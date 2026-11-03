@@ -6,6 +6,9 @@ const files: Record<string, string> = {
   'training/latest/404.html': 'latest 404',
   'training/latest/hello_nextflow/index.html': 'hello',
   'training/latest/hello_nextflow.md': '# Hello',
+  'training/latest/index.md': '# Home',
+  'training/latest/pt.md': '# Início',
+  'training/3.9/index.md': '# Old home',
   'training/latest/llms.txt': '# llms',
   'training/latest/_astro/app.abc123.js': 'js',
   'training/latest/pagefind/fragment/en_1.pf_fragment': 'bin',
@@ -68,6 +71,19 @@ describe('router', () => {
       'https://training.nextflow.io/latest/hello_nextflow/',
     );
     expect((await get('/3.8.2')).headers.get('Location')).toBe('https://training.nextflow.io/3.8.2/');
+  });
+
+  it("maps /<version>.md to the version's index.md", async () => {
+    const latest = await get('/latest.md');
+    expect(latest.status).toBe(200);
+    expect(await latest.text()).toBe('# Home');
+    expect(latest.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
+    expect(await (await get('/3.9.md')).text()).toBe('# Old home');
+    const head = await get('/3.9.md', 'HEAD');
+    expect(head.status).toBe(200);
+    expect(head.body).toBeNull();
+    expect(await (await get('/latest/pt.md')).text()).toBe('# Início');
+    expect((await get('/4.0.md')).status).toBe(404);
   });
 
   it('decodes percent-encoded paths', async () => {

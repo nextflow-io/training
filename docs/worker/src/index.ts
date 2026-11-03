@@ -75,7 +75,11 @@ async function route(url: URL, env: Env): Promise<Response> {
   } catch {
     return new Response('Bad Request', { status: 400 });
   }
-  const object = await env.BUCKET.get(path.endsWith('/') ? `${key}index.html` : key);
+  // Page actions request a version home page's Markdown as /<version>.md; the build writes <version>/index.md.
+  const home = /^\/[^/]+\.md$/.test(path);
+  const object = await env.BUCKET.get(
+    path.endsWith('/') ? `${key}index.html` : home ? `${key.slice(0, -3)}/index.md` : key,
+  );
   if (object) return serve(object, path, 200);
   if (!path.endsWith('/') && (await env.BUCKET.head(`${key}/index.html`))) return redirect(url, `${path}/`, 301);
 
