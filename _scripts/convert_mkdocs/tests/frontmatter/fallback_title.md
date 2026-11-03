@@ -1,0 +1,9 @@
+# Orientation - Video Transcript
+
+!!!note "Important notes"
+
+    This page shows the transcript only.
+
+## Welcome
+
+Hi, and welcome back.
