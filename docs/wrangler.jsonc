@@ -1,0 +1,11 @@
+// Router Worker for training.nextflow.io: serves every version from R2 under training/.
+// Deployed by .github/workflows/docs-deploy.yml when docs/worker/ or this file changes.
+{
+  "$schema": "./worker/node_modules/wrangler/config-schema.json",
+  "name": "nextflow-training",
+  "main": "./worker/src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": true,
+  "preview_urls": false,
+  "r2_buckets": [{ "binding": "BUCKET", "bucket_name": "seqera-docs" }]
+}
