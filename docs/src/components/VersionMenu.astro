@@ -1,6 +1,85 @@
 ---
-// Stub: stream B2 replaces this.
 import Default from '@astrojs/starlight/components/SiteTitle.astro';
+import Select from '@astrojs/starlight/components/Select.astro';
+
+// Empty in local dev (base `/`): there is no version to switch from.
+const current = import.meta.env.BASE_URL.replace(/^\/|\/$/g, '');
+const locale = Astro.locals.starlightRoute.locale ?? '';
 ---
 
 <Default><slot /></Default>
+{
+  current && (
+    <nf-version-menu hidden data-current={current} data-locale={locale}>
+      <Select
+        icon="code-branch"
+        label="Version"
+        options={[{ label: current, value: current, selected: true }]}
+      />
+    </nf-version-menu>
+  )
+}
+
+<script>
+  type Version = { version: string; title: string; aliases: string[] };
+
+  const exists = (url: string) => fetch(url, { method: 'HEAD' }).then((r) => r.ok, () => false);
+
+  class VersionMenu extends HTMLElement {
+    async connectedCallback() {
+      const select = this.querySelector('select')!;
+      const { current = '', locale } = this.dataset;
+      const versions: Version[] | undefined = await fetch('/versions.json')
+        .then((r) => (r.ok ? r.json() : undefined))
+        .catch(() => undefined);
+      if (!Array.isArray(versions) || !versions.length) return;
+
+      // Clone the server-rendered option so the new ones keep Starlight's scoped styles.
+      const placeholder = select.options[0];
+      // Groups mark the latest in the list while the closed menu stays narrow enough for phones.
+      const groups = ['Latest', 'Older'].map((label) => Object.assign(document.createElement('optgroup'), { label }));
+      let found = false;
+      for (const v of versions) {
+        const latest = v.aliases.includes('latest');
+        const option = placeholder.cloneNode() as HTMLOptionElement;
+        option.value = latest ? 'latest' : v.version;
+        option.textContent = v.title;
+        option.defaultSelected = v.version === current || v.aliases.includes(current);
+        found ||= option.defaultSelected;
+        groups[latest ? 0 : 1].append(option);
+      }
+      select.append(...groups.filter((g) => g.children.length));
+      // Keep the placeholder only for builds missing from versions.json, e.g. development.
+      if (found) placeholder.remove();
+      const initial = select.value;
+      this.hidden = false;
+
+      addEventListener('pageshow', (e) => {
+        if (e.persisted) select.value = initial;
+      });
+      select.addEventListener('change', async () => {
+        const target = `/${select.value}/`;
+        const page = target + location.pathname.slice(current.length + 2);
+        const localeRoot = locale ? `${target}${locale}/` : '';
+        if (await exists(page)) location.href = page + location.hash;
+        else if (localeRoot && (await exists(localeRoot))) location.href = localeRoot;
+        else location.href = target;
+      });
+    }
+  }
+  customElements.define('nf-version-menu', VersionMenu);
+</script>
+
+<style>
+  nf-version-menu {
+    display: flex;
+    flex-shrink: 0;
+    margin-inline-start: 1rem;
+  }
+  nf-version-menu[hidden] {
+    display: none;
+  }
+  nf-version-menu :global(select) {
+    width: auto;
+  }
+</style>
