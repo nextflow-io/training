@@ -9,12 +9,27 @@ import starlightLinksValidator from 'starlight-links-validator';
 import starlightLlmsTxt from 'starlight-llms-txt';
 import starlightPageActions from 'starlight-page-actions';
 import starlightQuiz from 'starlight-quiz';
+import fallbackMarkdown from './src/integrations/fallback-markdown.mjs';
 import links from './src/markdown/links.mjs';
 import { redirects } from './src/redirects.mjs';
 import { sidebar } from './src/sidebar.mjs';
 
 // One build serves one prefix: /development/, /latest/ or /<version>/.
 const base = process.env.BASE ?? '/';
+
+const locales = {
+  root: { label: 'English', lang: 'en' },
+  ca: { label: 'Català' },
+  de: { label: 'Deutsch' },
+  es: { label: 'Español' },
+  fr: { label: 'Français' },
+  hi: { label: 'हिन्दी' },
+  it: { label: 'Italiano' },
+  ko: { label: '한국어' },
+  pl: { label: 'Polski' },
+  pt: { label: 'Português' },
+  tr: { label: 'Türkçe' },
+};
 
 const nfCoreModule = ({ name, path }) =>
   path?.includes('nf-core/')
@@ -35,19 +50,7 @@ export default defineConfig({
       logo: { light: './src/assets/nextflow-logo.png', dark: './src/assets/nextflow-logo-white.png', replacesTitle: true },
       favicon: '/favicon.png',
       defaultLocale: 'root',
-      locales: {
-        root: { label: 'English', lang: 'en' },
-        ca: { label: 'Català' },
-        de: { label: 'Deutsch' },
-        es: { label: 'Español' },
-        fr: { label: 'Français' },
-        hi: { label: 'हिन्दी' },
-        it: { label: 'Italiano' },
-        ko: { label: '한국어' },
-        pl: { label: 'Polski' },
-        pt: { label: 'Português' },
-        tr: { label: 'Türkçe' },
-      },
+      locales,
       sidebar,
       social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/nextflow-io/training' }],
       editLink: { baseUrl: 'https://github.com/nextflow-io/training/edit/master/docs/' },
@@ -87,5 +90,6 @@ export default defineConfig({
         './src/components/CourseInfo.astro',
       ],
     }),
+    fallbackMarkdown(Object.keys(locales).filter((l) => l !== 'root')),
   ],
 });
