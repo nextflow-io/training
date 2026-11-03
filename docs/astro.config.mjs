@@ -70,7 +70,7 @@ export default defineConfig({
           runnable: { outputDelay: 60 },
           apiLinks: { adapters: [nextflow({ modules: nfCoreModule })] },
         }),
-        starlightQuiz(),
+        starlightQuiz({ progressPosition: 'bottom' }),
         starlightLlmsTxt(),
         // No baseUrl: page actions then leave llms.txt to starlight-llms-txt.
         starlightPageActions(),
