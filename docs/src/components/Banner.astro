@@ -1,6 +1,90 @@
 ---
-// Stub: stream B3 replaces this.
 import Default from '@astrojs/starlight/components/Banner.astro';
+import { Icon } from '@astrojs/starlight/components';
+import announcement from '../announcement.json';
+
+const { t } = Astro.locals;
+const tr = (key: string, fallback: string, vars = {}) => (t.exists(key) ? t(key as any, vars) : fallback);
+
+const showAnnouncement = announcement.active && Date.now() < Date.parse(announcement.hide_after);
+
+const version = import.meta.env.BASE_URL.replace(/^\/|\/$/g, '');
+// /development/ is ahead of the newest release, so it is never archived.
+const archivable = version && version !== 'latest' && version !== 'development';
 ---
 
-<Default><slot /></Default>
+<Default />
+{
+  showAnnouncement && (
+    <>
+      <div id="nf-announcement" class="nf-banner nf-announcement" data-pagefind-ignore>
+        {announcement.text} <strong>{announcement.text_bold}</strong>{' '}
+        <a href={announcement.url} target="_blank">
+          {announcement.url_text}
+          <Icon name="right-arrow" class="nf-banner-icon" />
+        </a>
+      </div>
+      <script is:inline define:vars={{ hideAfter: announcement.hide_after }}>
+        if (Date.now() >= Date.parse(hideAfter)) document.getElementById('nf-announcement').remove();
+      </script>
+    </>
+  )
+}
+{
+  archivable && (
+    <div id="nf-archive" class="nf-banner nf-archive" data-version={version} data-pagefind-ignore hidden>
+      {tr('banner.archive', `This is an archived version (${version}) of the training material.`, { version })}{' '}
+      <a href="/latest/">{tr('banner.latest', 'View the latest version')}</a>
+    </div>
+  )
+}
+
+<script>
+  async function showArchiveNotice(el: HTMLElement) {
+    const res = await fetch('/versions.json');
+    if (!res.ok) return;
+    const versions: { version: string }[] = await res.json();
+    // Unlisted prefixes (previews, manual republishes) and the newest release get no notice.
+    if (versions.findIndex((v) => v.version === el.dataset.version) < 1) return;
+    const samePage = '/latest/' + location.pathname.slice(import.meta.env.BASE_URL.length);
+    const head = await fetch(samePage, { method: 'HEAD' }).catch(() => null);
+    if (head?.ok) el.querySelector('a')!.href = samePage;
+    el.hidden = false;
+  }
+
+  const el = document.getElementById('nf-archive');
+  if (el) showArchiveNotice(el).catch(() => {});
+</script>
+
+<style>
+  .nf-banner {
+    padding: var(--sl-nav-pad-y) var(--sl-nav-pad-x);
+    line-height: var(--sl-line-height-headings);
+    text-align: center;
+    text-wrap: balance;
+  }
+  .nf-banner a {
+    color: inherit;
+  }
+  .nf-announcement {
+    background-color: var(--sl-color-banner-bg, var(--sl-color-bg-accent));
+    color: var(--sl-color-banner-text, var(--sl-color-text-invert));
+    box-shadow: var(--sl-shadow-sm);
+  }
+  .nf-announcement a {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .nf-banner-icon {
+    display: inline;
+    vertical-align: -0.125em;
+  }
+  .nf-archive {
+    background-color: var(--sl-color-orange-low);
+    color: var(--sl-color-orange-high);
+    border-bottom: 1px solid var(--sl-color-orange);
+  }
+  .nf-archive a {
+    font-weight: 600;
+  }
+</style>
