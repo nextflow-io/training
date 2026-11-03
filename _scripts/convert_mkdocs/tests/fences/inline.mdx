@@ -1,0 +1,15 @@
+Use `channel.of('a'){:nextflow}` to create a channel, or `docker.enabled = true{:nextflow}` in the config.
+
+The plugin class starts with `@Function{:groovy}` and `package training.plugin{:groovy}`.
+
+Other languages keep their name: `nextflow run hello.nf{:bash}`.
+
+- [x] `include { SAYHELLO } from './modules/sayhello.nf'{:nextflow}`
+
+| Scope | Example |
+| --- | --- |
+| `greeting` | `greeting {}{:nextflow}` |
+
+```nextflow
+println "`#!groovy x`"
+```
