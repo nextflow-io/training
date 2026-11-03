@@ -1,0 +1,23 @@
+:::code-tabs
+```nextflow title="modules/cowpy.nf" showLineNumbers startLineNumber=6 label="Process definition"
+input:
+tuple val(meta), val(character), path(recording)
+```
+```nextflow title="main.nf" label="Workflow call"
+COWPY(ch_languages.map { meta, file -> [meta, meta.character, file] })
+```
+:::
+
+A lone code tab becomes a one-item `<Tabs>`, since code tabs need two blocks:
+
+<Tabs>
+
+<TabItem label="Single tab">
+
+```bash
+nextflow run main.nf
+```
+
+</TabItem>
+
+</Tabs>

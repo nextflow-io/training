@@ -1,0 +1,19 @@
+Make the change:
+
+<CodeWalkthrough>
+
+```nextflow title="hello.nf" showLineNumbers startLineNumber=4 step="Before"
+process SAY_HELLO {
+}
+```
+
+```nextflow {3} title="hello.nf" showLineNumbers startLineNumber=4 step="After"
+process SAY_HELLO {
+
+    publishDir 'results'
+}
+```
+
+</CodeWalkthrough>
+
+Run the workflow.
