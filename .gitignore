@@ -32,3 +32,5 @@ hello-nf-core/core-hello/
 docs/node_modules/
 docs/dist/
 docs/.astro/
+docs/.wrangler/
+docs/dist-preview/
