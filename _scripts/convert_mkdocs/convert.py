@@ -24,9 +24,9 @@ from core import LOCALES, Page, Run, split_frontmatter  # noqa: E402
 from generate import GENERATORS  # noqa: E402
 from rules import RULES  # noqa: E402
 
-# Built by MkDocs but not content: skipped everywhere.
+# Not pages: MkDocs skips README.md when index.md exists, and assets/ holds theme files.
 SKIP = {"README.md"}
-SKIP_DIRS = {"assets", "_template", "ideas"}
+SKIP_DIRS = {"assets"}
 
 
 def source_pages(run: Run, langs: list[str], only: list[str]) -> list[tuple[str, str]]:
