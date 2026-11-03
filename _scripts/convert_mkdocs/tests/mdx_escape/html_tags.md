@@ -1,0 +1,9 @@
+Line one<br>line two<br/>line three.
+
+<img src=img/logo.png width=100>
+
+<div data-tf-live="01ABC"></div><script src="//embed.typeform.com/next/embed.js"></script>
+
+<table><tr><td colspan=2>cell</td></tr></table>
+
+<a href="https://x.org/?a=1 b=2" title=plain>x</a>
