@@ -1,3 +1,6 @@
+# Prettier's MDX support breaks JSX in list items and wraps inline components
+*.mdx
+
 # Complex formatting on the home and help pages
 # (MkDocs Material grid cards require specific indentation that prettier breaks)
 **/docs/index.md

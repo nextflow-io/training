@@ -1,0 +1,13 @@
+---
+// Spike stub. Stream B1 replaces this with the full course cards.
+const info = Astro.props.frontmatter?.additional_information ?? {};
+const t = Astro.locals.t;
+---
+<div class="course-info">
+  {info.learning_objectives && (
+    <details>
+      <summary>{t('courseInfo.learningObjectives')}</summary>
+      <ul>{info.learning_objectives.map((o) => <li>{o}</li>)}</ul>
+    </details>
+  )}
+</div>
