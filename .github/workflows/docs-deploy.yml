@@ -8,8 +8,8 @@ name: Docs deploy
 # The Router Worker is deployed on pushes that change it.
 #
 # Repository secrets, named like seqeralabs/docs's:
-#   R2_ACCESS_KEY_ID_TRAINING_REPO, R2_SECRET_ACCESS_KEY_TRAINING_REPO  R2 token, Object Read & Write on nextflow-training-docs
-#   CLOUDFLARE_API_TOKEN_TRAINING_REPO                                  "Workers Scripts: Edit", scoped to nextflow-training
+#   CLOUDFLARE_API_TOKEN_TRAINING_REPO   "Workers Scripts: Edit" on nextflow-training, plus R2 Object Read & Write
+#                                        on nextflow-training-docs (rclone's S3 keys are derived from it)
 #   CLOUDFLARE_ACCOUNT_ID_TRAINING_REPO
 
 on:
@@ -109,8 +109,6 @@ jobs:
       RCLONE_CONFIG_R2_PROVIDER: Cloudflare
       RCLONE_CONFIG_R2_REGION: auto
       RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true"
-      RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID_TRAINING_REPO }}
-      RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY_TRAINING_REPO }}
       RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID_TRAINING_REPO }}.r2.cloudflarestorage.com
     steps:
       - name: Download site
@@ -134,6 +132,21 @@ jobs:
           unzip -q "$zip"
           sudo install "rclone-v$RCLONE_VERSION-linux-amd64/rclone" /usr/local/bin/
 
+      # R2's S3 API takes an API token's ID as the access key and the token's SHA-256 as the secret.
+      - &r2-credentials
+        name: Derive R2 credentials
+        env:
+          TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_TRAINING_REPO }}
+          ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_TRAINING_REPO }}
+        run: |
+          id=$(curl -fsS -H "Authorization: Bearer $TOKEN" "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT/tokens/verify" | jq -er .result.id)
+          secret=$(printf '%s' "$TOKEN" | sha256sum | cut -d' ' -f1)
+          echo "::add-mask::$secret"
+          {
+            echo "RCLONE_CONFIG_R2_ACCESS_KEY_ID=$id"
+            echo "RCLONE_CONFIG_R2_SECRET_ACCESS_KEY=$secret"
+          } >> "$GITHUB_ENV"
+
       # --checksum skips unchanged files, as every build gives them new mtimes.
       - name: Sync to R2
         env:
@@ -152,6 +165,7 @@ jobs:
     env: *rclone
     steps:
       - *install-rclone
+      - *r2-credentials
 
       # mike's schema, newest first, so the version menus of frozen MkDocs builds keep working.
       - name: Add the version to versions.json

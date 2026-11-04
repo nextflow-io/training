@@ -12,6 +12,8 @@
 #   export RCLONE_CONFIG_R2_TYPE=s3 RCLONE_CONFIG_R2_PROVIDER=Cloudflare RCLONE_CONFIG_R2_REGION=auto \
 #     RCLONE_CONFIG_R2_NO_CHECK_BUCKET=true RCLONE_CONFIG_R2_ACCESS_KEY_ID=… \
 #     RCLONE_CONFIG_R2_SECRET_ACCESS_KEY=… RCLONE_CONFIG_R2_ENDPOINT=https://<account>.r2.cloudflarestorage.com
+# The access key is the Cloudflare API token's ID, and the secret is the token's SHA-256,
+# as in docs-deploy.yml.
 set -eu
 
 dest=${1:-r2:nextflow-training-docs/training}
