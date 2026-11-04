@@ -32,7 +32,7 @@ These indicate documentation or code problems:
 Nextflow 26.04+ renders a different, machine-readable console format when it detects an AI agent environment (see [Console Output Mode](../../shared/repo-conventions.md#console-output-mode-critical)).
 This format must never appear in learner-facing documentation, since no learner will ever see it in their own terminal.
 
-**Flag immediately** if a documented "Command output" block contains any of:
+**Flag immediately** if documented command output (the lines after `# [!output]` in a `bash` block) contains any of:
 
 - `[PIPELINE]`, `[WORKDIR]`, `[PROCESS ...]` tags
 - `[SUCCESS] completed=... failed=... cached=...` or `[FAILED] completed=...`
@@ -65,10 +65,10 @@ While your actual run hashes will differ from documented hashes (acceptable), th
 
 ```bash
 # Find all hashes in a file
-grep -oE '\[[0-9a-f]{2}/[0-9a-f]{6}\]' file.md | sort | uniq -c | sort -rn
+grep -oE '\[[0-9a-f]{2}/[0-9a-f]{6}\]' file.mdx | sort | uniq -c | sort -rn
 
 # Check for invalid hex characters
-grep -oE '\[[^]]+\]' file.md | grep -Ev '^\[[0-9a-f]{2}/[0-9a-f]{6}\]$'
+grep -ohE '\[[0-9a-z]{2}/[0-9a-z]{6}\]' file.mdx | grep -Ev '^\[[0-9a-f]{2}/[0-9a-f]{6}\]$'
 ```
 
 Duplicate hash counts > 1 are only acceptable when:
