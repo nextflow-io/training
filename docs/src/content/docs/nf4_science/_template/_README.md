@@ -9,7 +9,8 @@ It is based on the common patterns found in the Genomics and RNAseq courses.
 
    ```bash
    # Docs
-   cp -r docs/en/docs/nf4_science/_template docs/en/docs/nf4_science/{your_domain}
+   cp -r docs/src/content/docs/nf4_science/_template docs/src/content/docs/nf4_science/{your_domain}
+   rm docs/src/content/docs/nf4_science/{your_domain}/_README.md
 
    # Scripts
    cp -r nf4-science/_template nf4-science/{your_domain}
@@ -29,25 +30,39 @@ It is based on the common patterns found in the Genomics and RNAseq courses.
    ```
 
 4. Search for all `{PLACEHOLDER}` values in the docs and scripts and replace them with your content.
+   In page prose, MDX needs the braces escaped, so placeholders there are written `\{PLACEHOLDER\}`: remove the backslashes along with the placeholder.
+   In frontmatter, code spans and code blocks they are written `{PLACEHOLDER}`.
 
-5. Add to `mkdocs.yml` nav (see snippet below).
+5. Add the course to `docs/src/sidebar.mjs` (see snippet below).
 
 6. Populate the `data/` directory with test datasets.
 
 7. Build out the `solutions/` directory with working code for each part.
 
-## mkdocs.yml nav snippet
+8. Run `cd docs && npm run dev` and check every page renders, then run a full build (`npm run build`) to check the links.
 
-```yaml
-- { Your Domain }:
-    - nf4_science/{your_domain}/index.md
-    - nf4_science/{your_domain}/00_orientation.md
-    - nf4_science/{your_domain}/01_method.md
-    - nf4_science/{your_domain}/02_single_sample.md
-    - nf4_science/{your_domain}/03_multi_sample.md
-    - nf4_science/{your_domain}/survey.md
-    - nf4_science/{your_domain}/next_steps.md
+## sidebar.mjs snippet
+
+Add a group to the `items` of the "Nextflow for Science" group, next to Genomics and RNAseq.
+Entries are page slugs without the `.mdx` extension; their labels come from the page titles.
+
+```js
+{
+  "label": "{Your Domain}",
+  "collapsed": true,
+  "items": [
+    { "label": "Overview", "slug": "nf4_science/{your_domain}" },
+    "nf4_science/{your_domain}/00_orientation",
+    "nf4_science/{your_domain}/01_method",
+    "nf4_science/{your_domain}/02_single_sample",
+    "nf4_science/{your_domain}/03_multi_sample",
+    "nf4_science/{your_domain}/next_steps",
+    "nf4_science/{your_domain}/survey"
+  ]
+}
 ```
+
+Copy the `translations` map of the "Overview" label from the Genomics group.
 
 ## Placeholder reference
 
@@ -94,31 +109,33 @@ It is based on the common patterns found in the Genomics and RNAseq courses.
 
 The template follows a three-part arc:
 
-1. **Part 1 (01_method.md)**: Manual testing in Docker containers to understand the methodology
-2. **Part 2 (02_single_sample.md)**: Wrap commands in Nextflow; single-sample, then batch
-3. **Part 3 (03_multi_sample.md)**: Add multi-sample aggregation using channel operators
+1. **Part 1 (01_method.mdx)**: Manual testing in Docker containers to understand the methodology
+2. **Part 2 (02_single_sample.mdx)**: Wrap commands in Nextflow; single-sample, then batch
+3. **Part 3 (03_multi_sample.mdx)**: Add multi-sample aggregation using channel operators
 
 ### Key conventions
 
-- Use **Before/After tabbed code blocks** with `hl_lines` to show code changes
-- Use `??? success "Command output"` for collapsible expected output
-- Use `??? abstract "Directory contents"` for collapsible directory trees
+- Use **`<CodeWalkthrough>`** with a `step="Before"` and a `step="After"` code block to show code changes, with `{...}` line highlights on the changed lines
+- Put expected command output in the command's `bash` block, after a `# [!output]` line
+- Use `<details class="abstract">` with `<summary>Directory contents</summary>` for collapsible directory trees
 - End each major section with **Takeaway** and **What's next?** subsections
 - Use `---` horizontal rules to separate major numbered sections
 - Provide skeleton files (workflow + modules) for learners to fill in
 - Organize solutions by part (`solutions/part2/`, `solutions/part3/`)
 
+See `CLAUDE.md` at the repository root for the full page syntax.
+
 ## Directory structure
 
 ```
-docs/en/docs/nf4_science/{domain}/
-├── index.md                    # Course overview with frontmatter
-├── 00_orientation.md           # Environment setup
-├── 01_method.md                # Manual testing in containers
-├── 02_single_sample.md         # Single-sample Nextflow implementation
-├── 03_multi_sample.md          # Multi-sample aggregation
-├── survey.md                   # Typeform feedback survey
-├── next_steps.md               # Course summary and suggestions
+docs/src/content/docs/nf4_science/{domain}/
+├── index.mdx                   # Course overview with frontmatter
+├── 00_orientation.mdx          # Environment setup
+├── 01_method.mdx               # Manual testing in containers
+├── 02_single_sample.mdx        # Single-sample Nextflow implementation
+├── 03_multi_sample.mdx         # Multi-sample aggregation
+├── survey.mdx                  # Typeform feedback survey
+├── next_steps.mdx              # Course summary and suggestions
 └── img/                        # Diagrams (.excalidraw.svg, .png)
 
 nf4-science/{domain}/

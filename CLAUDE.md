@@ -1,98 +1,88 @@
 # Nextflow Training Materials Repository
 
-This repository contains training materials for Nextflow, built with Material for MkDocs and published at https://training.nextflow.io.
+This repository contains training materials for Nextflow, built with Astro Starlight and published at https://training.nextflow.io.
 
 ## Quick Context
 
 - **Purpose**: Educational materials teaching Nextflow workflow development
-- **Build system**: MkDocs with Material theme and custom plugins
-- **Languages**: Multiple (en, pt, es, fr, it, ko, pl, tr) - translations are AI-generated, see TRANSLATING.md
+- **Build system**: Astro 7 + Starlight, in `docs/`. Markdown is processed by Sätteri (remark/rehype plugins do not run). Code blocks use Expressive Code with the starlight-codeblocks plugin
+- **Languages**: English plus ca, de, es, fr, hi, it, ko, pl, pt, tr. Translations are AI-generated, see TRANSLATING.md
 - **Target audience**: Scientists and developers learning Nextflow
+- **History**: The site moved from MkDocs Material in 2026. MkDocs syntax (`!!!`, `???`, `===` tabs, `hl_lines`, `--8<--`) no longer works
 
 ## Common Commands
 
 ### Preview locally
 
-Two equivalent options. Docker is fastest if you already use it:
+Node 22 or later:
 
 ```bash
-docker run --rm -it -p 8000:8000 -v ${PWD}:/docs -w /docs/docs/en ghcr.io/nextflow-io/training-mkdocs:latest
-# View at http://0.0.0.0:8000/
+cd docs
+npm ci
+npm run dev        # http://localhost:4321/, reloads on save
 ```
 
-Or via [`uv`](https://docs.astral.sh/uv/), which auto-installs all mkdocs plugins:
+In an agent session `astro dev` starts in the background. Manage it with `npx astro dev status`, `npx astro dev logs` and `npx astro dev stop` (run in `docs/`).
+
+Production-like build (about 80 s and 6 GB RAM; runs the links validator):
 
 ```bash
-uv run _scripts/docs.py live       # English-only preview at http://127.0.0.1:8008/
-uv run _scripts/docs.py build-all  # build every translated site (slow)
+cd docs
+BASE=/latest/ npm run build
+BASE=/latest/ npm run preview   # http://localhost:4321/latest/
 ```
 
 ### Validate heading numbering
 
 ```bash
-uv run .github/check_headings.py docs/**/*.md
-uv run .github/check_headings.py --fix docs/**/*.md  # auto-fix
+uv run .github/check_headings.py docs/src/content/docs/hello_nextflow/*.mdx
+uv run .github/check_headings.py --fix docs/src/content/docs/hello_nextflow/*.mdx
+find docs/src/content/docs -name '*.mdx' -print0 | xargs -0 uv run .github/check_headings.py  # all pages; translations are skipped
 ```
 
-### Lint Nextflow scripts
+### Other checks
 
 ```bash
+node docs/scripts/check-fences.mjs docs/src/content/docs   # code block meta; errors fail CI
 nextflow lint .   # also runs in CI and posts results as a PR comment
 ```
 
-### Format markdown
-
-```bash
-prettier --write docs/**/*.md
-```
-
-### Preview a release
-
-`preview_release.py` serves the current branch at `https://training.nextflow.io/` as if it were a published version (useful for recording videos before a release ships):
-
-```bash
-sudo uv run ./preview_release.py --version 3.0
-```
+Prettier ignores `*.mdx` (it breaks MDX). The build is the check: a page that is not valid MDX fails `npm run build`.
 
 ## Repository Structure
 
-- `docs/en/` - English training content (source)
-  - `docs/` - Markdown content
-    - `hello_nextflow/` - Basic Nextflow introduction
-    - `nfcore_build/` - nf-core framework training
-    - `nf4_science/` - Domain-specific training (genomics, RNAseq)
-    - `side_quests/` - Advanced topics
-  - `mkdocs.yml` - Site navigation and configuration
-- `docs/{lang}/` - Translated content (pt, es, fr, it, ko, pl, tr)
-  - `glossary.yml` - Per-language glossary for deterministic post-processing
-  - `llm-prompt.md` - Language-specific translation instructions for the LLM
-- `_scripts/` - Translation package (`translate/`) and build scripts (`docs.py`)
-- `hello-nextflow/`, `nfcore-build/`, `nf4-science/`, `side-quests/` - Runnable Nextflow scripts paired with the matching `docs/en/docs/<module>/` lesson tree. Lesson markdown imports from these dirs via `--8<--` snippets, so changes to a script usually need a matching markdown edit (and vice versa).
-- `docs/en/hooks/index_page_hook.py` - mkdocs hook that renders the `index_page` frontmatter template (see Conventions)
+- `docs/` - The Astro app (`astro.config.mjs`, `ec.config.mjs`, `package.json`)
+  - `src/content/docs/` - English pages (`.mdx`), the source of truth
+  - `src/content/docs/<lang>/` - Translations, same relative paths. Generated, never edit by hand
+  - `src/content/i18n/<lang>.json` - UI strings
+  - `src/sidebar.mjs` - Site navigation. Every new page goes here
+  - `src/redirects.mjs` - Redirects for moved pages
+  - `src/content.config.ts` - Frontmatter schema, validated at build time
+  - `src/components/` - Custom components (`CourseInfo`, `Banner`, ...); `src/announcement.json` sets the banner
+- `_scripts/translate/` - Translation package; `languages/<lang>/` holds `llm-prompt.md` and `glossary.yml`
+- `hello-nextflow/`, `nextflow-run/`, `nfcore-use/`, `nfcore-build/`, `config-exec/`, `seqera-scale/`, `nf4-science/`, `side-quests/` - Runnable Nextflow scripts paired with the matching lesson tree. Some lessons import files from these dirs (`?raw` imports), so changes to a script usually need a matching page edit (and vice versa).
 - `.github/check_headings.py` - Validates heading numbering
+- `.github/workflows/docs-build.yml` - PR build: heading check, fence check, `astro build` with links validator. PRs get a preview URL comment
 
 ## Important Conventions
 
-### Markdown Files
+### Pages
 
+- Every page is `.mdx`. Frontmatter holds `title:` (no H1 in the body) and `description:` (one sentence, used for search, share cards and llms.txt)
+- `tableOfContents: false` hides the table of contents
+- Components (`Tabs`, `TabItem`, `Card`, `CardGrid`, `LinkCard`, `LinkButton`, `Code`, `CodeWalkthrough`, `Quiz`, `CourseInfo`) are auto-imported. Don't add import lines, except `?raw` code includes
 - **Heading numbering**: Must use `## 1.`, `### 1.1.` with trailing periods
 - **One sentence per line**: For cleaner git diffs
 - **Takeaway sections**: Each major section ends with "### Takeaway" and "### What's next?"
-- **Admonitions**: Use `!!! note`, `!!! tip`, `!!! warning`, `??? exercise`, `??? solution`
-- **Before/After comparisons**: Use tabbed blocks with highlighting to show code fixes (see debugging side quest):
-  ```markdown
-  === "After"
-  `groovy title="fixed.nf" hl_lines="14" linenums="1"
-      // corrected code with line 14 highlighted
-      `
-  === "Before"
-  `groovy title="fixed.nf" hl_lines="14" linenums="1"
-      // broken code with line 14 highlighted
-      `
-  ```
-- **Code block line highlighting (`hl_lines`)**: This attribute specifies which lines to highlight, counted from the START of the code block (1-indexed). It is completely independent of `linenums`.
+- **Asides**: `:::note`, `:::tip`, `:::caution`, `:::danger`, optional title in brackets (`:::tip[Faster runs]`), closed by `:::`. Nest by giving the outer aside more colons (`::::note` around `:::tip`)
+- **Collapsibles** (exercises, solutions, file contents): `<details class="TYPE">` (add `open` to start expanded), `<summary>Title</summary>`, a blank line, the body, a blank line, `</details>`. Types: `exercise`, `solution`, `abstract`, `example`, `info`, `note`, `tip`, `warning`, `success`, `failure`, `question`, `full-code`, `optional`, `courses`, `catalog`
 
-  **To set `hl_lines` correctly**: Before writing the `hl_lines` attribute, identify the lines you want highlighted, then count their position from line 1 of the snippet. Blank lines count. For example, given this snippet:
+### Code blocks
+
+- Use `nextflow` for Nextflow scripts and config (add `nextflow="config"` to config snippets whose title doesn't end in `.config`); keep `groovy` for real Groovy (plugin classes, `build.gradle`). Fence meta: `{1,3-5}` highlights, `title="main.nf"`, `showLineNumbers`, `startLineNumber=21`
+- **Line highlighting (`{...}`)**: Counts lines from the START of the code block (1-indexed), independent of `startLineNumber`.
+
+  **To set it correctly**: identify the lines you want highlighted, then count their position from line 1 of the snippet. Blank lines count. For example, given this snippet:
 
   ```
   #!/usr/bin/env nextflow    <- line 1
@@ -105,13 +95,62 @@ sudo uv run ./preview_release.py --version 3.0
           val x              <- line 8
   ```
 
-  To highlight the `publishDir` line and the `val x` line, count their positions (5 and 8), then write: `hl_lines="5 8"`. The `linenums` attribute (which controls displayed line numbers) does not affect this counting.
+  To highlight the `publishDir` line and the `val x` line, write `{5,8}`. `startLineNumber` only changes the displayed numbers.
 
   **Common errors**:
 
   - Skipping blank lines when counting (blank lines are lines too)
-  - Assuming `hl_lines` numbers match `linenums` display numbers (they don't - always count from 1)
+  - Assuming highlight numbers match the displayed line numbers (they don't - always count from 1)
   - Highlighting structural keywords (`input:`, `output:`) instead of the meaningful content
+
+- **Before/After comparisons**: `<CodeWalkthrough>` with two blocks, `step="Before"` then `step="After"`, each keeping its title, line numbers and highlights. Blank line after the opening tag and before the closing tag. If a version needs prose or several blocks, use `<Tabs>` instead
+
+  ````mdx
+  <CodeWalkthrough>
+
+  ```nextflow title="hello.nf" showLineNumbers startLineNumber=17 step="Before"
+  workflow {
+      sayHello()
+  }
+  ```
+
+  ```nextflow {3-4} title="hello.nf" showLineNumbers startLineNumber=17 step="After"
+  workflow {
+      sayHello()
+      publish:
+      first_output = sayHello.out
+  }
+  ```
+
+  </CodeWalkthrough>
+  ````
+
+- **Command output**: in the command's `bash` block, after a `# [!output]` line (readers click **Run code**; copy takes only the command). Fence ranges count command lines only; highlight output with `# [!code highlight]` at the line end. `# [!output stderr]` starts error output. Escape a literal `[!x]` in output as `[\!x]`. Over 60 output lines: add `runnable.outputDelay=0`
+
+  ````mdx
+  ```bash
+  nextflow run hello.nf
+  # [!output]
+   N E X T F L O W   ~  version 26.04.4
+
+  [65/7be2fa] sayHello | 1 of 1 ✔ # [!code highlight]
+  ```
+  ````
+
+- **Annotations**: `// [!annotate] Note text` at the end of a code line (`# [!annotate]` in shell)
+- **Code-only tabs**: `:::code-tabs`, then two or more blocks each with `label="..."`, then `:::`. Only code blocks inside. Tabs with prose: `<Tabs>` / `<TabItem label="...">`
+- **Inline code highlighting**: suffix inside the backticks, `` `channel.of('a'){:nextflow}` ``. Only where syntax colour helps (braces, closures, interpolation)
+- **Including a file from the repo**: after the frontmatter, `import cfg from '../../../../../nfcore-use/custom.config?raw';` (relative to the page), then `<Code code={cfg} lang="nextflow" title="custom.config" meta="{3-6} showLineNumbers" />`
+
+The vendored `starlight-codeblocks` skill documents every code block feature.
+
+### Links, images and components
+
+- **Links**: relative links to the `.mdx` file, `[Part 1](../hello_nextflow/01_hello_world.mdx#11-examine-the-code)`. The links validator fails the build on a missing page or anchor. Set a heading's ID with `{#id}` at the end of the heading
+- **Images**: Markdown images relative to the page. Diagrams are Excalidraw files saved as `img/name.excalidraw.svg` and embedded as `![Alt text](./img/name.excalidraw.svg)`; dark mode inverts them. Mermaid blocks do not render
+- **Quizzes**: `<Quiz id="quiz-1">`, a blank line, the question, a `- [ ]` / `- [x]` list, a blank line, `</Quiz>`. IDs are unique per page
+- **Other components**: `<LinkButton href="02_hello_channels.mdx" variant="primary" icon="right-arrow">Continue</LinkButton>`; `<CardGrid>` with `<Card title="...">`; captions as `<figure>` + `<figcaption>`; keys as `<kbd>Ctrl</kbd>+<kbd>C</kbd>`
+- **MDX escaping in prose**: comments are `{/* ... */}` (HTML comments fail); write `\{` `\}` for braces and `&lt;` for a bare `<`; use `[https://x.org](https://x.org)` not `<https://x.org>`. Code spans and code blocks need no escaping
 
 ### Nextflow Scripts
 
@@ -173,26 +212,29 @@ Note that... (or just state the fact directly)
 
 ### Module Structure
 
-Standard pattern for training modules:
+Standard pattern for training modules, under `docs/src/content/docs/`:
 
 ```
 module_name/
-├── index.md (overview)
-├── 00_orientation.md (introduction)
-├── 01_topic.md (numbered lessons)
-├── survey.md (feedback)
-├── next_steps.md
-└── solutions/ (working code)
+├── index.mdx (overview)
+├── 00_orientation.mdx (introduction)
+├── 01_topic.mdx (numbered lessons)
+├── survey.mdx (feedback)
+├── next_steps.mdx
+└── img/ (images and .excalidraw.svg diagrams)
 ```
+
+Solutions live with the scripts, e.g. `hello-nextflow/solutions/`.
 
 ### Index page template
 
-Course and module `index.md` pages opt into a templated layout via frontmatter. The `index_page_hook.py` mkdocs hook generates Material grid cards from structured fields:
+Course and module `index.mdx` pages render their info cards from frontmatter with `<CourseInfo frontmatter={frontmatter} />`, placed where the cards go:
 
 ```yaml
 ---
 title: Course Title
-hide: [toc]
+description: One-sentence summary.
+tableOfContents: false
 page_type: index_page
 index_type: course # or "module"; renders as a badge
 additional_information:
@@ -203,14 +245,15 @@ additional_information:
 ---
 ```
 
-The page must include a `<!-- additional_information -->` marker where the cards should be inserted. The build fails with a descriptive error if requirements aren't met. Full spec in CONTRIBUTING.md.
+The schema is in `docs/src/content.config.ts`; the build fails on invalid fields. Full spec in CONTRIBUTING.md.
 
 ## Gotchas
 
-1. **Multilingual builds**: Initial build takes minutes due to multiple languages
-2. **Heading validation**: Auto-runs on commit via pre-commit hook
-3. **Excalidraw diagrams**: Must use `.excalidraw.svg` extension for editability
-4. **Module vs Lesson**: Module = entire course (e.g. "Hello Nextflow"), Lesson = single page (e.g. "01_hello_world.md")
+1. **MDX is strict**: a stray `{`, `<` or HTML comment in prose fails the build with a file and line number
+2. **Pages must be in the sidebar**: a page missing from `docs/src/sidebar.mjs` builds but is unreachable from navigation
+3. **Build warnings fail CI**: starlight-codeblocks warnings (unknown directive, bad range) fail `docs-build.yml`. Read them after every build
+4. **Excalidraw diagrams**: Must use `.excalidraw.svg` extension for editability
+5. **Module vs Lesson**: Module = entire course (e.g. "Hello Nextflow"), Lesson = single page (e.g. "01_hello_world.mdx")
 
 ## Testing Nextflow Examples
 
@@ -224,23 +267,25 @@ nextflow run example.nf -resume  # verify caching works
 
 ## Adding New Content
 
-1. Create lesson/module using Claude commands: `/new-lesson`, `/new-module`
-2. Add to `mkdocs.yml` nav section
-3. Test locally with `/preview`
-4. Validate by asking Claude to check quality (uses skills automatically)
-5. Run heading check (happens automatically via hook)
+1. Create lesson/module using Claude skills: `/new-lesson`, `/new-module`
+2. Add the page to `docs/src/sidebar.mjs` (a slug without extension, e.g. `"hello_nextflow/07_hello_x"`)
+3. Preview locally with `/preview`
+4. Validate with `/validate`
+5. Run the heading check (CI runs it too)
 
 ## Project-specific Claude skills
 
 This repo ships custom skills tailored to training authoring. Prefer them over generic edits when the task fits:
 
 - **Authoring**: `/new-module`, `/new-lesson`, `/add-exercise`
-- **Preview & test**: `/preview`, `/stop-preview`, `/test-example`, `/run-tutorial`
+- **Preview & test**: `/preview`, `/stop-preview`, `/test-example`, `/run-tutorial`, `/docker-setup`
 - **Review**: `/validate`, `/check-highlights`, `/check-inline-code`, `/find-todos`
+- **Reference**: `starlight-codeblocks` (vendored from the npm package): every code block feature, its syntax and limits. Components are auto-imported here, so ignore its import instructions
 
 ## DO NOT
 
-- Don't edit generated files in `.cache/` or `site/`
+- Don't edit generated files in `docs/dist/`, `docs/.astro/` or `docs/node_modules/`
+- Don't edit translated pages under `docs/src/content/docs/<lang>/`; fix the English page or the translation prompt
 - Don't commit `work/` directories from Nextflow runs
 - Don't skip heading validation - it will fail CI
 - Don't forget to test Nextflow examples before documenting them
@@ -252,4 +297,5 @@ This repo ships custom skills tailored to training authoring. Prefer them over g
 - **Translation guide**: See TRANSLATING.md (all translations are AI-generated)
 - **Training site**: https://training.nextflow.io
 - **Nextflow docs**: https://nextflow.io/docs/latest/
-- **MkDocs Material**: https://squidfunk.github.io/mkdocs-material/
+- **Starlight**: https://starlight.astro.build/
+- **starlight-codeblocks**: https://ewels.github.io/starlight-codeblocks/
