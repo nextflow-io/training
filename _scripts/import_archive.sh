@@ -3,7 +3,7 @@
 #
 #   _scripts/import_archive.sh [destination [version ...]]
 #
-# destination defaults to r2:seqera-docs/training. Versions default to every entry of
+# destination defaults to r2:nextflow-training-docs/training. Versions default to every entry of
 # gh-pages/versions.json except 0.dev. Each goes to <destination>/<version>/.
 # latest/ and versions.json (without 0.dev) are written only if absent, so a run after
 # the first Astro release leaves them alone. Re-runs skip files already uploaded.
@@ -14,7 +14,7 @@
 #     RCLONE_CONFIG_R2_SECRET_ACCESS_KEY=… RCLONE_CONFIG_R2_ENDPOINT=https://<account>.r2.cloudflarestorage.com
 set -eu
 
-dest=${1:-r2:seqera-docs/training}
+dest=${1:-r2:nextflow-training-docs/training}
 [ $# -gt 0 ] && shift
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT

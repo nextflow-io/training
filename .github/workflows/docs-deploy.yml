@@ -1,16 +1,16 @@
 name: Docs deploy
 
-# Publishes the site to R2 (bucket seqera-docs, prefix training/), served by the
+# Publishes the site to R2 (bucket nextflow-training-docs, prefix training/), served by the
 # Router Worker in docs/worker/. One build serves one prefix:
 #   - push to master:    /development/
 #   - release:           /<tag>/ and /latest/, then versions.json
 #   - workflow_dispatch: /<version>/, plus /latest/ if asked, then versions.json
 # The Router Worker is deployed on pushes that change it.
 #
-# Environment `docs-production` holds the secrets:
-#   R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY  R2 token, Object Read & Write on seqera-docs
-#   CLOUDFLARE_API_TOKEN                    "Workers Scripts: Edit"
-#   CLOUDFLARE_ACCOUNT_ID
+# Repository secrets, named like seqeralabs/docs's:
+#   R2_ACCESS_KEY_ID_TRAINING_REPO, R2_SECRET_ACCESS_KEY_TRAINING_REPO  R2 token, Object Read & Write on nextflow-training-docs
+#   CLOUDFLARE_API_TOKEN_TRAINING_REPO                                  "Workers Scripts: Edit", scoped to nextflow-training
+#   CLOUDFLARE_ACCOUNT_ID_TRAINING_REPO
 
 on:
   push:
@@ -43,7 +43,7 @@ defaults:
     shell: bash
 
 env:
-  BUCKET: seqera-docs
+  BUCKET: nextflow-training-docs
   RCLONE_VERSION: 1.75.2
   RCLONE_SHA256: 349ac8fba6ff65d6247043f1750cdcb518ec5d500ef91463a10d37c0ccdf3702
 
@@ -101,7 +101,6 @@ jobs:
     needs: [plan, build]
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    environment: docs-production
     strategy:
       matrix:
         prefix: ${{ fromJSON(needs.plan.outputs.prefixes) }}
@@ -110,9 +109,9 @@ jobs:
       RCLONE_CONFIG_R2_PROVIDER: Cloudflare
       RCLONE_CONFIG_R2_REGION: auto
       RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true"
-      RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-      RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-      RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+      RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID_TRAINING_REPO }}
+      RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY_TRAINING_REPO }}
+      RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID_TRAINING_REPO }}.r2.cloudflarestorage.com
     steps:
       - name: Download site
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
@@ -147,7 +146,6 @@ jobs:
     needs: [plan, publish]
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    environment: docs-production
     concurrency:
       group: docs-versions-json
       cancel-in-progress: false
@@ -206,7 +204,6 @@ jobs:
     if: needs.worker-changes.outputs.changed == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    environment: docs-production
     permissions:
       contents: read
     defaults:
@@ -229,6 +226,6 @@ jobs:
 
       - name: Deploy
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_TRAINING_REPO }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_TRAINING_REPO }}
         run: npm run deploy -- --message "master @ ${GITHUB_SHA:0:7}"

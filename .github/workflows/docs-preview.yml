@@ -8,9 +8,11 @@ name: Docs preview
 # This workflow runs in the base repository's context: it uses the default branch's
 # wrangler config and never checks out or runs PR code. The artifact is only uploaded.
 #
-# Environment `docs-preview` holds the secrets:
-#   CLOUDFLARE_API_TOKEN   "Workers Scripts: Edit"
-#   CLOUDFLARE_ACCOUNT_ID
+# Repository secrets:
+#   CLOUDFLARE_PREVIEW_API_TOKEN_TRAINING_REPO  "Workers Scripts: Edit", scoped to the preview Worker only
+#   CLOUDFLARE_ACCOUNT_ID_TRAINING_REPO
+# `wrangler preview` needs the Worker in docs/wrangler.preview.jsonc to exist: deploy it
+# once by hand first (any dist-preview/ contents will do).
 
 on:
   workflow_run: # zizmor: ignore[dangerous-triggers] PR code is never checked out; the artifact is data
@@ -63,7 +65,6 @@ jobs:
     if: needs.pr.outputs.number != ''
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    environment: docs-preview
     permissions:
       actions: read
       pull-requests: write
@@ -118,8 +119,8 @@ jobs:
         id: deploy
         if: env.BUILT == 'true'
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_PREVIEW_API_TOKEN_TRAINING_REPO }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_TRAINING_REPO }}
         run: |
           npx wrangler preview -c ../wrangler.preview.jsonc --name "pr-$PR" \
             --message "PR #$PR @ ${SHA:0:7}" --json | tee preview.json
@@ -162,7 +163,6 @@ jobs:
       github.event.pull_request.user.login != 'dependabot[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    environment: docs-preview
     permissions:
       pull-requests: write
     concurrency:
@@ -195,8 +195,8 @@ jobs:
       # A PR whose build never succeeded has no Preview to delete.
       - name: Delete Cloudflare Preview
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_PREVIEW_API_TOKEN_TRAINING_REPO }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_TRAINING_REPO }}
         run: |
           if ! npx wrangler preview delete -c ../wrangler.preview.jsonc --name "pr-$PR" --skip-confirmation 2>&1 | tee delete.log; then
             grep -qi 'not found' delete.log || exit 1
