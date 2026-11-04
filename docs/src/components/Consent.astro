@@ -5,223 +5,245 @@ const { t } = Astro.locals;
 const llmsTxt = `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}llms.txt`;
 ---
 
-<Default><slot /></Default>
+<Default>
+  <slot />
+</Default>
 
 <div class="site-footer">
-	<p>
-		<span>Copyright &copy; 2020-{new Date().getFullYear()}, <a href="https://seqera.io" target="_blank" rel="noopener">Seqera</a>.</span>
-		<span>
-			<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
-				<!-- Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0) -->
-				<path fill="currentColor" d="m245.83 214.87-33.22 17.28c-9.43-19.58-25.24-19.93-27.46-19.93-22.13 0-33.22 14.61-33.22 43.84 0 23.57 9.21 43.84 33.22 43.84 14.47 0 24.65-7.09 30.57-21.26l30.55 15.5c-6.17 11.51-25.69 38.98-65.1 38.98-22.6 0-73.96-10.32-73.96-77.05 0-58.69 43-77.06 72.63-77.06 30.72-.01 52.7 11.95 65.99 35.86zm143.05 0-32.78 17.28c-9.5-19.77-25.72-19.93-27.9-19.93-22.14 0-33.22 14.61-33.22 43.84 0 23.55 9.23 43.84 33.22 43.84 14.45 0 24.65-7.09 30.54-21.26l31 15.5c-2.1 3.75-21.39 38.98-65.09 38.98-22.69 0-73.96-9.87-73.96-77.05 0-58.67 42.97-77.06 72.63-77.06 30.71-.01 52.58 11.95 65.56 35.86zM247.56 8.05C104.74 8.05 0 123.11 0 256.05c0 138.49 113.6 248 247.56 248 129.93 0 248.44-100.87 248.44-248 0-137.87-106.62-248-248.44-248zm.87 450.81c-112.54 0-203.7-93.04-203.7-202.81 0-105.42 85.43-203.27 203.72-203.27 112.53 0 202.82 89.46 202.82 203.26-.01 121.69-99.68 202.82-202.84 202.82z"></path>
-			</svg>
-			<a
-				href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
-				target="_blank"
-				rel="noopener"
-				title="Creative Commons CC BY-NC-SA 4.0">Creative Commons BY-NC-SA 4.0</a
-			>.
-		</span>
-	</p>
-	<p>
-		<a href={llmsTxt}>llms.txt</a>
-		<button type="button" id="consent-open">Cookie settings</button>
-	</p>
+  <p>
+    <span>
+      Copyright &copy; 2020-{new Date().getFullYear()},{' '}
+      <a href="https://seqera.io" target="_blank" rel="noopener">
+        Seqera
+      </a>
+      .
+    </span>
+    <span>
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+        <!-- Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0) -->
+        <path
+          fill="currentColor"
+          d="m245.83 214.87-33.22 17.28c-9.43-19.58-25.24-19.93-27.46-19.93-22.13 0-33.22 14.61-33.22 43.84 0 23.57 9.21 43.84 33.22 43.84 14.47 0 24.65-7.09 30.57-21.26l30.55 15.5c-6.17 11.51-25.69 38.98-65.1 38.98-22.6 0-73.96-10.32-73.96-77.05 0-58.69 43-77.06 72.63-77.06 30.72-.01 52.7 11.95 65.99 35.86zm143.05 0-32.78 17.28c-9.5-19.77-25.72-19.93-27.9-19.93-22.14 0-33.22 14.61-33.22 43.84 0 23.55 9.23 43.84 33.22 43.84 14.45 0 24.65-7.09 30.54-21.26l31 15.5c-2.1 3.75-21.39 38.98-65.09 38.98-22.69 0-73.96-9.87-73.96-77.05 0-58.67 42.97-77.06 72.63-77.06 30.71-.01 52.58 11.95 65.56 35.86zM247.56 8.05C104.74 8.05 0 123.11 0 256.05c0 138.49 113.6 248 247.56 248 129.93 0 248.44-100.87 248.44-248 0-137.87-106.62-248-248.44-248zm.87 450.81c-112.54 0-203.7-93.04-203.7-202.81 0-105.42 85.43-203.27 203.72-203.27 112.53 0 202.82 89.46 202.82 203.26-.01 121.69-99.68 202.82-202.84 202.82z"
+        ></path>
+      </svg>
+      <a
+        href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+        target="_blank"
+        rel="noopener"
+        title="Creative Commons CC BY-NC-SA 4.0"
+      >
+        Creative Commons BY-NC-SA 4.0
+      </a>
+      .
+    </span>
+  </p>
+  <p>
+    <a href={llmsTxt}>llms.txt</a>
+    <button type="button" id="consent-open">
+      Cookie settings
+    </button>
+  </p>
 </div>
 
 <dialog id="consent" aria-labelledby="consent-title" aria-describedby="consent-description">
-	<form method="dialog">
-		<h2 id="consent-title" tabindex="-1" autofocus>{t('consent.title')}</h2>
-		<p id="consent-description" set:html={t('consent.description')} />
-		<div id="consent-settings" hidden>
-			<label><input type="checkbox" name="analytics" checked /> Google Analytics</label>
-			<label><input type="checkbox" name="posthog" checked /> {t('consent.posthog')}</label>
-		</div>
-		<div class="controls">
-			<button value="accept">Accept</button>
-			<button value="reject">Reject</button>
-			<button type="button" class="manage" aria-expanded="false" aria-controls="consent-settings">
-				Manage settings
-			</button>
-		</div>
-	</form>
+  <form method="dialog">
+    <h2 id="consent-title" tabindex="-1" autofocus>
+      {t('consent.title')}
+    </h2>
+    <p id="consent-description" set:html={t('consent.description')} />
+    <div id="consent-settings" hidden>
+      <label>
+        <input type="checkbox" name="analytics" checked /> Google Analytics
+      </label>
+      <label>
+        <input type="checkbox" name="posthog" checked /> {t('consent.posthog')}
+      </label>
+    </div>
+    <div class="controls">
+      <button value="accept">Accept</button>
+      <button value="reject">Reject</button>
+      <button type="button" class="manage" aria-expanded="false" aria-controls="consent-settings">
+        Manage settings
+      </button>
+    </div>
+  </form>
 </dialog>
 
 <script>
-	type Consent = Record<string, boolean>;
+  type Consent = Record<string, boolean>;
 
-	// Material for MkDocs' key under `extra.scope: /`, so choices made on the old site carry over.
-	const KEY = '/.__consent';
-	const GA_ID = 'G-244N3GEN75';
+  // Material for MkDocs' key under `extra.scope: /`, so choices made on the old site carry over.
+  const KEY = '/.__consent';
+  const GA_ID = 'G-244N3GEN75';
 
-	const dialog = document.getElementById('consent') as HTMLDialogElement;
-	const form = dialog.querySelector('form')!;
-	const settings = document.getElementById('consent-settings')!;
-	const manage = form.querySelector<HTMLButtonElement>('.manage')!;
-	const boxes = [...form.querySelectorAll<HTMLInputElement>('input[type=checkbox]')];
+  const dialog = document.getElementById('consent') as HTMLDialogElement;
+  const form = dialog.querySelector('form')!;
+  const settings = document.getElementById('consent-settings')!;
+  const manage = form.querySelector<HTMLButtonElement>('.manage')!;
+  const boxes = [...form.querySelectorAll<HTMLInputElement>('input[type=checkbox]')];
 
-	function read(): Consent | null {
-		try {
-			return JSON.parse(localStorage.getItem(KEY)!);
-		} catch {
-			return null;
-		}
-	}
+  function read(): Consent | null {
+    try {
+      return JSON.parse(localStorage.getItem(KEY)!);
+    } catch {
+      return null;
+    }
+  }
 
-	function addScript(src: string) {
-		const script = Object.assign(document.createElement('script'), { src, async: true });
-		document.head.append(script);
-		return script;
-	}
+  function addScript(src: string) {
+    const script = Object.assign(document.createElement('script'), { src, async: true });
+    document.head.append(script);
+    return script;
+  }
 
-	let started: Consent = {};
-	function start(consent: Consent) {
-		const w = window as any;
-		if (consent.analytics && !started.analytics) {
-			w.dataLayer = w.dataLayer || [];
-			w.gtag = function () {
-				w.dataLayer.push(arguments);
-			};
-			w.gtag('js', new Date());
-			w.gtag('config', GA_ID);
-			addScript(`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`);
-		}
-		if (consent.posthog && !started.posthog) {
-			addScript('https://eu-assets.i.posthog.com/static/array.js').onload = () =>
-				w.posthog.init('phc_pLVMvF3StGtifZ71oQrnQ99FGD1luzjIcG3xrs1PIaW', {
-					api_host: 'https://eu.i.posthog.com',
-					person_profiles: 'always',
-					persistence: 'localStorage',
-				});
-		}
-		started = { ...started, ...consent };
-	}
+  let started: Consent = {};
+  function start(consent: Consent) {
+    const w = window as any;
+    if (consent.analytics && !started.analytics) {
+      w.dataLayer = w.dataLayer || [];
+      w.gtag = function () {
+        w.dataLayer.push(arguments);
+      };
+      w.gtag('js', new Date());
+      w.gtag('config', GA_ID);
+      addScript(`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`);
+    }
+    if (consent.posthog && !started.posthog) {
+      addScript('https://eu-assets.i.posthog.com/static/array.js').onload = () =>
+        w.posthog.init('phc_pLVMvF3StGtifZ71oQrnQ99FGD1luzjIcG3xrs1PIaW', {
+          api_host: 'https://eu.i.posthog.com',
+          person_profiles: 'always',
+          persistence: 'localStorage',
+        });
+    }
+    started = { ...started, ...consent };
+  }
 
-	function showSettings(show: boolean) {
-		settings.hidden = !show;
-		manage.setAttribute('aria-expanded', String(show));
-	}
+  function showSettings(show: boolean) {
+    settings.hidden = !show;
+    manage.setAttribute('aria-expanded', String(show));
+  }
 
-	manage.addEventListener('click', () => showSettings(settings.hidden));
+  manage.addEventListener('click', () => showSettings(settings.hidden));
 
-	document.getElementById('consent-open')!.addEventListener('click', () => {
-		const consent = read();
-		for (const box of boxes) box.checked = consent ? !!consent[box.name] : true;
-		showSettings(true);
-		dialog.showModal();
-	});
+  document.getElementById('consent-open')!.addEventListener('click', () => {
+    const consent = read();
+    for (const box of boxes) box.checked = consent ? !!consent[box.name] : true;
+    showSettings(true);
+    dialog.showModal();
+  });
 
-	form.addEventListener('submit', (event) => {
-		const reject = (event.submitter as HTMLButtonElement | null)?.value === 'reject';
-		const next: Consent = Object.fromEntries(boxes.map((box) => [box.name, !reject && box.checked]));
-		const previous = read() ?? {};
-		try {
-			localStorage.setItem(KEY, JSON.stringify({ ...previous, ...next }));
-		} catch {}
-		// Loaded trackers can't be unloaded, so a withdrawal needs a fresh page.
-		if (Object.keys(next).some((name) => started[name] && !next[name])) location.reload();
-		else start(next);
-	});
+  form.addEventListener('submit', (event) => {
+    const reject = (event.submitter as HTMLButtonElement | null)?.value === 'reject';
+    const next: Consent = Object.fromEntries(boxes.map((box) => [box.name, !reject && box.checked]));
+    const previous = read() ?? {};
+    try {
+      localStorage.setItem(KEY, JSON.stringify({ ...previous, ...next }));
+    } catch {}
+    // Loaded trackers can't be unloaded, so a withdrawal needs a fresh page.
+    if (Object.keys(next).some((name) => started[name] && !next[name])) location.reload();
+    else start(next);
+  });
 
-	const consent = read();
-	if (consent) start(consent);
-	else dialog.showModal();
+  const consent = read();
+  if (consent) start(consent);
+  else dialog.showModal();
 </script>
 
 <style>
-	.site-footer {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		gap: 0.5rem 2rem;
-		margin-top: 2rem;
-		padding-top: 1rem;
-		border-top: 1px solid var(--sl-color-hairline);
-		font-size: var(--sl-text-xs);
-		color: var(--sl-color-gray-3);
-	}
-	.site-footer p {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.25rem 1rem;
-	}
-	.site-footer svg {
-		width: 1em;
-		height: 1em;
-		margin-inline-end: 0.25em;
-		vertical-align: -0.125em;
-	}
-	.site-footer a,
-	#consent-open {
-		color: inherit;
-	}
-	.site-footer a:hover,
-	#consent-open:hover {
-		color: var(--sl-color-white);
-	}
-	#consent-open {
-		padding: 0;
-		border: 0;
-		background: none;
-		font: inherit;
-		text-decoration: underline;
-		cursor: pointer;
-	}
+  .site-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--sl-color-hairline);
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+  .site-footer p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+  }
+  .site-footer svg {
+    width: 1em;
+    height: 1em;
+    margin-inline-end: 0.25em;
+    vertical-align: -0.125em;
+  }
+  .site-footer a,
+  #consent-open {
+    color: inherit;
+  }
+  .site-footer a:hover,
+  #consent-open:hover {
+    color: var(--sl-color-white);
+  }
+  #consent-open {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+  }
 
-	dialog {
-		width: min(48rem, 100% - 2rem);
-		margin: auto auto 1rem;
-		padding: 1.25rem 1.5rem;
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: 0.5rem;
-		background: var(--sl-color-bg-nav);
-		color: var(--sl-color-text);
-		box-shadow: var(--sl-shadow-lg);
-		font-size: var(--sl-text-sm);
-	}
-	dialog::backdrop {
-		background: rgb(0 0 0 / 0.5);
-	}
-	h2 {
-		outline: none;
-		margin-bottom: 0.5rem;
-		font-size: var(--sl-text-h4);
-		color: var(--sl-color-white);
-	}
-	dialog p :global(a) {
-		color: var(--sl-color-text-accent);
-	}
-	#consent-settings {
-		margin-top: 1rem;
-	}
-	label {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		margin-block: 0.25rem;
-		cursor: pointer;
-	}
-	input {
-		accent-color: var(--sl-color-accent);
-	}
-	.controls {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		margin-top: 1rem;
-	}
-	.controls button {
-		padding: 0.375rem 1.25rem;
-		border: 1px solid var(--sl-color-text-accent);
-		border-radius: 999rem;
-		background: var(--sl-color-text-accent);
-		color: var(--sl-color-black);
-		font: inherit;
-		font-weight: 600;
-		cursor: pointer;
-	}
-	.controls .manage {
-		background: transparent;
-		color: var(--sl-color-text-accent);
-	}
+  dialog {
+    width: min(48rem, 100% - 2rem);
+    margin: auto auto 1rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    background: var(--sl-color-bg-nav);
+    color: var(--sl-color-text);
+    box-shadow: var(--sl-shadow-lg);
+    font-size: var(--sl-text-sm);
+  }
+  dialog::backdrop {
+    background: rgb(0 0 0 / 0.5);
+  }
+  h2 {
+    outline: none;
+    margin-bottom: 0.5rem;
+    font-size: var(--sl-text-h4);
+    color: var(--sl-color-white);
+  }
+  dialog p :global(a) {
+    color: var(--sl-color-text-accent);
+  }
+  #consent-settings {
+    margin-top: 1rem;
+  }
+  label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block: 0.25rem;
+    cursor: pointer;
+  }
+  input {
+    accent-color: var(--sl-color-accent);
+  }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .controls button {
+    padding: 0.375rem 1.25rem;
+    border: 1px solid var(--sl-color-text-accent);
+    border-radius: 999rem;
+    background: var(--sl-color-text-accent);
+    color: var(--sl-color-black);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .controls .manage {
+    background: transparent;
+    color: var(--sl-color-text-accent);
+  }
 </style>

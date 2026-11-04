@@ -7,23 +7,23 @@ const current = import.meta.env.BASE_URL.replace(/^\/|\/$/g, '');
 const locale = Astro.locals.starlightRoute.locale ?? '';
 ---
 
-<Default><slot /></Default>
-{
-  current && (
-    <nf-version-menu hidden data-current={current} data-locale={locale}>
-      <Select
-        icon="code-branch"
-        label="Version"
-        options={[{ label: current, value: current, selected: true }]}
-      />
-    </nf-version-menu>
-  )
-}
+<Default>
+  <slot />
+</Default>
+{current && (
+  <nf-version-menu hidden data-current={current} data-locale={locale}>
+    <Select icon="code-branch" label="Version" options={[{ label: current, value: current, selected: true }]} />
+  </nf-version-menu>
+)}
 
 <script>
   type Version = { version: string; title: string; aliases: string[] };
 
-  const exists = (url: string) => fetch(url, { method: 'HEAD' }).then((r) => r.ok, () => false);
+  const exists = (url: string) =>
+    fetch(url, { method: 'HEAD' }).then(
+      (r) => r.ok,
+      () => false,
+    );
 
   class VersionMenu extends HTMLElement {
     async connectedCallback() {

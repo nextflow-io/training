@@ -8,7 +8,11 @@ trim_trailing_whitespace = true
 indent_size = 4
 indent_style = space
 
-[*.{md,mdx,yml,yaml,html,css,scss,js,mjs,ts,astro,json,jsonc}]
+[*.{md,mdx,yml,yaml,html,css,scss,js,mjs,ts,astro}]
+indent_size = 2
+
+# npm writes 2 spaces; JSON elsewhere (nf-core pipelines, devcontainers) uses 4
+[docs/**.{json,jsonc}]
 indent_size = 2
 
 # ignore python and markdown

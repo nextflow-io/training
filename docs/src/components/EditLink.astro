@@ -21,22 +21,20 @@ const issueUrl =
   })}`;
 ---
 
-{
-  translated ? (
-    <div class="sl-flex print:hidden">
-      <a href={issueUrl} class="sl-flex">
-        <Icon name="comment-alt" size="1.2em" />
-        Report an issue with this translation
-      </a>
-      <a href={translatingUrl} class="sl-flex">
-        <Icon name="translate" size="1.2em" />
-        Improve translation
-      </a>
-    </div>
-  ) : (
-    <Default />
-  )
-}
+{translated ? (
+  <div class="sl-flex print:hidden">
+    <a href={issueUrl} class="sl-flex">
+      <Icon name="comment-alt" size="1.2em" />
+      Report an issue with this translation
+    </a>
+    <a href={translatingUrl} class="sl-flex">
+      <Icon name="translate" size="1.2em" />
+      Improve translation
+    </a>
+  </div>
+) : (
+  <Default />
+)}
 
 <style>
   @layer starlight.core {

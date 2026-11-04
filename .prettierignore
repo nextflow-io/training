@@ -1,5 +1,12 @@
-# Prettier's MDX support breaks JSX in list items and wraps inline components
+# Prettier parses MDX 1, not MDX 3: a fence indented 4 spaces after a paragraph is a code block
+# to Astro, but Prettier rewrites it as inline code. The build still passes.
 *.mdx
+
+# MkDocs input for the converter tests, where 4-space list indentation is syntax
+_scripts/convert_mkdocs/tests/
+
+# LLM prompts: examples must match the pages exactly, and any change marks all translations outdated
+_scripts/**/*llm-prompt.md
 
 # Ignore all files in side-quests/solutions
 side-quests/solutions/nf-core/**/*.js

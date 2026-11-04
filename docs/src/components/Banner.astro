@@ -14,30 +14,26 @@ const archivable = version && version !== 'latest' && version !== 'development';
 ---
 
 <Default />
-{
-  showAnnouncement && (
-    <>
-      <div id="nf-announcement" class="nf-banner nf-announcement" data-pagefind-ignore>
-        {announcement.text} <strong>{announcement.text_bold}</strong>{' '}
-        <a href={announcement.url} target="_blank">
-          {announcement.url_text}
-          <Icon name="right-arrow" class="nf-banner-icon" />
-        </a>
-      </div>
-      <script is:inline define:vars={{ hideAfter: announcement.hide_after }}>
-        if (Date.now() >= Date.parse(hideAfter)) document.getElementById('nf-announcement').remove();
-      </script>
-    </>
-  )
-}
-{
-  archivable && (
-    <div id="nf-archive" class="nf-banner nf-archive" data-version={version} data-pagefind-ignore hidden>
-      {tr('banner.archive', `This is an archived version (${version}) of the training material.`, { version })}{' '}
-      <a href="/latest/">{tr('banner.latest', 'View the latest version')}</a>
+{showAnnouncement && (
+  <>
+    <div id="nf-announcement" class="nf-banner nf-announcement" data-pagefind-ignore>
+      {announcement.text} <strong>{announcement.text_bold}</strong>{' '}
+      <a href={announcement.url} target="_blank">
+        {announcement.url_text}
+        <Icon name="right-arrow" class="nf-banner-icon" />
+      </a>
     </div>
-  )
-}
+    <script is:inline define:vars={{ hideAfter: announcement.hide_after }}>
+      if (Date.now() >= Date.parse(hideAfter)) document.getElementById('nf-announcement').remove();
+    </script>
+  </>
+)}
+{archivable && (
+  <div id="nf-archive" class="nf-banner nf-archive" data-version={version} data-pagefind-ignore hidden>
+    {tr('banner.archive', `This is an archived version (${version}) of the training material.`, { version })}{' '}
+    <a href="/latest/">{tr('banner.latest', 'View the latest version')}</a>
+  </div>
+)}
 
 <script>
   async function showArchiveNotice(el: HTMLElement) {

@@ -47,24 +47,24 @@ const links = [
 ];
 ---
 
-<Default><slot /></Default>
+<Default>
+  <slot />
+</Default>
 <nav class="sl-hidden lg:sl-block" aria-labelledby="toc-resources-heading">
   <h2 id="toc-resources-heading">Resources</h2>
   <ul>
-    {
-      links.map(({ label, href, viewBox, paths }) => (
-        <li>
-          <a href={href} target="_blank" rel="noopener">
-            <svg viewBox={viewBox} aria-hidden="true">
-              {paths.map((d) => (
-                <path d={d} />
-              ))}
-            </svg>
-            {label}
-          </a>
-        </li>
-      ))
-    }
+    {links.map(({ label, href, viewBox, paths }) => (
+      <li>
+        <a href={href} target="_blank" rel="noopener">
+          <svg viewBox={viewBox} aria-hidden="true">
+            {paths.map((d) => (
+              <path d={d} />
+            ))}
+          </svg>
+          {label}
+        </a>
+      </li>
+    ))}
   </ul>
 </nav>
 

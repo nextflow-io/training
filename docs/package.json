@@ -27,5 +27,9 @@
     "starlight-llms-txt": "0.12.0",
     "starlight-page-actions": "0.7.1",
     "starlight-quiz": "1.0.2"
+  },
+  "devDependencies": {
+    "prettier": "3.9.10",
+    "prettier-plugin-astro": "1.1.2"
   }
 }
