@@ -8,7 +8,7 @@ from pathlib import Path
 import yaml
 
 from core import fenced_lines, split_frontmatter
-from rules.frontmatter import H1, plain
+from rules.frontmatter import HEADING, plain
 
 
 class _Loader(yaml.SafeLoader):
@@ -54,4 +54,4 @@ def page_title(run, lang: str, rel: str) -> str | None:
         return str(meta["title"])
     lines = body.split("\n")
     fenced = fenced_lines(lines)
-    return next((plain(m["text"]) for i, l in enumerate(lines) if i not in fenced and (m := H1.match(l))), None)
+    return next((plain(m["text"]) for i, l in enumerate(lines) if i not in fenced and (m := HEADING.match(l)) and m["level"] == "#"), None)
