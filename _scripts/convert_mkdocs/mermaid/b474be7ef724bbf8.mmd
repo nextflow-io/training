@@ -1,0 +1,12 @@
+graph TD
+    A[GreetingPlugin] -->|registers| B[GreetingExtension]
+    A -->|registers| C[GreetingFactory]
+    C -->|creates| D[GreetingObserver]
+
+    B -->|provides| E["@Function methods<br/>(callable from workflows)"]
+    D -->|hooks into| F["Lifecycle events<br/>(onFlowCreate, onProcessComplete, etc.)"]
+
+    style A fill:#e1f5fe
+    style B fill:#fff3e0
+    style C fill:#fff3e0
+    style D fill:#fff3e0
