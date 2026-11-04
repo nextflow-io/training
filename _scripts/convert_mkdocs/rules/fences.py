@@ -23,6 +23,8 @@ SCOPES = (
     "process|profiles|plugins|docker|singularity|apptainer|podman|charliecloud|conda|spack|executor"
     "|manifest|env|aws|azure|google|k8s|wave|fusion|tower|timeline|report|trace|dag|notification|mail|lineage"
 )
+# Fence languages in the corpus that Shiki doesn't know: MkDocs used the file name as the language.
+LANGUAGES = {"Dockerfile": "dockerfile", "conda.yml": "yaml"}
 # Not `params.x = ...`: old-style scripts set params that way too.
 CONFIG_START = re.compile(rf"^((withName|withLabel)\s*:|(params|{SCOPES})\s*\{{|({SCOPES})\.\w|ext\.\w|(outputDir|workDir|includeConfig)\b)")
 
@@ -40,6 +42,7 @@ def classify(title: str | None, code: str) -> tuple[str, bool]:
 
 def fence_line(info: str, code: str) -> str:
     lang, _, rest = info.partition(" ")
+    lang = LANGUAGES.get(lang, lang)
     attrs = dict((m["key"], m["value"]) for m in ATTR.finditer(rest))
     leftover = ATTR.sub("", rest).strip()
     title = attrs.get("title")

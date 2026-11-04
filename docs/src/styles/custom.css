@@ -161,12 +161,12 @@ details.solution {
   &[open] {
     padding-bottom: 0.75rem;
   }
+  /* Block layout, so bold and plain text in a title stay one line of text. */
   > summary {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    position: relative;
     margin-inline: -0.75rem;
-    padding: 0.5rem 0.75rem;
+    padding-block: 0.5rem;
+    padding-inline: 2.5rem 2.25rem;
     border-radius: 0.2rem;
     background: color-mix(in srgb, var(--c) 10%, transparent);
     font-weight: 700;
@@ -177,13 +177,16 @@ details.solution {
   }
   /* Starlight's chevron, moved to the end */
   > summary::before {
-    order: 1;
-    margin-inline: auto 0;
+    position: absolute;
+    inset-inline-end: 0.75rem;
+    top: calc(50% - 0.625rem);
+    margin: 0;
   }
   > summary::after {
     content: '';
-    order: -1;
-    flex: none;
+    position: absolute;
+    inset-inline-start: 0.75rem;
+    top: calc(50% - 0.625rem);
     width: 1.25rem;
     height: 1.25rem;
     background: var(--c);
@@ -212,8 +215,31 @@ details.solution {
   width: 100%;
   aspect-ratio: 16 / 9;
 }
-:root[data-theme='dark'] .sl-markdown-content img[src*='.excalidraw.'] {
+:root[data-theme='dark'] .sl-markdown-content :is(img[src*='.excalidraw.'], img[src*='/mermaid-']) {
   filter: invert(1) hue-rotate(180deg);
+}
+
+/* Floats: MkDocs `{ align=right }` images and `!!! tip inline end` asides */
+
+.sl-markdown-content .align-right {
+  float: inline-end;
+  margin-inline-start: 1rem;
+}
+.sl-markdown-content .align-left {
+  float: inline-start;
+  margin-inline-end: 1rem;
+}
+.sl-markdown-content .starlight-aside.inline.end {
+  float: inline-end;
+  width: min(16rem, 45%);
+  margin: 0 0 1rem 1rem;
+}
+@media (max-width: 50rem) {
+  .sl-markdown-content :is(.align-right, .align-left, .starlight-aside.inline.end) {
+    float: none;
+    width: auto;
+    margin-inline: 0;
+  }
 }
 
 /* Tables */

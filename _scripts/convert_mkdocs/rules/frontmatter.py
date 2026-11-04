@@ -181,5 +181,12 @@ def apply(page) -> None:
     for h in hide:
         if h not in ("toc", "footer"):
             page.warn(f"hide: {h} has no Starlight equivalent")
+    for key, items in (meta.get("additional_information") or {}).items():
+        if isinstance(items, list) and any(isinstance(x, dict) for x in items):
+            # An unquoted "Label: text" item parses as a mapping; MkDocs printed it as text.
+            page.warn(f"additional_information.{key}: item read as a mapping, kept as text")
+            meta["additional_information"][key] = [
+                ", ".join(f"{k}: {v}" for k, v in x.items()) if isinstance(x, dict) else x for x in items
+            ]
     out.update(meta)
     page.meta = out

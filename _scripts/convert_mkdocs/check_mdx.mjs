@@ -33,7 +33,7 @@ for (const file of walk(dir)) {
   files++;
   const src = readFileSync(file, 'utf8').replace(/^---\n[\s\S]*?\n---\n/, (fm) => '\n'.repeat(fm.split('\n').length - 1));
   try {
-    mdxToJs(src, { features: { directive: true, gfm: true } });
+    mdxToJs(src, { features: { directive: true, gfm: true, headingAttributes: true } });
   } catch (e) {
     failed++;
     console.log(`${path.relative(dir, file)}: ${String(e.message ?? e).split('\n')[0]}`);

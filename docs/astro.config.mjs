@@ -82,7 +82,11 @@ export default defineConfig({
         // No baseUrl: page actions then leave llms.txt to starlight-llms-txt.
         starlightPageActions(),
         // Translated pages link to English fallback pages on purpose.
-        starlightLinksValidator({ exclude: linksValidatorExclude, errorOnFallbackPages: false }),
+        starlightLinksValidator({
+          // nf4_science/_template links to `{TOOL_A_URL}`-style placeholders on purpose.
+          exclude: (link) => linksValidatorExclude(link) || /\{[A-Z_]+\}/.test(link.link),
+          errorOnFallbackPages: false,
+        }),
       ],
     }),
     // Must come after starlight(): it only injects imports when MDX is already registered.

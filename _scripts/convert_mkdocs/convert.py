@@ -74,7 +74,9 @@ def main() -> int:
         for p in pages:
             print(f"docs/{p.lang}/docs/{p.rel}\tdocs/src/content/docs/{p.out_rel}")
         for dst, src in sorted(run.assets.items()):
-            print(f"{src.relative_to(run.src_root).as_posix()}\tdocs/src/content/docs/{dst}")
+            # Assets made by the converter (pre-rendered Mermaid) are new files, added with its output.
+            if src.is_relative_to(run.src_root):
+                print(f"{src.relative_to(run.src_root).as_posix()}\tdocs/src/content/docs/{dst}")
         return 0
 
     if args.clean and run.out_root.exists():
@@ -92,7 +94,8 @@ def main() -> int:
 
     if not args.no_generate:
         for gen in GENERATORS:
-            for rel, content in sorted(gen.generate(run, langs).items()):
+            # Always every locale: the sidebar and redirects describe the whole site.
+            for rel, content in sorted(gen.generate(run, LOCALES).items()):
                 out = args.app / rel
                 out.parent.mkdir(parents=True, exist_ok=True)
                 out.write_text(content, encoding="utf-8")
