@@ -1,0 +1,21 @@
+# UI strings for translation - Italian (Italiano)
+# Queste stringhe sono utilizzate da index_page_hook.py per le pagine
+# iniziali dei corsi e in mkdocs.yml per il consenso ai cookie.
+
+index_page:
+  course_summary: "Riepilogo del corso"
+  additional_information: "Informazioni aggiuntive"
+  technical_requirements: "Requisiti tecnici"
+  learning_objectives: "Obiettivi di apprendimento"
+  audience_prerequisites: "Destinatari e prerequisiti"
+  course_videos: "Video del corso"
+
+defaults:
+  technical_requirements: >-
+    Avrai bisogno di un account GitHub OPPURE di un'installazione locale di Nextflow.
+    Consulta [Opzioni ambiente](../envsetup/index.md) per maggiori dettagli.
+  videos: >-
+    Sono disponibili video per ogni capitolo, in cui un istruttore lavora
+    attraverso gli esercizi. Il video di ogni parte del corso è incorporato
+    nella parte superiore della pagina corrispondente.
+  view_playlist: "Guarda la playlist su YouTube"

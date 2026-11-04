@@ -1,0 +1,29 @@
+.DS_Store
+.cache
+.idea
+serve
+work
+.nextflow*
+results
+transcript-index
+.vscode
+.playwright-mcp/
+.preview-release/
+__pycache__
+*.pyc
+
+# Gradle build artifacts
+.gradle/
+
+# Build outputs
+site/
+site_build/
+docs/*/site/
+docs/*/site_build/
+
+# Python virtual environments
+.venv/
+_scripts/.venv/
+
+# Tutorial working directories (created by learners during exercises)
+hello-nf-core/core-hello/

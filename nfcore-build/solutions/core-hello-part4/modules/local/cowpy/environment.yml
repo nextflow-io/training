@@ -1,0 +1,5 @@
+name: COWPY
+channels:
+  - conda-forge
+dependencies:
+  - cowpy=1.1.5

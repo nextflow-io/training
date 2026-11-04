@@ -1,0 +1,36 @@
+# Getting started
+
+## Start a training environment
+
+To use the pre-built environment we provide on GitHub Codespaces, click the "Open in GitHub Codespaces" button below.
+For other options, see [Environment options](../envsetup/index.md).
+
+We recommend opening the training environment in a new browser tab or window (use right-click, ctrl-click or cmd-click depending on your equipment) so that you can read on while the environment loads.
+You will need to keep these instructions open in parallel to work through the course.
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+
+### Environment basics
+
+This training environment contains all the software, code and data necessary to work through the training course, so you don't need to install anything yourself.
+
+The codespace is set up with a VSCode interface, which includes a filesystem explorer, a code editor and a terminal shell.
+All instructions given during the course (e.g. 'open the file', 'edit the code' or 'run this command') refer to those three parts of the VSCode interface unless otherwise specified.
+
+If you are working through this course by yourself, please acquaint yourself with the [environment basics](../envsetup/01_setup.md) for further details.
+
+### Version requirements
+
+This training works with Nextflow 25.10.2 or later **with the v2 syntax parser ENABLED**.
+If you are using a local or custom environment, please make sure you are using the correct settings as documented [here](../info/nxf_versions.md).
+
+## Readiness checklist
+
+Think you're ready to dive in?
+
+- [ ] I understand the goal of this course and its prerequisites
+- [ ] My environment is up and running
+
+If you can check all the boxes, you're good to go.
+
+**To begin, select a Side Quest from the navigation menu.**

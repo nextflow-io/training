@@ -1,0 +1,16 @@
+{
+    "Should run without failures and produce correct output": {
+        "content": [
+            {
+                "0": [
+                    "UPPER-greetings.csv:md5,2985c521c6b7ed5c97946d6356a5fe64"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "26.04.4"
+        },
+        "timestamp": "2026-06-23T15:48:10.014026951"
+    }
+}

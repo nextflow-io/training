@@ -1,0 +1,9 @@
+# Questionario di feedback
+
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
+Prima di proseguire, completate questo breve questionario di 5 domande per valutare la formazione, condividere eventuali feedback sulla vostra esperienza e farci sapere cos'altro potremmo fare per aiutarvi nel vostro percorso con Nextflow.
+
+Il completamento dovrebbe richiedere meno di un minuto. Grazie per aiutarci a migliorare i nostri materiali di formazione per tutti!
+
+<div data-tf-live="01M2DNYZMKW99BW976FP5VX5CJ"></div><script src="//embed.typeform.com/next/embed.js"></script>

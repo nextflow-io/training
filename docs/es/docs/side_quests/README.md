@@ -1,0 +1,1 @@
+Este es un marcador de posición para las futuras Side Quests (capacitaciones de profundización). Los documentos que se encuentran actualmente aquí son borradores basados en contenido reciclado de otros lugares.

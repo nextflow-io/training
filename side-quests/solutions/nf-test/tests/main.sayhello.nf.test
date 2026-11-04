@@ -1,0 +1,26 @@
+nextflow_process {
+
+    name "Test Process sayHello"
+    script "main.nf"
+    process "sayHello"
+
+    test("Should run without failures and contain expected greeting") {
+        when {
+            params {
+                // define parameters here
+            }
+            process {
+                """
+                input[0] = "hello"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert path(process.out[0][0]).readLines().contains('hello')
+            assert !path(process.out[0][0]).readLines().contains('HELLO')
+        }
+    }
+
+}

@@ -1,0 +1,60 @@
+//
+// DEVELOPMENT DEVCONTAINER CONFIG
+// Base configuration that is pre-built and pushed to GitHub
+// See .devcontainer/devcontainer.json for production config
+//
+{
+    "name": "nextflow-training (codespaces-dev)",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+
+    "features": {
+        "../local-features/init": {},
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.13"
+        },
+        "ghcr.io/devcontainers/features/java:1": { "version": "21.0.6-ms" },
+        "ghcr.io/rocker-org/devcontainer-features/miniforge:2": {
+            "version": "latest"
+        },
+        "ghcr.io/va-h/devcontainers-features/uv": {},
+        "../local-features/apptainer": {},
+        "../local-features/tower-agent": {},
+        "../local-features/nextflow": {},
+        "../local-features/conda-channels": {},
+        "../local-features/uv-tools": {}
+    },
+    "workspaceFolder": "/workspaces/training",
+    "remoteUser": "root",
+    "remoteEnv": {
+        // Nextflow installation version
+        "NXF_HOME": "/workspaces/.nextflow",
+        "NXF_EDGE": "0",
+        "NXF_VER": "26.04.4",
+        "NXF_SYNTAX_PARSER": "v2",
+        // Other env vars
+        "HOST_PROJECT_PATH": "/workspaces/training",
+        "SHELL": "/bin/bash" // Ush bash
+    },
+    "containerEnv": {
+        // Docker API compatibility
+        "DOCKER_API_VERSION": "1.43"
+    },
+    "onCreateCommand": "bash .devcontainer/setup.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "nf-core.nf-core-extensionpack",
+                "ms-vscode.live-server"
+            ],
+            // Use Python from conda
+            "settings": {
+                "python.defaultInterpreterPath": "/opt/conda/bin/python"
+            },
+            // Use bash
+            "terminal.integrated.defaultProfile.linux": "bash"
+        }
+    }
+}

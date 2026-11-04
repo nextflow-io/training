@@ -1,0 +1,78 @@
+# Build and push the Docker image for GitHub Codespaces
+# - Only pushes if push or release
+# - Builds without push for PRs to check the Dockerfile
+
+name: Build Docker [devcontainers]
+
+on:
+  pull_request: # Build, don't push
+    paths:
+      - ".devcontainer/**"
+      - ".github/workflows/docker-devcontainer.yml"
+  push: {branches: [master]} # Build + push ('latest' tag)
+  release: {types: [published]} # Build + push (release tag)
+  workflow_dispatch: # Build + push (custom tag)
+    inputs:
+      tag_name:
+        description: "Docker image tag name"
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  build_push:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Set tag variable
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          DISPATCH_TAG: ${{ inputs.tag_name }}
+        run: |
+          if [[ "$GITHUB_EVENT_NAME" == 'release' ]]; then
+            echo "IMAGE_TAG=$RELEASE_TAG" >> "$GITHUB_ENV"
+          elif [[ "$GITHUB_EVENT_NAME" == 'workflow_dispatch' ]]; then
+            echo "IMAGE_TAG=$DISPATCH_TAG" >> "$GITHUB_ENV"
+          else
+            echo "IMAGE_TAG=latest" >> "$GITHUB_ENV"
+          fi
+
+      - name: Check out the repo
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up QEMU for multi-architecture builds
+        uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1 # v4.4.0
+
+      - name: Setup Docker buildx for multi-architecture builds
+        uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+        with:
+          use: true
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pre-build dev container image
+        uses: devcontainers/ci@513af61f4de4f75d37e4438f184ba4358f0fc1ca # v0.3.1900000450
+        env:
+          BUILDX_NO_DEFAULT_ATTESTATIONS: true
+        with:
+          configFile: .devcontainer/codespaces-dev/devcontainer.json
+          imageName: ghcr.io/${{ github.repository }}
+          imageTag: ${{ env.IMAGE_TAG }}
+          cacheFrom: ghcr.io/${{ github.repository }}
+          platform: linux/amd64,linux/arm64
+          push: filter
+          eventFilterForPush: |
+            push
+            release
+            workflow_dispatch

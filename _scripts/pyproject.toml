@@ -1,0 +1,17 @@
+[project]
+name = "translate"
+version = "0.1.0"
+description = "LLM-powered translation CLI for Nextflow training docs"
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic>=0.40.0",
+    "gitpython>=3.1.0",
+    "typer>=0.12.0",
+    "pyyaml>=6.0",
+    "rich>=13.0.0",
+    "pygithub>=2.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

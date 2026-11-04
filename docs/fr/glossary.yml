@@ -1,0 +1,42 @@
+# French translation glossary for post-processing enforcement.
+# These translations are applied deterministically, overriding LLM output.
+
+translation_notice:
+  text: "Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)"
+  homepage:
+    title: "Traduction assistée par IA"
+    body: |
+      Cette traduction a été créée à l'aide de l'intelligence artificielle et révisée par des traducteurs humains.
+      Nous apprécions vos commentaires et suggestions d'amélioration.
+      Consultez notre [guide de traduction](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) pour plus d'informations.
+
+tab_labels:
+  After: Après
+  Before: Avant
+
+admonition_titles:
+  note: Note
+  tip: Astuce
+  warning: Avertissement
+  info: Info
+  exercise: Exercice
+  solution: Solution
+  example: Exemple
+  danger: Danger
+  hint: Indice
+
+admonition_title_glossary:
+  "Command output": "Sortie de la commande"
+  "Directory contents": "Contenu du répertoire"
+  "File contents": "Contenu du fichier"
+  "Scenario": Scénario
+  "How to begin from this section": "Comment commencer à partir de cette section"
+  "Full code file": "Fichier de code complet"
+  "Work directory contents": "Contenu du répertoire de travail"
+  "Results directory contents": "Contenu du répertoire de résultats"
+  "Examples": Exemples
+  "Directory contents (symlinks shortened)": "Contenu du répertoire (liens symboliques raccourcis)"
+  "Don't see the same thing?": "Vous ne voyez pas la même chose ?"
+  "Command output (edited for clarity)": "Sortie de la commande (éditée pour la clarté)"
+  "Directory and file contents": "Contenu du répertoire et du fichier"
+  "Workflow code": "Code du workflow"

@@ -1,0 +1,9 @@
+id,repeat,type,bam
+patientA,1,normal,patientA_rep1_normal.bam
+patientA,1,tumor,patientA_rep1_tumor.bam
+patientA,2,normal,patientA_rep2_normal.bam
+patientA,2,tumor,patientA_rep2_tumor.bam
+patientB,1,normal,patientB_rep1_normal.bam
+patientB,1,tumor,patientB_rep1_tumor.bam
+patientC,1,normal,patientC_rep1_normal.bam
+patientC,1,tumor,patientC_rep1_tumor.bam

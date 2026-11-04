@@ -1,0 +1,42 @@
+# Hindi translation glossary for post-processing enforcement.
+# These translations are applied deterministically, overriding LLM output.
+
+translation_notice:
+  text: "AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)"
+  homepage:
+    title: "AI-सहायता प्राप्त अनुवाद"
+    body: |
+      यह अनुवाद कृत्रिम बुद्धिमत्ता का उपयोग करके बनाया गया था और मानव अनुवादकों द्वारा समीक्षित किया गया था।
+      हम आपकी प्रतिक्रिया और सुधार के सुझावों का स्वागत करते हैं।
+      अधिक जानकारी के लिए हमारी [अनुवाद मार्गदर्शिका](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) देखें।
+
+tab_labels:
+  After: बाद में
+  Before: पहले
+
+admonition_titles:
+  note: नोट
+  tip: सुझाव
+  warning: चेतावनी
+  info: जानकारी
+  exercise: अभ्यास
+  solution: समाधान
+  example: उदाहरण
+  danger: खतरा
+  hint: संकेत
+
+admonition_title_glossary:
+  "Command output": "कमांड आउटपुट"
+  "Directory contents": "डायरेक्टरी सामग्री"
+  "File contents": "फ़ाइल सामग्री"
+  "Scenario": परिदृश्य
+  "How to begin from this section": "इस खंड से कैसे शुरू करें"
+  "Full code file": "पूर्ण कोड फ़ाइल"
+  "Work directory contents": "Work डायरेक्टरी सामग्री"
+  "Results directory contents": "Results डायरेक्टरी सामग्री"
+  "Examples": उदाहरण
+  "Directory contents (symlinks shortened)": "डायरेक्टरी सामग्री (symlinks छोटे किए गए)"
+  "Don't see the same thing?": "वही चीज़ नहीं दिख रही?"
+  "Command output (edited for clarity)": "कमांड आउटपुट (स्पष्टता के लिए संपादित)"
+  "Directory and file contents": "डायरेक्टरी और फ़ाइल सामग्री"
+  "Workflow code": "वर्कफ़्लो कोड"

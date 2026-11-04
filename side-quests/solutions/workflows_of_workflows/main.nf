@@ -1,0 +1,32 @@
+#!/usr/bin/env nextflow
+
+include { GREETING_WORKFLOW } from './workflows/greeting'
+include { TRANSFORM_WORKFLOW } from './workflows/transform'
+
+workflow {
+    main:
+    names = channel.of('Alice', 'Bob', 'Charlie')
+
+    // Run the greeting workflow
+    GREETING_WORKFLOW(names)
+
+    // Run the transform workflow
+    TRANSFORM_WORKFLOW(GREETING_WORKFLOW.out.timestamped)
+
+    publish:
+    greetings = GREETING_WORKFLOW.out.greetings
+    upper = TRANSFORM_WORKFLOW.out.upper
+    reversed = TRANSFORM_WORKFLOW.out.reversed
+}
+
+output {
+    greetings {
+        path 'greetings'
+    }
+    upper {
+        path 'upper'
+    }
+    reversed {
+        path 'reversed'
+    }
+}

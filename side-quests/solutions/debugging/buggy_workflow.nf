@@ -1,0 +1,114 @@
+#!/usr/bin/env nextflow
+
+/*
+ * Buggy workflow for debugging exercises
+ * This workflow contains several intentional bugs for learning purposes
+ */
+
+params{
+    // Parameters with missing validation
+    input: Path = 'data/sample_data.csv'
+    output: String = 'results'
+}
+
+/*
+ * Process with input/output mismatch
+ */
+process processFiles {
+
+    input:
+    tuple val(sample_id), path(input_file)
+
+    output:
+    // Fixed: removed trailing comma
+    path "${sample_id}_result.txt"
+
+    script:
+    """
+    # Fixed: Used correct variable name
+    echo "Processing: ${sample_id}"
+    cat ${input_file} > ${sample_id}_result.txt
+    """
+}
+// Fixed to add missing closing brace
+
+/*
+ * Process with resource issues
+ */
+process heavyProcess {
+
+    // Fixed: Increase execution time to avoid timeout
+    time '100 s'
+
+    input:
+    val sample_id
+
+    output:
+    path "${sample_id}_heavy.txt"
+
+    script:
+    """
+    # Simulate heavy computation
+    for i in {1..10000}; do
+        echo "Heavy computation \${i} for ${sample_id}" # Fixed: escaped variable
+    done > ${sample_id}_heavy.txt # Fixed: output file name corrected
+    """
+}
+
+/*
+ * Process with file handling issues
+ */
+process handleFiles {
+
+    input:
+    path input_file
+
+    output:
+    path "processed_${input_file}"
+
+    script:
+    """
+    # BUG: Incorrect file handling - input_file might not exist
+    if [ -f "${input_file}" ]; then
+        cp ${input_file} processed_${input_file}
+    fi
+    """
+}
+
+/*
+ * Main workflow with channel issues
+ */
+workflow {
+    main:
+    // Channel with incorrect usage
+    input_ch = channel.fromPath(params.input)
+        .splitCsv(header: true)
+        .map { row -> [row.sample_id, file(row.fastq_path)] }
+    // Fixed: made the map return a tuple with sample_id and fastq_path as a file
+
+    processed_ch = processFiles(input_ch)
+
+    heavy_ch = heavyProcess(input_ch.map { it[0] })
+    // Fixed: using the first element of the tuple as input
+
+    // BUG: Incorrect channel usage
+    // Fixed: take output from second process
+    file_ch = handleFiles(heavy_ch)
+
+    publish:
+    processed = processed_ch
+    heavy = heavy_ch
+    files = file_ch
+}
+
+output {
+    processed {
+        path 'processed'
+    }
+    heavy {
+        path 'heavy'
+    }
+    files {
+        path 'files'
+    }
+}

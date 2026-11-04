@@ -1,0 +1,106 @@
+#!/usr/bin/env nextflow
+
+/*
+ * Buggy workflow for debugging exercises
+ * This workflow contains several intentional bugs for learning purposes
+ */
+
+params{
+    // Parameters with missing validation
+    input: Path = 'data/sample_data.csv'
+    output: String = 'results'
+}
+
+/*
+ * Process with input/output mismatch
+ */
+process processFiles {
+
+    input:
+    tuple val(sample_id), path(input_file)
+
+    output:
+    path "${sample_id}_result.txt",
+
+    script:
+    """
+    echo "Processing: ${sample}"
+    cat ${input_file} > ${sample}_result.txt
+    """
+
+/*
+ * Process with resource issues
+ */
+process heavyProcess {
+
+    time '1 ms'
+
+    input:
+    val sample_id
+
+    output:
+    path "${sample_id}_heavy.txt"
+
+    script:
+    """
+    # Simulate heavy computation
+    for i in {1..10000}; do
+        echo "Heavy computation $i for ${sample_id}"
+    done > ${sample_id}.txt
+    """
+}
+
+/*
+ * Process with file handling issues
+ */
+process handleFiles {
+
+    input:
+    path input_file
+
+    output:
+    path "processed_${input_file}"
+
+    script:
+    """
+    if [ -f "${input_file}" ]; then
+        cp ${input_file} processed_${input_file}
+    fi
+    """
+}
+
+/*
+ * Main workflow with channel issues
+ */
+workflow {
+    main:
+    // Channel with incorrect usage
+    input_ch = channel
+        .fromPath(params.input)
+        .splitCsv(header: true)
+        .map { row -> row.sample_id }
+
+    processed_ch = processFiles(input_ch)
+
+    heavy_ch = heavyProcess(sample_ids)
+
+    file_ch = channel.fromPath("*.txt")
+    handleFiles(file_ch)
+
+    publish:
+    processed = processFiles.out
+    heavy = heavyProcess.out
+    files = handleFiles.out
+}
+
+output {
+    processed {
+        path 'processed'
+    }
+    heavy {
+        path 'heavy'
+    }
+    files {
+        path 'files'
+    }
+}

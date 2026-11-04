@@ -1,0 +1,21 @@
+# UI strings for translation - Hindi (हिन्दी)
+# ये strings index_page_hook.py द्वारा कोर्स लैंडिंग पेज के लिए
+# और mkdocs.yml में कुकी सहमति के लिए उपयोग की जाती हैं।
+
+index_page:
+  course_summary: "कोर्स सारांश"
+  additional_information: "अतिरिक्त जानकारी"
+  technical_requirements: "तकनीकी आवश्यकताएँ"
+  learning_objectives: "सीखने के उद्देश्य"
+  audience_prerequisites: "लक्षित दर्शक और पूर्वापेक्षाएँ"
+  course_videos: "कोर्स वीडियो"
+
+defaults:
+  technical_requirements: >-
+    आपको एक GitHub खाता या Nextflow का लोकल इंस्टॉलेशन चाहिए होगा।
+    अधिक जानकारी के लिए [वातावरण विकल्प](../envsetup/index.md) देखें।
+  videos: >-
+    प्रत्येक अध्याय के लिए वीडियो उपलब्ध हैं, जिसमें एक प्रशिक्षक
+    अभ्यासों को करके दिखाता है। कोर्स के प्रत्येक भाग का वीडियो
+    संबंधित पेज के शीर्ष पर एम्बेड किया गया है।
+  view_playlist: "YouTube पर प्लेलिस्ट देखें"

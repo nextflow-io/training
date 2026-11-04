@@ -1,0 +1,20 @@
+# UI strings for translation - Korean (한국어)
+# 이 문자열들은 index_page_hook.py에서 과정 시작 페이지에 사용되며
+# mkdocs.yml에서 쿠키 동의에 사용됩니다.
+
+index_page:
+  course_summary: "과정 요약"
+  additional_information: "추가 정보"
+  technical_requirements: "기술 요구사항"
+  learning_objectives: "학습 목표"
+  audience_prerequisites: "대상 및 선수조건"
+  course_videos: "과정 동영상"
+
+defaults:
+  technical_requirements: >-
+    GitHub 계정 또는 Nextflow 로컬 설치가 필요합니다.
+    자세한 내용은 [환경 옵션](../envsetup/index.md)을 참조하세요.
+  videos: >-
+    각 장에는 강사가 연습 문제를 진행하는 동영상이 제공됩니다.
+    각 과정 부분의 동영상은 해당 페이지 상단에 포함되어 있습니다.
+  view_playlist: "YouTube에서 재생목록 보기"

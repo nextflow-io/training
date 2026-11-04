@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "cowpy"
+description: write your description here
+keywords:
+  - sort
+  - example
+  - genomics
+tools:
+  - "cowpy":
+      description: ""
+      homepage: ""
+      documentation: ""
+      tool_dev_url: ""
+      doi: ""
+      licence: null
+      identifier: null
+
+input:
+  - - meta:
+        type: map
+        description: Groovy Map containing sample information. e.g. `[
+          id:'sample1' ]`
+    - input:
+        type: file
+        description: ""
+        pattern: ""
+        ontologies:
+          - edam: ""
+output:
+  output:
+    - - meta:
+          type: map
+          description: Groovy Map containing sample information. e.g. `[
+            id:'sample1' ]`
+      - "*":
+          type: file
+          description: ""
+          pattern: ""
+          ontologies:
+            - edam: ""
+  versions_cowpy:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - cowpy:
+          type: string
+          description: The name of the tool
+      - cowpy --version:
+          type: eval
+          description: The expression to obtain the version of the tool
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - cowpy:
+          type: string
+          description: The name of the tool
+      - cowpy --version:
+          type: eval
+          description: The expression to obtain the version of the tool
+authors:
+  - "@FriederikeHanssen"
+maintainers:
+  - "@FriederikeHanssen"

@@ -1,0 +1,14 @@
+{
+    "id": "nextflow",
+    "name": "Nextflow Installation",
+    "description": "Install Nextflow and nf-test",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": ["latest"],
+            "default": "latest",
+            "description": "Select or enter a version."
+        }
+    },
+    "installsAfter": ["ghcr.io/devcontainers/features/java:1"]
+}

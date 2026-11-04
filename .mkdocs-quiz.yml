@@ -1,0 +1,12 @@
+cli_run:
+  "Nextflow Run":
+    "Basics": docs/en/docs/nextflow_run/01_basics.md
+    "Pipeline": docs/en/docs/nextflow_run/02_pipeline.md
+    "Config": docs/en/docs/nextflow_run/03_config.md
+  "Hello Nextflow":
+    "Hello World": docs/en/docs/hello_nextflow/01_hello_world.md
+    "Hello Channels": docs/en/docs/hello_nextflow/02_hello_channels.md
+    "Hello Workflow": docs/en/docs/hello_nextflow/03_hello_workflow.md
+    "Hello Modules": docs/en/docs/hello_nextflow/04_hello_modules.md
+    "Hello Containers": docs/en/docs/hello_nextflow/05_hello_containers.md
+    "Hello Config": docs/en/docs/hello_nextflow/06_hello_config.md

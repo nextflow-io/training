@@ -1,0 +1,12 @@
+# Seqera CLI configuration
+# Fill in the values below, then run: source .seqera_config
+
+# Personal access token
+# In the Seqera web interface: click your avatar (top right) > Your tokens
+export TOWER_ACCESS_TOKEN=
+
+# Default workspace (numeric workspace ID, e.g. 123456789012345)
+# Find it in the "ID" column of: tw workspaces list
+# (The org-name/workspace-name form is only accepted by the --workspace flag,
+#  not by this environment variable.)
+export TOWER_WORKSPACE_ID=

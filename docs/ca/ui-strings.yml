@@ -1,0 +1,24 @@
+# UI strings for translation - Catalan (Català)
+# Aquestes cadenes s'utilitzen a index_page_hook.py per a les pàgines
+# d'inici dels cursos i a mkdocs.yml per al consentiment de cookies.
+#
+# Quan s'afegeix una llengua nova, copieu aquest fitxer a docs/<lang>/ui-strings.yml
+# i traduïu tots els valors.
+
+index_page:
+  course_summary: "Resum del curs"
+  additional_information: "Informació addicional"
+  technical_requirements: "Requisits tècnics"
+  learning_objectives: "Objectius d'aprenentatge"
+  audience_prerequisites: "Públic i prerequisits"
+  course_videos: "Vídeos del curs"
+
+defaults:
+  technical_requirements: >-
+    Necessitareu un compte de GitHub O una instal·lació local de Nextflow.
+    Consulteu [Opcions d'entorn](../envsetup/index.md) per a més detalls.
+  videos: >-
+    Hi ha vídeos disponibles per a cada capítol, amb un instructor que resol
+    els exercicis. El vídeo per a cada part del curs està inserit a la part
+    superior de la pàgina corresponent.
+  view_playlist: "Veure la llista de reproducció a YouTube"
