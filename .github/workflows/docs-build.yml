@@ -57,10 +57,13 @@ jobs:
         if: github.event_name == 'pull_request'
         working-directory: .
         run: |
+          # awk reads to the end: exiting early would kill git diff with SIGPIPE, which pipefail turns into a failure.
           reason=$(git diff --name-status --no-renames HEAD^1 HEAD | awk -F'\t' '
-            $1 == "D" { print "deletes " $2; exit }
-            $2 ~ /^docs\/src\/content\/docs\/[a-z][a-z]\// { print "changes " $2; exit }
-            $2 ~ /^docs\// && $2 !~ /^docs\/src\/content\/docs\// { print "changes " $2; exit }
+            reason { next }
+            $1 == "D" { reason = "deletes " $2; next }
+            $2 ~ /^docs\/src\/content\/docs\/[a-z][a-z]\// { reason = "changes " $2; next }
+            $2 ~ /^docs\// && $2 !~ /^docs\/src\/content\/docs\// { reason = "changes " $2 }
+            END { print reason }
           ')
           if [ -n "$reason" ]; then
             echo "Building every language: this PR $reason."
