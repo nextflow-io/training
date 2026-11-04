@@ -1,13 +1,13 @@
 ---
 name: new-lesson
-description: Create a new numbered lesson page within an existing training module. Use when adding a new topic like '05_error_handling.md' to an existing course.
+description: Create a new numbered lesson page within an existing training module. Use when adding a new topic like '05_error_handling.mdx' to an existing course.
 ---
 
 Create a new lesson page within an existing training module.
 
-See [../shared/repo-conventions.md](../shared/repo-conventions.md) for directory structure and file conventions.
+See [../shared/repo-conventions.md](../shared/repo-conventions.md) for directory structure and file conventions, and the `starlight-codeblocks` skill for code block features.
 
-**Note**: A "module" is a complete training course (like "Hello Nextflow" or "Side Quests"), while a "lesson" is a single numbered page within that module (like "01_hello_world.md").
+**Note**: A "module" is a complete training course (like "Hello Nextflow" or "Side Quests"), while a "lesson" is a single numbered page within that module (like "01_hello_world.mdx").
 
 Follow these steps:
 
@@ -17,14 +17,17 @@ Follow these steps:
    - Lesson number (e.g., 01, 02, 03)
    - Lesson title (e.g., "Hello World", "Working with Channels")
 
-2. Create the markdown file following the naming convention: `[number]_[title_with_underscores].md`
+2. Create the page in `docs/src/content/docs/<module>/`, following the naming convention: `[number]_[title_with_underscores].mdx`
 
-   - Example: `03_hello_workflow.md`
+   - Example: `docs/src/content/docs/hello_nextflow/03_hello_workflow.mdx`
 
 3. Use this lesson template structure:
 
-````markdown
-# Part [N]: [Title]
+````mdx
+---
+title: 'Part [N]: [Title]'
+description: [One sentence summarising the lesson, used for search, share cards and llms.txt]
+---
 
 [Introduction paragraph explaining what this lesson covers]
 
@@ -40,10 +43,7 @@ Follow these steps:
 
 ```bash
 command example
-```
-````
-
-```console title="Output"
+# [!output]
 expected output
 ```
 
@@ -65,7 +65,7 @@ expected output
 
 [Content with code examples]
 
-```groovy title="example.nf" linenums="1" hl_lines="3 5"
+```nextflow {3,5} title="example.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 process EXAMPLE {
@@ -80,33 +80,41 @@ process EXAMPLE {
 ### What's next?
 
 [Next steps or move to next lesson]
-
 ````
 
 4. Include appropriate elements:
-   - Code blocks with proper formatting (linenums, titles, highlighting)
-   - **For `hl_lines`**: Before writing this attribute, identify which lines you want highlighted, then count their position from line 1 of the snippet. Blank lines count. The `hl_lines` values are completely independent of `linenums`.
-   - Before/After comparisons using tabbed blocks where relevant:
-     ```markdown
-     === "After"
-         ```groovy title="example.nf" hl_lines="5" linenums="1"
-         // corrected code
-         ```
-     === "Before"
-         ```groovy title="example.nf" hl_lines="5" linenums="1"
-         // broken code
-         ```
-     ```
-   - Admonitions: `!!! note`, `!!! tip`, `!!! warning`, `??? exercise`
-   - Console output examples
-   - Clear explanations for beginners
 
-5. Remind the user to:
-   - Add the lesson to `docs/en/mkdocs.yml` nav section in the correct module
+   - Code blocks with proper formatting (`title`, `showLineNumbers`, `startLineNumber=N`, highlights)
+   - **For highlights (`{3,5-7}` on the fence)**: identify which lines you want highlighted, then count their position from line 1 of the snippet. Blank lines count. The numbers are completely independent of `startLineNumber`.
+   - Before/After comparisons using a code walkthrough, Before first. Keep the blank lines after the opening tag and before the closing tag:
+
+     ````mdx
+     <CodeWalkthrough>
+
+     ```nextflow title="example.nf" showLineNumbers step="Before"
+     // broken code
+     ```
+
+     ```nextflow {5} title="example.nf" showLineNumbers step="After"
+     // corrected code, with line 5 highlighted
+     ```
+
+     </CodeWalkthrough>
+     ````
+
+   - Command output inside the `bash` block, after `# [!output]`. Mark key output lines with `# [!code highlight]` at the end of the line; start error output with `# [!output stderr]`
+   - Asides: `:::note`, `:::tip`, `:::caution`, `:::danger` (optional `[Title]`), closed by `:::`
+   - Exercises and collapsible content: `<details class="exercise">` (see `/add-exercise`)
+   - Links to other pages as relative `.mdx` links, e.g. `[Part 1](01_hello_world.mdx#11-examine-the-code)`
+   - Clear explanations for beginners
+   - No import lines: components are auto-imported
+
+5. Add the page to `docs/src/sidebar.mjs`, in the module's `items` list in lesson order, as a slug without the extension (e.g. `"hello_nextflow/03_hello_workflow"`). The sidebar label comes from the page `title`.
+
+6. Remind the user to:
    - Create corresponding Nextflow example scripts if needed
    - Add solution files for any exercises in `[module]/solutions/`
    - Test any Nextflow examples before committing
-   - Run heading validation: `uv run .github/check_headings.py --fix docs/**/*.md`
-   - Preview locally with `mkdocs serve` or Docker to verify formatting
-   - Translations are handled automatically - when merged to master, the translation workflow will create PRs for each language
-````
+   - Run heading validation: `uv run .github/check_headings.py --fix docs/src/content/docs/<module>/*.mdx`
+   - Preview locally with `/preview` to verify formatting
+   - Translations are handled by the translation workflow, which maintainers run before a release
