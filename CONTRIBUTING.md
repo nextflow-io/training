@@ -226,9 +226,12 @@ Code spans and code blocks need no escaping.
 
 ### Formatting / linting
 
-Prettier ignores `.mdx` files, because it breaks MDX syntax.
+Prettier ignores `.mdx` files: it parses them as MDX 1, and can turn a code block into inline code without failing the build.
 The build is the check: a page that is not valid MDX fails `npm run build` with the file and line.
-Prettier still formats the other files in the repository; install it locally (<https://prettier.io/>, ideally via the VSCode plugin) and use the pre-commit hooks.
+
+Prettier formats the other files, including the `.astro` components.
+The checks run as git hooks with [prek](https://prek.j178.dev/), configured in `prek.toml`: run `prek install` once and they run on every commit (CI runs them too).
+Editors use `docs/prettier.config.mjs` for files in `docs/`, once `npm ci` has run there.
 
 For paragraphs containing multiple sentences, please start each sentence on a new line.
 Doing that produces cleaner diffs for future code reviews.

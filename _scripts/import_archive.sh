@@ -21,7 +21,7 @@ trap 'rm -rf "$work"' EXIT
 
 # gh-pages is about 9 GB, so check out one version at a time.
 git clone --quiet --depth 1 --branch gh-pages --filter=blob:none --sparse \
-  https://github.com/nextflow-io/training.git "$work/gh-pages"
+    https://github.com/nextflow-io/training.git "$work/gh-pages"
 cd "$work/gh-pages"
 git sparse-checkout set --no-cone /versions.json
 
@@ -31,14 +31,14 @@ exists() { [ -n "$(rclone lsf "$dest/$1" 2>/dev/null)" ]; }
 if ! exists latest/index.html; then versions="$versions latest"; fi
 
 for v in $versions; do
-  echo "== $v"
-  git sparse-checkout set --no-cone /versions.json "/$v/"
-  [ -d "$v" ] || { echo "$v is not on gh-pages" >&2; exit 1; }
-  rclone copy "$v" "$dest/$v" --checksum --fast-list --transfers 32 --checkers 64 --stats-one-line --stats 30s
+    echo "== $v"
+    git sparse-checkout set --no-cone /versions.json "/$v/"
+    [ -d "$v" ] || { echo "$v is not on gh-pages" >&2; exit 1; }
+    rclone copy "$v" "$dest/$v" --checksum --fast-list --transfers 32 --checkers 64 --stats-one-line --stats 30s
 done
 
 if exists versions.json; then
-  echo "$dest/versions.json exists; left as is."
+    echo "$dest/versions.json exists; left as is."
 else
-  jq 'map(select(.version != "0.dev"))' versions.json | rclone rcat "$dest/versions.json"
+    jq 'map(select(.version != "0.dev"))' versions.json | rclone rcat "$dest/versions.json"
 fi

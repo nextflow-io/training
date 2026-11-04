@@ -45,9 +45,10 @@ find docs/src/content/docs -name '*.mdx' -print0 | xargs -0 uv run .github/check
 ```bash
 node docs/scripts/check-fences.mjs docs/src/content/docs   # code block meta; errors fail CI
 nextflow lint .   # also runs in CI and posts results as a PR comment
+prek run --all-files   # Prettier, editorconfig and whitespace hooks from prek.toml; also runs in CI
 ```
 
-Prettier ignores `*.mdx` (it breaks MDX). The build is the check: a page that is not valid MDX fails `npm run build`.
+Prettier ignores `*.mdx`: it parses MDX 1 and can turn a code block into inline code. The build is the check: a page that is not valid MDX fails `npm run build`.
 
 ### Preview a release
 
