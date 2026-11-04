@@ -39,6 +39,9 @@ jobs:
         working-directory: docs
         run: npm test
 
+      - name: Preview comment script
+        run: node --test '.github/scripts/*.test.mjs'
+
       - name: Install Router Worker dependencies
         working-directory: docs/worker
         run: npm ci

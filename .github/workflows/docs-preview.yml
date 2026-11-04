@@ -83,6 +83,7 @@ jobs:
           persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            .github/scripts/preview-pages.mjs
             docs/.nvmrc
             docs/wrangler.preview.jsonc
             docs/worker/package.json
@@ -131,20 +132,36 @@ jobs:
           }
           echo "url=$url" >> "$GITHUB_OUTPUT"
 
+      # A missing page list must not mark the deployed preview as failed.
+      - name: List the changed pages
+        id: pages
+        if: steps.deploy.outputs.url != ''
+        continue-on-error: true
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          PREVIEW_URL: ${{ steps.deploy.outputs.url }}
+        with:
+          result-encoding: string
+          script: |
+            const { changedPagesMarkdown } = await import(`${process.env.GITHUB_WORKSPACE}/.github/scripts/preview-pages.mjs`);
+            const files = await github.paginate(github.rest.pulls.listFiles, { ...context.repo, pull_number: Number(process.env.PR), per_page: 100 });
+            return changedPagesMarkdown(files, 'docs/dist-preview/latest', process.env.PREVIEW_URL);
+
       - name: Update the preview comment
         if: always()
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           STATE: ${{ env.BUILT != 'true' && 'build-failed' || job.status }}
           PREVIEW_URL: ${{ steps.deploy.outputs.url }}
+          PAGES: ${{ steps.pages.outputs.result }}
           RUN_URL: ${{ env.BUILT != 'true' && github.event.workflow_run.html_url || format('{0}/{1}/actions/runs/{2}', github.server_url, github.repository, github.run_id) }}
         with:
           script: &comment |
             const MARKER = '<!-- cloudflare-preview-comment -->';
-            const { PR, SHA, STATE, PREVIEW_URL, RUN_URL } = process.env;
+            const { PR, SHA, STATE, PREVIEW_URL, RUN_URL, PAGES } = process.env;
             const short = SHA.slice(0, 7);
             const status = {
-              success: `✅ **Preview ready:** ${PREVIEW_URL}\n\nBuilt from \`${short}\`.`,
+              success: `✅ **Preview ready:** ${PREVIEW_URL}\n\nBuilt from \`${short}\`.${PAGES ? `\n\n${PAGES}` : ''}`,
               'build-failed': `❌ **Docs build failed** for \`${short}\`. See the [build logs](${RUN_URL}).`,
               removed: '🗑️ The preview was deleted because the PR was closed.',
               'cleanup-failed': `⚠️ The preview could not be deleted automatically. See the [run logs](${RUN_URL}).`,
