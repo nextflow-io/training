@@ -9,8 +9,8 @@ on:
     paths:
       - ".devcontainer/**"
       - ".github/workflows/docker-devcontainer.yml"
-  push: { branches: [master] } # Build + push ('latest' tag)
-  release: { types: [published] } # Build + push (release tag)
+  push: {branches: [master]} # Build + push ('latest' tag)
+  release: {types: [published]} # Build + push (release tag)
   workflow_dispatch: # Build + push (custom tag)
     inputs:
       tag_name:
