@@ -5,6 +5,7 @@ Table of contents:
 - [Contributing](#contributing)
   - [Contribution model](#contribution-model)
   - [Installation](#installation)
+  - [Previewing a release](#previewing-a-release)
   - [Translations](#translations)
   - [Announcement banner](#announcement-banner)
   - [Figures \& diagrams](#figures--diagrams)
@@ -59,6 +60,54 @@ BASE=/latest/ npm run preview
 ```
 
 The preview serves the built site at <http://localhost:4321/latest/>.
+
+## Previewing a release
+
+The `preview_release.py` script serves the training site locally at `https://training.nextflow.io/` with the current branch appearing as a specified version release.
+This is useful for recording videos or previewing how a release will look before it's published.
+
+### How it works
+
+1. Fetches the MkDocs-era released versions and `versions.json` from the `gh-pages` branch
+2. Builds the current branch twice, as `/<version>/` and `/latest/`, as a release does (Astro writes the base path into every URL)
+3. Updates `versions.json` to show your version as "latest"
+4. Generates trusted TLS certificates using mkcert
+5. Adds a temporary entry to `/etc/hosts` to redirect the domain locally
+6. Serves the site using Caddy on port 443
+7. Cleans up the hosts entry when you stop the server (Ctrl+C)
+
+### First-time setup
+
+Install the mkcert root CA (one-time, as your regular user):
+
+```bash
+mkcert -install
+```
+
+This adds a local certificate authority to your system keychain so browsers trust the generated certificates.
+Restart your browser after running this command.
+
+The script also needs Homebrew (it installs mkcert and Caddy), Node.js and an `upstream` remote pointing at `https://github.com/nextflow-io/training.git`.
+
+### Usage
+
+Run the script with [uv](https://docs.astral.sh/uv/), which handles its dependencies, and without `sudo`: it asks for your password only to edit `/etc/hosts`.
+
+```bash
+uv run ./preview_release.py --version 4.0
+
+# Check current status
+uv run ./preview_release.py status
+
+# Clean up work directory on exit (default keeps it for faster restarts)
+uv run ./preview_release.py --version 4.0 --clean
+```
+
+### Caching
+
+The script caches the `gh-pages` content, both builds and the TLS certificates in `.preview-release/`.
+Each build takes about a minute and is redone only when files in `docs/` change.
+Use `--clean` to delete the work directory on exit, or remove `.preview-release/` to force a fresh build.
 
 ## Translations
 

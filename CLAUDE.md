@@ -49,6 +49,14 @@ nextflow lint .   # also runs in CI and posts results as a PR comment
 
 Prettier ignores `*.mdx` (it breaks MDX). The build is the check: a page that is not valid MDX fails `npm run build`.
 
+### Preview a release
+
+`preview_release.py` serves the current branch at `https://training.nextflow.io/` as if it were a published version (useful for recording videos before a release ships). Run it without `sudo`; it asks for a password only to edit `/etc/hosts`. Details in CONTRIBUTING.md:
+
+```bash
+uv run ./preview_release.py --version 4.0
+```
+
 ## Repository Structure
 
 - `docs/` - The Astro app (`astro.config.mjs`, `ec.config.mjs`, `package.json`)
