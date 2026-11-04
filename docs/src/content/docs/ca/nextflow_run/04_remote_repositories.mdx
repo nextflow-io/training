@@ -1,6 +1,9 @@
-# Part 4: Executar pipelines remots
+---
+title: 'Part 4: Executar pipelines remots'
+description: Fins ara, heu executat scripts de workflow emmagatzemats localment.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Fins ara, heu executat scripts de workflow emmagatzemats localment.
 A la pràctica, sovint voldreu executar pipelines publicats en repositoris remots, com GitHub, sense haver-los de descarregar vosaltres mateixos.
@@ -20,27 +23,23 @@ Aquest és un pipeline diferent, molt més senzill que el que heu estat executan
 
 ```bash
 nextflow run nextflow-io/hello
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Pulling nextflow-io/hello ...
+ downloaded from https://github.com/nextflow-io/hello.git
+Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] revision: 3c2cdc9823 [master]
+
+executor >  local (4)
+[ba/08236d] sayHello (4) | 4 of 4 ✔
+Ciao world!
+
+Hello world!
+
+Bonjour world!
+
+Hola world!
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Pulling nextflow-io/hello ...
-     downloaded from https://github.com/nextflow-io/hello.git
-    Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] revision: 3c2cdc9823 [master]
-
-    executor >  local (4)
-    [ba/08236d] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
-    Hello world!
-
-    Bonjour world!
-
-    Hola world!
-    ```
 
 ### 1.2. Trobar on s'ha emmagatzemat en memòria cau el pipeline
 
@@ -52,39 +51,31 @@ Per trobar on ha quedat un pipeline concret, i quines revisions estan disponible
 
 ```bash
 nextflow info nextflow-io/hello
+# [!output]
+ project name: nextflow-io/hello
+ repository  : https://github.com/nextflow-io/hello
+ local path  : /workspaces/.nextflow/assets/.repos/nextflow-io/hello
+ main script : main.nf
+ revisions   :
+ > master (default)
+   mybranch
+   testing
+   v1.1 [t]
+   v1.2 [t]
+   v1.3 [t]
 ```
 
-??? success "Sortida de la comanda"
-
-    ```console
-     project name: nextflow-io/hello
-     repository  : https://github.com/nextflow-io/hello
-     local path  : /workspaces/.nextflow/assets/.repos/nextflow-io/hello
-     main script : main.nf
-     revisions   :
-     > master (default)
-       mybranch
-       testing
-       v1.1 [t]
-       v1.2 [t]
-       v1.3 [t]
-    ```
-
-    Nextflow marca cada revisió que ja heu obtingut localment amb `>`; la resta estan disponibles però encara no s'han descarregat en una còpia de treball.
+Nextflow marca cada revisió que ja heu obtingut localment amb `>`; la resta estan disponibles però encara no s'han descarregat en una còpia de treball.
 
 També podeu llistar tots els pipelines que heu descarregat fins ara amb `nextflow list`:
 
 ```bash
 nextflow list
+# [!output]
+nextflow-io/hello
 ```
 
-??? success "Sortida de la comanda"
-
-    ```console
-    nextflow-io/hello
-    ```
-
-El curs [Use nf-core](../nfcore_use/01_run_demo.md#12-retrieve-the-pipeline-code) cobreix aquest mecanisme de memòria cau amb més profunditat, incloent-hi com explorar el codi font d'un pipeline descarregat.
+El curs [Use nf-core](../nfcore_use/01_run_demo.mdx#12-recuperar-el-codi-del-pipeline) cobreix aquest mecanisme de memòria cau amb més profunditat, incloent-hi com explorar el codi font d'un pipeline descarregat.
 
 ### Conclusio
 
@@ -105,27 +96,23 @@ Podeu fixar una versió concreta (etiqueta), branca o commit utilitzant l'indica
 
 ```bash
 nextflow run nextflow-io/hello -r v1.3
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Pulling nextflow-io/hello:v1.3 ...
+ downloaded from https://github.com/nextflow-io/hello.git
+Launching `https://github.com/nextflow-io/hello` [sick_carson] revision: 2ce0b0e294 [v1.3]
+
+executor >  local (4)
+[61/e11f77] sayHello (4) | 4 of 4 ✔
+Ciao world!
+
+Bonjour world!
+
+Hello world!
+
+Hola world!
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Pulling nextflow-io/hello:v1.3 ...
-     downloaded from https://github.com/nextflow-io/hello.git
-    Launching `https://github.com/nextflow-io/hello` [sick_carson] revision: 2ce0b0e294 [v1.3]
-
-    executor >  local (4)
-    [61/e11f77] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
-    Bonjour world!
-
-    Hello world!
-
-    Hola world!
-    ```
 
 Nextflow obté aquesta revisió la primera vegada que la sol·liciteu, d'aquí les línies `Pulling` i `downloaded from`; sol·licitar la mateixa revisió de nou més endavant va directament a `Launching`.
 Fixar una revisió exacta és essencial per a la reproductibilitat.
@@ -138,25 +125,21 @@ Proveu d'executar el pipeline de nou sense `-r`:
 
 ```bash
 nextflow run nextflow-io/hello
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `https://github.com/nextflow-io/hello` [hungry_maxwell] revision: 3c2cdc9823 [master]
+
+executor >  local (4)
+[ba/08236d] sayHello (4) | 4 of 4 ✔
+Ciao world!
+
+Hello world!
+
+Bonjour world!
+
+Hola world!
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `https://github.com/nextflow-io/hello` [hungry_maxwell] revision: 3c2cdc9823 [master]
-
-    executor >  local (4)
-    [ba/08236d] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
-    Hello world!
-
-    Bonjour world!
-
-    Hola world!
-    ```
 
 Tot i que l'execució anterior fixava explícitament `v1.3`, aquesta execució torna directament a la branca per defecte (`master`).
 Nextflow manté una còpia de treball local separada per a cada revisió que heu utilitzat, que és el que mostren els marcadors `>` a `nextflow info`, però mai recorda quina heu executat l'última vegada.
@@ -170,7 +153,7 @@ Sabeu com fixar un pipeline remot a una versió, branca o commit específics per
 ### Què segueix?
 
 Heu cobert els fonaments de l'execució i la gestió de pipelines de Nextflow.
-Vegeu el [Resum del curs](next_steps.md) per saber on anar a partir d'aquí.
+Vegeu el [Resum del curs](next_steps.mdx) per saber on anar a partir d'aquí.
 
 ---
 

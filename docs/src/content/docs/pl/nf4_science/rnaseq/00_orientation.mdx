@@ -1,10 +1,13 @@
-# Pierwsze kroki
+---
+title: Pierwsze kroki
+description: 'Nextflow dla RNAseq: Pierwsze kroki'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Uruchom środowisko szkoleniowe
 
-Aby skorzystać z gotowego środowiska udostępnianego przez nas na GitHub Codespaces, kliknij przycisk „Open in GitHub Codespaces" poniżej. Inne opcje znajdziesz w sekcji [Opcje środowiska](../../envsetup/index.md).
+Aby skorzystać z gotowego środowiska udostępnianego przez nas na GitHub Codespaces, kliknij przycisk „Open in GitHub Codespaces" poniżej. Inne opcje znajdziesz w sekcji [Opcje środowiska](../../envsetup/index.mdx).
 
 Zalecamy otwarcie środowiska szkoleniowego w nowej karcie lub oknie przeglądarki (użyj kliknięcia prawym przyciskiem myszy, ctrl+klik lub cmd+klik w zależności od Twojego sprzętu), abyś mógł czytać instrukcje podczas ładowania środowiska.
 Musisz mieć te instrukcje otwarte równolegle, aby przejść przez kurs.
@@ -18,12 +21,12 @@ To środowisko szkoleniowe zawiera wszystkie oprogramowanie, kod i dane niezbęd
 Codespace jest skonfigurowany z interfejsem VSCode, który obejmuje eksplorator systemu plików, edytor kodu i powłokę terminala.
 Wszystkie instrukcje podawane w trakcie kursu (np. „otwórz plik", „edytuj kod" lub „uruchom to polecenie") odnoszą się do tych trzech części interfejsu VSCode, chyba że zaznaczono inaczej.
 
-Jeśli pracujesz nad tym kursem samodzielnie, zapoznaj się z [podstawami środowiska](../../envsetup/01_setup.md), aby uzyskać więcej szczegółów.
+Jeśli pracujesz nad tym kursem samodzielnie, zapoznaj się z [podstawami środowiska](../../envsetup/01_setup.mdx), aby uzyskać więcej szczegółów.
 
 ### Wymagania dotyczące wersji
 
 To szkolenie jest zaprojektowane dla Nextflow'a 25.10.2 lub nowszego **z WŁĄCZONYM parserem składni v2**.
-Jeśli używasz lokalnego lub niestandardowego środowiska, upewnij się, że używasz prawidłowych ustawień zgodnie z dokumentacją [tutaj](../../info/nxf_versions.md).
+Jeśli używasz lokalnego lub niestandardowego środowiska, upewnij się, że używasz prawidłowych ustawień zgodnie z dokumentacją [tutaj](../../info/nxf_versions.mdx).
 
 ## Przygotuj się do pracy
 
@@ -45,13 +48,13 @@ Możesz ustawić VSCode tak, aby skupił się na tym katalogu, dzięki czemu tyl
 code .
 ```
 
-!!! tip "Wskazówka"
+:::tip[Wskazówka]
+Jeśli z jakiegokolwiek powodu opuścisz ten katalog (np. Twój codespace przejdzie w stan uśpienia), zawsze możesz użyć pełnej ścieżki, aby do niego wrócić, zakładając, że pracujesz w środowisku szkoleniowym Github Codespaces:
 
-    Jeśli z jakiegokolwiek powodu opuścisz ten katalog (np. Twój codespace przejdzie w stan uśpienia), zawsze możesz użyć pełnej ścieżki, aby do niego wrócić, zakładając, że pracujesz w środowisku szkoleniowym Github Codespaces:
-
-    ```bash
-    cd /workspaces/training/nf4-science/rnaseq
-    ```
+```bash
+cd /workspaces/training/nf4-science/rnaseq
+```
+:::
 
 Teraz przyjrzyjmy się zawartości.
 
@@ -68,45 +71,48 @@ Tutaj generujemy spis treści do trzeciego poziomu:
 tree . -L 3
 ```
 
-??? abstract "Zawartość katalogu"
+<details class="abstract">
+<summary>Zawartość katalogu</summary>
 
-    ```console
-    .
-    ├── data
-    │   ├── genome.fa
-    │   ├── paired-end.csv
-    │   ├── reads
-    │   │   ├── ENCSR000COQ1_1.fastq.gz
-    │   │   ├── ENCSR000COQ1_2.fastq.gz
-    │   │   ├── ENCSR000COQ2_1.fastq.gz
-    │   │   ├── ENCSR000COQ2_2.fastq.gz
-    │   │   ├── ENCSR000COR1_1.fastq.gz
-    │   │   ├── ENCSR000COR1_2.fastq.gz
-    │   │   ├── ENCSR000COR2_1.fastq.gz
-    │   │   ├── ENCSR000COR2_2.fastq.gz
-    │   │   ├── ENCSR000CPO1_1.fastq.gz
-    │   │   ├── ENCSR000CPO1_2.fastq.gz
-    │   │   ├── ENCSR000CPO2_1.fastq.gz
-    │   │   └── ENCSR000CPO2_2.fastq.gz
-    │   └── single-end.csv
-    ├── modules
-    │   ├── fastqc.nf
-    │   ├── hisat2_align.nf
-    │   ├── multiqc.nf
-    │   └── trim_galore.nf
-    ├── nextflow.config
-    ├── rnaseq.nf
-    └── solutions
-        ├── part2
-        │   ├── modules
-        │   ├── nextflow.config
-        │   └── rnaseq-2.nf
-        └── part3
-            ├── modules
-            ├── nextflow.config
-            ├── rnaseq-3.nf
-            └── rnaseq_pe-3.nf
-    ```
+```console
+.
+├── data
+│   ├── genome.fa
+│   ├── paired-end.csv
+│   ├── reads
+│   │   ├── ENCSR000COQ1_1.fastq.gz
+│   │   ├── ENCSR000COQ1_2.fastq.gz
+│   │   ├── ENCSR000COQ2_1.fastq.gz
+│   │   ├── ENCSR000COQ2_2.fastq.gz
+│   │   ├── ENCSR000COR1_1.fastq.gz
+│   │   ├── ENCSR000COR1_2.fastq.gz
+│   │   ├── ENCSR000COR2_1.fastq.gz
+│   │   ├── ENCSR000COR2_2.fastq.gz
+│   │   ├── ENCSR000CPO1_1.fastq.gz
+│   │   ├── ENCSR000CPO1_2.fastq.gz
+│   │   ├── ENCSR000CPO2_1.fastq.gz
+│   │   └── ENCSR000CPO2_2.fastq.gz
+│   └── single-end.csv
+├── modules
+│   ├── fastqc.nf
+│   ├── hisat2_align.nf
+│   ├── multiqc.nf
+│   └── trim_galore.nf
+├── nextflow.config
+├── rnaseq.nf
+└── solutions
+    ├── part2
+    │   ├── modules
+    │   ├── nextflow.config
+    │   └── rnaseq-2.nf
+    └── part3
+        ├── modules
+        ├── nextflow.config
+        ├── rnaseq-3.nf
+        └── rnaseq_pe-3.nf
+```
+
+</details>
 
 Kliknij na kolorowe pole, aby rozwinąć sekcję i zobaczyć jej zawartość.
 Używamy takich zwijanych sekcji, aby wyświetlać oczekiwane wyjście poleceń, a także zawartość katalogów i plików w zwięzły sposób.
@@ -134,4 +140,4 @@ Myślisz, że jesteś gotowy, aby zacząć?
 
 Jeśli możesz zaznaczyć wszystkie pola, możesz zaczynać.
 
-**Aby przejść do [Części 1: Przegląd metody](./01_method.md), kliknij strzałkę w prawym dolnym rogu tej strony.**
+**Aby przejść do [Części 1: Przegląd metody](./01_method.mdx), kliknij strzałkę w prawym dolnym rogu tej strony.**

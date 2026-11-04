@@ -1,6 +1,9 @@
-# Riepilogo
+---
+title: Riepilogo
+description: Hai completato la formazione sullo sviluppo di plugin.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Hai completato la formazione sullo sviluppo di plugin.
 Questa pagina riepiloga ciò che hai costruito in ogni parte, tratta la distribuzione e fornisce indicazioni su dove andare dopo.
@@ -75,7 +78,7 @@ Per istruzioni passo dopo passo, consulta la [documentazione ufficiale sulla pub
 
 Una volta pubblicato, gli utenti installano il tuo plugin senza alcuna configurazione locale:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 plugins {
     id 'nf-greeting@1.0.0'
 }
@@ -123,7 +126,7 @@ nextflowPlugin {
 
 **Utilizzo nei flussi di lavoro:**
 
-```groovy
+```nextflow
 include { myFunction } from 'plugin/my-plugin'
 
 workflow {

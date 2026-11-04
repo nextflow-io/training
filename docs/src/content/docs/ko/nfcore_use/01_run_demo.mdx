@@ -1,12 +1,15 @@
-# 파트 1: 데모 파이프라인 실행
+---
+title: '파트 1: 데모 파이프라인 실행'
+description: Use nf-core 교육 과정의 첫 번째 파트에서는 nf-core 파이프라인을 찾고, 내장된 테스트 프로파일을 사용하여 실행하는 방법을 학습합니다.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Use nf-core 교육 과정의 첫 번째 파트에서는 nf-core 파이프라인을 찾고, 내장된 테스트 프로파일을 사용하여 실행하는 방법을 학습합니다.
 
 여기서는 nf-core 프로젝트가 데모 및 교육 목적으로 관리하는 nf-core/demo 파이프라인을 사용합니다.
 
-[시작하기](./00_orientation.md) 페이지의 안내에 따라 작업 디렉토리가 `nfcore-use/`로 설정되어 있는지 확인하세요.
+[시작하기](./00_orientation.mdx) 페이지의 안내에 따라 작업 디렉토리가 `nfcore-use/`로 설정되어 있는지 확인하세요.
 
 ---
 
@@ -18,7 +21,7 @@ Use nf-core 교육 과정의 첫 번째 파트에서는 nf-core 파이프라인�
 
 웹 브라우저에서 [https://nf-co.re/pipelines/](https://nf-co.re/pipelines/)로 이동하여 검색창에 `demo`를 입력합니다.
 
-![검색 결과](./img/search-results.png)
+![검색 결과](../../nfcore_use/img/search-results.png)
 
 파이프라인 이름 `demo`를 클릭하면 파이프라인 문서 페이지로 이동합니다.
 
@@ -43,7 +46,7 @@ Use nf-core 교육 과정의 첫 번째 파트에서는 nf-core 파이프라인�
 
 `Introduction` 탭은 파이프라인의 개요를 제공하며, 시각적 표현(서브웨이 맵이라고 함)과 파이프라인의 일부로 실행되는 도구 목록이 포함되어 있습니다.
 
-![파이프라인 서브웨이 맵](./img/nf-core-demo-subway-cropped.png)
+![파이프라인 서브웨이 맵](../../nfcore_use/img/nf-core-demo-subway-cropped.png)
 
 1. 리드 QC ([FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
 2. 어댑터 및 품질 트리밍 ([SEQTK_TRIM](https://github.com/lh3/seqtk))
@@ -77,14 +80,10 @@ Nextflow는 올바른 형식의 저장소에서 파이프라인을 수동으로 
 
 ```bash
 nextflow pull nf-core/demo
+# [!output]
+Checking nf-core/demo ...
+ downloaded from https://github.com/nf-core/demo.git - revision: 32893afef8 [master]
 ```
-
-??? success "명령 출력"
-
-    ```console
-    Checking nf-core/demo ...
-     downloaded from https://github.com/nf-core/demo.git - revision: 32893afef8 [master]
-    ```
 
 Nextflow는 파이프라인 코드를 `pull`하여 전체 저장소를 로컬 드라이브에 다운로드합니다.
 
@@ -97,13 +96,9 @@ Nextflow는 파이프라인 코드를 `pull`하여 전체 저장소를 로컬 �
 
 ```bash
 nextflow list
+# [!output]
+nf-core/demo
 ```
-
-??? success "명령 출력"
-
-    ```console
-    nf-core/demo
-    ```
 
 다른 파이프라인을 몇 개 더 pull하여 여러 개가 있을 때 어떻게 나열되는지 확인해 보세요.
 
@@ -116,50 +111,46 @@ nextflow list
 
 ```bash
 nextflow info nf-core/demo
+# [!output]
+ project name: nf-core/demo
+ repository  : https://github.com/nf-core/demo
+ local path  : /workspaces/.nextflow/assets/.repos/nf-core/demo
+ main script : main.nf
+ description : An nf-core demo pipeline
+ revisions   :
+   TEMPLATE
+   bumper
+   dev
+   fix-nxfversion
+   manually-merge-3_0_2
+ > master (default)
+   nf-core-template-merge-2.13.2.dev0
+   nf-core-template-merge-2.14.0
+   nf-core-template-merge-2.14.1
+   nf-core-template-merge-3.0.0
+   nf-core-template-merge-3.0.1
+   nf-core-template-merge-3.0.2
+   nf-core-template-merge-3.1.0
+   nf-core-template-merge-3.1.2
+   nf-core-template-merge-3.2.0
+   nf-core-template-merge-3.2.1
+   nf-core-template-merge-3.3.1
+   nf-core-template-merge-3.3.2
+   nf-core-template-merge-4.0.0
+   nf-core-template-merge-4.0.3
+   nf-core-template-merge-4.1.0
+   nf-core-template-merge-4.1.0-2
+   patch
+   1.0.0 [t]
+   1.0.1 [t]
+   1.0.2 [t]
+   1.1.0 [t]
+ > 1.2.0 [t]
 ```
 
-??? success "명령 출력"
-
-    ```console
-     project name: nf-core/demo
-     repository  : https://github.com/nf-core/demo
-     local path  : /workspaces/.nextflow/assets/.repos/nf-core/demo
-     main script : main.nf
-     description : An nf-core demo pipeline
-     revisions   :
-       TEMPLATE
-       bumper
-       dev
-       fix-nxfversion
-       manually-merge-3_0_2
-     > master (default)
-       nf-core-template-merge-2.13.2.dev0
-       nf-core-template-merge-2.14.0
-       nf-core-template-merge-2.14.1
-       nf-core-template-merge-3.0.0
-       nf-core-template-merge-3.0.1
-       nf-core-template-merge-3.0.2
-       nf-core-template-merge-3.1.0
-       nf-core-template-merge-3.1.2
-       nf-core-template-merge-3.2.0
-       nf-core-template-merge-3.2.1
-       nf-core-template-merge-3.3.1
-       nf-core-template-merge-3.3.2
-       nf-core-template-merge-4.0.0
-       nf-core-template-merge-4.0.3
-       nf-core-template-merge-4.1.0
-       nf-core-template-merge-4.1.0-2
-       patch
-       1.0.0 [t]
-       1.0.1 [t]
-       1.0.2 [t]
-       1.1.0 [t]
-     > 1.2.0 [t]
-    ```
-
-!!! info "정보"
-
-    교육 환경을 사용하지 않는 경우 전체 경로가 다를 수 있습니다.
+:::note[정보]
+교육 환경을 사용하지 않는 경우 전체 경로가 다를 수 있습니다.
+:::
 
 Nextflow는 다운로드된 소스 코드를 의도적으로 '눈에 띄지 않는 곳'에 보관합니다. 이는 이러한 파이프라인이 직접 상호작용하는 코드보다는 라이브러리처럼 사용되어야 한다는 원칙에 따른 것입니다.
 
@@ -187,32 +178,35 @@ ln -s "$(echo $NXF_HOME/assets/.repos/nf-core/demo/clones/*/)" pipelines/nf-core
 tree -L 1 pipelines/nf-core/demo
 ```
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console
-    pipelines/nf-core/demo
-    ├── assets
-    ├── CHANGELOG.md
-    ├── CITATIONS.md
-    ├── CODE_OF_CONDUCT.md
-    ├── conf
-    ├── docs
-    ├── LICENSE
-    ├── main.nf
-    ├── modules
-    ├── modules.json
-    ├── nextflow.config
-    ├── nextflow_schema.json
-    ├── nf-test.config
-    ├── README.md
-    ├── ro-crate-metadata.json
-    ├── subworkflows
-    ├── tests
-    ├── tower.yml
-    └── workflows
+```console
+pipelines/nf-core/demo
+├── assets
+├── CHANGELOG.md
+├── CITATIONS.md
+├── CODE_OF_CONDUCT.md
+├── conf
+├── docs
+├── LICENSE
+├── main.nf
+├── modules
+├── modules.json
+├── nextflow.config
+├── nextflow_schema.json
+├── nf-test.config
+├── README.md
+├── ro-crate-metadata.json
+├── subworkflows
+├── tests
+├── tower.yml
+└── workflows
 
-    7 directories, 12 files
-    ```
+7 directories, 12 files
+```
+
+</details>
 
 보시다시피 많은 내용이 있지만, 대부분은 신경 쓰지 않아도 됩니다.
 
@@ -228,10 +222,10 @@ tree -L 1 pipelines/nf-core/demo
 
 이 파트에서는 파이프라인 코드 구성 요소를 다루지 않지만, nf-core 파이프라인의 최종 사용자에게 관련성이 높은 설정 및 유효성 검사 요소는 살펴볼 것입니다.
 
-!!! tip "팁"
-
-    nf-core 파이프라인의 소스 코드는 GitHub에서도 탐색할 수 있습니다. 예: [github.com/nf-core/demo](https://github.com/nf-core/demo).
-    모든 nf-core 파이프라인은 동일한 디렉토리 구조를 따르므로, 구조를 한 번 파악하면 어떤 파이프라인에서도 같은 방식으로 설정 파일, 모듈, 워크플로우를 찾을 수 있습니다.
+:::tip[팁]
+nf-core 파이프라인의 소스 코드는 GitHub에서도 탐색할 수 있습니다. 예: [github.com/nf-core/demo](https://github.com/nf-core/demo).
+모든 nf-core 파이프라인은 동일한 디렉토리 구조를 따르므로, 구조를 한 번 파악하면 어떤 파이프라인에서도 같은 방식으로 설정 파일, 모듈, 워크플로우를 찾을 수 있습니다.
+:::
 
 이제 파이프라인을 실행해 봅니다!
 
@@ -251,10 +245,10 @@ nf-core 웹사이트를 통해 파이프라인을 찾고 소스 코드의 로컬
 이는 [nf-core/test-datasets](https://github.com/nf-core/test-datasets) 저장소에 호스팅된 소규모 테스트 데이터셋을 사용하여 파이프라인을 실행하기 위한 최소한의 설정 모음입니다.
 소규모로 파이프라인을 빠르게 실행해 볼 수 있는 좋은 방법입니다.
 
-!!! tip "팁"
-
-    Nextflow의 설정 프로파일 시스템을 사용하면 다양한 컨테이너 엔진이나 실행 환경 간에 쉽게 전환할 수 있습니다.
-    자세한 내용은 [Hello Nextflow 파트 6: 설정](../hello_nextflow/06_hello_config.md)을 참조하세요.
+:::tip[팁]
+Nextflow의 설정 프로파일 시스템을 사용하면 다양한 컨테이너 엔진이나 실행 환경 간에 쉽게 전환할 수 있습니다.
+자세한 내용은 [Hello Nextflow 파트 6: 설정](../hello_nextflow/06_hello_config.mdx)을 참조하세요.
+:::
 
 ### 2.1. 테스트 프로파일 살펴보기
 
@@ -268,7 +262,7 @@ code pipelines/nf-core/demo/conf/test.config
 
 해당 파일의 내용은 다음과 같습니다:
 
-```groovy title="conf/test.config" linenums="1" hl_lines="8 26"
+```nextflow {8,26} title="conf/test.config" showLineNumbers
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Nextflow config file for running minimal tests
@@ -300,7 +294,7 @@ params {
 
 파일 상단의 주석 블록에 이 테스트 프로파일로 파이프라인을 실행하는 방법을 보여주는 사용 예제가 포함되어 있습니다.
 
-```groovy title="conf/test.config" linenums="7"
+```nextflow title="conf/test.config" showLineNumbers startLineNumber=7
     Use as follows:
         nextflow run nf-core/demo -profile test,<docker/singularity> --outdir <OUTDIR>
 ```
@@ -339,76 +333,72 @@ SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/il
 
 ```bash
 nextflow run nf-core/demo -profile test,docker --outdir demo-results
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Downloading plugin nf-schema@2.7.2
+Launching `https://github.com/nf-core/demo` [cranky_curry] revision: 32893afef8 [master]
+
+
+------------------------------------------------------
+                                        ,--./,-.
+        ___     __   __   __   ___     /,-._.--~'
+  |\ | |__  __ /  ` /  \ |__) |__         }  {
+  | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                        `._,._,'
+  nf-core/demo 1.2.0
+------------------------------------------------------
+
+Input/output options
+  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
+  outdir                    : demo-results
+
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
+
+Generic options
+  trace_report_suffix       : 2026-07-03_21-31-35
+
+Core Nextflow options
+  revision                  : master
+  runName                   : cranky_curry
+  containerEngine           : docker
+  launchDir                 : /workspaces/training/nfcore-use
+  workDir                   : /workspaces/training/nfcore-use/work
+  projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
+  userName                  : root
+  profile                   : test,docker
+  configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+
+* The pipeline
+    https://doi.org/10.5281/zenodo.12192442
+
+* The nf-core framework
+    https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+    https://github.com/nf-core/demo/blob/master/CITATIONS.md
+
+executor >  local (8)
+[ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
+[b7/cb6812] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
+[ff/6ebd98] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
+[09/bbd1b4] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
+-[nf-core/demo] Pipeline completed successfully-
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Downloading plugin nf-schema@2.7.2
-    Launching `https://github.com/nf-core/demo` [cranky_curry] revision: 32893afef8 [master]
-
-
-    ------------------------------------------------------
-                                            ,--./,-.
-            ___     __   __   __   ___     /,-._.--~'
-      |\ | |__  __ /  ` /  \ |__) |__         }  {
-      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                            `._,._,'
-      nf-core/demo 1.2.0
-    ------------------------------------------------------
-
-    Input/output options
-      input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
-      outdir                    : demo-results
-
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
-
-    Generic options
-      trace_report_suffix       : 2026-07-03_21-31-35
-
-    Core Nextflow options
-      revision                  : master
-      runName                   : cranky_curry
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nfcore-use
-      workDir                   : /workspaces/training/nfcore-use/work
-      projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
-      userName                  : root
-      profile                   : test,docker
-      configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
-
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-
-    * The pipeline
-        https://doi.org/10.5281/zenodo.12192442
-
-    * The nf-core framework
-        https://doi.org/10.1038/s41587-020-0439-x
-
-    * Software dependencies
-        https://github.com/nf-core/demo/blob/master/CITATIONS.md
-
-    executor >  local (8)
-    [ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-    [b7/cb6812] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-    [ff/6ebd98] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
-    [09/bbd1b4] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
-    -[nf-core/demo] Pipeline completed successfully-
-    ```
 
 출력이 위와 같다면 축하합니다! 첫 번째 nf-core 파이프라인을 성공적으로 실행했습니다.
 
 기본 Nextflow 파이프라인을 실행할 때보다 콘솔 출력이 훨씬 많다는 것을 알 수 있습니다.
 파이프라인 버전, 입력 및 출력 요약, 일부 설정 요소가 포함된 헤더가 있습니다.
 
-!!! info "정보"
-
-    출력에는 다른 타임스탬프, 실행 이름, 파일 경로가 표시되지만 전체 구조와 프로세스 실행은 유사합니다.
+:::note[정보]
+출력에는 다른 타임스탬프, 실행 이름, 파일 경로가 표시되지만 전체 구조와 프로세스 실행은 유사합니다.
+:::
 
 출력 상단 근처의 다음 줄을 확인하세요:
 
@@ -442,7 +432,7 @@ nf-core 웹사이트의 파이프라인 문서 페이지에 표시된 네 가지
 
 `NFCORE_DEMO:DEMO:MULTIQC`와 같이 여기에 표시된 전체 프로세스 이름은 Hello Nextflow 입문 자료에서 보았던 것보다 깁니다.
 이는 상위 워크플로우의 이름을 포함하며 파이프라인 코드의 모듈성을 반영합니다.
-nf-core 스타일의 파이프라인을 직접 개발하고 싶다면 [Build with nf-core](../nfcore_build/index.md) 과정을 참조하세요.
+nf-core 스타일의 파이프라인을 직접 개발하고 싶다면 [Build with nf-core](../nfcore_build/index.mdx) 과정을 참조하세요.
 
 ### 2.3. 파이프라인 출력 살펴보기
 
@@ -452,33 +442,36 @@ nf-core 스타일의 파이프라인을 직접 개발하고 싶다면 [Build wit
 tree -L 2 demo-results
 ```
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console
-    demo-results
-    ├── cowpy
-    │   └── cowpy.txt
-    ├── fastqc
-    │   ├── SAMPLE1_PE
-    │   ├── SAMPLE2_PE
-    │   └── SAMPLE3_SE
-    ├── fq
-    │   ├── SAMPLE1_PE
-    │   ├── SAMPLE2_PE
-    │   └── SAMPLE3_SE
-    ├── multiqc
-    │   ├── multiqc_data
-    │   └── multiqc_report.html
-    └── pipeline_info
-        ├── execution_report_2026-07-03_21-31-35.html
-        ├── execution_timeline_2026-07-03_21-31-35.html
-        ├── execution_trace_2026-07-03_21-31-35.txt
-        ├── nf_core_demo_software_mqc_versions.yml
-        ├── params_2026-07-03_21-31-43.json
-        └── pipeline_dag_2026-07-03_21-31-35.html
+```console
+demo-results
+├── cowpy
+│   └── cowpy.txt
+├── fastqc
+│   ├── SAMPLE1_PE
+│   ├── SAMPLE2_PE
+│   └── SAMPLE3_SE
+├── fq
+│   ├── SAMPLE1_PE
+│   ├── SAMPLE2_PE
+│   └── SAMPLE3_SE
+├── multiqc
+│   ├── multiqc_data
+│   └── multiqc_report.html
+└── pipeline_info
+    ├── execution_report_2026-07-03_21-31-35.html
+    ├── execution_timeline_2026-07-03_21-31-35.html
+    ├── execution_trace_2026-07-03_21-31-35.txt
+    ├── nf_core_demo_software_mqc_versions.yml
+    ├── params_2026-07-03_21-31-43.json
+    └── pipeline_dag_2026-07-03_21-31-35.html
 
-    12 directories, 8 files
-    ```
+12 directories, 8 files
+```
+
+</details>
 
 꽤 많아 보일 수 있습니다.
 `nf-core/demo` 파이프라인의 출력에 대해 자세히 알아보려면 [문서 페이지](https://nf-co.re/demo/1.2.0/docs/output/)를 확인하세요.
@@ -487,12 +480,12 @@ tree -L 2 demo-results
 
 예를 들어 `execution_timeline_*` 파일은 실행된 프로세스, 실행 순서, 소요 시간을 보여줍니다:
 
-![실행 타임라인 보고서](./img/execution_timeline.png)
+![실행 타임라인 보고서](../../nfcore_use/img/execution_timeline.png)
 
-!!! info "정보"
-
-    여기서는 Github Codespaces의 최소 사양 머신에서 실행하고 있기 때문에 작업이 병렬로 실행되지 않았습니다.
-    병렬 실행을 확인하려면 코드스페이스의 CPU 할당과 테스트 설정의 리소스 제한을 늘려 보세요.
+:::note[정보]
+여기서는 Github Codespaces의 최소 사양 머신에서 실행하고 있기 때문에 작업이 병렬로 실행되지 않았습니다.
+병렬 실행을 확인하려면 코드스페이스의 CPU 할당과 테스트 설정의 리소스 제한을 늘려 보세요.
+:::
 
 이러한 보고서는 모든 nf-core 파이프라인에서 자동으로 생성됩니다.
 
@@ -502,7 +495,7 @@ tree -L 2 demo-results
 
 ### 다음 단계
 
-[파트 2](./02_configure_execution.md)로 이동하여 파이프라인 실행 설정 방법을 학습합니다.
+[파트 2](./02_configure_execution.mdx)로 이동하여 파이프라인 실행 설정 방법을 학습합니다.
 
 ---
 

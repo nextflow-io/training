@@ -1,16 +1,19 @@
-# मैन्युअल इंस्टॉलेशन
+---
+title: मैन्युअल इंस्टॉलेशन
+description: प्रशिक्षण चलाने के लिए आवश्यक सब कुछ अपने स्थानीय वातावरण में मैन्युअल रूप से install करना संभव है।
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 प्रशिक्षण चलाने के लिए आवश्यक सब कुछ अपने स्थानीय वातावरण में मैन्युअल रूप से install करना संभव है।
 
 यहाँ हमने standard POSIX-compatible systems (व्यक्तिगत machine जैसे laptop मानते हुए) पर यह कैसे करना है इसका documentation किया है।
 ध्यान रखो कि कुछ विवरण तुम्हारे विशिष्ट system के आधार पर अलग हो सकते हैं।
 
-!!! tip "सुझाव"
-
-    आगे बढ़ने से पहले, क्या तुमने [Devcontainers approach](03_devcontainer.md) पर विचार किया है?
-    यह मैन्युअल installation की आवश्यकता के बिना सभी आवश्यक tools और dependencies प्रदान करता है।
+:::tip[सुझाव]
+आगे बढ़ने से पहले, क्या तुमने [Devcontainers approach](03_devcontainer.mdx) पर विचार किया है?
+यह मैन्युअल installation की आवश्यकता के बिना सभी आवश्यक tools और dependencies प्रदान करता है।
+:::
 
 ## सामान्य software आवश्यकताएँ
 
@@ -20,7 +23,7 @@ Nextflow किसी भी POSIX-compatible system (Linux, macOS, Windows Subs
 कुल मिलाकर, तुम्हें निम्नलिखित software installed होना चाहिए:
 
 - Bash या समकक्ष shell
-- [Java 21 या बाद का](https://www.oracle.com/technetwork/java/javase/downloads/index.html) (Nextflow चलाने के लिए Java 17+ पर्याप्त है, लेकिन [plugin development](../side_quests/plugin_development/index.md) course के लिए Java 21 आवश्यक है)
+- [Java 21 या बाद का](https://www.oracle.com/technetwork/java/javase/downloads/index.html) (Nextflow चलाने के लिए Java 17+ पर्याप्त है, लेकिन [plugin development](../side_quests/plugin_development/index.mdx) course के लिए Java 21 आवश्यक है)
 - [Git](https://git-scm.com/)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Conda](https://conda.io/) 4.5 (या बाद का)
@@ -39,13 +42,13 @@ Nextflow documentation manual [Environment setup](https://www.nextflow.io/docs/l
 
 हम Nextflow के लिए self-install विकल्प और nf-core tools के लिए PyPI विकल्प का उपयोग करने की अनुशंसा करते हैं।
 
-!!! warning "Version compatibility"
+:::caution[Version compatibility]
+**जनवरी 2026 के अनुसार, हमारे सभी Nextflow प्रशिक्षण courses के लिए Nextflow version 25.10.2 या बाद का आवश्यक है, strict v2 syntax सक्रिय के साथ, जब तक अन्यथा उल्लेख न हो।**
 
-    **जनवरी 2026 के अनुसार, हमारे सभी Nextflow प्रशिक्षण courses के लिए Nextflow version 25.10.2 या बाद का आवश्यक है, strict v2 syntax सक्रिय के साथ, जब तक अन्यथा उल्लेख न हो।**
+Version आवश्यकताओं और strict v2 syntax के बारे में अधिक जानकारी के लिए, कृपया [Nextflow versions](../info/nxf_versions.mdx) guide देखो।
 
-    Version आवश्यकताओं और strict v2 syntax के बारे में अधिक जानकारी के लिए, कृपया [Nextflow versions](../info/nxf_versions.md) guide देखो।
-
-    पूर्व syntax के अनुरूप प्रशिक्षण सामग्री के पुराने versions इस webpage के menu bar में version selector के माध्यम से उपलब्ध हैं।
+पूर्व syntax के अनुरूप प्रशिक्षण सामग्री के पुराने versions इस webpage के menu bar में version selector के माध्यम से उपलब्ध हैं।
+:::
 
 ## प्रशिक्षण सामग्री
 

@@ -1,10 +1,13 @@
-# Erste Schritte
+---
+title: Erste Schritte
+description: 'Nextflow für {DOMAIN}: Erste Schritte'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Eine Trainingsumgebung starten
 
-Um die vorgefertigte Umgebung zu nutzen, die wir auf GitHub Codespaces bereitstellen, klicke auf die Schaltfläche „In GitHub Codespaces öffnen" unten. Für andere Optionen siehe [Umgebungsoptionen](../../envsetup/index.md).
+Um die vorgefertigte Umgebung zu nutzen, die wir auf GitHub Codespaces bereitstellen, klicke auf die Schaltfläche „In GitHub Codespaces öffnen" unten. Für andere Optionen siehe [Umgebungsoptionen](../../envsetup/index.mdx).
 
 Wir empfehlen, die Trainingsumgebung in einem neuen Browser-Tab oder -Fenster zu öffnen (verwende Rechtsklick, Strg-Klick oder Cmd-Klick, je nach deinem Gerät), damit du weiterlesen kannst, während die Umgebung lädt.
 Du musst diese Anleitung parallel geöffnet halten, um den Kurs durchzuarbeiten.
@@ -18,12 +21,12 @@ Diese Trainingsumgebung enthält alle Software, den Code und die Daten, die für
 Der Codespace ist mit einer VSCode-Oberfläche eingerichtet, die einen Dateisystem-Explorer, einen Code-Editor und ein Terminal-Shell umfasst.
 Alle Anweisungen im Kurs (z. B. „Öffne die Datei", „Bearbeite den Code" oder „Führe diesen Befehl aus") beziehen sich auf diese drei Teile der VSCode-Oberfläche, sofern nicht anders angegeben.
 
-Wenn du diesen Kurs selbstständig durcharbeitest, mache dich bitte mit den [Grundlagen der Umgebung](../../envsetup/01_setup.md) vertraut, um weitere Details zu erfahren.
+Wenn du diesen Kurs selbstständig durcharbeitest, mache dich bitte mit den [Grundlagen der Umgebung](../../envsetup/01_setup.mdx) vertraut, um weitere Details zu erfahren.
 
 ### Versionsanforderungen
 
 Dieses Training ist für Nextflow 25.10.2 oder neuer **mit AKTIVIERTEM v2-Syntax-Parser** konzipiert.
-Wenn du eine lokale oder benutzerdefinierte Umgebung verwendest, stelle bitte sicher, dass du die korrekten Einstellungen verwendest, wie [hier](../../info/nxf_versions.md) dokumentiert.
+Wenn du eine lokale oder benutzerdefinierte Umgebung verwendest, stelle bitte sicher, dass du die korrekten Einstellungen verwendest, wie [hier](../../info/nxf_versions.mdx) dokumentiert.
 
 ## Bereit zum Arbeiten
 
@@ -45,13 +48,13 @@ Du kannst VSCode so einstellen, dass es sich auf dieses Verzeichnis fokussiert, 
 code .
 ```
 
-!!! tip "Tipp"
+:::tip[Tipp]
+Falls du aus irgendeinem Grund dieses Verzeichnis verlässt (z. B. wenn dein Codespace in den Ruhezustand geht), kannst du jederzeit den vollständigen Pfad verwenden, um dorthin zurückzukehren, vorausgesetzt, du arbeitest in der GitHub Codespaces Trainingsumgebung:
 
-    Falls du aus irgendeinem Grund dieses Verzeichnis verlässt (z. B. wenn dein Codespace in den Ruhezustand geht), kannst du jederzeit den vollständigen Pfad verwenden, um dorthin zurückzukehren, vorausgesetzt, du arbeitest in der GitHub Codespaces Trainingsumgebung:
-
-    ```bash
-    cd /workspaces/training/nf4-science/{DOMAIN_DIR}
-    ```
+```bash
+cd /workspaces/training/nf4-science/{DOMAIN_DIR}
+```
+:::
 
 Schauen wir uns nun den Inhalt an.
 
@@ -68,25 +71,28 @@ Hier erzeugen wir ein Inhaltsverzeichnis bis zur zweiten Ebene:
 tree . -L 2
 ```
 
-??? abstract "Verzeichnisinhalt"
+<details class="abstract">
+<summary>Verzeichnisinhalt</summary>
 
-    ```console
-    .
-    ├── data
-    │   ├── {DATA_SUBDIRS}
-    │   └── samplesheet.csv
-    ├── {DOMAIN_DIR}.nf
+```console
+.
+├── data
+│   ├── {DATA_SUBDIRS}
+│   └── samplesheet.csv
+├── {DOMAIN_DIR}.nf
+├── modules
+│   ├── {TOOL_A_MODULE}.nf
+│   └── {TOOL_B_MODULE}.nf
+├── nextflow.config
+└── solutions
     ├── modules
-    │   ├── {TOOL_A_MODULE}.nf
-    │   └── {TOOL_B_MODULE}.nf
-    ├── nextflow.config
-    └── solutions
-        ├── modules
-        ├── part2
-        └── part3
+    ├── part2
+    └── part3
 
-    N directories, N files
-    ```
+N directories, N files
+```
+
+</details>
 
 Klicke auf das farbige Feld, um den Abschnitt zu erweitern und seinen Inhalt anzuzeigen.
 Wir verwenden solche ausklappbaren Abschnitte, um erwartete Befehlsausgaben sowie Verzeichnis- und Dateiinhalte auf kompakte Weise darzustellen.
@@ -113,4 +119,4 @@ Denkst du, du bist bereit loszulegen?
 
 Wenn du alle Kästchen abhaken kannst, bist du startklar.
 
-**Um mit [Teil 1: Methodenübersicht](./01_method.md) fortzufahren, klicke auf den Pfeil in der unteren rechten Ecke dieser Seite.**
+**Um mit [Teil 1: Methodenübersicht](./01_method.mdx) fortzufahren, klicke auf den Pfeil in der unteren rechten Ecke dieser Seite.**

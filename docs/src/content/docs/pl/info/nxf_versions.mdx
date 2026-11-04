@@ -1,12 +1,12 @@
 ---
 title: Wersje Nextflow
 description: Zrozumienie i zarządzanie ewolucją wersji składni Nextflow
-hide:
-  - toc
-  - footer
+tableOfContents: false
+prev: false
+next: false
 ---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Aktualnie wspierana wersja składni Nextflow i wymagania
 
@@ -17,8 +17,8 @@ Wersja Nextflow aktualnie ładowana domyślnie w naszym środowisku szkoleniowym
 
 Ponieważ kursy wykorzystują teraz typowane wejścia na poziomie workflow'a, a także dyrektywy wyjściowe na poziomie workflow'a, wymagają użycia parsera składni V2, **chyba że w instrukcjach kursu wyraźnie zaznaczono inaczej**.
 Parser V2 jest domyślny od Nextflow 26.04 wzwyż, więc w przypadku wersji, którą ładujemy, nie trzeba go włączać ręcznie.
-Jeśli planujesz korzystać ze środowiska, które udostępniamy przez [Github Codespaces](../envsetup/01_setup.md) lub [lokalne devcontainery](../envsetup/03_devcontainer.md), nie musisz nic robić, chyba że w instrukcjach kursu wyraźnie zaznaczono inaczej.
-Jeśli jednak planujesz przejść przez szkolenia we własnym środowisku ([Instalacja ręczna](../envsetup/02_local.md)), musisz upewnić się, że używasz Nextflow w wersji 25.10.2 lub nowszej, a jeśli korzystasz z wersji wcześniejszej niż 26.04 — że masz włączony parser składni v2.
+Jeśli planujesz korzystać ze środowiska, które udostępniamy przez [Github Codespaces](../envsetup/01_setup.mdx) lub [lokalne devcontainery](../envsetup/03_devcontainer.mdx), nie musisz nic robić, chyba że w instrukcjach kursu wyraźnie zaznaczono inaczej.
+Jeśli jednak planujesz przejść przez szkolenia we własnym środowisku ([Instalacja ręczna](../envsetup/02_local.mdx)), musisz upewnić się, że używasz Nextflow w wersji 25.10.2 lub nowszej, a jeśli korzystasz z wersji wcześniejszej niż 26.04 — że masz włączony parser składni v2.
 
 ## Starsze wersje materiałów szkoleniowych
 
@@ -78,7 +78,7 @@ Aby **wyłączyć** parser składni v2 dla bieżącej sesji, uruchom następują
 export NXF_SYNTAX_PARSER=v1
 ```
 
-<!-- Will it be possible to disable it in versions after 26.04? -->
+{/* Will it be possible to disable it in versions after 26.04? */}
 
 ### Migracja istniejącego kodu
 
@@ -101,8 +101,8 @@ Jeśli potrzebujesz pomocy, skontaktuj się z nami na Slacku lub na forum.
 
 <div markdown class="homepage_logos">
 
-![Seqera](../assets/img/seqera_logo.png#only-light)
+<span class="dark:sl-hidden">![Seqera](../../assets/img/seqera_logo.png)</span>
 
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
+<span class="light:sl-hidden">![Seqera](../../assets/img/seqera_logo_dark.png)</span>
 
 </div>

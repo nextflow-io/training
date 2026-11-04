@@ -1,8 +1,11 @@
-# Partie 2 : Configurer le pipeline
+---
+title: 'Partie 2 : Configurer le pipeline'
+description: Dans la Partie 1, vous avez exécuté un pipeline complet à plusieurs étapes qui traite plusieurs entrées en parallèle à l'aide de conteneurs.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Dans la [Partie 1](./01_run_nextflow.md), vous avez exécuté un pipeline complet à plusieurs étapes qui traite plusieurs entrées en parallèle à l'aide de conteneurs.
+Dans la [Partie 1](./01_run_nextflow.mdx), vous avez exécuté un pipeline complet à plusieurs étapes qui traite plusieurs entrées en parallèle à l'aide de conteneurs.
 Nous allons maintenant examiner comment configurer le comportement du pipeline à l'aide de `nextflow.config` : d'abord en analysant le fichier de configuration que nous vous avons déjà fourni, puis en explorant d'autres façons de fournir une configuration, et enfin en contrôlant comment et où les sorties sont publiées.
 
 ---
@@ -13,60 +16,63 @@ Nextflow récupère automatiquement `nextflow.config` depuis le répertoire de t
 
 Nous vous fournissons un fichier de configuration qui couvre quatre domaines : le packaging logiciel, les paramètres de processus, les paramètres du pipeline et les profils d'exécution.
 
-??? full-code "nextflow.config"
+<details class="full-code">
+<summary>nextflow.config</summary>
 
-    ```groovy title="nextflow.config" linenums="1"
-    /*
-     * Packaging logiciel
-     */
-    docker.enabled = true
+```nextflow title="nextflow.config" showLineNumbers
+/*
+ * Packaging logiciel
+ */
+docker.enabled = true
 
-    /*
-     * Paramètres de processus
-     */
-    process {
-        cpus = 1
-        memory = 1.GB
+/*
+ * Paramètres de processus
+ */
+process {
+    cpus = 1
+    memory = 1.GB
+}
+
+/*
+ * Paramètres du pipeline
+ */
+params {
+    input = 'data/greetings.csv'
+    batch = 'batch'
+    character = 'turkey'
+}
+
+/*
+ * Profils
+ */
+profiles {
+    test {
+        params.input = 'data/greetings.csv'
+        params.batch = 'test'
+        params.character = 'tux'
     }
-
-    /*
-     * Paramètres du pipeline
-     */
-    params {
-        input = 'data/greetings.csv'
-        batch = 'batch'
-        character = 'turkey'
+    conda {
+        docker.enabled = false
+        conda.enabled = true
     }
+}
+```
 
-    /*
-     * Profils
-     */
-    profiles {
-        test {
-            params.input = 'data/greetings.csv'
-            params.batch = 'test'
-            params.character = 'tux'
-        }
-        conda {
-            docker.enabled = false
-            conda.enabled = true
-        }
-    }
-    ```
+</details>
 
 Passons en revue chacun d'eux, puis mettons les profils en pratique en exécutant le pipeline avec l'un d'eux.
 
-!!! note "Note"
-
-    Cette configuration couvre l'exécution locale sur une seule machine.
-    Nextflow prend également en charge les ordonnanceurs HPC (SLURM, PBS, LSF) et les executors cloud (AWS Batch, Google Cloud Batch, Azure Batch), tous configurés via le même mécanisme `nextflow.config`.
-    Consultez la [Partie 1 : S'adapter à votre environnement de calcul](../config_exec/01_packaging_and_execution.md) du cours [Configure Execution](../config_exec/index.md) pour une présentation complète de ces options.
+:::note[Note]
+Cette configuration couvre l'exécution locale sur une seule machine.
+Nextflow prend également en charge les ordonnanceurs HPC (SLURM, PBS, LSF) et les executors cloud (AWS Batch, Google Cloud Batch, Azure Batch), tous configurés via le même mécanisme `nextflow.config`.
+Consultez la [Partie 1 : S'adapter à votre environnement de calcul](../config_exec/01_packaging_and_execution.mdx) du cours [Configure Execution](../config_exec/index.mdx) pour une présentation complète de ces options.
+:::
 
 ### 1.1. Packaging logiciel
 
 Le packaging logiciel désigne la façon dont Nextflow fournit les outils dont vos processus ont besoin, qu'il s'agisse d'une image de conteneur, d'un environnement Conda ou d'autre chose.
 
-```groovy title="nextflow.config" linenums="1"
+```nextflow title="nextflow.config" showLineNumbers
 /*
  * Packaging logiciel
  */
@@ -81,7 +87,7 @@ Tout processus qui déclare une directive `container` s'exécute à l'intérieur
 Rappelons qu'un processus est une étape unique de votre pipeline, comme `sayHello` ou `cowpy`.
 Nextflow vous permet de configurer un certain nombre de choses sur la façon dont chacun s'exécute réellement : la quantité de CPU et de mémoire allouée, le conteneur ou l'environnement Conda utilisé, et bien plus encore.
 
-```groovy title="nextflow.config" linenums="6"
+```nextflow title="nextflow.config" showLineNumbers startLineNumber=6
 /*
  * Paramètres de processus
  */
@@ -93,14 +99,14 @@ process {
 
 Cela limite chaque processus à un seul CPU et 1 Go de mémoire.
 
-Nextflow vous permet également de définir des valeurs différentes pour des processus nommés individuellement ou des groupes de processus ; vous apprendrez comment dans la [Partie 2 : Gérer les ressources de calcul et les échecs](../config_exec/02_resources_and_retries.md#12-set-resource-allocations-for-a-specific-process) du cours [Configure Execution](../config_exec/index.md).
+Nextflow vous permet également de définir des valeurs différentes pour des processus nommés individuellement ou des groupes de processus ; vous apprendrez comment dans la [Partie 2 : Gérer les ressources de calcul et les échecs](../config_exec/02_resources_and_retries.mdx#12-définir-les-allocations-de-ressources-pour-un-processus-spécifique) du cours [Configure Execution](../config_exec/index.mdx).
 
 ### 1.3. Paramètres du pipeline
 
 Les paramètres sont les entrées en ligne de commande du pipeline, les mêmes options `--input`, `--batch` et `--character` que vous avez déjà définies directement en ligne de commande.
 Définir leurs valeurs par défaut ici signifie que vous n'avez pas à les saisir à chaque fois, bien que, comme vous le verrez plus loin dans cette partie, il existe d'autres façons de les fournir.
 
-```groovy title="nextflow.config" linenums="14"
+```nextflow title="nextflow.config" showLineNumbers startLineNumber=14
 /*
  * Paramètres du pipeline
  */
@@ -117,7 +123,7 @@ Ces valeurs par défaut s'appliquent chaque fois qu'un paramètre n'est pas four
 
 Les profils vous permettent de regrouper un ensemble de paramètres sous un seul nom, afin de pouvoir basculer entre des configurations complètes avec une seule option au lieu de modifier les valeurs manuellement à chaque fois.
 
-```groovy title="nextflow.config" linenums="23"
+```nextflow title="nextflow.config" showLineNumbers startLineNumber=23
 /*
  * Profils
  */
@@ -144,49 +150,45 @@ Mettons le profil `test` en pratique.
 
 ```bash
 nextflow run main.nf -profile test
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [reverent_heisenberg] revision: ce74f81996
+
+executor >  local (8)
+[3d/8a12c7] sayHello (3)       | 3 of 3 ✔ # [!code highlight]
+[e7/e0934f] convertToUpper (2) | 3 of 3 ✔ # [!code highlight]
+[1d/616569] collectGreetings   | 1 of 1 ✔ # [!code highlight]
+[44/7d46cf] cowpy              | 1 of 1 ✔ # [!code highlight]
+
+Outputs:
+
+  /workspaces/training/nextflow-run/results
+
+  first_output:
+    - test/intermediates/Bonjour-output.txt
+    - test/intermediates/Hello-output.txt
+    - test/intermediates/Hola-output.txt
+
+  uppercased:
+    - test/intermediates/UPPER-Bonjour-output.txt
+    - test/intermediates/UPPER-Hello-output.txt
+    - test/intermediates/UPPER-Hola-output.txt
+
+  collected: test/intermediates/COLLECTED-test-output.txt
+
+  batch_report: test/test-report.txt
+
+  cowpy_art: test/cowpy-COLLECTED-test-output.txt
 ```
-
-??? success "Sortie de la commande"
-
-    ```console hl_lines="6 7 8 9"
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [reverent_heisenberg] revision: ce74f81996
-
-    executor >  local (8)
-    [3d/8a12c7] sayHello (3)       | 3 of 3 ✔
-    [e7/e0934f] convertToUpper (2) | 3 of 3 ✔
-    [1d/616569] collectGreetings   | 1 of 1 ✔
-    [44/7d46cf] cowpy              | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nextflow-run/results
-
-      first_output:
-        - test/intermediates/Bonjour-output.txt
-        - test/intermediates/Hello-output.txt
-        - test/intermediates/Hola-output.txt
-
-      uppercased:
-        - test/intermediates/UPPER-Bonjour-output.txt
-        - test/intermediates/UPPER-Hello-output.txt
-        - test/intermediates/UPPER-Hola-output.txt
-
-      collected: test/intermediates/COLLECTED-test-output.txt
-
-      batch_report: test/test-report.txt
-
-      cowpy_art: test/cowpy-COLLECTED-test-output.txt
-    ```
 
 Le pipeline s'exécute avec `batch = 'test'` et `character = 'tux'`.
 Vérifiez `results/test/` : le nom du batch fait maintenant partie du chemin du répertoire lui-même, et l'art ASCII représente le pingouin tux au lieu d'une dinde.
 
-!!! note "Note"
-
-    Vous pouvez activer plusieurs profils à la fois, et utiliser `nextflow config -profile <name>,<name>` pour voir le résultat entièrement résolu avant d'exécuter quoi que ce soit.
-    La combinaison de profils et la façon dont Nextflow résout les conflits entre eux sont traitées en détail dans la [Partie 3 : Utiliser les profils pour changer de configuration](../config_exec/03_profiles.md) du cours [Configure Execution](../config_exec/index.md).
+:::note[Note]
+Vous pouvez activer plusieurs profils à la fois, et utiliser `nextflow config -profile <name>,<name>` pour voir le résultat entièrement résolu avant d'exécuter quoi que ce soit.
+La combinaison de profils et la façon dont Nextflow résout les conflits entre eux sont traitées en détail dans la [Partie 3 : Utiliser les profils pour changer de configuration](../config_exec/03_profiles.mdx) du cours [Configure Execution](../config_exec/index.mdx).
+:::
 
 ### À retenir
 
@@ -208,7 +210,7 @@ Nextflow vous offre également deux mécanismes plus ciblés : un fichier de con
 Supposons que vous déplaciez le pipeline vers une machine qui n'a pas Docker et que vous souhaitiez donner à chaque processus plus de ressources.
 Créez un nouveau fichier de configuration avec uniquement les remplacements dont vous avez besoin :
 
-```groovy title="custom.config" linenums="1"
+```nextflow title="custom.config" showLineNumbers
 process {
     cpus = 2
     memory = 2.GB
@@ -222,41 +224,37 @@ Passez-le avec votre pipeline principal via `-c` :
 
 ```bash
 nextflow run main.nf -c custom.config
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [exotic_cray] revision: ce74f81996
+
+executor >  local (8)
+[77/e02315] sayHello (1)       | 3 of 3 ✔ # [!code highlight]
+[a6/ccf44b] convertToUpper (3) | 3 of 3 ✔ # [!code highlight]
+[56/fd1296] collectGreetings   | 1 of 1 ✔ # [!code highlight]
+[2c/205a94] cowpy              | 1 of 1 ✔ # [!code highlight]
+
+Outputs:
+
+  /workspaces/training/nextflow-run/results
+
+  first_output:
+    - batch/intermediates/Bonjour-output.txt
+    - batch/intermediates/Hello-output.txt
+    - batch/intermediates/Hola-output.txt
+
+  uppercased:
+    - batch/intermediates/UPPER-Bonjour-output.txt
+    - batch/intermediates/UPPER-Hello-output.txt
+    - batch/intermediates/UPPER-Hola-output.txt
+
+  collected: batch/intermediates/COLLECTED-batch-output.txt
+
+  batch_report: batch/batch-report.txt
+
+  cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
 ```
-
-??? success "Sortie de la commande"
-
-    ```console hl_lines="6 7 8 9"
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [exotic_cray] revision: ce74f81996
-
-    executor >  local (8)
-    [77/e02315] sayHello (1)       | 3 of 3 ✔
-    [a6/ccf44b] convertToUpper (3) | 3 of 3 ✔
-    [56/fd1296] collectGreetings   | 1 of 1 ✔
-    [2c/205a94] cowpy              | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nextflow-run/results
-
-      first_output:
-        - batch/intermediates/Bonjour-output.txt
-        - batch/intermediates/Hello-output.txt
-        - batch/intermediates/Hola-output.txt
-
-      uppercased:
-        - batch/intermediates/UPPER-Bonjour-output.txt
-        - batch/intermediates/UPPER-Hello-output.txt
-        - batch/intermediates/UPPER-Hola-output.txt
-
-      collected: batch/intermediates/COLLECTED-batch-output.txt
-
-      batch_report: batch/batch-report.txt
-
-      cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
-    ```
 
 Nextflow fusionne `custom.config` par-dessus le `nextflow.config` du pipeline, de sorte que chaque processus obtient maintenant 2 CPU et 2 Go de mémoire au lieu des valeurs par défaut, et s'exécute via Conda plutôt que Docker.
 `cowpy` est le seul processus avec un package Conda déclaré aux côtés de son conteneur, c'est donc celui pour lequel vous verrez Nextflow construire réellement un environnement :
@@ -278,7 +276,7 @@ Nextflow vous permet de fournir des [fichiers de paramètres](https://nextflow.i
 
 Un fichier de paramètres appelé `test-params.yaml` est déjà fourni dans votre répertoire de travail :
 
-```yaml title="test-params.yaml" linenums="1"
+```yaml title="test-params.yaml" showLineNumbers
 input: "data/greetings.csv"
 batch: "yaml"
 character: "stegosaurus"
@@ -286,73 +284,72 @@ character: "stegosaurus"
 
 La syntaxe utilise des deux-points (`:`) au lieu des signes égal (`=`) utilisés dans `nextflow.config`, car ce fichier est du YAML pur plutôt que du Groovy.
 
-!!! info "Info"
-
-    Une version JSON, `test-params.json`, est également fournie. N'hésitez pas à l'essayer par vous-même ; la syntaxe pour la passer est identique.
+:::note[Info]
+Une version JSON, `test-params.json`, est également fournie. N'hésitez pas à l'essayer par vous-même ; la syntaxe pour la passer est identique.
+:::
 
 Passez le fichier avec `-params-file` :
 
 ```bash
 nextflow run main.nf -params-file test-params.yaml
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [sharp_faraday] revision: ce74f81996
+
+executor >  local (8)
+[1c/9ff63e] sayHello (1)       | 3 of 3 ✔
+[3b/bb5691] convertToUpper (2) | 3 of 3 ✔
+[cd/2c1f6e] collectGreetings   | 1 of 1 ✔
+[89/c333bc] cowpy              | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nextflow-run/results
+
+  first_output:
+    - yaml/intermediates/Bonjour-output.txt
+    - yaml/intermediates/Hello-output.txt
+    - yaml/intermediates/Hola-output.txt
+
+  uppercased:
+    - yaml/intermediates/UPPER-Bonjour-output.txt
+    - yaml/intermediates/UPPER-Hello-output.txt
+    - yaml/intermediates/UPPER-Hola-output.txt
+
+  collected: yaml/intermediates/COLLECTED-yaml-output.txt
+
+  batch_report: yaml/yaml-report.txt
+
+  cowpy_art: yaml/cowpy-COLLECTED-yaml-output.txt
 ```
 
-??? success "Sortie de la commande"
+<details class="abstract">
+<summary>Contenu du fichier</summary>
 
-    ```console
-    N E X T F L O W   ~  version 26.04.4
+```console title="results/yaml/cowpy-COLLECTED-yaml-output.txt"
+ _________
+/ BONJOUR \
+| HOLA    |
+\ HELLO   /
+ ---------
+\                             .       .
+ \                           / `.   .' "
+  \                  .---.  <    > <    >  .---.
+   \                 |    \  \ - ~ ~ - /  /    |
+         _____          ..-~             ~-..-~
+        |     |   \~~~\.'                    `./~~~/
+       ---------   \__/                        \__/
+      .'  O    \     /               /       \  "
+     (_____,    `._.'               |         }  \/~~~/
+      `----.          /       }     |        /    \__/
+            `-.      |       /      |       /      `. ,~~|
+                ~-.__|      /_ - ~ ^|      /- _      `..-'
+                    |     /        |     /     ~-.     `-. _  _  _
+                    |_____|        |_____|         ~ - . _ _ _ _ _>
+```
 
-    Launching `main.nf` [sharp_faraday] revision: ce74f81996
-
-    executor >  local (8)
-    [1c/9ff63e] sayHello (1)       | 3 of 3 ✔
-    [3b/bb5691] convertToUpper (2) | 3 of 3 ✔
-    [cd/2c1f6e] collectGreetings   | 1 of 1 ✔
-    [89/c333bc] cowpy              | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nextflow-run/results
-
-      first_output:
-        - yaml/intermediates/Bonjour-output.txt
-        - yaml/intermediates/Hello-output.txt
-        - yaml/intermediates/Hola-output.txt
-
-      uppercased:
-        - yaml/intermediates/UPPER-Bonjour-output.txt
-        - yaml/intermediates/UPPER-Hello-output.txt
-        - yaml/intermediates/UPPER-Hola-output.txt
-
-      collected: yaml/intermediates/COLLECTED-yaml-output.txt
-
-      batch_report: yaml/yaml-report.txt
-
-      cowpy_art: yaml/cowpy-COLLECTED-yaml-output.txt
-    ```
-
-??? abstract "Contenu du fichier"
-
-    ```console title="results/yaml/cowpy-COLLECTED-yaml-output.txt"
-     _________
-    / BONJOUR \
-    | HOLA    |
-    \ HELLO   /
-     ---------
-    \                             .       .
-     \                           / `.   .' "
-      \                  .---.  <    > <    >  .---.
-       \                 |    \  \ - ~ ~ - /  /    |
-             _____          ..-~             ~-..-~
-            |     |   \~~~\.'                    `./~~~/
-           ---------   \__/                        \__/
-          .'  O    \     /               /       \  "
-         (_____,    `._.'               |         }  \/~~~/
-          `----.          /       }     |        /    \__/
-                `-.      |       /      |       /      `. ,~~|
-                    ~-.__|      /_ - ~ ^|      /- _      `..-'
-                        |     /        |     /     ~-.     `-. _  _  _
-                        |_____|        |_____|         ~ - . _ _ _ _ _>
-    ```
+</details>
 
 Un fichier de paramètres est particulièrement utile lorsqu'un pipeline possède plus d'une poignée de paramètres : il vous permet de les fournir tous en une seule fois, sans une ligne de commande interminable ni aucune modification du script du workflow, et il est facile à distribuer avec vos résultats.
 
@@ -378,57 +375,56 @@ Pointez vers un autre emplacement avec `-output-dir` (ou sa forme abrégée, `-o
 
 ```bash
 nextflow run main.nf -output-dir outputs
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [serene_kimura] revision: ce74f81996
+
+executor >  local (8)
+[31/df5c15] sayHello (3)       | 3 of 3 ✔ # [!code highlight]
+[08/8bb2e5] convertToUpper (1) | 3 of 3 ✔ # [!code highlight]
+[e5/5814da] collectGreetings   | 1 of 1 ✔ # [!code highlight]
+[cf/8ab8c6] cowpy              | 1 of 1 ✔ # [!code highlight]
+
+Outputs:
+
+  /workspaces/training/nextflow-run/outputs
+
+  first_output:
+    - batch/intermediates/Bonjour-output.txt
+    - batch/intermediates/Hello-output.txt
+    - batch/intermediates/Hola-output.txt
+
+  uppercased:
+    - batch/intermediates/UPPER-Bonjour-output.txt
+    - batch/intermediates/UPPER-Hello-output.txt
+    - batch/intermediates/UPPER-Hola-output.txt
+
+  collected: batch/intermediates/COLLECTED-batch-output.txt
+
+  batch_report: batch/batch-report.txt
+
+  cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
 ```
 
-??? success "Sortie de la commande"
+<details class="abstract">
+<summary>Contenu du répertoire</summary>
 
-    ```console hl_lines="6 7 8 9"
-    N E X T F L O W   ~  version 26.04.4
+```console
+outputs/batch
+├── batch-report.txt
+├── cowpy-COLLECTED-batch-output.txt
+└── intermediates
+    ├── Bonjour-output.txt
+    ├── COLLECTED-batch-output.txt
+    ├── Hello-output.txt
+    ├── Hola-output.txt
+    ├── UPPER-Bonjour-output.txt
+    ├── UPPER-Hello-output.txt
+    └── UPPER-Hola-output.txt
+```
 
-    Launching `main.nf` [serene_kimura] revision: ce74f81996
-
-    executor >  local (8)
-    [31/df5c15] sayHello (3)       | 3 of 3 ✔
-    [08/8bb2e5] convertToUpper (1) | 3 of 3 ✔
-    [e5/5814da] collectGreetings   | 1 of 1 ✔
-    [cf/8ab8c6] cowpy              | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nextflow-run/outputs
-
-      first_output:
-        - batch/intermediates/Bonjour-output.txt
-        - batch/intermediates/Hello-output.txt
-        - batch/intermediates/Hola-output.txt
-
-      uppercased:
-        - batch/intermediates/UPPER-Bonjour-output.txt
-        - batch/intermediates/UPPER-Hello-output.txt
-        - batch/intermediates/UPPER-Hola-output.txt
-
-      collected: batch/intermediates/COLLECTED-batch-output.txt
-
-      batch_report: batch/batch-report.txt
-
-      cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
-    ```
-
-??? abstract "Contenu du répertoire"
-
-    ```console
-    outputs/batch
-    ├── batch-report.txt
-    ├── cowpy-COLLECTED-batch-output.txt
-    └── intermediates
-        ├── Bonjour-output.txt
-        ├── COLLECTED-batch-output.txt
-        ├── Hello-output.txt
-        ├── Hola-output.txt
-        ├── UPPER-Bonjour-output.txt
-        ├── UPPER-Hello-output.txt
-        └── UPPER-Hola-output.txt
-    ```
+</details>
 
 Les sorties se trouvent maintenant dans `outputs/batch/` au lieu du répertoire par défaut `results/batch/`.
 Le code du pipeline lui-même décide toujours de la structure à l'intérieur de ce répertoire de base, comme les sous-répertoires `batch/` et `intermediates/` ; `-output-dir` contrôle uniquement l'endroit où cette structure commence.
@@ -436,7 +432,7 @@ Le code du pipeline lui-même décide toujours de la structure à l'intérieur d
 `-output-dir` n'est en réalité qu'un raccourci en ligne de commande pour l'option de configuration `outputDir`, elle peut donc être placée n'importe où où une configuration peut l'être : directement dans `nextflow.config`, à l'intérieur d'un profil, ou dans un fichier de superposition `-c` comme celui que vous avez utilisé plus tôt dans cette partie.
 Par exemple, cet extrait montre le même paramètre placé directement dans `nextflow.config` au lieu d'être passé en ligne de commande :
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 outputDir = 'outputs'
 ```
 
@@ -459,67 +455,63 @@ Si vous souhaitez que tous les fichiers de sortie soient correctement copiés, d
 
 Essayez de le définir dans `nextflow.config` :
 
-=== "Après"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" hl_lines="7"
-    params {
-        input = 'data/greetings.csv'
-        batch = 'batch'
-        character = 'turkey'
-    }
+```nextflow title="nextflow.config" step="Avant"
+params {
+    input = 'data/greetings.csv'
+    batch = 'batch'
+    character = 'turkey'
+}
+```
 
-    workflow.output.mode = 'copy'
-    ```
+```nextflow {7} title="nextflow.config" step="Après"
+params {
+    input = 'data/greetings.csv'
+    batch = 'batch'
+    character = 'turkey'
+}
 
-=== "Avant"
+workflow.output.mode = 'copy'
+```
 
-    ```groovy title="nextflow.config"
-    params {
-        input = 'data/greetings.csv'
-        batch = 'batch'
-        character = 'turkey'
-    }
-    ```
+</CodeWalkthrough>
 
 Puis exécutez le pipeline en changeant le nom du batch afin de pouvoir voir la différence dans les sorties :
 
 ```bash
 nextflow run main.nf --batch withmode
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [angry_noether] revision: ce74f81996
+
+executor >  local (8)
+[41/2b478d] sayHello (3)       | 3 of 3 ✔ # [!code highlight]
+[bf/dd2840] convertToUpper (2) | 3 of 3 ✔ # [!code highlight]
+[ea/364e97] collectGreetings   | 1 of 1 ✔ # [!code highlight]
+[10/76fe7b] cowpy              | 1 of 1 ✔ # [!code highlight]
+
+Outputs:
+
+  /workspaces/training/nextflow-run/results
+
+  first_output:
+    - withmode/intermediates/Bonjour-output.txt
+    - withmode/intermediates/Hello-output.txt
+    - withmode/intermediates/Hola-output.txt
+
+  uppercased:
+    - withmode/intermediates/UPPER-Bonjour-output.txt
+    - withmode/intermediates/UPPER-Hello-output.txt
+    - withmode/intermediates/UPPER-Hola-output.txt
+
+  collected: withmode/intermediates/COLLECTED-withmode-output.txt
+
+  batch_report: withmode/withmode-report.txt
+
+  cowpy_art: withmode/cowpy-COLLECTED-withmode-output.txt
 ```
-
-??? success "Sortie de la commande"
-
-    ```console hl_lines="6 7 8 9"
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [angry_noether] revision: ce74f81996
-
-    executor >  local (8)
-    [41/2b478d] sayHello (3)       | 3 of 3 ✔
-    [bf/dd2840] convertToUpper (2) | 3 of 3 ✔
-    [ea/364e97] collectGreetings   | 1 of 1 ✔
-    [10/76fe7b] cowpy              | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nextflow-run/results
-
-      first_output:
-        - withmode/intermediates/Bonjour-output.txt
-        - withmode/intermediates/Hello-output.txt
-        - withmode/intermediates/Hola-output.txt
-
-      uppercased:
-        - withmode/intermediates/UPPER-Bonjour-output.txt
-        - withmode/intermediates/UPPER-Hello-output.txt
-        - withmode/intermediates/UPPER-Hola-output.txt
-
-      collected: withmode/intermediates/COLLECTED-withmode-output.txt
-
-      batch_report: withmode/withmode-report.txt
-
-      cowpy_art: withmode/cowpy-COLLECTED-withmode-output.txt
-    ```
 
 Examinez l'un des fichiers de sortie comme précédemment :
 
@@ -530,10 +522,10 @@ $ ls -l results/withmode/intermediates/Hello-output.txt
 
 C'est maintenant un vrai fichier indépendant qui restera disponible même si `work/` est nettoyé.
 
-!!! warning "Avertissement"
-
-    Le paramètre `workflow.output.mode` ne fait que définir une valeur par défaut pour les sorties qui n'ont pas déjà un mode défini dans le code du pipeline.
-    Il ne peut pas remplacer un mode codé en dur par l'auteur·e, quelle que soit la valeur que vous lui attribuez.
+:::caution[Avertissement]
+Le paramètre `workflow.output.mode` ne fait que définir une valeur par défaut pour les sorties qui n'ont pas déjà un mode défini dans le code du pipeline.
+Il ne peut pas remplacer un mode codé en dur par l'auteur·e, quelle que soit la valeur que vous lui attribuez.
+:::
 
 ### À retenir
 
@@ -541,7 +533,7 @@ Vous savez comment personnaliser le répertoire de sortie de base et choisir ent
 
 ### Et ensuite ?
 
-Passez à la [Partie 3](./03_manage_executions.md), où vous apprendrez à inspecter l'historique des exécutions passées, à générer des rapports d'exécution et à nettoyer les anciens répertoires de travail.
+Passez à la [Partie 3](./03_manage_executions.mdx), où vous apprendrez à inspecter l'historique des exécutions passées, à générer des rapports d'exécution et à nettoyer les anciens répertoires de travail.
 
 ---
 

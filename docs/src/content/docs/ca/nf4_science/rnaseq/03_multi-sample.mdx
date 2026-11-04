@@ -1,32 +1,38 @@
-# Part 3: Implementació multi-mostra amb dades paired-end
+---
+title: 'Part 3: Implementació multi-mostra amb dades paired-end'
+description: Anteriorment, heu construït un pipeline de detecció de variants per mostra que processava les dades de cada mostra de manera independent.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Anteriorment, heu construït un pipeline de detecció de variants per mostra que processava les dades de cada mostra de manera independent.
 En aquesta part del curs, portarem el nostre workflow senzill al següent nivell convertint-lo en una potent eina d'automatització per lots capaç de gestionar un nombre arbitrari de mostres.
 I mentre hi som, també l'actualitzarem perquè esperi dades paired-end, que són més comunes en estudis recents.
 
-??? info "Com començar des d'aquesta secció"
+<details class="info">
+<summary>Com començar des d'aquesta secció</summary>
 
-    Aquesta secció del curs assumeix que heu completat la [Part 1: Visió general del mètode](./01_method.md), la [Part 2: Implementació d'una sola mostra](./02_single-sample.md) i teniu un pipeline `rnaseq.nf` funcional amb els fitxers de mòdul completats.
+Aquesta secció del curs assumeix que heu completat la [Part 1: Visió general del mètode](./01_method.mdx), la [Part 2: Implementació d'una sola mostra](./02_single-sample.mdx) i teniu un pipeline `rnaseq.nf` funcional amb els fitxers de mòdul completats.
 
-    Si no heu completat la Part 2 o voleu començar de nou per a aquesta part, podeu utilitzar la solució de la Part 2 com a punt de partida.
-    Executeu aquestes comandes des de dins del directori `nf4-science/rnaseq/`:
+Si no heu completat la Part 2 o voleu començar de nou per a aquesta part, podeu utilitzar la solució de la Part 2 com a punt de partida.
+Executeu aquestes comandes des de dins del directori `nf4-science/rnaseq/`:
 
-    ```bash
-    cp solutions/part2/rnaseq-2.nf rnaseq.nf
-    cp solutions/part2/modules/fastqc.nf modules/
-    cp solutions/part2/modules/trim_galore.nf modules/
-    cp solutions/part2/modules/hisat2_align.nf modules/
-    cp solutions/part2/nextflow.config .
-    ```
+```bash
+cp solutions/part2/rnaseq-2.nf rnaseq.nf
+cp solutions/part2/modules/fastqc.nf modules/
+cp solutions/part2/modules/trim_galore.nf modules/
+cp solutions/part2/modules/hisat2_align.nf modules/
+cp solutions/part2/nextflow.config .
+```
 
-    Això us proporciona un workflow complet de processament d'una sola mostra.
-    Podeu comprovar que s'executa correctament:
+Això us proporciona un workflow complet de processament d'una sola mostra.
+Podeu comprovar que s'executa correctament:
 
-    ```bash
-    nextflow run rnaseq.nf -profile test
-    ```
+```bash
+nextflow run rnaseq.nf -profile test
+```
+
+</details>
 
 ## Assignació
 
@@ -36,11 +42,9 @@ En aquesta part del curs, ampliarem el workflow per fer el següent:
 2. Executar QC per mostra, retallat i alineament en totes les mostres en paral·lel
 3. Agregar tots els informes de QC en un informe MultiQC complet
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-wf-03.svg"
-</figure>
+![](../../../nf4_science/rnaseq/img/rnaseq-wf-03.excalidraw.svg)
 
-Això automatitza els passos de la segona secció de la [Part 1: Visió general del mètode](./01_method.md#2-multi-sample-qc-aggregation), on vau executar aquestes comandes manualment en els seus contenidors.
+Això automatitza els passos de la segona secció de la [Part 1: Visió general del mètode](./01_method.mdx#2-agregació-de-qc-de-múltiples-mostres), on vau executar aquestes comandes manualment en els seus contenidors.
 
 ## Pla de la lliçó
 
@@ -53,12 +57,12 @@ Ho hem dividit en tres etapes:
 3. **Canviar a dades RNAseq paired-end.**
    Això cobreix l'adaptació de processos per a entrades paired-end (utilitzant tuples), la creació de mòduls paired-end i la configuració d'un perfil de prova separat.
 
-Això implementa el mètode descrit a la [Part 1: Visió general del mètode](./01_method.md) (segona secció que cobreix el cas d'ús multi-mostra) i es basa directament en el workflow produït per la Part 2.
+Això implementa el mètode descrit a la [Part 1: Visió general del mètode](./01_method.mdx) (segona secció que cobreix el cas d'ús multi-mostra) i es basa directament en el workflow produït per la Part 2.
 
-!!! tip "Consell"
-
-    Assegureu-vos que esteu al directori de treball correcte:
-    `cd /workspaces/training/nf4-science/rnaseq`
+:::tip[Consell]
+Assegureu-vos que esteu al directori de treball correcte:
+`cd /workspaces/training/nf4-science/rnaseq`
+:::
 
 ---
 
@@ -68,7 +72,7 @@ Per executar-se en múltiples mostres, hem de canviar com gestionem l'entrada: e
 
 Proporcionem un fitxer CSV que conté IDs de mostra i camins de fitxers FASTQ al directori `data/`.
 
-```csv title="data/single-end.csv" linenums="1"
+```csv title="data/single-end.csv" showLineNumbers
 sample_id,fastq_path
 ENCSR000COQ1,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000COQ1_1.fastq.gz
 ENCSR000COQ2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000COQ2_1.fastq.gz
@@ -82,40 +86,40 @@ Aquest fitxer CSV inclou una línia de capçalera que anomena les columnes.
 
 Tingueu en compte que aquestes són encara dades de lectura single-end.
 
-!!! warning "Advertència"
-
-    Els camins de fitxer al CSV són camins absoluts que han de coincidir amb el vostre entorn.
-    Si no esteu executant això a l'entorn de formació que proporcionem, haureu d'actualitzar els camins perquè coincideixin amb el vostre sistema.
+:::caution[Advertència]
+Els camins de fitxer al CSV són camins absoluts que han de coincidir amb el vostre entorn.
+Si no esteu executant això a l'entorn de formació que proporcionem, haureu d'actualitzar els camins perquè coincideixin amb el vostre sistema.
+:::
 
 ### 1.1. Canviar l'entrada primària a un CSV de camins de fitxer al perfil de prova
 
 Primer, hem d'actualitzar el perfil de prova a `nextflow.config` per proporcionar el camí del fitxer CSV en lloc del camí FASTQ únic.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="5"
-    docker.enabled = true
+```nextflow title="nextflow.config" showLineNumbers step="Abans"
+docker.enabled = true
 
-    profiles {
-        test {
-            params.input = "${projectDir}/data/single-end.csv"
-            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
-        }
+profiles {
+    test {
+        params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
+        params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
     }
-    ```
+}
+```
 
-=== "Abans"
+```nextflow {5} title="nextflow.config" showLineNumbers step="Després"
+docker.enabled = true
 
-    ```groovy title="nextflow.config" linenums="1"
-    docker.enabled = true
-
-    profiles {
-        test {
-            params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
-            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
-        }
+profiles {
+    test {
+        params.input = "${projectDir}/data/single-end.csv"
+        params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 A continuació, haurem d'actualitzar la creació del canal per llegir des d'aquest CSV.
 
@@ -123,32 +127,32 @@ A continuació, haurem d'actualitzar la creació del canal per llegir des d'aque
 
 Hem de carregar els continguts del fitxer al canal en lloc de només el camí del fitxer.
 
-Podem fer-ho utilitzant el mateix patró que vam utilitzar a la [Part 2 de Hello Nextflow](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file): aplicant l'operador [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) per analitzar el fitxer, després una operació `map` per extreure el camí del fitxer FASTQ de cada fila.
+Podem fer-ho utilitzant el mateix patró que vam utilitzar a la [Part 2 de Hello Nextflow](../../hello_nextflow/02_hello_channels.mdx#42-utilitzeu-loperador-splitcsv-per-analitzar-el-fitxer): aplicant l'operador [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) per analitzar el fitxer, després una operació `map` per extreure el camí del fitxer FASTQ de cada fila.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="19" hl_lines="4-7"
-    workflow {
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=19 step="Abans"
+workflow {
 
-        main:
-        // Crea el canal d'entrada des dels continguts d'un fitxer CSV
-        read_ch = channel.fromPath(params.input)
-            .splitCsv(header: true)
-            .map { row -> file(row.fastq_path) }
-    ```
+    main:
+    // Crea el canal d'entrada des d'un camí de fitxer
+    read_ch = channel.fromPath(params.input)
+```
 
-=== "Abans"
+```nextflow {4-7} title="rnaseq.nf" showLineNumbers startLineNumber=19 step="Després"
+workflow {
 
-    ```groovy title="rnaseq.nf" linenums="19"
-    workflow {
+    main:
+    // Crea el canal d'entrada des dels continguts d'un fitxer CSV
+    read_ch = channel.fromPath(params.input)
+        .splitCsv(header: true)
+        .map { row -> file(row.fastq_path) }
+```
 
-        main:
-        // Crea el canal d'entrada des d'un camí de fitxer
-        read_ch = channel.fromPath(params.input)
-    ```
+</CodeWalkthrough>
 
-Una cosa que és nova en comparació amb el que vau trobar al curs Hello Nextflow és que aquest CSV té una línia de capçalera, així que afegim `#!groovy header: true` a la crida `splitCsv()`.
-Això ens permet referenciar columnes per nom a l'operació `map`: `#!groovy row.fastq_path` extreu el camí del fitxer de la columna `fastq_path` de cada fila.
+Una cosa que és nova en comparació amb el que vau trobar al curs Hello Nextflow és que aquest CSV té una línia de capçalera, així que afegim `header: true{:nextflow}` a la crida `splitCsv()`.
+Això ens permet referenciar columnes per nom a l'operació `map`: `row.fastq_path{:nextflow}` extreu el camí del fitxer de la columna `fastq_path` de cada fila.
 
 La gestió d'entrada està actualitzada i el workflow està llest per provar.
 
@@ -156,82 +160,78 @@ La gestió d'entrada està actualitzada i el workflow està llest per provar.
 
 El workflow ara llegeix informació de mostres des d'un fitxer CSV i processa totes les mostres en paral·lel.
 
-```bash
+```bash runnable.outputDelay=0
 nextflow run rnaseq.nf -profile test
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `rnaseq.nf` [scruffy_wescoff] revision: 10f8b6f49d
+
+executor >  local (18)
+[30/659733] FASTQC (4)       | 6 of 6 ✔
+[71/0eda42] TRIM_GALORE (1)  | 6 of 6 ✔
+[7e/54ae09] HISAT2_ALIGN (6) | 6 of 6 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/rnaseq/results
+
+  fastqc_zip:
+    - fastqc/ENCSR000COQ1_1_fastqc.zip
+    - fastqc/ENCSR000COQ2_1_fastqc.zip
+    - fastqc/ENCSR000COR1_1_fastqc.zip
+    - fastqc/ENCSR000COR2_1_fastqc.zip
+    - fastqc/ENCSR000CPO1_1_fastqc.zip
+    - fastqc/ENCSR000CPO2_1_fastqc.zip
+
+  fastqc_html:
+    - fastqc/ENCSR000COQ1_1_fastqc.html
+    - fastqc/ENCSR000COQ2_1_fastqc.html
+    - fastqc/ENCSR000COR1_1_fastqc.html
+    - fastqc/ENCSR000COR2_1_fastqc.html
+    - fastqc/ENCSR000CPO1_1_fastqc.html
+    - fastqc/ENCSR000CPO2_1_fastqc.html
+
+  trimmed_reads:
+    - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+    - trimming/ENCSR000COQ2_1_trimmed.fq.gz
+    - trimming/ENCSR000COR1_1_trimmed.fq.gz
+    - trimming/ENCSR000COR2_1_trimmed.fq.gz
+    - trimming/ENCSR000CPO1_1_trimmed.fq.gz
+    - trimming/ENCSR000CPO2_1_trimmed.fq.gz
+
+  trimming_reports:
+    - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt
+
+  trimming_fastqc:
+    - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000COQ2_1_trimmed_fastqc.html, trimming/ENCSR000COQ2_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000COR1_1_trimmed_fastqc.html, trimming/ENCSR000COR1_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000COR2_1_trimmed_fastqc.html, trimming/ENCSR000COR2_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000CPO1_1_trimmed_fastqc.html, trimming/ENCSR000CPO1_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000CPO2_1_trimmed_fastqc.html, trimming/ENCSR000CPO2_1_trimmed_fastqc.zip]
+
+  bam:
+    - align/ENCSR000COQ1_1_trimmed.bam
+    - align/ENCSR000COQ2_1_trimmed.bam
+    - align/ENCSR000COR1_1_trimmed.bam
+    - align/ENCSR000COR2_1_trimmed.bam
+    - align/ENCSR000CPO1_1_trimmed.bam
+    - align/ENCSR000CPO2_1_trimmed.bam
+
+  align_log:
+    - align/ENCSR000COQ1_1_trimmed.hisat2.log
+    - align/ENCSR000COQ2_1_trimmed.hisat2.log
+    - align/ENCSR000COR1_1_trimmed.hisat2.log
+    - align/ENCSR000COR2_1_trimmed.hisat2.log
+    - align/ENCSR000CPO1_1_trimmed.hisat2.log
+    - align/ENCSR000CPO2_1_trimmed.hisat2.log
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `rnaseq.nf` [scruffy_wescoff] revision: 10f8b6f49d
-
-    executor >  local (18)
-    [30/659733] FASTQC (4)       | 6 of 6 ✔
-    [71/0eda42] TRIM_GALORE (1)  | 6 of 6 ✔
-    [7e/54ae09] HISAT2_ALIGN (6) | 6 of 6 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/rnaseq/results
-
-      fastqc_zip:
-        - fastqc/ENCSR000COQ1_1_fastqc.zip
-        - fastqc/ENCSR000COQ2_1_fastqc.zip
-        - fastqc/ENCSR000COR1_1_fastqc.zip
-        - fastqc/ENCSR000COR2_1_fastqc.zip
-        - fastqc/ENCSR000CPO1_1_fastqc.zip
-        - fastqc/ENCSR000CPO2_1_fastqc.zip
-
-      fastqc_html:
-        - fastqc/ENCSR000COQ1_1_fastqc.html
-        - fastqc/ENCSR000COQ2_1_fastqc.html
-        - fastqc/ENCSR000COR1_1_fastqc.html
-        - fastqc/ENCSR000COR2_1_fastqc.html
-        - fastqc/ENCSR000CPO1_1_fastqc.html
-        - fastqc/ENCSR000CPO2_1_fastqc.html
-
-      trimmed_reads:
-        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
-        - trimming/ENCSR000COQ2_1_trimmed.fq.gz
-        - trimming/ENCSR000COR1_1_trimmed.fq.gz
-        - trimming/ENCSR000COR2_1_trimmed.fq.gz
-        - trimming/ENCSR000CPO1_1_trimmed.fq.gz
-        - trimming/ENCSR000CPO2_1_trimmed.fq.gz
-
-      trimming_reports:
-        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt
-
-      trimming_fastqc:
-        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000COQ2_1_trimmed_fastqc.html, trimming/ENCSR000COQ2_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000COR1_1_trimmed_fastqc.html, trimming/ENCSR000COR1_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000COR2_1_trimmed_fastqc.html, trimming/ENCSR000COR2_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000CPO1_1_trimmed_fastqc.html, trimming/ENCSR000CPO1_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000CPO2_1_trimmed_fastqc.html, trimming/ENCSR000CPO2_1_trimmed_fastqc.zip]
-
-      bam:
-        - align/ENCSR000COQ1_1_trimmed.bam
-        - align/ENCSR000COQ2_1_trimmed.bam
-        - align/ENCSR000COR1_1_trimmed.bam
-        - align/ENCSR000COR2_1_trimmed.bam
-        - align/ENCSR000CPO1_1_trimmed.bam
-        - align/ENCSR000CPO2_1_trimmed.bam
-
-      align_log:
-        - align/ENCSR000COQ1_1_trimmed.hisat2.log
-        - align/ENCSR000COQ2_1_trimmed.hisat2.log
-        - align/ENCSR000COR1_1_trimmed.hisat2.log
-        - align/ENCSR000COR2_1_trimmed.hisat2.log
-        - align/ENCSR000CPO1_1_trimmed.hisat2.log
-        - align/ENCSR000CPO2_1_trimmed.hisat2.log
-    ```
 
 Aquesta vegada cada pas s'executa 6 vegades, una per cada mostra al fitxer CSV.
 
@@ -253,7 +253,7 @@ Afegir un pas d'agregació d'informes de QC que combini mètriques de totes les 
 Tot això produeix molts informes de QC, i no volem haver de buscar entre informes individuals.
 Aquest és el punt perfecte per posar un pas d'agregació d'informes MultiQC.
 
-Recordeu la comanda `multiqc` de la [Part 1](01_method.md):
+Recordeu la comanda `multiqc` de la [Part 1](01_method.mdx):
 
 ```bash
 multiqc . -n <output_name>.html
@@ -272,61 +272,61 @@ El procés MultiQC necessita un paràmetre de nom d'informe i les sortides de QC
 
 Afegiu un paràmetre per anomenar l'informe de sortida.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="11" hl_lines="8-9"
-    params {
-        // Entrada primària
-        input: Path
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=11 step="Abans"
+params {
+    // Entrada primària
+    input: Path
 
-        // Arxiu del genoma de referència
-        hisat2_index_zip: Path
+    // Arxiu del genoma de referència
+    hisat2_index_zip: Path
+}
+```
 
-        // ID de l'informe
-        report_id: String
-    }
-    ```
+```nextflow {8-9} title="rnaseq.nf" showLineNumbers startLineNumber=11 step="Després"
+params {
+    // Entrada primària
+    input: Path
 
-=== "Abans"
+    // Arxiu del genoma de referència
+    hisat2_index_zip: Path
 
-    ```groovy title="rnaseq.nf" linenums="11"
-    params {
-        // Entrada primària
-        input: Path
+    // ID de l'informe
+    report_id: String
+}
+```
 
-        // Arxiu del genoma de referència
-        hisat2_index_zip: Path
-    }
-    ```
+</CodeWalkthrough>
 
 Afegiu el valor per defecte de l'ID de l'informe al perfil de prova:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="7"
-    docker.enabled = true
+```nextflow title="nextflow.config" showLineNumbers step="Abans"
+docker.enabled = true
 
-    profiles {
-        test {
-            params.input = "${projectDir}/data/single-end.csv"
-            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
-            params.report_id = "all_single-end"
-        }
+profiles {
+    test {
+        params.input = "${projectDir}/data/single-end.csv"
+        params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
     }
-    ```
+}
+```
 
-=== "Abans"
+```nextflow {7} title="nextflow.config" showLineNumbers step="Després"
+docker.enabled = true
 
-    ```groovy title="nextflow.config" linenums="1"
-    docker.enabled = true
-
-    profiles {
-        test {
-            params.input = "${projectDir}/data/single-end.csv"
-            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
-        }
+profiles {
+    test {
+        params.input = "${projectDir}/data/single-end.csv"
+        params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+        params.report_id = "all_single-end"
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 A continuació, haurem de preparar les entrades per al procés MultiQC.
 
@@ -350,29 +350,29 @@ Les barregem en un sol canal, després utilitzem `.collect()` per agregar els in
 
 Afegiu aquestes línies al cos del workflow després de la crida `HISAT2_ALIGN`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="38" hl_lines="4-12"
-        // Alineament a un genoma de referència
-        HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=38 step="Abans"
+    // Alineament a un genoma de referència
+    HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
+```
 
-        // Generació d'informes de QC complets
-        multiqc_files_ch = channel.empty().mix(
-            FASTQC.out.zip,
-            FASTQC.out.html,
-            TRIM_GALORE.out.trimming_reports,
-            TRIM_GALORE.out.fastqc_reports,
-            HISAT2_ALIGN.out.log,
-        )
-        multiqc_files_list = multiqc_files_ch.collect()
-    ```
+```nextflow {4-12} title="rnaseq.nf" showLineNumbers startLineNumber=38 step="Després"
+    // Alineament a un genoma de referència
+    HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
 
-=== "Abans"
+    // Generació d'informes de QC complets
+    multiqc_files_ch = channel.empty().mix(
+        FASTQC.out.zip,
+        FASTQC.out.html,
+        TRIM_GALORE.out.trimming_reports,
+        TRIM_GALORE.out.fastqc_reports,
+        HISAT2_ALIGN.out.log,
+    )
+    multiqc_files_list = multiqc_files_ch.collect()
+```
 
-    ```groovy title="rnaseq.nf" linenums="38"
-        // Alineament a un genoma de referència
-        HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
-    ```
+</CodeWalkthrough>
 
 L'ús de variables intermèdies fa que cada pas sigui clar: `multiqc_files_ch` conté tots els fitxers de QC individuals barrejats en un canal, i `multiqc_files_list` és el paquet recollit llest per passar a MultiQC.
 
@@ -386,57 +386,57 @@ Obriu `modules/multiqc.nf` i examineu l'esquema de la definició del procés.
 
 Aneu endavant i ompliu la definició del procés per vosaltres mateixos utilitzant la informació proporcionada anteriorment, després comproveu el vostre treball contra la solució a la pestanya "Després" a continuació.
 
-=== "Abans"
+<CodeWalkthrough>
 
-    ```groovy title="modules/multiqc.nf" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/multiqc.nf" showLineNumbers step="Abans"
+#!/usr/bin/env nextflow
 
-    /*
-     * Agrega informes de QC amb MultiQC
-     */
-    process MULTIQC {
+/*
+ * Agrega informes de QC amb MultiQC
+ */
+process MULTIQC {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-=== "Després"
+```nextflow {8,11,12,15,16,20} title="modules/multiqc.nf" showLineNumbers step="Després"
+#!/usr/bin/env nextflow
 
-    ```groovy title="modules/multiqc.nf" linenums="1" hl_lines="8 11 12 15 16 20"
-    #!/usr/bin/env nextflow
+/*
+ * Agrega informes de QC amb MultiQC
+ */
+process MULTIQC {
 
-    /*
-     * Agrega informes de QC amb MultiQC
-     */
-    process MULTIQC {
+    container "community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c"
 
-        container "community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c"
+    input:
+    path '*'
+    val output_name
 
-        input:
-        path '*'
-        val output_name
+    output:
+    path "${output_name}.html", emit: report
+    path "${output_name}_data", emit: data
 
-        output:
-        path "${output_name}.html", emit: report
-        path "${output_name}_data", emit: data
+    script:
+    """
+    multiqc . -n ${output_name}.html
+    """
+}
+```
 
-        script:
-        """
-        multiqc . -n ${output_name}.html
-        """
-    }
-    ```
+</CodeWalkthrough>
 
-Aquest procés utilitza `#!groovy path '*'` com a qualificador d'entrada per als fitxers de QC.
+Aquest procés utilitza `path '*'{:nextflow}` com a qualificador d'entrada per als fitxers de QC.
 El comodí `'*'` indica a Nextflow que prepari tots els fitxers recollits al directori de treball sense requerir noms específics.
 L'entrada `val output_name` és una cadena que controla el nom del fitxer de l'informe.
 
@@ -448,24 +448,24 @@ Un cop hàgiu completat això, el procés està llest per utilitzar.
 
 Afegiu la declaració d'importació a `rnaseq.nf`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="3" hl_lines="5"
-    // Declaracions INCLUDE de mòduls
-    include { FASTQC } from './modules/fastqc.nf'
-    include { TRIM_GALORE } from './modules/trim_galore.nf'
-    include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
-    include { MULTIQC } from './modules/multiqc.nf'
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=3 step="Abans"
+// Declaracions INCLUDE de mòduls
+include { FASTQC } from './modules/fastqc.nf'
+include { TRIM_GALORE } from './modules/trim_galore.nf'
+include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
+```
 
-=== "Abans"
+```nextflow {5} title="rnaseq.nf" showLineNumbers startLineNumber=3 step="Després"
+// Declaracions INCLUDE de mòduls
+include { FASTQC } from './modules/fastqc.nf'
+include { TRIM_GALORE } from './modules/trim_galore.nf'
+include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
+include { MULTIQC } from './modules/multiqc.nf'
+```
 
-    ```groovy title="rnaseq.nf" linenums="3"
-    // Declaracions INCLUDE de mòduls
-    include { FASTQC } from './modules/fastqc.nf'
-    include { TRIM_GALORE } from './modules/trim_galore.nf'
-    include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
-    ```
+</CodeWalkthrough>
 
 Ara afegiu la crida al procés al workflow.
 
@@ -473,18 +473,18 @@ Ara afegiu la crida al procés al workflow.
 
 Passeu els fitxers de QC recollits i l'ID de l'informe al procés `MULTIQC`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="49" hl_lines="2"
-        multiqc_files_list = multiqc_files_ch.collect()
-        MULTIQC(multiqc_files_list, params.report_id)
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=49 step="Abans"
+    multiqc_files_list = multiqc_files_ch.collect()
+```
 
-=== "Abans"
+```nextflow {2} title="rnaseq.nf" showLineNumbers startLineNumber=49 step="Després"
+    multiqc_files_list = multiqc_files_ch.collect()
+    MULTIQC(multiqc_files_list, params.report_id)
+```
 
-    ```groovy title="rnaseq.nf" linenums="49"
-        multiqc_files_list = multiqc_files_ch.collect()
-    ```
+</CodeWalkthrough>
 
 El procés MultiQC ara està connectat al workflow.
 
@@ -496,35 +496,35 @@ Hem d'afegir les sortides de MultiQC a la declaració de publicació i configura
 
 Afegiu les sortides de MultiQC a la secció `publish:`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="52" hl_lines="9-10"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-        trimmed_reads = TRIM_GALORE.out.trimmed_reads
-        trimming_reports = TRIM_GALORE.out.trimming_reports
-        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
-        bam = HISAT2_ALIGN.out.bam
-        align_log = HISAT2_ALIGN.out.log
-        multiqc_report = MULTIQC.out.report
-        multiqc_data = MULTIQC.out.data
-    }
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=52 step="Abans"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+    trimmed_reads = TRIM_GALORE.out.trimmed_reads
+    trimming_reports = TRIM_GALORE.out.trimming_reports
+    trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+    bam = HISAT2_ALIGN.out.bam
+    align_log = HISAT2_ALIGN.out.log
+}
+```
 
-=== "Abans"
+```nextflow {9-10} title="rnaseq.nf" showLineNumbers startLineNumber=52 step="Després"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+    trimmed_reads = TRIM_GALORE.out.trimmed_reads
+    trimming_reports = TRIM_GALORE.out.trimming_reports
+    trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+    bam = HISAT2_ALIGN.out.bam
+    align_log = HISAT2_ALIGN.out.log
+    multiqc_report = MULTIQC.out.report
+    multiqc_data = MULTIQC.out.data
+}
+```
 
-    ```groovy title="rnaseq.nf" linenums="52"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-        trimmed_reads = TRIM_GALORE.out.trimmed_reads
-        trimming_reports = TRIM_GALORE.out.trimming_reports
-        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
-        bam = HISAT2_ALIGN.out.bam
-        align_log = HISAT2_ALIGN.out.log
-    }
-    ```
+</CodeWalkthrough>
 
 A continuació, haurem de dir a Nextflow on posar aquestes sortides.
 
@@ -532,29 +532,29 @@ A continuació, haurem de dir a Nextflow on posar aquestes sortides.
 
 Afegiu entrades per als objectius de MultiQC al bloc `output {}`, publicant-los en un subdirectori `multiqc/`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="82" hl_lines="4-9"
-        align_log {
-            path 'align'
-        }
-        multiqc_report {
-            path 'multiqc'
-        }
-        multiqc_data {
-            path 'multiqc'
-        }
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=82 step="Abans"
+    align_log {
+        path 'align'
     }
-    ```
+}
+```
 
-=== "Abans"
-
-    ```groovy title="rnaseq.nf" linenums="82"
-        align_log {
-            path 'align'
-        }
+```nextflow {4-9} title="rnaseq.nf" showLineNumbers startLineNumber=82 step="Després"
+    align_log {
+        path 'align'
     }
-    ```
+    multiqc_report {
+        path 'multiqc'
+    }
+    multiqc_data {
+        path 'multiqc'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 La configuració de sortida està completa.
 
@@ -562,87 +562,83 @@ La configuració de sortida està completa.
 
 Utilitzem `-resume` perquè els passos de processament anteriors estiguin en memòria cau i només s'executi el nou pas MultiQC.
 
-```bash
+```bash runnable.outputDelay=0
 nextflow run rnaseq.nf -profile test -resume
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `rnaseq.nf` [focused_moriondo] revision: 481681975c
+
+executor >  local (1)
+[5e/600a76] FASTQC (6)       | 6 of 6, cached: 6 ✔
+[ad/f92df3] TRIM_GALORE (3)  | 6 of 6, cached: 6 ✔
+[85/008c39] HISAT2_ALIGN (4) | 6 of 6, cached: 6 ✔
+[2b/6fa3ea] MULTIQC          | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/rnaseq/results
+
+  fastqc_zip:
+    - fastqc/ENCSR000COQ1_1_fastqc.zip
+    - fastqc/ENCSR000COQ2_1_fastqc.zip
+    - fastqc/ENCSR000COR1_1_fastqc.zip
+    - fastqc/ENCSR000COR2_1_fastqc.zip
+    - fastqc/ENCSR000CPO1_1_fastqc.zip
+    - fastqc/ENCSR000CPO2_1_fastqc.zip
+
+  fastqc_html:
+    - fastqc/ENCSR000COQ1_1_fastqc.html
+    - fastqc/ENCSR000COQ2_1_fastqc.html
+    - fastqc/ENCSR000COR1_1_fastqc.html
+    - fastqc/ENCSR000COR2_1_fastqc.html
+    - fastqc/ENCSR000CPO1_1_fastqc.html
+    - fastqc/ENCSR000CPO2_1_fastqc.html
+
+  trimmed_reads:
+    - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+    - trimming/ENCSR000COQ2_1_trimmed.fq.gz
+    - trimming/ENCSR000COR1_1_trimmed.fq.gz
+    - trimming/ENCSR000COR2_1_trimmed.fq.gz
+    - trimming/ENCSR000CPO1_1_trimmed.fq.gz
+    - trimming/ENCSR000CPO2_1_trimmed.fq.gz
+
+  trimming_reports:
+    - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt
+
+  trimming_fastqc:
+    - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000COQ2_1_trimmed_fastqc.html, trimming/ENCSR000COQ2_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000COR1_1_trimmed_fastqc.html, trimming/ENCSR000COR1_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000COR2_1_trimmed_fastqc.html, trimming/ENCSR000COR2_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000CPO1_1_trimmed_fastqc.html, trimming/ENCSR000CPO1_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000CPO2_1_trimmed_fastqc.html, trimming/ENCSR000CPO2_1_trimmed_fastqc.zip]
+
+  bam:
+    - align/ENCSR000COQ1_1_trimmed.bam
+    - align/ENCSR000COQ2_1_trimmed.bam
+    - align/ENCSR000COR1_1_trimmed.bam
+    - align/ENCSR000COR2_1_trimmed.bam
+    - align/ENCSR000CPO1_1_trimmed.bam
+    - align/ENCSR000CPO2_1_trimmed.bam
+
+  align_log:
+    - align/ENCSR000COQ1_1_trimmed.hisat2.log
+    - align/ENCSR000COQ2_1_trimmed.hisat2.log
+    - align/ENCSR000COR1_1_trimmed.hisat2.log
+    - align/ENCSR000COR2_1_trimmed.hisat2.log
+    - align/ENCSR000CPO1_1_trimmed.hisat2.log
+    - align/ENCSR000CPO2_1_trimmed.hisat2.log
+
+  multiqc_report: multiqc/all_single-end.html
+
+  multiqc_data: multiqc/all_single-end_data
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `rnaseq.nf` [focused_moriondo] revision: 481681975c
-
-    executor >  local (1)
-    [5e/600a76] FASTQC (6)       | 6 of 6, cached: 6 ✔
-    [ad/f92df3] TRIM_GALORE (3)  | 6 of 6, cached: 6 ✔
-    [85/008c39] HISAT2_ALIGN (4) | 6 of 6, cached: 6 ✔
-    [2b/6fa3ea] MULTIQC          | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/rnaseq/results
-
-      fastqc_zip:
-        - fastqc/ENCSR000COQ1_1_fastqc.zip
-        - fastqc/ENCSR000COQ2_1_fastqc.zip
-        - fastqc/ENCSR000COR1_1_fastqc.zip
-        - fastqc/ENCSR000COR2_1_fastqc.zip
-        - fastqc/ENCSR000CPO1_1_fastqc.zip
-        - fastqc/ENCSR000CPO2_1_fastqc.zip
-
-      fastqc_html:
-        - fastqc/ENCSR000COQ1_1_fastqc.html
-        - fastqc/ENCSR000COQ2_1_fastqc.html
-        - fastqc/ENCSR000COR1_1_fastqc.html
-        - fastqc/ENCSR000COR2_1_fastqc.html
-        - fastqc/ENCSR000CPO1_1_fastqc.html
-        - fastqc/ENCSR000CPO2_1_fastqc.html
-
-      trimmed_reads:
-        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
-        - trimming/ENCSR000COQ2_1_trimmed.fq.gz
-        - trimming/ENCSR000COR1_1_trimmed.fq.gz
-        - trimming/ENCSR000COR2_1_trimmed.fq.gz
-        - trimming/ENCSR000CPO1_1_trimmed.fq.gz
-        - trimming/ENCSR000CPO2_1_trimmed.fq.gz
-
-      trimming_reports:
-        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt
-
-      trimming_fastqc:
-        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000COQ2_1_trimmed_fastqc.html, trimming/ENCSR000COQ2_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000COR1_1_trimmed_fastqc.html, trimming/ENCSR000COR1_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000COR2_1_trimmed_fastqc.html, trimming/ENCSR000COR2_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000CPO1_1_trimmed_fastqc.html, trimming/ENCSR000CPO1_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000CPO2_1_trimmed_fastqc.html, trimming/ENCSR000CPO2_1_trimmed_fastqc.zip]
-
-      bam:
-        - align/ENCSR000COQ1_1_trimmed.bam
-        - align/ENCSR000COQ2_1_trimmed.bam
-        - align/ENCSR000COR1_1_trimmed.bam
-        - align/ENCSR000COR2_1_trimmed.bam
-        - align/ENCSR000CPO1_1_trimmed.bam
-        - align/ENCSR000CPO2_1_trimmed.bam
-
-      align_log:
-        - align/ENCSR000COQ1_1_trimmed.hisat2.log
-        - align/ENCSR000COQ2_1_trimmed.hisat2.log
-        - align/ENCSR000COR1_1_trimmed.hisat2.log
-        - align/ENCSR000COR2_1_trimmed.hisat2.log
-        - align/ENCSR000CPO1_1_trimmed.hisat2.log
-        - align/ENCSR000CPO2_1_trimmed.hisat2.log
-
-      multiqc_report: multiqc/all_single-end.html
-
-      multiqc_data: multiqc/all_single-end_data
-    ```
 
 S'ha afegit una sola crida a MULTIQC després de les crides de procés en memòria cau.
 
@@ -652,40 +648,43 @@ Podeu trobar les sortides de MultiQC al directori de resultats.
 tree -L 2 -l results/multiqc
 ```
 
-??? abstract "Contingut del directori"
+<details class="abstract">
+<summary>Contingut del directori</summary>
 
-    ```console
-    results/multiqc
-    ├── all_single-end.html
-    └── all_single-end_data
-        ├── cutadapt_filtered_reads_plot.txt
-        ├── cutadapt_trimmed_sequences_plot_3_Counts.txt
-        ├── cutadapt_trimmed_sequences_plot_3_Obs_Exp.txt
-        ├── fastqc-status-check-heatmap.txt
-        ├── fastqc_adapter_content_plot.txt
-        ├── fastqc_overrepresented_sequences_plot.txt
-        ├── fastqc_per_base_n_content_plot.txt
-        ├── fastqc_per_base_sequence_quality_plot.txt
-        ├── fastqc_per_sequence_gc_content_plot_Counts.txt
-        ├── fastqc_per_sequence_gc_content_plot_Percentages.txt
-        ├── fastqc_per_sequence_quality_scores_plot.txt
-        ├── fastqc_sequence_counts_plot.txt
-        ├── fastqc_sequence_duplication_levels_plot.txt
-        ├── fastqc_sequence_length_distribution_plot.txt
-        ├── fastqc_top_overrepresented_sequences_table.txt
-        ├── hisat2_se_plot.txt
-        ├── llms-full.txt
-        ├── multiqc.log
-        ├── multiqc.parquet
-        ├── multiqc_citations.txt
-        ├── multiqc_cutadapt.txt
-        ├── multiqc_data.json
-        ├── multiqc_fastqc.txt
-        ├── multiqc_general_stats.txt
-        ├── multiqc_hisat2.txt
-        ├── multiqc_software_versions.txt
-        └── multiqc_sources.txt
-    ```
+```console
+results/multiqc
+├── all_single-end.html
+└── all_single-end_data
+    ├── cutadapt_filtered_reads_plot.txt
+    ├── cutadapt_trimmed_sequences_plot_3_Counts.txt
+    ├── cutadapt_trimmed_sequences_plot_3_Obs_Exp.txt
+    ├── fastqc-status-check-heatmap.txt
+    ├── fastqc_adapter_content_plot.txt
+    ├── fastqc_overrepresented_sequences_plot.txt
+    ├── fastqc_per_base_n_content_plot.txt
+    ├── fastqc_per_base_sequence_quality_plot.txt
+    ├── fastqc_per_sequence_gc_content_plot_Counts.txt
+    ├── fastqc_per_sequence_gc_content_plot_Percentages.txt
+    ├── fastqc_per_sequence_quality_scores_plot.txt
+    ├── fastqc_sequence_counts_plot.txt
+    ├── fastqc_sequence_duplication_levels_plot.txt
+    ├── fastqc_sequence_length_distribution_plot.txt
+    ├── fastqc_top_overrepresented_sequences_table.txt
+    ├── hisat2_se_plot.txt
+    ├── llms-full.txt
+    ├── multiqc.log
+    ├── multiqc.parquet
+    ├── multiqc_citations.txt
+    ├── multiqc_cutadapt.txt
+    ├── multiqc_data.json
+    ├── multiqc_fastqc.txt
+    ├── multiqc_general_stats.txt
+    ├── multiqc_hisat2.txt
+    ├── multiqc_software_versions.txt
+    └── multiqc_sources.txt
+```
+
+</details>
 
 Aquest últim fitxer `all_single-end.html` és l'informe agregat complet, convenientment empaquetat en un fitxer HTML fàcil de navegar.
 
@@ -724,7 +723,7 @@ Ara actualitzeu els paràmetres i la gestió d'entrada al nou fitxer.
 
 Proporcionem un segon fitxer CSV que conté IDs de mostra i camins de fitxers FASTQ emparellats al directori `data/`.
 
-```csv title="data/paired-end.csv" linenums="1"
+```csv title="data/paired-end.csv" showLineNumbers
 sample_id,fastq_1,fastq_2
 ENCSR000COQ1,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000COQ1_1.fastq.gz,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000COQ1_2.fastq.gz
 ENCSR000COQ2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000COQ2_1.fastq.gz,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000COQ2_2.fastq.gz
@@ -736,38 +735,38 @@ ENCSR000CPO2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO2_1.f
 
 Afegiu un perfil `test_pe` a `nextflow.config` que apunti a aquest fitxer i utilitzi un ID d'informe paired-end.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="9-13"
-    docker.enabled = true
+```nextflow title="nextflow.config" showLineNumbers step="Abans"
+docker.enabled = true
 
-    profiles {
-        test {
-            params.input = "${projectDir}/data/single-end.csv"
-            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
-            params.report_id = "all_single-end"
-        }
-        test_pe {
-            params.input = "${projectDir}/data/paired-end.csv"
-            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
-            params.report_id = "all_paired-end"
-        }
+profiles {
+    test {
+        params.input = "${projectDir}/data/single-end.csv"
+        params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+        params.report_id = "all_single-end"
     }
-    ```
+}
+```
 
-=== "Abans"
+```nextflow {9-13} title="nextflow.config" showLineNumbers step="Després"
+docker.enabled = true
 
-    ```groovy title="nextflow.config" linenums="1"
-    docker.enabled = true
-
-    profiles {
-        test {
-            params.input = "${projectDir}/data/single-end.csv"
-            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
-            params.report_id = "all_single-end"
-        }
+profiles {
+    test {
+        params.input = "${projectDir}/data/single-end.csv"
+        params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+        params.report_id = "all_single-end"
     }
-    ```
+    test_pe {
+        params.input = "${projectDir}/data/paired-end.csv"
+        params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+        params.report_id = "all_paired-end"
+    }
+}
+```
+
+</CodeWalkthrough>
 
 El perfil de prova per a dades paired-end està llest.
 
@@ -775,23 +774,23 @@ El perfil de prova per a dades paired-end està llest.
 
 L'operador `.map()` necessita agafar ambdós camins de fitxer FASTQ i retornar-los com una llista.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq_pe.nf" linenums="25" hl_lines="4"
-        // Crea el canal d'entrada des dels continguts d'un fitxer CSV
-        read_ch = channel.fromPath(params.input)
-            .splitCsv(header: true)
-            .map { row -> [file(row.fastq_1), file(row.fastq_2)] }
-    ```
+```nextflow title="rnaseq_pe.nf" showLineNumbers startLineNumber=25 step="Abans"
+    // Crea el canal d'entrada des dels continguts d'un fitxer CSV
+    read_ch = channel.fromPath(params.input)
+        .splitCsv(header: true)
+        .map { row -> file(row.fastq_path) }
+```
 
-=== "Abans"
+```nextflow {4} title="rnaseq_pe.nf" showLineNumbers startLineNumber=25 step="Després"
+    // Crea el canal d'entrada des dels continguts d'un fitxer CSV
+    read_ch = channel.fromPath(params.input)
+        .splitCsv(header: true)
+        .map { row -> [file(row.fastq_1), file(row.fastq_2)] }
+```
 
-    ```groovy title="rnaseq_pe.nf" linenums="25"
-        // Crea el canal d'entrada des dels continguts d'un fitxer CSV
-        read_ch = channel.fromPath(params.input)
-            .splitCsv(header: true)
-            .map { row -> file(row.fastq_path) }
-    ```
+</CodeWalkthrough>
 
 La gestió d'entrada està configurada per a dades paired-end.
 
@@ -806,37 +805,37 @@ cp modules/fastqc.nf modules/fastqc_pe.nf
 L'entrada del procés FASTQC no necessita canviar — quan Nextflow rep una llista de dos fitxers, prepara ambdós i `reads` s'expandeix a ambdós noms de fitxer.
 L'únic canvi necessari és al bloc de sortida: com ara obtenim dos informes FastQC per mostra, canviem de patrons basats en `simpleName` a comodins.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="modules/fastqc_pe.nf" linenums="10" hl_lines="2 3"
-        output:
-        path "*_fastqc.zip", emit: zip
-        path "*_fastqc.html", emit: html
-    ```
+```nextflow title="modules/fastqc_pe.nf" showLineNumbers startLineNumber=10 step="Abans"
+    output:
+    path "${reads.simpleName}_fastqc.zip", emit: zip
+    path "${reads.simpleName}_fastqc.html", emit: html
+```
 
-=== "Abans"
+```nextflow {2,3} title="modules/fastqc_pe.nf" showLineNumbers startLineNumber=10 step="Després"
+    output:
+    path "*_fastqc.zip", emit: zip
+    path "*_fastqc.html", emit: html
+```
 
-    ```groovy title="modules/fastqc_pe.nf" linenums="10"
-        output:
-        path "${reads.simpleName}_fastqc.zip", emit: zip
-        path "${reads.simpleName}_fastqc.html", emit: html
-    ```
+</CodeWalkthrough>
 
 Això generalitza el procés d'una manera que el fa capaç de gestionar dades single-end o paired-end.
 
 Actualitzeu la importació a `rnaseq_pe.nf` per utilitzar la versió paired-end:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq_pe.nf" linenums="4" hl_lines="1"
-    include { FASTQC } from './modules/fastqc_pe.nf'
-    ```
+```nextflow title="rnaseq_pe.nf" showLineNumbers startLineNumber=4 step="Abans"
+include { FASTQC } from './modules/fastqc.nf'
+```
 
-=== "Abans"
+```nextflow {1} title="rnaseq_pe.nf" showLineNumbers startLineNumber=4 step="Després"
+include { FASTQC } from './modules/fastqc_pe.nf'
+```
 
-    ```groovy title="rnaseq_pe.nf" linenums="4"
-    include { FASTQC } from './modules/fastqc.nf'
-    ```
+</CodeWalkthrough>
 
 El mòdul FASTQC i la seva importació estan actualitzats per a dades paired-end.
 
@@ -854,54 +853,54 @@ Aquest mòdul necessita canvis més substancials:
 - La comanda afegeix la bandera `--paired` i pren ambdós fitxers de lectura
 - La sortida canvia per reflectir les convencions de nomenclatura paired-end de Trim Galore, produint informes FastQC separats per a cada fitxer de lectura
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="modules/trim_galore_pe.nf" linenums="8" hl_lines="2 5 7 8 12"
-        input:
-        tuple path(read1), path(read2)
+```nextflow title="modules/trim_galore_pe.nf" showLineNumbers startLineNumber=8 step="Abans"
+    input:
+    path reads
 
-        output:
-        tuple path("*_val_1.fq.gz"), path("*_val_2.fq.gz"), emit: trimmed_reads
-        path "*_trimming_report.txt", emit: trimming_reports
-        path "*_val_1_fastqc.{zip,html}", emit: fastqc_reports_1
-        path "*_val_2_fastqc.{zip,html}", emit: fastqc_reports_2
+    output:
+    path "${reads.simpleName}_trimmed.fq.gz", emit: trimmed_reads
+    path "${reads}_trimming_report.txt", emit: trimming_reports
+    path "${reads.simpleName}_trimmed_fastqc.{zip,html}", emit: fastqc_reports
 
-        script:
-        """
-        trim_galore --fastqc --paired ${read1} ${read2}
-        """
-    ```
+    script:
+    """
+    trim_galore --fastqc ${reads}
+    """
+```
 
-=== "Abans"
+```nextflow {2,5,7,8,12} title="modules/trim_galore_pe.nf" showLineNumbers startLineNumber=8 step="Després"
+    input:
+    tuple path(read1), path(read2)
 
-    ```groovy title="modules/trim_galore_pe.nf" linenums="8"
-        input:
-        path reads
+    output:
+    tuple path("*_val_1.fq.gz"), path("*_val_2.fq.gz"), emit: trimmed_reads
+    path "*_trimming_report.txt", emit: trimming_reports
+    path "*_val_1_fastqc.{zip,html}", emit: fastqc_reports_1
+    path "*_val_2_fastqc.{zip,html}", emit: fastqc_reports_2
 
-        output:
-        path "${reads.simpleName}_trimmed.fq.gz", emit: trimmed_reads
-        path "${reads}_trimming_report.txt", emit: trimming_reports
-        path "${reads.simpleName}_trimmed_fastqc.{zip,html}", emit: fastqc_reports
+    script:
+    """
+    trim_galore --fastqc --paired ${read1} ${read2}
+    """
+```
 
-        script:
-        """
-        trim_galore --fastqc ${reads}
-        """
-    ```
+</CodeWalkthrough>
 
 Actualitzeu la importació a `rnaseq_pe.nf`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq_pe.nf" linenums="5" hl_lines="1"
-    include { TRIM_GALORE } from './modules/trim_galore_pe.nf'
-    ```
+```nextflow title="rnaseq_pe.nf" showLineNumbers startLineNumber=5 step="Abans"
+include { TRIM_GALORE } from './modules/trim_galore.nf'
+```
 
-=== "Abans"
+```nextflow {1} title="rnaseq_pe.nf" showLineNumbers startLineNumber=5 step="Després"
+include { TRIM_GALORE } from './modules/trim_galore_pe.nf'
+```
 
-    ```groovy title="rnaseq_pe.nf" linenums="5"
-    include { TRIM_GALORE } from './modules/trim_galore.nf'
-    ```
+</CodeWalkthrough>
 
 El mòdul TRIM_GALORE i la seva importació estan actualitzats per a dades paired-end.
 
@@ -919,59 +918,59 @@ Aquest mòdul necessita canvis similars:
 - La comanda HISAT2 canvia de `-U` (no emparellat) a arguments de lectura `-1` i `-2` (emparellats)
 - Tots els usos de `reads.simpleName` canvien a `read1.simpleName` ja que ara referenciem un membre específic de la parella
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="modules/hisat2_align_pe.nf" linenums="8" hl_lines="2 6 7 12 13 14"
-        input:
-        tuple path(read1), path(read2)
-        path index_zip
+```nextflow title="modules/hisat2_align_pe.nf" showLineNumbers startLineNumber=8 step="Abans"
+    input:
+    path reads
+    path index_zip
 
-        output:
-        path "${read1.simpleName}.bam", emit: bam
-        path "${read1.simpleName}.hisat2.log", emit: log
+    output:
+    path "${reads.simpleName}.bam", emit: bam
+    path "${reads.simpleName}.hisat2.log", emit: log
 
-        script:
-        """
-        tar -xzvf ${index_zip}
-        hisat2 -x ${index_zip.simpleName} -1 ${read1} -2 ${read2} \
-            --new-summary --summary-file ${read1.simpleName}.hisat2.log | \
-            samtools view -bS -o ${read1.simpleName}.bam
-        """
-    ```
+    script:
+    """
+    tar -xzvf ${index_zip}
+    hisat2 -x ${index_zip.simpleName} -U ${reads} \
+        --new-summary --summary-file ${reads.simpleName}.hisat2.log | \
+        samtools view -bS -o ${reads.simpleName}.bam
+    """
+```
 
-=== "Abans"
+```nextflow {2,6,7,12,13,14} title="modules/hisat2_align_pe.nf" showLineNumbers startLineNumber=8 step="Després"
+    input:
+    tuple path(read1), path(read2)
+    path index_zip
 
-    ```groovy title="modules/hisat2_align_pe.nf" linenums="8"
-        input:
-        path reads
-        path index_zip
+    output:
+    path "${read1.simpleName}.bam", emit: bam
+    path "${read1.simpleName}.hisat2.log", emit: log
 
-        output:
-        path "${reads.simpleName}.bam", emit: bam
-        path "${reads.simpleName}.hisat2.log", emit: log
+    script:
+    """
+    tar -xzvf ${index_zip}
+    hisat2 -x ${index_zip.simpleName} -1 ${read1} -2 ${read2} \
+        --new-summary --summary-file ${read1.simpleName}.hisat2.log | \
+        samtools view -bS -o ${read1.simpleName}.bam
+    """
+```
 
-        script:
-        """
-        tar -xzvf ${index_zip}
-        hisat2 -x ${index_zip.simpleName} -U ${reads} \
-            --new-summary --summary-file ${reads.simpleName}.hisat2.log | \
-            samtools view -bS -o ${reads.simpleName}.bam
-        """
-    ```
+</CodeWalkthrough>
 
 Actualitzeu la importació a `rnaseq_pe.nf`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq_pe.nf" linenums="6" hl_lines="1"
-    include { HISAT2_ALIGN } from './modules/hisat2_align_pe.nf'
-    ```
+```nextflow title="rnaseq_pe.nf" showLineNumbers startLineNumber=6 step="Abans"
+include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
+```
 
-=== "Abans"
+```nextflow {1} title="rnaseq_pe.nf" showLineNumbers startLineNumber=6 step="Després"
+include { HISAT2_ALIGN } from './modules/hisat2_align_pe.nf'
+```
 
-    ```groovy title="rnaseq_pe.nf" linenums="6"
-    include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
-    ```
+</CodeWalkthrough>
 
 El mòdul HISAT2_ALIGN i la seva importació estan actualitzats per a dades paired-end.
 
@@ -980,30 +979,30 @@ El mòdul HISAT2_ALIGN i la seva importació estan actualitzats per a dades pair
 El procés `TRIM_GALORE` paired-end ara produeix dos canals d'informes FastQC separats (`fastqc_reports_1` i `fastqc_reports_2`) en lloc d'un.
 Actualitzeu el bloc `.mix()` a `rnaseq_pe.nf` per incloure ambdós:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq_pe.nf" linenums="40" hl_lines="5 6"
-        multiqc_files_ch = channel.empty().mix(
-            FASTQC.out.zip,
-            FASTQC.out.html,
-            TRIM_GALORE.out.trimming_reports,
-            TRIM_GALORE.out.fastqc_reports_1,
-            TRIM_GALORE.out.fastqc_reports_2,
-            HISAT2_ALIGN.out.log,
-        )
-    ```
+```nextflow title="rnaseq_pe.nf" showLineNumbers startLineNumber=40 step="Abans"
+    multiqc_files_ch = channel.empty().mix(
+        FASTQC.out.zip,
+        FASTQC.out.html,
+        TRIM_GALORE.out.trimming_reports,
+        TRIM_GALORE.out.fastqc_reports,
+        HISAT2_ALIGN.out.log,
+    )
+```
 
-=== "Abans"
+```nextflow {5,6} title="rnaseq_pe.nf" showLineNumbers startLineNumber=40 step="Després"
+    multiqc_files_ch = channel.empty().mix(
+        FASTQC.out.zip,
+        FASTQC.out.html,
+        TRIM_GALORE.out.trimming_reports,
+        TRIM_GALORE.out.fastqc_reports_1,
+        TRIM_GALORE.out.fastqc_reports_2,
+        HISAT2_ALIGN.out.log,
+    )
+```
 
-    ```groovy title="rnaseq_pe.nf" linenums="40"
-        multiqc_files_ch = channel.empty().mix(
-            FASTQC.out.zip,
-            FASTQC.out.html,
-            TRIM_GALORE.out.trimming_reports,
-            TRIM_GALORE.out.fastqc_reports,
-            HISAT2_ALIGN.out.log,
-        )
-    ```
+</CodeWalkthrough>
 
 L'agregació MultiQC ara inclou ambdós conjunts d'informes FastQC paired-end.
 
@@ -1013,71 +1012,71 @@ La secció `publish:` i el bloc `output {}` també necessiten reflectir els dos 
 
 Actualitzeu la secció `publish:` a `rnaseq_pe.nf`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq_pe.nf" linenums="52" hl_lines="6-7"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-        trimmed_reads = TRIM_GALORE.out.trimmed_reads
-        trimming_reports = TRIM_GALORE.out.trimming_reports
-        trimming_fastqc_1 = TRIM_GALORE.out.fastqc_reports_1
-        trimming_fastqc_2 = TRIM_GALORE.out.fastqc_reports_2
-        bam = HISAT2_ALIGN.out.bam
-        align_log = HISAT2_ALIGN.out.log
-        multiqc_report = MULTIQC.out.report
-        multiqc_data = MULTIQC.out.data
-    }
-    ```
+```nextflow title="rnaseq_pe.nf" showLineNumbers startLineNumber=52 step="Abans"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+    trimmed_reads = TRIM_GALORE.out.trimmed_reads
+    trimming_reports = TRIM_GALORE.out.trimming_reports
+    trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+    bam = HISAT2_ALIGN.out.bam
+    align_log = HISAT2_ALIGN.out.log
+    multiqc_report = MULTIQC.out.report
+    multiqc_data = MULTIQC.out.data
+}
+```
 
-=== "Abans"
+```nextflow {6-7} title="rnaseq_pe.nf" showLineNumbers startLineNumber=52 step="Després"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+    trimmed_reads = TRIM_GALORE.out.trimmed_reads
+    trimming_reports = TRIM_GALORE.out.trimming_reports
+    trimming_fastqc_1 = TRIM_GALORE.out.fastqc_reports_1
+    trimming_fastqc_2 = TRIM_GALORE.out.fastqc_reports_2
+    bam = HISAT2_ALIGN.out.bam
+    align_log = HISAT2_ALIGN.out.log
+    multiqc_report = MULTIQC.out.report
+    multiqc_data = MULTIQC.out.data
+}
+```
 
-    ```groovy title="rnaseq_pe.nf" linenums="52"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-        trimmed_reads = TRIM_GALORE.out.trimmed_reads
-        trimming_reports = TRIM_GALORE.out.trimming_reports
-        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
-        bam = HISAT2_ALIGN.out.bam
-        align_log = HISAT2_ALIGN.out.log
-        multiqc_report = MULTIQC.out.report
-        multiqc_data = MULTIQC.out.data
-    }
-    ```
+</CodeWalkthrough>
 
 Actualitzeu les entrades corresponents al bloc `output {}`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq_pe.nf" linenums="77" hl_lines="4-9"
-        trimming_reports {
-            path 'trimming'
-        }
-        trimming_fastqc_1 {
-            path 'trimming'
-        }
-        trimming_fastqc_2 {
-            path 'trimming'
-        }
-        bam {
-            path 'align'
-        }
-    ```
+```nextflow title="rnaseq_pe.nf" showLineNumbers startLineNumber=77 step="Abans"
+    trimming_reports {
+        path 'trimming'
+    }
+    trimming_fastqc {
+        path 'trimming'
+    }
+    bam {
+        path 'align'
+    }
+```
 
-=== "Abans"
+```nextflow {4-9} title="rnaseq_pe.nf" showLineNumbers startLineNumber=77 step="Després"
+    trimming_reports {
+        path 'trimming'
+    }
+    trimming_fastqc_1 {
+        path 'trimming'
+    }
+    trimming_fastqc_2 {
+        path 'trimming'
+    }
+    bam {
+        path 'align'
+    }
+```
 
-    ```groovy title="rnaseq_pe.nf" linenums="77"
-        trimming_reports {
-            path 'trimming'
-        }
-        trimming_fastqc {
-            path 'trimming'
-        }
-        bam {
-            path 'align'
-        }
-    ```
+</CodeWalkthrough>
 
 El workflow paired-end ara està completament actualitzat i llest per executar.
 
@@ -1085,95 +1084,91 @@ El workflow paired-end ara està completament actualitzat i llest per executar.
 
 No utilitzem `-resume` ja que això no es guardaria en memòria cau, i hi ha el doble de dades a processar que abans, però encara hauria de completar-se en menys d'un minut.
 
-```bash
+```bash runnable.outputDelay=0
 nextflow run rnaseq_pe.nf -profile test_pe
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `rnaseq_pe.nf` [irreverent_goodall] revision: 4857270963
+
+executor >  local (19)
+[b2/6eeec6] FASTQC (3)       | 6 of 6 ✔
+[fc/cf8740] TRIM_GALORE (5)  | 6 of 6 ✔
+[4d/d86bd7] HISAT2_ALIGN (6) | 6 of 6 ✔
+[34/51347d] MULTIQC          | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/rnaseq/results
+
+  fastqc_zip:
+    - [fastqc/ENCSR000COQ1_1_fastqc.zip, fastqc/ENCSR000COQ1_2_fastqc.zip]
+    - [fastqc/ENCSR000COQ2_1_fastqc.zip, fastqc/ENCSR000COQ2_2_fastqc.zip]
+    - [fastqc/ENCSR000COR1_1_fastqc.zip, fastqc/ENCSR000COR1_2_fastqc.zip]
+    - [fastqc/ENCSR000COR2_1_fastqc.zip, fastqc/ENCSR000COR2_2_fastqc.zip]
+    - [fastqc/ENCSR000CPO1_1_fastqc.zip, fastqc/ENCSR000CPO1_2_fastqc.zip]
+    - [fastqc/ENCSR000CPO2_1_fastqc.zip, fastqc/ENCSR000CPO2_2_fastqc.zip]
+
+  fastqc_html:
+    - [fastqc/ENCSR000COQ1_1_fastqc.html, fastqc/ENCSR000COQ1_2_fastqc.html]
+    - [fastqc/ENCSR000COQ2_1_fastqc.html, fastqc/ENCSR000COQ2_2_fastqc.html]
+    - [fastqc/ENCSR000COR1_1_fastqc.html, fastqc/ENCSR000COR1_2_fastqc.html]
+    - [fastqc/ENCSR000COR2_1_fastqc.html, fastqc/ENCSR000COR2_2_fastqc.html]
+    - [fastqc/ENCSR000CPO1_1_fastqc.html, fastqc/ENCSR000CPO1_2_fastqc.html]
+    - [fastqc/ENCSR000CPO2_1_fastqc.html, fastqc/ENCSR000CPO2_2_fastqc.html]
+
+  trimmed_reads:
+    - [trimming/ENCSR000COQ1_1_val_1.fq.gz, trimming/ENCSR000COQ1_2_val_2.fq.gz]
+    - [trimming/ENCSR000COQ2_1_val_1.fq.gz, trimming/ENCSR000COQ2_2_val_2.fq.gz]
+    - [trimming/ENCSR000COR1_1_val_1.fq.gz, trimming/ENCSR000COR1_2_val_2.fq.gz]
+    - [trimming/ENCSR000COR2_1_val_1.fq.gz, trimming/ENCSR000COR2_2_val_2.fq.gz]
+    - [trimming/ENCSR000CPO1_1_val_1.fq.gz, trimming/ENCSR000CPO1_2_val_2.fq.gz]
+    - [trimming/ENCSR000CPO2_1_val_1.fq.gz, trimming/ENCSR000CPO2_2_val_2.fq.gz]
+
+  trimming_reports:
+    - [trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COQ1_2.fastq.gz_trimming_report.txt]
+    - [trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COQ2_2.fastq.gz_trimming_report.txt]
+    - [trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COR1_2.fastq.gz_trimming_report.txt]
+    - [trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COR2_2.fastq.gz_trimming_report.txt]
+    - [trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000CPO1_2.fastq.gz_trimming_report.txt]
+    - [trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000CPO2_2.fastq.gz_trimming_report.txt]
+
+  trimming_fastqc_1:
+    - [trimming/ENCSR000COQ1_1_val_1_fastqc.html, trimming/ENCSR000COQ1_1_val_1_fastqc.zip]
+    - [trimming/ENCSR000COQ2_1_val_1_fastqc.html, trimming/ENCSR000COQ2_1_val_1_fastqc.zip]
+    - [trimming/ENCSR000COR1_1_val_1_fastqc.html, trimming/ENCSR000COR1_1_val_1_fastqc.zip]
+    - [trimming/ENCSR000COR2_1_val_1_fastqc.html, trimming/ENCSR000COR2_1_val_1_fastqc.zip]
+    - [trimming/ENCSR000CPO1_1_val_1_fastqc.html, trimming/ENCSR000CPO1_1_val_1_fastqc.zip]
+    - [trimming/ENCSR000CPO2_1_val_1_fastqc.html, trimming/ENCSR000CPO2_1_val_1_fastqc.zip]
+
+  trimming_fastqc_2:
+    - [trimming/ENCSR000COQ1_2_val_2_fastqc.html, trimming/ENCSR000COQ1_2_val_2_fastqc.zip]
+    - [trimming/ENCSR000COQ2_2_val_2_fastqc.html, trimming/ENCSR000COQ2_2_val_2_fastqc.zip]
+    - [trimming/ENCSR000COR1_2_val_2_fastqc.html, trimming/ENCSR000COR1_2_val_2_fastqc.zip]
+    - [trimming/ENCSR000COR2_2_val_2_fastqc.html, trimming/ENCSR000COR2_2_val_2_fastqc.zip]
+    - [trimming/ENCSR000CPO1_2_val_2_fastqc.html, trimming/ENCSR000CPO1_2_val_2_fastqc.zip]
+    - [trimming/ENCSR000CPO2_2_val_2_fastqc.html, trimming/ENCSR000CPO2_2_val_2_fastqc.zip]
+
+  bam:
+    - align/ENCSR000COQ1_1_val_1.bam
+    - align/ENCSR000COQ2_1_val_1.bam
+    - align/ENCSR000COR1_1_val_1.bam
+    - align/ENCSR000COR2_1_val_1.bam
+    - align/ENCSR000CPO1_1_val_1.bam
+    - align/ENCSR000CPO2_1_val_1.bam
+
+  align_log:
+    - align/ENCSR000COQ1_1_val_1.hisat2.log
+    - align/ENCSR000COQ2_1_val_1.hisat2.log
+    - align/ENCSR000COR1_1_val_1.hisat2.log
+    - align/ENCSR000COR2_1_val_1.hisat2.log
+    - align/ENCSR000CPO1_1_val_1.hisat2.log
+    - align/ENCSR000CPO2_1_val_1.hisat2.log
+
+  multiqc_report: multiqc/all_paired-end.html
+
+  multiqc_data: multiqc/all_paired-end_data
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `rnaseq_pe.nf` [irreverent_goodall] revision: 4857270963
-
-    executor >  local (19)
-    [b2/6eeec6] FASTQC (3)       | 6 of 6 ✔
-    [fc/cf8740] TRIM_GALORE (5)  | 6 of 6 ✔
-    [4d/d86bd7] HISAT2_ALIGN (6) | 6 of 6 ✔
-    [34/51347d] MULTIQC          | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/rnaseq/results
-
-      fastqc_zip:
-        - [fastqc/ENCSR000COQ1_1_fastqc.zip, fastqc/ENCSR000COQ1_2_fastqc.zip]
-        - [fastqc/ENCSR000COQ2_1_fastqc.zip, fastqc/ENCSR000COQ2_2_fastqc.zip]
-        - [fastqc/ENCSR000COR1_1_fastqc.zip, fastqc/ENCSR000COR1_2_fastqc.zip]
-        - [fastqc/ENCSR000COR2_1_fastqc.zip, fastqc/ENCSR000COR2_2_fastqc.zip]
-        - [fastqc/ENCSR000CPO1_1_fastqc.zip, fastqc/ENCSR000CPO1_2_fastqc.zip]
-        - [fastqc/ENCSR000CPO2_1_fastqc.zip, fastqc/ENCSR000CPO2_2_fastqc.zip]
-
-      fastqc_html:
-        - [fastqc/ENCSR000COQ1_1_fastqc.html, fastqc/ENCSR000COQ1_2_fastqc.html]
-        - [fastqc/ENCSR000COQ2_1_fastqc.html, fastqc/ENCSR000COQ2_2_fastqc.html]
-        - [fastqc/ENCSR000COR1_1_fastqc.html, fastqc/ENCSR000COR1_2_fastqc.html]
-        - [fastqc/ENCSR000COR2_1_fastqc.html, fastqc/ENCSR000COR2_2_fastqc.html]
-        - [fastqc/ENCSR000CPO1_1_fastqc.html, fastqc/ENCSR000CPO1_2_fastqc.html]
-        - [fastqc/ENCSR000CPO2_1_fastqc.html, fastqc/ENCSR000CPO2_2_fastqc.html]
-
-      trimmed_reads:
-        - [trimming/ENCSR000COQ1_1_val_1.fq.gz, trimming/ENCSR000COQ1_2_val_2.fq.gz]
-        - [trimming/ENCSR000COQ2_1_val_1.fq.gz, trimming/ENCSR000COQ2_2_val_2.fq.gz]
-        - [trimming/ENCSR000COR1_1_val_1.fq.gz, trimming/ENCSR000COR1_2_val_2.fq.gz]
-        - [trimming/ENCSR000COR2_1_val_1.fq.gz, trimming/ENCSR000COR2_2_val_2.fq.gz]
-        - [trimming/ENCSR000CPO1_1_val_1.fq.gz, trimming/ENCSR000CPO1_2_val_2.fq.gz]
-        - [trimming/ENCSR000CPO2_1_val_1.fq.gz, trimming/ENCSR000CPO2_2_val_2.fq.gz]
-
-      trimming_reports:
-        - [trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COQ1_2.fastq.gz_trimming_report.txt]
-        - [trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COQ2_2.fastq.gz_trimming_report.txt]
-        - [trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COR1_2.fastq.gz_trimming_report.txt]
-        - [trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COR2_2.fastq.gz_trimming_report.txt]
-        - [trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000CPO1_2.fastq.gz_trimming_report.txt]
-        - [trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000CPO2_2.fastq.gz_trimming_report.txt]
-
-      trimming_fastqc_1:
-        - [trimming/ENCSR000COQ1_1_val_1_fastqc.html, trimming/ENCSR000COQ1_1_val_1_fastqc.zip]
-        - [trimming/ENCSR000COQ2_1_val_1_fastqc.html, trimming/ENCSR000COQ2_1_val_1_fastqc.zip]
-        - [trimming/ENCSR000COR1_1_val_1_fastqc.html, trimming/ENCSR000COR1_1_val_1_fastqc.zip]
-        - [trimming/ENCSR000COR2_1_val_1_fastqc.html, trimming/ENCSR000COR2_1_val_1_fastqc.zip]
-        - [trimming/ENCSR000CPO1_1_val_1_fastqc.html, trimming/ENCSR000CPO1_1_val_1_fastqc.zip]
-        - [trimming/ENCSR000CPO2_1_val_1_fastqc.html, trimming/ENCSR000CPO2_1_val_1_fastqc.zip]
-
-      trimming_fastqc_2:
-        - [trimming/ENCSR000COQ1_2_val_2_fastqc.html, trimming/ENCSR000COQ1_2_val_2_fastqc.zip]
-        - [trimming/ENCSR000COQ2_2_val_2_fastqc.html, trimming/ENCSR000COQ2_2_val_2_fastqc.zip]
-        - [trimming/ENCSR000COR1_2_val_2_fastqc.html, trimming/ENCSR000COR1_2_val_2_fastqc.zip]
-        - [trimming/ENCSR000COR2_2_val_2_fastqc.html, trimming/ENCSR000COR2_2_val_2_fastqc.zip]
-        - [trimming/ENCSR000CPO1_2_val_2_fastqc.html, trimming/ENCSR000CPO1_2_val_2_fastqc.zip]
-        - [trimming/ENCSR000CPO2_2_val_2_fastqc.html, trimming/ENCSR000CPO2_2_val_2_fastqc.zip]
-
-      bam:
-        - align/ENCSR000COQ1_1_val_1.bam
-        - align/ENCSR000COQ2_1_val_1.bam
-        - align/ENCSR000COR1_1_val_1.bam
-        - align/ENCSR000COR2_1_val_1.bam
-        - align/ENCSR000CPO1_1_val_1.bam
-        - align/ENCSR000CPO2_1_val_1.bam
-
-      align_log:
-        - align/ENCSR000COQ1_1_val_1.hisat2.log
-        - align/ENCSR000COQ2_1_val_1.hisat2.log
-        - align/ENCSR000COR1_1_val_1.hisat2.log
-        - align/ENCSR000COR2_1_val_1.hisat2.log
-        - align/ENCSR000CPO1_1_val_1.hisat2.log
-        - align/ENCSR000CPO2_1_val_1.hisat2.log
-
-      multiqc_report: multiqc/all_paired-end.html
-
-      multiqc_data: multiqc/all_paired-end_data
-    ```
 
 Ara tenim dues versions lleugerament divergents del nostre workflow, una per a dades de lectura single-end i una per a dades paired-end.
 El següent pas lògic seria fer que el workflow accepti qualsevol tipus de dades sobre la marxa, que està fora de l'abast d'aquest curs, però podem abordar-ho en un seguiment.
@@ -1188,4 +1183,4 @@ Sabeu com adaptar un workflow d'una sola mostra per paral·lelitzar el processam
 
 Doneu-vos una gran palmadeta a l'esquena! Heu completat el curs Nextflow per a RNAseq.
 
-Aneu al [resum final del curs](./next_steps.md) per revisar el que heu après i descobrir què ve després.
+Aneu al [resum final del curs](./next_steps.mdx) per revisar el que heu après i descobrir què ve després.

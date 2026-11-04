@@ -1,12 +1,12 @@
 ---
 title: Nextflow sürümleri
 description: Nextflow'un sözdizimi sürümlerinin evrimini anlama ve yönetme
-hide:
-  - toc
-  - footer
+tableOfContents: false
+prev: false
+next: false
 ---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Desteklenen güncel Nextflow sözdizimi sürümü ve gereksinimleri
 
@@ -17,8 +17,8 @@ Eğitim ortamımızda varsayılan olarak yüklenen Nextflow sürümü **Nextflow
 
 Kurslar artık iş akışı düzeyinde tiplendirilmiş girdiler ve iş akışı düzeyinde çıktı yönergeleri kullandığından, **aksi belirtilmedikçe** V2 sözdizimi ayrıştırıcısının kullanılması gerekmektedir.
 V2 ayrıştırıcısı, Nextflow 26.04 sürümünden itibaren varsayılan olarak etkindir; dolayısıyla yüklediğimiz sürümde bunu manuel olarak etkinleştirmenize gerek yoktur.
-[Github Codespaces](../envsetup/01_setup.md) veya [yerel devcontainer'lar](../envsetup/03_devcontainer.md) aracılığıyla sağladığımız ortamı kullanmayı planlıyorsanız, kurs talimatlarında özellikle belirtilmedikçe herhangi bir işlem yapmanıza gerek yoktur.
-Ancak eğitimleri kendi ortamınızda ([Manuel kurulum](../envsetup/02_local.md)) tamamlamayı planlıyorsanız, Nextflow 25.10.2 veya daha yeni bir sürümü kullandığınızdan ve 26.04 öncesi bir sürümdeyseniz v2 sözdizimi ayrıştırıcısını etkinleştirdiğinizden emin olmanız gerekmektedir.
+[Github Codespaces](../envsetup/01_setup.mdx) veya [yerel devcontainer'lar](../envsetup/03_devcontainer.mdx) aracılığıyla sağladığımız ortamı kullanmayı planlıyorsanız, kurs talimatlarında özellikle belirtilmedikçe herhangi bir işlem yapmanıza gerek yoktur.
+Ancak eğitimleri kendi ortamınızda ([Manuel kurulum](../envsetup/02_local.mdx)) tamamlamayı planlıyorsanız, Nextflow 25.10.2 veya daha yeni bir sürümü kullandığınızdan ve 26.04 öncesi bir sürümdeyseniz v2 sözdizimi ayrıştırıcısını etkinleştirdiğinizden emin olmanız gerekmektedir.
 
 ## Eğitim materyallerinin eski sürümleri
 
@@ -78,7 +78,7 @@ Mevcut oturumunuz için v2 sözdizimi ayrıştırıcısını **devre dışı bı
 export NXF_SYNTAX_PARSER=v1
 ```
 
-<!-- Will it be possible to disable it in versions after 26.04? -->
+{/* Will it be possible to disable it in versions after 26.04? */}
 
 ### Mevcut kodun taşınması
 
@@ -101,8 +101,8 @@ Yardıma ihtiyaç duyarsanız Slack'te veya forumda bize ulaşın.
 
 <div markdown class="homepage_logos">
 
-![Seqera](../assets/img/seqera_logo.png#only-light)
+<span class="dark:sl-hidden">![Seqera](../../assets/img/seqera_logo.png)</span>
 
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
+<span class="light:sl-hidden">![Seqera](../../assets/img/seqera_logo_dark.png)</span>
 
 </div>

@@ -1,6 +1,9 @@
-# İş Akışlarının İş Akışları
+---
+title: İş Akışlarının İş Akışları
+description: Bir pipeline geliştirirken, farklı veri türleri veya analiz adımları için benzer süreç dizileri oluşturduğunuzu sık sık fark edersiniz.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bir pipeline geliştirirken, farklı veri türleri veya analiz adımları için benzer süreç dizileri oluşturduğunuzu sık sık fark edersiniz.
 Bu süreç dizilerini kopyalayıp yapıştırarak bakımı zor olan tekrarlı kodlara yol açabilirsiniz; ya da anlaşılması ve değiştirilmesi güç olan tek bir devasa iş akışı oluşturabilirsiniz.
@@ -26,7 +29,7 @@ Bu beceriler, temiz ve bakımı kolay bir kod yapısını korurken karmaşık pi
 
 Bu yan göreve başlamadan önce şunları yapmış olmalısınız:
 
-- [Hello Nextflow](../../hello_nextflow/index.md) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmak.
+- [Hello Nextflow](../../hello_nextflow/index.mdx) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmak.
 - Temel Nextflow kavramları ve mekanizmalarını (süreçler, kanallar, operatörler, modüller) rahatça kullanabilmek.
 
 ---
@@ -35,7 +38,7 @@ Bu yan göreve başlamadan önce şunları yapmış olmalısınız:
 
 #### Eğitim kod alanını açın
 
-Henüz yapmadıysanız, eğitim ortamını [Ortam Kurulumu](../../envsetup/index.md) bölümünde açıklandığı şekilde açtığınızdan emin olun.
+Henüz yapmadıysanız, eğitim ortamını [Ortam Kurulumu](../../envsetup/index.mdx) bölümünde açıklandığı şekilde açtığınızdan emin olun.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -113,7 +116,7 @@ Greeting iş akışı, isimleri doğrular ve zaman damgalı selamlamalar üretir
 
 `workflows/greeting.nf` dosyasını açın ve kodu inceleyin:
 
-```groovy title="workflows/greeting.nf" linenums="1"
+```nextflow title="workflows/greeting.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 include { VALIDATE_NAME } from '../modules/validate_name'
@@ -148,32 +151,28 @@ Her şeyin çalıştığını doğrulamak için çalıştırın:
 
 ```bash
 nextflow run workflows/greeting.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+Launching `workflows/greeting.nf` [sharp_kirch] revision: 04c0a33f79
+executor >  local (9)
+[c5/9df3c8] VAL…TE_NAME (validating Alice) | 3 of 3 ✔
+[e0/243874] SAY_HELLO (greeting Alice)     | 3 of 3 ✔
+[c5/e40c8d] TIM…ing timestamp to greeting) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/workflows_of_workflows/results
+
+  greetings:
+    - Charlie-output.txt
+    - Bob-output.txt
+    - Alice-output.txt
+
+  timestamped:
+    - timestamped_Bob-output.txt
+    - timestamped_Charlie-output.txt
+    - timestamped_Alice-output.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-    Launching `workflows/greeting.nf` [sharp_kirch] revision: 04c0a33f79
-    executor >  local (9)
-    [c5/9df3c8] VAL…TE_NAME (validating Alice) | 3 of 3 ✔
-    [e0/243874] SAY_HELLO (greeting Alice)     | 3 of 3 ✔
-    [c5/e40c8d] TIM…ing timestamp to greeting) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/side-quests/workflows_of_workflows/results
-
-      greetings:
-        - Charlie-output.txt
-        - Bob-output.txt
-        - Alice-output.txt
-
-      timestamped:
-        - timestamped_Bob-output.txt
-        - timestamped_Charlie-output.txt
-        - timestamped_Alice-output.txt
-    ```
 
 Diğer iş akışlarıyla birleştirilebilir hale getirmek için birkaç değişiklik yapmamız gerekiyor.
 
@@ -189,17 +188,17 @@ Aşağıdaki bölümler bu değişiklikleri tek tek ele almaktadır.
 
 İş akışına bir ad verin; böylece üst iş akışından içe aktarılabilir hale gelir.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="workflows/greeting.nf" linenums="5" hl_lines="1"
-    workflow GREETING_WORKFLOW {
-    ```
+```nextflow {1} title="workflows/greeting.nf" showLineNumbers startLineNumber=5 step="Önce"
+workflow {
+```
 
-=== "Önce"
+```nextflow {1} title="workflows/greeting.nf" showLineNumbers startLineNumber=5 step="Sonra"
+workflow GREETING_WORKFLOW {
+```
 
-    ```groovy title="workflows/greeting.nf" linenums="5" hl_lines="1"
-    workflow {
-    ```
+</CodeWalkthrough>
 
 Bir adla birlikte iş akışı, diğer betiklere aktarılabilir.
 
@@ -207,32 +206,32 @@ Bir adla birlikte iş akışı, diğer betiklere aktarılabilir.
 
 Sabit kodlanmış kanal tanımını, iş akışının beklediği girdileri bildiren bir `take:` bloğuyla değiştirin. `take:` bloğu `main:`'den önce gelir ve `names_ch = channel.of(...)` satırı kaldırılır.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="workflows/greeting.nf" linenums="5" hl_lines="2 3 5"
-    workflow GREETING_WORKFLOW {
-        take:
-        names_ch // İsimlerle dolu girdi kanalı
+```nextflow title="workflows/greeting.nf" showLineNumbers startLineNumber=5 step="Önce"
+workflow GREETING_WORKFLOW {
+    main:
+    names_ch = channel.of('Alice', 'Bob', 'Charlie')
 
-        main:
-        // Süreçleri zincirleyin: doğrula -> selamlama oluştur -> zaman damgası ekle
-        validated_ch = VALIDATE_NAME(names_ch)
-        greetings_ch = SAY_HELLO(validated_ch)
-        timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
-    ```
+    // Süreçleri zincirleyin: doğrula -> selamlama oluştur -> zaman damgası ekle
+    validated_ch = VALIDATE_NAME(names_ch)
+    greetings_ch = SAY_HELLO(validated_ch)
+    timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
+```
 
-=== "Önce"
+```nextflow {2,3,5} title="workflows/greeting.nf" showLineNumbers startLineNumber=5 step="Sonra"
+workflow GREETING_WORKFLOW {
+    take:
+    names_ch // İsimlerle dolu girdi kanalı
 
-    ```groovy title="workflows/greeting.nf" linenums="5"
-    workflow GREETING_WORKFLOW {
-        main:
-        names_ch = channel.of('Alice', 'Bob', 'Charlie')
+    main:
+    // Süreçleri zincirleyin: doğrula -> selamlama oluştur -> zaman damgası ekle
+    validated_ch = VALIDATE_NAME(names_ch)
+    greetings_ch = SAY_HELLO(validated_ch)
+    timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
+```
 
-        // Süreçleri zincirleyin: doğrula -> selamlama oluştur -> zaman damgası ekle
-        validated_ch = VALIDATE_NAME(names_ch)
-        greetings_ch = SAY_HELLO(validated_ch)
-        timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
-    ```
+</CodeWalkthrough>
 
 `take:` bloğu kanalı yalnızca adıyla tanımlar. İçine ne gireceğini üst iş akışı belirler.
 
@@ -240,32 +239,32 @@ Sabit kodlanmış kanal tanımını, iş akışının beklediği girdileri bildi
 
 `publish:` bölümünü ve `output {}` bloğunu kaldırarak bunların yerine çıktıları adlandıran bir `emit:` bloğu ekleyin.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="workflows/greeting.nf" linenums="14" hl_lines="2 3 4"
+```nextflow title="workflows/greeting.nf" showLineNumbers startLineNumber=14 step="Önce"
 
-        emit:
-        greetings = greetings_ch // Orijinal selamlamalar
-        timestamped = timestamped_ch // Zaman damgalı selamlamalar
+    publish:
+    greetings = greetings_ch
+    timestamped = timestamped_ch
+}
+
+output {
+    greetings {
     }
-    ```
-
-=== "Önce"
-
-    ```groovy title="workflows/greeting.nf" linenums="14"
-
-        publish:
-        greetings = greetings_ch
-        timestamped = timestamped_ch
+    timestamped {
     }
+}
+```
 
-    output {
-        greetings {
-        }
-        timestamped {
-        }
-    }
-    ```
+```nextflow {2,3,4} title="workflows/greeting.nf" showLineNumbers startLineNumber=14 step="Sonra"
+
+    emit:
+    greetings = greetings_ch // Orijinal selamlamalar
+    timestamped = timestamped_ch // Zaman damgalı selamlamalar
+}
+```
+
+</CodeWalkthrough>
 
 `emit:` bloğu, üst iş akışlarının `GREETING_WORKFLOW.out.greetings` ve `GREETING_WORKFLOW.out.timestamped` aracılığıyla erişebileceği adlandırılmış çıktıları ortaya koyar.
 
@@ -273,7 +272,7 @@ Sabit kodlanmış kanal tanımını, iş akışının beklediği girdileri bildi
 
 Üç değişikliğin tamamından sonra dosyanın tamamı şöyle görünmelidir:
 
-```groovy title="workflows/greeting.nf" linenums="1" hl_lines="7 8 9 11 17 18 19"
+```nextflow {7,8,9,11,17,18,19} title="workflows/greeting.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 include { VALIDATE_NAME } from '../modules/validate_name'
@@ -300,15 +299,11 @@ workflow GREETING_WORKFLOW {
 
 ```bash
 nextflow run workflows/greeting.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+Launching `workflows/greeting.nf` [intergalactic_leavitt] revision: 89ac88c6c2
+No entry workflow specified
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-    Launching `workflows/greeting.nf` [intergalactic_leavitt] revision: 89ac88c6c2
-    No entry workflow specified
-    ```
 
 Bu, önemli bir kavramı ortaya koymaktadır: **giriş iş akışı**.
 Nextflow, bir betiği doğrudan çalıştırdığınızda adsız bir `workflow {}` bloğunu giriş noktası olarak kullanır.
@@ -325,38 +320,38 @@ Greeting iş akışını çağırmak için ana iş akışını güncelleyin.
 
 `include` ifadesini ekleyin, iş akışı gövdesini `GREETING_WORKFLOW`'u çağıracak şekilde güncelleyin ve `publish:` bölümündeki `channel.empty()` yer tutucusunu değiştirin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="1" hl_lines="3 9 10 13"
-    #!/usr/bin/env nextflow
+```nextflow title="main.nf" showLineNumbers step="Önce"
+#!/usr/bin/env nextflow
 
-    include { GREETING_WORKFLOW } from './workflows/greeting'
+workflow {
+    main:
+    names = channel.of('Alice', 'Bob', 'Charlie')
 
-    workflow {
-        main:
-        names = channel.of('Alice', 'Bob', 'Charlie')
+    publish:
+    greetings = channel.empty()
+}
+```
 
-        // Greeting iş akışını çalıştırın
-        GREETING_WORKFLOW(names)
+```nextflow {3,9,10,13} title="main.nf" showLineNumbers step="Sonra"
+#!/usr/bin/env nextflow
 
-        publish:
-        greetings = GREETING_WORKFLOW.out.greetings
-    }
-    ```
+include { GREETING_WORKFLOW } from './workflows/greeting'
 
-=== "Önce"
+workflow {
+    main:
+    names = channel.of('Alice', 'Bob', 'Charlie')
 
-    ```groovy title="main.nf" linenums="1"
-    #!/usr/bin/env nextflow
+    // Greeting iş akışını çalıştırın
+    GREETING_WORKFLOW(names)
 
-    workflow {
-        main:
-        names = channel.of('Alice', 'Bob', 'Charlie')
+    publish:
+    greetings = GREETING_WORKFLOW.out.greetings
+}
+```
 
-        publish:
-        greetings = channel.empty()
-    }
-    ```
+</CodeWalkthrough>
 
 Nextflow'un bunu pipeline giriş noktası olarak kullanabilmesi için giriş iş akışı adsız kalır.
 
@@ -364,24 +359,24 @@ Nextflow'un bunu pipeline giriş noktası olarak kullanabilmesi için giriş iş
 
 Yayımlanan selamlamaları bir `greetings/` alt dizinine yönlendirmek için `path` yönergesini ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="14" hl_lines="3"
-    output {
-        greetings {
-            path 'greetings'
-        }
+```nextflow {2,3} title="main.nf" showLineNumbers startLineNumber=14 step="Önce"
+output {
+    greetings {
     }
-    ```
+}
+```
 
-=== "Önce"
-
-    ```groovy title="main.nf" linenums="14" hl_lines="2 3"
-    output {
-        greetings {
-        }
+```nextflow {3} title="main.nf" showLineNumbers startLineNumber=14 step="Sonra"
+output {
+    greetings {
+        path 'greetings'
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 #### 1.3.3. İş akışını çalıştırın
 
@@ -389,46 +384,48 @@ Yayımlanan selamlamaları bir `greetings/` alt dizinine yönlendirmek için `pa
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+Launching `main.nf` [agitated_jones] revision: 6b0e98dd05
+executor >  local (9)
+[00/5ac4ce] GRE…DATE_NAME (validating Bob) | 3 of 3 ✔
+[7d/dde45c] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
+[fd/a044cc] GRE…ing timestamp to greeting) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/workflows_of_workflows/results
+
+  greetings:
+    - greetings/Bob-output.txt
+    - greetings/Charlie-output.txt
+    - greetings/Alice-output.txt
 ```
 
-??? success "Komut çıktısı"
+<details class="abstract">
+<summary>`results/` dizinine eklenen yeni içerik</summary>
 
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-    Launching `main.nf` [agitated_jones] revision: 6b0e98dd05
-    executor >  local (9)
-    [00/5ac4ce] GRE…DATE_NAME (validating Bob) | 3 of 3 ✔
-    [7d/dde45c] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
-    [fd/a044cc] GRE…ing timestamp to greeting) | 3 of 3 ✔
+```console
+results/
+└── greetings
+    ├── Alice-output.txt
+    ├── Bob-output.txt
+    └── Charlie-output.txt
+```
 
-    Outputs:
+1.1. bölümündeki bağımsız çalıştırmadan gelen altı dosya (`Alice-output.txt`, `timestamped_Alice-output.txt` vb.) bu yeni `greetings/` alt dizininin yanında `results/` içinde durmaya devam etmektedir.
+Bu beklenen bir durumdur: bu derste hiçbir şey onları silmez ve 2.1. bölümü bunları doğrudan girdi olarak okur.
 
-      /workspaces/training/side-quests/workflows_of_workflows/results
+</details>
 
-      greetings:
-        - greetings/Bob-output.txt
-        - greetings/Charlie-output.txt
-        - greetings/Alice-output.txt
-    ```
+<details class="abstract">
+<summary>Dosya içeriği</summary>
 
-??? abstract "`results/` dizinine eklenen yeni içerik"
+```console title="results/greetings/Alice-output.txt"
+Hello, Alice!
+```
 
-    ```console
-    results/
-    └── greetings
-        ├── Alice-output.txt
-        ├── Bob-output.txt
-        └── Charlie-output.txt
-    ```
-
-    1.1. bölümündeki bağımsız çalıştırmadan gelen altı dosya (`Alice-output.txt`, `timestamped_Alice-output.txt` vb.) bu yeni `greetings/` alt dizininin yanında `results/` içinde durmaya devam etmektedir.
-    Bu beklenen bir durumdur: bu derste hiçbir şey onları silmez ve 2.1. bölümü bunları doğrudan girdi olarak okur.
-
-??? abstract "Dosya içeriği"
-
-    ```console title="results/greetings/Alice-output.txt"
-    Hello, Alice!
-    ```
+</details>
 
 Selamlama dosyaları `results/greetings/` dizinine yayımlanır. Ana iş akışı `GREETING_WORKFLOW`'u çağırır ve çıktısını doğrudan `publish:` bölümüne bağlar.
 
@@ -465,7 +462,7 @@ Transform iş akışı, zaman damgalı selamlamalara metin dönüşümleri uygul
 
 `workflows/transform.nf` dosyasını açın ve kodu inceleyin:
 
-```groovy title="workflows/transform.nf" linenums="1"
+```nextflow title="workflows/transform.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 include { SAY_HELLO_UPPER } from '../modules/say_hello_upper'
@@ -498,31 +495,27 @@ Bu bağımsız iş akışı, `greeting.nf` tarafından üretilen `results/` dizi
 
 ```bash
 nextflow run workflows/transform.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+Launching `workflows/transform.nf` [evil_meninsky] revision: 4e35790d32
+executor >  local (6)
+[7d/4ed7de] SAY…estamped_Alice-output.txt) | 3 of 3 ✔
+[70/ddaafa] REV…imestamped_Bob-output.txt) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/workflows_of_workflows/results
+
+  upper:
+    - UPPER-timestamped_Bob-output.txt
+    - UPPER-timestamped_Charlie-output.txt
+    - UPPER-timestamped_Alice-output.txt
+
+  reversed:
+    - REVERSED-UPPER-timestamped_Charlie-output.txt
+    - REVERSED-UPPER-timestamped_Alice-output.txt
+    - REVERSED-UPPER-timestamped_Bob-output.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-    Launching `workflows/transform.nf` [evil_meninsky] revision: 4e35790d32
-    executor >  local (6)
-    [7d/4ed7de] SAY…estamped_Alice-output.txt) | 3 of 3 ✔
-    [70/ddaafa] REV…imestamped_Bob-output.txt) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/side-quests/workflows_of_workflows/results
-
-      upper:
-        - UPPER-timestamped_Bob-output.txt
-        - UPPER-timestamped_Charlie-output.txt
-        - UPPER-timestamped_Alice-output.txt
-
-      reversed:
-        - REVERSED-UPPER-timestamped_Charlie-output.txt
-        - REVERSED-UPPER-timestamped_Alice-output.txt
-        - REVERSED-UPPER-timestamped_Bob-output.txt
-    ```
 
 `GREETING_WORKFLOW` ile birleştirilebilir hale getirmek için 1.2. bölümündeki üç değişikliğin aynısı geçerlidir.
 
@@ -532,7 +525,7 @@ nextflow run workflows/transform.nf
 
 Tamamlanmış dosya şöyle görünmelidir:
 
-```groovy title="workflows/transform.nf" linenums="1" hl_lines="6 7 8 10 15 16 17"
+```nextflow {6,7,8,10,15,16,17} title="workflows/transform.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 include { SAY_HELLO_UPPER } from '../modules/say_hello_upper'
@@ -563,49 +556,49 @@ Dönüşüm iş akışını çağırmak için ana iş akışını güncelleyin.
 
 Include ifadesini, zaman damgalı selamlamalar üzerinde zincirlenen `TRANSFORM_WORKFLOW` çağrısını ve iki yeni `publish:` girişini ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="1" hl_lines="4 13 14 18 19"
-    #!/usr/bin/env nextflow
+```nextflow title="main.nf" showLineNumbers step="Önce"
+#!/usr/bin/env nextflow
 
-    include { GREETING_WORKFLOW } from './workflows/greeting'
-    include { TRANSFORM_WORKFLOW } from './workflows/transform'
+include { GREETING_WORKFLOW } from './workflows/greeting'
 
-    workflow {
-        main:
-        names = channel.of('Alice', 'Bob', 'Charlie')
+workflow {
+    main:
+    names = channel.of('Alice', 'Bob', 'Charlie')
 
-        // Greeting iş akışını çalıştırın
-        GREETING_WORKFLOW(names)
+    // Greeting iş akışını çalıştırın
+    GREETING_WORKFLOW(names)
 
-        // Transform iş akışını çalıştırın
-        TRANSFORM_WORKFLOW(GREETING_WORKFLOW.out.timestamped)
+    publish:
+    greetings = GREETING_WORKFLOW.out.greetings
+}
+```
 
-        publish:
-        greetings = GREETING_WORKFLOW.out.greetings
-        upper = TRANSFORM_WORKFLOW.out.upper
-        reversed = TRANSFORM_WORKFLOW.out.reversed
-    }
-    ```
+```nextflow {4,13,14,18,19} title="main.nf" showLineNumbers step="Sonra"
+#!/usr/bin/env nextflow
 
-=== "Önce"
+include { GREETING_WORKFLOW } from './workflows/greeting'
+include { TRANSFORM_WORKFLOW } from './workflows/transform'
 
-    ```groovy title="main.nf" linenums="1"
-    #!/usr/bin/env nextflow
+workflow {
+    main:
+    names = channel.of('Alice', 'Bob', 'Charlie')
 
-    include { GREETING_WORKFLOW } from './workflows/greeting'
+    // Greeting iş akışını çalıştırın
+    GREETING_WORKFLOW(names)
 
-    workflow {
-        main:
-        names = channel.of('Alice', 'Bob', 'Charlie')
+    // Transform iş akışını çalıştırın
+    TRANSFORM_WORKFLOW(GREETING_WORKFLOW.out.timestamped)
 
-        // Greeting iş akışını çalıştırın
-        GREETING_WORKFLOW(names)
+    publish:
+    greetings = GREETING_WORKFLOW.out.greetings
+    upper = TRANSFORM_WORKFLOW.out.upper
+    reversed = TRANSFORM_WORKFLOW.out.reversed
+}
+```
 
-        publish:
-        greetings = GREETING_WORKFLOW.out.greetings
-    }
-    ```
+</CodeWalkthrough>
 
 Bu, dönüşüm iş akışını zaman damgalı selamlamalar üzerinde çalıştıracaktır.
 
@@ -613,31 +606,31 @@ Bu, dönüşüm iş akışını zaman damgalı selamlamalar üzerinde çalışt�
 
 `output {}` bloğuna `upper` ve `reversed` girişlerini ekleyin; her biri kendi alt dizini için bir `path` yönergesiyle birlikte:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="20" hl_lines="5 6 7 8 9 10"
-    output {
-        greetings {
-            path 'greetings'
-        }
-        upper {
-            path 'upper'
-        }
-        reversed {
-            path 'reversed'
-        }
+```nextflow {2,3,4,5} title="main.nf" showLineNumbers startLineNumber=20 step="Önce"
+output {
+    greetings {
+        path 'greetings'
     }
-    ```
+}
+```
 
-=== "Önce"
-
-    ```groovy title="main.nf" linenums="20" hl_lines="2 3 4 5"
-    output {
-        greetings {
-            path 'greetings'
-        }
+```nextflow {5,6,7,8,9,10} title="main.nf" showLineNumbers startLineNumber=20 step="Sonra"
+output {
+    greetings {
+        path 'greetings'
     }
-    ```
+    upper {
+        path 'upper'
+    }
+    reversed {
+        path 'reversed'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 Bu, nihai çıktıları uygun dizinlere yayımlayacaktır.
 
@@ -647,66 +640,68 @@ Her şeyin çalıştığını test etmek için pipeline'ı çalıştırın:
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+Launching `main.nf` [special_magritte] revision: 2a0e54fecd
+executor >  local (15)
+[e7/e051a5] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
+[ca/cf1b18] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
+[e5/aa6be2] GRE…ing timestamp to greeting) | 3 of 3 ✔
+[d2/7afc88] TRA…imestamped_Bob-output.txt) | 3 of 3 ✔
+[5b/70f190] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/workflows_of_workflows/results
+
+  greetings:
+    - greetings/Bob-output.txt
+    - greetings/Charlie-output.txt
+    - greetings/Alice-output.txt
+
+  upper:
+    - upper/UPPER-timestamped_Charlie-output.txt
+    - upper/UPPER-timestamped_Bob-output.txt
+    - upper/UPPER-timestamped_Alice-output.txt
+
+  reversed:
+    - reversed/REVERSED-UPPER-timestamped_Charlie-output.txt
+    - reversed/REVERSED-UPPER-timestamped_Bob-output.txt
+    - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
 ```
 
-??? success "Komut çıktısı"
+<details class="abstract">
+<summary>`results/` dizinine eklenen yeni içerik</summary>
 
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-    Launching `main.nf` [special_magritte] revision: 2a0e54fecd
-    executor >  local (15)
-    [e7/e051a5] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
-    [ca/cf1b18] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
-    [e5/aa6be2] GRE…ing timestamp to greeting) | 3 of 3 ✔
-    [d2/7afc88] TRA…imestamped_Bob-output.txt) | 3 of 3 ✔
-    [5b/70f190] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
+```console
+results/
+├── greetings
+│   ├── Alice-output.txt
+│   ├── Bob-output.txt
+│   └── Charlie-output.txt
+├── reversed
+│   ├── REVERSED-UPPER-timestamped_Alice-output.txt
+│   ├── REVERSED-UPPER-timestamped_Bob-output.txt
+│   └── REVERSED-UPPER-timestamped_Charlie-output.txt
+└── upper
+    ├── UPPER-timestamped_Alice-output.txt
+    ├── UPPER-timestamped_Bob-output.txt
+    └── UPPER-timestamped_Charlie-output.txt
+```
 
-    Outputs:
+`results/` kök dizini aynı zamanda 1.1. ve 2.1. bölümlerindeki bağımsız çalıştırmalardan kalan dosyaları (`Alice-output.txt`, `timestamped_Alice-output.txt`, `UPPER-timestamped_Alice-output.txt` vb.) içermeye devam etmektedir.
+Bu beklenen bir durumdur: bu ders hiçbir zaman bunları temizlemenizi istemez.
 
-      /workspaces/training/side-quests/workflows_of_workflows/results
+</details>
 
-      greetings:
-        - greetings/Bob-output.txt
-        - greetings/Charlie-output.txt
-        - greetings/Alice-output.txt
+<details class="abstract">
+<summary>Dosya içeriği</summary>
 
-      upper:
-        - upper/UPPER-timestamped_Charlie-output.txt
-        - upper/UPPER-timestamped_Bob-output.txt
-        - upper/UPPER-timestamped_Alice-output.txt
+```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
+!ECILA ,OLLEH ]54:84:81 31-90-6202[
+```
 
-      reversed:
-        - reversed/REVERSED-UPPER-timestamped_Charlie-output.txt
-        - reversed/REVERSED-UPPER-timestamped_Bob-output.txt
-        - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
-    ```
-
-??? abstract "`results/` dizinine eklenen yeni içerik"
-
-    ```console
-    results/
-    ├── greetings
-    │   ├── Alice-output.txt
-    │   ├── Bob-output.txt
-    │   └── Charlie-output.txt
-    ├── reversed
-    │   ├── REVERSED-UPPER-timestamped_Alice-output.txt
-    │   ├── REVERSED-UPPER-timestamped_Bob-output.txt
-    │   └── REVERSED-UPPER-timestamped_Charlie-output.txt
-    └── upper
-        ├── UPPER-timestamped_Alice-output.txt
-        ├── UPPER-timestamped_Bob-output.txt
-        └── UPPER-timestamped_Charlie-output.txt
-    ```
-
-    `results/` kök dizini aynı zamanda 1.1. ve 2.1. bölümlerindeki bağımsız çalıştırmalardan kalan dosyaları (`Alice-output.txt`, `timestamped_Alice-output.txt`, `UPPER-timestamped_Alice-output.txt` vb.) içermeye devam etmektedir.
-    Bu beklenen bir durumdur: bu ders hiçbir zaman bunları temizlemenizi istemez.
-
-??? abstract "Dosya içeriği"
-
-    ```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
-    !ECILA ,OLLEH ]54:84:81 31-90-6202[
-    ```
+</details>
 
 Pipeline uçtan uca çalışıyor: selamlama büyük harfe dönüştürülmüş ve tersine çevrilmiştir.
 
@@ -741,7 +736,7 @@ Bu teknikleri kendi çalışmalarınızda uygulamak, bakımı kolay ve ölçekle
 
 1.  **İş akışı yapısı**: Her iş akışı için `take:` ve `emit:` sözdizimini kullanarak açık girdiler ve çıktılar tanımladık; bileşenler arasında iyi tanımlanmış arayüzler oluşturduk ve iş akışı mantığını `main:` bloğunun içine yerleştirdik.
 
-    ```groovy
+    ```nextflow
     workflow EXAMPLE_WORKFLOW {
         take:
         // Girdi kanalları burada tanımlanır
@@ -762,19 +757,19 @@ Bu teknikleri kendi çalışmalarınızda uygulamak, bakımı kolay ve ölçekle
 
     - Tek bir iş akışını içe aktarma
 
-    ```groovy
+    ```nextflow
     include { WORKFLOW_NAME } from './path/to/workflow'
     ```
 
     - Birden fazla iş akışını içe aktarma
 
-    ```groovy
+    ```nextflow
     include { WORKFLOW_A; WORKFLOW_B } from './path/to/workflows'
     ```
 
     - Ad çakışmalarını önlemek için takma adla içe aktarma
 
-    ```groovy
+    ```nextflow
     include { WORKFLOW_A as WORKFLOW_A_ALIAS } from './path/to/workflow'
     ```
 
@@ -783,7 +778,7 @@ Bu teknikleri kendi çalışmalarınızda uygulamak, bakımı kolay ve ölçekle
 
     - Adsız iş akışı (giriş noktası)
 
-    ```groovy
+    ```nextflow
     workflow {
         // Betik çalıştırıldığında burası giriş noktasıdır
         NAMED_WORKFLOW(input_ch)
@@ -792,7 +787,7 @@ Bu teknikleri kendi çalışmalarınızda uygulamak, bakımı kolay ve ölçekle
 
     - Adlandırılmış iş akışı (giriş iş akışından çağrılır)
 
-    ```groovy
+    ```nextflow
     workflow NAMED_WORKFLOW {
         // Giriş iş akışından çağrılmalıdır
     }
@@ -800,7 +795,7 @@ Bu teknikleri kendi çalışmalarınızda uygulamak, bakımı kolay ve ölçekle
 
 4.  **Veri akışını yönetme**: Ad alanı gösterimini (`WORKFLOW_NAME.out.channel_name`) kullanarak iş akışı çıktılarına nasıl erişileceğini ve bunların diğer iş akışlarına nasıl iletileceğini öğrendik.
 
-    ```groovy
+    ```nextflow
     WORKFLOW_A(input_ch)
     WORKFLOW_B(WORKFLOW_A.out.some_channel)
     ```
@@ -815,4 +810,4 @@ Bu teknikleri kendi çalışmalarınızda uygulamak, bakımı kolay ve ölçekle
 
 ## Sırada ne var?
 
-[Yan Görevler menüsüne](../index.md) dönün veya listedeki bir sonraki konuya geçmek için sayfanın sağ alt köşesindeki düğmeye tıklayın.
+[Yan Görevler menüsüne](../index.mdx) dönün veya listedeki bir sonraki konuya geçmek için sayfanın sağ alt köşesindeki düğmeye tıklayın.

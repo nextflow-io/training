@@ -1,8 +1,11 @@
-# Getting started
+---
+title: Getting started
+description: 'Build with nf-core: Getting started'
+---
 
 ## Start a training environment
 
-To use the pre-built environment we provide on GitHub Codespaces, click the "Open in GitHub Codespaces" button below. For other options, see [Environment options](../envsetup/index.md).
+To use the pre-built environment we provide on GitHub Codespaces, click the "Open in GitHub Codespaces" button below. For other options, see [Environment options](../envsetup/index.mdx).
 
 We recommend opening the training environment in a new browser tab or window (use right-click, ctrl-click or cmd-click depending on your equipment) so that you can read on while the environment loads.
 You will need to keep these instructions open in parallel to work through the course.
@@ -16,23 +19,23 @@ This training environment contains all the software, code and data necessary to 
 The codespace is set up with a VSCode interface, which includes a filesystem explorer, a code editor and a terminal shell.
 All instructions given during the course (e.g. 'open the file', 'edit the code' or 'run this command') refer to those three parts of the VScode interface unless otherwise specified.
 
-If you are working through this course by yourself, please acquaint yourself with the [environment basics](../envsetup/01_setup.md) for further details.
+If you are working through this course by yourself, please acquaint yourself with the [environment basics](../envsetup/01_setup.mdx) for further details.
 
 ### Version requirements
 
 This training works with Nextflow 25.10.2 or later **with the v2 syntax parser**, which is the default from Nextflow 26.04 onward.
-In our training environment you don't need to do anything: it runs Nextflow 26.04.4 with the v2 parser. If you are using a local or custom environment, see the [version notes](../info/nxf_versions.md).
+In our training environment you don't need to do anything: it runs Nextflow 26.04.4 with the v2 parser. If you are using a local or custom environment, see the [version notes](../info/nxf_versions.mdx).
 
 This training additionally requires **nf-core tools 4.1.0**.
 If you use a different version of nf-core tooling, you may have difficulty following along.
 
 You can check what version is installed in your environment using the command `nf-core --version`.
 
-!!! warning "v2 parser compatibility"
-
-    Many nf-core pipelines do not yet support the v2 syntax parser.
-    If you run an nf-core pipeline other than those used in this course and encounter errors, you may need to switch to the v1 parser by setting `export NXF_SYNTAX_PARSER=v1`.
-    See the [version notes](../info/nxf_versions.md) for details.
+:::caution[v2 parser compatibility]
+Many nf-core pipelines do not yet support the v2 syntax parser.
+If you run an nf-core pipeline other than those used in this course and encounter errors, you may need to switch to the v1 parser by setting `export NXF_SYNTAX_PARSER=v1`.
+See the [version notes](../info/nxf_versions.mdx) for details.
+:::
 
 ## Get ready to work
 
@@ -48,13 +51,13 @@ Change directory now by running this command in the terminal:
 cd nfcore-build/
 ```
 
-!!! tip
+:::tip
+If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
 
-    If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
-
-    ```bash
-    cd /workspaces/training/nfcore-build
-    ```
+```bash
+cd /workspaces/training/nfcore-build
+```
+:::
 
 Next, explore the contents of this directory.
 
@@ -71,23 +74,26 @@ Here we generate a table of contents to the second level down:
 tree . -L 2
 ```
 
-??? abstract "Directory contents"
+<details class="abstract">
+<summary>Directory contents</summary>
 
-    ```console
-    .
-    ├── greetings.csv
-    ├── original-hello
-    │   ├── hello.nf
-    │   ├── modules
-    │   └── nextflow.config
-    └── solutions
-        ├── composable-hello
-        ├── core-hello-part1
-        ├── core-hello-part2
-        ├── core-hello-part3
-        ├── core-hello-part4
-        └── core-hello-start
-    ```
+```console
+.
+├── greetings.csv
+├── original-hello
+│   ├── hello.nf
+│   ├── modules
+│   └── nextflow.config
+└── solutions
+    ├── composable-hello
+    ├── core-hello-part1
+    ├── core-hello-part2
+    ├── core-hello-part3
+    ├── core-hello-part4
+    └── core-hello-start
+```
+
+</details>
 
 Click on the colored box to expand the section and view its contents.
 We use collapsible sections like this to include expected command output in a concise way.

@@ -1,12 +1,12 @@
 ---
 title: Versioni di Nextflow
 description: Comprendere e gestire l'evoluzione delle versioni della sintassi di Nextflow
-hide:
-  - toc
-  - footer
+tableOfContents: false
+prev: false
+next: false
 ---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Versione della sintassi di Nextflow attualmente supportata e requisiti
 
@@ -17,8 +17,8 @@ La versione di Nextflow attualmente caricata per impostazione predefinita nel no
 
 Poiché i corsi ora utilizzano input tipizzati a livello di flusso di lavoro e direttive di output a livello di flusso di lavoro, richiedono l'uso del parser di sintassi V2, **salvo diversa indicazione**.
 Il parser V2 è quello predefinito a partire da Nextflow 26.04, quindi nella versione che carichiamo non è necessario abilitarlo manualmente.
-Se prevedete di utilizzare l'ambiente che forniamo tramite [Github Codespaces](../envsetup/01_setup.md) o [devcontainer locali](../envsetup/03_devcontainer.md), non dovete fare nulla a meno che non sia specificato nelle istruzioni del corso.
-Tuttavia, se prevedete di seguire le formazioni nel vostro ambiente ([Installazione manuale](../envsetup/02_local.md)), dovrete assicurarvi di utilizzare Nextflow versione 25.10.2 o successiva e di abilitare il parser di sintassi v2 se utilizzate una versione precedente alla 26.04.
+Se prevedete di utilizzare l'ambiente che forniamo tramite [Github Codespaces](../envsetup/01_setup.mdx) o [devcontainer locali](../envsetup/03_devcontainer.mdx), non dovete fare nulla a meno che non sia specificato nelle istruzioni del corso.
+Tuttavia, se prevedete di seguire le formazioni nel vostro ambiente ([Installazione manuale](../envsetup/02_local.mdx)), dovrete assicurarvi di utilizzare Nextflow versione 25.10.2 o successiva e di abilitare il parser di sintassi v2 se utilizzate una versione precedente alla 26.04.
 
 ## Versioni precedenti dei materiali di formazione
 
@@ -78,7 +78,7 @@ Per **disabilitare** il parser di sintassi v2 per la sessione corrente, eseguite
 export NXF_SYNTAX_PARSER=v1
 ```
 
-<!-- Sarà possibile disabilitarlo nelle versioni successive alla 26.04? -->
+{/* Sarà possibile disabilitarlo nelle versioni successive alla 26.04? */}
 
 ### Migrazione del codice esistente
 
@@ -101,8 +101,8 @@ Se avete bisogno di aiuto, contattateci su Slack o sul forum.
 
 <div markdown class="homepage_logos">
 
-![Seqera](../assets/img/seqera_logo.png#only-light)
+<span class="dark:sl-hidden">![Seqera](../../assets/img/seqera_logo.png)</span>
 
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
+<span class="light:sl-hidden">![Seqera](../../assets/img/seqera_logo_dark.png)</span>
 
 </div>

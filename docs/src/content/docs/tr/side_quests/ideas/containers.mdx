@@ -1,6 +1,9 @@
-# Bölüm 1: Daha Fazla Konteyner
+---
+title: 'Bölüm 1: Daha Fazla Konteyner'
+description: '[YAPILACAK]'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 [YAPILACAK]
 
@@ -18,11 +21,11 @@ Bu bölümün sonundaki alıştırmada kullanılacak olan `quote` pip paketi iç
 Seqera Containers, pip ve conda (bioconda dahil) ile yüklenebilen araçlar için konteyner imajları oluşturan ücretsiz bir hizmettir.
 [Seqera Containers](https://www.seqera.io/containers/) sitesine gidin ve `quote` pip paketini arayın.
 
-![Seqera Containers](img/seqera-containers-1.png)
+
 
 `quote` pip paketi için bir konteyner imajı talep etmek üzere "+Add" ve ardından "Get Container" düğmesine tıklayın.
 
-![Seqera Containers](img/seqera-containers-2.png)
+
 
 Paketin bu sürümü için bir topluluk konteyneri ilk kez oluşturuluyorsa, tamamlanması birkaç dakika sürebilir.
 Sizin için oluşturulan konteyner imajının URI'sini (örneğin `community.wave.seqera.io/library/pip_quote:ae07804021465ee9`) kopyalamak için tıklayın.
@@ -49,7 +52,7 @@ Seqera Containers web sitesine dönün ve "Build Details" düğmesine tıklayın
 Bakacağımız ilk öğe, konteyner imajını oluşturmak için gereken tüm komutları içeren bir tür betik dosyası olan `Dockerfile`'dır.
 Her bir bölümün ne yaptığını anlamanıza yardımcı olmak için aşağıdaki Dockerfile'a bazı açıklayıcı yorumlar ekledik.
 
-```Dockerfile title="Dockerfile"
+```dockerfile title="Dockerfile"
 # Micromamba temel docker imajından başla
 FROM mambaorg/micromamba:1.5.10-noble
 # conda.yml dosyasını konteynere kopyala
@@ -70,7 +73,7 @@ ENV PATH="$MAMBA_ROOT_PREFIX/bin:$PATH"
 
 Bakacağımız ikinci öğe, konteyner imajına yüklenmesi gereken paketlerin listesini içeren `conda.yml` dosyasıdır.
 
-```conda.yml title="conda.yml"
+```yaml title="conda.yml"
 channels:
 - conda-forge
 - bioconda
@@ -82,10 +85,10 @@ dependencies:
 
 Bu dosyaların içeriğini `containers/build` dizininde bulunan taslakların içine kopyalayın, ardından konteyner imajını kendiniz oluşturmak için aşağıdaki komutu çalıştırın.
 
-!!! Note "Not"
-
-    Konteyner imajını `quote` adı ve `latest` etiketi ile etiketlemek için `-t quote:latest` bayrağını kullanıyoruz.
-    Bu sistemi çalıştırırken konteyner imajına atıfta bulunmak için bu etiketi kullanabileceğiz.
+:::note[Not]
+Konteyner imajını `quote` adı ve `latest` etiketi ile etiketlemek için `-t quote:latest` bayrağını kullanıyoruz.
+Bu sistemi çalıştırırken konteyner imajına atıfta bulunmak için bu etiketi kullanabileceğiz.
+:::
 
 ```bash
 docker build -t quote:latest containers/build
@@ -103,7 +106,7 @@ Nextflow pipeline'larınızda kullanmak istediğiniz bir araç için konteyner i
 
 ### Sırada ne var?
 
-Bu eğitim serisinin [sonraki bölümüne](./04_hello_genomics.md) devam etmek için ihtiyacınız olan her şeye sahipsiniz.
+Bu eğitim serisinin sonraki bölümüne devam etmek için ihtiyacınız olan her şeye sahipsiniz.
 Ayrıca `quote` konteynerini kullanarak bilgisayar/biyoloji öncüleri hakkında alıntılar almak ve bunları `cowsay` konteynerini kullanarak görüntülemek için isteğe bağlı bir alıştırmayla devam edebilirsiniz.
 
 ---
@@ -143,17 +146,17 @@ Bu alıştırmaları yapmak, eğitimin sonraki bölümlerini anlamak için _gere
 
 `quote` konteyner imajı için, önceki ek alıştırmada kendiniz oluşturduğunuz imajı veya Seqera Containers'dan aldığınız imajı kullanabilirsiniz.
 
-!!! Hint "İpucu"
-
-    getQuote sürecinizin `script` bloğu için iyi bir seçenek şu olabilir:
-        ```groovy
-        script:
-            def safe_author = author.tokenize(' ').join('-')
-            """
-            quote "$author" > quote-${safe_author}.txt
-            echo "-${author}" >> quote-${safe_author}.txt
-            """
-        ```
+:::note[İpucu]
+getQuote sürecinizin `script` bloğu için iyi bir seçenek şu olabilir:
+    ```nextflow
+    script:
+        def safe_author = author.tokenize(' ').join('-')
+        """
+        quote "$author" > quote-${safe_author}.txt
+        echo "-${author}" >> quote-${safe_author}.txt
+        """
+    ```
+:::
 
 Bu alıştırmanın çözümünü `containers/solutions/hello-containers-4.1.nf` dosyasında bulabilirsiniz.
 
@@ -162,7 +165,7 @@ Bu alıştırmanın çözümünü `containers/solutions/hello-containers-4.1.nf`
 Pipeline'ınıza hem `quote` hem de `sayHello` için tasarlanmış girdileri kabul etmesine izin verecek bazı dallanma mantığı ekleyin.
 İşte bir Nextflow iş akışında `if` ifadesinin nasıl kullanılacağına dair bir örnek:
 
-```groovy title="hello-containers.nf"
+```nextflow title="hello-containers.nf"
 workflow {
     if (params.quote) {
         ...
@@ -174,9 +177,9 @@ workflow {
 }
 ```
 
-!!! Hint "İpucu"
-
-    Bir sürecin çıktı kanalına bir ad atamak için `new_ch = processName.out` kullanabilirsiniz.
+:::note[İpucu]
+Bir sürecin çıktı kanalına bir ad atamak için `new_ch = processName.out` kullanabilirsiniz.
+:::
 
 Bu alıştırmanın çözümünü `containers/solutions/hello-containers-4.2.nf` dosyasında bulabilirsiniz.
 

@@ -1,10 +1,13 @@
-# 시작하기
+---
+title: 시작하기
+description: 'Build with nf-core: 시작하기'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## 교육 환경 시작하기
 
-GitHub Codespaces에서 제공하는 사전 구축된 환경을 사용하려면 아래의 "Open in GitHub Codespaces" 버튼을 클릭하십시오. 다른 옵션은 [환경 옵션](../envsetup/index.md)을 참조하십시오.
+GitHub Codespaces에서 제공하는 사전 구축된 환경을 사용하려면 아래의 "Open in GitHub Codespaces" 버튼을 클릭하십시오. 다른 옵션은 [환경 옵션](../envsetup/index.mdx)을 참조하십시오.
 
 환경이 로드되는 동안 계속 읽을 수 있도록 새 브라우저 탭 또는 창에서 교육 환경을 여는 것을 권장합니다(사용 중인 운영체제에 따라 우클릭, ctrl-클릭 또는 cmd-클릭 사용).
 과정을 진행하려면 이 지침을 계속 열어두어야 합니다.
@@ -18,23 +21,23 @@ GitHub Codespaces에서 제공하는 사전 구축된 환경을 사용하려면 
 codespace는 VSCode 인터페이스로 설정되어 있으며, 파일 시스템 탐색기, 코드 편집기 및 터미널 셸이 포함되어 있습니다.
 과정 중에 제공되는 모든 지침(예: '파일 열기', '코드 편집' 또는 '이 명령 실행')은 달리 명시되지 않는 한 VSCode 인터페이스의 이 세 부분을 참조합니다.
 
-이 과정을 혼자 진행하는 경우 자세한 내용은 [환경 기본 사항](../envsetup/01_setup.md)을 숙지하십시오.
+이 과정을 혼자 진행하는 경우 자세한 내용은 [환경 기본 사항](../envsetup/01_setup.mdx)을 숙지하십시오.
 
 ### 버전 요구 사항
 
 이 교육은 **v2 syntax parser가 활성화된** Nextflow 25.10.2 이상에서 작동하며, v2 parser는 Nextflow 26.04부터 기본값입니다.
-제공하는 교육 환경에서는 별도로 설정할 필요가 없습니다. v2 parser가 적용된 Nextflow 26.04.4가 실행됩니다. 로컬 또는 사용자 지정 환경을 사용하는 경우 [버전 참고 사항](../info/nxf_versions.md)을 확인하십시오.
+제공하는 교육 환경에서는 별도로 설정할 필요가 없습니다. v2 parser가 적용된 Nextflow 26.04.4가 실행됩니다. 로컬 또는 사용자 지정 환경을 사용하는 경우 [버전 참고 사항](../info/nxf_versions.mdx)을 확인하십시오.
 
 이 교육에는 추가로 **nf-core tools 4.1.0**가 필요합니다.
 다른 버전의 nf-core 도구를 사용하는 경우 따라가기 어려울 수 있습니다.
 
 `nf-core --version` 명령을 사용하여 환경에 설치된 버전을 확인할 수 있습니다.
 
-!!! warning "v2 parser 호환성"
-
-    많은 nf-core 파이프라인이 아직 v2 syntax parser를 지원하지 않습니다.
-    이 과정에서 사용하는 파이프라인 외의 nf-core 파이프라인을 실행하다가 오류가 발생하면 `export NXF_SYNTAX_PARSER=v1`을 설정하여 v1 parser로 전환해야 할 수 있습니다.
-    자세한 내용은 [버전 참고 사항](../info/nxf_versions.md)을 확인하십시오.
+:::caution[v2 parser 호환성]
+많은 nf-core 파이프라인이 아직 v2 syntax parser를 지원하지 않습니다.
+이 과정에서 사용하는 파이프라인 외의 nf-core 파이프라인을 실행하다가 오류가 발생하면 `export NXF_SYNTAX_PARSER=v1`을 설정하여 v1 parser로 전환해야 할 수 있습니다.
+자세한 내용은 [버전 참고 사항](../info/nxf_versions.mdx)을 확인하십시오.
+:::
 
 ## 작업 준비하기
 
@@ -50,13 +53,13 @@ codespace가 실행되면 교육에 들어가기 전에 두 가지 작업을 수
 cd nfcore-build/
 ```
 
-!!! tip "팁"
+:::tip[팁]
+어떤 이유로든 이 디렉토리를 벗어나는 경우(예: codespace가 중지 상태로 전환됨) Github Codespaces 교육 환경 내에서 실행하는 경우 전체 경로를 사용하여 언제든지 돌아갈 수 있습니다:
 
-    어떤 이유로든 이 디렉토리를 벗어나는 경우(예: codespace가 중지 상태로 전환됨) Github Codespaces 교육 환경 내에서 실행하는 경우 전체 경로를 사용하여 언제든지 돌아갈 수 있습니다:
-
-    ```bash
-    cd /workspaces/training/nfcore-build
-    ```
+```bash
+cd /workspaces/training/nfcore-build
+```
+:::
 
 이제 이 디렉토리의 내용을 살펴봅니다.
 
@@ -73,23 +76,26 @@ cd nfcore-build/
 tree . -L 2
 ```
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console
-    .
-    ├── greetings.csv
-    ├── original-hello
-    │   ├── hello.nf
-    │   ├── modules
-    │   └── nextflow.config
-    └── solutions
-        ├── composable-hello
-        ├── core-hello-part1
-        ├── core-hello-part2
-        ├── core-hello-part3
-        ├── core-hello-part4
-        └── core-hello-start
-    ```
+```console
+.
+├── greetings.csv
+├── original-hello
+│   ├── hello.nf
+│   ├── modules
+│   └── nextflow.config
+└── solutions
+    ├── composable-hello
+    ├── core-hello-part1
+    ├── core-hello-part2
+    ├── core-hello-part3
+    ├── core-hello-part4
+    └── core-hello-start
+```
+
+</details>
 
 색상이 있는 상자를 클릭하여 섹션을 확장하고 내용을 확인하십시오.
 예상되는 명령 출력을 간결한 방식으로 포함하기 위해 이와 같은 접을 수 있는 섹션을 사용합니다.

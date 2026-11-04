@@ -1,6 +1,9 @@
-# Bölüm 2: nf-core/molkart'ı Çalıştırma
+---
+title: 'Bölüm 2: nf-core/molkart''ı Çalıştırma'
+description: Bölüm 1'de, Nextflow çalıştırmasının temellerini anlamak için basit bir Hello World iş akışı çalıştırdık.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bölüm 1'de, Nextflow çalıştırmasının temellerini anlamak için basit bir Hello World iş akışı çalıştırdık.
 Şimdi gerçek dünyadan bir biyogörüntüleme pipeline'ı çalıştıracağız: **nf-core/molkart**.
@@ -25,14 +28,14 @@ nf-core pipeline'larının temel özellikleri:
 - **Kalite kontrol**: MultiQC kullanarak otomatik kalite kontrol raporları
 - **Konteyner desteği**: Tekrarlanabilirlik için önceden hazırlanmış konteynerler
 
-!!! tip "nf-core hakkında daha fazla bilgi edinmek ister misiniz?"
-
-    nf-core pipeline geliştirmeye derinlemesine bir giriş için [Build with nf-core](../../nfcore_build/index.md) eğitim kursuna göz atın.
-    Sıfırdan nf-core pipeline'ları oluşturmayı ve özelleştirmeyi kapsar.
+:::tip[nf-core hakkında daha fazla bilgi edinmek ister misiniz?]
+nf-core pipeline geliştirmeye derinlemesine bir giriş için [Build with nf-core](../../nfcore_build/index.mdx) eğitim kursuna göz atın.
+Sıfırdan nf-core pipeline'ları oluşturmayı ve özelleştirmeyi kapsar.
+:::
 
 ### 1.2. molkart pipeline'ı
 
-![nf-core/molkart pipeline'ı](img/molkart.png)
+![nf-core/molkart pipeline'ı](../../../nf4_science/imaging/img/molkart.png)
 
 [nf-core/molkart](https://nf-co.re/molkart) pipeline'ı, uzamsal transkriptomik görüntüleme verilerini birkaç aşamadan geçirerek işler:
 
@@ -60,11 +63,11 @@ git clone --branch 1.2.0 --depth 1 https://github.com/nf-core/molkart
 
 Bu, tam pipeline kaynak kodunu içeren bir `molkart/` dizini oluşturur.
 
-!!! note "Neden yerel olarak klonluyoruz?"
-
-    Genellikle, nf-core pipeline'larını doğrudan GitHub'dan `nextflow run nf-core/molkart -r 1.2.0` kullanarak çalıştırırsınız.
-    Nextflow, istenen pipeline sürümünü sizin için otomatik olarak `$HOME/.nextflow/assets/nf-core/molkart` dizinine indirir ve oradan çalıştırır.
-    Ancak bu eğitim için, kodu daha kolay inceleyebilmemiz amacıyla pipeline'ı farklı bir yerel dizine klonluyoruz.
+:::note[Neden yerel olarak klonluyoruz?]
+Genellikle, nf-core pipeline'larını doğrudan GitHub'dan `nextflow run nf-core/molkart -r 1.2.0` kullanarak çalıştırırsınız.
+Nextflow, istenen pipeline sürümünü sizin için otomatik olarak `$HOME/.nextflow/assets/nf-core/molkart` dizinine indirir ve oradan çalıştırır.
+Ancak bu eğitim için, kodu daha kolay inceleyebilmemiz amacıyla pipeline'ı farklı bir yerel dizine klonluyoruz.
+:::
 
 ### 2.1. Konteyner gereksinimlerini anlama
 
@@ -99,32 +102,35 @@ Bu parametreleri kullanarak pipeline'ı çalıştırmayı deneyelim:
 nextflow run ./molkart -params-file params.yaml
 ```
 
-!!! Warning "Bu komut başarısız olacak - bu kasıtlı!"
-
-    Neden gerekli olduklarını göstermek için kasıtlı olarak bunu konteynerler olmadan çalıştırıyoruz.
+:::caution[Bu komut başarısız olacak - bu kasıtlı!]
+Neden gerekli olduklarını göstermek için kasıtlı olarak bunu konteynerler olmadan çalıştırıyoruz.
+:::
 
 Birkaç dakika sonra, şuna benzer bir hata göreceksiniz:
 
-??? failure "Komut çıktısı"
+<details class="failure">
+<summary>Komut çıktısı</summary>
 
-    ```console
-    ERROR ~ Error executing process > 'NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)'
+```console
+ERROR ~ Error executing process > 'NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)'
 
-    Caused by:
-      Process `NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)` terminated with an error exit status (127)
+Caused by:
+  Process `NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)` terminated with an error exit status (127)
 
-    Command executed:
+Command executed:
 
-      duplicate_finder.py \
-          spots.txt \
-          90
+  duplicate_finder.py \
+      spots.txt \
+      90
 
-    Command exit status:
-      127
+Command exit status:
+  127
 
-    Command error:
-      .command.sh: line 3: duplicate_finder.py: command not found
-    ```
+Command error:
+  .command.sh: line 3: duplicate_finder.py: command not found
+```
+
+</details>
 
 **Ne oluyor?**
 
@@ -147,7 +153,7 @@ code molkart/modules/local/clahe/main.nf
 
 5. satıra bakın - şunu göreceksiniz:
 
-```groovy
+```nextflow
 container 'ghcr.io/schapirolabor/molkart-local:v0.0.4'
 ```
 
@@ -170,7 +176,7 @@ code nextflow.config
 
 `docker.enabled = false` ifadesini `docker.enabled = true` olarak değiştirin:
 
-```groovy
+```nextflow nextflow="config"
 docker.enabled = true
 process {
     resourceLimits = [
@@ -193,96 +199,99 @@ Bu sefer Nextflow:
 3. Her işlemi belirtilen konteyner içinde çalıştıracak
 4. Tüm araçlar konteynerler içinde mevcut olduğu için başarıyla çalışacak
 
-!!! Tip "Konteynerlar neden önemlidir"
+:::tip[Konteynerlar neden önemlidir]
+Çoğu nf-core pipeline'ı konteynerizasyonu (Docker, Singularity, Podman, vb.) **gerektirir** çünkü:
 
-    Çoğu nf-core pipeline'ı konteynerizasyonu (Docker, Singularity, Podman, vb.) **gerektirir** çünkü:
+- Standart ortamlarda bulunmayan özel biyoinformatik yazılımları kullanırlar
+- Konteynerler tekrarlanabilirliği sağlar - aynı yazılım sürümleri her yerde çalışır
+- Düzinelerce aracı ve bağımlılıklarını manuel olarak kurmanız gerekmez
 
-    - Standart ortamlarda bulunmayan özel biyoinformatik yazılımları kullanırlar
-    - Konteynerler tekrarlanabilirliği sağlar - aynı yazılım sürümleri her yerde çalışır
-    - Düzinelerce aracı ve bağımlılıklarını manuel olarak kurmanız gerekmez
-
-    Nextflow'da konteynerler hakkında daha fazla bilgi için, Hello Nextflow eğitiminden [Hello Containers](../../hello_nextflow/05_hello_containers.md) bölümüne bakın.
+Nextflow'da konteynerler hakkında daha fazla bilgi için, Hello Nextflow eğitiminden [Hello Containers](../../hello_nextflow/05_hello_containers.mdx) bölümüne bakın.
+:::
 
 ### 2.3. Çalıştırmayı izleme
 
 Pipeline çalışırken, buna benzer bir çıktı göreceksiniz:
 
-??? success "Komut çıktısı"
+<details class="success">
+<summary>Komut çıktısı</summary>
 
-    ```console
-     N E X T F L O W   ~  version 26.04.4
+```console
+ N E X T F L O W   ~  version 26.04.4
 
-    Launching `./molkart/main.nf` [exotic_banach] revision: e4152308ec
+Launching `./molkart/main.nf` [exotic_banach] revision: e4152308ec
 
-    WARN: Unrecognized config option 'validation.help.enabled'
-    WARN: Unrecognized config option 'validation.defaultIgnoreParams'
-    WARN: Unrecognized config option 'validation.monochromeLogs'
+WARN: Unrecognized config option 'validation.help.enabled'
+WARN: Unrecognized config option 'validation.defaultIgnoreParams'
+WARN: Unrecognized config option 'validation.monochromeLogs'
 
-    ------------------------------------------------------
-                                            ,--./,-.
-            ___     __   __   __   ___     /,-._.--~'
-      |\ | |__  __ /  ` /  \ |__) |__         }  {
-      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                            `._,._,'
-      nf-core/molkart 1.2.0
-    ------------------------------------------------------
-    Segmentation methods and options
-      segmentation_method: mesmer,cellpose,stardist
+------------------------------------------------------
+                                        ,--./,-.
+        ___     __   __   __   ___     /,-._.--~'
+  |\ | |__  __ /  ` /  \ |__) |__         }  {
+  | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                        `._,._,'
+  nf-core/molkart 1.2.0
+------------------------------------------------------
+Segmentation methods and options
+  segmentation_method: mesmer,cellpose,stardist
 
-    Image preprocessing
-      mindagap_boxsize   : 7
-      mindagap_loopnum   : 100
-      clahe_kernel       : 25
-      mindagap_tilesize  : 90
-      clahe_pyramid_tile : 368
+Image preprocessing
+  mindagap_boxsize   : 7
+  mindagap_loopnum   : 100
+  clahe_kernel       : 25
+  mindagap_tilesize  : 90
+  clahe_pyramid_tile : 368
 
-    Input/output options
-      input              : data/samplesheet.csv
-      outdir             : results
+Input/output options
+  input              : data/samplesheet.csv
+  outdir             : results
 
-    Generic options
-      trace_report_suffix: 2026-06-23_16-25-30
+Generic options
+  trace_report_suffix: 2026-06-23_16-25-30
 
-    Core Nextflow options
-      runName            : exotic_banach
-      containerEngine    : docker
-      launchDir          : /workspaces/training/nf4-science/imaging
-      workDir            : /workspaces/training/nf4-science/imaging/work
-      projectDir         : /workspaces/training/nf4-science/imaging/molkart
-      userName           : root
-      profile            : standard
-      configFiles        : /workspaces/training/nf4-science/imaging/molkart/nextflow.config, /workspaces/training/nf4-science/imaging/nextflow.config
+Core Nextflow options
+  runName            : exotic_banach
+  containerEngine    : docker
+  launchDir          : /workspaces/training/nf4-science/imaging
+  workDir            : /workspaces/training/nf4-science/imaging/work
+  projectDir         : /workspaces/training/nf4-science/imaging/molkart
+  userName           : root
+  profile            : standard
+  configFiles        : /workspaces/training/nf4-science/imaging/molkart/nextflow.config, /workspaces/training/nf4-science/imaging/nextflow.config
 
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-    * The pipeline
-        https://doi.org/10.5281/zenodo.10650748
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+* The pipeline
+    https://doi.org/10.5281/zenodo.10650748
 
-    * The nf-core framework
-        https://doi.org/10.1038/s41587-020-0439-x
+* The nf-core framework
+    https://doi.org/10.1038/s41587-020-0439-x
 
-    * Software dependencies
-        https://github.com/nf-core/molkart/blob/master/CITATIONS.md
+* Software dependencies
+    https://github.com/nf-core/molkart/blob/master/CITATIONS.md
 
-    executor >  local (22)
-    [b4/e57ff1] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2 ✔
-    [2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2 ✔
-    [94/b1ef70] NFC…RT:CREATE_STACK (mem_only) | 1 of 1 ✔
-    [58/4b6426] NFC…DUPLICATEFINDER (mem_only) | 1 of 1 ✔
-    [c2/ef7002] NFC…DEEPCELL_MESMER (mem_only) | 1 of 1 ✔
-    [4f/ddd328] NFC…OLKART:STARDIST (mem_only) | 1 of 1 ✔
-    [8c/dd0362] NFC…OLKART:CELLPOSE (mem_only) | 1 of 1 ✔
-    [08/2ddcb5] NFC…KART:MASKFILTER (mem_only) | 3 of 3 ✔
-    [56/e30de0] NFC…LKART:SPOT2CELL (mem_only) | 3 of 3 ✔
-    [b0/5aa635] NFC…:CREATE_ANNDATA (mem_only) | 3 of 3 ✔
-    [5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3 ✔
-    [8e/8bd365] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
-    -[nf-core/molkart] Pipeline completed successfully-
-    Completed at: 23-Jun-2026 16:31:40
-    Duration    : 6m 9s
-    CPU hours   : (a few seconds)
-    Succeeded   : 22
-    ```
+executor >  local (22)
+[b4/e57ff1] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2 ✔
+[94/b1ef70] NFC…RT:CREATE_STACK (mem_only) | 1 of 1 ✔
+[58/4b6426] NFC…DUPLICATEFINDER (mem_only) | 1 of 1 ✔
+[c2/ef7002] NFC…DEEPCELL_MESMER (mem_only) | 1 of 1 ✔
+[4f/ddd328] NFC…OLKART:STARDIST (mem_only) | 1 of 1 ✔
+[8c/dd0362] NFC…OLKART:CELLPOSE (mem_only) | 1 of 1 ✔
+[08/2ddcb5] NFC…KART:MASKFILTER (mem_only) | 3 of 3 ✔
+[56/e30de0] NFC…LKART:SPOT2CELL (mem_only) | 3 of 3 ✔
+[b0/5aa635] NFC…:CREATE_ANNDATA (mem_only) | 3 of 3 ✔
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3 ✔
+[8e/8bd365] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
+-[nf-core/molkart] Pipeline completed successfully-
+Completed at: 23-Jun-2026 16:31:40
+Duration    : 6m 9s
+CPU hours   : (a few seconds)
+Succeeded   : 22
+```
+
+</details>
 
 Bu çıktının, pipeline'ın takip ettiği nf-core kuralları nedeniyle Hello World örneğimizden daha detaylı olduğuna dikkat edin:
 
@@ -369,10 +378,10 @@ Rapor şunları içerir:
 - Segmentasyon kalite metrikleri
 - Tespit edilen hücre ve nokta sayısı
 
-!!! Tip "İpucu"
-
-    MultiQC raporları genellikle tüm nf-core pipeline'larına dahil edilir.
-    Her zaman pipeline çalıştırması ve veri kalitesi hakkında üst düzey bir genel bakış sağlarlar.
+:::tip[İpucu]
+MultiQC raporları genellikle tüm nf-core pipeline'larına dahil edilir.
+Her zaman pipeline çalıştırması ve veri kalitesi hakkında üst düzey bir genel bakış sağlarlar.
+:::
 
 ### 3.3. Hücre-transkript tablolarını inceleme
 
@@ -423,9 +432,9 @@ Bu şunları gösterir:
 - CPU ve bellek kullanımı
 - Hangi görevlerin önbellekte olduğu ve hangilerinin çalıştırıldığı
 
-!!! Tip "İpucu"
-
-    Bu raporlar, kaynak tahsisini optimize etmek ve performans sorunlarını gidermek için son derece kullanışlıdır.
+:::tip[İpucu]
+Bu raporlar, kaynak tahsisini optimize etmek ve performans sorunlarını gidermek için son derece kullanışlıdır.
+:::
 
 ### Özetle
 
@@ -474,9 +483,9 @@ Hello World'den temel fark:
 - Çıktı dosyaları oldukça büyük olabilir (segmentasyon maskeleri, işlenmiş görüntüler)
 - Görev başına birden fazla girdi ve çıktı dosyası
 
-!!! Tip "İpucu"
-
-    Bir süreç başarısız olursa, çalışma dizinine gidebilir, hata mesajları için `.command.err` dosyasını inceleyebilir ve hatta sorunu ayıklamak için `.command.sh` dosyasını manuel olarak yeniden çalıştırabilirsiniz.
+:::tip[İpucu]
+Bir süreç başarısız olursa, çalışma dizinine gidebilir, hata mesajları için `.command.err` dosyasını inceleyebilir ve hatta sorunu ayıklamak için `.command.sh` dosyasını manuel olarak yeniden çalıştırabilirsiniz.
+:::
 
 ### 4.3. Çalışma dizini temizliği
 
@@ -547,10 +556,10 @@ Resume özellikle şu durumlarda değerlidir:
 - Veri indirme sırasında ağ bağlantınız düştüğünde
 - Hesaplamayı yeniden yapmadan ek çıktılar eklemek istediğinizde
 
-!!! Warning "Uyarı"
-
-    Resume yalnızca girdi verilerini, pipeline kodunu veya parametreleri değiştirmemişseniz çalışır.
-    Bunlardan herhangi birini değiştirirseniz, Nextflow etkilenen görevleri doğru bir şekilde yeniden çalıştıracaktır.
+:::caution[Uyarı]
+Resume yalnızca girdi verilerini, pipeline kodunu veya parametreleri değiştirmemişseniz çalışır.
+Bunlardan herhangi birini değiştirirseniz, Nextflow etkilenen görevleri doğru bir şekilde yeniden çalıştıracaktır.
+:::
 
 ### Özetle
 

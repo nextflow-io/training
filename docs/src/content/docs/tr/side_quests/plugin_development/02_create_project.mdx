@@ -1,22 +1,25 @@
-# Bölüm 2: Plugin Projesi Oluşturma
+---
+title: 'Bölüm 2: Plugin Projesi Oluşturma'
+description: Plugin'lerin Nextflow'u yeniden kullanılabilir işlevsellikle nasıl genişlettiğini gördünüz.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Plugin'lerin Nextflow'u yeniden kullanılabilir işlevsellikle nasıl genişlettiğini gördünüz.
 Şimdi kendi plugin'inizi oluşturacaksınız; derleme yapılandırmasını sizin için hazırlayan bir proje şablonuyla başlayacaksınız.
 
-!!! tip "Buradan mı başlıyorsunuz?"
+:::tip[Buradan mı başlıyorsunuz?]
+Bu bölüme doğrudan katılıyorsanız, başlangıç noktası olarak kullanmak üzere Bölüm 1'in çözümünü kopyalayın:
 
-    Bu bölüme doğrudan katılıyorsanız, başlangıç noktası olarak kullanmak üzere Bölüm 1'in çözümünü kopyalayın:
+```bash
+cp -r solutions/1-plugin-basics/* .
+```
+:::
 
-    ```bash
-    cp -r solutions/1-plugin-basics/* .
-    ```
-
-!!! info "Resmi belgeler"
-
-    Bu bölüm ve sonraki bölümler, plugin geliştirmenin temel konularını kapsamaktadır.
-    Kapsamlı ayrıntılar için [resmi Nextflow plugin geliştirme belgelerine](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html) bakın.
+:::note[Resmi belgeler]
+Bu bölüm ve sonraki bölümler, plugin geliştirmenin temel konularını kapsamaktadır.
+Kapsamlı ayrıntılar için [resmi Nextflow plugin geliştirme belgelerine](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html) bakın.
+:::
 
 ---
 
@@ -34,9 +37,9 @@ Plugin created successfully at path: /workspaces/training/side-quests/plugin_dev
 
 İlk argüman plugin adıdır; ikincisi ise oluşturulan kodu klasörler halinde düzenlemek için kullanılan organizasyon adınızdır.
 
-!!! tip "Manuel oluşturma"
-
-    Plugin projelerini manuel olarak da oluşturabilir ya da başlangıç noktası olarak GitHub'daki [nf-hello şablonunu](https://github.com/nextflow-io/nf-hello) kullanabilirsiniz.
+:::tip[Manuel oluşturma]
+Plugin projelerini manuel olarak da oluşturabilir ya da başlangıç noktası olarak GitHub'daki [nf-hello şablonunu](https://github.com/nextflow-io/nf-hello) kullanabilirsiniz.
+:::
 
 ---
 
@@ -137,22 +140,17 @@ plugins {
 version = '0.1.0'
 
 nextflowPlugin {
-    nextflowVersion = '25.10.0'       // (1)!
+    nextflowVersion = '25.10.0'       // [!annotate] **`nextflowVersion`**: Gereken minimum Nextflow sürümü
 
-    provider = 'training'             // (2)!
-    className = 'training.plugin.GreetingPlugin'  // (3)!
-    extensionPoints = [               // (4)!
+    provider = 'training'             // [!annotate] **`provider`**: Adınız veya organizasyonunuz
+    className = 'training.plugin.GreetingPlugin'  // [!annotate] **`className`**: Ana plugin sınıfı; Nextflow'un ilk yüklediği giriş noktası
+    extensionPoints = [               // [!annotate] **`extensionPoints`**: Nextflow'a özellik ekleyen sınıflar (fonksiyonlarınız, izleme bileşenleri vb.)
         'training.plugin.GreetingExtension',
         'training.plugin.GreetingFactory'
     ]
 
 }
 ```
-
-1. **`nextflowVersion`**: Gereken minimum Nextflow sürümü
-2. **`provider`**: Adınız veya organizasyonunuz
-3. **`className`**: Ana plugin sınıfı; Nextflow'un ilk yüklediği giriş noktası
-4. **`extensionPoints`**: Nextflow'a özellik ekleyen sınıflar (fonksiyonlarınız, izleme bileşenleri vb.)
 
 `nextflowPlugin` bloğu şunları yapılandırır:
 
@@ -166,23 +164,23 @@ nextflowPlugin {
 Şablon, güncel olmayabilecek bir `nextflowVersion` değeri oluşturur.
 Tam uyumluluk için kurulu Nextflow sürümünüzle eşleşecek şekilde güncelleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="build.gradle" hl_lines="2"
-    nextflowPlugin {
-        nextflowVersion = '26.04.0'
+```groovy {2} title="build.gradle" step="Önce"
+nextflowPlugin {
+    nextflowVersion = '25.10.0'
 
-        provider = 'training'
-    ```
+    provider = 'training'
+```
 
-=== "Önce"
+```groovy {2} title="build.gradle" step="Sonra"
+nextflowPlugin {
+    nextflowVersion = '26.04.0'
 
-    ```groovy title="build.gradle" hl_lines="2"
-    nextflowPlugin {
-        nextflowVersion = '25.10.0'
+    provider = 'training'
+```
 
-        provider = 'training'
-    ```
+</CodeWalkthrough>
 
 ---
 
@@ -205,20 +203,7 @@ Dikkat edilmesi gereken temel dosyalar şunlardır:
 - `GreetingExtension`, bu plugin'in iş akışlarına sunduğu fonksiyonları sağlar
 - `GreetingObserver`, pipeline ile birlikte çalışır ve pipeline kodunda değişiklik gerektirmeksizin olaylara yanıt verir
 
-```mermaid
-graph TD
-    A[GreetingPlugin] -->|registers| B[GreetingExtension]
-    A -->|registers| C[GreetingFactory]
-    C -->|creates| D[GreetingObserver]
-
-    B -->|provides| E["@Function methods<br/>(callable from workflows)"]
-    D -->|hooks into| F["Lifecycle events<br/>(onFlowCreate, onProcessComplete, etc.)"]
-
-    style A fill:#e1f5fe
-    style B fill:#fff3e0
-    style C fill:#fff3e0
-    style D fill:#fff3e0
-```
+![](../../../side_quests/plugin_development/img/mermaid-b474be7ef724bbf8.svg)
 
 ---
 
@@ -234,28 +219,31 @@ make install
 
 `make install`, plugin kodunu derler ve yerel Nextflow plugin dizininize (`$NXF_HOME/plugins/`) kopyalayarak kullanıma hazır hale getirir.
 
-??? example "Derleme çıktısı"
+<details class="example">
+<summary>Derleme çıktısı</summary>
 
-    Bu komutu ilk kez çalıştırdığınızda Gradle kendisini indirecektir (bu bir dakika sürebilir):
+Bu komutu ilk kez çalıştırdığınızda Gradle kendisini indirecektir (bu bir dakika sürebilir):
 
-    ```console
-    Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
-    ...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+```console
+Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
+...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
 
-    Welcome to Gradle 8.14!
-    ...
+Welcome to Gradle 8.14!
+...
 
-    Deprecated Gradle features were used in this build...
+Deprecated Gradle features were used in this build...
 
-    BUILD SUCCESSFUL in 23s
-    6 actionable tasks: 6 executed
-    ```
+BUILD SUCCESSFUL in 23s
+6 actionable tasks: 6 executed
+```
 
-    **Uyarılar beklenen bir durumdur.**
+**Uyarılar beklenen bir durumdur.**
 
-    - **"Downloading gradle..."**: Bu yalnızca ilk seferinde gerçekleşir. Sonraki derlemeler çok daha hızlıdır.
-    - **"Deprecated Gradle features..."**: Bu uyarı, kodunuzdan değil plugin şablonundan kaynaklanmaktadır. Güvenle görmezden gelebilirsiniz.
-    - **"BUILD SUCCESSFUL"**: Önemli olan budur. Plugin'iniz hatasız derlendi.
+- **"Downloading gradle..."**: Bu yalnızca ilk seferinde gerçekleşir. Sonraki derlemeler çok daha hızlıdır.
+- **"Deprecated Gradle features..."**: Bu uyarı, kodunuzdan değil plugin şablonundan kaynaklanmaktadır. Güvenle görmezden gelebilirsiniz.
+- **"BUILD SUCCESSFUL"**: Önemli olan budur. Plugin'iniz hatasız derlendi.
+
+</details>
 
 Pipeline dizinine geri dönün:
 
@@ -265,29 +253,29 @@ cd ..
 
 `nextflow.config` dosyasına nf-greeting plugin'ini ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" hl_lines="4"
-    // Plugin geliştirme alıştırmaları için yapılandırma
-    plugins {
-        id 'nf-schema@2.6.1'
-        id 'nf-greeting@0.1.0'
-    }
-    ```
+```nextflow title="nextflow.config" step="Önce"
+// Plugin geliştirme alıştırmaları için yapılandırma
+plugins {
+    id 'nf-schema@2.6.1'
+}
+```
 
-=== "Önce"
+```nextflow {4} title="nextflow.config" step="Sonra"
+// Plugin geliştirme alıştırmaları için yapılandırma
+plugins {
+    id 'nf-schema@2.6.1'
+    id 'nf-greeting@0.1.0'
+}
+```
 
-    ```groovy title="nextflow.config"
-    // Plugin geliştirme alıştırmaları için yapılandırma
-    plugins {
-        id 'nf-schema@2.6.1'
-    }
-    ```
+</CodeWalkthrough>
 
-!!! note "Yerel plugin'ler için sürüm zorunludur"
-
-    Yerel olarak kurulu plugin'leri kullanırken sürümü belirtmeniz gerekir (örneğin, `nf-greeting@0.1.0`).
-    Kayıt defterinde yayımlanmış plugin'ler yalnızca adla kullanılabilir.
+:::note[Yerel plugin'ler için sürüm zorunludur]
+Yerel olarak kurulu plugin'leri kullanırken sürümü belirtmeniz gerekir (örneğin, `nf-greeting@0.1.0`).
+Kayıt defterinde yayımlanmış plugin'ler yalnızca adla kullanılabilir.
+:::
 
 Pipeline'ı çalıştırın:
 
@@ -334,4 +322,4 @@ Pipeline'ın kendisi değişmemiştir; gözlemci, factory'de kayıtlı olduğu i
 
 Şimdi Extension sınıfında özel fonksiyonlar uygulayacak ve bunları iş akışında kullanacaksınız.
 
-[Bölüm 3'e geçin :material-arrow-right:](03_custom_functions.md){ .md-button .md-button--primary }
+<LinkButton href="03_custom_functions.mdx" variant="primary" icon="right-arrow">Bölüm 3'e geçin</LinkButton>

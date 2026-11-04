@@ -1,4 +1,12 @@
-# Part 5: Prepare your inputs
+---
+title: 'Part 5: Prepare your inputs'
+description: In Parts 1 through 3, you ran pipelines with their test profiles, which supply a ready-made input samplesheet.
+---
+
+import nfcore_use_broken_samplesheet_1_csv from '../../../../../nfcore-use/broken_samplesheet_1.csv?raw';
+import nfcore_use_broken_samplesheet_2_csv from '../../../../../nfcore-use/broken_samplesheet_2.csv?raw';
+import nfcore_use_data_sra_ids_csv from '../../../../../nfcore-use/data/sra_ids.csv?raw';
+import nfcore_use_solutions_samplesheet_csv from '../../../../../nfcore-use/solutions/samplesheet.csv?raw';
 
 In Parts 1 through 3, you ran pipelines with their test profiles, which supply a ready-made input samplesheet.
 To run a pipeline on your own data, you need to provide that samplesheet yourself.
@@ -41,44 +49,47 @@ The input schema is what the pipeline actually enforces.
 The input schema lives in the pipeline repository at `assets/schema_input.json`.
 You can view it on GitHub at [github.com/nf-core/rnaseq/blob/3.27.0/assets/schema_input.json](https://github.com/nf-core/rnaseq/blob/3.27.0/assets/schema_input.json).
 
-??? abstract "Input schema (excerpt)"
+<details class="abstract">
+<summary>Input schema (excerpt)</summary>
 
-    ```json title="assets/schema_input.json"
-    {
-        "items": {
-            "type": "object",
-            "properties": {
-                "sample": {
-                    "type": ["string", "integer"],
-                    "pattern": "^\\S+$",
-                    "errorMessage": "Sample name must be provided and cannot contain spaces",
-                    "meta": ["id"]
-                },
-                "fastq_1": {
-                    "type": "string",
-                    "format": "file-path",
-                    "exists": true,
-                    "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q(\\.gz)?$",
-                    "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq', '.fastq', '.fq.gz' or '.fastq.gz'"
-                },
-                "fastq_2": {
-                    "type": "string",
-                    "format": "file-path",
-                    "exists": true,
-                    "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q(\\.gz)?$",
-                    "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq', '.fastq', '.fq.gz' or '.fastq.gz'"
-                },
-                "strandedness": {
-                    "type": "string",
-                    "errorMessage": "Strandedness must be provided and be one of 'auto', 'forward', 'reverse' or 'unstranded'",
-                    "enum": ["forward", "reverse", "unstranded", "auto"],
-                    "meta": ["strandedness"]
-                }
+```json title="assets/schema_input.json"
+{
+    "items": {
+        "type": "object",
+        "properties": {
+            "sample": {
+                "type": ["string", "integer"],
+                "pattern": "^\\S+$",
+                "errorMessage": "Sample name must be provided and cannot contain spaces",
+                "meta": ["id"]
             },
-            "required": ["sample", "fastq_1", "strandedness"]
-        }
+            "fastq_1": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q(\\.gz)?$",
+                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq', '.fastq', '.fq.gz' or '.fastq.gz'"
+            },
+            "fastq_2": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q(\\.gz)?$",
+                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq', '.fastq', '.fq.gz' or '.fastq.gz'"
+            },
+            "strandedness": {
+                "type": "string",
+                "errorMessage": "Strandedness must be provided and be one of 'auto', 'forward', 'reverse' or 'unstranded'",
+                "enum": ["forward", "reverse", "unstranded", "auto"],
+                "meta": ["strandedness"]
+            }
+        },
+        "required": ["sample", "fastq_1", "strandedness"]
     }
-    ```
+}
+```
+
+</details>
 
 The schema states the same rules as the documentation, in a form the pipeline can check automatically:
 
@@ -95,17 +106,20 @@ The full schema also defines a few optional columns (such as `seq_platform` and 
 The samplesheet used by the `test` profile in Part 3 is a good example of these rules in practice.
 Its location is set by the `input` parameter in the pipeline's `conf/test.config` file.
 
-??? abstract "Test samplesheet (excerpt; paths shortened)"
+<details class="abstract">
+<summary>Test samplesheet (excerpt; paths shortened)</summary>
 
-    ```csv title="samplesheet_test.csv"
-    sample,fastq_1,fastq_2,strandedness
-    WT_REP1,https://.../SRR6357070_1.fastq.gz,https://.../SRR6357070_2.fastq.gz,auto
-    WT_REP1,https://.../SRR6357071_1.fastq.gz,https://.../SRR6357071_2.fastq.gz,auto
-    WT_REP2,https://.../SRR6357072_1.fastq.gz,https://.../SRR6357072_2.fastq.gz,reverse
-    RAP1_UNINDUCED_REP1,https://.../SRR6357073_1.fastq.gz,,reverse
-    RAP1_UNINDUCED_REP2,https://.../SRR6357074_1.fastq.gz,,reverse
-    RAP1_UNINDUCED_REP2,https://.../SRR6357075_1.fastq.gz,,reverse
-    ```
+```csv title="samplesheet_test.csv"
+sample,fastq_1,fastq_2,strandedness
+WT_REP1,https://.../SRR6357070_1.fastq.gz,https://.../SRR6357070_2.fastq.gz,auto
+WT_REP1,https://.../SRR6357071_1.fastq.gz,https://.../SRR6357071_2.fastq.gz,auto
+WT_REP2,https://.../SRR6357072_1.fastq.gz,https://.../SRR6357072_2.fastq.gz,reverse
+RAP1_UNINDUCED_REP1,https://.../SRR6357073_1.fastq.gz,,reverse
+RAP1_UNINDUCED_REP2,https://.../SRR6357074_1.fastq.gz,,reverse
+RAP1_UNINDUCED_REP2,https://.../SRR6357075_1.fastq.gz,,reverse
+```
+
+</details>
 
 This excerpt shows several features of the format:
 
@@ -163,37 +177,44 @@ When you don't have that information from the sequencing facility, use `auto`.
 
 Create a file named `samplesheet.csv` in your working directory and fill it in based on the information above.
 
-??? exercise
+<details class="exercise">
+<summary>Exercise</summary>
 
-    Write `samplesheet.csv` with a header row and one row per sequencing run.
-    Use paths relative to your working directory, for example `data/reads/WT_2_S2_L001_R1_001.fastq.gz`.
+Write `samplesheet.csv` with a header row and one row per sequencing run.
+Use paths relative to your working directory, for example `data/reads/WT_2_S2_L001_R1_001.fastq.gz`.
 
-??? solution
+</details>
 
-    ```csv title="samplesheet.csv"
-    --8<-- "nfcore-use/solutions/samplesheet.csv"
-    ```
+<details class="solution">
+<summary>Solution</summary>
 
-    `WT_1` has two rows, one per lane, and the pipeline merges them into a single sample.
+<Code code={nfcore_use_solutions_samplesheet_csv} lang="csv" title="samplesheet.csv" />
+
+`WT_1` has two rows, one per lane, and the pipeline merges them into a single sample.
+
+</details>
 
 Relative paths are resolved from the directory where you launch the pipeline.
 If you plan to launch from a different directory, or share the samplesheet with collaborators, use absolute paths instead.
 
-??? tip "Generating a samplesheet with a script"
+<details class="tip">
+<summary>Generating a samplesheet with a script</summary>
 
-    Writing a samplesheet by hand is fine for a handful of files, but error-prone for a real experiment with dozens of samples.
-    A short shell loop can generate the rows from the filenames:
+Writing a samplesheet by hand is fine for a handful of files, but error-prone for a real experiment with dozens of samples.
+A short shell loop can generate the rows from the filenames:
 
-    ```bash
-    echo "sample,fastq_1,fastq_2,strandedness" > samplesheet.csv
-    for r1 in data/reads/*_R1_001.fastq.gz; do
-        r2=${r1/_R1_/_R2_}
-        sample=$(basename $r1 | sed 's/_S[0-9]*_L[0-9]*_R1_001.fastq.gz//')
-        echo "$sample,$r1,$r2,auto" >> samplesheet.csv
-    done
-    ```
+```bash
+echo "sample,fastq_1,fastq_2,strandedness" > samplesheet.csv
+for r1 in data/reads/*_R1_001.fastq.gz; do
+    r2=${r1/_R1_/_R2_}
+    sample=$(basename $r1 | sed 's/_S[0-9]*_L[0-9]*_R1_001.fastq.gz//')
+    echo "$sample,$r1,$r2,auto" >> samplesheet.csv
+done
+```
 
-    Always check the result before using it, since this kind of script depends on every file following the same naming convention.
+Always check the result before using it, since this kind of script depends on every file following the same naming convention.
+
+</details>
 
 ### 2.3. Check the samplesheet without running the pipeline
 
@@ -208,40 +229,46 @@ nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --input samplesheet.c
 
 The `test` profile provides the reference files, and `--input` replaces its samplesheet with yours.
 
-??? success "Command output"
+<details class="success">
+<summary>Command output</summary>
 
-    ```console
-    ...
-    -[nf-core/rnaseq] Pipeline completed successfully-
-    ```
+```console
+...
+-[nf-core/rnaseq] Pipeline completed successfully-
+```
+
+</details>
 
 The pipeline reports success without running any tasks, which means your samplesheet passed validation.
 If you made a mistake, the pipeline stops with a list of errors; sections 4 and 5 cover how to interpret and fix them.
 
-??? tip "Running the full pipeline on this data"
+<details class="tip">
+<summary>Running the full pipeline on this data</summary>
 
-    The files only contain 2,000 read pairs each, which is below the pipeline's default minimum of 10,000 reads per sample after trimming.
-    Samples below that threshold are skipped, so create a file named `small_reads.yml` that lowers it:
+The files only contain 2,000 read pairs each, which is below the pipeline's default minimum of 10,000 reads per sample after trimming.
+Samples below that threshold are skipped, so create a file named `small_reads.yml` that lowers it:
 
-    ```yaml title="small_reads.yml"
-    min_trimmed_reads: 1000
-    ```
+```yaml title="small_reads.yml"
+min_trimmed_reads: 1000
+```
 
-    Then remove `-preview` and add `-c laptop.config` as in Part 3:
+Then remove `-preview` and add `-c laptop.config` as in Part 3:
 
-    ```bash
-    nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --input samplesheet.csv --outdir results -c laptop.config -params-file small_reads.yml
-    ```
+```bash
+nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --input samplesheet.csv --outdir results -c laptop.config -params-file small_reads.yml
+```
 
-    The parameter must be set in a params file rather than as `--min_trimmed_reads 1000` on the command line, because command-line values are passed as strings and the pipeline expects an integer.
+The parameter must be set in a params file rather than as `--min_trimmed_reads 1000` on the command line, because command-line values are passed as strings and the pipeline expects an integer.
 
-    On the default 2-core machine, a full run can fill the disk with container images; see the [disk space warning in Part 3](./03_run_production_pipeline.md#13-re-run-with-a-custom-configuration).
+On the default 2-core machine, a full run can fill the disk with container images; see the [disk space warning in Part 3](./03_run_production_pipeline.mdx#13-re-run-with-a-custom-configuration).
 
-### Takeaway
+</details>
+
+### Takeaway {#takeaway_1}
 
 You can write a samplesheet for a set of FASTQ files, including samples sequenced over multiple lanes, and check it with `-preview` before committing to a full run.
 
-### What's next?
+### What's next? {#whats-next_1}
 
 Generate a samplesheet for data from a public archive.
 
@@ -257,9 +284,7 @@ It can also write a samplesheet formatted for a downstream nf-core pipeline, inc
 
 The file `data/sra_ids.csv` lists four sequencing runs, one per line:
 
-```csv title="data/sra_ids.csv"
---8<-- "nfcore-use/data/sra_ids.csv"
-```
+<Code code={nfcore_use_data_sra_ids_csv} lang="csv" title="data/sra_ids.csv" />
 
 These runs come from a drug-screening study ([GEO series GSE206599](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE206599)) in which human cells were treated with the MEK inhibitor trametinib or with DMSO as a control.
 They were chosen because their files are only a few megabytes each.
@@ -338,12 +363,12 @@ WARN: Found the following unidentified headers in fetchngs-results/samplesheet/s
 
 The pipeline passes validation, with a warning listing the columns it does not use.
 
-### Takeaway
+### Takeaway {#takeaway_2}
 
 `nf-core/fetchngs` downloads public data and writes a samplesheet for a downstream pipeline.
 The generated samplesheet is a starting point: check the values the archives cannot provide reliably, such as strandedness, before running the analysis.
 
-### What's next?
+### What's next? {#whats-next_2}
 
 Learn to interpret and fix the errors the pipeline reports when a samplesheet is invalid.
 
@@ -360,9 +385,7 @@ At launch, the pipeline checks every row of the samplesheet against those rules 
 
 Your working directory contains a samplesheet named `broken_samplesheet_1.csv`.
 
-```csv title="broken_samplesheet_1.csv" linenums="1" hl_lines="3-6"
---8<-- "nfcore-use/broken_samplesheet_1.csv"
-```
+<Code code={nfcore_use_broken_samplesheet_1_csv} lang="csv" title="broken_samplesheet_1.csv" meta="{3-6} showLineNumbers" />
 
 Run the pipeline with it, using `-preview` as in section 2.3 so that no tasks run:
 
@@ -406,36 +429,42 @@ Compare the path with the files in `data/reads/` to find the cause.
 
 ### 4.3. Fix the samplesheet
 
-??? exercise
+<details class="exercise">
+<summary>Exercise</summary>
 
-    Fix the four errors in `broken_samplesheet_1.csv`, then re-run the command from 4.1 to confirm that the samplesheet passes validation.
+Fix the four errors in `broken_samplesheet_1.csv`, then re-run the command from 4.1 to confirm that the samplesheet passes validation.
 
-??? solution
+</details>
 
-    The fixed rows are highlighted:
+<details class="solution">
+<summary>Solution</summary>
 
-    ```csv title="broken_samplesheet_1.csv" linenums="1" hl_lines="3-6"
-    sample,fastq_1,fastq_2,strandedness
-    WT_1,data/reads/WT_1_S1_L001_R1_001.fastq.gz,data/reads/WT_1_S1_L001_R2_001.fastq.gz,auto
-    WT_1,data/reads/WT_1_S1_L002_R1_001.fastq.gz,data/reads/WT_1_S1_L002_R2_001.fastq.gz,auto
-    WT_2,data/reads/WT_2_S2_L001_R1_001.fastq.gz,data/reads/WT_2_S2_L001_R2_001.fastq.gz,auto
-    KO_1,data/reads/KO_1_S3_L001_R1_001.fastq.gz,data/reads/KO_1_S3_L001_R2_001.fastq.gz,reverse
-    KO_2,data/reads/KO_2_S4_L001_R1_001.fastq.gz,data/reads/KO_2_S4_L001_R2_001.fastq.gz,auto
-    ```
+The fixed rows are highlighted:
 
-    - Line 3: the lane in the `fastq_1` path was `L02` instead of `L002`.
-    - Line 4: the space in `WT 2` is replaced by an underscore.
-    - Line 5: `reversed` is replaced by `reverse`.
-    - Line 6: the empty strandedness value is set to `auto`.
+```csv {3-6} title="broken_samplesheet_1.csv" showLineNumbers
+sample,fastq_1,fastq_2,strandedness
+WT_1,data/reads/WT_1_S1_L001_R1_001.fastq.gz,data/reads/WT_1_S1_L001_R2_001.fastq.gz,auto
+WT_1,data/reads/WT_1_S1_L002_R1_001.fastq.gz,data/reads/WT_1_S1_L002_R2_001.fastq.gz,auto
+WT_2,data/reads/WT_2_S2_L001_R1_001.fastq.gz,data/reads/WT_2_S2_L001_R2_001.fastq.gz,auto
+KO_1,data/reads/KO_1_S3_L001_R1_001.fastq.gz,data/reads/KO_1_S3_L001_R2_001.fastq.gz,reverse
+KO_2,data/reads/KO_2_S4_L001_R1_001.fastq.gz,data/reads/KO_2_S4_L001_R2_001.fastq.gz,auto
+```
 
-    Re-running the command now reports `Pipeline completed successfully`.
+- Line 3: the lane in the `fastq_1` path was `L02` instead of `L002`.
+- Line 4: the space in `WT 2` is replaced by an underscore.
+- Line 5: `reversed` is replaced by `reverse`.
+- Line 6: the empty strandedness value is set to `auto`.
 
-### Takeaway
+Re-running the command now reports `Pipeline completed successfully`.
+
+</details>
+
+### Takeaway {#takeaway_3}
 
 Schema validation reports every error in the samplesheet at once, identifying each by row and column.
 Reading the rule that failed, rather than only the custom error message, tells you what to fix.
 
-### What's next?
+### What's next? {#whats-next_3}
 
 Some errors involve more than one row and are not visible to the schema.
 
@@ -451,9 +480,7 @@ Pipelines that need such rules implement them in their own code, which runs afte
 
 Your working directory also contains `broken_samplesheet_2.csv`.
 
-```csv title="broken_samplesheet_2.csv" linenums="1" hl_lines="2-3"
---8<-- "nfcore-use/broken_samplesheet_2.csv"
-```
+<Code code={nfcore_use_broken_samplesheet_2_csv} lang="csv" title="broken_samplesheet_2.csv" meta="{2-3} showLineNumbers" />
 
 Check it with `-preview`:
 
@@ -489,50 +516,59 @@ It is a convenient way to test the logic of a pipeline run, but the outputs it p
 
 ### 5.3. Fix the samplesheet
 
-??? exercise
+<details class="exercise">
+<summary>Exercise</summary>
 
-    Fix `broken_samplesheet_2.csv` and verify the fix by running the same `-stub` command again.
+Fix `broken_samplesheet_2.csv` and verify the fix by running the same `-stub` command again.
 
-??? solution
+</details>
 
-    The two runs of `WT_1` must declare the same strandedness:
+<details class="solution">
+<summary>Solution</summary>
 
-    ```csv title="broken_samplesheet_2.csv" linenums="1" hl_lines="2"
-    sample,fastq_1,fastq_2,strandedness
-    WT_1,data/reads/WT_1_S1_L001_R1_001.fastq.gz,data/reads/WT_1_S1_L001_R2_001.fastq.gz,auto
-    WT_1,data/reads/WT_1_S1_L002_R1_001.fastq.gz,data/reads/WT_1_S1_L002_R2_001.fastq.gz,auto
-    WT_2,data/reads/WT_2_S2_L001_R1_001.fastq.gz,data/reads/WT_2_S2_L001_R2_001.fastq.gz,auto
-    KO_1,data/reads/KO_1_S3_L001_R1_001.fastq.gz,data/reads/KO_1_S3_L001_R2_001.fastq.gz,auto
-    KO_2,data/reads/KO_2_S4_L001_R1_001.fastq.gz,data/reads/KO_2_S4_L001_R2_001.fastq.gz,auto
-    ```
+The two runs of `WT_1` must declare the same strandedness:
 
-    With the fix in place, the stub run proceeds past the samplesheet checks and starts submitting tasks.
-    You can stop it with ++ctrl+c++ once tasks appear.
+```csv {2} title="broken_samplesheet_2.csv" showLineNumbers
+sample,fastq_1,fastq_2,strandedness
+WT_1,data/reads/WT_1_S1_L001_R1_001.fastq.gz,data/reads/WT_1_S1_L001_R2_001.fastq.gz,auto
+WT_1,data/reads/WT_1_S1_L002_R1_001.fastq.gz,data/reads/WT_1_S1_L002_R2_001.fastq.gz,auto
+WT_2,data/reads/WT_2_S2_L001_R1_001.fastq.gz,data/reads/WT_2_S2_L001_R2_001.fastq.gz,auto
+KO_1,data/reads/KO_1_S3_L001_R1_001.fastq.gz,data/reads/KO_1_S3_L001_R2_001.fastq.gz,auto
+KO_2,data/reads/KO_2_S4_L001_R1_001.fastq.gz,data/reads/KO_2_S4_L001_R2_001.fastq.gz,auto
+```
+
+With the fix in place, the stub run proceeds past the samplesheet checks and starts submitting tasks.
+You can stop it with <kbd>Ctrl</kbd>+<kbd>C</kbd> once tasks appear.
+
+</details>
 
 `nf-core/rnaseq` applies several checks of this kind to samples with multiple rows.
 Runs of the same sample must also agree on whether they are single-end or paired-end, and on whether their files are compressed.
 The pipeline's usage documentation describes the rules that apply to its samplesheet.
 
-??? exercise "Apply it to the pipeline you chose in Part 4"
+<details class="exercise">
+<summary>Apply it to the pipeline you chose in Part 4</summary>
 
-    Find the samplesheet requirements of the pipeline you chose in [Part 4](./04_choose_pipeline.md), in its usage documentation and in its `assets/schema_input.json` file on GitHub.
+Find the samplesheet requirements of the pipeline you chose in [Part 4](./04_choose_pipeline.mdx), in its usage documentation and in its `assets/schema_input.json` file on GitHub.
 
-    1. Write the header and one example row of a samplesheet for your scenario, using placeholder paths for the data files.
-       Note any column whose value your scenario does not provide, and where you would get that information.
-    2. List the rules the input schema enforces: required columns, patterns, accepted values.
-       Which mistakes in your draft samplesheet would it catch?
-    3. Check the usage documentation for rules that span multiple rows, such as consistency between samples that belong to the same individual or family.
-       These are the checks that `-preview` does not reach.
+1. Write the header and one example row of a samplesheet for your scenario, using placeholder paths for the data files.
+   Note any column whose value your scenario does not provide, and where you would get that information.
+2. List the rules the input schema enforces: required columns, patterns, accepted values.
+   Which mistakes in your draft samplesheet would it catch?
+3. Check the usage documentation for rules that span multiple rows, such as consistency between samples that belong to the same individual or family.
+   These are the checks that `-preview` does not reach.
 
-### Takeaway
+</details>
+
+### Takeaway {#takeaway_4}
 
 Schema validation catches errors within a row; pipeline-specific checks catch inconsistencies across rows.
 `-preview` triggers only the first kind, while `-stub` reaches both without running real computation.
 
-### What's next?
+### What's next? {#whats-next_4}
 
 Run the pipeline on a bigger machine, and use its reports to tune its compute resource allocations.
-Head on to [Part 6](./06_resources.md).
+Head on to [Part 6](./06_resources.mdx).
 
 ---
 

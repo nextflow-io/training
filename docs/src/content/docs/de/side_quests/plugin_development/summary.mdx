@@ -1,6 +1,9 @@
-# Zusammenfassung
+---
+title: Zusammenfassung
+description: Du hast das Plugin-Entwicklungs-Training abgeschlossen.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Du hast das Plugin-Entwicklungs-Training abgeschlossen.
 Diese Seite fasst zusammen, was du in jedem Teil gebaut hast, erklärt die Verteilung und gibt dir Hinweise, wie es weitergehen kann.
@@ -75,7 +78,7 @@ Schritt-für-Schritt-Anleitungen findest du in der [offiziellen Veröffentlichun
 
 Nach der Veröffentlichung können Nutzer\*innen dein Plugin ohne lokale Einrichtung installieren:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 plugins {
     id 'nf-greeting@1.0.0'
 }
@@ -123,7 +126,7 @@ nextflowPlugin {
 
 **Verwendung in Workflows:**
 
-```groovy
+```nextflow
 include { myFunction } from 'plugin/my-plugin'
 
 workflow {

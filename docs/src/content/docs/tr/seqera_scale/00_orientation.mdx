@@ -1,10 +1,13 @@
-# Başlarken
+---
+title: Başlarken
+description: 'Seqera ile Ölçeklendirme: Başlarken'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Eğitim Ortamını Başlatın
 
-GitHub Codespaces üzerinde sunduğumuz hazır ortamı kullanmak için aşağıdaki "Open in GitHub Codespaces" düğmesine tıklayın. Diğer seçenekler için [Ortam seçenekleri](../envsetup/index.md) sayfasına bakın.
+GitHub Codespaces üzerinde sunduğumuz hazır ortamı kullanmak için aşağıdaki "Open in GitHub Codespaces" düğmesine tıklayın. Diğer seçenekler için [Ortam seçenekleri](../envsetup/index.mdx) sayfasına bakın.
 
 Ortam yüklenirken okumaya devam edebilmek için eğitim ortamını yeni bir tarayıcı sekmesinde veya penceresinde açmanızı öneririz (kullandığınız cihaza göre sağ tıklama, ctrl+tıklama veya cmd+tıklama kullanabilirsiniz).
 Kursu tamamlamak için bu talimatları paralel olarak açık tutmanız gerekecektir.
@@ -18,7 +21,7 @@ Bu eğitim ortamı, kursu tamamlamak için gerekli tüm yazılım, kod ve verile
 Codespace, bir dosya sistemi gezgini, kod düzenleyici ve terminal kabuğu içeren VSCode arayüzüyle yapılandırılmıştır.
 Kurs boyunca verilen tüm talimatlar (örneğin "dosyayı açın", "kodu düzenleyin" veya "bu komutu çalıştırın"), aksi belirtilmedikçe VSCode arayüzünün bu üç bölümüne atıfta bulunmaktadır.
 
-Bu kursu kendi başınıza tamamlıyorsanız, daha fazla ayrıntı için lütfen [ortam temelleri](../envsetup/01_setup.md) sayfasını inceleyin.
+Bu kursu kendi başınıza tamamlıyorsanız, daha fazla ayrıntı için lütfen [ortam temelleri](../envsetup/01_setup.mdx) sayfasını inceleyin.
 
 ## Çalışmaya Hazırlanın
 
@@ -39,13 +42,13 @@ Ardından VSCode'u bu dizine odaklanacak şekilde ayarlayın; böylece dosya gez
 code .
 ```
 
-!!! tip "İpucu"
+:::tip[İpucu]
+Herhangi bir nedenle bu dizinden çıkarsanız (örneğin codespace'iniz uyku moduna geçerse), Github Codespaces eğitim ortamında çalıştığınızı varsayarak her zaman tam yolu kullanarak geri dönebilirsiniz:
 
-    Herhangi bir nedenle bu dizinden çıkarsanız (örneğin codespace'iniz uyku moduna geçerse), Github Codespaces eğitim ortamında çalıştığınızı varsayarak her zaman tam yolu kullanarak geri dönebilirsiniz:
-
-    ```bash
-    cd /workspaces/training/seqera-scale
-    ```
+```bash
+cd /workspaces/training/seqera-scale
+```
+:::
 
 ### Sağlanan Materyalleri İnceleyin
 
@@ -56,12 +59,15 @@ Tam yapıyı görmek için terminalden aşağıdaki komutu çalıştırın:
 tree -a .
 ```
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console
-    .
-    └── .seqera_config
-    ```
+```console
+.
+└── .seqera_config
+```
+
+</details>
 
 **`.seqera_config`** dosyası, `tw` CLI'ını Seqera erişim tokenınız ve çalışma alanınızla yapılandırmak için 3. bölümde dolduracağınız bir taslaktır.
 
@@ -75,4 +81,4 @@ Başlamaya hazır olduğunuzu düşünüyor musunuz?
 
 Tüm kutuları işaretleyebildiyseniz, başlamaya hazırsınız.
 
-**[Bölüm 1: Pipeline'ları web arayüzünden başlatma](./01_run_with_seqera.md) sayfasına geçmek için bu sayfanın sağ alt köşesindeki oka tıklayın.**
+**[Bölüm 1: Pipeline'ları web arayüzünden başlatma](./01_run_with_seqera.mdx) sayfasına geçmek için bu sayfanın sağ alt köşesindeki oka tıklayın.**

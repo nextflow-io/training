@@ -1,6 +1,9 @@
-# İş Akışlarında Sorun Giderme
+---
+title: İş Akışlarında Sorun Giderme
+description: Hata ayıklama, saatlerce süren hayal kırıklığından sizi kurtarabilecek ve daha etkili bir Nextflow geliştiricisi olmanızı sağlayacak kritik bir beceridir.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Hata ayıklama, saatlerce süren hayal kırıklığından sizi kurtarabilecek ve daha etkili bir Nextflow geliştiricisi olmanızı sağlayacak kritik bir beceridir. Kariyeriniz boyunca, özellikle başlangıç aşamasında, iş akışlarınızı oluştururken ve bakımını yaparken hatalarla karşılaşacaksınız. Sistematik hata ayıklama yaklaşımlarını öğrenmek, sorunları hızla tespit edip çözmenize yardımcı olacaktır.
 
@@ -20,10 +23,10 @@ Sonunda, sinir bozucu hata mesajlarını çözüm için net yol haritalarına d�
 
 Bu yan göreve başlamadan önce:
 
-- [Hello Nextflow](../../hello_nextflow/index.md) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmalısınız.
+- [Hello Nextflow](../../hello_nextflow/index.mdx) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmalısınız.
 - Temel Nextflow kavramları ve mekanizmalarını (süreçler, kanallar, operatörler) rahatça kullanabiliyor olmalısınız.
 
-**İsteğe bağlı:** Önce [IDE Features for Nextflow Development](../dev_environment/index.md) yan görevini tamamlamanızı öneririz.
+**İsteğe bağlı:** Önce [IDE Features for Nextflow Development](../dev_environment/index.mdx) yan görevini tamamlamanızı öneririz.
 Bu görev, burada yoğun biçimde kullanacağımız hata ayıklamayı destekleyen IDE özelliklerini (sözdizimi vurgulama, hata tespiti vb.) kapsamlı şekilde ele almaktadır.
 
 ---
@@ -32,7 +35,7 @@ Bu görev, burada yoğun biçimde kullanacağımız hata ayıklamayı destekleye
 
 #### Eğitim kod alanını açın
 
-Henüz yapmadıysanız, eğitim ortamını [Ortam Kurulumu](../../envsetup/index.md) bölümünde açıklandığı şekilde açtığınızdan emin olun.
+Henüz yapmadıysanız, eğitim ortamını [Ortam Kurulumu](../../envsetup/index.mdx) bölümünde açıklandığı şekilde açtığınızdan emin olun.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -54,34 +57,37 @@ code .
 
 Alıştırma için kullanacağımız çeşitli hata türleri içeren örnek iş akışları bulacaksınız:
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console
-    .
-    ├── bad_bash_var.nf
-    ├── bad_channel_shape.nf
-    ├── bad_channel_shape_viewed_debug.nf
-    ├── bad_channel_shape_viewed.nf
-    ├── bad_number_inputs.nf
-    ├── badpractice_syntax.nf
-    ├── bad_resources.nf
-    ├── bad_syntax.nf
-    ├── buggy_workflow.nf
-    ├── data
-    │   ├── sample_001.fastq.gz
-    │   ├── sample_002.fastq.gz
-    │   ├── sample_003.fastq.gz
-    │   ├── sample_004.fastq.gz
-    │   ├── sample_005.fastq.gz
-    │   └── sample_data.csv
-    ├── exhausted.nf
-    ├── invalid_process.nf
-    ├── missing_output.nf
-    ├── missing_software.nf
-    ├── missing_software_with_stub.nf
-    ├── nextflow.config
-    └── no_such_var.nf
-    ```
+```console
+.
+├── bad_bash_var.nf
+├── bad_channel_shape.nf
+├── bad_channel_shape_viewed_debug.nf
+├── bad_channel_shape_viewed.nf
+├── bad_number_inputs.nf
+├── badpractice_syntax.nf
+├── bad_resources.nf
+├── bad_syntax.nf
+├── buggy_workflow.nf
+├── data
+│   ├── sample_001.fastq.gz
+│   ├── sample_002.fastq.gz
+│   ├── sample_003.fastq.gz
+│   ├── sample_004.fastq.gz
+│   ├── sample_005.fastq.gz
+│   └── sample_data.csv
+├── exhausted.nf
+├── invalid_process.nf
+├── missing_output.nf
+├── missing_software.nf
+├── missing_software_with_stub.nf
+├── nextflow.config
+└── no_such_var.nf
+```
+
+</details>
 
 Bu dosyalar, gerçek dünya geliştirme sürecinde karşılaşacağınız yaygın hata ayıklama senaryolarını temsil etmektedir.
 
@@ -127,21 +133,17 @@ Pratik bir örnekle başlayalım.
 
 ```bash
 nextflow run bad_syntax.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_syntax.nf` [nice_kalam] revision: 550b9a8873
+
+Error bad_syntax.nf:24:1: Unexpected input: '<EOF>'
+# [!output stderr]
+ERROR ~ Script compilation failed
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_syntax.nf` [nice_kalam] revision: 550b9a8873
-
-    Error bad_syntax.nf:24:1: Unexpected input: '<EOF>'
-
-    ERROR ~ Script compilation failed
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 **Sözdizimi hata mesajlarının temel unsurları:**
 
@@ -153,7 +155,7 @@ nextflow run bad_syntax.nf
 
 Şimdi hataya neyin neden olduğunu anlamak için `bad_syntax.nf` dosyasını inceleyelim:
 
-```groovy title="bad_syntax.nf" hl_lines="14" linenums="1"
+```nextflow {14} title="bad_syntax.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -181,7 +183,7 @@ workflow {
 
 Bu örnek için hatanın nerede olduğunu göstermek amacıyla bir yorum bıraktık. Nextflow VSCode eklentisi de eşleşmeyen süslü parantezi kırmızıyla işaretleyerek ve dosyanın erken sonlandığını vurgulayarak size ipuçları vermelidir:
 
-![Hatalı sözdizimi](../img/bad_syntax.png)
+![Hatalı sözdizimi](../../../side_quests/img/bad_syntax.png)
 
 **Parantez hataları için hata ayıklama stratejisi:**
 
@@ -193,61 +195,61 @@ Bu örnek için hatanın nerede olduğunu göstermek amacıyla bir yorum bırakt
 
 Yorumu eksik kapanış süslü parantezi ile değiştirin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="bad_syntax.nf" hl_lines="14" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow {14} title="bad_syntax.nf" showLineNumbers step="Önce"
+#!/usr/bin/env nextflow
 
-    process PROCESS_FILES {
-        input:
-        val sample_name
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-        output:
-        path "${sample_name}_output.txt"
+    output:
+    path "${sample_name}_output.txt"
 
-        script:
-        """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt
-        """
-    }  // Eksik kapanış süslü parantezini ekle
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+// Süreç için kapanış süslü parantezi eksik
 
-    workflow {
+workflow {
 
-        // Girdi kanalı oluştur
-        input_ch = channel.of('sample1', 'sample2', 'sample3')
+    // Girdi kanalı oluştur
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Süreci girdi kanalıyla çağır
-        PROCESS_FILES(input_ch)
-    }
-    ```
+    // Süreci girdi kanalıyla çağır
+    PROCESS_FILES(input_ch)
+}
+```
 
-=== "Önce"
+```nextflow {14} title="bad_syntax.nf" showLineNumbers step="Sonra"
+#!/usr/bin/env nextflow
 
-    ```groovy title="bad_syntax.nf" hl_lines="14" linenums="1"
-    #!/usr/bin/env nextflow
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-    process PROCESS_FILES {
-        input:
-        val sample_name
+    output:
+    path "${sample_name}_output.txt"
 
-        output:
-        path "${sample_name}_output.txt"
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}  // Eksik kapanış süslü parantezini ekle
 
-        script:
-        """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt
-        """
-    // Süreç için kapanış süslü parantezi eksik
+workflow {
 
-    workflow {
+    // Girdi kanalı oluştur
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Girdi kanalı oluştur
-        input_ch = channel.of('sample1', 'sample2', 'sample3')
+    // Süreci girdi kanalıyla çağır
+    PROCESS_FILES(input_ch)
+}
+```
 
-        // Süreci girdi kanalıyla çağır
-        PROCESS_FILES(input_ch)
-    }
-    ```
+</CodeWalkthrough>
 
 #### Pipeline'ı çalıştırın
 
@@ -255,18 +257,14 @@ Yorumu eksik kapanış süslü parantezi ile değiştirin:
 
 ```bash
 nextflow run bad_syntax.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_syntax.nf` [small_morse] revision: 27352249e7
+
+executor >  local (3)
+[f5/dd6f46] PROCESS_FILES (1) | 3 of 3 ✔
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_syntax.nf` [small_morse] revision: 27352249e7
-
-    executor >  local (3)
-    [f5/dd6f46] PROCESS_FILES (1) | 3 of 3 ✔
-    ```
 
 ### 1.2. Yanlış süreç anahtar sözcükleri veya yönergeleri kullanma
 
@@ -276,33 +274,29 @@ Bir diğer yaygın sözdizimi hatası **geçersiz süreç tanımıdır**. Bu dur
 
 ```bash
 nextflow run invalid_process.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `invalid_process.nf` [astonishing_pesquet] revision: f42559404a
+
+Error invalid_process.nf:3:1: Invalid process definition -- check for missing or out-of-order section labels
+│   3 | process PROCESS_FILES {
+│     | ^^^^^^^^^^^^^^^^^^^^^^^
+│   4 |     inputs:
+│   5 |     val sample_name
+│   6 |
+╰   7 |     output:
+# [!output stderr]
+ERROR ~ Script compilation failed
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `invalid_process.nf` [astonishing_pesquet] revision: f42559404a
-
-    Error invalid_process.nf:3:1: Invalid process definition -- check for missing or out-of-order section labels
-    │   3 | process PROCESS_FILES {
-    │     | ^^^^^^^^^^^^^^^^^^^^^^^
-    │   4 |     inputs:
-    │   5 |     val sample_name
-    │   6 |
-    ╰   7 |     output:
-
-    ERROR ~ Script compilation failed
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 #### Kodu inceleyin
 
 Hata, "Geçersiz süreç tanımı" olduğunu belirtir ve sorunun çevresindeki bağlamı gösterir. 3-7. satırlara bakıldığında, 4. satırda `inputs:` ifadesinin sorun olduğu görülmektedir. `invalid_process.nf` dosyasını inceleyelim:
 
-```groovy title="invalid_process.nf" hl_lines="4" linenums="1"
+```nextflow {4} title="invalid_process.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -330,67 +324,67 @@ workflow {
 
 Hata bağlamındaki 4. satıra bakıldığında sorun fark edilebilir: doğru `input` yönergesi yerine `inputs` kullanılmış. Nextflow VSCode eklentisi de bunu işaretleyecektir:
 
-![Geçersiz süreç mesajı](../img/invalid_process_message.png)
+![Geçersiz süreç mesajı](../../../side_quests/img/invalid_process_message.png)
 
 #### Kodu düzeltin
 
 [Belgelere](https://www.nextflow.io/docs/latest/process.html#) başvurarak yanlış anahtar sözcüğü doğrusuyla değiştirin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="invalid_process.nf" hl_lines="4" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow {4} title="invalid_process.nf" showLineNumbers step="Önce"
+#!/usr/bin/env nextflow
 
-    process PROCESS_FILES {
-        input:  // Düzeltildi: 'inputs' yerine 'input' kullanıldı
-        val sample_name
+process PROCESS_FILES {
+    inputs:  // HATA: 'inputs' değil 'input' olmalı
+    val sample_name
 
-        output:
-        path "${sample_name}_output.txt"
+    output:
+    path "${sample_name}_output.txt"
 
-        script:
-        """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt
-        """
-    }
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}
 
-    workflow {
+workflow {
 
-        // Girdi kanalı oluştur
-        input_ch = channel.of('sample1', 'sample2', 'sample3')
+    // Girdi kanalı oluştur
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Süreci girdi kanalıyla çağır
-        PROCESS_FILES(input_ch)
-    }
-    ```
+    // Süreci girdi kanalıyla çağır
+    PROCESS_FILES(input_ch)
+}
+```
 
-=== "Önce"
+```nextflow {4} title="invalid_process.nf" showLineNumbers step="Sonra"
+#!/usr/bin/env nextflow
 
-    ```groovy title="invalid_process.nf" hl_lines="4" linenums="1"
-    #!/usr/bin/env nextflow
+process PROCESS_FILES {
+    input:  // Düzeltildi: 'inputs' yerine 'input' kullanıldı
+    val sample_name
 
-    process PROCESS_FILES {
-        inputs:  // HATA: 'inputs' değil 'input' olmalı
-        val sample_name
+    output:
+    path "${sample_name}_output.txt"
 
-        output:
-        path "${sample_name}_output.txt"
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}
 
-        script:
-        """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt
-        """
-    }
+workflow {
 
-    workflow {
+    // Girdi kanalı oluştur
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // Girdi kanalı oluştur
-        input_ch = channel.of('sample1', 'sample2', 'sample3')
+    // Süreci girdi kanalıyla çağır
+    PROCESS_FILES(input_ch)
+}
+```
 
-        // Süreci girdi kanalıyla çağır
-        PROCESS_FILES(input_ch)
-    }
-    ```
+</CodeWalkthrough>
 
 #### Pipeline'ı çalıştırın
 
@@ -398,18 +392,14 @@ Hata bağlamındaki 4. satıra bakıldığında sorun fark edilebilir: doğru `i
 
 ```bash
 nextflow run invalid_process.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `invalid_process.nf` [confident_banach] revision: 74483e75bc
+
+executor >  local (3)
+[29/87d6b8] PROCESS_FILES (1) | 3 of 3 ✔
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `invalid_process.nf` [confident_banach] revision: 74483e75bc
-
-    executor >  local (3)
-    [29/87d6b8] PROCESS_FILES (1) | 3 of 3 ✔
-    ```
 
 ### 1.3. Hatalı değişken adları kullanma
 
@@ -419,23 +409,19 @@ Betik bloklarında kullandığınız değişken adları geçerli olmalı; ya gir
 
 ```bash
 nextflow run no_such_var.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `no_such_var.nf` [spontaneous_pasteur] revision: 0c4d3bc28c
+
+Error no_such_var.nf:17:39: `undefined_var` is not defined
+│  17 |     echo "Using undefined variable: ${undefined_var}" >> ${output_pref
+╰     |                                       ^^^^^^^^^^^^^
+# [!output stderr]
+ERROR ~ Script compilation failed
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `no_such_var.nf` [spontaneous_pasteur] revision: 0c4d3bc28c
-
-    Error no_such_var.nf:17:39: `undefined_var` is not defined
-    │  17 |     echo "Using undefined variable: ${undefined_var}" >> ${output_pref
-    ╰     |                                       ^^^^^^^^^^^^^
-
-    ERROR ~ Script compilation failed
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 Hata derleme zamanında yakalanır ve doğrudan 17. satırdaki tanımsız değişkene işaret eder; bir şapka işareti sorunun tam olarak nerede olduğunu gösterir.
 
@@ -443,7 +429,7 @@ Hata derleme zamanında yakalanır ve doğrudan 17. satırdaki tanımsız deği�
 
 `no_such_var.nf` dosyasını inceleyelim:
 
-```groovy title="no_such_var.nf" hl_lines="17" linenums="1"
+```nextflow {17} title="no_such_var.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -470,68 +456,68 @@ workflow {
 }
 ```
 
-Hata mesajı, değişkenin betik şablonunda tanınmadığını belirtir; betik bloğunda `#!groovy ${undefined_var}` kullanıldığını ancak başka bir yerde tanımlanmadığını görebilirsiniz.
+Hata mesajı, değişkenin betik şablonunda tanınmadığını belirtir; betik bloğunda `${undefined_var}{:nextflow}` kullanıldığını ancak başka bir yerde tanımlanmadığını görebilirsiniz.
 
 #### Kodu düzeltin
 
 'No such variable' (böyle bir değişken yok) hatası alırsanız, değişkeni tanımlayarak (girdi değişken adlarını düzelterek veya betikten önce Groovy kodunu düzenleyerek) ya da gerekli değilse betik bloğundan kaldırarak düzeltebilirsiniz:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="no_such_var.nf" hl_lines="15-17" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow {17} title="no_such_var.nf" showLineNumbers step="Önce"
+#!/usr/bin/env nextflow
 
-    process PROCESS_FILES {
-        input:
-        val sample_name
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-        output:
-        path "${sample_name}_processed.txt"
+    output:
+    path "${sample_name}_processed.txt"
 
-        script:
-        // Betikten önce Groovy kodunda değişkenleri tanımla
-        def output_prefix = "${sample_name}_processed"
-        def timestamp = new Date().format("yyyy-MM-dd")
+    script:
+    // Betikten önce Groovy kodunda değişkenleri tanımla
+    def output_prefix = "${sample_name}_processed"
+    def timestamp = new Date().format("yyyy-MM-dd")
 
-        """
-        echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        """  // undefined_var içeren satır kaldırıldı
-    }
+    """
+    echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
+    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // HATA: undefined_var tanımlı değil
+    """
+}
 
-    workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')
-        PROCESS_FILES(input_ch)
-    }
-    ```
+workflow {
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
+    PROCESS_FILES(input_ch)
+}
+```
 
-=== "Önce"
+```nextflow {15-17} title="no_such_var.nf" showLineNumbers step="Sonra"
+#!/usr/bin/env nextflow
 
-    ```groovy title="no_such_var.nf" hl_lines="17" linenums="1"
-    #!/usr/bin/env nextflow
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-    process PROCESS_FILES {
-        input:
-        val sample_name
+    output:
+    path "${sample_name}_processed.txt"
 
-        output:
-        path "${sample_name}_processed.txt"
+    script:
+    // Betikten önce Groovy kodunda değişkenleri tanımla
+    def output_prefix = "${sample_name}_processed"
+    def timestamp = new Date().format("yyyy-MM-dd")
 
-        script:
-        // Betikten önce Groovy kodunda değişkenleri tanımla
-        def output_prefix = "${sample_name}_processed"
-        def timestamp = new Date().format("yyyy-MM-dd")
+    """
+    echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
+    """  // undefined_var içeren satır kaldırıldı
+}
 
-        """
-        echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // HATA: undefined_var tanımlı değil
-        """
-    }
+workflow {
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
+    PROCESS_FILES(input_ch)
+}
+```
 
-    workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')
-        PROCESS_FILES(input_ch)
-    }
-    ```
+</CodeWalkthrough>
 
 #### Pipeline'ı çalıştırın
 
@@ -539,18 +525,14 @@ Hata mesajı, değişkenin betik şablonunda tanınmadığını belirtir; betik 
 
 ```bash
 nextflow run no_such_var.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `no_such_var.nf` [suspicious_venter] revision: 229f1da893
+
+executor >  local (3)
+[26/b4370c] PROCESS_FILES (3) | 3 of 3 ✔
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `no_such_var.nf` [suspicious_venter] revision: 229f1da893
-
-    executor >  local (3)
-    [26/b4370c] PROCESS_FILES (3) | 3 of 3 ✔
-    ```
 
 ### 1.4. Bash değişkenlerinin hatalı kullanımı
 
@@ -560,29 +542,25 @@ Nextflow'a yeni başlarken, Nextflow (Groovy) ve Bash değişkenleri arasındaki
 
 ```bash
 nextflow run bad_bash_var.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_bash_var.nf` [hopeful_koch] revision: 0853c11080
+
+Error bad_bash_var.nf:13:42: `prefix` is not defined
+│  13 |     echo "Processing ${sample_name}" > ${prefix}.txt
+╰     |                                          ^^^^^^
+# [!output stderr]
+ERROR ~ Script compilation failed
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_bash_var.nf` [hopeful_koch] revision: 0853c11080
-
-    Error bad_bash_var.nf:13:42: `prefix` is not defined
-    │  13 |     echo "Processing ${sample_name}" > ${prefix}.txt
-    ╰     |                                          ^^^^^^
-
-    ERROR ~ Script compilation failed
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 #### Kodu inceleyin
 
-Hata, `#!groovy ${prefix}` ifadesinin kullanıldığı 13. satıra işaret etmektedir. Soruna neyin neden olduğunu görmek için `bad_bash_var.nf` dosyasını inceleyelim:
+Hata, `${prefix}{:nextflow}` ifadesinin kullanıldığı 13. satıra işaret etmektedir. Soruna neyin neden olduğunu görmek için `bad_bash_var.nf` dosyasını inceleyelim:
 
-```groovy title="bad_bash_var.nf" hl_lines="13" linenums="1"
+```nextflow {13} title="bad_bash_var.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -600,56 +578,56 @@ process PROCESS_FILES {
 }
 ```
 
-Bu örnekte `prefix` değişkenini Bash'te tanımlıyoruz; ancak bir Nextflow sürecinde buna başvurmak için kullandığımız `$` sözdizimi (`#!groovy ${prefix}`), Groovy değişkeni olarak yorumlanır, Bash değişkeni olarak değil. Değişken Groovy bağlamında mevcut olmadığından 'no such variable' (böyle bir değişken yok) hatası alırız.
+Bu örnekte `prefix` değişkenini Bash'te tanımlıyoruz; ancak bir Nextflow sürecinde buna başvurmak için kullandığımız `$` sözdizimi (`${prefix}{:nextflow}`), Groovy değişkeni olarak yorumlanır, Bash değişkeni olarak değil. Değişken Groovy bağlamında mevcut olmadığından 'no such variable' (böyle bir değişken yok) hatası alırız.
 
 #### Kodu düzeltin
 
 Bir Bash değişkeni kullanmak istiyorsanız, dolar işaretini şu şekilde kaçırmanız gerekir:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="bad_bash_var.nf" hl_lines="13" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow {13} title="bad_bash_var.nf" showLineNumbers step="Önce"
+#!/usr/bin/env nextflow
 
-    process PROCESS_FILES {
-        input:
-        val sample_name
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-        output:
-        path "${sample_name}_output.txt"
+    output:
+    path "${sample_name}_output.txt"
 
-        script:
-        """
-        prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > \${prefix}.txt  # Düzeltildi: Dolar işareti kaçırıldı
-        """
-    }
+    script:
+    """
+    prefix="${sample_name}_output"
+    echo "Processing ${sample_name}" > ${prefix}.txt  # HATA: ${prefix} Groovy sözdizimi, Bash değil
+    """
+}
+```
 
-    workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')
-        PROCESS_FILES(input_ch)
-    }
-    ```
+```nextflow {13} title="bad_bash_var.nf" showLineNumbers step="Sonra"
+#!/usr/bin/env nextflow
 
-=== "Önce"
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-    ```groovy title="bad_bash_var.nf" hl_lines="13" linenums="1"
-    #!/usr/bin/env nextflow
+    output:
+    path "${sample_name}_output.txt"
 
-    process PROCESS_FILES {
-        input:
-        val sample_name
+    script:
+    """
+    prefix="${sample_name}_output"
+    echo "Processing ${sample_name}" > \${prefix}.txt  # Düzeltildi: Dolar işareti kaçırıldı
+    """
+}
 
-        output:
-        path "${sample_name}_output.txt"
+workflow {
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
+    PROCESS_FILES(input_ch)
+}
+```
 
-        script:
-        """
-        prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > ${prefix}.txt  # HATA: ${prefix} Groovy sözdizimi, Bash değil
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 Bu, Nextflow'a bunu bir Bash değişkeni olarak yorumlamasını söyler.
 
@@ -659,33 +637,29 @@ Bu, Nextflow'a bunu bir Bash değişkeni olarak yorumlamasını söyler.
 
 ```bash
 nextflow run bad_bash_var.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_bash_var.nf` [naughty_franklin] revision: 9c672c6a1b
+
+executor >  local (3)
+[cf/19a490] PROCESS_FILES (3) | 3 of 3 ✔
 ```
 
-??? success "Komut çıktısı"
+:::tip[Groovy ve Bash Değişkenleri]
+Dize birleştirme veya önek/sonek işlemleri gibi basit değişken manipülasyonları için, betik bloğundaki Bash değişkenleri yerine betik bölümünde Groovy değişkenleri kullanmak genellikle daha okunabilirdir:
 
-    ```console
-     N E X T F L O W   ~  version 26.04.4
+```nextflow showLineNumbers
+script:
+def output_prefix = "${sample_name}_processed"
+def output_file = "${output_prefix}.txt"
+"""
+echo "Processing ${sample_name}" > ${output_file}
+"""
+```
 
-    Launching `bad_bash_var.nf` [naughty_franklin] revision: 9c672c6a1b
-
-    executor >  local (3)
-    [cf/19a490] PROCESS_FILES (3) | 3 of 3 ✔
-    ```
-
-!!! tip "Groovy ve Bash Değişkenleri"
-
-    Dize birleştirme veya önek/sonek işlemleri gibi basit değişken manipülasyonları için, betik bloğundaki Bash değişkenleri yerine betik bölümünde Groovy değişkenleri kullanmak genellikle daha okunabilirdir:
-
-    ```groovy linenums="1"
-    script:
-    def output_prefix = "${sample_name}_processed"
-    def output_file = "${output_prefix}.txt"
-    """
-    echo "Processing ${sample_name}" > ${output_file}
-    """
-    ```
-
-    Bu yaklaşım, dolar işaretlerini kaçırma ihtiyacını ortadan kaldırır ve kodu okumayı ve bakımını yapmayı kolaylaştırır.
+Bu yaklaşım, dolar işaretlerini kaçırma ihtiyacını ortadan kaldırır ve kodu okumayı ve bakımını yapmayı kolaylaştırır.
+:::
 
 ### 1.5. İş Akışı Bloğu Dışındaki İfadeler
 
@@ -695,23 +669,19 @@ Nextflow VSCode eklentisi, hatalara neden olacak kod yapısı sorunlarını vurg
 
 ```bash
 nextflow run badpractice_syntax.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `badpractice_syntax.nf` [fervent_miescher] revision: 5e4b291bde
+
+Error badpractice_syntax.nf:3:1: Statements cannot be mixed with script declarations -- move statements into a process, workflow, or function
+│   3 | input_ch = channel.of('sample1', 'sample2', 'sample3')
+╰     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# [!output stderr]
+ERROR ~ Script compilation failed
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `badpractice_syntax.nf` [fervent_miescher] revision: 5e4b291bde
-
-    Error badpractice_syntax.nf:3:1: Statements cannot be mixed with script declarations -- move statements into a process, workflow, or function
-    │   3 | input_ch = channel.of('sample1', 'sample2', 'sample3')
-    ╰     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-    ERROR ~ Script compilation failed
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 Hata mesajı sorunu açıkça belirtmektedir: ifadeler (kanal tanımları gibi) bir iş akışı veya süreç bloğu dışında betik bildirimleriyle karıştırılamaz.
 
@@ -719,7 +689,7 @@ Hata mesajı sorunu açıkça belirtmektedir: ifadeler (kanal tanımları gibi) 
 
 Hataya neyin neden olduğunu görmek için `badpractice_syntax.nf` dosyasını inceleyelim:
 
-```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
+```nextflow {3} title="badpractice_syntax.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 input_ch = channel.of('sample1', 'sample2', 'sample3')  // HATA: Kanal iş akışı dışında tanımlanmış
@@ -748,68 +718,68 @@ workflow {
 
 VSCode eklentisi de `input_ch` değişkeninin iş akışı bloğu dışında tanımlandığını vurgulayacaktır:
 
-![Önemsiz sözdizimi hatası](../img/nonlethal.png)
+![Önemsiz sözdizimi hatası](../../../side_quests/img/nonlethal.png)
 
 #### Kodu düzeltin
 
 Kanal tanımını iş akışı bloğunun içine taşıyın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="badpractice_syntax.nf" hl_lines="21" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow {3} title="badpractice_syntax.nf" showLineNumbers step="Önce"
+#!/usr/bin/env nextflow
 
-    process PROCESS_FILES {
-        input:
-        val sample_name
+input_ch = channel.of('sample1', 'sample2', 'sample3')  // HATA: Kanal iş akışı dışında tanımlanmış
 
-        output:
-        path "${sample_name}_processed.txt"
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-        script:
-        // Betikten önce Groovy kodunda değişkenleri tanımla
-        def output_prefix = "${sample_name}_processed"
-        def timestamp = new Date().format("yyyy-MM-dd")
+    output:
+    path "${sample_name}_processed.txt"
 
-        """
-        echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        """
-    }
+    script:
+    // Betikten önce Groovy kodunda değişkenleri tanımla
+    def output_prefix = "${sample_name}_processed"
+    def timestamp = new Date().format("yyyy-MM-dd")
 
-    workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')  // İş akışı bloğunun içine taşındı
-        PROCESS_FILES(input_ch)
-    }
-    ```
+    """
+    echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
+    """
+}
 
-=== "Önce"
+workflow {
+    PROCESS_FILES(input_ch)
+}
+```
 
-    ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow {21} title="badpractice_syntax.nf" showLineNumbers step="Sonra"
+#!/usr/bin/env nextflow
 
-    input_ch = channel.of('sample1', 'sample2', 'sample3')  // HATA: Kanal iş akışı dışında tanımlanmış
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-    process PROCESS_FILES {
-        input:
-        val sample_name
+    output:
+    path "${sample_name}_processed.txt"
 
-        output:
-        path "${sample_name}_processed.txt"
+    script:
+    // Betikten önce Groovy kodunda değişkenleri tanımla
+    def output_prefix = "${sample_name}_processed"
+    def timestamp = new Date().format("yyyy-MM-dd")
 
-        script:
-        // Betikten önce Groovy kodunda değişkenleri tanımla
-        def output_prefix = "${sample_name}_processed"
-        def timestamp = new Date().format("yyyy-MM-dd")
+    """
+    echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
+    """
+}
 
-        """
-        echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        """
-    }
+workflow {
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  // İş akışı bloğunun içine taşındı
+    PROCESS_FILES(input_ch)
+}
+```
 
-    workflow {
-        PROCESS_FILES(input_ch)
-    }
-    ```
+</CodeWalkthrough>
 
 #### Pipeline'ı çalıştırın
 
@@ -817,18 +787,14 @@ Düzeltmenin çalıştığını doğrulamak için iş akışını tekrar çalı�
 
 ```bash
 nextflow run badpractice_syntax.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `badpractice_syntax.nf` [naughty_ochoa] revision: 92d029754c
+
+executor >  local (3)
+[f0/350ff4] PROCESS_FILES (2) | 3 of 3 ✔
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `badpractice_syntax.nf` [naughty_ochoa] revision: 92d029754c
-
-    executor >  local (3)
-    [f0/350ff4] PROCESS_FILES (2) | 3 of 3 ✔
-    ```
 
 Girdi kanallarınızı iş akışı bloğu içinde tanımlayın ve genel olarak eklentinin yaptığı diğer önerilere uyun.
 
@@ -846,13 +812,13 @@ Sözdizimi doğru olsa bile ortaya çıkan daha karmaşık kanal yapısı hatala
 
 Kanal yapısı hataları, sözdizimi hatalarından daha ince bir yapıya sahiptir; çünkü kod sözdizimsel olarak doğrudur, ancak veri şekilleri süreçlerin beklediğiyle eşleşmez. Nextflow pipeline'ı çalıştırmaya çalışır; ancak girdi sayısının beklediğiyle eşleşmediğini fark edip başarısız olabilir. Bu hatalar genellikle yalnızca çalışma zamanında ortaya çıkar ve iş akışınızda akan verilerin anlaşılmasını gerektirir.
 
-!!! tip "`.view()` ile Kanal Hata Ayıklama"
+:::tip[`.view()` ile Kanal Hata Ayıklama]
+Bu bölüm boyunca, iş akışınızın herhangi bir noktasında kanal içeriğini incelemek için `.view()` operatörünü kullanabileceğinizi unutmayın. Bu, kanal yapısı sorunlarını anlamak için en güçlü hata ayıklama araçlarından biridir. Bu tekniği 2.4. bölümde ayrıntılı olarak ele alacağız; ancak örnekler üzerinde çalışırken kullanmaktan çekinmeyin.
 
-    Bu bölüm boyunca, iş akışınızın herhangi bir noktasında kanal içeriğini incelemek için `.view()` operatörünü kullanabileceğinizi unutmayın. Bu, kanal yapısı sorunlarını anlamak için en güçlü hata ayıklama araçlarından biridir. Bu tekniği 2.4. bölümde ayrıntılı olarak ele alacağız; ancak örnekler üzerinde çalışırken kullanmaktan çekinmeyin.
-
-    ```groovy
-    my_channel.view()  // Kanaldan geçen verileri gösterir
-    ```
+```nextflow
+my_channel.view()  // Kanaldan geçen verileri gösterir
+```
+:::
 
 ### 2.1. Yanlış Sayıda Girdi Kanalı
 
@@ -862,29 +828,25 @@ Bu hata, bir sürecin beklediğinden farklı sayıda kanal ilettiğinizde ortaya
 
 ```bash
 nextflow run bad_number_inputs.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_number_inputs.nf` [desperate_carson] revision: d83e58dcd3
+
+Error bad_number_inputs.nf:23:5: Incorrect number of call arguments, expected 1 but received 2
+│  23 |     PROCESS_FILES(samples_ch, files_ch)
+╰     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# [!output stderr]
+ERROR ~ Script compilation failed
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_number_inputs.nf` [desperate_carson] revision: d83e58dcd3
-
-    Error bad_number_inputs.nf:23:5: Incorrect number of call arguments, expected 1 but received 2
-    │  23 |     PROCESS_FILES(samples_ch, files_ch)
-    ╰     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-    ERROR ~ Script compilation failed
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 #### Kodu inceleyin
 
 Hata mesajı, çağrının 1 bağımsız değişken beklediğini ancak 2 aldığını açıkça belirtir ve 23. satıra işaret eder. `bad_number_inputs.nf` dosyasını inceleyelim:
 
-```groovy title="bad_number_inputs.nf" hl_lines="5 23" linenums="1"
+```nextflow {5,23} title="bad_number_inputs.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -913,86 +875,82 @@ workflow {
 
 Süreç yalnızca bir girdi kanalı tanımlarken birden fazla girdi kanalı sağlayan eşleşmeyen `PROCESS_FILES` çağrısını görebilirsiniz. VSCode eklentisi de süreç çağrısının altını kırmızıyla çizer ve üzerine geldiğinizde bir tanı mesajı gösterir:
 
-![Yanlış bağımsız değişken sayısı mesajı](../img/incorrect_num_args.png)
+![Yanlış bağımsız değişken sayısı mesajı](../../../side_quests/img/incorrect_num_args.png)
 
 #### Kodu düzeltin
 
 Bu özel örnek için süreç tek bir kanal beklemekte ve ikinci kanala ihtiyaç duymamaktadır; bu nedenle yalnızca `samples_ch` kanalını ileterek düzeltebiliriz:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="bad_number_inputs.nf" hl_lines="23" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow {5,23} title="bad_number_inputs.nf" showLineNumbers step="Önce"
+#!/usr/bin/env nextflow
 
-    process PROCESS_FILES {
-        input:
-            val sample_name  // Süreç yalnızca 1 girdi bekliyor
+process PROCESS_FILES {
+    input:
+        val sample_name  // Süreç yalnızca 1 girdi bekliyor
 
-        output:
-            path "${sample_name}_output.txt"
+    output:
+        path "${sample_name}_output.txt"
 
-        script:
-        """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt
-        """
-    }
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}
 
-    workflow {
+workflow {
 
-        // İki ayrı kanal oluştur
-        samples_ch = channel.of('sample1', 'sample2', 'sample3')
-        files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
+    // İki ayrı kanal oluştur
+    samples_ch = channel.of('sample1', 'sample2', 'sample3')
+    files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // Düzeltildi: Yalnızca sürecin beklediği kanal iletildi
-        PROCESS_FILES(samples_ch)
-    }
-    ```
+    // HATA: 2 kanal iletiliyor ancak süreç yalnızca 1 bekliyor
+    PROCESS_FILES(samples_ch, files_ch)
+}
+```
 
-=== "Önce"
+```nextflow {23} title="bad_number_inputs.nf" showLineNumbers step="Sonra"
+#!/usr/bin/env nextflow
 
-    ```groovy title="bad_number_inputs.nf" hl_lines="5 23" linenums="1"
-    #!/usr/bin/env nextflow
+process PROCESS_FILES {
+    input:
+        val sample_name  // Süreç yalnızca 1 girdi bekliyor
 
-    process PROCESS_FILES {
-        input:
-            val sample_name  // Süreç yalnızca 1 girdi bekliyor
+    output:
+        path "${sample_name}_output.txt"
 
-        output:
-            path "${sample_name}_output.txt"
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}
 
-        script:
-        """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt
-        """
-    }
+workflow {
 
-    workflow {
+    // İki ayrı kanal oluştur
+    samples_ch = channel.of('sample1', 'sample2', 'sample3')
+    files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // İki ayrı kanal oluştur
-        samples_ch = channel.of('sample1', 'sample2', 'sample3')
-        files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
+    // Düzeltildi: Yalnızca sürecin beklediği kanal iletildi
+    PROCESS_FILES(samples_ch)
+}
+```
 
-        // HATA: 2 kanal iletiliyor ancak süreç yalnızca 1 bekliyor
-        PROCESS_FILES(samples_ch, files_ch)
-    }
-    ```
+</CodeWalkthrough>
 
 #### Pipeline'ı çalıştırın
 
 ```bash
 nextflow run bad_number_inputs.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_number_inputs.nf` [big_euler] revision: e302bd87be
+
+executor >  local (3)
+[47/1d039f] PROCESS_FILES (3) | 3 of 3 ✔
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_number_inputs.nf` [big_euler] revision: e302bd87be
-
-    executor >  local (3)
-    [47/1d039f] PROCESS_FILES (3) | 3 of 3 ✔
-    ```
 
 Bu örnekten daha yaygın olarak, bir sürece ek girdiler ekleyip iş akışı çağrısını buna göre güncellemeyi unutabilirsiniz; bu da bu tür bir hataya yol açabilir. Neyse ki bu, anlaşılması ve düzeltilmesi en kolay hatalardan biridir; çünkü hata mesajı uyuşmazlık hakkında oldukça açıktır.
 
@@ -1004,18 +962,14 @@ Bazı kanal yapısı hataları çok daha ince bir yapıya sahiptir ve hiçbir ha
 
 ```bash
 nextflow run exhausted.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `exhausted.nf` [romantic_liskov] revision: 31a6ae1494
+
+executor >  local (1)
+[10/82e235] PROCESS_FILES (1) | 1 of 1 ✔
 ```
-
-??? success "Komut çıktısı"
-
-    ```console title="Exhausted channel output"
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `exhausted.nf` [romantic_liskov] revision: 31a6ae1494
-
-    executor >  local (1)
-    [10/82e235] PROCESS_FILES (1) | 1 of 1 ✔
-    ```
 
 Bu iş akışı hatasız tamamlanır; ancak yalnızca tek bir örneği işler!
 
@@ -1023,7 +977,7 @@ Bu iş akışı hatasız tamamlanır; ancak yalnızca tek bir örneği işler!
 
 Bunun doğru olup olmadığını görmek için `exhausted.nf` dosyasını inceleyelim:
 
-```groovy title="exhausted.nf" hl_lines="23 24" linenums="1"
+```nextflow {23,24} title="exhausted.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -1065,7 +1019,7 @@ Kaç dosyanın etkilendiğine bağlı olarak bunu ele almanın birkaç yolu vard
 
 **1a** `channel.value()` kullanın:
 
-```groovy title="exhausted.nf (fixed - Option 1a)" hl_lines="2" linenums="21"
+```nextflow {2} title="exhausted.nf (fixed - Option 1a)" showLineNumbers startLineNumber=21
 workflow {
     reference_ch = channel.value('baseline_reference')  // Value channel yeniden kullanılabilir
     input_ch = channel.of('sample1', 'sample2', 'sample3')
@@ -1076,7 +1030,7 @@ workflow {
 
 **1b** `first()` [operatörünü](https://www.nextflow.io/docs/latest/reference/operator.html#first) kullanın:
 
-```groovy title="exhausted.nf (fixed - Option 1b)" hl_lines="2" linenums="21"
+```nextflow {2} title="exhausted.nf (fixed - Option 1b)" showLineNumbers startLineNumber=21
 workflow {
     reference_ch = channel.of('baseline_reference').first()  // Value channel'a dönüştür
     input_ch = channel.of('sample1', 'sample2', 'sample3')
@@ -1088,7 +1042,7 @@ workflow {
 **1c.** `collect()` [operatörünü](https://www.nextflow.io/docs/latest/reference/operator.html#collect) kullanın.
 `collect()` bir liste yayınlar; bu nedenle tek öğeyi çıkarmak için `map` kullanın:
 
-```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
+```nextflow {2} title="exhausted.nf (fixed - Option 1c)" showLineNumbers startLineNumber=21
 workflow {
     reference_ch = channel.of('baseline_reference').collect().map { refs -> refs[0] }  // Value channel'a dönüştür
     input_ch = channel.of('sample1', 'sample2', 'sample3')
@@ -1099,7 +1053,7 @@ workflow {
 
 **Seçenek 2**: Örnek kanalındaki tüm örnekler için birden fazla referans dosyanızın olduğu daha karmaşık senaryolarda, iki kanalı demetler halinde birleştiren yeni bir kanal oluşturmak için `combine` operatörünü kullanabilirsiniz:
 
-```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="4" linenums="21"
+```nextflow {4} title="exhausted.nf (fixed - Option 2)" showLineNumbers startLineNumber=21
 workflow {
     reference_ch = channel.of('baseline_reference','other_reference')
     input_ch = channel.of('sample1', 'sample2', 'sample3')
@@ -1113,7 +1067,7 @@ workflow {
 
 Bu, süreç girdisinin ayarlanmasını gerektirir. Örneğimizde, süreç tanımının başı şu şekilde ayarlanmalıdır:
 
-```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="5" linenums="1"
+```nextflow {5} title="exhausted.nf (fixed - Option 2)" showLineNumbers
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -1129,18 +1083,14 @@ Yukarıdaki düzeltmelerden birini deneyin ve iş akışını tekrar çalıştı
 
 ```bash
 nextflow run exhausted.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `exhausted.nf` [maniac_leavitt] revision: 74571a002a
+
+executor >  local (3)
+[d9/886888] PROCESS_FILES (2) | 3 of 3 ✔
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `exhausted.nf` [maniac_leavitt] revision: 74571a002a
-
-    executor >  local (3)
-    [d9/886888] PROCESS_FILES (2) | 3 of 3 ✔
-    ```
 
 Artık yalnızca bir örnek yerine üç örneğin de işlendiğini görmelisiniz.
 
@@ -1152,46 +1102,43 @@ Artık yalnızca bir örnek yerine üç örneğin de işlendiğini görmelisiniz
 
 ```bash
 nextflow run bad_channel_shape.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_channel_shape.nf` [disturbed_hilbert] revision: 3046f86036
+
+executor >  local (3)
+[13/2d7cf7] PROCESS_FILES (2) | 0 of 3 ✘
+# [!output stderr]
+ERROR ~ Error executing process > 'PROCESS_FILES (1)'
+
+Caused by:
+  Missing output file(s) `[sample1, file1.txt]_output.txt` expected by process `PROCESS_FILES (1)`
+
+
+Command executed:
+
+  echo "Processing [sample1, file1.txt]" > [sample1, file1.txt]_output.txt
+
+Command exit status:
+  0
+
+Command output:
+  (empty)
+
+Work dir:
+  /workspaces/training/side-quests/debugging/work/fc/20d7bd091eb9f7f63b76ab3a802cac
+
+Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+-- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_channel_shape.nf` [disturbed_hilbert] revision: 3046f86036
-
-    executor >  local (3)
-    [13/2d7cf7] PROCESS_FILES (2) | 0 of 3 ✘
-    ERROR ~ Error executing process > 'PROCESS_FILES (1)'
-
-    Caused by:
-      Missing output file(s) `[sample1, file1.txt]_output.txt` expected by process `PROCESS_FILES (1)`
-
-
-    Command executed:
-
-      echo "Processing [sample1, file1.txt]" > [sample1, file1.txt]_output.txt
-
-    Command exit status:
-      0
-
-    Command output:
-      (empty)
-
-    Work dir:
-      /workspaces/training/side-quests/debugging/work/fc/20d7bd091eb9f7f63b76ab3a802cac
-
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-
-    -- Check '.nextflow.log' file for details
-    ```
 
 #### Kodu inceleyin
 
 Hata mesajındaki köşeli parantezler burada ipucu vermektedir; süreç demeti tek bir değer olarak ele almaktadır ki bu istediğimiz şey değildir. `bad_channel_shape.nf` dosyasını inceleyelim:
 
-```groovy title="bad_channel_shape.nf" hl_lines="5 20-22" linenums="1"
+```nextflow {5,20-22} title="bad_channel_shape.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -1228,99 +1175,107 @@ Bunu düzeltmenin iki yolu vardır:
 1. Veriyi sürece uyacak şekilde yeniden şekillendirme
 2. Süreci veriye uyacak şekilde değiştirme
 
-=== "Seçenek 1: İlk öğeyi çıkarma"
+<Tabs>
 
-    === "Sonra"
+<TabItem label="Seçenek 1: İlk öğeyi çıkarma">
 
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
-        workflow {
+<CodeWalkthrough>
 
-            // Kanal demet yayınlıyor, ancak süreç tek değer bekliyor
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch.map { sample_id, file -> sample_id })  // Düzeltildi: İlk öğe çıkarıldı
-        }
-        ```
+```nextflow {9} title="bad_channel_shape.nf" showLineNumbers startLineNumber=16 step="Önce"
+workflow {
 
-    === "Önce"
+    // Kanal demet yayınlıyor, ancak süreç tek değer bekliyor
+    input_ch = channel.of(
+      ['sample1', 'file1.txt'],
+      ['sample2', 'file2.txt'],
+      ['sample3', 'file3.txt']
+    )
+    PROCESS_FILES(input_ch)
+}
+```
 
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
-        workflow {
+```nextflow {9} title="bad_channel_shape.nf" showLineNumbers startLineNumber=16 step="Sonra"
+workflow {
 
-            // Kanal demet yayınlıyor, ancak süreç tek değer bekliyor
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch)
-        }
-        ```
+    // Kanal demet yayınlıyor, ancak süreç tek değer bekliyor
+    input_ch = channel.of(
+      ['sample1', 'file1.txt'],
+      ['sample2', 'file2.txt'],
+      ['sample3', 'file3.txt']
+    )
+    PROCESS_FILES(input_ch.map { sample_id, file -> sample_id })  // Düzeltildi: İlk öğe çıkarıldı
+}
+```
 
-=== "Seçenek 2: Süreçte demet kabul etme"
+</CodeWalkthrough>
 
-    === "Sonra"
+</TabItem>
 
-        ```groovy title="bad_channel_shape.nf" hl_lines="5"  linenums="1"
-        #!/usr/bin/env nextflow
+<TabItem label="Seçenek 2: Süreçte demet kabul etme">
 
-        process PROCESS_FILES {
-            input:
-                tuple val(sample_name), val(file_name)  // Düzeltildi: Demet kabul edildi
+<CodeWalkthrough>
 
-            output:
-                path "${sample_name}_output.txt"
+```nextflow {5} title="bad_channel_shape.nf" showLineNumbers step="Önce"
+#!/usr/bin/env nextflow
 
-            script:
-            """
-            echo "Processing ${sample_name}" > ${sample_name}_output.txt
-            """
-        }
+process PROCESS_FILES {
+    input:
+        val sample_name  // Tek değer bekliyor, demet alıyor
 
-        workflow {
+    output:
+        path "${sample_name}_output.txt"
 
-            // Kanal demet yayınlıyor, ancak süreç tek değer bekliyor
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch)
-        }
-        ```
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}
 
-    === "Önce"
+workflow {
 
-        ```groovy title="bad_channel_shape.nf" hl_lines="5" linenums="1"
-        #!/usr/bin/env nextflow
+    // Kanal demet yayınlıyor, ancak süreç tek değer bekliyor
+    input_ch = channel.of(
+      ['sample1', 'file1.txt'],
+      ['sample2', 'file2.txt'],
+      ['sample3', 'file3.txt']
+    )
+    PROCESS_FILES(input_ch)
+}
+```
 
-        process PROCESS_FILES {
-            input:
-                val sample_name  // Tek değer bekliyor, demet alıyor
+```nextflow {5} title="bad_channel_shape.nf" showLineNumbers step="Sonra"
+#!/usr/bin/env nextflow
 
-            output:
-                path "${sample_name}_output.txt"
+process PROCESS_FILES {
+    input:
+        tuple val(sample_name), val(file_name)  // Düzeltildi: Demet kabul edildi
 
-            script:
-            """
-            echo "Processing ${sample_name}" > ${sample_name}_output.txt
-            """
-        }
+    output:
+        path "${sample_name}_output.txt"
 
-        workflow {
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}
 
-            // Kanal demet yayınlıyor, ancak süreç tek değer bekliyor
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch)
-        }
-        ```
+workflow {
+
+    // Kanal demet yayınlıyor, ancak süreç tek değer bekliyor
+    input_ch = channel.of(
+      ['sample1', 'file1.txt'],
+      ['sample2', 'file2.txt'],
+      ['sample3', 'file3.txt']
+    )
+    PROCESS_FILES(input_ch)
+}
+```
+
+</CodeWalkthrough>
+
+</TabItem>
+
+</Tabs>
 
 #### Pipeline'ı çalıştırın
 
@@ -1328,18 +1283,14 @@ Bunu düzeltmenin iki yolu vardır:
 
 ```bash
 nextflow run bad_channel_shape.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_channel_shape.nf` [clever_thompson] revision: 9b60aec7be
+
+executor >  local (3)
+[81/d0f3ea] PROCESS_FILES (1) | 3 of 3 ✔
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_channel_shape.nf` [clever_thompson] revision: 9b60aec7be
-
-    executor >  local (3)
-    [81/d0f3ea] PROCESS_FILES (1) | 3 of 3 ✔
-    ```
 
 #### Daha ileri gitmek: kayıt türleri
 
@@ -1351,15 +1302,15 @@ Kayıt türleri, veriye tanımlanmış bir şekil vererek bu sorunu çözer.
 Bir kayıt, adlandırılmış ve türlendirilmiş alanlar tanımlar; bir süreç ise kabul ettiği kayıt türünü bildirir.
 Nextflow her değeri bu bildirime göre denetler.
 
-!!! note "Kayıt türleri yeni bir özelliktir"
-
-    Kayıt türleri Nextflow 26.04 sürümünde tanıtılmıştır ve `nextflow.enable.types` bayrağını gerektirir.
-    26.04 sürümünde Nextflow, statik türlemenin önizleme özelliği olduğuna dair bir uyarı yazdırır.
-    Gelecekteki bir eğitim kursu bunları ayrıntılı olarak ele alacaktır.
+:::note[Kayıt türleri yeni bir özelliktir]
+Kayıt türleri Nextflow 26.04 sürümünde tanıtılmıştır ve `nextflow.enable.types` bayrağını gerektirir.
+26.04 sürümünde Nextflow, statik türlemenin önizleme özelliği olduğuna dair bir uyarı yazdırır.
+Gelecekteki bir eğitim kursu bunları ayrıntılı olarak ele alacaktır.
+:::
 
 Aynı iş akışının bir kayıt kullanılarak yazılmış hali aşağıdadır:
 
-```groovy title="bad_channel_shape.nf" hl_lines="3 5-8 12 15 19 27-29" linenums="1"
+```nextflow {3,5-8,12,15,19,27-29} title="bad_channel_shape.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 nextflow.enable.types = true
@@ -1405,7 +1356,7 @@ Orijinalden yapılan değişiklikler şunlardır:
 Bir kayıtta alan eksikse Nextflow hata mesajında alan adını belirtir.
 Bunu görmek için ikinci kayıttan `id` alanını kaldırın:
 
-```groovy title="bad_channel_shape.nf" hl_lines="3" linenums="26"
+```nextflow {3} title="bad_channel_shape.nf" showLineNumbers startLineNumber=26
     input_ch = channel.of(
       record(id: 'sample1', file_name: 'file1.txt'),
       record(file_name: 'file2.txt'),
@@ -1417,25 +1368,21 @@ Bunu görmek için ikinci kayıttan `id` alanını kaldırın:
 
 ```bash
 nextflow run bad_channel_shape.nf
+# [!output]
+ N E X T F L O W   ~  version 26.10.0
+
+Launching `bad_channel_shape.nf` [condescending_sammet] revision: 15c9f9aa87
+# [!output stderr]
+ERROR ~ Error executing process > 'PROCESS_FILES (2)'
+
+Caused by:
+  [PROCESS_FILES (2)] input field `id` at index 0 cannot be null -- append `?` to the type annotation to mark it as nullable
+
+
+Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.10.0
-
-    Launching `bad_channel_shape.nf` [condescending_sammet] revision: 15c9f9aa87
-
-    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
-
-    Caused by:
-      [PROCESS_FILES (2)] input field `id` at index 0 cannot be null -- append `?` to the type annotation to mark it as nullable
-
-
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 Bu hata Nextflow 26.10 veya sonraki bir sürümü gerektirir.
 Nextflow 26.04'te görev, `id` değeri `null` olarak ayarlanmış şekilde çalışır ve `null_output.txt` dosyasını oluşturur.
@@ -1452,30 +1399,26 @@ Bunu uygulamada görmek için `bad_channel_shape_viewed.nf` dosyasını çalış
 
 ```bash
 nextflow run bad_channel_shape_viewed.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_channel_shape_viewed.nf` [sleepy_cajal] revision: 03e79cdbad
+
+executor >  local (3)
+[dc/6e5c24] PROCESS_FILES (2) | 3 of 3 ✔
+Channel content: [sample1, file1.txt]
+Channel content: [sample2, file2.txt]
+Channel content: [sample3, file3.txt]
+After mapping: sample1
+After mapping: sample2
+After mapping: sample3
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_channel_shape_viewed.nf` [sleepy_cajal] revision: 03e79cdbad
-
-    executor >  local (3)
-    [dc/6e5c24] PROCESS_FILES (2) | 3 of 3 ✔
-    Channel content: [sample1, file1.txt]
-    Channel content: [sample2, file2.txt]
-    Channel content: [sample3, file3.txt]
-    After mapping: sample1
-    After mapping: sample2
-    After mapping: sample3
-    ```
 
 #### Kodu inceleyin
 
 `.view()` operatörünün nasıl kullanıldığını görmek için `bad_channel_shape_viewed.nf` dosyasını inceleyelim:
 
-```groovy title="bad_channel_shape_viewed.nf" linenums="16" hl_lines="9 11"
+```nextflow {9,11} title="bad_channel_shape_viewed.nf" showLineNumbers startLineNumber=16
 workflow {
 
     // Kanal demet yayınlıyor, ancak süreç tek değer bekliyor
@@ -1496,7 +1439,7 @@ workflow {
 
 Kanal içeriğini anlamak için gelecekte aşırı `.view()` işlemleri kullanmaktan kaçınmak adına yorum eklemek faydalıdır:
 
-```groovy title="bad_channel_shape_viewed.nf (with comments)" linenums="16" hl_lines="8 9"
+```nextflow {8,9} title="bad_channel_shape_viewed.nf (with comments)" showLineNumbers startLineNumber=16
 workflow {
 
     // Kanal demet yayınlıyor, ancak süreç tek değer bekliyor
@@ -1517,24 +1460,20 @@ workflow {
 
 ```bash
 nextflow run bad_channel_shape_viewed.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_channel_shape_viewed.nf` [marvelous_koch] revision: 03e79cdbad
+
+executor >  local (3)
+[dc/6e5c24] PROCESS_FILES (2) | 3 of 3 ✔
+Channel content: [sample1, file1.txt]
+Channel content: [sample2, file2.txt]
+Channel content: [sample3, file3.txt]
+After mapping: sample1
+After mapping: sample2
+After mapping: sample3
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_channel_shape_viewed.nf` [marvelous_koch] revision: 03e79cdbad
-
-    executor >  local (3)
-    [dc/6e5c24] PROCESS_FILES (2) | 3 of 3 ✔
-    Channel content: [sample1, file1.txt]
-    Channel content: [sample2, file2.txt]
-    Channel content: [sample3, file3.txt]
-    After mapping: sample1
-    After mapping: sample2
-    After mapping: sample3
-    ```
 
 ### Özetle
 
@@ -1558,46 +1497,43 @@ Süreç yazarken yaygın bir hata, sürecin beklediği ile üretilen arasında u
 
 ```bash
 nextflow run missing_output.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `missing_output.nf` [evil_gilbert] revision: 3d5117f7e2
+
+executor >  local (3)
+[45/146e39] PROCESS_FILES (1) | 0 of 3 ✘
+# [!output stderr]
+ERROR ~ Error executing process > 'PROCESS_FILES (3)'
+
+Caused by:
+  Missing output file(s) `sample3.txt` expected by process `PROCESS_FILES (3)`
+
+
+Command executed:
+
+  echo "Processing sample3" > sample3_output.txt
+
+Command exit status:
+  0
+
+Command output:
+  (empty)
+
+Work dir:
+  /workspaces/training/side-quests/debugging/work/2b/85afc51ff8d820df3b97b8a7154a30
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+
+-- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `missing_output.nf` [evil_gilbert] revision: 3d5117f7e2
-
-    executor >  local (3)
-    [45/146e39] PROCESS_FILES (1) | 0 of 3 ✘
-    ERROR ~ Error executing process > 'PROCESS_FILES (3)'
-
-    Caused by:
-      Missing output file(s) `sample3.txt` expected by process `PROCESS_FILES (3)`
-
-
-    Command executed:
-
-      echo "Processing sample3" > sample3_output.txt
-
-    Command exit status:
-      0
-
-    Command output:
-      (empty)
-
-    Work dir:
-      /workspaces/training/side-quests/debugging/work/2b/85afc51ff8d820df3b97b8a7154a30
-
-    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
-
-    -- Check '.nextflow.log' file for details
-    ```
 
 #### Kodu inceleyin
 
 Hata mesajı, sürecin `sample3.txt` adında bir çıktı dosyası üretmesini beklediğini; ancak betiğin aslında `sample3_output.txt` oluşturduğunu belirtmektedir. `missing_output.nf` dosyasındaki süreç tanımını inceleyelim:
 
-```groovy title="missing_output.nf" linenums="3" hl_lines="6 10"
+```nextflow {6,10} title="missing_output.nf" showLineNumbers startLineNumber=3
 process PROCESS_FILES {
     input:
     val sample_name
@@ -1627,56 +1563,52 @@ Bu örnek için bu, `output:` tanımımızın aksine çıktı dosyası adına `_
 
 Çıktı dosyası adını tutarlı hale getirerek uyuşmazlığı düzeltin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="missing_output.nf" hl_lines="6 10" linenums="3"
-    process PROCESS_FILES {
-        input:
-        val sample_name
+```nextflow {6,10} title="missing_output.nf" showLineNumbers startLineNumber=3 step="Önce"
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-        output:
-        path "${sample_name}_output.txt"  // Düzeltildi: Betik çıktısıyla eşleştirildi
+    output:
+    path "${sample_name}.txt"  // Beklenen: sample3.txt
 
-        script:
-        """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt
-        """
-    }
-    ```
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Oluşturulan: sample3_output.txt
+    """
+}
+```
 
-=== "Önce"
+```nextflow {6,10} title="missing_output.nf" showLineNumbers startLineNumber=3 step="Sonra"
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-    ```groovy title="missing_output.nf" hl_lines="6 10" linenums="3"
-    process PROCESS_FILES {
-        input:
-        val sample_name
+    output:
+    path "${sample_name}_output.txt"  // Düzeltildi: Betik çıktısıyla eşleştirildi
 
-        output:
-        path "${sample_name}.txt"  // Beklenen: sample3.txt
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}
+```
 
-        script:
-        """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Oluşturulan: sample3_output.txt
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 #### Pipeline'ı çalıştırın
 
 ```bash
 nextflow run missing_output.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `missing_output.nf` [elated_hamilton] revision: d7ad486bce
+
+executor >  local (3)
+[70/6d4479] PROCESS_FILES (1) | 3 of 3 ✔
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `missing_output.nf` [elated_hamilton] revision: d7ad486bce
-
-    executor >  local (3)
-    [70/6d4479] PROCESS_FILES (1) | 3 of 3 ✔
-    ```
 
 ### 3.2. Eksik yazılım
 
@@ -1686,37 +1618,33 @@ Bir diğer hata sınıfı, yazılım sağlamadaki hatalardan kaynaklanır. `miss
 
 ```bash
 nextflow run missing_software.nf
+# [!output stderr]
+ERROR ~ Error executing process > 'PROCESS_FILES (2)'
+
+Caused by:
+  Process `PROCESS_FILES (2)` terminated with an error exit status (127)
+
+
+Command executed:
+
+  cowpy sample2 > sample2_output.txt
+
+Command exit status:
+  127 # [!code highlight]
+
+Command output:
+  (empty)
+
+Command error:
+  .command.sh: line 2: cowpy: command not found # [!code highlight]
+
+Work dir:
+  /workspaces/training/side-quests/debugging/work/2f/bcf8fad6fd101c76950c92062ce299
+
+Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+-- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console hl_lines="12 18"
-    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
-
-    Caused by:
-      Process `PROCESS_FILES (2)` terminated with an error exit status (127)
-
-
-    Command executed:
-
-      cowpy sample2 > sample2_output.txt
-
-    Command exit status:
-      127
-
-    Command output:
-      (empty)
-
-    Command error:
-      .command.sh: line 2: cowpy: command not found
-
-    Work dir:
-      /workspaces/training/side-quests/debugging/work/2f/bcf8fad6fd101c76950c92062ce299
-
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-
-    -- Check '.nextflow.log' file for details
-    ```
 
 Süreç, belirttiğimiz komuta erişemiyor. Bazen bu, iş akışının `bin` dizininde bir betiğin mevcut olmasına rağmen çalıştırılabilir yapılmamış olmasından kaynaklanır. Diğer durumlarda ise yazılımın iş akışının çalıştığı konteyner veya ortamda yüklü olmamasından kaynaklanır.
 
@@ -1724,7 +1652,7 @@ Süreç, belirttiğimiz komuta erişemiyor. Bazen bu, iş akışının `bin` diz
 
 O `127` çıkış koduna dikkat edin; tam olarak sorunu size söyler. `missing_software.nf` dosyasını inceleyelim:
 
-```groovy title="missing_software.nf" linenums="3" hl_lines="3"
+```nextflow {3} title="missing_software.nf" showLineNumbers startLineNumber=3
 process PROCESS_FILES {
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -1752,22 +1680,18 @@ Burada biraz yanıltıcı davrandık; aslında kodda yanlış bir şey yok. Sade
 
 ```bash
 nextflow run missing_software.nf -profile docker
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `missing_software.nf` [awesome_stonebraker] revision: 0296d12839
+
+executor >  local (3)
+[33/bf8d3e] PROCESS_FILES (3) | 3 of 3 ✔
 ```
 
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `missing_software.nf` [awesome_stonebraker] revision: 0296d12839
-
-    executor >  local (3)
-    [33/bf8d3e] PROCESS_FILES (3) | 3 of 3 ✔
-    ```
-
-!!! note "Not"
-
-    Nextflow'un konteynerleri nasıl kullandığı hakkında daha fazla bilgi edinmek için [Hello Nextflow](../../hello_nextflow/05_hello_containers.md) bölümüne bakın.
+:::note[Not]
+Nextflow'un konteynerleri nasıl kullandığı hakkında daha fazla bilgi edinmek için [Hello Nextflow](../../hello_nextflow/05_hello_containers.mdx) bölümüne bakın.
+:::
 
 ### 3.3. Hatalı kaynak yapılandırması
 
@@ -1779,33 +1703,30 @@ nextflow run missing_software.nf -profile docker
 
 ```bash
 nextflow run bad_resources.nf -profile docker
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_resources.nf` [curious_escher] revision: e6e544e786
+
+executor >  local (3)
+[83/c8c4af] PROCESS_FILES (2) | 0 of 3
+WARN: Killing running tasks (2)
+# [!output stderr]
+ERROR ~ Error executing process > 'PROCESS_FILES (1)'
+
+Caused by:
+  process hasn't exited
+
+
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_resources.nf` [curious_escher] revision: e6e544e786
-
-    executor >  local (3)
-    [83/c8c4af] PROCESS_FILES (2) | 0 of 3
-    WARN: Killing running tasks (2)
-    ERROR ~ Error executing process > 'PROCESS_FILES (1)'
-
-    Caused by:
-      process hasn't exited
-
-
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 #### Kodu inceleyin
 
 `bad_resources.nf` dosyasını inceleyelim:
 
-```groovy title="bad_resources.nf" linenums="3" hl_lines="5"
+```nextflow {5} title="bad_resources.nf" showLineNumbers startLineNumber=3
 process PROCESS_FILES {
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -1832,64 +1753,60 @@ Sürecin bir saniyeden uzun süreceğini biliyoruz (bunu garantilemek için bir 
 
 Zaman sınırını gerçekçi bir değere yükseltin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="bad_resources.nf" hl_lines="3" linenums="3"
-    process PROCESS_FILES {
+```nextflow {3} title="bad_resources.nf" showLineNumbers startLineNumber=3 step="Önce"
+process PROCESS_FILES {
 
-        time '100 s'  // Düzeltildi: Gerçekçi zaman sınırı
+    time '1 ms'  // HATA: Gerçekçi olmayan zaman sınırı
 
-        input:
-        val sample_name
+    input:
+    val sample_name
 
-        output:
-        path "${sample_name}_output.txt"
+    output:
+    path "${sample_name}_output.txt"
 
-        script:
-        """
-        sleep 1
-        cowpy ${sample_name} > ${sample_name}_output.txt
-        """
-    }
-    ```
+    script:
+    """
+    sleep 1  # 1 saniye sürer, ancak zaman sınırı 1ms
+    cowpy ${sample_name} > ${sample_name}_output.txt
+    """
+}
+```
 
-=== "Önce"
+```nextflow {3} title="bad_resources.nf" showLineNumbers startLineNumber=3 step="Sonra"
+process PROCESS_FILES {
 
-    ```groovy title="bad_resources.nf" hl_lines="3" linenums="3"
-    process PROCESS_FILES {
+    time '100 s'  // Düzeltildi: Gerçekçi zaman sınırı
 
-        time '1 ms'  // HATA: Gerçekçi olmayan zaman sınırı
+    input:
+    val sample_name
 
-        input:
-        val sample_name
+    output:
+    path "${sample_name}_output.txt"
 
-        output:
-        path "${sample_name}_output.txt"
+    script:
+    """
+    sleep 1
+    cowpy ${sample_name} > ${sample_name}_output.txt
+    """
+}
+```
 
-        script:
-        """
-        sleep 1  # 1 saniye sürer, ancak zaman sınırı 1ms
-        cowpy ${sample_name} > ${sample_name}_output.txt
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 #### Pipeline'ı çalıştırın
 
 ```bash
 nextflow run bad_resources.nf -profile docker
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_resources.nf` [friendly_mcclintock] revision: 4304ffa21c
+
+executor >  local (3)
+[96/b70b83] PROCESS_FILES (3) | 3 of 3 ✔
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_resources.nf` [friendly_mcclintock] revision: 4304ffa21c
-
-    executor >  local (3)
-    [96/b70b83] PROCESS_FILES (3) | 3 of 3 ✔
-    ```
 
 `local` yürütücüde hata, bir zamanlayıcıda olduğundan daha az açıklayıcıdır: zaman sınırını açıkça belirten bir mesaj yerine `process hasn't exited` ve `WARN: Killing running tasks` mesajlarını alırsınız. Kurulacak bağlantı şudur: Nextflow, bir görev kendisine ayrılan kaynakları aştığında o görevi sonlandırır; dolayısıyla bir süreç betik düzeyinde bir hata olmaksızın sonlandırıldığında kaynak yönergelerini kontrol edin. Burada sorunun kaynağı, sürecin yaptığı iş için çok düşük olan `time` yönergesidir. Kaynak yönergelerinizi uygun şekilde yapılandırabilmek için çalıştırdığınız komutların kaynak gereksinimlerini anladığınızdan emin olun.
 
@@ -1907,40 +1824,37 @@ Work dizini incelemesini göstermek için daha önceki `missing_output.nf` örne
 
 ```bash
 nextflow run missing_output.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `missing_output.nf` [irreverent_payne] revision: 3d5117f7e2
+
+executor >  local (3)
+[f0/42f283] PROCESS_FILES (2) | 0 of 3 ✘
+# [!output stderr]
+ERROR ~ Error executing process > 'PROCESS_FILES (2)'
+
+Caused by:
+  Missing output file(s) `sample2.txt` expected by process `PROCESS_FILES (2)`
+
+
+Command executed:
+
+  echo "Processing sample2" > sample2_output.txt
+
+Command exit status:
+  0
+
+Command output:
+  (empty)
+
+Work dir:
+  /workspaces/training/side-quests/debugging/work/f0/42f283a25543dad8d56b192e314f41
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `missing_output.nf` [irreverent_payne] revision: 3d5117f7e2
-
-    executor >  local (3)
-    [f0/42f283] PROCESS_FILES (2) | 0 of 3 ✘
-    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
-
-    Caused by:
-      Missing output file(s) `sample2.txt` expected by process `PROCESS_FILES (2)`
-
-
-    Command executed:
-
-      echo "Processing sample2" > sample2_output.txt
-
-    Command exit status:
-      0
-
-    Command output:
-      (empty)
-
-    Work dir:
-      /workspaces/training/side-quests/debugging/work/f0/42f283a25543dad8d56b192e314f41
-
-    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 #### Work dizinini kontrol edin
 
@@ -2066,35 +1980,31 @@ Daha önceki örneklerimizden `bad_channel_shape_viewed.nf`, `.view()` kullanara
 
 ```bash
 nextflow run bad_channel_shape_viewed_debug.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_channel_shape_viewed_debug.nf` [infallible_shirley] revision: 37cbda227b
+
+executor >  local (3)
+[a1/59e59a] PROCESS_FILES (3) | 3 of 3 ✔
+Channel content: [sample1, file1.txt]
+Channel content: [sample2, file2.txt]
+Channel content: [sample3, file3.txt]
+After mapping: sample1
+After mapping: sample2
+After mapping: sample3
+Sample name inside process is sample1
+
+Sample name inside process is sample2
+
+Sample name inside process is sample3
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_channel_shape_viewed_debug.nf` [infallible_shirley] revision: 37cbda227b
-
-    executor >  local (3)
-    [a1/59e59a] PROCESS_FILES (3) | 3 of 3 ✔
-    Channel content: [sample1, file1.txt]
-    Channel content: [sample2, file2.txt]
-    Channel content: [sample3, file3.txt]
-    After mapping: sample1
-    After mapping: sample2
-    After mapping: sample3
-    Sample name inside process is sample1
-
-    Sample name inside process is sample2
-
-    Sample name inside process is sample3
-    ```
 
 #### Kodu inceleyin
 
 `debug` yönergesinin nasıl çalıştığını görmek için `bad_channel_shape_viewed_debug.nf` dosyasını inceleyelim:
 
-```groovy title="bad_channel_shape_viewed_debug.nf" linenums="3" hl_lines="2"
+```nextflow {2} title="bad_channel_shape_viewed_debug.nf" showLineNumbers startLineNumber=3
 process PROCESS_FILES {
     debug true  // Gerçek zamanlı çıktıyı etkinleştir
 
@@ -2122,29 +2032,25 @@ Bazen herhangi bir süreç çalışmadan önce sorunları yakalamak istersiniz. 
 
 Önizleme modu, komutları yürütmeden iş akışı mantığını test etmenizi sağlar. Bu, herhangi bir gerçek komut çalıştırmadan iş akışınızın yapısını hızla kontrol etmek ve süreçlerin doğru şekilde bağlandığından emin olmak için oldukça kullanışlı olabilir.
 
-!!! note "Not"
-
-    Daha önce `bad_syntax.nf` dosyasını düzelttiyseniz, bu komutu çalıştırmadan önce betik bloğundan sonra kapanış süslü parantezini kaldırarak sözdizimi hatasını yeniden ekleyin.
+:::note[Not]
+Daha önce `bad_syntax.nf` dosyasını düzelttiyseniz, bu komutu çalıştırmadan önce betik bloğundan sonra kapanış süslü parantezini kaldırarak sözdizimi hatasını yeniden ekleyin.
+:::
 
 Şu komutu çalıştırın:
 
 ```bash
 nextflow run bad_syntax.nf -preview
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_syntax.nf` [magical_mercator] revision: 550b9a8873
+
+Error bad_syntax.nf:24:1: Unexpected input: '<EOF>'
+# [!output stderr]
+ERROR ~ Script compilation failed
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_syntax.nf` [magical_mercator] revision: 550b9a8873
-
-    Error bad_syntax.nf:24:1: Unexpected input: '<EOF>'
-
-    ERROR ~ Script compilation failed
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 Önizleme modu, herhangi bir süreç çalıştırmadan sözdizimi hatalarını erken yakalamak için özellikle kullanışlıdır. Yürütmeden önce iş akışı yapısını ve süreç bağlantılarını doğrular.
 
@@ -2160,60 +2066,52 @@ Bir Nextflow süreci geliştirirken, gerçek komutu çalıştırmadan doğru bi�
 
 ```bash
 nextflow run missing_software_with_stub.nf
+# [!output stderr]
+ERROR ~ Error executing process > 'PROCESS_FILES (3)'
+
+Caused by:
+  Process `PROCESS_FILES (3)` terminated with an error exit status (127)
+
+
+Command executed:
+
+  cowpy sample3 > sample3_output.txt
+
+Command exit status:
+  127 # [!code highlight]
+
+Command output:
+  (empty)
+
+Command error:
+  .command.sh: line 2: cowpy: command not found # [!code highlight]
+
+Work dir:
+  /workspaces/training/side-quests/debugging/work/cd/b8686a0d27df5be779a38fed616d01
+
+Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+-- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console hl_lines="12 18"
-    ERROR ~ Error executing process > 'PROCESS_FILES (3)'
-
-    Caused by:
-      Process `PROCESS_FILES (3)` terminated with an error exit status (127)
-
-
-    Command executed:
-
-      cowpy sample3 > sample3_output.txt
-
-    Command exit status:
-      127
-
-    Command output:
-      (empty)
-
-    Command error:
-      .command.sh: line 2: cowpy: command not found
-
-    Work dir:
-      /workspaces/training/side-quests/debugging/work/cd/b8686a0d27df5be779a38fed616d01
-
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
-
-    -- Check '.nextflow.log' file for details
-    ```
 
 Ancak bu iş akışı, `docker` profili olmadan bile `-stub-run` ile çalıştırıldığında hata üretmez:
 
 ```bash
 nextflow run missing_software_with_stub.nf -stub-run
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `missing_software_with_stub.nf` [astonishing_shockley] revision: f1f4f05d7d
+
+executor >  local (3)
+[ba/416414] PROCESS_FILES (2) | 3 of 3 ✔
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `missing_software_with_stub.nf` [astonishing_shockley] revision: f1f4f05d7d
-
-    executor >  local (3)
-    [ba/416414] PROCESS_FILES (2) | 3 of 3 ✔
-    ```
 
 #### Kodu inceleyin
 
 `missing_software_with_stub.nf` dosyasını inceleyelim:
 
-```groovy title="missing_software.nf (with stub)" hl_lines="16-19" linenums="3"
+```nextflow {16-19} title="missing_software.nf (with stub)" showLineNumbers startLineNumber=3
 process PROCESS_FILES {
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -2281,25 +2179,25 @@ Bu metodoloji, ele aldığımız tüm araçları verimli bir iş akışında bir
 2. Resume ile test edin: `nextflow run workflow.nf -resume`
 3. Tam iş akışı yürütmesini doğrulayın
 
-!!! tip "Verimli Hata Ayıklama için Resume Kullanımı"
+:::tip[Verimli Hata Ayıklama için Resume Kullanımı]
+Bir sorunu tespit ettikten sonra, iş akışınızın başarılı bölümlerini yeniden çalıştırarak zaman kaybetmeden düzeltmelerinizi test etmek için verimli bir yola ihtiyacınız vardır. Nextflow'un `-resume` işlevi, hata ayıklama için son derece değerlidir.
 
-    Bir sorunu tespit ettikten sonra, iş akışınızın başarılı bölümlerini yeniden çalıştırarak zaman kaybetmeden düzeltmelerinizi test etmek için verimli bir yola ihtiyacınız vardır. Nextflow'un `-resume` işlevi, hata ayıklama için son derece değerlidir.
+[Hello Nextflow](../../hello_nextflow/index.mdx) üzerinde çalıştıysanız `-resume` ile karşılaşmış olmalısınız; sorunlu sürecinizden önceki süreçlerin çalışmasını beklerken kendinizi bekletmemek için hata ayıklama sırasında bundan iyi yararlanmanız önemlidir.
 
-    [Hello Nextflow](../../hello_nextflow/index.md) üzerinde çalıştıysanız `-resume` ile karşılaşmış olmalısınız; sorunlu sürecinizden önceki süreçlerin çalışmasını beklerken kendinizi bekletmemek için hata ayıklama sırasında bundan iyi yararlanmanız önemlidir.
+**Resume hata ayıklama stratejisi:**
 
-    **Resume hata ayıklama stratejisi:**
-
-    1. İş akışını başarısız olana kadar çalıştırın
-    2. Başarısız görev için work dizinini inceleyin
-    3. Belirli sorunu düzeltin
-    4. Yalnızca düzeltmeyi test etmek için resume kullanın
-    5. İş akışı tamamlanana kadar tekrarlayın
+1. İş akışını başarısız olana kadar çalıştırın
+2. Başarısız görev için work dizinini inceleyin
+3. Belirli sorunu düzeltin
+4. Yalnızca düzeltmeyi test etmek için resume kullanın
+5. İş akışı tamamlanana kadar tekrarlayın
+:::
 
 #### Hata Ayıklama Yapılandırma Profili
 
 Bu sistematik yaklaşımı daha da verimli hale getirmek için, ihtiyacınız olan tüm araçları otomatik olarak etkinleştiren özel bir hata ayıklama yapılandırması oluşturabilirsiniz:
 
-```groovy title="nextflow.config (debug profile)" linenums="1"
+```nextflow title="nextflow.config (debug profile)" nextflow="config" showLineNumbers
 profiles {
     debug {
         process {
@@ -2327,316 +2225,316 @@ Bu profil gerçek zamanlı çıktıyı etkinleştirir, work dizinlerini korur ve
 
 Artık sistematik hata ayıklama yaklaşımını pratiğe dökme zamanı. `buggy_workflow.nf` iş akışı, gerçek dünya geliştirme sürecinde karşılaşacağınız sorun türlerini temsil eden çeşitli yaygın hatalar içermektedir.
 
-!!! exercise "Alıştırma"
+:::note[Alıştırma]
+`buggy_workflow.nf` dosyasındaki tüm hataları tespit edip düzeltmek için sistematik hata ayıklama yaklaşımını kullanın. Bu iş akışı, bir CSV dosyasından örnek verileri işlemeye çalışır; ancak yaygın hata ayıklama senaryolarını temsil eden birden fazla kasıtlı hata içerir.
 
-    `buggy_workflow.nf` dosyasındaki tüm hataları tespit edip düzeltmek için sistematik hata ayıklama yaklaşımını kullanın. Bu iş akışı, bir CSV dosyasından örnek verileri işlemeye çalışır; ancak yaygın hata ayıklama senaryolarını temsil eden birden fazla kasıtlı hata içerir.
+İlk hatayı görmek için iş akışını çalıştırarak başlayın:
 
-    İlk hatayı görmek için iş akışını çalıştırarak başlayın:
+```bash
+nextflow run buggy_workflow.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
 
-    ```bash
-    nextflow run buggy_workflow.nf
-    ```
+Launching `buggy_workflow.nf` [happy_aryabhata] revision: 6a296ff695
 
-    ??? failure "Komut çıktısı"
+Error buggy_workflow.nf:25:12: Unexpected input: '\n'
+│  25 |     script:
+╰     |            ^
+# [!output stderr]
+ERROR ~ Script compilation failed
 
-        ```console
-         N E X T F L O W   ~  version 26.04.4
+ -- Check '.nextflow.log' file for details
+```
 
-        Launching `buggy_workflow.nf` [happy_aryabhata] revision: 6a296ff695
+Ayrıştırıcı 25. satıra (`script:`) işaret ediyor; ancak asıl sorun hemen üzerindedir: 23. satırdaki `output:` bildiriminden sonra gelen sondaki virgül, ayrıştırıcının başka bir çıktı beklentisine girmesine neden olur ve `script:` satırına ulaştığında hata verir. Bu, çözülmesi gereken birkaç sözdizimi hatasından ilkidir.
 
-        Error buggy_workflow.nf:25:12: Unexpected input: '\n'
-        │  25 |     script:
-        ╰     |            ^
+Öğrendiğiniz dört aşamalı hata ayıklama yöntemini uygulayın:
 
-        ERROR ~ Script compilation failed
+**Aşama 1: Sözdizimi Hatası Çözümü**
+- VSCode veya IDE'nizde kırmızı alt çizgileri kontrol edin
+- Sözdizimi sorunlarını belirlemek için `nextflow run workflow.nf -preview` komutunu çalıştırın
+- Tüm sözdizimi hatalarını düzeltin (eksik süslü parantezler, sondaki virgüller vb.)
+- Devam etmeden önce iş akışının başarıyla ayrıştırıldığından emin olun
 
-         -- Check '.nextflow.log' file for details
-        ```
+**Aşama 2: Hızlı Değerlendirme**
+- Çalışma zamanı hata mesajlarını dikkatlice okuyun
+- Hataların çalışma zamanı, mantık veya kaynakla ilgili olup olmadığını belirleyin
+- Temel iş akışı mantığını test etmek için `-preview` modunu kullanın
 
-        Ayrıştırıcı 25. satıra (`script:`) işaret ediyor; ancak asıl sorun hemen üzerindedir: 23. satırdaki `output:` bildiriminden sonra gelen sondaki virgül, ayrıştırıcının başka bir çıktı beklentisine girmesine neden olur ve `script:` satırına ulaştığında hata verir. Bu, çözülmesi gereken birkaç sözdizimi hatasından ilkidir.
+**Aşama 3: Ayrıntılı Araştırma**
+- Başarısız görevler için work dizinlerini inceleyin
+- Kanalları incelemek için `.view()` operatörleri ekleyin
+- Work dizinlerindeki log dosyalarını kontrol edin
+- Yürütme olmadan iş akışı mantığını test etmek için `-stub-run` kullanın
 
-    Öğrendiğiniz dört aşamalı hata ayıklama yöntemini uygulayın:
+**Aşama 4: Düzeltme ve Doğrulama**
+- Hedefli düzeltmeler yapın
+- Düzeltmeleri verimli şekilde test etmek için `-resume` kullanın
+- Tam iş akışı yürütmesini doğrulayın
 
-    **Aşama 1: Sözdizimi Hatası Çözümü**
-    - VSCode veya IDE'nizde kırmızı alt çizgileri kontrol edin
-    - Sözdizimi sorunlarını belirlemek için `nextflow run workflow.nf -preview` komutunu çalıştırın
-    - Tüm sözdizimi hatalarını düzeltin (eksik süslü parantezler, sondaki virgüller vb.)
-    - Devam etmeden önce iş akışının başarıyla ayrıştırıldığından emin olun
+**Kullanabileceğiniz Hata Ayıklama Araçları:**
+```bash
+# Sözdizimi kontrolü için önizleme modu
+nextflow run buggy_workflow.nf -preview
 
-    **Aşama 2: Hızlı Değerlendirme**
-    - Çalışma zamanı hata mesajlarını dikkatlice okuyun
-    - Hataların çalışma zamanı, mantık veya kaynakla ilgili olup olmadığını belirleyin
-    - Temel iş akışı mantığını test etmek için `-preview` modunu kullanın
+# Ayrıntılı çıktı için debug profili
+nextflow run buggy_workflow.nf -profile debug
 
-    **Aşama 3: Ayrıntılı Araştırma**
-    - Başarısız görevler için work dizinlerini inceleyin
-    - Kanalları incelemek için `.view()` operatörleri ekleyin
-    - Work dizinlerindeki log dosyalarını kontrol edin
-    - Yürütme olmadan iş akışı mantığını test etmek için `-stub-run` kullanın
+# Mantık testi için stub çalıştırma
+nextflow run buggy_workflow.nf -stub-run
 
-    **Aşama 4: Düzeltme ve Doğrulama**
-    - Hedefli düzeltmeler yapın
-    - Düzeltmeleri verimli şekilde test etmek için `-resume` kullanın
-    - Tam iş akışı yürütmesini doğrulayın
+# Düzeltmelerden sonra resume
+nextflow run buggy_workflow.nf -resume
+```
 
-    **Kullanabileceğiniz Hata Ayıklama Araçları:**
-    ```bash
-    # Sözdizimi kontrolü için önizleme modu
-    nextflow run buggy_workflow.nf -preview
+<details class="solution">
+<summary>Çözüm</summary>
 
-    # Ayrıntılı çıktı için debug profili
-    nextflow run buggy_workflow.nf -profile debug
+`buggy_workflow.nf` dosyası, tüm önemli hata ayıklama kategorilerini kapsayan 10 farklı hata içermektedir. Her hatanın ve nasıl düzeltileceğinin, Nextflow 26.04'te gerçekte karşılaşılan sıraya göre sistematik bir dökümü aşağıda verilmiştir. Derleyici iş akışını iki geçişte çözümler: önce sözdizimini ayrıştırır, ardından her değişkenin tanımlı olduğunu statik olarak kontrol eder. Bu nedenle önce sözdizimi hatalarını temizlersiniz, ardından bir grup tanımsız değişken hatası gelir; iş akışı hiç çalışmadan önce bunların hepsi giderilmelidir.
 
-    # Mantık testi için stub çalıştırma
-    nextflow run buggy_workflow.nf -stub-run
+Sözdizimi hatalarıyla başlayalım:
 
-    # Düzeltmelerden sonra resume
-    nextflow run buggy_workflow.nf -resume
-    ```
+**Hata 1: Sözdizimi Hatası - Sondaki Virgül**
+```nextflow showLineNumbers startLineNumber=21
+output:
+    path "${sample_id}_result.txt",  // HATA: Sondaki virgül
+```
+**Düzeltme:** Sondaki virgülü kaldırın
+```nextflow showLineNumbers startLineNumber=21
+output:
+    path "${sample_id}_result.txt"
+```
 
-    ??? solution "Çözüm"
-        `buggy_workflow.nf` dosyası, tüm önemli hata ayıklama kategorilerini kapsayan 10 farklı hata içermektedir. Her hatanın ve nasıl düzeltileceğinin, Nextflow 26.04'te gerçekte karşılaşılan sıraya göre sistematik bir dökümü aşağıda verilmiştir. Derleyici iş akışını iki geçişte çözümler: önce sözdizimini ayrıştırır, ardından her değişkenin tanımlı olduğunu statik olarak kontrol eder. Bu nedenle önce sözdizimi hatalarını temizlersiniz, ardından bir grup tanımsız değişken hatası gelir; iş akışı hiç çalışmadan önce bunların hepsi giderilmelidir.
+Virgül kaldırıldıktan sonra ayrıştırıcı, `processFiles`'ı kapatması gereken süslü parantezi arayarak dosyanın sonuna kadar ilerler ve `Unexpected input: '<EOF>'` hatasını bildirir.
 
-        Sözdizimi hatalarıyla başlayalım:
+**Hata 2: Sözdizimi Hatası - Eksik Kapanış Süslü Parantezi**
+```nextflow showLineNumbers startLineNumber=24
+script:
+"""
+echo "Processing: ${sample}"
+cat ${input_file} > ${sample}_result.txt
+"""
+// HATA: processFiles süreci için kapanış süslü parantezi eksik
+```
+**Düzeltme:** Eksik kapanış süslü parantezini ekleyin
+```nextflow showLineNumbers startLineNumber=29
+"""
+echo "Processing: ${sample_id}"
+cat ${input_file} > ${sample_id}_result.txt
+"""
+}  // Eksik kapanış süslü parantezini ekle
+```
 
-        **Hata 1: Sözdizimi Hatası - Sondaki Virgül**
-        ```groovy linenums="21"
-        output:
-            path "${sample_id}_result.txt",  // HATA: Sondaki virgül
-        ```
-        **Düzeltme:** Sondaki virgülü kaldırın
-        ```groovy linenums="21"
-        output:
-            path "${sample_id}_result.txt"
-        ```
+Artık sözdizimi ayrıştırılıyor; bu nedenle statik tür denetleyicisi çalışır. İş akışı çalışmadan önce tüm tanımsız değişkenleri bir kerede bildirir:
 
-        Virgül kaldırıldıktan sonra ayrıştırıcı, `processFiles`'ı kapatması gereken süslü parantezi arayarak dosyanın sonuna kadar ilerler ve `Unexpected input: '<EOF>'` hatasını bildirir.
+```console
+Error buggy_workflow.nf:86:29: `sample_ids` is not defined
+Error buggy_workflow.nf:27:25: `sample` is not defined
+Error buggy_workflow.nf:28:27: `sample` is not defined
+Error buggy_workflow.nf:49:33: `i` is not defined
+```
 
-        **Hata 2: Sözdizimi Hatası - Eksik Kapanış Süslü Parantezi**
-        ```groovy linenums="24"
-        script:
-        """
-        echo "Processing: ${sample}"
-        cat ${input_file} > ${sample}_result.txt
-        """
-        // HATA: processFiles süreci için kapanış süslü parantezi eksik
-        ```
-        **Düzeltme:** Eksik kapanış süslü parantezini ekleyin
-        ```groovy linenums="29"
-        """
-        echo "Processing: ${sample_id}"
-        cat ${input_file} > ${sample_id}_result.txt
-        """
-        }  // Eksik kapanış süslü parantezini ekle
-        ```
+Bu dört satır, aşağıdaki Hata 3, 4 ve 5'e karşılık gelen üç farklı hataya işaret etmektedir. Sonuncusu olan `i`, tür denetleyicisinin bir Nextflow değişkeninden ayırt edemediği bir Bash değişkenidir; bu nedenle çalışma zamanı hatası olarak değil, derleme zamanında ortaya çıkar. Yeniden çalıştırmadan önce üçünü de düzeltin.
 
-        Artık sözdizimi ayrıştırılıyor; bu nedenle statik tür denetleyicisi çalışır. İş akışı çalışmadan önce tüm tanımsız değişkenleri bir kerede bildirir:
+**Hata 3: Değişken Adı Hatası**
+```nextflow showLineNumbers startLineNumber=26
+echo "Processing: ${sample}"     // HATA: sample_id olmalı
+cat ${input_file} > ${sample}_result.txt  // HATA: sample_id olmalı
+```
+**Düzeltme:** Doğru girdi değişken adını kullanın
+```nextflow showLineNumbers startLineNumber=26
+echo "Processing: ${sample_id}"
+cat ${input_file} > ${sample_id}_result.txt
+```
 
-        ```console
-        Error buggy_workflow.nf:86:29: `sample_ids` is not defined
-        Error buggy_workflow.nf:27:25: `sample` is not defined
-        Error buggy_workflow.nf:28:27: `sample` is not defined
-        Error buggy_workflow.nf:49:33: `i` is not defined
-        ```
+**Hata 4: Tanımsız Değişken Hatası**
+```nextflow showLineNumbers startLineNumber=87
+heavy_ch = heavyProcess(sample_ids)  // HATA: sample_ids tanımsız
+```
+**Düzeltme:** Doğru kanalı kullanın
+```nextflow showLineNumbers startLineNumber=87
+heavy_ch = heavyProcess(input_ch)
+```
 
-        Bu dört satır, aşağıdaki Hata 3, 4 ve 5'e karşılık gelen üç farklı hataya işaret etmektedir. Sonuncusu olan `i`, tür denetleyicisinin bir Nextflow değişkeninden ayırt edemediği bir Bash değişkenidir; bu nedenle çalışma zamanı hatası olarak değil, derleme zamanında ortaya çıkar. Yeniden çalıştırmadan önce üçünü de düzeltin.
+**Hata 5: Bash Değişkeni Kaçırma Hatası**
+```nextflow showLineNumbers startLineNumber=48
+echo "Heavy computation $i for ${sample_id}"  // HATA: $i tanımsız bir Nextflow değişkeni gibi görünüyor
+```
+**Düzeltme:** Bash değişkenini kaçırın; böylece Nextflow onu shell'e bırakır
+```nextflow showLineNumbers startLineNumber=48
+echo "Heavy computation \${i} for ${sample_id}"
+```
 
-        **Hata 3: Değişken Adı Hatası**
-        ```groovy linenums="26"
-        echo "Processing: ${sample}"     // HATA: sample_id olmalı
-        cat ${input_file} > ${sample}_result.txt  // HATA: sample_id olmalı
-        ```
-        **Düzeltme:** Doğru girdi değişken adını kullanın
-        ```groovy linenums="26"
-        echo "Processing: ${sample_id}"
-        cat ${input_file} > ${sample_id}_result.txt
-        ```
+Bunlar çözüldükten sonra iş akışı derlenir ve çalışmaya başlar. İlk çalışma zamanı hatası `processFiles`'tan gelir; süreç bir demet beklerken yalın bir değer alıyor: `Input tuple does not match tuple declaration in process 'processFiles' -- offending value: sample_003`.
 
-        **Hata 4: Tanımsız Değişken Hatası**
-        ```groovy linenums="87"
-        heavy_ch = heavyProcess(sample_ids)  // HATA: sample_ids tanımsız
-        ```
-        **Düzeltme:** Doğru kanalı kullanın
-        ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch)
-        ```
+**Hata 6: Kanal Yapısı Hatası - Yanlış Map Çıktısı**
+```nextflow showLineNumbers startLineNumber=83
+.map { row -> row.sample_id }  // HATA: processFiles demet bekliyor
+```
+**Düzeltme:** processFiles'ın beklediği demet yapısını döndürün
+```nextflow showLineNumbers startLineNumber=83
+.map { row -> [row.sample_id, file(row.fastq_path)] }
+```
 
-        **Hata 5: Bash Değişkeni Kaçırma Hatası**
-        ```groovy linenums="48"
-        echo "Heavy computation $i for ${sample_id}"  // HATA: $i tanımsız bir Nextflow değişkeni gibi görünüyor
-        ```
-        **Düzeltme:** Bash değişkenini kaçırın; böylece Nextflow onu shell'e bırakır
-        ```groovy linenums="48"
-        echo "Heavy computation \${i} for ${sample_id}"
-        ```
+Bu `processFiles`'ı düzeltir; ancak `input_ch` artık iki elemanlı bir demet yayınlıyor ve `heavyProcess` hâlâ tek bir değer beklerken tüm demeti alıyor. Demet, betikteki Bash komutuna `[sample_005, /path/sample_005.fastq.gz]` olarak aktarılır ve 2 çıkış durumuyla bir sözdizimi hatasına yol açar.
 
-        Bunlar çözüldükten sonra iş akışı derlenir ve çalışmaya başlar. İlk çalışma zamanı hatası `processFiles`'tan gelir; süreç bir demet beklerken yalın bir değer alıyor: `Input tuple does not match tuple declaration in process 'processFiles' -- offending value: sample_003`.
+**Hata 7: heavyProcess için Hatalı Kanal Yapısı**
+```nextflow showLineNumbers startLineNumber=87
+heavy_ch = heavyProcess(input_ch)  // HATA: input_ch artık 2 elemanlı demet yayınlıyor; heavyProcess yalnızca ilk elemana ihtiyaç duyuyor
+```
+**Düzeltme:** Yalnızca örnek kimliklerini iletin
+```nextflow showLineNumbers startLineNumber=87
+heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
+```
 
-        **Hata 6: Kanal Yapısı Hatası - Yanlış Map Çıktısı**
-        ```groovy linenums="83"
-        .map { row -> row.sample_id }  // HATA: processFiles demet bekliyor
-        ```
-        **Düzeltme:** processFiles'ın beklediği demet yapısını döndürün
-        ```groovy linenums="83"
+Artık `heavyProcess` çalışıyor; ancak zaman sınırına takılıyor. `local` yürütücüde mesaj, açık bir zaman aşımı yerine `process hasn't exited` (ve `WARN: Killing running tasks` uyarısı) şeklinde görünür; bu nedenle durdurulan görevi `time` yönergesine bağlayın:
+
+**Hata 8: Kaynak Yapılandırma Hatası**
+```nextflow showLineNumbers startLineNumber=36
+time '1 ms'  // HATA: Gerçekçi olmayan zaman sınırı
+```
+**Düzeltme:** Gerçekçi bir zaman sınırına yükseltin
+```nextflow showLineNumbers startLineNumber=36
+time '100 s'
+```
+
+Ardından çözülmesi gereken bir `Missing output file(s)` hatası var; çünkü betik `${sample_id}.txt` yazıyor ancak çıktı bildirimi `${sample_id}_heavy.txt` bekliyor:
+
+**Hata 9: Çıktı Dosyası Adı Uyuşmazlığı**
+```nextflow showLineNumbers startLineNumber=49
+done > ${sample_id}.txt  // HATA: Yanlış dosya adı, çıktı bildirimiyle eşleşmeli
+```
+**Düzeltme:** Çıktı bildirimiyle eşleştirin
+```nextflow showLineNumbers startLineNumber=49
+done > ${sample_id}_heavy.txt
+```
+
+İş akışı artık hatasız tamamlanıyor; ancak `files` çıktısı boş: `handleFiles` hiç çalışmadı. Girdi kanalı olan `channel.fromPath("*.txt")`, başlatma dizininde hiçbir dosyayla eşleşmediğinden süreç sessizce atlanıyor.
+
+**Hata 10: Yanlış Kanal Kaynağı**
+```nextflow showLineNumbers startLineNumber=88
+file_ch = channel.fromPath("*.txt") // Hata: Bir süreçten değil, mevcut çalışma dizininden girdi almaya çalışıyor
+handleFiles(file_ch)
+```
+**Düzeltme:** Önceki sürecin çıktısını alın
+```nextflow showLineNumbers startLineNumber=88
+file_ch = handleFiles(heavy_ch)
+```
+
+Bununla birlikte tüm iş akışı baştan sona çalışır ve üç çıktının tamamı doldurulur.
+
+**Tam Düzeltilmiş İş Akışı:**
+```nextflow showLineNumbers
+#!/usr/bin/env nextflow
+
+/*
+* Hata ayıklama alıştırmaları için hatalı iş akışı
+* Bu iş akışı öğrenme amacıyla birkaç kasıtlı hata içermektedir
+*/
+
+params{
+    // Doğrulama eksik parametreler
+    input: Path = 'data/sample_data.csv'
+    output: String = 'results'
+}
+
+/*
+* Girdi/çıktı uyuşmazlığı olan süreç
+*/
+process processFiles {
+
+    input:
+        tuple val(sample_id), path(input_file)
+
+    output:
+        path "${sample_id}_result.txt"
+
+    script:
+    """
+    echo "Processing: ${sample_id}"
+    cat ${input_file} > ${sample_id}_result.txt
+    """
+}
+
+/*
+* Kaynak sorunları olan süreç
+*/
+process heavyProcess {
+
+    time '100 s'
+
+    input:
+        val sample_id
+
+    output:
+        path "${sample_id}_heavy.txt"
+
+    script:
+    """
+    # Ağır hesaplamayı simüle et
+    for i in {1..10000}; do
+        echo "Heavy computation \$i for ${sample_id}"
+    done > ${sample_id}_heavy.txt
+    """
+}
+
+/*
+* Dosya işleme sorunları olan süreç
+*/
+process handleFiles {
+
+    input:
+        path input_file
+
+    output:
+        path "processed_${input_file}"
+
+    script:
+    """
+    if [ -f "${input_file}" ]; then
+        cp ${input_file} processed_${input_file}
+    fi
+    """
+}
+
+/*
+* Kanal sorunları olan ana iş akışı
+*/
+workflow {
+    main:
+    // Yanlış kullanımlı kanal
+    input_ch = channel
+        .fromPath(params.input)
+        .splitCsv(header: true)
         .map { row -> [row.sample_id, file(row.fastq_path)] }
-        ```
 
-        Bu `processFiles`'ı düzeltir; ancak `input_ch` artık iki elemanlı bir demet yayınlıyor ve `heavyProcess` hâlâ tek bir değer beklerken tüm demeti alıyor. Demet, betikteki Bash komutuna `[sample_005, /path/sample_005.fastq.gz]` olarak aktarılır ve 2 çıkış durumuyla bir sözdizimi hatasına yol açar.
+    processed_ch = processFiles(input_ch)
 
-        **Hata 7: heavyProcess için Hatalı Kanal Yapısı**
-        ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch)  // HATA: input_ch artık 2 elemanlı demet yayınlıyor; heavyProcess yalnızca ilk elemana ihtiyaç duyuyor
-        ```
-        **Düzeltme:** Yalnızca örnek kimliklerini iletin
-        ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
-        ```
+    heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
 
-        Artık `heavyProcess` çalışıyor; ancak zaman sınırına takılıyor. `local` yürütücüde mesaj, açık bir zaman aşımı yerine `process hasn't exited` (ve `WARN: Killing running tasks` uyarısı) şeklinde görünür; bu nedenle durdurulan görevi `time` yönergesine bağlayın:
+    file_ch = handleFiles(heavy_ch)
 
-        **Hata 8: Kaynak Yapılandırma Hatası**
-        ```groovy linenums="36"
-        time '1 ms'  // HATA: Gerçekçi olmayan zaman sınırı
-        ```
-        **Düzeltme:** Gerçekçi bir zaman sınırına yükseltin
-        ```groovy linenums="36"
-        time '100 s'
-        ```
+    publish:
+    processed = processed_ch
+    heavy = heavy_ch
+    files = file_ch
+}
 
-        Ardından çözülmesi gereken bir `Missing output file(s)` hatası var; çünkü betik `${sample_id}.txt` yazıyor ancak çıktı bildirimi `${sample_id}_heavy.txt` bekliyor:
+output {
+    processed {
+        path 'processed'
+    }
+    heavy {
+        path 'heavy'
+    }
+    files {
+        path 'files'
+    }
+}
+```
 
-        **Hata 9: Çıktı Dosyası Adı Uyuşmazlığı**
-        ```groovy linenums="49"
-        done > ${sample_id}.txt  // HATA: Yanlış dosya adı, çıktı bildirimiyle eşleşmeli
-        ```
-        **Düzeltme:** Çıktı bildirimiyle eşleştirin
-        ```groovy linenums="49"
-        done > ${sample_id}_heavy.txt
-        ```
-
-        İş akışı artık hatasız tamamlanıyor; ancak `files` çıktısı boş: `handleFiles` hiç çalışmadı. Girdi kanalı olan `channel.fromPath("*.txt")`, başlatma dizininde hiçbir dosyayla eşleşmediğinden süreç sessizce atlanıyor.
-
-        **Hata 10: Yanlış Kanal Kaynağı**
-        ```groovy linenums="88"
-        file_ch = channel.fromPath("*.txt") // Hata: Bir süreçten değil, mevcut çalışma dizininden girdi almaya çalışıyor
-        handleFiles(file_ch)
-        ```
-        **Düzeltme:** Önceki sürecin çıktısını alın
-        ```groovy linenums="88"
-        file_ch = handleFiles(heavy_ch)
-        ```
-
-        Bununla birlikte tüm iş akışı baştan sona çalışır ve üç çıktının tamamı doldurulur.
-
-        **Tam Düzeltilmiş İş Akışı:**
-        ```groovy linenums="1"
-        #!/usr/bin/env nextflow
-
-        /*
-        * Hata ayıklama alıştırmaları için hatalı iş akışı
-        * Bu iş akışı öğrenme amacıyla birkaç kasıtlı hata içermektedir
-        */
-
-        params{
-            // Doğrulama eksik parametreler
-            input: Path = 'data/sample_data.csv'
-            output: String = 'results'
-        }
-
-        /*
-        * Girdi/çıktı uyuşmazlığı olan süreç
-        */
-        process processFiles {
-
-            input:
-                tuple val(sample_id), path(input_file)
-
-            output:
-                path "${sample_id}_result.txt"
-
-            script:
-            """
-            echo "Processing: ${sample_id}"
-            cat ${input_file} > ${sample_id}_result.txt
-            """
-        }
-
-        /*
-        * Kaynak sorunları olan süreç
-        */
-        process heavyProcess {
-
-            time '100 s'
-
-            input:
-                val sample_id
-
-            output:
-                path "${sample_id}_heavy.txt"
-
-            script:
-            """
-            # Ağır hesaplamayı simüle et
-            for i in {1..10000}; do
-                echo "Heavy computation \$i for ${sample_id}"
-            done > ${sample_id}_heavy.txt
-            """
-        }
-
-        /*
-        * Dosya işleme sorunları olan süreç
-        */
-        process handleFiles {
-
-            input:
-                path input_file
-
-            output:
-                path "processed_${input_file}"
-
-            script:
-            """
-            if [ -f "${input_file}" ]; then
-                cp ${input_file} processed_${input_file}
-            fi
-            """
-        }
-
-        /*
-        * Kanal sorunları olan ana iş akışı
-        */
-        workflow {
-            main:
-            // Yanlış kullanımlı kanal
-            input_ch = channel
-                .fromPath(params.input)
-                .splitCsv(header: true)
-                .map { row -> [row.sample_id, file(row.fastq_path)] }
-
-            processed_ch = processFiles(input_ch)
-
-            heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
-
-            file_ch = handleFiles(heavy_ch)
-
-            publish:
-            processed = processed_ch
-            heavy = heavy_ch
-            files = file_ch
-        }
-
-        output {
-            processed {
-                path 'processed'
-            }
-            heavy {
-                path 'heavy'
-            }
-            files {
-                path 'files'
-            }
-        }
-        ```
+</details>
+:::
 
 **Kapsanan Hata Kategorileri:**
 
@@ -2668,7 +2566,7 @@ Bu teknikleri kendi çalışmalarınızda uygulamak, bilgisayarınızla daha az 
 - Nextflow (Groovy) ve Bash değişkenleri arasındaki farkı ayırt etme
 - Erken hata tespiti için VS Code eklenti özelliklerini kullanma
 
-```groovy
+```nextflow
 // Eksik süslü parantez - IDE'de kırmızı alt çizgileri arayın
 process FOO {
     script:
@@ -2692,7 +2590,7 @@ echo "\${bash_var}"          // Bash değişkeni (kaçırılmış)
 - Kanal incelemesi için `.view()` operatörlerini kullanma
 - Çıktıdaki köşeli parantezler gibi hata kalıplarını tanıma
 
-```groovy
+```nextflow
 // Kanal içeriğini incele
 my_channel.view { item -> "Content: ${item}" }
 
@@ -2727,21 +2625,21 @@ cat work/ab/cdef12/.command.err
 - Verimli hata ayıklama döngüleri için resume kullanma
 - Dört aşamalı sistematik hata ayıklama metodolojisini takip etme
 
-!!! tip "Hızlı Hata Ayıklama Başvurusu"
+:::tip[Hızlı Hata Ayıklama Başvurusu]
+**Sözdizimi hataları mı?** → VSCode uyarılarını kontrol edin, `nextflow run workflow.nf -preview` komutunu çalıştırın
 
-    **Sözdizimi hataları mı?** → VSCode uyarılarını kontrol edin, `nextflow run workflow.nf -preview` komutunu çalıştırın
+**Kanal sorunları mı?** → İçeriği incelemek için `.view()` kullanın: `my_channel.view()`
 
-    **Kanal sorunları mı?** → İçeriği incelemek için `.view()` kullanın: `my_channel.view()`
+**Süreç hataları mı?** → Work dizini dosyalarını kontrol edin:
 
-    **Süreç hataları mı?** → Work dizini dosyalarını kontrol edin:
+- `.command.sh` - yürütülen betik
+- `.command.err` - hata mesajları
+- `.exitcode` - çıkış durumu (127 = komut bulunamadı, 137 = sonlandırıldı)
 
-    - `.command.sh` - yürütülen betik
-    - `.command.err` - hata mesajları
-    - `.exitcode` - çıkış durumu (127 = komut bulunamadı, 137 = sonlandırıldı)
+**Gizemli davranış mı?** → İş akışı mantığını test etmek için `-stub-run` ile çalıştırın
 
-    **Gizemli davranış mı?** → İş akışı mantığını test etmek için `-stub-run` ile çalıştırın
-
-    **Düzeltmeler yaptınız mı?** → Test ederken zaman kazanmak için `-resume` kullanın: `nextflow run workflow.nf -resume`
+**Düzeltmeler yaptınız mı?** → Test ederken zaman kazanmak için `-resume` kullanın: `nextflow run workflow.nf -resume`
+:::
 
 ---
 
@@ -2764,4 +2662,4 @@ cat work/ab/cdef12/.command.err
 
 ## Sırada ne var?
 
-[Yan Görevler menüsüne](../index.md) dönün veya listedeki bir sonraki konuya geçmek için sayfanın sağ alt köşesindeki düğmeye tıklayın.
+[Yan Görevler menüsüne](../index.mdx) dönün veya listedeki bir sonraki konuya geçmek için sayfanın sağ alt köşesindeki düğmeye tıklayın.

@@ -1,6 +1,9 @@
-# भाग 4: रिमोट पाइपलाइन चलाना
+---
+title: 'भाग 4: रिमोट पाइपलाइन चलाना'
+description: अब तक, तुमने लोकल रूप से स्टोर किए गए वर्कफ़्लो स्क्रिप्ट चलाए हैं।
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 अब तक, तुमने लोकल रूप से स्टोर किए गए वर्कफ़्लो स्क्रिप्ट चलाए हैं।
 व्यवहार में, तुम अक्सर रिमोट रिपॉजिटरी में प्रकाशित पाइपलाइन चलाना चाहोगे, जैसे GitHub पर, बिना उन्हें खुद डाउनलोड किए।
@@ -20,27 +23,23 @@ Nextflow इसे सरल बनाता है: तुम किसी भ�
 
 ```bash
 nextflow run nextflow-io/hello
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Pulling nextflow-io/hello ...
+ downloaded from https://github.com/nextflow-io/hello.git
+Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] revision: 3c2cdc9823 [master]
+
+executor >  local (4)
+[ba/08236d] sayHello (4) | 4 of 4 ✔
+Ciao world!
+
+Hello world!
+
+Bonjour world!
+
+Hola world!
 ```
-
-??? success "कमांड आउटपुट"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Pulling nextflow-io/hello ...
-     downloaded from https://github.com/nextflow-io/hello.git
-    Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] revision: 3c2cdc9823 [master]
-
-    executor >  local (4)
-    [ba/08236d] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
-    Hello world!
-
-    Bonjour world!
-
-    Hola world!
-    ```
 
 ### 1.2. पाइपलाइन कहाँ cache होती है यह पता करना
 
@@ -52,39 +51,31 @@ nextflow run nextflow-io/hello
 
 ```bash
 nextflow info nextflow-io/hello
+# [!output]
+ project name: nextflow-io/hello
+ repository  : https://github.com/nextflow-io/hello
+ local path  : /workspaces/.nextflow/assets/.repos/nextflow-io/hello
+ main script : main.nf
+ revisions   :
+ > master (default)
+   mybranch
+   testing
+   v1.1 [t]
+   v1.2 [t]
+   v1.3 [t]
 ```
 
-??? success "कमांड आउटपुट"
-
-    ```console
-     project name: nextflow-io/hello
-     repository  : https://github.com/nextflow-io/hello
-     local path  : /workspaces/.nextflow/assets/.repos/nextflow-io/hello
-     main script : main.nf
-     revisions   :
-     > master (default)
-       mybranch
-       testing
-       v1.1 [t]
-       v1.2 [t]
-       v1.3 [t]
-    ```
-
-    Nextflow हर उस revision को `>` से चिह्नित करता है जिसे तुमने पहले से लोकल रूप से checkout किया है; बाकी उपलब्ध हैं लेकिन अभी तक working copy में fetch नहीं किए गए।
+Nextflow हर उस revision को `>` से चिह्नित करता है जिसे तुमने पहले से लोकल रूप से checkout किया है; बाकी उपलब्ध हैं लेकिन अभी तक working copy में fetch नहीं किए गए।
 
 तुम `nextflow list` से अब तक pull की गई हर पाइपलाइन की सूची भी देख सकते हो:
 
 ```bash
 nextflow list
+# [!output]
+nextflow-io/hello
 ```
 
-??? success "कमांड आउटपुट"
-
-    ```console
-    nextflow-io/hello
-    ```
-
-[Use nf-core](../nfcore_use/01_run_demo.md#12-retrieve-the-pipeline-code) कोर्स इस caching तंत्र को और गहराई से कवर करता है, जिसमें pull की गई पाइपलाइन का सोर्स कोड कैसे देखें यह भी शामिल है।
+[Use nf-core](../nfcore_use/01_run_demo.mdx#12-पाइपलाइन-कोड-प्राप्त-करें) कोर्स इस caching तंत्र को और गहराई से कवर करता है, जिसमें pull की गई पाइपलाइन का सोर्स कोड कैसे देखें यह भी शामिल है।
 
 ### सारांश
 
@@ -105,27 +96,23 @@ nextflow list
 
 ```bash
 nextflow run nextflow-io/hello -r v1.3
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Pulling nextflow-io/hello:v1.3 ...
+ downloaded from https://github.com/nextflow-io/hello.git
+Launching `https://github.com/nextflow-io/hello` [sick_carson] revision: 2ce0b0e294 [v1.3]
+
+executor >  local (4)
+[61/e11f77] sayHello (4) | 4 of 4 ✔
+Ciao world!
+
+Bonjour world!
+
+Hello world!
+
+Hola world!
 ```
-
-??? success "कमांड आउटपुट"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Pulling nextflow-io/hello:v1.3 ...
-     downloaded from https://github.com/nextflow-io/hello.git
-    Launching `https://github.com/nextflow-io/hello` [sick_carson] revision: 2ce0b0e294 [v1.3]
-
-    executor >  local (4)
-    [61/e11f77] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
-    Bonjour world!
-
-    Hello world!
-
-    Hola world!
-    ```
 
 Nextflow पहली बार इस revision को fetch करता है जब तुम इसका अनुरोध करते हो, इसलिए `Pulling` और `downloaded from` लाइनें दिखती हैं; बाद में उसी revision का अनुरोध करने पर सीधे `Launching` पर जाता है।
 एक सटीक revision pin करना reproducibility के लिए आवश्यक है।
@@ -138,25 +125,21 @@ Nextflow पहली बार इस revision को fetch करता है
 
 ```bash
 nextflow run nextflow-io/hello
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `https://github.com/nextflow-io/hello` [hungry_maxwell] revision: 3c2cdc9823 [master]
+
+executor >  local (4)
+[ba/08236d] sayHello (4) | 4 of 4 ✔
+Ciao world!
+
+Hello world!
+
+Bonjour world!
+
+Hola world!
 ```
-
-??? success "कमांड आउटपुट"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `https://github.com/nextflow-io/hello` [hungry_maxwell] revision: 3c2cdc9823 [master]
-
-    executor >  local (4)
-    [ba/08236d] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
-    Hello world!
-
-    Bonjour world!
-
-    Hola world!
-    ```
 
 भले ही पिछले रन ने स्पष्ट रूप से `v1.3` pin किया था, यह रन सीधे default branch (`master`) पर वापस जाता है।
 Nextflow हर उस revision के लिए एक अलग लोकल working copy रखता है जिसे तुमने उपयोग किया है, जो `nextflow info` में `>` मार्कर दिखाता है, लेकिन यह कभी याद नहीं रखता कि तुमने आखिरी बार कौन सा चलाया था।
@@ -170,7 +153,7 @@ Reproducibility पूरी तरह तुम पर निर्भर ह�
 ### आगे क्या है?
 
 तुमने Nextflow पाइपलाइन चलाने और प्रबंधित करने की बुनियादी बातें सीख ली हैं।
-आगे कहाँ जाना है इसके लिए [कोर्स सारांश](next_steps.md) देखो।
+आगे कहाँ जाना है इसके लिए [कोर्स सारांश](next_steps.mdx) देखो।
 
 ---
 

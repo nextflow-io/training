@@ -1,6 +1,9 @@
-# Parte 2: If - Else
+---
+title: 'Parte 2: If - Else'
+description: '[TODO]'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 [TODO]
 
@@ -41,17 +44,17 @@ Ad alto livello, per completare questo esercizio dovrete:
 
 Per l'immagine del container `quote`, potete utilizzare quella che avete costruito voi stessi nell'esercizio avanzato precedente oppure quella ottenuta da Seqera Containers.
 
-!!! Hint "Suggerimento"
-
-    Una buona scelta per il blocco `script` del vostro processo getQuote potrebbe essere:
-        ```groovy
-        script:
-            def safe_author = author.tokenize(' ').join('-')
-            """
-            quote "$author" > quote-${safe_author}.txt
-            echo "-${author}" >> quote-${safe_author}.txt
-            """
-        ```
+:::note[Suggerimento]
+Una buona scelta per il blocco `script` del vostro processo getQuote potrebbe essere:
+    ```nextflow
+    script:
+        def safe_author = author.tokenize(' ').join('-')
+        """
+        quote "$author" > quote-${safe_author}.txt
+        echo "-${author}" >> quote-${safe_author}.txt
+        """
+    ```
+:::
 
 Potete trovare una soluzione a questo esercizio in `containers/solutions/hello-containers-4.1.nf`.
 
@@ -60,7 +63,7 @@ Potete trovare una soluzione a questo esercizio in `containers/solutions/hello-c
 Aggiungete della logica condizionale alla vostra pipeline per consentirle di accettare input destinati sia a `quote` che a `sayHello`.
 Ecco un esempio di come utilizzare un'istruzione `if` in un flusso di lavoro Nextflow:
 
-```groovy title="hello-containers.nf"
+```nextflow title="hello-containers.nf"
 workflow {
     if (params.quote) {
         ...
@@ -72,9 +75,9 @@ workflow {
 }
 ```
 
-!!! Hint "Suggerimento"
-
-    Potete usare `new_ch = processName.out` per assegnare un nome al canale di output di un processo.
+:::note[Suggerimento]
+Potete usare `new_ch = processName.out` per assegnare un nome al canale di output di un processo.
+:::
 
 Potete trovare una soluzione a questo esercizio in `containers/solutions/hello-containers-4.2.nf`.
 

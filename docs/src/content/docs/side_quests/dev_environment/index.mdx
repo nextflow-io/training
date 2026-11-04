@@ -1,14 +1,17 @@
-# Development Environment
+---
+title: Development Environment
+description: Modern Integrated Development Environments (IDEs) can dramatically transform your Nextflow development experience.
+---
 
 Modern Integrated Development Environments (IDEs) can dramatically transform your Nextflow development experience. This side quest focuses specifically on leveraging VS Code and its Nextflow extension to write code faster, catch errors early, and navigate complex workflows efficiently.
 
-!!! note "This isn't a traditional tutorial"
-
-    Unlike other training modules, this guide is organized as a collection of quick hints, tips, and practical examples rather than a step-by-step tutorial. Each section can be explored independently based on your interests and current development needs. Feel free to jump around and focus on the features that will be most immediately useful to your workflow development.
+:::note[This isn't a traditional tutorial]
+Unlike other training modules, this guide is organized as a collection of quick hints, tips, and practical examples rather than a step-by-step tutorial. Each section can be explored independently based on your interests and current development needs. Feel free to jump around and focus on the features that will be most immediately useful to your workflow development.
+:::
 
 ## What you should know first
 
-This guide assumes you've completed the [Hello Nextflow](../../hello_nextflow/index.md) training course and are comfortable with foundational Nextflow concepts including:
+This guide assumes you've completed the [Hello Nextflow](../../hello_nextflow/index.mdx) training course and are comfortable with foundational Nextflow concepts including:
 
 - **Basic workflow structure**: Understanding processes, workflows, and how they connect together
 - **Channel operations**: Creating channels, passing data between processes, and using basic operators
@@ -26,11 +29,11 @@ This guide focuses on **IDE productivity features** that will make you a more ef
 - **Formatting and organization**: Maintaining consistent, readable code style
 - **AI-assisted development** (optional): Using modern AI tools integrated with your IDE
 
-!!! info "Why IDE features now?"
+:::note[Why IDE features now?]
+You've likely already been using VS Code during the [Hello Nextflow](../../hello_nextflow/index.mdx) course, but we kept the focus on learning Nextflow fundamentals rather than IDE features. Now that you're comfortable with basic Nextflow concepts like processes, workflows, channels, and modules, you're ready to leverage the sophisticated IDE features that will make you a more efficient developer.
 
-    You've likely already been using VS Code during the [Hello Nextflow](../../hello_nextflow/index.md) course, but we kept the focus on learning Nextflow fundamentals rather than IDE features. Now that you're comfortable with basic Nextflow concepts like processes, workflows, channels, and modules, you're ready to leverage the sophisticated IDE features that will make you a more efficient developer.
-
-    Think of this as "leveling up" your development environment - the same editor you've been using has much more powerful capabilities that become truly valuable once you understand what they're helping you with.
+Think of this as "leveling up" your development environment - the same editor you've been using has much more powerful capabilities that become truly valuable once you understand what they're helping you with.
+:::
 
 ---
 
@@ -75,10 +78,10 @@ tree .
 2 directories, 12 files
 ```
 
-!!! note "About the Example Files"
-
-    - `basic_workflow.nf` is a working basic workflow that you can run and modify
-    - `complex_workflow.nf` is designed for illustration only to demonstrate navigation features - it may not run successfully but shows realistic multi-file workflow structure
+:::note[About the Example Files]
+- `basic_workflow.nf` is a working basic workflow that you can run and modify
+- `complex_workflow.nf` is designed for illustration only to demonstrate navigation features - it may not run successfully but shows realistic multi-file workflow structure
+:::
 
 ### Keyboard Shortcuts
 
@@ -90,9 +93,9 @@ If you are using a Mac, some (not all) keyboard shortcuts will use "cmd" instead
 
 ### 0.1. Installing the Nextflow Extension
 
-!!! note "Already Using Devcontainers?"
-
-    If you're working in **GitHub Codespaces** or using a **local devcontainer**, the Nextflow extension is likely already installed and configured for you. You can skip the manual installation steps below and proceed directly to exploring the extension features.
+:::note[Already Using Devcontainers?]
+If you're working in **GitHub Codespaces** or using a **local devcontainer**, the Nextflow extension is likely already installed and configured for you. You can skip the manual installation steps below and proceed directly to exploring the extension features.
+:::
 
 To install the extension manually:
 
@@ -142,9 +145,9 @@ Notice how VS Code highlights:
 - **Variables** and **function calls** with appropriate emphasis
 - **Code blocks** with proper indentation guides
 
-!!! note "Theme-Dependent Colors"
-
-    The specific colors you see will depend on your VS Code theme (dark/light mode), color settings, and any customizations you've made. The important thing is that different syntax elements are visually distinguished from each other, making code structure easier to understand regardless of your chosen color scheme.
+:::note[Theme-Dependent Colors]
+The specific colors you see will depend on your VS Code theme (dark/light mode), color settings, and any customizations you've made. The important thing is that different syntax elements are visually distinguished from each other, making code structure easier to understand regardless of your chosen color scheme.
+:::
 
 ### 1.2. Understanding Code Structure
 
@@ -158,11 +161,11 @@ The syntax highlighting helps you quickly identify:
 
 This visual organization becomes invaluable when working with complex workflows containing multiple processes and intricate data flows.
 
-### Takeaway
+### Takeaway {#takeaway_1}
 
 You understand how VS Code's syntax highlighting helps you read Nextflow code structure and identify different language elements for faster development.
 
-### What's next?
+### What's next? {#whats-next_1}
 
 Learn how intelligent auto-completion speeds up code writing with context-aware suggestions.
 
@@ -216,11 +219,11 @@ You'll see suggestions for:
 
 This saves time when configuring processes and works across different configuration scopes. For example, try typing `docker.` to see Docker-specific configuration options.
 
-### Takeaway
+### Takeaway {#takeaway_2}
 
 You can use VS Code's intelligent auto-completion to discover available channel operations, process directives, and configuration options without memorizing syntax.
 
-### What's next?
+### What's next? {#whats-next_2}
 
 Learn how real-time error detection helps you catch issues before running your workflow, simply by reading the code.
 
@@ -258,11 +261,11 @@ Common errors in Nextflow syntax include:
 
 The Nextflow language server highlights these issues in the Problems panel. You can check these out early to avoid syntax errors while running a pipeline.
 
-### Takeaway
+### Takeaway {#takeaway_3}
 
 You can use VS Code's error detection and Problems panel to catch syntax errors and issues before running your workflow, saving time and preventing frustration.
 
-### What's next?
+### What's next? {#whats-next_3}
 
 Learn how to efficiently navigate between processes, modules, and definitions in complex workflows.
 
@@ -272,35 +275,35 @@ Learn how to efficiently navigate between processes, modules, and definitions in
 
 Efficient navigation is crucial when working with complex workflows spanning multiple files. To understand this, replace the process definition in `basic_workflow.nf` with an import for the module we've provided you:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="basic_workflow.nf" linenums="3"
-    include { FASTQC } from './modules/fastqc.nf'
-    ```
+```nextflow title="basic_workflow.nf" showLineNumbers startLineNumber=3 step="Before"
+process FASTQC {
+    tag "${sample_id}"
 
-=== "Before"
+    input:
+    tuple val(sample_id), path(reads)
 
-    ```groovy title="basic_workflow.nf" linenums="3"
-    process FASTQC {
-        tag "${sample_id}"
+    output:
+    tuple val(sample_id), path("*.html"), emit: html
+    tuple val(sample_id), path("*.zip"), emit: zip
 
-        input:
-        tuple val(sample_id), path(reads)
+    script:
+    def args = task.ext.args ?: ''
+    """
+    fastqc \\
+        ${args} \\
+        --threads ${task.cpus} \\
+        ${reads}
+    """
+}
+```
 
-        output:
-        tuple val(sample_id), path("*.html"), emit: html
-        tuple val(sample_id), path("*.zip"), emit: zip
+```nextflow title="basic_workflow.nf" showLineNumbers startLineNumber=3 step="After"
+include { FASTQC } from './modules/fastqc.nf'
+```
 
-        script:
-        def args = task.ext.args ?: ''
-        """
-        fastqc \\
-            ${args} \\
-            --threads ${task.cpus} \\
-            ${reads}
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 ### 4.1. Go to Definition
 
@@ -369,11 +372,11 @@ This is just the 'entry' workflow, but you can also preview the DAG for the inne
 
 For this workflow, you can use the nodes in the DAG to navigate to the corresponding process definitions in the code. Click on a node, and it will take you to the relevant process definition in the editor. Particularly when a workflow grows to a large size, this can really help you to navigate around the code and understand how the processes are connected.
 
-### Takeaway
+### Takeaway {#takeaway_4}
 
 You can navigate complex workflows efficiently using go-to-definition, symbol search, find references, and DAG visualization to understand code structure and dependencies.
 
-### What's next?
+### What's next? {#whats-next_4}
 
 Learn how to work effectively across multiple interconnected files in larger Nextflow projects.
 
@@ -426,11 +429,11 @@ This shows you every file that uses the container directive, helping you:
 - Find examples of specific directives
 - Ensure consistency across modules
 
-### Takeaway
+### Takeaway {#takeaway_5}
 
 You can manage complex multi-file projects using quick file navigation, split editors, and project-wide search to work efficiently across workflows and modules.
 
-### What's next?
+### What's next? {#whats-next_5}
 
 Learn how code formatting and maintenance features keep your workflows organized and readable.
 
@@ -467,7 +470,7 @@ Currently, there is no strict style enforcement for Nextflow, so the language se
 
 Select a block of code in your workflow and press **Ctrl+/** (or **Cmd+/**) to comment it out:
 
-```groovy
+```nextflow
 // workflow {
 //     ch_input = channel.fromPath(params.input)
 //         .splitCsv(header: true)
@@ -516,11 +519,11 @@ This is particularly useful for:
 - Adding comments to multiple lines at once
 - Editing similar parameter definitions across multiple processes
 
-### Takeaway
+### Takeaway {#takeaway_6}
 
 You can maintain clean, readable code using automatic formatting, commenting features, code folding, bracket matching, and multi-line editing to organize complex workflows efficiently.
 
-### What's next?
+### What's next? {#whats-next_6}
 
 Learn how VS Code integrates with your broader development workflow beyond just editing code.
 
@@ -532,9 +535,9 @@ VS Code integrates well with your development workflow beyond just editing code.
 
 ### 7.1. Version Control Integration
 
-!!! note "Codespaces and Git Integration"
-
-    If you're working in **GitHub Codespaces**, some Git integration features may not work as expected, particularly keyboard shortcuts for Source Control. You may have also declined to open the directory as a Git repository during initial setup, which is fine for training purposes.
+:::note[Codespaces and Git Integration]
+If you're working in **GitHub Codespaces**, some Git integration features may not work as expected, particularly keyboard shortcuts for Source Control. You may have also declined to open the directory as a Git repository during initial setup, which is fine for training purposes.
+:::
 
 If your project is a git repository (as this is), VS Code shows:
 
@@ -564,11 +567,11 @@ While the workflow runs, you'll see real-time output in the terminal. After comp
 
 This keeps everything in one place rather than switching between multiple applications.
 
-### Takeaway
+### Takeaway {#takeaway_7}
 
 You can integrate VS Code with version control and workflow execution to manage your entire development process from a single interface.
 
-### What's next?
+### What's next? {#whats-next_7}
 
 See how all these IDE features work together in your daily development workflow.
 
@@ -613,12 +616,12 @@ You have now had a whistle-stop tour of VS Code's IDE features for Nextflow deve
 
 We don't expect you to remember everything, but now you know that these features exist you will be able to find them when you need them. As you continue developing Nextflow workflows, these IDE features will become second nature, allowing you to focus on writing high-quality code rather than wrestling with syntax and structure.
 
-### What's next?
+### What's next? {#whats-next_8}
 
 Apply these IDE skills while working through other training modules, for example:
 
-- **[nf-test](../nf_test/index.md)**: Create comprehensive test suites for your workflows
-- **[Build with nf-core](../../nfcore_build/index.md)**: Develop production-quality pipelines with community standards
+- **[nf-test](../nf_test/index.mdx)**: Create comprehensive test suites for your workflows
+- **[Build with nf-core](../../nfcore_build/index.mdx)**: Develop production-quality pipelines with community standards
 
 The true power of these IDE features emerges as you work on larger, more complex projects. Start incorporating them into your workflow gradually—within a few sessions, they'll become second nature and transform how you approach Nextflow development.
 

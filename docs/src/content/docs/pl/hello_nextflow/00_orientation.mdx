@@ -1,27 +1,33 @@
-# Rozpoczęcie pracy
+---
+title: Rozpoczęcie pracy
+description: 'Hello Nextflow: Rozpoczęcie pracy'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+<figure>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/PIjOdFaYwWA?si=gZxlXgkVxuLEzOsC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
+<figcaption>
 
-/// caption
-:fontawesome-brands-youtube:{ .youtube } Zobacz [całą playlistę](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) na kanale YouTube Nextflow.
+Zobacz [całą playlistę](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) na kanale YouTube Nextflow.
 
-:green_book: Transkrypcja wideo jest dostępna [tutaj](./transcripts/00_orientation.md).
-///
+📗 Transkrypcja wideo jest dostępna [tutaj](./transcripts/00_orientation.mdx).
 
-!!! tip "Wskazówka"
+</figcaption>
+</figure>
 
-    Filmy na YouTube mają specjalne funkcje!
+:::tip[Wskazówka]
+Filmy na YouTube mają specjalne funkcje!
 
-    - :fontawesome-solid-closed-captioning: Wysokiej jakości (ręcznie przygotowane) napisy. Włącz je ikoną :material-subtitles:
-    - :material-bookmark: Rozdziały wideo na osi czasu odpowiadające nagłówkom strony.
+- Wysokiej jakości (ręcznie przygotowane) napisy. Włącz je ikoną CC
+- 🔖 Rozdziały wideo na osi czasu odpowiadające nagłówkom strony.
+:::
 
 ## Uruchom środowisko szkoleniowe
 
-Aby użyć prekonfigurowanego środowiska, które udostępniamy na GitHub Codespaces, kliknij przycisk "Open in GitHub Codespaces" poniżej. Inne opcje znajdziesz w [Opcjach środowiska](../envsetup/index.md).
+Aby użyć prekonfigurowanego środowiska, które udostępniamy na GitHub Codespaces, kliknij przycisk "Open in GitHub Codespaces" poniżej. Inne opcje znajdziesz w [Opcjach środowiska](../envsetup/index.mdx).
 
 Zalecamy otwarcie środowiska szkoleniowego w nowej karcie lub oknie przeglądarki (użyj prawego przycisku myszy, ctrl-click lub cmd-click w zależności od sprzętu), abyś mógł czytać dalej podczas ładowania środowiska.
 Będziesz musiał trzymać te instrukcje otwarte równolegle, aby pracować z kursem.
@@ -35,12 +41,12 @@ To środowisko szkoleniowe zawiera całe oprogramowanie, kod i dane niezbędne d
 Codespace jest skonfigurowany z interfejsem VSCode, który obejmuje eksplorator systemu plików, edytor kodu i powłokę terminala.
 Wszystkie instrukcje podane podczas kursu (np. 'otwórz plik', 'edytuj kod' lub 'uruchom to polecenie') odnoszą się do tych trzech części interfejsu VSCode, chyba że zaznaczono inaczej.
 
-Jeśli pracujesz z tym kursem samodzielnie, zapoznaj się z [podstawami środowiska](../envsetup/01_setup.md), aby uzyskać więcej szczegółów.
+Jeśli pracujesz z tym kursem samodzielnie, zapoznaj się z [podstawami środowiska](../envsetup/01_setup.mdx), aby uzyskać więcej szczegółów.
 
 ### Wymagania wersji
 
 To szkolenie jest zaprojektowane dla Nextflow'a 25.10.2 lub nowszego **z WŁĄCZONYM parserem składni v2**.
-Jeśli używasz lokalnego lub niestandardowego środowiska, upewnij się, że używasz prawidłowych ustawień, jak udokumentowano [tutaj](../info/nxf_versions.md).
+Jeśli używasz lokalnego lub niestandardowego środowiska, upewnij się, że używasz prawidłowych ustawień, jak udokumentowano [tutaj](../info/nxf_versions.mdx).
 
 ## Przygotuj się do pracy
 
@@ -62,13 +68,13 @@ Możesz ustawić VSCode, aby skupił się na tym katalogu, tak aby w pasku boczn
 code .
 ```
 
-!!! tip "Wskazówka"
+:::tip[Wskazówka]
+Jeśli z jakiegokolwiek powodu wyjdziesz z tego katalogu (np. Twój codespace przejdzie w stan uśpienia), zawsze możesz użyć pełnej ścieżki, aby do niego wrócić, zakładając, że uruchamiasz to w środowisku szkoleniowym GitHub Codespaces:
 
-    Jeśli z jakiegokolwiek powodu wyjdziesz z tego katalogu (np. Twój codespace przejdzie w stan uśpienia), zawsze możesz użyć pełnej ścieżki, aby do niego wrócić, zakładając, że uruchamiasz to w środowisku szkoleniowym GitHub Codespaces:
-
-    ```bash
-    cd /workspaces/training/hello-nextflow
-    ```
+```bash
+cd /workspaces/training/hello-nextflow
+```
+:::
 
 Teraz przyjrzyjmy się zawartości.
 
@@ -85,29 +91,32 @@ Tutaj generujemy spis treści do drugiego poziomu w głąb:
 tree . -L 2
 ```
 
-??? abstract "Zawartość katalogu"
+<details class="abstract">
+<summary>Zawartość katalogu</summary>
 
-    ```console
-    .
-    ├── data
-    │   └── greetings.csv
-    ├── hello-channels.nf
-    ├── hello-config.nf
-    ├── hello-containers.nf
-    ├── hello-modules.nf
-    ├── hello-workflow.nf
-    ├── hello-world.nf
-    ├── nextflow.config
-    ├── solutions
-    │   ├── 1-hello-world
-    │   ├── 2-hello-channels
-    │   ├── 3-hello-workflow
-    │   ├── 4-hello-modules
-    │   ├── 5-hello-containers
-    │   └── 6-hello-config
-    ├── test-params.json
-    └── test-params.yaml
-    ```
+```console
+.
+├── data
+│   └── greetings.csv
+├── hello-channels.nf
+├── hello-config.nf
+├── hello-containers.nf
+├── hello-modules.nf
+├── hello-workflow.nf
+├── hello-world.nf
+├── nextflow.config
+├── solutions
+│   ├── 1-hello-world
+│   ├── 2-hello-channels
+│   ├── 3-hello-workflow
+│   ├── 4-hello-modules
+│   ├── 5-hello-containers
+│   └── 6-hello-config
+├── test-params.json
+└── test-params.yaml
+```
+
+</details>
 
 Kliknij na kolorowe pole, aby rozwinąć sekcję i zobaczyć jej zawartość.
 Używamy takich rozwijanych sekcji, aby zwięźle włączać oczekiwane wyjście poleceń.
@@ -134,4 +143,4 @@ Myślisz, że jesteś gotowy do zanurzenia się?
 
 Jeśli możesz zaznaczyć wszystkie pola, możesz zaczynać.
 
-**Aby przejść do [Części 1: Hello World](./01_hello_world.md), kliknij strzałkę w prawym dolnym rogu tej strony.**
+**Aby przejść do [Części 1: Hello World](./01_hello_world.mdx), kliknij strzałkę w prawym dolnym rogu tej strony.**

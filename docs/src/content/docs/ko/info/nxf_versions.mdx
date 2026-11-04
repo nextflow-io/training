@@ -1,12 +1,12 @@
 ---
 title: Nextflow 버전
 description: Nextflow 문법 버전의 변화를 이해하고 관리하기
-hide:
-  - toc
-  - footer
+tableOfContents: false
+prev: false
+next: false
 ---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## 현재 지원되는 Nextflow 문법 버전 및 요구 사항
 
@@ -17,8 +17,8 @@ hide:
 
 현재 과정에서는 워크플로우 수준의 타입이 지정된 입력과 워크플로우 수준의 출력 지시문을 사용하므로, **별도로 명시된 경우가 아닌 한** V2 문법 분석기가 필요합니다.
 V2 분석기는 Nextflow 26.04부터 기본값으로 설정되어 있으므로, 해당 버전을 사용하는 경우 수동으로 활성화할 필요가 없습니다.
-[Github Codespaces](../envsetup/01_setup.md) 또는 [로컬 devcontainer](../envsetup/03_devcontainer.md)를 통해 제공되는 환경을 사용할 계획이라면, 과정 안내에 별도로 명시된 경우가 아닌 한 추가 작업이 필요하지 않습니다.
-그러나 직접 구성한 환경([수동 설치](../envsetup/02_local.md))에서 교육을 진행할 계획이라면, Nextflow 25.10.2 이상 버전을 사용해야 하며, 26.04 이전 버전을 사용하는 경우 v2 문법 분석기를 직접 활성화해야 합니다.
+[Github Codespaces](../envsetup/01_setup.mdx) 또는 [로컬 devcontainer](../envsetup/03_devcontainer.mdx)를 통해 제공되는 환경을 사용할 계획이라면, 과정 안내에 별도로 명시된 경우가 아닌 한 추가 작업이 필요하지 않습니다.
+그러나 직접 구성한 환경([수동 설치](../envsetup/02_local.mdx))에서 교육을 진행할 계획이라면, Nextflow 25.10.2 이상 버전을 사용해야 하며, 26.04 이전 버전을 사용하는 경우 v2 문법 분석기를 직접 활성화해야 합니다.
 
 ## 이전 버전의 교육 자료
 
@@ -78,7 +78,7 @@ source ~/.bashrc
 export NXF_SYNTAX_PARSER=v1
 ```
 
-<!-- Will it be possible to disable it in versions after 26.04? -->
+{/* Will it be possible to disable it in versions after 26.04? */}
 
 ### 기존 코드 마이그레이션
 
@@ -101,8 +101,8 @@ export NXF_SYNTAX_PARSER=v1
 
 <div markdown class="homepage_logos">
 
-![Seqera](../assets/img/seqera_logo.png#only-light)
+<span class="dark:sl-hidden">![Seqera](../../assets/img/seqera_logo.png)</span>
 
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
+<span class="light:sl-hidden">![Seqera](../../assets/img/seqera_logo_dark.png)</span>
 
 </div>

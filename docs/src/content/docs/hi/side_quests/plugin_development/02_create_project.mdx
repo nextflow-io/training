@@ -1,22 +1,25 @@
-# भाग 2: एक Plugin प्रोजेक्ट बनाओ
+---
+title: 'भाग 2: एक Plugin प्रोजेक्ट बनाओ'
+description: तुमने देखा कि plugins Nextflow को reusable functionality के साथ कैसे extend करते हैं।
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 तुमने देखा कि plugins Nextflow को reusable functionality के साथ कैसे extend करते हैं।
 अब तुम अपना खुद का plugin बनाओगे, एक project template से शुरू करके जो build configuration तुम्हारे लिए handle करता है।
 
-!!! tip "यहाँ से शुरू कर रहे हो?"
+:::tip[यहाँ से शुरू कर रहे हो?]
+अगर तुम इस भाग से जुड़ रहे हो, तो Part 1 का solution अपने starting point के रूप में copy करो:
 
-    अगर तुम इस भाग से जुड़ रहे हो, तो Part 1 का solution अपने starting point के रूप में copy करो:
+```bash
+cp -r solutions/1-plugin-basics/* .
+```
+:::
 
-    ```bash
-    cp -r solutions/1-plugin-basics/* .
-    ```
-
-!!! info "आधिकारिक दस्तावेज़"
-
-    यह section और इसके बाद वाले sections plugin development की ज़रूरी बातें cover करते हैं।
-    विस्तृत जानकारी के लिए, [आधिकारिक Nextflow plugin development दस्तावेज़](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html) देखो।
+:::note[आधिकारिक दस्तावेज़]
+यह section और इसके बाद वाले sections plugin development की ज़रूरी बातें cover करते हैं।
+विस्तृत जानकारी के लिए, [आधिकारिक Nextflow plugin development दस्तावेज़](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html) देखो।
+:::
 
 ---
 
@@ -34,9 +37,9 @@ Plugin created successfully at path: /workspaces/training/side-quests/plugin_dev
 
 पहला argument plugin का नाम है, और दूसरा तुम्हारे organization का नाम है (generated code को folders में organize करने के लिए उपयोग होता है)।
 
-!!! tip "मैन्युअल तरीके से बनाना"
-
-    तुम plugin projects मैन्युअल रूप से भी बना सकते हो या GitHub पर [nf-hello template](https://github.com/nextflow-io/nf-hello) को starting point के रूप में उपयोग कर सकते हो।
+:::tip[मैन्युअल तरीके से बनाना]
+तुम plugin projects मैन्युअल रूप से भी बना सकते हो या GitHub पर [nf-hello template](https://github.com/nextflow-io/nf-hello) को starting point के रूप में उपयोग कर सकते हो।
+:::
 
 ---
 
@@ -137,22 +140,17 @@ plugins {
 version = '0.1.0'
 
 nextflowPlugin {
-    nextflowVersion = '25.10.0'       // (1)!
+    nextflowVersion = '25.10.0'       // [!annotate] **`nextflowVersion`**: न्यूनतम Nextflow version जो ज़रूरी है
 
-    provider = 'training'             // (2)!
-    className = 'training.plugin.GreetingPlugin'  // (3)!
-    extensionPoints = [               // (4)!
+    provider = 'training'             // [!annotate] **`provider`**: तुम्हारा नाम या organization
+    className = 'training.plugin.GreetingPlugin'  // [!annotate] **`className`**: मुख्य plugin class, वह entry point जिसे Nextflow पहले load करता है
+    extensionPoints = [               // [!annotate] **`extensionPoints`**: वे classes जो Nextflow में features जोड़ती हैं (तुम्हारे functions, monitoring, आदि)
         'training.plugin.GreetingExtension',
         'training.plugin.GreetingFactory'
     ]
 
 }
 ```
-
-1. **`nextflowVersion`**: न्यूनतम Nextflow version जो ज़रूरी है
-2. **`provider`**: तुम्हारा नाम या organization
-3. **`className`**: मुख्य plugin class, वह entry point जिसे Nextflow पहले load करता है
-4. **`extensionPoints`**: वे classes जो Nextflow में features जोड़ती हैं (तुम्हारे functions, monitoring, आदि)
 
 `nextflowPlugin` block configure करता है:
 
@@ -166,23 +164,23 @@ nextflowPlugin {
 Template एक `nextflowVersion` value generate करता है जो पुरानी हो सकती है।
 पूरी compatibility के लिए इसे अपने installed Nextflow version से match करने के लिए अपडेट करो:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="build.gradle" hl_lines="2"
-    nextflowPlugin {
-        nextflowVersion = '26.04.0'
+```groovy {2} title="build.gradle" step="पहले"
+nextflowPlugin {
+    nextflowVersion = '25.10.0'
 
-        provider = 'training'
-    ```
+    provider = 'training'
+```
 
-=== "पहले"
+```groovy {2} title="build.gradle" step="बाद में"
+nextflowPlugin {
+    nextflowVersion = '26.04.0'
 
-    ```groovy title="build.gradle" hl_lines="2"
-    nextflowPlugin {
-        nextflowVersion = '25.10.0'
+    provider = 'training'
+```
 
-        provider = 'training'
-    ```
+</CodeWalkthrough>
 
 ---
 
@@ -205,20 +203,7 @@ Plugin का source code `src/main/groovy/training/plugin/` में रहत
 - `GreetingExtension` वे functions provide करता है जो यह plugin workflows को उपलब्ध कराता है
 - `GreetingObserver` pipeline के साथ-साथ चलता है और events का जवाब देता है, बिना pipeline code में बदलाव किए
 
-```mermaid
-graph TD
-    A[GreetingPlugin] -->|registers| B[GreetingExtension]
-    A -->|registers| C[GreetingFactory]
-    C -->|creates| D[GreetingObserver]
-
-    B -->|provides| E["@Function methods<br/>(callable from workflows)"]
-    D -->|hooks into| F["Lifecycle events<br/>(onFlowCreate, onProcessComplete, etc.)"]
-
-    style A fill:#e1f5fe
-    style B fill:#fff3e0
-    style C fill:#fff3e0
-    style D fill:#fff3e0
-```
+![](../../../side_quests/plugin_development/img/mermaid-b474be7ef724bbf8.svg)
 
 ---
 
@@ -234,28 +219,31 @@ make install
 
 `make install` plugin code को compile करता है और इसे तुम्हारी local Nextflow plugin डायरेक्टरी (`$NXF_HOME/plugins/`) में copy करता है, जिससे यह उपयोग के लिए उपलब्ध हो जाता है।
 
-??? example "Build आउटपुट"
+<details class="example">
+<summary>Build आउटपुट</summary>
 
-    पहली बार जब तुम यह चलाते हो, Gradle खुद को download करेगा (इसमें एक मिनट लग सकता है):
+पहली बार जब तुम यह चलाते हो, Gradle खुद को download करेगा (इसमें एक मिनट लग सकता है):
 
-    ```console
-    Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
-    ...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+```console
+Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
+...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
 
-    Welcome to Gradle 8.14!
-    ...
+Welcome to Gradle 8.14!
+...
 
-    Deprecated Gradle features were used in this build...
+Deprecated Gradle features were used in this build...
 
-    BUILD SUCCESSFUL in 23s
-    6 actionable tasks: 6 executed
-    ```
+BUILD SUCCESSFUL in 23s
+6 actionable tasks: 6 executed
+```
 
-    **चेतावनियाँ expected हैं।**
+**चेतावनियाँ expected हैं।**
 
-    - **"Downloading gradle..."**: यह केवल पहली बार होता है। बाद के builds बहुत तेज़ होते हैं।
-    - **"Deprecated Gradle features..."**: यह चेतावनी plugin template से आती है, तुम्हारे code से नहीं। इसे ignore करना safe है।
-    - **"BUILD SUCCESSFUL"**: यही मायने रखता है। तुम्हारा plugin बिना errors के compile हुआ।
+- **"Downloading gradle..."**: यह केवल पहली बार होता है। बाद के builds बहुत तेज़ होते हैं।
+- **"Deprecated Gradle features..."**: यह चेतावनी plugin template से आती है, तुम्हारे code से नहीं। इसे ignore करना safe है।
+- **"BUILD SUCCESSFUL"**: यही मायने रखता है। तुम्हारा plugin बिना errors के compile हुआ।
+
+</details>
 
 Pipeline डायरेक्टरी में वापस जाओ:
 
@@ -265,29 +253,29 @@ cd ..
 
 `nextflow.config` में nf-greeting plugin जोड़ो:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" hl_lines="4"
-    // Plugin development exercises के लिए configuration
-    plugins {
-        id 'nf-schema@2.6.1'
-        id 'nf-greeting@0.1.0'
-    }
-    ```
+```nextflow title="nextflow.config" step="पहले"
+// Plugin development exercises के लिए configuration
+plugins {
+    id 'nf-schema@2.6.1'
+}
+```
 
-=== "पहले"
+```nextflow {4} title="nextflow.config" step="बाद में"
+// Plugin development exercises के लिए configuration
+plugins {
+    id 'nf-schema@2.6.1'
+    id 'nf-greeting@0.1.0'
+}
+```
 
-    ```groovy title="nextflow.config"
-    // Plugin development exercises के लिए configuration
-    plugins {
-        id 'nf-schema@2.6.1'
-    }
-    ```
+</CodeWalkthrough>
 
-!!! note "Local plugins के लिए version ज़रूरी है"
-
-    Locally installed plugins उपयोग करते समय, तुम्हें version specify करना होगा (जैसे, `nf-greeting@0.1.0`)।
-    Registry में published plugins सिर्फ नाम से उपयोग किए जा सकते हैं।
+:::note[Local plugins के लिए version ज़रूरी है]
+Locally installed plugins उपयोग करते समय, तुम्हें version specify करना होगा (जैसे, `nf-greeting@0.1.0`)।
+Registry में published plugins सिर्फ नाम से उपयोग किए जा सकते हैं।
+:::
 
 Pipeline चलाओ:
 
@@ -334,4 +322,4 @@ Pipeline खुद unchanged है; observer automatically चलता है 
 
 अब तुम Extension class में custom functions implement करोगे और उन्हें workflow में उपयोग करोगे।
 
-[भाग 3 पर जारी रखो :material-arrow-right:](03_custom_functions.md){ .md-button .md-button--primary }
+<LinkButton href="03_custom_functions.mdx" variant="primary" icon="right-arrow">भाग 3 पर जारी रखो</LinkButton>

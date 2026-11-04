@@ -1,14 +1,20 @@
-# Part 3: Hello Workflow
+---
+title: 'Part 3: Hello Workflow'
+description: Most real-world workflows involve more than one step.
+---
 
+<figure>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
+<figcaption>
 
-/// caption
-:fontawesome-brands-youtube:{ .youtube } See [the whole playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) on the Nextflow YouTube channel.
+See [the whole playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) on the Nextflow YouTube channel.
 
-:green_book: The video transcript is available [here](./transcripts/03_hello_workflow.md).
-///
+📗 The video transcript is available [here](./transcripts/03_hello_workflow.mdx).
+
+</figcaption>
+</figure>
 
 Most real-world workflows involve more than one step.
 In this training module, you'll learn how to connect processes together in a multi-step workflow.
@@ -28,9 +34,12 @@ This time, we're going to make the following changes to our workflow to better r
 3. Add a parameter to name the final output file and pass that as a secondary input to the collection step.
 4. Make the collection step also report a simple statistic about what was processed.
 
-??? info "How to begin from this section"
+<details class="info">
+<summary>How to begin from this section</summary>
 
-    This section of the course assumes you have completed Parts 1-2 of the [Hello Nextflow](./index.md) course, but if you are comfortable with the basics covered in those sections, you can start from here without doing anything special.
+This section of the course assumes you have completed Parts 1-2 of the [Hello Nextflow](./index.mdx) course, but if you are comfortable with the basics covered in those sections, you can start from here without doing anything special.
+
+</details>
 
 ---
 
@@ -39,7 +48,7 @@ This time, we're going to make the following changes to our workflow to better r
 We're going to use the workflow script `hello-workflow.nf` as a starting point.
 It is equivalent to the script produced by working through Part 2 of this training course, except we've removed the `view()` statements and changed the output destination:
 
-```groovy title="hello-workflow.nf" linenums="37" hl_lines="3"
+```nextflow {3} title="hello-workflow.nf" showLineNumbers startLineNumber=37
 output {
     first_output {
         path 'hello_workflow'
@@ -52,47 +61,44 @@ This diagram summarizes the current operation of the workflow.
 It should look familiar, except now we're explicitly showing that the outputs of the process are packaged in a channel, just like the inputs were.
 We're going to put that output channel to good use in a minute.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-workflow-channels.svg"
-</figure>
+![](./img/hello-workflow-channels.excalidraw.svg)
 
 Just to make sure everything is working, run the script once before making any changes:
 
 ```bash
 nextflow run hello-workflow.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-workflow.nf` [admiring_lamarr] revision: 4d4053520d
+
+executor >  local (3)
+[b1/5826b5] sayHello (2) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_workflow/Bonjour-output.txt
+    - hello_workflow/Hello-output.txt
+    - hello_workflow/Hola-output.txt
 ```
-
-??? success "Command output"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-workflow.nf` [admiring_lamarr] revision: 4d4053520d
-
-    executor >  local (3)
-    [b1/5826b5] sayHello (2) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_workflow/Bonjour-output.txt
-        - hello_workflow/Hello-output.txt
-        - hello_workflow/Hola-output.txt
-    ```
 
 As previously, you will find the output files in the location specified in the `output` block.
 For this chapter, it's under `results/hello_workflow/`.
 
-??? abstract "Directory contents"
+<details class="abstract">
+<summary>Directory contents</summary>
 
-    ```console
-    results/hello_workflow
-    ├── Bonjour-output.txt
-    ├── Hello-output.txt
-    └── Hola-output.txt
-    ```
+```console
+results/hello_workflow
+├── Bonjour-output.txt
+├── Hello-output.txt
+└── Hola-output.txt
+```
+
+</details>
 
 If that worked for you, you're ready to learn how to assemble a multi-step workflow.
 
@@ -102,9 +108,7 @@ If that worked for you, you're ready to learn how to assemble a multi-step workf
 
 We're going to add a step to convert each greeting to uppercase.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.svg"
-</figure>
+![](./img/hello-multistep.excalidraw.svg)
 
 To that end, we need to do three things:
 
@@ -130,11 +134,14 @@ echo 'Hello World' | tr '[a-z]' '[A-Z]' > UPPER-output.txt
 
 The output is a text file called `UPPER-output.txt` that contains the uppercase version of the `Hello World` string.
 
-??? abstract "File contents"
+<details class="abstract">
+<summary>File contents</summary>
 
-    ```console title="UPPER-output.txt"
-    HELLO WORLD
-    ```
+```console title="UPPER-output.txt"
+HELLO WORLD
+```
+
+</details>
 
 That's basically what we're going to try to do with our workflow.
 
@@ -144,7 +151,7 @@ We can model our new process on the first one, since we want to use all the same
 
 Add the following process definition to the workflow script, right under the first one:
 
-```groovy title="hello-workflow.nf" linenums="20"
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=20
 /*
  * Use a text replacement tool to convert the greeting to uppercase
  */
@@ -171,43 +178,43 @@ Now we need to tell Nextflow to actually call the process that we just defined.
 
 In the workflow block, make the following code change:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="44" hl_lines="10-11"
-    workflow {
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=44 step="Before"
+workflow {
 
-        main:
-        // create a channel for inputs from a CSV file
-        greeting_ch = channel.fromPath(params.input)
-                            .splitCsv()
-                            .map { line -> line[0] }
-        // emit a greeting
-        sayHello(greeting_ch)
-        // convert the greeting to uppercase
-        convertToUpper()
+    main:
+    // create a channel for inputs from a CSV file
+    greeting_ch = channel.fromPath(params.input)
+                        .splitCsv()
+                        .map { line -> line[0] }
+    // emit a greeting
+    sayHello(greeting_ch)
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+    publish:
+    first_output = sayHello.out
+}
+```
 
-=== "Before"
+```nextflow {10-11} title="hello-workflow.nf" showLineNumbers startLineNumber=44 step="After"
+workflow {
 
-    ```groovy title="hello-workflow.nf" linenums="44"
-    workflow {
+    main:
+    // create a channel for inputs from a CSV file
+    greeting_ch = channel.fromPath(params.input)
+                        .splitCsv()
+                        .map { line -> line[0] }
+    // emit a greeting
+    sayHello(greeting_ch)
+    // convert the greeting to uppercase
+    convertToUpper()
 
-        main:
-        // create a channel for inputs from a CSV file
-        greeting_ch = channel.fromPath(params.input)
-                            .splitCsv()
-                            .map { line -> line[0] }
-        // emit a greeting
-        sayHello(greeting_ch)
+    publish:
+    first_output = sayHello.out
+}
+```
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+</CodeWalkthrough>
 
 This is not yet functional because we have not specified what should be input to the `convertToUpper()` process.
 
@@ -220,25 +227,23 @@ We can refer to the output channel of a process as `<process>.out`.
 
 So the output of the `sayHello` process is a channel called `sayHello.out`, which we can plug straight into the call to `convertToUpper()`.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-connector.svg"
-</figure>
+![](./img/hello-multistep-connector.excalidraw.svg)
 
 In the workflow block, make the following code change:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // convert the greeting to uppercase
-        convertToUpper(sayHello.out)
-    ```
+```nextflow {2} title="hello-workflow.nf" showLineNumbers startLineNumber=53 step="Before"
+    // convert the greeting to uppercase
+    convertToUpper()
+```
 
-=== "Before"
+```nextflow {2} title="hello-workflow.nf" showLineNumbers startLineNumber=53 step="After"
+    // convert the greeting to uppercase
+    convertToUpper(sayHello.out)
+```
 
-    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // convert the greeting to uppercase
-        convertToUpper()
-    ```
+</CodeWalkthrough>
 
 For a simple case like this (one output to one input), that's all we need to do to connect two processes!
 
@@ -250,22 +255,22 @@ Finally, let's update the workflow outputs to publish the results from the secon
 
 In the `workflow` block, make the following code change:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="56" hl_lines="3"
-        publish:
-        first_output = sayHello.out
-        uppercased = convertToUpper.out
-    }
-    ```
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=56 step="Before"
+    publish:
+    first_output = sayHello.out
+}
+```
 
-=== "Before"
+```nextflow {3} title="hello-workflow.nf" showLineNumbers startLineNumber=56 step="After"
+    publish:
+    first_output = sayHello.out
+    uppercased = convertToUpper.out
+}
+```
 
-    ```groovy title="hello-workflow.nf" linenums="56"
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+</CodeWalkthrough>
 
 The logic is the same as previously.
 
@@ -273,31 +278,31 @@ The logic is the same as previously.
 
 In the `output` block, make the following code change:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="61" hl_lines="6-9"
-    output {
-        first_output {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        uppercased {
-            path 'hello_workflow'
-            mode 'copy'
-        }
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=61 step="Before"
+output {
+    first_output {
+        path 'hello_workflow'
+        mode 'copy'
     }
-    ```
+}
+```
 
-=== "Before"
-
-    ```groovy title="hello-workflow.nf" linenums="61"
-    output {
-        first_output {
-            path 'hello_workflow'
-            mode 'copy'
-        }
+```nextflow {6-9} title="hello-workflow.nf" showLineNumbers startLineNumber=61 step="After"
+output {
+    first_output {
+        path 'hello_workflow'
+        mode 'copy'
     }
-    ```
+    uppercased {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 Once again, the logic is the same as before.
 
@@ -307,64 +312,66 @@ Feel free to try changing the paths or the publish mode for one of the processes
 Of course, that does mean we're repeating some information here, which could become inconvenient if we wanted to update the location for all the outputs in the same way.
 Later in the course, you'll learn how to configure these settings for multiple outputs in a structured way.
 
-### 1.6. Run the workflow with `-resume`
+### 1.6. Run the workflow with `-resume` {#16-run-the-workflow-with-resume}
 
 Let's test this using the `-resume` flag, since we've already run the first step of the workflow successfully.
 
 ```bash
 nextflow run hello-workflow.nf -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-workflow.nf` [high_cantor] revision: d746983511
+
+executor >  local (3)
+[ab/816321] sayHello (3)       | 3 of 3, cached: 3 ✔
+[e0/ecf81b] convertToUpper (3) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_workflow/Hello-output.txt
+    - hello_workflow/Hola-output.txt
+    - hello_workflow/Bonjour-output.txt
+  uppercased:
+    - hello_workflow/UPPER-Hola-output.txt
+    - hello_workflow/UPPER-Hello-output.txt
+    - hello_workflow/UPPER-Bonjour-output.txt
 ```
-
-??? success "Command output"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-workflow.nf` [high_cantor] revision: d746983511
-
-    executor >  local (3)
-    [ab/816321] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [e0/ecf81b] convertToUpper (3) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_workflow/Hello-output.txt
-        - hello_workflow/Hola-output.txt
-        - hello_workflow/Bonjour-output.txt
-      uppercased:
-        - hello_workflow/UPPER-Hola-output.txt
-        - hello_workflow/UPPER-Hello-output.txt
-        - hello_workflow/UPPER-Bonjour-output.txt
-    ```
 
 There is now an extra line in the console output that corresponds to the new process we just added.
 
 You'll find the outputs in the `results/hello_workflow` directory as set in the `output` block.
 
-??? abstract "Directory contents"
+<details class="abstract">
+<summary>Directory contents</summary>
 
-    ```console
-    results/hello_workflow/
-    ├── Bonjour-output.txt
-    ├── Hello-output.txt
-    ├── Hola-output.txt
-    ├── UPPER-Bonjour-output.txt
-    ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
-    ```
+```console
+results/hello_workflow/
+├── Bonjour-output.txt
+├── Hello-output.txt
+├── Hola-output.txt
+├── UPPER-Bonjour-output.txt
+├── UPPER-Hello-output.txt
+└── UPPER-Hola-output.txt
+```
+
+</details>
 
 That's convenient! But it's still worth taking a look inside the work directory of one of the calls to the second process.
 
-??? abstract "Directory contents"
+<details class="abstract">
+<summary>Directory contents</summary>
 
-    ```console
-    work/e0/ecf81b4cacc648b9b994218d5b29d7/
-    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Hola-output.txt
-    └── UPPER-Hola-output.txt
-    ```
+```console
+work/e0/ecf81b4cacc648b9b994218d5b29d7/
+├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Hola-output.txt
+└── UPPER-Hola-output.txt
+```
+
+</details>
 
 Notice there are two `*-output` files: the output of the first process as well as the output of the second.
 
@@ -394,9 +401,7 @@ When we use a process to apply a transformation to each of the elements in a cha
 
 To demonstrate, we'll add a new step to our pipeline that collects all the uppercase greetings produced by the `convertToUpper` process and write them out to a single file.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
-</figure>
+![](./img/hello-collect.excalidraw.svg)
 
 Not to spoil the surprise, but this is going to involve a very useful operator.
 
@@ -417,13 +422,16 @@ cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLL
 
 The output is a text file called `COLLECTED-output.txt` that contains the uppercase versions of the original greetings.
 
-??? abstract "File contents"
+<details class="abstract">
+<summary>File contents</summary>
 
-    ```console title="COLLECTED-output.txt"
-    HELLO
-    BONJOUR
-    HOLA
-    ```
+```console title="COLLECTED-output.txt"
+HELLO
+BONJOUR
+HOLA
+```
+
+</details>
 
 That is the result we want to achieve with our workflow.
 
@@ -436,7 +444,7 @@ We can start writing it based on what we've seen before.
 
 Add the following process definition to the workflow script:
 
-```groovy title="hello-workflow.nf" linenums="37"
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=37
 /*
  * Collect uppercase greetings into a single output file
  */
@@ -469,19 +477,19 @@ That amounts to one input slot; let's call it `input_files` for simplicity.
 
 In the process block, make the following code change:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="42" hl_lines="2"
-          input:
-          path input_files
-    ```
+```nextflow {2} title="hello-workflow.nf" showLineNumbers startLineNumber=42 step="Before"
+      input:
+      ???
+```
 
-=== "Before"
+```nextflow {2} title="hello-workflow.nf" showLineNumbers startLineNumber=42 step="After"
+      input:
+      path input_files
+```
 
-    ```groovy title="hello-workflow.nf" linenums="42" hl_lines="2"
-          input:
-          ???
-    ```
+</CodeWalkthrough>
 
 Notice we use the `path` prefix even though we expect this to contain multiple files.
 
@@ -496,63 +504,61 @@ Fortunately, Nextflow is quite happy to do that for us if we simply write `cat $
 
 In the process block, make the following code change:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="54" hl_lines="3"
-        script:
-        """
-        cat ${input_files} > 'COLLECTED-output.txt'
-        """
-    ```
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=54 step="Before"
+    script:
+    """
+    cat ??? > 'COLLECTED-output.txt'
+    """
+```
 
-=== "Before"
+```nextflow {3} title="hello-workflow.nf" showLineNumbers startLineNumber=54 step="After"
+    script:
+    """
+    cat ${input_files} > 'COLLECTED-output.txt'
+    """
+```
 
-    ```groovy title="hello-workflow.nf" linenums="54"
-        script:
-        """
-        cat ??? > 'COLLECTED-output.txt'
-        """
-    ```
+</CodeWalkthrough>
 
 In theory this should handle any arbitrary number of input files.
 
-!!! tip
-
-    Some command-line tools require providing an argument (like `-input`) for each input file.
-    In that case, we would have to do a little bit of extra work to compose the command.
-    You can see an example of this in the [Nextflow for Genomics](../nf4_science/genomics/index.md) training course.
+:::tip
+Some command-line tools require providing an argument (like `-input`) for each input file.
+In that case, we would have to do a little bit of extra work to compose the command.
+You can see an example of this in the [Nextflow for Genomics](../nf4_science/genomics/index.mdx) training course.
+:::
 
 ### 2.3. Add the collection step to the workflow
 
 Now we should just need to call the collection process on the output of the uppercasing step.
 That is also a channel, called `convertToUpper.out`.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-connector.svg"
-</figure>
+![](./img/hello-collect-connector.excalidraw.svg)
 
 #### 2.3.1. Connect the process calls
 
 In the workflow block, make the following code change:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="75" hl_lines="4 5"
-        // convert the greeting to uppercase
-        convertToUpper(sayHello.out)
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=75 step="Before"
+    // convert the greeting to uppercase
+    convertToUpper(sayHello.out)
+}
+```
 
-        // collect all the greetings into one file
-        collectGreetings(convertToUpper.out)
-    }
-    ```
+```nextflow {4,5} title="hello-workflow.nf" showLineNumbers startLineNumber=75 step="After"
+    // convert the greeting to uppercase
+    convertToUpper(sayHello.out)
 
-=== "Before"
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out)
+}
+```
 
-    ```groovy title="hello-workflow.nf" linenums="75"
-        // convert the greeting to uppercase
-        convertToUpper(sayHello.out)
-    }
-    ```
+</CodeWalkthrough>
 
 This connects the output of `convertToUpper()` to the input of `collectGreetings()`.
 
@@ -560,100 +566,96 @@ This connects the output of `convertToUpper()` to the input of `collectGreetings
 
 In the `workflow` block, make the following code change:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="76" hl_lines="4"
-        publish:
-        first_output = sayHello.out
-        uppercased = convertToUpper.out
-        collected = collectGreetings.out
-    }
-    ```
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=76 step="Before"
+    publish:
+    first_output = sayHello.out
+    uppercased = convertToUpper.out
+}
+```
 
-=== "Before"
+```nextflow {4} title="hello-workflow.nf" showLineNumbers startLineNumber=76 step="After"
+    publish:
+    first_output = sayHello.out
+    uppercased = convertToUpper.out
+    collected = collectGreetings.out
+}
+```
 
-    ```groovy title="hello-workflow.nf" linenums="76"
-        publish:
-        first_output = sayHello.out
-        uppercased = convertToUpper.out
-    }
-    ```
+</CodeWalkthrough>
 
 #### 2.3.3. Update the `output` block
 
 In the `output` block, make the following code change:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="10-13"
-    output {
-        first_output {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        uppercased {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        collected {
-            path 'hello_workflow'
-            mode 'copy'
-        }
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=82 step="Before"
+output {
+    first_output {
+        path 'hello_workflow'
+        mode 'copy'
     }
-    ```
-
-=== "Before"
-
-    ```groovy title="hello-workflow.nf" linenums="82"
-    output {
-        first_output {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        uppercased {
-            path 'hello_workflow'
-            mode 'copy'
-        }
+    uppercased {
+        path 'hello_workflow'
+        mode 'copy'
     }
-    ```
+}
+```
 
-#### 2.3.4. Run the workflow with `-resume`
+```nextflow {10-13} title="hello-workflow.nf" showLineNumbers startLineNumber=82 step="After"
+output {
+    first_output {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+    uppercased {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+    collected {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+}
+```
+
+</CodeWalkthrough>
+
+#### 2.3.4. Run the workflow with `-resume` {#234-run-the-workflow-with-resume}
 
 Let's try it.
 
 ```bash
 nextflow run hello-workflow.nf -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-workflow.nf` [mad_gilbert] revision: 6acfd5e28d
+
+executor >  local (3)
+[79/33b2f0] sayHello (2)         | 3 of 3, cached: 3 ✔
+[99/79394f] convertToUpper (3)   | 3 of 3, cached: 3 ✔
+[47/50fe4a] collectGreetings (1) | 3 of 3 ✔ # [!code highlight]
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_workflow/Hello-output.txt
+    - hello_workflow/Bonjour-output.txt
+    - hello_workflow/Hola-output.txt
+  uppercased:
+    - hello_workflow/UPPER-Hello-output.txt
+    - hello_workflow/UPPER-Bonjour-output.txt
+    - hello_workflow/UPPER-Hola-output.txt
+  collected:
+    - hello_workflow/COLLECTED-output.txt
+    - hello_workflow/COLLECTED-output.txt
+    - hello_workflow/COLLECTED-output.txt
 ```
-
-??? success "Command output"
-
-    ```console hl_lines="8"
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-workflow.nf` [mad_gilbert] revision: 6acfd5e28d
-
-    executor >  local (3)
-    [79/33b2f0] sayHello (2)         | 3 of 3, cached: 3 ✔
-    [99/79394f] convertToUpper (3)   | 3 of 3, cached: 3 ✔
-    [47/50fe4a] collectGreetings (1) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_workflow/Hello-output.txt
-        - hello_workflow/Bonjour-output.txt
-        - hello_workflow/Hola-output.txt
-      uppercased:
-        - hello_workflow/UPPER-Hello-output.txt
-        - hello_workflow/UPPER-Bonjour-output.txt
-        - hello_workflow/UPPER-Hola-output.txt
-      collected:
-        - hello_workflow/COLLECTED-output.txt
-        - hello_workflow/COLLECTED-output.txt
-        - hello_workflow/COLLECTED-output.txt
-    ```
 
 It runs successfully, including the third step.
 
@@ -662,17 +664,18 @@ We were only expecting one, but there are three.
 
 Now have a look at the contents of the final output file.
 
-??? abstract "File contents"
+<details class="abstract">
+<summary>File contents</summary>
 
-    ```console title="results/hello_workflow/COLLECTED-output.txt"
-    HOLA
-    ```
+```console title="results/hello_workflow/COLLECTED-output.txt"
+HOLA
+```
+
+</details>
 
 Oh no. The collection step was run individually on each greeting, which is NOT what we wanted.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-no-operator.svg"
-</figure>
+![](./img/hello-collect-no-operator.excalidraw.svg)
 
 We need to do something to tell Nextflow explicitly that we want that third step to run on all the elements in the channel output by `convertToUpper()`.
 
@@ -691,86 +694,82 @@ We can plug that directly into the `collectGreetings()` process call.
 
 In the workflow block, make the following code change:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect())
-    }
-    ```
+```nextflow {2} title="hello-workflow.nf" showLineNumbers startLineNumber=73 step="Before"
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out)
+}
+```
 
-=== "Before"
+```nextflow {2} title="hello-workflow.nf" showLineNumbers startLineNumber=73 step="After"
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out.collect())
+}
+```
 
-    ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // collect all the greetings into one file
-        collectGreetings(convertToUpper.out)
-    }
-    ```
+</CodeWalkthrough>
 
 #### 2.4.2. Add some `view()` statements
 
 Let's also include a couple of `view()` statements to visualize the before and after states of the channel contents.
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect())
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=73 step="Before"
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out.collect())
+}
+```
 
-        // optional view statements
-        convertToUpper.out.view { contents -> "Before collect: $contents" }
-        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
-    }
-    ```
+```nextflow {4-6} title="hello-workflow.nf" showLineNumbers startLineNumber=73 step="After"
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out.collect())
 
-=== "Before"
+    // optional view statements
+    convertToUpper.out.view { contents -> "Before collect: $contents" }
+    convertToUpper.out.collect().view { contents -> "After collect: $contents" }
+}
+```
 
-    ```groovy title="hello-workflow.nf" linenums="73"
-        // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect())
-    }
-    ```
+</CodeWalkthrough>
 
 The `view()` statements can go anywhere you want; we put them right after the call for readability.
 
-#### 2.4.3. Run the workflow again with `-resume`
+#### 2.4.3. Run the workflow again with `-resume` {#243-run-the-workflow-again-with-resume}
 
 Let's try it:
 
 ```bash
 nextflow run hello-workflow.nf -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-workflow.nf` [soggy_franklin] revision: bc8e1b2726
+
+executor >  local (1)
+[d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
+[99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+[1e/83586c] collectGreetings   | 1 of 1 ✔
+Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
+Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
+Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
+After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_workflow/Hello-output.txt
+    - hello_workflow/Bonjour-output.txt
+    - hello_workflow/Hola-output.txt
+  uppercased:
+    - hello_workflow/UPPER-Bonjour-output.txt
+    - hello_workflow/UPPER-Hello-output.txt
+    - hello_workflow/UPPER-Hola-output.txt
+  collected: hello_workflow/COLLECTED-output.txt
 ```
-
-??? success "Command output"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-workflow.nf` [soggy_franklin] revision: bc8e1b2726
-
-    executor >  local (1)
-    [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
-    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
-    [1e/83586c] collectGreetings   | 1 of 1 ✔
-    Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
-    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_workflow/Hello-output.txt
-        - hello_workflow/Bonjour-output.txt
-        - hello_workflow/Hola-output.txt
-      uppercased:
-        - hello_workflow/UPPER-Bonjour-output.txt
-        - hello_workflow/UPPER-Hello-output.txt
-        - hello_workflow/UPPER-Hola-output.txt
-      collected: hello_workflow/COLLECTED-output.txt
-    ```
 
 It runs successfully, although the log output may look a little messier than this (we cleaned it up for readability).
 
@@ -782,62 +781,61 @@ Looking at the output of the `view()` statements, we see the following:
 
 We can summarize that with the following diagram:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-WITH-operator.svg"
-</figure>
+![](./img/hello-collect-WITH-operator.excalidraw.svg)
 
 Finally, you can have a look at the contents of the output file to satisfy yourself that everything worked correctly.
 
-??? abstract "File contents"
+<details class="abstract">
+<summary>File contents</summary>
 
-    ```console title="results/hello_workflow/COLLECTED-output.txt"
-    BONJOUR
-    HELLO
-    HOLA
-    ```
+```console title="results/hello_workflow/COLLECTED-output.txt"
+BONJOUR
+HELLO
+HOLA
+```
+
+</details>
 
 This time we have all three greetings in the final output file. Success!
 
-!!! note
-
-    If you run this several times without `-resume`, you will see that the order of the greetings changes from one run to the next.
-    This shows you that the order in which elements flow through process calls is not guaranteed to be consistent.
+:::note
+If you run this several times without `-resume`, you will see that the order of the greetings changes from one run to the next.
+This shows you that the order in which elements flow through process calls is not guaranteed to be consistent.
+:::
 
 #### 2.4.4. Remove `view()` statements for readability
 
 Before you move on to the next section, we recommend you delete the `view()` statements to avoid cluttering the console output.
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="73"
-        // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect())
-    ```
+```nextflow {4-6} title="hello-workflow.nf" showLineNumbers startLineNumber=73 step="Before"
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out.collect())
 
-=== "Before"
+    // optional view statements
+    convertToUpper.out.view { contents -> "Before collect: $contents" }
+    convertToUpper.out.collect().view { contents -> "After collect: $contents" }
+```
 
-    ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect())
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=73 step="After"
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out.collect())
+```
 
-        // optional view statements
-        convertToUpper.out.view { contents -> "Before collect: $contents" }
-        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
-    ```
+</CodeWalkthrough>
 
 This is basically the reverse operation from point 2.4.2.
 
-### Takeaway
+### Takeaway {#takeaway_1}
 
 You know how to collect outputs from a batch of process calls and feed them into a joint analysis or summation step.
 
 To recap, this is what you've built so far:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
-</figure>
+![](./img/hello-collect.excalidraw.svg)
 
-### What's next?
+### What's next? {#whats-next_1}
 
 Learn how to pass more than one input to a process.
 
@@ -852,9 +850,7 @@ To that end, we're going to make the following refinements to the workflow:
 - Modify the collector process to accept a user-defined name for the output file (`batch_name`)
 - Add a command-line parameter to the workflow (`--batch`) and pass it to the collector process
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.svg"
-</figure>
+![](./img/hello-collect-batch.excalidraw.svg)
 
 ### 3.1. Modify the collector process
 
@@ -867,20 +863,20 @@ Let's call this one `batch_name`.
 
 In the process block, make the following code change:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="42" hl_lines="3"
-        input:
-        path input_files
-        val batch_name
-    ```
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=42 step="Before"
+    input:
+    path input_files
+```
 
-=== "Before"
+```nextflow {3} title="hello-workflow.nf" showLineNumbers startLineNumber=42 step="After"
+    input:
+    path input_files
+    val batch_name
+```
 
-    ```groovy title="hello-workflow.nf" linenums="42"
-        input:
-        path input_files
-    ```
+</CodeWalkthrough>
 
 You can set up your processes to expect as many inputs as you want.
 Right now, these are all set up to be required inputs; you _must_ provide a value for the workflow to work.
@@ -893,29 +889,29 @@ We can insert the variable into the output file name in the same way we've compo
 
 In the process block, make the following code change:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="46" hl_lines="2 6"
-        output:
-        path "COLLECTED-${batch_name}-output.txt"
+```nextflow {2,6} title="hello-workflow.nf" showLineNumbers startLineNumber=46 step="Before"
+    output:
+    path "COLLECTED-output.txt"
 
-        script:
-        """
-        cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-        """
-    ```
+    script:
+    """
+    cat ${input_files} > 'COLLECTED-output.txt'
+    """
+```
 
-=== "Before"
+```nextflow {2,6} title="hello-workflow.nf" showLineNumbers startLineNumber=46 step="After"
+    output:
+    path "COLLECTED-${batch_name}-output.txt"
 
-    ```groovy title="hello-workflow.nf" linenums="46" hl_lines="2 6"
-        output:
-        path "COLLECTED-output.txt"
+    script:
+    """
+    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
+    """
+```
 
-        script:
-        """
-        cat ${input_files} > 'COLLECTED-output.txt'
-        """
-    ```
+</CodeWalkthrough>
 
 This sets up the process to use the `batch_name` value to generate a specific filename for the final output of the workflow.
 
@@ -930,28 +926,28 @@ Let's use that to declare a `batch` parameter (with a default value because we a
 
 In the pipeline parameters section, make the following code changes:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="55" hl_lines="6"
-    /*
-     * Pipeline parameters
-     */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-    }
-    ```
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=55 step="Before"
+/*
+ * Pipeline parameters
+ */
+params {
+    input: Path = 'data/greetings.csv'
+}
+```
 
-=== "Before"
+```nextflow {6} title="hello-workflow.nf" showLineNumbers startLineNumber=55 step="After"
+/*
+ * Pipeline parameters
+ */
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+}
+```
 
-    ```groovy title="hello-workflow.nf" linenums="55"
-    /*
-     * Pipeline parameters
-     */
-    params {
-        input: Path = 'data/greetings.csv'
-    }
-    ```
+</CodeWalkthrough>
 
 Just like we demonstrated for `--input`, you can override that default value by specifying a value with `--batch` on the command line.
 
@@ -961,25 +957,25 @@ To provide the value of the parameter to the process, we need to add it in the p
 
 In the workflow block, make the following code change:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect(), params.batch)
-    ```
+```nextflow {2} title="hello-workflow.nf" showLineNumbers startLineNumber=74 step="Before"
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out.collect())
+```
 
-=== "Before"
+```nextflow {2} title="hello-workflow.nf" showLineNumbers startLineNumber=74 step="After"
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out.collect(), params.batch)
+```
 
-    ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect())
-    ```
+</CodeWalkthrough>
 
 You see that to provide multiple inputs to a process, you simply list them in the call parentheses, separated by commas.
 
-!!! warning
-
-    You MUST provide the inputs to the process in the EXACT SAME ORDER as they are listed in the input definition block of the process.
+:::caution
+You MUST provide the inputs to the process in the EXACT SAME ORDER as they are listed in the input definition block of the process.
+:::
 
 ### 3.3. Run the workflow
 
@@ -987,52 +983,51 @@ Let's try running this with a batch name on the command line.
 
 ```bash
 nextflow run hello-workflow.nf -resume --batch trio
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-workflow.nf` [confident_rutherford] revision: bc58af409c
+
+executor >  local (1)
+[79/33b2f0] sayHello (2)       | 3 of 3, cached: 3 ✔
+[99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+[b5/f19efe] collectGreetings   | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_workflow/Bonjour-output.txt
+    - hello_workflow/Hello-output.txt
+    - hello_workflow/Hola-output.txt
+  uppercased:
+    - hello_workflow/UPPER-Bonjour-output.txt
+    - hello_workflow/UPPER-Hola-output.txt
+    - hello_workflow/UPPER-Hello-output.txt
+  collected: hello_workflow/COLLECTED-trio-output.txt
 ```
-
-??? success "Command output"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-workflow.nf` [confident_rutherford] revision: bc58af409c
-
-    executor >  local (1)
-    [79/33b2f0] sayHello (2)       | 3 of 3, cached: 3 ✔
-    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
-    [b5/f19efe] collectGreetings   | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_workflow/Bonjour-output.txt
-        - hello_workflow/Hello-output.txt
-        - hello_workflow/Hola-output.txt
-      uppercased:
-        - hello_workflow/UPPER-Bonjour-output.txt
-        - hello_workflow/UPPER-Hola-output.txt
-        - hello_workflow/UPPER-Hello-output.txt
-      collected: hello_workflow/COLLECTED-trio-output.txt
-    ```
 
 It runs successfully and produces the desired output:
 
-??? abstract "File contents"
+<details class="abstract">
+<summary>File contents</summary>
 
-    ```console title="results/hello_workflow/COLLECTED-trio-output.txt"
-    HELLO
-    BONJOUR
-    HOLA
-    ```
+```console title="results/hello_workflow/COLLECTED-trio-output.txt"
+HELLO
+BONJOUR
+HOLA
+```
+
+</details>
 
 Now, as long as we specify the parameter appropriately, subsequent runs on other batches of inputs won't clobber previous results.
 
-### Takeaway
+### Takeaway {#takeaway_2}
 
 You know how to pass more than one input to a process.
 
-### What's next?
+### What's next? {#whats-next_2}
 
 Learn how to emit multiple outputs and handle them conveniently.
 
@@ -1066,25 +1061,25 @@ That means we can use Nextflow's built-in `size()` function to get the number of
 
 In the `collectGreetings` process block, make the following code changes:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="55" hl_lines="2 5"
-        script:
-        count_greetings = input_files.size()
-        """
-        cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-        echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
-        """
-    ```
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=55 step="Before"
+    script:
+    """
+    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
+    """
+```
 
-=== "Before"
+```nextflow {2,5} title="hello-workflow.nf" showLineNumbers startLineNumber=55 step="After"
+    script:
+    count_greetings = input_files.size()
+    """
+    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
+    echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
+    """
+```
 
-    ```groovy title="hello-workflow.nf" linenums="55"
-        script:
-        """
-        cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-        """
-    ```
+</CodeWalkthrough>
 
 The `count_greetings` variable will be computed at runtime.
 
@@ -1096,30 +1091,30 @@ However, while we're at it, we're also going to add some `emit:` tags to our out
 
 In the process block, make the following code change:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="46" hl_lines="2 3"
-        output:
-        path "COLLECTED-${batch_name}-output.txt", emit: outfile
-        path "${batch_name}-report.txt", emit: report
-    ```
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=46 step="Before"
+    output:
+    path "COLLECTED-${batch_name}-output.txt"
+```
 
-=== "Before"
+```nextflow {2,3} title="hello-workflow.nf" showLineNumbers startLineNumber=46 step="After"
+    output:
+    path "COLLECTED-${batch_name}-output.txt", emit: outfile
+    path "${batch_name}-report.txt", emit: report
+```
 
-    ```groovy title="hello-workflow.nf" linenums="46"
-        output:
-        path "COLLECTED-${batch_name}-output.txt"
-    ```
+</CodeWalkthrough>
 
 The `emit:` tags are optional, and we could have added a tag to only one of the outputs.
 But as the saying goes, why not both?
 
-!!! tip
+:::tip
+If you don't name the outputs of a process using `emit:`, you can still access them individually by using their respective (zero-based) index.
+For example, you would use `<process>.out[0]` to get the first output, `<process>.out[1]` to get the second output, and so on.
 
-    If you don't name the outputs of a process using `emit:`, you can still access them individually by using their respective (zero-based) index.
-    For example, you would use `<process>.out[0]` to get the first output, `<process>.out[1]` to get the second output, and so on.
-
-    We prefer naming outputs because otherwise, it's too easy to grab the wrong index by error, especially when the process produces a lot of outputs.
+We prefer naming outputs because otherwise, it's too easy to grab the wrong index by error, especially when the process produces a lot of outputs.
+:::
 
 ### 4.2. Update the workflow outputs
 
@@ -1128,9 +1123,7 @@ Now that we have two outputs coming out of the `collectGreetings` process, the `
 - `collectGreetings.out.outfile` contains the final output file
 - `collectGreetings.out.report` contains the report file
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-report.svg"
-</figure>
+![](./img/hello-collect-report.excalidraw.svg)
 
 We need to update the workflow outputs accordingly.
 
@@ -1138,24 +1131,24 @@ We need to update the workflow outputs accordingly.
 
 In the `workflow block`, make the following code change:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="80" hl_lines="4 5"
-        publish:
-        first_output = sayHello.out
-        uppercased = convertToUpper.out
-        collected = collectGreetings.out.outfile
-        batch_report = collectGreetings.out.report
-    ```
+```nextflow {4} title="hello-workflow.nf" showLineNumbers startLineNumber=80 step="Before"
+    publish:
+    first_output = sayHello.out
+    uppercased = convertToUpper.out
+    collected = collectGreetings.out
+```
 
-=== "Before"
+```nextflow {4,5} title="hello-workflow.nf" showLineNumbers startLineNumber=80 step="After"
+    publish:
+    first_output = sayHello.out
+    uppercased = convertToUpper.out
+    collected = collectGreetings.out.outfile
+    batch_report = collectGreetings.out.report
+```
 
-    ```groovy title="hello-workflow.nf" linenums="80" hl_lines="4"
-        publish:
-        first_output = sayHello.out
-        uppercased = convertToUpper.out
-        collected = collectGreetings.out
-    ```
+</CodeWalkthrough>
 
 As you can see, referring to specific process outputs is now trivial.
 When we go to add one more step to our pipeline in Part 5 (Containers), we'll be able to easily refer to `collectGreetings.out.outfile` and hand it to the new process (spoiler: the new process is called `cowpy`).
@@ -1166,47 +1159,47 @@ But for now, let's finish updating the workflow-level outputs.
 
 In the `output` block, make the following code change:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="86" hl_lines="14-17"
-    output {
-        first_output {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        uppercased {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        collected {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        batch_report {
-            path 'hello_workflow'
-            mode 'copy'
-        }
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=80 step="Before"
+output {
+    first_output {
+        path 'hello_workflow'
+        mode 'copy'
     }
-    ```
-
-=== "Before"
-
-    ```groovy title="hello-workflow.nf" linenums="80"
-    output {
-        first_output {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        uppercased {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        collected {
-            path 'hello_workflow'
-            mode 'copy'
-        }
+    uppercased {
+        path 'hello_workflow'
+        mode 'copy'
     }
-    ```
+    collected {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+}
+```
+
+```nextflow {14-17} title="hello-workflow.nf" showLineNumbers startLineNumber=86 step="After"
+output {
+    first_output {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+    uppercased {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+    collected {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+    batch_report {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 We don't need to update the `collected` output definition since that name hasn't changed.
 We just need to add the new output.
@@ -1217,68 +1210,66 @@ Let's try running this with the current batch of greetings.
 
 ```bash
 nextflow run hello-workflow.nf -resume --batch trio
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-workflow.nf` [ecstatic_wilson] revision: c80285f8c8
+
+executor >  local (1)
+[c5/4c6ca9] sayHello (3)       | 3 of 3, cached: 3 ✔
+[0e/6cbc59] convertToUpper (3) | 3 of 3, cached: 3 ✔
+[02/61ead2] collectGreetings   | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_workflow/Bonjour-output.txt
+    - hello_workflow/Hello-output.txt
+    - hello_workflow/Hola-output.txt
+  uppercased:
+    - hello_workflow/UPPER-Bonjour-output.txt
+    - hello_workflow/UPPER-Hola-output.txt
+    - hello_workflow/UPPER-Hello-output.txt
+  collected: hello_workflow/COLLECTED-trio-output.txt
+  batch_report: hello_workflow/trio-report.txt
 ```
-
-??? success "Command output"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-workflow.nf` [ecstatic_wilson] revision: c80285f8c8
-
-    executor >  local (1)
-    [c5/4c6ca9] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [0e/6cbc59] convertToUpper (3) | 3 of 3, cached: 3 ✔
-    [02/61ead2] collectGreetings   | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_workflow/Bonjour-output.txt
-        - hello_workflow/Hello-output.txt
-        - hello_workflow/Hola-output.txt
-      uppercased:
-        - hello_workflow/UPPER-Bonjour-output.txt
-        - hello_workflow/UPPER-Hola-output.txt
-        - hello_workflow/UPPER-Hello-output.txt
-      collected: hello_workflow/COLLECTED-trio-output.txt
-      batch_report: hello_workflow/trio-report.txt
-    ```
 
 If you look in the `results/hello_workflow/` directory, you'll find the new report file, `trio-report.txt`.
 Open it to verify that the workflow correctly reported the count of greetings that were processed.
 
-??? abstract "File contents"
+<details class="abstract">
+<summary>File contents</summary>
 
-    ```txt title="trio-report.txt"
-    There were 3 greetings in this batch.
-    ```
+```txt title="trio-report.txt"
+There were 3 greetings in this batch.
+```
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-4-way.svg"
-</figure>
+</details>
+
+![](./img/hello-collect-4-way.excalidraw.svg)
 
 Feel free to add more greetings to the CSV and test what happens.
 
-### Takeaway
+### Takeaway {#takeaway_3}
 
 You know how to make a process emit multiple named outputs and how to handle them appropriately at the workflow level.
 
 More generally, you understand the key principles involved in connecting processes together in common ways.
 
-### What's next?
+### What's next? {#whats-next_3}
 
 Take an extra long break, you've earned it.
 
-When you're ready, move on to [**Part 4: Hello Modules**](./04_hello_modules.md) to learn how to modularize your code for better maintainability and code efficiency.
+When you're ready, move on to [**Part 4: Hello Modules**](./04_hello_modules.mdx) to learn how to modularize your code for better maintainability and code efficiency.
 
 ---
 
 ## Quiz
 
-<quiz>
+<Quiz id="quiz-1">
+
 How do you access the output of a process in the workflow block?
 - [ ] `process.output`
 - [ ] `output.processName`
@@ -1286,9 +1277,11 @@ How do you access the output of a process in the workflow block?
 - [ ] `get(processName)`
 
 Learn more: [1.4. Pass the output of the first process to the second process](#14-pass-the-output-of-the-first-process-to-the-second-process)
-</quiz>
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-2">
+
 What determines the order of process execution in Nextflow?
 - [ ] The order processes are written in the workflow block
 - [ ] Alphabetical order by process name
@@ -1296,12 +1289,14 @@ What determines the order of process execution in Nextflow?
 - [ ] Random order for parallel execution
 
 Learn more: [1.4. Pass the output of the first process to the second process](#14-pass-the-output-of-the-first-process-to-the-second-process)
-</quiz>
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-3">
+
 Which operator should replace `???` to gather all outputs into a single list for the downstream process?
 
-```groovy hl_lines="4"
+```nextflow {4}
 workflow {
     greetings_ch = Channel.of('Hello', 'Bonjour', 'Hola')
     SAYHELLO(greetings_ch)
@@ -1315,9 +1310,11 @@ workflow {
 - [ ] `join()`
 
 Learn more: [2.4. Use an operator to collect the greetings into a single input](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
-</quiz>
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-4">
+
 When should you use the `collect()` operator?
 - [ ] When you want to process items in parallel
 - [ ] When you need to filter channel contents
@@ -1325,9 +1322,11 @@ When should you use the `collect()` operator?
 - [ ] When you want to split data across multiple processes
 
 Learn more: [2.4. Use an operator to collect the greetings into a single input](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
-</quiz>
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-5">
+
 How do you access a named output from a process?
 - [ ] `processName.outputName`
 - [ ] `processName.get(outputName)`
@@ -1335,9 +1334,11 @@ How do you access a named output from a process?
 - [ ] `output.processName.outputName`
 
 Learn more: [4.1.2. Emit the report file and name outputs](#412-emit-the-report-file-and-name-outputs)
-</quiz>
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-6">
+
 What is the correct syntax for naming an output in a process?
 - [ ] `name: outputName`
 - [ ] `output: outputName`
@@ -1345,9 +1346,11 @@ What is the correct syntax for naming an output in a process?
 - [ ] `label: outputName`
 
 Learn more: [4.1.2. Emit the report file and name outputs](#412-emit-the-report-file-and-name-outputs)
-</quiz>
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-7">
+
 When providing multiple inputs to a process, what must be true?
 - [ ] All inputs must be of the same type
 - [ ] Inputs must be provided in alphabetical order
@@ -1355,4 +1358,5 @@ When providing multiple inputs to a process, what must be true?
 - [ ] Only two inputs can be provided at a time
 
 Learn more: [3. Pass additional parameters to a process](#3-pass-additional-parameters-to-a-process)
-</quiz>
+
+</Quiz>

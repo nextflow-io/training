@@ -1,6 +1,9 @@
-# Bölüm 4: Uzak Pipeline'ları Çalıştırma
+---
+title: 'Bölüm 4: Uzak Pipeline''ları Çalıştırma'
+description: Şimdiye kadar yerel olarak depolanan iş akışı betiklerini çalıştırdınız.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Şimdiye kadar yerel olarak depolanan iş akışı betiklerini çalıştırdınız.
 Pratikte, GitHub gibi uzak depolarda yayımlanan pipeline'ları kendiniz indirmeden çalıştırmak isteyeceksiniz.
@@ -20,27 +23,23 @@ Bu, bu kursta çalıştırdığınızdan farklı ve çok daha basit bir pipeline
 
 ```bash
 nextflow run nextflow-io/hello
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Pulling nextflow-io/hello ...
+ downloaded from https://github.com/nextflow-io/hello.git
+Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] revision: 3c2cdc9823 [master]
+
+executor >  local (4)
+[ba/08236d] sayHello (4) | 4 of 4 ✔
+Ciao world!
+
+Hello world!
+
+Bonjour world!
+
+Hola world!
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Pulling nextflow-io/hello ...
-     downloaded from https://github.com/nextflow-io/hello.git
-    Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] revision: 3c2cdc9823 [master]
-
-    executor >  local (4)
-    [ba/08236d] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
-    Hello world!
-
-    Bonjour world!
-
-    Hola world!
-    ```
 
 ### 1.2. Pipeline'ın önbelleğe alındığı yeri bulma
 
@@ -52,39 +51,31 @@ Belirli bir pipeline'ın nereye kaydedildiğini ve hangi revizyonların mevcut o
 
 ```bash
 nextflow info nextflow-io/hello
+# [!output]
+ project name: nextflow-io/hello
+ repository  : https://github.com/nextflow-io/hello
+ local path  : /workspaces/.nextflow/assets/.repos/nextflow-io/hello
+ main script : main.nf
+ revisions   :
+ > master (default)
+   mybranch
+   testing
+   v1.1 [t]
+   v1.2 [t]
+   v1.3 [t]
 ```
 
-??? success "Komut çıktısı"
-
-    ```console
-     project name: nextflow-io/hello
-     repository  : https://github.com/nextflow-io/hello
-     local path  : /workspaces/.nextflow/assets/.repos/nextflow-io/hello
-     main script : main.nf
-     revisions   :
-     > master (default)
-       mybranch
-       testing
-       v1.1 [t]
-       v1.2 [t]
-       v1.3 [t]
-    ```
-
-    Nextflow, yerel olarak zaten kontrol ettiğiniz her revizyonu `>` ile işaretler; geri kalanlar mevcut olmakla birlikte henüz çalışma kopyasına alınmamıştır.
+Nextflow, yerel olarak zaten kontrol ettiğiniz her revizyonu `>` ile işaretler; geri kalanlar mevcut olmakla birlikte henüz çalışma kopyasına alınmamıştır.
 
 Şimdiye kadar indirdiğiniz tüm pipeline'ları `nextflow list` komutuyla da listeleyebilirsiniz:
 
 ```bash
 nextflow list
+# [!output]
+nextflow-io/hello
 ```
 
-??? success "Komut çıktısı"
-
-    ```console
-    nextflow-io/hello
-    ```
-
-[Use nf-core](../nfcore_use/01_run_demo.md#12-retrieve-the-pipeline-code) kursu, indirilen bir pipeline'ın kaynak koduna nasıl göz atılacağı da dahil olmak üzere bu önbellekleme mekanizmasını daha ayrıntılı ele almaktadır.
+[Use nf-core](../nfcore_use/01_run_demo.mdx#12-pipeline-kodunu-i̇ndirme) kursu, indirilen bir pipeline'ın kaynak koduna nasıl göz atılacağı da dahil olmak üzere bu önbellekleme mekanizmasını daha ayrıntılı ele almaktadır.
 
 ### Özetle
 
@@ -105,27 +96,23 @@ Nextflow, varsayılan olarak varsayılan dalın en son revizyonunu çalıştır�
 
 ```bash
 nextflow run nextflow-io/hello -r v1.3
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Pulling nextflow-io/hello:v1.3 ...
+ downloaded from https://github.com/nextflow-io/hello.git
+Launching `https://github.com/nextflow-io/hello` [sick_carson] revision: 2ce0b0e294 [v1.3]
+
+executor >  local (4)
+[61/e11f77] sayHello (4) | 4 of 4 ✔
+Ciao world!
+
+Bonjour world!
+
+Hello world!
+
+Hola world!
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Pulling nextflow-io/hello:v1.3 ...
-     downloaded from https://github.com/nextflow-io/hello.git
-    Launching `https://github.com/nextflow-io/hello` [sick_carson] revision: 2ce0b0e294 [v1.3]
-
-    executor >  local (4)
-    [61/e11f77] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
-    Bonjour world!
-
-    Hello world!
-
-    Hola world!
-    ```
 
 Nextflow bu revizyonu ilk kez talep ettiğinizde indirir; bu nedenle `Pulling` ve `downloaded from` satırları görünür. Aynı revizyonu daha sonra tekrar talep ettiğinizde ise doğrudan `Launching` aşamasına geçilir.
 Tam bir revizyonu sabitleme, tekrarlanabilirlik açısından son derece önemlidir.
@@ -138,25 +125,21 @@ Pipeline'ı `-r` olmadan tekrar çalıştırmayı deneyin:
 
 ```bash
 nextflow run nextflow-io/hello
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `https://github.com/nextflow-io/hello` [hungry_maxwell] revision: 3c2cdc9823 [master]
+
+executor >  local (4)
+[ba/08236d] sayHello (4) | 4 of 4 ✔
+Ciao world!
+
+Hello world!
+
+Bonjour world!
+
+Hola world!
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `https://github.com/nextflow-io/hello` [hungry_maxwell] revision: 3c2cdc9823 [master]
-
-    executor >  local (4)
-    [ba/08236d] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
-    Hello world!
-
-    Bonjour world!
-
-    Hola world!
-    ```
 
 Önceki çalıştırma açıkça `v1.3`'ü sabitlemiş olsa da bu çalıştırma doğrudan varsayılan dala (`master`) geri döner.
 Nextflow, kullandığınız her revizyon için ayrı bir yerel çalışma kopyası tutar; `nextflow info` komutundaki `>` işaretleri de bunu gösterir. Ancak Nextflow, en son hangisini çalıştırdığınızı asla hatırlamaz.
@@ -170,7 +153,7 @@ Uzak bir pipeline'ı tekrarlanabilir çalıştırma için belirli bir sürüme, 
 ### Sırada ne var?
 
 Nextflow pipeline'larını çalıştırma ve yönetmenin temellerini öğrendiniz.
-Buradan nereye gideceğinizi öğrenmek için [Kurs özeti](next_steps.md) sayfasına bakın.
+Buradan nereye gideceğinizi öğrenmek için [Kurs özeti](next_steps.mdx) sayfasına bakın.
 
 ---
 

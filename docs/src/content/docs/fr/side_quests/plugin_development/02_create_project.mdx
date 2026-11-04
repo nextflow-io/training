@@ -1,22 +1,25 @@
-# Partie 2 : Créer un projet de plugin
+---
+title: 'Partie 2 : Créer un projet de plugin'
+description: Vous avez vu comment les plugins étendent Nextflow avec des fonctionnalités réutilisables.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Vous avez vu comment les plugins étendent Nextflow avec des fonctionnalités réutilisables.
 Vous allez maintenant créer le vôtre, en partant d'un modèle de projet qui gère la configuration de build pour vous.
 
-!!! tip "Vous commencez ici ?"
+:::tip[Vous commencez ici ?]
+Si vous rejoignez le cours à cette partie, copiez la solution de la Partie 1 pour l'utiliser comme point de départ :
 
-    Si vous rejoignez le cours à cette partie, copiez la solution de la Partie 1 pour l'utiliser comme point de départ :
+```bash
+cp -r solutions/1-plugin-basics/* .
+```
+:::
 
-    ```bash
-    cp -r solutions/1-plugin-basics/* .
-    ```
-
-!!! info "Documentation officielle"
-
-    Cette section et celles qui suivent couvrent les éléments essentiels du développement de plugins.
-    Pour des détails complets, consultez la [documentation officielle de développement de plugins Nextflow](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html).
+:::note[Documentation officielle]
+Cette section et celles qui suivent couvrent les éléments essentiels du développement de plugins.
+Pour des détails complets, consultez la [documentation officielle de développement de plugins Nextflow](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html).
+:::
 
 ---
 
@@ -34,9 +37,9 @@ Plugin created successfully at path: /workspaces/training/side-quests/plugin_dev
 
 Le premier argument est le nom du plugin, et le second est le nom de votre organisation (utilisé pour organiser le code généré dans des répertoires).
 
-!!! tip "Création manuelle"
-
-    Vous pouvez également créer des projets de plugins manuellement ou utiliser le [modèle nf-hello](https://github.com/nextflow-io/nf-hello) sur GitHub comme point de départ.
+:::tip[Création manuelle]
+Vous pouvez également créer des projets de plugins manuellement ou utiliser le [modèle nf-hello](https://github.com/nextflow-io/nf-hello) sur GitHub comme point de départ.
+:::
 
 ---
 
@@ -137,22 +140,17 @@ plugins {
 version = '0.1.0'
 
 nextflowPlugin {
-    nextflowVersion = '25.10.0'       // (1)!
+    nextflowVersion = '25.10.0'       // [!annotate] **`nextflowVersion`** : Version minimale de Nextflow requise
 
-    provider = 'training'             // (2)!
-    className = 'training.plugin.GreetingPlugin'  // (3)!
-    extensionPoints = [               // (4)!
+    provider = 'training'             // [!annotate] **`provider`** : Votre nom ou celui de votre organisation
+    className = 'training.plugin.GreetingPlugin'  // [!annotate] **`className`** : La classe principale du plugin, le point d'entrée que Nextflow charge en premier
+    extensionPoints = [               // [!annotate] **`extensionPoints`** : Les classes qui ajoutent des fonctionnalités à Nextflow (vos fonctions, la surveillance, etc.)
         'training.plugin.GreetingExtension',
         'training.plugin.GreetingFactory'
     ]
 
 }
 ```
-
-1. **`nextflowVersion`** : Version minimale de Nextflow requise
-2. **`provider`** : Votre nom ou celui de votre organisation
-3. **`className`** : La classe principale du plugin, le point d'entrée que Nextflow charge en premier
-4. **`extensionPoints`** : Les classes qui ajoutent des fonctionnalités à Nextflow (vos fonctions, la surveillance, etc.)
 
 Le bloc `nextflowPlugin` configure :
 
@@ -166,23 +164,23 @@ Le bloc `nextflowPlugin` configure :
 Le modèle génère une valeur `nextflowVersion` qui peut être obsolète.
 Mettez-la à jour pour qu'elle corresponde à votre version de Nextflow installée afin d'assurer une compatibilité complète :
 
-=== "Après"
+<CodeWalkthrough>
 
-    ```groovy title="build.gradle" hl_lines="2"
-    nextflowPlugin {
-        nextflowVersion = '26.04.0'
+```groovy {2} title="build.gradle" step="Avant"
+nextflowPlugin {
+    nextflowVersion = '25.10.0'
 
-        provider = 'training'
-    ```
+    provider = 'training'
+```
 
-=== "Avant"
+```groovy {2} title="build.gradle" step="Après"
+nextflowPlugin {
+    nextflowVersion = '26.04.0'
 
-    ```groovy title="build.gradle" hl_lines="2"
-    nextflowPlugin {
-        nextflowVersion = '25.10.0'
+    provider = 'training'
+```
 
-        provider = 'training'
-    ```
+</CodeWalkthrough>
 
 ---
 
@@ -205,20 +203,7 @@ Les principaux à connaître :
 - `GreetingExtension` fournit les fonctions que ce plugin met à disposition des workflows
 - `GreetingObserver` s'exécute en parallèle du pipeline et répond aux événements sans nécessiter de modifications du code du pipeline
 
-```mermaid
-graph TD
-    A[GreetingPlugin] -->|registers| B[GreetingExtension]
-    A -->|registers| C[GreetingFactory]
-    C -->|creates| D[GreetingObserver]
-
-    B -->|provides| E["@Function methods<br/>(callable from workflows)"]
-    D -->|hooks into| F["Lifecycle events<br/>(onFlowCreate, onProcessComplete, etc.)"]
-
-    style A fill:#e1f5fe
-    style B fill:#fff3e0
-    style C fill:#fff3e0
-    style D fill:#fff3e0
-```
+![](../../../side_quests/plugin_development/img/mermaid-b474be7ef724bbf8.svg)
 
 ---
 
@@ -234,28 +219,31 @@ make install
 
 `make install` compile le code du plugin et le copie dans votre répertoire local de plugins Nextflow (`$NXF_HOME/plugins/`), le rendant disponible à l'utilisation.
 
-??? example "Sortie du build"
+<details class="example">
+<summary>Sortie du build</summary>
 
-    La première fois que vous exécutez cette commande, Gradle se téléchargera lui-même (cela peut prendre une minute) :
+La première fois que vous exécutez cette commande, Gradle se téléchargera lui-même (cela peut prendre une minute) :
 
-    ```console
-    Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
-    ...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+```console
+Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
+...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
 
-    Welcome to Gradle 8.14!
-    ...
+Welcome to Gradle 8.14!
+...
 
-    Deprecated Gradle features were used in this build...
+Deprecated Gradle features were used in this build...
 
-    BUILD SUCCESSFUL in 23s
-    6 actionable tasks: 6 executed
-    ```
+BUILD SUCCESSFUL in 23s
+6 actionable tasks: 6 executed
+```
 
-    **Les avertissements sont attendus.**
+**Les avertissements sont attendus.**
 
-    - **"Downloading gradle..."** : Cela ne se produit que la première fois. Les builds suivants sont beaucoup plus rapides.
-    - **"Deprecated Gradle features..."** : Cet avertissement provient du modèle de plugin, pas de votre code. Vous pouvez l'ignorer en toute sécurité.
-    - **"BUILD SUCCESSFUL"** : C'est ce qui compte. Votre plugin a été compilé sans erreurs.
+- **"Downloading gradle..."** : Cela ne se produit que la première fois. Les builds suivants sont beaucoup plus rapides.
+- **"Deprecated Gradle features..."** : Cet avertissement provient du modèle de plugin, pas de votre code. Vous pouvez l'ignorer en toute sécurité.
+- **"BUILD SUCCESSFUL"** : C'est ce qui compte. Votre plugin a été compilé sans erreurs.
+
+</details>
 
 Retournez dans le répertoire du pipeline :
 
@@ -265,29 +253,29 @@ cd ..
 
 Ajoutez le plugin nf-greeting à `nextflow.config` :
 
-=== "Après"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" hl_lines="4"
-    // Configuration pour les exercices de développement de plugins
-    plugins {
-        id 'nf-schema@2.6.1'
-        id 'nf-greeting@0.1.0'
-    }
-    ```
+```nextflow title="nextflow.config" step="Avant"
+// Configuration pour les exercices de développement de plugins
+plugins {
+    id 'nf-schema@2.6.1'
+}
+```
 
-=== "Avant"
+```nextflow {4} title="nextflow.config" step="Après"
+// Configuration pour les exercices de développement de plugins
+plugins {
+    id 'nf-schema@2.6.1'
+    id 'nf-greeting@0.1.0'
+}
+```
 
-    ```groovy title="nextflow.config"
-    // Configuration pour les exercices de développement de plugins
-    plugins {
-        id 'nf-schema@2.6.1'
-    }
-    ```
+</CodeWalkthrough>
 
-!!! note "Version requise pour les plugins locaux"
-
-    Lors de l'utilisation de plugins installés localement, vous devez spécifier la version (par exemple, `nf-greeting@0.1.0`).
-    Les plugins publiés dans le registre peuvent utiliser uniquement le nom.
+:::note[Version requise pour les plugins locaux]
+Lors de l'utilisation de plugins installés localement, vous devez spécifier la version (par exemple, `nf-greeting@0.1.0`).
+Les plugins publiés dans le registre peuvent utiliser uniquement le nom.
+:::
 
 Exécutez le pipeline :
 
@@ -334,4 +322,4 @@ Vous avez appris que :
 
 Vous allez maintenant implémenter des fonctions personnalisées dans la classe Extension et les utiliser dans le workflow.
 
-[Continuer vers la Partie 3 :material-arrow-right:](03_custom_functions.md){ .md-button .md-button--primary }
+<LinkButton href="03_custom_functions.mdx" variant="primary" icon="right-arrow">Continuer vers la Partie 3</LinkButton>

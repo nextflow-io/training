@@ -1,8 +1,11 @@
-# भाग 3: एक प्रोडक्शन पाइपलाइन चलाना
+---
+title: 'भाग 3: एक प्रोडक्शन पाइपलाइन चलाना'
+description: भाग 2 में, तुमने nf-core/demo के लिए पैरामीटर सेट करना और कॉन्फ़िगरेशन कस्टमाइज़ करना सीखा।
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-[भाग 2](./02_configure_execution.md) में, तुमने nf-core/demo के लिए पैरामीटर सेट करना और कॉन्फ़िगरेशन कस्टमाइज़ करना सीखा।
+[भाग 2](./02_configure_execution.mdx) में, तुमने nf-core/demo के लिए पैरामीटर सेट करना और कॉन्फ़िगरेशन कस्टमाइज़ करना सीखा।
 अब हम जो तुमने सीखा है उसे एक असली प्रोडक्शन पाइपलाइन, nf-core/rnaseq, पर लागू करेंगे।
 
 ---
@@ -21,14 +24,10 @@
 
 ```bash
 nextflow pull nf-core/rnaseq
+# [!output]
+Checking nf-core/rnaseq ...
+ downloaded from https://github.com/nf-core/rnaseq.git - revision: 1f03b53ef7 [master]
 ```
-
-??? success "कमांड आउटपुट"
-
-    ```console
-    Checking nf-core/rnaseq ...
-     downloaded from https://github.com/nf-core/rnaseq.git - revision: 1f03b53ef7 [master]
-    ```
 
 पाइपलाइन अब लोकल में cache हो गई है और चलाने के लिए तैयार है।
 
@@ -38,58 +37,55 @@ nextflow pull nf-core/rnaseq
 
 ```bash
 nextflow run nf-core/rnaseq -profile test,docker --outdir rnaseq-results
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `https://github.com/nf-core/rnaseq` [suspicious_dijkstra] revision: 1f03b53ef7 [master]
+
+------------------------------------------------------
+                                        ,--./,-.
+        ___     __   __   __   ___     /,-._.--~'
+  |\ | |__  __ /  ` /  \ |__) |__         }  {
+  | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                        `._,._,'
+  nf-core/rnaseq 3.26.0
+------------------------------------------------------
+...
+[-        ] NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT  -
+Plus 47 more processes waiting for tasks…
+
+Execution cancelled -- Finishing pending tasks before exit
+-[nf-core/rnaseq] Pipeline completed with errors-
+# [!output stderr]
+ERROR ~ Error executing process > 'NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT (WT_REP2)'
+
+Caused by:
+  Process requirement exceeds available memory -- req: 12 GB; avail: 7.7 GB
+
+
+Command executed:
+
+  fq lint \
+      --disable-validator P001 \
+      SRR6357072_1.fastq.gz SRR6357072_2.fastq.gz > WT_REP2.fq_lint.txt
+
+Command exit status:
+  -
+
+Command output:
+  (empty)
+
+Work dir:
+  /workspaces/training/nfcore-use/work/xx/xxxxxxxxxxxxxxxxxxxxxx
+
+Container:
+  quay.io/biocontainers/fq:0.12.0--h9ee0642_0
+
+Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+ -- Check '.nextflow.log' file for details
+ERROR ~ Pipeline failed. Please refer to troubleshooting docs for common issues: https://nf-co.re/docs/running/troubleshooting
 ```
-
-??? failure "कमांड आउटपुट"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `https://github.com/nf-core/rnaseq` [suspicious_dijkstra] revision: 1f03b53ef7 [master]
-
-    ------------------------------------------------------
-                                            ,--./,-.
-            ___     __   __   __   ___     /,-._.--~'
-      |\ | |__  __ /  ` /  \ |__) |__         }  {
-      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                            `._,._,'
-      nf-core/rnaseq 3.26.0
-    ------------------------------------------------------
-    ...
-    [-        ] NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT  -
-    Plus 47 more processes waiting for tasks…
-
-    Execution cancelled -- Finishing pending tasks before exit
-    -[nf-core/rnaseq] Pipeline completed with errors-
-    ERROR ~ Error executing process > 'NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT (WT_REP2)'
-
-    Caused by:
-      Process requirement exceeds available memory -- req: 12 GB; avail: 7.7 GB
-
-
-    Command executed:
-
-      fq lint \
-          --disable-validator P001 \
-          SRR6357072_1.fastq.gz SRR6357072_2.fastq.gz > WT_REP2.fq_lint.txt
-
-    Command exit status:
-      -
-
-    Command output:
-      (empty)
-
-    Work dir:
-      /workspaces/training/nfcore-use/work/xx/xxxxxxxxxxxxxxxxxxxxxx
-
-    Container:
-      quay.io/biocontainers/fq:0.12.0--h9ee0642_0
-
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
-
-     -- Check '.nextflow.log' file for details
-    ERROR ~ Pipeline failed. Please refer to troubleshooting docs for common issues: https://nf-co.re/docs/running/troubleshooting
-    ```
 
 उस error में मुख्य लाइन यह है:
 
@@ -102,7 +98,7 @@ Process requirement exceeds available memory -- req: 12 GB; avail: 7.7 GB
 
 वह 12 GB `conf/base.config` में परिभाषित `process_low` resource label से आता है:
 
-```groovy title="conf/base.config"
+```nextflow title="conf/base.config"
 withLabel:process_low {
     cpus   = { 2     * task.attempt }
     memory = { 12.GB * task.attempt }
@@ -117,29 +113,32 @@ withLabel:process_low {
 
 हम तुम्हें एक custom config फ़ाइल प्रदान करते हैं जो label-based resource defaults को override करती है।
 
-??? full-code "laptop.config"
+<details class="full-code">
+<summary>laptop.config</summary>
 
-    ```groovy title="laptop.config"
-    process {
-        withLabel: 'process_low' {
-            cpus   = 2
-            memory = 6.GB
-        }
-        withLabel: 'process_medium' {
-            cpus   = 4
-            memory = 6.GB
-        }
-        withLabel: 'process_high' {
-            cpus   = 6
-            memory = 6.GB
-        }
-        withLabel: 'process_high_memory' {
-            memory = 6.GB
-        }
+```nextflow title="laptop.config"
+process {
+    withLabel: 'process_low' {
+        cpus   = 2
+        memory = 6.GB
     }
-    ```
+    withLabel: 'process_medium' {
+        cpus   = 4
+        memory = 6.GB
+    }
+    withLabel: 'process_high' {
+        cpus   = 6
+        memory = 6.GB
+    }
+    withLabel: 'process_high_memory' {
+        memory = 6.GB
+    }
+}
+```
 
-[भाग 2](./02_configure_execution.md) ने `withName:` को एक प्रोसेस को नाम से target करने के लिए पेश किया था।
+</details>
+
+[भाग 2](./02_configure_execution.mdx) ने `withName:` को एक प्रोसेस को नाम से target करने के लिए पेश किया था।
 यहाँ हम `withLabel:` का उपयोग करते हैं ताकि एक साथ उन सभी प्रोसेस को target किया जा सके जो एक label साझा करते हैं।
 
 यह फ़ाइल पहले से तुम्हारी working directory में मौजूद है।
@@ -147,29 +146,25 @@ Overrides लागू करने के लिए इसे `-c` के स�
 
 ```bash
 nextflow run nf-core/rnaseq -profile test,docker -c laptop.config --outdir rnaseq-results
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `https://github.com/nf-core/rnaseq` [romantic_faraday] revision: 1f03b53ef7 [master]
+
+------------------------------------------------------
+                                        ,--./,-.
+        ___     __   __   __   ___     /,-._.--~'
+  |\ | |__  __ /  ` /  \ |__) |__         }  {
+  | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                        `._,._,'
+  nf-core/rnaseq 3.26.0
+------------------------------------------------------
+...
+executor >  local (7)
+[xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FQ_LINT (RAP1_IAA_30M_REP1)   | 3 of 5
+[xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQC (RAP1_IAA_30M_REP1)    | 2 of 5
+...
 ```
-
-??? success "कमांड आउटपुट (पाइपलाइन लॉन्च हो रही है)"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `https://github.com/nf-core/rnaseq` [romantic_faraday] revision: 1f03b53ef7 [master]
-
-    ------------------------------------------------------
-                                            ,--./,-.
-            ___     __   __   __   ___     /,-._.--~'
-      |\ | |__  __ /  ` /  \ |__) |__         }  {
-      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                            `._,._,'
-      nf-core/rnaseq 3.26.0
-    ------------------------------------------------------
-    ...
-    executor >  local (7)
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FQ_LINT (RAP1_IAA_30M_REP1)   | 3 of 5
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQC (RAP1_IAA_30M_REP1)    | 2 of 5
-    ...
-    ```
 
 पाइपलाइन अब चल रही है, और तुम कार्यों को एक-एक करके पूरा होते देख सकते हो।
 इस न्यूनतम test dataset पर यह 15–20 मिनट में पूरी होगी, कुल मिलाकर 200 से अधिक कार्य निष्पादित करेगी।
@@ -180,9 +175,9 @@ Nextflow HPC schedulers (SLURM, PBS, LSF) और cloud platforms (AWS, Google Cl
 
 Seqera Platform (Nextflow के निर्माताओं द्वारा विकसित) HPC या cloud infrastructure पर Nextflow पाइपलाइन लॉन्च करने के लिए एक web-based interface प्रदान करता है (या तो तुम्हारा अपना या तुम्हारे लिए प्रबंधित), जिसमें compute और data management क्षमताएं हैं जो बड़े पैमाने पर पाइपलाइन चलाने की प्रक्रिया को सरल बनाती हैं।
 
-!!! tip "सुझाव"
-
-    शैक्षणिक शोधकर्ता [Seqera academic program](https://seqera.io/academic-program/) के माध्यम से Seqera Platform को निःशुल्क उपयोग कर सकते हैं।
+:::tip[सुझाव]
+शैक्षणिक शोधकर्ता [Seqera academic program](https://seqera.io/academic-program/) के माध्यम से Seqera Platform को निःशुल्क उपयोग कर सकते हैं।
+:::
 
 ### सारांश
 
@@ -192,7 +187,7 @@ Seqera Platform (Nextflow के निर्माताओं द्वार�
 ### आगे क्या है?
 
 तुमने nf-core पाइपलाइन चलाने की मूल बातें सीख ली हैं।
-यहाँ से आगे कहाँ जाना है, इसके लिए [अगले चरण](next_steps.md) देखो।
+यहाँ से आगे कहाँ जाना है, इसके लिए [अगले चरण](next_steps.mdx) देखो।
 
 ---
 

@@ -1,10 +1,13 @@
-# शुरू करना
+---
+title: शुरू करना
+description: 'Seqera के साथ स्केल करें: शुरू करना'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## एक प्रशिक्षण वातावरण शुरू करो
 
-GitHub Codespaces पर हमारे द्वारा प्रदान किए गए pre-built वातावरण का उपयोग करने के लिए, नीचे दिए गए "Open in GitHub Codespaces" बटन पर क्लिक करो। अन्य विकल्पों के लिए, [पर्यावरण विकल्प](../envsetup/index.md) देखो।
+GitHub Codespaces पर हमारे द्वारा प्रदान किए गए pre-built वातावरण का उपयोग करने के लिए, नीचे दिए गए "Open in GitHub Codespaces" बटन पर क्लिक करो। अन्य विकल्पों के लिए, [पर्यावरण विकल्प](../envsetup/index.mdx) देखो।
 
 हम सुझाव देते हैं कि प्रशिक्षण वातावरण को एक नए browser tab या window में खोलो (अपने उपकरण के अनुसार right-click, ctrl-click या cmd-click का उपयोग करो) ताकि वातावरण लोड होते समय तुम पढ़ते रह सको।
 कोर्स के दौरान काम करने के लिए तुम्हें ये निर्देश साथ-साथ खुले रखने होंगे।
@@ -18,7 +21,7 @@ GitHub Codespaces पर हमारे द्वारा प्रदान �
 codespace एक VSCode इंटरफ़ेस के साथ सेट किया गया है, जिसमें एक filesystem explorer, एक code editor और एक terminal shell शामिल है।
 कोर्स के दौरान दिए गए सभी निर्देश (जैसे 'फ़ाइल खोलो', 'कोड संपादित करो' या 'यह कमांड चलाओ') जब तक अन्यथा न कहा जाए, VSCode इंटरफ़ेस के इन्हीं तीन हिस्सों को संदर्भित करते हैं।
 
-अगर तुम यह कोर्स अकेले कर रहे हो, तो अधिक जानकारी के लिए कृपया [वातावरण की मूल बातें](../envsetup/01_setup.md) से परिचित हो जाओ।
+अगर तुम यह कोर्स अकेले कर रहे हो, तो अधिक जानकारी के लिए कृपया [वातावरण की मूल बातें](../envsetup/01_setup.mdx) से परिचित हो जाओ।
 
 ## काम के लिए तैयार हो जाओ
 
@@ -39,13 +42,13 @@ cd seqera-scale/
 code .
 ```
 
-!!! tip "सुझाव"
+:::tip[सुझाव]
+अगर किसी कारण से तुम इस डायरेक्टरी से बाहर चले जाओ (जैसे तुम्हारा codespace सो जाए), तो तुम हमेशा पूरे path का उपयोग करके वापस आ सकते हो, यह मानते हुए कि तुम Github Codespaces प्रशिक्षण वातावरण के अंदर चला रहे हो:
 
-    अगर किसी कारण से तुम इस डायरेक्टरी से बाहर चले जाओ (जैसे तुम्हारा codespace सो जाए), तो तुम हमेशा पूरे path का उपयोग करके वापस आ सकते हो, यह मानते हुए कि तुम Github Codespaces प्रशिक्षण वातावरण के अंदर चला रहे हो:
-
-    ```bash
-    cd /workspaces/training/seqera-scale
-    ```
+```bash
+cd /workspaces/training/seqera-scale
+```
+:::
 
 ### प्रदान की गई सामग्री देखो
 
@@ -56,12 +59,15 @@ code .
 tree -a .
 ```
 
-??? abstract "डायरेक्टरी सामग्री"
+<details class="abstract">
+<summary>डायरेक्टरी सामग्री</summary>
 
-    ```console
-    .
-    └── .seqera_config
-    ```
+```console
+.
+└── .seqera_config
+```
+
+</details>
 
 **`.seqera_config`** फ़ाइल एक stub है जिसे तुम section 3 के दौरान `tw` CLI को अपने Seqera access token और workspace के साथ configure करने के लिए भरोगे।
 
@@ -75,4 +81,4 @@ tree -a .
 
 अगर तुम सभी बॉक्स चेक कर सकते हो, तो तुम जाने के लिए तैयार हो।
 
-**[भाग 1: web interface से पाइपलाइन लॉन्च करो](./01_run_with_seqera.md) पर जारी रखने के लिए, इस पेज के नीचे दाईं ओर के तीर पर क्लिक करो।**
+**[भाग 1: web interface से पाइपलाइन लॉन्च करो](./01_run_with_seqera.mdx) पर जारी रखने के लिए, इस पेज के नीचे दाईं ओर के तीर पर क्लिक करो।**

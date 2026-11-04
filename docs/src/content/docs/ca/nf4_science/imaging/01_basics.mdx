@@ -1,6 +1,9 @@
-# Part 1: Executar operacions bàsiques
+---
+title: 'Part 1: Executar operacions bàsiques'
+description: En aquesta primera part del curs de formació de Nextflow per a Bioimatge, utilitzarem un exemple molt bàsic de Hello World independent del domini per…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 En aquesta primera part del curs de formació de Nextflow per a Bioimatge, utilitzarem un exemple molt bàsic de Hello World independent del domini per demostrar operacions essencials i assenyalar els components de codi de Nextflow corresponents.
 
@@ -19,7 +22,7 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 
 La sortida de la consola hauria de semblar-se a això:
 
-```console title="Output" linenums="1"
+```console title="Output" showLineNumbers
  N E X T F L O W   ~  version 26.04.4
 
 Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d
@@ -32,7 +35,7 @@ Felicitats, acabeu d'executar el vostre primer workflow de Nextflow!
 
 La sortida més important aquí és l'última línia (línia 6):
 
-```console title="Output" linenums="6"
+```console title="Output" showLineNumbers startLineNumber=6
 [71/8143bd] sayHello | 1 of 1 ✔
 ```
 
@@ -45,7 +48,7 @@ Això és genial, però potser us esteu preguntant: on és la sortida?
 Aquest workflow està configurat per publicar la seva sortida a un directori anomenat `results`.
 Si mireu el vostre directori actual, veureu que quan heu executat el workflow, Nextflow ha creat un nou directori anomenat `results`, que conté un fitxer anomenat `output.txt`.
 
-```console title="results/" linenums="1"
+```console title="results/" showLineNumbers
 results
 └── output.txt
 ```
@@ -55,7 +58,7 @@ Obriu el fitxer; el contingut hauria de coincidir amb la salutació que heu espe
 <details>
   <summary>Contingut del fitxer</summary>
 
-```console title="results/output.txt" linenums="1"
+```console title="results/output.txt" showLineNumbers
 Hello World!
 ```
 
@@ -67,10 +70,10 @@ Tanmateix, tingueu en compte que el resultat 'publicat' és una còpia (o en alg
 
 Així que ara, mirarem sota el capó per veure on Nextflow ha executat realment el treball.
 
-!!! warning "Advertència"
-
-    No tots els workflows estaran configurats per publicar sortides a un directori de resultats, i/o el nom del directori pot ser diferent.
-    Una mica més endavant en aquesta secció, us mostrarem com esbrinar on s'especifica aquest comportament.
+:::caution[Advertència]
+No tots els workflows estaran configurats per publicar sortides a un directori de resultats, i/o el nom del directori pot ser diferent.
+Una mica més endavant en aquesta secció, us mostrarem com esbrinar on s'especifica aquest comportament.
+:::
 
 ### 1.3. Trobar la sortida original i els registres al directori `work/`
 
@@ -83,7 +86,7 @@ Això pot sonar confús, així que vegem com es veu a la pràctica.
 
 Tornant a la sortida de consola del workflow que hem executat anteriorment, teníem aquesta línia:
 
-```console title="Excerpt of command output" linenums="6"
+```console title="Excerpt of command output" showLineNumbers startLineNumber=6
 [71/8143bd] sayHello | 1 of 1 ✔
 ```
 
@@ -100,14 +103,14 @@ Això hauria de produir el camí complet del directori: `work/71/8143bd5ed3420e2
 
 Vegem què hi ha allà dins.
 
-!!! Tip "Consell"
+:::tip[Consell]
+Si navegueu pel contingut del subdirectori de tasca a l'explorador de fitxers de VSCode, veureu tots els fitxers immediatament.
+Tanmateix, els fitxers de registre estan configurats per ser invisibles al terminal, així que si voleu utilitzar `ls` o `tree` per visualitzar-los, haureu d'establir l'opció rellevant per mostrar fitxers invisibles.
 
-    Si navegueu pel contingut del subdirectori de tasca a l'explorador de fitxers de VSCode, veureu tots els fitxers immediatament.
-    Tanmateix, els fitxers de registre estan configurats per ser invisibles al terminal, així que si voleu utilitzar `ls` o `tree` per visualitzar-los, haureu d'establir l'opció rellevant per mostrar fitxers invisibles.
-
-    ```bash
-    tree -a work
-    ```
+```bash
+tree -a work
+```
+:::
 
 Els noms exactes dels subdirectoris seran diferents al vostre sistema.
 
@@ -136,7 +139,7 @@ Si l'obriu, trobareu la salutació `Hello World!` de nou.
 <details>
   <summary>Contingut del fitxer output.txt</summary>
 
-```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" showLineNumbers
 Hello World!
 ```
 
@@ -159,16 +162,16 @@ El fitxer `.command.sh` és especialment útil perquè us mostra la comanda prin
 <details>
   <summary>Contingut del fitxer</summary>
 
-```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" showLineNumbers
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
 </details>
 
-!!! Tip "Consell"
-
-    Quan alguna cosa va malament i necessiteu solucionar problemes sobre què ha passat, pot ser útil mirar l'script `command.sh` per comprovar exactament quina comanda ha compost Nextflow basant-se en les instruccions del workflow, la interpolació de variables, etc.
+:::tip[Consell]
+Quan alguna cosa va malament i necessiteu solucionar problemes sobre què ha passat, pot ser útil mirar l'script `command.sh` per comprovar exactament quina comanda ha compost Nextflow basant-se en les instruccions del workflow, la interpolació de variables, etc.
+:::
 
 ### 1.4. Exercici opcional: tornar a executar amb diferents salutacions
 
@@ -200,7 +203,7 @@ Obrim l'script `hello-world.nf` al panell de l'editor.
 <details>
   <summary>Codi</summary>
 
-```groovy title="hello-world.nf" linenums="1"
+```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 /*
@@ -247,7 +250,7 @@ Aquí tenim un **procés** anomenat `sayHello` que pren una variable d'**entrada
 <details>
   <summary>Codi</summary>
 
-```groovy title="hello-world.nf" linenums="3"
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=3
 /*
  * Use echo to print a greeting to a file
  */
@@ -276,13 +279,13 @@ La definició d'`input` inclou el qualificador `val`, que indica a Nextflow que 
 
 La definició d'`output` inclou el qualificador `path`, que indica a Nextflow que això s'ha de gestionar com un camí (inclou tant camins de directori com fitxers).
 
-!!! Tip "Consell"
+:::tip[Consell]
+La definició de sortida no _determina_ quina sortida es crearà.
+Simplement _declara_ on trobar els fitxers de sortida esperats, perquè Nextflow pugui buscar-los una vegada l'execució estigui completa.
 
-    La definició de sortida no _determina_ quina sortida es crearà.
-    Simplement _declara_ on trobar els fitxers de sortida esperats, perquè Nextflow pugui buscar-los una vegada l'execució estigui completa.
-
-    Això és necessari per verificar que la comanda s'ha executat correctament i per passar la sortida a processos posteriors si cal.
-    La sortida produïda que no coincideixi amb el que es declara al bloc de sortida no es passarà als processos posteriors.
+Això és necessari per verificar que la comanda s'ha executat correctament i per passar la sortida a processos posteriors si cal.
+La sortida produïda que no coincideixi amb el que es declara al bloc de sortida no es passarà als processos posteriors.
+:::
 
 En un pipeline del món real, un procés normalment conté informació addicional com ara directives de procés, que introduirem d'aquí a poc.
 
@@ -293,7 +296,7 @@ La definició del workflow comença amb la paraula clau `workflow`, seguida d'un
 
 Aquí tenim un **workflow** que consisteix en una crida al procés `sayHello`, que pren una entrada, `params.greeting`, que conté el valor que hem donat al paràmetre `--greeting`.
 
-```groovy title="hello-world.nf" linenums="22"
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=22
 workflow {
 
     // emet una salutacio
@@ -313,10 +316,10 @@ El `params.greeting` que proporcionem a la crida del procés `sayHello()` és un
 Com s'ha esmentat anteriorment, així és com passem el valor del paràmetre de línia de comandes `--greeting` a la crida del procés `sayHello()`.
 De fet, simplement declarant `params.someParameterName` ens permetrà donar al workflow un paràmetre anomenat `--someParameterName` des de la línia de comandes.
 
-!!! Tip "Consell"
-
-    Aquests paràmetres de workflow declarats utilitzant el sistema `params` sempre prenen dos guions (`--`).
-    Això els distingeix dels paràmetres de nivell de Nextflow, que només prenen un guió (`-`).
+:::tip[Consell]
+Aquests paràmetres de workflow declarats utilitzant el sistema `params` sempre prenen dos guions (`--`).
+Això els distingeix dels paràmetres de nivell de Nextflow, que només prenen un guió (`-`).
+:::
 
 ### Conclusió
 
@@ -351,26 +354,22 @@ Per utilitzar-lo, simplement afegiu `-resume` a la vostra comanda i executeu-la:
 
 ```bash
 nextflow run hello-world.nf --greeting 'Hello World!' -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
+
+[71/8143bd] sayHello | 1 of 1, cached: 1 ✔
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
-
-    [71/8143bd] sayHello | 1 of 1, cached: 1 ✔
-    ```
 
 Busqueu la part `cached:` que s'ha afegit a la línia d'estat del procés, que significa que Nextflow ha reconegut que ja ha fet aquest treball i simplement ha reutilitzat el resultat de l'execució anterior correcta.
 
 També podeu veure que el hash del subdirectori de treball és el mateix que a l'execució anterior.
 Nextflow literalment us està assenyalant l'execució anterior i dient "Ja ho vaig fer allà."
 
-!!! Tip "Consell"
-
-    Quan torneu a executar un pipeline amb `resume`, Nextflow no sobreescriu cap fitxer escrit a un directori `publishDir` per cap crida de procés que s'hagi executat anteriorment amb èxit.
+:::tip[Consell]
+Quan torneu a executar un pipeline amb `resume`, Nextflow no sobreescriu cap fitxer escrit a un directori `publishDir` per cap crida de procés que s'hagi executat anteriorment amb èxit.
+:::
 
 ### 3.2. Inspeccionar el registre d'execucions passades
 
@@ -393,12 +392,12 @@ Nextflow inclou una subcomanda `clean` convenient que pot eliminar automàticame
 
 Podeu utilitzar el registre de Nextflow per buscar una execució basant-vos en la seva marca de temps i/o línia de comandes, després utilitzar `nextflow clean -before <run_name> -f` per eliminar directoris de treball d'execucions anteriors.
 
-!!! Warning "Advertència"
+:::caution[Advertència]
+Eliminar subdirectoris de treball d'execucions passades els elimina de la memòria cau de Nextflow i elimina qualsevol sortida que s'hagi emmagatzemat en aquests directoris.
+Això significa que trenca la capacitat de Nextflow de reprendre l'execució sense tornar a executar els processos corresponents.
 
-    Eliminar subdirectoris de treball d'execucions passades els elimina de la memòria cau de Nextflow i elimina qualsevol sortida que s'hagi emmagatzemat en aquests directoris.
-    Això significa que trenca la capacitat de Nextflow de reprendre l'execució sense tornar a executar els processos corresponents.
-
-    Sou responsables de desar qualsevol sortida que us importi o en la qual tingueu previst confiar! Si esteu utilitzant la directiva `publishDir` per a aquest propòsit, assegureu-vos d'utilitzar el mode `copy`, no el mode `symlink`.
+Sou responsables de desar qualsevol sortida que us importi o en la qual tingueu previst confiar! Si esteu utilitzant la directiva `publishDir` per a aquest propòsit, assegureu-vos d'utilitzar el mode `copy`, no el mode `symlink`.
+:::
 
 ### Conclusió
 

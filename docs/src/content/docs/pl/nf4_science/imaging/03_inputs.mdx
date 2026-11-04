@@ -1,6 +1,9 @@
-# Część 3: Organizowanie danych wejściowych
+---
+title: 'Część 3: Organizowanie danych wejściowych'
+description: W Części 2 uruchomiliśmy molkart z wieloma parametrami w wierszu poleceń.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 W Części 2 uruchomiliśmy molkart z wieloma parametrami w wierszu poleceń.
 Teraz poznamy dwa lepsze podejścia do zarządzania wejściami: **pliki parametrów** oraz **arkusze próbek**.
@@ -122,9 +125,9 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! Warning "Ostrzeżenie"
-
-    Zauważ, że ścieżki w arkuszu próbek są względne względem miejsca, **z którego uruchamiasz** Nextflow'a, a nie względem miejsca, w którym znajduje się arkusz próbek.
+:::caution[Ostrzeżenie]
+Zauważ, że ścieżki w arkuszu próbek są względne względem miejsca, **z którego uruchamiasz** Nextflow'a, a nie względem miejsca, w którym znajduje się arkusz próbek.
+:::
 
 Na koniec wykonajmy nf-core/molkart jeszcze raz z arkuszem próbek zawierającym lokalne ścieżki do plików:
 

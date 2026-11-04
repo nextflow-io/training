@@ -1,6 +1,9 @@
-# Teil 3: Eingaben organisieren
+---
+title: 'Teil 3: Eingaben organisieren'
+description: In Teil 2 haben wir molkart mit mehreren Parametern über die Kommandozeile ausgeführt.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 In Teil 2 haben wir molkart mit mehreren Parametern über die Kommandozeile ausgeführt.
 Jetzt lernen wir zwei bessere Ansätze zum Verwalten von Eingaben kennen: **Parameterdateien** und **Samplesheets**.
@@ -122,9 +125,9 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! Warning "Warnung"
-
-    Beachte, dass die Pfade im Samplesheet relativ zu dem Ort sind, an dem du Nextflow **ausführst**, nicht wo sich das Samplesheet befindet.
+:::caution[Warnung]
+Beachte, dass die Pfade im Samplesheet relativ zu dem Ort sind, an dem du Nextflow **ausführst**, nicht wo sich das Samplesheet befindet.
+:::
 
 Lass uns schließlich nf-core/molkart noch einmal mit dem Samplesheet mit lokalen Dateipfaden ausführen:
 

@@ -1,22 +1,25 @@
-# Part 2: Crear un projecte de plugin
+---
+title: 'Part 2: Crear un projecte de plugin'
+description: Heu vist com els plugins amplien Nextflow amb funcionalitats reutilitzables.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Heu vist com els plugins amplien Nextflow amb funcionalitats reutilitzables.
 Ara en creareu un de propi, començant amb una plantilla de projecte que gestiona la configuració de compilació per vosaltres.
 
-!!! tip "Comenceu des d'aquí?"
+:::tip[Comenceu des d'aquí?]
+Si us incorporeu en aquesta part, copieu la solució de la Part 1 per utilitzar-la com a punt de partida:
 
-    Si us incorporeu en aquesta part, copieu la solució de la Part 1 per utilitzar-la com a punt de partida:
+```bash
+cp -r solutions/1-plugin-basics/* .
+```
+:::
 
-    ```bash
-    cp -r solutions/1-plugin-basics/* .
-    ```
-
-!!! info "Documentació oficial"
-
-    Aquesta secció i les que segueixen cobreixen els aspectes essencials del desenvolupament de plugins.
-    Per a més detalls, consulteu la [documentació oficial de desenvolupament de plugins de Nextflow](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html).
+:::note[Documentació oficial]
+Aquesta secció i les que segueixen cobreixen els aspectes essencials del desenvolupament de plugins.
+Per a més detalls, consulteu la [documentació oficial de desenvolupament de plugins de Nextflow](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html).
+:::
 
 ---
 
@@ -34,9 +37,9 @@ Plugin created successfully at path: /workspaces/training/side-quests/plugin_dev
 
 El primer argument és el nom del plugin, i el segon és el nom de la vostra organització (s'utilitza per organitzar el codi generat en carpetes).
 
-!!! tip "Creació manual"
-
-    També podeu crear projectes de plugin manualment o utilitzar la [plantilla nf-hello](https://github.com/nextflow-io/nf-hello) a GitHub com a punt de partida.
+:::tip[Creació manual]
+També podeu crear projectes de plugin manualment o utilitzar la [plantilla nf-hello](https://github.com/nextflow-io/nf-hello) a GitHub com a punt de partida.
+:::
 
 ---
 
@@ -137,22 +140,17 @@ plugins {
 version = '0.1.0'
 
 nextflowPlugin {
-    nextflowVersion = '25.10.0'       // (1)!
+    nextflowVersion = '25.10.0'       // [!annotate] **`nextflowVersion`**: Versió mínima de Nextflow requerida
 
-    provider = 'training'             // (2)!
-    className = 'training.plugin.GreetingPlugin'  // (3)!
-    extensionPoints = [               // (4)!
+    provider = 'training'             // [!annotate] **`provider`**: El vostre nom o organització
+    className = 'training.plugin.GreetingPlugin'  // [!annotate] **`className`**: La classe principal del plugin, el punt d'entrada que Nextflow carrega primer
+    extensionPoints = [               // [!annotate] **`extensionPoints`**: Classes que afegeixen funcionalitats a Nextflow (les vostres funcions, monitoratge, etc.)
         'training.plugin.GreetingExtension',
         'training.plugin.GreetingFactory'
     ]
 
 }
 ```
-
-1. **`nextflowVersion`**: Versió mínima de Nextflow requerida
-2. **`provider`**: El vostre nom o organització
-3. **`className`**: La classe principal del plugin, el punt d'entrada que Nextflow carrega primer
-4. **`extensionPoints`**: Classes que afegeixen funcionalitats a Nextflow (les vostres funcions, monitoratge, etc.)
 
 El bloc `nextflowPlugin` configura:
 
@@ -166,23 +164,23 @@ El bloc `nextflowPlugin` configura:
 La plantilla genera un valor de `nextflowVersion` que pot estar desactualitzat.
 Actualitzeu-lo perquè coincideixi amb la versió de Nextflow instal·lada per garantir la compatibilitat total:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="build.gradle" hl_lines="2"
-    nextflowPlugin {
-        nextflowVersion = '26.04.0'
+```groovy {2} title="build.gradle" step="Abans"
+nextflowPlugin {
+    nextflowVersion = '25.10.0'
 
-        provider = 'training'
-    ```
+    provider = 'training'
+```
 
-=== "Abans"
+```groovy {2} title="build.gradle" step="Després"
+nextflowPlugin {
+    nextflowVersion = '26.04.0'
 
-    ```groovy title="build.gradle" hl_lines="2"
-    nextflowPlugin {
-        nextflowVersion = '25.10.0'
+    provider = 'training'
+```
 
-        provider = 'training'
-    ```
+</CodeWalkthrough>
 
 ---
 
@@ -205,20 +203,7 @@ Els més importants a tenir en compte:
 - `GreetingExtension` proporciona les funcions que aquest plugin posa a disposició dels workflows
 - `GreetingObserver` s'executa paral·lelament al pipeline i respon a esdeveniments sense requerir canvis al codi del pipeline
 
-```mermaid
-graph TD
-    A[GreetingPlugin] -->|registers| B[GreetingExtension]
-    A -->|registers| C[GreetingFactory]
-    C -->|creates| D[GreetingObserver]
-
-    B -->|provides| E["@Function methods<br/>(callable from workflows)"]
-    D -->|hooks into| F["Lifecycle events<br/>(onFlowCreate, onProcessComplete, etc.)"]
-
-    style A fill:#e1f5fe
-    style B fill:#fff3e0
-    style C fill:#fff3e0
-    style D fill:#fff3e0
-```
+![](../../../side_quests/plugin_development/img/mermaid-b474be7ef724bbf8.svg)
 
 ---
 
@@ -234,28 +219,31 @@ make install
 
 `make install` compila el codi del plugin i el copia al directori local de plugins de Nextflow (`$NXF_HOME/plugins/`), fent-lo disponible per utilitzar.
 
-??? example "Sortida de la compilació"
+<details class="example">
+<summary>Sortida de la compilació</summary>
 
-    La primera vegada que executeu això, Gradle es descarregarà a si mateix (pot trigar un minut):
+La primera vegada que executeu això, Gradle es descarregarà a si mateix (pot trigar un minut):
 
-    ```console
-    Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
-    ...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+```console
+Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
+...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
 
-    Welcome to Gradle 8.14!
-    ...
+Welcome to Gradle 8.14!
+...
 
-    Deprecated Gradle features were used in this build...
+Deprecated Gradle features were used in this build...
 
-    BUILD SUCCESSFUL in 23s
-    6 actionable tasks: 6 executed
-    ```
+BUILD SUCCESSFUL in 23s
+6 actionable tasks: 6 executed
+```
 
-    **Els avisos són esperats.**
+**Els avisos són esperats.**
 
-    - **"Downloading gradle..."**: Això només passa la primera vegada. Les compilacions posteriors són molt més ràpides.
-    - **"Deprecated Gradle features..."**: Aquest avís prové de la plantilla del plugin, no del vostre codi. Es pot ignorar sense problemes.
-    - **"BUILD SUCCESSFUL"**: Això és el que importa. El vostre plugin s'ha compilat sense errors.
+- **"Downloading gradle..."**: Això només passa la primera vegada. Les compilacions posteriors són molt més ràpides.
+- **"Deprecated Gradle features..."**: Aquest avís prové de la plantilla del plugin, no del vostre codi. Es pot ignorar sense problemes.
+- **"BUILD SUCCESSFUL"**: Això és el que importa. El vostre plugin s'ha compilat sense errors.
+
+</details>
 
 Torneu al directori del pipeline:
 
@@ -265,29 +253,29 @@ cd ..
 
 Afegiu el plugin nf-greeting a `nextflow.config`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" hl_lines="4"
-    // Configuració per als exercicis de desenvolupament de plugins
-    plugins {
-        id 'nf-schema@2.6.1'
-        id 'nf-greeting@0.1.0'
-    }
-    ```
+```nextflow title="nextflow.config" step="Abans"
+// Configuració per als exercicis de desenvolupament de plugins
+plugins {
+    id 'nf-schema@2.6.1'
+}
+```
 
-=== "Abans"
+```nextflow {4} title="nextflow.config" step="Després"
+// Configuració per als exercicis de desenvolupament de plugins
+plugins {
+    id 'nf-schema@2.6.1'
+    id 'nf-greeting@0.1.0'
+}
+```
 
-    ```groovy title="nextflow.config"
-    // Configuració per als exercicis de desenvolupament de plugins
-    plugins {
-        id 'nf-schema@2.6.1'
-    }
-    ```
+</CodeWalkthrough>
 
-!!! note "Versió requerida per als plugins locals"
-
-    Quan s'utilitzen plugins instal·lats localment, cal especificar la versió (p. ex., `nf-greeting@0.1.0`).
-    Els plugins publicats al registre poden utilitzar només el nom.
+:::note[Versió requerida per als plugins locals]
+Quan s'utilitzen plugins instal·lats localment, cal especificar la versió (p. ex., `nf-greeting@0.1.0`).
+Els plugins publicats al registre poden utilitzar només el nom.
+:::
 
 Executeu el pipeline:
 
@@ -334,4 +322,4 @@ Heu après que:
 
 Ara implementareu funcions personalitzades a la classe Extension i les utilitzareu al workflow.
 
-[Continua a la Part 3 :material-arrow-right:](03_custom_functions.md){ .md-button .md-button--primary }
+<LinkButton href="03_custom_functions.mdx" variant="primary" icon="right-arrow">Continua a la Part 3</LinkButton>

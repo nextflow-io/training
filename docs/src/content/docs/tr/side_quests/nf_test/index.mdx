@@ -1,6 +1,9 @@
-# nf-test ile Test Etme
+---
+title: nf-test ile Test Etme
+description: İş akışınızın her parçasının beklenen şekilde çalıştığını sistematik olarak doğrulayabilmek; tekrarlanabilirlik ve uzun vadeli bakım açısından kritik öneme…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 İş akışınızın her parçasının beklenen şekilde çalıştığını sistematik olarak doğrulayabilmek; tekrarlanabilirlik ve uzun vadeli bakım açısından kritik öneme sahiptir ve geliştirme sürecinde büyük bir yardım sağlayabilir.
 
@@ -47,18 +50,18 @@ Bu beceriler, pipeline projelerinizde kapsamlı bir test stratejisi uygulamanız
 
 Bu yan göreve başlamadan önce şunları yapmanız gerekir:
 
-- [Hello Nextflow](../../hello_nextflow/index.md) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmanız.
+- [Hello Nextflow](../../hello_nextflow/index.mdx) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmanız.
 - Temel Nextflow kavramları ve mekanizmalarını (süreçler, kanallar, operatörler, dosyalarla çalışma, meta veri) rahatça kullanabilmeniz.
 
-!!! warning "nf-test sürüm gereksinimi"
+:::caution[nf-test sürüm gereksinimi]
+Süreç düzeyinde testler **nf-test 0.9.3 veya daha yeni bir sürüm** gerektirir. Daha eski sürümler (0.9.2 dahil), Nextflow'un 26.04 sürümünden itibaren varsayılan olarak kullandığı katı sözdizimi ayrıştırıcısıyla uyumsuz test iskelet kodu üretir; bu durum beklenen test sonucu yerine `Script compilation failed` hatasına neden olur.
 
-    Süreç düzeyinde testler **nf-test 0.9.3 veya daha yeni bir sürüm** gerektirir. Daha eski sürümler (0.9.2 dahil), Nextflow'un 26.04 sürümünden itibaren varsayılan olarak kullandığı katı sözdizimi ayrıştırıcısıyla uyumsuz test iskelet kodu üretir; bu durum beklenen test sonucu yerine `Script compilation failed` hatasına neden olur.
+Sürümünüzü `nf-test version` komutuyla kontrol edebilirsiniz. Yükseltmeniz gerekiyorsa:
 
-    Sürümünüzü `nf-test version` komutuyla kontrol edebilirsiniz. Yükseltmeniz gerekiyorsa:
-
-    ```bash
-    curl -fsSL https://code.askimed.com/install/nf-test | bash
-    ```
+```bash
+curl -fsSL https://code.askimed.com/install/nf-test | bash
+```
+:::
 
 ---
 
@@ -66,7 +69,7 @@ Bu yan göreve başlamadan önce şunları yapmanız gerekir:
 
 #### Eğitim kod alanını açın
 
-Henüz yapmadıysanız, eğitim ortamını [Ortam Kurulumu](../../envsetup/index.md) bölümünde açıklandığı şekilde açtığınızdan emin olun.
+Henüz yapmadıysanız, eğitim ortamını [Ortam Kurulumu](../../envsetup/index.mdx) bölümünde açıklandığı şekilde açtığınızdan emin olun.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -95,97 +98,103 @@ Bir ana iş akışı dosyası ve pipeline'ın girdisini içeren `greetings.csv` 
 └── nextflow.config
 ```
 
-Dosyaların ayrıntılı açıklaması için [Hello Nextflow'daki ısınma bölümüne](../../hello_nextflow/00_orientation.md) bakın.
+Dosyaların ayrıntılı açıklaması için [Hello Nextflow'daki ısınma bölümüne](../../hello_nextflow/00_orientation.mdx) bakın.
 
-Test edeceğimiz iş akışı, [Hello Workflow](../../hello_nextflow/03_hello_workflow.md) bölümünde oluşturulan Hello iş akışının bir alt kümesidir.
+Test edeceğimiz iş akışı, [Hello Workflow](../../hello_nextflow/03_hello_workflow.mdx) bölümünde oluşturulan Hello iş akışının bir alt kümesidir.
 
-??? example "Hello Nextflow iş akışı ne yapar?"
+<details class="example">
+<summary>Hello Nextflow iş akışı ne yapar?</summary>
 
-    [Hello Nextflow](../../hello_nextflow/index.md) eğitimini yapmadıysanız, bu basit iş akışının ne yaptığına dair kısa bir genel bakış:
+[Hello Nextflow](../../hello_nextflow/index.mdx) eğitimini yapmadıysanız, bu basit iş akışının ne yaptığına dair kısa bir genel bakış:
 
-    İş akışı, selamlamaları içeren bir CSV dosyası alır, bunlar üzerinde dört ardışık dönüşüm adımı çalıştırır ve eğlenceli bir karakterin selamlamaları söylediğini gösteren ASCII resmi içeren tek bir metin dosyası çıktısı verir.
+İş akışı, selamlamaları içeren bir CSV dosyası alır, bunlar üzerinde dört ardışık dönüşüm adımı çalıştırır ve eğlenceli bir karakterin selamlamaları söylediğini gösteren ASCII resmi içeren tek bir metin dosyası çıktısı verir.
 
-    Dört adım, ayrı modül dosyalarında saklanan Nextflow süreçleri (`sayHello`, `convertToUpper`, `collectGreetings` ve `cowpy`) olarak uygulanmıştır.
+Dört adım, ayrı modül dosyalarında saklanan Nextflow süreçleri (`sayHello`, `convertToUpper`, `collectGreetings` ve `cowpy`) olarak uygulanmıştır.
 
-    1. **`sayHello`:** Her selamlamayı kendi çıktı dosyasına yazar (örn. "Hello-output.txt")
-    2. **`convertToUpper`:** Her selamlamayı büyük harfe dönüştürür (örn. "HELLO")
-    3. **`collectGreetings`:** Tüm büyük harfli selamlamaları tek bir toplu dosyada toplar
-    4. **`cowpy`:** `cowpy` aracını kullanarak ASCII sanatı oluşturur
+1. **`sayHello`:** Her selamlamayı kendi çıktı dosyasına yazar (örn. "Hello-output.txt")
+2. **`convertToUpper`:** Her selamlamayı büyük harfe dönüştürür (örn. "HELLO")
+3. **`collectGreetings`:** Tüm büyük harfli selamlamaları tek bir toplu dosyada toplar
+4. **`cowpy`:** `cowpy` aracını kullanarak ASCII sanatı oluşturur
 
-    Sonuçlar `results/` adlı bir dizine yayımlanır ve pipeline'ın nihai çıktısı (varsayılan parametrelerle çalıştırıldığında), büyük harfli selamlamaları söyleyen bir karakterin ASCII sanatını içeren düz bir metin dosyasıdır.
+Sonuçlar `results/` adlı bir dizine yayımlanır ve pipeline'ın nihai çıktısı (varsayılan parametrelerle çalıştırıldığında), büyük harfli selamlamaları söyleyen bir karakterin ASCII sanatını içeren düz bir metin dosyasıdır.
 
-    Bu yan görevde, yalnızca ilk iki süreci içeren Hello iş akışının ara bir formunu kullanıyoruz. <!-- TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 -->
+Bu yan görevde, yalnızca ilk iki süreci içeren Hello iş akışının ara bir formunu kullanıyoruz. {/* TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 */}
+
+</details>
 
 Üzerinde çalışacağımız alt küme iki süreçten oluşmaktadır: `sayHello` ve `convertToUpper`.
 Tam iş akışı kodunu aşağıda görebilirsiniz.
 
-??? example "İş akışı kodu"
+<details class="example">
+<summary>İş akışı kodu</summary>
 
-    ```groovy title="main.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="main.nf"
+#!/usr/bin/env nextflow
 
-    /*
-     * Pipeline parametreleri
-     */
-    params.input_file = "greetings.csv"
+/*
+ * Pipeline parametreleri
+ */
+params.input_file = "greetings.csv"
 
-    /*
-     * Standart çıktıya 'Hello World!' yazdırmak için echo kullan
-     */
-    process sayHello {
+/*
+ * Standart çıktıya 'Hello World!' yazdırmak için echo kullan
+ */
+process sayHello {
 
-        input:
-        val greeting
+    input:
+    val greeting
 
-        output:
-        path "${greeting}-output.txt"
+    output:
+    path "${greeting}-output.txt"
 
-        script:
-        """
-        echo '$greeting' > '$greeting-output.txt'
-        """
+    script:
+    """
+    echo '$greeting' > '$greeting-output.txt'
+    """
+}
+
+/*
+ * Selamlamayı büyük harfe dönüştürmek için metin değiştirme aracı kullan
+ */
+process convertToUpper {
+
+    input:
+    path input_file
+
+    output:
+    path "UPPER-${input_file}"
+
+    script:
+    """
+    cat $input_file | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
+    """
+}
+
+workflow {
+    main:
+    // CSV dosyasından girdiler için bir kanal oluştur
+    greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
+
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
+
+    // selamlamayı büyük harfe dönüştür
+    convertToUpper(sayHello.out)
+
+    publish:
+    greetings = sayHello.out
+    upper_greetings = convertToUpper.out
+}
+
+output {
+    greetings {
     }
-
-    /*
-     * Selamlamayı büyük harfe dönüştürmek için metin değiştirme aracı kullan
-     */
-    process convertToUpper {
-
-        input:
-        path input_file
-
-        output:
-        path "UPPER-${input_file}"
-
-        script:
-        """
-        cat $input_file | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
-        """
+    upper_greetings {
     }
+}
+```
 
-    workflow {
-        main:
-        // CSV dosyasından girdiler için bir kanal oluştur
-        greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
-
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
-
-        // selamlamayı büyük harfe dönüştür
-        convertToUpper(sayHello.out)
-
-        publish:
-        greetings = sayHello.out
-        upper_greetings = convertToUpper.out
-    }
-
-    output {
-        greetings {
-        }
-        upper_greetings {
-        }
-    }
-    ```
+</details>
 
 #### İş akışını çalıştırın
 
@@ -235,7 +244,7 @@ Test yazılımı esasen bu süreci bizim için otomatikleştirir.
 
 Göreviniz, yapılacak olası değişiklikler durumunda her parçanın beklenen şekilde çalışmaya devam ettiğini kolayca doğrulayabilmek için nf-test kullanarak bu iş akışına standartlaştırılmış testler eklemektir.
 
-<!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
+{/* TODO: give a bit more details, similar to how it's done in the Metadata side quest */}
 
 #### Hazırlık kontrol listesi
 
@@ -427,26 +436,26 @@ Test dosyasına geri dönelim ve `when` bloğundaki dosya yolunu değiştirelim.
 
 Testte pipeline'ın köküne nasıl işaret edeceğimizi merak ediyor olabilirsiniz. Bu yaygın bir durum olduğundan, nf-test işimizi kolaylaştırmak için kullanabileceğimiz bir dizi global değişken sunar. Tam listeyi [buradan](https://www.nf-test.com/docs/testcases/global_variables/) bulabilirsiniz; ancak şimdilik pipeline projesinin kökü anlamına gelen `projectDir` değişkenini kullanacağız.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="3"
-    when {
-        params {
-            input_file = "${projectDir}/greetings.csv"
-        }
+```groovy {3,4} title="tests/main.nf.test" showLineNumbers step="Önce"
+when {
+    params {
+        // parametreleri burada tanımlayın. Örnek:
+        // outdir = "tests/results"
     }
-    ```
+}
+```
 
-=== "Önce"
-
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="3 4"
-    when {
-        params {
-            // parametreleri burada tanımlayın. Örnek:
-            // outdir = "tests/results"
-        }
+```groovy {3} title="tests/main.nf.test" showLineNumbers step="Sonra"
+when {
+    params {
+        input_file = "${projectDir}/greetings.csv"
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 Çalışıp çalışmadığını görmek için testi tekrar çalıştıralım.
 
@@ -525,42 +534,42 @@ Basit bir kontrol, pipeline'ımızın beklediğimiz tüm süreçleri çalıştı
 
 Pipeline'ın beklenen sayıda süreci çalıştırıp çalıştırmadığını kontrol etmek için testimize bir assertion ekleyelim. Ayrıca test adını neyi test ettiğimizi daha iyi yansıtacak şekilde güncelleyeceğiz.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="1 11"
-        test("Should run successfully with correct number of processes") {
+```groovy {1} title="tests/main.nf.test" showLineNumbers step="Önce"
+    test("Should run without failures") {
 
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
             }
-
-            then {
-                assert workflow.success
-                assert workflow.trace.tasks().size() == 6
-            }
-
         }
-    ```
 
-=== "Önce"
-
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="1"
-        test("Should run without failures") {
-
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
-            }
-
-            then {
-                assert workflow.success
-            }
-
+        then {
+            assert workflow.success
         }
-    ```
+
+    }
+```
+
+```groovy {1,11} title="tests/main.nf.test" showLineNumbers step="Sonra"
+    test("Should run successfully with correct number of processes") {
+
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert workflow.trace.tasks().size() == 6
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 Test adı artık gerçekte neyi doğruladığımızı daha iyi yansıtıyor; yalnızca pipeline'ın başarısız olmadan çalışıp çalışmadığını değil, beklenen sayıda süreci çalıştırıp çalıştırmadığını da kontrol ediyoruz.
 
@@ -591,62 +600,62 @@ Başarılı! Pipeline başarıyla çalışıyor ve test geçiyor. Artık pipelin
 
 Çıktı dosyasının oluşturulup oluşturulmadığını kontrol etmek için testimize bir assertion ekleyelim. Sonuçların yorumlanmasını kolaylaştırmak için bunu bilgilendirici bir adla ayrı bir test olarak ekleyeceğiz.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="14-33"
-        test("Should run successfully with correct number of processes") {
+```groovy {14} title="tests/main.nf.test" showLineNumbers step="Önce"
+    test("Should run successfully with correct number of processes") {
 
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
             }
-
-            then {
-                assert workflow.success
-                assert workflow.trace.tasks().size() == 6
-            }
-
         }
 
-        test("Should produce correct output files") {
-
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
-            }
-
-            then {
-                assert file("$launchDir/results/Bonjour-output.txt").exists()
-                assert file("$launchDir/results/Hello-output.txt").exists()
-                assert file("$launchDir/results/Hola-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Hola-output.txt").exists()
-            }
-
+        then {
+            assert workflow.success
+            assert workflow.trace.tasks().size() == 6
         }
-    ```
 
-=== "Önce"
+    }
+```
 
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="14"
-        test("Should run successfully with correct number of processes") {
+```groovy {14-33} title="tests/main.nf.test" showLineNumbers step="Sonra"
+    test("Should run successfully with correct number of processes") {
 
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
             }
-
-            then {
-                assert workflow.success
-                assert workflow.trace.tasks().size() == 6
-            }
-
         }
-    ```
+
+        then {
+            assert workflow.success
+            assert workflow.trace.tasks().size() == 6
+        }
+
+    }
+
+    test("Should produce correct output files") {
+
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
+            }
+        }
+
+        then {
+            assert file("$launchDir/results/Bonjour-output.txt").exists()
+            assert file("$launchDir/results/Hello-output.txt").exists()
+            assert file("$launchDir/results/Hola-output.txt").exists()
+            assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
+            assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
+            assert file("$launchDir/results/UPPER-Hola-output.txt").exists()
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 Çalışıp çalışmadığını görmek için testi tekrar çalıştırın.
 
@@ -784,58 +793,58 @@ Test Process sayHello
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
-`sayHello` süreci 1 girdi bildirdiği ancak 0 argümanla çağrıldığı için test başarısız oldu. Sürece bir girdi ekleyerek bunu düzeltelim. [Hello Workflow](../../hello_nextflow/03_hello_workflow.md) bölümünden (ve yukarıdaki ısınma bölümünden) hatırlayacağınız üzere, `sayHello` sürecimiz sağlamamız gereken tek bir değer girdisi alır. Ayrıca test adını neyi test ettiğimizi daha iyi yansıtacak şekilde düzeltmeliyiz.
+`sayHello` süreci 1 girdi bildirdiği ancak 0 argümanla çağrıldığı için test başarısız oldu. Sürece bir girdi ekleyerek bunu düzeltelim. [Hello Workflow](../../hello_nextflow/03_hello_workflow.mdx) bölümünden (ve yukarıdaki ısınma bölümünden) hatırlayacağınız üzere, `sayHello` sürecimiz sağlamamız gereken tek bir değer girdisi alır. Ayrıca test adını neyi test ettiğimizi daha iyi yansıtacak şekilde düzeltmeliyiz.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 10"
-        test("Should run without failures and produce correct output") {
+```groovy {1,10,11} title="tests/main.sayhello.nf.test" showLineNumbers step="Önce"
+    test("Should run without failures") {
 
-            when {
-                params {
-                    // parametreleri burada tanımlayın. Örnek:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    input[0] = "hello"
-                    """
-                }
+        when {
+            params {
+                // parametreleri burada tanımlayın. Örnek:
+                // outdir = "tests/results"
             }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
+            process {
+                """
+                // sürecin girdilerini burada tanımlayın. Örnek:
+                // input[0] = file("test-file.txt")
+                """
             }
-
         }
-    ```
 
-=== "Önce"
-
-    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 10 11"
-        test("Should run without failures") {
-
-            when {
-                params {
-                    // parametreleri burada tanımlayın. Örnek:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    // sürecin girdilerini burada tanımlayın. Örnek:
-                    // input[0] = file("test-file.txt")
-                    """
-                }
-            }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
-            }
-
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
         }
-    ```
+
+    }
+```
+
+```groovy {1,10} title="tests/main.sayhello.nf.test" showLineNumbers step="Sonra"
+    test("Should run without failures and produce correct output") {
+
+        when {
+            params {
+                // parametreleri burada tanımlayın. Örnek:
+                // outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = "hello"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 Çalışıp çalışmadığını görmek için testi tekrar çalıştıralım.
 
@@ -887,9 +896,9 @@ Burada yazdırmayacağız, ancak süreç ve süreç çıktılarının ayrıntıl
 
 Bu, açıkça test ettiğimiz `sayHello` süreci tarafından oluşturulan çıktıları temsil eder. Testi yeniden çalıştırırsak, program yeni çıktının başlangıçta kaydedilen çıktıyla eşleşip eşleşmediğini kontrol edecektir. Bu, süreç çıktılarının değişmediğini test etmenin hızlı ve basit bir yoludur; bu nedenle nf-test bunu varsayılan olarak sunar.
 
-!!! warning "Uyarı"
-
-    Bu, orijinal çalıştırmada kaydettiğimiz çıktının doğru olduğundan emin olmamız gerektiği anlamına gelir!
+:::caution[Uyarı]
+Bu, orijinal çalıştırmada kaydettiğimiz çıktının doğru olduğundan emin olmamız gerektiği anlamına gelir!
+:::
 
 Gelecekteki geliştirme sürecinde, kodda çıktının farklı olmasına neden olan bir şey değişirse, test başarısız olacak ve değişikliğin beklenen bir değişiklik olup olmadığını belirlememiz gerekecektir.
 
@@ -927,55 +936,55 @@ Snapshot'lar çıktıdaki herhangi bir değişikliği yakalamak için harika ols
 
 Testimizi belirli içerikleri kontrol edecek şekilde nasıl değiştirebileceğimiz aşağıda gösterilmiştir:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 5 16 17"
-        test("Should run without failures and contain expected greeting") {
+```groovy {1,5,6,17} title="tests/main.sayhello.nf.test" showLineNumbers step="Önce"
+    test("Should run without failures and produce correct output") {
 
-            when {
-                params {
-                    // parametreleri burada tanımlayın
-                }
-                process {
-                    """
-                    input[0] = "hello"
-                    """
-                }
+        when {
+            params {
+                // parametreleri burada tanımlayın. Örnek:
+                // outdir = "tests/results"
             }
-
-            then {
-                assert process.success
-                assert path(process.out[0][0]).readLines().contains('hello')
-                assert !path(process.out[0][0]).readLines().contains('HELLO')
+            process {
+                """
+                input[0] = "hello"
+                """
             }
-
         }
-    ```
 
-=== "Önce"
-
-    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 5 6 17"
-        test("Should run without failures and produce correct output") {
-
-            when {
-                params {
-                    // parametreleri burada tanımlayın. Örnek:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    input[0] = "hello"
-                    """
-                }
-            }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
-            }
-
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
         }
-    ```
+
+    }
+```
+
+```groovy {1,5,16,17} title="tests/main.sayhello.nf.test" showLineNumbers step="Sonra"
+    test("Should run without failures and contain expected greeting") {
+
+        when {
+            params {
+                // parametreleri burada tanımlayın
+            }
+            process {
+                """
+                input[0] = "hello"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert path(process.out[0][0]).readLines().contains('hello')
+            assert !path(process.out[0][0]).readLines().contains('HELLO')
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 nf-test'in süreç çıktılarını liste listesi olarak gördüğüne dikkat edin; bu nedenle `process.out[0][0]`, bu süreçten gelen ilk kanal öğesinin (veya 'yayının') ilk bölümünü alır.
 
@@ -1055,56 +1064,56 @@ Bu, `sayHello` sürecine benzer bir test, ancak `convertToUpper` sürecini test 
 
 Şimdilik, pipeline düzeyindeki testte kullandığımız örneği kullanarak mevcut `greetings.csv` dosyasını yeniden kullanalım. Daha önce olduğu gibi, neyi test ettiğimizi daha iyi yansıtmak için testi adlandırabiliriz; ancak bu sefer (diğer süreçte yaptığımız gibi belirli dizeler kontrol etmek yerine) içeriği 'snapshot' olarak bırakalım.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.converttoupper.nf.test" linenums="1" hl_lines="1 10"
-        test("Should run without failures and produce correct output") {
+```groovy {1,10,11} title="tests/main.converttoupper.nf.test" showLineNumbers step="Önce"
+    test("Should run without failures") {
 
-            when {
-                params {
-                    // parametreleri burada tanımlayın. Örnek:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    input[0] = "${projectDir}/greetings.csv"
-                    """
-                }
+        when {
+            params {
+                // parametreleri burada tanımlayın. Örnek:
+                // outdir = "tests/results"
             }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
+            process {
+                """
+                // sürecin girdilerini burada tanımlayın. Örnek:
+                // input[0] = file("test-file.txt")
+                """
             }
-
         }
-    ```
 
-=== "Önce"
-
-    ```groovy title="tests/main.converttoupper.nf.test" linenums="1" hl_lines="1 10 11"
-        test("Should run without failures") {
-
-            when {
-                params {
-                    // parametreleri burada tanımlayın. Örnek:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    // sürecin girdilerini burada tanımlayın. Örnek:
-                    // input[0] = file("test-file.txt")
-                    """
-                }
-            }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
-            }
-
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
         }
-    ```
+
+    }
+```
+
+```groovy {1,10} title="tests/main.converttoupper.nf.test" showLineNumbers step="Sonra"
+    test("Should run without failures and produce correct output") {
+
+        when {
+            params {
+                // parametreleri burada tanımlayın. Örnek:
+                // outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = "${projectDir}/greetings.csv"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 Ve testi çalıştırın!
 
@@ -1229,7 +1238,7 @@ Bu teknikleri kendi çalışmalarınızda uygulamak şunları sağlamanıza olan
 
 ### Temel kalıplar
 
-<!-- TODO: Can we add snippets of code below to illustrate? -->
+{/* TODO: Can we add snippets of code below to illustrate? */}
 
 1. Pipeline düzeyinde testler:
    - Temel başarı testi
@@ -1257,4 +1266,4 @@ Daha gelişmiş test özellikleri ve en iyi uygulamalar için [nf-test belgeleri
 
 ## Sırada ne var?
 
-[Yan Görevler menüsüne](../index.md) dönün veya listedeki bir sonraki konuya geçmek için sayfanın sağ alt köşesindeki düğmeye tıklayın.
+[Yan Görevler menüsüne](../index.mdx) dönün veya listedeki bir sonraki konuya geçmek için sayfanın sağ alt köşesindeki düğmeye tıklayın.

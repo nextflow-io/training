@@ -1,16 +1,22 @@
-# Bölüm 2: Hello Channels
+---
+title: 'Bölüm 2: Hello Channels'
+description: Bu kursun 1. Bölümünde (Hello World), bir sürece değişken girdi sağlamak için girdiyi doğrudan süreç çağrısında nasıl ileteceğinizi gösterdik…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+<figure>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
+<figcaption>
 
-/// caption
-:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube kanalında [tüm oynatma listesini](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) izleyin.
+Nextflow YouTube kanalında [tüm oynatma listesini](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) izleyin.
 
-:green_book: Video transkripti [burada](./transcripts/02_hello_channels.md) mevcuttur.
-///
+📗 Video transkripti [burada](./transcripts/02_hello_channels.mdx) mevcuttur.
+
+</figcaption>
+</figure>
 
 Bu kursun 1. Bölümünde (Hello World), bir sürece değişken girdi sağlamak için girdiyi doğrudan süreç çağrısında nasıl ileteceğinizi gösterdik: `sayHello(params.input)`.
 Bu kasıtlı olarak basitleştirilmiş bir yaklaşımdı.
@@ -23,9 +29,12 @@ Kanallar, girdileri verimli bir şekilde işlemek ve çok adımlı iş akışlar
 Bu kursun bu bölümünde, çeşitli farklı kaynaklardan gelen birden fazla girdiyi işlemek için bir kanalı nasıl kullanacağınızı öğreneceksiniz.
 Ayrıca kanal içeriklerini gerektiği gibi dönüştürmek için [**operatörleri**](https://nextflow.io/docs/latest/reference/operator.html) nasıl kullanacağınızı da öğreneceksiniz.
 
-??? info "Bu bölümden nasıl başlanır"
+<details class="info">
+<summary>Bu bölümden nasıl başlanır</summary>
 
-    Bu kursun bu bölümü, [Hello Nextflow](./index.md) kursunun 1. Bölümünü tamamladığınızı varsayar, ancak o bölümde ele alınan temel konulara hakimseniz, özel bir şey yapmadan buradan başlayabilirsiniz.
+Bu kursun bu bölümü, [Hello Nextflow](./index.mdx) kursunun 1. Bölümünü tamamladığınızı varsayar, ancak o bölümde ele alınan temel konulara hakimseniz, özel bir şey yapmadan buradan başlayabilirsiniz.
+
+</details>
 
 ---
 
@@ -34,7 +43,7 @@ Ayrıca kanal içeriklerini gerektiği gibi dönüştürmek için [**operatörle
 Başlangıç noktası olarak `hello-channels.nf` iş akışı betiğini kullanacağız.
 Bu betik, bu eğitim kursunun 1. Bölümünde üretilen betiğe eşdeğerdir; ancak çıktı hedefini değiştirdik:
 
-```groovy title="hello-channels.nf" linenums="37" hl_lines="3"
+```nextflow {3} title="hello-channels.nf" showLineNumbers startLineNumber=37
 output {
     first_output {
         path 'hello_channels'
@@ -47,43 +56,45 @@ Her şeyin çalıştığından emin olmak için, herhangi bir değişiklik yapma
 
 ```bash
 nextflow run hello-channels.nf --input 'Hello Channels!'
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-channels.nf` [wise_jennings] revision: b24f4902d6
+
+executor >  local (1)
+[6f/824bc1] sayHello | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output: hello_channels/output.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-channels.nf` [wise_jennings] revision: b24f4902d6
-
-    executor >  local (1)
-    [6f/824bc1] sayHello | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output: hello_channels/output.txt
-    ```
 
 Daha önce olduğu gibi, çıktı dosyasını `output.txt` adıyla `results/hello_channels` dizininde bulacaksınız (yukarıda gösterilen iş akışı betiğinin `output` bloğunda belirtildiği gibi).
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console title="results/hello_channels" hl_lines="2-3"
-    results
-    ├── hello_channels
-    │   └── output.txt
-    ├── hello_world
-    │   └── output.txt
-    └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
-    ```
+```console {2-3} title="results/hello_channels"
+results
+├── hello_channels
+│   └── output.txt
+├── hello_world
+│   └── output.txt
+└── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
+```
 
-??? abstract "Dosya içeriği"
+</details>
 
-    ```console title="results/hello_channels/output.txt"
-    Hello Channels!
-    ```
+<details class="abstract">
+<summary>Dosya içeriği</summary>
+
+```console title="results/hello_channels/output.txt"
+Hello Channels!
+```
+
+</details>
 
 Bu sizin için çalıştıysa, kanallar hakkında öğrenmeye hazırsınız.
 
@@ -107,45 +118,43 @@ greeting_ch = channel.of('Hello Channels!')
 
 Bu, `channel.of()` kanal fabrikasını kullanarak `greeting_ch` adında bir kanal oluşturur; bu fabrika basit bir kuyruk kanalı kurar ve selamlama değeri olarak kullanılmak üzere `'Hello Channels!'` dizesini yükler.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.svg"
-</figure>
+![](../../hello_nextflow/img/hello-pipeline-channel.excalidraw.svg)
 
-!!! note "Not"
-
-    Okunabilirlik adına geçici olarak sabit kodlanmış dizelere dönüyoruz ve CLI parametresi kullanmıyoruz. Kanal düzeyinde neler olduğunu ele aldıktan sonra CLI parametrelerini kullanmaya geri döneceğiz.
+:::note[Not]
+Okunabilirlik adına geçici olarak sabit kodlanmış dizelere dönüyoruz ve CLI parametresi kullanmıyoruz. Kanal düzeyinde neler olduğunu ele aldıktan sonra CLI parametrelerini kullanmaya geri döneceğiz.
+:::
 
 İş akışı bloğunda, kanal fabrikası kodunu ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="4 5"
-    workflow {
+```nextflow title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Önce"
+workflow {
 
-        main:
-        // girdiler için bir kanal oluştur
-        greeting_ch = channel.of('Hello Channels!')
-        // bir selamlama yayınla
-        sayHello(params.input)
+    main:
+    // bir selamlama yayınla
+    sayHello(params.input)
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+    publish:
+    first_output = sayHello.out
+}
+```
 
-=== "Önce"
+```nextflow {4,5} title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Sonra"
+workflow {
 
-    ```groovy title="hello-channels.nf" linenums="27"
-    workflow {
+    main:
+    // girdiler için bir kanal oluştur
+    greeting_ch = channel.of('Hello Channels!')
+    // bir selamlama yayınla
+    sayHello(params.input)
 
-        main:
-        // bir selamlama yayınla
-        sayHello(params.input)
+    publish:
+    first_output = sayHello.out
+}
+```
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+</CodeWalkthrough>
 
 Süreç çağrısına girdiyi henüz değiştirmediğimiz için bu henüz işlevsel değil.
 
@@ -155,37 +164,37 @@ Süreç çağrısına girdiyi henüz değiştirmediğimiz için bu henüz işlev
 
 İş akışı bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
-    workflow {
+```nextflow {7} title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Önce"
+workflow {
 
-        main:
-        // girdiler için bir kanal oluştur
-        greeting_ch = channel.of('Hello Channels!')
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    main:
+    // girdiler için bir kanal oluştur
+    greeting_ch = channel.of('Hello Channels!')
+    // bir selamlama yayınla
+    sayHello(params.input)
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+    publish:
+    first_output = sayHello.out
+}
+```
 
-=== "Önce"
+```nextflow {7} title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Sonra"
+workflow {
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
-    workflow {
+    main:
+    // girdiler için bir kanal oluştur
+    greeting_ch = channel.of('Hello Channels!')
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        main:
-        // girdiler için bir kanal oluştur
-        greeting_ch = channel.of('Hello Channels!')
-        // bir selamlama yayınla
-        sayHello(params.input)
+    publish:
+    first_output = sayHello.out
+}
+```
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+</CodeWalkthrough>
 
 Bu, Nextflow'a `sayHello` sürecini `greeting_ch` kanalının içerikleri üzerinde çalıştırmasını söyler.
 
@@ -197,34 +206,33 @@ Hadi çalıştıralım!
 
 ```bash
 nextflow run hello-channels.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-channels.nf` [fabulous_crick] revision: 23e20f76e8
+
+executor >  local (1)
+[c0/4f1872] sayHello (1) | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_channels/output.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-channels.nf` [fabulous_crick] revision: 23e20f76e8
-
-    executor >  local (1)
-    [c0/4f1872] sayHello (1) | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_channels/output.txt
-    ```
 
 Her iki düzenlemeyi de doğru yaptıysanız, başarılı bir yürütme elde etmelisiniz.
 Sonucun hâlâ daha önce olduğu gibi olduğundan emin olmak için results dizinini kontrol edebilirsiniz.
 
-??? abstract "Dosya içeriği"
+<details class="abstract">
+<summary>Dosya içeriği</summary>
 
-    ```console title="results/hello_channels/output.txt"
-    Hello Channels!
-    ```
+```console title="results/hello_channels/output.txt"
+Hello Channels!
+```
+
+</details>
 
 Böylece aynı sonuca ulaşırken iş akışımızın esnekliğini artırdık.
 Bu, somut bir fayda olmadan daha fazla kod yazmak gibi görünebilir, ancak daha fazla girdiyi işlemeye başladığımızda değeri netleşecek.
@@ -240,38 +248,38 @@ Nextflow kanalları, içerikler üzerinde operatörler kullanarak işlem yapmam�
 
 Bu küçük satırı iş akışı bloğuna ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="6"
-    workflow {
+```nextflow title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Önce"
+workflow {
 
-        main:
-        // girdiler için bir kanal oluştur
-        greeting_ch = channel.of('Hello Channels!')
-                             .view()
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    main:
+    // girdiler için bir kanal oluştur
+    greeting_ch = channel.of('Hello Channels!')
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+    publish:
+    first_output = sayHello.out
+}
+```
 
-=== "Önce"
+```nextflow {6} title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Sonra"
+workflow {
 
-    ```groovy title="hello-channels.nf" linenums="27"
-    workflow {
+    main:
+    // girdiler için bir kanal oluştur
+    greeting_ch = channel.of('Hello Channels!')
+                         .view()
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        main:
-        // girdiler için bir kanal oluştur
-        greeting_ch = channel.of('Hello Channels!')
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    publish:
+    first_output = sayHello.out
+}
+```
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+</CodeWalkthrough>
 
 Tam boşluk miktarı 4'ün katı olduğu sürece önemli değil; amacımız `.view()` ifadesinin başlangıcını kanal yapımının `.of()` kısmına hizalamak.
 
@@ -279,26 +287,22 @@ Tam boşluk miktarı 4'ün katı olduğu sürece önemli değil; amacımız `.vi
 
 ```bash
 nextflow run hello-channels.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-channels.nf` [scruffy_shaw] revision: 2ede41e14a
+
+executor >  local (1)
+[ef/f7e40a] sayHello (1) | 1 of 1 ✔
+Hello Channels! # [!code highlight]
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_channels/output.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console hl_lines="7"
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-channels.nf` [scruffy_shaw] revision: 2ede41e14a
-
-    executor >  local (1)
-    [ef/f7e40a] sayHello (1) | 1 of 1 ✔
-    Hello Channels!
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_channels/output.txt
-    ```
 
 Gördüğünüz gibi, bu kanal içeriklerini konsola çıktı olarak verir.
 Burada yalnızca bir öğemiz var, ancak bir sonraki bölümde kanala birden fazla değer yüklemeye başladığımızda, bunun satır başına bir öğe çıktısı verecek şekilde ayarlandığını göreceksiniz.
@@ -328,21 +332,21 @@ Bunları `'Hello'`, `'Bonjour'` ve `'Hola'` yapalım.
 
 İş akışı bloğundan önce, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
-    // girdiler için bir kanal oluştur
-    greeting_ch = channel.of('Hello','Bonjour','Hola')
-                         .view()
-    ```
+```nextflow {2} title="hello-channels.nf" showLineNumbers startLineNumber=30 step="Önce"
+// girdiler için bir kanal oluştur
+greeting_ch = channel.of('Hello Channels')
+                     .view()
+```
 
-=== "Önce"
+```nextflow {2} title="hello-channels.nf" showLineNumbers startLineNumber=30 step="Sonra"
+// girdiler için bir kanal oluştur
+greeting_ch = channel.of('Hello','Bonjour','Hola')
+                     .view()
+```
 
-    ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
-    // girdiler için bir kanal oluştur
-    greeting_ch = channel.of('Hello Channels')
-                         .view()
-    ```
+</CodeWalkthrough>
 
 Dokümantasyon bunun çalışması gerektiğini söylüyor. Gerçekten bu kadar basit olabilir mi?
 
@@ -352,84 +356,90 @@ Hadi deneyelim.
 
 ```bash
 nextflow run hello-channels.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-channels.nf` [amazing_crick] revision: 59a9a5888a
+
+executor >  local (3)
+[f4/c9962c] sayHello (1) | 3 of 3 ✔ # [!code highlight]
+Hello
+Bonjour
+Hola
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_channels/output.txt
+    - hello_channels/output.txt
+    - hello_channels/output.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console hl_lines="6"
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-channels.nf` [amazing_crick] revision: 59a9a5888a
-
-    executor >  local (3)
-    [f4/c9962c] sayHello (1) | 3 of 3 ✔
-    Hello
-    Bonjour
-    Hola
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_channels/output.txt
-        - hello_channels/output.txt
-        - hello_channels/output.txt
-    ```
 
 Kesinlikle sorunsuz çalışmış görünüyor.
 Yürütme monitörü `sayHello` süreci için `3 of 3` çağrı yapıldığını gösteriyor ve söz verildiği gibi `view()` ifadesi tarafından sıralanan üç selamlamayı satır başına bir tane olarak görüyoruz.
 
 Ancak, results dizininde hâlâ yalnızca bir çıktı var:
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console title="results/hello_channels" hl_lines="3"
-    results
-    ├── hello_channels
-    │   └── output.txt
-    ├── hello_world
-    │   └── output.txt
-    └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
-    ```
+```console {3} title="results/hello_channels"
+results
+├── hello_channels
+│   └── output.txt
+├── hello_world
+│   └── output.txt
+└── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
+```
 
-??? abstract "Dosya içeriği"
+</details>
 
-    ```console title="results/hello_channels/output.txt"
-    Hola
-    ```
+<details class="abstract">
+<summary>Dosya içeriği</summary>
+
+```console title="results/hello_channels/output.txt"
+Hola
+```
+
+</details>
 
 Orada üç selamlamadan birini görmelisiniz, ancak aldığınız burada gösterilenden farklı olabilir.
 Bunun neden olabileceğini düşünebilir misiniz?
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
-</figure>
+![](../../hello_nextflow/img/hello-pipeline-channel-multi.excalidraw.svg)
 
 _Diyagramda, kanal yeşil renkte temsil edilmektedir ve öğelerin sırası bir borudaki misketler gibi temsil edilmektedir: ilk yüklenen sağda, sonra ikincisi ortada, sonra üçüncüsü soldadır._
 
 Yürütme monitörüne geri baktığımızda, bize yalnızca bir alt dizin yolu verdi (`f4/c9962c`).
 Hadi oraya bir göz atalım.
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console hl_lines="9"
-    work/f4/c9962ce91ef87480babcb86b2b9042/
-    ├── .command.begin
-    ├── .command.err
-    ├── .command.log
-    ├── .command.out
-    ├── .command.run
-    ├── .command.sh
-    ├── .exitcode
-    └── output.txt
-    ```
+```console {9}
+work/f4/c9962ce91ef87480babcb86b2b9042/
+├── .command.begin
+├── .command.err
+├── .command.log
+├── .command.out
+├── .command.run
+├── .command.sh
+├── .exitcode
+└── output.txt
+```
 
-??? abstract "Dosya içeriği"
+</details>
 
-    ```console title="work/f4/c9962ce91ef87480babcb86b2b9042/output.txt"
-    Hello
-    ```
+<details class="abstract">
+<summary>Dosya içeriği</summary>
+
+```console title="work/f4/c9962ce91ef87480babcb86b2b9042/output.txt"
+Hello
+```
+
+</details>
 
 Bu results dizininde aldığımız selamlama bile değil! Neler oluyor?
 
@@ -444,29 +454,25 @@ Loglamayı süreç çağrısı başına bir satır görüntüleyecek şekilde ge
 
 ```bash
 nextflow run hello-channels.nf -ansi-log false
+# [!output]
+N E X T F L O W  ~  version 26.04.4
+Launching `hello-channels.nf` [desperate_monod] - revision: 59a9a5888a
+Hello
+Bonjour
+Hola
+[23/871c7e] Submitted process > sayHello (2)
+[7f/21e2c2] Submitted process > sayHello (1)
+[f4/ea10a6] Submitted process > sayHello (3)
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_channels/output.txt
+    - hello_channels/output.txt
+    - hello_channels/output.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W  ~  version 26.04.4
-    Launching `hello-channels.nf` [desperate_monod] - revision: 59a9a5888a
-    Hello
-    Bonjour
-    Hola
-    [23/871c7e] Submitted process > sayHello (2)
-    [7f/21e2c2] Submitted process > sayHello (1)
-    [f4/ea10a6] Submitted process > sayHello (3)
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_channels/output.txt
-        - hello_channels/output.txt
-        - hello_channels/output.txt
-    ```
 
 Bu sefer çıktıda listelenen üç süreç çalışmasını ve bunlarla ilişkili work alt dizinlerini görüyoruz.
 
@@ -474,71 +480,75 @@ Bu çok daha iyi, en azından basit bir iş akışı için.
 Karmaşık bir iş akışı veya çok sayıda girdi için, tam listenin terminale çıktı olarak verilmesi biraz bunaltıcı olurdu.
 Bu nedenle `-ansi-log false` varsayılan davranış değil.
 
-!!! tip "İpucu"
-
-    Durumun raporlanma şekli iki loglama modu arasında biraz farklıdır.
-    Yoğunlaştırılmış modda, Nextflow çağrıların başarıyla tamamlanıp tamamlanmadığını raporlar.
-    Bu genişletilmiş modda, yalnızca gönderildiklerini raporlar.
+:::tip[İpucu]
+Durumun raporlanma şekli iki loglama modu arasında biraz farklıdır.
+Yoğunlaştırılmış modda, Nextflow çağrıların başarıyla tamamlanıp tamamlanmadığını raporlar.
+Bu genişletilmiş modda, yalnızca gönderildiklerini raporlar.
+:::
 
 Her neyse, artık her süreç çağrısının alt dizinlerine sahip olduğumuza göre, loglarına ve çıktılarına bakabiliriz.
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console
-    work/23/871c7ec3642a898ecd5e6090d21300/
-    ├── .command.begin
-    ├── .command.err
-    ├── .command.log
-    ├── .command.out
-    ├── .command.run
-    ├── .command.sh
-    ├── .exitcode
-    └── output.txt
-    ```
+```console
+work/23/871c7ec3642a898ecd5e6090d21300/
+├── .command.begin
+├── .command.err
+├── .command.log
+├── .command.out
+├── .command.run
+├── .command.sh
+├── .exitcode
+└── output.txt
+```
 
-    ```console
-    work/7f/21e2c2f3cc8833ef3858b236e5575c/
-    ├── .command.begin
-    ├── .command.err
-    ├── .command.log
-    ├── .command.out
-    ├── .command.run
-    ├── .command.sh
-    ├── .exitcode
-    └── output.txt
-    ```
+```console
+work/7f/21e2c2f3cc8833ef3858b236e5575c/
+├── .command.begin
+├── .command.err
+├── .command.log
+├── .command.out
+├── .command.run
+├── .command.sh
+├── .exitcode
+└── output.txt
+```
 
-    ```console
-    work/f4/ea10a680d5687596d3eaa3fcf69272/
-    ├── .command.begin
-    ├── .command.err
-    ├── .command.log
-    ├── .command.out
-    ├── .command.run
-    ├── .command.sh
-    ├── .exitcode
-    └── output.txt
-    ```
+```console
+work/f4/ea10a680d5687596d3eaa3fcf69272/
+├── .command.begin
+├── .command.err
+├── .command.log
+├── .command.out
+├── .command.run
+├── .command.sh
+├── .exitcode
+└── output.txt
+```
 
-??? abstract "Dosya içeriği"
+</details>
 
-    ```txt title="work/23/871c7ec3642a898ecd5e6090d21300/output.txt"
-    Bonjour
-    ```
+<details class="abstract">
+<summary>Dosya içeriği</summary>
 
-    ```txt title="work/7f/21e2c2f3cc8833ef3858b236e5575c/output.txt"
-    Hello
-    ```
+```txt title="work/23/871c7ec3642a898ecd5e6090d21300/output.txt"
+Bonjour
+```
 
-    ```txt title="work/f4/ea10a680d5687596d3eaa3fcf69272/output.txt"
-    Hola
-    ```
+```txt title="work/7f/21e2c2f3cc8833ef3858b236e5575c/output.txt"
+Hello
+```
+
+```txt title="work/f4/ea10a680d5687596d3eaa3fcf69272/output.txt"
+Hola
+```
+
+</details>
 
 Bu, üç sürecin de başarıyla çalıştığını gösteriyor (yaşasın).
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-channels-task-dirs.svg"
-</figure>
+![](../../hello_nextflow/img/hello-channels-task-dirs.excalidraw.svg)
 
 Bununla birlikte, results dizininde hâlâ yalnızca bir çıktı dosyası olması sorunu var.
 
@@ -556,55 +566,53 @@ Peki dosya adlarını nasıl benzersiz yaparız?
 Bunu yapmanın yaygın bir yolu, girdilerden (girdi kanalından alınan) bazı benzersiz meta verileri çıktı dosya adının bir parçası olarak kullanmaktır.
 Burada, kolaylık olsun diye, yalnızca kısa bir dize olduğu için selamlamanın kendisini kullanacağız ve bunu temel çıktı dosya adının önüne ekleyeceğiz.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi-unique.svg"
-</figure>
+![](../../hello_nextflow/img/hello-pipeline-channel-multi-unique.excalidraw.svg)
 
 #### 2.2.1. Dinamik bir çıktı dosya adı oluşturun
 
 Süreç bloğunda, aşağıdaki kod değişikliklerini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-channels.nf" linenums="6" hl_lines="7 11"
-    process sayHello {
+```nextflow {7,11} title="hello-channels.nf" showLineNumbers startLineNumber=6 step="Önce"
+process sayHello {
 
-        input:
-        val greeting
+    input:
+    val greeting
 
-        output:
-        path "${greeting}-output.txt"
+    output:
+    path 'output.txt'
 
-        script:
-        """
-        echo '${greeting}' > '${greeting}-output.txt'
-        """
-    }
-    ```
+    script:
+    """
+    echo '${greeting}' > output.txt
+    """
+}
+```
 
-=== "Önce"
+```nextflow {7,11} title="hello-channels.nf" showLineNumbers startLineNumber=6 step="Sonra"
+process sayHello {
 
-    ```groovy title="hello-channels.nf" linenums="6" hl_lines="7 11"
-    process sayHello {
+    input:
+    val greeting
 
-        input:
-        val greeting
+    output:
+    path "${greeting}-output.txt"
 
-        output:
-        path 'output.txt'
+    script:
+    """
+    echo '${greeting}' > '${greeting}-output.txt'
+    """
+}
+```
 
-        script:
-        """
-        echo '${greeting}' > output.txt
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 `output.txt` ifadesini hem çıktı tanımında hem de `script:` komut bloğunda değiştirdiğinizden emin olun.
 
-!!! tip "İpucu"
-
-    Çıktı tanımında, çıktı dosya adı ifadesinin etrafında çift tırnak kullanmalısınız (tek tırnak DEĞİL), aksi takdirde başarısız olacaktır.
+:::tip[İpucu]
+Çıktı tanımında, çıktı dosya adı ifadesinin etrafında çift tırnak kullanmalısınız (tek tırnak DEĞİL), aksi takdirde başarısız olacaktır.
+:::
 
 Bu, süreç her çağrıldığında benzersiz bir çıktı dosya adı üretmelidir, böylece çıktı dizinindeki aynı sürece yapılan diğer çağrıların çıktılarından ayırt edilebilir.
 
@@ -614,66 +622,68 @@ Hadi çalıştıralım. Varsayılan ANSI log ayarlarıyla çalıştırmaya geri 
 
 ```bash
 nextflow run hello-channels.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-channels.nf` [sharp_minsky] revision: 16a291febe
+
+executor >  local (3)
+[e8/33ee64] sayHello (2) | 3 of 3 ✔
+Hello
+Bonjour
+Hola
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_channels/Bonjour-output.txt
+    - hello_channels/Hola-output.txt
+    - hello_channels/Hello-output.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-channels.nf` [sharp_minsky] revision: 16a291febe
-
-    executor >  local (3)
-    [e8/33ee64] sayHello (2) | 3 of 3 ✔
-    Hello
-    Bonjour
-    Hola
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_channels/Bonjour-output.txt
-        - hello_channels/Hola-output.txt
-        - hello_channels/Hello-output.txt
-    ```
 
 Özet görünümüne geri döndüğümüzde, çıktı tekrar bir satırda özetleniyor.
 Tüm çıktı selamlamalarının orada olup olmadığını görmek için `results` dizinine bakın.
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console
-    results/hello_channels/
-    ├── Bonjour-output.txt
-    ├── Hello-output.txt
-    ├── Hola-output.txt
-    └── output.txt
-    ```
+```console
+results/hello_channels/
+├── Bonjour-output.txt
+├── Hello-output.txt
+├── Hola-output.txt
+└── output.txt
+```
 
-??? abstract "Dosya içeriği"
+</details>
 
-    ```console title="Bonjour-output.txt"
-    Bonjour
-    ```
+<details class="abstract">
+<summary>Dosya içeriği</summary>
 
-    ```console title="Hello-output.txt"
-    Hello
-    ```
+```console title="Bonjour-output.txt"
+Bonjour
+```
 
-    ```console title="Hola-output.txt"
-    Hola
-    ```
+```console title="Hello-output.txt"
+Hello
+```
+
+```console title="Hola-output.txt"
+Hola
+```
+
+</details>
 
 Başarılı! Artık çıktı dosyalarının üzerine yazılması konusunda endişelenmeden istediğimiz kadar selamlama ekleyebiliriz.
 
-!!! tip "İpucu"
-
-    Pratikte, dosyaları girdi verilerine dayalı olarak adlandırmak neredeyse her zaman pratik değildir.
-    Dinamik dosya adları oluşturmanın daha iyi yolu, meta verileri girdi dosyalarıyla birlikte bir sürece iletmektir.
-    Meta veriler genellikle bir 'örnek sayfası' veya eşdeğerleri aracılığıyla sağlanır.
-    Bunu daha sonra Nextflow eğitiminizde öğreneceksiniz (bkz. [Meta veri yan görevi](../side_quests/metadata/index.md)).
+:::tip[İpucu]
+Pratikte, dosyaları girdi verilerine dayalı olarak adlandırmak neredeyse her zaman pratik değildir.
+Dinamik dosya adları oluşturmanın daha iyi yolu, meta verileri girdi dosyalarıyla birlikte bir sürece iletmektir.
+Meta veriler genellikle bir 'örnek sayfası' veya eşdeğerleri aracılığıyla sağlanır.
+Bunu daha sonra Nextflow eğitiminizde öğreneceksiniz (bkz. [Meta veri yan görevi](../side_quests/metadata/index.mdx)).
+:::
 
 ### Özetle
 
@@ -696,9 +706,7 @@ Ya bu birden fazla girdiyi farklı bir şekilde sağlamak istersek?
 
 Bunu çıktı kanalımıza yükleyip çalışmasını bekleyebilir miyiz?
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-array.svg"
-</figure>
+![](../../hello_nextflow/img/hello-pipeline-multi-inputs-array.excalidraw.svg)
 
 Hadi öğrenelim.
 
@@ -711,41 +719,41 @@ Hadi deneyelim; girdi değişkenini kurmamız ve kanal fabrikasına yüklememiz 
 
 Az önce hayal ettiğimiz `greetings_array` değişkenini iş akışı bloğuna ekleyerek gerçeğe dönüştürelim:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="4 5"
-    workflow {
+```nextflow title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Önce"
+workflow {
 
-        main:
-        // bir girdi selamlama dizisi tanımla
-        greetings_array = ['Hello','Bonjour','Hola']
-        // girdiler için bir kanal oluştur
-        greeting_ch = channel.of('Hello','Bonjour','Hola')
-                             .view()
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    main:
+    // girdiler için bir kanal oluştur
+    greeting_ch = channel.of('Hello','Bonjour','Hola')
+                         .view()
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+    publish:
+    first_output = sayHello.out
+}
+```
 
-=== "Önce"
+```nextflow {4,5} title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Sonra"
+workflow {
 
-    ```groovy title="hello-channels.nf" linenums="27"
-    workflow {
+    main:
+    // bir girdi selamlama dizisi tanımla
+    greetings_array = ['Hello','Bonjour','Hola']
+    // girdiler için bir kanal oluştur
+    greeting_ch = channel.of('Hello','Bonjour','Hola')
+                         .view()
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        main:
-        // girdiler için bir kanal oluştur
-        greeting_ch = channel.of('Hello','Bonjour','Hola')
-                             .view()
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    publish:
+    first_output = sayHello.out
+}
+```
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+</CodeWalkthrough>
 
 Bu henüz işlevsel değil, sadece dizi için bir tanımlama ekledik.
 
@@ -755,43 +763,43 @@ Bu henüz işlevsel değil, sadece dizi için bir tanımlama ekledik.
 
 İş akışı bloğunda, aşağıdaki değişikliği yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
-    workflow {
+```nextflow {7} title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Önce"
+workflow {
 
-        main:
-        // bir girdi selamlama dizisi tanımla
-        greetings_array = ['Hello','Bonjour','Hola']
-        // girdiler için bir kanal oluştur
-        greeting_ch = channel.of(greetings_array)
-                             .view()
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    main:
+    // bir girdi selamlama dizisi tanımla
+    greetings_array = ['Hello','Bonjour','Hola']
+    // girdiler için bir kanal oluştur
+    greeting_ch = channel.of('Hello','Bonjour','Hola')
+                         .view()
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+    publish:
+    first_output = sayHello.out
+}
+```
 
-=== "Önce"
+```nextflow {7} title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Sonra"
+workflow {
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
-    workflow {
+    main:
+    // bir girdi selamlama dizisi tanımla
+    greetings_array = ['Hello','Bonjour','Hola']
+    // girdiler için bir kanal oluştur
+    greeting_ch = channel.of(greetings_array)
+                         .view()
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        main:
-        // bir girdi selamlama dizisi tanımla
-        greetings_array = ['Hello','Bonjour','Hola']
-        // girdiler için bir kanal oluştur
-        greeting_ch = channel.of('Hello','Bonjour','Hola')
-                             .view()
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    publish:
+    first_output = sayHello.out
+}
+```
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+</CodeWalkthrough>
 
 Bu artık işlevsel olmalı.
 
@@ -801,41 +809,38 @@ Hadi çalıştırmayı deneyelim:
 
 ```bash
 nextflow run hello-channels.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-channels.nf` [friendly_koch] revision: 97256837a7
+
+executor >  local (1)
+[a8/1f6ead] sayHello (1) | 0 of 1
+[Hello, Bonjour, Hola] # [!code highlight]
+# [!output stderr]
+ERROR ~ Error executing process > 'sayHello (1)'
+
+Caused by:
+  Missing output file(s) `[Hello, Bonjour, Hola]-output.txt` expected by process `sayHello (1)` # [!code highlight]
+
+
+Command executed:
+
+  echo '[Hello, Bonjour, Hola]' > '[Hello, Bonjour, Hola]-output.txt' # [!code highlight]
+
+Command exit status:
+  0
+
+Command output:
+  (empty)
+
+Work dir:
+  /workspaces/training/hello-nextflow/work/a8/1f6ead5f3fa30a3c508e2e7cf83ffb
+
+Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+-- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console hl_lines="7 11 16"
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-channels.nf` [friendly_koch] revision: 97256837a7
-
-    executor >  local (1)
-    [a8/1f6ead] sayHello (1) | 0 of 1
-    [Hello, Bonjour, Hola]
-    ERROR ~ Error executing process > 'sayHello (1)'
-
-    Caused by:
-      Missing output file(s) `[Hello, Bonjour, Hola]-output.txt` expected by process `sayHello (1)`
-
-
-    Command executed:
-
-      echo '[Hello, Bonjour, Hola]' > '[Hello, Bonjour, Hola]-output.txt'
-
-    Command exit status:
-      0
-
-    Command output:
-      (empty)
-
-    Work dir:
-      /workspaces/training/hello-nextflow/work/a8/1f6ead5f3fa30a3c508e2e7cf83ffb
-
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
-
-    -- Check '.nextflow.log' file for details
-    ```
 
 Hay aksi! Bir hata var!
 
@@ -843,9 +848,7 @@ Hay aksi! Bir hata var!
 
 Görünüşe göre Nextflow, dizideki üç dizeyi ayrı değerler olarak kullanmak yerine, `[Hello, Bonjour, Hola]`'yı bir dize değeri olarak kullanarak tek bir süreç çağrısı çalıştırmaya çalıştı.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
-</figure>
+![](../../hello_nextflow/img/hello-channels-array-fail.excalidraw.svg)
 
 Yani soruna neden olan "paketleme".
 Nextflow'un diziyi açmasını ve bireysel dizeleri kanala yüklemesini nasıl sağlarız?
@@ -864,51 +867,49 @@ Nextflow belgelerindeki [operatör listesine](https://nextflow.io/docs/latest/re
 
 İş akışı bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="9"
-    workflow {
+```nextflow title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Önce"
+workflow {
 
-        main:
-        // bir girdi selamlama dizisi tanımla
-        greetings_array = ['Hello','Bonjour','Hola']
-        // girdiler için bir kanal oluştur
-        greeting_ch = channel.of(greetings_array)
-                             .view()
-                             .flatten()
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    main:
+    // bir girdi selamlama dizisi tanımla
+    greetings_array = ['Hello','Bonjour','Hola']
+    // girdiler için bir kanal oluştur
+    greeting_ch = channel.of(greetings_array)
+                         .view()
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+    publish:
+    first_output = sayHello.out
+}
+```
 
-=== "Önce"
+```nextflow {9} title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Sonra"
+workflow {
 
-    ```groovy title="hello-channels.nf" linenums="27"
-    workflow {
+    main:
+    // bir girdi selamlama dizisi tanımla
+    greetings_array = ['Hello','Bonjour','Hola']
+    // girdiler için bir kanal oluştur
+    greeting_ch = channel.of(greetings_array)
+                         .view()
+                         .flatten()
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        main:
-        // bir girdi selamlama dizisi tanımla
-        greetings_array = ['Hello','Bonjour','Hola']
-        // girdiler için bir kanal oluştur
-        greeting_ch = channel.of(greetings_array)
-                             .view()
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    publish:
+    first_output = sayHello.out
+}
+```
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+</CodeWalkthrough>
 
 Burada okunabilirlik için operatörü bir sonraki satıra ekledik, ancak tercih ederseniz operatörleri kanal fabrikasıyla aynı satıra ekleyebilirsiniz, şöyle:
 `greeting_ch = channel.of(greetings_array).view().flatten()`
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-success.svg"
-</figure>
+![](../../hello_nextflow/img/hello-channels-array-success.excalidraw.svg)
 
 #### 3.2.2. `view()` ifadesini/ifadelerini iyileştirin
 
@@ -918,48 +919,48 @@ Bunu hemen test etmek için çalıştırabiliriz, ancak bu sırada kanal içerik
 
 İş akışı bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="8-10"
-    workflow {
+```nextflow {8-9} title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Önce"
+workflow {
 
-        main:
-        // bir girdi selamlama dizisi tanımla
-        greetings_array = ['Hello','Bonjour','Hola']
-        // girdiler için bir kanal oluştur
-        greeting_ch = channel.of(greetings_array)
-                             .view { greeting -> "Before flatten: $greeting" }
-                             .flatten()
-                             .view { greeting -> "After flatten: $greeting" }
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    main:
+    // bir girdi selamlama dizisi tanımla
+    greetings_array = ['Hello','Bonjour','Hola']
+    // girdiler için bir kanal oluştur
+    greeting_ch = channel.of(greetings_array)
+                         .view()
+                         .flatten()
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+    publish:
+    first_output = sayHello.out
+}
+```
 
-=== "Önce"
+```nextflow {8-10} title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Sonra"
+workflow {
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="8-9"
-    workflow {
+    main:
+    // bir girdi selamlama dizisi tanımla
+    greetings_array = ['Hello','Bonjour','Hola']
+    // girdiler için bir kanal oluştur
+    greeting_ch = channel.of(greetings_array)
+                         .view { greeting -> "Before flatten: $greeting" }
+                         .flatten()
+                         .view { greeting -> "After flatten: $greeting" }
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        main:
-        // bir girdi selamlama dizisi tanımla
-        greetings_array = ['Hello','Bonjour','Hola']
-        // girdiler için bir kanal oluştur
-        greeting_ch = channel.of(greetings_array)
-                             .view()
-                             .flatten()
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    publish:
+    first_output = sayHello.out
+}
+```
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+</CodeWalkthrough>
 
-İkinci bir `.view` ifadesi eklediğimizi ve her biri için boş parantezleri (`()`) biraz kod içeren süslü parantezlerle değiştirdiğimizi görüyorsunuz, örneğin `#!groovy { greeting -> "Before flatten: $greeting" }`.
+İkinci bir `.view` ifadesi eklediğimizi ve her biri için boş parantezleri (`()`) biraz kod içeren süslü parantezlerle değiştirdiğimizi görüyorsunuz, örneğin `{ greeting -> "Before flatten: $greeting" }{:nextflow}`.
 
 Bunlara _closure_ denir. İçerdikleri kod, kanaldaki her öğe için yürütülecektir.
 İç değer için burada `greeting` adında (ancak herhangi bir rastgele ad olabilir) geçici bir değişken tanımlıyoruz, bu yalnızca o closure kapsamında kullanılır.
@@ -967,12 +968,12 @@ Bunlara _closure_ denir. İçerdikleri kod, kanaldaki her öğe için yürütül
 Bu örnekte, `$greeting` kanalda yüklenen her bir öğeyi temsil eder.
 Bu, düzgün etiketlenmiş konsol çıktısı ile sonuçlanacaktır.
 
-!!! info "Bilgi"
+:::note[Bilgi]
+Bazı pipeline'larda operatör closure'ları içinde `$it` adlı özel bir değişkenin kullanıldığını görebilirsiniz.
+Bu, `->` ile tanımlamaya gerek kalmadan iç değişkene kısa yoldan erişim sağlayan bir _örtük_ değişkendir.
 
-    Bazı pipeline'larda operatör closure'ları içinde `$it` adlı özel bir değişkenin kullanıldığını görebilirsiniz.
-    Bu, `->` ile tanımlamaya gerek kalmadan iç değişkene kısa yoldan erişim sağlayan bir _örtük_ değişkendir.
-
-    Kod netliğine yardımcı olmak için açık olmayı tercih ediyoruz, bu nedenle `$it` sözdizimi önerilmemektedir ve Nextflow dilinden yavaş yavaş kaldırılacaktır.
+Kod netliğine yardımcı olmak için açık olmayı tercih ediyoruz, bu nedenle `$it` sözdizimi önerilmemektedir ve Nextflow dilinden yavaş yavaş kaldırılacaktır.
+:::
 
 #### 3.2.3. İş akışını çalıştırın
 
@@ -980,31 +981,27 @@ Son olarak, iş akışını tekrar çalıştırabilirsiniz!
 
 ```bash
 nextflow run hello-channels.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-channels.nf` [sleepy_gutenberg] revision: 1db4f760ee
+
+executor >  local (3)
+[b1/6a1e15] sayHello (2) | 3 of 3 ✔
+Before flatten: [Hello, Bonjour, Hola] # [!code highlight]
+After flatten: Hello # [!code highlight]
+After flatten: Bonjour # [!code highlight]
+After flatten: Hola # [!code highlight]
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_channels/Bonjour-output.txt
+    - hello_channels/Hola-output.txt
+    - hello_channels/Hello-output.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console hl_lines="7-10"
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-channels.nf` [sleepy_gutenberg] revision: 1db4f760ee
-
-    executor >  local (3)
-    [b1/6a1e15] sayHello (2) | 3 of 3 ✔
-    Before flatten: [Hello, Bonjour, Hola]
-    After flatten: Hello
-    After flatten: Bonjour
-    After flatten: Hola
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_channels/Bonjour-output.txt
-        - hello_channels/Hola-output.txt
-        - hello_channels/Hello-output.txt
-    ```
 
 Bu sefer çalışıyor VE `flatten()` operatörünü çalıştırmadan önce ve sonra kanal içeriklerinin nasıl göründüğüne dair ek bilgi veriyor.
 
@@ -1013,10 +1010,10 @@ Bu sefer çalışıyor VE `flatten()` operatörünü çalıştırmadan önce ve 
 
 Önemli olarak, bu her öğenin artık iş akışı tarafından ayrı ayrı işlenebileceği anlamına gelir.
 
-!!! tip "İpucu"
-
-    Aynı sonuçları, işleminde örtük bir eşleme adımı içeren farklı bir kanal fabrikası [`channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist) kullanarak elde etmek teknik olarak mümkündür.
-    Burada, basit bir kullanım durumunda bir operatörün kullanımını göstermek için bunu kullanmamayı tercih ettik.
+:::tip[İpucu]
+Aynı sonuçları, işleminde örtük bir eşleme adımı içeren farklı bir kanal fabrikası [`channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist) kullanarak elde etmek teknik olarak mümkündür.
+Burada, basit bir kullanım durumunda bir operatörün kullanımını göstermek için bunu kullanmamayı tercih ettik.
+:::
 
 ### Özetle
 
@@ -1036,7 +1033,7 @@ Büyük olasılıkla, işlenmesi gereken verileri içeren bir veya daha fazla do
 `greetings.csv` adlı, gerçek bir veri analizinde işlemek isteyebileceğiniz türden sütunlu verileri taklit eden birkaç girdi selamlaması içeren bir CSV dosyası hazırladık; bu dosya `data/` altında depolanıyor.
 (Sayılar anlamlı değil, sadece gösterim amaçlı oradalar.)
 
-```csv title="data/greetings.csv" linenums="1"
+```csv title="data/greetings.csv" showLineNumbers
 Hello,English,123
 Bonjour,French,456
 Hola,Spanish,789
@@ -1044,9 +1041,7 @@ Hola,Spanish,789
 
 Bir sonraki görevimiz, bu dosyadan değerleri okumak için iş akışımızı uyarlamak.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-csv.svg"
-</figure>
+![](../../hello_nextflow/img/hello-pipeline-multi-inputs-csv.excalidraw.svg)
 
 Bunu nasıl gerçekleştirebileceğimizi görelim.
 
@@ -1064,27 +1059,27 @@ Başlamak için, betikte iki önemli değişiklik yapmamız gerekecek:
 
 Parametre tanımlamasında aşağıdaki düzenlemeyi yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
-    /*
-    * Pipeline parametreleri
-    */
-    params {
-        input: Path = 'data/greetings.csv'
-    }
-    ```
+```nextflow {5} title="hello-channels.nf" showLineNumbers startLineNumber=20 step="Önce"
+/*
+ * Pipeline parametreleri
+ */
+params {
+    input: String = 'Hola mundo!'
+}
+```
 
-=== "Önce"
+```nextflow {5} title="hello-channels.nf" showLineNumbers startLineNumber=20 step="Sonra"
+/*
+* Pipeline parametreleri
+*/
+params {
+    input: Path = 'data/greetings.csv'
+}
+```
 
-    ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
-    /*
-     * Pipeline parametreleri
-     */
-    params {
-        input: String = 'Hola mundo!'
-    }
-    ```
+</CodeWalkthrough>
 
 Bu, dosyanın iş akışı koduyla aynı konumda olduğunu varsayar.
 Diğer veri konumlarıyla nasıl başa çıkacağınızı Nextflow yolculuğunuzda daha sonra öğreneceksiniz.
@@ -1096,45 +1091,45 @@ Dosya yollarını işlemek için yerleşik işlevselliğe sahip yeni bir kanal f
 
 İş akışı bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="4-8"
-    workflow {
+```nextflow {4-8} title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Önce"
+workflow {
 
-        main:
-        // bir CSV dosyasından girdiler için bir kanal oluştur
-        greeting_ch = channel.fromPath(params.input)
-                             .view { greeting -> "Before flatten: $greeting" }
-                             // .flatten()
-                             // .view { greeting -> "After flatten: $greeting" }
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    main:
+    // bir girdi selamlama dizisi tanımla
+    greetings_array = ['Hello','Bonjour','Hola']
+    // girdiler için bir kanal oluştur
+    greeting_ch = channel.of(greetings_array)
+                         .view { greeting -> "Before flatten: $greeting" }
+                         .flatten()
+                         .view { greeting -> "After flatten: $greeting" }
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+    publish:
+    first_output = sayHello.out
+}
+```
 
-=== "Önce"
+```nextflow {4-8} title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Sonra"
+workflow {
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="4-8"
-    workflow {
+    main:
+    // bir CSV dosyasından girdiler için bir kanal oluştur
+    greeting_ch = channel.fromPath(params.input)
+                         .view { greeting -> "Before flatten: $greeting" }
+                         // .flatten()
+                         // .view { greeting -> "After flatten: $greeting" }
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        main:
-        // bir girdi selamlama dizisi tanımla
-        greetings_array = ['Hello','Bonjour','Hola']
-        // girdiler için bir kanal oluştur
-        greeting_ch = channel.of(greetings_array)
-                             .view { greeting -> "Before flatten: $greeting" }
-                             .flatten()
-                             .view { greeting -> "After flatten: $greeting" }
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    publish:
+    first_output = sayHello.out
+}
+```
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+</CodeWalkthrough>
 
 Kanal girdisini `param.input`'a geri döndürdüğümüzü ve artık ihtiyacımız olmayacağı için `greetings_array` tanımlamasını sildiğimizi fark edeceksiniz.
 Ayrıca `flatten()` ve ikinci `view()` ifadesini yorum satırı haline getirdik.
@@ -1145,40 +1140,37 @@ Yeni kanal fabrikası ve girdi dosyası ile iş akışını çalıştırmayı de
 
 ```bash
 nextflow run hello-channels.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-channels.nf` [peaceful_poisson] revision: a286c08ad5
+
+[-        ] sayHello | 0 of 1 # [!code highlight]
+Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv # [!code highlight]
+# [!output stderr]
+ERROR ~ Error executing process > 'sayHello (1)'
+
+Caused by: # [!code highlight]
+  File `/workspaces/training/hello-nextflow/data/greetings.csv-output.txt` is outside the scope of the process work directory: /workspaces/training/hello-nextflow/work/30/e610cb4ea5ae8693f456ac3329c92f
+
+
+Command executed:
+
+  echo '/workspaces/training/hello-nextflow/data/greetings.csv' > '/workspaces/training/hello-nextflow/data/greetings.csv-output.txt' # [!code highlight]
+
+Command exit status:
+  -
+
+Command output:
+  (empty)
+
+Work dir:
+  /workspaces/training/hello-nextflow/work/30/e610cb4ea5ae8693f456ac3329c92f
+
+Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+-- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console hl_lines="5 6 9 15"
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-channels.nf` [peaceful_poisson] revision: a286c08ad5
-
-    [-        ] sayHello | 0 of 1
-    Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
-    ERROR ~ Error executing process > 'sayHello (1)'
-
-    Caused by:
-      File `/workspaces/training/hello-nextflow/data/greetings.csv-output.txt` is outside the scope of the process work directory: /workspaces/training/hello-nextflow/work/30/e610cb4ea5ae8693f456ac3329c92f
-
-
-    Command executed:
-
-      echo '/workspaces/training/hello-nextflow/data/greetings.csv' > '/workspaces/training/hello-nextflow/data/greetings.csv-output.txt'
-
-    Command exit status:
-      -
-
-    Command output:
-      (empty)
-
-    Work dir:
-      /workspaces/training/hello-nextflow/work/30/e610cb4ea5ae8693f456ac3329c92f
-
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-
-    -- Check '.nextflow.log' file for details
-    ```
 
 Hay aksi, çalışmıyor. Konsol çıktısının ve hata mesajının başlangıcına bakın.
 `Command executed:` kısmı burada özellikle faydalı.
@@ -1201,43 +1193,43 @@ Operatörü uygulamak için, daha önce olduğu gibi kanal fabrikası satırına
 
 İş akışı bloğunda, `flatten()` yerine `splitCsv()` (yorum satırından çıkarılmış) koymak için aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="6-8"
-    workflow {
+```nextflow {6-8} title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Önce"
+workflow {
 
-        main:
-        // bir CSV dosyasından girdiler için bir kanal oluştur
-        greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "Before splitCsv: $csv" }
-                             .splitCsv()
-                             .view { csv -> "After splitCsv: $csv" }
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    main:
+    // bir CSV dosyasından girdiler için bir kanal oluştur
+    greeting_ch = channel.fromPath(params.input)
+                         .view { greeting -> "Before flatten: $greeting" }
+                         // .flatten()
+                         // .view { greeting -> "After flatten: $greeting" }
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+    publish:
+    first_output = sayHello.out
+}
+```
 
-=== "Önce"
+```nextflow {6-8} title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Sonra"
+workflow {
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="6-8"
-    workflow {
+    main:
+    // bir CSV dosyasından girdiler için bir kanal oluştur
+    greeting_ch = channel.fromPath(params.input)
+                         .view { csv -> "Before splitCsv: $csv" }
+                         .splitCsv()
+                         .view { csv -> "After splitCsv: $csv" }
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        main:
-        // bir CSV dosyasından girdiler için bir kanal oluştur
-        greeting_ch = channel.fromPath(params.input)
-                             .view { greeting -> "Before flatten: $greeting" }
-                             // .flatten()
-                             // .view { greeting -> "After flatten: $greeting" }
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    publish:
+    first_output = sayHello.out
+}
+```
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+</CodeWalkthrough>
 
 Gördüğünüz gibi, önce/sonra `view()` ifadelerini de güncelledik.
 Teknik olarak aynı değişken adını (`greeting`) kullanabilirdik ama kodu başkaları için daha okunabilir kılmak amacıyla daha uygun bir şeye (`csv`) güncelledik.
@@ -1248,51 +1240,46 @@ Eklenen CSV ayrıştırma mantığıyla iş akışını çalıştırmayı deneye
 
 ```bash
 nextflow run hello-channels.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-channels.nf` [insane_fermat] revision: 8e62fcbeb1
+
+executor >  local (3)
+[24/76da2f] sayHello (2) | 0 of 3 ✘
+Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv # [!code highlight]
+After splitCsv: [Hello, English, 123] # [!code highlight]
+After splitCsv: [Bonjour, French, 456] # [!code highlight]
+After splitCsv: [Hola, Spanish, 789] # [!code highlight]
+# [!output stderr]
+ERROR ~ Error executing process > 'sayHello (2)' # [!code highlight]
+
+Caused by:
+  Missing output file(s) `[Bonjour, French, 456]-output.txt` expected by process `sayHello (2)` # [!code highlight]
+
+
+Command executed:
+
+  echo '[Bonjour, French, 456]' > '[Bonjour, French, 456]-output.txt' # [!code highlight]
+
+Command exit status:
+  0
+
+Command output:
+  (empty)
+
+Work dir:
+  /workspaces/training/hello-nextflow/work/24/76da2fcc4876b61632749f99e26a50
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+
+-- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı"
-
-    ```console hl_lines="7-11 14 19"
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-channels.nf` [insane_fermat] revision: 8e62fcbeb1
-
-    executor >  local (3)
-    [24/76da2f] sayHello (2) | 0 of 3 ✘
-    Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
-    After splitCsv: [Hello, English, 123]
-    After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Hola, Spanish, 789]
-    ERROR ~ Error executing process > 'sayHello (2)'
-
-    Caused by:
-      Missing output file(s) `[Bonjour, French, 456]-output.txt` expected by process `sayHello (2)`
-
-
-    Command executed:
-
-      echo '[Bonjour, French, 456]' > '[Bonjour, French, 456]-output.txt'
-
-    Command exit status:
-      0
-
-    Command output:
-      (empty)
-
-    Work dir:
-      /workspaces/training/hello-nextflow/work/24/76da2fcc4876b61632749f99e26a50
-
-    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
-
-    -- Check '.nextflow.log' file for details
-    ```
 
 İlginç bir şekilde, bu da başarısız oluyor, ancak farklı bir hatayla.
 Bu sefer Nextflow dosyanın içeriğini ayrıştırdı (yaşasın!) ama her satırı bir dizi olarak yükledi ve her dizi kanalda bir öğe.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-fail.svg"
-</figure>
+![](../../hello_nextflow/img/hello-channels-split-fail.excalidraw.svg)
 
 Ona her satırdaki yalnızca ilk sütunu almasını söylememiz gerekiyor.
 Peki bunu nasıl açarız?
@@ -1308,7 +1295,7 @@ Bunun yerine, Nextflow pipeline'larında gerçekten faydalı olan ve sık sık k
 Bu durumda, veri dosyamızdaki her satırdan istediğimiz o tek öğeyi çıkarmak için kullanacağız.
 Sözdizimi şöyle görünüyor:
 
-```groovy title="Syntax"
+```nextflow title="Syntax"
 .map { row -> row[0] }
 ```
 
@@ -1320,45 +1307,45 @@ Bu, 'kanaldaki her satır için, içerdiği 0. (birinci) öğeyi al' anlamına g
 
 İş akışı bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="9 10"
-    workflow {
+```nextflow title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Önce"
+workflow {
 
-        main:
-        // bir CSV dosyasından girdiler için bir kanal oluştur
-        greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "Before splitCsv: $csv" }
-                             .splitCsv()
-                             .view { csv -> "After splitCsv: $csv" }
-                             .map { item -> item[0] }
-                             .view { csv -> "After map: $csv" }
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    main:
+    // bir CSV dosyasından girdiler için bir kanal oluştur
+    greeting_ch = channel.fromPath(params.input)
+                         .view { csv -> "Before splitCsv: $csv" }
+                         .splitCsv()
+                         .view { csv -> "After splitCsv: $csv" }
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+    publish:
+    first_output = sayHello.out
+}
+```
 
-=== "Önce"
+```nextflow {9,10} title="hello-channels.nf" showLineNumbers startLineNumber=27 step="Sonra"
+workflow {
 
-    ```groovy title="hello-channels.nf" linenums="27"
-    workflow {
+    main:
+    // bir CSV dosyasından girdiler için bir kanal oluştur
+    greeting_ch = channel.fromPath(params.input)
+                         .view { csv -> "Before splitCsv: $csv" }
+                         .splitCsv()
+                         .view { csv -> "After splitCsv: $csv" }
+                         .map { item -> item[0] }
+                         .view { csv -> "After map: $csv" }
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        main:
-        // bir CSV dosyasından girdiler için bir kanal oluştur
-        greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "Before splitCsv: $csv" }
-                             .splitCsv()
-                             .view { csv -> "After splitCsv: $csv" }
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    publish:
+    first_output = sayHello.out
+}
+```
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+</CodeWalkthrough>
 
 Operatörün beklediğimizi yaptığını doğrulamak için başka bir `view()` çağrısı eklediğimizi görüyorsunuz.
 
@@ -1368,34 +1355,30 @@ Bunu bir kez daha çalıştıralım:
 
 ```bash
 nextflow run hello-channels.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-channels.nf` [focused_volhard] revision: de435e45be
+
+executor >  local (3)
+[54/6eebe3] sayHello (3) | 3 of 3 ✔
+Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
+After splitCsv: [Hello, English, 123]
+After splitCsv: [Bonjour, French, 456]
+After splitCsv: [Hola, Spanish, 789]
+After map: Hello
+After map: Bonjour
+After map: Hola
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_channels/Hola-output.txt
+    - hello_channels/Bonjour-output.txt
+    - hello_channels/Hello-output.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-channels.nf` [focused_volhard] revision: de435e45be
-
-    executor >  local (3)
-    [54/6eebe3] sayHello (3) | 3 of 3 ✔
-    Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
-    After splitCsv: [Hello, English, 123]
-    After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Hola, Spanish, 789]
-    After map: Hello
-    After map: Bonjour
-    After map: Hola
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_channels/Hola-output.txt
-        - hello_channels/Bonjour-output.txt
-        - hello_channels/Hello-output.txt
-    ```
 
 Bu sefer hatasız çalışmalı.
 
@@ -1407,9 +1390,7 @@ Bu sefer hatasız çalışmalı.
 
 _Satırların çıktınızda farklı bir sırada görünebileceğini unutmayın._
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-and-map.svg"
-</figure>
+![](../../hello_nextflow/img/hello-channels-split-and-map.excalidraw.svg)
 
 Her selamlamanın doğru şekilde çıkarıldığını ve iş akışı boyunca işlendiğini doğrulamak için çıktı dosyalarına da bakabilirsiniz.
 
@@ -1423,34 +1404,35 @@ Bir girdi değerleri dosyasını okumak ve bunları uygun şekilde işlemek içi
 Daha genel olarak, Nextflow'un süreçlere girdileri yönetmek için **kanalları** ve içeriklerini dönüştürmek için **operatörleri** nasıl kullandığına dair temel bir anlayışa sahipsiniz.
 Ayrıca kanalların paralel yürütmeyi örtük olarak nasıl işlediğini de gördünüz.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-channels-parallel.svg"
-</figure>
+![](../../hello_nextflow/img/hello-channels-parallel.excalidraw.svg)
 
 ### Sırada ne var?
 
 Büyük bir mola verin, bu bölümde çok çalıştınız!
 
-Hazır olduğunuzda, daha fazla adım eklemeyi ve bunları düzgün bir iş akışına bağlamayı öğrenmek için [**Bölüm 3: Hello Workflow**](./03_hello_workflow.md)'na geçin.
+Hazır olduğunuzda, daha fazla adım eklemeyi ve bunları düzgün bir iş akışına bağlamayı öğrenmek için [**Bölüm 3: Hello Workflow**](./03_hello_workflow.mdx)'na geçin.
 
 ---
 
 ## Quiz
 
-<quiz>
+<Quiz id="quiz-1">
+
 Nextflow'da kanal nedir?
 - [ ] Bir dosya yolu belirtimi
 - [ ] Bir süreç tanımı
 - [x] Süreçler arasında veri iletmek için kuyruk benzeri bir yapı
 - [ ] Bir yapılandırma ayarı
 
-Daha fazla bilgi: [1.1. Bir girdi kanalı oluşturun](#11-create-an-input-channel)
-</quiz>
+Daha fazla bilgi: [1.1. Bir girdi kanalı oluşturun](#11-bir-girdi-kanalı-oluşturun)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-2">
+
 Bu kod ne çıktı verecek?
 
-```groovy
+```nextflow
 channel.of('Hello', 'Bonjour', 'Hola')
     .view()
 ```
@@ -1460,65 +1442,78 @@ channel.of('Hello', 'Bonjour', 'Hola')
 - [ ] Hiçbir şey (kanallar varsayılan olarak yazdırmaz)
 - [ ] Bir hata (geçersiz sözdizimi)
 
-Daha fazla bilgi: [1.1. Bir girdi kanalı oluşturun](#11-create-an-input-channel)
-</quiz>
+Daha fazla bilgi: [1.1. Bir girdi kanalı oluşturun](#11-bir-girdi-kanalı-oluşturun)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-3">
+
 Bir kanal birden fazla değer içerdiğinde, Nextflow süreç yürütmesini nasıl işler?
 - [ ] Süreç tüm değerlerle bir kez çalışır
 - [x] Süreç kanaldaki her değer için bir kez çalışır
 - [ ] Süreç yalnızca ilk değerle çalışır
 - [ ] Süreç yalnızca son değerle çalışır
 
-Daha fazla bilgi: [2. İş akışını birden fazla girdi değeri üzerinde çalışacak şekilde değiştirin](#2-modify-the-workflow-to-run-on-multiple-input-values)
-</quiz>
+Daha fazla bilgi: [2. İş akışını birden fazla girdi değeri üzerinde çalışacak şekilde değiştirin](#2-i̇ş-akışını-birden-fazla-girdi-değeri-üzerinde-çalışacak-şekilde-değiştirin)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-4">
+
 `flatten()` operatörü ne yapar?
 - [ ] Birden fazla kanalı bir araya getirir
 - [ ] Kanal öğelerini sıralar
 - [x] Dizileri bireysel öğelere açar
 - [ ] Yinelenen öğeleri kaldırır
 
-Daha fazla bilgi: [3.2.1. `flatten()` operatörünü ekleyin](#321-add-the-flatten-operator)
-</quiz>
+Daha fazla bilgi: [3.2.1. `flatten()` operatörünü ekleyin](#321-flatten-operatörünü-ekleyin)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-5">
+
 `view()` operatörünün amacı nedir?
 - [ ] Kanal içeriklerini filtrelemek
 - [ ] Kanal öğelerini dönüştürmek
 - [x] Kanal içeriklerini incelemek ve hata ayıklamak
 - [ ] Kanal içeriklerini bir dosyaya kaydetmek
 
-Daha fazla bilgi: [1.4. Kanal içeriklerini incelemek için `view()` kullanın](#14-use-view-to-inspect-the-channel-contents)
-</quiz>
+Daha fazla bilgi: [1.4. Kanal içeriklerini incelemek için `view()` kullanın](#14-kanal-içeriklerini-incelemek-için-view-kullanın)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-6">
+
 `splitCsv()` ne yapar?
 - [ ] Kanal içeriklerinden bir CSV dosyası oluşturur
 - [ ] Bir dizeyi virgüllerle böler
 - [x] Bir CSV dosyasını her satırı temsil eden dizilere ayrıştırır
 - [ ] Birden fazla CSV dosyasını birleştirir
 
-Daha fazla bilgi: [4.2. Dosyayı ayrıştırmak için `splitCsv()` operatörünü kullanın](#42-use-the-splitcsv-operator-to-parse-the-file)
-</quiz>
+Daha fazla bilgi: [4.2. Dosyayı ayrıştırmak için `splitCsv()` operatörünü kullanın](#42-dosyayı-ayrıştırmak-için-splitcsv-operatörünü-kullanın)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-7">
+
 `map()` operatörünün amacı nedir?
 - [ ] Bir kanaldan öğeleri filtrelemek
 - [ ] Birden fazla kanalı birleştirmek
 - [x] Bir kanaldaki her öğeyi dönüştürmek
 - [ ] Bir kanaldaki öğeleri saymak
 
-Daha fazla bilgi: [4.3. Selamlamaları çıkarmak için `map()` operatörünü kullanın](#43-use-the-map-operator-to-extract-the-greetings)
-</quiz>
+Daha fazla bilgi: [4.3. Selamlamaları çıkarmak için `map()` operatörünü kullanın](#43-selamlamaları-çıkarmak-için-map-operatörünü-kullanın)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-8">
+
 Birden fazla girdiyi işlerken dinamik çıktı dosya adları kullanmak neden önemlidir?
 - [ ] Performansı iyileştirmek için
 - [ ] Disk alanını azaltmak için
 - [x] Çıktı dosyalarının birbirinin üzerine yazmasını önlemek için
 - [ ] Devam etme işlevselliğini etkinleştirmek için
 
-Daha fazla bilgi: [2.2. Çıktı dosya adlarının benzersiz olmasını sağlayın](#22-ensure-the-output-file-names-will-be-unique)
-</quiz>
+Daha fazla bilgi: [2.2. Çıktı dosya adlarının benzersiz olmasını sağlayın](#22-çıktı-dosya-adlarının-benzersiz-olmasını-sağlayın)
+
+</Quiz>

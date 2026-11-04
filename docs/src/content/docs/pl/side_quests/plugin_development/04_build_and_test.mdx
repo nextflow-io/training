@@ -1,24 +1,27 @@
-# Część 4: Testowanie
+---
+title: 'Część 4: Testowanie'
+description: Wtyczki to samodzielne oprogramowanie, któremu deweloperzy pipeline'ów muszą ufać.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Wtyczki to samodzielne oprogramowanie, któremu deweloperzy pipeline'ów muszą ufać.
 Testowanie każdej funkcji niezależnie, poza pipeline'em, zapewnia poprawne działanie wtyczki, zanim ktokolwiek zintegruje ją z workflow'em.
 W tej sekcji napiszesz i uruchomisz testy przy użyciu frameworka testowego Spock.
 
-!!! tip "Wskazówka"
+:::tip[Wskazówka]
+Jeśli zaczynasz od tej części, skopiuj rozwiązanie z Części 3, aby użyć go jako punktu startowego:
 
-    Jeśli zaczynasz od tej części, skopiuj rozwiązanie z Części 3, aby użyć go jako punktu startowego:
+```bash
+cp -r solutions/3-custom-functions/* .
+```
 
-    ```bash
-    cp -r solutions/3-custom-functions/* .
-    ```
+Następnie przejdź do katalogu wtyczki:
 
-    Następnie przejdź do katalogu wtyczki:
-
-    ```bash
-    cd nf-greeting
-    ```
+```bash
+cd nf-greeting
+```
+:::
 
 Upewnij się, że jesteś w katalogu wtyczki:
 
@@ -32,7 +35,7 @@ cd nf-greeting
 
 Pomyślna kompilacja oznacza, że kod się kompiluje, ale nie sprawdza, czy działa zgodnie z oczekiwaniami.
 Testy jednostkowe to małe fragmenty kodu, które automatycznie sprawdzają, czy Twoje funkcje zwracają właściwe wyjście dla danego wejścia.
-Na przykład test może sprawdzić, że `#!groovy reverseGreeting("Hello")` zwraca `"olleH"`.
+Na przykład test może sprawdzić, że `reverseGreeting("Hello"){:nextflow}` zwraca `"olleH"`.
 
 Testy są wartościowe, ponieważ:
 
@@ -53,18 +56,14 @@ Różnica polega na tym, że Spock używa oznaczonych bloków (`given:`, `expect
 Oto podstawowa struktura:
 
 ```groovy
-def 'should reverse a greeting'() {   // (1)!
-    given:                             // (2)!
+def 'should reverse a greeting'() {   // [!annotate] **Nazwa testu w cudzysłowie**: Opisuje, co sprawdza test. Używaj prostego języka angielskiego.
+    given:                             // [!annotate] **Blok `given:`**: Przygotuj wszystko, czego potrzebujesz do testu (twórz obiekty, przygotowuj dane)
     def ext = new GreetingExtension()
 
-    expect:                            // (3)!
+    expect:                            // [!annotate] **Blok `expect:`**: Właściwe sprawdzenia. Każda linia musi być `true`, aby test przeszedł
     ext.reverseGreeting('Hello') == 'olleH'
 }
 ```
-
-1. **Nazwa testu w cudzysłowie**: Opisuje, co sprawdza test. Używaj prostego języka angielskiego.
-2. **Blok `given:`**: Przygotuj wszystko, czego potrzebujesz do testu (twórz obiekty, przygotowuj dane)
-3. **Blok `expect:`**: Właściwe sprawdzenia. Każda linia musi być `true`, aby test przeszedł
 
 Ta struktura sprawia, że testy są czytelne: „Mając obiekt rozszerzenia, oczekuj, że `reverseGreeting('Hello')` zwróci `'olleH'`."
 
@@ -82,7 +81,7 @@ touch src/test/groovy/training/plugin/GreetingExtensionTest.groovy
 
 Otwórz plik w edytorze i dodaj pusty szkielet klasy testowej:
 
-```groovy title="src/test/groovy/training/plugin/GreetingExtensionTest.groovy" linenums="1"
+```groovy title="src/test/groovy/training/plugin/GreetingExtensionTest.groovy" showLineNumbers
 package training.plugin
 
 import spock.lang.Specification
@@ -90,12 +89,10 @@ import spock.lang.Specification
 /**
  * Testy dla funkcji rozszerzenia powitań
  */
-class GreetingExtensionTest extends Specification {  // (1)!
+class GreetingExtensionTest extends Specification {  // [!annotate] Wszystkie klasy testowe Spock rozszerzają `Specification`. To punkt startowy dla każdego pliku testowego Spock.
 
 }
 ```
-
-1. Wszystkie klasy testowe Spock rozszerzają `Specification`. To punkt startowy dla każdego pliku testowego Spock.
 
 ### 3.2. Testowanie reverseGreeting
 
@@ -103,105 +100,102 @@ Dodaj metodę testową wewnątrz ciała klasy.
 Blok `given:` tworzy instancję `GreetingExtension`, a blok `expect:` sprawdza, czy `reverseGreeting` poprawnie odwraca dwa różne wejścia.
 Test sprawdza funkcję bezpośrednio, bez uruchamiania pipeline'u.
 
-=== "Po"
+<CodeWalkthrough>
 
-    ```groovy title="GreetingExtensionTest.groovy" linenums="1" hl_lines="10-17"
-    package training.plugin
+```groovy title="GreetingExtensionTest.groovy" showLineNumbers step="Przed"
+package training.plugin
 
-    import spock.lang.Specification
+import spock.lang.Specification
 
-    /**
-     * Testy dla funkcji rozszerzenia powitań
-     */
-    class GreetingExtensionTest extends Specification {
+/**
+ * Testy dla funkcji rozszerzenia powitań
+ */
+class GreetingExtensionTest extends Specification {
 
-        def 'should reverse a greeting'() {
-            given:
-            def ext = new GreetingExtension()            // (1)!
+}
+```
 
-            expect:
-            ext.reverseGreeting('Hello') == 'olleH'     // (2)!
-            ext.reverseGreeting('Bonjour') == 'ruojnoB'
-        }
+```groovy {10-17} title="GreetingExtensionTest.groovy" showLineNumbers step="Po"
+package training.plugin
+
+import spock.lang.Specification
+
+/**
+ * Testy dla funkcji rozszerzenia powitań
+ */
+class GreetingExtensionTest extends Specification {
+
+    def 'should reverse a greeting'() {
+        given:
+        def ext = new GreetingExtension()            // [!annotate] Utwórz instancję rozszerzenia, aby testować je bezpośrednio, bez uruchamiania pipeline'u
+
+        expect:
+        ext.reverseGreeting('Hello') == 'olleH'     // [!annotate] Każda linia w `expect:` to asercja; test przechodzi tylko wtedy, gdy wszystkie są `true`
+        ext.reverseGreeting('Bonjour') == 'ruojnoB'
     }
-    ```
+}
+```
 
-    1. Utwórz instancję rozszerzenia, aby testować je bezpośrednio, bez uruchamiania pipeline'u
-    2. Każda linia w `expect:` to asercja; test przechodzi tylko wtedy, gdy wszystkie są `true`
-
-=== "Przed"
-
-    ```groovy title="GreetingExtensionTest.groovy" linenums="1"
-    package training.plugin
-
-    import spock.lang.Specification
-
-    /**
-     * Testy dla funkcji rozszerzenia powitań
-     */
-    class GreetingExtensionTest extends Specification {
-
-    }
-    ```
+</CodeWalkthrough>
 
 ### 3.3. Testowanie decorateGreeting
 
 Dodaj drugą metodę testową po pierwszej.
 Sprawdza ona, czy `decorateGreeting` opakowuje wejściowy string znakami `***` po każdej stronie.
 
-=== "Po"
+<CodeWalkthrough>
 
-    ```groovy title="GreetingExtensionTest.groovy" linenums="1" hl_lines="18-25"
-    package training.plugin
+```groovy {18} title="GreetingExtensionTest.groovy" showLineNumbers step="Przed"
+package training.plugin
 
-    import spock.lang.Specification
+import spock.lang.Specification
 
-    /**
-     * Testy dla funkcji rozszerzenia powitań
-     */
-    class GreetingExtensionTest extends Specification {
+/**
+ * Testy dla funkcji rozszerzenia powitań
+ */
+class GreetingExtensionTest extends Specification {
 
-        def 'should reverse a greeting'() {
-            given:
-            def ext = new GreetingExtension()
+    def 'should reverse a greeting'() {
+        given:
+        def ext = new GreetingExtension()
 
-            expect:
-            ext.reverseGreeting('Hello') == 'olleH'
-            ext.reverseGreeting('Bonjour') == 'ruojnoB'
-        }
-
-        def 'should decorate a greeting'() {
-            given:
-            def ext = new GreetingExtension()
-
-            expect:
-            ext.decorateGreeting('Hello') == '*** Hello ***'
-        }
+        expect:
+        ext.reverseGreeting('Hello') == 'olleH'
+        ext.reverseGreeting('Bonjour') == 'ruojnoB'
     }
-    ```
+}
+```
 
-=== "Przed"
+```groovy {18-25} title="GreetingExtensionTest.groovy" showLineNumbers step="Po"
+package training.plugin
 
-    ```groovy title="GreetingExtensionTest.groovy" linenums="1" hl_lines="18"
-    package training.plugin
+import spock.lang.Specification
 
-    import spock.lang.Specification
+/**
+ * Testy dla funkcji rozszerzenia powitań
+ */
+class GreetingExtensionTest extends Specification {
 
-    /**
-     * Testy dla funkcji rozszerzenia powitań
-     */
-    class GreetingExtensionTest extends Specification {
+    def 'should reverse a greeting'() {
+        given:
+        def ext = new GreetingExtension()
 
-        def 'should reverse a greeting'() {
-            given:
-            def ext = new GreetingExtension()
-
-            expect:
-            ext.reverseGreeting('Hello') == 'olleH'
-            ext.reverseGreeting('Bonjour') == 'ruojnoB'
-        }
+        expect:
+        ext.reverseGreeting('Hello') == 'olleH'
+        ext.reverseGreeting('Bonjour') == 'ruojnoB'
     }
-    ```
+
+    def 'should decorate a greeting'() {
+        given:
+        def ext = new GreetingExtension()
+
+        expect:
+        ext.decorateGreeting('Hello') == '*** Hello ***'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 ---
 
@@ -211,38 +205,47 @@ Sprawdza ona, czy `decorateGreeting` opakowuje wejściowy string znakami `***` p
 make test
 ```
 
-??? example "Wynik testów"
+<details class="example">
+<summary>Wynik testów</summary>
 
-    ```console
-    BUILD SUCCESSFUL in 5s
-    7 actionable tasks: 7 executed
-    ```
+```console
+BUILD SUCCESSFUL in 5s
+7 actionable tasks: 7 executed
+```
 
-    **Gdzie są wyniki testów?** Gradle ukrywa szczegółowe wyjście, gdy wszystkie testy przechodzą.
-    „BUILD SUCCESSFUL" oznacza, że wszystko zadziałało.
-    Jeśli jakiś test nie przejdzie, zobaczysz szczegółowe komunikaty o błędach.
+**Gdzie są wyniki testów?** Gradle ukrywa szczegółowe wyjście, gdy wszystkie testy przechodzą.
+„BUILD SUCCESSFUL" oznacza, że wszystko zadziałało.
+Jeśli jakiś test nie przejdzie, zobaczysz szczegółowe komunikaty o błędach.
 
-??? exercise "Dodaj test przypadku brzegowego"
+</details>
 
-    Dodaj test sprawdzający, czy `reverseGreeting` obsługuje pusty string.
-    Co powinno zwrócić `reverseGreeting('')`?
-    Dodaj test, uruchom `make test` i sprawdź, czy przechodzi.
+<details class="exercise">
+<summary>Dodaj test przypadku brzegowego</summary>
 
-    ??? solution "Rozwiązanie"
+Dodaj test sprawdzający, czy `reverseGreeting` obsługuje pusty string.
+Co powinno zwrócić `reverseGreeting('')`?
+Dodaj test, uruchom `make test` i sprawdź, czy przechodzi.
 
-        Dodaj tę metodę testową do `GreetingExtensionTest.groovy`:
+<details class="solution">
+<summary>Rozwiązanie</summary>
 
-        ```groovy
-        def 'should handle empty string'() {
-            given:
-            def ext = new GreetingExtension()
+Dodaj tę metodę testową do `GreetingExtensionTest.groovy`:
 
-            expect:
-            ext.reverseGreeting('') == ''
-        }
-        ```
+```groovy
+def 'should handle empty string'() {
+    given:
+    def ext = new GreetingExtension()
 
-        Odwrócony pusty string to nadal pusty string.
+    expect:
+    ext.reverseGreeting('') == ''
+}
+```
+
+Odwrócony pusty string to nadal pusty string.
+
+</details>
+
+</details>
 
 ---
 
@@ -259,11 +262,11 @@ python -m http.server
 VS Code wyświetli monit o otwarcie aplikacji w przeglądarce.
 Przejdź do swojej klasy testowej, aby zobaczyć wyniki poszczególnych testów:
 
-![Raport testów pokazujący, że wszystkie testy przeszły](./img/test_report.png)
+![Raport testów pokazujący, że wszystkie testy przeszły](../../../side_quests/plugin_development/img/test_report.png)
 
 Raport pokazuje każdą metodę testową i informację, czy przeszła, czy nie.
 
-Naciśnij ++ctrl+c++, aby zatrzymać serwer, a następnie wróć do poprzedniego katalogu:
+Naciśnij <kbd>Ctrl</kbd>+<kbd>C</kbd>, aby zatrzymać serwer, a następnie wróć do poprzedniego katalogu:
 
 ```bash
 popd
@@ -293,4 +296,4 @@ Do tej pory Twoja wtyczka dodaje niestandardowe funkcje, które pipeline'y mogą
 Wtyczki mogą też reagować na zdarzenia workflow'u (zakończenie zadania, opublikowanie pliku, zakończenie pipeline'u) przy użyciu obserwatorów śledzenia.
 W następnej sekcji zbudujesz obserwatora, który zlicza ukończone zadania i wyświetla podsumowanie po zakończeniu pipeline'u.
 
-[Przejdź do Części 5 :material-arrow-right:](05_observers.md){ .md-button .md-button--primary }
+<LinkButton href="05_observers.mdx" variant="primary" icon="right-arrow">Przejdź do Części 5</LinkButton>

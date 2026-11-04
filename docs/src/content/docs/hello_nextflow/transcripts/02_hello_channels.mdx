@@ -1,14 +1,17 @@
-# Part 2: Hello Channels - Video Transcript
+---
+title: 'Part 2: Hello Channels - Video Transcript'
+description: 'Hello Nextflow: Part 2: Hello Channels - Video Transcript'
+---
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-!!!note "Important notes"
+:::note[Important notes]
+This page shows the transcript only. For full step-by-step instructions, return to the [course material](../02_hello_channels.mdx).
 
-    This page shows the transcript only. For full step-by-step instructions, return to the [course material](../02_hello_channels.md).
-
-    The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.
+The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.
+:::
 
 ## Welcome
 
@@ -90,7 +93,7 @@ If we look at the terminal, we can see it ran three times and we can see the dif
 
 And the key is that, we have three tasks that ran. The Nextflow output tries to summarize that as the processing goes on, so that it doesn't completely take over your entire terminal, and that ANSI Logging uses ANSI escape codes, has basically overwritten the other tasks. So it just shows you the last one which happened to be updated.
 
-## 2.1.3. Run the command again with the -ansi-log false option
+## 2.1.3. Run the command again with the -ansi-log false option {#213-run-the-command-again-with-the-ansi-log-false-option}
 
 There's a few things we can do to actually understand this a bit better. We can look into the work directory itself and you can see all the different work dirs there, but that's a bit confusing 'cause it will be mixed up with different Nextflow execution runs.
 

@@ -1,6 +1,9 @@
-# 워크플로우의 워크플로우
+---
+title: 워크플로우의 워크플로우
+description: 파이프라인을 개발하다 보면, 서로 다른 데이터 유형이나 분석 단계에 대해 유사한 프로세스 시퀀스를 반복적으로 만들게 되는 경우가 많습니다.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 파이프라인을 개발하다 보면, 서로 다른 데이터 유형이나 분석 단계에 대해 유사한 프로세스 시퀀스를 반복적으로 만들게 되는 경우가 많습니다.
 이러한 프로세스 시퀀스를 복사하여 붙여넣다 보면 유지 관리하기 어려운 중복 코드가 생기거나, 이해하고 수정하기 어려운 거대한 워크플로우 하나가 만들어질 수 있습니다.
@@ -26,7 +29,7 @@ Nextflow의 가장 강력한 기능 중 하나는 더 작고 재사용 가능한
 
 이 사이드 퀘스트를 시작하기 전에 다음을 완료해야 합니다:
 
-- [Hello Nextflow](../../hello_nextflow/index.md) 튜토리얼 또는 동급의 입문 과정을 완료해야 합니다.
+- [Hello Nextflow](../../hello_nextflow/index.mdx) 튜토리얼 또는 동급의 입문 과정을 완료해야 합니다.
 - 기본적인 Nextflow 개념과 메커니즘(프로세스, 채널, 연산자, 모듈)을 편안하게 사용할 수 있어야 합니다.
 
 ---
@@ -35,7 +38,7 @@ Nextflow의 가장 강력한 기능 중 하나는 더 작고 재사용 가능한
 
 #### 교육 코드스페이스 열기
 
-아직 열지 않았다면, [환경 설정](../../envsetup/index.md)에 설명된 대로 교육 환경을 열어야 합니다.
+아직 열지 않았다면, [환경 설정](../../envsetup/index.mdx)에 설명된 대로 교육 환경을 열어야 합니다.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -113,7 +116,7 @@ greeting 워크플로우는 이름을 유효성 검사하고 타임스탬프가 
 
 `workflows/greeting.nf`를 열고 코드를 확인합니다:
 
-```groovy title="workflows/greeting.nf" linenums="1"
+```nextflow title="workflows/greeting.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 include { VALIDATE_NAME } from '../modules/validate_name'
@@ -149,32 +152,28 @@ output {
 
 ```bash
 nextflow run workflows/greeting.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+Launching `workflows/greeting.nf` [sharp_kirch] revision: 04c0a33f79
+executor >  local (9)
+[c5/9df3c8] VAL…TE_NAME (validating Alice) | 3 of 3 ✔
+[e0/243874] SAY_HELLO (greeting Alice)     | 3 of 3 ✔
+[c5/e40c8d] TIM…ing timestamp to greeting) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/workflows_of_workflows/results
+
+  greetings:
+    - Charlie-output.txt
+    - Bob-output.txt
+    - Alice-output.txt
+
+  timestamped:
+    - timestamped_Bob-output.txt
+    - timestamped_Charlie-output.txt
+    - timestamped_Alice-output.txt
 ```
-
-??? success "명령 출력"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-    Launching `workflows/greeting.nf` [sharp_kirch] revision: 04c0a33f79
-    executor >  local (9)
-    [c5/9df3c8] VAL…TE_NAME (validating Alice) | 3 of 3 ✔
-    [e0/243874] SAY_HELLO (greeting Alice)     | 3 of 3 ✔
-    [c5/e40c8d] TIM…ing timestamp to greeting) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/side-quests/workflows_of_workflows/results
-
-      greetings:
-        - Charlie-output.txt
-        - Bob-output.txt
-        - Alice-output.txt
-
-      timestamped:
-        - timestamped_Bob-output.txt
-        - timestamped_Charlie-output.txt
-        - timestamped_Alice-output.txt
-    ```
 
 다른 워크플로우와 구성 가능하게 만들기 위해 몇 가지를 변경해야 합니다.
 
@@ -190,17 +189,17 @@ nextflow run workflows/greeting.nf
 
 상위 워크플로우에서 가져올 수 있도록 워크플로우에 이름을 부여합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="workflows/greeting.nf" linenums="5" hl_lines="1"
-    workflow GREETING_WORKFLOW {
-    ```
+```nextflow {1} title="workflows/greeting.nf" showLineNumbers startLineNumber=5 step="전"
+workflow {
+```
 
-=== "전"
+```nextflow {1} title="workflows/greeting.nf" showLineNumbers startLineNumber=5 step="후"
+workflow GREETING_WORKFLOW {
+```
 
-    ```groovy title="workflows/greeting.nf" linenums="5" hl_lines="1"
-    workflow {
-    ```
+</CodeWalkthrough>
 
 이름이 생기면 워크플로우를 다른 스크립트로 가져올 수 있습니다.
 
@@ -209,32 +208,32 @@ nextflow run workflows/greeting.nf
 하드코딩된 채널 선언을 워크플로우가 기대하는 입력을 선언하는 `take:` 블록으로 교체합니다.
 `take:` 블록은 `main:` 앞에 위치하며, `names_ch = channel.of(...)` 줄은 제거합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="workflows/greeting.nf" linenums="5" hl_lines="2 3 5"
-    workflow GREETING_WORKFLOW {
-        take:
-        names_ch // 이름이 담긴 입력 채널
+```nextflow title="workflows/greeting.nf" showLineNumbers startLineNumber=5 step="전"
+workflow GREETING_WORKFLOW {
+    main:
+    names_ch = channel.of('Alice', 'Bob', 'Charlie')
 
-        main:
-        // 프로세스 연결: 유효성 검사 -> 인사말 생성 -> 타임스탬프 추가
-        validated_ch = VALIDATE_NAME(names_ch)
-        greetings_ch = SAY_HELLO(validated_ch)
-        timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
-    ```
+    // 프로세스 연결: 유효성 검사 -> 인사말 생성 -> 타임스탬프 추가
+    validated_ch = VALIDATE_NAME(names_ch)
+    greetings_ch = SAY_HELLO(validated_ch)
+    timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
+```
 
-=== "전"
+```nextflow {2,3,5} title="workflows/greeting.nf" showLineNumbers startLineNumber=5 step="후"
+workflow GREETING_WORKFLOW {
+    take:
+    names_ch // 이름이 담긴 입력 채널
 
-    ```groovy title="workflows/greeting.nf" linenums="5"
-    workflow GREETING_WORKFLOW {
-        main:
-        names_ch = channel.of('Alice', 'Bob', 'Charlie')
+    main:
+    // 프로세스 연결: 유효성 검사 -> 인사말 생성 -> 타임스탬프 추가
+    validated_ch = VALIDATE_NAME(names_ch)
+    greetings_ch = SAY_HELLO(validated_ch)
+    timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
+```
 
-        // 프로세스 연결: 유효성 검사 -> 인사말 생성 -> 타임스탬프 추가
-        validated_ch = VALIDATE_NAME(names_ch)
-        greetings_ch = SAY_HELLO(validated_ch)
-        timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
-    ```
+</CodeWalkthrough>
 
 `take:` 블록은 채널을 이름으로만 선언합니다. 채널에 무엇이 들어갈지는 상위 워크플로우에서 정의됩니다.
 
@@ -242,32 +241,32 @@ nextflow run workflows/greeting.nf
 
 `publish:` 섹션을 제거하고 `output {}` 블록을 삭제한 후, 출력에 이름을 부여하는 `emit:` 블록으로 교체합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="workflows/greeting.nf" linenums="14" hl_lines="2 3 4"
+```nextflow title="workflows/greeting.nf" showLineNumbers startLineNumber=14 step="전"
 
-        emit:
-        greetings = greetings_ch // 원본 인사말
-        timestamped = timestamped_ch // 타임스탬프가 추가된 인사말
+    publish:
+    greetings = greetings_ch
+    timestamped = timestamped_ch
+}
+
+output {
+    greetings {
     }
-    ```
-
-=== "전"
-
-    ```groovy title="workflows/greeting.nf" linenums="14"
-
-        publish:
-        greetings = greetings_ch
-        timestamped = timestamped_ch
+    timestamped {
     }
+}
+```
 
-    output {
-        greetings {
-        }
-        timestamped {
-        }
-    }
-    ```
+```nextflow {2,3,4} title="workflows/greeting.nf" showLineNumbers startLineNumber=14 step="후"
+
+    emit:
+    greetings = greetings_ch // 원본 인사말
+    timestamped = timestamped_ch // 타임스탬프가 추가된 인사말
+}
+```
+
+</CodeWalkthrough>
 
 `emit:` 블록은 상위 워크플로우가 `GREETING_WORKFLOW.out.greetings` 및 `GREETING_WORKFLOW.out.timestamped`를 통해 접근할 수 있는 이름 있는 출력을 노출합니다.
 
@@ -275,7 +274,7 @@ nextflow run workflows/greeting.nf
 
 세 가지 변경 사항을 모두 적용한 후, 완성된 파일은 다음과 같아야 합니다:
 
-```groovy title="workflows/greeting.nf" linenums="1" hl_lines="7 8 9 11 17 18 19"
+```nextflow {7,8,9,11,17,18,19} title="workflows/greeting.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 include { VALIDATE_NAME } from '../modules/validate_name'
@@ -302,15 +301,11 @@ workflow GREETING_WORKFLOW {
 
 ```bash
 nextflow run workflows/greeting.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+Launching `workflows/greeting.nf` [intergalactic_leavitt] revision: 89ac88c6c2
+No entry workflow specified
 ```
-
-??? failure "명령 출력"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-    Launching `workflows/greeting.nf` [intergalactic_leavitt] revision: 89ac88c6c2
-    No entry workflow specified
-    ```
 
 이것은 **진입 워크플로우(entry workflow)**라는 핵심 개념을 알려줍니다.
 Nextflow는 스크립트를 직접 실행할 때 이름 없는 `workflow {}` 블록을 진입점으로 사용합니다.
@@ -327,38 +322,38 @@ Nextflow는 스크립트를 직접 실행할 때 이름 없는 `workflow {}` 블
 
 `include` 구문을 추가하고, `GREETING_WORKFLOW`를 호출하도록 워크플로우 본문을 업데이트하며, `publish:`의 `channel.empty()` 플레이스홀더를 교체합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="1" hl_lines="3 9 10 13"
-    #!/usr/bin/env nextflow
+```nextflow title="main.nf" showLineNumbers step="전"
+#!/usr/bin/env nextflow
 
-    include { GREETING_WORKFLOW } from './workflows/greeting'
+workflow {
+    main:
+    names = channel.of('Alice', 'Bob', 'Charlie')
 
-    workflow {
-        main:
-        names = channel.of('Alice', 'Bob', 'Charlie')
+    publish:
+    greetings = channel.empty()
+}
+```
 
-        // greeting 워크플로우 실행
-        GREETING_WORKFLOW(names)
+```nextflow {3,9,10,13} title="main.nf" showLineNumbers step="후"
+#!/usr/bin/env nextflow
 
-        publish:
-        greetings = GREETING_WORKFLOW.out.greetings
-    }
-    ```
+include { GREETING_WORKFLOW } from './workflows/greeting'
 
-=== "전"
+workflow {
+    main:
+    names = channel.of('Alice', 'Bob', 'Charlie')
 
-    ```groovy title="main.nf" linenums="1"
-    #!/usr/bin/env nextflow
+    // greeting 워크플로우 실행
+    GREETING_WORKFLOW(names)
 
-    workflow {
-        main:
-        names = channel.of('Alice', 'Bob', 'Charlie')
+    publish:
+    greetings = GREETING_WORKFLOW.out.greetings
+}
+```
 
-        publish:
-        greetings = channel.empty()
-    }
-    ```
+</CodeWalkthrough>
 
 진입 워크플로우는 Nextflow가 파이프라인 진입점으로 사용할 수 있도록 이름 없이 유지합니다.
 
@@ -366,24 +361,24 @@ Nextflow는 스크립트를 직접 실행할 때 이름 없는 `workflow {}` 블
 
 게시된 인사말을 `greetings/` 하위 디렉토리로 라우팅하는 `path` 지시문을 추가합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="14" hl_lines="3"
-    output {
-        greetings {
-            path 'greetings'
-        }
+```nextflow {2,3} title="main.nf" showLineNumbers startLineNumber=14 step="전"
+output {
+    greetings {
     }
-    ```
+}
+```
 
-=== "전"
-
-    ```groovy title="main.nf" linenums="14" hl_lines="2 3"
-    output {
-        greetings {
-        }
+```nextflow {3} title="main.nf" showLineNumbers startLineNumber=14 step="후"
+output {
+    greetings {
+        path 'greetings'
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 #### 1.3.3. 워크플로우 실행
 
@@ -391,46 +386,48 @@ Nextflow는 스크립트를 직접 실행할 때 이름 없는 `workflow {}` 블
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+Launching `main.nf` [agitated_jones] revision: 6b0e98dd05
+executor >  local (9)
+[00/5ac4ce] GRE…DATE_NAME (validating Bob) | 3 of 3 ✔
+[7d/dde45c] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
+[fd/a044cc] GRE…ing timestamp to greeting) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/workflows_of_workflows/results
+
+  greetings:
+    - greetings/Bob-output.txt
+    - greetings/Charlie-output.txt
+    - greetings/Alice-output.txt
 ```
 
-??? success "명령 출력"
+<details class="abstract">
+<summary>`results/` 아래에 추가된 새 내용</summary>
 
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-    Launching `main.nf` [agitated_jones] revision: 6b0e98dd05
-    executor >  local (9)
-    [00/5ac4ce] GRE…DATE_NAME (validating Bob) | 3 of 3 ✔
-    [7d/dde45c] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
-    [fd/a044cc] GRE…ing timestamp to greeting) | 3 of 3 ✔
+```console
+results/
+└── greetings
+    ├── Alice-output.txt
+    ├── Bob-output.txt
+    └── Charlie-output.txt
+```
 
-    Outputs:
+1.1 섹션의 단독 실행에서 생성된 여섯 개의 파일(`Alice-output.txt`, `timestamped_Alice-output.txt` 등)이 이 새로운 `greetings/` 하위 디렉토리와 함께 `results/`에 그대로 남아 있습니다.
+이는 정상적인 동작입니다. 이 단원에서는 해당 파일들을 삭제하지 않으며, 2.1 섹션에서 해당 파일들을 직접 입력으로 읽습니다.
 
-      /workspaces/training/side-quests/workflows_of_workflows/results
+</details>
 
-      greetings:
-        - greetings/Bob-output.txt
-        - greetings/Charlie-output.txt
-        - greetings/Alice-output.txt
-    ```
+<details class="abstract">
+<summary>파일 내용</summary>
 
-??? abstract "`results/` 아래에 추가된 새 내용"
+```console title="results/greetings/Alice-output.txt"
+Hello, Alice!
+```
 
-    ```console
-    results/
-    └── greetings
-        ├── Alice-output.txt
-        ├── Bob-output.txt
-        └── Charlie-output.txt
-    ```
-
-    1.1 섹션의 단독 실행에서 생성된 여섯 개의 파일(`Alice-output.txt`, `timestamped_Alice-output.txt` 등)이 이 새로운 `greetings/` 하위 디렉토리와 함께 `results/`에 그대로 남아 있습니다.
-    이는 정상적인 동작입니다. 이 단원에서는 해당 파일들을 삭제하지 않으며, 2.1 섹션에서 해당 파일들을 직접 입력으로 읽습니다.
-
-??? abstract "파일 내용"
-
-    ```console title="results/greetings/Alice-output.txt"
-    Hello, Alice!
-    ```
+</details>
 
 인사말 파일이 `results/greetings/`에 게시됩니다.
 메인 워크플로우는 `GREETING_WORKFLOW`를 호출하고 그 출력을 `publish:` 섹션에 직접 연결합니다.
@@ -469,7 +466,7 @@ transform 워크플로우는 타임스탬프가 추가된 인사말에 텍스트
 
 `workflows/transform.nf`를 열고 코드를 확인합니다:
 
-```groovy title="workflows/transform.nf" linenums="1"
+```nextflow title="workflows/transform.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 include { SAY_HELLO_UPPER } from '../modules/say_hello_upper'
@@ -502,31 +499,27 @@ output {
 
 ```bash
 nextflow run workflows/transform.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+Launching `workflows/transform.nf` [evil_meninsky] revision: 4e35790d32
+executor >  local (6)
+[7d/4ed7de] SAY…estamped_Alice-output.txt) | 3 of 3 ✔
+[70/ddaafa] REV…imestamped_Bob-output.txt) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/workflows_of_workflows/results
+
+  upper:
+    - UPPER-timestamped_Bob-output.txt
+    - UPPER-timestamped_Charlie-output.txt
+    - UPPER-timestamped_Alice-output.txt
+
+  reversed:
+    - REVERSED-UPPER-timestamped_Charlie-output.txt
+    - REVERSED-UPPER-timestamped_Alice-output.txt
+    - REVERSED-UPPER-timestamped_Bob-output.txt
 ```
-
-??? success "명령 출력"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-    Launching `workflows/transform.nf` [evil_meninsky] revision: 4e35790d32
-    executor >  local (6)
-    [7d/4ed7de] SAY…estamped_Alice-output.txt) | 3 of 3 ✔
-    [70/ddaafa] REV…imestamped_Bob-output.txt) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/side-quests/workflows_of_workflows/results
-
-      upper:
-        - UPPER-timestamped_Bob-output.txt
-        - UPPER-timestamped_Charlie-output.txt
-        - UPPER-timestamped_Alice-output.txt
-
-      reversed:
-        - REVERSED-UPPER-timestamped_Charlie-output.txt
-        - REVERSED-UPPER-timestamped_Alice-output.txt
-        - REVERSED-UPPER-timestamped_Bob-output.txt
-    ```
 
 `GREETING_WORKFLOW`와 구성 가능하게 만들려면 1.2 섹션과 동일한 세 가지 변경 사항을 적용합니다.
 
@@ -536,7 +529,7 @@ nextflow run workflows/transform.nf
 
 완성된 파일은 다음과 같아야 합니다:
 
-```groovy title="workflows/transform.nf" linenums="1" hl_lines="6 7 8 10 15 16 17"
+```nextflow {6,7,8,10,15,16,17} title="workflows/transform.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 include { SAY_HELLO_UPPER } from '../modules/say_hello_upper'
@@ -567,49 +560,49 @@ transform 워크플로우가 이제 구성 가능해졌으며 메인 워크플�
 
 include 구문을 추가하고, 타임스탬프가 추가된 인사말에 연결된 `TRANSFORM_WORKFLOW` 호출을 추가하며, 두 개의 새로운 `publish:` 항목을 추가합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="1" hl_lines="4 13 14 18 19"
-    #!/usr/bin/env nextflow
+```nextflow title="main.nf" showLineNumbers step="전"
+#!/usr/bin/env nextflow
 
-    include { GREETING_WORKFLOW } from './workflows/greeting'
-    include { TRANSFORM_WORKFLOW } from './workflows/transform'
+include { GREETING_WORKFLOW } from './workflows/greeting'
 
-    workflow {
-        main:
-        names = channel.of('Alice', 'Bob', 'Charlie')
+workflow {
+    main:
+    names = channel.of('Alice', 'Bob', 'Charlie')
 
-        // greeting 워크플로우 실행
-        GREETING_WORKFLOW(names)
+    // greeting 워크플로우 실행
+    GREETING_WORKFLOW(names)
 
-        // transform 워크플로우 실행
-        TRANSFORM_WORKFLOW(GREETING_WORKFLOW.out.timestamped)
+    publish:
+    greetings = GREETING_WORKFLOW.out.greetings
+}
+```
 
-        publish:
-        greetings = GREETING_WORKFLOW.out.greetings
-        upper = TRANSFORM_WORKFLOW.out.upper
-        reversed = TRANSFORM_WORKFLOW.out.reversed
-    }
-    ```
+```nextflow {4,13,14,18,19} title="main.nf" showLineNumbers step="후"
+#!/usr/bin/env nextflow
 
-=== "전"
+include { GREETING_WORKFLOW } from './workflows/greeting'
+include { TRANSFORM_WORKFLOW } from './workflows/transform'
 
-    ```groovy title="main.nf" linenums="1"
-    #!/usr/bin/env nextflow
+workflow {
+    main:
+    names = channel.of('Alice', 'Bob', 'Charlie')
 
-    include { GREETING_WORKFLOW } from './workflows/greeting'
+    // greeting 워크플로우 실행
+    GREETING_WORKFLOW(names)
 
-    workflow {
-        main:
-        names = channel.of('Alice', 'Bob', 'Charlie')
+    // transform 워크플로우 실행
+    TRANSFORM_WORKFLOW(GREETING_WORKFLOW.out.timestamped)
 
-        // greeting 워크플로우 실행
-        GREETING_WORKFLOW(names)
+    publish:
+    greetings = GREETING_WORKFLOW.out.greetings
+    upper = TRANSFORM_WORKFLOW.out.upper
+    reversed = TRANSFORM_WORKFLOW.out.reversed
+}
+```
 
-        publish:
-        greetings = GREETING_WORKFLOW.out.greetings
-    }
-    ```
+</CodeWalkthrough>
 
 이렇게 하면 타임스탬프가 추가된 인사말에 transformation 워크플로우가 실행됩니다.
 
@@ -617,31 +610,31 @@ include 구문을 추가하고, 타임스탬프가 추가된 인사말에 연결
 
 `output {}` 블록에 `upper`와 `reversed` 항목을 추가하고, 각각 하위 디렉토리를 위한 `path` 지시문을 설정합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="20" hl_lines="5 6 7 8 9 10"
-    output {
-        greetings {
-            path 'greetings'
-        }
-        upper {
-            path 'upper'
-        }
-        reversed {
-            path 'reversed'
-        }
+```nextflow {2,3,4,5} title="main.nf" showLineNumbers startLineNumber=20 step="전"
+output {
+    greetings {
+        path 'greetings'
     }
-    ```
+}
+```
 
-=== "전"
-
-    ```groovy title="main.nf" linenums="20" hl_lines="2 3 4 5"
-    output {
-        greetings {
-            path 'greetings'
-        }
+```nextflow {5,6,7,8,9,10} title="main.nf" showLineNumbers startLineNumber=20 step="후"
+output {
+    greetings {
+        path 'greetings'
     }
-    ```
+    upper {
+        path 'upper'
+    }
+    reversed {
+        path 'reversed'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 이렇게 하면 최종 출력이 적절한 디렉토리에 게시됩니다.
 
@@ -651,66 +644,68 @@ include 구문을 추가하고, 타임스탬프가 추가된 인사말에 연결
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+Launching `main.nf` [special_magritte] revision: 2a0e54fecd
+executor >  local (15)
+[e7/e051a5] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
+[ca/cf1b18] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
+[e5/aa6be2] GRE…ing timestamp to greeting) | 3 of 3 ✔
+[d2/7afc88] TRA…imestamped_Bob-output.txt) | 3 of 3 ✔
+[5b/70f190] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/workflows_of_workflows/results
+
+  greetings:
+    - greetings/Bob-output.txt
+    - greetings/Charlie-output.txt
+    - greetings/Alice-output.txt
+
+  upper:
+    - upper/UPPER-timestamped_Charlie-output.txt
+    - upper/UPPER-timestamped_Bob-output.txt
+    - upper/UPPER-timestamped_Alice-output.txt
+
+  reversed:
+    - reversed/REVERSED-UPPER-timestamped_Charlie-output.txt
+    - reversed/REVERSED-UPPER-timestamped_Bob-output.txt
+    - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
 ```
 
-??? success "명령 출력"
+<details class="abstract">
+<summary>`results/` 아래에 추가된 새 내용</summary>
 
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-    Launching `main.nf` [special_magritte] revision: 2a0e54fecd
-    executor >  local (15)
-    [e7/e051a5] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
-    [ca/cf1b18] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
-    [e5/aa6be2] GRE…ing timestamp to greeting) | 3 of 3 ✔
-    [d2/7afc88] TRA…imestamped_Bob-output.txt) | 3 of 3 ✔
-    [5b/70f190] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
+```console
+results/
+├── greetings
+│   ├── Alice-output.txt
+│   ├── Bob-output.txt
+│   └── Charlie-output.txt
+├── reversed
+│   ├── REVERSED-UPPER-timestamped_Alice-output.txt
+│   ├── REVERSED-UPPER-timestamped_Bob-output.txt
+│   └── REVERSED-UPPER-timestamped_Charlie-output.txt
+└── upper
+    ├── UPPER-timestamped_Alice-output.txt
+    ├── UPPER-timestamped_Bob-output.txt
+    └── UPPER-timestamped_Charlie-output.txt
+```
 
-    Outputs:
+`results/` 루트에는 1.1 및 2.1 섹션의 단독 실행에서 남은 파일들(`Alice-output.txt`, `timestamped_Alice-output.txt`, `UPPER-timestamped_Alice-output.txt` 등)도 그대로 남아 있습니다.
+이는 정상적인 동작입니다. 이 단원에서는 해당 파일들을 삭제하도록 안내하지 않습니다.
 
-      /workspaces/training/side-quests/workflows_of_workflows/results
+</details>
 
-      greetings:
-        - greetings/Bob-output.txt
-        - greetings/Charlie-output.txt
-        - greetings/Alice-output.txt
+<details class="abstract">
+<summary>파일 내용</summary>
 
-      upper:
-        - upper/UPPER-timestamped_Charlie-output.txt
-        - upper/UPPER-timestamped_Bob-output.txt
-        - upper/UPPER-timestamped_Alice-output.txt
+```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
+!ECILA ,OLLEH ]54:84:81 31-90-6202[
+```
 
-      reversed:
-        - reversed/REVERSED-UPPER-timestamped_Charlie-output.txt
-        - reversed/REVERSED-UPPER-timestamped_Bob-output.txt
-        - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
-    ```
-
-??? abstract "`results/` 아래에 추가된 새 내용"
-
-    ```console
-    results/
-    ├── greetings
-    │   ├── Alice-output.txt
-    │   ├── Bob-output.txt
-    │   └── Charlie-output.txt
-    ├── reversed
-    │   ├── REVERSED-UPPER-timestamped_Alice-output.txt
-    │   ├── REVERSED-UPPER-timestamped_Bob-output.txt
-    │   └── REVERSED-UPPER-timestamped_Charlie-output.txt
-    └── upper
-        ├── UPPER-timestamped_Alice-output.txt
-        ├── UPPER-timestamped_Bob-output.txt
-        └── UPPER-timestamped_Charlie-output.txt
-    ```
-
-    `results/` 루트에는 1.1 및 2.1 섹션의 단독 실행에서 남은 파일들(`Alice-output.txt`, `timestamped_Alice-output.txt`, `UPPER-timestamped_Alice-output.txt` 등)도 그대로 남아 있습니다.
-    이는 정상적인 동작입니다. 이 단원에서는 해당 파일들을 삭제하도록 안내하지 않습니다.
-
-??? abstract "파일 내용"
-
-    ```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
-    !ECILA ,OLLEH ]54:84:81 31-90-6202[
-    ```
+</details>
 
 파이프라인이 처음부터 끝까지 정상적으로 작동합니다: 인사말이 대문자로 변환되고 뒤집혔습니다.
 
@@ -745,7 +740,7 @@ nextflow run main.nf
 
 1.  **워크플로우 구조**: `take:` 및 `emit:` 구문을 사용하여 각 워크플로우의 입력과 출력을 명확하게 정의하고, 구성 요소 간에 잘 정의된 인터페이스를 만들었으며, 워크플로우 로직을 `main:` 블록 안에 배치했습니다.
 
-    ```groovy
+    ```nextflow
     workflow EXAMPLE_WORKFLOW {
         take:
         // 입력 채널은 여기에 선언합니다
@@ -766,19 +761,19 @@ nextflow run main.nf
 
     - 단일 워크플로우 가져오기
 
-    ```groovy
+    ```nextflow
     include { WORKFLOW_NAME } from './path/to/workflow'
     ```
 
     - 여러 워크플로우 가져오기
 
-    ```groovy
+    ```nextflow
     include { WORKFLOW_A; WORKFLOW_B } from './path/to/workflows'
     ```
 
     - 이름 충돌을 피하기 위한 별칭으로 가져오기
 
-    ```groovy
+    ```nextflow
     include { WORKFLOW_A as WORKFLOW_A_ALIAS } from './path/to/workflow'
     ```
 
@@ -787,7 +782,7 @@ nextflow run main.nf
 
     - 이름 없는 워크플로우 (진입점)
 
-    ```groovy
+    ```nextflow
     workflow {
         // 스크립트가 실행될 때의 진입점입니다
         NAMED_WORKFLOW(input_ch)
@@ -796,7 +791,7 @@ nextflow run main.nf
 
     - 이름 있는 워크플로우 (진입 워크플로우에서 호출됨)
 
-    ```groovy
+    ```nextflow
     workflow NAMED_WORKFLOW {
         // 진입 워크플로우에서 호출되어야 합니다
     }
@@ -804,7 +799,7 @@ nextflow run main.nf
 
 4.  **데이터 흐름 관리**: 네임스페이스 표기법(`WORKFLOW_NAME.out.channel_name`)을 사용하여 워크플로우 출력에 접근하고 다른 워크플로우로 전달하는 방법을 학습했습니다.
 
-    ```groovy
+    ```nextflow
     WORKFLOW_A(input_ch)
     WORKFLOW_B(WORKFLOW_A.out.some_channel)
     ```
@@ -819,4 +814,4 @@ nextflow run main.nf
 
 ## 다음 단계
 
-[사이드 퀘스트 메뉴](../index.md)로 돌아가거나 페이지 오른쪽 하단의 버튼을 클릭하여 목록의 다음 주제로 이동하세요.
+[사이드 퀘스트 메뉴](../index.mdx)로 돌아가거나 페이지 오른쪽 하단의 버튼을 클릭하여 목록의 다음 주제로 이동하세요.

@@ -1,6 +1,9 @@
-# Partie 3 : Organisation des entrées
+---
+title: 'Partie 3 : Organisation des entrées'
+description: Dans la Partie 2, nous avons exécuté molkart avec plusieurs paramètres sur la ligne de commande.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Dans la Partie 2, nous avons exécuté molkart avec plusieurs paramètres sur la ligne de commande.
 Nous allons maintenant apprendre deux meilleures approches pour gérer les entrées : les **fichiers de paramètres** et les **feuilles d'échantillons**.
@@ -122,9 +125,9 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! Warning "Avertissement"
-
-    Notez que les chemins dans la feuille d'échantillons sont relatifs à l'endroit où vous **exécutez** Nextflow, pas à l'endroit où se trouve la feuille d'échantillons.
+:::caution[Avertissement]
+Notez que les chemins dans la feuille d'échantillons sont relatifs à l'endroit où vous **exécutez** Nextflow, pas à l'endroit où se trouve la feuille d'échantillons.
+:::
 
 Enfin, exécutons nf-core/molkart une fois de plus avec la feuille d'échantillons contenant des chemins de fichiers locaux :
 

@@ -1,11 +1,14 @@
-# Part 6: Configuració
+---
+title: 'Part 6: Configuració'
+description: El vostre plugin té funcions personalitzades i un observador, però tot està codificat de manera fixa.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 El vostre plugin té funcions personalitzades i un observador, però tot està codificat de manera fixa.
 Els usuaris no poden desactivar el comptador de tasques ni canviar el decorador sense editar el codi font i reconstruir-lo.
 
-A la Part 1, heu utilitzat els blocs `#!groovy validation {}` i `#!groovy co2footprint {}` a `nextflow.config` per controlar el comportament de nf-schema i nf-co2footprint.
+A la Part 1, heu utilitzat els blocs `validation {}{:nextflow}` i `co2footprint {}{:nextflow}` a `nextflow.config` per controlar el comportament de nf-schema i nf-co2footprint.
 Aquests blocs de configuració existeixen perquè els autors del plugin van incorporar aquesta capacitat.
 En aquesta secció, fareu el mateix per al vostre propi plugin.
 
@@ -13,7 +16,7 @@ En aquesta secció, fareu el mateix per al vostre propi plugin.
 
 1. Permetre als usuaris personalitzar el prefix i el sufix del decorador de salutacions
 2. Permetre als usuaris activar o desactivar el plugin mitjançant `nextflow.config`
-3. Registrar un àmbit de configuració formal perquè Nextflow reconegui el bloc `#!groovy greeting {}`
+3. Registrar un àmbit de configuració formal perquè Nextflow reconegui el bloc `greeting {}{:nextflow}`
 
 **Què canviareu:**
 
@@ -23,19 +26,19 @@ En aquesta secció, fareu el mateix per al vostre propi plugin.
 | `GreetingFactory.groovy`   | Llegir valors de configuració per controlar la creació d'observadors |
 | `GreetingConfig.groovy`    | Fitxer nou: classe formal `@ConfigScope`                             |
 | `build.gradle`             | Registrar la classe de configuració com a punt d'extensió            |
-| `nextflow.config`          | Afegir un bloc `#!groovy greeting {}` per provar-ho                  |
+| `nextflow.config`          | Afegir un bloc `greeting {}{:nextflow}` per provar-ho                  |
 
-!!! tip "Comenceu des d'aquí?"
+:::tip[Comenceu des d'aquí?]
+Si us incorporeu en aquesta part, copieu la solució de la Part 5 per utilitzar-la com a punt de partida:
 
-    Si us incorporeu en aquesta part, copieu la solució de la Part 5 per utilitzar-la com a punt de partida:
+```bash
+cp -r solutions/5-observers/* .
+```
+:::
 
-    ```bash
-    cp -r solutions/5-observers/* .
-    ```
-
-!!! info "Documentació oficial"
-
-    Per obtenir informació detallada sobre la configuració, consulteu la [documentació dels àmbits de configuració de Nextflow](https://nextflow.io/docs/latest/developer/config-scopes.html).
+:::note[Documentació oficial]
+Per obtenir informació detallada sobre la configuració, consulteu la [documentació dels àmbits de configuració de Nextflow](https://nextflow.io/docs/latest/developer/config-scopes.html).
+:::
 
 ---
 
@@ -53,7 +56,7 @@ final prefix = session.config.navigate('greeting.prefix', '***') as String
 
 Això correspon a un bloc de configuració al `nextflow.config` de l'usuari:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 greeting {
     prefix = '>>>'
 }
@@ -63,7 +66,7 @@ greeting {
 
 Editeu `GreetingExtension.groovy` per llegir la configuració a `init()` i utilitzar-la a `decorateGreeting()`:
 
-```groovy title="GreetingExtension.groovy" linenums="35" hl_lines="7-8 18"
+```groovy {7-8,18} title="GreetingExtension.groovy" showLineNumbers startLineNumber=35
 @CompileStatic
 class GreetingExtension extends PluginExtensionPoint {
 
@@ -112,7 +115,7 @@ El codi intenta assignar valors a `prefix` i `suffix`, però la classe no té ca
 
 Afegiu les declaracions de variables a la part superior de la classe, just després de l'obertura de la clau:
 
-```groovy title="GreetingExtension.groovy" linenums="35" hl_lines="4-5"
+```groovy {4-5} title="GreetingExtension.groovy" showLineNumbers startLineNumber=35
 @CompileStatic
 class GreetingExtension extends PluginExtensionPoint {
 
@@ -137,10 +140,10 @@ Quan el plugin es carrega, Nextflow crida el mètode `init()`, que sobreescriu a
 Si l'usuari no ha definit res, `navigate()` retorna el mateix valor per defecte, de manera que el comportament no canvia.
 El mètode `decorateGreeting()` llegeix aquests camps cada vegada que s'executa.
 
-!!! tip "Aprendre dels errors"
-
-    Aquest patró de "declarar abans d'usar" és fonamental a Java/Groovy, però pot resultar desconegut si veniu de Python o R, on les variables es creen en el moment en què s'assignen per primera vegada.
-    Experimentar aquest error una vegada us ajuda a reconèixer-lo i corregir-lo ràpidament en el futur.
+:::tip[Aprendre dels errors]
+Aquest patró de "declarar abans d'usar" és fonamental a Java/Groovy, però pot resultar desconegut si veniu de Python o R, on les variables es creen en el moment en què s'assignen per primera vegada.
+Experimentar aquest error una vegada us ajuda a reconèixer-lo i corregir-lo ràpidament en el futur.
+:::
 
 ### 1.4. Construir i provar
 
@@ -152,30 +155,30 @@ make install && cd ..
 
 Actualitzeu `nextflow.config` per personalitzar la decoració:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" hl_lines="7-10"
-    // Configuració per als exercicis de desenvolupament de plugins
-    plugins {
-        id 'nf-schema@2.6.1'
-        id 'nf-greeting@0.1.0'
-    }
+```nextflow title="nextflow.config" step="Abans"
+// Configuració per als exercicis de desenvolupament de plugins
+plugins {
+    id 'nf-schema@2.6.1'
+    id 'nf-greeting@0.1.0'
+}
+```
 
-    greeting {
-        prefix = '>>>'
-        suffix = '<<<'
-    }
-    ```
+```nextflow {7-10} title="nextflow.config" step="Després"
+// Configuració per als exercicis de desenvolupament de plugins
+plugins {
+    id 'nf-schema@2.6.1'
+    id 'nf-greeting@0.1.0'
+}
 
-=== "Abans"
+greeting {
+    prefix = '>>>'
+    suffix = '<<<'
+}
+```
 
-    ```groovy title="nextflow.config"
-    // Configuració per als exercicis de desenvolupament de plugins
-    plugins {
-        id 'nf-schema@2.6.1'
-        id 'nf-greeting@0.1.0'
-    }
-    ```
+</CodeWalkthrough>
 
 Executeu el pipeline:
 
@@ -204,32 +207,32 @@ Els usuaris haurien de poder desactivar el plugin completament mitjançant la co
 
 La factoria té accés a la sessió de Nextflow i a la seva configuració, de manera que és el lloc adequat per llegir el paràmetre `enabled` i decidir si cal crear observadors.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="GreetingFactory.groovy" linenums="31" hl_lines="3-4"
-    @Override
-    Collection<TraceObserver> create(Session session) {
-        final enabled = session.config.navigate('greeting.enabled', true)
-        if (!enabled) return []
+```groovy title="GreetingFactory.groovy" showLineNumbers startLineNumber=31 step="Abans"
+@Override
+Collection<TraceObserver> create(Session session) {
+    return [
+        new GreetingObserver(),
+        new TaskCounterObserver()
+    ]
+}
+```
 
-        return [
-            new GreetingObserver(),
-            new TaskCounterObserver()
-        ]
-    }
-    ```
+```groovy {3-4} title="GreetingFactory.groovy" showLineNumbers startLineNumber=31 step="Després"
+@Override
+Collection<TraceObserver> create(Session session) {
+    final enabled = session.config.navigate('greeting.enabled', true)
+    if (!enabled) return []
 
-=== "Abans"
+    return [
+        new GreetingObserver(),
+        new TaskCounterObserver()
+    ]
+}
+```
 
-    ```groovy title="GreetingFactory.groovy" linenums="31"
-    @Override
-    Collection<TraceObserver> create(Session session) {
-        return [
-            new GreetingObserver(),
-            new TaskCounterObserver()
-        ]
-    }
-    ```
+</CodeWalkthrough>
 
 La factoria ara llegeix `greeting.enabled` de la configuració i retorna una llista buida si l'usuari l'ha definit com a `false`.
 Quan la llista és buida, no es crea cap observador, de manera que els hooks del cicle de vida del plugin s'ometen silenciosament.
@@ -237,50 +240,50 @@ Quan la llista és buida, no es crea cap observador, de manera que els hooks del
 El test de la factoria de la Part 5 passa un `Mock(Session)` simple, que no té configuració, de manera que `navigate()` ara falla amb un `NullPointerException`.
 Actualitzeu `nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy` per donar al mock de la sessió una configuració, i afegiu un test per al cas desactivat:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="4-6 8 15-25"
-        def 'should create the observer instance' () {
-            given:
-            def factory = new GreetingFactory()
-            def session = Mock(Session) {
-                getConfig() >> [greeting: [enabled: true]]
-            }
-            when:
-            def result = factory.create(session)
-            then:
-            result.size() == 2
-            result[0] instanceof GreetingObserver
-            result[1] instanceof TaskCounterObserver
+```groovy {5} title="GreetingObserverTest.groovy" showLineNumbers startLineNumber=12 step="Abans"
+    def 'should create the observer instance' () {
+        given:
+        def factory = new GreetingFactory()
+        when:
+        def result = factory.create(Mock(Session))
+        then:
+        result.size() == 2
+        result[0] instanceof GreetingObserver
+        result[1] instanceof TaskCounterObserver
+    }
+```
+
+```groovy {4-6,8,15-25} title="GreetingObserverTest.groovy" showLineNumbers startLineNumber=12 step="Després"
+    def 'should create the observer instance' () {
+        given:
+        def factory = new GreetingFactory()
+        def session = Mock(Session) {
+            getConfig() >> [greeting: [enabled: true]]
         }
+        when:
+        def result = factory.create(session)
+        then:
+        result.size() == 2
+        result[0] instanceof GreetingObserver
+        result[1] instanceof TaskCounterObserver
+    }
 
-        def 'should return empty list when disabled' () {
-            given:
-            def factory = new GreetingFactory()
-            def session = Mock(Session) {
-                getConfig() >> [greeting: [enabled: false]]
-            }
-            when:
-            def result = factory.create(session)
-            then:
-            result.isEmpty()
+    def 'should return empty list when disabled' () {
+        given:
+        def factory = new GreetingFactory()
+        def session = Mock(Session) {
+            getConfig() >> [greeting: [enabled: false]]
         }
-    ```
+        when:
+        def result = factory.create(session)
+        then:
+        result.isEmpty()
+    }
+```
 
-=== "Abans"
-
-    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="5"
-        def 'should create the observer instance' () {
-            given:
-            def factory = new GreetingFactory()
-            when:
-            def result = factory.create(Mock(Session))
-            then:
-            result.size() == 2
-            result[0] instanceof GreetingObserver
-            result[1] instanceof TaskCounterObserver
-        }
-    ```
+</CodeWalkthrough>
 
 ### 2.1. Construir i provar
 
@@ -296,29 +299,35 @@ Executeu el pipeline per confirmar que tot continua funcionant:
 nextflow run greet.nf -ansi-log false
 ```
 
-??? exercise "Desactivar el plugin completament"
+<details class="exercise">
+<summary>Desactivar el plugin completament</summary>
 
-    Proveu de definir `greeting.enabled = false` a `nextflow.config` i executeu el pipeline de nou.
-    Què canvia a la sortida?
+Proveu de definir `greeting.enabled = false` a `nextflow.config` i executeu el pipeline de nou.
+Què canvia a la sortida?
 
-    ??? solution "Solució"
+<details class="solution">
+<summary>Solució</summary>
 
-        ```groovy title="nextflow.config" hl_lines="8"
-        // Configuració per als exercicis de desenvolupament de plugins
-        plugins {
-            id 'nf-schema@2.6.1'
-            id 'nf-greeting@0.1.0'
-        }
+```nextflow {8} title="nextflow.config"
+// Configuració per als exercicis de desenvolupament de plugins
+plugins {
+    id 'nf-schema@2.6.1'
+    id 'nf-greeting@0.1.0'
+}
 
-        greeting {
-            enabled = false
-        }
-        ```
+greeting {
+    enabled = false
+}
+```
 
-        Els missatges "Pipeline is starting!", "Pipeline complete!" i el recompte de tasques desapareixen perquè la factoria retorna una llista buida quan `enabled` és false.
-        El pipeline en si continua executant-se, però no hi ha cap observador actiu.
+Els missatges "Pipeline is starting!", "Pipeline complete!" i el recompte de tasques desapareixen perquè la factoria retorna una llista buida quan `enabled` és false.
+El pipeline en si continua executant-se, però no hi ha cap observador actiu.
 
-        Recordeu de tornar a definir `enabled` com a `true` (o eliminar la línia) abans de continuar.
+Recordeu de tornar a definir `enabled` com a `true` (o eliminar la línia) abans de continuar.
+
+</details>
+
+</details>
 
 ---
 
@@ -331,16 +340,7 @@ Una classe `ConfigScope` omple aquest buit.
 Declara quines opcions accepta el vostre plugin, els seus tipus i els seus valors per defecte.
 **No** substitueix les vostres crides a `navigate()`. En canvi, treballa conjuntament amb elles:
 
-```mermaid
-flowchart LR
-    A["nextflow.config<br/>greeting { ... }"] --> B["ConfigScope<br/><i>declares valid options</i>"]
-    A --> C["navigate()<br/><i>reads values at runtime</i>"]
-    B -. "validates &<br/>documents" .-> A
-    C -- "provides values to" --> D["Plugin code<br/><i>factory, extension</i>"]
-
-    style B fill:#e8f5e9,stroke:#4caf50
-    style C fill:#e3f2fd,stroke:#2196f3
-```
+![](../../../side_quests/plugin_development/img/mermaid-fb139af663b4f518.svg)
 
 Sense una classe `ConfigScope`, `navigate()` continua funcionant, però:
 
@@ -350,7 +350,7 @@ Sense una classe `ConfigScope`, `navigate()` continua funcionant, però:
 - La conversió de tipus és manual (`as String`, `as boolean`)
 
 Registrar una classe d'àmbit de configuració formal corregeix l'avís i resol els tres problemes.
-Aquest és el mateix mecanisme que hi ha darrere dels blocs `#!groovy validation {}` i `#!groovy co2footprint {}` que heu utilitzat a la Part 1.
+Aquest és el mateix mecanisme que hi ha darrere dels blocs `validation {}{:nextflow}` i `co2footprint {}{:nextflow}` que heu utilitzat a la Part 1.
 
 ### 3.1. Crear la classe de configuració
 
@@ -362,7 +362,7 @@ touch nf-greeting/src/main/groovy/training/plugin/GreetingConfig.groovy
 
 Afegiu la classe de configuració amb les tres opcions:
 
-```groovy title="GreetingConfig.groovy" linenums="1"
+```groovy title="GreetingConfig.groovy" showLineNumbers
 package training.plugin
 
 import nextflow.config.spec.ConfigOption
@@ -381,18 +381,18 @@ import nextflow.script.dsl.Description
  *         suffix = '<<<'
  *     }
  */
-@ScopeName('greeting')                       // (1)!
-class GreetingConfig implements ConfigScope { // (2)!
+@ScopeName('greeting')                       // [!annotate] S'associa al bloc `greeting { }` de `nextflow.config`
+class GreetingConfig implements ConfigScope { // [!annotate] Interfície obligatòria per a les classes de configuració
 
     GreetingConfig() {}
 
-    GreetingConfig(Map opts) {               // (3)!
+    GreetingConfig(Map opts) {               // [!annotate] Tant el constructor sense arguments com el constructor Map són necessaris perquè Nextflow pugui instanciar la configuració
         this.enabled = opts.enabled as Boolean ?: true
         this.prefix = opts.prefix as String ?: '***'
         this.suffix = opts.suffix as String ?: '***'
     }
 
-    @ConfigOption                            // (4)!
+    @ConfigOption                            // [!annotate] `@ConfigOption` marca un camp com a opció de configuració; `@Description` el documenta per a les eines
     @Description('Enable or disable the plugin entirely')
     boolean enabled = true
 
@@ -405,11 +405,6 @@ class GreetingConfig implements ConfigScope { // (2)!
     String suffix = '***'
 }
 ```
-
-1. S'associa al bloc `#!groovy greeting { }` de `nextflow.config`
-2. Interfície obligatòria per a les classes de configuració
-3. Tant el constructor sense arguments com el constructor Map són necessaris perquè Nextflow pugui instanciar la configuració
-4. `@ConfigOption` marca un camp com a opció de configuració; `@Description` el documenta per a les eines
 
 Punts clau:
 
@@ -424,24 +419,24 @@ Punts clau:
 Crear la classe no és suficient per si sol.
 Nextflow necessita saber que existeix, de manera que la registreu a `build.gradle` juntament amb els altres punts d'extensió.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="build.gradle" hl_lines="4"
-    extensionPoints = [
-        'training.plugin.GreetingExtension',
-        'training.plugin.GreetingFactory',
-        'training.plugin.GreetingConfig'
-    ]
-    ```
+```groovy title="build.gradle" step="Abans"
+extensionPoints = [
+    'training.plugin.GreetingExtension',
+    'training.plugin.GreetingFactory'
+]
+```
 
-=== "Abans"
+```groovy {4} title="build.gradle" step="Després"
+extensionPoints = [
+    'training.plugin.GreetingExtension',
+    'training.plugin.GreetingFactory',
+    'training.plugin.GreetingConfig'
+]
+```
 
-    ```groovy title="build.gradle"
-    extensionPoints = [
-        'training.plugin.GreetingExtension',
-        'training.plugin.GreetingFactory'
-    ]
-    ```
+</CodeWalkthrough>
 
 Tingueu en compte la diferència entre el registre de la factoria i el dels punts d'extensió:
 
@@ -457,16 +452,16 @@ nextflow run greet.nf -ansi-log false
 
 El comportament del pipeline és idèntic, però l'avís "Unrecognized config option" ha desaparegut.
 
-!!! note "Què ha canviat i què no"
-
-    `GreetingFactory` i `GreetingExtension` continuen utilitzant `session.config.navigate()` per llegir valors en temps d'execució.
-    Cap d'aquest codi ha canviat.
-    La classe `ConfigScope` és una declaració paral·lela que indica a Nextflow quines opcions existeixen.
-    Ambdues peces són necessàries: `ConfigScope` declara, `navigate()` llegeix.
+:::note[Què ha canviat i què no]
+`GreetingFactory` i `GreetingExtension` continuen utilitzant `session.config.navigate()` per llegir valors en temps d'execució.
+Cap d'aquest codi ha canviat.
+La classe `ConfigScope` és una declaració paral·lela que indica a Nextflow quines opcions existeixen.
+Ambdues peces són necessàries: `ConfigScope` declara, `navigate()` llegeix.
+:::
 
 El vostre plugin ara té la mateixa estructura que els plugins que heu utilitzat a la Part 1.
-Quan nf-schema exposa un bloc `#!groovy validation {}` o nf-co2footprint exposa un bloc `#!groovy co2footprint {}`, utilitzen exactament aquest patró: una classe `ConfigScope` amb camps anotats, registrada com a punt d'extensió.
-El vostre bloc `#!groovy greeting {}` funciona de la mateixa manera.
+Quan nf-schema exposa un bloc `validation {}{:nextflow}` o nf-co2footprint exposa un bloc `co2footprint {}{:nextflow}`, utilitzen exactament aquest patró: una classe `ConfigScope` amb camps anotats, registrada com a punt d'extensió.
+El vostre bloc `greeting {}{:nextflow}` funciona de la mateixa manera.
 
 ---
 
@@ -492,4 +487,4 @@ Heu après que:
 El vostre plugin ara té totes les peces d'un plugin de producció: funcions personalitzades, observadors de traça i configuració accessible per als usuaris.
 El pas final és empaquetar-lo per a la seva distribució.
 
-[Continua al Resum :material-arrow-right:](summary.md){ .md-button .md-button--primary }
+<LinkButton href="summary.mdx" variant="primary" icon="right-arrow">Continua al Resum</LinkButton>

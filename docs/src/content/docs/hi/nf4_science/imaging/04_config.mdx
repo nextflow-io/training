@@ -1,6 +1,9 @@
-# भाग 4: कॉन्फ़िगरेशन
+---
+title: 'भाग 4: कॉन्फ़िगरेशन'
+description: भाग 1-3 में, हमने सीखा कि Nextflow को कैसे चलाएं, एक nf-core pipeline को कैसे चलाएं, और parameter files और samplesheets के साथ inputs को कैसे मैनेज करें।
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 भाग 1-3 में, हमने सीखा कि Nextflow को कैसे चलाएं, एक nf-core pipeline को कैसे चलाएं, और parameter files और samplesheets के साथ inputs को कैसे मैनेज करें।
 अब हम **configuration files** और **profiles** का उपयोग करके विभिन्न computing environments के लिए pipelines को configure करने का तरीका जानेंगे।
@@ -46,7 +49,7 @@ Nextflow कई स्रोतों से configuration लोड करत�
 
 आइए उस configuration को देखें जिसका हम उपयोग कर रहे हैं:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 docker.enabled = true
 process {
     resourceLimits = [
@@ -80,7 +83,7 @@ code molkart/nextflow.config
 
 `profiles` block को खोजें:
 
-```groovy title="molkart/nextflow.config (excerpt)"
+```nextflow title="molkart/nextflow.config (excerpt)" nextflow="config"
 profiles {
     docker {
         docker.enabled          = true
@@ -152,7 +155,7 @@ nf-core pipelines में हमेशा कम से कम दो test pro
 
 आइए molkart में `test` profile पर करीब से नज़र डालें जो `includeConfig` निर्देश का उपयोग करके शामिल किया गया है:
 
-```groovy title="molkart/nextflow.config (excerpt)"
+```nextflow title="molkart/nextflow.config (excerpt)" nextflow="config"
 profiles {
   ...
     test      { includeConfig 'conf/test.config'      }
@@ -161,7 +164,7 @@ profiles {
 
 इसका मतलब है कि जब भी हम `-profile test` के साथ pipeline चलाते हैं, Nextflow `conf/test.config` से configuration लोड करेगा।
 
-```groovy title="molkart/conf/test.config (excerpt)"
+```nextflow title="molkart/conf/test.config (excerpt)" nextflow="config"
 params {
     config_profile_name        = 'Test profile'
     config_profile_description = 'Minimal test dataset to check pipeline function'
@@ -221,7 +224,7 @@ nf-core pipelines containers, testing, और विशेष environments क�
 
 अपने `nextflow.config` में निम्नलिखित जोड़ें:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 profiles {
     local_dev {
         docker.enabled = true
@@ -247,10 +250,10 @@ nextflow run ./molkart -profile local_dev --input data/samplesheet.csv --outdir 
 nextflow run ./molkart -profile hpc_cluster --input data/samplesheet.csv --outdir results
 ```
 
-!!! Note "नोट"
-
-    हम इस training environment में HPC profile का test नहीं कर सकते क्योंकि हमारे पास Slurm scheduler तक पहुंच नहीं है।
-    लेकिन यह दिखाता है कि आप वास्तविक उपयोग के लिए इसे कैसे configure करेंगे।
+:::note[नोट]
+हम इस training environment में HPC profile का test नहीं कर सकते क्योंकि हमारे पास Slurm scheduler तक पहुंच नहीं है।
+लेकिन यह दिखाता है कि आप वास्तविक उपयोग के लिए इसे कैसे configure करेंगे।
+:::
 
 ### 3.2. Configuration को inspect करने के लिए `nextflow config` का उपयोग करें
 
@@ -293,7 +296,7 @@ nf-core की process label system का उपयोग करके व्�
 प्रत्येक process को low, medium, या high compute resource आवश्यकताओं का वर्णन करने के लिए `process_low`, `process_medium`, या `process_high` जैसे label के साथ tag किया जाता है।
 ये labels pipeline की `conf/` directory में स्थित configuration files में से एक में विशिष्ट resource requests में परिवर्तित हो जाते हैं।
 
-```groovy title="molkart/conf/base.config (excerpt)"
+```nextflow title="molkart/conf/base.config (excerpt)" nextflow="config"
 process {
     cpus   = { 1      * task.attempt }
     memory = { 6.GB   * task.attempt }
@@ -332,7 +335,7 @@ process {
 
 fine-grained नियंत्रण के लिए, व्यक्तिगत processes को नाम से target करें:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 process {
     withName: 'NFCORE_MOLKART:MOLKART:CELLPOSE' {
         cpus   = 16
@@ -345,10 +348,10 @@ process {
 यह हमारे वर्तमान environment में pipeline को fail कर देगा क्योंकि हमारे पास इतना RAM उपलब्ध नहीं है।
 हम अगले section में इस प्रकार की failures को रोकने का तरीका सीखेंगे।
 
-!!! Tip "सुझाव"
-
-    Process names खोजने के लिए, pipeline execution output देखें या `.nextflow.log` की जांच करें।
-    Process names `WORKFLOW:SUBWORKFLOW:PROCESS` pattern का पालन करते हैं।
+:::tip[सुझाव]
+Process names खोजने के लिए, pipeline execution output देखें या `.nextflow.log` की जांच करें।
+Process names `WORKFLOW:SUBWORKFLOW:PROCESS` pattern का पालन करते हैं।
+:::
 
 ### सारांश
 
@@ -374,7 +377,7 @@ GitHub Codespaces जैसे सीमित environments में, limits �
 
 `resourceLimits` निर्देश निर्दिष्ट values पर resource requests को cap करता है:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 process {
     resourceLimits = [ cpus: 2, memory: 7.GB ]
 }
@@ -386,7 +389,7 @@ process {
 
 उपयुक्त limits शामिल करने के लिए अपने custom profiles को update करें:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 profiles {
     local_dev {
         docker.enabled = true
@@ -410,10 +413,10 @@ profiles {
 }
 ```
 
-!!! Warning "चेतावनी"
-
-    Resource limits को बहुत कम सेट करने से processes fail हो सकते हैं या धीरे चल सकते हैं।
-    Pipeline को कम memory-intensive algorithms का उपयोग करने या छोटे chunks में data को process करने की आवश्यकता हो सकती है।
+:::caution[चेतावनी]
+Resource limits को बहुत कम सेट करने से processes fail हो सकते हैं या धीरे चल सकते हैं।
+Pipeline को कम memory-intensive algorithms का उपयोग करने या छोटे chunks में data को process करने की आवश्यकता हो सकती है।
+:::
 
 ### निष्कर्ष
 
@@ -448,6 +451,6 @@ Nextflow for Bioimaging course पूरा करने के लिए बध
 अगले कदम:
 
 - Feedback प्रदान करने के लिए course survey भरें
-- Workflows develop करने के बारे में अधिक जानने के लिए [Hello Nextflow](../../hello_nextflow/index.md) देखें
-- nf-core tooling में गहराई से जाने के लिए [Build with nf-core](../../nfcore_build/index.md) explore करें
-- [Side Quests](../../side_quests/index.md) में और advanced topics explore करें
+- Workflows develop करने के बारे में अधिक जानने के लिए [Hello Nextflow](../../hello_nextflow/index.mdx) देखें
+- nf-core tooling में गहराई से जाने के लिए [Build with nf-core](../../nfcore_build/index.mdx) explore करें
+- [Side Quests](../../side_quests/index.mdx) में और advanced topics explore करें

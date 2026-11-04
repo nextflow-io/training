@@ -1,20 +1,23 @@
-# Part 2: Create a Plugin Project
+---
+title: 'Part 2: Create a Plugin Project'
+description: You've seen how plugins extend Nextflow with reusable functionality.
+---
 
 You've seen how plugins extend Nextflow with reusable functionality.
 Now you'll create your own, starting with a project template that handles the build configuration for you.
 
-!!! tip "Starting from here?"
+:::tip[Starting from here?]
+If you're joining at this part, copy the solution from Part 1 to use as your starting point:
 
-    If you're joining at this part, copy the solution from Part 1 to use as your starting point:
+```bash
+cp -r solutions/1-plugin-basics/* .
+```
+:::
 
-    ```bash
-    cp -r solutions/1-plugin-basics/* .
-    ```
-
-!!! info "Official documentation"
-
-    This section and those that follow cover plugin development essentials.
-    For comprehensive details, see the [official Nextflow plugin development documentation](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html).
+:::note[Official documentation]
+This section and those that follow cover plugin development essentials.
+For comprehensive details, see the [official Nextflow plugin development documentation](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html).
+:::
 
 ---
 
@@ -32,9 +35,9 @@ Plugin created successfully at path: /workspaces/training/side-quests/plugin_dev
 
 The first argument is the plugin name, and the second is your organization name (used to organize the generated code into folders).
 
-!!! tip "Manual creation"
-
-    You can also create plugin projects manually or use the [nf-hello template](https://github.com/nextflow-io/nf-hello) on GitHub as a starting point.
+:::tip[Manual creation]
+You can also create plugin projects manually or use the [nf-hello template](https://github.com/nextflow-io/nf-hello) on GitHub as a starting point.
+:::
 
 ---
 
@@ -135,22 +138,17 @@ plugins {
 version = '0.1.0'
 
 nextflowPlugin {
-    nextflowVersion = '25.10.0'       // (1)!
+    nextflowVersion = '25.10.0'       // [!annotate] **`nextflowVersion`**: Minimum Nextflow version required
 
-    provider = 'training'             // (2)!
-    className = 'training.plugin.GreetingPlugin'  // (3)!
-    extensionPoints = [               // (4)!
+    provider = 'training'             // [!annotate] **`provider`**: Your name or organization
+    className = 'training.plugin.GreetingPlugin'  // [!annotate] **`className`**: The main plugin class, the entry point that Nextflow loads first
+    extensionPoints = [               // [!annotate] **`extensionPoints`**: Classes that add features to Nextflow (your functions, monitoring, etc.)
         'training.plugin.GreetingExtension',
         'training.plugin.GreetingFactory'
     ]
 
 }
 ```
-
-1. **`nextflowVersion`**: Minimum Nextflow version required
-2. **`provider`**: Your name or organization
-3. **`className`**: The main plugin class, the entry point that Nextflow loads first
-4. **`extensionPoints`**: Classes that add features to Nextflow (your functions, monitoring, etc.)
 
 The `nextflowPlugin` block configures:
 
@@ -164,23 +162,23 @@ The `nextflowPlugin` block configures:
 The template generates a `nextflowVersion` value that may be outdated.
 Update it to match your installed Nextflow version for full compatibility:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="build.gradle" hl_lines="2"
-    nextflowPlugin {
-        nextflowVersion = '26.04.0'
+```groovy {2} title="build.gradle" step="Before"
+nextflowPlugin {
+    nextflowVersion = '25.10.0'
 
-        provider = 'training'
-    ```
+    provider = 'training'
+```
 
-=== "Before"
+```groovy {2} title="build.gradle" step="After"
+nextflowPlugin {
+    nextflowVersion = '26.04.0'
 
-    ```groovy title="build.gradle" hl_lines="2"
-    nextflowPlugin {
-        nextflowVersion = '25.10.0'
+    provider = 'training'
+```
 
-        provider = 'training'
-    ```
+</CodeWalkthrough>
 
 ---
 
@@ -203,20 +201,7 @@ The key ones to be aware of:
 - `GreetingExtension` provides the functions this plugin makes available to workflows
 - `GreetingObserver` runs alongside the pipeline and responds to events without requiring changes to pipeline code
 
-```mermaid
-graph TD
-    A[GreetingPlugin] -->|registers| B[GreetingExtension]
-    A -->|registers| C[GreetingFactory]
-    C -->|creates| D[GreetingObserver]
-
-    B -->|provides| E["@Function methods<br/>(callable from workflows)"]
-    D -->|hooks into| F["Lifecycle events<br/>(onFlowCreate, onProcessComplete, etc.)"]
-
-    style A fill:#e1f5fe
-    style B fill:#fff3e0
-    style C fill:#fff3e0
-    style D fill:#fff3e0
-```
+![](./img/mermaid-b474be7ef724bbf8.svg)
 
 ---
 
@@ -232,28 +217,31 @@ make install
 
 `make install` compiles the plugin code and copies it to your local Nextflow plugin directory (`$NXF_HOME/plugins/`), making it available to use.
 
-??? example "Build output"
+<details class="example">
+<summary>Build output</summary>
 
-    The first time you run this, Gradle will download itself (this may take a minute):
+The first time you run this, Gradle will download itself (this may take a minute):
 
-    ```console
-    Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
-    ...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+```console
+Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
+...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
 
-    Welcome to Gradle 8.14!
-    ...
+Welcome to Gradle 8.14!
+...
 
-    Deprecated Gradle features were used in this build...
+Deprecated Gradle features were used in this build...
 
-    BUILD SUCCESSFUL in 23s
-    6 actionable tasks: 6 executed
-    ```
+BUILD SUCCESSFUL in 23s
+6 actionable tasks: 6 executed
+```
 
-    **The warnings are expected.**
+**The warnings are expected.**
 
-    - **"Downloading gradle..."**: This only happens the first time. Subsequent builds are much faster.
-    - **"Deprecated Gradle features..."**: This warning comes from the plugin template, not your code. It is safe to ignore.
-    - **"BUILD SUCCESSFUL"**: This is what matters. Your plugin compiled without errors.
+- **"Downloading gradle..."**: This only happens the first time. Subsequent builds are much faster.
+- **"Deprecated Gradle features..."**: This warning comes from the plugin template, not your code. It is safe to ignore.
+- **"BUILD SUCCESSFUL"**: This is what matters. Your plugin compiled without errors.
+
+</details>
 
 Go back to the pipeline directory:
 
@@ -263,29 +251,29 @@ cd ..
 
 Add the nf-greeting plugin to `nextflow.config`:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" hl_lines="4"
-    // Configuration for plugin development exercises
-    plugins {
-        id 'nf-schema@2.6.1'
-        id 'nf-greeting@0.1.0'
-    }
-    ```
+```nextflow title="nextflow.config" step="Before"
+// Configuration for plugin development exercises
+plugins {
+    id 'nf-schema@2.6.1'
+}
+```
 
-=== "Before"
+```nextflow {4} title="nextflow.config" step="After"
+// Configuration for plugin development exercises
+plugins {
+    id 'nf-schema@2.6.1'
+    id 'nf-greeting@0.1.0'
+}
+```
 
-    ```groovy title="nextflow.config"
-    // Configuration for plugin development exercises
-    plugins {
-        id 'nf-schema@2.6.1'
-    }
-    ```
+</CodeWalkthrough>
 
-!!! note "Version required for local plugins"
-
-    When using locally installed plugins, you must specify the version (e.g., `nf-greeting@0.1.0`).
-    Published plugins in the registry can use just the name.
+:::note[Version required for local plugins]
+When using locally installed plugins, you must specify the version (e.g., `nf-greeting@0.1.0`).
+Published plugins in the registry can use just the name.
+:::
 
 Run the pipeline:
 
@@ -332,4 +320,4 @@ You learned that:
 
 Now you'll implement custom functions in the Extension class and use them in the workflow.
 
-[Continue to Part 3 :material-arrow-right:](03_custom_functions.md){ .md-button .md-button--primary }
+<LinkButton href="03_custom_functions.mdx" variant="primary" icon="right-arrow">Continue to Part 3</LinkButton>

@@ -1,6 +1,9 @@
-# nf-test를 활용한 테스트
+---
+title: nf-test를 활용한 테스트
+description: 워크플로우의 모든 부분이 의도한 대로 작동하는지 체계적으로 테스트할 수 있는 능력은 재현성과 장기적인 유지보수에 매우 중요하며, 개발 과정에서도 큰 도움이 됩니다.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 워크플로우의 모든 부분이 의도한 대로 작동하는지 체계적으로 테스트할 수 있는 능력은 재현성과 장기적인 유지보수에 매우 중요하며, 개발 과정에서도 큰 도움이 됩니다.
 
@@ -47,18 +50,18 @@
 
 이 사이드 퀘스트를 시작하기 전에 다음을 완료해야 합니다:
 
-- [Hello Nextflow](../../hello_nextflow/index.md) 튜토리얼 또는 동급의 입문 과정을 완료해야 합니다.
+- [Hello Nextflow](../../hello_nextflow/index.mdx) 튜토리얼 또는 동급의 입문 과정을 완료해야 합니다.
 - 기본적인 Nextflow 개념과 메커니즘(process, 채널, 연산자, 파일 작업, 메타데이터)에 익숙해야 합니다.
 
-!!! warning "nf-test 버전 요구사항"
+:::caution[nf-test 버전 요구사항]
+Process 수준 테스트는 **nf-test 0.9.3 이상**이 필요합니다. 이전 버전(0.9.2 포함)은 Nextflow가 버전 26.04부터 기본적으로 사용하는 엄격한 구문 분석기와 호환되지 않는 테스트 하네스 코드를 생성하여, 예상된 테스트 결과 대신 `Script compilation failed` 오류가 발생합니다.
 
-    Process 수준 테스트는 **nf-test 0.9.3 이상**이 필요합니다. 이전 버전(0.9.2 포함)은 Nextflow가 버전 26.04부터 기본적으로 사용하는 엄격한 구문 분석기와 호환되지 않는 테스트 하네스 코드를 생성하여, 예상된 테스트 결과 대신 `Script compilation failed` 오류가 발생합니다.
+`nf-test version` 명령으로 버전을 확인하세요. 업그레이드가 필요한 경우:
 
-    `nf-test version` 명령으로 버전을 확인하세요. 업그레이드가 필요한 경우:
-
-    ```bash
-    curl -fsSL https://code.askimed.com/install/nf-test | bash
-    ```
+```bash
+curl -fsSL https://code.askimed.com/install/nf-test | bash
+```
+:::
 
 ---
 
@@ -66,7 +69,7 @@
 
 #### 교육 코드스페이스 열기
 
-아직 열지 않았다면 [환경 설정](../../envsetup/index.md)에 설명된 대로 교육 환경을 열어 주세요.
+아직 열지 않았다면 [환경 설정](../../envsetup/index.mdx)에 설명된 대로 교육 환경을 열어 주세요.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -95,97 +98,103 @@ code .
 └── nextflow.config
 ```
 
-파일에 대한 자세한 설명은 [Hello Nextflow의 준비 운동](../../hello_nextflow/00_orientation.md)을 참조하세요.
+파일에 대한 자세한 설명은 [Hello Nextflow의 준비 운동](../../hello_nextflow/00_orientation.mdx)을 참조하세요.
 
-테스트할 워크플로우는 [Hello Workflow](../../hello_nextflow/03_hello_workflow.md)에서 구축한 Hello 워크플로우의 일부입니다.
+테스트할 워크플로우는 [Hello Workflow](../../hello_nextflow/03_hello_workflow.mdx)에서 구축한 Hello 워크플로우의 일부입니다.
 
-??? example "Hello Nextflow 워크플로우는 무엇을 하나요?"
+<details class="example">
+<summary>Hello Nextflow 워크플로우는 무엇을 하나요?</summary>
 
-    [Hello Nextflow](../../hello_nextflow/index.md) 교육을 수행하지 않은 경우, 이 간단한 워크플로우가 무엇을 하는지 간략히 설명합니다.
+[Hello Nextflow](../../hello_nextflow/index.mdx) 교육을 수행하지 않은 경우, 이 간단한 워크플로우가 무엇을 하는지 간략히 설명합니다.
 
-    워크플로우는 인사말이 담긴 CSV 파일을 받아 네 가지 연속적인 변환 단계를 실행하고, 재미있는 캐릭터가 인사말을 말하는 ASCII 그림이 담긴 단일 텍스트 파일을 출력합니다.
+워크플로우는 인사말이 담긴 CSV 파일을 받아 네 가지 연속적인 변환 단계를 실행하고, 재미있는 캐릭터가 인사말을 말하는 ASCII 그림이 담긴 단일 텍스트 파일을 출력합니다.
 
-    네 단계는 별도의 모듈 파일에 저장된 Nextflow process(`sayHello`, `convertToUpper`, `collectGreetings`, `cowpy`)로 구현됩니다.
+네 단계는 별도의 모듈 파일에 저장된 Nextflow process(`sayHello`, `convertToUpper`, `collectGreetings`, `cowpy`)로 구현됩니다.
 
-    1. **`sayHello`:** 각 인사말을 별도의 출력 파일에 씁니다 (예: "Hello-output.txt")
-    2. **`convertToUpper`:** 각 인사말을 대문자로 변환합니다 (예: "HELLO")
-    3. **`collectGreetings`:** 모든 대문자 인사말을 단일 배치 파일로 수집합니다
-    4. **`cowpy`:** `cowpy` 도구를 사용하여 ASCII 아트를 생성합니다
+1. **`sayHello`:** 각 인사말을 별도의 출력 파일에 씁니다 (예: "Hello-output.txt")
+2. **`convertToUpper`:** 각 인사말을 대문자로 변환합니다 (예: "HELLO")
+3. **`collectGreetings`:** 모든 대문자 인사말을 단일 배치 파일로 수집합니다
+4. **`cowpy`:** `cowpy` 도구를 사용하여 ASCII 아트를 생성합니다
 
-    결과는 `results/` 디렉토리에 게시되며, 파이프라인의 최종 출력(기본 매개변수로 실행 시)은 대문자로 변환된 인사말을 말하는 캐릭터의 ASCII 아트가 담긴 일반 텍스트 파일입니다.
+결과는 `results/` 디렉토리에 게시되며, 파이프라인의 최종 출력(기본 매개변수로 실행 시)은 대문자로 변환된 인사말을 말하는 캐릭터의 ASCII 아트가 담긴 일반 텍스트 파일입니다.
 
-    이 사이드 퀘스트에서는 처음 두 process만 포함하는 Hello 워크플로우의 중간 형태를 사용합니다. <!-- TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 -->
+이 사이드 퀘스트에서는 처음 두 process만 포함하는 Hello 워크플로우의 중간 형태를 사용합니다. {/* TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 */}
+
+</details>
 
 작업할 부분은 `sayHello`와 `convertToUpper` 두 process로 구성됩니다.
 전체 워크플로우 코드는 아래에서 확인할 수 있습니다.
 
-??? example "워크플로우 코드"
+<details class="example">
+<summary>워크플로우 코드</summary>
 
-    ```groovy title="main.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="main.nf"
+#!/usr/bin/env nextflow
 
-    /*
-     * 파이프라인 매개변수
-     */
-    params.input_file = "greetings.csv"
+/*
+ * 파이프라인 매개변수
+ */
+params.input_file = "greetings.csv"
 
-    /*
-     * echo를 사용하여 'Hello World!'를 표준 출력에 출력
-     */
-    process sayHello {
+/*
+ * echo를 사용하여 'Hello World!'를 표준 출력에 출력
+ */
+process sayHello {
 
-        input:
-        val greeting
+    input:
+    val greeting
 
-        output:
-        path "${greeting}-output.txt"
+    output:
+    path "${greeting}-output.txt"
 
-        script:
-        """
-        echo '$greeting' > '$greeting-output.txt'
-        """
+    script:
+    """
+    echo '$greeting' > '$greeting-output.txt'
+    """
+}
+
+/*
+ * 텍스트 변환 유틸리티를 사용하여 인사말을 대문자로 변환
+ */
+process convertToUpper {
+
+    input:
+    path input_file
+
+    output:
+    path "UPPER-${input_file}"
+
+    script:
+    """
+    cat $input_file | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
+    """
+}
+
+workflow {
+    main:
+    // CSV 파일에서 입력 채널 생성
+    greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
+
+    // 인사말 출력
+    sayHello(greeting_ch)
+
+    // 인사말을 대문자로 변환
+    convertToUpper(sayHello.out)
+
+    publish:
+    greetings = sayHello.out
+    upper_greetings = convertToUpper.out
+}
+
+output {
+    greetings {
     }
-
-    /*
-     * 텍스트 변환 유틸리티를 사용하여 인사말을 대문자로 변환
-     */
-    process convertToUpper {
-
-        input:
-        path input_file
-
-        output:
-        path "UPPER-${input_file}"
-
-        script:
-        """
-        cat $input_file | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
-        """
+    upper_greetings {
     }
+}
+```
 
-    workflow {
-        main:
-        // CSV 파일에서 입력 채널 생성
-        greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
-
-        // 인사말 출력
-        sayHello(greeting_ch)
-
-        // 인사말을 대문자로 변환
-        convertToUpper(sayHello.out)
-
-        publish:
-        greetings = sayHello.out
-        upper_greetings = convertToUpper.out
-    }
-
-    output {
-        greetings {
-        }
-        upper_greetings {
-        }
-    }
-    ```
+</details>
 
 #### 워크플로우 실행
 
@@ -235,7 +244,7 @@ Outputs:
 
 여러분의 과제는 nf-test를 사용하여 이 워크플로우에 표준화된 테스트를 추가하는 것입니다. 이를 통해 추가적인 변경이 이루어지더라도 모든 부분이 계속 예상대로 작동하는지 쉽게 확인할 수 있습니다.
 
-<!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
+{/* TODO: give a bit more details, similar to how it's done in the Metadata side quest */}
 
 #### 준비 확인 목록
 
@@ -427,26 +436,26 @@ ERROR ~ No such file or directory: /workspaces/training/side-quests/nf-test/.nf-
 
 테스트에서 파이프라인의 루트를 어떻게 가리킬지 궁금할 것입니다. 이는 일반적인 상황이므로 nf-test에는 작업을 쉽게 만들어 주는 다양한 전역 변수가 있습니다. 전체 목록은 [여기](https://www.nf-test.com/docs/testcases/global_variables/)에서 확인할 수 있으며, 지금은 파이프라인 프로젝트의 루트를 의미하는 `projectDir` 변수를 사용하겠습니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="3"
-    when {
-        params {
-            input_file = "${projectDir}/greetings.csv"
-        }
+```groovy {3,4} title="tests/main.nf.test" showLineNumbers step="전"
+when {
+    params {
+        // 여기에 매개변수를 정의합니다. 예:
+        // outdir = "tests/results"
     }
-    ```
+}
+```
 
-=== "전"
-
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="3 4"
-    when {
-        params {
-            // 여기에 매개변수를 정의합니다. 예:
-            // outdir = "tests/results"
-        }
+```groovy {3} title="tests/main.nf.test" showLineNumbers step="후"
+when {
+    params {
+        input_file = "${projectDir}/greetings.csv"
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 테스트를 다시 실행하여 작동하는지 확인합니다.
 
@@ -525,42 +534,42 @@ SUCCESS: Executed 1 tests in 5.239s
 
 파이프라인이 예상한 수의 process를 실행하는지 확인하는 assertion을 테스트에 추가합니다. 또한 테스트 이름을 테스트하는 내용을 더 잘 반영하도록 업데이트합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="1 11"
-        test("Should run successfully with correct number of processes") {
+```groovy {1} title="tests/main.nf.test" showLineNumbers step="전"
+    test("Should run without failures") {
 
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
             }
-
-            then {
-                assert workflow.success
-                assert workflow.trace.tasks().size() == 6
-            }
-
         }
-    ```
 
-=== "전"
-
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="1"
-        test("Should run without failures") {
-
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
-            }
-
-            then {
-                assert workflow.success
-            }
-
+        then {
+            assert workflow.success
         }
-    ```
+
+    }
+```
+
+```groovy {1,11} title="tests/main.nf.test" showLineNumbers step="후"
+    test("Should run successfully with correct number of processes") {
+
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert workflow.trace.tasks().size() == 6
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 이제 테스트 이름이 실제로 검증하는 내용을 더 잘 반영합니다. 단순히 파이프라인이 실패 없이 실행되는지뿐만 아니라 예상한 수의 process가 실행되는지도 확인합니다.
 
@@ -591,62 +600,62 @@ SUCCESS: Executed 1 tests in 2.879s
 
 출력 파일이 생성되었는지 확인하는 assertion을 테스트에 추가합니다. 결과를 더 쉽게 해석할 수 있도록 설명적인 이름과 함께 별도의 테스트로 추가합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="14-33"
-        test("Should run successfully with correct number of processes") {
+```groovy {14} title="tests/main.nf.test" showLineNumbers step="전"
+    test("Should run successfully with correct number of processes") {
 
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
             }
-
-            then {
-                assert workflow.success
-                assert workflow.trace.tasks().size() == 6
-            }
-
         }
 
-        test("Should produce correct output files") {
-
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
-            }
-
-            then {
-                assert file("$launchDir/results/Bonjour-output.txt").exists()
-                assert file("$launchDir/results/Hello-output.txt").exists()
-                assert file("$launchDir/results/Hola-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Hola-output.txt").exists()
-            }
-
+        then {
+            assert workflow.success
+            assert workflow.trace.tasks().size() == 6
         }
-    ```
 
-=== "전"
+    }
+```
 
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="14"
-        test("Should run successfully with correct number of processes") {
+```groovy {14-33} title="tests/main.nf.test" showLineNumbers step="후"
+    test("Should run successfully with correct number of processes") {
 
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
             }
-
-            then {
-                assert workflow.success
-                assert workflow.trace.tasks().size() == 6
-            }
-
         }
-    ```
+
+        then {
+            assert workflow.success
+            assert workflow.trace.tasks().size() == 6
+        }
+
+    }
+
+    test("Should produce correct output files") {
+
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
+            }
+        }
+
+        then {
+            assert file("$launchDir/results/Bonjour-output.txt").exists()
+            assert file("$launchDir/results/Hello-output.txt").exists()
+            assert file("$launchDir/results/Hola-output.txt").exists()
+            assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
+            assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
+            assert file("$launchDir/results/UPPER-Hola-output.txt").exists()
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 테스트를 다시 실행하여 작동하는지 확인합니다.
 
@@ -784,58 +793,58 @@ Test Process sayHello
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
-`sayHello` process가 1개의 입력을 선언했지만 0개의 인자로 호출되었기 때문에 테스트가 실패합니다. process에 입력을 추가하여 이를 수정합니다. [Hello Workflow](../../hello_nextflow/03_hello_workflow.md)(및 위의 준비 운동 섹션)에서 `sayHello` process가 단일 값 입력을 받는다는 것을 기억하세요. 이를 제공해야 합니다. 또한 테스트 이름을 테스트하는 내용을 더 잘 반영하도록 수정합니다.
+`sayHello` process가 1개의 입력을 선언했지만 0개의 인자로 호출되었기 때문에 테스트가 실패합니다. process에 입력을 추가하여 이를 수정합니다. [Hello Workflow](../../hello_nextflow/03_hello_workflow.mdx)(및 위의 준비 운동 섹션)에서 `sayHello` process가 단일 값 입력을 받는다는 것을 기억하세요. 이를 제공해야 합니다. 또한 테스트 이름을 테스트하는 내용을 더 잘 반영하도록 수정합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 10"
-        test("Should run without failures and produce correct output") {
+```groovy {1,10,11} title="tests/main.sayhello.nf.test" showLineNumbers step="전"
+    test("Should run without failures") {
 
-            when {
-                params {
-                    // 매개변수를 여기에 정의합니다. 예시:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    input[0] = "hello"
-                    """
-                }
+        when {
+            params {
+                // 매개변수를 여기에 정의합니다. 예시:
+                // outdir = "tests/results"
             }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
+            process {
+                """
+                // process의 입력을 여기에 정의합니다. 예시:
+                // input[0] = file("test-file.txt")
+                """
             }
-
         }
-    ```
 
-=== "전"
-
-    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 10 11"
-        test("Should run without failures") {
-
-            when {
-                params {
-                    // 매개변수를 여기에 정의합니다. 예시:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    // process의 입력을 여기에 정의합니다. 예시:
-                    // input[0] = file("test-file.txt")
-                    """
-                }
-            }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
-            }
-
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
         }
-    ```
+
+    }
+```
+
+```groovy {1,10} title="tests/main.sayhello.nf.test" showLineNumbers step="후"
+    test("Should run without failures and produce correct output") {
+
+        when {
+            params {
+                // 매개변수를 여기에 정의합니다. 예시:
+                // outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = "hello"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 테스트를 다시 실행하여 작동하는지 확인합니다.
 
@@ -887,9 +896,9 @@ code tests/main.sayhello.nf.test.snap
 
 이는 명시적으로 테스트하는 `sayHello` process가 생성한 출력을 나타냅니다. 테스트를 다시 실행하면 프로그램은 새 출력이 원래 기록된 출력과 일치하는지 확인합니다. 이는 process 출력이 변경되지 않는지 테스트하는 빠르고 간단한 방법이므로 nf-test가 기본값으로 제공합니다.
 
-!!! warning "경고"
-
-    즉, 원래 실행에서 기록한 출력이 올바른지 확인해야 합니다!
+:::caution[경고]
+즉, 원래 실행에서 기록한 출력이 올바른지 확인해야 합니다!
+:::
 
 향후 개발 과정에서 코드의 무언가가 변경되어 출력이 달라지면 테스트가 실패하고 변경이 예상된 것인지 아닌지 판단해야 합니다.
 
@@ -927,55 +936,55 @@ SUCCESS: Executed 1 tests in 3.097s
 
 다음은 특정 콘텐츠를 확인하도록 테스트를 수정하는 방법입니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 5 16 17"
-        test("Should run without failures and contain expected greeting") {
+```groovy {1,5,6,17} title="tests/main.sayhello.nf.test" showLineNumbers step="전"
+    test("Should run without failures and produce correct output") {
 
-            when {
-                params {
-                    // 매개변수를 여기에 정의합니다
-                }
-                process {
-                    """
-                    input[0] = "hello"
-                    """
-                }
+        when {
+            params {
+                // 매개변수를 여기에 정의합니다. 예시:
+                // outdir = "tests/results"
             }
-
-            then {
-                assert process.success
-                assert path(process.out[0][0]).readLines().contains('hello')
-                assert !path(process.out[0][0]).readLines().contains('HELLO')
+            process {
+                """
+                input[0] = "hello"
+                """
             }
-
         }
-    ```
 
-=== "전"
-
-    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 5 6 17"
-        test("Should run without failures and produce correct output") {
-
-            when {
-                params {
-                    // 매개변수를 여기에 정의합니다. 예시:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    input[0] = "hello"
-                    """
-                }
-            }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
-            }
-
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
         }
-    ```
+
+    }
+```
+
+```groovy {1,5,16,17} title="tests/main.sayhello.nf.test" showLineNumbers step="후"
+    test("Should run without failures and contain expected greeting") {
+
+        when {
+            params {
+                // 매개변수를 여기에 정의합니다
+            }
+            process {
+                """
+                input[0] = "hello"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert path(process.out[0][0]).readLines().contains('hello')
+            assert !path(process.out[0][0]).readLines().contains('HELLO')
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 nf-test는 process 출력을 리스트의 리스트로 인식하므로, `process.out[0][0]`은 이 process의 첫 번째 채널 항목(또는 '방출')의 첫 번째 부분을 가져옵니다.
 
@@ -1055,56 +1064,56 @@ nextflow_process {
 
 지금은 파이프라인 수준 테스트에서 사용한 예시를 활용하여 기존 greetings.csv 파일을 재사용합니다. 이전과 마찬가지로 테스트하는 내용을 더 잘 반영하도록 테스트 이름을 지정할 수 있지만, 이번에는 (다른 process에서 했던 것처럼) 특정 문자열을 확인하는 대신 콘텐츠를 '스냅샷'으로 남겨두겠습니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.converttoupper.nf.test" linenums="1" hl_lines="1 10"
-        test("Should run without failures and produce correct output") {
+```groovy {1,10,11} title="tests/main.converttoupper.nf.test" showLineNumbers step="전"
+    test("Should run without failures") {
 
-            when {
-                params {
-                    // 매개변수를 여기에 정의합니다. 예시:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    input[0] = "${projectDir}/greetings.csv"
-                    """
-                }
+        when {
+            params {
+                // 매개변수를 여기에 정의합니다. 예시:
+                // outdir = "tests/results"
             }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
+            process {
+                """
+                // process의 입력을 여기에 정의합니다. 예시:
+                // input[0] = file("test-file.txt")
+                """
             }
-
         }
-    ```
 
-=== "전"
-
-    ```groovy title="tests/main.converttoupper.nf.test" linenums="1" hl_lines="1 10 11"
-        test("Should run without failures") {
-
-            when {
-                params {
-                    // 매개변수를 여기에 정의합니다. 예시:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    // process의 입력을 여기에 정의합니다. 예시:
-                    // input[0] = file("test-file.txt")
-                    """
-                }
-            }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
-            }
-
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
         }
-    ```
+
+    }
+```
+
+```groovy {1,10} title="tests/main.converttoupper.nf.test" showLineNumbers step="후"
+    test("Should run without failures and produce correct output") {
+
+        when {
+            params {
+                // 매개변수를 여기에 정의합니다. 예시:
+                // outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = "${projectDir}/greetings.csv"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 테스트를 실행합니다!
 
@@ -1229,7 +1238,7 @@ SUCCESS: Executed 4 tests in 15.746s
 
 ### 핵심 패턴
 
-<!-- TODO: Can we add snippets of code below to illustrate? -->
+{/* TODO: Can we add snippets of code below to illustrate? */}
 
 1. 파이프라인 수준 테스트:
    - 기본 성공 테스트
@@ -1257,4 +1266,4 @@ SUCCESS: Executed 4 tests in 15.746s
 
 ## 다음 단계
 
-[사이드 퀘스트 메뉴](../index.md)로 돌아가거나 페이지 오른쪽 하단의 버튼을 클릭하여 목록의 다음 주제로 이동하세요.
+[사이드 퀘스트 메뉴](../index.mdx)로 돌아가거나 페이지 오른쪽 하단의 버튼을 클릭하여 목록의 다음 주제로 이동하세요.

@@ -1,12 +1,12 @@
 ---
 title: Versões do Nextflow
 description: Entendendo e gerenciando a evolução das versões de sintaxe do Nextflow
-hide:
-  - toc
-  - footer
+tableOfContents: false
+prev: false
+next: false
 ---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Versão de sintaxe do Nextflow atualmente suportada e requisitos
 
@@ -17,8 +17,8 @@ A versão do Nextflow atualmente carregada por padrão em nosso ambiente de trei
 
 Como os cursos agora usam entradas tipadas no nível do fluxo de trabalho, bem como diretivas de saída no nível do fluxo de trabalho, eles requerem o uso do analisador de sintaxe V2, **a menos que especificado de outra forma**.
 O analisador V2 é o padrão a partir do Nextflow 26.04 em diante, portanto, na versão que carregamos, você não precisa habilitá-lo manualmente.
-Se você planeja usar o ambiente que fornecemos através do [Github Codespaces](../envsetup/01_setup.md) ou [devcontainers locais](../envsetup/03_devcontainer.md), você não precisa fazer nada, a menos que especificamente indicado nas instruções do curso.
-No entanto, se você está planejando trabalhar nos treinamentos em seu próprio ambiente ([Instalação manual](../envsetup/02_local.md)), você precisará garantir o uso do Nextflow versão 25.10.2 ou posterior e habilitar o analisador de sintaxe v2 caso esteja usando uma versão anterior à 26.04.
+Se você planeja usar o ambiente que fornecemos através do [Github Codespaces](../envsetup/01_setup.mdx) ou [devcontainers locais](../envsetup/03_devcontainer.mdx), você não precisa fazer nada, a menos que especificamente indicado nas instruções do curso.
+No entanto, se você está planejando trabalhar nos treinamentos em seu próprio ambiente ([Instalação manual](../envsetup/02_local.mdx)), você precisará garantir o uso do Nextflow versão 25.10.2 ou posterior e habilitar o analisador de sintaxe v2 caso esteja usando uma versão anterior à 26.04.
 
 ## Versões mais antigas dos materiais de treinamento
 
@@ -78,7 +78,7 @@ Para **desabilitar** o analisador de sintaxe v2 para sua sessão atual, execute 
 export NXF_SYNTAX_PARSER=v1
 ```
 
-<!-- Will it be possible to disable it in versions after 26.04? -->
+{/* Will it be possible to disable it in versions after 26.04? */}
 
 ### Migrando código existente
 

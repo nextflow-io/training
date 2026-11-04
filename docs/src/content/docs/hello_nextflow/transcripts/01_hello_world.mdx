@@ -1,14 +1,17 @@
-# Part 1: Hello World - Video Transcript
+---
+title: 'Part 1: Hello World - Video Transcript'
+description: 'Hello Nextflow: Part 1: Hello World - Video Transcript'
+---
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-!!!note "Important notes"
+:::note[Important notes]
+This page shows the transcript only. For full step-by-step instructions, return to the [course material](../01_hello_world.mdx).
 
-    This page shows the transcript only. For full step-by-step instructions, return to the [course material](../01_hello_world.md).
-
-    The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.
+The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.
+:::
 
 ## Welcome
 
@@ -278,7 +281,7 @@ Okay. What's next? For the final part of this chapter, we're gonna talk a little
 
 And the other thing is, as I said before, every time I rerun this pipeline, it's creating a new set of work directories, and it's rerunning all the processes from scratch, which is a good thing. That's intended behavior. It's reproducible and it's regenerating everything fresh. But it obviously, if you're running very long running processes, it's annoying to always have to start your pipeline from the beginning if it crashed halfway through, or if you change something at the end of the pipeline.
 
-## 4.1. Re-launch a workflow with -resume
+## 4.1. Re-launch a workflow with -resume {#41-re-launch-a-workflow-with-resume}
 
 Luckily, Nextflow is really, good at knowing what has previously been run and what's available, and to reuse those old results is very, simple. We just add a, new flag at the end of the command _"-resume"_.
 

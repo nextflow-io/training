@@ -1,6 +1,9 @@
-# 요약
+---
+title: 요약
+description: 플러그인 개발 교육 과정을 완료하셨습니다.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 플러그인 개발 교육 과정을 완료하셨습니다.
 이 페이지에서는 각 파트에서 구현한 내용을 정리하고, 배포 방법과 다음 단계에 대한 안내를 제공합니다.
@@ -75,7 +78,7 @@ version = '1.0.0'  // 시맨틱 버전 관리 사용: MAJOR.MINOR.PATCH
 
 게시 후에는 로컬 설정 없이 플러그인을 설치할 수 있습니다:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 plugins {
     id 'nf-greeting@1.0.0'
 }
@@ -123,7 +126,7 @@ nextflowPlugin {
 
 **워크플로우에서 사용:**
 
-```groovy
+```nextflow
 include { myFunction } from 'plugin/my-plugin'
 
 workflow {

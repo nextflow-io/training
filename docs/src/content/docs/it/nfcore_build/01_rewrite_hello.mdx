@@ -1,22 +1,25 @@
-# Parte 1: Riscrivere Hello per nf-core
+---
+title: 'Parte 1: Riscrivere Hello per nf-core'
+description: In questa prima parte del corso di formazione Build with nf-core, vi mostriamo come creare una versione compatibile con nf-core della pipeline prodotta dal…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-In questa prima parte del corso di formazione Build with nf-core, vi mostriamo come creare una versione compatibile con nf-core della pipeline prodotta dal corso per principianti [Hello Nextflow](../hello_nextflow/index.md).
+In questa prima parte del corso di formazione Build with nf-core, vi mostriamo come creare una versione compatibile con nf-core della pipeline prodotta dal corso per principianti [Hello Nextflow](../hello_nextflow/index.mdx).
 
 Lo faremo in due fasi: prima utilizzeremo gli strumenti nf-core per creare uno scaffold della pipeline, poi innesteremo il codice della pipeline 'regolare' esistente sullo scaffold.
 
-Se non avete familiarità con la pipeline Hello o potreste aver bisogno di un ripasso, consultate [questa pagina informativa](../info/hello_pipeline.md).
+Se non avete familiarità con la pipeline Hello o potreste aver bisogno di un ripasso, consultate [questa pagina informativa](../info/hello_pipeline.mdx).
 
-!!! tip "Suggerimento"
+:::tip[Suggerimento]
+Questa parte del corso introdurrà due importanti meccanismi di Nextflow che non sono trattati nel corso introduttivo Hello Nextflow: [meta maps](../side_quests/metadata/index.mdx) e [workflows of workflows](../side_quests/workflows_of_workflows/index.mdx), entrambi trattati in dettaglio nelle Side Quest collegate.
 
-    Questa parte del corso introdurrà due importanti meccanismi di Nextflow che non sono trattati nel corso introduttivo Hello Nextflow: [meta maps](../side_quests/metadata/index.md) e [workflows of workflows](../side_quests/workflows_of_workflows/index.md), entrambi trattati in dettaglio nelle Side Quest collegate.
+Le istruzioni seguenti includono le informazioni essenziali necessarie per capire come vengono utilizzati nel contesto nf-core, ma può essere molto da assimilare tutto in una volta.
+Se avete il tempo, vi consigliamo di lavorare prima sulle due Side Quest (in qualsiasi ordine):
 
-    Le istruzioni seguenti includono le informazioni essenziali necessarie per capire come vengono utilizzati nel contesto nf-core, ma può essere molto da assimilare tutto in una volta.
-    Se avete il tempo, vi consigliamo di lavorare prima sulle due Side Quest (in qualsiasi ordine):
-
-    - [Workflows of Workflows](../side_quests/workflows_of_workflows/index.md)
-    - [Metadata and meta maps](../side_quests/metadata/index.md)
+- [Workflows of Workflows](../side_quests/workflows_of_workflows/index.mdx)
+- [Metadata and meta maps](../side_quests/metadata/index.mdx)
+:::
 
 ---
 
@@ -25,7 +28,7 @@ Se non avete familiarità con la pipeline Hello o potreste aver bisogno di un ri
 Il progetto nf-core impone linee guida rigorose su come le pipeline sono strutturate e su come il codice è organizzato, configurato e documentato.
 
 Prima di affrontare il nostro progetto di creazione della pipeline, dobbiamo comprendere quella struttura e organizzazione.
-Quindi diamo un'occhiata a come il codice della pipeline è organizzato nel repository `nf-core/demo`, utilizzando la copia in `pipelines/nf-core/demo` che avete clonato durante [Getting started](00_orientation.md).
+Quindi diamo un'occhiata a come il codice della pipeline è organizzato nel repository `nf-core/demo`, utilizzando la copia in `pipelines/nf-core/demo` che avete clonato durante [Getting started](00_orientation.mdx).
 
 Come promemoria, potete usare `tree` o il file explorer per trovare e aprire la directory `pipelines/nf-core/demo`.
 
@@ -33,36 +36,39 @@ Come promemoria, potete usare `tree` o il file explorer per trovare e aprire la 
 tree -L 1 pipelines/nf-core/demo
 ```
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console
-    pipelines/nf-core/demo
-    ├── assets
-    ├── CHANGELOG.md
-    ├── CITATIONS.md
-    ├── CODE_OF_CONDUCT.md
-    ├── conf
-    ├── docs
-    ├── LICENSE
-    ├── main.nf
-    ├── modules
-    ├── modules.json
-    ├── nextflow.config
-    ├── nextflow_schema.json
-    ├── nf-test.config
-    ├── README.md
-    ├── ro-crate-metadata.json
-    ├── subworkflows
-    ├── tests
-    ├── tower.yml
-    └── workflows
-    ```
+```console
+pipelines/nf-core/demo
+├── assets
+├── CHANGELOG.md
+├── CITATIONS.md
+├── CODE_OF_CONDUCT.md
+├── conf
+├── docs
+├── LICENSE
+├── main.nf
+├── modules
+├── modules.json
+├── nextflow.config
+├── nextflow_schema.json
+├── nf-test.config
+├── README.md
+├── ro-crate-metadata.json
+├── subworkflows
+├── tests
+├── tower.yml
+└── workflows
+```
+
+</details>
 
 Per ora ci concentreremo specificamente sui componenti del codice della pipeline (`main.nf`, `workflows`, `subworkflows`, `modules`) e su come si relazionano tra loro.
 
 ### 1.1. Struttura modulare dei flussi di lavoro nf-core
 
-L'organizzazione standard del codice delle pipeline nf-core segue una struttura modulare progettata per massimizzare il riutilizzo del codice, come introdotto in [Hello Modules](../hello_nextflow/04_hello_modules.md), Parte 4 del corso [Hello Nextflow](../hello_nextflow/index.md), sebbene in vero stile nf-core, questo sia implementato con un po' di complessità aggiuntiva.
+L'organizzazione standard del codice delle pipeline nf-core segue una struttura modulare progettata per massimizzare il riutilizzo del codice, come introdotto in [Hello Modules](../hello_nextflow/04_hello_modules.mdx), Parte 4 del corso [Hello Nextflow](../hello_nextflow/index.mdx), sebbene in vero stile nf-core, questo sia implementato con un po' di complessità aggiuntiva.
 In particolare, le pipeline nf-core fanno un uso abbondante di subworkflow, ovvero script di flusso di lavoro importati da un flusso di lavoro genitore.
 
 Può sembrare un po' astratto, quindi vediamo come viene utilizzato in pratica nella pipeline `nf-core/demo`.
@@ -71,18 +77,16 @@ Se guardate dentro il file `main.nf`, vedrete che importa un flusso di lavoro ch
 
 Ecco come appaiono le relazioni tra i componenti del codice rilevanti:
 
-<figure class="excalidraw">
-    --8<-- "docs/en/docs/nfcore_build/img/nf-core_demo_code_organization.svg"
-</figure>
+![](../../nfcore_build/img/nf-core_demo_code_organization.excalidraw.svg)
 
 Il flusso di lavoro senza nome in `main.nf` è chiamato script _entrypoint_. Funge da wrapper per due tipi di flussi di lavoro annidati: il flusso di lavoro `DEMO` contenente la logica di analisi effettiva, situato in `workflows/demo.nf`, e un insieme di flussi di lavoro di housekeeping situati sotto `subworkflows/`.
 Il flusso di lavoro `demo.nf` si avvale di **moduli** situati sotto `modules/`; questi contengono i **processi** che eseguiranno i passi di analisi effettivi.
 
-!!! info "Info"
+:::note[Info]
+I subworkflow non sono limitati alle funzioni di housekeeping e possono utilizzare moduli di processo.
 
-    I subworkflow non sono limitati alle funzioni di housekeeping e possono utilizzare moduli di processo.
-
-    La pipeline `nf-core/demo` mostrata qui è sul lato più semplice dello spettro, ma altre pipeline nf-core (come `nf-core/rnaseq`) utilizzano subworkflow coinvolti nell'analisi effettiva.
+La pipeline `nf-core/demo` mostrata qui è sul lato più semplice dello spettro, ma altre pipeline nf-core (come `nf-core/rnaseq`) utilizzano subworkflow coinvolti nell'analisi effettiva.
+:::
 
 Ora esaminiamo questi componenti in dettaglio.
 
@@ -103,17 +107,17 @@ Tratteremo le differenze rilevanti nella prossima parte di questo corso, quando 
 
 Il flusso di lavoro `demo.nf` si avvale di **moduli** situati sotto `modules/`, che esamineremo di seguito.
 
-!!! info "Info"
+:::note[Info]
+Alcuni flussi di lavoro di analisi nf-core mostrano livelli aggiuntivi di annidamento chiamando subworkflow di livello inferiore.
+Questo viene utilizzato principalmente per raggruppare due o più moduli comunemente usati insieme in segmenti di pipeline facilmente riutilizzabili.
+Potete vedere alcuni esempi sfogliando i [subworkflow nf-core](https://nf-co.re/subworkflows/) disponibili sul sito web nf-core.
 
-    Alcuni flussi di lavoro di analisi nf-core mostrano livelli aggiuntivi di annidamento chiamando subworkflow di livello inferiore.
-    Questo viene utilizzato principalmente per raggruppare due o più moduli comunemente usati insieme in segmenti di pipeline facilmente riutilizzabili.
-    Potete vedere alcuni esempi sfogliando i [subworkflow nf-core](https://nf-co.re/subworkflows/) disponibili sul sito web nf-core.
-
-    Quando lo script di analisi utilizza subworkflow, questi sono memorizzati sotto la directory `subworkflows/`.
+Quando lo script di analisi utilizza subworkflow, questi sono memorizzati sotto la directory `subworkflows/`.
+:::
 
 ### 1.4. I moduli
 
-I moduli sono dove vive il codice dei processi, come descritto nella [Parte 4 del corso di formazione Hello Nextflow](../hello_nextflow/04_hello_modules.md).
+I moduli sono dove vive il codice dei processi, come descritto nella [Parte 4 del corso di formazione Hello Nextflow](../hello_nextflow/04_hello_modules.mdx).
 
 Nel progetto nf-core, i moduli sono organizzati utilizzando una struttura annidata a più livelli che riflette sia la loro origine che il loro contenuto.
 Al livello superiore, i moduli sono differenziati come `nf-core` o `local` (non parte del progetto nf-core), e poi ulteriormente collocati in una directory denominata in base agli strumenti che racchiudono.
@@ -125,31 +129,34 @@ Potete vedere questo applicato in pratica ai moduli della pipeline `nf-core/demo
 tree -L 3 pipelines/nf-core/demo/modules
 ```
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console
-    pipelines/nf-core/demo/modules
-    ├── local
-    │   └── cowpy
-    │       ├── environment.yml
-    │       ├── main.nf
-    │       └── meta.yaml
-    └── nf-core
-        ├── fastqc
-        │   ├── environment.yml
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
-        ├── multiqc
-        │   ├── environment.yml
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
-        └── seqtk
-            └── trim
+```console
+pipelines/nf-core/demo/modules
+├── local
+│   └── cowpy
+│       ├── environment.yml
+│       ├── main.nf
+│       └── meta.yaml
+└── nf-core
+    ├── fastqc
+    │   ├── environment.yml
+    │   ├── main.nf
+    │   ├── meta.yml
+    │   └── tests
+    ├── multiqc
+    │   ├── environment.yml
+    │   ├── main.nf
+    │   ├── meta.yml
+    │   └── tests
+    └── seqtk
+        └── trim
 
-    9 directories, 9 files
-    ```
+9 directories, 9 files
+```
+
+</details>
 
 Qui vedete che i moduli `fastqc` e `multiqc` si trovano al livello superiore all'interno dei moduli `nf-core`, mentre il modulo `trim` si trova sotto il toolkit a cui appartiene, `seqtk`.
 Il modulo `cowpy` sotto `local` è un modulo locale, scritto specificamente per questa pipeline anziché installato dal repository dei moduli nf-core.
@@ -167,36 +174,39 @@ Come i moduli, i subworkflow sono differenziati in directory `local` e `nf-core`
 tree -L 3 pipelines/nf-core/demo/subworkflows
 ```
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console
-    pipelines/nf-core/demo/subworkflows
-    ├── local
-    │   └── utils_nfcore_demo_pipeline
-    │       └── main.nf
-    └── nf-core
-        ├── utils_nextflow_pipeline
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
-        ├── utils_nfcore_pipeline
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
-        └── utils_nfschema_plugin
-            ├── main.nf
-            ├── meta.yml
-            └── tests
+```console
+pipelines/nf-core/demo/subworkflows
+├── local
+│   └── utils_nfcore_demo_pipeline
+│       └── main.nf
+└── nf-core
+    ├── utils_nextflow_pipeline
+    │   ├── main.nf
+    │   ├── meta.yml
+    │   └── tests
+    ├── utils_nfcore_pipeline
+    │   ├── main.nf
+    │   ├── meta.yml
+    │   └── tests
+    └── utils_nfschema_plugin
+        ├── main.nf
+        ├── meta.yml
+        └── tests
 
-    9 directories, 7 files
-    ```
+9 directories, 7 files
+```
+
+</details>
 
 Come notato sopra, la pipeline `nf-core/demo` non include subworkflow specifici per l'analisi, quindi tutti i subworkflow che vediamo qui sono i cosiddetti flussi di lavoro di 'housekeeping' o 'utility', come indicato dal prefisso `utils_` nei loro nomi.
 Questi subworkflow sono ciò che produce il bell'header nf-core nell'output della console, tra le altre funzioni accessorie.
 
-!!! tip "Suggerimento"
-
-    Oltre al loro schema di denominazione, un'altra indicazione che questi subworkflow non svolgono alcuna funzione veramente correlata all'analisi è che non chiamano alcun processo.
+:::tip[Suggerimento]
+Oltre al loro schema di denominazione, un'altra indicazione che questi subworkflow non svolgono alcuna funzione veramente correlata all'analisi è che non chiamano alcun processo.
+:::
 
 Questo completa la panoramica dei componenti principali del codice che costituiscono la pipeline `nf-core/demo`.
 
@@ -226,8 +236,8 @@ nf-core pipelines create
 
 L'esecuzione di questo comando aprirà un'interfaccia utente testuale (TUI) per la creazione della pipeline:
 
-<div style="text-align: center;">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/VwjXNXONHlY?si=d0HkFSISnKn76TeI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/VwjXNXONHlY?si=d0HkFSISnKn76TeI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 Questa TUI vi chiederà di fornire informazioni di base sulla vostra pipeline e vi offrirà una scelta di funzionalità da includere o escludere nello scaffold della pipeline.
@@ -258,20 +268,23 @@ Questa TUI vi chiederà di fornire informazioni di base sulla vostra pipeline e 
 
 Una volta chiusa la TUI, dovreste vedere il seguente output nella console.
 
-??? success "Output del comando"
+<details class="success">
+<summary>Output del comando</summary>
 
-    ```console
-                                              ,--./,-.
-              ___     __   __   __   ___     /,-._.--~\
-        |\ | |__  __ /  ` /  \ |__) |__         }  {
-        | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                              `._,._,'
+```console
+                                          ,--./,-.
+          ___     __   __   __   ___     /,-._.--~\
+    |\ | |__  __ /  ` /  \ |__) |__         }  {
+    | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                          `._,._,'
 
-        nf-core/tools version 4.1.0 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
-    INFO     Launching interactive nf-core pipeline creation tool.
-    ```
+INFO     Launching interactive nf-core pipeline creation tool.
+```
+
+</details>
 
 Una volta completata la TUI, lo strumento segnala che ha creato la pipeline e inizializzato un repository git locale per la nuova pipeline:
 
@@ -289,64 +302,67 @@ Visualizzate i contenuti della nuova directory per vedere quanto lavoro vi siete
 tree core-hello
 ```
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console
-    core-hello
-    ├── assets
-    │   ├── samplesheet.csv
-    │   └── schema_input.json
-    ├── conf
-    │   ├── base.config
-    │   ├── modules.config
-    │   ├── test.config
-    │   └── test_full.config
-    ├── docs
-    │   ├── CONTRIBUTING.md
-    │   ├── output.md
-    │   ├── README.md
-    │   └── usage.md
-    ├── main.nf
-    ├── modules.json
-    ├── nextflow.config
-    ├── nextflow_schema.json
-    ├── README.md
-    ├── subworkflows
-    │   ├── local
-    │   │   └── utils_nfcore_hello_pipeline
-    │   │       └── main.nf
-    │   └── nf-core
-    │       ├── utils_nextflow_pipeline
-    │       │   ├── main.nf
-    │       │   ├── meta.yml
-    │       │   └── tests
-    │       │       ├── main.function.nf.test
-    │       │       ├── main.function.nf.test.snap
-    │       │       ├── main.workflow.nf.test
-    │       │       └── nextflow.config
-    │       ├── utils_nfcore_pipeline
-    │       │   ├── main.nf
-    │       │   ├── meta.yml
-    │       │   └── tests
-    │       │       ├── main.function.nf.test
-    │       │       ├── main.function.nf.test.snap
-    │       │       ├── main.nf.test
-    │       │       ├── main.nf.test.snap
-    │       │       ├── main.workflow.nf.test
-    │       │       ├── main.workflow.nf.test.snap
-    │       │       └── nextflow.config
-    │       └── utils_nfschema_plugin
-    │           ├── main.nf
-    │           ├── meta.yml
-    │           └── tests
-    │               ├── main.nf.test
-    │               ├── nextflow.config
-    │               └── nextflow_schema.json
-    └── workflows
-        └── hello.nf
+```console
+core-hello
+├── assets
+│   ├── samplesheet.csv
+│   └── schema_input.json
+├── conf
+│   ├── base.config
+│   ├── modules.config
+│   ├── test.config
+│   └── test_full.config
+├── docs
+│   ├── CONTRIBUTING.md
+│   ├── output.md
+│   ├── README.md
+│   └── usage.md
+├── main.nf
+├── modules.json
+├── nextflow.config
+├── nextflow_schema.json
+├── README.md
+├── subworkflows
+│   ├── local
+│   │   └── utils_nfcore_hello_pipeline
+│   │       └── main.nf
+│   └── nf-core
+│       ├── utils_nextflow_pipeline
+│       │   ├── main.nf
+│       │   ├── meta.yml
+│       │   └── tests
+│       │       ├── main.function.nf.test
+│       │       ├── main.function.nf.test.snap
+│       │       ├── main.workflow.nf.test
+│       │       └── nextflow.config
+│       ├── utils_nfcore_pipeline
+│       │   ├── main.nf
+│       │   ├── meta.yml
+│       │   └── tests
+│       │       ├── main.function.nf.test
+│       │       ├── main.function.nf.test.snap
+│       │       ├── main.nf.test
+│       │       ├── main.nf.test.snap
+│       │       ├── main.workflow.nf.test
+│       │       ├── main.workflow.nf.test.snap
+│       │       └── nextflow.config
+│       └── utils_nfschema_plugin
+│           ├── main.nf
+│           ├── meta.yml
+│           └── tests
+│               ├── main.nf.test
+│               ├── nextflow.config
+│               └── nextflow_schema.json
+└── workflows
+    └── hello.nf
 
-    14 directories, 37 files
-    ```
+14 directories, 37 files
+```
+
+</details>
 
 Sono molti file!
 Non preoccupatevi se vi sentite ancora un po' spaesati; percorreremo insieme le parti importanti a breve, e poi passo dopo passo nel resto del corso.
@@ -359,42 +375,38 @@ Che ci crediate o no, anche se non avete ancora aggiunto alcun modulo per farle 
 
 ```bash
 nextflow run ./core-hello -profile docker,test --outdir core-hello-results
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `./core-hello/main.nf` [cheesy_avogadro] revision: d6bbba9521
+
+WARN: Unrecognized config option 'validation.defaultIgnoreParams'
+WARN: Unrecognized config option 'validation.monochromeLogs'
+Input/output options
+  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
+  outdir                    : core-hello-results
+
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
+
+Generic options
+  trace_report_suffix       : 2026-06-23_16-56-58
+
+Core Nextflow options
+  runName                   : cheesy_avogadro
+  containerEngine           : docker
+  launchDir                 : /workspaces/training/nfcore-build
+  workDir                   : /workspaces/training/nfcore-build/work
+  projectDir                : /workspaces/training/nfcore-build/core-hello
+  userName                  : root
+  profile                   : docker,test
+  configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+-[core/hello] Pipeline completed successfully-
 ```
-
-??? success "Output del comando"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `./core-hello/main.nf` [cheesy_avogadro] revision: d6bbba9521
-
-    WARN: Unrecognized config option 'validation.defaultIgnoreParams'
-    WARN: Unrecognized config option 'validation.monochromeLogs'
-    Input/output options
-      input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
-      outdir                    : core-hello-results
-
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
-
-    Generic options
-      trace_report_suffix       : 2026-06-23_16-56-58
-
-    Core Nextflow options
-      runName                   : cheesy_avogadro
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nfcore-build
-      workDir                   : /workspaces/training/nfcore-build/work
-      projectDir                : /workspaces/training/nfcore-build/core-hello
-      userName                  : root
-      profile                   : docker,test
-      configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
-
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-    -[core/hello] Pipeline completed successfully-
-    ```
 
 Le righe `WARN: Unrecognized config option 'validation.*'` provengono dalla versione del plugin nf-schema fissata nel template appena creato.
 Sono innocue e non influenzano l'esecuzione.
@@ -402,23 +414,23 @@ Sono innocue e non influenzano l'esecuzione.
 Il resto di questo corso utilizza nf-schema 2.7.2, che non produce questi avvisi.
 Aprite `core-hello/nextflow.config` e aggiornate la versione del plugin nel blocco `plugins`:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/nextflow.config" linenums="246" hl_lines="3"
-    // Nextflow plugins
-    plugins {
-        id 'nf-schema@2.7.2' // Validazione dei parametri della pipeline e creazione di un canale di input da un sample sheet
-    }
-    ```
+```nextflow {3} title="core-hello/nextflow.config" showLineNumbers startLineNumber=246 step="Prima"
+// Nextflow plugins
+plugins {
+    id 'nf-schema@2.5.1' // Validazione dei parametri della pipeline e creazione di un canale di input da un sample sheet
+}
+```
 
-=== "Prima"
+```nextflow {3} title="core-hello/nextflow.config" showLineNumbers startLineNumber=246 step="Dopo"
+// Nextflow plugins
+plugins {
+    id 'nf-schema@2.7.2' // Validazione dei parametri della pipeline e creazione di un canale di input da un sample sheet
+}
+```
 
-    ```groovy title="core-hello/nextflow.config" linenums="246" hl_lines="3"
-    // Nextflow plugins
-    plugins {
-        id 'nf-schema@2.5.1' // Validazione dei parametri della pipeline e creazione di un canale di input da un sample sheet
-    }
-    ```
+</CodeWalkthrough>
 
 Questo vi mostra che tutto il cablaggio di base è a posto.
 Quindi, dove sono gli output? Ce ne sono?
@@ -429,24 +441,27 @@ In effetti, è stata creata una nuova directory di risultati chiamata `core-hell
 tree core-hello-results
 ```
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console
-    core-hello-results
-    └── pipeline_info
-        ├── execution_report_2026-06-23_16-56-58.html
-        ├── execution_timeline_2026-06-23_16-56-58.html
-        ├── execution_trace_2026-06-23_16-56-58.txt
-        ├── hello_software_versions.yml
-        ├── params_2026-06-23_16-57-00.json
-        └── pipeline_dag_2026-06-23_16-56-58.html
+```console
+core-hello-results
+└── pipeline_info
+    ├── execution_report_2026-06-23_16-56-58.html
+    ├── execution_timeline_2026-06-23_16-56-58.html
+    ├── execution_trace_2026-06-23_16-56-58.txt
+    ├── hello_software_versions.yml
+    ├── params_2026-06-23_16-57-00.json
+    └── pipeline_dag_2026-06-23_16-56-58.html
 
-    1 directory, 6 files
-    ```
+1 directory, 6 files
+```
+
+</details>
 
 Potete dare un'occhiata ai report per vedere cosa è stato eseguito, e la risposta è: niente del tutto!
 
-![report timeline di esecuzione vuoto](./img/execution_timeline_empty.png)
+![report timeline di esecuzione vuoto](../../nfcore_build/img/execution_timeline_empty.png)
 
 Diamo un'occhiata più da vicino a cosa c'è effettivamente nel codice.
 
@@ -458,9 +473,7 @@ Questo è l'equivalente diretto del flusso di lavoro `DEMO`, anche se al momento
 
 E di conseguenza, questa è la struttura complessiva dello scaffold della pipeline:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nfcore_build/img/core-hello-initial.svg"
-</figure>
+![](../../nfcore_build/img/core-hello-initial.excalidraw.svg)
 
 Questo dovrebbe ricordarvi la struttura della pipeline `nf-core/demo`!
 L'unica vera differenza è che il flusso di lavoro `DEMO` includeva processi dai moduli.
@@ -472,7 +485,7 @@ Diamo un'occhiata più da vicino.
 
 Questo funge da placeholder per il nostro flusso di lavoro di analisi, con alcune funzionalità nf-core già in atto.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 21 53"
+```nextflow {15,17,21,53} title="core-hello/workflows/hello.nf" showLineNumbers
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -536,7 +549,7 @@ workflow HELLO {
 */
 ```
 
-Rispetto a un flusso di lavoro Nextflow di base come quello sviluppato in [Hello Nextflow](../hello_nextflow/index.md), noterete alcune cose nuove qui (righe evidenziate sopra):
+Rispetto a un flusso di lavoro Nextflow di base come quello sviluppato in [Hello Nextflow](../hello_nextflow/index.mdx), noterete alcune cose nuove qui (righe evidenziate sopra):
 
 - Il blocco workflow ha un nome
 - Gli input del flusso di lavoro sono dichiarati utilizzando la parola chiave `take:` (qui un canale samplesheet e una directory di output), e la costruzione del canale viene spostata al flusso di lavoro genitore
@@ -545,12 +558,15 @@ Rispetto a un flusso di lavoro Nextflow di base come quello sviluppato in [Hello
 
 Queste sono funzionalità opzionali di Nextflow che rendono il flusso di lavoro **componibile**, il che significa che può essere richiamato dall'interno di un altro flusso di lavoro.
 
-??? note "Il blocco `channel.topic`"
+<details class="note">
+<summary>Il blocco `channel.topic`</summary>
 
-    Potreste aver notato il blocco `def topic_versions = channel.topic("versions")` che inizia alla riga 28.
-    Si tratta di codice di housekeeping standard che raccoglie automaticamente le informazioni sulla versione del software da tutti i moduli.
-    nf-core sta introducendo questo meccanismo in tutte le pipeline nel 2026, quindi lo vedrete in tutte le nuove pipeline da ora in avanti.
-    La Parte 3 di questo corso spiega come funziona in dettaglio.
+Potreste aver notato il blocco `def topic_versions = channel.topic("versions")` che inizia alla riga 28.
+Si tratta di codice di housekeeping standard che raccoglie automaticamente le informazioni sulla versione del software da tutti i moduli.
+nf-core sta introducendo questo meccanismo in tutte le pipeline nel 2026, quindi lo vedrete in tutte le nuove pipeline da ora in avanti.
+La Parte 3 di questo corso spiega come funziona in dettaglio.
+
+</details>
 
 Dovremo collegare la logica pertinente dal nostro flusso di lavoro di interesse in quella struttura.
 
@@ -568,16 +584,14 @@ Imparare come rendere un semplice flusso di lavoro componibile come preludio a r
 
 Ora è il momento di mettersi al lavoro per integrare il nostro flusso di lavoro nello scaffold nf-core.
 
-Come promemoria, stiamo lavorando con il flusso di lavoro presentato nel nostro corso di formazione [Hello Nextflow](../hello_nextflow/index.md).
+Come promemoria, stiamo lavorando con il flusso di lavoro presentato nel nostro corso di formazione [Hello Nextflow](../hello_nextflow/index.mdx).
 Quel flusso di lavoro è stato scritto come un semplice flusso di lavoro senza nome che può essere eseguito autonomamente.
 
 Per mappare chiaramente quali parti del flusso di lavoro originale dovrebbero andare dove nello scaffold nf-core, inizieremo trasformando il flusso di lavoro Hello originale in un flusso di lavoro **componibile** che può essere eseguito dall'interno di un flusso di lavoro genitore, come richiede il template nf-core.
 
 Questo è ciò che stiamo cercando di costruire in questo momento:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nfcore_build/img/composable-hello.svg"
-</figure>
+![](../../nfcore_build/img/composable-hello.excalidraw.svg)
 
 In sostanza, vogliamo imitare la struttura modulare dello scaffold nf-core, ma con meno complessità per cominciare.
 
@@ -587,40 +601,39 @@ Vi forniamo una copia pulita e completamente funzionale del workflow Hello Nextf
 tree original-hello/
 ```
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console
-    original-hello/
-    ├── hello.nf
-    ├── modules
-    │   ├── collectGreetings.nf
-    │   ├── convertToUpper.nf
-    │   ├── cowpy.nf
-    │   └── sayHello.nf
-    └── nextflow.config
+```console
+original-hello/
+├── hello.nf
+├── modules
+│   ├── collectGreetings.nf
+│   ├── convertToUpper.nf
+│   ├── cowpy.nf
+│   └── sayHello.nf
+└── nextflow.config
 
-    1 directory, 6 files
-    ```
+1 directory, 6 files
+```
+
+</details>
 
 Sentitevi liberi di eseguirla per assicurarvi che funzioni:
 
 ```bash
 nextflow run original-hello/hello.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `original-hello/hello.nf` [sharp_dijkstra] revision: 319b99ee58
+
+executor >  local (8)
+[23/4eb61e] sayHello (3)       | 3 of 3 ✔
+[c8/81a076] convertToUpper (1) | 3 of 3 ✔
+[90/ea197e] collectGreetings   | 1 of 1 ✔
+[da/3df79a] cowpy              | 1 of 1 ✔
 ```
-
-??? success "Output del comando"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `original-hello/hello.nf` [sharp_dijkstra] revision: 319b99ee58
-
-    executor >  local (8)
-    [23/4eb61e] sayHello (3)       | 3 of 3 ✔
-    [c8/81a076] convertToUpper (1) | 3 of 3 ✔
-    [90/ea197e] collectGreetings   | 1 of 1 ✔
-    [da/3df79a] cowpy              | 1 of 1 ✔
-    ```
 
 Se funziona, siete pronti per iniziare.
 
@@ -628,7 +641,7 @@ Se funziona, siete pronti per iniziare.
 
 Apriamo il file workflow `hello.nf` per ispezionare il codice, che è mostrato per intero di seguito (senza contare i processi, che sono nei moduli):
 
-```groovy title="original-hello/hello.nf" linenums="1"
+```nextflow title="original-hello/hello.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 /*
@@ -679,17 +692,17 @@ Esaminiamo le modifiche necessarie una per una.
 
 Prima di tutto, diamo un nome al flusso di lavoro così possiamo fare riferimento ad esso da un flusso di lavoro genitore.
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="original-hello/hello.nf" linenums="16"
-    workflow HELLO {
-    ```
+```nextflow title="original-hello/hello.nf" showLineNumbers startLineNumber=16 step="Prima"
+workflow {
+```
 
-=== "Prima"
+```nextflow title="original-hello/hello.nf" showLineNumbers startLineNumber=16 step="Dopo"
+workflow HELLO {
+```
 
-    ```groovy title="original-hello/hello.nf" linenums="16"
-    workflow {
-    ```
+</CodeWalkthrough>
 
 Le stesse convenzioni si applicano ai nomi dei flussi di lavoro come ai nomi dei moduli.
 
@@ -697,93 +710,93 @@ Le stesse convenzioni si applicano ai nomi dei flussi di lavoro come ai nomi dei
 
 Ora, sostituite la costruzione del canale con una semplice dichiarazione `take` che dichiara gli input attesi.
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="original-hello/hello.nf" linenums="18"
-        take:
-        // canale dei saluti
-        greeting_ch
-    ```
+```nextflow title="original-hello/hello.nf" showLineNumbers startLineNumber=18 step="Prima"
+    // crea un canale per gli input da un file CSV
+    greeting_ch = channel.fromPath(params.greeting)
+                        .splitCsv()
+                        .map { line -> line[0] }
+```
 
-=== "Prima"
+```nextflow title="original-hello/hello.nf" showLineNumbers startLineNumber=18 step="Dopo"
+    take:
+    // canale dei saluti
+    greeting_ch
+```
 
-    ```groovy title="original-hello/hello.nf" linenums="18"
-        // crea un canale per gli input da un file CSV
-        greeting_ch = channel.fromPath(params.greeting)
-                            .splitCsv()
-                            .map { line -> line[0] }
-    ```
+</CodeWalkthrough>
 
 Questo lascia i dettagli di come vengono forniti gli input al flusso di lavoro genitore.
 
 Mentre ci siamo, possiamo anche commentare la riga `params.greeting = 'greetings.csv'`
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="original-hello/hello.nf" linenums="3" hl_lines="4"
-        /*
-        * Pipeline parameters
-        */
-        //params.greeting = 'greetings.csv'
-        params.batch = 'test-batch'
-        params.character = 'turkey'
-    ```
+```nextflow {4} title="original-hello/hello.nf" showLineNumbers startLineNumber=3 step="Prima"
+    /*
+    * Pipeline parameters
+    */
+    params.greeting = 'greetings.csv'
+    params.batch = 'test-batch'
+    params.character = 'turkey'
+```
 
-=== "Prima"
+```nextflow {4} title="original-hello/hello.nf" showLineNumbers startLineNumber=3 step="Dopo"
+    /*
+    * Pipeline parameters
+    */
+    //params.greeting = 'greetings.csv'
+    params.batch = 'test-batch'
+    params.character = 'turkey'
+```
 
-    ```groovy title="original-hello/hello.nf" linenums="3" hl_lines="4"
-        /*
-        * Pipeline parameters
-        */
-        params.greeting = 'greetings.csv'
-        params.batch = 'test-batch'
-        params.character = 'turkey'
-    ```
+</CodeWalkthrough>
 
-!!! info "Info"
+:::note[Info]
+Se avete installato l'estensione del language server di Nextflow, il controllo della sintassi evidenzierà il vostro codice con sottolineature rosse ondulate.
+Questo perché se inserite una dichiarazione `take:`, dovete anche avere un `main:`.
 
-    Se avete installato l'estensione del language server di Nextflow, il controllo della sintassi evidenzierà il vostro codice con sottolineature rosse ondulate.
-    Questo perché se inserite una dichiarazione `take:`, dovete anche avere un `main:`.
-
-    Lo aggiungeremo nel prossimo passaggio.
+Lo aggiungeremo nel prossimo passaggio.
+:::
 
 #### 3.1.3. Prefare le operazioni del workflow con la dichiarazione `main`
 
 Successivamente, aggiungete una dichiarazione `main` prima del resto delle operazioni chiamate nel corpo del flusso di lavoro.
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="original-hello/hello.nf" linenums="22" hl_lines="1"
-        main:
+```nextflow title="original-hello/hello.nf" showLineNumbers startLineNumber=22 step="Prima"
+    // emette un saluto
+    sayHello(greeting_ch)
 
-        // emette un saluto
-        sayHello(greeting_ch)
+    // converte il saluto in maiuscolo
+    convertToUpper(sayHello.out)
 
-        // converte il saluto in maiuscolo
-        convertToUpper(sayHello.out)
+    // raccoglie tutti i saluti in un file
+    collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // raccoglie tutti i saluti in un file
-        collectGreetings(convertToUpper.out.collect(), params.batch)
+    // genera arte ASCII dei saluti con cowpy
+    cowpy(collectGreetings.out.outfile, params.character)
+```
 
-        // genera arte ASCII dei saluti con cowpy
-        cowpy(collectGreetings.out.outfile, params.character)
-    ```
+```nextflow {1} title="original-hello/hello.nf" showLineNumbers startLineNumber=22 step="Dopo"
+    main:
 
-=== "Prima"
+    // emette un saluto
+    sayHello(greeting_ch)
 
-    ```groovy title="original-hello/hello.nf" linenums="22"
-        // emette un saluto
-        sayHello(greeting_ch)
+    // converte il saluto in maiuscolo
+    convertToUpper(sayHello.out)
 
-        // converte il saluto in maiuscolo
-        convertToUpper(sayHello.out)
+    // raccoglie tutti i saluti in un file
+    collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // raccoglie tutti i saluti in un file
-        collectGreetings(convertToUpper.out.collect(), params.batch)
+    // genera arte ASCII dei saluti con cowpy
+    cowpy(collectGreetings.out.outfile, params.character)
+```
 
-        // genera arte ASCII dei saluti con cowpy
-        cowpy(collectGreetings.out.outfile, params.character)
-    ```
+</CodeWalkthrough>
 
 Questo sostanzialmente dice 'questo è ciò che questo flusso di lavoro _fa_'.
 
@@ -791,7 +804,7 @@ Questo sostanzialmente dice 'questo è ciò che questo flusso di lavoro _fa_'.
 
 Infine, aggiungete una dichiarazione `emit` che dichiara quali sono gli output finali del flusso di lavoro.
 
-```groovy title="original-hello/hello.nf" linenums="36"
+```nextflow title="original-hello/hello.nf" showLineNumbers startLineNumber=36
     emit:
     cowpy_hellos = cowpy.out
 ```
@@ -802,7 +815,7 @@ Questa è un'aggiunta completamente nuova al codice rispetto al flusso di lavoro
 
 Se avete effettuato tutte le modifiche come descritto, il vostro flusso di lavoro dovrebbe ora apparire così:
 
-```groovy title="original-hello/hello.nf" linenums="1" hl_lines="16 18-20 22 36-37"
+```nextflow {16,18-20,22,36-37} title="original-hello/hello.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 /*
@@ -859,7 +872,7 @@ touch original-hello/main.nf
 
 Copiate il seguente codice nel file `main.nf`.
 
-```groovy title="original-hello/main.nf" linenums="1"
+```nextflow title="original-hello/main.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 // importa il codice del flusso di lavoro dal file hello.nf
@@ -887,15 +900,15 @@ Ci sono due osservazioni importanti da fare qui:
 - La sintassi per chiamare il flusso di lavoro importato è essenzialmente la stessa della sintassi per chiamare i moduli.
 - Tutto ciò che è correlato al trasferimento degli input nel flusso di lavoro (parametro di input e costruzione del canale) è ora dichiarato in questo flusso di lavoro genitore.
 
-!!! info "Info"
+:::note[Info]
+Nominare il file del flusso di lavoro entrypoint `main.nf` è una convenzione, non un requisito.
 
-    Nominare il file del flusso di lavoro entrypoint `main.nf` è una convenzione, non un requisito.
+Se seguite questa convenzione, potete omettere di specificare il nome del file del flusso di lavoro nel vostro comando `nextflow run`.
+Nextflow cercherà automaticamente un file chiamato `main.nf` nella directory di esecuzione.
 
-    Se seguite questa convenzione, potete omettere di specificare il nome del file del flusso di lavoro nel vostro comando `nextflow run`.
-    Nextflow cercherà automaticamente un file chiamato `main.nf` nella directory di esecuzione.
-
-    Tuttavia, potete nominare il file del flusso di lavoro entrypoint in altro modo se preferite.
-    In tal caso, assicuratevi di specificare il nome del file del flusso di lavoro nel vostro comando `nextflow run`.
+Tuttavia, potete nominare il file del flusso di lavoro entrypoint in altro modo se preferite.
+In tal caso, assicuratevi di specificare il nome del file del flusso di lavoro nel vostro comando `nextflow run`.
+:::
 
 ### 3.3. Testare che il workflow venga eseguito
 
@@ -911,20 +924,23 @@ Se avessimo nominato il flusso di lavoro entrypoint `something_else.nf`, avremmo
 
 Se avete effettuato tutte le modifiche correttamente, questo dovrebbe essere eseguito fino al completamento.
 
-??? success "Output del comando"
+<details class="success">
+<summary>Output del comando</summary>
 
-    ```console
-    N E X T F L O W   ~  version 26.04.4
+```console
+N E X T F L O W   ~  version 26.04.4
 
-    Launching `original-hello/main.nf` [irreverent_cajal] revision: 619249b1d7
+Launching `original-hello/main.nf` [irreverent_cajal] revision: 619249b1d7
 
-    executor >  local (8)
-    [50/b02a90] HELLO:sayHello (1)       | 3 of 3 ✔
-    [c0/3c336a] HELLO:convertToUpper (2) | 3 of 3 ✔
-    [5c/47bb4f] HELLO:collectGreetings   | 1 of 1 ✔
-    [07/bfc706] HELLO:cowpy              | 1 of 1 ✔
-    Output: /workspaces/training/nfcore-build/work/07/bfc7061fa521e86f4e1954191ab4c4/cowpy-COLLECTED-test-batch-output.txt
-    ```
+executor >  local (8)
+[50/b02a90] HELLO:sayHello (1)       | 3 of 3 ✔
+[c0/3c336a] HELLO:convertToUpper (2) | 3 of 3 ✔
+[5c/47bb4f] HELLO:collectGreetings   | 1 of 1 ✔
+[07/bfc706] HELLO:cowpy              | 1 of 1 ✔
+Output: /workspaces/training/nfcore-build/work/07/bfc7061fa521e86f4e1954191ab4c4/cowpy-COLLECTED-test-batch-output.txt
+```
+
+</details>
 
 Questo significa che abbiamo aggiornato con successo il nostro flusso di lavoro `HELLO` per essere componibile.
 
@@ -943,13 +959,11 @@ Imparare come innestare un flusso di lavoro componibile di base sullo scaffold n
 Ora che abbiamo verificato che il nostro flusso di lavoro componibile funziona correttamente, torniamo allo scaffold della pipeline nf-core che abbiamo creato nella sezione 2.
 Vogliamo integrare il flusso di lavoro componibile che abbiamo appena sviluppato nella struttura del template nf-core, quindi il risultato finale dovrebbe apparire così.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nfcore_build/img/core-hello.svg"
-</figure>
+![](../../nfcore_build/img/core-hello.excalidraw.svg)
 
 Quindi come facciamo a farlo accadere? Diamo un'occhiata al contenuto attuale del flusso di lavoro `HELLO` in `core-hello/workflows/hello.nf` (lo scaffold nf-core).
 
-```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 21 53"
+```nextflow {15,17,21,53} title="core-hello/workflows/hello.nf" showLineNumbers
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -1026,10 +1040,10 @@ Affronteremo questo nelle seguenti fasi:
 3. Aggiungere la logica del flusso di lavoro al blocco `main`
 4. Aggiornare il blocco `emit`
 
-!!! info "Info"
-
-    Ignoreremo il blocco di cattura delle versioni per questo primo passaggio.
-    La Parte 3 spiega come funziona.
+:::note[Info]
+Ignoreremo il blocco di cattura delle versioni per questo primo passaggio.
+La Parte 3 spiega come funziona.
+:::
 
 ### 4.1. Copiare i moduli e configurare le importazioni dei moduli
 
@@ -1049,24 +1063,27 @@ Ora dovreste vedere la directory dei moduli elencata sotto `core-hello/`.
 tree core-hello/modules
 ```
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console
-    core-hello/modules
-    └── local
-        ├── collectGreetings.nf
-        ├── convertToUpper.nf
-        ├── cowpy.nf
-        └── sayHello.nf
+```console
+core-hello/modules
+└── local
+    ├── collectGreetings.nf
+    ├── convertToUpper.nf
+    ├── cowpy.nf
+    └── sayHello.nf
 
-    1 directory, 4 files
-    ```
+1 directory, 4 files
+```
+
+</details>
 
 Ora configuriamo le dichiarazioni di importazione dei moduli.
 
 Queste erano le dichiarazioni di importazione nel flusso di lavoro `original-hello/hello.nf`:
 
-```groovy title="original-hello/hello.nf" linenums="10"
+```nextflow title="original-hello/hello.nf" showLineNumbers startLineNumber=10
 // Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -1076,33 +1093,33 @@ include { cowpy } from './modules/cowpy.nf'
 
 Aprite il file `core-hello/workflows/hello.nf` e trasponate quelle dichiarazioni di importazione in esso come mostrato di seguito.
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="8-11"
-    /*
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
-    include { paramsSummaryMap       } from 'plugin/nf-schema'
-    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-    include { sayHello               } from '../modules/local/sayHello.nf'
-    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { collectGreetings       } from '../modules/local/collectGreetings.nf'
-    include { cowpy                  } from '../modules/local/cowpy.nf'
-    ```
+```nextflow title="core-hello/workflows/hello.nf" showLineNumbers step="Prima"
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+include { paramsSummaryMap       } from 'plugin/nf-schema'
+include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+```
 
-=== "Prima"
+```nextflow {8-11} title="core-hello/workflows/hello.nf" showLineNumbers step="Dopo"
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+include { paramsSummaryMap       } from 'plugin/nf-schema'
+include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { sayHello               } from '../modules/local/sayHello.nf'
+include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+include { collectGreetings       } from '../modules/local/collectGreetings.nf'
+include { cowpy                  } from '../modules/local/cowpy.nf'
+```
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1"
-    /*
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
-    include { paramsSummaryMap       } from 'plugin/nf-schema'
-    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-    ```
+</CodeWalkthrough>
 
 Altre due osservazioni interessanti qui:
 
@@ -1114,7 +1131,7 @@ Altre due osservazioni interessanti qui:
 Il progetto nf-core ha molte funzionalità pre-costruite intorno al concetto di samplesheet, che è tipicamente un file CSV contenente dati in colonne.
 Poiché è essenzialmente ciò che è il nostro file `greetings.csv`, manterremo l'attuale dichiarazione `take` così com'è, e aggiorneremo semplicemente il nome del canale di input nel prossimo passaggio.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="21"
+```nextflow title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=21
     take:
     ch_samplesheet // canale: samplesheet letto da --input
     outdir
@@ -1128,7 +1145,7 @@ Ora che i nostri moduli sono disponibili per il flusso di lavoro, possiamo colle
 
 Come promemoria, questo è il codice pertinente nel flusso di lavoro originale, che non è cambiato molto quando l'abbiamo reso componibile (abbiamo solo aggiunto la riga `main:`):
 
-```groovy title="original-hello/hello.nf" linenums="22"
+```nextflow title="original-hello/hello.nf" showLineNumbers startLineNumber=22
     main:
 
     // emette un saluto
@@ -1150,125 +1167,125 @@ C'è già del codice lì che ha a che fare con la cattura delle versioni degli s
 Manterremo l'inizializzazione `def ch_versions = channel.empty()` in alto, quindi inseriremo la nostra logica del flusso di lavoro, mantenendo il codice di raccolta delle versioni alla fine.
 Questo ordinamento ha senso perché in una pipeline reale, i processi emetterebbero informazioni sulla versione che verrebbero aggiunte al canale `ch_versions` mentre il flusso di lavoro viene eseguito.
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="19" hl_lines="11-21"
-    workflow HELLO {
+```nextflow title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=19 step="Prima"
+workflow HELLO {
 
-        take:
-        ch_samplesheet // canale: samplesheet letto da --input
-        outdir
+    take:
+    ch_samplesheet // canale: samplesheet letto da --input
+    outdir
 
-        main:
+    main:
 
-        def ch_versions = channel.empty()
+    def ch_versions = channel.empty()
 
-        // emette un saluto
-        sayHello(greeting_ch)
+    //
+    // Raccoglie e salva le versioni del software
+    //
+    def topic_versions = channel.topic("versions")
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
 
-        // converte il saluto in maiuscolo
-        convertToUpper(sayHello.out)
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+        }
+        .groupTuple(by:0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
 
-        // raccoglie tutti i saluti in un file
-        collectGreetings(convertToUpper.out.collect(), params.batch)
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        .mix(topic_versions_string)
+        .collectFile(
+            storeDir: "${outdir}/pipeline_info",
+            name:  'hello_software_'  + 'versions.yml',
+            sort: true,
+            newLine: true
+        )
+    emit:
+    versions       = ch_versions                 // canale: [ path(versions.yml) ]
+}
+```
 
-        // genera arte ASCII dei saluti con cowpy
-        cowpy(collectGreetings.out.outfile, params.character)
+```nextflow {11-21} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=19 step="Dopo"
+workflow HELLO {
 
-        //
-        // Raccoglie e salva le versioni del software
-        //
-        def topic_versions = channel.topic("versions")
-            .distinct()
-            .branch { entry ->
-                versions_file: entry instanceof Path
-                versions_tuple: true
-            }
+    take:
+    ch_samplesheet // canale: samplesheet letto da --input
+    outdir
 
-        def topic_versions_string = topic_versions.versions_tuple
-            .map { process, tool, version ->
-                [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
-            }
-            .groupTuple(by:0)
-            .map { process, tool_versions ->
-                tool_versions.unique().sort()
-                "${process}:\n${tool_versions.join('\n')}"
-            }
+    main:
 
-        def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
-            .mix(topic_versions_string)
-            .collectFile(
-                storeDir: "${outdir}/pipeline_info",
-                name:  'hello_software_'  + 'versions.yml',
-                sort: true,
-                newLine: true
-            )
-        emit:
-        versions       = ch_versions                 // canale: [ path(versions.yml) ]
-    }
-    ```
+    def ch_versions = channel.empty()
 
-=== "Prima"
+    // emette un saluto
+    sayHello(greeting_ch)
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="19"
-    workflow HELLO {
+    // converte il saluto in maiuscolo
+    convertToUpper(sayHello.out)
 
-        take:
-        ch_samplesheet // canale: samplesheet letto da --input
-        outdir
+    // raccoglie tutti i saluti in un file
+    collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        main:
+    // genera arte ASCII dei saluti con cowpy
+    cowpy(collectGreetings.out.outfile, params.character)
 
-        def ch_versions = channel.empty()
+    //
+    // Raccoglie e salva le versioni del software
+    //
+    def topic_versions = channel.topic("versions")
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
 
-        //
-        // Raccoglie e salva le versioni del software
-        //
-        def topic_versions = channel.topic("versions")
-            .distinct()
-            .branch { entry ->
-                versions_file: entry instanceof Path
-                versions_tuple: true
-            }
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+        }
+        .groupTuple(by:0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
 
-        def topic_versions_string = topic_versions.versions_tuple
-            .map { process, tool, version ->
-                [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
-            }
-            .groupTuple(by:0)
-            .map { process, tool_versions ->
-                tool_versions.unique().sort()
-                "${process}:\n${tool_versions.join('\n')}"
-            }
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        .mix(topic_versions_string)
+        .collectFile(
+            storeDir: "${outdir}/pipeline_info",
+            name:  'hello_software_'  + 'versions.yml',
+            sort: true,
+            newLine: true
+        )
+    emit:
+    versions       = ch_versions                 // canale: [ path(versions.yml) ]
+}
+```
 
-        def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
-            .mix(topic_versions_string)
-            .collectFile(
-                storeDir: "${outdir}/pipeline_info",
-                name:  'hello_software_'  + 'versions.yml',
-                sort: true,
-                newLine: true
-            )
-        emit:
-        versions       = ch_versions                 // canale: [ path(versions.yml) ]
-    }
-    ```
+</CodeWalkthrough>
 
 Sembra ottimo, ma dobbiamo ancora aggiornare il nome del canale che stiamo passando al processo `sayHello()` da `greeting_ch` a `ch_samplesheet` come mostrato di seguito, per corrispondere a ciò che è scritto sotto la parola chiave `take:`.
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
-        // emette un saluto (aggiornato per usare la convenzione nf-core per i samplesheet)
-        sayHello(ch_samplesheet)
-    ```
+```nextflow title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=29 step="Prima"
+    // emette un saluto
+    sayHello(greeting_ch)
+```
 
-=== "Prima"
+```nextflow title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=29 step="Dopo"
+    // emette un saluto (aggiornato per usare la convenzione nf-core per i samplesheet)
+    sayHello(ch_samplesheet)
+```
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
-        // emette un saluto
-        sayHello(greeting_ch)
-    ```
+</CodeWalkthrough>
 
 Ora la logica del flusso di lavoro è correttamente collegata.
 
@@ -1276,20 +1293,20 @@ Ora la logica del flusso di lavoro è correttamente collegata.
 
 Infine, dobbiamo aggiornare il blocco `emit` per includere la dichiarazione degli output finali del flusso di lavoro.
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="69" hl_lines="2"
-        emit:
-        cowpy_hellos   = cowpy.out
-        versions       = ch_versions                 // canale: [ path(versions.yml) ]
-    ```
+```nextflow title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=69 step="Prima"
+    emit:
+    versions       = ch_versions                 // canale: [ path(versions.yml) ]
+```
 
-=== "Prima"
+```nextflow {2} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=69 step="Dopo"
+    emit:
+    cowpy_hellos   = cowpy.out
+    versions       = ch_versions                 // canale: [ path(versions.yml) ]
+```
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="69"
-        emit:
-        versions       = ch_versions                 // canale: [ path(versions.yml) ]
-    ```
+</CodeWalkthrough>
 
 Questo conclude le modifiche che dobbiamo apportare al flusso di lavoro `HELLO` stesso.
 A questo punto, abbiamo raggiunto la struttura complessiva del codice che ci eravamo proposti di implementare.
@@ -1316,7 +1333,7 @@ Il primo passo è capire dove viene eseguita la gestione degli input.
 Potreste ricordare che quando abbiamo riscritto il flusso di lavoro Hello Nextflow per renderlo componibile, abbiamo spostato la dichiarazione del parametro di input di un livello verso l'alto, nel flusso di lavoro entrypoint `main.nf`.
 Quindi diamo un'occhiata al flusso di lavoro entrypoint `main.nf` di livello superiore che è stato creato come parte dello scaffold della pipeline:
 
-```groovy title="core-hello/main.nf" linenums="1"
+```nextflow title="core-hello/main.nf" showLineNumbers
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1413,9 +1430,7 @@ Ciò che conta qui è che ci sono due flussi di lavoro definiti:
 
 Ecco un diagramma di come si relazionano tra loro:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nfcore_build/img/hello-nested-workflows.svg"
-</figure>
+![](../../nfcore_build/img/hello-nested-workflows.excalidraw.svg)
 
 Importante, non possiamo trovare alcun codice che costruisce un canale di input a questo livello, solo riferimenti a un samplesheet fornito tramite il parametro `--input`.
 
@@ -1423,7 +1438,7 @@ Un po' di ricerca rivela che la gestione degli input è eseguita dal subworkflow
 
 Se apriamo quel file e scorriamo verso il basso, arriviamo a questo blocco di codice:
 
-```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84"
+```nextflow title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" showLineNumbers startLineNumber=84
     //
     // Crea il canale dal file di input fornito tramite params.input
     //
@@ -1455,19 +1470,19 @@ Se apriamo quel file e scorriamo verso il basso, arriviamo a questo blocco di co
 
 Questa è la fabbrica di canali che analizza il samplesheet e lo passa in una forma pronta per essere consumata dal flusso di lavoro `HELLO`.
 
-!!! info "Info"
+:::note[Info]
+La sintassi sopra è un po' diversa da quella che abbiamo usato in precedenza, ma fondamentalmente questo:
 
-    La sintassi sopra è un po' diversa da quella che abbiamo usato in precedenza, ma fondamentalmente questo:
+```nextflow
+channel.<...>.set { ch_samplesheet }
+```
 
-    ```groovy
-    channel.<...>.set { ch_samplesheet }
-    ```
+è equivalente a questo:
 
-    è equivalente a questo:
-
-    ```groovy
-    ch_samplesheet = channel.<...>
-    ```
+```nextflow
+ch_samplesheet = channel.<...>
+```
+:::
 
 Questo codice coinvolge alcuni passaggi di analisi e validazione che sono altamente specifici per il samplesheet di esempio incluso con il template della pipeline nf-core, che al momento della scrittura è molto specifico del dominio e non adatto per il nostro progetto di pipeline semplice.
 
@@ -1477,7 +1492,7 @@ La buona notizia è che le esigenze della nostra pipeline sono molto più sempli
 
 Come promemoria, ecco come appariva la costruzione del canale (come visto nella directory delle soluzioni):
 
-```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="2"
+```nextflow {2} title="solutions/composable-hello/main.nf" showLineNumbers startLineNumber=10
     // crea un canale per gli input da un file CSV
     greeting_ch = channel.fromPath(params.greeting)
         .splitCsv()
@@ -1486,53 +1501,53 @@ Come promemoria, ecco come appariva la costruzione del canale (come visto nella 
 
 Quindi dobbiamo solo collegarlo nel flusso di lavoro di inizializzazione, con modifiche minori: aggiorniamo il nome del canale da `greeting_ch` a `ch_samplesheet`, e il nome del parametro da `params.greeting` a `params.input` (vedi riga evidenziata).
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5-7"
-        //
-        // Crea il canale dal file di input fornito tramite params.input
-        //
+```nextflow {5-23} title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" showLineNumbers startLineNumber=84 step="Prima"
+    //
+    // Crea il canale dal file di input fornito tramite params.input
+    //
 
-        ch_samplesheet = channel.fromPath(params.input)
-            .splitCsv()
-            .map { line -> line[0] }
+    channel
+        .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
+        .map {
+            meta, fastq_1, fastq_2 ->
+                if (!fastq_2) {
+                    return [ meta.id, meta + [ single_end:true ], [ fastq_1 ] ]
+                } else {
+                    return [ meta.id, meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
+                }
+        }
+        .groupTuple()
+        .map { samplesheet ->
+            validateInputSamplesheet(samplesheet)
+        }
+        .map {
+            meta, fastqs ->
+                return [ meta, fastqs.flatten() ]
+        }
+        .set { ch_samplesheet }
 
-        emit:
-        samplesheet = ch_samplesheet
-        versions    = ch_versions
-    ```
+    emit:
+    samplesheet = ch_samplesheet
+    versions    = ch_versions
+```
 
-=== "Prima"
+```nextflow {5-7} title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" showLineNumbers startLineNumber=84 step="Dopo"
+    //
+    // Crea il canale dal file di input fornito tramite params.input
+    //
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5-23"
-        //
-        // Crea il canale dal file di input fornito tramite params.input
-        //
+    ch_samplesheet = channel.fromPath(params.input)
+        .splitCsv()
+        .map { line -> line[0] }
 
-        channel
-            .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
-            .map {
-                meta, fastq_1, fastq_2 ->
-                    if (!fastq_2) {
-                        return [ meta.id, meta + [ single_end:true ], [ fastq_1 ] ]
-                    } else {
-                        return [ meta.id, meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
-                    }
-            }
-            .groupTuple()
-            .map { samplesheet ->
-                validateInputSamplesheet(samplesheet)
-            }
-            .map {
-                meta, fastqs ->
-                    return [ meta, fastqs.flatten() ]
-            }
-            .set { ch_samplesheet }
+    emit:
+    samplesheet = ch_samplesheet
+    versions    = ch_versions
+```
 
-        emit:
-        samplesheet = ch_samplesheet
-        versions    = ch_versions
-    ```
+</CodeWalkthrough>
 
 Questo completa le modifiche di cui abbiamo bisogno per far funzionare l'elaborazione degli input.
 
@@ -1562,67 +1577,67 @@ Ora il file `greetings.csv` è pronto per essere utilizzato come input di test.
 
 Ora possiamo aggiornare il file `test.config` come segue:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6 8-10"
-    params {
-        config_profile_name        = 'Test profile'
-        config_profile_description = 'Minimal test dataset to check pipeline function'
+```nextflow {6-8} title="core-hello/conf/test.config" showLineNumbers startLineNumber=21 step="Prima"
+params {
+    config_profile_name        = 'Test profile'
+    config_profile_description = 'Minimal test dataset to check pipeline function'
 
-        // Dati di input
-        input  = "${projectDir}/assets/greetings.csv"
+    // Dati di input
+    // TODO nf-core: Specify the paths to your test data on nf-core/test-datasets
+    // TODO nf-core: Give any required params for the test so that command line flags are not needed
+    input  = params.pipelines_testdata_base_path + 'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
+}
+```
 
-        // Altri parametri
-        batch     = 'test'
-        character = 'tux'
-    }
-    ```
+```nextflow {6,8-10} title="core-hello/conf/test.config" showLineNumbers startLineNumber=21 step="Dopo"
+params {
+    config_profile_name        = 'Test profile'
+    config_profile_description = 'Minimal test dataset to check pipeline function'
 
-=== "Prima"
+    // Dati di input
+    input  = "${projectDir}/assets/greetings.csv"
 
-    ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6-8"
-    params {
-        config_profile_name        = 'Test profile'
-        config_profile_description = 'Minimal test dataset to check pipeline function'
+    // Altri parametri
+    batch     = 'test'
+    character = 'tux'
+}
+```
 
-        // Dati di input
-        // TODO nf-core: Specify the paths to your test data on nf-core/test-datasets
-        // TODO nf-core: Give any required params for the test so that command line flags are not needed
-        input  = params.pipelines_testdata_base_path + 'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
-    }
-    ```
+</CodeWalkthrough>
 
 Punti chiave:
 
-- **Utilizzo di `#!groovy ${projectDir}`**: Questa è una variabile implicita di Nextflow che punta alla directory dove si trova lo script del flusso di lavoro principale (la radice della pipeline). Utilizzarla garantisce che il percorso funzioni indipendentemente da dove viene eseguita la pipeline.
-- **Percorsi assoluti**: Utilizzando `#!groovy ${projectDir}`, creiamo un percorso assoluto, che è importante per i dati di test che vengono forniti con la pipeline.
+- **Utilizzo di `${projectDir}{:nextflow}`**: Questa è una variabile implicita di Nextflow che punta alla directory dove si trova lo script del flusso di lavoro principale (la radice della pipeline). Utilizzarla garantisce che il percorso funzioni indipendentemente da dove viene eseguita la pipeline.
+- **Percorsi assoluti**: Utilizzando `${projectDir}{:nextflow}`, creiamo un percorso assoluto, che è importante per i dati di test che vengono forniti con la pipeline.
 - **Posizione dei dati di test**: Le pipeline nf-core tipicamente memorizzano i dati di test nella directory `assets/` all'interno del repository della pipeline per i piccoli file di test, o fanno riferimento a dataset di test esterni per i file più grandi.
 
 E mentre ci siamo, stringiamo i limiti di risorse predefiniti per assicurarci che questo venga eseguito su macchine molto basilari (come le VM minimali in Github Codespaces):
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/conf/test.config" linenums="13" hl_lines="3-4"
-    process {
-        resourceLimits = [
-            cpus: 2,
-            memory: '4.GB',
-            time: '1.h'
-        ]
-    }
-    ```
+```nextflow {3-4} title="core-hello/conf/test.config" showLineNumbers startLineNumber=13 step="Prima"
+process {
+    resourceLimits = [
+        cpus: 4,
+        memory: '15.GB',
+        time: '1.h'
+    ]
+}
+```
 
-=== "Prima"
+```nextflow {3-4} title="core-hello/conf/test.config" showLineNumbers startLineNumber=13 step="Dopo"
+process {
+    resourceLimits = [
+        cpus: 2,
+        memory: '4.GB',
+        time: '1.h'
+    ]
+}
+```
 
-    ```groovy title="core-hello/conf/test.config" linenums="13" hl_lines="3-4"
-    process {
-        resourceLimits = [
-            cpus: 4,
-            memory: '15.GB',
-            time: '1.h'
-        ]
-    }
-    ```
+</CodeWalkthrough>
 
 Questo completa le modifiche del codice che dobbiamo fare.
 
@@ -1633,39 +1648,39 @@ Poiché non abbiamo ancora adattato quegli schemi al nostro formato `greetings.c
 
 Aprite `core-hello/nextflow.config` e impostate `validate_params` su `false`:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/nextflow.config" linenums="37"
-        validate_params            = false
-    ```
+```nextflow title="core-hello/nextflow.config" showLineNumbers startLineNumber=37 step="Prima"
+    validate_params            = true
+```
 
-=== "Prima"
+```nextflow title="core-hello/nextflow.config" showLineNumbers startLineNumber=37 step="Dopo"
+    validate_params            = false
+```
 
-    ```groovy title="core-hello/nextflow.config" linenums="37"
-        validate_params            = true
-    ```
+</CodeWalkthrough>
 
 Impostiamo questo nel file di configurazione anziché sulla riga di comando perché a partire da Nextflow versione 26.04, tutti i valori forniti sulla riga di comando sono tipizzati come stringhe.
 Di conseguenza, i parametri Boolean devono essere impostati in un file di configurazione o in un `-params-file` per assumere un valore genuino `true`/`false`.
 
 Ad esempio, usare `--validate_params false` qui verrebbe valutato come la **stringa** `"false"`, il che lascia la validazione attiva.
 
-!!! tip "Righe di compatibilità con il parser v2 in `nextflow.config`"
+:::tip[Righe di compatibilità con il parser v2 in `nextflow.config`]
+A proposito di sintassi v2, potreste notare queste due righe appena sotto il blocco `params` nel file di configurazione:
 
-    A proposito di sintassi v2, potreste notare queste due righe appena sotto il blocco `params` nel file di configurazione:
+```nextflow nextflow="config"
+outputDir = params.outdir
+workflow.output.mode = params.publish_dir_mode
+```
 
-    ```groovy
-    outputDir = params.outdir
-    workflow.output.mode = params.publish_dir_mode
-    ```
+Queste sono necessarie per la compatibilità con il parser della sintassi v2.
 
-    Queste sono necessarie per la compatibilità con il parser della sintassi v2.
+- Con la sintassi v2, le variabili `params.*` non possono essere referenziate direttamente all'interno delle direttive `publishDir` nei moduli di processo, quindi `outputDir` è definita qui come variabile di configurazione di livello superiore a cui quelle direttive possono accedere.
 
-    - Con la sintassi v2, le variabili `params.*` non possono essere referenziate direttamente all'interno delle direttive `publishDir` nei moduli di processo, quindi `outputDir` è definita qui come variabile di configurazione di livello superiore a cui quelle direttive possono accedere.
+- `workflow.output.mode` imposta la modalità di pubblicazione predefinita per il blocco di output del flusso di lavoro v2.
 
-    - `workflow.output.mode` imposta la modalità di pubblicazione predefinita per il blocco di output del flusso di lavoro v2.
-
-    Entrambe sono generate automaticamente dal template della pipeline nf-core e non devono essere modificate.
+Entrambe sono generate automaticamente dal template della pipeline nf-core e non devono essere modificate.
+:::
 
 ### 5.5. Eseguire la pipeline con il profilo test
 
@@ -1677,45 +1692,48 @@ nextflow run core-hello --outdir core-hello-results -profile test,docker
 
 Se avete effettuato tutte le modifiche correttamente, dovrebbe essere eseguita fino al completamento.
 
-??? success "Output del comando"
+<details class="success">
+<summary>Output del comando</summary>
 
-    ```console
-     N E X T F L O W   ~  version 26.04.4
+```console
+ N E X T F L O W   ~  version 26.04.4
 
-    Downloading plugin nf-schema@2.7.2
-    Launching `core-hello/main.nf` [voluminous_caravaggio] revision: d6bbba9521
+Downloading plugin nf-schema@2.7.2
+Launching `core-hello/main.nf` [voluminous_caravaggio] revision: d6bbba9521
 
-    Input/output options
-      input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
-      outdir                    : core-hello-results
+Input/output options
+  input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
+  outdir                    : core-hello-results
 
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
 
-    Generic options
-      validate_params           : false
-      trace_report_suffix       : 2026-06-23_16-58-45
+Generic options
+  validate_params           : false
+  trace_report_suffix       : 2026-06-23_16-58-45
 
-    Core Nextflow options
-      runName                   : voluminous_caravaggio
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nfcore-build
-      workDir                   : /workspaces/training/nfcore-build/work
-      projectDir                : /workspaces/training/nfcore-build/core-hello
-      userName                  : root
-      profile                   : test,docker
-      configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
+Core Nextflow options
+  runName                   : voluminous_caravaggio
+  containerEngine           : docker
+  launchDir                 : /workspaces/training/nfcore-build
+  workDir                   : /workspaces/training/nfcore-build/work
+  projectDir                : /workspaces/training/nfcore-build/core-hello
+  userName                  : root
+  profile                   : test,docker
+  configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
 
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-    executor >  local (8)
-    [30/fc3bdb] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
-    [55/58b611] CORE_HELLO:HELLO:convertToUpper (1) | 3 of 3 ✔
-    [12/83c0bc] CORE_HELLO:HELLO:collectGreetings   | 1 of 1 ✔
-    [18/4894fd] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
-    -[core/hello] Pipeline completed successfully-
-    ```
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+executor >  local (8)
+[30/fc3bdb] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
+[55/58b611] CORE_HELLO:HELLO:convertToUpper (1) | 3 of 3 ✔
+[12/83c0bc] CORE_HELLO:HELLO:collectGreetings   | 1 of 1 ✔
+[18/4894fd] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
+-[core/hello] Pipeline completed successfully-
+```
+
+</details>
 
 Come potete vedere, questo ha prodotto il tipico riepilogo nf-core all'inizio grazie al subworkflow di inizializzazione, e le righe per ogni modulo ora mostrano i nomi completi `PIPELINE:WORKFLOW:module`.
 
@@ -1730,35 +1748,38 @@ Come potreste ricordare da prima, la nostra prima esecuzione del flusso di lavor
 tree core-hello-results
 ```
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console
-    core-hello-results
-    └── pipeline_info
-        ├── execution_report_2026-06-23_16-56-58.html
-        ├── execution_report_2026-06-23_16-58-45.html
-        ├── execution_timeline_2026-06-23_16-56-58.html
-        ├── execution_timeline_2026-06-23_16-58-45.html
-        ├── execution_trace_2026-06-23_16-56-58.txt
-        ├── execution_trace_2026-06-23_16-58-45.txt
-        ├── hello_software_versions.yml
-        ├── params_2026-06-23_16-57-00.json
-        ├── params_2026-06-23_16-58-47.json
-        ├── pipeline_dag_2026-06-23_16-56-58.html
-        └── pipeline_dag_2026-06-23_16-58-45.html
+```console
+core-hello-results
+└── pipeline_info
+    ├── execution_report_2026-06-23_16-56-58.html
+    ├── execution_report_2026-06-23_16-58-45.html
+    ├── execution_timeline_2026-06-23_16-56-58.html
+    ├── execution_timeline_2026-06-23_16-58-45.html
+    ├── execution_trace_2026-06-23_16-56-58.txt
+    ├── execution_trace_2026-06-23_16-58-45.txt
+    ├── hello_software_versions.yml
+    ├── params_2026-06-23_16-57-00.json
+    ├── params_2026-06-23_16-58-47.json
+    ├── pipeline_dag_2026-06-23_16-56-58.html
+    └── pipeline_dag_2026-06-23_16-58-45.html
 
-    1 directory, 11 files
-    ```
+1 directory, 11 files
+```
+
+</details>
 
 Vedete che abbiamo ottenuto un altro set di report di esecuzione oltre a quelli che abbiamo ottenuto dalla prima esecuzione, quando il flusso di lavoro era ancora solo un placeholder.
 Questa volta vedete tutte le attività che sono state eseguite come previsto.
 
-![report timeline di esecuzione per la pipeline Hello](./img/execution_timeline_hello.png)
+![report timeline di esecuzione per la pipeline Hello](../../nfcore_build/img/execution_timeline_hello.png)
 
-!!! info "Info"
-
-    Ancora una volta le attività non sono state eseguite in parallelo perché stiamo eseguendo su una macchina minimalista in Github Codespaces.
-    Per vederle eseguire in parallelo, provate ad aumentare l'allocazione della CPU del vostro codespace e i limiti di risorse nella configurazione di test.
+:::note[Info]
+Ancora una volta le attività non sono state eseguite in parallelo perché stiamo eseguendo su una macchina minimalista in Github Codespaces.
+Per vederle eseguire in parallelo, provate ad aumentare l'allocazione della CPU del vostro codespace e i limiti di risorse nella configurazione di test.
+:::
 
 È fantastico, ma i nostri risultati effettivi della pipeline non sono lì!
 
@@ -1768,30 +1789,33 @@ Ecco cosa è successo: non abbiamo cambiato nulla ai moduli stessi, quindi gli o
 tree results
 ```
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console
-    results
-    ├── Bonjour-output.txt
-    ├── COLLECTED-test-batch-output.txt
-    ├── COLLECTED-test-output.txt
-    ├── cowpy-COLLECTED-test-batch-output.txt
-    ├── cowpy-COLLECTED-test-output.txt
-    ├── Hello-output.txt
-    ├── Hola-output.txt
-    ├── UPPER-Bonjour-output.txt
-    ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
+```console
+results
+├── Bonjour-output.txt
+├── COLLECTED-test-batch-output.txt
+├── COLLECTED-test-output.txt
+├── cowpy-COLLECTED-test-batch-output.txt
+├── cowpy-COLLECTED-test-output.txt
+├── Hello-output.txt
+├── Hola-output.txt
+├── UPPER-Bonjour-output.txt
+├── UPPER-Hello-output.txt
+└── UPPER-Hola-output.txt
 
-    0 directories, 10 files
-    ```
+0 directories, 10 files
+```
+
+</details>
 
 Ah, eccoli, mescolati con gli output delle esecuzioni precedenti della pipeline Hello originale.
 
 Se vogliamo che siano organizzati ordinatamente come gli output della pipeline demo, dovremo cambiare il modo in cui impostiamo la pubblicazione degli output.
 Vi mostreremo come farlo più tardi in questo corso di formazione.
 
-<!-- TODO: Update this once we've updated Hello Nextflow to use workflow-level outputs -->
+{/* TODO: Update this once we've updated Hello Nextflow to use workflow-level outputs */}
 
 Ed eccolo! Può sembrare molto lavoro per ottenere lo stesso risultato della pipeline originale, ma ottenete tutti quei bei report generati automaticamente, e ora avete una solida base per sfruttare le funzionalità aggiuntive di nf-core, inclusa la validazione degli input e alcune interessanti capacità di gestione dei metadati che tratteremo in una sezione successiva.
 
@@ -1804,4 +1828,4 @@ Come parte di ciò, avete imparato come rendere un flusso di lavoro componibile 
 
 ### Cosa c'è dopo?
 
-Prendetevi una pausa, è stato un lavoro duro! Quando siete pronti, passate a [Part 2: Use an nf-core module](./02_use_module.md) per imparare come sfruttare i moduli mantenuti dalla comunità dal repository nf-core/modules.
+Prendetevi una pausa, è stato un lavoro duro! Quando siete pronti, passate a [Part 2: Use an nf-core module](./02_use_module.mdx) per imparare come sfruttare i moduli mantenuti dalla comunità dal repository nf-core/modules.

@@ -1,8 +1,11 @@
-# Getting started
+---
+title: Getting started
+description: 'Scale with Seqera: Getting started'
+---
 
 ## Start a training environment
 
-To use the pre-built environment we provide on GitHub Codespaces, click the "Open in GitHub Codespaces" button below. For other options, see [Environment options](../envsetup/index.md).
+To use the pre-built environment we provide on GitHub Codespaces, click the "Open in GitHub Codespaces" button below. For other options, see [Environment options](../envsetup/index.mdx).
 
 We recommend opening the training environment in a new browser tab or window (use right-click, ctrl-click or cmd-click depending on your equipment) so that you can read on while the environment loads.
 You will need to keep these instructions open in parallel to work through the course.
@@ -16,7 +19,7 @@ This training environment contains all the software, code and data necessary to 
 The codespace is set up with a VSCode interface, which includes a filesystem explorer, a code editor and a terminal shell.
 All instructions given during the course (e.g. 'open the file', 'edit the code' or 'run this command') refer to those three parts of the VSCode interface unless otherwise specified.
 
-If you are working through this course by yourself, please acquaint yourself with the [environment basics](../envsetup/01_setup.md) for further details.
+If you are working through this course by yourself, please acquaint yourself with the [environment basics](../envsetup/01_setup.mdx) for further details.
 
 ## Get ready to work
 
@@ -37,13 +40,13 @@ Then set VSCode to focus on this directory, so only the relevant files appear in
 code .
 ```
 
-!!! tip
+:::tip
+If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
 
-    If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
-
-    ```bash
-    cd /workspaces/training/seqera-scale
-    ```
+```bash
+cd /workspaces/training/seqera-scale
+```
+:::
 
 ### Explore the materials provided
 
@@ -54,12 +57,15 @@ Run the following from the terminal to see the full structure:
 tree -a .
 ```
 
-??? abstract "Directory contents"
+<details class="abstract">
+<summary>Directory contents</summary>
 
-    ```console
-    .
-    └── .seqera_config
-    ```
+```console
+.
+└── .seqera_config
+```
+
+</details>
 
 The **`.seqera_config`** file is a stub you will fill in during section 3 to configure the `tw` CLI with your Seqera access token and workspace.
 
@@ -73,4 +79,4 @@ Think you're ready to dive in?
 
 If you can check all the boxes, you're good to go.
 
-**To continue to [Part 1: Launch pipelines from the web interface](./01_run_with_seqera.md), click on the arrow in the bottom right corner of this page.**
+**To continue to [Part 1: Launch pipelines from the web interface](./01_run_with_seqera.mdx), click on the arrow in the bottom right corner of this page.**

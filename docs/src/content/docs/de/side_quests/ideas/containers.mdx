@@ -1,6 +1,9 @@
-# Teil 1: Mehr Container
+---
+title: 'Teil 1: Mehr Container'
+description: '[TODO]'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 [TODO]
 
@@ -18,11 +21,11 @@ Du wirst ein Container-Image für das `quote` pip-Paket erhalten/erstellen, das 
 Seqera Containers ist ein kostenloser Service, der Container-Images für pip- und conda-installierbare Tools (einschließlich bioconda) erstellt.
 Navigiere zu [Seqera Containers](https://www.seqera.io/containers/) und suche nach dem `quote` pip-Paket.
 
-![Seqera Containers](img/seqera-containers-1.png)
+
 
 Klicke auf "+Add" und dann auf "Get Container", um ein Container-Image für das `quote` pip-Paket anzufordern.
 
-![Seqera Containers](img/seqera-containers-2.png)
+
 
 Wenn dies das erste Mal ist, dass ein Community-Container für diese Version des Pakets erstellt wird, kann es einige Minuten dauern, bis er fertig ist.
 Klicke, um die URI (z.B. `community.wave.seqera.io/library/pip_quote:ae07804021465ee9`) des für dich erstellten Container-Images zu kopieren.
@@ -49,7 +52,7 @@ Kehre zur Seqera Containers-Website zurück und klicke auf den Button "Build Det
 Das erste Element, das wir uns ansehen, ist das `Dockerfile`, eine Art Skriptdatei, die alle Befehle enthält, die zum Erstellen des Container-Images benötigt werden.
 Wir haben dem Dockerfile unten einige erklärende Kommentare hinzugefügt, um dir zu helfen zu verstehen, was jeder Teil macht.
 
-```Dockerfile title="Dockerfile"
+```dockerfile title="Dockerfile"
 # Starte vom micromamba-Basis-Docker-Image
 FROM mambaorg/micromamba:1.5.10-noble
 # Kopiere die conda.yml-Datei in den Container
@@ -70,7 +73,7 @@ ENV PATH="$MAMBA_ROOT_PREFIX/bin:$PATH"
 
 Das zweite Element, das wir uns ansehen, ist die `conda.yml`-Datei, die die Liste der Pakete enthält, die im Container-Image installiert werden müssen.
 
-```conda.yml title="conda.yml"
+```yaml title="conda.yml"
 channels:
 - conda-forge
 - bioconda
@@ -82,10 +85,10 @@ dependencies:
 
 Kopiere den Inhalt dieser Dateien in die Vorlagen im Verzeichnis `containers/build` und führe dann den folgenden Befehl aus, um das Container-Image selbst zu erstellen.
 
-!!! Note "Hinweis"
-
-    Wir verwenden das Flag `-t quote:latest`, um das Container-Image mit dem Namen `quote` und dem Tag `latest` zu versehen.
-    Wir können dieses Tag verwenden, um auf das Container-Image zu verweisen, wenn wir es auf diesem System ausführen.
+:::note[Hinweis]
+Wir verwenden das Flag `-t quote:latest`, um das Container-Image mit dem Namen `quote` und dem Tag `latest` zu versehen.
+Wir können dieses Tag verwenden, um auf das Container-Image zu verweisen, wenn wir es auf diesem System ausführen.
+:::
 
 ```bash
 docker build -t quote:latest containers/build
@@ -103,7 +106,7 @@ Du hast zwei verschiedene Möglichkeiten kennengelernt, ein Container-Image für
 
 ### Wie geht es weiter?
 
-Du hast alles, was du brauchst, um mit dem [nächsten Kapitel](./04_hello_genomics.md) dieser Trainingsreihe fortzufahren.
+Du hast alles, was du brauchst, um mit dem nächsten Kapitel dieser Trainingsreihe fortzufahren.
 Du kannst auch mit einer optionalen Übung fortfahren, um Zitate über Computer-/Biologie-Pionier\*innen mit dem `quote`-Container abzurufen und sie mit dem `cowsay`-Container auszugeben.
 
 ---
@@ -143,17 +146,17 @@ Um diese Übung abzuschließen, musst du auf hoher Ebene:
 
 Für das `quote`-Container-Image kannst du entweder das verwenden, das du selbst in der vorherigen zusätzlichen Übung erstellt hast, oder das, das du von Seqera Containers erhalten hast.
 
-!!! Hint "Hinweis"
-
-    Eine gute Wahl für den `script`-Block deines getQuote-Prozesses könnte sein:
-        ```groovy
-        script:
-            def safe_author = author.tokenize(' ').join('-')
-            """
-            quote "$author" > quote-${safe_author}.txt
-            echo "-${author}" >> quote-${safe_author}.txt
-            """
-        ```
+:::note[Hinweis]
+Eine gute Wahl für den `script`-Block deines getQuote-Prozesses könnte sein:
+    ```nextflow
+    script:
+        def safe_author = author.tokenize(' ').join('-')
+        """
+        quote "$author" > quote-${safe_author}.txt
+        echo "-${author}" >> quote-${safe_author}.txt
+        """
+    ```
+:::
 
 Du findest eine Lösung für diese Übung in `containers/solutions/hello-containers-4.1.nf`.
 
@@ -162,7 +165,7 @@ Du findest eine Lösung für diese Übung in `containers/solutions/hello-contain
 Füge deiner Pipeline etwas Verzweigungslogik hinzu, damit sie Eingaben akzeptieren kann, die sowohl für `quote` als auch für `sayHello` gedacht sind.
 Hier ist ein Beispiel, wie man eine `if`-Anweisung in einem Nextflow-Workflow verwendet:
 
-```groovy title="hello-containers.nf"
+```nextflow title="hello-containers.nf"
 workflow {
     if (params.quote) {
         ...
@@ -174,9 +177,9 @@ workflow {
 }
 ```
 
-!!! Hint "Hinweis"
-
-    Du kannst `new_ch = processName.out` verwenden, um dem Ausgabekanal eines Prozesses einen Namen zuzuweisen.
+:::note[Hinweis]
+Du kannst `new_ch = processName.out` verwenden, um dem Ausgabekanal eines Prozesses einen Namen zuzuweisen.
+:::
 
 Du findest eine Lösung für diese Übung in `containers/solutions/hello-containers-4.2.nf`.
 

@@ -1,16 +1,22 @@
-# Bölüm 3: Hello Workflow
+---
+title: 'Bölüm 3: Hello Workflow'
+description: Gerçek dünya iş akışlarının çoğu birden fazla adım içerir.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+<figure>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
+<figcaption>
 
-/// caption
-:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube kanalında [tüm oynatma listesini](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) izleyin.
+Nextflow YouTube kanalında [tüm oynatma listesini](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) izleyin.
 
-:green_book: Video transkripti [burada](./transcripts/03_hello_workflow.md) mevcuttur.
-///
+📗 Video transkripti [burada](./transcripts/03_hello_workflow.mdx) mevcuttur.
+
+</figcaption>
+</figure>
 
 Gerçek dünya iş akışlarının çoğu birden fazla adım içerir.
 Bu eğitim modülünde, süreçleri çok adımlı bir iş akışında nasıl birbirine bağlayacağınızı öğreneceksiniz.
@@ -30,9 +36,12 @@ Bu sefer, insanların gerçek iş akışlarını nasıl oluşturduğunu daha iyi
 3. Son çıktı dosyasını adlandırmak için bir parametre eklemek ve bunu toplama adımına ikincil bir girdi olarak iletmek.
 4. Toplama adımının ayrıca işlenenler hakkında basit bir istatistik raporlamasını sağlamak.
 
-??? info "Bu bölümden nasıl başlanır"
+<details class="info">
+<summary>Bu bölümden nasıl başlanır</summary>
 
-    Bu kursun bu bölümü, [Hello Nextflow](./index.md) kursunun 1-2. Bölümlerini tamamladığınızı varsayar, ancak o bölümlerde ele alınan temel konulara hakimseniz, özel bir şey yapmadan buradan başlayabilirsiniz.
+Bu kursun bu bölümü, [Hello Nextflow](./index.mdx) kursunun 1-2. Bölümlerini tamamladığınızı varsayar, ancak o bölümlerde ele alınan temel konulara hakimseniz, özel bir şey yapmadan buradan başlayabilirsiniz.
+
+</details>
 
 ---
 
@@ -41,7 +50,7 @@ Bu sefer, insanların gerçek iş akışlarını nasıl oluşturduğunu daha iyi
 Başlangıç noktası olarak `hello-workflow.nf` iş akışı betiğini kullanacağız.
 Bu betik, bu eğitim kursunun 2. Bölümünde üretilen betiğe eşdeğerdir; ancak `view()` ifadelerini kaldırdık ve çıktı hedefini değiştirdik:
 
-```groovy title="hello-workflow.nf" linenums="37" hl_lines="3"
+```nextflow {3} title="hello-workflow.nf" showLineNumbers startLineNumber=37
 output {
     first_output {
         path 'hello_workflow'
@@ -54,47 +63,44 @@ Bu diyagram, iş akışının mevcut işleyişini özetlemektedir.
 Tanıdık gelmeli, ancak şimdi süreç çıktılarının bir kanala paketlendiğini, tıpkı girdiler gibi, açıkça gösteriyoruz.
 Bu çıktı kanalını birazdan iyi bir şekilde kullanacağız.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-workflow-channels.svg"
-</figure>
+![](../../hello_nextflow/img/hello-workflow-channels.excalidraw.svg)
 
 Her şeyin çalıştığından emin olmak için, herhangi bir değişiklik yapmadan önce betiği bir kez çalıştırın:
 
 ```bash
 nextflow run hello-workflow.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-workflow.nf` [admiring_lamarr] revision: 4d4053520d
+
+executor >  local (3)
+[b1/5826b5] sayHello (2) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_workflow/Bonjour-output.txt
+    - hello_workflow/Hello-output.txt
+    - hello_workflow/Hola-output.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-workflow.nf` [admiring_lamarr] revision: 4d4053520d
-
-    executor >  local (3)
-    [b1/5826b5] sayHello (2) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_workflow/Bonjour-output.txt
-        - hello_workflow/Hello-output.txt
-        - hello_workflow/Hola-output.txt
-    ```
 
 Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen konumda bulacaksınız.
 Bu bölüm için, `results/hello_workflow/` altında.
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console
-    results/hello_workflow
-    ├── Bonjour-output.txt
-    ├── Hello-output.txt
-    └── Hola-output.txt
-    ```
+```console
+results/hello_workflow
+├── Bonjour-output.txt
+├── Hello-output.txt
+└── Hola-output.txt
+```
+
+</details>
 
 Bu sizin için çalıştıysa, çok adımlı bir iş akışı oluşturmayı öğrenmeye hazırsınız.
 
@@ -104,9 +110,7 @@ Bu sizin için çalıştıysa, çok adımlı bir iş akışı oluşturmayı öğ
 
 Her selamlamayı büyük harfe dönüştürmek için bir adım ekleyeceğiz.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.svg"
-</figure>
+![](../../hello_nextflow/img/hello-multistep.excalidraw.svg)
 
 Bu amaçla, üç şey yapmamız gerekiyor:
 
@@ -132,11 +136,14 @@ echo 'Hello World' | tr '[a-z]' '[A-Z]' > UPPER-output.txt
 
 Çıktı, `Hello World` dizesinin büyük harf versiyonunu içeren `UPPER-output.txt` adlı bir metin dosyasıdır.
 
-??? abstract "Dosya içeriği"
+<details class="abstract">
+<summary>Dosya içeriği</summary>
 
-    ```console title="UPPER-output.txt"
-    HELLO WORLD
-    ```
+```console title="UPPER-output.txt"
+HELLO WORLD
+```
+
+</details>
 
 Temel olarak iş akışımızla yapmaya çalışacağımız şey budur.
 
@@ -146,7 +153,7 @@ Aynı bileşenlerin tümünü kullanmak istediğimiz için yeni sürecimizi ilki
 
 Aşağıdaki süreç tanımını iş akışı betiğine, ilkinin hemen altına ekleyin:
 
-```groovy title="hello-workflow.nf" linenums="20"
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=20
 /*
  * Selamlamayı büyük harfe dönüştürmek için bir metin değiştirme aracı kullan
  */
@@ -173,43 +180,43 @@ Bu süreçte, ilk sürecin çıktısı için orijinal olarak yaptığımıza ben
 
 İş akışı bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="44" hl_lines="10-11"
-    workflow {
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=44 step="Önce"
+workflow {
 
-        main:
-        // bir CSV dosyasından girdiler için bir kanal oluştur
-        greeting_ch = channel.fromPath(params.input)
-                            .splitCsv()
-                            .map { line -> line[0] }
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
-        // selamlamayı büyük harfe dönüştür
-        convertToUpper()
+    main:
+    // bir CSV dosyasından girdiler için bir kanal oluştur
+    greeting_ch = channel.fromPath(params.input)
+                        .splitCsv()
+                        .map { line -> line[0] }
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+    publish:
+    first_output = sayHello.out
+}
+```
 
-=== "Önce"
+```nextflow {10-11} title="hello-workflow.nf" showLineNumbers startLineNumber=44 step="Sonra"
+workflow {
 
-    ```groovy title="hello-workflow.nf" linenums="44"
-    workflow {
+    main:
+    // bir CSV dosyasından girdiler için bir kanal oluştur
+    greeting_ch = channel.fromPath(params.input)
+                        .splitCsv()
+                        .map { line -> line[0] }
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
+    // selamlamayı büyük harfe dönüştür
+    convertToUpper()
 
-        main:
-        // bir CSV dosyasından girdiler için bir kanal oluştur
-        greeting_ch = channel.fromPath(params.input)
-                            .splitCsv()
-                            .map { line -> line[0] }
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
+    publish:
+    first_output = sayHello.out
+}
+```
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+</CodeWalkthrough>
 
 Bu henüz işlevsel değil çünkü `convertToUpper()` sürecine ne girilmesi gerektiğini belirtmedik.
 
@@ -222,25 +229,23 @@ Bir sürecin çıktı kanalına `<process>.out` olarak atıfta bulunabiliriz.
 
 Dolayısıyla `sayHello` sürecinin çıktısı `sayHello.out` adlı bir kanaldır ve bunu doğrudan `convertToUpper()` çağrısına bağlayabiliriz.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-connector.svg"
-</figure>
+![](../../hello_nextflow/img/hello-multistep-connector.excalidraw.svg)
 
 İş akışı bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // selamlamayı büyük harfe dönüştür
-        convertToUpper(sayHello.out)
-    ```
+```nextflow {2} title="hello-workflow.nf" showLineNumbers startLineNumber=53 step="Önce"
+    // selamlamayı büyük harfe dönüştür
+    convertToUpper()
+```
 
-=== "Önce"
+```nextflow {2} title="hello-workflow.nf" showLineNumbers startLineNumber=53 step="Sonra"
+    // selamlamayı büyük harfe dönüştür
+    convertToUpper(sayHello.out)
+```
 
-    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // selamlamayı büyük harfe dönüştür
-        convertToUpper()
-    ```
+</CodeWalkthrough>
 
 Bunun gibi basit bir durum için (bir çıktıdan bir girdiye), iki süreci bağlamak için yapmamız gereken tek şey bu!
 
@@ -252,22 +257,22 @@ Son olarak, ikinci süreçten gelen sonuçları da yayınlamak için iş akış�
 
 `workflow` bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="56" hl_lines="3"
-        publish:
-        first_output = sayHello.out
-        uppercased = convertToUpper.out
-    }
-    ```
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=56 step="Önce"
+    publish:
+    first_output = sayHello.out
+}
+```
 
-=== "Önce"
+```nextflow {3} title="hello-workflow.nf" showLineNumbers startLineNumber=56 step="Sonra"
+    publish:
+    first_output = sayHello.out
+    uppercased = convertToUpper.out
+}
+```
 
-    ```groovy title="hello-workflow.nf" linenums="56"
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+</CodeWalkthrough>
 
 Mantık daha önce olduğu gibi aynı.
 
@@ -275,31 +280,31 @@ Mantık daha önce olduğu gibi aynı.
 
 `output` bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="61" hl_lines="6-9"
-    output {
-        first_output {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        uppercased {
-            path 'hello_workflow'
-            mode 'copy'
-        }
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=61 step="Önce"
+output {
+    first_output {
+        path 'hello_workflow'
+        mode 'copy'
     }
-    ```
+}
+```
 
-=== "Önce"
-
-    ```groovy title="hello-workflow.nf" linenums="61"
-    output {
-        first_output {
-            path 'hello_workflow'
-            mode 'copy'
-        }
+```nextflow {6-9} title="hello-workflow.nf" showLineNumbers startLineNumber=61 step="Sonra"
+output {
+    first_output {
+        path 'hello_workflow'
+        mode 'copy'
     }
-    ```
+    uppercased {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 Yine mantık daha önce olduğu gibi aynı.
 
@@ -315,58 +320,60 @@ Kursun ilerleyen bölümlerinde, bu ayarları birden fazla çıktı için yapıl
 
 ```bash
 nextflow run hello-workflow.nf -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-workflow.nf` [high_cantor] revision: d746983511
+
+executor >  local (3)
+[ab/816321] sayHello (3)       | 3 of 3, cached: 3 ✔
+[e0/ecf81b] convertToUpper (3) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_workflow/Hello-output.txt
+    - hello_workflow/Hola-output.txt
+    - hello_workflow/Bonjour-output.txt
+  uppercased:
+    - hello_workflow/UPPER-Hola-output.txt
+    - hello_workflow/UPPER-Hello-output.txt
+    - hello_workflow/UPPER-Bonjour-output.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-workflow.nf` [high_cantor] revision: d746983511
-
-    executor >  local (3)
-    [ab/816321] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [e0/ecf81b] convertToUpper (3) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_workflow/Hello-output.txt
-        - hello_workflow/Hola-output.txt
-        - hello_workflow/Bonjour-output.txt
-      uppercased:
-        - hello_workflow/UPPER-Hola-output.txt
-        - hello_workflow/UPPER-Hello-output.txt
-        - hello_workflow/UPPER-Bonjour-output.txt
-    ```
 
 Konsol çıktısında, az önce eklediğimiz yeni sürece karşılık gelen fazladan bir satır var.
 
 Çıktıları `output` bloğunda ayarlandığı gibi `results/hello_workflow` dizininde bulacaksınız.
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console
-    results/hello_workflow/
-    ├── Bonjour-output.txt
-    ├── Hello-output.txt
-    ├── Hola-output.txt
-    ├── UPPER-Bonjour-output.txt
-    ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
-    ```
+```console
+results/hello_workflow/
+├── Bonjour-output.txt
+├── Hello-output.txt
+├── Hola-output.txt
+├── UPPER-Bonjour-output.txt
+├── UPPER-Hello-output.txt
+└── UPPER-Hola-output.txt
+```
+
+</details>
 
 Bu kullanışlı! Ancak yine de ikinci sürece yapılan çağrılardan birinin work dizinine bakmaya değer.
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console
-    work/e0/ecf81b4cacc648b9b994218d5b29d7/
-    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Hola-output.txt
-    └── UPPER-Hola-output.txt
-    ```
+```console
+work/e0/ecf81b4cacc648b9b994218d5b29d7/
+├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Hola-output.txt
+└── UPPER-Hola-output.txt
+```
+
+</details>
 
 İki `*-output` dosyası olduğunu fark edin: ilk sürecin çıktısı ve ikincinin çıktısı.
 
@@ -396,9 +403,7 @@ Burada birden fazla selamlamaya yaptığımız gibi, bir kanaldaki öğelerin he
 
 Göstermek için, pipeline'ımıza `convertToUpper` süreci tarafından üretilen tüm büyük harf selamlamaları toplayan ve bunları tek bir dosyaya yazan yeni bir adım ekleyeceğiz.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
-</figure>
+![](../../hello_nextflow/img/hello-collect.excalidraw.svg)
 
 Sürprizi bozmak istemiyoruz, ama bu çok kullanışlı bir operatör içerecek.
 
@@ -419,13 +424,16 @@ cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLL
 
 Çıktı, orijinal selamlamaların büyük harf versiyonlarını içeren `COLLECTED-output.txt` adlı bir metin dosyasıdır.
 
-??? abstract "Dosya içeriği"
+<details class="abstract">
+<summary>Dosya içeriği</summary>
 
-    ```console title="COLLECTED-output.txt"
-    HELLO
-    BONJOUR
-    HOLA
-    ```
+```console title="COLLECTED-output.txt"
+HELLO
+BONJOUR
+HOLA
+```
+
+</details>
 
 İş akışımızla elde etmek istediğimiz sonuç budur.
 
@@ -438,7 +446,7 @@ Daha önce gördüklerimize dayalı olarak yazmaya başlayabiliriz.
 
 Aşağıdaki süreç tanımını iş akışı betiğine ekleyin:
 
-```groovy title="hello-workflow.nf" linenums="37"
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=37
 /*
  * Büyük harfli selamlamaları tek bir çıktı dosyasında topla
  */
@@ -471,19 +479,19 @@ Bu bir girdi slotuna eşit; basitlik için buna `input_files` diyelim.
 
 Süreç bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="42" hl_lines="2"
-          input:
-          path input_files
-    ```
+```nextflow {2} title="hello-workflow.nf" showLineNumbers startLineNumber=42 step="Önce"
+      input:
+      ???
+```
 
-=== "Önce"
+```nextflow {2} title="hello-workflow.nf" showLineNumbers startLineNumber=42 step="Sonra"
+      input:
+      path input_files
+```
 
-    ```groovy title="hello-workflow.nf" linenums="42" hl_lines="2"
-          input:
-          ???
-    ```
+</CodeWalkthrough>
 
 Birden fazla dosya beklememize rağmen `path` önekini kullandığımıza dikkat edin.
 
@@ -498,63 +506,61 @@ Neyse ki, script komutunda basitçe `cat ${input_files}` yazarsak Nextflow bunu 
 
 Süreç bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="54" hl_lines="3"
-        script:
-        """
-        cat ${input_files} > 'COLLECTED-output.txt'
-        """
-    ```
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=54 step="Önce"
+    script:
+    """
+    cat ??? > 'COLLECTED-output.txt'
+    """
+```
 
-=== "Önce"
+```nextflow {3} title="hello-workflow.nf" showLineNumbers startLineNumber=54 step="Sonra"
+    script:
+    """
+    cat ${input_files} > 'COLLECTED-output.txt'
+    """
+```
 
-    ```groovy title="hello-workflow.nf" linenums="54"
-        script:
-        """
-        cat ??? > 'COLLECTED-output.txt'
-        """
-    ```
+</CodeWalkthrough>
 
 Teoride bu, rastgele sayıda girdi dosyasını işlemelidir.
 
-!!! tip "İpucu"
-
-    Bazı komut satırı araçları, her girdi dosyası için bir argüman (örneğin `-input`) sağlamayı gerektirir.
-    Bu durumda, komutu oluşturmak için biraz fazladan çalışma yapmamız gerekir.
-    Bunun bir örneğini [Genomik için Nextflow](../nf4_science/genomics/index.md) eğitim kursunda görebilirsiniz.
+:::tip[İpucu]
+Bazı komut satırı araçları, her girdi dosyası için bir argüman (örneğin `-input`) sağlamayı gerektirir.
+Bu durumda, komutu oluşturmak için biraz fazladan çalışma yapmamız gerekir.
+Bunun bir örneğini [Genomik için Nextflow](../nf4_science/genomics/index.mdx) eğitim kursunda görebilirsiniz.
+:::
 
 ### 2.3. Toplama adımını iş akışına ekleyin
 
 Şimdi büyük harf dönüşümü adımının çıktısı üzerinde toplama sürecini çağırmamız yeterli olmalı.
 Bu da `convertToUpper.out` adlı bir kanaldır.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-connector.svg"
-</figure>
+![](../../hello_nextflow/img/hello-collect-connector.excalidraw.svg)
 
 #### 2.3.1. Süreç çağrılarını bağlayın
 
 İş akışı bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="75" hl_lines="4 5"
-        // selamlamayı büyük harfe dönüştür
-        convertToUpper(sayHello.out)
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=75 step="Önce"
+    // selamlamayı büyük harfe dönüştür
+    convertToUpper(sayHello.out)
+}
+```
 
-        // tüm selamlamaları tek bir dosyada topla
-        collectGreetings(convertToUpper.out)
-    }
-    ```
+```nextflow {4,5} title="hello-workflow.nf" showLineNumbers startLineNumber=75 step="Sonra"
+    // selamlamayı büyük harfe dönüştür
+    convertToUpper(sayHello.out)
 
-=== "Önce"
+    // tüm selamlamaları tek bir dosyada topla
+    collectGreetings(convertToUpper.out)
+}
+```
 
-    ```groovy title="hello-workflow.nf" linenums="75"
-        // selamlamayı büyük harfe dönüştür
-        convertToUpper(sayHello.out)
-    }
-    ```
+</CodeWalkthrough>
 
 Bu, `convertToUpper()`'ın çıktısını `collectGreetings()`'in girdisine bağlar.
 
@@ -562,62 +568,62 @@ Bu, `convertToUpper()`'ın çıktısını `collectGreetings()`'in girdisine bağ
 
 `workflow` bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="76" hl_lines="4"
-        publish:
-        first_output = sayHello.out
-        uppercased = convertToUpper.out
-        collected = collectGreetings.out
-    }
-    ```
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=76 step="Önce"
+    publish:
+    first_output = sayHello.out
+    uppercased = convertToUpper.out
+}
+```
 
-=== "Önce"
+```nextflow {4} title="hello-workflow.nf" showLineNumbers startLineNumber=76 step="Sonra"
+    publish:
+    first_output = sayHello.out
+    uppercased = convertToUpper.out
+    collected = collectGreetings.out
+}
+```
 
-    ```groovy title="hello-workflow.nf" linenums="76"
-        publish:
-        first_output = sayHello.out
-        uppercased = convertToUpper.out
-    }
-    ```
+</CodeWalkthrough>
 
 #### 2.3.3. `output` bloğunu güncelleyin
 
 `output` bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="10-13"
-    output {
-        first_output {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        uppercased {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        collected {
-            path 'hello_workflow'
-            mode 'copy'
-        }
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=82 step="Önce"
+output {
+    first_output {
+        path 'hello_workflow'
+        mode 'copy'
     }
-    ```
-
-=== "Önce"
-
-    ```groovy title="hello-workflow.nf" linenums="82"
-    output {
-        first_output {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        uppercased {
-            path 'hello_workflow'
-            mode 'copy'
-        }
+    uppercased {
+        path 'hello_workflow'
+        mode 'copy'
     }
-    ```
+}
+```
+
+```nextflow {10-13} title="hello-workflow.nf" showLineNumbers startLineNumber=82 step="Sonra"
+output {
+    first_output {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+    uppercased {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+    collected {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 #### 2.3.4. İş akışını `-resume` ile çalıştırın
 
@@ -625,37 +631,33 @@ Hadi deneyelim.
 
 ```bash
 nextflow run hello-workflow.nf -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-workflow.nf` [mad_gilbert] revision: 6acfd5e28d
+
+executor >  local (3)
+[79/33b2f0] sayHello (2)         | 3 of 3, cached: 3 ✔
+[99/79394f] convertToUpper (3)   | 3 of 3, cached: 3 ✔
+[47/50fe4a] collectGreetings (1) | 3 of 3 ✔ # [!code highlight]
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_workflow/Hello-output.txt
+    - hello_workflow/Bonjour-output.txt
+    - hello_workflow/Hola-output.txt
+  uppercased:
+    - hello_workflow/UPPER-Hello-output.txt
+    - hello_workflow/UPPER-Bonjour-output.txt
+    - hello_workflow/UPPER-Hola-output.txt
+  collected:
+    - hello_workflow/COLLECTED-output.txt
+    - hello_workflow/COLLECTED-output.txt
+    - hello_workflow/COLLECTED-output.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console hl_lines="8"
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-workflow.nf` [mad_gilbert] revision: 6acfd5e28d
-
-    executor >  local (3)
-    [79/33b2f0] sayHello (2)         | 3 of 3, cached: 3 ✔
-    [99/79394f] convertToUpper (3)   | 3 of 3, cached: 3 ✔
-    [47/50fe4a] collectGreetings (1) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_workflow/Hello-output.txt
-        - hello_workflow/Bonjour-output.txt
-        - hello_workflow/Hola-output.txt
-      uppercased:
-        - hello_workflow/UPPER-Hello-output.txt
-        - hello_workflow/UPPER-Bonjour-output.txt
-        - hello_workflow/UPPER-Hola-output.txt
-      collected:
-        - hello_workflow/COLLECTED-output.txt
-        - hello_workflow/COLLECTED-output.txt
-        - hello_workflow/COLLECTED-output.txt
-    ```
 
 Üçüncü adım dahil başarıyla çalışıyor.
 
@@ -664,17 +666,18 @@ Yalnızca bir tane bekliyorduk, ama üç tane var.
 
 Şimdi son çıktı dosyasının içeriğine bakın.
 
-??? abstract "Dosya içeriği"
+<details class="abstract">
+<summary>Dosya içeriği</summary>
 
-    ```console title="results/hello_workflow/COLLECTED-output.txt"
-    HOLA
-    ```
+```console title="results/hello_workflow/COLLECTED-output.txt"
+HOLA
+```
+
+</details>
 
 Hay aksi. Toplama adımı her selamlama için ayrı ayrı çalıştırıldı, bu istediğimiz şey DEĞİLDİ.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-no-operator.svg"
-</figure>
+![](../../hello_nextflow/img/hello-collect-no-operator.excalidraw.svg)
 
 Nextflow'a, o üçüncü adımın `convertToUpper()` tarafından çıktı olarak verilen kanaldaki tüm öğeler üzerinde çalışmasını istediğimizi açıkça söylemek için bir şey yapmamız gerekiyor.
 
@@ -693,45 +696,45 @@ Bunu doğrudan `collectGreetings()` süreç çağrısına bağlayabiliriz.
 
 İş akışı bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // tüm selamlamaları tek bir dosyada topla
-        collectGreetings(convertToUpper.out.collect())
-    }
-    ```
+```nextflow {2} title="hello-workflow.nf" showLineNumbers startLineNumber=73 step="Önce"
+    // tüm selamlamaları tek bir dosyada topla
+    collectGreetings(convertToUpper.out)
+}
+```
 
-=== "Önce"
+```nextflow {2} title="hello-workflow.nf" showLineNumbers startLineNumber=73 step="Sonra"
+    // tüm selamlamaları tek bir dosyada topla
+    collectGreetings(convertToUpper.out.collect())
+}
+```
 
-    ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // tüm selamlamaları tek bir dosyada topla
-        collectGreetings(convertToUpper.out)
-    }
-    ```
+</CodeWalkthrough>
 
 #### 2.4.2. Bazı `view()` ifadeleri ekleyin
 
 Kanal içeriklerinin önceki ve sonraki durumlarını görselleştirmek için birkaç `view()` ifadesi de ekleyelim.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // tüm selamlamaları tek bir dosyada topla
-        collectGreetings(convertToUpper.out.collect())
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=73 step="Önce"
+    // tüm selamlamaları tek bir dosyada topla
+    collectGreetings(convertToUpper.out.collect())
+}
+```
 
-        // isteğe bağlı view ifadeleri
-        convertToUpper.out.view { contents -> "Before collect: $contents" }
-        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
-    }
-    ```
+```nextflow {4-6} title="hello-workflow.nf" showLineNumbers startLineNumber=73 step="Sonra"
+    // tüm selamlamaları tek bir dosyada topla
+    collectGreetings(convertToUpper.out.collect())
 
-=== "Önce"
+    // isteğe bağlı view ifadeleri
+    convertToUpper.out.view { contents -> "Before collect: $contents" }
+    convertToUpper.out.collect().view { contents -> "After collect: $contents" }
+}
+```
 
-    ```groovy title="hello-workflow.nf" linenums="73"
-        // tüm selamlamaları tek bir dosyada topla
-        collectGreetings(convertToUpper.out.collect())
-    }
-    ```
+</CodeWalkthrough>
 
 `view()` ifadeleri istediğiniz yere konabilir; okunabilirlik için çağrının hemen arkasına koyduk.
 
@@ -741,38 +744,34 @@ Hadi deneyelim:
 
 ```bash
 nextflow run hello-workflow.nf -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-workflow.nf` [soggy_franklin] revision: bc8e1b2726
+
+executor >  local (1)
+[d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
+[99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+[1e/83586c] collectGreetings   | 1 of 1 ✔
+Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
+Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
+Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
+After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_workflow/Hello-output.txt
+    - hello_workflow/Bonjour-output.txt
+    - hello_workflow/Hola-output.txt
+  uppercased:
+    - hello_workflow/UPPER-Bonjour-output.txt
+    - hello_workflow/UPPER-Hello-output.txt
+    - hello_workflow/UPPER-Hola-output.txt
+  collected: hello_workflow/COLLECTED-output.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-workflow.nf` [soggy_franklin] revision: bc8e1b2726
-
-    executor >  local (1)
-    [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
-    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
-    [1e/83586c] collectGreetings   | 1 of 1 ✔
-    Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
-    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_workflow/Hello-output.txt
-        - hello_workflow/Bonjour-output.txt
-        - hello_workflow/Hola-output.txt
-      uppercased:
-        - hello_workflow/UPPER-Bonjour-output.txt
-        - hello_workflow/UPPER-Hello-output.txt
-        - hello_workflow/UPPER-Hola-output.txt
-      collected: hello_workflow/COLLECTED-output.txt
-    ```
 
 Başarıyla çalışıyor, ancak log çıktısı bundan biraz daha dağınık görünebilir (okunabilirlik için temizledik).
 
@@ -784,48 +783,49 @@ Bu sefer üçüncü adım yalnızca bir kez çağrıldı!
 
 Bunu şu diyagramla özetleyebiliriz:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-WITH-operator.svg"
-</figure>
+![](../../hello_nextflow/img/hello-collect-WITH-operator.excalidraw.svg)
 
 Son olarak, her şeyin doğru çalıştığından emin olmak için çıktı dosyasının içeriğine bakabilirsiniz.
 
-??? abstract "Dosya içeriği"
+<details class="abstract">
+<summary>Dosya içeriği</summary>
 
-    ```console title="results/hello_workflow/COLLECTED-output.txt"
-    BONJOUR
-    HELLO
-    HOLA
-    ```
+```console title="results/hello_workflow/COLLECTED-output.txt"
+BONJOUR
+HELLO
+HOLA
+```
+
+</details>
 
 Bu sefer son çıktı dosyasında üç selamlamamızın hepsi var. Başarılı!
 
-!!! note "Not"
-
-    Bunu `-resume` olmadan birkaç kez çalıştırırsanız, selamlamaların sırasının bir çalışmadan diğerine değiştiğini göreceksiniz.
-    Bu, öğelerin süreç çağrılarından geçme sırasının tutarlı olmasının garanti edilmediğini gösterir.
+:::note[Not]
+Bunu `-resume` olmadan birkaç kez çalıştırırsanız, selamlamaların sırasının bir çalışmadan diğerine değiştiğini göreceksiniz.
+Bu, öğelerin süreç çağrılarından geçme sırasının tutarlı olmasının garanti edilmediğini gösterir.
+:::
 
 #### 2.4.4. Okunabilirlik için `view()` ifadelerini kaldırın
 
 Bir sonraki bölüme geçmeden önce, konsol çıktısını karmaşıklaştırmamak için `view()` ifadelerini silmenizi öneririz.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="73"
-        // tüm selamlamaları tek bir dosyada topla
-        collectGreetings(convertToUpper.out.collect())
-    ```
+```nextflow {4-6} title="hello-workflow.nf" showLineNumbers startLineNumber=73 step="Önce"
+    // tüm selamlamaları tek bir dosyada topla
+    collectGreetings(convertToUpper.out.collect())
 
-=== "Önce"
+    // isteğe bağlı view ifadeleri
+    convertToUpper.out.view { contents -> "Before collect: $contents" }
+    convertToUpper.out.collect().view { contents -> "After collect: $contents" }
+```
 
-    ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // tüm selamlamaları tek bir dosyada topla
-        collectGreetings(convertToUpper.out.collect())
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=73 step="Sonra"
+    // tüm selamlamaları tek bir dosyada topla
+    collectGreetings(convertToUpper.out.collect())
+```
 
-        // isteğe bağlı view ifadeleri
-        convertToUpper.out.view { contents -> "Before collect: $contents" }
-        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
-    ```
+</CodeWalkthrough>
 
 Bu temelde 2.4.2 noktasının ters işlemidir.
 
@@ -835,9 +835,7 @@ Toplu süreç çağrılarından çıktıları nasıl toplayıp ortak bir analiz 
 
 Özetlemek gerekirse, şu ana kadar oluşturduğunuz şey bu:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
-</figure>
+![](../../hello_nextflow/img/hello-collect.excalidraw.svg)
 
 ### Sırada ne var?
 
@@ -854,9 +852,7 @@ Bu amaçla, iş akışında aşağıdaki iyileştirmeleri yapacağız:
 - Toplayıcı süreci, çıktı dosyası için kullanıcı tanımlı bir ad kabul edecek şekilde değiştirmek (`batch_name`)
 - İş akışına bir komut satırı parametresi eklemek (`--batch`) ve bunu toplayıcı sürece iletmek
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.svg"
-</figure>
+![](../../hello_nextflow/img/hello-collect-batch.excalidraw.svg)
 
 ### 3.1. Toplayıcı sürecini değiştirin
 
@@ -869,20 +865,20 @@ Buna `batch_name` diyelim.
 
 Süreç bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="42" hl_lines="3"
-        input:
-        path input_files
-        val batch_name
-    ```
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=42 step="Önce"
+    input:
+    path input_files
+```
 
-=== "Önce"
+```nextflow {3} title="hello-workflow.nf" showLineNumbers startLineNumber=42 step="Sonra"
+    input:
+    path input_files
+    val batch_name
+```
 
-    ```groovy title="hello-workflow.nf" linenums="42"
-        input:
-        path input_files
-    ```
+</CodeWalkthrough>
 
 Süreçlerinizi istediğiniz kadar girdi bekleyecek şekilde ayarlayabilirsiniz.
 Şu anda bunların hepsi zorunlu girdiler olarak ayarlanmış; iş akışının çalışması için bir değer sağlamalısınız.
@@ -895,29 +891,29 @@ Değişkeni, daha önce dinamik dosya adları oluşturduğumuz şekilde çıktı
 
 Süreç bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="46" hl_lines="2 6"
-        output:
-        path "COLLECTED-${batch_name}-output.txt"
+```nextflow {2,6} title="hello-workflow.nf" showLineNumbers startLineNumber=46 step="Önce"
+    output:
+    path "COLLECTED-output.txt"
 
-        script:
-        """
-        cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-        """
-    ```
+    script:
+    """
+    cat ${input_files} > 'COLLECTED-output.txt'
+    """
+```
 
-=== "Önce"
+```nextflow {2,6} title="hello-workflow.nf" showLineNumbers startLineNumber=46 step="Sonra"
+    output:
+    path "COLLECTED-${batch_name}-output.txt"
 
-    ```groovy title="hello-workflow.nf" linenums="46" hl_lines="2 6"
-        output:
-        path "COLLECTED-output.txt"
+    script:
+    """
+    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
+    """
+```
 
-        script:
-        """
-        cat ${input_files} > 'COLLECTED-output.txt'
-        """
-    ```
+</CodeWalkthrough>
 
 Bu, süreci iş akışının son çıktısı için belirli bir dosya adı oluşturmak üzere `batch_name` değerini kullanacak şekilde ayarlar.
 
@@ -932,28 +928,28 @@ Hadi bunu bir `batch` parametresi tanımlamak için kullanalım (tembel olduğum
 
 Pipeline parametreleri bölümünde, aşağıdaki kod değişikliklerini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="55" hl_lines="6"
-    /*
-     * Pipeline parametreleri
-     */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-    }
-    ```
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=55 step="Önce"
+/*
+ * Pipeline parametreleri
+ */
+params {
+    input: Path = 'data/greetings.csv'
+}
+```
 
-=== "Önce"
+```nextflow {6} title="hello-workflow.nf" showLineNumbers startLineNumber=55 step="Sonra"
+/*
+ * Pipeline parametreleri
+ */
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+}
+```
 
-    ```groovy title="hello-workflow.nf" linenums="55"
-    /*
-     * Pipeline parametreleri
-     */
-    params {
-        input: Path = 'data/greetings.csv'
-    }
-    ```
+</CodeWalkthrough>
 
 `--input` için gösterdiğimiz gibi, komut satırında `--batch` ile bir değer belirterek bu varsayılan değeri geçersiz kılabilirsiniz.
 
@@ -963,25 +959,25 @@ Parametrenin değerini sürece sağlamak için, süreç çağrısına eklememiz 
 
 İş akışı bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // tüm selamlamaları tek bir dosyada topla
-        collectGreetings(convertToUpper.out.collect(), params.batch)
-    ```
+```nextflow {2} title="hello-workflow.nf" showLineNumbers startLineNumber=74 step="Önce"
+    // tüm selamlamaları tek bir dosyada topla
+    collectGreetings(convertToUpper.out.collect())
+```
 
-=== "Önce"
+```nextflow {2} title="hello-workflow.nf" showLineNumbers startLineNumber=74 step="Sonra"
+    // tüm selamlamaları tek bir dosyada topla
+    collectGreetings(convertToUpper.out.collect(), params.batch)
+```
 
-    ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // tüm selamlamaları tek bir dosyada topla
-        collectGreetings(convertToUpper.out.collect())
-    ```
+</CodeWalkthrough>
 
 Bir sürece birden fazla girdi sağlamak için, bunları çağrı parantezlerinde virgülle ayırarak listelemeniz yeterli.
 
-!!! warning "Uyarı"
-
-    Girdileri sürece, sürecin girdi tanım bloğunda listelendikleri AYNI SIRADA sağlamalısınız.
+:::caution[Uyarı]
+Girdileri sürece, sürecin girdi tanım bloğunda listelendikleri AYNI SIRADA sağlamalısınız.
+:::
 
 ### 3.3. İş akışını çalıştırın
 
@@ -989,44 +985,43 @@ Bunu komut satırında bir grup adıyla çalıştırmayı deneyelim.
 
 ```bash
 nextflow run hello-workflow.nf -resume --batch trio
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-workflow.nf` [confident_rutherford] revision: bc58af409c
+
+executor >  local (1)
+[79/33b2f0] sayHello (2)       | 3 of 3, cached: 3 ✔
+[99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+[b5/f19efe] collectGreetings   | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_workflow/Bonjour-output.txt
+    - hello_workflow/Hello-output.txt
+    - hello_workflow/Hola-output.txt
+  uppercased:
+    - hello_workflow/UPPER-Bonjour-output.txt
+    - hello_workflow/UPPER-Hola-output.txt
+    - hello_workflow/UPPER-Hello-output.txt
+  collected: hello_workflow/COLLECTED-trio-output.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-workflow.nf` [confident_rutherford] revision: bc58af409c
-
-    executor >  local (1)
-    [79/33b2f0] sayHello (2)       | 3 of 3, cached: 3 ✔
-    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
-    [b5/f19efe] collectGreetings   | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_workflow/Bonjour-output.txt
-        - hello_workflow/Hello-output.txt
-        - hello_workflow/Hola-output.txt
-      uppercased:
-        - hello_workflow/UPPER-Bonjour-output.txt
-        - hello_workflow/UPPER-Hola-output.txt
-        - hello_workflow/UPPER-Hello-output.txt
-      collected: hello_workflow/COLLECTED-trio-output.txt
-    ```
 
 Başarıyla çalışıyor ve istenen çıktıyı üretiyor:
 
-??? abstract "Dosya içeriği"
+<details class="abstract">
+<summary>Dosya içeriği</summary>
 
-    ```console title="results/hello_workflow/COLLECTED-trio-output.txt"
-    HELLO
-    BONJOUR
-    HOLA
-    ```
+```console title="results/hello_workflow/COLLECTED-trio-output.txt"
+HELLO
+BONJOUR
+HOLA
+```
+
+</details>
 
 Artık parametreyi uygun şekilde belirttiğimiz sürece, diğer girdi grupları üzerindeki sonraki çalıştırmalar önceki sonuçları bozmayacak.
 
@@ -1070,25 +1065,25 @@ Bu, `input_files` dizisindeki dosya sayısını almak için Nextflow'un yerleşi
 
 `collectGreetings` süreç bloğunda, aşağıdaki kod değişikliklerini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="55" hl_lines="2 5"
-        script:
-        count_greetings = input_files.size()
-        """
-        cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-        echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
-        """
-    ```
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=55 step="Önce"
+    script:
+    """
+    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
+    """
+```
 
-=== "Önce"
+```nextflow {2,5} title="hello-workflow.nf" showLineNumbers startLineNumber=55 step="Sonra"
+    script:
+    count_greetings = input_files.size()
+    """
+    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
+    echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
+    """
+```
 
-    ```groovy title="hello-workflow.nf" linenums="55"
-        script:
-        """
-        cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-        """
-    ```
+</CodeWalkthrough>
 
 `count_greetings` değişkeni çalışma zamanında hesaplanacaktır.
 
@@ -1100,30 +1095,30 @@ Ancak, bu arada, çıktı tanımlarımıza bazı `emit:` etiketleri de ekleyece�
 
 Süreç bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="46" hl_lines="2 3"
-        output:
-        path "COLLECTED-${batch_name}-output.txt", emit: outfile
-        path "${batch_name}-report.txt", emit: report
-    ```
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=46 step="Önce"
+    output:
+    path "COLLECTED-${batch_name}-output.txt"
+```
 
-=== "Önce"
+```nextflow {2,3} title="hello-workflow.nf" showLineNumbers startLineNumber=46 step="Sonra"
+    output:
+    path "COLLECTED-${batch_name}-output.txt", emit: outfile
+    path "${batch_name}-report.txt", emit: report
+```
 
-    ```groovy title="hello-workflow.nf" linenums="46"
-        output:
-        path "COLLECTED-${batch_name}-output.txt"
-    ```
+</CodeWalkthrough>
 
 `emit:` etiketleri isteğe bağlıdır ve çıktılardan yalnızca birine bir etiket ekleyebilirdik.
 Ama deyişte olduğu gibi, neden ikisi de olmasın?
 
-!!! tip "İpucu"
+:::tip[İpucu]
+Bir sürecin çıktılarını `emit:` kullanarak adlandırmazsanız, bunlara yine de ilgili (sıfır tabanlı) indekslerini kullanarak ayrı ayrı erişebilirsiniz.
+Örneğin, ilk çıktıyı almak için `<process>.out[0]`, ikinci çıktıyı almak için `<process>.out[1]` ve benzeri şekillerde kullanırsınız.
 
-    Bir sürecin çıktılarını `emit:` kullanarak adlandırmazsanız, bunlara yine de ilgili (sıfır tabanlı) indekslerini kullanarak ayrı ayrı erişebilirsiniz.
-    Örneğin, ilk çıktıyı almak için `<process>.out[0]`, ikinci çıktıyı almak için `<process>.out[1]` ve benzeri şekillerde kullanırsınız.
-
-    Çıktıları adlandırmayı tercih ediyoruz çünkü aksi takdirde, özellikle süreç çok sayıda çıktı ürettiğinde, yanlışlıkla yanlış indeksi almak çok kolay.
+Çıktıları adlandırmayı tercih ediyoruz çünkü aksi takdirde, özellikle süreç çok sayıda çıktı ürettiğinde, yanlışlıkla yanlış indeksi almak çok kolay.
+:::
 
 ### 4.2. İş akışı çıktılarını güncelleyin
 
@@ -1132,9 +1127,7 @@ Ama deyişte olduğu gibi, neden ikisi de olmasın?
 - `collectGreetings.out.outfile` son çıktı dosyasını içerir
 - `collectGreetings.out.report` rapor dosyasını içerir
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-report.svg"
-</figure>
+![](../../hello_nextflow/img/hello-collect-report.excalidraw.svg)
 
 İş akışı çıktılarını buna göre güncellememiz gerekiyor.
 
@@ -1142,24 +1135,24 @@ Ama deyişte olduğu gibi, neden ikisi de olmasın?
 
 `workflow` bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="80" hl_lines="4 5"
-        publish:
-        first_output = sayHello.out
-        uppercased = convertToUpper.out
-        collected = collectGreetings.out.outfile
-        batch_report = collectGreetings.out.report
-    ```
+```nextflow {4} title="hello-workflow.nf" showLineNumbers startLineNumber=80 step="Önce"
+    publish:
+    first_output = sayHello.out
+    uppercased = convertToUpper.out
+    collected = collectGreetings.out
+```
 
-=== "Önce"
+```nextflow {4,5} title="hello-workflow.nf" showLineNumbers startLineNumber=80 step="Sonra"
+    publish:
+    first_output = sayHello.out
+    uppercased = convertToUpper.out
+    collected = collectGreetings.out.outfile
+    batch_report = collectGreetings.out.report
+```
 
-    ```groovy title="hello-workflow.nf" linenums="80" hl_lines="4"
-        publish:
-        first_output = sayHello.out
-        uppercased = convertToUpper.out
-        collected = collectGreetings.out
-    ```
+</CodeWalkthrough>
 
 Gördüğünüz gibi, belirli süreç çıktılarına atıfta bulunmak artık önemsiz.
 Bölüm 5'te (Konteynerler) pipeline'ımıza bir adım daha eklediğimizde, `collectGreetings.out.outfile`'a kolayca atıfta bulunabilecek ve yeni sürece verebileceğiz (spoiler: yeni sürecin adı `cowpy`).
@@ -1170,47 +1163,47 @@ Ama şimdilik, iş akışı düzeyindeki çıktıları güncellemeyi bitirelim.
 
 `output` bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-workflow.nf" linenums="86" hl_lines="14-17"
-    output {
-        first_output {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        uppercased {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        collected {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        batch_report {
-            path 'hello_workflow'
-            mode 'copy'
-        }
+```nextflow title="hello-workflow.nf" showLineNumbers startLineNumber=80 step="Önce"
+output {
+    first_output {
+        path 'hello_workflow'
+        mode 'copy'
     }
-    ```
-
-=== "Önce"
-
-    ```groovy title="hello-workflow.nf" linenums="80"
-    output {
-        first_output {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        uppercased {
-            path 'hello_workflow'
-            mode 'copy'
-        }
-        collected {
-            path 'hello_workflow'
-            mode 'copy'
-        }
+    uppercased {
+        path 'hello_workflow'
+        mode 'copy'
     }
-    ```
+    collected {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+}
+```
+
+```nextflow {14-17} title="hello-workflow.nf" showLineNumbers startLineNumber=86 step="Sonra"
+output {
+    first_output {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+    uppercased {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+    collected {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+    batch_report {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 Bu ad değişmediği için `collected` çıktı tanımını güncellememize gerek yok.
 Sadece yeni çıktıyı eklememiz gerekiyor.
@@ -1221,48 +1214,45 @@ Bunu mevcut selamlama grubuyla çalıştırmayı deneyelim.
 
 ```bash
 nextflow run hello-workflow.nf -resume --batch trio
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-workflow.nf` [ecstatic_wilson] revision: c80285f8c8
+
+executor >  local (1)
+[c5/4c6ca9] sayHello (3)       | 3 of 3, cached: 3 ✔
+[0e/6cbc59] convertToUpper (3) | 3 of 3, cached: 3 ✔
+[02/61ead2] collectGreetings   | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_workflow/Bonjour-output.txt
+    - hello_workflow/Hello-output.txt
+    - hello_workflow/Hola-output.txt
+  uppercased:
+    - hello_workflow/UPPER-Bonjour-output.txt
+    - hello_workflow/UPPER-Hola-output.txt
+    - hello_workflow/UPPER-Hello-output.txt
+  collected: hello_workflow/COLLECTED-trio-output.txt
+  batch_report: hello_workflow/trio-report.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-workflow.nf` [ecstatic_wilson] revision: c80285f8c8
-
-    executor >  local (1)
-    [c5/4c6ca9] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [0e/6cbc59] convertToUpper (3) | 3 of 3, cached: 3 ✔
-    [02/61ead2] collectGreetings   | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_workflow/Bonjour-output.txt
-        - hello_workflow/Hello-output.txt
-        - hello_workflow/Hola-output.txt
-      uppercased:
-        - hello_workflow/UPPER-Bonjour-output.txt
-        - hello_workflow/UPPER-Hola-output.txt
-        - hello_workflow/UPPER-Hello-output.txt
-      collected: hello_workflow/COLLECTED-trio-output.txt
-      batch_report: hello_workflow/trio-report.txt
-    ```
 
 `results/hello_workflow/` dizinine bakarsanız, yeni rapor dosyasını, `trio-report.txt`'yi bulacaksınız.
 İş akışının işlenen selamlama sayısını doğru bir şekilde raporladığını doğrulamak için açın.
 
-??? abstract "Dosya içeriği"
+<details class="abstract">
+<summary>Dosya içeriği</summary>
 
-    ```txt title="trio-report.txt"
-    There were 3 greetings in this batch.
-    ```
+```txt title="trio-report.txt"
+There were 3 greetings in this batch.
+```
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-4-way.svg"
-</figure>
+</details>
+
+![](../../hello_nextflow/img/hello-collect-4-way.excalidraw.svg)
 
 CSV'ye daha fazla selamlama eklemekten ve ne olduğunu test etmekten çekinmeyin.
 
@@ -1276,36 +1266,41 @@ Daha genel olarak, süreçleri yaygın yollarla birbirine bağlamayla ilgili tem
 
 Ekstra uzun bir mola verin, bunu hak ettiniz.
 
-Hazır olduğunuzda, kodunuzu daha iyi sürdürülebilirlik ve kod verimliliği için nasıl modülerleştireceğinizi öğrenmek için [**Bölüm 4: Hello Modules**](./04_hello_modules.md)'e geçin.
+Hazır olduğunuzda, kodunuzu daha iyi sürdürülebilirlik ve kod verimliliği için nasıl modülerleştireceğinizi öğrenmek için [**Bölüm 4: Hello Modules**](./04_hello_modules.mdx)'e geçin.
 
 ---
 
 ## Quiz
 
-<quiz>
+<Quiz id="quiz-1">
+
 İş akışı bloğunda bir sürecin çıktısına nasıl erişirsiniz?
 - [ ] `process.output`
 - [ ] `output.processName`
 - [x] `processName.out`
 - [ ] `get(processName)`
 
-Daha fazla bilgi: [1.4. İlk sürecin çıktısını ikinci sürece iletin](#14-pass-the-output-of-the-first-process-to-the-second-process)
-</quiz>
+Daha fazla bilgi: [1.4. İlk sürecin çıktısını ikinci sürece iletin](#14-i̇lk-sürecin-çıktısını-ikinci-sürece-iletin)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-2">
+
 Nextflow'da süreç yürütme sırasını ne belirler?
 - [ ] Süreçlerin iş akışı bloğunda yazıldıkları sıra
 - [ ] Süreç adına göre alfabetik sıra
 - [x] Süreçler arasındaki veri bağımlılıkları
 - [ ] Paralel yürütme için rastgele sıra
 
-Daha fazla bilgi: [1.4. İlk sürecin çıktısını ikinci sürece iletin](#14-pass-the-output-of-the-first-process-to-the-second-process)
-</quiz>
+Daha fazla bilgi: [1.4. İlk sürecin çıktısını ikinci sürece iletin](#14-i̇lk-sürecin-çıktısını-ikinci-sürece-iletin)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-3">
+
 Aşağı akış süreci için tüm çıktıları tek bir listede toplamak için `???` yerine hangi operatör gelmelidir?
 
-```groovy hl_lines="4"
+```nextflow {4}
 workflow {
     greetings_ch = Channel.of('Hello', 'Bonjour', 'Hola')
     SAYHELLO(greetings_ch)
@@ -1318,45 +1313,54 @@ workflow {
 - [ ] `mix()`
 - [ ] `join()`
 
-Daha fazla bilgi: [2.4. Selamlamaları tek bir girdide toplamak için bir operatör kullanın](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
-</quiz>
+Daha fazla bilgi: [2.4. Selamlamaları tek bir girdide toplamak için bir operatör kullanın](#24-selamlamaları-tek-bir-girdide-toplamak-için-bir-operatör-kullanın)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-4">
+
 `collect()` operatörünü ne zaman kullanmalısınız?
 - [ ] Öğeleri paralel olarak işlemek istediğinizde
 - [ ] Kanal içeriklerini filtrelemeniz gerektiğinde
 - [x] Aşağı akış sürecinin yukarı akış sürecinden tüm öğelere ihtiyacı olduğunda
 - [ ] Verileri birden fazla sürece bölmek istediğinizde
 
-Daha fazla bilgi: [2.4. Selamlamaları tek bir girdide toplamak için bir operatör kullanın](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
-</quiz>
+Daha fazla bilgi: [2.4. Selamlamaları tek bir girdide toplamak için bir operatör kullanın](#24-selamlamaları-tek-bir-girdide-toplamak-için-bir-operatör-kullanın)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-5">
+
 Bir süreçten adlandırılmış bir çıktıya nasıl erişirsiniz?
 - [ ] `processName.outputName`
 - [ ] `processName.get(outputName)`
 - [x] `processName.out.outputName`
 - [ ] `output.processName.outputName`
 
-Daha fazla bilgi: [4.1.2. Rapor dosyasını yayınlayın ve çıktıları adlandırın](#412-emit-the-report-file-and-name-outputs)
-</quiz>
+Daha fazla bilgi: [4.1.2. Rapor dosyasını yayınlayın ve çıktıları adlandırın](#412-rapor-dosyasını-yayınlayın-ve-çıktıları-adlandırın)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-6">
+
 Bir süreçte çıktıyı adlandırmak için doğru sözdizimi nedir?
 - [ ] `name: outputName`
 - [ ] `output: outputName`
 - [x] `emit: outputName`
 - [ ] `label: outputName`
 
-Daha fazla bilgi: [4.1.2. Rapor dosyasını yayınlayın ve çıktıları adlandırın](#412-emit-the-report-file-and-name-outputs)
-</quiz>
+Daha fazla bilgi: [4.1.2. Rapor dosyasını yayınlayın ve çıktıları adlandırın](#412-rapor-dosyasını-yayınlayın-ve-çıktıları-adlandırın)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-7">
+
 Bir sürece birden fazla girdi sağlarken ne doğru olmalıdır?
 - [ ] Tüm girdiler aynı türde olmalıdır
 - [ ] Girdiler alfabetik sırada sağlanmalıdır
 - [x] Girdilerin sırası girdi bloğunda tanımlanan sırayla eşleşmelidir
 - [ ] Aynı anda yalnızca iki girdi sağlanabilir
 
-Daha fazla bilgi: [3. Bir sürece ek parametreler iletin](#3-pass-additional-parameters-to-a-process)
-</quiz>
+Daha fazla bilgi: [3. Bir sürece ek parametreler iletin](#3-bir-sürece-ek-parametreler-iletin)
+
+</Quiz>

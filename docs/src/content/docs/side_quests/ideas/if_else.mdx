@@ -1,4 +1,7 @@
-# Part 2: If - Else
+---
+title: 'Part 2: If - Else'
+description: '[TODO]'
+---
 
 [TODO]
 
@@ -39,17 +42,17 @@ At a high level, to complete this exercise you will need to:
 
 For the `quote` container image, you can either use the one you built yourself in the previous stretch exercise or use the one you got from Seqera Containers .
 
-!!! Hint
-
-    A good choice for the `script` block of your getQuote process might be:
-        ```groovy
-        script:
-            def safe_author = author.tokenize(' ').join('-')
-            """
-            quote "$author" > quote-${safe_author}.txt
-            echo "-${author}" >> quote-${safe_author}.txt
-            """
-        ```
+:::note[Hint]
+A good choice for the `script` block of your getQuote process might be:
+    ```nextflow
+    script:
+        def safe_author = author.tokenize(' ').join('-')
+        """
+        quote "$author" > quote-${safe_author}.txt
+        echo "-${author}" >> quote-${safe_author}.txt
+        """
+    ```
+:::
 
 You can find a solution to this exercise in `containers/solutions/hello-containers-4.1.nf`.
 
@@ -58,7 +61,7 @@ You can find a solution to this exercise in `containers/solutions/hello-containe
 Add some branching logic using to your pipeline to allow it to accept inputs intended for both `quote` and `sayHello`.
 Here's an example of how to use an `if` statement in a Nextflow workflow:
 
-```groovy title="hello-containers.nf"
+```nextflow title="hello-containers.nf"
 workflow {
     if (params.quote) {
         ...
@@ -70,9 +73,9 @@ workflow {
 }
 ```
 
-!!! Hint
-
-    You can use `new_ch = processName.out` to assign a name to the output channel of a process.
+:::note[Hint]
+You can use `new_ch = processName.out` to assign a name to the output channel of a process.
+:::
 
 You can find a solution to this exercise in `containers/solutions/hello-containers-4.2.nf`.
 

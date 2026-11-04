@@ -1,6 +1,9 @@
-# Teil 3: Ein nf-core-Modul erstellen
+---
+title: 'Teil 3: Ein nf-core-Modul erstellen'
+description: In diesem dritten Teil des Build with nf-core Trainingskurses zeigen wir dir, wie du ein nf-core-Modul erstellst, indem du die wichtigsten Konventionen…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 In diesem dritten Teil des Build with nf-core Trainingskurses zeigen wir dir, wie du ein nf-core-Modul erstellst, indem du die wichtigsten Konventionen anwendest, die Module portabel und wartbar machen.
 
@@ -8,24 +11,27 @@ Das nf-core-Projekt stellt einen Befehl (`nf-core modules create`) bereit, der a
 Zu Lehrzwecken werden wir jedoch damit beginnen, es manuell zu machen: Wir transformieren das lokale `cowpy`-Modul in deiner `core-hello`-Pipeline Schritt für Schritt in ein Modul im nf-core-Stil.
 Danach zeigen wir dir, wie du die vorlagenbasierte Modulerstellung nutzt, um in Zukunft effizienter zu arbeiten.
 
-??? info "Wie du von diesem Abschnitt aus beginnst"
+<details class="info">
+<summary>Wie du von diesem Abschnitt aus beginnst</summary>
 
-    Dieser Abschnitt setzt voraus, dass du [Teil 2: Ein nf-core-Modul verwenden](./02_use_module.md) abgeschlossen hast und das `FIND_CONCATENATE`-Modul in deine Pipeline integriert hast.
+Dieser Abschnitt setzt voraus, dass du [Teil 2: Ein nf-core-Modul verwenden](./02_use_module.mdx) abgeschlossen hast und das `FIND_CONCATENATE`-Modul in deine Pipeline integriert hast.
 
-    Wenn du Teil 2 nicht abgeschlossen hast oder für diesen Teil neu beginnen möchtest, kannst du die Lösung `core-hello-part2` als Ausgangspunkt verwenden.
-    Führe diese Befehle im Verzeichnis `nfcore-build/` aus:
+Wenn du Teil 2 nicht abgeschlossen hast oder für diesen Teil neu beginnen möchtest, kannst du die Lösung `core-hello-part2` als Ausgangspunkt verwenden.
+Führe diese Befehle im Verzeichnis `nfcore-build/` aus:
 
-    ```bash
-    cp -r solutions/core-hello-part2 core-hello
-    cd core-hello
-    ```
+```bash
+cp -r solutions/core-hello-part2 core-hello
+cd core-hello
+```
 
-    Dies gibt dir eine Pipeline mit dem bereits integrierten `FIND_CONCATENATE`-Modul.
-    Du kannst testen, ob sie erfolgreich läuft, indem du den folgenden Befehl ausführst:
+Dies gibt dir eine Pipeline mit dem bereits integrierten `FIND_CONCATENATE`-Modul.
+Du kannst testen, ob sie erfolgreich läuft, indem du den folgenden Befehl ausführst:
 
-    ```bash
-    nextflow run . --outdir core-hello-results -profile test,docker
-    ```
+```bash
+nextflow run . --outdir core-hello-results -profile test,docker
+```
+
+</details>
 
 ---
 
@@ -35,7 +41,7 @@ In diesem Abschnitt wenden wir nf-core-Konventionen auf das lokale `cowpy`-Modul
 
 Dies ist der aktuelle Code für das `cowpy`-Prozessmodul:
 
-```groovy title="core-hello/modules/local/cowpy.nf" linenums="1"
+```nextflow title="core-hello/modules/local/cowpy.nf" showLineNumbers
 // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
 process cowpy {
 
@@ -68,13 +74,13 @@ Wir werden die folgenden nf-core-Konventionen schrittweise anwenden:
 
 Nach jedem Schritt führen wir die Pipeline aus, um zu testen, dass alles wie erwartet funktioniert.
 
-!!! warning "Arbeitsverzeichnis"
+:::caution[Arbeitsverzeichnis]
+Stelle sicher, dass du dich im Verzeichnis `core-hello` (dein Pipeline-Stammverzeichnis) befindest, für alle Dateibearbeitungen und Befehlsausführungen in diesem Abschnitt.
 
-    Stelle sicher, dass du dich im Verzeichnis `core-hello` (dein Pipeline-Stammverzeichnis) befindest, für alle Dateibearbeitungen und Befehlsausführungen in diesem Abschnitt.
-
-    ```bash
-    cd core-hello
-    ```
+```bash
+cd core-hello
+```
+:::
 
 ### 1.1. Den Prozessnamen in Großbuchstaben ändern
 
@@ -92,19 +98,19 @@ Los geht's!
 
 Öffne die Moduldatei `cowpy.nf` (unter `core-hello/modules/local/`) und ändere den Prozessnamen in Großbuchstaben:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2"
-    // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
-    process COWPY {
-    ```
+```nextflow {2} title="core-hello/modules/local/cowpy.nf" showLineNumbers step="Vorher"
+// ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
+process cowpy {
+```
 
-=== "Vorher"
+```nextflow {2} title="core-hello/modules/local/cowpy.nf" showLineNumbers step="Danach"
+// ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
+process COWPY {
+```
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2"
-    // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
-    process cowpy {
-    ```
+</CodeWalkthrough>
 
 In diesem Fall ist die Großschreibung völlig unkompliziert.
 
@@ -114,37 +120,37 @@ Wenn der Prozessname aus mehreren Wörtern bestünde, zum Beispiel wenn wir eine
 
 Prozessnamen sind case-sensitiv, daher müssen wir, nachdem wir den Prozessnamen geändert haben, die Modul-Import-Anweisung entsprechend im Workflow-Header von `hello.nf` aktualisieren:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
-    /*
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
-    include { paramsSummaryMap       } from 'plugin/nf-schema'
-    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-    include { sayHello               } from '../modules/local/sayHello.nf'
-    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
-    include { COWPY                  } from '../modules/local/cowpy.nf'
-    ```
+```nextflow {11} title="core-hello/workflows/hello.nf" showLineNumbers step="Vorher"
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+include { paramsSummaryMap       } from 'plugin/nf-schema'
+include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { sayHello               } from '../modules/local/sayHello.nf'
+include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+include { cowpy                  } from '../modules/local/cowpy.nf'
+```
 
-=== "Vorher"
+```nextflow {11} title="core-hello/workflows/hello.nf" showLineNumbers step="Danach"
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+include { paramsSummaryMap       } from 'plugin/nf-schema'
+include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { sayHello               } from '../modules/local/sayHello.nf'
+include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+include { COWPY                  } from '../modules/local/cowpy.nf'
+```
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
-    /*
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
-    include { paramsSummaryMap       } from 'plugin/nf-schema'
-    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-    include { sayHello               } from '../modules/local/sayHello.nf'
-    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
-    include { cowpy                  } from '../modules/local/cowpy.nf'
-    ```
+</CodeWalkthrough>
 
 Wir könnten einen Alias in der Import-Anweisung verwenden, um zu vermeiden, dass wir Aufrufe des Prozesses aktualisieren müssen, aber das würde den Sinn der Übernahme der Großbuchstaben-Konvention etwas verfehlen.
 
@@ -152,89 +158,89 @@ Wir könnten einen Alias in der Import-Anweisung verwenden, um zu vermeiden, das
 
 Also aktualisieren wir jetzt die beiden Referenzen auf den Prozess im Workflow-Block von `hello.nf`:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="5 36"
-    // Die Datei aus dem Tupel extrahieren, da cowpy noch keine Metadaten verwendet
-    ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
+```nextflow {5,36} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=44 step="Vorher"
+// Die Datei aus dem Tupel extrahieren, da cowpy noch keine Metadaten verwendet
+ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
-    // ASCII-Kunst der Begrüßungen mit cowpy generieren
-    COWPY(ch_for_cowpy, params.character)
+// ASCII-Kunst der Begrüßungen mit cowpy generieren
+cowpy(ch_for_cowpy, params.character)
 
-    //
-    // Software-Versionen sammeln und speichern
-    //
-    def topic_versions = channel.topic("versions")
-        .distinct()
-        .branch { entry ->
-            versions_file: entry instanceof Path
-            versions_tuple: true
-        }
+//
+// Software-Versionen sammeln und speichern
+//
+def topic_versions = channel.topic("versions")
+    .distinct()
+    .branch { entry ->
+        versions_file: entry instanceof Path
+        versions_tuple: true
+    }
 
-    def topic_versions_string = topic_versions.versions_tuple
-        .map { process, tool, version ->
-            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
-        }
-        .groupTuple(by:0)
-        .map { process, tool_versions ->
-            tool_versions.unique().sort()
-            "${process}:\n${tool_versions.join('\n')}"
-        }
+def topic_versions_string = topic_versions.versions_tuple
+    .map { process, tool, version ->
+        [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+    }
+    .groupTuple(by:0)
+    .map { process, tool_versions ->
+        tool_versions.unique().sort()
+        "${process}:\n${tool_versions.join('\n')}"
+    }
 
-    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
-        .mix(topic_versions_string)
-        .collectFile(
-            storeDir: "${outdir}/pipeline_info",
-            name:  'hello_software_'  + 'versions.yml',
-            sort: true,
-            newLine: true
-        )
-    emit:
-    cowpy_hellos   = COWPY.out
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
-    ```
+def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    .mix(topic_versions_string)
+    .collectFile(
+        storeDir: "${outdir}/pipeline_info",
+        name:  'hello_software_'  + 'versions.yml',
+        sort: true,
+        newLine: true
+    )
+emit:
+cowpy_hellos   = cowpy.out
+versions       = ch_versions                 // channel: [ path(versions.yml) ]
+```
 
-=== "Vorher"
+```nextflow {5,36} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=44 step="Danach"
+// Die Datei aus dem Tupel extrahieren, da cowpy noch keine Metadaten verwendet
+ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="5 36"
-    // Die Datei aus dem Tupel extrahieren, da cowpy noch keine Metadaten verwendet
-    ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
+// ASCII-Kunst der Begrüßungen mit cowpy generieren
+COWPY(ch_for_cowpy, params.character)
 
-    // ASCII-Kunst der Begrüßungen mit cowpy generieren
-    cowpy(ch_for_cowpy, params.character)
+//
+// Software-Versionen sammeln und speichern
+//
+def topic_versions = channel.topic("versions")
+    .distinct()
+    .branch { entry ->
+        versions_file: entry instanceof Path
+        versions_tuple: true
+    }
 
-    //
-    // Software-Versionen sammeln und speichern
-    //
-    def topic_versions = channel.topic("versions")
-        .distinct()
-        .branch { entry ->
-            versions_file: entry instanceof Path
-            versions_tuple: true
-        }
+def topic_versions_string = topic_versions.versions_tuple
+    .map { process, tool, version ->
+        [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+    }
+    .groupTuple(by:0)
+    .map { process, tool_versions ->
+        tool_versions.unique().sort()
+        "${process}:\n${tool_versions.join('\n')}"
+    }
 
-    def topic_versions_string = topic_versions.versions_tuple
-        .map { process, tool, version ->
-            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
-        }
-        .groupTuple(by:0)
-        .map { process, tool_versions ->
-            tool_versions.unique().sort()
-            "${process}:\n${tool_versions.join('\n')}"
-        }
+def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    .mix(topic_versions_string)
+    .collectFile(
+        storeDir: "${outdir}/pipeline_info",
+        name:  'hello_software_'  + 'versions.yml',
+        sort: true,
+        newLine: true
+    )
+emit:
+cowpy_hellos   = COWPY.out
+versions       = ch_versions                 // channel: [ path(versions.yml) ]
+```
 
-    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
-        .mix(topic_versions_string)
-        .collectFile(
-            storeDir: "${outdir}/pipeline_info",
-            name:  'hello_software_'  + 'versions.yml',
-            sort: true,
-            newLine: true
-        )
-    emit:
-    cowpy_hellos   = cowpy.out
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
-    ```
+</CodeWalkthrough>
 
 Stelle sicher, dass du **beide** Änderungen vornimmst, sonst erhältst du einen Fehler, wenn du dies ausführst.
 
@@ -244,46 +250,42 @@ Lass uns den Workflow ausführen, um zu testen, dass nach diesen Änderungen all
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `./main.nf` [elegant_plateau] revision: d6bbba9521
+
+Input/output options
+  input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
+  outdir                    : core-hello-results
+
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
+
+Generic options
+  validate_params           : false
+  trace_report_suffix       : 2026-01-06_04-51-29
+
+Core Nextflow options
+  runName                   : elegant_plateau
+  containerEngine           : docker
+  launchDir                 : /workspaces/training/nfcore-build/core-hello
+  workDir                   : /workspaces/training/nfcore-build/core-hello/work
+  projectDir                : /workspaces/training/nfcore-build/core-hello
+  userName                  : root
+  profile                   : test,docker
+  configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+executor >  local (8)
+[7b/66ceb5] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+[8e/1bafb9] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+[bb/203575] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+[39/715489] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
+-[core/hello] Pipeline completed successfully-
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `./main.nf` [elegant_plateau] revision: d6bbba9521
-
-    Input/output options
-      input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
-      outdir                    : core-hello-results
-
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
-
-    Generic options
-      validate_params           : false
-      trace_report_suffix       : 2026-01-06_04-51-29
-
-    Core Nextflow options
-      runName                   : elegant_plateau
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nfcore-build/core-hello
-      workDir                   : /workspaces/training/nfcore-build/core-hello/work
-      projectDir                : /workspaces/training/nfcore-build/core-hello
-      userName                  : root
-      profile                   : test,docker
-      configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
-
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-    executor >  local (8)
-    [7b/66ceb5] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
-    [8e/1bafb9] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [bb/203575] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
-    [39/715489] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
-    -[core/hello] Pipeline completed successfully-
-    ```
 
 Gut, das funktioniert! Lass uns nun zu substanzielleren Änderungen übergehen.
 
@@ -291,9 +293,7 @@ Gut, das funktioniert! Lass uns nun zu substanzielleren Änderungen übergehen.
 
 In der aktuellen Version der `core-hello`-Pipeline extrahieren wir die Datei aus dem Ausgabe-Tupel von `FIND_CONCATENATE`, um sie an `COWPY` zu übergeben, wie in der oberen Hälfte des Diagramms unten gezeigt.
 
-<figure class="excalidraw">
-    --8<-- "docs/en/docs/nfcore_build/img/cowpy-inputs.svg"
-</figure>
+![](../../nfcore_build/img/cowpy-inputs.excalidraw.svg)
 
 Es wäre besser, wenn `COWPY` Metadaten-Tupel direkt akzeptieren würde, sodass Metadaten durch den Workflow fließen können, wie in der unteren Hälfte des Diagramms gezeigt.
 
@@ -309,27 +309,27 @@ Nachdem wir all das getan haben, führen wir die Pipeline aus, um zu testen, das
 
 Kehre zur Moduldatei `cowpy.nf` zurück und ändere sie so, dass sie Metadaten-Tupel akzeptiert, wie unten gezeigt.
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="9" hl_lines="2 6"
-        input:
-            tuple val(meta), path(input_file)
-            val character
+```nextflow {2,6} title="core-hello/modules/local/cowpy.nf" showLineNumbers startLineNumber=9 step="Vorher"
+    input:
+        path input_file
+        val character
 
-        output:
-            tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
-    ```
+    output:
+        path "cowpy-${input_file}"
+```
 
-=== "Vorher"
+```nextflow {2,6} title="core-hello/modules/local/cowpy.nf" showLineNumbers startLineNumber=9 step="Danach"
+    input:
+        tuple val(meta), path(input_file)
+        val character
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="9" hl_lines="2 6"
-        input:
-            path input_file
-            val character
+    output:
+        tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
+```
 
-        output:
-            path "cowpy-${input_file}"
-    ```
+</CodeWalkthrough>
 
 Wie du sehen kannst, haben wir sowohl die **Haupteingabe** als auch die **Ausgabe** in ein Tupel geändert, das dem Muster `tuple val(meta), path(input_file)` folgt, das in Teil 2 dieses Trainings eingeführt wurde.
 Für die Ausgabe haben wir auch diese Gelegenheit genutzt, um `emit: cowpy_output` hinzuzufügen, um dem Ausgabekanal einen beschreibenden Namen zu geben.
@@ -343,22 +343,22 @@ Da die Ausgabe von `FIND_CONCATENATE` und die Eingabe von `COWPY` jetzt die glei
 
 Öffne die Workflow-Datei `hello.nf` (unter `core-hello/workflows/`) und aktualisiere den Aufruf von `COWPY` wie unten gezeigt.
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
-        // ASCII-Kunst der Begrüßungen mit cowpy generieren
-        COWPY(FIND_CONCATENATE.out.file_out, params.character)
-    ```
+```nextflow {1-2,5} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=44 step="Vorher"
+    // Die Datei aus dem Tupel extrahieren, da cowpy noch keine Metadaten verwendet
+    ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
-=== "Vorher"
+    // ASCII-Kunst der Begrüßungen mit cowpy generieren
+    COWPY(ch_for_cowpy, params.character)
+```
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="1-2 5"
-        // Die Datei aus dem Tupel extrahieren, da cowpy noch keine Metadaten verwendet
-        ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
+```nextflow {2} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=44 step="Danach"
+    // ASCII-Kunst der Begrüßungen mit cowpy generieren
+    COWPY(FIND_CONCATENATE.out.file_out, params.character)
+```
 
-        // ASCII-Kunst der Begrüßungen mit cowpy generieren
-        COWPY(ch_for_cowpy, params.character)
-    ```
+</CodeWalkthrough>
 
 Wir rufen jetzt `COWPY` direkt mit `FIND_CONCATENATE.out.file_out` auf.
 
@@ -368,21 +368,21 @@ Dadurch müssen wir den `ch_for_cowpy`-Kanal nicht mehr konstruieren, sodass die
 
 Da `COWPY` jetzt eine benannte Ausgabe, `cowpy_output`, ausgibt, können wir den `emit:`-Block des `hello.nf`-Workflows aktualisieren, um diese zu verwenden.
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="75" hl_lines="2"
-        emit:
-        cowpy_hellos   = COWPY.out.cowpy_output
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
-    ```
+```nextflow {2} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=75 step="Vorher"
+    emit:
+    cowpy_hellos   = COWPY.out
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+```
 
-=== "Vorher"
+```nextflow {2} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=75 step="Danach"
+    emit:
+    cowpy_hellos   = COWPY.out.cowpy_output
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+```
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="75" hl_lines="2"
-        emit:
-        cowpy_hellos   = COWPY.out
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
-    ```
+</CodeWalkthrough>
 
 Dies ist technisch nicht erforderlich, aber es ist gute Praxis, auf benannte Ausgaben zu verweisen, wann immer möglich.
 
@@ -392,46 +392,42 @@ Lass uns den Workflow ausführen, um zu testen, dass nach diesen Änderungen all
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `./main.nf` [modest_saha] revision: d6bbba9521
+
+Input/output options
+  input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
+  outdir                    : core-hello-results
+
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
+
+Generic options
+  validate_params           : false
+  trace_report_suffix       : 2025-12-27_06-16-55
+
+Core Nextflow options
+  runName                   : modest_saha
+  containerEngine           : docker
+  launchDir                 : /workspaces/training/nfcore-build/core-hello
+  workDir                   : /workspaces/training/nfcore-build/core-hello/work
+  projectDir                : /workspaces/training/nfcore-build/core-hello
+  userName                  : root
+  profile                   : test,docker
+  configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+executor >  local (8)
+[a8/447993] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+[00/1fc59c] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+[57/ac800d] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+[b7/092f2b] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
+-[core/hello] Pipeline completed successfully-
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `./main.nf` [modest_saha] revision: d6bbba9521
-
-    Input/output options
-      input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
-      outdir                    : core-hello-results
-
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
-
-    Generic options
-      validate_params           : false
-      trace_report_suffix       : 2025-12-27_06-16-55
-
-    Core Nextflow options
-      runName                   : modest_saha
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nfcore-build/core-hello
-      workDir                   : /workspaces/training/nfcore-build/core-hello/work
-      projectDir                : /workspaces/training/nfcore-build/core-hello
-      userName                  : root
-      profile                   : test,docker
-      configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
-
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-    executor >  local (8)
-    [a8/447993] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
-    [00/1fc59c] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [57/ac800d] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
-    [b7/092f2b] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
-    -[core/hello] Pipeline completed successfully-
-    ```
 
 Die Pipeline sollte erfolgreich laufen, wobei Metadaten nun von `FIND_CONCATENATE` durch `COWPY` fließen.
 
@@ -464,55 +460,55 @@ Nachdem wir all das getan haben, führen wir die Pipeline aus, um zu testen, das
 Lass es uns tun.
 Öffne die Moduldatei `cowpy.nf` (unter `core-hello/modules/local/`) und ändere sie so, dass sie auf `ext.args` verweist, wie unten gezeigt.
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
-    // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
-    process COWPY {
+```nextflow {11,18} title="core-hello/modules/local/cowpy.nf" showLineNumbers step="Vorher"
+// ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
+process COWPY {
 
-        publishDir 'results', mode: 'copy'
+    publishDir 'results', mode: 'copy'
 
-        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-        conda 'conda-forge::cowpy==1.1.5'
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    conda 'conda-forge::cowpy==1.1.5'
 
-        input:
-            tuple val(meta), path(input_file)
+    input:
+        tuple val(meta), path(input_file)
+        val character
 
-        output:
-            tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
+    output:
+        tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
 
-        script:
-        def args = task.ext.args ?: ''
-        """
-        cat $input_file | cowpy $args > cowpy-${input_file}
-        """
-    }
-    ```
+    script:
+    """
+    cat $input_file | cowpy -c "$character" > cowpy-${input_file}
+    """
+}
+```
 
-=== "Vorher"
+```nextflow {16,18} title="core-hello/modules/local/cowpy.nf" showLineNumbers step="Danach"
+// ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
+process COWPY {
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="11 18"
-    // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
-    process COWPY {
+    publishDir 'results', mode: 'copy'
 
-        publishDir 'results', mode: 'copy'
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    conda 'conda-forge::cowpy==1.1.5'
 
-        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-        conda 'conda-forge::cowpy==1.1.5'
+    input:
+        tuple val(meta), path(input_file)
 
-        input:
-            tuple val(meta), path(input_file)
-            val character
+    output:
+        tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
 
-        output:
-            tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
+    script:
+    def args = task.ext.args ?: ''
+    """
+    cat $input_file | cowpy $args > cowpy-${input_file}
+    """
+}
+```
 
-        script:
-        """
-        cat $input_file | cowpy -c "$character" > cowpy-${input_file}
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 Du kannst sehen, dass wir drei Änderungen vorgenommen haben.
 
@@ -528,9 +524,9 @@ Du kannst sehen, dass wir drei Änderungen vorgenommen haben.
 
 Dadurch ist die Modulschnittstelle jetzt einfacher: Sie erwartet nur die wesentlichen Metadaten- und Dateieingaben.
 
-!!! info "Info"
-
-    Der `?:`-Operator wird oft 'Elvis-Operator' genannt, weil er wie ein seitwärts gedrehtes Elvis-Presley-Gesicht aussieht, wobei das `?`-Zeichen die Welle in seinen Haaren symbolisiert.
+:::note[Info]
+Der `?:`-Operator wird oft 'Elvis-Operator' genannt, weil er wie ein seitwärts gedrehtes Elvis-Presley-Gesicht aussieht, wobei das `?`-Zeichen die Welle in seinen Haaren symbolisiert.
+:::
 
 #### 1.3.2. `ext.args` in der Datei `modules.config` konfigurieren
 
@@ -538,46 +534,46 @@ Nachdem wir die `character`-Deklaration aus dem Modul entfernt haben, müssen wi
 
 Konkret werden wir dieses kleine Code-Stück zum `process {}`-Block hinzufügen:
 
-```groovy title="Code to add"
+```nextflow title="Code to add" nextflow="config"
 withName: 'COWPY' {
     ext.args = { "-c ${params.character}" }
 }
 ```
 
-Die `withName:`-Syntax weist diese Konfiguration nur dem `COWPY`-Prozess zu, und `#!groovy ext.args = { "-c ${params.character}" }` komponiert einfach eine Zeichenkette, die den Wert des `character`-Parameters enthält.
+Die `withName:`-Syntax weist diese Konfiguration nur dem `COWPY`-Prozess zu, und `ext.args = { "-c ${params.character}" }{:nextflow}` komponiert einfach eine Zeichenkette, die den Wert des `character`-Parameters enthält.
 Beachte die Verwendung der geschweiften Klammern, die Nextflow anweisen, den Wert des Parameters zur Laufzeit zu evaluieren.
 
 Macht das Sinn? Lass es uns hinzufügen.
 
 Öffne `conf/modules.config` und füge den Konfigurationscode innerhalb des `process {}`-Blocks hinzu, wie unten gezeigt.
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="8-10"
-    process {
-        publishDir = [
-            path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
-            mode: params.publish_dir_mode,
-            saveAs: { filename -> filename.equals('versions.yml') ? null : filename }
-        ]
+```nextflow title="core-hello/conf/modules.config" showLineNumbers startLineNumber=13 step="Vorher"
+process {
+    publishDir = [
+        path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
+        mode: params.publish_dir_mode,
+        saveAs: { filename -> filename.equals('versions.yml') ? null : filename }
+    ]
+}
+```
 
-        withName: 'COWPY' {
-            ext.args = { "-c ${params.character}" }
-        }
+```nextflow {8-10} title="core-hello/conf/modules.config" showLineNumbers startLineNumber=13 step="Danach"
+process {
+    publishDir = [
+        path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
+        mode: params.publish_dir_mode,
+        saveAs: { filename -> filename.equals('versions.yml') ? null : filename }
+    ]
+
+    withName: 'COWPY' {
+        ext.args = { "-c ${params.character}" }
     }
-    ```
+}
+```
 
-=== "Vorher"
-
-    ```groovy title="core-hello/conf/modules.config" linenums="13"
-    process {
-        publishDir = [
-            path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
-            mode: params.publish_dir_mode,
-            saveAs: { filename -> filename.equals('versions.yml') ? null : filename }
-        ]
-    }
-    ```
+</CodeWalkthrough>
 
 Hoffentlich kannst du dir vorstellen, dass alle Module in einer Pipeline ihre `ext.args` in dieser Datei spezifiziert haben, mit den folgenden Vorteilen:
 
@@ -594,19 +590,19 @@ Da das `COWPY`-Modul den `character`-Parameter nicht mehr als Eingabe benötigt,
 
 Öffne die Workflow-Datei `hello.nf` (unter `core-hello/workflows/`) und aktualisiere den Aufruf von `COWPY` wie unten gezeigt.
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
-        // ASCII-Kunst der Begrüßungen mit cowpy generieren
-        COWPY(FIND_CONCATENATE.out.file_out)
-    ```
+```nextflow {2} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=44 step="Vorher"
+    // ASCII-Kunst der Begrüßungen mit cowpy generieren
+    COWPY(FIND_CONCATENATE.out.file_out, params.character)
+```
 
-=== "Vorher"
+```nextflow {2} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=44 step="Danach"
+    // ASCII-Kunst der Begrüßungen mit cowpy generieren
+    COWPY(FIND_CONCATENATE.out.file_out)
+```
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
-        // ASCII-Kunst der Begrüßungen mit cowpy generieren
-        COWPY(FIND_CONCATENATE.out.file_out, params.character)
-    ```
+</CodeWalkthrough>
 
 Der Workflow-Code ist jetzt sauberer: Wir müssen `params.character` nicht direkt an den Prozess übergeben.
 Die Modulschnittstelle wird minimal gehalten, was sie portabler macht, während die Pipeline die explizite Option weiterhin über die Konfiguration bereitstellt.
@@ -619,46 +615,42 @@ Führe diesen Befehl mit `kosh` aus, einer der... rätselhafteren Optionen:
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --character kosh
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `./main.nf` [exotic_planck] revision: d6bbba9521
+
+Input/output options
+  input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
+  outdir                    : core-hello-results
+
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
+
+Generic options
+  validate_params           : false
+  trace_report_suffix       : 2025-12-27_06-23-13
+
+Core Nextflow options
+  runName                   : exotic_planck
+  containerEngine           : docker
+  launchDir                 : /workspaces/training/nfcore-build/core-hello
+  workDir                   : /workspaces/training/nfcore-build/core-hello/work
+  projectDir                : /workspaces/training/nfcore-build/core-hello
+  userName                  : root
+  profile                   : test,docker
+  configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+executor >  local (8)
+[13/9e3c0e] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+[e2/5b0ee5] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+[b6/4fb569] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+[38/eb29ea] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
+-[core/hello] Pipeline completed successfully-
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `./main.nf` [exotic_planck] revision: d6bbba9521
-
-    Input/output options
-      input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
-      outdir                    : core-hello-results
-
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
-
-    Generic options
-      validate_params           : false
-      trace_report_suffix       : 2025-12-27_06-23-13
-
-    Core Nextflow options
-      runName                   : exotic_planck
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nfcore-build/core-hello
-      workDir                   : /workspaces/training/nfcore-build/core-hello/work
-      projectDir                : /workspaces/training/nfcore-build/core-hello
-      userName                  : root
-      profile                   : test,docker
-      configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
-
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-    executor >  local (8)
-    [13/9e3c0e] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
-    [e2/5b0ee5] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [b6/4fb569] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
-    [38/eb29ea] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
-    -[core/hello] Pipeline completed successfully-
-    ```
 
 Dies sollte wie zuvor erfolgreich laufen.
 
@@ -667,51 +659,50 @@ Finde die Ausgabe im Dateibrowser oder verwende den Aufgaben-Hash (der Teil `38/
 
 ```bash
 cat work/38/eb29ea*/cowpy-test.txt
+# [!output]
+ _________
+/ BONJOUR \
+| HELLO   |
+\ HOLA    /
+ ---------
+    \
+     \
+      \
+  ___       _____     ___
+ /   \     /    /|   /   \
+|     |   /    / |  |     |
+|     |  /____/  |  |     |
+|     |  |    |  |  |     |
+|     |  | {} | /   |     |
+|     |  |____|/    |     |
+|     |    |==|     |     |
+|      \___________/      |
+|                         |
+|                         |
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-     _________
-    / BONJOUR \
-    | HELLO   |
-    \ HOLA    /
-     ---------
-        \
-         \
-          \
-      ___       _____     ___
-     /   \     /    /|   /   \
-    |     |   /    / |  |     |
-    |     |  /____/  |  |     |
-    |     |  |    |  |  |     |
-    |     |  | {} | /   |     |
-    |     |  |____|/    |     |
-    |     |    |==|     |     |
-    |      \___________/      |
-    |                         |
-    |                         |
-    ```
 
 Du solltest die ASCII-Kunst mit dem `kosh`-Charakter sehen, was bestätigt, dass die `ext.args`-Konfiguration funktioniert hat!
 
-??? info "(Optional) Die Befehlsdatei inspizieren"
+<details class="info">
+<summary>(Optional) Die Befehlsdatei inspizieren</summary>
 
-    Wenn du genau sehen möchtest, wie die Konfiguration angewendet wurde, kannst du die `.command.sh`-Datei inspizieren:
+Wenn du genau sehen möchtest, wie die Konfiguration angewendet wurde, kannst du die `.command.sh`-Datei inspizieren:
 
-    ```bash
-    cat work/38/eb29ea*/.command.sh
-    ```
+```bash
+cat work/38/eb29ea*/.command.sh
+```
 
-    Du wirst den `cowpy`-Befehl mit dem Argument `-c kosh` sehen:
+Du wirst den `cowpy`-Befehl mit dem Argument `-c kosh` sehen:
 
-    ```console
-    #!/usr/bin/env bash
-    ...
-    cat test.txt | cowpy -c kosh > cowpy-test.txt
-    ```
+```console
+#!/usr/bin/env bash
+...
+cat test.txt | cowpy -c kosh > cowpy-test.txt
+```
 
-    Dies zeigt, dass die `.command.sh`-Datei basierend auf der `ext.args`-Konfiguration korrekt generiert wurde.
+Dies zeigt, dass die `.command.sh`-Datei basierend auf der `ext.args`-Konfiguration korrekt generiert wurde.
+
+</details>
 
 Nimm dir einen Moment Zeit, um darüber nachzudenken, was wir hier erreicht haben.
 Dieser Ansatz hält die Modulschnittstelle auf wesentliche Daten (Dateien, Metadaten und alle obligatorischen probenbezogenen Parameter) fokussiert, während Optionen, die das Verhalten des Tools steuern, separat über die Konfiguration gehandhabt werden.
@@ -726,9 +717,9 @@ Zusammenfassung der Vorteile dieses Ansatzes:
 - **Portabilität**: Module können ohne fest codierte Tool-Optionen wiederverwendet werden
 - **Keine Workflow-Änderungen**: Das Hinzufügen oder Ändern von Tool-Optionen erfordert keine Aktualisierung des Workflow-Codes
 
-!!! info "Info"
-
-    Das `ext.args`-System hat leistungsstarke zusätzliche Funktionen, die hier nicht behandelt werden, einschließlich des dynamischen Wechselns von Argumentwerten basierend auf Metadaten. Siehe die [nf-core-Modulspezifikationen](https://nf-co.re/docs/guidelines/components/modules) für weitere Details.
+:::note[Info]
+Das `ext.args`-System hat leistungsstarke zusätzliche Funktionen, die hier nicht behandelt werden, einschließlich des dynamischen Wechselns von Argumentwerten basierend auf Metadaten. Siehe die [nf-core-Modulspezifikationen](https://nf-co.re/docs/guidelines/components/modules) für weitere Details.
+:::
 
 ### 1.4. Ausgabe-Benennung mit `ext.prefix` standardisieren
 
@@ -752,45 +743,45 @@ Nachdem wir das getan haben, führen wir die Pipeline aus, um zu testen, dass al
 
 Öffne die Moduldatei `cowpy.nf` (unter `core-hello/modules/local/`) und ändere sie so, dass sie auf `ext.prefix` verweist, wie unten gezeigt.
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="12" hl_lines="2 6 8"
-        output:
-            tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
+```nextflow {2,7} title="core-hello/modules/local/cowpy.nf" showLineNumbers startLineNumber=12 step="Vorher"
+    output:
+        tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
 
-        script:
-        def args = task.ext.args ?: ''
-        prefix = task.ext.prefix ?: "${meta.id}"
-        """
-        cat $input_file | cowpy $args > ${prefix}.txt
-        """
-    }
-    ```
+    script:
+    def args = task.ext.args ?: ''
+    """
+    cat $input_file | cowpy $args > cowpy-${input_file}
+    """
+}
+```
 
-=== "Vorher"
+```nextflow {2,6,8} title="core-hello/modules/local/cowpy.nf" showLineNumbers startLineNumber=12 step="Danach"
+    output:
+        tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="12" hl_lines="2 7"
-        output:
-            tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
+    script:
+    def args = task.ext.args ?: ''
+    prefix = task.ext.prefix ?: "${meta.id}"
+    """
+    cat $input_file | cowpy $args > ${prefix}.txt
+    """
+}
+```
 
-        script:
-        def args = task.ext.args ?: ''
-        """
-        cat $input_file | cowpy $args > cowpy-${input_file}
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 Du kannst sehen, dass wir drei Änderungen vorgenommen haben.
 
-1. **Im `script:`-Block haben wir die Zeile `#!groovy prefix = task.ext.prefix ?: "${meta.id}"` hinzugefügt.**
+1. **Im `script:`-Block haben wir die Zeile `prefix = task.ext.prefix ?: "${meta.id}"{:nextflow}` hinzugefügt.**
    Diese Zeile verwendet den `?:`-Operator, um den Wert der `prefix`-Variable zu bestimmen: den Inhalt von `task.ext.prefix`, wenn er nicht leer ist, oder die Kennung aus der Metamap (`meta.id`), wenn er es ist.
    Beachte, dass wir zwar allgemein auf `ext.prefix` verweisen, dieser Code jedoch `task.ext.prefix` referenzieren muss, um die `ext.prefix`-Konfiguration auf Modulebene herauszuziehen.
 
-2. **In der Befehlszeile haben wir `#!groovy cowpy-${input_file}` durch `#!groovy ${prefix}.txt` ersetzt.**
+2. **In der Befehlszeile haben wir `cowpy-${input_file}{:nextflow}` durch `${prefix}.txt{:nextflow}` ersetzt.**
    Hier fügt Nextflow den durch die obige Zeile bestimmten Wert von `prefix` ein.
 
-3. **Im `output:`-Block haben wir `#!groovy path("cowpy-${input_file}")` durch `#!groovy path("${prefix}.txt")` ersetzt.**
+3. **Im `output:`-Block haben wir `path("cowpy-${input_file}"){:nextflow}` durch `path("${prefix}.txt"){:nextflow}` ersetzt.**
    Dies wiederholt einfach, wie der Dateipfad gemäß dem in der Befehlszeile Geschriebenen sein wird.
 
 Dadurch wird der Name der Ausgabedatei nun mit einem sinnvollen Standard (der Kennung aus der Metamap) kombiniert mit der entsprechenden Dateiformaterweiterung konstruiert.
@@ -801,7 +792,7 @@ In diesem Fall ist der sinnvolle Standard nach unserem Geschmack nicht ausreiche
 
 Wir tun dies, indem wir `ext.prefix` in `modules.config` konfigurieren, genau wie wir es für den `character`-Parameter mit `ext.args` getan haben, außer dass diesmal der Block `withName: 'COWPY' {}` bereits existiert und wir nur die folgende Zeile hinzufügen müssen:
 
-```groovy title="Code to add"
+```nextflow title="Code to add" nextflow="config"
 ext.prefix = { "cowpy-${meta.id}" }
 ```
 
@@ -812,22 +803,22 @@ Lass es uns hinzufügen.
 
 Öffne `conf/modules.config` und füge den Konfigurationscode innerhalb des `process {}`-Blocks hinzu, wie unten gezeigt.
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/conf/modules.config" linenums="21" hl_lines="3"
-        withName: 'COWPY' {
-            ext.args = { "-c ${params.character}" }
-            ext.prefix = { "cowpy-${meta.id}" }
-        }
-    ```
+```nextflow title="core-hello/conf/modules.config" showLineNumbers startLineNumber=21 step="Vorher"
+    withName: 'COWPY' {
+        ext.args = { "-c ${params.character}" }
+    }
+```
 
-=== "Vorher"
+```nextflow {3} title="core-hello/conf/modules.config" showLineNumbers startLineNumber=21 step="Danach"
+    withName: 'COWPY' {
+        ext.args = { "-c ${params.character}" }
+        ext.prefix = { "cowpy-${meta.id}" }
+    }
+```
 
-    ```groovy title="core-hello/conf/modules.config" linenums="21"
-        withName: 'COWPY' {
-            ext.args = { "-c ${params.character}" }
-        }
-    ```
+</CodeWalkthrough>
 
 Falls du dich fragst: Die `ext.prefix`-Closure hat Zugriff auf das richtige Stück Metadaten, weil die Konfiguration im Kontext der Prozessausführung ausgewertet wird, wo Metadaten verfügbar sind.
 
@@ -837,62 +828,61 @@ Lass uns testen, dass der Workflow immer noch wie erwartet funktioniert.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `./main.nf` [admiring_turing] revision: d6bbba9521
+
+Input/output options
+  input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
+  outdir                    : core-hello-results
+
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
+
+Generic options
+  validate_params           : false
+  trace_report_suffix       : 2025-12-27_06-29-02
+
+Core Nextflow options
+  runName                   : admiring_turing
+  containerEngine           : docker
+  launchDir                 : /workspaces/training/nfcore-build/core-hello
+  workDir                   : /workspaces/training/nfcore-build/core-hello/work
+  projectDir                : /workspaces/training/nfcore-build/core-hello
+  userName                  : root
+  profile                   : test,docker
+  configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+executor >  local (8)
+[b2/e08524] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+[13/88939f] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+[23/4554e1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+[a3/c6cbe9] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
+-[core/hello] Pipeline completed successfully-
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `./main.nf` [admiring_turing] revision: d6bbba9521
-
-    Input/output options
-      input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
-      outdir                    : core-hello-results
-
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
-
-    Generic options
-      validate_params           : false
-      trace_report_suffix       : 2025-12-27_06-29-02
-
-    Core Nextflow options
-      runName                   : admiring_turing
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nfcore-build/core-hello
-      workDir                   : /workspaces/training/nfcore-build/core-hello/work
-      projectDir                : /workspaces/training/nfcore-build/core-hello
-      userName                  : root
-      profile                   : test,docker
-      configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
-
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-    executor >  local (8)
-    [b2/e08524] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
-    [13/88939f] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [23/4554e1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
-    [a3/c6cbe9] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
-    -[core/hello] Pipeline completed successfully-
-    ```
 
 Schaue dir die Ausgabe im Ergebnisverzeichnis an.
 Du solltest die cowpy-Ausgabedatei mit der gleichen Benennung wie zuvor sehen: `cowpy-test.txt`, basierend auf dem Standard-Batch-Namen.
 
-??? abstract "Verzeichnisinhalt"
+<details class="abstract">
+<summary>Verzeichnisinhalt</summary>
 
-    ```console hl_lines="3"
-    results
-    ├── Bonjour-output.txt
-    ├── cowpy-test.txt
-    ├── Hello-output.txt
-    ├── Hola-output.txt
-    ├── UPPER-Bonjour-output.txt
-    ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
-    ```
+```console {3}
+results
+├── Bonjour-output.txt
+├── cowpy-test.txt
+├── Hello-output.txt
+├── Hola-output.txt
+├── UPPER-Bonjour-output.txt
+├── UPPER-Hello-output.txt
+└── UPPER-Hola-output.txt
+```
+
+</details>
 
 Ändere gerne die `ext.prefix`-Konfiguration in `conf/modules.config`, um dich zu überzeugen, dass du das Benennungsmuster ändern kannst, ohne Änderungen am Modul- oder Workflow-Code vornehmen zu müssen.
 
@@ -943,28 +933,28 @@ Schließlich werden wir demonstrieren, wie man das Standardverhalten bei Bedarf 
 Lass uns das tun.
 Öffne die Moduldatei `cowpy.nf` (unter `core-hello/modules/local/`) und entferne die `publishDir`-Direktive, wie unten gezeigt.
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/modules/local/cowpy.nf (excerpt)" linenums="1"
-    // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
-    process COWPY {
+```nextflow {4} title="core-hello/modules/local/cowpy.nf (excerpt)" showLineNumbers step="Vorher"
+// ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
+process COWPY {
 
-        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-        conda 'conda-forge::cowpy==1.1.5'
-    ```
+    publishDir 'results', mode: 'copy'
 
-=== "Vorher"
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    conda 'conda-forge::cowpy==1.1.5'
 
-    ```groovy title="core-hello/modules/local/cowpy.nf (excerpt)" linenums="1" hl_lines="4"
-    // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
-    process COWPY {
+```
 
-        publishDir 'results', mode: 'copy'
+```nextflow title="core-hello/modules/local/cowpy.nf (excerpt)" showLineNumbers step="Danach"
+// ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
+process COWPY {
 
-        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-        conda 'conda-forge::cowpy==1.1.5'
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    conda 'conda-forge::cowpy==1.1.5'
+```
 
-    ```
+</CodeWalkthrough>
 
 Das war's!
 
@@ -974,94 +964,93 @@ Lass uns sehen, was passiert, wenn wir die Pipeline jetzt ausführen.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `./main.nf` [silly_caravaggio] revision: d6bbba9521
+
+Input/output options
+  input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
+  outdir                    : core-hello-results
+
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
+
+Generic options
+  validate_params           : false
+  trace_report_suffix       : 2025-12-27_06-35-56
+
+Core Nextflow options
+  runName                   : silly_caravaggio
+  containerEngine           : docker
+  launchDir                 : /workspaces/training/nfcore-build/core-hello
+  workDir                   : /workspaces/training/nfcore-build/core-hello/work
+  projectDir                : /workspaces/training/nfcore-build/core-hello
+  userName                  : root
+  profile                   : test,docker
+  configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+executor >  local (8)
+[db/39978e] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+[b5/bf6a8d] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+[b7/c61842] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+[46/5839d6] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
+-[core/hello] Pipeline completed successfully-
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `./main.nf` [silly_caravaggio] revision: d6bbba9521
-
-    Input/output options
-      input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
-      outdir                    : core-hello-results
-
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
-
-    Generic options
-      validate_params           : false
-      trace_report_suffix       : 2025-12-27_06-35-56
-
-    Core Nextflow options
-      runName                   : silly_caravaggio
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nfcore-build/core-hello
-      workDir                   : /workspaces/training/nfcore-build/core-hello/work
-      projectDir                : /workspaces/training/nfcore-build/core-hello
-      userName                  : root
-      profile                   : test,docker
-      configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
-
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-    executor >  local (8)
-    [db/39978e] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
-    [b5/bf6a8d] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [b7/c61842] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
-    [46/5839d6] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
-    -[core/hello] Pipeline completed successfully-
-    ```
 
 Schaue dir dein aktuelles Arbeitsverzeichnis an.
 Jetzt enthält `core-hello-results` auch die Ausgaben des `COWPY`-Moduls.
 
-??? abstract "Verzeichnisinhalt"
+<details class="abstract">
+<summary>Verzeichnisinhalt</summary>
 
-    ```console hl_lines="4-5"
-    core-hello-results/
-    ├── find
-    │   └── test.txt
-    ├── cowpy
-    │   └── cowpy-test.txt
-    └── pipeline_info
-        ├── execution_report_2025-12-27_06-16-55.html
-        ├── execution_report_2025-12-27_06-23-13.html
-        ├── execution_report_2025-12-27_06-29-02.html
-        ├── execution_report_2025-12-27_06-35-56.html
-        ├── execution_timeline_2025-12-27_06-16-55.html
-        ├── execution_timeline_2025-12-27_06-23-13.html
-        ├── execution_timeline_2025-12-27_06-29-02.html
-        ├── execution_timeline_2025-12-27_06-35-56.html
-        ├── execution_trace_2025-12-27_06-16-55.txt
-        ├── execution_trace_2025-12-27_06-23-13.txt
-        ├── execution_trace_2025-12-27_06-29-02.txt
-        ├── execution_trace_2025-12-27_06-35-56.txt
-        ├── hello_software_versions.yml
-        ├── params_2025-12-27_06-17-00.json
-        ├── params_2025-12-27_06-23-17.json
-        ├── params_2025-12-27_06-29-07.json
-        ├── params_2025-12-27_06-36-01.json
-        ├── pipeline_dag_2025-12-27_06-16-55.html
-        ├── pipeline_dag_2025-12-27_06-23-13.html
-        ├── pipeline_dag_2025-12-27_06-29-02.html
-        └── pipeline_dag_2025-12-27_06-35-56.html
-    ```
+```console {4-5}
+core-hello-results/
+├── find
+│   └── test.txt
+├── cowpy
+│   └── cowpy-test.txt
+└── pipeline_info
+    ├── execution_report_2025-12-27_06-16-55.html
+    ├── execution_report_2025-12-27_06-23-13.html
+    ├── execution_report_2025-12-27_06-29-02.html
+    ├── execution_report_2025-12-27_06-35-56.html
+    ├── execution_timeline_2025-12-27_06-16-55.html
+    ├── execution_timeline_2025-12-27_06-23-13.html
+    ├── execution_timeline_2025-12-27_06-29-02.html
+    ├── execution_timeline_2025-12-27_06-35-56.html
+    ├── execution_trace_2025-12-27_06-16-55.txt
+    ├── execution_trace_2025-12-27_06-23-13.txt
+    ├── execution_trace_2025-12-27_06-29-02.txt
+    ├── execution_trace_2025-12-27_06-35-56.txt
+    ├── hello_software_versions.yml
+    ├── params_2025-12-27_06-17-00.json
+    ├── params_2025-12-27_06-23-17.json
+    ├── params_2025-12-27_06-29-07.json
+    ├── params_2025-12-27_06-36-01.json
+    ├── pipeline_dag_2025-12-27_06-16-55.html
+    ├── pipeline_dag_2025-12-27_06-23-13.html
+    ├── pipeline_dag_2025-12-27_06-29-02.html
+    └── pipeline_dag_2025-12-27_06-35-56.html
+```
+
+</details>
 
 Du kannst sehen, dass Nextflow diese Hierarchie von Verzeichnissen basierend auf den Namen des Workflows und des Moduls erstellt hat.
 
-!!! info "Info"
-
-    Du wirst vielleicht `hello_software_versions.yml` in `pipeline_info/` bemerken.
-    Diese Datei enthält derzeit nur Versionsinformationen von `FIND_CONCATENATE`, weil `COWPY` seine Version noch nicht meldet.
-    Abschnitt 1.6 erklärt, wie man das hinzufügt.
+:::note[Info]
+Du wirst vielleicht `hello_software_versions.yml` in `pipeline_info/` bemerken.
+Diese Datei enthält derzeit nur Versionsinformationen von `FIND_CONCATENATE`, weil `COWPY` seine Version noch nicht meldet.
+Abschnitt 1.6 erklärt, wie man das hinzufügt.
+:::
 
 Der verantwortliche Code befindet sich in der Datei `conf/modules.config`.
 Dies ist die Standard-`publishDir`-Konfiguration, die Teil der nf-core-Vorlage ist und für alle Prozesse gilt:
 
-```groovy
+```nextflow nextflow="config"
 process {
     publishDir = [
         path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
@@ -1076,7 +1065,7 @@ Dies mag kompliziert aussehen, also schauen wir uns jede der drei Komponenten an
 - **`path:`** Bestimmt das Ausgabeverzeichnis basierend auf dem Prozessnamen.
   Der vollständige Name eines in `task.process` enthaltenen Prozesses umfasst die Hierarchie von Workflow- und Modulimporten (wie `CORE_HELLO:HELLO:FIND_CONCATENATE`).
   Die `tokenize`-Operationen entfernen diese Hierarchie, um nur den Prozessnamen zu erhalten, nehmen dann den ersten Teil vor einem Unterstrich (falls zutreffend) und konvertieren ihn in Kleinbuchstaben.
-  Dies bestimmt, dass die Ergebnisse von `FIND_CONCATENATE` nach `#!groovy ${params.outdir}/find/` veröffentlicht werden.
+  Dies bestimmt, dass die Ergebnisse von `FIND_CONCATENATE` nach `${params.outdir}/find/{:nextflow}` veröffentlicht werden.
 - **`mode:`** Steuert, wie Dateien veröffentlicht werden (copy, symlink usw.).
   Dies ist über den Parameter `params.publish_dir_mode` konfigurierbar.
 - **`saveAs:`** Filtert, welche Dateien veröffentlicht werden sollen.
@@ -1095,7 +1084,7 @@ Um die Standard-`publishDir`-Direktive zu überschreiben, kannst du einfach dein
 
 Du könntest beispielsweise den Standard für einen einzelnen Prozess mit dem `withName:`-Selektor überschreiben, wie in diesem Beispiel, wo wir eine benutzerdefinierte `publishDir`-Direktive für den `COWPY`-Prozess hinzufügen.
 
-```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="10-12"
+```nextflow {10-12} title="core-hello/conf/modules.config" showLineNumbers startLineNumber=13
 process {
     publishDir = [
         path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
@@ -1136,20 +1125,20 @@ Module veröffentlichen ihre Version als Tupel direkt im output-Block mit dem Sc
 
 Öffne die Moduldatei `cowpy.nf` und füge eine Versionsausgabe-Zeile wie unten gezeigt hinzu.
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="10" hl_lines="3"
-        output:
-            tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
-            tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions, emit: versions_cowpy
-    ```
+```nextflow title="core-hello/modules/local/cowpy.nf" showLineNumbers startLineNumber=10 step="Vorher"
+    output:
+        tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
+```
 
-=== "Vorher"
+```nextflow {3} title="core-hello/modules/local/cowpy.nf" showLineNumbers startLineNumber=10 step="Danach"
+    output:
+        tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
+        tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions, emit: versions_cowpy
+```
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="10"
-        output:
-            tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
-    ```
+</CodeWalkthrough>
 
 Die neue Zeile veröffentlicht ein `[process_name, tool_name, version]`-Tupel im topic channel `"versions"`.
 Am script-Block sind keine Änderungen nötig — die Version wird statisch im output-Block deklariert.
@@ -1158,24 +1147,20 @@ Am script-Block sind keine Änderungen nötig — die Version wird statisch im o
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `./main.nf` [silly_fermat] revision: d6bbba9521
+
+...
+
+executor >  local (8)
+[8d/f3a091] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+[2e/b5c742] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+[6a/d9e183] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+[3c/f20b54] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
+-[core/hello] Pipeline completed successfully-
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `./main.nf` [silly_fermat] revision: d6bbba9521
-
-    ...
-
-    executor >  local (8)
-    [8d/f3a091] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
-    [2e/b5c742] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [6a/d9e183] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
-    [3c/f20b54] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
-    -[core/hello] Pipeline completed successfully-
-    ```
 
 Öffne `core-hello-results/pipeline_info/hello_software_versions.yml` und du siehst jetzt beide Module:
 
@@ -1193,10 +1178,10 @@ Workflow:
 
 Die Sammlung auf Workflow-Seite — der `channel.topic("versions")`-Block, den du im Platzhalter-Workflow in Teil 1 gesehen hast — abonniert das Topic und schreibt diesen kombinierten Bericht automatisch.
 
-!!! info "Rückwärtskompatibilität"
-
-    Der `versions_file`-Branch im topic channel-Block des Workflows existiert, um Module zu unterstützen, die noch nicht auf `topic: versions` aktualisiert wurden und weiterhin eine `versions.yml`-Datei im script-Block mit `emit: versions` schreiben.
-    Beide Stile werden während der Übergangsphase gleichzeitig unterstützt.
+:::note[Rückwärtskompatibilität]
+Der `versions_file`-Branch im topic channel-Block des Workflows existiert, um Module zu unterstützen, die noch nicht auf `topic: versions` aktualisiert wurden und weiterhin eine `versions.yml`-Datei im script-Block mit `emit: versions` schreiben.
+Beide Stile werden während der Übergangsphase gleichzeitig unterstützt.
+:::
 
 ### Fazit
 
@@ -1258,16 +1243,19 @@ Das Tool übernimmt die Komplexität der Paketinformationssuche und der Struktur
 
 Das Tool erstellt eine vollständige Modulstruktur in `modules/local/` (oder `modules/nf-core/`, wenn du dich im nf-core/modules-Repository befindest):
 
-??? abstract "Verzeichnisinhalt"
+<details class="abstract">
+<summary>Verzeichnisinhalt</summary>
 
-    ```console
-    modules/local/cowpy
-    ├── environment.yml
-    ├── main.nf
-    ├── meta.yml
-    └── tests
-        └── main.nf.test
-    ```
+```console
+modules/local/cowpy
+├── environment.yml
+├── main.nf
+├── meta.yml
+└── tests
+    └── main.nf.test
+```
+
+</details>
 
 Jede Datei erfüllt einen bestimmten Zweck:
 
@@ -1276,13 +1264,13 @@ Jede Datei erfüllt einen bestimmten Zweck:
 - **`environment.yml`**: Conda-Umgebungsspezifikation für Abhängigkeiten
 - **`tests/main.nf.test`**: nf-test-Testfälle zur Validierung der Modulfunktionalität
 
-!!! tip "Mehr über Tests erfahren"
-
-    Die generierte Testdatei verwendet nf-test, ein Test-Framework für Nextflow-Pipelines und -Module. Um zu lernen, wie man diese Tests schreibt und ausführt, siehe die [nf-test-Nebenquest](../side_quests/nf_test/index.md).
+:::tip[Mehr über Tests erfahren]
+Die generierte Testdatei verwendet nf-test, ein Test-Framework für Nextflow-Pipelines und -Module. Um zu lernen, wie man diese Tests schreibt und ausführt, siehe die [nf-test-Nebenquest](../side_quests/nf_test/index.mdx).
+:::
 
 Die generierte `main.nf` enthält alle Muster, die du gerade gelernt hast, plus einige zusätzliche Features:
 
-```groovy title="modules/local/cowpy/main.nf" linenums="1" hl_lines="12 23 24"
+```nextflow {12,23,24} title="modules/local/cowpy/main.nf" showLineNumbers
 
 
 process COWPY {
@@ -1360,70 +1348,70 @@ In diesem Fall verwenden wir denselben vorgefertigten Container wie zuvor.
 
 Der Standardcode bietet einen Wechsel zwischen Docker und Singularity an, aber wir werden diese Zeile vereinfachen und einfach den Docker-Container angeben, den wir von Seqera Containers oben erhalten haben.
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
-    process COWPY {
-        tag "$meta.id"
-        label 'process_single'
+```nextflow {6-8} title="modules/local/cowpy/main.nf" showLineNumbers startLineNumber=3 step="Vorher"
+process COWPY {
+    tag "$meta.id"
+    label 'process_single'
 
-        conda "${moduleDir}/environment.yml"
-        container "community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273"
-    ```
+    conda "${moduleDir}/environment.yml"
+    container "${ workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
+        'quay.io/biocontainers/YOUR-TOOL-HERE' }"
+```
 
-=== "Vorher"
+```nextflow {6} title="modules/local/cowpy/main.nf" showLineNumbers startLineNumber=3 step="Danach"
+process COWPY {
+    tag "$meta.id"
+    label 'process_single'
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6-8"
-    process COWPY {
-        tag "$meta.id"
-        label 'process_single'
+    conda "${moduleDir}/environment.yml"
+    container "community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273"
+```
 
-        conda "${moduleDir}/environment.yml"
-        container "${ workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container ?
-            'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
-            'quay.io/biocontainers/YOUR-TOOL-HERE' }"
-    ```
+</CodeWalkthrough>
 
 #### 2.2.2. Conda-Umgebung
 
-Für die Conda-Umgebung gibt der Modulcode `#!groovy conda "${moduleDir}/environment.yml"` an, was bedeutet, dass sie in der Datei `environment.yml` konfiguriert werden sollte.
+Für die Conda-Umgebung gibt der Modulcode `conda "${moduleDir}/environment.yml"{:nextflow}` an, was bedeutet, dass sie in der Datei `environment.yml` konfiguriert werden sollte.
 
 Das Modul-Erstellungstool hat uns gewarnt, dass es das `cowpy`-Paket in Bioconda (dem primären Kanal für Bioinformatik-Tools) nicht finden konnte.
 Allerdings ist `cowpy` in conda-forge verfügbar, sodass du die `environment.yml` wie folgt vervollständigen kannst:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```yaml title="modules/local/cowpy/environment.yml"  linenums="1" hl_lines="1 3 5"
-    name: COWPY
-    channels:
-      - conda-forge
-    dependencies:
-      - cowpy=1.1.5
-    ```
+```yaml title="modules/local/cowpy/environment.yml" showLineNumbers step="Vorher"
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/environment-schema.json
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  # TODO nf-core: List required Conda package(s).
+  #               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
+  #               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
+  - "YOUR-TOOL-HERE"
+```
 
-=== "Vorher"
+```yaml {1,3,5} title="modules/local/cowpy/environment.yml" showLineNumbers step="Danach"
+name: COWPY
+channels:
+  - conda-forge
+dependencies:
+  - cowpy=1.1.5
+```
 
-    ```yaml title="modules/local/cowpy/environment.yml" linenums="1"
-    ---
-    # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/environment-schema.json
-    channels:
-      - conda-forge
-      - bioconda
-    dependencies:
-      # TODO nf-core: List required Conda package(s).
-      #               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
-      #               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
-      - "YOUR-TOOL-HERE"
-    ```
+</CodeWalkthrough>
 
 Für eine Einreichung bei nf-core müssten wir die Standards genauer einhalten, aber für unseren eigenen Gebrauch können wir den Code auf diese Weise vereinfachen.
 
-!!! tip "Bioconda vs conda-forge Pakete"
+:::tip[Bioconda vs conda-forge Pakete]
+- **Bioconda-Pakete**: Erhalten automatisch BioContainers, die sofort einsatzbereite Container bereitstellen
+- **conda-forge-Pakete**: Können Seqera Containers verwenden, um Container on-demand aus dem Conda-Rezept zu erstellen
 
-    - **Bioconda-Pakete**: Erhalten automatisch BioContainers, die sofort einsatzbereite Container bereitstellen
-    - **conda-forge-Pakete**: Können Seqera Containers verwenden, um Container on-demand aus dem Conda-Rezept zu erstellen
-
-    Die meisten Bioinformatik-Tools befinden sich in Bioconda, aber für conda-forge-Tools bietet Seqera Containers eine einfache Lösung für die Containerisierung.
+Die meisten Bioinformatik-Tools befinden sich in Bioconda, aber für conda-forge-Tools bietet Seqera Containers eine einfache Lösung für die Containerisierung.
+:::
 
 ### 2.3. Die `COWPY`-Logik einbauen
 
@@ -1436,37 +1424,37 @@ Wenn wir auf unser manuelles `COWPY`-Modul aus Abschnitt 1 zurückblicken, könn
 
 Aktualisiere die Eingabe- und Ausgabeblöcke:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="10" hl_lines="1-2 5-6"
-    input:
-    tuple val(meta), path(input_file)
+```nextflow {1,4-6} title="modules/local/cowpy/main.nf" showLineNumbers startLineNumber=10 step="Vorher"
+input:tuple val(meta), path(input)
 
-    output:
-    tuple val(meta), path("${prefix}.txt")                                       , emit: cowpy_output
-    tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions    , emit: versions_cowpy
-    ```
+output:
+tuple val(meta), path("*"), emit: output
 
-=== "Vorher"
+tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions, emit: versions_cowpy
+```
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="10" hl_lines="1 4-6"
-    input:tuple val(meta), path(input)
+```nextflow {1-2,5-6} title="modules/local/cowpy/main.nf" showLineNumbers startLineNumber=10 step="Danach"
+input:
+tuple val(meta), path(input_file)
 
-    output:
-    tuple val(meta), path("*"), emit: output
+output:
+tuple val(meta), path("${prefix}.txt")                                       , emit: cowpy_output
+tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions    , emit: versions_cowpy
+```
 
-    tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions, emit: versions_cowpy
-    ```
+</CodeWalkthrough>
 
 Dies spezifiziert:
 
 - Die Eingabedeklaration in einer eigenen Zeile unterhalb von `input:`
 - Den Eingabedatei-Parameternamen (`input_file` statt dem generischen `input`)
-- Den Ausgabedateinamen mit dem konfigurierbaren Präfix-Muster (`#!groovy ${prefix}.txt` statt Wildcard `*`)
+- Den Ausgabedateinamen mit dem konfigurierbaren Präfix-Muster (`${prefix}.txt{:nextflow}` statt Wildcard `*`)
 - Einen beschreibenden Emit-Namen (`cowpy_output` statt dem generischen `output`)
-- Einen statischen Versionsstring (`#!groovy val("1.1.5")`) anstelle des `#!groovy eval("cowpy --version")` der Vorlage, passend zum manuellen Modul aus Abschnitt 1.6 (das `cowpy`-Tool stellt kein `--version`-Flag bereit)
+- Einen statischen Versionsstring (`val("1.1.5"){:nextflow}`) anstelle des `eval("cowpy --version"){:nextflow}` der Vorlage, passend zum manuellen Modul aus Abschnitt 1.6 (das `cowpy`-Tool stellt kein `--version`-Flag bereit)
 
-Wenn du den Nextflow Language Server zur Syntaxvalidierung verwendest, wird der Teil `#!groovy ${prefix}` in dieser Phase als Fehler markiert, weil wir ihn noch nicht zum Script-Block hinzugefügt haben.
+Wenn du den Nextflow Language Server zur Syntaxvalidierung verwendest, wird der Teil `${prefix}{:nextflow}` in dieser Phase als Fehler markiert, weil wir ihn noch nicht zum Script-Block hinzugefügt haben.
 Kommen wir jetzt dazu.
 
 #### 2.3.2. Der Script-Block
@@ -1475,35 +1463,35 @@ Die Vorlage generiert einen leeren Script-Block, den du mit dem eigentlichen Too
 
 Basierend auf dem Modul, das wir zuvor manuell geschrieben haben, sollten wir die folgenden Änderungen vornehmen:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="20" hl_lines="3 6"
-    script:
-    def args = task.ext.args ?: ''
-    prefix = task.ext.prefix ?: "${meta.id}"
+```nextflow {3} title="modules/local/cowpy/main.nf" showLineNumbers startLineNumber=20 step="Vorher"
+script:
+def args = task.ext.args ?: ''
+def prefix = task.ext.prefix ?: "${meta.id}"
 
-    """
-    cat $input_file | cowpy $args > ${prefix}.txt
+"""
 
-    """
-    ```
+"""
+```
 
-=== "Vorher"
+```nextflow {3,6} title="modules/local/cowpy/main.nf" showLineNumbers startLineNumber=20 step="Danach"
+script:
+def args = task.ext.args ?: ''
+prefix = task.ext.prefix ?: "${meta.id}"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="20" hl_lines="3"
-    script:
-    def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
+"""
+cat $input_file | cowpy $args > ${prefix}.txt
 
-    """
+"""
+```
 
-    """
-    ```
+</CodeWalkthrough>
 
 Wichtige Änderungen:
 
 - Ändere `def prefix` zu nur `prefix` (ohne `def`), um es im Output-Block zugänglich zu machen
-- Füge den eigentlichen `cowpy`-Befehl ein, der sowohl `$args` als auch `#!groovy ${prefix}.txt` verwendet
+- Füge den eigentlichen `cowpy`-Befehl ein, der sowohl `$args` als auch `${prefix}.txt{:nextflow}` verwendet
 
 Beachte, dass wir, wenn wir nicht bereits die Arbeit des Hinzufügens der `ext.args`- und `ext.prefix`-Konfiguration für den `COWPY`-Prozess zur Datei `modules.config` erledigt hätten, dies jetzt tun müssten.
 
@@ -1511,41 +1499,41 @@ Beachte, dass wir, wenn wir nicht bereits die Arbeit des Hinzufügens der `ext.a
 
 Im Nextflow-Kontext erlaubt ein [Stub](https://www.nextflow.io/docs/latest/process.html#stub)-Block, ein leichtgewichtiges Dummy-Skript zu definieren, das für schnelles Prototyping und Testen der Pipeline-Logik verwendet wird, ohne den eigentlichen Befehl auszuführen.
 
-<!-- TODO (future) This is super glossed over but should really be explained or at least link out to an explanation about stubs (the reference doc isn't terribly helpful either). Right now this is likely to be mostly meaningless to anyone who doesn't already know about stubs. -->
+{/* TODO (future) This is super glossed over but should really be explained or at least link out to an explanation about stubs (the reference doc isn't terribly helpful either). Right now this is likely to be mostly meaningless to anyone who doesn't already know about stubs. */}
 
 Mach dir nicht zu viele Sorgen, wenn dies mysteriös erscheint; wir fügen dies der Vollständigkeit halber hinzu, aber du kannst den Stub-Abschnitt auch einfach löschen, wenn du dich nicht damit befassen möchtest, da er komplett optional ist.
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="29" hl_lines="3 6"
-    stub:
-    def args = task.ext.args ?: ''
-    prefix = task.ext.prefix ?: "${meta.id}"
+```nextflow {3,6} title="modules/local/cowpy/main.nf" showLineNumbers startLineNumber=29 step="Vorher"
+stub:
+def args = task.ext.args ?: ''
+def prefix = task.ext.prefix ?: "${meta.id}"
 
-    """
-    touch ${prefix}.txt
+"""
+echo $args
 
-    """
-    ```
+"""
+```
 
-=== "Vorher"
+```nextflow {3,6} title="modules/local/cowpy/main.nf" showLineNumbers startLineNumber=29 step="Danach"
+stub:
+def args = task.ext.args ?: ''
+prefix = task.ext.prefix ?: "${meta.id}"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="29" hl_lines="3 6"
-    stub:
-    def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
+"""
+touch ${prefix}.txt
 
-    """
-    echo $args
+"""
+```
 
-    """
-    ```
+</CodeWalkthrough>
 
 Wichtige Änderungen:
 
 - Ändere `def prefix` zu nur `prefix`, um es dem Script-Block anzupassen
 - Entferne die Zeile `echo $args` (die nur Vorlagen-Platzhaltercode war)
-- Der Stub erstellt eine leere `#!groovy ${prefix}.txt`-Datei, die dem entspricht, was der Script-Block erzeugt
+- Der Stub erstellt eine leere `${prefix}.txt{:nextflow}`-Datei, die dem entspricht, was der Script-Block erzeugt
 
 Dies ermöglicht es dir, die Workflow-Logik und Dateibehandlung zu testen, ohne auf die Ausführung des eigentlichen Tools warten zu müssen.
 
@@ -1555,82 +1543,78 @@ Sobald du die Umgebungseinrichtung (Abschnitt 2.2), Eingaben/Ausgaben (Abschnitt
 
 Alles, was wir tun müssen, um diese neue Version des `COWPY`-Moduls auszuprobieren, ist die Import-Anweisung in der Workflow-Datei `hello.nf` auf die neue Datei umzuleiten.
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="11"
-    /*
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
-    include { paramsSummaryMap       } from 'plugin/nf-schema'
-    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-    include { sayHello               } from '../modules/local/sayHello.nf'
-    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
-    include { COWPY                  } from '../modules/local/cowpy/main.nf'
-    ```
+```nextflow {11} title="workflows/hello.nf" showLineNumbers step="Vorher"
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+include { paramsSummaryMap       } from 'plugin/nf-schema'
+include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { sayHello               } from '../modules/local/sayHello.nf'
+include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+include { COWPY                  } from '../modules/local/cowpy.nf'
+```
 
-=== "Vorher"
+```nextflow {11} title="workflows/hello.nf" showLineNumbers step="Danach"
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+include { paramsSummaryMap       } from 'plugin/nf-schema'
+include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { sayHello               } from '../modules/local/sayHello.nf'
+include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+include { COWPY                  } from '../modules/local/cowpy/main.nf'
+```
 
-    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="11"
-    /*
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
-    include { paramsSummaryMap       } from 'plugin/nf-schema'
-    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-    include { sayHello               } from '../modules/local/sayHello.nf'
-    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
-    include { COWPY                  } from '../modules/local/cowpy.nf'
-    ```
+</CodeWalkthrough>
 
 Führen wir die Pipeline aus, um sie zu testen.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker
+# [!output]
+  N E X T F L O W   ~  version 26.04.4
+
+Launching `./main.nf` [prickly_neumann] revision: d6bbba9521
+
+Input/output options
+  input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
+  outdir                    : core-hello-results
+
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
+
+Generic options
+  validate_params           : false
+  trace_report_suffix       : 2025-12-27_08-23-51
+
+Core Nextflow options
+  runName                   : prickly_neumann
+  containerEngine           : docker
+  launchDir                 : /workspaces/training/nfcore-build/core-hello
+  workDir                   : /workspaces/training/nfcore-build/core-hello/work
+  projectDir                : /workspaces/training/nfcore-build/core-hello
+  userName                  : root
+  profile                   : test,docker
+  configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+executor >  local (8)
+[e9/008ede] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+[f0/d70cfe] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+[be/0ecc58] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+[11/8e082f] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔ # [!code highlight]
+-[core/hello] Pipeline completed successfully-
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console hl_lines="33"
-      N E X T F L O W   ~  version 26.04.4
-
-    Launching `./main.nf` [prickly_neumann] revision: d6bbba9521
-
-    Input/output options
-      input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
-      outdir                    : core-hello-results
-
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
-
-    Generic options
-      validate_params           : false
-      trace_report_suffix       : 2025-12-27_08-23-51
-
-    Core Nextflow options
-      runName                   : prickly_neumann
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nfcore-build/core-hello
-      workDir                   : /workspaces/training/nfcore-build/core-hello/work
-      projectDir                : /workspaces/training/nfcore-build/core-hello
-      userName                  : root
-      profile                   : test,docker
-      configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
-
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-    executor >  local (8)
-    [e9/008ede] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
-    [f0/d70cfe] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [be/0ecc58] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
-    [11/8e082f] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
-    -[core/hello] Pipeline completed successfully-
-    ```
 
 Dies erzeugt dieselben Ergebnisse wie zuvor.
 
@@ -1693,4 +1677,4 @@ Schließlich hast du gelernt, wie du Module zur nf-core-Community beitragen kann
 
 ### Wie geht es weiter?
 
-Wenn du bereit bist, fahre mit [Teil 4: Eingabevalidierung](./04_input_validation.md) fort, um zu lernen, wie du Schema-basierte Eingabevalidierung zu deiner Pipeline hinzufügst.
+Wenn du bereit bist, fahre mit [Teil 4: Eingabevalidierung](./04_input_validation.mdx) fort, um zu lernen, wie du Schema-basierte Eingabevalidierung zu deiner Pipeline hinzufügst.

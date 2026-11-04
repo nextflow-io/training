@@ -1,6 +1,11 @@
-# Part 6: Scale up and tune compute resources
+---
+title: 'Part 6: Scale up and tune compute resources'
+description: In Part 3, you got nf-core/rnaseq running on the default machine by constraining its resource requests with laptop.config.
+---
 
-In [Part 3](./03_run_production_pipeline.md), you got `nf-core/rnaseq` running on the default machine by constraining its resource requests with `laptop.config`.
+import nfcore_use_solutions_tuned_config from '../../../../../nfcore-use/solutions/tuned.config?raw';
+
+In [Part 3](./03_run_production_pipeline.mdx), you got `nf-core/rnaseq` running on the default machine by constraining its resource requests with `laptop.config`.
 That is fine for testing, but real analyses need more resources, not fewer.
 
 In this part, you move to a bigger machine and run the pipeline with its default resource requests.
@@ -16,7 +21,7 @@ This part uses a bigger codespace machine, which uses more of your GitHub Codesp
 
 You can change the machine type of your codespace from the editor:
 
-1. Open the Command Palette with ++ctrl+shift+p++ (++cmd+shift+p++ on macOS).
+1. Open the Command Palette with <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> (<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> on macOS).
 2. Type `Codespaces: Change Machine Type` and select it.
 3. Select the **8-core** machine type.
 4. Confirm that you want to restart the codespace when prompted.
@@ -64,14 +69,10 @@ Run the pipeline without `laptop.config`, so that each process gets the resource
 
 ```bash
 nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --outdir rnaseq-default
+# [!output]
+...
+-[nf-core/rnaseq] Pipeline completed successfully-
 ```
-
-??? success "Command output (excerpt)"
-
-    ```console
-    ...
-    -[nf-core/rnaseq] Pipeline completed successfully-
-    ```
 
 With 8 CPUs and 32 GB, the default requests fit, so the run proceeds without any overrides.
 In our tests on a newly created 8-core codespace, the run took about 14 minutes.
@@ -87,9 +88,12 @@ Setting up those environments, however, adds significant complexity.
 
 The Seqera platform (developed by the creators of Nextflow) provides a web-based interface for launching Nextflow pipelines on HPC or cloud infrastructure (either your own or one managed for you), with compute and data management capabilities that streamline the process of running pipelines at scale.
 
-??? tip "Seqera academic program"
+<details class="tip">
+<summary>Seqera academic program</summary>
 
-    Academic researchers can access Seqera Platform free of charge through the [Seqera academic program](https://seqera.io/academic-program/).
+Academic researchers can access Seqera Platform free of charge through the [Seqera academic program](https://seqera.io/academic-program/).
+
+</details>
 
 ### Takeaway
 
@@ -135,7 +139,7 @@ In the **Resource Usage** section, the **Memory** plot has two tabs:
 - **Raw usage** shows the peak memory each process used, in absolute terms.
 - **% Allocated** shows that peak as a percentage of the memory requested.
 
-<!-- TODO: screenshot of the % Allocated memory plot from a Codespaces run -->
+{/* TODO: screenshot of the % Allocated memory plot from a Codespaces run */}
 
 With the pipeline's default requests, most processes use a small fraction of their allocation.
 Here are a few representative processes from our own test run on the 8-core machine:
@@ -163,7 +167,7 @@ Memory, not CPU, was the bottleneck.
 Open the execution timeline to see this.
 Each bar is a task; many tasks wait for memory to be released before they can start, even when CPUs are idle.
 
-<!-- TODO: screenshot of the timeline from the default 8-core run -->
+{/* TODO: screenshot of the timeline from the default 8-core run */}
 
 The same problem appears on HPC clusters and in the cloud in a different form: oversized requests wait longer in the scheduler queue and cost more.
 
@@ -171,12 +175,12 @@ Generic labels are a common cause of over-allocation.
 For example, `nf-core/fetchngs` requests 12 GB of memory for each download by default, because its download process uses the `process_low` label from the nf-core pipeline template, while each download actually uses about 15 MB.
 You capped it at 6 GB with `laptop.config` in Part 5.
 
-### Takeaway
+### Takeaway {#takeaway_1}
 
 The execution report shows how much of its allocation each process actually used.
 Over-allocation limits how many tasks can run in parallel.
 
-### What's next?
+### What's next? {#whats-next_1}
 
 Write a configuration that matches resource requests to actual usage.
 
@@ -195,7 +199,7 @@ That is why the run in Part 3 failed on the default machine, which has 8 GB, of 
 The 8-core machine provides 8 CPUs and 32 GB of memory.
 Create a file named `tuned.config` that sets the limits to what it can provide:
 
-```groovy title="tuned.config" linenums="1"
+```nextflow title="tuned.config" showLineNumbers
 process {
     // Never request more than the machine has
     resourceLimits = [cpus: 8, memory: 30.GB]
@@ -209,7 +213,7 @@ On its own, this does not help parallelism: every process still requests far mor
 The pipeline assigns resources through labels defined in `conf/base.config`.
 Each label definition multiplies its values by `task.attempt`:
 
-```groovy title="conf/base.config (excerpt)"
+```nextflow title="conf/base.config (excerpt)" nextflow="config"
 withLabel:process_low {
     cpus   = { 2     * task.attempt }
     memory = { 12.GB * task.attempt }
@@ -225,20 +229,26 @@ When you override resource values, keep the `task.attempt` multiplier.
 
 Based on the execution report, update `tuned.config`:
 
-=== "After"
+<Tabs>
 
-    ```groovy title="tuned.config" linenums="1" hl_lines="5-24"
-    --8<-- "nfcore-use/solutions/tuned.config"
-    ```
+<TabItem label="After">
 
-=== "Before"
+<Code code={nfcore_use_solutions_tuned_config} lang="nextflow" title="tuned.config" meta="{5-24} showLineNumbers" />
 
-    ```groovy title="tuned.config" linenums="1"
-    process {
-        // Never request more than the machine has
-        resourceLimits = [cpus: 8, memory: 30.GB]
-    }
-    ```
+</TabItem>
+
+<TabItem label="Before">
+
+```nextflow title="tuned.config" showLineNumbers
+process {
+    // Never request more than the machine has
+    resourceLimits = [cpus: 8, memory: 30.GB]
+}
+```
+
+</TabItem>
+
+</Tabs>
 
 Each value leaves headroom above the peak usage in the report, and the `task.attempt` multiplier covers inputs that turn out larger than expected.
 `process_single` gets 2 GB rather than 1 GB because `MULTIQC`, which has that label, peaked at about 1 GB.
@@ -265,28 +275,34 @@ At most 6 tasks ran at once instead of 4, and the memory reserved at any one tim
 The time saved is modest here because the test dataset is tiny: most tasks finish within seconds, so starting them sooner gains little.
 On real data, where individual tasks run for minutes or hours, running more of them in parallel makes a much larger difference.
 
-??? tip "Applying this to a real analysis"
+<details class="tip">
+<summary>Applying this to a real analysis</summary>
 
-    The test dataset is tiny, so its resource usage does not represent a real analysis.
-    For real data, run the pipeline on one or two representative samples first, read the execution report, then tune the configuration before launching the full dataset.
-    Memory needs often scale with input size and reference genome size, so keep generous headroom.
+The test dataset is tiny, so its resource usage does not represent a real analysis.
+For real data, run the pipeline on one or two representative samples first, read the execution report, then tune the configuration before launching the full dataset.
+Memory needs often scale with input size and reference genome size, so keep generous headroom.
 
-??? exercise "Apply it to the pipeline you chose in Part 4"
+</details>
 
-    Return to the published results of the pipeline you chose in [Part 4](./04_choose_pipeline.md) and open the execution report in `pipeline_info/`.
-    Identify the processes with the highest memory usage, and compare that usage with the memory requested by their labels in the pipeline's `conf/base.config` file.
+<details class="exercise">
+<summary>Apply it to the pipeline you chose in Part 4</summary>
 
-    Which processes would you right-size for your dataset, and in which direction?
+Return to the published results of the pipeline you chose in [Part 4](./04_choose_pipeline.mdx) and open the execution report in `pipeline_info/`.
+Identify the processes with the highest memory usage, and compare that usage with the memory requested by their labels in the pipeline's `conf/base.config` file.
 
-### Takeaway
+Which processes would you right-size for your dataset, and in which direction?
+
+</details>
+
+### Takeaway {#takeaway_2}
 
 `resourceLimits` keeps requests within what the machine can provide, and label-level overrides based on the execution report let more tasks run in parallel.
 Keeping the `task.attempt` multiplier preserves the pipeline's automatic retry with more resources.
 
-### What's next?
+### What's next? {#whats-next_2}
 
 You've completed the Use nf-core course.
-See [Next steps](next_steps.md) for where to go from here.
+See [Next steps](next_steps.mdx) for where to go from here.
 
 If you go on to other courses in the same codespace, first switch it back to the 2-core machine type, following the steps in [section 1.1](#11-change-the-machine-type).
 The 8-core machine uses your quota four times faster.

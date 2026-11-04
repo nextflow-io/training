@@ -1,13 +1,16 @@
-# Bölüm 2: Tek örnekli uygulama
+---
+title: 'Bölüm 2: Tek örnekli uygulama'
+description: Bu kursun bu bölümünde, Bölüm 1'de çalıştırdığımız tüm komutları otomatikleştirmek için mümkün olan en basit iş akışını yazacağız ve her seferinde yalnızca…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bu kursun bu bölümünde, Bölüm 1'de çalıştırdığımız tüm komutları otomatikleştirmek için mümkün olan en basit iş akışını yazacağız ve her seferinde yalnızca bir örneği işlemeyi hedefleyeceğiz.
 
-!!! warning "Ön Koşul"
-
-    Bu derse başlamadan önce [Bölüm 1: Yönteme genel bakış](./01_method.md) bölümünü tamamlamış olmanız gerekir.
-    Özellikle, 1.2.3 bölümünde çalışmak, bu dersteki hizalama adımı için gerekli olan genom dizin dosyasını (`data/genome_index.tar.gz`) oluşturur.
+:::caution[Ön Koşul]
+Bu derse başlamadan önce [Bölüm 1: Yönteme genel bakış](./01_method.mdx) bölümünü tamamlamış olmanız gerekir.
+Özellikle, 1.2.3 bölümünde çalışmak, bu dersteki hizalama adımı için gerekli olan genom dizin dosyasını (`data/genome_index.tar.gz`) oluşturur.
+:::
 
 ## Görev
 
@@ -17,126 +20,127 @@ Bu kursun bu bölümünde, aşağıdakileri yapan bir iş akışı geliştirece�
 2. Adaptörleri kırpın ve kırpma sonrası kalite kontrolü çalıştırın (Trim Galore)
 3. Kırpılmış okumaları bir referans genoma hizalayın (HISAT2)
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-wf-02.svg"
-</figure>
+![](../../../nf4_science/rnaseq/img/rnaseq-wf-02.excalidraw.svg)
 
-Bu, [Bölüm 1: Yönteme genel bakış](./01_method.md#1-single-sample-processing) bölümünün ilk kısmındaki adımları otomatikleştirir; burada bu komutları konteynerlerinde manuel olarak çalıştırmıştınız.
+Bu, [Bölüm 1: Yönteme genel bakış](./01_method.mdx#1-tek-örnekli-işleme) bölümünün ilk kısmındaki adımları otomatikleştirir; burada bu komutları konteynerlerinde manuel olarak çalıştırmıştınız.
 
 Başlangıç noktası olarak, size iş akışının ana bölümlerini özetleyen bir iş akışı dosyası olan `rnaseq.nf` ve `modules/` dizininde her sürecin yapısını özetleyen dört modül dosyası (`fastqc.nf`, `trim_galore.nf`, `hisat2_align.nf` ve `multiqc.nf`) sağlıyoruz.
 
-??? full-code "İskelet dosyaları"
+<details class="full-code">
+<summary>İskelet dosyaları</summary>
 
-    ```groovy title="rnaseq.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="rnaseq.nf"
+#!/usr/bin/env nextflow
 
-    // Modül INCLUDE ifadeleri
+// Modül INCLUDE ifadeleri
 
-    /*
-     * Pipeline parametreleri
-     */
+/*
+ * Pipeline parametreleri
+ */
 
-    // Birincil girdi
+// Birincil girdi
 
-    workflow {
+workflow {
 
-        main:
-        // Girdi kanalı oluştur
+    main:
+    // Girdi kanalı oluştur
 
-        // Süreçleri çağır
+    // Süreçleri çağır
 
-        publish:
-        // Yayınlanacak çıktıları bildir
-    }
+    publish:
+    // Yayınlanacak çıktıları bildir
+}
 
-    output {
-        // Yayınlama hedeflerini yapılandır
-    }
-    ```
+output {
+    // Yayınlama hedeflerini yapılandır
+}
+```
 
-    ```groovy title="modules/fastqc.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/fastqc.nf"
+#!/usr/bin/env nextflow
 
-    /*
-     * Girdi okumaları üzerinde FastQC çalıştır
-     */
-    process FASTQC {
+/*
+ * Girdi okumaları üzerinde FastQC çalıştır
+ */
+process FASTQC {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-    ```groovy title="modules/trim_galore.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/trim_galore.nf"
+#!/usr/bin/env nextflow
 
-    /*
-     * Adaptörleri kırp ve kırpma sonrası kalite kontrolü çalıştır
-     */
-    process TRIM_GALORE {
+/*
+ * Adaptörleri kırp ve kırpma sonrası kalite kontrolü çalıştır
+ */
+process TRIM_GALORE {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-    ```groovy title="modules/hisat2_align.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/hisat2_align.nf"
+#!/usr/bin/env nextflow
 
-    /*
-     * Okumaları bir referans genoma hizala
-     */
-    process HISAT2_ALIGN {
+/*
+ * Okumaları bir referans genoma hizala
+ */
+process HISAT2_ALIGN {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-    ```groovy title="modules/multiqc.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/multiqc.nf"
+#!/usr/bin/env nextflow
 
-    /*
-     * MultiQC ile kalite kontrol raporlarını topla
-     */
-    process MULTIQC {
+/*
+ * MultiQC ile kalite kontrol raporlarını topla
+ */
+process MULTIQC {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
+
+</details>
 
 Bu dosyalar işlevsel değildir; amaçları yalnızca kodun ilginç kısımlarını doldurmanız için iskelet görevi görmektir.
 
@@ -153,10 +157,10 @@ Geliştirme sürecini daha eğitici hale getirmek için bunu üç aşamaya ayır
 
 Her adım, iş akışı geliştirmenin belirli bir yönüne odaklanır.
 
-!!! tip "İpucu"
-
-    Doğru çalışma dizininde olduğunuzdan emin olun:
-    `cd /workspaces/training/nf4-science/rnaseq`
+:::tip[İpucu]
+Doğru çalışma dizininde olduğunuzdan emin olun:
+`cd /workspaces/training/nf4-science/rnaseq`
+:::
 
 ---
 
@@ -164,7 +168,7 @@ Her adım, iş akışı geliştirmenin belirli bir yönüne odaklanır.
 
 Bu ilk adım temellere odaklanır: bir FASTQ dosyası yükleme ve üzerinde kalite kontrolü çalıştırma.
 
-[Bölüm 1](01_method.md)'deki `fastqc` komutunu hatırlayın:
+[Bölüm 1](01_method.mdx)'deki `fastqc` komutunu hatırlayın:
 
 ```bash
 fastqc <reads>
@@ -187,27 +191,27 @@ Bir girdi parametresi bildirmemiz, uygun bir varsayılan değer sağlamak için 
 
 `rnaseq.nf` dosyasında, `Pipeline parametreleri` bölümü altında, `Path` türünde `reads` adlı bir parametre bildirin.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="5" hl_lines="4-7"
-    /*
-     * Pipeline parametreleri
-     */
-    params {
-        // Birincil girdi
-        input: Path
-    }
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=5 step="Önce"
+/*
+ * Pipeline parametreleri
+ */
 
-=== "Önce"
+// Birincil girdi
+```
 
-    ```groovy title="rnaseq.nf" linenums="5"
-    /*
-     * Pipeline parametreleri
-     */
-
+```nextflow {4-7} title="rnaseq.nf" showLineNumbers startLineNumber=5 step="Sonra"
+/*
+ * Pipeline parametreleri
+ */
+params {
     // Birincil girdi
-    ```
+    input: Path
+}
+```
+
+</CodeWalkthrough>
 
 Bu, CLI parametresini ayarlar, ancak geliştirme sırasında iş akışını her çalıştırdığımızda dosya yolunu yazmak istemiyoruz.
 Varsayılan bir değer sağlamak için birden fazla seçenek vardır; burada bir test profili kullanıyoruz.
@@ -215,67 +219,67 @@ Varsayılan bir değer sağlamak için birden fazla seçenek vardır; burada bir
 #### 1.1.2. `nextflow.config` dosyasında varsayılan değere sahip bir test profili oluşturun
 
 Bir test profili, komut satırında girdi belirtmeden bir iş akışını denemek için uygun varsayılan değerler sağlar.
-Bu, Nextflow ekosisteminde yaygın bir kuraldır (daha fazla ayrıntı için [Hello Config](../../hello_nextflow/06_hello_config.md) bölümüne bakın).
+Bu, Nextflow ekosisteminde yaygın bir kuraldır (daha fazla ayrıntı için [Hello Config](../../hello_nextflow/06_hello_config.mdx) bölümüne bakın).
 
 `nextflow.config` dosyasına, `reads` parametresini test FASTQ dosyalarından birine ayarlayan bir `test` profili içeren bir `profiles` bloğu ekleyin.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="3-7"
-    docker.enabled = true
+```nextflow title="nextflow.config" showLineNumbers step="Önce"
+docker.enabled = true
+```
 
-    profiles {
-        test {
-            params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
-        }
+```nextflow {3-7} title="nextflow.config" showLineNumbers step="Sonra"
+docker.enabled = true
+
+profiles {
+    test {
+        params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
     }
-    ```
+}
+```
 
-=== "Önce"
+</CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="1"
-    docker.enabled = true
-    ```
-
-Burada, iş akışı betiğinin bulunduğu dizine işaret eden yerleşik bir Nextflow değişkeni olan `#!groovy ${projectDir}` kullanıyoruz.
+Burada, iş akışı betiğinin bulunduğu dizine işaret eden yerleşik bir Nextflow değişkeni olan `${projectDir}{:nextflow}` kullanıyoruz.
 Bu, mutlak yolları sabit kodlamadan veri dosyalarına ve diğer kaynaklara başvurmayı kolaylaştırır.
 
 Parametre artık uygun bir varsayılana sahip. Ardından, ondan bir kanal oluşturmamız gerekiyor.
 
 #### 1.1.3. Girdi kanalını ayarlayın
 
-İş akışı bloğunda, `.fromPath` kanal fabrikasını kullanarak parametre değerinden bir girdi kanalı oluşturun ([Hello Channels](../../hello_nextflow/02_hello_channels.md) bölümünde kullanıldığı gibi).
+İş akışı bloğunda, `.fromPath` kanal fabrikasını kullanarak parametre değerinden bir girdi kanalı oluşturun ([Hello Channels](../../hello_nextflow/02_hello_channels.mdx) bölümünde kullanıldığı gibi).
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="13" hl_lines="4-5"
-    workflow {
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=13 step="Önce"
+workflow {
 
-        main:
-        // Bir dosya yolundan girdi kanalı oluştur
-        read_ch = channel.fromPath(params.input)
+    main:
+    // Girdi kanalı oluştur
 
-        // Süreçleri çağır
+    // Süreçleri çağır
 
-        publish:
-        // Yayınlanacak çıktıları bildir
-    }
-    ```
+    publish:
+    // Yayınlanacak çıktıları bildir
+}
+```
 
-=== "Önce"
+```nextflow {4-5} title="rnaseq.nf" showLineNumbers startLineNumber=13 step="Sonra"
+workflow {
 
-    ```groovy title="rnaseq.nf" linenums="13"
-    workflow {
+    main:
+    // Bir dosya yolundan girdi kanalı oluştur
+    read_ch = channel.fromPath(params.input)
 
-        main:
-        // Girdi kanalı oluştur
+    // Süreçleri çağır
 
-        // Süreçleri çağır
+    publish:
+    // Yayınlanacak çıktıları bildir
+}
+```
 
-        publish:
-        // Yayınlanacak çıktıları bildir
-    }
-    ```
+</CodeWalkthrough>
 
 Ardından, bu girdi üzerinde kalite kontrolü çalıştırmak için süreci oluşturmamız gerekecek.
 
@@ -286,58 +290,58 @@ Modül dosyasındaki süreç tanımını doldurmamız, bir include ifadesi kulla
 #### 1.2.1. Kalite kontrol süreci için modülü doldurun
 
 `modules/fastqc.nf` dosyasını açın ve süreç tanımının ana hatlarını inceleyin.
-Ana yapısal öğeleri tanıyor olmalısınız; değilse, bir tazeleme için [Hello Nextflow](../../hello_nextflow/01_hello_world.md) bölümünü okumayı düşünün.
+Ana yapısal öğeleri tanıyor olmalısınız; değilse, bir tazeleme için [Hello Nextflow](../../hello_nextflow/01_hello_world.mdx) bölümünü okumayı düşünün.
 
 Devam edin ve yukarıda sağlanan bilgileri kullanarak süreç tanımını kendiniz doldurun, ardından çalışmanızı aşağıdaki "Sonra" sekmesindeki çözümle karşılaştırın.
 
-=== "Önce"
+<CodeWalkthrough>
 
-    ```groovy title="modules/fastqc.nf" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/fastqc.nf" showLineNumbers step="Önce"
+#!/usr/bin/env nextflow
 
-    /*
-     * Girdi okumaları üzerinde FastQC çalıştır
-     */
-    process FASTQC {
+/*
+ * Girdi okumaları üzerinde FastQC çalıştır
+ */
+process FASTQC {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-=== "Sonra"
+```nextflow {8,11,14,15,19} title="modules/fastqc.nf" showLineNumbers step="Sonra"
+#!/usr/bin/env nextflow
 
-    ```groovy title="modules/fastqc.nf" linenums="1" hl_lines="8 11 14 15 19"
-    #!/usr/bin/env nextflow
+/*
+ * Girdi okumaları üzerinde FastQC çalıştır
+ */
+process FASTQC {
 
-    /*
-     * Girdi okumaları üzerinde FastQC çalıştır
-     */
-    process FASTQC {
+    container "community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"
 
-        container "community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"
+    input:
+    path reads
 
-        input:
-        path reads
+    output:
+    path "${reads.simpleName}_fastqc.zip", emit: zip
+    path "${reads.simpleName}_fastqc.html", emit: html
 
-        output:
-        path "${reads.simpleName}_fastqc.zip", emit: zip
-        path "${reads.simpleName}_fastqc.html", emit: html
+    script:
+    """
+    fastqc ${reads}
+    """
+}
+```
 
-        script:
-        """
-        fastqc ${reads}
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 `simpleName` erişimcisi, dosya adından tüm uzantıları çıkarır; böylece `ENCSR000COQ1_1.fastq.gz`, `ENCSR000COQ1_1` olur.
 Her çıktı kanalına isim atamak için `emit:` sözdizimini kullanıyoruz; bu, çıktıları publish bloğuna bağlamak için yararlı olacaktır.
@@ -349,18 +353,18 @@ Bunu tamamladığınızda, süreç tamamlanmış olur.
 
 `rnaseq.nf` dosyasında, süreci iş akışı için kullanılabilir hale getirmek için bir `include` ifadesi ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="3" hl_lines="2"
-    // Modül INCLUDE ifadeleri
-    include { FASTQC } from './modules/fastqc.nf'
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=3 step="Önce"
+// Modül INCLUDE ifadeleri
+```
 
-=== "Önce"
+```nextflow {2} title="rnaseq.nf" showLineNumbers startLineNumber=3 step="Sonra"
+// Modül INCLUDE ifadeleri
+include { FASTQC } from './modules/fastqc.nf'
+```
 
-    ```groovy title="rnaseq.nf" linenums="3"
-    // Modül INCLUDE ifadeleri
-    ```
+</CodeWalkthrough>
 
 Süreç artık iş akışı kapsamında kullanılabilir.
 
@@ -368,38 +372,38 @@ Süreç artık iş akışı kapsamında kullanılabilir.
 
 İş akışı bloğuna, girdi kanalını argüman olarak ileten bir `FASTQC` çağrısı ekleyin.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="14" hl_lines="7-8"
-    workflow {
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=14 step="Önce"
+workflow {
 
-        main:
-        // Bir dosya yolundan girdi kanalı oluştur
-        read_ch = channel.fromPath(params.input)
+    main:
+    // Bir dosya yolundan girdi kanalı oluştur
+    read_ch = channel.fromPath(params.input)
 
-        // İlk kalite kontrolü
-        FASTQC(read_ch)
+    // Süreçleri çağır
 
-        publish:
-        // Yayınlanacak çıktıları bildir
-    }
-    ```
+    publish:
+    // Yayınlanacak çıktıları bildir
+}
+```
 
-=== "Önce"
+```nextflow {7-8} title="rnaseq.nf" showLineNumbers startLineNumber=14 step="Sonra"
+workflow {
 
-    ```groovy title="rnaseq.nf" linenums="14"
-    workflow {
+    main:
+    // Bir dosya yolundan girdi kanalı oluştur
+    read_ch = channel.fromPath(params.input)
 
-        main:
-        // Bir dosya yolundan girdi kanalı oluştur
-        read_ch = channel.fromPath(params.input)
+    // İlk kalite kontrolü
+    FASTQC(read_ch)
 
-        // Süreçleri çağır
+    publish:
+    // Yayınlanacak çıktıları bildir
+}
+```
 
-        publish:
-        // Yayınlanacak çıktıları bildir
-    }
-    ```
+</CodeWalkthrough>
 
 İş akışı artık girdiyi yükler ve üzerinde kalite kontrol sürecini çalıştırır.
 Ardından, çıktının nasıl yayınlanacağını yapılandırmamız gerekiyor.
@@ -413,22 +417,22 @@ Hangi süreç çıktılarının yayınlanacağını bildirmemiz ve nereye gitmes
 İş akışı bloğu içindeki `publish:` bölümü, hangi süreç çıktılarının yayınlanması gerektiğini bildirir.
 `FASTQC` çıktılarını adlandırılmış hedeflere atayın.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="23" hl_lines="2-3"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-    }
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=23 step="Önce"
+    publish:
+    // Yayınlanacak çıktıları bildir
+}
+```
 
-=== "Önce"
+```nextflow {2-3} title="rnaseq.nf" showLineNumbers startLineNumber=23 step="Sonra"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+}
+```
 
-    ```groovy title="rnaseq.nf" linenums="23"
-        publish:
-        // Yayınlanacak çıktıları bildir
-    }
-    ```
+</CodeWalkthrough>
 
 Ardından, Nextflow'a yayınlanan çıktıları nereye koyacağını söylememiz gerekecek.
 
@@ -437,32 +441,32 @@ Ardından, Nextflow'a yayınlanan çıktıları nereye koyacağını söylememiz
 `output {}` bloğu iş akışının dışında yer alır ve her adlandırılmış hedefin nerede yayınlandığını belirtir.
 Her iki hedefi de bir `fastqc/` alt dizinine yayınlayacak şekilde yapılandırın.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="28" hl_lines="2-7"
-    output {
-        fastqc_zip {
-            path 'fastqc'
-        }
-        fastqc_html {
-            path 'fastqc'
-        }
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=28 step="Önce"
+output {
+    // Yayınlama hedeflerini yapılandır
+}
+```
+
+```nextflow {2-7} title="rnaseq.nf" showLineNumbers startLineNumber=28 step="Sonra"
+output {
+    fastqc_zip {
+        path 'fastqc'
     }
-    ```
-
-=== "Önce"
-
-    ```groovy title="rnaseq.nf" linenums="28"
-    output {
-        // Yayınlama hedeflerini yapılandır
+    fastqc_html {
+        path 'fastqc'
     }
-    ```
+}
+```
 
-!!! note "Not"
+</CodeWalkthrough>
 
-    Varsayılan olarak, Nextflow çıktı dosyalarını sembolik bağlantılar olarak yayınlar; bu, gereksiz çoğaltmayı önler.
-    Burada kullandığımız veri dosyaları çok küçük olsa da, genomik alanında çok büyük olabilirler.
-    Sembolik bağlantılar, `work` dizininizi temizlediğinizde bozulur; bu nedenle üretim iş akışları için varsayılan yayınlama modunu `'copy'` olarak geçersiz kılmak isteyebilirsiniz.
+:::note[Not]
+Varsayılan olarak, Nextflow çıktı dosyalarını sembolik bağlantılar olarak yayınlar; bu, gereksiz çoğaltmayı önler.
+Burada kullandığımız veri dosyaları çok küçük olsa da, genomik alanında çok büyük olabilirler.
+Sembolik bağlantılar, `work` dizininizi temizlediğinizde bozulur; bu nedenle üretim iş akışları için varsayılan yayınlama modunu `'copy'` olarak geçersiz kılmak isteyebilirsiniz.
+:::
 
 ### 1.4. İş akışını çalıştırın
 
@@ -472,28 +476,24 @@ Test profilinde ayarlanan varsayılan değeri kullanmak için `-profile test` il
 
 ```bash
 nextflow run rnaseq.nf -profile test
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `rnaseq.nf` [fabulous_engelbart] revision: 859d80cde8
+
+executor >  local (1)
+[4e/36fb3d] FASTQC (1) | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/rnaseq/results
+
+  fastqc_zip:
+    - fastqc/ENCSR000COQ1_1_fastqc.zip
+
+  fastqc_html:
+    - fastqc/ENCSR000COQ1_1_fastqc.html
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `rnaseq.nf` [fabulous_engelbart] revision: 859d80cde8
-
-    executor >  local (1)
-    [4e/36fb3d] FASTQC (1) | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/rnaseq/results
-
-      fastqc_zip:
-        - fastqc/ENCSR000COQ1_1_fastqc.zip
-
-      fastqc_html:
-        - fastqc/ENCSR000COQ1_1_fastqc.html
-    ```
 
 Bölüm 1'de çalıştıysanız ve konteyneri zaten çektiyseniz bu çok hızlı çalışmalıdır.
 Eğer atladıysanız, Nextflow konteyneri sizin için çekecektir; bunun gerçekleşmesi için herhangi bir şey yapmanıza gerek yok, ancak bir dakikaya kadar beklemeniz gerekebilir.
@@ -524,7 +524,7 @@ Bir süreç içeren bir modül oluşturmayı, onu bir iş akışına aktarmayı,
 
 Artık ilk kalite kontrolü yerinde olduğuna göre, yerleşik kırpma sonrası kalite kontrolü ile adaptör kırpma adımını ekleyebiliriz.
 
-[Bölüm 1](01_method.md)'deki `trim_galore` komutunu hatırlayın:
+[Bölüm 1](01_method.mdx)'deki `trim_galore` komutunu hatırlayın:
 
 ```bash
 trim_galore --fastqc <reads>
@@ -546,55 +546,55 @@ Daha önce olduğu gibi, süreç tanımını doldurmamız, modülü içe aktarma
 
 Devam edin ve yukarıda sağlanan bilgileri kullanarak süreç tanımını kendiniz doldurun, ardından çalışmanızı aşağıdaki "Sonra" sekmesindeki çözümle karşılaştırın.
 
-=== "Önce"
+<CodeWalkthrough>
 
-    ```groovy title="modules/trim_galore.nf" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/trim_galore.nf" showLineNumbers step="Önce"
+#!/usr/bin/env nextflow
 
-    /*
-     * Adaptörleri kırp ve kırpma sonrası kalite kontrolü çalıştır
-     */
-    process TRIM_GALORE {
+/*
+ * Adaptörleri kırp ve kırpma sonrası kalite kontrolü çalıştır
+ */
+process TRIM_GALORE {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-=== "Sonra"
+```nextflow {8,11,14,15,16,20} title="modules/trim_galore.nf" showLineNumbers step="Sonra"
+#!/usr/bin/env nextflow
 
-    ```groovy title="modules/trim_galore.nf" linenums="1" hl_lines="8 11 14 15 16 20"
-    #!/usr/bin/env nextflow
+/*
+ * Adaptörleri kırp ve kırpma sonrası kalite kontrolü çalıştır
+ */
+process TRIM_GALORE {
 
-    /*
-     * Adaptörleri kırp ve kırpma sonrası kalite kontrolü çalıştır
-     */
-    process TRIM_GALORE {
+    container "community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"
 
-        container "community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"
+    input:
+    path reads
 
-        input:
-        path reads
+    output:
+    path "${reads.simpleName}_trimmed.fq.gz", emit: trimmed_reads
+    path "${reads}_trimming_report.txt", emit: trimming_reports
+    path "${reads.simpleName}_trimmed_fastqc.{zip,html}", emit: fastqc_reports
 
-        output:
-        path "${reads.simpleName}_trimmed.fq.gz", emit: trimmed_reads
-        path "${reads}_trimming_report.txt", emit: trimming_reports
-        path "${reads.simpleName}_trimmed_fastqc.{zip,html}", emit: fastqc_reports
+    script:
+    """
+    trim_galore --fastqc ${reads}
+    """
+}
+```
 
-        script:
-        """
-        trim_galore --fastqc ${reads}
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 Bu sürecin üç adlandırılmış çıktısı vardır: hizalama adımına beslenen kırpılmış okumalar, kırpma raporu ve kırpma sonrası FastQC raporları.
 `--fastqc` bayrağı, Trim Galore'a kırpılmış çıktı üzerinde otomatik olarak FastQC çalıştırmasını söyler.
@@ -603,20 +603,20 @@ Bu sürecin üç adlandırılmış çıktısı vardır: hizalama adımına besle
 
 Yeni modülü içe aktarmak için `rnaseq.nf` dosyasını güncelleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="3" hl_lines="3"
-    // Modül INCLUDE ifadeleri
-    include { FASTQC } from './modules/fastqc.nf'
-    include { TRIM_GALORE } from './modules/trim_galore.nf'
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=3 step="Önce"
+// Modül INCLUDE ifadeleri
+include { FASTQC } from './modules/fastqc.nf'
+```
 
-=== "Önce"
+```nextflow {3} title="rnaseq.nf" showLineNumbers startLineNumber=3 step="Sonra"
+// Modül INCLUDE ifadeleri
+include { FASTQC } from './modules/fastqc.nf'
+include { TRIM_GALORE } from './modules/trim_galore.nf'
+```
 
-    ```groovy title="rnaseq.nf" linenums="3"
-    // Modül INCLUDE ifadeleri
-    include { FASTQC } from './modules/fastqc.nf'
-    ```
+</CodeWalkthrough>
 
 Ardından, iş akışına süreç çağrısını ekleyeceğiz.
 
@@ -624,44 +624,44 @@ Ardından, iş akışına süreç çağrısını ekleyeceğiz.
 
 İş akışı bloğuna süreç çağrısını ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="15" hl_lines="10-11"
-    workflow {
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=15 step="Önce"
+workflow {
 
-        main:
-        // Bir dosya yolundan girdi kanalı oluştur
-        read_ch = channel.fromPath(params.input)
+    main:
+    // Bir dosya yolundan girdi kanalı oluştur
+    read_ch = channel.fromPath(params.input)
 
-        // İlk kalite kontrolü
-        FASTQC(read_ch)
+    // İlk kalite kontrolü
+    FASTQC(read_ch)
 
-        // Adaptör kırpma ve kırpma sonrası kalite kontrolü
-        TRIM_GALORE(read_ch)
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+}
+```
 
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-    }
-    ```
+```nextflow {10-11} title="rnaseq.nf" showLineNumbers startLineNumber=15 step="Sonra"
+workflow {
 
-=== "Önce"
+    main:
+    // Bir dosya yolundan girdi kanalı oluştur
+    read_ch = channel.fromPath(params.input)
 
-    ```groovy title="rnaseq.nf" linenums="15"
-    workflow {
+    // İlk kalite kontrolü
+    FASTQC(read_ch)
 
-        main:
-        // Bir dosya yolundan girdi kanalı oluştur
-        read_ch = channel.fromPath(params.input)
+    // Adaptör kırpma ve kırpma sonrası kalite kontrolü
+    TRIM_GALORE(read_ch)
 
-        // İlk kalite kontrolü
-        FASTQC(read_ch)
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+}
+```
 
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-    }
-    ```
+</CodeWalkthrough>
 
 Kırpma süreci artık iş akışına bağlanmıştır.
 
@@ -673,26 +673,26 @@ Kırpma çıktılarını yayınlama bildirimine eklememiz ve nereye gideceklerin
 
 Kırpma çıktılarını `publish:` bölümüne ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="27" hl_lines="4-6"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-        trimmed_reads = TRIM_GALORE.out.trimmed_reads
-        trimming_reports = TRIM_GALORE.out.trimming_reports
-        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
-    }
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=27 step="Önce"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+}
+```
 
-=== "Önce"
+```nextflow {4-6} title="rnaseq.nf" showLineNumbers startLineNumber=27 step="Sonra"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+    trimmed_reads = TRIM_GALORE.out.trimmed_reads
+    trimming_reports = TRIM_GALORE.out.trimming_reports
+    trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+}
+```
 
-    ```groovy title="rnaseq.nf" linenums="27"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-    }
-    ```
+</CodeWalkthrough>
 
 Ardından, Nextflow'a bu çıktıları nereye koyacağını söylememiz gerekecek.
 
@@ -700,40 +700,40 @@ Ardından, Nextflow'a bu çıktıları nereye koyacağını söylememiz gerekece
 
 `output {}` bloğunda kırpma hedefleri için girdiler ekleyin ve bunları bir `trimming/` alt dizinine yayınlayın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="35" hl_lines="8-16"
-    output {
-        fastqc_zip {
-            path 'fastqc'
-        }
-        fastqc_html {
-            path 'fastqc'
-        }
-        trimmed_reads {
-            path 'trimming'
-        }
-        trimming_reports {
-            path 'trimming'
-        }
-        trimming_fastqc {
-            path 'trimming'
-        }
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=35 step="Önce"
+output {
+    fastqc_zip {
+        path 'fastqc'
     }
-    ```
-
-=== "Önce"
-
-    ```groovy title="rnaseq.nf" linenums="35"
-    output {
-        fastqc_zip {
-            path 'fastqc'
-        }
-        fastqc_html {
-            path 'fastqc'
-        }
+    fastqc_html {
+        path 'fastqc'
     }
-    ```
+}
+```
+
+```nextflow {8-16} title="rnaseq.nf" showLineNumbers startLineNumber=35 step="Sonra"
+output {
+    fastqc_zip {
+        path 'fastqc'
+    }
+    fastqc_html {
+        path 'fastqc'
+    }
+    trimmed_reads {
+        path 'trimming'
+    }
+    trimming_reports {
+        path 'trimming'
+    }
+    trimming_fastqc {
+        path 'trimming'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 Çıktı yapılandırması tamamlandı.
 
@@ -743,38 +743,34 @@ Ardından, Nextflow'a bu çıktıları nereye koyacağını söylememiz gerekece
 
 ```bash
 nextflow run rnaseq.nf -profile test
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `rnaseq.nf` [stupefied_volhard] revision: faaf310b2f
+
+executor >  local (2)
+[a3/ac9284] FASTQC (1)      | 1 of 1 ✔
+[55/c4d983] TRIM_GALORE (1) | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/rnaseq/results
+
+  fastqc_zip:
+    - fastqc/ENCSR000COQ1_1_fastqc.zip
+
+  fastqc_html:
+    - fastqc/ENCSR000COQ1_1_fastqc.html
+
+  trimmed_reads:
+    - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+
+  trimming_reports:
+    - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+
+  trimming_fastqc:
+    - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `rnaseq.nf` [stupefied_volhard] revision: faaf310b2f
-
-    executor >  local (2)
-    [a3/ac9284] FASTQC (1)      | 1 of 1 ✔
-    [55/c4d983] TRIM_GALORE (1) | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/rnaseq/results
-
-      fastqc_zip:
-        - fastqc/ENCSR000COQ1_1_fastqc.zip
-
-      fastqc_html:
-        - fastqc/ENCSR000COQ1_1_fastqc.html
-
-      trimmed_reads:
-        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
-
-      trimming_reports:
-        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
-
-      trimming_fastqc:
-        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
-    ```
 
 Bu da çok hızlı çalışmalıdır, çünkü çok küçük bir girdi dosyası üzerinde çalışıyoruz.
 
@@ -805,7 +801,7 @@ Kırpılmış okumalar çıktısından zincirlenen hizalama adımını ekleyin.
 
 Son olarak HISAT2 kullanarak genom hizalama adımını ekleyebiliriz.
 
-[Bölüm 1](01_method.md)'deki hizalama komutunu hatırlayın:
+[Bölüm 1](01_method.mdx)'deki hizalama komutunu hatırlayın:
 
 ```bash
 hisat2 -x <genome_index> -U <reads> \
@@ -827,55 +823,55 @@ Genom dizin arşivi için bir parametre bildirmemiz gerekiyor.
 
 `rnaseq.nf` dosyasına genom dizin arşivi için bir parametre bildirimi ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="11" hl_lines="5-6"
-    params {
-        // Birincil girdi
-        input: Path
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=11 step="Önce"
+params {
+    // Birincil girdi
+    input: Path
+}
+```
 
-        // Referans genom arşivi
-        hisat2_index_zip: Path
-    }
-    ```
+```nextflow {5-6} title="rnaseq.nf" showLineNumbers startLineNumber=11 step="Sonra"
+params {
+    // Birincil girdi
+    input: Path
 
-=== "Önce"
+    // Referans genom arşivi
+    hisat2_index_zip: Path
+}
+```
 
-    ```groovy title="rnaseq.nf" linenums="11"
-    params {
-        // Birincil girdi
-        input: Path
-    }
-    ```
+</CodeWalkthrough>
 
 #### 3.1.2. Test profiline genom dizini varsayılanını ekleyin
 
 Bölüm 1.1.2'de `input` için yaptığımız gibi, `nextflow.config` dosyasındaki test profiline genom dizini için bir varsayılan değer ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="6"
-    docker.enabled = true
+```nextflow title="nextflow.config" showLineNumbers step="Önce"
+docker.enabled = true
 
-    profiles {
-        test {
-            params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
-            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
-        }
+profiles {
+    test {
+        params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
     }
-    ```
+}
+```
 
-=== "Önce"
+```nextflow {6} title="nextflow.config" showLineNumbers step="Sonra"
+docker.enabled = true
 
-    ```groovy title="nextflow.config" linenums="1"
-    docker.enabled = true
-
-    profiles {
-        test {
-            params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
-        }
+profiles {
+    test {
+        params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
+        params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 Parametre hazır; şimdi hizalama sürecini oluşturabiliriz.
 
@@ -889,58 +885,58 @@ Daha önce olduğu gibi, süreç tanımını doldurmamız, modülü içe aktarma
 
 Devam edin ve yukarıda sağlanan bilgileri kullanarak süreç tanımını kendiniz doldurun, ardından çalışmanızı aşağıdaki "Sonra" sekmesindeki çözümle karşılaştırın.
 
-=== "Önce"
+<CodeWalkthrough>
 
-    ```groovy title="modules/hisat2_align.nf" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/hisat2_align.nf" showLineNumbers step="Önce"
+#!/usr/bin/env nextflow
 
-    /*
-     * Okumaları bir referans genoma hizala
-     */
-    process HISAT2_ALIGN {
+/*
+ * Okumaları bir referans genoma hizala
+ */
+process HISAT2_ALIGN {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-=== "Sonra"
+```nextflow {8,11,12,15,16,20,21,22,23} title="modules/hisat2_align.nf" showLineNumbers step="Sonra"
+#!/usr/bin/env nextflow
 
-    ```groovy title="modules/hisat2_align.nf" linenums="1" hl_lines="8 11 12 15 16 20 21 22 23"
-    #!/usr/bin/env nextflow
+/*
+ * Okumaları bir referans genoma hizala
+ */
+process HISAT2_ALIGN {
 
-    /*
-     * Okumaları bir referans genoma hizala
-     */
-    process HISAT2_ALIGN {
+    container "community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e"
 
-        container "community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e"
+    input:
+    path reads
+    path index_zip
 
-        input:
-        path reads
-        path index_zip
+    output:
+    path "${reads.simpleName}.bam", emit: bam
+    path "${reads.simpleName}.hisat2.log", emit: log
 
-        output:
-        path "${reads.simpleName}.bam", emit: bam
-        path "${reads.simpleName}.hisat2.log", emit: log
+    script:
+    """
+    tar -xzvf ${index_zip}
+    hisat2 -x ${index_zip.simpleName} -U ${reads} \
+        --new-summary --summary-file ${reads.simpleName}.hisat2.log | \
+        samtools view -bS -o ${reads.simpleName}.bam
+    """
+}
+```
 
-        script:
-        """
-        tar -xzvf ${index_zip}
-        hisat2 -x ${index_zip.simpleName} -U ${reads} \
-            --new-summary --summary-file ${reads.simpleName}.hisat2.log | \
-            samtools view -bS -o ${reads.simpleName}.bam
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 Bu süreç iki girdi alır: okumalar ve genom dizin arşivi.
 Betik bloğu önce dizini arşivden çıkarır, ardından çıktıyı BAM formatına dönüştürmek için `samtools view`'a yönlendirilen HISAT2 hizalamasını çalıştırır.
@@ -950,64 +946,64 @@ Betik bloğu önce dizini arşivden çıkarır, ardından çıktıyı BAM format
 
 Yeni modülü içe aktarmak için `rnaseq.nf` dosyasını güncelleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="3" hl_lines="4"
-    // Modül INCLUDE ifadeleri
-    include { FASTQC } from './modules/fastqc.nf'
-    include { TRIM_GALORE } from './modules/trim_galore.nf'
-    include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=3 step="Önce"
+// Modül INCLUDE ifadeleri
+include { FASTQC } from './modules/fastqc.nf'
+include { TRIM_GALORE } from './modules/trim_galore.nf'
+```
 
-=== "Önce"
+```nextflow {4} title="rnaseq.nf" showLineNumbers startLineNumber=3 step="Sonra"
+// Modül INCLUDE ifadeleri
+include { FASTQC } from './modules/fastqc.nf'
+include { TRIM_GALORE } from './modules/trim_galore.nf'
+include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
+```
 
-    ```groovy title="rnaseq.nf" linenums="3"
-    // Modül INCLUDE ifadeleri
-    include { FASTQC } from './modules/fastqc.nf'
-    include { TRIM_GALORE } from './modules/trim_galore.nf'
-    ```
+</CodeWalkthrough>
 
 Ardından, iş akışına süreç çağrısını ekleyeceğiz.
 
 #### 3.2.3. Hizalama sürecini çağırın
 
 Kırpılmış okumalar, önceki adım tarafından çıktılanan `TRIM_GALORE.out.trimmed_reads` kanalındadır.
-Genom dizin arşivini sağlamak için `#!groovy file(params.hisat2_index_zip)` kullanıyoruz.
+Genom dizin arşivini sağlamak için `file(params.hisat2_index_zip){:nextflow}` kullanıyoruz.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="19" hl_lines="13-14"
-    workflow {
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=19 step="Önce"
+workflow {
 
-        main:
-        // Bir dosya yolundan girdi kanalı oluştur
-        read_ch = channel.fromPath(params.input)
+    main:
+    // Bir dosya yolundan girdi kanalı oluştur
+    read_ch = channel.fromPath(params.input)
 
-        // İlk kalite kontrolü
-        FASTQC(read_ch)
+    // İlk kalite kontrolü
+    FASTQC(read_ch)
 
-        // Adaptör kırpma ve kırpma sonrası kalite kontrolü
-        TRIM_GALORE(read_ch)
+    // Adaptör kırpma ve kırpma sonrası kalite kontrolü
+    TRIM_GALORE(read_ch)
+```
 
-        // Referans genoma hizalama
-        HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
-    ```
+```nextflow {13-14} title="rnaseq.nf" showLineNumbers startLineNumber=19 step="Sonra"
+workflow {
 
-=== "Önce"
+    main:
+    // Bir dosya yolundan girdi kanalı oluştur
+    read_ch = channel.fromPath(params.input)
 
-    ```groovy title="rnaseq.nf" linenums="19"
-    workflow {
+    // İlk kalite kontrolü
+    FASTQC(read_ch)
 
-        main:
-        // Bir dosya yolundan girdi kanalı oluştur
-        read_ch = channel.fromPath(params.input)
+    // Adaptör kırpma ve kırpma sonrası kalite kontrolü
+    TRIM_GALORE(read_ch)
 
-        // İlk kalite kontrolü
-        FASTQC(read_ch)
+    // Referans genoma hizalama
+    HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
+```
 
-        // Adaptör kırpma ve kırpma sonrası kalite kontrolü
-        TRIM_GALORE(read_ch)
-    ```
+</CodeWalkthrough>
 
 Hizalama süreci artık iş akışına bağlanmıştır.
 
@@ -1019,31 +1015,31 @@ Hizalama çıktılarını yayınlama bildirimine eklememiz ve nereye gidecekleri
 
 Hizalama çıktılarını `publish:` bölümüne ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="34" hl_lines="7-8"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-        trimmed_reads = TRIM_GALORE.out.trimmed_reads
-        trimming_reports = TRIM_GALORE.out.trimming_reports
-        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
-        bam = HISAT2_ALIGN.out.bam
-        align_log = HISAT2_ALIGN.out.log
-    }
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=34 step="Önce"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+    trimmed_reads = TRIM_GALORE.out.trimmed_reads
+    trimming_reports = TRIM_GALORE.out.trimming_reports
+    trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+}
+```
 
-=== "Önce"
+```nextflow {7-8} title="rnaseq.nf" showLineNumbers startLineNumber=34 step="Sonra"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+    trimmed_reads = TRIM_GALORE.out.trimmed_reads
+    trimming_reports = TRIM_GALORE.out.trimming_reports
+    trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+    bam = HISAT2_ALIGN.out.bam
+    align_log = HISAT2_ALIGN.out.log
+}
+```
 
-    ```groovy title="rnaseq.nf" linenums="34"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-        trimmed_reads = TRIM_GALORE.out.trimmed_reads
-        trimming_reports = TRIM_GALORE.out.trimming_reports
-        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
-    }
-    ```
+</CodeWalkthrough>
 
 Ardından, Nextflow'a bu çıktıları nereye koyacağını söylememiz gerekecek.
 
@@ -1051,55 +1047,55 @@ Ardından, Nextflow'a bu çıktıları nereye koyacağını söylememiz gerekece
 
 `output {}` bloğunda hizalama hedefleri için girdiler ekleyin ve bunları bir `align/` alt dizinine yayınlayın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="44" hl_lines="17-22"
-    output {
-        fastqc_zip {
-            path 'fastqc'
-        }
-        fastqc_html {
-            path 'fastqc'
-        }
-        trimmed_reads {
-            path 'trimming'
-        }
-        trimming_reports {
-            path 'trimming'
-        }
-        trimming_fastqc {
-            path 'trimming'
-        }
-        bam {
-            path 'align'
-        }
-        align_log {
-            path 'align'
-        }
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=44 step="Önce"
+output {
+    fastqc_zip {
+        path 'fastqc'
     }
-    ```
-
-=== "Önce"
-
-    ```groovy title="rnaseq.nf" linenums="44"
-    output {
-        fastqc_zip {
-            path 'fastqc'
-        }
-        fastqc_html {
-            path 'fastqc'
-        }
-        trimmed_reads {
-            path 'trimming'
-        }
-        trimming_reports {
-            path 'trimming'
-        }
-        trimming_fastqc {
-            path 'trimming'
-        }
+    fastqc_html {
+        path 'fastqc'
     }
-    ```
+    trimmed_reads {
+        path 'trimming'
+    }
+    trimming_reports {
+        path 'trimming'
+    }
+    trimming_fastqc {
+        path 'trimming'
+    }
+}
+```
+
+```nextflow {17-22} title="rnaseq.nf" showLineNumbers startLineNumber=44 step="Sonra"
+output {
+    fastqc_zip {
+        path 'fastqc'
+    }
+    fastqc_html {
+        path 'fastqc'
+    }
+    trimmed_reads {
+        path 'trimming'
+    }
+    trimming_reports {
+        path 'trimming'
+    }
+    trimming_fastqc {
+        path 'trimming'
+    }
+    bam {
+        path 'align'
+    }
+    align_log {
+        path 'align'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 Çıktı yapılandırması tamamlandı.
 
@@ -1109,45 +1105,41 @@ Ardından, Nextflow'a bu çıktıları nereye koyacağını söylememiz gerekece
 
 ```bash
 nextflow run rnaseq.nf -profile test
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `rnaseq.nf` [nauseous_allen] revision: 45d77a9709
+
+executor >  local (3)
+[57/b3c2cb] FASTQC (1)       | 1 of 1 ✔
+[98/451aef] TRIM_GALORE (1)  | 1 of 1 ✔
+[78/7cf2c3] HISAT2_ALIGN (1) | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/rnaseq/results
+
+  fastqc_zip:
+    - fastqc/ENCSR000COQ1_1_fastqc.zip
+
+  fastqc_html:
+    - fastqc/ENCSR000COQ1_1_fastqc.html
+
+  trimmed_reads:
+    - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+
+  trimming_reports:
+    - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+
+  trimming_fastqc:
+    - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
+
+  bam:
+    - align/ENCSR000COQ1_1_trimmed.bam
+
+  align_log:
+    - align/ENCSR000COQ1_1_trimmed.hisat2.log
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `rnaseq.nf` [nauseous_allen] revision: 45d77a9709
-
-    executor >  local (3)
-    [57/b3c2cb] FASTQC (1)       | 1 of 1 ✔
-    [98/451aef] TRIM_GALORE (1)  | 1 of 1 ✔
-    [78/7cf2c3] HISAT2_ALIGN (1) | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/rnaseq/results
-
-      fastqc_zip:
-        - fastqc/ENCSR000COQ1_1_fastqc.zip
-
-      fastqc_html:
-        - fastqc/ENCSR000COQ1_1_fastqc.html
-
-      trimmed_reads:
-        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
-
-      trimming_reports:
-        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
-
-      trimming_fastqc:
-        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
-
-      bam:
-        - align/ENCSR000COQ1_1_trimmed.bam
-
-      align_log:
-        - align/ENCSR000COQ1_1_trimmed.hisat2.log
-    ```
 
 Hizalama çıktılarını sonuçlar dizininde bulabilirsiniz.
 
@@ -1173,4 +1165,4 @@ Tek uçlu RNAseq örneklerini ayrı ayrı işlemek için tüm temel adımları n
 
 Bir mola verin! Bu çok şeydi.
 
-Kendinizi tazelenmiş hissettiğinizde, [Bölüm 3](./03_multi-sample.md)'e geçin; burada iş akışını birden fazla örneği paralel olarak işleyecek şekilde nasıl değiştireceğinizi, tüm örnekler için tüm adımlarda kalite kontrol raporlarını nasıl toplayacağınızı ve iş akışının çift uçlu RNAseq verileri üzerinde çalışmasını nasıl etkinleştireceğinizi öğreneceksiniz.
+Kendinizi tazelenmiş hissettiğinizde, [Bölüm 3](./03_multi-sample.mdx)'e geçin; burada iş akışını birden fazla örneği paralel olarak işleyecek şekilde nasıl değiştireceğinizi, tüm örnekler için tüm adımlarda kalite kontrol raporlarını nasıl toplayacağınızı ve iş akışının çift uçlu RNAseq verileri üzerinde çalışmasını nasıl etkinleştireceğinizi öğreneceksiniz.

@@ -1,6 +1,9 @@
-# 워크플로우 문제 해결
+---
+title: 워크플로우 문제 해결
+description: 디버깅은 수많은 시간을 절약하고 더 효과적인 Nextflow 개발자가 될 수 있도록 도와주는 핵심 기술입니다.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 디버깅은 수많은 시간을 절약하고 더 효과적인 Nextflow 개발자가 될 수 있도록 도와주는 핵심 기술입니다. 특히 처음 시작할 때, 워크플로우를 구축하고 유지 관리하는 과정에서 버그를 만나게 됩니다. 체계적인 디버깅 방법을 익히면 문제를 빠르게 파악하고 해결할 수 있습니다.
 
@@ -20,10 +23,10 @@
 
 이 사이드 퀘스트를 시작하기 전에 다음을 준비하세요:
 
-- [Hello Nextflow](../../hello_nextflow/index.md) 튜토리얼 또는 동급의 입문 과정을 완료해야 합니다.
+- [Hello Nextflow](../../hello_nextflow/index.mdx) 튜토리얼 또는 동급의 입문 과정을 완료해야 합니다.
 - 기본적인 Nextflow 개념과 메커니즘(프로세스, 채널, 연산자)을 편안하게 사용할 수 있어야 합니다.
 
-**선택 사항:** 먼저 [Nextflow 개발을 위한 IDE 기능](../dev_environment/index.md) 사이드 퀘스트를 완료하는 것을 권장합니다.
+**선택 사항:** 먼저 [Nextflow 개발을 위한 IDE 기능](../dev_environment/index.mdx) 사이드 퀘스트를 완료하는 것을 권장합니다.
 해당 과정에서는 디버깅을 지원하는 IDE 기능(구문 강조, 오류 감지 등)을 포괄적으로 다루며, 여기서도 많이 활용합니다.
 
 ---
@@ -32,7 +35,7 @@
 
 #### 교육 codespace 열기
 
-아직 열지 않았다면, [환경 설정](../../envsetup/index.md)에 설명된 대로 교육 환경을 열어 주세요.
+아직 열지 않았다면, [환경 설정](../../envsetup/index.mdx)에 설명된 대로 교육 환경을 열어 주세요.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -54,34 +57,37 @@ code .
 
 다양한 유형의 버그가 포함된 예제 워크플로우 파일들을 확인할 수 있습니다. 이 파일들을 실습에 활용합니다:
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console
-    .
-    ├── bad_bash_var.nf
-    ├── bad_channel_shape.nf
-    ├── bad_channel_shape_viewed_debug.nf
-    ├── bad_channel_shape_viewed.nf
-    ├── bad_number_inputs.nf
-    ├── badpractice_syntax.nf
-    ├── bad_resources.nf
-    ├── bad_syntax.nf
-    ├── buggy_workflow.nf
-    ├── data
-    │   ├── sample_001.fastq.gz
-    │   ├── sample_002.fastq.gz
-    │   ├── sample_003.fastq.gz
-    │   ├── sample_004.fastq.gz
-    │   ├── sample_005.fastq.gz
-    │   └── sample_data.csv
-    ├── exhausted.nf
-    ├── invalid_process.nf
-    ├── missing_output.nf
-    ├── missing_software.nf
-    ├── missing_software_with_stub.nf
-    ├── nextflow.config
-    └── no_such_var.nf
-    ```
+```console
+.
+├── bad_bash_var.nf
+├── bad_channel_shape.nf
+├── bad_channel_shape_viewed_debug.nf
+├── bad_channel_shape_viewed.nf
+├── bad_number_inputs.nf
+├── badpractice_syntax.nf
+├── bad_resources.nf
+├── bad_syntax.nf
+├── buggy_workflow.nf
+├── data
+│   ├── sample_001.fastq.gz
+│   ├── sample_002.fastq.gz
+│   ├── sample_003.fastq.gz
+│   ├── sample_004.fastq.gz
+│   ├── sample_005.fastq.gz
+│   └── sample_data.csv
+├── exhausted.nf
+├── invalid_process.nf
+├── missing_output.nf
+├── missing_software.nf
+├── missing_software_with_stub.nf
+├── nextflow.config
+└── no_such_var.nf
+```
+
+</details>
 
 이 파일들은 실제 개발 환경에서 자주 마주치는 디버깅 시나리오를 나타냅니다.
 
@@ -127,21 +133,17 @@ code .
 
 ```bash
 nextflow run bad_syntax.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_syntax.nf` [nice_kalam] revision: 550b9a8873
+
+Error bad_syntax.nf:24:1: Unexpected input: '<EOF>'
+# [!output stderr]
+ERROR ~ Script compilation failed
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_syntax.nf` [nice_kalam] revision: 550b9a8873
-
-    Error bad_syntax.nf:24:1: Unexpected input: '<EOF>'
-
-    ERROR ~ Script compilation failed
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 **구문 오류 메시지의 핵심 요소:**
 
@@ -153,7 +155,7 @@ nextflow run bad_syntax.nf
 
 이제 `bad_syntax.nf`를 살펴보고 오류의 원인을 파악합니다:
 
-```groovy title="bad_syntax.nf" hl_lines="14" linenums="1"
+```nextflow {14} title="bad_syntax.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -181,7 +183,7 @@ workflow {
 
 이 예제에서는 오류 위치를 표시하는 주석을 남겨두었습니다. Nextflow VSCode 확장 프로그램도 불일치하는 중괄호를 빨간색으로 표시하고 파일의 조기 종료를 강조하여 힌트를 제공합니다:
 
-![잘못된 구문](../img/bad_syntax.png)
+![잘못된 구문](../../../side_quests/img/bad_syntax.png)
 
 **중괄호 오류 디버깅 전략:**
 
@@ -193,61 +195,61 @@ workflow {
 
 주석을 누락된 닫는 중괄호로 교체합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="bad_syntax.nf" hl_lines="14" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow {14} title="bad_syntax.nf" showLineNumbers step="전"
+#!/usr/bin/env nextflow
 
-    process PROCESS_FILES {
-        input:
-        val sample_name
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-        output:
-        path "${sample_name}_output.txt"
+    output:
+    path "${sample_name}_output.txt"
 
-        script:
-        """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt
-        """
-    }  // 누락된 닫는 중괄호 추가
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+// process의 닫는 중괄호 누락
 
-    workflow {
+workflow {
 
-        // 입력 채널 생성
-        input_ch = channel.of('sample1', 'sample2', 'sample3')
+    // 입력 채널 생성
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // 입력 채널로 프로세스 실행
-        PROCESS_FILES(input_ch)
-    }
-    ```
+    // 입력 채널로 프로세스 실행
+    PROCESS_FILES(input_ch)
+}
+```
 
-=== "전"
+```nextflow {14} title="bad_syntax.nf" showLineNumbers step="후"
+#!/usr/bin/env nextflow
 
-    ```groovy title="bad_syntax.nf" hl_lines="14" linenums="1"
-    #!/usr/bin/env nextflow
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-    process PROCESS_FILES {
-        input:
-        val sample_name
+    output:
+    path "${sample_name}_output.txt"
 
-        output:
-        path "${sample_name}_output.txt"
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}  // 누락된 닫는 중괄호 추가
 
-        script:
-        """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt
-        """
-    // process의 닫는 중괄호 누락
+workflow {
 
-    workflow {
+    // 입력 채널 생성
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // 입력 채널 생성
-        input_ch = channel.of('sample1', 'sample2', 'sample3')
+    // 입력 채널로 프로세스 실행
+    PROCESS_FILES(input_ch)
+}
+```
 
-        // 입력 채널로 프로세스 실행
-        PROCESS_FILES(input_ch)
-    }
-    ```
+</CodeWalkthrough>
 
 #### 파이프라인 실행
 
@@ -255,18 +257,14 @@ workflow {
 
 ```bash
 nextflow run bad_syntax.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_syntax.nf` [small_morse] revision: 27352249e7
+
+executor >  local (3)
+[f5/dd6f46] PROCESS_FILES (1) | 3 of 3 ✔
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_syntax.nf` [small_morse] revision: 27352249e7
-
-    executor >  local (3)
-    [f5/dd6f46] PROCESS_FILES (1) | 3 of 3 ✔
-    ```
 
 ### 1.2. 잘못된 프로세스 키워드 또는 지시문 사용
 
@@ -276,33 +274,29 @@ nextflow run bad_syntax.nf
 
 ```bash
 nextflow run invalid_process.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `invalid_process.nf` [astonishing_pesquet] revision: f42559404a
+
+Error invalid_process.nf:3:1: Invalid process definition -- check for missing or out-of-order section labels
+│   3 | process PROCESS_FILES {
+│     | ^^^^^^^^^^^^^^^^^^^^^^^
+│   4 |     inputs:
+│   5 |     val sample_name
+│   6 |
+╰   7 |     output:
+# [!output stderr]
+ERROR ~ Script compilation failed
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `invalid_process.nf` [astonishing_pesquet] revision: f42559404a
-
-    Error invalid_process.nf:3:1: Invalid process definition -- check for missing or out-of-order section labels
-    │   3 | process PROCESS_FILES {
-    │     | ^^^^^^^^^^^^^^^^^^^^^^^
-    │   4 |     inputs:
-    │   5 |     val sample_name
-    │   6 |
-    ╰   7 |     output:
-
-    ERROR ~ Script compilation failed
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 #### 코드 확인
 
 오류 메시지는 "Invalid process definition"을 나타내며 문제 주변의 컨텍스트를 보여줍니다. 3~7번 줄을 보면 4번 줄에 `inputs:`가 있는 것이 문제입니다. `invalid_process.nf`를 살펴봅니다:
 
-```groovy title="invalid_process.nf" hl_lines="4" linenums="1"
+```nextflow {4} title="invalid_process.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -330,67 +324,67 @@ workflow {
 
 오류 컨텍스트의 4번 줄을 보면 문제를 발견할 수 있습니다: 올바른 `input` 지시문 대신 `inputs`를 사용하고 있습니다. Nextflow VSCode 확장 프로그램도 이를 표시합니다:
 
-![잘못된 프로세스 메시지](../img/invalid_process_message.png)
+![잘못된 프로세스 메시지](../../../side_quests/img/invalid_process_message.png)
 
 #### 코드 수정
 
 [문서](https://www.nextflow.io/docs/latest/process.html#)를 참조하여 잘못된 키워드를 올바른 것으로 교체합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="invalid_process.nf" hl_lines="4" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow {4} title="invalid_process.nf" showLineNumbers step="전"
+#!/usr/bin/env nextflow
 
-    process PROCESS_FILES {
-        input:  // 수정: 'inputs'를 'input'으로 변경
-        val sample_name
+process PROCESS_FILES {
+    inputs:  // 오류: 'inputs'가 아닌 'input'이어야 합니다
+    val sample_name
 
-        output:
-        path "${sample_name}_output.txt"
+    output:
+    path "${sample_name}_output.txt"
 
-        script:
-        """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt
-        """
-    }
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}
 
-    workflow {
+workflow {
 
-        // 입력 채널 생성
-        input_ch = channel.of('sample1', 'sample2', 'sample3')
+    // 입력 채널 생성
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // 입력 채널로 프로세스 실행
-        PROCESS_FILES(input_ch)
-    }
-    ```
+    // 입력 채널로 프로세스 실행
+    PROCESS_FILES(input_ch)
+}
+```
 
-=== "전"
+```nextflow {4} title="invalid_process.nf" showLineNumbers step="후"
+#!/usr/bin/env nextflow
 
-    ```groovy title="invalid_process.nf" hl_lines="4" linenums="1"
-    #!/usr/bin/env nextflow
+process PROCESS_FILES {
+    input:  // 수정: 'inputs'를 'input'으로 변경
+    val sample_name
 
-    process PROCESS_FILES {
-        inputs:  // 오류: 'inputs'가 아닌 'input'이어야 합니다
-        val sample_name
+    output:
+    path "${sample_name}_output.txt"
 
-        output:
-        path "${sample_name}_output.txt"
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}
 
-        script:
-        """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt
-        """
-    }
+workflow {
 
-    workflow {
+    // 입력 채널 생성
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // 입력 채널 생성
-        input_ch = channel.of('sample1', 'sample2', 'sample3')
+    // 입력 채널로 프로세스 실행
+    PROCESS_FILES(input_ch)
+}
+```
 
-        // 입력 채널로 프로세스 실행
-        PROCESS_FILES(input_ch)
-    }
-    ```
+</CodeWalkthrough>
 
 #### 파이프라인 실행
 
@@ -398,18 +392,14 @@ workflow {
 
 ```bash
 nextflow run invalid_process.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `invalid_process.nf` [confident_banach] revision: 74483e75bc
+
+executor >  local (3)
+[29/87d6b8] PROCESS_FILES (1) | 3 of 3 ✔
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `invalid_process.nf` [confident_banach] revision: 74483e75bc
-
-    executor >  local (3)
-    [29/87d6b8] PROCESS_FILES (1) | 3 of 3 ✔
-    ```
 
 ### 1.3. 잘못된 변수 이름 사용
 
@@ -419,23 +409,19 @@ script 블록에서 사용하는 변수 이름은 유효해야 하며, 입력에
 
 ```bash
 nextflow run no_such_var.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `no_such_var.nf` [spontaneous_pasteur] revision: 0c4d3bc28c
+
+Error no_such_var.nf:17:39: `undefined_var` is not defined
+│  17 |     echo "Using undefined variable: ${undefined_var}" >> ${output_pref
+╰     |                                       ^^^^^^^^^^^^^
+# [!output stderr]
+ERROR ~ Script compilation failed
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `no_such_var.nf` [spontaneous_pasteur] revision: 0c4d3bc28c
-
-    Error no_such_var.nf:17:39: `undefined_var` is not defined
-    │  17 |     echo "Using undefined variable: ${undefined_var}" >> ${output_pref
-    ╰     |                                       ^^^^^^^^^^^^^
-
-    ERROR ~ Script compilation failed
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 오류는 컴파일 시점에 감지되며, 17번 줄의 정의되지 않은 변수를 직접 가리키고 캐럿(^)으로 정확한 위치를 표시합니다.
 
@@ -443,7 +429,7 @@ nextflow run no_such_var.nf
 
 `no_such_var.nf`를 살펴봅니다:
 
-```groovy title="no_such_var.nf" hl_lines="17" linenums="1"
+```nextflow {17} title="no_such_var.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -470,68 +456,68 @@ workflow {
 }
 ```
 
-오류 메시지는 해당 변수가 script 템플릿에서 인식되지 않음을 나타냅니다. script 블록에서 `#!groovy ${undefined_var}`가 사용되고 있지만 다른 곳에서 정의되지 않은 것을 확인할 수 있습니다.
+오류 메시지는 해당 변수가 script 템플릿에서 인식되지 않음을 나타냅니다. script 블록에서 `${undefined_var}{:nextflow}`가 사용되고 있지만 다른 곳에서 정의되지 않은 것을 확인할 수 있습니다.
 
 #### 코드 수정
 
 'No such variable' 오류가 발생하면, 변수를 정의하거나(입력 변수 이름을 수정하거나 script 앞의 Groovy 코드를 편집하여), 필요하지 않다면 script 블록에서 제거하여 수정할 수 있습니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="no_such_var.nf" hl_lines="15-17" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow {17} title="no_such_var.nf" showLineNumbers step="전"
+#!/usr/bin/env nextflow
 
-    process PROCESS_FILES {
-        input:
-        val sample_name
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-        output:
-        path "${sample_name}_processed.txt"
+    output:
+    path "${sample_name}_processed.txt"
 
-        script:
-        // script 앞에 Groovy 코드로 변수 정의
-        def output_prefix = "${sample_name}_processed"
-        def timestamp = new Date().format("yyyy-MM-dd")
+    script:
+    // script 앞에 Groovy 코드로 변수 정의
+    def output_prefix = "${sample_name}_processed"
+    def timestamp = new Date().format("yyyy-MM-dd")
 
-        """
-        echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        """  // undefined_var가 있는 줄 제거
-    }
+    """
+    echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
+    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // 오류: undefined_var가 정의되지 않음
+    """
+}
 
-    workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')
-        PROCESS_FILES(input_ch)
-    }
-    ```
+workflow {
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
+    PROCESS_FILES(input_ch)
+}
+```
 
-=== "전"
+```nextflow {15-17} title="no_such_var.nf" showLineNumbers step="후"
+#!/usr/bin/env nextflow
 
-    ```groovy title="no_such_var.nf" hl_lines="17" linenums="1"
-    #!/usr/bin/env nextflow
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-    process PROCESS_FILES {
-        input:
-        val sample_name
+    output:
+    path "${sample_name}_processed.txt"
 
-        output:
-        path "${sample_name}_processed.txt"
+    script:
+    // script 앞에 Groovy 코드로 변수 정의
+    def output_prefix = "${sample_name}_processed"
+    def timestamp = new Date().format("yyyy-MM-dd")
 
-        script:
-        // script 앞에 Groovy 코드로 변수 정의
-        def output_prefix = "${sample_name}_processed"
-        def timestamp = new Date().format("yyyy-MM-dd")
+    """
+    echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
+    """  // undefined_var가 있는 줄 제거
+}
 
-        """
-        echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // 오류: undefined_var가 정의되지 않음
-        """
-    }
+workflow {
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
+    PROCESS_FILES(input_ch)
+}
+```
 
-    workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')
-        PROCESS_FILES(input_ch)
-    }
-    ```
+</CodeWalkthrough>
 
 #### 파이프라인 실행
 
@@ -539,18 +525,14 @@ workflow {
 
 ```bash
 nextflow run no_such_var.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `no_such_var.nf` [suspicious_venter] revision: 229f1da893
+
+executor >  local (3)
+[26/b4370c] PROCESS_FILES (3) | 3 of 3 ✔
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `no_such_var.nf` [suspicious_venter] revision: 229f1da893
-
-    executor >  local (3)
-    [26/b4370c] PROCESS_FILES (3) | 3 of 3 ✔
-    ```
 
 ### 1.4. Bash 변수의 잘못된 사용
 
@@ -560,29 +542,25 @@ Nextflow를 처음 시작할 때, Nextflow(Groovy) 변수와 Bash 변수의 차�
 
 ```bash
 nextflow run bad_bash_var.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_bash_var.nf` [hopeful_koch] revision: 0853c11080
+
+Error bad_bash_var.nf:13:42: `prefix` is not defined
+│  13 |     echo "Processing ${sample_name}" > ${prefix}.txt
+╰     |                                          ^^^^^^
+# [!output stderr]
+ERROR ~ Script compilation failed
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_bash_var.nf` [hopeful_koch] revision: 0853c11080
-
-    Error bad_bash_var.nf:13:42: `prefix` is not defined
-    │  13 |     echo "Processing ${sample_name}" > ${prefix}.txt
-    ╰     |                                          ^^^^^^
-
-    ERROR ~ Script compilation failed
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 #### 코드 확인
 
-오류는 `#!groovy ${prefix}`가 사용된 13번 줄을 가리킵니다. `bad_bash_var.nf`를 살펴보고 문제의 원인을 확인합니다:
+오류는 `${prefix}{:nextflow}`가 사용된 13번 줄을 가리킵니다. `bad_bash_var.nf`를 살펴보고 문제의 원인을 확인합니다:
 
-```groovy title="bad_bash_var.nf" hl_lines="13" linenums="1"
+```nextflow {13} title="bad_bash_var.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -600,56 +578,56 @@ process PROCESS_FILES {
 }
 ```
 
-이 예제에서는 Bash에서 `prefix` 변수를 정의하고 있지만, Nextflow 프로세스에서 참조에 사용한 `$` 구문(`#!groovy ${prefix}`)은 Bash가 아닌 Groovy 변수로 해석됩니다. 해당 변수가 Groovy 컨텍스트에 존재하지 않으므로 'no such variable' 오류가 발생합니다.
+이 예제에서는 Bash에서 `prefix` 변수를 정의하고 있지만, Nextflow 프로세스에서 참조에 사용한 `$` 구문(`${prefix}{:nextflow}`)은 Bash가 아닌 Groovy 변수로 해석됩니다. 해당 변수가 Groovy 컨텍스트에 존재하지 않으므로 'no such variable' 오류가 발생합니다.
 
 #### 코드 수정
 
 Bash 변수를 사용하려면 달러 기호를 다음과 같이 이스케이프해야 합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="bad_bash_var.nf" hl_lines="13" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow {13} title="bad_bash_var.nf" showLineNumbers step="전"
+#!/usr/bin/env nextflow
 
-    process PROCESS_FILES {
-        input:
-        val sample_name
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-        output:
-        path "${sample_name}_output.txt"
+    output:
+    path "${sample_name}_output.txt"
 
-        script:
-        """
-        prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > \${prefix}.txt  # 수정: 달러 기호 이스케이프
-        """
-    }
+    script:
+    """
+    prefix="${sample_name}_output"
+    echo "Processing ${sample_name}" > ${prefix}.txt  # 오류: ${prefix}는 Bash가 아닌 Groovy 구문
+    """
+}
+```
 
-    workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')
-        PROCESS_FILES(input_ch)
-    }
-    ```
+```nextflow {13} title="bad_bash_var.nf" showLineNumbers step="후"
+#!/usr/bin/env nextflow
 
-=== "전"
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-    ```groovy title="bad_bash_var.nf" hl_lines="13" linenums="1"
-    #!/usr/bin/env nextflow
+    output:
+    path "${sample_name}_output.txt"
 
-    process PROCESS_FILES {
-        input:
-        val sample_name
+    script:
+    """
+    prefix="${sample_name}_output"
+    echo "Processing ${sample_name}" > \${prefix}.txt  # 수정: 달러 기호 이스케이프
+    """
+}
 
-        output:
-        path "${sample_name}_output.txt"
+workflow {
+    input_ch = channel.of('sample1', 'sample2', 'sample3')
+    PROCESS_FILES(input_ch)
+}
+```
 
-        script:
-        """
-        prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > ${prefix}.txt  # 오류: ${prefix}는 Bash가 아닌 Groovy 구문
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 이렇게 하면 Nextflow가 이를 Bash 변수로 해석합니다.
 
@@ -659,33 +637,29 @@ Bash 변수를 사용하려면 달러 기호를 다음과 같이 이스케이프
 
 ```bash
 nextflow run bad_bash_var.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_bash_var.nf` [naughty_franklin] revision: 9c672c6a1b
+
+executor >  local (3)
+[cf/19a490] PROCESS_FILES (3) | 3 of 3 ✔
 ```
 
-??? success "명령 출력"
+:::tip[Groovy 변수 vs Bash 변수]
+문자열 연결이나 접두사/접미사 작업과 같은 간단한 변수 조작의 경우, script 블록의 Bash 변수보다 script 섹션의 Groovy 변수를 사용하는 것이 일반적으로 더 가독성이 좋습니다:
 
-    ```console
-     N E X T F L O W   ~  version 26.04.4
+```nextflow showLineNumbers
+script:
+def output_prefix = "${sample_name}_processed"
+def output_file = "${output_prefix}.txt"
+"""
+echo "Processing ${sample_name}" > ${output_file}
+"""
+```
 
-    Launching `bad_bash_var.nf` [naughty_franklin] revision: 9c672c6a1b
-
-    executor >  local (3)
-    [cf/19a490] PROCESS_FILES (3) | 3 of 3 ✔
-    ```
-
-!!! tip "Groovy 변수 vs Bash 변수"
-
-    문자열 연결이나 접두사/접미사 작업과 같은 간단한 변수 조작의 경우, script 블록의 Bash 변수보다 script 섹션의 Groovy 변수를 사용하는 것이 일반적으로 더 가독성이 좋습니다:
-
-    ```groovy linenums="1"
-    script:
-    def output_prefix = "${sample_name}_processed"
-    def output_file = "${output_prefix}.txt"
-    """
-    echo "Processing ${sample_name}" > ${output_file}
-    """
-    ```
-
-    이 방법은 달러 기호를 이스케이프할 필요가 없으며 코드를 더 읽기 쉽고 유지 관리하기 쉽게 만듭니다.
+이 방법은 달러 기호를 이스케이프할 필요가 없으며 코드를 더 읽기 쉽고 유지 관리하기 쉽게 만듭니다.
+:::
 
 ### 1.5. workflow 블록 외부의 구문
 
@@ -695,23 +669,19 @@ Nextflow VSCode 확장 프로그램은 오류를 유발하는 코드 구조 문�
 
 ```bash
 nextflow run badpractice_syntax.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `badpractice_syntax.nf` [fervent_miescher] revision: 5e4b291bde
+
+Error badpractice_syntax.nf:3:1: Statements cannot be mixed with script declarations -- move statements into a process, workflow, or function
+│   3 | input_ch = channel.of('sample1', 'sample2', 'sample3')
+╰     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# [!output stderr]
+ERROR ~ Script compilation failed
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `badpractice_syntax.nf` [fervent_miescher] revision: 5e4b291bde
-
-    Error badpractice_syntax.nf:3:1: Statements cannot be mixed with script declarations -- move statements into a process, workflow, or function
-    │   3 | input_ch = channel.of('sample1', 'sample2', 'sample3')
-    ╰     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-    ERROR ~ Script compilation failed
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 오류 메시지는 문제를 명확하게 나타냅니다: 구문(채널 정의 등)은 workflow 또는 process 블록 외부의 script 선언과 혼합될 수 없습니다.
 
@@ -719,7 +689,7 @@ nextflow run badpractice_syntax.nf
 
 `badpractice_syntax.nf`를 살펴보고 오류의 원인을 확인합니다:
 
-```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
+```nextflow {3} title="badpractice_syntax.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 input_ch = channel.of('sample1', 'sample2', 'sample3')  // 오류: workflow 외부에 채널 정의
@@ -748,68 +718,68 @@ workflow {
 
 VSCode 확장 프로그램도 `input_ch` 변수가 workflow 블록 외부에 정의되어 있음을 강조 표시합니다:
 
-![치명적이지 않은 구문 오류](../img/nonlethal.png)
+![치명적이지 않은 구문 오류](../../../side_quests/img/nonlethal.png)
 
 #### 코드 수정
 
 채널 정의를 workflow 블록 안으로 이동합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="badpractice_syntax.nf" hl_lines="21" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow {3} title="badpractice_syntax.nf" showLineNumbers step="전"
+#!/usr/bin/env nextflow
 
-    process PROCESS_FILES {
-        input:
-        val sample_name
+input_ch = channel.of('sample1', 'sample2', 'sample3')  // 오류: workflow 외부에 채널 정의
 
-        output:
-        path "${sample_name}_processed.txt"
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-        script:
-        // script 앞에 Groovy 코드로 변수 정의
-        def output_prefix = "${sample_name}_processed"
-        def timestamp = new Date().format("yyyy-MM-dd")
+    output:
+    path "${sample_name}_processed.txt"
 
-        """
-        echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        """
-    }
+    script:
+    // script 앞에 Groovy 코드로 변수 정의
+    def output_prefix = "${sample_name}_processed"
+    def timestamp = new Date().format("yyyy-MM-dd")
 
-    workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')  // workflow 블록 안으로 이동
-        PROCESS_FILES(input_ch)
-    }
-    ```
+    """
+    echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
+    """
+}
 
-=== "전"
+workflow {
+    PROCESS_FILES(input_ch)
+}
+```
 
-    ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow {21} title="badpractice_syntax.nf" showLineNumbers step="후"
+#!/usr/bin/env nextflow
 
-    input_ch = channel.of('sample1', 'sample2', 'sample3')  // 오류: workflow 외부에 채널 정의
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-    process PROCESS_FILES {
-        input:
-        val sample_name
+    output:
+    path "${sample_name}_processed.txt"
 
-        output:
-        path "${sample_name}_processed.txt"
+    script:
+    // script 앞에 Groovy 코드로 변수 정의
+    def output_prefix = "${sample_name}_processed"
+    def timestamp = new Date().format("yyyy-MM-dd")
 
-        script:
-        // script 앞에 Groovy 코드로 변수 정의
-        def output_prefix = "${sample_name}_processed"
-        def timestamp = new Date().format("yyyy-MM-dd")
+    """
+    echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
+    """
+}
 
-        """
-        echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        """
-    }
+workflow {
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  // workflow 블록 안으로 이동
+    PROCESS_FILES(input_ch)
+}
+```
 
-    workflow {
-        PROCESS_FILES(input_ch)
-    }
-    ```
+</CodeWalkthrough>
 
 #### 파이프라인 실행
 
@@ -817,18 +787,14 @@ VSCode 확장 프로그램도 `input_ch` 변수가 workflow 블록 외부에 정
 
 ```bash
 nextflow run badpractice_syntax.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `badpractice_syntax.nf` [naughty_ochoa] revision: 92d029754c
+
+executor >  local (3)
+[f0/350ff4] PROCESS_FILES (2) | 3 of 3 ✔
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `badpractice_syntax.nf` [naughty_ochoa] revision: 92d029754c
-
-    executor >  local (3)
-    [f0/350ff4] PROCESS_FILES (2) | 3 of 3 ✔
-    ```
 
 입력 채널은 workflow 블록 안에 정의하고, 일반적으로 확장 프로그램이 제안하는 다른 권장 사항도 따르세요.
 
@@ -846,13 +812,13 @@ Nextflow 오류 메시지와 IDE 시각적 표시기를 사용하여 구문 오�
 
 채널 구조 오류는 구문 오류보다 더 미묘합니다. 코드는 구문적으로 올바르지만, 데이터 형태가 프로세스가 기대하는 것과 일치하지 않기 때문입니다. Nextflow는 파이프라인 실행을 시도하지만, 입력 수가 기대와 다르면 실패할 수 있습니다. 이러한 오류는 일반적으로 런타임에만 나타나며, 워크플로우를 통해 흐르는 데이터에 대한 이해가 필요합니다.
 
-!!! tip "`.view()`를 사용한 채널 디버깅"
+:::tip[`.view()`를 사용한 채널 디버깅]
+이 섹션 전반에 걸쳐, 워크플로우의 어느 지점에서든 `.view()` 연산자를 사용하여 채널 내용을 검사할 수 있다는 점을 기억하세요. 이는 채널 구조 문제를 이해하는 데 가장 강력한 디버깅 도구 중 하나입니다. 2.4 섹션에서 이 기법을 자세히 살펴보겠지만, 예제를 진행하면서 자유롭게 사용해 보세요.
 
-    이 섹션 전반에 걸쳐, 워크플로우의 어느 지점에서든 `.view()` 연산자를 사용하여 채널 내용을 검사할 수 있다는 점을 기억하세요. 이는 채널 구조 문제를 이해하는 데 가장 강력한 디버깅 도구 중 하나입니다. 2.4 섹션에서 이 기법을 자세히 살펴보겠지만, 예제를 진행하면서 자유롭게 사용해 보세요.
-
-    ```groovy
-    my_channel.view()  // 채널을 통해 흐르는 내용을 표시
-    ```
+```nextflow
+my_channel.view()  // 채널을 통해 흐르는 내용을 표시
+```
+:::
 
 ### 2.1. 잘못된 입력 채널 수
 
@@ -862,29 +828,25 @@ Nextflow 오류 메시지와 IDE 시각적 표시기를 사용하여 구문 오�
 
 ```bash
 nextflow run bad_number_inputs.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_number_inputs.nf` [desperate_carson] revision: d83e58dcd3
+
+Error bad_number_inputs.nf:23:5: Incorrect number of call arguments, expected 1 but received 2
+│  23 |     PROCESS_FILES(samples_ch, files_ch)
+╰     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# [!output stderr]
+ERROR ~ Script compilation failed
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_number_inputs.nf` [desperate_carson] revision: d83e58dcd3
-
-    Error bad_number_inputs.nf:23:5: Incorrect number of call arguments, expected 1 but received 2
-    │  23 |     PROCESS_FILES(samples_ch, files_ch)
-    ╰     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-    ERROR ~ Script compilation failed
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 #### 코드 확인
 
 오류 메시지는 호출이 인자 1개를 기대했지만 2개를 받았다고 명확히 나타내며, 23번 줄을 가리킵니다. `bad_number_inputs.nf`를 살펴봅니다:
 
-```groovy title="bad_number_inputs.nf" hl_lines="5 23" linenums="1"
+```nextflow {5,23} title="bad_number_inputs.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -913,86 +875,82 @@ workflow {
 
 프로세스가 하나의 입력 채널만 정의하는데 여러 입력 채널을 제공하는 `PROCESS_FILES` 호출의 불일치를 확인할 수 있습니다. VSCode 확장 프로그램도 프로세스 호출에 빨간 밑줄을 표시하고, 마우스를 올리면 진단 메시지를 제공합니다:
 
-![잘못된 인자 수 메시지](../img/incorrect_num_args.png)
+![잘못된 인자 수 메시지](../../../side_quests/img/incorrect_num_args.png)
 
 #### 코드 수정
 
 이 특정 예제에서 프로세스는 단일 채널을 기대하며 두 번째 채널이 필요하지 않으므로, `samples_ch` 채널만 전달하여 수정할 수 있습니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="bad_number_inputs.nf" hl_lines="23" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow {5,23} title="bad_number_inputs.nf" showLineNumbers step="전"
+#!/usr/bin/env nextflow
 
-    process PROCESS_FILES {
-        input:
-            val sample_name  // 프로세스는 입력 1개만 기대
+process PROCESS_FILES {
+    input:
+        val sample_name  // 프로세스는 입력 1개만 기대
 
-        output:
-            path "${sample_name}_output.txt"
+    output:
+        path "${sample_name}_output.txt"
 
-        script:
-        """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt
-        """
-    }
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}
 
-    workflow {
+workflow {
 
-        // 두 개의 별도 채널 생성
-        samples_ch = channel.of('sample1', 'sample2', 'sample3')
-        files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
+    // 두 개의 별도 채널 생성
+    samples_ch = channel.of('sample1', 'sample2', 'sample3')
+    files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // 수정: 프로세스가 기대하는 채널만 전달
-        PROCESS_FILES(samples_ch)
-    }
-    ```
+    // 오류: 채널 2개를 전달하지만 프로세스는 1개만 기대
+    PROCESS_FILES(samples_ch, files_ch)
+}
+```
 
-=== "전"
+```nextflow {23} title="bad_number_inputs.nf" showLineNumbers step="후"
+#!/usr/bin/env nextflow
 
-    ```groovy title="bad_number_inputs.nf" hl_lines="5 23" linenums="1"
-    #!/usr/bin/env nextflow
+process PROCESS_FILES {
+    input:
+        val sample_name  // 프로세스는 입력 1개만 기대
 
-    process PROCESS_FILES {
-        input:
-            val sample_name  // 프로세스는 입력 1개만 기대
+    output:
+        path "${sample_name}_output.txt"
 
-        output:
-            path "${sample_name}_output.txt"
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}
 
-        script:
-        """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt
-        """
-    }
+workflow {
 
-    workflow {
+    // 두 개의 별도 채널 생성
+    samples_ch = channel.of('sample1', 'sample2', 'sample3')
+    files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // 두 개의 별도 채널 생성
-        samples_ch = channel.of('sample1', 'sample2', 'sample3')
-        files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
+    // 수정: 프로세스가 기대하는 채널만 전달
+    PROCESS_FILES(samples_ch)
+}
+```
 
-        // 오류: 채널 2개를 전달하지만 프로세스는 1개만 기대
-        PROCESS_FILES(samples_ch, files_ch)
-    }
-    ```
+</CodeWalkthrough>
 
 #### 파이프라인 실행
 
 ```bash
 nextflow run bad_number_inputs.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_number_inputs.nf` [big_euler] revision: e302bd87be
+
+executor >  local (3)
+[47/1d039f] PROCESS_FILES (3) | 3 of 3 ✔
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_number_inputs.nf` [big_euler] revision: e302bd87be
-
-    executor >  local (3)
-    [47/1d039f] PROCESS_FILES (3) | 3 of 3 ✔
-    ```
 
 이 예제보다 더 흔한 경우는, 프로세스에 추가 입력을 추가하고 workflow 호출을 그에 맞게 업데이트하는 것을 잊어버리는 것입니다. 다행히 이는 오류 메시지가 불일치를 명확하게 설명하므로 이해하고 수정하기 쉬운 오류 중 하나입니다.
 
@@ -1004,18 +962,14 @@ nextflow run bad_number_inputs.nf
 
 ```bash
 nextflow run exhausted.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `exhausted.nf` [romantic_liskov] revision: 31a6ae1494
+
+executor >  local (1)
+[10/82e235] PROCESS_FILES (1) | 1 of 1 ✔
 ```
-
-??? success "명령 출력"
-
-    ```console title="Exhausted channel output"
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `exhausted.nf` [romantic_liskov] revision: 31a6ae1494
-
-    executor >  local (1)
-    [10/82e235] PROCESS_FILES (1) | 1 of 1 ✔
-    ```
 
 이 워크플로우는 오류 없이 완료되지만, 단 하나의 샘플만 처리합니다!
 
@@ -1023,7 +977,7 @@ nextflow run exhausted.nf
 
 `exhausted.nf`를 살펴보고 이것이 맞는지 확인합니다:
 
-```groovy title="exhausted.nf" hl_lines="23 24" linenums="1"
+```nextflow {23,24} title="exhausted.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -1065,7 +1019,7 @@ workflow {
 
 **1a** `channel.value()` 사용:
 
-```groovy title="exhausted.nf (fixed - Option 1a)" hl_lines="2" linenums="21"
+```nextflow {2} title="exhausted.nf (fixed - Option 1a)" showLineNumbers startLineNumber=21
 workflow {
     reference_ch = channel.value('baseline_reference')  // value 채널은 재사용 가능
     input_ch = channel.of('sample1', 'sample2', 'sample3')
@@ -1076,7 +1030,7 @@ workflow {
 
 **1b** `first()` [연산자](https://www.nextflow.io/docs/latest/reference/operator.html#first) 사용:
 
-```groovy title="exhausted.nf (fixed - Option 1b)" hl_lines="2" linenums="21"
+```nextflow {2} title="exhausted.nf (fixed - Option 1b)" showLineNumbers startLineNumber=21
 workflow {
     reference_ch = channel.of('baseline_reference').first()  // value 채널로 변환
     input_ch = channel.of('sample1', 'sample2', 'sample3')
@@ -1088,7 +1042,7 @@ workflow {
 **1c.** `collect()` [연산자](https://www.nextflow.io/docs/latest/reference/operator.html#collect) 사용.
 `collect()`는 리스트를 내보내므로, `map`을 사용하여 단일 항목을 추출합니다:
 
-```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
+```nextflow {2} title="exhausted.nf (fixed - Option 1c)" showLineNumbers startLineNumber=21
 workflow {
     reference_ch = channel.of('baseline_reference').collect().map { refs -> refs[0] }  // value 채널로 변환
     input_ch = channel.of('sample1', 'sample2', 'sample3')
@@ -1099,7 +1053,7 @@ workflow {
 
 **옵션 2**: 샘플 채널의 모든 샘플에 대해 여러 레퍼런스 파일이 있는 더 복잡한 시나리오에서는, `combine` 연산자를 사용하여 두 채널을 튜플로 결합한 새 채널을 만들 수 있습니다:
 
-```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="4" linenums="21"
+```nextflow {4} title="exhausted.nf (fixed - Option 2)" showLineNumbers startLineNumber=21
 workflow {
     reference_ch = channel.of('baseline_reference','other_reference')
     input_ch = channel.of('sample1', 'sample2', 'sample3')
@@ -1113,7 +1067,7 @@ workflow {
 
 이 방법은 프로세스 입력을 조정해야 합니다. 예제에서 프로세스 정의의 시작 부분을 다음과 같이 수정해야 합니다:
 
-```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="5" linenums="1"
+```nextflow {5} title="exhausted.nf (fixed - Option 2)" showLineNumbers
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -1129,18 +1083,14 @@ process PROCESS_FILES {
 
 ```bash
 nextflow run exhausted.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `exhausted.nf` [maniac_leavitt] revision: 74571a002a
+
+executor >  local (3)
+[d9/886888] PROCESS_FILES (2) | 3 of 3 ✔
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `exhausted.nf` [maniac_leavitt] revision: 74571a002a
-
-    executor >  local (3)
-    [d9/886888] PROCESS_FILES (2) | 3 of 3 ✔
-    ```
 
 이제 하나가 아닌 세 개의 샘플이 모두 처리되는 것을 확인할 수 있습니다.
 
@@ -1152,46 +1102,43 @@ nextflow run exhausted.nf
 
 ```bash
 nextflow run bad_channel_shape.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_channel_shape.nf` [disturbed_hilbert] revision: 3046f86036
+
+executor >  local (3)
+[13/2d7cf7] PROCESS_FILES (2) | 0 of 3 ✘
+# [!output stderr]
+ERROR ~ Error executing process > 'PROCESS_FILES (1)'
+
+Caused by:
+  Missing output file(s) `[sample1, file1.txt]_output.txt` expected by process `PROCESS_FILES (1)`
+
+
+Command executed:
+
+  echo "Processing [sample1, file1.txt]" > [sample1, file1.txt]_output.txt
+
+Command exit status:
+  0
+
+Command output:
+  (empty)
+
+Work dir:
+  /workspaces/training/side-quests/debugging/work/fc/20d7bd091eb9f7f63b76ab3a802cac
+
+Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+-- Check '.nextflow.log' file for details
 ```
-
-??? failure "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_channel_shape.nf` [disturbed_hilbert] revision: 3046f86036
-
-    executor >  local (3)
-    [13/2d7cf7] PROCESS_FILES (2) | 0 of 3 ✘
-    ERROR ~ Error executing process > 'PROCESS_FILES (1)'
-
-    Caused by:
-      Missing output file(s) `[sample1, file1.txt]_output.txt` expected by process `PROCESS_FILES (1)`
-
-
-    Command executed:
-
-      echo "Processing [sample1, file1.txt]" > [sample1, file1.txt]_output.txt
-
-    Command exit status:
-      0
-
-    Command output:
-      (empty)
-
-    Work dir:
-      /workspaces/training/side-quests/debugging/work/fc/20d7bd091eb9f7f63b76ab3a802cac
-
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-
-    -- Check '.nextflow.log' file for details
-    ```
 
 #### 코드 확인
 
 오류 메시지의 대괄호가 단서를 제공합니다. 프로세스가 튜플을 단일 값으로 처리하고 있는데, 이는 우리가 원하는 것이 아닙니다. `bad_channel_shape.nf`를 살펴봅니다:
 
-```groovy title="bad_channel_shape.nf" hl_lines="5 20-22" linenums="1"
+```nextflow {5,20-22} title="bad_channel_shape.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -1228,99 +1175,107 @@ workflow {
 1. 프로세스에 맞게 데이터를 재구성
 2. 데이터에 맞게 프로세스를 변경
 
-=== "옵션 1: 첫 번째 요소 추출"
+<Tabs>
 
-    === "후"
+<TabItem label="옵션 1: 첫 번째 요소 추출">
 
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
-        workflow {
+<CodeWalkthrough>
 
-            // 채널은 튜플을 내보내지만 프로세스는 단일 값을 기대
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch.map { sample_id, file -> sample_id })  // 수정: 첫 번째 요소 추출
-        }
-        ```
+```nextflow {9} title="bad_channel_shape.nf" showLineNumbers startLineNumber=16 step="전"
+workflow {
 
-    === "전"
+    // 채널은 튜플을 내보내지만 프로세스는 단일 값을 기대
+    input_ch = channel.of(
+      ['sample1', 'file1.txt'],
+      ['sample2', 'file2.txt'],
+      ['sample3', 'file3.txt']
+    )
+    PROCESS_FILES(input_ch)
+}
+```
 
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
-        workflow {
+```nextflow {9} title="bad_channel_shape.nf" showLineNumbers startLineNumber=16 step="후"
+workflow {
 
-            // 채널은 튜플을 내보내지만 프로세스는 단일 값을 기대
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch)
-        }
-        ```
+    // 채널은 튜플을 내보내지만 프로세스는 단일 값을 기대
+    input_ch = channel.of(
+      ['sample1', 'file1.txt'],
+      ['sample2', 'file2.txt'],
+      ['sample3', 'file3.txt']
+    )
+    PROCESS_FILES(input_ch.map { sample_id, file -> sample_id })  // 수정: 첫 번째 요소 추출
+}
+```
 
-=== "옵션 2: 프로세스에서 튜플 받기"
+</CodeWalkthrough>
 
-    === "후"
+</TabItem>
 
-        ```groovy title="bad_channel_shape.nf" hl_lines="5"  linenums="1"
-        #!/usr/bin/env nextflow
+<TabItem label="옵션 2: 프로세스에서 튜플 받기">
 
-        process PROCESS_FILES {
-            input:
-                tuple val(sample_name), val(file_name)  // 수정: 튜플 받기
+<CodeWalkthrough>
 
-            output:
-                path "${sample_name}_output.txt"
+```nextflow {5} title="bad_channel_shape.nf" showLineNumbers step="전"
+#!/usr/bin/env nextflow
 
-            script:
-            """
-            echo "Processing ${sample_name}" > ${sample_name}_output.txt
-            """
-        }
+process PROCESS_FILES {
+    input:
+        val sample_name  // 단일 값을 기대하지만 튜플을 받음
 
-        workflow {
+    output:
+        path "${sample_name}_output.txt"
 
-            // 채널은 튜플을 내보내지만 프로세스는 단일 값을 기대
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch)
-        }
-        ```
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}
 
-    === "전"
+workflow {
 
-        ```groovy title="bad_channel_shape.nf" hl_lines="5" linenums="1"
-        #!/usr/bin/env nextflow
+    // 채널은 튜플을 내보내지만 프로세스는 단일 값을 기대
+    input_ch = channel.of(
+      ['sample1', 'file1.txt'],
+      ['sample2', 'file2.txt'],
+      ['sample3', 'file3.txt']
+    )
+    PROCESS_FILES(input_ch)
+}
+```
 
-        process PROCESS_FILES {
-            input:
-                val sample_name  // 단일 값을 기대하지만 튜플을 받음
+```nextflow {5} title="bad_channel_shape.nf" showLineNumbers step="후"
+#!/usr/bin/env nextflow
 
-            output:
-                path "${sample_name}_output.txt"
+process PROCESS_FILES {
+    input:
+        tuple val(sample_name), val(file_name)  // 수정: 튜플 받기
 
-            script:
-            """
-            echo "Processing ${sample_name}" > ${sample_name}_output.txt
-            """
-        }
+    output:
+        path "${sample_name}_output.txt"
 
-        workflow {
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}
 
-            // 채널은 튜플을 내보내지만 프로세스는 단일 값을 기대
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch)
-        }
-        ```
+workflow {
+
+    // 채널은 튜플을 내보내지만 프로세스는 단일 값을 기대
+    input_ch = channel.of(
+      ['sample1', 'file1.txt'],
+      ['sample2', 'file2.txt'],
+      ['sample3', 'file3.txt']
+    )
+    PROCESS_FILES(input_ch)
+}
+```
+
+</CodeWalkthrough>
+
+</TabItem>
+
+</Tabs>
 
 #### 파이프라인 실행
 
@@ -1328,18 +1283,14 @@ workflow {
 
 ```bash
 nextflow run bad_channel_shape.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_channel_shape.nf` [clever_thompson] revision: 9b60aec7be
+
+executor >  local (3)
+[81/d0f3ea] PROCESS_FILES (1) | 3 of 3 ✔
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_channel_shape.nf` [clever_thompson] revision: 9b60aec7be
-
-    executor >  local (3)
-    [81/d0f3ea] PROCESS_FILES (1) | 3 of 3 ✔
-    ```
 
 #### 더 나아가기: 레코드 타입
 
@@ -1351,15 +1302,15 @@ nextflow run bad_channel_shape.nf
 레코드는 이름이 지정된 타입 필드를 정의하고, 프로세스는 허용하는 레코드 타입을 선언합니다.
 Nextflow는 각 값을 해당 선언과 대조하여 검사합니다.
 
-!!! note "레코드 타입은 새로운 기능입니다"
-
-    레코드 타입은 Nextflow 26.04에서 도입되었으며 `nextflow.enable.types` 플래그가 필요합니다.
-    26.04에서 Nextflow는 정적 타이핑이 미리 보기 기능임을 알리는 경고를 출력합니다.
-    향후 교육 과정에서 이를 자세히 다룰 예정입니다.
+:::note[레코드 타입은 새로운 기능입니다]
+레코드 타입은 Nextflow 26.04에서 도입되었으며 `nextflow.enable.types` 플래그가 필요합니다.
+26.04에서 Nextflow는 정적 타이핑이 미리 보기 기능임을 알리는 경고를 출력합니다.
+향후 교육 과정에서 이를 자세히 다룰 예정입니다.
+:::
 
 레코드를 사용하여 작성한 동일한 워크플로우는 다음과 같습니다:
 
-```groovy title="bad_channel_shape.nf" hl_lines="3 5-8 12 15 19 27-29" linenums="1"
+```nextflow {3,5-8,12,15,19,27-29} title="bad_channel_shape.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 nextflow.enable.types = true
@@ -1405,7 +1356,7 @@ workflow {
 레코드에 필드가 누락된 경우, Nextflow는 오류에서 해당 필드 이름을 알려줍니다.
 이를 확인하려면 두 번째 레코드에서 `id`를 제거합니다:
 
-```groovy title="bad_channel_shape.nf" hl_lines="3" linenums="26"
+```nextflow {3} title="bad_channel_shape.nf" showLineNumbers startLineNumber=26
     input_ch = channel.of(
       record(id: 'sample1', file_name: 'file1.txt'),
       record(file_name: 'file2.txt'),
@@ -1417,25 +1368,21 @@ workflow {
 
 ```bash
 nextflow run bad_channel_shape.nf
+# [!output]
+ N E X T F L O W   ~  version 26.10.0
+
+Launching `bad_channel_shape.nf` [condescending_sammet] revision: 15c9f9aa87
+# [!output stderr]
+ERROR ~ Error executing process > 'PROCESS_FILES (2)'
+
+Caused by:
+  [PROCESS_FILES (2)] input field `id` at index 0 cannot be null -- append `?` to the type annotation to mark it as nullable
+
+
+Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.10.0
-
-    Launching `bad_channel_shape.nf` [condescending_sammet] revision: 15c9f9aa87
-
-    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
-
-    Caused by:
-      [PROCESS_FILES (2)] input field `id` at index 0 cannot be null -- append `?` to the type annotation to mark it as nullable
-
-
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 이 오류는 Nextflow 26.10 이상이 필요합니다.
 Nextflow 26.04에서는 `id`가 `null`로 설정된 상태로 작업이 실행되며 `null_output.txt`가 생성됩니다.
@@ -1452,30 +1399,26 @@ Nextflow 26.04에서는 `id`가 `null`로 설정된 상태로 작업이 실행�
 
 ```bash
 nextflow run bad_channel_shape_viewed.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_channel_shape_viewed.nf` [sleepy_cajal] revision: 03e79cdbad
+
+executor >  local (3)
+[dc/6e5c24] PROCESS_FILES (2) | 3 of 3 ✔
+Channel content: [sample1, file1.txt]
+Channel content: [sample2, file2.txt]
+Channel content: [sample3, file3.txt]
+After mapping: sample1
+After mapping: sample2
+After mapping: sample3
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_channel_shape_viewed.nf` [sleepy_cajal] revision: 03e79cdbad
-
-    executor >  local (3)
-    [dc/6e5c24] PROCESS_FILES (2) | 3 of 3 ✔
-    Channel content: [sample1, file1.txt]
-    Channel content: [sample2, file2.txt]
-    Channel content: [sample3, file3.txt]
-    After mapping: sample1
-    After mapping: sample2
-    After mapping: sample3
-    ```
 
 #### 코드 확인
 
 `bad_channel_shape_viewed.nf`를 살펴보고 `.view()`가 어떻게 사용되는지 확인합니다:
 
-```groovy title="bad_channel_shape_viewed.nf" linenums="16" hl_lines="9 11"
+```nextflow {9,11} title="bad_channel_shape_viewed.nf" showLineNumbers startLineNumber=16
 workflow {
 
     // 채널은 튜플을 내보내지만 프로세스는 단일 값을 기대
@@ -1496,7 +1439,7 @@ workflow {
 
 앞으로 채널 내용을 이해하기 위해 `.view()` 연산을 과도하게 사용하지 않으려면, 도움이 되는 주석을 추가하는 것이 좋습니다:
 
-```groovy title="bad_channel_shape_viewed.nf (with comments)" linenums="16" hl_lines="8 9"
+```nextflow {8,9} title="bad_channel_shape_viewed.nf (with comments)" showLineNumbers startLineNumber=16
 workflow {
 
     // 채널은 튜플을 내보내지만 프로세스는 단일 값을 기대
@@ -1517,24 +1460,20 @@ workflow {
 
 ```bash
 nextflow run bad_channel_shape_viewed.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_channel_shape_viewed.nf` [marvelous_koch] revision: 03e79cdbad
+
+executor >  local (3)
+[dc/6e5c24] PROCESS_FILES (2) | 3 of 3 ✔
+Channel content: [sample1, file1.txt]
+Channel content: [sample2, file2.txt]
+Channel content: [sample3, file3.txt]
+After mapping: sample1
+After mapping: sample2
+After mapping: sample3
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_channel_shape_viewed.nf` [marvelous_koch] revision: 03e79cdbad
-
-    executor >  local (3)
-    [dc/6e5c24] PROCESS_FILES (2) | 3 of 3 ✔
-    Channel content: [sample1, file1.txt]
-    Channel content: [sample2, file2.txt]
-    Channel content: [sample3, file3.txt]
-    After mapping: sample1
-    After mapping: sample2
-    After mapping: sample3
-    ```
 
 ### 핵심 정리
 
@@ -1558,46 +1497,43 @@ nextflow run bad_channel_shape_viewed.nf
 
 ```bash
 nextflow run missing_output.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `missing_output.nf` [evil_gilbert] revision: 3d5117f7e2
+
+executor >  local (3)
+[45/146e39] PROCESS_FILES (1) | 0 of 3 ✘
+# [!output stderr]
+ERROR ~ Error executing process > 'PROCESS_FILES (3)'
+
+Caused by:
+  Missing output file(s) `sample3.txt` expected by process `PROCESS_FILES (3)`
+
+
+Command executed:
+
+  echo "Processing sample3" > sample3_output.txt
+
+Command exit status:
+  0
+
+Command output:
+  (empty)
+
+Work dir:
+  /workspaces/training/side-quests/debugging/work/2b/85afc51ff8d820df3b97b8a7154a30
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+
+-- Check '.nextflow.log' file for details
 ```
-
-??? failure "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `missing_output.nf` [evil_gilbert] revision: 3d5117f7e2
-
-    executor >  local (3)
-    [45/146e39] PROCESS_FILES (1) | 0 of 3 ✘
-    ERROR ~ Error executing process > 'PROCESS_FILES (3)'
-
-    Caused by:
-      Missing output file(s) `sample3.txt` expected by process `PROCESS_FILES (3)`
-
-
-    Command executed:
-
-      echo "Processing sample3" > sample3_output.txt
-
-    Command exit status:
-      0
-
-    Command output:
-      (empty)
-
-    Work dir:
-      /workspaces/training/side-quests/debugging/work/2b/85afc51ff8d820df3b97b8a7154a30
-
-    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
-
-    -- Check '.nextflow.log' file for details
-    ```
 
 #### 코드 확인
 
 오류 메시지는 프로세스가 `sample3.txt`라는 출력 파일을 생성할 것으로 기대했지만, 스크립트가 실제로 `sample3_output.txt`를 생성한다고 나타냅니다. `missing_output.nf`의 프로세스 정의를 살펴봅니다:
 
-```groovy title="missing_output.nf" linenums="3" hl_lines="6 10"
+```nextflow {6,10} title="missing_output.nf" showLineNumbers startLineNumber=3
 process PROCESS_FILES {
     input:
     val sample_name
@@ -1627,56 +1563,52 @@ sample3_output.txt
 
 출력 파일 이름을 일관되게 만들어 불일치를 수정합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="missing_output.nf" hl_lines="6 10" linenums="3"
-    process PROCESS_FILES {
-        input:
-        val sample_name
+```nextflow {6,10} title="missing_output.nf" showLineNumbers startLineNumber=3 step="전"
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-        output:
-        path "${sample_name}_output.txt"  // 수정: 스크립트 출력과 일치
+    output:
+    path "${sample_name}.txt"  // 기대: sample3.txt
 
-        script:
-        """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt
-        """
-    }
-    ```
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt  // 생성: sample3_output.txt
+    """
+}
+```
 
-=== "전"
+```nextflow {6,10} title="missing_output.nf" showLineNumbers startLineNumber=3 step="후"
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-    ```groovy title="missing_output.nf" hl_lines="6 10" linenums="3"
-    process PROCESS_FILES {
-        input:
-        val sample_name
+    output:
+    path "${sample_name}_output.txt"  // 수정: 스크립트 출력과 일치
 
-        output:
-        path "${sample_name}.txt"  // 기대: sample3.txt
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}
+```
 
-        script:
-        """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt  // 생성: sample3_output.txt
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 #### 파이프라인 실행
 
 ```bash
 nextflow run missing_output.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `missing_output.nf` [elated_hamilton] revision: d7ad486bce
+
+executor >  local (3)
+[70/6d4479] PROCESS_FILES (1) | 3 of 3 ✔
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `missing_output.nf` [elated_hamilton] revision: d7ad486bce
-
-    executor >  local (3)
-    [70/6d4479] PROCESS_FILES (1) | 3 of 3 ✔
-    ```
 
 ### 3.2. 소프트웨어 누락
 
@@ -1686,37 +1618,33 @@ nextflow run missing_output.nf
 
 ```bash
 nextflow run missing_software.nf
+# [!output stderr]
+ERROR ~ Error executing process > 'PROCESS_FILES (2)'
+
+Caused by:
+  Process `PROCESS_FILES (2)` terminated with an error exit status (127)
+
+
+Command executed:
+
+  cowpy sample2 > sample2_output.txt
+
+Command exit status:
+  127 # [!code highlight]
+
+Command output:
+  (empty)
+
+Command error:
+  .command.sh: line 2: cowpy: command not found # [!code highlight]
+
+Work dir:
+  /workspaces/training/side-quests/debugging/work/2f/bcf8fad6fd101c76950c92062ce299
+
+Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+-- Check '.nextflow.log' file for details
 ```
-
-??? failure "명령 출력"
-
-    ```console hl_lines="12 18"
-    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
-
-    Caused by:
-      Process `PROCESS_FILES (2)` terminated with an error exit status (127)
-
-
-    Command executed:
-
-      cowpy sample2 > sample2_output.txt
-
-    Command exit status:
-      127
-
-    Command output:
-      (empty)
-
-    Command error:
-      .command.sh: line 2: cowpy: command not found
-
-    Work dir:
-      /workspaces/training/side-quests/debugging/work/2f/bcf8fad6fd101c76950c92062ce299
-
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-
-    -- Check '.nextflow.log' file for details
-    ```
 
 프로세스가 지정한 명령에 접근할 수 없습니다. 때로는 워크플로우 `bin` 디렉토리에 스크립트가 있지만 실행 가능하게 설정되지 않은 경우이고, 다른 경우에는 워크플로우가 실행되는 컨테이너나 환경에 소프트웨어가 설치되지 않은 경우입니다.
 
@@ -1724,7 +1652,7 @@ nextflow run missing_software.nf
 
 `127` 종료 코드를 주목하세요. 정확히 문제를 알려줍니다. `missing_software.nf`를 살펴봅니다:
 
-```groovy title="missing_software.nf" linenums="3" hl_lines="3"
+```nextflow {3} title="missing_software.nf" showLineNumbers startLineNumber=3
 process PROCESS_FILES {
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -1752,22 +1680,18 @@ process PROCESS_FILES {
 
 ```bash
 nextflow run missing_software.nf -profile docker
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `missing_software.nf` [awesome_stonebraker] revision: 0296d12839
+
+executor >  local (3)
+[33/bf8d3e] PROCESS_FILES (3) | 3 of 3 ✔
 ```
 
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `missing_software.nf` [awesome_stonebraker] revision: 0296d12839
-
-    executor >  local (3)
-    [33/bf8d3e] PROCESS_FILES (3) | 3 of 3 ✔
-    ```
-
-!!! note "참고"
-
-    Nextflow가 컨테이너를 사용하는 방법에 대해 자세히 알아보려면 [Hello Nextflow](../../hello_nextflow/05_hello_containers.md)를 참조하세요.
+:::note[참고]
+Nextflow가 컨테이너를 사용하는 방법에 대해 자세히 알아보려면 [Hello Nextflow](../../hello_nextflow/05_hello_containers.mdx)를 참조하세요.
+:::
 
 ### 3.3. 잘못된 리소스 설정
 
@@ -1779,33 +1703,30 @@ nextflow run missing_software.nf -profile docker
 
 ```bash
 nextflow run bad_resources.nf -profile docker
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_resources.nf` [curious_escher] revision: e6e544e786
+
+executor >  local (3)
+[83/c8c4af] PROCESS_FILES (2) | 0 of 3
+WARN: Killing running tasks (2)
+# [!output stderr]
+ERROR ~ Error executing process > 'PROCESS_FILES (1)'
+
+Caused by:
+  process hasn't exited
+
+
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_resources.nf` [curious_escher] revision: e6e544e786
-
-    executor >  local (3)
-    [83/c8c4af] PROCESS_FILES (2) | 0 of 3
-    WARN: Killing running tasks (2)
-    ERROR ~ Error executing process > 'PROCESS_FILES (1)'
-
-    Caused by:
-      process hasn't exited
-
-
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 #### 코드 확인
 
 `bad_resources.nf`를 살펴봅니다:
 
-```groovy title="bad_resources.nf" linenums="3" hl_lines="5"
+```nextflow {5} title="bad_resources.nf" showLineNumbers startLineNumber=3
 process PROCESS_FILES {
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -1832,64 +1753,60 @@ process PROCESS_FILES {
 
 시간 제한을 현실적인 값으로 늘립니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="bad_resources.nf" hl_lines="3" linenums="3"
-    process PROCESS_FILES {
+```nextflow {3} title="bad_resources.nf" showLineNumbers startLineNumber=3 step="전"
+process PROCESS_FILES {
 
-        time '100 s'  // 수정: 현실적인 시간 제한
+    time '1 ms'  // 오류: 비현실적인 시간 제한
 
-        input:
-        val sample_name
+    input:
+    val sample_name
 
-        output:
-        path "${sample_name}_output.txt"
+    output:
+    path "${sample_name}_output.txt"
 
-        script:
-        """
-        sleep 1
-        cowpy ${sample_name} > ${sample_name}_output.txt
-        """
-    }
-    ```
+    script:
+    """
+    sleep 1  # 1초가 걸리지만 시간 제한은 1ms
+    cowpy ${sample_name} > ${sample_name}_output.txt
+    """
+}
+```
 
-=== "전"
+```nextflow {3} title="bad_resources.nf" showLineNumbers startLineNumber=3 step="후"
+process PROCESS_FILES {
 
-    ```groovy title="bad_resources.nf" hl_lines="3" linenums="3"
-    process PROCESS_FILES {
+    time '100 s'  // 수정: 현실적인 시간 제한
 
-        time '1 ms'  // 오류: 비현실적인 시간 제한
+    input:
+    val sample_name
 
-        input:
-        val sample_name
+    output:
+    path "${sample_name}_output.txt"
 
-        output:
-        path "${sample_name}_output.txt"
+    script:
+    """
+    sleep 1
+    cowpy ${sample_name} > ${sample_name}_output.txt
+    """
+}
+```
 
-        script:
-        """
-        sleep 1  # 1초가 걸리지만 시간 제한은 1ms
-        cowpy ${sample_name} > ${sample_name}_output.txt
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 #### 파이프라인 실행
 
 ```bash
 nextflow run bad_resources.nf -profile docker
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_resources.nf` [friendly_mcclintock] revision: 4304ffa21c
+
+executor >  local (3)
+[96/b70b83] PROCESS_FILES (3) | 3 of 3 ✔
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_resources.nf` [friendly_mcclintock] revision: 4304ffa21c
-
-    executor >  local (3)
-    [96/b70b83] PROCESS_FILES (3) | 3 of 3 ✔
-    ```
 
 `local` executor에서는 스케줄러를 사용할 때보다 오류 메시지가 덜 명확합니다. 시간 제한을 명시하는 메시지 대신 `process hasn't exited`와 `WARN: Killing running tasks`가 표시됩니다. 여기서 파악해야 할 연결 고리는, Nextflow가 할당된 리소스를 초과하는 작업을 종료한다는 점입니다. 따라서 스크립트 수준의 오류 없이 프로세스가 종료되면 리소스 지시문을 확인하세요. 이 예제에서는 `time` 지시문이 프로세스가 수행하는 작업에 비해 너무 낮게 설정된 것이 원인입니다. 실행하는 명령의 리소스 요구 사항을 이해하여 리소스 지시문을 적절히 설정할 수 있도록 하세요.
 
@@ -1907,40 +1824,37 @@ nextflow run bad_resources.nf -profile docker
 
 ```bash
 nextflow run missing_output.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `missing_output.nf` [irreverent_payne] revision: 3d5117f7e2
+
+executor >  local (3)
+[f0/42f283] PROCESS_FILES (2) | 0 of 3 ✘
+# [!output stderr]
+ERROR ~ Error executing process > 'PROCESS_FILES (2)'
+
+Caused by:
+  Missing output file(s) `sample2.txt` expected by process `PROCESS_FILES (2)`
+
+
+Command executed:
+
+  echo "Processing sample2" > sample2_output.txt
+
+Command exit status:
+  0
+
+Command output:
+  (empty)
+
+Work dir:
+  /workspaces/training/side-quests/debugging/work/f0/42f283a25543dad8d56b192e314f41
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `missing_output.nf` [irreverent_payne] revision: 3d5117f7e2
-
-    executor >  local (3)
-    [f0/42f283] PROCESS_FILES (2) | 0 of 3 ✘
-    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
-
-    Caused by:
-      Missing output file(s) `sample2.txt` expected by process `PROCESS_FILES (2)`
-
-
-    Command executed:
-
-      echo "Processing sample2" > sample2_output.txt
-
-    Command exit status:
-      0
-
-    Command output:
-      (empty)
-
-    Work dir:
-      /workspaces/training/side-quests/debugging/work/f0/42f283a25543dad8d56b192e314f41
-
-    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 #### Work 디렉토리 확인
 
@@ -2066,35 +1980,31 @@ Nextflow는 워크플로우 실행을 디버깅하고 분석하기 위한 여러
 
 ```bash
 nextflow run bad_channel_shape_viewed_debug.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_channel_shape_viewed_debug.nf` [infallible_shirley] revision: 37cbda227b
+
+executor >  local (3)
+[a1/59e59a] PROCESS_FILES (3) | 3 of 3 ✔
+Channel content: [sample1, file1.txt]
+Channel content: [sample2, file2.txt]
+Channel content: [sample3, file3.txt]
+After mapping: sample1
+After mapping: sample2
+After mapping: sample3
+Sample name inside process is sample1
+
+Sample name inside process is sample2
+
+Sample name inside process is sample3
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_channel_shape_viewed_debug.nf` [infallible_shirley] revision: 37cbda227b
-
-    executor >  local (3)
-    [a1/59e59a] PROCESS_FILES (3) | 3 of 3 ✔
-    Channel content: [sample1, file1.txt]
-    Channel content: [sample2, file2.txt]
-    Channel content: [sample3, file3.txt]
-    After mapping: sample1
-    After mapping: sample2
-    After mapping: sample3
-    Sample name inside process is sample1
-
-    Sample name inside process is sample2
-
-    Sample name inside process is sample3
-    ```
 
 #### 코드 확인
 
 `bad_channel_shape_viewed_debug.nf`를 살펴보고 `debug` 지시문이 어떻게 작동하는지 확인합니다:
 
-```groovy title="bad_channel_shape_viewed_debug.nf" linenums="3" hl_lines="2"
+```nextflow {2} title="bad_channel_shape_viewed_debug.nf" showLineNumbers startLineNumber=3
 process PROCESS_FILES {
     debug true  // 실시간 출력 활성화
 
@@ -2122,29 +2032,25 @@ process PROCESS_FILES {
 
 Preview 모드를 사용하면 명령을 실행하지 않고 워크플로우 로직을 테스트할 수 있습니다. 실제 명령을 실행하지 않고도 워크플로우 구조를 빠르게 확인하고 프로세스가 올바르게 연결되어 있는지 확인하는 데 매우 유용합니다.
 
-!!! note "참고"
-
-    앞서 `bad_syntax.nf`를 수정했다면, 이 명령을 실행하기 전에 script 블록 뒤의 닫는 중괄호를 제거하여 구문 오류를 다시 도입하세요.
+:::note[참고]
+앞서 `bad_syntax.nf`를 수정했다면, 이 명령을 실행하기 전에 script 블록 뒤의 닫는 중괄호를 제거하여 구문 오류를 다시 도입하세요.
+:::
 
 다음 명령을 실행합니다:
 
 ```bash
 nextflow run bad_syntax.nf -preview
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `bad_syntax.nf` [magical_mercator] revision: 550b9a8873
+
+Error bad_syntax.nf:24:1: Unexpected input: '<EOF>'
+# [!output stderr]
+ERROR ~ Script compilation failed
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `bad_syntax.nf` [magical_mercator] revision: 550b9a8873
-
-    Error bad_syntax.nf:24:1: Unexpected input: '<EOF>'
-
-    ERROR ~ Script compilation failed
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 Preview 모드는 프로세스를 실행하지 않고 구문 오류를 조기에 잡는 데 특히 유용합니다. 실행 전에 워크플로우 구조와 프로세스 연결을 검증합니다.
 
@@ -2160,60 +2066,52 @@ Nextflow 프로세스를 개발할 때, `stub` 지시문을 사용하여 실제 
 
 ```bash
 nextflow run missing_software_with_stub.nf
+# [!output stderr]
+ERROR ~ Error executing process > 'PROCESS_FILES (3)'
+
+Caused by:
+  Process `PROCESS_FILES (3)` terminated with an error exit status (127)
+
+
+Command executed:
+
+  cowpy sample3 > sample3_output.txt
+
+Command exit status:
+  127 # [!code highlight]
+
+Command output:
+  (empty)
+
+Command error:
+  .command.sh: line 2: cowpy: command not found # [!code highlight]
+
+Work dir:
+  /workspaces/training/side-quests/debugging/work/cd/b8686a0d27df5be779a38fed616d01
+
+Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+-- Check '.nextflow.log' file for details
 ```
-
-??? failure "명령 출력"
-
-    ```console hl_lines="12 18"
-    ERROR ~ Error executing process > 'PROCESS_FILES (3)'
-
-    Caused by:
-      Process `PROCESS_FILES (3)` terminated with an error exit status (127)
-
-
-    Command executed:
-
-      cowpy sample3 > sample3_output.txt
-
-    Command exit status:
-      127
-
-    Command output:
-      (empty)
-
-    Command error:
-      .command.sh: line 2: cowpy: command not found
-
-    Work dir:
-      /workspaces/training/side-quests/debugging/work/cd/b8686a0d27df5be779a38fed616d01
-
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
-
-    -- Check '.nextflow.log' file for details
-    ```
 
 하지만 이 워크플로우는 `docker` 프로파일 없이도 `-stub-run`으로 실행하면 오류가 발생하지 않습니다:
 
 ```bash
 nextflow run missing_software_with_stub.nf -stub-run
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `missing_software_with_stub.nf` [astonishing_shockley] revision: f1f4f05d7d
+
+executor >  local (3)
+[ba/416414] PROCESS_FILES (2) | 3 of 3 ✔
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `missing_software_with_stub.nf` [astonishing_shockley] revision: f1f4f05d7d
-
-    executor >  local (3)
-    [ba/416414] PROCESS_FILES (2) | 3 of 3 ✔
-    ```
 
 #### 코드 확인
 
 `missing_software_with_stub.nf`를 살펴봅니다:
 
-```groovy title="missing_software.nf (with stub)" hl_lines="16-19" linenums="3"
+```nextflow {16-19} title="missing_software.nf (with stub)" showLineNumbers startLineNumber=3
 process PROCESS_FILES {
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -2281,25 +2179,25 @@ trace 파일과 work 디렉토리부터 preview 모드, stub 실행, 리소스 �
 2. resume으로 테스트: `nextflow run workflow.nf -resume`
 3. 완전한 워크플로우 실행 확인
 
-!!! tip "효율적인 디버깅을 위한 Resume 사용"
+:::tip[효율적인 디버깅을 위한 Resume 사용]
+문제를 파악한 후에는 워크플로우의 성공적인 부분을 다시 실행하는 데 시간을 낭비하지 않고 수정 사항을 효율적으로 테스트하는 방법이 필요합니다. Nextflow의 `-resume` 기능은 디버깅에 매우 유용합니다.
 
-    문제를 파악한 후에는 워크플로우의 성공적인 부분을 다시 실행하는 데 시간을 낭비하지 않고 수정 사항을 효율적으로 테스트하는 방법이 필요합니다. Nextflow의 `-resume` 기능은 디버깅에 매우 유용합니다.
+[Hello Nextflow](../../hello_nextflow/index.mdx)를 진행했다면 `-resume`을 접했을 것입니다. 문제 프로세스 이전의 프로세스가 실행되는 동안 기다리지 않으려면 디버깅 시 이를 잘 활용하는 것이 중요합니다.
 
-    [Hello Nextflow](../../hello_nextflow/index.md)를 진행했다면 `-resume`을 접했을 것입니다. 문제 프로세스 이전의 프로세스가 실행되는 동안 기다리지 않으려면 디버깅 시 이를 잘 활용하는 것이 중요합니다.
+**Resume 디버깅 전략:**
 
-    **Resume 디버깅 전략:**
-
-    1. 실패할 때까지 워크플로우 실행
-    2. 실패한 작업의 work 디렉토리 검사
-    3. 특정 문제 수정
-    4. 수정 사항만 테스트하기 위해 resume
-    5. 워크플로우가 완료될 때까지 반복
+1. 실패할 때까지 워크플로우 실행
+2. 실패한 작업의 work 디렉토리 검사
+3. 특정 문제 수정
+4. 수정 사항만 테스트하기 위해 resume
+5. 워크플로우가 완료될 때까지 반복
+:::
 
 #### 디버깅 설정 프로파일
 
 이 체계적인 접근법을 더욱 효율적으로 만들기 위해, 필요한 모든 도구를 자동으로 활성화하는 전용 디버깅 설정을 만들 수 있습니다:
 
-```groovy title="nextflow.config (debug profile)" linenums="1"
+```nextflow title="nextflow.config (debug profile)" nextflow="config" showLineNumbers
 profiles {
     debug {
         process {
@@ -2327,316 +2225,316 @@ nextflow run workflow.nf -profile debug
 
 이제 체계적인 디버깅 접근법을 실제로 적용할 시간입니다. `buggy_workflow.nf` 워크플로우에는 실제 개발에서 마주치는 유형의 문제를 나타내는 여러 일반적인 오류가 포함되어 있습니다.
 
-!!! exercise "연습"
+:::note[연습]
+체계적인 디버깅 접근법을 사용하여 `buggy_workflow.nf`의 모든 오류를 파악하고 수정하세요. 이 워크플로우는 CSV 파일에서 샘플 데이터를 처리하려 하지만, 일반적인 디버깅 시나리오를 나타내는 여러 의도적인 버그가 포함되어 있습니다.
 
-    체계적인 디버깅 접근법을 사용하여 `buggy_workflow.nf`의 모든 오류를 파악하고 수정하세요. 이 워크플로우는 CSV 파일에서 샘플 데이터를 처리하려 하지만, 일반적인 디버깅 시나리오를 나타내는 여러 의도적인 버그가 포함되어 있습니다.
+워크플로우를 실행하여 첫 번째 오류를 확인합니다:
 
-    워크플로우를 실행하여 첫 번째 오류를 확인합니다:
+```bash
+nextflow run buggy_workflow.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
 
-    ```bash
-    nextflow run buggy_workflow.nf
-    ```
+Launching `buggy_workflow.nf` [happy_aryabhata] revision: 6a296ff695
 
-    ??? failure "명령 출력"
+Error buggy_workflow.nf:25:12: Unexpected input: '\n'
+│  25 |     script:
+╰     |            ^
+# [!output stderr]
+ERROR ~ Script compilation failed
 
-        ```console
-         N E X T F L O W   ~  version 26.04.4
+ -- Check '.nextflow.log' file for details
+```
 
-        Launching `buggy_workflow.nf` [happy_aryabhata] revision: 6a296ff695
+파서는 25번 줄(`script:`)을 가리키지만, 실제 원인은 바로 위에 있습니다. 23번 줄의 `output:` 선언 뒤에 후행 쉼표가 있어 파서가 또 다른 출력을 기대하게 되고, `script:`에 도달하면 실패합니다. 이것이 해결해야 할 여러 구문 오류 중 첫 번째입니다.
 
-        Error buggy_workflow.nf:25:12: Unexpected input: '\n'
-        │  25 |     script:
-        ╰     |            ^
+배운 4단계 디버깅 방법을 적용합니다:
 
-        ERROR ~ Script compilation failed
+**1단계: 구문 오류 해결**
+- VSCode 또는 IDE에서 빨간 밑줄 확인
+- `nextflow run workflow.nf -preview`를 실행하여 구문 문제 파악
+- 모든 구문 오류 수정 (중괄호 누락, 후행 쉼표 등)
+- 진행하기 전에 워크플로우가 성공적으로 파싱되는지 확인
 
-         -- Check '.nextflow.log' file for details
-        ```
+**2단계: 빠른 평가**
+- 런타임 오류 메시지를 주의 깊게 읽기
+- 오류가 런타임, 로직, 또는 리소스 관련인지 파악
+- `-preview` 모드를 사용하여 기본 워크플로우 로직 테스트
 
-        파서는 25번 줄(`script:`)을 가리키지만, 실제 원인은 바로 위에 있습니다. 23번 줄의 `output:` 선언 뒤에 후행 쉼표가 있어 파서가 또 다른 출력을 기대하게 되고, `script:`에 도달하면 실패합니다. 이것이 해결해야 할 여러 구문 오류 중 첫 번째입니다.
+**3단계: 상세 조사**
+- 실패한 작업의 work 디렉토리 검사
+- 채널 검사를 위해 `.view()` 연산자 추가
+- work 디렉토리의 로그 파일 확인
+- `-stub-run`을 사용하여 실행 없이 워크플로우 로직 테스트
 
-    배운 4단계 디버깅 방법을 적용합니다:
+**4단계: 수정 및 검증**
+- 목표 수정 적용
+- `-resume`을 사용하여 효율적으로 수정 사항 테스트
+- 완전한 워크플로우 실행 확인
 
-    **1단계: 구문 오류 해결**
-    - VSCode 또는 IDE에서 빨간 밑줄 확인
-    - `nextflow run workflow.nf -preview`를 실행하여 구문 문제 파악
-    - 모든 구문 오류 수정 (중괄호 누락, 후행 쉼표 등)
-    - 진행하기 전에 워크플로우가 성공적으로 파싱되는지 확인
+**사용 가능한 디버깅 도구:**
+```bash
+# 구문 확인을 위한 preview 모드
+nextflow run buggy_workflow.nf -preview
 
-    **2단계: 빠른 평가**
-    - 런타임 오류 메시지를 주의 깊게 읽기
-    - 오류가 런타임, 로직, 또는 리소스 관련인지 파악
-    - `-preview` 모드를 사용하여 기본 워크플로우 로직 테스트
+# 상세 출력을 위한 debug 프로파일
+nextflow run buggy_workflow.nf -profile debug
 
-    **3단계: 상세 조사**
-    - 실패한 작업의 work 디렉토리 검사
-    - 채널 검사를 위해 `.view()` 연산자 추가
-    - work 디렉토리의 로그 파일 확인
-    - `-stub-run`을 사용하여 실행 없이 워크플로우 로직 테스트
+# 로직 테스트를 위한 stub 실행
+nextflow run buggy_workflow.nf -stub-run
 
-    **4단계: 수정 및 검증**
-    - 목표 수정 적용
-    - `-resume`을 사용하여 효율적으로 수정 사항 테스트
-    - 완전한 워크플로우 실행 확인
+# 수정 후 resume
+nextflow run buggy_workflow.nf -resume
+```
 
-    **사용 가능한 디버깅 도구:**
-    ```bash
-    # 구문 확인을 위한 preview 모드
-    nextflow run buggy_workflow.nf -preview
+<details class="solution">
+<summary>해결책</summary>
 
-    # 상세 출력을 위한 debug 프로파일
-    nextflow run buggy_workflow.nf -profile debug
+`buggy_workflow.nf`에는 모든 주요 디버깅 카테고리를 다루는 10개의 별개 오류가 포함되어 있습니다. 각 오류와 수정 방법에 대한 체계적인 분석으로, Nextflow 26.04에서 실제로 마주치는 순서대로 정리했습니다. 컴파일러는 워크플로우를 두 번에 걸쳐 처리합니다. 먼저 구문을 파싱한 다음, 모든 변수가 정의되어 있는지 정적으로 검사합니다. 따라서 구문 오류를 먼저 해결하고, 그다음 정의되지 않은 변수 오류를 일괄 처리한 후에야 워크플로우가 실행되어 런타임 오류가 시작됩니다.
 
-    # 로직 테스트를 위한 stub 실행
-    nextflow run buggy_workflow.nf -stub-run
+먼저 구문 오류부터 시작합니다:
 
-    # 수정 후 resume
-    nextflow run buggy_workflow.nf -resume
-    ```
+**오류 1: 구문 오류 - 후행 쉼표**
+```nextflow showLineNumbers startLineNumber=21
+output:
+    path "${sample_id}_result.txt",  // 오류: 후행 쉼표
+```
+**수정:** 후행 쉼표 제거
+```nextflow showLineNumbers startLineNumber=21
+output:
+    path "${sample_id}_result.txt"
+```
 
-    ??? solution "해결책"
-        `buggy_workflow.nf`에는 모든 주요 디버깅 카테고리를 다루는 10개의 별개 오류가 포함되어 있습니다. 각 오류와 수정 방법에 대한 체계적인 분석으로, Nextflow 26.04에서 실제로 마주치는 순서대로 정리했습니다. 컴파일러는 워크플로우를 두 번에 걸쳐 처리합니다. 먼저 구문을 파싱한 다음, 모든 변수가 정의되어 있는지 정적으로 검사합니다. 따라서 구문 오류를 먼저 해결하고, 그다음 정의되지 않은 변수 오류를 일괄 처리한 후에야 워크플로우가 실행되어 런타임 오류가 시작됩니다.
+쉼표를 제거하면 파서가 파일 끝까지 실행되어 `processFiles`를 닫아야 할 중괄호를 찾다가 `Unexpected input: '<EOF>'`를 보고합니다.
 
-        먼저 구문 오류부터 시작합니다:
+**오류 2: 구문 오류 - 닫는 중괄호 누락**
+```nextflow showLineNumbers startLineNumber=24
+script:
+"""
+echo "Processing: ${sample}"
+cat ${input_file} > ${sample}_result.txt
+"""
+// 오류: processFiles 프로세스의 닫는 중괄호 누락
+```
+**수정:** 누락된 닫는 중괄호 추가
+```nextflow showLineNumbers startLineNumber=29
+"""
+echo "Processing: ${sample_id}"
+cat ${input_file} > ${sample_id}_result.txt
+"""
+}  // 누락된 닫는 중괄호 추가
+```
 
-        **오류 1: 구문 오류 - 후행 쉼표**
-        ```groovy linenums="21"
-        output:
-            path "${sample_id}_result.txt",  // 오류: 후행 쉼표
-        ```
-        **수정:** 후행 쉼표 제거
-        ```groovy linenums="21"
-        output:
-            path "${sample_id}_result.txt"
-        ```
+이제 구문이 파싱되므로 정적 타입 검사기가 실행됩니다. 워크플로우가 실행되기 전에 정의되지 않은 변수를 한꺼번에 보고합니다:
 
-        쉼표를 제거하면 파서가 파일 끝까지 실행되어 `processFiles`를 닫아야 할 중괄호를 찾다가 `Unexpected input: '<EOF>'`를 보고합니다.
+```console
+Error buggy_workflow.nf:86:29: `sample_ids` is not defined
+Error buggy_workflow.nf:27:25: `sample` is not defined
+Error buggy_workflow.nf:28:27: `sample` is not defined
+Error buggy_workflow.nf:49:33: `i` is not defined
+```
 
-        **오류 2: 구문 오류 - 닫는 중괄호 누락**
-        ```groovy linenums="24"
-        script:
-        """
-        echo "Processing: ${sample}"
-        cat ${input_file} > ${sample}_result.txt
-        """
-        // 오류: processFiles 프로세스의 닫는 중괄호 누락
-        ```
-        **수정:** 누락된 닫는 중괄호 추가
-        ```groovy linenums="29"
-        """
-        echo "Processing: ${sample_id}"
-        cat ${input_file} > ${sample_id}_result.txt
-        """
-        }  // 누락된 닫는 중괄호 추가
-        ```
+이 네 줄은 아래의 오류 3, 4, 5에 해당하는 세 가지 별개의 버그에 해당합니다. 마지막 `i`는 타입 검사기가 Nextflow 변수와 구분하지 못하는 Bash 변수로, 런타임 오류가 아닌 컴파일 시점에 나타납니다. 다시 실행하기 전에 세 가지 모두 수정합니다.
 
-        이제 구문이 파싱되므로 정적 타입 검사기가 실행됩니다. 워크플로우가 실행되기 전에 정의되지 않은 변수를 한꺼번에 보고합니다:
+**오류 3: 변수 이름 오류**
+```nextflow showLineNumbers startLineNumber=26
+echo "Processing: ${sample}"     // 오류: sample_id여야 함
+cat ${input_file} > ${sample}_result.txt  // 오류: sample_id여야 함
+```
+**수정:** 올바른 입력 변수 이름 사용
+```nextflow showLineNumbers startLineNumber=26
+echo "Processing: ${sample_id}"
+cat ${input_file} > ${sample_id}_result.txt
+```
 
-        ```console
-        Error buggy_workflow.nf:86:29: `sample_ids` is not defined
-        Error buggy_workflow.nf:27:25: `sample` is not defined
-        Error buggy_workflow.nf:28:27: `sample` is not defined
-        Error buggy_workflow.nf:49:33: `i` is not defined
-        ```
+**오류 4: 정의되지 않은 변수 오류**
+```nextflow showLineNumbers startLineNumber=87
+heavy_ch = heavyProcess(sample_ids)  // 오류: sample_ids가 정의되지 않음
+```
+**수정:** 올바른 채널 사용
+```nextflow showLineNumbers startLineNumber=87
+heavy_ch = heavyProcess(input_ch)
+```
 
-        이 네 줄은 아래의 오류 3, 4, 5에 해당하는 세 가지 별개의 버그에 해당합니다. 마지막 `i`는 타입 검사기가 Nextflow 변수와 구분하지 못하는 Bash 변수로, 런타임 오류가 아닌 컴파일 시점에 나타납니다. 다시 실행하기 전에 세 가지 모두 수정합니다.
+**오류 5: Bash 변수 이스케이프 오류**
+```nextflow showLineNumbers startLineNumber=48
+echo "Heavy computation $i for ${sample_id}"  // 오류: $i가 정의되지 않은 Nextflow 변수처럼 보임
+```
+**수정:** Nextflow가 셸에 처리를 맡기도록 Bash 변수 이스케이프
+```nextflow showLineNumbers startLineNumber=48
+echo "Heavy computation \${i} for ${sample_id}"
+```
 
-        **오류 3: 변수 이름 오류**
-        ```groovy linenums="26"
-        echo "Processing: ${sample}"     // 오류: sample_id여야 함
-        cat ${input_file} > ${sample}_result.txt  // 오류: sample_id여야 함
-        ```
-        **수정:** 올바른 입력 변수 이름 사용
-        ```groovy linenums="26"
-        echo "Processing: ${sample_id}"
-        cat ${input_file} > ${sample_id}_result.txt
-        ```
+이 오류들을 해결하면 워크플로우가 컴파일되어 실행을 시작합니다. 첫 번째 런타임 오류는 `processFiles`에서 발생합니다. 튜플을 기대하는데 단순 값이 전달되기 때문입니다: `Input tuple does not match tuple declaration in process 'processFiles' -- offending value: sample_003`.
 
-        **오류 4: 정의되지 않은 변수 오류**
-        ```groovy linenums="87"
-        heavy_ch = heavyProcess(sample_ids)  // 오류: sample_ids가 정의되지 않음
-        ```
-        **수정:** 올바른 채널 사용
-        ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch)
-        ```
+**오류 6: 채널 구조 오류 - 잘못된 map 출력**
+```nextflow showLineNumbers startLineNumber=83
+.map { row -> row.sample_id }  // 오류: processFiles는 튜플을 기대
+```
+**수정:** processFiles가 기대하는 튜플 구조 반환
+```nextflow showLineNumbers startLineNumber=83
+.map { row -> [row.sample_id, file(row.fastq_path)] }
+```
 
-        **오류 5: Bash 변수 이스케이프 오류**
-        ```groovy linenums="48"
-        echo "Heavy computation $i for ${sample_id}"  // 오류: $i가 정의되지 않은 Nextflow 변수처럼 보임
-        ```
-        **수정:** Nextflow가 셸에 처리를 맡기도록 Bash 변수 이스케이프
-        ```groovy linenums="48"
-        echo "Heavy computation \${i} for ${sample_id}"
-        ```
+이렇게 하면 `processFiles`는 수정되지만, `input_ch`가 이제 2개 요소의 튜플을 내보내므로 `heavyProcess`에 전체 튜플이 전달되어 단일 값을 기대하는 곳에서 문제가 발생합니다. 튜플이 스크립트에서 `[sample_005, /path/sample_005.fastq.gz]`로 렌더링되어 Bash 명령이 구문 오류와 함께 종료 상태 2로 실패합니다.
 
-        이 오류들을 해결하면 워크플로우가 컴파일되어 실행을 시작합니다. 첫 번째 런타임 오류는 `processFiles`에서 발생합니다. 튜플을 기대하는데 단순 값이 전달되기 때문입니다: `Input tuple does not match tuple declaration in process 'processFiles' -- offending value: sample_003`.
+**오류 7: heavyProcess의 잘못된 채널 구조**
+```nextflow showLineNumbers startLineNumber=87
+heavy_ch = heavyProcess(input_ch)  // 오류: input_ch는 이제 2개 요소 튜플을 내보냄 - heavyProcess는 첫 번째 요소만 필요
+```
+**수정:** 샘플 ID만 전달
+```nextflow showLineNumbers startLineNumber=87
+heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
+```
 
-        **오류 6: 채널 구조 오류 - 잘못된 map 출력**
-        ```groovy linenums="83"
-        .map { row -> row.sample_id }  // 오류: processFiles는 튜플을 기대
-        ```
-        **수정:** processFiles가 기대하는 튜플 구조 반환
-        ```groovy linenums="83"
+이제 `heavyProcess`가 실행되지만 시간 제한에 걸립니다. `local` executor에서는 명시적인 타임아웃 메시지 대신 `process hasn't exited`(및 `WARN: Killing running tasks` 메시지)가 표시되므로, 종료된 작업을 해당 `time` 지시문과 연결합니다:
+
+**오류 8: 리소스 설정 오류**
+```nextflow showLineNumbers startLineNumber=36
+time '1 ms'  // 오류: 비현실적인 시간 제한
+```
+**수정:** 현실적인 시간 제한으로 늘리기
+```nextflow showLineNumbers startLineNumber=36
+time '100 s'
+```
+
+다음으로 `Missing output file(s)` 오류를 해결합니다. 스크립트는 `${sample_id}.txt`를 생성하지만 출력 선언은 `${sample_id}_heavy.txt`를 기대하기 때문입니다:
+
+**오류 9: 출력 파일 이름 불일치**
+```nextflow showLineNumbers startLineNumber=49
+done > ${sample_id}.txt  // 오류: 잘못된 파일 이름, 출력 선언과 일치해야 함
+```
+**수정:** 출력 선언과 일치시키기
+```nextflow showLineNumbers startLineNumber=49
+done > ${sample_id}_heavy.txt
+```
+
+이제 워크플로우가 오류 없이 완료되지만 `files` 출력이 비어 있습니다. `handleFiles`가 실행되지 않은 것입니다. 입력 채널인 `channel.fromPath("*.txt")`가 실행 디렉토리에서 파일을 찾지 못해 오류 없이 프로세스가 건너뛰어집니다.
+
+**오류 10: 잘못된 채널 소스**
+```nextflow showLineNumbers startLineNumber=88
+file_ch = channel.fromPath("*.txt") // 오류: 프로세스가 아닌 현재 디렉토리에서 입력을 가져오려 함
+handleFiles(file_ch)
+```
+**수정:** 이전 프로세스의 출력 사용
+```nextflow showLineNumbers startLineNumber=88
+file_ch = handleFiles(heavy_ch)
+```
+
+이제 전체 워크플로우가 처음부터 끝까지 실행되고 세 가지 출력이 모두 채워집니다.
+
+**완전히 수정된 워크플로우:**
+```nextflow showLineNumbers
+#!/usr/bin/env nextflow
+
+/*
+* 디버깅 연습을 위한 버그가 있는 워크플로우
+* 이 워크플로우에는 학습 목적으로 여러 의도적인 버그가 포함되어 있습니다
+*/
+
+params{
+    // 검증이 누락된 매개변수
+    input: Path = 'data/sample_data.csv'
+    output: String = 'results'
+}
+
+/*
+* 입력/출력 불일치가 있는 프로세스
+*/
+process processFiles {
+
+    input:
+        tuple val(sample_id), path(input_file)
+
+    output:
+        path "${sample_id}_result.txt"
+
+    script:
+    """
+    echo "Processing: ${sample_id}"
+    cat ${input_file} > ${sample_id}_result.txt
+    """
+}
+
+/*
+* 리소스 문제가 있는 프로세스
+*/
+process heavyProcess {
+
+    time '100 s'
+
+    input:
+        val sample_id
+
+    output:
+        path "${sample_id}_heavy.txt"
+
+    script:
+    """
+    # 무거운 계산 시뮬레이션
+    for i in {1..10000}; do
+        echo "Heavy computation \$i for ${sample_id}"
+    done > ${sample_id}_heavy.txt
+    """
+}
+
+/*
+* 파일 처리 문제가 있는 프로세스
+*/
+process handleFiles {
+
+    input:
+        path input_file
+
+    output:
+        path "processed_${input_file}"
+
+    script:
+    """
+    if [ -f "${input_file}" ]; then
+        cp ${input_file} processed_${input_file}
+    fi
+    """
+}
+
+/*
+* 채널 문제가 있는 메인 워크플로우
+*/
+workflow {
+    main:
+    // 잘못된 사용이 있는 채널
+    input_ch = channel
+        .fromPath(params.input)
+        .splitCsv(header: true)
         .map { row -> [row.sample_id, file(row.fastq_path)] }
-        ```
 
-        이렇게 하면 `processFiles`는 수정되지만, `input_ch`가 이제 2개 요소의 튜플을 내보내므로 `heavyProcess`에 전체 튜플이 전달되어 단일 값을 기대하는 곳에서 문제가 발생합니다. 튜플이 스크립트에서 `[sample_005, /path/sample_005.fastq.gz]`로 렌더링되어 Bash 명령이 구문 오류와 함께 종료 상태 2로 실패합니다.
+    processed_ch = processFiles(input_ch)
 
-        **오류 7: heavyProcess의 잘못된 채널 구조**
-        ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch)  // 오류: input_ch는 이제 2개 요소 튜플을 내보냄 - heavyProcess는 첫 번째 요소만 필요
-        ```
-        **수정:** 샘플 ID만 전달
-        ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
-        ```
+    heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
 
-        이제 `heavyProcess`가 실행되지만 시간 제한에 걸립니다. `local` executor에서는 명시적인 타임아웃 메시지 대신 `process hasn't exited`(및 `WARN: Killing running tasks` 메시지)가 표시되므로, 종료된 작업을 해당 `time` 지시문과 연결합니다:
+    file_ch = handleFiles(heavy_ch)
 
-        **오류 8: 리소스 설정 오류**
-        ```groovy linenums="36"
-        time '1 ms'  // 오류: 비현실적인 시간 제한
-        ```
-        **수정:** 현실적인 시간 제한으로 늘리기
-        ```groovy linenums="36"
-        time '100 s'
-        ```
+    publish:
+    processed = processed_ch
+    heavy = heavy_ch
+    files = file_ch
+}
 
-        다음으로 `Missing output file(s)` 오류를 해결합니다. 스크립트는 `${sample_id}.txt`를 생성하지만 출력 선언은 `${sample_id}_heavy.txt`를 기대하기 때문입니다:
+output {
+    processed {
+        path 'processed'
+    }
+    heavy {
+        path 'heavy'
+    }
+    files {
+        path 'files'
+    }
+}
+```
 
-        **오류 9: 출력 파일 이름 불일치**
-        ```groovy linenums="49"
-        done > ${sample_id}.txt  // 오류: 잘못된 파일 이름, 출력 선언과 일치해야 함
-        ```
-        **수정:** 출력 선언과 일치시키기
-        ```groovy linenums="49"
-        done > ${sample_id}_heavy.txt
-        ```
-
-        이제 워크플로우가 오류 없이 완료되지만 `files` 출력이 비어 있습니다. `handleFiles`가 실행되지 않은 것입니다. 입력 채널인 `channel.fromPath("*.txt")`가 실행 디렉토리에서 파일을 찾지 못해 오류 없이 프로세스가 건너뛰어집니다.
-
-        **오류 10: 잘못된 채널 소스**
-        ```groovy linenums="88"
-        file_ch = channel.fromPath("*.txt") // 오류: 프로세스가 아닌 현재 디렉토리에서 입력을 가져오려 함
-        handleFiles(file_ch)
-        ```
-        **수정:** 이전 프로세스의 출력 사용
-        ```groovy linenums="88"
-        file_ch = handleFiles(heavy_ch)
-        ```
-
-        이제 전체 워크플로우가 처음부터 끝까지 실행되고 세 가지 출력이 모두 채워집니다.
-
-        **완전히 수정된 워크플로우:**
-        ```groovy linenums="1"
-        #!/usr/bin/env nextflow
-
-        /*
-        * 디버깅 연습을 위한 버그가 있는 워크플로우
-        * 이 워크플로우에는 학습 목적으로 여러 의도적인 버그가 포함되어 있습니다
-        */
-
-        params{
-            // 검증이 누락된 매개변수
-            input: Path = 'data/sample_data.csv'
-            output: String = 'results'
-        }
-
-        /*
-        * 입력/출력 불일치가 있는 프로세스
-        */
-        process processFiles {
-
-            input:
-                tuple val(sample_id), path(input_file)
-
-            output:
-                path "${sample_id}_result.txt"
-
-            script:
-            """
-            echo "Processing: ${sample_id}"
-            cat ${input_file} > ${sample_id}_result.txt
-            """
-        }
-
-        /*
-        * 리소스 문제가 있는 프로세스
-        */
-        process heavyProcess {
-
-            time '100 s'
-
-            input:
-                val sample_id
-
-            output:
-                path "${sample_id}_heavy.txt"
-
-            script:
-            """
-            # 무거운 계산 시뮬레이션
-            for i in {1..10000}; do
-                echo "Heavy computation \$i for ${sample_id}"
-            done > ${sample_id}_heavy.txt
-            """
-        }
-
-        /*
-        * 파일 처리 문제가 있는 프로세스
-        */
-        process handleFiles {
-
-            input:
-                path input_file
-
-            output:
-                path "processed_${input_file}"
-
-            script:
-            """
-            if [ -f "${input_file}" ]; then
-                cp ${input_file} processed_${input_file}
-            fi
-            """
-        }
-
-        /*
-        * 채널 문제가 있는 메인 워크플로우
-        */
-        workflow {
-            main:
-            // 잘못된 사용이 있는 채널
-            input_ch = channel
-                .fromPath(params.input)
-                .splitCsv(header: true)
-                .map { row -> [row.sample_id, file(row.fastq_path)] }
-
-            processed_ch = processFiles(input_ch)
-
-            heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
-
-            file_ch = handleFiles(heavy_ch)
-
-            publish:
-            processed = processed_ch
-            heavy = heavy_ch
-            files = file_ch
-        }
-
-        output {
-            processed {
-                path 'processed'
-            }
-            heavy {
-                path 'heavy'
-            }
-            files {
-                path 'files'
-            }
-        }
-        ```
+</details>
+:::
 
 **다루는 오류 카테고리:**
 
@@ -2668,7 +2566,7 @@ nextflow run workflow.nf -profile debug
 - Nextflow(Groovy) 변수와 Bash 변수 구분
 - 조기 오류 감지를 위한 VS Code 확장 프로그램 기능 활용
 
-```groovy
+```nextflow
 // 중괄호 누락 - IDE에서 빨간 밑줄 확인
 process FOO {
     script:
@@ -2692,7 +2590,7 @@ echo "\${bash_var}"          // Bash 변수 (이스케이프됨)
 - 채널 검사를 위한 `.view()` 연산자 사용
 - 출력의 대괄호와 같은 오류 패턴 인식
 
-```groovy
+```nextflow
 // 채널 내용 검사
 my_channel.view { item -> "Content: ${item}" }
 
@@ -2727,21 +2625,21 @@ cat work/ab/cdef12/.command.err
 - 효율적인 디버깅 사이클을 위한 resume 적용
 - 4단계 체계적인 디버깅 방법론 따르기
 
-!!! tip "빠른 디버깅 참조"
+:::tip[빠른 디버깅 참조]
+**구문 오류?** → VSCode 경고 확인, `nextflow run workflow.nf -preview` 실행
 
-    **구문 오류?** → VSCode 경고 확인, `nextflow run workflow.nf -preview` 실행
+**채널 문제?** → `.view()`를 사용하여 내용 검사: `my_channel.view()`
 
-    **채널 문제?** → `.view()`를 사용하여 내용 검사: `my_channel.view()`
+**프로세스 실패?** → work 디렉토리 파일 확인:
 
-    **프로세스 실패?** → work 디렉토리 파일 확인:
+- `.command.sh` - 실행된 스크립트
+- `.command.err` - 오류 메시지
+- `.exitcode` - 종료 상태 (127 = 명령을 찾을 수 없음, 137 = 종료됨)
 
-    - `.command.sh` - 실행된 스크립트
-    - `.command.err` - 오류 메시지
-    - `.exitcode` - 종료 상태 (127 = 명령을 찾을 수 없음, 137 = 종료됨)
+**원인 불명의 동작?** → `-stub-run`으로 워크플로우 로직 테스트
 
-    **원인 불명의 동작?** → `-stub-run`으로 워크플로우 로직 테스트
-
-    **수정 완료?** → `-resume`을 사용하여 시간 절약: `nextflow run workflow.nf -resume`
+**수정 완료?** → `-resume`을 사용하여 시간 절약: `nextflow run workflow.nf -resume`
+:::
 
 ---
 
@@ -2764,4 +2662,4 @@ cat work/ab/cdef12/.command.err
 
 ## 다음 단계
 
-[사이드 퀘스트 메뉴](../index.md)로 돌아가거나, 페이지 오른쪽 하단의 버튼을 클릭하여 목록의 다음 주제로 이동하세요.
+[사이드 퀘스트 메뉴](../index.mdx)로 돌아가거나, 페이지 오른쪽 하단의 버튼을 클릭하여 목록의 다음 주제로 이동하세요.

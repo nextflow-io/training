@@ -1,6 +1,9 @@
-# भाग 1: बुनियादी ऑपरेशन चलाएं
+---
+title: 'भाग 1: बुनियादी ऑपरेशन चलाएं'
+description: Nextflow for Bioimaging प्रशिक्षण पाठ्यक्रम के इस पहले भाग में, हम एक बहुत ही बुनियादी domain-agnostic Hello World उदाहरण का उपयोग करेंगे ताकि आवश्यक ऑपरेशन…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Nextflow for Bioimaging प्रशिक्षण पाठ्यक्रम के इस पहले भाग में, हम एक बहुत ही बुनियादी domain-agnostic Hello World उदाहरण का उपयोग करेंगे ताकि आवश्यक ऑपरेशन प्रदर्शित कर सकें और संबंधित Nextflow कोड घटकों को इंगित कर सकें।
 
@@ -19,7 +22,7 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 
 तुम्हारा console आउटपुट कुछ इस तरह दिखना चाहिए:
 
-```console title="Output" linenums="1"
+```console title="Output" showLineNumbers
  N E X T F L O W   ~  version 26.04.4
 
 Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d
@@ -32,7 +35,7 @@ executor >  local (1)
 
 यहाँ सबसे महत्वपूर्ण आउटपुट आखिरी लाइन है (line 6):
 
-```console title="Output" linenums="6"
+```console title="Output" showLineNumbers startLineNumber=6
 [71/8143bd] sayHello | 1 of 1 ✔
 ```
 
@@ -45,7 +48,7 @@ executor >  local (1)
 यह workflow अपने आउटपुट को `results` नाम की डायरेक्टरी में publish करने के लिए configured है।
 यदि तुम अपनी वर्तमान डायरेक्टरी को देखो, तो तुम देखोगे कि जब तुमने workflow चलाई, तो Nextflow ने `results` नाम की एक नई डायरेक्टरी बनाई, जिसमें `output.txt` नाम की एक फ़ाइल है।
 
-```console title="results/" linenums="1"
+```console title="results/" showLineNumbers
 results
 └── output.txt
 ```
@@ -55,7 +58,7 @@ results
 <details>
   <summary>फ़ाइल सामग्री</summary>
 
-```console title="results/output.txt" linenums="1"
+```console title="results/output.txt" showLineNumbers
 Hello World!
 ```
 
@@ -67,10 +70,10 @@ Hello World!
 
 तो अब, हम यह देखने के लिए अंदर झांकेंगे कि Nextflow ने वास्तव में कार्य कहाँ execute किया।
 
-!!! warning "चेतावनी"
-
-    सभी workflows अपने आउटपुट को results डायरेक्टरी में publish करने के लिए set up नहीं होंगे, और/या डायरेक्टरी का नाम अलग हो सकता है।
-    इस section में थोड़ा आगे, हम तुम्हें दिखाएंगे कि यह व्यवहार कहाँ निर्दिष्ट है।
+:::caution[चेतावनी]
+सभी workflows अपने आउटपुट को results डायरेक्टरी में publish करने के लिए set up नहीं होंगे, और/या डायरेक्टरी का नाम अलग हो सकता है।
+इस section में थोड़ा आगे, हम तुम्हें दिखाएंगे कि यह व्यवहार कहाँ निर्दिष्ट है।
+:::
 
 ### 1.3. `work/` डायरेक्टरी में मूल आउटपुट और logs खोजें
 
@@ -83,7 +86,7 @@ Hello World!
 
 पहले चलाई गई workflow के console आउटपुट पर वापस जाते हुए, हमारे पास यह लाइन थी:
 
-```console title="Excerpt of command output" linenums="6"
+```console title="Excerpt of command output" showLineNumbers startLineNumber=6
 [71/8143bd] sayHello | 1 of 1 ✔
 ```
 
@@ -100,14 +103,14 @@ tree work/71/8143bd*
 
 देखते हैं कि वहाँ क्या है।
 
-!!! Tip "सुझाव"
+:::tip[सुझाव]
+यदि तुम VSCode file explorer में task subdirectory की सामग्री ब्राउज़ करते हो, तो तुम सभी फ़ाइलें तुरंत देखोगे।
+हालांकि, log फ़ाइलें terminal में invisible होने के लिए set हैं, इसलिए यदि तुम उन्हें देखने के लिए `ls` या `tree` का उपयोग करना चाहते हो, तो तुम्हें invisible फ़ाइलें प्रदर्शित करने के लिए संबंधित विकल्प set करना होगा।
 
-    यदि तुम VSCode file explorer में task subdirectory की सामग्री ब्राउज़ करते हो, तो तुम सभी फ़ाइलें तुरंत देखोगे।
-    हालांकि, log फ़ाइलें terminal में invisible होने के लिए set हैं, इसलिए यदि तुम उन्हें देखने के लिए `ls` या `tree` का उपयोग करना चाहते हो, तो तुम्हें invisible फ़ाइलें प्रदर्शित करने के लिए संबंधित विकल्प set करना होगा।
-
-    ```bash
-    tree -a work
-    ```
+```bash
+tree -a work
+```
+:::
 
 तुम्हारे सिस्टम पर सटीक subdirectory नाम अलग होंगे।
 
@@ -136,7 +139,7 @@ work
 <details>
   <summary>output.txt की फ़ाइल सामग्री</summary>
 
-```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" showLineNumbers
 Hello World!
 ```
 
@@ -159,16 +162,16 @@ Hello World!
 <details>
   <summary>फ़ाइल सामग्री</summary>
 
-```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" showLineNumbers
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
 </details>
 
-!!! Tip "सुझाव"
-
-    जब कुछ गलत हो जाता है और तुम्हें troubleshoot करने की आवश्यकता होती है कि क्या हुआ, तो यह देखने के लिए `command.sh` स्क्रिप्ट को देखना उपयोगी हो सकता है कि Nextflow ने workflow instructions, variable interpolation आदि के आधार पर बिल्कुल कौन सी कमांड बनाई।
+:::tip[सुझाव]
+जब कुछ गलत हो जाता है और तुम्हें troubleshoot करने की आवश्यकता होती है कि क्या हुआ, तो यह देखने के लिए `command.sh` स्क्रिप्ट को देखना उपयोगी हो सकता है कि Nextflow ने workflow instructions, variable interpolation आदि के आधार पर बिल्कुल कौन सी कमांड बनाई।
+:::
 
 ### 1.4. वैकल्पिक अभ्यास: अलग-अलग greetings के साथ फिर से चलाएं
 
@@ -200,7 +203,7 @@ _यहाँ लक्ष्य Nextflow कोड की syntax को या�
 <details>
   <summary>कोड</summary>
 
-```groovy title="hello-world.nf" linenums="1"
+```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 /*
@@ -247,7 +250,7 @@ Process body में एक script block होना चाहिए जो �
 <details>
   <summary>कोड</summary>
 
-```groovy title="hello-world.nf" linenums="3"
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=3
 /*
  * Use echo to print a greeting to a file
  */
@@ -276,13 +279,13 @@ process sayHello {
 
 `output` परिभाषा में `path` qualifier शामिल है, जो Nextflow को बताता है कि इसे path के रूप में संभाला जाना चाहिए (directory paths और files दोनों शामिल हैं)।
 
-!!! Tip "सुझाव"
+:::tip[सुझाव]
+Output परिभाषा _निर्धारित नहीं करती_ कि क्या आउटपुट बनाया जाएगा।
+यह केवल _घोषित करती है_ कि अपेक्षित आउटपुट फ़ाइल(ओं) को कहाँ खोजना है, ताकि execution पूर्ण होने के बाद Nextflow इसे देख सके।
 
-    Output परिभाषा _निर्धारित नहीं करती_ कि क्या आउटपुट बनाया जाएगा।
-    यह केवल _घोषित करती है_ कि अपेक्षित आउटपुट फ़ाइल(ओं) को कहाँ खोजना है, ताकि execution पूर्ण होने के बाद Nextflow इसे देख सके।
-
-    यह सफलतापूर्वक execute की गई कमांड को verify करने और यदि आवश्यक हो तो downstream processes को आउटपुट पास करने के लिए आवश्यक है।
-    उत्पादित आउटपुट जो output block में घोषित के साथ मेल नहीं खाता, downstream processes को पास नहीं किया जाएगा।
+यह सफलतापूर्वक execute की गई कमांड को verify करने और यदि आवश्यक हो तो downstream processes को आउटपुट पास करने के लिए आवश्यक है।
+उत्पादित आउटपुट जो output block में घोषित के साथ मेल नहीं खाता, downstream processes को पास नहीं किया जाएगा।
+:::
 
 वास्तविक दुनिया की pipeline में, एक process में आमतौर पर अतिरिक्त जानकारी होती है जैसे process directives, जिन्हें हम थोड़ी देर में पेश करेंगे।
 
@@ -293,7 +296,7 @@ Workflow परिभाषा keyword `workflow` से शुरू होत�
 
 यहाँ हमारे पास एक **workflow** है जो `sayHello` process की एक call से बना है, जो एक इनपुट लेता है, `params.greeting`, जो उस मान को रखता है जो हमने `--greeting` पैरामीटर को दिया।
 
-```groovy title="hello-world.nf" linenums="22"
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=22
 workflow {
 
     // एक अभिवादन emit करें
@@ -313,10 +316,10 @@ workflow {
 जैसा कि ऊपर उल्लेख किया गया है, यही तरीका है जिससे हम `--greeting` command-line पैरामीटर के मान को `sayHello()` process call को पास करते हैं।
 वास्तव में, केवल `params.someParameterName` घोषित करने से हम workflow को command-line से `--someParameterName` नामक पैरामीटर दे सकेंगे।
 
-!!! Tip "सुझाव"
-
-    `params` प्रणाली का उपयोग करके घोषित ये workflow parameters हमेशा दो dashes (`--`) लेते हैं।
-    यह उन्हें Nextflow-level parameters से अलग करता है, जो केवल एक dash (`-`) लेते हैं।
+:::tip[सुझाव]
+`params` प्रणाली का उपयोग करके घोषित ये workflow parameters हमेशा दो dashes (`--`) लेते हैं।
+यह उन्हें Nextflow-level parameters से अलग करता है, जो केवल एक dash (`-`) लेते हैं।
+:::
 
 ### निष्कर्ष
 
@@ -351,26 +354,22 @@ Nextflow में `-resume` नामक एक विकल्प है ज�
 
 ```bash
 nextflow run hello-world.nf --greeting 'Hello World!' -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
+
+[71/8143bd] sayHello | 1 of 1, cached: 1 ✔
 ```
-
-??? success "कमांड आउटपुट"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
-
-    [71/8143bd] sayHello | 1 of 1, cached: 1 ✔
-    ```
 
 Process status line में जोड़े गए `cached:` bit को देखो, जिसका अर्थ है कि Nextflow ने पहचान लिया है कि उसने यह काम पहले ही कर लिया है और बस पिछले सफल run के परिणाम का पुन: उपयोग किया।
 
 तुम यह भी देख सकते हो कि work subdirectory hash पिछले run के समान है।
 Nextflow सचमुच तुम्हें पिछले execution की ओर इशारा कर रहा है और कह रहा है "मैंने वह पहले ही वहाँ कर दिया।"
 
-!!! Tip "सुझाव"
-
-    जब तुम `resume` के साथ pipeline को फिर से चलाते हो, तो Nextflow किसी भी process call द्वारा `publishDir` डायरेक्टरी में लिखी गई किसी भी फ़ाइल को overwrite नहीं करता है जो पहले सफलतापूर्वक चलाई गई थी।
+:::tip[सुझाव]
+जब तुम `resume` के साथ pipeline को फिर से चलाते हो, तो Nextflow किसी भी process call द्वारा `publishDir` डायरेक्टरी में लिखी गई किसी भी फ़ाइल को overwrite नहीं करता है जो पहले सफलतापूर्वक चलाई गई थी।
+:::
 
 ### 3.2. पिछले executions के log की जांच करें
 
@@ -393,12 +392,12 @@ Nextflow में एक सुविधाजनक `clean` subcommand शा�
 
 तुम Nextflow log का उपयोग करके timestamp और/या command line के आधार पर एक run को देख सकते हो, फिर पहले की runs से work directories को delete करने के लिए `nextflow clean -before <run_name> -f` का उपयोग कर सकते हो।
 
-!!! Warning "चेतावनी"
+:::caution[चेतावनी]
+पिछली runs से work subdirectories को delete करना उन्हें Nextflow के cache से हटा देता है और उन directories में संग्रहीत किसी भी आउटपुट को delete कर देता है।
+इसका मतलब है कि यह संबंधित processes को फिर से चलाए बिना execution को resume करने की Nextflow की क्षमता को तोड़ देता है।
 
-    पिछली runs से work subdirectories को delete करना उन्हें Nextflow के cache से हटा देता है और उन directories में संग्रहीत किसी भी आउटपुट को delete कर देता है।
-    इसका मतलब है कि यह संबंधित processes को फिर से चलाए बिना execution को resume करने की Nextflow की क्षमता को तोड़ देता है।
-
-    किसी भी आउटपुट को सहेजना तुम्हारी जिम्मेदारी है जिसकी तुम्हें परवाह है या जिस पर तुम निर्भर रहने की योजना बनाते हो! यदि तुम इस उद्देश्य के लिए `publishDir` directive का उपयोग कर रहे हो, तो सुनिश्चित करो कि `copy` mode का उपयोग करो, `symlink` mode का नहीं।
+किसी भी आउटपुट को सहेजना तुम्हारी जिम्मेदारी है जिसकी तुम्हें परवाह है या जिस पर तुम निर्भर रहने की योजना बनाते हो! यदि तुम इस उद्देश्य के लिए `publishDir` directive का उपयोग कर रहे हो, तो सुनिश्चित करो कि `copy` mode का उपयोग करो, `symlink` mode का नहीं।
+:::
 
 ### सारांश
 

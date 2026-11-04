@@ -1,18 +1,21 @@
-# Part 5: Trace Observers
+---
+title: 'Part 5: Trace Observers'
+description: Els trace observers permeten que el vostre plugin respongui a esdeveniments del workflow, com ara la finalització d'una tasca, la publicació d'un fitxer o la…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Els trace observers permeten que el vostre plugin respongui a esdeveniments del workflow, com ara la finalització d'una tasca, la publicació d'un fitxer o la finalització del pipeline.
 Això permet casos d'ús com ara informes personalitzats, notificacions de Slack, recollida de mètriques o integració amb sistemes de monitoratge externs.
 En aquesta secció, construireu un observer que compta les tasques completades i imprimeix un resum.
 
-!!! tip "Comenceu des d'aquí?"
+:::tip[Comenceu des d'aquí?]
+Si us incorporeu en aquesta part, copieu la solució de la Part 4 per utilitzar-la com a punt de partida:
 
-    Si us incorporeu en aquesta part, copieu la solució de la Part 4 per utilitzar-la com a punt de partida:
-
-    ```bash
-    cp -r solutions/4-build-and-test/* .
-    ```
+```bash
+cp -r solutions/4-build-and-test/* .
+```
+:::
 
 ---
 
@@ -26,7 +29,7 @@ Mireu el codi de l'observer:
 cat nf-greeting/src/main/groovy/training/plugin/GreetingObserver.groovy
 ```
 
-```groovy title="Output" hl_lines="30 32-34 37-39"
+```groovy {30,32-34,37-39} title="Output"
 /*
  * Copyright 2025, Seqera Labs
  *
@@ -56,23 +59,19 @@ import nextflow.trace.TraceObserver
  */
 @Slf4j
 @CompileStatic
-class GreetingObserver implements TraceObserver {    // (1)!
+class GreetingObserver implements TraceObserver {    // [!annotate] Interfície per connectar-se als esdeveniments del cicle de vida del workflow
 
     @Override
-    void onFlowCreate(Session session) {            // (2)!
+    void onFlowCreate(Session session) {            // [!annotate] S'invoca quan el workflow s'inicia; rep la sessió per accedir a la configuració
         println "Pipeline is starting! 🚀"
     }
 
     @Override
-    void onFlowComplete() {                         // (3)!
+    void onFlowComplete() {                         // [!annotate] S'invoca quan el workflow finalitza correctament
         println "Pipeline complete! 👋"
     }
 }
 ```
-
-1. Interfície per connectar-se als esdeveniments del cicle de vida del workflow
-2. S'invoca quan el workflow s'inicia; rep la sessió per accedir a la configuració
-3. S'invoca quan el workflow finalitza correctament
 
 Hi ha dues coses a destacar:
 
@@ -109,11 +108,11 @@ touch nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy
 
 Comenceu amb l'observer més senzill possible que imprimeixi un missatge quan qualsevol tasca es completi:
 
-```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1"
+```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" showLineNumbers
 package training.plugin
 
 import groovy.transform.CompileStatic
-import nextflow.processor.TaskHandler       // (1)!
+import nextflow.processor.TaskHandler       // [!annotate] Importeu les classes necessàries: `TraceObserver`, `TaskHandler` i `TraceRecord`
 import nextflow.trace.TraceObserver
 import nextflow.trace.TraceRecord
 
@@ -121,18 +120,14 @@ import nextflow.trace.TraceRecord
  * Observer que respon a la finalització de tasques
  */
 @CompileStatic
-class TaskCounterObserver implements TraceObserver {  // (2)!
+class TaskCounterObserver implements TraceObserver {  // [!annotate] Creeu una classe que `implements TraceObserver`
 
     @Override
-    void onProcessComplete(TaskHandler handler, TraceRecord trace) {  // (3)!
+    void onProcessComplete(TaskHandler handler, TraceRecord trace) {  // [!annotate] Sobreescriviu `onProcessComplete` per executar codi quan una tasca finalitza
         println "✓ Task completed!"
     }
 }
 ```
-
-1. Importeu les classes necessàries: `TraceObserver`, `TaskHandler` i `TraceRecord`
-2. Creeu una classe que `implements TraceObserver`
-3. Sobreescriviu `onProcessComplete` per executar codi quan una tasca finalitza
 
 Això és el mínim necessari:
 
@@ -149,7 +144,7 @@ Mireu-la:
 cat nf-greeting/src/main/groovy/training/plugin/GreetingFactory.groovy
 ```
 
-```groovy title="Output" hl_lines="25 27-29"
+```groovy {25,27-29} title="Output"
 /*
  * Copyright 2025, Seqera Labs
  *
@@ -186,53 +181,53 @@ class GreetingFactory implements TraceObserverFactory {
 
 Editeu `GreetingFactory.groovy` per afegir el nou observer:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="GreetingFactory.groovy" linenums="31" hl_lines="3-6"
-    @Override
-    Collection<TraceObserver> create(Session session) {
-        return [
-            new GreetingObserver(),
-            new TaskCounterObserver()
-        ]
-    }
-    ```
+```groovy {3} title="GreetingFactory.groovy" showLineNumbers startLineNumber=31 step="Abans"
+@Override
+Collection<TraceObserver> create(Session session) {
+    return List.<TraceObserver>of(new GreetingObserver())
+}
+```
 
-=== "Abans"
+```groovy {3-6} title="GreetingFactory.groovy" showLineNumbers startLineNumber=31 step="Després"
+@Override
+Collection<TraceObserver> create(Session session) {
+    return [
+        new GreetingObserver(),
+        new TaskCounterObserver()
+    ]
+}
+```
 
-    ```groovy title="GreetingFactory.groovy" linenums="31" hl_lines="3"
-    @Override
-    Collection<TraceObserver> create(Session session) {
-        return List.<TraceObserver>of(new GreetingObserver())
-    }
-    ```
+</CodeWalkthrough>
 
-!!! note "Sintaxi de llistes en Groovy"
-
-    Hem substituït el `List.<TraceObserver>of(...)` d'estil Java per la sintaxi de llista literal `[...]` més senzilla de Groovy.
-    Tots dos retornen una `Collection`, però la sintaxi de Groovy és més llegible quan s'afegeixen múltiples elements.
+:::note[Sintaxi de llistes en Groovy]
+Hem substituït el `List.<TraceObserver>of(...)` d'estil Java per la sintaxi de llista literal `[...]` més senzilla de Groovy.
+Tots dos retornen una `Collection`, però la sintaxi de Groovy és més llegible quan s'afegeixen múltiples elements.
+:::
 
 La prova unitària de la plantilla per a la factory espera exactament un observer, de manera que ara falla perquè la factory en crea dos.
 Actualitzeu `nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy` per esperar-ne tots dos:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="GreetingObserverTest.groovy" linenums="17" hl_lines="2-4"
-            then:
-            result.size() == 2
-            result[0] instanceof GreetingObserver
-            result[1] instanceof TaskCounterObserver
-        }
-    ```
+```groovy {2-3} title="GreetingObserverTest.groovy" showLineNumbers startLineNumber=17 step="Abans"
+        then:
+        result.size() == 1
+        result.first() instanceof GreetingObserver
+    }
+```
 
-=== "Abans"
+```groovy {2-4} title="GreetingObserverTest.groovy" showLineNumbers startLineNumber=17 step="Després"
+        then:
+        result.size() == 2
+        result[0] instanceof GreetingObserver
+        result[1] instanceof TaskCounterObserver
+    }
+```
 
-    ```groovy title="GreetingObserverTest.groovy" linenums="17" hl_lines="2-3"
-            then:
-            result.size() == 1
-            result.first() instanceof GreetingObserver
-        }
-    ```
+</CodeWalkthrough>
 
 ### 2.3. Construir, instal·lar i provar
 
@@ -241,12 +236,12 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-!!! tip "Per què `-ansi-log false`?"
+:::tip[Per què `-ansi-log false`?]
+Per defecte, la visualització de progrés ANSI de Nextflow sobreescriu les línies anteriors per mostrar una vista neta i actualitzada del progrés.
+Això significa que només veuríeu el *recompte final* de tasques, no els missatges intermedis.
 
-    Per defecte, la visualització de progrés ANSI de Nextflow sobreescriu les línies anteriors per mostrar una vista neta i actualitzada del progrés.
-    Això significa que només veuríeu el *recompte final* de tasques, no els missatges intermedis.
-
-    Utilitzar `-ansi-log false` desactiva aquest comportament i mostra tota la sortida de manera seqüencial, cosa que és essencial quan es proven observers que imprimeixen missatges durant l'execució.
+Utilitzar `-ansi-log false` desactiva aquest comportament i mostra tota la sortida de manera seqüencial, cosa que és essencial quan es proven observers que imprimeixen missatges durant l'execució.
+:::
 
 Hauríeu de veure "✓ Task completed!" imprès cinc vegades (una per tasca), intercalat amb la sortida existent del pipeline:
 
@@ -265,10 +260,13 @@ Pipeline complete! 👋
 L'observer funciona.
 Cada vegada que una tasca finalitza, Nextflow crida `onProcessComplete`, i la nostra implementació imprimeix un missatge.
 
-??? exercise "Personalitzeu el missatge"
+<details class="exercise">
+<summary>Personalitzeu el missatge</summary>
 
-    Proveu de canviar el missatge a `onProcessComplete` per alguna cosa pròpia, reconstruïu i torneu a executar.
-    Això confirma que el cicle complet d'edició-construcció-execució funciona per als observers.
+Proveu de canviar el missatge a `onProcessComplete` per alguna cosa pròpia, reconstruïu i torneu a executar.
+Això confirma que el cicle complet d'edició-construcció-execució funciona per als observers.
+
+</details>
 
 ### 2.4. Afegir lògica de comptatge
 
@@ -283,7 +281,7 @@ Quan tot el workflow finalitza, l'observer imprimeix el total final.
 
 Actualitzeu `TaskCounterObserver.groovy` amb els canvis destacats:
 
-```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="5 15 19-20 23-25"
+```groovy {5,15,19-20,23-25} title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" showLineNumbers
 package training.plugin
 
 import groovy.transform.CompileStatic
@@ -298,24 +296,20 @@ import nextflow.trace.TraceRecord
 @CompileStatic
 class TaskCounterObserver implements TraceObserver {
 
-    private final AtomicInteger taskCount = new AtomicInteger()  // (1)!
+    private final AtomicInteger taskCount = new AtomicInteger()  // [!annotate] `taskCount` és una variable que pertany a l'objecte observer. Manté el seu valor entre crides a mètodes, de manera que pot acumular un recompte durant tota l'execució del workflow. `private` significa que només aquesta classe hi pot accedir. Nextflow pot notificar diverses finalitzacions de tasques alhora des de fils d'execució diferents, de manera que el comptador és un `AtomicInteger`, que es manté correcte sota actualitzacions concurrents on un `int` simple pot perdre increments.
 
     @Override
     void onProcessComplete(TaskHandler handler, TraceRecord trace) {
-        final count = taskCount.incrementAndGet()                 // (2)!
+        final count = taskCount.incrementAndGet()                 // [!annotate] `incrementAndGet()` afegeix un al comptador i retorna el nou valor. Aquesta línia s'executa cada vegada que una tasca es completa, de manera que el recompte creix a mesura que el workflow avança.
         println "📊 Tasks completed so far: ${count}"
     }
 
     @Override
-    void onFlowComplete() {                                       // (3)!
+    void onFlowComplete() {                                       // [!annotate] `onFlowComplete` és un segon hook del cicle de vida. S'executa una vegada quan el workflow finalitza, cosa que el converteix en un bon lloc per imprimir un resum.
         println "📈 Final task count: ${taskCount.get()}"
     }
 }
 ```
-
-1. `taskCount` és una variable que pertany a l'objecte observer. Manté el seu valor entre crides a mètodes, de manera que pot acumular un recompte durant tota l'execució del workflow. `private` significa que només aquesta classe hi pot accedir. Nextflow pot notificar diverses finalitzacions de tasques alhora des de fils d'execució diferents, de manera que el comptador és un `AtomicInteger`, que es manté correcte sota actualitzacions concurrents on un `int` simple pot perdre increments.
-2. `incrementAndGet()` afegeix un al comptador i retorna el nou valor. Aquesta línia s'executa cada vegada que una tasca es completa, de manera que el recompte creix a mesura que el workflow avança.
-3. `onFlowComplete` és un segon hook del cicle de vida. S'executa una vegada quan el workflow finalitza, cosa que el converteix en un bon lloc per imprimir un resum.
 
 En resum:
 
@@ -330,37 +324,40 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-??? example "Sortida"
+<details class="example">
+<summary>Sortida</summary>
 
-    ```console
-    N E X T F L O W  ~  version 26.04.4
-    Launching `greet.nf` [pensive_engelbart] - revision: bef1bea9f0
-    Pipeline is starting! 🚀
-    Reversed: olleH
-    Reversed: ruojnoB
-    Reversed: aloH
-    Reversed: oaiC
-    Reversed: ollaH
-    [be/bd8e72] Submitted process > SAY_HELLO (2)
-    [5b/d24c2b] Submitted process > SAY_HELLO (1)
-    [14/1f9dbe] Submitted process > SAY_HELLO (3)
-    Decorated: *** Bonjour ***
-    Decorated: *** Hello ***
-    [85/a6b3ad] Submitted process > SAY_HELLO (4)
-    📊 Tasks completed so far: 1
-    📊 Tasks completed so far: 2
-    Decorated: *** Hola ***
-    📊 Tasks completed so far: 3
-    Decorated: *** Ciao ***
-    [3c/be6686] Submitted process > SAY_HELLO (5)
-    📊 Tasks completed so far: 4
-    Decorated: *** Hallo ***
-    📊 Tasks completed so far: 5
-    Pipeline complete! 👋
-    📈 Final task count: 5
-    ```
+```console
+N E X T F L O W  ~  version 26.04.4
+Launching `greet.nf` [pensive_engelbart] - revision: bef1bea9f0
+Pipeline is starting! 🚀
+Reversed: olleH
+Reversed: ruojnoB
+Reversed: aloH
+Reversed: oaiC
+Reversed: ollaH
+[be/bd8e72] Submitted process > SAY_HELLO (2)
+[5b/d24c2b] Submitted process > SAY_HELLO (1)
+[14/1f9dbe] Submitted process > SAY_HELLO (3)
+Decorated: *** Bonjour ***
+Decorated: *** Hello ***
+[85/a6b3ad] Submitted process > SAY_HELLO (4)
+📊 Tasks completed so far: 1
+📊 Tasks completed so far: 2
+Decorated: *** Hola ***
+📊 Tasks completed so far: 3
+Decorated: *** Ciao ***
+[3c/be6686] Submitted process > SAY_HELLO (5)
+📊 Tasks completed so far: 4
+Decorated: *** Hallo ***
+📊 Tasks completed so far: 5
+Pipeline complete! 👋
+📈 Final task count: 5
+```
 
-    Els missatges del comptador s'intercalen amb les submissions de tasques perquè els observers s'executen a mesura que les tasques es completen.
+Els missatges del comptador s'intercalen amb les submissions de tasques perquè els observers s'executen a mesura que les tasques es completen.
+
+</details>
 
 ---
 
@@ -373,46 +370,46 @@ El mètode `onFilePublish` rep els camins de destinació i d'origen, que podeu u
 
 Primer, actualitzeu `greet.nf` perquè el procés `SAY_HELLO` publiqui els seus fitxers de sortida:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="greet.nf" linenums="10" hl_lines="2"
-    process SAY_HELLO {
-        publishDir 'results'
-        input:
-            val greeting
-        output:
-            path 'greeting.txt'
-        script:
-        // Utilitzeu la nostra funció de plugin personalitzada per decorar la salutació
-        def decorated = decorateGreeting(greeting)
-        """
-        echo '$decorated' > greeting.txt
-        """
-    }
-    ```
+```nextflow title="greet.nf" showLineNumbers startLineNumber=10 step="Abans"
+process SAY_HELLO {
+    input:
+        val greeting
+    output:
+        path 'greeting.txt'
+    script:
+    // Utilitzeu la nostra funció de plugin personalitzada per decorar la salutació
+    def decorated = decorateGreeting(greeting)
+    """
+    echo '$decorated' > greeting.txt
+    """
+}
+```
 
-=== "Abans"
+```nextflow {2} title="greet.nf" showLineNumbers startLineNumber=10 step="Després"
+process SAY_HELLO {
+    publishDir 'results'
+    input:
+        val greeting
+    output:
+        path 'greeting.txt'
+    script:
+    // Utilitzeu la nostra funció de plugin personalitzada per decorar la salutació
+    def decorated = decorateGreeting(greeting)
+    """
+    echo '$decorated' > greeting.txt
+    """
+}
+```
 
-    ```groovy title="greet.nf" linenums="10"
-    process SAY_HELLO {
-        input:
-            val greeting
-        output:
-            path 'greeting.txt'
-        script:
-        // Utilitzeu la nostra funció de plugin personalitzada per decorar la salutació
-        def decorated = decorateGreeting(greeting)
-        """
-        echo '$decorated' > greeting.txt
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 ### 3.2. Afegir el mètode onFilePublish
 
 Afegiu un mètode `onFilePublish` i la importació necessària a `TaskCounterObserver.groovy`:
 
-```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="5 24-27"
+```groovy {5,24-27} title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" showLineNumbers
 package training.plugin
 
 import groovy.transform.CompileStatic
@@ -490,4 +487,4 @@ El comptador de tasques funciona, però sempre està actiu.
 En un plugin real, els usuaris haurien de poder activar o desactivar funcionalitats, o ajustar el comportament, des de `nextflow.config` sense haver d'editar el codi font del plugin.
 La secció següent mostra com fer que el vostre observer sigui configurable i com compartir el vostre plugin acabat amb altres persones.
 
-[Continueu a la Part 6 :material-arrow-right:](06_configuration.md){ .md-button .md-button--primary }
+<LinkButton href="06_configuration.mdx" variant="primary" icon="right-arrow">Continueu a la Part 6</LinkButton>

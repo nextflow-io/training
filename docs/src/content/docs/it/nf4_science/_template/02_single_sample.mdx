@@ -1,33 +1,34 @@
-# Parte 2: Elaborazione di un singolo campione
+---
+title: 'Parte 2: Elaborazione di un singolo campione'
+description: Nella Parte 1, avete testato manualmente i comandi {TOOL_A} e {TOOL_B} nei rispettivi container.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nella Parte 1, avete testato manualmente i comandi {TOOL_A} e {TOOL_B} nei rispettivi container.
+Nella Parte 1, avete testato manualmente i comandi \{TOOL_A\} e \{TOOL_B\} nei rispettivi container.
 Ora andremo a integrare quegli stessi comandi in un flusso di lavoro Nextflow.
 
 ## Obiettivo
 
 In questa parte del corso, svilupperemo un flusso di lavoro che esegue le seguenti operazioni:
 
-1. {PROCESS_1_DESCRIPTION}
-2. {PROCESS_2_DESCRIPTION}
+1. \{PROCESS_1_DESCRIPTION\}
+2. \{PROCESS_2_DESCRIPTION\}
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/{DOMAIN_DIR}/img/{DIAGRAM_1}.svg"
-</figure>
+
 
 Questo replica i passaggi della Parte 1, dove avete eseguito questi comandi manualmente nei loro container.
 
-Come punto di partenza, vi forniamo un file di flusso di lavoro, `{DOMAIN_DIR}.nf`, che delinea le parti principali del flusso di lavoro, insieme a due file modulo, {TOOL_A_MODULE}.nf e {TOOL_B_MODULE}.nf, che delineano la struttura dei moduli.
+Come punto di partenza, vi forniamo un file di flusso di lavoro, `{DOMAIN_DIR}.nf`, che delinea le parti principali del flusso di lavoro, insieme a due file modulo, \{TOOL_A_MODULE\}.nf e \{TOOL_B_MODULE\}.nf, che delineano la struttura dei moduli.
 Questi file non sono funzionali; il loro scopo è solo quello di servire come strutture da riempire con le parti interessanti del codice.
 
 ## Piano della lezione
 
-Per rendere il processo di sviluppo più educativo, abbiamo suddiviso il tutto in {N} passaggi:
+Per rendere il processo di sviluppo più educativo, abbiamo suddiviso il tutto in \{N\} passaggi:
 
-1. **Scrivere un flusso di lavoro a singolo stadio che esegue {TOOL_A_ACTION}.**
+1. **Scrivere un flusso di lavoro a singolo stadio che esegue \{TOOL_A_ACTION\}.**
    Questo copre la creazione di un modulo, la sua importazione e la sua chiamata in un flusso di lavoro.
-2. **Aggiungere un secondo processo per eseguire {TOOL_B_ACTION}.**
+2. **Aggiungere un secondo processo per eseguire \{TOOL_B_ACTION\}.**
    Questo introduce il concatenamento degli output dei processi agli input e la gestione dei file accessori.
 3. **Adattare il flusso di lavoro per eseguirlo su un batch di campioni.**
    Questo copre l'esecuzione parallela e introduce le tuple per mantenere insieme i file associati.
@@ -38,17 +39,17 @@ Ogni passaggio si concentra su un aspetto specifico dello sviluppo del flusso di
 
 ---
 
-## 1. Scrivere un flusso di lavoro a singolo stadio che esegue {TOOL_A_ACTION}
+## 1. Scrivere un flusso di lavoro a singolo stadio che esegue \{TOOL_A_ACTION\}
 
-Questo primo passaggio si concentra sulle basi: caricare {PRIMARY_INPUT_TYPE} e {TOOL_A_OUTPUT_DESCRIPTION}.
+Questo primo passaggio si concentra sulle basi: caricare \{PRIMARY_INPUT_TYPE\} e \{TOOL_A_OUTPUT_DESCRIPTION\}.
 
-Ricordate il comando `{TOOL_A_COMMAND_NAME}` dalla [Parte 1](01_method.md):
+Ricordate il comando `{TOOL_A_COMMAND_NAME}` dalla [Parte 1](01_method.mdx):
 
 ```bash
 {TOOL_A_COMMAND_SUMMARY}
 ```
 
-Il comando prende {INPUT_DESCRIPTION} e produce {OUTPUT_DESCRIPTION}.
+Il comando prende \{INPUT_DESCRIPTION\} e produce \{OUTPUT_DESCRIPTION\}.
 L'URI del container era `{TOOL_A_CONTAINER_URI}`.
 
 Andremo a integrare queste informazioni in Nextflow in tre fasi:
@@ -65,27 +66,27 @@ Dobbiamo dichiarare un parametro di input, creare un profilo di test per fornire
 
 Nel file principale del flusso di lavoro `{DOMAIN_DIR}.nf`, sotto la sezione `Pipeline parameters`, dichiarate un parametro CLI chiamato `{PRIMARY_PARAM_NAME}`.
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="{DOMAIN_DIR}.nf" linenums="5" hl_lines="4-7"
-    /*
-     * Pipeline parameters
-     */
-    params {
-        // Primary input
-        {PRIMARY_PARAM_NAME}: Path
-    }
-    ```
+```nextflow title="{DOMAIN_DIR}.nf" showLineNumbers startLineNumber=5 step="Prima"
+/*
+ * Pipeline parameters
+ */
 
-=== "Prima"
+// Primary input
+```
 
-    ```groovy title="{DOMAIN_DIR}.nf" linenums="5"
-    /*
-     * Pipeline parameters
-     */
-
+```nextflow {4-7} title="{DOMAIN_DIR}.nf" showLineNumbers startLineNumber=5 step="Dopo"
+/*
+ * Pipeline parameters
+ */
+params {
     // Primary input
-    ```
+    {PRIMARY_PARAM_NAME}: Path
+}
+```
+
+</CodeWalkthrough>
 
 Questo configura il parametro CLI, ma non vogliamo digitare il percorso del file ogni volta che eseguiamo il flusso di lavoro durante lo sviluppo.
 Ci sono diverse opzioni per fornire un valore predefinito; qui utilizziamo un profilo di test.
@@ -93,42 +94,42 @@ Ci sono diverse opzioni per fornire un valore predefinito; qui utilizziamo un pr
 #### 1.1.2. Creare un profilo di test con un valore predefinito in `nextflow.config`
 
 Un profilo di test fornisce valori predefiniti convenienti per provare un flusso di lavoro senza specificare input dalla riga di comando.
-Questa è una convenzione comune nell'ecosistema Nextflow (vedi [Hello Config](../../hello_nextflow/06_hello_config.md) per maggiori dettagli).
+Questa è una convenzione comune nell'ecosistema Nextflow (vedi [Hello Config](../../hello_nextflow/06_hello_config.mdx) per maggiori dettagli).
 
-Aggiungete un blocco `profiles` a `nextflow.config` con un profilo `test` che imposta il parametro `{PRIMARY_PARAM_NAME}` a uno dei {PRIMARY_INPUT_TYPE} di test.
+Aggiungete un blocco `profiles` a `nextflow.config` con un profilo `test` che imposta il parametro `{PRIMARY_PARAM_NAME}` a uno dei \{PRIMARY_INPUT_TYPE\} di test.
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="3-7"
-    docker.enabled = true
+```nextflow title="nextflow.config" showLineNumbers step="Prima"
+docker.enabled = true
+```
 
-    profiles {
-        test {
-            params.{PRIMARY_PARAM_NAME} = "${projectDir}/data/{TEST_INPUT_PATH}"
-        }
+```nextflow {3-7} title="nextflow.config" showLineNumbers step="Dopo"
+docker.enabled = true
+
+profiles {
+    test {
+        params.{PRIMARY_PARAM_NAME} = "${projectDir}/data/{TEST_INPUT_PATH}"
     }
-    ```
+}
+```
 
-=== "Prima"
-
-    ```groovy title="nextflow.config" linenums="1"
-    docker.enabled = true
-    ```
+</CodeWalkthrough>
 
 Qui stiamo usando `${projectDir}`, una variabile integrata di Nextflow che punta alla directory dove si trova lo script del flusso di lavoro.
 Questo rende facile fare riferimento a file di dati e altre risorse senza codificare percorsi assoluti.
 
 #### 1.1.3. Configurare il canale di input
 
-{INPUT_CHANNEL_INSTRUCTIONS}
+\{INPUT_CHANNEL_INSTRUCTIONS\}
 
-### 1.2. Scrivere il modulo {TOOL_A_NAME}
+### 1.2. Scrivere il modulo \{TOOL_A_NAME\}
 
-{MODULE_INSTRUCTIONS_COVERING: container, input, output, script}
+\{MODULE_INSTRUCTIONS_COVERING: container, input, output, script\}
 
 ### 1.3. Importare e chiamare il modulo nel flusso di lavoro
 
-{IMPORT_AND_CALL_INSTRUCTIONS}
+\{IMPORT_AND_CALL_INSTRUCTIONS\}
 
 ### 1.4. Eseguire il flusso di lavoro
 
@@ -138,27 +139,23 @@ Possiamo eseguirlo con `-profile test` per utilizzare il valore predefinito conf
 
 ```bash
 nextflow run {DOMAIN_DIR}.nf -profile test
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `{DOMAIN_DIR}.nf` [{RUN_NAME}] revision: {HASH}
+
+executor >  local (1)
+[{HASH}] {PROCESS_A_NAME} (1) | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/{DOMAIN_DIR}/results
+
+  {OUTPUT_NAME}:
+    - {OUTPUT_SUBDIR}/{OUTPUT_FILE}
 ```
 
-??? success "Output del comando"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `{DOMAIN_DIR}.nf` [{RUN_NAME}] revision: {HASH}
-
-    executor >  local (1)
-    [{HASH}] {PROCESS_A_NAME} (1) | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/{DOMAIN_DIR}/results
-
-      {OUTPUT_NAME}:
-        - {OUTPUT_SUBDIR}/{OUTPUT_FILE}
-    ```
-
-{VERIFY_OUTPUT_INSTRUCTIONS}
+\{VERIFY_OUTPUT_INSTRUCTIONS\}
 
 ### Takeaway
 
@@ -170,37 +167,33 @@ Aggiungere un secondo processo per concatenare ulteriori passaggi di analisi.
 
 ---
 
-## 2. Aggiungere un secondo processo per eseguire {TOOL_B_ACTION}
+## 2. Aggiungere un secondo processo per eseguire \{TOOL_B_ACTION\}
 
-{DESCRIBE_WHAT_THIS_STEP_ADDS}
+\{DESCRIBE_WHAT_THIS_STEP_ADDS\}
 
-Ricordate il comando `{TOOL_B_COMMAND_NAME}` dalla [Parte 1](01_method.md):
+Ricordate il comando `{TOOL_B_COMMAND_NAME}` dalla [Parte 1](01_method.mdx):
 
 ```bash
 {TOOL_B_COMMAND_SUMMARY}
 ```
 
-### 2.1. Scrivere il modulo {TOOL_B_NAME}
+### 2.1. Scrivere il modulo \{TOOL_B_NAME\}
 
-{MODULE_INSTRUCTIONS}
+\{MODULE_INSTRUCTIONS\}
 
 ### 2.2. Importare e chiamare il modulo nel flusso di lavoro
 
-{IMPORT_AND_CALL_INSTRUCTIONS_CHAINING_OUTPUTS}
+\{IMPORT_AND_CALL_INSTRUCTIONS_CHAINING_OUTPUTS\}
 
 ### 2.3. Eseguire il flusso di lavoro
 
 ```bash
 nextflow run {DOMAIN_DIR}.nf -profile test
+# [!output]
+{EXPECTED_OUTPUT}
 ```
 
-??? success "Output del comando"
-
-    ```console
-    {EXPECTED_OUTPUT}
-    ```
-
-{VERIFY_OUTPUT_INSTRUCTIONS}
+\{VERIFY_OUTPUT_INSTRUCTIONS\}
 
 ### Takeaway
 
@@ -217,21 +210,17 @@ Scalare il flusso di lavoro per elaborare più campioni in parallelo.
 Finora, il flusso di lavoro elabora un singolo campione.
 Per gestire più campioni, dobbiamo modificare il modo in cui vengono forniti gli input e sfruttare il paradigma dataflow di Nextflow per parallelizzare l'esecuzione.
 
-### 3.1. {BATCH_INPUT_INSTRUCTIONS}
+### 3.1. \{BATCH_INPUT_INSTRUCTIONS\}
 
-{INSTRUCTIONS_FOR_SWITCHING_TO_SAMPLESHEET_OR_BATCH_INPUT}
+\{INSTRUCTIONS_FOR_SWITCHING_TO_SAMPLESHEET_OR_BATCH_INPUT\}
 
 ### 3.2. Eseguire il flusso di lavoro su più campioni
 
 ```bash
 nextflow run {DOMAIN_DIR}.nf -profile test
+# [!output]
+{EXPECTED_OUTPUT_MULTIPLE_SAMPLES}
 ```
-
-??? success "Output del comando"
-
-    ```console
-    {EXPECTED_OUTPUT_MULTIPLE_SAMPLES}
-    ```
 
 ### Takeaway
 
@@ -239,4 +228,4 @@ Sapete come sfruttare il paradigma dataflow di Nextflow per parallelizzare l'ela
 
 ### Cosa c'è dopo?
 
-Nella [Parte 3](03_multi_sample.md), aggiungerete l'aggregazione multi-campione per combinare i risultati di tutti i campioni.
+Nella [Parte 3](03_multi_sample.mdx), aggiungerete l'aggregazione multi-campione per combinare i risultati di tutti i campioni.

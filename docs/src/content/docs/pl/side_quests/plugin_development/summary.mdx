@@ -1,6 +1,9 @@
-# Podsumowanie
+---
+title: Podsumowanie
+description: Ukończyłeś szkolenie z tworzenia wtyczek.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Ukończyłeś szkolenie z tworzenia wtyczek.
 Ta strona podsumowuje to, co zbudowałeś w każdej części, omawia dystrybucję i wskazuje, co robić dalej.
@@ -75,7 +78,7 @@ Instrukcje krok po kroku znajdziesz w [oficjalnej dokumentacji publikowania](htt
 
 Po opublikowaniu użytkownicy instalują Twoją wtyczkę bez żadnej lokalnej konfiguracji:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 plugins {
     id 'nf-greeting@1.0.0'
 }
@@ -123,7 +126,7 @@ nextflowPlugin {
 
 **Użycie w workflow'ach:**
 
-```groovy
+```nextflow
 include { myFunction } from 'plugin/my-plugin'
 
 workflow {

@@ -1,6 +1,9 @@
-# Partie 2 : Exécuter nf-core/molkart
+---
+title: 'Partie 2 : Exécuter nf-core/molkart'
+description: Dans la Partie 1, nous avons exécuté un workflow simple Hello World pour comprendre les bases de l'exécution de Nextflow.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Dans la Partie 1, nous avons exécuté un workflow simple Hello World pour comprendre les bases de l'exécution de Nextflow.
 Nous allons maintenant exécuter un véritable pipeline de bio-imagerie : **nf-core/molkart**.
@@ -25,14 +28,14 @@ Caractéristiques clés des pipelines nf-core :
 - **Contrôle qualité** : Rapports de QC automatisés utilisant MultiQC
 - **Support des conteneurs** : Conteneurs pré-construits pour la reproductibilité
 
-!!! tip "Vous voulez en savoir plus sur nf-core ?"
-
-    Pour une introduction approfondie au développement de pipelines nf-core, consultez le cours de formation [Build with nf-core](../../nfcore_build/index.md).
-    Il couvre comment créer et personnaliser des pipelines nf-core à partir de zéro.
+:::tip[Vous voulez en savoir plus sur nf-core ?]
+Pour une introduction approfondie au développement de pipelines nf-core, consultez le cours de formation [Build with nf-core](../../nfcore_build/index.mdx).
+Il couvre comment créer et personnaliser des pipelines nf-core à partir de zéro.
+:::
 
 ### 1.2. Le pipeline molkart
 
-![Pipeline nf-core/molkart](img/molkart.png)
+![Pipeline nf-core/molkart](../../../nf4_science/imaging/img/molkart.png)
 
 Le pipeline [nf-core/molkart](https://nf-co.re/molkart) traite les données d'imagerie de transcriptomique spatiale à travers plusieurs étapes :
 
@@ -60,11 +63,11 @@ git clone --branch 1.2.0 --depth 1 https://github.com/nf-core/molkart
 
 Cela crée un répertoire `molkart/` contenant le code source complet du pipeline.
 
-!!! note "Pourquoi clonons-nous localement ?"
-
-    Typiquement, vous exécuteriez les pipelines nf-core directement depuis GitHub en utilisant `nextflow run nf-core/molkart -r 1.2.0`.
-    Nextflow télécharge automatiquement la version du pipeline demandée pour vous dans `$HOME/.nextflow/assets/nf-core/molkart` et l'exécute à partir de là.
-    Cependant, pour cette formation, nous clonons le pipeline dans un répertoire local différent afin de pouvoir inspecter plus facilement le code.
+:::note[Pourquoi clonons-nous localement ?]
+Typiquement, vous exécuteriez les pipelines nf-core directement depuis GitHub en utilisant `nextflow run nf-core/molkart -r 1.2.0`.
+Nextflow télécharge automatiquement la version du pipeline demandée pour vous dans `$HOME/.nextflow/assets/nf-core/molkart` et l'exécute à partir de là.
+Cependant, pour cette formation, nous clonons le pipeline dans un répertoire local différent afin de pouvoir inspecter plus facilement le code.
+:::
 
 ### 2.1. Comprendre les exigences en matière de conteneurs
 
@@ -99,32 +102,35 @@ Essayons d'exécuter le pipeline en utilisant ces paramètres :
 nextflow run ./molkart -params-file params.yaml
 ```
 
-!!! Warning "Cette commande échouera - c'est intentionnel !"
-
-    Nous exécutons délibérément cela sans conteneurs pour démontrer pourquoi ils sont nécessaires.
+:::caution[Cette commande échouera - c'est intentionnel !]
+Nous exécutons délibérément cela sans conteneurs pour démontrer pourquoi ils sont nécessaires.
+:::
 
 Après quelques instants, vous verrez une erreur comme celle-ci :
 
-??? failure "Sortie de la commande"
+<details class="failure">
+<summary>Sortie de la commande</summary>
 
-    ```console
-    ERROR ~ Error executing process > 'NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)'
+```console
+ERROR ~ Error executing process > 'NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)'
 
-    Caused by:
-      Process `NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)` terminated with an error exit status (127)
+Caused by:
+  Process `NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)` terminated with an error exit status (127)
 
-    Command executed:
+Command executed:
 
-      duplicate_finder.py \
-          spots.txt \
-          90
+  duplicate_finder.py \
+      spots.txt \
+      90
 
-    Command exit status:
-      127
+Command exit status:
+  127
 
-    Command error:
-      .command.sh: line 3: duplicate_finder.py: command not found
-    ```
+Command error:
+  .command.sh: line 3: duplicate_finder.py: command not found
+```
+
+</details>
 
 **Que se passe-t-il ici ?**
 
@@ -147,7 +153,7 @@ code molkart/modules/local/clahe/main.nf
 
 Regardez la ligne 5 - vous verrez :
 
-```groovy
+```nextflow
 container 'ghcr.io/schapirolabor/molkart-local:v0.0.4'
 ```
 
@@ -170,7 +176,7 @@ code nextflow.config
 
 Changez `docker.enabled = false` en `docker.enabled = true` :
 
-```groovy
+```nextflow nextflow="config"
 docker.enabled = true
 process {
     resourceLimits = [
@@ -193,96 +199,99 @@ Cette fois, Nextflow va :
 3. Exécuter chaque processus à l'intérieur de son conteneur spécifié
 4. S'exécuter avec succès car tous les outils sont disponibles à l'intérieur des conteneurs
 
-!!! Tip "Pourquoi les conteneurs sont importants"
+:::tip[Pourquoi les conteneurs sont importants]
+La plupart des pipelines nf-core **nécessitent** la conteneurisation (Docker, Singularity, Podman, etc.) car :
 
-    La plupart des pipelines nf-core **nécessitent** la conteneurisation (Docker, Singularity, Podman, etc.) car :
+- Ils utilisent des logiciels bioinformatiques spécialisés non disponibles dans les environnements standard
+- Les conteneurs garantissent la reproductibilité - exactement les mêmes versions de logiciels s'exécutent partout
+- Vous n'avez pas besoin d'installer manuellement des dizaines d'outils et leurs dépendances
 
-    - Ils utilisent des logiciels bioinformatiques spécialisés non disponibles dans les environnements standard
-    - Les conteneurs garantissent la reproductibilité - exactement les mêmes versions de logiciels s'exécutent partout
-    - Vous n'avez pas besoin d'installer manuellement des dizaines d'outils et leurs dépendances
-
-    Pour plus de détails sur les conteneurs dans Nextflow, consultez [Hello Containers](../../hello_nextflow/05_hello_containers.md) de la formation Hello Nextflow.
+Pour plus de détails sur les conteneurs dans Nextflow, consultez [Hello Containers](../../hello_nextflow/05_hello_containers.mdx) de la formation Hello Nextflow.
+:::
 
 ### 2.3. Surveiller l'exécution
 
 Pendant l'exécution du pipeline, vous verrez une sortie similaire à ceci :
 
-??? success "Sortie de la commande"
+<details class="success">
+<summary>Sortie de la commande</summary>
 
-    ```console
-     N E X T F L O W   ~  version 26.04.4
+```console
+ N E X T F L O W   ~  version 26.04.4
 
-    Launching `./molkart/main.nf` [exotic_banach] revision: e4152308ec
+Launching `./molkart/main.nf` [exotic_banach] revision: e4152308ec
 
-    WARN: Unrecognized config option 'validation.help.enabled'
-    WARN: Unrecognized config option 'validation.defaultIgnoreParams'
-    WARN: Unrecognized config option 'validation.monochromeLogs'
+WARN: Unrecognized config option 'validation.help.enabled'
+WARN: Unrecognized config option 'validation.defaultIgnoreParams'
+WARN: Unrecognized config option 'validation.monochromeLogs'
 
-    ------------------------------------------------------
-                                            ,--./,-.
-            ___     __   __   __   ___     /,-._.--~'
-      |\ | |__  __ /  ` /  \ |__) |__         }  {
-      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                            `._,._,'
-      nf-core/molkart 1.2.0
-    ------------------------------------------------------
-    Segmentation methods and options
-      segmentation_method: mesmer,cellpose,stardist
+------------------------------------------------------
+                                        ,--./,-.
+        ___     __   __   __   ___     /,-._.--~'
+  |\ | |__  __ /  ` /  \ |__) |__         }  {
+  | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                        `._,._,'
+  nf-core/molkart 1.2.0
+------------------------------------------------------
+Segmentation methods and options
+  segmentation_method: mesmer,cellpose,stardist
 
-    Image preprocessing
-      mindagap_boxsize   : 7
-      mindagap_loopnum   : 100
-      clahe_kernel       : 25
-      mindagap_tilesize  : 90
-      clahe_pyramid_tile : 368
+Image preprocessing
+  mindagap_boxsize   : 7
+  mindagap_loopnum   : 100
+  clahe_kernel       : 25
+  mindagap_tilesize  : 90
+  clahe_pyramid_tile : 368
 
-    Input/output options
-      input              : data/samplesheet.csv
-      outdir             : results
+Input/output options
+  input              : data/samplesheet.csv
+  outdir             : results
 
-    Generic options
-      trace_report_suffix: 2026-06-23_16-25-30
+Generic options
+  trace_report_suffix: 2026-06-23_16-25-30
 
-    Core Nextflow options
-      runName            : exotic_banach
-      containerEngine    : docker
-      launchDir          : /workspaces/training/nf4-science/imaging
-      workDir            : /workspaces/training/nf4-science/imaging/work
-      projectDir         : /workspaces/training/nf4-science/imaging/molkart
-      userName           : root
-      profile            : standard
-      configFiles        : /workspaces/training/nf4-science/imaging/molkart/nextflow.config, /workspaces/training/nf4-science/imaging/nextflow.config
+Core Nextflow options
+  runName            : exotic_banach
+  containerEngine    : docker
+  launchDir          : /workspaces/training/nf4-science/imaging
+  workDir            : /workspaces/training/nf4-science/imaging/work
+  projectDir         : /workspaces/training/nf4-science/imaging/molkart
+  userName           : root
+  profile            : standard
+  configFiles        : /workspaces/training/nf4-science/imaging/molkart/nextflow.config, /workspaces/training/nf4-science/imaging/nextflow.config
 
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-    * The pipeline
-        https://doi.org/10.5281/zenodo.10650748
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+* The pipeline
+    https://doi.org/10.5281/zenodo.10650748
 
-    * The nf-core framework
-        https://doi.org/10.1038/s41587-020-0439-x
+* The nf-core framework
+    https://doi.org/10.1038/s41587-020-0439-x
 
-    * Software dependencies
-        https://github.com/nf-core/molkart/blob/master/CITATIONS.md
+* Software dependencies
+    https://github.com/nf-core/molkart/blob/master/CITATIONS.md
 
-    executor >  local (22)
-    [b4/e57ff1] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2 ✔
-    [2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2 ✔
-    [94/b1ef70] NFC…RT:CREATE_STACK (mem_only) | 1 of 1 ✔
-    [58/4b6426] NFC…DUPLICATEFINDER (mem_only) | 1 of 1 ✔
-    [c2/ef7002] NFC…DEEPCELL_MESMER (mem_only) | 1 of 1 ✔
-    [4f/ddd328] NFC…OLKART:STARDIST (mem_only) | 1 of 1 ✔
-    [8c/dd0362] NFC…OLKART:CELLPOSE (mem_only) | 1 of 1 ✔
-    [08/2ddcb5] NFC…KART:MASKFILTER (mem_only) | 3 of 3 ✔
-    [56/e30de0] NFC…LKART:SPOT2CELL (mem_only) | 3 of 3 ✔
-    [b0/5aa635] NFC…:CREATE_ANNDATA (mem_only) | 3 of 3 ✔
-    [5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3 ✔
-    [8e/8bd365] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
-    -[nf-core/molkart] Pipeline completed successfully-
-    Completed at: 23-Jun-2026 16:31:40
-    Duration    : 6m 9s
-    CPU hours   : (a few seconds)
-    Succeeded   : 22
-    ```
+executor >  local (22)
+[b4/e57ff1] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2 ✔
+[94/b1ef70] NFC…RT:CREATE_STACK (mem_only) | 1 of 1 ✔
+[58/4b6426] NFC…DUPLICATEFINDER (mem_only) | 1 of 1 ✔
+[c2/ef7002] NFC…DEEPCELL_MESMER (mem_only) | 1 of 1 ✔
+[4f/ddd328] NFC…OLKART:STARDIST (mem_only) | 1 of 1 ✔
+[8c/dd0362] NFC…OLKART:CELLPOSE (mem_only) | 1 of 1 ✔
+[08/2ddcb5] NFC…KART:MASKFILTER (mem_only) | 3 of 3 ✔
+[56/e30de0] NFC…LKART:SPOT2CELL (mem_only) | 3 of 3 ✔
+[b0/5aa635] NFC…:CREATE_ANNDATA (mem_only) | 3 of 3 ✔
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3 ✔
+[8e/8bd365] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
+-[nf-core/molkart] Pipeline completed successfully-
+Completed at: 23-Jun-2026 16:31:40
+Duration    : 6m 9s
+CPU hours   : (a few seconds)
+Succeeded   : 22
+```
+
+</details>
 
 Remarquez comment cette sortie est plus détaillée que notre exemple Hello World en raison des conventions nf-core que le pipeline suit :
 
@@ -369,10 +378,10 @@ Le rapport inclut :
 - Métriques de qualité de segmentation
 - Nombre de cellules et de spots détectés
 
-!!! Tip "Astuce"
-
-    Les rapports MultiQC sont généralement inclus dans tous les pipelines nf-core.
-    Ils fournissent toujours un aperçu de haut niveau de l'exécution du pipeline et de la qualité des données.
+:::tip[Astuce]
+Les rapports MultiQC sont généralement inclus dans tous les pipelines nf-core.
+Ils fournissent toujours un aperçu de haut niveau de l'exécution du pipeline et de la qualité des données.
+:::
 
 ### 3.3. Examiner les tables cellule par transcrit
 
@@ -423,9 +432,9 @@ Cela montre :
 - Utilisation du CPU et de la mémoire
 - Quelles tâches ont été mises en cache ou exécutées
 
-!!! Tip "Astuce"
-
-    Ces rapports sont incroyablement utiles pour optimiser l'allocation des ressources et dépanner les problèmes de performance.
+:::tip[Astuce]
+Ces rapports sont incroyablement utiles pour optimiser l'allocation des ressources et dépanner les problèmes de performance.
+:::
 
 ### À retenir
 
@@ -474,9 +483,9 @@ La différence clé par rapport à Hello World :
 - Les fichiers de sortie peuvent être assez volumineux (masques de segmentation, images traitées)
 - Plusieurs fichiers d'entrée et de sortie par tâche
 
-!!! Tip "Astuce"
-
-    Si un processus échoue, vous pouvez naviguer vers son répertoire de travail, examiner `.command.err` pour les messages d'erreur, et même réexécuter `.command.sh` manuellement pour déboguer le problème.
+:::tip[Astuce]
+Si un processus échoue, vous pouvez naviguer vers son répertoire de travail, examiner `.command.err` pour les messages d'erreur, et même réexécuter `.command.sh` manuellement pour déboguer le problème.
+:::
 
 ### 4.3. Nettoyage du répertoire de travail
 
@@ -547,10 +556,10 @@ Resume est particulièrement utile quand :
 - Votre connexion réseau tombe pendant le téléchargement de données
 - Vous voulez ajouter des sorties supplémentaires sans refaire le calcul
 
-!!! Warning "Avertissement"
-
-    Resume ne fonctionne que si vous n'avez pas modifié les données d'entrée, le code du pipeline ou les paramètres.
-    Si vous modifiez l'un de ces éléments, Nextflow réexécutera correctement les tâches affectées.
+:::caution[Avertissement]
+Resume ne fonctionne que si vous n'avez pas modifié les données d'entrée, le code du pipeline ou les paramètres.
+Si vous modifiez l'un de ces éléments, Nextflow réexécutera correctement les tâches affectées.
+:::
 
 ### À retenir
 

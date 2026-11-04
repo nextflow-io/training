@@ -1,12 +1,10 @@
 ---
 title: Plugin Development
-hide:
-  - toc
+description: Nextflow का plugin सिस्टम तुम्हें भाषा को custom फ़ंक्शन, monitoring hooks, execution backends, और बहुत कुछ के साथ extend करने की सुविधा देता है।
+tableOfContents: false
 ---
 
-# Plugin Development
-
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Nextflow का plugin सिस्टम तुम्हें भाषा को custom फ़ंक्शन, monitoring hooks, execution backends, और बहुत कुछ के साथ extend करने की सुविधा देता है।
 Plugins समुदाय को Nextflow के core को modify किए बिना उसमें features जोड़ने में सक्षम बनाते हैं, जिससे वे पाइपलाइनों में reusable functionality साझा करने के लिए आदर्श बन जाते हैं।
@@ -21,15 +19,15 @@ Parts 2-6 में अपना खुद का plugin बनाना शा�
 
 **Prerequisites**
 
-- एक GitHub account या [यहाँ](../../envsetup/02_local.md) बताए अनुसार लोकल इंस्टॉलेशन।
-- [Hello Nextflow](../../hello_nextflow/index.md) कोर्स पूरा किया हो या समकक्ष अनुभव हो।
+- एक GitHub account या [यहाँ](../../envsetup/02_local.mdx) बताए अनुसार लोकल इंस्टॉलेशन।
+- [Hello Nextflow](../../hello_nextflow/index.mdx) कोर्स पूरा किया हो या समकक्ष अनुभव हो।
 - Java 21 या उससे नया संस्करण (प्रशिक्षण वातावरण में शामिल है; केवल Parts 2-6 के लिए आवश्यक है)।
 
 **Working directory:** `side-quests/plugin_development`
 
 #### Training codespace खोलें
 
-अगर तुमने अभी तक ऐसा नहीं किया है, तो [Environment Setup](../../envsetup/index.md) में बताए अनुसार training environment ज़रूर खोलो।
+अगर तुमने अभी तक ऐसा नहीं किया है, तो [Environment Setup](../../envsetup/index.mdx) में बताए अनुसार training environment ज़रूर खोलो।
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -79,4 +77,4 @@ Spock framework का उपयोग करके unit tests लिखें �
 
 कोर्स शुरू करने के लिए तैयार हो?
 
-[सीखना शुरू करें :material-arrow-right:](01_plugin_basics.md){ .md-button .md-button--primary }
+<LinkButton href="01_plugin_basics.mdx" variant="primary" icon="right-arrow">सीखना शुरू करें</LinkButton>

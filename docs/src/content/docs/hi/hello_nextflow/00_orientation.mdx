@@ -1,27 +1,33 @@
-# शुरुआत करना
+---
+title: शुरुआत करना
+description: 'Hello Nextflow: शुरुआत करना'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+<figure>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/PIjOdFaYwWA?si=gZxlXgkVxuLEzOsC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
+<figcaption>
 
-/// caption
-:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube channel पर [पूरी playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) देखें।
+Nextflow YouTube channel पर [पूरी playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) देखें।
 
-:green_book: वीडियो transcript [यहाँ](./transcripts/00_orientation.md) उपलब्ध है।
-///
+📗 वीडियो transcript [यहाँ](./transcripts/00_orientation.mdx) उपलब्ध है।
 
-!!! tip "सुझाव"
+</figcaption>
+</figure>
 
-    YouTube वीडियो में कुछ super powers हैं!
+:::tip[सुझाव]
+YouTube वीडियो में कुछ super powers हैं!
 
-    - :fontawesome-solid-closed-captioning: उच्च गुणवत्ता (manually curated) captions / subtitles। इन्हें :material-subtitles: icon से चालू करो
-    - :material-bookmark: Timeline में video chapters जो page headings से मेल खाते हैं।
+- उच्च गुणवत्ता (manually curated) captions / subtitles। इन्हें CC icon से चालू करो
+- 🔖 Timeline में video chapters जो page headings से मेल खाते हैं।
+:::
 
 ## Training environment शुरू करें
 
-GitHub Codespaces पर हमारे द्वारा प्रदान किए गए pre-built environment का उपयोग करने के लिए, नीचे "Open in GitHub Codespaces" button पर क्लिक करो। अन्य विकल्पों के लिए, [Environment options](../envsetup/index.md) देखें।
+GitHub Codespaces पर हमारे द्वारा प्रदान किए गए pre-built environment का उपयोग करने के लिए, नीचे "Open in GitHub Codespaces" button पर क्लिक करो। अन्य विकल्पों के लिए, [Environment options](../envsetup/index.mdx) देखें।
 
 हम training environment को एक नए browser tab या window में खोलने की सलाह देते हैं (अपने equipment के आधार पर right-click, ctrl-click या cmd-click का उपयोग करो) ताकि तुम environment लोड होने के दौरान पढ़ना जारी रख सको।
 कोर्स के माध्यम से काम करने के लिए तुम्हें इन instructions को parallel में खुला रखना होगा।
@@ -35,12 +41,12 @@ GitHub Codespaces पर हमारे द्वारा प्रदान �
 Codespace एक VSCode interface के साथ सेट किया गया है, जिसमें एक filesystem explorer, एक code editor और एक terminal shell शामिल है।
 कोर्स के दौरान दिए गए सभी instructions (जैसे 'file खोलो', 'code edit करो' या 'यह command चलाओ') VSCode interface के उन तीन भागों को संदर्भित करते हैं जब तक अन्यथा निर्दिष्ट न हो।
 
-यदि तुम इस कोर्स को स्वयं कर रहे हो, तो कृपया अधिक विवरण के लिए [environment basics](../envsetup/01_setup.md) से परिचित हो जाओ।
+यदि तुम इस कोर्स को स्वयं कर रहे हो, तो कृपया अधिक विवरण के लिए [environment basics](../envsetup/01_setup.mdx) से परिचित हो जाओ।
 
 ### Version requirements
 
 यह training Nextflow 25.10.2 या बाद के version के लिए डिज़ाइन की गई है **v2 syntax parser ENABLED के साथ**।
-यदि तुम local या custom environment का उपयोग कर रहे हो, तो कृपया सुनिश्चित करो कि तुम [यहाँ](../info/nxf_versions.md) documented सही settings का उपयोग कर रहे हो।
+यदि तुम local या custom environment का उपयोग कर रहे हो, तो कृपया सुनिश्चित करो कि तुम [यहाँ](../info/nxf_versions.mdx) documented सही settings का उपयोग कर रहे हो।
 
 ## काम करने के लिए तैयार हो जाओ
 
@@ -62,13 +68,13 @@ cd hello-nextflow/
 code .
 ```
 
-!!! tip "सुझाव"
+:::tip[सुझाव]
+यदि किसी भी कारण से तुम इस directory से बाहर चले जाते हो (जैसे तुम्हारा codespace sleep हो जाए), तो तुम हमेशा full path का उपयोग करके इसमें वापस आ सकते हो, यह मानते हुए कि तुम इसे Github Codespaces training environment में चला रहे हो:
 
-    यदि किसी भी कारण से तुम इस directory से बाहर चले जाते हो (जैसे तुम्हारा codespace sleep हो जाए), तो तुम हमेशा full path का उपयोग करके इसमें वापस आ सकते हो, यह मानते हुए कि तुम इसे Github Codespaces training environment में चला रहे हो:
-
-    ```bash
-    cd /workspaces/training/hello-nextflow
-    ```
+```bash
+cd /workspaces/training/hello-nextflow
+```
+:::
 
 अब चलो contents पर एक नज़र डालते हैं।
 
@@ -85,29 +91,32 @@ code .
 tree . -L 2
 ```
 
-??? abstract "डायरेक्टरी सामग्री"
+<details class="abstract">
+<summary>डायरेक्टरी सामग्री</summary>
 
-    ```console
-    .
-    ├── data
-    │   └── greetings.csv
-    ├── hello-channels.nf
-    ├── hello-config.nf
-    ├── hello-containers.nf
-    ├── hello-modules.nf
-    ├── hello-workflow.nf
-    ├── hello-world.nf
-    ├── nextflow.config
-    ├── solutions
-    │   ├── 1-hello-world
-    │   ├── 2-hello-channels
-    │   ├── 3-hello-workflow
-    │   ├── 4-hello-modules
-    │   ├── 5-hello-containers
-    │   └── 6-hello-config
-    ├── test-params.json
-    └── test-params.yaml
-    ```
+```console
+.
+├── data
+│   └── greetings.csv
+├── hello-channels.nf
+├── hello-config.nf
+├── hello-containers.nf
+├── hello-modules.nf
+├── hello-workflow.nf
+├── hello-world.nf
+├── nextflow.config
+├── solutions
+│   ├── 1-hello-world
+│   ├── 2-hello-channels
+│   ├── 3-hello-workflow
+│   ├── 4-hello-modules
+│   ├── 5-hello-containers
+│   └── 6-hello-config
+├── test-params.json
+└── test-params.yaml
+```
+
+</details>
 
 Section को expand करने और इसकी contents देखने के लिए colored box पर क्लिक करो।
 हम expected command output को concise तरीके से शामिल करने के लिए इस तरह के collapsible sections का उपयोग करते हैं।
@@ -134,4 +143,4 @@ Section को expand करने और इसकी contents देखने 
 
 यदि तुम सभी boxes check कर सकते हो, तो तुम जाने के लिए तैयार हो।
 
-**[Part 1: Hello World](./01_hello_world.md) पर जारी रखने के लिए, इस page के नीचे दाएँ कोने में arrow पर क्लिक करो।**
+**[Part 1: Hello World](./01_hello_world.mdx) पर जारी रखने के लिए, इस page के नीचे दाएँ कोने में arrow पर क्लिक करो।**

@@ -1,8 +1,11 @@
-# Teil 2: Pipelines von der Kommandozeile starten
+---
+title: 'Teil 2: Pipelines von der Kommandozeile starten'
+description: In Teil 1 hast du nf-core/rnaseq über die Seqera-Weboberfläche gestartet.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-In [Teil 1](./01_run_with_seqera.md) hast du nf-core/rnaseq über die Seqera-Weboberfläche gestartet.
+In [Teil 1](./01_run_with_seqera.mdx) hast du nf-core/rnaseq über die Seqera-Weboberfläche gestartet.
 Jetzt machen wir dasselbe von der Kommandozeile aus mit dem `tw` CLI und fügen deinem Workspace eine neue Pipeline hinzu.
 
 ---
@@ -32,13 +35,9 @@ sudo mv tw /usr/local/bin/
 
 ```bash
 tw --version
+# [!output]
+Tower CLI version 0.40.0 (build 26db579)
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-    Tower CLI version 0.40.0 (build 26db579)
-    ```
 
 Das `tw` CLI ist installiert und bereit zur Konfiguration.
 
@@ -71,35 +70,31 @@ source .seqera_config
 
 ```bash
 tw info
+# [!output]
+    Details
+-------------------------+-----------------------------
+ Tower API endpoint      | https://api.cloud.seqera.io
+ Tower API version       | 1.150.0
+ Tower version           | 26.1.0-cycle54
+ CLI version             | 0.30.0 (fde9dec)
+ CLI minimum API version | 1.148.0
+ Authenticated user      | <your-name>
+
+System health status
+---------------------------------------+----
+ Remote API server connection check    | OK
+ Tower API version check               | OK
+ Authentication API credential's token | OK
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-        Details
-    -------------------------+-----------------------------
-     Tower API endpoint      | https://api.cloud.seqera.io
-     Tower API version       | 1.150.0
-     Tower version           | 26.1.0-cycle54
-     CLI version             | 0.30.0 (fde9dec)
-     CLI minimum API version | 1.148.0
-     Authenticated user      | <your-name>
-
-    System health status
-    ---------------------------------------+----
-     Remote API server connection check    | OK
-     Tower API version check               | OK
-     Authentication API credential's token | OK
-    ```
 
 Das `tw` CLI ist jetzt authentifiziert und mit deinem Seqera-Konto verbunden.
 Führe `source .seqera_config` zu Beginn jeder Codespace-Sitzung aus, um die Konfiguration neu zu laden.
 
-!!! tip "Tipp"
-
-    Wenn dein Workspace keine primäre Compute-Umgebung festgelegt hat, kannst du `export TOWER_COMPUTE_ENV=<compute-env-name>` zu deiner Konfigurationsdatei hinzufügen, um eine Standardumgebung festzulegen.
-    Jeder Konfigurationswert kann auf der Kommandozeile überschrieben werden, indem das Flag explizit übergeben wird (z. B. `--compute-env other-env`).
-    Siehe die [tw CLI-Referenz](https://docs.seqera.io/platform/latest/cli/reference) für die vollständige Liste der Optionen und Umgebungsvariablen.
+:::tip[Tipp]
+Wenn dein Workspace keine primäre Compute-Umgebung festgelegt hat, kannst du `export TOWER_COMPUTE_ENV=<compute-env-name>` zu deiner Konfigurationsdatei hinzufügen, um eine Standardumgebung festzulegen.
+Jeder Konfigurationswert kann auf der Kommandozeile überschrieben werden, indem das Flag explizit übergeben wird (z. B. `--compute-env other-env`).
+Siehe die [tw CLI-Referenz](https://docs.seqera.io/platform/latest/cli/reference) für die vollständige Liste der Optionen und Umgebungsvariablen.
+:::
 
 ### 1.4. Deinen Workspace vom CLI aus erkunden
 
@@ -107,73 +102,61 @@ Liste die Workspaces auf, auf die du Zugriff hast:
 
 ```bash
 tw workspaces list
+# [!output]
+Available workspaces:
+ID              | Name            | Full Name                | Visibility
+--------------- | --------------- | ------------------------ | ----------
+<workspace-id>  | my-workspace    | my-org/my-workspace      | PRIVATE
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-    Available workspaces:
-    ID              | Name            | Full Name                | Visibility
-    --------------- | --------------- | ------------------------ | ----------
-    <workspace-id>  | my-workspace    | my-org/my-workspace      | PRIVATE
-    ```
 
 Zeige die Runs in deinem Workspace an, einschließlich des nf-core/rnaseq-Runs, den du gerade gestartet hast:
 
 ```bash
 tw runs list
+# [!output]
+Pipeline runs for my-org/my-workspace workspace:
+ID        | Status   | Name          | Pipeline               | Run name
+--------- | -------- | ------------- | ---------------------- | --------
+<run-id>  | RUNNING  | ...           | nf-core/rnaseq         | happy_curie
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-    Pipeline runs for my-org/my-workspace workspace:
-    ID        | Status   | Name          | Pipeline               | Run name
-    --------- | -------- | ------------- | ---------------------- | --------
-    <run-id>  | RUNNING  | ...           | nf-core/rnaseq         | happy_curie
-    ```
 
 Derselbe Run, den du in der Weboberfläche überwachst, ist hier sichtbar.
 
-!!! note "Hinweis"
+:::note[Hinweis]
+Da `TOWER_WORKSPACE_ID` in `.seqera_config` gesetzt ist, kannst du `--workspace` bei allen `tw`-Befehlen weglassen.
+Ohne die Konfiguration würdest du es explizit übergeben:
 
-    Da `TOWER_WORKSPACE_ID` in `.seqera_config` gesetzt ist, kannst du `--workspace` bei allen `tw`-Befehlen weglassen.
-    Ohne die Konfiguration würdest du es explizit übergeben:
-
-    ```bash
-    tw runs list --workspace <org>/<workspace>
-    ```
+```bash
+tw runs list --workspace <org>/<workspace>
+```
+:::
 
 Alles, was in der Weboberfläche sichtbar ist, ist auch vom CLI aus zugänglich.
 
 ### 1.5. nf-core/rnaseq vom CLI starten
 
-Die Pipeline, die du in [Teil 1](./01_run_with_seqera.md) zu deinem Workspace hinzugefügt hast, ist im CLI über ihren Namen verfügbar.
+Die Pipeline, die du in [Teil 1](./01_run_with_seqera.mdx) zu deinem Workspace hinzugefügt hast, ist im CLI über ihren Namen verfügbar.
 Starte sie mit dem `test`-Profil:
 
 ```bash
 tw launch nf-core-rnaseq --profile test
+# [!output]
+Launching pipeline nf-core-rnaseq
+Run name: focused_einstein
+https://cloud.seqera.io/orgs/my-org/workspaces/my-workspace/watch/<run-id>
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-    Launching pipeline nf-core-rnaseq
-    Run name: focused_einstein
-    https://cloud.seqera.io/orgs/my-org/workspaces/my-workspace/watch/<run-id>
-    ```
 
 Öffne den Link in deinem Browser und bestätige, dass der Run im **Runs**-Panel erscheint.
 
 Sobald du siehst, dass er läuft, hast du bestätigt, dass das CLI und die Weboberfläche zwei Ansichten desselben Workspace sind.
 
-!!! note "Hinweis"
+:::note[Hinweis]
+Du kannst auch eine vollständige GitHub-URL direkt an `tw launch` übergeben, ohne die Pipeline vorher zu einem Workspace hinzuzufügen.
+Es ist jedoch generell besser, die Pipeline vor dem Start explizit hinzuzufügen: So wird die Pipeline-Konfiguration für zukünftige Runs gespeichert, sie ist über ihren Namen verfügbar und für alle Workspace-Mitglieder im Launchpad sichtbar.
 
-    Du kannst auch eine vollständige GitHub-URL direkt an `tw launch` übergeben, ohne die Pipeline vorher zu einem Workspace hinzuzufügen.
-    Es ist jedoch generell besser, die Pipeline vor dem Start explizit hinzuzufügen: So wird die Pipeline-Konfiguration für zukünftige Runs gespeichert, sie ist über ihren Namen verfügbar und für alle Workspace-Mitglieder im Launchpad sichtbar.
-
-    Es ist möglich, eine Pipeline direkt von der Kommandozeile aus mit `tw` zu einem Workspace hinzuzufügen.
-    Der nächste Abschnitt zeigt, wie das mit der nf-core/demo-Pipeline geht.
+Es ist möglich, eine Pipeline direkt von der Kommandozeile aus mit `tw` zu einem Workspace hinzuzufügen.
+Der nächste Abschnitt zeigt, wie das mit der nf-core/demo-Pipeline geht.
+:::
 
 ### Fazit
 
@@ -198,13 +181,9 @@ Führe den folgenden Befehl aus, um die Pipeline in deinem Workspace zu registri
 tw pipelines add \
     --name nf-core-demo \
     https://github.com/nf-core/demo
+# [!output]
+New pipeline 'nf-core-demo' added at my-org/my-workspace workspace
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-    New pipeline 'nf-core-demo' added at my-org/my-workspace workspace
-    ```
 
 Die Pipeline ist jetzt registriert und erscheint im Launchpad.
 
@@ -214,23 +193,19 @@ Liste die Pipelines in deinem Workspace auf, um zu bestätigen, dass sie hinzuge
 
 ```bash
 tw pipelines list
+# [!output]
+Pipelines at my-org/my-workspace:
+ID   | Name            | Repository
+---- | --------------- | -----------------------------------------
+...  | nf-core-demo    | https://github.com/nf-core/demo
+...  | nf-core-rnaseq  | ...
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-    Pipelines at my-org/my-workspace:
-    ID   | Name            | Repository
-    ---- | --------------- | -----------------------------------------
-    ...  | nf-core-demo    | https://github.com/nf-core/demo
-    ...  | nf-core-rnaseq  | ...
-    ```
 
 Öffne deinen Workspace im Browser und klicke auf **Launchpad**, um zu bestätigen, dass nf-core/demo jetzt neben nf-core/rnaseq erscheint.
 
-!!! tip "Tipp"
-
-    Du kannst Pipelines auch über die Weboberfläche hinzufügen: Klicke in der linken Seitenleiste auf **Launchpad**, dann auf **Add pipeline** und fülle das Formular entsprechend aus.
+:::tip[Tipp]
+Du kannst Pipelines auch über die Weboberfläche hinzufügen: Klicke in der linken Seitenleiste auf **Launchpad**, dann auf **Add pipeline** und fülle das Formular entsprechend aus.
+:::
 
 Klicke auf die Schaltfläche **Launch** beim nf-core/demo-Eintrag, um das Startformular zu öffnen.
 Du wirst sehen, dass die Parameter `input` und `outdir` rot hervorgehoben sind – sie sind Pflichtfelder ohne Standardwerte, da `tw pipelines add` nur die Pipeline-Quelle registriert, ohne Parameter vorzukonfigurieren.
@@ -281,30 +256,26 @@ Jetzt kannst du die Pipeline mit dem `test`-Profil (das das `input`-Samplesheet 
 
 ```bash
 tw launch nf-core-demo --profile test --params-file params.yaml
+# [!output]
+Launching pipeline nf-core-demo
+Run name: focused_feynman
+https://cloud.seqera.io/orgs/my-org/workspaces/my-workspace/watch/<run-id>
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-    Launching pipeline nf-core-demo
-    Run name: focused_feynman
-    https://cloud.seqera.io/orgs/my-org/workspaces/my-workspace/watch/<run-id>
-    ```
 
 Öffne den Link, um zu bestätigen, dass der Run im **Runs**-Panel erscheint.
 
-!!! tip "Tipp"
+:::tip[Tipp]
+Du kannst die Parameterdatei auch beim ersten Einrichtungsschritt angeben, wenn du einige Standardwerte festlegen möchtest, sowie einige zusätzliche Eigenschaften, die dem entsprechen, was wir zuvor über das Webformular gemacht haben:
 
-    Du kannst die Parameterdatei auch beim ersten Einrichtungsschritt angeben, wenn du einige Standardwerte festlegen möchtest, sowie einige zusätzliche Eigenschaften, die dem entsprechen, was wir zuvor über das Webformular gemacht haben:
-
-    ```bash
-    tw pipelines add \
-      --name nf-core-demo-gg \
-      --description "Demo pipeline with defaults for testing" \
-      --params-file params.yaml \
-      --profile test \
-      https://github.com/nf-core/demo
-    ```
+```bash
+tw pipelines add \
+  --name nf-core-demo-gg \
+  --description "Demo pipeline with defaults for testing" \
+  --params-file params.yaml \
+  --profile test \
+  https://github.com/nf-core/demo
+```
+:::
 
 ### Fazit
 

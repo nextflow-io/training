@@ -1,8 +1,11 @@
-# Getting started
+---
+title: Getting started
+description: 'Configure Execution: Getting started'
+---
 
 ## Start a training environment
 
-To use the pre-built environment we provide on GitHub Codespaces, click the "Open in GitHub Codespaces" button below. For other options, see [Environment options](../envsetup/index.md).
+To use the pre-built environment we provide on GitHub Codespaces, click the "Open in GitHub Codespaces" button below. For other options, see [Environment options](../envsetup/index.mdx).
 
 We recommend opening the training environment in a new browser tab or window (use right-click, ctrl-click or cmd-click depending on your equipment) so that you can read on while the environment loads.
 You will need to keep these instructions open in parallel to work through the course.
@@ -16,12 +19,12 @@ This training environment contains all the software, code and data necessary to 
 The codespace is set up with a VSCode interface, which includes a filesystem explorer, a code editor and a terminal shell.
 All instructions given during the course (e.g. 'open the file', 'edit the code' or 'run this command') refer to those three parts of the VSCode interface unless otherwise specified.
 
-If you are working through this course by yourself, please acquaint yourself with the [environment basics](../envsetup/01_setup.md) for further details.
+If you are working through this course by yourself, please acquaint yourself with the [environment basics](../envsetup/01_setup.mdx) for further details.
 
 ### Version requirements
 
 This course requires Nextflow 25.10.2 or later, with the v2 syntax parser enabled (the default in 25.10+).
-If you are using a local or custom environment, please make sure you are using the correct settings as documented [here](../info/nxf_versions.md).
+If you are using a local or custom environment, please make sure you are using the correct settings as documented [here](../info/nxf_versions.mdx).
 
 ## Get ready to work
 
@@ -42,13 +45,13 @@ Then set VSCode to focus on this directory, so only the relevant files appear in
 code .
 ```
 
-!!! tip
+:::tip
+If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
 
-    If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
-
-    ```bash
-    cd /workspaces/training/config-exec
-    ```
+```bash
+cd /workspaces/training/config-exec
+```
+:::
 
 ### Explore the materials provided
 
@@ -59,22 +62,25 @@ Run the following from the terminal to see the full structure:
 tree . -L 2
 ```
 
-??? abstract "Directory contents"
+<details class="abstract">
+<summary>Directory contents</summary>
 
-    ```console
-    .
-    ├── data
-    │   └── greetings.csv
-    ├── main.nf
-    ├── modules
-    │   ├── collectGreetings.nf
-    │   ├── convertToUpper.nf
-    │   ├── cowpy.nf
-    │   └── sayHello.nf
-    └── nextflow.config
-    ```
+```console
+.
+├── data
+│   └── greetings.csv
+├── main.nf
+├── modules
+│   ├── collectGreetings.nf
+│   ├── convertToUpper.nf
+│   ├── cowpy.nf
+│   └── sayHello.nf
+└── nextflow.config
+```
 
-The **`main.nf`** and **`modules/`** files are the same multi-step pipeline from [Nextflow Run](../nextflow_run/index.md), and the **`nextflow.config`** file is the same configuration you already saw there.
+</details>
+
+The **`main.nf`** and **`modules/`** files are the same multi-step pipeline from [Nextflow Run](../nextflow_run/index.mdx), and the **`nextflow.config`** file is the same configuration you already saw there.
 You'll extend both over the course of these exercises.
 
 The **`data/`** directory contains the CSV input file the pipeline reads from.
@@ -89,4 +95,4 @@ Think you're ready to dive in?
 
 If you can check all the boxes, you're good to go.
 
-**To continue to [Part 1: Adapt to your compute environment](./01_packaging_and_execution.md), click on the arrow in the bottom right corner of this page.**
+**To continue to [Part 1: Adapt to your compute environment](./01_packaging_and_execution.mdx), click on the arrow in the bottom right corner of this page.**

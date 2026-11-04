@@ -1,22 +1,25 @@
-# 1부: nf-core용 Hello 재작성
+---
+title: '1부: nf-core용 Hello 재작성'
+description: Build with nf-core 교육 과정의 첫 번째 부분에서는 Hello Nextflow 초급자 과정에서 만든 파이프라인의 nf-core 호환 버전을 생성하는 방법을 보여드립니다.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Build with nf-core 교육 과정의 첫 번째 부분에서는 [Hello Nextflow](../hello_nextflow/index.md) 초급자 과정에서 만든 파이프라인의 nf-core 호환 버전을 생성하는 방법을 보여드립니다.
+Build with nf-core 교육 과정의 첫 번째 부분에서는 [Hello Nextflow](../hello_nextflow/index.mdx) 초급자 과정에서 만든 파이프라인의 nf-core 호환 버전을 생성하는 방법을 보여드립니다.
 
 두 단계로 진행합니다. 먼저 nf-core 도구를 사용하여 파이프라인 스캐폴드를 생성한 다음, 기존의 '일반' 파이프라인 코드를 스캐폴드에 맞게 조정합니다.
 
-Hello 파이프라인에 익숙하지 않거나 복습이 필요하시면 [이 정보 페이지](../info/hello_pipeline.md)를 참조하세요.
+Hello 파이프라인에 익숙하지 않거나 복습이 필요하시면 [이 정보 페이지](../info/hello_pipeline.mdx)를 참조하세요.
 
-!!! tip "팁"
+:::tip[팁]
+이 과정에서는 Hello Nextflow 입문 과정에서 다루지 않은 두 가지 중요한 Nextflow 메커니즘을 학습합니다: [meta maps](../side_quests/metadata/index.mdx)와 [workflows of workflows](../side_quests/workflows_of_workflows/index.mdx)입니다. 두 주제 모두 링크된 Side Quest에서 자세히 다룹니다.
 
-    이 과정에서는 Hello Nextflow 입문 과정에서 다루지 않은 두 가지 중요한 Nextflow 메커니즘을 학습합니다: [meta maps](../side_quests/metadata/index.md)와 [workflows of workflows](../side_quests/workflows_of_workflows/index.md)입니다. 두 주제 모두 링크된 Side Quest에서 자세히 다룹니다.
+아래 지침에는 nf-core 맥락에서 이러한 메커니즘이 어떻게 사용되는지 이해하는 데 필요한 핵심 정보가 포함되어 있지만, 한 번에 많은 내용을 접하게 될 수 있습니다.
+시간이 있다면 두 Side Quest를 먼저 학습하는 것을 권장합니다(순서는 무관합니다):
 
-    아래 지침에는 nf-core 맥락에서 이러한 메커니즘이 어떻게 사용되는지 이해하는 데 필요한 핵심 정보가 포함되어 있지만, 한 번에 많은 내용을 접하게 될 수 있습니다.
-    시간이 있다면 두 Side Quest를 먼저 학습하는 것을 권장합니다(순서는 무관합니다):
-
-    - [Workflows of Workflows](../side_quests/workflows_of_workflows/index.md)
-    - [Metadata and meta maps](../side_quests/metadata/index.md)
+- [Workflows of Workflows](../side_quests/workflows_of_workflows/index.mdx)
+- [Metadata and meta maps](../side_quests/metadata/index.mdx)
+:::
 
 ---
 
@@ -25,7 +28,7 @@ Hello 파이프라인에 익숙하지 않거나 복습이 필요하시면 [이 �
 nf-core 프로젝트는 파이프라인의 구조, 코드 구성, 설정, 문서화 방식에 대한 엄격한 가이드라인을 적용합니다.
 
 파이프라인 생성 작업을 시작하기 전에 해당 구조와 구성 방식을 이해해야 합니다.
-[시작하기](00_orientation.md) 단계에서 클론한 `pipelines/nf-core/demo` 복사본을 사용하여 `nf-core/demo` 저장소에서 파이프라인 코드가 어떻게 구성되어 있는지 살펴보겠습니다.
+[시작하기](00_orientation.mdx) 단계에서 클론한 `pipelines/nf-core/demo` 복사본을 사용하여 `nf-core/demo` 저장소에서 파이프라인 코드가 어떻게 구성되어 있는지 살펴보겠습니다.
 
 파일 탐색기를 사용하거나 `tree` 명령으로 `pipelines/nf-core/demo` 디렉토리를 찾아 열 수 있습니다.
 
@@ -33,36 +36,39 @@ nf-core 프로젝트는 파이프라인의 구조, 코드 구성, 설정, 문서
 tree -L 1 pipelines/nf-core/demo
 ```
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console
-    pipelines/nf-core/demo
-    ├── assets
-    ├── CHANGELOG.md
-    ├── CITATIONS.md
-    ├── CODE_OF_CONDUCT.md
-    ├── conf
-    ├── docs
-    ├── LICENSE
-    ├── main.nf
-    ├── modules
-    ├── modules.json
-    ├── nextflow.config
-    ├── nextflow_schema.json
-    ├── nf-test.config
-    ├── README.md
-    ├── ro-crate-metadata.json
-    ├── subworkflows
-    ├── tests
-    ├── tower.yml
-    └── workflows
-    ```
+```console
+pipelines/nf-core/demo
+├── assets
+├── CHANGELOG.md
+├── CITATIONS.md
+├── CODE_OF_CONDUCT.md
+├── conf
+├── docs
+├── LICENSE
+├── main.nf
+├── modules
+├── modules.json
+├── nextflow.config
+├── nextflow_schema.json
+├── nf-test.config
+├── README.md
+├── ro-crate-metadata.json
+├── subworkflows
+├── tests
+├── tower.yml
+└── workflows
+```
+
+</details>
 
 지금은 파이프라인 코드 구성 요소(`main.nf`, `workflows`, `subworkflows`, `modules`)와 이들이 서로 어떻게 연관되는지에 집중하겠습니다.
 
 ### 1.1. nf-core 워크플로우의 모듈식 구조
 
-표준 nf-core 파이프라인 코드 구성은 코드 재사용을 극대화하도록 설계된 모듈식 구조를 따릅니다. 이는 [Hello Nextflow](../hello_nextflow/04_hello_modules.md) 과정의 4부인 [Hello Modules](../hello_nextflow/index.md)에서 소개된 내용이지만, nf-core 방식에 맞게 약간의 추가적인 복잡성이 적용됩니다.
+표준 nf-core 파이프라인 코드 구성은 코드 재사용을 극대화하도록 설계된 모듈식 구조를 따릅니다. 이는 [Hello Nextflow](../hello_nextflow/04_hello_modules.mdx) 과정의 4부인 [Hello Modules](../hello_nextflow/index.mdx)에서 소개된 내용이지만, nf-core 방식에 맞게 약간의 추가적인 복잡성이 적용됩니다.
 구체적으로, nf-core 파이프라인은 상위 workflow에서 가져오는 workflow 스크립트인 subworkflow를 적극적으로 활용합니다.
 
 다소 추상적으로 들릴 수 있으므로, `nf-core/demo` 파이프라인에서 실제로 어떻게 사용되는지 살펴보겠습니다.
@@ -71,18 +77,16 @@ tree -L 1 pipelines/nf-core/demo
 
 관련 코드 구성 요소 간의 관계는 다음과 같습니다:
 
-<figure class="excalidraw">
-    --8<-- "docs/en/docs/nfcore_build/img/nf-core_demo_code_organization.svg"
-</figure>
+![](../../nfcore_build/img/nf-core_demo_code_organization.excalidraw.svg)
 
 `main.nf`의 이름 없는 workflow는 _진입점(entrypoint)_ 스크립트라고 합니다. 이는 두 종류의 내포된 workflow를 위한 래퍼 역할을 합니다: `workflows/demo.nf`에 위치한 실제 분석 로직을 포함하는 `DEMO` workflow와 `subworkflows/` 아래에 위치한 일련의 관리 workflow입니다.
 `demo.nf` workflow는 `modules/` 아래에 위치한 **모듈**을 호출하며, 이 모듈들에는 실제 분석 단계를 수행하는 **프로세스**가 포함되어 있습니다.
 
-!!! info "정보"
+:::note[정보]
+Subworkflow는 관리 기능에만 국한되지 않으며, 프로세스 모듈을 활용할 수 있습니다.
 
-    Subworkflow는 관리 기능에만 국한되지 않으며, 프로세스 모듈을 활용할 수 있습니다.
-
-    여기서 소개하는 `nf-core/demo` 파이프라인은 비교적 단순한 편이지만, `nf-core/rnaseq`와 같은 다른 nf-core 파이프라인은 실제 분석에 관여하는 subworkflow를 활용합니다.
+여기서 소개하는 `nf-core/demo` 파이프라인은 비교적 단순한 편이지만, `nf-core/rnaseq`와 같은 다른 nf-core 파이프라인은 실제 분석에 관여하는 subworkflow를 활용합니다.
+:::
 
 이제 이러한 구성 요소를 자세히 살펴보겠습니다.
 
@@ -103,17 +107,17 @@ tree -L 1 pipelines/nf-core/demo
 
 `demo.nf` workflow는 `modules/` 아래에 위치한 **모듈**을 호출하며, 다음에 살펴보겠습니다.
 
-!!! info "정보"
+:::note[정보]
+일부 nf-core 분석 workflow는 하위 수준의 subworkflow를 호출하여 추가적인 내포 수준을 보여줍니다.
+이는 주로 함께 자주 사용되는 두 개 이상의 모듈을 쉽게 재사용 가능한 파이프라인 세그먼트로 묶는 데 사용됩니다.
+nf-core 웹사이트에서 사용 가능한 [nf-core subworkflows](https://nf-co.re/subworkflows/)를 탐색하여 몇 가지 예시를 확인할 수 있습니다.
 
-    일부 nf-core 분석 workflow는 하위 수준의 subworkflow를 호출하여 추가적인 내포 수준을 보여줍니다.
-    이는 주로 함께 자주 사용되는 두 개 이상의 모듈을 쉽게 재사용 가능한 파이프라인 세그먼트로 묶는 데 사용됩니다.
-    nf-core 웹사이트에서 사용 가능한 [nf-core subworkflows](https://nf-co.re/subworkflows/)를 탐색하여 몇 가지 예시를 확인할 수 있습니다.
-
-    분석 스크립트가 subworkflow를 사용하는 경우, 해당 subworkflow는 `subworkflows/` 디렉토리 아래에 저장됩니다.
+분석 스크립트가 subworkflow를 사용하는 경우, 해당 subworkflow는 `subworkflows/` 디렉토리 아래에 저장됩니다.
+:::
 
 ### 1.4. 모듈
 
-모듈은 [Hello Nextflow 교육 과정 4부](../hello_nextflow/04_hello_modules.md)에서 설명한 것처럼 프로세스 코드가 위치하는 곳입니다.
+모듈은 [Hello Nextflow 교육 과정 4부](../hello_nextflow/04_hello_modules.mdx)에서 설명한 것처럼 프로세스 코드가 위치하는 곳입니다.
 
 nf-core 프로젝트에서 모듈은 출처와 내용을 모두 반영하는 다단계 내포 구조로 구성됩니다.
 최상위 수준에서 모듈은 `nf-core` 또는 `local`(nf-core 프로젝트에 속하지 않음)로 구분되며, 이후 래핑하는 도구의 이름을 딴 디렉토리에 배치됩니다.
@@ -125,31 +129,34 @@ nf-core 프로젝트에서 모듈은 출처와 내용을 모두 반영하는 다
 tree -L 3 pipelines/nf-core/demo/modules
 ```
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console
-    pipelines/nf-core/demo/modules
-    ├── local
-    │   └── cowpy
-    │       ├── environment.yml
-    │       ├── main.nf
-    │       └── meta.yaml
-    └── nf-core
-        ├── fastqc
-        │   ├── environment.yml
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
-        ├── multiqc
-        │   ├── environment.yml
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
-        └── seqtk
-            └── trim
+```console
+pipelines/nf-core/demo/modules
+├── local
+│   └── cowpy
+│       ├── environment.yml
+│       ├── main.nf
+│       └── meta.yaml
+└── nf-core
+    ├── fastqc
+    │   ├── environment.yml
+    │   ├── main.nf
+    │   ├── meta.yml
+    │   └── tests
+    ├── multiqc
+    │   ├── environment.yml
+    │   ├── main.nf
+    │   ├── meta.yml
+    │   └── tests
+    └── seqtk
+        └── trim
 
-    9 directories, 9 files
-    ```
+9 directories, 9 files
+```
+
+</details>
 
 `fastqc`와 `multiqc` 모듈은 `nf-core` 모듈 내 최상위 수준에 위치하는 반면, `trim` 모듈은 속한 툴킷인 `seqtk` 아래에 위치합니다.
 `local` 아래의 `cowpy` 모듈은 nf-core 모듈 저장소에서 설치된 것이 아니라 이 파이프라인을 위해 특별히 작성된 로컬 모듈입니다.
@@ -167,36 +174,39 @@ tree -L 3 pipelines/nf-core/demo/modules
 tree -L 3 pipelines/nf-core/demo/subworkflows
 ```
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console
-    pipelines/nf-core/demo/subworkflows
-    ├── local
-    │   └── utils_nfcore_demo_pipeline
-    │       └── main.nf
-    └── nf-core
-        ├── utils_nextflow_pipeline
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
-        ├── utils_nfcore_pipeline
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
-        └── utils_nfschema_plugin
-            ├── main.nf
-            ├── meta.yml
-            └── tests
+```console
+pipelines/nf-core/demo/subworkflows
+├── local
+│   └── utils_nfcore_demo_pipeline
+│       └── main.nf
+└── nf-core
+    ├── utils_nextflow_pipeline
+    │   ├── main.nf
+    │   ├── meta.yml
+    │   └── tests
+    ├── utils_nfcore_pipeline
+    │   ├── main.nf
+    │   ├── meta.yml
+    │   └── tests
+    └── utils_nfschema_plugin
+        ├── main.nf
+        ├── meta.yml
+        └── tests
 
-    9 directories, 7 files
-    ```
+9 directories, 7 files
+```
+
+</details>
 
 위에서 언급했듯이, `nf-core/demo` 파이프라인에는 분석 특화 subworkflow가 포함되어 있지 않으므로, 여기서 볼 수 있는 모든 subworkflow는 이름의 `utils_` 접두사로 표시된 소위 '관리' 또는 '유틸리티' workflow입니다.
 이러한 subworkflow는 콘솔 출력에서 멋진 nf-core 헤더를 생성하는 것을 비롯한 다양한 부속 기능을 담당합니다.
 
-!!! tip "팁"
-
-    명명 패턴 외에도, 이러한 subworkflow가 실제 분석 관련 기능을 수행하지 않는다는 또 다른 표시는 프로세스를 전혀 호출하지 않는다는 것입니다.
+:::tip[팁]
+명명 패턴 외에도, 이러한 subworkflow가 실제 분석 관련 기능을 수행하지 않는다는 또 다른 표시는 프로세스를 전혀 호출하지 않는다는 것입니다.
+:::
 
 이것으로 `nf-core/demo` 파이프라인을 구성하는 핵심 코드 구성 요소에 대한 개요가 완료됩니다.
 
@@ -226,15 +236,15 @@ nf-core pipelines create
 
 이 명령을 실행하면 파이프라인 생성을 위한 텍스트 사용자 인터페이스(TUI)가 열립니다:
 
-<div style="text-align: center;">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/VwjXNXONHlY?si=d0HkFSISnKn76TeI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/VwjXNXONHlY?si=d0HkFSISnKn76TeI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 이 TUI는 파이프라인에 대한 기본 정보를 제공하도록 요청하며 파이프라인 스캐폴드에 포함하거나 제외할 기능을 선택할 수 있게 해줍니다.
 
 - 시작 화면에서 **Let's go!**를 클릭합니다.
 - `Choose pipeline type` 화면에서 **Custom**을 클릭합니다.
-- 다음과 같이 파이프라인 세부 정보를 입력한 후(< YOUR NAME >을 자신의 이름으로 교체), **Next**를 클릭합니다.
+- 다음과 같이 파이프라인 세부 정보를 입력한 후(&lt; YOUR NAME >을 자신의 이름으로 교체), **Next**를 클릭합니다.
 
 ```
 [ ] GitHub organisation: core
@@ -258,20 +268,23 @@ nf-core pipelines create
 
 TUI가 닫히면 다음과 같은 콘솔 출력이 표시됩니다.
 
-??? success "명령 출력"
+<details class="success">
+<summary>명령 출력</summary>
 
-    ```console
-                                              ,--./,-.
-              ___     __   __   __   ___     /,-._.--~\
-        |\ | |__  __ /  ` /  \ |__) |__         }  {
-        | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                              `._,._,'
+```console
+                                          ,--./,-.
+          ___     __   __   __   ___     /,-._.--~\
+    |\ | |__  __ /  ` /  \ |__) |__         }  {
+    | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                          `._,._,'
 
-        nf-core/tools version 4.1.0 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
-    INFO     Launching interactive nf-core pipeline creation tool.
-    ```
+INFO     Launching interactive nf-core pipeline creation tool.
+```
+
+</details>
 
 TUI가 완료되면 도구가 파이프라인을 생성하고, 새 파이프라인의 로컬 git 저장소를 초기화했다고 보고합니다:
 
@@ -289,64 +302,67 @@ INFO     Pipeline created: ./core-hello
 tree core-hello
 ```
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console
-    core-hello
-    ├── assets
-    │   ├── samplesheet.csv
-    │   └── schema_input.json
-    ├── conf
-    │   ├── base.config
-    │   ├── modules.config
-    │   ├── test.config
-    │   └── test_full.config
-    ├── docs
-    │   ├── CONTRIBUTING.md
-    │   ├── output.md
-    │   ├── README.md
-    │   └── usage.md
-    ├── main.nf
-    ├── modules.json
-    ├── nextflow.config
-    ├── nextflow_schema.json
-    ├── README.md
-    ├── subworkflows
-    │   ├── local
-    │   │   └── utils_nfcore_hello_pipeline
-    │   │       └── main.nf
-    │   └── nf-core
-    │       ├── utils_nextflow_pipeline
-    │       │   ├── main.nf
-    │       │   ├── meta.yml
-    │       │   └── tests
-    │       │       ├── main.function.nf.test
-    │       │       ├── main.function.nf.test.snap
-    │       │       ├── main.workflow.nf.test
-    │       │       └── nextflow.config
-    │       ├── utils_nfcore_pipeline
-    │       │   ├── main.nf
-    │       │   ├── meta.yml
-    │       │   └── tests
-    │       │       ├── main.function.nf.test
-    │       │       ├── main.function.nf.test.snap
-    │       │       ├── main.nf.test
-    │       │       ├── main.nf.test.snap
-    │       │       ├── main.workflow.nf.test
-    │       │       ├── main.workflow.nf.test.snap
-    │       │       └── nextflow.config
-    │       └── utils_nfschema_plugin
-    │           ├── main.nf
-    │           ├── meta.yml
-    │           └── tests
-    │               ├── main.nf.test
-    │               ├── nextflow.config
-    │               └── nextflow_schema.json
-    └── workflows
-        └── hello.nf
+```console
+core-hello
+├── assets
+│   ├── samplesheet.csv
+│   └── schema_input.json
+├── conf
+│   ├── base.config
+│   ├── modules.config
+│   ├── test.config
+│   └── test_full.config
+├── docs
+│   ├── CONTRIBUTING.md
+│   ├── output.md
+│   ├── README.md
+│   └── usage.md
+├── main.nf
+├── modules.json
+├── nextflow.config
+├── nextflow_schema.json
+├── README.md
+├── subworkflows
+│   ├── local
+│   │   └── utils_nfcore_hello_pipeline
+│   │       └── main.nf
+│   └── nf-core
+│       ├── utils_nextflow_pipeline
+│       │   ├── main.nf
+│       │   ├── meta.yml
+│       │   └── tests
+│       │       ├── main.function.nf.test
+│       │       ├── main.function.nf.test.snap
+│       │       ├── main.workflow.nf.test
+│       │       └── nextflow.config
+│       ├── utils_nfcore_pipeline
+│       │   ├── main.nf
+│       │   ├── meta.yml
+│       │   └── tests
+│       │       ├── main.function.nf.test
+│       │       ├── main.function.nf.test.snap
+│       │       ├── main.nf.test
+│       │       ├── main.nf.test.snap
+│       │       ├── main.workflow.nf.test
+│       │       ├── main.workflow.nf.test.snap
+│       │       └── nextflow.config
+│       └── utils_nfschema_plugin
+│           ├── main.nf
+│           ├── meta.yml
+│           └── tests
+│               ├── main.nf.test
+│               ├── nextflow.config
+│               └── nextflow_schema.json
+└── workflows
+    └── hello.nf
 
-    14 directories, 37 files
-    ```
+14 directories, 37 files
+```
+
+</details>
 
 정말 많은 파일입니다!
 아직 조금 헷갈리더라도 걱정하지 마세요. 중요한 부분들을 곧 살펴보고, 이후 과정에서 단계적으로 다루겠습니다.
@@ -359,42 +375,38 @@ tree core-hello
 
 ```bash
 nextflow run ./core-hello -profile docker,test --outdir core-hello-results
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `./core-hello/main.nf` [cheesy_avogadro] revision: d6bbba9521
+
+WARN: Unrecognized config option 'validation.defaultIgnoreParams'
+WARN: Unrecognized config option 'validation.monochromeLogs'
+Input/output options
+  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
+  outdir                    : core-hello-results
+
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
+
+Generic options
+  trace_report_suffix       : 2026-06-23_16-56-58
+
+Core Nextflow options
+  runName                   : cheesy_avogadro
+  containerEngine           : docker
+  launchDir                 : /workspaces/training/nfcore-build
+  workDir                   : /workspaces/training/nfcore-build/work
+  projectDir                : /workspaces/training/nfcore-build/core-hello
+  userName                  : root
+  profile                   : docker,test
+  configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+-[core/hello] Pipeline completed successfully-
 ```
-
-??? success "명령 출력"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `./core-hello/main.nf` [cheesy_avogadro] revision: d6bbba9521
-
-    WARN: Unrecognized config option 'validation.defaultIgnoreParams'
-    WARN: Unrecognized config option 'validation.monochromeLogs'
-    Input/output options
-      input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
-      outdir                    : core-hello-results
-
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
-
-    Generic options
-      trace_report_suffix       : 2026-06-23_16-56-58
-
-    Core Nextflow options
-      runName                   : cheesy_avogadro
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nfcore-build
-      workDir                   : /workspaces/training/nfcore-build/work
-      projectDir                : /workspaces/training/nfcore-build/core-hello
-      userName                  : root
-      profile                   : docker,test
-      configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
-
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-    -[core/hello] Pipeline completed successfully-
-    ```
 
 `WARN: Unrecognized config option 'validation.*'` 줄은 새로 생성된 템플릿에 고정된 nf-schema 플러그인 버전에서 발생합니다.
 이는 무해하며 실행에 영향을 주지 않습니다.
@@ -402,23 +414,23 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 이 과정의 나머지 부분에서는 이러한 경고를 생성하지 않는 nf-schema 2.7.2를 사용합니다.
 `core-hello/nextflow.config`를 열고 `plugins` 블록의 플러그인 버전을 업데이트합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/nextflow.config" linenums="246" hl_lines="3"
-    // Nextflow plugins
-    plugins {
-        id 'nf-schema@2.7.2' // 파이프라인 매개변수 검증 및 샘플 시트에서 입력 채널 생성
-    }
-    ```
+```nextflow {3} title="core-hello/nextflow.config" showLineNumbers startLineNumber=246 step="전"
+// Nextflow plugins
+plugins {
+    id 'nf-schema@2.5.1' // 파이프라인 매개변수 검증 및 샘플 시트에서 입력 채널 생성
+}
+```
 
-=== "전"
+```nextflow {3} title="core-hello/nextflow.config" showLineNumbers startLineNumber=246 step="후"
+// Nextflow plugins
+plugins {
+    id 'nf-schema@2.7.2' // 파이프라인 매개변수 검증 및 샘플 시트에서 입력 채널 생성
+}
+```
 
-    ```groovy title="core-hello/nextflow.config" linenums="246" hl_lines="3"
-    // Nextflow plugins
-    plugins {
-        id 'nf-schema@2.5.1' // 파이프라인 매개변수 검증 및 샘플 시트에서 입력 채널 생성
-    }
-    ```
+</CodeWalkthrough>
 
 이는 모든 기본 배선이 제자리에 있음을 보여줍니다.
 그렇다면 출력은 어디에 있을까요? 출력이 있기는 한가요?
@@ -429,24 +441,27 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 tree core-hello-results
 ```
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console
-    core-hello-results
-    └── pipeline_info
-        ├── execution_report_2026-06-23_16-56-58.html
-        ├── execution_timeline_2026-06-23_16-56-58.html
-        ├── execution_trace_2026-06-23_16-56-58.txt
-        ├── hello_software_versions.yml
-        ├── params_2026-06-23_16-57-00.json
-        └── pipeline_dag_2026-06-23_16-56-58.html
+```console
+core-hello-results
+└── pipeline_info
+    ├── execution_report_2026-06-23_16-56-58.html
+    ├── execution_timeline_2026-06-23_16-56-58.html
+    ├── execution_trace_2026-06-23_16-56-58.txt
+    ├── hello_software_versions.yml
+    ├── params_2026-06-23_16-57-00.json
+    └── pipeline_dag_2026-06-23_16-56-58.html
 
-    1 directory, 6 files
-    ```
+1 directory, 6 files
+```
+
+</details>
 
 보고서를 살펴보면 무엇이 실행되었는지 확인할 수 있는데, 답은 아무것도 실행되지 않았다는 것입니다!
 
-![비어있는 실행 타임라인 보고서](./img/execution_timeline_empty.png)
+![비어있는 실행 타임라인 보고서](../../nfcore_build/img/execution_timeline_empty.png)
 
 코드에 실제로 무엇이 있는지 살펴보겠습니다.
 
@@ -458,9 +473,7 @@ tree core-hello-results
 
 따라서 파이프라인 스캐폴드의 전체 구조는 다음과 같습니다:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nfcore_build/img/core-hello-initial.svg"
-</figure>
+![](../../nfcore_build/img/core-hello-initial.excalidraw.svg)
 
 `nf-core/demo` 파이프라인 구조가 떠오르실 것입니다!
 유일한 실질적인 차이점은 `DEMO` workflow에는 모듈의 프로세스가 포함되어 있었다는 것입니다.
@@ -472,7 +485,7 @@ tree core-hello-results
 
 이는 일부 nf-core 기능이 이미 갖춰진 분석 workflow의 플레이스홀더 역할을 합니다.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 21 53"
+```nextflow {15,17,21,53} title="core-hello/workflows/hello.nf" showLineNumbers
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -536,7 +549,7 @@ workflow HELLO {
 */
 ```
 
-[Hello Nextflow](../hello_nextflow/index.md)에서 개발된 것과 같은 기본 Nextflow workflow와 비교하면, 여기에서 새로운 몇 가지 사항(위의 강조 표시된 줄)을 발견할 수 있습니다:
+[Hello Nextflow](../hello_nextflow/index.mdx)에서 개발된 것과 같은 기본 Nextflow workflow와 비교하면, 여기에서 새로운 몇 가지 사항(위의 강조 표시된 줄)을 발견할 수 있습니다:
 
 - workflow 블록에 이름이 있습니다
 - workflow 입력은 `take:` 키워드를 사용하여 선언되고(여기서는 샘플시트 채널과 출력 디렉토리), 채널 구성은 상위 workflow로 이동됩니다
@@ -545,12 +558,15 @@ workflow HELLO {
 
 이것들은 workflow를 **구성 가능(composable)**하게 만드는 Nextflow의 선택적 기능으로, 다른 workflow 내에서 호출될 수 있음을 의미합니다.
 
-??? note "`channel.topic` 블록"
+<details class="note">
+<summary>`channel.topic` 블록</summary>
 
-    28번째 줄부터 시작하는 `def topic_versions = channel.topic("versions")` 블록을 발견하셨을 것입니다.
-    이는 모든 모듈에서 소프트웨어 버전 정보를 자동으로 수집하는 상용구 관리 코드입니다.
-    nf-core는 2026년에 모든 파이프라인에 이 메커니즘을 도입할 예정이므로, 앞으로 모든 새 파이프라인에서 이를 볼 수 있습니다.
-    이 과정의 3부에서 작동 방식을 자세히 설명합니다.
+28번째 줄부터 시작하는 `def topic_versions = channel.topic("versions")` 블록을 발견하셨을 것입니다.
+이는 모든 모듈에서 소프트웨어 버전 정보를 자동으로 수집하는 상용구 관리 코드입니다.
+nf-core는 2026년에 모든 파이프라인에 이 메커니즘을 도입할 예정이므로, 앞으로 모든 새 파이프라인에서 이를 볼 수 있습니다.
+이 과정의 3부에서 작동 방식을 자세히 설명합니다.
+
+</details>
 
 관심 있는 workflow의 관련 로직을 해당 구조에 연결해야 합니다.
 
@@ -568,16 +584,14 @@ nf-core와 호환되도록 만들기 위한 전제로 간단한 workflow를 구�
 
 이제 workflow를 nf-core 스캐폴드에 통합하는 작업을 시작할 때입니다.
 
-상기하자면, 우리는 [Hello Nextflow](../hello_nextflow/index.md) 교육 과정에서 다룬 workflow로 작업하고 있습니다.
+상기하자면, 우리는 [Hello Nextflow](../hello_nextflow/index.mdx) 교육 과정에서 다룬 workflow로 작업하고 있습니다.
 해당 workflow는 단독으로 실행할 수 있는 간단한 이름 없는 workflow로 작성되었습니다.
 
 nf-core 스캐폴드에서 원래 workflow의 어떤 부분이 어디에 들어가야 하는지 명확하게 파악하기 위해, 먼저 원래 Hello workflow를 nf-core 템플릿이 요구하는 대로 상위 workflow 내에서 실행 가능한 **구성 가능한** workflow로 변환하겠습니다.
 
 지금 만들려는 것은 다음과 같습니다:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nfcore_build/img/composable-hello.svg"
-</figure>
+![](../../nfcore_build/img/composable-hello.excalidraw.svg)
 
 기본적으로 nf-core 스캐폴드의 모듈식 구조를 모방하되, 처음에는 복잡성을 줄이는 것이 목표입니다.
 
@@ -587,40 +601,39 @@ nf-core 스캐폴드에서 원래 workflow의 어떤 부분이 어디에 들어�
 tree original-hello/
 ```
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console
-    original-hello/
-    ├── hello.nf
-    ├── modules
-    │   ├── collectGreetings.nf
-    │   ├── convertToUpper.nf
-    │   ├── cowpy.nf
-    │   └── sayHello.nf
-    └── nextflow.config
+```console
+original-hello/
+├── hello.nf
+├── modules
+│   ├── collectGreetings.nf
+│   ├── convertToUpper.nf
+│   ├── cowpy.nf
+│   └── sayHello.nf
+└── nextflow.config
 
-    1 directory, 6 files
-    ```
+1 directory, 6 files
+```
+
+</details>
 
 작동하는지 확인하기 위해 자유롭게 실행해 보세요:
 
 ```bash
 nextflow run original-hello/hello.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `original-hello/hello.nf` [sharp_dijkstra] revision: 319b99ee58
+
+executor >  local (8)
+[23/4eb61e] sayHello (3)       | 3 of 3 ✔
+[c8/81a076] convertToUpper (1) | 3 of 3 ✔
+[90/ea197e] collectGreetings   | 1 of 1 ✔
+[da/3df79a] cowpy              | 1 of 1 ✔
 ```
-
-??? success "명령 출력"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `original-hello/hello.nf` [sharp_dijkstra] revision: 319b99ee58
-
-    executor >  local (8)
-    [23/4eb61e] sayHello (3)       | 3 of 3 ✔
-    [c8/81a076] convertToUpper (1) | 3 of 3 ✔
-    [90/ea197e] collectGreetings   | 1 of 1 ✔
-    [da/3df79a] cowpy              | 1 of 1 ✔
-    ```
 
 정상적으로 실행된다면 다음 단계로 넘어갈 준비가 된 것입니다.
 
@@ -628,7 +641,7 @@ nextflow run original-hello/hello.nf
 
 `hello.nf` workflow 파일을 열어 아래에 전체적으로 표시된 코드를 검사해 봅시다(모듈에 있는 프로세스는 제외):
 
-```groovy title="original-hello/hello.nf" linenums="1"
+```nextflow title="original-hello/hello.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 /*
@@ -679,17 +692,17 @@ workflow {
 
 먼저 상위 workflow에서 참조할 수 있도록 workflow에 이름을 지정하겠습니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="original-hello/hello.nf" linenums="16"
-    workflow HELLO {
-    ```
+```nextflow title="original-hello/hello.nf" showLineNumbers startLineNumber=16 step="전"
+workflow {
+```
 
-=== "전"
+```nextflow title="original-hello/hello.nf" showLineNumbers startLineNumber=16 step="후"
+workflow HELLO {
+```
 
-    ```groovy title="original-hello/hello.nf" linenums="16"
-    workflow {
-    ```
+</CodeWalkthrough>
 
 모듈 이름과 동일한 규칙이 workflow 이름에도 적용됩니다.
 
@@ -697,93 +710,93 @@ workflow {
 
 이제 채널 구성을 예상 입력을 선언하는 간단한 `take` 문으로 교체합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="original-hello/hello.nf" linenums="18"
-        take:
-        // 인사말 채널
-        greeting_ch
-    ```
+```nextflow title="original-hello/hello.nf" showLineNumbers startLineNumber=18 step="전"
+    // CSV 파일에서 입력용 채널 생성
+    greeting_ch = channel.fromPath(params.greeting)
+                        .splitCsv()
+                        .map { line -> line[0] }
+```
 
-=== "전"
+```nextflow title="original-hello/hello.nf" showLineNumbers startLineNumber=18 step="후"
+    take:
+    // 인사말 채널
+    greeting_ch
+```
 
-    ```groovy title="original-hello/hello.nf" linenums="18"
-        // CSV 파일에서 입력용 채널 생성
-        greeting_ch = channel.fromPath(params.greeting)
-                            .splitCsv()
-                            .map { line -> line[0] }
-    ```
+</CodeWalkthrough>
 
 이는 입력이 어떻게 제공되는지에 대한 세부 사항을 상위 workflow에 맡깁니다.
 
 이 기회에 `params.greeting = 'greetings.csv'` 줄도 주석 처리할 수 있습니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="original-hello/hello.nf" linenums="3" hl_lines="4"
-        /*
-        * Pipeline parameters
-        */
-        //params.greeting = 'greetings.csv'
-        params.batch = 'test-batch'
-        params.character = 'turkey'
-    ```
+```nextflow {4} title="original-hello/hello.nf" showLineNumbers startLineNumber=3 step="전"
+    /*
+    * Pipeline parameters
+    */
+    params.greeting = 'greetings.csv'
+    params.batch = 'test-batch'
+    params.character = 'turkey'
+```
 
-=== "전"
+```nextflow {4} title="original-hello/hello.nf" showLineNumbers startLineNumber=3 step="후"
+    /*
+    * Pipeline parameters
+    */
+    //params.greeting = 'greetings.csv'
+    params.batch = 'test-batch'
+    params.character = 'turkey'
+```
 
-    ```groovy title="original-hello/hello.nf" linenums="3" hl_lines="4"
-        /*
-        * Pipeline parameters
-        */
-        params.greeting = 'greetings.csv'
-        params.batch = 'test-batch'
-        params.character = 'turkey'
-    ```
+</CodeWalkthrough>
 
-!!! info "정보"
+:::note[정보]
+Nextflow 언어 서버 확장이 설치되어 있다면 구문 검사기가 코드에 빨간 물결선을 표시할 것입니다.
+이는 `take:` 문을 넣으면 `main:`도 있어야 하기 때문입니다.
 
-    Nextflow 언어 서버 확장이 설치되어 있다면 구문 검사기가 코드에 빨간 물결선을 표시할 것입니다.
-    이는 `take:` 문을 넣으면 `main:`도 있어야 하기 때문입니다.
-
-    다음 단계에서 추가하겠습니다.
+다음 단계에서 추가하겠습니다.
+:::
 
 #### 3.1.3. workflow 작업 앞에 `main` 문 추가
 
 다음으로, workflow 본문에서 호출되는 나머지 작업 앞에 `main` 문을 추가합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="original-hello/hello.nf" linenums="22" hl_lines="1"
-        main:
+```nextflow title="original-hello/hello.nf" showLineNumbers startLineNumber=22 step="전"
+    // 인사말 출력
+    sayHello(greeting_ch)
 
-        // 인사말 출력
-        sayHello(greeting_ch)
+    // 인사말을 대문자로 변환
+    convertToUpper(sayHello.out)
 
-        // 인사말을 대문자로 변환
-        convertToUpper(sayHello.out)
+    // 모든 인사말을 하나의 파일에 수집
+    collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // 모든 인사말을 하나의 파일에 수집
-        collectGreetings(convertToUpper.out.collect(), params.batch)
+    // cowpy로 인사말의 ASCII 아트 생성
+    cowpy(collectGreetings.out.outfile, params.character)
+```
 
-        // cowpy로 인사말의 ASCII 아트 생성
-        cowpy(collectGreetings.out.outfile, params.character)
-    ```
+```nextflow {1} title="original-hello/hello.nf" showLineNumbers startLineNumber=22 step="후"
+    main:
 
-=== "전"
+    // 인사말 출력
+    sayHello(greeting_ch)
 
-    ```groovy title="original-hello/hello.nf" linenums="22"
-        // 인사말 출력
-        sayHello(greeting_ch)
+    // 인사말을 대문자로 변환
+    convertToUpper(sayHello.out)
 
-        // 인사말을 대문자로 변환
-        convertToUpper(sayHello.out)
+    // 모든 인사말을 하나의 파일에 수집
+    collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // 모든 인사말을 하나의 파일에 수집
-        collectGreetings(convertToUpper.out.collect(), params.batch)
+    // cowpy로 인사말의 ASCII 아트 생성
+    cowpy(collectGreetings.out.outfile, params.character)
+```
 
-        // cowpy로 인사말의 ASCII 아트 생성
-        cowpy(collectGreetings.out.outfile, params.character)
-    ```
+</CodeWalkthrough>
 
 이것은 기본적으로 '이것이 이 workflow가 _하는_ 일'이라고 말하는 것입니다.
 
@@ -791,7 +804,7 @@ workflow {
 
 마지막으로 workflow의 최종 출력이 무엇인지 선언하는 `emit` 문을 추가합니다.
 
-```groovy title="original-hello/hello.nf" linenums="36"
+```nextflow title="original-hello/hello.nf" showLineNumbers startLineNumber=36
     emit:
     cowpy_hellos = cowpy.out
 ```
@@ -802,7 +815,7 @@ workflow {
 
 설명대로 모든 변경을 수행했다면 workflow는 이제 다음과 같이 보일 것입니다:
 
-```groovy title="original-hello/hello.nf" linenums="1" hl_lines="16 18-20 22 36-37"
+```nextflow {16,18-20,22,36-37} title="original-hello/hello.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 /*
@@ -859,7 +872,7 @@ touch original-hello/main.nf
 
 다음 코드를 `main.nf` 파일에 복사합니다.
 
-```groovy title="original-hello/main.nf" linenums="1"
+```nextflow title="original-hello/main.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 // hello.nf 파일에서 workflow 코드 가져오기
@@ -887,15 +900,15 @@ workflow {
 - 가져온 workflow를 호출하는 구문은 모듈을 호출하는 구문과 본질적으로 동일합니다.
 - 입력을 workflow로 가져오는 것과 관련된 모든 것(입력 매개변수 및 채널 구성)은 이제 이 상위 workflow에 선언됩니다.
 
-!!! info "정보"
+:::note[정보]
+진입점 workflow 파일의 이름을 `main.nf`로 지정하는 것은 규칙이지 요구 사항이 아닙니다.
 
-    진입점 workflow 파일의 이름을 `main.nf`로 지정하는 것은 규칙이지 요구 사항이 아닙니다.
+이 규칙을 따르면 `nextflow run` 명령에서 workflow 파일 이름을 지정하지 않아도 됩니다.
+Nextflow는 실행 디렉토리에서 `main.nf`라는 파일을 자동으로 찾습니다.
 
-    이 규칙을 따르면 `nextflow run` 명령에서 workflow 파일 이름을 지정하지 않아도 됩니다.
-    Nextflow는 실행 디렉토리에서 `main.nf`라는 파일을 자동으로 찾습니다.
-
-    그러나 원한다면 진입점 workflow 파일의 이름을 다르게 지정할 수 있습니다.
-    그 경우 `nextflow run` 명령에서 workflow 파일 이름을 반드시 지정해야 합니다.
+그러나 원한다면 진입점 workflow 파일의 이름을 다르게 지정할 수 있습니다.
+그 경우 `nextflow run` 명령에서 workflow 파일 이름을 반드시 지정해야 합니다.
+:::
 
 ### 3.3. workflow가 실행되는지 테스트
 
@@ -911,20 +924,23 @@ nextflow run ./original-hello
 
 모든 변경 사항을 올바르게 수행했다면 완료될 때까지 실행되어야 합니다.
 
-??? success "명령 출력"
+<details class="success">
+<summary>명령 출력</summary>
 
-    ```console
-    N E X T F L O W   ~  version 26.04.4
+```console
+N E X T F L O W   ~  version 26.04.4
 
-    Launching `original-hello/main.nf` [irreverent_cajal] revision: 619249b1d7
+Launching `original-hello/main.nf` [irreverent_cajal] revision: 619249b1d7
 
-    executor >  local (8)
-    [50/b02a90] HELLO:sayHello (1)       | 3 of 3 ✔
-    [c0/3c336a] HELLO:convertToUpper (2) | 3 of 3 ✔
-    [5c/47bb4f] HELLO:collectGreetings   | 1 of 1 ✔
-    [07/bfc706] HELLO:cowpy              | 1 of 1 ✔
-    Output: /workspaces/training/nfcore-build/work/07/bfc7061fa521e86f4e1954191ab4c4/cowpy-COLLECTED-test-batch-output.txt
-    ```
+executor >  local (8)
+[50/b02a90] HELLO:sayHello (1)       | 3 of 3 ✔
+[c0/3c336a] HELLO:convertToUpper (2) | 3 of 3 ✔
+[5c/47bb4f] HELLO:collectGreetings   | 1 of 1 ✔
+[07/bfc706] HELLO:cowpy              | 1 of 1 ✔
+Output: /workspaces/training/nfcore-build/work/07/bfc7061fa521e86f4e1954191ab4c4/cowpy-COLLECTED-test-batch-output.txt
+```
+
+</details>
 
 이는 `HELLO` workflow를 구성 가능하게 업그레이드하는 데 성공했음을 의미합니다.
 
@@ -943,13 +959,11 @@ nf-core 호환 가능하게 만들기 위한 전제로 기본 구성 가능한 w
 이제 구성 가능한 workflow가 올바르게 작동하는 것을 확인했으므로, 섹션 2에서 생성한 nf-core 파이프라인 스캐폴드로 돌아가겠습니다.
 방금 개발한 구성 가능한 workflow를 nf-core 템플릿 구조에 통합하여 최종 결과가 다음과 같이 보이기를 원합니다.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nfcore_build/img/core-hello.svg"
-</figure>
+![](../../nfcore_build/img/core-hello.excalidraw.svg)
 
 그렇다면 어떻게 이를 실현할까요? `core-hello/workflows/hello.nf`(nf-core 스캐폴드)에 있는 `HELLO` workflow의 현재 내용을 살펴보겠습니다.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 21 53"
+```nextflow {15,17,21,53} title="core-hello/workflows/hello.nf" showLineNumbers
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -1026,10 +1040,10 @@ workflow HELLO {
 3. workflow 로직을 `main` 블록에 추가
 4. `emit` 블록 업데이트
 
-!!! info "정보"
-
-    이번 첫 번째 패스에서는 버전 캡처 블록을 무시하겠습니다.
-    3부에서 작동 방식을 설명합니다.
+:::note[정보]
+이번 첫 번째 패스에서는 버전 캡처 블록을 무시하겠습니다.
+3부에서 작동 방식을 설명합니다.
+:::
 
 ### 4.1. 모듈 복사 및 모듈 import 설정
 
@@ -1049,24 +1063,27 @@ cp original-hello/modules/* core-hello/modules/local/.
 tree core-hello/modules
 ```
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console
-    core-hello/modules
-    └── local
-        ├── collectGreetings.nf
-        ├── convertToUpper.nf
-        ├── cowpy.nf
-        └── sayHello.nf
+```console
+core-hello/modules
+└── local
+    ├── collectGreetings.nf
+    ├── convertToUpper.nf
+    ├── cowpy.nf
+    └── sayHello.nf
 
-    1 directory, 4 files
-    ```
+1 directory, 4 files
+```
+
+</details>
 
 이제 모듈 import 문을 설정하겠습니다.
 
 `original-hello/hello.nf` workflow의 import 문은 다음과 같았습니다:
 
-```groovy title="original-hello/hello.nf" linenums="10"
+```nextflow title="original-hello/hello.nf" showLineNumbers startLineNumber=10
 // 모듈 포함
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -1076,33 +1093,33 @@ include { cowpy } from './modules/cowpy.nf'
 
 `core-hello/workflows/hello.nf` 파일을 열고 아래와 같이 이러한 import 문을 변환합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="8-11"
-    /*
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
-    include { paramsSummaryMap       } from 'plugin/nf-schema'
-    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-    include { sayHello               } from '../modules/local/sayHello.nf'
-    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { collectGreetings       } from '../modules/local/collectGreetings.nf'
-    include { cowpy                  } from '../modules/local/cowpy.nf'
-    ```
+```nextflow title="core-hello/workflows/hello.nf" showLineNumbers step="전"
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+include { paramsSummaryMap       } from 'plugin/nf-schema'
+include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+```
 
-=== "전"
+```nextflow {8-11} title="core-hello/workflows/hello.nf" showLineNumbers step="후"
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+include { paramsSummaryMap       } from 'plugin/nf-schema'
+include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { sayHello               } from '../modules/local/sayHello.nf'
+include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+include { collectGreetings       } from '../modules/local/collectGreetings.nf'
+include { cowpy                  } from '../modules/local/cowpy.nf'
+```
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1"
-    /*
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
-    include { paramsSummaryMap       } from 'plugin/nf-schema'
-    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-    ```
+</CodeWalkthrough>
 
 여기서 두 가지 더 흥미로운 관찰 사항이 있습니다:
 
@@ -1114,7 +1131,7 @@ include { cowpy } from './modules/cowpy.nf'
 nf-core 프로젝트에는 일반적으로 열 데이터를 포함하는 CSV 파일인 samplesheet 개념과 관련된 많은 사전 구축 기능이 있습니다.
 본질적으로 우리의 `greetings.csv` 파일이 그러하므로 현재 `take` 선언을 그대로 유지하고 다음 단계에서 입력 채널의 이름만 업데이트하겠습니다.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="21"
+```nextflow title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=21
     take:
     ch_samplesheet // channel: --input에서 읽어온 samplesheet
     outdir
@@ -1128,7 +1145,7 @@ nf-core 프로젝트에는 일반적으로 열 데이터를 포함하는 CSV 파
 
 참고로, 이것은 원래 workflow의 관련 코드이며, 구성 가능하게 만들 때 많이 변경되지 않았습니다(`main:` 줄만 추가했습니다):
 
-```groovy title="original-hello/hello.nf" linenums="22"
+```nextflow title="original-hello/hello.nf" showLineNumbers startLineNumber=22
     main:
 
     // 인사말 출력
@@ -1150,125 +1167,125 @@ workflow를 실행하는 도구의 버전을 캡처하는 것과 관련된 일�
 맨 위에 `def ch_versions = channel.empty()` 초기화를 유지한 다음 workflow 로직을 삽입하고 버전 수집 코드를 끝에 유지하겠습니다.
 이러한 순서는 실제 파이프라인에서 프로세스가 workflow가 실행될 때 `ch_versions` 채널에 추가될 버전 정보를 방출하기 때문에 의미가 있습니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="19" hl_lines="11-21"
-    workflow HELLO {
+```nextflow title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=19 step="전"
+workflow HELLO {
 
-        take:
-        ch_samplesheet // channel: --input에서 읽어온 samplesheet
-        outdir
+    take:
+    ch_samplesheet // channel: --input에서 읽어온 samplesheet
+    outdir
 
-        main:
+    main:
 
-        def ch_versions = channel.empty()
+    def ch_versions = channel.empty()
 
-        // 인사말 출력
-        sayHello(greeting_ch)
+    //
+    // 소프트웨어 버전 수집 및 저장
+    //
+    def topic_versions = channel.topic("versions")
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
 
-        // 인사말을 대문자로 변환
-        convertToUpper(sayHello.out)
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+        }
+        .groupTuple(by:0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
 
-        // 모든 인사말을 하나의 파일에 수집
-        collectGreetings(convertToUpper.out.collect(), params.batch)
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        .mix(topic_versions_string)
+        .collectFile(
+            storeDir: "${outdir}/pipeline_info",
+            name:  'hello_software_'  + 'versions.yml',
+            sort: true,
+            newLine: true
+        )
+    emit:
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+}
+```
 
-        // cowpy로 인사말의 ASCII 아트 생성
-        cowpy(collectGreetings.out.outfile, params.character)
+```nextflow {11-21} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=19 step="후"
+workflow HELLO {
 
-        //
-        // 소프트웨어 버전 수집 및 저장
-        //
-        def topic_versions = channel.topic("versions")
-            .distinct()
-            .branch { entry ->
-                versions_file: entry instanceof Path
-                versions_tuple: true
-            }
+    take:
+    ch_samplesheet // channel: --input에서 읽어온 samplesheet
+    outdir
 
-        def topic_versions_string = topic_versions.versions_tuple
-            .map { process, tool, version ->
-                [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
-            }
-            .groupTuple(by:0)
-            .map { process, tool_versions ->
-                tool_versions.unique().sort()
-                "${process}:\n${tool_versions.join('\n')}"
-            }
+    main:
 
-        def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
-            .mix(topic_versions_string)
-            .collectFile(
-                storeDir: "${outdir}/pipeline_info",
-                name:  'hello_software_'  + 'versions.yml',
-                sort: true,
-                newLine: true
-            )
-        emit:
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
-    }
-    ```
+    def ch_versions = channel.empty()
 
-=== "전"
+    // 인사말 출력
+    sayHello(greeting_ch)
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="19"
-    workflow HELLO {
+    // 인사말을 대문자로 변환
+    convertToUpper(sayHello.out)
 
-        take:
-        ch_samplesheet // channel: --input에서 읽어온 samplesheet
-        outdir
+    // 모든 인사말을 하나의 파일에 수집
+    collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        main:
+    // cowpy로 인사말의 ASCII 아트 생성
+    cowpy(collectGreetings.out.outfile, params.character)
 
-        def ch_versions = channel.empty()
+    //
+    // 소프트웨어 버전 수집 및 저장
+    //
+    def topic_versions = channel.topic("versions")
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
 
-        //
-        // 소프트웨어 버전 수집 및 저장
-        //
-        def topic_versions = channel.topic("versions")
-            .distinct()
-            .branch { entry ->
-                versions_file: entry instanceof Path
-                versions_tuple: true
-            }
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+        }
+        .groupTuple(by:0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
 
-        def topic_versions_string = topic_versions.versions_tuple
-            .map { process, tool, version ->
-                [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
-            }
-            .groupTuple(by:0)
-            .map { process, tool_versions ->
-                tool_versions.unique().sort()
-                "${process}:\n${tool_versions.join('\n')}"
-            }
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        .mix(topic_versions_string)
+        .collectFile(
+            storeDir: "${outdir}/pipeline_info",
+            name:  'hello_software_'  + 'versions.yml',
+            sort: true,
+            newLine: true
+        )
+    emit:
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+}
+```
 
-        def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
-            .mix(topic_versions_string)
-            .collectFile(
-                storeDir: "${outdir}/pipeline_info",
-                name:  'hello_software_'  + 'versions.yml',
-                sort: true,
-                newLine: true
-            )
-        emit:
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
-    }
-    ```
+</CodeWalkthrough>
 
 좋아 보이지만 `take:` 키워드 아래에 작성된 것과 일치하도록 아래와 같이 `sayHello()` 프로세스에 전달하는 채널의 이름을 `greeting_ch`에서 `ch_samplesheet`로 업데이트해야 합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
-        // 인사말 출력 (nf-core samplesheet 규칙을 사용하도록 업데이트됨)
-        sayHello(ch_samplesheet)
-    ```
+```nextflow title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=29 step="전"
+    // 인사말 출력
+    sayHello(greeting_ch)
+```
 
-=== "전"
+```nextflow title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=29 step="후"
+    // 인사말 출력 (nf-core samplesheet 규칙을 사용하도록 업데이트됨)
+    sayHello(ch_samplesheet)
+```
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
-        // 인사말 출력
-        sayHello(greeting_ch)
-    ```
+</CodeWalkthrough>
 
 이제 workflow 로직이 올바르게 연결되었습니다.
 
@@ -1276,20 +1293,20 @@ workflow를 실행하는 도구의 버전을 캡처하는 것과 관련된 일�
 
 마지막으로 workflow의 최종 출력 선언을 포함하도록 `emit` 블록을 업데이트해야 합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="69" hl_lines="2"
-        emit:
-        cowpy_hellos   = cowpy.out
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
-    ```
+```nextflow title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=69 step="전"
+    emit:
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+```
 
-=== "전"
+```nextflow {2} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=69 step="후"
+    emit:
+    cowpy_hellos   = cowpy.out
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+```
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="69"
-        emit:
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
-    ```
+</CodeWalkthrough>
 
 이것으로 `HELLO` workflow 자체에 대한 수정이 완료됩니다.
 이 시점에서 우리는 구현하기로 설정한 전반적인 코드 구조를 달성했습니다.
@@ -1316,7 +1333,7 @@ nf-core 템플릿은 복잡한 유전체학 데이터 세트를 위해 설계된
 Hello Nextflow workflow를 구성 가능하게 다시 작성할 때 입력 매개변수 선언을 `main.nf` 진입점 workflow로 한 단계 위로 이동한 것을 기억하실 것입니다.
 따라서 파이프라인 스캐폴드의 일부로 생성된 최상위 `main.nf` 진입점 workflow를 살펴보겠습니다:
 
-```groovy title="core-hello/main.nf" linenums="1"
+```nextflow title="core-hello/main.nf" showLineNumbers
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1413,9 +1430,7 @@ nf-core 프로젝트는 내포된 subworkflow를 많이 사용하므로 이 부�
 
 그들이 서로 어떻게 관련되어 있는지 보여주는 다이어그램이 있습니다:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nfcore_build/img/hello-nested-workflows.svg"
-</figure>
+![](../../nfcore_build/img/hello-nested-workflows.excalidraw.svg)
 
 중요한 것은 이 수준에서 입력 채널을 구성하는 코드를 찾을 수 없고, `--input` 매개변수를 통해 제공되는 samplesheet에 대한 참조만 있다는 것입니다.
 
@@ -1423,7 +1438,7 @@ nf-core 프로젝트는 내포된 subworkflow를 많이 사용하므로 이 부�
 
 해당 파일을 열고 아래로 스크롤하면 다음 코드 덩어리에 도달합니다:
 
-```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84"
+```nextflow title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" showLineNumbers startLineNumber=84
     //
     // params.input을 통해 제공된 입력 파일에서 채널 생성
     //
@@ -1455,19 +1470,19 @@ nf-core 프로젝트는 내포된 subworkflow를 많이 사용하므로 이 부�
 
 이것은 samplesheet를 파싱하고 `HELLO` workflow에서 소비할 준비가 된 형태로 전달하는 channel factory입니다.
 
-!!! info "정보"
+:::note[정보]
+위의 구문은 이전에 사용한 것과 약간 다르지만 기본적으로 다음은:
 
-    위의 구문은 이전에 사용한 것과 약간 다르지만 기본적으로 다음은:
+```nextflow
+channel.<...>.set { ch_samplesheet }
+```
 
-    ```groovy
-    channel.<...>.set { ch_samplesheet }
-    ```
+다음과 동등합니다:
 
-    다음과 동등합니다:
-
-    ```groovy
-    ch_samplesheet = channel.<...>
-    ```
+```nextflow
+ch_samplesheet = channel.<...>
+```
+:::
 
 이 코드에는 nf-core 파이프라인 템플릿에 포함된 예제 samplesheet에 매우 특정적인 일부 파싱 및 검증 단계가 포함되어 있으며, 작성 당시 이는 매우 도메인별로 특정적이어서 우리의 간단한 파이프라인 프로젝트에 적합하지 않습니다.
 
@@ -1477,7 +1492,7 @@ nf-core 프로젝트는 내포된 subworkflow를 많이 사용하므로 이 부�
 
 참고로 채널 구성은 다음과 같았습니다(solutions 디렉토리에서 확인):
 
-```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="2"
+```nextflow {2} title="solutions/composable-hello/main.nf" showLineNumbers startLineNumber=10
     // CSV 파일에서 입력용 채널 생성
     greeting_ch = channel.fromPath(params.greeting)
         .splitCsv()
@@ -1486,53 +1501,53 @@ nf-core 프로젝트는 내포된 subworkflow를 많이 사용하므로 이 부�
 
 따라서 약간의 변경을 통해 초기화 workflow에 연결하기만 하면 됩니다: 채널 이름을 `greeting_ch`에서 `ch_samplesheet`로, 매개변수 이름을 `params.greeting`에서 `params.input`으로 업데이트합니다(강조 표시된 줄 참조).
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5-7"
-        //
-        // params.input을 통해 제공된 입력 파일에서 채널 생성
-        //
+```nextflow {5-23} title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" showLineNumbers startLineNumber=84 step="전"
+    //
+    // params.input을 통해 제공된 입력 파일에서 채널 생성
+    //
 
-        ch_samplesheet = channel.fromPath(params.input)
-            .splitCsv()
-            .map { line -> line[0] }
+    channel
+        .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
+        .map {
+            meta, fastq_1, fastq_2 ->
+                if (!fastq_2) {
+                    return [ meta.id, meta + [ single_end:true ], [ fastq_1 ] ]
+                } else {
+                    return [ meta.id, meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
+                }
+        }
+        .groupTuple()
+        .map { samplesheet ->
+            validateInputSamplesheet(samplesheet)
+        }
+        .map {
+            meta, fastqs ->
+                return [ meta, fastqs.flatten() ]
+        }
+        .set { ch_samplesheet }
 
-        emit:
-        samplesheet = ch_samplesheet
-        versions    = ch_versions
-    ```
+    emit:
+    samplesheet = ch_samplesheet
+    versions    = ch_versions
+```
 
-=== "전"
+```nextflow {5-7} title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" showLineNumbers startLineNumber=84 step="후"
+    //
+    // params.input을 통해 제공된 입력 파일에서 채널 생성
+    //
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5-23"
-        //
-        // params.input을 통해 제공된 입력 파일에서 채널 생성
-        //
+    ch_samplesheet = channel.fromPath(params.input)
+        .splitCsv()
+        .map { line -> line[0] }
 
-        channel
-            .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
-            .map {
-                meta, fastq_1, fastq_2 ->
-                    if (!fastq_2) {
-                        return [ meta.id, meta + [ single_end:true ], [ fastq_1 ] ]
-                    } else {
-                        return [ meta.id, meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
-                    }
-            }
-            .groupTuple()
-            .map { samplesheet ->
-                validateInputSamplesheet(samplesheet)
-            }
-            .map {
-                meta, fastqs ->
-                    return [ meta, fastqs.flatten() ]
-            }
-            .set { ch_samplesheet }
+    emit:
+    samplesheet = ch_samplesheet
+    versions    = ch_versions
+```
 
-        emit:
-        samplesheet = ch_samplesheet
-        versions    = ch_versions
-    ```
+</CodeWalkthrough>
 
 이것으로 입력 처리가 작동하도록 만드는 데 필요한 변경 사항이 완료됩니다.
 
@@ -1562,35 +1577,35 @@ cp greetings.csv core-hello/assets/.
 
 이제 다음과 같이 `test.config` 파일을 업데이트할 수 있습니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6 8-10"
-    params {
-        config_profile_name        = 'Test profile'
-        config_profile_description = 'Minimal test dataset to check pipeline function'
+```nextflow {6-8} title="core-hello/conf/test.config" showLineNumbers startLineNumber=21 step="전"
+params {
+    config_profile_name        = 'Test profile'
+    config_profile_description = 'Minimal test dataset to check pipeline function'
 
-        // 입력 데이터
-        input  = "${projectDir}/assets/greetings.csv"
+    // 입력 데이터
+    // TODO nf-core: nf-core/test-datasets에 테스트 데이터 경로 지정
+    // TODO nf-core: 명령줄 플래그가 필요하지 않도록 테스트에 필요한 매개변수 제공
+    input  = params.pipelines_testdata_base_path + 'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
+}
+```
 
-        // 기타 매개변수
-        batch     = 'test'
-        character = 'tux'
-    }
-    ```
+```nextflow {6,8-10} title="core-hello/conf/test.config" showLineNumbers startLineNumber=21 step="후"
+params {
+    config_profile_name        = 'Test profile'
+    config_profile_description = 'Minimal test dataset to check pipeline function'
 
-=== "전"
+    // 입력 데이터
+    input  = "${projectDir}/assets/greetings.csv"
 
-    ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6-8"
-    params {
-        config_profile_name        = 'Test profile'
-        config_profile_description = 'Minimal test dataset to check pipeline function'
+    // 기타 매개변수
+    batch     = 'test'
+    character = 'tux'
+}
+```
 
-        // 입력 데이터
-        // TODO nf-core: nf-core/test-datasets에 테스트 데이터 경로 지정
-        // TODO nf-core: 명령줄 플래그가 필요하지 않도록 테스트에 필요한 매개변수 제공
-        input  = params.pipelines_testdata_base_path + 'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
-    }
-    ```
+</CodeWalkthrough>
 
 주요 요점:
 
@@ -1600,29 +1615,29 @@ cp greetings.csv core-hello/assets/.
 
 또한 매우 기본적인 머신(Github Codespaces의 최소 VM과 같은)에서도 실행되도록 기본 리소스 제한을 강화하겠습니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/conf/test.config" linenums="13" hl_lines="3-4"
-    process {
-        resourceLimits = [
-            cpus: 2,
-            memory: '4.GB',
-            time: '1.h'
-        ]
-    }
-    ```
+```nextflow {3-4} title="core-hello/conf/test.config" showLineNumbers startLineNumber=13 step="전"
+process {
+    resourceLimits = [
+        cpus: 4,
+        memory: '15.GB',
+        time: '1.h'
+    ]
+}
+```
 
-=== "전"
+```nextflow {3-4} title="core-hello/conf/test.config" showLineNumbers startLineNumber=13 step="후"
+process {
+    resourceLimits = [
+        cpus: 2,
+        memory: '4.GB',
+        time: '1.h'
+    ]
+}
+```
 
-    ```groovy title="core-hello/conf/test.config" linenums="13" hl_lines="3-4"
-    process {
-        resourceLimits = [
-            cpus: 4,
-            memory: '15.GB',
-            time: '1.h'
-        ]
-    }
-    ```
+</CodeWalkthrough>
 
 이것으로 필요한 코드 수정이 완료되었습니다.
 
@@ -1633,39 +1648,39 @@ cp greetings.csv core-hello/assets/.
 
 `core-hello/nextflow.config`를 열고 `validate_params`를 `false`로 설정합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/nextflow.config" linenums="37"
-        validate_params            = false
-    ```
+```nextflow title="core-hello/nextflow.config" showLineNumbers startLineNumber=37 step="전"
+    validate_params            = true
+```
 
-=== "전"
+```nextflow title="core-hello/nextflow.config" showLineNumbers startLineNumber=37 step="후"
+    validate_params            = false
+```
 
-    ```groovy title="core-hello/nextflow.config" linenums="37"
-        validate_params            = true
-    ```
+</CodeWalkthrough>
 
 명령줄 대신 설정 파일에서 이를 설정하는 이유는 Nextflow 버전 26.04부터 명령줄에서 제공되는 모든 값이 문자열로 처리되기 때문입니다.
 따라서 Boolean 매개변수는 실제 `true`/`false` 값을 갖기 위해 설정 파일이나 `-params-file`에서 설정해야 합니다.
 
 예를 들어, 여기서 `--validate_params false`를 사용하면 **문자열** `"false"`로 평가되어 검증이 계속 활성화된 상태로 유지됩니다.
 
-!!! tip "`nextflow.config`의 v2 분석기 호환성 줄"
+:::tip[`nextflow.config`의 v2 분석기 호환성 줄]
+v2 구문에 대해 말하자면, 설정 파일의 `params` 블록 바로 아래에 다음 두 줄이 있을 수 있습니다:
 
-    v2 구문에 대해 말하자면, 설정 파일의 `params` 블록 바로 아래에 다음 두 줄이 있을 수 있습니다:
+```nextflow nextflow="config"
+outputDir = params.outdir
+workflow.output.mode = params.publish_dir_mode
+```
 
-    ```groovy
-    outputDir = params.outdir
-    workflow.output.mode = params.publish_dir_mode
-    ```
+이는 v2 구문 분석기와의 호환성을 위해 필요합니다.
 
-    이는 v2 구문 분석기와의 호환성을 위해 필요합니다.
+- v2 구문에서는 `params.*` 변수를 프로세스 모듈의 `publishDir` 지시문 내에서 직접 참조할 수 없으므로, `outputDir`이 해당 지시문이 접근할 수 있는 최상위 설정 변수로 여기에 정의됩니다.
 
-    - v2 구문에서는 `params.*` 변수를 프로세스 모듈의 `publishDir` 지시문 내에서 직접 참조할 수 없으므로, `outputDir`이 해당 지시문이 접근할 수 있는 최상위 설정 변수로 여기에 정의됩니다.
+- `workflow.output.mode`는 v2 workflow 출력 블록의 기본 게시 모드를 설정합니다.
 
-    - `workflow.output.mode`는 v2 workflow 출력 블록의 기본 게시 모드를 설정합니다.
-
-    두 줄 모두 nf-core 파이프라인 템플릿에 의해 자동으로 생성되며 수정할 필요가 없습니다.
+두 줄 모두 nf-core 파이프라인 템플릿에 의해 자동으로 생성되며 수정할 필요가 없습니다.
+:::
 
 ### 5.5. 테스트 프로필로 파이프라인 실행
 
@@ -1677,45 +1692,48 @@ nextflow run core-hello --outdir core-hello-results -profile test,docker
 
 모든 수정을 올바르게 수행했다면 완료될 때까지 실행되어야 합니다.
 
-??? success "명령 출력"
+<details class="success">
+<summary>명령 출력</summary>
 
-    ```console
-     N E X T F L O W   ~  version 26.04.4
+```console
+ N E X T F L O W   ~  version 26.04.4
 
-    Downloading plugin nf-schema@2.7.2
-    Launching `core-hello/main.nf` [voluminous_caravaggio] revision: d6bbba9521
+Downloading plugin nf-schema@2.7.2
+Launching `core-hello/main.nf` [voluminous_caravaggio] revision: d6bbba9521
 
-    Input/output options
-      input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
-      outdir                    : core-hello-results
+Input/output options
+  input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
+  outdir                    : core-hello-results
 
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
 
-    Generic options
-      validate_params           : false
-      trace_report_suffix       : 2026-06-23_16-58-45
+Generic options
+  validate_params           : false
+  trace_report_suffix       : 2026-06-23_16-58-45
 
-    Core Nextflow options
-      runName                   : voluminous_caravaggio
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nfcore-build
-      workDir                   : /workspaces/training/nfcore-build/work
-      projectDir                : /workspaces/training/nfcore-build/core-hello
-      userName                  : root
-      profile                   : test,docker
-      configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
+Core Nextflow options
+  runName                   : voluminous_caravaggio
+  containerEngine           : docker
+  launchDir                 : /workspaces/training/nfcore-build
+  workDir                   : /workspaces/training/nfcore-build/work
+  projectDir                : /workspaces/training/nfcore-build/core-hello
+  userName                  : root
+  profile                   : test,docker
+  configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
 
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-    executor >  local (8)
-    [30/fc3bdb] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
-    [55/58b611] CORE_HELLO:HELLO:convertToUpper (1) | 3 of 3 ✔
-    [12/83c0bc] CORE_HELLO:HELLO:collectGreetings   | 1 of 1 ✔
-    [18/4894fd] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
-    -[core/hello] Pipeline completed successfully-
-    ```
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+executor >  local (8)
+[30/fc3bdb] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
+[55/58b611] CORE_HELLO:HELLO:convertToUpper (1) | 3 of 3 ✔
+[12/83c0bc] CORE_HELLO:HELLO:collectGreetings   | 1 of 1 ✔
+[18/4894fd] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
+-[core/hello] Pipeline completed successfully-
+```
+
+</details>
 
 보시다시피, 초기화 subworkflow 덕분에 시작 부분에 일반적인 nf-core 요약이 생성되었으며, 각 모듈에 대한 줄은 이제 `PIPELINE:WORKFLOW:module` 전체 이름을 보여줍니다.
 
@@ -1730,35 +1748,38 @@ nextflow run core-hello --outdir core-hello-results -profile test,docker
 tree core-hello-results
 ```
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console
-    core-hello-results
-    └── pipeline_info
-        ├── execution_report_2026-06-23_16-56-58.html
-        ├── execution_report_2026-06-23_16-58-45.html
-        ├── execution_timeline_2026-06-23_16-56-58.html
-        ├── execution_timeline_2026-06-23_16-58-45.html
-        ├── execution_trace_2026-06-23_16-56-58.txt
-        ├── execution_trace_2026-06-23_16-58-45.txt
-        ├── hello_software_versions.yml
-        ├── params_2026-06-23_16-57-00.json
-        ├── params_2026-06-23_16-58-47.json
-        ├── pipeline_dag_2026-06-23_16-56-58.html
-        └── pipeline_dag_2026-06-23_16-58-45.html
+```console
+core-hello-results
+└── pipeline_info
+    ├── execution_report_2026-06-23_16-56-58.html
+    ├── execution_report_2026-06-23_16-58-45.html
+    ├── execution_timeline_2026-06-23_16-56-58.html
+    ├── execution_timeline_2026-06-23_16-58-45.html
+    ├── execution_trace_2026-06-23_16-56-58.txt
+    ├── execution_trace_2026-06-23_16-58-45.txt
+    ├── hello_software_versions.yml
+    ├── params_2026-06-23_16-57-00.json
+    ├── params_2026-06-23_16-58-47.json
+    ├── pipeline_dag_2026-06-23_16-56-58.html
+    └── pipeline_dag_2026-06-23_16-58-45.html
 
-    1 directory, 11 files
-    ```
+1 directory, 11 files
+```
+
+</details>
 
 첫 번째 실행에서 얻은 것 외에도 추가 실행 보고서 세트를 얻은 것을 볼 수 있습니다. 이때 workflow는 여전히 플레이스홀더일 뿐이었습니다.
 이번에는 예상대로 실행된 모든 작업이 표시됩니다.
 
-![Hello 파이프라인의 실행 타임라인 보고서](./img/execution_timeline_hello.png)
+![Hello 파이프라인의 실행 타임라인 보고서](../../nfcore_build/img/execution_timeline_hello.png)
 
-!!! info "정보"
-
-    Github Codespaces에서 최소한의 머신으로 실행하고 있기 때문에 작업이 다시 병렬로 실행되지 않았습니다.
-    작업이 병렬로 실행되는 것을 보려면 codespace의 CPU 할당량과 테스트 설정의 리소스 제한을 늘려보세요.
+:::note[정보]
+Github Codespaces에서 최소한의 머신으로 실행하고 있기 때문에 작업이 다시 병렬로 실행되지 않았습니다.
+작업이 병렬로 실행되는 것을 보려면 codespace의 CPU 할당량과 테스트 설정의 리소스 제한을 늘려보세요.
+:::
 
 좋습니다만, 실제 파이프라인 결과는 거기에 없습니다!
 
@@ -1768,30 +1789,33 @@ tree core-hello-results
 tree results
 ```
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console
-    results
-    ├── Bonjour-output.txt
-    ├── COLLECTED-test-batch-output.txt
-    ├── COLLECTED-test-output.txt
-    ├── cowpy-COLLECTED-test-batch-output.txt
-    ├── cowpy-COLLECTED-test-output.txt
-    ├── Hello-output.txt
-    ├── Hola-output.txt
-    ├── UPPER-Bonjour-output.txt
-    ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
+```console
+results
+├── Bonjour-output.txt
+├── COLLECTED-test-batch-output.txt
+├── COLLECTED-test-output.txt
+├── cowpy-COLLECTED-test-batch-output.txt
+├── cowpy-COLLECTED-test-output.txt
+├── Hello-output.txt
+├── Hola-output.txt
+├── UPPER-Bonjour-output.txt
+├── UPPER-Hello-output.txt
+└── UPPER-Hola-output.txt
 
-    0 directories, 10 files
-    ```
+0 directories, 10 files
+```
+
+</details>
 
 아, 거기 있군요. 원래 Hello 파이프라인의 이전 실행 결과와 섞여 있습니다.
 
 데모 파이프라인의 출력처럼 깔끔하게 구성하려면 출력 게시 방법을 변경해야 합니다.
 이 교육 과정의 뒷부분에서 그 방법을 보여드리겠습니다.
 
-<!-- TODO: Hello Nextflow가 workflow 수준 출력을 사용하도록 업데이트되면 이를 업데이트하세요 -->
+{/* TODO: Hello Nextflow가 workflow 수준 출력을 사용하도록 업데이트되면 이를 업데이트하세요 */}
 
 바로 이것입니다! 원래 파이프라인과 동일한 결과를 얻기 위해 많은 작업처럼 보일 수 있지만, 자동으로 생성되는 멋진 보고서를 모두 얻을 수 있으며, 이제 입력 검증과 나중 섹션에서 다룰 일부 메타데이터 처리 기능을 포함한 nf-core의 추가 기능을 활용할 수 있는 견고한 기반을 갖추게 되었습니다.
 
@@ -1804,4 +1828,4 @@ nf-core 템플릿을 사용하여 일반 Nextflow 파이프라인을 nf-core 스
 
 ### 다음 단계
 
-잠시 휴식을 취하세요, 힘든 작업이었습니다! 준비가 되면 [2부: nf-core 모듈 사용하기](./02_use_module.md)로 넘어가서 nf-core/modules 저장소에서 커뮤니티가 관리하는 모듈을 활용하는 방법을 배우세요.
+잠시 휴식을 취하세요, 힘든 작업이었습니다! 준비가 되면 [2부: nf-core 모듈 사용하기](./02_use_module.mdx)로 넘어가서 nf-core/modules 저장소에서 커뮤니티가 관리하는 모듈을 활용하는 방법을 배우세요.

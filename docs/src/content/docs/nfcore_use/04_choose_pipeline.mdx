@@ -1,4 +1,7 @@
-# Part 4: Choose a pipeline for a scientific question
+---
+title: 'Part 4: Choose a pipeline for a scientific question'
+description: In Parts 1 to 3, you ran pipelines that were chosen for you.
+---
 
 In Parts 1 to 3, you ran pipelines that were chosen for you.
 In practice, the first challenge is deciding which pipeline to use, or whether any existing pipeline fits your question at all.
@@ -21,54 +24,54 @@ Working alone, write down your answers as you go and compare them with the worke
 
 Choose the scenario closest to your own research interests.
 
-<!-- prettier-ignore-start -->
+{/* prettier-ignore-start */}
 
-<div class="grid cards" markdown>
+<CardGrid>
 
--   :material-account-group:{ .lg .middle } __Structural variants in an unsolved rare disease trio__
+<Card title="Structural variants in an unsolved rare disease trio">
 
-    ---
+A clinical research lab is studying a child with a suspected genetic disorder.
+Exome sequencing of the child and both unaffected parents did not find a causal variant, so the family was re-sequenced with long-read whole-genome sequencing, which detects structural variants that short reads miss.
+The lab wants a short list of candidate structural variants, prioritized by their relevance to the child's clinical features, which have been recorded as HPO terms.
 
-    A clinical research lab is studying a child with a suspected genetic disorder.
-    Exome sequencing of the child and both unaffected parents did not find a causal variant, so the family was re-sequenced with long-read whole-genome sequencing, which detects structural variants that short reads miss.
-    The lab wants a short list of candidate structural variants, prioritized by their relevance to the child's clinical features, which have been recorded as HPO terms.
+- **Data**: Oxford Nanopore whole-genome FASTQ files for three individuals, and HPO terms for the child
+- **Reference**: GRCh38
 
-    - **Data**: Oxford Nanopore whole-genome FASTQ files for three individuals, and HPO terms for the child
-    - **Reference**: GRCh38
+</Card>
 
--   :material-flask-outline:{ .lg .middle } __Differential expression in bulk RNA-seq__
+<Card title="Differential expression in bulk RNA-seq">
 
-    ---
+A neurogenetics group has bulk RNA-seq from iPSC-derived neurons carrying a risk variant and isogenic controls, with four replicates each.
+They want to know which genes are differentially expressed between the two groups.
 
-    A neurogenetics group has bulk RNA-seq from iPSC-derived neurons carrying a risk variant and isogenic controls, with four replicates each.
-    They want to know which genes are differentially expressed between the two groups.
+- **Data**: paired-end Illumina FASTQ files for eight samples
+- **Reference**: GRCh38
 
-    - **Data**: paired-end Illumina FASTQ files for eight samples
-    - **Reference**: GRCh38
+</Card>
 
--   :material-scatter-plot-outline:{ .lg .middle } __Single-cell RNA-seq of immune cells__
+<Card title="Single-cell RNA-seq of immune cells">
 
-    ---
+An immunology group has 10x Genomics single-cell RNA-seq of peripheral blood mononuclear cells from patients and healthy controls.
+They want to identify cell types and compare their proportions between patients and controls.
 
-    An immunology group has 10x Genomics single-cell RNA-seq of peripheral blood mononuclear cells from patients and healthy controls.
-    They want to identify cell types and compare their proportions between patients and controls.
+- **Data**: 10x Chromium 3' FASTQ files for six samples
+- **Reference**: GRCh38
 
-    - **Data**: 10x Chromium 3' FASTQ files for six samples
-    - **Reference**: GRCh38
+</Card>
 
--   :material-dna:{ .lg .middle } __DNA methylation at imprinted loci__
+<Card title="DNA methylation at imprinted loci">
 
-    ---
+An epigenetics group has whole-genome bisulfite sequencing from patients with a suspected imprinting disorder and matched controls.
+They want methylation levels at known imprinted loci for each sample.
 
-    An epigenetics group has whole-genome bisulfite sequencing from patients with a suspected imprinting disorder and matched controls.
-    They want methylation levels at known imprinted loci for each sample.
+- **Data**: paired-end Illumina bisulfite FASTQ files for six samples
+- **Reference**: GRCh38
 
-    - **Data**: paired-end Illumina bisulfite FASTQ files for six samples
-    - **Reference**: GRCh38
+</Card>
 
-</div>
+</CardGrid>
 
-<!-- prettier-ignore-end -->
+{/* prettier-ignore-end */}
 
 ### 1.2. Define the goal
 
@@ -98,22 +101,34 @@ Try several keywords, since a pipeline's name does not always reflect everything
 Shortlist up to two candidates.
 If you haven't found a candidate after about five minutes, open the hint for your scenario.
 
-??? tip "Hint: Structural variants in an unsolved rare disease trio"
+<details class="tip">
+<summary>Hint: Structural variants in an unsolved rare disease trio</summary>
 
-    Compare [nf-core/raredisease](https://nf-co.re/raredisease) and [nf-core/longraredisease](https://nf-co.re/longraredisease).
-    Both address rare disease; which one fits your data?
+Compare [nf-core/raredisease](https://nf-co.re/raredisease) and [nf-core/longraredisease](https://nf-co.re/longraredisease).
+Both address rare disease; which one fits your data?
 
-??? tip "Hint: Differential expression in bulk RNA-seq"
+</details>
 
-    Look at [nf-core/rnaseq](https://nf-co.re/rnaseq) and [nf-core/differentialabundance](https://nf-co.re/differentialabundance).
+<details class="tip">
+<summary>Hint: Differential expression in bulk RNA-seq</summary>
 
-??? tip "Hint: Single-cell RNA-seq of immune cells"
+Look at [nf-core/rnaseq](https://nf-co.re/rnaseq) and [nf-core/differentialabundance](https://nf-co.re/differentialabundance).
 
-    Look at [nf-core/scrnaseq](https://nf-co.re/scrnaseq).
+</details>
 
-??? tip "Hint: DNA methylation at imprinted loci"
+<details class="tip">
+<summary>Hint: Single-cell RNA-seq of immune cells</summary>
 
-    Look at [nf-core/methylseq](https://nf-co.re/methylseq).
+Look at [nf-core/scrnaseq](https://nf-co.re/scrnaseq).
+
+</details>
+
+<details class="tip">
+<summary>Hint: DNA methylation at imprinted loci</summary>
+
+Look at [nf-core/methylseq](https://nf-co.re/methylseq).
+
+</details>
 
 ### 2.2. Check the pipeline status
 
@@ -124,11 +139,11 @@ For each candidate, open its page and note:
   Pipelines still under development are listed in the catalog without a stable release; they may change significantly from one version to the next, so results may not be reproducible across updates.
 - **Last update**: a pipeline that is actively maintained is more likely to support current tool versions and reference data.
 
-### Takeaway
+### Takeaway {#takeaway_1}
 
 You have a shortlist of up to two candidate pipelines.
 
-### What's next?
+### What's next? {#whats-next_1}
 
 Evaluate whether each candidate produces the result you defined in 1.2.
 
@@ -146,20 +161,23 @@ You can browse them in the **Results** tab of the pipeline's page on the nf-core
 The results are organized in the same way as when you run the pipeline yourself:
 
 - The output directories contain the files described in the output documentation, including the MultiQC report in `multiqc/`.
-- The `pipeline_info/` directory contains the execution report and trace, as in [Part 1](./01_run_demo.md#23-examine-the-pipelines-outputs).
+- The `pipeline_info/` directory contains the execution report and trace, as in [Part 1](./01_run_demo.mdx#23-examine-the-pipelines-outputs).
 
 Some pipelines run several test configurations and organize their results in one subdirectory per configuration, for example per aligner in `nf-core/scrnaseq`.
 For some releases, only the `pipeline_info/` directory is published; in that case, select an earlier release from the version menu, or rely on the output documentation.
 
-??? tip "Viewing runs on Seqera Platform"
+<details class="tip">
+<summary>Viewing runs on Seqera Platform</summary>
 
-    The Community Showcase workspace on [Seqera Platform](https://cloud.seqera.io) contains completed runs of several nf-core pipelines, including `nf-core/rnaseq` and `nf-core/scrnaseq`.
-    A run page shows the parameters, the status and resource usage of every task, and the reports the pipeline produced.
-    Viewing it requires a free Seqera account; see [Scale with Seqera](../seqera_scale/index.md).
+The Community Showcase workspace on [Seqera Platform](https://cloud.seqera.io) contains completed runs of several nf-core pipelines, including `nf-core/rnaseq` and `nf-core/scrnaseq`.
+A run page shows the parameters, the status and resource usage of every task, and the reports the pipeline produced.
+Viewing it requires a free Seqera account; see [Scale with Seqera](../seqera_scale/index.mdx).
+
+</details>
 
 ### 3.2. Inputs
 
-Find the samplesheet format in the usage documentation and in `assets/schema_input.json`, the input schema you saw for `nf-core/demo` in [Part 2](./02_configure_execution.md#14-input-validation).
+Find the samplesheet format in the usage documentation and in `assets/schema_input.json`, the input schema you saw for `nf-core/demo` in [Part 2](./02_configure_execution.mdx#14-input-validation).
 
 - What columns does the samplesheet require?
 - Does your scenario provide that information, or would you need to collect more?
@@ -183,11 +201,11 @@ Open the execution report in the `pipeline_info/` directory of the published res
 - Which processes took the longest, and which used the most memory?
 - How might that scale to the size of your dataset?
 
-### Takeaway
+### Takeaway {#takeaway_2}
 
 You have evaluated each candidate on its inputs, reference requirements, outputs and compute needs.
 
-### What's next?
+### What's next? {#whats-next_2}
 
 Make a decision.
 
@@ -216,78 +234,90 @@ If you're working in a group, choose one person to present the card in one minut
 Compare your conclusions with the worked answer for your scenario.
 There is room for judgment, so a different answer with good reasons is not necessarily wrong.
 
-??? solution "Structural variants in an unsolved rare disease trio"
+<details class="solution">
+<summary>Structural variants in an unsolved rare disease trio</summary>
 
-    **Pipeline chosen**: `nf-core/longraredisease`.
+**Pipeline chosen**: `nf-core/longraredisease`.
 
-    **Why not `nf-core/raredisease`**: it is an obvious match when you search the catalog for "rare disease", and it addresses the same clinical question, but it only accepts Illumina short-read data.
-    Checking the data type first rules it out.
+**Why not `nf-core/raredisease`**: it is an obvious match when you search the catalog for "rare disease", and it addresses the same clinical question, but it only accepts Illumina short-read data.
+Checking the data type first rules it out.
 
-    **Why it fits**: `nf-core/longraredisease` is designed for long-read data from Oxford Nanopore or PacBio, and focuses on structural variants.
-    It calls them with three callers (Sniffles, CuteSV and SVIM) and merges the results into a consensus set, supports trio analysis including detection of de novo variants, annotates the variants with AnnotSV, and ranks them against the patient's HPO terms with SvAnna.
-    It can also call SNVs, copy number variants, short tandem repeats and methylation, which long reads provide from the same data.
+**Why it fits**: `nf-core/longraredisease` is designed for long-read data from Oxford Nanopore or PacBio, and focuses on structural variants.
+It calls them with three callers (Sniffles, CuteSV and SVIM) and merges the results into a consensus set, supports trio analysis including detection of de novo variants, annotates the variants with AnnotSV, and ranks them against the patient's HPO terms with SvAnna.
+It can also call SNVs, copy number variants, short tandem repeats and methylation, which long reads provide from the same data.
 
-    **Inputs to prepare**: the samplesheet requires `sample` and `file_path`, and uses `hpo_terms`, `sex`, `phenotype`, `family_id`, `maternal_id` and `paternal_id` to describe the trio and the child's clinical features.
+**Inputs to prepare**: the samplesheet requires `sample` and `file_path`, and uses `hpo_terms`, `sex`, `phenotype`, `family_id`, `maternal_id` and `paternal_id` to describe the trio and the child's clinical features.
 
-    **What to keep in mind**: check the release history; `nf-core/longraredisease` is much younger than `nf-core/raredisease`, so it has less of a track record.
-    The published test results cover one chromosome of a single sample, and do not include the AnnotSV annotation or SvAnna prioritization outputs; use the output documentation to see what those results look like.
+**What to keep in mind**: check the release history; `nf-core/longraredisease` is much younger than `nf-core/raredisease`, so it has less of a track record.
+The published test results cover one chromosome of a single sample, and do not include the AnnotSV annotation or SvAnna prioritization outputs; use the output documentation to see what those results look like.
 
-    **Compute concern**: the published execution report comes from that small test, so it greatly understates the resources a trio of whole genomes requires.
-    Plan for read alignment and variant calling on whole genomes to dominate the run.
+**Compute concern**: the published execution report comes from that small test, so it greatly understates the resources a trio of whole genomes requires.
+Plan for read alignment and variant calling on whole genomes to dominate the run.
 
-??? solution "Differential expression in bulk RNA-seq"
+</details>
 
-    **Pipelines chosen**: `nf-core/rnaseq` followed by `nf-core/differentialabundance`.
+<details class="solution">
+<summary>Differential expression in bulk RNA-seq</summary>
 
-    **Why**: neither pipeline answers the question alone.
-    `nf-core/rnaseq` performs QC, alignment and quantification, producing gene count matrices, but its documentation states that it does not compare samples statistically.
-    The DESeq2 step it runs is a QC step (sample PCA and clustering), not a differential expression test.
-    `nf-core/differentialabundance` takes the count matrix from `nf-core/rnaseq`, a sample sheet describing the groups, and a contrasts file defining the comparison, and runs DESeq2 (or limma) to produce differential expression tables, plots and a report.
+**Pipelines chosen**: `nf-core/rnaseq` followed by `nf-core/differentialabundance`.
 
-    **Inputs to prepare**: a samplesheet for `nf-core/rnaseq` (covered in Part 5), then a sample sheet with a `condition` column and a contrasts file for `nf-core/differentialabundance`.
+**Why**: neither pipeline answers the question alone.
+`nf-core/rnaseq` performs QC, alignment and quantification, producing gene count matrices, but its documentation states that it does not compare samples statistically.
+The DESeq2 step it runs is a QC step (sample PCA and clustering), not a differential expression test.
+`nf-core/differentialabundance` takes the count matrix from `nf-core/rnaseq`, a sample sheet describing the groups, and a contrasts file defining the comparison, and runs DESeq2 (or limma) to produce differential expression tables, plots and a report.
 
-    **Reference data**: the `nf-core/rnaseq` documentation recommends providing a recent GENCODE or Ensembl FASTA and GTF rather than the built-in `--genome` references, whose annotations are out of date.
+**Inputs to prepare**: a samplesheet for `nf-core/rnaseq` (covered in Part 5), then a sample sheet with a `condition` column and a contrasts file for `nf-core/differentialabundance`.
 
-    **Compute concern**: alignment and quantification dominate the run time and memory; differential analysis on a count matrix is light.
+**Reference data**: the `nf-core/rnaseq` documentation recommends providing a recent GENCODE or Ensembl FASTA and GTF rather than the built-in `--genome` references, whose annotations are out of date.
 
-??? solution "Single-cell RNA-seq of immune cells"
+**Compute concern**: alignment and quantification dominate the run time and memory; differential analysis on a count matrix is light.
 
-    **Pipeline chosen**: `nf-core/scrnaseq`, with a caveat.
+</details>
 
-    **Why it fits partially**: it takes 10x Chromium data to count matrices, with a choice of tools (Alevin-fry by default, STARsolo, kallisto | bustools or Cell Ranger), and outputs them in formats ready for analysis in Python (`.h5ad`) or R (`.rds` for Seurat).
+<details class="solution">
+<summary>Single-cell RNA-seq of immune cells</summary>
 
-    **What it does not cover**: clustering, cell type annotation and comparing proportions between groups.
-    The nf-core community is developing `nf-core/scdownstream` for these steps, but at the time of writing it has no stable release.
-    Until then, the group would do the downstream analysis interactively, for example with Scanpy or Seurat.
+**Pipeline chosen**: `nf-core/scrnaseq`, with a caveat.
 
-    **Inputs to prepare**: a samplesheet with `sample`, `fastq_1` and `fastq_2`, and optionally `expected_cells`; knowing the 10x chemistry version also helps, although the `--protocol` parameter can detect it automatically.
+**Why it fits partially**: it takes 10x Chromium data to count matrices, with a choice of tools (Alevin-fry by default, STARsolo, kallisto | bustools or Cell Ranger), and outputs them in formats ready for analysis in Python (`.h5ad`) or R (`.rds` for Seurat).
 
-    **Compute concern**: index building and alignment are memory-intensive for the human genome.
+**What it does not cover**: clustering, cell type annotation and comparing proportions between groups.
+The nf-core community is developing `nf-core/scdownstream` for these steps, but at the time of writing it has no stable release.
+Until then, the group would do the downstream analysis interactively, for example with Scanpy or Seurat.
 
-??? solution "DNA methylation at imprinted loci"
+**Inputs to prepare**: a samplesheet with `sample`, `fastq_1` and `fastq_2`, and optionally `expected_cells`; knowing the 10x chemistry version also helps, although the `--protocol` parameter can detect it automatically.
 
-    **Pipeline chosen**: `nf-core/methylseq`.
+**Compute concern**: index building and alignment are memory-intensive for the human genome.
 
-    **Why it fits**: it aligns bisulfite sequencing reads (with Bismark by default, or bwa-meth) and produces per-CpG methylation calls for each sample.
-    It can also restrict the methylation output to regions of interest: `--run_targeted_sequencing` with `--target_regions_file` filters the results to the regions in a BED file, which could contain the imprinted loci.
+</details>
 
-    **What it does not cover**: statistical comparison between patients and controls.
-    The scenario only asks for methylation levels per sample, so this is sufficient here, but a differential methylation analysis would need a separate tool such as methylKit or DSS.
+<details class="solution">
+<summary>DNA methylation at imprinted loci</summary>
 
-    **Inputs to prepare**: a simple samplesheet with `sample`, `fastq_1` and `fastq_2`, and a BED file of the imprinted loci.
+**Pipeline chosen**: `nf-core/methylseq`.
 
-    **Compute concern**: aligning whole-genome bisulfite data is slow and memory-intensive; the alignment step dominates the run.
+**Why it fits**: it aligns bisulfite sequencing reads (with Bismark by default, or bwa-meth) and produces per-CpG methylation calls for each sample.
+It can also restrict the methylation output to regions of interest: `--run_targeted_sequencing` with `--target_regions_file` filters the results to the regions in a BED file, which could contain the imprinted loci.
 
-### Takeaway
+**What it does not cover**: statistical comparison between patients and controls.
+The scenario only asks for methylation levels per sample, so this is sufficient here, but a differential methylation analysis would need a separate tool such as methylKit or DSS.
+
+**Inputs to prepare**: a simple samplesheet with `sample`, `fastq_1` and `fastq_2`, and a BED file of the imprinted loci.
+
+**Compute concern**: aligning whole-genome bisulfite data is slow and memory-intensive; the alignment step dominates the run.
+
+</details>
+
+### Takeaway {#takeaway_3}
 
 Choosing a pipeline means checking that it produces the result you need from the inputs you have, not only that it accepts your data type.
 Completed runs let you check outputs and compute needs before running anything yourself.
 
-### What's next?
+### What's next? {#whats-next_3}
 
 The next parts cover practical challenges of running a pipeline on your own data: preparing the samplesheet, troubleshooting validation errors, and tuning compute resources.
 They use `nf-core/rnaseq` as the example; at the end of each part, you can apply the same steps to the pipeline you chose here.
-Head on to [Part 5](./05_inputs.md).
+Head on to [Part 5](./05_inputs.mdx).
 
 ---
 

@@ -1,6 +1,9 @@
-# भाग 1: अधिक कंटेनर
+---
+title: 'भाग 1: अधिक कंटेनर'
+description: '[TODO]'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 [TODO]
 
@@ -18,11 +21,11 @@
 Seqera Containers एक मुफ़्त सेवा है जो pip और conda (bioconda सहित) इंस्टॉल करने योग्य टूल के लिए कंटेनर इमेज बनाती है।
 [Seqera Containers](https://www.seqera.io/containers/) पर जाओ और `quote` pip पैकेज को खोजो।
 
-![Seqera Containers](img/seqera-containers-1.png)
+
 
 `quote` pip पैकेज के लिए कंटेनर इमेज का अनुरोध करने के लिए "+Add" और फिर "Get Container" पर क्लिक करो।
 
-![Seqera Containers](img/seqera-containers-2.png)
+
 
 यदि यह पहली बार है कि इस पैकेज के इस संस्करण के लिए कम्युनिटी कंटेनर बनाया जा रहा है, तो इसे पूरा होने में कुछ मिनट लग सकते हैं।
 तुम्हारे लिए बनाई गई कंटेनर इमेज की URI (जैसे `community.wave.seqera.io/library/pip_quote:ae07804021465ee9`) को कॉपी करने के लिए क्लिक करो।
@@ -49,7 +52,7 @@ Seqera Containers वेबसाइट पर वापस जाओ और "Bu
 पहली चीज़ जिसे हम देखेंगे वह `Dockerfile` है, एक प्रकार की स्क्रिप्ट फ़ाइल जिसमें कंटेनर इमेज बनाने के लिए आवश्यक सभी कमांड होते हैं।
 हमने नीचे दिए गए Dockerfile में कुछ व्याख्यात्मक कमेंट जोड़े हैं ताकि तुम समझ सको कि प्रत्येक भाग क्या करता है।
 
-```Dockerfile title="Dockerfile"
+```dockerfile title="Dockerfile"
 # micromamba बेस docker इमेज से शुरू करें
 FROM mambaorg/micromamba:1.5.10-noble
 # conda.yml फ़ाइल को कंटेनर में कॉपी करें
@@ -70,7 +73,7 @@ ENV PATH="$MAMBA_ROOT_PREFIX/bin:$PATH"
 
 दूसरी चीज़ जिसे हम देखेंगे वह `conda.yml` फ़ाइल है, जिसमें कंटेनर इमेज में इंस्टॉल किए जाने वाले पैकेज की सूची होती है।
 
-```conda.yml title="conda.yml"
+```yaml title="conda.yml"
 channels:
 - conda-forge
 - bioconda
@@ -82,10 +85,10 @@ dependencies:
 
 इन फ़ाइलों की सामग्री को `containers/build` डायरेक्टरी में स्थित स्टब में कॉपी करो, फिर कंटेनर इमेज को खुद बनाने के लिए निम्नलिखित कमांड चलाओ।
 
-!!! Note "नोट"
-
-    हम `-t quote:latest` फ्लैग का उपयोग करते हैं ताकि कंटेनर इमेज को `quote` नाम और `latest` टैग के साथ टैग किया जा सके।
-    हम इस सिस्टम पर इसे चलाते समय कंटेनर इमेज को संदर्भित करने के लिए इस टैग का उपयोग कर सकेंगे।
+:::note[नोट]
+हम `-t quote:latest` फ्लैग का उपयोग करते हैं ताकि कंटेनर इमेज को `quote` नाम और `latest` टैग के साथ टैग किया जा सके।
+हम इस सिस्टम पर इसे चलाते समय कंटेनर इमेज को संदर्भित करने के लिए इस टैग का उपयोग कर सकेंगे।
+:::
 
 ```bash
 docker build -t quote:latest containers/build
@@ -103,7 +106,7 @@ docker run --rm quote:latest quote "Margaret Oakley Dayhoff"
 
 ### आगे क्या है?
 
-तुम्हारे पास इस प्रशिक्षण श्रृंखला के [अगले अध्याय](./04_hello_genomics.md) को जारी रखने के लिए आवश्यक सब कुछ है।
+तुम्हारे पास इस प्रशिक्षण श्रृंखला के अगले अध्याय को जारी रखने के लिए आवश्यक सब कुछ है।
 तुम `quote` कंटेनर का उपयोग करके कंप्यूटर/जीवविज्ञान के अग्रदूतों पर उद्धरण प्राप्त करने और उन्हें `cowsay` कंटेनर का उपयोग करके आउटपुट करने के लिए एक वैकल्पिक अभ्यास के साथ भी जारी रख सकते हो।
 
 ---
@@ -143,17 +146,17 @@ docker run --rm quote:latest quote "Margaret Oakley Dayhoff"
 
 `quote` कंटेनर इमेज के लिए, तुम या तो पिछले स्ट्रेच अभ्यास में खुद बनाई गई इमेज का उपयोग कर सकते हो या Seqera Containers से प्राप्त की गई इमेज का उपयोग कर सकते हो।
 
-!!! Hint "संकेत"
-
-    तुम्हारे getQuote प्रोसेस के `script` ब्लॉक के लिए एक अच्छा विकल्प हो सकता है:
-        ```groovy
-        script:
-            def safe_author = author.tokenize(' ').join('-')
-            """
-            quote "$author" > quote-${safe_author}.txt
-            echo "-${author}" >> quote-${safe_author}.txt
-            """
-        ```
+:::note[संकेत]
+तुम्हारे getQuote प्रोसेस के `script` ब्लॉक के लिए एक अच्छा विकल्प हो सकता है:
+    ```nextflow
+    script:
+        def safe_author = author.tokenize(' ').join('-')
+        """
+        quote "$author" > quote-${safe_author}.txt
+        echo "-${author}" >> quote-${safe_author}.txt
+        """
+    ```
+:::
 
 तुम इस अभ्यास का समाधान `containers/solutions/hello-containers-4.1.nf` में पा सकते हो।
 
@@ -162,7 +165,7 @@ docker run --rm quote:latest quote "Margaret Oakley Dayhoff"
 अपनी पाइपलाइन में कुछ ब्रांचिंग लॉजिक जोड़ो ताकि यह `quote` और `sayHello` दोनों के लिए इच्छित इनपुट स्वीकार कर सके।
 यहाँ Nextflow वर्कफ़्लो में `if` स्टेटमेंट का उपयोग करने का एक उदाहरण है:
 
-```groovy title="hello-containers.nf"
+```nextflow title="hello-containers.nf"
 workflow {
     if (params.quote) {
         ...
@@ -174,9 +177,9 @@ workflow {
 }
 ```
 
-!!! Hint "संकेत"
-
-    तुम किसी प्रोसेस के आउटपुट चैनल को एक नाम असाइन करने के लिए `new_ch = processName.out` का उपयोग कर सकते हो।
+:::note[संकेत]
+तुम किसी प्रोसेस के आउटपुट चैनल को एक नाम असाइन करने के लिए `new_ch = processName.out` का उपयोग कर सकते हो।
+:::
 
 तुम इस अभ्यास का समाधान `containers/solutions/hello-containers-4.2.nf` में पा सकते हो।
 

@@ -1,4 +1,7 @@
-# Part 3: Organizing inputs
+---
+title: 'Part 3: Organizing inputs'
+description: In Part 2, we ran molkart with multiple parameters on the command line.
+---
 
 In Part 2, we ran molkart with multiple parameters on the command line.
 Now we'll learn two better approaches for managing inputs: **parameter files** and **samplesheets**.
@@ -120,9 +123,9 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! Warning
-
-    Notice the paths in the samplesheet are relative to where you **run** Nextflow, not where the samplesheet is located.
+:::caution
+Notice the paths in the samplesheet are relative to where you **run** Nextflow, not where the samplesheet is located.
+:::
 
 Finally, let's execute nf-core/molkart one more time with the samplesheet with local file paths:
 
@@ -130,11 +133,11 @@ Finally, let's execute nf-core/molkart one more time with the samplesheet with l
 
 As you can see, Nextflow executes this run similar to when the files were downloaded from Github. This is one of the great features of Nextflow, it stages the data properly for you, regardless of where it is located.
 
-### Takeaway
+### Takeaway {#takeaway_1}
 
 Samplesheets organize multi-sample datasets in a way that allows you to explicitly define your metadata along with the file paths.
 Most nf-core pipelines use this pattern.
 
-### What's next?
+### What's next? {#whats-next_1}
 
 Now that we've covered inputs, let's explore how to configure Nextflow pipelines for different computing environments.

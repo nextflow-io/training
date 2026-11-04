@@ -1,16 +1,19 @@
-# भाग 1: विधि का अवलोकन और मैनुअल परीक्षण
+---
+title: 'भाग 1: विधि का अवलोकन और मैनुअल परीक्षण'
+description: '{BRIEF_METHOD_DESCRIPTION}'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-{BRIEF_METHOD_DESCRIPTION}
+\{BRIEF_METHOD_DESCRIPTION\}
 
-![पाइपलाइन अवलोकन](img/{PIPELINE_DIAGRAM}.png)
 
-{OPTIONAL_EXTENDED_METHOD_DESCRIPTION}
+
+\{OPTIONAL_EXTENDED_METHOD_DESCRIPTION\}
 
 ### विधियाँ
 
-{DESCRIBE_THE_TWO_APPROACHES: single-sample और multi-sample/aggregation}
+\{DESCRIBE_THE_TWO_APPROACHES: single-sample और multi-sample/aggregation\}
 
 इससे पहले कि हम कोई भी वर्कफ़्लो कोड लिखना शुरू करें, हम कुछ टेस्ट डेटा पर कमांड को मैनुअली आज़माएंगे।
 
@@ -18,41 +21,39 @@
 
 हम निम्नलिखित डेटा और संबंधित संसाधन प्रदान करते हैं:
 
-- **{PRIMARY_INPUT_DESCRIPTION}**
-- **{SAMPLE_DESCRIPTION}**
-- **{ADDITIONAL_RESOURCES_DESCRIPTION}**
+- **\{PRIMARY_INPUT_DESCRIPTION\}**
+- **\{SAMPLE_DESCRIPTION\}**
+- **\{ADDITIONAL_RESOURCES_DESCRIPTION\}**
 
 ### सॉफ़्टवेयर
 
-मुख्य टूल हैं [{TOOL_A}]({TOOL_A_URL}) और [{TOOL_B}]({TOOL_B_URL})।
+मुख्य टूल हैं [\{TOOL_A\}](\{TOOL_A_URL\}) और [\{TOOL_B\}](\{TOOL_B_URL\})।
 
-ये टूल GitHub Codespaces वातावरण में इंस्टॉल नहीं हैं, इसलिए हम इन्हें कंटेनर के माध्यम से उपयोग करेंगे (देखें [Hello Containers](../../hello_nextflow/05_hello_containers.md))।
+ये टूल GitHub Codespaces वातावरण में इंस्टॉल नहीं हैं, इसलिए हम इन्हें कंटेनर के माध्यम से उपयोग करेंगे (देखें [Hello Containers](../../hello_nextflow/05_hello_containers.mdx))।
 
-!!! note "नोट"
-
-    सुनिश्चित करो कि तुम `nf4-science/{DOMAIN_DIR}` डायरेक्टरी में हो ताकि जब तुम `pwd` टाइप करो तो पाथ का अंतिम भाग `{DOMAIN_DIR}` दिखे।
+:::note[नोट]
+सुनिश्चित करो कि तुम `nf4-science/{DOMAIN_DIR}` डायरेक्टरी में हो ताकि जब तुम `pwd` टाइप करो तो पाथ का अंतिम भाग `{DOMAIN_DIR}` दिखे।
+:::
 
 ---
 
-## 1. {SINGLE_SAMPLE_SECTION_TITLE}
+## 1. \{SINGLE_SAMPLE_SECTION_TITLE\}
 
-{BRIEF_DESCRIPTION_OF_SINGLE_SAMPLE_APPROACH}
+\{BRIEF_DESCRIPTION_OF_SINGLE_SAMPLE_APPROACH\}
 
 इस सेक्शन में हम उन कमांड का परीक्षण करते हैं जो single-sample प्रोसेसिंग दृष्टिकोण को बनाते हैं।
 ये वही कमांड हैं जिन्हें हम इस कोर्स के भाग 2 में Nextflow वर्कफ़्लो में wrap करेंगे।
 
-1. {STEP_1_SUMMARY}
-2. {STEP_2_SUMMARY}
+1. \{STEP_1_SUMMARY\}
+2. \{STEP_2_SUMMARY\}
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/{DOMAIN_DIR}/img/{DIAGRAM_1}.svg"
-</figure>
+
 
 हम सिर्फ़ एक नमूने पर कमांड का परीक्षण करके शुरू करते हैं।
 
-### 1.1. {FIRST_TOOL_STEP_TITLE}
+### 1.1. \{FIRST_TOOL_STEP_TITLE\}
 
-{BRIEF_DESCRIPTION_OF_STEP}
+\{BRIEF_DESCRIPTION_OF_STEP\}
 
 #### 1.1.1. कंटेनर को pull करें
 
@@ -60,13 +61,9 @@
 
 ```bash
 docker pull {TOOL_A_CONTAINER_URI}
+# [!output]
+{EXPECTED_PULL_OUTPUT}
 ```
-
-??? success "कमांड आउटपुट"
-
-    ```console
-    {EXPECTED_PULL_OUTPUT}
-    ```
 
 #### 1.1.2. कंटेनर को इंटरैक्टिवली spin up करें
 
@@ -82,15 +79,11 @@ docker run -it -v ./data:/data {TOOL_A_CONTAINER_URI}
 
 ```bash
 {TOOL_A_COMMAND}
+# [!output]
+{EXPECTED_COMMAND_OUTPUT}
 ```
 
-??? success "कमांड आउटपुट"
-
-    ```console
-    {EXPECTED_COMMAND_OUTPUT}
-    ```
-
-{DESCRIBE_EXPECTED_OUTPUT_FILES}
+\{DESCRIBE_EXPECTED_OUTPUT_FILES\}
 
 #### 1.1.4. कंटेनर से बाहर निकलो
 
@@ -102,21 +95,17 @@ exit
 
 तुम्हारा प्रॉम्प्ट सामान्य हो जाना चाहिए।
 
-### 1.2. {SECOND_TOOL_STEP_TITLE}
+### 1.2. \{SECOND_TOOL_STEP_TITLE\}
 
-{BRIEF_DESCRIPTION_OF_STEP}
+\{BRIEF_DESCRIPTION_OF_STEP\}
 
 #### 1.2.1. कंटेनर को pull करें
 
 ```bash
 docker pull {TOOL_B_CONTAINER_URI}
+# [!output]
+{EXPECTED_PULL_OUTPUT}
 ```
-
-??? success "कमांड आउटपुट"
-
-    ```console
-    {EXPECTED_PULL_OUTPUT}
-    ```
 
 #### 1.2.2. कंटेनर को इंटरैक्टिवली spin up करें
 
@@ -128,15 +117,11 @@ docker run -it -v ./data:/data {TOOL_B_CONTAINER_URI}
 
 ```bash
 {TOOL_B_COMMAND}
+# [!output]
+{EXPECTED_COMMAND_OUTPUT}
 ```
 
-??? success "कमांड आउटपुट"
-
-    ```console
-    {EXPECTED_COMMAND_OUTPUT}
-    ```
-
-{DESCRIBE_EXPECTED_OUTPUT_FILES}
+\{DESCRIBE_EXPECTED_OUTPUT_FILES\}
 
 #### 1.2.4. कंटेनर से बाहर निकलो
 
@@ -151,31 +136,29 @@ exit
 
 ---
 
-## 2. {MULTI_SAMPLE_SECTION_TITLE}
+## 2. \{MULTI_SAMPLE_SECTION_TITLE\}
 
-{BRIEF_DESCRIPTION_OF_MULTI_SAMPLE_APPROACH}
+\{BRIEF_DESCRIPTION_OF_MULTI_SAMPLE_APPROACH\}
 
-{EXPLAIN_WHY_MULTI_SAMPLE_IS_NEEDED}
+\{EXPLAIN_WHY_MULTI_SAMPLE_IS_NEEDED\}
 
 इस सेक्शन में हम multi-sample प्रोसेसिंग के लिए आवश्यक अतिरिक्त कमांड का परीक्षण करते हैं।
 ये वही कमांड हैं जिन्हें हम इस कोर्स के भाग 3 में Nextflow वर्कफ़्लो में wrap करेंगे।
 
-1. {AGGREGATION_STEP_1_SUMMARY}
-2. {AGGREGATION_STEP_2_SUMMARY}
+1. \{AGGREGATION_STEP_1_SUMMARY\}
+2. \{AGGREGATION_STEP_2_SUMMARY\}
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/{DOMAIN_DIR}/img/{DIAGRAM_2}.svg"
-</figure>
 
-### 2.1. {AGGREGATION_STEP_TITLE}
 
-{STEP_INSTRUCTIONS_FOLLOWING_SAME_PATTERN_AS_ABOVE}
+### 2.1. \{AGGREGATION_STEP_TITLE\}
+
+\{STEP_INSTRUCTIONS_FOLLOWING_SAME_PATTERN_AS_ABOVE\}
 
 ---
 
 ### सारांश
 
-तुम जानते हो कि {TOOL_A} और {TOOL_B} कमांड को उनके संबंधित कंटेनर में कैसे टेस्ट करना है, जिसमें {MULTI_SAMPLE_SUMMARY} कैसे करना है यह भी शामिल है।
+तुम जानते हो कि \{TOOL_A\} और \{TOOL_B\} कमांड को उनके संबंधित कंटेनर में कैसे टेस्ट करना है, जिसमें \{MULTI_SAMPLE_SUMMARY\} कैसे करना है यह भी शामिल है।
 
 ### आगे क्या है?
 

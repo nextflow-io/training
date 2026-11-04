@@ -1,6 +1,9 @@
-# Teil 4: Konfiguration
+---
+title: 'Teil 4: Konfiguration'
+description: In den Teilen 1-3 haben wir gelernt, wie man Nextflow ausführt, eine nf-core Pipeline ausführt und Eingaben mit Parameterdateien und Samplesheets verwaltet.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 In den Teilen 1-3 haben wir gelernt, wie man Nextflow ausführt, eine nf-core Pipeline ausführt und Eingaben mit Parameterdateien und Samplesheets verwaltet.
 Jetzt werden wir erkunden, wie man Pipelines für verschiedene Rechenumgebungen mit **Konfigurationsdateien** und **Profilen** konfiguriert.
@@ -46,7 +49,7 @@ Dieser geschichtete Ansatz ermöglicht es dir, Standardeinstellungen in der Pipe
 
 Schauen wir uns die Konfiguration an, die wir bisher verwendet haben:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 docker.enabled = true
 process {
     resourceLimits = [
@@ -80,7 +83,7 @@ code molkart/nextflow.config
 
 Suche nach dem `profiles`-Block:
 
-```groovy title="molkart/nextflow.config (excerpt)"
+```nextflow title="molkart/nextflow.config (excerpt)" nextflow="config"
 profiles {
     docker {
         docker.enabled          = true
@@ -152,7 +155,7 @@ nf-core Pipelines enthalten immer mindestens zwei Test-Profile:
 
 Schauen wir uns das `test`-Profil in molkart genauer an, das mit der `includeConfig`-Direktive eingebunden wird:
 
-```groovy title="molkart/nextflow.config (excerpt)"
+```nextflow title="molkart/nextflow.config (excerpt)" nextflow="config"
 profiles {
   ...
     test      { includeConfig 'conf/test.config'      }
@@ -161,7 +164,7 @@ profiles {
 
 Das bedeutet, wann immer wir die Pipeline mit `-profile test` ausführen, lädt Nextflow die Konfiguration aus `conf/test.config`.
 
-```groovy title="molkart/conf/test.config (excerpt)"
+```nextflow title="molkart/conf/test.config (excerpt)" nextflow="config"
 params {
     config_profile_name        = 'Test profile'
     config_profile_description = 'Minimal test dataset to check pipeline function'
@@ -221,7 +224,7 @@ Erstellen wir eigene Profile für zwei Szenarien:
 
 Füge Folgendes zu deiner `nextflow.config` hinzu:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 profiles {
     local_dev {
         docker.enabled = true
@@ -247,10 +250,10 @@ nextflow run ./molkart -profile local_dev --input data/samplesheet.csv --outdir 
 nextflow run ./molkart -profile hpc_cluster --input data/samplesheet.csv --outdir results
 ```
 
-!!! Note "Hinweis"
-
-    Wir können das HPC-Profil in dieser Trainingsumgebung nicht testen, da wir keinen Zugang zu einem Slurm-Scheduler haben.
-    Aber dies zeigt, wie du es für die praktische Anwendung konfigurieren würdest.
+:::note[Hinweis]
+Wir können das HPC-Profil in dieser Trainingsumgebung nicht testen, da wir keinen Zugang zu einem Slurm-Scheduler haben.
+Aber dies zeigt, wie du es für die praktische Anwendung konfigurieren würdest.
+:::
 
 ### 3.2. `nextflow config` verwenden, um Konfigurationen zu inspizieren
 
@@ -293,7 +296,7 @@ Zur Vereinfachung verwenden nf-core Pipelines [**Process-Labels**](https://www.n
 Jeder Prozess ist mit einem Label wie `process_low`, `process_medium` oder `process_high` versehen, um niedrige, mittlere bzw. hohe Rechenressourcenanforderungen zu beschreiben.
 Diese Labels werden in einer der Konfigurationsdateien im `conf/`-Verzeichnis der Pipeline in spezifische Ressourcenanforderungen umgewandelt.
 
-```groovy title="molkart/conf/base.config (excerpt)"
+```nextflow title="molkart/conf/base.config (excerpt)" nextflow="config"
 process {
     cpus   = { 1      * task.attempt }
     memory = { 6.GB   * task.attempt }
@@ -332,7 +335,7 @@ Beachte den `task.attempt`-Multiplikator - dieser ermöglicht es nachfolgenden A
 
 Für feinere Kontrolle kannst du einzelne Prozesse nach Namen ansprechen:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 process {
     withName: 'NFCORE_MOLKART:MOLKART:CELLPOSE' {
         cpus   = 16
@@ -345,10 +348,10 @@ Wenn wir versuchen, diese Pipeline mit der obigen Überschreibung auszuführen, 
 Dies wird dazu führen, dass die Pipeline in unserer aktuellen Umgebung fehlschlägt, da wir nicht so viel RAM zur Verfügung haben.
 Wir werden im nächsten Abschnitt lernen, wie man solche Fehler verhindert.
 
-!!! Tip "Tipp"
-
-    Um Prozessnamen zu finden, schaue in die Pipeline-Ausführungsausgabe oder prüfe `.nextflow.log`.
-    Prozessnamen folgen dem Muster `WORKFLOW:SUBWORKFLOW:PROCESS`.
+:::tip[Tipp]
+Um Prozessnamen zu finden, schaue in die Pipeline-Ausführungsausgabe oder prüfe `.nextflow.log`.
+Prozessnamen folgen dem Muster `WORKFLOW:SUBWORKFLOW:PROCESS`.
+:::
 
 ### Fazit
 
@@ -374,7 +377,7 @@ In eingeschränkten Umgebungen wie GitHub Codespaces würde Nextflow ohne Limits
 
 Die `resourceLimits`-Direktive begrenzt Ressourcenanforderungen auf angegebene Werte:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 process {
     resourceLimits = [ cpus: 2, memory: 7.GB ]
 }
@@ -386,7 +389,7 @@ Dies teilt Nextflow mit: "Wenn ein Prozess mehr als 2 CPUs oder 7 GB Speicher an
 
 Aktualisiere deine eigenen Profile, um angemessene Limits einzuschließen:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 profiles {
     local_dev {
         docker.enabled = true
@@ -410,10 +413,10 @@ profiles {
 }
 ```
 
-!!! Warning "Warnung"
-
-    Zu niedrige Ressourcenlimits können dazu führen, dass Prozesse fehlschlagen oder langsam laufen.
-    Die Pipeline muss möglicherweise weniger speicherintensive Algorithmen verwenden oder Daten in kleineren Blöcken verarbeiten.
+:::caution[Warnung]
+Zu niedrige Ressourcenlimits können dazu führen, dass Prozesse fehlschlagen oder langsam laufen.
+Die Pipeline muss möglicherweise weniger speicherintensive Algorithmen verwenden oder Daten in kleineren Blöcken verarbeiten.
+:::
 
 ### Fazit
 
@@ -448,6 +451,6 @@ Herzlichen Glückwunsch zum Abschluss des Kurses "Nextflow für Bioimaging"!
 Nächste Schritte:
 
 - Fülle die Kursumfrage aus, um Feedback zu geben
-- Schau dir [Hello Nextflow](../../hello_nextflow/index.md) an, um mehr über die Entwicklung von Workflows zu lernen
-- Erkunde [Build with nf-core](../../nfcore_build/index.md), um tiefer in die nf-core Werkzeuge einzutauchen
-- Erkunde fortgeschrittenere Themen in den [Side Quests](../../side_quests/index.md)
+- Schau dir [Hello Nextflow](../../hello_nextflow/index.mdx) an, um mehr über die Entwicklung von Workflows zu lernen
+- Erkunde [Build with nf-core](../../nfcore_build/index.mdx), um tiefer in die nf-core Werkzeuge einzutauchen
+- Erkunde fortgeschrittenere Themen in den [Side Quests](../../side_quests/index.mdx)

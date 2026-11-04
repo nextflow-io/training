@@ -1,10 +1,13 @@
-# Primeros pasos
+---
+title: Primeros pasos
+description: 'Escala con Seqera: Primeros pasos'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Iniciar un entorno de capacitación
 
-Para usar el entorno preconfigurado que proporcionamos en GitHub Codespaces, haga clic en el botón "Open in GitHub Codespaces" que aparece a continuación. Para otras opciones, consulte [Opciones de entorno](../envsetup/index.md).
+Para usar el entorno preconfigurado que proporcionamos en GitHub Codespaces, haga clic en el botón "Open in GitHub Codespaces" que aparece a continuación. Para otras opciones, consulte [Opciones de entorno](../envsetup/index.mdx).
 
 Recomendamos abrir el entorno de capacitación en una nueva pestaña o ventana del navegador (use clic derecho, ctrl+clic o cmd+clic según su equipo) para que pueda seguir leyendo mientras el entorno se carga.
 Deberá mantener estas instrucciones abiertas en paralelo para trabajar a lo largo del curso.
@@ -18,7 +21,7 @@ Este entorno de capacitación contiene todo el software, el código y los datos 
 El codespace está configurado con una interfaz de VSCode, que incluye un explorador de archivos, un editor de código y una terminal.
 Todas las instrucciones dadas durante el curso (por ejemplo, "abra el archivo", "edite el código" o "ejecute este comando") hacen referencia a esas tres partes de la interfaz de VSCode, a menos que se indique lo contrario.
 
-Si está trabajando en este curso por su cuenta, familiarícese con los [conceptos básicos del entorno](../envsetup/01_setup.md) para obtener más detalles.
+Si está trabajando en este curso por su cuenta, familiarícese con los [conceptos básicos del entorno](../envsetup/01_setup.mdx) para obtener más detalles.
 
 ## Prepararse para trabajar
 
@@ -39,13 +42,13 @@ Luego configure VSCode para que se enfoque en este directorio, de modo que solo 
 code .
 ```
 
-!!! tip "Consejo"
+:::tip[Consejo]
+Si por alguna razón sale de este directorio (por ejemplo, si su codespace entra en reposo), siempre puede usar la ruta completa para regresar, asumiendo que está ejecutando esto dentro del entorno de capacitación de GitHub Codespaces:
 
-    Si por alguna razón sale de este directorio (por ejemplo, si su codespace entra en reposo), siempre puede usar la ruta completa para regresar, asumiendo que está ejecutando esto dentro del entorno de capacitación de GitHub Codespaces:
-
-    ```bash
-    cd /workspaces/training/seqera-scale
-    ```
+```bash
+cd /workspaces/training/seqera-scale
+```
+:::
 
 ### Explorar los materiales proporcionados
 
@@ -56,12 +59,15 @@ Ejecute lo siguiente desde la terminal para ver la estructura completa:
 tree -a .
 ```
 
-??? abstract "Contenido del directorio"
+<details class="abstract">
+<summary>Contenido del directorio</summary>
 
-    ```console
-    .
-    └── .seqera_config
-    ```
+```console
+.
+└── .seqera_config
+```
+
+</details>
 
 El archivo **`.seqera_config`** es una plantilla que completará durante la sección 3 para configurar el CLI `tw` con su token de acceso y espacio de trabajo de Seqera.
 
@@ -75,4 +81,4 @@ El archivo **`.seqera_config`** es una plantilla que completará durante la secc
 
 Si puede marcar todas las casillas, está listo para continuar.
 
-**Para continuar a [Parte 1: Ejecutar pipelines desde la interfaz web](./01_run_with_seqera.md), haga clic en la flecha en la esquina inferior derecha de esta página.**
+**Para continuar a [Parte 1: Ejecutar pipelines desde la interfaz web](./01_run_with_seqera.mdx), haga clic en la flecha en la esquina inferior derecha de esta página.**

@@ -1,6 +1,9 @@
-# 파트 3: 입력 구성하기
+---
+title: '파트 3: 입력 구성하기'
+description: Part 2에서는 명령줄에서 여러 매개변수를 사용하여 molkart를 실행했습니다.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Part 2에서는 명령줄에서 여러 매개변수를 사용하여 molkart를 실행했습니다.
 이제 입력을 관리하는 두 가지 더 나은 방법인 **매개변수 파일**과 **샘플시트**를 배우겠습니다.
@@ -122,9 +125,9 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! Warning "경고"
-
-    샘플시트의 경로는 샘플시트가 위치한 곳이 아니라 Nextflow를 **실행**하는 위치에 상대적입니다.
+:::caution[경고]
+샘플시트의 경로는 샘플시트가 위치한 곳이 아니라 Nextflow를 **실행**하는 위치에 상대적입니다.
+:::
 
 마지막으로 로컬 파일 경로가 있는 샘플시트로 nf-core/molkart를 한 번 더 실행합니다:
 

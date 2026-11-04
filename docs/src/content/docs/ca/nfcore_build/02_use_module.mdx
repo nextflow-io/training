@@ -1,6 +1,9 @@
-# Part 2: Utilitzar un mòdul nf-core
+---
+title: 'Part 2: Utilitzar un mòdul nf-core'
+description: En aquesta segona part del curs de formació Build with nf-core, us mostrem com trobar, instal·lar i utilitzar un mòdul nf-core existent al vostre pipeline.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 En aquesta segona part del curs de formació Build with nf-core, us mostrem com trobar, instal·lar i utilitzar un mòdul nf-core existent al vostre pipeline.
 
@@ -9,24 +12,27 @@ En lloc d'escriure cada procés des de zero, podeu instal·lar i utilitzar mòdu
 
 Per demostrar com funciona això, substituirem el mòdul personalitzat `collectGreetings` pel mòdul `find/concatenate` de nf-core/modules al pipeline `core-hello`.
 
-??? info "Com començar des d'aquesta secció"
+<details class="info">
+<summary>Com començar des d'aquesta secció</summary>
 
-    Aquesta secció del curs assumeix que heu completat la [Part 1: Reescriure Hello per a nf-core](./01_rewrite_hello.md) i teniu un pipeline `core-hello` funcional.
+Aquesta secció del curs assumeix que heu completat la [Part 1: Reescriure Hello per a nf-core](./01_rewrite_hello.mdx) i teniu un pipeline `core-hello` funcional.
 
-    Si no heu completat la Part 1 o voleu començar de nou per a aquesta part, podeu utilitzar la solució `core-hello-part1` com a punt de partida.
-    Executeu aquesta comanda des del directori `nfcore-build/`:
+Si no heu completat la Part 1 o voleu començar de nou per a aquesta part, podeu utilitzar la solució `core-hello-part1` com a punt de partida.
+Executeu aquesta comanda des del directori `nfcore-build/`:
 
-    ```bash
-    cp -r solutions/core-hello-part1 core-hello
-    cd core-hello
-    ```
+```bash
+cp -r solutions/core-hello-part1 core-hello
+cd core-hello
+```
 
-    Això us proporciona un pipeline nf-core completament funcional preparat per afegir mòduls.
-    Podeu comprovar que s'executa correctament executant la comanda següent:
+Això us proporciona un pipeline nf-core completament funcional preparat per afegir mòduls.
+Podeu comprovar que s'executa correctament executant la comanda següent:
 
-    ```bash
-    nextflow run . --outdir core-hello-results -profile test,docker
-    ```
+```bash
+nextflow run . --outdir core-hello-results -profile test,docker
+```
+
+</details>
 
 ---
 
@@ -45,17 +51,17 @@ El projecte nf-core manté un catàleg centralitzat de mòduls a [https://nf-co.
 
 Navegueu a la pàgina de mòduls al vostre navegador web i utilitzeu la barra de cerca per cercar 'concatenate'.
 
-![resultats de cerca de mòduls](./img/module-search-results.png)
+![resultats de cerca de mòduls](../../nfcore_build/img/module-search-results.png)
 
 Com podeu veure, hi ha força resultats, molts d'ells mòduls dissenyats per concatenar tipus de fitxers molt específics.
 Entre ells, hauríeu de veure un anomenat `find_concatenate` que és de propòsit general.
 
-!!! info "Convenció de nomenclatura de mòduls"
+:::note[Convenció de nomenclatura de mòduls]
+El guió baix (`_`) s'utilitza com a substitut del caràcter barra (`/`) als noms de mòduls.
 
-    El guió baix (`_`) s'utilitza com a substitut del caràcter barra (`/`) als noms de mòduls.
-
-    Els mòduls nf-core segueixen la convenció de nomenclatura `programari/comanda` quan una eina proporciona múltiples comandes, com `samtools/view` (paquet samtools, comanda view) o `gatk/haplotypecaller` (paquet GATK, comanda HaplotypeCaller).
-    Per a eines que només proporcionen una comanda principal, els mòduls utilitzen un sol nivell com `fastqc` o `multiqc`.
+Els mòduls nf-core segueixen la convenció de nomenclatura `programari/comanda` quan una eina proporciona múltiples comandes, com `samtools/view` (paquet samtools, comanda view) o `gatk/haplotypecaller` (paquet GATK, comanda HaplotypeCaller).
+Per a eines que només proporcionen una comanda principal, els mòduls utilitzen un sol nivell com `fastqc` o `multiqc`.
+:::
 
 Feu clic a la caixa del mòdul `find_concatenate` per veure la documentació del mòdul.
 
@@ -72,31 +78,23 @@ Alternativament, també podeu cercar mòduls directament des de la línia de com
 
 ```bash
 nf-core modules list remote
+# [!output]
+...
+│ fastqc                                                │
+│ find/concatenate                                      │
+│ gatk4/applybqsr                                       │
+│ gatk4/baserecalibrator                                │
+...
 ```
-
-??? success "Sortida de la comanda (truncada)"
-
-    ```console
-    ...
-    │ fastqc                                                │
-    │ find/concatenate                                      │
-    │ gatk4/applybqsr                                       │
-    │ gatk4/baserecalibrator                                │
-    ...
-    ```
 
 Això mostrarà una llista de tots els mòduls disponibles al repositori nf-core/modules, tot i que és una mica menys convenient si no coneixeu ja el nom del mòdul que esteu cercant.
 No obstant això, si el coneixeu, podeu canalitzar la llista a `grep` per trobar mòduls específics:
 
 ```bash
 nf-core modules list remote | grep 'find/concatenate'
+# [!output]
+│ find/concatenate                                      │
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    │ find/concatenate                                      │
-    ```
 
 Tingueu en compte que l'enfocament amb `grep` només extraurà resultats amb el terme de cerca al seu nom.
 
@@ -110,81 +108,84 @@ nf-core modules info find/concatenate
 
 Això mostra documentació sobre el mòdul, incloent les seves entrades, sortides i informació bàsica d'ús.
 
-??? success "Sortida de la comanda"
+<details class="success">
+<summary>Sortida de la comanda</summary>
 
-    ```console
+```console
 
-                                              ,--./,-.
-              ___     __   __   __   ___     /,-._.--~\
-        |\ | |__  __ /  ` /  \ |__) |__         }  {
-        | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                              `._,._,'
+                                          ,--./,-.
+          ___     __   __   __   ___     /,-._.--~\
+    |\ | |__  __ /  ` /  \ |__) |__         }  {
+    | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                          `._,._,'
 
-        nf-core/tools version 4.1.0 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
-    INFO     Reinstalling modules found in 'modules.json' but missing from
-             directory:
-    ╭─ Module: find/concatenate  ──────────────────────────────────────────────────╮
-    │ 🌐 Repository: https://github.com/nf-core/modules.git                        │
-    │ 🔧 Tools: find, pigz                                                         │
-    │ 📖 Description: A module for concatenation of gzipped or uncompressed files  │
-    │ getting around UNIX terminal argument size                                   │
-    ╰──────────────────────────────────────────────────────────────────────────────╯
-                      ╷                                                    ╷
-     📥 Inputs        │Description                                         │Pattern
-    ╺━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━╸
-     input[0]         │                                                    │
-    ╶─────────────────┼────────────────────────────────────────────────────┼───────╴
-      meta  (map)     │Groovy Map containing sample information e.g. [     │
-                      │id:'test' ]                                         │
-    ╶─────────────────┼────────────────────────────────────────────────────┼───────╴
-      files_in  (file)│List of either compressed or uncompressed files     │      *
-                      ╵                                                    ╵
-                                      ╷                                ╷
-     📥 Outputs                       │Description                     │    Pattern
-    ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━╸
-     file_out                         │                                │
-    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
-      meta  (map)                     │Groovy Map containing sample    │
-                                      │information e.g. [ id:'test' ]  │
-    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
-      ${prefix}  (file)               │Concatenated file. Will be      │${file_out}
-                                      │gzipped if ${prefix} ends with  │
-                                      │".gz" or inputs are gzipped,    │
-                                      │will be uncompressed otherwise. │
-    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
-     versions_find                    │                                │
-    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
-      ${task.process}  (string)       │The name of the process         │
-    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
-      find  (string)                  │The name of the tool            │
-    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
-      find --version | sed '1!d; s/.* │The expression to obtain the    │
-     //'  (eval)                      │version of the tool             │
-    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
-     versions_pigz                    │                                │
-    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
-      ${task.process}  (string)       │The name of the process         │
-    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
-      pigz  (string)                  │The name of the tool            │
-    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
-      pigz --version 2>&1 | sed       │The expression to obtain the    │
-     's/pigz //g'  (eval)             │version of the tool             │
-    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
-     versions_coreutils               │                                │
-    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
-      ${task.process}  (string)       │The name of the process         │
-    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
-      coreutils  (string)             │The name of the tool            │
-    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
-      cat --version | sed '1!d; s/.*  │The expression to obtain the    │
-     //'  (eval)                      │version of the tool             │
-                                      ╵                                ╵
+INFO     Reinstalling modules found in 'modules.json' but missing from
+         directory:
+╭─ Module: find/concatenate  ──────────────────────────────────────────────────╮
+│ 🌐 Repository: https://github.com/nf-core/modules.git                        │
+│ 🔧 Tools: find, pigz                                                         │
+│ 📖 Description: A module for concatenation of gzipped or uncompressed files  │
+│ getting around UNIX terminal argument size                                   │
+╰──────────────────────────────────────────────────────────────────────────────╯
+                  ╷                                                    ╷
+ 📥 Inputs        │Description                                         │Pattern
+╺━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━╸
+ input[0]         │                                                    │
+╶─────────────────┼────────────────────────────────────────────────────┼───────╴
+  meta  (map)     │Groovy Map containing sample information e.g. [     │
+                  │id:'test' ]                                         │
+╶─────────────────┼────────────────────────────────────────────────────┼───────╴
+  files_in  (file)│List of either compressed or uncompressed files     │      *
+                  ╵                                                    ╵
+                                  ╷                                ╷
+ 📥 Outputs                       │Description                     │    Pattern
+╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━╸
+ file_out                         │                                │
+╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+  meta  (map)                     │Groovy Map containing sample    │
+                                  │information e.g. [ id:'test' ]  │
+╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+  ${prefix}  (file)               │Concatenated file. Will be      │${file_out}
+                                  │gzipped if ${prefix} ends with  │
+                                  │".gz" or inputs are gzipped,    │
+                                  │will be uncompressed otherwise. │
+╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+ versions_find                    │                                │
+╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+  ${task.process}  (string)       │The name of the process         │
+╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+  find  (string)                  │The name of the tool            │
+╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+  find --version | sed '1!d; s/.* │The expression to obtain the    │
+ //'  (eval)                      │version of the tool             │
+╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+ versions_pigz                    │                                │
+╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+  ${task.process}  (string)       │The name of the process         │
+╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+  pigz  (string)                  │The name of the tool            │
+╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+  pigz --version 2>&1 | sed       │The expression to obtain the    │
+ 's/pigz //g'  (eval)             │version of the tool             │
+╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+ versions_coreutils               │                                │
+╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+  ${task.process}  (string)       │The name of the process         │
+╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+  coreutils  (string)             │The name of the tool            │
+╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+  cat --version | sed '1!d; s/.*  │The expression to obtain the    │
+ //'  (eval)                      │version of the tool             │
+                                  ╵                                ╵
 
-     💻  Installation command: nf-core modules install find/concatenate
+ 💻  Installation command: nf-core modules install find/concatenate
 
-    ```
+```
+
+</details>
 
 Aquesta és exactament la mateixa informació que podeu trobar al lloc web.
 
@@ -201,28 +202,23 @@ Assegureu-vos que el vostre directori de treball actual és l'arrel del projecte
 
 ```bash
 nf-core modules install find/concatenate
+# [!output]
+                                      ,--./,-.
+      ___     __   __   __   ___     /,-._.--~\
+|\ | |__  __ /  ` /  \ |__) |__         }  {
+| \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                      `._,._,'
+
+nf-core/tools version 4.1.0 - https://nf-co.re
+
+
+INFO     Reinstalling modules found in 'modules.json' but missing from
+         directory:
+INFO     Installing 'find/concatenate'
+INFO     Use the following statement to include this module:
+
+ include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-
-                                          ,--./,-.
-          ___     __   __   __   ___     /,-._.--~\
-    |\ | |__  __ /  ` /  \ |__) |__         }  {
-    | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                          `._,._,'
-
-    nf-core/tools version 4.1.0 - https://nf-co.re
-
-
-    INFO     Reinstalling modules found in 'modules.json' but missing from
-             directory:
-    INFO     Installing 'find/concatenate'
-    INFO     Use the following statement to include this module:
-
-     include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
-    ```
 
 La comanda descarrega els fitxers del mòdul a `modules/nf-core/find/concatenate/` i actualitza `modules.json` per fer seguiment del mòdul instal·lat.
 
@@ -232,76 +228,82 @@ Comprovem que els fitxers del mòdul estan al seu lloc:
 tree -L 4 modules
 ```
 
-??? abstract "Contingut del directori"
+<details class="abstract">
+<summary>Contingut del directori</summary>
 
-    ```console
-    modules
-    ├── local
-    │   ├── collectGreetings.nf
-    │   ├── convertToUpper.nf
-    │   ├── cowpy.nf
-    │   └── sayHello.nf
-    └── nf-core
-        └── find
-            └── concatenate
-                ├── environment.yml
-                ├── main.nf
-                ├── meta.yml
-                └── tests
+```console
+modules
+├── local
+│   ├── collectGreetings.nf
+│   ├── convertToUpper.nf
+│   ├── cowpy.nf
+│   └── sayHello.nf
+└── nf-core
+    └── find
+        └── concatenate
+            ├── environment.yml
+            ├── main.nf
+            ├── meta.yml
+            └── tests
 
-    5 directories, 7 files
-    ```
+5 directories, 7 files
+```
+
+</details>
 
 També podeu confirmar la instal·lació inspeccionant `modules.json`, que ara llista `find/concatenate` sota el repositori nf-core/modules.
 
-??? abstract "Contingut del fitxer"
+<details class="abstract">
+<summary>Contingut del fitxer</summary>
 
-    ```json title="modules.json"
-    {
-        "name": "core/hello",
-        "homePage": "https://github.com/core/hello",
-        "repos": {
-            "https://github.com/nf-core/modules.git": {
-                "modules": {
-                    "nf-core": {
-                        "find/concatenate": {
-                            "branch": "master",
-                            "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
-                            "installed_by": [
-                                "modules"
-                            ]
-                        }
+```json title="modules.json"
+{
+    "name": "core/hello",
+    "homePage": "https://github.com/core/hello",
+    "repos": {
+        "https://github.com/nf-core/modules.git": {
+            "modules": {
+                "nf-core": {
+                    "find/concatenate": {
+                        "branch": "master",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "installed_by": [
+                            "modules"
+                        ]
                     }
-                },
-                "subworkflows": {
-                    "nf-core": {
-                        "utils_nextflow_pipeline": {
-                            "branch": "master",
-                            "git_sha": "c2b22d85f30a706a3073387f30380704fcae013b",
-                            "installed_by": [
-                                "subworkflows"
-                            ]
-                        },
-                        "utils_nfcore_pipeline": {
-                            "branch": "master",
-                            "git_sha": "a3fb7351b1fdb2b1de282b765816bbea190e86a8",
-                            "installed_by": [
-                                "subworkflows"
-                            ]
-                        },
-                        "utils_nfschema_plugin": {
-                            "branch": "master",
-                            "git_sha": "a7b27fd25bfa8dcc07d299e88bd790585901a436",
-                            "installed_by": [
-                                "subworkflows"
-                            ]
-                        }
+                }
+            },
+            "subworkflows": {
+                "nf-core": {
+                    "utils_nextflow_pipeline": {
+                        "branch": "master",
+                        "git_sha": "c2b22d85f30a706a3073387f30380704fcae013b",
+                        "installed_by": [
+                            "subworkflows"
+                        ]
+                    },
+                    "utils_nfcore_pipeline": {
+                        "branch": "master",
+                        "git_sha": "a3fb7351b1fdb2b1de282b765816bbea190e86a8",
+                        "installed_by": [
+                            "subworkflows"
+                        ]
+                    },
+                    "utils_nfschema_plugin": {
+                        "branch": "master",
+                        "git_sha": "a7b27fd25bfa8dcc07d299e88bd790585901a436",
+                        "installed_by": [
+                            "subworkflows"
+                        ]
                     }
                 }
             }
         }
     }
-    ```
+}
+```
+
+</details>
 
 Això confirma que el mòdul `find/concatenate` ara forma part del codi font del vostre projecte.
 No obstant això, per utilitzar realment el nou mòdul, hem d'importar-lo al nostre pipeline.
@@ -310,30 +312,25 @@ Finalment, també podeu utilitzar la comanda `nf-core modules list local` per co
 
 ```bash
 nf-core modules list local
+# [!output]
+                                      ,--./,-.
+      ___     __   __   __   ___     /,-._.--~\
+|\ | |__  __ /  ` /  \ |__) |__         }  {
+| \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                      `._,._,'
+
+nf-core/tools version 4.1.0 - https://nf-co.re
+
+
+INFO     Repository type: pipeline
+INFO     Modules installed in '.':
+
+┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Module Name      ┃ Repository      ┃ Version SHA ┃ Message                                                                       ┃ Date       ┃
+┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+│ find/concatenate │ nf-core/modules │ 6d46786     │ Support for apptainer as well as singularity for .sif in `container` (#11260) │ 2026-04-23 │
+└──────────────────┴─────────────────┴─────────────┴───────────────────────────────────────────────────────────────────────────────┴────────────┘
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-
-                                          ,--./,-.
-          ___     __   __   __   ___     /,-._.--~\
-    |\ | |__  __ /  ` /  \ |__) |__         }  {
-    | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                          `._,._,'
-
-    nf-core/tools version 4.1.0 - https://nf-co.re
-
-
-    INFO     Repository type: pipeline
-    INFO     Modules installed in '.':
-
-    ┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-    ┃ Module Name      ┃ Repository      ┃ Version SHA ┃ Message                                                                       ┃ Date       ┃
-    ┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-    │ find/concatenate │ nf-core/modules │ 6d46786     │ Support for apptainer as well as singularity for .sif in `container` (#11260) │ 2026-04-23 │
-    └──────────────────┴─────────────────┴─────────────┴───────────────────────────────────────────────────────────────────────────────┴────────────┘
-    ```
 
 Això mostra `find/concatenate` a la taula resultant juntament amb el seu repositori, SHA de versió, missatge i data.
 
@@ -343,7 +340,7 @@ Substituïm la declaració `include` del mòdul `collectGreetings` per la de `FI
 
 La declaració d'importació apunta al fitxer `main.nf` del mòdul sota `modules/nf-core/`:
 
-```groovy title="Import statement for the find/concatenate module"
+```nextflow title="Import statement for the find/concatenate module"
 include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
 ```
 
@@ -351,37 +348,37 @@ Tingueu en compte que la convenció nf-core és utilitzar majúscules per als no
 
 Obriu `core-hello/workflows/hello.nf` i feu la substitució següent:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
-    /*
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
-    include { paramsSummaryMap       } from 'plugin/nf-schema'
-    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-    include { sayHello               } from '../modules/local/sayHello.nf'
-    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
-    include { cowpy                  } from '../modules/local/cowpy.nf'
-    ```
+```nextflow {10} title="core-hello/workflows/hello.nf" showLineNumbers step="Abans"
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+include { paramsSummaryMap       } from 'plugin/nf-schema'
+include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { sayHello               } from '../modules/local/sayHello.nf'
+include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+include { collectGreetings       } from '../modules/local/collectGreetings.nf'
+include { cowpy                  } from '../modules/local/cowpy.nf'
+```
 
-=== "Abans"
+```nextflow {10} title="core-hello/workflows/hello.nf" showLineNumbers step="Després"
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+include { paramsSummaryMap       } from 'plugin/nf-schema'
+include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { sayHello               } from '../modules/local/sayHello.nf'
+include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+include { cowpy                  } from '../modules/local/cowpy.nf'
+```
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
-    /*
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
-    include { paramsSummaryMap       } from 'plugin/nf-schema'
-    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-    include { sayHello               } from '../modules/local/sayHello.nf'
-    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { collectGreetings       } from '../modules/local/collectGreetings.nf'
-    include { cowpy                  } from '../modules/local/cowpy.nf'
-    ```
+</CodeWalkthrough>
 
 Observeu com el camí per al mòdul nf-core difereix dels mòduls locals:
 
@@ -396,15 +393,15 @@ En aquest punt, podríeu estar temptats de començar a editar codi, però val la
 
 Tractarem això com una secció separada perquè implica un nou mecanisme que encara no hem cobert: els mapes de metadades.
 
-!!! info "Info"
+:::note[Info]
+Opcionalment podeu eliminar el fitxer `collectGreetings.nf`:
 
-    Opcionalment podeu eliminar el fitxer `collectGreetings.nf`:
+```bash
+rm modules/local/collectGreetings.nf
+```
 
-    ```bash
-    rm modules/local/collectGreetings.nf
-    ```
-
-    No obstant això, potser voldreu conservar-lo com a referència per entendre les diferències entre mòduls locals i nf-core.
+No obstant això, potser voldreu conservar-lo com a referència per entendre les diferències entre mòduls locals i nf-core.
+:::
 
 ### Conclusió
 
@@ -424,15 +421,15 @@ Això ens permetrà determinar si podem tractar el nou mòdul com un reemplaçam
 Idealment això és quelcom que hauríeu de fer _abans_ fins i tot d'instal·lar el mòdul, però bé, més val tard que mai.
 (Per cert, hi ha una comanda `uninstall` per desfer-se dels mòduls que decidiu que ja no voleu.)
 
-!!! info "Info"
-
-    El procés `FIND_CONCATENATE` inclou una gestió força intel·ligent de diferents tipus de compressió, extensions de fitxer i altres aspectes que no són estrictament rellevants per al que intentem mostrar-vos aquí, així que ignorarem la major part i ens centrarem només en les parts que són importants.
+:::note[Info]
+El procés `FIND_CONCATENATE` inclou una gestió força intel·ligent de diferents tipus de compressió, extensions de fitxer i altres aspectes que no són estrictament rellevants per al que intentem mostrar-vos aquí, així que ignorarem la major part i ens centrarem només en les parts que són importants.
+:::
 
 ### 2.1. Comparar les interfícies dels dos mòduls
 
 Com a recordatori, així és com es veu la interfície del nostre mòdul `collectGreetings`:
 
-```groovy title="modules/local/collectGreetings.nf (excerpt)" linenums="4" hl_lines="6-7 10"
+```nextflow {6-7,10} title="modules/local/collectGreetings.nf (excerpt)" showLineNumbers startLineNumber=4
 process collectGreetings {
 
     publishDir 'results', mode: 'copy'
@@ -454,7 +451,7 @@ En completar-se, `collectGreetings` produeix un sol camí de fitxer, emès amb l
 
 En comparació, la interfície del mòdul `find/concatenate` és més complexa:
 
-```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="1" hl_lines="11 14"
+```nextflow {11,14} title="modules/nf-core/find/concatenate/main.nf (excerpt)" showLineNumbers
 process FIND_CONCATENATE {
     tag "${meta.id}"
     label 'process_low'
@@ -489,9 +486,7 @@ Tingueu en compte també que per defecte, el fitxer de sortida es nomenarà basa
 
 Això pot semblar molt a tenir en compte només mirant el codi, així que aquí teniu un diagrama per ajudar-vos a visualitzar com encaixa tot plegat.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nfcore_build/img/module_comparison.svg"
-</figure>
+![](../../nfcore_build/img/module_comparison.excalidraw.svg)
 
 Podeu veure que els dos mòduls tenen requisits d'entrada similars pel que fa al contingut (un conjunt de fitxers d'entrada més algunes metadades) però expectatives molt diferents sobre com s'empaqueta aquest contingut.
 Ignorant la sortida de versions per ara, la seva sortida principal també és equivalent (un fitxer concatenat), excepte que `FIND_CONCATENATE` també emet el metamap conjuntament amb el fitxer de sortida.
@@ -511,19 +506,19 @@ Per convenció, un metamap nf-core s'anomena `meta` i conté el camp obligatori 
 
 Per exemple, un mapa de metadades típic podria tenir aquest aspecte:
 
-```groovy title="Example of sample-level metamap"
+```nextflow title="Example of sample-level metamap"
 [id: 'sample1', single_end: false, strandedness: 'forward']
 ```
 
 O en un cas on les metadades s'adjunten a nivell de lot:
 
-```groovy title="Example of batch-level metamap"
+```nextflow title="Example of batch-level metamap"
 [id: 'batch1', date: '25.10.01']
 ```
 
 Ara posem això en el context del procés `FIND_CONCATENATE`, que espera que els fitxers d'entrada s'empaqueten en una tupla amb un metamap, i també produeix el metamap com a part de la tupla de sortida.
 
-```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="10" hl_lines="2 5"
+```nextflow {2,5} title="modules/nf-core/find/concatenate/main.nf (excerpt)" showLineNumbers startLineNumber=10
 input:
 tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
@@ -537,15 +532,15 @@ Els processos posteriors poden accedir fàcilment a aquestes metadades també.
 Recordeu com us vam dir que el fitxer produït per `FIND_CONCATENATE` es nomenarà basant-se en un identificador que forma part de les metadades?
 Aquest és el codi rellevant:
 
-```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="37"
+```nextflow title="modules/nf-core/find/concatenate/main.nf (excerpt)" showLineNumbers startLineNumber=37
 prefix = task.ext.prefix ?: "${meta.id}${file_extensions[0]}"
 ```
 
-Això es tradueix aproximadament com segueix: si es proporciona un `prefix` mitjançant el sistema de paràmetres de tasca extern (`task.ext`), utilitzeu-lo per nomenar el fitxer de sortida; en cas contrari, creeu-ne un utilitzant `#!groovy ${meta.id}`, que correspon al camp `id` del metamap.
+Això es tradueix aproximadament com segueix: si es proporciona un `prefix` mitjançant el sistema de paràmetres de tasca extern (`task.ext`), utilitzeu-lo per nomenar el fitxer de sortida; en cas contrari, creeu-ne un utilitzant `${meta.id}{:nextflow}`, que correspon al camp `id` del metamap.
 
 Podeu imaginar el canal d'entrada que arriba a aquest mòdul amb continguts com aquest:
 
-```groovy title="Example input channel contents"
+```nextflow title="Example input channel contents"
 ch_input = [[[id: 'batch1', date: '25.10.01'], ['file1A.txt', 'file1B.txt']],
             [[id: 'batch2', date: '25.10.26'], ['file2A.txt', 'file2B.txt']],
             [[id: 'batch3', date: '25.11.14'], ['file3A.txt', 'file3B.txt']]]
@@ -553,7 +548,7 @@ ch_input = [[[id: 'batch1', date: '25.10.01'], ['file1A.txt', 'file1B.txt']],
 
 Llavors el contingut del canal de sortida que surt seria així:
 
-```groovy title="Example output channel contents"
+```nextflow title="Example output channel contents"
 ch_output = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
             [[id: 'batch2', date: '25.10.26'], 'batch2.txt'],
             [[id: 'batch3', date: '25.11.14'], 'batch3.txt']]
@@ -564,9 +559,9 @@ Com s'ha esmentat anteriorment, la configuració d'entrada `tuple val(meta), pat
 Esperem que pugueu començar a veure com d'útil pot ser això.
 No només us permet nomenar sortides basant-vos en metadades, sinó que també podeu fer coses com utilitzar-les per aplicar diferents valors de paràmetres, i en combinació amb operadors específics, fins i tot podeu agrupar, ordenar o filtrar dades mentre flueixen pel pipeline.
 
-!!! info "Més informació sobre metadades"
-
-    Per a una introducció completa sobre com treballar amb metadades als workflows Nextflow, incloent com llegir metadades des de fulls de mostres i utilitzar-les per personalitzar el processament, consulteu la missió secundària [Metadades als workflows](../side_quests/metadata/index.md).
+:::note[Més informació sobre metadades]
+Per a una introducció completa sobre com treballar amb metadades als workflows Nextflow, incloent com llegir metadades des de fulls de mostres i utilitzar-les per personalitzar el processament, consulteu la missió secundària [Metadades als workflows](../side_quests/metadata/index.mdx).
+:::
 
 ### 2.3. Resumir els canvis a fer
 
@@ -595,9 +590,9 @@ Ara que sabeu tot sobre els metamaps (o prou per als propòsits d'aquest curs, a
 
 Per claredat, dividirem això i cobrirem cada pas per separat.
 
-!!! info "Info"
-
-    Tots els canvis mostrats a continuació es fan a la lògica del workflow al bloc `main` del fitxer de workflow `core-hello/workflows/hello.nf`.
+:::note[Info]
+Tots els canvis mostrats a continuació es fan a la lògica del workflow al bloc `main` del fitxer de workflow `core-hello/workflows/hello.nf`.
+:::
 
 ### 3.1. Crear un mapa de metadades
 
@@ -605,14 +600,14 @@ Primer, hem de crear un mapa de metadades per a `FIND_CONCATENATE`, tenint en co
 
 Com que no necessitem cap altra metadada, podem mantenir-ho simple i utilitzar quelcom així:
 
-```groovy title="Syntax example"
+```nextflow title="Syntax example"
 def cat_meta = [id: 'test']
 ```
 
 Excepte que no volem codificar el valor `id` de forma fixa; volem utilitzar el valor del parametre `params.batch`.
 Així que el codi es converteix en:
 
-```groovy title="Syntax example"
+```nextflow title="Syntax example"
 def cat_meta = [id: params.batch]
 ```
 
@@ -620,37 +615,37 @@ Sí, és literalment així de simple crear un metamap bàsic.
 
 Afegim aquestes línies després de la crida a `convertToUpper`, eliminant la crida a `collectGreetings`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="7-8"
-        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
-        sayHello(ch_samplesheet)
+```nextflow {7-8} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=29 step="Abans"
+    // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
+    sayHello(ch_samplesheet)
 
-        // converteix la salutació a majúscules
-        convertToUpper(sayHello.out)
+    // converteix la salutació a majúscules
+    convertToUpper(sayHello.out)
 
-        // crea un mapa de metadades amb el nom del lot com a ID
-        def cat_meta = [ id: params.batch ]
+    // recull totes les salutacions en un fitxer
+    collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // genera art ASCII de les salutacions amb cowpy
-        cowpy(collectGreetings.out.outfile, params.character)
-    ```
+    // genera art ASCII de les salutacions amb cowpy
+    cowpy(collectGreetings.out.outfile, params.character)
+```
 
-=== "Abans"
+```nextflow {7-8} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=29 step="Després"
+    // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
+    sayHello(ch_samplesheet)
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="7-8"
-        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
-        sayHello(ch_samplesheet)
+    // converteix la salutació a majúscules
+    convertToUpper(sayHello.out)
 
-        // converteix la salutació a majúscules
-        convertToUpper(sayHello.out)
+    // crea un mapa de metadades amb el nom del lot com a ID
+    def cat_meta = [ id: params.batch ]
 
-        // recull totes les salutacions en un fitxer
-        collectGreetings(convertToUpper.out.collect(), params.batch)
+    // genera art ASCII de les salutacions amb cowpy
+    cowpy(collectGreetings.out.outfile, params.character)
+```
 
-        // genera art ASCII de les salutacions amb cowpy
-        cowpy(collectGreetings.out.outfile, params.character)
-    ```
+</CodeWalkthrough>
 
 Això crea un mapa de metadades simple on l'`id` s'estableix al nom del nostre lot (que serà `test` quan s'utilitzi el perfil de test).
 
@@ -658,45 +653,45 @@ Això crea un mapa de metadades simple on l'`id` s'estableix al nom del nostre l
 
 A continuació, transformeu el canal de fitxers en un canal de tuples que continguin metadades i fitxers:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="10-11"
-        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
-        sayHello(ch_samplesheet)
+```nextflow title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=29 step="Abans"
+    // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
+    sayHello(ch_samplesheet)
 
-        // converteix la salutació a majúscules
-        convertToUpper(sayHello.out)
+    // converteix la salutació a majúscules
+    convertToUpper(sayHello.out)
 
-        // crea un mapa de metadades amb el nom del lot com a ID
-        def cat_meta = [ id: params.batch ]
+    // crea un mapa de metadades amb el nom del lot com a ID
+    def cat_meta = [ id: params.batch ]
 
-        // crea un canal amb metadades i fitxers en format tupla
-        ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
+    // genera art ASCII de les salutacions amb cowpy
+    cowpy(collectGreetings.out.outfile, params.character)
+```
 
-        // genera art ASCII de les salutacions amb cowpy
-        cowpy(collectGreetings.out.outfile, params.character)
-    ```
+```nextflow {10-11} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=29 step="Després"
+    // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
+    sayHello(ch_samplesheet)
 
-=== "Abans"
+    // converteix la salutació a majúscules
+    convertToUpper(sayHello.out)
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
-        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
-        sayHello(ch_samplesheet)
+    // crea un mapa de metadades amb el nom del lot com a ID
+    def cat_meta = [ id: params.batch ]
 
-        // converteix la salutació a majúscules
-        convertToUpper(sayHello.out)
+    // crea un canal amb metadades i fitxers en format tupla
+    ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // crea un mapa de metadades amb el nom del lot com a ID
-        def cat_meta = [ id: params.batch ]
+    // genera art ASCII de les salutacions amb cowpy
+    cowpy(collectGreetings.out.outfile, params.character)
+```
 
-        // genera art ASCII de les salutacions amb cowpy
-        cowpy(collectGreetings.out.outfile, params.character)
-    ```
+</CodeWalkthrough>
 
 La línia que hem afegit aconsegueix dues coses:
 
 - `.collect()` recull tots els fitxers de la sortida de `convertToUpper` en una sola llista
-- `#!groovy .map { files -> tuple(cat_meta, files) }` crea una tupla de `[metadades, fitxers]` en el format que `FIND_CONCATENATE` espera
+- `.map { files -> tuple(cat_meta, files) }{:nextflow}` crea una tupla de `[metadades, fitxers]` en el format que `FIND_CONCATENATE` espera
 
 Això és tot el que necessitem fer per configurar la tupla d'entrada per a `FIND_CONCATENATE`.
 
@@ -704,46 +699,46 @@ Això és tot el que necessitem fer per configurar la tupla d'entrada per a `FIN
 
 Ara cridem `FIND_CONCATENATE` sobre el canal acabat de crear:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="13-14"
-        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
-        sayHello(ch_samplesheet)
+```nextflow title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=29 step="Abans"
+    // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
+    sayHello(ch_samplesheet)
 
-        // converteix la salutació a majúscules
-        convertToUpper(sayHello.out)
+    // converteix la salutació a majúscules
+    convertToUpper(sayHello.out)
 
-        // crea un mapa de metadades amb el nom del lot com a ID
-        def cat_meta = [ id: params.batch ]
+    // crea un mapa de metadades amb el nom del lot com a ID
+    def cat_meta = [ id: params.batch ]
 
-        // crea un canal amb metadades i fitxers en format tupla
-        ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
+    // crea un canal amb metadades i fitxers en format tupla
+    ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // concatena les salutacions
-        FIND_CONCATENATE(ch_for_cat)
+    // genera art ASCII de les salutacions amb cowpy
+    cowpy(collectGreetings.out.outfile, params.character)
+```
 
-        // genera art ASCII de les salutacions amb cowpy
-        cowpy(collectGreetings.out.outfile, params.character)
-    ```
+```nextflow {13-14} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=29 step="Després"
+    // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
+    sayHello(ch_samplesheet)
 
-=== "Abans"
+    // converteix la salutació a majúscules
+    convertToUpper(sayHello.out)
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
-        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
-        sayHello(ch_samplesheet)
+    // crea un mapa de metadades amb el nom del lot com a ID
+    def cat_meta = [ id: params.batch ]
 
-        // converteix la salutació a majúscules
-        convertToUpper(sayHello.out)
+    // crea un canal amb metadades i fitxers en format tupla
+    ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // crea un mapa de metadades amb el nom del lot com a ID
-        def cat_meta = [ id: params.batch ]
+    // concatena les salutacions
+    FIND_CONCATENATE(ch_for_cat)
 
-        // crea un canal amb metadades i fitxers en format tupla
-        ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
+    // genera art ASCII de les salutacions amb cowpy
+    cowpy(collectGreetings.out.outfile, params.character)
+```
 
-        // genera art ASCII de les salutacions amb cowpy
-        cowpy(collectGreetings.out.outfile, params.character)
-    ```
+</CodeWalkthrough>
 
 Això completa la part més complicada d'aquesta substitució, però encara no hem acabat del tot: encara hem d'actualitzar com passem la sortida concatenada al procés `cowpy`.
 
@@ -754,60 +749,60 @@ No obstant això, el procés `FIND_CONCATENATE` produeix una tupla que inclou el
 
 Com que `cowpy` encara no accepta tuples de metadades (ho arreglarem a la següent part del curs), hem d'extreure el fitxer de sortida de la tupla produïda per `FIND_CONCATENATE` abans de passar-lo a `cowpy`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="16-17 20"
-        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
-        sayHello(ch_samplesheet)
+```nextflow {17} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=29 step="Abans"
+    // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
+    sayHello(ch_samplesheet)
 
-        // converteix la salutació a majúscules
-        convertToUpper(sayHello.out)
+    // converteix la salutació a majúscules
+    convertToUpper(sayHello.out)
 
-        // crea un mapa de metadades amb el nom del lot com a ID
-        def cat_meta = [ id: params.batch ]
+    // crea un mapa de metadades amb el nom del lot com a ID
+    def cat_meta = [ id: params.batch ]
 
-        // crea un canal amb metadades i fitxers en format tupla
-        ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
+    // crea un canal amb metadades i fitxers en format tupla
+    ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // concatena les salutacions
-        FIND_CONCATENATE(ch_for_cat)
+    // concatena les salutacions
+    FIND_CONCATENATE(ch_for_cat)
 
-        // extreu el fitxer de la tupla ja que cowpy encara no utilitza metadades
-        ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
+    // genera art ASCII de les salutacions amb cowpy
+    cowpy(collectGreetings.out.outfile, params.character)
+```
 
-        // genera art ASCII de les salutacions amb cowpy
-        cowpy(ch_for_cowpy, params.character)
-    ```
+```nextflow {16-17,20} title="core-hello/workflows/hello.nf" showLineNumbers startLineNumber=29 step="Després"
+    // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
+    sayHello(ch_samplesheet)
 
-=== "Abans"
+    // converteix la salutació a majúscules
+    convertToUpper(sayHello.out)
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="17"
-        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
-        sayHello(ch_samplesheet)
+    // crea un mapa de metadades amb el nom del lot com a ID
+    def cat_meta = [ id: params.batch ]
 
-        // converteix la salutació a majúscules
-        convertToUpper(sayHello.out)
+    // crea un canal amb metadades i fitxers en format tupla
+    ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // crea un mapa de metadades amb el nom del lot com a ID
-        def cat_meta = [ id: params.batch ]
+    // concatena les salutacions
+    FIND_CONCATENATE(ch_for_cat)
 
-        // crea un canal amb metadades i fitxers en format tupla
-        ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
+    // extreu el fitxer de la tupla ja que cowpy encara no utilitza metadades
+    ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
-        // concatena les salutacions
-        FIND_CONCATENATE(ch_for_cat)
+    // genera art ASCII de les salutacions amb cowpy
+    cowpy(ch_for_cowpy, params.character)
+```
 
-        // genera art ASCII de les salutacions amb cowpy
-        cowpy(collectGreetings.out.outfile, params.character)
-    ```
+</CodeWalkthrough>
 
-L'operació `#!groovy .map { meta, file -> file }` extreu el fitxer de la tupla `[metadades, fitxer]` produïda per `FIND_CONCATENATE` en un nou canal, `ch_for_cowpy`.
+L'operació `.map { meta, file -> file }{:nextflow}` extreu el fitxer de la tupla `[metadades, fitxer]` produïda per `FIND_CONCATENATE` en un nou canal, `ch_for_cowpy`.
 
 Llavors només cal passar `ch_for_cowpy` a `cowpy` en lloc de `collectGreetings.out.outfile` en aquesta última línia.
 
-!!! info "Info"
-
-    A la següent part del curs, actualitzarem `cowpy` per treballar directament amb tuples de metadades, així que aquest pas d'extracció ja no serà necessari.
+:::note[Info]
+A la següent part del curs, actualitzarem `cowpy` per treballar directament amb tuples de metadades, així que aquest pas d'extracció ja no serà necessari.
+:::
 
 ### 3.5. Provar el workflow
 
@@ -819,44 +814,47 @@ nextflow run . --outdir core-hello-results -profile test,docker
 
 Això hauria d'executar-se raonablement ràpid.
 
-??? success "Sortida de la comanda"
+<details class="success">
+<summary>Sortida de la comanda</summary>
 
-    ```console
-     N E X T F L O W   ~  version 26.04.4
+```console
+ N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [cheesy_bhabha] revision: d6bbba9521
+Launching `./main.nf` [cheesy_bhabha] revision: d6bbba9521
 
-    Input/output options
-      input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
-      outdir                    : core-hello-results
+Input/output options
+  input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
+  outdir                    : core-hello-results
 
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
 
-    Generic options
-      validate_params           : false
-      trace_report_suffix       : 2026-06-23_16-55-02
+Generic options
+  validate_params           : false
+  trace_report_suffix       : 2026-06-23_16-55-02
 
-    Core Nextflow options
-      runName                   : cheesy_bhabha
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nfcore-build/core-hello
-      workDir                   : /workspaces/training/nfcore-build/core-hello/work
-      projectDir                : /workspaces/training/nfcore-build/core-hello
-      userName                  : root
-      profile                   : test,docker
-      configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
+Core Nextflow options
+  runName                   : cheesy_bhabha
+  containerEngine           : docker
+  launchDir                 : /workspaces/training/nfcore-build/core-hello
+  workDir                   : /workspaces/training/nfcore-build/core-hello/work
+  projectDir                : /workspaces/training/nfcore-build/core-hello
+  userName                  : root
+  profile                   : test,docker
+  configFiles               : /workspaces/training/nfcore-build/core-hello/nextflow.config
 
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-    executor >  local (8)
-    [bf/aa86d7] CORE_HELLO:HELLO:sayHello (3)            | 3 of 3 ✔
-    [0a/df448e] CORE_HELLO:HELLO:convertToUpper (3)      | 3 of 3 ✔
-    [82/ded72f] CORE_HELLO:HELLO:FIND_CONCATENATE (test) | 1 of 1 ✔
-    [9d/0130bf] CORE_HELLO:HELLO:cowpy                   | 1 of 1 ✔
-    -[core/hello] Pipeline completed successfully-
-    ```
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+executor >  local (8)
+[bf/aa86d7] CORE_HELLO:HELLO:sayHello (3)            | 3 of 3 ✔
+[0a/df448e] CORE_HELLO:HELLO:convertToUpper (3)      | 3 of 3 ✔
+[82/ded72f] CORE_HELLO:HELLO:FIND_CONCATENATE (test) | 1 of 1 ✔
+[9d/0130bf] CORE_HELLO:HELLO:cowpy                   | 1 of 1 ✔
+-[core/hello] Pipeline completed successfully-
+```
+
+</details>
 
 Observeu que `FIND_CONCATENATE` ara apareix a la llista d'execució de processos en lloc de `collectGreetings`.
 

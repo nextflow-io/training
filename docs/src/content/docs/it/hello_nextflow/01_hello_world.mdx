@@ -1,23 +1,32 @@
-# Parte 1: Hello World
+---
+title: 'Parte 1: Hello World'
+description: In questa prima parte del corso di formazione Hello Nextflow, introduciamo l'argomento con un esempio Hello World molto semplice e indipendente dal dominio…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+<figure>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=it" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
+<figcaption>
 
-/// caption
-:fontawesome-brands-youtube:{ .youtube } Guarda [l'intera playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) sul canale YouTube di Nextflow.
+Guarda [l'intera playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) sul canale YouTube di Nextflow.
 
-:green_book: La trascrizione del video è disponibile [qui](./transcripts/01_hello_world.md).
-///
+📗 La trascrizione del video è disponibile [qui](./transcripts/01_hello_world.mdx).
+
+</figcaption>
+</figure>
 
 In questa prima parte del corso di formazione Hello Nextflow, introduciamo l'argomento con un esempio Hello World molto semplice e indipendente dal dominio, che costruiremo progressivamente per dimostrare l'uso della logica e dei componenti fondamentali di Nextflow.
 
-??? info "Cos'è un esempio Hello World?"
+<details class="info">
+<summary>Cos'è un esempio Hello World?</summary>
 
-    Un "Hello World!" è un esempio minimalista pensato per dimostrare la sintassi e la struttura di base di un linguaggio di programmazione o framework software.
-    L'esempio consiste tipicamente nella stampa della frase "Hello, World!" su un dispositivo di output, come la console o il terminale, oppure nella sua scrittura su un file.
+Un "Hello World!" è un esempio minimalista pensato per dimostrare la sintassi e la struttura di base di un linguaggio di programmazione o framework software.
+L'esempio consiste tipicamente nella stampa della frase "Hello, World!" su un dispositivo di output, come la console o il terminale, oppure nella sua scrittura su un file.
+
+</details>
 
 ---
 
@@ -25,9 +34,9 @@ In questa prima parte del corso di formazione Hello Nextflow, introduciamo l'arg
 
 Dimostriamolo con un semplice comando che eseguiamo direttamente nel terminale, per mostrare cosa fa prima di incapsularlo in Nextflow.
 
-!!! tip "Suggerimento"
-
-    Ricordate che ora dovreste trovarvi nella directory `hello-nextflow/` come descritto nella pagina [Per iniziare](00_orientation.md).
+:::tip[Suggerimento]
+Ricordate che ora dovreste trovarvi nella directory `hello-nextflow/` come descritto nella pagina [Per iniziare](00_orientation.mdx).
+:::
 
 ### 0.1. Far dire hello al terminale
 
@@ -35,13 +44,9 @@ Eseguite il seguente comando nel terminale.
 
 ```bash
 echo 'Hello World!'
+# [!output]
+Hello World!
 ```
-
-??? success "Output del comando"
-
-    ```console
-    Hello World!
-    ```
 
 Questo produce il testo 'Hello World' direttamente nel terminale.
 
@@ -53,12 +58,6 @@ L'esecuzione di pipeline coinvolge principalmente la lettura di dati da file e l
 echo 'Hello World!' > output.txt
 ```
 
-??? success "Output del comando"
-
-    ```console
-
-    ```
-
 Questo non produce alcun output nel terminale.
 
 ### 0.3. Trovare l'output
@@ -66,11 +65,14 @@ Questo non produce alcun output nel terminale.
 Il testo 'Hello World' dovrebbe ora trovarsi nel file di output che abbiamo specificato, chiamato `output.txt`.
 Potete aprirlo nell'esplora file o dalla riga di comando utilizzando l'utility `cat`, ad esempio.
 
-??? abstract "Contenuto del file"
+<details class="abstract">
+<summary>Contenuto del file</summary>
 
-    ```console title="output.txt" linenums="1"
-    Hello World!
-    ```
+```console title="output.txt" showLineNumbers
+Hello World!
+```
+
+</details>
 
 Questo è ciò che cercheremo di replicare con il nostro primo workflow Nextflow.
 
@@ -95,32 +97,35 @@ Poi lo eseguiremo e cercheremo i suoi output.
 
 Troverete lo script `hello-world.nf` nella vostra directory corrente, che dovrebbe essere `hello-nextflow`. Apritelo nel riquadro dell'editor.
 
-??? full-code "File di codice completo"
+<details class="full-code">
+<summary>File di codice completo</summary>
 
-    ```groovy title="hello-world.nf" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="hello-world.nf" showLineNumbers
+#!/usr/bin/env nextflow
 
-    /*
-    * Usa echo per stampare 'Hello World!' su un file
-    */
-    process sayHello {
+/*
+* Usa echo per stampare 'Hello World!' su un file
+*/
+process sayHello {
 
-        output:
-        path 'output.txt'
+    output:
+    path 'output.txt'
 
-        script:
-        """
-        echo 'Hello World!' > output.txt
-        """
-    }
+    script:
+    """
+    echo 'Hello World!' > output.txt
+    """
+}
 
-    workflow {
+workflow {
 
-        main:
-        // emette un saluto
-        sayHello()
-    }
-    ```
+    main:
+    // emette un saluto
+    sayHello()
+}
+```
+
+</details>
 
 Uno script di workflow Nextflow include tipicamente una o più definizioni di [**process**](https://nextflow.io/docs/latest/process.html) e il [**workflow**](https://nextflow.io/docs/latest/workflow.html) stesso, più alcuni blocchi opzionali (non presenti qui) che introdurremo più avanti.
 
@@ -135,7 +140,7 @@ Il primo blocco di codice descrive un **process**.
 La definizione del process inizia con la parola chiave `process`, seguita dal nome del process e infine dal corpo del process delimitato da parentesi graffe.
 Il corpo del process deve contenere un blocco script che specifica il comando da eseguire, che può essere qualsiasi cosa si possa eseguire in un terminale a riga di comando.
 
-```groovy title="hello-world.nf" linenums="3"
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=3
 /*
 * Usa echo per stampare 'Hello World!' su un file
 */
@@ -153,9 +158,7 @@ process sayHello {
 
 Qui abbiamo un **process** chiamato `sayHello` che scrive il suo **output** su un file chiamato `output.txt`.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_world.svg"
-</figure>
+![](../../hello_nextflow/img/hello_world.excalidraw.svg)
 
 Questa è una definizione di process molto minimale che contiene solo una definizione di `output` e lo `script` da eseguire.
 
@@ -166,11 +169,11 @@ Un altro qualificatore comune è `val`.
 Semplicemente _dichiara_ qual è l'output atteso, così che Nextflow possa cercarlo una volta completata l'esecuzione.
 Questo è necessario per verificare che il comando sia stato eseguito con successo e per passare l'output ai processi a valle se necessario. L'output prodotto che non corrisponde a quanto dichiarato nel blocco output non verrà passato ai processi a valle.
 
-!!! warning "Avviso"
-
-    Questo esempio è fragile perché abbiamo codificato in modo fisso il nome del file di output in due posti separati (lo script e i blocchi output).
-    Se modifichiamo uno ma non l'altro, lo script si romperà.
-    Più avanti imparerete modi per usare le variabili per mitigare questo problema.
+:::caution[Avviso]
+Questo esempio è fragile perché abbiamo codificato in modo fisso il nome del file di output in due posti separati (lo script e i blocchi output).
+Se modifichiamo uno ma non l'altro, lo script si romperà.
+Più avanti imparerete modi per usare le variabili per mitigare questo problema.
+:::
 
 In una pipeline reale, un process contiene di solito blocchi aggiuntivi come direttive e input, che introdurremo tra poco.
 
@@ -181,7 +184,7 @@ La definizione del workflow inizia con la parola chiave `workflow`, seguita da u
 
 Qui abbiamo un **workflow** che consiste in un blocco `main:` (che dice 'questo è il corpo principale del workflow') contenente una chiamata al process `sayHello`.
 
-```groovy title="hello-world.nf" linenums="17"
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=17
 workflow {
 
     main:
@@ -195,10 +198,10 @@ In una pipeline reale, il workflow contiene tipicamente multiple chiamate a **pr
 
 Imparerete come aggiungere input variabili più avanti in questo modulo di formazione; e imparerete come aggiungere più processi e connetterli tramite channel nella Parte 3 di questo corso.
 
-!!! tip "Suggerimento"
-
-    Tecnicamente la riga `main:` non è richiesta per workflow semplici come questo, quindi potreste incontrare workflow che non ce l'hanno.
-    Ma ne avremo bisogno per sfruttare gli output a livello di workflow, quindi tanto vale includerla dall'inizio.
+:::tip[Suggerimento]
+Tecnicamente la riga `main:` non è richiesta per workflow semplici come questo, quindi potreste incontrare workflow che non ce l'hanno.
+Ma ne avremo bisogno per sfruttare gli output a livello di workflow, quindi tanto vale includerla dall'inizio.
+:::
 
 ### 1.2. Eseguire il workflow
 
@@ -210,18 +213,14 @@ Nel terminale, eseguite il seguente comando:
 
 ```bash
 nextflow run hello-world.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [goofy_torvalds] revision: c33d41f479
+
+executor >  local (1)
+[65/7be2fa] sayHello | 1 of 1 ✔ # [!code highlight]
 ```
-
-??? success "Output del comando"
-
-    ```console hl_lines="6"
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [goofy_torvalds] revision: c33d41f479
-
-    executor >  local (1)
-    [65/7be2fa] sayHello | 1 of 1 ✔
-    ```
 
 Se l'output della console assomiglia a questo, congratulazioni, avete appena eseguito il vostro primo workflow Nextflow!
 
@@ -248,41 +247,50 @@ Guardando cosa abbiamo ottenuto per l'esecuzione mostrata sopra, la riga di log 
 
 Diamo un'occhiata a cosa c'è dentro.
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console
-    work
-    └── 65
-        └── 7be2fad5e71e5f49998f795677fd68
-            ├── .command.begin
-            ├── .command.err
-            ├── .command.log
-            ├── .command.out
-            ├── .command.run
-            ├── .command.sh
-            ├── .exitcode
-            └── output.txt
-    ```
+```console
+work
+└── 65
+    └── 7be2fad5e71e5f49998f795677fd68
+        ├── .command.begin
+        ├── .command.err
+        ├── .command.log
+        ├── .command.out
+        ├── .command.run
+        ├── .command.sh
+        ├── .exitcode
+        └── output.txt
+```
 
-??? question "Non vedi la stessa cosa?"
+</details>
 
-    I nomi esatti delle sottodirectory saranno diversi sul vostro sistema.
+<details class="question">
+<summary>Non vedi la stessa cosa?</summary>
 
-    Se navigate nei contenuti della sottodirectory dell'attività nell'esplora file di VSCode, vedrete tutti i file immediatamente.
-    Tuttavia, i file di log sono impostati per essere invisibili nel terminale, quindi se volete usare `ls` o `tree` per visualizzarli, dovrete impostare l'opzione pertinente per visualizzare i file invisibili.
+I nomi esatti delle sottodirectory saranno diversi sul vostro sistema.
 
-    ```bash
-    tree -a work
-    ```
+Se navigate nei contenuti della sottodirectory dell'attività nell'esplora file di VSCode, vedrete tutti i file immediatamente.
+Tuttavia, i file di log sono impostati per essere invisibili nel terminale, quindi se volete usare `ls` o `tree` per visualizzarli, dovrete impostare l'opzione pertinente per visualizzare i file invisibili.
+
+```bash
+tree -a work
+```
+
+</details>
 
 La prima cosa che vorrete guardare è l'output effettivo del workflow, cioè il file `output.txt` prodotto dal process `sayHello`.
 Apritelo e troverete il saluto `Hello World!`, che era lo scopo del nostro workflow minimalista.
 
-??? abstract "Contenuto del file"
+<details class="abstract">
+<summary>Contenuto del file</summary>
 
-    ```console title="output.txt"
-    Hello World!
-    ```
+```console title="output.txt"
+Hello World!
+```
+
+</details>
 
 Ha funzionato!
 
@@ -300,12 +308,15 @@ Detto questo, diamo anche un'occhiata agli altri file in quella directory. Sono 
 
 Il file `.command.sh` è particolarmente utile perché indica il comando principale che Nextflow ha eseguito, non includendo tutta la contabilità e la configurazione dell'attività/ambiente.
 
-??? abstract "Contenuto del file"
+<details class="abstract">
+<summary>Contenuto del file</summary>
 
-    ```console title=".command.sh"
-    #!/bin/bash -ue
-    echo 'Hello World!' > output.txt
-    ```
+```console title=".command.sh"
+#!/bin/bash -ue
+echo 'Hello World!' > output.txt
+```
+
+</details>
 
 Questo corrisponde a quanto abbiamo eseguito manualmente prima.
 
@@ -316,60 +327,63 @@ Questo rende particolarmente prezioso poter vedere esattamente come Nextflow ha 
 
 Provate a rieseguire il workflow alcune volte, poi guardate le directory delle attività sotto `work/`.
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console
-    work
-    ├── 0f
-    │   └── 52b7e07b0e274a80843fca48ed21b8
-    │       ├── .command.begin
-    │       ├── .command.err
-    │       ├── .command.log
-    │       ├── .command.out
-    │       ├── .command.run
-    │       ├── .command.sh
-    │       ├── .exitcode
-    │       └── output.txt
-    ├── 65
-        └── 7be2fad5e71e5f49998f795677fd68
-    │   │   ├── .command.begin
-    │   │   ├── .command.err
-    │   │   ├── .command.log
-    │   │   ├── .command.out
-    │   │   ├── .command.run
-    │   │   ├── .command.sh
-    │   │   ├── .exitcode
-    │   │   └── output.txt
-    │   └── e029f2e75305874a9ab263d21ebc2c
-    │       ├── .command.begin
-    │       ├── .command.err
-    │       ├── .command.log
-    │       ├── .command.out
-    │       ├── .command.run
-    │       ├── .command.sh
-    │       ├── .exitcode
-    │       └── output.txt
-    ├── 6c
-    │   └── d4fd787e0b01b3c82e85696c297500
-    │       ├── .command.begin
-    │       ├── .command.err
-    │       ├── .command.log
-    │       ├── .command.out
-    │       ├── .command.run
-    │       ├── .command.sh
-    │       ├── .exitcode
-    │       └── output.txt
-    └── e8
-        └── ab99fad46ade52905ec973ff39bb80
-            ├── .command.begin
-            ├── .command.err
-            ├── .command.log
-            ├── .command.out
-            ├── .command.run
-            ├── .command.sh
-            ├── .exitcode
-            └── output.txt
-    ```
+```console
+work
+├── 0f
+│   └── 52b7e07b0e274a80843fca48ed21b8
+│       ├── .command.begin
+│       ├── .command.err
+│       ├── .command.log
+│       ├── .command.out
+│       ├── .command.run
+│       ├── .command.sh
+│       ├── .exitcode
+│       └── output.txt
+├── 65
+    └── 7be2fad5e71e5f49998f795677fd68
+│   │   ├── .command.begin
+│   │   ├── .command.err
+│   │   ├── .command.log
+│   │   ├── .command.out
+│   │   ├── .command.run
+│   │   ├── .command.sh
+│   │   ├── .exitcode
+│   │   └── output.txt
+│   └── e029f2e75305874a9ab263d21ebc2c
+│       ├── .command.begin
+│       ├── .command.err
+│       ├── .command.log
+│       ├── .command.out
+│       ├── .command.run
+│       ├── .command.sh
+│       ├── .exitcode
+│       └── output.txt
+├── 6c
+│   └── d4fd787e0b01b3c82e85696c297500
+│       ├── .command.begin
+│       ├── .command.err
+│       ├── .command.log
+│       ├── .command.out
+│       ├── .command.run
+│       ├── .command.sh
+│       ├── .exitcode
+│       └── output.txt
+└── e8
+    └── ab99fad46ade52905ec973ff39bb80
+        ├── .command.begin
+        ├── .command.err
+        ├── .command.log
+        ├── .command.out
+        ├── .command.run
+        ├── .command.sh
+        ├── .exitcode
+        └── output.txt
+```
+
+</details>
 
 Vedete che è stata creata una nuova sottodirectory con un set completo di file di output e log per ogni esecuzione.
 Questo mostra che eseguire lo stesso workflow più volte non sovrascriverà i risultati delle esecuzioni precedenti.
@@ -405,30 +419,30 @@ Dobbiamo aggiungere un blocco `publish:` al corpo del workflow (stesso tipo di e
 
 Nel file dello script del workflow `hello-world.nf`, aggiungete le seguenti righe di codice:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="hello-world.nf" linenums="17" hl_lines="7-8"
-    workflow {
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=17 step="Prima"
+workflow {
 
-        main:
-        // emette un saluto
-        sayHello()
+    main:
+    // emette un saluto
+    sayHello()
+}
+```
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+```nextflow {7-8} title="hello-world.nf" showLineNumbers startLineNumber=17 step="Dopo"
+workflow {
 
-=== "Prima"
+    main:
+    // emette un saluto
+    sayHello()
 
-    ```groovy title="hello-world.nf" linenums="17"
-    workflow {
+    publish:
+    first_output = sayHello.out
+}
+```
 
-        main:
-        // emette un saluto
-        sayHello()
-    }
-    ```
+</CodeWalkthrough>
 
 Vedete che possiamo riferirci all'output del process semplicemente facendo `sayHello().out`, e assegnargli un nome arbitrario, `first_output`.
 
@@ -438,39 +452,39 @@ Ora dobbiamo solo aggiungere il blocco `output:` dove verrà specificato il perc
 
 Nel file dello script del workflow `hello-world.nf`, aggiungete le seguenti righe di codice:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="hello-world.nf" linenums="17" hl_lines="11-15"
-    workflow {
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=17 step="Prima"
+workflow {
 
-        main:
-        // emette un saluto
-        sayHello()
+    main:
+    // emette un saluto
+    sayHello()
 
-        publish:
-        first_output = sayHello.out
+    publish:
+    first_output = sayHello.out
+}
+```
+
+```nextflow {11-15} title="hello-world.nf" showLineNumbers startLineNumber=17 step="Dopo"
+workflow {
+
+    main:
+    // emette un saluto
+    sayHello()
+
+    publish:
+    first_output = sayHello.out
+}
+
+output {
+    first_output {
+        path '.'
     }
+}
+```
 
-    output {
-        first_output {
-            path '.'
-        }
-    }
-    ```
-
-=== "Prima"
-
-    ```groovy title="hello-world.nf" linenums="17"
-    workflow {
-
-        main:
-        // emette un saluto
-        sayHello()
-
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+</CodeWalkthrough>
 
 Possiamo usare questo per assegnare percorsi specifici a qualsiasi output di process dichiarato nel blocco `workflow`.
 Più avanti imparerete modi per generare strutture di directory di output sofisticate, ma per ora stiamo semplicemente codificando in modo fisso un percorso minimo per semplicità.
@@ -481,55 +495,54 @@ Ora eseguite lo script del workflow modificato:
 
 ```bash
 nextflow run hello-world.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [jovial_mayer] revision: 35bd3425e5
+
+executor >  local (1)
+[9f/48ef97] sayHello | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output: output.txt
 ```
-
-??? success "Output del comando"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [jovial_mayer] revision: 35bd3425e5
-
-    executor >  local (1)
-    [9f/48ef97] sayHello | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output: output.txt
-    ```
 
 L'output del terminale ora termina con un riepilogo `Outputs:` che elenca gli output pubblicati e la directory in cui sono stati scritti.
 
 Controllate il vostro esplora file: questa volta, Nextflow ha anche creato una nuova directory chiamata `results/`.
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console hl_lines="10-11 22"
-    .
-    ├── greetings.csv
-    ├── hello-channels.nf
-    ├── hello-config.nf
-    ├── hello-containers.nf
-    ├── hello-modules.nf
-    ├── hello-workflow.nf
-    ├── hello-world.nf
-    ├── nextflow.config
-    ├── results
-    │   └── output.txt -> /workspaces/training/hello-nextflow/work/9f/48ef97f110b0dbd83635d7cbe288d2/output.txt
-    ├── solutions
-    │   ├── 1-hello-world
-    │   ├── 2-hello-channels
-    │   ├── 3-hello-workflow
-    │   ├── 4-hello-modules
-    │   ├── 5-hello-containers
-    │   └── 6-hello-config
-    ├── test-params.json
-    └── work
-        ├── 65
-        └── 9f
-    ```
+```console {10-11,22}
+.
+├── greetings.csv
+├── hello-channels.nf
+├── hello-config.nf
+├── hello-containers.nf
+├── hello-modules.nf
+├── hello-workflow.nf
+├── hello-world.nf
+├── nextflow.config
+├── results
+│   └── output.txt -> /workspaces/training/hello-nextflow/work/9f/48ef97f110b0dbd83635d7cbe288d2/output.txt
+├── solutions
+│   ├── 1-hello-world
+│   ├── 2-hello-channels
+│   ├── 3-hello-workflow
+│   ├── 4-hello-modules
+│   ├── 5-hello-containers
+│   └── 6-hello-config
+├── test-params.json
+└── work
+    ├── 65
+    └── 9f
+```
+
+</details>
 
 All'interno della directory `results`, troviamo un link simbolico al file `output.txt` prodotto nella directory work dal comando che abbiamo appena eseguito.
 
@@ -547,25 +560,25 @@ Il modo più semplice per farlo è assegnare percorsi di output specifici per og
 Ancora una volta, modificare il comportamento di pubblicazione per un output specifico è davvero semplice.
 Per impostare una posizione personalizzata, basta modificare il `path` di conseguenza:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="hello-world.nf" linenums="27" hl_lines="3"
-    output {
-        first_output {
-            path 'hello_world'
-        }
+```nextflow {3} title="hello-world.nf" showLineNumbers startLineNumber=27 step="Prima"
+output {
+    first_output {
+        path '.'
     }
-    ```
+}
+```
 
-=== "Prima"
-
-    ```groovy title="hello-world.nf" linenums="27" hl_lines="3"
-    output {
-        first_output {
-            path '.'
-        }
+```nextflow {3} title="hello-world.nf" showLineNumbers startLineNumber=27 step="Dopo"
+output {
+    first_output {
+        path 'hello_world'
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 Poiché questo è impostato a livello del singolo output, potete specificare posizioni e sottodirectory diverse per soddisfare le vostre esigenze.
 
@@ -575,41 +588,38 @@ Proviamo.
 
 ```bash
 nextflow run hello-world.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
+
+executor >  local (1)
+[8c/79499c] sayHello | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output: hello_world/output.txt
 ```
-
-??? success "Output del comando"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
-
-    executor >  local (1)
-    [8c/79499c] sayHello | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output: hello_world/output.txt
-    ```
 
 Questa volta il risultato viene scritto nella sottodirectory specificata.
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console hl_lines="2-3"
-    results/
-    ├── hello_world
-    │   └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c2e506b79e2e01acb808d9d12/output.txt
-    └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
-    ```
+```console {2-3}
+results/
+├── hello_world
+│   └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c2e506b79e2e01acb808d9d12/output.txt
+└── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
+```
+
+</details>
 
 Vedete che il risultato dell'esecuzione precedente è ancora lì.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_world_output.svg"
-</figure>
+![](../../hello_nextflow/img/hello_world_output.excalidraw.svg)
 
 Potete usare quanti livelli di nidificazione desiderate.
 È anche possibile usare il nome del process o altre variabili per nominare le directory usate per organizzare i risultati, ed è possibile cambiare il nome predefinito della directory di output di primo livello (che è controllata dal flag CLI `-o` o dalla variabile di configurazione `outputDir`).
@@ -631,26 +641,26 @@ Un'opzione facile è cambiare la modalità di pubblicazione su copy per gli outp
 Questa parte è davvero semplice.
 Basta aggiungere `mode 'copy'` alla definizione di output a livello di workflow pertinente:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="hello-world.nf" linenums="27" hl_lines="4"
-    output {
-        first_output {
-            path 'hello_world'
-            mode 'copy'
-        }
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=27 step="Prima"
+output {
+    first_output {
+        path 'hello_world'
     }
-    ```
+}
+```
 
-=== "Prima"
-
-    ```groovy title="hello-world.nf" linenums="27"
-    output {
-        first_output {
-            path 'hello_world'
-        }
+```nextflow {4} title="hello-world.nf" showLineNumbers startLineNumber=27 step="Dopo"
+output {
+    first_output {
+        path 'hello_world'
+        mode 'copy'
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 Questo imposta la modalità di pubblicazione per quello specifico output.
 
@@ -660,35 +670,34 @@ Proviamo.
 
 ```bash
 nextflow run hello-world.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
+
+executor >  local (1)
+[df/521638] sayHello | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output: hello_world/output.txt
 ```
-
-??? success "Output del comando"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
-
-    executor >  local (1)
-    [df/521638] sayHello | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output: hello_world/output.txt
-    ```
 
 Questa volta, se guardate i risultati, il file è una copia vera e propria invece di un semplice symlink.
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console hl_lines="3"
-    results/
-    ├── hello_world
-    │   └── output.txt
-    └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
-    ```
+```console {3}
+results/
+├── hello_world
+│   └── output.txt
+└── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
+```
+
+</details>
 
 Poiché anche questo è impostato a livello del singolo output, vi permette di impostare la modalità di pubblicazione in modo granulare.
 Questo sarà particolarmente utile più avanti quando passeremo a pipeline multi-step, dove potrete voler copiare solo gli output finali e lasciare gli output intermedi come symlink, per esempio.
@@ -702,7 +711,7 @@ Fino a molto recentemente, il modo stabilito per pubblicare gli output era farlo
 
 Per ottenere quanto abbiamo appena fatto per gli output del process `sayHello`, avremmo invece aggiunto la seguente riga alla definizione del process:
 
-```groovy title="hello-world.nf" linenums="6" hl_lines="3"
+```nextflow {3} title="hello-world.nf" showLineNumbers startLineNumber=6
 process sayHello {
 
     publishDir 'results/hello_world', mode: 'copy'
@@ -753,26 +762,26 @@ Prima, adattiamo la definizione del process per accettare un input chiamato `gre
 
 Nel blocco del process, fate la seguente modifica al codice:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="hello-world.nf" linenums="6" hl_lines="3-4"
-    process sayHello {
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=6 step="Prima"
+process sayHello {
 
-        input:
-        val greeting
+    output:
+    path 'output.txt'
+```
 
-        output:
-        path 'output.txt'
-    ```
+```nextflow {3-4} title="hello-world.nf" showLineNumbers startLineNumber=6 step="Dopo"
+process sayHello {
 
-=== "Prima"
+    input:
+    val greeting
 
-    ```groovy title="hello-world.nf" linenums="6"
-    process sayHello {
+    output:
+    path 'output.txt'
+```
 
-        output:
-        path 'output.txt'
-    ```
+</CodeWalkthrough>
 
 La variabile `greeting` è prefissata da `val` per dire a Nextflow che è un valore (non un percorso).
 
@@ -782,29 +791,29 @@ Ora scambiamo il valore originale codificato in modo fisso con il valore della v
 
 Nel blocco del process, fate la seguente modifica al codice:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-        script:
-        """
-        echo '${greeting}' > output.txt
-        """
-    ```
+```nextflow {3} title="hello-world.nf" showLineNumbers startLineNumber=14 step="Prima"
+    script:
+    """
+    echo 'Hello World!' > output.txt
+    """
+```
 
-=== "Prima"
+```nextflow {3} title="hello-world.nf" showLineNumbers startLineNumber=14 step="Dopo"
+    script:
+    """
+    echo '${greeting}' > output.txt
+    """
+```
 
-    ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-        script:
-        """
-        echo 'Hello World!' > output.txt
-        """
-    ```
+</CodeWalkthrough>
 
 Il simbolo `$` e le parentesi graffe (`{ }`) dicono a Nextflow che questo è un nome di variabile che deve essere sostituito con il valore di input effettivo (=interpolato).
 
-!!! tip "Suggerimento"
-
-    Le parentesi graffe (`{ }`) erano tecnicamente opzionali nelle versioni precedenti di Nextflow, quindi potreste vedere workflow più vecchi dove questo è scritto come `echo '$greeting' > output.txt`.
+:::tip[Suggerimento]
+Le parentesi graffe (`{ }`) erano tecnicamente opzionali nelle versioni precedenti di Nextflow, quindi potreste vedere workflow più vecchi dove questo è scritto come `echo '$greeting' > output.txt`.
+:::
 
 Ora che il process `sayHello()` è pronto ad accettare un input variabile, abbiamo bisogno di un modo per fornire un valore di input alla chiamata del process a livello di workflow.
 
@@ -813,9 +822,7 @@ Ora che il process `sayHello()` è pronto ad accettare un input variabile, abbia
 Potremmo semplicemente codificare in modo fisso un input direttamente facendo la chiamata al process `sayHello('Hello World!')`.
 Tuttavia, quando facciamo lavoro reale con il nostro workflow, vorremo essere in grado di controllare i suoi input dalla riga di comando, così da poter fare qualcosa del genere:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
-</figure>
+![](../../hello_nextflow/img/hello_world_input.excalidraw.svg)
 
 Fortunatamente, Nextflow ha un sistema di parametri di workflow integrato chiamato [`params`](https://nextflow.io/docs/latest/config.html#params) che rende facile dichiarare e usare parametri CLI.
 
@@ -826,19 +833,19 @@ In linea di principio possiamo scriverlo ovunque; ma poiché vorremo darlo alla 
 
 Nel blocco del workflow, fate la seguente modifica al codice:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-        // emette un saluto
-        sayHello(params.input)
-    ```
+```nextflow {2} title="hello-world.nf" showLineNumbers startLineNumber=23 step="Prima"
+    // emette un saluto
+    sayHello()
+```
 
-=== "Prima"
+```nextflow {2} title="hello-world.nf" showLineNumbers startLineNumber=23 step="Dopo"
+    // emette un saluto
+    sayHello(params.input)
+```
 
-    ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-        // emette un saluto
-        sayHello()
-    ```
+</CodeWalkthrough>
 
 Questo dice a Nextflow di eseguire il process `sayHello` sul valore fornito tramite il parametro `--input`.
 
@@ -850,46 +857,45 @@ Eseguiamolo!
 
 ```bash
 nextflow run hello-world.nf --input 'Bonjour le monde!'
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [elated_lavoisier] revision: 7c031b42ea
+
+executor >  local (1)
+[4b/654319] sayHello | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output: hello_world/output.txt
 ```
-
-??? success "Output del comando"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [elated_lavoisier] revision: 7c031b42ea
-
-    executor >  local (1)
-    [4b/654319] sayHello | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output: hello_world/output.txt
-    ```
 
 Se avete fatto tutte queste modifiche correttamente, dovreste ottenere un'altra esecuzione riuscita.
 
 Assicuratevi di aprire il file di output per verificare che ora abbiate la nuova versione del saluto.
 
-??? abstract "Contenuto del file"
+<details class="abstract">
+<summary>Contenuto del file</summary>
 
-    ```console title="results/hello_world/output.txt"
-    Bonjour le monde!
-    ```
+```console title="results/hello_world/output.txt"
+Bonjour le monde!
+```
+
+</details>
 
 Et voilà!
 
 Notate come la nuova esecuzione ha sovrascritto il file di output pubblicato nella directory `results`.
 Tuttavia, i risultati delle esecuzioni precedenti sono ancora conservati nelle directory delle attività sotto `work`.
 
-!!! tip "Suggerimento"
+:::tip[Suggerimento]
+Potete facilmente distinguere i parametri a livello di Nextflow dai parametri a livello di pipeline.
 
-    Potete facilmente distinguere i parametri a livello di Nextflow dai parametri a livello di pipeline.
-
-    - I parametri che si applicano a una pipeline prendono sempre un doppio trattino (`--`).
-    - I parametri che modificano un'impostazione di Nextflow, _ad es._ la funzione `-o` menzionata in precedenza, prendono un singolo trattino (`-`).
+- I parametri che si applicano a una pipeline prendono sempre un doppio trattino (`--`).
+- I parametri che modificano un'impostazione di Nextflow, _ad es._ la funzione `-o` menzionata in precedenza, prendono un singolo trattino (`-`).
+:::
 
 ### 3.4. Usare valori predefiniti per i parametri da riga di comando
 
@@ -899,7 +905,7 @@ Ok, quello era conveniente, ma in molti casi ha senso fornire un valore predefin
 
 Diamo al parametro `input` un valore predefinito dichiarandolo prima della definizione del workflow.
 
-```groovy title="hello-world.nf" linenums="20"
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=20
 /*
  * Pipeline parameters
  */
@@ -912,9 +918,9 @@ Come vedete, possiamo specificare il tipo di input che il workflow si aspetta (N
 La sintassi è `nome: Tipo = valore_predefinito`.
 I tipi supportati includono `String`, `Integer`, `Float`, `Boolean` e `Path`.
 
-!!! info "Info"
-
-    Nei workflow più vecchi, potreste vedere quel intero blocco `params` scritto semplicemente come `input = 'Hola mundo!'`.
+:::note[Info]
+Nei workflow più vecchi, potreste vedere quel intero blocco `params` scritto semplicemente come `input = 'Hola mundo!'`.
+:::
 
 Man mano che aggiungete più parametri alla vostra pipeline, dovreste aggiungerli tutti a questo blocco, che debbano o meno avere un valore predefinito.
 Questo renderà facile trovare tutti i parametri configurabili a colpo d'occhio.
@@ -925,61 +931,63 @@ Ora che avete un valore predefinito impostato, potete eseguire di nuovo il workf
 
 ```bash
 nextflow run hello-world.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [determined_edison] revision: 3539118582
+
+executor >  local (1)
+[72/394147] sayHello | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output: hello_world/output.txt
 ```
 
-??? success "Output del comando"
+<details class="question">
+<summary>Se non ha funzionato</summary>
 
-    ```console
-    N E X T F L O W   ~  version 26.04.4
+Se è fallito con un errore che assomiglia a questo:
 
-    Launching `hello-world.nf` [determined_edison] revision: 3539118582
+```
+ERROR ~ Script compilation error
+- file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
+- cause: you tried to assign a value to the class 'java.lang.String'
+@ line 24, column 12.
+      input: String = 'Hola mundo!'
+              ^
 
-    executor >  local (1)
-    [72/394147] sayHello | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output: hello_world/output.txt
-    ```
-
-??? question "Se non ha funzionato"
-
-    Se è fallito con un errore che assomiglia a questo:
-
-    ```
-    ERROR ~ Script compilation error
-    - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
-    - cause: you tried to assign a value to the class 'java.lang.String'
-    @ line 24, column 12.
-          input: String = 'Hola mundo!'
-                  ^
-
-    1 error
+1 error
 
 
-    -- Check '.nextflow.log' file for details
-    ```
+-- Check '.nextflow.log' file for details
+```
 
-    Allora probabilmente state usando il vecchio parser del linguaggio Nextflow v1.
-    Questo è stato menzionato all'inizio del corso, ma forse ve lo siete perso.
-    Controllate il materiale di aiuto sulle [versioni di Nextflow](../info/nxf_versions.md).
+Allora probabilmente state usando il vecchio parser del linguaggio Nextflow v1.
+Questo è stato menzionato all'inizio del corso, ma forse ve lo siete perso.
+Controllate il materiale di aiuto sulle [versioni di Nextflow](../info/nxf_versions.mdx).
 
-    Il parser v2 è quello predefinito a partire da Nextflow 26.04, quindi questo problema si presenterà solo con versioni precedenti.
-    Su una versione precedente alla 26.04 dovete abilitare il parser del linguaggio v2:
+Il parser v2 è quello predefinito a partire da Nextflow 26.04, quindi questo problema si presenterà solo con versioni precedenti.
+Su una versione precedente alla 26.04 dovete abilitare il parser del linguaggio v2:
 
-    ```bash
-    export NXF_SYNTAX_PARSER=v2
-    ```
+```bash
+export NXF_SYNTAX_PARSER=v2
+```
+
+</details>
 
 L'output sarà nella stessa posizione di prima, ma i contenuti dovrebbero essere aggiornati con il nuovo testo.
 
-??? abstract "Contenuto del file"
+<details class="abstract">
+<summary>Contenuto del file</summary>
 
-    ```console title="results/hello_world/output.txt"
-    Hola mundo!
-    ```
+```console title="results/hello_world/output.txt"
+Hola mundo!
+```
+
+</details>
 
 Nextflow ha usato il valore predefinito del parametro greeting per creare l'output.
 
@@ -991,39 +999,38 @@ Provate:
 
 ```bash
 nextflow run hello-world.nf --input 'Konnichiwa!'
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [elegant_faraday] revision: 3539118582
+
+executor >  local (1)
+[6f/a12a91] sayHello | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output: hello_world/output.txt
 ```
-
-??? success "Output del comando"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [elegant_faraday] revision: 3539118582
-
-    executor >  local (1)
-    [6f/a12a91] sayHello | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output: hello_world/output.txt
-    ```
 
 Ancora una volta, dovreste trovare l'output aggiornato corrispondente nella vostra directory results.
 
-??? abstract "Contenuto del file"
+<details class="abstract">
+<summary>Contenuto del file</summary>
 
-    ```console title="results/hello_world/output.txt"
-    Konnichiwa!
-    ```
+```console title="results/hello_world/output.txt"
+Konnichiwa!
+```
 
-!!! note "Nota"
+</details>
 
-    In Nextflow, ci sono più posti dove potete specificare valori per i parametri.
-    Se lo stesso parametro è impostato su valori diversi in più posti, Nexflow determinerà quale valore usare in base all'ordine di precedenza descritto [qui](https://www.nextflow.io/docs/latest/config.html).
+:::note[Nota]
+In Nextflow, ci sono più posti dove potete specificare valori per i parametri.
+Se lo stesso parametro è impostato su valori diversi in più posti, Nexflow determinerà quale valore usare in base all'ordine di precedenza descritto [qui](https://www.nextflow.io/docs/latest/config.html).
 
-    Copriremo questo in maggior dettaglio nella Parte 6 (Configuration).
+Copriremo questo in maggior dettaglio nella Parte 6 (Configuration).
+:::
 
 ### Takeaway
 
@@ -1058,23 +1065,19 @@ Per usarlo, aggiungete semplicemente `-resume` al vostro comando ed eseguitelo:
 
 ```bash
 nextflow run hello-world.nf --input 'Konnichiwa!' -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [golden_cantor] revision: 35bd3425e5
+
+[62/49a1f8] sayHello | 1 of 1, cached: 1 ✔ # [!code highlight]
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output: hello_world/output.txt
 ```
-
-??? success "Output del comando"
-
-    ```console hl_lines="5"
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [golden_cantor] revision: 35bd3425e5
-
-    [62/49a1f8] sayHello | 1 of 1, cached: 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output: hello_world/output.txt
-    ```
 
 L'output della console dovrebbe sembrare familiare, ma c'è una cosa leggermente diversa rispetto a prima.
 
@@ -1083,9 +1086,9 @@ Cercate la parte `cached:` che è stata aggiunta nella riga di stato del process
 Potete anche vedere che l'hash della sottodirectory work è lo stesso dell'esecuzione precedente.
 Nextflow vi sta letteralmente indicando l'esecuzione precedente e dicendo "Ho già fatto quello lì."
 
-!!! tip "Suggerimento"
-
-    Quando ri-eseguite una pipeline con `resume`, Nextflow non sovrascrive alcun file pubblicato fuori dalla directory work da esecuzioni che sono state eseguite con successo in precedenza.
+:::tip[Suggerimento]
+Quando ri-eseguite una pipeline con `resume`, Nextflow non sovrascrive alcun file pubblicato fuori dalla directory work da esecuzioni che sono state eseguite con successo in precedenza.
+:::
 
 ### 4.2. Ispezionare il log delle esecuzioni passate
 
@@ -1094,15 +1097,18 @@ Ecco come fare.
 
 Ogni volta che avviate un workflow nextflow, una riga viene scritta in un file di log chiamato `history`, sotto una directory nascosta chiamata `.nextflow` nella directory di lavoro corrente.
 
-??? abstract "Contenuto del file"
+<details class="abstract">
+<summary>Contenuto del file</summary>
 
-    ```txt title=".nextflow/history" linenums="1"
-    2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'
-    2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --input Bonjour
-    2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input 'Dobry den'
-    2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa
-    2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
-    ```
+```txt title=".nextflow/history" showLineNumbers
+2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'
+2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --input Bonjour
+2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input 'Dobry den'
+2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa
+2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
+```
+
+</details>
 
 Questo file fornisce il timestamp, il nome dell'esecuzione, lo stato, l'ID di revisione, l'ID di sessione e la riga di comando completa per ogni esecuzione Nextflow che è stata avviata dalla directory di lavoro corrente.
 
@@ -1110,18 +1116,14 @@ Un modo più conveniente per accedere a queste informazioni è usare il comando 
 
 ```bash
 nextflow log
+# [!output]
+TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND
+2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input 'Hello World'
+2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --input Bonjour
+2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input 'Dobry den'
+2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa
+2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume
 ```
-
-??? success "Output del comando"
-
-    ```console linenums="1"
-    TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND
-    2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input 'Hello World'
-    2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --input Bonjour
-    2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input 'Dobry den'
-    2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa
-    2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume
-    ```
 
 Questo produrrà i contenuti del file di log nel terminale, arricchiti con una riga di intestazione.
 
@@ -1153,13 +1155,9 @@ Prima usiamo il flag di prova a secco `-n` per verificare cosa verrà eliminato 
 
 ```bash
 nextflow clean -before golden_cantor -n
+# [!output]
+Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
 ```
-
-??? success "Output del comando"
-
-    ```console
-    Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
-    ```
 
 Il vostro output avrà nomi di directory di attività diversi e potrebbe avere un numero diverso di righe, ma dovrebbe sembrare simile all'esempio.
 
@@ -1171,23 +1169,19 @@ Se l'output sembra come previsto e volete procedere con l'eliminazione, ri-esegu
 
 ```bash
 nextflow clean -before golden_cantor -f
+# [!output]
+Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
 ```
-
-??? success "Output del comando"
-
-    ```console
-    Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
-    ```
 
 L'output dovrebbe essere simile a prima, ma ora dicendo 'Removed' invece di 'Would remove'.
 Notate che questo non rimuove le sottodirectory a due caratteri (come `a3/` sopra) ma ne svuota il contenuto.
 
-!!! Warning "Avviso"
+:::caution[Avviso]
+Eliminare le sottodirectory work dalle esecuzioni passate le rimuove dalla cache di Nextflow e cancella tutti gli output che erano memorizzati in quelle directory.
+Questo significa che interrompe la capacità di Nextflow di riprendere l'esecuzione senza ri-eseguire i processi corrispondenti.
 
-    Eliminare le sottodirectory work dalle esecuzioni passate le rimuove dalla cache di Nextflow e cancella tutti gli output che erano memorizzati in quelle directory.
-    Questo significa che interrompe la capacità di Nextflow di riprendere l'esecuzione senza ri-eseguire i processi corrispondenti.
-
-    È vostra responsabilità salvare tutti gli output che vi interessano o su cui contate! Questo è il motivo principale per cui preferiamo usare la modalità `copy` piuttosto che la modalità `symlink` per la direttiva `publish`.
+È vostra responsabilità salvare tutti gli output che vi interessano o su cui contate! Questo è il motivo principale per cui preferiamo usare la modalità `copy` piuttosto che la modalità `symlink` per la direttiva `publish`.
+:::
 
 ### Takeaway
 
@@ -1199,41 +1193,48 @@ Più in generale, sapete come interpretare un semplice workflow Nextflow, gestir
 
 Prendetevi una piccola pausa, ve la siete meritata!
 
-Quando siete pronti, passate alla [**Parte 2: Hello Channels**](./02_hello_channels.md) per imparare come usare i channel per alimentare gli input nel vostro workflow, il che vi permetterà di sfruttare il parallelismo del flusso dati integrato di Nextflow e altre potenti funzionalità.
+Quando siete pronti, passate alla [**Parte 2: Hello Channels**](./02_hello_channels.mdx) per imparare come usare i channel per alimentare gli input nel vostro workflow, il che vi permetterà di sfruttare il parallelismo del flusso dati integrato di Nextflow e altre potenti funzionalità.
 
 ---
 
 ## Quiz
 
-<quiz>
+<Quiz id="quiz-1">
+
 Quali sono i componenti minimi richiesti di un process Nextflow?
 - [ ] Solo blocchi input e output
 - [x] Blocchi output e script
 - [ ] Blocchi input, output e script
 - [ ] Solo un blocco script
 
-Approfondisci: [1.1.1. La definizione del `process`](#111-the-process-definition)
-</quiz>
+Approfondisci: [1.1.1. La definizione del `process`](#111-la-definizione-del-process)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-2">
+
 Qual è lo scopo del blocco output in un process?
 - [ ] Stampare i risultati sulla console
 - [ ] Salvare i file nella directory work
 - [x] Dichiarare gli output attesi dal process
 - [ ] Definire variabili d'ambiente
 
-Approfondisci: [1.1.1. La definizione del `process`](#111-the-process-definition)
-</quiz>
+Approfondisci: [1.1.1. La definizione del `process`](#111-la-definizione-del-process)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-3">
+
 Quale comando viene usato per eseguire un workflow Nextflow?
 - [ ] `nextflow start`
 - [ ] `nextflow execute`
 - [x] `nextflow run`
 - [ ] `nextflow launch`
-</quiz>
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-4">
+
 Guardando la directory work di un'attività, quale file contiene il comando effettivo che è stato eseguito?
 
 ```
@@ -1253,43 +1254,52 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-Approfondisci: [1.2.2. Trovare l'output e i log nella directory `work`](#122-find-the-output-and-logs-in-the-work-directory)
-</quiz>
+Approfondisci: [1.2.2. Trovare l'output e i log nella directory `work`](#122-trovare-loutput-e-i-log-nella-directory-work)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-5">
+
 Cosa fa il flag `-resume`?
 - [ ] Riavvia il workflow dall'inizio
 - [ ] Mette in pausa il workflow
 - [x] Salta i processi che sono già stati completati con successo
 - [ ] Crea un backup del workflow
 
-Approfondisci: [4.1. Ri-avviare un workflow con `-resume`](#41-re-launch-a-workflow-with--resume)
-</quiz>
+Approfondisci: [4.1. Ri-avviare un workflow con `-resume`](#41-ri-avviare-un-workflow-con--resume)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-6">
+
 Qual è la modalità predefinita per pubblicare gli output del workflow?
 - [ ] Copiare i file nella directory di output
 - [x] Creare link simbolici nella directory di output
 - [ ] Spostare i file nella directory di output
 - [ ] Comprimere i file nella directory di output
 
-Approfondisci: [2.3. Impostare la modalità di pubblicazione su copy](#23-set-the-publish-mode-to-copy)
-</quiz>
+Approfondisci: [2.3. Impostare la modalità di pubblicazione su copy](#23-impostare-la-modalità-di-pubblicazione-su-copy)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-7">
+
 Come si passa un valore di parametro a un workflow Nextflow dalla riga di comando?
 - [ ] `-parameter value`
 - [ ] `--parameter:value`
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-Approfondisci: [3.2. Impostare un parametro da riga di comando per catturare l'input dell'utente](#32-set-up-a-command-line-parameter-to-capture-user-input)
-</quiz>
+Approfondisci: [3.2. Impostare un parametro da riga di comando per catturare l'input dell'utente](#32-impostare-un-parametro-da-riga-di-comando-per-catturare-linput-dellutente)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-8">
+
 Come si fa riferimento a una variabile all'interno di un blocco script Nextflow?
 - [ ] Usare la sintassi `%variable%`
-- [x] Usare la sintassi `#!groovy ${variable}`
+- [x] Usare la sintassi `${variable}{:nextflow}`
 - [ ] Usare la sintassi `{{variable}}`
 - [ ] Usare la sintassi `[variable]`
-</quiz>
+
+</Quiz>

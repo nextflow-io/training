@@ -1,10 +1,13 @@
-# Primeros pasos
+---
+title: Primeros pasos
+description: 'Nextflow para {DOMAIN}: Primeros pasos'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Iniciar un entorno de capacitación
 
-Para usar el entorno preconfigurado que proporcionamos en GitHub Codespaces, haz clic en el botón "Open in GitHub Codespaces" a continuación. Para otras opciones, consulta [Opciones de entorno](../../envsetup/index.md).
+Para usar el entorno preconfigurado que proporcionamos en GitHub Codespaces, haz clic en el botón "Open in GitHub Codespaces" a continuación. Para otras opciones, consulta [Opciones de entorno](../../envsetup/index.mdx).
 
 Recomendamos abrir el entorno de capacitación en una nueva pestaña o ventana del navegador (usa clic derecho, ctrl-clic o cmd-clic según tu equipo) para que puedas seguir leyendo mientras se carga el entorno.
 Necesitarás mantener estas instrucciones abiertas en paralelo para trabajar en el curso.
@@ -18,12 +21,12 @@ Este entorno de capacitación contiene todo el software, código y datos necesar
 El codespace está configurado con una interfaz VSCode, que incluye un explorador de archivos, un editor de código y una terminal shell.
 Todas las instrucciones dadas durante el curso (por ejemplo, 'abre el archivo', 'edita el código' o 'ejecuta este comando') se refieren a esas tres partes de la interfaz VSCode a menos que se especifique lo contrario.
 
-Si estás trabajando en este curso por tu cuenta, por favor familiarízate con los [conceptos básicos del entorno](../../envsetup/01_setup.md) para más detalles.
+Si estás trabajando en este curso por tu cuenta, por favor familiarízate con los [conceptos básicos del entorno](../../envsetup/01_setup.mdx) para más detalles.
 
 ### Requisitos de versión
 
 Esta capacitación está diseñada para Nextflow 25.10.2 o posterior **con el analizador de sintaxis v2 HABILITADO**.
-Si estás usando un entorno local o personalizado, por favor asegúrate de estar usando la configuración correcta como se documenta [aquí](../../info/nxf_versions.md).
+Si estás usando un entorno local o personalizado, por favor asegúrate de estar usando la configuración correcta como se documenta [aquí](../../info/nxf_versions.mdx).
 
 ## Prepárate para trabajar
 
@@ -45,13 +48,13 @@ Puedes configurar VSCode para enfocarse en este directorio, de modo que solo los
 code .
 ```
 
-!!! tip "Consejo"
+:::tip[Consejo]
+Si por alguna razón sales de este directorio (por ejemplo, tu codespace se suspende), siempre puedes usar la ruta completa para regresar a él, asumiendo que estás ejecutando esto dentro del entorno de capacitación de Github Codespaces:
 
-    Si por alguna razón sales de este directorio (por ejemplo, tu codespace se suspende), siempre puedes usar la ruta completa para regresar a él, asumiendo que estás ejecutando esto dentro del entorno de capacitación de Github Codespaces:
-
-    ```bash
-    cd /workspaces/training/nf4-science/{DOMAIN_DIR}
-    ```
+```bash
+cd /workspaces/training/nf4-science/{DOMAIN_DIR}
+```
+:::
 
 Ahora echemos un vistazo al contenido.
 
@@ -68,25 +71,28 @@ Aquí generamos una tabla de contenidos hasta el segundo nivel:
 tree . -L 2
 ```
 
-??? abstract "Contenido del directorio"
+<details class="abstract">
+<summary>Contenido del directorio</summary>
 
-    ```console
-    .
-    ├── data
-    │   ├── {DATA_SUBDIRS}
-    │   └── samplesheet.csv
-    ├── {DOMAIN_DIR}.nf
+```console
+.
+├── data
+│   ├── {DATA_SUBDIRS}
+│   └── samplesheet.csv
+├── {DOMAIN_DIR}.nf
+├── modules
+│   ├── {TOOL_A_MODULE}.nf
+│   └── {TOOL_B_MODULE}.nf
+├── nextflow.config
+└── solutions
     ├── modules
-    │   ├── {TOOL_A_MODULE}.nf
-    │   └── {TOOL_B_MODULE}.nf
-    ├── nextflow.config
-    └── solutions
-        ├── modules
-        ├── part2
-        └── part3
+    ├── part2
+    └── part3
 
-    N directories, N files
-    ```
+N directories, N files
+```
+
+</details>
 
 Haz clic en el cuadro de color para expandir la sección y ver su contenido.
 Usamos secciones plegables como esta para mostrar la salida esperada de comandos, así como el contenido de directorios y archivos de manera concisa.
@@ -113,4 +119,4 @@ Usamos secciones plegables como esta para mostrar la salida esperada de comandos
 
 Si puedes marcar todas las casillas, estás listo para comenzar.
 
-**Para continuar a [Parte 1: Descripción general del método](./01_method.md), haz clic en la flecha en la esquina inferior derecha de esta página.**
+**Para continuar a [Parte 1: Descripción general del método](./01_method.mdx), haz clic en la flecha en la esquina inferior derecha de esta página.**

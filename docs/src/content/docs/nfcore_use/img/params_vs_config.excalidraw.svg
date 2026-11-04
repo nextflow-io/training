@@ -15,7 +15,7 @@
   </defs>
 
   <!-- Background -->
-  <rect width="1100" height="860" fill="#ffffff"/>
+  
 
   <!-- Title -->
   <text x="550" y="35" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#1e1e1e">Parameters vs Configuration</text>

@@ -1,16 +1,22 @@
-# Bölüm 5: Merhaba Konteynerlar
+---
+title: 'Bölüm 5: Merhaba Konteynerlar'
+description: Bu eğitim kursunun 1-4. Bölümlerinde, bazı metinleri işleyebilen, birden fazla girdi varsa yürütmeyi paralelleştirebilen ve sonuçları daha fazla işleme için…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+<figure>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
+<figcaption>
 
-/// caption
-:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube kanalında [tüm oynatma listesini](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) izleyin.
+Nextflow YouTube kanalında [tüm oynatma listesini](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) izleyin.
 
-:green_book: Video transkripti [burada](./transcripts/05_hello_containers.md) mevcuttur.
-///
+📗 Video transkripti [burada](./transcripts/05_hello_containers.mdx) mevcuttur.
+
+</figcaption>
+</figure>
 
 Bu eğitim kursunun 1-4. Bölümlerinde, bazı metinleri işleyebilen, birden fazla girdi varsa yürütmeyi paralelleştirebilen ve sonuçları daha fazla işleme için toplayabilen basit bir iş akışı oluşturmak için Nextflow'un temel yapı taşlarını nasıl kullanacağınızı öğrendiniz.
 
@@ -25,15 +31,18 @@ Tahmin edebileceğiniz gibi, bu pipeline'larınızı daha tekrarlanabilir hale g
 
 Bunu [Docker](https://www.docker.com/get-started/) kullanarak öğreteceğimizi, ancak Nextflow'un [diğer birçok konteyner teknolojisini](https://nextflow.io/docs/latest/container.html) de desteklediğini unutmayın.
 
-??? info "Bu bölümden nasıl başlanır"
+<details class="info">
+<summary>Bu bölümden nasıl başlanır</summary>
 
-    Bu kursun bu bölümü, [Hello Nextflow](./index.md) kursunun 1-4. Bölümlerini tamamladığınızı ve eksiksiz çalışan bir pipeline'ınız olduğunu varsayar.
+Bu kursun bu bölümü, [Hello Nextflow](./index.mdx) kursunun 1-4. Bölümlerini tamamladığınızı ve eksiksiz çalışan bir pipeline'ınız olduğunu varsayar.
 
-    Kursa bu noktadan başlıyorsanız, `modules` dizinini çözümlerden kopyalamanız gerekecek:
+Kursa bu noktadan başlıyorsanız, `modules` dizinini çözümlerden kopyalamanız gerekecek:
 
-    ```bash
-    cp -r solutions/4-hello-modules/modules .
-    ```
+```bash
+cp -r solutions/4-hello-modules/modules .
+```
+
+</details>
 
 ---
 
@@ -42,7 +51,7 @@ Bunu [Docker](https://www.docker.com/get-started/) kullanarak öğreteceğimizi,
 Başlangıç noktası olarak `hello-containers.nf` iş akışı betiğini kullanacağız.
 Bu betik, bu eğitim kursunun 4. Bölümünde üretilen betiğe eşdeğerdir; ancak çıktı hedeflerini değiştirdik:
 
-```groovy title="hello-containers.nf" linenums="37" hl_lines="3 7 11 15"
+```nextflow {3,7,11,15} title="hello-containers.nf" showLineNumbers startLineNumber=37
 output {
     first_output {
         path 'hello_containers'
@@ -67,51 +76,50 @@ Her şeyin çalıştığından emin olmak için, herhangi bir değişiklik yapma
 
 ```bash
 nextflow run hello-containers.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-containers.nf` [nice_escher] revision: d5dfdc9872
+
+executor >  local (7)
+[5a/ec1fa1] sayHello (2)       | 3 of 3 ✔
+[30/32b5b8] convertToUpper (3) | 3 of 3 ✔
+[d3/be01bc] collectGreetings   | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_containers/Hola-output.txt
+    - hello_containers/Bonjour-output.txt
+    - hello_containers/Hello-output.txt
+  uppercased:
+    - hello_containers/UPPER-Bonjour-output.txt
+    - hello_containers/UPPER-Hola-output.txt
+    - hello_containers/UPPER-Hello-output.txt
+  collected: hello_containers/COLLECTED-batch-output.txt
+  batch_report: hello_containers/batch-report.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-containers.nf` [nice_escher] revision: d5dfdc9872
-
-    executor >  local (7)
-    [5a/ec1fa1] sayHello (2)       | 3 of 3 ✔
-    [30/32b5b8] convertToUpper (3) | 3 of 3 ✔
-    [d3/be01bc] collectGreetings   | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_containers/Hola-output.txt
-        - hello_containers/Bonjour-output.txt
-        - hello_containers/Hello-output.txt
-      uppercased:
-        - hello_containers/UPPER-Bonjour-output.txt
-        - hello_containers/UPPER-Hola-output.txt
-        - hello_containers/UPPER-Hello-output.txt
-      collected: hello_containers/COLLECTED-batch-output.txt
-      batch_report: hello_containers/batch-report.txt
-    ```
 
 Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen dizinde bulacaksınız (`results/hello_containers/`).
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console
-    results/hello_containers/
-    ├── Bonjour-output.txt
-    ├── COLLECTED-batch-output.txt
-    ├── Hello-output.txt
-    ├── Hola-output.txt
-    ├── batch-report.txt
-    ├── UPPER-Bonjour-output.txt
-    ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
-    ```
+```console
+results/hello_containers/
+├── Bonjour-output.txt
+├── COLLECTED-batch-output.txt
+├── Hello-output.txt
+├── Hola-output.txt
+├── batch-report.txt
+├── UPPER-Bonjour-output.txt
+├── UPPER-Hello-output.txt
+└── UPPER-Hola-output.txt
+```
+
+</details>
 
 Bu sizin için çalıştıysa, konteynerleri nasıl kullanacağınızı öğrenmeye hazırsınız.
 
@@ -167,29 +175,25 @@ Tam çekme komutunu çalıştırın:
 
 ```bash
 docker pull 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+# [!output]
+1.1.5--3db457ae1977a273: Pulling from library/cowpy
+dafa2b0c44d2: Pull complete
+dec6b097362e: Pull complete
+f88da01cff0b: Pull complete
+4f4fb700ef54: Pull complete
+92dc97a3ef36: Pull complete
+403f74b0f85e: Pull complete
+10b8c00c10a5: Pull complete
+17dc7ea432cc: Pull complete
+bb36d6c3110d: Pull complete
+0ea1a16bbe82: Pull complete
+030a47592a0a: Pull complete
+c23bdb422167: Pull complete
+e1686ff32a11: Pull complete
+Digest: sha256:1ebc0043e8cafa61203bf42d29fd05bd14e7b4298e5e8cf986504c15f5aa4160
+Status: Downloaded newer image for community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
+community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    1.1.5--3db457ae1977a273: Pulling from library/cowpy
-    dafa2b0c44d2: Pull complete
-    dec6b097362e: Pull complete
-    f88da01cff0b: Pull complete
-    4f4fb700ef54: Pull complete
-    92dc97a3ef36: Pull complete
-    403f74b0f85e: Pull complete
-    10b8c00c10a5: Pull complete
-    17dc7ea432cc: Pull complete
-    bb36d6c3110d: Pull complete
-    0ea1a16bbe82: Pull complete
-    030a47592a0a: Pull complete
-    c23bdb422167: Pull complete
-    e1686ff32a11: Pull complete
-    Digest: sha256:1ebc0043e8cafa61203bf42d29fd05bd14e7b4298e5e8cf986504c15f5aa4160
-    Status: Downloaded newer image for community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
-    community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
-    ```
 
 İmajı daha önce hiç indirmediyseniz, bunun tamamlanması bir dakika sürebilir.
 Bittiğinde, konteyner imajının yerel bir kopyasına sahipsiniz.
@@ -215,20 +219,16 @@ Tam olarak birleştirilmiş konteyner yürütme komutu şöyle görünür; devam
 
 ```bash
 docker run --rm 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' cowpy
+# [!output]
+______________________________________________________
+< Cowacter, eyes:default, tongue:False, thoughts:False >
+------------------------------------------------------
+    \   ^__^
+      \  (oo)\_______
+        (__)\       )\/\
+          ||----w |
+          ||     ||
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    ______________________________________________________
-    < Cowacter, eyes:default, tongue:False, thoughts:False >
-    ------------------------------------------------------
-        \   ^__^
-          \  (oo)\_______
-            (__)\       )\/\
-              ||----w |
-              ||     ||
-    ```
 
 Sistem konteyneri başlattı, `cowpy` komutunu parametreleriyle çalıştırdı, çıktıyı konsola gönderdi ve son olarak konteyner örneğini kapattı.
 
@@ -253,11 +253,14 @@ Bunu doğrulamak için dosya sisteminin kökünden dizin içeriklerini listeleme
 ls /
 ```
 
-??? abstract "Komut çıktısı"
+<details class="abstract">
+<summary>Komut çıktısı</summary>
 
-    ```console
-    bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
-    ```
+```console
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+```
+
+</details>
 
 `tree` yardımcı programı bu konteynerde mevcut olmadığı için burada `ls` kullanıyoruz.
 Konteyner içindeki dosya sisteminin ana sisteminizden farklı olduğunu görebilirsiniz.
@@ -274,33 +277,29 @@ Artık konteynerin içinde olduğunuza göre, `cowpy` komutunu doğrudan çalı�
 
 ```bash
 echo "Hello Containers" | cowpy -c tux
+# [!output]
+ __________________
+< Hello Containers >
+ ------------------
+   \
+    \
+        .--.
+       |o_o |
+       |:_/ |
+      //   \ \
+     (|     | )
+    /'\_   _/`\
+    \___)=(___/
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     __________________
-    < Hello Containers >
-     ------------------
-       \
-        \
-            .--.
-           |o_o |
-           |:_/ |
-          //   \ \
-         (|     | )
-        /'\_   _/`\
-        \___)=(___/
-    ```
 
 Şimdi çıktı varsayılan inek yerine Linux pengueni Tux'u gösteriyor; çünkü `-c tux` parametresini belirttik.
 
 Konteyner içinde olduğunuz için, Docker komutlarıyla uğraşmak zorunda kalmadan girdi parametrelerini değiştirerek `cowpy` komutunu istediğiniz kadar çalıştırabilirsiniz.
 
-!!! Tip "İpucu"
-
-    Farklı bir karakter seçmek için `-c` bayrağını kullanın; seçenekler şunlardır:
-    `beavis`, `cheese`, `daemon`, `dragonandcow`, `ghostbusters`, `kitty`, `moose`, `milk`, `stegosaurus`, `turkey`, `turtle`, `tux`
+:::tip[İpucu]
+Farklı bir karakter seçmek için `-c` bayrağını kullanın; seçenekler şunlardır:
+`beavis`, `cheese`, `daemon`, `dragonandcow`, `ghostbusters`, `kitty`, `moose`, `milk`, `stegosaurus`, `turkey`, `turtle`, `tux`
+:::
 
 Bu hoş. Daha da hoş olacak şey, `greetings.csv` dosyamızı buna girdi olarak besleyebilmek.
 Ancak dosya sistemine erişimimiz olmadığı için yapamayız.
@@ -309,7 +308,7 @@ Bunu düzeltelim.
 
 #### 1.3.3. Konteynerden çıkın
 
-Konteynerden çıkmak için, istemde `exit` yazabilir veya ++ctrl+d++ klavye kısayolunu kullanabilirsiniz.
+Konteynerden çıkmak için, istemde `exit` yazabilir veya <kbd>Ctrl</kbd>+<kbd>D</kbd> klavye kısayolunu kullanabilirsiniz.
 
 ```bash
 exit
@@ -341,14 +340,10 @@ Bu, mevcut çalışma dizinini konteyner içinde `/my_project` altında erişile
 
 ```bash
 ls /my_project
+# [!output]
+data               hello-config.nf      hello-modules.nf   hello-world.nf  nextflow.config  solutions         work
+hello-channels.nf  hello-containers.nf  hello-workflow.nf  modules         results          test-params.json
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    data               hello-config.nf      hello-modules.nf   hello-world.nf  nextflow.config  solutions         work
-    hello-channels.nf  hello-containers.nf  hello-workflow.nf  modules         results          test-params.json
-    ```
 
 Artık `data/` altındaki `greetings.csv` dosyası dahil olmak üzere çalışma dizininin içeriğini konteyner içinden görebilirsiniz.
 
@@ -362,38 +357,34 @@ Bunu yapmak için, CSV dosyasının içeriğini `cowpy` komutuna yönlendirmek �
 
 ```bash
 cat /my_project/data/greetings.csv | cowpy -c turkey
+# [!output]
+ ____________________
+/ Hello,English,123  \
+| Bonjour,French,456 |
+\ Hola,Spanish,789   /
+--------------------
+  \                                  ,+*^^*+___+++_
+  \                           ,*^^^^              )
+    \                       _+*                     ^**+_
+    \                    +^       _ _++*+_+++_,         )
+              _+^^*+_    (     ,+*^ ^          \+_        )
+            {       )  (    ,(    ,_+--+--,      ^)      ^\
+            { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
+          {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
+          ( /  (    (        ,___    ^*+_+* )   <    <      \
+          U _/     )    *--<  ) ^\-----++__)   )    )       )
+            (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
+          (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+        (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
+          *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
+          \             \_)^)_)) ))^^^^^^^^^^))^^^^)
+          (_             ^\__^^^^^^^^^^^^))^^^^^^^)
+            ^\___            ^\__^^^^^^))^^^^^^^^)\\
+                  ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
+                    ___) >____) >___   ^\_\_\_\_\_\_\)
+                    ^^^//\\_^^//\\_^       ^(\_\_\_\)
+                      ^^^ ^^ ^^^ ^
 ```
-
-??? success "Komut çıktısı"
-
-    ```console title="data/greetings.csv"
-     ____________________
-    / Hello,English,123  \
-    | Bonjour,French,456 |
-    \ Hola,Spanish,789   /
-    --------------------
-      \                                  ,+*^^*+___+++_
-      \                           ,*^^^^              )
-        \                       _+*                     ^**+_
-        \                    +^       _ _++*+_+++_,         )
-                  _+^^*+_    (     ,+*^ ^          \+_        )
-                {       )  (    ,(    ,_+--+--,      ^)      ^\
-                { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
-              {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
-              ( /  (    (        ,___    ^*+_+* )   <    <      \
-              U _/     )    *--<  ) ^\-----++__)   )    )       )
-                (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
-            (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
-              *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
-              \             \_)^)_)) ))^^^^^^^^^^))^^^^)
-              (_             ^\__^^^^^^^^^^^^))^^^^^^^)
-                ^\___            ^\__^^^^^^))^^^^^^^^)\\
-                      ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
-                        ___) >____) >___   ^\_\_\_\_\_\_\)
-                        ^^^//\\_^^//\\_^       ^(\_\_\_\)
-                          ^^^ ^^ ^^^ ^
-    ```
 
 Bu, örnek selamlamalarımızı söyleyen bir hindi ASCII sanatını üretiyor!
 Ancak burada hindi yalnızca selamlamalar yerine tam satırları tekrarlıyor.
@@ -425,9 +416,7 @@ Bu, süreçlerinizi çalıştırmak için istediğiniz herhangi bir konteyner im
 
 Bunu göstermek için, geliştirdiğimiz pipeline'a `collectGreetings` adımından sonra bir `cowpy` adımı ekleyeceğiz.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
-</figure>
+![](../../hello_nextflow/img/hello-pipeline-cowpy.excalidraw.svg)
 
 ### 2.1. Bir `cowpy` modülü yazın
 
@@ -447,7 +436,7 @@ Bu bize süreç kodunu koyacağımız bir yer verir.
 
 `cowpy` sürecimizi daha önce yazdığımız diğer süreçlere göre modelleyebiliriz.
 
-```groovy title="modules/cowpy.nf" linenums="1"
+```nextflow title="modules/cowpy.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 // cowpy ile ASCII sanatı oluştur
@@ -480,24 +469,24 @@ Süreç, selamlamaları içeren bir `input_file` ve bir `character` değeri bekl
 
 İmport tanımını workflow bloğunun üstüne ekleyin ve uygun şekilde doldurun.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-containers.nf" linenums="3" hl_lines="5"
-    // Modülleri dahil et
-    include { sayHello } from './modules/sayHello.nf'
-    include { convertToUpper } from './modules/convertToUpper.nf'
-    include { collectGreetings } from './modules/collectGreetings.nf'
-    include { cowpy } from './modules/cowpy.nf'
-    ```
+```nextflow title="hello-containers.nf" showLineNumbers startLineNumber=3 step="Önce"
+// Modülleri dahil et
+include { sayHello } from './modules/sayHello.nf'
+include { convertToUpper } from './modules/convertToUpper.nf'
+include { collectGreetings } from './modules/collectGreetings.nf'
+```
 
-=== "Önce"
+```nextflow {5} title="hello-containers.nf" showLineNumbers startLineNumber=3 step="Sonra"
+// Modülleri dahil et
+include { sayHello } from './modules/sayHello.nf'
+include { convertToUpper } from './modules/convertToUpper.nf'
+include { collectGreetings } from './modules/collectGreetings.nf'
+include { cowpy } from './modules/cowpy.nf'
+```
 
-    ```groovy title="hello-containers.nf" linenums="3"
-    // Modülleri dahil et
-    include { sayHello } from './modules/sayHello.nf'
-    include { convertToUpper } from './modules/convertToUpper.nf'
-    include { collectGreetings } from './modules/collectGreetings.nf'
-    ```
+</CodeWalkthrough>
 
 Artık `cowpy` modülü iş akışında kullanılabilir durumda.
 
@@ -505,44 +494,44 @@ Artık `cowpy` modülü iş akışında kullanılabilir durumda.
 
 `cowpy()` sürecini, hatırlayabileceğiniz gibi iki çıktı üreten `collectGreetings()` sürecinin çıktısına bağlayalım:
 
-- `collectGreetings.out.outfile` çıktı dosyasını içerir <-- _istediğimiz şey_
+- `collectGreetings.out.outfile` çıktı dosyasını içerir &lt;-- _istediğimiz şey_
 - `collectGreetings.out.report` grup başına selamlama sayısını içeren rapor dosyasını içerir
 
 İş akışı bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-containers.nf" linenums="19" hl_lines="12-13"
-        main:
-        // bir CSV dosyasından girdiler için bir kanal oluştur
-        greeting_ch = channel.fromPath(params.input)
-                            .splitCsv()
-                            .map { line -> line[0] }
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
-        // selamlamayı büyük harfe dönüştür
-        convertToUpper(sayHello.out)
-        // tüm selamlamaları tek bir dosyada topla
-        collectGreetings(convertToUpper.out.collect(), params.batch)
-        // cowpy ile selamlamaların ASCII sanatını oluştur
-        cowpy(collectGreetings.out.outfile, params.character)
-    ```
+```nextflow title="hello-containers.nf" showLineNumbers startLineNumber=19 step="Önce"
+    main:
+    // bir CSV dosyasından girdiler için bir kanal oluştur
+    greeting_ch = channel.fromPath(params.input)
+                        .splitCsv()
+                        .map { line -> line[0] }
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
+    // selamlamayı büyük harfe dönüştür
+    convertToUpper(sayHello.out)
+    // tüm selamlamaları tek bir dosyada topla
+    collectGreetings(convertToUpper.out.collect(), params.batch)
+```
 
-=== "Önce"
+```nextflow {12-13} title="hello-containers.nf" showLineNumbers startLineNumber=19 step="Sonra"
+    main:
+    // bir CSV dosyasından girdiler için bir kanal oluştur
+    greeting_ch = channel.fromPath(params.input)
+                        .splitCsv()
+                        .map { line -> line[0] }
+    // bir selamlama yayınla
+    sayHello(greeting_ch)
+    // selamlamayı büyük harfe dönüştür
+    convertToUpper(sayHello.out)
+    // tüm selamlamaları tek bir dosyada topla
+    collectGreetings(convertToUpper.out.collect(), params.batch)
+    // cowpy ile selamlamaların ASCII sanatını oluştur
+    cowpy(collectGreetings.out.outfile, params.character)
+```
 
-    ```groovy title="hello-containers.nf" linenums="19"
-        main:
-        // bir CSV dosyasından girdiler için bir kanal oluştur
-        greeting_ch = channel.fromPath(params.input)
-                            .splitCsv()
-                            .map { line -> line[0] }
-        // bir selamlama yayınla
-        sayHello(greeting_ch)
-        // selamlamayı büyük harfe dönüştür
-        convertToUpper(sayHello.out)
-        // tüm selamlamaları tek bir dosyada topla
-        collectGreetings(convertToUpper.out.collect(), params.batch)
-    ```
+</CodeWalkthrough>
 
 Selamlamaları hangi karakterin söylemesini istediğimizi belirtmek için yeni bir CLI parametresi olan `params.character`'ı tanımladığımıza dikkat edin.
 
@@ -550,30 +539,30 @@ Selamlamaları hangi karakterin söylemesini istediğimizi belirtmek için yeni 
 
 Bu teknik olarak isteğe bağlıdır; ancak önerilen bir pratiktir ve bu arada karakter için varsayılan bir değer belirleme fırsatıdır.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-containers.nf" linenums="9" hl_lines="7"
-    /*
-    * Pipeline parametreleri
-    */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-        character: String = 'turkey'
-    }
-    ```
+```nextflow title="hello-containers.nf" showLineNumbers startLineNumber=9 step="Önce"
+/*
+* Pipeline parametreleri
+*/
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+}
+```
 
-=== "Önce"
+```nextflow {7} title="hello-containers.nf" showLineNumbers startLineNumber=9 step="Sonra"
+/*
+* Pipeline parametreleri
+*/
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+    character: String = 'turkey'
+}
+```
 
-    ```groovy title="hello-containers.nf" linenums="9"
-    /*
-    * Pipeline parametreleri
-    */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-    }
-    ```
+</CodeWalkthrough>
 
 Artık komut satırlarımızda karakter parametresini yazmayı atlayabiliriz.
 
@@ -585,26 +574,26 @@ Artık komut satırlarımızda karakter parametresini yazmayı atlayabiliriz.
 
 `workflow` bloğunda, aşağıdaki kod değişikliğini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-containers.nf" linenums="34" hl_lines="6"
-        publish:
-        first_output = sayHello.out
-        uppercased = convertToUpper.out
-        collected = collectGreetings.out.outfile
-        batch_report = collectGreetings.out.report
-        cowpy_art = cowpy.out
-    ```
+```nextflow title="hello-containers.nf" showLineNumbers startLineNumber=34 step="Önce"
+    publish:
+    first_output = sayHello.out
+    uppercased = convertToUpper.out
+    collected = collectGreetings.out.outfile
+    batch_report = collectGreetings.out.report
+```
 
-=== "Önce"
+```nextflow {6} title="hello-containers.nf" showLineNumbers startLineNumber=34 step="Sonra"
+    publish:
+    first_output = sayHello.out
+    uppercased = convertToUpper.out
+    collected = collectGreetings.out.outfile
+    batch_report = collectGreetings.out.report
+    cowpy_art = cowpy.out
+```
 
-    ```groovy title="hello-containers.nf" linenums="34"
-        publish:
-        first_output = sayHello.out
-        uppercased = convertToUpper.out
-        collected = collectGreetings.out.outfile
-        batch_report = collectGreetings.out.report
-    ```
+</CodeWalkthrough>
 
 `cowpy` süreci yalnızca bir çıktı üretir; bu yüzden `.out` ekleyerek her zamanki şekilde atıfta bulunabiliriz.
 
@@ -616,55 +605,55 @@ Son `cowpy_art` çıktısını `output` bloğuna eklememiz gerekiyor. Bu arada, 
 
 `output` bloğunda, aşağıdaki kod değişikliklerini yapın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-containers.nf" linenums="42" hl_lines="3 7 11 15 18-21"
-    output {
-        first_output {
-            path 'hello_containers/intermediates'
-            mode 'copy'
-        }
-        uppercased {
-            path 'hello_containers/intermediates'
-            mode 'copy'
-        }
-        collected {
-            path 'hello_containers/intermediates'
-            mode 'copy'
-        }
-        batch_report {
-            path 'hello_containers'
-            mode 'copy'
-        }
-        cowpy_art {
-            path 'hello_containers'
-            mode 'copy'
-        }
+```nextflow {3,7,11,15} title="hello-containers.nf" showLineNumbers startLineNumber=42 step="Önce"
+output {
+    first_output {
+        path 'hello_containers'
+        mode 'copy'
     }
-    ```
-
-=== "Önce"
-
-    ```groovy title="hello-containers.nf" linenums="42" hl_lines="3 7 11 15"
-    output {
-        first_output {
-            path 'hello_containers'
-            mode 'copy'
-        }
-        uppercased {
-            path 'hello_containers'
-            mode 'copy'
-        }
-        collected {
-            path 'hello_containers'
-            mode 'copy'
-        }
-        batch_report {
-            path 'hello_containers'
-            mode 'copy'
-        }
+    uppercased {
+        path 'hello_containers'
+        mode 'copy'
     }
-    ```
+    collected {
+        path 'hello_containers'
+        mode 'copy'
+    }
+    batch_report {
+        path 'hello_containers'
+        mode 'copy'
+    }
+}
+```
+
+```nextflow {3,7,11,15,18-21} title="hello-containers.nf" showLineNumbers startLineNumber=42 step="Sonra"
+output {
+    first_output {
+        path 'hello_containers/intermediates'
+        mode 'copy'
+    }
+    uppercased {
+        path 'hello_containers/intermediates'
+        mode 'copy'
+    }
+    collected {
+        path 'hello_containers/intermediates'
+        mode 'copy'
+    }
+    batch_report {
+        path 'hello_containers'
+        mode 'copy'
+    }
+    cowpy_art {
+        path 'hello_containers'
+        mode 'copy'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 Artık yayımlanan çıktılar biraz daha düzenli olacak.
 
@@ -672,9 +661,7 @@ Artık yayımlanan çıktılar biraz daha düzenli olacak.
 
 Özetlemek gerekirse, hedeflediğimiz şey şu:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
-</figure>
+![](../../hello_nextflow/img/hello_pipeline_complete.excalidraw.svg)
 
 Çalışacağını düşünüyor musunuz?
 
@@ -683,46 +670,43 @@ Temiz bir sayfa açmak için önceki yayımlanan çıktıları silelim ve iş ak
 ```bash
 rm -r results/hello_containers/
 nextflow run hello-containers.nf -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-containers.nf` [lonely_woese] revision: abf1dccf7f
+
+executor >  local (1)
+[c9/f5c686] sayHello (3)       | 3 of 3, cached: 3 ✔
+[ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔
+[7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔
+[9b/02e776] cowpy              | 0 of 1 ✘
+# [!output stderr]
+ERROR ~ Error executing process > 'cowpy' # [!code highlight]
+
+Caused by:
+  Process `cowpy` terminated with an error exit status (127) # [!code highlight]
+
+
+Command executed:
+
+  cat COLLECTED-batch-output.txt | cowpy -c "turkey" > cowpy-COLLECTED-batch-output.txt
+
+Command exit status: # [!code highlight]
+  127 # [!code highlight]
+
+Command output:
+  (empty)
+
+Command error: # [!code highlight]
+  .command.sh: line 2: cowpy: command not found # [!code highlight]
+
+Work dir:
+  /workspaces/training/hello-nextflow/work/9b/02e7761db848f82db3c3e59ff3a9b6
+
+Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+-- Check '.nextflow.log' file for details
 ```
-
-??? failure "Komut çıktısı (netlik için düzenlendi)"
-
-    ```console hl_lines="10 13 20-21 26-27"
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-containers.nf` [lonely_woese] revision: abf1dccf7f
-
-    executor >  local (1)
-    [c9/f5c686] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔
-    [7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔
-    [9b/02e776] cowpy              | 0 of 1 ✘
-    ERROR ~ Error executing process > 'cowpy'
-
-    Caused by:
-      Process `cowpy` terminated with an error exit status (127)
-
-
-    Command executed:
-
-      cat COLLECTED-batch-output.txt | cowpy -c "turkey" > cowpy-COLLECTED-batch-output.txt
-
-    Command exit status:
-      127
-
-    Command output:
-      (empty)
-
-    Command error:
-      .command.sh: line 2: cowpy: command not found
-
-    Work dir:
-      /workspaces/training/hello-nextflow/work/9b/02e7761db848f82db3c3e59ff3a9b6
-
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-
-    -- Check '.nextflow.log' file for details
-    ```
 
 Hay aksi, bir hata var!
 `error exit status (127)` tarafından verilen hata kodu, istediğimiz çalıştırılabilir dosyanın bulunamadığı anlamına gelir.
@@ -739,45 +723,45 @@ Bu öğreticinin ilk bölümünde doğrudan kullandığımız aynı imajı kulla
 
 `cowpy.nf` modülünü düzenleyerek süreç tanımına `container` yönergesini şu şekilde ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="3"
-    process cowpy {
+```nextflow title="modules/cowpy.nf" showLineNumbers startLineNumber=4 step="Önce"
+process cowpy {
 
-        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    input:
+    path input_file
+    val character
 
-        input:
-        path input_file
-        val character
+    output:
+    path "cowpy-${input_file}"
 
-        output:
-        path "cowpy-${input_file}"
+    script:
+    """
+    cat ${input_file} | cowpy -c "${character}" > cowpy-${input_file}
+    """
+}
+```
 
-        script:
-        """
-        cat ${input_file} | cowpy -c "${character}" > cowpy-${input_file}
-        """
-    }
-    ```
+```nextflow {3} title="modules/cowpy.nf" showLineNumbers startLineNumber=4 step="Sonra"
+process cowpy {
 
-=== "Önce"
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
-    ```groovy title="modules/cowpy.nf" linenums="4"
-    process cowpy {
+    input:
+    path input_file
+    val character
 
-        input:
-        path input_file
-        val character
+    output:
+    path "cowpy-${input_file}"
 
-        output:
-        path "cowpy-${input_file}"
+    script:
+    """
+    cat ${input_file} | cowpy -c "${character}" > cowpy-${input_file}
+    """
+}
+```
 
-        script:
-        """
-        cat ${input_file} | cowpy -c "${character}" > cowpy-${input_file}
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 Bu, Nextflow'a _Docker kullanımı etkinleştirilmişse_, süreci yürütmek için burada belirtilen konteyner imajını kullanması gerektiğini söyler.
 
@@ -793,23 +777,23 @@ Docker'ı açıkça devre dışı bırakan tek satırlık bir kod içeren bir `n
 
 Şimdi, Docker'ı etkinleştirmek için bunu `true` olarak değiştirelim:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```console title="nextflow.config" linenums="1" hl_lines="1"
-    docker.enabled = true
-    ```
+```console {1} title="nextflow.config" showLineNumbers step="Önce"
+docker.enabled = false
+```
 
-=== "Önce"
+```console {1} title="nextflow.config" showLineNumbers step="Sonra"
+docker.enabled = true
+```
 
-    ```console title="nextflow.config" linenums="1" hl_lines="1"
-    docker.enabled = false
-    ```
+</CodeWalkthrough>
 
-!!! tip "İpucu"
-
-    `-with-docker <container>` parametresini kullanarak Docker yürütmesini komut satırından, çalıştırma bazında etkinleştirmek mümkündür.
-    Ancak bu, tüm iş akışı için yalnızca bir konteyner belirtmemize izin verirken, az önce gösterdiğimiz yaklaşım süreç başına farklı bir konteyner belirtmemize olanak tanır.
-    Bu, modülerlik, kod bakımı ve tekrarlanabilirlik için daha iyidir.
+:::tip[İpucu]
+`-with-docker <container>` parametresini kullanarak Docker yürütmesini komut satırından, çalıştırma bazında etkinleştirmek mümkündür.
+Ancak bu, tüm iş akışı için yalnızca bir konteyner belirtmemize izin verirken, az önce gösterdiğimiz yaklaşım süreç başına farklı bir konteyner belirtmemize olanak tanır.
+Bu, modülerlik, kod bakımı ve tekrarlanabilirlik için daha iyidir.
+:::
 
 #### 2.3.3. Docker etkinken iş akışını çalıştırın
 
@@ -817,89 +801,91 @@ Docker'ı açıkça devre dışı bırakan tek satırlık bir kod içeren bir `n
 
 ```bash
 nextflow run hello-containers.nf -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-containers.nf` [drunk_perlman] revision: abf1dccf7f
+
+executor >  local (1)
+[c9/f5c686] sayHello (3)       | 3 of 3, cached: 3 ✔
+[ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔
+[7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔
+[98/656c6c] cowpy              | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_containers/intermediates/Bonjour-output.txt
+    - hello_containers/intermediates/Hola-output.txt
+    - hello_containers/intermediates/Hello-output.txt
+  uppercased:
+    - hello_containers/intermediates/UPPER-Hola-output.txt
+    - hello_containers/intermediates/UPPER-Bonjour-output.txt
+    - hello_containers/intermediates/UPPER-Hello-output.txt
+  collected: hello_containers/intermediates/COLLECTED-batch-output.txt
+  batch_report: hello_containers/batch-report.txt
+  cowpy_art: hello_containers/cowpy-COLLECTED-batch-output.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-containers.nf` [drunk_perlman] revision: abf1dccf7f
-
-    executor >  local (1)
-    [c9/f5c686] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔
-    [7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔
-    [98/656c6c] cowpy              | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_containers/intermediates/Bonjour-output.txt
-        - hello_containers/intermediates/Hola-output.txt
-        - hello_containers/intermediates/Hello-output.txt
-      uppercased:
-        - hello_containers/intermediates/UPPER-Hola-output.txt
-        - hello_containers/intermediates/UPPER-Bonjour-output.txt
-        - hello_containers/intermediates/UPPER-Hello-output.txt
-      collected: hello_containers/intermediates/COLLECTED-batch-output.txt
-      batch_report: hello_containers/batch-report.txt
-      cowpy_art: hello_containers/cowpy-COLLECTED-batch-output.txt
-    ```
 
 Bu sefer gerçekten çalışıyor!
 Her zamanki gibi iş akışı çıktılarını ilgili sonuçlar dizininde bulabilirsiniz; ancak bu sefer biraz daha düzgün organize edilmiş: yalnızca rapor ve son çıktı üst düzeyde, tüm ara dosyalar bir alt dizine taşınmış.
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console
-    results/hello_containers/
-    ├── cowpy-COLLECTED-batch-output.txt
-    ├── intermediates
-    │   ├── Bonjour-output.txt
-    │   ├── COLLECTED-batch-output.txt
-    │   ├── Hello-output.txt
-    │   ├── Hola-output.txt
-    │   ├── UPPER-Bonjour-output.txt
-    │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
-    └── batch-report.txt
-    ```
+```console
+results/hello_containers/
+├── cowpy-COLLECTED-batch-output.txt
+├── intermediates
+│   ├── Bonjour-output.txt
+│   ├── COLLECTED-batch-output.txt
+│   ├── Hello-output.txt
+│   ├── Hola-output.txt
+│   ├── UPPER-Bonjour-output.txt
+│   ├── UPPER-Hello-output.txt
+│   └── UPPER-Hola-output.txt
+└── batch-report.txt
+```
+
+</details>
 
 Son ASCII sanat çıktısı `results/hello_containers/` dizininde, `cowpy-COLLECTED-batch-output.txt` adı altında.
 
-??? abstract "Dosya içeriği"
+<details class="abstract">
+<summary>Dosya içeriği</summary>
 
-    ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
-    _________
-    / HOLA    \
-    | HELLO   |
-    \ BONJOUR /
-    ---------
-      \                                  ,+*^^*+___+++_
-      \                           ,*^^^^              )
-        \                       _+*                     ^**+_
-        \                    +^       _ _++*+_+++_,         )
-                  _+^^*+_    (     ,+*^ ^          \+_        )
-                {       )  (    ,(    ,_+--+--,      ^)      ^\
-                { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
-              {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
-              ( /  (    (        ,___    ^*+_+* )   <    <      \
-              U _/     )    *--<  ) ^\-----++__)   )    )       )
-                (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
-            (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
-              *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
-              \             \_)^)_)) ))^^^^^^^^^^))^^^^)
-              (_             ^\__^^^^^^^^^^^^))^^^^^^^)
-                ^\___            ^\__^^^^^^))^^^^^^^^)\\
-                      ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
-                        ___) >____) >___   ^\_\_\_\_\_\_\)
-                        ^^^//\\_^^//\\_^       ^(\_\_\_\)
-                          ^^^ ^^ ^^^ ^
-    ```
+```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
+_________
+/ HOLA    \
+| HELLO   |
+\ BONJOUR /
+---------
+  \                                  ,+*^^*+___+++_
+  \                           ,*^^^^              )
+    \                       _+*                     ^**+_
+    \                    +^       _ _++*+_+++_,         )
+              _+^^*+_    (     ,+*^ ^          \+_        )
+            {       )  (    ,(    ,_+--+--,      ^)      ^\
+            { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
+          {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
+          ( /  (    (        ,___    ^*+_+* )   <    <      \
+          U _/     )    *--<  ) ^\-----++__)   )    )       )
+            (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
+          (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+        (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
+          *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
+          \             \_)^)_)) ))^^^^^^^^^^))^^^^)
+          (_             ^\__^^^^^^^^^^^^))^^^^^^^)
+            ^\___            ^\__^^^^^^))^^^^^^^^)\\
+                  ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
+                    ___) >____) >___   ^\_\_\_\_\_\_\)
+                    ^^^//\\_^^//\\_^       ^(\_\_\_\)
+                      ^^^ ^^ ^^^ ^
+```
+
+</details>
 
 İşte orada, istenildiği gibi selamlamaları söyleyen güzel hindimiz.
 
@@ -913,161 +899,164 @@ Bu, şu kısaltılmış dizin yoluna karşılık gelir: `work/98/656c6c`.
 
 Bu dizinde, Nextflow'un pipeline'ı yürütme sürecinde sizin adınıza çalıştırdığı tüm komutları içeren `.command.run` dosyasını bulacaksınız.
 
-??? abstract "Dosya içeriği"
+<details class="abstract">
+<summary>Dosya içeriği</summary>
 
-    ```console title="work/98/656c6c90cce1667c094d880f4b6dcc/.command.run"
-    #!/bin/bash
-    ### ---
-    ### name: 'cowpy'
-    ### container: 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-    ### outputs:
-    ### - 'cowpy-COLLECTED-batch-output.txt'
-    ### ...
-    set -e
+```console title="work/98/656c6c90cce1667c094d880f4b6dcc/.command.run"
+#!/bin/bash
+### ---
+### name: 'cowpy'
+### container: 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+### outputs:
+### - 'cowpy-COLLECTED-batch-output.txt'
+### ...
+set -e
+set -u
+NXF_DEBUG=${NXF_DEBUG:=0}; [[ $NXF_DEBUG > 1 ]] && set -x
+NXF_ENTRY=${1:-nxf_main}
+
+
+nxf_sleep() {
+  sleep $1 2>/dev/null || sleep 1;
+}
+
+nxf_date() {
+    local ts=$(date +%s%3N);
+    if [[ ${#ts} == 10 ]]; then echo ${ts}000
+    elif [[ $ts == *%3N ]]; then echo ${ts/\%3N/000}
+    elif [[ $ts == *3N ]]; then echo ${ts/3N/000}
+    elif [[ ${#ts} == 13 ]]; then echo $ts
+    else echo "Unexpected timestamp value: $ts"; exit 1
+    fi
+}
+
+nxf_env() {
+    echo '============= task environment ============='
+    env | sort | sed "s/\(.*\)AWS\(.*\)=\(.\{6\}\).*/\1AWS\2=\3xxxxxxxxxxxxx/"
+    echo '============= task output =================='
+}
+
+nxf_kill() {
+    declare -a children
+    while read P PP;do
+        children[$PP]+=" $P"
+    done < <(ps -e -o pid= -o ppid=)
+
+    kill_all() {
+        [[ $1 != $$ ]] && kill $1 2>/dev/null || true
+        for i in ${children[$1]:=}; do kill_all $i; done
+    }
+
+    kill_all $1
+}
+
+nxf_mktemp() {
+    local base=${1:-/tmp}
+    mkdir -p "$base"
+    if [[ $(uname) = Darwin ]]; then mktemp -d $base/nxf.XXXXXXXXXX
+    else TMPDIR="$base" mktemp -d -t nxf.XXXXXXXXXX
+    fi
+}
+
+nxf_fs_copy() {
+  local source=$1
+  local target=$2
+  local basedir=$(dirname $1)
+  mkdir -p $target/$basedir
+  cp -fRL $source $target/$basedir
+}
+
+nxf_fs_move() {
+  local source=$1
+  local target=$2
+  local basedir=$(dirname $1)
+  mkdir -p $target/$basedir
+  mv -f $source $target/$basedir
+}
+
+nxf_fs_rsync() {
+  rsync -rRl $1 $2
+}
+
+nxf_fs_rclone() {
+  rclone copyto $1 $2/$1
+}
+
+nxf_fs_fcp() {
+  fcp $1 $2/$1
+}
+
+on_exit() {
+    local last_err=$?
+    local exit_status=${nxf_main_ret:=0}
+    [[ ${exit_status} -eq 0 && ${nxf_unstage_ret:=0} -ne 0 ]] && exit_status=${nxf_unstage_ret:=0}
+    [[ ${exit_status} -eq 0 && ${last_err} -ne 0 ]] && exit_status=${last_err}
+    printf -- $exit_status > /workspaces/training/hello-nextflow/work/98/656c6c90cce1667c094d880f4b6dcc/.exitcode
+    set +u
+    docker rm $NXF_BOXID &>/dev/null || true
+    exit $exit_status
+}
+
+on_term() {
+    set +e
+    docker stop $NXF_BOXID
+}
+
+nxf_launch() {
+    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/98/656c6c90cce1667c094d880f4b6dcc/.command.sh
+}
+
+nxf_stage() {
+    true
+    # stage input files
+    rm -f COLLECTED-batch-output.txt
+    ln -s /workspaces/training/hello-nextflow/work/7f/f435e3f2cf95979b5f3d7647ae6696/COLLECTED-batch-output.txt COLLECTED-batch-output.txt
+}
+
+nxf_unstage_outputs() {
+    true
+}
+
+nxf_unstage_controls() {
+    true
+}
+
+nxf_unstage() {
+    if [[ ${nxf_main_ret:=0} == 0 ]]; then
+        (set -e -o pipefail; (nxf_unstage_outputs | tee -a .command.out) 3>&1 1>&2 2>&3 | tee -a .command.err)
+        nxf_unstage_ret=$?
+    fi
+    nxf_unstage_controls
+}
+
+nxf_main() {
+    trap on_exit EXIT
+    trap on_term TERM INT USR2
+    trap '' USR1
+
+    [[ "${NXF_CHDIR:-}" ]] && cd "$NXF_CHDIR"
+    export NXF_BOXID="nxf-$(dd bs=18 count=1 if=/dev/urandom 2>/dev/null | base64 | tr +/ 0A | tr -d '\r\n')"
+    NXF_SCRATCH=''
+    [[ $NXF_DEBUG > 0 ]] && nxf_env
+    touch /workspaces/training/hello-nextflow/work/98/656c6c90cce1667c094d880f4b6dcc/.command.begin
+    set +u
     set -u
-    NXF_DEBUG=${NXF_DEBUG:=0}; [[ $NXF_DEBUG > 1 ]] && set -x
-    NXF_ENTRY=${1:-nxf_main}
+    [[ $NXF_SCRATCH ]] && cd $NXF_SCRATCH
+    export NXF_TASK_WORKDIR="$PWD"
+    nxf_stage
 
+    set +e
+    (set -o pipefail; (nxf_launch | tee .command.out) 3>&1 1>&2 2>&3 | tee .command.err) &
+    pid=$!
+    wait $pid || nxf_main_ret=$?
+    nxf_unstage
+}
 
-    nxf_sleep() {
-      sleep $1 2>/dev/null || sleep 1;
-    }
+$NXF_ENTRY
 
-    nxf_date() {
-        local ts=$(date +%s%3N);
-        if [[ ${#ts} == 10 ]]; then echo ${ts}000
-        elif [[ $ts == *%3N ]]; then echo ${ts/\%3N/000}
-        elif [[ $ts == *3N ]]; then echo ${ts/3N/000}
-        elif [[ ${#ts} == 13 ]]; then echo $ts
-        else echo "Unexpected timestamp value: $ts"; exit 1
-        fi
-    }
+```
 
-    nxf_env() {
-        echo '============= task environment ============='
-        env | sort | sed "s/\(.*\)AWS\(.*\)=\(.\{6\}\).*/\1AWS\2=\3xxxxxxxxxxxxx/"
-        echo '============= task output =================='
-    }
-
-    nxf_kill() {
-        declare -a children
-        while read P PP;do
-            children[$PP]+=" $P"
-        done < <(ps -e -o pid= -o ppid=)
-
-        kill_all() {
-            [[ $1 != $$ ]] && kill $1 2>/dev/null || true
-            for i in ${children[$1]:=}; do kill_all $i; done
-        }
-
-        kill_all $1
-    }
-
-    nxf_mktemp() {
-        local base=${1:-/tmp}
-        mkdir -p "$base"
-        if [[ $(uname) = Darwin ]]; then mktemp -d $base/nxf.XXXXXXXXXX
-        else TMPDIR="$base" mktemp -d -t nxf.XXXXXXXXXX
-        fi
-    }
-
-    nxf_fs_copy() {
-      local source=$1
-      local target=$2
-      local basedir=$(dirname $1)
-      mkdir -p $target/$basedir
-      cp -fRL $source $target/$basedir
-    }
-
-    nxf_fs_move() {
-      local source=$1
-      local target=$2
-      local basedir=$(dirname $1)
-      mkdir -p $target/$basedir
-      mv -f $source $target/$basedir
-    }
-
-    nxf_fs_rsync() {
-      rsync -rRl $1 $2
-    }
-
-    nxf_fs_rclone() {
-      rclone copyto $1 $2/$1
-    }
-
-    nxf_fs_fcp() {
-      fcp $1 $2/$1
-    }
-
-    on_exit() {
-        local last_err=$?
-        local exit_status=${nxf_main_ret:=0}
-        [[ ${exit_status} -eq 0 && ${nxf_unstage_ret:=0} -ne 0 ]] && exit_status=${nxf_unstage_ret:=0}
-        [[ ${exit_status} -eq 0 && ${last_err} -ne 0 ]] && exit_status=${last_err}
-        printf -- $exit_status > /workspaces/training/hello-nextflow/work/98/656c6c90cce1667c094d880f4b6dcc/.exitcode
-        set +u
-        docker rm $NXF_BOXID &>/dev/null || true
-        exit $exit_status
-    }
-
-    on_term() {
-        set +e
-        docker stop $NXF_BOXID
-    }
-
-    nxf_launch() {
-        docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/98/656c6c90cce1667c094d880f4b6dcc/.command.sh
-    }
-
-    nxf_stage() {
-        true
-        # stage input files
-        rm -f COLLECTED-batch-output.txt
-        ln -s /workspaces/training/hello-nextflow/work/7f/f435e3f2cf95979b5f3d7647ae6696/COLLECTED-batch-output.txt COLLECTED-batch-output.txt
-    }
-
-    nxf_unstage_outputs() {
-        true
-    }
-
-    nxf_unstage_controls() {
-        true
-    }
-
-    nxf_unstage() {
-        if [[ ${nxf_main_ret:=0} == 0 ]]; then
-            (set -e -o pipefail; (nxf_unstage_outputs | tee -a .command.out) 3>&1 1>&2 2>&3 | tee -a .command.err)
-            nxf_unstage_ret=$?
-        fi
-        nxf_unstage_controls
-    }
-
-    nxf_main() {
-        trap on_exit EXIT
-        trap on_term TERM INT USR2
-        trap '' USR1
-
-        [[ "${NXF_CHDIR:-}" ]] && cd "$NXF_CHDIR"
-        export NXF_BOXID="nxf-$(dd bs=18 count=1 if=/dev/urandom 2>/dev/null | base64 | tr +/ 0A | tr -d '\r\n')"
-        NXF_SCRATCH=''
-        [[ $NXF_DEBUG > 0 ]] && nxf_env
-        touch /workspaces/training/hello-nextflow/work/98/656c6c90cce1667c094d880f4b6dcc/.command.begin
-        set +u
-        set -u
-        [[ $NXF_SCRATCH ]] && cd $NXF_SCRATCH
-        export NXF_TASK_WORKDIR="$PWD"
-        nxf_stage
-
-        set +e
-        (set -o pipefail; (nxf_launch | tee .command.out) 3>&1 1>&2 2>&3 | tee .command.err) &
-        pid=$!
-        wait $pid || nxf_main_ret=$?
-        nxf_unstage
-    }
-
-    $NXF_ENTRY
-
-    ```
+</details>
 
 Bu dosyada `nxf_launch`'ı ararsanız, şöyle bir şey görmelisiniz:
 
@@ -1112,7 +1101,7 @@ Nextflow'da süreçleri çalıştırmak için konteynerleri nasıl kullanacağı
 
 Bir mola verin!
 
-Hazır olduğunuzda, pipeline'ınızın yürütülmesini altyapınıza uyacak şekilde yapılandırmayı ve girdiler ile parametrelerin yapılandırmasını yönetmeyi öğrenmek için [**Bölüm 6: Merhaba Yapılandırma**](./06_hello_config.md)'ya geçin.
+Hazır olduğunuzda, pipeline'ınızın yürütülmesini altyapınıza uyacak şekilde yapılandırmayı ve girdiler ile parametrelerin yapılandırmasını yönetmeyi öğrenmek için [**Bölüm 6: Merhaba Yapılandırma**](./06_hello_config.mdx)'ya geçin.
 
 Bu en son bölüm ve ardından bu kursla işiniz bitmiş olacak!
 
@@ -1120,68 +1109,82 @@ Bu en son bölüm ve ardından bu kursla işiniz bitmiş olacak!
 
 ## Quiz
 
-<quiz>
+<Quiz id="quiz-1">
+
 Konteyner nedir?
 - [ ] Bir sanal makine türü
 - [ ] Bir dosya sıkıştırma formatı
 - [x] Bir uygulamayı çalıştırmak için gereken her şeyi içeren hafif, bağımsız çalıştırılabilir bir birim
 - [ ] Bir ağ protokolü
-</quiz>
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-2">
+
 Konteyner imajı ile konteyner örneği arasındaki fark nedir?
 - [ ] Aynı şeyler
 - [x] İmaj bir şablondur; örnek o imajdan oluşturulan çalışan bir konteynerdir
 - [ ] Örnek bir şablondur; imaj çalışan bir konteynerdir
 - [ ] İmajlar Docker içindir; örnekler Singularity içindir
-</quiz>
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-3">
+
 `docker run` komutunda `-v` bayrağı ne yapar?
 - [ ] Ayrıntılı çıktıyı etkinleştirir
 - [ ] Konteyneri doğrular
 - [x] Ana sistemden konteynere bir hacim bağlar
 - [ ] Konteynerin sürümünü belirtir
 
-Daha fazla bilgi: [1.3.4. Verileri konteynere bağlayın](#134-mount-data-into-the-container)
-</quiz>
+Daha fazla bilgi: [1.3.4. Verileri konteynere bağlayın](#134-verileri-konteynere-bağlayın)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-4">
+
 Konteynerler kullanırken neden hacimleri bağlamanız gerekiyor?
 - [ ] Konteyner performansını artırmak için
 - [ ] Disk alanından tasarruf etmek için
 - [x] Konteynerler varsayılan olarak ana dosya sisteminden izole olduğu için
 - [ ] Ağı etkinleştirmek için
 
-Daha fazla bilgi: [1.3.4. Verileri konteynere bağlayın](#134-mount-data-into-the-container)
-</quiz>
+Daha fazla bilgi: [1.3.4. Verileri konteynere bağlayın](#134-verileri-konteynere-bağlayın)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-5">
+
 Bir Nextflow süreci için konteyneri nasıl belirtirsiniz?
 - [ ] `docker 'container-uri'`
 - [ ] `image 'container-uri'`
 - [x] `container 'container-uri'`
 - [ ] `use 'container-uri'`
 
-Daha fazla bilgi: [2.3.1. cowpy için bir konteyner belirtin](#231-specify-a-container-for-cowpy)
-</quiz>
+Daha fazla bilgi: [2.3.1. cowpy için bir konteyner belirtin](#231-cowpy-için-bir-konteyner-belirtin)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-6">
+
 İş akışınız için Docker'ı hangi `nextflow.config` ayarı etkinleştirir?
-- [ ] `#!groovy process.docker = true`
-- [x] `#!groovy docker.enabled = true`
-- [ ] `#!groovy container.engine = 'docker'`
-- [ ] `#!groovy docker.activate = true`
+- [ ] `process.docker = true{:nextflow}`
+- [x] `docker.enabled = true{:nextflow}`
+- [ ] `container.engine = 'docker'{:nextflow}`
+- [ ] `docker.activate = true{:nextflow}`
 
-Daha fazla bilgi: [2.3.2. `nextflow.config` dosyası aracılığıyla Docker kullanımını etkinleştirin](#232-enable-use-of-docker-via-the-nextflowconfig-file)
-</quiz>
+Daha fazla bilgi: [2.3.2. `nextflow.config` dosyası aracılığıyla Docker kullanımını etkinleştirin](#232-nextflowconfig-dosyası-aracılığıyla-docker-kullanımını-etkinleştirin)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-7">
+
 Bir süreci konteyner içinde çalıştırırken Nextflow otomatik olarak neyi yönetir? (Uygulanabilen tümünü seçin)
 - [x] Gerekirse konteyner imajını çekmek
 - [x] Work dizinini bağlamak
 - [x] Süreç betiğini konteyner içinde çalıştırmak
 - [x] Yürütme sonrası konteyner örneğini temizlemek
 
-Daha fazla bilgi: [2.3.4. Nextflow'un konteynerleştirilmiş görevi nasıl başlattığını inceleyin](#234-inspect-how-nextflow-launched-the-containerized-task)
-</quiz>
+Daha fazla bilgi: [2.3.4. Nextflow'un konteynerleştirilmiş görevi nasıl başlattığını inceleyin](#234-nextflowun-konteynerleştirilmiş-görevi-nasıl-başlattığını-inceleyin)
+
+</Quiz>

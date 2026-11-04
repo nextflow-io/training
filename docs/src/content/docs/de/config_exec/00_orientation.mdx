@@ -1,10 +1,13 @@
-# Erste Schritte
+---
+title: Erste Schritte
+description: 'Configure Execution: Erste Schritte'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Trainingsumgebung starten
 
-Um die von uns auf GitHub Codespaces bereitgestellte Umgebung zu nutzen, klicke auf die Schaltfläche „Open in GitHub Codespaces" unten. Weitere Optionen findest du unter [Umgebungsoptionen](../envsetup/index.md).
+Um die von uns auf GitHub Codespaces bereitgestellte Umgebung zu nutzen, klicke auf die Schaltfläche „Open in GitHub Codespaces" unten. Weitere Optionen findest du unter [Umgebungsoptionen](../envsetup/index.mdx).
 
 Wir empfehlen, die Trainingsumgebung in einem neuen Browser-Tab oder -Fenster zu öffnen (je nach Gerät per Rechtsklick, Strg+Klick oder Cmd+Klick), damit du weiterlesen kannst, während die Umgebung lädt.
 Du solltest diese Anleitung parallel geöffnet halten, um den Kurs durchzuarbeiten.
@@ -18,12 +21,12 @@ Diese Trainingsumgebung enthält die gesamte Software, den Code und die Daten, d
 Der Codespace ist mit einer VSCode-Oberfläche eingerichtet, die einen Datei-Explorer, einen Code-Editor und ein Terminal enthält.
 Alle Anweisungen im Kurs (z. B. „Datei öffnen", „Code bearbeiten" oder „diesen Befehl ausführen") beziehen sich auf diese drei Teile der VSCode-Oberfläche, sofern nicht anders angegeben.
 
-Wenn du diesen Kurs eigenständig durcharbeitest, mach dich bitte mit den [Grundlagen der Umgebung](../envsetup/01_setup.md) für weitere Details vertraut.
+Wenn du diesen Kurs eigenständig durcharbeitest, mach dich bitte mit den [Grundlagen der Umgebung](../envsetup/01_setup.mdx) für weitere Details vertraut.
 
 ### Versionsanforderungen
 
 Dieser Kurs erfordert Nextflow 25.10.2 oder höher, mit aktiviertem v2-Syntax-Parser (Standard ab 25.10+).
-Wenn du eine lokale oder benutzerdefinierte Umgebung verwendest, stelle sicher, dass du die richtigen Einstellungen verwendest, wie [hier](../info/nxf_versions.md) dokumentiert.
+Wenn du eine lokale oder benutzerdefinierte Umgebung verwendest, stelle sicher, dass du die richtigen Einstellungen verwendest, wie [hier](../info/nxf_versions.mdx) dokumentiert.
 
 ## Bereit zum Arbeiten
 
@@ -44,13 +47,13 @@ Dann weise VSCode an, sich auf dieses Verzeichnis zu fokussieren, damit nur die 
 code .
 ```
 
-!!! tip "Tipp"
+:::tip[Tipp]
+Falls du dieses Verzeichnis aus irgendeinem Grund verlässt (z. B. wenn dein Codespace in den Ruhezustand wechselt), kannst du jederzeit den vollständigen Pfad verwenden, um dorthin zurückzukehren – vorausgesetzt, du arbeitest in der GitHub Codespaces-Trainingsumgebung:
 
-    Falls du dieses Verzeichnis aus irgendeinem Grund verlässt (z. B. wenn dein Codespace in den Ruhezustand wechselt), kannst du jederzeit den vollständigen Pfad verwenden, um dorthin zurückzukehren – vorausgesetzt, du arbeitest in der GitHub Codespaces-Trainingsumgebung:
-
-    ```bash
-    cd /workspaces/training/config-exec
-    ```
+```bash
+cd /workspaces/training/config-exec
+```
+:::
 
 ### Bereitgestellte Materialien erkunden
 
@@ -61,22 +64,25 @@ Führe folgenden Befehl im Terminal aus, um die vollständige Struktur anzuzeige
 tree . -L 2
 ```
 
-??? abstract "Verzeichnisinhalt"
+<details class="abstract">
+<summary>Verzeichnisinhalt</summary>
 
-    ```console
-    .
-    ├── data
-    │   └── greetings.csv
-    ├── main.nf
-    ├── modules
-    │   ├── collectGreetings.nf
-    │   ├── convertToUpper.nf
-    │   ├── cowpy.nf
-    │   └── sayHello.nf
-    └── nextflow.config
-    ```
+```console
+.
+├── data
+│   └── greetings.csv
+├── main.nf
+├── modules
+│   ├── collectGreetings.nf
+│   ├── convertToUpper.nf
+│   ├── cowpy.nf
+│   └── sayHello.nf
+└── nextflow.config
+```
 
-Die Dateien **`main.nf`** und **`modules/`** sind dieselbe mehrstufige Pipeline aus [Nextflow Run](../nextflow_run/index.md), und die Datei **`nextflow.config`** ist dieselbe Konfiguration, die du dort bereits gesehen hast.
+</details>
+
+Die Dateien **`main.nf`** und **`modules/`** sind dieselbe mehrstufige Pipeline aus [Nextflow Run](../nextflow_run/index.mdx), und die Datei **`nextflow.config`** ist dieselbe Konfiguration, die du dort bereits gesehen hast.
 Du wirst beide im Laufe dieser Übungen erweitern.
 
 Das Verzeichnis **`data/`** enthält die CSV-Eingabedatei, aus der die Pipeline liest.
@@ -91,4 +97,4 @@ Bereit zum Einsteigen?
 
 Wenn du alle Punkte abhaken kannst, kann es losgehen.
 
-**Um zu [Teil 1: An deine Rechenumgebung anpassen](./01_packaging_and_execution.md) zu gelangen, klicke auf den Pfeil in der unteren rechten Ecke dieser Seite.**
+**Um zu [Teil 1: An deine Rechenumgebung anpassen](./01_packaging_and_execution.mdx) zu gelangen, klicke auf den Pfeil in der unteren rechten Ecke dieser Seite.**

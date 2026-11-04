@@ -1,6 +1,9 @@
-# Bölüm 3: Girdileri düzenleme
+---
+title: 'Bölüm 3: Girdileri düzenleme'
+description: Bölüm 2'de molkart'ı komut satırında birden fazla parametre ile çalıştırdık.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bölüm 2'de molkart'ı komut satırında birden fazla parametre ile çalıştırdık.
 Şimdi girdileri yönetmek için iki daha iyi yaklaşım öğreneceğiz: **parametre dosyaları** ve **örnek tabloları**.
@@ -122,9 +125,9 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! Warning "Uyarı"
-
-    Örnek tablosundaki yolların, örnek tablosunun bulunduğu yere değil, Nextflow'u **çalıştırdığınız** yere göre göreceli olduğuna dikkat edin.
+:::caution[Uyarı]
+Örnek tablosundaki yolların, örnek tablosunun bulunduğu yere değil, Nextflow'u **çalıştırdığınız** yere göre göreceli olduğuna dikkat edin.
+:::
 
 Son olarak, yerel dosya yollarına sahip örnek tablosuyla nf-core/molkart'ı bir kez daha çalıştıralım:
 

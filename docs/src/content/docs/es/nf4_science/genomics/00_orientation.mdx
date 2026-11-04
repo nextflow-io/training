@@ -1,10 +1,13 @@
-# Primeros pasos
+---
+title: Primeros pasos
+description: 'Nextflow para Genómica: Primeros pasos'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Iniciar un entorno de capacitación
 
-Para usar el entorno preconfigurado que proporcionamos en GitHub Codespaces, haga clic en el botón "Open in GitHub Codespaces" a continuación. Para otras opciones, consulte [Opciones de entorno](../../envsetup/index.md).
+Para usar el entorno preconfigurado que proporcionamos en GitHub Codespaces, haga clic en el botón "Open in GitHub Codespaces" a continuación. Para otras opciones, consulte [Opciones de entorno](../../envsetup/index.mdx).
 
 Recomendamos abrir el entorno de capacitación en una nueva pestaña o ventana del navegador (use clic derecho, ctrl-clic o cmd-clic según su equipo) para que pueda leer mientras se carga el entorno.
 Necesitará mantener estas instrucciones abiertas en paralelo para trabajar en el curso.
@@ -18,12 +21,12 @@ Este entorno de capacitación contiene todo el software, código y datos necesar
 El codespace está configurado con una interfaz VSCode, que incluye un explorador de archivos, un editor de código y un terminal shell.
 Todas las instrucciones dadas durante el curso (por ejemplo, 'abrir el archivo', 'editar el código' o 'ejecutar este comando') se refieren a esas tres partes de la interfaz de VScode a menos que se especifique lo contrario.
 
-Si está trabajando en este curso por su cuenta, por favor familiarícese con los [conceptos básicos del entorno](../../envsetup/01_setup.md) para más detalles.
+Si está trabajando en este curso por su cuenta, por favor familiarícese con los [conceptos básicos del entorno](../../envsetup/01_setup.mdx) para más detalles.
 
 ### Requisitos de versión
 
 Esta capacitación está diseñada para Nextflow 25.10.2 o posterior **con el analizador de sintaxis v2 HABILITADO**.
-Si está usando un entorno local o personalizado, por favor asegúrese de estar usando la configuración correcta como está documentado [aquí](../../info/nxf_versions.md).
+Si está usando un entorno local o personalizado, por favor asegúrese de estar usando la configuración correcta como está documentado [aquí](../../info/nxf_versions.mdx).
 
 ## Prepárese para trabajar
 
@@ -45,13 +48,13 @@ Puede configurar VSCode para enfocarse en este directorio, de modo que solo los 
 code .
 ```
 
-!!! tip "Consejo"
+:::tip[Consejo]
+Si por cualquier razón sale de este directorio (por ejemplo, su codespace se suspende), siempre puede usar la ruta completa para regresar a él, asumiendo que está ejecutando esto dentro del entorno de capacitación de Github Codespaces:
 
-    Si por cualquier razón sale de este directorio (por ejemplo, su codespace se suspende), siempre puede usar la ruta completa para regresar a él, asumiendo que está ejecutando esto dentro del entorno de capacitación de Github Codespaces:
-
-    ```bash
-    cd /workspaces/training/nf4-science/genomics
-    ```
+```bash
+cd /workspaces/training/nf4-science/genomics
+```
+:::
 
 Ahora echemos un vistazo a los contenidos.
 
@@ -68,26 +71,29 @@ Aquí generamos una tabla de contenidos hasta el segundo nivel:
 tree . -L 2
 ```
 
-??? abstract "Contenido del directorio"
+<details class="abstract">
+<summary>Contenido del directorio</summary>
 
-    ```console
-    .
-    ├── data
-    │   ├── bam
-    │   ├── ref
-    │   └── samplesheet.csv
-    ├── genomics.nf
-    ├── modules
-    │   ├── gatk_haplotypecaller.nf
-    │   ├── gatk_jointgenotyping.nf
-    │   └── samtools_index.nf
-    ├── nextflow.config
-    └── solutions
-        ├── part2
-        └── part3
+```console
+.
+├── data
+│   ├── bam
+│   ├── ref
+│   └── samplesheet.csv
+├── genomics.nf
+├── modules
+│   ├── gatk_haplotypecaller.nf
+│   ├── gatk_jointgenotyping.nf
+│   └── samtools_index.nf
+├── nextflow.config
+└── solutions
+    ├── part2
+    └── part3
 
-    7 directories, 6 files
-    ```
+7 directories, 6 files
+```
+
+</details>
 
 Haga clic en el cuadro de color para expandir la sección y ver su contenido.
 Usamos secciones plegables como esta para mostrar la salida esperada de comandos, así como el contenido de directorios y archivos de forma concisa.
@@ -115,4 +121,4 @@ Usamos secciones plegables como esta para mostrar la salida esperada de comandos
 
 Si puede marcar todas las casillas, está listo para comenzar.
 
-**Para continuar a la [Parte 1: Descripción general del método](./01_method.md), haga clic en la flecha en la esquina inferior derecha de esta página.**
+**Para continuar a la [Parte 1: Descripción general del método](./01_method.mdx), haga clic en la flecha en la esquina inferior derecha de esta página.**

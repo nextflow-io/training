@@ -1,30 +1,36 @@
-# Part 3: Multi-sample paired-end implementation
+---
+title: 'Part 3: Multi-sample paired-end implementation'
+description: Previously, you built a per-sample variant calling pipeline that processed each sample's data independently.
+---
 
 Previously, you built a per-sample variant calling pipeline that processed each sample's data independently.
 In this part of the course, we're going to take our simple workflow to the next level by turning it into a powerful batch automation tool to handle arbitrary numbers of samples.
 And while we're at it, we're also going to update it to expect paired-end data, which is more common in newer studies.
 
-??? info "How to begin from this section"
+<details class="info">
+<summary>How to begin from this section</summary>
 
-    This section of the course assumes you have completed [Part 1: Method Overview](./01_method.md), [Part 2: Single-sample implementation](./02_single-sample.md) and have a working `rnaseq.nf` pipeline with filled-in module files.
+This section of the course assumes you have completed [Part 1: Method Overview](./01_method.mdx), [Part 2: Single-sample implementation](./02_single-sample.mdx) and have a working `rnaseq.nf` pipeline with filled-in module files.
 
-    If you did not complete Part 2 or want to start fresh for this part, you can use the Part 2 solution as your starting point.
-    Run these commands from inside the `nf4-science/rnaseq/` directory:
+If you did not complete Part 2 or want to start fresh for this part, you can use the Part 2 solution as your starting point.
+Run these commands from inside the `nf4-science/rnaseq/` directory:
 
-    ```bash
-    cp solutions/part2/rnaseq-2.nf rnaseq.nf
-    cp solutions/part2/modules/fastqc.nf modules/
-    cp solutions/part2/modules/trim_galore.nf modules/
-    cp solutions/part2/modules/hisat2_align.nf modules/
-    cp solutions/part2/nextflow.config .
-    ```
+```bash
+cp solutions/part2/rnaseq-2.nf rnaseq.nf
+cp solutions/part2/modules/fastqc.nf modules/
+cp solutions/part2/modules/trim_galore.nf modules/
+cp solutions/part2/modules/hisat2_align.nf modules/
+cp solutions/part2/nextflow.config .
+```
 
-    This gives you a complete single-sample processing workflow.
-    You can test that it runs successfully:
+This gives you a complete single-sample processing workflow.
+You can test that it runs successfully:
 
-    ```bash
-    nextflow run rnaseq.nf -profile test
-    ```
+```bash
+nextflow run rnaseq.nf -profile test
+```
+
+</details>
 
 ## Assignment
 
@@ -34,11 +40,9 @@ In this part of the course, we're going to extend the workflow to do the followi
 2. Run per-sample QC, trimming, and alignment on all samples in parallel
 3. Aggregate all QC reports into a comprehensive MultiQC report
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-wf-03.svg"
-</figure>
+![](./img/rnaseq-wf-03.excalidraw.svg)
 
-This automates the steps from the second section of [Part 1: Method overview](./01_method.md#2-multi-sample-qc-aggregation), where you ran these commands manually in their containers.
+This automates the steps from the second section of [Part 1: Method overview](./01_method.mdx#2-multi-sample-qc-aggregation), where you ran these commands manually in their containers.
 
 ## Lesson plan
 
@@ -51,12 +55,12 @@ We've broken this down into three stages:
 3. **Switch to paired-end RNAseq data.**
    This covers adapting processes for paired-end inputs (using tuples), creating paired-end modules, and setting up a separate test profile.
 
-This implements the method described in [Part 1: Method Overview](./01_method.md) (second section covering the multi-sample use case) and builds directly on the workflow produced by Part 2.
+This implements the method described in [Part 1: Method Overview](./01_method.mdx) (second section covering the multi-sample use case) and builds directly on the workflow produced by Part 2.
 
-!!! tip
-
-    Make sure you're in the correct working directory:
-    `cd /workspaces/training/nf4-science/rnaseq`
+:::tip
+Make sure you're in the correct working directory:
+`cd /workspaces/training/nf4-science/rnaseq`
+:::
 
 ---
 
@@ -66,7 +70,7 @@ To run on multiple samples, we need to change how we manage the input: instead o
 
 We provide a CSV file containing sample IDs and FASTQ file paths in the `data/` directory.
 
-```csv title="data/single-end.csv" linenums="1"
+```csv title="data/single-end.csv" showLineNumbers
 sample_id,fastq_path
 ENCSR000COQ1,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000COQ1_1.fastq.gz
 ENCSR000COQ2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000COQ2_1.fastq.gz
@@ -80,40 +84,40 @@ This CSV file includes a header line that names the columns.
 
 Note that this is still single-end read data.
 
-!!! warning
-
-    The file paths in the CSV are absolute paths that must match your environment.
-    If you are not running this in the training environment we provide, you will need to update the paths to match your system.
+:::caution
+The file paths in the CSV are absolute paths that must match your environment.
+If you are not running this in the training environment we provide, you will need to update the paths to match your system.
+:::
 
 ### 1.1. Change the primary input to a CSV of file paths in the test profile
 
 First, we need to update the test profile in `nextflow.config` to provide the CSV file path instead of the single FASTQ path.
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="5"
-    docker.enabled = true
+```nextflow title="nextflow.config" showLineNumbers step="Before"
+docker.enabled = true
 
-    profiles {
-        test {
-            params.input = "${projectDir}/data/single-end.csv"
-            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
-        }
+profiles {
+    test {
+        params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
+        params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
     }
-    ```
+}
+```
 
-=== "Before"
+```nextflow {5} title="nextflow.config" showLineNumbers step="After"
+docker.enabled = true
 
-    ```groovy title="nextflow.config" linenums="1"
-    docker.enabled = true
-
-    profiles {
-        test {
-            params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
-            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
-        }
+profiles {
+    test {
+        params.input = "${projectDir}/data/single-end.csv"
+        params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 Next, we'll need to update the channel creation to read from this CSV.
 
@@ -121,32 +125,32 @@ Next, we'll need to update the channel creation to read from this CSV.
 
 We need to load the contents of the file into the channel instead of just the file path itself.
 
-We can do this using the same pattern we used in [Part 2 of Hello Nextflow](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file): applying the [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) operator to parse the file, then a `map` operation to extract the FASTQ file path from each row.
+We can do this using the same pattern we used in [Part 2 of Hello Nextflow](../../hello_nextflow/02_hello_channels.mdx#42-use-the-splitcsv-operator-to-parse-the-file): applying the [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) operator to parse the file, then a `map` operation to extract the FASTQ file path from each row.
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="19" hl_lines="4-7"
-    workflow {
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=19 step="Before"
+workflow {
 
-        main:
-        // Create input channel from the contents of a CSV file
-        read_ch = channel.fromPath(params.input)
-            .splitCsv(header: true)
-            .map { row -> file(row.fastq_path) }
-    ```
+    main:
+    // Create input channel from a file path
+    read_ch = channel.fromPath(params.input)
+```
 
-=== "Before"
+```nextflow {4-7} title="rnaseq.nf" showLineNumbers startLineNumber=19 step="After"
+workflow {
 
-    ```groovy title="rnaseq.nf" linenums="19"
-    workflow {
+    main:
+    // Create input channel from the contents of a CSV file
+    read_ch = channel.fromPath(params.input)
+        .splitCsv(header: true)
+        .map { row -> file(row.fastq_path) }
+```
 
-        main:
-        // Create input channel from a file path
-        read_ch = channel.fromPath(params.input)
-    ```
+</CodeWalkthrough>
 
-One thing that is new compared to what you encountered in the Hello Nextflow course is that this CSV has a header line, so we add `#!groovy header: true` to the `splitCsv()` call.
-That allows us to reference columns by name in the `map` operation: `#!groovy row.fastq_path` extracts the file path from the `fastq_path` column of each row.
+One thing that is new compared to what you encountered in the Hello Nextflow course is that this CSV has a header line, so we add `header: true{:nextflow}` to the `splitCsv()` call.
+That allows us to reference columns by name in the `map` operation: `row.fastq_path{:nextflow}` extracts the file path from the `fastq_path` column of each row.
 
 The input handling is updated and the workflow is ready to test.
 
@@ -154,82 +158,78 @@ The input handling is updated and the workflow is ready to test.
 
 The workflow now reads sample information from a CSV file and processes all samples in parallel.
 
-```bash
+```bash runnable.outputDelay=0
 nextflow run rnaseq.nf -profile test
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `rnaseq.nf` [scruffy_wescoff] revision: 10f8b6f49d
+
+executor >  local (18)
+[30/659733] FASTQC (4)       | 6 of 6 ✔
+[71/0eda42] TRIM_GALORE (1)  | 6 of 6 ✔
+[7e/54ae09] HISAT2_ALIGN (6) | 6 of 6 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/rnaseq/results
+
+  fastqc_zip:
+    - fastqc/ENCSR000COQ1_1_fastqc.zip
+    - fastqc/ENCSR000COQ2_1_fastqc.zip
+    - fastqc/ENCSR000COR1_1_fastqc.zip
+    - fastqc/ENCSR000COR2_1_fastqc.zip
+    - fastqc/ENCSR000CPO1_1_fastqc.zip
+    - fastqc/ENCSR000CPO2_1_fastqc.zip
+
+  fastqc_html:
+    - fastqc/ENCSR000COQ1_1_fastqc.html
+    - fastqc/ENCSR000COQ2_1_fastqc.html
+    - fastqc/ENCSR000COR1_1_fastqc.html
+    - fastqc/ENCSR000COR2_1_fastqc.html
+    - fastqc/ENCSR000CPO1_1_fastqc.html
+    - fastqc/ENCSR000CPO2_1_fastqc.html
+
+  trimmed_reads:
+    - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+    - trimming/ENCSR000COQ2_1_trimmed.fq.gz
+    - trimming/ENCSR000COR1_1_trimmed.fq.gz
+    - trimming/ENCSR000COR2_1_trimmed.fq.gz
+    - trimming/ENCSR000CPO1_1_trimmed.fq.gz
+    - trimming/ENCSR000CPO2_1_trimmed.fq.gz
+
+  trimming_reports:
+    - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt
+
+  trimming_fastqc:
+    - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000COQ2_1_trimmed_fastqc.html, trimming/ENCSR000COQ2_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000COR1_1_trimmed_fastqc.html, trimming/ENCSR000COR1_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000COR2_1_trimmed_fastqc.html, trimming/ENCSR000COR2_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000CPO1_1_trimmed_fastqc.html, trimming/ENCSR000CPO1_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000CPO2_1_trimmed_fastqc.html, trimming/ENCSR000CPO2_1_trimmed_fastqc.zip]
+
+  bam:
+    - align/ENCSR000COQ1_1_trimmed.bam
+    - align/ENCSR000COQ2_1_trimmed.bam
+    - align/ENCSR000COR1_1_trimmed.bam
+    - align/ENCSR000COR2_1_trimmed.bam
+    - align/ENCSR000CPO1_1_trimmed.bam
+    - align/ENCSR000CPO2_1_trimmed.bam
+
+  align_log:
+    - align/ENCSR000COQ1_1_trimmed.hisat2.log
+    - align/ENCSR000COQ2_1_trimmed.hisat2.log
+    - align/ENCSR000COR1_1_trimmed.hisat2.log
+    - align/ENCSR000COR2_1_trimmed.hisat2.log
+    - align/ENCSR000CPO1_1_trimmed.hisat2.log
+    - align/ENCSR000CPO2_1_trimmed.hisat2.log
 ```
-
-??? success "Command output"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `rnaseq.nf` [scruffy_wescoff] revision: 10f8b6f49d
-
-    executor >  local (18)
-    [30/659733] FASTQC (4)       | 6 of 6 ✔
-    [71/0eda42] TRIM_GALORE (1)  | 6 of 6 ✔
-    [7e/54ae09] HISAT2_ALIGN (6) | 6 of 6 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/rnaseq/results
-
-      fastqc_zip:
-        - fastqc/ENCSR000COQ1_1_fastqc.zip
-        - fastqc/ENCSR000COQ2_1_fastqc.zip
-        - fastqc/ENCSR000COR1_1_fastqc.zip
-        - fastqc/ENCSR000COR2_1_fastqc.zip
-        - fastqc/ENCSR000CPO1_1_fastqc.zip
-        - fastqc/ENCSR000CPO2_1_fastqc.zip
-
-      fastqc_html:
-        - fastqc/ENCSR000COQ1_1_fastqc.html
-        - fastqc/ENCSR000COQ2_1_fastqc.html
-        - fastqc/ENCSR000COR1_1_fastqc.html
-        - fastqc/ENCSR000COR2_1_fastqc.html
-        - fastqc/ENCSR000CPO1_1_fastqc.html
-        - fastqc/ENCSR000CPO2_1_fastqc.html
-
-      trimmed_reads:
-        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
-        - trimming/ENCSR000COQ2_1_trimmed.fq.gz
-        - trimming/ENCSR000COR1_1_trimmed.fq.gz
-        - trimming/ENCSR000COR2_1_trimmed.fq.gz
-        - trimming/ENCSR000CPO1_1_trimmed.fq.gz
-        - trimming/ENCSR000CPO2_1_trimmed.fq.gz
-
-      trimming_reports:
-        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt
-
-      trimming_fastqc:
-        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000COQ2_1_trimmed_fastqc.html, trimming/ENCSR000COQ2_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000COR1_1_trimmed_fastqc.html, trimming/ENCSR000COR1_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000COR2_1_trimmed_fastqc.html, trimming/ENCSR000COR2_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000CPO1_1_trimmed_fastqc.html, trimming/ENCSR000CPO1_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000CPO2_1_trimmed_fastqc.html, trimming/ENCSR000CPO2_1_trimmed_fastqc.zip]
-
-      bam:
-        - align/ENCSR000COQ1_1_trimmed.bam
-        - align/ENCSR000COQ2_1_trimmed.bam
-        - align/ENCSR000COR1_1_trimmed.bam
-        - align/ENCSR000COR2_1_trimmed.bam
-        - align/ENCSR000CPO1_1_trimmed.bam
-        - align/ENCSR000CPO2_1_trimmed.bam
-
-      align_log:
-        - align/ENCSR000COQ1_1_trimmed.hisat2.log
-        - align/ENCSR000COQ2_1_trimmed.hisat2.log
-        - align/ENCSR000COR1_1_trimmed.hisat2.log
-        - align/ENCSR000COR2_1_trimmed.hisat2.log
-        - align/ENCSR000CPO1_1_trimmed.hisat2.log
-        - align/ENCSR000CPO2_1_trimmed.hisat2.log
-    ```
 
 This time each step gets run 6 times, once for each sample in the CSV file.
 
@@ -251,7 +251,7 @@ Add a QC report aggregation step that combines metrics from all samples.
 All this produces a lot of QC reports, and we don't want to have to dig through individual reports.
 This is the perfect point to put in a MultiQC report aggregation step.
 
-Recall the `multiqc` command from [Part 1](01_method.md):
+Recall the `multiqc` command from [Part 1](01_method.mdx):
 
 ```bash
 multiqc . -n <output_name>.html
@@ -270,61 +270,61 @@ The MultiQC process needs a report name parameter and the collected QC outputs f
 
 Add a parameter to name the output report.
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="11" hl_lines="8-9"
-    params {
-        // Primary input
-        input: Path
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=11 step="Before"
+params {
+    // Primary input
+    input: Path
 
-        // Reference genome archive
-        hisat2_index_zip: Path
+    // Reference genome archive
+    hisat2_index_zip: Path
+}
+```
 
-        // Report ID
-        report_id: String
-    }
-    ```
+```nextflow {8-9} title="rnaseq.nf" showLineNumbers startLineNumber=11 step="After"
+params {
+    // Primary input
+    input: Path
 
-=== "Before"
+    // Reference genome archive
+    hisat2_index_zip: Path
 
-    ```groovy title="rnaseq.nf" linenums="11"
-    params {
-        // Primary input
-        input: Path
+    // Report ID
+    report_id: String
+}
+```
 
-        // Reference genome archive
-        hisat2_index_zip: Path
-    }
-    ```
+</CodeWalkthrough>
 
 Add the report ID default to the test profile:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="7"
-    docker.enabled = true
+```nextflow title="nextflow.config" showLineNumbers step="Before"
+docker.enabled = true
 
-    profiles {
-        test {
-            params.input = "${projectDir}/data/single-end.csv"
-            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
-            params.report_id = "all_single-end"
-        }
+profiles {
+    test {
+        params.input = "${projectDir}/data/single-end.csv"
+        params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
     }
-    ```
+}
+```
 
-=== "Before"
+```nextflow {7} title="nextflow.config" showLineNumbers step="After"
+docker.enabled = true
 
-    ```groovy title="nextflow.config" linenums="1"
-    docker.enabled = true
-
-    profiles {
-        test {
-            params.input = "${projectDir}/data/single-end.csv"
-            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
-        }
+profiles {
+    test {
+        params.input = "${projectDir}/data/single-end.csv"
+        params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+        params.report_id = "all_single-end"
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 Next, we'll need to prepare the inputs for the MultiQC process.
 
@@ -348,29 +348,29 @@ We mix them into a single channel, then use `.collect()` to aggregate the report
 
 Add these lines to the workflow body after the `HISAT2_ALIGN` call:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="38" hl_lines="4-12"
-        // Alignment to a reference genome
-        HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=38 step="Before"
+    // Alignment to a reference genome
+    HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
+```
 
-        // Comprehensive QC report generation
-        multiqc_files_ch = channel.empty().mix(
-            FASTQC.out.zip,
-            FASTQC.out.html,
-            TRIM_GALORE.out.trimming_reports,
-            TRIM_GALORE.out.fastqc_reports,
-            HISAT2_ALIGN.out.log,
-        )
-        multiqc_files_list = multiqc_files_ch.collect()
-    ```
+```nextflow {4-12} title="rnaseq.nf" showLineNumbers startLineNumber=38 step="After"
+    // Alignment to a reference genome
+    HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
 
-=== "Before"
+    // Comprehensive QC report generation
+    multiqc_files_ch = channel.empty().mix(
+        FASTQC.out.zip,
+        FASTQC.out.html,
+        TRIM_GALORE.out.trimming_reports,
+        TRIM_GALORE.out.fastqc_reports,
+        HISAT2_ALIGN.out.log,
+    )
+    multiqc_files_list = multiqc_files_ch.collect()
+```
 
-    ```groovy title="rnaseq.nf" linenums="38"
-        // Alignment to a reference genome
-        HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
-    ```
+</CodeWalkthrough>
 
 Using intermediate variables makes each step clear: `multiqc_files_ch` contains all individual QC files mixed into one channel, and `multiqc_files_list` is the collected bundle ready to pass to MultiQC.
 
@@ -384,57 +384,57 @@ Open `modules/multiqc.nf` and examine the outline of the process definition.
 
 Go ahead and fill in the process definition by yourself using the information provided above, then check your work against the solution in the "After" tab below.
 
-=== "Before"
+<CodeWalkthrough>
 
-    ```groovy title="modules/multiqc.nf" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/multiqc.nf" showLineNumbers step="Before"
+#!/usr/bin/env nextflow
 
-    /*
-     * Aggregate QC reports with MultiQC
-     */
-    process MULTIQC {
+/*
+ * Aggregate QC reports with MultiQC
+ */
+process MULTIQC {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-=== "After"
+```nextflow {8,11,12,15,16,20} title="modules/multiqc.nf" showLineNumbers step="After"
+#!/usr/bin/env nextflow
 
-    ```groovy title="modules/multiqc.nf" linenums="1" hl_lines="8 11 12 15 16 20"
-    #!/usr/bin/env nextflow
+/*
+ * Aggregate QC reports with MultiQC
+ */
+process MULTIQC {
 
-    /*
-     * Aggregate QC reports with MultiQC
-     */
-    process MULTIQC {
+    container "community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c"
 
-        container "community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c"
+    input:
+    path '*'
+    val output_name
 
-        input:
-        path '*'
-        val output_name
+    output:
+    path "${output_name}.html", emit: report
+    path "${output_name}_data", emit: data
 
-        output:
-        path "${output_name}.html", emit: report
-        path "${output_name}_data", emit: data
+    script:
+    """
+    multiqc . -n ${output_name}.html
+    """
+}
+```
 
-        script:
-        """
-        multiqc . -n ${output_name}.html
-        """
-    }
-    ```
+</CodeWalkthrough>
 
-This process uses `#!groovy path '*'` as the input qualifier for the QC files.
+This process uses `path '*'{:nextflow}` as the input qualifier for the QC files.
 The `'*'` wildcard tells Nextflow to stage all the collected files into the working directory without requiring specific names.
 The `val output_name` input is a string that controls the report filename.
 
@@ -446,24 +446,24 @@ Once you've completed this, the process is ready to use.
 
 Add the import statement to `rnaseq.nf`:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="3" hl_lines="5"
-    // Module INCLUDE statements
-    include { FASTQC } from './modules/fastqc.nf'
-    include { TRIM_GALORE } from './modules/trim_galore.nf'
-    include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
-    include { MULTIQC } from './modules/multiqc.nf'
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=3 step="Before"
+// Module INCLUDE statements
+include { FASTQC } from './modules/fastqc.nf'
+include { TRIM_GALORE } from './modules/trim_galore.nf'
+include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
+```
 
-=== "Before"
+```nextflow {5} title="rnaseq.nf" showLineNumbers startLineNumber=3 step="After"
+// Module INCLUDE statements
+include { FASTQC } from './modules/fastqc.nf'
+include { TRIM_GALORE } from './modules/trim_galore.nf'
+include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
+include { MULTIQC } from './modules/multiqc.nf'
+```
 
-    ```groovy title="rnaseq.nf" linenums="3"
-    // Module INCLUDE statements
-    include { FASTQC } from './modules/fastqc.nf'
-    include { TRIM_GALORE } from './modules/trim_galore.nf'
-    include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
-    ```
+</CodeWalkthrough>
 
 Now add the process call to the workflow.
 
@@ -471,18 +471,18 @@ Now add the process call to the workflow.
 
 Pass the collected QC files and the report ID to the `MULTIQC` process:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="49" hl_lines="2"
-        multiqc_files_list = multiqc_files_ch.collect()
-        MULTIQC(multiqc_files_list, params.report_id)
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=49 step="Before"
+    multiqc_files_list = multiqc_files_ch.collect()
+```
 
-=== "Before"
+```nextflow {2} title="rnaseq.nf" showLineNumbers startLineNumber=49 step="After"
+    multiqc_files_list = multiqc_files_ch.collect()
+    MULTIQC(multiqc_files_list, params.report_id)
+```
 
-    ```groovy title="rnaseq.nf" linenums="49"
-        multiqc_files_list = multiqc_files_ch.collect()
-    ```
+</CodeWalkthrough>
 
 The MultiQC process is now wired into the workflow.
 
@@ -494,35 +494,35 @@ We need to add the MultiQC outputs to the publish declaration and configure wher
 
 Add the MultiQC outputs to the `publish:` section:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="52" hl_lines="9-10"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-        trimmed_reads = TRIM_GALORE.out.trimmed_reads
-        trimming_reports = TRIM_GALORE.out.trimming_reports
-        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
-        bam = HISAT2_ALIGN.out.bam
-        align_log = HISAT2_ALIGN.out.log
-        multiqc_report = MULTIQC.out.report
-        multiqc_data = MULTIQC.out.data
-    }
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=52 step="Before"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+    trimmed_reads = TRIM_GALORE.out.trimmed_reads
+    trimming_reports = TRIM_GALORE.out.trimming_reports
+    trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+    bam = HISAT2_ALIGN.out.bam
+    align_log = HISAT2_ALIGN.out.log
+}
+```
 
-=== "Before"
+```nextflow {9-10} title="rnaseq.nf" showLineNumbers startLineNumber=52 step="After"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+    trimmed_reads = TRIM_GALORE.out.trimmed_reads
+    trimming_reports = TRIM_GALORE.out.trimming_reports
+    trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+    bam = HISAT2_ALIGN.out.bam
+    align_log = HISAT2_ALIGN.out.log
+    multiqc_report = MULTIQC.out.report
+    multiqc_data = MULTIQC.out.data
+}
+```
 
-    ```groovy title="rnaseq.nf" linenums="52"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-        trimmed_reads = TRIM_GALORE.out.trimmed_reads
-        trimming_reports = TRIM_GALORE.out.trimming_reports
-        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
-        bam = HISAT2_ALIGN.out.bam
-        align_log = HISAT2_ALIGN.out.log
-    }
-    ```
+</CodeWalkthrough>
 
 Next, we'll need to tell Nextflow where to put these outputs.
 
@@ -530,29 +530,29 @@ Next, we'll need to tell Nextflow where to put these outputs.
 
 Add entries for the MultiQC targets in the `output {}` block, publishing them into a `multiqc/` subdirectory:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="82" hl_lines="4-9"
-        align_log {
-            path 'align'
-        }
-        multiqc_report {
-            path 'multiqc'
-        }
-        multiqc_data {
-            path 'multiqc'
-        }
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=82 step="Before"
+    align_log {
+        path 'align'
     }
-    ```
+}
+```
 
-=== "Before"
-
-    ```groovy title="rnaseq.nf" linenums="82"
-        align_log {
-            path 'align'
-        }
+```nextflow {4-9} title="rnaseq.nf" showLineNumbers startLineNumber=82 step="After"
+    align_log {
+        path 'align'
     }
-    ```
+    multiqc_report {
+        path 'multiqc'
+    }
+    multiqc_data {
+        path 'multiqc'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 The output configuration is complete.
 
@@ -560,87 +560,83 @@ The output configuration is complete.
 
 We use `-resume` so that the previous processing steps are cached and only the new MultiQC step runs.
 
-```bash
+```bash runnable.outputDelay=0
 nextflow run rnaseq.nf -profile test -resume
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `rnaseq.nf` [focused_moriondo] revision: 481681975c
+
+executor >  local (1)
+[5e/600a76] FASTQC (6)       | 6 of 6, cached: 6 ✔
+[ad/f92df3] TRIM_GALORE (3)  | 6 of 6, cached: 6 ✔
+[85/008c39] HISAT2_ALIGN (4) | 6 of 6, cached: 6 ✔
+[2b/6fa3ea] MULTIQC          | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/rnaseq/results
+
+  fastqc_zip:
+    - fastqc/ENCSR000COQ1_1_fastqc.zip
+    - fastqc/ENCSR000COQ2_1_fastqc.zip
+    - fastqc/ENCSR000COR1_1_fastqc.zip
+    - fastqc/ENCSR000COR2_1_fastqc.zip
+    - fastqc/ENCSR000CPO1_1_fastqc.zip
+    - fastqc/ENCSR000CPO2_1_fastqc.zip
+
+  fastqc_html:
+    - fastqc/ENCSR000COQ1_1_fastqc.html
+    - fastqc/ENCSR000COQ2_1_fastqc.html
+    - fastqc/ENCSR000COR1_1_fastqc.html
+    - fastqc/ENCSR000COR2_1_fastqc.html
+    - fastqc/ENCSR000CPO1_1_fastqc.html
+    - fastqc/ENCSR000CPO2_1_fastqc.html
+
+  trimmed_reads:
+    - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+    - trimming/ENCSR000COQ2_1_trimmed.fq.gz
+    - trimming/ENCSR000COR1_1_trimmed.fq.gz
+    - trimming/ENCSR000COR2_1_trimmed.fq.gz
+    - trimming/ENCSR000CPO1_1_trimmed.fq.gz
+    - trimming/ENCSR000CPO2_1_trimmed.fq.gz
+
+  trimming_reports:
+    - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt
+    - trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt
+
+  trimming_fastqc:
+    - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000COQ2_1_trimmed_fastqc.html, trimming/ENCSR000COQ2_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000COR1_1_trimmed_fastqc.html, trimming/ENCSR000COR1_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000COR2_1_trimmed_fastqc.html, trimming/ENCSR000COR2_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000CPO1_1_trimmed_fastqc.html, trimming/ENCSR000CPO1_1_trimmed_fastqc.zip]
+    - [trimming/ENCSR000CPO2_1_trimmed_fastqc.html, trimming/ENCSR000CPO2_1_trimmed_fastqc.zip]
+
+  bam:
+    - align/ENCSR000COQ1_1_trimmed.bam
+    - align/ENCSR000COQ2_1_trimmed.bam
+    - align/ENCSR000COR1_1_trimmed.bam
+    - align/ENCSR000COR2_1_trimmed.bam
+    - align/ENCSR000CPO1_1_trimmed.bam
+    - align/ENCSR000CPO2_1_trimmed.bam
+
+  align_log:
+    - align/ENCSR000COQ1_1_trimmed.hisat2.log
+    - align/ENCSR000COQ2_1_trimmed.hisat2.log
+    - align/ENCSR000COR1_1_trimmed.hisat2.log
+    - align/ENCSR000COR2_1_trimmed.hisat2.log
+    - align/ENCSR000CPO1_1_trimmed.hisat2.log
+    - align/ENCSR000CPO2_1_trimmed.hisat2.log
+
+  multiqc_report: multiqc/all_single-end.html
+
+  multiqc_data: multiqc/all_single-end_data
 ```
-
-??? success "Command output"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `rnaseq.nf` [focused_moriondo] revision: 481681975c
-
-    executor >  local (1)
-    [5e/600a76] FASTQC (6)       | 6 of 6, cached: 6 ✔
-    [ad/f92df3] TRIM_GALORE (3)  | 6 of 6, cached: 6 ✔
-    [85/008c39] HISAT2_ALIGN (4) | 6 of 6, cached: 6 ✔
-    [2b/6fa3ea] MULTIQC          | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/rnaseq/results
-
-      fastqc_zip:
-        - fastqc/ENCSR000COQ1_1_fastqc.zip
-        - fastqc/ENCSR000COQ2_1_fastqc.zip
-        - fastqc/ENCSR000COR1_1_fastqc.zip
-        - fastqc/ENCSR000COR2_1_fastqc.zip
-        - fastqc/ENCSR000CPO1_1_fastqc.zip
-        - fastqc/ENCSR000CPO2_1_fastqc.zip
-
-      fastqc_html:
-        - fastqc/ENCSR000COQ1_1_fastqc.html
-        - fastqc/ENCSR000COQ2_1_fastqc.html
-        - fastqc/ENCSR000COR1_1_fastqc.html
-        - fastqc/ENCSR000COR2_1_fastqc.html
-        - fastqc/ENCSR000CPO1_1_fastqc.html
-        - fastqc/ENCSR000CPO2_1_fastqc.html
-
-      trimmed_reads:
-        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
-        - trimming/ENCSR000COQ2_1_trimmed.fq.gz
-        - trimming/ENCSR000COR1_1_trimmed.fq.gz
-        - trimming/ENCSR000COR2_1_trimmed.fq.gz
-        - trimming/ENCSR000CPO1_1_trimmed.fq.gz
-        - trimming/ENCSR000CPO2_1_trimmed.fq.gz
-
-      trimming_reports:
-        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt
-
-      trimming_fastqc:
-        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000COQ2_1_trimmed_fastqc.html, trimming/ENCSR000COQ2_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000COR1_1_trimmed_fastqc.html, trimming/ENCSR000COR1_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000COR2_1_trimmed_fastqc.html, trimming/ENCSR000COR2_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000CPO1_1_trimmed_fastqc.html, trimming/ENCSR000CPO1_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000CPO2_1_trimmed_fastqc.html, trimming/ENCSR000CPO2_1_trimmed_fastqc.zip]
-
-      bam:
-        - align/ENCSR000COQ1_1_trimmed.bam
-        - align/ENCSR000COQ2_1_trimmed.bam
-        - align/ENCSR000COR1_1_trimmed.bam
-        - align/ENCSR000COR2_1_trimmed.bam
-        - align/ENCSR000CPO1_1_trimmed.bam
-        - align/ENCSR000CPO2_1_trimmed.bam
-
-      align_log:
-        - align/ENCSR000COQ1_1_trimmed.hisat2.log
-        - align/ENCSR000COQ2_1_trimmed.hisat2.log
-        - align/ENCSR000COR1_1_trimmed.hisat2.log
-        - align/ENCSR000COR2_1_trimmed.hisat2.log
-        - align/ENCSR000CPO1_1_trimmed.hisat2.log
-        - align/ENCSR000CPO2_1_trimmed.hisat2.log
-
-      multiqc_report: multiqc/all_single-end.html
-
-      multiqc_data: multiqc/all_single-end_data
-    ```
 
 A single call to MULTIQC has been added after the cached process calls.
 
@@ -650,48 +646,51 @@ You can find the MultiQC outputs in the results directory.
 tree -L 2 -l results/multiqc
 ```
 
-??? abstract "Directory contents"
+<details class="abstract">
+<summary>Directory contents</summary>
 
-    ```console
-    results/multiqc
-    ├── all_single-end.html
-    └── all_single-end_data
-        ├── cutadapt_filtered_reads_plot.txt
-        ├── cutadapt_trimmed_sequences_plot_3_Counts.txt
-        ├── cutadapt_trimmed_sequences_plot_3_Obs_Exp.txt
-        ├── fastqc-status-check-heatmap.txt
-        ├── fastqc_adapter_content_plot.txt
-        ├── fastqc_overrepresented_sequences_plot.txt
-        ├── fastqc_per_base_n_content_plot.txt
-        ├── fastqc_per_base_sequence_quality_plot.txt
-        ├── fastqc_per_sequence_gc_content_plot_Counts.txt
-        ├── fastqc_per_sequence_gc_content_plot_Percentages.txt
-        ├── fastqc_per_sequence_quality_scores_plot.txt
-        ├── fastqc_sequence_counts_plot.txt
-        ├── fastqc_sequence_duplication_levels_plot.txt
-        ├── fastqc_sequence_length_distribution_plot.txt
-        ├── fastqc_top_overrepresented_sequences_table.txt
-        ├── hisat2_se_plot.txt
-        ├── llms-full.txt
-        ├── multiqc.log
-        ├── multiqc.parquet
-        ├── multiqc_citations.txt
-        ├── multiqc_cutadapt.txt
-        ├── multiqc_data.json
-        ├── multiqc_fastqc.txt
-        ├── multiqc_general_stats.txt
-        ├── multiqc_hisat2.txt
-        ├── multiqc_software_versions.txt
-        └── multiqc_sources.txt
-    ```
+```console
+results/multiqc
+├── all_single-end.html
+└── all_single-end_data
+    ├── cutadapt_filtered_reads_plot.txt
+    ├── cutadapt_trimmed_sequences_plot_3_Counts.txt
+    ├── cutadapt_trimmed_sequences_plot_3_Obs_Exp.txt
+    ├── fastqc-status-check-heatmap.txt
+    ├── fastqc_adapter_content_plot.txt
+    ├── fastqc_overrepresented_sequences_plot.txt
+    ├── fastqc_per_base_n_content_plot.txt
+    ├── fastqc_per_base_sequence_quality_plot.txt
+    ├── fastqc_per_sequence_gc_content_plot_Counts.txt
+    ├── fastqc_per_sequence_gc_content_plot_Percentages.txt
+    ├── fastqc_per_sequence_quality_scores_plot.txt
+    ├── fastqc_sequence_counts_plot.txt
+    ├── fastqc_sequence_duplication_levels_plot.txt
+    ├── fastqc_sequence_length_distribution_plot.txt
+    ├── fastqc_top_overrepresented_sequences_table.txt
+    ├── hisat2_se_plot.txt
+    ├── llms-full.txt
+    ├── multiqc.log
+    ├── multiqc.parquet
+    ├── multiqc_citations.txt
+    ├── multiqc_cutadapt.txt
+    ├── multiqc_data.json
+    ├── multiqc_fastqc.txt
+    ├── multiqc_general_stats.txt
+    ├── multiqc_hisat2.txt
+    ├── multiqc_software_versions.txt
+    └── multiqc_sources.txt
+```
+
+</details>
 
 That last `all_single-end.html` file is the full aggregated report, conveniently packaged into one easy to browse HTML file.
 
-### Takeaway
+### Takeaway {#takeaway_1}
 
 You know how to collect outputs from multiple channels, bundle them with `.mix()` and `.collect()`, and pass them to an aggregation process.
 
-### What's next?
+### What's next? {#whats-next_1}
 
 Adapt the workflow to handle paired-end RNAseq data.
 
@@ -722,7 +721,7 @@ Now update the parameters and input handling in the new file.
 
 We provide a second CSV file containing sample IDs and paired FASTQ file paths in the `data/` directory.
 
-```csv title="data/paired-end.csv" linenums="1"
+```csv title="data/paired-end.csv" showLineNumbers
 sample_id,fastq_1,fastq_2
 ENCSR000COQ1,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000COQ1_1.fastq.gz,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000COQ1_2.fastq.gz
 ENCSR000COQ2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000COQ2_1.fastq.gz,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000COQ2_2.fastq.gz
@@ -734,38 +733,38 @@ ENCSR000CPO2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO2_1.f
 
 Add a `test_pe` profile to `nextflow.config` that points to this file and uses a paired-end report ID.
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="9-13"
-    docker.enabled = true
+```nextflow title="nextflow.config" showLineNumbers step="Before"
+docker.enabled = true
 
-    profiles {
-        test {
-            params.input = "${projectDir}/data/single-end.csv"
-            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
-            params.report_id = "all_single-end"
-        }
-        test_pe {
-            params.input = "${projectDir}/data/paired-end.csv"
-            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
-            params.report_id = "all_paired-end"
-        }
+profiles {
+    test {
+        params.input = "${projectDir}/data/single-end.csv"
+        params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+        params.report_id = "all_single-end"
     }
-    ```
+}
+```
 
-=== "Before"
+```nextflow {9-13} title="nextflow.config" showLineNumbers step="After"
+docker.enabled = true
 
-    ```groovy title="nextflow.config" linenums="1"
-    docker.enabled = true
-
-    profiles {
-        test {
-            params.input = "${projectDir}/data/single-end.csv"
-            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
-            params.report_id = "all_single-end"
-        }
+profiles {
+    test {
+        params.input = "${projectDir}/data/single-end.csv"
+        params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+        params.report_id = "all_single-end"
     }
-    ```
+    test_pe {
+        params.input = "${projectDir}/data/paired-end.csv"
+        params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+        params.report_id = "all_paired-end"
+    }
+}
+```
+
+</CodeWalkthrough>
 
 The test profile for paired-end data is ready.
 
@@ -773,23 +772,23 @@ The test profile for paired-end data is ready.
 
 The `.map()` operator needs to grab both FASTQ file paths and return them as a list.
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq_pe.nf" linenums="25" hl_lines="4"
-        // Create input channel from the contents of a CSV file
-        read_ch = channel.fromPath(params.input)
-            .splitCsv(header: true)
-            .map { row -> [file(row.fastq_1), file(row.fastq_2)] }
-    ```
+```nextflow title="rnaseq_pe.nf" showLineNumbers startLineNumber=25 step="Before"
+    // Create input channel from the contents of a CSV file
+    read_ch = channel.fromPath(params.input)
+        .splitCsv(header: true)
+        .map { row -> file(row.fastq_path) }
+```
 
-=== "Before"
+```nextflow {4} title="rnaseq_pe.nf" showLineNumbers startLineNumber=25 step="After"
+    // Create input channel from the contents of a CSV file
+    read_ch = channel.fromPath(params.input)
+        .splitCsv(header: true)
+        .map { row -> [file(row.fastq_1), file(row.fastq_2)] }
+```
 
-    ```groovy title="rnaseq_pe.nf" linenums="25"
-        // Create input channel from the contents of a CSV file
-        read_ch = channel.fromPath(params.input)
-            .splitCsv(header: true)
-            .map { row -> file(row.fastq_path) }
-    ```
+</CodeWalkthrough>
 
 The input handling is configured for paired-end data.
 
@@ -804,37 +803,37 @@ cp modules/fastqc.nf modules/fastqc_pe.nf
 The FASTQC process input doesn't need to change — when Nextflow receives a list of two files, it stages both and `reads` expands to both filenames.
 The only change needed is in the output block: since we now get two FastQC reports per sample, we switch from `simpleName`-based patterns to wildcards.
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="modules/fastqc_pe.nf" linenums="10" hl_lines="2 3"
-        output:
-        path "*_fastqc.zip", emit: zip
-        path "*_fastqc.html", emit: html
-    ```
+```nextflow title="modules/fastqc_pe.nf" showLineNumbers startLineNumber=10 step="Before"
+    output:
+    path "${reads.simpleName}_fastqc.zip", emit: zip
+    path "${reads.simpleName}_fastqc.html", emit: html
+```
 
-=== "Before"
+```nextflow {2,3} title="modules/fastqc_pe.nf" showLineNumbers startLineNumber=10 step="After"
+    output:
+    path "*_fastqc.zip", emit: zip
+    path "*_fastqc.html", emit: html
+```
 
-    ```groovy title="modules/fastqc_pe.nf" linenums="10"
-        output:
-        path "${reads.simpleName}_fastqc.zip", emit: zip
-        path "${reads.simpleName}_fastqc.html", emit: html
-    ```
+</CodeWalkthrough>
 
 This generalizes the process in a way that makes it able to handle either single-end or paired-end data.
 
 Update the import in `rnaseq_pe.nf` to use the paired-end version:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq_pe.nf" linenums="4" hl_lines="1"
-    include { FASTQC } from './modules/fastqc_pe.nf'
-    ```
+```nextflow title="rnaseq_pe.nf" showLineNumbers startLineNumber=4 step="Before"
+include { FASTQC } from './modules/fastqc.nf'
+```
 
-=== "Before"
+```nextflow {1} title="rnaseq_pe.nf" showLineNumbers startLineNumber=4 step="After"
+include { FASTQC } from './modules/fastqc_pe.nf'
+```
 
-    ```groovy title="rnaseq_pe.nf" linenums="4"
-    include { FASTQC } from './modules/fastqc.nf'
-    ```
+</CodeWalkthrough>
 
 The FASTQC module and its import are updated for paired-end data.
 
@@ -852,54 +851,54 @@ This module needs more substantial changes:
 - The command adds the `--paired` flag and takes both read files
 - The output changes to reflect Trim Galore's paired-end naming conventions, producing separate FastQC reports for each read file
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="modules/trim_galore_pe.nf" linenums="8" hl_lines="2 5 7 8 12"
-        input:
-        tuple path(read1), path(read2)
+```nextflow title="modules/trim_galore_pe.nf" showLineNumbers startLineNumber=8 step="Before"
+    input:
+    path reads
 
-        output:
-        tuple path("*_val_1.fq.gz"), path("*_val_2.fq.gz"), emit: trimmed_reads
-        path "*_trimming_report.txt", emit: trimming_reports
-        path "*_val_1_fastqc.{zip,html}", emit: fastqc_reports_1
-        path "*_val_2_fastqc.{zip,html}", emit: fastqc_reports_2
+    output:
+    path "${reads.simpleName}_trimmed.fq.gz", emit: trimmed_reads
+    path "${reads}_trimming_report.txt", emit: trimming_reports
+    path "${reads.simpleName}_trimmed_fastqc.{zip,html}", emit: fastqc_reports
 
-        script:
-        """
-        trim_galore --fastqc --paired ${read1} ${read2}
-        """
-    ```
+    script:
+    """
+    trim_galore --fastqc ${reads}
+    """
+```
 
-=== "Before"
+```nextflow {2,5,7,8,12} title="modules/trim_galore_pe.nf" showLineNumbers startLineNumber=8 step="After"
+    input:
+    tuple path(read1), path(read2)
 
-    ```groovy title="modules/trim_galore_pe.nf" linenums="8"
-        input:
-        path reads
+    output:
+    tuple path("*_val_1.fq.gz"), path("*_val_2.fq.gz"), emit: trimmed_reads
+    path "*_trimming_report.txt", emit: trimming_reports
+    path "*_val_1_fastqc.{zip,html}", emit: fastqc_reports_1
+    path "*_val_2_fastqc.{zip,html}", emit: fastqc_reports_2
 
-        output:
-        path "${reads.simpleName}_trimmed.fq.gz", emit: trimmed_reads
-        path "${reads}_trimming_report.txt", emit: trimming_reports
-        path "${reads.simpleName}_trimmed_fastqc.{zip,html}", emit: fastqc_reports
+    script:
+    """
+    trim_galore --fastqc --paired ${read1} ${read2}
+    """
+```
 
-        script:
-        """
-        trim_galore --fastqc ${reads}
-        """
-    ```
+</CodeWalkthrough>
 
 Update the import in `rnaseq_pe.nf`:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq_pe.nf" linenums="5" hl_lines="1"
-    include { TRIM_GALORE } from './modules/trim_galore_pe.nf'
-    ```
+```nextflow title="rnaseq_pe.nf" showLineNumbers startLineNumber=5 step="Before"
+include { TRIM_GALORE } from './modules/trim_galore.nf'
+```
 
-=== "Before"
+```nextflow {1} title="rnaseq_pe.nf" showLineNumbers startLineNumber=5 step="After"
+include { TRIM_GALORE } from './modules/trim_galore_pe.nf'
+```
 
-    ```groovy title="rnaseq_pe.nf" linenums="5"
-    include { TRIM_GALORE } from './modules/trim_galore.nf'
-    ```
+</CodeWalkthrough>
 
 The TRIM_GALORE module and its import are updated for paired-end data.
 
@@ -917,59 +916,59 @@ This module needs similar changes:
 - The HISAT2 command changes from `-U` (unpaired) to `-1` and `-2` (paired) read arguments
 - All uses of `reads.simpleName` change to `read1.simpleName` since we now reference a specific member of the pair
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="modules/hisat2_align_pe.nf" linenums="8" hl_lines="2 6 7 12 13 14"
-        input:
-        tuple path(read1), path(read2)
-        path index_zip
+```nextflow title="modules/hisat2_align_pe.nf" showLineNumbers startLineNumber=8 step="Before"
+    input:
+    path reads
+    path index_zip
 
-        output:
-        path "${read1.simpleName}.bam", emit: bam
-        path "${read1.simpleName}.hisat2.log", emit: log
+    output:
+    path "${reads.simpleName}.bam", emit: bam
+    path "${reads.simpleName}.hisat2.log", emit: log
 
-        script:
-        """
-        tar -xzvf ${index_zip}
-        hisat2 -x ${index_zip.simpleName} -1 ${read1} -2 ${read2} \
-            --new-summary --summary-file ${read1.simpleName}.hisat2.log | \
-            samtools view -bS -o ${read1.simpleName}.bam
-        """
-    ```
+    script:
+    """
+    tar -xzvf ${index_zip}
+    hisat2 -x ${index_zip.simpleName} -U ${reads} \
+        --new-summary --summary-file ${reads.simpleName}.hisat2.log | \
+        samtools view -bS -o ${reads.simpleName}.bam
+    """
+```
 
-=== "Before"
+```nextflow {2,6,7,12,13,14} title="modules/hisat2_align_pe.nf" showLineNumbers startLineNumber=8 step="After"
+    input:
+    tuple path(read1), path(read2)
+    path index_zip
 
-    ```groovy title="modules/hisat2_align_pe.nf" linenums="8"
-        input:
-        path reads
-        path index_zip
+    output:
+    path "${read1.simpleName}.bam", emit: bam
+    path "${read1.simpleName}.hisat2.log", emit: log
 
-        output:
-        path "${reads.simpleName}.bam", emit: bam
-        path "${reads.simpleName}.hisat2.log", emit: log
+    script:
+    """
+    tar -xzvf ${index_zip}
+    hisat2 -x ${index_zip.simpleName} -1 ${read1} -2 ${read2} \
+        --new-summary --summary-file ${read1.simpleName}.hisat2.log | \
+        samtools view -bS -o ${read1.simpleName}.bam
+    """
+```
 
-        script:
-        """
-        tar -xzvf ${index_zip}
-        hisat2 -x ${index_zip.simpleName} -U ${reads} \
-            --new-summary --summary-file ${reads.simpleName}.hisat2.log | \
-            samtools view -bS -o ${reads.simpleName}.bam
-        """
-    ```
+</CodeWalkthrough>
 
 Update the import in `rnaseq_pe.nf`:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq_pe.nf" linenums="6" hl_lines="1"
-    include { HISAT2_ALIGN } from './modules/hisat2_align_pe.nf'
-    ```
+```nextflow title="rnaseq_pe.nf" showLineNumbers startLineNumber=6 step="Before"
+include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
+```
 
-=== "Before"
+```nextflow {1} title="rnaseq_pe.nf" showLineNumbers startLineNumber=6 step="After"
+include { HISAT2_ALIGN } from './modules/hisat2_align_pe.nf'
+```
 
-    ```groovy title="rnaseq_pe.nf" linenums="6"
-    include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
-    ```
+</CodeWalkthrough>
 
 The HISAT2_ALIGN module and its import are updated for paired-end data.
 
@@ -978,30 +977,30 @@ The HISAT2_ALIGN module and its import are updated for paired-end data.
 The paired-end `TRIM_GALORE` process now produces two separate FastQC report channels (`fastqc_reports_1` and `fastqc_reports_2`) instead of one.
 Update the `.mix()` block in `rnaseq_pe.nf` to include both:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq_pe.nf" linenums="40" hl_lines="5 6"
-        multiqc_files_ch = channel.empty().mix(
-            FASTQC.out.zip,
-            FASTQC.out.html,
-            TRIM_GALORE.out.trimming_reports,
-            TRIM_GALORE.out.fastqc_reports_1,
-            TRIM_GALORE.out.fastqc_reports_2,
-            HISAT2_ALIGN.out.log,
-        )
-    ```
+```nextflow title="rnaseq_pe.nf" showLineNumbers startLineNumber=40 step="Before"
+    multiqc_files_ch = channel.empty().mix(
+        FASTQC.out.zip,
+        FASTQC.out.html,
+        TRIM_GALORE.out.trimming_reports,
+        TRIM_GALORE.out.fastqc_reports,
+        HISAT2_ALIGN.out.log,
+    )
+```
 
-=== "Before"
+```nextflow {5,6} title="rnaseq_pe.nf" showLineNumbers startLineNumber=40 step="After"
+    multiqc_files_ch = channel.empty().mix(
+        FASTQC.out.zip,
+        FASTQC.out.html,
+        TRIM_GALORE.out.trimming_reports,
+        TRIM_GALORE.out.fastqc_reports_1,
+        TRIM_GALORE.out.fastqc_reports_2,
+        HISAT2_ALIGN.out.log,
+    )
+```
 
-    ```groovy title="rnaseq_pe.nf" linenums="40"
-        multiqc_files_ch = channel.empty().mix(
-            FASTQC.out.zip,
-            FASTQC.out.html,
-            TRIM_GALORE.out.trimming_reports,
-            TRIM_GALORE.out.fastqc_reports,
-            HISAT2_ALIGN.out.log,
-        )
-    ```
+</CodeWalkthrough>
 
 The MultiQC aggregation now includes both sets of paired-end FastQC reports.
 
@@ -1011,71 +1010,71 @@ The `publish:` section and `output {}` block also need to reflect the two separa
 
 Update the `publish:` section in `rnaseq_pe.nf`:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq_pe.nf" linenums="52" hl_lines="6-7"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-        trimmed_reads = TRIM_GALORE.out.trimmed_reads
-        trimming_reports = TRIM_GALORE.out.trimming_reports
-        trimming_fastqc_1 = TRIM_GALORE.out.fastqc_reports_1
-        trimming_fastqc_2 = TRIM_GALORE.out.fastqc_reports_2
-        bam = HISAT2_ALIGN.out.bam
-        align_log = HISAT2_ALIGN.out.log
-        multiqc_report = MULTIQC.out.report
-        multiqc_data = MULTIQC.out.data
-    }
-    ```
+```nextflow title="rnaseq_pe.nf" showLineNumbers startLineNumber=52 step="Before"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+    trimmed_reads = TRIM_GALORE.out.trimmed_reads
+    trimming_reports = TRIM_GALORE.out.trimming_reports
+    trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+    bam = HISAT2_ALIGN.out.bam
+    align_log = HISAT2_ALIGN.out.log
+    multiqc_report = MULTIQC.out.report
+    multiqc_data = MULTIQC.out.data
+}
+```
 
-=== "Before"
+```nextflow {6-7} title="rnaseq_pe.nf" showLineNumbers startLineNumber=52 step="After"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+    trimmed_reads = TRIM_GALORE.out.trimmed_reads
+    trimming_reports = TRIM_GALORE.out.trimming_reports
+    trimming_fastqc_1 = TRIM_GALORE.out.fastqc_reports_1
+    trimming_fastqc_2 = TRIM_GALORE.out.fastqc_reports_2
+    bam = HISAT2_ALIGN.out.bam
+    align_log = HISAT2_ALIGN.out.log
+    multiqc_report = MULTIQC.out.report
+    multiqc_data = MULTIQC.out.data
+}
+```
 
-    ```groovy title="rnaseq_pe.nf" linenums="52"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-        trimmed_reads = TRIM_GALORE.out.trimmed_reads
-        trimming_reports = TRIM_GALORE.out.trimming_reports
-        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
-        bam = HISAT2_ALIGN.out.bam
-        align_log = HISAT2_ALIGN.out.log
-        multiqc_report = MULTIQC.out.report
-        multiqc_data = MULTIQC.out.data
-    }
-    ```
+</CodeWalkthrough>
 
 Update the corresponding entries in the `output {}` block:
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq_pe.nf" linenums="77" hl_lines="4-9"
-        trimming_reports {
-            path 'trimming'
-        }
-        trimming_fastqc_1 {
-            path 'trimming'
-        }
-        trimming_fastqc_2 {
-            path 'trimming'
-        }
-        bam {
-            path 'align'
-        }
-    ```
+```nextflow title="rnaseq_pe.nf" showLineNumbers startLineNumber=77 step="Before"
+    trimming_reports {
+        path 'trimming'
+    }
+    trimming_fastqc {
+        path 'trimming'
+    }
+    bam {
+        path 'align'
+    }
+```
 
-=== "Before"
+```nextflow {4-9} title="rnaseq_pe.nf" showLineNumbers startLineNumber=77 step="After"
+    trimming_reports {
+        path 'trimming'
+    }
+    trimming_fastqc_1 {
+        path 'trimming'
+    }
+    trimming_fastqc_2 {
+        path 'trimming'
+    }
+    bam {
+        path 'align'
+    }
+```
 
-    ```groovy title="rnaseq_pe.nf" linenums="77"
-        trimming_reports {
-            path 'trimming'
-        }
-        trimming_fastqc {
-            path 'trimming'
-        }
-        bam {
-            path 'align'
-        }
-    ```
+</CodeWalkthrough>
 
 The paired-end workflow is now fully updated and ready to run.
 
@@ -1083,107 +1082,103 @@ The paired-end workflow is now fully updated and ready to run.
 
 We don't use `-resume` since this wouldn't cache, and there's twice as much data to process than before, but it should still complete in under a minute.
 
-```bash
+```bash runnable.outputDelay=0
 nextflow run rnaseq_pe.nf -profile test_pe
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `rnaseq_pe.nf` [irreverent_goodall] revision: 4857270963
+
+executor >  local (19)
+[b2/6eeec6] FASTQC (3)       | 6 of 6 ✔
+[fc/cf8740] TRIM_GALORE (5)  | 6 of 6 ✔
+[4d/d86bd7] HISAT2_ALIGN (6) | 6 of 6 ✔
+[34/51347d] MULTIQC          | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/rnaseq/results
+
+  fastqc_zip:
+    - [fastqc/ENCSR000COQ1_1_fastqc.zip, fastqc/ENCSR000COQ1_2_fastqc.zip]
+    - [fastqc/ENCSR000COQ2_1_fastqc.zip, fastqc/ENCSR000COQ2_2_fastqc.zip]
+    - [fastqc/ENCSR000COR1_1_fastqc.zip, fastqc/ENCSR000COR1_2_fastqc.zip]
+    - [fastqc/ENCSR000COR2_1_fastqc.zip, fastqc/ENCSR000COR2_2_fastqc.zip]
+    - [fastqc/ENCSR000CPO1_1_fastqc.zip, fastqc/ENCSR000CPO1_2_fastqc.zip]
+    - [fastqc/ENCSR000CPO2_1_fastqc.zip, fastqc/ENCSR000CPO2_2_fastqc.zip]
+
+  fastqc_html:
+    - [fastqc/ENCSR000COQ1_1_fastqc.html, fastqc/ENCSR000COQ1_2_fastqc.html]
+    - [fastqc/ENCSR000COQ2_1_fastqc.html, fastqc/ENCSR000COQ2_2_fastqc.html]
+    - [fastqc/ENCSR000COR1_1_fastqc.html, fastqc/ENCSR000COR1_2_fastqc.html]
+    - [fastqc/ENCSR000COR2_1_fastqc.html, fastqc/ENCSR000COR2_2_fastqc.html]
+    - [fastqc/ENCSR000CPO1_1_fastqc.html, fastqc/ENCSR000CPO1_2_fastqc.html]
+    - [fastqc/ENCSR000CPO2_1_fastqc.html, fastqc/ENCSR000CPO2_2_fastqc.html]
+
+  trimmed_reads:
+    - [trimming/ENCSR000COQ1_1_val_1.fq.gz, trimming/ENCSR000COQ1_2_val_2.fq.gz]
+    - [trimming/ENCSR000COQ2_1_val_1.fq.gz, trimming/ENCSR000COQ2_2_val_2.fq.gz]
+    - [trimming/ENCSR000COR1_1_val_1.fq.gz, trimming/ENCSR000COR1_2_val_2.fq.gz]
+    - [trimming/ENCSR000COR2_1_val_1.fq.gz, trimming/ENCSR000COR2_2_val_2.fq.gz]
+    - [trimming/ENCSR000CPO1_1_val_1.fq.gz, trimming/ENCSR000CPO1_2_val_2.fq.gz]
+    - [trimming/ENCSR000CPO2_1_val_1.fq.gz, trimming/ENCSR000CPO2_2_val_2.fq.gz]
+
+  trimming_reports:
+    - [trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COQ1_2.fastq.gz_trimming_report.txt]
+    - [trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COQ2_2.fastq.gz_trimming_report.txt]
+    - [trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COR1_2.fastq.gz_trimming_report.txt]
+    - [trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COR2_2.fastq.gz_trimming_report.txt]
+    - [trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000CPO1_2.fastq.gz_trimming_report.txt]
+    - [trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000CPO2_2.fastq.gz_trimming_report.txt]
+
+  trimming_fastqc_1:
+    - [trimming/ENCSR000COQ1_1_val_1_fastqc.html, trimming/ENCSR000COQ1_1_val_1_fastqc.zip]
+    - [trimming/ENCSR000COQ2_1_val_1_fastqc.html, trimming/ENCSR000COQ2_1_val_1_fastqc.zip]
+    - [trimming/ENCSR000COR1_1_val_1_fastqc.html, trimming/ENCSR000COR1_1_val_1_fastqc.zip]
+    - [trimming/ENCSR000COR2_1_val_1_fastqc.html, trimming/ENCSR000COR2_1_val_1_fastqc.zip]
+    - [trimming/ENCSR000CPO1_1_val_1_fastqc.html, trimming/ENCSR000CPO1_1_val_1_fastqc.zip]
+    - [trimming/ENCSR000CPO2_1_val_1_fastqc.html, trimming/ENCSR000CPO2_1_val_1_fastqc.zip]
+
+  trimming_fastqc_2:
+    - [trimming/ENCSR000COQ1_2_val_2_fastqc.html, trimming/ENCSR000COQ1_2_val_2_fastqc.zip]
+    - [trimming/ENCSR000COQ2_2_val_2_fastqc.html, trimming/ENCSR000COQ2_2_val_2_fastqc.zip]
+    - [trimming/ENCSR000COR1_2_val_2_fastqc.html, trimming/ENCSR000COR1_2_val_2_fastqc.zip]
+    - [trimming/ENCSR000COR2_2_val_2_fastqc.html, trimming/ENCSR000COR2_2_val_2_fastqc.zip]
+    - [trimming/ENCSR000CPO1_2_val_2_fastqc.html, trimming/ENCSR000CPO1_2_val_2_fastqc.zip]
+    - [trimming/ENCSR000CPO2_2_val_2_fastqc.html, trimming/ENCSR000CPO2_2_val_2_fastqc.zip]
+
+  bam:
+    - align/ENCSR000COQ1_1_val_1.bam
+    - align/ENCSR000COQ2_1_val_1.bam
+    - align/ENCSR000COR1_1_val_1.bam
+    - align/ENCSR000COR2_1_val_1.bam
+    - align/ENCSR000CPO1_1_val_1.bam
+    - align/ENCSR000CPO2_1_val_1.bam
+
+  align_log:
+    - align/ENCSR000COQ1_1_val_1.hisat2.log
+    - align/ENCSR000COQ2_1_val_1.hisat2.log
+    - align/ENCSR000COR1_1_val_1.hisat2.log
+    - align/ENCSR000COR2_1_val_1.hisat2.log
+    - align/ENCSR000CPO1_1_val_1.hisat2.log
+    - align/ENCSR000CPO2_1_val_1.hisat2.log
+
+  multiqc_report: multiqc/all_paired-end.html
+
+  multiqc_data: multiqc/all_paired-end_data
 ```
-
-??? success "Command output"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `rnaseq_pe.nf` [irreverent_goodall] revision: 4857270963
-
-    executor >  local (19)
-    [b2/6eeec6] FASTQC (3)       | 6 of 6 ✔
-    [fc/cf8740] TRIM_GALORE (5)  | 6 of 6 ✔
-    [4d/d86bd7] HISAT2_ALIGN (6) | 6 of 6 ✔
-    [34/51347d] MULTIQC          | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/rnaseq/results
-
-      fastqc_zip:
-        - [fastqc/ENCSR000COQ1_1_fastqc.zip, fastqc/ENCSR000COQ1_2_fastqc.zip]
-        - [fastqc/ENCSR000COQ2_1_fastqc.zip, fastqc/ENCSR000COQ2_2_fastqc.zip]
-        - [fastqc/ENCSR000COR1_1_fastqc.zip, fastqc/ENCSR000COR1_2_fastqc.zip]
-        - [fastqc/ENCSR000COR2_1_fastqc.zip, fastqc/ENCSR000COR2_2_fastqc.zip]
-        - [fastqc/ENCSR000CPO1_1_fastqc.zip, fastqc/ENCSR000CPO1_2_fastqc.zip]
-        - [fastqc/ENCSR000CPO2_1_fastqc.zip, fastqc/ENCSR000CPO2_2_fastqc.zip]
-
-      fastqc_html:
-        - [fastqc/ENCSR000COQ1_1_fastqc.html, fastqc/ENCSR000COQ1_2_fastqc.html]
-        - [fastqc/ENCSR000COQ2_1_fastqc.html, fastqc/ENCSR000COQ2_2_fastqc.html]
-        - [fastqc/ENCSR000COR1_1_fastqc.html, fastqc/ENCSR000COR1_2_fastqc.html]
-        - [fastqc/ENCSR000COR2_1_fastqc.html, fastqc/ENCSR000COR2_2_fastqc.html]
-        - [fastqc/ENCSR000CPO1_1_fastqc.html, fastqc/ENCSR000CPO1_2_fastqc.html]
-        - [fastqc/ENCSR000CPO2_1_fastqc.html, fastqc/ENCSR000CPO2_2_fastqc.html]
-
-      trimmed_reads:
-        - [trimming/ENCSR000COQ1_1_val_1.fq.gz, trimming/ENCSR000COQ1_2_val_2.fq.gz]
-        - [trimming/ENCSR000COQ2_1_val_1.fq.gz, trimming/ENCSR000COQ2_2_val_2.fq.gz]
-        - [trimming/ENCSR000COR1_1_val_1.fq.gz, trimming/ENCSR000COR1_2_val_2.fq.gz]
-        - [trimming/ENCSR000COR2_1_val_1.fq.gz, trimming/ENCSR000COR2_2_val_2.fq.gz]
-        - [trimming/ENCSR000CPO1_1_val_1.fq.gz, trimming/ENCSR000CPO1_2_val_2.fq.gz]
-        - [trimming/ENCSR000CPO2_1_val_1.fq.gz, trimming/ENCSR000CPO2_2_val_2.fq.gz]
-
-      trimming_reports:
-        - [trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COQ1_2.fastq.gz_trimming_report.txt]
-        - [trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COQ2_2.fastq.gz_trimming_report.txt]
-        - [trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COR1_2.fastq.gz_trimming_report.txt]
-        - [trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COR2_2.fastq.gz_trimming_report.txt]
-        - [trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000CPO1_2.fastq.gz_trimming_report.txt]
-        - [trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000CPO2_2.fastq.gz_trimming_report.txt]
-
-      trimming_fastqc_1:
-        - [trimming/ENCSR000COQ1_1_val_1_fastqc.html, trimming/ENCSR000COQ1_1_val_1_fastqc.zip]
-        - [trimming/ENCSR000COQ2_1_val_1_fastqc.html, trimming/ENCSR000COQ2_1_val_1_fastqc.zip]
-        - [trimming/ENCSR000COR1_1_val_1_fastqc.html, trimming/ENCSR000COR1_1_val_1_fastqc.zip]
-        - [trimming/ENCSR000COR2_1_val_1_fastqc.html, trimming/ENCSR000COR2_1_val_1_fastqc.zip]
-        - [trimming/ENCSR000CPO1_1_val_1_fastqc.html, trimming/ENCSR000CPO1_1_val_1_fastqc.zip]
-        - [trimming/ENCSR000CPO2_1_val_1_fastqc.html, trimming/ENCSR000CPO2_1_val_1_fastqc.zip]
-
-      trimming_fastqc_2:
-        - [trimming/ENCSR000COQ1_2_val_2_fastqc.html, trimming/ENCSR000COQ1_2_val_2_fastqc.zip]
-        - [trimming/ENCSR000COQ2_2_val_2_fastqc.html, trimming/ENCSR000COQ2_2_val_2_fastqc.zip]
-        - [trimming/ENCSR000COR1_2_val_2_fastqc.html, trimming/ENCSR000COR1_2_val_2_fastqc.zip]
-        - [trimming/ENCSR000COR2_2_val_2_fastqc.html, trimming/ENCSR000COR2_2_val_2_fastqc.zip]
-        - [trimming/ENCSR000CPO1_2_val_2_fastqc.html, trimming/ENCSR000CPO1_2_val_2_fastqc.zip]
-        - [trimming/ENCSR000CPO2_2_val_2_fastqc.html, trimming/ENCSR000CPO2_2_val_2_fastqc.zip]
-
-      bam:
-        - align/ENCSR000COQ1_1_val_1.bam
-        - align/ENCSR000COQ2_1_val_1.bam
-        - align/ENCSR000COR1_1_val_1.bam
-        - align/ENCSR000COR2_1_val_1.bam
-        - align/ENCSR000CPO1_1_val_1.bam
-        - align/ENCSR000CPO2_1_val_1.bam
-
-      align_log:
-        - align/ENCSR000COQ1_1_val_1.hisat2.log
-        - align/ENCSR000COQ2_1_val_1.hisat2.log
-        - align/ENCSR000COR1_1_val_1.hisat2.log
-        - align/ENCSR000COR2_1_val_1.hisat2.log
-        - align/ENCSR000CPO1_1_val_1.hisat2.log
-        - align/ENCSR000CPO2_1_val_1.hisat2.log
-
-      multiqc_report: multiqc/all_paired-end.html
-
-      multiqc_data: multiqc/all_paired-end_data
-    ```
 
 Now we have two slightly divergent versions of our workflow, one for single-end read data and one for paired-end data.
 The next logical step would be to make the workflow accept either data type on the fly, which is out of scope for this course, but we may tackle that in a follow-up.
 
 ---
 
-### Takeaway
+### Takeaway {#takeaway_2}
 
 You know how to adapt a single-sample workflow to parallelize processing of multiple samples, generate a comprehensive QC report, and adapt the workflow to use paired-end read data.
 
-### What's next?
+### What's next? {#whats-next_2}
 
 Give yourself a big pat on the back! You have completed the Nextflow for RNAseq course.
 
-Head on to the final [course summary](./next_steps.md) to review what you learned and find out what comes next.
+Head on to the final [course summary](./next_steps.mdx) to review what you learned and find out what comes next.

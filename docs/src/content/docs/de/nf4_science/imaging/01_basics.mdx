@@ -1,6 +1,9 @@
-# Teil 1: Grundlegende Operationen ausführen
+---
+title: 'Teil 1: Grundlegende Operationen ausführen'
+description: Im ersten Teil des Nextflow für Bioimaging Trainingskurses verwenden wir ein sehr einfaches, domänenunabhängiges Hello World Beispiel, um wesentliche…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Im ersten Teil des Nextflow für Bioimaging Trainingskurses verwenden wir ein sehr einfaches, domänenunabhängiges Hello World Beispiel, um wesentliche Operationen zu demonstrieren und auf die entsprechenden Nextflow Code-Komponenten hinzuweisen.
 
@@ -19,7 +22,7 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 
 Deine Konsolenausgabe sollte in etwa so aussehen:
 
-```console title="Output" linenums="1"
+```console title="Output" showLineNumbers
  N E X T F L O W   ~  version 26.04.4
 
 Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d
@@ -32,7 +35,7 @@ Glückwunsch, du hast gerade deinen ersten Nextflow Workflow ausgeführt!
 
 Die wichtigste Ausgabe hier ist die letzte Zeile (Zeile 6):
 
-```console title="Output" linenums="6"
+```console title="Output" showLineNumbers startLineNumber=6
 [71/8143bd] sayHello | 1 of 1 ✔
 ```
 
@@ -45,7 +48,7 @@ Das ist großartig, aber du fragst dich vielleicht: wo ist die Ausgabe?
 Dieser Workflow ist so konfiguriert, dass er seine Ausgabe in ein Verzeichnis namens `results` veröffentlicht.
 Wenn du dir dein aktuelles Verzeichnis ansiehst, wirst du sehen, dass Nextflow beim Ausführen des Workflows ein neues Verzeichnis namens `results` erstellt hat, das eine Datei namens `output.txt` enthält.
 
-```console title="results/" linenums="1"
+```console title="results/" showLineNumbers
 results
 └── output.txt
 ```
@@ -55,7 +58,7 @@ results
 <details>
   <summary>Dateiinhalt</summary>
 
-```console title="results/output.txt" linenums="1"
+```console title="results/output.txt" showLineNumbers
 Hello World!
 ```
 
@@ -67,10 +70,10 @@ Beachte jedoch, dass das 'veröffentlichte' Ergebnis eine Kopie (oder in manchen
 
 Jetzt werden wir also unter die Haube schauen, um zu sehen, wo Nextflow tatsächlich die Arbeit ausgeführt hat.
 
-!!! warning "Warnung"
-
-    Nicht alle Workflows sind so eingerichtet, dass sie Ausgaben in ein results Verzeichnis veröffentlichen, und/oder der Verzeichnisname kann unterschiedlich sein.
-    Etwas weiter unten in diesem Abschnitt zeigen wir dir, wie du herausfindest, wo dieses Verhalten festgelegt ist.
+:::caution[Warnung]
+Nicht alle Workflows sind so eingerichtet, dass sie Ausgaben in ein results Verzeichnis veröffentlichen, und/oder der Verzeichnisname kann unterschiedlich sein.
+Etwas weiter unten in diesem Abschnitt zeigen wir dir, wie du herausfindest, wo dieses Verhalten festgelegt ist.
+:::
 
 ### 1.3. Die ursprüngliche Ausgabe und Logs im `work/` Verzeichnis finden
 
@@ -83,7 +86,7 @@ Das klingt vielleicht verwirrend, also schauen wir uns an, wie das in der Praxis
 
 Zurück zur Konsolenausgabe für den Workflow, den wir vorhin ausgeführt haben, hatten wir diese Zeile:
 
-```console title="Excerpt of command output" linenums="6"
+```console title="Excerpt of command output" showLineNumbers startLineNumber=6
 [71/8143bd] sayHello | 1 of 1 ✔
 ```
 
@@ -100,14 +103,14 @@ Dies sollte den vollständigen Verzeichnispfad ergeben: `work/71/8143bd5ed3420e2
 
 Schauen wir uns an, was sich darin befindet.
 
-!!! Tip "Tipp"
+:::tip[Tipp]
+Wenn du den Inhalt des Aufgabenunterverzeichnisses im VSCode Datei-Explorer durchsuchst, siehst du alle Dateien sofort.
+Allerdings sind die Logdateien so eingestellt, dass sie im Terminal unsichtbar sind. Wenn du also `ls` oder `tree` verwenden möchtest, um sie anzuzeigen, musst du die entsprechende Option zum Anzeigen unsichtbarer Dateien setzen.
 
-    Wenn du den Inhalt des Aufgabenunterverzeichnisses im VSCode Datei-Explorer durchsuchst, siehst du alle Dateien sofort.
-    Allerdings sind die Logdateien so eingestellt, dass sie im Terminal unsichtbar sind. Wenn du also `ls` oder `tree` verwenden möchtest, um sie anzuzeigen, musst du die entsprechende Option zum Anzeigen unsichtbarer Dateien setzen.
-
-    ```bash
-    tree -a work
-    ```
+```bash
+tree -a work
+```
+:::
 
 Die genauen Unterverzeichnisnamen werden auf deinem System unterschiedlich sein.
 
@@ -136,7 +139,7 @@ Wenn du sie öffnest, wirst du die `Hello World!` Begrüßung wieder finden.
 <details>
   <summary>Dateiinhalt von output.txt</summary>
 
-```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" showLineNumbers
 Hello World!
 ```
 
@@ -159,16 +162,16 @@ Die `.command.sh` Datei ist besonders nützlich, weil sie dir den Hauptbefehl ze
 <details>
   <summary>Dateiinhalt</summary>
 
-```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" showLineNumbers
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
 </details>
 
-!!! Tip "Tipp"
-
-    Wenn etwas schiefgeht und du Fehlersuche betreiben musst, kann es nützlich sein, das `command.sh` Skript anzuschauen, um genau zu prüfen, welchen Befehl Nextflow basierend auf den Workflow-Anweisungen, Variableninterpolation usw. zusammengestellt hat.
+:::tip[Tipp]
+Wenn etwas schiefgeht und du Fehlersuche betreiben musst, kann es nützlich sein, das `command.sh` Skript anzuschauen, um genau zu prüfen, welchen Befehl Nextflow basierend auf den Workflow-Anweisungen, Variableninterpolation usw. zusammengestellt hat.
+:::
 
 ### 1.4. Optionale Übung: erneut mit verschiedenen Begrüßungen ausführen
 
@@ -200,7 +203,7 @@ Lass uns das `hello-world.nf` Skript im Editor-Fenster öffnen.
 <details>
   <summary>Code</summary>
 
-```groovy title="hello-world.nf" linenums="1"
+```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 /*
@@ -247,7 +250,7 @@ Hier haben wir einen **Prozess** namens `sayHello`, der eine **Eingabe**-Variabl
 <details>
   <summary>Code</summary>
 
-```groovy title="hello-world.nf" linenums="3"
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=3
 /*
  * Verwende echo, um eine Begrüßung in eine Datei zu schreiben
  */
@@ -276,13 +279,13 @@ Die `input` Definition enthält den `val` Qualifier, der Nextflow mitteilt, dass
 
 Die `output` Definition enthält den `path` Qualifier, der Nextflow mitteilt, dass dies als Pfad behandelt werden soll (umfasst sowohl Verzeichnispfade als auch Dateien).
 
-!!! Tip "Tipp"
+:::tip[Tipp]
+Die Ausgabedefinition _bestimmt_ nicht, welche Ausgabe erstellt wird.
+Sie _deklariert_ einfach, wo die erwarteten Ausgabedatei(en) zu finden sind, damit Nextflow danach suchen kann, sobald die Ausführung abgeschlossen ist.
 
-    Die Ausgabedefinition _bestimmt_ nicht, welche Ausgabe erstellt wird.
-    Sie _deklariert_ einfach, wo die erwarteten Ausgabedatei(en) zu finden sind, damit Nextflow danach suchen kann, sobald die Ausführung abgeschlossen ist.
-
-    Dies ist notwendig, um zu überprüfen, dass der Befehl erfolgreich ausgeführt wurde, und um die Ausgabe bei Bedarf an nachgelagerte Prozesse weiterzugeben.
-    Erzeugte Ausgabe, die nicht mit dem übereinstimmt, was im output-Block deklariert ist, wird nicht an nachgelagerte Prozesse weitergegeben.
+Dies ist notwendig, um zu überprüfen, dass der Befehl erfolgreich ausgeführt wurde, und um die Ausgabe bei Bedarf an nachgelagerte Prozesse weiterzugeben.
+Erzeugte Ausgabe, die nicht mit dem übereinstimmt, was im output-Block deklariert ist, wird nicht an nachgelagerte Prozesse weitergegeben.
+:::
 
 In einer realen Pipeline enthält ein Prozess normalerweise zusätzliche Informationen wie Prozessdirektiven, die wir in Kürze einführen werden.
 
@@ -293,7 +296,7 @@ Die Workflow-Definition beginnt mit dem Schlüsselwort `workflow`, gefolgt von e
 
 Hier haben wir einen **Workflow**, der aus einem Aufruf des `sayHello` Prozesses besteht, der eine Eingabe `params.greeting` nimmt, die den Wert enthält, den wir dem `--greeting` Parameter gegeben haben.
 
-```groovy title="hello-world.nf" linenums="22"
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=22
 workflow {
 
     // gib eine Begrüßung aus
@@ -313,10 +316,10 @@ Das `params.greeting`, das wir dem `sayHello()` Prozessaufruf übergeben, ist ei
 Wie oben erwähnt, geben wir so den Wert des `--greeting` Befehlszeilenparameters an den `sayHello()` Prozessaufruf weiter.
 Tatsächlich ermöglicht die einfache Deklaration von `params.someParameterName` uns, dem Workflow einen Parameter namens `--someParameterName` von der Befehlszeile aus zu geben.
 
-!!! Tip "Tipp"
-
-    Diese Workflow-Parameter, die mit dem `params` System deklariert werden, verwenden immer zwei Bindestriche (`--`).
-    Dies unterscheidet sie von Nextflow-Parametern, die nur einen Bindestrich (`-`) verwenden.
+:::tip[Tipp]
+Diese Workflow-Parameter, die mit dem `params` System deklariert werden, verwenden immer zwei Bindestriche (`--`).
+Dies unterscheidet sie von Nextflow-Parametern, die nur einen Bindestrich (`-`) verwenden.
+:::
 
 ### Zusammenfassung
 
@@ -351,26 +354,22 @@ Um es zu verwenden, füge einfach `-resume` zu deinem Befehl hinzu und führe ih
 
 ```bash
 nextflow run hello-world.nf --greeting 'Hello World!' -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
+
+[71/8143bd] sayHello | 1 of 1, cached: 1 ✔
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
-
-    [71/8143bd] sayHello | 1 of 1, cached: 1 ✔
-    ```
 
 Achte auf den `cached:` Teil, der in der Prozessstatuszeile hinzugefügt wurde, was bedeutet, dass Nextflow erkannt hat, dass es diese Arbeit bereits erledigt hat und einfach das Ergebnis aus dem vorherigen erfolgreichen Lauf wiederverwendet.
 
 Du kannst auch sehen, dass der work Unterverzeichnis-Hash derselbe ist wie im vorherigen Lauf.
 Nextflow zeigt dir buchstäblich auf die vorherige Ausführung und sagt "Das habe ich bereits dort drüben gemacht."
 
-!!! Tip "Tipp"
-
-    Wenn du eine Pipeline mit `resume` erneut ausführst, überschreibt Nextflow keine Dateien, die von einem Prozessaufruf, der zuvor erfolgreich ausgeführt wurde, in ein `publishDir` Verzeichnis geschrieben wurden.
+:::tip[Tipp]
+Wenn du eine Pipeline mit `resume` erneut ausführst, überschreibt Nextflow keine Dateien, die von einem Prozessaufruf, der zuvor erfolgreich ausgeführt wurde, in ein `publishDir` Verzeichnis geschrieben wurden.
+:::
 
 ### 3.2. Das Log vergangener Ausführungen einsehen
 
@@ -393,12 +392,12 @@ Nextflow enthält einen praktischen `clean` Unterbefehl, der automatisch die wor
 
 Du kannst das Nextflow Log verwenden, um einen Lauf anhand seines Zeitstempels und/oder seiner Befehlszeile nachzuschlagen, und dann `nextflow clean -before <run_name> -f` verwenden, um work Verzeichnisse von früheren Läufen zu löschen.
 
-!!! Warning "Warnung"
+:::caution[Warnung]
+Das Löschen von work Unterverzeichnissen aus vergangenen Läufen entfernt sie aus dem Nextflow Cache und löscht alle Ausgaben, die in diesen Verzeichnissen gespeichert waren.
+Das bedeutet, dass es Nextflows Fähigkeit zerstört, die Ausführung fortzusetzen, ohne die entsprechenden Prozesse erneut auszuführen.
 
-    Das Löschen von work Unterverzeichnissen aus vergangenen Läufen entfernt sie aus dem Nextflow Cache und löscht alle Ausgaben, die in diesen Verzeichnissen gespeichert waren.
-    Das bedeutet, dass es Nextflows Fähigkeit zerstört, die Ausführung fortzusetzen, ohne die entsprechenden Prozesse erneut auszuführen.
-
-    Du bist dafür verantwortlich, alle Ausgaben zu speichern, die dir wichtig sind oder auf die du dich verlassen möchtest! Wenn du die `publishDir` Direktive für diesen Zweck verwendest, stelle sicher, dass du den `copy` Modus verwendest, nicht den `symlink` Modus.
+Du bist dafür verantwortlich, alle Ausgaben zu speichern, die dir wichtig sind oder auf die du dich verlassen möchtest! Wenn du die `publishDir` Direktive für diesen Zweck verwendest, stelle sicher, dass du den `copy` Modus verwendest, nicht den `symlink` Modus.
+:::
 
 ### Fazit
 

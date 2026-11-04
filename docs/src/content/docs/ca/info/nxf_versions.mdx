@@ -1,12 +1,12 @@
 ---
 title: Versions de Nextflow
 description: Comprendre i gestionar l'evolució de les versions de sintaxi de Nextflow
-hide:
-  - toc
-  - footer
+tableOfContents: false
+prev: false
+next: false
 ---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Versió de sintaxi de Nextflow i requisits actuals
 
@@ -17,8 +17,8 @@ La versió de Nextflow carregada per defecte al nostre entorn de formació és *
 
 Com que els cursos ara utilitzen entrades tipades a nivell de workflow així com directives de sortida a nivell de workflow, requereixen l'ús de l'analitzador de sintaxi V2, **tret que s'especifiqui el contrari**.
 L'analitzador V2 és el valor per defecte a partir de Nextflow 26.04, de manera que amb la versió que carreguem no cal habilitar-lo manualment.
-Si teniu previst utilitzar l'entorn que proporcionem a través de [Github Codespaces](../envsetup/01_setup.md) o [devcontainers locals](../envsetup/03_devcontainer.md), no cal que feu res tret que s'indiqui específicament a les instruccions del curs.
-No obstant això, si teniu previst treballar amb les formacions al vostre propi entorn ([Instal·lació manual](../envsetup/02_local.md)), haureu d'assegurar-vos d'utilitzar Nextflow versió 25.10.2 o posterior, i d'habilitar l'analitzador de sintaxi v2 si feu servir una versió anterior a la 26.04.
+Si teniu previst utilitzar l'entorn que proporcionem a través de [Github Codespaces](../envsetup/01_setup.mdx) o [devcontainers locals](../envsetup/03_devcontainer.mdx), no cal que feu res tret que s'indiqui específicament a les instruccions del curs.
+No obstant això, si teniu previst treballar amb les formacions al vostre propi entorn ([Instal·lació manual](../envsetup/02_local.mdx)), haureu d'assegurar-vos d'utilitzar Nextflow versió 25.10.2 o posterior, i d'habilitar l'analitzador de sintaxi v2 si feu servir una versió anterior a la 26.04.
 
 ## Versions anteriors dels materials de formació
 
@@ -78,7 +78,7 @@ Per **deshabilitar** l'analitzador de sintaxi v2 per a la vostra sessió actual,
 export NXF_SYNTAX_PARSER=v1
 ```
 
-<!-- Will it be possible to disable it in versions after 26.04? -->
+{/* Will it be possible to disable it in versions after 26.04? */}
 
 ### Migrar codi existent
 
@@ -101,8 +101,8 @@ Si necessiteu ajuda, contacteu-nos a Slack o al fòrum.
 
 <div markdown class="homepage_logos">
 
-![Seqera](../assets/img/seqera_logo.png#only-light)
+<span class="dark:sl-hidden">![Seqera](../../assets/img/seqera_logo.png)</span>
 
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
+<span class="light:sl-hidden">![Seqera](../../assets/img/seqera_logo_dark.png)</span>
 
 </div>

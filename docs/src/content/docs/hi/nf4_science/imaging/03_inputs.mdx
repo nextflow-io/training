@@ -1,6 +1,9 @@
-# भाग 3: इनपुट को व्यवस्थित करना
+---
+title: 'भाग 3: इनपुट को व्यवस्थित करना'
+description: भाग 2 में, हमने कमांड लाइन पर कई पैरामीटर के साथ molkart चलाया।
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 भाग 2 में, हमने कमांड लाइन पर कई पैरामीटर के साथ molkart चलाया।
 अब हम इनपुट को प्रबंधित करने के दो बेहतर तरीके सीखेंगे: **पैरामीटर फ़ाइलें** और **samplesheets**।
@@ -122,9 +125,9 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! Warning "चेतावनी"
-
-    ध्यान दें कि samplesheet में पथ वहाँ से सापेक्ष हैं जहाँ आप Nextflow **चलाते** हैं, न कि जहाँ samplesheet स्थित है।
+:::caution[चेतावनी]
+ध्यान दें कि samplesheet में पथ वहाँ से सापेक्ष हैं जहाँ आप Nextflow **चलाते** हैं, न कि जहाँ samplesheet स्थित है।
+:::
 
 अंत में, आइए स्थानीय फ़ाइल पथों के साथ samplesheet के साथ nf-core/molkart को एक बार फिर से निष्पादित करें:
 

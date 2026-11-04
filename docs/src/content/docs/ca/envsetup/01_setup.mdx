@@ -1,14 +1,17 @@
-# GitHub Codespaces
+---
+title: GitHub Codespaces
+description: GitHub Codespaces és una plataforma basada en web que ens permet proporcionar un entorn preconfigurat per a la formació, recolzat per màquines virtuals al…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 GitHub Codespaces és una plataforma basada en web que ens permet proporcionar un entorn preconfigurat per a la formació, recolzat per màquines virtuals al núvol.
 La plataforma està operada per Github (que és propietat de Microsoft), i és accessible gratuïtament (amb quotes d'ús) per a qualsevol persona amb un compte de Github.
 
-!!! warning "Advertència"
-
-    Els comptes vinculats a organitzacions poden estar subjectes a certes restriccions addicionals.
-    Si aquest és el vostre cas, potser haureu d'utilitzar un compte personal independent, o utilitzar una instal·lació local en el seu lloc.
+:::caution[Advertència]
+Els comptes vinculats a organitzacions poden estar subjectes a certes restriccions addicionals.
+Si aquest és el vostre cas, potser haureu d'utilitzar un compte personal independent, o utilitzar una instal·lació local en el seu lloc.
+:::
 
 ## Crear un compte de GitHub
 
@@ -16,7 +19,7 @@ Podeu crear un compte gratuït de GitHub des de la [pàgina d'inici de GitHub](h
 
 ## Llançar el vostre GitHub Codespace
 
-Un cop hàgiu iniciat sessió a GitHub, obriu aquest enllaç al vostre navegador per obrir l'entorn de formació de Nextflow: <https://codespaces.new/nextflow-io/training?quickstart=1&ref=master>
+Un cop hàgiu iniciat sessió a GitHub, obriu aquest enllaç al vostre navegador per obrir l'entorn de formació de Nextflow: [https://codespaces.new/nextflow-io/training?quickstart=1&ref=master](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 Alternativament, podeu fer clic al botó que es mostra a continuació, que es repeteix a cada curs de formació (normalment a la pàgina d'Orientació).
 
@@ -24,7 +27,7 @@ Alternativament, podeu fer clic al botó que es mostra a continuació, que es re
 
 Se us hauria de presentar una pàgina on podeu crear un nou GitHub Codespace:
 
-![Create a GitHub Codespace](img/codespaces_create.png)
+![Create a GitHub Codespace](../../envsetup/img/codespaces_create.png)
 
 ### Configuració
 
@@ -33,24 +36,27 @@ Tret que s'especifiqui el contrari al curs que esteu començant, simplement pode
 
 No obstant això, és possible personalitzar l'entorn fent clic al botó "Change options".
 
-??? info "Opcions de configuració"
+<details class="info">
+<summary>Opcions de configuració</summary>
 
-    Si feu clic al botó "Change options", se us donarà l'opció de personalitzar el següent:
+Si feu clic al botó "Change options", se us donarà l'opció de personalitzar el següent:
 
-    #### Branch
+#### Branch
 
-    Això us permet seleccionar una versió diferent dels materials de formació.
-    La branca `master` generalment conté correccions d'errors i materials que s'han desenvolupat i aprovat recentment però que encara no s'han publicat al lloc web.
-    Altres branques contenen treballs en curs que poden no ser completament funcionals.
+Això us permet seleccionar una versió diferent dels materials de formació.
+La branca `master` generalment conté correccions d'errors i materials que s'han desenvolupat i aprovat recentment però que encara no s'han publicat al lloc web.
+Altres branques contenen treballs en curs que poden no ser completament funcionals.
 
-    #### Machine type
+#### Machine type
 
-    Això us permet personalitzar la màquina virtual que utilitzareu per treballar amb la formació.
+Això us permet personalitzar la màquina virtual que utilitzareu per treballar amb la formació.
 
-    Utilitzar una màquina amb més nuclis us permet aprofitar millor la capacitat de Nextflow per paral·lelitzar l'execució del workflow.
-    No obstant això, consumirà la vostra assignació de quota gratuïta més ràpidament, per la qual cosa no recomanem canviar aquesta configuració tret que s'aconselli a les instruccions del curs que teniu previst fer.
+Utilitzar una màquina amb més nuclis us permet aprofitar millor la capacitat de Nextflow per paral·lelitzar l'execució del workflow.
+No obstant això, consumirà la vostra assignació de quota gratuïta més ràpidament, per la qual cosa no recomanem canviar aquesta configuració tret que s'aconselli a les instruccions del curs que teniu previst fer.
 
-    Consulteu 'Quotes de GitHub Codespaces' a continuació per a més detalls sobre les quotes.
+Consulteu 'Quotes de GitHub Codespaces' a continuació per a més detalls sobre les quotes.
+
+</details>
 
 ### Temps d'inici
 
@@ -61,7 +67,7 @@ No obstant això, no hauria de trigar més de cinc minuts.
 
 Un cop s'hagi carregat el vostre GitHub Codespaces, hauríeu de veure alguna cosa similar al següent (que pot obrir-se en mode clar depenent de les preferències del vostre compte):
 
-![GitHub Codespaces welcome](img/codespaces_welcome.png)
+![GitHub Codespaces welcome](../../envsetup/img/codespaces_welcome.png)
 
 Aquesta és la interfície de l'IDE VSCode, una aplicació popular de desenvolupament de codi que recomanem utilitzar per al desenvolupament amb Nextflow.
 
@@ -71,7 +77,7 @@ Aquesta és la interfície de l'IDE VSCode, una aplicació popular de desenvolup
 
 Podeu ajustar les proporcions relatives dels panells de la finestra com vulgueu.
 
-<!-- TODO (future) Link to development best practices side quest? -->
+{/* TODO (future) Link to development best practices side quest? */}
 
 ## Altres notes sobre l'ús de GitHub Codespaces
 
@@ -80,11 +86,11 @@ Podeu ajustar les proporcions relatives dels panells de la finestra com vulgueu.
 Un cop hàgiu creat un entorn, podeu reprendre'l o reiniciar-lo fàcilment i continuar des d'on ho vau deixar.
 El vostre entorn expirarà després de 30 minuts d'inactivitat i desarà els vostres canvis durant un màxim de 2 setmanes.
 
-Podeu reobrir un entorn des de <https://github.com/codespaces/>.
+Podeu reobrir un entorn des de [https://github.com/codespaces/](https://github.com/codespaces/).
 Es llistaran els entorns anteriors.
 Feu clic a una sessió per reprendre-la.
 
-![List GitHub Codespace sessions](img/codespaces_list.png)
+![List GitHub Codespace sessions](../../envsetup/img/codespaces_list.png)
 
 Si heu desat l'URL del vostre entorn anterior de GitHub Codespaces, simplement podeu obrir-lo al vostre navegador.
 Alternativament, feu clic al mateix botó que vau utilitzar per crear-lo en primer lloc:
@@ -93,7 +99,7 @@ Alternativament, feu clic al mateix botó que vau utilitzar per crear-lo en prim
 
 Hauríeu de veure la sessió anterior, l'opció per defecte és reprendre-la:
 
-![Resume a GitHub Codespace](img/codespaces_resume.png)
+![Resume a GitHub Codespace](../../envsetup/img/codespaces_resume.png)
 
 ### Desar fitxers a la vostra màquina local
 

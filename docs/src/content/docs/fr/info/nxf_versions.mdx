@@ -1,12 +1,12 @@
 ---
 title: Versions de Nextflow
 description: Comprendre et gérer l'évolution des versions de syntaxe de Nextflow
-hide:
-  - toc
-  - footer
+tableOfContents: false
+prev: false
+next: false
 ---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Version de syntaxe Nextflow actuellement prise en charge et exigences
 
@@ -17,8 +17,8 @@ La version de Nextflow actuellement chargée par défaut dans notre environnemen
 
 Étant donné que les cours utilisent désormais des entrées typées au niveau du workflow ainsi que des directives de sortie au niveau du workflow, ils nécessitent l'utilisation de l'analyseur syntaxique V2, **sauf indication contraire**.
 L'analyseur syntaxique V2 est activé par défaut à partir de Nextflow 26.04, donc avec la version que nous chargeons, vous n'avez pas besoin de l'activer manuellement.
-Si vous prévoyez d'utiliser l'environnement que nous fournissons via [Github Codespaces](../envsetup/01_setup.md) ou les [devcontainers locaux](../envsetup/03_devcontainer.md), vous n'avez rien à faire sauf indication contraire dans les instructions du cours.
-Cependant, si vous prévoyez de suivre les formations dans votre propre environnement ([Installation manuelle](../envsetup/02_local.md)), vous devrez vous assurer d'utiliser Nextflow version 25.10.2 ou ultérieure, et d'activer l'analyseur syntaxique v2 si vous utilisez une version antérieure à 26.04.
+Si vous prévoyez d'utiliser l'environnement que nous fournissons via [Github Codespaces](../envsetup/01_setup.mdx) ou les [devcontainers locaux](../envsetup/03_devcontainer.mdx), vous n'avez rien à faire sauf indication contraire dans les instructions du cours.
+Cependant, si vous prévoyez de suivre les formations dans votre propre environnement ([Installation manuelle](../envsetup/02_local.mdx)), vous devrez vous assurer d'utiliser Nextflow version 25.10.2 ou ultérieure, et d'activer l'analyseur syntaxique v2 si vous utilisez une version antérieure à 26.04.
 
 ## Versions antérieures des supports de formation
 
@@ -78,7 +78,7 @@ Pour **désactiver** l'analyseur syntaxique v2 pour votre session actuelle, exé
 export NXF_SYNTAX_PARSER=v1
 ```
 
-<!-- Will it be possible to disable it in versions after 26.04? -->
+{/* Will it be possible to disable it in versions after 26.04? */}
 
 ### Migration du code existant
 
@@ -101,8 +101,8 @@ Si vous avez besoin d'aide, contactez-nous sur Slack ou sur le forum.
 
 <div markdown class="homepage_logos">
 
-![Seqera](../assets/img/seqera_logo.png#only-light)
+<span class="dark:sl-hidden">![Seqera](../../assets/img/seqera_logo.png)</span>
 
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
+<span class="light:sl-hidden">![Seqera](../../assets/img/seqera_logo_dark.png)</span>
 
 </div>

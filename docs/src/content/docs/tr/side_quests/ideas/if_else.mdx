@@ -1,6 +1,9 @@
-# Bölüm 2: If - Else
+---
+title: 'Bölüm 2: If - Else'
+description: '[TODO]'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 [TODO]
 
@@ -41,17 +44,17 @@ Bu alıştırmaları yapmak, eğitimin sonraki bölümlerini anlamak için _gere
 
 `quote` konteyner imajı için, önceki ek alıştırmada kendiniz oluşturduğunuz imajı veya Seqera Containers'dan aldığınız imajı kullanabilirsiniz.
 
-!!! Hint "İpucu"
-
-    getQuote sürecinizin `script` bloğu için iyi bir seçim şu olabilir:
-        ```groovy
-        script:
-            def safe_author = author.tokenize(' ').join('-')
-            """
-            quote "$author" > quote-${safe_author}.txt
-            echo "-${author}" >> quote-${safe_author}.txt
-            """
-        ```
+:::note[İpucu]
+getQuote sürecinizin `script` bloğu için iyi bir seçim şu olabilir:
+    ```nextflow
+    script:
+        def safe_author = author.tokenize(' ').join('-')
+        """
+        quote "$author" > quote-${safe_author}.txt
+        echo "-${author}" >> quote-${safe_author}.txt
+        """
+    ```
+:::
 
 Bu alıştırmanın çözümünü `containers/solutions/hello-containers-4.1.nf` dosyasında bulabilirsiniz.
 
@@ -60,7 +63,7 @@ Bu alıştırmanın çözümünü `containers/solutions/hello-containers-4.1.nf`
 Pipeline'ınıza hem `quote` hem de `sayHello` için tasarlanmış girdileri kabul edebilmesi amacıyla dallanma mantığı ekleyin.
 İşte bir Nextflow iş akışında `if` ifadesinin nasıl kullanılacağına dair bir örnek:
 
-```groovy title="hello-containers.nf"
+```nextflow title="hello-containers.nf"
 workflow {
     if (params.quote) {
         ...
@@ -72,9 +75,9 @@ workflow {
 }
 ```
 
-!!! Hint "İpucu"
-
-    Bir sürecin çıktı kanalına isim atamak için `new_ch = processName.out` kullanabilirsiniz.
+:::note[İpucu]
+Bir sürecin çıktı kanalına isim atamak için `new_ch = processName.out` kullanabilirsiniz.
+:::
 
 Bu alıştırmanın çözümünü `containers/solutions/hello-containers-4.2.nf` dosyasında bulabilirsiniz.
 

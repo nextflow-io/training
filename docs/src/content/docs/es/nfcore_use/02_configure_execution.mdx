@@ -1,11 +1,14 @@
-# Parte 2: Configurar la ejecución del pipeline
+---
+title: 'Parte 2: Configurar la ejecución del pipeline'
+description: En la Parte 1, encontró y ejecutó el pipeline nf-core/demo usando su perfil de prueba.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-En la [Parte 1](./01_run_demo.md), encontró y ejecutó el pipeline nf-core/demo usando su perfil de prueba.
+En la [Parte 1](./01_run_demo.mdx), encontró y ejecutó el pipeline nf-core/demo usando su perfil de prueba.
 Ahora veremos cómo configurar la ejecución del pipeline: establecer parámetros, comprender la validación y personalizar la asignación de recursos y los argumentos de las herramientas.
 
-Como se explica en [Hello Config](../hello_nextflow/06_hello_config.md), queremos poder cambiar con qué datos se ejecutará nuestro pipeline y cómo se ejecutará sin modificar el código del pipeline en sí.
+Como se explica en [Hello Config](../hello_nextflow/06_hello_config.mdx), queremos poder cambiar con qué datos se ejecutará nuestro pipeline y cómo se ejecutará sin modificar el código del pipeline en sí.
 Para ello, Nextflow admite múltiples formas de controlar la configuración del pipeline, lo que puede resultar un poco abrumador.
 
 El proyecto nf-core especifica convenciones para organizar los elementos de configuración, distinguiendo dos tipos de configuración en el nivel superior: **parámetros del pipeline** y **configuración** en sentido estricto.
@@ -13,9 +16,7 @@ El proyecto nf-core especifica convenciones para organizar los elementos de conf
 - **Parámetros del pipeline** (establecidos a través del sistema `params`) generalmente incluyen cosas como archivos de entrada, indicadores de comportamiento de herramientas y parámetros de análisis.
 - **Configuración** en sentido estricto se refiere a la logística de cómo se ejecuta el pipeline, es decir, el executor, la asignación de recursos de cómputo, etc.
 
-<figure class="excalidraw">
-    --8<-- "docs/en/docs/nfcore_use/img/params_vs_config.excalidraw.svg"
-</figure>
+![](../../nfcore_use/img/params_vs_config.excalidraw.svg)
 
 Comencemos abordando los parámetros del pipeline y luego veremos la configuración en sentido estricto.
 
@@ -31,72 +32,68 @@ Ejecute el comando de ayuda para el pipeline demo:
 
 ```bash
 nextflow run nf-core/demo --help
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `https://github.com/nf-core/demo` [adoring_meucci] revision: 32893afef8 [master]
+
+
+------------------------------------------------------
+                                        ,--./,-.
+        ___     __   __   __   ___     /,-._.--~'
+  |\ | |__  __ /  ` /  \ |__) |__         }  {
+  | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                        `._,._,'
+  nf-core/demo 1.2.0
+------------------------------------------------------
+Typical pipeline command:
+
+  nextflow run nf-core/demo -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>
+
+
+Input/output options
+  --input                       [string] Path to a metadata file containing information about the samples in the experiment.
+  --outdir                      [string] The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.
+  --email                       [string] Email address for completion summary.
+  --multiqc_title               [string] MultiQC report title. Printed as page header, used for filename if not otherwise specified.
+
+Reference genome options
+  --genome                      [string] Name of iGenomes reference.
+  --fasta                       [string] Path to FASTA genome file.
+
+Process skipping options
+  --skip_trim                   [boolean] Skip trimming fastq files with seqtk
+
+Generic options
+  --multiqc_methods_description [string]          Custom MultiQC yaml file containing HTML including a methods description.
+  --help                        [boolean, string] Display the help message.
+  --help_full                   [boolean]         Display the full detailed help message.
+  --show_hidden                 [boolean]         Display hidden parameters in the help message (only works when --help or --help_full are provided).
+ !! Hiding 19 param(s), use the `--showHidden` parameter to show them !!
+------------------------------------------------------
+
+* The pipeline
+    https://doi.org/10.5281/zenodo.12192442
+
+* The nf-core framework
+    https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+    https://github.com/nf-core/demo/blob/master/CITATIONS.md
 ```
-
-??? success "Salida del comando"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `https://github.com/nf-core/demo` [adoring_meucci] revision: 32893afef8 [master]
-
-
-    ------------------------------------------------------
-                                            ,--./,-.
-            ___     __   __   __   ___     /,-._.--~'
-      |\ | |__  __ /  ` /  \ |__) |__         }  {
-      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                            `._,._,'
-      nf-core/demo 1.2.0
-    ------------------------------------------------------
-    Typical pipeline command:
-
-      nextflow run nf-core/demo -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>
-
-
-    Input/output options
-      --input                       [string] Path to a metadata file containing information about the samples in the experiment.
-      --outdir                      [string] The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.
-      --email                       [string] Email address for completion summary.
-      --multiqc_title               [string] MultiQC report title. Printed as page header, used for filename if not otherwise specified.
-
-    Reference genome options
-      --genome                      [string] Name of iGenomes reference.
-      --fasta                       [string] Path to FASTA genome file.
-
-    Process skipping options
-      --skip_trim                   [boolean] Skip trimming fastq files with seqtk
-
-    Generic options
-      --multiqc_methods_description [string]          Custom MultiQC yaml file containing HTML including a methods description.
-      --help                        [boolean, string] Display the help message.
-      --help_full                   [boolean]         Display the full detailed help message.
-      --show_hidden                 [boolean]         Display hidden parameters in the help message (only works when --help or --help_full are provided).
-     !! Hiding 19 param(s), use the `--showHidden` parameter to show them !!
-    ------------------------------------------------------
-
-    * The pipeline
-        https://doi.org/10.5281/zenodo.12192442
-
-    * The nf-core framework
-        https://doi.org/10.1038/s41587-020-0439-x
-
-    * Software dependencies
-        https://github.com/nf-core/demo/blob/master/CITATIONS.md
-    ```
 
 Como puede ver, la salida agrupa los parámetros en categorías (opciones de entrada/salida, opciones de genoma de referencia, etc.) con tipos y descripciones para cada uno.
 
 Esta categorización está determinada por un archivo de esquema, que se explica más adelante.
 En pipelines de Nextflow simples, `--help` solo funciona si el desarrollador lo implementó manualmente.
 
-!!! tip "Consejo"
-
-    Use `--help --show_hidden` para ver parámetros adicionales que están ocultos por defecto, como `--publish_dir_mode` o `--monochrome_logs`.
+:::tip[Consejo]
+Use `--help --show_hidden` para ver parámetros adicionales que están ocultos por defecto, como `--publish_dir_mode` o `--monochrome_logs`.
+:::
 
 ### 1.2. Establecer valores de parámetros
 
-Como se explica en [Hello Config](../hello_nextflow/06_hello_config.md), puede establecer valores de parámetros en la línea de comandos con `--nombre_param` o recopilar un conjunto de parámetros en un archivo YAML y pasarlo con `-params-file`.
+Como se explica en [Hello Config](../hello_nextflow/06_hello_config.mdx), puede establecer valores de parámetros en la línea de comandos con `--nombre_param` o recopilar un conjunto de parámetros en un archivo YAML y pasarlo con `-params-file`.
 Ambos enfoques funcionan de la misma manera con los pipelines de nf-core.
 
 Por ejemplo, para omitir el paso de recorte, queremos establecer el parámetro booleano `skip_trim` en `true`.
@@ -110,92 +107,88 @@ Páselo con `-params-file`:
 
 ```bash
 nextflow run nf-core/demo -profile test,docker --outdir demo-results-notrim -params-file my_params.yml
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `https://github.com/nf-core/demo` [focused_heisenberg] revision: 32893afef8 [master]
+
+
+------------------------------------------------------
+                                        ,--./,-.
+        ___     __   __   __   ___     /,-._.--~'
+  |\ | |__  __ /  ` /  \ |__) |__         }  {
+  | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                        `._,._,'
+  nf-core/demo 1.2.0
+------------------------------------------------------
+
+Input/output options
+  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
+  outdir                    : demo-results-notrim
+
+Process skipping options
+  skip_trim                 : true
+
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
+
+Generic options
+  trace_report_suffix       : 2026-07-03_22-08-47
+
+Core Nextflow options
+  revision                  : master
+  runName                   : focused_heisenberg
+  containerEngine           : docker
+  launchDir                 : /workspaces/training/nfcore-use
+  workDir                   : /workspaces/training/nfcore-use/work
+  projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
+  userName                  : root
+  profile                   : test,docker
+  configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+
+* The pipeline
+    https://doi.org/10.5281/zenodo.12192442
+
+* The nf-core framework
+    https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+    https://github.com/nf-core/demo/blob/master/CITATIONS.md
+
+executor >  local (5)
+[7a/f3599e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) | 3 of 3 ✔
+[b0/2f0bdc] NFCORE_DEMO:DEMO:COWPY               | 1 of 1 ✔
+[c3/3c2278] NFCORE_DEMO:DEMO:MULTIQC (demo)      | 1 of 1 ✔
+-[nf-core/demo] Pipeline completed successfully-
 ```
-
-??? success "Salida del comando"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `https://github.com/nf-core/demo` [focused_heisenberg] revision: 32893afef8 [master]
-
-
-    ------------------------------------------------------
-                                            ,--./,-.
-            ___     __   __   __   ___     /,-._.--~'
-      |\ | |__  __ /  ` /  \ |__) |__         }  {
-      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                            `._,._,'
-      nf-core/demo 1.2.0
-    ------------------------------------------------------
-
-    Input/output options
-      input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
-      outdir                    : demo-results-notrim
-
-    Process skipping options
-      skip_trim                 : true
-
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
-
-    Generic options
-      trace_report_suffix       : 2026-07-03_22-08-47
-
-    Core Nextflow options
-      revision                  : master
-      runName                   : focused_heisenberg
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nfcore-use
-      workDir                   : /workspaces/training/nfcore-use/work
-      projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
-      userName                  : root
-      profile                   : test,docker
-      configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
-
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-
-    * The pipeline
-        https://doi.org/10.5281/zenodo.12192442
-
-    * The nf-core framework
-        https://doi.org/10.1038/s41587-020-0439-x
-
-    * Software dependencies
-        https://github.com/nf-core/demo/blob/master/CITATIONS.md
-
-    executor >  local (5)
-    [7a/f3599e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) | 3 of 3 ✔
-    [b0/2f0bdc] NFCORE_DEMO:DEMO:COWPY               | 1 of 1 ✔
-    [c3/3c2278] NFCORE_DEMO:DEMO:MULTIQC (demo)      | 1 of 1 ✔
-    -[nf-core/demo] Pipeline completed successfully-
-    ```
 
 El proceso `SEQTK_TRIM` ya no aparece en la salida.
 
-!!! warning "Advertencia: Limitaciones importantes sobre las entradas de parámetros"
+:::caution[Advertencia: Limitaciones importantes sobre las entradas de parámetros]
+**Establecer parámetros booleanos en la línea de comandos**
 
-    **Establecer parámetros booleanos en la línea de comandos**
+A partir de la versión 26.04 de Nextflow, todos los valores proporcionados en la línea de comandos se tipifican como strings.
+Para un parámetro booleano como `skip_trim`, pasarlo como un indicador simple (`--skip_trim`) o como `--skip_trim true` se evalúa como el **string** `"true"`, lo que falla en la validación del esquema:
 
-    A partir de la versión 26.04 de Nextflow, todos los valores proporcionados en la línea de comandos se tipifican como strings.
-    Para un parámetro booleano como `skip_trim`, pasarlo como un indicador simple (`--skip_trim`) o como `--skip_trim true` se evalúa como el **string** `"true"`, lo que falla en la validación del esquema:
+```console
+* --skip_trim (true): Value is [string] but should be [boolean]
+```
 
-    ```console
-    * --skip_trim (true): Value is [string] but should be [boolean]
-    ```
+Para establecer un parámetro booleano con un valor genuino `true`/`false`, use un `-params-file` como se muestra arriba, o establézcalo en un archivo de configuración.
+Los parámetros de tipo string, integer y ruta de archivo no se ven afectados y aún pueden establecerse directamente en la línea de comandos.
+Este curso usa este patrón en todo momento para los parámetros booleanos.
 
-    Para establecer un parámetro booleano con un valor genuino `true`/`false`, use un `-params-file` como se muestra arriba, o establézcalo en un archivo de configuración.
-    Los parámetros de tipo string, integer y ruta de archivo no se ven afectados y aún pueden establecerse directamente en la línea de comandos.
-    Este curso usa este patrón en todo momento para los parámetros booleanos.
+**Usar archivos de configuración personalizados**
 
-    **Usar archivos de configuración personalizados**
+Aunque técnicamente es posible establecer parámetros del pipeline en un archivo de configuración personalizado pasado con `-c`, esto puede no anular los valores predeterminados ya establecidos en el propio `nextflow.config` del pipeline, dependiendo de las reglas de precedencia de configuración de Nextflow.
+Usar `--nombre_param` en la línea de comandos o `-params-file` es más confiable, ya que estos siempre tienen precedencia.
 
-    Aunque técnicamente es posible establecer parámetros del pipeline en un archivo de configuración personalizado pasado con `-c`, esto puede no anular los valores predeterminados ya establecidos en el propio `nextflow.config` del pipeline, dependiendo de las reglas de precedencia de configuración de Nextflow.
-    Usar `--nombre_param` en la línea de comandos o `-params-file` es más confiable, ya que estos siempre tienen precedencia.
-
-    Como regla general: si aparece en la salida de `--help`, establézcalo mediante la línea de comandos o un archivo de parámetros en lugar de un archivo de configuración.
+Como regla general: si aparece en la salida de `--help`, establézcalo mediante la línea de comandos o un archivo de parámetros en lugar de un archivo de configuración.
+:::
 
 ### 1.3. Validación de parámetros
 
@@ -205,7 +198,7 @@ Este esquema registra el tipo, la descripción, el valor predeterminado y la agr
 Además de potenciar la salida de `--help`, el archivo de esquema también permite la validación automatizada en el momento del lanzamiento.
 Esto significa que Nextflow puede verificar que cada parámetro que pase exista y haya recibido un valor apropiado (del tipo apropiado, dentro del rango de valores permitidos, etc.).
 
-Cubrimos esto con más detalle en la [sección de validación de entradas](../nfcore_build/04_input_validation.md), pero ya puede verlo en acción proporcionando al pipeline demo alguna entrada de parámetros no válida.
+Cubrimos esto con más detalle en la [sección de validación de entradas](../nfcore_build/04_input_validation.mdx), pero ya puede verlo en acción proporcionando al pipeline demo alguna entrada de parámetros no válida.
 
 #### 1.3.1. Parámetros no reconocidos
 
@@ -247,7 +240,7 @@ The following invalid input values have been detected:
 ```
 
 El pipeline se detiene antes de que se ejecute cualquier proceso, evitando una ejecución fallida o incorrecta.
-Como se señala en [1.2](#12-set-parameter-values), los parámetros booleanos deben establecerse con un valor genuino `true`/`false` en un archivo de parámetros en lugar de pasarse en la línea de comandos, ya que los valores de la línea de comandos se tipifican como strings.
+Como se señala en [1.2](#12-establecer-valores-de-parámetros), los parámetros booleanos deben establecerse con un valor genuino `true`/`false` en un archivo de parámetros en lugar de pasarse en la línea de comandos, ya que los valores de la línea de comandos se tipifican como strings.
 
 ### 1.4. Validación de entradas
 
@@ -256,48 +249,51 @@ Por ejemplo, si un pipeline espera una hoja de muestras como su entrada de datos
 
 Luego, en tiempo de ejecución, Nextflow puede verificar que el archivo de entrada proporcionado sea válido.
 
-También cubrimos esto con más detalle en la [sección de validación de entradas](../nfcore_build/04_input_validation.md), pero ya puede verlo en acción proporcionando al pipeline demo una hoja de muestras de entrada no válida.
+También cubrimos esto con más detalle en la [sección de validación de entradas](../nfcore_build/04_input_validation.mdx), pero ya puede verlo en acción proporcionando al pipeline demo una hoja de muestras de entrada no válida.
 
 El pipeline `nf-core/demo` espera un archivo CSV con las columnas `sample`, `fastq_1` y `fastq_2`.
 Esto está definido en un archivo de esquema (`assets/schema_input.json`) que especifica la estructura esperada, los tipos de columnas y las restricciones.
 
-??? abstract "Archivo de esquema para entradas"
+<details class="abstract">
+<summary>Archivo de esquema para entradas</summary>
 
-    ```json title="assets/schema_input.json"
-    {
-        "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": "https://raw.githubusercontent.com/nf-core/demo/master/assets/schema_input.json",
-        "title": "nf-core/demo pipeline - params.input schema",
-        "description": "Schema for the file provided with params.input",
-        "type": "array",
-        "items": {
-            "type": "object",
-            "properties": {
-                "sample": {
-                    "type": "string",
-                    "pattern": "^\\S+$",
-                    "errorMessage": "Sample name must be provided and cannot contain spaces",
-                    "meta": ["id"]
-                },
-                "fastq_1": {
-                    "type": "string",
-                    "format": "file-path",
-                    "exists": true,
-                    "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
-                    "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
-                },
-                "fastq_2": {
-                    "type": "string",
-                    "format": "file-path",
-                    "exists": true,
-                    "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
-                    "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
-                }
+```json title="assets/schema_input.json"
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/nf-core/demo/master/assets/schema_input.json",
+    "title": "nf-core/demo pipeline - params.input schema",
+    "description": "Schema for the file provided with params.input",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "sample": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Sample name must be provided and cannot contain spaces",
+                "meta": ["id"]
             },
-            "required": ["sample", "fastq_1"]
-        }
+            "fastq_1": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
+                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+            },
+            "fastq_2": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
+                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+            }
+        },
+        "required": ["sample", "fastq_1"]
     }
-    ```
+}
+```
+
+</details>
 
 El esquema especifica que `sample` y `fastq_1` son obligatorios, mientras que `fastq_2` es opcional (admitiendo datos tanto de extremos pareados como de extremo único).
 Las rutas de archivo se validan en cuanto a su existencia y patrón de extensión.
@@ -335,7 +331,7 @@ nf-schema no se detiene en el primer error — recopila cada problema y los list
 
 Cada error identifica la entrada y el campo exactos que causaron el problema, para que pueda corregir su hoja de muestras y luego volver a lanzar el pipeline con la confianza de que no va a fallar en algún punto posterior cuando Nextflow intente acceder a la ruta del archivo.
 
-Para los desarrolladores, todo esto se cubre con más detalle en la [Parte 4 de Build with nf-core](../nfcore_build/04_input_validation.md).
+Para los desarrolladores, todo esto se cubre con más detalle en la [Parte 4 de Build with nf-core](../nfcore_build/04_input_validation.mdx).
 
 ### Conclusión
 
@@ -356,8 +352,8 @@ Antes de anular cualquier configuración, es útil saber dónde se encuentran lo
 
 ### 2.1. Explorar los archivos de configuración
 
-Ya vio en la [Parte 1](./01_run_demo.md) que el código fuente del pipeline se encuentra en `$NXF_HOME/assets`.
-Usando el enlace simbólico `pipelines` que creó en la [Parte 1](./01_run_demo.md), liste los archivos de configuración para ver qué está disponible:
+Ya vio en la [Parte 1](./01_run_demo.mdx) que el código fuente del pipeline se encuentra en `$NXF_HOME/assets`.
+Usando el enlace simbólico `pipelines` que creó en la [Parte 1](./01_run_demo.mdx), liste los archivos de configuración para ver qué está disponible:
 
 ```bash
 ls pipelines/nf-core/demo/conf/
@@ -380,15 +376,13 @@ test.config
 test_full.config
 ```
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nfcore_use/img/nfcore_config_files.excalidraw.svg"
-</figure>
+![](../../nfcore_use/img/nfcore_config_files.excalidraw.svg)
 
 Los archivos de configuración más importantes son:
 
 - **`conf/base.config`**: Define etiquetas de recursos (`process_low`, `process_medium`, `process_high`) que asignan CPUs, memoria y tiempo a los procesos. Cuando vea que un proceso usa más recursos de los esperados, aquí es donde se originan esos valores predeterminados.
 - **`conf/modules.config`**: Establece los argumentos de las herramientas por proceso (`ext.args`) y la configuración de publicación de salidas (`publishDir`). Abra este archivo para ver qué argumentos recibe cada herramienta por defecto.
-- **`conf/test.config`**: El perfil de prueba que usó en la [Parte 1](./01_run_demo.md), que limita los recursos mediante `resourceLimits` y establece una hoja de muestras de prueba. Se activa con `-profile test`.
+- **`conf/test.config`**: El perfil de prueba que usó en la [Parte 1](./01_run_demo.mdx), que limita los recursos mediante `resourceLimits` y establece una hoja de muestras de prueba. Se activa con `-profile test`.
   También existe un `conf/test_full.config` para ejecutar con un conjunto de datos de prueba de tamaño completo, útil para benchmarking.
 
 El `nextflow.config` central carga todo lo anterior y establece los valores predeterminados apropiados para todo.
@@ -408,7 +402,7 @@ La convención `ext.args` le permite pasar estos argumentos a la herramienta sub
 
 El archivo `custom.config` proporcionado en su directorio de trabajo demuestra ambas anulaciones:
 
-```groovy title="custom.config" linenums="1"
+```nextflow title="custom.config" showLineNumbers
 process {
     withName: 'FASTQC' {
         cpus = 2
@@ -430,18 +424,14 @@ Ejecute el pipeline con esta configuración:
 
 ```bash
 nextflow run nf-core/demo -profile test,docker --outdir demo-results-custom -c custom.config
+# [!output]
+executor >  local (8)
+[95/b32876] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE)     | 3 of 3 ✔
+[17/428668] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) | 3 of 3 ✔
+[cf/85991a] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
+[3c/94a7a0] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
+-[nf-core/demo] Pipeline completed successfully-
 ```
-
-??? success "Salida del comando"
-
-    ```console
-    executor >  local (8)
-    [95/b32876] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE)     | 3 of 3 ✔
-    [17/428668] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) | 3 of 3 ✔
-    [cf/85991a] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
-    [3c/94a7a0] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
-    -[nf-core/demo] Pipeline completed successfully-
-    ```
 
 El indicador `-c` agrega su configuración sobre la configuración integrada del pipeline.
 
@@ -449,29 +439,25 @@ Para verificar que la anulación de `ext.args` tuvo efecto, encuentre el hash de
 
 ```bash
 cat work/17/428668/.command.sh
+# [!output]
+#!/usr/bin/env bash -e -u -o pipefail
+printf "%s\n" sample1_R1.fastq.gz sample1_R2.fastq.gz | while read f;
+do
+    seqtk \
+        trimfq \
+        -b 5 \
+        $f \
+        | gzip --no-name > SAMPLE1_PE_$(basename $f)
+done
+...
 ```
-
-??? success "Salida del comando"
-
-    ```console
-    #!/usr/bin/env bash -e -u -o pipefail
-    printf "%s\n" sample1_R1.fastq.gz sample1_R2.fastq.gz | while read f;
-    do
-        seqtk \
-            trimfq \
-            -b 5 \
-            $f \
-            | gzip --no-name > SAMPLE1_PE_$(basename $f)
-    done
-    ...
-    ```
 
 Debería ver `-b 5` en el comando `seqtk trimfq`.
 
 Una cosa importante que debe saber sobre `ext.args`: si un módulo ya tiene un valor predeterminado establecido, su valor lo **reemplazará completamente** en lugar de agregarse a él.
 Por ejemplo, `FASTQC` tiene `ext.args = '--quiet'` establecido por defecto en `conf/modules.config`:
 
-```groovy title="conf/modules.config" linenums="21" hl_lines="2"
+```nextflow {2} title="conf/modules.config" showLineNumbers startLineNumber=21
     withName: FASTQC {
         ext.args   = '--quiet'
         publishDir = [
@@ -493,7 +479,7 @@ Sabe dónde se encuentran los valores predeterminados de configuración de los p
 
 ### ¿Qué sigue?
 
-Continúe con la [Parte 3](./03_run_production_pipeline.md), donde aplicará lo que ha aprendido a un pipeline de producción real.
+Continúe con la [Parte 3](./03_run_production_pipeline.mdx), donde aplicará lo que ha aprendido a un pipeline de producción real.
 
 ---
 

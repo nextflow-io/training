@@ -1,12 +1,12 @@
 ---
 title: Nextflow versions
 description: Understanding and managing the evolution of Nextflow's syntax versions
-hide:
-  - toc
-  - footer
+tableOfContents: false
+prev: false
+next: false
 ---
 
-## Current supported Nextflow syntax version & requirements
+## Current supported Nextflow syntax version & requirements {#current-supported-nextflow-syntax-version-requirements}
 
 As of version 3.0 of the training portal, all our training courses are compatible with Nextflow version 25.10.2 or later unless otherwise specified on the course index page.
 (This does not include deprecated or otherwise archived materials which may not have a version notice).
@@ -15,8 +15,8 @@ The version of Nextflow currently loaded by default in our training environment 
 
 Because the courses now use typed inputs at the workflow level as well as workflow-level output directives, they require the use of the V2 syntax parser, **unless otherwise specified**.
 The V2 parser is the default from Nextflow 26.04 onward, so on the version we load you don't need to enable it manually.
-If you plan to use the environment we provide through [Github Codespaces](../envsetup/01_setup.md) or [local devcontainers](../envsetup/03_devcontainer.md), you don't need to do anything unless specifically noted in the course instructions.
-However, if you are planning to work through the trainings in your own environment ([Manual install](../envsetup/02_local.md)), you will need to make sure to use Nextflow version 25.10.2 or later, and to enable the v2 syntax parser if you are on a version before 26.04.
+If you plan to use the environment we provide through [Github Codespaces](../envsetup/01_setup.mdx) or [local devcontainers](../envsetup/03_devcontainer.mdx), you don't need to do anything unless specifically noted in the course instructions.
+However, if you are planning to work through the trainings in your own environment ([Manual install](../envsetup/02_local.mdx)), you will need to make sure to use Nextflow version 25.10.2 or later, and to enable the v2 syntax parser if you are on a version before 26.04.
 
 ## Older versions of the training materials
 
@@ -76,7 +76,7 @@ To **disable** the v2 syntax parser for your current session, run the following 
 export NXF_SYNTAX_PARSER=v1
 ```
 
-<!-- Will it be possible to disable it in versions after 26.04? -->
+{/* Will it be possible to disable it in versions after 26.04? */}
 
 ### Migrating existing code
 

@@ -1,10 +1,13 @@
-# Primers passos
+---
+title: Primers passos
+description: 'Escala amb Seqera: Primers passos'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Iniciar un entorn de formació
 
-Per utilitzar l'entorn preconfigurado que proporcionem a GitHub Codespaces, feu clic al botó "Open in GitHub Codespaces" que trobareu a continuació. Per a altres opcions, consulteu [Opcions d'entorn](../envsetup/index.md).
+Per utilitzar l'entorn preconfigurado que proporcionem a GitHub Codespaces, feu clic al botó "Open in GitHub Codespaces" que trobareu a continuació. Per a altres opcions, consulteu [Opcions d'entorn](../envsetup/index.mdx).
 
 Us recomanem obrir l'entorn de formació en una nova pestanya o finestra del navegador (feu clic amb el botó dret, ctrl-clic o cmd-clic segons el vostre equip) per poder continuar llegint mentre es carrega l'entorn.
 Haureu de mantenir aquestes instruccions obertes en paral·lel per treballar el curs.
@@ -18,7 +21,7 @@ Aquest entorn de formació conté tot el programari, el codi i les dades necessa
 El codespace està configurat amb una interfície VSCode, que inclou un explorador de fitxers, un editor de codi i un terminal.
 Totes les instruccions donades durant el curs (p. ex., "obriu el fitxer", "editeu el codi" o "executeu aquesta comanda") fan referència a aquestes tres parts de la interfície VSCode, llevat que s'indiqui el contrari.
 
-Si esteu treballant aquest curs pel vostre compte, familiaritzeu-vos amb els [conceptes bàsics de l'entorn](../envsetup/01_setup.md) per obtenir més detalls.
+Si esteu treballant aquest curs pel vostre compte, familiaritzeu-vos amb els [conceptes bàsics de l'entorn](../envsetup/01_setup.mdx) per obtenir més detalls.
 
 ## Prepareu-vos per treballar
 
@@ -39,13 +42,13 @@ A continuació, configureu VSCode perquè es centri en aquest directori, de mane
 code .
 ```
 
-!!! tip "Consell"
+:::tip[Consell]
+Si per qualsevol motiu sortiu d'aquest directori (p. ex., el vostre codespace entra en repòs), sempre podeu utilitzar la ruta completa per tornar-hi, assumint que esteu executant-ho dins de l'entorn de formació de Github Codespaces:
 
-    Si per qualsevol motiu sortiu d'aquest directori (p. ex., el vostre codespace entra en repòs), sempre podeu utilitzar la ruta completa per tornar-hi, assumint que esteu executant-ho dins de l'entorn de formació de Github Codespaces:
-
-    ```bash
-    cd /workspaces/training/seqera-scale
-    ```
+```bash
+cd /workspaces/training/seqera-scale
+```
+:::
 
 ### Explorar els materials proporcionats
 
@@ -56,12 +59,15 @@ Executeu el següent des del terminal per veure l'estructura completa:
 tree -a .
 ```
 
-??? abstract "Contingut del directori"
+<details class="abstract">
+<summary>Contingut del directori</summary>
 
-    ```console
-    .
-    └── .seqera_config
-    ```
+```console
+.
+└── .seqera_config
+```
+
+</details>
 
 El fitxer **`.seqera_config`** és un esquelet que omplireu durant la secció 3 per configurar la CLI `tw` amb el vostre token d'accés i espai de treball de Seqera.
 
@@ -75,4 +81,4 @@ Creieu que esteu a punt per començar?
 
 Si podeu marcar totes les caselles, esteu a punt per continuar.
 
-**Per continuar a [Part 1: Llançar pipelines des de la interfície web](./01_run_with_seqera.md), feu clic a la fletxa a la cantonada inferior dreta d'aquesta pàgina.**
+**Per continuar a [Part 1: Llançar pipelines des de la interfície web](./01_run_with_seqera.mdx), feu clic a la fletxa a la cantonada inferior dreta d'aquesta pàgina.**

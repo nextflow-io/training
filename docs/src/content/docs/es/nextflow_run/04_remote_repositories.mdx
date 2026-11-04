@@ -1,6 +1,9 @@
-# Parte 4: Ejecutar pipelines remotos
+---
+title: 'Parte 4: Ejecutar pipelines remotos'
+description: Hasta ahora, ha ejecutado scripts de workflow almacenados localmente.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Hasta ahora, ha ejecutado scripts de workflow almacenados localmente.
 En la práctica, con frecuencia querrá ejecutar pipelines publicados en repositorios remotos, como GitHub, sin necesidad de descargarlos usted mismo.
@@ -20,27 +23,23 @@ Este es un pipeline diferente, mucho más simple que el que ha estado ejecutando
 
 ```bash
 nextflow run nextflow-io/hello
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Pulling nextflow-io/hello ...
+ downloaded from https://github.com/nextflow-io/hello.git
+Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] revision: 3c2cdc9823 [master]
+
+executor >  local (4)
+[ba/08236d] sayHello (4) | 4 of 4 ✔
+Ciao world!
+
+Hello world!
+
+Bonjour world!
+
+Hola world!
 ```
-
-??? success "Salida del comando"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Pulling nextflow-io/hello ...
-     downloaded from https://github.com/nextflow-io/hello.git
-    Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] revision: 3c2cdc9823 [master]
-
-    executor >  local (4)
-    [ba/08236d] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
-    Hello world!
-
-    Bonjour world!
-
-    Hola world!
-    ```
 
 ### 1.2. Encontrar dónde se almacena en caché el pipeline
 
@@ -52,39 +51,31 @@ Para encontrar dónde quedó un pipeline específico y qué revisiones están di
 
 ```bash
 nextflow info nextflow-io/hello
+# [!output]
+ project name: nextflow-io/hello
+ repository  : https://github.com/nextflow-io/hello
+ local path  : /workspaces/.nextflow/assets/.repos/nextflow-io/hello
+ main script : main.nf
+ revisions   :
+ > master (default)
+   mybranch
+   testing
+   v1.1 [t]
+   v1.2 [t]
+   v1.3 [t]
 ```
 
-??? success "Salida del comando"
-
-    ```console
-     project name: nextflow-io/hello
-     repository  : https://github.com/nextflow-io/hello
-     local path  : /workspaces/.nextflow/assets/.repos/nextflow-io/hello
-     main script : main.nf
-     revisions   :
-     > master (default)
-       mybranch
-       testing
-       v1.1 [t]
-       v1.2 [t]
-       v1.3 [t]
-    ```
-
-    Nextflow marca cada revisión que ya ha descargado localmente con `>`; el resto están disponibles pero aún no se han obtenido en una copia de trabajo.
+Nextflow marca cada revisión que ya ha descargado localmente con `>`; el resto están disponibles pero aún no se han obtenido en una copia de trabajo.
 
 También puede listar todos los pipelines que ha descargado hasta ahora con `nextflow list`:
 
 ```bash
 nextflow list
+# [!output]
+nextflow-io/hello
 ```
 
-??? success "Salida del comando"
-
-    ```console
-    nextflow-io/hello
-    ```
-
-El curso [Use nf-core](../nfcore_use/01_run_demo.md#12-retrieve-the-pipeline-code) cubre este mecanismo de caché con mayor profundidad, incluyendo cómo explorar el código fuente de un pipeline descargado.
+El curso [Use nf-core](../nfcore_use/01_run_demo.mdx#12-recuperar-el-código-del-pipeline) cubre este mecanismo de caché con mayor profundidad, incluyendo cómo explorar el código fuente de un pipeline descargado.
 
 ### Conclusión
 
@@ -105,27 +96,23 @@ Puede fijar una versión (tag), rama o commit específico usando el indicador `-
 
 ```bash
 nextflow run nextflow-io/hello -r v1.3
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Pulling nextflow-io/hello:v1.3 ...
+ downloaded from https://github.com/nextflow-io/hello.git
+Launching `https://github.com/nextflow-io/hello` [sick_carson] revision: 2ce0b0e294 [v1.3]
+
+executor >  local (4)
+[61/e11f77] sayHello (4) | 4 of 4 ✔
+Ciao world!
+
+Bonjour world!
+
+Hello world!
+
+Hola world!
 ```
-
-??? success "Salida del comando"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Pulling nextflow-io/hello:v1.3 ...
-     downloaded from https://github.com/nextflow-io/hello.git
-    Launching `https://github.com/nextflow-io/hello` [sick_carson] revision: 2ce0b0e294 [v1.3]
-
-    executor >  local (4)
-    [61/e11f77] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
-    Bonjour world!
-
-    Hello world!
-
-    Hola world!
-    ```
 
 Nextflow obtiene esta revisión la primera vez que la solicita, de ahí las líneas `Pulling` y `downloaded from`; solicitar la misma revisión nuevamente más adelante omite directamente el paso de descarga y va a `Launching`.
 Fijar una revisión exacta es esencial para la reproducibilidad.
@@ -138,25 +125,21 @@ Intente ejecutar el pipeline nuevamente sin `-r`:
 
 ```bash
 nextflow run nextflow-io/hello
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `https://github.com/nextflow-io/hello` [hungry_maxwell] revision: 3c2cdc9823 [master]
+
+executor >  local (4)
+[ba/08236d] sayHello (4) | 4 of 4 ✔
+Ciao world!
+
+Hello world!
+
+Bonjour world!
+
+Hola world!
 ```
-
-??? success "Salida del comando"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `https://github.com/nextflow-io/hello` [hungry_maxwell] revision: 3c2cdc9823 [master]
-
-    executor >  local (4)
-    [ba/08236d] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
-    Hello world!
-
-    Bonjour world!
-
-    Hola world!
-    ```
 
 Aunque la ejecución anterior fijó explícitamente `v1.3`, esta ejecución vuelve directamente a la rama predeterminada (`master`).
 Nextflow mantiene una copia de trabajo local separada para cada revisión que ha utilizado, que es lo que muestran los marcadores `>` en `nextflow info`, pero nunca recuerda cuál ejecutó por última vez.
@@ -170,7 +153,7 @@ Sabe cómo fijar un pipeline remoto a una versión, rama o commit específico pa
 ### ¿Qué sigue?
 
 Ha cubierto los fundamentos de la ejecución y gestión de pipelines de Nextflow.
-Consulte el [Resumen del curso](next_steps.md) para saber hacia dónde continuar desde aquí.
+Consulte el [Resumen del curso](next_steps.mdx) para saber hacia dónde continuar desde aquí.
 
 ---
 

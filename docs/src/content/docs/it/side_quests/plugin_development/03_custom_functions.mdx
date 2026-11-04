@@ -1,16 +1,19 @@
-# Parte 3: Funzioni Personalizzate
+---
+title: 'Parte 3: Funzioni Personalizzate'
+description: Alla fine di questa sezione, avrete funzioni personalizzate nel vostro plugin, compilate e installate localmente, in esecuzione in un flusso di lavoro reale.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Alla fine di questa sezione, avrete funzioni personalizzate nel vostro plugin, compilate e installate localmente, in esecuzione in un flusso di lavoro reale.
 
-!!! tip "Iniziate da qui?"
+:::tip[Iniziate da qui?]
+Se vi unite a partire da questa parte, copiate la soluzione dalla Parte 2 da usare come punto di partenza:
 
-    Se vi unite a partire da questa parte, copiate la soluzione dalla Parte 2 da usare come punto di partenza:
-
-    ```bash
-    cp -r solutions/2-create-project/* .
-    ```
+```bash
+cp -r solutions/2-create-project/* .
+```
+:::
 
 ---
 
@@ -31,7 +34,7 @@ Apritelo per vedere il punto di partenza:
 cat src/main/groovy/training/plugin/GreetingExtension.groovy
 ```
 
-```groovy title="Output" hl_lines="29 40-43"
+```groovy {29,40-43} title="Output"
 /*
  * Copyright 2025, Seqera Labs
  *
@@ -60,10 +63,10 @@ import nextflow.plugin.extension.PluginExtensionPoint
  * script Nextflow.
  */
 @CompileStatic
-class GreetingExtension extends PluginExtensionPoint { // (1)!
+class GreetingExtension extends PluginExtensionPoint { // [!annotate] La classe su cui si basa la vostra estensione. Nextflow richiede questa classe per riconoscere le vostre funzioni.
 
     @Override
-    protected void init(Session session) {             // (2)!
+    protected void init(Session session) {             // [!annotate] Chiamata quando il plugin viene caricato; da usare per l'inizializzazione
     }
 
     /**
@@ -71,17 +74,13 @@ class GreetingExtension extends PluginExtensionPoint { // (1)!
      *
      * @param target
      */
-    @Function                                          // (3)!
+    @Function                                          // [!annotate] Rende questo metodo richiamabile dai flussi di lavoro tramite `include`
     void sayHello(String target) {
         println "Hello, ${target}!"
     }
 
 }
 ```
-
-1. La classe su cui si basa la vostra estensione. Nextflow richiede questa classe per riconoscere le vostre funzioni.
-2. Chiamata quando il plugin viene caricato; da usare per l'inizializzazione
-3. Rende questo metodo richiamabile dai flussi di lavoro tramite `include`
 
 Il template include una funzione `sayHello` di esempio.
 L'annotazione `@Function` è ciò che rende un metodo richiamabile dai flussi di lavoro Nextflow.
@@ -101,57 +100,53 @@ Sostituitela con la vostra funzione per vedere il ciclo completo di scrittura, c
 
 Modificate `src/main/groovy/training/plugin/GreetingExtension.groovy` per sostituire il metodo `sayHello`:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="GreetingExtension.groovy" linenums="24" hl_lines="8-14"
-    @CompileStatic
-    class GreetingExtension extends PluginExtensionPoint {
+```groovy {12-20} title="GreetingExtension.groovy" showLineNumbers startLineNumber=24 step="Prima"
+/**
+ * Implementa una funzione personalizzata che può essere importata da
+ * script Nextflow.
+ */
+@CompileStatic
+class GreetingExtension extends PluginExtensionPoint {
 
-        @Override
-        protected void init(Session session) {
-        }
-
-        /**
-         * Inverte una stringa di saluto
-         */
-        @Function                                // (1)!
-        String reverseGreeting(String greeting) { // (2)!
-            return greeting.reverse()             // (3)!
-        }
-
+    @Override
+    protected void init(Session session) {
     }
-    ```
 
-    1. Rende il metodo richiamabile dai flussi di lavoro Nextflow
-    2. Accetta una String, restituisce una String
-    3. Il metodo di inversione delle stringhe integrato in Groovy
-
-=== "Prima"
-
-    ```groovy title="GreetingExtension.groovy" linenums="24" hl_lines="12-20"
     /**
-     * Implementa una funzione personalizzata che può essere importata da
-     * script Nextflow.
+     * Saluta il destinatario specificato.
+     *
+     * @param target
      */
-    @CompileStatic
-    class GreetingExtension extends PluginExtensionPoint {
-
-        @Override
-        protected void init(Session session) {
-        }
-
-        /**
-         * Saluta il destinatario specificato.
-         *
-         * @param target
-         */
-        @Function
-        void sayHello(String target) {
-            println "Hello, ${target}!"
-        }
-
+    @Function
+    void sayHello(String target) {
+        println "Hello, ${target}!"
     }
-    ```
+
+}
+```
+
+```groovy {8-14} title="GreetingExtension.groovy" showLineNumbers startLineNumber=24 step="Dopo"
+@CompileStatic
+class GreetingExtension extends PluginExtensionPoint {
+
+    @Override
+    protected void init(Session session) {
+    }
+
+    /**
+     * Inverte una stringa di saluto
+     */
+    @Function                                // [!annotate] Rende il metodo richiamabile dai flussi di lavoro Nextflow
+    String reverseGreeting(String greeting) { // [!annotate] Accetta una String, restituisce una String
+        return greeting.reverse()             // [!annotate] Il metodo di inversione delle stringhe integrato in Groovy
+    }
+
+}
+```
+
+</CodeWalkthrough>
 
 Elementi chiave di questa funzione:
 
@@ -159,10 +154,10 @@ Elementi chiave di questa funzione:
 - **`String reverseGreeting(String greeting)`**: Accetta una String, restituisce una String
 - **`greeting.reverse()`**: Il metodo di inversione delle stringhe integrato in Groovy
 
-!!! tip "Metodi pubblici e privati"
-
-    I metodi senza `@Function` non sono esposti ai flussi di lavoro Nextflow.
-    Potete aggiungere metodi di supporto alla vostra classe senza preoccuparvi che vengano esposti nel namespace del flusso di lavoro.
+:::tip[Metodi pubblici e privati]
+I metodi senza `@Function` non sono esposti ai flussi di lavoro Nextflow.
+Potete aggiungere metodi di supporto alla vostra classe senza preoccuparvi che vengano esposti nel namespace del flusso di lavoro.
+:::
 
 ---
 
@@ -174,11 +169,11 @@ Compilate e installate il plugin:
 make install
 ```
 
-!!! tip "Se la compilazione fallisce"
-
-    Leggete attentamente il messaggio di errore; di solito include un numero di riga e descrive il problema.
-    Le cause più comuni sono errori di sintassi (parentesi o virgolette mancanti), nomi di classe scritti in modo errato e mancata corrispondenza dei tipi.
-    Se siete bloccati, confrontate il vostro codice carattere per carattere con gli esempi.
+:::tip[Se la compilazione fallisce]
+Leggete attentamente il messaggio di errore; di solito include un numero di riga e descrive il problema.
+Le cause più comuni sono errori di sintassi (parentesi o virgolette mancanti), nomi di classe scritti in modo errato e mancata corrispondenza dei tipi.
+Se siete bloccati, confrontate il vostro codice carattere per carattere con gli esempi.
+:::
 
 ---
 
@@ -195,67 +190,67 @@ cd ..
 
 Modificate `greet.nf` per importare e usare `reverseGreeting`:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="greet.nf" hl_lines="4 23-25" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="greet.nf" showLineNumbers step="Prima"
+#!/usr/bin/env nextflow
 
-    include { samplesheetToList } from 'plugin/nf-schema'
-    include { reverseGreeting } from 'plugin/nf-greeting'
+include { samplesheetToList } from 'plugin/nf-schema'
 
-    params.input = 'greetings.csv'
+params.input = 'greetings.csv'
 
-    process SAY_HELLO {
-        input:
-            val greeting
-        output:
-            stdout
-        script:
-        """
-        echo '$greeting'
-        """
-    }
+process SAY_HELLO {
+    input:
+        val greeting
+    output:
+        stdout
+    script:
+    """
+    echo '$greeting'
+    """
+}
 
-    workflow {
-        greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-            .map { row -> row[0] }
+workflow {
+    greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+        .map { row -> row[0] }
+    SAY_HELLO(greeting_ch)
+    SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
+}
+```
 
-        greeting_ch
-            .map { greeting -> reverseGreeting(greeting) }
-            .view { reversed -> "Reversed: $reversed" }
+```nextflow {4,23-25} title="greet.nf" showLineNumbers step="Dopo"
+#!/usr/bin/env nextflow
 
-        SAY_HELLO(greeting_ch)
-        SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
-    }
-    ```
+include { samplesheetToList } from 'plugin/nf-schema'
+include { reverseGreeting } from 'plugin/nf-greeting'
 
-=== "Prima"
+params.input = 'greetings.csv'
 
-    ```groovy title="greet.nf" linenums="1"
-    #!/usr/bin/env nextflow
+process SAY_HELLO {
+    input:
+        val greeting
+    output:
+        stdout
+    script:
+    """
+    echo '$greeting'
+    """
+}
 
-    include { samplesheetToList } from 'plugin/nf-schema'
+workflow {
+    greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+        .map { row -> row[0] }
 
-    params.input = 'greetings.csv'
+    greeting_ch
+        .map { greeting -> reverseGreeting(greeting) }
+        .view { reversed -> "Reversed: $reversed" }
 
-    process SAY_HELLO {
-        input:
-            val greeting
-        output:
-            stdout
-        script:
-        """
-        echo '$greeting'
-        """
-    }
+    SAY_HELLO(greeting_ch)
+    SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
+}
+```
 
-    workflow {
-        greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-            .map { row -> row[0] }
-        SAY_HELLO(greeting_ch)
-        SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
-    }
-    ```
+</CodeWalkthrough>
 
 Eseguite la pipeline:
 
@@ -263,28 +258,31 @@ Eseguite la pipeline:
 nextflow run greet.nf
 ```
 
-??? example "Output"
+<details class="example">
+<summary>Output</summary>
 
-    ```console
-    N E X T F L O W   ~  version 26.04.4
+```console
+N E X T F L O W   ~  version 26.04.4
 
-    Launching `greet.nf` [elated_marconi] revision: 8cc49dbe33
+Launching `greet.nf` [elated_marconi] revision: 8cc49dbe33
 
-    Pipeline is starting! 🚀
-    executor >  local (5)
-    [fe/109754] SAY_HELLO (5) | 5 of 5 ✔
-    Reversed: olleH
-    Reversed: ruojnoB
-    Reversed: aloH
-    Reversed: oaiC
-    Reversed: ollaH
-    Output: Hello
-    Output: Bonjour
-    Output: Hola
-    Output: Ciao
-    Output: Hallo
-    Pipeline complete! 👋
-    ```
+Pipeline is starting! 🚀
+executor >  local (5)
+[fe/109754] SAY_HELLO (5) | 5 of 5 ✔
+Reversed: olleH
+Reversed: ruojnoB
+Reversed: aloH
+Reversed: oaiC
+Reversed: ollaH
+Output: Hello
+Output: Bonjour
+Output: Hola
+Output: Ciao
+Output: Hallo
+Pipeline complete! 👋
+```
+
+</details>
 
 La vostra prima funzione personalizzata del plugin funziona in un flusso di lavoro reale.
 Lo stesso pattern `include { ... } from 'plugin/...'` che avete usato con nf-hello e nf-schema nella Parte 1 funziona anche con il vostro plugin.
@@ -298,59 +296,57 @@ Aggiungete una seconda funzione che racchiude un saluto con marcatori decorativi
 
 Modificate `GreetingExtension.groovy` per aggiungere `decorateGreeting` dopo `reverseGreeting`, prima della parentesi graffa di chiusura della classe:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="GreetingExtension.groovy" linenums="24" hl_lines="16-22"
-    @CompileStatic
-    class GreetingExtension extends PluginExtensionPoint {
+```groovy title="GreetingExtension.groovy" showLineNumbers startLineNumber=24 step="Prima"
+@CompileStatic
+class GreetingExtension extends PluginExtensionPoint {
 
-        @Override
-        protected void init(Session session) {
-        }
-
-        /**
-         * Inverte una stringa di saluto
-         */
-        @Function
-        String reverseGreeting(String greeting) {
-            return greeting.reverse()
-        }
-
-        /**
-         * Decora un saluto con marcatori celebrativi
-         */
-        @Function
-        String decorateGreeting(String greeting) {
-            return "*** ${greeting} ***"             // (1)!
-        }
-
+    @Override
+    protected void init(Session session) {
     }
-    ```
 
-    1. Interpolazione di stringhe in Groovy: `#!groovy ${...}` inserisce il valore della variabile nella stringa
-
-=== "Prima"
-
-    ```groovy title="GreetingExtension.groovy" linenums="24"
-    @CompileStatic
-    class GreetingExtension extends PluginExtensionPoint {
-
-        @Override
-        protected void init(Session session) {
-        }
-
-        /**
-         * Inverte una stringa di saluto
-         */
-        @Function
-        String reverseGreeting(String greeting) {
-            return greeting.reverse()
-        }
-
+    /**
+     * Inverte una stringa di saluto
+     */
+    @Function
+    String reverseGreeting(String greeting) {
+        return greeting.reverse()
     }
-    ```
 
-Questa funzione usa l'interpolazione di stringhe di Groovy (`#!groovy "*** ${greeting} ***"`) per incorporare la variabile del saluto all'interno di una stringa.
+}
+```
+
+```groovy {16-22} title="GreetingExtension.groovy" showLineNumbers startLineNumber=24 step="Dopo"
+@CompileStatic
+class GreetingExtension extends PluginExtensionPoint {
+
+    @Override
+    protected void init(Session session) {
+    }
+
+    /**
+     * Inverte una stringa di saluto
+     */
+    @Function
+    String reverseGreeting(String greeting) {
+        return greeting.reverse()
+    }
+
+    /**
+     * Decora un saluto con marcatori celebrativi
+     */
+    @Function
+    String decorateGreeting(String greeting) {
+        return "*** ${greeting} ***"             // [!annotate] Interpolazione di stringhe in Groovy: `${...}` inserisce il valore della variabile nella stringa
+    }
+
+}
+```
+
+</CodeWalkthrough>
+
+Questa funzione usa l'interpolazione di stringhe di Groovy (`"*** ${greeting} ***"{:nextflow}`) per incorporare la variabile del saluto all'interno di una stringa.
 
 Compilate, installate e aggiornate il flusso di lavoro:
 
@@ -360,108 +356,108 @@ cd nf-greeting && make install && cd ..
 
 Aggiornate `greet.nf` per importare e usare anche `decorateGreeting`:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="greet.nf" hl_lines="4-6 14 16-17 19 33" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow {4,12,15,28} title="greet.nf" showLineNumbers step="Prima"
+#!/usr/bin/env nextflow
 
-    include { samplesheetToList } from 'plugin/nf-schema'
-    // Importa le funzioni personalizzate dal nostro plugin
-    include { reverseGreeting } from 'plugin/nf-greeting'
-    include { decorateGreeting } from 'plugin/nf-greeting'  // (1)!
+include { samplesheetToList } from 'plugin/nf-schema'
+include { reverseGreeting } from 'plugin/nf-greeting'
 
-    params.input = 'greetings.csv'
+params.input = 'greetings.csv'
 
-    process SAY_HELLO {
-        input:
-            val greeting
-        output:
-            path 'greeting.txt'
-        script:
-        // Usa la nostra funzione personalizzata del plugin per decorare il saluto
-        def decorated = decorateGreeting(greeting)  // (2)!
-        """
-        echo '$decorated' > greeting.txt
-        """
-    }
+process SAY_HELLO {
+    input:
+        val greeting
+    output:
+        stdout
+    script:
+    """
+    echo '$greeting'
+    """
+}
 
-    workflow {
-        greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-            .map { row -> row[0] }
+workflow {
+    greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+        .map { row -> row[0] }
 
-        // Dimostra l'uso della funzione reverseGreeting
-        greeting_ch
-            .map { greeting -> reverseGreeting(greeting) }
-            .view { reversed -> "Reversed: $reversed" }
+    greeting_ch
+        .map { greeting -> reverseGreeting(greeting) }
+        .view { reversed -> "Reversed: $reversed" }
 
-        SAY_HELLO(greeting_ch)
-        SAY_HELLO.out.view { file -> "Decorated: ${file.text.trim()}" }
-    }
-    ```
+    SAY_HELLO(greeting_ch)
+    SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
+}
+```
 
-    1. Più funzioni dallo stesso plugin richiedono istruzioni `include` separate
-    2. Le funzioni del plugin funzionano anche all'interno dei blocchi `script:` dei processi
+```nextflow {4-6,14,16-17,19,33} title="greet.nf" showLineNumbers step="Dopo"
+#!/usr/bin/env nextflow
 
-=== "Prima"
+include { samplesheetToList } from 'plugin/nf-schema'
+// Importa le funzioni personalizzate dal nostro plugin
+include { reverseGreeting } from 'plugin/nf-greeting'
+include { decorateGreeting } from 'plugin/nf-greeting'  // [!annotate] Più funzioni dallo stesso plugin richiedono istruzioni `include` separate
 
-    ```groovy title="greet.nf" linenums="1" hl_lines="4 12 15 28"
-    #!/usr/bin/env nextflow
+params.input = 'greetings.csv'
 
-    include { samplesheetToList } from 'plugin/nf-schema'
-    include { reverseGreeting } from 'plugin/nf-greeting'
+process SAY_HELLO {
+    input:
+        val greeting
+    output:
+        path 'greeting.txt'
+    script:
+    // Usa la nostra funzione personalizzata del plugin per decorare il saluto
+    def decorated = decorateGreeting(greeting)  // [!annotate] Le funzioni del plugin funzionano anche all'interno dei blocchi `script:` dei processi
+    """
+    echo '$decorated' > greeting.txt
+    """
+}
 
-    params.input = 'greetings.csv'
+workflow {
+    greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+        .map { row -> row[0] }
 
-    process SAY_HELLO {
-        input:
-            val greeting
-        output:
-            stdout
-        script:
-        """
-        echo '$greeting'
-        """
-    }
+    // Dimostra l'uso della funzione reverseGreeting
+    greeting_ch
+        .map { greeting -> reverseGreeting(greeting) }
+        .view { reversed -> "Reversed: $reversed" }
 
-    workflow {
-        greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-            .map { row -> row[0] }
+    SAY_HELLO(greeting_ch)
+    SAY_HELLO.out.view { file -> "Decorated: ${file.text.trim()}" }
+}
+```
 
-        greeting_ch
-            .map { greeting -> reverseGreeting(greeting) }
-            .view { reversed -> "Reversed: $reversed" }
-
-        SAY_HELLO(greeting_ch)
-        SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
-    }
-    ```
+</CodeWalkthrough>
 
 ```bash
 nextflow run greet.nf
 ```
 
-??? example "Output"
+<details class="example">
+<summary>Output</summary>
 
-    ```console
-    N E X T F L O W   ~  version 26.04.4
+```console
+N E X T F L O W   ~  version 26.04.4
 
-    Launching `greet.nf` [elated_marconi] revision: bef1bea9f0
+Launching `greet.nf` [elated_marconi] revision: bef1bea9f0
 
-    Pipeline is starting! 🚀
-    executor >  local (5)
-    [fe/109754] SAY_HELLO (5) | 5 of 5 ✔
-    Reversed: olleH
-    Reversed: ruojnoB
-    Reversed: aloH
-    Reversed: oaiC
-    Reversed: ollaH
-    Decorated: *** Hello ***
-    Decorated: *** Bonjour ***
-    Decorated: *** Hola ***
-    Decorated: *** Ciao ***
-    Decorated: *** Hallo ***
-    Pipeline complete! 👋
-    ```
+Pipeline is starting! 🚀
+executor >  local (5)
+[fe/109754] SAY_HELLO (5) | 5 of 5 ✔
+Reversed: olleH
+Reversed: ruojnoB
+Reversed: aloH
+Reversed: oaiC
+Reversed: ollaH
+Decorated: *** Hello ***
+Decorated: *** Bonjour ***
+Decorated: *** Hola ***
+Decorated: *** Ciao ***
+Decorated: *** Hallo ***
+Pipeline complete! 👋
+```
+
+</details>
 
 Le funzioni del plugin funzionano sia negli script dei processi (come `decorateGreeting` all'interno di `SAY_HELLO`) che nelle operazioni del flusso di lavoro (come `reverseGreeting` in un `map`).
 
@@ -483,4 +479,4 @@ Le vostre funzioni funzionano, ma finora le avete verificate solo eseguendo l'in
 Questo approccio non è scalabile: man mano che aggiungete più funzioni, avete bisogno di un modo più rapido per verificare che ciascuna si comporti correttamente, specialmente dopo aver apportato modifiche.
 La sezione successiva introduce i test unitari, che vi permettono di verificare le singole funzioni automaticamente senza eseguire una pipeline.
 
-[Continua alla Parte 4 :material-arrow-right:](04_build_and_test.md){ .md-button .md-button--primary }
+<LinkButton href="04_build_and_test.mdx" variant="primary" icon="right-arrow">Continua alla Parte 4</LinkButton>

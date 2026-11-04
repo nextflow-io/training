@@ -1,6 +1,9 @@
-# Part 1: Més contenidors
+---
+title: 'Part 1: Més contenidors'
+description: '[TODO]'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 [TODO]
 
@@ -18,11 +21,11 @@ Obtindreu/construireu una imatge de contenidor per al paquet pip `quote`, que s'
 Seqera Containers és un servei gratuït que construeix imatges de contenidor per a eines instal·lables amb pip i conda (incloent bioconda).
 Navegueu a [Seqera Containers](https://www.seqera.io/containers/) i cerqueu el paquet pip `quote`.
 
-![Seqera Containers](img/seqera-containers-1.png)
+
 
 Feu clic a "+Add" i després a "Get Container" per sol·licitar una imatge de contenidor per al paquet pip `quote`.
 
-![Seqera Containers](img/seqera-containers-2.png)
+
 
 Si aquesta és la primera vegada que es construeix un contenidor comunitari per a aquesta versió del paquet, pot trigar uns minuts a completar-se.
 Feu clic per copiar l'URI (p. ex. `community.wave.seqera.io/library/pip_quote:ae07804021465ee9`) de la imatge de contenidor que s'ha creat per a vosaltres.
@@ -49,7 +52,7 @@ Torneu al lloc web de Seqera Containers i feu clic al botó "Build Details".
 El primer element que examinarem és el `Dockerfile`, un tipus de fitxer d'script que conté totes les comandes necessàries per construir la imatge de contenidor.
 Hem afegit alguns comentaris explicatius al Dockerfile següent per ajudar-vos a entendre què fa cada part.
 
-```Dockerfile title="Dockerfile"
+```dockerfile title="Dockerfile"
 # Comença des de la imatge base de docker micromamba
 FROM mambaorg/micromamba:1.5.10-noble
 # Copia el fitxer conda.yml dins del contenidor
@@ -70,7 +73,7 @@ ENV PATH="$MAMBA_ROOT_PREFIX/bin:$PATH"
 
 El segon element que examinarem és el fitxer `conda.yml`, que conté la llista de paquets que cal instal·lar a la imatge de contenidor.
 
-```conda.yml title="conda.yml"
+```yaml title="conda.yml"
 channels:
 - conda-forge
 - bioconda
@@ -82,10 +85,10 @@ dependencies:
 
 Copieu el contingut d'aquests fitxers als esbossos situats al directori `containers/build`, després executeu la comanda següent per construir la imatge de contenidor vosaltres mateixos.
 
-!!! Note "Nota"
-
-    Utilitzem la bandera `-t quote:latest` per etiquetar la imatge de contenidor amb el nom `quote` i l'etiqueta `latest`.
-    Podrem utilitzar aquesta etiqueta per referir-nos a la imatge de contenidor quan l'executem en aquest sistema.
+:::note[Nota]
+Utilitzem la bandera `-t quote:latest` per etiquetar la imatge de contenidor amb el nom `quote` i l'etiqueta `latest`.
+Podrem utilitzar aquesta etiqueta per referir-nos a la imatge de contenidor quan l'executem en aquest sistema.
+:::
 
 ```bash
 docker build -t quote:latest containers/build
@@ -103,7 +106,7 @@ Heu après dues maneres diferents d'obtenir una imatge de contenidor per a una e
 
 ### Què segueix?
 
-Teniu tot el que necessiteu per continuar al [següent capítol](./04_hello_genomics.md) d'aquesta sèrie de formació.
+Teniu tot el que necessiteu per continuar al següent capítol d'aquesta sèrie de formació.
 També podeu continuar amb un exercici opcional per obtenir cites sobre pioners de la informàtica/biologia utilitzant el contenidor `quote` i mostrar-les utilitzant el contenidor `cowsay`.
 
 ---
@@ -143,17 +146,17 @@ A grans trets, per completar aquest exercici haureu de:
 
 Per a la imatge de contenidor `quote`, podeu utilitzar la que heu construït vosaltres mateixos en l'exercici addicional anterior o utilitzar la que heu obtingut de Seqera Containers.
 
-!!! Hint "Pista"
-
-    Una bona opció per al bloc `script` del vostre procés getQuote podria ser:
-        ```groovy
-        script:
-            def safe_author = author.tokenize(' ').join('-')
-            """
-            quote "$author" > quote-${safe_author}.txt
-            echo "-${author}" >> quote-${safe_author}.txt
-            """
-        ```
+:::note[Pista]
+Una bona opció per al bloc `script` del vostre procés getQuote podria ser:
+    ```nextflow
+    script:
+        def safe_author = author.tokenize(' ').join('-')
+        """
+        quote "$author" > quote-${safe_author}.txt
+        echo "-${author}" >> quote-${safe_author}.txt
+        """
+    ```
+:::
 
 Podeu trobar una solució a aquest exercici a `containers/solutions/hello-containers-4.1.nf`.
 
@@ -162,7 +165,7 @@ Podeu trobar una solució a aquest exercici a `containers/solutions/hello-contai
 Afegiu alguna lògica de ramificació al vostre pipeline per permetre que accepti entrades destinades tant a `quote` com a `sayHello`.
 Aquí teniu un exemple de com utilitzar una instrucció `if` en un workflow de Nextflow:
 
-```groovy title="hello-containers.nf"
+```nextflow title="hello-containers.nf"
 workflow {
     if (params.quote) {
         ...
@@ -174,9 +177,9 @@ workflow {
 }
 ```
 
-!!! Hint "Pista"
-
-    Podeu utilitzar `new_ch = processName.out` per assignar un nom al canal de sortida d'un procés.
+:::note[Pista]
+Podeu utilitzar `new_ch = processName.out` per assignar un nom al canal de sortida d'un procés.
+:::
 
 Podeu trobar una solució a aquest exercici a `containers/solutions/hello-containers-4.2.nf`.
 

@@ -1,179 +1,209 @@
 ---
-title: Ana Sayfa
+title: Nextflow Eğitimi
 description: Nextflow topluluk eğitim portalına hoş geldiniz!
-hide:
-  - toc
-  - footer
+sidebar:
+  label: Ana Sayfa
+tableOfContents: false
+prev: false
+next: false
 ---
 
-# Nextflow Eğitimi
+<CardGrid>
 
-<div class="grid cards" markdown>
+<Card title="Kendi kendine öğrenme kursları">
 
--   :material-book-open-variant:{ .lg .middle } __Kendi kendine öğrenme kursları__
+**Nextflow topluluk eğitim portalına hoş geldiniz!**
 
-    ---
+Aşağıdaki kursları kendi hızınızda, web tabanlı ortamımızda veya kendi ortamınızda tamamlayın.
+Her kurs uygulamalıdır ve bağımsız olarak tamamlayabileceğiniz hedefe yönelik alıştırmalar içerir.
 
-    **Nextflow topluluk eğitim portalına hoş geldiniz!**
+<LinkButton href="#nextflow-eğitim-kursları-kataloğu" variant="primary" icon="down-arrow">Kurslara göz atın</LinkButton>
 
-    Aşağıdaki kursları kendi hızınızda, web tabanlı ortamımızda veya kendi ortamınızda tamamlayın.
-    Her kurs uygulamalıdır ve bağımsız olarak tamamlayabileceğiniz hedefe yönelik alıştırmalar içerir.
+</Card>
 
-    [Kurslara göz atın :material-arrow-down:](#catalog-of-nextflow-training-courses){ .md-button .md-button--primary .mt-1 }
+<Card title="Eğitim Etkinlikleri">
 
--   :material-account-group-outline:{ .lg .middle } __Eğitim Etkinlikleri__
+**Kendi kendine öğrenmenin ötesinde bir şey mi arıyorsunuz?**
 
-    ---
+Yapılandırılmış eğitim etkinliklerini, kendi eğitimlerinizi düzenlemek için rehberleri ve açık kaynak lisansımızla katkı politikamızı bulun.
 
-    **Kendi kendine öğrenmenin ötesinde bir şey mi arıyorsunuz?**
+<LinkButton href="training_events.mdx" variant="secondary" icon="right-arrow">Eğitim etkinliklerini görüntüleyin</LinkButton>
 
-    Yapılandırılmış eğitim etkinliklerini, kendi eğitimlerinizi düzenlemek için rehberleri ve açık kaynak lisansımızla katkı politikamızı bulun.
+</Card>
 
-    [Eğitim etkinliklerini görüntüleyin :material-arrow-right:](training_events.md){ .md-button .md-button--secondary .mt-1 }
+</CardGrid>
 
-</div>
-
-!!! note "Yapay Zeka Destekli Çeviri"
-
-    Bu çeviri yapay zeka kullanılarak oluşturulmuş ve insan çevirmenler tarafından gözden geçirilmiştir.
-    Geri bildirimlerinizi ve iyileştirme önerilerinizi memnuniyetle karşılıyoruz.
-    Daha fazla bilgi için [çeviri kılavuzumuza](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) bakın.
+:::note[Yapay Zeka Destekli Çeviri]
+Bu çeviri yapay zeka kullanılarak oluşturulmuş ve insan çevirmenler tarafından gözden geçirilmiştir.
+Geri bildirimlerinizi ve iyileştirme önerilerinizi memnuniyetle karşılıyoruz.
+Daha fazla bilgi için [çeviri kılavuzumuza](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) bakın.
+:::
 
 ## Nextflow eğitim kursları kataloğu
 
-<div class="grid cards" markdown>
+<CardGrid>
 
--   :material-account:{ .lg .middle } __Kullanıcılar için__
+<Card title="Kullanıcılar için">
 
-    ---
+### Pipeline'ları çalıştırın
 
-    ### :material-play-circle:{.nextflow-primary} Pipeline'ları çalıştırın {.mt-1}
+Herhangi bir kod yazmadan mevcut pipeline'ları çalıştırmayı öğrenin.
 
-    Herhangi bir kod yazmadan mevcut pipeline'ları çalıştırmayı öğrenin.
+<details class="courses">
+<summary>**Nextflow Run:** Nextflow ile pipeline çalıştırın</summary>
 
-    ??? courses "**Nextflow Run:** Nextflow ile pipeline çalıştırın"
+Kod anlamayı gerektirmeyen, Nextflow pipeline'larını çalıştırmaya hızlı bir giriş. Pipeline başlatmayı, çıktıları almayı, konteyner kullanmayı ve temel düzeyde yürütmeyi yapılandırmayı kapsar.
 
-        Kod anlamayı gerektirmeyen, Nextflow pipeline'larını çalıştırmaya hızlı bir giriş. Pipeline başlatmayı, çıktıları almayı, konteyner kullanmayı ve temel düzeyde yürütmeyi yapılandırmayı kapsar.
+<LinkButton href="nextflow_run/index.mdx" variant="secondary" icon="right-arrow">Eğitimi görüntüleyin</LinkButton>
 
-        [Eğitimi görüntüleyin :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
+</details>
 
-    ??? courses "**Use nf-core:** Topluluk tarafından denetlenmiş pipeline'ları bulun ve çalıştırın"
+<details class="courses">
+<summary>**Use nf-core:** Topluluk tarafından denetlenmiş pipeline'ları bulun ve çalıştırın</summary>
 
-        nf-core topluluk projesinden pipeline'ları bulmaya, çalıştırmaya ve yapılandırmaya hızlı bir giriş. Minimal bir demo pipeline'dan başlayarak üretim ölçeğinde bir analiz pipeline'ına kadar ilerler.
+nf-core topluluk projesinden pipeline'ları bulmaya, çalıştırmaya ve yapılandırmaya hızlı bir giriş. Minimal bir demo pipeline'dan başlayarak üretim ölçeğinde bir analiz pipeline'ına kadar ilerler.
 
-        [Eğitimi görüntüleyin :material-arrow-right:](nfcore_use/index.md){ .md-button .md-button--secondary }
+<LinkButton href="nfcore_use/index.mdx" variant="secondary" icon="right-arrow">Eğitimi görüntüleyin</LinkButton>
 
-    ??? courses "**Scale with Seqera:** Pipeline'ları büyük ölçekte başlatın ve izleyin"
+</details>
 
-        Seqera Platform ile Nextflow pipeline'larını hem web arayüzünden hem de komut satırından başlatmaya ve izlemeye uygulamalı bir giriş.
+<details class="courses">
+<summary>**Scale with Seqera:** Pipeline'ları büyük ölçekte başlatın ve izleyin</summary>
 
-        [Eğitimi görüntüleyin :material-arrow-right:](seqera_scale/index.md){ .md-button .md-button--secondary }
+Seqera Platform ile Nextflow pipeline'larını hem web arayüzünden hem de komut satırından başlatmaya ve izlemeye uygulamalı bir giriş.
 
-    ---
+<LinkButton href="seqera_scale/index.mdx" variant="secondary" icon="right-arrow">Eğitimi görüntüleyin</LinkButton>
 
-    ### :material-tune:{.nextflow-primary} Yürütmeyi yönetin {.mt-1}
+</details>
 
-    Pipeline yürütmesini etkin biçimde yönetmeyi öğrenin.
+---
 
-    ??? courses "**Configure Execution:** Kaynakları, yeniden denemeleri ve yürütme profillerini yapılandırın"
+### Yürütmeyi yönetin
 
-        Nextflow pipeline yürütmesini yapılandırmaya uygulamalı bir giriş: farklı hesaplama ortamlarına uyum sağlama, kaynak tahsislerini ve yeniden denemeleri kontrol etme ve önceden tanımlanmış yapılandırma profilleri arasında geçiş yapma.
+Pipeline yürütmesini etkin biçimde yönetmeyi öğrenin.
 
-        [Eğitimi görüntüleyin :material-arrow-right:](config_exec/index.md){ .md-button .md-button--secondary }
+<details class="courses">
+<summary>**Configure Execution:** Kaynakları, yeniden denemeleri ve yürütme profillerini yapılandırın</summary>
 
-    !!! info compact "Daha fazla konu geliyor"
+Nextflow pipeline yürütmesini yapılandırmaya uygulamalı bir giriş: farklı hesaplama ortamlarına uyum sağlama, kaynak tahsislerini ve yeniden denemeleri kontrol etme ve önceden tanımlanmış yapılandırma profilleri arasında geçiş yapma.
 
-        Performans ayarı, HPC/bulut yürütmesi ve daha fazlası bu bölüm için planlanmaktadır.
-        Bir sonraki konuyu belirlemek için [kısa ilgi anketimize](https://seqera.typeform.com/to/JCs91e8v) oy verin.
+<LinkButton href="config_exec/index.mdx" variant="secondary" icon="right-arrow">Eğitimi görüntüleyin</LinkButton>
 
--   :material-code-tags:{ .lg .middle } __Geliştiriciler için__
+</details>
 
-    ---
+:::note[Daha fazla konu geliyor]
+Performans ayarı, HPC/bulut yürütmesi ve daha fazlası bu bölüm için planlanmaktadır.
+Bir sonraki konuyu belirlemek için [kısa ilgi anketimize](https://seqera.typeform.com/to/JCs91e8v) oy verin.
+:::
 
-    ### :material-wrench:{.nextflow-primary} Pipeline yazın {.mt-1}
+</Card>
 
-    Kendi Nextflow pipeline'larınızı geliştirmeyi öğrenin.
+<Card title="Geliştiriciler için">
 
-    ??? courses "**Hello Nextflow:** Sıfırdan kendi pipeline'larınızı geliştirin"
+### Pipeline yazın
 
-        Bu kurs, basit ama tam işlevli pipeline'lar geliştirmeye yetecek düzeyde Nextflow dilinin temel bileşenlerini; ayrıca pipeline tasarımı, geliştirme ve yapılandırma uygulamalarının kilit unsurlarını kapsar.
+Kendi Nextflow pipeline'larınızı geliştirmeyi öğrenin.
 
-        [Eğitimi görüntüleyin :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--secondary }
+<details class="courses">
+<summary>**Hello Nextflow:** Sıfırdan kendi pipeline'larınızı geliştirin</summary>
 
-    ??? courses "**Build with nf-core:** nf-core araçlarını ve kurallarını kullanın"
+Bu kurs, basit ama tam işlevli pipeline'lar geliştirmeye yetecek düzeyde Nextflow dilinin temel bileşenlerini; ayrıca pipeline tasarımı, geliştirme ve yapılandırma uygulamalarının kilit unsurlarını kapsar.
 
-        [nf-core](https://nf-co.re/) uyumlu pipeline'lar geliştirmeyi öğrenmek isteyen Nextflow geliştiricileri için.
-        Kurs; nf-core şablonunu ve geliştirme en iyi uygulamalarını kullanan, mevcut nf-core modüllerinden yararlanan, basit ama tam işlevli pipeline'lar geliştirmeye yetecek düzeyde nf-core pipeline'larının yapısını kapsar.
+<LinkButton href="hello_nextflow/index.mdx" variant="secondary" icon="right-arrow">Eğitimi görüntüleyin</LinkButton>
 
-        [Eğitimi görüntüleyin :material-arrow-right:](nfcore_build/index.md){ .md-button .md-button--secondary }
+</details>
 
-    ??? catalog "**Side Quests:** Gelişmiş Nextflow konularına dalın"
+<details class="courses">
+<summary>**Build with nf-core:** nf-core araçlarını ve kurallarını kullanın</summary>
 
-        Belirli konularda bilgi ve becerilerini genişletmek ya da derinleştirmek isteyen Nextflow geliştiricileri için tasarlanmış bağımsız mini kurslardan oluşan bir koleksiyon.
-        Doğrusal bir sırayla sunulmakla birlikte herhangi bir sırayla alınabilir (bağımlılıklar için her mini kursun giriş bölümüne bakın).
+[nf-core](https://nf-co.re/) uyumlu pipeline'lar geliştirmeyi öğrenmek isteyen Nextflow geliştiricileri için.
+Kurs; nf-core şablonunu ve geliştirme en iyi uygulamalarını kullanan, mevcut nf-core modüllerinden yararlanan, basit ama tam işlevli pipeline'lar geliştirmeye yetecek düzeyde nf-core pipeline'larının yapısını kapsar.
 
-        [Side Quests'e göz atın :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
+<LinkButton href="nfcore_build/index.mdx" variant="secondary" icon="right-arrow">Eğitimi görüntüleyin</LinkButton>
 
-    ---
+</details>
 
-    ### :material-microscope:{.nextflow-primary} Bilim için Nextflow {.mt-1}
+<details class="catalog">
+<summary>**Side Quests:** Gelişmiş Nextflow konularına dalın</summary>
 
-    Belirli bilimsel uygulamalar için Nextflow pipeline'ları geliştirmeyi öğrenin.
+Belirli konularda bilgi ve becerilerini genişletmek ya da derinleştirmek isteyen Nextflow geliştiricileri için tasarlanmış bağımsız mini kurslardan oluşan bir koleksiyon.
+Doğrusal bir sırayla sunulmakla birlikte herhangi bir sırayla alınabilir (bağımlılıklar için her mini kursun giriş bölümüne bakın).
 
-    ??? courses "**Genomics:** Varyant çağırma pipeline'ı geliştirin"
+<LinkButton href="side_quests/index.mdx" variant="secondary" icon="right-arrow">Side Quests'e göz atın</LinkButton>
 
-        Kendi genomik pipeline'larını geliştirmeyi öğrenmek isteyen araştırmacılar için bir kurs. Temel Nextflow geliştirme kalıplarını göstermek amacıyla varyant çağırma kullanım senaryosunu ele alır.
+</details>
 
-        [Eğitimi görüntüleyin :material-arrow-right:](nf4_science/genomics/index.md){ .md-button .md-button--secondary }
+---
 
-    ??? courses "**RNAseq:** Toplu RNAseq işleme pipeline'ı geliştirin"
+### Bilim için Nextflow
 
-        Kendi RNAseq pipeline'larını geliştirmeyi öğrenmek isteyen araştırmacılar için bir kurs. Temel Nextflow geliştirme kalıplarını göstermek amacıyla toplu RNAseq işleme kullanım senaryosunu ele alır.
+Belirli bilimsel uygulamalar için Nextflow pipeline'ları geliştirmeyi öğrenin.
 
-        [Eğitimi görüntüleyin :material-arrow-right:](nf4_science/rnaseq/index.md){ .md-button .md-button--secondary }
+<details class="courses">
+<summary>**Genomics:** Varyant çağırma pipeline'ı geliştirin</summary>
 
-    ??? courses "**Bioimaging:** Görüntüleme pipeline'larını çalıştırın ve yapılandırın"
+Kendi genomik pipeline'larını geliştirmeyi öğrenmek isteyen araştırmacılar için bir kurs. Temel Nextflow geliştirme kalıplarını göstermek amacıyla varyant çağırma kullanım senaryosunu ele alır.
 
-        Biyogörüntüleme pipeline'larını çalıştırmayı ve yapılandırmayı öğrenmek isteyen araştırmacılar için bir kurs. Temel Nextflow kullanım kalıplarını göstermek amacıyla nf-core/molkart'ı ele alır.
+<LinkButton href="nf4_science/genomics/index.mdx" variant="secondary" icon="right-arrow">Eğitimi görüntüleyin</LinkButton>
 
-        [Eğitimi görüntüleyin :material-arrow-right:](nf4_science/imaging/index.md){ .md-button .md-button--secondary }
+</details>
 
-</div>
+<details class="courses">
+<summary>**RNAseq:** Toplu RNAseq işleme pipeline'ı geliştirin</summary>
+
+Kendi RNAseq pipeline'larını geliştirmeyi öğrenmek isteyen araştırmacılar için bir kurs. Temel Nextflow geliştirme kalıplarını göstermek amacıyla toplu RNAseq işleme kullanım senaryosunu ele alır.
+
+<LinkButton href="nf4_science/rnaseq/index.mdx" variant="secondary" icon="right-arrow">Eğitimi görüntüleyin</LinkButton>
+
+</details>
+
+<details class="courses">
+<summary>**Bioimaging:** Görüntüleme pipeline'larını çalıştırın ve yapılandırın</summary>
+
+Biyogörüntüleme pipeline'larını çalıştırmayı ve yapılandırmayı öğrenmek isteyen araştırmacılar için bir kurs. Temel Nextflow kullanım kalıplarını göstermek amacıyla nf-core/molkart'ı ele alır.
+
+<LinkButton href="nf4_science/imaging/index.mdx" variant="secondary" icon="right-arrow">Eğitimi görüntüleyin</LinkButton>
+
+</details>
+
+</Card>
+
+</CardGrid>
 
 ## Kurulum ve Yardım
 
-<div class="grid cards mb-4" markdown>
+<CardGrid>
 
--   :material-cog-outline:{ .lg .middle } __Eğitim Ortamı__
+<Card title="Eğitim Ortamı">
 
-    ---
+Nextflow eğitimleri için ortamınızı kurma seçenekleri.
 
-    Nextflow eğitimleri için ortamınızı kurma seçenekleri.
+<LinkButton href="envsetup/index.mdx" variant="secondary" icon="right-arrow">Eğitim ortamlarını görüntüleyin</LinkButton>
 
-    [Eğitim ortamlarını görüntüleyin :material-arrow-right:](envsetup/index.md){ .md-button .md-button--secondary }
+</Card>
 
--   :material-tag-outline:{ .lg .middle } __Nextflow sürümleri__
+<Card title="Nextflow sürümleri">
 
-    ---
+Nextflow'un sözdizimi sürümlerinin gelişimini anlama ve yönetme.
 
-    Nextflow'un sözdizimi sürümlerinin gelişimini anlama ve yönetme.
+<LinkButton href="info/nxf_versions.mdx" variant="secondary" icon="right-arrow">Sürüm gereksinimlerini kontrol edin</LinkButton>
 
-    [Sürüm gereksinimlerini kontrol edin :material-arrow-right:](info/nxf_versions.md){ .md-button .md-button--secondary }
+</Card>
 
--   :material-file-code-outline:{ .lg .middle } __Hello pipeline__
+<Card title="Hello pipeline">
 
-    ---
+Hello pipeline'ının ne yaptığına ve nasıl yapılandırıldığına ilişkin özet.
 
-    Hello pipeline'ının ne yaptığına ve nasıl yapılandırıldığına ilişkin özet.
+<LinkButton href="info/hello_pipeline.mdx" variant="secondary" icon="right-arrow">Özeti okuyun</LinkButton>
 
-    [Özeti okuyun :material-arrow-right:](info/hello_pipeline.md){ .md-button .md-button--secondary }
+</Card>
 
--   :material-lifebuoy:{ .lg .middle } __Yardım alma__
+<Card title="Yardım alma">
 
-    ---
+Nextflow eğitiminde bir sorunla karşılaştığınızda başvurabileceğiniz kaynaklar.
 
-    Nextflow eğitiminde bir sorunla karşılaştığınızda başvurabileceğiniz kaynaklar.
+<LinkButton href="help.mdx" variant="secondary" icon="right-arrow">Yardım bulun</LinkButton>
 
-    [Yardım bulun :material-arrow-right:](help.md){ .md-button .md-button--secondary }
+</Card>
 
-</div>
+</CardGrid>

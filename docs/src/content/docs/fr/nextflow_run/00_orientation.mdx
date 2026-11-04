@@ -1,10 +1,13 @@
-# Démarrage
+---
+title: Démarrage
+description: 'Nextflow Run: Démarrage'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Lancer un environnement de formation
 
-Pour utiliser l'environnement pré-construit que nous fournissons sur GitHub Codespaces, cliquez sur le bouton « Open in GitHub Codespaces » ci-dessous. Pour d'autres options, consultez [Options d'environnement](../envsetup/index.md).
+Pour utiliser l'environnement pré-construit que nous fournissons sur GitHub Codespaces, cliquez sur le bouton « Open in GitHub Codespaces » ci-dessous. Pour d'autres options, consultez [Options d'environnement](../envsetup/index.mdx).
 
 Nous vous recommandons d'ouvrir l'environnement de formation dans un nouvel onglet ou une nouvelle fenêtre de navigateur (utilisez le clic droit, ctrl-clic ou cmd-clic selon votre équipement) afin de pouvoir continuer à lire pendant que l'environnement se charge.
 Vous devrez garder ces instructions ouvertes en parallèle pour suivre la formation.
@@ -18,12 +21,12 @@ Cet environnement de formation contient tous les logiciels, le code et les donn�
 Le codespace est configuré avec une interface VSCode, qui comprend un explorateur de fichiers, un éditeur de code et un terminal shell.
 Toutes les instructions données pendant la formation (par exemple « ouvrir le fichier », « modifier le code » ou « exécuter cette commande ») se réfèrent à ces trois parties de l'interface VSCode, sauf indication contraire.
 
-Si vous suivez cette formation par vous-même, veuillez vous familiariser avec les [bases de l'environnement](../envsetup/01_setup.md) pour plus de détails.
+Si vous suivez cette formation par vous-même, veuillez vous familiariser avec les [bases de l'environnement](../envsetup/01_setup.mdx) pour plus de détails.
 
 ### Exigences de version
 
 Cette formation requiert Nextflow 25.10.2 ou ultérieur, avec le parseur de syntaxe v2 activé (valeur par défaut dans la version 25.10+).
-Si vous utilisez un environnement local ou personnalisé, veuillez vous assurer que vous utilisez les paramètres corrects comme documenté [ici](../info/nxf_versions.md).
+Si vous utilisez un environnement local ou personnalisé, veuillez vous assurer que vous utilisez les paramètres corrects comme documenté [ici](../info/nxf_versions.mdx).
 
 ## Se préparer à travailler
 
@@ -44,13 +47,13 @@ Configurez ensuite VSCode pour se concentrer sur ce répertoire, de sorte que se
 code .
 ```
 
-!!! tip "Astuce"
+:::tip[Astuce]
+Si pour une raison quelconque vous sortez de ce répertoire (par exemple, votre codespace s'endort), vous pouvez toujours utiliser le chemin complet pour y revenir, en supposant que vous exécutez cela dans l'environnement de formation GitHub Codespaces :
 
-    Si pour une raison quelconque vous sortez de ce répertoire (par exemple, votre codespace s'endort), vous pouvez toujours utiliser le chemin complet pour y revenir, en supposant que vous exécutez cela dans l'environnement de formation GitHub Codespaces :
-
-    ```bash
-    cd /workspaces/training/nextflow-run
-    ```
+```bash
+cd /workspaces/training/nextflow-run
+```
+:::
 
 ### Explorer les matériaux fournis
 
@@ -61,23 +64,26 @@ Exécutez la commande suivante depuis le terminal pour voir la structure complè
 tree . -L 2
 ```
 
-??? abstract "Contenu du répertoire"
+<details class="abstract">
+<summary>Contenu du répertoire</summary>
 
-    ```console
-    .
-    ├── 1-hello.nf
-    ├── 2-inputs.nf
-    ├── data
-    │   ├── greetings-extended.csv
-    │   └── greetings.csv
-    ├── main.nf
-    ├── modules
-    │   ├── collectGreetings.nf
-    │   ├── convertToUpper.nf
-    │   ├── cowpy.nf
-    │   └── sayHello.nf
-    └── nextflow.config
-    ```
+```console
+.
+├── 1-hello.nf
+├── 2-inputs.nf
+├── data
+│   ├── greetings-extended.csv
+│   └── greetings.csv
+├── main.nf
+├── modules
+│   ├── collectGreetings.nf
+│   ├── convertToUpper.nf
+│   ├── cowpy.nf
+│   └── sayHello.nf
+└── nextflow.config
+```
+
+</details>
 
 Les **fichiers `.nf`** sont des scripts de workflow de complexité croissante, utilisés dans cet ordre tout au long de la formation.
 
@@ -97,4 +103,4 @@ Vous pensez être prêt·e à plonger ?
 
 Si vous pouvez cocher toutes les cases, vous êtes prêt·e à commencer.
 
-**Pour continuer vers [Partie 1 : Exécuter Nextflow](./01_run_nextflow.md), cliquez sur la flèche en bas à droite de cette page.**
+**Pour continuer vers [Partie 1 : Exécuter Nextflow](./01_run_nextflow.mdx), cliquez sur la flèche en bas à droite de cette page.**

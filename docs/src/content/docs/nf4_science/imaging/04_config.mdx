@@ -1,4 +1,7 @@
-# Part 4: Configuration
+---
+title: 'Part 4: Configuration'
+description: In Parts 1-3, we learned how to run Nextflow, run an nf-core pipeline, and manage inputs with parameter files and samplesheets.
+---
 
 In Parts 1-3, we learned how to run Nextflow, run an nf-core pipeline, and manage inputs with parameter files and samplesheets.
 Now we'll explore how to configure pipelines for different computing environments using **configuration files** and **profiles**.
@@ -44,7 +47,7 @@ This layered approach lets you keep defaults in the pipeline, override with user
 
 Let's look at the configuration we've been using:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 docker.enabled = true
 process {
     resourceLimits = [
@@ -78,7 +81,7 @@ code molkart/nextflow.config
 
 Search for the `profiles` block:
 
-```groovy title="molkart/nextflow.config (excerpt)"
+```nextflow title="molkart/nextflow.config (excerpt)" nextflow="config"
 profiles {
     docker {
         docker.enabled          = true
@@ -150,7 +153,7 @@ nf-core pipelines will always include at least two test profiles:
 
 Let's take a closer look at the `test` profile in molkart which is included using the `includeConfig` directive:
 
-```groovy title="molkart/nextflow.config (excerpt)"
+```nextflow title="molkart/nextflow.config (excerpt)" nextflow="config"
 profiles {
   ...
     test      { includeConfig 'conf/test.config'      }
@@ -159,7 +162,7 @@ profiles {
 
 This means whenever we run the pipeline with `-profile test`, Nextflow will load the configuration from `conf/test.config`.
 
-```groovy title="molkart/conf/test.config (excerpt)"
+```nextflow title="molkart/conf/test.config (excerpt)" nextflow="config"
 params {
     config_profile_name        = 'Test profile'
     config_profile_description = 'Minimal test dataset to check pipeline function'
@@ -219,7 +222,7 @@ Let's create custom profiles for two scenarios:
 
 Add the following to your `nextflow.config`:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 profiles {
     local_dev {
         docker.enabled = true
@@ -245,10 +248,10 @@ nextflow run ./molkart -profile local_dev --input data/samplesheet.csv --outdir 
 nextflow run ./molkart -profile hpc_cluster --input data/samplesheet.csv --outdir results
 ```
 
-!!! Note
-
-    We can't test the HPC profile in this training environment since we don't have access to a Slurm scheduler.
-    But this shows how you would configure it for real-world use.
+:::note
+We can't test the HPC profile in this training environment since we don't have access to a Slurm scheduler.
+But this shows how you would configure it for real-world use.
+:::
 
 ### 3.2. Use `nextflow config` to inspect configuration
 
@@ -272,12 +275,12 @@ This is extremely useful for:
 - Understanding what values will actually be used
 - Checking how multiple profiles interact
 
-### Takeaway
+### Takeaway {#takeaway_1}
 
 Custom profiles let you switch between different computing environments with a single command-line flag.
 Use `nextflow config` to inspect the resolved configuration before running.
 
-### What's next?
+### What's next? {#whats-next_1}
 
 Learn how to customize resource requests for individual processes using nf-core's process label system.
 
@@ -291,7 +294,7 @@ For simplicity, nf-core pipelines use [**process labels**](https://www.nextflow.
 Each process is tagged with a label like `process_low`, `process_medium`, or `process_high` to describe low, medium, or high compute resource requirements, respectively.
 These labels get converted into specific resource requests in one of the configuration files located in the `conf/` directory of the pipeline.
 
-```groovy title="molkart/conf/base.config (excerpt)"
+```nextflow title="molkart/conf/base.config (excerpt)" nextflow="config"
 process {
     cpus   = { 1      * task.attempt }
     memory = { 6.GB   * task.attempt }
@@ -330,7 +333,7 @@ Notice the `task.attempt` multiplier - this allows subsequent task retries to re
 
 For fine-grained control, target individual processes by name:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 process {
     withName: 'NFCORE_MOLKART:MOLKART:CELLPOSE' {
         cpus   = 16
@@ -343,17 +346,17 @@ If we try to run this pipeline with the above override, the `CELLPOSE` process w
 This will cause the pipeline to fail in our current environment since we don't have that much RAM available.
 We'll learn how to prevent these types of failures in the next section.
 
-!!! Tip
+:::tip
+To find process names, look at the pipeline execution output or check `.nextflow.log`.
+Process names follow the pattern `WORKFLOW:SUBWORKFLOW:PROCESS`.
+:::
 
-    To find process names, look at the pipeline execution output or check `.nextflow.log`.
-    Process names follow the pattern `WORKFLOW:SUBWORKFLOW:PROCESS`.
-
-### Takeaway
+### Takeaway {#takeaway_2}
 
 nf-core pipelines use process labels to standardize resource allocation.
 You can override resources by label (affects multiple processes) or by name (affects one specific process).
 
-### What's next?
+### What's next? {#whats-next_2}
 
 Learn how to manage resource limits in constrained environments like GitHub Codespaces.
 
@@ -372,7 +375,7 @@ In constrained environments like GitHub Codespaces, without limits, Nextflow wou
 
 The `resourceLimits` directive caps resource requests at specified values:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 process {
     resourceLimits = [ cpus: 2, memory: 7.GB ]
 }
@@ -384,7 +387,7 @@ This tells Nextflow: "If any process requests more than 2 CPUs or 7 GB memory, c
 
 Update your custom profiles to include appropriate limits:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 profiles {
     local_dev {
         docker.enabled = true
@@ -408,17 +411,17 @@ profiles {
 }
 ```
 
-!!! Warning
+:::caution
+Setting resource limits too low may cause processes to fail or run slowly.
+The pipeline may need to use less memory-intensive algorithms or process data in smaller chunks.
+:::
 
-    Setting resource limits too low may cause processes to fail or run slowly.
-    The pipeline may need to use less memory-intensive algorithms or process data in smaller chunks.
-
-### Takeaway
+### Takeaway {#takeaway_3}
 
 Use `resourceLimits` to run pipelines in resource-constrained environments by capping process resource requests.
 Different profiles can have different limits appropriate for their environment.
 
-### What's next?
+### What's next? {#whats-next_3}
 
 You've completed the core Nextflow for Bioimaging training!
 
@@ -439,13 +442,13 @@ Key skills you've learned:
 
 These configuration skills are transferable to any Nextflow pipeline and will help you run workflows efficiently across local machines, HPC clusters, and cloud platforms.
 
-### What's next?
+### What's next? {#whats-next_4}
 
 Congratulations on completing the Nextflow for Bioimaging course!
 
 Next steps:
 
 - Fill out the course survey to provide feedback
-- Check out [Hello Nextflow](../../hello_nextflow/index.md) to learn more about developing workflows
-- Explore [Build with nf-core](../../nfcore_build/index.md) to dive deeper into nf-core tooling
-- Explore more advanced topics in the [Side Quests](../../side_quests/index.md)
+- Check out [Hello Nextflow](../../hello_nextflow/index.mdx) to learn more about developing workflows
+- Explore [Build with nf-core](../../nfcore_build/index.mdx) to dive deeper into nf-core tooling
+- Explore more advanced topics in the [Side Quests](../../side_quests/index.mdx)

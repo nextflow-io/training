@@ -1,10 +1,13 @@
-# Başlarken
+---
+title: Başlarken
+description: 'Genomik için Nextflow: Başlarken'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Eğitim ortamını başlatın
 
-GitHub Codespaces üzerinde sağladığımız önceden hazırlanmış ortamı kullanmak için aşağıdaki "GitHub Codespaces'te Aç" düğmesine tıklayın. Diğer seçenekler için [Ortam seçenekleri](../../envsetup/index.md) sayfasına bakın.
+GitHub Codespaces üzerinde sağladığımız önceden hazırlanmış ortamı kullanmak için aşağıdaki "GitHub Codespaces'te Aç" düğmesine tıklayın. Diğer seçenekler için [Ortam seçenekleri](../../envsetup/index.mdx) sayfasına bakın.
 
 Eğitim ortamını yeni bir tarayıcı sekmesinde veya penceresinde açmanızı öneririz (ekipmanınıza bağlı olarak sağ tıklama, ctrl-tıklama veya cmd-tıklama kullanın), böylece ortam yüklenirken okumaya devam edebilirsiniz.
 Kurs boyunca çalışmak için bu talimatları paralel olarak açık tutmanız gerekecek.
@@ -18,12 +21,12 @@ Bu eğitim ortamı, eğitim kursunda çalışmak için gerekli tüm yazılımı,
 Codespace bir VSCode arayüzü ile kurulmuştur; bu arayüz bir dosya sistemi gezgini, bir kod düzenleyici ve bir terminal kabuğu içerir.
 Kurs boyunca verilen tüm talimatlar (örn. 'dosyayı açın', 'kodu düzenleyin' veya 'bu komutu çalıştırın') aksi belirtilmedikçe VSCode arayüzünün bu üç bölümüne atıfta bulunur.
 
-Bu kursu kendi başınıza çalışıyorsanız, lütfen daha fazla ayrıntı için [ortam temellerine](../../envsetup/01_setup.md) göz atın.
+Bu kursu kendi başınıza çalışıyorsanız, lütfen daha fazla ayrıntı için [ortam temellerine](../../envsetup/01_setup.mdx) göz atın.
 
 ### Sürüm gereksinimleri
 
 Bu eğitim, Nextflow 25.10.2 veya sonrası için **v2 sözdizimi ayrıştırıcısının ETKİN olduğu** sürüm ile çalışmaktadır.
-Yerel veya özel bir ortam kullanıyorsanız, lütfen [burada](../../info/nxf_versions.md) belgelenen doğru ayarları kullandığınızdan emin olun.
+Yerel veya özel bir ortam kullanıyorsanız, lütfen [burada](../../info/nxf_versions.mdx) belgelenen doğru ayarları kullandığınızdan emin olun.
 
 ## Çalışmaya hazır olun
 
@@ -45,13 +48,13 @@ VSCode'u bu dizine odaklanacak şekilde ayarlayabilirsiniz, böylece dosya gezgi
 code .
 ```
 
-!!! tip "İpucu"
+:::tip[İpucu]
+Herhangi bir nedenle bu dizinden çıkarsanız (örn. codespace'iniz uykuya geçerse), Github Codespaces eğitim ortamında çalıştığınızı varsayarak, ona dönmek için her zaman tam yolu kullanabilirsiniz:
 
-    Herhangi bir nedenle bu dizinden çıkarsanız (örn. codespace'iniz uykuya geçerse), Github Codespaces eğitim ortamında çalıştığınızı varsayarak, ona dönmek için her zaman tam yolu kullanabilirsiniz:
-
-    ```bash
-    cd /workspaces/training/nf4-science/genomics
-    ```
+```bash
+cd /workspaces/training/nf4-science/genomics
+```
+:::
 
 Şimdi içeriğe bir göz atalım.
 
@@ -68,26 +71,29 @@ Burada ikinci seviyeye kadar bir içindekiler tablosu oluşturuyoruz:
 tree . -L 2
 ```
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console
-    .
-    ├── data
-    │   ├── bam
-    │   ├── ref
-    │   └── samplesheet.csv
-    ├── genomics.nf
-    ├── modules
-    │   ├── gatk_haplotypecaller.nf
-    │   ├── gatk_jointgenotyping.nf
-    │   └── samtools_index.nf
-    ├── nextflow.config
-    └── solutions
-        ├── part2
-        └── part3
+```console
+.
+├── data
+│   ├── bam
+│   ├── ref
+│   └── samplesheet.csv
+├── genomics.nf
+├── modules
+│   ├── gatk_haplotypecaller.nf
+│   ├── gatk_jointgenotyping.nf
+│   └── samtools_index.nf
+├── nextflow.config
+└── solutions
+    ├── part2
+    └── part3
 
-    7 directories, 6 files
-    ```
+7 directories, 6 files
+```
+
+</details>
 
 Bölümü genişletmek ve içeriğini görüntülemek için renkli kutuya tıklayın.
 Beklenen komut çıktısını ve ayrıca dizin ve dosya içeriklerini özlü bir şekilde görüntülemek için bu şekilde katlanabilir bölümler kullanıyoruz.
@@ -115,4 +121,4 @@ Dalışa hazır olduğunuzu mu düşünüyorsunuz?
 
 Tüm kutuları işaretleyebiliyorsanız, hazırsınız.
 
-**[Bölüm 1: Metoda genel bakış](./01_method.md) bölümüne devam etmek için bu sayfanın sağ alt köşesindeki oka tıklayın.**
+**[Bölüm 1: Metoda genel bakış](./01_method.mdx) bölümüne devam etmek için bu sayfanın sağ alt köşesindeki oka tıklayın.**

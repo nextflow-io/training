@@ -1,14 +1,12 @@
 ---
 title: Ortam seçenekleri
 description: Nextflow eğitimleri için ortamınızı ayarlama seçenekleri
-hide:
-  - toc
-  - footer
+tableOfContents: false
+prev: false
+next: false
 ---
 
-# Ortam seçenekleri
-
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 
 
@@ -17,39 +15,39 @@ Bu amaçla, tüm kurslarımızda çalışmak için gerekli tüm yazılımları, 
 
 Bu konteynerize ortam, Github Codespaces üzerinde hazır olarak veya Devcontainers eklentisi ile VS Code'da yerel olarak çalıştırılabilir.
 
-<div class="grid cards" markdown>
+<CardGrid>
 
--   :material-cloud-outline:{ .lg .middle } __Github Codespaces__
+<Card title="Github Codespaces">
 
-    ---
+GitHub Codespaces, buluttaki sanal makineler tarafından desteklenen, tüm araçlar ve veriler dahil önceden oluşturulmuş bir eğitim ortamı sağlamamıza olanak tanıyan web tabanlı bir hizmettir. Github hesabı olan herkes için ücretsiz olarak erişilebilir.
 
-    GitHub Codespaces, buluttaki sanal makineler tarafından desteklenen, tüm araçlar ve veriler dahil önceden oluşturulmuş bir eğitim ortamı sağlamamıza olanak tanıyan web tabanlı bir hizmettir. Github hesabı olan herkes için ücretsiz olarak erişilebilir.
+<LinkButton href="01_setup.mdx" variant="primary" icon="right-arrow">Github Codespaces kullanın</LinkButton>
 
-    [Github Codespaces kullanın :material-arrow-right:](01_setup.md){ .md-button .md-button--primary .mt-1 }
+</Card>
 
--   :material-laptop:{ .lg .middle } __Yerel Devcontainer'lar__
+<Card title="Yerel Devcontainer'lar">
 
-    ---
+Devcontainer'lı VS Code, tüm eğitim araçları önceden yapılandırılmış, yerel olarak çalışan konteynerize bir geliştirme ortamı sağlar. Codespaces ile aynı önceden oluşturulmuş ortamı sunar ancak tamamen yerel donanımınızda çalışır.
 
-    Devcontainer'lı VS Code, tüm eğitim araçları önceden yapılandırılmış, yerel olarak çalışan konteynerize bir geliştirme ortamı sağlar. Codespaces ile aynı önceden oluşturulmuş ortamı sunar ancak tamamen yerel donanımınızda çalışır.
+<LinkButton href="03_devcontainer.mdx" variant="primary" icon="right-arrow">Devcontainer'ları yerel olarak kullanın</LinkButton>
 
-    [Devcontainer'ları yerel olarak kullanın :material-arrow-right:](03_devcontainer.md){ .md-button .md-button--primary .mt-1 }
+</Card>
 
-</div>
+</CardGrid>
 
 ## Manuel kurulum talimatları
 
 Yukarıdaki seçeneklerin hiçbiri ihtiyaçlarınıza uymuyorsa, yazılım bağımlılıklarını manuel olarak yükleyerek ve eğitim deposunu klonlayarak bu ortamı kendi yerel sisteminizde çoğaltabilirsiniz.
 
-[Manuel kurulum :material-arrow-right:](02_local.md){ .md-button .md-button--primary .mt-1 }
+<LinkButton href="02_local.mdx" variant="primary" icon="right-arrow">Manuel kurulum</LinkButton>
 
 ---
 
-!!! info "Gitpod'un kullanımdan kaldırılması"
+:::note[Gitpod'un kullanımdan kaldırılması]
+Nextflow Eğitimi, Şubat 2025'e kadar [Gitpod](https://gitpod.io) kullanıyordu.
+Ancak Gitpod yapımcıları, ücretsiz işlevselliği [Gitpod Flex](https://www.gitpod.io/blog/introducing-gitpod-flex) sistemi lehine emekliye ayırmaya karar verdi.
+Bu nedenle, önceden kurulum gerektirmeden tek tıklamayla geliştirici ortamı sunan GitHub Codespaces'e geçtik.
 
-    Nextflow Eğitimi, Şubat 2025'e kadar [Gitpod](https://gitpod.io) kullanıyordu.
-    Ancak Gitpod yapımcıları, ücretsiz işlevselliği [Gitpod Flex](https://www.gitpod.io/blog/introducing-gitpod-flex) sistemi lehine emekliye ayırmaya karar verdi.
-    Bu nedenle, önceden kurulum gerektirmeden tek tıklamayla geliştirici ortamı sunan GitHub Codespaces'e geçtik.
-
-    Gitpod'a ne zaman kaydolduğunuza ve hizmeti tam olarak ne zaman emekliye ayıracaklarına bağlı olarak, eski bulut IDE'lerinde eğitimi başlatabilirsiniz, ancak ileriye dönük güvenilir erişimi garanti edemeyiz:
-    [Gitpod'da aç](https://gitpod.io/#https://github.com/nextflow-io/training).
+Gitpod'a ne zaman kaydolduğunuza ve hizmeti tam olarak ne zaman emekliye ayıracaklarına bağlı olarak, eski bulut IDE'lerinde eğitimi başlatabilirsiniz, ancak ileriye dönük güvenilir erişimi garanti edemeyiz:
+[Gitpod'da aç](https://gitpod.io/#https://github.com/nextflow-io/training).
+:::

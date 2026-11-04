@@ -1,18 +1,24 @@
-# Kurs özeti
+---
+title: Kurs özeti
+description: Hello Nextflow eğitim kursunu tamamladığınız için tebrikler!
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Hello Nextflow eğitim kursunu tamamladığınız için tebrikler! 🎉
 
+<figure>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/wnmUAfDL01E?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
+<figcaption>
 
-/// caption
-:fontawesome-brands-youtube:{ .youtube } [Tüm oynatma listesini Nextflow YouTube kanalında](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) izleyin.
+[Tüm oynatma listesini Nextflow YouTube kanalında](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) izleyin.
 
-:green_book: Video ile birlikte [video transkriptini](./transcripts/07_next_steps.md) okuyabilirsiniz.
-///
+📗 Video ile birlikte [video transkriptini](./transcripts/07_next_steps.mdx) okuyabilirsiniz.
+
+</figcaption>
+</figure>
 
 ## Yolculuğunuz
 
@@ -26,9 +32,7 @@ Altı bölüm boyunca, bu basit iş akışını kanallar, operatörler, konteyne
 - Sonuçlar `results/` adlı bir dizine yayımlanır.
 - Pipeline'ın son çıktısı, büyük harfli selamlamaları söyleyen bir karakterin ASCII sanatını içeren düz metin dosyasıdır.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
-</figure>
+![](../../hello_nextflow/img/hello_pipeline_complete.excalidraw.svg)
 
 1. **`sayHello`:** Her selamlamayı kendi çıktı dosyasına yazar (örn. "Hello-output.txt")
 2. **`convertToUpper`:** Her selamlamayı büyük harfe dönüştürür (örn. "HELLO")
@@ -53,9 +57,9 @@ Artık Nextflow'da kendi pipeline'larınızı geliştirmeye başlamak için teme
 
 Bundan sonra ne yapılacağına dair en iyi 3 önerimiz:
 
-- [Nextflow for Science](../nf4_science/index.md) ile Nextflow'u bilimsel bir analiz kullanım durumuna uygulayın
-- [Build with nf-core](../nfcore_build/index.md) ile nf-core'a başlayın
-- [Side Quests](../side_quests/index.md) ile daha gelişmiş Nextflow özelliklerini keşfedin
+- [Nextflow for Science](../nf4_science/index.mdx) ile Nextflow'u bilimsel bir analiz kullanım durumuna uygulayın
+- [Build with nf-core](../nfcore_build/index.mdx) ile nf-core'a başlayın
+- [Side Quests](../side_quests/index.mdx) ile daha gelişmiş Nextflow özelliklerini keşfedin
 
 Son olarak, Nextflow'un yaratıcıları tarafından geliştirilen, iş akışlarınızı başlatmayı ve yönetmeyi, verilerinizi yönetmeyi ve herhangi bir ortamda etkileşimli analizler çalıştırmayı daha da kolaylaştıran bulut tabanlı bir platform olan [**Seqera Platform**](https://seqera.io/)'a göz atmanızı öneririz.
 
@@ -63,4 +67,4 @@ Son olarak, Nextflow'un yaratıcıları tarafından geliştirilen, iş akışlar
 
 Devam etmeden önce, lütfen kurs anketini tamamlamak için bir dakikanızı ayırın! Geri bildirimleriniz, eğitim materyallerimizi herkes için geliştirmemize yardımcı olur.
 
-[Ankete katılın :material-arrow-right:](survey.md){ .md-button .md-button--primary }
+<LinkButton href="survey.mdx" variant="primary" icon="right-arrow">Ankete katılın</LinkButton>

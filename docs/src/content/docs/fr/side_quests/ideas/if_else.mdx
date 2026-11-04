@@ -1,6 +1,9 @@
-# Partie 2 : If - Else
+---
+title: 'Partie 2 : If - Else'
+description: '[TODO]'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 [TODO]
 
@@ -41,17 +44,17 @@ Nous avons une liste de pionniers de l'informatique et de la biologie dans le fi
 
 Pour l'image de conteneur `quote`, vous pouvez soit utiliser celle que vous avez construite vous-même dans l'exercice avancé précédent, soit utiliser celle que vous avez obtenue depuis Seqera Containers.
 
-!!! Hint "Indice"
-
-    Un bon choix pour le bloc `script` de votre processus getQuote pourrait être :
-        ```groovy
-        script:
-            def safe_author = author.tokenize(' ').join('-')
-            """
-            quote "$author" > quote-${safe_author}.txt
-            echo "-${author}" >> quote-${safe_author}.txt
-            """
-        ```
+:::note[Indice]
+Un bon choix pour le bloc `script` de votre processus getQuote pourrait être :
+    ```nextflow
+    script:
+        def safe_author = author.tokenize(' ').join('-')
+        """
+        quote "$author" > quote-${safe_author}.txt
+        echo "-${author}" >> quote-${safe_author}.txt
+        """
+    ```
+:::
 
 Vous pouvez trouver une solution à cet exercice dans `containers/solutions/hello-containers-4.1.nf`.
 
@@ -60,7 +63,7 @@ Vous pouvez trouver une solution à cet exercice dans `containers/solutions/hell
 Ajoutez une logique de branchement à votre pipeline pour lui permettre d'accepter des entrées destinées à la fois à `quote` et `sayHello`.
 Voici un exemple d'utilisation d'une instruction `if` dans un workflow Nextflow :
 
-```groovy title="hello-containers.nf"
+```nextflow title="hello-containers.nf"
 workflow {
     if (params.quote) {
         ...
@@ -72,9 +75,9 @@ workflow {
 }
 ```
 
-!!! Hint "Indice"
-
-    Vous pouvez utiliser `new_ch = processName.out` pour assigner un nom au canal de sortie d'un processus.
+:::note[Indice]
+Vous pouvez utiliser `new_ch = processName.out` pour assigner un nom au canal de sortie d'un processus.
+:::
 
 Vous pouvez trouver une solution à cet exercice dans `containers/solutions/hello-containers-4.2.nf`.
 

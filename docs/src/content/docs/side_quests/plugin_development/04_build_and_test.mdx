@@ -1,22 +1,25 @@
-# Part 4: Testing
+---
+title: 'Part 4: Testing'
+description: Plugins are standalone software that pipeline developers need to trust.
+---
 
 Plugins are standalone software that pipeline developers need to trust.
 Testing each feature independently, outside of a pipeline, ensures the plugin works correctly before anyone integrates it into a workflow.
 In this section, you'll write and run tests using the Spock testing framework.
 
-!!! tip "Starting from here?"
+:::tip[Starting from here?]
+If you're joining at this part, copy the solution from Part 3 to use as your starting point:
 
-    If you're joining at this part, copy the solution from Part 3 to use as your starting point:
+```bash
+cp -r solutions/3-custom-functions/* .
+```
 
-    ```bash
-    cp -r solutions/3-custom-functions/* .
-    ```
+Then change into the plugin directory:
 
-    Then change into the plugin directory:
-
-    ```bash
-    cd nf-greeting
-    ```
+```bash
+cd nf-greeting
+```
+:::
 
 Make sure you're in the plugin directory:
 
@@ -30,7 +33,7 @@ cd nf-greeting
 
 A successful build means the code compiles, but doesn't check that it works as expected.
 Unit tests are small pieces of code that automatically check if your functions produce the right output for a given input.
-For example, a test might check that `#!groovy reverseGreeting("Hello")` returns `"olleH"`.
+For example, a test might check that `reverseGreeting("Hello"){:nextflow}` returns `"olleH"`.
 
 Tests are valuable because:
 
@@ -51,18 +54,14 @@ The difference is that Spock uses labelled blocks (`given:`, `expect:`, `when:`,
 Here's the basic structure:
 
 ```groovy
-def 'should reverse a greeting'() {   // (1)!
-    given:                             // (2)!
+def 'should reverse a greeting'() {   // [!annotate] **Test name in quotes**: Describes what the test checks. Use plain English.
+    given:                             // [!annotate] **`given:` block**: Set up what you need for the test (create objects, prepare data)
     def ext = new GreetingExtension()
 
-    expect:                            // (3)!
+    expect:                            // [!annotate] **`expect:` block**: The actual checks. Each line should be `true` for the test to pass
     ext.reverseGreeting('Hello') == 'olleH'
 }
 ```
-
-1. **Test name in quotes**: Describes what the test checks. Use plain English.
-2. **`given:` block**: Set up what you need for the test (create objects, prepare data)
-3. **`expect:` block**: The actual checks. Each line should be `true` for the test to pass
 
 This structure makes tests readable: "Given an extension object, expect that `reverseGreeting('Hello')` equals `'olleH'`."
 
@@ -80,7 +79,7 @@ touch src/test/groovy/training/plugin/GreetingExtensionTest.groovy
 
 Open it in your editor and add the empty test class skeleton:
 
-```groovy title="src/test/groovy/training/plugin/GreetingExtensionTest.groovy" linenums="1"
+```groovy title="src/test/groovy/training/plugin/GreetingExtensionTest.groovy" showLineNumbers
 package training.plugin
 
 import spock.lang.Specification
@@ -88,12 +87,10 @@ import spock.lang.Specification
 /**
  * Tests for the greeting extension functions
  */
-class GreetingExtensionTest extends Specification {  // (1)!
+class GreetingExtensionTest extends Specification {  // [!annotate] All Spock test classes extend `Specification`. This is the starting point for any Spock test file.
 
 }
 ```
-
-1. All Spock test classes extend `Specification`. This is the starting point for any Spock test file.
 
 ### 3.2. Test reverseGreeting
 
@@ -101,105 +98,102 @@ Add a test method inside the class body.
 The `given:` block creates a `GreetingExtension` instance, and the `expect:` block checks that `reverseGreeting` correctly reverses two different inputs.
 This tests the function directly, without running a pipeline.
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="GreetingExtensionTest.groovy" linenums="1" hl_lines="10-17"
-    package training.plugin
+```groovy title="GreetingExtensionTest.groovy" showLineNumbers step="Before"
+package training.plugin
 
-    import spock.lang.Specification
+import spock.lang.Specification
 
-    /**
-     * Tests for the greeting extension functions
-     */
-    class GreetingExtensionTest extends Specification {
+/**
+ * Tests for the greeting extension functions
+ */
+class GreetingExtensionTest extends Specification {
 
-        def 'should reverse a greeting'() {
-            given:
-            def ext = new GreetingExtension()            // (1)!
+}
+```
 
-            expect:
-            ext.reverseGreeting('Hello') == 'olleH'     // (2)!
-            ext.reverseGreeting('Bonjour') == 'ruojnoB'
-        }
+```groovy {10-17} title="GreetingExtensionTest.groovy" showLineNumbers step="After"
+package training.plugin
+
+import spock.lang.Specification
+
+/**
+ * Tests for the greeting extension functions
+ */
+class GreetingExtensionTest extends Specification {
+
+    def 'should reverse a greeting'() {
+        given:
+        def ext = new GreetingExtension()            // [!annotate] Create an instance of your extension to test directly, without running a pipeline
+
+        expect:
+        ext.reverseGreeting('Hello') == 'olleH'     // [!annotate] Each line in `expect:` is an assertion; the test passes only if all are `true`
+        ext.reverseGreeting('Bonjour') == 'ruojnoB'
     }
-    ```
+}
+```
 
-    1. Create an instance of your extension to test directly, without running a pipeline
-    2. Each line in `expect:` is an assertion; the test passes only if all are `true`
-
-=== "Before"
-
-    ```groovy title="GreetingExtensionTest.groovy" linenums="1"
-    package training.plugin
-
-    import spock.lang.Specification
-
-    /**
-     * Tests for the greeting extension functions
-     */
-    class GreetingExtensionTest extends Specification {
-
-    }
-    ```
+</CodeWalkthrough>
 
 ### 3.3. Test decorateGreeting
 
 Add a second test method after the first one.
 This one verifies that `decorateGreeting` wraps the input string with `***` on each side.
 
-=== "After"
+<CodeWalkthrough>
 
-    ```groovy title="GreetingExtensionTest.groovy" linenums="1" hl_lines="18-25"
-    package training.plugin
+```groovy {18} title="GreetingExtensionTest.groovy" showLineNumbers step="Before"
+package training.plugin
 
-    import spock.lang.Specification
+import spock.lang.Specification
 
-    /**
-     * Tests for the greeting extension functions
-     */
-    class GreetingExtensionTest extends Specification {
+/**
+ * Tests for the greeting extension functions
+ */
+class GreetingExtensionTest extends Specification {
 
-        def 'should reverse a greeting'() {
-            given:
-            def ext = new GreetingExtension()
+    def 'should reverse a greeting'() {
+        given:
+        def ext = new GreetingExtension()
 
-            expect:
-            ext.reverseGreeting('Hello') == 'olleH'
-            ext.reverseGreeting('Bonjour') == 'ruojnoB'
-        }
-
-        def 'should decorate a greeting'() {
-            given:
-            def ext = new GreetingExtension()
-
-            expect:
-            ext.decorateGreeting('Hello') == '*** Hello ***'
-        }
+        expect:
+        ext.reverseGreeting('Hello') == 'olleH'
+        ext.reverseGreeting('Bonjour') == 'ruojnoB'
     }
-    ```
+}
+```
 
-=== "Before"
+```groovy {18-25} title="GreetingExtensionTest.groovy" showLineNumbers step="After"
+package training.plugin
 
-    ```groovy title="GreetingExtensionTest.groovy" linenums="1" hl_lines="18"
-    package training.plugin
+import spock.lang.Specification
 
-    import spock.lang.Specification
+/**
+ * Tests for the greeting extension functions
+ */
+class GreetingExtensionTest extends Specification {
 
-    /**
-     * Tests for the greeting extension functions
-     */
-    class GreetingExtensionTest extends Specification {
+    def 'should reverse a greeting'() {
+        given:
+        def ext = new GreetingExtension()
 
-        def 'should reverse a greeting'() {
-            given:
-            def ext = new GreetingExtension()
-
-            expect:
-            ext.reverseGreeting('Hello') == 'olleH'
-            ext.reverseGreeting('Bonjour') == 'ruojnoB'
-        }
+        expect:
+        ext.reverseGreeting('Hello') == 'olleH'
+        ext.reverseGreeting('Bonjour') == 'ruojnoB'
     }
-    ```
+
+    def 'should decorate a greeting'() {
+        given:
+        def ext = new GreetingExtension()
+
+        expect:
+        ext.decorateGreeting('Hello') == '*** Hello ***'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 ---
 
@@ -209,38 +203,47 @@ This one verifies that `decorateGreeting` wraps the input string with `***` on e
 make test
 ```
 
-??? example "Test output"
+<details class="example">
+<summary>Test output</summary>
 
-    ```console
-    BUILD SUCCESSFUL in 5s
-    7 actionable tasks: 7 executed
-    ```
+```console
+BUILD SUCCESSFUL in 5s
+7 actionable tasks: 7 executed
+```
 
-    **Where are the test results?** Gradle hides detailed output when all tests pass.
-    "BUILD SUCCESSFUL" means everything worked.
-    If any test fails, you'll see detailed error messages.
+**Where are the test results?** Gradle hides detailed output when all tests pass.
+"BUILD SUCCESSFUL" means everything worked.
+If any test fails, you'll see detailed error messages.
 
-??? exercise "Add an edge case test"
+</details>
 
-    Add a test that checks `reverseGreeting` handles an empty string.
-    What should `reverseGreeting('')` return?
-    Add the test, run `make test`, and verify it passes.
+<details class="exercise">
+<summary>Add an edge case test</summary>
 
-    ??? solution
+Add a test that checks `reverseGreeting` handles an empty string.
+What should `reverseGreeting('')` return?
+Add the test, run `make test`, and verify it passes.
 
-        Add this test method to `GreetingExtensionTest.groovy`:
+<details class="solution">
+<summary>Solution</summary>
 
-        ```groovy
-        def 'should handle empty string'() {
-            given:
-            def ext = new GreetingExtension()
+Add this test method to `GreetingExtensionTest.groovy`:
 
-            expect:
-            ext.reverseGreeting('') == ''
-        }
-        ```
+```groovy
+def 'should handle empty string'() {
+    given:
+    def ext = new GreetingExtension()
 
-        An empty string reversed is still an empty string.
+    expect:
+    ext.reverseGreeting('') == ''
+}
+```
+
+An empty string reversed is still an empty string.
+
+</details>
+
+</details>
 
 ---
 
@@ -261,7 +264,7 @@ Click through to your test class to see individual test results:
 
 The report shows each test method and whether it passed or failed.
 
-Press ++ctrl+c++ to stop the server, then return to the previous directory:
+Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the server, then return to the previous directory:
 
 ```bash
 popd
@@ -291,4 +294,4 @@ So far, your plugin adds custom functions that pipelines can call.
 Plugins can also react to workflow events (a task completing, a file being published, the pipeline finishing) using trace observers.
 In the next section, you'll build an observer that counts completed tasks and prints a summary when the pipeline finishes.
 
-[Continue to Part 5 :material-arrow-right:](05_observers.md){ .md-button .md-button--primary }
+<LinkButton href="05_observers.mdx" variant="primary" icon="right-arrow">Continue to Part 5</LinkButton>

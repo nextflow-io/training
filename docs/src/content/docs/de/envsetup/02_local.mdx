@@ -1,16 +1,19 @@
-# Manuelle Installation
+---
+title: Manuelle Installation
+description: Es ist möglich, alles, was du zum Ausführen des Trainings benötigst, manuell in deiner eigenen lokalen Umgebung zu installieren.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Es ist möglich, alles, was du zum Ausführen des Trainings benötigst, manuell in deiner eigenen lokalen Umgebung zu installieren.
 
 Hier haben wir dokumentiert, wie das auf Standard-POSIX-kompatiblen Systemen geht (unter der Annahme eines persönlichen Rechners wie eines Laptops).
 Beachte, dass einige Details je nach deinem spezifischen System unterschiedlich sein können.
 
-!!! tip "Tipp"
-
-    Bevor du fortfährst, hast du den [Devcontainers-Ansatz](03_devcontainer.md) in Betracht gezogen?
-    Er stellt alle notwendigen Tools und Abhängigkeiten bereit, ohne dass eine manuelle Installation erforderlich ist.
+:::tip[Tipp]
+Bevor du fortfährst, hast du den [Devcontainers-Ansatz](03_devcontainer.mdx) in Betracht gezogen?
+Er stellt alle notwendigen Tools und Abhängigkeiten bereit, ohne dass eine manuelle Installation erforderlich ist.
+:::
 
 ## Allgemeine Softwareanforderungen
 
@@ -20,7 +23,7 @@ Unsere Trainingskurse haben einige zusätzliche Anforderungen.
 Insgesamt musst du die folgende Software installiert haben:
 
 - Bash oder eine gleichwertige Shell
-- [Java 21 oder höher](https://www.oracle.com/technetwork/java/javase/downloads/index.html) (Java 17+ reicht aus, um Nextflow auszuführen, aber der Kurs zur [Plugin-Entwicklung](../side_quests/plugin_development/index.md) erfordert Java 21)
+- [Java 21 oder höher](https://www.oracle.com/technetwork/java/javase/downloads/index.html) (Java 17+ reicht aus, um Nextflow auszuführen, aber der Kurs zur [Plugin-Entwicklung](../side_quests/plugin_development/index.mdx) erfordert Java 21)
 - [Git](https://git-scm.com/)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Conda](https://conda.io/) 4.5 (oder höher)
@@ -39,13 +42,13 @@ Du musst Nextflow selbst sowie die nf-core tools installieren, wie in den unten 
 
 Wir empfehlen die Self-Install-Option für Nextflow und die PyPI-Option für nf-core tools.
 
-!!! warning "Versionskompatibilität"
+:::caution[Versionskompatibilität]
+**Ab Januar 2026 erfordern alle unsere Nextflow-Trainingskurse Nextflow Version 25.10.2 oder höher mit aktivierter strikter v2-Syntax, sofern nicht anders angegeben.**
 
-    **Ab Januar 2026 erfordern alle unsere Nextflow-Trainingskurse Nextflow Version 25.10.2 oder höher mit aktivierter strikter v2-Syntax, sofern nicht anders angegeben.**
+Weitere Informationen zu Versionsanforderungen und strikter v2-Syntax findest du im [Nextflow-Versionen](../info/nxf_versions.mdx)-Leitfaden.
 
-    Weitere Informationen zu Versionsanforderungen und strikter v2-Syntax findest du im [Nextflow-Versionen](../info/nxf_versions.md)-Leitfaden.
-
-    Ältere Versionen des Trainingsmaterials, die früherer Syntax entsprechen, sind über den Versionsauswähler in der Menüleiste dieser Webseite verfügbar.
+Ältere Versionen des Trainingsmaterials, die früherer Syntax entsprechen, sind über den Versionsauswähler in der Menüleiste dieser Webseite verfügbar.
+:::
 
 ## Trainingsmaterialien
 

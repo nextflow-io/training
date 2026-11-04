@@ -1,8 +1,11 @@
-# Getting started
+---
+title: Getting started
+description: 'Nextflow for Genomics: Getting started'
+---
 
 ## Start a training environment
 
-To use the pre-built environment we provide on GitHub Codespaces, click the "Open in GitHub Codespaces" button below. For other options, see [Environment options](../../envsetup/index.md).
+To use the pre-built environment we provide on GitHub Codespaces, click the "Open in GitHub Codespaces" button below. For other options, see [Environment options](../../envsetup/index.mdx).
 
 We recommend opening the training environment in a new browser tab or window (use right-click, ctrl-click or cmd-click depending on your equipment) so that you can read on while the environment loads.
 You will need to keep these instructions open in parallel to work through the course.
@@ -16,12 +19,12 @@ This training environment contains all the software, code and data necessary to 
 The codespace is set up with a VSCode interface, which includes a filesystem explorer, a code editor and a terminal shell.
 All instructions given during the course (e.g. 'open the file', 'edit the code' or 'run this command') refer to those three parts of the VScode interface unless otherwise specified.
 
-If you are working through this course by yourself, please acquaint yourself with the [environment basics](../../envsetup/01_setup.md) for further details.
+If you are working through this course by yourself, please acquaint yourself with the [environment basics](../../envsetup/01_setup.mdx) for further details.
 
 ### Version requirements
 
 This training works with Nextflow 25.10.2 or later **with the v2 syntax parser ENABLED**.
-If you are using a local or custom environment, please make sure you are using the correct settings as documented [here](../../info/nxf_versions.md).
+If you are using a local or custom environment, please make sure you are using the correct settings as documented [here](../../info/nxf_versions.mdx).
 
 ## Get ready to work
 
@@ -43,13 +46,13 @@ You can set VSCode to focus on this directory, so that only the relevant files s
 code .
 ```
 
-!!! tip
+:::tip
+If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
 
-    If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
-
-    ```bash
-    cd /workspaces/training/nf4-science/genomics
-    ```
+```bash
+cd /workspaces/training/nf4-science/genomics
+```
+:::
 
 Now let's have a look at the contents.
 
@@ -66,26 +69,29 @@ Here we generate a table of contents to the second level down:
 tree . -L 2
 ```
 
-??? abstract "Directory contents"
+<details class="abstract">
+<summary>Directory contents</summary>
 
-    ```console
-    .
-    ├── data
-    │   ├── bam
-    │   ├── ref
-    │   └── samplesheet.csv
-    ├── genomics.nf
-    ├── modules
-    │   ├── gatk_haplotypecaller.nf
-    │   ├── gatk_jointgenotyping.nf
-    │   └── samtools_index.nf
-    ├── nextflow.config
-    └── solutions
-        ├── part2
-        └── part3
+```console
+.
+├── data
+│   ├── bam
+│   ├── ref
+│   └── samplesheet.csv
+├── genomics.nf
+├── modules
+│   ├── gatk_haplotypecaller.nf
+│   ├── gatk_jointgenotyping.nf
+│   └── samtools_index.nf
+├── nextflow.config
+└── solutions
+    ├── part2
+    └── part3
 
-    7 directories, 6 files
-    ```
+7 directories, 6 files
+```
+
+</details>
 
 Click on the colored box to expand the section and view its contents.
 We use collapsible sections like this to display expected command output as well as directory and file contents in a concise way.
@@ -113,4 +119,4 @@ Think you're ready to dive in?
 
 If you can check all the boxes, you're good to go.
 
-**To continue to [Part 1: Method overview](./01_method.md), click on the arrow in the bottom right corner of this page.**
+**To continue to [Part 1: Method overview](./01_method.mdx), click on the arrow in the bottom right corner of this page.**

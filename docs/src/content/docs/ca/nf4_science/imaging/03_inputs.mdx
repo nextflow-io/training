@@ -1,6 +1,9 @@
-# Part 3: Organitzant les entrades
+---
+title: 'Part 3: Organitzant les entrades'
+description: A la Part 2, vam executar molkart amb múltiples paràmetres a la línia de comandes.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 A la Part 2, vam executar molkart amb múltiples paràmetres a la línia de comandes.
 Ara aprendrem dues millors aproximacions per gestionar les entrades: **fitxers de paràmetres** i **fulls de mostres**.
@@ -122,9 +125,9 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! Warning "Advertència"
-
-    Noteu que les rutes al full de mostres són relatives a on **executeu** Nextflow, no a on es troba el full de mostres.
+:::caution[Advertència]
+Noteu que les rutes al full de mostres són relatives a on **executeu** Nextflow, no a on es troba el full de mostres.
+:::
 
 Finalment, executem nf-core/molkart una vegada més amb el full de mostres amb rutes de fitxers locals:
 

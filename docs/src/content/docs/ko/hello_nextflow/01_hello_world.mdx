@@ -1,23 +1,32 @@
-# 파트 1: Hello World
+---
+title: '파트 1: Hello World'
+description: Hello Nextflow 교육 과정의 첫 번째 파트에서는 매우 기본적인 도메인에 구애받지 않는 Hello World 예제로 주제에 쉽게 접근합니다.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+<figure>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
+<figcaption>
 
-/// caption
-:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube 채널에서 [전체 재생 목록](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n)을 확인하세요.
+Nextflow YouTube 채널에서 [전체 재생 목록](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n)을 확인하세요.
 
-:green_book: 비디오 스크립트는 [여기](./transcripts/01_hello_world.md)에서 확인할 수 있습니다.
-///
+📗 비디오 스크립트는 [여기](./transcripts/01_hello_world.mdx)에서 확인할 수 있습니다.
+
+</figcaption>
+</figure>
 
 Hello Nextflow 교육 과정의 첫 번째 파트에서는 매우 기본적인 도메인에 구애받지 않는 Hello World 예제로 주제에 쉽게 접근합니다. 이 예제를 단계적으로 구축하여 기본 Nextflow 로직과 구성 요소의 사용법을 시연합니다.
 
-??? info "Hello World 예제란 무엇인가요?"
+<details class="info">
+<summary>Hello World 예제란 무엇인가요?</summary>
 
-    "Hello World!"는 프로그래밍 언어 또는 소프트웨어 프레임워크의 기본 구문과 구조를 보여주기 위한 최소한의 예제입니다.
-    이 예제는 일반적으로 콘솔이나 터미널과 같은 출력 장치에 "Hello, World!"라는 문구를 출력하거나 파일에 쓰는 것으로 구성됩니다.
+"Hello World!"는 프로그래밍 언어 또는 소프트웨어 프레임워크의 기본 구문과 구조를 보여주기 위한 최소한의 예제입니다.
+이 예제는 일반적으로 콘솔이나 터미널과 같은 출력 장치에 "Hello, World!"라는 문구를 출력하거나 파일에 쓰는 것으로 구성됩니다.
+
+</details>
 
 ---
 
@@ -25,9 +34,9 @@ Hello Nextflow 교육 과정의 첫 번째 파트에서는 매우 기본적인 �
 
 Nextflow로 감싸기 전에, 터미널에서 직접 실행하는 간단한 명령으로 시작하여 무엇을 하는지 보여드리겠습니다.
 
-!!! tip "팁"
-
-    [시작하기](00_orientation.md) 페이지에 설명된 대로 이제 `hello-nextflow/` 디렉토리 안에 있어야 합니다.
+:::tip[팁]
+[시작하기](00_orientation.mdx) 페이지에 설명된 대로 이제 `hello-nextflow/` 디렉토리 안에 있어야 합니다.
+:::
 
 ### 0.1. 터미널이 hello라고 말하게 하기
 
@@ -35,13 +44,9 @@ Nextflow로 감싸기 전에, 터미널에서 직접 실행하는 간단한 명�
 
 ```bash
 echo 'Hello World!'
+# [!output]
+Hello World!
 ```
-
-??? success "명령 출력"
-
-    ```console
-    Hello World!
-    ```
 
 이것은 터미널에 'Hello World' 텍스트를 출력합니다.
 
@@ -53,12 +58,6 @@ echo 'Hello World!'
 echo 'Hello World!' > output.txt
 ```
 
-??? success "명령 출력"
-
-    ```console
-
-    ```
-
 이것은 터미널에 아무것도 출력하지 않습니다.
 
 ### 0.3. 출력 찾기
@@ -66,11 +65,14 @@ echo 'Hello World!' > output.txt
 'Hello World' 텍스트는 이제 지정한 출력 파일인 `output.txt`에 있어야 합니다.
 파일 탐색기에서 열거나 예를 들어 `cat` 유틸리티를 사용하여 명령줄에서 열 수 있습니다.
 
-??? abstract "파일 내용"
+<details class="abstract">
+<summary>파일 내용</summary>
 
-    ```console title="output.txt" linenums="1"
-    Hello World!
-    ```
+```console title="output.txt" showLineNumbers
+Hello World!
+```
+
+</details>
 
 이것이 첫 번째 Nextflow 워크플로우로 복제하려는 것입니다.
 
@@ -95,32 +97,35 @@ Nextflow 워크플로우로 작성하면 어떻게 보이는지 알아보세요.
 
 `hello-world.nf` 스크립트는 현재 디렉토리인 `hello-nextflow`에 있습니다. 편집기 창에서 여십시오.
 
-??? full-code "전체 코드 파일"
+<details class="full-code">
+<summary>전체 코드 파일</summary>
 
-    ```groovy title="hello-world.nf" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="hello-world.nf" showLineNumbers
+#!/usr/bin/env nextflow
 
-    /*
-    * echo를 사용하여 'Hello World!'를 파일에 출력
-    */
-    process sayHello {
+/*
+* echo를 사용하여 'Hello World!'를 파일에 출력
+*/
+process sayHello {
 
-        output:
-        path 'output.txt'
+    output:
+    path 'output.txt'
 
-        script:
-        """
-        echo 'Hello World!' > output.txt
-        """
-    }
+    script:
+    """
+    echo 'Hello World!' > output.txt
+    """
+}
 
-    workflow {
+workflow {
 
-        main:
-        // 인사말을 내보냅니다
-        sayHello()
-    }
-    ```
+    main:
+    // 인사말을 내보냅니다
+    sayHello()
+}
+```
+
+</details>
 
 Nextflow 워크플로우 스크립트는 일반적으로 하나 이상의 [**process**](https://nextflow.io/docs/latest/process.html) 정의와 [**workflow**](https://nextflow.io/docs/latest/workflow.html) 자체, 그리고 나중에 소개할 몇 가지 선택적 블록(여기에는 없음)을 포함합니다.
 
@@ -135,7 +140,7 @@ Nextflow 워크플로우 스크립트는 일반적으로 하나 이상의 [**pro
 프로세스 정의는 `process` 키워드로 시작하고 프로세스 이름이 뒤따르며 마지막으로 중괄호로 구분된 프로세스 본문이 옵니다.
 프로세스 본문에는 실행할 명령을 지정하는 script 블록이 포함되어야 하며, 이는 명령줄 터미널에서 실행할 수 있는 모든 것이 될 수 있습니다.
 
-```groovy title="hello-world.nf" linenums="3"
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=3
 /*
 * echo를 사용하여 'Hello World!'를 파일에 출력
 */
@@ -153,9 +158,7 @@ process sayHello {
 
 여기에 `output.txt`라는 파일에 **출력**을 쓰는 `sayHello`라는 **프로세스**가 있습니다.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_world.svg"
-</figure>
+![](../../hello_nextflow/img/hello_world.excalidraw.svg)
 
 이것은 `output` 정의와 실행할 `script`만 포함하는 매우 최소한의 프로세스 정의입니다.
 
@@ -166,11 +169,11 @@ process sayHello {
 실행이 완료된 후 Nextflow가 찾을 수 있도록 예상 출력을 단순히 *선언*합니다.
 이는 명령이 성공적으로 실행되었는지 확인하고 필요한 경우 출력을 다운스트림 프로세스에 전달하는 데 필요합니다. 출력 블록에 선언된 것과 일치하지 않는 생성된 출력은 다운스트림 프로세스로 전달되지 않습니다.
 
-!!! warning "경고"
-
-    이 예제는 두 개의 별도 위치(스크립트와 출력 블록)에 출력 파일 이름을 하드코딩했기 때문에 취약합니다.
-    하나를 변경하고 다른 하나를 변경하지 않으면 스크립트가 중단됩니다.
-    나중에 이 문제를 완화하기 위해 변수를 사용하는 방법을 배웁니다.
+:::caution[경고]
+이 예제는 두 개의 별도 위치(스크립트와 출력 블록)에 출력 파일 이름을 하드코딩했기 때문에 취약합니다.
+하나를 변경하고 다른 하나를 변경하지 않으면 스크립트가 중단됩니다.
+나중에 이 문제를 완화하기 위해 변수를 사용하는 방법을 배웁니다.
+:::
 
 실제 파이프라인에서 프로세스는 일반적으로 지시문과 입력과 같은 추가 블록을 포함하며, 이에 대해서는 곧 소개합니다.
 
@@ -181,7 +184,7 @@ process sayHello {
 
 여기에 `main:` 블록('이것이 워크플로우의 메인 본문입니다'라고 말하는 코드 요소)과 `sayHello` 프로세스에 대한 호출을 포함하는 **workflow**가 있습니다.
 
-```groovy title="hello-world.nf" linenums="17"
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=17
 workflow {
 
     main:
@@ -195,10 +198,10 @@ workflow {
 
 이 교육 모듈의 후반부에서 변수 입력을 추가하는 방법을 배웁니다. 그리고 이 과정의 Part 3에서 더 많은 프로세스를 추가하고 채널로 연결하는 방법을 배웁니다.
 
-!!! tip "팁"
-
-    기술적으로 `main:` 줄은 이와 같은 간단한 워크플로우에는 필요하지 않으므로 이를 포함하지 않는 워크플로우를 만날 수 있습니다.
-    그러나 워크플로우 수준 출력을 활용하려면 필요하므로 처음부터 포함하는 것이 좋습니다.
+:::tip[팁]
+기술적으로 `main:` 줄은 이와 같은 간단한 워크플로우에는 필요하지 않으므로 이를 포함하지 않는 워크플로우를 만날 수 있습니다.
+그러나 워크플로우 수준 출력을 활용하려면 필요하므로 처음부터 포함하는 것이 좋습니다.
+:::
 
 ### 1.2. 워크플로우 실행
 
@@ -210,18 +213,14 @@ workflow {
 
 ```bash
 nextflow run hello-world.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [goofy_torvalds] revision: c33d41f479
+
+executor >  local (1)
+[65/7be2fa] sayHello | 1 of 1 ✔ # [!code highlight]
 ```
-
-??? success "명령 출력"
-
-    ```console hl_lines="6"
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [goofy_torvalds] revision: c33d41f479
-
-    executor >  local (1)
-    [65/7be2fa] sayHello | 1 of 1 ✔
-    ```
 
 콘솔 출력이 이와 같다면 축하합니다. 첫 번째 Nextflow 워크플로우를 실행하셨습니다!
 
@@ -248,41 +247,50 @@ nextflow run hello-world.nf
 
 그 안에 무엇이 있는지 살펴보겠습니다.
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console
-    work
-    └── 65
-        └── 7be2fad5e71e5f49998f795677fd68
-            ├── .command.begin
-            ├── .command.err
-            ├── .command.log
-            ├── .command.out
-            ├── .command.run
-            ├── .command.sh
-            ├── .exitcode
-            └── output.txt
-    ```
+```console
+work
+└── 65
+    └── 7be2fad5e71e5f49998f795677fd68
+        ├── .command.begin
+        ├── .command.err
+        ├── .command.log
+        ├── .command.out
+        ├── .command.run
+        ├── .command.sh
+        ├── .exitcode
+        └── output.txt
+```
 
-??? question "같은 것이 보이지 않나요?"
+</details>
 
-    정확한 하위 디렉토리 이름은 시스템에서 다를 것입니다.
+<details class="question">
+<summary>같은 것이 보이지 않나요?</summary>
 
-    VSCode 파일 탐색기에서 작업 하위 디렉토리의 내용을 탐색하면 모든 파일이 바로 표시됩니다.
-    그러나 로그 파일은 터미널에서 보이지 않도록 설정되어 있으므로 `ls` 또는 `tree`를 사용하여 보려면 보이지 않는 파일을 표시하는 관련 옵션을 설정해야 합니다.
+정확한 하위 디렉토리 이름은 시스템에서 다를 것입니다.
 
-    ```bash
-    tree -a work
-    ```
+VSCode 파일 탐색기에서 작업 하위 디렉토리의 내용을 탐색하면 모든 파일이 바로 표시됩니다.
+그러나 로그 파일은 터미널에서 보이지 않도록 설정되어 있으므로 `ls` 또는 `tree`를 사용하여 보려면 보이지 않는 파일을 표시하는 관련 옵션을 설정해야 합니다.
+
+```bash
+tree -a work
+```
+
+</details>
 
 먼저 워크플로우의 실제 출력, 즉 `sayHello` 프로세스에서 생성된 `output.txt` 파일을 살펴보고 싶을 것입니다.
 열어보면 `Hello World!` 인사말이 있으며, 이것이 최소한의 워크플로우의 목적이었습니다.
 
-??? abstract "파일 내용"
+<details class="abstract">
+<summary>파일 내용</summary>
 
-    ```console title="output.txt"
-    Hello World!
-    ```
+```console title="output.txt"
+Hello World!
+```
+
+</details>
 
 작동했습니다!
 
@@ -300,12 +308,15 @@ nextflow run hello-world.nf
 
 `.command.sh` 파일은 모든 북키핑 및 작업/환경 설정을 포함하지 않고 Nextflow가 실행한 메인 명령을 알려주므로 특히 유용합니다.
 
-??? abstract "파일 내용"
+<details class="abstract">
+<summary>파일 내용</summary>
 
-    ```console title=".command.sh"
-    #!/bin/bash -ue
-    echo 'Hello World!' > output.txt
-    ```
+```console title=".command.sh"
+#!/bin/bash -ue
+echo 'Hello World!' > output.txt
+```
+
+</details>
 
 이것은 이전에 수동으로 실행한 것과 일치합니다.
 
@@ -316,60 +327,63 @@ nextflow run hello-world.nf
 
 워크플로우를 몇 번 다시 실행한 다음 `work/` 아래의 작업 디렉토리를 살펴보십시오.
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console
-    work
-    ├── 0f
-    │   └── 52b7e07b0e274a80843fca48ed21b8
-    │       ├── .command.begin
-    │       ├── .command.err
-    │       ├── .command.log
-    │       ├── .command.out
-    │       ├── .command.run
-    │       ├── .command.sh
-    │       ├── .exitcode
-    │       └── output.txt
-    ├── 65
-        └── 7be2fad5e71e5f49998f795677fd68
-    │   │   ├── .command.begin
-    │   │   ├── .command.err
-    │   │   ├── .command.log
-    │   │   ├── .command.out
-    │   │   ├── .command.run
-    │   │   ├── .command.sh
-    │   │   ├── .exitcode
-    │   │   └── output.txt
-    │   └── e029f2e75305874a9ab263d21ebc2c
-    │       ├── .command.begin
-    │       ├── .command.err
-    │       ├── .command.log
-    │       ├── .command.out
-    │       ├── .command.run
-    │       ├── .command.sh
-    │       ├── .exitcode
-    │       └── output.txt
-    ├── 6c
-    │   └── d4fd787e0b01b3c82e85696c297500
-    │       ├── .command.begin
-    │       ├── .command.err
-    │       ├── .command.log
-    │       ├── .command.out
-    │       ├── .command.run
-    │       ├── .command.sh
-    │       ├── .exitcode
-    │       └── output.txt
-    └── e8
-        └── ab99fad46ade52905ec973ff39bb80
-            ├── .command.begin
-            ├── .command.err
-            ├── .command.log
-            ├── .command.out
-            ├── .command.run
-            ├── .command.sh
-            ├── .exitcode
-            └── output.txt
-    ```
+```console
+work
+├── 0f
+│   └── 52b7e07b0e274a80843fca48ed21b8
+│       ├── .command.begin
+│       ├── .command.err
+│       ├── .command.log
+│       ├── .command.out
+│       ├── .command.run
+│       ├── .command.sh
+│       ├── .exitcode
+│       └── output.txt
+├── 65
+    └── 7be2fad5e71e5f49998f795677fd68
+│   │   ├── .command.begin
+│   │   ├── .command.err
+│   │   ├── .command.log
+│   │   ├── .command.out
+│   │   ├── .command.run
+│   │   ├── .command.sh
+│   │   ├── .exitcode
+│   │   └── output.txt
+│   └── e029f2e75305874a9ab263d21ebc2c
+│       ├── .command.begin
+│       ├── .command.err
+│       ├── .command.log
+│       ├── .command.out
+│       ├── .command.run
+│       ├── .command.sh
+│       ├── .exitcode
+│       └── output.txt
+├── 6c
+│   └── d4fd787e0b01b3c82e85696c297500
+│       ├── .command.begin
+│       ├── .command.err
+│       ├── .command.log
+│       ├── .command.out
+│       ├── .command.run
+│       ├── .command.sh
+│       ├── .exitcode
+│       └── output.txt
+└── e8
+    └── ab99fad46ade52905ec973ff39bb80
+        ├── .command.begin
+        ├── .command.err
+        ├── .command.log
+        ├── .command.out
+        ├── .command.run
+        ├── .command.sh
+        ├── .exitcode
+        └── output.txt
+```
+
+</details>
 
 각 실행에 대해 완전한 출력 및 로그 파일 세트가 있는 새 하위 디렉토리가 생성된 것을 볼 수 있습니다.
 이것은 동일한 워크플로우를 여러 번 실행해도 이전 실행의 결과를 덮어쓰지 않는다는 것을 보여줍니다.
@@ -405,30 +419,30 @@ nextflow run hello-world.nf
 
 워크플로우 스크립트 파일 `hello-world.nf`에 다음 코드 줄을 추가하십시오:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="hello-world.nf" linenums="17" hl_lines="7-8"
-    workflow {
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=17 step="전"
+workflow {
 
-        main:
-        // 인사말을 내보냅니다
-        sayHello()
+    main:
+    // 인사말을 내보냅니다
+    sayHello()
+}
+```
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+```nextflow {7-8} title="hello-world.nf" showLineNumbers startLineNumber=17 step="후"
+workflow {
 
-=== "전"
+    main:
+    // 인사말을 내보냅니다
+    sayHello()
 
-    ```groovy title="hello-world.nf" linenums="17"
-    workflow {
+    publish:
+    first_output = sayHello.out
+}
+```
 
-        main:
-        // 인사말을 내보냅니다
-        sayHello()
-    }
-    ```
+</CodeWalkthrough>
 
 `sayHello().out`을 통해 프로세스의 출력을 간단히 참조하고 임의의 이름 `first_output`을 할당할 수 있습니다.
 
@@ -438,39 +452,39 @@ nextflow run hello-world.nf
 
 워크플로우 스크립트 파일 `hello-world.nf`에 다음 코드 줄을 추가하십시오:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="hello-world.nf" linenums="17" hl_lines="11-15"
-    workflow {
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=17 step="전"
+workflow {
 
-        main:
-        // 인사말을 내보냅니다
-        sayHello()
+    main:
+    // 인사말을 내보냅니다
+    sayHello()
 
-        publish:
-        first_output = sayHello.out
+    publish:
+    first_output = sayHello.out
+}
+```
+
+```nextflow {11-15} title="hello-world.nf" showLineNumbers startLineNumber=17 step="후"
+workflow {
+
+    main:
+    // 인사말을 내보냅니다
+    sayHello()
+
+    publish:
+    first_output = sayHello.out
+}
+
+output {
+    first_output {
+        path '.'
     }
+}
+```
 
-    output {
-        first_output {
-            path '.'
-        }
-    }
-    ```
-
-=== "전"
-
-    ```groovy title="hello-world.nf" linenums="17"
-    workflow {
-
-        main:
-        // 인사말을 내보냅니다
-        sayHello()
-
-        publish:
-        first_output = sayHello.out
-    }
-    ```
+</CodeWalkthrough>
 
 이것을 사용하여 `workflow` 블록에 선언된 모든 프로세스 출력에 특정 경로를 할당할 수 있습니다.
 나중에 정교한 출력 디렉토리 구조를 생성하는 방법을 배우겠지만, 지금은 단순함을 위해 최소한의 경로만 하드코딩합니다.
@@ -481,55 +495,54 @@ nextflow run hello-world.nf
 
 ```bash
 nextflow run hello-world.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [jovial_mayer] revision: 35bd3425e5
+
+executor >  local (1)
+[9f/48ef97] sayHello | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output: output.txt
 ```
-
-??? success "명령 출력"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [jovial_mayer] revision: 35bd3425e5
-
-    executor >  local (1)
-    [9f/48ef97] sayHello | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output: output.txt
-    ```
 
 터미널 출력은 이제 게시된 출력과 해당 출력이 저장된 디렉토리를 나열하는 `Outputs:` 요약으로 끝납니다.
 
 파일 탐색기를 확인하십시오: 이번에는 Nextflow가 `results/`라는 새 디렉토리도 생성했습니다.
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console hl_lines="10-11 22"
-    .
-    ├── greetings.csv
-    ├── hello-channels.nf
-    ├── hello-config.nf
-    ├── hello-containers.nf
-    ├── hello-modules.nf
-    ├── hello-workflow.nf
-    ├── hello-world.nf
-    ├── nextflow.config
-    ├── results
-    │   └── output.txt -> /workspaces/training/hello-nextflow/work/9f/48ef97f110b0dbd83635d7cbe288d2/output.txt
-    ├── solutions
-    │   ├── 1-hello-world
-    │   ├── 2-hello-channels
-    │   ├── 3-hello-workflow
-    │   ├── 4-hello-modules
-    │   ├── 5-hello-containers
-    │   └── 6-hello-config
-    ├── test-params.json
-    └── work
-        ├── 65
-        └── 9f
-    ```
+```console {10-11,22}
+.
+├── greetings.csv
+├── hello-channels.nf
+├── hello-config.nf
+├── hello-containers.nf
+├── hello-modules.nf
+├── hello-workflow.nf
+├── hello-world.nf
+├── nextflow.config
+├── results
+│   └── output.txt -> /workspaces/training/hello-nextflow/work/9f/48ef97f110b0dbd83635d7cbe288d2/output.txt
+├── solutions
+│   ├── 1-hello-world
+│   ├── 2-hello-channels
+│   ├── 3-hello-workflow
+│   ├── 4-hello-modules
+│   ├── 5-hello-containers
+│   └── 6-hello-config
+├── test-params.json
+└── work
+    ├── 65
+    └── 9f
+```
+
+</details>
 
 `results` 디렉토리 안에는 방금 실행한 명령에 의해 작업 디렉토리에 생성된 `output.txt`에 대한 심볼릭 링크가 있습니다.
 
@@ -547,25 +560,25 @@ nextflow run hello-world.nf
 특정 출력의 게시 동작을 수정하는 것은 정말 간단합니다.
 사용자 정의 위치를 설정하려면 `path`를 적절하게 편집하기만 하면 됩니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="hello-world.nf" linenums="27" hl_lines="3"
-    output {
-        first_output {
-            path 'hello_world'
-        }
+```nextflow {3} title="hello-world.nf" showLineNumbers startLineNumber=27 step="전"
+output {
+    first_output {
+        path '.'
     }
-    ```
+}
+```
 
-=== "전"
-
-    ```groovy title="hello-world.nf" linenums="27" hl_lines="3"
-    output {
-        first_output {
-            path '.'
-        }
+```nextflow {3} title="hello-world.nf" showLineNumbers startLineNumber=27 step="후"
+output {
+    first_output {
+        path 'hello_world'
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 개별 출력 수준에서 설정되므로 필요에 맞게 다른 위치와 하위 디렉토리를 지정할 수 있습니다.
 
@@ -575,41 +588,38 @@ nextflow run hello-world.nf
 
 ```bash
 nextflow run hello-world.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
+
+executor >  local (1)
+[8c/79499c] sayHello | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output: hello_world/output.txt
 ```
-
-??? success "명령 출력"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
-
-    executor >  local (1)
-    [8c/79499c] sayHello | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output: hello_world/output.txt
-    ```
 
 이번에는 결과가 지정된 하위 디렉토리 아래에 기록됩니다.
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console hl_lines="2-3"
-    results/
-    ├── hello_world
-    │   └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c2e506b79e2e01acb808d9d12/output.txt
-    └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
-    ```
+```console {2-3}
+results/
+├── hello_world
+│   └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c2e506b79e2e01acb808d9d12/output.txt
+└── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
+```
+
+</details>
 
 이전 실행의 결과도 여전히 있습니다.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_world_output.svg"
-</figure>
+![](../../hello_nextflow/img/hello_world_output.excalidraw.svg)
 
 원하는 만큼 중첩 수준을 사용할 수 있습니다.
 프로세스 이름이나 다른 변수를 사용하여 결과를 구성하는 데 사용되는 디렉토리 이름을 지정할 수도 있으며, 최상위 출력 디렉토리의 기본 이름을 변경할 수도 있습니다(`-o` CLI 플래그 또는 설정 변수 `outputDir`에 의해 제어됨).
@@ -631,26 +641,26 @@ nextflow run hello-world.nf
 이 부분은 정말 간단합니다.
 관련 워크플로우 수준 출력 정의에 `mode 'copy'`를 추가하기만 하면 됩니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="hello-world.nf" linenums="27" hl_lines="4"
-    output {
-        first_output {
-            path 'hello_world'
-            mode 'copy'
-        }
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=27 step="전"
+output {
+    first_output {
+        path 'hello_world'
     }
-    ```
+}
+```
 
-=== "전"
-
-    ```groovy title="hello-world.nf" linenums="27"
-    output {
-        first_output {
-            path 'hello_world'
-        }
+```nextflow {4} title="hello-world.nf" showLineNumbers startLineNumber=27 step="후"
+output {
+    first_output {
+        path 'hello_world'
+        mode 'copy'
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 이것은 해당 특정 출력의 게시 모드를 설정합니다.
 
@@ -660,35 +670,34 @@ nextflow run hello-world.nf
 
 ```bash
 nextflow run hello-world.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
+
+executor >  local (1)
+[df/521638] sayHello | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output: hello_world/output.txt
 ```
-
-??? success "명령 출력"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
-
-    executor >  local (1)
-    [df/521638] sayHello | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output: hello_world/output.txt
-    ```
 
 이번에는 결과를 보면 파일이 심볼릭 링크가 아닌 적절한 복사본입니다.
 
-??? abstract "디렉토리 내용"
+<details class="abstract">
+<summary>디렉토리 내용</summary>
 
-    ```console hl_lines="3"
-    results/
-    ├── hello_world
-    │   └── output.txt
-    └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
-    ```
+```console {3}
+results/
+├── hello_world
+│   └── output.txt
+└── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
+```
+
+</details>
 
 이것도 개별 출력 수준에서 설정되므로 세분화된 방식으로 게시 모드를 설정할 수 있습니다.
 나중에 다단계 파이프라인으로 이동할 때 특히 유용할 것입니다. 예를 들어 최종 출력만 복사하고 중간 출력은 심볼릭 링크로 둘 수 있습니다.
@@ -702,7 +711,7 @@ Nextflow 여정에서 적절한 시기에 사용 방법을 보여드리겠습니
 
 `sayHello` 프로세스의 출력에 대해 방금 수행한 것을 달성하려면 대신 프로세스 정의에 다음 줄을 추가했을 것입니다:
 
-```groovy title="hello-world.nf" linenums="6" hl_lines="3"
+```nextflow {3} title="hello-world.nf" showLineNumbers startLineNumber=6
 process sayHello {
 
     publishDir 'results/hello_world', mode: 'copy'
@@ -753,26 +762,26 @@ process sayHello {
 
 프로세스 블록에서 다음 코드 변경을 수행하십시오:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="hello-world.nf" linenums="6" hl_lines="3-4"
-    process sayHello {
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=6 step="전"
+process sayHello {
 
-        input:
-        val greeting
+    output:
+    path 'output.txt'
+```
 
-        output:
-        path 'output.txt'
-    ```
+```nextflow {3-4} title="hello-world.nf" showLineNumbers startLineNumber=6 step="후"
+process sayHello {
 
-=== "전"
+    input:
+    val greeting
 
-    ```groovy title="hello-world.nf" linenums="6"
-    process sayHello {
+    output:
+    path 'output.txt'
+```
 
-        output:
-        path 'output.txt'
-    ```
+</CodeWalkthrough>
 
 `greeting` 변수는 값(경로가 아님)임을 Nextflow에 알리기 위해 `val` 접두사가 붙습니다.
 
@@ -782,29 +791,29 @@ process sayHello {
 
 프로세스 블록에서 다음 코드 변경을 수행하십시오:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-        script:
-        """
-        echo '${greeting}' > output.txt
-        """
-    ```
+```nextflow {3} title="hello-world.nf" showLineNumbers startLineNumber=14 step="전"
+    script:
+    """
+    echo 'Hello World!' > output.txt
+    """
+```
 
-=== "전"
+```nextflow {3} title="hello-world.nf" showLineNumbers startLineNumber=14 step="후"
+    script:
+    """
+    echo '${greeting}' > output.txt
+    """
+```
 
-    ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-        script:
-        """
-        echo 'Hello World!' > output.txt
-        """
-    ```
+</CodeWalkthrough>
 
 `$` 기호와 중괄호(`{ }`)는 Nextflow에게 이것이 실제 입력 값으로 대체(=보간)해야 하는 변수 이름임을 알려줍니다.
 
-!!! tip "팁"
-
-    중괄호(`{ }`)는 이전 버전의 Nextflow에서는 기술적으로 선택 사항이었으므로 `echo '$greeting' > output.txt`로 작성된 이전 워크플로우를 볼 수 있습니다.
+:::tip[팁]
+중괄호(`{ }`)는 이전 버전의 Nextflow에서는 기술적으로 선택 사항이었으므로 `echo '$greeting' > output.txt`로 작성된 이전 워크플로우를 볼 수 있습니다.
+:::
 
 이제 `sayHello()` 프로세스가 변수 입력을 받을 준비가 되었으므로 워크플로우 수준에서 process 실행에 입력 값을 제공하는 방법이 필요합니다.
 
@@ -813,9 +822,7 @@ process sayHello {
 `sayHello('Hello World!')`를 process 실행으로 만들어 입력을 직접 하드코딩할 수 있습니다.
 그러나 워크플로우로 실제 작업을 수행할 때는 명령줄에서 입력을 제어할 수 있어야 합니다. 예를 들어 다음과 같이 할 수 있습니다:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
-</figure>
+![](../../hello_nextflow/img/hello_world_input.excalidraw.svg)
 
 다행히 Nextflow에는 CLI 매개변수를 쉽게 선언하고 사용할 수 있는 [`params`](https://nextflow.io/docs/latest/config.html#params)라는 내장 워크플로우 매개변수 시스템이 있습니다.
 
@@ -826,19 +833,19 @@ process sayHello {
 
 워크플로우 블록에서 다음 코드 변경을 수행하십시오:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-        // 인사말을 내보냅니다
-        sayHello(params.input)
-    ```
+```nextflow {2} title="hello-world.nf" showLineNumbers startLineNumber=23 step="전"
+    // 인사말을 내보냅니다
+    sayHello()
+```
 
-=== "전"
+```nextflow {2} title="hello-world.nf" showLineNumbers startLineNumber=23 step="후"
+    // 인사말을 내보냅니다
+    sayHello(params.input)
+```
 
-    ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-        // 인사말을 내보냅니다
-        sayHello()
-    ```
+</CodeWalkthrough>
 
 이것은 Nextflow에게 `--input` 매개변수를 통해 제공된 값으로 `sayHello` 프로세스를 실행하도록 지시합니다.
 
@@ -850,46 +857,45 @@ process sayHello {
 
 ```bash
 nextflow run hello-world.nf --input 'Bonjour le monde!'
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [elated_lavoisier] revision: 7c031b42ea
+
+executor >  local (1)
+[4b/654319] sayHello | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output: hello_world/output.txt
 ```
-
-??? success "명령 출력"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [elated_lavoisier] revision: 7c031b42ea
-
-    executor >  local (1)
-    [4b/654319] sayHello | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output: hello_world/output.txt
-    ```
 
 이러한 편집을 모두 올바르게 수행했다면 또 다른 성공적인 실행 결과를 얻을 수 있습니다.
 
 출력 파일을 열어 이제 새 버전의 인사말이 있는지 확인하십시오.
 
-??? abstract "파일 내용"
+<details class="abstract">
+<summary>파일 내용</summary>
 
-    ```console title="results/hello_world/output.txt"
-    Bonjour le monde!
-    ```
+```console title="results/hello_world/output.txt"
+Bonjour le monde!
+```
+
+</details>
 
 Et voilà!
 
 새 실행이 `results` 디렉토리에 게시된 출력 파일을 덮어썼습니다.
 그러나 이전 실행의 결과는 여전히 `work` 아래의 작업 디렉토리에 보존되어 있습니다.
 
-!!! tip "팁"
+:::tip[팁]
+Nextflow 수준 매개변수와 파이프라인 수준 매개변수를 쉽게 구분할 수 있습니다.
 
-    Nextflow 수준 매개변수와 파이프라인 수준 매개변수를 쉽게 구분할 수 있습니다.
-
-    - 파이프라인에 적용되는 매개변수는 항상 이중 하이픈(`--`)을 사용합니다.
-    - Nextflow 설정을 수정하는 매개변수, 예를 들어 앞서 언급한 `-resume` 기능은 단일 하이픈(`-`)을 사용합니다.
+- 파이프라인에 적용되는 매개변수는 항상 이중 하이픈(`--`)을 사용합니다.
+- Nextflow 설정을 수정하는 매개변수, 예를 들어 앞서 언급한 `-resume` 기능은 단일 하이픈(`-`)을 사용합니다.
+:::
 
 ### 3.4. 명령줄 매개변수에 기본값 사용
 
@@ -899,7 +905,7 @@ Et voilà!
 
 워크플로우 정의 전에 `input` 매개변수를 선언하여 기본값을 제공합니다.
 
-```groovy title="hello-world.nf" linenums="20"
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=20
 /*
  * 파이프라인 매개변수
  */
@@ -912,9 +918,9 @@ params {
 구문은 `name: Type = default_value`입니다.
 지원되는 유형에는 `String`, `Integer`, `Float`, `Boolean`, `Path`가 포함됩니다.
 
-!!! info "정보"
-
-    이전 워크플로우에서는 전체 `params` 블록이 `input = 'Hola mundo!'`로만 작성된 것을 볼 수 있습니다.
+:::note[정보]
+이전 워크플로우에서는 전체 `params` 블록이 `input = 'Hola mundo!'`로만 작성된 것을 볼 수 있습니다.
+:::
 
 파이프라인에 더 많은 매개변수를 추가할 때 기본값을 제공해야 하든 아니든 이 블록에 모두 추가하십시오.
 이렇게 하면 한눈에 모든 설정 가능한 매개변수를 쉽게 찾을 수 있습니다.
@@ -925,61 +931,63 @@ params {
 
 ```bash
 nextflow run hello-world.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [determined_edison] revision: 3539118582
+
+executor >  local (1)
+[72/394147] sayHello | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output: hello_world/output.txt
 ```
 
-??? success "명령 출력"
+<details class="question">
+<summary>작동하지 않았다면</summary>
 
-    ```console
-    N E X T F L O W   ~  version 26.04.4
+다음과 같은 오류가 발생했다면:
 
-    Launching `hello-world.nf` [determined_edison] revision: 3539118582
+```
+ERROR ~ Script compilation error
+- file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
+- cause: you tried to assign a value to the class 'java.lang.String'
+@ line 24, column 12.
+      input: String = 'Hola mundo!'
+              ^
 
-    executor >  local (1)
-    [72/394147] sayHello | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output: hello_world/output.txt
-    ```
-
-??? question "작동하지 않았다면"
-
-    다음과 같은 오류가 발생했다면:
-
-    ```
-    ERROR ~ Script compilation error
-    - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
-    - cause: you tried to assign a value to the class 'java.lang.String'
-    @ line 24, column 12.
-          input: String = 'Hola mundo!'
-                  ^
-
-    1 error
+1 error
 
 
-    -- Check '.nextflow.log' file for details
-    ```
+-- Check '.nextflow.log' file for details
+```
 
-    이전 v1 Nextflow 언어 분석기를 사용하고 있을 가능성이 높습니다.
-    이것은 과정 시작 부분에서 언급되었지만 놓쳤을 수 있습니다.
-    [Nextflow 버전](../info/nxf_versions.md) 도움말 자료를 확인하십시오.
+이전 v1 Nextflow 언어 분석기를 사용하고 있을 가능성이 높습니다.
+이것은 과정 시작 부분에서 언급되었지만 놓쳤을 수 있습니다.
+[Nextflow 버전](../info/nxf_versions.mdx) 도움말 자료를 확인하십시오.
 
-    v2 분석기는 Nextflow 26.04부터 기본값으로 설정되어 있으므로 이전 버전에서만 이 문제가 발생합니다.
-    26.04 이전 버전을 사용하는 경우 v2 언어 분석기를 활성화해야 합니다:
+v2 분석기는 Nextflow 26.04부터 기본값으로 설정되어 있으므로 이전 버전에서만 이 문제가 발생합니다.
+26.04 이전 버전을 사용하는 경우 v2 언어 분석기를 활성화해야 합니다:
 
-    ```bash
-    export NXF_SYNTAX_PARSER=v2
-    ```
+```bash
+export NXF_SYNTAX_PARSER=v2
+```
+
+</details>
 
 출력은 이전과 같은 위치에 있지만 내용은 새 텍스트로 업데이트되어야 합니다.
 
-??? abstract "파일 내용"
+<details class="abstract">
+<summary>파일 내용</summary>
 
-    ```console title="results/hello_world/output.txt"
-    Hola mundo!
-    ```
+```console title="results/hello_world/output.txt"
+Hola mundo!
+```
+
+</details>
 
 Nextflow는 인사말 매개변수의 기본값을 사용하여 출력을 생성했습니다.
 
@@ -991,39 +999,38 @@ Nextflow는 인사말 매개변수의 기본값을 사용하여 출력을 생성
 
 ```bash
 nextflow run hello-world.nf --input 'Konnichiwa!'
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [elegant_faraday] revision: 3539118582
+
+executor >  local (1)
+[6f/a12a91] sayHello | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output: hello_world/output.txt
 ```
-
-??? success "명령 출력"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [elegant_faraday] revision: 3539118582
-
-    executor >  local (1)
-    [6f/a12a91] sayHello | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output: hello_world/output.txt
-    ```
 
 다시 한번 results 디렉토리에서 해당하는 업데이트된 출력을 찾을 수 있습니다.
 
-??? abstract "파일 내용"
+<details class="abstract">
+<summary>파일 내용</summary>
 
-    ```console title="results/hello_world/output.txt"
-    Konnichiwa!
-    ```
+```console title="results/hello_world/output.txt"
+Konnichiwa!
+```
 
-!!! note "참고"
+</details>
 
-    Nextflow에서는 매개변수 값을 지정할 수 있는 여러 곳이 있습니다.
-    동일한 매개변수가 여러 곳에서 다른 값으로 설정된 경우 Nextflow는 [여기](https://www.nextflow.io/docs/latest/config.html)에 설명된 우선순위에 따라 사용할 값을 결정합니다.
+:::note[참고]
+Nextflow에서는 매개변수 값을 지정할 수 있는 여러 곳이 있습니다.
+동일한 매개변수가 여러 곳에서 다른 값으로 설정된 경우 Nextflow는 [여기](https://www.nextflow.io/docs/latest/config.html)에 설명된 우선순위에 따라 사용할 값을 결정합니다.
 
-    Part 6(Configuration)에서 이에 대해 더 자세히 다룹니다.
+Part 6(Configuration)에서 이에 대해 더 자세히 다룹니다.
+:::
 
 ### 핵심 정리
 
@@ -1058,23 +1065,19 @@ Nextflow에는 이를 수행할 수 있는 [`-resume`](https://nextflow.io/docs/
 
 ```bash
 nextflow run hello-world.nf --input 'Konnichiwa!' -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [golden_cantor] revision: 35bd3425e5
+
+[62/49a1f8] sayHello | 1 of 1, cached: 1 ✔ # [!code highlight]
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output: hello_world/output.txt
 ```
-
-??? success "명령 출력"
-
-    ```console hl_lines="5"
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [golden_cantor] revision: 35bd3425e5
-
-    [62/49a1f8] sayHello | 1 of 1, cached: 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output: hello_world/output.txt
-    ```
 
 콘솔 출력은 익숙해 보이지만, 이전과 약간 다른 점이 있습니다.
 
@@ -1083,9 +1086,9 @@ nextflow run hello-world.nf --input 'Konnichiwa!' -resume
 작업 하위 디렉토리 해시가 이전 실행과 동일한 것도 볼 수 있습니다.
 Nextflow는 문자 그대로 이전 실행을 가리키며 "이미 저기서 했습니다"라고 말합니다.
 
-!!! tip "팁"
-
-    `resume`으로 파이프라인을 다시 실행하면 Nextflow는 이전에 성공적으로 실행된 실행에서 작업 디렉토리 외부에 게시된 파일을 덮어쓰지 않습니다.
+:::tip[팁]
+`resume`으로 파이프라인을 다시 실행하면 Nextflow는 이전에 성공적으로 실행된 실행에서 작업 디렉토리 외부에 게시된 파일을 덮어쓰지 않습니다.
+:::
 
 ### 4.2. 과거 실행 로그 검사
 
@@ -1094,15 +1097,18 @@ Nextflow는 문자 그대로 이전 실행을 가리키며 "이미 저기서 했
 
 nextflow 워크플로우를 시작할 때마다 현재 작업 디렉토리의 `.nextflow`라는 숨겨진 디렉토리 아래의 `history`라는 로그 파일에 줄이 기록됩니다.
 
-??? abstract "파일 내용"
+<details class="abstract">
+<summary>파일 내용</summary>
 
-    ```txt title=".nextflow/history" linenums="1"
-    2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'
-    2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --input Bonjour
-    2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input 'Dobry den'
-    2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa
-    2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
-    ```
+```txt title=".nextflow/history" showLineNumbers
+2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'
+2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --input Bonjour
+2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input 'Dobry den'
+2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa
+2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
+```
+
+</details>
 
 이 파일은 현재 작업 디렉토리 내에서 시작된 모든 Nextflow 실행의 타임스탬프, 실행 이름, 상태, 리비전 ID, 세션 ID 및 전체 명령줄을 제공합니다.
 
@@ -1110,18 +1116,14 @@ nextflow 워크플로우를 시작할 때마다 현재 작업 디렉토리의 `.
 
 ```bash
 nextflow log
+# [!output]
+TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND
+2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input 'Hello World'
+2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --input Bonjour
+2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input 'Dobry den'
+2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa
+2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume
 ```
-
-??? success "명령 출력"
-
-    ```console linenums="1"
-    TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND
-    2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input 'Hello World'
-    2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --input Bonjour
-    2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input 'Dobry den'
-    2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa
-    2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume
-    ```
 
 이것은 헤더 줄이 추가된 로그 파일의 내용을 터미널에 출력합니다.
 
@@ -1153,13 +1155,9 @@ Nextflow 로그를 사용하여 타임스탬프 및/또는 명령줄을 기반�
 
 ```bash
 nextflow clean -before golden_cantor -n
+# [!output]
+Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
 ```
-
-??? success "명령 출력"
-
-    ```console
-    Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
-    ```
 
 출력에는 다른 작업 디렉토리 이름이 있고 줄 수가 다를 수 있지만 예제와 비슷하게 보일 것입니다.
 
@@ -1171,23 +1169,19 @@ nextflow clean -before golden_cantor -n
 
 ```bash
 nextflow clean -before golden_cantor -f
+# [!output]
+Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
 ```
-
-??? success "명령 출력"
-
-    ```console
-    Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
-    ```
 
 출력은 이전과 비슷하지만 이제 'Would remove' 대신 'Removed'라고 표시됩니다.
 이것은 두 문자 하위 디렉토리(위의 `a3/`와 같은)를 제거하지 않지만 내용을 비웁니다.
 
-!!! Warning "경고"
+:::caution[경고]
+과거 실행의 작업 하위 디렉토리를 삭제하면 Nextflow 캐시에서 제거되고 해당 디렉토리에 저장된 모든 출력이 삭제됩니다.
+이것은 해당 프로세스를 다시 실행하지 않고 실행을 재개하는 Nextflow의 기능을 중단시킵니다.
 
-    과거 실행의 작업 하위 디렉토리를 삭제하면 Nextflow 캐시에서 제거되고 해당 디렉토리에 저장된 모든 출력이 삭제됩니다.
-    이것은 해당 프로세스를 다시 실행하지 않고 실행을 재개하는 Nextflow의 기능을 중단시킵니다.
-
-    관심 있거나 의존하려는 출력을 저장하는 것은 귀하의 책임입니다! 이것이 `publish` 지시문에 `symlink` 모드보다 `copy` 모드를 선호하는 주된 이유입니다.
+관심 있거나 의존하려는 출력을 저장하는 것은 귀하의 책임입니다! 이것이 `publish` 지시문에 `symlink` 모드보다 `copy` 모드를 선호하는 주된 이유입니다.
+:::
 
 ### 핵심 정리
 
@@ -1199,41 +1193,48 @@ nextflow clean -before golden_cantor -f
 
 잠시 쉬세요, 받을 자격이 있습니다!
 
-준비가 되면 [**Part 2: Hello Channels**](./02_hello_channels.md)로 이동하여 채널을 사용하여 워크플로우에 입력을 공급하는 방법을 배우십시오. 이를 통해 Nextflow의 내장 데이터 흐름 병렬 처리 및 기타 강력한 기능을 활용할 수 있습니다.
+준비가 되면 [**Part 2: Hello Channels**](./02_hello_channels.mdx)로 이동하여 채널을 사용하여 워크플로우에 입력을 공급하는 방법을 배우십시오. 이를 통해 Nextflow의 내장 데이터 흐름 병렬 처리 및 기타 강력한 기능을 활용할 수 있습니다.
 
 ---
 
 ## 퀴즈
 
-<quiz>
+<Quiz id="quiz-1">
+
 Nextflow 프로세스의 최소 필수 구성 요소는 무엇입니까?
 - [ ] 입력 및 출력 블록만
 - [x] 출력 및 스크립트 블록
 - [ ] 입력, 출력 및 스크립트 블록
 - [ ] 스크립트 블록만
 
-자세히 알아보기: [1.1.1. 프로세스 정의](#111-the-process-definition)
-</quiz>
+자세히 알아보기: [1.1.1. 프로세스 정의](#111-process-정의)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-2">
+
 프로세스에서 출력 블록의 목적은 무엇입니까?
 - [ ] 결과를 콘솔에 출력
 - [ ] 작업 디렉토리에 파일 저장
 - [x] 프로세스에서 예상되는 출력 선언
 - [ ] 환경 변수 정의
 
-자세히 알아보기: [1.1.1. 프로세스 정의](#111-the-process-definition)
-</quiz>
+자세히 알아보기: [1.1.1. 프로세스 정의](#111-process-정의)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-3">
+
 Nextflow 워크플로우를 실행하는 데 사용되는 명령은 무엇입니까?
 - [ ] `nextflow start`
 - [ ] `nextflow execute`
 - [x] `nextflow run`
 - [ ] `nextflow launch`
-</quiz>
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-4">
+
 작업의 작업 디렉토리를 보면 실제로 실행된 명령이 포함된 파일은 무엇입니까?
 
 ```
@@ -1253,43 +1254,52 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-자세히 알아보기: [1.2.2. `work` 디렉토리에서 출력 및 로그 찾기](#122-find-the-output-and-logs-in-the-work-directory)
-</quiz>
+자세히 알아보기: [1.2.2. `work` 디렉토리에서 출력 및 로그 찾기](#122-work-디렉토리에서-출력-및-로그-찾기)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-5">
+
 `-resume` 플래그는 무엇을 합니까?
 - [ ] 워크플로우를 처음부터 다시 시작
 - [ ] 워크플로우 일시 중지
 - [x] 이미 성공적으로 완료된 프로세스 건너뛰기
 - [ ] 워크플로우 백업 생성
 
-자세히 알아보기: [4.1. `-resume`으로 워크플로우 다시 실행](#41-re-launch-a-workflow-with--resume)
-</quiz>
+자세히 알아보기: [4.1. `-resume`으로 워크플로우 다시 실행](#41--resume으로-워크플로우-다시-실행)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-6">
+
 워크플로우 출력 게시의 기본 모드는 무엇입니까?
 - [ ] 출력 디렉토리에 파일 복사
 - [x] 출력 디렉토리에 심볼릭 링크 생성
 - [ ] 출력 디렉토리로 파일 이동
 - [ ] 출력 디렉토리에 파일 압축
 
-자세히 알아보기: [2.3. 게시 모드를 copy로 설정](#23-set-the-publish-mode-to-copy)
-</quiz>
+자세히 알아보기: [2.3. 게시 모드를 copy로 설정](#23-게시-모드를-copy로-설정)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-7">
+
 명령줄에서 Nextflow 워크플로우에 매개변수 값을 어떻게 전달합니까?
 - [ ] `-parameter value`
 - [ ] `--parameter:value`
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-자세히 알아보기: [3.2. 사용자 입력을 캡처하기 위한 명령줄 매개변수 설정](#32-set-up-a-command-line-parameter-to-capture-user-input)
-</quiz>
+자세히 알아보기: [3.2. 사용자 입력을 캡처하기 위한 명령줄 매개변수 설정](#32-사용자-입력을-캡처하기-위한-명령줄-매개변수-설정)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-8">
+
 Nextflow 스크립트 블록 내에서 변수를 어떻게 참조합니까?
 - [ ] `%variable%` 구문 사용
-- [x] `#!groovy ${variable}` 구문 사용
+- [x] `${variable}{:nextflow}` 구문 사용
 - [ ] `{{variable}}` 구문 사용
 - [ ] `[variable]` 구문 사용
-</quiz>
+
+</Quiz>

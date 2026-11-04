@@ -1,6 +1,9 @@
-# Bölüm 2: Örnek başına varyant çağırma
+---
+title: 'Bölüm 2: Örnek başına varyant çağırma'
+description: Bölüm 1'de, Samtools ve GATK komutlarını ilgili konteynırlarında manuel olarak test ettiniz.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bölüm 1'de, Samtools ve GATK komutlarını ilgili konteynırlarında manuel olarak test ettiniz.
 Şimdi, aynı komutları bir Nextflow iş akışına dönüştüreceğiz.
@@ -12,84 +15,85 @@ Kursun bu bölümünde, aşağıdakileri yapan bir iş akışı geliştireceğiz
 1. [Samtools](https://www.htslib.org/) kullanarak her BAM girdi dosyası için bir dizin dosyası oluşturmak
 2. Her BAM girdi dosyası üzerinde GATK HaplotypeCaller'ı çalıştırarak VCF (Variant Call Format) formatında örnek başına varyant çağrıları oluşturmak
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
-</figure>
+![](../../../nf4_science/genomics/img/hello-gatk-1.excalidraw.svg)
 
-Bu, [Bölüm 1: Yöntem genel bakışı](./01_method.md#1-per-sample-variant-calling)'nın ilk bölümündeki adımları otomatikleştirir; orada bu komutları konteynırlarında manuel olarak çalıştırmıştınız.
+Bu, [Bölüm 1: Yöntem genel bakışı](./01_method.mdx#1-örnek-başına-varyant-çağırma)'nın ilk bölümündeki adımları otomatikleştirir; orada bu komutları konteynırlarında manuel olarak çalıştırmıştınız.
 
 Başlangıç noktası olarak, size iş akışının ana bölümlerini özetleyen bir iş akışı dosyası (`genomics.nf`) ve her sürecin yapısını özetleyen iki modül dosyası (`samtools_index.nf` ve `gatk_haplotypecaller.nf`) sağlıyoruz.
 
-??? full-code "İskelet dosyaları"
+<details class="full-code">
+<summary>İskelet dosyaları</summary>
 
-    ```groovy title="genomics.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="genomics.nf"
+#!/usr/bin/env nextflow
 
-    // Modül INCLUDE ifadeleri
+// Modül INCLUDE ifadeleri
 
-    /*
-     * Pipeline parameters
-     */
+/*
+ * Pipeline parameters
+ */
 
-    // Birincil girdi
+// Birincil girdi
 
-    workflow {
+workflow {
 
-        main:
-        // Girdi kanalı oluştur
+    main:
+    // Girdi kanalı oluştur
 
-        // Süreçleri çağır
+    // Süreçleri çağır
 
-        publish:
-        // Yayınlanacak çıktıları bildirin
-    }
+    publish:
+    // Yayınlanacak çıktıları bildirin
+}
 
-    output {
-        // Yayınlama hedeflerini yapılandırın
-    }
-    ```
+output {
+    // Yayınlama hedeflerini yapılandırın
+}
+```
 
-    ```groovy title="modules/samtools_index.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/samtools_index.nf"
+#!/usr/bin/env nextflow
 
-    /*
-     * Generate BAM index file
-     */
-    process SAMTOOLS_INDEX {
+/*
+ * Generate BAM index file
+ */
+process SAMTOOLS_INDEX {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-    ```groovy title="modules/gatk_haplotypecaller.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/gatk_haplotypecaller.nf"
+#!/usr/bin/env nextflow
 
-    /*
-     * Call variants with GATK HaplotypeCaller
-     */
-    process GATK_HAPLOTYPECALLER {
+/*
+ * Call variants with GATK HaplotypeCaller
+ */
+process GATK_HAPLOTYPECALLER {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
+
+</details>
 
 Bu dosyalar işlevsel değildir; amaçları sadece kodun ilginç kısımlarını doldurmanız için iskelet görevi görmektir.
 
@@ -108,10 +112,10 @@ Geliştirme sürecini daha eğitici hale getirmek için bunu dört aşamaya ayı
 
 Her adım, iş akışı geliştirmenin belirli bir yönüne odaklanır.
 
-!!! tip "İpucu"
-
-    Doğru çalışma dizininde olduğunuzdan emin olun:
-    `cd /workspaces/training/nf4-science/genomics`
+:::tip[İpucu]
+Doğru çalışma dizininde olduğunuzdan emin olun:
+`cd /workspaces/training/nf4-science/genomics`
+:::
 
 ---
 
@@ -119,7 +123,7 @@ Her adım, iş akışı geliştirmenin belirli bir yönüne odaklanır.
 
 Bu ilk adım temellere odaklanır: bir BAM dosyası yüklemek ve bunun için bir dizin oluşturmak.
 
-[Bölüm 1](01_method.md)'deki `samtools index` komutunu hatırlayın:
+[Bölüm 1](01_method.mdx)'deki `samtools index` komutunu hatırlayın:
 
 ```bash
 samtools index '<input_bam>'
@@ -142,27 +146,27 @@ Bir girdi parametresi bildirmemiz, uygun bir varsayılan değer sağlamak için 
 
 Ana iş akışı dosyası `genomics.nf`'de, `Pipeline parameters` bölümü altında, `input` adlı bir CLI parametresi bildirin.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="5" hl_lines="4-7"
-    /*
-     * Pipeline parameters
-     */
-    params {
-        // Birincil girdi
-        input: Path
-    }
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=5 step="Önce"
+/*
+ * Pipeline parameters
+ */
 
-=== "Önce"
+// Birincil girdi
+```
 
-    ```groovy title="genomics.nf" linenums="5"
-    /*
-     * Pipeline parameters
-     */
-
+```nextflow {4-7} title="genomics.nf" showLineNumbers startLineNumber=5 step="Sonra"
+/*
+ * Pipeline parameters
+ */
+params {
     // Birincil girdi
-    ```
+    input: Path
+}
+```
+
+</CodeWalkthrough>
 
 Bu, CLI parametresini ayarlar, ancak geliştirme sırasında iş akışını her çalıştırdığımızda dosya yolunu yazmak istemiyoruz.
 Varsayılan bir değer sağlamak için birden fazla seçenek vardır; burada bir test profili kullanıyoruz.
@@ -170,53 +174,53 @@ Varsayılan bir değer sağlamak için birden fazla seçenek vardır; burada bir
 #### 1.1.2. `nextflow.config` içinde varsayılan değere sahip bir test profili oluşturun
 
 Bir test profili, komut satırında girdi belirtmeden bir iş akışını denemek için uygun varsayılan değerler sağlar.
-Bu, Nextflow ekosisteminde yaygın bir kuraldır (daha fazla ayrıntı için [Hello Config](../../hello_nextflow/06_hello_config.md)'e bakın).
+Bu, Nextflow ekosisteminde yaygın bir kuraldır (daha fazla ayrıntı için [Hello Config](../../hello_nextflow/06_hello_config.mdx)'e bakın).
 
 `nextflow.config` dosyasına, `input` parametresini test BAM dosyalarından birine ayarlayan bir `test` profili içeren bir `profiles` bloğu ekleyin.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="3-7"
-    docker.enabled = true
+```nextflow title="nextflow.config" showLineNumbers step="Önce"
+docker.enabled = true
+```
 
-    profiles {
-        test {
-            params.input = "${projectDir}/data/bam/reads_mother.bam"
-        }
+```nextflow {3-7} title="nextflow.config" showLineNumbers step="Sonra"
+docker.enabled = true
+
+profiles {
+    test {
+        params.input = "${projectDir}/data/bam/reads_mother.bam"
     }
-    ```
+}
+```
 
-=== "Önce"
-
-    ```groovy title="nextflow.config" linenums="1"
-    docker.enabled = true
-    ```
+</CodeWalkthrough>
 
 Burada, iş akışı betiğinin bulunduğu dizini gösteren yerleşik bir Nextflow değişkeni olan `${projectDir}` kullanıyoruz.
 Bu, mutlak yolları sabit kodlamadan veri dosyalarına ve diğer kaynaklara başvurmayı kolaylaştırır.
 
 #### 1.1.3. Girdi kanalını ayarlayın
 
-İş akışı bloğunda, `.fromPath` kanal fabrikasını kullanarak parametre değerinden bir girdi kanalı oluşturun ([Hello Channels](../../hello_nextflow/02_hello_channels.md)'da kullanıldığı gibi).
+İş akışı bloğunda, `.fromPath` kanal fabrikasını kullanarak parametre değerinden bir girdi kanalı oluşturun ([Hello Channels](../../hello_nextflow/02_hello_channels.mdx)'da kullanıldığı gibi).
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="13" hl_lines="4-5"
-    workflow {
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=13 step="Önce"
+workflow {
 
-        main:
-        // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
-        reads_ch = channel.fromPath(params.input)
-    ```
+    main:
+    // Girdi kanalı oluştur
+```
 
-=== "Önce"
+```nextflow {4-5} title="genomics.nf" showLineNumbers startLineNumber=13 step="Sonra"
+workflow {
 
-    ```groovy title="genomics.nf" linenums="13"
-    workflow {
+    main:
+    // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
+    reads_ch = channel.fromPath(params.input)
+```
 
-        main:
-        // Girdi kanalı oluştur
-    ```
+</CodeWalkthrough>
 
 Ardından, bu girdi üzerinde dizinleme çalıştırmak için süreci oluşturmamız gerekecek.
 
@@ -227,57 +231,57 @@ Modül dosyasında süreç tanımını yazmamız, bir include ifadesi kullanarak
 #### 1.2.1. Dizinleme süreci için modülü doldurun
 
 `modules/samtools_index.nf` dosyasını açın ve süreç tanımının ana hatlarını inceleyin.
-Ana yapısal öğeleri tanımalısınız; değilse, tazeleme için [Hello Nextflow](../../hello_nextflow/01_hello_world.md)'u okumayı düşünün.
+Ana yapısal öğeleri tanımalısınız; değilse, tazeleme için [Hello Nextflow](../../hello_nextflow/01_hello_world.mdx)'u okumayı düşünün.
 
 Devam edin ve yukarıda sağlanan bilgileri kullanarak süreç tanımını kendiniz doldurun, ardından çalışmanızı aşağıdaki "Sonra" sekmesindeki çözümle karşılaştırın.
 
-=== "Önce"
+<CodeWalkthrough>
 
-    ```groovy title="modules/samtools_index.nf" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/samtools_index.nf" showLineNumbers step="Önce"
+#!/usr/bin/env nextflow
 
-    /*
-     * Generate BAM index file
-     */
-    process SAMTOOLS_INDEX {
+/*
+ * Generate BAM index file
+ */
+process SAMTOOLS_INDEX {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-=== "Sonra"
+```nextflow {8,11,14,18} title="modules/samtools_index.nf" showLineNumbers step="Sonra"
+#!/usr/bin/env nextflow
 
-    ```groovy title="modules/samtools_index.nf" linenums="1" hl_lines="8 11 14 18"
-    #!/usr/bin/env nextflow
+/*
+ * Generate BAM index file
+ */
+process SAMTOOLS_INDEX {
 
-    /*
-     * Generate BAM index file
-     */
-    process SAMTOOLS_INDEX {
+    container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
 
-        container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
+    input:
+    path input_bam
 
-        input:
-        path input_bam
+    output:
+    path "${input_bam}.bai"
 
-        output:
-        path "${input_bam}.bai"
+    script:
+    """
+    samtools index '$input_bam'
+    """
+}
+```
 
-        script:
-        """
-        samtools index '$input_bam'
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 Bunu tamamladığınızda, süreç tamamlanmış olur.
 İş akışında kullanmak için modülü içe aktarmanız ve bir süreç çağrısı eklemeniz gerekir.
@@ -286,18 +290,18 @@ Bunu tamamladığınızda, süreç tamamlanmış olur.
 
 `genomics.nf` dosyasında, süreci iş akışında kullanılabilir hale getirmek için bir `include` ifadesi ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="3" hl_lines="2"
-    // Modül INCLUDE ifadeleri
-    include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=3 step="Önce"
+// Modül INCLUDE ifadeleri
+```
 
-=== "Önce"
+```nextflow {2} title="genomics.nf" showLineNumbers startLineNumber=3 step="Sonra"
+// Modül INCLUDE ifadeleri
+include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
+```
 
-    ```groovy title="genomics.nf" linenums="3"
-    // Modül INCLUDE ifadeleri
-    ```
+</CodeWalkthrough>
 
 Süreç artık iş akışı kapsamında kullanılabilir.
 
@@ -305,30 +309,30 @@ Süreç artık iş akışı kapsamında kullanılabilir.
 
 Şimdi, iş akışı bloğunda, girdi kanalını argüman olarak ileterek `SAMTOOLS_INDEX`'e bir çağrı ekleyelim.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="14" hl_lines="7-8"
-    workflow {
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=14 step="Önce"
+workflow {
 
-        main:
-        // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
-        reads_ch = channel.fromPath(params.input)
+    main:
+    // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
+    reads_ch = channel.fromPath(params.input)
 
-        // Girdi BAM dosyası için dizin dosyası oluştur
-        SAMTOOLS_INDEX(reads_ch)
-    ```
+    // Süreçleri çağır
+```
 
-=== "Önce"
+```nextflow {7-8} title="genomics.nf" showLineNumbers startLineNumber=14 step="Sonra"
+workflow {
 
-    ```groovy title="genomics.nf" linenums="14"
-    workflow {
+    main:
+    // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
+    reads_ch = channel.fromPath(params.input)
 
-        main:
-        // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
-        reads_ch = channel.fromPath(params.input)
+    // Girdi BAM dosyası için dizin dosyası oluştur
+    SAMTOOLS_INDEX(reads_ch)
+```
 
-        // Süreçleri çağır
-    ```
+</CodeWalkthrough>
 
 İş akışı artık girdiyi yükler ve üzerinde dizinleme sürecini çalıştırır.
 Ardından, çıktının nasıl yayınlanacağını yapılandırmamız gerekiyor.
@@ -342,21 +346,21 @@ Hangi süreç çıktılarının yayınlanacağını bildirmemiz ve nereye gitmes
 İş akışı bloğu içindeki `publish:` bölümü, hangi süreç çıktılarının yayınlanması gerektiğini bildirir.
 `SAMTOOLS_INDEX` çıktısını `bam_index` adlı bir hedefe atayın.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="22" hl_lines="2"
-        publish:
-        bam_index = SAMTOOLS_INDEX.out
-    }
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=22 step="Önce"
+    publish:
+    // Yayınlanacak çıktıları bildirin
+}
+```
 
-=== "Önce"
+```nextflow {2} title="genomics.nf" showLineNumbers startLineNumber=22 step="Sonra"
+    publish:
+    bam_index = SAMTOOLS_INDEX.out
+}
+```
 
-    ```groovy title="genomics.nf" linenums="22"
-        publish:
-        // Yayınlanacak çıktıları bildirin
-    }
-    ```
+</CodeWalkthrough>
 
 Ardından, Nextflow'a yayınlanan çıktıyı nereye koyacağını söylememiz gerekecek.
 
@@ -365,29 +369,29 @@ Ardından, Nextflow'a yayınlanan çıktıyı nereye koyacağını söylememiz g
 `output {}` bloğu iş akışının dışında yer alır ve her adlandırılmış hedefin nerede yayınlandığını belirtir.
 `bam_index` için bir `bam/` alt dizinine yayınlayan bir hedef ekleyelim.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="26" hl_lines="2-4"
-    output {
-        bam_index {
-            path 'bam'
-        }
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=26 step="Önce"
+output {
+    // Yayınlama hedeflerini yapılandırın
+}
+```
+
+```nextflow {2-4} title="genomics.nf" showLineNumbers startLineNumber=26 step="Sonra"
+output {
+    bam_index {
+        path 'bam'
     }
-    ```
+}
+```
 
-=== "Önce"
+</CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="26"
-    output {
-        // Yayınlama hedeflerini yapılandırın
-    }
-    ```
-
-!!! note "Not"
-
-    Varsayılan olarak, Nextflow çıktı dosyalarını sembolik bağlantılar olarak yayınlar; bu, gereksiz çoğaltmayı önler.
-    Burada kullandığımız veri dosyaları çok küçük olsa da, genomik alanında çok büyük olabilirler.
-    `work` dizininizi temizlediğinizde sembolik bağlantılar bozulacaktır; bu nedenle üretim iş akışları için varsayılan yayınlama modunu `'copy'` olarak geçersiz kılmak isteyebilirsiniz.
+:::note[Not]
+Varsayılan olarak, Nextflow çıktı dosyalarını sembolik bağlantılar olarak yayınlar; bu, gereksiz çoğaltmayı önler.
+Burada kullandığımız veri dosyaları çok küçük olsa da, genomik alanında çok büyük olabilirler.
+`work` dizininizi temizlediğinizde sembolik bağlantılar bozulacaktır; bu nedenle üretim iş akışları için varsayılan yayınlama modunu `'copy'` olarak geçersiz kılmak isteyebilirsiniz.
+:::
 
 ### 1.4. İş akışını çalıştırın
 
@@ -397,43 +401,45 @@ Test profilinde ayarlanan varsayılan değeri kullanmak ve komut satırına yol 
 
 ```bash
 nextflow run genomics.nf -profile test
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `genomics.nf` [elegant_ochoa] revision: fd242ec7cf
+
+executor >  local (1)
+[ad/b2c9bf] SAMTOOLS_INDEX (1) | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/genomics/results
+
+  bam_index:
+    - bam/reads_mother.bam.bai
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `genomics.nf` [elegant_ochoa] revision: fd242ec7cf
-
-    executor >  local (1)
-    [ad/b2c9bf] SAMTOOLS_INDEX (1) | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/genomics/results
-
-      bam_index:
-        - bam/reads_mother.bam.bai
-    ```
 
 Dizin dosyasının doğru şekilde oluşturulduğunu çalışma dizinine veya sonuçlar dizinine bakarak kontrol edebilirsiniz.
 
-??? abstract "Çalışma dizini içeriği"
+<details class="abstract">
+<summary>Çalışma dizini içeriği</summary>
 
-    ```console
-    work/ad/b2c9bf4af404ef7cf63e0aa3887f65
-    ├── reads_mother.bam -> /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
-    └── reads_mother.bam.bai
-    ```
+```console
+work/ad/b2c9bf4af404ef7cf63e0aa3887f65
+├── reads_mother.bam -> /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
+└── reads_mother.bam.bai
+```
 
-??? abstract "Sonuçlar dizini içeriği"
+</details>
 
-    ```console
-    results/
-    └── bam/
-        └── reads_mother.bam.bai -> ...
-    ```
+<details class="abstract">
+<summary>Sonuçlar dizini içeriği</summary>
+
+```console
+results/
+└── bam/
+    └── reads_mother.bam.bai -> ...
+```
+
+</details>
 
 İşte burada!
 
@@ -451,7 +457,7 @@ Dizinleme sürecinin çıktısını alan ve varyant çağırma çalıştırmak i
 
 Artık girdi dosyamız için bir dizinimiz olduğuna göre, varyant çağırma adımını ayarlamaya geçebiliriz.
 
-[Bölüm 1](01_method.md)'deki `gatk HaplotypeCaller` komutunu hatırlayın:
+[Bölüm 1](01_method.mdx)'deki `gatk HaplotypeCaller` komutunu hatırlayın:
 
 ```bash
 gatk HaplotypeCaller \
@@ -480,29 +486,29 @@ Bunlar için parametreler bildirmemiz, test profiline varsayılan değerler ekle
 
 Yeni sürecimiz sağlanması gereken bir avuç ek dosya beklediğinden, `genomics.nf` dosyasında `Pipeline parameters` bölümü altında bunlar için parametre bildirimleri ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="9" hl_lines="5-9"
-    params {
-        // Birincil girdi
-        input: Path
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=9 step="Önce"
+params {
+    // Birincil girdi
+    input: Path
+}
+```
 
-        // Yardımcı dosyalar
-        reference: Path
-        reference_index: Path
-        reference_dict: Path
-        intervals: Path
-    }
-    ```
+```nextflow {5-9} title="genomics.nf" showLineNumbers startLineNumber=9 step="Sonra"
+params {
+    // Birincil girdi
+    input: Path
 
-=== "Önce"
+    // Yardımcı dosyalar
+    reference: Path
+    reference_index: Path
+    reference_dict: Path
+    intervals: Path
+}
+```
 
-    ```groovy title="genomics.nf" linenums="9"
-    params {
-        // Birincil girdi
-        input: Path
-    }
-    ```
+</CodeWalkthrough>
 
 Daha önce olduğu gibi, satır içi yerine test profili aracılığıyla varsayılan değerler sağlayacağız.
 
@@ -510,25 +516,25 @@ Daha önce olduğu gibi, satır içi yerine test profili aracılığıyla varsay
 
 Bölüm 1.1.2'de `input` için yaptığımız gibi, `nextflow.config` dosyasındaki test profiline yardımcı dosyalar için varsayılan değerler ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="4" hl_lines="3-6"
-    test {
-        params.input = "${projectDir}/data/bam/reads_mother.bam"
-        params.reference = "${projectDir}/data/ref/ref.fasta"
-        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-        params.reference_dict = "${projectDir}/data/ref/ref.dict"
-        params.intervals = "${projectDir}/data/ref/intervals.bed"
-    }
-    ```
+```nextflow title="nextflow.config" showLineNumbers startLineNumber=4 step="Önce"
+test {
+    params.input = "${projectDir}/data/bam/reads_mother.bam"
+}
+```
 
-=== "Önce"
+```nextflow {3-6} title="nextflow.config" showLineNumbers startLineNumber=4 step="Sonra"
+test {
+    params.input = "${projectDir}/data/bam/reads_mother.bam"
+    params.reference = "${projectDir}/data/ref/ref.fasta"
+    params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+    params.reference_dict = "${projectDir}/data/ref/ref.dict"
+    params.intervals = "${projectDir}/data/ref/intervals.bed"
+}
+```
 
-    ```groovy title="nextflow.config" linenums="4"
-    test {
-        params.input = "${projectDir}/data/bam/reads_mother.bam"
-    }
-    ```
+</CodeWalkthrough>
 
 Ardından, bu dosya yollarını iş akışında kullanmak üzere yükleyen değişkenler oluşturmamız gerekecek.
 
@@ -536,40 +542,40 @@ Ardından, bu dosya yollarını iş akışında kullanmak üzere yükleyen deği
 
 İş akışı bloğu içinde yardımcı dosya yolları için değişkenler ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="21" hl_lines="7-11"
-    workflow {
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=21 step="Önce"
+workflow {
 
-        main:
-        // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
-        reads_ch = channel.fromPath(params.input)
+    main:
+    // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
+    reads_ch = channel.fromPath(params.input)
 
-        // Yardımcı dosyalar için dosya yollarını yükle (referans ve aralıklar)
-        ref_file        = file(params.reference)
-        ref_index_file  = file(params.reference_index)
-        ref_dict_file   = file(params.reference_dict)
-        intervals_file  = file(params.intervals)
+    // Girdi BAM dosyası için dizin dosyası oluştur
+    SAMTOOLS_INDEX(reads_ch)
+```
 
-        // Girdi BAM dosyası için dizin dosyası oluştur
-        SAMTOOLS_INDEX(reads_ch)
-    ```
+```nextflow {7-11} title="genomics.nf" showLineNumbers startLineNumber=21 step="Sonra"
+workflow {
 
-=== "Önce"
+    main:
+    // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
+    reads_ch = channel.fromPath(params.input)
 
-    ```groovy title="genomics.nf" linenums="21"
-    workflow {
+    // Yardımcı dosyalar için dosya yollarını yükle (referans ve aralıklar)
+    ref_file        = file(params.reference)
+    ref_index_file  = file(params.reference_index)
+    ref_dict_file   = file(params.reference_dict)
+    intervals_file  = file(params.intervals)
 
-        main:
-        // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
-        reads_ch = channel.fromPath(params.input)
+    // Girdi BAM dosyası için dizin dosyası oluştur
+    SAMTOOLS_INDEX(reads_ch)
+```
 
-        // Girdi BAM dosyası için dizin dosyası oluştur
-        SAMTOOLS_INDEX(reads_ch)
-    ```
+</CodeWalkthrough>
 
 `file()` sözdizimi, Nextflow'a bu girdileri açıkça dosya yolları olarak işlemesini söyler.
-Bu konuda daha fazla bilgiyi [Dosyalarla çalışma](../../side_quests/working_with_files/index.md) Yan Görevinde öğrenebilirsiniz.
+Bu konuda daha fazla bilgiyi [Dosyalarla çalışma](../../side_quests/working_with_files/index.mdx) Yan Görevinde öğrenebilirsiniz.
 
 ### 2.2. Varyant çağırma sürecini yazın ve iş akışında çağırın
 
@@ -581,63 +587,63 @@ Modül dosyasında süreç tanımını yazmamız, bir include ifadesi kullanarak
 
 Devam edin ve yukarıda sağlanan bilgileri kullanarak süreç tanımını kendiniz doldurun, ardından çalışmanızı aşağıdaki "Sonra" sekmesindeki çözümle karşılaştırın.
 
-=== "Önce"
+<CodeWalkthrough>
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/gatk_haplotypecaller.nf" showLineNumbers step="Önce"
+#!/usr/bin/env nextflow
 
-    /*
-     * Call variants with GATK HaplotypeCaller
-     */
-    process GATK_HAPLOTYPECALLER {
+/*
+ * Call variants with GATK HaplotypeCaller
+ */
+process GATK_HAPLOTYPECALLER {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-=== "Sonra"
+```nextflow {8,11-16,19-20,24-28} title="modules/gatk_haplotypecaller.nf" showLineNumbers step="Sonra"
+#!/usr/bin/env nextflow
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="1" hl_lines="8 11-16 19-20 24-28"
-    #!/usr/bin/env nextflow
+/*
+ * Call variants with GATK HaplotypeCaller
+ */
+process GATK_HAPLOTYPECALLER {
 
-    /*
-     * Call variants with GATK HaplotypeCaller
-     */
-    process GATK_HAPLOTYPECALLER {
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-        container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+    input:
+    path input_bam
+    path input_bam_index
+    path ref_fasta
+    path ref_index
+    path ref_dict
+    path interval_list
 
-        input:
-        path input_bam
-        path input_bam_index
-        path ref_fasta
-        path ref_index
-        path ref_dict
-        path interval_list
+    output:
+    path "${input_bam}.vcf"     , emit: vcf
+    path "${input_bam}.vcf.idx" , emit: idx
 
-        output:
-        path "${input_bam}.vcf"     , emit: vcf
-        path "${input_bam}.vcf.idx" , emit: idx
+    script:
+    """
+    gatk HaplotypeCaller \
+        -R ${ref_fasta} \
+        -I ${input_bam} \
+        -O ${input_bam}.vcf \
+        -L ${interval_list}
+    """
+}
+```
 
-        script:
-        """
-        gatk HaplotypeCaller \
-            -R ${ref_fasta} \
-            -I ${input_bam} \
-            -O ${input_bam}.vcf \
-            -L ${interval_list}
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 Bu sürecin GATK komutunun kendisinin gerektirdiğinden daha fazla girdiye sahip olduğunu fark edeceksiniz.
 GATK, adlandırma kurallarına göre BAM dizin dosyasını ve referans genomun yardımcı dosyalarını aramayı bilir, ancak Nextflow alan bağımsızdır ve bu kuralları bilmez.
@@ -653,20 +659,20 @@ Bunu tamamladığınızda, süreç tamamlanmış olur.
 
 Yeni modülü içe aktarmak için `genomics.nf` dosyasını güncelleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="3" hl_lines="3"
-    // Modül INCLUDE ifadeleri
-    include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
-    include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=3 step="Önce"
+// Modül INCLUDE ifadeleri
+include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
+```
 
-=== "Önce"
+```nextflow {3} title="genomics.nf" showLineNumbers startLineNumber=3 step="Sonra"
+// Modül INCLUDE ifadeleri
+include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
+include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
+```
 
-    ```groovy title="genomics.nf" linenums="3"
-    // Modül INCLUDE ifadeleri
-    include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
-    ```
+</CodeWalkthrough>
 
 Süreç artık iş akışı kapsamında kullanılabilir.
 
@@ -674,36 +680,36 @@ Süreç artık iş akışı kapsamında kullanılabilir.
 
 İş akışı gövdesinde, `main:` altına süreç çağrısını ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="33" hl_lines="4-12"
-        // Girdi BAM dosyası için dizin dosyası oluştur
-        SAMTOOLS_INDEX(reads_ch)
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=33 step="Önce"
+    // Girdi BAM dosyası için dizin dosyası oluştur
+    SAMTOOLS_INDEX(reads_ch)
+```
 
-        // Dizinlenmiş BAM dosyasından varyantları çağır
-        GATK_HAPLOTYPECALLER(
-            reads_ch,
-            SAMTOOLS_INDEX.out,
-            ref_file,
-            ref_index_file,
-            ref_dict_file,
-            intervals_file
-        )
-    ```
+```nextflow {4-12} title="genomics.nf" showLineNumbers startLineNumber=33 step="Sonra"
+    // Girdi BAM dosyası için dizin dosyası oluştur
+    SAMTOOLS_INDEX(reads_ch)
 
-=== "Önce"
+    // Dizinlenmiş BAM dosyasından varyantları çağır
+    GATK_HAPLOTYPECALLER(
+        reads_ch,
+        SAMTOOLS_INDEX.out,
+        ref_file,
+        ref_index_file,
+        ref_dict_file,
+        intervals_file
+    )
+```
 
-    ```groovy title="genomics.nf" linenums="33"
-        // Girdi BAM dosyası için dizin dosyası oluştur
-        SAMTOOLS_INDEX(reads_ch)
-    ```
+</CodeWalkthrough>
 
 Hello Nextflow eğitim serisinden `*.out` sözdizimini tanımalısınız; Nextflow'a `SAMTOOLS_INDEX` tarafından çıktılanan kanalı almasını ve bunu `GATK_HAPLOTYPECALLER` süreç çağrısına bağlamasını söylüyoruz.
 
-!!! note "Not"
-
-    Girdilerin, süreç çağrısında, sürecin girdi bloğunda listelendiği sırayla tam olarak aynı sırada sağlandığına dikkat edin.
-    Nextflow'da girdiler konumsaldır; yani aynı sırayı _takip etmelisiniz_ ve elbette aynı sayıda öğe olmalıdır.
+:::note[Not]
+Girdilerin, süreç çağrısında, sürecin girdi bloğunda listelendiği sırayla tam olarak aynı sırada sağlandığına dikkat edin.
+Nextflow'da girdiler konumsaldır; yani aynı sırayı _takip etmelisiniz_ ve elbette aynı sayıda öğe olmalıdır.
+:::
 
 ### 2.3. Çıktı işlemeyi yapılandırın
 
@@ -713,23 +719,23 @@ Yeni çıktıları yayınlama bildirimine eklememiz ve nereye gideceklerini yap�
 
 VCF ve dizin çıktılarını `publish:` bölümüne ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="45" hl_lines="3-4"
-        publish:
-        bam_index = SAMTOOLS_INDEX.out
-        vcf = GATK_HAPLOTYPECALLER.out.vcf
-        vcf_idx = GATK_HAPLOTYPECALLER.out.idx
-    }
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=45 step="Önce"
+    publish:
+    bam_index = SAMTOOLS_INDEX.out
+}
+```
 
-=== "Önce"
+```nextflow {3-4} title="genomics.nf" showLineNumbers startLineNumber=45 step="Sonra"
+    publish:
+    bam_index = SAMTOOLS_INDEX.out
+    vcf = GATK_HAPLOTYPECALLER.out.vcf
+    vcf_idx = GATK_HAPLOTYPECALLER.out.idx
+}
+```
 
-    ```groovy title="genomics.nf" linenums="45"
-        publish:
-        bam_index = SAMTOOLS_INDEX.out
-    }
-    ```
+</CodeWalkthrough>
 
 Ardından, Nextflow'a yeni çıktıları nereye koyacağını söylememiz gerekecek.
 
@@ -737,31 +743,31 @@ Ardından, Nextflow'a yeni çıktıları nereye koyacağını söylememiz gereke
 
 `output {}` bloğunda `vcf` ve `vcf_idx` hedefleri için girişler ekleyin; her ikisini de bir `vcf/` alt dizinine yayınlayın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="51" hl_lines="5-10"
-    output {
-        bam_index {
-            path 'bam'
-        }
-        vcf {
-            path 'vcf'
-        }
-        vcf_idx {
-            path 'vcf'
-        }
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=49 step="Önce"
+output {
+    bam_index {
+        path 'bam'
     }
-    ```
+}
+```
 
-=== "Önce"
-
-    ```groovy title="genomics.nf" linenums="49"
-    output {
-        bam_index {
-            path 'bam'
-        }
+```nextflow {5-10} title="genomics.nf" showLineNumbers startLineNumber=51 step="Sonra"
+output {
+    bam_index {
+        path 'bam'
     }
-    ```
+    vcf {
+        path 'vcf'
+    }
+    vcf_idx {
+        path 'vcf'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 VCF ve dizini, her ikisi de `vcf/` alt dizinine giden ayrı hedefler olarak yayınlanır.
 
@@ -771,32 +777,28 @@ Genişletilmiş iş akışını çalıştırın; bu sefer dizinleme adımını t
 
 ```bash
 nextflow run genomics.nf -profile test -resume
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `genomics.nf` [amazing_stonebraker] revision: 3dc6f69336
+
+executor >  local (1)
+[ad/b2c9bf] SAMTOOLS_INDEX (1)       | 1 of 1, cached: 1 ✔
+[12/2f009f] GATK_HAPLOTYPECALLER (1) | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/genomics/results
+
+  bam_index:
+    - bam/reads_mother.bam.bai
+
+  vcf:
+    - vcf/reads_mother.bam.vcf
+
+  vcf_idx:
+    - vcf/reads_mother.bam.vcf.idx
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `genomics.nf` [amazing_stonebraker] revision: 3dc6f69336
-
-    executor >  local (1)
-    [ad/b2c9bf] SAMTOOLS_INDEX (1)       | 1 of 1, cached: 1 ✔
-    [12/2f009f] GATK_HAPLOTYPECALLER (1) | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/genomics/results
-
-      bam_index:
-        - bam/reads_mother.bam.bai
-
-      vcf:
-        - vcf/reads_mother.bam.vcf
-
-      vcf_idx:
-        - vcf/reads_mother.bam.vcf.idx
-    ```
 
 Şimdi konsol çıktısına bakarsak, iki sürecin listelendiğini görüyoruz.
 
@@ -804,27 +806,33 @@ nextflow run genomics.nf -profile test -resume
 
 Çıktı dosyalarını sonuçlar dizininde (çalışma dizinine sembolik bağlantılar olarak) bulacaksınız.
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console
-    results/
-    ├── bam/
-    │   └── reads_mother.bam.bai -> ...
-    └── vcf/
-        ├── reads_mother.bam.vcf -> ...
-        └── reads_mother.bam.vcf.idx -> ...
-    ```
+```console
+results/
+├── bam/
+│   └── reads_mother.bam.bai -> ...
+└── vcf/
+    ├── reads_mother.bam.vcf -> ...
+    └── reads_mother.bam.vcf.idx -> ...
+```
+
+</details>
 
 VCF dosyasını açarsanız, GATK komutunu doğrudan konteynırda çalıştırarak oluşturduğunuz dosyadaki içerikle aynı içeriği görmelisiniz.
 
-??? abstract "Dosya içeriği"
+<details class="abstract">
+<summary>Dosya içeriği</summary>
 
-    ```console title="reads_mother.bam.vcf" linenums="26"
-    #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
-    20_10037292_10066351	3480	.	C	CT	503.03	.	AC=2;AF=1.00;AN=2;DP=23;ExcessHet=0.0000;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=60.00;QD=27.95;SOR=1.179	GT:AD:DP:GQ:PL	1/1:0,18:18:54:517,54,0
-    20_10037292_10066351	3520	.	AT	A	609.03	.	AC=2;AF=1.00;AN=2;DP=18;ExcessHet=0.0000;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=60.00;QD=33.83;SOR=0.693	GT:AD:DP:GQ:PL	1/1:0,18:18:54:623,54,0
-    20_10037292_10066351	3529	.	T	A	155.64	.	AC=1;AF=0.500;AN=2;BaseQRankSum=-0.544;DP=21;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=7.78;ReadPosRankSum=-1.158;SOR=1.034	GT:AD:DP:GQ:PL	0/1:12,8:20:99:163,0,328
-    ```
+```console title="reads_mother.bam.vcf" showLineNumbers startLineNumber=26
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
+20_10037292_10066351	3480	.	C	CT	503.03	.	AC=2;AF=1.00;AN=2;DP=23;ExcessHet=0.0000;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=60.00;QD=27.95;SOR=1.179	GT:AD:DP:GQ:PL	1/1:0,18:18:54:517,54,0
+20_10037292_10066351	3520	.	AT	A	609.03	.	AC=2;AF=1.00;AN=2;DP=18;ExcessHet=0.0000;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=60.00;QD=33.83;SOR=0.693	GT:AD:DP:GQ:PL	1/1:0,18:18:54:623,54,0
+20_10037292_10066351	3529	.	T	A	155.64	.	AC=1;AF=0.500;AN=2;BaseQRankSum=-0.544;DP=21;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=7.78;ReadPosRankSum=-1.158;SOR=1.034	GT:AD:DP:GQ:PL	0/1:12,8:20:99:163,0,328
+```
+
+</details>
 
 Bu, çalışmamızdaki her örnek için oluşturmayı önemsediğimiz çıktıdır.
 
@@ -852,49 +860,49 @@ Bu, çok örnekli yürütmeyi test etmenin hızlı bir yoludur; bir sonraki adı
 
 İlk olarak, diziler yazılı bildirimleri kullanamayacağından, parametre bildirimindeki tür açıklamasını yorumlayın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
-        // Birincil girdi (üç örnekten oluşan dizi)
-        input //: Path
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=10 step="Önce"
+    // Birincil girdi
+    input: Path
+```
 
-=== "Önce"
+```nextflow {1-2} title="genomics.nf" showLineNumbers startLineNumber=10 step="Sonra"
+    // Birincil girdi (üç örnekten oluşan dizi)
+    input //: Path
+```
 
-    ```groovy title="genomics.nf" linenums="10"
-        // Birincil girdi
-        input: Path
-    ```
+</CodeWalkthrough>
 
 Ardından test profilini üç örneğin tümünü listeleyecek şekilde güncelleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="4" hl_lines="2-6"
-    test {
-        params.input = [
-            "${projectDir}/data/bam/reads_mother.bam",
-            "${projectDir}/data/bam/reads_father.bam",
-            "${projectDir}/data/bam/reads_son.bam"
-        ]
-        params.reference = "${projectDir}/data/ref/ref.fasta"
-        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-        params.reference_dict = "${projectDir}/data/ref/ref.dict"
-        params.intervals = "${projectDir}/data/ref/intervals.bed"
-    }
-    ```
+```nextflow title="nextflow.config" showLineNumbers startLineNumber=4 step="Önce"
+test {
+    params.input = "${projectDir}/data/bam/reads_mother.bam"
+    params.reference = "${projectDir}/data/ref/ref.fasta"
+    params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+    params.reference_dict = "${projectDir}/data/ref/ref.dict"
+    params.intervals = "${projectDir}/data/ref/intervals.bed"
+}
+```
 
-=== "Önce"
+```nextflow {2-6} title="nextflow.config" showLineNumbers startLineNumber=4 step="Sonra"
+test {
+    params.input = [
+        "${projectDir}/data/bam/reads_mother.bam",
+        "${projectDir}/data/bam/reads_father.bam",
+        "${projectDir}/data/bam/reads_son.bam"
+    ]
+    params.reference = "${projectDir}/data/ref/ref.fasta"
+    params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+    params.reference_dict = "${projectDir}/data/ref/ref.dict"
+    params.intervals = "${projectDir}/data/ref/intervals.bed"
+}
+```
 
-    ```groovy title="nextflow.config" linenums="4"
-    test {
-        params.input = "${projectDir}/data/bam/reads_mother.bam"
-        params.reference = "${projectDir}/data/ref/ref.fasta"
-        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-        params.reference_dict = "${projectDir}/data/ref/ref.dict"
-        params.intervals = "${projectDir}/data/ref/intervals.bed"
-    }
-    ```
+</CodeWalkthrough>
 
 İş akışı gövdesindeki kanal fabrikası (`.fromPath`) tek bir dosya yolu kadar birden fazla dosya yolunu da kabul eder; bu nedenle başka değişiklik gerekmez.
 
@@ -908,66 +916,72 @@ nextflow run genomics.nf -profile test -resume
 
 Komik olan şu: bu _çalışabilir_ VEYA _başarısız olabilir_. Örneğin, işte başarılı olan bir çalıştırma:
 
-??? success "Komut çıktısı"
+<details class="success">
+<summary>Komut çıktısı</summary>
 
-    ```console
-     N E X T F L O W   ~  version 26.04.4
+```console
+ N E X T F L O W   ~  version 26.04.4
 
-    Launching `genomics.nf` [pensive_noyce] revision: 6c424c0674
+Launching `genomics.nf` [pensive_noyce] revision: 6c424c0674
 
-    executor >  local (6)
-    [f9/ccfefd] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
-    [dc/b63c4b] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+executor >  local (6)
+[f9/ccfefd] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
+[dc/b63c4b] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
 
-    Outputs:
+Outputs:
 
-      /workspaces/training/nf4-science/genomics/results
+  /workspaces/training/nf4-science/genomics/results
 
-      bam_index:
-        - bam/reads_mother.bam.bai
-        - bam/reads_father.bam.bai
-        - bam/reads_son.bam.bai
+  bam_index:
+    - bam/reads_mother.bam.bai
+    - bam/reads_father.bam.bai
+    - bam/reads_son.bam.bai
 
-      vcf:
-        - vcf/reads_son.bam.vcf
-        - vcf/reads_mother.bam.vcf
-        - vcf/reads_father.bam.vcf
+  vcf:
+    - vcf/reads_son.bam.vcf
+    - vcf/reads_mother.bam.vcf
+    - vcf/reads_father.bam.vcf
 
-      vcf_idx:
-        - vcf/reads_son.bam.vcf.idx
-        - vcf/reads_mother.bam.vcf.idx
-        - vcf/reads_father.bam.vcf.idx
-    ```
+  vcf_idx:
+    - vcf/reads_son.bam.vcf.idx
+    - vcf/reads_mother.bam.vcf.idx
+    - vcf/reads_father.bam.vcf.idx
+```
+
+</details>
 
 İş akışı çalıştırmanız başarılı olduysa, şuna benzer bir hata alana kadar tekrar çalıştırın:
 
-??? failure "Komut çıktısı"
+<details class="failure">
+<summary>Komut çıktısı</summary>
 
-    ```console
-     N E X T F L O W   ~  version 26.04.4
+```console
+ N E X T F L O W   ~  version 26.04.4
 
-    Launching `genomics.nf` [wise_cray] revision: 6c424c0674
+Launching `genomics.nf` [wise_cray] revision: 6c424c0674
 
-    executor >  local (4)
-    [3e/565553] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 1 ✔
-    [fb/7d64e0] GATK_HAPLOTYPECALLER (2) | 1 of 3, cached: 1 ✘
-    ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (3)'
+executor >  local (4)
+[3e/565553] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 1 ✔
+[fb/7d64e0] GATK_HAPLOTYPECALLER (2) | 1 of 3, cached: 1 ✘
+ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (3)'
 
-    Caused by:
-      Process `GATK_HAPLOTYPECALLER (3)` terminated with an error exit status (2)
+Caused by:
+  Process `GATK_HAPLOTYPECALLER (3)` terminated with an error exit status (2)
 
-    Command executed:
+Command executed:
 
-      gatk HaplotypeCaller         -R ref.fasta         -I reads_son.bam         -O reads_son.bam.vcf         -L intervals.bed
+  gatk HaplotypeCaller         -R ref.fasta         -I reads_son.bam         -O reads_son.bam.vcf         -L intervals.bed
 
-    Command exit status:
-      2
+Command exit status:
+  2
 
-    Command error:
-      ...
-      A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
-      ...
-    ```
+Command error:
+  ...
+  A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
+  ...
+```
+
+</details>
 
 GATK komut hata çıktısına bakarsanız, şuna benzer bir satır olacaktır:
 
@@ -985,19 +999,22 @@ Neyin yanlış gittiğini anlamak için çalışma dizinlerini inceleyeceğiz ve
 
 Konsol çıktısında listelenen başarısız `GATK_HAPLOTYPECALLER` süreç çağrısı için çalışma dizininin içine bakın.
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console
-    work/3f/e775e3104e279ca5f292bf7b652f3e
-    ├── intervals.bed -> /workspaces/training/nf4-science/genomics/data/ref/intervals.bed
-    ├── reads_father.bam.bai -> /workspaces/training/nf4-science/genomics/work/3e/565553bc8010ce09098c9444851c21/reads_father.bam.bai
-    ├── reads_son.bam -> /workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
-    ├── reads_son.bam.vcf
-    ├── reads_son.bam.vcf.idx
-    ├── ref.dict -> /workspaces/training/nf4-science/genomics/data/ref/ref.dict
-    ├── ref.fasta -> /workspaces/training/nf4-science/genomics/data/ref/ref.fasta
-    └── ref.fasta.fai -> /workspaces/training/nf4-science/genomics/data/ref/ref.fasta.fai
-    ```
+```console
+work/3f/e775e3104e279ca5f292bf7b652f3e
+├── intervals.bed -> /workspaces/training/nf4-science/genomics/data/ref/intervals.bed
+├── reads_father.bam.bai -> /workspaces/training/nf4-science/genomics/work/3e/565553bc8010ce09098c9444851c21/reads_father.bam.bai
+├── reads_son.bam -> /workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
+├── reads_son.bam.vcf
+├── reads_son.bam.vcf.idx
+├── ref.dict -> /workspaces/training/nf4-science/genomics/data/ref/ref.dict
+├── ref.fasta -> /workspaces/training/nf4-science/genomics/data/ref/ref.fasta
+└── ref.fasta.fai -> /workspaces/training/nf4-science/genomics/data/ref/ref.fasta.fai
+```
+
+</details>
 
 Bu dizinde listelenen BAM dosyasının ve BAM dizininin adlarına özellikle dikkat edin: `reads_son.bam` ve `reads_father.bam.bai`.
 
@@ -1007,27 +1024,27 @@ Ne oluyor? Nextflow bu süreç çağrısının çalışma dizininde bir dizin do
 
 Kanalın içeriğini görüntülemek için `GATK_HAPLOTYPECALLER` süreç çağrısından önce iş akışı gövdesine şu iki satırı ekleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="36" hl_lines="3-5"
-        SAMTOOLS_INDEX(reads_ch)
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=36 step="Önce"
+    SAMTOOLS_INDEX(reads_ch)
 
-        // geçici tanılama
-        reads_ch.view()
-        SAMTOOLS_INDEX.out.view()
+    // Dizinlenmiş BAM dosyasından varyantları çağır
+    GATK_HAPLOTYPECALLER(
+```
 
-        // Dizinlenmiş BAM dosyasından varyantları çağır
-        GATK_HAPLOTYPECALLER(
-    ```
+```nextflow {3-5} title="genomics.nf" showLineNumbers startLineNumber=36 step="Sonra"
+    SAMTOOLS_INDEX(reads_ch)
 
-=== "Önce"
+    // geçici tanılama
+    reads_ch.view()
+    SAMTOOLS_INDEX.out.view()
 
-    ```groovy title="genomics.nf" linenums="36"
-        SAMTOOLS_INDEX(reads_ch)
+    // Dizinlenmiş BAM dosyasından varyantları çağır
+    GATK_HAPLOTYPECALLER(
+```
 
-        // Dizinlenmiş BAM dosyasından varyantları çağır
-        GATK_HAPLOTYPECALLER(
-    ```
+</CodeWalkthrough>
 
 Ardından iş akışı komutunu tekrar çalıştırın.
 
@@ -1049,20 +1066,20 @@ Bir kez daha, bu başarılı olabilir veya başarısız olabilir. İşte başar�
 İlk üç satır girdi kanalına, ikincisi ise çıktı kanalına karşılık gelir.
 Üç örnek için BAM dosyalarının ve dizin dosyalarının aynı sırada listelenmediğini görebilirsiniz!
 
-!!! note "Not"
-
-    Birden fazla öğe içeren bir kanal üzerinde bir Nextflow süreci çağırdığınızda, Nextflow yürütmeyi mümkün olduğunca paralelleştirmeye çalışacak ve çıktıları kullanılabilir hale geldikleri sırayla toplayacaktır.
-    Sonuç olarak, karşılık gelen çıktılar orijinal girdilerin verildiğinden farklı bir sırada toplanabilir.
+:::note[Not]
+Birden fazla öğe içeren bir kanal üzerinde bir Nextflow süreci çağırdığınızda, Nextflow yürütmeyi mümkün olduğunca paralelleştirmeye çalışacak ve çıktıları kullanılabilir hale geldikleri sırayla toplayacaktır.
+Sonuç olarak, karşılık gelen çıktılar orijinal girdilerin verildiğinden farklı bir sırada toplanabilir.
+:::
 
 Şu anda yazıldığı gibi, iş akışı betiğimiz dizin dosyalarının dizinleme adımından girdilerin verildiği anne/baba/oğul sırasıyla aynı sırada listelenerek çıkacağını varsayar.
 Ancak bunun böyle olacağının garantisi yoktur; bu nedenle bazen (her zaman olmasa da) yanlış dosyalar ikinci adımda eşleştirilir.
 
 Bunu düzeltmek için, BAM dosyalarının ve dizin dosyalarının kanallar aracılığıyla birlikte seyahat etmesini sağlamamız gerekir.
 
-!!! tip "İpucu"
-
-    İş akışı kodundaki `view()` ifadeleri hiçbir şey yapmaz; bu nedenle onları içeride bırakmak sorun değildir.
-    Ancak konsol çıktınızı karmaşıklaştıracaklar; bu nedenle sorunu gidermeyi bitirdiğinizde bunları kaldırmanızı öneririz.
+:::tip[İpucu]
+İş akışı kodundaki `view()` ifadeleri hiçbir şey yapmaz; bu nedenle onları içeride bırakmak sorun değildir.
+Ancak konsol çıktınızı karmaşıklaştıracaklar; bu nedenle sorunu gidermeyi bitirdiğinizde bunları kaldırmanızı öneririz.
+:::
 
 ### 3.4. İş akışını dizin dosyalarını doğru şekilde işleyecek şekilde güncelleyin
 
@@ -1072,25 +1089,25 @@ Düzeltme, her BAM dosyasını diziniyle birlikte bir demete paketlemek, ardınd
 
 Bir BAM dosyasının ve dizininin yakından ilişkili kalmasını sağlamanın en basit yolu, bunları dizin görevinden çıkan bir demete birlikte paketlemektir.
 
-!!! note "Not"
-
-    Bir **demet**, bir fonksiyondan birden fazla değer döndürmek için yaygın olarak kullanılan sonlu, sıralı bir öğe listesidir. Demetler, ilişkilerini ve sıralarını korurken süreçler arasında birden fazla girdi veya çıktı iletmek için özellikle yararlıdır.
+:::note[Not]
+Bir **demet**, bir fonksiyondan birden fazla değer döndürmek için yaygın olarak kullanılan sonlu, sıralı bir öğe listesidir. Demetler, ilişkilerini ve sıralarını korurken süreçler arasında birden fazla girdi veya çıktı iletmek için özellikle yararlıdır.
+:::
 
 `modules/samtools_index.nf` dosyasındaki çıktıyı BAM dosyasını içerecek şekilde güncelleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="modules/samtools_index.nf" linenums="14" hl_lines="2"
-        output:
-        tuple path(input_bam), path("${input_bam}.bai")
-    ```
+```nextflow title="modules/samtools_index.nf" showLineNumbers startLineNumber=14 step="Önce"
+    output:
+    path "${input_bam}.bai"
+```
 
-=== "Önce"
+```nextflow {2} title="modules/samtools_index.nf" showLineNumbers startLineNumber=14 step="Sonra"
+    output:
+    tuple path(input_bam), path("${input_bam}.bai")
+```
 
-    ```groovy title="modules/samtools_index.nf" linenums="14"
-        output:
-        path "${input_bam}.bai"
-    ```
+</CodeWalkthrough>
 
 Bu şekilde, her dizin dosyası orijinal BAM dosyasıyla sıkı bir şekilde eşleştirilecek ve dizinleme adımının genel çıktısı dosya çiftleri içeren tek bir kanal olacaktır.
 
@@ -1100,20 +1117,20 @@ Bu şekilde, her dizin dosyası orijinal BAM dosyasıyla sıkı bir şekilde eş
 
 `modules/gatk_haplotypecaller.nf` dosyasını güncelleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="11" hl_lines="2"
-        input:
-        tuple path(input_bam), path(input_bam_index)
-    ```
+```nextflow title="modules/gatk_haplotypecaller.nf" showLineNumbers startLineNumber=11 step="Önce"
+    input:
+    path input_bam
+    path input_bam_index
+```
 
-=== "Önce"
+```nextflow {2} title="modules/gatk_haplotypecaller.nf" showLineNumbers startLineNumber=11 step="Sonra"
+    input:
+    tuple path(input_bam), path(input_bam_index)
+```
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="11"
-        input:
-        path input_bam
-        path input_bam_index
-    ```
+</CodeWalkthrough>
 
 Ardından, iş akışını süreç çağrısında ve yayınlama hedeflerinde yeni demet yapısını yansıtacak şekilde güncellememiz gerekecek.
 
@@ -1123,20 +1140,20 @@ Artık BAM dosyası `SAMTOOLS_INDEX` tarafından çıktılanan kanala paketlendi
 
 `genomics.nf` dosyasındaki çağrıyı güncelleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="42" hl_lines="2"
-        GATK_HAPLOTYPECALLER(
-            SAMTOOLS_INDEX.out,
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=42 step="Önce"
+    GATK_HAPLOTYPECALLER(
+        reads_ch,
+        SAMTOOLS_INDEX.out,
+```
 
-=== "Önce"
+```nextflow {2} title="genomics.nf" showLineNumbers startLineNumber=42 step="Sonra"
+    GATK_HAPLOTYPECALLER(
+        SAMTOOLS_INDEX.out,
+```
 
-    ```groovy title="genomics.nf" linenums="42"
-        GATK_HAPLOTYPECALLER(
-            reads_ch,
-            SAMTOOLS_INDEX.out,
-    ```
+</CodeWalkthrough>
 
 Son olarak, yayınlama hedeflerini yeni çıktı yapısını yansıtacak şekilde güncellememiz gerekiyor.
 
@@ -1144,49 +1161,49 @@ Son olarak, yayınlama hedeflerini yeni çıktı yapısını yansıtacak şekild
 
 SAMTOOLS_INDEX çıktısı artık hem BAM dosyasını hem de dizinini içeren bir demet olduğundan, yayınlama hedefini içeriğini daha iyi yansıtmak için `bam_index`'ten `indexed_bam`'e yeniden adlandırın:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="46" hl_lines="2 8"
-        publish:
-        indexed_bam = SAMTOOLS_INDEX.out
-        vcf = GATK_HAPLOTYPECALLER.out.vcf
-        vcf_idx = GATK_HAPLOTYPECALLER.out.idx
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=46 step="Önce"
+    publish:
+    bam_index = SAMTOOLS_INDEX.out
+    vcf = GATK_HAPLOTYPECALLER.out.vcf
+    vcf_idx = GATK_HAPLOTYPECALLER.out.idx
+}
+
+output {
+    bam_index {
+        path 'bam'
     }
-
-    output {
-        indexed_bam {
-            path 'bam'
-        }
-        vcf {
-            path 'vcf'
-        }
-        vcf_idx {
-            path 'vcf'
-        }
+    vcf {
+        path 'vcf'
     }
-    ```
-
-=== "Önce"
-
-    ```groovy title="genomics.nf" linenums="46"
-        publish:
-        bam_index = SAMTOOLS_INDEX.out
-        vcf = GATK_HAPLOTYPECALLER.out.vcf
-        vcf_idx = GATK_HAPLOTYPECALLER.out.idx
+    vcf_idx {
+        path 'vcf'
     }
+}
+```
 
-    output {
-        bam_index {
-            path 'bam'
-        }
-        vcf {
-            path 'vcf'
-        }
-        vcf_idx {
-            path 'vcf'
-        }
+```nextflow {2,8} title="genomics.nf" showLineNumbers startLineNumber=46 step="Sonra"
+    publish:
+    indexed_bam = SAMTOOLS_INDEX.out
+    vcf = GATK_HAPLOTYPECALLER.out.vcf
+    vcf_idx = GATK_HAPLOTYPECALLER.out.idx
+}
+
+output {
+    indexed_bam {
+        path 'bam'
     }
-    ```
+    vcf {
+        path 'vcf'
+    }
+    vcf_idx {
+        path 'vcf'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 Bu değişikliklerle, BAM ve dizininin birlikte seyahat etmesi garanti edilir; bu nedenle eşleştirme her zaman doğru olacaktır.
 
@@ -1200,58 +1217,64 @@ nextflow run genomics.nf -profile test
 
 Bu sefer (ve her seferinde) her şey doğru şekilde çalışmalıdır:
 
-??? success "Komut çıktısı"
+<details class="success">
+<summary>Komut çıktısı</summary>
 
-    ```console
-     N E X T F L O W   ~  version 26.04.4
+```console
+ N E X T F L O W   ~  version 26.04.4
 
-    Launching `genomics.nf` [furious_hirsch] revision: 4f0b37c75a
+Launching `genomics.nf` [furious_hirsch] revision: 4f0b37c75a
 
-    executor >  local (6)
-    [39/6efc23] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
-    [de/b3744f] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+executor >  local (6)
+[39/6efc23] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
+[de/b3744f] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
 
-    Outputs:
+Outputs:
 
-      /workspaces/training/nf4-science/genomics/results
+  /workspaces/training/nf4-science/genomics/results
 
-      indexed_bam:
-        - [bam/reads_son.bam, bam/reads_son.bam.bai]
-        - [bam/reads_father.bam, bam/reads_father.bam.bai]
-        - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
+  indexed_bam:
+    - [bam/reads_son.bam, bam/reads_son.bam.bai]
+    - [bam/reads_father.bam, bam/reads_father.bam.bai]
+    - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
 
-      vcf:
-        - vcf/reads_mother.bam.vcf
-        - vcf/reads_son.bam.vcf
-        - vcf/reads_father.bam.vcf
+  vcf:
+    - vcf/reads_mother.bam.vcf
+    - vcf/reads_son.bam.vcf
+    - vcf/reads_father.bam.vcf
 
-      vcf_idx:
-        - vcf/reads_mother.bam.vcf.idx
-        - vcf/reads_son.bam.vcf.idx
-        - vcf/reads_father.bam.vcf.idx
-    ```
+  vcf_idx:
+    - vcf/reads_mother.bam.vcf.idx
+    - vcf/reads_son.bam.vcf.idx
+    - vcf/reads_father.bam.vcf.idx
+```
+
+</details>
 
 Sonuçlar dizini artık her örnek için hem BAM hem de BAI dosyalarını (demetten) ve VCF çıktılarını içerir:
 
-??? abstract "Sonuçlar dizini içeriği"
+<details class="abstract">
+<summary>Sonuçlar dizini içeriği</summary>
 
-    ```console
-    results/
-    ├── bam/
-    │   ├── reads_father.bam -> ...
-    │   ├── reads_father.bam.bai -> ...
-    │   ├── reads_mother.bam -> ...
-    │   ├── reads_mother.bam.bai -> ...
-    │   ├── reads_son.bam -> ...
-    │   └── reads_son.bam.bai -> ...
-    └── vcf/
-        ├── reads_father.bam.vcf -> ...
-        ├── reads_father.bam.vcf.idx -> ...
-        ├── reads_mother.bam.vcf -> ...
-        ├── reads_mother.bam.vcf.idx -> ...
-        ├── reads_son.bam.vcf -> ...
-        └── reads_son.bam.vcf.idx -> ...
-    ```
+```console
+results/
+├── bam/
+│   ├── reads_father.bam -> ...
+│   ├── reads_father.bam.bai -> ...
+│   ├── reads_mother.bam -> ...
+│   ├── reads_mother.bam.bai -> ...
+│   ├── reads_son.bam -> ...
+│   └── reads_son.bam.bai -> ...
+└── vcf/
+    ├── reads_father.bam.vcf -> ...
+    ├── reads_father.bam.vcf.idx -> ...
+    ├── reads_mother.bam.vcf -> ...
+    ├── reads_mother.bam.vcf.idx -> ...
+    ├── reads_son.bam.vcf -> ...
+    └── reads_son.bam.vcf.idx -> ...
+```
+
+</details>
 
 İlişkili dosyaları demetlere paketleyerek, doğru dosyaların iş akışı boyunca her zaman birlikte seyahat etmesini sağladık.
 İş akışı artık herhangi bir sayıda örneği güvenilir bir şekilde işler; ancak bunları yapılandırmada tek tek listelemek çok ölçeklenebilir değildir.
@@ -1287,10 +1310,10 @@ NA12882,/workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
 
 Bu CSV dosyası, sütunları adlandıran bir başlık satırı içerir.
 
-!!! warning "Uyarı"
-
-    CSV'deki dosya yolları, ortamınızla eşleşmesi gereken mutlak yollardır.
-    Bunu sağladığımız eğitim ortamında çalıştırmıyorsanız, yolları sisteminize uyacak şekilde güncellemeniz gerekecektir.
+:::caution[Uyarı]
+CSV'deki dosya yolları, ortamınızla eşleşmesi gereken mutlak yollardır.
+Bunu sağladığımız eğitim ortamında çalıştırmıyorsanız, yolları sisteminize uyacak şekilde güncellemeniz gerekecektir.
+:::
 
 ### 4.2. Parametreyi ve test profilini güncelleyin
 
@@ -1298,49 +1321,49 @@ Bu CSV dosyası, sütunları adlandıran bir başlık satırı içerir.
 
 Params bloğundaki tür açıklamasını geri yükleyin (çünkü tekrar tek bir yoldur):
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
-        // Birincil girdi (satır başına bir girdi dosyası içeren dosya)
-        input: Path
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=10 step="Önce"
+    // Birincil girdi (üç örnekten oluşan dizi)
+    input
+```
 
-=== "Önce"
+```nextflow {1-2} title="genomics.nf" showLineNumbers startLineNumber=10 step="Sonra"
+    // Birincil girdi (satır başına bir girdi dosyası içeren dosya)
+    input: Path
+```
 
-    ```groovy title="genomics.nf" linenums="10"
-        // Birincil girdi (üç örnekten oluşan dizi)
-        input
-    ```
+</CodeWalkthrough>
 
 Ardından test profilini metin dosyasına işaret edecek şekilde güncelleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="4" hl_lines="2"
-    test {
-        params.input = "${projectDir}/data/samplesheet.csv"
-        params.reference = "${projectDir}/data/ref/ref.fasta"
-        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-        params.reference_dict = "${projectDir}/data/ref/ref.dict"
-        params.intervals = "${projectDir}/data/ref/intervals.bed"
-    }
-    ```
+```nextflow title="nextflow.config" showLineNumbers startLineNumber=4 step="Önce"
+test {
+    params.input = [
+        "${projectDir}/data/bam/reads_mother.bam",
+        "${projectDir}/data/bam/reads_father.bam",
+        "${projectDir}/data/bam/reads_son.bam"
+    ]
+    params.reference = "${projectDir}/data/ref/ref.fasta"
+    params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+    params.reference_dict = "${projectDir}/data/ref/ref.dict"
+    params.intervals = "${projectDir}/data/ref/intervals.bed"
+}
+```
 
-=== "Önce"
+```nextflow {2} title="nextflow.config" showLineNumbers startLineNumber=4 step="Sonra"
+test {
+    params.input = "${projectDir}/data/samplesheet.csv"
+    params.reference = "${projectDir}/data/ref/ref.fasta"
+    params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+    params.reference_dict = "${projectDir}/data/ref/ref.dict"
+    params.intervals = "${projectDir}/data/ref/intervals.bed"
+}
+```
 
-    ```groovy title="nextflow.config" linenums="4"
-    test {
-        params.input = [
-            "${projectDir}/data/bam/reads_mother.bam",
-            "${projectDir}/data/bam/reads_father.bam",
-            "${projectDir}/data/bam/reads_son.bam"
-        ]
-        params.reference = "${projectDir}/data/ref/ref.fasta"
-        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-        params.reference_dict = "${projectDir}/data/ref/ref.dict"
-        params.intervals = "${projectDir}/data/ref/intervals.bed"
-    }
-    ```
+</CodeWalkthrough>
 
 Dosya listesi artık kodda hiç yaşamıyor; bu, doğru yönde büyük bir adımdır.
 
@@ -1349,30 +1372,30 @@ Dosya listesi artık kodda hiç yaşamıyor; bu, doğru yönde büyük bir adım
 Şu anda, girdi kanal fabrikamız kendisine verdiğimiz tüm dosyaları dizinleme sürecine beslemek istediğimiz veri girdileri olarak ele alıyor.
 Şimdi ona dosya yollarını listeleyen bir dosya verdiğimizden, içerdiği dosya yollarını veri girdileri olarak ele alacak şekilde davranışını değiştirmemiz gerekiyor.
 
-Bunu [Hello Nextflow'un Bölüm 2](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file)'sinde kullandığımız aynı kalıbı kullanarak yapabiliriz: dosyayı ayrıştırmak için [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) operatörünü uygulayarak, ardından her satırdan dosya yolunu çıkarmak için bir `map` işlemi.
+Bunu [Hello Nextflow'un Bölüm 2](../../hello_nextflow/02_hello_channels.mdx#42-dosyayı-ayrıştırmak-için-splitcsv-operatörünü-kullanın)'sinde kullandığımız aynı kalıbı kullanarak yapabiliriz: dosyayı ayrıştırmak için [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) operatörünü uygulayarak, ardından her satırdan dosya yolunu çıkarmak için bir `map` işlemi.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="24" hl_lines="1-4"
-        // Girdi dosya yollarını listeleyen bir CSV dosyasından girdi kanalı oluştur
-        reads_ch = channel.fromPath(params.input)
-                .splitCsv(header: true)
-                .map { row -> file(row.reads_bam) }
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=24 step="Önce"
+    // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
+    reads_ch = channel.fromPath(params.input)
+```
 
-=== "Önce"
+```nextflow {1-4} title="genomics.nf" showLineNumbers startLineNumber=24 step="Sonra"
+    // Girdi dosya yollarını listeleyen bir CSV dosyasından girdi kanalı oluştur
+    reads_ch = channel.fromPath(params.input)
+            .splitCsv(header: true)
+            .map { row -> file(row.reads_bam) }
+```
 
-    ```groovy title="genomics.nf" linenums="24"
-        // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
-        reads_ch = channel.fromPath(params.input)
-    ```
+</CodeWalkthrough>
 
-Hello Nextflow kursunda karşılaştığınıza kıyasla yeni olan bir şey, bu CSV'nin bir başlık satırına sahip olmasıdır; bu nedenle `splitCsv()` çağrısına `#!groovy header: true` ekliyoruz.
-Bu, `map` işleminde sütunlara ada göre başvurmamızı sağlar: `#!groovy row.reads_bam`, her satırın `reads_bam` sütunundan dosya yolunu çıkarır.
+Hello Nextflow kursunda karşılaştığınıza kıyasla yeni olan bir şey, bu CSV'nin bir başlık satırına sahip olmasıdır; bu nedenle `splitCsv()` çağrısına `header: true{:nextflow}` ekliyoruz.
+Bu, `map` işleminde sütunlara ada göre başvurmamızı sağlar: `row.reads_bam{:nextflow}`, her satırın `reads_bam` sütunundan dosya yolunu çıkarır.
 
-!!! tip "İpucu"
-
-    Operatörlerin burada ne yaptığını anladığınızdan emin değilseniz, bu, bunları uygulamadan önce ve sonra kanal içeriğinin nasıl göründüğüne bakmak için `.view()` operatörünü kullanmak için başka bir harika fırsattır.
+:::tip[İpucu]
+Operatörlerin burada ne yaptığını anladığınızdan emin değilseniz, bu, bunları uygulamadan önce ve sonra kanal içeriğinin nasıl göründüğüne bakmak için `.view()` operatörünü kullanmak için başka bir harika fırsattır.
+:::
 
 ### 4.4. İş akışını çalıştırın
 
@@ -1380,38 +1403,34 @@ Bu, `map` işleminde sütunlara ada göre başvurmamızı sağlar: `#!groovy row
 
 ```bash
 nextflow run genomics.nf -profile test
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `genomics.nf` [spontaneous_descartes] revision: aa5d4a64f3
+
+executor >  local (6)
+[f4/553469] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
+[89/83e197] GATK_HAPLOTYPECALLER (1) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/genomics/results
+
+  indexed_bam:
+    - [bam/reads_father.bam, bam/reads_father.bam.bai]
+    - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
+    - [bam/reads_son.bam, bam/reads_son.bam.bai]
+
+  vcf:
+    - vcf/reads_son.bam.vcf
+    - vcf/reads_mother.bam.vcf
+    - vcf/reads_father.bam.vcf
+
+  vcf_idx:
+    - vcf/reads_son.bam.vcf.idx
+    - vcf/reads_mother.bam.vcf.idx
+    - vcf/reads_father.bam.vcf.idx
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `genomics.nf` [spontaneous_descartes] revision: aa5d4a64f3
-
-    executor >  local (6)
-    [f4/553469] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
-    [89/83e197] GATK_HAPLOTYPECALLER (1) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/genomics/results
-
-      indexed_bam:
-        - [bam/reads_father.bam, bam/reads_father.bam.bai]
-        - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
-        - [bam/reads_son.bam, bam/reads_son.bam.bai]
-
-      vcf:
-        - vcf/reads_son.bam.vcf
-        - vcf/reads_mother.bam.vcf
-        - vcf/reads_father.bam.vcf
-
-      vcf_idx:
-        - vcf/reads_son.bam.vcf.idx
-        - vcf/reads_mother.bam.vcf.idx
-        - vcf/reads_father.bam.vcf.idx
-    ```
 
 Bu, daha öncekiyle aynı sonucu üretmelidir. Basit varyant çağırma iş akışımız artık istediğimiz tüm temel özelliklere sahip.
 
@@ -1425,4 +1444,4 @@ Daha genel olarak, genomik dosya formatlarının ve araç gereksinimlerinin öze
 
 Bir mola verin! Bu çok şeydi.
 
-Kendinizi tazelenmiş hissettiğinizde, [Bölüm 3](./03_joint_calling.md)'e geçin; orada bu basit örnek başına varyant çağırma iş akışını verilere ortak varyant çağırma uygulamak için nasıl dönüştüreceğinizi öğreneceksiniz.
+Kendinizi tazelenmiş hissettiğinizde, [Bölüm 3](./03_joint_calling.mdx)'e geçin; orada bu basit örnek başına varyant çağırma iş akışını verilere ortak varyant çağırma uygulamak için nasıl dönüştüreceğinizi öğreneceksiniz.

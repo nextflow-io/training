@@ -1,6 +1,9 @@
-# भाग 2: If - Else
+---
+title: 'भाग 2: If - Else'
+description: '[TODO]'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 [TODO]
 
@@ -41,17 +44,17 @@
 
 `quote` कंटेनर इमेज के लिए, तुम या तो पिछली स्ट्रेच एक्सरसाइज़ में खुद बनाई गई इमेज का उपयोग कर सकते हो या Seqera Containers से प्राप्त इमेज का उपयोग कर सकते हो।
 
-!!! Hint "संकेत"
-
-    तुम्हारे getQuote प्रोसेस के `script` ब्लॉक के लिए एक अच्छा विकल्प यह हो सकता है:
-        ```groovy
-        script:
-            def safe_author = author.tokenize(' ').join('-')
-            """
-            quote "$author" > quote-${safe_author}.txt
-            echo "-${author}" >> quote-${safe_author}.txt
-            """
-        ```
+:::note[संकेत]
+तुम्हारे getQuote प्रोसेस के `script` ब्लॉक के लिए एक अच्छा विकल्प यह हो सकता है:
+    ```nextflow
+    script:
+        def safe_author = author.tokenize(' ').join('-')
+        """
+        quote "$author" > quote-${safe_author}.txt
+        echo "-${author}" >> quote-${safe_author}.txt
+        """
+    ```
+:::
 
 तुम इस एक्सरसाइज़ का समाधान `containers/solutions/hello-containers-4.1.nf` में पा सकते हो।
 
@@ -60,7 +63,7 @@
 अपनी पाइपलाइन में कुछ ब्रांचिंग लॉजिक जोड़ें ताकि यह `quote` और `sayHello` दोनों के लिए इच्छित इनपुट स्वीकार कर सके।
 यहाँ Nextflow वर्कफ़्लो में `if` स्टेटमेंट का उपयोग करने का एक उदाहरण है:
 
-```groovy title="hello-containers.nf"
+```nextflow title="hello-containers.nf"
 workflow {
     if (params.quote) {
         ...
@@ -72,9 +75,9 @@ workflow {
 }
 ```
 
-!!! Hint "संकेत"
-
-    तुम किसी प्रोसेस के आउटपुट चैनल को एक नाम असाइन करने के लिए `new_ch = processName.out` का उपयोग कर सकते हो।
+:::note[संकेत]
+तुम किसी प्रोसेस के आउटपुट चैनल को एक नाम असाइन करने के लिए `new_ch = processName.out` का उपयोग कर सकते हो।
+:::
 
 तुम इस एक्सरसाइज़ का समाधान `containers/solutions/hello-containers-4.2.nf` में पा सकते हो।
 

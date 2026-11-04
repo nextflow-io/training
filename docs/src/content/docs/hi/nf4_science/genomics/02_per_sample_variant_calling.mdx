@@ -1,6 +1,9 @@
-# भाग 2: प्रति-नमूना वेरिएंट कॉलिंग
+---
+title: 'भाग 2: प्रति-नमूना वेरिएंट कॉलिंग'
+description: भाग 1 में, तुमने Samtools और GATK कमांड को उनके संबंधित कंटेनर में मैन्युअल रूप से टेस्ट किया।
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 भाग 1 में, तुमने Samtools और GATK कमांड को उनके संबंधित कंटेनर में मैन्युअल रूप से टेस्ट किया।
 अब, हम उन्हीं कमांड को एक Nextflow workflow में wrap करने जा रहे हैं।
@@ -12,84 +15,85 @@
 1. [Samtools](https://www.htslib.org/) का उपयोग करके प्रत्येक BAM इनपुट फ़ाइल के लिए एक इंडेक्स फ़ाइल जेनरेट करना
 2. प्रत्येक BAM इनपुट फ़ाइल पर GATK HaplotypeCaller चलाना ताकि VCF (Variant Call Format) में प्रति-नमूना वेरिएंट कॉल जेनरेट हो सकें
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
-</figure>
+![](../../../nf4_science/genomics/img/hello-gatk-1.excalidraw.svg)
 
-यह [भाग 1: Method overview](./01_method.md#1-per-sample-variant-calling) के पहले सेक्शन के चरणों को automate करता है, जहाँ तुमने इन कमांड को उनके कंटेनर में मैन्युअल रूप से चलाया था।
+यह [भाग 1: Method overview](./01_method.mdx#1-प्रति-नमूना-वेरिएंट-कॉलिंग) के पहले सेक्शन के चरणों को automate करता है, जहाँ तुमने इन कमांड को उनके कंटेनर में मैन्युअल रूप से चलाया था।
 
 शुरुआती बिंदु के रूप में, हम तुम्हें एक workflow फ़ाइल, `genomics.nf`, प्रदान करते हैं, जो workflow के मुख्य भागों की रूपरेखा देती है, साथ ही दो मॉड्यूल फ़ाइलें, `samtools_index.nf` और `gatk_haplotypecaller.nf`, जो प्रत्येक प्रोसेस की संरचना की रूपरेखा देती हैं।
 
-??? full-code "Scaffold फ़ाइलें"
+<details class="full-code">
+<summary>Scaffold फ़ाइलें</summary>
 
-    ```groovy title="genomics.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="genomics.nf"
+#!/usr/bin/env nextflow
 
-    // Module INCLUDE statements
+// Module INCLUDE statements
 
-    /*
-     * Pipeline parameters
-     */
+/*
+ * Pipeline parameters
+ */
 
-    // Primary input
+// Primary input
 
-    workflow {
+workflow {
 
-        main:
-        // Create input channel
+    main:
+    // Create input channel
 
-        // Call processes
+    // Call processes
 
-        publish:
-        // Declare outputs to publish
-    }
+    publish:
+    // Declare outputs to publish
+}
 
-    output {
-        // Configure publish targets
-    }
-    ```
+output {
+    // Configure publish targets
+}
+```
 
-    ```groovy title="modules/samtools_index.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/samtools_index.nf"
+#!/usr/bin/env nextflow
 
-    /*
-     * Generate BAM index file
-     */
-    process SAMTOOLS_INDEX {
+/*
+ * Generate BAM index file
+ */
+process SAMTOOLS_INDEX {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-    ```groovy title="modules/gatk_haplotypecaller.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/gatk_haplotypecaller.nf"
+#!/usr/bin/env nextflow
 
-    /*
-     * Call variants with GATK HaplotypeCaller
-     */
-    process GATK_HAPLOTYPECALLER {
+/*
+ * Call variants with GATK HaplotypeCaller
+ */
+process GATK_HAPLOTYPECALLER {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
+
+</details>
 
 ये फ़ाइलें कार्यात्मक नहीं हैं; उनका उद्देश्य केवल scaffolds के रूप में काम करना है जिन्हें तुम कोड के दिलचस्प भागों से भर सकते हो।
 
@@ -108,10 +112,10 @@
 
 प्रत्येक चरण workflow विकास के एक विशिष्ट पहलू पर केंद्रित है।
 
-!!! tip "सुझाव"
-
-    सुनिश्चित करो कि तुम सही working डायरेक्टरी में हो:
-    `cd /workspaces/training/nf4-science/genomics`
+:::tip[सुझाव]
+सुनिश्चित करो कि तुम सही working डायरेक्टरी में हो:
+`cd /workspaces/training/nf4-science/genomics`
+:::
 
 ---
 
@@ -119,7 +123,7 @@
 
 यह पहला चरण मूल बातों पर केंद्रित है: एक BAM फ़ाइल लोड करना और उसके लिए एक इंडेक्स जेनरेट करना।
 
-[भाग 1](01_method.md) से `samtools index` कमांड याद करो:
+[भाग 1](01_method.mdx) से `samtools index` कमांड याद करो:
 
 ```bash
 samtools index '<input_bam>'
@@ -142,27 +146,27 @@ samtools index '<input_bam>'
 
 मुख्य workflow फ़ाइल `genomics.nf` में, `Pipeline parameters` सेक्शन के अंतर्गत, `input` नामक एक CLI पैरामीटर घोषित करो।
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="5" hl_lines="4-7"
-    /*
-     * Pipeline parameters
-     */
-    params {
-        // Primary input
-        input: Path
-    }
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=5 step="पहले"
+/*
+ * Pipeline parameters
+ */
 
-=== "पहले"
+// Primary input
+```
 
-    ```groovy title="genomics.nf" linenums="5"
-    /*
-     * Pipeline parameters
-     */
-
+```nextflow {4-7} title="genomics.nf" showLineNumbers startLineNumber=5 step="बाद में"
+/*
+ * Pipeline parameters
+ */
+params {
     // Primary input
-    ```
+    input: Path
+}
+```
+
+</CodeWalkthrough>
 
 यह CLI पैरामीटर सेट अप करता है, लेकिन हम विकास के दौरान हर बार workflow चलाते समय फ़ाइल पथ टाइप नहीं करना चाहते।
 डिफ़ॉल्ट मान प्रदान करने के लिए कई विकल्प हैं; यहाँ हम एक test profile का उपयोग करते हैं।
@@ -170,53 +174,53 @@ samtools index '<input_bam>'
 #### 1.1.2. `nextflow.config` में डिफ़ॉल्ट मान के साथ एक test profile बनाओ
 
 एक test profile कमांड लाइन पर इनपुट निर्दिष्ट किए बिना workflow को आज़माने के लिए सुविधाजनक डिफ़ॉल्ट मान प्रदान करता है।
-यह Nextflow ecosystem में एक सामान्य परंपरा है (अधिक विवरण के लिए [Hello Config](../../hello_nextflow/06_hello_config.md) देखो)।
+यह Nextflow ecosystem में एक सामान्य परंपरा है (अधिक विवरण के लिए [Hello Config](../../hello_nextflow/06_hello_config.mdx) देखो)।
 
 `nextflow.config` में एक `profiles` ब्लॉक जोड़ो जिसमें एक `test` profile हो जो `input` पैरामीटर को test BAM फ़ाइलों में से एक पर सेट करता है।
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="3-7"
-    docker.enabled = true
+```nextflow title="nextflow.config" showLineNumbers step="पहले"
+docker.enabled = true
+```
 
-    profiles {
-        test {
-            params.input = "${projectDir}/data/bam/reads_mother.bam"
-        }
+```nextflow {3-7} title="nextflow.config" showLineNumbers step="बाद में"
+docker.enabled = true
+
+profiles {
+    test {
+        params.input = "${projectDir}/data/bam/reads_mother.bam"
     }
-    ```
+}
+```
 
-=== "पहले"
-
-    ```groovy title="nextflow.config" linenums="1"
-    docker.enabled = true
-    ```
+</CodeWalkthrough>
 
 यहाँ, हम `${projectDir}` का उपयोग कर रहे हैं, एक built-in Nextflow वेरिएबल जो उस डायरेक्टरी की ओर इशारा करता है जहाँ workflow स्क्रिप्ट स्थित है।
 यह absolute paths को hardcode किए बिना डेटा फ़ाइलों और अन्य संसाधनों को संदर्भित करना आसान बनाता है।
 
 #### 1.1.3. इनपुट चैनल सेट अप करो
 
-workflow ब्लॉक में, `.fromPath` चैनल फ़ैक्टरी का उपयोग करके पैरामीटर मान से एक इनपुट चैनल बनाओ ([Hello Channels](../../hello_nextflow/02_hello_channels.md) में उपयोग किए गए अनुसार)।
+workflow ब्लॉक में, `.fromPath` चैनल फ़ैक्टरी का उपयोग करके पैरामीटर मान से एक इनपुट चैनल बनाओ ([Hello Channels](../../hello_nextflow/02_hello_channels.mdx) में उपयोग किए गए अनुसार)।
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="13" hl_lines="4-5"
-    workflow {
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=13 step="पहले"
+workflow {
 
-        main:
-        // Create input channel (single file via CLI parameter)
-        reads_ch = channel.fromPath(params.input)
-    ```
+    main:
+    // Create input channel
+```
 
-=== "पहले"
+```nextflow {4-5} title="genomics.nf" showLineNumbers startLineNumber=13 step="बाद में"
+workflow {
 
-    ```groovy title="genomics.nf" linenums="13"
-    workflow {
+    main:
+    // Create input channel (single file via CLI parameter)
+    reads_ch = channel.fromPath(params.input)
+```
 
-        main:
-        // Create input channel
-    ```
+</CodeWalkthrough>
 
 अब, हमें इस इनपुट पर indexing चलाने के लिए प्रोसेस बनाना होगा।
 
@@ -227,57 +231,57 @@ workflow ब्लॉक में, `.fromPath` चैनल फ़ैक्ट�
 #### 1.2.1. indexing प्रोसेस के लिए मॉड्यूल भरो
 
 `modules/samtools_index.nf` खोलो और प्रोसेस परिभाषा की रूपरेखा की जाँच करो।
-तुम्हें मुख्य संरचनात्मक तत्वों को पहचानना चाहिए; यदि नहीं, तो refresher के लिए [Hello Nextflow](../../hello_nextflow/01_hello_world.md) पढ़ने पर विचार करो।
+तुम्हें मुख्य संरचनात्मक तत्वों को पहचानना चाहिए; यदि नहीं, तो refresher के लिए [Hello Nextflow](../../hello_nextflow/01_hello_world.mdx) पढ़ने पर विचार करो।
 
 आगे बढ़ो और ऊपर दी गई जानकारी का उपयोग करके प्रोसेस परिभाषा को स्वयं भरो, फिर नीचे "बाद में" टैब में समाधान के विरुद्ध अपने काम की जाँच करो।
 
-=== "पहले"
+<CodeWalkthrough>
 
-    ```groovy title="modules/samtools_index.nf" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/samtools_index.nf" showLineNumbers step="पहले"
+#!/usr/bin/env nextflow
 
-    /*
-     * Generate BAM index file
-     */
-    process SAMTOOLS_INDEX {
+/*
+ * Generate BAM index file
+ */
+process SAMTOOLS_INDEX {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-=== "बाद में"
+```nextflow {8,11,14,18} title="modules/samtools_index.nf" showLineNumbers step="बाद में"
+#!/usr/bin/env nextflow
 
-    ```groovy title="modules/samtools_index.nf" linenums="1" hl_lines="8 11 14 18"
-    #!/usr/bin/env nextflow
+/*
+ * Generate BAM index file
+ */
+process SAMTOOLS_INDEX {
 
-    /*
-     * Generate BAM index file
-     */
-    process SAMTOOLS_INDEX {
+    container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
 
-        container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
+    input:
+    path input_bam
 
-        input:
-        path input_bam
+    output:
+    path "${input_bam}.bai"
 
-        output:
-        path "${input_bam}.bai"
+    script:
+    """
+    samtools index '$input_bam'
+    """
+}
+```
 
-        script:
-        """
-        samtools index '$input_bam'
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 एक बार जब तुम इसे पूरा कर लो, तो प्रोसेस पूर्ण हो जाता है।
 इसे workflow में उपयोग करने के लिए, तुम्हें मॉड्यूल import करना होगा और एक प्रोसेस कॉल जोड़नी होगी।
@@ -286,18 +290,18 @@ workflow ब्लॉक में, `.fromPath` चैनल फ़ैक्ट�
 
 `genomics.nf` में, प्रोसेस को workflow के लिए उपलब्ध कराने के लिए एक `include` statement जोड़ो:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="3" hl_lines="2"
-    // Module INCLUDE statements
-    include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=3 step="पहले"
+// Module INCLUDE statements
+```
 
-=== "पहले"
+```nextflow {2} title="genomics.nf" showLineNumbers startLineNumber=3 step="बाद में"
+// Module INCLUDE statements
+include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
+```
 
-    ```groovy title="genomics.nf" linenums="3"
-    // Module INCLUDE statements
-    ```
+</CodeWalkthrough>
 
 प्रोसेस अब workflow scope में उपलब्ध है।
 
@@ -305,30 +309,30 @@ workflow ब्लॉक में, `.fromPath` चैनल फ़ैक्ट�
 
 अब, workflow ब्लॉक में `SAMTOOLS_INDEX` के लिए एक कॉल जोड़ें, इनपुट चैनल को argument के रूप में पास करते हुए।
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="14" hl_lines="7-8"
-    workflow {
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=14 step="पहले"
+workflow {
 
-        main:
-        // Create input channel (single file via CLI parameter)
-        reads_ch = channel.fromPath(params.input)
+    main:
+    // Create input channel (single file via CLI parameter)
+    reads_ch = channel.fromPath(params.input)
 
-        // Create index file for input BAM file
-        SAMTOOLS_INDEX(reads_ch)
-    ```
+    // Call processes
+```
 
-=== "पहले"
+```nextflow {7-8} title="genomics.nf" showLineNumbers startLineNumber=14 step="बाद में"
+workflow {
 
-    ```groovy title="genomics.nf" linenums="14"
-    workflow {
+    main:
+    // Create input channel (single file via CLI parameter)
+    reads_ch = channel.fromPath(params.input)
 
-        main:
-        // Create input channel (single file via CLI parameter)
-        reads_ch = channel.fromPath(params.input)
+    // Create index file for input BAM file
+    SAMTOOLS_INDEX(reads_ch)
+```
 
-        // Call processes
-    ```
+</CodeWalkthrough>
 
 workflow अब इनपुट लोड करता है और उस पर indexing प्रोसेस चलाता है।
 इसके बाद, हमें कॉन्फ़िगर करना होगा कि आउटपुट कैसे publish किया जाए।
@@ -342,21 +346,21 @@ workflow अब इनपुट लोड करता है और उस प�
 workflow ब्लॉक के अंदर `publish:` सेक्शन घोषित करता है कि कौन से प्रोसेस आउटपुट publish किए जाने चाहिए।
 `SAMTOOLS_INDEX` के आउटपुट को `bam_index` नामक एक named target को assign करो।
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="22" hl_lines="2"
-        publish:
-        bam_index = SAMTOOLS_INDEX.out
-    }
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=22 step="पहले"
+    publish:
+    // Declare outputs to publish
+}
+```
 
-=== "पहले"
+```nextflow {2} title="genomics.nf" showLineNumbers startLineNumber=22 step="बाद में"
+    publish:
+    bam_index = SAMTOOLS_INDEX.out
+}
+```
 
-    ```groovy title="genomics.nf" linenums="22"
-        publish:
-        // Declare outputs to publish
-    }
-    ```
+</CodeWalkthrough>
 
 अब, हमें Nextflow को बताना होगा कि published आउटपुट कहाँ रखना है।
 
@@ -365,29 +369,29 @@ workflow ब्लॉक के अंदर `publish:` सेक्शन घ�
 `output {}` ब्लॉक workflow के बाहर बैठता है और निर्दिष्ट करता है कि प्रत्येक named target कहाँ publish किया जाता है।
 चलो `bam_index` के लिए एक target जोड़ें जो `bam/` subdirectory में publish करता है।
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="26" hl_lines="2-4"
-    output {
-        bam_index {
-            path 'bam'
-        }
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=26 step="पहले"
+output {
+    // Configure publish targets
+}
+```
+
+```nextflow {2-4} title="genomics.nf" showLineNumbers startLineNumber=26 step="बाद में"
+output {
+    bam_index {
+        path 'bam'
     }
-    ```
+}
+```
 
-=== "पहले"
+</CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="26"
-    output {
-        // Configure publish targets
-    }
-    ```
-
-!!! note "नोट"
-
-    डिफ़ॉल्ट रूप से, Nextflow आउटपुट फ़ाइलों को symbolic links के रूप में publish करता है, जो अनावश्यक duplication से बचता है।
-    भले ही हम यहाँ जो डेटा फ़ाइलें उपयोग कर रहे हैं वे बहुत छोटी हैं, genomics में वे बहुत बड़ी हो सकती हैं।
-    जब तुम अपनी `work` डायरेक्टरी को साफ़ करते हो तो Symlinks टूट जाएंगे, इसलिए production workflows के लिए तुम डिफ़ॉल्ट publish mode को `'copy'` में override करना चाह सकते हो।
+:::note[नोट]
+डिफ़ॉल्ट रूप से, Nextflow आउटपुट फ़ाइलों को symbolic links के रूप में publish करता है, जो अनावश्यक duplication से बचता है।
+भले ही हम यहाँ जो डेटा फ़ाइलें उपयोग कर रहे हैं वे बहुत छोटी हैं, genomics में वे बहुत बड़ी हो सकती हैं।
+जब तुम अपनी `work` डायरेक्टरी को साफ़ करते हो तो Symlinks टूट जाएंगे, इसलिए production workflows के लिए तुम डिफ़ॉल्ट publish mode को `'copy'` में override करना चाह सकते हो।
+:::
 
 ### 1.4. workflow चलाओ
 
@@ -397,43 +401,45 @@ workflow ब्लॉक के अंदर `publish:` सेक्शन घ�
 
 ```bash
 nextflow run genomics.nf -profile test
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `genomics.nf` [elegant_ochoa] revision: fd242ec7cf
+
+executor >  local (1)
+[ad/b2c9bf] SAMTOOLS_INDEX (1) | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/genomics/results
+
+  bam_index:
+    - bam/reads_mother.bam.bai
 ```
-
-??? success "कमांड आउटपुट"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `genomics.nf` [elegant_ochoa] revision: fd242ec7cf
-
-    executor >  local (1)
-    [ad/b2c9bf] SAMTOOLS_INDEX (1) | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/genomics/results
-
-      bam_index:
-        - bam/reads_mother.bam.bai
-    ```
 
 तुम जाँच सकते हो कि इंडेक्स फ़ाइल सही तरीके से जेनरेट हुई है या नहीं work डायरेक्टरी या results डायरेक्टरी में देखकर।
 
-??? abstract "Work डायरेक्टरी सामग्री"
+<details class="abstract">
+<summary>Work डायरेक्टरी सामग्री</summary>
 
-    ```console
-    work/ad/b2c9bf4af404ef7cf63e0aa3887f65
-    ├── reads_mother.bam -> /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
-    └── reads_mother.bam.bai
-    ```
+```console
+work/ad/b2c9bf4af404ef7cf63e0aa3887f65
+├── reads_mother.bam -> /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
+└── reads_mother.bam.bai
+```
 
-??? abstract "Results डायरेक्टरी सामग्री"
+</details>
 
-    ```console
-    results/
-    └── bam/
-        └── reads_mother.bam.bai -> ...
-    ```
+<details class="abstract">
+<summary>Results डायरेक्टरी सामग्री</summary>
+
+```console
+results/
+└── bam/
+    └── reads_mother.bam.bai -> ...
+```
+
+</details>
 
 वहाँ है!
 
@@ -451,7 +457,7 @@ nextflow run genomics.nf -profile test
 
 अब जब हमारे पास अपनी इनपुट फ़ाइल के लिए एक इंडेक्स है, तो हम वेरिएंट कॉलिंग चरण सेट अप करने के लिए आगे बढ़ सकते हैं।
 
-[भाग 1](01_method.md) से `gatk HaplotypeCaller` कमांड याद करो:
+[भाग 1](01_method.mdx) से `gatk HaplotypeCaller` कमांड याद करो:
 
 ```bash
 gatk HaplotypeCaller \
@@ -480,29 +486,29 @@ gatk HaplotypeCaller \
 
 चूंकि हमारा नया प्रोसेस कुछ अतिरिक्त फ़ाइलों की अपेक्षा करता है, `genomics.nf` में `Pipeline parameters` सेक्शन के अंतर्गत उनके लिए पैरामीटर घोषणाएँ जोड़ो:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="9" hl_lines="5-9"
-    params {
-        // Primary input
-        input: Path
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=9 step="पहले"
+params {
+    // Primary input
+    input: Path
+}
+```
 
-        // Accessory files
-        reference: Path
-        reference_index: Path
-        reference_dict: Path
-        intervals: Path
-    }
-    ```
+```nextflow {5-9} title="genomics.nf" showLineNumbers startLineNumber=9 step="बाद में"
+params {
+    // Primary input
+    input: Path
 
-=== "पहले"
+    // Accessory files
+    reference: Path
+    reference_index: Path
+    reference_dict: Path
+    intervals: Path
+}
+```
 
-    ```groovy title="genomics.nf" linenums="9"
-    params {
-        // Primary input
-        input: Path
-    }
-    ```
+</CodeWalkthrough>
 
 पहले की तरह, हम inline के बजाय test profile के माध्यम से डिफ़ॉल्ट मान प्रदान करेंगे।
 
@@ -510,25 +516,25 @@ gatk HaplotypeCaller \
 
 जैसा कि हमने सेक्शन 1.1.2 में `input` के लिए किया था, `nextflow.config` में test profile में accessory फ़ाइलों के लिए डिफ़ॉल्ट मान जोड़ो:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="4" hl_lines="3-6"
-    test {
-        params.input = "${projectDir}/data/bam/reads_mother.bam"
-        params.reference = "${projectDir}/data/ref/ref.fasta"
-        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-        params.reference_dict = "${projectDir}/data/ref/ref.dict"
-        params.intervals = "${projectDir}/data/ref/intervals.bed"
-    }
-    ```
+```nextflow title="nextflow.config" showLineNumbers startLineNumber=4 step="पहले"
+test {
+    params.input = "${projectDir}/data/bam/reads_mother.bam"
+}
+```
 
-=== "पहले"
+```nextflow {3-6} title="nextflow.config" showLineNumbers startLineNumber=4 step="बाद में"
+test {
+    params.input = "${projectDir}/data/bam/reads_mother.bam"
+    params.reference = "${projectDir}/data/ref/ref.fasta"
+    params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+    params.reference_dict = "${projectDir}/data/ref/ref.dict"
+    params.intervals = "${projectDir}/data/ref/intervals.bed"
+}
+```
 
-    ```groovy title="nextflow.config" linenums="4"
-    test {
-        params.input = "${projectDir}/data/bam/reads_mother.bam"
-    }
-    ```
+</CodeWalkthrough>
 
 अब, हमें वेरिएबल बनाने होंगे जो workflow में उपयोग के लिए इन फ़ाइल पथों को लोड करते हैं।
 
@@ -536,40 +542,40 @@ gatk HaplotypeCaller \
 
 workflow ब्लॉक के अंदर accessory फ़ाइल पथों के लिए वेरिएबल जोड़ो:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="21" hl_lines="7-11"
-    workflow {
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=21 step="पहले"
+workflow {
 
-        main:
-        // Create input channel (single file via CLI parameter)
-        reads_ch = channel.fromPath(params.input)
+    main:
+    // Create input channel (single file via CLI parameter)
+    reads_ch = channel.fromPath(params.input)
 
-        // Load the file paths for the accessory files (reference and intervals)
-        ref_file        = file(params.reference)
-        ref_index_file  = file(params.reference_index)
-        ref_dict_file   = file(params.reference_dict)
-        intervals_file  = file(params.intervals)
+    // Create index file for input BAM file
+    SAMTOOLS_INDEX(reads_ch)
+```
 
-        // Create index file for input BAM file
-        SAMTOOLS_INDEX(reads_ch)
-    ```
+```nextflow {7-11} title="genomics.nf" showLineNumbers startLineNumber=21 step="बाद में"
+workflow {
 
-=== "पहले"
+    main:
+    // Create input channel (single file via CLI parameter)
+    reads_ch = channel.fromPath(params.input)
 
-    ```groovy title="genomics.nf" linenums="21"
-    workflow {
+    // Load the file paths for the accessory files (reference and intervals)
+    ref_file        = file(params.reference)
+    ref_index_file  = file(params.reference_index)
+    ref_dict_file   = file(params.reference_dict)
+    intervals_file  = file(params.intervals)
 
-        main:
-        // Create input channel (single file via CLI parameter)
-        reads_ch = channel.fromPath(params.input)
+    // Create index file for input BAM file
+    SAMTOOLS_INDEX(reads_ch)
+```
 
-        // Create index file for input BAM file
-        SAMTOOLS_INDEX(reads_ch)
-    ```
+</CodeWalkthrough>
 
 `file()` सिंटैक्स Nextflow को स्पष्ट रूप से बताता है कि इन इनपुट को फ़ाइल पथों के रूप में हैंडल करना है।
-तुम Side Quest [Working with files](../../side_quests/working_with_files/index.md) में इसके बारे में अधिक जान सकते हो।
+तुम Side Quest [Working with files](../../side_quests/working_with_files/index.mdx) में इसके बारे में अधिक जान सकते हो।
 
 ### 2.2. वेरिएंट कॉलिंग प्रोसेस लिखो और workflow में उसे कॉल करो
 
@@ -581,63 +587,63 @@ workflow ब्लॉक के अंदर accessory फ़ाइल पथो
 
 आगे बढ़ो और ऊपर दी गई जानकारी का उपयोग करके प्रोसेस परिभाषा को स्वयं भरो, फिर नीचे "बाद में" टैब में समाधान के विरुद्ध अपने काम की जाँच करो।
 
-=== "पहले"
+<CodeWalkthrough>
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/gatk_haplotypecaller.nf" showLineNumbers step="पहले"
+#!/usr/bin/env nextflow
 
-    /*
-     * Call variants with GATK HaplotypeCaller
-     */
-    process GATK_HAPLOTYPECALLER {
+/*
+ * Call variants with GATK HaplotypeCaller
+ */
+process GATK_HAPLOTYPECALLER {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-=== "बाद में"
+```nextflow {8,11-16,19-20,24-28} title="modules/gatk_haplotypecaller.nf" showLineNumbers step="बाद में"
+#!/usr/bin/env nextflow
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="1" hl_lines="8 11-16 19-20 24-28"
-    #!/usr/bin/env nextflow
+/*
+ * Call variants with GATK HaplotypeCaller
+ */
+process GATK_HAPLOTYPECALLER {
 
-    /*
-     * Call variants with GATK HaplotypeCaller
-     */
-    process GATK_HAPLOTYPECALLER {
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-        container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+    input:
+    path input_bam
+    path input_bam_index
+    path ref_fasta
+    path ref_index
+    path ref_dict
+    path interval_list
 
-        input:
-        path input_bam
-        path input_bam_index
-        path ref_fasta
-        path ref_index
-        path ref_dict
-        path interval_list
+    output:
+    path "${input_bam}.vcf"     , emit: vcf
+    path "${input_bam}.vcf.idx" , emit: idx
 
-        output:
-        path "${input_bam}.vcf"     , emit: vcf
-        path "${input_bam}.vcf.idx" , emit: idx
+    script:
+    """
+    gatk HaplotypeCaller \
+        -R ${ref_fasta} \
+        -I ${input_bam} \
+        -O ${input_bam}.vcf \
+        -L ${interval_list}
+    """
+}
+```
 
-        script:
-        """
-        gatk HaplotypeCaller \
-            -R ${ref_fasta} \
-            -I ${input_bam} \
-            -O ${input_bam}.vcf \
-            -L ${interval_list}
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 तुम देखोगे कि इस प्रोसेस में GATK कमांड की आवश्यकता से अधिक इनपुट हैं।
 GATK naming conventions के आधार पर BAM इंडेक्स फ़ाइल और reference genome की accessory फ़ाइलों को देखना जानता है, लेकिन Nextflow domain-agnostic है और इन conventions के बारे में नहीं जानता।
@@ -653,20 +659,20 @@ GATK naming conventions के आधार पर BAM इंडेक्स फ
 
 नए मॉड्यूल को import करने के लिए `genomics.nf` को अपडेट करो:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="3" hl_lines="3"
-    // Module INCLUDE statements
-    include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
-    include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=3 step="पहले"
+// Module INCLUDE statements
+include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
+```
 
-=== "पहले"
+```nextflow {3} title="genomics.nf" showLineNumbers startLineNumber=3 step="बाद में"
+// Module INCLUDE statements
+include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
+include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
+```
 
-    ```groovy title="genomics.nf" linenums="3"
-    // Module INCLUDE statements
-    include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
-    ```
+</CodeWalkthrough>
 
 प्रोसेस अब workflow scope में उपलब्ध है।
 
@@ -674,36 +680,36 @@ GATK naming conventions के आधार पर BAM इंडेक्स फ
 
 workflow body में, `main:` के अंतर्गत प्रोसेस कॉल जोड़ो:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="33" hl_lines="4-12"
-        // Create index file for input BAM file
-        SAMTOOLS_INDEX(reads_ch)
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=33 step="पहले"
+    // Create index file for input BAM file
+    SAMTOOLS_INDEX(reads_ch)
+```
 
-        // Call variants from the indexed BAM file
-        GATK_HAPLOTYPECALLER(
-            reads_ch,
-            SAMTOOLS_INDEX.out,
-            ref_file,
-            ref_index_file,
-            ref_dict_file,
-            intervals_file
-        )
-    ```
+```nextflow {4-12} title="genomics.nf" showLineNumbers startLineNumber=33 step="बाद में"
+    // Create index file for input BAM file
+    SAMTOOLS_INDEX(reads_ch)
 
-=== "पहले"
+    // Call variants from the indexed BAM file
+    GATK_HAPLOTYPECALLER(
+        reads_ch,
+        SAMTOOLS_INDEX.out,
+        ref_file,
+        ref_index_file,
+        ref_dict_file,
+        intervals_file
+    )
+```
 
-    ```groovy title="genomics.nf" linenums="33"
-        // Create index file for input BAM file
-        SAMTOOLS_INDEX(reads_ch)
-    ```
+</CodeWalkthrough>
 
 तुम्हें Hello Nextflow प्रशिक्षण श्रृंखला से `*.out` सिंटैक्स को पहचानना चाहिए; हम Nextflow को बता रहे हैं कि `SAMTOOLS_INDEX` द्वारा आउटपुट किए गए चैनल को लें और उसे `GATK_HAPLOTYPECALLER` प्रोसेस कॉल में plug करें।
 
-!!! note "नोट"
-
-    ध्यान दें कि इनपुट प्रोसेस के कॉल में उसी क्रम में प्रदान किए जाते हैं जिस क्रम में वे प्रोसेस के input ब्लॉक में सूचीबद्ध हैं।
-    Nextflow में, इनपुट positional हैं, जिसका अर्थ है कि तुम्हें उसी क्रम का पालन _करना चाहिए_; और निश्चित रूप से तत्वों की संख्या समान होनी चाहिए।
+:::note[नोट]
+ध्यान दें कि इनपुट प्रोसेस के कॉल में उसी क्रम में प्रदान किए जाते हैं जिस क्रम में वे प्रोसेस के input ब्लॉक में सूचीबद्ध हैं।
+Nextflow में, इनपुट positional हैं, जिसका अर्थ है कि तुम्हें उसी क्रम का पालन _करना चाहिए_; और निश्चित रूप से तत्वों की संख्या समान होनी चाहिए।
+:::
 
 ### 2.3. आउटपुट हैंडलिंग कॉन्फ़िगर करो
 
@@ -713,23 +719,23 @@ workflow body में, `main:` के अंतर्गत प्रोसे
 
 `publish:` सेक्शन में VCF और इंडेक्स आउटपुट जोड़ो:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="45" hl_lines="3-4"
-        publish:
-        bam_index = SAMTOOLS_INDEX.out
-        vcf = GATK_HAPLOTYPECALLER.out.vcf
-        vcf_idx = GATK_HAPLOTYPECALLER.out.idx
-    }
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=45 step="पहले"
+    publish:
+    bam_index = SAMTOOLS_INDEX.out
+}
+```
 
-=== "पहले"
+```nextflow {3-4} title="genomics.nf" showLineNumbers startLineNumber=45 step="बाद में"
+    publish:
+    bam_index = SAMTOOLS_INDEX.out
+    vcf = GATK_HAPLOTYPECALLER.out.vcf
+    vcf_idx = GATK_HAPLOTYPECALLER.out.idx
+}
+```
 
-    ```groovy title="genomics.nf" linenums="45"
-        publish:
-        bam_index = SAMTOOLS_INDEX.out
-    }
-    ```
+</CodeWalkthrough>
 
 अब, हमें Nextflow को बताना होगा कि नए आउटपुट कहाँ रखने हैं।
 
@@ -737,31 +743,31 @@ workflow body में, `main:` के अंतर्गत प्रोसे
 
 `output {}` ब्लॉक में `vcf` और `vcf_idx` targets के लिए entries जोड़ो, दोनों को `vcf/` subdirectory में publish करते हुए:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="51" hl_lines="5-10"
-    output {
-        bam_index {
-            path 'bam'
-        }
-        vcf {
-            path 'vcf'
-        }
-        vcf_idx {
-            path 'vcf'
-        }
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=49 step="पहले"
+output {
+    bam_index {
+        path 'bam'
     }
-    ```
+}
+```
 
-=== "पहले"
-
-    ```groovy title="genomics.nf" linenums="49"
-    output {
-        bam_index {
-            path 'bam'
-        }
+```nextflow {5-10} title="genomics.nf" showLineNumbers startLineNumber=51 step="बाद में"
+output {
+    bam_index {
+        path 'bam'
     }
-    ```
+    vcf {
+        path 'vcf'
+    }
+    vcf_idx {
+        path 'vcf'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 VCF और इसका इंडेक्स अलग targets के रूप में publish किए जाते हैं जो दोनों `vcf/` subdirectory में जाते हैं।
 
@@ -771,32 +777,28 @@ VCF और इसका इंडेक्स अलग targets के रूप
 
 ```bash
 nextflow run genomics.nf -profile test -resume
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `genomics.nf` [amazing_stonebraker] revision: 3dc6f69336
+
+executor >  local (1)
+[ad/b2c9bf] SAMTOOLS_INDEX (1)       | 1 of 1, cached: 1 ✔
+[12/2f009f] GATK_HAPLOTYPECALLER (1) | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/genomics/results
+
+  bam_index:
+    - bam/reads_mother.bam.bai
+
+  vcf:
+    - vcf/reads_mother.bam.vcf
+
+  vcf_idx:
+    - vcf/reads_mother.bam.vcf.idx
 ```
-
-??? success "कमांड आउटपुट"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `genomics.nf` [amazing_stonebraker] revision: 3dc6f69336
-
-    executor >  local (1)
-    [ad/b2c9bf] SAMTOOLS_INDEX (1)       | 1 of 1, cached: 1 ✔
-    [12/2f009f] GATK_HAPLOTYPECALLER (1) | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/genomics/results
-
-      bam_index:
-        - bam/reads_mother.bam.bai
-
-      vcf:
-        - vcf/reads_mother.bam.vcf
-
-      vcf_idx:
-        - vcf/reads_mother.bam.vcf.idx
-    ```
 
 अब यदि हम console आउटपुट को देखें, तो हम दो प्रोसेस सूचीबद्ध देखते हैं।
 
@@ -804,27 +806,33 @@ nextflow run genomics.nf -profile test -resume
 
 तुम results डायरेक्टरी में आउटपुट फ़ाइलें पाओगे (work डायरेक्टरी के symbolic links के रूप में)।
 
-??? abstract "डायरेक्टरी सामग्री"
+<details class="abstract">
+<summary>डायरेक्टरी सामग्री</summary>
 
-    ```console
-    results/
-    ├── bam/
-    │   └── reads_mother.bam.bai -> ...
-    └── vcf/
-        ├── reads_mother.bam.vcf -> ...
-        └── reads_mother.bam.vcf.idx -> ...
-    ```
+```console
+results/
+├── bam/
+│   └── reads_mother.bam.bai -> ...
+└── vcf/
+    ├── reads_mother.bam.vcf -> ...
+    └── reads_mother.bam.vcf.idx -> ...
+```
+
+</details>
 
 यदि तुम VCF फ़ाइल खोलते हो, तो तुम्हें उस फ़ाइल के समान सामग्री दिखनी चाहिए जो तुमने कंटेनर में सीधे GATK कमांड चलाकर जेनरेट की थी।
 
-??? abstract "फ़ाइल सामग्री"
+<details class="abstract">
+<summary>फ़ाइल सामग्री</summary>
 
-    ```console title="reads_mother.bam.vcf" linenums="26"
-    #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
-    20_10037292_10066351	3480	.	C	CT	503.03	.	AC=2;AF=1.00;AN=2;DP=23;ExcessHet=0.0000;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=60.00;QD=27.95;SOR=1.179	GT:AD:DP:GQ:PL	1/1:0,18:18:54:517,54,0
-    20_10037292_10066351	3520	.	AT	A	609.03	.	AC=2;AF=1.00;AN=2;DP=18;ExcessHet=0.0000;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=60.00;QD=33.83;SOR=0.693	GT:AD:DP:GQ:PL	1/1:0,18:18:54:623,54,0
-    20_10037292_10066351	3529	.	T	A	155.64	.	AC=1;AF=0.500;AN=2;BaseQRankSum=-0.544;DP=21;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=7.78;ReadPosRankSum=-1.158;SOR=1.034	GT:AD:DP:GQ:PL	0/1:12,8:20:99:163,0,328
-    ```
+```console title="reads_mother.bam.vcf" showLineNumbers startLineNumber=26
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
+20_10037292_10066351	3480	.	C	CT	503.03	.	AC=2;AF=1.00;AN=2;DP=23;ExcessHet=0.0000;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=60.00;QD=27.95;SOR=1.179	GT:AD:DP:GQ:PL	1/1:0,18:18:54:517,54,0
+20_10037292_10066351	3520	.	AT	A	609.03	.	AC=2;AF=1.00;AN=2;DP=18;ExcessHet=0.0000;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=60.00;QD=33.83;SOR=0.693	GT:AD:DP:GQ:PL	1/1:0,18:18:54:623,54,0
+20_10037292_10066351	3529	.	T	A	155.64	.	AC=1;AF=0.500;AN=2;BaseQRankSum=-0.544;DP=21;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=7.78;ReadPosRankSum=-1.158;SOR=1.034	GT:AD:DP:GQ:PL	0/1:12,8:20:99:163,0,328
+```
+
+</details>
 
 यह वह आउटपुट है जिसे हम अपने अध्ययन में प्रत्येक नमूने के लिए जेनरेट करने की परवाह करते हैं।
 
@@ -852,49 +860,49 @@ workflow को bulk में कई नमूनों को हैंडल 
 
 पहले, पैरामीटर घोषणा में type annotation को comment out करो, क्योंकि arrays typed घोषणाओं का उपयोग नहीं कर सकते:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
-        // Primary input (array of three samples)
-        input //: Path
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=10 step="पहले"
+    // Primary input
+    input: Path
+```
 
-=== "पहले"
+```nextflow {1-2} title="genomics.nf" showLineNumbers startLineNumber=10 step="बाद में"
+    // Primary input (array of three samples)
+    input //: Path
+```
 
-    ```groovy title="genomics.nf" linenums="10"
-        // Primary input
-        input: Path
-    ```
+</CodeWalkthrough>
 
 फिर सभी तीन नमूनों को सूचीबद्ध करने के लिए test profile को अपडेट करो:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="4" hl_lines="2-6"
-    test {
-        params.input = [
-            "${projectDir}/data/bam/reads_mother.bam",
-            "${projectDir}/data/bam/reads_father.bam",
-            "${projectDir}/data/bam/reads_son.bam"
-        ]
-        params.reference = "${projectDir}/data/ref/ref.fasta"
-        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-        params.reference_dict = "${projectDir}/data/ref/ref.dict"
-        params.intervals = "${projectDir}/data/ref/intervals.bed"
-    }
-    ```
+```nextflow title="nextflow.config" showLineNumbers startLineNumber=4 step="पहले"
+test {
+    params.input = "${projectDir}/data/bam/reads_mother.bam"
+    params.reference = "${projectDir}/data/ref/ref.fasta"
+    params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+    params.reference_dict = "${projectDir}/data/ref/ref.dict"
+    params.intervals = "${projectDir}/data/ref/intervals.bed"
+}
+```
 
-=== "पहले"
+```nextflow {2-6} title="nextflow.config" showLineNumbers startLineNumber=4 step="बाद में"
+test {
+    params.input = [
+        "${projectDir}/data/bam/reads_mother.bam",
+        "${projectDir}/data/bam/reads_father.bam",
+        "${projectDir}/data/bam/reads_son.bam"
+    ]
+    params.reference = "${projectDir}/data/ref/ref.fasta"
+    params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+    params.reference_dict = "${projectDir}/data/ref/ref.dict"
+    params.intervals = "${projectDir}/data/ref/intervals.bed"
+}
+```
 
-    ```groovy title="nextflow.config" linenums="4"
-    test {
-        params.input = "${projectDir}/data/bam/reads_mother.bam"
-        params.reference = "${projectDir}/data/ref/ref.fasta"
-        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-        params.reference_dict = "${projectDir}/data/ref/ref.dict"
-        params.intervals = "${projectDir}/data/ref/intervals.bed"
-    }
-    ```
+</CodeWalkthrough>
 
 workflow body में चैनल फ़ैक्टरी (`.fromPath`) एक single के साथ-साथ कई फ़ाइल पथों को स्वीकार करती है, इसलिए कोई अन्य परिवर्तन की आवश्यकता नहीं है।
 
@@ -908,66 +916,72 @@ nextflow run genomics.nf -profile test -resume
 
 मज़ेदार बात: यह _काम कर सकता है_, या यह _fail हो सकता है_। उदाहरण के लिए, यहाँ एक run है जो सफल रहा:
 
-??? success "कमांड आउटपुट"
+<details class="success">
+<summary>कमांड आउटपुट</summary>
 
-    ```console
-     N E X T F L O W   ~  version 26.04.4
+```console
+ N E X T F L O W   ~  version 26.04.4
 
-    Launching `genomics.nf` [pensive_noyce] revision: 6c424c0674
+Launching `genomics.nf` [pensive_noyce] revision: 6c424c0674
 
-    executor >  local (6)
-    [f9/ccfefd] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
-    [dc/b63c4b] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+executor >  local (6)
+[f9/ccfefd] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
+[dc/b63c4b] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
 
-    Outputs:
+Outputs:
 
-      /workspaces/training/nf4-science/genomics/results
+  /workspaces/training/nf4-science/genomics/results
 
-      bam_index:
-        - bam/reads_mother.bam.bai
-        - bam/reads_father.bam.bai
-        - bam/reads_son.bam.bai
+  bam_index:
+    - bam/reads_mother.bam.bai
+    - bam/reads_father.bam.bai
+    - bam/reads_son.bam.bai
 
-      vcf:
-        - vcf/reads_son.bam.vcf
-        - vcf/reads_mother.bam.vcf
-        - vcf/reads_father.bam.vcf
+  vcf:
+    - vcf/reads_son.bam.vcf
+    - vcf/reads_mother.bam.vcf
+    - vcf/reads_father.bam.vcf
 
-      vcf_idx:
-        - vcf/reads_son.bam.vcf.idx
-        - vcf/reads_mother.bam.vcf.idx
-        - vcf/reads_father.bam.vcf.idx
-    ```
+  vcf_idx:
+    - vcf/reads_son.bam.vcf.idx
+    - vcf/reads_mother.bam.vcf.idx
+    - vcf/reads_father.bam.vcf.idx
+```
+
+</details>
 
 यदि तुम्हारा workflow run सफल रहा, तो इसे तब तक फिर से चलाओ जब तक तुम्हें इस तरह की error न मिले:
 
-??? failure "कमांड आउटपुट"
+<details class="failure">
+<summary>कमांड आउटपुट</summary>
 
-    ```console
-     N E X T F L O W   ~  version 26.04.4
+```console
+ N E X T F L O W   ~  version 26.04.4
 
-    Launching `genomics.nf` [wise_cray] revision: 6c424c0674
+Launching `genomics.nf` [wise_cray] revision: 6c424c0674
 
-    executor >  local (4)
-    [3e/565553] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 1 ✔
-    [fb/7d64e0] GATK_HAPLOTYPECALLER (2) | 1 of 3, cached: 1 ✘
-    ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (3)'
+executor >  local (4)
+[3e/565553] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 1 ✔
+[fb/7d64e0] GATK_HAPLOTYPECALLER (2) | 1 of 3, cached: 1 ✘
+ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (3)'
 
-    Caused by:
-      Process `GATK_HAPLOTYPECALLER (3)` terminated with an error exit status (2)
+Caused by:
+  Process `GATK_HAPLOTYPECALLER (3)` terminated with an error exit status (2)
 
-    Command executed:
+Command executed:
 
-      gatk HaplotypeCaller         -R ref.fasta         -I reads_son.bam         -O reads_son.bam.vcf         -L intervals.bed
+  gatk HaplotypeCaller         -R ref.fasta         -I reads_son.bam         -O reads_son.bam.vcf         -L intervals.bed
 
-    Command exit status:
-      2
+Command exit status:
+  2
 
-    Command error:
-      ...
-      A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
-      ...
-    ```
+Command error:
+  ...
+  A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
+  ...
+```
+
+</details>
 
 यदि तुम GATK कमांड error आउटपुट को देखते हो, तो इस तरह की एक लाइन होगी:
 
@@ -985,19 +999,22 @@ A USER ERROR has occurred: Traversal by intervals was requested but some input f
 
 console आउटपुट में सूचीबद्ध failed `GATK_HAPLOTYPECALLER` प्रोसेस कॉल के लिए work डायरेक्टरी के अंदर देखो।
 
-??? abstract "डायरेक्टरी सामग्री"
+<details class="abstract">
+<summary>डायरेक्टरी सामग्री</summary>
 
-    ```console
-    work/3f/e775e3104e279ca5f292bf7b652f3e
-    ├── intervals.bed -> /workspaces/training/nf4-science/genomics/data/ref/intervals.bed
-    ├── reads_father.bam.bai -> /workspaces/training/nf4-science/genomics/work/3e/565553bc8010ce09098c9444851c21/reads_father.bam.bai
-    ├── reads_son.bam -> /workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
-    ├── reads_son.bam.vcf
-    ├── reads_son.bam.vcf.idx
-    ├── ref.dict -> /workspaces/training/nf4-science/genomics/data/ref/ref.dict
-    ├── ref.fasta -> /workspaces/training/nf4-science/genomics/data/ref/ref.fasta
-    └── ref.fasta.fai -> /workspaces/training/nf4-science/genomics/data/ref/ref.fasta.fai
-    ```
+```console
+work/3f/e775e3104e279ca5f292bf7b652f3e
+├── intervals.bed -> /workspaces/training/nf4-science/genomics/data/ref/intervals.bed
+├── reads_father.bam.bai -> /workspaces/training/nf4-science/genomics/work/3e/565553bc8010ce09098c9444851c21/reads_father.bam.bai
+├── reads_son.bam -> /workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
+├── reads_son.bam.vcf
+├── reads_son.bam.vcf.idx
+├── ref.dict -> /workspaces/training/nf4-science/genomics/data/ref/ref.dict
+├── ref.fasta -> /workspaces/training/nf4-science/genomics/data/ref/ref.fasta
+└── ref.fasta.fai -> /workspaces/training/nf4-science/genomics/data/ref/ref.fasta.fai
+```
+
+</details>
 
 इस डायरेक्टरी में सूचीबद्ध BAM फ़ाइल और BAM इंडेक्स के नामों पर विशेष ध्यान दो: `reads_son.bam` और `reads_father.bam.bai`।
 
@@ -1007,27 +1024,27 @@ console आउटपुट में सूचीबद्ध failed `GATK_HAPLO
 
 चैनल की सामग्री को देखने के लिए `GATK_HAPLOTYPECALLER` प्रोसेस कॉल से पहले workflow body में ये दो लाइनें जोड़ो:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="36" hl_lines="3-5"
-        SAMTOOLS_INDEX(reads_ch)
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=36 step="पहले"
+    SAMTOOLS_INDEX(reads_ch)
 
-        // temporary diagnostics
-        reads_ch.view()
-        SAMTOOLS_INDEX.out.view()
+    // Call variants from the indexed BAM file
+    GATK_HAPLOTYPECALLER(
+```
 
-        // Call variants from the indexed BAM file
-        GATK_HAPLOTYPECALLER(
-    ```
+```nextflow {3-5} title="genomics.nf" showLineNumbers startLineNumber=36 step="बाद में"
+    SAMTOOLS_INDEX(reads_ch)
 
-=== "पहले"
+    // temporary diagnostics
+    reads_ch.view()
+    SAMTOOLS_INDEX.out.view()
 
-    ```groovy title="genomics.nf" linenums="36"
-        SAMTOOLS_INDEX(reads_ch)
+    // Call variants from the indexed BAM file
+    GATK_HAPLOTYPECALLER(
+```
 
-        // Call variants from the indexed BAM file
-        GATK_HAPLOTYPECALLER(
-    ```
+</CodeWalkthrough>
 
 फिर workflow कमांड फिर से चलाओ।
 
@@ -1049,20 +1066,20 @@ nextflow run genomics.nf -profile test
 पहली तीन लाइनें इनपुट चैनल से मेल खाती हैं और दूसरी, आउटपुट चैनल से।
 तुम देख सकते हो कि तीन नमूनों के लिए BAM फ़ाइलें और इंडेक्स फ़ाइलें एक ही क्रम में सूचीबद्ध नहीं हैं!
 
-!!! note "नोट"
-
-    जब तुम कई तत्वों वाले चैनल पर Nextflow प्रोसेस कॉल करते हो, तो Nextflow execution को यथासंभव parallelize करने की कोशिश करेगा, और जो भी क्रम में उपलब्ध हो जाएंगे उस क्रम में आउटपुट एकत्र करेगा।
-    परिणाम यह है कि संबंधित आउटपुट मूल इनपुट के दिए गए क्रम से अलग क्रम में एकत्र किए जा सकते हैं।
+:::note[नोट]
+जब तुम कई तत्वों वाले चैनल पर Nextflow प्रोसेस कॉल करते हो, तो Nextflow execution को यथासंभव parallelize करने की कोशिश करेगा, और जो भी क्रम में उपलब्ध हो जाएंगे उस क्रम में आउटपुट एकत्र करेगा।
+परिणाम यह है कि संबंधित आउटपुट मूल इनपुट के दिए गए क्रम से अलग क्रम में एकत्र किए जा सकते हैं।
+:::
 
 जैसा कि वर्तमान में लिखा गया है, हमारी workflow स्क्रिप्ट मानती है कि इंडेक्स फ़ाइलें indexing चरण से उसी mother/father/son क्रम में सूचीबद्ध होंगी जैसे इनपुट दिए गए थे।
 लेकिन यह गारंटी नहीं है कि ऐसा होगा, यही कारण है कि कभी-कभी (हालांकि हमेशा नहीं) दूसरे चरण में गलत फ़ाइलें जोड़ी जाती हैं।
 
 इसे ठीक करने के लिए, हमें यह सुनिश्चित करना होगा कि BAM फ़ाइलें और उनकी इंडेक्स फ़ाइलें चैनलों के माध्यम से एक साथ यात्रा करें।
 
-!!! tip "सुझाव"
-
-    workflow कोड में `view()` statements कुछ नहीं करते, इसलिए उन्हें छोड़ना कोई समस्या नहीं है।
-    हालाँकि वे तुम्हारे console आउटपुट को अव्यवस्थित करेंगे, इसलिए हम अनुशंसा करते हैं कि जब तुम समस्या का निवारण कर लो तो उन्हें हटा दो।
+:::tip[सुझाव]
+workflow कोड में `view()` statements कुछ नहीं करते, इसलिए उन्हें छोड़ना कोई समस्या नहीं है।
+हालाँकि वे तुम्हारे console आउटपुट को अव्यवस्थित करेंगे, इसलिए हम अनुशंसा करते हैं कि जब तुम समस्या का निवारण कर लो तो उन्हें हटा दो।
+:::
 
 ### 3.4. इंडेक्स फ़ाइलों को सही ढंग से हैंडल करने के लिए workflow अपडेट करो
 
@@ -1072,25 +1089,25 @@ fix यह है कि प्रत्येक BAM फ़ाइल को उ
 
 यह सुनिश्चित करने का सबसे सरल तरीका है कि एक BAM फ़ाइल और उसका इंडेक्स निकटता से जुड़े रहें, उन्हें index task से बाहर आने वाले tuple में एक साथ package करना है।
 
-!!! note "नोट"
-
-    एक **tuple** तत्वों की एक finite, ordered list है जो आमतौर पर एक function से कई मान वापस करने के लिए उपयोग की जाती है। Tuples विशेष रूप से उपयोगी हैं जब प्रोसेस के बीच कई इनपुट या आउटपुट पास करते समय उनके association और order को संरक्षित करना हो।
+:::note[नोट]
+एक **tuple** तत्वों की एक finite, ordered list है जो आमतौर पर एक function से कई मान वापस करने के लिए उपयोग की जाती है। Tuples विशेष रूप से उपयोगी हैं जब प्रोसेस के बीच कई इनपुट या आउटपुट पास करते समय उनके association और order को संरक्षित करना हो।
+:::
 
 `modules/samtools_index.nf` में आउटपुट को BAM फ़ाइल शामिल करने के लिए अपडेट करो:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="modules/samtools_index.nf" linenums="14" hl_lines="2"
-        output:
-        tuple path(input_bam), path("${input_bam}.bai")
-    ```
+```nextflow title="modules/samtools_index.nf" showLineNumbers startLineNumber=14 step="पहले"
+    output:
+    path "${input_bam}.bai"
+```
 
-=== "पहले"
+```nextflow {2} title="modules/samtools_index.nf" showLineNumbers startLineNumber=14 step="बाद में"
+    output:
+    tuple path(input_bam), path("${input_bam}.bai")
+```
 
-    ```groovy title="modules/samtools_index.nf" linenums="14"
-        output:
-        path "${input_bam}.bai"
-    ```
+</CodeWalkthrough>
 
 इस तरह, प्रत्येक इंडेक्स फ़ाइल अपनी मूल BAM फ़ाइल के साथ कसकर जुड़ी होगी, और indexing चरण का समग्र आउटपुट फ़ाइलों के जोड़े युक्त एक single चैनल होगा।
 
@@ -1100,20 +1117,20 @@ fix यह है कि प्रत्येक BAM फ़ाइल को उ
 
 `modules/gatk_haplotypecaller.nf` अपडेट करो:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="11" hl_lines="2"
-        input:
-        tuple path(input_bam), path(input_bam_index)
-    ```
+```nextflow title="modules/gatk_haplotypecaller.nf" showLineNumbers startLineNumber=11 step="पहले"
+    input:
+    path input_bam
+    path input_bam_index
+```
 
-=== "पहले"
+```nextflow {2} title="modules/gatk_haplotypecaller.nf" showLineNumbers startLineNumber=11 step="बाद में"
+    input:
+    tuple path(input_bam), path(input_bam_index)
+```
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="11"
-        input:
-        path input_bam
-        path input_bam_index
-    ```
+</CodeWalkthrough>
 
 अब, हमें प्रोसेस कॉल और publish targets में नई tuple संरचना को reflect करने के लिए workflow को अपडेट करना होगा।
 
@@ -1123,20 +1140,20 @@ fix यह है कि प्रत्येक BAM फ़ाइल को उ
 
 `genomics.nf` में कॉल अपडेट करो:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="42" hl_lines="2"
-        GATK_HAPLOTYPECALLER(
-            SAMTOOLS_INDEX.out,
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=42 step="पहले"
+    GATK_HAPLOTYPECALLER(
+        reads_ch,
+        SAMTOOLS_INDEX.out,
+```
 
-=== "पहले"
+```nextflow {2} title="genomics.nf" showLineNumbers startLineNumber=42 step="बाद में"
+    GATK_HAPLOTYPECALLER(
+        SAMTOOLS_INDEX.out,
+```
 
-    ```groovy title="genomics.nf" linenums="42"
-        GATK_HAPLOTYPECALLER(
-            reads_ch,
-            SAMTOOLS_INDEX.out,
-    ```
+</CodeWalkthrough>
 
 अंत में, हमें नई आउटपुट संरचना को reflect करने के लिए publish targets को अपडेट करना होगा।
 
@@ -1144,49 +1161,49 @@ fix यह है कि प्रत्येक BAM फ़ाइल को उ
 
 चूंकि SAMTOOLS_INDEX आउटपुट अब BAM फ़ाइल और उसके इंडेक्स दोनों युक्त एक tuple है, इसकी सामग्री को बेहतर ढंग से reflect करने के लिए publish target का नाम `bam_index` से `indexed_bam` में बदलो:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="46" hl_lines="2 8"
-        publish:
-        indexed_bam = SAMTOOLS_INDEX.out
-        vcf = GATK_HAPLOTYPECALLER.out.vcf
-        vcf_idx = GATK_HAPLOTYPECALLER.out.idx
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=46 step="पहले"
+    publish:
+    bam_index = SAMTOOLS_INDEX.out
+    vcf = GATK_HAPLOTYPECALLER.out.vcf
+    vcf_idx = GATK_HAPLOTYPECALLER.out.idx
+}
+
+output {
+    bam_index {
+        path 'bam'
     }
-
-    output {
-        indexed_bam {
-            path 'bam'
-        }
-        vcf {
-            path 'vcf'
-        }
-        vcf_idx {
-            path 'vcf'
-        }
+    vcf {
+        path 'vcf'
     }
-    ```
-
-=== "पहले"
-
-    ```groovy title="genomics.nf" linenums="46"
-        publish:
-        bam_index = SAMTOOLS_INDEX.out
-        vcf = GATK_HAPLOTYPECALLER.out.vcf
-        vcf_idx = GATK_HAPLOTYPECALLER.out.idx
+    vcf_idx {
+        path 'vcf'
     }
+}
+```
 
-    output {
-        bam_index {
-            path 'bam'
-        }
-        vcf {
-            path 'vcf'
-        }
-        vcf_idx {
-            path 'vcf'
-        }
+```nextflow {2,8} title="genomics.nf" showLineNumbers startLineNumber=46 step="बाद में"
+    publish:
+    indexed_bam = SAMTOOLS_INDEX.out
+    vcf = GATK_HAPLOTYPECALLER.out.vcf
+    vcf_idx = GATK_HAPLOTYPECALLER.out.idx
+}
+
+output {
+    indexed_bam {
+        path 'bam'
     }
-    ```
+    vcf {
+        path 'vcf'
+    }
+    vcf_idx {
+        path 'vcf'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 इन परिवर्तनों के साथ, BAM और उसका इंडेक्स एक साथ यात्रा करने की गारंटी है, इसलिए pairing हमेशा सही होगी।
 
@@ -1200,58 +1217,64 @@ nextflow run genomics.nf -profile test
 
 इस बार (और हर बार) सब कुछ सही ढंग से चलना चाहिए:
 
-??? success "कमांड आउटपुट"
+<details class="success">
+<summary>कमांड आउटपुट</summary>
 
-    ```console
-     N E X T F L O W   ~  version 26.04.4
+```console
+ N E X T F L O W   ~  version 26.04.4
 
-    Launching `genomics.nf` [furious_hirsch] revision: 4f0b37c75a
+Launching `genomics.nf` [furious_hirsch] revision: 4f0b37c75a
 
-    executor >  local (6)
-    [39/6efc23] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
-    [de/b3744f] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+executor >  local (6)
+[39/6efc23] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
+[de/b3744f] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
 
-    Outputs:
+Outputs:
 
-      /workspaces/training/nf4-science/genomics/results
+  /workspaces/training/nf4-science/genomics/results
 
-      indexed_bam:
-        - [bam/reads_son.bam, bam/reads_son.bam.bai]
-        - [bam/reads_father.bam, bam/reads_father.bam.bai]
-        - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
+  indexed_bam:
+    - [bam/reads_son.bam, bam/reads_son.bam.bai]
+    - [bam/reads_father.bam, bam/reads_father.bam.bai]
+    - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
 
-      vcf:
-        - vcf/reads_mother.bam.vcf
-        - vcf/reads_son.bam.vcf
-        - vcf/reads_father.bam.vcf
+  vcf:
+    - vcf/reads_mother.bam.vcf
+    - vcf/reads_son.bam.vcf
+    - vcf/reads_father.bam.vcf
 
-      vcf_idx:
-        - vcf/reads_mother.bam.vcf.idx
-        - vcf/reads_son.bam.vcf.idx
-        - vcf/reads_father.bam.vcf.idx
-    ```
+  vcf_idx:
+    - vcf/reads_mother.bam.vcf.idx
+    - vcf/reads_son.bam.vcf.idx
+    - vcf/reads_father.bam.vcf.idx
+```
+
+</details>
 
 results डायरेक्टरी में अब प्रत्येक नमूने के लिए BAM और BAI फ़ाइलें (tuple से) शामिल हैं, साथ ही VCF आउटपुट भी:
 
-??? abstract "Results डायरेक्टरी सामग्री"
+<details class="abstract">
+<summary>Results डायरेक्टरी सामग्री</summary>
 
-    ```console
-    results/
-    ├── bam/
-    │   ├── reads_father.bam -> ...
-    │   ├── reads_father.bam.bai -> ...
-    │   ├── reads_mother.bam -> ...
-    │   ├── reads_mother.bam.bai -> ...
-    │   ├── reads_son.bam -> ...
-    │   └── reads_son.bam.bai -> ...
-    └── vcf/
-        ├── reads_father.bam.vcf -> ...
-        ├── reads_father.bam.vcf.idx -> ...
-        ├── reads_mother.bam.vcf -> ...
-        ├── reads_mother.bam.vcf.idx -> ...
-        ├── reads_son.bam.vcf -> ...
-        └── reads_son.bam.vcf.idx -> ...
-    ```
+```console
+results/
+├── bam/
+│   ├── reads_father.bam -> ...
+│   ├── reads_father.bam.bai -> ...
+│   ├── reads_mother.bam -> ...
+│   ├── reads_mother.bam.bai -> ...
+│   ├── reads_son.bam -> ...
+│   └── reads_son.bam.bai -> ...
+└── vcf/
+    ├── reads_father.bam.vcf -> ...
+    ├── reads_father.bam.vcf.idx -> ...
+    ├── reads_mother.bam.vcf -> ...
+    ├── reads_mother.bam.vcf.idx -> ...
+    ├── reads_son.bam.vcf -> ...
+    └── reads_son.bam.vcf.idx -> ...
+```
+
+</details>
 
 संबंधित फ़ाइलों को tuples में bundle करके, हमने सुनिश्चित किया कि सही फ़ाइलें हमेशा workflow के माध्यम से एक साथ यात्रा करती हैं।
 workflow अब किसी भी संख्या में नमूनों को विश्वसनीय रूप से process करता है, लेकिन उन्हें config में व्यक्तिगत रूप से सूचीबद्ध करना बहुत scalable नहीं है।
@@ -1287,10 +1310,10 @@ NA12882,/workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
 
 यह CSV फ़ाइल में एक header line शामिल है जो columns को नाम देती है।
 
-!!! warning "चेतावनी"
-
-    CSV में फ़ाइल पथ absolute paths हैं जो तुम्हारे वातावरण से match करने चाहिए।
-    यदि तुम हमारे द्वारा प्रदान किए गए प्रशिक्षण वातावरण में इसे नहीं चला रहे हो, तो तुम्हें अपने सिस्टम से match करने के लिए paths को अपडेट करने की आवश्यकता होगी।
+:::caution[चेतावनी]
+CSV में फ़ाइल पथ absolute paths हैं जो तुम्हारे वातावरण से match करने चाहिए।
+यदि तुम हमारे द्वारा प्रदान किए गए प्रशिक्षण वातावरण में इसे नहीं चला रहे हो, तो तुम्हें अपने सिस्टम से match करने के लिए paths को अपडेट करने की आवश्यकता होगी।
+:::
 
 ### 4.2. पैरामीटर और test profile अपडेट करो
 
@@ -1298,49 +1321,49 @@ NA12882,/workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
 
 params ब्लॉक में type annotation restore करो (क्योंकि यह फिर से एक single path है):
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
-        // Primary input (file of input files, one per line)
-        input: Path
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=10 step="पहले"
+    // Primary input (array of three samples)
+    input
+```
 
-=== "पहले"
+```nextflow {1-2} title="genomics.nf" showLineNumbers startLineNumber=10 step="बाद में"
+    // Primary input (file of input files, one per line)
+    input: Path
+```
 
-    ```groovy title="genomics.nf" linenums="10"
-        // Primary input (array of three samples)
-        input
-    ```
+</CodeWalkthrough>
 
 फिर टेक्स्ट फ़ाइल की ओर इशारा करने के लिए test profile को अपडेट करो:
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="4" hl_lines="2"
-    test {
-        params.input = "${projectDir}/data/samplesheet.csv"
-        params.reference = "${projectDir}/data/ref/ref.fasta"
-        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-        params.reference_dict = "${projectDir}/data/ref/ref.dict"
-        params.intervals = "${projectDir}/data/ref/intervals.bed"
-    }
-    ```
+```nextflow title="nextflow.config" showLineNumbers startLineNumber=4 step="पहले"
+test {
+    params.input = [
+        "${projectDir}/data/bam/reads_mother.bam",
+        "${projectDir}/data/bam/reads_father.bam",
+        "${projectDir}/data/bam/reads_son.bam"
+    ]
+    params.reference = "${projectDir}/data/ref/ref.fasta"
+    params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+    params.reference_dict = "${projectDir}/data/ref/ref.dict"
+    params.intervals = "${projectDir}/data/ref/intervals.bed"
+}
+```
 
-=== "पहले"
+```nextflow {2} title="nextflow.config" showLineNumbers startLineNumber=4 step="बाद में"
+test {
+    params.input = "${projectDir}/data/samplesheet.csv"
+    params.reference = "${projectDir}/data/ref/ref.fasta"
+    params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+    params.reference_dict = "${projectDir}/data/ref/ref.dict"
+    params.intervals = "${projectDir}/data/ref/intervals.bed"
+}
+```
 
-    ```groovy title="nextflow.config" linenums="4"
-    test {
-        params.input = [
-            "${projectDir}/data/bam/reads_mother.bam",
-            "${projectDir}/data/bam/reads_father.bam",
-            "${projectDir}/data/bam/reads_son.bam"
-        ]
-        params.reference = "${projectDir}/data/ref/ref.fasta"
-        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-        params.reference_dict = "${projectDir}/data/ref/ref.dict"
-        params.intervals = "${projectDir}/data/ref/intervals.bed"
-    }
-    ```
+</CodeWalkthrough>
 
 फ़ाइलों की list अब कोड में बिल्कुल नहीं रहती, जो सही दिशा में एक बड़ा कदम है।
 
@@ -1349,30 +1372,30 @@ params ब्लॉक में type annotation restore करो (क्यो
 वर्तमान में, हमारी इनपुट चैनल फ़ैक्टरी हमें दी गई किसी भी फ़ाइल को डेटा इनपुट के रूप में treat करती है जिसे हम indexing प्रोसेस को feed करना चाहते हैं।
 चूंकि हम अब इसे एक फ़ाइल दे रहे हैं जो इनपुट फ़ाइल पथों को सूचीबद्ध करती है, हमें फ़ाइल को parse करने और इसमें शामिल फ़ाइल पथों को डेटा इनपुट के रूप में treat करने के लिए इसके व्यवहार को बदलने की आवश्यकता है।
 
-हम उसी पैटर्न का उपयोग करके ऐसा कर सकते हैं जिसका हमने [Hello Nextflow के भाग 2](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file) में उपयोग किया था: फ़ाइल को parse करने के लिए [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) ऑपरेटर लागू करना, फिर प्रत्येक row से फ़ाइल पथ extract करने के लिए एक `map` operation।
+हम उसी पैटर्न का उपयोग करके ऐसा कर सकते हैं जिसका हमने [Hello Nextflow के भाग 2](../../hello_nextflow/02_hello_channels.mdx#42-file-parse-करने-के-लिए-splitcsv-operator-use-करें) में उपयोग किया था: फ़ाइल को parse करने के लिए [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) ऑपरेटर लागू करना, फिर प्रत्येक row से फ़ाइल पथ extract करने के लिए एक `map` operation।
 
-=== "बाद में"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="24" hl_lines="1-4"
-        // Create input channel from a CSV file listing input file paths
-        reads_ch = channel.fromPath(params.input)
-                .splitCsv(header: true)
-                .map { row -> file(row.reads_bam) }
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=24 step="पहले"
+    // Create input channel (single file via CLI parameter)
+    reads_ch = channel.fromPath(params.input)
+```
 
-=== "पहले"
+```nextflow {1-4} title="genomics.nf" showLineNumbers startLineNumber=24 step="बाद में"
+    // Create input channel from a CSV file listing input file paths
+    reads_ch = channel.fromPath(params.input)
+            .splitCsv(header: true)
+            .map { row -> file(row.reads_bam) }
+```
 
-    ```groovy title="genomics.nf" linenums="24"
-        // Create input channel (single file via CLI parameter)
-        reads_ch = channel.fromPath(params.input)
-    ```
+</CodeWalkthrough>
 
-एक चीज़ जो नई है जो तुमने Hello Nextflow कोर्स में सामना की थी उसकी तुलना में यह है कि इस CSV में एक header line है, इसलिए हम `splitCsv()` कॉल में `#!groovy header: true` जोड़ते हैं।
-यह हमें `map` operation में columns को नाम से संदर्भित करने की अनुमति देता है: `#!groovy row.reads_bam` प्रत्येक row के `reads_bam` column से फ़ाइल पथ extract करता है।
+एक चीज़ जो नई है जो तुमने Hello Nextflow कोर्स में सामना की थी उसकी तुलना में यह है कि इस CSV में एक header line है, इसलिए हम `splitCsv()` कॉल में `header: true{:nextflow}` जोड़ते हैं।
+यह हमें `map` operation में columns को नाम से संदर्भित करने की अनुमति देता है: `row.reads_bam{:nextflow}` प्रत्येक row के `reads_bam` column से फ़ाइल पथ extract करता है।
 
-!!! tip "सुझाव"
-
-    यदि तुम्हें विश्वास नहीं है कि तुम समझते हो कि ऑपरेटर यहाँ क्या कर रहे हैं, तो यह उन्हें लागू करने से पहले और बाद में चैनल सामग्री कैसी दिखती है यह देखने के लिए `.view()` ऑपरेटर का उपयोग करने का एक और शानदार अवसर है।
+:::tip[सुझाव]
+यदि तुम्हें विश्वास नहीं है कि तुम समझते हो कि ऑपरेटर यहाँ क्या कर रहे हैं, तो यह उन्हें लागू करने से पहले और बाद में चैनल सामग्री कैसी दिखती है यह देखने के लिए `.view()` ऑपरेटर का उपयोग करने का एक और शानदार अवसर है।
+:::
 
 ### 4.4. workflow चलाओ
 
@@ -1380,38 +1403,34 @@ workflow को एक बार और चलाओ।
 
 ```bash
 nextflow run genomics.nf -profile test
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `genomics.nf` [spontaneous_descartes] revision: aa5d4a64f3
+
+executor >  local (6)
+[f4/553469] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
+[89/83e197] GATK_HAPLOTYPECALLER (1) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/genomics/results
+
+  indexed_bam:
+    - [bam/reads_father.bam, bam/reads_father.bam.bai]
+    - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
+    - [bam/reads_son.bam, bam/reads_son.bam.bai]
+
+  vcf:
+    - vcf/reads_son.bam.vcf
+    - vcf/reads_mother.bam.vcf
+    - vcf/reads_father.bam.vcf
+
+  vcf_idx:
+    - vcf/reads_son.bam.vcf.idx
+    - vcf/reads_mother.bam.vcf.idx
+    - vcf/reads_father.bam.vcf.idx
 ```
-
-??? success "कमांड आउटपुट"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `genomics.nf` [spontaneous_descartes] revision: aa5d4a64f3
-
-    executor >  local (6)
-    [f4/553469] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
-    [89/83e197] GATK_HAPLOTYPECALLER (1) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/genomics/results
-
-      indexed_bam:
-        - [bam/reads_father.bam, bam/reads_father.bam.bai]
-        - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
-        - [bam/reads_son.bam, bam/reads_son.bam.bai]
-
-      vcf:
-        - vcf/reads_son.bam.vcf
-        - vcf/reads_mother.bam.vcf
-        - vcf/reads_father.bam.vcf
-
-      vcf_idx:
-        - vcf/reads_son.bam.vcf.idx
-        - vcf/reads_mother.bam.vcf.idx
-        - vcf/reads_father.bam.vcf.idx
-    ```
 
 इसे पहले जैसा ही परिणाम उत्पन्न करना चाहिए। हमारे simple वेरिएंट कॉलिंग workflow में अब वे सभी बुनियादी features हैं जो हम चाहते थे।
 
@@ -1425,4 +1444,4 @@ nextflow run genomics.nf -profile test
 
 एक break लो! यह बहुत कुछ था।
 
-जब तुम तरोताज़ा महसूस करो, तो [भाग 3](./03_joint_calling.md) पर जाओ, जहाँ तुम सीखोगे कि डेटा पर joint वेरिएंट कॉलिंग लागू करने के लिए इस simple प्रति-नमूना वेरिएंट कॉलिंग workflow को कैसे transform करें।
+जब तुम तरोताज़ा महसूस करो, तो [भाग 3](./03_joint_calling.mdx) पर जाओ, जहाँ तुम सीखोगे कि डेटा पर joint वेरिएंट कॉलिंग लागू करने के लिए इस simple प्रति-नमूना वेरिएंट कॉलिंग workflow को कैसे transform करें।

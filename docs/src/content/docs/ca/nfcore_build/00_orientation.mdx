@@ -1,10 +1,13 @@
-# Primers passos
+---
+title: Primers passos
+description: 'Build with nf-core: Primers passos'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Iniciar un entorn de formació
 
-Per utilitzar l'entorn preconfigurat que proporcionem a GitHub Codespaces, feu clic al botó "Open in GitHub Codespaces" que apareix a continuació. Per a altres opcions, consulteu [Opcions d'entorn](../envsetup/index.md).
+Per utilitzar l'entorn preconfigurat que proporcionem a GitHub Codespaces, feu clic al botó "Open in GitHub Codespaces" que apareix a continuació. Per a altres opcions, consulteu [Opcions d'entorn](../envsetup/index.mdx).
 
 Recomanem obrir l'entorn de formació en una pestanya o finestra nova del navegador (utilitzeu clic dret, ctrl+clic o cmd+clic segons el vostre equip) perquè pugueu continuar llegint mentre es carrega l'entorn.
 Haureu de mantenir aquestes instruccions obertes en paral·lel per treballar durant el curs.
@@ -18,23 +21,23 @@ Aquest entorn de formació conté tot el programari, codi i dades necessaris per
 El codespace està configurat amb una interfície VSCode, que inclou un explorador del sistema de fitxers, un editor de codi i un terminal de línia de comandes.
 Totes les instruccions donades durant el curs (per exemple, "obriu el fitxer", "editeu el codi" o "executeu aquesta comanda") es refereixen a aquestes tres parts de la interfície VSCode tret que s'especifiqui el contrari.
 
-Si esteu treballant en aquest curs pel vostre compte, familiaritzeu-vos amb els [conceptes bàsics de l'entorn](../envsetup/01_setup.md) per a més detalls.
+Si esteu treballant en aquest curs pel vostre compte, familiaritzeu-vos amb els [conceptes bàsics de l'entorn](../envsetup/01_setup.mdx) per a més detalls.
 
 ### Requisits de versió
 
 Aquesta formació funciona amb **Nextflow 25.10.2** o posterior **amb l'analitzador de sintaxi v2**, que és el valor per defecte a partir de Nextflow 26.04.
-Al nostre entorn de formació no cal fer res: s'executa Nextflow 26.04.4 amb l'analitzador v2. Si utilitzeu un entorn local o personalitzat, consulteu les [notes de versió](../info/nxf_versions.md).
+Al nostre entorn de formació no cal fer res: s'executa Nextflow 26.04.4 amb l'analitzador v2. Si utilitzeu un entorn local o personalitzat, consulteu les [notes de versió](../info/nxf_versions.mdx).
 
 La formació també requereix **nf-core tools 4.1.0**.
 Si utilitzeu una versió diferent de les eines nf-core, podeu tenir dificultats per seguir el curs.
 
 Podeu comprovar quina versió està instal·lada al vostre entorn utilitzant la comanda `nf-core --version`.
 
-!!! warning "Compatibilitat amb l'analitzador v2"
-
-    Molts pipelines nf-core encara no admeten l'analitzador de sintaxi v2.
-    Si executeu un pipeline nf-core diferent dels utilitzats en aquest curs i trobeu errors, és possible que hàgiu de canviar a l'analitzador v1 establint `export NXF_SYNTAX_PARSER=v1`.
-    Consulteu les [notes de versió](../info/nxf_versions.md) per a més detalls.
+:::caution[Compatibilitat amb l'analitzador v2]
+Molts pipelines nf-core encara no admeten l'analitzador de sintaxi v2.
+Si executeu un pipeline nf-core diferent dels utilitzats en aquest curs i trobeu errors, és possible que hàgiu de canviar a l'analitzador v1 establint `export NXF_SYNTAX_PARSER=v1`.
+Consulteu les [notes de versió](../info/nxf_versions.mdx) per a més detalls.
+:::
 
 ## Prepareu-vos per treballar
 
@@ -50,13 +53,13 @@ Canvieu de directori ara executant aquesta comanda al terminal:
 cd nfcore-build/
 ```
 
-!!! tip "Consell"
+:::tip[Consell]
+Si per qualsevol motiu sortiu d'aquest directori (per exemple, el vostre codespace s'adorm), sempre podeu utilitzar el camí complet per tornar-hi, assumint que esteu executant això dins de l'entorn de formació de Github Codespaces:
 
-    Si per qualsevol motiu sortiu d'aquest directori (per exemple, el vostre codespace s'adorm), sempre podeu utilitzar el camí complet per tornar-hi, assumint que esteu executant això dins de l'entorn de formació de Github Codespaces:
-
-    ```bash
-    cd /workspaces/training/nfcore-build
-    ```
+```bash
+cd /workspaces/training/nfcore-build
+```
+:::
 
 A continuació, exploreu el contingut d'aquest directori.
 
@@ -73,23 +76,26 @@ Aquí generem una taula de continguts fins al segon nivell:
 tree . -L 2
 ```
 
-??? abstract "Contingut del directori"
+<details class="abstract">
+<summary>Contingut del directori</summary>
 
-    ```console
-    .
-    ├── greetings.csv
-    ├── original-hello
-    │   ├── hello.nf
-    │   ├── modules
-    │   └── nextflow.config
-    └── solutions
-        ├── composable-hello
-        ├── core-hello-part1
-        ├── core-hello-part2
-        ├── core-hello-part3
-        ├── core-hello-part4
-        └── core-hello-start
-    ```
+```console
+.
+├── greetings.csv
+├── original-hello
+│   ├── hello.nf
+│   ├── modules
+│   └── nextflow.config
+└── solutions
+    ├── composable-hello
+    ├── core-hello-part1
+    ├── core-hello-part2
+    ├── core-hello-part3
+    ├── core-hello-part4
+    └── core-hello-start
+```
+
+</details>
 
 Feu clic a la caixa de color per expandir la secció i veure el seu contingut.
 Utilitzem seccions desplegables com aquesta per incloure la sortida esperada de les comandes de manera concisa.

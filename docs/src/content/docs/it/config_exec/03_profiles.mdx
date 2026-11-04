@@ -1,13 +1,16 @@
-# Parte 3: Usare i profili per cambiare configurazione
+---
+title: 'Parte 3: Usare i profili per cambiare configurazione'
+description: 'Nelle Parte 1 e Parte 2, avete accumulato alcune opzioni di configurazione: packaging del software, piattaforma di esecuzione e allocazione delle risorse.'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nelle [Parte 1](./01_packaging_and_execution.md) e [Parte 2](./02_resources_and_retries.md), avete accumulato alcune opzioni di configurazione: packaging del software, piattaforma di esecuzione e allocazione delle risorse.
+Nelle [Parte 1](./01_packaging_and_execution.mdx) e [Parte 2](./02_resources_and_retries.mdx), avete accumulato alcune opzioni di configurazione: packaging del software, piattaforma di esecuzione e allocazione delle risorse.
 In pratica, spesso vorrete passare da un intero insieme di queste opzioni a un altro a seconda di dove state eseguendo il flusso di lavoro, ad esempio un laptop per lo sviluppo e un cluster HPC per la produzione.
 
 Nextflow vi permette di definire un numero qualsiasi di [profili](https://nextflow.io/docs/latest/config.html#profiles) che descrivono configurazioni diverse, e di selezionarne uno (o più) al momento dell'esecuzione con un singolo flag.
 
-Ne avete già usato uno: il profilo `test` di [Nextflow Run](../nextflow_run/index.md) sovrascrive i parametri di input con un insieme piccolo e ben definito.
+Ne avete già usato uno: il profilo `test` di [Nextflow Run](../nextflow_run/index.mdx) sovrascrive i parametri di input con un insieme piccolo e ben definito.
 Ora creerete i vostri profili di infrastruttura e li combinerete con esso.
 
 ---
@@ -18,50 +21,50 @@ Ora creerete i vostri profili di infrastruttura e li combinerete con esso.
 
 Aggiungete due profili a `nextflow.config`: uno per eseguire su un normale laptop con Docker, e uno per un cluster HPC universitario con uno scheduler Slurm e Conda.
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="35" hl_lines="10-19"
-    profiles {
-        test {
-            params.input = 'data/greetings.csv'
-            params.batch = 'test'
-            params.character = 'tux'
-        }
-        conda {
-            docker.enabled = false
-            conda.enabled = true
-        }
-        my_laptop {
-            process.executor = 'local'
-            docker.enabled = true
-        }
-        univ_hpc {
-            process.executor = 'slurm'
-            conda.enabled = true
-            process.resourceLimits = [
-                memory: 750.GB,
-                cpus: 200,
-                time: 30.d
-            ]
-        }
+```nextflow title="nextflow.config" showLineNumbers startLineNumber=35 step="Prima"
+profiles {
+    test {
+        params.input = 'data/greetings.csv'
+        params.batch = 'test'
+        params.character = 'tux'
     }
-    ```
-
-=== "Prima"
-
-    ```groovy title="nextflow.config" linenums="35"
-    profiles {
-        test {
-            params.input = 'data/greetings.csv'
-            params.batch = 'test'
-            params.character = 'tux'
-        }
-        conda {
-            docker.enabled = false
-            conda.enabled = true
-        }
+    conda {
+        docker.enabled = false
+        conda.enabled = true
     }
-    ```
+}
+```
+
+```nextflow {10-19} title="nextflow.config" showLineNumbers startLineNumber=35 step="Dopo"
+profiles {
+    test {
+        params.input = 'data/greetings.csv'
+        params.batch = 'test'
+        params.character = 'tux'
+    }
+    conda {
+        docker.enabled = false
+        conda.enabled = true
+    }
+    my_laptop {
+        process.executor = 'local'
+        docker.enabled = true
+    }
+    univ_hpc {
+        process.executor = 'slurm'
+        conda.enabled = true
+        process.resourceLimits = [
+            memory: 750.GB,
+            cpus: 200,
+            time: 30.d
+        ]
+    }
+}
+```
+
+</CodeWalkthrough>
 
 Il profilo `univ_hpc` imposta anche i limiti delle risorse, poiché ciò è tipicamente richiesto su infrastrutture HPC condivise.
 
@@ -71,45 +74,41 @@ Selezionate un profilo al momento dell'esecuzione con `-profile`.
 
 ```bash
 nextflow run main.nf -profile my_laptop
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [nice_kimura] revision: c3c85dec78
+
+executor >  local (8)
+[df/b86b2f] sayHello (2)       | 3 of 3 ✔
+[b2/e2cb9c] convertToUpper (3) | 3 of 3 ✔
+[af/2ecff7] collectGreetings   | 1 of 1 ✔
+[c6/713c96] cowpy              | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/config-exec/results
+
+  first_output:
+    - full_pipeline/intermediates/Bonjour-output.txt
+    - full_pipeline/intermediates/Hello-output.txt
+    - full_pipeline/intermediates/Hola-output.txt
+
+  uppercased:
+    - full_pipeline/intermediates/UPPER-Bonjour-output.txt
+    - full_pipeline/intermediates/UPPER-Hello-output.txt
+    - full_pipeline/intermediates/UPPER-Hola-output.txt
+
+  collected: full_pipeline/intermediates/COLLECTED-batch-output.txt
+
+  batch_report: full_pipeline/batch-report.txt
+
+  cowpy_art: full_pipeline/cowpy-COLLECTED-batch-output.txt
 ```
 
-??? success "Output del comando"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [nice_kimura] revision: c3c85dec78
-
-    executor >  local (8)
-    [df/b86b2f] sayHello (2)       | 3 of 3 ✔
-    [b2/e2cb9c] convertToUpper (3) | 3 of 3 ✔
-    [af/2ecff7] collectGreetings   | 1 of 1 ✔
-    [c6/713c96] cowpy              | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/config-exec/results
-
-      first_output:
-        - full_pipeline/intermediates/Bonjour-output.txt
-        - full_pipeline/intermediates/Hello-output.txt
-        - full_pipeline/intermediates/Hola-output.txt
-
-      uppercased:
-        - full_pipeline/intermediates/UPPER-Bonjour-output.txt
-        - full_pipeline/intermediates/UPPER-Hello-output.txt
-        - full_pipeline/intermediates/UPPER-Hola-output.txt
-
-      collected: full_pipeline/intermediates/COLLECTED-batch-output.txt
-
-      batch_report: full_pipeline/batch-report.txt
-
-      cowpy_art: full_pipeline/cowpy-COLLECTED-batch-output.txt
-    ```
-
-!!! warning "Avviso"
-
-    Il profilo `univ_hpc` non funzionerà nell'ambiente di formazione, poiché non è disponibile uno scheduler Slurm.
+:::caution[Avviso]
+Il profilo `univ_hpc` non funzionerà nell'ambiente di formazione, poiché non è disponibile uno scheduler Slurm.
+:::
 
 Se trovate altre impostazioni che appartengono sempre insieme, aggiungetele al profilo corrispondente.
 Potete anche creare profili aggiuntivi per raggruppare qualsiasi altra combinazione di cui avete bisogno.
@@ -122,41 +121,37 @@ Combinate `my_laptop` con il profilo `test` che già conoscete da Nextflow Run.
 
 ```bash
 nextflow run main.nf -profile my_laptop,test
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [romantic_volhard] revision: c3c85dec78
+
+executor >  local (8)
+[22/81de4f] sayHello (3)       | 3 of 3 ✔
+[93/e16b04] convertToUpper (1) | 3 of 3 ✔
+[ca/3e6a91] collectGreetings   | 1 of 1 ✔
+[16/0cc7e3] cowpy              | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/config-exec/results
+
+  first_output:
+    - full_pipeline/intermediates/Hola-output.txt
+    - full_pipeline/intermediates/Hello-output.txt
+    - full_pipeline/intermediates/Bonjour-output.txt
+
+  uppercased:
+    - full_pipeline/intermediates/UPPER-Hello-output.txt
+    - full_pipeline/intermediates/UPPER-Bonjour-output.txt
+    - full_pipeline/intermediates/UPPER-Hola-output.txt
+
+  collected: full_pipeline/intermediates/COLLECTED-test-output.txt
+
+  batch_report: full_pipeline/test-report.txt
+
+  cowpy_art: full_pipeline/cowpy-COLLECTED-test-output.txt
 ```
-
-??? success "Output del comando"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [romantic_volhard] revision: c3c85dec78
-
-    executor >  local (8)
-    [22/81de4f] sayHello (3)       | 3 of 3 ✔
-    [93/e16b04] convertToUpper (1) | 3 of 3 ✔
-    [ca/3e6a91] collectGreetings   | 1 of 1 ✔
-    [16/0cc7e3] cowpy              | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/config-exec/results
-
-      first_output:
-        - full_pipeline/intermediates/Hola-output.txt
-        - full_pipeline/intermediates/Hello-output.txt
-        - full_pipeline/intermediates/Bonjour-output.txt
-
-      uppercased:
-        - full_pipeline/intermediates/UPPER-Hello-output.txt
-        - full_pipeline/intermediates/UPPER-Bonjour-output.txt
-        - full_pipeline/intermediates/UPPER-Hola-output.txt
-
-      collected: full_pipeline/intermediates/COLLECTED-test-output.txt
-
-      batch_report: full_pipeline/test-report.txt
-
-      cowpy_art: full_pipeline/cowpy-COLLECTED-test-output.txt
-    ```
 
 I nomi dei singoli file riflettono correttamente `batch = 'test'` dal profilo `test` (`COLLECTED-test-output.txt`, e così via).
 
@@ -175,7 +170,7 @@ Imparate come ispezionare la configurazione completamente risolta prima di esegu
 
 ## 2. Ispezionare la configurazione risolta
 
-Avete già usato `nextflow config -profile test` in [Nextflow Run](../nextflow_run/02_configure_pipeline.md) per verificare a cosa si risolve un singolo profilo.
+Avete già usato `nextflow config -profile test` in [Nextflow Run](../nextflow_run/02_configure_pipeline.mdx) per verificare a cosa si risolve un singolo profilo.
 Quel comando diventa particolarmente utile quando si combinano più profili: come avete appena visto, quando due profili impostano la stessa opzione, può essere difficile determinare manualmente quale valore prevalga effettivamente.
 Il comando `nextflow config` risolve tutto questo per voi, senza eseguire la pipeline.
 
@@ -183,30 +178,26 @@ Il comando `nextflow config` risolve tutto questo per voi, senza eseguire la pip
 
 ```bash
 nextflow config
+# [!output]
+params {
+   input = 'data/greetings.csv'
+   batch = 'batch'
+   character = 'turkey'
+}
+
+docker {
+   enabled = true
+}
+
+process {
+   memory = '1 GB'
+   withName:cowpy {
+      conda = 'conda-forge::cowpy==1.1.5'
+      memory = '2 GB'
+      cpus = 2
+   }
+}
 ```
-
-??? success "Output del comando"
-
-    ```groovy
-    params {
-       input = 'data/greetings.csv'
-       batch = 'batch'
-       character = 'turkey'
-    }
-
-    docker {
-       enabled = true
-    }
-
-    process {
-       memory = '1 GB'
-       withName:cowpy {
-          conda = 'conda-forge::cowpy==1.1.5'
-          memory = '2 GB'
-          cpus = 2
-       }
-    }
-    ```
 
 Questa è esattamente la configurazione che verrebbe applicata se eseguiste la pipeline senza flag aggiuntivi.
 
@@ -216,31 +207,27 @@ Aggiungete gli stessi profili che usereste per un'esecuzione reale.
 
 ```bash
 nextflow config -profile my_laptop,test
+# [!output]
+params {
+   input = 'data/greetings.csv'
+   batch = 'test'
+   character = 'tux'
+}
+
+docker {
+   enabled = true
+}
+
+process {
+   memory = '1 GB'
+   withName:cowpy {
+      conda = 'conda-forge::cowpy==1.1.5'
+      memory = '2 GB'
+      cpus = 2
+   }
+   executor = 'local'
+}
 ```
-
-??? success "Output del comando"
-
-    ```groovy
-    params {
-       input = 'data/greetings.csv'
-       batch = 'test'
-       character = 'tux'
-    }
-
-    docker {
-       enabled = true
-    }
-
-    process {
-       memory = '1 GB'
-       withName:cowpy {
-          conda = 'conda-forge::cowpy==1.1.5'
-          memory = '2 GB'
-          cpus = 2
-       }
-       executor = 'local'
-    }
-    ```
 
 Confrontando i due output si conferma cosa è cambiato: `params.batch`, `params.character` e `process.executor` riflettono tutti i profili `my_laptop,test`.
 Questo diventa particolarmente prezioso per le pipeline con molti livelli di configurazione, dove determinare manualmente le impostazioni risolte sarebbe tedioso e soggetto a errori.
@@ -252,7 +239,7 @@ Sapete come usare `nextflow config` per ispezionare la configurazione completame
 ### Cosa c'è dopo?
 
 Avete coperto gli elementi essenziali della configurazione delle pipeline Nextflow.
-Consultate il [Riepilogo del corso](next_steps.md) per sapere come proseguire da qui.
+Consultate il [Riepilogo del corso](next_steps.mdx) per sapere come proseguire da qui.
 
 ---
 

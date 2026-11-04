@@ -1,16 +1,22 @@
-# Bölüm 4: Hello Modules
+---
+title: 'Bölüm 4: Hello Modules'
+description: Bu bölüm, pipeline'ınızın geliştirilmesini ve bakımını daha verimli ve sürdürülebilir hale getirmek için iş akışı kodunuzu nasıl organize edeceğinizi kapsar.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+<figure>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
+<figcaption>
 
-/// caption
-:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube kanalında [tüm oynatma listesini](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) izleyin.
+Nextflow YouTube kanalında [tüm oynatma listesini](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) izleyin.
 
-:green_book: Video transkripti [burada](./transcripts/04_hello_modules.md) mevcuttur.
-///
+📗 Video transkripti [burada](./transcripts/04_hello_modules.mdx) mevcuttur.
+
+</figcaption>
+</figure>
 
 Bu bölüm, pipeline'ınızın geliştirilmesini ve bakımını daha verimli ve sürdürülebilir hale getirmek için iş akışı kodunuzu nasıl organize edeceğinizi kapsar.
 Özellikle, [**modülleri**](https://nextflow.io/docs/latest/module.html) nasıl kullanacağınızı göstereceğiz.
@@ -22,15 +28,16 @@ Bu, kodun birden fazla kopyasını üretmeden süreç tanımlarını birden fazl
 İş akışımızı geliştirmeye başladığımızda, her şeyi tek bir kod dosyasına yazdık.
 Şimdi süreçleri bireysel modüllere taşıyacağız.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/modules.svg"
-</figure>
+![](../../hello_nextflow/img/modules.excalidraw.svg)
 
 Bu, kodumuzu daha paylaşılabilir, esnek ve bakımı kolay hale getirecek.
 
-??? info "Bu bölümden nasıl başlanır"
+<details class="info">
+<summary>Bu bölümden nasıl başlanır</summary>
 
-    Bu kursun bu bölümü, [Hello Nextflow](./index.md) kursunun 1-3. Bölümlerini tamamladığınızı varsayar; ancak o bölümlerde ele alınan temel konulara hakimseniz, özel bir şey yapmadan buradan başlayabilirsiniz.
+Bu kursun bu bölümü, [Hello Nextflow](./index.mdx) kursunun 1-3. Bölümlerini tamamladığınızı varsayar; ancak o bölümlerde ele alınan temel konulara hakimseniz, özel bir şey yapmadan buradan başlayabilirsiniz.
+
+</details>
 
 ---
 
@@ -39,7 +46,7 @@ Bu, kodumuzu daha paylaşılabilir, esnek ve bakımı kolay hale getirecek.
 Başlangıç noktası olarak `hello-modules.nf` iş akışı betiğini kullanacağız.
 Bu betik, bu eğitim kursunun 3. Bölümünde üretilen betiğe eşdeğerdir; ancak çıktı hedeflerini değiştirdik:
 
-```groovy title="hello-modules.nf" linenums="37" hl_lines="3 7 11 15"
+```nextflow {3,7,11,15} title="hello-modules.nf" showLineNumbers startLineNumber=37
 output {
     first_output {
         path 'hello_modules'
@@ -64,51 +71,50 @@ Her şeyin çalıştığından emin olmak için, herhangi bir değişiklik yapma
 
 ```bash
 nextflow run hello-modules.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-modules.nf` [hopeful_avogadro] revision: b09af1237d
+
+executor >  local (7)
+[0f/8795c9] sayHello (3)       | 3 of 3 ✔
+[6a/eb2510] convertToUpper (3) | 3 of 3 ✔
+[af/479117] collectGreetings   | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_modules/Hola-output.txt
+    - hello_modules/Bonjour-output.txt
+    - hello_modules/Hello-output.txt
+  uppercased:
+    - hello_modules/UPPER-Hola-output.txt
+    - hello_modules/UPPER-Bonjour-output.txt
+    - hello_modules/UPPER-Hello-output.txt
+  collected: hello_modules/COLLECTED-batch-output.txt
+  batch_report: hello_modules/batch-report.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-modules.nf` [hopeful_avogadro] revision: b09af1237d
-
-    executor >  local (7)
-    [0f/8795c9] sayHello (3)       | 3 of 3 ✔
-    [6a/eb2510] convertToUpper (3) | 3 of 3 ✔
-    [af/479117] collectGreetings   | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_modules/Hola-output.txt
-        - hello_modules/Bonjour-output.txt
-        - hello_modules/Hello-output.txt
-      uppercased:
-        - hello_modules/UPPER-Hola-output.txt
-        - hello_modules/UPPER-Bonjour-output.txt
-        - hello_modules/UPPER-Hello-output.txt
-      collected: hello_modules/COLLECTED-batch-output.txt
-      batch_report: hello_modules/batch-report.txt
-    ```
 
 Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen dizinde bulacaksınız (burada, `results/hello_modules/`).
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console
-    results/hello_modules/
-    ├── Bonjour-output.txt
-    ├── COLLECTED-batch-output.txt
-    ├── Hello-output.txt
-    ├── Hola-output.txt
-    ├── batch-report.txt
-    ├── UPPER-Bonjour-output.txt
-    ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
-    ```
+```console
+results/hello_modules/
+├── Bonjour-output.txt
+├── COLLECTED-batch-output.txt
+├── Hello-output.txt
+├── Hola-output.txt
+├── batch-report.txt
+├── UPPER-Bonjour-output.txt
+├── UPPER-Hello-output.txt
+└── UPPER-Hola-output.txt
+```
+
+</details>
 
 Bu sizin için çalıştıysa, iş akışı kodunuzu modülerleştirmeyi öğrenmeye hazırsınız.
 
@@ -146,7 +152,7 @@ Bu bize süreç kodunu koyacağımız bir yer verir.
 
 Tüm süreç tanımını iş akışı dosyasından modül dosyasına kopyalayın.
 
-```groovy title="modules/sayHello.nf" linenums="1"
+```nextflow title="modules/sayHello.nf" showLineNumbers
 /*
  * 'Hello World!' ifadesini bir dosyaya yazdırmak için echo kullan
  */
@@ -171,38 +177,38 @@ Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin.
 
 Bir modülden süreç dahil etmenin sözdizimi oldukça basittir:
 
-```groovy title="Syntax: include declaration"
+```nextflow title="Syntax: include declaration"
 include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
 Bunu `params` bloğunun üstüne ekleyelim ve uygun şekilde dolduralım.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-modules.nf" linenums="44" hl_lines="1 2"
-    // Modülleri dahil et
-    include { sayHello } from './modules/sayHello.nf'
+```nextflow title="hello-modules.nf" showLineNumbers startLineNumber=44 step="Önce"
+/*
+* Pipeline parametreleri
+*/
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+}
+```
 
-    /*
-    * Pipeline parametreleri
-    */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-    }
-    ```
+```nextflow {1,2} title="hello-modules.nf" showLineNumbers startLineNumber=44 step="Sonra"
+// Modülleri dahil et
+include { sayHello } from './modules/sayHello.nf'
 
-=== "Önce"
+/*
+* Pipeline parametreleri
+*/
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+}
+```
 
-    ```groovy title="hello-modules.nf" linenums="44"
-    /*
-    * Pipeline parametreleri
-    */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-    }
-    ```
+</CodeWalkthrough>
 
 Süreç adını, `sayHello`, ve modül kodunu içeren dosyanın yolunu, `./modules/sayHello.nf`, doldurduğumuzu görüyorsunuz.
 
@@ -212,34 +218,30 @@ Süreç adını, `sayHello`, ve modül kodunu içeren dosyanın yolunu, `./modul
 
 ```bash
 nextflow run hello-modules.nf -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-modules.nf` [romantic_poisson] revision: 96edfa9ad3
+
+[f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
+[3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
+[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_modules/Hello-output.txt
+    - hello_modules/Bonjour-output.txt
+    - hello_modules/Hola-output.txt
+  uppercased:
+    - hello_modules/UPPER-Hola-output.txt
+    - hello_modules/UPPER-Bonjour-output.txt
+    - hello_modules/UPPER-Hello-output.txt
+  collected: hello_modules/COLLECTED-batch-output.txt
+  batch_report: hello_modules/batch-report.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-modules.nf` [romantic_poisson] revision: 96edfa9ad3
-
-    [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
-    [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
-    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_modules/Hello-output.txt
-        - hello_modules/Bonjour-output.txt
-        - hello_modules/Hola-output.txt
-      uppercased:
-        - hello_modules/UPPER-Hola-output.txt
-        - hello_modules/UPPER-Bonjour-output.txt
-        - hello_modules/UPPER-Hello-output.txt
-      collected: hello_modules/COLLECTED-batch-output.txt
-      batch_report: hello_modules/batch-report.txt
-    ```
 
 Her şey önbelleklendiği için bu çok hızlı çalışmalıdır.
 Yayınlanan çıktıları kontrol etmekten çekinmeyin.
@@ -272,7 +274,7 @@ touch modules/convertToUpper.nf
 
 Tüm süreç tanımını iş akışı dosyasından modül dosyasına kopyalayın.
 
-```groovy title="modules/convertToUpper.nf" linenums="1"
+```nextflow title="modules/convertToUpper.nf" showLineNumbers
 /*
  * Selamlamayı büyük harfe dönüştürmek için bir metin değiştirme aracı kullan
  */
@@ -297,36 +299,36 @@ Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin.
 
 Include tanımını `params` bloğunun üstüne ekleyin ve uygun şekilde doldurun.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-modules.nf" linenums="23" hl_lines="3"
-    // Modülleri dahil et
-    include { sayHello } from './modules/sayHello.nf'
-    include { convertToUpper } from './modules/convertToUpper.nf'
+```nextflow title="hello-modules.nf" showLineNumbers startLineNumber=23 step="Önce"
+// Modülleri dahil et
+include { sayHello } from './modules/sayHello.nf'
 
-    /*
-    * Pipeline parametreleri
-    */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-    }
-    ```
+/*
+* Pipeline parametreleri
+*/
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+}
+```
 
-=== "Önce"
+```nextflow {3} title="hello-modules.nf" showLineNumbers startLineNumber=23 step="Sonra"
+// Modülleri dahil et
+include { sayHello } from './modules/sayHello.nf'
+include { convertToUpper } from './modules/convertToUpper.nf'
 
-    ```groovy title="hello-modules.nf" linenums="23"
-    // Modülleri dahil et
-    include { sayHello } from './modules/sayHello.nf'
+/*
+* Pipeline parametreleri
+*/
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+}
+```
 
-    /*
-    * Pipeline parametreleri
-    */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-    }
-    ```
+</CodeWalkthrough>
 
 Bu artık çok tanıdık görünmeye başlamalı.
 
@@ -336,34 +338,30 @@ Bunu `-resume` bayrağıyla çalıştırın.
 
 ```bash
 nextflow run hello-modules.nf -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-modules.nf` [nauseous_heisenberg] revision: a04a9f2da0
+
+[c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
+[60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
+[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_modules/Hola-output.txt
+    - hello_modules/Hello-output.txt
+    - hello_modules/Bonjour-output.txt
+  uppercased:
+    - hello_modules/UPPER-Bonjour-output.txt
+    - hello_modules/UPPER-Hello-output.txt
+    - hello_modules/UPPER-Hola-output.txt
+  collected: hello_modules/COLLECTED-batch-output.txt
+  batch_report: hello_modules/batch-report.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-modules.nf` [nauseous_heisenberg] revision: a04a9f2da0
-
-    [c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
-    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_modules/Hola-output.txt
-        - hello_modules/Hello-output.txt
-        - hello_modules/Bonjour-output.txt
-      uppercased:
-        - hello_modules/UPPER-Bonjour-output.txt
-        - hello_modules/UPPER-Hello-output.txt
-        - hello_modules/UPPER-Hola-output.txt
-      collected: hello_modules/COLLECTED-batch-output.txt
-      batch_report: hello_modules/batch-report.txt
-    ```
 
 Bu hâlâ daha önce olduğu gibi aynı çıktıyı üretmelidir.
 
@@ -385,7 +383,7 @@ touch modules/collectGreetings.nf
 
 Tüm süreç tanımını iş akışı dosyasından modül dosyasına kopyalayın.
 
-```groovy title="modules/collectGreetings.nf" linenums="1"
+```nextflow title="modules/collectGreetings.nf" showLineNumbers
 /*
  * Büyük harfli selamlamaları tek bir çıktı dosyasında topla
  */
@@ -414,38 +412,38 @@ Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin.
 
 Include tanımını `params` bloğunun üstüne ekleyin ve uygun şekilde doldurun.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
-    // Modülleri dahil et
-    include { sayHello } from './modules/sayHello.nf'
-    include { convertToUpper } from './modules/convertToUpper.nf'
-    include { collectGreetings } from './modules/collectGreetings.nf'
+```nextflow title="hello-modules.nf" showLineNumbers startLineNumber=3 step="Önce"
+// Modülleri dahil et
+include { sayHello } from './modules/sayHello.nf'
+include { convertToUpper } from './modules/convertToUpper.nf'
 
-    /*
-    * Pipeline parametreleri
-    */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-    }
-    ```
+/*
+* Pipeline parametreleri
+*/
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+}
+```
 
-=== "Önce"
+```nextflow {4} title="hello-modules.nf" showLineNumbers startLineNumber=3 step="Sonra"
+// Modülleri dahil et
+include { sayHello } from './modules/sayHello.nf'
+include { convertToUpper } from './modules/convertToUpper.nf'
+include { collectGreetings } from './modules/collectGreetings.nf'
 
-    ```groovy title="hello-modules.nf" linenums="3"
-    // Modülleri dahil et
-    include { sayHello } from './modules/sayHello.nf'
-    include { convertToUpper } from './modules/convertToUpper.nf'
+/*
+* Pipeline parametreleri
+*/
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+}
+```
 
-    /*
-    * Pipeline parametreleri
-    */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-    }
-    ```
+</CodeWalkthrough>
 
 Sonuncusu!
 
@@ -455,34 +453,30 @@ Bunu `-resume` bayrağıyla çalıştırın.
 
 ```bash
 nextflow run hello-modules.nf -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-modules.nf` [friendly_coulomb] revision: 7aa2b9bc0f
+
+[f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
+[3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
+[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_modules/Hello-output.txt
+    - hello_modules/Bonjour-output.txt
+    - hello_modules/Hola-output.txt
+  uppercased:
+    - hello_modules/UPPER-Bonjour-output.txt
+    - hello_modules/UPPER-Hello-output.txt
+    - hello_modules/UPPER-Hola-output.txt
+  collected: hello_modules/COLLECTED-batch-output.txt
+  batch_report: hello_modules/batch-report.txt
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-modules.nf` [friendly_coulomb] revision: 7aa2b9bc0f
-
-    [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
-    [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
-    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_modules/Hello-output.txt
-        - hello_modules/Bonjour-output.txt
-        - hello_modules/Hola-output.txt
-      uppercased:
-        - hello_modules/UPPER-Bonjour-output.txt
-        - hello_modules/UPPER-Hello-output.txt
-        - hello_modules/UPPER-Hola-output.txt
-      collected: hello_modules/COLLECTED-batch-output.txt
-      batch_report: hello_modules/batch-report.txt
-    ```
 
 Bu hâlâ daha önce olduğu gibi aynı çıktıyı üretmelidir.
 
@@ -499,55 +493,65 @@ Bu, kodu kopyala-yapıştır yapmaktan daha iyi; çünkü daha sonra modülü ge
 
 İsterseniz kısa bir mola verin.
 
-Hazır olduğunuzda, yazılım bağımlılıklarını daha kullanışlı ve tekrarlanabilir bir şekilde yönetmek için konteynerleri nasıl kullanacağınızı öğrenmek üzere [**Bölüm 5: Hello Containers**](./05_hello_containers.md)'a geçin.
+Hazır olduğunuzda, yazılım bağımlılıklarını daha kullanışlı ve tekrarlanabilir bir şekilde yönetmek için konteynerleri nasıl kullanacağınızı öğrenmek üzere [**Bölüm 5: Hello Containers**](./05_hello_containers.mdx)'a geçin.
 
 ---
 
 ## Quiz
 
-<quiz>
+<Quiz id="quiz-1">
+
 Nextflow'da modül nedir?
 - [ ] Bir yapılandırma dosyası
 - [x] Süreç tanımları içerebilen bağımsız bir dosya
 - [ ] Bir iş akışı tanımı
 - [ ] Bir kanal operatörü
 
-Daha fazla bilgi: [2. `sayHello()` için bir modül oluşturun](#2-create-a-module-for-sayhello)
-</quiz>
+Daha fazla bilgi: [2. `sayHello()` için bir modül oluşturun](#2-sayhello-için-bir-modül-oluşturun)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-2">
+
 Modül dosyaları için genellikle kullanılan konvansiyon nedir?
 - [ ] İş akışıyla aynı dizinde
 - [ ] Bir `bin/` dizininde
 - [x] Bir `modules/` dizininde
 - [ ] Bir `lib/` dizininde
 
-Daha fazla bilgi: [1. Modülleri depolamak için bir dizin oluşturun](#1-create-a-directory-to-store-modules)
-</quiz>
+Daha fazla bilgi: [1. Modülleri depolamak için bir dizin oluşturun](#1-modülleri-depolamak-için-bir-dizin-oluşturun)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-3">
+
 Bir modül kullanmak için doğru sözdizimi nedir?
 
-- [ ] `#!groovy import { SAYHELLO } from './modules/sayhello.nf'`
-- [ ] `#!groovy require { SAYHELLO } from './modules/sayhello.nf'`
-- [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
-- [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
+- [ ] `import { SAYHELLO } from './modules/sayhello.nf'{:nextflow}`
+- [ ] `require { SAYHELLO } from './modules/sayhello.nf'{:nextflow}`
+- [x] `include { SAYHELLO } from './modules/sayhello.nf'{:nextflow}`
+- [ ] `load { SAYHELLO } from './modules/sayhello.nf'{:nextflow}`
 
-Daha fazla bilgi: [2.3. Bir include tanımı ekleyin](#23-add-an-include-declaration-before-the-workflow-block)
-</quiz>
+Daha fazla bilgi: [2.3. Bir include tanımı ekleyin](#23-i̇ş-akışı-bloğundan-önce-bir-include-tanımı-ekleyin)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-4">
+
 Modüller kullanıldığında `-resume` işlevselliğine ne olur?
 - [ ] Artık çalışmaz
 - [ ] Ek yapılandırma gerektirir
 - [x] Daha önce olduğu gibi çalışır
 - [ ] Yalnızca yerel modüller için çalışır
-</quiz>
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-5">
+
 Modül kullanmanın faydaları nelerdir? (Uygulanabilen tümünü seçin)
 - [x] İş akışları arasında kod yeniden kullanılabilirliği
 - [x] Daha kolay bakım
 - [x] İş akışı kodunun daha iyi organizasyonu
 - [ ] Daha hızlı yürütme hızı
-</quiz>
+
+</Quiz>

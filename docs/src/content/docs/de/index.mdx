@@ -1,179 +1,209 @@
 ---
-title: Home
+title: Nextflow Training
 description: Willkommen im Nextflow Community Training Portal!
-hide:
-  - toc
-  - footer
+sidebar:
+  label: Home
+tableOfContents: false
+prev: false
+next: false
 ---
 
-# Nextflow Training
+<CardGrid>
 
-<div class="grid cards" markdown>
+<Card title="Selbstlernkurse">
 
--   :material-book-open-variant:{ .lg .middle } __Selbstlernkurse__
+**Willkommen im Nextflow Community Training Portal!**
 
-    ---
+Arbeite die Kurse unten in deinem eigenen Tempo durch – in unserer webbasierten Umgebung oder in deiner eigenen.
+Jeder Kurs ist praxisorientiert, mit zielgerichteten Übungen, die du eigenständig absolvieren kannst.
 
-    **Willkommen im Nextflow Community Training Portal!**
+<LinkButton href="#catalog-of-nextflow-training-courses" variant="primary" icon="down-arrow">Kurse entdecken</LinkButton>
 
-    Arbeite die Kurse unten in deinem eigenen Tempo durch – in unserer webbasierten Umgebung oder in deiner eigenen.
-    Jeder Kurs ist praxisorientiert, mit zielgerichteten Übungen, die du eigenständig absolvieren kannst.
+</Card>
 
-    [Kurse entdecken :material-arrow-down:](#catalog-of-nextflow-training-courses){ .md-button .md-button--primary .mt-1 }
+<Card title="Training Events">
 
--   :material-account-group-outline:{ .lg .middle } __Training Events__
+**Suchst du etwas über Selbstlernkurse hinaus?**
 
-    ---
+Finde strukturierte Training Events, Anleitungen für eigene Trainings sowie unsere Open-Source-Lizenz und Beitragsrichtlinien.
 
-    **Suchst du etwas über Selbstlernkurse hinaus?**
+<LinkButton href="training_events.mdx" variant="secondary" icon="right-arrow">Training Events ansehen</LinkButton>
 
-    Finde strukturierte Training Events, Anleitungen für eigene Trainings sowie unsere Open-Source-Lizenz und Beitragsrichtlinien.
+</Card>
 
-    [Training Events ansehen :material-arrow-right:](training_events.md){ .md-button .md-button--secondary .mt-1 }
+</CardGrid>
 
-</div>
-
-!!! note "KI-gestützte Übersetzung"
-
-    Diese Übersetzung wurde mit künstlicher Intelligenz erstellt und von menschlichen Übersetzern überprüft.
-    Wir freuen uns über Feedback und Verbesserungsvorschläge.
-    Weitere Informationen findest du in unserer [Übersetzungsanleitung](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md).
+:::note[KI-gestützte Übersetzung]
+Diese Übersetzung wurde mit künstlicher Intelligenz erstellt und von menschlichen Übersetzern überprüft.
+Wir freuen uns über Feedback und Verbesserungsvorschläge.
+Weitere Informationen findest du in unserer [Übersetzungsanleitung](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md).
+:::
 
 ## Catalog of Nextflow training courses
 
-<div class="grid cards" markdown>
+<CardGrid>
 
--   :material-account:{ .lg .middle } __Für Anwender\*innen__
+<Card title="Für Anwender\*innen">
 
-    ---
+### Pipelines ausführen
 
-    ### :material-play-circle:{.nextflow-primary} Pipelines ausführen {.mt-1}
+Lerne, bestehende Pipelines auszuführen, ohne Code schreiben zu müssen.
 
-    Lerne, bestehende Pipelines auszuführen, ohne Code schreiben zu müssen.
+<details class="courses">
+<summary>**Nextflow Run:** Pipelines mit Nextflow ausführen</summary>
 
-    ??? courses "**Nextflow Run:** Pipelines mit Nextflow ausführen"
+Eine kompakte Einführung in das Ausführen von Nextflow-Pipelines – ohne Programmierkenntnisse. Themen: Pipelines starten, Ergebnisse abrufen, Container verwenden und die Ausführung grundlegend konfigurieren.
 
-        Eine kompakte Einführung in das Ausführen von Nextflow-Pipelines – ohne Programmierkenntnisse. Themen: Pipelines starten, Ergebnisse abrufen, Container verwenden und die Ausführung grundlegend konfigurieren.
+<LinkButton href="nextflow_run/index.mdx" variant="secondary" icon="right-arrow">Zum Training</LinkButton>
 
-        [Zum Training :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
+</details>
 
-    ??? courses "**Use nf-core:** Community-Pipelines finden und ausführen"
+<details class="courses">
+<summary>**Use nf-core:** Community-Pipelines finden und ausführen</summary>
 
-        Eine kompakte Einführung in das Finden, Ausführen und Konfigurieren von Pipelines aus dem nf-core Community-Projekt – beginnend mit einer minimalen Demo-Pipeline bis hin zu einer produktionsreifen Analyse-Pipeline.
+Eine kompakte Einführung in das Finden, Ausführen und Konfigurieren von Pipelines aus dem nf-core Community-Projekt – beginnend mit einer minimalen Demo-Pipeline bis hin zu einer produktionsreifen Analyse-Pipeline.
 
-        [Zum Training :material-arrow-right:](nfcore_use/index.md){ .md-button .md-button--secondary }
+<LinkButton href="nfcore_use/index.mdx" variant="secondary" icon="right-arrow">Zum Training</LinkButton>
 
-    ??? courses "**Scale with Seqera:** Pipelines skaliert starten und überwachen"
+</details>
 
-        Eine praxisorientierte Einführung in das Starten und Überwachen von Nextflow-Pipelines mit der Seqera Platform – sowohl über die Weboberfläche als auch über die Kommandozeile.
+<details class="courses">
+<summary>**Scale with Seqera:** Pipelines skaliert starten und überwachen</summary>
 
-        [Zum Training :material-arrow-right:](seqera_scale/index.md){ .md-button .md-button--secondary }
+Eine praxisorientierte Einführung in das Starten und Überwachen von Nextflow-Pipelines mit der Seqera Platform – sowohl über die Weboberfläche als auch über die Kommandozeile.
 
-    ---
+<LinkButton href="seqera_scale/index.mdx" variant="secondary" icon="right-arrow">Zum Training</LinkButton>
 
-    ### :material-tune:{.nextflow-primary} Ausführung verwalten {.mt-1}
+</details>
 
-    Lerne, Pipeline-Ausführungen effektiv zu verwalten.
+---
 
-    ??? courses "**Configure Execution:** Ressourcen, Wiederholungen und Ausführungsprofile konfigurieren"
+### Ausführung verwalten
 
-        Eine praxisorientierte Einführung in die Konfiguration von Nextflow-Pipelines: Anpassung an verschiedene Rechenumgebungen, Steuerung von Ressourcenzuweisungen und Wiederholungen sowie Wechsel zwischen vordefinierten Konfigurationsprofilen.
+Lerne, Pipeline-Ausführungen effektiv zu verwalten.
 
-        [Zum Training :material-arrow-right:](config_exec/index.md){ .md-button .md-button--secondary }
+<details class="courses">
+<summary>**Configure Execution:** Ressourcen, Wiederholungen und Ausführungsprofile konfigurieren</summary>
 
-    !!! info compact "Weitere Themen folgen"
+Eine praxisorientierte Einführung in die Konfiguration von Nextflow-Pipelines: Anpassung an verschiedene Rechenumgebungen, Steuerung von Ressourcenzuweisungen und Wiederholungen sowie Wechsel zwischen vordefinierten Konfigurationsprofilen.
 
-        Performance-Tuning, HPC/Cloud-Ausführung und mehr sind für diesen Bereich geplant.
-        Stimme ab, was als nächstes behandelt werden soll, in unserer [kurzen Umfrage](https://seqera.typeform.com/to/JCs91e8v).
+<LinkButton href="config_exec/index.mdx" variant="secondary" icon="right-arrow">Zum Training</LinkButton>
 
--   :material-code-tags:{ .lg .middle } __Für Entwickler\*innen__
+</details>
 
-    ---
+:::note[Weitere Themen folgen]
+Performance-Tuning, HPC/Cloud-Ausführung und mehr sind für diesen Bereich geplant.
+Stimme ab, was als nächstes behandelt werden soll, in unserer [kurzen Umfrage](https://seqera.typeform.com/to/JCs91e8v).
+:::
 
-    ### :material-wrench:{.nextflow-primary} Pipelines schreiben {.mt-1}
+</Card>
 
-    Lerne, eigene Nextflow-Pipelines zu entwickeln.
+<Card title="Für Entwickler\*innen">
 
-    ??? courses "**Hello Nextflow:** Eigene Pipelines von Grund auf entwickeln"
+### Pipelines schreiben
 
-        Dieser Kurs behandelt die Kernkomponenten der Nextflow-Sprache in ausreichender Tiefe, um einfache, aber vollständig funktionsfähige Pipelines zu entwickeln – plus wichtige Aspekte des Pipeline-Designs, der Entwicklung und der Konfiguration.
+Lerne, eigene Nextflow-Pipelines zu entwickeln.
 
-        [Zum Training :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--secondary }
+<details class="courses">
+<summary>**Hello Nextflow:** Eigene Pipelines von Grund auf entwickeln</summary>
 
-    ??? courses "**Build with nf-core:** nf-core-Tools und -Regeln verwenden"
+Dieser Kurs behandelt die Kernkomponenten der Nextflow-Sprache in ausreichender Tiefe, um einfache, aber vollständig funktionsfähige Pipelines zu entwickeln – plus wichtige Aspekte des Pipeline-Designs, der Entwicklung und der Konfiguration.
 
-        Für Nextflow-Entwickler\*innen, die lernen möchten, [nf-core](https://nf-co.re/)-konforme Pipelines zu entwickeln.
-        Der Kurs behandelt die Struktur von nf-core-Pipelines in ausreichender Tiefe, um einfache, aber vollständig funktionsfähige Pipelines zu entwickeln, die das nf-core-Template und Best Practices nutzen – einschließlich der Verwendung bestehender nf-core-Module.
+<LinkButton href="hello_nextflow/index.mdx" variant="secondary" icon="right-arrow">Zum Training</LinkButton>
 
-        [Zum Training :material-arrow-right:](nfcore_build/index.md){ .md-button .md-button--secondary }
+</details>
 
-    ??? catalog "**Side Quests:** Fortgeschrittene Nextflow-Themen vertiefen"
+<details class="courses">
+<summary>**Build with nf-core:** nf-core-Tools und -Regeln verwenden</summary>
 
-        Eine Sammlung eigenständiger Mini-Kurse für Nextflow-Entwickler\*innen, die ihr Wissen erweitern und/oder ihre Kenntnisse zu bestimmten Themen vertiefen möchten.
-        Sie sind linear aufgebaut, können aber in beliebiger Reihenfolge absolviert werden (siehe Abhängigkeiten in der jeweiligen Mini-Kurs-Übersicht).
+Für Nextflow-Entwickler\*innen, die lernen möchten, [nf-core](https://nf-co.re/)-konforme Pipelines zu entwickeln.
+Der Kurs behandelt die Struktur von nf-core-Pipelines in ausreichender Tiefe, um einfache, aber vollständig funktionsfähige Pipelines zu entwickeln, die das nf-core-Template und Best Practices nutzen – einschließlich der Verwendung bestehender nf-core-Module.
 
-        [Side Quests durchsuchen :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
+<LinkButton href="nfcore_build/index.mdx" variant="secondary" icon="right-arrow">Zum Training</LinkButton>
 
-    ---
+</details>
 
-    ### :material-microscope:{.nextflow-primary} Nextflow für die Wissenschaft {.mt-1}
+<details class="catalog">
+<summary>**Side Quests:** Fortgeschrittene Nextflow-Themen vertiefen</summary>
 
-    Lerne, Nextflow-Pipelines für spezifische wissenschaftliche Anwendungen zu entwickeln.
+Eine Sammlung eigenständiger Mini-Kurse für Nextflow-Entwickler\*innen, die ihr Wissen erweitern und/oder ihre Kenntnisse zu bestimmten Themen vertiefen möchten.
+Sie sind linear aufgebaut, können aber in beliebiger Reihenfolge absolviert werden (siehe Abhängigkeiten in der jeweiligen Mini-Kurs-Übersicht).
 
-    ??? courses "**Genomics:** Eine Variant-Calling-Pipeline entwickeln"
+<LinkButton href="side_quests/index.mdx" variant="secondary" icon="right-arrow">Side Quests durchsuchen</LinkButton>
 
-        Ein Kurs für Forscher\*innen, die lernen möchten, eigene Genomik-Pipelines zu entwickeln – anhand eines Variant-Calling-Anwendungsfalls werden wesentliche Nextflow-Entwicklungsmuster demonstriert.
+</details>
 
-        [Zum Training :material-arrow-right:](nf4_science/genomics/index.md){ .md-button .md-button--secondary }
+---
 
-    ??? courses "**RNAseq:** Eine Bulk-RNAseq-Verarbeitungs-Pipeline entwickeln"
+### Nextflow für die Wissenschaft
 
-        Ein Kurs für Forscher\*innen, die lernen möchten, eigene RNAseq-Pipelines zu entwickeln – anhand eines Bulk-RNAseq-Verarbeitungsanwendungsfalls werden wesentliche Nextflow-Entwicklungsmuster demonstriert.
+Lerne, Nextflow-Pipelines für spezifische wissenschaftliche Anwendungen zu entwickeln.
 
-        [Zum Training :material-arrow-right:](nf4_science/rnaseq/index.md){ .md-button .md-button--secondary }
+<details class="courses">
+<summary>**Genomics:** Eine Variant-Calling-Pipeline entwickeln</summary>
 
-    ??? courses "**Bioimaging:** Imaging-Pipelines ausführen und konfigurieren"
+Ein Kurs für Forscher\*innen, die lernen möchten, eigene Genomik-Pipelines zu entwickeln – anhand eines Variant-Calling-Anwendungsfalls werden wesentliche Nextflow-Entwicklungsmuster demonstriert.
 
-        Ein Kurs für Forscher\*innen, die lernen möchten, Bioimaging-Pipelines auszuführen und zu konfigurieren – anhand von nf-core/molkart werden wesentliche Nextflow-Nutzungsmuster demonstriert.
+<LinkButton href="nf4_science/genomics/index.mdx" variant="secondary" icon="right-arrow">Zum Training</LinkButton>
 
-        [Zum Training :material-arrow-right:](nf4_science/imaging/index.md){ .md-button .md-button--secondary }
+</details>
 
-</div>
+<details class="courses">
+<summary>**RNAseq:** Eine Bulk-RNAseq-Verarbeitungs-Pipeline entwickeln</summary>
+
+Ein Kurs für Forscher\*innen, die lernen möchten, eigene RNAseq-Pipelines zu entwickeln – anhand eines Bulk-RNAseq-Verarbeitungsanwendungsfalls werden wesentliche Nextflow-Entwicklungsmuster demonstriert.
+
+<LinkButton href="nf4_science/rnaseq/index.mdx" variant="secondary" icon="right-arrow">Zum Training</LinkButton>
+
+</details>
+
+<details class="courses">
+<summary>**Bioimaging:** Imaging-Pipelines ausführen und konfigurieren</summary>
+
+Ein Kurs für Forscher\*innen, die lernen möchten, Bioimaging-Pipelines auszuführen und zu konfigurieren – anhand von nf-core/molkart werden wesentliche Nextflow-Nutzungsmuster demonstriert.
+
+<LinkButton href="nf4_science/imaging/index.mdx" variant="secondary" icon="right-arrow">Zum Training</LinkButton>
+
+</details>
+
+</Card>
+
+</CardGrid>
 
 ## Setup & Hilfe
 
-<div class="grid cards mb-4" markdown>
+<CardGrid>
 
--   :material-cog-outline:{ .lg .middle } __Training-Umgebung__
+<Card title="Training-Umgebung">
 
-    ---
+Optionen zum Einrichten deiner Umgebung für die Nextflow-Trainings.
 
-    Optionen zum Einrichten deiner Umgebung für die Nextflow-Trainings.
+<LinkButton href="envsetup/index.mdx" variant="secondary" icon="right-arrow">Training-Umgebungen ansehen</LinkButton>
 
-    [Training-Umgebungen ansehen :material-arrow-right:](envsetup/index.md){ .md-button .md-button--secondary }
+</Card>
 
--   :material-tag-outline:{ .lg .middle } __Nextflow-Versionen__
+<Card title="Nextflow-Versionen">
 
-    ---
+Die Entwicklung der Nextflow-Syntaxversionen verstehen und verwalten.
 
-    Die Entwicklung der Nextflow-Syntaxversionen verstehen und verwalten.
+<LinkButton href="info/nxf_versions.mdx" variant="secondary" icon="right-arrow">Versionsanforderungen prüfen</LinkButton>
 
-    [Versionsanforderungen prüfen :material-arrow-right:](info/nxf_versions.md){ .md-button .md-button--secondary }
+</Card>
 
--   :material-file-code-outline:{ .lg .middle } __Die Hello-Pipeline__
+<Card title="Die Hello-Pipeline">
 
-    ---
+Überblick darüber, was die Hello-Pipeline macht und wie sie aufgebaut ist.
 
-    Überblick darüber, was die Hello-Pipeline macht und wie sie aufgebaut ist.
+<LinkButton href="info/hello_pipeline.mdx" variant="secondary" icon="right-arrow">Überblick lesen</LinkButton>
 
-    [Überblick lesen :material-arrow-right:](info/hello_pipeline.md){ .md-button .md-button--secondary }
+</Card>
 
--   :material-lifebuoy:{ .lg .middle } __Hilfe erhalten__
+<Card title="Hilfe erhalten">
 
-    ---
+Hilfreiche Ressourcen, wenn du ein Problem mit dem Nextflow-Training hast.
 
-    Hilfreiche Ressourcen, wenn du ein Problem mit dem Nextflow-Training hast.
+<LinkButton href="help.mdx" variant="secondary" icon="right-arrow">Hilfe finden</LinkButton>
 
-    [Hilfe finden :material-arrow-right:](help.md){ .md-button .md-button--secondary }
+</Card>
 
-</div>
+</CardGrid>

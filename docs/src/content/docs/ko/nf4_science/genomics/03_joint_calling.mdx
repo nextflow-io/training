@@ -1,29 +1,35 @@
-# 파트 3: 코호트에 대한 조인트 호출
+---
+title: '파트 3: 코호트에 대한 조인트 호출'
+description: 이전에는 각 샘플의 데이터를 독립적으로 처리하는 샘플별 변이 호출 파이프라인을 구축했습니다.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 이전에는 각 샘플의 데이터를 독립적으로 처리하는 샘플별 변이 호출 파이프라인을 구축했습니다.
-이제 [파트 1](01_method.md)(다중 샘플 사용 사례)에서 설명한 대로 조인트 변이 호출을 구현하도록 파이프라인을 확장하겠습니다.
+이제 [파트 1](01_method.mdx)(다중 샘플 사용 사례)에서 설명한 대로 조인트 변이 호출을 구현하도록 파이프라인을 확장하겠습니다.
 
-??? info "이 섹션을 시작하는 방법"
+<details class="info">
+<summary>이 섹션을 시작하는 방법</summary>
 
-    이 과정의 이 섹션은 [파트 1: 방법 개요](./01_method.md), [파트 2: 샘플별 변이 호출](./02_per_sample_variant_calling.md)을 완료하고 작동하는 `genomics.nf` 파이프라인이 있다고 가정합니다.
+이 과정의 이 섹션은 [파트 1: 방법 개요](./01_method.mdx), [파트 2: 샘플별 변이 호출](./02_per_sample_variant_calling.mdx)을 완료하고 작동하는 `genomics.nf` 파이프라인이 있다고 가정합니다.
 
-    파트 2를 완료하지 않았거나 이 파트를 새로 시작하려면 파트 2 해결책을 시작점으로 사용할 수 있습니다.
-    `nf4-science/genomics/` 디렉토리 내에서 다음 명령을 실행하세요:
+파트 2를 완료하지 않았거나 이 파트를 새로 시작하려면 파트 2 해결책을 시작점으로 사용할 수 있습니다.
+`nf4-science/genomics/` 디렉토리 내에서 다음 명령을 실행하세요:
 
-    ```bash
-    cp solutions/part2/genomics-2.nf genomics.nf
-    cp solutions/part2/nextflow.config .
-    cp solutions/part2/modules/* modules/
-    ```
+```bash
+cp solutions/part2/genomics-2.nf genomics.nf
+cp solutions/part2/nextflow.config .
+cp solutions/part2/modules/* modules/
+```
 
-    이렇게 하면 완전한 샘플별 변이 호출 워크플로우를 얻을 수 있습니다.
-    다음 명령을 실행하여 성공적으로 실행되는지 테스트할 수 있습니다:
+이렇게 하면 완전한 샘플별 변이 호출 워크플로우를 얻을 수 있습니다.
+다음 명령을 실행하여 성공적으로 실행되는지 테스트할 수 있습니다:
 
-    ```bash
-    nextflow run genomics.nf -profile test
-    ```
+```bash
+nextflow run genomics.nf -profile test
+```
+
+</details>
 
 ## 과제
 
@@ -34,11 +40,9 @@
 3. 모든 GVCF를 수집하고 GenomicsDB 데이터 저장소로 결합
 4. 결합된 GVCF 데이터 저장소에 대해 조인트 유전자형 분석을 실행하여 코호트 수준의 VCF 생성
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
-</figure>
+![](../../../nf4_science/genomics/img/hello-gatk-2.excalidraw.svg)
 
-이는 [파트 1: 방법 개요](./01_method.md)(다중 샘플 사용 사례를 다루는 두 번째 섹션)에서 설명한 방법을 구현하며, [파트 2: 샘플별 변이 호출](./02_per_sample_variant_calling.md)에서 생성한 워크플로우를 직접 기반으로 합니다.
+이는 [파트 1: 방법 개요](./01_method.mdx)(다중 샘플 사용 사례를 다루는 두 번째 섹션)에서 설명한 방법을 구현하며, [파트 2: 샘플별 변이 호출](./02_per_sample_variant_calling.mdx)에서 생성한 워크플로우를 직접 기반으로 합니다.
 
 ## 학습 계획
 
@@ -49,12 +53,12 @@
 2. **샘플별 GVCF를 결합하고 유전자형을 분석하는 조인트 유전자형 분석 단계를 추가합니다.**
    `collect()` 연산자, 명령줄 구성을 위한 Groovy 클로저, 그리고 다중 명령 프로세스를 다룹니다.
 
-이는 [파트 1: 방법 개요](./01_method.md#2-joint-calling-on-a-cohort)의 두 번째 섹션에서 컨테이너에서 수동으로 실행했던 단계를 자동화합니다.
+이는 [파트 1: 방법 개요](./01_method.mdx#2-코호트에-대한-공동-호출)의 두 번째 섹션에서 컨테이너에서 수동으로 실행했던 단계를 자동화합니다.
 
-!!! tip "팁"
-
-    올바른 작업 디렉토리에 있는지 확인하세요:
-    `cd /workspaces/training/nf4-science/genomics`
+:::tip[팁]
+올바른 작업 디렉토리에 있는지 확인하세요:
+`cd /workspaces/training/nf4-science/genomics`
+:::
 
 ---
 
@@ -63,7 +67,7 @@
 파트 2의 파이프라인은 VCF 파일을 생성하지만, 조인트 호출에는 GVCF 파일이 필요합니다.
 GVCF 변이 호출 모드를 활성화하고 출력 파일 확장자를 업데이트해야 합니다.
 
-[파트 1](01_method.md)의 GVCF 변이 호출 명령을 상기해 보세요:
+[파트 1](01_method.mdx)의 GVCF 변이 호출 명령을 상기해 보세요:
 
 ```bash
 gatk HaplotypeCaller \
@@ -85,51 +89,51 @@ gatk HaplotypeCaller \
 
 `-ERC GVCF`를 추가할 때 이전 줄 끝에 백슬래시(`\`)를 추가해야 합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="22" hl_lines="5 7"
-        """
-        gatk HaplotypeCaller \
-            -R ${ref_fasta} \
-            -I ${input_bam} \
-            -O ${input_bam}.g.vcf \
-            -L ${interval_list} \
-            -ERC GVCF
-        """
-    ```
+```nextflow {5} title="modules/gatk_haplotypecaller.nf" showLineNumbers startLineNumber=22 step="전"
+    """
+    gatk HaplotypeCaller \
+        -R ${ref_fasta} \
+        -I ${input_bam} \
+        -O ${input_bam}.vcf \
+        -L ${interval_list}
+    """
+```
 
-=== "전"
+```nextflow {5,7} title="modules/gatk_haplotypecaller.nf" showLineNumbers startLineNumber=22 step="후"
+    """
+    gatk HaplotypeCaller \
+        -R ${ref_fasta} \
+        -I ${input_bam} \
+        -O ${input_bam}.g.vcf \
+        -L ${interval_list} \
+        -ERC GVCF
+    """
+```
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="22" hl_lines="5"
-        """
-        gatk HaplotypeCaller \
-            -R ${ref_fasta} \
-            -I ${input_bam} \
-            -O ${input_bam}.vcf \
-            -L ${interval_list}
-        """
-    ```
+</CodeWalkthrough>
 
 또한 새 파일 확장자와 일치하도록 출력 블록을 업데이트해야 합니다.
 명령 출력을 `.vcf`에서 `.g.vcf`로 변경했으므로, 프로세스 `output:` 블록도 동일한 변경 사항을 반영해야 합니다.
 
 ### 1.2. 프로세스 출력 블록에서 출력 파일 확장자 업데이트
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="17" hl_lines="2 3"
-        output:
-        path "${input_bam}.g.vcf"     , emit: vcf
-        path "${input_bam}.g.vcf.idx" , emit: idx
-    ```
+```nextflow {2,3} title="modules/gatk_haplotypecaller.nf" showLineNumbers startLineNumber=17 step="전"
+    output:
+    path "${input_bam}.vcf"     , emit: vcf
+    path "${input_bam}.vcf.idx" , emit: idx
+```
 
-=== "전"
+```nextflow {2,3} title="modules/gatk_haplotypecaller.nf" showLineNumbers startLineNumber=17 step="후"
+    output:
+    path "${input_bam}.g.vcf"     , emit: vcf
+    path "${input_bam}.g.vcf.idx" , emit: idx
+```
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="17" hl_lines="2 3"
-        output:
-        path "${input_bam}.vcf"     , emit: vcf
-        path "${input_bam}.vcf.idx" , emit: idx
-    ```
+</CodeWalkthrough>
 
 또한 새 GVCF 출력을 반영하도록 워크플로우의 게시 및 출력 설정을 업데이트해야 합니다.
 
@@ -138,23 +142,23 @@ gatk HaplotypeCaller \
 이제 VCF 대신 GVCF를 생성하므로, 더 설명적인 이름을 사용하도록 워크플로우의 `publish:` 섹션을 업데이트해야 합니다.
 또한 명확성을 위해 GVCF 파일을 자체 하위 디렉토리로 구성하겠습니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="47" hl_lines="3 4"
-        publish:
-        indexed_bam = SAMTOOLS_INDEX.out
-        gvcf = GATK_HAPLOTYPECALLER.out.vcf
-        gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=47 step="전"
+    publish:
+    indexed_bam = SAMTOOLS_INDEX.out
+    vcf = GATK_HAPLOTYPECALLER.out.vcf
+    vcf_idx = GATK_HAPLOTYPECALLER.out.idx
+```
 
-=== "전"
+```nextflow {3,4} title="genomics.nf" showLineNumbers startLineNumber=47 step="후"
+    publish:
+    indexed_bam = SAMTOOLS_INDEX.out
+    gvcf = GATK_HAPLOTYPECALLER.out.vcf
+    gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
+```
 
-    ```groovy title="genomics.nf" linenums="47"
-        publish:
-        indexed_bam = SAMTOOLS_INDEX.out
-        vcf = GATK_HAPLOTYPECALLER.out.vcf
-        vcf_idx = GATK_HAPLOTYPECALLER.out.idx
-    ```
+</CodeWalkthrough>
 
 이제 일치하도록 출력 블록을 업데이트하세요.
 
@@ -162,37 +166,37 @@ gatk HaplotypeCaller \
 
 또한 GVCF 파일을 `gvcf` 하위 디렉토리에 넣도록 `output` 블록을 업데이트해야 합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="53" hl_lines="3 5 6 8 9"
-    output {
-        indexed_bam {
-            path 'indexed_bam'
-        }
-        gvcf {
-            path 'gvcf'
-        }
-        gvcf_idx {
-            path 'gvcf'
-        }
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=53 step="전"
+output {
+    indexed_bam {
+        path 'bam'
     }
-    ```
-
-=== "전"
-
-    ```groovy title="genomics.nf" linenums="53"
-    output {
-        indexed_bam {
-            path 'bam'
-        }
-        vcf {
-            path 'vcf'
-        }
-        vcf_idx {
-            path 'vcf'
-        }
+    vcf {
+        path 'vcf'
     }
-    ```
+    vcf_idx {
+        path 'vcf'
+    }
+}
+```
+
+```nextflow {3,5,6,8,9} title="genomics.nf" showLineNumbers startLineNumber=53 step="후"
+output {
+    indexed_bam {
+        path 'indexed_bam'
+    }
+    gvcf {
+        path 'gvcf'
+    }
+    gvcf_idx {
+        path 'gvcf'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 모듈, 게시 대상, 출력 블록이 모두 업데이트되었으므로 변경 사항을 테스트할 수 있습니다.
 
@@ -202,60 +206,59 @@ gatk HaplotypeCaller \
 
 ```bash
 nextflow run genomics.nf -profile test
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `genomics.nf` [crazy_solvay] revision: 1fa50d94ef
+
+executor >  local (6)
+[9f/c67a60] SAMTOOLS_INDEX (2)       | 3 of 3 ✔
+[47/a20c52] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/genomics/results
+
+  indexed_bam:
+    - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]
+    - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]
+    - [indexed_bam/reads_father.bam, indexed_bam/reads_father.bam.bai]
+
+  gvcf:
+    - gvcf/reads_son.bam.g.vcf
+    - gvcf/reads_father.bam.g.vcf
+    - gvcf/reads_mother.bam.g.vcf
+
+  gvcf_idx:
+    - gvcf/reads_son.bam.g.vcf.idx
+    - gvcf/reads_father.bam.g.vcf.idx
+    - gvcf/reads_mother.bam.g.vcf.idx
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `genomics.nf` [crazy_solvay] revision: 1fa50d94ef
-
-    executor >  local (6)
-    [9f/c67a60] SAMTOOLS_INDEX (2)       | 3 of 3 ✔
-    [47/a20c52] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/genomics/results
-
-      indexed_bam:
-        - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]
-        - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]
-        - [indexed_bam/reads_father.bam, indexed_bam/reads_father.bam.bai]
-
-      gvcf:
-        - gvcf/reads_son.bam.g.vcf
-        - gvcf/reads_father.bam.g.vcf
-        - gvcf/reads_mother.bam.g.vcf
-
-      gvcf_idx:
-        - gvcf/reads_son.bam.g.vcf.idx
-        - gvcf/reads_father.bam.g.vcf.idx
-        - gvcf/reads_mother.bam.g.vcf.idx
-    ```
 
 Nextflow 출력은 이전과 동일하게 보이지만, `.g.vcf` 파일과 해당 인덱스 파일이 이제 하위 디렉토리로 구성되어 있습니다.
 
-??? abstract "디렉토리 내용 (심볼릭 링크 축약됨)"
+<details class="abstract">
+<summary>디렉토리 내용 (심볼릭 링크 축약됨)</summary>
 
-    ```console
-    results/
-    ├── gvcf/
-    │   ├── reads_father.bam.g.vcf -> */0d/e1b164*/reads_father.bam.g.vcf
-    │   ├── reads_father.bam.g.vcf.idx -> */0d/e1b164*/reads_father.bam.g.vcf.idx
-    │   ├── reads_mother.bam.g.vcf -> */47/a20c52*/reads_mother.bam.g.vcf
-    │   ├── reads_mother.bam.g.vcf.idx -> */47/a20c52*/reads_mother.bam.g.vcf.idx
-    │   ├── reads_son.bam.g.vcf -> */a6/d2a73e*/reads_son.bam.g.vcf
-    │   └── reads_son.bam.g.vcf.idx -> */a6/d2a73e*/reads_son.bam.g.vcf.idx
-    └── indexed_bam/
-        ├── reads_father.bam -> */9f/c67a60*/reads_father.bam
-        ├── reads_father.bam.bai -> */9f/c67a60*/reads_father.bam.bai
-        ├── reads_mother.bam -> */bb/13a815*/reads_mother.bam
-        ├── reads_mother.bam.bai -> */bb/13a815*/reads_mother.bam.bai
-        ├── reads_son.bam -> */b3/27e144*/reads_son.bam
-        └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
-    ```
+```console
+results/
+├── gvcf/
+│   ├── reads_father.bam.g.vcf -> */0d/e1b164*/reads_father.bam.g.vcf
+│   ├── reads_father.bam.g.vcf.idx -> */0d/e1b164*/reads_father.bam.g.vcf.idx
+│   ├── reads_mother.bam.g.vcf -> */47/a20c52*/reads_mother.bam.g.vcf
+│   ├── reads_mother.bam.g.vcf.idx -> */47/a20c52*/reads_mother.bam.g.vcf.idx
+│   ├── reads_son.bam.g.vcf -> */a6/d2a73e*/reads_son.bam.g.vcf
+│   └── reads_son.bam.g.vcf.idx -> */a6/d2a73e*/reads_son.bam.g.vcf.idx
+└── indexed_bam/
+    ├── reads_father.bam -> */9f/c67a60*/reads_father.bam
+    ├── reads_father.bam.bai -> */9f/c67a60*/reads_father.bam.bai
+    ├── reads_mother.bam -> */bb/13a815*/reads_mother.bam
+    ├── reads_mother.bam.bai -> */bb/13a815*/reads_mother.bam.bai
+    ├── reads_son.bam -> */b3/27e144*/reads_son.bam
+    └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
+```
+
+</details>
 
 GVCF 파일 중 하나를 열어 스크롤하면 GATK HaplotypeCaller가 요청한 대로 GVCF 파일을 생성했는지 확인할 수 있습니다.
 
@@ -272,10 +275,10 @@ GVCF 파일 중 하나를 열어 스크롤하면 GATK HaplotypeCaller가 요청�
 ## 2. 조인트 유전자형 분석 단계 추가
 
 이제 샘플별 GVCF를 수집하고, GenomicsDB 데이터 저장소로 결합한 다음, 조인트 유전자형 분석을 실행하여 코호트 수준의 VCF를 생성해야 합니다.
-[파트 1](01_method.md)에서 다룬 것처럼, 이것은 두 도구 작업입니다: GenomicsDBImport가 GVCF를 결합하고, GenotypeGVCFs가 최종 변이 호출을 생성합니다.
+[파트 1](01_method.mdx)에서 다룬 것처럼, 이것은 두 도구 작업입니다: GenomicsDBImport가 GVCF를 결합하고, GenotypeGVCFs가 최종 변이 호출을 생성합니다.
 두 도구를 `GATK_JOINTGENOTYPING`이라는 단일 프로세스로 적용하겠습니다.
 
-[파트 1](01_method.md)의 두 명령을 상기해 보세요:
+[파트 1](01_method.mdx)의 두 명령을 상기해 보세요:
 
 ```bash
 gatk GenomicsDBImport \
@@ -306,22 +309,22 @@ gatk GenotypeGVCFs \
 코호트에 대한 임의의 이름을 제공해야 합니다.
 교육 시리즈의 후반부에서 이러한 종류의 작업에 샘플 메타데이터를 사용하는 방법을 배우겠지만, 지금은 `params`를 사용하여 CLI 매개변수를 선언합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="18" hl_lines="3-4"
-        intervals: Path
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=18 step="전"
+    intervals: Path
+}
+```
 
-        // 최종 출력 파일의 기본 이름
-        cohort_name: String
-    }
-    ```
+```nextflow {3-4} title="genomics.nf" showLineNumbers startLineNumber=18 step="후"
+    intervals: Path
 
-=== "전"
+    // 최종 출력 파일의 기본 이름
+    cohort_name: String
+}
+```
 
-    ```groovy title="genomics.nf" linenums="18"
-        intervals: Path
-    }
-    ```
+</CodeWalkthrough>
 
 이 매개변수를 최종 출력 파일 이름 지정에 사용하겠습니다.
 
@@ -329,30 +332,30 @@ gatk GenotypeGVCFs \
 
 또한 테스트 프로필에 `cohort_name` 매개변수의 기본값을 추가합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="4" hl_lines="7"
-    test {
-        params.input = "${projectDir}/data/samplesheet.csv"
-        params.reference = "${projectDir}/data/ref/ref.fasta"
-        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-        params.reference_dict = "${projectDir}/data/ref/ref.dict"
-        params.intervals = "${projectDir}/data/ref/intervals.bed"
-        params.cohort_name = "family_trio"
-    }
-    ```
+```nextflow title="nextflow.config" showLineNumbers startLineNumber=4 step="전"
+test {
+    params.input = "${projectDir}/data/samplesheet.csv"
+    params.reference = "${projectDir}/data/ref/ref.fasta"
+    params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+    params.reference_dict = "${projectDir}/data/ref/ref.dict"
+    params.intervals = "${projectDir}/data/ref/intervals.bed"
+}
+```
 
-=== "전"
+```nextflow {7} title="nextflow.config" showLineNumbers startLineNumber=4 step="후"
+test {
+    params.input = "${projectDir}/data/samplesheet.csv"
+    params.reference = "${projectDir}/data/ref/ref.fasta"
+    params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+    params.reference_dict = "${projectDir}/data/ref/ref.dict"
+    params.intervals = "${projectDir}/data/ref/intervals.bed"
+    params.cohort_name = "family_trio"
+}
+```
 
-    ```groovy title="nextflow.config" linenums="4"
-    test {
-        params.input = "${projectDir}/data/samplesheet.csv"
-        params.reference = "${projectDir}/data/ref/ref.fasta"
-        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-        params.reference_dict = "${projectDir}/data/ref/ref.dict"
-        params.intervals = "${projectDir}/data/ref/intervals.bed"
-    }
-    ```
+</CodeWalkthrough>
 
 다음으로, 샘플별 출력을 수집하여 함께 처리할 수 있도록 해야 합니다.
 
@@ -364,23 +367,23 @@ gatk GenotypeGVCFs \
 `collect()` 채널 연산자를 사용하여 이를 수행할 수 있습니다.
 GATK_HAPLOTYPECALLER 실행 직후 `workflow` 본문에 다음 줄을 추가하세요:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="48" hl_lines="4-6"
-            intervals_file
-        )
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=48 step="전"
+        intervals_file
+    )
+```
 
-        // 샘플 전체에서 변이 호출 출력 수집
-        all_gvcfs_ch = GATK_HAPLOTYPECALLER.out.vcf.collect()
-        all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
-    ```
+```nextflow {4-6} title="genomics.nf" showLineNumbers startLineNumber=48 step="후"
+        intervals_file
+    )
 
-=== "전"
+    // 샘플 전체에서 변이 호출 출력 수집
+    all_gvcfs_ch = GATK_HAPLOTYPECALLER.out.vcf.collect()
+    all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
+```
 
-    ```groovy title="genomics.nf" linenums="48"
-            intervals_file
-        )
-    ```
+</CodeWalkthrough>
 
 이를 분석하면:
 
@@ -390,9 +393,9 @@ GATK_HAPLOTYPECALLER 실행 직후 `workflow` 본문에 다음 줄을 추가하�
 
 Nextflow가 실행을 위해 모든 입력 파일을 함께 스테이징하므로 인덱스 파일이 GVCF와 함께 존재하게 되어, GVCF와 해당 인덱스 파일을 (튜플로 함께 유지하는 것과 반대로) 별도로 수집할 수 있습니다.
 
-!!! tip "팁"
-
-    `view()` 연산자를 사용하여 채널 연산자를 적용하기 전후에 채널의 내용을 검사할 수 있습니다.
+:::tip[팁]
+`view()` 연산자를 사용하여 채널 연산자를 적용하기 전후에 채널의 내용을 검사할 수 있습니다.
+:::
 
 ### 2.2. 조인트 유전자형 분석 프로세스 작성 및 워크플로우에서 실행
 
@@ -413,20 +416,20 @@ gatk GenomicsDBImport \
 
 `-V ${all_gvcfs_ch}`로 작성하면, Nextflow는 단순히 파일명을 연결하고 명령의 해당 부분은 다음과 같이 보일 것입니다:
 
-```groovy
+```nextflow
 -V reads_mother.bam.g.vcf reads_father.bam.g.vcf reads_son.bam.g.vcf
 ```
 
 하지만 문자열이 다음과 같이 보여야 합니다:
 
-```groovy
+```nextflow
 -V reads_mother.bam.g.vcf -V reads_father.bam.g.vcf -V reads_son.bam.g.vcf
 ```
 
 중요한 것은, 수집된 채널에 있는 파일이 무엇이든 이 문자열을 동적으로 구성해야 한다는 것입니다.
 Nextflow(Groovy를 통해)는 이를 수행하는 간결한 방법을 제공합니다:
 
-```groovy
+```nextflow
 def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
 ```
 
@@ -449,70 +452,70 @@ def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
 
 위에 제공된 정보를 사용하여 프로세스 정의를 작성한 다음, 아래 "후" 탭의 해결책과 비교하여 작업을 확인하세요.
 
-=== "전"
+<CodeWalkthrough>
 
-    ```groovy title="modules/gatk_jointgenotyping.nf" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/gatk_jointgenotyping.nf" showLineNumbers step="전"
+#!/usr/bin/env nextflow
 
-    /*
-     * GVCF를 GenomicsDB 데이터 저장소로 결합하고 조인트 유전자형 분석을 실행하여 코호트 수준의 호출 생성
-     */
-    process GATK_JOINTGENOTYPING {
+/*
+ * GVCF를 GenomicsDB 데이터 저장소로 결합하고 조인트 유전자형 분석을 실행하여 코호트 수준의 호출 생성
+ */
+process GATK_JOINTGENOTYPING {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-=== "후"
+```nextflow {8,11-17,20-21,24-25,29-33} title="modules/gatk_jointgenotyping.nf" showLineNumbers step="후"
+#!/usr/bin/env nextflow
 
-    ```groovy title="modules/gatk_jointgenotyping.nf" linenums="1" hl_lines="8 11-17 20-21 24-25 29-33"
-    #!/usr/bin/env nextflow
+/*
+ * GVCF를 GenomicsDB 데이터 저장소로 결합하고 조인트 유전자형 분석을 실행하여 코호트 수준의 호출 생성
+ */
+process GATK_JOINTGENOTYPING {
 
-    /*
-     * GVCF를 GenomicsDB 데이터 저장소로 결합하고 조인트 유전자형 분석을 실행하여 코호트 수준의 호출 생성
-     */
-    process GATK_JOINTGENOTYPING {
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-        container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+    input:
+    path all_gvcfs
+    path all_idxs
+    path interval_list
+    val cohort_name
+    path ref_fasta
+    path ref_index
+    path ref_dict
 
-        input:
-        path all_gvcfs
-        path all_idxs
-        path interval_list
-        val cohort_name
-        path ref_fasta
-        path ref_index
-        path ref_dict
+    output:
+    path "${cohort_name}.joint.vcf"     , emit: vcf
+    path "${cohort_name}.joint.vcf.idx" , emit: idx
 
-        output:
-        path "${cohort_name}.joint.vcf"     , emit: vcf
-        path "${cohort_name}.joint.vcf.idx" , emit: idx
+    script:
+    def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
+    """
+    gatk GenomicsDBImport \
+        ${gvcfs_line} \
+        -L ${interval_list} \
+        --genomicsdb-workspace-path ${cohort_name}_gdb
 
-        script:
-        def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
-        """
-        gatk GenomicsDBImport \
-            ${gvcfs_line} \
-            -L ${interval_list} \
-            --genomicsdb-workspace-path ${cohort_name}_gdb
+    gatk GenotypeGVCFs \
+        -R ${ref_fasta} \
+        -V gendb://${cohort_name}_gdb \
+        -L ${interval_list} \
+        -O ${cohort_name}.joint.vcf
+    """
+}
+```
 
-        gatk GenotypeGVCFs \
-            -R ${ref_fasta} \
-            -V gendb://${cohort_name}_gdb \
-            -L ${interval_list} \
-            -O ${cohort_name}.joint.vcf
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 여기서 주목할 만한 몇 가지가 있습니다.
 
@@ -532,22 +535,22 @@ GenomicsDB 데이터 저장소(`${cohort_name}_gdb`)는 프로세스 내에서�
 
 기존 import 문 아래에 `genomics.nf`에 import 문을 추가하세요:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="3" hl_lines="4"
-    // 모듈 INCLUDE 문
-    include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
-    include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
-    include { GATK_JOINTGENOTYPING } from './modules/gatk_jointgenotyping.nf'
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=3 step="전"
+// 모듈 INCLUDE 문
+include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
+include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
+```
 
-=== "전"
+```nextflow {4} title="genomics.nf" showLineNumbers startLineNumber=3 step="후"
+// 모듈 INCLUDE 문
+include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
+include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
+include { GATK_JOINTGENOTYPING } from './modules/gatk_jointgenotyping.nf'
+```
 
-    ```groovy title="genomics.nf" linenums="3"
-    // 모듈 INCLUDE 문
-    include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
-    include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
-    ```
+</CodeWalkthrough>
 
 이제 프로세스를 워크플로우 범위에서 사용할 수 있습니다.
 
@@ -555,28 +558,28 @@ GenomicsDB 데이터 저장소(`${cohort_name}_gdb`)는 프로세스 내에서�
 
 `collect()` 줄 다음에 워크플로우 본문에 `GATK_JOINTGENOTYPING` 실행을 추가하세요:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="53" hl_lines="3-12"
-        all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=53 step="전"
+    all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
+```
 
-        // GVCF를 GenomicsDB 데이터 저장소로 결합하고 조인트 유전자형 분석 적용
-        GATK_JOINTGENOTYPING(
-            all_gvcfs_ch,
-            all_idxs_ch,
-            intervals_file,
-            params.cohort_name,
-            ref_file,
-            ref_index_file,
-            ref_dict_file
-        )
-    ```
+```nextflow {3-12} title="genomics.nf" showLineNumbers startLineNumber=53 step="후"
+    all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
 
-=== "전"
+    // GVCF를 GenomicsDB 데이터 저장소로 결합하고 조인트 유전자형 분석 적용
+    GATK_JOINTGENOTYPING(
+        all_gvcfs_ch,
+        all_idxs_ch,
+        intervals_file,
+        params.cohort_name,
+        ref_file,
+        ref_index_file,
+        ref_dict_file
+    )
+```
 
-    ```groovy title="genomics.nf" linenums="53"
-        all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
-    ```
+</CodeWalkthrough>
 
 이제 프로세스가 완전히 연결되었습니다.
 다음으로 출력이 게시되는 방식을 설정합니다.
@@ -590,25 +593,25 @@ GenomicsDB 데이터 저장소(`${cohort_name}_gdb`)는 프로세스 내에서�
 
 워크플로우의 `publish:` 섹션에 조인트 VCF와 해당 인덱스를 추가하세요:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="66" hl_lines="5-6"
-        publish:
-        indexed_bam = SAMTOOLS_INDEX.out
-        gvcf = GATK_HAPLOTYPECALLER.out.vcf
-        gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
-        joint_vcf = GATK_JOINTGENOTYPING.out.vcf
-        joint_vcf_idx = GATK_JOINTGENOTYPING.out.idx
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=66 step="전"
+    publish:
+    indexed_bam = SAMTOOLS_INDEX.out
+    gvcf = GATK_HAPLOTYPECALLER.out.vcf
+    gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
+```
 
-=== "전"
+```nextflow {5-6} title="genomics.nf" showLineNumbers startLineNumber=66 step="후"
+    publish:
+    indexed_bam = SAMTOOLS_INDEX.out
+    gvcf = GATK_HAPLOTYPECALLER.out.vcf
+    gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
+    joint_vcf = GATK_JOINTGENOTYPING.out.vcf
+    joint_vcf_idx = GATK_JOINTGENOTYPING.out.idx
+```
 
-    ```groovy title="genomics.nf" linenums="66"
-        publish:
-        indexed_bam = SAMTOOLS_INDEX.out
-        gvcf = GATK_HAPLOTYPECALLER.out.vcf
-        gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
-    ```
+</CodeWalkthrough>
 
 이제 일치하도록 출력 블록을 업데이트하세요.
 
@@ -617,43 +620,43 @@ GenomicsDB 데이터 저장소(`${cohort_name}_gdb`)는 프로세스 내에서�
 조인트 VCF 파일에 대한 항목을 추가하세요.
 이것이 최종 출력이므로 결과 디렉토리의 루트에 배치하겠습니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="74" hl_lines="11-16"
-    output {
-        indexed_bam {
-            path 'indexed_bam'
-        }
-        gvcf {
-            path 'gvcf'
-        }
-        gvcf_idx {
-            path 'gvcf'
-        }
-        joint_vcf {
-            path '.'
-        }
-        joint_vcf_idx {
-            path '.'
-        }
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=74 step="전"
+output {
+    indexed_bam {
+        path 'indexed_bam'
     }
-    ```
-
-=== "전"
-
-    ```groovy title="genomics.nf" linenums="74"
-    output {
-        indexed_bam {
-            path 'indexed_bam'
-        }
-        gvcf {
-            path 'gvcf'
-        }
-        gvcf_idx {
-            path 'gvcf'
-        }
+    gvcf {
+        path 'gvcf'
     }
-    ```
+    gvcf_idx {
+        path 'gvcf'
+    }
+}
+```
+
+```nextflow {11-16} title="genomics.nf" showLineNumbers startLineNumber=74 step="후"
+output {
+    indexed_bam {
+        path 'indexed_bam'
+    }
+    gvcf {
+        path 'gvcf'
+    }
+    gvcf_idx {
+        path 'gvcf'
+    }
+    joint_vcf {
+        path '.'
+    }
+    joint_vcf_idx {
+        path '.'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 프로세스, 게시 대상, 출력 블록이 모두 준비되었으므로 완전한 워크플로우를 테스트할 수 있습니다.
 
@@ -663,72 +666,71 @@ GenomicsDB 데이터 저장소(`${cohort_name}_gdb`)는 프로세스 내에서�
 
 ```bash
 nextflow run genomics.nf -profile test -resume
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `genomics.nf` [maniac_shaw] revision: 7c1f77a8bc
+
+executor >  local (1)
+[9f/c67a60] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
+[a6/d2a73e] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
+[2a/6052e7] GATK_JOINTGENOTYPING     | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/genomics/results
+
+  indexed_bam:
+    - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]
+    - [indexed_bam/reads_father.bam, indexed_bam/reads_father.bam.bai]
+    - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]
+
+  gvcf:
+    - gvcf/reads_father.bam.g.vcf
+    - gvcf/reads_mother.bam.g.vcf
+    - gvcf/reads_son.bam.g.vcf
+
+  gvcf_idx:
+    - gvcf/reads_father.bam.g.vcf.idx
+    - gvcf/reads_mother.bam.g.vcf.idx
+    - gvcf/reads_son.bam.g.vcf.idx
+
+  joint_vcf: family_trio.joint.vcf
+
+  joint_vcf_idx: family_trio.joint.vcf.idx
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `genomics.nf` [maniac_shaw] revision: 7c1f77a8bc
-
-    executor >  local (1)
-    [9f/c67a60] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
-    [a6/d2a73e] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
-    [2a/6052e7] GATK_JOINTGENOTYPING     | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/genomics/results
-
-      indexed_bam:
-        - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]
-        - [indexed_bam/reads_father.bam, indexed_bam/reads_father.bam.bai]
-        - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]
-
-      gvcf:
-        - gvcf/reads_father.bam.g.vcf
-        - gvcf/reads_mother.bam.g.vcf
-        - gvcf/reads_son.bam.g.vcf
-
-      gvcf_idx:
-        - gvcf/reads_father.bam.g.vcf.idx
-        - gvcf/reads_mother.bam.g.vcf.idx
-        - gvcf/reads_son.bam.g.vcf.idx
-
-      joint_vcf: family_trio.joint.vcf
-
-      joint_vcf_idx: family_trio.joint.vcf.idx
-    ```
 
 처음 두 단계는 이전 실행에서 캐시되었으며, 새로운 `GATK_JOINTGENOTYPING` 단계는 세 샘플 모두의 수집된 입력에 대해 한 번 실행됩니다.
 최종 출력 파일인 `family_trio.joint.vcf`(및 해당 인덱스)는 결과 디렉토리에 있습니다.
 
-??? abstract "디렉토리 내용 (심볼릭 링크 축약됨)"
+<details class="abstract">
+<summary>디렉토리 내용 (심볼릭 링크 축약됨)</summary>
 
-    ```console
-    results/
-    ├── family_trio.joint.vcf -> */2a/6052e7*/family_trio.joint.vcf
-    ├── family_trio.joint.vcf.idx -> */2a/6052e7*/family_trio.joint.vcf.idx
-    ├── gvcf/
-    │   ├── reads_father.bam.g.vcf -> */0d/e1b164*/reads_father.bam.g.vcf
-    │   ├── reads_father.bam.g.vcf.idx -> */0d/e1b164*/reads_father.bam.g.vcf.idx
-    │   ├── reads_mother.bam.g.vcf -> */47/a20c52*/reads_mother.bam.g.vcf
-    │   ├── reads_mother.bam.g.vcf.idx -> */47/a20c52*/reads_mother.bam.g.vcf.idx
-    │   ├── reads_son.bam.g.vcf -> */a6/d2a73e*/reads_son.bam.g.vcf
-    │   └── reads_son.bam.g.vcf.idx -> */a6/d2a73e*/reads_son.bam.g.vcf.idx
-    └── indexed_bam/
-        ├── reads_father.bam -> */9f/c67a60*/reads_father.bam
-        ├── reads_father.bam.bai -> */9f/c67a60*/reads_father.bam.bai
-        ├── reads_mother.bam -> */bb/13a815*/reads_mother.bam
-        ├── reads_mother.bam.bai -> */bb/13a815*/reads_mother.bam.bai
-        ├── reads_son.bam -> */b3/27e144*/reads_son.bam
-        └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
-    ```
+```console
+results/
+├── family_trio.joint.vcf -> */2a/6052e7*/family_trio.joint.vcf
+├── family_trio.joint.vcf.idx -> */2a/6052e7*/family_trio.joint.vcf.idx
+├── gvcf/
+│   ├── reads_father.bam.g.vcf -> */0d/e1b164*/reads_father.bam.g.vcf
+│   ├── reads_father.bam.g.vcf.idx -> */0d/e1b164*/reads_father.bam.g.vcf.idx
+│   ├── reads_mother.bam.g.vcf -> */47/a20c52*/reads_mother.bam.g.vcf
+│   ├── reads_mother.bam.g.vcf.idx -> */47/a20c52*/reads_mother.bam.g.vcf.idx
+│   ├── reads_son.bam.g.vcf -> */a6/d2a73e*/reads_son.bam.g.vcf
+│   └── reads_son.bam.g.vcf.idx -> */a6/d2a73e*/reads_son.bam.g.vcf.idx
+└── indexed_bam/
+    ├── reads_father.bam -> */9f/c67a60*/reads_father.bam
+    ├── reads_father.bam.bai -> */9f/c67a60*/reads_father.bam.bai
+    ├── reads_mother.bam -> */bb/13a815*/reads_mother.bam
+    ├── reads_mother.bam.bai -> */bb/13a815*/reads_mother.bam.bai
+    ├── reads_son.bam -> */b3/27e144*/reads_son.bam
+    └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
+```
+
+</details>
 
 조인트 VCF 파일을 열면 워크플로우가 예상된 변이 호출을 생성했는지 확인할 수 있습니다.
 
-```console title="family_trio.joint.vcf" linenums="40"
+```console title="family_trio.joint.vcf" showLineNumbers startLineNumber=40
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_father	reads_mother	reads_son
 20_10037292_10066351	3480	.	C	CT	1625.89	.	AC=5;AF=0.833;AN=6;BaseQRankSum=0.220;DP=85;ExcessHet=0.0000;FS=2.476;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=21.68;ReadPosRankSum=-1.147e+00;SOR=0.487	GT:AD:DP:GQ:PL	0/1:15,16:31:99:367,0,375	1/1:0,18:18:54:517,54,0	1/1:0,26:26:78:756,78,0
 20_10037292_10066351	3520	.	AT	A	1678.89	.	AC=5;AF=0.833;AN=6;BaseQRankSum=1.03;DP=80;ExcessHet=0.0000;FS=2.290;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=22.39;ReadPosRankSum=0.701;SOR=0.730	GT:AD:DP:GQ:PL	0/1:18,13:31:99:296,0,424	1/1:0,18:18:54:623,54,0	1/1:0,26:26:78:774,78,0
@@ -737,11 +739,11 @@ nextflow run genomics.nf -profile test -resume
 
 이제 자동화되고 완전히 재현 가능한 조인트 변이 호출 워크플로우가 완성되었습니다!
 
-!!! note "참고"
-
-    제공된 데이터 파일은 염색체 20의 아주 작은 부분만 다룬다는 점을 명심하세요.
-    실제 변이 호출 세트의 크기는 수백만 개의 변이로 계산됩니다.
-    그래서 교육 목적으로는 아주 작은 데이터 하위 집합만 사용합니다!
+:::note[참고]
+제공된 데이터 파일은 염색체 20의 아주 작은 부분만 다룬다는 점을 명심하세요.
+실제 변이 호출 세트의 크기는 수백만 개의 변이로 계산됩니다.
+그래서 교육 목적으로는 아주 작은 데이터 하위 집합만 사용합니다!
+:::
 
 ### 핵심 정리
 
@@ -752,4 +754,4 @@ nextflow run genomics.nf -profile test -resume
 
 스스로를 크게 칭찬하세요! Nextflow for Genomics 과정을 완료했습니다.
 
-학습한 내용을 검토하고 다음 단계를 알아보려면 최종 [과정 요약](./next_steps.md)으로 이동하세요.
+학습한 내용을 검토하고 다음 단계를 알아보려면 최종 [과정 요약](./next_steps.mdx)으로 이동하세요.

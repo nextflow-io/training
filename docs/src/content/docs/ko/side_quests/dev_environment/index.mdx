@@ -1,16 +1,19 @@
-# 개발 환경
+---
+title: 개발 환경
+description: 현대적인 통합 개발 환경(IDE)은 Nextflow 개발 경험을 크게 향상시킬 수 있습니다.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 현대적인 통합 개발 환경(IDE)은 Nextflow 개발 경험을 크게 향상시킬 수 있습니다. 이 사이드 퀘스트는 VS Code와 Nextflow 확장 기능을 활용하여 코드를 더 빠르게 작성하고, 오류를 조기에 발견하며, 복잡한 워크플로우를 효율적으로 탐색하는 방법에 초점을 맞춥니다.
 
-!!! note "일반적인 튜토리얼과는 다릅니다"
-
-    다른 교육 모듈과 달리, 이 가이드는 단계별 튜토리얼이 아닌 간단한 힌트, 팁, 실용적인 예제 모음으로 구성되어 있습니다. 각 섹션은 관심사와 현재 개발 필요에 따라 독립적으로 살펴볼 수 있습니다. 워크플로우 개발에 가장 즉각적으로 유용한 기능에 집중하여 자유롭게 탐색하세요.
+:::note[일반적인 튜토리얼과는 다릅니다]
+다른 교육 모듈과 달리, 이 가이드는 단계별 튜토리얼이 아닌 간단한 힌트, 팁, 실용적인 예제 모음으로 구성되어 있습니다. 각 섹션은 관심사와 현재 개발 필요에 따라 독립적으로 살펴볼 수 있습니다. 워크플로우 개발에 가장 즉각적으로 유용한 기능에 집중하여 자유롭게 탐색하세요.
+:::
 
 ## 먼저 알아야 할 사항
 
-이 가이드는 [Hello Nextflow](../../hello_nextflow/index.md) 교육 과정을 완료하고 다음을 포함한 Nextflow의 기본 개념에 익숙하다고 가정합니다:
+이 가이드는 [Hello Nextflow](../../hello_nextflow/index.mdx) 교육 과정을 완료하고 다음을 포함한 Nextflow의 기본 개념에 익숙하다고 가정합니다:
 
 - **기본 워크플로우 구조**: 프로세스, 워크플로우, 그리고 이들이 어떻게 연결되는지 이해
 - **채널 연산**: 채널 생성, 프로세스 간 데이터 전달, 기본 연산자 사용
@@ -28,11 +31,11 @@
 - **서식 지정 및 구성**: 일관되고 읽기 쉬운 코드 스타일 유지
 - **AI 보조 개발** (선택 사항): IDE와 통합된 현대적인 AI 도구 사용
 
-!!! info "지금 IDE 기능을 다루는 이유"
+:::note[지금 IDE 기능을 다루는 이유]
+[Hello Nextflow](../../hello_nextflow/index.mdx) 과정에서 이미 VS Code를 사용해 왔지만, IDE 기능보다는 Nextflow 기본 개념 학습에 집중했습니다. 이제 프로세스, 워크플로우, 채널, 모듈과 같은 기본 Nextflow 개념에 익숙해졌으므로, 더 효율적인 개발자가 될 수 있도록 도와주는 정교한 IDE 기능을 활용할 준비가 되었습니다.
 
-    [Hello Nextflow](../../hello_nextflow/index.md) 과정에서 이미 VS Code를 사용해 왔지만, IDE 기능보다는 Nextflow 기본 개념 학습에 집중했습니다. 이제 프로세스, 워크플로우, 채널, 모듈과 같은 기본 Nextflow 개념에 익숙해졌으므로, 더 효율적인 개발자가 될 수 있도록 도와주는 정교한 IDE 기능을 활용할 준비가 되었습니다.
-
-    이것은 개발 환경을 "한 단계 업그레이드"하는 것으로 생각하세요. 지금까지 사용해 온 동일한 편집기에는 무엇을 도와주는지 이해하고 나면 진정한 가치를 발휘하는 훨씬 강력한 기능들이 있습니다.
+이것은 개발 환경을 "한 단계 업그레이드"하는 것으로 생각하세요. 지금까지 사용해 온 동일한 편집기에는 무엇을 도와주는지 이해하고 나면 진정한 가치를 발휘하는 훨씬 강력한 기능들이 있습니다.
+:::
 
 ---
 
@@ -77,10 +80,10 @@ tree .
 2 directories, 12 files
 ```
 
-!!! note "예제 파일에 대하여"
-
-    - `basic_workflow.nf`는 실행하고 수정할 수 있는 작동하는 기본 워크플로우입니다.
-    - `complex_workflow.nf`는 탐색 기능을 보여주기 위한 예시용으로만 설계되었습니다. 성공적으로 실행되지 않을 수 있지만, 실제적인 다중 파일 워크플로우 구조를 보여줍니다.
+:::note[예제 파일에 대하여]
+- `basic_workflow.nf`는 실행하고 수정할 수 있는 작동하는 기본 워크플로우입니다.
+- `complex_workflow.nf`는 탐색 기능을 보여주기 위한 예시용으로만 설계되었습니다. 성공적으로 실행되지 않을 수 있지만, 실제적인 다중 파일 워크플로우 구조를 보여줍니다.
+:::
 
 ### 키보드 단축키
 
@@ -92,25 +95,25 @@ Mac을 사용하는 경우, 일부(전부는 아님) 키보드 단축키는 "ctr
 
 ### 0.1. Nextflow 확장 기능 설치
 
-!!! note "이미 Devcontainer를 사용 중이신가요?"
-
-    **GitHub Codespaces**에서 작업 중이거나 **로컬 devcontainer**를 사용하는 경우, Nextflow 확장 기능이 이미 설치되어 설정되어 있을 가능성이 높습니다. 아래의 수동 설치 단계를 건너뛰고 확장 기능 탐색으로 바로 진행할 수 있습니다.
+:::note[이미 Devcontainer를 사용 중이신가요?]
+**GitHub Codespaces**에서 작업 중이거나 **로컬 devcontainer**를 사용하는 경우, Nextflow 확장 기능이 이미 설치되어 설정되어 있을 가능성이 높습니다. 아래의 수동 설치 단계를 건너뛰고 확장 기능 탐색으로 바로 진행할 수 있습니다.
+:::
 
 확장 기능을 수동으로 설치하려면:
 
 1. VS Code를 엽니다.
-2. 왼쪽의 확장 기능 아이콘을 클릭하여 확장 기능 보기로 이동합니다: ![extensions icon](../img/extensions_icon.png) (VS Code를 로컬에서 실행하는 경우 단축키 `Ctrl/Cmd+Shift+X`)
+2. 왼쪽의 확장 기능 아이콘을 클릭하여 확장 기능 보기로 이동합니다: ![extensions icon](../../../side_quests/img/extensions_icon.png) (VS Code를 로컬에서 실행하는 경우 단축키 `Ctrl/Cmd+Shift+X`)
 3. "Nextflow"를 검색합니다.
 4. 공식 Nextflow 확장 기능을 설치합니다.
 
-![Nextflow 확장 기능 설치](../img/install_extension.png)
+![Nextflow 확장 기능 설치](../../../side_quests/img/install_extension.png)
 
 ### 0.2. 작업 공간 레이아웃
 
 Hello Nextflow 전반에 걸쳐 VS Code를 사용해 왔으므로 기본 사항은 이미 익숙할 것입니다. 이 세션을 위해 작업 공간을 효율적으로 구성하는 방법은 다음과 같습니다:
 
 - **편집기 영역**: 파일 보기 및 편집용. 파일을 나란히 비교하기 위해 여러 창으로 분할할 수 있습니다.
-- **파일 탐색기(File Explorer)** 클릭 (![file explorer icon](../img/files_icon.png)) (`Ctrl/Cmd+Shift+E`): 시스템의 로컬 파일 및 폴더. 파일 간 탐색을 위해 왼쪽에 열어 두세요.
+- **파일 탐색기(File Explorer)** 클릭 (![file explorer icon](../../../side_quests/img/files_icon.png)) (`Ctrl/Cmd+Shift+E`): 시스템의 로컬 파일 및 폴더. 파일 간 탐색을 위해 왼쪽에 열어 두세요.
 - **통합 터미널** (Windows와 MacOS 모두 `Ctrl+Shift+` 백틱): 하단에 있는 컴퓨터와 상호작용하기 위한 터미널. Nextflow 또는 다른 명령을 실행하는 데 사용합니다.
 - **문제 패널(Problems Panel)** (`Ctrl+Shift+M`): VS Code가 감지한 오류와 문제를 여기에 표시합니다. 한눈에 문제를 확인하는 데 유용합니다.
 
@@ -134,7 +137,7 @@ Nextflow 확장 기능이 설치된 VS Code가 설정되었으며, 효율적인 
 
 `basic_workflow.nf`를 열어 구문 강조를 확인합니다:
 
-![구문 강조 예시](../img/syntax_showcase.png)
+![구문 강조 예시](../../../side_quests/img/syntax_showcase.png)
 
 VS Code가 다음을 강조하는 방식을 확인하세요:
 
@@ -144,9 +147,9 @@ VS Code가 다음을 강조하는 방식을 확인하세요:
 - **변수**와 **함수 호출**이 적절한 강조로 표시됨
 - **코드 블록**이 적절한 들여쓰기 가이드와 함께 표시됨
 
-!!! note "테마에 따른 색상 차이"
-
-    표시되는 특정 색상은 VS Code 테마(다크/라이트 모드), 색상 설정, 사용자 정의에 따라 달라집니다. 중요한 것은 서로 다른 구문 요소가 시각적으로 구분되어, 선택한 색상 구성표에 관계없이 코드 구조를 더 쉽게 이해할 수 있다는 점입니다.
+:::note[테마에 따른 색상 차이]
+표시되는 특정 색상은 VS Code 테마(다크/라이트 모드), 색상 설정, 사용자 정의에 따라 달라집니다. 중요한 것은 서로 다른 구문 요소가 시각적으로 구분되어, 선택한 색상 구성표에 관계없이 코드 구조를 더 쉽게 이해할 수 있다는 점입니다.
+:::
 
 ### 1.2. 코드 구조 이해
 
@@ -182,7 +185,7 @@ VS Code의 자동 완성 기능은 컨텍스트에 따라 적절한 옵션을 �
 
 `basic_workflow.nf`를 다시 열고 workflow 블록에서 `channel.`을 입력해 봅니다:
 
-![채널 자동 완성](../img/autocomplete_channel.png)
+![채널 자동 완성](../../../side_quests/img/autocomplete_channel.png)
 
 다음에 대한 제안이 표시됩니다:
 
@@ -196,19 +199,19 @@ VS Code의 자동 완성 기능은 컨텍스트에 따라 적절한 옵션을 �
 
 채널에 적용할 수 있는 연산자도 확인할 수 있습니다. 예를 들어, `FASTQC.out.html.`을 입력하면 사용 가능한 연산을 볼 수 있습니다:
 
-![채널 연산 자동 완성](../img/autocomplete_operators.png)
+![채널 연산 자동 완성](../../../side_quests/img/autocomplete_operators.png)
 
 #### Process 지시문
 
 process 스크립트 블록 내에서 `task.`를 입력하면 사용 가능한 런타임 속성을 볼 수 있습니다:
 
-![작업 속성 자동 완성](../img/autocomplete_task.png)
+![작업 속성 자동 완성](../../../side_quests/img/autocomplete_task.png)
 
 #### 설정
 
 nextflow.config를 열고 어디서든 `process.`를 입력하면 사용 가능한 process 지시문을 볼 수 있습니다:
 
-![설정 자동 완성](../img/autocomplete_config.png)
+![설정 자동 완성](../../../side_quests/img/autocomplete_config.png)
 
 다음에 대한 제안이 표시됩니다:
 
@@ -234,17 +237,17 @@ VS Code의 실시간 오류 감지는 워크플로우 실행 전에 문제를 �
 
 감지 기능을 확인하기 위해 의도적으로 오류를 만들어 봅니다. `basic_workflow.nf`를 열고 process 이름을 `FASTQC`에서 `FASTQ`(또는 다른 잘못된 이름)로 변경합니다. VS Code는 즉시 workflow 블록의 오류를 빨간색 물결 밑줄로 강조합니다:
 
-![오류 밑줄](../img/error_underline.png)
+![오류 밑줄](../../../side_quests/img/error_underline.png)
 
 ### 3.2. 문제 패널
 
 개별 오류 강조 외에도, VS Code는 작업 공간 전체의 모든 오류, 경고, 정보 메시지를 집계하는 중앙화된 문제 패널을 제공합니다. `Ctrl/Cmd+Shift+M`으로 열고 필터 아이콘을 사용하여 현재 파일과 관련된 오류만 표시합니다:
 
-![문제 패널 필터링](../img/active_file.png)
+![문제 패널 필터링](../../../side_quests/img/active_file.png)
 
 문제를 클릭하면 해당 줄로 바로 이동합니다.
 
-![문제 패널](../img/problems_panel.png)
+![문제 패널](../../../side_quests/img/problems_panel.png)
 
 process 이름을 `FASTQC`로 되돌려 오류를 수정합니다.
 
@@ -274,47 +277,47 @@ VS Code의 오류 감지와 문제 패널을 사용하여 워크플로우 실행
 
 복잡한 워크플로우를 여러 파일에 걸쳐 작업할 때 효율적인 탐색이 중요합니다. 이를 이해하기 위해 `basic_workflow.nf`의 process 정의를 제공된 모듈의 import로 교체합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="basic_workflow.nf" linenums="3"
-    include { FASTQC } from './modules/fastqc.nf'
-    ```
+```nextflow title="basic_workflow.nf" showLineNumbers startLineNumber=3 step="전"
+process FASTQC {
+    tag "${sample_id}"
 
-=== "전"
+    input:
+    tuple val(sample_id), path(reads)
 
-    ```groovy title="basic_workflow.nf" linenums="3"
-    process FASTQC {
-        tag "${sample_id}"
+    output:
+    tuple val(sample_id), path("*.html"), emit: html
+    tuple val(sample_id), path("*.zip"), emit: zip
 
-        input:
-        tuple val(sample_id), path(reads)
+    script:
+    def args = task.ext.args ?: ''
+    """
+    fastqc \\
+        ${args} \\
+        --threads ${task.cpus} \\
+        ${reads}
+    """
+}
+```
 
-        output:
-        tuple val(sample_id), path("*.html"), emit: html
-        tuple val(sample_id), path("*.zip"), emit: zip
+```nextflow title="basic_workflow.nf" showLineNumbers startLineNumber=3 step="후"
+include { FASTQC } from './modules/fastqc.nf'
+```
 
-        script:
-        def args = task.ext.args ?: ''
-        """
-        fastqc \\
-            ${args} \\
-            --threads ${task.cpus} \\
-            ${reads}
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 ### 4.1. 정의로 이동
 
 `FASTQC`와 같은 process 이름 위에 마우스를 올리면 모듈 인터페이스(입력 및 출력)가 포함된 팝업이 표시됩니다:
 
-![정의로 이동](../img/syntax.png)
+![정의로 이동](../../../side_quests/img/syntax.png)
 
 이 기능은 워크플로우를 작성할 때 특히 유용합니다. 모듈 파일을 직접 열지 않고도 모듈 인터페이스를 이해할 수 있습니다.
 
 **Ctrl/Cmd-클릭**을 사용하여 process, 모듈, 변수 정의로 빠르게 이동할 수 있습니다. 스크립트 상단의 모듈 파일 링크 위에 마우스를 올리고 제안된 링크를 따라갑니다:
 
-![링크 따라가기](../img/follow_link.png)
+![링크 따라가기](../../../side_quests/img/follow_link.png)
 
 process 이름에도 동일하게 작동합니다. `basic_workflow.nf`로 돌아가서 workflow 블록의 `FASTQC` process 이름에 이를 적용합니다. 이렇게 하면 process 이름으로 직접 연결됩니다(이 예제에서는 모듈 파일과 동일하지만, 훨씬 더 큰 파일의 중간 부분일 수도 있습니다).
 
@@ -333,7 +336,7 @@ process 이름에도 동일하게 작동합니다. `basic_workflow.nf`로 돌아
 
 `complex_workflow.nf`가 열린 상태에서 VSCode 상단의 검색 창에 `@`를 입력하면 파일의 모든 심볼 개요를 볼 수 있습니다(키보드 단축키는 `Ctrl/Cmd+Shift+O`이지만 Codespaces에서는 작동하지 않을 수 있습니다). 현재 파일의 모든 심볼을 나열하는 심볼 탐색 패널이 열립니다:
 
-![심볼 탐색](../img/symbols.png)
+![심볼 탐색](../../../side_quests/img/symbols.png)
 
 다음이 표시됩니다:
 
@@ -347,15 +350,15 @@ process 이름에도 동일하게 작동합니다. `basic_workflow.nf`로 돌아
 
 코드베이스 전체에서 process 또는 변수가 사용되는 위치를 파악하는 것은 매우 유용합니다. 예를 들어, `FASTQC` process에 대한 모든 참조를 찾으려면 먼저 해당 정의로 이동합니다. `modules/fastqc.nf`를 직접 열거나, 위에서 했던 것처럼 `Ctrl/Cmd-클릭`을 사용하여 VS Code의 빠른 탐색 기능을 활용할 수 있습니다. process 정의에 도달하면 `FASTQC` process 이름을 마우스 오른쪽 버튼으로 클릭하고 컨텍스트 메뉴에서 "Find All References"를 선택하면 사용된 모든 인스턴스를 볼 수 있습니다.
 
-![참조 찾기](../img/references.png)
+![참조 찾기](../../../side_quests/img/references.png)
 
 이 기능은 두 개의 서로 다른 워크플로우에서의 사용을 포함하여 작업 공간 내에서 `FASTQC`가 참조되는 모든 인스턴스를 표시합니다. 이는 `FASTQC` process 수정의 잠재적 영향을 평가하는 데 매우 중요합니다.
 
 ### 4.4. 개요 패널
 
-탐색기 사이드바(![Explorer icon](../img/files_icon.png) 클릭)에 있는 개요 패널은 현재 파일의 모든 심볼에 대한 편리한 개요를 제공합니다. 이 기능을 통해 함수, 변수 및 기타 주요 요소를 계층적 보기로 표시하여 코드 구조를 빠르게 탐색하고 관리할 수 있습니다.
+탐색기 사이드바(![Explorer icon](../../../side_quests/img/files_icon.png) 클릭)에 있는 개요 패널은 현재 파일의 모든 심볼에 대한 편리한 개요를 제공합니다. 이 기능을 통해 함수, 변수 및 기타 주요 요소를 계층적 보기로 표시하여 코드 구조를 빠르게 탐색하고 관리할 수 있습니다.
 
-![개요 패널](../img/outline.png)
+![개요 패널](../../../side_quests/img/outline.png)
 
 파일 브라우저를 사용하지 않고 개요 패널을 사용하여 코드의 다른 부분으로 빠르게 이동합니다.
 
@@ -363,11 +366,11 @@ process 이름에도 동일하게 작동합니다. `basic_workflow.nf`로 돌아
 
 VS Code의 Nextflow 확장 기능은 워크플로우를 방향성 비순환 그래프(DAG)로 시각화할 수 있습니다. 이를 통해 프로세스 간의 데이터 흐름과 의존성을 이해할 수 있습니다. `complex_workflow.nf`를 열고 `workflow {` 위의 "Preview DAG" 버튼을 클릭합니다(이 파일의 두 번째 `workflow` 블록):
 
-![DAG 미리보기](../img/dag_preview.png)
+![DAG 미리보기](../../../side_quests/img/dag_preview.png)
 
 이것은 '진입점' 워크플로우이지만, 더 위에 있는 `RNASEQ_PIPELINE {` 워크플로우 위의 "Preview DAG" 버튼을 클릭하여 내부 워크플로우의 DAG도 미리 볼 수 있습니다:
 
-![내부 워크플로우 DAG 미리보기](../img/dag_preview_inner.png)
+![내부 워크플로우 DAG 미리보기](../../../side_quests/img/dag_preview_inner.png)
 
 이 워크플로우에서는 DAG의 노드를 사용하여 코드의 해당 process 정의로 이동할 수 있습니다. 노드를 클릭하면 편집기의 관련 process 정의로 이동합니다. 특히 워크플로우가 대규모로 성장할 때, 이 기능은 코드를 탐색하고 프로세스가 어떻게 연결되어 있는지 이해하는 데 큰 도움이 됩니다.
 
@@ -406,7 +409,7 @@ VS Code가 일치하는 파일을 표시합니다. `modules/fastqc.nf`를 선택
 3. `modules/fastqc.nf` 탭을 마우스 오른쪽 버튼으로 클릭하고 "Split Right"를 선택합니다.
 4. 이제 두 파일을 나란히 볼 수 있습니다.
 
-![분할 편집기](../img/split_editor.png)
+![분할 편집기](../../../side_quests/img/split_editor.png)
 
 다음과 같은 경우에 유용합니다:
 
@@ -420,7 +423,7 @@ VS Code가 일치하는 파일을 표시합니다. `modules/fastqc.nf`를 선택
 
 작업 공간 전체에서 `container`를 검색해 봅니다:
 
-![프로젝트 검색](../img/project_search.png)
+![프로젝트 검색](../../../side_quests/img/project_search.png)
 
 이를 통해 container 지시문을 사용하는 모든 파일을 볼 수 있어 다음에 도움이 됩니다:
 
@@ -469,7 +472,7 @@ VS Code가 즉시:
 
 워크플로우에서 코드 블록을 선택하고 **Ctrl+/** (또는 **Cmd+/**)를 눌러 주석 처리합니다:
 
-```groovy
+```nextflow
 // workflow {
 //     ch_input = channel.fromPath(params.input)
 //         .splitCsv(header: true)
@@ -491,7 +494,7 @@ VS Code가 즉시:
 
 `complex_workflow.nf`에서 process 정의 옆의 작은 화살표를 확인합니다. 클릭하여 프로세스를 접습니다(축소):
 
-![코드 접기](../img/code_folding.png)
+![코드 접기](../../../side_quests/img/code_folding.png)
 
 이를 통해 구현 세부 사항에 빠져들지 않고 워크플로우 구조의 상위 수준 개요를 볼 수 있습니다.
 
@@ -534,9 +537,9 @@ VS Code는 코드 편집을 넘어 개발 워크플로우와 잘 통합됩니다
 
 ### 7.1. 버전 관리 통합
 
-!!! note "Codespaces와 Git 통합"
-
-    **GitHub Codespaces**에서 작업 중인 경우, 일부 Git 통합 기능이 예상대로 작동하지 않을 수 있습니다. 특히 소스 제어를 위한 키보드 단축키가 그렇습니다. 초기 설정 시 디렉토리를 Git 저장소로 열기를 거부했을 수도 있는데, 교육 목적으로는 괜찮습니다.
+:::note[Codespaces와 Git 통합]
+**GitHub Codespaces**에서 작업 중인 경우, 일부 Git 통합 기능이 예상대로 작동하지 않을 수 있습니다. 특히 소스 제어를 위한 키보드 단축키가 그렇습니다. 초기 설정 시 디렉토리를 Git 저장소로 열기를 거부했을 수도 있는데, 교육 목적으로는 괜찮습니다.
+:::
 
 프로젝트가 git 저장소인 경우(이 경우처럼), VS Code는 다음을 표시합니다:
 
@@ -545,9 +548,9 @@ VS Code는 코드 편집을 넘어 개발 워크플로우와 잘 통합됩니다
 - 인라인 diff 보기
 - 커밋 및 푸시 기능
 
-소스 제어 버튼(![Source control icon](../img/source_control_icon.png))을 사용하여 소스 제어 패널을 엽니다(VS Code를 로컬에서 사용하는 경우 `Ctrl+Shift+G` 또는 `Cmd+Shift+G`). 편집기에서 직접 git 변경 사항을 확인하고 커밋을 스테이징할 수 있습니다.
+소스 제어 버튼(![Source control icon](../../../side_quests/img/source_control_icon.png))을 사용하여 소스 제어 패널을 엽니다(VS Code를 로컬에서 사용하는 경우 `Ctrl+Shift+G` 또는 `Cmd+Shift+G`). 편집기에서 직접 git 변경 사항을 확인하고 커밋을 스테이징할 수 있습니다.
 
-![소스 제어 패널](../img/source_control.png)
+![소스 제어 패널](../../../side_quests/img/source_control.png)
 
 ### 7.2. 워크플로우 실행 및 결과 검사
 
@@ -619,8 +622,8 @@ VS Code의 Nextflow 개발을 위한 IDE 기능을 빠르게 살펴보았습니�
 
 다른 교육 모듈을 진행하면서 이러한 IDE 기술을 적용해 보세요. 예를 들어:
 
-- **[nf-test](../nf_test/index.md)**: 워크플로우를 위한 포괄적인 테스트 스위트 작성
-- **[Build with nf-core](../../nfcore_build/index.md)**: 커뮤니티 표준으로 프로덕션 품질의 파이프라인 구축
+- **[nf-test](../nf_test/index.mdx)**: 워크플로우를 위한 포괄적인 테스트 스위트 작성
+- **[Build with nf-core](../../nfcore_build/index.mdx)**: 커뮤니티 표준으로 프로덕션 품질의 파이프라인 구축
 
 이러한 IDE 기능의 진정한 힘은 더 크고 복잡한 프로젝트를 진행할 때 발휘됩니다. 단계적으로 워크플로우에 통합하기 시작하세요. 몇 번의 세션 후에는 자연스럽게 익숙해져 Nextflow 개발에 접근하는 방식이 달라질 것입니다.
 

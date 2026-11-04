@@ -1,6 +1,9 @@
-# Divisió i Agrupació
+---
+title: Divisió i Agrupació
+description: Nextflow proporciona eines potents per treballar amb dades de manera flexible.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Nextflow proporciona eines potents per treballar amb dades de manera flexible. Una capacitat clau és dividir les dades en diferents fluxos i després agrupar els elements relacionats. Això és especialment valuós en workflows de bioinformàtica on cal processar diferents tipus de mostres de manera independent abans de combinar els resultats per a l'anàlisi.
 
@@ -28,10 +31,10 @@ Aquestes habilitats us ajudaran a construir workflows que puguin gestionar múlt
 
 Abans d'abordar aquesta missió secundària, hauríeu de:
 
-- Haver completat el tutorial [Hello Nextflow](../../hello_nextflow/index.md) o un curs equivalent per a principiants.
+- Haver completat el tutorial [Hello Nextflow](../../hello_nextflow/index.mdx) o un curs equivalent per a principiants.
 - Estar còmodes amb els conceptes i mecanismes bàsics de Nextflow (processos, canals, operadors, treball amb fitxers, metadades)
 
-**Opcional:** Recomanem completar primer la missió secundària [Metadata in workflows](../metadata/index.md).
+**Opcional:** Recomanem completar primer la missió secundària [Metadata in workflows](../metadata/index.mdx).
 Aquesta cobreix els fonaments de la lectura de fitxers CSV amb `splitCsv` i la creació de mapes de metadades, que utilitzarem àmpliament aquí.
 
 ---
@@ -40,7 +43,7 @@ Aquesta cobreix els fonaments de la lectura de fitxers CSV amb `splitCsv` i la c
 
 #### Obriu l'espai de treball de formació
 
-Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../../envsetup/index.md).
+Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../../envsetup/index.mdx).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -92,9 +95,9 @@ Si no esteu familiaritzats amb l'anàlisi del càncer, simplement sapigueu que a
 
 Per al pacient A específicament, tenim dos conjunts de rèpliques tècniques (repeticions).
 
-!!! note "Nota"
-
-    No us preocupeu si no esteu familiaritzats amb aquest disseny experimental, no és crític per entendre aquest tutorial.
+:::note[Nota]
+No us preocupeu si no esteu familiaritzats amb aquest disseny experimental, no és crític per entendre aquest tutorial.
+:::
 
 Amb el contingut de les dades entès, podem veure què ha d'aconseguir el workflow.
 
@@ -129,68 +132,64 @@ Si podeu marcar totes les caselles, esteu a punt per començar.
 
 Comencem llegint les dades de mostres amb `splitCsv` i organitzant-les en el patró de mapa de metadades. Al `main.nf`, veureu que ja hem iniciat el workflow.
 
-```groovy title="main.nf" linenums="1" hl_lines="2"
+```nextflow {2} title="main.nf" showLineNumbers
 workflow {
     ch_samplesheet = channel.fromPath("./data/samplesheet.csv")
 }
 ```
 
-!!! note "Nota"
+:::note[Nota]
+Al llarg d'aquest tutorial, utilitzarem el prefix `ch_` per a totes les variables de canal per indicar clarament que són canals de Nextflow.
+:::
 
-    Al llarg d'aquest tutorial, utilitzarem el prefix `ch_` per a totes les variables de canal per indicar clarament que són canals de Nextflow.
+Si heu completat la missió secundària [Metadata in workflows](../metadata/index.mdx), reconeixereu aquest patró. Utilitzarem `splitCsv` per llegir el CSV i estructurar immediatament les dades amb un mapa de metadades per separar les metadades de les rutes dels fitxers.
 
-Si heu completat la missió secundària [Metadata in workflows](../metadata/index.md), reconeixereu aquest patró. Utilitzarem `splitCsv` per llegir el CSV i estructurar immediatament les dades amb un mapa de metadades per separar les metadades de les rutes dels fitxers.
+:::note[Info]
+En aquesta formació trobarem dos conceptes diferents anomenats `map`:
 
-!!! info "Info"
+- **Estructura de dades**: El mapa de Groovy (equivalent als diccionaris/hashes en altres llenguatges) que emmagatzema parells clau-valor
+- **Operador de canal**: L'operador `.map()` que transforma elements en un canal
 
-    En aquesta formació trobarem dos conceptes diferents anomenats `map`:
-
-    - **Estructura de dades**: El mapa de Groovy (equivalent als diccionaris/hashes en altres llenguatges) que emmagatzema parells clau-valor
-    - **Operador de canal**: L'operador `.map()` que transforma elements en un canal
-
-    Aclararem quin volem dir en context, però aquesta distinció és important d'entendre quan es treballa amb Nextflow.
+Aclararem quin volem dir en context, però aquesta distinció és important d'entendre quan es treballa amb Nextflow.
+:::
 
 Apliqueu aquests canvis a `main.nf`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="2" hl_lines="1-6"
-        ch_samples = channel.fromPath("./data/samplesheet.csv")
-            .splitCsv(header: true)
-            .map{ row ->
-              [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
-            }
-            .view()
-    ```
+```nextflow {1} title="main.nf" showLineNumbers startLineNumber=2 step="Abans"
+    ch_samplesheet = channel.fromPath("./data/samplesheet.csv")
+```
 
-=== "Abans"
+```nextflow {1-6} title="main.nf" showLineNumbers startLineNumber=2 step="Després"
+    ch_samples = channel.fromPath("./data/samplesheet.csv")
+        .splitCsv(header: true)
+        .map{ row ->
+          [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
+        }
+        .view()
+```
 
-    ```groovy title="main.nf" linenums="2" hl_lines="1"
-        ch_samplesheet = channel.fromPath("./data/samplesheet.csv")
-    ```
+</CodeWalkthrough>
 
 Això combina l'operació `splitCsv` (llegir el CSV amb capçaleres) i l'operació `map` (estructurar les dades com a tuples `[meta, fitxer]`) en un sol pas. Apliqueu aquest canvi i executeu el pipeline:
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [wise_venter] revision: 9211c186b2
+
+[[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+[[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+[[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+[[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+[[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+[[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+[[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+[[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [wise_venter] revision: 9211c186b2
-
-    [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-    [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-    [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-    [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-    ```
 
 Ara tenim un canal on cada element és una tupla `[meta, fitxer]` — les metadades separades de les rutes dels fitxers. Aquesta estructura ens permet dividir i agrupar la nostra càrrega de treball basant-nos en els camps de metadades.
 
@@ -202,47 +201,43 @@ Ara tenim un canal on cada element és una tupla `[meta, fitxer]` — les metada
 
 Podem utilitzar l'[operador `filter`](https://www.nextflow.io/docs/latest/operator.html#filter) per filtrar les dades basant-nos en una condició. Diguem que només volem processar mostres normals. Podem fer-ho filtrant les dades basant-nos en el camp `type`. Inserim això abans de l'operador `view`.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="2" hl_lines="6"
-        ch_samples = channel.fromPath("./data/samplesheet.csv")
-            .splitCsv(header: true)
-            .map{ row ->
-              [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
-            }
-            .filter { meta, file -> meta.type == 'normal' }
-            .view()
-    ```
+```nextflow title="main.nf" showLineNumbers startLineNumber=2 step="Abans"
+    ch_samples = channel.fromPath("./data/samplesheet.csv")
+        .splitCsv(header: true)
+        .map{ row ->
+          [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
+        }
+        .view()
+```
 
-=== "Abans"
+```nextflow {6} title="main.nf" showLineNumbers startLineNumber=2 step="Després"
+    ch_samples = channel.fromPath("./data/samplesheet.csv")
+        .splitCsv(header: true)
+        .map{ row ->
+          [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
+        }
+        .filter { meta, file -> meta.type == 'normal' }
+        .view()
+```
 
-    ```groovy title="main.nf" linenums="2"
-        ch_samples = channel.fromPath("./data/samplesheet.csv")
-            .splitCsv(header: true)
-            .map{ row ->
-              [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
-            }
-            .view()
-    ```
+</CodeWalkthrough>
 
 Executeu el workflow de nou per veure el resultat filtrat:
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [high_knuth] revision: bc0db74ccc
+
+[[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+[[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+[[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+[[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [high_knuth] revision: bc0db74ccc
-
-    [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-    [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-    [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-    ```
 
 Hem filtrat correctament les dades per incloure només les mostres normals. Fem un resum de com funciona.
 
@@ -252,7 +247,7 @@ En el nostre cas, volem conservar només les mostres on `meta.type == 'normal'`.
 
 Això s'aconsegueix amb la closure única que hem introduït anteriorment:
 
-```groovy title="main.nf" linenums="7"
+```nextflow title="main.nf" showLineNumbers startLineNumber=7
     .filter { meta, file -> meta.type == 'normal' }
 ```
 
@@ -262,103 +257,95 @@ Aquest filtre s'encadena directament en l'operació del canal.
 
 Actualment estem aplicant el filtre al canal creat directament des del CSV, però volem filtrar-lo de més d'una manera, de manera que reescrivim la lògica per crear un canal filtrat separat per a les mostres normals:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="2" hl_lines="6 8"
-        ch_samples = channel.fromPath("./data/samplesheet.csv")
-            .splitCsv(header: true)
-            .map{ row ->
-                [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
-            }
-        ch_normal_samples = ch_samples
-            .filter { meta, file -> meta.type == 'normal' }
-        ch_normal_samples
-            .view()
-    ```
+```nextflow title="main.nf" showLineNumbers startLineNumber=2 step="Abans"
+    ch_samples = channel.fromPath("./data/samplesheet.csv")
+        .splitCsv(header: true)
+        .map{ row ->
+          [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
+        }
+        .filter { meta, file -> meta.type == 'normal' }
+        .view()
+```
 
-=== "Abans"
+```nextflow {6,8} title="main.nf" showLineNumbers startLineNumber=2 step="Després"
+    ch_samples = channel.fromPath("./data/samplesheet.csv")
+        .splitCsv(header: true)
+        .map{ row ->
+            [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
+        }
+    ch_normal_samples = ch_samples
+        .filter { meta, file -> meta.type == 'normal' }
+    ch_normal_samples
+        .view()
+```
 
-    ```groovy title="main.nf" linenums="2"
-        ch_samples = channel.fromPath("./data/samplesheet.csv")
-            .splitCsv(header: true)
-            .map{ row ->
-              [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
-            }
-            .filter { meta, file -> meta.type == 'normal' }
-            .view()
-    ```
+</CodeWalkthrough>
 
 Executeu el pipeline per veure els resultats:
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [shrivelled_rubens] revision: 636aae17ff
+
+[[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+[[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+[[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+[[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [shrivelled_rubens] revision: 636aae17ff
-
-    [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-    [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-    [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-    ```
 
 Hem filtrat correctament les dades i hem creat un canal separat per a les mostres normals.
 
 Creem també un canal filtrat per a les mostres tumorals:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="7" hl_lines="3-8"
-        ch_normal_samples = ch_samples
-            .filter { meta, file -> meta.type == 'normal' }
-        ch_tumor_samples = ch_samples
-            .filter { meta, file -> meta.type == 'tumor' }
-        ch_normal_samples
-            .view{'Normal sample: ' + it}
-        ch_tumor_samples
-            .view{'Tumor sample: ' + it}
-    ```
+```nextflow {3,4} title="main.nf" showLineNumbers startLineNumber=7 step="Abans"
+    ch_normal_samples = ch_samples
+        .filter { meta, file -> meta.type == 'normal' }
+    ch_normal_samples
+        .view()
+```
 
-=== "Abans"
+```nextflow {3-8} title="main.nf" showLineNumbers startLineNumber=7 step="Després"
+    ch_normal_samples = ch_samples
+        .filter { meta, file -> meta.type == 'normal' }
+    ch_tumor_samples = ch_samples
+        .filter { meta, file -> meta.type == 'tumor' }
+    ch_normal_samples
+        .view{'Normal sample: ' + it}
+    ch_tumor_samples
+        .view{'Tumor sample: ' + it}
+```
 
-    ```groovy title="main.nf" linenums="7" hl_lines="3 4"
-        ch_normal_samples = ch_samples
-            .filter { meta, file -> meta.type == 'normal' }
-        ch_normal_samples
-            .view()
-    ```
+</CodeWalkthrough>
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [elated_jepsen] revision: c96ba8f734
+
+Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 ```
 
-??? success "Sortida de la comanda"
+Hem separat les mostres normals i tumorals en dos canals diferents, i hem utilitzat una closure subministrada a `view()` per etiquetar-les de manera diferent a la sortida: `ch_tumor_samples.view{'Tumor sample: ' + it}{:nextflow}`.
 
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [elated_jepsen] revision: c96ba8f734
-
-    Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-    Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-    Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-    Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-    ```
-
-Hem separat les mostres normals i tumorals en dos canals diferents, i hem utilitzat una closure subministrada a `view()` per etiquetar-les de manera diferent a la sortida: `#!groovy ch_tumor_samples.view{'Tumor sample: ' + it}`.
-
-!!! note "Nota"
-
-    L'ordre relatiu de les línies `Normal sample:` i `Tumor sample:` pot variar entre execucions, ja que les dues crides a `view()` pertanyen a canals independents que s'executen de manera concurrent. L'ordre de les mostres _dins_ de cada etiqueta sempre es preserva.
+:::note[Nota]
+L'ordre relatiu de les línies `Normal sample:` i `Tumor sample:` pot variar entre execucions, ja que les dues crides a `view()` pertanyen a canals independents que s'executen de manera concurrent. L'ordre de les mostres _dins_ de cada etiqueta sempre es preserva.
+:::
 
 ### Conclusió
 
@@ -388,24 +375,20 @@ Si ja no teniu la sortida de la consola disponible, executem el pipeline per com
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [exotic_bassi] revision: c96ba8f734
+
+Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [exotic_bassi] revision: c96ba8f734
-
-    Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-    Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-    Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-    Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-    ```
 
 Podem veure que el camp `id` és el primer element de cada mapa de metadades. Perquè `join` funcioni, hauríem d'aïllar el camp `id` en cada tupla. Després d'això, podem simplement utilitzar l'operador `join` per combinar els dos canals.
 
@@ -413,54 +396,50 @@ Podem veure que el camp `id` és el primer element de cada mapa de metadades. Pe
 
 Per aïllar el camp `id`, podem utilitzar l'[operador `map`](https://www.nextflow.io/docs/latest/operator.html#map) per crear una nova tupla amb el camp `id` com a primer element.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="7" hl_lines="3 6"
-        ch_normal_samples = ch_samples
-            .filter { meta, file -> meta.type == 'normal' }
-            .map { meta, file -> [meta.id, meta, file] }
-        ch_tumor_samples = ch_samples
-            .filter { meta, file -> meta.type == 'tumor' }
-            .map { meta, file -> [meta.id, meta, file] }
-        ch_normal_samples
-            .view{'Normal sample: ' + it}
-        ch_tumor_samples
-            .view{'Tumor sample: ' + it}
-    ```
+```nextflow title="main.nf" showLineNumbers startLineNumber=7 step="Abans"
+    ch_normal_samples = ch_samples
+        .filter { meta, file -> meta.type == 'normal' }
+    ch_tumor_samples = ch_samples
+        .filter { meta, file -> meta.type == 'tumor' }
+    ch_normal_samples
+        .view{'Normal sample: ' + it}
+    ch_tumor_samples
+        .view{'Tumor sample: ' + it}
+```
 
-=== "Abans"
+```nextflow {3,6} title="main.nf" showLineNumbers startLineNumber=7 step="Després"
+    ch_normal_samples = ch_samples
+        .filter { meta, file -> meta.type == 'normal' }
+        .map { meta, file -> [meta.id, meta, file] }
+    ch_tumor_samples = ch_samples
+        .filter { meta, file -> meta.type == 'tumor' }
+        .map { meta, file -> [meta.id, meta, file] }
+    ch_normal_samples
+        .view{'Normal sample: ' + it}
+    ch_tumor_samples
+        .view{'Tumor sample: ' + it}
+```
 
-    ```groovy title="main.nf" linenums="7"
-        ch_normal_samples = ch_samples
-            .filter { meta, file -> meta.type == 'normal' }
-        ch_tumor_samples = ch_samples
-            .filter { meta, file -> meta.type == 'tumor' }
-        ch_normal_samples
-            .view{'Normal sample: ' + it}
-        ch_tumor_samples
-            .view{'Tumor sample: ' + it}
-    ```
+</CodeWalkthrough>
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [compassionate_monod] revision: 3132715893
+
+Normal sample: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+Normal sample: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+Normal sample: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [compassionate_monod] revision: 3132715893
-
-    Normal sample: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-    Normal sample: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    Normal sample: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-    Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-    Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-    ```
 
 Pot ser subtil, però hauríeu de poder veure que el primer element de cada tupla és el camp `id`.
 
@@ -470,51 +449,47 @@ Ara podem utilitzar l'operador `join` per combinar els dos canals basant-nos en 
 
 Un cop més, utilitzarem `view` per imprimir les sortides unides.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="7" hl_lines="7-9"
-        ch_normal_samples = ch_samples
-            .filter { meta, file -> meta.type == 'normal' }
-            .map { meta, file -> [meta.id, meta, file] }
-        ch_tumor_samples = ch_samples
-            .filter { meta, file -> meta.type == 'tumor' }
-            .map { meta, file -> [meta.id, meta, file] }
-        ch_joined_samples = ch_normal_samples
-            .join(ch_tumor_samples)
-        ch_joined_samples.view()
-    ```
+```nextflow {7-10} title="main.nf" showLineNumbers startLineNumber=7 step="Abans"
+    ch_normal_samples = ch_samples
+        .filter { meta, file -> meta.type == 'normal' }
+        .map { meta, file -> [meta.id, meta, file] }
+    ch_tumor_samples = ch_samples
+        .filter { meta, file -> meta.type == 'tumor' }
+        .map { meta, file -> [meta.id, meta, file] }
+    ch_normal_samples
+        .view{'Normal sample: ' + it}
+    ch_tumor_samples
+        .view{'Tumor sample: ' + it}
+```
 
-=== "Abans"
+```nextflow {7-9} title="main.nf" showLineNumbers startLineNumber=7 step="Després"
+    ch_normal_samples = ch_samples
+        .filter { meta, file -> meta.type == 'normal' }
+        .map { meta, file -> [meta.id, meta, file] }
+    ch_tumor_samples = ch_samples
+        .filter { meta, file -> meta.type == 'tumor' }
+        .map { meta, file -> [meta.id, meta, file] }
+    ch_joined_samples = ch_normal_samples
+        .join(ch_tumor_samples)
+    ch_joined_samples.view()
+```
 
-    ```groovy title="main.nf" linenums="7" hl_lines="7-10"
-        ch_normal_samples = ch_samples
-            .filter { meta, file -> meta.type == 'normal' }
-            .map { meta, file -> [meta.id, meta, file] }
-        ch_tumor_samples = ch_samples
-            .filter { meta, file -> meta.type == 'tumor' }
-            .map { meta, file -> [meta.id, meta, file] }
-        ch_normal_samples
-            .view{'Normal sample: ' + it}
-        ch_tumor_samples
-            .view{'Tumor sample: ' + it}
-    ```
+</CodeWalkthrough>
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [desperate_shaw] revision: 5508db4b8b
+
+[patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+[patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+[patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+[patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [desperate_shaw] revision: 5508db4b8b
-
-    [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-    ```
 
 És una mica difícil de llegir perquè és molt ample, però hauríeu de poder veure que les mostres s'han unit pel camp `id`. Cada tupla ara té el format:
 
@@ -524,9 +499,9 @@ nextflow run main.nf
 - `tumor_meta_map`: Les metadades de la mostra tumoral incloent el tipus, la rèplica i la ruta al fitxer BAM
 - `tumor_sample`: La mostra tumoral incloent el tipus, la rèplica i la ruta al fitxer BAM
 
-!!! warning "Advertència"
-
-    L'operador `join` descartarà qualsevol tupla sense coincidència. En aquest exemple, ens hem assegurat que totes les mostres tenien coincidència per a tumor i normal, però si això no és cert, heu d'utilitzar el paràmetre `remainder: true` per conservar les tuples sense coincidència. Consulteu la [documentació](https://www.nextflow.io/docs/latest/operator.html#join) per a més detalls.
+:::caution[Advertència]
+L'operador `join` descartarà qualsevol tupla sense coincidència. En aquest exemple, ens hem assegurat que totes les mostres tenien coincidència per a tumor i normal, però si això no és cert, heu d'utilitzar el paràmetre `remainder: true` per conservar les tuples sense coincidència. Consulteu la [documentació](https://www.nextflow.io/docs/latest/operator.html#join) per a més detalls.
+:::
 
 Ara sabeu com utilitzar `map` per aïllar un camp en una tupla, i com utilitzar `join` per combinar tuples basant-se en el primer camp.
 Amb aquest coneixement, podem combinar canals correctament basant-nos en un camp compartit.
@@ -541,46 +516,42 @@ Per evitar-ho, podem unir per múltiples camps. En realitat hi ha múltiples man
 
 Comencem creant una nova clau d'unió. Podem fer-ho de la mateixa manera que abans, utilitzant l'[operador `map`](https://www.nextflow.io/docs/latest/operator.html#map) per crear una nova tupla amb els camps `id` i `repeat` com a primer element.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="7" hl_lines="3 6"
-        ch_normal_samples = ch_samples
-            .filter { meta, file -> meta.type == 'normal' }
-            .map { meta, file -> [[meta.id, meta.repeat], meta, file] }
-        ch_tumor_samples = ch_samples
-            .filter { meta, file -> meta.type == 'tumor' }
-            .map { meta, file -> [[meta.id, meta.repeat], meta, file] }
-    ```
+```nextflow {3,6} title="main.nf" showLineNumbers startLineNumber=7 step="Abans"
+    ch_normal_samples = ch_samples
+        .filter { meta, file -> meta.type == 'normal' }
+        .map { meta, file -> [meta.id, meta, file] }
+    ch_tumor_samples = ch_samples
+        .filter { meta, file -> meta.type == 'tumor' }
+        .map { meta, file -> [meta.id, meta, file] }
+```
 
-=== "Abans"
+```nextflow {3,6} title="main.nf" showLineNumbers startLineNumber=7 step="Després"
+    ch_normal_samples = ch_samples
+        .filter { meta, file -> meta.type == 'normal' }
+        .map { meta, file -> [[meta.id, meta.repeat], meta, file] }
+    ch_tumor_samples = ch_samples
+        .filter { meta, file -> meta.type == 'tumor' }
+        .map { meta, file -> [[meta.id, meta.repeat], meta, file] }
+```
 
-    ```groovy title="main.nf" linenums="7" hl_lines="3 6"
-        ch_normal_samples = ch_samples
-            .filter { meta, file -> meta.type == 'normal' }
-            .map { meta, file -> [meta.id, meta, file] }
-        ch_tumor_samples = ch_samples
-            .filter { meta, file -> meta.type == 'tumor' }
-            .map { meta, file -> [meta.id, meta, file] }
-    ```
+</CodeWalkthrough>
 
 Ara hauríem de veure que la unió es produeix però utilitzant tant els camps `id` com `repeat`. Executeu el workflow:
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [lonely_solvay] revision: 3c97c335d2
+
+[[patientA, 1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+[[patientA, 2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+[[patientB, 1], [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+[[patientC, 1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [lonely_solvay] revision: 3c97c335d2
-
-    [[patientA, 1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    [[patientA, 2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    [[patientB, 1], [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    [[patientC, 1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-    ```
 
 Observeu com tenim una tupla de dos elements (camps `id` i `repeat`) com a primer element de cada resultat unit. Això demostra com es poden utilitzar elements complexos com a clau d'unió, permetent una coincidència força intricada entre mostres de les mateixes condicions.
 
@@ -592,44 +563,40 @@ L'enfocament anterior perd els noms dels camps de la nostra clau d'unió — els
 
 El mètode `subMap` extreu només els parells clau-valor especificats d'un mapa. Aquí extraurem només els camps `id` i `repeat` per crear la nostra clau d'unió.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="7" hl_lines="3 6"
-        ch_normal_samples = ch_samples
-            .filter { meta, file -> meta.type == 'normal' }
-            .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
-        ch_tumor_samples = ch_samples
-            .filter { meta, file -> meta.type == 'tumor' }
-            .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
-    ```
+```nextflow {3,6} title="main.nf" showLineNumbers startLineNumber=7 step="Abans"
+    ch_normal_samples = ch_samples
+        .filter { meta, file -> meta.type == 'normal' }
+        .map { meta, file -> [[meta.id, meta.repeat], meta, file] }
+    ch_tumor_samples = ch_samples
+        .filter { meta, file -> meta.type == 'tumor' }
+        .map { meta, file -> [[meta.id, meta.repeat], meta, file] }
+```
 
-=== "Abans"
+```nextflow {3,6} title="main.nf" showLineNumbers startLineNumber=7 step="Després"
+    ch_normal_samples = ch_samples
+        .filter { meta, file -> meta.type == 'normal' }
+        .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+    ch_tumor_samples = ch_samples
+        .filter { meta, file -> meta.type == 'tumor' }
+        .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+```
 
-    ```groovy title="main.nf" linenums="7" hl_lines="3 6"
-        ch_normal_samples = ch_samples
-            .filter { meta, file -> meta.type == 'normal' }
-            .map { meta, file -> [[meta.id, meta.repeat], meta, file] }
-        ch_tumor_samples = ch_samples
-            .filter { meta, file -> meta.type == 'tumor' }
-            .map { meta, file -> [[meta.id, meta.repeat], meta, file] }
-    ```
+</CodeWalkthrough>
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [scruffy_swanson] revision: a8478c9d0a
+
+[[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+[[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+[[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+[[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [scruffy_swanson] revision: a8478c9d0a
-
-    [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    [[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-    ```
 
 Ara tenim una nova clau d'unió que no només inclou els camps `id` i `repeat` sinó que també conserva els noms dels camps perquè puguem accedir-hi posteriorment per nom, p. ex. `meta.id` i `meta.repeat`.
 
@@ -639,86 +606,82 @@ Per evitar la duplicació i reduir errors, podem utilitzar una closure amb nom. 
 
 Per fer-ho, primer definim la closure com una nova variable:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="2" hl_lines="7"
-        ch_samples = channel.fromPath("./data/samplesheet.csv")
-            .splitCsv(header: true)
-            .map{ row ->
-                [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
-            }
+```nextflow title="main.nf" showLineNumbers startLineNumber=2 step="Abans"
+    ch_samples = channel.fromPath("./data/samplesheet.csv")
+        .splitCsv(header: true)
+        .map{ row ->
+            [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
+        }
+    ch_normal_samples = ch_samples
+        .filter { meta, file -> meta.type == 'normal' }
+```
 
-        getSampleIdAndReplicate = { meta, bam -> [ meta.subMap(['id', 'repeat']), meta, file(bam) ] }
+```nextflow {7} title="main.nf" showLineNumbers startLineNumber=2 step="Després"
+    ch_samples = channel.fromPath("./data/samplesheet.csv")
+        .splitCsv(header: true)
+        .map{ row ->
+            [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
+        }
 
-        ch_normal_samples = ch_samples
-            .filter { meta, file -> meta.type == 'normal' }
-    ```
+    getSampleIdAndReplicate = { meta, bam -> [ meta.subMap(['id', 'repeat']), meta, file(bam) ] }
 
-=== "Abans"
+    ch_normal_samples = ch_samples
+        .filter { meta, file -> meta.type == 'normal' }
+```
 
-    ```groovy title="main.nf" linenums="2"
-        ch_samples = channel.fromPath("./data/samplesheet.csv")
-            .splitCsv(header: true)
-            .map{ row ->
-                [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
-            }
-        ch_normal_samples = ch_samples
-            .filter { meta, file -> meta.type == 'normal' }
-    ```
+</CodeWalkthrough>
 
 Hem definit la transformació map com una variable amb nom que podem reutilitzar.
 
-Tingueu en compte que també convertim la ruta del fitxer a un objecte Path utilitzant `file()` perquè qualsevol procés que rebi aquest canal pugui gestionar el fitxer correctament (per a més informació vegeu [Working with files](../working_with_files/index.md)).
+Tingueu en compte que també convertim la ruta del fitxer a un objecte Path utilitzant `file()` perquè qualsevol procés que rebi aquest canal pugui gestionar el fitxer correctament (per a més informació vegeu [Working with files](../working_with_files/index.mdx)).
 
 Implementem la closure al nostre workflow:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="10" hl_lines="3 6"
-        ch_normal_samples = ch_samples
-            .filter { meta, file -> meta.type == 'normal' }
-             .map ( getSampleIdAndReplicate )
-        ch_tumor_samples = ch_samples
-            .filter { meta, file -> meta.type == 'tumor' }
-             .map ( getSampleIdAndReplicate )
+```nextflow {3,6} title="main.nf" showLineNumbers startLineNumber=10 step="Abans"
+    ch_normal_samples = ch_samples
+        .filter { meta, file -> meta.type == 'normal' }
+        .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+    ch_tumor_samples = ch_samples
+        .filter { meta, file -> meta.type == 'tumor' }
+        .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+```
 
-    ```
+```nextflow {3,6} title="main.nf" showLineNumbers startLineNumber=10 step="Després"
+    ch_normal_samples = ch_samples
+        .filter { meta, file -> meta.type == 'normal' }
+         .map ( getSampleIdAndReplicate )
+    ch_tumor_samples = ch_samples
+        .filter { meta, file -> meta.type == 'tumor' }
+         .map ( getSampleIdAndReplicate )
 
-=== "Abans"
+```
 
-    ```groovy title="main.nf" linenums="10" hl_lines="3 6"
-        ch_normal_samples = ch_samples
-            .filter { meta, file -> meta.type == 'normal' }
-            .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
-        ch_tumor_samples = ch_samples
-            .filter { meta, file -> meta.type == 'tumor' }
-            .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
-    ```
+</CodeWalkthrough>
 
-!!! note "Nota"
-
-    L'operador `map` ha canviat d'utilitzar `{ }` a utilitzar `( )` per passar la closure com a argument. Això és perquè l'operador `map` espera una closure com a argument i `{ }` s'utilitza per definir una closure anònima. Quan es crida una closure amb nom, utilitzeu la sintaxi `( )`.
+:::note[Nota]
+L'operador `map` ha canviat d'utilitzar `{ }` a utilitzar `( )` per passar la closure com a argument. Això és perquè l'operador `map` espera una closure com a argument i `{ }` s'utilitza per definir una closure anònima. Quan es crida una closure amb nom, utilitzeu la sintaxi `( )`.
+:::
 
 Executeu el workflow una vegada més per comprovar que tot continua funcionant:
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [admiring_turing] revision: 06c4cbbb2e
+
+[[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
+[[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
+[[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
+[[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]
 ```
 
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [admiring_turing] revision: 06c4cbbb2e
-
-    [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
-    [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
-    [[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
-    [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]
-    ```
-
-    Com que la closure ara embolcalla cada ruta amb `file()`, les entrades de fitxer apareixen com a rutes absolutes resoltes en lloc dels noms de fitxer simples del full de mostres.
+Com que la closure ara embolcalla cada ruta amb `file()`, les entrades de fitxer apareixen com a rutes absolutes resoltes en lloc dels noms de fitxer simples del full de mostres.
 
 Utilitzar una closure amb nom ens permet reutilitzar la mateixa transformació en múltiples llocs, reduint el risc d'errors i fent el codi més llegible i mantenible.
 
@@ -726,7 +689,7 @@ Utilitzar una closure amb nom ens permet reutilitzar la mateixa transformació e
 
 Tenim moltes dades duplicades al nostre workflow. Cada element de les mostres unides repeteix els camps `id` i `repeat`. Com que aquesta informació ja està disponible a la clau d'agrupació, podem evitar aquesta redundància. Com a recordatori, l'estructura de dades actual és la següent:
 
-```groovy
+```nextflow
 [
   [
     "id": "patientC",
@@ -749,17 +712,17 @@ Tenim moltes dades duplicades al nostre workflow. Cada element de les mostres un
 
 Com que els camps `id` i `repeat` estan disponibles a la clau d'agrupació, eliminem-los de la resta de cada element del canal per evitar la duplicació. Podem fer-ho utilitzant el mètode `subMap` per crear un nou mapa amb només el camp `type`. Aquest enfocament ens permet mantenir tota la informació necessària eliminant la redundància en la nostra estructura de dades.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="8" hl_lines="1"
-        getSampleIdAndReplicate = { meta, bam -> [ meta.subMap(['id', 'repeat']), meta.subMap(['type']), file(bam) ] }
-    ```
+```nextflow {1} title="main.nf" showLineNumbers startLineNumber=8 step="Abans"
+    getSampleIdAndReplicate = { meta, bam -> [ meta.subMap(['id', 'repeat']), meta, file(bam) ] }
+```
 
-=== "Abans"
+```nextflow {1} title="main.nf" showLineNumbers startLineNumber=8 step="Després"
+    getSampleIdAndReplicate = { meta, bam -> [ meta.subMap(['id', 'repeat']), meta.subMap(['type']), file(bam) ] }
+```
 
-    ```groovy title="main.nf" linenums="8" hl_lines="1"
-        getSampleIdAndReplicate = { meta, bam -> [ meta.subMap(['id', 'repeat']), meta, file(bam) ] }
-    ```
+</CodeWalkthrough>
 
 Ara la closure retorna una tupla on el primer element conté els camps `id` i `repeat`, i el segon element conté només el camp `type`. Això elimina la redundància emmagatzemant la informació de `id` i `repeat` una sola vegada a la clau d'agrupació, mantenint tota la informació necessària.
 
@@ -767,20 +730,16 @@ Executeu el workflow per veure com queda:
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [scruffy_tuckerman] revision: 791ad3c1fb
+
+[[id:patientA, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
+[[id:patientA, repeat:2], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
+[[id:patientB, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
+[[id:patientC, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [scruffy_tuckerman] revision: 791ad3c1fb
-
-    [[id:patientA, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
-    [[id:patientA, repeat:2], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
-    [[id:patientB, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
-    [[id:patientC, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]
-    ```
 
 Podem veure que només indiquem els camps `id` i `repeat` una vegada a la clau d'agrupació i tenim el camp `type` a les dades de la mostra. No hem perdut cap informació però hem aconseguit fer el contingut del nostre canal més concís.
 
@@ -792,36 +751,32 @@ Al principi, hem separat les mostres normals i tumorals utilitzant `filter`, i d
 
 Com que coneixem la posició de cada element al nostre canal, podem simplificar l'estructura eliminant les metadades `[type:normal]` i `[type:tumor]`.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="8" hl_lines="1"
-        getSampleIdAndReplicate = { meta, file -> [ meta.subMap(['id', 'repeat']), file ] }
-    ```
+```nextflow {1} title="main.nf" showLineNumbers startLineNumber=8 step="Abans"
+    getSampleIdAndReplicate = { meta, file -> [ meta.subMap(['id', 'repeat']), meta.subMap(['type']), file ] }
+```
 
-=== "Abans"
+```nextflow {1} title="main.nf" showLineNumbers startLineNumber=8 step="Després"
+    getSampleIdAndReplicate = { meta, file -> [ meta.subMap(['id', 'repeat']), file ] }
+```
 
-    ```groovy title="main.nf" linenums="8" hl_lines="1"
-        getSampleIdAndReplicate = { meta, file -> [ meta.subMap(['id', 'repeat']), meta.subMap(['type']), file ] }
-    ```
+</CodeWalkthrough>
 
 Executeu de nou per veure el resultat:
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [intergalactic_lagrange] revision: 8c8750a19d
+
+[[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+[[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+[[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [intergalactic_lagrange] revision: 8c8750a19d
-
-    [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-    [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-    [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-    [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
-    ```
 
 Cada tupla ara conté només la clau d'agrupació i les dues rutes de fitxer, sense camps repetits.
 
@@ -850,64 +805,60 @@ A la secció següent, demostrarem com distribuir les nostres dades de mostres e
 
 Comencem creant un canal d'intervals. Per simplificar, simplement utilitzarem 3 intervals que definirem manualment. En un workflow real, podríeu llegir-los d'un fitxer d'entrada o fins i tot crear un canal amb molts fitxers d'intervals.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="17" hl_lines="2"
-            .join(ch_tumor_samples)
-        ch_intervals = channel.of('chr1', 'chr2', 'chr3')
-    ```
+```nextflow {2} title="main.nf" showLineNumbers startLineNumber=17 step="Abans"
+        .join(ch_tumor_samples)
+    ch_joined_samples.view()
+```
 
-=== "Abans"
+```nextflow {2} title="main.nf" showLineNumbers startLineNumber=17 step="Després"
+        .join(ch_tumor_samples)
+    ch_intervals = channel.of('chr1', 'chr2', 'chr3')
+```
 
-    ```groovy title="main.nf" linenums="17" hl_lines="2"
-            .join(ch_tumor_samples)
-        ch_joined_samples.view()
-    ```
+</CodeWalkthrough>
 
 Recordeu que volem repetir cada mostra per a cada interval. Això de vegades s'anomena el producte cartesià de les mostres i els intervals. Podem aconseguir-ho utilitzant l'[operador `combine`](https://www.nextflow.io/docs/latest/operator.html#combine). Això agafarà cada element del canal 1 i el repetirà per a cada element del canal 2. Afegim un operador combine al nostre workflow:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="18" hl_lines="3-5"
-        ch_intervals = channel.of('chr1', 'chr2', 'chr3')
+```nextflow title="main.nf" showLineNumbers startLineNumber=18 step="Abans"
+    ch_intervals = channel.of('chr1', 'chr2', 'chr3')
+```
 
-        ch_combined_samples = ch_joined_samples
-            .combine(ch_intervals)
-            .view()
-    ```
+```nextflow {3-5} title="main.nf" showLineNumbers startLineNumber=18 step="Després"
+    ch_intervals = channel.of('chr1', 'chr2', 'chr3')
 
-=== "Abans"
+    ch_combined_samples = ch_joined_samples
+        .combine(ch_intervals)
+        .view()
+```
 
-    ```groovy title="main.nf" linenums="18"
-        ch_intervals = channel.of('chr1', 'chr2', 'chr3')
-    ```
+</CodeWalkthrough>
 
 Ara executem-ho i veiem què passa:
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [lethal_northcutt] revision: 09667ddd59
+
+[[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr1]
+[[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr2]
+[[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr3]
+[[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr1]
+[[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr2]
+[[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr3]
+[[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr1]
+[[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr2]
+[[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr3]
+[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr1]
+[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr2]
+[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr3]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [lethal_northcutt] revision: 09667ddd59
-
-    [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr1]
-    [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr2]
-    [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr3]
-    [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr1]
-    [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr2]
-    [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr3]
-    [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr1]
-    [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr2]
-    [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr3]
-    [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr1]
-    [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr2]
-    [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr3]
-    ```
 
 Èxit! Hem repetit cada mostra per a cada interval de la nostra llista de 3 intervals. Hem triplicat efectivament el nombre d'elements al nostre canal.
 
@@ -917,46 +868,46 @@ nextflow run main.nf
 
 Podem utilitzar l'operador `map` per ordenar i refactoritzar les nostres dades de mostres perquè siguin més fàcils d'entendre. Movem la cadena d'intervals al mapa d'unió del primer element.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="20" hl_lines="3-9"
-        ch_combined_samples = ch_joined_samples
-            .combine(ch_intervals)
-            .map { grouping_key, normal, tumor, interval ->
-                [
-                    grouping_key + [interval: interval],
-                    normal,
-                    tumor
-                ]
-            }
-            .view()
-    ```
+```nextflow title="main.nf" showLineNumbers startLineNumber=20 step="Abans"
+    ch_combined_samples = ch_joined_samples
+        .combine(ch_intervals)
+        .view()
+```
 
-=== "Abans"
+```nextflow {3-9} title="main.nf" showLineNumbers startLineNumber=20 step="Després"
+    ch_combined_samples = ch_joined_samples
+        .combine(ch_intervals)
+        .map { grouping_key, normal, tumor, interval ->
+            [
+                grouping_key + [interval: interval],
+                normal,
+                tumor
+            ]
+        }
+        .view()
+```
 
-    ```groovy title="main.nf" linenums="20"
-        ch_combined_samples = ch_joined_samples
-            .combine(ch_intervals)
-            .view()
-    ```
+</CodeWalkthrough>
 
 Analitzem pas a pas el que fa aquesta operació map.
 
 Primer, utilitzem paràmetres amb nom per fer el codi més llegible. Utilitzant els noms `grouping_key`, `normal`, `tumor` i `interval`, podem referir-nos als elements de la tupla per nom en lloc d'índex:
 
-```groovy
+```nextflow
         .map { grouping_key, normal, tumor, interval ->
 ```
 
 A continuació, combinem la `grouping_key` amb el camp `interval`. La `grouping_key` és un mapa que conté els camps `id` i `repeat`. Creem un nou mapa amb l'`interval` i els fusionem utilitzant l'addició de mapes de Groovy (`+`):
 
-```groovy
+```nextflow
                 grouping_key + [interval: interval],
 ```
 
 Finalment, retornem això com una tupla amb tres elements: el mapa de metadades combinat, el fitxer de la mostra normal i el fitxer de la mostra tumoral:
 
-```groovy
+```nextflow
             [
                 grouping_key + [interval: interval],
                 normal,
@@ -968,28 +919,24 @@ Executem-ho de nou i comprovem el contingut del canal:
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [hungry_engelbart] revision: 45db6a7dd7
+
+[[id:patientA, repeat:1, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+[[id:patientA, repeat:1, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+[[id:patientA, repeat:1, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+[[id:patientA, repeat:2, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+[[id:patientA, repeat:2, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+[[id:patientA, repeat:2, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+[[id:patientB, repeat:1, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+[[id:patientB, repeat:1, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+[[id:patientB, repeat:1, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+[[id:patientC, repeat:1, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+[[id:patientC, repeat:1, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+[[id:patientC, repeat:1, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [hungry_engelbart] revision: 45db6a7dd7
-
-    [[id:patientA, repeat:1, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-    [[id:patientA, repeat:1, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-    [[id:patientA, repeat:1, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-    [[id:patientA, repeat:2, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-    [[id:patientA, repeat:2, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-    [[id:patientA, repeat:2, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-    [[id:patientB, repeat:1, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-    [[id:patientB, repeat:1, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-    [[id:patientB, repeat:1, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-    [[id:patientC, repeat:1, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
-    [[id:patientC, repeat:1, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
-    [[id:patientC, repeat:1, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
-    ```
 
 Utilitzar `map` per forçar les dades a l'estructura correcta pot ser complicat, però és crucial per a una manipulació de dades efectiva.
 
@@ -1016,7 +963,7 @@ Per fer-ho, hauríem de separar les nostres variables d'agrupació perquè pugue
 
 El primer pas és similar al que hem fet a la secció anterior. Hem d'aïllar la nostra variable d'agrupació com a primer element de la tupla. Recordeu que el nostre primer element és actualment un mapa dels camps `id`, `repeat` i `interval`:
 
-```groovy title="main.nf" linenums="1"
+```nextflow title="main.nf" showLineNumbers
 {
   "id": "patientA",
   "repeat": "1",
@@ -1026,138 +973,130 @@ El primer pas és similar al que hem fet a la secció anterior. Hem d'aïllar la
 
 Podem reutilitzar el mètode `subMap` d'abans per aïllar els camps `id` i `interval` del mapa. Com abans, utilitzarem l'operador `map` per aplicar el mètode `subMap` al primer element de la tupla per a cada mostra.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="20" hl_lines="11-19"
-        ch_combined_samples = ch_joined_samples
-            .combine(ch_intervals)
-            .map { grouping_key, normal, tumor, interval ->
-                [
-                    grouping_key + [interval: interval],
-                    normal,
-                    tumor
-                ]
-            }
+```nextflow {10} title="main.nf" showLineNumbers startLineNumber=20 step="Abans"
+    ch_combined_samples = ch_joined_samples
+        .combine(ch_intervals)
+        .map { grouping_key, normal, tumor, interval ->
+            [
+                grouping_key + [interval: interval],
+                normal,
+                tumor
+            ]
+        }
+        .view()
+```
 
-        ch_grouped_samples = ch_combined_samples
-            .map { grouping_key, normal, tumor ->
-                [
-                    grouping_key.subMap('id', 'interval'),
-                    normal,
-                    tumor
-                ]
-              }
-              .view()
-    ```
+```nextflow {11-19} title="main.nf" showLineNumbers startLineNumber=20 step="Després"
+    ch_combined_samples = ch_joined_samples
+        .combine(ch_intervals)
+        .map { grouping_key, normal, tumor, interval ->
+            [
+                grouping_key + [interval: interval],
+                normal,
+                tumor
+            ]
+        }
 
-=== "Abans"
+    ch_grouped_samples = ch_combined_samples
+        .map { grouping_key, normal, tumor ->
+            [
+                grouping_key.subMap('id', 'interval'),
+                normal,
+                tumor
+            ]
+          }
+          .view()
+```
 
-    ```groovy title="main.nf" linenums="20" hl_lines="10"
-        ch_combined_samples = ch_joined_samples
-            .combine(ch_intervals)
-            .map { grouping_key, normal, tumor, interval ->
-                [
-                    grouping_key + [interval: interval],
-                    normal,
-                    tumor
-                ]
-            }
-            .view()
-    ```
+</CodeWalkthrough>
 
 Executem-ho de nou i comprovem el contingut del canal:
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [stupefied_kirch] revision: c5bd1a7c31
+
+[[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+[[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+[[id:patientA, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+[[id:patientA, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+[[id:patientA, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+[[id:patientA, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+[[id:patientB, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+[[id:patientB, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+[[id:patientB, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+[[id:patientC, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+[[id:patientC, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+[[id:patientC, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [stupefied_kirch] revision: c5bd1a7c31
-
-    [[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-    [[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-    [[id:patientA, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-    [[id:patientA, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-    [[id:patientA, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-    [[id:patientA, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-    [[id:patientB, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-    [[id:patientB, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-    [[id:patientB, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-    [[id:patientC, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
-    [[id:patientC, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
-    [[id:patientC, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
-    ```
 
 Podem veure que hem aïllat correctament els camps `id` i `interval`, però encara no hem agrupat les mostres.
 
-!!! note "Nota"
-
-    Aquí estem descartant el camp `replicate`. Això és perquè no el necessitem per al processament posterior. Després de completar aquest tutorial, comproveu si podeu incloure-lo sense afectar l'agrupació posterior!
+:::note[Nota]
+Aquí estem descartant el camp `replicate`. Això és perquè no el necessitem per al processament posterior. Després de completar aquest tutorial, comproveu si podeu incloure-lo sense afectar l'agrupació posterior!
+:::
 
 Ara agrupem les mostres per aquest nou element d'agrupació, utilitzant l'[operador `groupTuple`](https://www.nextflow.io/docs/latest/operator.html#grouptuple).
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="30" hl_lines="9"
-        ch_grouped_samples = ch_combined_samples
-            .map { grouping_key, normal, tumor ->
-                [
-                    grouping_key.subMap('id', 'interval'),
-                    normal,
-                    tumor
-                ]
-              }
-              .groupTuple()
-              .view()
-    ```
+```nextflow title="main.nf" showLineNumbers startLineNumber=30 step="Abans"
+    ch_grouped_samples = ch_combined_samples
+        .map { grouping_key, normal, tumor ->
+            [
+                grouping_key.subMap('id', 'interval'),
+                normal,
+                tumor
+            ]
+          }
+          .view()
+```
 
-=== "Abans"
+```nextflow {9} title="main.nf" showLineNumbers startLineNumber=30 step="Després"
+    ch_grouped_samples = ch_combined_samples
+        .map { grouping_key, normal, tumor ->
+            [
+                grouping_key.subMap('id', 'interval'),
+                normal,
+                tumor
+            ]
+          }
+          .groupTuple()
+          .view()
+```
 
-    ```groovy title="main.nf" linenums="30"
-        ch_grouped_samples = ch_combined_samples
-            .map { grouping_key, normal, tumor ->
-                [
-                    grouping_key.subMap('id', 'interval'),
-                    normal,
-                    tumor
-                ]
-              }
-              .view()
-    ```
+</CodeWalkthrough>
 
 Això és tot! Simplement hem afegit una sola línia de codi. Veiem què passa quan l'executem:
 
 ```bash
 nextflow run main.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [soggy_borg] revision: cc057d5f49
+
+[[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+[[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+[[id:patientA, interval:chr3], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+[[id:patientB, interval:chr1], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+[[id:patientB, interval:chr2], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+[[id:patientB, interval:chr3], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+[[id:patientC, interval:chr1], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+[[id:patientC, interval:chr2], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+[[id:patientC, interval:chr3], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [soggy_borg] revision: cc057d5f49
-
-    [[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
-    [[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
-    [[id:patientA, interval:chr3], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
-    [[id:patientB, interval:chr1], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
-    [[id:patientB, interval:chr2], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
-    [[id:patientB, interval:chr3], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
-    [[id:patientC, interval:chr1], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
-    [[id:patientC, interval:chr2], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
-    [[id:patientC, interval:chr3], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
-    ```
 
 Observeu que les nostres dades han canviat d'estructura i dins de cada element del canal els fitxers ara estan continguts en tuples com `[patientA_rep1_normal.bam, patientA_rep2_normal.bam]`. Això és perquè quan utilitzem `groupTuple`, Nextflow combina els fitxers individuals per a cada mostra d'un grup. Això és important de recordar quan intenteu gestionar les dades posteriorment.
 
-!!! note "Nota"
-
-    [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) és l'operació inversa de groupTuple. Desempaqueta els elements d'un canal i els aplana. Proveu d'afegir `transpose` i desfer l'agrupació que hem realitzat anteriorment!
+:::note[Nota]
+[`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) és l'operació inversa de groupTuple. Desempaqueta els elements d'un canal i els aplana. Proveu d'afegir `transpose` i desfer l'agrupació que hem realitzat anteriorment!
+:::
 
 Ambdues direccions de l'operació — agrupar i desagrupar — formen ara part del vostre conjunt d'eines.
 
@@ -1188,9 +1127,9 @@ Dominar aquestes operacions de canal us permetrà construir pipelines flexibles 
 
 ### Patrons clau
 
-1.  **Crear dades d'entrada estructurades:** Partint d'un fitxer CSV amb mapes de metadades (basant-se en patrons de [Metadata in workflows](../metadata/index.md))
+1.  **Crear dades d'entrada estructurades:** Partint d'un fitxer CSV amb mapes de metadades (basant-se en patrons de [Metadata in workflows](../metadata/index.mdx))
 
-    ```groovy
+    ```nextflow
     ch_samples = channel.fromPath("./data/samplesheet.csv")
         .splitCsv(header: true)
         .map{ row ->
@@ -1200,7 +1139,7 @@ Dominar aquestes operacions de canal us permetrà construir pipelines flexibles 
 
 2.  **Dividir dades en canals separats:** Hem utilitzat `filter` per dividir les dades en fluxos independents basant-nos en el camp `type`
 
-    ```groovy
+    ```nextflow
     channel.filter { meta, file -> meta.type == 'tumor' }
     ```
 
@@ -1208,13 +1147,13 @@ Dominar aquestes operacions de canal us permetrà construir pipelines flexibles 
 
     - Unir dos canals per clau (primer element de la tupla)
 
-    ```groovy
+    ```nextflow
     ch_normal_samples.join(ch_tumor_samples)
     ```
 
     - Extreure la clau d'unió i unir per aquest valor
 
-    ```groovy
+    ```nextflow
     ch_normal_samples.map { meta, file -> [meta.id, meta, file] }
         .join(
           ch_tumor_samples.map { meta, file -> [meta.id, meta, file] }
@@ -1223,7 +1162,7 @@ Dominar aquestes operacions de canal us permetrà construir pipelines flexibles 
 
     - Unir per múltiples camps utilitzant `subMap`
 
-    ```groovy
+    ```nextflow
     ch_normal_samples.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         .join(
           ch_tumor_samples.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
@@ -1232,13 +1171,13 @@ Dominar aquestes operacions de canal us permetrà construir pipelines flexibles 
 
 4.  **Distribuir per intervals:** Hem utilitzat `combine` per crear productes cartesians de mostres amb intervals genòmics per al processament paral·lel.
 
-    ```groovy
+    ```nextflow
     ch_joined_samples.combine(ch_intervals)
     ```
 
 5.  **Agregar per claus d'agrupació:** Hem utilitzat `groupTuple` per agrupar pel primer element de cada tupla, recollint així les mostres que comparteixen els camps `id` i `interval` i fusionant les rèpliques tècniques.
 
-    ```groovy
+    ```nextflow
     channel.groupTuple()
     ```
 
@@ -1246,13 +1185,13 @@ Dominar aquestes operacions de canal us permetrà construir pipelines flexibles 
 
     - Extreure camps específics d'un mapa
 
-    ```groovy
+    ```nextflow
     meta.subMap(['id', 'repeat'])
     ```
 
     - Utilitzar una closure amb nom per a transformacions reutilitzables
 
-    ```groovy
+    ```nextflow
     getSampleIdAndReplicate = { meta, file -> [meta.subMap(['id', 'repeat']), file] }
     channel.map(getSampleIdAndReplicate)
     ```
@@ -1269,4 +1208,4 @@ Dominar aquestes operacions de canal us permetrà construir pipelines flexibles 
 
 ## Què segueix?
 
-Torneu al [menú de missions secundàries](../index.md) o feu clic al botó a la part inferior dreta de la pàgina per continuar amb el tema següent de la llista.
+Torneu al [menú de missions secundàries](../index.mdx) o feu clic al botó a la part inferior dreta de la pàgina per continuar amb el tema següent de la llista.

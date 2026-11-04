@@ -1,8 +1,11 @@
-# 파트 3: 프로덕션 파이프라인 실행
+---
+title: '파트 3: 프로덕션 파이프라인 실행'
+description: 파트 2에서는 nf-core/demo의 매개변수 설정 및 실행 설정 맞춤화 방법을 학습했습니다.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-[파트 2](./02_configure_execution.md)에서는 nf-core/demo의 매개변수 설정 및 실행 설정 맞춤화 방법을 학습했습니다.
+[파트 2](./02_configure_execution.mdx)에서는 nf-core/demo의 매개변수 설정 및 실행 설정 맞춤화 방법을 학습했습니다.
 이제 학습한 내용을 실제 프로덕션 파이프라인인 nf-core/rnaseq에 적용합니다.
 
 ---
@@ -21,14 +24,10 @@
 
 ```bash
 nextflow pull nf-core/rnaseq
+# [!output]
+Checking nf-core/rnaseq ...
+ downloaded from https://github.com/nf-core/rnaseq.git - revision: 1f03b53ef7 [master]
 ```
-
-??? success "명령 출력"
-
-    ```console
-    Checking nf-core/rnaseq ...
-     downloaded from https://github.com/nf-core/rnaseq.git - revision: 1f03b53ef7 [master]
-    ```
 
 파이프라인이 로컬에 캐시되어 실행할 준비가 완료되었습니다.
 
@@ -38,58 +37,55 @@ nextflow pull nf-core/rnaseq
 
 ```bash
 nextflow run nf-core/rnaseq -profile test,docker --outdir rnaseq-results
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `https://github.com/nf-core/rnaseq` [suspicious_dijkstra] revision: 1f03b53ef7 [master]
+
+------------------------------------------------------
+                                        ,--./,-.
+        ___     __   __   __   ___     /,-._.--~'
+  |\ | |__  __ /  ` /  \ |__) |__         }  {
+  | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                        `._,._,'
+  nf-core/rnaseq 3.26.0
+------------------------------------------------------
+...
+[-        ] NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT  -
+Plus 47 more processes waiting for tasks…
+
+Execution cancelled -- Finishing pending tasks before exit
+-[nf-core/rnaseq] Pipeline completed with errors-
+# [!output stderr]
+ERROR ~ Error executing process > 'NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT (WT_REP2)'
+
+Caused by:
+  Process requirement exceeds available memory -- req: 12 GB; avail: 7.7 GB
+
+
+Command executed:
+
+  fq lint \
+      --disable-validator P001 \
+      SRR6357072_1.fastq.gz SRR6357072_2.fastq.gz > WT_REP2.fq_lint.txt
+
+Command exit status:
+  -
+
+Command output:
+  (empty)
+
+Work dir:
+  /workspaces/training/nfcore-use/work/xx/xxxxxxxxxxxxxxxxxxxxxx
+
+Container:
+  quay.io/biocontainers/fq:0.12.0--h9ee0642_0
+
+Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+ -- Check '.nextflow.log' file for details
+ERROR ~ Pipeline failed. Please refer to troubleshooting docs for common issues: https://nf-co.re/docs/running/troubleshooting
 ```
-
-??? failure "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `https://github.com/nf-core/rnaseq` [suspicious_dijkstra] revision: 1f03b53ef7 [master]
-
-    ------------------------------------------------------
-                                            ,--./,-.
-            ___     __   __   __   ___     /,-._.--~'
-      |\ | |__  __ /  ` /  \ |__) |__         }  {
-      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                            `._,._,'
-      nf-core/rnaseq 3.26.0
-    ------------------------------------------------------
-    ...
-    [-        ] NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT  -
-    Plus 47 more processes waiting for tasks…
-
-    Execution cancelled -- Finishing pending tasks before exit
-    -[nf-core/rnaseq] Pipeline completed with errors-
-    ERROR ~ Error executing process > 'NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT (WT_REP2)'
-
-    Caused by:
-      Process requirement exceeds available memory -- req: 12 GB; avail: 7.7 GB
-
-
-    Command executed:
-
-      fq lint \
-          --disable-validator P001 \
-          SRR6357072_1.fastq.gz SRR6357072_2.fastq.gz > WT_REP2.fq_lint.txt
-
-    Command exit status:
-      -
-
-    Command output:
-      (empty)
-
-    Work dir:
-      /workspaces/training/nfcore-use/work/xx/xxxxxxxxxxxxxxxxxxxxxx
-
-    Container:
-      quay.io/biocontainers/fq:0.12.0--h9ee0642_0
-
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
-
-     -- Check '.nextflow.log' file for details
-    ERROR ~ Pipeline failed. Please refer to troubleshooting docs for common issues: https://nf-co.re/docs/running/troubleshooting
-    ```
 
 오류의 핵심 내용은 다음과 같습니다.
 
@@ -102,7 +98,7 @@ Process requirement exceeds available memory -- req: 12 GB; avail: 7.7 GB
 
 이 12 GB는 `conf/base.config`에 정의된 `process_low` 리소스 레이블에서 비롯됩니다.
 
-```groovy title="conf/base.config"
+```nextflow title="conf/base.config"
 withLabel:process_low {
     cpus   = { 2     * task.attempt }
     memory = { 12.GB * task.attempt }
@@ -117,29 +113,32 @@ withLabel:process_low {
 
 레이블 기반 리소스 기본값을 재정의하는 사용자 정의 설정 파일을 제공합니다.
 
-??? full-code "laptop.config"
+<details class="full-code">
+<summary>laptop.config</summary>
 
-    ```groovy title="laptop.config"
-    process {
-        withLabel: 'process_low' {
-            cpus   = 2
-            memory = 6.GB
-        }
-        withLabel: 'process_medium' {
-            cpus   = 4
-            memory = 6.GB
-        }
-        withLabel: 'process_high' {
-            cpus   = 6
-            memory = 6.GB
-        }
-        withLabel: 'process_high_memory' {
-            memory = 6.GB
-        }
+```nextflow title="laptop.config"
+process {
+    withLabel: 'process_low' {
+        cpus   = 2
+        memory = 6.GB
     }
-    ```
+    withLabel: 'process_medium' {
+        cpus   = 4
+        memory = 6.GB
+    }
+    withLabel: 'process_high' {
+        cpus   = 6
+        memory = 6.GB
+    }
+    withLabel: 'process_high_memory' {
+        memory = 6.GB
+    }
+}
+```
 
-[파트 2](./02_configure_execution.md)에서는 `withName:`을 사용하여 단일 프로세스를 이름으로 지정하는 방법을 다뤘습니다.
+</details>
+
+[파트 2](./02_configure_execution.mdx)에서는 `withName:`을 사용하여 단일 프로세스를 이름으로 지정하는 방법을 다뤘습니다.
 여기서는 `withLabel:`을 사용하여 동일한 레이블을 공유하는 모든 프로세스를 한 번에 지정합니다.
 
 이 파일은 이미 작업 디렉토리에 있습니다.
@@ -147,29 +146,25 @@ withLabel:process_low {
 
 ```bash
 nextflow run nf-core/rnaseq -profile test,docker -c laptop.config --outdir rnaseq-results
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `https://github.com/nf-core/rnaseq` [romantic_faraday] revision: 1f03b53ef7 [master]
+
+------------------------------------------------------
+                                        ,--./,-.
+        ___     __   __   __   ___     /,-._.--~'
+  |\ | |__  __ /  ` /  \ |__) |__         }  {
+  | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                        `._,._,'
+  nf-core/rnaseq 3.26.0
+------------------------------------------------------
+...
+executor >  local (7)
+[xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FQ_LINT (RAP1_IAA_30M_REP1)   | 3 of 5
+[xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQC (RAP1_IAA_30M_REP1)    | 2 of 5
+...
 ```
-
-??? success "명령 출력 (파이프라인 시작)"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `https://github.com/nf-core/rnaseq` [romantic_faraday] revision: 1f03b53ef7 [master]
-
-    ------------------------------------------------------
-                                            ,--./,-.
-            ___     __   __   __   ___     /,-._.--~'
-      |\ | |__  __ /  ` /  \ |__) |__         }  {
-      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                            `._,._,'
-      nf-core/rnaseq 3.26.0
-    ------------------------------------------------------
-    ...
-    executor >  local (7)
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FQ_LINT (RAP1_IAA_30M_REP1)   | 3 of 5
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQC (RAP1_IAA_30M_REP1)    | 2 of 5
-    ...
-    ```
 
 파이프라인이 실행 중이며, 작업이 하나씩 완료되는 것을 확인할 수 있습니다.
 이 최소한의 테스트 데이터셋에서는 총 200개 이상의 작업을 실행하며 15~20분 내에 완료됩니다.
@@ -180,9 +175,9 @@ Nextflow는 HPC 스케줄러(SLURM, PBS, LSF)와 클라우드 플랫폼(AWS, Goo
 
 Seqera 플랫폼(Nextflow 개발팀이 만든 서비스)은 HPC 또는 클라우드 인프라에서 Nextflow 파이프라인을 실행하기 위한 웹 기반 인터페이스를 제공합니다. 자체 인프라 또는 관리형 인프라를 사용할 수 있으며, 대규모 파이프라인 실행 과정을 간소화하는 컴퓨팅 및 데이터 관리 기능을 갖추고 있습니다.
 
-!!! tip "팁"
-
-    학술 연구자는 [Seqera 학술 프로그램](https://seqera.io/academic-program/)을 통해 Seqera Platform을 무료로 이용할 수 있습니다.
+:::tip[팁]
+학술 연구자는 [Seqera 학술 프로그램](https://seqera.io/academic-program/)을 통해 Seqera Platform을 무료로 이용할 수 있습니다.
+:::
 
 ### 핵심 정리
 
@@ -192,7 +187,7 @@ Seqera 플랫폼(Nextflow 개발팀이 만든 서비스)은 HPC 또는 클라우
 ### 다음 단계
 
 nf-core 파이프라인 실행의 기본 사항을 모두 다뤘습니다.
-앞으로 나아갈 방향은 [다음 단계](next_steps.md)를 참조하세요.
+앞으로 나아갈 방향은 [다음 단계](next_steps.mdx)를 참조하세요.
 
 ---
 

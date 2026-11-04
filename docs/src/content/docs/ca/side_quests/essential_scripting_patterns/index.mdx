@@ -1,6 +1,9 @@
-# Patrons Essencials de Scripting
+---
+title: Patrons Essencials de Scripting
+description: Nextflow és un llenguatge de programació que s'executa sobre la Java Virtual Machine.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Nextflow és un llenguatge de programació que s'executa sobre la Java Virtual Machine. Tot i que Nextflow està construït sobre [Groovy](http://groovy-lang.org/) i comparteix gran part de la seva sintaxi, Nextflow és molt més que "Groovy amb extensions" -- és un llenguatge independent amb una [sintaxi](https://nextflow.io/docs/latest/reference/syntax.html) i una [biblioteca estàndard](https://nextflow.io/docs/latest/reference/stdlib.html) completament especificades.
 
@@ -26,7 +29,7 @@ Transformarem un workflow senzill de lectura de CSV en un pipeline de bioinform�
 
 Abans d'emprendre aquesta missió secundària, hauríeu de:
 
-- Haver completat el tutorial [Hello Nextflow](../../hello_nextflow/index.md) o un curs equivalent per a principiants.
+- Haver completat el tutorial [Hello Nextflow](../../hello_nextflow/index.mdx) o un curs equivalent per a principiants.
 - Estar còmodes usant conceptes i mecanismes bàsics de Nextflow (processos, canals, operadors, treballar amb fitxers, metadades)
 - Tenir familiaritat bàsica amb construccions de programació comunes (variables, maps, llistes)
 
@@ -39,7 +42,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 
 #### Obriu l'espai de treball de formació
 
-Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../../envsetup/index.md).
+Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../../envsetup/index.mdx).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -90,7 +93,7 @@ Creieu que esteu preparats per submergir-vos?
 - [ ] Entenc l'objectiu d'aquest curs i els seus prerequisits
 - [ ] El meu codespace està en funcionament
 - [ ] He establert el meu directori de treball adequadament
-<!-- - [ ] I understand the assignment -->
+{/* - [ ] I understand the assignment */}
 
 Si podeu marcar totes les caselles, esteu a punt per començar.
 
@@ -106,7 +109,7 @@ Quan s'escriuen workflows de Nextflow, és important distingir entre **dataflow*
 
 Comenceu amb un workflow senzill que simplement llegeix el fitxer CSV (ja ho hem fet per vosaltres a `main.nf`):
 
-```groovy title="main.nf" linenums="1"
+```nextflow title="main.nf" showLineNumbers
 workflow {
     main:
     ch_samples = channel.fromPath("./data/samples.csv")
@@ -130,58 +133,54 @@ Executeu aquest workflow per veure les dades CSV en brut:
 
 ```bash
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [exotic_salas] revision: d915f0414b
+
+[sample_id:SAMPLE_001, organism:human, tissue_type:liver, sequencing_depth:30000000, file_path:data/sequences/SAMPLE_001_S1_L001_R1_001.fastq, quality_score:38.5]
+[sample_id:SAMPLE_002, organism:mouse, tissue_type:brain, sequencing_depth:25000000, file_path:data/sequences/SAMPLE_002_S2_L001_R1_001.fastq, quality_score:35.2]
+[sample_id:SAMPLE_003, organism:human, tissue_type:kidney, sequencing_depth:45000000, file_path:data/sequences/SAMPLE_003_S3_L001_R1_001.fastq, quality_score:42.1]
+
+Outputs:
+
+  /workspaces/training/side-quests/essential_scripting_patterns/results
+
+  reports:
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [exotic_salas] revision: d915f0414b
-
-    [sample_id:SAMPLE_001, organism:human, tissue_type:liver, sequencing_depth:30000000, file_path:data/sequences/SAMPLE_001_S1_L001_R1_001.fastq, quality_score:38.5]
-    [sample_id:SAMPLE_002, organism:mouse, tissue_type:brain, sequencing_depth:25000000, file_path:data/sequences/SAMPLE_002_S2_L001_R1_001.fastq, quality_score:35.2]
-    [sample_id:SAMPLE_003, organism:human, tissue_type:kidney, sequencing_depth:45000000, file_path:data/sequences/SAMPLE_003_S3_L001_R1_001.fastq, quality_score:42.1]
-
-    Outputs:
-
-      /workspaces/training/side-quests/essential_scripting_patterns/results
-
-      reports:
-    ```
 
 #### 1.1.2. Afegir l'Operador Map
 
 Ara afegirem scripting per transformar les dades, usant l'operador `.map()` amb el qual probablement ja esteu familiaritzats. Aquest operador pren una 'closure' on podem escriure codi per transformar cada element.
 
-!!! note "Nota"
-
-    Una **closure** és un bloc de codi que es pot passar i executar més tard. Penseu-hi com una funció que definiu en línia. Les closures s'escriuen amb claus `{ }` i poden prendre paràmetres. Són fonamentals per al funcionament dels operadors de Nextflow i, si porteu un temps escrivint Nextflow, és possible que ja les hàgiu estat usant sense adonar-vos-en!
+:::note[Nota]
+Una **closure** és un bloc de codi que es pot passar i executar més tard. Penseu-hi com una funció que definiu en línia. Les closures s'escriuen amb claus `{ }` i poden prendre paràmetres. Són fonamentals per al funcionament dels operadors de Nextflow i, si porteu un temps escrivint Nextflow, és possible que ja les hàgiu estat usant sense adonar-vos-en!
+:::
 
 Aquí teniu l'aspecte d'aquesta operació map:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="3" hl_lines="3-6"
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                return row
-            }
-            .view()
-    ```
+```nextflow {3} title="main.nf" showLineNumbers startLineNumber=3 step="Abans"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .view()
+```
 
-=== "Abans"
+```nextflow {3-6} title="main.nf" showLineNumbers startLineNumber=3 step="Després"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            return row
+        }
+        .view()
+```
 
-    ```groovy title="main.nf" linenums="3" hl_lines="3"
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .view()
-    ```
+</CodeWalkthrough>
 
 Aquesta és la nostra primera **closure** -- una funció anònima que podeu passar com a argument (similar a les lambdes en Python o les funcions fletxa en JavaScript). Les closures són essencials per treballar amb operadors de Nextflow.
 
-La closure `#!groovy { row -> return row }` pren un paràmetre `row` (podria tenir qualsevol nom: `item`, `sample`, etc.).
+La closure `{ row -> return row }{:nextflow}` pren un paràmetre `row` (podria tenir qualsevol nom: `item`, `sample`, etc.).
 
 Quan l'operador `.map()` processa cada element del canal, passa aquell element a la vostra closure. Aquí, `row` conté una fila del CSV cada vegada.
 
@@ -197,35 +196,35 @@ Veureu la mateixa sortida que abans, perquè simplement estem retornant l'entrad
 
 Ara escriurem lògica de **scripting** dins de la nostra closure per transformar cada fila de dades. Aquí és on processem elements de dades individuals en lloc d'orquestrar el flux de dades.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="3" hl_lines="4-12"
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                // Scripting per a la transformació de dades
-                def sample_meta = [
-                    id: row.sample_id.toLowerCase(),
-                    organism: row.organism,
-                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                    depth: row.sequencing_depth.toInteger(),
-                    quality: row.quality_score.toDouble()
-                ]
-                return sample_meta
-            }
-            .view()
-    ```
+```nextflow {4} title="main.nf" showLineNumbers startLineNumber=3 step="Abans"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            return row
+        }
+        .view()
+```
 
-=== "Abans"
+```nextflow {4-12} title="main.nf" showLineNumbers startLineNumber=3 step="Després"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            // Scripting per a la transformació de dades
+            def sample_meta = [
+                id: row.sample_id.toLowerCase(),
+                organism: row.organism,
+                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                depth: row.sequencing_depth.toInteger(),
+                quality: row.quality_score.toDouble()
+            ]
+            return sample_meta
+        }
+        .view()
+```
 
-    ```groovy title="main.nf" linenums="3" hl_lines="4"
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                return row
-            }
-            .view()
-    ```
+</CodeWalkthrough>
 
 El map `sample_meta` és una estructura de dades clau-valor (com els diccionaris en Python, els objectes en JavaScript o els hashes en Ruby) que emmagatzema informació relacionada: ID de mostra, organisme, tipus de teixit, profunditat de seqüenciació i puntuació de qualitat.
 
@@ -235,15 +234,11 @@ Apliqueu aquest canvi i executeu el workflow:
 
 ```bash
 nextflow run main.nf
+# [!output]
+[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5]
+[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2]
+[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    [id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5]
-    [id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2]
-    [id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1]
-    ```
 
 #### 1.1.4. Afegir Lògica Condicional
 
@@ -251,64 +246,60 @@ Ara afegim més scripting -- aquesta vegada usant un operador ternari per prendr
 
 Feu el canvi següent:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="3" hl_lines="11-12"
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                def sample_meta = [
-                    id: row.sample_id.toLowerCase(),
-                    organism: row.organism,
-                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                    depth: row.sequencing_depth.toInteger(),
-                    quality: row.quality_score.toDouble()
-                ]
-                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return sample_meta + [priority: priority]
-            }
-            .view()
-    ```
+```nextflow {11} title="main.nf" showLineNumbers startLineNumber=3 step="Abans"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            def sample_meta = [
+                id: row.sample_id.toLowerCase(),
+                organism: row.organism,
+                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                depth: row.sequencing_depth.toInteger(),
+                quality: row.quality_score.toDouble()
+            ]
+            return sample_meta
+        }
+        .view()
+```
 
-=== "Abans"
+```nextflow {11-12} title="main.nf" showLineNumbers startLineNumber=3 step="Després"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            def sample_meta = [
+                id: row.sample_id.toLowerCase(),
+                organism: row.organism,
+                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                depth: row.sequencing_depth.toInteger(),
+                quality: row.quality_score.toDouble()
+            ]
+            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+            return sample_meta + [priority: priority]
+        }
+        .view()
+```
 
-    ```groovy title="main.nf" linenums="3" hl_lines="11"
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                def sample_meta = [
-                    id: row.sample_id.toLowerCase(),
-                    organism: row.organism,
-                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                    depth: row.sequencing_depth.toInteger(),
-                    quality: row.quality_score.toDouble()
-                ]
-                return sample_meta
-            }
-            .view()
-    ```
+</CodeWalkthrough>
 
 L'operador ternari és una forma abreujada d'una instrucció if/else que segueix el patró `condició ? valor_si_cert : valor_si_fals`. Aquesta línia significa: "Si la qualitat és superior a 40, usa 'high', en cas contrari usa 'normal'". El seu cosí, l'**operador Elvis** (`?:`), proporciona valors per defecte quan alguna cosa és null o buida -- explorarem aquest patró més endavant en aquest tutorial.
 
 L'operador d'addició de maps `+` crea un **nou map** en lloc de modificar l'existent. Aquesta línia crea un nou map que conté tots els parells clau-valor de `sample_meta` més la nova clau `priority`.
 
-!!! note "Nota"
-
-    Mai modifiqueu maps passats a closures -- sempre creeu-ne de nous usant `+` (per exemple). A Nextflow, les mateixes dades sovint flueixen a través de múltiples operacions simultàniament. Modificar un map in-place pot causar efectes secundaris imprevisibles quan altres operacions fan referència al mateix objecte. Crear nous maps assegura que cada operació tingui la seva pròpia còpia neta.
+:::note[Nota]
+Mai modifiqueu maps passats a closures -- sempre creeu-ne de nous usant `+` (per exemple). A Nextflow, les mateixes dades sovint flueixen a través de múltiples operacions simultàniament. Modificar un map in-place pot causar efectes secundaris imprevisibles quan altres operacions fan referència al mateix objecte. Crear nous maps assegura que cada operació tingui la seva pròpia còpia neta.
+:::
 
 Executeu el workflow modificat:
 
 ```bash
 nextflow run main.nf
+# [!output]
+[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
+[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
+[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    [id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
-    [id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
-    [id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
-    ```
 
 Hem afegit amb èxit lògica condicional per enriquir les nostres metadades amb un nivell de prioritat basat en puntuacions de qualitat.
 
@@ -318,75 +309,71 @@ Mentre que l'operador `+` afegeix claus a un map, de vegades cal fer el contrari
 
 Afegim una línia per crear una versió simplificada de les nostres metadades que només contingui camps d'identificació:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="3" hl_lines="12-13"
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                // Scripting per a la transformació de dades
-                def sample_meta = [
-                    id: row.sample_id.toLowerCase(),
-                    organism: row.organism,
-                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                    depth: row.sequencing_depth.toInteger(),
-                    quality: row.quality_score.toDouble()
-                ]
-                def id_only = sample_meta.subMap(['id', 'organism', 'tissue'])
-                println "ID fields only: ${id_only}"
+```nextflow {12} title="main.nf" showLineNumbers startLineNumber=3 step="Abans"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            // Scripting per a la transformació de dades
+            def sample_meta = [
+                id: row.sample_id.toLowerCase(),
+                organism: row.organism,
+                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                depth: row.sequencing_depth.toInteger(),
+                quality: row.quality_score.toDouble()
+            ]
+            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+            return sample_meta + [priority: priority]
+        }
+        .view()
+```
 
-                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return sample_meta + [priority: priority]
-            }
-            .view()
-    ```
+```nextflow {12-13} title="main.nf" showLineNumbers startLineNumber=3 step="Després"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            // Scripting per a la transformació de dades
+            def sample_meta = [
+                id: row.sample_id.toLowerCase(),
+                organism: row.organism,
+                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                depth: row.sequencing_depth.toInteger(),
+                quality: row.quality_score.toDouble()
+            ]
+            def id_only = sample_meta.subMap(['id', 'organism', 'tissue'])
+            println "ID fields only: ${id_only}"
 
-=== "Abans"
+            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+            return sample_meta + [priority: priority]
+        }
+        .view()
+```
 
-    ```groovy title="main.nf" linenums="3" hl_lines="12"
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                // Scripting per a la transformació de dades
-                def sample_meta = [
-                    id: row.sample_id.toLowerCase(),
-                    organism: row.organism,
-                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                    depth: row.sequencing_depth.toInteger(),
-                    quality: row.quality_score.toDouble()
-                ]
-                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return sample_meta + [priority: priority]
-            }
-            .view()
-    ```
+</CodeWalkthrough>
 
 Executeu el workflow modificat:
 
 ```bash
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [focused_goldwasser] revision: d9c7a39dec
+
+ID fields only: [id:sample_001, organism:human, tissue:liver]
+[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
+ID fields only: [id:sample_002, organism:mouse, tissue:brain]
+[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
+ID fields only: [id:sample_003, organism:human, tissue:kidney]
+[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
+
+Outputs:
+
+  /workspaces/training/side-quests/essential_scripting_patterns/results
+
+  reports:
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [focused_goldwasser] revision: d9c7a39dec
-
-    ID fields only: [id:sample_001, organism:human, tissue:liver]
-    [id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
-    ID fields only: [id:sample_002, organism:mouse, tissue:brain]
-    [id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
-    ID fields only: [id:sample_003, organism:human, tissue:kidney]
-    [id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
-
-    Outputs:
-
-      /workspaces/training/side-quests/essential_scripting_patterns/results
-
-      reports:
-    ```
 
 Això mostra tant les metadades completes mostrades per l'operació `view()` com el subconjunt extret que hem imprès amb `println`.
 
@@ -396,13 +383,13 @@ Això és particularment útil quan necessiteu crear diferents versions de metad
 
 Ara elimineu les instruccions println per restaurar el vostre workflow a l'estat anterior, ja que no les necessitem per continuar.
 
-!!! tip "Consell"
+:::tip[Consell]
+**Resum d'Operacions de Map**
 
-    **Resum d'Operacions de Map**
-
-    - **Afegir claus**: `map1 + [nova_clau: valor]` - Crea un nou map amb claus addicionals
-    - **Extreure claus**: `map1.subMap(['clau1', 'clau2'])` - Crea un nou map amb només les claus especificades
-    - **Ambdues operacions creen nous maps** - Els maps originals romanen sense canvis
+- **Afegir claus**: `map1 + [nova_clau: valor]` - Crea un nou map amb claus addicionals
+- **Extreure claus**: `map1.subMap(['clau1', 'clau2'])` - Crea un nou map amb només les claus especificades
+- **Ambdues operacions creen nous maps** - Els maps originals romanen sense canvis
+:::
 
 #### 1.1.6. Combinar Maps i Retornar Resultats
 
@@ -410,63 +397,59 @@ Fins ara, només hem estat retornant el que la comunitat de Nextflow anomena el 
 
 Generem una estructura de canal que comprengui una tupla de 2 elements: el map de metadades enriquit i la ruta del fitxer corresponent. Aquest és un patró comú a Nextflow per passar dades als processos.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="3" hl_lines="12"
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                def sample_meta = [
-                    id: row.sample_id.toLowerCase(),
-                    organism: row.organism,
-                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                    depth: row.sequencing_depth.toInteger(),
-                    quality: row.quality_score.toDouble()
-                ]
-                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return tuple( sample_meta + [priority: priority], file(row.file_path) )
-            }
-            .view()
-    ```
+```nextflow {12} title="main.nf" showLineNumbers startLineNumber=3 step="Abans"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            def sample_meta = [
+                id: row.sample_id.toLowerCase(),
+                organism: row.organism,
+                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                depth: row.sequencing_depth.toInteger(),
+                quality: row.quality_score.toDouble()
+            ]
+            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+            return sample_meta + [priority: priority]
+        }
+        .view()
+```
 
-=== "Abans"
+```nextflow {12} title="main.nf" showLineNumbers startLineNumber=3 step="Després"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            def sample_meta = [
+                id: row.sample_id.toLowerCase(),
+                organism: row.organism,
+                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                depth: row.sequencing_depth.toInteger(),
+                quality: row.quality_score.toDouble()
+            ]
+            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+            return tuple( sample_meta + [priority: priority], file(row.file_path) )
+        }
+        .view()
+```
 
-    ```groovy title="main.nf" linenums="3" hl_lines="12"
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                def sample_meta = [
-                    id: row.sample_id.toLowerCase(),
-                    organism: row.organism,
-                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                    depth: row.sequencing_depth.toInteger(),
-                    quality: row.quality_score.toDouble()
-                ]
-                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return sample_meta + [priority: priority]
-            }
-            .view()
-    ```
+</CodeWalkthrough>
 
 Apliqueu aquest canvi i executeu el workflow:
 
 ```bash
 nextflow run main.nf
+# [!output]
+[[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
+[[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
+[[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    [[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
-    [[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
-    [[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
-    ```
 
 Aquesta estructura de tupla `[meta, fitxer]` és un patró comú a Nextflow per passar tant metadades com fitxers associats als processos.
 
-!!! note "Nota"
-
-    **Maps i Metadades**: Els maps són fonamentals per treballar amb metadades a Nextflow. Per a una explicació més detallada sobre el treball amb maps de metadades, consulteu la missió secundària [Treballar amb metadades](../metadata/index.md).
+:::note[Nota]
+**Maps i Metadades**: Els maps són fonamentals per treballar amb metadades a Nextflow. Per a una explicació més detallada sobre el treball amb maps de metadades, consulteu la missió secundària [Treballar amb metadades](../metadata/index.mdx).
+:::
 
 El nostre workflow demostra el patró central: les **operacions de dataflow** (`workflow`, `channel.fromPath()`, `.splitCsv()`, `.map()`, `.view()`) orquestren com es mouen les dades a través del pipeline, mentre que el **scripting** (maps `[clau: valor]`, mètodes de string, conversions de tipus, operadors ternaris) dins de la closure `.map()` gestiona la transformació d'elements de dades individuals.
 
@@ -478,7 +461,7 @@ Un exemple perfecte és el mètode `collect`, que existeix tant per als tipus de
 
 Demostrem això amb algunes dades d'exemple, començant per refrescar-nos sobre el que fa l'operador `collect()` del canal. Consulteu `collect.nf`:
 
-```groovy title="collect.nf" linenums="1"
+```nextflow title="collect.nf" showLineNumbers
 def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
 // channel.collect() - agrupa múltiples emissions del canal en una
@@ -502,54 +485,50 @@ Executeu el workflow per confirmar-ho:
 
 ```bash
 nextflow run collect.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `collect.nf` [friendly_jones] revision: 5b2b07e824
+
+Individual channel item: sample_001
+Individual channel item: sample_002
+Individual channel item: sample_003
+channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `collect.nf` [friendly_jones] revision: 5b2b07e824
-
-    Individual channel item: sample_001
-    Individual channel item: sample_002
-    Individual channel item: sample_003
-    channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
-    ```
 
 `view()` retorna una sortida per a cada emissió del canal, de manera que sabem que aquesta sortida única conté els 3 elements originals agrupats en una llista.
 
 Ara vegem el mètode `collect` en una List en acció. Modifiqueu `collect.nf` per aplicar el mètode `collect` de la List a la llista original d'IDs de mostra:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="collect.nf" linenums="1" hl_lines="9-13"
-    def sample_ids = ['sample_001', 'sample_002', 'sample_003']
+```nextflow title="collect.nf" showLineNumbers step="Abans"
+def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
-    // channel.collect() - agrupa múltiples emissions del canal en una
-    ch_input = channel.fromList(sample_ids)
-    ch_input.view { sample -> "Individual channel item: ${sample}" }
-    ch_collected = ch_input.collect()
-    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
+// channel.collect() - agrupa múltiples emissions del canal en una
+ch_input = channel.fromList(sample_ids)
+ch_input.view { sample -> "Individual channel item: ${sample}" }
+ch_collected = ch_input.collect()
+ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
+```
 
-    // List.collect() - transforma cada element, preserva l'estructura
-    def formatted_ids = sample_ids.collect { id ->
-        id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
-    }
-    println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
-    ```
+```nextflow {9-13} title="collect.nf" showLineNumbers step="Després"
+def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
-=== "Abans"
+// channel.collect() - agrupa múltiples emissions del canal en una
+ch_input = channel.fromList(sample_ids)
+ch_input.view { sample -> "Individual channel item: ${sample}" }
+ch_collected = ch_input.collect()
+ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 
-    ```groovy title="collect.nf" linenums="1"
-    def sample_ids = ['sample_001', 'sample_002', 'sample_003']
+// List.collect() - transforma cada element, preserva l'estructura
+def formatted_ids = sample_ids.collect { id ->
+    id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
+}
+println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
+```
 
-    // channel.collect() - agrupa múltiples emissions del canal en una
-    ch_input = channel.fromList(sample_ids)
-    ch_input.view { sample -> "Individual channel item: ${sample}" }
-    ch_collected = ch_input.collect()
-    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
-    ```
+</CodeWalkthrough>
 
 En aquest nou fragment:
 
@@ -560,21 +539,17 @@ Executeu el workflow modificat:
 
 ```bash
 nextflow run collect.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `collect.nf` [lethal_caravaggio] revision: 48f3dcbb7b
+
+List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3) # [!code highlight]
+Individual channel item: sample_001
+Individual channel item: sample_002
+Individual channel item: sample_003
+channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console hl_lines="5"
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `collect.nf` [lethal_caravaggio] revision: 48f3dcbb7b
-
-    List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
-    Individual channel item: sample_001
-    Individual channel item: sample_002
-    Individual channel item: sample_003
-    channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
-    ```
 
 Aquesta vegada, NO hem canviat l'estructura de les dades, encara tenim 3 elements a la llista, però SÍ hem transformat cada element usant el mètode `collect` de la List per produir una nova llista amb valors modificats. Això és similar a usar l'operador `map` en un canal, però opera sobre una estructura de dades List en lloc d'un canal.
 
@@ -586,71 +561,67 @@ Relacionat amb el mètode `collect` de la List és l'operador spread (`*.`), que
 
 Afegim una demostració al nostre fitxer `collect.nf`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="collect.nf" linenums="1" hl_lines="15-18"
-    def sample_ids = ['sample_001', 'sample_002', 'sample_003']
+```nextflow title="collect.nf" showLineNumbers step="Abans"
+def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
-    // channel.collect() - agrupa múltiples emissions del canal en una
-    ch_input = channel.fromList(sample_ids)
-    ch_input.view { sample -> "Individual channel item: ${sample}" }
-    ch_collected = ch_input.collect()
-    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
+// channel.collect() - agrupa múltiples emissions del canal en una
+ch_input = channel.fromList(sample_ids)
+ch_input.view { sample -> "Individual channel item: ${sample}" }
+ch_collected = ch_input.collect()
+ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 
-    // List.collect() - transforma cada element, preserva l'estructura
-    def formatted_ids = sample_ids.collect { id ->
-        id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
-    }
-    println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
+// List.collect() - transforma cada element, preserva l'estructura
+def formatted_ids = sample_ids.collect { id ->
+    id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
+}
+println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
+```
 
-    // Operador spread - accés concís a propietats
-    def sample_data = [[id: 's1', quality: 38.5], [id: 's2', quality: 42.1], [id: 's3', quality: 35.2]]
-    def all_ids = sample_data*.id
-    println "Spread operator result: ${all_ids}"
-    ```
+```nextflow {15-18} title="collect.nf" showLineNumbers step="Després"
+def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
-=== "Abans"
+// channel.collect() - agrupa múltiples emissions del canal en una
+ch_input = channel.fromList(sample_ids)
+ch_input.view { sample -> "Individual channel item: ${sample}" }
+ch_collected = ch_input.collect()
+ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 
-    ```groovy title="collect.nf" linenums="1"
-    def sample_ids = ['sample_001', 'sample_002', 'sample_003']
+// List.collect() - transforma cada element, preserva l'estructura
+def formatted_ids = sample_ids.collect { id ->
+    id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
+}
+println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
 
-    // channel.collect() - agrupa múltiples emissions del canal en una
-    ch_input = channel.fromList(sample_ids)
-    ch_input.view { sample -> "Individual channel item: ${sample}" }
-    ch_collected = ch_input.collect()
-    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
+// Operador spread - accés concís a propietats
+def sample_data = [[id: 's1', quality: 38.5], [id: 's2', quality: 42.1], [id: 's3', quality: 35.2]]
+def all_ids = sample_data*.id
+println "Spread operator result: ${all_ids}"
+```
 
-    // List.collect() - transforma cada element, preserva l'estructura
-    def formatted_ids = sample_ids.collect { id ->
-        id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
-    }
-    println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
-    ```
+</CodeWalkthrough>
 
 Executeu el workflow actualitzat:
 
 ```bash title="Test spread operator"
 nextflow run collect.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `collect.nf` [adoring_visvesvaraya] revision: 915ce68e4d
+
+List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
+Spread operator result: [s1, s2, s3] # [!code highlight]
+Individual channel item: sample_001
+Individual channel item: sample_002
+Individual channel item: sample_003
+channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console hl_lines="6"
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `collect.nf` [adoring_visvesvaraya] revision: 915ce68e4d
-
-    List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
-    Spread operator result: [s1, s2, s3]
-    Individual channel item: sample_001
-    Individual channel item: sample_002
-    Individual channel item: sample_003
-    channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
-    ```
 
 L'operador spread `*.` és una forma abreujada d'un patró collect comú:
 
-```groovy
+```nextflow
 // Aquestes són equivalents:
 def ids = samples*.id
 def ids = samples.collect { it.id }
@@ -662,10 +633,10 @@ def names = files.collect { it.getName() }
 
 L'operador spread és particularment útil quan necessiteu extreure una sola propietat d'una llista d'objectes -- és més llegible que escriure la closure `collect` completa.
 
-!!! tip "Consell: Quan Usar Spread vs Collect"
-
-    - **Useu spread (`*.`)** per a l'accés simple a propietats: `samples*.id`, `files*.name`
-    - **Useu collect** per a transformacions o lògica complexa: `#!groovy samples.collect { it.id.toUpperCase() }`, `#!groovy samples.collect { [it.id, it.quality > 40] }`
+:::tip[Consell: Quan Usar Spread vs Collect]
+- **Useu spread (`*.`)** per a l'accés simple a propietats: `samples*.id`, `files*.name`
+- **Useu collect** per a transformacions o lògica complexa: `samples.collect { it.id.toUpperCase() }{:nextflow}`, `samples.collect { [it.id, it.quality > 40] }{:nextflow}`
+:::
 
 ### Conclusió
 
@@ -693,49 +664,49 @@ Tornarem al nostre workflow `main.nf` i afegirem lògica de coincidència de pat
 
 Feu el canvi següent al vostre workflow `main.nf` existent:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="5" hl_lines="10-21"
-            .map { row ->
-                // Scripting per a la transformació de dades
-                def sample_meta = [
-                    id: row.sample_id.toLowerCase(),
-                    organism: row.organism,
-                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                    depth: row.sequencing_depth.toInteger(),
-                    quality: row.quality_score.toDouble()
-                ]
-                def fastq_path = file(row.file_path)
+```nextflow {10-11} title="main.nf" showLineNumbers startLineNumber=5 step="Abans"
+        .map { row ->
+            // Scripting per a la transformació de dades
+            def sample_meta = [
+                id: row.sample_id.toLowerCase(),
+                organism: row.organism,
+                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                depth: row.sequencing_depth.toInteger(),
+                quality: row.quality_score.toDouble()
+            ]
+            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+            return tuple(sample_meta + [priority: priority], file(row.file_path))
+        }
+```
 
-                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
-                def file_meta = m ? [
-                    sample_num: m[0][2].toInteger(),
-                    lane: m[0][3],
-                    read: m[0][4],
-                    chunk: m[0][5]
-                ] : [:]
+```nextflow {10-21} title="main.nf" showLineNumbers startLineNumber=5 step="Després"
+        .map { row ->
+            // Scripting per a la transformació de dades
+            def sample_meta = [
+                id: row.sample_id.toLowerCase(),
+                organism: row.organism,
+                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                depth: row.sequencing_depth.toInteger(),
+                quality: row.quality_score.toDouble()
+            ]
+            def fastq_path = file(row.file_path)
 
-                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
-            }
-    ```
+            def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+            def file_meta = m ? [
+                sample_num: m[0][2].toInteger(),
+                lane: m[0][3],
+                read: m[0][4],
+                chunk: m[0][5]
+            ] : [:]
 
-=== "Abans"
+            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+            return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+        }
+```
 
-    ```groovy title="main.nf" linenums="5" hl_lines="10-11"
-            .map { row ->
-                // Scripting per a la transformació de dades
-                def sample_meta = [
-                    id: row.sample_id.toLowerCase(),
-                    organism: row.organism,
-                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                    depth: row.sequencing_depth.toInteger(),
-                    quality: row.quality_score.toDouble()
-                ]
-                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return tuple(sample_meta + [priority: priority], file(row.file_path))
-            }
-    ```
+</CodeWalkthrough>
 
 Això demostra **conceptes clau de processament de strings**:
 
@@ -760,25 +731,21 @@ Executeu el workflow modificat:
 
 ```bash title="Test pattern matching"
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [nasty_brazil] revision: 723ff4e5e6
+
+[[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
+[[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
+[[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
+
+Outputs:
+
+  /workspaces/training/side-quests/essential_scripting_patterns/results
+
+  reports:
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [nasty_brazil] revision: 723ff4e5e6
-
-    [[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
-    [[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
-    [[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
-
-    Outputs:
-
-      /workspaces/training/side-quests/essential_scripting_patterns/results
-
-      reports:
-    ```
 
 Això mostra les metadades enriquides a partir dels noms de fitxers.
 
@@ -788,7 +755,7 @@ Els blocs de script dels processos són essencialment strings de múltiples lín
 
 Afegim un procés al nostre workflow que demostri aquest patró. Obriu `modules/fastp.nf` i feu-hi una ullada:
 
-```groovy title="modules/fastp.nf" linenums="1"
+```nextflow title="modules/fastp.nf" showLineNumbers
 process FASTP {
     container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
@@ -816,217 +783,209 @@ El procés pren fitxers FASTQ com a entrada i executa l'eina `fastp` per retalla
 
 Primer, incloeu el mòdul a la primera línia del vostre workflow `main.nf`:
 
-```groovy title="main.nf" linenums="1"
+```nextflow title="main.nf" showLineNumbers
 include { FASTP } from './modules/fastp.nf'
 ```
 
 Després modifiqueu el bloc `workflow` per connectar el canal `ch_samples` al procés `FASTP`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="25" hl_lines="28"
-    workflow {
-        main:
+```nextflow {27} title="main.nf" showLineNumbers startLineNumber=25 step="Abans"
+workflow {
+    main:
 
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                def sample_meta = [
-                    id: row.sample_id.toLowerCase(),
-                    organism: row.organism,
-                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                    depth: row.sequencing_depth.toInteger(),
-                    quality: row.quality_score.toDouble()
-                ]
-                def fastq_path = file(row.file_path)
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            def sample_meta = [
+                id: row.sample_id.toLowerCase(),
+                organism: row.organism,
+                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                depth: row.sequencing_depth.toInteger(),
+                quality: row.quality_score.toDouble()
+            ]
+            def fastq_path = file(row.file_path)
 
-                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
-                def file_meta = m ? [
-                    sample_num: m[0][2].toInteger(),
-                    lane: m[0][3],
-                    read: m[0][4],
-                    chunk: m[0][5]
-                ] : [:]
+            def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+            def file_meta = m ? [
+                sample_num: m[0][2].toInteger(),
+                lane: m[0][3],
+                read: m[0][4],
+                chunk: m[0][5]
+            ] : [:]
 
-                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
-            }
-
-        ch_fastp = FASTP(ch_samples)
-
-        publish:
-        reports = channel.empty()
-    }
-
-    output {
-        reports {
-            path 'reports'
+            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+            return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
         }
+        .view()
+
+    publish:
+    reports = channel.empty()
+}
+
+output {
+    reports {
+        path 'reports'
     }
-    ```
+}
+```
 
-=== "Abans"
+```nextflow {28} title="main.nf" showLineNumbers startLineNumber=25 step="Després"
+workflow {
+    main:
 
-    ```groovy title="main.nf" linenums="25" hl_lines="27"
-    workflow {
-        main:
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            def sample_meta = [
+                id: row.sample_id.toLowerCase(),
+                organism: row.organism,
+                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                depth: row.sequencing_depth.toInteger(),
+                quality: row.quality_score.toDouble()
+            ]
+            def fastq_path = file(row.file_path)
 
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                def sample_meta = [
-                    id: row.sample_id.toLowerCase(),
-                    organism: row.organism,
-                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                    depth: row.sequencing_depth.toInteger(),
-                    quality: row.quality_score.toDouble()
-                ]
-                def fastq_path = file(row.file_path)
+            def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+            def file_meta = m ? [
+                sample_num: m[0][2].toInteger(),
+                lane: m[0][3],
+                read: m[0][4],
+                chunk: m[0][5]
+            ] : [:]
 
-                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
-                def file_meta = m ? [
-                    sample_num: m[0][2].toInteger(),
-                    lane: m[0][3],
-                    read: m[0][4],
-                    chunk: m[0][5]
-                ] : [:]
-
-                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
-            }
-            .view()
-
-        publish:
-        reports = channel.empty()
-    }
-
-    output {
-        reports {
-            path 'reports'
+            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+            return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
         }
+
+    ch_fastp = FASTP(ch_samples)
+
+    publish:
+    reports = channel.empty()
+}
+
+output {
+    reports {
+        path 'reports'
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 Executeu aquest workflow modificat:
 
 ```bash
 nextflow run main.nf
+# [!output stderr]
+ERROR ~ Error executing process > 'FASTP (2)'
+
+Caused by:
+  Process `FASTP (2)` terminated with an error exit status (255)
+
+
+Command executed:
+
+  fastp \
+      --in1 SAMPLE_002_S2_L001_R1_001.fastq \
+      --in2 null \
+      --out1 sample_002_trimmed_R1.fastq.gz \
+      --out2 sample_002_trimmed_R2.fastq.gz \
+      --json sample_002.fastp.json \
+      --html sample_002.fastp.html \
+      --thread 1
+
+Command exit status:
+  255
+
+Command output:
+  (empty)
+
+Command error:
+  ERROR: Failed to open file: null
+
+Work dir:
+  /workspaces/training/side-quests/essential_scripting_patterns/work/8b/5b15c8cf35259a87db0137312d6d06
+
+Container:
+  community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690
+
+Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+ -- Check '.nextflow.log' file for details
 ```
-
-??? failure "Sortida de la comanda"
-
-    ```console
-    ERROR ~ Error executing process > 'FASTP (2)'
-
-    Caused by:
-      Process `FASTP (2)` terminated with an error exit status (255)
-
-
-    Command executed:
-
-      fastp \
-          --in1 SAMPLE_002_S2_L001_R1_001.fastq \
-          --in2 null \
-          --out1 sample_002_trimmed_R1.fastq.gz \
-          --out2 sample_002_trimmed_R2.fastq.gz \
-          --json sample_002.fastp.json \
-          --html sample_002.fastp.html \
-          --thread 1
-
-    Command exit status:
-      255
-
-    Command output:
-      (empty)
-
-    Command error:
-      ERROR: Failed to open file: null
-
-    Work dir:
-      /workspaces/training/side-quests/essential_scripting_patterns/work/8b/5b15c8cf35259a87db0137312d6d06
-
-    Container:
-      community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690
-
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
-
-     -- Check '.nextflow.log' file for details
-    ```
 
 Podeu veure que el procés intenta executar `fastp` amb un valor `null` per al segon fitxer d'entrada, cosa que fa que falli. Això és perquè el nostre conjunt de dades conté lectures d'un sol extrem, però el procés està codificat per esperar lectures de dos extrems (dos fitxers d'entrada alhora).
 
 Corregiu-ho afegint lògica condicional al bloc `script:` del procés `FASTP`. Una instrucció if/else comprova el nombre de fitxers de lectura i ajusta la comanda en conseqüència.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="10" hl_lines="2-26"
+```nextflow {2-11} title="main.nf" showLineNumbers startLineNumber=10 step="Abans"
         script:
-        // Detecció simple de lectura d'un sol extrem vs dos extrems
-        def is_single = reads instanceof List ? reads.size() == 1 : true
+        """
+        fastp \\
+            --in1 ${reads[0]} \\
+            --in2 ${reads[1]} \\
+            --out1 ${meta.id}_trimmed_R1.fastq.gz \\
+            --out2 ${meta.id}_trimmed_R2.fastq.gz \\
+            --json ${meta.id}.fastp.json \\
+            --html ${meta.id}.fastp.html \\
+            --thread $task.cpus
+        """
+    }
+```
 
-        if (is_single) {
-            def input_file = reads instanceof List ? reads[0] : reads
-            """
-            fastp \\
-                --in1 ${input_file} \\
-                --out1 ${meta.id}_trimmed.fastq.gz \\
-                --json ${meta.id}.fastp.json \\
-                --html ${meta.id}.fastp.html \\
-                --thread $task.cpus
-            """
-        } else {
-            """
-            fastp \\
-                --in1 ${reads[0]} \\
-                --in2 ${reads[1]} \\
-                --out1 ${meta.id}_trimmed_R1.fastq.gz \\
-                --out2 ${meta.id}_trimmed_R2.fastq.gz \\
-                --json ${meta.id}.fastp.json \\
-                --html ${meta.id}.fastp.html \\
-                --thread $task.cpus
-            """
-        }
-    ```
+```nextflow {2-26} title="main.nf" showLineNumbers startLineNumber=10 step="Després"
+    script:
+    // Detecció simple de lectura d'un sol extrem vs dos extrems
+    def is_single = reads instanceof List ? reads.size() == 1 : true
 
-=== "Abans"
+    if (is_single) {
+        def input_file = reads instanceof List ? reads[0] : reads
+        """
+        fastp \\
+            --in1 ${input_file} \\
+            --out1 ${meta.id}_trimmed.fastq.gz \\
+            --json ${meta.id}.fastp.json \\
+            --html ${meta.id}.fastp.html \\
+            --thread $task.cpus
+        """
+    } else {
+        """
+        fastp \\
+            --in1 ${reads[0]} \\
+            --in2 ${reads[1]} \\
+            --out1 ${meta.id}_trimmed_R1.fastq.gz \\
+            --out2 ${meta.id}_trimmed_R2.fastq.gz \\
+            --json ${meta.id}.fastp.json \\
+            --html ${meta.id}.fastp.html \\
+            --thread $task.cpus
+        """
+    }
+```
 
-    ```groovy title="main.nf" linenums="10" hl_lines="2-11"
-            script:
-            """
-            fastp \\
-                --in1 ${reads[0]} \\
-                --in2 ${reads[1]} \\
-                --out1 ${meta.id}_trimmed_R1.fastq.gz \\
-                --out2 ${meta.id}_trimmed_R2.fastq.gz \\
-                --json ${meta.id}.fastp.json \\
-                --html ${meta.id}.fastp.html \\
-                --thread $task.cpus
-            """
-        }
-    ```
+</CodeWalkthrough>
 
 Ara el workflow pot gestionar tant lectures d'un sol extrem com de dos extrems de manera elegant. La lògica condicional comprova el nombre de fitxers d'entrada i construeix la comanda adequada per a `fastp`. Vegem si funciona:
 
 ```bash
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [distracted_bohr] revision: b9b1c249c1
+
+executor >  local (3)
+[d9/542a41] FASTP (1) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/essential_scripting_patterns/results
+
+  reports:
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [distracted_bohr] revision: b9b1c249c1
-
-    executor >  local (3)
-    [d9/542a41] FASTP (1) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/side-quests/essential_scripting_patterns/results
-
-      reports:
-    ```
 
 Sembla bé! Si comprovem les comandes reals que s'han executat (personalitzeu-ho per al vostre hash de tasca):
 
@@ -1046,9 +1005,9 @@ fastp \
     --thread 1
 ```
 
-Un altre ús comú de la lògica de script dinàmica es pot veure al [mòdul de Genòmica de Nextflow for Science](../../nf4_science/genomics/03_joint_calling.md). En aquell mòdul, el procés GATK que s'invoca pot prendre múltiples fitxers d'entrada, però cadascun ha d'anar prefixat amb `-V` per formar una línia de comanda correcta. El procés usa scripting per transformar una col·lecció de fitxers d'entrada (`all_gvcfs`) en els arguments de comanda correctes:
+Un altre ús comú de la lògica de script dinàmica es pot veure al [mòdul de Genòmica de Nextflow for Science](../../nf4_science/genomics/03_joint_calling.mdx). En aquell mòdul, el procés GATK que s'invoca pot prendre múltiples fitxers d'entrada, però cadascun ha d'anar prefixat amb `-V` per formar una línia de comanda correcta. El procés usa scripting per transformar una col·lecció de fitxers d'entrada (`all_gvcfs`) en els arguments de comanda correctes:
 
-```groovy title="command line manipulation for GATK" linenums="1" hl_lines="2 5"
+```nextflow {2,5} title="command line manipulation for GATK" showLineNumbers
     script:
     def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
     """
@@ -1067,7 +1026,7 @@ Els scripts de processos barregen variables de Nextflow, variables de shell i su
 
 Feu una ullada al fitxer de mòdul `modules/generate_report.nf`:
 
-```groovy title="modules/generate_report.nf" linenums="1"
+```nextflow title="modules/generate_report.nf" showLineNumbers
 process GENERATE_REPORT {
 
     input:
@@ -1088,196 +1047,195 @@ Aquest procés escriu un informe senzill amb l'ID de mostra i el nom del fitxer.
 
 Incloeu el procés al vostre `main.nf` i afegiu-lo al workflow:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="1" hl_lines="2 31"
-    include { FASTP } from './modules/fastp.nf'
-    include { GENERATE_REPORT } from './modules/generate_report.nf'
+```nextflow {1,29} title="main.nf" showLineNumbers step="Abans"
+include { FASTP } from './modules/fastp.nf'
 
-    workflow {
-        main:
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                def sample_meta = [
-                    id: row.sample_id.toLowerCase(),
-                    organism: row.organism,
-                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                    depth: row.sequencing_depth.toInteger(),
-                    quality: row.quality_score.toDouble()
-                ]
-                def fastq_path = file(row.file_path)
+workflow {
+    main:
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            def sample_meta = [
+                id: row.sample_id.toLowerCase(),
+                organism: row.organism,
+                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                depth: row.sequencing_depth.toInteger(),
+                quality: row.quality_score.toDouble()
+            ]
+            def fastq_path = file(row.file_path)
 
-                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
-                def file_meta = m ? [
-                    sample_num: m[0][2].toInteger(),
-                    lane: m[0][3],
-                    read: m[0][4],
-                    chunk: m[0][5]
-                ] : [:]
+            def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+            def file_meta = m ? [
+                sample_num: m[0][2].toInteger(),
+                lane: m[0][3],
+                read: m[0][4],
+                chunk: m[0][5]
+            ] : [:]
 
-                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
-            }
-
-        ch_fastp = FASTP(ch_samples)
-        GENERATE_REPORT(ch_samples)
-
-        publish:
-        reports = GENERATE_REPORT.out
-    }
-
-    output {
-        reports {
-            path 'reports'
+            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+            return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
         }
+
+    ch_fastp = FASTP(ch_samples)
+
+    publish:
+    reports = channel.empty()
+}
+
+output {
+    reports {
+        path 'reports'
     }
-    ```
+}
+```
 
-=== "Abans"
+```nextflow {2,31} title="main.nf" showLineNumbers step="Després"
+include { FASTP } from './modules/fastp.nf'
+include { GENERATE_REPORT } from './modules/generate_report.nf'
 
-    ```groovy title="main.nf" linenums="1" hl_lines="1 29"
-    include { FASTP } from './modules/fastp.nf'
+workflow {
+    main:
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            def sample_meta = [
+                id: row.sample_id.toLowerCase(),
+                organism: row.organism,
+                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                depth: row.sequencing_depth.toInteger(),
+                quality: row.quality_score.toDouble()
+            ]
+            def fastq_path = file(row.file_path)
 
-    workflow {
-        main:
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                def sample_meta = [
-                    id: row.sample_id.toLowerCase(),
-                    organism: row.organism,
-                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                    depth: row.sequencing_depth.toInteger(),
-                    quality: row.quality_score.toDouble()
-                ]
-                def fastq_path = file(row.file_path)
+            def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+            def file_meta = m ? [
+                sample_num: m[0][2].toInteger(),
+                lane: m[0][3],
+                read: m[0][4],
+                chunk: m[0][5]
+            ] : [:]
 
-                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
-                def file_meta = m ? [
-                    sample_num: m[0][2].toInteger(),
-                    lane: m[0][3],
-                    read: m[0][4],
-                    chunk: m[0][5]
-                ] : [:]
-
-                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
-            }
-
-        ch_fastp = FASTP(ch_samples)
-
-        publish:
-        reports = channel.empty()
-    }
-
-    output {
-        reports {
-            path 'reports'
+            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+            return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
         }
+
+    ch_fastp = FASTP(ch_samples)
+    GENERATE_REPORT(ch_samples)
+
+    publish:
+    reports = GENERATE_REPORT.out
+}
+
+output {
+    reports {
+        path 'reports'
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 Ara executeu el workflow i comproveu els informes generats a `results/reports/`. Haurien de contenir informació bàsica sobre cada mostra.
 
 ```bash
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [festering_payne] revision: 3690c7806d
+
+executor >  local (6)
+[d5/67a3aa] FASTP (3)           | 3 of 3 ✔
+[11/982b68] GENERATE_REPORT (1) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/essential_scripting_patterns/results
+
+  reports:
+    - reports/sample_003_report.txt
+    - reports/sample_001_report.txt
+    - reports/sample_002_report.txt
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [festering_payne] revision: 3690c7806d
-
-    executor >  local (6)
-    [d5/67a3aa] FASTP (3)           | 3 of 3 ✔
-    [11/982b68] GENERATE_REPORT (1) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/side-quests/essential_scripting_patterns/results
-
-      reports:
-        - reports/sample_003_report.txt
-        - reports/sample_001_report.txt
-        - reports/sample_002_report.txt
-    ```
 
 Però, i si volem afegir informació sobre quan i on s'ha produït el processament? Modifiquem el procés per usar variables de **shell** i una mica de substitució de comandes per incloure l'usuari actual, el nom d'amfitrió i la data a l'informe:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="modules/generate_report.nf" linenums="10" hl_lines="5-7"
-        script:
-        """
-        echo "Processing ${reads}" > ${meta.id}_report.txt
-        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
-        echo "Processed by: ${USER}" >> ${meta.id}_report.txt
-        echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
-        echo "Date: $(date)" >> ${meta.id}_report.txt
-        """
-    ```
+```nextflow title="modules/generate_report.nf" showLineNumbers startLineNumber=10 step="Abans"
+    script:
+    """
+    echo "Processing ${reads}" > ${meta.id}_report.txt
+    echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+    """
+```
 
-=== "Abans"
+```nextflow {5-7} title="modules/generate_report.nf" showLineNumbers startLineNumber=10 step="Després"
+    script:
+    """
+    echo "Processing ${reads}" > ${meta.id}_report.txt
+    echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+    echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+    echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
+    echo "Date: $(date)" >> ${meta.id}_report.txt
+    """
+```
 
-    ```groovy title="modules/generate_report.nf" linenums="10"
-        script:
-        """
-        echo "Processing ${reads}" > ${meta.id}_report.txt
-        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
-        """
-    ```
+</CodeWalkthrough>
 
-Si executeu això, notareu un error -- Nextflow intenta interpretar `#!groovy ${USER}` com una variable de Nextflow que no existeix.
+Si executeu això, notareu un error -- Nextflow intenta interpretar `${USER}{:nextflow}` com una variable de Nextflow que no existeix.
 
-??? failure "Sortida de la comanda"
+<details class="failure">
+<summary>Sortida de la comanda</summary>
 
-    ```console
-     N E X T F L O W   ~  version 26.04.4
+```console
+ N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [furious_euclid] revision: 3690c7806d
+Launching `main.nf` [furious_euclid] revision: 3690c7806d
 
-    Error modules/generate_report.nf:13:27: `USER` is not defined
-    │  13 |     echo "Processed by: ${USER}" >> ${meta.id}_report.txt
-    ╰     |                           ^^^^
+Error modules/generate_report.nf:13:27: `USER` is not defined
+│  13 |     echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+╰     |                           ^^^^
 
 
-    ERROR ~ Script compilation failed
+ERROR ~ Script compilation failed
 
-     -- Check '.nextflow.log' file for details
-    ```
+ -- Check '.nextflow.log' file for details
+```
+
+</details>
 
 Cal escapar-la perquè Bash la pugui gestionar.
 
 Corregiu-ho escapant les variables de shell i les substitucions de comandes amb una barra inversa (`\`):
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="modules/generate_report.nf" linenums="10" hl_lines="5-7"
-        script:
-        """
-        echo "Processing ${reads}" > ${meta.id}_report.txt
-        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
-        echo "Processed by: \${USER}" >> ${meta.id}_report.txt
-        echo "Hostname: \$(hostname)" >> ${meta.id}_report.txt
-        echo "Date: \$(date)" >> ${meta.id}_report.txt
-        """
-    ```
+```nextflow title="modules/generate_report.nf" showLineNumbers startLineNumber=10 step="Abans"
+    script:
+    """
+    echo "Processing ${reads}" > ${meta.id}_report.txt
+    echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+    echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+    echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
+    echo "Date: $(date)" >> ${meta.id}_report.txt
+    """
+```
 
-=== "Abans"
+```nextflow {5-7} title="modules/generate_report.nf" showLineNumbers startLineNumber=10 step="Després"
+    script:
+    """
+    echo "Processing ${reads}" > ${meta.id}_report.txt
+    echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+    echo "Processed by: \${USER}" >> ${meta.id}_report.txt
+    echo "Hostname: \$(hostname)" >> ${meta.id}_report.txt
+    echo "Date: \$(date)" >> ${meta.id}_report.txt
+    """
+```
 
-    ```groovy title="modules/generate_report.nf" linenums="10"
-        script:
-        """
-        echo "Processing ${reads}" > ${meta.id}_report.txt
-        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
-        echo "Processed by: ${USER}" >> ${meta.id}_report.txt
-        echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
-        echo "Date: $(date)" >> ${meta.id}_report.txt
-        """
-    ```
+</CodeWalkthrough>
 
 Ara funciona! La barra inversa (`\`) li diu a Nextflow "no interpretis això, passa-ho a Bash".
 
@@ -1288,9 +1246,9 @@ En aquesta secció, heu après tècniques de **processament de strings**:
 - **Expressions regulars per a l'anàlisi de fitxers**: Usar l'operador `=~` i patrons regex (`~/patró/`) per extreure metadades de convencions de nomenclatura de fitxers complexes
 - **Generació dinàmica de scripts**: Usar lògica condicional (if/else, operadors ternaris) per generar strings de script diferents basant-se en les característiques de l'entrada
 - **Interpolació de variables**: Comprendre quan Nextflow interpreta strings vs quan ho fa la shell
-  - `#!groovy ${var}` - Variables de Nextflow (interpolades per Nextflow en temps de compilació del workflow)
-  - `#!groovy \${var}` - Variables d'entorn de la shell (escapades, passades a bash en temps d'execució)
-  - `#!groovy \$(cmd)` - Substitució de comandes de la shell (escapada, executada per bash en temps d'execució)
+  - `${var}{:nextflow}` - Variables de Nextflow (interpolades per Nextflow en temps de compilació del workflow)
+  - `\${var}{:nextflow}` - Variables d'entorn de la shell (escapades, passades a bash en temps d'execució)
+  - `\$(cmd){:nextflow}` - Substitució de comandes de la shell (escapada, executada per bash en temps d'execució)
 
 Aquests patrons de processament i generació de strings són essencials per gestionar els formats de fitxers i les convencions de nomenclatura diverses que trobareu en workflows de bioinformàtica del món real.
 
@@ -1304,103 +1262,103 @@ La nostra operació map s'ha tornat llarga i complexa. Extraiem-la en una funci�
 
 Per il·lustrar com queda això amb el nostre workflow existent, feu la modificació següent, usant `def` per definir una funció reutilitzable anomenada `separateMetadata`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="1" hl_lines="4-24 30"
-    include { FASTP } from './modules/fastp.nf'
-    include { GENERATE_REPORT } from './modules/generate_report.nf'
+```nextflow {8-28} title="main.nf" showLineNumbers step="Abans"
+include { FASTP } from './modules/fastp.nf'
+include { GENERATE_REPORT } from './modules/generate_report.nf'
 
-    def separateMetadata(row) {
-        def sample_meta = [
-            id: row.sample_id.toLowerCase(),
-            organism: row.organism,
-            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-            depth: row.sequencing_depth.toInteger(),
-            quality: row.quality_score.toDouble()
-        ]
-        def fastq_path = file(row.file_path)
+workflow {
+    main:
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            def sample_meta = [
+                id: row.sample_id.toLowerCase(),
+                organism: row.organism,
+                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                depth: row.sequencing_depth.toInteger(),
+                quality: row.quality_score.toDouble()
+            ]
+            def fastq_path = file(row.file_path)
 
-        def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
-        def file_meta = m ? [
-            sample_num: m[0][2].toInteger(),
-            lane: m[0][3],
-            read: m[0][4],
-            chunk: m[0][5]
-        ] : [:]
+            def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+            def file_meta = m ? [
+                sample_num: m[0][2].toInteger(),
+                lane: m[0][3],
+                read: m[0][4],
+                chunk: m[0][5]
+            ] : [:]
 
-        def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-        return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
-    }
-
-    workflow {
-        main:
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map{ row -> separateMetadata(row) }
-
-        ch_fastp = FASTP(ch_samples)
-        GENERATE_REPORT(ch_samples)
-
-        publish:
-        reports = GENERATE_REPORT.out
-    }
-
-    output {
-        reports {
-            path 'reports'
+            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+            return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
         }
+
+    ch_fastp = FASTP(ch_samples)
+    GENERATE_REPORT(ch_samples)
+
+    publish:
+    reports = GENERATE_REPORT.out
+}
+
+output {
+    reports {
+        path 'reports'
     }
-    ```
+}
+```
 
-=== "Abans"
+```nextflow {4-24,30} title="main.nf" showLineNumbers step="Després"
+include { FASTP } from './modules/fastp.nf'
+include { GENERATE_REPORT } from './modules/generate_report.nf'
 
-    ```groovy title="main.nf" linenums="1" hl_lines="8-28"
-    include { FASTP } from './modules/fastp.nf'
-    include { GENERATE_REPORT } from './modules/generate_report.nf'
+def separateMetadata(row) {
+    def sample_meta = [
+        id: row.sample_id.toLowerCase(),
+        organism: row.organism,
+        tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+        depth: row.sequencing_depth.toInteger(),
+        quality: row.quality_score.toDouble()
+    ]
+    def fastq_path = file(row.file_path)
 
-    workflow {
-        main:
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                def sample_meta = [
-                    id: row.sample_id.toLowerCase(),
-                    organism: row.organism,
-                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                    depth: row.sequencing_depth.toInteger(),
-                    quality: row.quality_score.toDouble()
-                ]
-                def fastq_path = file(row.file_path)
+    def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+    def file_meta = m ? [
+        sample_num: m[0][2].toInteger(),
+        lane: m[0][3],
+        read: m[0][4],
+        chunk: m[0][5]
+    ] : [:]
 
-                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
-                def file_meta = m ? [
-                    sample_num: m[0][2].toInteger(),
-                    lane: m[0][3],
-                    read: m[0][4],
-                    chunk: m[0][5]
-                ] : [:]
+    def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+    return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+}
 
-                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
-            }
+workflow {
+    main:
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map{ row -> separateMetadata(row) }
 
-        ch_fastp = FASTP(ch_samples)
-        GENERATE_REPORT(ch_samples)
+    ch_fastp = FASTP(ch_samples)
+    GENERATE_REPORT(ch_samples)
 
-        publish:
-        reports = GENERATE_REPORT.out
+    publish:
+    reports = GENERATE_REPORT.out
+}
+
+output {
+    reports {
+        path 'reports'
     }
+}
+```
 
-    output {
-        reports {
-            path 'reports'
-        }
-    }
-    ```
+</CodeWalkthrough>
 
 En extreure aquesta lògica en una funció, hem reduït la lògica real del workflow a quelcom molt més net:
 
-```groovy title="minimal workflow"
+```nextflow title="minimal workflow"
     ch_samples = channel.fromPath("./data/samples.csv")
         .splitCsv(header: true)
         .map{ row -> separateMetadata(row) }
@@ -1415,28 +1373,24 @@ Executeu el workflow per assegurar-vos que encara funciona:
 
 ```bash
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [peaceful_plateau] revision: 918c15451f
+
+executor >  local (6)
+[a5/f542b1] FASTP (2)           | 3 of 3 ✔
+[22/a94ad7] GENERATE_REPORT (2) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/essential_scripting_patterns/results
+
+  reports:
+    - reports/sample_001_report.txt
+    - reports/sample_003_report.txt
+    - reports/sample_002_report.txt
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [peaceful_plateau] revision: 918c15451f
-
-    executor >  local (6)
-    [a5/f542b1] FASTP (2)           | 3 of 3 ✔
-    [22/a94ad7] GENERATE_REPORT (2) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/side-quests/essential_scripting_patterns/results
-
-      reports:
-        - reports/sample_001_report.txt
-        - reports/sample_003_report.txt
-        - reports/sample_002_report.txt
-    ```
 
 La sortida hauria de mostrar ambdós processos completant-se amb èxit. El workflow ara és molt més net i fàcil de mantenir, amb tota la lògica complexa de processament de metadades encapsulada a la funció `separateMetadata`.
 
@@ -1461,62 +1415,58 @@ Fins ara hem usat scripting al bloc `script` dels processos. Però les **closure
 
 Actualment, el nostre procés FASTP usa recursos per defecte. Fem-lo més intel·ligent assignant més CPUs per a mostres d'alta profunditat. Editeu `modules/fastp.nf` per incloure una directiva `cpus` dinàmica i una directiva `memory` estàtica:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="modules/fastp.nf" linenums="1" hl_lines="4-5"
-    process FASTP {
-        container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+```nextflow title="modules/fastp.nf" showLineNumbers step="Abans"
+process FASTP {
+    container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 2 : 1 }
-        memory 2.GB
+    input:
+    tuple val(meta), path(reads)
+```
 
-        input:
-        tuple val(meta), path(reads)
-    ```
+```nextflow {4-5} title="modules/fastp.nf" showLineNumbers step="Després"
+process FASTP {
+    container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-=== "Abans"
+    cpus { meta.depth > 40000000 ? 2 : 1 }
+    memory 2.GB
 
-    ```groovy title="modules/fastp.nf" linenums="1"
-    process FASTP {
-        container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+    input:
+    tuple val(meta), path(reads)
+```
 
-        input:
-        tuple val(meta), path(reads)
-    ```
+</CodeWalkthrough>
 
-La closure `#!groovy { meta.depth > 40000000 ? 2 : 1 }` usa l'**operador ternari** (cobert a la Secció 1.1) i s'avalua per a cada tasca, permetent l'assignació de recursos per mostra. Les mostres d'alta profunditat (>40M lectures) obtenen 2 CPUs, mentre que les altres obtenen 1 CPU.
+La closure `{ meta.depth > 40000000 ? 2 : 1 }{:nextflow}` usa l'**operador ternari** (cobert a la Secció 1.1) i s'avalua per a cada tasca, permetent l'assignació de recursos per mostra. Les mostres d'alta profunditat (>40M lectures) obtenen 2 CPUs, mentre que les altres obtenen 1 CPU.
 
-!!! note "Nota: Accedir a Variables d'Entrada en Directives"
-
-    La closure pot accedir a qualsevol variable d'entrada (com `meta` aquí) perquè Nextflow avalua aquestes closures en el context de l'execució de cada tasca.
+:::note[Nota: Accedir a Variables d'Entrada en Directives]
+La closure pot accedir a qualsevol variable d'entrada (com `meta` aquí) perquè Nextflow avalua aquestes closures en el context de l'execució de cada tasca.
+:::
 
 Executeu el workflow de nou amb l'opció `-ansi-log false` per facilitar la visualització dels hashes de les tasques.
 
 ```bash
 nextflow run main.nf -ansi-log false
+# [!output]
+N E X T F L O W  ~  version 26.04.4
+Launching `main.nf` [naughty_kay] - revision: 918c15451f
+[1e/d9a972] Submitted process > GENERATE_REPORT (2)
+[ef/820ed7] Submitted process > GENERATE_REPORT (3)
+[f6/ab4b70] Submitted process > FASTP (1)
+[5b/748d5a] Submitted process > GENERATE_REPORT (1)
+[7b/d99953] Submitted process > FASTP (3)
+[37/291870] Submitted process > FASTP (2)
+
+Outputs:
+
+  /workspaces/training/side-quests/essential_scripting_patterns/results
+
+  reports:
+    - reports/sample_002_report.txt
+    - reports/sample_003_report.txt
+    - reports/sample_001_report.txt
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W  ~  version 26.04.4
-    Launching `main.nf` [naughty_kay] - revision: 918c15451f
-    [1e/d9a972] Submitted process > GENERATE_REPORT (2)
-    [ef/820ed7] Submitted process > GENERATE_REPORT (3)
-    [f6/ab4b70] Submitted process > FASTP (1)
-    [5b/748d5a] Submitted process > GENERATE_REPORT (1)
-    [7b/d99953] Submitted process > FASTP (3)
-    [37/291870] Submitted process > FASTP (2)
-
-    Outputs:
-
-      /workspaces/training/side-quests/essential_scripting_patterns/results
-
-      reports:
-        - reports/sample_002_report.txt
-        - reports/sample_003_report.txt
-        - reports/sample_001_report.txt
-    ```
 
 Podeu comprovar la comanda `docker` exacta que s'ha executat per veure l'assignació de CPUs per a qualsevol tasca donada:
 
@@ -1536,53 +1486,49 @@ En aquest exemple hem triat un exemple que ha sol·licitat 2 CPUs (`--cpu-shares
 
 Un altre patró potent és usar `task.attempt` per a estratègies de reintent. Per mostrar per què això és útil, començarem reduint l'assignació de memòria a FASTP per sota del que necessita. Canvieu la directiva `memory` a `modules/fastp.nf` a `1.GB`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="modules/fastp.nf" linenums="1" hl_lines="5"
-    process FASTP {
-        container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+```nextflow {5} title="modules/fastp.nf" showLineNumbers step="Abans"
+process FASTP {
+    container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 2 : 1 }
-        memory 1.GB
+    cpus { meta.depth > 40000000 ? 2 : 1 }
+    memory 2.GB
 
-        input:
-        tuple val(meta), path(reads)
-    ```
+    input:
+    tuple val(meta), path(reads)
+```
 
-=== "Abans"
+```nextflow {5} title="modules/fastp.nf" showLineNumbers step="Després"
+process FASTP {
+    container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-    ```groovy title="modules/fastp.nf" linenums="1" hl_lines="5"
-    process FASTP {
-        container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+    cpus { meta.depth > 40000000 ? 2 : 1 }
+    memory 1.GB
 
-        cpus { meta.depth > 40000000 ? 2 : 1 }
-        memory 2.GB
+    input:
+    tuple val(meta), path(reads)
+```
 
-        input:
-        tuple val(meta), path(reads)
-    ```
+</CodeWalkthrough>
 
 ... i executeu el workflow de nou:
 
 ```bash
 nextflow run main.nf
+# [!output]
+Command exit status:
+  137 # [!code highlight]
+
+Command output:
+  (empty)
+
+Command error:
+  Detecting adapter sequence for read1...
+  No adapter detected for read1
+
+  .command.sh: line 7:    34 Killed                  fastp --in1 SAMPLE_001_S1_L001_R1_001.fastq --out1 sample_001_trimmed.fastq.gz --json sample_001.fastp.json --html sample_001.fastp.html --thread 1 # [!code highlight]
 ```
-
-??? failure "Sortida de la comanda"
-
-    ```console hl_lines="2 11"
-    Command exit status:
-      137
-
-    Command output:
-      (empty)
-
-    Command error:
-      Detecting adapter sequence for read1...
-      No adapter detected for read1
-
-      .command.sh: line 7:    34 Killed                  fastp --in1 SAMPLE_001_S1_L001_R1_001.fastq --out1 sample_001_trimmed.fastq.gz --json sample_001.fastp.json --html sample_001.fastp.html --thread 1
-    ```
 
 Això indica que el procés ha estat eliminat per superar els límits de memòria.
 
@@ -1590,33 +1536,33 @@ Aquest és un escenari molt comú en workflows del món real -- de vegades simpl
 
 Per fer el nostre workflow més robust, podem implementar una estratègia de reintent que augmenti l'assignació de memòria en cada intent, usant de nou una closure de Groovy. Modifiqueu la directiva `memory` per multiplicar la memòria base per `task.attempt`, i afegiu les directives `errorStrategy 'retry'` i `maxRetries 2`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="modules/fastp.nf" linenums="1" hl_lines="5-7"
-    process FASTP {
-        container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+```nextflow {5} title="modules/fastp.nf" showLineNumbers step="Abans"
+process FASTP {
+    container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 2 : 1 }
-        memory { 1.GB * task.attempt }
-        errorStrategy 'retry'
-        maxRetries 2
+    cpus { meta.depth > 40000000 ? 2 : 1 }
+    memory 2.GB
 
-        input:
-        tuple val(meta), path(reads)
-    ```
+    input:
+    tuple val(meta), path(reads)
+```
 
-=== "Abans"
+```nextflow {5-7} title="modules/fastp.nf" showLineNumbers step="Després"
+process FASTP {
+    container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-    ```groovy title="modules/fastp.nf" linenums="1" hl_lines="5"
-    process FASTP {
-        container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+    cpus { meta.depth > 40000000 ? 2 : 1 }
+    memory { 1.GB * task.attempt }
+    errorStrategy 'retry'
+    maxRetries 2
 
-        cpus { meta.depth > 40000000 ? 2 : 1 }
-        memory 2.GB
+    input:
+    tuple val(meta), path(reads)
+```
 
-        input:
-        tuple val(meta), path(reads)
-    ```
+</CodeWalkthrough>
 
 Ara si el procés falla per memòria insuficient, Nextflow reintentarà amb més memòria:
 
@@ -1652,79 +1598,75 @@ Hem proporcionat un procés Trimgalore senzill a `modules/trimgalore.nf`, podeu 
 
 Incloeu el nou mòdul de `modules/trimgalore.nf`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="1" hl_lines="2"
-    include { FASTP } from './modules/fastp.nf'
-    include { TRIMGALORE } from './modules/trimgalore.nf'
-    ```
+```nextflow title="main.nf" showLineNumbers step="Abans"
+include { FASTP } from './modules/fastp.nf'
+```
 
-=== "Abans"
+```nextflow {2} title="main.nf" showLineNumbers step="Després"
+include { FASTP } from './modules/fastp.nf'
+include { TRIMGALORE } from './modules/trimgalore.nf'
+```
 
-    ```groovy title="main.nf" linenums="1"
-    include { FASTP } from './modules/fastp.nf'
-    ```
+</CodeWalkthrough>
 
 ... i després modifiqueu el vostre workflow `main.nf` per bifurcar mostres basant-vos en les seves metadades i enrutar-les a través del procés de retallada adequat, com aquest:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="29" hl_lines="5-12"
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row -> separateMetadata(row) }
+```nextflow {5} title="main.nf" showLineNumbers startLineNumber=29 step="Abans"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row -> separateMetadata(row) }
 
-        trim_branches = ch_samples
-            .branch { meta, reads ->
-                fastp: meta.organism == 'human' && meta.depth >= 30000000
-                trimgalore: true
-            }
+    ch_fastp = FASTP(ch_samples)
+    GENERATE_REPORT(ch_samples)
+```
 
-        ch_fastp = FASTP(trim_branches.fastp)
-        ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
-        GENERATE_REPORT(ch_samples)
-    ```
+```nextflow {5-12} title="main.nf" showLineNumbers startLineNumber=29 step="Després"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row -> separateMetadata(row) }
 
-=== "Abans"
+    trim_branches = ch_samples
+        .branch { meta, reads ->
+            fastp: meta.organism == 'human' && meta.depth >= 30000000
+            trimgalore: true
+        }
 
-    ```groovy title="main.nf" linenums="29" hl_lines="5"
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row -> separateMetadata(row) }
+    ch_fastp = FASTP(trim_branches.fastp)
+    ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+    GENERATE_REPORT(ch_samples)
+```
 
-        ch_fastp = FASTP(ch_samples)
-        GENERATE_REPORT(ch_samples)
-    ```
+</CodeWalkthrough>
 
 Executeu aquest workflow modificat:
 
 ```bash
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [condescending_venter] revision: bba0842886
+
+executor >  local (8)
+[8b/40c882] FASTP (1)           | 2 of 2, retries: 2 ✔
+[59/988a68] TRIMGALORE (1)      | 1 of 1 ✔
+[01/2df2d4] GENERATE_REPORT (3) | 3 of 3 ✔
+[0a/8bb1dd] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+[af/76bc6f] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+
+Outputs:
+
+  /workspaces/training/side-quests/essential_scripting_patterns/results
+
+  reports:
+    - reports/sample_001_report.txt
+    - reports/sample_002_report.txt
+    - reports/sample_003_report.txt
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [condescending_venter] revision: bba0842886
-
-    executor >  local (8)
-    [8b/40c882] FASTP (1)           | 2 of 2, retries: 2 ✔
-    [59/988a68] TRIMGALORE (1)      | 1 of 1 ✔
-    [01/2df2d4] GENERATE_REPORT (3) | 3 of 3 ✔
-    [0a/8bb1dd] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
-    [af/76bc6f] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
-
-    Outputs:
-
-      /workspaces/training/side-quests/essential_scripting_patterns/results
-
-      reports:
-        - reports/sample_001_report.txt
-        - reports/sample_002_report.txt
-        - reports/sample_003_report.txt
-    ```
 
 Aquí hem usat expressions condicionals petites però potents dins de l'operador `.branch{}` per enrutar mostres basant-nos en les seves metadades. Les mostres humanes amb alta cobertura passen per `FASTP`, mentre que totes les altres mostres passen per `TRIMGALORE`.
 
@@ -1741,69 +1683,65 @@ Això significa que `meta.id` sol (sense `!= null` explícit) comprova si l'ID e
 
 Afegiu el següent abans de l'operació branch:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="29" hl_lines="5-11"
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row -> separateMetadata(row) }
+```nextflow {5} title="main.nf" showLineNumbers startLineNumber=29 step="Abans"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row -> separateMetadata(row) }
 
-        // Filtrar mostres invàlides o de baixa qualitat
-        ch_valid_samples = ch_samples
-            .filter { meta, reads ->
-                meta.id && meta.organism && meta.depth >= 25000000
-            }
+    trim_branches = ch_samples
+        .branch { meta, reads ->
+            fastp: meta.organism == 'human' && meta.depth >= 30000000
+            trimgalore: true
+        }
+```
 
-        trim_branches = ch_valid_samples
-            .branch { meta, reads ->
-                fastp: meta.organism == 'human' && meta.depth >= 30000000
-                trimgalore: true
-            }
-    ```
+```nextflow {5-11} title="main.nf" showLineNumbers startLineNumber=29 step="Després"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map { row -> separateMetadata(row) }
 
-=== "Abans"
+    // Filtrar mostres invàlides o de baixa qualitat
+    ch_valid_samples = ch_samples
+        .filter { meta, reads ->
+            meta.id && meta.organism && meta.depth >= 25000000
+        }
 
-    ```groovy title="main.nf" linenums="29" hl_lines="5"
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map { row -> separateMetadata(row) }
+    trim_branches = ch_valid_samples
+        .branch { meta, reads ->
+            fastp: meta.organism == 'human' && meta.depth >= 30000000
+            trimgalore: true
+        }
+```
 
-        trim_branches = ch_samples
-            .branch { meta, reads ->
-                fastp: meta.organism == 'human' && meta.depth >= 30000000
-                trimgalore: true
-            }
-    ```
+</CodeWalkthrough>
 
 Executeu el workflow de nou:
 
 ```bash
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [disturbed_jepsen] revision: 7097b98dd8
+
+executor >  local (6)
+[4f/af20c4] FASTP (2)           | 2 of 2, retries: 2 ✔
+[99/320017] TRIMGALORE (1)      | 1 of 1 ✔
+[3a/7c9caa] GENERATE_REPORT (1) | 3 of 3 ✔
+[b3/cc56c7] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+[5b/a38d75] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+
+Outputs:
+
+  /workspaces/training/side-quests/essential_scripting_patterns/results
+
+  reports:
+    - reports/sample_003_report.txt
+    - reports/sample_001_report.txt
+    - reports/sample_002_report.txt
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [disturbed_jepsen] revision: 7097b98dd8
-
-    executor >  local (6)
-    [4f/af20c4] FASTP (2)           | 2 of 2, retries: 2 ✔
-    [99/320017] TRIMGALORE (1)      | 1 of 1 ✔
-    [3a/7c9caa] GENERATE_REPORT (1) | 3 of 3 ✔
-    [b3/cc56c7] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
-    [5b/a38d75] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
-
-    Outputs:
-
-      /workspaces/training/side-quests/essential_scripting_patterns/results
-
-      reports:
-        - reports/sample_003_report.txt
-        - reports/sample_001_report.txt
-        - reports/sample_002_report.txt
-    ```
 
 En aquest cas les tres mostres satisfan el filtre, de manera que totes continuen pel pipeline.
 Un llindar més estricte exclouria les mostres de baixa profunditat i reduiria el nombre de tasques que s'executen.
@@ -1813,14 +1751,14 @@ L'expressió del filtre `meta.id && meta.organism && meta.depth >= 25000000` com
 - `meta.id && meta.organism` comprova que tots dos camps existeixin i no siguin buits (usant truthiness)
 - `meta.depth >= 25000000` assegura una profunditat de seqüenciació suficient amb una comparació explícita
 
-!!! note "Truthiness en Pràctica"
+:::note[Truthiness en Pràctica]
+L'expressió `meta.id && meta.organism` és més concisa que escriure:
+```nextflow
+meta.id != null && meta.id != '' && meta.organism != null && meta.organism != ''
+```
 
-    L'expressió `meta.id && meta.organism` és més concisa que escriure:
-    ```groovy
-    meta.id != null && meta.id != '' && meta.organism != null && meta.organism != ''
-    ```
-
-    Això fa que la lògica de filtratge sigui molt més neta i fàcil de llegir.
+Això fa que la lògica de filtratge sigui molt més neta i fàcil de llegir.
+:::
 
 ### Conclusió
 
@@ -1840,50 +1778,46 @@ Diguem que volem afegir suport per a informació opcional d'execució de seqüen
 
 Modifiqueu la funció `separateMetadata` per incloure un camp run_id:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="5" hl_lines="9"
-    def separateMetadata(row) {
-        def sample_meta = [
-            id: row.sample_id.toLowerCase(),
-            organism: row.organism,
-            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-            depth: row.sequencing_depth.toInteger(),
-            quality: row.quality_score.toDouble()
-        ]
-        def run_id = row.run_id.toUpperCase()
-    ```
+```nextflow title="main.nf" showLineNumbers startLineNumber=5 step="Abans"
+def separateMetadata(row) {
+    def sample_meta = [
+        id: row.sample_id.toLowerCase(),
+        organism: row.organism,
+        tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+        depth: row.sequencing_depth.toInteger(),
+        quality: row.quality_score.toDouble()
+    ]
+```
 
-=== "Abans"
+```nextflow {9} title="main.nf" showLineNumbers startLineNumber=5 step="Després"
+def separateMetadata(row) {
+    def sample_meta = [
+        id: row.sample_id.toLowerCase(),
+        organism: row.organism,
+        tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+        depth: row.sequencing_depth.toInteger(),
+        quality: row.quality_score.toDouble()
+    ]
+    def run_id = row.run_id.toUpperCase()
+```
 
-    ```groovy title="main.nf" linenums="5"
-    def separateMetadata(row) {
-        def sample_meta = [
-            id: row.sample_id.toLowerCase(),
-            organism: row.organism,
-            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-            depth: row.sequencing_depth.toInteger(),
-            quality: row.quality_score.toDouble()
-        ]
-    ```
+</CodeWalkthrough>
 
 Ara executeu el workflow:
 
 ```bash
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [fervent_bassi] revision: c5d3df5c06
+# [!output stderr]
+ERROR ~ Cannot invoke method toUpperCase() on null object
+
+ -- Check script 'main.nf' at line: 13 or see '.nextflow.log' file for more details
 ```
-
-??? failure "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [fervent_bassi] revision: c5d3df5c06
-
-    ERROR ~ Cannot invoke method toUpperCase() on null object
-
-     -- Check script 'main.nf' at line: 13 or see '.nextflow.log' file for more details
-    ```
 
 Això falla amb una NullPointerException.
 
@@ -1895,63 +1829,59 @@ L'operador de navegació segura (`?.`) retorna `null` en lloc de llançar una ex
 
 Actualitzeu la funció per usar la navegació segura:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="4" hl_lines="9"
-    def separateMetadata(row) {
-        def sample_meta = [
-            id: row.sample_id.toLowerCase(),
-            organism: row.organism,
-            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-            depth: row.sequencing_depth.toInteger(),
-            quality: row.quality_score.toDouble()
-        ]
-        def run_id = row.run_id?.toUpperCase()
-    ```
+```nextflow {9} title="main.nf" showLineNumbers startLineNumber=4 step="Abans"
+def separateMetadata(row) {
+    def sample_meta = [
+        id: row.sample_id.toLowerCase(),
+        organism: row.organism,
+        tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+        depth: row.sequencing_depth.toInteger(),
+        quality: row.quality_score.toDouble()
+    ]
+    def run_id = row.run_id.toUpperCase()
+```
 
-=== "Abans"
+```nextflow {9} title="main.nf" showLineNumbers startLineNumber=4 step="Després"
+def separateMetadata(row) {
+    def sample_meta = [
+        id: row.sample_id.toLowerCase(),
+        organism: row.organism,
+        tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+        depth: row.sequencing_depth.toInteger(),
+        quality: row.quality_score.toDouble()
+    ]
+    def run_id = row.run_id?.toUpperCase()
+```
 
-    ```groovy title="main.nf" linenums="4" hl_lines="9"
-    def separateMetadata(row) {
-        def sample_meta = [
-            id: row.sample_id.toLowerCase(),
-            organism: row.organism,
-            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-            depth: row.sequencing_depth.toInteger(),
-            quality: row.quality_score.toDouble()
-        ]
-        def run_id = row.run_id.toUpperCase()
-    ```
+</CodeWalkthrough>
 
 Executeu de nou:
 
 ```bash
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [serene_jennings] revision: d7cb8ec312
+
+executor >  local (6)
+[69/cab072] FASTP (2)           | 2 of 2, retries: 2 ✔
+[09/3b946a] TRIMGALORE (1)      | 1 of 1 ✔
+[3e/bfa8c5] GENERATE_REPORT (2) | 3 of 3 ✔
+[cb/e00b43] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+[5c/a9a73c] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+
+Outputs:
+
+  /workspaces/training/side-quests/essential_scripting_patterns/results
+
+  reports:
+    - reports/sample_001_report.txt
+    - reports/sample_002_report.txt
+    - reports/sample_003_report.txt
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [serene_jennings] revision: d7cb8ec312
-
-    executor >  local (6)
-    [69/cab072] FASTP (2)           | 2 of 2, retries: 2 ✔
-    [09/3b946a] TRIMGALORE (1)      | 1 of 1 ✔
-    [3e/bfa8c5] GENERATE_REPORT (2) | 3 of 3 ✔
-    [cb/e00b43] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
-    [5c/a9a73c] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
-
-    Outputs:
-
-      /workspaces/training/side-quests/essential_scripting_patterns/results
-
-      reports:
-        - reports/sample_001_report.txt
-        - reports/sample_002_report.txt
-        - reports/sample_003_report.txt
-    ```
 
 Sense fallada! El workflow ara gestiona el camp mancant de manera elegant. Quan `row.run_id` és `null`, l'operador `?.` evita la crida a `.toUpperCase()`, i `run_id` es converteix en `null` en lloc de causar una excepció.
 
@@ -1961,80 +1891,76 @@ L'operador Elvis (`?:`) proporciona valors per defecte quan el costat esquerre �
 
 Ara que usem la navegació segura, `run_id` serà `null` per a les mostres sense aquest camp. Usem l'operador Elvis per proporcionar un valor per defecte i afegim-lo al nostre map `sample_meta`:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="5" hl_lines="9-10"
-    def separateMetadata(row) {
-        def sample_meta = [
-            id: row.sample_id.toLowerCase(),
-            organism: row.organism,
-            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-            depth: row.sequencing_depth.toInteger(),
-            quality: row.quality_score.toDouble()
-        ]
-        def run_id = row.run_id?.toUpperCase() ?: 'UNSPECIFIED'
-        sample_meta.run = run_id
-    ```
+```nextflow {9} title="main.nf" showLineNumbers startLineNumber=5 step="Abans"
+def separateMetadata(row) {
+    def sample_meta = [
+        id: row.sample_id.toLowerCase(),
+        organism: row.organism,
+        tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+        depth: row.sequencing_depth.toInteger(),
+        quality: row.quality_score.toDouble()
+    ]
+    def run_id = row.run_id?.toUpperCase()
+```
 
-=== "Abans"
+```nextflow {9-10} title="main.nf" showLineNumbers startLineNumber=5 step="Després"
+def separateMetadata(row) {
+    def sample_meta = [
+        id: row.sample_id.toLowerCase(),
+        organism: row.organism,
+        tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+        depth: row.sequencing_depth.toInteger(),
+        quality: row.quality_score.toDouble()
+    ]
+    def run_id = row.run_id?.toUpperCase() ?: 'UNSPECIFIED'
+    sample_meta.run = run_id
+```
 
-    ```groovy title="main.nf" linenums="5" hl_lines="9"
-    def separateMetadata(row) {
-        def sample_meta = [
-            id: row.sample_id.toLowerCase(),
-            organism: row.organism,
-            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-            depth: row.sequencing_depth.toInteger(),
-            quality: row.quality_score.toDouble()
-        ]
-        def run_id = row.run_id?.toUpperCase()
-    ```
+</CodeWalkthrough>
 
 Afegiu també un operador `view()` al workflow per veure els resultats:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="31" hl_lines="4"
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map{ row -> separateMetadata(row) }
-            .view()
-    ```
+```nextflow title="main.nf" showLineNumbers startLineNumber=31 step="Abans"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map{ row -> separateMetadata(row) }
+```
 
-=== "Abans"
+```nextflow {4} title="main.nf" showLineNumbers startLineNumber=31 step="Després"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map{ row -> separateMetadata(row) }
+        .view()
+```
 
-    ```groovy title="main.nf" linenums="31"
-        ch_samples = channel.fromPath("./data/samples.csv")
-            .splitCsv(header: true)
-            .map{ row -> separateMetadata(row) }
-    ```
+</CodeWalkthrough>
 
 i executeu el workflow:
 
 ```bash
 nextflow run main.nf
+# [!output]
+[[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, run:UNSPECIFIED, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
+[[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, run:UNSPECIFIED, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
+[[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, run:UNSPECIFIED, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    [[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, run:UNSPECIFIED, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
-    [[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, run:UNSPECIFIED, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
-    [[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, run:UNSPECIFIED, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
-    ```
 
 Perfecte! Ara totes les mostres tenen un camp `run` amb el seu ID d'execució real (en majúscules) o el valor per defecte 'UNSPECIFIED'. La combinació de `?.` i `?:` proporciona tant seguretat (sense fallades) com valors per defecte raonables.
 
 Elimineu l'operador `.view()` ara que hem confirmat que funciona.
 
-!!! tip "Consell: Combinar Navegació Segura i Elvis"
+:::tip[Consell: Combinar Navegació Segura i Elvis]
+El patró `valor?.mètode() ?: 'per_defecte'` és comú en workflows de producció:
 
-    El patró `valor?.mètode() ?: 'per_defecte'` és comú en workflows de producció:
+- `valor?.mètode()` - Crida el mètode de manera segura, retorna `null` si `valor` és `null`
+- `?: 'per_defecte'` - Proporciona un valor de reserva si el resultat és `null`
 
-    - `valor?.mètode()` - Crida el mètode de manera segura, retorna `null` si `valor` és `null`
-    - `?: 'per_defecte'` - Proporciona un valor de reserva si el resultat és `null`
-
-    Aquest patró gestiona dades mancants/incompletes de manera elegant.
+Aquest patró gestiona dades mancants/incompletes de manera elegant.
+:::
 
 Useu aquests operadors de manera consistent en funcions, closures d'operadors (`.map{}`, `.filter{}`), scripts de processos i fitxers de configuració. Eviten fallades quan es gestionen dades del món real.
 
@@ -2054,60 +1980,56 @@ De vegades cal aturar el workflow immediatament si els paràmetres d'entrada no 
 
 Creeu una funció de validació abans del vostre bloc de workflow, crideu-la des del workflow i canvieu la creació del canal per usar un paràmetre per a la ruta del fitxer CSV. Si el paràmetre manca o el fitxer no existeix, crideu `error()` per aturar l'execució amb un missatge clar.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="1" hl_lines="5-15 19-20"
-    include { FASTP } from './modules/fastp.nf'
-    include { TRIMGALORE } from './modules/trimgalore.nf'
-    include { GENERATE_REPORT } from './modules/generate_report.nf'
+```nextflow title="main.nf" showLineNumbers step="Abans"
+include { FASTP } from './modules/fastp.nf'
+include { TRIMGALORE } from './modules/trimgalore.nf'
+include { GENERATE_REPORT } from './modules/generate_report.nf'
 
-    def validateInputs() {
-        // Comprovar que es proporciona el paràmetre d'entrada
-        if (!params.input) {
-            error("Input CSV file path not provided. Please specify --input <file.csv>")
-        }
+...
+workflow {
+    main:
+    ch_samples = channel.fromPath("./data/samples.csv")
+```
 
-        // Comprovar que el fitxer CSV existeix
-        if (!file(params.input).exists()) {
-            error("Input CSV file not found: ${params.input}")
-        }
+```nextflow {5-15,19-20} title="main.nf" showLineNumbers step="Després"
+include { FASTP } from './modules/fastp.nf'
+include { TRIMGALORE } from './modules/trimgalore.nf'
+include { GENERATE_REPORT } from './modules/generate_report.nf'
+
+def validateInputs() {
+    // Comprovar que es proporciona el paràmetre d'entrada
+    if (!params.input) {
+        error("Input CSV file path not provided. Please specify --input <file.csv>")
     }
-    ...
-    workflow {
-        main:
-        validateInputs()
-        ch_samples = channel.fromPath(params.input)
-    ```
 
-=== "Abans"
+    // Comprovar que el fitxer CSV existeix
+    if (!file(params.input).exists()) {
+        error("Input CSV file not found: ${params.input}")
+    }
+}
+...
+workflow {
+    main:
+    validateInputs()
+    ch_samples = channel.fromPath(params.input)
+```
 
-    ```groovy title="main.nf" linenums="1"
-    include { FASTP } from './modules/fastp.nf'
-    include { TRIMGALORE } from './modules/trimgalore.nf'
-    include { GENERATE_REPORT } from './modules/generate_report.nf'
-
-    ...
-    workflow {
-        main:
-        ch_samples = channel.fromPath("./data/samples.csv")
-    ```
+</CodeWalkthrough>
 
 Ara proveu d'executar sense el fitxer CSV:
 
 ```bash
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [golden_lamarck] revision: 0d323c9cad
+
+WARN: Access to undefined parameter `input` -- Initialise it to a default value eg. `params.input = some_value`
+Input CSV file path not provided. Please specify --input <file.csv>
 ```
-
-??? failure "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [golden_lamarck] revision: 0d323c9cad
-
-    WARN: Access to undefined parameter `input` -- Initialise it to a default value eg. `params.input = some_value`
-    Input CSV file path not provided. Please specify --input <file.csv>
-    ```
 
 El workflow s'atura immediatament amb un missatge d'error clar en lloc de fallar misteriosament més tard.
 
@@ -2115,104 +2037,92 @@ Ara executeu-lo amb un fitxer inexistent:
 
 ```bash
 nextflow run main.nf --input ./data/nonexistent.csv
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [admiring_avogadro] revision: 0d323c9cad
+
+Input CSV file not found: ./data/nonexistent.csv
 ```
-
-??? failure "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [admiring_avogadro] revision: 0d323c9cad
-
-    Input CSV file not found: ./data/nonexistent.csv
-    ```
 
 Finalment, executeu-lo amb el fitxer correcte:
 
 ```bash
 nextflow run main.nf --input ./data/samples.csv
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [sad_hopper] revision: 0d323c9cad
+
+executor >  local (6)
+[67/e870d6] FASTP (2)           | 2 of 2, retries: 2 ✔
+[e9/685c2d] TRIMGALORE (1)      | 1 of 1 ✔
+[fa/8ff90b] GENERATE_REPORT (3) | 3 of 3 ✔
+[11/caf770] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+[94/f6f423] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+
+Outputs:
+
+  /workspaces/training/side-quests/essential_scripting_patterns/results
+
+  reports:
+    - reports/sample_001_report.txt
+    - reports/sample_003_report.txt
+    - reports/sample_002_report.txt
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [sad_hopper] revision: 0d323c9cad
-
-    executor >  local (6)
-    [67/e870d6] FASTP (2)           | 2 of 2, retries: 2 ✔
-    [e9/685c2d] TRIMGALORE (1)      | 1 of 1 ✔
-    [fa/8ff90b] GENERATE_REPORT (3) | 3 of 3 ✔
-    [11/caf770] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
-    [94/f6f423] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
-
-    Outputs:
-
-      /workspaces/training/side-quests/essential_scripting_patterns/results
-
-      reports:
-        - reports/sample_001_report.txt
-        - reports/sample_003_report.txt
-        - reports/sample_002_report.txt
-    ```
 
 Aquesta vegada s'executa amb èxit.
 
 També podeu afegir validació dins de la funció `separateMetadata`. Usem el `log.warn` no fatal per emetre advertències per a mostres amb baixa profunditat de seqüenciació, però permetent que el workflow continuï:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="1" hl_lines="3-6"
-        def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+```nextflow title="main.nf" showLineNumbers step="Abans"
+    def priority = sample_meta.quality > 40 ? 'high' : 'normal'
 
-        // Validar que les dades tenen sentit
-        if (sample_meta.depth < 30000000) {
-            log.warn "Low sequencing depth for ${sample_meta.id}: ${sample_meta.depth}"
-        }
+    return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+}
+```
 
-        return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+```nextflow {3-6} title="main.nf" showLineNumbers step="Després"
+    def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+
+    // Validar que les dades tenen sentit
+    if (sample_meta.depth < 30000000) {
+        log.warn "Low sequencing depth for ${sample_meta.id}: ${sample_meta.depth}"
     }
-    ```
 
-=== "Abans"
+    return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+}
+```
 
-    ```groovy title="main.nf" linenums="1"
-        def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-
-        return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
-    }
-    ```
+</CodeWalkthrough>
 
 Executeu el workflow de nou amb el CSV original:
 
 ```bash
 nextflow run main.nf --input ./data/samples.csv
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [jolly_colden] revision: 08552a816f
+
+executor >  local (8)
+[3b/e1586c] FASTP (2)           | 2 of 2, retries: 2 ✔
+[8b/4286b3] TRIMGALORE (1)      | 1 of 1 ✔
+[a0/761239] GENERATE_REPORT (3) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/essential_scripting_patterns/results
+
+  reports:
+    - reports/sample_003_report.txt
+    - reports/sample_002_report.txt
+    - reports/sample_001_report.txt
+
+WARN: Low sequencing depth for sample_002: 25000000
 ```
-
-??? warning "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [jolly_colden] revision: 08552a816f
-
-    executor >  local (8)
-    [3b/e1586c] FASTP (2)           | 2 of 2, retries: 2 ✔
-    [8b/4286b3] TRIMGALORE (1)      | 1 of 1 ✔
-    [a0/761239] GENERATE_REPORT (3) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/side-quests/essential_scripting_patterns/results
-
-      reports:
-        - reports/sample_003_report.txt
-        - reports/sample_002_report.txt
-        - reports/sample_001_report.txt
-
-    WARN: Low sequencing depth for sample_002: 25000000
-    ```
 
 Veiem una advertència sobre la baixa profunditat de seqüenciació per a una de les mostres.
 
@@ -2239,41 +2149,41 @@ El gestor d'esdeveniments més usat és `onComplete`, que s'executa quan el vost
 
 Afegiu el gestor d'esdeveniments al vostre fitxer `main.nf`, dins de la definició del workflow:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="67" hl_lines="5-16"
-        ch_fastp = FASTP(trim_branches.fastp)
-        ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
-        GENERATE_REPORT(ch_samples)
+```nextflow {7} title="main.nf" showLineNumbers startLineNumber=67 step="Abans"
+    ch_fastp = FASTP(trim_branches.fastp)
+    ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+    GENERATE_REPORT(ch_samples)
 
-        workflow.onComplete = {
-            println ""
-            println "Pipeline execution summary:"
-            println "=========================="
-            println "Completed at: ${workflow.complete}"
-            println "Duration    : ${workflow.duration}"
-            println "Success     : ${workflow.success}"
-            println "workDir     : ${workflow.workDir}"
-            println "exit status : ${workflow.exitStatus}"
-            println ""
-        }
+    publish:
+    reports = GENERATE_REPORT.out
+}
+```
 
-        publish:
-        reports = GENERATE_REPORT.out
+```nextflow {5-16} title="main.nf" showLineNumbers startLineNumber=67 step="Després"
+    ch_fastp = FASTP(trim_branches.fastp)
+    ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+    GENERATE_REPORT(ch_samples)
+
+    workflow.onComplete = {
+        println ""
+        println "Pipeline execution summary:"
+        println "=========================="
+        println "Completed at: ${workflow.complete}"
+        println "Duration    : ${workflow.duration}"
+        println "Success     : ${workflow.success}"
+        println "workDir     : ${workflow.workDir}"
+        println "exit status : ${workflow.exitStatus}"
+        println ""
     }
-    ```
 
-=== "Abans"
+    publish:
+    reports = GENERATE_REPORT.out
+}
+```
 
-    ```groovy title="main.nf" linenums="67" hl_lines="7"
-        ch_fastp = FASTP(trim_branches.fastp)
-        ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
-        GENERATE_REPORT(ch_samples)
-
-        publish:
-        reports = GENERATE_REPORT.out
-    }
-    ```
+</CodeWalkthrough>
 
 Aquesta closure s'executa quan el workflow es completa. Dins, teniu accés a l'objecte `workflow` que proporciona propietats útils sobre l'execució.
 
@@ -2281,144 +2191,136 @@ Executeu el vostre workflow i veureu aquest resum al final!
 
 ```bash
 nextflow run main.nf --input ./data/samples.csv -ansi-log false
+# [!output]
+N E X T F L O W  ~  version 26.04.4
+Launching `main.nf` [sleepy_sax] - revision: a5468824bd
+WARN: Low sequencing depth for sample_002: 25000000
+[1d/85ba4a] Submitted process > TRIMGALORE (1)
+[4c/7c429a] Submitted process > FASTP (2)
+[22/e7faf8] Submitted process > GENERATE_REPORT (1)
+[2a/ade0b2] Submitted process > FASTP (1)
+[1f/193864] Submitted process > GENERATE_REPORT (3)
+[60/712f82] Submitted process > GENERATE_REPORT (2)
+[2a/ade0b2] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+[4c/7c429a] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+[85/b96cbc] Re-submitted process > FASTP (1)
+[a7/55b62e] Re-submitted process > FASTP (2)
+
+Pipeline execution summary:
+==========================
+Completed at: 2026-06-23T15:49:52.574354708Z
+Duration    : 4.5s
+Success     : true
+workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
+exit status : 0
+
+
+Outputs:
+
+  /workspaces/training/side-quests/essential_scripting_patterns/results
+
+  reports:
+    - reports/sample_001_report.txt
+    - reports/sample_003_report.txt
+    - reports/sample_002_report.txt
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-    N E X T F L O W  ~  version 26.04.4
-    Launching `main.nf` [sleepy_sax] - revision: a5468824bd
-    WARN: Low sequencing depth for sample_002: 25000000
-    [1d/85ba4a] Submitted process > TRIMGALORE (1)
-    [4c/7c429a] Submitted process > FASTP (2)
-    [22/e7faf8] Submitted process > GENERATE_REPORT (1)
-    [2a/ade0b2] Submitted process > FASTP (1)
-    [1f/193864] Submitted process > GENERATE_REPORT (3)
-    [60/712f82] Submitted process > GENERATE_REPORT (2)
-    [2a/ade0b2] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
-    [4c/7c429a] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
-    [85/b96cbc] Re-submitted process > FASTP (1)
-    [a7/55b62e] Re-submitted process > FASTP (2)
-
-    Pipeline execution summary:
-    ==========================
-    Completed at: 2026-06-23T15:49:52.574354708Z
-    Duration    : 4.5s
-    Success     : true
-    workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
-    exit status : 0
-
-
-    Outputs:
-
-      /workspaces/training/side-quests/essential_scripting_patterns/results
-
-      reports:
-        - reports/sample_001_report.txt
-        - reports/sample_003_report.txt
-        - reports/sample_002_report.txt
-    ```
 
 Fem-lo més útil afegint lògica condicional:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="67" hl_lines="5-22"
-        ch_fastp = FASTP(trim_branches.fastp)
-        ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
-        GENERATE_REPORT(ch_samples)
+```nextflow {5-16} title="main.nf" showLineNumbers startLineNumber=67 step="Abans"
+    ch_fastp = FASTP(trim_branches.fastp)
+    ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+    GENERATE_REPORT(ch_samples)
 
-        workflow.onComplete = {
-            println ""
-            println "Pipeline execution summary:"
-            println "=========================="
-            println "Completed at: ${workflow.complete}"
-            println "Duration    : ${workflow.duration}"
-            println "Success     : ${workflow.success}"
-            println "workDir     : ${workflow.workDir}"
-            println "exit status : ${workflow.exitStatus}"
-            println ""
-
-            if (workflow.success) {
-                println "✅ Pipeline completed successfully!"
-            } else {
-                println "❌ Pipeline failed!"
-                println "Error: ${workflow.errorMessage}"
-            }
-        }
-
-        publish:
-        reports = GENERATE_REPORT.out
+    workflow.onComplete = {
+        println ""
+        println "Pipeline execution summary:"
+        println "=========================="
+        println "Completed at: ${workflow.complete}"
+        println "Duration    : ${workflow.duration}"
+        println "Success     : ${workflow.success}"
+        println "workDir     : ${workflow.workDir}"
+        println "exit status : ${workflow.exitStatus}"
+        println ""
     }
-    ```
 
-=== "Abans"
+    publish:
+    reports = GENERATE_REPORT.out
+}
+```
 
-    ```groovy title="main.nf" linenums="67" hl_lines="5-16"
-        ch_fastp = FASTP(trim_branches.fastp)
-        ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
-        GENERATE_REPORT(ch_samples)
+```nextflow {5-22} title="main.nf" showLineNumbers startLineNumber=67 step="Després"
+    ch_fastp = FASTP(trim_branches.fastp)
+    ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+    GENERATE_REPORT(ch_samples)
 
-        workflow.onComplete = {
-            println ""
-            println "Pipeline execution summary:"
-            println "=========================="
-            println "Completed at: ${workflow.complete}"
-            println "Duration    : ${workflow.duration}"
-            println "Success     : ${workflow.success}"
-            println "workDir     : ${workflow.workDir}"
-            println "exit status : ${workflow.exitStatus}"
-            println ""
+    workflow.onComplete = {
+        println ""
+        println "Pipeline execution summary:"
+        println "=========================="
+        println "Completed at: ${workflow.complete}"
+        println "Duration    : ${workflow.duration}"
+        println "Success     : ${workflow.success}"
+        println "workDir     : ${workflow.workDir}"
+        println "exit status : ${workflow.exitStatus}"
+        println ""
+
+        if (workflow.success) {
+            println "✅ Pipeline completed successfully!"
+        } else {
+            println "❌ Pipeline failed!"
+            println "Error: ${workflow.errorMessage}"
         }
-
-        publish:
-        reports = GENERATE_REPORT.out
     }
-    ```
+
+    publish:
+    reports = GENERATE_REPORT.out
+}
+```
+
+</CodeWalkthrough>
 
 Ara obtenim un resum encara més informatiu, incloent un missatge d'èxit/fallada i el directori de sortida si s'especifica:
 
 ```bash
 nextflow run main.nf --input ./data/samples.csv
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [hopeful_waddington] revision: d5a2a830a7
+
+executor >  local (6)
+[ba/58eddd] FASTP (1)           | 2 of 2, retries: 2 ✔
+[03/3ccc01] TRIMGALORE (1)      | 1 of 1 ✔
+[a6/2bcd58] GENERATE_REPORT (3) | 3 of 3 ✔
+WARN: Low sequencing depth for sample_002: 25000000
+[81/c69cdc] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+[e5/a71364] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+Pipeline execution summary:
+==========================
+Completed at: 2026-06-23T15:50:06.811854363Z
+Duration    : 4.4s
+Success     : true
+workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
+exit status : 0
+
+✅ Pipeline completed successfully!
+
+Outputs:
+
+  /workspaces/training/side-quests/essential_scripting_patterns/results
+
+  reports:
+    - reports/sample_003_report.txt
+    - reports/sample_002_report.txt
+    - reports/sample_001_report.txt
 ```
-
-??? success "Sortida de la comanda"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [hopeful_waddington] revision: d5a2a830a7
-
-    executor >  local (6)
-    [ba/58eddd] FASTP (1)           | 2 of 2, retries: 2 ✔
-    [03/3ccc01] TRIMGALORE (1)      | 1 of 1 ✔
-    [a6/2bcd58] GENERATE_REPORT (3) | 3 of 3 ✔
-    WARN: Low sequencing depth for sample_002: 25000000
-    [81/c69cdc] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
-    [e5/a71364] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
-    Pipeline execution summary:
-    ==========================
-    Completed at: 2026-06-23T15:50:06.811854363Z
-    Duration    : 4.4s
-    Success     : true
-    workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
-    exit status : 0
-
-    ✅ Pipeline completed successfully!
-
-    Outputs:
-
-      /workspaces/training/side-quests/essential_scripting_patterns/results
-
-      reports:
-        - reports/sample_003_report.txt
-        - reports/sample_002_report.txt
-        - reports/sample_001_report.txt
-    ```
 
 També podeu escriure el resum en un fitxer usant operacions de fitxer:
 
-```groovy title="main.nf - Writing summary to file"
+```nextflow title="main.nf - Writing summary to file"
 workflow {
     // ... el vostre codi de workflow ...
 
@@ -2445,7 +2347,7 @@ workflow {
 
 A més de `onComplete`, hi ha un altre gestor d'esdeveniments que podeu usar: `onError`, que s'executa només si el workflow falla:
 
-```groovy title="main.nf - onError handler"
+```nextflow title="main.nf - onError handler"
 workflow {
     // ... el vostre codi de workflow ...
 
@@ -2472,7 +2374,7 @@ workflow {
 
 Podeu usar múltiples gestors junts al vostre script de workflow:
 
-```groovy title="main.nf - Combined handlers"
+```nextflow title="main.nf - Combined handlers"
 workflow {
     // ... el vostre codi de workflow ...
 
@@ -2528,13 +2430,13 @@ Aplicar aquests patrons en el vostre propi treball us permetrà construir workfl
 
     - Dataflow: orquestració de canals
 
-    ```groovy
+    ```nextflow
     channel.fromPath('*.fastq').splitCsv(header: true)
     ```
 
     - Scripting: processament de dades en col·leccions
 
-    ```groovy
+    ```nextflow
     sample_data.collect { it.toUpperCase() }
     ```
 
@@ -2542,13 +2444,13 @@ Aplicar aquests patrons en el vostre propi treball us permetrà construir workfl
 
     - Coincidència de patrons
 
-    ```groovy
+    ```nextflow
     filename =~ ~/^(\w+)_(\w+)_(\d+)\.fastq$/
     ```
 
     - Funció amb retorn condicional
 
-    ```groovy
+    ```nextflow
     def parseSample(filename) {
         def matcher = filename =~ pattern
         return matcher ? [valid: true, data: matcher[0]] : [valid: false]
@@ -2557,7 +2459,7 @@ Aplicar aquests patrons en el vostre propi treball us permetrà construir workfl
 
     - Col·lecció de fitxers a arguments de comanda (en bloc script del procés)
 
-    ```groovy
+    ```nextflow
     script:
     def file_args = input_files.collect { file -> "--input ${file}" }.join(' ')
     """
@@ -2569,7 +2471,7 @@ Aplicar aquests patrons en el vostre propi treball us permetrà construir workfl
 
     - Definir una funció amb nom
 
-    ```groovy
+    ```nextflow
     def separateMetadata(row) {
         def sample_meta = [ /* code hidden for brevity */ ]
         def fastq_path = file(row.file_path)
@@ -2583,7 +2485,7 @@ Aplicar aquests patrons en el vostre propi treball us permetrà construir workfl
 
     - Cridar la funció amb nom en un workflow
 
-    ```groovy
+    ```nextflow
     workflow {
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
@@ -2597,14 +2499,14 @@ Aplicar aquests patrons en el vostre propi treball us permetrà construir workfl
 
     - Closures amb nom i composició
 
-    ```groovy
+    ```nextflow
     def enrichData = normalizeId >> addQualityCategory >> addFlags
     def processor = generalFunction.curry(fixedParam)
     ```
 
     - Closures amb accés a l'àmbit
 
-    ```groovy
+    ```nextflow
     def collectStats = { data -> stats.count++; return data }
     ```
 
@@ -2612,7 +2514,7 @@ Aplicar aquests patrons en el vostre propi treball us permetrà construir workfl
 
     - Usar `.branch()` per enrutar dades a través de diferents branques del workflow
 
-    ```groovy
+    ```nextflow
     trim_branches = ch_samples
     .branch { meta, reads ->
         fastp: meta.organism == 'human' && meta.depth >= 30000000
@@ -2625,13 +2527,13 @@ Aplicar aquests patrons en el vostre propi treball us permetrà construir workfl
 
     - Avaluació booleana amb Groovy Truth
 
-    ```groovy
+    ```nextflow
     if (sample.files) println "Has files"
     ```
 
     - Usar `filter()` per fer subconjunts de dades amb 'truthiness'
 
-    ```groovy
+    ```nextflow
     ch_valid_samples = ch_samples
         .filter { meta, reads ->
             meta.id && meta.organism && meta.depth >= 25000000
@@ -2640,13 +2542,13 @@ Aplicar aquests patrons en el vostre propi treball us permetrà construir workfl
 
 6.  **Operadors de Navegació Segura i Elvis**: Heu fet el pipeline robust davant de dades mancants usant `?.` per a l'accés null-safe a propietats i `?:` per proporcionar valors per defecte.
 
-    ```groovy
+    ```nextflow
     def id = data?.sample?.id ?: 'unknown'
     ```
 
 7.  **Validació amb error() i log.warn**: Heu après a validar entrades aviat i fallar ràpidament amb missatges d'error clars.
 
-    ```groovy
+    ```nextflow
     try {
         def errors = validateSample(sample)
         if (errors) throw new RuntimeException("Invalid: ${errors.join(', ')}")
@@ -2659,7 +2561,7 @@ Aplicar aquests patrons en el vostre propi treball us permetrà construir workfl
 
     - Usar `onComplete` per registrar i notificar
 
-    ```groovy
+    ```nextflow
     workflow.onComplete = {
         println "Success     : ${workflow.success}"
         println "exit status : ${workflow.exitStatus}"
@@ -2675,7 +2577,7 @@ Aplicar aquests patrons en el vostre propi treball us permetrà construir workfl
 
     - Usar `onError` per prendre acció específicament en cas de fallada
 
-    ```groovy
+    ```nextflow
     workflow.onError = {
         // Escriure un registre d'errors detallat
         def error_file = file("${workflow.launchDir}/error.log")
@@ -2714,4 +2616,4 @@ Us beneficiarà practicar i ampliar les vostres habilitats per tal de:
 
 ## Què segueix?
 
-Torneu al [menú de Missions Secundàries](../index.md) o feu clic al botó a la part inferior dreta de la pàgina per continuar amb el tema següent de la llista.
+Torneu al [menú de Missions Secundàries](../index.mdx) o feu clic al botó a la part inferior dreta de la pàgina per continuar amb el tema següent de la llista.

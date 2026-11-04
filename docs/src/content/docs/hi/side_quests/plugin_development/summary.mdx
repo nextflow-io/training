@@ -1,6 +1,9 @@
-# सारांश
+---
+title: सारांश
+description: तुमने Plugin Development प्रशिक्षण पूरा कर लिया है।
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 तुमने Plugin Development प्रशिक्षण पूरा कर लिया है।
 यह पेज हर भाग में तुमने जो बनाया उसका पुनर्कथन करता है, वितरण को कवर करता है, और आगे कहाँ जाना है इस पर मार्गदर्शन प्रदान करता है।
@@ -75,7 +78,7 @@ Publishing वर्कफ़्लो:
 
 एक बार publish होने के बाद, उपयोगकर्ता बिना किसी लोकल सेटअप के तुम्हारा plugin इंस्टॉल कर सकते हैं:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 plugins {
     id 'nf-greeting@1.0.0'
 }
@@ -123,7 +126,7 @@ nextflowPlugin {
 
 **Workflows में उपयोग:**
 
-```groovy
+```nextflow
 include { myFunction } from 'plugin/my-plugin'
 
 workflow {

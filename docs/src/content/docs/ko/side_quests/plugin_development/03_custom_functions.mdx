@@ -1,16 +1,19 @@
-# 파트 3: 사용자 정의 함수
+---
+title: '파트 3: 사용자 정의 함수'
+description: 이 섹션을 마치면 플러그인에 사용자 정의 함수를 추가하고, 로컬에서 빌드 및 설치하여 실제 워크플로우에서 실행할 수 있게 됩니다.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 이 섹션을 마치면 플러그인에 사용자 정의 함수를 추가하고, 로컬에서 빌드 및 설치하여 실제 워크플로우에서 실행할 수 있게 됩니다.
 
-!!! tip "여기서부터 시작하시나요?"
+:::tip[여기서부터 시작하시나요?]
+파트 3부터 시작하는 경우, 파트 2의 해결책을 시작점으로 복사하세요:
 
-    파트 3부터 시작하는 경우, 파트 2의 해결책을 시작점으로 복사하세요:
-
-    ```bash
-    cp -r solutions/2-create-project/* .
-    ```
+```bash
+cp -r solutions/2-create-project/* .
+```
+:::
 
 ---
 
@@ -31,7 +34,7 @@ cd nf-greeting
 cat src/main/groovy/training/plugin/GreetingExtension.groovy
 ```
 
-```groovy title="Output" hl_lines="29 40-43"
+```groovy {29,40-43} title="Output"
 /*
  * Copyright 2025, Seqera Labs
  *
@@ -60,10 +63,10 @@ import nextflow.plugin.extension.PluginExtensionPoint
  * 사용자 정의 함수를 구현합니다.
  */
 @CompileStatic
-class GreetingExtension extends PluginExtensionPoint { // (1)!
+class GreetingExtension extends PluginExtensionPoint { // [!annotate] 확장이 기반으로 하는 클래스입니다. Nextflow가 함수를 인식하려면 이 클래스가 필요합니다.
 
     @Override
-    protected void init(Session session) {             // (2)!
+    protected void init(Session session) {             // [!annotate] 플러그인이 로드될 때 호출됩니다. 초기화에 사용합니다.
     }
 
     /**
@@ -71,17 +74,13 @@ class GreetingExtension extends PluginExtensionPoint { // (1)!
      *
      * @param target
      */
-    @Function                                          // (3)!
+    @Function                                          // [!annotate] 이 메서드를 `include`를 통해 워크플로우에서 호출 가능하게 만듭니다.
     void sayHello(String target) {
         println "Hello, ${target}!"
     }
 
 }
 ```
-
-1. 확장이 기반으로 하는 클래스입니다. Nextflow가 함수를 인식하려면 이 클래스가 필요합니다.
-2. 플러그인이 로드될 때 호출됩니다. 초기화에 사용합니다.
-3. 이 메서드를 `include`를 통해 워크플로우에서 호출 가능하게 만듭니다.
 
 템플릿에는 `sayHello` 함수 예제가 포함되어 있습니다.
 `@Function` 어노테이션은 메서드를 Nextflow 워크플로우에서 호출 가능하게 만드는 역할을 합니다.
@@ -101,57 +100,53 @@ Groovy(및 Java)에서는 메서드가 반환하는 타입과 매개변수의 �
 
 `src/main/groovy/training/plugin/GreetingExtension.groovy`를 편집하여 `sayHello` 메서드를 교체합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="GreetingExtension.groovy" linenums="24" hl_lines="8-14"
-    @CompileStatic
-    class GreetingExtension extends PluginExtensionPoint {
+```groovy {12-20} title="GreetingExtension.groovy" showLineNumbers startLineNumber=24 step="전"
+/**
+ * Nextflow 스크립트에서 가져올 수 있는
+ * 사용자 정의 함수를 구현합니다.
+ */
+@CompileStatic
+class GreetingExtension extends PluginExtensionPoint {
 
-        @Override
-        protected void init(Session session) {
-        }
-
-        /**
-         * 인사말 문자열을 역순으로 변환합니다
-         */
-        @Function                                // (1)!
-        String reverseGreeting(String greeting) { // (2)!
-            return greeting.reverse()             // (3)!
-        }
-
+    @Override
+    protected void init(Session session) {
     }
-    ```
 
-    1. 메서드를 Nextflow 워크플로우에서 호출 가능하게 만듭니다.
-    2. String을 받아 String을 반환합니다.
-    3. Groovy의 내장 문자열 역순 변환 메서드입니다.
-
-=== "전"
-
-    ```groovy title="GreetingExtension.groovy" linenums="24" hl_lines="12-20"
     /**
-     * Nextflow 스크립트에서 가져올 수 있는
-     * 사용자 정의 함수를 구현합니다.
+     * 지정된 대상에게 인사합니다.
+     *
+     * @param target
      */
-    @CompileStatic
-    class GreetingExtension extends PluginExtensionPoint {
-
-        @Override
-        protected void init(Session session) {
-        }
-
-        /**
-         * 지정된 대상에게 인사합니다.
-         *
-         * @param target
-         */
-        @Function
-        void sayHello(String target) {
-            println "Hello, ${target}!"
-        }
-
+    @Function
+    void sayHello(String target) {
+        println "Hello, ${target}!"
     }
-    ```
+
+}
+```
+
+```groovy {8-14} title="GreetingExtension.groovy" showLineNumbers startLineNumber=24 step="후"
+@CompileStatic
+class GreetingExtension extends PluginExtensionPoint {
+
+    @Override
+    protected void init(Session session) {
+    }
+
+    /**
+     * 인사말 문자열을 역순으로 변환합니다
+     */
+    @Function                                // [!annotate] 메서드를 Nextflow 워크플로우에서 호출 가능하게 만듭니다.
+    String reverseGreeting(String greeting) { // [!annotate] String을 받아 String을 반환합니다.
+        return greeting.reverse()             // [!annotate] Groovy의 내장 문자열 역순 변환 메서드입니다.
+    }
+
+}
+```
+
+</CodeWalkthrough>
 
 이 함수의 핵심 구성 요소:
 
@@ -159,10 +154,10 @@ Groovy(및 Java)에서는 메서드가 반환하는 타입과 매개변수의 �
 - **`String reverseGreeting(String greeting)`**: String을 받아 String을 반환합니다.
 - **`greeting.reverse()`**: Groovy의 내장 문자열 역순 변환 메서드입니다.
 
-!!! tip "public 메서드와 private 메서드"
-
-    `@Function`이 없는 메서드는 Nextflow 워크플로우에 노출되지 않습니다.
-    워크플로우 네임스페이스에 노출될 걱정 없이 클래스에 보조 메서드를 추가할 수 있습니다.
+:::tip[public 메서드와 private 메서드]
+`@Function`이 없는 메서드는 Nextflow 워크플로우에 노출되지 않습니다.
+워크플로우 네임스페이스에 노출될 걱정 없이 클래스에 보조 메서드를 추가할 수 있습니다.
+:::
 
 ---
 
@@ -174,11 +169,11 @@ Groovy(및 Java)에서는 메서드가 반환하는 타입과 매개변수의 �
 make install
 ```
 
-!!! tip "빌드가 실패하는 경우"
-
-    오류 메시지를 주의 깊게 읽으세요. 보통 줄 번호와 문제 설명이 포함되어 있습니다.
-    일반적인 원인으로는 문법 오류(괄호나 따옴표 누락), 클래스 이름 오타, 타입 불일치 등이 있습니다.
-    해결이 어렵다면 예제와 코드를 한 글자씩 비교해 보세요.
+:::tip[빌드가 실패하는 경우]
+오류 메시지를 주의 깊게 읽으세요. 보통 줄 번호와 문제 설명이 포함되어 있습니다.
+일반적인 원인으로는 문법 오류(괄호나 따옴표 누락), 클래스 이름 오타, 타입 불일치 등이 있습니다.
+해결이 어렵다면 예제와 코드를 한 글자씩 비교해 보세요.
+:::
 
 ---
 
@@ -195,67 +190,67 @@ cd ..
 
 `greet.nf`를 편집하여 `reverseGreeting`을 가져오고 사용합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="greet.nf" hl_lines="4 23-25" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="greet.nf" showLineNumbers step="전"
+#!/usr/bin/env nextflow
 
-    include { samplesheetToList } from 'plugin/nf-schema'
-    include { reverseGreeting } from 'plugin/nf-greeting'
+include { samplesheetToList } from 'plugin/nf-schema'
 
-    params.input = 'greetings.csv'
+params.input = 'greetings.csv'
 
-    process SAY_HELLO {
-        input:
-            val greeting
-        output:
-            stdout
-        script:
-        """
-        echo '$greeting'
-        """
-    }
+process SAY_HELLO {
+    input:
+        val greeting
+    output:
+        stdout
+    script:
+    """
+    echo '$greeting'
+    """
+}
 
-    workflow {
-        greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-            .map { row -> row[0] }
+workflow {
+    greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+        .map { row -> row[0] }
+    SAY_HELLO(greeting_ch)
+    SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
+}
+```
 
-        greeting_ch
-            .map { greeting -> reverseGreeting(greeting) }
-            .view { reversed -> "Reversed: $reversed" }
+```nextflow {4,23-25} title="greet.nf" showLineNumbers step="후"
+#!/usr/bin/env nextflow
 
-        SAY_HELLO(greeting_ch)
-        SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
-    }
-    ```
+include { samplesheetToList } from 'plugin/nf-schema'
+include { reverseGreeting } from 'plugin/nf-greeting'
 
-=== "전"
+params.input = 'greetings.csv'
 
-    ```groovy title="greet.nf" linenums="1"
-    #!/usr/bin/env nextflow
+process SAY_HELLO {
+    input:
+        val greeting
+    output:
+        stdout
+    script:
+    """
+    echo '$greeting'
+    """
+}
 
-    include { samplesheetToList } from 'plugin/nf-schema'
+workflow {
+    greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+        .map { row -> row[0] }
 
-    params.input = 'greetings.csv'
+    greeting_ch
+        .map { greeting -> reverseGreeting(greeting) }
+        .view { reversed -> "Reversed: $reversed" }
 
-    process SAY_HELLO {
-        input:
-            val greeting
-        output:
-            stdout
-        script:
-        """
-        echo '$greeting'
-        """
-    }
+    SAY_HELLO(greeting_ch)
+    SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
+}
+```
 
-    workflow {
-        greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-            .map { row -> row[0] }
-        SAY_HELLO(greeting_ch)
-        SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
-    }
-    ```
+</CodeWalkthrough>
 
 파이프라인을 실행합니다:
 
@@ -263,28 +258,31 @@ cd ..
 nextflow run greet.nf
 ```
 
-??? example "출력"
+<details class="example">
+<summary>출력</summary>
 
-    ```console
-    N E X T F L O W   ~  version 26.04.4
+```console
+N E X T F L O W   ~  version 26.04.4
 
-    Launching `greet.nf` [elated_marconi] revision: 8cc49dbe33
+Launching `greet.nf` [elated_marconi] revision: 8cc49dbe33
 
-    Pipeline is starting! 🚀
-    executor >  local (5)
-    [fe/109754] SAY_HELLO (5) | 5 of 5 ✔
-    Reversed: olleH
-    Reversed: ruojnoB
-    Reversed: aloH
-    Reversed: oaiC
-    Reversed: ollaH
-    Output: Hello
-    Output: Bonjour
-    Output: Hola
-    Output: Ciao
-    Output: Hallo
-    Pipeline complete! 👋
-    ```
+Pipeline is starting! 🚀
+executor >  local (5)
+[fe/109754] SAY_HELLO (5) | 5 of 5 ✔
+Reversed: olleH
+Reversed: ruojnoB
+Reversed: aloH
+Reversed: oaiC
+Reversed: ollaH
+Output: Hello
+Output: Bonjour
+Output: Hola
+Output: Ciao
+Output: Hallo
+Pipeline complete! 👋
+```
+
+</details>
 
 첫 번째 사용자 정의 플러그인 함수가 실제 워크플로우에서 동작하고 있습니다.
 파트 1에서 nf-hello 및 nf-schema와 함께 사용했던 `include { ... } from 'plugin/...'` 패턴이 직접 만든 플러그인에서도 동일하게 작동합니다.
@@ -298,59 +296,57 @@ nextflow run greet.nf
 
 `GreetingExtension.groovy`를 편집하여 `reverseGreeting` 뒤, 클래스의 닫는 중괄호 앞에 `decorateGreeting`을 추가합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="GreetingExtension.groovy" linenums="24" hl_lines="16-22"
-    @CompileStatic
-    class GreetingExtension extends PluginExtensionPoint {
+```groovy title="GreetingExtension.groovy" showLineNumbers startLineNumber=24 step="전"
+@CompileStatic
+class GreetingExtension extends PluginExtensionPoint {
 
-        @Override
-        protected void init(Session session) {
-        }
-
-        /**
-         * 인사말 문자열을 역순으로 변환합니다
-         */
-        @Function
-        String reverseGreeting(String greeting) {
-            return greeting.reverse()
-        }
-
-        /**
-         * 인사말에 축하 마커를 추가합니다
-         */
-        @Function
-        String decorateGreeting(String greeting) {
-            return "*** ${greeting} ***"             // (1)!
-        }
-
+    @Override
+    protected void init(Session session) {
     }
-    ```
 
-    1. Groovy 문자열 보간: `#!groovy ${...}`는 변수의 값을 문자열에 삽입합니다.
-
-=== "전"
-
-    ```groovy title="GreetingExtension.groovy" linenums="24"
-    @CompileStatic
-    class GreetingExtension extends PluginExtensionPoint {
-
-        @Override
-        protected void init(Session session) {
-        }
-
-        /**
-         * 인사말 문자열을 역순으로 변환합니다
-         */
-        @Function
-        String reverseGreeting(String greeting) {
-            return greeting.reverse()
-        }
-
+    /**
+     * 인사말 문자열을 역순으로 변환합니다
+     */
+    @Function
+    String reverseGreeting(String greeting) {
+        return greeting.reverse()
     }
-    ```
 
-이 함수는 Groovy 문자열 보간(`#!groovy "*** ${greeting} ***"`)을 사용하여 인사말 변수를 문자열 안에 삽입합니다.
+}
+```
+
+```groovy {16-22} title="GreetingExtension.groovy" showLineNumbers startLineNumber=24 step="후"
+@CompileStatic
+class GreetingExtension extends PluginExtensionPoint {
+
+    @Override
+    protected void init(Session session) {
+    }
+
+    /**
+     * 인사말 문자열을 역순으로 변환합니다
+     */
+    @Function
+    String reverseGreeting(String greeting) {
+        return greeting.reverse()
+    }
+
+    /**
+     * 인사말에 축하 마커를 추가합니다
+     */
+    @Function
+    String decorateGreeting(String greeting) {
+        return "*** ${greeting} ***"             // [!annotate] Groovy 문자열 보간: `${...}`는 변수의 값을 문자열에 삽입합니다.
+    }
+
+}
+```
+
+</CodeWalkthrough>
+
+이 함수는 Groovy 문자열 보간(`"*** ${greeting} ***"{:nextflow}`)을 사용하여 인사말 변수를 문자열 안에 삽입합니다.
 
 빌드, 설치 후 워크플로우를 업데이트합니다:
 
@@ -360,108 +356,108 @@ cd nf-greeting && make install && cd ..
 
 `greet.nf`를 업데이트하여 `decorateGreeting`도 가져오고 사용합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="greet.nf" hl_lines="4-6 14 16-17 19 33" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow {4,12,15,28} title="greet.nf" showLineNumbers step="전"
+#!/usr/bin/env nextflow
 
-    include { samplesheetToList } from 'plugin/nf-schema'
-    // 플러그인에서 사용자 정의 함수를 가져옵니다
-    include { reverseGreeting } from 'plugin/nf-greeting'
-    include { decorateGreeting } from 'plugin/nf-greeting'  // (1)!
+include { samplesheetToList } from 'plugin/nf-schema'
+include { reverseGreeting } from 'plugin/nf-greeting'
 
-    params.input = 'greetings.csv'
+params.input = 'greetings.csv'
 
-    process SAY_HELLO {
-        input:
-            val greeting
-        output:
-            path 'greeting.txt'
-        script:
-        // 사용자 정의 플러그인 함수를 사용하여 인사말을 꾸밉니다
-        def decorated = decorateGreeting(greeting)  // (2)!
-        """
-        echo '$decorated' > greeting.txt
-        """
-    }
+process SAY_HELLO {
+    input:
+        val greeting
+    output:
+        stdout
+    script:
+    """
+    echo '$greeting'
+    """
+}
 
-    workflow {
-        greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-            .map { row -> row[0] }
+workflow {
+    greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+        .map { row -> row[0] }
 
-        // reverseGreeting 함수 사용을 시연합니다
-        greeting_ch
-            .map { greeting -> reverseGreeting(greeting) }
-            .view { reversed -> "Reversed: $reversed" }
+    greeting_ch
+        .map { greeting -> reverseGreeting(greeting) }
+        .view { reversed -> "Reversed: $reversed" }
 
-        SAY_HELLO(greeting_ch)
-        SAY_HELLO.out.view { file -> "Decorated: ${file.text.trim()}" }
-    }
-    ```
+    SAY_HELLO(greeting_ch)
+    SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
+}
+```
 
-    1. 동일한 플러그인에서 여러 함수를 가져오려면 각각 별도의 `include` 구문이 필요합니다.
-    2. 플러그인 함수는 process `script:` 블록 내부에서도 동작합니다.
+```nextflow {4-6,14,16-17,19,33} title="greet.nf" showLineNumbers step="후"
+#!/usr/bin/env nextflow
 
-=== "전"
+include { samplesheetToList } from 'plugin/nf-schema'
+// 플러그인에서 사용자 정의 함수를 가져옵니다
+include { reverseGreeting } from 'plugin/nf-greeting'
+include { decorateGreeting } from 'plugin/nf-greeting'  // [!annotate] 동일한 플러그인에서 여러 함수를 가져오려면 각각 별도의 `include` 구문이 필요합니다.
 
-    ```groovy title="greet.nf" linenums="1" hl_lines="4 12 15 28"
-    #!/usr/bin/env nextflow
+params.input = 'greetings.csv'
 
-    include { samplesheetToList } from 'plugin/nf-schema'
-    include { reverseGreeting } from 'plugin/nf-greeting'
+process SAY_HELLO {
+    input:
+        val greeting
+    output:
+        path 'greeting.txt'
+    script:
+    // 사용자 정의 플러그인 함수를 사용하여 인사말을 꾸밉니다
+    def decorated = decorateGreeting(greeting)  // [!annotate] 플러그인 함수는 process `script:` 블록 내부에서도 동작합니다.
+    """
+    echo '$decorated' > greeting.txt
+    """
+}
 
-    params.input = 'greetings.csv'
+workflow {
+    greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+        .map { row -> row[0] }
 
-    process SAY_HELLO {
-        input:
-            val greeting
-        output:
-            stdout
-        script:
-        """
-        echo '$greeting'
-        """
-    }
+    // reverseGreeting 함수 사용을 시연합니다
+    greeting_ch
+        .map { greeting -> reverseGreeting(greeting) }
+        .view { reversed -> "Reversed: $reversed" }
 
-    workflow {
-        greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-            .map { row -> row[0] }
+    SAY_HELLO(greeting_ch)
+    SAY_HELLO.out.view { file -> "Decorated: ${file.text.trim()}" }
+}
+```
 
-        greeting_ch
-            .map { greeting -> reverseGreeting(greeting) }
-            .view { reversed -> "Reversed: $reversed" }
-
-        SAY_HELLO(greeting_ch)
-        SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
-    }
-    ```
+</CodeWalkthrough>
 
 ```bash
 nextflow run greet.nf
 ```
 
-??? example "출력"
+<details class="example">
+<summary>출력</summary>
 
-    ```console
-    N E X T F L O W   ~  version 26.04.4
+```console
+N E X T F L O W   ~  version 26.04.4
 
-    Launching `greet.nf` [elated_marconi] revision: bef1bea9f0
+Launching `greet.nf` [elated_marconi] revision: bef1bea9f0
 
-    Pipeline is starting! 🚀
-    executor >  local (5)
-    [fe/109754] SAY_HELLO (5) | 5 of 5 ✔
-    Reversed: olleH
-    Reversed: ruojnoB
-    Reversed: aloH
-    Reversed: oaiC
-    Reversed: ollaH
-    Decorated: *** Hello ***
-    Decorated: *** Bonjour ***
-    Decorated: *** Hola ***
-    Decorated: *** Ciao ***
-    Decorated: *** Hallo ***
-    Pipeline complete! 👋
-    ```
+Pipeline is starting! 🚀
+executor >  local (5)
+[fe/109754] SAY_HELLO (5) | 5 of 5 ✔
+Reversed: olleH
+Reversed: ruojnoB
+Reversed: aloH
+Reversed: oaiC
+Reversed: ollaH
+Decorated: *** Hello ***
+Decorated: *** Bonjour ***
+Decorated: *** Hola ***
+Decorated: *** Ciao ***
+Decorated: *** Hallo ***
+Pipeline complete! 👋
+```
+
+</details>
 
 플러그인 함수는 process 스크립트(`SAY_HELLO` 내부의 `decorateGreeting`)와 워크플로우 연산(`map` 내부의 `reverseGreeting`) 모두에서 동작합니다.
 
@@ -483,4 +479,4 @@ nextflow run greet.nf
 이 방식은 확장성이 없습니다. 함수가 늘어날수록, 특히 변경 후에도 각 함수가 올바르게 동작하는지 더 빠르게 확인할 방법이 필요합니다.
 다음 섹션에서는 파이프라인을 실행하지 않고도 개별 함수를 자동으로 검증할 수 있는 단위 테스트를 소개합니다.
 
-[파트 4로 계속 :material-arrow-right:](04_build_and_test.md){ .md-button .md-button--primary }
+<LinkButton href="04_build_and_test.mdx" variant="primary" icon="right-arrow">파트 4로 계속</LinkButton>

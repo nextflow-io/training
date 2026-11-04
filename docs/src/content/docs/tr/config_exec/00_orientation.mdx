@@ -1,10 +1,13 @@
-# Başlarken
+---
+title: Başlarken
+description: 'Yürütme Yapılandırması: Başlarken'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Eğitim Ortamını Başlatın
 
-GitHub Codespaces üzerinde sunduğumuz hazır ortamı kullanmak için aşağıdaki "Open in GitHub Codespaces" düğmesine tıklayın. Diğer seçenekler için [Ortam seçenekleri](../envsetup/index.md) sayfasına bakın.
+GitHub Codespaces üzerinde sunduğumuz hazır ortamı kullanmak için aşağıdaki "Open in GitHub Codespaces" düğmesine tıklayın. Diğer seçenekler için [Ortam seçenekleri](../envsetup/index.mdx) sayfasına bakın.
 
 Ortam yüklenirken okumaya devam edebilmek için eğitim ortamını yeni bir tarayıcı sekmesinde veya penceresinde açmanızı öneririz (kullandığınız cihaza göre sağ tıklama, ctrl+tıklama veya cmd+tıklama kullanabilirsiniz).
 Kursu tamamlamak için bu talimatları paralel olarak açık tutmanız gerekecektir.
@@ -18,12 +21,12 @@ Bu eğitim ortamı, kursu tamamlamak için gereken tüm yazılım, kod ve verile
 Codespace, VSCode arayüzüyle yapılandırılmıştır. Bu arayüz; bir dosya sistemi gezgini, bir kod düzenleyici ve bir terminal kabuğu içermektedir.
 Kurs boyunca verilen tüm talimatlar (örneğin "dosyayı açın", "kodu düzenleyin" veya "bu komutu çalıştırın"), aksi belirtilmedikçe VSCode arayüzünün bu üç bölümüne atıfta bulunmaktadır.
 
-Bu kursu kendi başınıza tamamlıyorsanız, daha fazla ayrıntı için [ortam temelleri](../envsetup/01_setup.md) sayfasını incelemenizi öneririz.
+Bu kursu kendi başınıza tamamlıyorsanız, daha fazla ayrıntı için [ortam temelleri](../envsetup/01_setup.mdx) sayfasını incelemenizi öneririz.
 
 ### Sürüm Gereksinimleri
 
 Bu kurs, v2 sözdizimi ayrıştırıcısının etkin olduğu (25.10+ sürümünde varsayılan) Nextflow 25.10.2 veya daha yeni bir sürümünü gerektirmektedir.
-Yerel veya özel bir ortam kullanıyorsanız, [burada](../info/nxf_versions.md) belgelenen doğru ayarları kullandığınızdan emin olun.
+Yerel veya özel bir ortam kullanıyorsanız, [burada](../info/nxf_versions.mdx) belgelenen doğru ayarları kullandığınızdan emin olun.
 
 ## Çalışmaya Hazırlanın
 
@@ -44,13 +47,13 @@ Ardından VSCode'u bu dizine odaklanacak şekilde ayarlayın; böylece dosya gez
 code .
 ```
 
-!!! tip "İpucu"
+:::tip[İpucu]
+Herhangi bir nedenle bu dizinden çıkarsanız (örneğin codespace'iniz uyku moduna geçerse), Github Codespaces eğitim ortamında çalıştığınızı varsayarak tam yolu kullanarak her zaman geri dönebilirsiniz:
 
-    Herhangi bir nedenle bu dizinden çıkarsanız (örneğin codespace'iniz uyku moduna geçerse), Github Codespaces eğitim ortamında çalıştığınızı varsayarak tam yolu kullanarak her zaman geri dönebilirsiniz:
-
-    ```bash
-    cd /workspaces/training/config-exec
-    ```
+```bash
+cd /workspaces/training/config-exec
+```
+:::
 
 ### Sağlanan Materyalleri İnceleyin
 
@@ -61,22 +64,25 @@ Tam yapıyı görmek için terminalden aşağıdaki komutu çalıştırın:
 tree . -L 2
 ```
 
-??? abstract "Dizin içeriği"
+<details class="abstract">
+<summary>Dizin içeriği</summary>
 
-    ```console
-    .
-    ├── data
-    │   └── greetings.csv
-    ├── main.nf
-    ├── modules
-    │   ├── collectGreetings.nf
-    │   ├── convertToUpper.nf
-    │   ├── cowpy.nf
-    │   └── sayHello.nf
-    └── nextflow.config
-    ```
+```console
+.
+├── data
+│   └── greetings.csv
+├── main.nf
+├── modules
+│   ├── collectGreetings.nf
+│   ├── convertToUpper.nf
+│   ├── cowpy.nf
+│   └── sayHello.nf
+└── nextflow.config
+```
 
-**`main.nf`** ve **`modules/`** dosyaları, [Nextflow Run](../nextflow_run/index.md) kursundaki çok adımlı pipeline'ın aynısıdır; **`nextflow.config`** dosyası ise orada gördüğünüz yapılandırmanın aynısıdır.
+</details>
+
+**`main.nf`** ve **`modules/`** dosyaları, [Nextflow Run](../nextflow_run/index.mdx) kursundaki çok adımlı pipeline'ın aynısıdır; **`nextflow.config`** dosyası ise orada gördüğünüz yapılandırmanın aynısıdır.
 Bu alıştırmalar boyunca her ikisini de genişleteceksiniz.
 
 **`data/`** dizini, pipeline'ın okuduğu CSV girdi dosyasını içermektedir.
@@ -91,4 +97,4 @@ Başlamaya hazır olduğunuzu düşünüyor musunuz?
 
 Tüm kutuları işaretleyebildiyseniz, başlayabilirsiniz.
 
-**[Bölüm 1: Hesaplama ortamınıza uyarlama](./01_packaging_and_execution.md) sayfasına geçmek için bu sayfanın sağ alt köşesindeki oka tıklayın.**
+**[Bölüm 1: Hesaplama ortamınıza uyarlama](./01_packaging_and_execution.mdx) sayfasına geçmek için bu sayfanın sağ alt köşesindeki oka tıklayın.**

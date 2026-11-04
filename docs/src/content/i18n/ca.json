@@ -1,0 +1,14 @@
+{
+  "courseInfo.courseSummary": "Resum del curs",
+  "courseInfo.additionalInformation": "Informació addicional",
+  "courseInfo.technicalRequirements": "Requisits tècnics",
+  "courseInfo.learningObjectives": "Objectius d'aprenentatge",
+  "courseInfo.audiencePrerequisites": "Públic i prerequisits",
+  "courseInfo.courseVideos": "Vídeos del curs",
+  "courseInfo.defaultTechnicalRequirements": "Necessitareu un compte de GitHub O una instal·lació local de Nextflow. Consulteu [Opcions d'entorn](../envsetup/index.md) per a més detalls.",
+  "courseInfo.defaultVideos": "Hi ha vídeos disponibles per a cada capítol, amb un instructor que resol els exercicis. El vídeo per a cada part del curs està inserit a la part superior de la pàgina corresponent.",
+  "courseInfo.viewPlaylist": "Veure la llista de reproducció a YouTube",
+  "consent.title": "Consentiment de cookies",
+  "consent.description": "Utilitzem cookies per reconèixer les vostres visites repetides i preferències, així com per mesurar l'eficàcia de la nostra documentació i si els usuaris troben el que estan buscant. Amb el vostre consentiment, ens ajudeu a millorar els nostres materials de formació. Més informació a <a href=\"https://seqera.io/privacy-policy/#cookies\" target=\"_blank\" rel=\"noopener\">com utilitzem les cookies</a>.",
+  "consent.posthog": "PostHog Analytics"
+}

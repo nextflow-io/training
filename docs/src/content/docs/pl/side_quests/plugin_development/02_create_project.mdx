@@ -1,22 +1,25 @@
-# Część 2: Tworzenie projektu wtyczki
+---
+title: 'Część 2: Tworzenie projektu wtyczki'
+description: Wiesz już, jak wtyczki rozszerzają Nextflow'a o funkcjonalności wielokrotnego użytku.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Wiesz już, jak wtyczki rozszerzają Nextflow'a o funkcjonalności wielokrotnego użytku.
 Teraz stworzysz własną, zaczynając od szablonu projektu, który zajmuje się konfiguracją budowania za Ciebie.
 
-!!! tip "Zaczynasz od tej części?"
+:::tip[Zaczynasz od tej części?]
+Jeśli dołączasz w tym miejscu, skopiuj rozwiązanie z Części 1 jako punkt startowy:
 
-    Jeśli dołączasz w tym miejscu, skopiuj rozwiązanie z Części 1 jako punkt startowy:
+```bash
+cp -r solutions/1-plugin-basics/* .
+```
+:::
 
-    ```bash
-    cp -r solutions/1-plugin-basics/* .
-    ```
-
-!!! info "Oficjalna dokumentacja"
-
-    Ta sekcja i kolejne omawiają podstawy tworzenia wtyczek.
-    Szczegółowe informacje znajdziesz w [oficjalnej dokumentacji tworzenia wtyczek Nextflow](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html).
+:::note[Oficjalna dokumentacja]
+Ta sekcja i kolejne omawiają podstawy tworzenia wtyczek.
+Szczegółowe informacje znajdziesz w [oficjalnej dokumentacji tworzenia wtyczek Nextflow](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html).
+:::
 
 ---
 
@@ -34,9 +37,9 @@ Plugin created successfully at path: /workspaces/training/side-quests/plugin_dev
 
 Pierwszy argument to nazwa wtyczki, a drugi to nazwa Twojej organizacji (służy do organizowania wygenerowanego kodu w katalogi).
 
-!!! tip "Tworzenie ręczne"
-
-    Możesz też tworzyć projekty wtyczek ręcznie lub użyć [szablonu nf-hello](https://github.com/nextflow-io/nf-hello) na GitHub jako punktu startowego.
+:::tip[Tworzenie ręczne]
+Możesz też tworzyć projekty wtyczek ręcznie lub użyć [szablonu nf-hello](https://github.com/nextflow-io/nf-hello) na GitHub jako punktu startowego.
+:::
 
 ---
 
@@ -137,22 +140,17 @@ plugins {
 version = '0.1.0'
 
 nextflowPlugin {
-    nextflowVersion = '25.10.0'       // (1)!
+    nextflowVersion = '25.10.0'       // [!annotate] **`nextflowVersion`**: Minimalna wymagana wersja Nextflow'a
 
-    provider = 'training'             // (2)!
-    className = 'training.plugin.GreetingPlugin'  // (3)!
-    extensionPoints = [               // (4)!
+    provider = 'training'             // [!annotate] **`provider`**: Twoje imię lub nazwa organizacji
+    className = 'training.plugin.GreetingPlugin'  // [!annotate] **`className`**: Główna klasa wtyczki — punkt wejścia ładowany przez Nextflow'a jako pierwszy
+    extensionPoints = [               // [!annotate] **`extensionPoints`**: Klasy dodające funkcjonalności do Nextflow'a (Twoje funkcje, monitorowanie itp.)
         'training.plugin.GreetingExtension',
         'training.plugin.GreetingFactory'
     ]
 
 }
 ```
-
-1. **`nextflowVersion`**: Minimalna wymagana wersja Nextflow'a
-2. **`provider`**: Twoje imię lub nazwa organizacji
-3. **`className`**: Główna klasa wtyczki — punkt wejścia ładowany przez Nextflow'a jako pierwszy
-4. **`extensionPoints`**: Klasy dodające funkcjonalności do Nextflow'a (Twoje funkcje, monitorowanie itp.)
 
 Blok `nextflowPlugin` konfiguruje:
 
@@ -166,23 +164,23 @@ Blok `nextflowPlugin` konfiguruje:
 Szablon generuje wartość `nextflowVersion`, która może być nieaktualna.
 Zaktualizuj ją, aby odpowiadała zainstalowanej wersji Nextflow'a i zapewnić pełną kompatybilność:
 
-=== "Po"
+<CodeWalkthrough>
 
-    ```groovy title="build.gradle" hl_lines="2"
-    nextflowPlugin {
-        nextflowVersion = '26.04.0'
+```groovy {2} title="build.gradle" step="Przed"
+nextflowPlugin {
+    nextflowVersion = '25.10.0'
 
-        provider = 'training'
-    ```
+    provider = 'training'
+```
 
-=== "Przed"
+```groovy {2} title="build.gradle" step="Po"
+nextflowPlugin {
+    nextflowVersion = '26.04.0'
 
-    ```groovy title="build.gradle" hl_lines="2"
-    nextflowPlugin {
-        nextflowVersion = '25.10.0'
+    provider = 'training'
+```
 
-        provider = 'training'
-    ```
+</CodeWalkthrough>
 
 ---
 
@@ -205,20 +203,7 @@ Kluczowe pliki, o których warto wiedzieć:
 - `GreetingExtension` dostarcza funkcje udostępniane przez wtyczkę workflow'om
 - `GreetingObserver` działa równolegle z pipeline'em i reaguje na zdarzenia bez konieczności modyfikowania kodu pipeline'u
 
-```mermaid
-graph TD
-    A[GreetingPlugin] -->|registers| B[GreetingExtension]
-    A -->|registers| C[GreetingFactory]
-    C -->|creates| D[GreetingObserver]
-
-    B -->|provides| E["@Function methods<br/>(callable from workflows)"]
-    D -->|hooks into| F["Lifecycle events<br/>(onFlowCreate, onProcessComplete, etc.)"]
-
-    style A fill:#e1f5fe
-    style B fill:#fff3e0
-    style C fill:#fff3e0
-    style D fill:#fff3e0
-```
+![](../../../side_quests/plugin_development/img/mermaid-b474be7ef724bbf8.svg)
 
 ---
 
@@ -234,28 +219,31 @@ make install
 
 `make install` kompiluje kod wtyczki i kopiuje go do lokalnego katalogu wtyczek Nextflow (`$NXF_HOME/plugins/`), udostępniając go do użycia.
 
-??? example "Wynik budowania"
+<details class="example">
+<summary>Wynik budowania</summary>
 
-    Przy pierwszym uruchomieniu Gradle pobierze się samodzielnie (może to chwilę potrwać):
+Przy pierwszym uruchomieniu Gradle pobierze się samodzielnie (może to chwilę potrwać):
 
-    ```console
-    Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
-    ...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+```console
+Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
+...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
 
-    Welcome to Gradle 8.14!
-    ...
+Welcome to Gradle 8.14!
+...
 
-    Deprecated Gradle features were used in this build...
+Deprecated Gradle features were used in this build...
 
-    BUILD SUCCESSFUL in 23s
-    6 actionable tasks: 6 executed
-    ```
+BUILD SUCCESSFUL in 23s
+6 actionable tasks: 6 executed
+```
 
-    **Ostrzeżenia są oczekiwane.**
+**Ostrzeżenia są oczekiwane.**
 
-    - **"Downloading gradle..."**: Dzieje się to tylko za pierwszym razem. Kolejne budowania są znacznie szybsze.
-    - **"Deprecated Gradle features..."**: To ostrzeżenie pochodzi z szablonu wtyczki, nie z Twojego kodu. Można je bezpiecznie zignorować.
-    - **"BUILD SUCCESSFUL"**: To jest najważniejsze. Wtyczka skompilowała się bez błędów.
+- **"Downloading gradle..."**: Dzieje się to tylko za pierwszym razem. Kolejne budowania są znacznie szybsze.
+- **"Deprecated Gradle features..."**: To ostrzeżenie pochodzi z szablonu wtyczki, nie z Twojego kodu. Można je bezpiecznie zignorować.
+- **"BUILD SUCCESSFUL"**: To jest najważniejsze. Wtyczka skompilowała się bez błędów.
+
+</details>
 
 Wróć do katalogu pipeline'u:
 
@@ -265,29 +253,29 @@ cd ..
 
 Dodaj wtyczkę nf-greeting do `nextflow.config`:
 
-=== "Po"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" hl_lines="4"
-    // Konfiguracja dla ćwiczeń z tworzenia wtyczek
-    plugins {
-        id 'nf-schema@2.6.1'
-        id 'nf-greeting@0.1.0'
-    }
-    ```
+```nextflow title="nextflow.config" step="Przed"
+// Konfiguracja dla ćwiczeń z tworzenia wtyczek
+plugins {
+    id 'nf-schema@2.6.1'
+}
+```
 
-=== "Przed"
+```nextflow {4} title="nextflow.config" step="Po"
+// Konfiguracja dla ćwiczeń z tworzenia wtyczek
+plugins {
+    id 'nf-schema@2.6.1'
+    id 'nf-greeting@0.1.0'
+}
+```
 
-    ```groovy title="nextflow.config"
-    // Konfiguracja dla ćwiczeń z tworzenia wtyczek
-    plugins {
-        id 'nf-schema@2.6.1'
-    }
-    ```
+</CodeWalkthrough>
 
-!!! note "Wersja wymagana dla lokalnych wtyczek"
-
-    Korzystając z lokalnie zainstalowanych wtyczek, musisz podać wersję (np. `nf-greeting@0.1.0`).
-    Wtyczki opublikowane w rejestrze mogą używać samej nazwy.
+:::note[Wersja wymagana dla lokalnych wtyczek]
+Korzystając z lokalnie zainstalowanych wtyczek, musisz podać wersję (np. `nf-greeting@0.1.0`).
+Wtyczki opublikowane w rejestrze mogą używać samej nazwy.
+:::
 
 Uruchom pipeline:
 
@@ -334,4 +322,4 @@ Nauczyłeś się, że:
 
 Teraz zaimplementujesz własne funkcje w klasie Extension i użyjesz ich w workflow'ie.
 
-[Przejdź do Części 3 :material-arrow-right:](03_custom_functions.md){ .md-button .md-button--primary }
+<LinkButton href="03_custom_functions.mdx" variant="primary" icon="right-arrow">Przejdź do Części 3</LinkButton>

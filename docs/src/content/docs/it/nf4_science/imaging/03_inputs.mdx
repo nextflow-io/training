@@ -1,6 +1,9 @@
-# Parte 3: Organizzazione degli input
+---
+title: 'Parte 3: Organizzazione degli input'
+description: Nella Parte 2, abbiamo eseguito molkart con più parametri dalla riga di comando.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Nella Parte 2, abbiamo eseguito molkart con più parametri dalla riga di comando.
 Ora impareremo due approcci migliori per gestire gli input: **file di parametri** e **samplesheet**.
@@ -122,9 +125,9 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! Warning "Avviso"
-
-    Noti che i percorsi nel samplesheet sono relativi a dove **esegue** Nextflow, non a dove si trova il samplesheet.
+:::caution[Avviso]
+Noti che i percorsi nel samplesheet sono relativi a dove **esegue** Nextflow, non a dove si trova il samplesheet.
+:::
 
 Infine, eseguiamo nf-core/molkart un'altra volta con il samplesheet con percorsi di file locali:
 

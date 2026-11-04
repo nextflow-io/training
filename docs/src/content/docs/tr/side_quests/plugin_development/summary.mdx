@@ -1,6 +1,9 @@
-# Özet
+---
+title: Özet
+description: Plugin Geliştirme eğitimini tamamladınız.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Plugin Geliştirme eğitimini tamamladınız.
 Bu sayfa, her bölümde neler geliştirdiğinizi özetlemekte, dağıtım konusunu ele almakta ve bundan sonra nereye gideceğinize dair rehberlik sunmaktadır.
@@ -75,7 +78,7 @@ Adım adım talimatlar için [resmi yayımlama belgelerine](https://www.nextflow
 
 Yayımlandıktan sonra kullanıcılar plugin'inizi herhangi bir yerel kurulum gerektirmeden yükleyebilir:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 plugins {
     id 'nf-greeting@1.0.0'
 }
@@ -123,7 +126,7 @@ nextflowPlugin {
 
 **İş akışlarında kullanım:**
 
-```groovy
+```nextflow
 include { myFunction } from 'plugin/my-plugin'
 
 workflow {

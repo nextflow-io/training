@@ -1,4 +1,7 @@
-# Summary
+---
+title: Summary
+description: You have completed the Plugin Development training.
+---
 
 You have completed the Plugin Development training.
 This page recaps what you built in each part, covers distribution, and provides guidance on where to go next.
@@ -73,7 +76,7 @@ For step-by-step instructions, see the [official publishing documentation](https
 
 Once published, users install your plugin without any local setup:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 plugins {
     id 'nf-greeting@1.0.0'
 }
@@ -121,7 +124,7 @@ nextflowPlugin {
 
 **Using in workflows:**
 
-```groovy
+```nextflow
 include { myFunction } from 'plugin/my-plugin'
 
 workflow {

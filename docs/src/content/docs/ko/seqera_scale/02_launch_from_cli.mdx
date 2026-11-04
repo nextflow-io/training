@@ -1,8 +1,11 @@
-# 파트 2: 명령줄에서 파이프라인 실행
+---
+title: '파트 2: 명령줄에서 파이프라인 실행'
+description: 파트 1에서는 Seqera 웹 인터페이스에서 nf-core/rnaseq를 실행했습니다.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-[파트 1](./01_run_with_seqera.md)에서는 Seqera 웹 인터페이스에서 nf-core/rnaseq를 실행했습니다.
+[파트 1](./01_run_with_seqera.mdx)에서는 Seqera 웹 인터페이스에서 nf-core/rnaseq를 실행했습니다.
 이번에는 `tw` CLI를 사용하여 명령줄에서 동일한 작업을 수행하고, 워크스페이스에 새 파이프라인을 추가합니다.
 
 ---
@@ -32,13 +35,9 @@ sudo mv tw /usr/local/bin/
 
 ```bash
 tw --version
+# [!output]
+Tower CLI version 0.40.0 (build 26db579)
 ```
-
-??? success "명령 출력"
-
-    ```console
-    Tower CLI version 0.40.0 (build 26db579)
-    ```
 
 `tw` CLI가 설치되었으며 설정할 준비가 되었습니다.
 
@@ -70,35 +69,31 @@ source .seqera_config
 
 ```bash
 tw info
+# [!output]
+    Details
+-------------------------+-----------------------------
+ Tower API endpoint      | https://api.cloud.seqera.io
+ Tower API version       | 1.150.0
+ Tower version           | 26.1.0-cycle54
+ CLI version             | 0.30.0 (fde9dec)
+ CLI minimum API version | 1.148.0
+ Authenticated user      | <your-name>
+
+System health status
+---------------------------------------+----
+ Remote API server connection check    | OK
+ Tower API version check               | OK
+ Authentication API credential's token | OK
 ```
-
-??? success "명령 출력"
-
-    ```console
-        Details
-    -------------------------+-----------------------------
-     Tower API endpoint      | https://api.cloud.seqera.io
-     Tower API version       | 1.150.0
-     Tower version           | 26.1.0-cycle54
-     CLI version             | 0.30.0 (fde9dec)
-     CLI minimum API version | 1.148.0
-     Authenticated user      | <your-name>
-
-    System health status
-    ---------------------------------------+----
-     Remote API server connection check    | OK
-     Tower API version check               | OK
-     Authentication API credential's token | OK
-    ```
 
 `tw` CLI가 인증되었으며 Seqera 계정에 연결되었습니다.
 Codespace 세션을 시작할 때마다 `source .seqera_config`를 실행하여 설정을 다시 로드합니다.
 
-!!! tip "팁"
-
-    워크스페이스에 기본 컴퓨팅 환경이 설정되어 있지 않은 경우, 설정 파일에 `export TOWER_COMPUTE_ENV=<compute-env-name>`을 추가하여 기본값을 지정할 수 있습니다.
-    모든 설정 값은 명령줄에서 플래그를 명시적으로 전달하여 재정의할 수 있습니다(예: `--compute-env other-env`).
-    전체 옵션 및 환경 변수 목록은 [tw CLI 참조 문서](https://docs.seqera.io/platform/latest/cli/reference)를 확인하세요.
+:::tip[팁]
+워크스페이스에 기본 컴퓨팅 환경이 설정되어 있지 않은 경우, 설정 파일에 `export TOWER_COMPUTE_ENV=<compute-env-name>`을 추가하여 기본값을 지정할 수 있습니다.
+모든 설정 값은 명령줄에서 플래그를 명시적으로 전달하여 재정의할 수 있습니다(예: `--compute-env other-env`).
+전체 옵션 및 환경 변수 목록은 [tw CLI 참조 문서](https://docs.seqera.io/platform/latest/cli/reference)를 확인하세요.
+:::
 
 ### 1.4. CLI에서 워크스페이스 탐색
 
@@ -106,73 +101,61 @@ Codespace 세션을 시작할 때마다 `source .seqera_config`를 실행하여 
 
 ```bash
 tw workspaces list
+# [!output]
+Available workspaces:
+ID              | Name            | Full Name                | Visibility
+--------------- | --------------- | ------------------------ | ----------
+<workspace-id>  | my-workspace    | my-org/my-workspace      | PRIVATE
 ```
-
-??? success "명령 출력"
-
-    ```console
-    Available workspaces:
-    ID              | Name            | Full Name                | Visibility
-    --------------- | --------------- | ------------------------ | ----------
-    <workspace-id>  | my-workspace    | my-org/my-workspace      | PRIVATE
-    ```
 
 방금 실행한 nf-core/rnaseq 실행을 포함하여 워크스페이스의 실행 목록을 확인합니다:
 
 ```bash
 tw runs list
+# [!output]
+Pipeline runs for my-org/my-workspace workspace:
+ID        | Status   | Name          | Pipeline               | Run name
+--------- | -------- | ------------- | ---------------------- | --------
+<run-id>  | RUNNING  | ...           | nf-core/rnaseq         | happy_curie
 ```
-
-??? success "명령 출력"
-
-    ```console
-    Pipeline runs for my-org/my-workspace workspace:
-    ID        | Status   | Name          | Pipeline               | Run name
-    --------- | -------- | ------------- | ---------------------- | --------
-    <run-id>  | RUNNING  | ...           | nf-core/rnaseq         | happy_curie
-    ```
 
 웹 인터페이스에서 모니터링 중인 동일한 실행이 여기에도 표시됩니다.
 
-!!! note "참고"
+:::note[참고]
+`.seqera_config`에 `TOWER_WORKSPACE_ID`가 설정되어 있으므로 모든 `tw` 명령에서 `--workspace`를 생략할 수 있습니다.
+설정 파일 없이 사용하는 경우 다음과 같이 명시적으로 전달합니다:
 
-    `.seqera_config`에 `TOWER_WORKSPACE_ID`가 설정되어 있으므로 모든 `tw` 명령에서 `--workspace`를 생략할 수 있습니다.
-    설정 파일 없이 사용하는 경우 다음과 같이 명시적으로 전달합니다:
-
-    ```bash
-    tw runs list --workspace <org>/<workspace>
-    ```
+```bash
+tw runs list --workspace <org>/<workspace>
+```
+:::
 
 웹 인터페이스에서 볼 수 있는 모든 것은 CLI에서도 접근할 수 있습니다.
 
 ### 1.5. CLI에서 nf-core/rnaseq 실행
 
-[파트 1](./01_run_with_seqera.md)에서 워크스페이스에 추가한 파이프라인은 CLI에서 이름으로 사용할 수 있습니다.
+[파트 1](./01_run_with_seqera.mdx)에서 워크스페이스에 추가한 파이프라인은 CLI에서 이름으로 사용할 수 있습니다.
 `test` 프로파일로 실행합니다:
 
 ```bash
 tw launch nf-core-rnaseq --profile test
+# [!output]
+Launching pipeline nf-core-rnaseq
+Run name: focused_einstein
+https://cloud.seqera.io/orgs/my-org/workspaces/my-workspace/watch/<run-id>
 ```
-
-??? success "명령 출력"
-
-    ```console
-    Launching pipeline nf-core-rnaseq
-    Run name: focused_einstein
-    https://cloud.seqera.io/orgs/my-org/workspaces/my-workspace/watch/<run-id>
-    ```
 
 브라우저에서 링크를 열고 **Runs** 패널에 실행이 표시되는지 확인합니다.
 
 실행 중인 것을 확인했다면, CLI와 웹 인터페이스가 동일한 워크스페이스를 보는 두 가지 방식임을 확인한 것입니다.
 
-!!! note "참고"
+:::note[참고]
+파이프라인을 워크스페이스에 추가하지 않고도 `tw launch`에 GitHub URL을 직접 전달할 수 있습니다.
+그러나 실행 전에 파이프라인을 명시적으로 추가하는 것이 일반적으로 더 좋습니다. 이렇게 하면 향후 실행을 위한 파이프라인 설정이 저장되고, 이름으로 사용할 수 있으며, Launchpad에서 모든 워크스페이스 구성원이 볼 수 있습니다.
 
-    파이프라인을 워크스페이스에 추가하지 않고도 `tw launch`에 GitHub URL을 직접 전달할 수 있습니다.
-    그러나 실행 전에 파이프라인을 명시적으로 추가하는 것이 일반적으로 더 좋습니다. 이렇게 하면 향후 실행을 위한 파이프라인 설정이 저장되고, 이름으로 사용할 수 있으며, Launchpad에서 모든 워크스페이스 구성원이 볼 수 있습니다.
-
-    `tw`를 사용하여 명령줄에서 직접 워크스페이스에 파이프라인을 추가할 수도 있습니다.
-    다음 섹션에서는 nf-core/demo 파이프라인을 사용하여 이 방법을 설명합니다.
+`tw`를 사용하여 명령줄에서 직접 워크스페이스에 파이프라인을 추가할 수도 있습니다.
+다음 섹션에서는 nf-core/demo 파이프라인을 사용하여 이 방법을 설명합니다.
+:::
 
 ### 핵심 정리
 
@@ -197,13 +180,9 @@ nf-core/demo는 연습하기에 좋은 예입니다. Use nf-core 과정에서 �
 tw pipelines add \
     --name nf-core-demo \
     https://github.com/nf-core/demo
+# [!output]
+New pipeline 'nf-core-demo' added at my-org/my-workspace workspace
 ```
-
-??? success "명령 출력"
-
-    ```console
-    New pipeline 'nf-core-demo' added at my-org/my-workspace workspace
-    ```
 
 파이프라인이 등록되었으며 Launchpad에 표시됩니다.
 
@@ -213,23 +192,19 @@ tw pipelines add \
 
 ```bash
 tw pipelines list
+# [!output]
+Pipelines at my-org/my-workspace:
+ID   | Name            | Repository
+---- | --------------- | -----------------------------------------
+...  | nf-core-demo    | https://github.com/nf-core/demo
+...  | nf-core-rnaseq  | ...
 ```
-
-??? success "명령 출력"
-
-    ```console
-    Pipelines at my-org/my-workspace:
-    ID   | Name            | Repository
-    ---- | --------------- | -----------------------------------------
-    ...  | nf-core-demo    | https://github.com/nf-core/demo
-    ...  | nf-core-rnaseq  | ...
-    ```
 
 브라우저에서 워크스페이스를 열고 **Launchpad**를 클릭하여 nf-core/demo가 nf-core/rnaseq와 함께 표시되는지 확인합니다.
 
-!!! tip "팁"
-
-    웹 인터페이스를 통해서도 파이프라인을 추가할 수 있습니다. 왼쪽 사이드바에서 **Launchpad**를 클릭한 후 **Add pipeline**을 클릭하고 양식을 작성합니다.
+:::tip[팁]
+웹 인터페이스를 통해서도 파이프라인을 추가할 수 있습니다. 왼쪽 사이드바에서 **Launchpad**를 클릭한 후 **Add pipeline**을 클릭하고 양식을 작성합니다.
+:::
 
 nf-core/demo 항목의 **Launch** 버튼을 클릭하여 실행 양식을 엽니다.
 `input`과 `outdir` 매개변수가 빨간색으로 강조 표시된 것을 확인할 수 있습니다. 이는 기본값이 없는 필수 항목으로, `tw pipelines add`가 매개변수를 사전 설정하지 않고 파이프라인 소스만 등록하기 때문입니다.
@@ -280,30 +255,26 @@ outdir: "s3://my-bucket/demo-results-cli"
 
 ```bash
 tw launch nf-core-demo --profile test --params-file params.yaml
+# [!output]
+Launching pipeline nf-core-demo
+Run name: focused_feynman
+https://cloud.seqera.io/orgs/my-org/workspaces/my-workspace/watch/<run-id>
 ```
-
-??? success "명령 출력"
-
-    ```console
-    Launching pipeline nf-core-demo
-    Run name: focused_feynman
-    https://cloud.seqera.io/orgs/my-org/workspaces/my-workspace/watch/<run-id>
-    ```
 
 링크를 열어 **Runs** 패널에 실행이 표시되는지 확인합니다.
 
-!!! tip "팁"
+:::tip[팁]
+초기 설정 단계에서 매개변수 파일을 포함하여 기본값을 설정하고, 웹 양식에서 설정한 내용과 일치하도록 추가 속성을 지정할 수 있습니다:
 
-    초기 설정 단계에서 매개변수 파일을 포함하여 기본값을 설정하고, 웹 양식에서 설정한 내용과 일치하도록 추가 속성을 지정할 수 있습니다:
-
-    ```bash
-    tw pipelines add \
-      --name nf-core-demo-gg \
-      --description "Demo pipeline with defaults for testing" \
-      --params-file params.yaml \
-      --profile test \
-      https://github.com/nf-core/demo
-    ```
+```bash
+tw pipelines add \
+  --name nf-core-demo-gg \
+  --description "Demo pipeline with defaults for testing" \
+  --params-file params.yaml \
+  --profile test \
+  https://github.com/nf-core/demo
+```
+:::
 
 ### 핵심 정리
 

@@ -1,6 +1,9 @@
-# Metadaten und Meta-Maps
+---
+title: Metadaten und Meta-Maps
+description: In jeder wissenschaftlichen Analyse arbeiten wir selten nur mit den rohen Datendateien.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 In jeder wissenschaftlichen Analyse arbeiten wir selten nur mit den rohen Datendateien.
 Jede Datei bringt ihre eigenen zusätzlichen Informationen mit: was sie ist, woher sie stammt und was sie besonders macht.
@@ -33,7 +36,7 @@ Diese Fähigkeiten helfen dir, robustere und flexiblere Pipelines zu entwickeln,
 
 Bevor du diese Side Quest angehst, solltest du:
 
-- Das Tutorial [Hello Nextflow](../../hello_nextflow/index.md) oder einen gleichwertigen Einsteigerkurs abgeschlossen haben.
+- Das Tutorial [Hello Nextflow](../../hello_nextflow/index.mdx) oder einen gleichwertigen Einsteigerkurs abgeschlossen haben.
 - Mit grundlegenden Nextflow-Konzepten und -Mechanismen (Prozesse, Kanäle, Operatoren) vertraut sein.
 
 ---
@@ -42,7 +45,7 @@ Bevor du diese Side Quest angehst, solltest du:
 
 #### Öffne den Training-Codespace
 
-Falls du das noch nicht getan hast, öffne die Trainingsumgebung wie in der [Umgebung einrichten](../../envsetup/index.md)-Anleitung beschrieben.
+Falls du das noch nicht getan hast, öffne die Trainingsumgebung wie in der [Umgebung einrichten](../../envsetup/index.mdx)-Anleitung beschrieben.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -66,22 +69,25 @@ Der Editor öffnet sich mit dem Projektverzeichnis im Fokus.
 
 Du findest eine Haupt-Workflow-Datei und ein `data`-Verzeichnis mit einem Datenblatt und einigen Datendateien.
 
-??? abstract "Verzeichnisinhalt"
+<details class="abstract">
+<summary>Verzeichnisinhalt</summary>
 
-    ```console
-    .
-    ├── data
-    │   ├── bonjour.txt
-    │   ├── ciao.txt
-    │   ├── guten_tag.txt
-    │   ├── hallo.txt
-    │   ├── hello.txt
-    │   ├── hola.txt
-    │   ├── salut.txt
-    │   └── datasheet.csv
-    ├── main.nf
-    └── nextflow.config
-    ```
+```console
+.
+├── data
+│   ├── bonjour.txt
+│   ├── ciao.txt
+│   ├── guten_tag.txt
+│   ├── hallo.txt
+│   ├── hello.txt
+│   ├── hola.txt
+│   ├── salut.txt
+│   └── datasheet.csv
+├── main.nf
+└── nextflow.config
+```
+
+</details>
 
 Der Workflow in der `main.nf`-Datei ist ein Grundgerüst, das du schrittweise zu einem vollständig funktionierenden Workflow ausbauen wirst.
 
@@ -106,46 +112,49 @@ Jede Datendatei enthält einen Begrüßungstext in einer von fünf Sprachen (fr:
 
 Wir werden ein Tool namens [`COWPY`](https://github.com/jeffbuttars/cowpy) verwenden, um ASCII-Kunst jeder Figur zu generieren, die ihre aufgezeichnete Begrüßung spricht.
 
-??? info "Was macht `COWPY`?"
+<details class="info">
+<summary>Was macht `COWPY`?</summary>
 
-    `COWPY` ist ein Befehlszeilen-Tool, das ASCII-Kunst generiert, um beliebige Texteingaben auf unterhaltsame Weise darzustellen.
-    Es ist eine Python-Implementierung des klassischen [cowsay](https://en.wikipedia.org/wiki/Cowsay)-Tools von Tony Monroe.
+`COWPY` ist ein Befehlszeilen-Tool, das ASCII-Kunst generiert, um beliebige Texteingaben auf unterhaltsame Weise darzustellen.
+Es ist eine Python-Implementierung des klassischen [cowsay](https://en.wikipedia.org/wiki/Cowsay)-Tools von Tony Monroe.
 
-    ```console
-    cowpy "Hello Nextflow"
-    ```
+```console
+cowpy "Hello Nextflow"
+```
 
-    ```console
-    ______________________________________________________
-    < Hello Nextflow >
-    ------------------------------------------------------
-        \   ^__^
-          \  (oo)\_______
-            (__)\       )\/\
-              ||----w |
-              ||     ||
-    ```
+```console
+______________________________________________________
+< Hello Nextflow >
+------------------------------------------------------
+    \   ^__^
+      \  (oo)\_______
+        (__)\       )\/\
+          ||----w |
+          ||     ||
+```
 
-    Optional kannst du eine Figur (oder 'cowacter') auswählen, die anstelle der Standard-Kuh verwendet wird.
+Optional kannst du eine Figur (oder 'cowacter') auswählen, die anstelle der Standard-Kuh verwendet wird.
 
-    ```console
-    cowpy "Hello Nextflow" -c tux
-    ```
+```console
+cowpy "Hello Nextflow" -c tux
+```
 
-    ```console
-    __________________
-    < Hello Nextflow >
-    ------------------
-      \
-        \
-            .--.
-          |o_o |
-          |:_/ |
-          //   \ \
-        (|     | )
-        /'\_   _/`\
-        \___)=(___/
-    ```
+```console
+__________________
+< Hello Nextflow >
+------------------
+  \
+    \
+        .--.
+      |o_o |
+      |:_/ |
+      //   \ \
+    (|     | )
+    /'\_   _/`\
+    \___)=(___/
+```
+
+</details>
 
 Außerdem verwenden wir ein Sprachanalyse-Tool namens `langid`, um zu erkennen, welche Sprache jede Figur spricht, und die Ausgaben der Pipeline entsprechend zu organisieren.
 
@@ -175,7 +184,7 @@ Wenn du alle Punkte abhaken kannst, kann es losgehen.
 
 Öffne die `main.nf`-Workflow-Datei, um das Workflow-Grundgerüst zu untersuchen, das wir dir als Ausgangspunkt geben.
 
-```groovy title="main.nf" linenums="1"
+```nextflow title="main.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 workflow  {
@@ -196,7 +205,7 @@ output {
 
 Der [`splitCsv`](https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv)-Operator liest jede Zeile der Datei als Element im Kanal.
 Das ist derselbe Ansatz, den wir in Hello Nextflow, unserem Einsteigerkurs, zum Laden von CSV-Daten verwenden.
-Schau dir [diesen Abschnitt](../../hello_nextflow/02_hello_channels.md#4-read-input-values-from-a-csv-file) an, falls du eine Auffrischung brauchst.
+Schau dir [diesen Abschnitt](../../hello_nextflow/02_hello_channels.mdx#4-eingabewerte-aus-einer-csv-datei-lesen) an, falls du eine Auffrischung brauchst.
 
 Mit `header: true` wird die erste Zeile als Spaltenüberschriften behandelt, sodass jedes Element eine Map aus Schlüssel-Wert-Paaren wird, die nach Spaltennamen geordnet sind.
 
@@ -208,29 +217,25 @@ Führe den Workflow aus, um zu sehen, wie der Kanalinhalt strukturiert ist, soba
 
 ```bash
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [exotic_albattani] revision: c7ce88ee60
+
+[id:sampleA, character:squirrel, recording:/workspaces/training/side-quests/metadata/data/bonjour.txt]
+[id:sampleB, character:tux, recording:/workspaces/training/side-quests/metadata/data/guten_tag.txt]
+[id:sampleC, character:sheep, recording:/workspaces/training/side-quests/metadata/data/hallo.txt]
+[id:sampleD, character:turkey, recording:/workspaces/training/side-quests/metadata/data/hello.txt]
+[id:sampleE, character:stegosaurus, recording:/workspaces/training/side-quests/metadata/data/hola.txt]
+[id:sampleF, character:moose, recording:/workspaces/training/side-quests/metadata/data/salut.txt]
+[id:sampleG, character:turtle, recording:/workspaces/training/side-quests/metadata/data/ciao.txt]
+
+Outputs:
+
+  /workspaces/training/side-quests/metadata/results
+
+  cowpy_art:
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [exotic_albattani] revision: c7ce88ee60
-
-    [id:sampleA, character:squirrel, recording:/workspaces/training/side-quests/metadata/data/bonjour.txt]
-    [id:sampleB, character:tux, recording:/workspaces/training/side-quests/metadata/data/guten_tag.txt]
-    [id:sampleC, character:sheep, recording:/workspaces/training/side-quests/metadata/data/hallo.txt]
-    [id:sampleD, character:turkey, recording:/workspaces/training/side-quests/metadata/data/hello.txt]
-    [id:sampleE, character:stegosaurus, recording:/workspaces/training/side-quests/metadata/data/hola.txt]
-    [id:sampleF, character:moose, recording:/workspaces/training/side-quests/metadata/data/salut.txt]
-    [id:sampleG, character:turtle, recording:/workspaces/training/side-quests/metadata/data/ciao.txt]
-
-    Outputs:
-
-      /workspaces/training/side-quests/metadata/results
-
-      cowpy_art:
-    ```
 
 Wir sehen, dass der Operator für jede Zeile in der CSV-Datei eine Map aus Schlüssel-Wert-Paaren erstellt hat, wobei die Spaltenüberschriften als Schlüssel für die entsprechenden Werte dienen.
 
@@ -243,43 +248,46 @@ Jeder Map-Eintrag entspricht einer Spalte in unserem Datenblatt:
 Das macht es einfach, auf bestimmte Felder jeder Zeile zuzugreifen.
 Zum Beispiel könnten wir mit `id` auf die Datei-ID oder mit `recording` auf den Pfad der txt-Datei zugreifen.
 
-??? info "(Optional) Mehr über Groovy-Maps"
+<details class="info">
+<summary>(Optional) Mehr über Groovy-Maps</summary>
 
-    In Groovy, der Programmiersprache, auf der Nextflow aufbaut, ist eine Map eine Schlüssel-Wert-Datenstruktur, ähnlich wie Dictionaries in Python, Objekte in JavaScript oder Hashes in Ruby.
+In Groovy, der Programmiersprache, auf der Nextflow aufbaut, ist eine Map eine Schlüssel-Wert-Datenstruktur, ähnlich wie Dictionaries in Python, Objekte in JavaScript oder Hashes in Ruby.
 
-    Hier ist ein ausführbares Skript, das zeigt, wie du eine Map definieren und auf ihren Inhalt zugreifen kannst:
+Hier ist ein ausführbares Skript, das zeigt, wie du eine Map definieren und auf ihren Inhalt zugreifen kannst:
 
-    ```groovy title="examples/map_demo.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="examples/map_demo.nf"
+#!/usr/bin/env nextflow
 
-    // Eine einfache Map erstellen
-    def my_map = [id:'sampleA', character:'squirrel']
+// Eine einfache Map erstellen
+def my_map = [id:'sampleA', character:'squirrel']
 
-    // Die gesamte Map ausgeben
-    println "map: ${my_map}"
+// Die gesamte Map ausgeben
+println "map: ${my_map}"
 
-    // Auf einzelne Werte mit Punktnotation zugreifen
-    println "id: ${my_map.id}"
-    println "character: ${my_map.character}"
-    ```
+// Auf einzelne Werte mit Punktnotation zugreifen
+println "id: ${my_map.id}"
+println "character: ${my_map.character}"
+```
 
-    Obwohl es keinen richtigen `workflow`-Block hat, kann Nextflow dies wie einen Workflow ausführen:
+Obwohl es keinen richtigen `workflow`-Block hat, kann Nextflow dies wie einen Workflow ausführen:
 
-    ```bash
-    nextflow run examples/map_demo.nf
-    ```
+```bash
+nextflow run examples/map_demo.nf
+```
 
-    Und das kannst du in der Ausgabe erwarten:
+Und das kannst du in der Ausgabe erwarten:
 
-    ```console title="Output"
-     N E X T F L O W   ~  version 26.04.4
+```console title="Output"
+ N E X T F L O W   ~  version 26.04.4
 
-    Launching `examples/map_demo.nf` [cheesy_plateau] revision: fae5b8496e
+Launching `examples/map_demo.nf` [cheesy_plateau] revision: fae5b8496e
 
-    map: [id:sampleA, character:squirrel]
-    id: sampleA
-    character: squirrel
-    ```
+map: [id:sampleA, character:squirrel]
+id: sampleA
+character: squirrel
+```
+
+</details>
 
 ### 1.2. Ein bestimmtes Feld mit `map` auswählen
 
@@ -289,26 +297,26 @@ Wir verwenden den `map`-Operator, um über jedes Element in einem Kanal zu iteri
 
 Um auf die `character`-Spalte zuzugreifen, füge die `map`-Operation vor der `.view()`-Operation wie folgt hinzu:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="5" hl_lines="3-5"
-        ch_datasheet = channel.fromPath("./data/datasheet.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                row.character
-            }
-            .view()
-    ```
+```nextflow title="main.nf" showLineNumbers startLineNumber=5 step="Vorher"
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
+        .splitCsv(header: true)
+        .view()
+```
 
-=== "Vorher"
+```nextflow {3-5} title="main.nf" showLineNumbers startLineNumber=5 step="Danach"
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            row.character
+        }
+        .view()
+```
 
-    ```groovy title="main.nf" linenums="5"
-        ch_datasheet = channel.fromPath("./data/datasheet.csv")
-            .splitCsv(header: true)
-            .view()
-    ```
+</CodeWalkthrough>
 
-Diese Art, auf ein bestimmtes Feld zuzugreifen, wird in [diesem Abschnitt](../../hello_nextflow/02_hello_channels.md#43-use-the-map-operator-to-extract-the-greetings) von Hello Nextflow ausführlicher erklärt, falls du eine Auffrischung brauchst.
+Diese Art, auf ein bestimmtes Feld zuzugreifen, wird in [diesem Abschnitt](../../hello_nextflow/02_hello_channels.mdx#43-den-map-operator-verwenden-um-die-begrüßungen-zu-extrahieren) von Hello Nextflow ausführlicher erklärt, falls du eine Auffrischung brauchst.
 
 #### 1.2.2. Den Workflow ausführen
 
@@ -316,29 +324,25 @@ Führe den Workflow aus, um zu überprüfen, ob du die extrahierten Charakternam
 
 ```bash
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [exotic_albattani] revision: 10a2598a59
+
+squirrel
+tux
+sheep
+turkey
+stegosaurus
+moose
+turtle
+
+Outputs:
+
+  /workspaces/training/side-quests/metadata/results
+
+  cowpy_art:
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [exotic_albattani] revision: 10a2598a59
-
-    squirrel
-    tux
-    sheep
-    turkey
-    stegosaurus
-    moose
-    turtle
-
-    Outputs:
-
-      /workspaces/training/side-quests/metadata/results
-
-      cowpy_art:
-    ```
 
 Das zeigt, dass wir auf die Werte der `character`-Spalte für jede Zeile zugreifen können.
 
@@ -350,7 +354,7 @@ Wir stellen dir ein vorgefertigtes `COWPY`-Prozessmodul zur Verfügung. Zuerst m
 
 Du kannst die Datei öffnen, um den Prozess zu sehen:
 
-```groovy title="modules/cowpy.nf" linenums="1" hl_lines="7 8"
+```nextflow {7,8} title="modules/cowpy.nf" showLineNumbers
 // ASCII-Kunst mit cowpy generieren
 process COWPY {
 
@@ -379,27 +383,27 @@ Eine Möglichkeit, mehrere Felder in separate Kanäle zu extrahieren, ist der [`
 
 Ersetze die `map`-Operation durch `multiMap`:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="5" hl_lines="3-6"
-        ch_datasheet = channel.fromPath("./data/datasheet.csv")
-            .splitCsv(header: true)
-            .multiMap { row ->
-                file: row.recording
-                character: row.character
-            }
-    ```
+```nextflow {3-6} title="main.nf" showLineNumbers startLineNumber=5 step="Vorher"
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            row.character
+        }
+        .view()
+```
 
-=== "Vorher"
+```nextflow {3-6} title="main.nf" showLineNumbers startLineNumber=5 step="Danach"
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
+        .splitCsv(header: true)
+        .multiMap { row ->
+            file: row.recording
+            character: row.character
+        }
+```
 
-    ```groovy title="main.nf" linenums="5" hl_lines="3-6"
-        ch_datasheet = channel.fromPath("./data/datasheet.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                row.character
-            }
-            .view()
-    ```
+</CodeWalkthrough>
 
 Der `multiMap`-Block definiert zwei benannte Sub-Kanäle (`file` und `character`) aus jeder Zeile, auf die wir als `ch_datasheet.file` und `ch_datasheet.character` zugreifen können.
 
@@ -407,57 +411,57 @@ Der `multiMap`-Block definiert zwei benannte Sub-Kanäle (`file` und `character`
 
 Füge nun das `COWPY`-Prozessmodul ein und übergib jeden Sub-Kanal als separates Argument:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="1" hl_lines="3 14"
-    #!/usr/bin/env nextflow
+```nextflow title="main.nf" showLineNumbers step="Vorher"
+#!/usr/bin/env nextflow
 
-    include { COWPY } from './modules/cowpy.nf'
-
-    workflow {
-        main:
-        ch_datasheet = channel.fromPath("./data/datasheet.csv")
-            .splitCsv(header: true)
-            .multiMap { row ->
-                file: row.recording
-                character: row.character
-            }
-
-        COWPY(ch_datasheet.file, ch_datasheet.character)
-
-        publish:
-        cowpy_art = channel.empty()
-    }
-
-    output {
-        cowpy_art {
+workflow {
+    main:
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
+        .splitCsv(header: true)
+        .multiMap { row ->
+            file: row.recording
+            character: row.character
         }
+
+    publish:
+    cowpy_art = channel.empty()
+}
+
+output {
+    cowpy_art {
     }
-    ```
+}
+```
 
-=== "Vorher"
+```nextflow {3,14} title="main.nf" showLineNumbers step="Danach"
+#!/usr/bin/env nextflow
 
-    ```groovy title="main.nf" linenums="1"
-    #!/usr/bin/env nextflow
+include { COWPY } from './modules/cowpy.nf'
 
-    workflow {
-        main:
-        ch_datasheet = channel.fromPath("./data/datasheet.csv")
-            .splitCsv(header: true)
-            .multiMap { row ->
-                file: row.recording
-                character: row.character
-            }
-
-        publish:
-        cowpy_art = channel.empty()
-    }
-
-    output {
-        cowpy_art {
+workflow {
+    main:
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
+        .splitCsv(header: true)
+        .multiMap { row ->
+            file: row.recording
+            character: row.character
         }
+
+    COWPY(ch_datasheet.file, ch_datasheet.character)
+
+    publish:
+    cowpy_art = channel.empty()
+}
+
+output {
+    cowpy_art {
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 So können wir die zwei Felder separat übergeben, wie es `COWPY` erfordert.
 
@@ -465,23 +469,23 @@ So können wir die zwei Felder separat übergeben, wie es `COWPY` erfordert.
 
 Füge abschließend die Ausgabe von `COWPY` zum `publish:`-Block hinzu:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="14" hl_lines="4"
-        COWPY(ch_datasheet.file, ch_datasheet.character)
+```nextflow {4} title="main.nf" showLineNumbers startLineNumber=14 step="Vorher"
+    COWPY(ch_datasheet.file, ch_datasheet.character)
 
-        publish:
-        cowpy_art = COWPY.out
-    ```
+    publish:
+    cowpy_art = channel.empty()
+```
 
-=== "Vorher"
+```nextflow {4} title="main.nf" showLineNumbers startLineNumber=14 step="Danach"
+    COWPY(ch_datasheet.file, ch_datasheet.character)
 
-    ```groovy title="main.nf" linenums="14" hl_lines="4"
-        COWPY(ch_datasheet.file, ch_datasheet.character)
+    publish:
+    cowpy_art = COWPY.out
+```
 
-        publish:
-        cowpy_art = channel.empty()
-    ```
+</CodeWalkthrough>
 
 So können wir die vom Workflow produzierten Ausgaben leicht einsehen.
 
@@ -491,65 +495,67 @@ Führe den Workflow aus, um zu überprüfen, dass `COWPY` mit den bereitgestellt
 
 ```bash
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [clever_dijkstra] revision: 2fb579b3bd
+
+executor >  local (7)
+[3a/f1c290] COWPY (7) | 7 of 7 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/metadata/results
+
+  cowpy_art:
+    - cowpy-bonjour.txt
+    - cowpy-guten_tag.txt
+    - cowpy-salut.txt
+    - cowpy-hola.txt
+    - cowpy-hello.txt
+    - cowpy-hallo.txt
+    - cowpy-ciao.txt
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [clever_dijkstra] revision: 2fb579b3bd
-
-    executor >  local (7)
-    [3a/f1c290] COWPY (7) | 7 of 7 ✔
-
-    Outputs:
-
-      /workspaces/training/side-quests/metadata/results
-
-      cowpy_art:
-        - cowpy-bonjour.txt
-        - cowpy-guten_tag.txt
-        - cowpy-salut.txt
-        - cowpy-hola.txt
-        - cowpy-hello.txt
-        - cowpy-hallo.txt
-        - cowpy-ciao.txt
-    ```
 
 Wie du siehst, hat `COWPY` jede Datei mit der richtigen Figur verarbeitet.
 
-??? abstract "Results-Verzeichnis Inhalt"
+<details class="abstract">
+<summary>Results-Verzeichnis Inhalt</summary>
 
-    ```console
-    results/
-    ├── cowpy-bonjour.txt
-    ├── cowpy-ciao.txt
-    ├── cowpy-guten_tag.txt
-    ├── cowpy-hallo.txt
-    ├── cowpy-hello.txt
-    ├── cowpy-hola.txt
-    └── cowpy-salut.txt
-    ```
+```console
+results/
+├── cowpy-bonjour.txt
+├── cowpy-ciao.txt
+├── cowpy-guten_tag.txt
+├── cowpy-hallo.txt
+├── cowpy-hello.txt
+├── cowpy-hola.txt
+└── cowpy-salut.txt
+```
 
-??? example "Inhalt von results/cowpy-guten_tag.txt"
+</details>
 
-    ```console
-    $ cat results/cowpy-guten_tag.txt
-     _____________________________
-    / Guten Tag, wie geht es dir? \
-    \ Auf Wiedersehen, bis morgen /
-     -----------------------------
-       \
-        \
-            .--.
-           |o_o |
-           |:_/ |
-          //   \ \
-         (|     | )
-        /'\_   _/`\
-        \___)=(___/
-    ```
+<details class="example">
+<summary>Inhalt von results/cowpy-guten_tag.txt</summary>
+
+```console
+$ cat results/cowpy-guten_tag.txt
+ _____________________________
+/ Guten Tag, wie geht es dir? \
+\ Auf Wiedersehen, bis morgen /
+ -----------------------------
+   \
+    \
+        .--.
+       |o_o |
+       |:_/ |
+      //   \ \
+     (|     | )
+    /'\_   _/`\
+    \___)=(___/
+```
+
+</details>
 
 Dieser Ansatz funktioniert, hat aber eine Einschränkung: Wir mussten den Kanal in zwei separate Sub-Kanäle aufteilen.
 Wenn wir mehr Felder an den Prozess übergeben wollten, müssten wir sie in weitere Sub-Kanäle aufteilen.
@@ -565,48 +571,48 @@ Anstatt die Felder in separate Kanäle aufzuteilen, können wir den Prozess so a
 
 Aktualisiere `COWPY`, um ein Tupel zu akzeptieren, das den drei Elementen jeder Zeile entspricht:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="modules/cowpy.nf" linenums="1" hl_lines="7 10 14"
-    // ASCII-Kunst mit cowpy generieren
-    process COWPY {
+```nextflow {7-8,11,15} title="modules/cowpy.nf" showLineNumbers step="Vorher"
+// ASCII-Kunst mit cowpy generieren
+process COWPY {
 
-        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
-        input:
-        tuple val(id), val(character), path(recording)
+    input:
+    path recording
+    val character
 
-        output:
-        path "cowpy-${recording}"
+    output:
+    path "cowpy-${recording}"
 
-        script:
-        """
-        cat ${recording} | cowpy -c ${character} > cowpy-${recording}
-        """
-    }
-    ```
+    script:
+    """
+    cat ${recording} | cowpy -c ${character} > cowpy-${recording}
+    """
+}
+```
 
-=== "Vorher"
+```nextflow {7,10,14} title="modules/cowpy.nf" showLineNumbers step="Danach"
+// ASCII-Kunst mit cowpy generieren
+process COWPY {
 
-    ```groovy title="modules/cowpy.nf" linenums="1" hl_lines="7-8 11 15"
-    // ASCII-Kunst mit cowpy generieren
-    process COWPY {
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
-        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    input:
+    tuple val(id), val(character), path(recording)
 
-        input:
-        path recording
-        val character
+    output:
+    path "cowpy-${recording}"
 
-        output:
-        path "cowpy-${recording}"
+    script:
+    """
+    cat ${recording} | cowpy -c ${character} > cowpy-${recording}
+    """
+}
+```
 
-        script:
-        """
-        cat ${recording} | cowpy -c ${character} > cowpy-${recording}
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 Jetzt erwartet der Prozess nur noch eine Eingabe, die alles enthält, was wir ihm geben möchten.
 
@@ -614,26 +620,26 @@ Jetzt erwartet der Prozess nur noch eine Eingabe, die alles enthält, was wir ih
 
 Wir müssen noch eine Mapping-Operation verwenden, um die Elemente aufzuzählen, die wir im Tupel an den Prozess übergeben möchten:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="5" hl_lines="3-5"
-        ch_datasheet = channel.fromPath("./data/datasheet.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                [row.id, row.character, row.recording]
-            }
-    ```
+```nextflow {3-6} title="main.nf" showLineNumbers startLineNumber=5 step="Vorher"
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
+        .splitCsv(header: true)
+        .multiMap { row ->
+            file: row.recording
+            character: row.character
+        }
+```
 
-=== "Vorher"
+```nextflow {3-5} title="main.nf" showLineNumbers startLineNumber=5 step="Danach"
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            [row.id, row.character, row.recording]
+        }
+```
 
-    ```groovy title="main.nf" linenums="5" hl_lines="3-6"
-        ch_datasheet = channel.fromPath("./data/datasheet.csv")
-            .splitCsv(header: true)
-            .multiMap { row ->
-                file: row.recording
-                character: row.character
-            }
-    ```
+</CodeWalkthrough>
 
 Du fragst dich vielleicht, warum wir nicht einfach die gesamte Groovy-Map aus `splitCsv` direkt übergeben können.
 Der Grund: Wir müssen Nextflow explizit mitteilen, dass die Aufnahmedatei als Pfad behandelt werden muss (d.h. sie muss korrekt bereitgestellt werden).
@@ -643,29 +649,29 @@ Das geschieht auf der Ebene der Eingabeschnittstelle von `COWPY`, wo das `record
 
 Ersetzen wir abschließend die zwei separaten Eingaben im Prozessaufruf durch das einzelne Tupel, das wir gerade erstellt haben:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="5" hl_lines="7"
-        ch_datasheet = channel.fromPath("./data/datasheet.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                [row.id, row.character, row.recording]
-            }
+```nextflow {7} title="main.nf" showLineNumbers startLineNumber=5 step="Vorher"
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            [row.id, row.character, row.recording]
+        }
 
-        COWPY(ch_datasheet)
-    ```
+    COWPY(ch_datasheet.file, ch_datasheet.character)
+```
 
-=== "Vorher"
+```nextflow {7} title="main.nf" showLineNumbers startLineNumber=5 step="Danach"
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            [row.id, row.character, row.recording]
+        }
 
-    ```groovy title="main.nf" linenums="5" hl_lines="7"
-        ch_datasheet = channel.fromPath("./data/datasheet.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                [row.id, row.character, row.recording]
-            }
+    COWPY(ch_datasheet)
+```
 
-        COWPY(ch_datasheet.file, ch_datasheet.character)
-    ```
+</CodeWalkthrough>
 
 Das vereinfacht den Prozessaufruf etwas.
 
@@ -675,70 +681,72 @@ Führe den Workflow aus, um zu überprüfen, dass `COWPY` die Daten weiterhin ko
 
 ```bash
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [pedantic_lovelace] revision: 745a78a291
+
+executor >  local (7)
+[5e/2a1b34] COWPY (7) | 7 of 7 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/metadata/results
+
+  cowpy_art:
+    - cowpy-bonjour.txt
+    - cowpy-guten_tag.txt
+    - cowpy-salut.txt
+    - cowpy-hola.txt
+    - cowpy-hello.txt
+    - cowpy-hallo.txt
+    - cowpy-ciao.txt
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [pedantic_lovelace] revision: 745a78a291
-
-    executor >  local (7)
-    [5e/2a1b34] COWPY (7) | 7 of 7 ✔
-
-    Outputs:
-
-      /workspaces/training/side-quests/metadata/results
-
-      cowpy_art:
-        - cowpy-bonjour.txt
-        - cowpy-guten_tag.txt
-        - cowpy-salut.txt
-        - cowpy-hola.txt
-        - cowpy-hello.txt
-        - cowpy-hallo.txt
-        - cowpy-ciao.txt
-    ```
 
 Die Ausgabe sind dieselben sieben `cowpy-*.txt`-Dateien wie zuvor, jetzt mit einem einfacheren Aufruf von `COWPY`.
 
-??? abstract "Results-Verzeichnis Inhalt"
+<details class="abstract">
+<summary>Results-Verzeichnis Inhalt</summary>
 
-    ```console
-    results/
-    ├── cowpy-bonjour.txt
-    ├── cowpy-ciao.txt
-    ├── cowpy-guten_tag.txt
-    ├── cowpy-hallo.txt
-    ├── cowpy-hello.txt
-    ├── cowpy-hola.txt
-    └── cowpy-salut.txt
-    ```
+```console
+results/
+├── cowpy-bonjour.txt
+├── cowpy-ciao.txt
+├── cowpy-guten_tag.txt
+├── cowpy-hallo.txt
+├── cowpy-hello.txt
+├── cowpy-hola.txt
+└── cowpy-salut.txt
+```
 
-??? example "Inhalt von results/cowpy-guten_tag.txt"
+</details>
 
-    ```console
-    $ cat results/cowpy-guten_tag.txt
-     _____________________________
-    / Guten Tag, wie geht es dir? \
-    \ Auf Wiedersehen, bis morgen /
-     -----------------------------
-       \
-        \
-            .--.
-           |o_o |
-           |:_/ |
-          //   \ \
-         (|     | )
-        /'\_   _/`\
-        \___)=(___/
-    ```
+<details class="example">
+<summary>Inhalt von results/cowpy-guten_tag.txt</summary>
+
+```console
+$ cat results/cowpy-guten_tag.txt
+ _____________________________
+/ Guten Tag, wie geht es dir? \
+\ Auf Wiedersehen, bis morgen /
+ -----------------------------
+   \
+    \
+        .--.
+       |o_o |
+       |:_/ |
+      //   \ \
+     (|     | )
+    /'\_   _/`\
+    \___)=(___/
+```
+
+</details>
 
 Das ist eine leichte Verbesserung gegenüber dem `multiMap`-Ansatz.
 Aber wir mussten die ursprüngliche Groovy-Map immer noch entpacken, um das Eingabe-Tupel zu erstellen, und es gibt eine enge Kopplung zwischen dem Prozess und dem Datenblatt: Die `COWPY`-Eingabedefinition referenziert jetzt direkt die Spaltennamen `id`, `character` und `recording`.
 
-```groovy
+```nextflow
 input:
 tuple val(id), val(character), path(recording)
 ```
@@ -753,7 +761,7 @@ Um das zu lösen, brauchen wir eine Möglichkeit, alle Metadaten als Paket zu ü
 Die Lösung besteht darin, zwei verschiedene Aspekte im Kanal zu trennen: die **Metadaten über eine Probe** und die **Datendatei** selbst.
 Indem wir alle Metadaten in einer einzigen Map bündeln (der „Meta-Map"), erhalten wir ein konsistentes Tupel aus zwei Elementen, unabhängig davon, wie viele Metadatenspalten das Datenblatt enthält:
 
-```groovy title="Syntax example"
+```nextflow title="Syntax example"
 input:
 tuple val(meta), path(file)
 ```
@@ -765,36 +773,36 @@ Prozesse, die diese Struktur akzeptieren, müssen nicht wissen oder sich darum k
 
 Lass uns die `map`-Operation umstrukturieren, um ein `[meta, file]`-Tupel zu erzeugen:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="5" hl_lines="4 6 8 11"
-        ch_datasheet = channel.fromPath("./data/datasheet.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                [[id: row.id, character: row.character], row.recording]
-            }
-            .view()
+```nextflow {4,7,10} title="main.nf" showLineNumbers startLineNumber=5 step="Vorher"
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            [row.id, row.character, row.recording]
+        }
 
-        // COWPY(ch_datasheet)  // Wird im nächsten Schritt aktualisiert
+    COWPY(ch_datasheet)
 
-        publish:
-        cowpy_art = channel.empty() // COWPY.out
-    ```
+    publish:
+    cowpy_art = COWPY.out
+```
 
-=== "Vorher"
+```nextflow {4,6,8,11} title="main.nf" showLineNumbers startLineNumber=5 step="Danach"
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            [[id: row.id, character: row.character], row.recording]
+        }
+        .view()
 
-    ```groovy title="main.nf" linenums="5" hl_lines="4 7 10"
-        ch_datasheet = channel.fromPath("./data/datasheet.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                [row.id, row.character, row.recording]
-            }
+    // COWPY(ch_datasheet)  // Wird im nächsten Schritt aktualisiert
 
-        COWPY(ch_datasheet)
+    publish:
+    cowpy_art = channel.empty() // COWPY.out
+```
 
-        publish:
-        cowpy_art = COWPY.out
-    ```
+</CodeWalkthrough>
 
 Du wirst bemerken, dass wir auch eine `view()`-Anweisung hinzugefügt, den `COWPY`-Aufruf auskommentiert und `COWPY.out` durch `channel.empty()` ersetzt haben, weil die Prozess-Eingabedefinition noch nicht zur neuen Struktur passt.
 
@@ -804,29 +812,25 @@ Führe den Workflow aus, um die neue Kanalform zu sehen:
 
 ```bash
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [lethal_booth] revision: 50e03309d4
+
+[[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/data/bonjour.txt]
+[[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/data/guten_tag.txt]
+[[id:sampleC, character:sheep], /workspaces/training/side-quests/metadata/data/hallo.txt]
+[[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/data/hello.txt]
+[[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/data/hola.txt]
+[[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/data/salut.txt]
+[[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/data/ciao.txt]
+
+Outputs:
+
+  /workspaces/training/side-quests/metadata/results
+
+  cowpy_art:
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console title="View meta map"
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [lethal_booth] revision: 50e03309d4
-
-    [[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/data/bonjour.txt]
-    [[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/data/guten_tag.txt]
-    [[id:sampleC, character:sheep], /workspaces/training/side-quests/metadata/data/hallo.txt]
-    [[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/data/hello.txt]
-    [[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/data/hola.txt]
-    [[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/data/salut.txt]
-    [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/data/ciao.txt]
-
-    Outputs:
-
-      /workspaces/training/side-quests/metadata/results
-
-      cowpy_art:
-    ```
 
 Jedes Element im Kanal ist jetzt ein Tupel aus zwei Elementen: zuerst die Meta-Map, dann die Datei.
 
@@ -843,47 +847,47 @@ Wenn wir später eine `language`-Spalte zum Datenblatt hinzufügen und sie in de
 
 Aktualisiere `COWPY`, um die `[meta, file]`-Tupelstruktur zu akzeptieren:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="modules/cowpy.nf" linenums="1" hl_lines="7 10 14"
-    // ASCII-Kunst mit cowpy generieren
-    process COWPY {
+```nextflow {7,10,14} title="modules/cowpy.nf" showLineNumbers step="Vorher"
+// ASCII-Kunst mit cowpy generieren
+process COWPY {
 
-        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
-        input:
-        tuple val(meta), path(recording)
+    input:
+    tuple val(id), val(character), path(recording)
 
-        output:
-        path "cowpy-${recording}"
+    output:
+    path "cowpy-${recording}"
 
-        script:
-        """
-        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
-        """
-    }
-    ```
+    script:
+    """
+    cat ${recording} | cowpy -c ${character} > cowpy-${recording}
+    """
+}
+```
 
-=== "Vorher"
+```nextflow {7,10,14} title="modules/cowpy.nf" showLineNumbers step="Danach"
+// ASCII-Kunst mit cowpy generieren
+process COWPY {
 
-    ```groovy title="modules/cowpy.nf" linenums="1" hl_lines="7 10 14"
-    // ASCII-Kunst mit cowpy generieren
-    process COWPY {
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
-        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    input:
+    tuple val(meta), path(recording)
 
-        input:
-        tuple val(id), val(character), path(recording)
+    output:
+    path "cowpy-${recording}"
 
-        output:
-        path "cowpy-${recording}"
+    script:
+    """
+    cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
+    """
+}
+```
 
-        script:
-        """
-        cat ${recording} | cowpy -c ${character} > cowpy-${recording}
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 Im Script-Block greift `meta.character` auf das `character`-Feld der Meta-Map zu.
 Auf jedes Feld in der Meta-Map kann auf dieselbe Weise zugegriffen werden.
@@ -892,36 +896,36 @@ Auf jedes Feld in der Meta-Map kann auf dieselbe Weise zugegriffen werden.
 
 Stelle den `COWPY`-Aufruf wieder her und verbinde seine Ausgabe für die Veröffentlichung:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="5" hl_lines="7 10"
-        ch_datasheet = channel.fromPath("./data/datasheet.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                [[id: row.id, character: row.character], row.recording]
-            }
+```nextflow {6,8,11} title="main.nf" showLineNumbers startLineNumber=5 step="Vorher"
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            [[id: row.id, character: row.character], row.recording]
+        }
+        .view()
 
-        COWPY(ch_datasheet)
+    // COWPY(ch_datasheet)  // Wird im nächsten Schritt aktualisiert
 
-        publish:
-        cowpy_art = COWPY.out
-    ```
+    publish:
+    cowpy_art = channel.empty() // COWPY.out
+```
 
-=== "Vorher"
+```nextflow {7,10} title="main.nf" showLineNumbers startLineNumber=5 step="Danach"
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            [[id: row.id, character: row.character], row.recording]
+        }
 
-    ```groovy title="main.nf" linenums="5" hl_lines="6 8 11"
-        ch_datasheet = channel.fromPath("./data/datasheet.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                [[id: row.id, character: row.character], row.recording]
-            }
-            .view()
+    COWPY(ch_datasheet)
 
-        // COWPY(ch_datasheet)  // Wird im nächsten Schritt aktualisiert
+    publish:
+    cowpy_art = COWPY.out
+```
 
-        publish:
-        cowpy_art = channel.empty() // COWPY.out
-    ```
+</CodeWalkthrough>
 
 Wir haben auch die Ausgabeveröffentlichung wiederhergestellt.
 
@@ -931,65 +935,67 @@ Führe den Workflow aus, um zu überprüfen, dass alles funktioniert:
 
 ```bash
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [wise_sammet] revision: f8f429c3df
+
+executor >  local (7)
+[5d/dffd4e] COWPY (7) | 7 of 7 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/metadata/results
+
+  cowpy_art:
+    - cowpy-bonjour.txt
+    - cowpy-guten_tag.txt
+    - cowpy-salut.txt
+    - cowpy-hola.txt
+    - cowpy-hello.txt
+    - cowpy-hallo.txt
+    - cowpy-ciao.txt
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [wise_sammet] revision: f8f429c3df
-
-    executor >  local (7)
-    [5d/dffd4e] COWPY (7) | 7 of 7 ✔
-
-    Outputs:
-
-      /workspaces/training/side-quests/metadata/results
-
-      cowpy_art:
-        - cowpy-bonjour.txt
-        - cowpy-guten_tag.txt
-        - cowpy-salut.txt
-        - cowpy-hola.txt
-        - cowpy-hello.txt
-        - cowpy-hallo.txt
-        - cowpy-ciao.txt
-    ```
 
 Das Ergebnisverzeichnis enthält jetzt die ASCII-Kunst-Dateien.
 
-??? abstract "Verzeichnisinhalt"
+<details class="abstract">
+<summary>Verzeichnisinhalt</summary>
 
-    ```console
-    results/
-    ├── cowpy-bonjour.txt
-    ├── cowpy-ciao.txt
-    ├── cowpy-guten_tag.txt
-    ├── cowpy-hallo.txt
-    ├── cowpy-hello.txt
-    ├── cowpy-hola.txt
-    └── cowpy-salut.txt
-    ```
+```console
+results/
+├── cowpy-bonjour.txt
+├── cowpy-ciao.txt
+├── cowpy-guten_tag.txt
+├── cowpy-hallo.txt
+├── cowpy-hello.txt
+├── cowpy-hola.txt
+└── cowpy-salut.txt
+```
 
-??? example "Inhalt von results/cowpy-guten_tag.txt"
+</details>
 
-    ```console
-    $ cat results/cowpy-guten_tag.txt
-     _____________________________
-    / Guten Tag, wie geht es dir? \
-    \ Auf Wiedersehen, bis morgen /
-     -----------------------------
-       \
-        \
-            .--.
-           |o_o |
-           |:_/ |
-          //   \ \
-         (|     | )
-        /'\_   _/`\
-        \___)=(___/
-    ```
+<details class="example">
+<summary>Inhalt von results/cowpy-guten_tag.txt</summary>
+
+```console
+$ cat results/cowpy-guten_tag.txt
+ _____________________________
+/ Guten Tag, wie geht es dir? \
+\ Auf Wiedersehen, bis morgen /
+ -----------------------------
+   \
+    \
+        .--.
+       |o_o |
+       |:_/ |
+      //   \ \
+     (|     | )
+    /'\_   _/`\
+    \___)=(___/
+```
+
+</details>
 
 Der Prozess empfängt jetzt alle Metadaten als Paket über `meta`, verwendet was er braucht (`meta.character`) und ignoriert den Rest.
 
@@ -1019,7 +1025,7 @@ Wir stellen dir ein vorgefertigtes Prozessmodul namens `IDENTIFY_LANGUAGE` zur V
 
 Öffne die Moduldatei, um den Code zu untersuchen:
 
-```groovy title="modules/langid.nf" linenums="1" hl_lines="7 10"
+```nextflow {7,10} title="modules/langid.nf" showLineNumbers
 // langid verwenden, um die Sprache jeder Eingabedatei vorherzusagen
 process IDENTIFY_LANGUAGE {
 
@@ -1047,46 +1053,46 @@ Der `sed`-Befehl entfernt den Wahrscheinlichkeitswert und den abschließenden Ze
 
 Füge das `IDENTIFY_LANGUAGE`-Prozessmodul ein und rufe es auf dem Datenblatt-Kanal auf:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="1" hl_lines="4 14-16"
-    #!/usr/bin/env nextflow
+```nextflow title="main.nf" showLineNumbers step="Vorher"
+#!/usr/bin/env nextflow
 
-    include { COWPY } from './modules/cowpy.nf'
-    include { IDENTIFY_LANGUAGE } from './modules/langid.nf'
+include { COWPY } from './modules/cowpy.nf'
 
-    workflow {
-        main:
-        ch_datasheet = channel.fromPath("./data/datasheet.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                [[id: row.id, character: row.character], row.recording]
-            }
+workflow {
+    main:
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            [[id: row.id, character: row.character], row.recording]
+        }
 
-        // langid ausführen, um die Sprache jeder Begrüßung zu identifizieren
-        IDENTIFY_LANGUAGE(ch_datasheet)
-        IDENTIFY_LANGUAGE.out.view()
+    COWPY(ch_datasheet)
+```
 
-        COWPY(ch_datasheet)
-    ```
+```nextflow {4,14-16} title="main.nf" showLineNumbers step="Danach"
+#!/usr/bin/env nextflow
 
-=== "Vorher"
+include { COWPY } from './modules/cowpy.nf'
+include { IDENTIFY_LANGUAGE } from './modules/langid.nf'
 
-    ```groovy title="main.nf" linenums="1"
-    #!/usr/bin/env nextflow
+workflow {
+    main:
+    ch_datasheet = channel.fromPath("./data/datasheet.csv")
+        .splitCsv(header: true)
+        .map { row ->
+            [[id: row.id, character: row.character], row.recording]
+        }
 
-    include { COWPY } from './modules/cowpy.nf'
+    // langid ausführen, um die Sprache jeder Begrüßung zu identifizieren
+    IDENTIFY_LANGUAGE(ch_datasheet)
+    IDENTIFY_LANGUAGE.out.view()
 
-    workflow {
-        main:
-        ch_datasheet = channel.fromPath("./data/datasheet.csv")
-            .splitCsv(header: true)
-            .map { row ->
-                [[id: row.id, character: row.character], row.recording]
-            }
+    COWPY(ch_datasheet)
+```
 
-        COWPY(ch_datasheet)
-    ```
+</CodeWalkthrough>
 
 Die Hauptausgabe dieses Prozesses ist nur ein String, daher gibt es keine Ausgabedateien zu veröffentlichen.
 Stattdessen verwenden wir `IDENTIFY_LANGUAGE.out.view()`, um die Ergebnisse der Operation anzuzeigen.
@@ -1097,52 +1103,48 @@ Führe den Workflow aus, um die Sprachidentifikation zu erzeugen. Verwende `-res
 
 ```bash
 nextflow run main.nf -resume
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [voluminous_mcnulty] revision: 1d1ec2b857
+
+executor >  local (7)
+[c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
+[58/d865ee] COWPY (7)             | 7 of 7, cached: 7 ✔
+[[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/work/f6/8544c23128c0ed7c4f11dbc729b167/ciao.txt, it]
+[[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/work/91/a2a307e970fa3950ceeeee6aa3b34c/guten_tag.txt, de]
+[[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/work/5e/ebac0d3e7a45a5e914d0bca827fc02/hello.txt, en]
+[[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/work/08/7199b7ab1ca733267d76b8168e5f38/salut.txt, fr]
+[[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/work/7d/890c6fa79c485b4a600eaa89af2140/hola.txt, es]
+[[id:sampleC, character:sheep], /workspaces/training/side-quests/metadata/work/d9/b360d0cd38e53c710ec41ac3b74bc3/hallo.txt, de]
+[[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/work/c9/34bfec04abaf808c2ef6c5cb8c8273/bonjour.txt, fr]
+
+Outputs:
+
+  /workspaces/training/side-quests/metadata/results
+
+  cowpy_art:
+    - cowpy-salut.txt
+    - cowpy-hallo.txt
+    - cowpy-bonjour.txt
+    - cowpy-hello.txt
+    - cowpy-hola.txt
+    - cowpy-guten_tag.txt
+    - cowpy-ciao.txt
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [voluminous_mcnulty] revision: 1d1ec2b857
-
-    executor >  local (7)
-    [c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
-    [58/d865ee] COWPY (7)             | 7 of 7, cached: 7 ✔
-    [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/work/f6/8544c23128c0ed7c4f11dbc729b167/ciao.txt, it]
-    [[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/work/91/a2a307e970fa3950ceeeee6aa3b34c/guten_tag.txt, de]
-    [[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/work/5e/ebac0d3e7a45a5e914d0bca827fc02/hello.txt, en]
-    [[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/work/08/7199b7ab1ca733267d76b8168e5f38/salut.txt, fr]
-    [[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/work/7d/890c6fa79c485b4a600eaa89af2140/hola.txt, es]
-    [[id:sampleC, character:sheep], /workspaces/training/side-quests/metadata/work/d9/b360d0cd38e53c710ec41ac3b74bc3/hallo.txt, de]
-    [[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/work/c9/34bfec04abaf808c2ef6c5cb8c8273/bonjour.txt, fr]
-
-    Outputs:
-
-      /workspaces/training/side-quests/metadata/results
-
-      cowpy_art:
-        - cowpy-salut.txt
-        - cowpy-hallo.txt
-        - cowpy-bonjour.txt
-        - cowpy-hello.txt
-        - cowpy-hola.txt
-        - cowpy-guten_tag.txt
-        - cowpy-ciao.txt
-    ```
 
 Wir haben jetzt eine Sprachvorhersage für jede Datei im Datensatz.
 
 Das Ausgabe-Tupel besteht aus `[meta, file, lang_id]`, d.h. die Meta-Map und die Datei werden zusammen mit dem neuen Ergebnis weitergegeben.
 
-!!! note "Hinweis"
+:::note[Hinweis]
+Dieses Muster, die Meta-Map mit den Ergebnissen verknüpft zu halten, macht es einfacher, Ergebnisse später kanalübergreifend zu verknüpfen.
+Man kann sich nicht auf die Reihenfolge der Elemente in Kanälen verlassen, um Daten korrekt zuzuordnen.
+Stattdessen müssen Schlüssel verwendet werden.
+Meta-Maps bieten dafür eine ideale Struktur.
 
-    Dieses Muster, die Meta-Map mit den Ergebnissen verknüpft zu halten, macht es einfacher, Ergebnisse später kanalübergreifend zu verknüpfen.
-    Man kann sich nicht auf die Reihenfolge der Elemente in Kanälen verlassen, um Daten korrekt zuzuordnen.
-    Stattdessen müssen Schlüssel verwendet werden.
-    Meta-Maps bieten dafür eine ideale Struktur.
-
-    Dieser Anwendungsfall wird ausführlich in der Side Quest [Splitting & Grouping](../splitting_and_grouping/index.md) erkundet.
+Dieser Anwendungsfall wird ausführlich in der Side Quest [Splitting & Grouping](../splitting_and_grouping/index.mdx) erkundet.
+:::
 
 ### 2.2. Metadaten mit Prozessausgaben anreichern
 
@@ -1153,118 +1155,121 @@ Anstatt sie als separates Element zu behalten, falten wir sie zurück in die Met
 
 Wir können eine neue Meta-Map erstellen, die die ursprüngliche ersetzt, indem wir den Groovy-`+`-Operator verwenden:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="14" hl_lines="3-7"
-        // langid ausführen, um die Sprache jeder Begrüßung zu identifizieren
-        IDENTIFY_LANGUAGE(ch_datasheet)
-        IDENTIFY_LANGUAGE.out
-            .map { meta, file, lang_id ->
-                [meta + [lang: lang_id], file]
-            }
-            .view()
-    ```
+```nextflow {3} title="main.nf" showLineNumbers startLineNumber=14 step="Vorher"
+    // langid ausführen, um die Sprache jeder Begrüßung zu identifizieren
+    IDENTIFY_LANGUAGE(ch_datasheet)
+    IDENTIFY_LANGUAGE.out.view()
+```
 
-=== "Vorher"
+```nextflow {3-7} title="main.nf" showLineNumbers startLineNumber=14 step="Danach"
+    // langid ausführen, um die Sprache jeder Begrüßung zu identifizieren
+    IDENTIFY_LANGUAGE(ch_datasheet)
+    IDENTIFY_LANGUAGE.out
+        .map { meta, file, lang_id ->
+            [meta + [lang: lang_id], file]
+        }
+        .view()
+```
 
-    ```groovy title="main.nf" linenums="14" hl_lines="3"
-        // langid ausführen, um die Sprache jeder Begrüßung zu identifizieren
-        IDENTIFY_LANGUAGE(ch_datasheet)
-        IDENTIFY_LANGUAGE.out.view()
-    ```
+</CodeWalkthrough>
 
-Das Herzstück dieser Operation ist `#!groovy meta + [lang: lang_id]`.
+Das Herzstück dieser Operation ist `meta + [lang: lang_id]{:nextflow}`.
 
 Dieser Code erstellt eine temporäre Map mit einem einzigen Schlüssel-Wert-Paar, das den Sprachcode enthält (`[lang: lang_id]`), und verwendet dann den Groovy-`+`-Operator, um sie mit der ursprünglichen `meta`-Map zu kombinieren, die die vorhandenen Metadaten enthält. Das ergibt eine neue, erweiterte Meta-Map.
 
 Eine ausführlichere Erklärung findest du im Kasten unten.
 
-??? info "Erstellung der neuen Meta-Map mit dem `+`-Operator"
+<details class="info">
+<summary>Erstellung der neuen Meta-Map mit dem `+`-Operator</summary>
 
-    **Zunächst musst du wissen, dass wir den Inhalt zweier Maps mit dem Groovy-Operator `+` zusammenführen können.**
+**Zunächst musst du wissen, dass wir den Inhalt zweier Maps mit dem Groovy-Operator `+` zusammenführen können.**
 
-    Angenommen, wir haben die folgenden Maps:
+Angenommen, wir haben die folgenden Maps:
 
-    ```groovy
-    map1 = [id: 'sampleA', character: 'squirrel']
-    map2 = [lang: 'fr']
-    ```
+```nextflow
+map1 = [id: 'sampleA', character: 'squirrel']
+map2 = [lang: 'fr']
+```
 
-    Wir können sie so zusammenführen:
+Wir können sie so zusammenführen:
 
-    ```groovy
-    new_map = map1 + map2
-    ```
+```nextflow
+new_map = map1 + map2
+```
 
-    Der Inhalt von `new_map` wird sein:
+Der Inhalt von `new_map` wird sein:
 
-    ```groovy
-    [id: 'sampleA', character: 'squirrel', lang: 'fr']
-    ```
+```nextflow
+[id: 'sampleA', character: 'squirrel', lang: 'fr']
+```
 
-    Toll!
+Toll!
 
-    **Aber was, wenn du ein Feld hinzufügen musst, das noch nicht Teil einer Map ist?**
+**Aber was, wenn du ein Feld hinzufügen musst, das noch nicht Teil einer Map ist?**
 
-    Angenommen, du beginnst wieder mit `map1`, aber die Sprachvorhersage ist nicht in ihrer eigenen Map (es gibt kein `map2`).
-    Stattdessen ist sie in einer Variable namens `lang_id` gespeichert, und du weißt, dass du ihren Wert (`'fr'`) mit dem Schlüssel `lang` speichern möchtest.
+Angenommen, du beginnst wieder mit `map1`, aber die Sprachvorhersage ist nicht in ihrer eigenen Map (es gibt kein `map2`).
+Stattdessen ist sie in einer Variable namens `lang_id` gespeichert, und du weißt, dass du ihren Wert (`'fr'`) mit dem Schlüssel `lang` speichern möchtest.
 
-    Du kannst tatsächlich Folgendes tun:
+Du kannst tatsächlich Folgendes tun:
 
-    ```groovy
-    new_map = map1 + [lang: lang_id]
-    ```
+```nextflow
+new_map = map1 + [lang: lang_id]
+```
 
-    Hier erstellt `[lang: lang_id]` eine neue namenlose Map auf der Stelle, und `map1 + ` führt `map1` mit der neuen namenlosen Map zusammen, was denselben `new_map`-Inhalt wie zuvor erzeugt.
+Hier erstellt `[lang: lang_id]` eine neue namenlose Map auf der Stelle, und `map1 + ` führt `map1` mit der neuen namenlosen Map zusammen, was denselben `new_map`-Inhalt wie zuvor erzeugt.
 
-    Praktisch, oder?
+Praktisch, oder?
 
-    **Jetzt übertragen wir das in den Kontext einer Nextflow `channel.map()`-Operation.**
+**Jetzt übertragen wir das in den Kontext einer Nextflow `channel.map()`-Operation.**
 
-    Der Code wird zu:
+Der Code wird zu:
 
-    ```groovy
-    .map { map1, lang_id ->
-        map1 + [lang: lang_id]
-    }
-    ```
+```nextflow
+.map { map1, lang_id ->
+    map1 + [lang: lang_id]
+}
+```
 
-    Das macht Folgendes:
+Das macht Folgendes:
 
-    - `#!groovy map1, lang_id ->` nimmt die zwei Elemente im Tupel
-    - `#!groovy map1 + [lang: lang_id]` erstellt die neue Map wie oben beschrieben
+- `map1, lang_id ->{:nextflow}` nimmt die zwei Elemente im Tupel
+- `map1 + [lang: lang_id]{:nextflow}` erstellt die neue Map wie oben beschrieben
 
-    Die Ausgabe ist eine einzelne namenlose Map mit demselben Inhalt wie `new_map` in unserem Beispiel oben.
-    Wir haben also effektiv transformiert:
+Die Ausgabe ist eine einzelne namenlose Map mit demselben Inhalt wie `new_map` in unserem Beispiel oben.
+Wir haben also effektiv transformiert:
 
-    ```groovy
-    [id: 'sampleA', character: 'squirrel'], 'fr'
-    ```
+```nextflow
+[id: 'sampleA', character: 'squirrel'], 'fr'
+```
 
-    in:
+in:
 
-    ```groovy
-    [id: 'sampleA', character: 'squirrel', lang: 'fr']
-    ```
+```nextflow
+[id: 'sampleA', character: 'squirrel', lang: 'fr']
+```
 
-    Hoffentlich siehst du, dass wenn wir `map1` durch `meta` ersetzen, das im Wesentlichen alles ist, was wir brauchen, um die Sprachvorhersage zu unserer Meta-Map in unserem Workflow hinzuzufügen.
+Hoffentlich siehst du, dass wenn wir `map1` durch `meta` ersetzen, das im Wesentlichen alles ist, was wir brauchen, um die Sprachvorhersage zu unserer Meta-Map in unserem Workflow hinzuzufügen.
 
-    Bis auf eine Sache!
+Bis auf eine Sache!
 
-    In unserem Workflow **müssen wir auch das `file`-Objekt im Tupel berücksichtigen**, das aus `meta, file, lang_id` besteht.
+In unserem Workflow **müssen wir auch das `file`-Objekt im Tupel berücksichtigen**, das aus `meta, file, lang_id` besteht.
 
-    Der Code wird also zu:
+Der Code wird also zu:
 
-    ```groovy
-    .map { meta, file, lang_id ->
-        [meta + [lang: lang_id], file]
-    }
-    ```
+```nextflow
+.map { meta, file, lang_id ->
+    [meta + [lang: lang_id], file]
+}
+```
 
-    Falls es schwer nachzuvollziehen ist, warum sich `file` in der `map`-Operation scheinbar bewegt, stell dir vor, dass statt `#!groovy [meta + [lang: lang_id], file]` diese Zeile `[new_map, file]` lautet.
-    Das sollte klarer machen, dass wir `file` einfach an seiner ursprünglichen zweiten Position im Tupel belassen. Wir haben nur den `new_info`-Wert in die Map an erster Position eingefaltet.
+Falls es schwer nachzuvollziehen ist, warum sich `file` in der `map`-Operation scheinbar bewegt, stell dir vor, dass statt `[meta + [lang: lang_id], file]{:nextflow}` diese Zeile `[new_map, file]` lautet.
+Das sollte klarer machen, dass wir `file` einfach an seiner ursprünglichen zweiten Position im Tupel belassen. Wir haben nur den `new_info`-Wert in die Map an erster Position eingefaltet.
 
-    **Und das bringt uns zurück zur `tuple val(meta), path(file)`-Kanalstruktur!**
+**Und das bringt uns zurück zur `tuple val(meta), path(file)`-Kanalstruktur!**
+
+</details>
 
 #### 2.2.2. Den Workflow ausführen
 
@@ -1272,51 +1277,47 @@ Sobald du sicher bist, dass du verstehst, was dieser Code tut, führe den Workfl
 
 ```bash
 nextflow run main.nf -resume
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [cheeky_fermat] revision: f55f2f98b9
+
+[d9/b360d0] IDENTIFY_LANGUAGE (3) | 7 of 7, cached: 7 ✔
+[94/224450] COWPY (3)             | 7 of 7, cached: 7 ✔
+[[id:sampleF, character:moose, lang:fr], /workspaces/training/side-quests/metadata/work/08/7199b7ab1ca733267d76b8168e5f38/salut.txt]
+[[id:sampleC, character:sheep, lang:de], /workspaces/training/side-quests/metadata/work/d9/b360d0cd38e53c710ec41ac3b74bc3/hallo.txt]
+[[id:sampleD, character:turkey, lang:en], /workspaces/training/side-quests/metadata/work/5e/ebac0d3e7a45a5e914d0bca827fc02/hello.txt]
+[[id:sampleE, character:stegosaurus, lang:es], /workspaces/training/side-quests/metadata/work/7d/890c6fa79c485b4a600eaa89af2140/hola.txt]
+[[id:sampleG, character:turtle, lang:it], /workspaces/training/side-quests/metadata/work/f6/8544c23128c0ed7c4f11dbc729b167/ciao.txt]
+[[id:sampleA, character:squirrel, lang:fr], /workspaces/training/side-quests/metadata/work/c9/34bfec04abaf808c2ef6c5cb8c8273/bonjour.txt]
+[[id:sampleB, character:tux, lang:de], /workspaces/training/side-quests/metadata/work/91/a2a307e970fa3950ceeeee6aa3b34c/guten_tag.txt]
+
+Outputs:
+
+  /workspaces/training/side-quests/metadata/results
+
+  cowpy_art:
+    - cowpy-guten_tag.txt
+    - cowpy-hallo.txt
+    - cowpy-bonjour.txt
+    - cowpy-hello.txt
+    - cowpy-hola.txt
+    - cowpy-salut.txt
+    - cowpy-ciao.txt
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [cheeky_fermat] revision: f55f2f98b9
-
-    [d9/b360d0] IDENTIFY_LANGUAGE (3) | 7 of 7, cached: 7 ✔
-    [94/224450] COWPY (3)             | 7 of 7, cached: 7 ✔
-    [[id:sampleF, character:moose, lang:fr], /workspaces/training/side-quests/metadata/work/08/7199b7ab1ca733267d76b8168e5f38/salut.txt]
-    [[id:sampleC, character:sheep, lang:de], /workspaces/training/side-quests/metadata/work/d9/b360d0cd38e53c710ec41ac3b74bc3/hallo.txt]
-    [[id:sampleD, character:turkey, lang:en], /workspaces/training/side-quests/metadata/work/5e/ebac0d3e7a45a5e914d0bca827fc02/hello.txt]
-    [[id:sampleE, character:stegosaurus, lang:es], /workspaces/training/side-quests/metadata/work/7d/890c6fa79c485b4a600eaa89af2140/hola.txt]
-    [[id:sampleG, character:turtle, lang:it], /workspaces/training/side-quests/metadata/work/f6/8544c23128c0ed7c4f11dbc729b167/ciao.txt]
-    [[id:sampleA, character:squirrel, lang:fr], /workspaces/training/side-quests/metadata/work/c9/34bfec04abaf808c2ef6c5cb8c8273/bonjour.txt]
-    [[id:sampleB, character:tux, lang:de], /workspaces/training/side-quests/metadata/work/91/a2a307e970fa3950ceeeee6aa3b34c/guten_tag.txt]
-
-    Outputs:
-
-      /workspaces/training/side-quests/metadata/results
-
-      cowpy_art:
-        - cowpy-guten_tag.txt
-        - cowpy-hallo.txt
-        - cowpy-bonjour.txt
-        - cowpy-hello.txt
-        - cowpy-hola.txt
-        - cowpy-salut.txt
-        - cowpy-ciao.txt
-    ```
 
 Ja, das stimmt!
 Wir haben die Ausgabe des Prozesses sauber von `meta, file, lang_id` umstrukturiert, sodass `lang_id` jetzt einer der Schlüssel in der Meta-Map ist und die Tupel des Kanals wieder dem `meta, file`-Modell entsprechen.
 
-!!! tip "Schlüssel aus einer Meta-Map entfernen"
+:::tip[Schlüssel aus einer Meta-Map entfernen]
+Du kannst einen Schlüssel aus einer Meta-Map mit der Groovy-Methode [`subMap`](https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)) entfernen, die eine neue Map zurückgibt, die nur die angegebenen Schlüssel enthält:
 
-    Du kannst einen Schlüssel aus einer Meta-Map mit der Groovy-Methode [`subMap`](https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)) entfernen, die eine neue Map zurückgibt, die nur die angegebenen Schlüssel enthält:
+```nextflow
+meta.subMap(['id', 'character'])  // gibt eine Map nur mit 'id' und 'character' zurück
+```
 
-    ```groovy
-    meta.subMap(['id', 'character'])  // gibt eine Map nur mit 'id' und 'character' zurück
-    ```
-
-    Das ist nützlich, wenn ein nachgelagerter Prozess oder ein Modul nicht alle Felder benötigt, die sich in der Meta-Map angesammelt haben.
+Das ist nützlich, wenn ein nachgelagerter Prozess oder ein Modul nicht alle Felder benötigt, die sich in der Meta-Map angesammelt haben.
+:::
 
 ### 2.3. Eine Sprachgruppe mit Bedingungen zuweisen
 
@@ -1328,7 +1329,7 @@ Das Hinzufügen eines `lang_group`-Felds macht diese Klassifizierung für nachge
 
 Wir verwenden eine zweite `map`-Operation mit bedingter Logik, um die Sprachfamilie zuzuweisen:
 
-```groovy
+```nextflow
 .map { meta, file ->
 
     // Bedingte Logik zur Definition von lang_group kommt hier hin
@@ -1343,57 +1344,57 @@ Hier ist die anzuwendende Logik:
 - Wenn `meta.lang` `'de'` oder `'en'` ist, setze `lang_group` auf `'germanic'`.
 - Sonst wenn `meta.lang` in `['fr', 'es', 'it']` enthalten ist, setze `lang_group` auf `'romance'`.
 
-!!! tip "Tipp"
-
-    Du kannst auf den Wert von `lang` innerhalb der map-Operation mit `meta.lang` zugreifen.
+:::tip[Tipp]
+Du kannst auf den Wert von `lang` innerhalb der map-Operation mit `meta.lang` zugreifen.
+:::
 
 Nimm die folgenden Änderungen am Workflow vor:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="14" hl_lines="7-19 21"
-        // langid ausführen, um die Sprache jeder Begrüßung zu identifizieren
-        IDENTIFY_LANGUAGE(ch_datasheet)
-        IDENTIFY_LANGUAGE.out
-            .map { meta, file, lang_id ->
-                [meta + [lang: lang_id], file]
+```nextflow {7} title="main.nf" showLineNumbers startLineNumber=14 step="Vorher"
+    // langid ausführen, um die Sprache jeder Begrüßung zu identifizieren
+    IDENTIFY_LANGUAGE(ch_datasheet)
+    IDENTIFY_LANGUAGE.out
+        .map { meta, file, lang_id ->
+            [meta + [lang: lang_id], file]
+        }
+        .view()
+```
+
+```nextflow {7-19,21} title="main.nf" showLineNumbers startLineNumber=14 step="Danach"
+    // langid ausführen, um die Sprache jeder Begrüßung zu identifizieren
+    IDENTIFY_LANGUAGE(ch_datasheet)
+    IDENTIFY_LANGUAGE.out
+        .map { meta, file, lang_id ->
+            [meta + [lang: lang_id], file]
+        }
+        .map { meta, file ->
+
+            def lang_group = "unknown"
+            if (meta.lang.equals("de") || meta.lang.equals('en')) {
+                lang_group = "germanic"
             }
-            .map { meta, file ->
-
-                def lang_group = "unknown"
-                if (meta.lang.equals("de") || meta.lang.equals('en')) {
-                    lang_group = "germanic"
-                }
-                else if (meta.lang in ["fr", "es", "it"]) {
-                    lang_group = "romance"
-                }
-
-                [meta + [lang_group: lang_group], file]
+            else if (meta.lang in ["fr", "es", "it"]) {
+                lang_group = "romance"
             }
-            .set { ch_languages }
 
-        ch_languages.view()
-    ```
+            [meta + [lang_group: lang_group], file]
+        }
+        .set { ch_languages }
 
-=== "Vorher"
+    ch_languages.view()
+```
 
-    ```groovy title="main.nf" linenums="14" hl_lines="7"
-        // langid ausführen, um die Sprache jeder Begrüßung zu identifizieren
-        IDENTIFY_LANGUAGE(ch_datasheet)
-        IDENTIFY_LANGUAGE.out
-            .map { meta, file, lang_id ->
-                [meta + [lang: lang_id], file]
-            }
-            .view()
-    ```
+</CodeWalkthrough>
 
 Wichtige Punkte:
 
 - `def lang_group = "unknown"` initialisiert die Variable mit einem sicheren Standardwert.
 - Die `if / else if`-Struktur behandelt die zwei Sprachfamilien; alles andere bleibt `'unknown'`.
-- `#!groovy .set { ch_languages }` gibt dem resultierenden Kanal einen Namen für den nächsten Schritt.
+- `.set { ch_languages }{:nextflow}` gibt dem resultierenden Kanal einen Namen für den nächsten Schritt.
 
-<!-- TODO (future) Add note/links to relevant docs in additional resources section -->
+{/* TODO (future) Add note/links to relevant docs in additional resources section */}
 
 #### 2.3.2. Den Workflow ausführen:
 
@@ -1401,38 +1402,34 @@ Führe den Workflow aus, um zu überprüfen, dass es funktioniert:
 
 ```bash
 nextflow run main.nf -resume
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [wise_almeida] revision: 0f4b36d66d
+
+[c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7, cached: 7 ✔
+[e9/269aa0] COWPY (6)             | 7 of 7, cached: 7 ✔
+[[id:sampleC, character:sheep, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/work/d9/b360d0cd38e53c710ec41ac3b74bc3/hallo.txt]
+[[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/work/c9/34bfec04abaf808c2ef6c5cb8c8273/bonjour.txt]
+[[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/training/side-quests/metadata/work/7d/890c6fa79c485b4a600eaa89af2140/hola.txt]
+[[id:sampleD, character:turkey, lang:en, lang_group:germanic], /workspaces/training/side-quests/metadata/work/5e/ebac0d3e7a45a5e914d0bca827fc02/hello.txt]
+[[id:sampleB, character:tux, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/work/91/a2a307e970fa3950ceeeee6aa3b34c/guten_tag.txt]
+[[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/work/f6/8544c23128c0ed7c4f11dbc729b167/ciao.txt]
+[[id:sampleF, character:moose, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/work/08/7199b7ab1ca733267d76b8168e5f38/salut.txt]
+
+Outputs:
+
+  /workspaces/training/side-quests/metadata/results
+
+  cowpy_art:
+    - cowpy-ciao.txt
+    - cowpy-salut.txt
+    - cowpy-guten_tag.txt
+    - cowpy-hallo.txt
+    - cowpy-bonjour.txt
+    - cowpy-hola.txt
+    - cowpy-hello.txt
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [wise_almeida] revision: 0f4b36d66d
-
-    [c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7, cached: 7 ✔
-    [e9/269aa0] COWPY (6)             | 7 of 7, cached: 7 ✔
-    [[id:sampleC, character:sheep, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/work/d9/b360d0cd38e53c710ec41ac3b74bc3/hallo.txt]
-    [[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/work/c9/34bfec04abaf808c2ef6c5cb8c8273/bonjour.txt]
-    [[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/training/side-quests/metadata/work/7d/890c6fa79c485b4a600eaa89af2140/hola.txt]
-    [[id:sampleD, character:turkey, lang:en, lang_group:germanic], /workspaces/training/side-quests/metadata/work/5e/ebac0d3e7a45a5e914d0bca827fc02/hello.txt]
-    [[id:sampleB, character:tux, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/work/91/a2a307e970fa3950ceeeee6aa3b34c/guten_tag.txt]
-    [[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/work/f6/8544c23128c0ed7c4f11dbc729b167/ciao.txt]
-    [[id:sampleF, character:moose, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/work/08/7199b7ab1ca733267d76b8168e5f38/salut.txt]
-
-    Outputs:
-
-      /workspaces/training/side-quests/metadata/results
-
-      cowpy_art:
-        - cowpy-ciao.txt
-        - cowpy-salut.txt
-        - cowpy-guten_tag.txt
-        - cowpy-hallo.txt
-        - cowpy-bonjour.txt
-        - cowpy-hola.txt
-        - cowpy-hello.txt
-    ```
 
 Die Meta-Map enthält jetzt vier Felder: `id`, `character`, `lang` und `lang_group`.
 Die Kanalstruktur ist weiterhin `[meta, file]`.
@@ -1447,29 +1444,29 @@ Dazu sind drei Änderungen erforderlich: den `COWPY`-Prozess aktualisieren, um `
 
 Füge `meta` zur Ausgabe hinzu, damit der Output-Block auf `lang` und `lang_group` für die Zuordnung und Umbenennung zugreifen kann:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2"
-        output:
-        tuple val(meta), path("cowpy-${recording}")
+```nextflow {2} title="modules/cowpy.nf" showLineNumbers startLineNumber=9 step="Vorher"
+    output:
+    path "cowpy-${recording}"
 
-        script:
-        """
-        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
-        """
-    ```
+    script:
+    """
+    cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
+    """
+```
 
-=== "Vorher"
+```nextflow {2} title="modules/cowpy.nf" showLineNumbers startLineNumber=9 step="Danach"
+    output:
+    tuple val(meta), path("cowpy-${recording}")
 
-    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2"
-        output:
-        path "cowpy-${recording}"
+    script:
+    """
+    cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
+    """
+```
 
-        script:
-        """
-        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
-        """
-    ```
+</CodeWalkthrough>
 
 Das ist eine minimale Änderung auf Prozessebene: `COWPY` muss nicht wissen, dass `lang` oder `lang_group` existieren – nur dass es `meta` zusammen mit seiner Ausgabe weitergeben soll.
 Die Zuordnung und Umbenennung anhand dieser Felder erfolgt nachgelagert, im Output-Block.
@@ -1478,31 +1475,31 @@ Die Zuordnung und Umbenennung anhand dieser Felder erfolgt nachgelagert, im Outp
 
 Ersetze `COWPY(ch_datasheet)` durch `COWPY(ch_languages)`:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="32" hl_lines="3"
-        .set { ch_languages }
+```nextflow {3,5} title="main.nf" showLineNumbers startLineNumber=32 step="Vorher"
+    .set { ch_languages }
 
-        COWPY(ch_languages)
+    ch_languages.view()
 
-        publish:
-        cowpy_art = COWPY.out
-    }
-    ```
+    COWPY(ch_datasheet)
 
-=== "Vorher"
+    publish:
+    cowpy_art = COWPY.out
+}
+```
 
-    ```groovy title="main.nf" linenums="32" hl_lines="3 5"
-        .set { ch_languages }
+```nextflow {3} title="main.nf" showLineNumbers startLineNumber=32 step="Danach"
+    .set { ch_languages }
 
-        ch_languages.view()
+    COWPY(ch_languages)
 
-        COWPY(ch_datasheet)
+    publish:
+    cowpy_art = COWPY.out
+}
+```
 
-        publish:
-        cowpy_art = COWPY.out
-    }
-    ```
+</CodeWalkthrough>
 
 Wir entfernen auch die `ch_languages.view()`-Zeile, da wir den Kanalinhalt nicht mehr prüfen müssen.
 
@@ -1510,26 +1507,26 @@ Wir entfernen auch die `ch_languages.view()`-Zeile, da wir den Kanalinhalt nicht
 
 Füge eine `path`-Closure zum `output {}`-Block hinzu, die den [`>>`-Operator](https://www.nextflow.io/docs/latest/workflow.html#dynamic-publish-path) verwendet, um jede Datei an ein explizites Ziel zu veröffentlichen: ihr Sprachgruppen-Unterverzeichnis, unter einem Namen mit dem erkannten Sprachcode als Präfix:
 
-=== "Danach"
+<CodeWalkthrough>
 
-    ```groovy title="main.nf" linenums="40" hl_lines="3-5"
-    output {
-        cowpy_art {
-            path { meta, file ->
-                file >> "${meta.lang_group}/${meta.lang}-${file.name}"
-            }
+```nextflow {2,3} title="main.nf" showLineNumbers startLineNumber=40 step="Vorher"
+output {
+    cowpy_art {
+    }
+}
+```
+
+```nextflow {3-5} title="main.nf" showLineNumbers startLineNumber=40 step="Danach"
+output {
+    cowpy_art {
+        path { meta, file ->
+            file >> "${meta.lang_group}/${meta.lang}-${file.name}"
         }
     }
-    ```
+}
+```
 
-=== "Vorher"
-
-    ```groovy title="main.nf" linenums="40" hl_lines="2 3"
-    output {
-        cowpy_art {
-        }
-    }
-    ```
+</CodeWalkthrough>
 
 Das zeigt, wie wir Metadaten verwenden können, um Ausgaben zu organisieren und umzubenennen – vollständig aus dem Output-Block heraus, ohne den Prozess selbst zu ändern.
 
@@ -1540,32 +1537,28 @@ Lösche die vorherigen Ergebnisse und führe die vollständige Pipeline aus:
 ```bash
 rm -r results
 nextflow run main.nf
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `main.nf` [suspicious_crick] revision: 955602d59b
+
+executor >  local (14)
+[99/64c59d] IDENTIFY_LANGUAGE (6) | 7 of 7 ✔
+[3c/0f1922] COWPY (7)             | 7 of 7 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/metadata/results
+
+  cowpy_art:
+    - [{id: sampleB, character: tux, lang: de, lang_group: germanic}, germanic/de-cowpy-guten_tag.txt]
+    - [{id: sampleG, character: turtle, lang: it, lang_group: romance}, romance/it-cowpy-ciao.txt]
+    - [{id: sampleC, character: sheep, lang: de, lang_group: germanic}, germanic/de-cowpy-hallo.txt]
+    - [{id: sampleE, character: stegosaurus, lang: es, lang_group: romance}, romance/es-cowpy-hola.txt]
+    - [{id: sampleA, character: squirrel, lang: fr, lang_group: romance}, romance/fr-cowpy-bonjour.txt]
+    - [{id: sampleD, character: turkey, lang: en, lang_group: germanic}, germanic/en-cowpy-hello.txt]
+    - [{id: sampleF, character: moose, lang: fr, lang_group: romance}, romance/fr-cowpy-salut.txt]
 ```
-
-??? success "Befehlsausgabe"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [suspicious_crick] revision: 955602d59b
-
-    executor >  local (14)
-    [99/64c59d] IDENTIFY_LANGUAGE (6) | 7 of 7 ✔
-    [3c/0f1922] COWPY (7)             | 7 of 7 ✔
-
-    Outputs:
-
-      /workspaces/training/side-quests/metadata/results
-
-      cowpy_art:
-        - [{id: sampleB, character: tux, lang: de, lang_group: germanic}, germanic/de-cowpy-guten_tag.txt]
-        - [{id: sampleG, character: turtle, lang: it, lang_group: romance}, romance/it-cowpy-ciao.txt]
-        - [{id: sampleC, character: sheep, lang: de, lang_group: germanic}, germanic/de-cowpy-hallo.txt]
-        - [{id: sampleE, character: stegosaurus, lang: es, lang_group: romance}, romance/es-cowpy-hola.txt]
-        - [{id: sampleA, character: squirrel, lang: fr, lang_group: romance}, romance/fr-cowpy-bonjour.txt]
-        - [{id: sampleD, character: turkey, lang: en, lang_group: germanic}, germanic/en-cowpy-hello.txt]
-        - [{id: sampleF, character: moose, lang: fr, lang_group: romance}, romance/fr-cowpy-salut.txt]
-    ```
 
 Das Ergebnisverzeichnis ist jetzt nach Sprachfamilie organisiert, wobei jede Datei nach der erkannten Sprache benannt ist:
 
@@ -1583,14 +1576,14 @@ results/
 ```
 
 Die `path`-Closure im `output {}`-Block empfängt jedes `[meta, file]`-Tupel.
-Der `>>`-Operator veröffentlicht `file` am Ziel `#!groovy "${meta.lang_group}/${meta.lang}-${file.name}"` und kombiniert dabei das Unterverzeichnis (`lang_group`) und den umbenannten Dateinamen (mit `lang` als Präfix) in einem einzigen Ausdruck.
+Der `>>`-Operator veröffentlicht `file` am Ziel `"${meta.lang_group}/${meta.lang}-${file.name}"{:nextflow}` und kombiniert dabei das Unterverzeichnis (`lang_group`) und den umbenannten Dateinamen (mit `lang` als Präfix) in einem einzigen Ausdruck.
 Beide Metadaten stammen aus der in diesem Abschnitt aufgebauten angereicherten Meta-Map, und `COWPY` selbst muss nie wissen, dass sie existieren.
 
 ### Fazit
 
 In diesem Abschnitt hast du gelernt:
 
-- **Wie man die Meta-Map mit Prozessausgaben anreichert:** Das Hinzufügen neuer Schlüssel mit `#!groovy meta + [key: value]` erhält die `[meta, file]`-Kanalstruktur, während die Metadaten erweitert werden.
+- **Wie man die Meta-Map mit Prozessausgaben anreichert:** Das Hinzufügen neuer Schlüssel mit `meta + [key: value]{:nextflow}` erhält die `[meta, file]`-Kanalstruktur, während die Metadaten erweitert werden.
 - **Wie man Metadaten aus Metadaten ableitet:** Bedingte Logik innerhalb einer `map`-Operation kann neue Felder aus bestehenden berechnen.
 - **Wie man Metadaten zur Ausgabeorganisation verwendet:** Die `path`-Closure im `output {}`-Block kann aus der Meta-Map lesen, um Dateien in Unterverzeichnisse zu leiten.
 
@@ -1610,7 +1603,7 @@ Das Fehlverhalten hängt davon ab, ob die Spalte im Datenblatt vorhanden, aber l
 
 Angenommen, ein Eintrag im Datenblatt hat ein leeres `character`-Feld:
 
-```csv title="datasheet.csv" linenums="1" hl_lines="2"
+```csv {2} title="datasheet.csv" showLineNumbers
 id,character,recording
 sampleA,,/workspaces/training/side-quests/metadata/data/bonjour.txt
 sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
@@ -1618,51 +1611,54 @@ sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 ```
 
 Der `character`-Schlüssel wird für alle Einträge beim Einlesen des Datenblatts erstellt, aber `meta.character` für `sampleA` ist ein leerer String.
-Wenn Nextflow `#!groovy ${meta.character}` in den Befehl einsetzt, erhält das `COWPY`-Tool ein leeres Argument für `-c` und schlägt fehl:
+Wenn Nextflow `${meta.character}{:nextflow}` in den Befehl einsetzt, erhält das `COWPY`-Tool ein leeres Argument für `-c` und schlägt fehl:
 
-??? failure "Befehlsausgabe"
+<details class="failure">
+<summary>Befehlsausgabe</summary>
 
-    ```console hl_lines="7 12 17 29"
-     N E X T F L O W   ~  version 26.04.4
+```console {7,12,17,29}
+ N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [marvelous_hirsch] revision: 955602d59b
+Launching `main.nf` [marvelous_hirsch] revision: 955602d59b
 
-    executor >  local (14)
-    [c1/c5dd4f] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
-    [d3/b7c415] COWPY (3)             | 5 of 7
-    WARN: Killing running tasks (1)
-    ERROR ~ Error executing process > 'COWPY (7)'
+executor >  local (14)
+[c1/c5dd4f] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
+[d3/b7c415] COWPY (3)             | 5 of 7
+WARN: Killing running tasks (1)
+ERROR ~ Error executing process > 'COWPY (7)'
 
-    Caused by:
-      Process `COWPY (7)` terminated with an error exit status (2)
+Caused by:
+  Process `COWPY (7)` terminated with an error exit status (2)
 
 
-    Command executed:
+Command executed:
 
-      cat bonjour.txt | cowpy -c  > cowpy-bonjour.txt
+  cat bonjour.txt | cowpy -c  > cowpy-bonjour.txt
 
-    Command exit status:
-      2
+Command exit status:
+  2
 
-    Command output:
-      (empty)
+Command output:
+  (empty)
 
-    Command error:
-      usage: cowpy [-h] [-l] [-L] [-t] [-u] [-e EYES] [-c COWACTER] [-E] [-r] [-x]
-                   [-C]
-                   [msg ...]
-      cowpy: error: argument -c/--cowacter: expected one argument
+Command error:
+  usage: cowpy [-h] [-l] [-L] [-t] [-u] [-e EYES] [-c COWACTER] [-E] [-r] [-x]
+               [-C]
+               [msg ...]
+  cowpy: error: argument -c/--cowacter: expected one argument
 
-    Work dir:
-      /workspaces/training/side-quests/metadata/work/cc/dfe60ff2e14f0dd88488939eca57b8
+Work dir:
+  /workspaces/training/side-quests/metadata/work/cc/dfe60ff2e14f0dd88488939eca57b8
 
-    Container:
-      community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
+Container:
+  community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
 
-    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
 
-     -- Check '.nextflow.log' file for details
-    ```
+ -- Check '.nextflow.log' file for details
+```
+
+</details>
 
 Die Fehlermeldung (`expected one argument`) weist auf das leere `-c`-Flag hin.
 Ein Blick in die `.command.sh`-Datei im work-Verzeichnis bestätigt, dass der Befehl mit einem leeren Wert ausgeführt wurde.
@@ -1671,69 +1667,72 @@ Ein Blick in die `.command.sh`-Datei im work-Verzeichnis bestätigt, dass der Be
 
 Wenn die `character`-Spalte vollständig fehlt:
 
-```csv title="datasheet.csv" linenums="1"
+```csv title="datasheet.csv" showLineNumbers
 id,recording
 sampleA,/workspaces/training/side-quests/metadata/data/bonjour.txt
 sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 ...
 ```
 
-Unsere `map`-Operation schreibt explizit `#!groovy character: row.character`, sodass der `character`-Schlüssel in der Meta-Map zwar erstellt wird, aber der Zugriff auf eine Spalte, die in der geparsten Zeile nicht existiert, `null` zurückgibt – der Wert wird also `null`.
-Wenn der Prozess-Script `#!groovy ${meta.character}` auswertet, setzt Nextflow buchstäblich den String `null` in den Befehl ein:
+Unsere `map`-Operation schreibt explizit `character: row.character{:nextflow}`, sodass der `character`-Schlüssel in der Meta-Map zwar erstellt wird, aber der Zugriff auf eine Spalte, die in der geparsten Zeile nicht existiert, `null` zurückgibt – der Wert wird also `null`.
+Wenn der Prozess-Script `${meta.character}{:nextflow}` auswertet, setzt Nextflow buchstäblich den String `null` in den Befehl ein:
 
-??? failure "Befehlsausgabe"
+<details class="failure">
+<summary>Befehlsausgabe</summary>
 
-    ```console hl_lines="7 12 17"
-     N E X T F L O W   ~  version 26.04.4
+```console {7,12,17}
+ N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [jovial_bohr] revision: 955602d59b
+Launching `main.nf` [jovial_bohr] revision: 955602d59b
 
-    executor >  local (14)
-    [61/91663a] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
-    [0e/99bfb0] COWPY (7)             | 0 of 7
-    WARN: Killing running tasks (5)
-    ERROR ~ Error executing process > 'COWPY (3)'
+executor >  local (14)
+[61/91663a] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
+[0e/99bfb0] COWPY (7)             | 0 of 7
+WARN: Killing running tasks (5)
+ERROR ~ Error executing process > 'COWPY (3)'
 
-    Caused by:
-      Process `COWPY (3)` terminated with an error exit status (1)
+Caused by:
+  Process `COWPY (3)` terminated with an error exit status (1)
 
 
-    Command executed:
+Command executed:
 
-      cat hola.txt | cowpy -c null > cowpy-hola.txt
+  cat hola.txt | cowpy -c null > cowpy-hola.txt
 
-    Command exit status:
-      1
+Command exit status:
+  1
 
-    Command output:
-      (empty)
+Command output:
+  (empty)
 
-    Command error:
-      Traceback (most recent call last):
-        File "/opt/conda/bin/cowpy", line 10, in <module>
-          sys.exit(main())
-                  ~~~~^^
-        File "/opt/conda/lib/python3.13/site-packages/cowpy/cow.py", line 1215, in main
-          print(cow(eyes=args.eyes,
-                ~~~^^^^^^^^^^^^^^^^
-                tongue=args.tongue,
-                ^^^^^^^^^^^^^^^^^^^
-                thoughts=args.thoughts
-                ^^^^^^^^^^^^^^^^^^^^^^
-                    ).milk(msg)
-                    ^
-      TypeError: 'str' object is not callable
+Command error:
+  Traceback (most recent call last):
+    File "/opt/conda/bin/cowpy", line 10, in <module>
+      sys.exit(main())
+              ~~~~^^
+    File "/opt/conda/lib/python3.13/site-packages/cowpy/cow.py", line 1215, in main
+      print(cow(eyes=args.eyes,
+            ~~~^^^^^^^^^^^^^^^^
+            tongue=args.tongue,
+            ^^^^^^^^^^^^^^^^^^^
+            thoughts=args.thoughts
+            ^^^^^^^^^^^^^^^^^^^^^^
+                ).milk(msg)
+                ^
+  TypeError: 'str' object is not callable
 
-    Work dir:
-      /workspaces/training/side-quests/metadata/work/52/80c08666f6732690bce00f04993489
+Work dir:
+  /workspaces/training/side-quests/metadata/work/52/80c08666f6732690bce00f04993489
 
-    Container:
-      community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
+Container:
+  community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
 
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
-     -- Check '.nextflow.log' file for details
-    ```
+ -- Check '.nextflow.log' file for details
+```
+
+</details>
 
 Das `cowpy -c null` im ausgeführten Befehl ist der diagnostische Hinweis.
 
@@ -1744,24 +1743,21 @@ Es gibt zwei sich ergänzende Ansätze, um Workflows robuster gegen fehlende Met
 **1. Eingabevalidierung**
 
 Die zuverlässigste Lösung ist, das Datenblatt zu validieren, bevor die Verarbeitung beginnt, damit Probleme frühzeitig mit einer klaren Fehlermeldung erkannt werden, anstatt als kryptischer Prozessfehler mitten in der Ausführung aufzutauchen.
-Das [Build with nf-core](../../nfcore_build/04_input_validation.md)-Training zeigt, wie man Eingabevalidierung mit dem nf-schema-Plugin hinzufügt. <!-- TODO (future) pending a proper Validation side quest -->
+Das [Build with nf-core](../../nfcore_build/04_input_validation.mdx)-Training zeigt, wie man Eingabevalidierung mit dem nf-schema-Plugin hinzufügt. {/* TODO (future) pending a proper Validation side quest */}
 
 **2. Explizite Prozesseingaben für erforderliche Werte**
 
 Wenn die Prozessschnittstelle selbst kommunizieren soll, dass ein bestimmter Wert erforderlich ist, kannst du ihn als explizite Eingabe aus der Meta-Map extrahieren:
 
-=== "Prozessdefinition"
-
-    ```groovy title="modules/cowpy.nf" linenums="6"
-    input:
-    tuple val(meta), val(character), path(recording)
-    ```
-
-=== "Workflow-Aufruf"
-
-    ```groovy title="main.nf"
-    COWPY(ch_languages.map { meta, file -> [meta, meta.character, file] })
-    ```
+:::code-tabs
+```nextflow title="modules/cowpy.nf" showLineNumbers startLineNumber=6 label="Prozessdefinition"
+input:
+tuple val(meta), val(character), path(recording)
+```
+```nextflow title="main.nf" label="Workflow-Aufruf"
+COWPY(ch_languages.map { meta, file -> [meta, meta.character, file] })
+```
+:::
 
 Dieser Ansatz macht `character` zu einem sichtbaren, erforderlichen Teil des Prozessvertrags.
 Wer das Modul liest, sieht sofort, dass ein Charakterwert angegeben werden muss.
@@ -1797,7 +1793,7 @@ Das „Meta-Map + Datendatei"-Tupel-Muster ist eine zentrale Konvention in Nextf
 
 1.  **Metadaten lesen und strukturieren:** Eine CSV-Datei einlesen und eine Meta-Map erstellen.
 
-    ```groovy
+    ```nextflow
     channel.fromPath('datasheet.csv')
         .splitCsv(header: true)
         .map { row ->
@@ -1807,7 +1803,7 @@ Das „Meta-Map + Datendatei"-Tupel-Muster ist eine zentrale Konvention in Nextf
 
 2.  **Metadaten während des Workflows erweitern:** Neue Schlüssel aus Prozessausgaben oder abgeleiteter Logik hinzufügen.
 
-    ```groovy
+    ```nextflow
     // Aus einer Prozessausgabe
     .map { meta, file, lang ->
         [ meta + [lang: lang], file ]
@@ -1824,13 +1820,13 @@ Das „Meta-Map + Datendatei"-Tupel-Muster ist eine zentrale Konvention in Nextf
 
 3.  **Metadaten innerhalb eines Prozesses verwenden:** Auf jedes Feld per Punktnotation im Script-Block zugreifen.
 
-    ```groovy
+    ```nextflow
     cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
     ```
 
 4.  **Ausgaben nach Metadatenwert organisieren und umbenennen:** Die `path`-Closure im `output {}`-Block verwenden, mit dem `>>`-Operator, um sowohl das Zielverzeichnis als auch den veröffentlichten Dateinamen zu steuern.
 
-    ```groovy
+    ```nextflow
     output {
         cowpy_art {
             path { meta, file ->
@@ -1850,4 +1846,4 @@ Das „Meta-Map + Datendatei"-Tupel-Muster ist eine zentrale Konvention in Nextf
 
 ## Wie geht es weiter?
 
-Kehre zum [Menü der Side Quests](../index.md) zurück oder klicke auf die Schaltfläche unten rechts auf der Seite, um zum nächsten Thema in der Liste zu wechseln.
+Kehre zum [Menü der Side Quests](../index.mdx) zurück oder klicke auf die Schaltfläche unten rechts auf der Seite, um zum nächsten Thema in der Liste zu wechseln.

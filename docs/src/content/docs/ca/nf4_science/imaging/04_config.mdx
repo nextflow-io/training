@@ -1,6 +1,9 @@
-# Part 4: Configuració
+---
+title: 'Part 4: Configuració'
+description: A les Parts 1-3, hem après com executar Nextflow, executar un pipeline d'nf-core i gestionar entrades amb fitxers de paràmetres i fulls de mostres.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 A les Parts 1-3, hem après com executar Nextflow, executar un pipeline d'nf-core i gestionar entrades amb fitxers de paràmetres i fulls de mostres.
 Ara explorarem com configurar pipelines per a diferents entorns informàtics utilitzant **fitxers de configuració** i **perfils**.
@@ -46,7 +49,7 @@ Aquest enfocament per capes et permet mantenir valors per defecte al pipeline, s
 
 Vegem la configuració que hem estat utilitzant:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 docker.enabled = true
 process {
     resourceLimits = [
@@ -80,7 +83,7 @@ code molkart/nextflow.config
 
 Cerca el bloc `profiles`:
 
-```groovy title="molkart/nextflow.config (excerpt)"
+```nextflow title="molkart/nextflow.config (excerpt)" nextflow="config"
 profiles {
     docker {
         docker.enabled          = true
@@ -152,7 +155,7 @@ Els pipelines d'nf-core sempre inclouran almenys dos perfils de prova:
 
 Vegem més de prop el perfil `test` a molkart que s'inclou utilitzant la directiva `includeConfig`:
 
-```groovy title="molkart/nextflow.config (excerpt)"
+```nextflow title="molkart/nextflow.config (excerpt)" nextflow="config"
 profiles {
   ...
     test      { includeConfig 'conf/test.config'      }
@@ -161,7 +164,7 @@ profiles {
 
 Això significa que sempre que executem el pipeline amb `-profile test`, Nextflow carregarà la configuració de `conf/test.config`.
 
-```groovy title="molkart/conf/test.config (excerpt)"
+```nextflow title="molkart/conf/test.config (excerpt)" nextflow="config"
 params {
     config_profile_name        = 'Test profile'
     config_profile_description = 'Minimal test dataset to check pipeline function'
@@ -221,7 +224,7 @@ Creem perfils personalitzats per a dos escenaris:
 
 Afegeix el següent al teu `nextflow.config`:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 profiles {
     local_dev {
         docker.enabled = true
@@ -247,10 +250,10 @@ nextflow run ./molkart -profile local_dev --input data/samplesheet.csv --outdir 
 nextflow run ./molkart -profile hpc_cluster --input data/samplesheet.csv --outdir results
 ```
 
-!!! Note "Nota"
-
-    No podem provar el perfil HPC en aquest entorn de formació ja que no tenim accés a un planificador Slurm.
-    Però això mostra com ho configuraries per a un ús real.
+:::note[Nota]
+No podem provar el perfil HPC en aquest entorn de formació ja que no tenim accés a un planificador Slurm.
+Però això mostra com ho configuraries per a un ús real.
+:::
 
 ### 3.2. Utilitzar `nextflow config` per inspeccionar la configuració
 
@@ -293,7 +296,7 @@ Per simplicitat, els pipelines d'nf-core utilitzen [**etiquetes de procés**](ht
 Cada procés està etiquetat amb una etiqueta com `process_low`, `process_medium` o `process_high` per descriure requisits de recursos informàtics baixos, mitjans o alts, respectivament.
 Aquestes etiquetes es converteixen en sol·licituds de recursos específiques en un dels fitxers de configuració ubicats al directori `conf/` del pipeline.
 
-```groovy title="molkart/conf/base.config (excerpt)"
+```nextflow title="molkart/conf/base.config (excerpt)" nextflow="config"
 process {
     cpus   = { 1      * task.attempt }
     memory = { 6.GB   * task.attempt }
@@ -332,7 +335,7 @@ Observa el multiplicador `task.attempt` - això permet que els reintents de tasq
 
 Per a un control detallat, dirigeix-te a processos individuals per nom:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 process {
     withName: 'NFCORE_MOLKART:MOLKART:CELLPOSE' {
         cpus   = 16
@@ -345,10 +348,10 @@ Si intentem executar aquest pipeline amb la sobreescriptura anterior, el procés
 Això farà que el pipeline falli al nostre entorn actual ja que no tenim tanta RAM disponible.
 Aprendrem com prevenir aquests tipus de fallades a la següent secció.
 
-!!! Tip "Consell"
-
-    Per trobar noms de processos, mira la sortida d'execució del pipeline o comprova `.nextflow.log`.
-    Els noms de processos segueixen el patró `WORKFLOW:SUBWORKFLOW:PROCESS`.
+:::tip[Consell]
+Per trobar noms de processos, mira la sortida d'execució del pipeline o comprova `.nextflow.log`.
+Els noms de processos segueixen el patró `WORKFLOW:SUBWORKFLOW:PROCESS`.
+:::
 
 ### Conclusió
 
@@ -374,7 +377,7 @@ En entorns restringits com GitHub Codespaces, sense límits, Nextflow es negaria
 
 La directiva `resourceLimits` limita les sol·licituds de recursos a valors especificats:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 process {
     resourceLimits = [ cpus: 2, memory: 7.GB ]
 }
@@ -386,7 +389,7 @@ Això indica a Nextflow: "Si algun procés sol·licita més de 2 CPUs o 7 GB de 
 
 Actualitza els teus perfils personalitzats per incloure límits apropiats:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 profiles {
     local_dev {
         docker.enabled = true
@@ -410,10 +413,10 @@ profiles {
 }
 ```
 
-!!! Warning "Advertència"
-
-    Establir límits de recursos massa baixos pot fer que els processos fallin o s'executin lentament.
-    El pipeline pot necessitar utilitzar algorismes menys intensius en memòria o processar dades en fragments més petits.
+:::caution[Advertència]
+Establir límits de recursos massa baixos pot fer que els processos fallin o s'executin lentament.
+El pipeline pot necessitar utilitzar algorismes menys intensius en memòria o processar dades en fragments més petits.
+:::
 
 ### Conclusió
 
@@ -448,6 +451,6 @@ Felicitats per completar el curs de Nextflow per a Bioimatge!
 Pròxims passos:
 
 - Omple l'enquesta del curs per proporcionar comentaris
-- Consulta [Hello Nextflow](../../hello_nextflow/index.md) per aprendre més sobre el desenvolupament de workflows
-- Explora [Build with nf-core](../../nfcore_build/index.md) per aprofundir en les eines d'nf-core
-- Explora temes més avançats a les [Side Quests](../../side_quests/index.md)
+- Consulta [Hello Nextflow](../../hello_nextflow/index.mdx) per aprendre més sobre el desenvolupament de workflows
+- Explora [Build with nf-core](../../nfcore_build/index.mdx) per aprofundir en les eines d'nf-core
+- Explora temes més avançats a les [Side Quests](../../side_quests/index.mdx)

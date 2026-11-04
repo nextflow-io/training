@@ -1,6 +1,9 @@
-# Teil 2: If - Else
+---
+title: 'Teil 2: If - Else'
+description: '[TODO]'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 [TODO]
 
@@ -41,17 +44,17 @@ Um diese Übung zu lösen, musst du im Wesentlichen:
 
 Für das `quote`-Container-Image kannst du entweder das verwenden, das du selbst in der vorherigen zusätzlichen Übung erstellt hast, oder das von Seqera Containers.
 
-!!! Hint "Hinweis"
-
-    Eine gute Wahl für den `script`-Block deines getQuote-Prozesses könnte sein:
-        ```groovy
-        script:
-            def safe_author = author.tokenize(' ').join('-')
-            """
-            quote "$author" > quote-${safe_author}.txt
-            echo "-${author}" >> quote-${safe_author}.txt
-            """
-        ```
+:::note[Hinweis]
+Eine gute Wahl für den `script`-Block deines getQuote-Prozesses könnte sein:
+    ```nextflow
+    script:
+        def safe_author = author.tokenize(' ').join('-')
+        """
+        quote "$author" > quote-${safe_author}.txt
+        echo "-${author}" >> quote-${safe_author}.txt
+        """
+    ```
+:::
 
 Eine Lösung zu dieser Übung findest du in `containers/solutions/hello-containers-4.1.nf`.
 
@@ -60,7 +63,7 @@ Eine Lösung zu dieser Übung findest du in `containers/solutions/hello-containe
 Füge deiner Pipeline eine Verzweigungslogik hinzu, damit sie Eingaben sowohl für `quote` als auch für `sayHello` akzeptieren kann.
 Hier ist ein Beispiel, wie du eine `if`-Anweisung in einem Nextflow-Workflow verwendest:
 
-```groovy title="hello-containers.nf"
+```nextflow title="hello-containers.nf"
 workflow {
     if (params.quote) {
         ...
@@ -72,9 +75,9 @@ workflow {
 }
 ```
 
-!!! Hint "Hinweis"
-
-    Du kannst `new_ch = processName.out` verwenden, um dem Ausgabekanal eines Prozesses einen Namen zuzuweisen.
+:::note[Hinweis]
+Du kannst `new_ch = processName.out` verwenden, um dem Ausgabekanal eines Prozesses einen Namen zuzuweisen.
+:::
 
 Eine Lösung zu dieser Übung findest du in `containers/solutions/hello-containers-4.2.nf`.
 

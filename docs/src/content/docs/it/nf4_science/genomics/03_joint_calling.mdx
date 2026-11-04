@@ -1,29 +1,35 @@
-# Parte 3: Joint calling su una coorte
+---
+title: 'Parte 3: Joint calling su una coorte'
+description: In precedenza, avete costruito una pipeline di variant calling per-campione che processava i dati di ciascun campione in modo indipendente.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 In precedenza, avete costruito una pipeline di variant calling per-campione che processava i dati di ciascun campione in modo indipendente.
-Ora la estenderemo per implementare il joint variant calling, come descritto nella [Parte 1](01_method.md) (caso d'uso multi-campione).
+Ora la estenderemo per implementare il joint variant calling, come descritto nella [Parte 1](01_method.mdx) (caso d'uso multi-campione).
 
-??? info "Come iniziare da questa sezione"
+<details class="info">
+<summary>Come iniziare da questa sezione</summary>
 
-    Questa sezione del corso presuppone che abbiate completato la [Parte 1: Panoramica del metodo](./01_method.md), la [Parte 2: Variant calling per-campione](./02_per_sample_variant_calling.md) e che abbiate una pipeline `genomics.nf` funzionante.
+Questa sezione del corso presuppone che abbiate completato la [Parte 1: Panoramica del metodo](./01_method.mdx), la [Parte 2: Variant calling per-campione](./02_per_sample_variant_calling.mdx) e che abbiate una pipeline `genomics.nf` funzionante.
 
-    Se non avete completato la Parte 2 o volete ripartire da zero per questa parte, potete usare la soluzione della Parte 2 come punto di partenza.
-    Eseguite questi comandi dall'interno della directory `nf4-science/genomics/`:
+Se non avete completato la Parte 2 o volete ripartire da zero per questa parte, potete usare la soluzione della Parte 2 come punto di partenza.
+Eseguite questi comandi dall'interno della directory `nf4-science/genomics/`:
 
-    ```bash
-    cp solutions/part2/genomics-2.nf genomics.nf
-    cp solutions/part2/nextflow.config .
-    cp solutions/part2/modules/* modules/
-    ```
+```bash
+cp solutions/part2/genomics-2.nf genomics.nf
+cp solutions/part2/nextflow.config .
+cp solutions/part2/modules/* modules/
+```
 
-    Questo vi fornisce un flusso di lavoro completo di variant calling per-campione.
-    Potete verificare che funzioni correttamente eseguendo il seguente comando:
+Questo vi fornisce un flusso di lavoro completo di variant calling per-campione.
+Potete verificare che funzioni correttamente eseguendo il seguente comando:
 
-    ```bash
-    nextflow run genomics.nf -profile test
-    ```
+```bash
+nextflow run genomics.nf -profile test
+```
+
+</details>
 
 ## Compito
 
@@ -34,11 +40,9 @@ In questa parte del corso, estenderemo il flusso di lavoro per fare quanto segue
 3. Raccogliere tutti i GVCF e combinarli in un data store GenomicsDB
 4. Eseguire il joint genotyping sul data store GVCF combinato per produrre un VCF a livello di coorte
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
-</figure>
+![](../../../nf4_science/genomics/img/hello-gatk-2.excalidraw.svg)
 
-Questo implementa il metodo descritto nella [Parte 1: Panoramica del metodo](./01_method.md) (seconda sezione che copre il caso d'uso multi-campione) e si basa direttamente sul flusso di lavoro prodotto dalla [Parte 2: Variant calling per-campione](./02_per_sample_variant_calling.md).
+Questo implementa il metodo descritto nella [Parte 1: Panoramica del metodo](./01_method.mdx) (seconda sezione che copre il caso d'uso multi-campione) e si basa direttamente sul flusso di lavoro prodotto dalla [Parte 2: Variant calling per-campione](./02_per_sample_variant_calling.mdx).
 
 ## Piano della lezione
 
@@ -49,12 +53,12 @@ Abbiamo suddiviso questo in due fasi:
 2. **Aggiungere un passaggio di joint genotyping che combina e genotipizza i GVCF per-campione.**
    Questo introduce l'operatore `collect()`, le closure Groovy per la costruzione della riga di comando e i processi multi-comando.
 
-Questo automatizza i passaggi della seconda sezione della [Parte 1: Panoramica del metodo](./01_method.md#2-joint-calling-on-a-cohort), dove avete eseguito questi comandi manualmente nei loro container.
+Questo automatizza i passaggi della seconda sezione della [Parte 1: Panoramica del metodo](./01_method.mdx#2-joint-calling-su-una-coorte), dove avete eseguito questi comandi manualmente nei loro container.
 
-!!! tip "Suggerimento"
-
-    Assicuratevi di essere nella directory di lavoro corretta:
-    `cd /workspaces/training/nf4-science/genomics`
+:::tip[Suggerimento]
+Assicuratevi di essere nella directory di lavoro corretta:
+`cd /workspaces/training/nf4-science/genomics`
+:::
 
 ---
 
@@ -63,7 +67,7 @@ Questo automatizza i passaggi della seconda sezione della [Parte 1: Panoramica d
 La pipeline della Parte 2 produce file VCF, ma il joint calling richiede file GVCF.
 Dobbiamo attivare la modalità di variant calling GVCF e aggiornare l'estensione del file di output.
 
-Ricordate il comando di variant calling GVCF dalla [Parte 1](01_method.md):
+Ricordate il comando di variant calling GVCF dalla [Parte 1](01_method.mdx):
 
 ```bash
 gatk HaplotypeCaller \
@@ -85,51 +89,51 @@ Aprite il file modulo `modules/gatk_haplotypecaller.nf` per apportare due modifi
 
 Assicuratevi di aggiungere una barra rovesciata (`\`) alla fine della riga precedente quando aggiungete `-ERC GVCF`.
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="22" hl_lines="5 7"
-        """
-        gatk HaplotypeCaller \
-            -R ${ref_fasta} \
-            -I ${input_bam} \
-            -O ${input_bam}.g.vcf \
-            -L ${interval_list} \
-            -ERC GVCF
-        """
-    ```
+```nextflow {5} title="modules/gatk_haplotypecaller.nf" showLineNumbers startLineNumber=22 step="Prima"
+    """
+    gatk HaplotypeCaller \
+        -R ${ref_fasta} \
+        -I ${input_bam} \
+        -O ${input_bam}.vcf \
+        -L ${interval_list}
+    """
+```
 
-=== "Prima"
+```nextflow {5,7} title="modules/gatk_haplotypecaller.nf" showLineNumbers startLineNumber=22 step="Dopo"
+    """
+    gatk HaplotypeCaller \
+        -R ${ref_fasta} \
+        -I ${input_bam} \
+        -O ${input_bam}.g.vcf \
+        -L ${interval_list} \
+        -ERC GVCF
+    """
+```
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="22" hl_lines="5"
-        """
-        gatk HaplotypeCaller \
-            -R ${ref_fasta} \
-            -I ${input_bam} \
-            -O ${input_bam}.vcf \
-            -L ${interval_list}
-        """
-    ```
+</CodeWalkthrough>
 
 Dobbiamo anche aggiornare il blocco output per corrispondere alla nuova estensione del file.
 Poiché abbiamo cambiato l'output del comando da `.vcf` a `.g.vcf`, il blocco `output:` del processo deve riflettere lo stesso cambiamento.
 
 ### 1.2. Aggiornare l'estensione del file di output nel blocco outputs del processo
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="17" hl_lines="2 3"
-        output:
-        path "${input_bam}.g.vcf"     , emit: vcf
-        path "${input_bam}.g.vcf.idx" , emit: idx
-    ```
+```nextflow {2,3} title="modules/gatk_haplotypecaller.nf" showLineNumbers startLineNumber=17 step="Prima"
+    output:
+    path "${input_bam}.vcf"     , emit: vcf
+    path "${input_bam}.vcf.idx" , emit: idx
+```
 
-=== "Prima"
+```nextflow {2,3} title="modules/gatk_haplotypecaller.nf" showLineNumbers startLineNumber=17 step="Dopo"
+    output:
+    path "${input_bam}.g.vcf"     , emit: vcf
+    path "${input_bam}.g.vcf.idx" , emit: idx
+```
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="17" hl_lines="2 3"
-        output:
-        path "${input_bam}.vcf"     , emit: vcf
-        path "${input_bam}.vcf.idx" , emit: idx
-    ```
+</CodeWalkthrough>
 
 Dobbiamo anche aggiornare la configurazione di publish e output del flusso di lavoro per riflettere i nuovi output GVCF.
 
@@ -138,23 +142,23 @@ Dobbiamo anche aggiornare la configurazione di publish e output del flusso di la
 Poiché ora stiamo producendo GVCF invece di VCF, dovremmo aggiornare la sezione `publish:` del flusso di lavoro per usare nomi più descrittivi.
 Organizzeremo anche i file GVCF nella loro sottodirectory per maggiore chiarezza.
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="47" hl_lines="3 4"
-        publish:
-        indexed_bam = SAMTOOLS_INDEX.out
-        gvcf = GATK_HAPLOTYPECALLER.out.vcf
-        gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=47 step="Prima"
+    publish:
+    indexed_bam = SAMTOOLS_INDEX.out
+    vcf = GATK_HAPLOTYPECALLER.out.vcf
+    vcf_idx = GATK_HAPLOTYPECALLER.out.idx
+```
 
-=== "Prima"
+```nextflow {3,4} title="genomics.nf" showLineNumbers startLineNumber=47 step="Dopo"
+    publish:
+    indexed_bam = SAMTOOLS_INDEX.out
+    gvcf = GATK_HAPLOTYPECALLER.out.vcf
+    gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
+```
 
-    ```groovy title="genomics.nf" linenums="47"
-        publish:
-        indexed_bam = SAMTOOLS_INDEX.out
-        vcf = GATK_HAPLOTYPECALLER.out.vcf
-        vcf_idx = GATK_HAPLOTYPECALLER.out.idx
-    ```
+</CodeWalkthrough>
 
 Ora aggiorniamo il blocco output per corrispondere.
 
@@ -162,37 +166,37 @@ Ora aggiorniamo il blocco output per corrispondere.
 
 Dobbiamo anche aggiornare il blocco `output` per mettere i file GVCF in una sottodirectory `gvcf`.
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="53" hl_lines="3 5 6 8 9"
-    output {
-        indexed_bam {
-            path 'indexed_bam'
-        }
-        gvcf {
-            path 'gvcf'
-        }
-        gvcf_idx {
-            path 'gvcf'
-        }
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=53 step="Prima"
+output {
+    indexed_bam {
+        path 'bam'
     }
-    ```
-
-=== "Prima"
-
-    ```groovy title="genomics.nf" linenums="53"
-    output {
-        indexed_bam {
-            path 'bam'
-        }
-        vcf {
-            path 'vcf'
-        }
-        vcf_idx {
-            path 'vcf'
-        }
+    vcf {
+        path 'vcf'
     }
-    ```
+    vcf_idx {
+        path 'vcf'
+    }
+}
+```
+
+```nextflow {3,5,6,8,9} title="genomics.nf" showLineNumbers startLineNumber=53 step="Dopo"
+output {
+    indexed_bam {
+        path 'indexed_bam'
+    }
+    gvcf {
+        path 'gvcf'
+    }
+    gvcf_idx {
+        path 'gvcf'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 Con il modulo, i target di publish e il blocco output tutti aggiornati, possiamo testare le modifiche.
 
@@ -202,60 +206,59 @@ Eseguite il flusso di lavoro per verificare che le modifiche funzionino.
 
 ```bash
 nextflow run genomics.nf -profile test
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `genomics.nf` [crazy_solvay] revision: 1fa50d94ef
+
+executor >  local (6)
+[9f/c67a60] SAMTOOLS_INDEX (2)       | 3 of 3 ✔
+[47/a20c52] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/genomics/results
+
+  indexed_bam:
+    - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]
+    - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]
+    - [indexed_bam/reads_father.bam, indexed_bam/reads_father.bam.bai]
+
+  gvcf:
+    - gvcf/reads_son.bam.g.vcf
+    - gvcf/reads_father.bam.g.vcf
+    - gvcf/reads_mother.bam.g.vcf
+
+  gvcf_idx:
+    - gvcf/reads_son.bam.g.vcf.idx
+    - gvcf/reads_father.bam.g.vcf.idx
+    - gvcf/reads_mother.bam.g.vcf.idx
 ```
-
-??? success "Output del comando"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `genomics.nf` [crazy_solvay] revision: 1fa50d94ef
-
-    executor >  local (6)
-    [9f/c67a60] SAMTOOLS_INDEX (2)       | 3 of 3 ✔
-    [47/a20c52] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/genomics/results
-
-      indexed_bam:
-        - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]
-        - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]
-        - [indexed_bam/reads_father.bam, indexed_bam/reads_father.bam.bai]
-
-      gvcf:
-        - gvcf/reads_son.bam.g.vcf
-        - gvcf/reads_father.bam.g.vcf
-        - gvcf/reads_mother.bam.g.vcf
-
-      gvcf_idx:
-        - gvcf/reads_son.bam.g.vcf.idx
-        - gvcf/reads_father.bam.g.vcf.idx
-        - gvcf/reads_mother.bam.g.vcf.idx
-    ```
 
 L'output di Nextflow appare uguale a prima, ma i file `.g.vcf` e i loro file indice sono ora organizzati in sottodirectory.
 
-??? abstract "Contenuto della directory (symlink abbreviati)"
+<details class="abstract">
+<summary>Contenuto della directory (symlink abbreviati)</summary>
 
-    ```console
-    results/
-    ├── gvcf/
-    │   ├── reads_father.bam.g.vcf -> */0d/e1b164*/reads_father.bam.g.vcf
-    │   ├── reads_father.bam.g.vcf.idx -> */0d/e1b164*/reads_father.bam.g.vcf.idx
-    │   ├── reads_mother.bam.g.vcf -> */47/a20c52*/reads_mother.bam.g.vcf
-    │   ├── reads_mother.bam.g.vcf.idx -> */47/a20c52*/reads_mother.bam.g.vcf.idx
-    │   ├── reads_son.bam.g.vcf -> */a6/d2a73e*/reads_son.bam.g.vcf
-    │   └── reads_son.bam.g.vcf.idx -> */a6/d2a73e*/reads_son.bam.g.vcf.idx
-    └── indexed_bam/
-        ├── reads_father.bam -> */9f/c67a60*/reads_father.bam
-        ├── reads_father.bam.bai -> */9f/c67a60*/reads_father.bam.bai
-        ├── reads_mother.bam -> */bb/13a815*/reads_mother.bam
-        ├── reads_mother.bam.bai -> */bb/13a815*/reads_mother.bam.bai
-        ├── reads_son.bam -> */b3/27e144*/reads_son.bam
-        └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
-    ```
+```console
+results/
+├── gvcf/
+│   ├── reads_father.bam.g.vcf -> */0d/e1b164*/reads_father.bam.g.vcf
+│   ├── reads_father.bam.g.vcf.idx -> */0d/e1b164*/reads_father.bam.g.vcf.idx
+│   ├── reads_mother.bam.g.vcf -> */47/a20c52*/reads_mother.bam.g.vcf
+│   ├── reads_mother.bam.g.vcf.idx -> */47/a20c52*/reads_mother.bam.g.vcf.idx
+│   ├── reads_son.bam.g.vcf -> */a6/d2a73e*/reads_son.bam.g.vcf
+│   └── reads_son.bam.g.vcf.idx -> */a6/d2a73e*/reads_son.bam.g.vcf.idx
+└── indexed_bam/
+    ├── reads_father.bam -> */9f/c67a60*/reads_father.bam
+    ├── reads_father.bam.bai -> */9f/c67a60*/reads_father.bam.bai
+    ├── reads_mother.bam -> */bb/13a815*/reads_mother.bam
+    ├── reads_mother.bam.bai -> */bb/13a815*/reads_mother.bam.bai
+    ├── reads_son.bam -> */b3/27e144*/reads_son.bam
+    └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
+```
+
+</details>
 
 Se aprite uno dei file GVCF e scorrete attraverso di esso, potete verificare che GATK HaplotypeCaller abbia prodotto file GVCF come richiesto.
 
@@ -272,10 +275,10 @@ Imparate a raccogliere i contenuti di un canale e passarli al processo successiv
 ## 2. Aggiungere un passaggio di joint genotyping
 
 Ora dobbiamo raccogliere i GVCF per-campione, combinarli in un data store GenomicsDB ed eseguire il joint genotyping per produrre un VCF a livello di coorte.
-Come trattato nella [Parte 1](01_method.md), questa è un'operazione a due strumenti: GenomicsDBImport combina i GVCF, poi GenotypeGVCFs produce le chiamate di varianti finali.
+Come trattato nella [Parte 1](01_method.mdx), questa è un'operazione a due strumenti: GenomicsDBImport combina i GVCF, poi GenotypeGVCFs produce le chiamate di varianti finali.
 Incapsuleremo entrambi gli strumenti in un singolo processo chiamato `GATK_JOINTGENOTYPING`.
 
-Ricordate i due comandi dalla [Parte 1](01_method.md):
+Ricordate i due comandi dalla [Parte 1](01_method.mdx):
 
 ```bash
 gatk GenomicsDBImport \
@@ -306,22 +309,22 @@ Il processo di joint genotyping necessita di due tipi di input che non abbiamo a
 Dobbiamo fornire un nome arbitrario per la coorte.
 Più avanti nella serie di formazione imparerete come usare i metadati dei campioni per questo tipo di cose, ma per ora dichiariamo semplicemente un parametro CLI usando `params`.
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="18" hl_lines="3-4"
-        intervals: Path
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=18 step="Prima"
+    intervals: Path
+}
+```
 
-        // Nome base per il file di output finale
-        cohort_name: String
-    }
-    ```
+```nextflow {3-4} title="genomics.nf" showLineNumbers startLineNumber=18 step="Dopo"
+    intervals: Path
 
-=== "Prima"
+    // Nome base per il file di output finale
+    cohort_name: String
+}
+```
 
-    ```groovy title="genomics.nf" linenums="18"
-        intervals: Path
-    }
-    ```
+</CodeWalkthrough>
 
 Useremo questo parametro per nominare il file di output finale.
 
@@ -329,30 +332,30 @@ Useremo questo parametro per nominare il file di output finale.
 
 Aggiungiamo anche un valore predefinito per il parametro `cohort_name` nel profilo test:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="4" hl_lines="7"
-    test {
-        params.input = "${projectDir}/data/samplesheet.csv"
-        params.reference = "${projectDir}/data/ref/ref.fasta"
-        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-        params.reference_dict = "${projectDir}/data/ref/ref.dict"
-        params.intervals = "${projectDir}/data/ref/intervals.bed"
-        params.cohort_name = "family_trio"
-    }
-    ```
+```nextflow title="nextflow.config" showLineNumbers startLineNumber=4 step="Prima"
+test {
+    params.input = "${projectDir}/data/samplesheet.csv"
+    params.reference = "${projectDir}/data/ref/ref.fasta"
+    params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+    params.reference_dict = "${projectDir}/data/ref/ref.dict"
+    params.intervals = "${projectDir}/data/ref/intervals.bed"
+}
+```
 
-=== "Prima"
+```nextflow {7} title="nextflow.config" showLineNumbers startLineNumber=4 step="Dopo"
+test {
+    params.input = "${projectDir}/data/samplesheet.csv"
+    params.reference = "${projectDir}/data/ref/ref.fasta"
+    params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+    params.reference_dict = "${projectDir}/data/ref/ref.dict"
+    params.intervals = "${projectDir}/data/ref/intervals.bed"
+    params.cohort_name = "family_trio"
+}
+```
 
-    ```groovy title="nextflow.config" linenums="4"
-    test {
-        params.input = "${projectDir}/data/samplesheet.csv"
-        params.reference = "${projectDir}/data/ref/ref.fasta"
-        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-        params.reference_dict = "${projectDir}/data/ref/ref.dict"
-        params.intervals = "${projectDir}/data/ref/intervals.bed"
-    }
-    ```
+</CodeWalkthrough>
 
 Successivamente, dovremo raccogliere gli output per-campione in modo che possano essere processati insieme.
 
@@ -364,23 +367,23 @@ Vogliamo raggruppare tutti e tre i GVCF (e i loro file indice) in modo che Nextf
 Possiamo farlo usando l'operatore di canale `collect()`.
 Aggiungete le seguenti righe al corpo del `workflow`, subito dopo la chiamata a GATK_HAPLOTYPECALLER:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="48" hl_lines="4-6"
-            intervals_file
-        )
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=48 step="Prima"
+        intervals_file
+    )
+```
 
-        // Raccoglie gli output di variant calling attraverso i campioni
-        all_gvcfs_ch = GATK_HAPLOTYPECALLER.out.vcf.collect()
-        all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
-    ```
+```nextflow {4-6} title="genomics.nf" showLineNumbers startLineNumber=48 step="Dopo"
+        intervals_file
+    )
 
-=== "Prima"
+    // Raccoglie gli output di variant calling attraverso i campioni
+    all_gvcfs_ch = GATK_HAPLOTYPECALLER.out.vcf.collect()
+    all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
+```
 
-    ```groovy title="genomics.nf" linenums="48"
-            intervals_file
-        )
-    ```
+</CodeWalkthrough>
 
 Scomponendo questo:
 
@@ -390,9 +393,9 @@ Scomponendo questo:
 
 Possiamo raccogliere i GVCF e i loro file indice separatamente (invece di tenerli insieme in tuple) perché Nextflow metterà in stage tutti i file di input insieme per l'esecuzione, quindi i file indice saranno presenti accanto ai GVCF.
 
-!!! tip "Suggerimento"
-
-    Potete usare l'operatore `view()` per ispezionare i contenuti dei canali prima e dopo l'applicazione degli operatori di canale.
+:::tip[Suggerimento]
+Potete usare l'operatore `view()` per ispezionare i contenuti dei canali prima e dopo l'applicazione degli operatori di canale.
+:::
 
 ### 2.2. Scrivere il processo di joint genotyping e chiamarlo nel flusso di lavoro
 
@@ -413,20 +416,20 @@ gatk GenomicsDBImport \
 
 Se dovessimo scrivere `-V ${all_gvcfs_ch}`, Nextflow concatenerebbe semplicemente i nomi dei file e quella parte del comando apparirebbe così:
 
-```groovy
+```nextflow
 -V reads_mother.bam.g.vcf reads_father.bam.g.vcf reads_son.bam.g.vcf
 ```
 
 Ma abbiamo bisogno che la stringa appaia così:
 
-```groovy
+```nextflow
 -V reads_mother.bam.g.vcf -V reads_father.bam.g.vcf -V reads_son.bam.g.vcf
 ```
 
 Importante, dobbiamo costruire questa stringa dinamicamente da qualunque file sia nel canale raccolto.
 Nextflow (tramite Groovy) fornisce un modo conciso per farlo:
 
-```groovy
+```nextflow
 def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
 ```
 
@@ -449,70 +452,70 @@ Aprite `modules/gatk_jointgenotyping.nf` ed esaminate la struttura della definiz
 
 Procedete e riempite la definizione del processo usando le informazioni fornite sopra, poi verificate il vostro lavoro confrontandolo con la soluzione nella scheda "Dopo" qui sotto.
 
-=== "Prima"
+<CodeWalkthrough>
 
-    ```groovy title="modules/gatk_jointgenotyping.nf" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/gatk_jointgenotyping.nf" showLineNumbers step="Prima"
+#!/usr/bin/env nextflow
 
-    /*
-     * Combina i GVCF in un datastore GenomicsDB ed esegue il joint genotyping per produrre chiamate a livello di coorte
-     */
-    process GATK_JOINTGENOTYPING {
+/*
+ * Combina i GVCF in un datastore GenomicsDB ed esegue il joint genotyping per produrre chiamate a livello di coorte
+ */
+process GATK_JOINTGENOTYPING {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-=== "Dopo"
+```nextflow {8,11-17,20-21,24-25,29-33} title="modules/gatk_jointgenotyping.nf" showLineNumbers step="Dopo"
+#!/usr/bin/env nextflow
 
-    ```groovy title="modules/gatk_jointgenotyping.nf" linenums="1" hl_lines="8 11-17 20-21 24-25 29-33"
-    #!/usr/bin/env nextflow
+/*
+ * Combina i GVCF in un datastore GenomicsDB ed esegue il joint genotyping per produrre chiamate a livello di coorte
+ */
+process GATK_JOINTGENOTYPING {
 
-    /*
-     * Combina i GVCF in un datastore GenomicsDB ed esegue il joint genotyping per produrre chiamate a livello di coorte
-     */
-    process GATK_JOINTGENOTYPING {
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-        container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+    input:
+    path all_gvcfs
+    path all_idxs
+    path interval_list
+    val cohort_name
+    path ref_fasta
+    path ref_index
+    path ref_dict
 
-        input:
-        path all_gvcfs
-        path all_idxs
-        path interval_list
-        val cohort_name
-        path ref_fasta
-        path ref_index
-        path ref_dict
+    output:
+    path "${cohort_name}.joint.vcf"     , emit: vcf
+    path "${cohort_name}.joint.vcf.idx" , emit: idx
 
-        output:
-        path "${cohort_name}.joint.vcf"     , emit: vcf
-        path "${cohort_name}.joint.vcf.idx" , emit: idx
+    script:
+    def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
+    """
+    gatk GenomicsDBImport \
+        ${gvcfs_line} \
+        -L ${interval_list} \
+        --genomicsdb-workspace-path ${cohort_name}_gdb
 
-        script:
-        def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
-        """
-        gatk GenomicsDBImport \
-            ${gvcfs_line} \
-            -L ${interval_list} \
-            --genomicsdb-workspace-path ${cohort_name}_gdb
+    gatk GenotypeGVCFs \
+        -R ${ref_fasta} \
+        -V gendb://${cohort_name}_gdb \
+        -L ${interval_list} \
+        -O ${cohort_name}.joint.vcf
+    """
+}
+```
 
-        gatk GenotypeGVCFs \
-            -R ${ref_fasta} \
-            -V gendb://${cohort_name}_gdb \
-            -L ${interval_list} \
-            -O ${cohort_name}.joint.vcf
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 Ci sono diverse cose che vale la pena evidenziare qui.
 
@@ -532,22 +535,22 @@ Per usarlo nel flusso di lavoro, dovrete importare il modulo e aggiungere una ch
 
 Aggiungete l'istruzione import a `genomics.nf`, sotto le istruzioni import esistenti:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="3" hl_lines="4"
-    // Module INCLUDE statements
-    include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
-    include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
-    include { GATK_JOINTGENOTYPING } from './modules/gatk_jointgenotyping.nf'
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=3 step="Prima"
+// Module INCLUDE statements
+include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
+include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
+```
 
-=== "Prima"
+```nextflow {4} title="genomics.nf" showLineNumbers startLineNumber=3 step="Dopo"
+// Module INCLUDE statements
+include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
+include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
+include { GATK_JOINTGENOTYPING } from './modules/gatk_jointgenotyping.nf'
+```
 
-    ```groovy title="genomics.nf" linenums="3"
-    // Module INCLUDE statements
-    include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
-    include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
-    ```
+</CodeWalkthrough>
 
 Il processo è ora disponibile nello scope del flusso di lavoro.
 
@@ -555,28 +558,28 @@ Il processo è ora disponibile nello scope del flusso di lavoro.
 
 Aggiungete la chiamata a `GATK_JOINTGENOTYPING` nel corpo del flusso di lavoro, dopo le righe `collect()`:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="53" hl_lines="3-12"
-        all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=53 step="Prima"
+    all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
+```
 
-        // Combina i GVCF in un data store GenomicsDB e applica il joint genotyping
-        GATK_JOINTGENOTYPING(
-            all_gvcfs_ch,
-            all_idxs_ch,
-            intervals_file,
-            params.cohort_name,
-            ref_file,
-            ref_index_file,
-            ref_dict_file
-        )
-    ```
+```nextflow {3-12} title="genomics.nf" showLineNumbers startLineNumber=53 step="Dopo"
+    all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
 
-=== "Prima"
+    // Combina i GVCF in un data store GenomicsDB e applica il joint genotyping
+    GATK_JOINTGENOTYPING(
+        all_gvcfs_ch,
+        all_idxs_ch,
+        intervals_file,
+        params.cohort_name,
+        ref_file,
+        ref_index_file,
+        ref_dict_file
+    )
+```
 
-    ```groovy title="genomics.nf" linenums="53"
-        all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
-    ```
+</CodeWalkthrough>
 
 Il processo è ora completamente collegato.
 Successivamente, configuriamo come vengono pubblicati gli output.
@@ -590,25 +593,25 @@ Aggiungete target di publish e voci del blocco output per i risultati del joint 
 
 Aggiungete il VCF joint e il suo indice alla sezione `publish:` del flusso di lavoro:
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="66" hl_lines="5-6"
-        publish:
-        indexed_bam = SAMTOOLS_INDEX.out
-        gvcf = GATK_HAPLOTYPECALLER.out.vcf
-        gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
-        joint_vcf = GATK_JOINTGENOTYPING.out.vcf
-        joint_vcf_idx = GATK_JOINTGENOTYPING.out.idx
-    ```
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=66 step="Prima"
+    publish:
+    indexed_bam = SAMTOOLS_INDEX.out
+    gvcf = GATK_HAPLOTYPECALLER.out.vcf
+    gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
+```
 
-=== "Prima"
+```nextflow {5-6} title="genomics.nf" showLineNumbers startLineNumber=66 step="Dopo"
+    publish:
+    indexed_bam = SAMTOOLS_INDEX.out
+    gvcf = GATK_HAPLOTYPECALLER.out.vcf
+    gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
+    joint_vcf = GATK_JOINTGENOTYPING.out.vcf
+    joint_vcf_idx = GATK_JOINTGENOTYPING.out.idx
+```
 
-    ```groovy title="genomics.nf" linenums="66"
-        publish:
-        indexed_bam = SAMTOOLS_INDEX.out
-        gvcf = GATK_HAPLOTYPECALLER.out.vcf
-        gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
-    ```
+</CodeWalkthrough>
 
 Ora aggiornate il blocco output per corrispondere.
 
@@ -617,43 +620,43 @@ Ora aggiornate il blocco output per corrispondere.
 Aggiungete voci per i file VCF joint.
 Li metteremo alla radice della directory results poiché questo è l'output finale.
 
-=== "Dopo"
+<CodeWalkthrough>
 
-    ```groovy title="genomics.nf" linenums="74" hl_lines="11-16"
-    output {
-        indexed_bam {
-            path 'indexed_bam'
-        }
-        gvcf {
-            path 'gvcf'
-        }
-        gvcf_idx {
-            path 'gvcf'
-        }
-        joint_vcf {
-            path '.'
-        }
-        joint_vcf_idx {
-            path '.'
-        }
+```nextflow title="genomics.nf" showLineNumbers startLineNumber=74 step="Prima"
+output {
+    indexed_bam {
+        path 'indexed_bam'
     }
-    ```
-
-=== "Prima"
-
-    ```groovy title="genomics.nf" linenums="74"
-    output {
-        indexed_bam {
-            path 'indexed_bam'
-        }
-        gvcf {
-            path 'gvcf'
-        }
-        gvcf_idx {
-            path 'gvcf'
-        }
+    gvcf {
+        path 'gvcf'
     }
-    ```
+    gvcf_idx {
+        path 'gvcf'
+    }
+}
+```
+
+```nextflow {11-16} title="genomics.nf" showLineNumbers startLineNumber=74 step="Dopo"
+output {
+    indexed_bam {
+        path 'indexed_bam'
+    }
+    gvcf {
+        path 'gvcf'
+    }
+    gvcf_idx {
+        path 'gvcf'
+    }
+    joint_vcf {
+        path '.'
+    }
+    joint_vcf_idx {
+        path '.'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 Con il processo, i target di publish e il blocco output tutti a posto, possiamo testare il flusso di lavoro completo.
 
@@ -663,72 +666,71 @@ Eseguite il flusso di lavoro per verificare che tutto funzioni.
 
 ```bash
 nextflow run genomics.nf -profile test -resume
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `genomics.nf` [maniac_shaw] revision: 7c1f77a8bc
+
+executor >  local (1)
+[9f/c67a60] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
+[a6/d2a73e] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
+[2a/6052e7] GATK_JOINTGENOTYPING     | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/genomics/results
+
+  indexed_bam:
+    - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]
+    - [indexed_bam/reads_father.bam, indexed_bam/reads_father.bam.bai]
+    - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]
+
+  gvcf:
+    - gvcf/reads_father.bam.g.vcf
+    - gvcf/reads_mother.bam.g.vcf
+    - gvcf/reads_son.bam.g.vcf
+
+  gvcf_idx:
+    - gvcf/reads_father.bam.g.vcf.idx
+    - gvcf/reads_mother.bam.g.vcf.idx
+    - gvcf/reads_son.bam.g.vcf.idx
+
+  joint_vcf: family_trio.joint.vcf
+
+  joint_vcf_idx: family_trio.joint.vcf.idx
 ```
-
-??? success "Output del comando"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `genomics.nf` [maniac_shaw] revision: 7c1f77a8bc
-
-    executor >  local (1)
-    [9f/c67a60] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
-    [a6/d2a73e] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
-    [2a/6052e7] GATK_JOINTGENOTYPING     | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/genomics/results
-
-      indexed_bam:
-        - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]
-        - [indexed_bam/reads_father.bam, indexed_bam/reads_father.bam.bai]
-        - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]
-
-      gvcf:
-        - gvcf/reads_father.bam.g.vcf
-        - gvcf/reads_mother.bam.g.vcf
-        - gvcf/reads_son.bam.g.vcf
-
-      gvcf_idx:
-        - gvcf/reads_father.bam.g.vcf.idx
-        - gvcf/reads_mother.bam.g.vcf.idx
-        - gvcf/reads_son.bam.g.vcf.idx
-
-      joint_vcf: family_trio.joint.vcf
-
-      joint_vcf_idx: family_trio.joint.vcf.idx
-    ```
 
 I primi due passaggi sono in cache dall'esecuzione precedente, e il nuovo passaggio `GATK_JOINTGENOTYPING` viene eseguito una volta sugli input raccolti da tutti e tre i campioni.
 Il file di output finale, `family_trio.joint.vcf` (e il suo indice), sono nella directory results.
 
-??? abstract "Contenuto della directory (symlink abbreviati)"
+<details class="abstract">
+<summary>Contenuto della directory (symlink abbreviati)</summary>
 
-    ```console
-    results/
-    ├── family_trio.joint.vcf -> */2a/6052e7*/family_trio.joint.vcf
-    ├── family_trio.joint.vcf.idx -> */2a/6052e7*/family_trio.joint.vcf.idx
-    ├── gvcf/
-    │   ├── reads_father.bam.g.vcf -> */0d/e1b164*/reads_father.bam.g.vcf
-    │   ├── reads_father.bam.g.vcf.idx -> */0d/e1b164*/reads_father.bam.g.vcf.idx
-    │   ├── reads_mother.bam.g.vcf -> */47/a20c52*/reads_mother.bam.g.vcf
-    │   ├── reads_mother.bam.g.vcf.idx -> */47/a20c52*/reads_mother.bam.g.vcf.idx
-    │   ├── reads_son.bam.g.vcf -> */a6/d2a73e*/reads_son.bam.g.vcf
-    │   └── reads_son.bam.g.vcf.idx -> */a6/d2a73e*/reads_son.bam.g.vcf.idx
-    └── indexed_bam/
-        ├── reads_father.bam -> */9f/c67a60*/reads_father.bam
-        ├── reads_father.bam.bai -> */9f/c67a60*/reads_father.bam.bai
-        ├── reads_mother.bam -> */bb/13a815*/reads_mother.bam
-        ├── reads_mother.bam.bai -> */bb/13a815*/reads_mother.bam.bai
-        ├── reads_son.bam -> */b3/27e144*/reads_son.bam
-        └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
-    ```
+```console
+results/
+├── family_trio.joint.vcf -> */2a/6052e7*/family_trio.joint.vcf
+├── family_trio.joint.vcf.idx -> */2a/6052e7*/family_trio.joint.vcf.idx
+├── gvcf/
+│   ├── reads_father.bam.g.vcf -> */0d/e1b164*/reads_father.bam.g.vcf
+│   ├── reads_father.bam.g.vcf.idx -> */0d/e1b164*/reads_father.bam.g.vcf.idx
+│   ├── reads_mother.bam.g.vcf -> */47/a20c52*/reads_mother.bam.g.vcf
+│   ├── reads_mother.bam.g.vcf.idx -> */47/a20c52*/reads_mother.bam.g.vcf.idx
+│   ├── reads_son.bam.g.vcf -> */a6/d2a73e*/reads_son.bam.g.vcf
+│   └── reads_son.bam.g.vcf.idx -> */a6/d2a73e*/reads_son.bam.g.vcf.idx
+└── indexed_bam/
+    ├── reads_father.bam -> */9f/c67a60*/reads_father.bam
+    ├── reads_father.bam.bai -> */9f/c67a60*/reads_father.bam.bai
+    ├── reads_mother.bam -> */bb/13a815*/reads_mother.bam
+    ├── reads_mother.bam.bai -> */bb/13a815*/reads_mother.bam.bai
+    ├── reads_son.bam -> */b3/27e144*/reads_son.bam
+    └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
+```
+
+</details>
 
 Se aprite il file VCF joint, potete verificare che il flusso di lavoro abbia prodotto le chiamate di varianti attese.
 
-```console title="family_trio.joint.vcf" linenums="40"
+```console title="family_trio.joint.vcf" showLineNumbers startLineNumber=40
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_father	reads_mother	reads_son
 20_10037292_10066351	3480	.	C	CT	1625.89	.	AC=5;AF=0.833;AN=6;BaseQRankSum=0.220;DP=85;ExcessHet=0.0000;FS=2.476;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=21.68;ReadPosRankSum=-1.147e+00;SOR=0.487	GT:AD:DP:GQ:PL	0/1:15,16:31:99:367,0,375	1/1:0,18:18:54:517,54,0	1/1:0,26:26:78:756,78,0
 20_10037292_10066351	3520	.	AT	A	1678.89	.	AC=5;AF=0.833;AN=6;BaseQRankSum=1.03;DP=80;ExcessHet=0.0000;FS=2.290;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=22.39;ReadPosRankSum=0.701;SOR=0.730	GT:AD:DP:GQ:PL	0/1:18,13:31:99:296,0,424	1/1:0,18:18:54:623,54,0	1/1:0,26:26:78:774,78,0
@@ -737,11 +739,11 @@ Se aprite il file VCF joint, potete verificare che il flusso di lavoro abbia pro
 
 Ora avete un flusso di lavoro di joint variant calling automatizzato e completamente riproducibile!
 
-!!! note "Nota"
-
-    Tenete presente che i file di dati che vi abbiamo fornito coprono solo una piccola porzione del cromosoma 20.
-    La dimensione reale di un callset di varianti sarebbe contata in milioni di varianti.
-    Ecco perché usiamo solo piccoli sottoinsiemi di dati per scopi di formazione!
+:::note[Nota]
+Tenete presente che i file di dati che vi abbiamo fornito coprono solo una piccola porzione del cromosoma 20.
+La dimensione reale di un callset di varianti sarebbe contata in milioni di varianti.
+Ecco perché usiamo solo piccoli sottoinsiemi di dati per scopi di formazione!
+:::
 
 ### Takeaway
 
@@ -752,4 +754,4 @@ Sapete anche come costruire una riga di comando usando le closure Groovy, e come
 
 Datevi una grande pacca sulla spalla! Avete completato il corso Nextflow for Genomics.
 
-Passate al [riepilogo finale del corso](./next_steps.md) per rivedere ciò che avete imparato e scoprire cosa viene dopo.
+Passate al [riepilogo finale del corso](./next_steps.mdx) per rivedere ciò che avete imparato e scoprire cosa viene dopo.

@@ -1,16 +1,22 @@
-# Część 4: Hello Modules
+---
+title: 'Część 4: Hello Modules'
+description: Ta sekcja opisuje, jak organizować kod workflow'u, aby rozwój i utrzymanie pipeline'u było bardziej efektywne i zrównoważone.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+<figure>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
+<figcaption>
 
-/// caption
-:fontawesome-brands-youtube:{ .youtube } Zobacz [całą playlistę](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) na kanale YouTube Nextflow.
+Zobacz [całą playlistę](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) na kanale YouTube Nextflow.
 
-:green_book: Transkrypcja wideo jest dostępna [tutaj](./transcripts/04_hello_modules.md).
-///
+📗 Transkrypcja wideo jest dostępna [tutaj](./transcripts/04_hello_modules.mdx).
+
+</figcaption>
+</figure>
 
 Ta sekcja opisuje, jak organizować kod workflow'u, aby rozwój i utrzymanie pipeline'u było bardziej efektywne i zrównoważone.
 W szczególności pokażemy, jak używać [**modułów**](https://nextflow.io/docs/latest/module.html).
@@ -22,15 +28,16 @@ Umożliwia to ponowne wykorzystanie definicji procesów w wielu workflow'ach bez
 Kiedy zaczęliśmy rozwijać nasz workflow, napisaliśmy wszystko w jednym pliku kodu.
 Teraz przeniesiemy procesy do indywidualnych modułów.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/modules.svg"
-</figure>
+![](../../hello_nextflow/img/modules.excalidraw.svg)
 
 To sprawi, że nasz kod będzie bardziej współdzielny, elastyczny i łatwy w utrzymaniu.
 
-??? info "Jak zacząć od tej sekcji"
+<details class="info">
+<summary>Jak zacząć od tej sekcji</summary>
 
-    Ta sekcja kursu zakłada, że ukończyłeś Części 1-3 kursu [Hello Nextflow](./index.md), ale jeśli znasz podstawy omówione w tych sekcjach, możesz zacząć od tego miejsca bez dodatkowych przygotowań.
+Ta sekcja kursu zakłada, że ukończyłeś Części 1-3 kursu [Hello Nextflow](./index.mdx), ale jeśli znasz podstawy omówione w tych sekcjach, możesz zacząć od tego miejsca bez dodatkowych przygotowań.
+
+</details>
 
 ---
 
@@ -39,7 +46,7 @@ To sprawi, że nasz kod będzie bardziej współdzielny, elastyczny i łatwy w u
 Użyjemy skryptu workflow'u `hello-modules.nf` jako punktu wyjścia.
 Jest on równoważny skryptowi utworzonemu podczas pracy nad Częścią 3 tego szkolenia, z tą różnicą, że zmieniliśmy miejsca docelowe wyjść:
 
-```groovy title="hello-modules.nf" linenums="37" hl_lines="3 7 11 15"
+```nextflow {3,7,11,15} title="hello-modules.nf" showLineNumbers startLineNumber=37
 output {
     first_output {
         path 'hello_modules'
@@ -64,51 +71,50 @@ Aby upewnić się, że wszystko działa, uruchom skrypt raz przed wprowadzeniem 
 
 ```bash
 nextflow run hello-modules.nf
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-modules.nf` [hopeful_avogadro] revision: b09af1237d
+
+executor >  local (7)
+[0f/8795c9] sayHello (3)       | 3 of 3 ✔
+[6a/eb2510] convertToUpper (3) | 3 of 3 ✔
+[af/479117] collectGreetings   | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_modules/Hola-output.txt
+    - hello_modules/Bonjour-output.txt
+    - hello_modules/Hello-output.txt
+  uppercased:
+    - hello_modules/UPPER-Hola-output.txt
+    - hello_modules/UPPER-Bonjour-output.txt
+    - hello_modules/UPPER-Hello-output.txt
+  collected: hello_modules/COLLECTED-batch-output.txt
+  batch_report: hello_modules/batch-report.txt
 ```
-
-??? success "Wyjście polecenia"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-modules.nf` [hopeful_avogadro] revision: b09af1237d
-
-    executor >  local (7)
-    [0f/8795c9] sayHello (3)       | 3 of 3 ✔
-    [6a/eb2510] convertToUpper (3) | 3 of 3 ✔
-    [af/479117] collectGreetings   | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_modules/Hola-output.txt
-        - hello_modules/Bonjour-output.txt
-        - hello_modules/Hello-output.txt
-      uppercased:
-        - hello_modules/UPPER-Hola-output.txt
-        - hello_modules/UPPER-Bonjour-output.txt
-        - hello_modules/UPPER-Hello-output.txt
-      collected: hello_modules/COLLECTED-batch-output.txt
-      batch_report: hello_modules/batch-report.txt
-    ```
 
 Jak poprzednio, pliki wyjściowe znajdziesz w katalogu określonym w bloku `output` (tutaj `results/hello_modules/`).
 
-??? abstract "Zawartość katalogu"
+<details class="abstract">
+<summary>Zawartość katalogu</summary>
 
-    ```console
-    results/hello_modules/
-    ├── Bonjour-output.txt
-    ├── COLLECTED-batch-output.txt
-    ├── Hello-output.txt
-    ├── Hola-output.txt
-    ├── batch-report.txt
-    ├── UPPER-Bonjour-output.txt
-    ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
-    ```
+```console
+results/hello_modules/
+├── Bonjour-output.txt
+├── COLLECTED-batch-output.txt
+├── Hello-output.txt
+├── Hola-output.txt
+├── batch-report.txt
+├── UPPER-Bonjour-output.txt
+├── UPPER-Hello-output.txt
+└── UPPER-Hola-output.txt
+```
+
+</details>
 
 Jeśli to zadziałało, jesteś gotowy do nauki modularyzacji kodu workflow'u.
 
@@ -146,7 +152,7 @@ To daje nam miejsce na umieszczenie kodu procesu.
 
 Skopiuj całą definicję procesu z pliku workflow'u do pliku modułu.
 
-```groovy title="modules/sayHello.nf" linenums="1"
+```nextflow title="modules/sayHello.nf" showLineNumbers
 /*
  * Użyj echo do wypisania 'Hello World!' do pliku
  */
@@ -171,38 +177,38 @@ Po wykonaniu tego usuń definicję procesu z pliku workflow'u.
 
 Składnia importowania procesu z modułu jest dość prosta:
 
-```groovy title="Syntax: include declaration"
+```nextflow title="Syntax: include declaration"
 include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
 Wstawmy ją powyżej bloku `params` i wypełnijmy odpowiednio.
 
-=== "Po"
+<CodeWalkthrough>
 
-    ```groovy title="hello-modules.nf" linenums="44" hl_lines="1 2"
-    // Dołącz moduły
-    include { sayHello } from './modules/sayHello.nf'
+```nextflow title="hello-modules.nf" showLineNumbers startLineNumber=44 step="Przed"
+/*
+* Pipeline parameters
+*/
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+}
+```
 
-    /*
-    * Pipeline parameters
-    */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-    }
-    ```
+```nextflow {1,2} title="hello-modules.nf" showLineNumbers startLineNumber=44 step="Po"
+// Dołącz moduły
+include { sayHello } from './modules/sayHello.nf'
 
-=== "Przed"
+/*
+* Pipeline parameters
+*/
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+}
+```
 
-    ```groovy title="hello-modules.nf" linenums="44"
-    /*
-    * Pipeline parameters
-    */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-    }
-    ```
+</CodeWalkthrough>
 
 Widzisz, że wypełniliśmy nazwę procesu, `sayHello`, oraz ścieżkę do pliku zawierającego kod modułu, `./modules/sayHello.nf`.
 
@@ -212,34 +218,30 @@ Uruchamiamy workflow z zasadniczo tym samym kodem i wejściami co poprzednio, wi
 
 ```bash
 nextflow run hello-modules.nf -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-modules.nf` [romantic_poisson] revision: 96edfa9ad3
+
+[f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
+[3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
+[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_modules/Hello-output.txt
+    - hello_modules/Bonjour-output.txt
+    - hello_modules/Hola-output.txt
+  uppercased:
+    - hello_modules/UPPER-Hola-output.txt
+    - hello_modules/UPPER-Bonjour-output.txt
+    - hello_modules/UPPER-Hello-output.txt
+  collected: hello_modules/COLLECTED-batch-output.txt
+  batch_report: hello_modules/batch-report.txt
 ```
-
-??? success "Wyjście polecenia"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-modules.nf` [romantic_poisson] revision: 96edfa9ad3
-
-    [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
-    [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
-    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_modules/Hello-output.txt
-        - hello_modules/Bonjour-output.txt
-        - hello_modules/Hola-output.txt
-      uppercased:
-        - hello_modules/UPPER-Hola-output.txt
-        - hello_modules/UPPER-Bonjour-output.txt
-        - hello_modules/UPPER-Hello-output.txt
-      collected: hello_modules/COLLECTED-batch-output.txt
-      batch_report: hello_modules/batch-report.txt
-    ```
 
 To powinno się wykonać bardzo szybko, ponieważ wszystko jest w cache.
 Możesz sprawdzić opublikowane wyjścia.
@@ -272,7 +274,7 @@ touch modules/convertToUpper.nf
 
 Skopiuj całą definicję procesu z pliku workflow'u do pliku modułu.
 
-```groovy title="modules/convertToUpper.nf" linenums="1"
+```nextflow title="modules/convertToUpper.nf" showLineNumbers
 /*
  * Użyj narzędzia zamiany tekstu do przekształcenia pozdrowienia na wielkie litery
  */
@@ -297,36 +299,36 @@ Po wykonaniu tego usuń definicję procesu z pliku workflow'u.
 
 Wstaw deklarację importu powyżej bloku `params` i wypełnij ją odpowiednio.
 
-=== "Po"
+<CodeWalkthrough>
 
-    ```groovy title="hello-modules.nf" linenums="23" hl_lines="3"
-    // Dołącz moduły
-    include { sayHello } from './modules/sayHello.nf'
-    include { convertToUpper } from './modules/convertToUpper.nf'
+```nextflow title="hello-modules.nf" showLineNumbers startLineNumber=23 step="Przed"
+// Dołącz moduły
+include { sayHello } from './modules/sayHello.nf'
 
-    /*
-    * Pipeline parameters
-    */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-    }
-    ```
+/*
+* Pipeline parameters
+*/
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+}
+```
 
-=== "Przed"
+```nextflow {3} title="hello-modules.nf" showLineNumbers startLineNumber=23 step="Po"
+// Dołącz moduły
+include { sayHello } from './modules/sayHello.nf'
+include { convertToUpper } from './modules/convertToUpper.nf'
 
-    ```groovy title="hello-modules.nf" linenums="23"
-    // Dołącz moduły
-    include { sayHello } from './modules/sayHello.nf'
+/*
+* Pipeline parameters
+*/
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+}
+```
 
-    /*
-    * Pipeline parameters
-    */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-    }
-    ```
+</CodeWalkthrough>
 
 To powinno zacząć wyglądać bardzo znajomo.
 
@@ -336,34 +338,30 @@ Uruchom z flagą `-resume`.
 
 ```bash
 nextflow run hello-modules.nf -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-modules.nf` [nauseous_heisenberg] revision: a04a9f2da0
+
+[c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
+[60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
+[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_modules/Hola-output.txt
+    - hello_modules/Hello-output.txt
+    - hello_modules/Bonjour-output.txt
+  uppercased:
+    - hello_modules/UPPER-Bonjour-output.txt
+    - hello_modules/UPPER-Hello-output.txt
+    - hello_modules/UPPER-Hola-output.txt
+  collected: hello_modules/COLLECTED-batch-output.txt
+  batch_report: hello_modules/batch-report.txt
 ```
-
-??? success "Wyjście polecenia"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-modules.nf` [nauseous_heisenberg] revision: a04a9f2da0
-
-    [c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
-    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_modules/Hola-output.txt
-        - hello_modules/Hello-output.txt
-        - hello_modules/Bonjour-output.txt
-      uppercased:
-        - hello_modules/UPPER-Bonjour-output.txt
-        - hello_modules/UPPER-Hello-output.txt
-        - hello_modules/UPPER-Hola-output.txt
-      collected: hello_modules/COLLECTED-batch-output.txt
-      batch_report: hello_modules/batch-report.txt
-    ```
 
 To powinno nadal produkować takie samo wyjście jak poprzednio.
 
@@ -385,7 +383,7 @@ touch modules/collectGreetings.nf
 
 Skopiuj całą definicję procesu z pliku workflow'u do pliku modułu.
 
-```groovy title="modules/collectGreetings.nf" linenums="1"
+```nextflow title="modules/collectGreetings.nf" showLineNumbers
 /*
  * Zbierz pozdrowienia pisane wielkimi literami do jednego pliku wyjściowego
  */
@@ -414,38 +412,38 @@ Po wykonaniu tego usuń definicję procesu z pliku workflow'u.
 
 Wstaw deklarację importu powyżej bloku `params` i wypełnij ją odpowiednio.
 
-=== "Po"
+<CodeWalkthrough>
 
-    ```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
-    // Dołącz moduły
-    include { sayHello } from './modules/sayHello.nf'
-    include { convertToUpper } from './modules/convertToUpper.nf'
-    include { collectGreetings } from './modules/collectGreetings.nf'
+```nextflow title="hello-modules.nf" showLineNumbers startLineNumber=3 step="Przed"
+// Dołącz moduły
+include { sayHello } from './modules/sayHello.nf'
+include { convertToUpper } from './modules/convertToUpper.nf'
 
-    /*
-    * Pipeline parameters
-    */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-    }
-    ```
+/*
+* Pipeline parameters
+*/
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+}
+```
 
-=== "Przed"
+```nextflow {4} title="hello-modules.nf" showLineNumbers startLineNumber=3 step="Po"
+// Dołącz moduły
+include { sayHello } from './modules/sayHello.nf'
+include { convertToUpper } from './modules/convertToUpper.nf'
+include { collectGreetings } from './modules/collectGreetings.nf'
 
-    ```groovy title="hello-modules.nf" linenums="3"
-    // Dołącz moduły
-    include { sayHello } from './modules/sayHello.nf'
-    include { convertToUpper } from './modules/convertToUpper.nf'
+/*
+* Pipeline parameters
+*/
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+}
+```
 
-    /*
-    * Pipeline parameters
-    */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-    }
-    ```
+</CodeWalkthrough>
 
 Ostatni!
 
@@ -455,34 +453,30 @@ Uruchom z flagą `-resume`.
 
 ```bash
 nextflow run hello-modules.nf -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-modules.nf` [friendly_coulomb] revision: 7aa2b9bc0f
+
+[f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
+[3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
+[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+
+Outputs:
+
+  /workspaces/training/hello-nextflow/results
+
+  first_output:
+    - hello_modules/Hello-output.txt
+    - hello_modules/Bonjour-output.txt
+    - hello_modules/Hola-output.txt
+  uppercased:
+    - hello_modules/UPPER-Bonjour-output.txt
+    - hello_modules/UPPER-Hello-output.txt
+    - hello_modules/UPPER-Hola-output.txt
+  collected: hello_modules/COLLECTED-batch-output.txt
+  batch_report: hello_modules/batch-report.txt
 ```
-
-??? success "Wyjście polecenia"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-modules.nf` [friendly_coulomb] revision: 7aa2b9bc0f
-
-    [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
-    [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
-    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      first_output:
-        - hello_modules/Hello-output.txt
-        - hello_modules/Bonjour-output.txt
-        - hello_modules/Hola-output.txt
-      uppercased:
-        - hello_modules/UPPER-Bonjour-output.txt
-        - hello_modules/UPPER-Hello-output.txt
-        - hello_modules/UPPER-Hola-output.txt
-      collected: hello_modules/COLLECTED-batch-output.txt
-      batch_report: hello_modules/batch-report.txt
-    ```
 
 To powinno nadal produkować takie samo wyjście jak poprzednio.
 
@@ -499,55 +493,65 @@ Jest to lepsze niż kopiowanie-wklejanie kodu, ponieważ jeśli później zdecyd
 
 Zrób krótką przerwę, jeśli masz ochotę.
 
-Gdy będziesz gotowy, przejdź do [**Część 5: Hello Containers**](./05_hello_containers.md), aby dowiedzieć się, jak używać kontenerów do wygodniejszego i bardziej powtarzalnego zarządzania zależnościami oprogramowania.
+Gdy będziesz gotowy, przejdź do [**Część 5: Hello Containers**](./05_hello_containers.mdx), aby dowiedzieć się, jak używać kontenerów do wygodniejszego i bardziej powtarzalnego zarządzania zależnościami oprogramowania.
 
 ---
 
 ## Quiz
 
-<quiz>
+<Quiz id="quiz-1">
+
 Czym jest moduł w Nextflow?
 - [ ] Plik konfiguracyjny
 - [x] Samodzielny plik, który może zawierać definicje procesów
 - [ ] Definicja workflow'u
 - [ ] Operator kanału
 
-Dowiedz się więcej: [2. Utwórz moduł dla `sayHello()`](#2-create-a-module-for-sayhello)
-</quiz>
+Dowiedz się więcej: [2. Utwórz moduł dla `sayHello()`](#2-utwórz-moduł-dla-sayhello)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-2">
+
 Jaka konwencja jest zwykle stosowana do przechowywania plików modułów?
 - [ ] W tym samym katalogu co workflow
 - [ ] W katalogu `bin/`
 - [x] W katalogu `modules/`
 - [ ] W katalogu `lib/`
 
-Dowiedz się więcej: [1. Utwórz katalog do przechowywania modułów](#1-create-a-directory-to-store-modules)
-</quiz>
+Dowiedz się więcej: [1. Utwórz katalog do przechowywania modułów](#1-utwórz-katalog-do-przechowywania-modułów)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-3">
+
 Jaka jest poprawna składnia do użycia modułu?
 
-- [ ] `#!groovy import { SAYHELLO } from './modules/sayhello.nf'`
-- [ ] `#!groovy require { SAYHELLO } from './modules/sayhello.nf'`
-- [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
-- [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
+- [ ] `import { SAYHELLO } from './modules/sayhello.nf'{:nextflow}`
+- [ ] `require { SAYHELLO } from './modules/sayhello.nf'{:nextflow}`
+- [x] `include { SAYHELLO } from './modules/sayhello.nf'{:nextflow}`
+- [ ] `load { SAYHELLO } from './modules/sayhello.nf'{:nextflow}`
 
-Dowiedz się więcej: [2.3. Dodaj deklarację importu](#23-add-an-include-declaration-before-the-workflow-block)
-</quiz>
+Dowiedz się więcej: [2.3. Dodaj deklarację importu](#23-dodaj-deklarację-importu-przed-blokiem-workflow)
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-4">
+
 Co się dzieje z funkcjonalnością `-resume` podczas używania modułów?
 - [ ] Przestaje działać
 - [ ] Wymaga dodatkowej konfiguracji
 - [x] Działa tak samo jak wcześniej
 - [ ] Działa tylko dla lokalnych modułów
-</quiz>
 
-<quiz>
+</Quiz>
+
+<Quiz id="quiz-5">
+
 Jakie są korzyści z używania modułów? (Wybierz wszystkie pasujące)
 - [x] Możliwość ponownego wykorzystania kodu w różnych workflow'ach
 - [x] Łatwiejsze utrzymanie
 - [x] Lepsza organizacja kodu workflow'u
 - [ ] Szybsza prędkość wykonania
-</quiz>
+
+</Quiz>

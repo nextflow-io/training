@@ -1,39 +1,37 @@
 ---
 title: Build with nf-core
-hide:
-  - toc
+description: Build with nf-core ist eine praktische Einführung in die Nutzung von nf-core Ressourcen und Best Practices.
+tableOfContents: false
 page_type: index_page
 index_type: course
 additional_information:
   technical_requirements: true
   learning_objectives:
-    - Die Code-Struktur und Projektorganisation von nf-core Pipelines beschreiben
-    - Eine grundlegende nf-core kompatible Pipeline aus einem Template erstellen
-    - Einen einfachen Nextflow Workflow auf nf-core Standards upgraden
-    - nf-core Module zu einer nf-core kompatiblen Pipeline hinzufügen
-    - Eigene Module zu nf-core beisteuern
-    - Eingaben und Parameter mit nf-core Tooling validieren
+  - Die Code-Struktur und Projektorganisation von nf-core Pipelines beschreiben
+  - Eine grundlegende nf-core kompatible Pipeline aus einem Template erstellen
+  - Einen einfachen Nextflow Workflow auf nf-core Standards upgraden
+  - nf-core Module zu einer nf-core kompatiblen Pipeline hinzufügen
+  - Eigene Module zu nf-core beisteuern
+  - Eingaben und Parameter mit nf-core Tooling validieren
   audience_prerequisites:
-    - "**Zielgruppe:** Dieser Kurs richtet sich an Lernende, die bereits mit den Grundlagen von Nextflow vertraut sind und lernen möchten, nf-core Ressourcen und Best Practices zu nutzen."
-    - "**Fähigkeiten:** Vertrautheit mit der Kommandozeile, grundlegende Scripting-Konzepte und gängige Dateiformate werden vorausgesetzt."
-    - "**Kurse:** Der Kurs [Hello Nextflow](../hello_nextflow/index.md) und [Use nf-core](../nfcore_use/index.md) müssen abgeschlossen sein, oder gleichwertige Kenntnisse müssen vorhanden sein."
-    - "**Fachgebiet:** Die Übungen sind alle fachgebietsneutral, daher ist kein spezifisches wissenschaftliches Vorwissen erforderlich."
+  - '**Zielgruppe:** Dieser Kurs richtet sich an Lernende, die bereits mit den Grundlagen von Nextflow vertraut sind und lernen möchten, nf-core Ressourcen und Best Practices zu nutzen.'
+  - '**Fähigkeiten:** Vertrautheit mit der Kommandozeile, grundlegende Scripting-Konzepte und gängige Dateiformate werden vorausgesetzt.'
+  - '**Kurse:** Der Kurs [Hello Nextflow](../hello_nextflow/index.md) und [Use nf-core](../nfcore_use/index.md) müssen abgeschlossen sein, oder gleichwertige Kenntnisse müssen vorhanden sein.'
+  - '**Fachgebiet:** Die Übungen sind alle fachgebietsneutral, daher ist kein spezifisches wissenschaftliches Vorwissen erforderlich.'
 ---
 
-# Build with nf-core
-
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 **Build with nf-core ist eine praktische Einführung in die Nutzung von nf-core Ressourcen und Best Practices.**
 
-![nf-core logo](./img/nf-core-logo.png#only-light)
-![nf-core logo](./img/nf-core-logo-darkbg.png#only-dark)
+<span class="dark:sl-hidden">![nf-core logo](../../nfcore_build/img/nf-core-logo.png)</span>
+<span class="light:sl-hidden">![nf-core logo](../../nfcore_build/img/nf-core-logo-darkbg.png)</span>
 
 Durch praktische Beispiele und angeleitete Übungen lernst du, nf-core kompatible Module und Pipelines zu nutzen und zu entwickeln sowie nf-core Tooling effektiv einzusetzen.
 
 Nach diesem Kurs kannst du Pipelines nach nf-core Best Practices entwickeln.
 
-<!-- additional_information -->
+<CourseInfo frontmatter={frontmatter} />
 
 ## Kursübersicht
 
@@ -54,13 +52,13 @@ Wir haben dies in vier Teile unterteilt, die sich jeweils auf bestimmte Aspekte 
 
 | Kurskapitel                                                       | Zusammenfassung                                                                                                                                                        | Geschätzte Dauer |
 | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| [Teil 1: Hello für nf-core umschreiben](./01_rewrite_hello.md)    | Passe einen bestehenden Workflow an das nf-core Template-Gerüst an, ausgehend vom einfachen Workflow aus dem Kurs [Hello Nextflow](../hello_nextflow/index.md)         | 60 Min.          |
-| [Teil 2: Ein nf-core Modul verwenden](./02_use_module.md)         | Erkunde die Community-Modulbibliothek und lerne, vorgefertigte, getestete Module zu integrieren, die gängige Bioinformatik-Tools wrappen                               | 30 Min.          |
-| [Teil 3: Ein nf-core Modul erstellen](./03_make_module.md)        | Erstelle dein eigenes nf-core-style Modul unter Verwendung der spezifischen Struktur, Namenskonventionen und Metadaten-Anforderungen, die von nf-core etabliert wurden | 30 Min.          |
-| [Teil 4: Eingabevalidierung hinzufügen](./04_input_validation.md) | Implementiere Eingabevalidierung sowohl für Kommandozeilen-Parameter als auch für Eingabedateien mit nf-schema                                                         | 30 Min.          |
+| [Teil 1: Hello für nf-core umschreiben](./01_rewrite_hello.mdx)    | Passe einen bestehenden Workflow an das nf-core Template-Gerüst an, ausgehend vom einfachen Workflow aus dem Kurs [Hello Nextflow](../hello_nextflow/index.mdx)         | 60 Min.          |
+| [Teil 2: Ein nf-core Modul verwenden](./02_use_module.mdx)         | Erkunde die Community-Modulbibliothek und lerne, vorgefertigte, getestete Module zu integrieren, die gängige Bioinformatik-Tools wrappen                               | 30 Min.          |
+| [Teil 3: Ein nf-core Modul erstellen](./03_make_module.mdx)        | Erstelle dein eigenes nf-core-style Modul unter Verwendung der spezifischen Struktur, Namenskonventionen und Metadaten-Anforderungen, die von nf-core etabliert wurden | 30 Min.          |
+| [Teil 4: Eingabevalidierung hinzufügen](./04_input_validation.mdx) | Implementiere Eingabevalidierung sowohl für Kommandozeilen-Parameter als auch für Eingabedateien mit nf-schema                                                         | 30 Min.          |
 
 Am Ende dieses Kurses kannst du den enormen Reichtum an Ressourcen nutzen, die das nf-core Projekt bietet.
 
 Bereit, den Kurs zu beginnen?
 
-[Mit dem Lernen beginnen :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }
+<LinkButton href="00_orientation.mdx" variant="primary" icon="right-arrow">Mit dem Lernen beginnen</LinkButton>

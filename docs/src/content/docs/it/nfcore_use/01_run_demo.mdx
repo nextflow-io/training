@@ -1,12 +1,15 @@
-# Parte 1: Eseguire una pipeline demo
+---
+title: 'Parte 1: Eseguire una pipeline demo'
+description: In questa prima parte del corso Use nf-core, vi mostriamo come trovare una pipeline nf-core e provarla utilizzando il suo profilo di test integrato.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 In questa prima parte del corso Use nf-core, vi mostriamo come trovare una pipeline nf-core e provarla utilizzando il suo profilo di test integrato.
 
 Utilizzeremo una pipeline chiamata nf-core/demo, mantenuta dal progetto nf-core come parte del suo inventario di pipeline per scopi dimostrativi e di formazione.
 
-Assicuratevi che la vostra directory di lavoro sia impostata su `nfcore-use/` come indicato nella pagina [Getting started](./00_orientation.md).
+Assicuratevi che la vostra directory di lavoro sia impostata su `nfcore-use/` come indicato nella pagina [Getting started](./00_orientation.mdx).
 
 ---
 
@@ -18,7 +21,7 @@ Iniziamo individuando la pipeline nf-core/demo sul sito web del progetto all'ind
 
 Nel vostro browser web, andate su [https://nf-co.re/pipelines/](https://nf-co.re/pipelines/) e digitate `demo` nella barra di ricerca.
 
-![risultati della ricerca](./img/search-results.png)
+![risultati della ricerca](../../nfcore_use/img/search-results.png)
 
 Cliccate sul nome della pipeline, `demo`, per accedere alla pagina di documentazione della pipeline.
 
@@ -43,7 +46,7 @@ Date un'occhiata ora e cercate di scoprire:
 
 La scheda `Introduction` fornisce una panoramica della pipeline, inclusa una rappresentazione visiva (chiamata subway map) e un elenco degli strumenti eseguiti come parte della pipeline.
 
-![subway map della pipeline](./img/nf-core-demo-subway-cropped.png)
+![subway map della pipeline](../../nfcore_use/img/nf-core-demo-subway-cropped.png)
 
 1. Controllo qualità delle letture ([FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
 2. Trimming degli adattatori e della qualità ([SEQTK_TRIM](https://github.com/lh3/seqtk))
@@ -77,14 +80,10 @@ Torniamo al terminale ed eseguiamo il seguente comando:
 
 ```bash
 nextflow pull nf-core/demo
+# [!output]
+Checking nf-core/demo ...
+ downloaded from https://github.com/nf-core/demo.git - revision: 32893afef8 [master]
 ```
-
-??? success "Output del comando"
-
-    ```console
-    Checking nf-core/demo ...
-     downloaded from https://github.com/nf-core/demo.git - revision: 32893afef8 [master]
-    ```
 
 Nextflow esegue un `pull` del codice della pipeline, ovvero scarica l'intero repository sul vostro disco locale.
 
@@ -97,13 +96,9 @@ Potete chiedere a Nextflow di fornirvi un elenco delle pipeline che avete recupe
 
 ```bash
 nextflow list
+# [!output]
+nf-core/demo
 ```
-
-??? success "Output del comando"
-
-    ```console
-    nf-core/demo
-    ```
 
 Potete provare a fare il pull di alcune altre pipeline per vedere come vengono elencate quando ne avete più di una.
 
@@ -116,50 +111,46 @@ Per trovare dove si trova una pipeline specifica, chiedete direttamente a Nextfl
 
 ```bash
 nextflow info nf-core/demo
+# [!output]
+ project name: nf-core/demo
+ repository  : https://github.com/nf-core/demo
+ local path  : /workspaces/.nextflow/assets/.repos/nf-core/demo
+ main script : main.nf
+ description : An nf-core demo pipeline
+ revisions   :
+   TEMPLATE
+   bumper
+   dev
+   fix-nxfversion
+   manually-merge-3_0_2
+ > master (default)
+   nf-core-template-merge-2.13.2.dev0
+   nf-core-template-merge-2.14.0
+   nf-core-template-merge-2.14.1
+   nf-core-template-merge-3.0.0
+   nf-core-template-merge-3.0.1
+   nf-core-template-merge-3.0.2
+   nf-core-template-merge-3.1.0
+   nf-core-template-merge-3.1.2
+   nf-core-template-merge-3.2.0
+   nf-core-template-merge-3.2.1
+   nf-core-template-merge-3.3.1
+   nf-core-template-merge-3.3.2
+   nf-core-template-merge-4.0.0
+   nf-core-template-merge-4.0.3
+   nf-core-template-merge-4.1.0
+   nf-core-template-merge-4.1.0-2
+   patch
+   1.0.0 [t]
+   1.0.1 [t]
+   1.0.2 [t]
+   1.1.0 [t]
+ > 1.2.0 [t]
 ```
 
-??? success "Output del comando"
-
-    ```console
-     project name: nf-core/demo
-     repository  : https://github.com/nf-core/demo
-     local path  : /workspaces/.nextflow/assets/.repos/nf-core/demo
-     main script : main.nf
-     description : An nf-core demo pipeline
-     revisions   :
-       TEMPLATE
-       bumper
-       dev
-       fix-nxfversion
-       manually-merge-3_0_2
-     > master (default)
-       nf-core-template-merge-2.13.2.dev0
-       nf-core-template-merge-2.14.0
-       nf-core-template-merge-2.14.1
-       nf-core-template-merge-3.0.0
-       nf-core-template-merge-3.0.1
-       nf-core-template-merge-3.0.2
-       nf-core-template-merge-3.1.0
-       nf-core-template-merge-3.1.2
-       nf-core-template-merge-3.2.0
-       nf-core-template-merge-3.2.1
-       nf-core-template-merge-3.3.1
-       nf-core-template-merge-3.3.2
-       nf-core-template-merge-4.0.0
-       nf-core-template-merge-4.0.3
-       nf-core-template-merge-4.1.0
-       nf-core-template-merge-4.1.0-2
-       patch
-       1.0.0 [t]
-       1.0.1 [t]
-       1.0.2 [t]
-       1.1.0 [t]
-     > 1.2.0 [t]
-    ```
-
-!!! info "Info"
-
-    Il percorso completo potrebbe essere diverso sul vostro sistema se non state utilizzando il nostro ambiente di formazione.
+:::note[Info]
+Il percorso completo potrebbe essere diverso sul vostro sistema se non state utilizzando il nostro ambiente di formazione.
+:::
 
 Nextflow mantiene il codice sorgente scaricato intenzionalmente "fuori dalla vista", secondo il principio che queste pipeline dovrebbero essere utilizzate più come librerie che come codice con cui interagire direttamente.
 
@@ -187,32 +178,35 @@ Potete usare `tree` oppure il file explorer per trovare e aprire la directory `n
 tree -L 1 pipelines/nf-core/demo
 ```
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console
-    pipelines/nf-core/demo
-    ├── assets
-    ├── CHANGELOG.md
-    ├── CITATIONS.md
-    ├── CODE_OF_CONDUCT.md
-    ├── conf
-    ├── docs
-    ├── LICENSE
-    ├── main.nf
-    ├── modules
-    ├── modules.json
-    ├── nextflow.config
-    ├── nextflow_schema.json
-    ├── nf-test.config
-    ├── README.md
-    ├── ro-crate-metadata.json
-    ├── subworkflows
-    ├── tests
-    ├── tower.yml
-    └── workflows
+```console
+pipelines/nf-core/demo
+├── assets
+├── CHANGELOG.md
+├── CITATIONS.md
+├── CODE_OF_CONDUCT.md
+├── conf
+├── docs
+├── LICENSE
+├── main.nf
+├── modules
+├── modules.json
+├── nextflow.config
+├── nextflow_schema.json
+├── nf-test.config
+├── README.md
+├── ro-crate-metadata.json
+├── subworkflows
+├── tests
+├── tower.yml
+└── workflows
 
-    7 directories, 12 files
-    ```
+7 directories, 12 files
+```
+
+</details>
 
 Come potete vedere, c'è molto in quella directory, ma la maggior parte non è qualcosa di cui dovete preoccuparvi.
 
@@ -228,10 +222,10 @@ Per il resto, possiamo distinguere tre gruppi funzionali di file di codice:
 
 Non esamineremo i componenti del codice della pipeline in questa parte del corso, ma toccheremo elementi di configurazione e validazione che probabilmente saranno rilevanti per voi come utenti finali delle pipeline nf-core.
 
-!!! tip "Suggerimento"
-
-    Potete anche sfogliare il codice sorgente di qualsiasi pipeline nf-core su GitHub, ad esempio [github.com/nf-core/demo](https://github.com/nf-core/demo).
-    Ogni pipeline nf-core segue la stessa struttura di directory, quindi una volta che conoscete la struttura, potete trovare file di configurazione, moduli e flussi di lavoro per qualsiasi pipeline nello stesso modo.
+:::tip[Suggerimento]
+Potete anche sfogliare il codice sorgente di qualsiasi pipeline nf-core su GitHub, ad esempio [github.com/nf-core/demo](https://github.com/nf-core/demo).
+Ogni pipeline nf-core segue la stessa struttura di directory, quindi una volta che conoscete la struttura, potete trovare file di configurazione, moduli e flussi di lavoro per qualsiasi pipeline nello stesso modo.
+:::
 
 Per ora, passiamo all'esecuzione della pipeline!
 
@@ -251,10 +245,10 @@ Comodamente, ogni pipeline nf-core viene fornita con un profilo di test.
 Si tratta di un insieme minimo di impostazioni di configurazione per eseguire la pipeline utilizzando un piccolo dataset di test ospitato nel repository [nf-core/test-datasets](https://github.com/nf-core/test-datasets).
 È un ottimo modo per provare rapidamente una pipeline su piccola scala.
 
-!!! tip "Suggerimento"
-
-    Il sistema di profili di configurazione di Nextflow vi permette di passare facilmente tra diversi motori di container o ambienti di esecuzione.
-    Per maggiori dettagli, consultate [Hello Nextflow Parte 6: Configuration](../hello_nextflow/06_hello_config.md).
+:::tip[Suggerimento]
+Il sistema di profili di configurazione di Nextflow vi permette di passare facilmente tra diversi motori di container o ambienti di esecuzione.
+Per maggiori dettagli, consultate [Hello Nextflow Parte 6: Configuration](../hello_nextflow/06_hello_config.mdx).
+:::
 
 ### 2.1. Esaminare il profilo di test
 
@@ -268,7 +262,7 @@ code pipelines/nf-core/demo/conf/test.config
 
 Ecco il contenuto di quel file:
 
-```groovy title="conf/test.config" linenums="1" hl_lines="8 26"
+```nextflow {8,26} title="conf/test.config" showLineNumbers
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Nextflow config file for running minimal tests
@@ -300,7 +294,7 @@ params {
 
 Noterete subito che il blocco di commento in cima include un esempio d'uso che mostra come eseguire la pipeline con questo profilo di test.
 
-```groovy title="conf/test.config" linenums="7"
+```nextflow title="conf/test.config" showLineNumbers startLineNumber=7
     Use as follows:
         nextflow run nf-core/demo -profile test,<docker/singularity> --outdir <OUTDIR>
 ```
@@ -339,76 +333,72 @@ Con questo, possiamo eseguire il comando di test:
 
 ```bash
 nextflow run nf-core/demo -profile test,docker --outdir demo-results
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Downloading plugin nf-schema@2.7.2
+Launching `https://github.com/nf-core/demo` [cranky_curry] revision: 32893afef8 [master]
+
+
+------------------------------------------------------
+                                        ,--./,-.
+        ___     __   __   __   ___     /,-._.--~'
+  |\ | |__  __ /  ` /  \ |__) |__         }  {
+  | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                        `._,._,'
+  nf-core/demo 1.2.0
+------------------------------------------------------
+
+Input/output options
+  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
+  outdir                    : demo-results
+
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
+
+Generic options
+  trace_report_suffix       : 2026-07-03_21-31-35
+
+Core Nextflow options
+  revision                  : master
+  runName                   : cranky_curry
+  containerEngine           : docker
+  launchDir                 : /workspaces/training/nfcore-use
+  workDir                   : /workspaces/training/nfcore-use/work
+  projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
+  userName                  : root
+  profile                   : test,docker
+  configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+
+* The pipeline
+    https://doi.org/10.5281/zenodo.12192442
+
+* The nf-core framework
+    https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+    https://github.com/nf-core/demo/blob/master/CITATIONS.md
+
+executor >  local (8)
+[ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
+[b7/cb6812] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
+[ff/6ebd98] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
+[09/bbd1b4] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
+-[nf-core/demo] Pipeline completed successfully-
 ```
-
-??? success "Output del comando"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Downloading plugin nf-schema@2.7.2
-    Launching `https://github.com/nf-core/demo` [cranky_curry] revision: 32893afef8 [master]
-
-
-    ------------------------------------------------------
-                                            ,--./,-.
-            ___     __   __   __   ___     /,-._.--~'
-      |\ | |__  __ /  ` /  \ |__) |__         }  {
-      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                            `._,._,'
-      nf-core/demo 1.2.0
-    ------------------------------------------------------
-
-    Input/output options
-      input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
-      outdir                    : demo-results
-
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
-
-    Generic options
-      trace_report_suffix       : 2026-07-03_21-31-35
-
-    Core Nextflow options
-      revision                  : master
-      runName                   : cranky_curry
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nfcore-use
-      workDir                   : /workspaces/training/nfcore-use/work
-      projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
-      userName                  : root
-      profile                   : test,docker
-      configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
-
-    !! Only displaying parameters that differ from the pipeline defaults !!
-    ------------------------------------------------------
-
-    * The pipeline
-        https://doi.org/10.5281/zenodo.12192442
-
-    * The nf-core framework
-        https://doi.org/10.1038/s41587-020-0439-x
-
-    * Software dependencies
-        https://github.com/nf-core/demo/blob/master/CITATIONS.md
-
-    executor >  local (8)
-    [ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-    [b7/cb6812] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-    [ff/6ebd98] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
-    [09/bbd1b4] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
-    -[nf-core/demo] Pipeline completed successfully-
-    ```
 
 Se il vostro output corrisponde a quello mostrato, Congratulazioni! Avete appena eseguito la vostra prima pipeline nf-core.
 
 Noterete che c'è molto più output nella console rispetto a quando eseguite una pipeline Nextflow di base.
 C'è un'intestazione che include un riepilogo della versione della pipeline, degli input e output, e alcuni elementi di configurazione.
 
-!!! info "Info"
-
-    Il vostro output mostrerà timestamp, nomi di esecuzione e percorsi di file diversi, ma la struttura generale e l'esecuzione dei processi dovrebbero essere simili.
+:::note[Info]
+Il vostro output mostrerà timestamp, nomi di esecuzione e percorsi di file diversi, ma la struttura generale e l'esecuzione dei processi dovrebbero essere simili.
+:::
 
 Notate la riga vicino alla cima dell'output:
 
@@ -442,7 +432,7 @@ Questo ci dice che sono stati eseguiti quattro processi, corrispondenti ai quatt
 
 I nomi completi dei processi come mostrati qui, ad esempio `NFCORE_DEMO:DEMO:MULTIQC`, sono più lunghi di quelli che potreste aver visto nel materiale introduttivo Hello Nextflow.
 Questi includono i nomi dei loro flussi di lavoro padre e riflettono la modularità del codice della pipeline.
-Se volete imparare a sviluppare pipeline in stile nf-core voi stessi, consultate il corso [Build with nf-core](../nfcore_build/index.md).
+Se volete imparare a sviluppare pipeline in stile nf-core voi stessi, consultate il corso [Build with nf-core](../nfcore_build/index.mdx).
 
 ### 2.3. Esaminare gli output della pipeline
 
@@ -452,33 +442,36 @@ Infine, diamo un'occhiata alla directory `demo-results` prodotta dalla pipeline.
 tree -L 2 demo-results
 ```
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console
-    demo-results
-    ├── cowpy
-    │   └── cowpy.txt
-    ├── fastqc
-    │   ├── SAMPLE1_PE
-    │   ├── SAMPLE2_PE
-    │   └── SAMPLE3_SE
-    ├── fq
-    │   ├── SAMPLE1_PE
-    │   ├── SAMPLE2_PE
-    │   └── SAMPLE3_SE
-    ├── multiqc
-    │   ├── multiqc_data
-    │   └── multiqc_report.html
-    └── pipeline_info
-        ├── execution_report_2026-07-03_21-31-35.html
-        ├── execution_timeline_2026-07-03_21-31-35.html
-        ├── execution_trace_2026-07-03_21-31-35.txt
-        ├── nf_core_demo_software_mqc_versions.yml
-        ├── params_2026-07-03_21-31-43.json
-        └── pipeline_dag_2026-07-03_21-31-35.html
+```console
+demo-results
+├── cowpy
+│   └── cowpy.txt
+├── fastqc
+│   ├── SAMPLE1_PE
+│   ├── SAMPLE2_PE
+│   └── SAMPLE3_SE
+├── fq
+│   ├── SAMPLE1_PE
+│   ├── SAMPLE2_PE
+│   └── SAMPLE3_SE
+├── multiqc
+│   ├── multiqc_data
+│   └── multiqc_report.html
+└── pipeline_info
+    ├── execution_report_2026-07-03_21-31-35.html
+    ├── execution_timeline_2026-07-03_21-31-35.html
+    ├── execution_trace_2026-07-03_21-31-35.txt
+    ├── nf_core_demo_software_mqc_versions.yml
+    ├── params_2026-07-03_21-31-43.json
+    └── pipeline_dag_2026-07-03_21-31-35.html
 
-    12 directories, 8 files
-    ```
+12 directories, 8 files
+```
+
+</details>
 
 Potrebbe sembrare molto.
 Per saperne di più sugli output della pipeline `nf-core/demo`, consultate la sua [pagina di documentazione](https://nf-co.re/demo/1.2.0/docs/output/).
@@ -487,12 +480,12 @@ In questa fase, ciò che è importante osservare è che i risultati sono organiz
 
 Ad esempio, il file `execution_timeline_*` vi mostra quali processi sono stati eseguiti, in quale ordine e quanto tempo hanno impiegato:
 
-![report della timeline di esecuzione](./img/execution_timeline.png)
+![report della timeline di esecuzione](../../nfcore_use/img/execution_timeline.png)
 
-!!! info "Info"
-
-    Qui le attività non sono state eseguite in parallelo perché stiamo lavorando su una macchina minimalista in Github Codespaces.
-    Per vedere queste esecuzioni in parallelo, provate ad aumentare l'allocazione di CPU del vostro codespace e i limiti di risorse nella configurazione di test.
+:::note[Info]
+Qui le attività non sono state eseguite in parallelo perché stiamo lavorando su una macchina minimalista in Github Codespaces.
+Per vedere queste esecuzioni in parallelo, provate ad aumentare l'allocazione di CPU del vostro codespace e i limiti di risorse nella configurazione di test.
+:::
 
 Questi report vengono generati automaticamente per tutte le pipeline nf-core.
 
@@ -502,7 +495,7 @@ Sapete come eseguire una pipeline nf-core usando il suo profilo di test integrat
 
 ### Cosa c'è dopo?
 
-Passate alla [Parte 2](./02_configure_execution.md), dove imparerete come configurare l'esecuzione della pipeline.
+Passate alla [Parte 2](./02_configure_execution.mdx), dove imparerete come configurare l'esecuzione della pipeline.
 
 ---
 

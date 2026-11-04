@@ -1,4 +1,7 @@
-# Part 1: More Containers
+---
+title: 'Part 1: More Containers'
+description: '[TODO]'
+---
 
 [TODO]
 
@@ -16,11 +19,11 @@ You'll be getting/building a container image for the `quote` pip package, which 
 Seqera Containers is a free service that builds container images for pip and conda (including bioconda) installable tools.
 Navigate to [Seqera Containers](https://www.seqera.io/containers/) and search for the `quote` pip package.
 
-![Seqera Containers](img/seqera-containers-1.png)
+
 
 Click on "+Add" and then "Get Container" to request a container image for the `quote` pip package.
 
-![Seqera Containers](img/seqera-containers-2.png)
+
 
 If this is the first time a community container has been built for this version of the package, it may take a few minutes to complete.
 Click to copy the URI (e.g. `community.wave.seqera.io/library/pip_quote:ae07804021465ee9`) of the container image that was created for you.
@@ -47,7 +50,7 @@ Return to the Seqera Containers website and click on the "Build Details" button.
 The first item we'll look at is the `Dockerfile`, a type of script file that contains all the commands needed to build the container image.
 We've added some explanatory comments to the Dockerfile below to help you understand what each part does.
 
-```Dockerfile title="Dockerfile"
+```dockerfile title="Dockerfile"
 # Start from the micromamba base docker image
 FROM mambaorg/micromamba:1.5.10-noble
 # Copy the conda.yml file into the container
@@ -68,7 +71,7 @@ ENV PATH="$MAMBA_ROOT_PREFIX/bin:$PATH"
 
 The second item we'll look at is the `conda.yml` file, which contains the list of packages that need to be installed in the container image.
 
-```conda.yml title="conda.yml"
+```yaml title="conda.yml"
 channels:
 - conda-forge
 - bioconda
@@ -80,10 +83,10 @@ dependencies:
 
 Copy the contents of these files into the stubs located in the `containers/build` directory, then run the following command to build the container image yourself.
 
-!!! Note
-
-    We use the `-t quote:latest` flag to tag the container image with the name `quote` and the tag `latest`.
-    We will be able to use this tag to refer to the container image when running it on this system.
+:::note
+We use the `-t quote:latest` flag to tag the container image with the name `quote` and the tag `latest`.
+We will be able to use this tag to refer to the container image when running it on this system.
+:::
 
 ```bash
 docker build -t quote:latest containers/build
@@ -101,7 +104,7 @@ You've learned two different ways to get a container image for a tool you want t
 
 ### What's next?
 
-You have everything you need to continue to the [next chapter](./04_hello_genomics.md) of this training series.
+You have everything you need to continue to the next chapter of this training series.
 You can also continue on with an optional exercise to fetch quotes on computer/biology pioneers using the `quote` container and output them using the `cowsay` container.
 
 ---
@@ -141,17 +144,17 @@ At a high level, to complete this exercise you will need to:
 
 For the `quote` container image, you can either use the one you built yourself in the previous stretch exercise or use the one you got from Seqera Containers .
 
-!!! Hint
-
-    A good choice for the `script` block of your getQuote process might be:
-        ```groovy
-        script:
-            def safe_author = author.tokenize(' ').join('-')
-            """
-            quote "$author" > quote-${safe_author}.txt
-            echo "-${author}" >> quote-${safe_author}.txt
-            """
-        ```
+:::note[Hint]
+A good choice for the `script` block of your getQuote process might be:
+    ```nextflow
+    script:
+        def safe_author = author.tokenize(' ').join('-')
+        """
+        quote "$author" > quote-${safe_author}.txt
+        echo "-${author}" >> quote-${safe_author}.txt
+        """
+    ```
+:::
 
 You can find a solution to this exercise in `containers/solutions/hello-containers-4.1.nf`.
 
@@ -160,7 +163,7 @@ You can find a solution to this exercise in `containers/solutions/hello-containe
 Add some branching logic using to your pipeline to allow it to accept inputs intended for both `quote` and `sayHello`.
 Here's an example of how to use an `if` statement in a Nextflow workflow:
 
-```groovy title="hello-containers.nf"
+```nextflow title="hello-containers.nf"
 workflow {
     if (params.quote) {
         ...
@@ -172,17 +175,17 @@ workflow {
 }
 ```
 
-!!! Hint
-
-    You can use `new_ch = processName.out` to assign a name to the output channel of a process.
+:::note[Hint]
+You can use `new_ch = processName.out` to assign a name to the output channel of a process.
+:::
 
 You can find a solution to this exercise in `containers/solutions/hello-containers-4.2.nf`.
 
-### Takeaway
+### Takeaway {#takeaway_1}
 
 You know how to use containers in Nextflow to run processes, and how to build some branching logic into your pipelines!
 
-### What's next?
+### What's next? {#whats-next_1}
 
 Celebrate, take a stretch break and drink some water!
 

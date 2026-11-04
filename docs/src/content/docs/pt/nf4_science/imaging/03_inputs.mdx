@@ -1,6 +1,9 @@
-# Parte 3: Organizando entradas
+---
+title: 'Parte 3: Organizando entradas'
+description: Na Parte 2, executamos o molkart com múltiplos parâmetros na linha de comando.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Na Parte 2, executamos o molkart com múltiplos parâmetros na linha de comando.
 Agora vamos aprender duas abordagens melhores para gerenciar entradas: **arquivos de parâmetros** e **planilhas de amostras**.
@@ -122,9 +125,9 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! Warning "Aviso"
-
-    Observe que os caminhos na planilha de amostras são relativos a onde você **executa** o Nextflow, não onde a planilha de amostras está localizada.
+:::caution[Aviso]
+Observe que os caminhos na planilha de amostras são relativos a onde você **executa** o Nextflow, não onde a planilha de amostras está localizada.
+:::
 
 Finalmente, vamos executar o nf-core/molkart mais uma vez com a planilha de amostras com caminhos de arquivos locais:
 

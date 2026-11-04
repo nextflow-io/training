@@ -1,6 +1,9 @@
-# Testando com nf-test
+---
+title: Testando com nf-test
+description: Ser capaz de testar sistematicamente cada parte do seu fluxo de trabalho para garantir que está funcionando como esperado é fundamental para a…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Ser capaz de testar sistematicamente cada parte do seu fluxo de trabalho para garantir que está funcionando como esperado é fundamental para a reprodutibilidade e manutenção a longo prazo, e pode ser uma grande ajuda durante o processo de desenvolvimento.
 
@@ -47,18 +50,18 @@ Essas habilidades ajudarão você a implementar uma estratégia de testes abrang
 
 Antes de embarcar nesta missão secundária, você deve:
 
-- Ter concluído o tutorial [Hello Nextflow](../../hello_nextflow/index.md) ou um curso equivalente para iniciantes.
+- Ter concluído o tutorial [Hello Nextflow](../../hello_nextflow/index.mdx) ou um curso equivalente para iniciantes.
 - Estar confortável usando conceitos e mecanismos básicos do Nextflow (processos, canais, operadores, trabalhando com arquivos, metadados)
 
-!!! warning "Requisito de versão do nf-test"
+:::caution[Requisito de versão do nf-test]
+Testes em nível de processo requerem **nf-test 0.9.3 ou posterior**. Versões mais antigas (incluindo 0.9.2) geram código de estrutura de teste incompatível com o analisador de sintaxe estrito que o Nextflow usa por padrão a partir da versão 26.04, causando um erro `Script compilation failed` em vez do resultado esperado do teste.
 
-    Testes em nível de processo requerem **nf-test 0.9.3 ou posterior**. Versões mais antigas (incluindo 0.9.2) geram código de estrutura de teste incompatível com o analisador de sintaxe estrito que o Nextflow usa por padrão a partir da versão 26.04, causando um erro `Script compilation failed` em vez do resultado esperado do teste.
+Verifique sua versão com `nf-test version`. Se precisar atualizar:
 
-    Verifique sua versão com `nf-test version`. Se precisar atualizar:
-
-    ```bash
-    curl -fsSL https://code.askimed.com/install/nf-test | bash
-    ```
+```bash
+curl -fsSL https://code.askimed.com/install/nf-test | bash
+```
+:::
 
 ---
 
@@ -66,7 +69,7 @@ Antes de embarcar nesta missão secundária, você deve:
 
 #### Abra o codespace de treinamento
 
-Se ainda não o fez, certifique-se de abrir o ambiente de treinamento conforme descrito em [Configuração do Ambiente](../../envsetup/index.md).
+Se ainda não o fez, certifique-se de abrir o ambiente de treinamento conforme descrito em [Configuração do Ambiente](../../envsetup/index.mdx).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -95,97 +98,103 @@ Você encontrará um arquivo de fluxo de trabalho principal e um arquivo CSV cha
 └── nextflow.config
 ```
 
-Para uma descrição detalhada dos arquivos, consulte o [aquecimento do Hello Nextflow](../../hello_nextflow/00_orientation.md).
+Para uma descrição detalhada dos arquivos, consulte o [aquecimento do Hello Nextflow](../../hello_nextflow/00_orientation.mdx).
 
-O fluxo de trabalho que vamos testar é um subconjunto do fluxo de trabalho Hello construído em [Hello Workflow](../../hello_nextflow/03_hello_workflow.md).
+O fluxo de trabalho que vamos testar é um subconjunto do fluxo de trabalho Hello construído em [Hello Workflow](../../hello_nextflow/03_hello_workflow.mdx).
 
-??? example "O que o fluxo de trabalho Hello Nextflow faz?"
+<details class="example">
+<summary>O que o fluxo de trabalho Hello Nextflow faz?</summary>
 
-    Se você não fez o treinamento [Hello Nextflow](../../hello_nextflow/index.md), aqui está uma visão geral rápida do que este fluxo de trabalho simples faz.
+Se você não fez o treinamento [Hello Nextflow](../../hello_nextflow/index.mdx), aqui está uma visão geral rápida do que este fluxo de trabalho simples faz.
 
-    O fluxo de trabalho recebe um arquivo CSV contendo saudações, executa quatro etapas consecutivas de transformação nelas e gera um único arquivo de texto contendo uma imagem ASCII de um personagem divertido dizendo as saudações.
+O fluxo de trabalho recebe um arquivo CSV contendo saudações, executa quatro etapas consecutivas de transformação nelas e gera um único arquivo de texto contendo uma imagem ASCII de um personagem divertido dizendo as saudações.
 
-    As quatro etapas são implementadas como processos Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` e `cowpy`) armazenados em arquivos de módulo separados.
+As quatro etapas são implementadas como processos Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` e `cowpy`) armazenados em arquivos de módulo separados.
 
-    1. **`sayHello`:** Escreve cada saudação em seu próprio arquivo de saída (ex.: "Hello-output.txt")
-    2. **`convertToUpper`:** Converte cada saudação para maiúsculas (ex.: "HELLO")
-    3. **`collectGreetings`:** Coleta todas as saudações em maiúsculas em um único arquivo em lote
-    4. **`cowpy`:** Gera arte ASCII usando a ferramenta `cowpy`
+1. **`sayHello`:** Escreve cada saudação em seu próprio arquivo de saída (ex.: "Hello-output.txt")
+2. **`convertToUpper`:** Converte cada saudação para maiúsculas (ex.: "HELLO")
+3. **`collectGreetings`:** Coleta todas as saudações em maiúsculas em um único arquivo em lote
+4. **`cowpy`:** Gera arte ASCII usando a ferramenta `cowpy`
 
-    Os resultados são publicados em um diretório chamado `results/`, e a saída final do pipeline (quando executado com os parâmetros padrão) é um arquivo de texto simples contendo arte ASCII de um personagem dizendo as saudações em maiúsculas.
+Os resultados são publicados em um diretório chamado `results/`, e a saída final do pipeline (quando executado com os parâmetros padrão) é um arquivo de texto simples contendo arte ASCII de um personagem dizendo as saudações em maiúsculas.
 
-    Nesta missão secundária, usamos uma forma intermediária do fluxo de trabalho Hello que contém apenas os dois primeiros processos. <!-- TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 -->
+Nesta missão secundária, usamos uma forma intermediária do fluxo de trabalho Hello que contém apenas os dois primeiros processos. {/* TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 */}
+
+</details>
 
 O subconjunto com o qual trabalharemos é composto de dois processos: `sayHello` e `convertToUpper`.
 Você pode ver o código completo do fluxo de trabalho abaixo.
 
-??? example "Código do fluxo de trabalho"
+<details class="example">
+<summary>Código do fluxo de trabalho</summary>
 
-    ```groovy title="main.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="main.nf"
+#!/usr/bin/env nextflow
 
-    /*
-     * Parâmetros do pipeline
-     */
-    params.input_file = "greetings.csv"
+/*
+ * Parâmetros do pipeline
+ */
+params.input_file = "greetings.csv"
 
-    /*
-     * Usa echo para imprimir 'Hello World!' na saída padrão
-     */
-    process sayHello {
+/*
+ * Usa echo para imprimir 'Hello World!' na saída padrão
+ */
+process sayHello {
 
-        input:
-        val greeting
+    input:
+    val greeting
 
-        output:
-        path "${greeting}-output.txt"
+    output:
+    path "${greeting}-output.txt"
 
-        script:
-        """
-        echo '$greeting' > '$greeting-output.txt'
-        """
+    script:
+    """
+    echo '$greeting' > '$greeting-output.txt'
+    """
+}
+
+/*
+ * Usa um utilitário de substituição de texto para converter a saudação para maiúsculas
+ */
+process convertToUpper {
+
+    input:
+    path input_file
+
+    output:
+    path "UPPER-${input_file}"
+
+    script:
+    """
+    cat $input_file | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
+    """
+}
+
+workflow {
+    main:
+    // cria um canal para entradas a partir de um arquivo CSV
+    greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
+
+    // emite uma saudação
+    sayHello(greeting_ch)
+
+    // converte a saudação para maiúsculas
+    convertToUpper(sayHello.out)
+
+    publish:
+    greetings = sayHello.out
+    upper_greetings = convertToUpper.out
+}
+
+output {
+    greetings {
     }
-
-    /*
-     * Usa um utilitário de substituição de texto para converter a saudação para maiúsculas
-     */
-    process convertToUpper {
-
-        input:
-        path input_file
-
-        output:
-        path "UPPER-${input_file}"
-
-        script:
-        """
-        cat $input_file | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
-        """
+    upper_greetings {
     }
+}
+```
 
-    workflow {
-        main:
-        // cria um canal para entradas a partir de um arquivo CSV
-        greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
-
-        // emite uma saudação
-        sayHello(greeting_ch)
-
-        // converte a saudação para maiúsculas
-        convertToUpper(sayHello.out)
-
-        publish:
-        greetings = sayHello.out
-        upper_greetings = convertToUpper.out
-    }
-
-    output {
-        greetings {
-        }
-        upper_greetings {
-        }
-    }
-    ```
+</details>
 
 #### Execute o fluxo de trabalho
 
@@ -235,7 +244,7 @@ Testar software essencialmente faz esse processo por nós.
 
 Seu desafio é adicionar testes padronizados a este fluxo de trabalho usando nf-test, a fim de facilitar a verificação de que cada parte continua funcionando como esperado caso quaisquer alterações adicionais sejam feitas.
 
-<!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
+{/* TODO: give a bit more details, similar to how it's done in the Metadata side quest */}
 
 #### Lista de verificação de prontidão
 
@@ -427,26 +436,26 @@ Vamos voltar ao arquivo de teste e alterar o caminho para o arquivo no bloco `wh
 
 Você pode estar se perguntando como vamos apontar para a raiz do pipeline no teste. Como esta é uma situação comum, o nf-test tem uma série de variáveis globais que podemos usar para facilitar nossa vida. Você pode encontrar a lista completa [aqui](https://www.nf-test.com/docs/testcases/global_variables/), mas por enquanto usaremos a variável `projectDir`, que representa a raiz do projeto do pipeline.
 
-=== "Depois"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="3"
-    when {
-        params {
-            input_file = "${projectDir}/greetings.csv"
-        }
+```groovy {3,4} title="tests/main.nf.test" showLineNumbers step="Antes"
+when {
+    params {
+        // define parameters here. Example:
+        // outdir = "tests/results"
     }
-    ```
+}
+```
 
-=== "Antes"
-
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="3 4"
-    when {
-        params {
-            // define parameters here. Example:
-            // outdir = "tests/results"
-        }
+```groovy {3} title="tests/main.nf.test" showLineNumbers step="Depois"
+when {
+    params {
+        input_file = "${projectDir}/greetings.csv"
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 Vamos executar o teste novamente para ver se funciona.
 
@@ -525,42 +534,42 @@ Uma verificação simples é garantir que nosso pipeline está executando todos 
 
 Vamos adicionar uma asserção ao nosso teste para verificar se o pipeline executa o número esperado de processos. Também atualizaremos o nome do nosso teste para refletir melhor o que estamos testando.
 
-=== "Depois"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="1 11"
-        test("Should run successfully with correct number of processes") {
+```groovy {1} title="tests/main.nf.test" showLineNumbers step="Antes"
+    test("Should run without failures") {
 
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
             }
-
-            then {
-                assert workflow.success
-                assert workflow.trace.tasks().size() == 6
-            }
-
         }
-    ```
 
-=== "Antes"
-
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="1"
-        test("Should run without failures") {
-
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
-            }
-
-            then {
-                assert workflow.success
-            }
-
+        then {
+            assert workflow.success
         }
-    ```
+
+    }
+```
+
+```groovy {1,11} title="tests/main.nf.test" showLineNumbers step="Depois"
+    test("Should run successfully with correct number of processes") {
+
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert workflow.trace.tasks().size() == 6
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 O nome do teste agora reflete melhor o que estamos realmente verificando - não apenas que o pipeline é executado sem falhar, mas que ele executa o número esperado de processos.
 
@@ -591,62 +600,62 @@ Sucesso! O pipeline é executado com sucesso e o teste passa. Agora começamos a
 
 Vamos adicionar uma asserção ao nosso teste para verificar se o arquivo de saída foi criado. Vamos adicioná-la como um teste separado, com um nome informativo, para tornar os resultados mais fáceis de interpretar.
 
-=== "Depois"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="14-33"
-        test("Should run successfully with correct number of processes") {
+```groovy {14} title="tests/main.nf.test" showLineNumbers step="Antes"
+    test("Should run successfully with correct number of processes") {
 
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
             }
-
-            then {
-                assert workflow.success
-                assert workflow.trace.tasks().size() == 6
-            }
-
         }
 
-        test("Should produce correct output files") {
-
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
-            }
-
-            then {
-                assert file("$launchDir/results/Bonjour-output.txt").exists()
-                assert file("$launchDir/results/Hello-output.txt").exists()
-                assert file("$launchDir/results/Hola-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Hola-output.txt").exists()
-            }
-
+        then {
+            assert workflow.success
+            assert workflow.trace.tasks().size() == 6
         }
-    ```
 
-=== "Antes"
+    }
+```
 
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="14"
-        test("Should run successfully with correct number of processes") {
+```groovy {14-33} title="tests/main.nf.test" showLineNumbers step="Depois"
+    test("Should run successfully with correct number of processes") {
 
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
             }
-
-            then {
-                assert workflow.success
-                assert workflow.trace.tasks().size() == 6
-            }
-
         }
-    ```
+
+        then {
+            assert workflow.success
+            assert workflow.trace.tasks().size() == 6
+        }
+
+    }
+
+    test("Should produce correct output files") {
+
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
+            }
+        }
+
+        then {
+            assert file("$launchDir/results/Bonjour-output.txt").exists()
+            assert file("$launchDir/results/Hello-output.txt").exists()
+            assert file("$launchDir/results/Hola-output.txt").exists()
+            assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
+            assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
+            assert file("$launchDir/results/UPPER-Hola-output.txt").exists()
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 Execute o teste novamente para ver se funciona.
 
@@ -784,58 +793,58 @@ Test Process sayHello
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
-O teste falha porque o processo `sayHello` declara 1 entrada, mas foi chamado com 0 argumentos. Vamos corrigir isso adicionando uma entrada ao processo. Lembre-se de [Hello Workflow](../../hello_nextflow/03_hello_workflow.md) (e da seção de aquecimento acima) que nosso processo `sayHello` recebe uma única entrada de valor, que precisaremos fornecer. Também devemos corrigir o nome do teste para refletir melhor o que estamos testando.
+O teste falha porque o processo `sayHello` declara 1 entrada, mas foi chamado com 0 argumentos. Vamos corrigir isso adicionando uma entrada ao processo. Lembre-se de [Hello Workflow](../../hello_nextflow/03_hello_workflow.mdx) (e da seção de aquecimento acima) que nosso processo `sayHello` recebe uma única entrada de valor, que precisaremos fornecer. Também devemos corrigir o nome do teste para refletir melhor o que estamos testando.
 
-=== "Depois"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 10"
-        test("Should run without failures and produce correct output") {
+```groovy {1,10,11} title="tests/main.sayhello.nf.test" showLineNumbers step="Antes"
+    test("Should run without failures") {
 
-            when {
-                params {
-                    // define parameters here. Example:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    input[0] = "hello"
-                    """
-                }
+        when {
+            params {
+                // define parameters here. Example:
+                // outdir = "tests/results"
             }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
+            process {
+                """
+                // define inputs of the process here. Example:
+                // input[0] = file("test-file.txt")
+                """
             }
-
         }
-    ```
 
-=== "Antes"
-
-    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 10 11"
-        test("Should run without failures") {
-
-            when {
-                params {
-                    // define parameters here. Example:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    // define inputs of the process here. Example:
-                    // input[0] = file("test-file.txt")
-                    """
-                }
-            }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
-            }
-
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
         }
-    ```
+
+    }
+```
+
+```groovy {1,10} title="tests/main.sayhello.nf.test" showLineNumbers step="Depois"
+    test("Should run without failures and produce correct output") {
+
+        when {
+            params {
+                // define parameters here. Example:
+                // outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = "hello"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 Vamos executar o teste novamente para ver se funciona.
 
@@ -887,9 +896,9 @@ Não vamos imprimi-lo aqui, mas você deve ver um arquivo JSON contendo detalhes
 
 Isso representa as saídas criadas pelo processo `sayHello`, que estamos testando explicitamente. Se executarmos o teste novamente, o programa verificará se a nova saída corresponde à saída que foi originalmente registrada. Esta é uma maneira rápida e simples de testar que as saídas do processo não mudam, razão pela qual o nf-test a fornece como padrão.
 
-!!! warning "Aviso"
-
-    Isso significa que temos que ter certeza de que a saída que registramos na execução original está correta!
+:::caution[Aviso]
+Isso significa que temos que ter certeza de que a saída que registramos na execução original está correta!
+:::
 
 Se, no decorrer do desenvolvimento futuro, algo no código mudar e causar uma saída diferente, o teste falhará e teremos que determinar se a mudança é esperada ou não.
 
@@ -927,55 +936,55 @@ Embora os snapshots sejam ótimos para detectar quaisquer mudanças na saída, �
 
 Veja como poderíamos modificar nosso teste para verificar conteúdo específico:
 
-=== "Depois"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 5 16 17"
-        test("Should run without failures and contain expected greeting") {
+```groovy {1,5,6,17} title="tests/main.sayhello.nf.test" showLineNumbers step="Antes"
+    test("Should run without failures and produce correct output") {
 
-            when {
-                params {
-                    // define parameters here
-                }
-                process {
-                    """
-                    input[0] = "hello"
-                    """
-                }
+        when {
+            params {
+                // define parameters here. Example:
+                // outdir = "tests/results"
             }
-
-            then {
-                assert process.success
-                assert path(process.out[0][0]).readLines().contains('hello')
-                assert !path(process.out[0][0]).readLines().contains('HELLO')
+            process {
+                """
+                input[0] = "hello"
+                """
             }
-
         }
-    ```
 
-=== "Antes"
-
-    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 5 6 17"
-        test("Should run without failures and produce correct output") {
-
-            when {
-                params {
-                    // define parameters here. Example:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    input[0] = "hello"
-                    """
-                }
-            }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
-            }
-
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
         }
-    ```
+
+    }
+```
+
+```groovy {1,5,16,17} title="tests/main.sayhello.nf.test" showLineNumbers step="Depois"
+    test("Should run without failures and contain expected greeting") {
+
+        when {
+            params {
+                // define parameters here
+            }
+            process {
+                """
+                input[0] = "hello"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert path(process.out[0][0]).readLines().contains('hello')
+            assert !path(process.out[0][0]).readLines().contains('HELLO')
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 Observe que o nf-test vê as saídas do processo como uma lista de listas, então `process.out[0][0]` está buscando a primeira parte do primeiro item do canal (ou 'emissão') deste processo.
 
@@ -1055,56 +1064,56 @@ Agora precisamos fornecer um único arquivo de entrada para o processo convertTo
 
 Por enquanto, vamos reutilizar o arquivo greetings.csv existente usando o exemplo que usamos com o teste em nível de pipeline. Como antes, podemos nomear o teste para refletir melhor o que estamos testando, mas desta vez vamos deixá-lo 'capturar' o conteúdo em vez de verificar strings específicas (como fizemos no outro processo).
 
-=== "Depois"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.converttoupper.nf.test" linenums="1" hl_lines="1 10"
-        test("Should run without failures and produce correct output") {
+```groovy {1,10,11} title="tests/main.converttoupper.nf.test" showLineNumbers step="Antes"
+    test("Should run without failures") {
 
-            when {
-                params {
-                    // define parameters here. Example:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    input[0] = "${projectDir}/greetings.csv"
-                    """
-                }
+        when {
+            params {
+                // define parameters here. Example:
+                // outdir = "tests/results"
             }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
+            process {
+                """
+                // define inputs of the process here. Example:
+                // input[0] = file("test-file.txt")
+                """
             }
-
         }
-    ```
 
-=== "Antes"
-
-    ```groovy title="tests/main.converttoupper.nf.test" linenums="1" hl_lines="1 10 11"
-        test("Should run without failures") {
-
-            when {
-                params {
-                    // define parameters here. Example:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    // define inputs of the process here. Example:
-                    // input[0] = file("test-file.txt")
-                    """
-                }
-            }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
-            }
-
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
         }
-    ```
+
+    }
+```
+
+```groovy {1,10} title="tests/main.converttoupper.nf.test" showLineNumbers step="Depois"
+    test("Should run without failures and produce correct output") {
+
+        when {
+            params {
+                // define parameters here. Example:
+                // outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = "${projectDir}/greetings.csv"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 E execute o teste!
 
@@ -1229,7 +1238,7 @@ Aplicar essas técnicas no seu próprio trabalho permitirá que você garanta qu
 
 ### Padrões principais
 
-<!-- TODO: Can we add snippets of code below to illustrate? -->
+{/* TODO: Can we add snippets of code below to illustrate? */}
 
 1. Testes em nível de pipeline:
    - Teste básico de sucesso
@@ -1257,4 +1266,4 @@ Confira a [documentação do nf-test](https://www.nf-test.com/) para recursos de
 
 ## O que vem a seguir?
 
-Retorne ao [menu de Missões Secundárias](../index.md) ou clique no botão no canto inferior direito da página para avançar para o próximo tópico da lista.
+Retorne ao [menu de Missões Secundárias](../index.mdx) ou clique no botão no canto inferior direito da página para avançar para o próximo tópico da lista.

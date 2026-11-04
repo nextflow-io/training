@@ -1,14 +1,17 @@
-# GitHub Codespaces
+---
+title: GitHub Codespaces
+description: GitHub Codespaces è una piattaforma basata sul web che ci permette di fornire un ambiente preconfigurato per la formazione, supportato da macchine virtuali…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 GitHub Codespaces è una piattaforma basata sul web che ci permette di fornire un ambiente preconfigurato per la formazione, supportato da macchine virtuali nel cloud.
 La piattaforma è gestita da Github (di proprietà di Microsoft) ed è accessibile gratuitamente (con quote di utilizzo) a chiunque abbia un account Github.
 
-!!! warning "Avviso"
-
-    Gli account associati a organizzazioni possono essere soggetti a determinate restrizioni aggiuntive.
-    Se questo è il vostro caso, potrebbe dover utilizzare un account personale indipendente, oppure optare per un'installazione locale.
+:::caution[Avviso]
+Gli account associati a organizzazioni possono essere soggetti a determinate restrizioni aggiuntive.
+Se questo è il vostro caso, potrebbe dover utilizzare un account personale indipendente, oppure optare per un'installazione locale.
+:::
 
 ## Creare un account GitHub
 
@@ -16,7 +19,7 @@ La piattaforma è gestita da Github (di proprietà di Microsoft) ed è accessibi
 
 ## Avviare il vostro GitHub Codespace
 
-Una volta effettuato l'accesso a GitHub, apra questo link nel browser per aprire l'ambiente di formazione Nextflow: <https://codespaces.new/nextflow-io/training?quickstart=1&ref=master>
+Una volta effettuato l'accesso a GitHub, apra questo link nel browser per aprire l'ambiente di formazione Nextflow: [https://codespaces.new/nextflow-io/training?quickstart=1&ref=master](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 In alternativa, potete cliccare sul pulsante mostrato di seguito, che viene ripetuto in ogni corso di formazione (tipicamente nella pagina Orientamento).
 
@@ -24,7 +27,7 @@ In alternativa, potete cliccare sul pulsante mostrato di seguito, che viene ripe
 
 Dovreste visualizzare una pagina dove potete creare un nuovo GitHub Codespace:
 
-![Create a GitHub Codespace](img/codespaces_create.png)
+![Create a GitHub Codespace](../../envsetup/img/codespaces_create.png)
 
 ### Configurazione
 
@@ -33,24 +36,27 @@ Salvo diversa indicazione nel corso che state iniziando, potete semplicemente cl
 
 Tuttavia, è possibile personalizzare l'ambiente cliccando sul pulsante "Change options".
 
-??? info "Opzioni di configurazione"
+<details class="info">
+<summary>Opzioni di configurazione</summary>
 
-    Se clicca sul pulsante "Change options", avrà la possibilità di personalizzare quanto segue:
+Se clicca sul pulsante "Change options", avrà la possibilità di personalizzare quanto segue:
 
-    #### Branch
+#### Branch
 
-    Questo permette di selezionare una versione diversa dei materiali formativi.
-    Il branch `master` generalmente contiene correzioni di bug e materiali che sono stati recentemente sviluppati e approvati ma non ancora rilasciati sul sito web.
-    Altri branch contengono lavori in corso che potrebbero non essere completamente funzionanti.
+Questo permette di selezionare una versione diversa dei materiali formativi.
+Il branch `master` generalmente contiene correzioni di bug e materiali che sono stati recentemente sviluppati e approvati ma non ancora rilasciati sul sito web.
+Altri branch contengono lavori in corso che potrebbero non essere completamente funzionanti.
 
-    #### Tipo di macchina
+#### Tipo di macchina
 
-    Questo permette di personalizzare la macchina virtuale che utilizzerà per lavorare attraverso la formazione.
+Questo permette di personalizzare la macchina virtuale che utilizzerà per lavorare attraverso la formazione.
 
-    Utilizzare una macchina con più core permette di sfruttare maggiormente la capacità di Nextflow di parallelizzare l'esecuzione del workflow.
-    Tuttavia, consumerà la vostra quota gratuita più velocemente, quindi non raccomandiamo di modificare questa impostazione a meno che non sia consigliato nelle istruzioni del corso che sta pianificando di seguire.
+Utilizzare una macchina con più core permette di sfruttare maggiormente la capacità di Nextflow di parallelizzare l'esecuzione del workflow.
+Tuttavia, consumerà la vostra quota gratuita più velocemente, quindi non raccomandiamo di modificare questa impostazione a meno che non sia consigliato nelle istruzioni del corso che sta pianificando di seguire.
 
-    Vedere 'Quote di GitHub Codespaces' di seguito per maggiori dettagli sulle quote.
+Vedere 'Quote di GitHub Codespaces' di seguito per maggiori dettagli sulle quote.
+
+</details>
 
 ### Tempo di avvio
 
@@ -61,7 +67,7 @@ Tuttavia, non dovrebbe richiedere più di cinque minuti.
 
 Una volta caricato il vostro GitHub Codespaces, dovrebbe vedere qualcosa di simile al seguente (che potrebbe aprirsi in modalità chiara a seconda delle preferenze del vostro account):
 
-![GitHub Codespaces welcome](img/codespaces_welcome.png)
+![GitHub Codespaces welcome](../../envsetup/img/codespaces_welcome.png)
 
 Questa è l'interfaccia dell'IDE VSCode, un'applicazione popolare per lo sviluppo del codice che raccomandiamo di utilizzare per lo sviluppo Nextflow.
 
@@ -71,7 +77,7 @@ Questa è l'interfaccia dell'IDE VSCode, un'applicazione popolare per lo svilupp
 
 È possibile regolare le proporzioni relative dei riquadri della finestra come preferisce.
 
-<!-- TODO (future) Link to development best practices side quest? -->
+{/* TODO (future) Link to development best practices side quest? */}
 
 ## Altre note sull'uso di GitHub Codespaces
 
@@ -80,11 +86,11 @@ Questa è l'interfaccia dell'IDE VSCode, un'applicazione popolare per lo svilupp
 Una volta creato un ambiente, è possibile riprenderlo o riavviarlo facilmente e continuare da dove si era lasciato.
 L'ambiente andrà in timeout dopo 30 minuti di inattività e salverà le modifiche per un massimo di 2 settimane.
 
-È possibile riaprire un ambiente da <https://github.com/codespaces/>.
+È possibile riaprire un ambiente da [https://github.com/codespaces/](https://github.com/codespaces/).
 Gli ambienti precedenti saranno elencati.
 Clicchi su una sessione per riprenderla.
 
-![List GitHub Codespace sessions](img/codespaces_list.png)
+![List GitHub Codespace sessions](../../envsetup/img/codespaces_list.png)
 
 Se avete salvato l'URL del vostro ambiente GitHub Codespaces precedente, potete semplicemente aprirlo nel browser.
 In alternativa, cliccate sullo stesso pulsante che avete usato per crearlo inizialmente:
@@ -93,7 +99,7 @@ In alternativa, cliccate sullo stesso pulsante che avete usato per crearlo inizi
 
 Dovrebbe vedere la sessione precedente, l'opzione predefinita è di riprenderla:
 
-![Resume a GitHub Codespace](img/codespaces_resume.png)
+![Resume a GitHub Codespace](../../envsetup/img/codespaces_resume.png)
 
 ### Salvare file sulla macchina locale
 

@@ -1,179 +1,209 @@
 ---
-title: Inicio
+title: Capacitación en Nextflow
 description: ¡Bienvenido/a al portal de capacitación de la comunidad Nextflow!
-hide:
-  - toc
-  - footer
+sidebar:
+  label: Inicio
+tableOfContents: false
+prev: false
+next: false
 ---
 
-# Capacitación en Nextflow
+<CardGrid>
 
-<div class="grid cards" markdown>
+<Card title="Cursos de autoservicio">
 
--   :material-book-open-variant:{ .lg .middle } __Cursos de autoservicio__
+**¡Bienvenido/a al portal de capacitación de la comunidad Nextflow!**
 
-    ---
+Avance a su propio ritmo a través de los cursos que se presentan a continuación, en nuestro entorno basado en la web o en el suyo propio.
+Cada curso es práctico, con ejercicios orientados a objetivos que puede completar de forma independiente.
 
-    **¡Bienvenido/a al portal de capacitación de la comunidad Nextflow!**
+<LinkButton href="#catalog-of-nextflow-training-courses" variant="primary" icon="down-arrow">Explorar los cursos</LinkButton>
 
-    Avance a su propio ritmo a través de los cursos que se presentan a continuación, en nuestro entorno basado en la web o en el suyo propio.
-    Cada curso es práctico, con ejercicios orientados a objetivos que puede completar de forma independiente.
+</Card>
 
-    [Explorar los cursos :material-arrow-down:](#catalog-of-nextflow-training-courses){ .md-button .md-button--primary .mt-1 }
+<Card title="Eventos de capacitación">
 
--   :material-account-group-outline:{ .lg .middle } __Eventos de capacitación__
+**¿Busca algo más allá del autoservicio?**
 
-    ---
+Encuentre eventos de capacitación estructurados, orientación para organizar sus propios talleres y nuestra licencia de código abierto y política de contribución.
 
-    **¿Busca algo más allá del autoservicio?**
+<LinkButton href="training_events.mdx" variant="secondary" icon="right-arrow">Ver eventos de capacitación</LinkButton>
 
-    Encuentre eventos de capacitación estructurados, orientación para organizar sus propios talleres y nuestra licencia de código abierto y política de contribución.
+</Card>
 
-    [Ver eventos de capacitación :material-arrow-right:](training_events.md){ .md-button .md-button--secondary .mt-1 }
+</CardGrid>
 
-</div>
-
-!!! note "Traducción asistida por IA"
-
-    Esta traducción fue creada utilizando inteligencia artificial y revisada por traductores humanos.
-    Agradecemos sus comentarios y sugerencias de mejora.
-    Consulte nuestra [guía de traducción](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) para más información.
+:::note[Traducción asistida por IA]
+Esta traducción fue creada utilizando inteligencia artificial y revisada por traductores humanos.
+Agradecemos sus comentarios y sugerencias de mejora.
+Consulte nuestra [guía de traducción](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) para más información.
+:::
 
 ## Catalog of Nextflow training courses
 
-<div class="grid cards" markdown>
+<CardGrid>
 
--   :material-account:{ .lg .middle } __Para usuarios__
+<Card title="Para usuarios">
 
-    ---
+### Ejecutar pipelines
 
-    ### :material-play-circle:{.nextflow-primary} Ejecutar pipelines {.mt-1}
+Aprenda a ejecutar pipelines existentes sin escribir ningún código.
 
-    Aprenda a ejecutar pipelines existentes sin escribir ningún código.
+<details class="courses">
+<summary>**Nextflow Run:** Ejecutar pipelines con Nextflow</summary>
 
-    ??? courses "**Nextflow Run:** Ejecutar pipelines con Nextflow"
+Una introducción rápida a la ejecución de pipelines de Nextflow que no requiere comprensión del código. Cubre el lanzamiento de pipelines, la recuperación de salidas, el uso de contenedores y la configuración de la ejecución a un nivel básico.
 
-        Una introducción rápida a la ejecución de pipelines de Nextflow que no requiere comprensión del código. Cubre el lanzamiento de pipelines, la recuperación de salidas, el uso de contenedores y la configuración de la ejecución a un nivel básico.
+<LinkButton href="nextflow_run/index.mdx" variant="secondary" icon="right-arrow">Ver la capacitación</LinkButton>
 
-        [Ver la capacitación :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
+</details>
 
-    ??? courses "**Use nf-core:** Encontrar y ejecutar pipelines curados por la comunidad"
+<details class="courses">
+<summary>**Use nf-core:** Encontrar y ejecutar pipelines curados por la comunidad</summary>
 
-        Una introducción rápida para encontrar, ejecutar y configurar pipelines del proyecto comunitario nf-core, comenzando con un pipeline de demostración mínimo y escalando hasta un pipeline de análisis a escala de producción.
+Una introducción rápida para encontrar, ejecutar y configurar pipelines del proyecto comunitario nf-core, comenzando con un pipeline de demostración mínimo y escalando hasta un pipeline de análisis a escala de producción.
 
-        [Ver la capacitación :material-arrow-right:](nfcore_use/index.md){ .md-button .md-button--secondary }
+<LinkButton href="nfcore_use/index.mdx" variant="secondary" icon="right-arrow">Ver la capacitación</LinkButton>
 
-    ??? courses "**Scale with Seqera:** Lanzar y monitorear pipelines a escala"
+</details>
 
-        Una introducción práctica al lanzamiento y monitoreo de pipelines de Nextflow con Seqera Platform, tanto desde la interfaz web como desde la línea de comandos.
+<details class="courses">
+<summary>**Scale with Seqera:** Lanzar y monitorear pipelines a escala</summary>
 
-        [Ver la capacitación :material-arrow-right:](seqera_scale/index.md){ .md-button .md-button--secondary }
+Una introducción práctica al lanzamiento y monitoreo de pipelines de Nextflow con Seqera Platform, tanto desde la interfaz web como desde la línea de comandos.
 
-    ---
+<LinkButton href="seqera_scale/index.mdx" variant="secondary" icon="right-arrow">Ver la capacitación</LinkButton>
 
-    ### :material-tune:{.nextflow-primary} Gestionar la ejecución {.mt-1}
+</details>
 
-    Aprenda a gestionar la ejecución de pipelines de manera efectiva.
+---
 
-    ??? courses "**Configure Execution:** Configurar recursos, reintentos y perfiles de ejecución"
+### Gestionar la ejecución
 
-        Una introducción práctica a la configuración de la ejecución de pipelines de Nextflow: adaptación a diferentes entornos de cómputo, control de asignaciones de recursos y reintentos, y cambio entre perfiles de configuración predefinidos.
+Aprenda a gestionar la ejecución de pipelines de manera efectiva.
 
-        [Ver la capacitación :material-arrow-right:](config_exec/index.md){ .md-button .md-button--secondary }
+<details class="courses">
+<summary>**Configure Execution:** Configurar recursos, reintentos y perfiles de ejecución</summary>
 
-    !!! info compact "Más temas próximamente"
+Una introducción práctica a la configuración de la ejecución de pipelines de Nextflow: adaptación a diferentes entornos de cómputo, control de asignaciones de recursos y reintentos, y cambio entre perfiles de configuración predefinidos.
 
-        La optimización del rendimiento, la ejecución en HPC/nube y más están planificados para esta sección.
-        Vote sobre qué temas cubrir a continuación en nuestra [breve encuesta de interés](https://seqera.typeform.com/to/JCs91e8v).
+<LinkButton href="config_exec/index.mdx" variant="secondary" icon="right-arrow">Ver la capacitación</LinkButton>
 
--   :material-code-tags:{ .lg .middle } __Para desarrolladores__
+</details>
 
-    ---
+:::note[Más temas próximamente]
+La optimización del rendimiento, la ejecución en HPC/nube y más están planificados para esta sección.
+Vote sobre qué temas cubrir a continuación en nuestra [breve encuesta de interés](https://seqera.typeform.com/to/JCs91e8v).
+:::
 
-    ### :material-wrench:{.nextflow-primary} Escribir pipelines {.mt-1}
+</Card>
 
-    Aprenda a desarrollar sus propios pipelines de Nextflow.
+<Card title="Para desarrolladores">
 
-    ??? courses "**Hello Nextflow:** Desarrollar sus propios pipelines desde cero"
+### Escribir pipelines
 
-        Este curso cubre los componentes principales del lenguaje Nextflow con suficiente detalle para permitir el desarrollo de pipelines simples pero completamente funcionales, además de elementos clave de diseño, desarrollo y prácticas de configuración de pipelines.
+Aprenda a desarrollar sus propios pipelines de Nextflow.
 
-        [Ver la capacitación :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--secondary }
+<details class="courses">
+<summary>**Hello Nextflow:** Desarrollar sus propios pipelines desde cero</summary>
 
-    ??? courses "**Build with nf-core:** Usar las herramientas y reglas de nf-core"
+Este curso cubre los componentes principales del lenguaje Nextflow con suficiente detalle para permitir el desarrollo de pipelines simples pero completamente funcionales, además de elementos clave de diseño, desarrollo y prácticas de configuración de pipelines.
 
-        Para desarrolladores de Nextflow que deseen aprender a desarrollar pipelines compatibles con [nf-core](https://nf-co.re/).
-        El curso cubre la estructura de los pipelines de nf-core con suficiente detalle para permitir el desarrollo de pipelines simples pero completamente funcionales que aprovechen la plantilla de nf-core y las mejores prácticas de desarrollo, así como el uso de módulos de nf-core existentes.
+<LinkButton href="hello_nextflow/index.mdx" variant="secondary" icon="right-arrow">Ver la capacitación</LinkButton>
 
-        [Ver la capacitación :material-arrow-right:](nfcore_build/index.md){ .md-button .md-button--secondary }
+</details>
 
-    ??? catalog "**Side Quests:** Profundizar en temas avanzados de Nextflow"
+<details class="courses">
+<summary>**Build with nf-core:** Usar las herramientas y reglas de nf-core</summary>
 
-        Una colección de mini-cursos independientes destinados a desarrolladores de Nextflow que deseen ampliar su alcance y/o profundizar sus habilidades en temas particulares.
-        Se presentan de forma lineal, pero pueden tomarse en cualquier orden (consulte las dependencias en la descripción general de cada mini-curso).
+Para desarrolladores de Nextflow que deseen aprender a desarrollar pipelines compatibles con [nf-core](https://nf-co.re/).
+El curso cubre la estructura de los pipelines de nf-core con suficiente detalle para permitir el desarrollo de pipelines simples pero completamente funcionales que aprovechen la plantilla de nf-core y las mejores prácticas de desarrollo, así como el uso de módulos de nf-core existentes.
 
-        [Explorar los Side Quests :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
+<LinkButton href="nfcore_build/index.mdx" variant="secondary" icon="right-arrow">Ver la capacitación</LinkButton>
 
-    ---
+</details>
 
-    ### :material-microscope:{.nextflow-primary} Nextflow para la Ciencia {.mt-1}
+<details class="catalog">
+<summary>**Side Quests:** Profundizar en temas avanzados de Nextflow</summary>
 
-    Aprenda a desarrollar pipelines de Nextflow para aplicaciones científicas específicas.
+Una colección de mini-cursos independientes destinados a desarrolladores de Nextflow que deseen ampliar su alcance y/o profundizar sus habilidades en temas particulares.
+Se presentan de forma lineal, pero pueden tomarse en cualquier orden (consulte las dependencias en la descripción general de cada mini-curso).
 
-    ??? courses "**Genomics:** Desarrollar un pipeline de llamado de variantes"
+<LinkButton href="side_quests/index.mdx" variant="secondary" icon="right-arrow">Explorar los Side Quests</LinkButton>
 
-        Un curso para investigadores que deseen aprender a desarrollar sus propios pipelines de genómica, utilizando un caso de uso de llamado de variantes para demostrar los patrones esenciales de desarrollo en Nextflow.
+</details>
 
-        [Ver la capacitación :material-arrow-right:](nf4_science/genomics/index.md){ .md-button .md-button--secondary }
+---
 
-    ??? courses "**RNAseq:** Desarrollar un pipeline de procesamiento de RNAseq masivo"
+### Nextflow para la Ciencia
 
-        Un curso para investigadores que deseen aprender a desarrollar sus propios pipelines de RNAseq, utilizando un caso de uso de procesamiento de RNAseq masivo para demostrar los patrones esenciales de desarrollo en Nextflow.
+Aprenda a desarrollar pipelines de Nextflow para aplicaciones científicas específicas.
 
-        [Ver la capacitación :material-arrow-right:](nf4_science/rnaseq/index.md){ .md-button .md-button--secondary }
+<details class="courses">
+<summary>**Genomics:** Desarrollar un pipeline de llamado de variantes</summary>
 
-    ??? courses "**Bioimaging:** Ejecutar y configurar pipelines de imágenes"
+Un curso para investigadores que deseen aprender a desarrollar sus propios pipelines de genómica, utilizando un caso de uso de llamado de variantes para demostrar los patrones esenciales de desarrollo en Nextflow.
 
-        Un curso para investigadores que deseen aprender a ejecutar y configurar pipelines de bioimagen, utilizando nf-core/molkart para demostrar los patrones esenciales de uso de Nextflow.
+<LinkButton href="nf4_science/genomics/index.mdx" variant="secondary" icon="right-arrow">Ver la capacitación</LinkButton>
 
-        [Ver la capacitación :material-arrow-right:](nf4_science/imaging/index.md){ .md-button .md-button--secondary }
+</details>
 
-</div>
+<details class="courses">
+<summary>**RNAseq:** Desarrollar un pipeline de procesamiento de RNAseq masivo</summary>
+
+Un curso para investigadores que deseen aprender a desarrollar sus propios pipelines de RNAseq, utilizando un caso de uso de procesamiento de RNAseq masivo para demostrar los patrones esenciales de desarrollo en Nextflow.
+
+<LinkButton href="nf4_science/rnaseq/index.mdx" variant="secondary" icon="right-arrow">Ver la capacitación</LinkButton>
+
+</details>
+
+<details class="courses">
+<summary>**Bioimaging:** Ejecutar y configurar pipelines de imágenes</summary>
+
+Un curso para investigadores que deseen aprender a ejecutar y configurar pipelines de bioimagen, utilizando nf-core/molkart para demostrar los patrones esenciales de uso de Nextflow.
+
+<LinkButton href="nf4_science/imaging/index.mdx" variant="secondary" icon="right-arrow">Ver la capacitación</LinkButton>
+
+</details>
+
+</Card>
+
+</CardGrid>
 
 ## Configuración y ayuda
 
-<div class="grid cards mb-4" markdown>
+<CardGrid>
 
--   :material-cog-outline:{ .lg .middle } __Entorno de capacitación__
+<Card title="Entorno de capacitación">
 
-    ---
+Opciones para configurar su entorno para las capacitaciones de Nextflow.
 
-    Opciones para configurar su entorno para las capacitaciones de Nextflow.
+<LinkButton href="envsetup/index.mdx" variant="secondary" icon="right-arrow">Ver los entornos de capacitación</LinkButton>
 
-    [Ver los entornos de capacitación :material-arrow-right:](envsetup/index.md){ .md-button .md-button--secondary }
+</Card>
 
--   :material-tag-outline:{ .lg .middle } __Versiones de Nextflow__
+<Card title="Versiones de Nextflow">
 
-    ---
+Comprensión y gestión de la evolución de las versiones de sintaxis de Nextflow.
 
-    Comprensión y gestión de la evolución de las versiones de sintaxis de Nextflow.
+<LinkButton href="info/nxf_versions.mdx" variant="secondary" icon="right-arrow">Verificar los requisitos de versión</LinkButton>
 
-    [Verificar los requisitos de versión :material-arrow-right:](info/nxf_versions.md){ .md-button .md-button--secondary }
+</Card>
 
--   :material-file-code-outline:{ .lg .middle } __El pipeline Hello__
+<Card title="El pipeline Hello">
 
-    ---
+Resumen de lo que hace el pipeline Hello y cómo está estructurado.
 
-    Resumen de lo que hace el pipeline Hello y cómo está estructurado.
+<LinkButton href="info/hello_pipeline.mdx" variant="secondary" icon="right-arrow">Leer el resumen</LinkButton>
 
-    [Leer el resumen :material-arrow-right:](info/hello_pipeline.md){ .md-button .md-button--secondary }
+</Card>
 
--   :material-lifebuoy:{ .lg .middle } __Obtener ayuda__
+<Card title="Obtener ayuda">
 
-    ---
+Recursos útiles cuando tenga un problema con la capacitación de Nextflow.
 
-    Recursos útiles cuando tenga un problema con la capacitación de Nextflow.
+<LinkButton href="help.mdx" variant="secondary" icon="right-arrow">Encontrar ayuda</LinkButton>
 
-    [Encontrar ayuda :material-arrow-right:](help.md){ .md-button .md-button--secondary }
+</Card>
 
-</div>
+</CardGrid>

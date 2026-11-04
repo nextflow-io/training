@@ -1,18 +1,21 @@
-# Bölüm 5: Trace Observer'lar
+---
+title: 'Bölüm 5: Trace Observer''lar'
+description: Trace observer'lar, eklentinizin bir görevin tamamlanması, bir dosyanın yayımlanması veya pipeline'ın bitmesi gibi iş akışı olaylarına yanıt vermesini sağlar.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Trace observer'lar, eklentinizin bir görevin tamamlanması, bir dosyanın yayımlanması veya pipeline'ın bitmesi gibi iş akışı olaylarına yanıt vermesini sağlar.
 Bu sayede özel raporlar, Slack bildirimleri, metrik toplama veya harici izleme sistemleriyle entegrasyon gibi kullanım senaryoları mümkün olur.
 Bu bölümde, tamamlanan görevleri sayan ve bir özet yazdıran bir observer oluşturacaksınız.
 
-!!! tip "Buradan mı başlıyorsunuz?"
+:::tip[Buradan mı başlıyorsunuz?]
+Bu bölüme doğrudan katılıyorsanız, başlangıç noktası olarak Bölüm 4'ün çözümünü kopyalayın:
 
-    Bu bölüme doğrudan katılıyorsanız, başlangıç noktası olarak Bölüm 4'ün çözümünü kopyalayın:
-
-    ```bash
-    cp -r solutions/4-build-and-test/* .
-    ```
+```bash
+cp -r solutions/4-build-and-test/* .
+```
+:::
 
 ---
 
@@ -26,7 +29,7 @@ Observer koduna bakın:
 cat nf-greeting/src/main/groovy/training/plugin/GreetingObserver.groovy
 ```
 
-```groovy title="Output" hl_lines="30 32-34 37-39"
+```groovy {30,32-34,37-39} title="Output"
 /*
  * Copyright 2025, Seqera Labs
  *
@@ -56,23 +59,19 @@ import nextflow.trace.TraceObserver
  */
 @Slf4j
 @CompileStatic
-class GreetingObserver implements TraceObserver {    // (1)!
+class GreetingObserver implements TraceObserver {    // [!annotate] İş akışı yaşam döngüsü olaylarına bağlanmak için kullanılan arayüz
 
     @Override
-    void onFlowCreate(Session session) {            // (2)!
+    void onFlowCreate(Session session) {            // [!annotate] İş akışı başladığında çağrılır; yapılandırmaya erişmek için oturumu alır
         println "Pipeline is starting! 🚀"
     }
 
     @Override
-    void onFlowComplete() {                         // (3)!
+    void onFlowComplete() {                         // [!annotate] İş akışı başarıyla tamamlandığında çağrılır
         println "Pipeline complete! 👋"
     }
 }
 ```
-
-1. İş akışı yaşam döngüsü olaylarına bağlanmak için kullanılan arayüz
-2. İş akışı başladığında çağrılır; yapılandırmaya erişmek için oturumu alır
-3. İş akışı başarıyla tamamlandığında çağrılır
 
 Burada dikkat edilmesi gereken iki nokta vardır:
 
@@ -109,11 +108,11 @@ touch nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy
 
 Herhangi bir görev tamamlandığında mesaj yazdıran mümkün olan en basit observer ile başlayın:
 
-```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1"
+```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" showLineNumbers
 package training.plugin
 
 import groovy.transform.CompileStatic
-import nextflow.processor.TaskHandler       // (1)!
+import nextflow.processor.TaskHandler       // [!annotate] Gerekli sınıfları içe aktarın: `TraceObserver`, `TaskHandler` ve `TraceRecord`
 import nextflow.trace.TraceObserver
 import nextflow.trace.TraceRecord
 
@@ -121,18 +120,14 @@ import nextflow.trace.TraceRecord
  * Görev tamamlanma olaylarına yanıt veren observer
  */
 @CompileStatic
-class TaskCounterObserver implements TraceObserver {  // (2)!
+class TaskCounterObserver implements TraceObserver {  // [!annotate] `TraceObserver`'ı uygulayan (`implements`) bir sınıf oluşturun
 
     @Override
-    void onProcessComplete(TaskHandler handler, TraceRecord trace) {  // (3)!
+    void onProcessComplete(TaskHandler handler, TraceRecord trace) {  // [!annotate] Bir görev tamamlandığında kod çalıştırmak için `onProcessComplete`'i override edin
         println "✓ Task completed!"
     }
 }
 ```
-
-1. Gerekli sınıfları içe aktarın: `TraceObserver`, `TaskHandler` ve `TraceRecord`
-2. `TraceObserver`'ı uygulayan (`implements`) bir sınıf oluşturun
-3. Bir görev tamamlandığında kod çalıştırmak için `onProcessComplete`'i override edin
 
 Bu, gereken asgari yapıdır:
 
@@ -149,7 +144,7 @@ Bir göz atın:
 cat nf-greeting/src/main/groovy/training/plugin/GreetingFactory.groovy
 ```
 
-```groovy title="Output" hl_lines="25 27-29"
+```groovy {25,27-29} title="Output"
 /*
  * Copyright 2025, Seqera Labs
  *
@@ -186,53 +181,53 @@ class GreetingFactory implements TraceObserverFactory {
 
 Yeni observer'ı eklemek için `GreetingFactory.groovy`'yi düzenleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="GreetingFactory.groovy" linenums="31" hl_lines="3-6"
-    @Override
-    Collection<TraceObserver> create(Session session) {
-        return [
-            new GreetingObserver(),
-            new TaskCounterObserver()
-        ]
-    }
-    ```
+```groovy {3} title="GreetingFactory.groovy" showLineNumbers startLineNumber=31 step="Önce"
+@Override
+Collection<TraceObserver> create(Session session) {
+    return List.<TraceObserver>of(new GreetingObserver())
+}
+```
 
-=== "Önce"
+```groovy {3-6} title="GreetingFactory.groovy" showLineNumbers startLineNumber=31 step="Sonra"
+@Override
+Collection<TraceObserver> create(Session session) {
+    return [
+        new GreetingObserver(),
+        new TaskCounterObserver()
+    ]
+}
+```
 
-    ```groovy title="GreetingFactory.groovy" linenums="31" hl_lines="3"
-    @Override
-    Collection<TraceObserver> create(Session session) {
-        return List.<TraceObserver>of(new GreetingObserver())
-    }
-    ```
+</CodeWalkthrough>
 
-!!! note "Groovy liste sözdizimi"
-
-    Java tarzı `List.<TraceObserver>of(...)` ifadesini Groovy'nin daha sade liste değişmezi `[...]` ile değiştirdik.
-    Her ikisi de bir `Collection` döndürür; ancak birden fazla öğe eklerken Groovy sözdizimi daha okunabilirdir.
+:::note[Groovy liste sözdizimi]
+Java tarzı `List.<TraceObserver>of(...)` ifadesini Groovy'nin daha sade liste değişmezi `[...]` ile değiştirdik.
+Her ikisi de bir `Collection` döndürür; ancak birden fazla öğe eklerken Groovy sözdizimi daha okunabilirdir.
+:::
 
 Şablonun factory için hazırladığı birim testi tam olarak bir observer beklemektedir; bu nedenle factory iki observer oluşturduğunda test başarısız olur.
 Her ikisini de bekleyecek şekilde `nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy` dosyasını güncelleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="GreetingObserverTest.groovy" linenums="17" hl_lines="2-4"
-            then:
-            result.size() == 2
-            result[0] instanceof GreetingObserver
-            result[1] instanceof TaskCounterObserver
-        }
-    ```
+```groovy {2-3} title="GreetingObserverTest.groovy" showLineNumbers startLineNumber=17 step="Önce"
+        then:
+        result.size() == 1
+        result.first() instanceof GreetingObserver
+    }
+```
 
-=== "Önce"
+```groovy {2-4} title="GreetingObserverTest.groovy" showLineNumbers startLineNumber=17 step="Sonra"
+        then:
+        result.size() == 2
+        result[0] instanceof GreetingObserver
+        result[1] instanceof TaskCounterObserver
+    }
+```
 
-    ```groovy title="GreetingObserverTest.groovy" linenums="17" hl_lines="2-3"
-            then:
-            result.size() == 1
-            result.first() instanceof GreetingObserver
-        }
-    ```
+</CodeWalkthrough>
 
 ### 2.3. Derleme, kurulum ve test
 
@@ -241,12 +236,12 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-!!! tip "Neden `-ansi-log false`?"
+:::tip[Neden `-ansi-log false`?]
+Nextflow, varsayılan olarak ANSI ilerleme görüntüsünü kullanır ve önceki satırların üzerine yazarak ilerlemenin temiz ve güncel bir görünümünü sunar.
+Bu, yalnızca *son* görev sayısını göreceğiniz anlamına gelir; ara mesajları göremezsiniz.
 
-    Nextflow, varsayılan olarak ANSI ilerleme görüntüsünü kullanır ve önceki satırların üzerine yazarak ilerlemenin temiz ve güncel bir görünümünü sunar.
-    Bu, yalnızca *son* görev sayısını göreceğiniz anlamına gelir; ara mesajları göremezsiniz.
-
-    `-ansi-log false` kullanmak bu davranışı devre dışı bırakır ve tüm çıktıyı sıralı olarak gösterir; bu da yürütme sırasında mesaj yazdıran observer'ları test ederken önemlidir.
+`-ansi-log false` kullanmak bu davranışı devre dışı bırakır ve tüm çıktıyı sıralı olarak gösterir; bu da yürütme sırasında mesaj yazdıran observer'ları test ederken önemlidir.
+:::
 
 "✓ Task completed!" ifadesinin beş kez (her görev için bir kez) mevcut pipeline çıktısıyla iç içe geçmiş şekilde yazdırıldığını görmelisiniz:
 
@@ -265,10 +260,13 @@ Pipeline complete! 👋
 Observer çalışıyor.
 Bir görev her tamamlandığında, Nextflow `onProcessComplete`'i çağırır ve bizim uygulamamız bir mesaj yazdırır.
 
-??? exercise "Mesajı özelleştirin"
+<details class="exercise">
+<summary>Mesajı özelleştirin</summary>
 
-    `onProcessComplete` içindeki mesajı kendi seçtiğiniz bir şeyle değiştirmeyi deneyin, yeniden derleyin ve çalıştırın.
-    Bu, observer'lar için tam düzenleme-derleme-çalıştırma döngüsünün çalıştığını doğrular.
+`onProcessComplete` içindeki mesajı kendi seçtiğiniz bir şeyle değiştirmeyi deneyin, yeniden derleyin ve çalıştırın.
+Bu, observer'lar için tam düzenleme-derleme-çalıştırma döngüsünün çalıştığını doğrular.
+
+</details>
 
 ### 2.4. Sayma mantığı ekleme
 
@@ -283,7 +281,7 @@ Tüm iş akışı tamamlandığında, observer son toplamı yazdırır.
 
 `TaskCounterObserver.groovy`'yi vurgulanan değişikliklerle güncelleyin:
 
-```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="5 15 19-20 23-25"
+```groovy {5,15,19-20,23-25} title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" showLineNumbers
 package training.plugin
 
 import groovy.transform.CompileStatic
@@ -298,24 +296,20 @@ import nextflow.trace.TraceRecord
 @CompileStatic
 class TaskCounterObserver implements TraceObserver {
 
-    private final AtomicInteger taskCount = new AtomicInteger()  // (1)!
+    private final AtomicInteger taskCount = new AtomicInteger()  // [!annotate] `taskCount`, observer nesnesine ait bir değişkendir. Metod çağrıları arasında değerini korur; bu sayede tüm iş akışı çalışması boyunca bir sayım biriktirebilir. `private`, yalnızca bu sınıfın ona erişebileceği anlamına gelir. Nextflow, farklı thread'lerden aynı anda birden fazla görev tamamlanmasını bildirebilir; bu nedenle sayaç, eş zamanlı güncellemeler altında doğruluğunu koruyan bir `AtomicInteger`'dır. Sıradan bir `int` kullanıldığında artırma işlemleri kaybolabilir.
 
     @Override
     void onProcessComplete(TaskHandler handler, TraceRecord trace) {
-        final count = taskCount.incrementAndGet()                 // (2)!
+        final count = taskCount.incrementAndGet()                 // [!annotate] `incrementAndGet()` sayaca bir ekler ve yeni değeri döndürür. Bu satır her görev tamamlandığında çalışır; böylece iş akışı ilerledikçe sayım artar.
         println "📊 Tasks completed so far: ${count}"
     }
 
     @Override
-    void onFlowComplete() {                                       // (3)!
+    void onFlowComplete() {                                       // [!annotate] `onFlowComplete`, ikinci bir yaşam döngüsü kancasıdır. İş akışı tamamlandığında bir kez çalışır ve özet yazdırmak için uygun bir yerdir.
         println "📈 Final task count: ${taskCount.get()}"
     }
 }
 ```
-
-1. `taskCount`, observer nesnesine ait bir değişkendir. Metod çağrıları arasında değerini korur; bu sayede tüm iş akışı çalışması boyunca bir sayım biriktirebilir. `private`, yalnızca bu sınıfın ona erişebileceği anlamına gelir. Nextflow, farklı thread'lerden aynı anda birden fazla görev tamamlanmasını bildirebilir; bu nedenle sayaç, eş zamanlı güncellemeler altında doğruluğunu koruyan bir `AtomicInteger`'dır. Sıradan bir `int` kullanıldığında artırma işlemleri kaybolabilir.
-2. `incrementAndGet()` sayaca bir ekler ve yeni değeri döndürür. Bu satır her görev tamamlandığında çalışır; böylece iş akışı ilerledikçe sayım artar.
-3. `onFlowComplete`, ikinci bir yaşam döngüsü kancasıdır. İş akışı tamamlandığında bir kez çalışır ve özet yazdırmak için uygun bir yerdir.
 
 Özetle:
 
@@ -330,37 +324,40 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-??? example "Çıktı"
+<details class="example">
+<summary>Çıktı</summary>
 
-    ```console
-    N E X T F L O W  ~  version 26.04.4
-    Launching `greet.nf` [pensive_engelbart] - revision: bef1bea9f0
-    Pipeline is starting! 🚀
-    Reversed: olleH
-    Reversed: ruojnoB
-    Reversed: aloH
-    Reversed: oaiC
-    Reversed: ollaH
-    [be/bd8e72] Submitted process > SAY_HELLO (2)
-    [5b/d24c2b] Submitted process > SAY_HELLO (1)
-    [14/1f9dbe] Submitted process > SAY_HELLO (3)
-    Decorated: *** Bonjour ***
-    Decorated: *** Hello ***
-    [85/a6b3ad] Submitted process > SAY_HELLO (4)
-    📊 Tasks completed so far: 1
-    📊 Tasks completed so far: 2
-    Decorated: *** Hola ***
-    📊 Tasks completed so far: 3
-    Decorated: *** Ciao ***
-    [3c/be6686] Submitted process > SAY_HELLO (5)
-    📊 Tasks completed so far: 4
-    Decorated: *** Hallo ***
-    📊 Tasks completed so far: 5
-    Pipeline complete! 👋
-    📈 Final task count: 5
-    ```
+```console
+N E X T F L O W  ~  version 26.04.4
+Launching `greet.nf` [pensive_engelbart] - revision: bef1bea9f0
+Pipeline is starting! 🚀
+Reversed: olleH
+Reversed: ruojnoB
+Reversed: aloH
+Reversed: oaiC
+Reversed: ollaH
+[be/bd8e72] Submitted process > SAY_HELLO (2)
+[5b/d24c2b] Submitted process > SAY_HELLO (1)
+[14/1f9dbe] Submitted process > SAY_HELLO (3)
+Decorated: *** Bonjour ***
+Decorated: *** Hello ***
+[85/a6b3ad] Submitted process > SAY_HELLO (4)
+📊 Tasks completed so far: 1
+📊 Tasks completed so far: 2
+Decorated: *** Hola ***
+📊 Tasks completed so far: 3
+Decorated: *** Ciao ***
+[3c/be6686] Submitted process > SAY_HELLO (5)
+📊 Tasks completed so far: 4
+Decorated: *** Hallo ***
+📊 Tasks completed so far: 5
+Pipeline complete! 👋
+📈 Final task count: 5
+```
 
-    Sayaç mesajları, görev gönderimleriyle iç içe geçmiştir; çünkü observer'lar görevler tamamlandıkça çalışır.
+Sayaç mesajları, görev gönderimleriyle iç içe geçmiştir; çünkü observer'lar görevler tamamlandıkça çalışır.
+
+</details>
 
 ---
 
@@ -373,46 +370,46 @@ Observer, dosyalar yayımlandığında da yanıt verebilir.
 
 Önce, `SAY_HELLO` sürecinin çıktı dosyalarını yayımlaması için `greet.nf`'yi güncelleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="greet.nf" linenums="10" hl_lines="2"
-    process SAY_HELLO {
-        publishDir 'results'
-        input:
-            val greeting
-        output:
-            path 'greeting.txt'
-        script:
-        // Selamlamayı süslemek için özel eklenti fonksiyonumuzu kullan
-        def decorated = decorateGreeting(greeting)
-        """
-        echo '$decorated' > greeting.txt
-        """
-    }
-    ```
+```nextflow title="greet.nf" showLineNumbers startLineNumber=10 step="Önce"
+process SAY_HELLO {
+    input:
+        val greeting
+    output:
+        path 'greeting.txt'
+    script:
+    // Selamlamayı süslemek için özel eklenti fonksiyonumuzu kullan
+    def decorated = decorateGreeting(greeting)
+    """
+    echo '$decorated' > greeting.txt
+    """
+}
+```
 
-=== "Önce"
+```nextflow {2} title="greet.nf" showLineNumbers startLineNumber=10 step="Sonra"
+process SAY_HELLO {
+    publishDir 'results'
+    input:
+        val greeting
+    output:
+        path 'greeting.txt'
+    script:
+    // Selamlamayı süslemek için özel eklenti fonksiyonumuzu kullan
+    def decorated = decorateGreeting(greeting)
+    """
+    echo '$decorated' > greeting.txt
+    """
+}
+```
 
-    ```groovy title="greet.nf" linenums="10"
-    process SAY_HELLO {
-        input:
-            val greeting
-        output:
-            path 'greeting.txt'
-        script:
-        // Selamlamayı süslemek için özel eklenti fonksiyonumuzu kullan
-        def decorated = decorateGreeting(greeting)
-        """
-        echo '$decorated' > greeting.txt
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 ### 3.2. onFilePublish metodunu ekleme
 
 `TaskCounterObserver.groovy`'ye bir `onFilePublish` metodu ve gerekli içe aktarmayı ekleyin:
 
-```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="5 24-27"
+```groovy {5,24-27} title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" showLineNumbers
 package training.plugin
 
 import groovy.transform.CompileStatic
@@ -490,4 +487,4 @@ Görev sayacı çalışıyor; ancak her zaman açık durumda.
 Gerçek bir eklentide, kullanıcıların eklenti kaynak kodunu düzenlemeden `nextflow.config` üzerinden özellikleri etkinleştirip devre dışı bırakabilmesi veya davranışı ayarlayabilmesi gerekir.
 Bir sonraki bölüm, observer'ınızı yapılandırılabilir hale getirmeyi ve tamamlanmış eklentinizi başkalarıyla paylaşmayı göstermektedir.
 
-[Bölüm 6'ya devam edin :material-arrow-right:](06_configuration.md){ .md-button .md-button--primary }
+<LinkButton href="06_configuration.mdx" variant="primary" icon="right-arrow">Bölüm 6'ya devam edin</LinkButton>

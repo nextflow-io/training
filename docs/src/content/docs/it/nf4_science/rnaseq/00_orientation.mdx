@@ -1,10 +1,13 @@
-# Primi passi
+---
+title: Primi passi
+description: 'Nextflow per RNAseq: Primi passi'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Avviare un ambiente di formazione
 
-Per utilizzare l'ambiente preconfigurato che forniamo su GitHub Codespaces, cliccate sul pulsante "Open in GitHub Codespaces" qui sotto. Per altre opzioni, consultate [Opzioni di ambiente](../../envsetup/index.md).
+Per utilizzare l'ambiente preconfigurato che forniamo su GitHub Codespaces, cliccate sul pulsante "Open in GitHub Codespaces" qui sotto. Per altre opzioni, consultate [Opzioni di ambiente](../../envsetup/index.mdx).
 
 Vi consigliamo di aprire l'ambiente di formazione in una nuova scheda o finestra del browser (utilizzate il clic destro, ctrl-clic o cmd-clic a seconda del vostro dispositivo) in modo da poter continuare a leggere mentre l'ambiente si carica.
 Dovrete tenere queste istruzioni aperte in parallelo per seguire il corso.
@@ -18,12 +21,12 @@ Questo ambiente di formazione contiene tutto il software, il codice e i dati nec
 Il codespace è configurato con un'interfaccia VSCode, che include un esploratore del filesystem, un editor di codice e una shell del terminale.
 Tutte le istruzioni fornite durante il corso (ad es. 'aprite il file', 'modificate il codice' o 'eseguite questo comando') si riferiscono a queste tre parti dell'interfaccia VSCode salvo diversa indicazione.
 
-Se state seguendo questo corso autonomamente, vi preghiamo di familiarizzare con le [nozioni di base sull'ambiente](../../envsetup/01_setup.md) per ulteriori dettagli.
+Se state seguendo questo corso autonomamente, vi preghiamo di familiarizzare con le [nozioni di base sull'ambiente](../../envsetup/01_setup.mdx) per ulteriori dettagli.
 
 ### Requisiti di versione
 
 Questa formazione è progettata per Nextflow 25.10.2 o successivo **con il parser di sintassi v2 ABILITATO**.
-Se state utilizzando un ambiente locale o personalizzato, assicuratevi di utilizzare le impostazioni corrette come documentato [qui](../../info/nxf_versions.md).
+Se state utilizzando un ambiente locale o personalizzato, assicuratevi di utilizzare le impostazioni corrette come documentato [qui](../../info/nxf_versions.mdx).
 
 ## Preparatevi a lavorare
 
@@ -45,13 +48,13 @@ Potete impostare VSCode per concentrarsi su questa directory, in modo che solo i
 code .
 ```
 
-!!! tip "Suggerimento"
+:::tip[Suggerimento]
+Se per qualsiasi motivo vi spostate fuori da questa directory (ad es. il vostro codespace va in sospensione), potete sempre utilizzare il percorso completo per ritornarvi, supponendo che stiate eseguendo questo nell'ambiente di formazione GitHub Codespaces:
 
-    Se per qualsiasi motivo vi spostate fuori da questa directory (ad es. il vostro codespace va in sospensione), potete sempre utilizzare il percorso completo per ritornarvi, supponendo che stiate eseguendo questo nell'ambiente di formazione GitHub Codespaces:
-
-    ```bash
-    cd /workspaces/training/nf4-science/rnaseq
-    ```
+```bash
+cd /workspaces/training/nf4-science/rnaseq
+```
+:::
 
 Ora diamo un'occhiata ai contenuti.
 
@@ -68,45 +71,48 @@ Qui generiamo un sommario dei contenuti fino al terzo livello:
 tree . -L 3
 ```
 
-??? abstract "Contenuto della directory"
+<details class="abstract">
+<summary>Contenuto della directory</summary>
 
-    ```console
-    .
-    ├── data
-    │   ├── genome.fa
-    │   ├── paired-end.csv
-    │   ├── reads
-    │   │   ├── ENCSR000COQ1_1.fastq.gz
-    │   │   ├── ENCSR000COQ1_2.fastq.gz
-    │   │   ├── ENCSR000COQ2_1.fastq.gz
-    │   │   ├── ENCSR000COQ2_2.fastq.gz
-    │   │   ├── ENCSR000COR1_1.fastq.gz
-    │   │   ├── ENCSR000COR1_2.fastq.gz
-    │   │   ├── ENCSR000COR2_1.fastq.gz
-    │   │   ├── ENCSR000COR2_2.fastq.gz
-    │   │   ├── ENCSR000CPO1_1.fastq.gz
-    │   │   ├── ENCSR000CPO1_2.fastq.gz
-    │   │   ├── ENCSR000CPO2_1.fastq.gz
-    │   │   └── ENCSR000CPO2_2.fastq.gz
-    │   └── single-end.csv
-    ├── modules
-    │   ├── fastqc.nf
-    │   ├── hisat2_align.nf
-    │   ├── multiqc.nf
-    │   └── trim_galore.nf
-    ├── nextflow.config
-    ├── rnaseq.nf
-    └── solutions
-        ├── part2
-        │   ├── modules
-        │   ├── nextflow.config
-        │   └── rnaseq-2.nf
-        └── part3
-            ├── modules
-            ├── nextflow.config
-            ├── rnaseq-3.nf
-            └── rnaseq_pe-3.nf
-    ```
+```console
+.
+├── data
+│   ├── genome.fa
+│   ├── paired-end.csv
+│   ├── reads
+│   │   ├── ENCSR000COQ1_1.fastq.gz
+│   │   ├── ENCSR000COQ1_2.fastq.gz
+│   │   ├── ENCSR000COQ2_1.fastq.gz
+│   │   ├── ENCSR000COQ2_2.fastq.gz
+│   │   ├── ENCSR000COR1_1.fastq.gz
+│   │   ├── ENCSR000COR1_2.fastq.gz
+│   │   ├── ENCSR000COR2_1.fastq.gz
+│   │   ├── ENCSR000COR2_2.fastq.gz
+│   │   ├── ENCSR000CPO1_1.fastq.gz
+│   │   ├── ENCSR000CPO1_2.fastq.gz
+│   │   ├── ENCSR000CPO2_1.fastq.gz
+│   │   └── ENCSR000CPO2_2.fastq.gz
+│   └── single-end.csv
+├── modules
+│   ├── fastqc.nf
+│   ├── hisat2_align.nf
+│   ├── multiqc.nf
+│   └── trim_galore.nf
+├── nextflow.config
+├── rnaseq.nf
+└── solutions
+    ├── part2
+    │   ├── modules
+    │   ├── nextflow.config
+    │   └── rnaseq-2.nf
+    └── part3
+        ├── modules
+        ├── nextflow.config
+        ├── rnaseq-3.nf
+        └── rnaseq_pe-3.nf
+```
+
+</details>
 
 Cliccate sulla casella colorata per espandere la sezione e visualizzarne i contenuti.
 Utilizziamo sezioni comprimibili come questa per visualizzare l'output previsto dei comandi, nonché i contenuti di directory e file in modo conciso.
@@ -134,4 +140,4 @@ Pensate di essere pronti per iniziare?
 
 Se potete spuntare tutte le caselle, siete pronti per iniziare.
 
-**Per continuare alla [Parte 1: Panoramica del metodo](./01_method.md), cliccate sulla freccia nell'angolo in basso a destra di questa pagina.**
+**Per continuare alla [Parte 1: Panoramica del metodo](./01_method.mdx), cliccate sulla freccia nell'angolo in basso a destra di questa pagina.**

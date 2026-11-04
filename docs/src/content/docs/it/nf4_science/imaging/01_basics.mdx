@@ -1,6 +1,9 @@
-# Parte 1: Eseguire operazioni di base
+---
+title: 'Parte 1: Eseguire operazioni di base'
+description: In questa prima parte del corso di formazione Nextflow per il Bioimaging, utilizzeremo un esempio Hello World molto semplice e indipendente dal dominio per…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 In questa prima parte del corso di formazione Nextflow per il Bioimaging, utilizzeremo un esempio Hello World molto semplice e indipendente dal dominio per dimostrare operazioni essenziali e indicare i componenti corrispondenti del codice Nextflow.
 
@@ -19,7 +22,7 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 
 L'output della console dovrebbe apparire così:
 
-```console title="Output" linenums="1"
+```console title="Output" showLineNumbers
  N E X T F L O W   ~  version 26.04.4
 
 Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d
@@ -32,7 +35,7 @@ Congratulazioni, avete appena eseguito il vostro primo workflow Nextflow!
 
 L'output più importante qui è l'ultima riga (riga 6):
 
-```console title="Output" linenums="6"
+```console title="Output" showLineNumbers startLineNumber=6
 [71/8143bd] sayHello | 1 of 1 ✔
 ```
 
@@ -45,7 +48,7 @@ Questo ci indica che il processo `sayHello` è stato eseguito con successo una v
 Questo workflow è configurato per pubblicare il suo output in una directory chiamata `results`.
 Se osservate la directory corrente, vedrete che quando avete eseguito il workflow, Nextflow ha creato una nuova directory chiamata `results`, che contiene un file chiamato `output.txt`.
 
-```console title="results/" linenums="1"
+```console title="results/" showLineNumbers
 results
 └── output.txt
 ```
@@ -55,7 +58,7 @@ Aprite il file; il contenuto dovrebbe corrispondere al saluto che avete specific
 <details>
   <summary>Contenuto del file</summary>
 
-```console title="results/output.txt" linenums="1"
+```console title="results/output.txt" showLineNumbers
 Hello World!
 ```
 
@@ -67,10 +70,10 @@ Tuttavia, siate consapevoli che il risultato 'pubblicato' è una copia (o in alc
 
 Quindi ora, daremo un'occhiata dietro le quinte per vedere dove Nextflow ha effettivamente eseguito il lavoro.
 
-!!! warning "Avviso"
-
-    Non tutti i workflow saranno configurati per pubblicare gli output in una directory results, e/o il nome della directory potrebbe essere diverso.
-    Un po' più avanti in questa sezione, vi mostreremo come scoprire dove è specificato questo comportamento.
+:::caution[Avviso]
+Non tutti i workflow saranno configurati per pubblicare gli output in una directory results, e/o il nome della directory potrebbe essere diverso.
+Un po' più avanti in questa sezione, vi mostreremo come scoprire dove è specificato questo comportamento.
+:::
 
 ### 1.3. Trovare l'output originale e i log nella directory `work/`
 
@@ -83,7 +86,7 @@ Questo potrebbe sembrare confuso, quindi vediamo come appare nella pratica.
 
 Tornando all'output della console per il workflow che abbiamo eseguito in precedenza, avevamo questa riga:
 
-```console title="Excerpt of command output" linenums="6"
+```console title="Excerpt of command output" showLineNumbers startLineNumber=6
 [71/8143bd] sayHello | 1 of 1 ✔
 ```
 
@@ -100,14 +103,14 @@ Questo dovrebbe produrre il percorso completo della directory: `work/71/8143bd5e
 
 Diamo un'occhiata a cosa c'è dentro.
 
-!!! Tip "Suggerimento"
+:::tip[Suggerimento]
+Se esplorate il contenuto della sottodirectory di attività nell'esploratore file di VSCode, vedrete tutti i file immediatamente.
+Tuttavia, i file di log sono impostati per essere invisibili nel terminale, quindi se volete utilizzare `ls` o `tree` per visualizzarli, dovrete impostare l'opzione pertinente per visualizzare i file invisibili.
 
-    Se esplorate il contenuto della sottodirectory di attività nell'esploratore file di VSCode, vedrete tutti i file immediatamente.
-    Tuttavia, i file di log sono impostati per essere invisibili nel terminale, quindi se volete utilizzare `ls` o `tree` per visualizzarli, dovrete impostare l'opzione pertinente per visualizzare i file invisibili.
-
-    ```bash
-    tree -a work
-    ```
+```bash
+tree -a work
+```
+:::
 
 I nomi esatti delle sottodirectory saranno diversi sul vostro sistema.
 
@@ -136,7 +139,7 @@ Se lo aprite, troverete di nuovo il saluto `Hello World!`.
 <details>
   <summary>Contenuto del file output.txt</summary>
 
-```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" showLineNumbers
 Hello World!
 ```
 
@@ -159,16 +162,16 @@ Il file `.command.sh` è particolarmente utile perché mostra il comando princip
 <details>
   <summary>Contenuto del file</summary>
 
-```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" showLineNumbers
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
 </details>
 
-!!! Tip "Suggerimento"
-
-    Quando qualcosa va storto e dovete risolvere il problema, può essere utile guardare lo script `command.sh` per verificare esattamente quale comando Nextflow ha composto in base alle istruzioni del workflow, all'interpolazione delle variabili e così via.
+:::tip[Suggerimento]
+Quando qualcosa va storto e dovete risolvere il problema, può essere utile guardare lo script `command.sh` per verificare esattamente quale comando Nextflow ha composto in base alle istruzioni del workflow, all'interpolazione delle variabili e così via.
+:::
 
 ### 1.4. Esercizio facoltativo: rieseguire con saluti diversi
 
@@ -200,7 +203,7 @@ Apriamo lo script `hello-world.nf` nel pannello dell'editor.
 <details>
   <summary>Codice</summary>
 
-```groovy title="hello-world.nf" linenums="1"
+```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 /*
@@ -247,7 +250,7 @@ Qui abbiamo un **processo** chiamato `sayHello` che accetta una variabile di **i
 <details>
   <summary>Codice</summary>
 
-```groovy title="hello-world.nf" linenums="3"
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=3
 /*
  * Use echo to print a greeting to a file
  */
@@ -276,13 +279,13 @@ La definizione `input` include il qualificatore `val`, che dice a Nextflow di as
 
 La definizione `output` include il qualificatore `path`, che dice a Nextflow che questo dovrebbe essere gestito come un percorso (include sia percorsi di directory che file).
 
-!!! Tip "Suggerimento"
+:::tip[Suggerimento]
+La definizione di output non _determina_ quale output verrà creato.
+Semplicemente _dichiara_ dove trovare il/i file di output previsti, in modo che Nextflow possa cercarlo una volta completata l'esecuzione.
 
-    La definizione di output non _determina_ quale output verrà creato.
-    Semplicemente _dichiara_ dove trovare il/i file di output previsti, in modo che Nextflow possa cercarlo una volta completata l'esecuzione.
-
-    Questo è necessario per verificare che il comando sia stato eseguito con successo e per passare l'output ai processi successivi se necessario.
-    L'output prodotto che non corrisponde a ciò che è dichiarato nel blocco di output non verrà passato ai processi successivi.
+Questo è necessario per verificare che il comando sia stato eseguito con successo e per passare l'output ai processi successivi se necessario.
+L'output prodotto che non corrisponde a ciò che è dichiarato nel blocco di output non verrà passato ai processi successivi.
+:::
 
 In una pipeline del mondo reale, un processo di solito contiene informazioni aggiuntive come direttive di processo, che introdurremo tra poco.
 
@@ -293,7 +296,7 @@ La definizione del workflow inizia con la parola chiave `workflow`, seguita da u
 
 Qui abbiamo un **workflow** che consiste in una chiamata al processo `sayHello`, che accetta un input, `params.greeting`, che contiene il valore che abbiamo dato al parametro `--greeting`.
 
-```groovy title="hello-world.nf" linenums="22"
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=22
 workflow {
 
     // emette un saluto
@@ -313,10 +316,10 @@ Il `params.greeting` che forniamo alla chiamata del processo `sayHello()` è un 
 Come menzionato sopra, è così che passiamo il valore del parametro da riga di comando `--greeting` alla chiamata del processo `sayHello()`.
 Infatti, semplicemente dichiarando `params.someParameterName` ci permetterà di dare al workflow un parametro denominato `--someParameterName` dalla riga di comando.
 
-!!! Tip "Suggerimento"
-
-    Questi parametri del workflow dichiarati utilizzando il sistema `params` richiedono sempre due trattini (`--`).
-    Questo li distingue dai parametri a livello Nextflow, che richiedono solo un trattino (`-`).
+:::tip[Suggerimento]
+Questi parametri del workflow dichiarati utilizzando il sistema `params` richiedono sempre due trattini (`--`).
+Questo li distingue dai parametri a livello Nextflow, che richiedono solo un trattino (`-`).
+:::
 
 ### Takeaway
 
@@ -351,26 +354,22 @@ Per utilizzarlo, aggiungete semplicemente `-resume` al vostro comando ed eseguit
 
 ```bash
 nextflow run hello-world.nf --greeting 'Hello World!' -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
+
+[71/8143bd] sayHello | 1 of 1, cached: 1 ✔
 ```
-
-??? success "Output del comando"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
-
-    [71/8143bd] sayHello | 1 of 1, cached: 1 ✔
-    ```
 
 Cercate il bit `cached:` che è stato aggiunto nella riga dello stato del processo, che significa che Nextflow ha riconosciuto di aver già fatto questo lavoro e ha semplicemente riutilizzato il risultato dall'esecuzione precedente riuscita.
 
 Potete anche vedere che l'hash della sottodirectory work è lo stesso dell'esecuzione precedente.
 Nextflow vi sta letteralmente indicando l'esecuzione precedente e dicendo "L'ho già fatto lì."
 
-!!! Tip "Suggerimento"
-
-    Quando rieseguite una pipeline con `resume`, Nextflow non sovrascrive nessun file scritto in una directory `publishDir` da alcuna chiamata di processo che è stata precedentemente eseguita con successo.
+:::tip[Suggerimento]
+Quando rieseguite una pipeline con `resume`, Nextflow non sovrascrive nessun file scritto in una directory `publishDir` da alcuna chiamata di processo che è stata precedentemente eseguita con successo.
+:::
 
 ### 3.2. Ispezionare il log delle esecuzioni passate
 
@@ -393,12 +392,12 @@ Nextflow include un comodo sottocomando `clean` che può eliminare automaticamen
 
 Potete utilizzare il log Nextflow per cercare un'esecuzione in base al suo timestamp e/o alla riga di comando, quindi utilizzare `nextflow clean -before <run_name> -f` per eliminare le directory work dalle esecuzioni precedenti.
 
-!!! Warning "Avviso"
+:::caution[Avviso]
+L'eliminazione delle sottodirectory work dalle esecuzioni passate le rimuove dalla cache di Nextflow ed elimina qualsiasi output che era memorizzato in quelle directory.
+Questo significa che interrompe la capacità di Nextflow di riprendere l'esecuzione senza rieseguire i processi corrispondenti.
 
-    L'eliminazione delle sottodirectory work dalle esecuzioni passate le rimuove dalla cache di Nextflow ed elimina qualsiasi output che era memorizzato in quelle directory.
-    Questo significa che interrompe la capacità di Nextflow di riprendere l'esecuzione senza rieseguire i processi corrispondenti.
-
-    Siete responsabili del salvataggio di qualsiasi output che vi interessa o su cui prevedete di fare affidamento! Se state utilizzando la direttiva `publishDir` per questo scopo, assicuratevi di utilizzare la modalità `copy`, non la modalità `symlink`.
+Siete responsabili del salvataggio di qualsiasi output che vi interessa o su cui prevedete di fare affidamento! Se state utilizzando la direttiva `publishDir` per questo scopo, assicuratevi di utilizzare la modalità `copy`, non la modalità `symlink`.
+:::
 
 ### Takeaway
 

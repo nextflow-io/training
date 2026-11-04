@@ -1,6 +1,9 @@
-# Część 2: If - Else
+---
+title: 'Część 2: If - Else'
+description: '[TODO]'
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 [TODO]
 
@@ -41,17 +44,17 @@ Ogólnie rzecz biorąc, aby ukończyć to ćwiczenie, będziesz musiał:
 
 Dla obrazu kontenera `quote` możesz użyć tego, który sam zbudowałeś w poprzednim dodatkowym ćwiczeniu, lub skorzystać z tego, który otrzymałeś z Seqera Containers.
 
-!!! Hint "Podpowiedź"
-
-    Dobrym wyborem dla bloku `script` Twojego procesu getQuote może być:
-        ```groovy
-        script:
-            def safe_author = author.tokenize(' ').join('-')
-            """
-            quote "$author" > quote-${safe_author}.txt
-            echo "-${author}" >> quote-${safe_author}.txt
-            """
-        ```
+:::note[Podpowiedź]
+Dobrym wyborem dla bloku `script` Twojego procesu getQuote może być:
+    ```nextflow
+    script:
+        def safe_author = author.tokenize(' ').join('-')
+        """
+        quote "$author" > quote-${safe_author}.txt
+        echo "-${author}" >> quote-${safe_author}.txt
+        """
+    ```
+:::
 
 Rozwiązanie tego ćwiczenia znajdziesz w pliku `containers/solutions/hello-containers-4.1.nf`.
 
@@ -60,7 +63,7 @@ Rozwiązanie tego ćwiczenia znajdziesz w pliku `containers/solutions/hello-cont
 Dodaj logikę rozgałęzień do swojego pipeline'u, aby mógł przyjmować dane wejściowe przeznaczone zarówno dla `quote`, jak i `sayHello`.
 Oto przykład użycia instrukcji `if` w workflow'ie Nextflow:
 
-```groovy title="hello-containers.nf"
+```nextflow title="hello-containers.nf"
 workflow {
     if (params.quote) {
         ...
@@ -72,9 +75,9 @@ workflow {
 }
 ```
 
-!!! Hint "Podpowiedź"
-
-    Możesz użyć `new_ch = processName.out`, aby przypisać nazwę do kanału wyjściowego procesu.
+:::note[Podpowiedź]
+Możesz użyć `new_ch = processName.out`, aby przypisać nazwę do kanału wyjściowego procesu.
+:::
 
 Rozwiązanie tego ćwiczenia znajdziesz w pliku `containers/solutions/hello-containers-4.2.nf`.
 

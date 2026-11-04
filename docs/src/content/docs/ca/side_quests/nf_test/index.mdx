@@ -1,6 +1,9 @@
-# Proves amb nf-test
+---
+title: Proves amb nf-test
+description: Poder comprovar sistemàticament que cada part del vostre workflow fa el que se suposa que ha de fer és fonamental per a la reproductibilitat i el manteniment…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Poder comprovar sistemàticament que cada part del vostre workflow fa el que se suposa que ha de fer és fonamental per a la reproductibilitat i el manteniment a llarg termini, i pot ser d'una gran ajuda durant el procés de desenvolupament.
 
@@ -47,18 +50,18 @@ Aquestes habilitats us ajudaran a implementar una estratègia de proves completa
 
 Abans d'abordar aquesta missió secundària, hauríeu de:
 
-- Haver completat el tutorial [Hello Nextflow](../../hello_nextflow/index.md) o un curs equivalent per a principiants.
+- Haver completat el tutorial [Hello Nextflow](../../hello_nextflow/index.mdx) o un curs equivalent per a principiants.
 - Estar còmodes amb els conceptes i mecanismes bàsics de Nextflow (processos, canals, operadors, treball amb fitxers, metadades)
 
-!!! warning "Requisit de versió de nf-test"
+:::caution[Requisit de versió de nf-test]
+Les proves a nivell de procés requereixen **nf-test 0.9.3 o posterior**. Les versions anteriors (inclosa la 0.9.2) generen codi de bastida de proves incompatible amb l'analitzador sintàctic estricte que Nextflow utilitza per defecte a partir de la versió 26.04, cosa que provoca un error `Script compilation failed` en lloc del resultat de prova esperat.
 
-    Les proves a nivell de procés requereixen **nf-test 0.9.3 o posterior**. Les versions anteriors (inclosa la 0.9.2) generen codi de bastida de proves incompatible amb l'analitzador sintàctic estricte que Nextflow utilitza per defecte a partir de la versió 26.04, cosa que provoca un error `Script compilation failed` en lloc del resultat de prova esperat.
+Comproveu la vostra versió amb `nf-test version`. Si necessiteu actualitzar:
 
-    Comproveu la vostra versió amb `nf-test version`. Si necessiteu actualitzar:
-
-    ```bash
-    curl -fsSL https://code.askimed.com/install/nf-test | bash
-    ```
+```bash
+curl -fsSL https://code.askimed.com/install/nf-test | bash
+```
+:::
 
 ---
 
@@ -66,7 +69,7 @@ Abans d'abordar aquesta missió secundària, hauríeu de:
 
 #### Obriu el codespace de formació
 
-Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../../envsetup/index.md).
+Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../../envsetup/index.mdx).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -95,97 +98,103 @@ Trobareu un fitxer de workflow principal i un fitxer CSV anomenat `greetings.csv
 └── nextflow.config
 ```
 
-Per a una descripció detallada dels fitxers, consulteu l'[escalfament de Hello Nextflow](../../hello_nextflow/00_orientation.md).
+Per a una descripció detallada dels fitxers, consulteu l'[escalfament de Hello Nextflow](../../hello_nextflow/00_orientation.mdx).
 
-El workflow que provarem és un subconjunt del Hello workflow construït a [Hello Workflow](../../hello_nextflow/03_hello_workflow.md).
+El workflow que provarem és un subconjunt del Hello workflow construït a [Hello Workflow](../../hello_nextflow/03_hello_workflow.mdx).
 
-??? example "Què fa el workflow Hello Nextflow?"
+<details class="example">
+<summary>Què fa el workflow Hello Nextflow?</summary>
 
-    Si no heu fet la formació [Hello Nextflow](../../hello_nextflow/index.md), aquí teniu una visió general ràpida del que fa aquest workflow senzill.
+Si no heu fet la formació [Hello Nextflow](../../hello_nextflow/index.mdx), aquí teniu una visió general ràpida del que fa aquest workflow senzill.
 
-    El workflow pren un fitxer CSV que conté salutacions, executa quatre passos de transformació consecutius sobre elles i genera un únic fitxer de text que conté una imatge ASCII d'un personatge divertit dient les salutacions.
+El workflow pren un fitxer CSV que conté salutacions, executa quatre passos de transformació consecutius sobre elles i genera un únic fitxer de text que conté una imatge ASCII d'un personatge divertit dient les salutacions.
 
-    Els quatre passos s'implementen com a processos Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` i `cowpy`) emmagatzemats en fitxers de mòdul separats.
+Els quatre passos s'implementen com a processos Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` i `cowpy`) emmagatzemats en fitxers de mòdul separats.
 
-    1. **`sayHello`:** Escriu cada salutació al seu propi fitxer de sortida (p. ex., "Hello-output.txt")
-    2. **`convertToUpper`:** Converteix cada salutació a majúscules (p. ex., "HELLO")
-    3. **`collectGreetings`:** Recull totes les salutacions en majúscules en un únic fitxer per lots
-    4. **`cowpy`:** Genera art ASCII utilitzant l'eina `cowpy`
+1. **`sayHello`:** Escriu cada salutació al seu propi fitxer de sortida (p. ex., "Hello-output.txt")
+2. **`convertToUpper`:** Converteix cada salutació a majúscules (p. ex., "HELLO")
+3. **`collectGreetings`:** Recull totes les salutacions en majúscules en un únic fitxer per lots
+4. **`cowpy`:** Genera art ASCII utilitzant l'eina `cowpy`
 
-    Els resultats es publiquen en un directori anomenat `results/`, i la sortida final del pipeline (quan s'executa amb els paràmetres per defecte) és un fitxer de text pla que conté art ASCII d'un personatge dient les salutacions en majúscules.
+Els resultats es publiquen en un directori anomenat `results/`, i la sortida final del pipeline (quan s'executa amb els paràmetres per defecte) és un fitxer de text pla que conté art ASCII d'un personatge dient les salutacions en majúscules.
 
-    En aquesta missió secundària, utilitzem una forma intermèdia del Hello workflow que només conté els dos primers processos. <!-- TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 -->
+En aquesta missió secundària, utilitzem una forma intermèdia del Hello workflow que només conté els dos primers processos. {/* TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 */}
+
+</details>
 
 El subconjunt amb el qual treballarem està compost de dos processos: `sayHello` i `convertToUpper`.
 Podeu veure el codi complet del workflow a continuació.
 
-??? example "Codi del workflow"
+<details class="example">
+<summary>Codi del workflow</summary>
 
-    ```groovy title="main.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="main.nf"
+#!/usr/bin/env nextflow
 
-    /*
-     * Paràmetres del pipeline
-     */
-    params.input_file = "greetings.csv"
+/*
+ * Paràmetres del pipeline
+ */
+params.input_file = "greetings.csv"
 
-    /*
-     * Utilitza echo per imprimir 'Hello World!' a la sortida estàndard
-     */
-    process sayHello {
+/*
+ * Utilitza echo per imprimir 'Hello World!' a la sortida estàndard
+ */
+process sayHello {
 
-        input:
-        val greeting
+    input:
+    val greeting
 
-        output:
-        path "${greeting}-output.txt"
+    output:
+    path "${greeting}-output.txt"
 
-        script:
-        """
-        echo '$greeting' > '$greeting-output.txt'
-        """
+    script:
+    """
+    echo '$greeting' > '$greeting-output.txt'
+    """
+}
+
+/*
+ * Utilitza una utilitat de substitució de text per convertir la salutació a majúscules
+ */
+process convertToUpper {
+
+    input:
+    path input_file
+
+    output:
+    path "UPPER-${input_file}"
+
+    script:
+    """
+    cat $input_file | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
+    """
+}
+
+workflow {
+    main:
+    // crea un canal per a les entrades des d'un fitxer CSV
+    greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
+
+    // emet una salutació
+    sayHello(greeting_ch)
+
+    // converteix la salutació a majúscules
+    convertToUpper(sayHello.out)
+
+    publish:
+    greetings = sayHello.out
+    upper_greetings = convertToUpper.out
+}
+
+output {
+    greetings {
     }
-
-    /*
-     * Utilitza una utilitat de substitució de text per convertir la salutació a majúscules
-     */
-    process convertToUpper {
-
-        input:
-        path input_file
-
-        output:
-        path "UPPER-${input_file}"
-
-        script:
-        """
-        cat $input_file | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
-        """
+    upper_greetings {
     }
+}
+```
 
-    workflow {
-        main:
-        // crea un canal per a les entrades des d'un fitxer CSV
-        greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
-
-        // emet una salutació
-        sayHello(greeting_ch)
-
-        // converteix la salutació a majúscules
-        convertToUpper(sayHello.out)
-
-        publish:
-        greetings = sayHello.out
-        upper_greetings = convertToUpper.out
-    }
-
-    output {
-        greetings {
-        }
-        upper_greetings {
-        }
-    }
-    ```
+</details>
 
 #### Executeu el workflow
 
@@ -235,7 +244,7 @@ Les proves de programari essencialment fan aquest procés per nosaltres.
 
 El vostre repte és afegir proves estandarditzades a aquest workflow utilitzant nf-test, per tal de facilitar la verificació que cada part continua funcionant com s'espera en cas que es facin més canvis.
 
-<!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
+{/* TODO: give a bit more details, similar to how it's done in the Metadata side quest */}
 
 #### Llista de comprovació de preparació
 
@@ -427,26 +436,26 @@ Tornem al fitxer de proves i canviem el camí al fitxer al bloc `when`.
 
 Potser us pregunteu com apuntarem a l'arrel del pipeline a la prova. Com que aquesta és una situació habitual, nf-test té un conjunt de variables globals que podem utilitzar per facilitar-nos la vida. Podeu trobar la llista completa [aquí](https://www.nf-test.com/docs/testcases/global_variables/) però de moment utilitzarem la variable `projectDir`, que fa referència a l'arrel del projecte del pipeline.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="3"
-    when {
-        params {
-            input_file = "${projectDir}/greetings.csv"
-        }
+```groovy {3,4} title="tests/main.nf.test" showLineNumbers step="Abans"
+when {
+    params {
+        // definiu els paràmetres aquí. Exemple:
+        // outdir = "tests/results"
     }
-    ```
+}
+```
 
-=== "Abans"
-
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="3 4"
-    when {
-        params {
-            // definiu els paràmetres aquí. Exemple:
-            // outdir = "tests/results"
-        }
+```groovy {3} title="tests/main.nf.test" showLineNumbers step="Després"
+when {
+    params {
+        input_file = "${projectDir}/greetings.csv"
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 Executem la prova de nou per veure si funciona.
 
@@ -525,42 +534,42 @@ Una comprovació senzilla és assegurar-nos que el nostre pipeline executa tots 
 
 Afegim una assertion a la nostra prova per comprovar que el pipeline executa el nombre esperat de processos. També actualitzarem el nom de la prova per reflectir millor el que estem provant.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="1 11"
-        test("Should run successfully with correct number of processes") {
+```groovy {1} title="tests/main.nf.test" showLineNumbers step="Abans"
+    test("Should run without failures") {
 
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
             }
-
-            then {
-                assert workflow.success
-                assert workflow.trace.tasks().size() == 6
-            }
-
         }
-    ```
 
-=== "Abans"
-
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="1"
-        test("Should run without failures") {
-
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
-            }
-
-            then {
-                assert workflow.success
-            }
-
+        then {
+            assert workflow.success
         }
-    ```
+
+    }
+```
+
+```groovy {1,11} title="tests/main.nf.test" showLineNumbers step="Després"
+    test("Should run successfully with correct number of processes") {
+
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert workflow.trace.tasks().size() == 6
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 El nom de la prova ara reflecteix millor el que realment estem verificant: no només que el pipeline s'executa sense fallar, sinó que executa el nombre esperat de processos.
 
@@ -591,62 +600,62 @@ SUCCESS: Executed 1 tests in 2.879s
 
 Afegim una assertion a la nostra prova per comprovar que el fitxer de sortida s'ha creat. L'afegirem com una prova separada, amb un nom informatiu, per facilitar la interpretació dels resultats.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="14-33"
-        test("Should run successfully with correct number of processes") {
+```groovy {14} title="tests/main.nf.test" showLineNumbers step="Abans"
+    test("Should run successfully with correct number of processes") {
 
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
             }
-
-            then {
-                assert workflow.success
-                assert workflow.trace.tasks().size() == 6
-            }
-
         }
 
-        test("Should produce correct output files") {
-
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
-            }
-
-            then {
-                assert file("$launchDir/results/Bonjour-output.txt").exists()
-                assert file("$launchDir/results/Hello-output.txt").exists()
-                assert file("$launchDir/results/Hola-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Hola-output.txt").exists()
-            }
-
+        then {
+            assert workflow.success
+            assert workflow.trace.tasks().size() == 6
         }
-    ```
 
-=== "Abans"
+    }
+```
 
-    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="14"
-        test("Should run successfully with correct number of processes") {
+```groovy {14-33} title="tests/main.nf.test" showLineNumbers step="Després"
+    test("Should run successfully with correct number of processes") {
 
-            when {
-                params {
-                    input_file = "${projectDir}/greetings.csv"
-                }
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
             }
-
-            then {
-                assert workflow.success
-                assert workflow.trace.tasks().size() == 6
-            }
-
         }
-    ```
+
+        then {
+            assert workflow.success
+            assert workflow.trace.tasks().size() == 6
+        }
+
+    }
+
+    test("Should produce correct output files") {
+
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
+            }
+        }
+
+        then {
+            assert file("$launchDir/results/Bonjour-output.txt").exists()
+            assert file("$launchDir/results/Hello-output.txt").exists()
+            assert file("$launchDir/results/Hola-output.txt").exists()
+            assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
+            assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
+            assert file("$launchDir/results/UPPER-Hola-output.txt").exists()
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 Executeu la prova de nou per veure si funciona.
 
@@ -784,58 +793,58 @@ Test Process sayHello
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
-La prova falla perquè el procés `sayHello` declara 1 entrada però s'ha cridat amb 0 arguments. Corregim-ho afegint una entrada al procés. Recordeu de [Hello Workflow](../../hello_nextflow/03_hello_workflow.md) (i de la secció d'escalfament anterior) que el nostre procés `sayHello` pren una única entrada de valor, que haurem de proporcionar. També hauríem de corregir el nom de la prova per reflectir millor el que estem provant.
+La prova falla perquè el procés `sayHello` declara 1 entrada però s'ha cridat amb 0 arguments. Corregim-ho afegint una entrada al procés. Recordeu de [Hello Workflow](../../hello_nextflow/03_hello_workflow.mdx) (i de la secció d'escalfament anterior) que el nostre procés `sayHello` pren una única entrada de valor, que haurem de proporcionar. També hauríem de corregir el nom de la prova per reflectir millor el que estem provant.
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 10"
-        test("Should run without failures and produce correct output") {
+```groovy {1,10,11} title="tests/main.sayhello.nf.test" showLineNumbers step="Abans"
+    test("Should run without failures") {
 
-            when {
-                params {
-                    // definiu els paràmetres aquí. Exemple:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    input[0] = "hello"
-                    """
-                }
+        when {
+            params {
+                // definiu els paràmetres aquí. Exemple:
+                // outdir = "tests/results"
             }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
+            process {
+                """
+                // definiu les entrades del procés aquí. Exemple:
+                // input[0] = file("test-file.txt")
+                """
             }
-
         }
-    ```
 
-=== "Abans"
-
-    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 10 11"
-        test("Should run without failures") {
-
-            when {
-                params {
-                    // definiu els paràmetres aquí. Exemple:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    // definiu les entrades del procés aquí. Exemple:
-                    // input[0] = file("test-file.txt")
-                    """
-                }
-            }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
-            }
-
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
         }
-    ```
+
+    }
+```
+
+```groovy {1,10} title="tests/main.sayhello.nf.test" showLineNumbers step="Després"
+    test("Should run without failures and produce correct output") {
+
+        when {
+            params {
+                // definiu els paràmetres aquí. Exemple:
+                // outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = "hello"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 Executem la prova de nou per veure si funciona.
 
@@ -887,9 +896,9 @@ No l'imprimirem aquí, però hauríeu de veure un fitxer JSON que conté detalls
 
 Això representa les sortides creades pel procés `sayHello`, que estem provant explícitament. Si tornem a executar la prova, el programa comprovarà que la nova sortida coincideix amb la sortida que es va registrar originalment. Aquesta és una manera ràpida i senzilla de provar que les sortides del procés no canvien, per això nf-test la proporciona com a opció per defecte.
 
-!!! warning "Advertència"
-
-    Això significa que hem d'assegurar-nos que la sortida que registrem en l'execució original és correcta!
+:::caution[Advertència]
+Això significa que hem d'assegurar-nos que la sortida que registrem en l'execució original és correcta!
+:::
 
 Si, en el curs del desenvolupament futur, alguna cosa al codi canvia i fa que la sortida sigui diferent, la prova fallarà i haurem de determinar si el canvi és esperat o no.
 
@@ -927,55 +936,55 @@ Tot i que els snapshots són excel·lents per detectar qualsevol canvi a la sort
 
 Aquí teniu com podríem modificar la nostra prova per comprovar contingut específic:
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 5 16 17"
-        test("Should run without failures and contain expected greeting") {
+```groovy {1,5,6,17} title="tests/main.sayhello.nf.test" showLineNumbers step="Abans"
+    test("Should run without failures and produce correct output") {
 
-            when {
-                params {
-                    // definiu els paràmetres aquí
-                }
-                process {
-                    """
-                    input[0] = "hello"
-                    """
-                }
+        when {
+            params {
+                // definiu els paràmetres aquí. Exemple:
+                // outdir = "tests/results"
             }
-
-            then {
-                assert process.success
-                assert path(process.out[0][0]).readLines().contains('hello')
-                assert !path(process.out[0][0]).readLines().contains('HELLO')
+            process {
+                """
+                input[0] = "hello"
+                """
             }
-
         }
-    ```
 
-=== "Abans"
-
-    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 5 6 17"
-        test("Should run without failures and produce correct output") {
-
-            when {
-                params {
-                    // definiu els paràmetres aquí. Exemple:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    input[0] = "hello"
-                    """
-                }
-            }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
-            }
-
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
         }
-    ```
+
+    }
+```
+
+```groovy {1,5,16,17} title="tests/main.sayhello.nf.test" showLineNumbers step="Després"
+    test("Should run without failures and contain expected greeting") {
+
+        when {
+            params {
+                // definiu els paràmetres aquí
+            }
+            process {
+                """
+                input[0] = "hello"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert path(process.out[0][0]).readLines().contains('hello')
+            assert !path(process.out[0][0]).readLines().contains('HELLO')
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 Tingueu en compte que nf-test veu les sortides del procés com una llista de llistes, de manera que `process.out[0][0]` obté la primera part del primer element del canal (o 'emissió') d'aquest procés.
 
@@ -1055,56 +1064,56 @@ Ara hem de proporcionar un únic fitxer d'entrada al procés convertToUpper, que
 
 De moment, reutilitzem el fitxer greetings.csv existent utilitzant l'exemple que hem usat amb la prova a nivell de pipeline. Com abans, podem anomenar la prova per reflectir millor el que estem provant, però aquesta vegada deixem que faci un 'snapshot' del contingut en lloc de comprovar cadenes específiques (com hem fet amb l'altre procés).
 
-=== "Després"
+<CodeWalkthrough>
 
-    ```groovy title="tests/main.converttoupper.nf.test" linenums="1" hl_lines="1 10"
-        test("Should run without failures and produce correct output") {
+```groovy {1,10,11} title="tests/main.converttoupper.nf.test" showLineNumbers step="Abans"
+    test("Should run without failures") {
 
-            when {
-                params {
-                    // definiu els paràmetres aquí. Exemple:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    input[0] = "${projectDir}/greetings.csv"
-                    """
-                }
+        when {
+            params {
+                // definiu els paràmetres aquí. Exemple:
+                // outdir = "tests/results"
             }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
+            process {
+                """
+                // definiu les entrades del procés aquí. Exemple:
+                // input[0] = file("test-file.txt")
+                """
             }
-
         }
-    ```
 
-=== "Abans"
-
-    ```groovy title="tests/main.converttoupper.nf.test" linenums="1" hl_lines="1 10 11"
-        test("Should run without failures") {
-
-            when {
-                params {
-                    // definiu els paràmetres aquí. Exemple:
-                    // outdir = "tests/results"
-                }
-                process {
-                    """
-                    // definiu les entrades del procés aquí. Exemple:
-                    // input[0] = file("test-file.txt")
-                    """
-                }
-            }
-
-            then {
-                assert process.success
-                assert snapshot(process.out).match()
-            }
-
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
         }
-    ```
+
+    }
+```
+
+```groovy {1,10} title="tests/main.converttoupper.nf.test" showLineNumbers step="Després"
+    test("Should run without failures and produce correct output") {
+
+        when {
+            params {
+                // definiu els paràmetres aquí. Exemple:
+                // outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = "${projectDir}/greetings.csv"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+```
+
+</CodeWalkthrough>
 
 I executeu la prova!
 
@@ -1229,7 +1238,7 @@ Aplicar aquestes tècniques en el vostre propi treball us permetrà assegurar qu
 
 ### Patrons clau
 
-<!-- TODO: Can we add snippets of code below to illustrate? -->
+{/* TODO: Can we add snippets of code below to illustrate? */}
 
 1. Proves a nivell de pipeline:
    - Prova bàsica d'èxit
@@ -1257,4 +1266,4 @@ Consulteu la [documentació de nf-test](https://www.nf-test.com/) per a funciona
 
 ## Què segueix?
 
-Torneu al [menú de missions secundàries](../index.md) o feu clic al botó a la part inferior dreta de la pàgina per passar al tema següent de la llista.
+Torneu al [menú de missions secundàries](../index.mdx) o feu clic al botó a la part inferior dreta de la pàgina per passar al tema següent de la llista.

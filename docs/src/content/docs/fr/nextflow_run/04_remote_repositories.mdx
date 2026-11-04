@@ -1,6 +1,9 @@
-# Partie 4 : Exécuter des pipelines distants
+---
+title: 'Partie 4 : Exécuter des pipelines distants'
+description: Jusqu'à présent, vous avez exécuté des scripts de workflow stockés localement.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Jusqu'à présent, vous avez exécuté des scripts de workflow stockés localement.
 En pratique, vous souhaiterez souvent exécuter des pipelines publiés dans des dépôts distants, comme GitHub, sans les télécharger vous-même.
@@ -20,27 +23,23 @@ Il s'agit d'un pipeline différent, bien plus simple que celui que vous avez uti
 
 ```bash
 nextflow run nextflow-io/hello
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Pulling nextflow-io/hello ...
+ downloaded from https://github.com/nextflow-io/hello.git
+Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] revision: 3c2cdc9823 [master]
+
+executor >  local (4)
+[ba/08236d] sayHello (4) | 4 of 4 ✔
+Ciao world!
+
+Hello world!
+
+Bonjour world!
+
+Hola world!
 ```
-
-??? success "Sortie de la commande"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Pulling nextflow-io/hello ...
-     downloaded from https://github.com/nextflow-io/hello.git
-    Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] revision: 3c2cdc9823 [master]
-
-    executor >  local (4)
-    [ba/08236d] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
-    Hello world!
-
-    Bonjour world!
-
-    Hola world!
-    ```
 
 ### 1.2. Trouver où le pipeline est mis en cache
 
@@ -52,39 +51,31 @@ Pour savoir où un pipeline spécifique a été enregistré, et quelles révisio
 
 ```bash
 nextflow info nextflow-io/hello
+# [!output]
+ project name: nextflow-io/hello
+ repository  : https://github.com/nextflow-io/hello
+ local path  : /workspaces/.nextflow/assets/.repos/nextflow-io/hello
+ main script : main.nf
+ revisions   :
+ > master (default)
+   mybranch
+   testing
+   v1.1 [t]
+   v1.2 [t]
+   v1.3 [t]
 ```
 
-??? success "Sortie de la commande"
-
-    ```console
-     project name: nextflow-io/hello
-     repository  : https://github.com/nextflow-io/hello
-     local path  : /workspaces/.nextflow/assets/.repos/nextflow-io/hello
-     main script : main.nf
-     revisions   :
-     > master (default)
-       mybranch
-       testing
-       v1.1 [t]
-       v1.2 [t]
-       v1.3 [t]
-    ```
-
-    Nextflow marque chaque révision que vous avez déjà extraite localement avec `>` ; les autres sont disponibles mais n'ont pas encore été récupérées dans une copie de travail.
+Nextflow marque chaque révision que vous avez déjà extraite localement avec `>` ; les autres sont disponibles mais n'ont pas encore été récupérées dans une copie de travail.
 
 Vous pouvez également lister tous les pipelines que vous avez téléchargés jusqu'à présent avec `nextflow list` :
 
 ```bash
 nextflow list
+# [!output]
+nextflow-io/hello
 ```
 
-??? success "Sortie de la commande"
-
-    ```console
-    nextflow-io/hello
-    ```
-
-Le cours [Use nf-core](../nfcore_use/01_run_demo.md#12-retrieve-the-pipeline-code) couvre ce mécanisme de mise en cache plus en détail, notamment comment parcourir le code source d'un pipeline téléchargé.
+Le cours [Use nf-core](../nfcore_use/01_run_demo.mdx#12-récupérer-le-code-du-pipeline) couvre ce mécanisme de mise en cache plus en détail, notamment comment parcourir le code source d'un pipeline téléchargé.
 
 ### À retenir
 
@@ -105,27 +96,23 @@ Vous pouvez épingler une version particulière (tag), une branche, ou un commit
 
 ```bash
 nextflow run nextflow-io/hello -r v1.3
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Pulling nextflow-io/hello:v1.3 ...
+ downloaded from https://github.com/nextflow-io/hello.git
+Launching `https://github.com/nextflow-io/hello` [sick_carson] revision: 2ce0b0e294 [v1.3]
+
+executor >  local (4)
+[61/e11f77] sayHello (4) | 4 of 4 ✔
+Ciao world!
+
+Bonjour world!
+
+Hello world!
+
+Hola world!
 ```
-
-??? success "Sortie de la commande"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Pulling nextflow-io/hello:v1.3 ...
-     downloaded from https://github.com/nextflow-io/hello.git
-    Launching `https://github.com/nextflow-io/hello` [sick_carson] revision: 2ce0b0e294 [v1.3]
-
-    executor >  local (4)
-    [61/e11f77] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
-    Bonjour world!
-
-    Hello world!
-
-    Hola world!
-    ```
 
 Nextflow récupère cette révision la première fois que vous la demandez, d'où les lignes `Pulling` et `downloaded from` ; demander la même révision ultérieurement passe directement à `Launching`.
 Épingler une révision exacte est essentiel pour la reproductibilité.
@@ -138,25 +125,21 @@ Essayez d'exécuter à nouveau le pipeline sans `-r` :
 
 ```bash
 nextflow run nextflow-io/hello
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `https://github.com/nextflow-io/hello` [hungry_maxwell] revision: 3c2cdc9823 [master]
+
+executor >  local (4)
+[ba/08236d] sayHello (4) | 4 of 4 ✔
+Ciao world!
+
+Hello world!
+
+Bonjour world!
+
+Hola world!
 ```
-
-??? success "Sortie de la commande"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `https://github.com/nextflow-io/hello` [hungry_maxwell] revision: 3c2cdc9823 [master]
-
-    executor >  local (4)
-    [ba/08236d] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
-    Hello world!
-
-    Bonjour world!
-
-    Hola world!
-    ```
 
 Même si l'exécution précédente avait explicitement épinglé `v1.3`, cette exécution revient directement à la branche par défaut (`master`).
 Nextflow conserve une copie de travail locale distincte pour chaque révision que vous avez utilisée, ce que montrent les marqueurs `>` dans `nextflow info`, mais il ne mémorise jamais laquelle vous avez exécutée en dernier.
@@ -170,7 +153,7 @@ Vous savez comment épingler un pipeline distant à une version, une branche ou 
 ### Et ensuite ?
 
 Vous avez couvert les fondamentaux de l'exécution et de la gestion des pipelines Nextflow.
-Consultez le [Résumé du cours](next_steps.md) pour savoir comment continuer.
+Consultez le [Résumé du cours](next_steps.mdx) pour savoir comment continuer.
 
 ---
 

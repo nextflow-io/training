@@ -1,11 +1,14 @@
-# Bölüm 6: Yapılandırma
+---
+title: 'Bölüm 6: Yapılandırma'
+description: Eklentinizin özel fonksiyonları ve bir gözlemcisi var, ancak her şey sabit kodlanmış durumda.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Eklentinizin özel fonksiyonları ve bir gözlemcisi var, ancak her şey sabit kodlanmış durumda.
 Kullanıcılar, kaynak kodu düzenleyip yeniden derlemeden görev sayacını kapatamaz veya dekoratörü değiştiremez.
 
-Bölüm 1'de, nf-schema ve nf-co2footprint'in nasıl davranacağını kontrol etmek için `nextflow.config` dosyasında `#!groovy validation {}` ve `#!groovy co2footprint {}` bloklarını kullandınız.
+Bölüm 1'de, nf-schema ve nf-co2footprint'in nasıl davranacağını kontrol etmek için `nextflow.config` dosyasında `validation {}{:nextflow}` ve `co2footprint {}{:nextflow}` bloklarını kullandınız.
 Bu yapılandırma blokları, eklenti yazarlarının bu özelliği yerleştirmiş olması sayesinde mevcuttur.
 Bu bölümde, kendi eklentiniz için aynısını yapacaksınız.
 
@@ -13,7 +16,7 @@ Bu bölümde, kendi eklentiniz için aynısını yapacaksınız.
 
 1. Kullanıcıların selamlama dekoratörünün ön ek ve son ekini özelleştirmesine izin vermek
 2. Kullanıcıların eklentiyi `nextflow.config` aracılığıyla etkinleştirmesine veya devre dışı bırakmasına izin vermek
-3. Nextflow'un `#!groovy greeting {}` bloğunu tanıması için resmi bir yapılandırma kapsamı kaydetmek
+3. Nextflow'un `greeting {}{:nextflow}` bloğunu tanıması için resmi bir yapılandırma kapsamı kaydetmek
 
 **Değiştirecekleriniz:**
 
@@ -23,19 +26,19 @@ Bu bölümde, kendi eklentiniz için aynısını yapacaksınız.
 | `GreetingFactory.groovy`   | Gözlemci oluşturmayı kontrol etmek için yapılandırma değerlerini okumak |
 | `GreetingConfig.groovy`    | Yeni dosya: resmi `@ConfigScope` sınıfı                                 |
 | `build.gradle`             | Yapılandırma sınıfını bir uzantı noktası olarak kaydetmek               |
-| `nextflow.config`          | Test etmek için bir `#!groovy greeting {}` bloğu eklemek                |
+| `nextflow.config`          | Test etmek için bir `greeting {}{:nextflow}` bloğu eklemek                |
 
-!!! tip "Buradan mı başlıyorsunuz?"
+:::tip[Buradan mı başlıyorsunuz?]
+Bu bölüme doğrudan katılıyorsanız, başlangıç noktası olarak kullanmak üzere Bölüm 5'in çözümünü kopyalayın:
 
-    Bu bölüme doğrudan katılıyorsanız, başlangıç noktası olarak kullanmak üzere Bölüm 5'in çözümünü kopyalayın:
+```bash
+cp -r solutions/5-observers/* .
+```
+:::
 
-    ```bash
-    cp -r solutions/5-observers/* .
-    ```
-
-!!! info "Resmi belgeler"
-
-    Kapsamlı yapılandırma ayrıntıları için [Nextflow yapılandırma kapsamları belgelerine](https://nextflow.io/docs/latest/developer/config-scopes.html) bakın.
+:::note[Resmi belgeler]
+Kapsamlı yapılandırma ayrıntıları için [Nextflow yapılandırma kapsamları belgelerine](https://nextflow.io/docs/latest/developer/config-scopes.html) bakın.
+:::
 
 ---
 
@@ -53,7 +56,7 @@ final prefix = session.config.navigate('greeting.prefix', '***') as String
 
 Bu, kullanıcının `nextflow.config` dosyasındaki bir yapılandırma bloğuna karşılık gelir:
 
-```groovy title="nextflow.config"
+```nextflow title="nextflow.config"
 greeting {
     prefix = '>>>'
 }
@@ -63,7 +66,7 @@ greeting {
 
 `GreetingExtension.groovy` dosyasını, `init()` içinde yapılandırmayı okuyacak ve `decorateGreeting()` içinde kullanacak şekilde düzenleyin:
 
-```groovy title="GreetingExtension.groovy" linenums="35" hl_lines="7-8 18"
+```groovy {7-8,18} title="GreetingExtension.groovy" showLineNumbers startLineNumber=35
 @CompileStatic
 class GreetingExtension extends PluginExtensionPoint {
 
@@ -112,7 +115,7 @@ Kod, `prefix` ve `suffix` değişkenlerine değer atamaya çalışıyor, ancak s
 
 Sınıfın başına, açılış parantezinin hemen ardına değişken bildirimlerini ekleyin:
 
-```groovy title="GreetingExtension.groovy" linenums="35" hl_lines="4-5"
+```groovy {4-5} title="GreetingExtension.groovy" showLineNumbers startLineNumber=35
 @CompileStatic
 class GreetingExtension extends PluginExtensionPoint {
 
@@ -137,10 +140,10 @@ Eklenti yüklendiğinde Nextflow, `init()` yöntemini çağırır; bu yöntem s�
 Kullanıcı herhangi bir şey ayarlamamışsa `navigate()` aynı varsayılanı döndürür, dolayısıyla davranış değişmez.
 `decorateGreeting()` yöntemi her çalıştığında bu alanları okur.
 
-!!! tip "Hatalardan öğrenmek"
-
-    Bu "kullanmadan önce bildir" kalıbı Java/Groovy için temeldir; ancak değişkenlerin ilk atama yapıldığında var olmaya başladığı Python veya R'dan geliyorsanız alışılmadık gelebilir.
-    Bu hatayı bir kez yaşamak, ileride hızlıca tanıyıp düzeltmenizi sağlar.
+:::tip[Hatalardan öğrenmek]
+Bu "kullanmadan önce bildir" kalıbı Java/Groovy için temeldir; ancak değişkenlerin ilk atama yapıldığında var olmaya başladığı Python veya R'dan geliyorsanız alışılmadık gelebilir.
+Bu hatayı bir kez yaşamak, ileride hızlıca tanıyıp düzeltmenizi sağlar.
+:::
 
 ### 1.4. Derleme ve test
 
@@ -152,30 +155,30 @@ make install && cd ..
 
 Süslemeyi özelleştirmek için `nextflow.config` dosyasını güncelleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" hl_lines="7-10"
-    // Eklenti geliştirme alıştırmaları için yapılandırma
-    plugins {
-        id 'nf-schema@2.6.1'
-        id 'nf-greeting@0.1.0'
-    }
+```nextflow title="nextflow.config" step="Önce"
+// Eklenti geliştirme alıştırmaları için yapılandırma
+plugins {
+    id 'nf-schema@2.6.1'
+    id 'nf-greeting@0.1.0'
+}
+```
 
-    greeting {
-        prefix = '>>>'
-        suffix = '<<<'
-    }
-    ```
+```nextflow {7-10} title="nextflow.config" step="Sonra"
+// Eklenti geliştirme alıştırmaları için yapılandırma
+plugins {
+    id 'nf-schema@2.6.1'
+    id 'nf-greeting@0.1.0'
+}
 
-=== "Önce"
+greeting {
+    prefix = '>>>'
+    suffix = '<<<'
+}
+```
 
-    ```groovy title="nextflow.config"
-    // Eklenti geliştirme alıştırmaları için yapılandırma
-    plugins {
-        id 'nf-schema@2.6.1'
-        id 'nf-greeting@0.1.0'
-    }
-    ```
+</CodeWalkthrough>
 
 Pipeline'ı çalıştırın:
 
@@ -204,32 +207,32 @@ Kullanıcılar, yapılandırma aracılığıyla eklentiyi tamamen devre dışı 
 
 Fabrika, Nextflow oturumuna ve yapılandırmasına erişebildiğinden, `enabled` ayarını okuyup gözlemci oluşturulup oluşturulmayacağına karar vermek için doğru yerdir.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="GreetingFactory.groovy" linenums="31" hl_lines="3-4"
-    @Override
-    Collection<TraceObserver> create(Session session) {
-        final enabled = session.config.navigate('greeting.enabled', true)
-        if (!enabled) return []
+```groovy title="GreetingFactory.groovy" showLineNumbers startLineNumber=31 step="Önce"
+@Override
+Collection<TraceObserver> create(Session session) {
+    return [
+        new GreetingObserver(),
+        new TaskCounterObserver()
+    ]
+}
+```
 
-        return [
-            new GreetingObserver(),
-            new TaskCounterObserver()
-        ]
-    }
-    ```
+```groovy {3-4} title="GreetingFactory.groovy" showLineNumbers startLineNumber=31 step="Sonra"
+@Override
+Collection<TraceObserver> create(Session session) {
+    final enabled = session.config.navigate('greeting.enabled', true)
+    if (!enabled) return []
 
-=== "Önce"
+    return [
+        new GreetingObserver(),
+        new TaskCounterObserver()
+    ]
+}
+```
 
-    ```groovy title="GreetingFactory.groovy" linenums="31"
-    @Override
-    Collection<TraceObserver> create(Session session) {
-        return [
-            new GreetingObserver(),
-            new TaskCounterObserver()
-        ]
-    }
-    ```
+</CodeWalkthrough>
 
 Fabrika artık yapılandırmadan `greeting.enabled` değerini okuyor ve kullanıcı bunu `false` olarak ayarlamışsa boş bir liste döndürüyor.
 Liste boş olduğunda hiçbir gözlemci oluşturulmaz; dolayısıyla eklentinin yaşam döngüsü kancaları sessizce atlanır.
@@ -237,50 +240,50 @@ Liste boş olduğunda hiçbir gözlemci oluşturulmaz; dolayısıyla eklentinin 
 5. Bölüm'deki fabrika testi, yapılandırması olmayan bir `Mock(Session)` kullanıyor; bu nedenle `navigate()` artık `NullPointerException` ile başarısız oluyor.
    Mock oturuma bir yapılandırma eklemek ve devre dışı bırakma durumu için bir test eklemek üzere `nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy` dosyasını güncelleyin:
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="4-6 8 15-25"
-        def 'should create the observer instance' () {
-            given:
-            def factory = new GreetingFactory()
-            def session = Mock(Session) {
-                getConfig() >> [greeting: [enabled: true]]
-            }
-            when:
-            def result = factory.create(session)
-            then:
-            result.size() == 2
-            result[0] instanceof GreetingObserver
-            result[1] instanceof TaskCounterObserver
+```groovy {5} title="GreetingObserverTest.groovy" showLineNumbers startLineNumber=12 step="Önce"
+    def 'should create the observer instance' () {
+        given:
+        def factory = new GreetingFactory()
+        when:
+        def result = factory.create(Mock(Session))
+        then:
+        result.size() == 2
+        result[0] instanceof GreetingObserver
+        result[1] instanceof TaskCounterObserver
+    }
+```
+
+```groovy {4-6,8,15-25} title="GreetingObserverTest.groovy" showLineNumbers startLineNumber=12 step="Sonra"
+    def 'should create the observer instance' () {
+        given:
+        def factory = new GreetingFactory()
+        def session = Mock(Session) {
+            getConfig() >> [greeting: [enabled: true]]
         }
+        when:
+        def result = factory.create(session)
+        then:
+        result.size() == 2
+        result[0] instanceof GreetingObserver
+        result[1] instanceof TaskCounterObserver
+    }
 
-        def 'should return empty list when disabled' () {
-            given:
-            def factory = new GreetingFactory()
-            def session = Mock(Session) {
-                getConfig() >> [greeting: [enabled: false]]
-            }
-            when:
-            def result = factory.create(session)
-            then:
-            result.isEmpty()
+    def 'should return empty list when disabled' () {
+        given:
+        def factory = new GreetingFactory()
+        def session = Mock(Session) {
+            getConfig() >> [greeting: [enabled: false]]
         }
-    ```
+        when:
+        def result = factory.create(session)
+        then:
+        result.isEmpty()
+    }
+```
 
-=== "Önce"
-
-    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="5"
-        def 'should create the observer instance' () {
-            given:
-            def factory = new GreetingFactory()
-            when:
-            def result = factory.create(Mock(Session))
-            then:
-            result.size() == 2
-            result[0] instanceof GreetingObserver
-            result[1] instanceof TaskCounterObserver
-        }
-    ```
+</CodeWalkthrough>
 
 ### 2.1. Derleme ve test
 
@@ -296,29 +299,35 @@ Her şeyin hâlâ çalıştığını doğrulamak için pipeline'ı çalıştır�
 nextflow run greet.nf -ansi-log false
 ```
 
-??? exercise "Eklentiyi tamamen devre dışı bırakma"
+<details class="exercise">
+<summary>Eklentiyi tamamen devre dışı bırakma</summary>
 
-    `nextflow.config` dosyasında `greeting.enabled = false` ayarını yapıp pipeline'ı tekrar çalıştırmayı deneyin.
-    Çıktıda ne değişiyor?
+`nextflow.config` dosyasında `greeting.enabled = false` ayarını yapıp pipeline'ı tekrar çalıştırmayı deneyin.
+Çıktıda ne değişiyor?
 
-    ??? solution "Çözüm"
+<details class="solution">
+<summary>Çözüm</summary>
 
-        ```groovy title="nextflow.config" hl_lines="8"
-        // Eklenti geliştirme alıştırmaları için yapılandırma
-        plugins {
-            id 'nf-schema@2.6.1'
-            id 'nf-greeting@0.1.0'
-        }
+```nextflow {8} title="nextflow.config"
+// Eklenti geliştirme alıştırmaları için yapılandırma
+plugins {
+    id 'nf-schema@2.6.1'
+    id 'nf-greeting@0.1.0'
+}
 
-        greeting {
-            enabled = false
-        }
-        ```
+greeting {
+    enabled = false
+}
+```
 
-        "Pipeline is starting!", "Pipeline complete!" ve görev sayısı mesajlarının tamamı kaybolur; çünkü `enabled` false olduğunda fabrika boş bir liste döndürür.
-        Pipeline'ın kendisi çalışmaya devam eder, ancak hiçbir gözlemci etkin değildir.
+"Pipeline is starting!", "Pipeline complete!" ve görev sayısı mesajlarının tamamı kaybolur; çünkü `enabled` false olduğunda fabrika boş bir liste döndürür.
+Pipeline'ın kendisi çalışmaya devam eder, ancak hiçbir gözlemci etkin değildir.
 
-        Devam etmeden önce `enabled` değerini `true` olarak ayarlamayı (veya satırı kaldırmayı) unutmayın.
+Devam etmeden önce `enabled` değerini `true` olarak ayarlamayı (veya satırı kaldırmayı) unutmayın.
+
+</details>
+
+</details>
 
 ---
 
@@ -331,16 +340,7 @@ Bunun nedeni, `session.config.navigate()` yönteminin yalnızca değerleri okuma
 Eklentinizin kabul ettiği seçenekleri, türlerini ve varsayılanlarını bildirir.
 `navigate()` çağrılarınızın **yerini almaz**. Bunun yerine onlarla birlikte çalışır:
 
-```mermaid
-flowchart LR
-    A["nextflow.config<br/>greeting { ... }"] --> B["ConfigScope<br/><i>declares valid options</i>"]
-    A --> C["navigate()<br/><i>reads values at runtime</i>"]
-    B -. "validates &<br/>documents" .-> A
-    C -- "provides values to" --> D["Plugin code<br/><i>factory, extension</i>"]
-
-    style B fill:#e8f5e9,stroke:#4caf50
-    style C fill:#e3f2fd,stroke:#2196f3
-```
+![](../../../side_quests/plugin_development/img/mermaid-fb139af663b4f518.svg)
 
 `ConfigScope` sınıfı olmadan `navigate()` hâlâ çalışır, ancak:
 
@@ -350,7 +350,7 @@ flowchart LR
 - Tür dönüşümü manueldir (`as String`, `as boolean`)
 
 Resmi bir yapılandırma kapsamı sınıfı kaydetmek uyarıyı düzeltir ve bu üç sorunu da giderir.
-Bu, Bölüm 1'de kullandığınız `#!groovy validation {}` ve `#!groovy co2footprint {}` bloklarının arkasındaki mekanizmanın aynısıdır.
+Bu, Bölüm 1'de kullandığınız `validation {}{:nextflow}` ve `co2footprint {}{:nextflow}` bloklarının arkasındaki mekanizmanın aynısıdır.
 
 ### 3.1. Yapılandırma sınıfını oluşturma
 
@@ -362,7 +362,7 @@ touch nf-greeting/src/main/groovy/training/plugin/GreetingConfig.groovy
 
 Üç seçeneğin tamamını içeren yapılandırma sınıfını ekleyin:
 
-```groovy title="GreetingConfig.groovy" linenums="1"
+```groovy title="GreetingConfig.groovy" showLineNumbers
 package training.plugin
 
 import nextflow.config.spec.ConfigOption
@@ -381,18 +381,18 @@ import nextflow.script.dsl.Description
  *         suffix = '<<<'
  *     }
  */
-@ScopeName('greeting')                       // (1)!
-class GreetingConfig implements ConfigScope { // (2)!
+@ScopeName('greeting')                       // [!annotate] `nextflow.config` dosyasındaki `greeting { }` bloğuyla eşleşir
+class GreetingConfig implements ConfigScope { // [!annotate] Yapılandırma sınıfları için gerekli arayüz
 
     GreetingConfig() {}
 
-    GreetingConfig(Map opts) {               // (3)!
+    GreetingConfig(Map opts) {               // [!annotate] Nextflow'un yapılandırmayı örnekleyebilmesi için hem bağımsız değişkensiz hem de Map yapıcısı gereklidir
         this.enabled = opts.enabled as Boolean ?: true
         this.prefix = opts.prefix as String ?: '***'
         this.suffix = opts.suffix as String ?: '***'
     }
 
-    @ConfigOption                            // (4)!
+    @ConfigOption                            // [!annotate] `@ConfigOption` bir alanı yapılandırma seçeneği olarak işaretler; `@Description` ise araçlar için belgeler (`nextflow.script.dsl` paketinden içe aktarılır)
     @Description('Enable or disable the plugin entirely')
     boolean enabled = true
 
@@ -405,11 +405,6 @@ class GreetingConfig implements ConfigScope { // (2)!
     String suffix = '***'
 }
 ```
-
-1. `nextflow.config` dosyasındaki `#!groovy greeting { }` bloğuyla eşleşir
-2. Yapılandırma sınıfları için gerekli arayüz
-3. Nextflow'un yapılandırmayı örnekleyebilmesi için hem bağımsız değişkensiz hem de Map yapıcısı gereklidir
-4. `@ConfigOption` bir alanı yapılandırma seçeneği olarak işaretler; `@Description` ise araçlar için belgeler (`nextflow.script.dsl` paketinden içe aktarılır)
 
 Temel noktalar:
 
@@ -424,24 +419,24 @@ Temel noktalar:
 Sınıfı oluşturmak tek başına yeterli değildir.
 Nextflow'un bunun varlığından haberdar olması gerekir; bu nedenle diğer uzantı noktalarının yanına `build.gradle` dosyasına kaydedersiniz.
 
-=== "Sonra"
+<CodeWalkthrough>
 
-    ```groovy title="build.gradle" hl_lines="4"
-    extensionPoints = [
-        'training.plugin.GreetingExtension',
-        'training.plugin.GreetingFactory',
-        'training.plugin.GreetingConfig'
-    ]
-    ```
+```groovy title="build.gradle" step="Önce"
+extensionPoints = [
+    'training.plugin.GreetingExtension',
+    'training.plugin.GreetingFactory'
+]
+```
 
-=== "Önce"
+```groovy {4} title="build.gradle" step="Sonra"
+extensionPoints = [
+    'training.plugin.GreetingExtension',
+    'training.plugin.GreetingFactory',
+    'training.plugin.GreetingConfig'
+]
+```
 
-    ```groovy title="build.gradle"
-    extensionPoints = [
-        'training.plugin.GreetingExtension',
-        'training.plugin.GreetingFactory'
-    ]
-    ```
+</CodeWalkthrough>
 
 Fabrika ve uzantı noktaları kaydı arasındaki farka dikkat edin:
 
@@ -457,16 +452,16 @@ nextflow run greet.nf -ansi-log false
 
 Pipeline davranışı aynıdır, ancak "Unrecognized config option" uyarısı artık görünmez.
 
-!!! note "Ne değişti, ne değişmedi"
-
-    `GreetingFactory` ve `GreetingExtension` sınıflarınız çalışma zamanında değerleri okumak için hâlâ `session.config.navigate()` kullanıyor.
-    Bu kodların hiçbiri değişmedi.
-    `ConfigScope` sınıfı, Nextflow'a hangi seçeneklerin var olduğunu bildiren paralel bir bildirimdir.
-    Her iki parça da gereklidir: `ConfigScope` bildirir, `navigate()` okur.
+:::note[Ne değişti, ne değişmedi]
+`GreetingFactory` ve `GreetingExtension` sınıflarınız çalışma zamanında değerleri okumak için hâlâ `session.config.navigate()` kullanıyor.
+Bu kodların hiçbiri değişmedi.
+`ConfigScope` sınıfı, Nextflow'a hangi seçeneklerin var olduğunu bildiren paralel bir bildirimdir.
+Her iki parça da gereklidir: `ConfigScope` bildirir, `navigate()` okur.
+:::
 
 Eklentiniz artık Bölüm 1'de kullandığınız eklentilerle aynı yapıya sahip.
-nf-schema bir `#!groovy validation {}` bloğu veya nf-co2footprint bir `#!groovy co2footprint {}` bloğu sunduğunda, tam olarak bu kalıbı kullanırlar: açıklamalı alanlara sahip bir `ConfigScope` sınıfı, uzantı noktası olarak kaydedilmiş.
-`#!groovy greeting {}` bloğunuz da aynı şekilde çalışır.
+nf-schema bir `validation {}{:nextflow}` bloğu veya nf-co2footprint bir `co2footprint {}{:nextflow}` bloğu sunduğunda, tam olarak bu kalıbı kullanırlar: açıklamalı alanlara sahip bir `ConfigScope` sınıfı, uzantı noktası olarak kaydedilmiş.
+`greeting {}{:nextflow}` bloğunuz da aynı şekilde çalışır.
 
 ---
 
@@ -492,4 +487,4 @@ nf-schema bir `#!groovy validation {}` bloğu veya nf-co2footprint bir `#!groovy
 Eklentiniz artık bir üretim eklentisinin tüm parçalarına sahip: özel fonksiyonlar, izleme gözlemcileri ve kullanıcıya yönelik yapılandırma.
 Son adım, dağıtım için paketlemektir.
 
-[Özete geç :material-arrow-right:](summary.md){ .md-button .md-button--primary }
+<LinkButton href="summary.mdx" variant="primary" icon="right-arrow">Özete geç</LinkButton>

@@ -1,6 +1,9 @@
-# Bölüm 1: Temel işlemleri çalıştırın
+---
+title: 'Bölüm 1: Temel işlemleri çalıştırın'
+description: Nextflow for Bioimaging eğitim kursunun bu ilk bölümünde, temel işlemleri göstermek ve ilgili Nextflow kod bileşenlerine işaret etmek için çok basit…
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Nextflow for Bioimaging eğitim kursunun bu ilk bölümünde, temel işlemleri göstermek ve ilgili Nextflow kod bileşenlerine işaret etmek için çok basit, alan-bağımsız bir Hello World örneği kullanacağız.
 
@@ -19,7 +22,7 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 
 Konsol çıktınız şuna benzer görünmelidir:
 
-```console title="Output" linenums="1"
+```console title="Output" showLineNumbers
  N E X T F L O W   ~  version 26.04.4
 
 Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d
@@ -32,7 +35,7 @@ Tebrikler, ilk Nextflow workflow'unuzu çalıştırdınız!
 
 Buradaki en önemli çıktı son satırdır (satır 6):
 
-```console title="Output" linenums="6"
+```console title="Output" showLineNumbers startLineNumber=6
 [71/8143bd] sayHello | 1 of 1 ✔
 ```
 
@@ -45,7 +48,7 @@ Bu harika, ancak merak ediyor olabilirsiniz: çıktı nerede?
 Bu workflow, çıktısını `results` adlı bir dizine yayımlamak üzere yapılandırılmıştır.
 Mevcut dizininize bakarsanız, workflow'u çalıştırdığınızda Nextflow'un `results` adında yeni bir dizin oluşturduğunu göreceksiniz; bu dizin `output.txt` adlı bir dosya içerir.
 
-```console title="results/" linenums="1"
+```console title="results/" showLineNumbers
 results
 └── output.txt
 ```
@@ -55,7 +58,7 @@ Dosyayı açın; içeriği komut satırında belirttiğiniz selamlama ile eşle�
 <details>
   <summary>Dosya içeriği</summary>
 
-```console title="results/output.txt" linenums="1"
+```console title="results/output.txt" showLineNumbers
 Hello World!
 ```
 
@@ -67,10 +70,10 @@ Ancak, 'yayımlanan' sonucun, Nextflow'un workflow'u çalıştırırken üretti�
 
 Şimdi, Nextflow'un çalışmayı gerçekte nerede yürüttüğünü görmek için kaputun altına bakacağız.
 
-!!! warning "Uyarı"
-
-    Tüm workflow'lar çıktıları bir results dizinine yayımlamak üzere ayarlanmamış olabilir ve/veya dizin adı farklı olabilir.
-    Bu bölümde biraz ilerledikten sonra, bu davranışın nerede belirtildiğini nasıl öğreneceğinizi göstereceğiz.
+:::caution[Uyarı]
+Tüm workflow'lar çıktıları bir results dizinine yayımlamak üzere ayarlanmamış olabilir ve/veya dizin adı farklı olabilir.
+Bu bölümde biraz ilerledikten sonra, bu davranışın nerede belirtildiğini nasıl öğreneceğinizi göstereceğiz.
+:::
 
 ### 1.3. `work/` dizininde orijinal çıktıyı ve günlükleri bulun
 
@@ -83,7 +86,7 @@ Bu kafa karıştırıcı gelebilir, o yüzden pratikte bunun nasıl göründüğ
 
 Daha önce çalıştırdığımız workflow'un konsol çıktısına geri dönersek, şu satırımız vardı:
 
-```console title="Excerpt of command output" linenums="6"
+```console title="Excerpt of command output" showLineNumbers startLineNumber=6
 [71/8143bd] sayHello | 1 of 1 ✔
 ```
 
@@ -100,14 +103,14 @@ Bu, tam dizin yolunu vermelidir: `work/71/8143bd5ed3420e23c5f0dc1a05056d`
 
 Orada ne olduğuna bir göz atalım.
 
-!!! Tip "İpucu"
+:::tip[İpucu]
+VSCode dosya gezgininde görev alt dizininin içeriğine göz atarsanız, tüm dosyaları hemen göreceksiniz.
+Ancak, günlük dosyaları terminalde görünmez olarak ayarlanmıştır, bu nedenle bunları görüntülemek için `ls` veya `tree` kullanmak istiyorsanız, görünmez dosyaları görüntülemek için ilgili seçeneği ayarlamanız gerekecektir.
 
-    VSCode dosya gezgininde görev alt dizininin içeriğine göz atarsanız, tüm dosyaları hemen göreceksiniz.
-    Ancak, günlük dosyaları terminalde görünmez olarak ayarlanmıştır, bu nedenle bunları görüntülemek için `ls` veya `tree` kullanmak istiyorsanız, görünmez dosyaları görüntülemek için ilgili seçeneği ayarlamanız gerekecektir.
-
-    ```bash
-    tree -a work
-    ```
+```bash
+tree -a work
+```
+:::
 
 Tam alt dizin adları sisteminizde farklı olacaktır.
 
@@ -136,7 +139,7 @@ Açarsanız, yine `Hello World!` selamlamasını bulacaksınız.
 <details>
   <summary>output.txt dosyasının içeriği</summary>
 
-```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" showLineNumbers
 Hello World!
 ```
 
@@ -159,16 +162,16 @@ Bunlar, Nextflow'un görev yürütmenin bir parçası olarak yazdığı yardımc
 <details>
   <summary>Dosya içeriği</summary>
 
-```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" showLineNumbers
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
 </details>
 
-!!! Tip "İpucu"
-
-    Bir şeyler ters gittiğinde ve ne olduğunu sorun gidermeniz gerektiğinde, Nextflow'un workflow talimatlarına, değişken enterpolasyonuna vb. dayalı olarak tam olarak hangi komutu oluşturduğunu kontrol etmek için `command.sh` betiğine bakmak yararlı olabilir.
+:::tip[İpucu]
+Bir şeyler ters gittiğinde ve ne olduğunu sorun gidermeniz gerektiğinde, Nextflow'un workflow talimatlarına, değişken enterpolasyonuna vb. dayalı olarak tam olarak hangi komutu oluşturduğunu kontrol etmek için `command.sh` betiğine bakmak yararlı olabilir.
+:::
 
 ### 1.4. İsteğe bağlı alıştırma: farklı selamlamalarla yeniden çalıştırın
 
@@ -200,7 +203,7 @@ _Buradaki amaç Nextflow kodunun sözdizimini ezberlemek değil, ana bileşenler
 <details>
   <summary>Kod</summary>
 
-```groovy title="hello-world.nf" linenums="1"
+```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 /*
@@ -247,7 +250,7 @@ Burada `greeting` adlı bir **input** değişkeni alan ve **output**'unu `output
 <details>
   <summary>Kod</summary>
 
-```groovy title="hello-world.nf" linenums="3"
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=3
 /*
  * Bir selamlamayı bir dosyaya yazdırmak için echo kullan
  */
@@ -276,13 +279,13 @@ Bu, sadece bir `input` tanımı, bir `output` tanımı ve çalıştırılacak `s
 
 `output` tanımı, Nextflow'a bunun bir yol olarak ele alınması gerektiğini söyleyen `path` niteleyicisini içerir (hem dizin yollarını hem de dosyaları içerir).
 
-!!! Tip "İpucu"
+:::tip[İpucu]
+Çıktı tanımı hangi çıktının oluşturulacağını _belirlemez_.
+Sadece beklenen çıktı dosya(lar)ının nerede bulunacağını _bildirir_, böylece Nextflow çalıştırma tamamlandığında bunu arayabilir.
 
-    Çıktı tanımı hangi çıktının oluşturulacağını _belirlemez_.
-    Sadece beklenen çıktı dosya(lar)ının nerede bulunacağını _bildirir_, böylece Nextflow çalıştırma tamamlandığında bunu arayabilir.
-
-    Bu, komutun başarıyla çalıştırıldığını doğrulamak ve gerekirse çıktıyı aşağı akış süreçlerine aktarmak için gereklidir.
-    Çıktı bloğunda bildirilenle eşleşmeyen üretilen çıktı, aşağı akış süreçlerine aktarılmayacaktır.
+Bu, komutun başarıyla çalıştırıldığını doğrulamak ve gerekirse çıktıyı aşağı akış süreçlerine aktarmak için gereklidir.
+Çıktı bloğunda bildirilenle eşleşmeyen üretilen çıktı, aşağı akış süreçlerine aktarılmayacaktır.
+:::
 
 Gerçek dünyadaki bir pipeline'da, bir süreç genellikle birazdan tanıtacağımız süreç yönergeleri gibi ek bilgiler içerir.
 
@@ -293,7 +296,7 @@ Workflow tanımı `workflow` anahtar kelimesiyle başlar, ardından isteğe bağ
 
 Burada, `--greeting` parametresine verdiğimiz değeri tutan `params.greeting` girdisini alan `sayHello` sürecine bir çağrıdan oluşan bir **workflow**'umuz var.
 
-```groovy title="hello-world.nf" linenums="22"
+```nextflow title="hello-world.nf" showLineNumbers startLineNumber=22
 workflow {
 
     // bir selamlama yayınla
@@ -313,10 +316,10 @@ Bunu kursun 2. Bölümünde nf-core/molkart'ı çalıştırdığımızda uygulam
 Yukarıda belirtildiği gibi, `--greeting` komut satırı parametresinin değerini `sayHello()` süreç çağrısına bu şekilde aktarıyoruz.
 Aslında, sadece `params.someParameterName` bildirmek, workflow'a komut satırından `--someParameterName` adında bir parametre vermemizi sağlayacaktır.
 
-!!! Tip "İpucu"
-
-    `params` sistemi kullanılarak bildirilen bu workflow parametreleri her zaman iki tire (`--`) alır.
-    Bu, onları sadece bir tire (`-`) alan Nextflow seviyesi parametrelerden ayırır.
+:::tip[İpucu]
+`params` sistemi kullanılarak bildirilen bu workflow parametreleri her zaman iki tire (`--`) alır.
+Bu, onları sadece bir tire (`-`) alan Nextflow seviyesi parametrelerden ayırır.
+:::
 
 ### Özet
 
@@ -351,26 +354,22 @@ Kullanmak için komutunuza `-resume` ekleyin ve çalıştırın:
 
 ```bash
 nextflow run hello-world.nf --greeting 'Hello World!' -resume
+# [!output]
+N E X T F L O W   ~  version 26.04.4
+
+Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
+
+[71/8143bd] sayHello | 1 of 1, cached: 1 ✔
 ```
-
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
-
-    [71/8143bd] sayHello | 1 of 1, cached: 1 ✔
-    ```
 
 Süreç durum satırına eklenmiş olan `cached:` kısmına bakın; bu, Nextflow'un bu çalışmayı zaten yaptığını tanıdığı ve önceki başarılı çalıştırmadan sonucu yeniden kullandığı anlamına gelir.
 
 Ayrıca çalışma alt dizini hash'inin önceki çalıştırmayla aynı olduğunu görebilirsiniz.
 Nextflow tam anlamıyla size önceki çalıştırmayı gösteriyor ve "Bunu zaten orada yaptım" diyor.
 
-!!! Tip "İpucu"
-
-    Pipeline'ınızı `resume` ile yeniden çalıştırdığınızda, Nextflow daha önce başarıyla çalıştırılan herhangi bir süreç çağrısı tarafından bir `publishDir` dizinine yazılan dosyaların üzerine yazmaz.
+:::tip[İpucu]
+Pipeline'ınızı `resume` ile yeniden çalıştırdığınızda, Nextflow daha önce başarıyla çalıştırılan herhangi bir süreç çağrısı tarafından bir `publishDir` dizinine yazılan dosyaların üzerine yazmaz.
+:::
 
 ### 3.2. Geçmiş çalıştırmaların günlüğünü inceleyin
 
@@ -393,12 +392,12 @@ Nextflow, artık umursamadığınız geçmiş çalıştırmaların çalışma al
 
 Zaman damgasına ve/veya komut satırına göre bir çalıştırmayı aramak için Nextflow günlüğünü kullanabilir, ardından önceki çalıştırmalardaki çalışma dizinlerini silmek için `nextflow clean -before <run_name> -f` kullanabilirsiniz.
 
-!!! Warning "Uyarı"
+:::caution[Uyarı]
+Geçmiş çalıştırmalardan çalışma alt dizinlerini silmek onları Nextflow'un önbelleğinden kaldırır ve bu dizinlerde depolanan tüm çıktıları siler.
+Bu, Nextflow'un ilgili süreçleri yeniden çalıştırmadan çalıştırmayı sürdürme yeteneğini bozduğu anlamına gelir.
 
-    Geçmiş çalıştırmalardan çalışma alt dizinlerini silmek onları Nextflow'un önbelleğinden kaldırır ve bu dizinlerde depolanan tüm çıktıları siler.
-    Bu, Nextflow'un ilgili süreçleri yeniden çalıştırmadan çalıştırmayı sürdürme yeteneğini bozduğu anlamına gelir.
-
-    Önem verdiğiniz veya güvenmeyi planladığınız çıktıları kaydetmek sizin sorumluluğunuzdadır! Bu amaçla `publishDir` yönergesini kullanıyorsanız, `symlink` modunu değil `copy` modunu kullandığınızdan emin olun.
+Önem verdiğiniz veya güvenmeyi planladığınız çıktıları kaydetmek sizin sorumluluğunuzdadır! Bu amaçla `publishDir` yönergesini kullanıyorsanız, `symlink` modunu değil `copy` modunu kullandığınızdan emin olun.
+:::
 
 ### Özet
 

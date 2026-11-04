@@ -1,13 +1,16 @@
-# 파트 2: 단일 샘플 구현
+---
+title: '파트 2: 단일 샘플 구현'
+description: 이 과정의 이 부분에서는 파트 1에서 실행한 모든 명령을 적용하여 자동으로 실행하는 가장 간단한 워크플로우를 작성하며, 한 번에 하나의 샘플만 처리하는 것을 목표로 합니다.
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 이 과정의 이 부분에서는 파트 1에서 실행한 모든 명령을 적용하여 자동으로 실행하는 가장 간단한 워크플로우를 작성하며, 한 번에 하나의 샘플만 처리하는 것을 목표로 합니다.
 
-!!! warning "필수 조건"
-
-    이 레슨을 시작하기 전에 [파트 1: 방법 개요](./01_method.md)를 완료해야 합니다.
-    특히, 섹션 1.2.3을 진행하면 이 레슨의 정렬 단계에 필요한 게놈 인덱스 파일(`data/genome_index.tar.gz`)이 생성됩니다.
+:::caution[필수 조건]
+이 레슨을 시작하기 전에 [파트 1: 방법 개요](./01_method.mdx)를 완료해야 합니다.
+특히, 섹션 1.2.3을 진행하면 이 레슨의 정렬 단계에 필요한 게놈 인덱스 파일(`data/genome_index.tar.gz`)이 생성됩니다.
+:::
 
 ## 과제
 
@@ -17,126 +20,127 @@
 2. 어댑터 트리밍 및 트리밍 후 QC 실행 (Trim Galore)
 3. 트리밍된 리드를 참조 게놈에 정렬 (HISAT2)
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-wf-02.svg"
-</figure>
+![](../../../nf4_science/rnaseq/img/rnaseq-wf-02.excalidraw.svg)
 
-이는 [파트 1: 방법 개요](./01_method.md#1-single-sample-processing)의 첫 번째 섹션에서 컨테이너 내에서 수동으로 실행한 단계를 자동화합니다.
+이는 [파트 1: 방법 개요](./01_method.mdx#1-단일-샘플-처리)의 첫 번째 섹션에서 컨테이너 내에서 수동으로 실행한 단계를 자동화합니다.
 
 시작점으로 워크플로우의 주요 부분을 요약한 워크플로우 파일 `rnaseq.nf`와 `modules/` 디렉토리에 각 프로세스의 구조를 요약한 네 개의 모듈 파일(`fastqc.nf`, `trim_galore.nf`, `hisat2_align.nf`, `multiqc.nf`)을 제공합니다.
 
-??? full-code "스캐폴드 파일"
+<details class="full-code">
+<summary>스캐폴드 파일</summary>
 
-    ```groovy title="rnaseq.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="rnaseq.nf"
+#!/usr/bin/env nextflow
 
-    // 모듈 INCLUDE 문
+// 모듈 INCLUDE 문
 
-    /*
-     * Pipeline parameters
-     */
+/*
+ * Pipeline parameters
+ */
 
-    // Primary input
+// Primary input
 
-    workflow {
+workflow {
 
-        main:
-        // 입력 채널 생성
+    main:
+    // 입력 채널 생성
 
-        // 프로세스 실행
+    // 프로세스 실행
 
-        publish:
-        // 게시할 출력 선언
-    }
+    publish:
+    // 게시할 출력 선언
+}
 
-    output {
-        // 게시 타겟 설정
-    }
-    ```
+output {
+    // 게시 타겟 설정
+}
+```
 
-    ```groovy title="modules/fastqc.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/fastqc.nf"
+#!/usr/bin/env nextflow
 
-    /*
-     * 입력 리드에 대해 FastQC 실행
-     */
-    process FASTQC {
+/*
+ * 입력 리드에 대해 FastQC 실행
+ */
+process FASTQC {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-    ```groovy title="modules/trim_galore.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/trim_galore.nf"
+#!/usr/bin/env nextflow
 
-    /*
-     * 어댑터 트리밍 및 트리밍 후 QC 실행
-     */
-    process TRIM_GALORE {
+/*
+ * 어댑터 트리밍 및 트리밍 후 QC 실행
+ */
+process TRIM_GALORE {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-    ```groovy title="modules/hisat2_align.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/hisat2_align.nf"
+#!/usr/bin/env nextflow
 
-    /*
-     * 참조 게놈에 리드 정렬
-     */
-    process HISAT2_ALIGN {
+/*
+ * 참조 게놈에 리드 정렬
+ */
+process HISAT2_ALIGN {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-    ```groovy title="modules/multiqc.nf"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/multiqc.nf"
+#!/usr/bin/env nextflow
 
-    /*
-     * MultiQC로 QC 보고서 결합
-     */
-    process MULTIQC {
+/*
+ * MultiQC로 QC 보고서 결합
+ */
+process MULTIQC {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
+
+</details>
 
 이 파일들은 기능적이지 않으며, 코드의 중요한 부분을 채워 넣을 수 있는 스캐폴드 역할만 합니다.
 
@@ -153,10 +157,10 @@
 
 각 단계는 워크플로우 개발의 특정 측면에 초점을 맞춥니다.
 
-!!! tip "팁"
-
-    올바른 작업 디렉토리에 있는지 확인하세요:
-    `cd /workspaces/training/nf4-science/rnaseq`
+:::tip[팁]
+올바른 작업 디렉토리에 있는지 확인하세요:
+`cd /workspaces/training/nf4-science/rnaseq`
+:::
 
 ---
 
@@ -164,7 +168,7 @@
 
 이 첫 번째 단계는 기본 사항에 초점을 맞춥니다: FASTQ 파일을 로드하고 품질 관리를 실행합니다.
 
-[파트 1](01_method.md)의 `fastqc` 명령을 떠올려 보세요:
+[파트 1](01_method.mdx)의 `fastqc` 명령을 떠올려 보세요:
 
 ```bash
 fastqc <reads>
@@ -187,27 +191,27 @@ fastqc <reads>
 
 `rnaseq.nf`의 `Pipeline parameters` 섹션 아래에 `Path` 타입의 `reads` 매개변수를 선언합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="5" hl_lines="4-7"
-    /*
-     * Pipeline parameters
-     */
-    params {
-        // Primary input
-        input: Path
-    }
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=5 step="전"
+/*
+ * Pipeline parameters
+ */
 
-=== "전"
+// Primary input
+```
 
-    ```groovy title="rnaseq.nf" linenums="5"
-    /*
-     * Pipeline parameters
-     */
-
+```nextflow {4-7} title="rnaseq.nf" showLineNumbers startLineNumber=5 step="후"
+/*
+ * Pipeline parameters
+ */
+params {
     // Primary input
-    ```
+    input: Path
+}
+```
+
+</CodeWalkthrough>
 
 이것으로 CLI 매개변수가 설정되었지만, 개발 중에 워크플로우를 실행할 때마다 파일 경로를 입력하고 싶지 않습니다.
 기본값을 제공하는 여러 옵션이 있으며, 여기서는 테스트 프로필을 사용합니다.
@@ -215,67 +219,67 @@ fastqc <reads>
 #### 1.1.2. `nextflow.config`에 기본값이 있는 테스트 프로필 생성
 
 테스트 프로필은 명령줄에서 입력을 지정하지 않고 워크플로우를 시험해 볼 수 있는 편리한 기본값을 제공합니다.
-이는 Nextflow 생태계에서 일반적인 관례입니다(자세한 내용은 [Hello Config](../../hello_nextflow/06_hello_config.md) 참조).
+이는 Nextflow 생태계에서 일반적인 관례입니다(자세한 내용은 [Hello Config](../../hello_nextflow/06_hello_config.mdx) 참조).
 
 `nextflow.config`에 `profiles` 블록을 추가하고 `reads` 매개변수를 테스트 FASTQ 파일 중 하나로 설정하는 `test` 프로필을 추가합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="3-7"
-    docker.enabled = true
+```nextflow title="nextflow.config" showLineNumbers step="전"
+docker.enabled = true
+```
 
-    profiles {
-        test {
-            params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
-        }
+```nextflow {3-7} title="nextflow.config" showLineNumbers step="후"
+docker.enabled = true
+
+profiles {
+    test {
+        params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
     }
-    ```
+}
+```
 
-=== "전"
+</CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="1"
-    docker.enabled = true
-    ```
-
-여기서는 워크플로우 스크립트가 위치한 디렉토리를 가리키는 Nextflow 내장 변수인 `#!groovy ${projectDir}`를 사용합니다.
+여기서는 워크플로우 스크립트가 위치한 디렉토리를 가리키는 Nextflow 내장 변수인 `${projectDir}{:nextflow}`를 사용합니다.
 이를 통해 절대 경로를 하드코딩하지 않고도 데이터 파일 및 기타 리소스를 쉽게 참조할 수 있습니다.
 
 이제 매개변수에 편리한 기본값이 있습니다. 다음으로 이로부터 채널을 생성해야 합니다.
 
 #### 1.1.3. 입력 채널 설정
 
-workflow 블록에서 `.fromPath` 채널 팩토리를 사용하여 매개변수 값으로부터 입력 채널을 생성합니다([Hello Channels](../../hello_nextflow/02_hello_channels.md)에서 사용됨).
+workflow 블록에서 `.fromPath` 채널 팩토리를 사용하여 매개변수 값으로부터 입력 채널을 생성합니다([Hello Channels](../../hello_nextflow/02_hello_channels.mdx)에서 사용됨).
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="13" hl_lines="4-5"
-    workflow {
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=13 step="전"
+workflow {
 
-        main:
-        // 파일 경로에서 입력 채널 생성
-        read_ch = channel.fromPath(params.input)
+    main:
+    // 입력 채널 생성
 
-        // 프로세스 실행
+    // 프로세스 실행
 
-        publish:
-        // 게시할 출력 선언
-    }
-    ```
+    publish:
+    // 게시할 출력 선언
+}
+```
 
-=== "전"
+```nextflow {4-5} title="rnaseq.nf" showLineNumbers startLineNumber=13 step="후"
+workflow {
 
-    ```groovy title="rnaseq.nf" linenums="13"
-    workflow {
+    main:
+    // 파일 경로에서 입력 채널 생성
+    read_ch = channel.fromPath(params.input)
 
-        main:
-        // 입력 채널 생성
+    // 프로세스 실행
 
-        // 프로세스 실행
+    publish:
+    // 게시할 출력 선언
+}
+```
 
-        publish:
-        // 게시할 출력 선언
-    }
-    ```
+</CodeWalkthrough>
 
 다음으로 이 입력에 대해 QC를 실행할 프로세스를 생성해야 합니다.
 
@@ -286,58 +290,58 @@ workflow 블록에서 `.fromPath` 채널 팩토리를 사용하여 매개변수 
 #### 1.2.1. QC 프로세스용 모듈 채우기
 
 `modules/fastqc.nf`를 열고 프로세스 정의의 개요를 살펴보세요.
-주요 구조 요소를 인식할 수 있어야 합니다. 그렇지 않다면 [Hello Nextflow](../../hello_nextflow/01_hello_world.md)를 읽어보는 것을 고려하세요.
+주요 구조 요소를 인식할 수 있어야 합니다. 그렇지 않다면 [Hello Nextflow](../../hello_nextflow/01_hello_world.mdx)를 읽어보는 것을 고려하세요.
 
 위에 제공된 정보를 사용하여 직접 프로세스 정의를 채운 다음, 아래 "후" 탭의 솔루션과 비교하여 작업을 확인하세요.
 
-=== "전"
+<CodeWalkthrough>
 
-    ```groovy title="modules/fastqc.nf" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/fastqc.nf" showLineNumbers step="전"
+#!/usr/bin/env nextflow
 
-    /*
-     * 입력 리드에 대해 FastQC 실행
-     */
-    process FASTQC {
+/*
+ * 입력 리드에 대해 FastQC 실행
+ */
+process FASTQC {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-=== "후"
+```nextflow {8,11,14,15,19} title="modules/fastqc.nf" showLineNumbers step="후"
+#!/usr/bin/env nextflow
 
-    ```groovy title="modules/fastqc.nf" linenums="1" hl_lines="8 11 14 15 19"
-    #!/usr/bin/env nextflow
+/*
+ * 입력 리드에 대해 FastQC 실행
+ */
+process FASTQC {
 
-    /*
-     * 입력 리드에 대해 FastQC 실행
-     */
-    process FASTQC {
+    container "community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"
 
-        container "community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"
+    input:
+    path reads
 
-        input:
-        path reads
+    output:
+    path "${reads.simpleName}_fastqc.zip", emit: zip
+    path "${reads.simpleName}_fastqc.html", emit: html
 
-        output:
-        path "${reads.simpleName}_fastqc.zip", emit: zip
-        path "${reads.simpleName}_fastqc.html", emit: html
+    script:
+    """
+    fastqc ${reads}
+    """
+}
+```
 
-        script:
-        """
-        fastqc ${reads}
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 `simpleName` 접근자는 파일명에서 모든 확장자를 제거하므로 `ENCSR000COQ1_1.fastq.gz`는 `ENCSR000COQ1_1`이 됩니다.
 `emit:` 구문을 사용하여 각 출력 채널에 이름을 할당하며, 이는 출력을 publish 블록에 연결하는 데 유용합니다.
@@ -349,18 +353,18 @@ workflow 블록에서 `.fromPath` 채널 팩토리를 사용하여 매개변수 
 
 `rnaseq.nf`에 `include` 문을 추가하여 프로세스를 워크플로우에서 사용할 수 있도록 합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="3" hl_lines="2"
-    // 모듈 INCLUDE 문
-    include { FASTQC } from './modules/fastqc.nf'
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=3 step="전"
+// 모듈 INCLUDE 문
+```
 
-=== "전"
+```nextflow {2} title="rnaseq.nf" showLineNumbers startLineNumber=3 step="후"
+// 모듈 INCLUDE 문
+include { FASTQC } from './modules/fastqc.nf'
+```
 
-    ```groovy title="rnaseq.nf" linenums="3"
-    // 모듈 INCLUDE 문
-    ```
+</CodeWalkthrough>
 
 이제 프로세스를 워크플로우 범위에서 사용할 수 있습니다.
 
@@ -368,38 +372,38 @@ workflow 블록에서 `.fromPath` 채널 팩토리를 사용하여 매개변수 
 
 workflow 블록에 `FASTQC` 호출을 추가하고 입력 채널을 인수로 전달합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="14" hl_lines="7-8"
-    workflow {
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=14 step="전"
+workflow {
 
-        main:
-        // 파일 경로에서 입력 채널 생성
-        read_ch = channel.fromPath(params.input)
+    main:
+    // 파일 경로에서 입력 채널 생성
+    read_ch = channel.fromPath(params.input)
 
-        // 초기 품질 관리
-        FASTQC(read_ch)
+    // 프로세스 실행
 
-        publish:
-        // 게시할 출력 선언
-    }
-    ```
+    publish:
+    // 게시할 출력 선언
+}
+```
 
-=== "전"
+```nextflow {7-8} title="rnaseq.nf" showLineNumbers startLineNumber=14 step="후"
+workflow {
 
-    ```groovy title="rnaseq.nf" linenums="14"
-    workflow {
+    main:
+    // 파일 경로에서 입력 채널 생성
+    read_ch = channel.fromPath(params.input)
 
-        main:
-        // 파일 경로에서 입력 채널 생성
-        read_ch = channel.fromPath(params.input)
+    // 초기 품질 관리
+    FASTQC(read_ch)
 
-        // 프로세스 실행
+    publish:
+    // 게시할 출력 선언
+}
+```
 
-        publish:
-        // 게시할 출력 선언
-    }
-    ```
+</CodeWalkthrough>
 
 이제 워크플로우가 입력을 로드하고 QC 프로세스를 실행합니다.
 다음으로 출력이 게시되는 방식을 설정해야 합니다.
@@ -413,22 +417,22 @@ workflow 블록에 `FASTQC` 호출을 추가하고 입력 채널을 인수로 �
 workflow 블록 내부의 `publish:` 섹션은 게시할 프로세스 출력을 선언합니다.
 `FASTQC`의 출력을 명명된 타겟에 할당합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="23" hl_lines="2-3"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-    }
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=23 step="전"
+    publish:
+    // 게시할 출력 선언
+}
+```
 
-=== "전"
+```nextflow {2-3} title="rnaseq.nf" showLineNumbers startLineNumber=23 step="후"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+}
+```
 
-    ```groovy title="rnaseq.nf" linenums="23"
-        publish:
-        // 게시할 출력 선언
-    }
-    ```
+</CodeWalkthrough>
 
 다음으로 Nextflow에 게시된 출력을 어디에 둘지 알려줘야 합니다.
 
@@ -437,32 +441,32 @@ workflow 블록 내부의 `publish:` 섹션은 게시할 프로세스 출력을 
 `output {}` 블록은 workflow 외부에 위치하며 각 명명된 타겟이 게시되는 위치를 지정합니다.
 두 타겟 모두 `fastqc/` 하위 디렉토리에 게시되도록 설정합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="28" hl_lines="2-7"
-    output {
-        fastqc_zip {
-            path 'fastqc'
-        }
-        fastqc_html {
-            path 'fastqc'
-        }
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=28 step="전"
+output {
+    // 게시 타겟 설정
+}
+```
+
+```nextflow {2-7} title="rnaseq.nf" showLineNumbers startLineNumber=28 step="후"
+output {
+    fastqc_zip {
+        path 'fastqc'
     }
-    ```
-
-=== "전"
-
-    ```groovy title="rnaseq.nf" linenums="28"
-    output {
-        // 게시 타겟 설정
+    fastqc_html {
+        path 'fastqc'
     }
-    ```
+}
+```
 
-!!! note "참고"
+</CodeWalkthrough>
 
-    기본적으로 Nextflow는 출력 파일을 심볼릭 링크로 게시하여 불필요한 중복을 방지합니다.
-    여기서 사용하는 데이터 파일은 매우 작지만, 유전체학에서는 매우 커질 수 있습니다.
-    심볼릭 링크는 `work` 디렉토리를 정리할 때 깨지므로, 프로덕션 워크플로우에서는 기본 게시 모드를 `'copy'`로 재정의하는 것이 좋습니다.
+:::note[참고]
+기본적으로 Nextflow는 출력 파일을 심볼릭 링크로 게시하여 불필요한 중복을 방지합니다.
+여기서 사용하는 데이터 파일은 매우 작지만, 유전체학에서는 매우 커질 수 있습니다.
+심볼릭 링크는 `work` 디렉토리를 정리할 때 깨지므로, 프로덕션 워크플로우에서는 기본 게시 모드를 `'copy'`로 재정의하는 것이 좋습니다.
+:::
 
 ### 1.4. 워크플로우 실행
 
@@ -472,28 +476,24 @@ workflow 블록 내부의 `publish:` 섹션은 게시할 프로세스 출력을 
 
 ```bash
 nextflow run rnaseq.nf -profile test
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `rnaseq.nf` [fabulous_engelbart] revision: 859d80cde8
+
+executor >  local (1)
+[4e/36fb3d] FASTQC (1) | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/rnaseq/results
+
+  fastqc_zip:
+    - fastqc/ENCSR000COQ1_1_fastqc.zip
+
+  fastqc_html:
+    - fastqc/ENCSR000COQ1_1_fastqc.html
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `rnaseq.nf` [fabulous_engelbart] revision: 859d80cde8
-
-    executor >  local (1)
-    [4e/36fb3d] FASTQC (1) | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/rnaseq/results
-
-      fastqc_zip:
-        - fastqc/ENCSR000COQ1_1_fastqc.zip
-
-      fastqc_html:
-        - fastqc/ENCSR000COQ1_1_fastqc.html
-    ```
 
 파트 1을 진행하고 이미 컨테이너를 가져왔다면 매우 빠르게 실행될 것입니다.
 건너뛰었다면 Nextflow가 컨테이너를 가져올 것입니다. 이를 위해 아무것도 할 필요가 없지만 최대 1분 정도 기다려야 할 수 있습니다.
@@ -524,7 +524,7 @@ ENCSR000COQ1_1_fastqc.html  ENCSR000COQ1_1_fastqc.zip
 
 이제 초기 QC가 준비되었으므로 내장된 트리밍 후 QC와 함께 어댑터 트리밍 단계를 추가할 수 있습니다.
 
-[파트 1](01_method.md)의 `trim_galore` 명령을 떠올려 보세요:
+[파트 1](01_method.mdx)의 `trim_galore` 명령을 떠올려 보세요:
 
 ```bash
 trim_galore --fastqc <reads>
@@ -546,55 +546,55 @@ trim_galore --fastqc <reads>
 
 위에 제공된 정보를 사용하여 직접 프로세스 정의를 채운 다음, 아래 "후" 탭의 솔루션과 비교하여 작업을 확인하세요.
 
-=== "전"
+<CodeWalkthrough>
 
-    ```groovy title="modules/trim_galore.nf" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/trim_galore.nf" showLineNumbers step="전"
+#!/usr/bin/env nextflow
 
-    /*
-     * 어댑터 트리밍 및 트리밍 후 QC 실행
-     */
-    process TRIM_GALORE {
+/*
+ * 어댑터 트리밍 및 트리밍 후 QC 실행
+ */
+process TRIM_GALORE {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-=== "후"
+```nextflow {8,11,14,15,16,20} title="modules/trim_galore.nf" showLineNumbers step="후"
+#!/usr/bin/env nextflow
 
-    ```groovy title="modules/trim_galore.nf" linenums="1" hl_lines="8 11 14 15 16 20"
-    #!/usr/bin/env nextflow
+/*
+ * 어댑터 트리밍 및 트리밍 후 QC 실행
+ */
+process TRIM_GALORE {
 
-    /*
-     * 어댑터 트리밍 및 트리밍 후 QC 실행
-     */
-    process TRIM_GALORE {
+    container "community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"
 
-        container "community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"
+    input:
+    path reads
 
-        input:
-        path reads
+    output:
+    path "${reads.simpleName}_trimmed.fq.gz", emit: trimmed_reads
+    path "${reads}_trimming_report.txt", emit: trimming_reports
+    path "${reads.simpleName}_trimmed_fastqc.{zip,html}", emit: fastqc_reports
 
-        output:
-        path "${reads.simpleName}_trimmed.fq.gz", emit: trimmed_reads
-        path "${reads}_trimming_report.txt", emit: trimming_reports
-        path "${reads.simpleName}_trimmed_fastqc.{zip,html}", emit: fastqc_reports
+    script:
+    """
+    trim_galore --fastqc ${reads}
+    """
+}
+```
 
-        script:
-        """
-        trim_galore --fastqc ${reads}
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 이 프로세스는 세 개의 명명된 출력을 가집니다: 정렬 단계로 전달되는 트리밍된 리드, 트리밍 보고서, 트리밍 후 FastQC 보고서입니다.
 `--fastqc` 플래그는 Trim Galore에 트리밍된 출력에 대해 자동으로 FastQC를 실행하도록 지시합니다.
@@ -603,20 +603,20 @@ trim_galore --fastqc <reads>
 
 `rnaseq.nf`를 업데이트하여 새 모듈을 가져옵니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="3" hl_lines="3"
-    // 모듈 INCLUDE 문
-    include { FASTQC } from './modules/fastqc.nf'
-    include { TRIM_GALORE } from './modules/trim_galore.nf'
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=3 step="전"
+// 모듈 INCLUDE 문
+include { FASTQC } from './modules/fastqc.nf'
+```
 
-=== "전"
+```nextflow {3} title="rnaseq.nf" showLineNumbers startLineNumber=3 step="후"
+// 모듈 INCLUDE 문
+include { FASTQC } from './modules/fastqc.nf'
+include { TRIM_GALORE } from './modules/trim_galore.nf'
+```
 
-    ```groovy title="rnaseq.nf" linenums="3"
-    // 모듈 INCLUDE 문
-    include { FASTQC } from './modules/fastqc.nf'
-    ```
+</CodeWalkthrough>
 
 다음으로 워크플로우에 프로세스 호출을 추가합니다.
 
@@ -624,44 +624,44 @@ trim_galore --fastqc <reads>
 
 workflow 블록에 프로세스 호출을 추가합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="15" hl_lines="10-11"
-    workflow {
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=15 step="전"
+workflow {
 
-        main:
-        // 파일 경로에서 입력 채널 생성
-        read_ch = channel.fromPath(params.input)
+    main:
+    // 파일 경로에서 입력 채널 생성
+    read_ch = channel.fromPath(params.input)
 
-        // 초기 품질 관리
-        FASTQC(read_ch)
+    // 초기 품질 관리
+    FASTQC(read_ch)
 
-        // 어댑터 트리밍 및 트리밍 후 QC
-        TRIM_GALORE(read_ch)
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+}
+```
 
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-    }
-    ```
+```nextflow {10-11} title="rnaseq.nf" showLineNumbers startLineNumber=15 step="후"
+workflow {
 
-=== "전"
+    main:
+    // 파일 경로에서 입력 채널 생성
+    read_ch = channel.fromPath(params.input)
 
-    ```groovy title="rnaseq.nf" linenums="15"
-    workflow {
+    // 초기 품질 관리
+    FASTQC(read_ch)
 
-        main:
-        // 파일 경로에서 입력 채널 생성
-        read_ch = channel.fromPath(params.input)
+    // 어댑터 트리밍 및 트리밍 후 QC
+    TRIM_GALORE(read_ch)
 
-        // 초기 품질 관리
-        FASTQC(read_ch)
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+}
+```
 
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-    }
-    ```
+</CodeWalkthrough>
 
 이제 트리밍 프로세스가 워크플로우에 연결되었습니다.
 
@@ -673,26 +673,26 @@ workflow 블록에 프로세스 호출을 추가합니다:
 
 `publish:` 섹션에 트리밍 출력을 추가합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="27" hl_lines="4-6"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-        trimmed_reads = TRIM_GALORE.out.trimmed_reads
-        trimming_reports = TRIM_GALORE.out.trimming_reports
-        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
-    }
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=27 step="전"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+}
+```
 
-=== "전"
+```nextflow {4-6} title="rnaseq.nf" showLineNumbers startLineNumber=27 step="후"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+    trimmed_reads = TRIM_GALORE.out.trimmed_reads
+    trimming_reports = TRIM_GALORE.out.trimming_reports
+    trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+}
+```
 
-    ```groovy title="rnaseq.nf" linenums="27"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-    }
-    ```
+</CodeWalkthrough>
 
 다음으로 Nextflow에 이러한 출력을 어디에 둘지 알려줘야 합니다.
 
@@ -700,40 +700,40 @@ workflow 블록에 프로세스 호출을 추가합니다:
 
 `output {}` 블록에 트리밍 타겟에 대한 항목을 추가하여 `trimming/` 하위 디렉토리에 게시합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="35" hl_lines="8-16"
-    output {
-        fastqc_zip {
-            path 'fastqc'
-        }
-        fastqc_html {
-            path 'fastqc'
-        }
-        trimmed_reads {
-            path 'trimming'
-        }
-        trimming_reports {
-            path 'trimming'
-        }
-        trimming_fastqc {
-            path 'trimming'
-        }
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=35 step="전"
+output {
+    fastqc_zip {
+        path 'fastqc'
     }
-    ```
-
-=== "전"
-
-    ```groovy title="rnaseq.nf" linenums="35"
-    output {
-        fastqc_zip {
-            path 'fastqc'
-        }
-        fastqc_html {
-            path 'fastqc'
-        }
+    fastqc_html {
+        path 'fastqc'
     }
-    ```
+}
+```
+
+```nextflow {8-16} title="rnaseq.nf" showLineNumbers startLineNumber=35 step="후"
+output {
+    fastqc_zip {
+        path 'fastqc'
+    }
+    fastqc_html {
+        path 'fastqc'
+    }
+    trimmed_reads {
+        path 'trimming'
+    }
+    trimming_reports {
+        path 'trimming'
+    }
+    trimming_fastqc {
+        path 'trimming'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 출력 설정이 완료되었습니다.
 
@@ -743,38 +743,34 @@ workflow 블록에 프로세스 호출을 추가합니다:
 
 ```bash
 nextflow run rnaseq.nf -profile test
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `rnaseq.nf` [stupefied_volhard] revision: faaf310b2f
+
+executor >  local (2)
+[a3/ac9284] FASTQC (1)      | 1 of 1 ✔
+[55/c4d983] TRIM_GALORE (1) | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/rnaseq/results
+
+  fastqc_zip:
+    - fastqc/ENCSR000COQ1_1_fastqc.zip
+
+  fastqc_html:
+    - fastqc/ENCSR000COQ1_1_fastqc.html
+
+  trimmed_reads:
+    - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+
+  trimming_reports:
+    - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+
+  trimming_fastqc:
+    - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `rnaseq.nf` [stupefied_volhard] revision: faaf310b2f
-
-    executor >  local (2)
-    [a3/ac9284] FASTQC (1)      | 1 of 1 ✔
-    [55/c4d983] TRIM_GALORE (1) | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/rnaseq/results
-
-      fastqc_zip:
-        - fastqc/ENCSR000COQ1_1_fastqc.zip
-
-      fastqc_html:
-        - fastqc/ENCSR000COQ1_1_fastqc.html
-
-      trimmed_reads:
-        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
-
-      trimming_reports:
-        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
-
-      trimming_fastqc:
-        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
-    ```
 
 매우 작은 입력 파일에서 실행하고 있으므로 이것도 매우 빠르게 실행될 것입니다.
 
@@ -805,7 +801,7 @@ ENCSR000COQ1_1_trimmed_fastqc.html           ENCSR000COQ1_1_trimmed.fq.gz
 
 마지막으로 HISAT2를 사용하여 게놈 정렬 단계를 추가할 수 있습니다.
 
-[파트 1](01_method.md)의 정렬 명령을 떠올려 보세요:
+[파트 1](01_method.mdx)의 정렬 명령을 떠올려 보세요:
 
 ```bash
 hisat2 -x <genome_index> -U <reads> \
@@ -827,55 +823,55 @@ hisat2 -x <genome_index> -U <reads> \
 
 `rnaseq.nf`에 게놈 인덱스 아카이브에 대한 매개변수 선언을 추가합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="11" hl_lines="5-6"
-    params {
-        // Primary input
-        input: Path
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=11 step="전"
+params {
+    // Primary input
+    input: Path
+}
+```
 
-        // Reference genome archive
-        hisat2_index_zip: Path
-    }
-    ```
+```nextflow {5-6} title="rnaseq.nf" showLineNumbers startLineNumber=11 step="후"
+params {
+    // Primary input
+    input: Path
 
-=== "전"
+    // Reference genome archive
+    hisat2_index_zip: Path
+}
+```
 
-    ```groovy title="rnaseq.nf" linenums="11"
-    params {
-        // Primary input
-        input: Path
-    }
-    ```
+</CodeWalkthrough>
 
 #### 3.1.2. 테스트 프로필에 게놈 인덱스 기본값 추가
 
 섹션 1.1.2에서 `reads`에 대해 했던 것처럼, `nextflow.config`의 테스트 프로필에 게놈 인덱스에 대한 기본값을 추가합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="6"
-    docker.enabled = true
+```nextflow title="nextflow.config" showLineNumbers step="전"
+docker.enabled = true
 
-    profiles {
-        test {
-            params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
-            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
-        }
+profiles {
+    test {
+        params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
     }
-    ```
+}
+```
 
-=== "전"
+```nextflow {6} title="nextflow.config" showLineNumbers step="후"
+docker.enabled = true
 
-    ```groovy title="nextflow.config" linenums="1"
-    docker.enabled = true
-
-    profiles {
-        test {
-            params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
-        }
+profiles {
+    test {
+        params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
+        params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
     }
-    ```
+}
+```
+
+</CodeWalkthrough>
 
 매개변수가 준비되었습니다. 이제 정렬 프로세스를 생성할 수 있습니다.
 
@@ -889,58 +885,58 @@ hisat2 -x <genome_index> -U <reads> \
 
 위에 제공된 정보를 사용하여 직접 프로세스 정의를 채운 다음, 아래 "후" 탭의 솔루션과 비교하여 작업을 확인하세요.
 
-=== "전"
+<CodeWalkthrough>
 
-    ```groovy title="modules/hisat2_align.nf" linenums="1"
-    #!/usr/bin/env nextflow
+```nextflow title="modules/hisat2_align.nf" showLineNumbers step="전"
+#!/usr/bin/env nextflow
 
-    /*
-     * 참조 게놈에 리드 정렬
-     */
-    process HISAT2_ALIGN {
+/*
+ * 참조 게놈에 리드 정렬
+ */
+process HISAT2_ALIGN {
 
-        container
+    container
 
-        input:
+    input:
 
-        output:
+    output:
 
-        script:
-        """
+    script:
+    """
 
-        """
-    }
-    ```
+    """
+}
+```
 
-=== "후"
+```nextflow {8,11,12,15,16,20,21,22,23} title="modules/hisat2_align.nf" showLineNumbers step="후"
+#!/usr/bin/env nextflow
 
-    ```groovy title="modules/hisat2_align.nf" linenums="1" hl_lines="8 11 12 15 16 20 21 22 23"
-    #!/usr/bin/env nextflow
+/*
+ * 참조 게놈에 리드 정렬
+ */
+process HISAT2_ALIGN {
 
-    /*
-     * 참조 게놈에 리드 정렬
-     */
-    process HISAT2_ALIGN {
+    container "community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e"
 
-        container "community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e"
+    input:
+    path reads
+    path index_zip
 
-        input:
-        path reads
-        path index_zip
+    output:
+    path "${reads.simpleName}.bam", emit: bam
+    path "${reads.simpleName}.hisat2.log", emit: log
 
-        output:
-        path "${reads.simpleName}.bam", emit: bam
-        path "${reads.simpleName}.hisat2.log", emit: log
+    script:
+    """
+    tar -xzvf ${index_zip}
+    hisat2 -x ${index_zip.simpleName} -U ${reads} \
+        --new-summary --summary-file ${reads.simpleName}.hisat2.log | \
+        samtools view -bS -o ${reads.simpleName}.bam
+    """
+}
+```
 
-        script:
-        """
-        tar -xzvf ${index_zip}
-        hisat2 -x ${index_zip.simpleName} -U ${reads} \
-            --new-summary --summary-file ${reads.simpleName}.hisat2.log | \
-            samtools view -bS -o ${reads.simpleName}.bam
-        """
-    }
-    ```
+</CodeWalkthrough>
 
 이 프로세스는 두 개의 입력을 받습니다: 리드와 게놈 인덱스 아카이브입니다.
 script 블록은 먼저 아카이브에서 인덱스를 추출한 다음, HISAT2 정렬을 실행하고 `samtools view`로 파이프하여 출력을 BAM 형식으로 변환합니다.
@@ -950,64 +946,64 @@ script 블록은 먼저 아카이브에서 인덱스를 추출한 다음, HISAT2
 
 `rnaseq.nf`를 업데이트하여 새 모듈을 가져옵니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="3" hl_lines="4"
-    // 모듈 INCLUDE 문
-    include { FASTQC } from './modules/fastqc.nf'
-    include { TRIM_GALORE } from './modules/trim_galore.nf'
-    include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=3 step="전"
+// 모듈 INCLUDE 문
+include { FASTQC } from './modules/fastqc.nf'
+include { TRIM_GALORE } from './modules/trim_galore.nf'
+```
 
-=== "전"
+```nextflow {4} title="rnaseq.nf" showLineNumbers startLineNumber=3 step="후"
+// 모듈 INCLUDE 문
+include { FASTQC } from './modules/fastqc.nf'
+include { TRIM_GALORE } from './modules/trim_galore.nf'
+include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
+```
 
-    ```groovy title="rnaseq.nf" linenums="3"
-    // 모듈 INCLUDE 문
-    include { FASTQC } from './modules/fastqc.nf'
-    include { TRIM_GALORE } from './modules/trim_galore.nf'
-    ```
+</CodeWalkthrough>
 
 다음으로 워크플로우에 프로세스 실행을 추가합니다.
 
 #### 3.2.3. 정렬 프로세스 실행
 
 트리밍된 리드는 이전 단계에서 출력된 `TRIM_GALORE.out.trimmed_reads` 채널에 있습니다.
-`#!groovy file(params.hisat2_index_zip)`를 사용하여 게놈 인덱스 아카이브를 제공합니다.
+`file(params.hisat2_index_zip){:nextflow}`를 사용하여 게놈 인덱스 아카이브를 제공합니다.
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="19" hl_lines="13-14"
-    workflow {
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=19 step="전"
+workflow {
 
-        main:
-        // 파일 경로에서 입력 채널 생성
-        read_ch = channel.fromPath(params.input)
+    main:
+    // 파일 경로에서 입력 채널 생성
+    read_ch = channel.fromPath(params.input)
 
-        // 초기 품질 관리
-        FASTQC(read_ch)
+    // 초기 품질 관리
+    FASTQC(read_ch)
 
-        // 어댑터 트리밍 및 트리밍 후 QC
-        TRIM_GALORE(read_ch)
+    // 어댑터 트리밍 및 트리밍 후 QC
+    TRIM_GALORE(read_ch)
+```
 
-        // 참조 게놈에 정렬
-        HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
-    ```
+```nextflow {13-14} title="rnaseq.nf" showLineNumbers startLineNumber=19 step="후"
+workflow {
 
-=== "전"
+    main:
+    // 파일 경로에서 입력 채널 생성
+    read_ch = channel.fromPath(params.input)
 
-    ```groovy title="rnaseq.nf" linenums="19"
-    workflow {
+    // 초기 품질 관리
+    FASTQC(read_ch)
 
-        main:
-        // 파일 경로에서 입력 채널 생성
-        read_ch = channel.fromPath(params.input)
+    // 어댑터 트리밍 및 트리밍 후 QC
+    TRIM_GALORE(read_ch)
 
-        // 초기 품질 관리
-        FASTQC(read_ch)
+    // 참조 게놈에 정렬
+    HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
+```
 
-        // 어댑터 트리밍 및 트리밍 후 QC
-        TRIM_GALORE(read_ch)
-    ```
+</CodeWalkthrough>
 
 이제 정렬 프로세스가 워크플로우에 연결되었습니다.
 
@@ -1019,31 +1015,31 @@ script 블록은 먼저 아카이브에서 인덱스를 추출한 다음, HISAT2
 
 `publish:` 섹션에 정렬 출력을 추가합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="34" hl_lines="7-8"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-        trimmed_reads = TRIM_GALORE.out.trimmed_reads
-        trimming_reports = TRIM_GALORE.out.trimming_reports
-        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
-        bam = HISAT2_ALIGN.out.bam
-        align_log = HISAT2_ALIGN.out.log
-    }
-    ```
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=34 step="전"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+    trimmed_reads = TRIM_GALORE.out.trimmed_reads
+    trimming_reports = TRIM_GALORE.out.trimming_reports
+    trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+}
+```
 
-=== "전"
+```nextflow {7-8} title="rnaseq.nf" showLineNumbers startLineNumber=34 step="후"
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+    trimmed_reads = TRIM_GALORE.out.trimmed_reads
+    trimming_reports = TRIM_GALORE.out.trimming_reports
+    trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+    bam = HISAT2_ALIGN.out.bam
+    align_log = HISAT2_ALIGN.out.log
+}
+```
 
-    ```groovy title="rnaseq.nf" linenums="34"
-        publish:
-        fastqc_zip = FASTQC.out.zip
-        fastqc_html = FASTQC.out.html
-        trimmed_reads = TRIM_GALORE.out.trimmed_reads
-        trimming_reports = TRIM_GALORE.out.trimming_reports
-        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
-    }
-    ```
+</CodeWalkthrough>
 
 다음으로 Nextflow에 이러한 출력을 어디에 둘지 알려줘야 합니다.
 
@@ -1051,55 +1047,55 @@ script 블록은 먼저 아카이브에서 인덱스를 추출한 다음, HISAT2
 
 `output {}` 블록에 정렬 타겟에 대한 항목을 추가하여 `align/` 하위 디렉토리에 게시합니다:
 
-=== "후"
+<CodeWalkthrough>
 
-    ```groovy title="rnaseq.nf" linenums="44" hl_lines="17-22"
-    output {
-        fastqc_zip {
-            path 'fastqc'
-        }
-        fastqc_html {
-            path 'fastqc'
-        }
-        trimmed_reads {
-            path 'trimming'
-        }
-        trimming_reports {
-            path 'trimming'
-        }
-        trimming_fastqc {
-            path 'trimming'
-        }
-        bam {
-            path 'align'
-        }
-        align_log {
-            path 'align'
-        }
+```nextflow title="rnaseq.nf" showLineNumbers startLineNumber=44 step="전"
+output {
+    fastqc_zip {
+        path 'fastqc'
     }
-    ```
-
-=== "전"
-
-    ```groovy title="rnaseq.nf" linenums="44"
-    output {
-        fastqc_zip {
-            path 'fastqc'
-        }
-        fastqc_html {
-            path 'fastqc'
-        }
-        trimmed_reads {
-            path 'trimming'
-        }
-        trimming_reports {
-            path 'trimming'
-        }
-        trimming_fastqc {
-            path 'trimming'
-        }
+    fastqc_html {
+        path 'fastqc'
     }
-    ```
+    trimmed_reads {
+        path 'trimming'
+    }
+    trimming_reports {
+        path 'trimming'
+    }
+    trimming_fastqc {
+        path 'trimming'
+    }
+}
+```
+
+```nextflow {17-22} title="rnaseq.nf" showLineNumbers startLineNumber=44 step="후"
+output {
+    fastqc_zip {
+        path 'fastqc'
+    }
+    fastqc_html {
+        path 'fastqc'
+    }
+    trimmed_reads {
+        path 'trimming'
+    }
+    trimming_reports {
+        path 'trimming'
+    }
+    trimming_fastqc {
+        path 'trimming'
+    }
+    bam {
+        path 'align'
+    }
+    align_log {
+        path 'align'
+    }
+}
+```
+
+</CodeWalkthrough>
 
 출력 설정이 완료되었습니다.
 
@@ -1109,45 +1105,41 @@ script 블록은 먼저 아카이브에서 인덱스를 추출한 다음, HISAT2
 
 ```bash
 nextflow run rnaseq.nf -profile test
+# [!output]
+ N E X T F L O W   ~  version 26.04.4
+
+Launching `rnaseq.nf` [nauseous_allen] revision: 45d77a9709
+
+executor >  local (3)
+[57/b3c2cb] FASTQC (1)       | 1 of 1 ✔
+[98/451aef] TRIM_GALORE (1)  | 1 of 1 ✔
+[78/7cf2c3] HISAT2_ALIGN (1) | 1 of 1 ✔
+
+Outputs:
+
+  /workspaces/training/nf4-science/rnaseq/results
+
+  fastqc_zip:
+    - fastqc/ENCSR000COQ1_1_fastqc.zip
+
+  fastqc_html:
+    - fastqc/ENCSR000COQ1_1_fastqc.html
+
+  trimmed_reads:
+    - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+
+  trimming_reports:
+    - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+
+  trimming_fastqc:
+    - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
+
+  bam:
+    - align/ENCSR000COQ1_1_trimmed.bam
+
+  align_log:
+    - align/ENCSR000COQ1_1_trimmed.hisat2.log
 ```
-
-??? success "명령 출력"
-
-    ```console
-     N E X T F L O W   ~  version 26.04.4
-
-    Launching `rnaseq.nf` [nauseous_allen] revision: 45d77a9709
-
-    executor >  local (3)
-    [57/b3c2cb] FASTQC (1)       | 1 of 1 ✔
-    [98/451aef] TRIM_GALORE (1)  | 1 of 1 ✔
-    [78/7cf2c3] HISAT2_ALIGN (1) | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nf4-science/rnaseq/results
-
-      fastqc_zip:
-        - fastqc/ENCSR000COQ1_1_fastqc.zip
-
-      fastqc_html:
-        - fastqc/ENCSR000COQ1_1_fastqc.html
-
-      trimmed_reads:
-        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
-
-      trimming_reports:
-        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
-
-      trimming_fastqc:
-        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
-
-      bam:
-        - align/ENCSR000COQ1_1_trimmed.bam
-
-      align_log:
-        - align/ENCSR000COQ1_1_trimmed.hisat2.log
-    ```
 
 results 디렉토리에서 정렬 출력을 찾을 수 있습니다.
 
@@ -1173,4 +1165,4 @@ _워크플로우가 한 번에 여러 샘플을 허용하도록 만든 후 파�
 
 휴식을 취하세요! 많은 내용이었습니다.
 
-기분이 상쾌해지면 [파트 3](./03_multi-sample.md)으로 이동하세요. 여기서는 여러 샘플을 병렬로 처리하도록 워크플로우를 수정하고, 모든 샘플의 모든 단계에서 QC 보고서를 결합하며, 페어드 엔드 RNAseq 데이터에서 워크플로우를 실행할 수 있도록 하는 방법을 배웁니다.
+기분이 상쾌해지면 [파트 3](./03_multi-sample.mdx)으로 이동하세요. 여기서는 여러 샘플을 병렬로 처리하도록 워크플로우를 수정하고, 모든 샘플의 모든 단계에서 QC 보고서를 결합하며, 페어드 엔드 RNAseq 데이터에서 워크플로우를 실행할 수 있도록 하는 방법을 배웁니다.
