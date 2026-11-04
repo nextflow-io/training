@@ -1,0 +1,25 @@
+################################################################################
+################################################################################
+##                                                                            ##
+##    !!!!!!!!!!!!!!!!!!!!   TEMPORARY FILE: DELETE ME   !!!!!!!!!!!!!!!!!!!!  ##
+##                                                                            ##
+##    DELETE THIS FILE WHEN training.nextflow.io MOVES TO CLOUDFLARE          ##
+##    (the DNS switch planned for the end of November 2026).                  ##
+##                                                                            ##
+##    It exists only so that Netlify builds PR deploy previews of the         ##
+##    Astro site until then. Production on Netlify is served from the         ##
+##    gh-pages branch, which has no build and never reads this file.          ##
+##    After the switch, PR previews come from .github/workflows/              ##
+##    docs-preview.yml (Cloudflare), and Netlify is not used at all.          ##
+##                                                                            ##
+##    DO NOT build on this file. DO NOT copy it. DELETE IT.                   ##
+##                                                                            ##
+################################################################################
+################################################################################
+
+# Netlify reads the Node version from docs/.nvmrc. With no BASE set, the site is
+# served from the root, and the version menu stays hidden.
+[build]
+  base = "docs"
+  command = "npm ci && npm run build"
+  publish = "dist"
