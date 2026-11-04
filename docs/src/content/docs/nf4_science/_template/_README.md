@@ -123,7 +123,7 @@ The template follows a three-part arc:
 - Provide skeleton files (workflow + modules) for learners to fill in
 - Organize solutions by part (`solutions/part2/`, `solutions/part3/`)
 
-See `CLAUDE.md` at the repository root for the full page syntax.
+See `AGENTS.md` at the repository root for the full page syntax.
 
 ## Directory structure
 

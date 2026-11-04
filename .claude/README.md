@@ -4,7 +4,7 @@ This directory contains Claude AI assistant configuration to help developers cre
 
 ## Files Overview
 
-### `CLAUDE.md` (in repository root)
+### `AGENTS.md` (in repository root)
 
 Core rules and conventions for this repository. Claude automatically follows these guidelines for:
 
@@ -173,7 +173,7 @@ params.greeting = 'Hello'  // highlighted
 1. **Create/Edit Content**
 
    - Use `/new-lesson` or `/new-module` for structure
-   - Follow conventions in `CLAUDE.md`
+   - Follow conventions in `AGENTS.md`
    - Add exercises with `/add-exercise`
 
 2. **Review Quality**

@@ -57,7 +57,7 @@ Use this checklist when reviewing a specific lesson file.
 
 ## Writing Style
 
-See CLAUDE.md for full guidelines.
+See AGENTS.md for full guidelines.
 
 - [ ] No LLM-style interjections ("Remember when...?", "Don't worry") — "Let's" is acceptable in tutorial prose
 - [ ] No exclamation-based emphasis ("Much faster!", "So powerful!")

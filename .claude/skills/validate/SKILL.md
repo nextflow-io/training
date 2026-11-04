@@ -84,7 +84,7 @@ Perform the following checks **only on files within the determined scope**, exce
 
 7. **Check Page Syntax**
    - Every page has `title:` and `description:` frontmatter and no `# ` H1 in the body
-   - Leftover MkDocs syntax that renders literally: `!!! `, `??? `, `=== "`, `hl_lines=`, `linenums=`, `--8<--`, `` `#!groovy ``. Replace with the MDX forms in CLAUDE.md
+   - Leftover MkDocs syntax that renders literally: `!!! `, `??? `, `=== "`, `hl_lines=`, `linenums=`, `--8<--`, `` `#!groovy ``. Replace with the MDX forms in AGENTS.md
    - `<details>` blocks have a blank line after `<summary>` and before `</details>`; `<CodeWalkthrough>` has a blank line after the opening tag and before the closing tag
    - `:::` asides are closed; `:::code-tabs` contains only code blocks
    - Nextflow code blocks use ` ```nextflow `, not ` ```groovy ` (real Groovy stays `groovy`)
