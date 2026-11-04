@@ -49,6 +49,7 @@ npm run dev
 
 Open <http://localhost:4321/> in your web browser.
 Pages reload when you save changes in your editor.
+To work faster on English pages, run `TRANSLATIONS=false npm run dev`: it leaves out the 10 translations.
 
 To check a change the way CI does, run a full build.
 It builds every language and runs the links validator, so it takes about 80 seconds and 6 GB of RAM:

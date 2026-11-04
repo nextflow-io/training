@@ -1,7 +1,15 @@
 import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+import { translatedLocales, translations } from './locales.mjs';
+
+// docsLoader() takes no pattern, so English-only builds use its glob with the language folders left out.
+const englishLoader = glob({
+  base: './src/content/docs',
+  pattern: ['**/[^_]*.{md,mdx}', `!{${translatedLocales.join(',')}}/**`],
+});
 
 const additionalInformation = z
   .object({
@@ -15,7 +23,7 @@ const additionalInformation = z
 
 export const collections = {
   docs: defineCollection({
-    loader: docsLoader(),
+    loader: translations ? docsLoader() : englishLoader,
     schema: docsSchema({
       extend: z.object({
         page_type: z.literal('index_page').optional(),

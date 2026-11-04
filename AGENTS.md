@@ -22,6 +22,8 @@ npm ci
 npm run dev        # http://localhost:4321/, reloads on save
 ```
 
+`TRANSLATIONS=false` before `npm run dev` or `npm run build` leaves out the 10 translations, which makes builds about 7 times faster. PR builds in CI do the same unless the PR could affect a translation.
+
 In an agent session `astro dev` starts in the background. Manage it with `npx astro dev status`, `npx astro dev logs` and `npx astro dev stop` (run in `docs/`).
 
 Production-like build (about 80 s and 6 GB RAM; runs the links validator):

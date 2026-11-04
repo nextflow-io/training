@@ -18,8 +18,12 @@
 ################################################################################
 
 # Netlify reads the Node version from docs/.nvmrc. With no BASE set, the site is
-# served from the root, and the version menu stays hidden.
+# served from the root, and the version menu stays hidden. English only: the CI
+# build in docs-build.yml still checks the translations when a PR touches them.
 [build]
   base = "docs"
   command = "npm ci && npm run build"
   publish = "dist"
+
+[build.environment]
+  TRANSLATIONS = "false"

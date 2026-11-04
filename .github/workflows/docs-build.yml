@@ -45,7 +45,29 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ inputs.ref }}
+          # A PR checks out its merge commit; the parent is the base, for the diff below.
+          fetch-depth: ${{ github.event_name == 'pull_request' && 2 || 1 }}
           persist-credentials: false
+
+      # Translations are about 90% of the build. A PR skips them unless it could break one:
+      # it deletes or renames a file, changes a translated page (the two-letter folders), or
+      # changes anything else in docs/ beyond the English pages. Deploys (workflow_call)
+      # always build every language.
+      - name: Choose languages
+        if: github.event_name == 'pull_request'
+        working-directory: .
+        run: |
+          reason=$(git diff --name-status --no-renames HEAD^1 HEAD | awk -F'\t' '
+            $1 == "D" { print "deletes " $2; exit }
+            $2 ~ /^docs\/src\/content\/docs\/[a-z][a-z]\// { print "changes " $2; exit }
+            $2 ~ /^docs\// && $2 !~ /^docs\/src\/content\/docs\// { print "changes " $2; exit }
+          ')
+          if [ -n "$reason" ]; then
+            echo "Building every language: this PR $reason."
+          else
+            echo "::notice::English-only build: this PR changes no file that the translations depend on."
+            echo "TRANSLATIONS=false" >> "$GITHUB_ENV"
+          fi
 
       - name: Set up Node.js
         id: node

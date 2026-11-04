@@ -377,10 +377,10 @@ uv run python -m translate sync pt
    uv run python -m translate new-lang sv --name Svenska
    ```
 
-2. Add the locale to `locales` in `docs/astro.config.mjs`, with the language's own name as the label:
+2. Add the locale to `allLocales` in `docs/src/locales.mjs`, with the language's own name as the label:
 
    ```js
-   const locales = {
+   export const allLocales = {
      root: { label: "English", lang: "en" },
      // ...
      sv: { label: "Svenska" },
@@ -446,8 +446,9 @@ Use GitHub Actions:
 
 ```
 docs/
-├── astro.config.mjs        # Site config, including the `locales` list
+├── astro.config.mjs        # Site config
 └── src/
+    ├── locales.mjs         # The `allLocales` list
     ├── sidebar.mjs         # Navigation; group labels have per-language `translations`
     └── content/
         ├── docs/           # English pages (.mdx), the source

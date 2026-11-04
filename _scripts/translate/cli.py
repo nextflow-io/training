@@ -316,7 +316,7 @@ def new_lang(
         console.print(f"[green]Created:[/green] {path.relative_to(REPO_ROOT)} (translate it)")
     console.print(f"[green]Added:[/green] {lang}: {name} to {LANGUAGE_NAMES.relative_to(REPO_ROOT)}")
     console.print(
-        f"\nManual step: add `{lang}: {{ label: '{name}' }}` to `locales` in docs/astro.config.mjs"
+        f"\nManual step: add `{lang}: {{ label: '{name}' }}` to `allLocales` in docs/src/locales.mjs"
     )
 
 

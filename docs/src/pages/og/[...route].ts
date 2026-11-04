@@ -4,7 +4,8 @@ import config from 'virtual:starlight/user-config';
 
 const entries = await getCollection('docs');
 const titles = new Map(entries.map((entry) => [entry.id, entry.data.title]));
-const homes = new Set(['index', ...Object.keys(config.locales)]);
+// Starlight leaves `locales` undefined on an English-only build.
+const homes = new Set(['index', ...Object.keys(config.locales ?? {})]);
 
 const families = ['Inter', 'Noto Sans KR', 'Noto Sans Devanagari'];
 const green: [number, number, number] = [13, 192, 157];

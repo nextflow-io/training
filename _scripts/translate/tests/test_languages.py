@@ -69,7 +69,7 @@ def test_new_lang(monkeypatch, tmp_path):
     try:
         result = CliRunner().invoke(cli.app, ["new-lang", "JA", "--name", "日本語"])
         assert result.exit_code == 0, result.output
-        assert "docs/astro.config.mjs" in result.output
+        assert "docs/src/locales.mjs" in result.output
         assert yaml.safe_load(names.read_text()) == {"de": "Deutsch", "en": "English", "ja": "日本語"}
         assert names.read_text() == "de: Deutsch\nen: English\nja: 日本語\n"
         assert json.loads((i18n / "ja.json").read_text()) == {"a": "b"}

@@ -10,26 +10,13 @@ import starlightLlmsTxt from 'starlight-llms-txt';
 import starlightPageActions from 'starlight-page-actions';
 import starlightQuiz from 'starlight-quiz';
 import fallbackMarkdown from './src/integrations/fallback-markdown.mjs';
+import { locales } from './src/locales.mjs';
 import links from './src/markdown/links.mjs';
 import { redirects } from './src/redirects.mjs';
 import { sidebar } from './src/sidebar.mjs';
 
 // One build serves one prefix: /development/, /latest/ or /<version>/.
 const base = process.env.BASE ?? '/';
-
-const locales = {
-  root: { label: 'English', lang: 'en' },
-  ca: { label: 'Català' },
-  de: { label: 'Deutsch' },
-  es: { label: 'Español' },
-  fr: { label: 'Français' },
-  hi: { label: 'हिन्दी' },
-  it: { label: 'Italiano' },
-  ko: { label: '한국어' },
-  pl: { label: 'Polski' },
-  pt: { label: 'Português' },
-  tr: { label: 'Türkçe' },
-};
 
 const nfCoreModule = ({ name, path }) =>
   path?.includes('nf-core/')
