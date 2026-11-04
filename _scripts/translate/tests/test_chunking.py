@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import pytest
+
 from translate.chunking import Chunk, ChunkDiff, diff_chunks, reassemble_chunks, split_into_chunks
 
 
@@ -54,6 +56,24 @@ def test_split_code_block_with_h2():
     assert chunks[1].heading == "## Section 1"
     assert "## This is not a heading" in chunks[1].content
     assert chunks[2].heading == "## Section 2"
+
+
+@pytest.mark.parametrize(
+    "block",
+    [
+        '<details class="solution">\n<summary>Solution</summary>\n\n## Not a split\n\n</details>',
+        "<CodeWalkthrough>\n\n<details>\n\n## Not a split\n\n</details>\n\n</CodeWalkthrough>",
+        '<Tabs>\n\n<TabItem label="A">\n\n## Not a split\n\n</TabItem>\n\n</Tabs>',
+        '<Quiz id="quiz-1">\n\n## Not a split\n- [x] yes\n\n</Quiz>',
+        "::::note[Outer]\n:::tip\nInner.\n:::\n## Not a split\n::::",
+    ],
+)
+def test_split_skips_mdx_blocks(block):
+    """## inside JSX elements and ::: asides should not start a new chunk."""
+    text = f"## Section 1\n\n{block}\n\n<LinkButton href=\"a.mdx\">Go</LinkButton>\n\n## Section 2\n\nContent."
+    chunks = split_into_chunks(text)
+    assert [c.heading for c in chunks] == ["", "## Section 1", "## Section 2"]
+    assert "## Not a split" in chunks[1].content
 
 
 def test_split_nested_headings():
