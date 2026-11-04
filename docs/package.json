@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "test": "node --test"
+    "test": "node --test 'src/**/*.test.mjs'"
   },
   "engines": {
     "node": ">=22.23.4"
