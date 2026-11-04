@@ -160,6 +160,11 @@ jobs:
           LATEST: ${{ needs.plan.outputs.latest }}
         run: |
           rclone cat "r2:$BUCKET/training/versions.json" > versions.json
+          # rclone cat exits 0 for a missing R2 object, and jq turns empty input into an empty file.
+          if [ ! -s versions.json ]; then
+            echo "::error::training/versions.json is missing or empty in R2. Restore it before publishing."
+            exit 1
+          fi
           jq --arg v "$VERSION" --argjson latest "$LATEST" '
             (map(select(.version == $v))[0].aliases // []) as $old
             | map(select(.version != $v))

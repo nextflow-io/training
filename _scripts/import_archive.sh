@@ -26,7 +26,8 @@ cd "$work/gh-pages"
 git sparse-checkout set --no-cone /versions.json
 
 versions=${*:-$(jq -r '.[].version | select(. != "0.dev")' versions.json)}
-exists() { rclone cat "$dest/$1" > /dev/null 2>&1; }
+# Not `rclone cat`: on R2 it exits 0 for a missing object.
+exists() { [ -n "$(rclone lsf "$dest/$1" 2>/dev/null)" ]; }
 if ! exists latest/index.html; then versions="$versions latest"; fi
 
 for v in $versions; do
