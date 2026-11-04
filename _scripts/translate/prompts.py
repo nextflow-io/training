@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from functools import lru_cache
 
-from .config import DOCS_ROOT, SCRIPTS_DIR, ConfigError
+from .config import LANGUAGES_DIR, SCRIPTS_DIR, ConfigError
 
 
 @lru_cache
@@ -19,7 +19,7 @@ def get_general_prompt() -> str:
 @lru_cache
 def get_lang_prompt(lang: str) -> str:
     """Load language-specific prompt."""
-    path = DOCS_ROOT / lang / "llm-prompt.md"
+    path = LANGUAGES_DIR / lang / "llm-prompt.md"
     if not path.exists():
         raise ConfigError(f"Language prompt not found: {path}")
     return path.read_text(encoding="utf-8")

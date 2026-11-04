@@ -11,10 +11,15 @@ from rich.console import Console
 
 # Paths (resolved relative to this file: _scripts/translate/config.py)
 REPO_ROOT = Path(__file__).parent.parent.parent
-DOCS_ROOT = REPO_ROOT / "docs"
-EN_DOCS = DOCS_ROOT / "en" / "docs"
 SCRIPTS_DIR = REPO_ROOT / "_scripts"
-TRANSLATE_CONFIG = Path(__file__).parent / "translate_config.yml"
+TRANSLATE_DIR = Path(__file__).parent
+TRANSLATE_CONFIG = TRANSLATE_DIR / "translate_config.yml"
+LANGUAGE_NAMES = TRANSLATE_DIR / "language_names.yml"
+LANGUAGES_DIR = TRANSLATE_DIR / "languages"  # <lang>/llm-prompt.md and glossary.yml
+# English pages sit at the root of the Starlight content tree, translations in <lang>/.
+DOCS_ROOT = REPO_ROOT / "docs" / "src" / "content" / "docs"
+EN_DOCS = DOCS_ROOT
+I18N_DIR = REPO_ROOT / "docs" / "src" / "content" / "i18n"
 
 # Claude API settings
 MODEL = "claude-sonnet-4-6"

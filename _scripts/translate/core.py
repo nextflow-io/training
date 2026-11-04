@@ -19,7 +19,6 @@ from .git_utils import (
     get_file_at_commit,
     get_file_diff,
     get_prompt_diff,
-    get_translation_baseline,
 )
 from .models import FileLogEntry, TranslationFile, TranslationLog
 from .paths import get_languages
@@ -180,12 +179,14 @@ async def translate_file_async(
     progress: TranslationProgress,
     client: anthropic.AsyncAnthropic,
     log: TranslationLog | None = None,
+    baseline: str | None = None,
 ) -> None:
     """Translate a single file with verification and retry.
 
     On the first attempt, tries chunk-based translation if applicable.
     Falls back to full-file translation if chunking is not feasible or
-    if verification fails.
+    if verification fails. Without a ``baseline`` commit, an existing
+    translation is updated as a whole.
     """
     console = make_console()
     filename = str(tf.relative_path)
@@ -203,12 +204,6 @@ async def translate_file_async(
 
             entry.input_lines = en_content.count("\n") + 1
             entry.input_hash = hashlib.md5(en_content.encode()).hexdigest()[:12]
-
-            # Resolve baseline once (lru_cached, but avoids duplicate try/except)
-            try:
-                baseline = get_translation_baseline()
-            except Exception:
-                baseline = None
 
             for attempt in range(1 + MAX_VERIFY_RETRIES):
                 output_content = None
@@ -319,6 +314,7 @@ async def translate_all(
     files: list[TranslationFile],
     parallel: int,
     log: TranslationLog | None = None,
+    baseline: str | None = None,
 ) -> None:
     """Translate all files in parallel with progress logging."""
     console = make_console()
@@ -336,7 +332,10 @@ async def translate_all(
     progress = TranslationProgress(files, file_lines)
     client = anthropic.AsyncAnthropic()
 
-    tasks = [translate_file_async(tf, semaphore, progress, client, log) for tf in files]
+    tasks = [
+        translate_file_async(tf, semaphore, progress, client, log, baseline)
+        for tf in files
+    ]
 
     # Run translations with progress logger
     logger_task = asyncio.create_task(progress_logger(progress))

@@ -1,7 +1,7 @@
 # German translation glossary for post-processing enforcement.
 # These translations are applied deterministically, overriding LLM output.
 
-# AI translation notice (span format for regular pages)
+# AI translation notice (span on regular pages, :::note aside on the homepage)
 translation_notice:
   text: "KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)"
   homepage:
@@ -11,12 +11,12 @@ translation_notice:
       Wir freuen uns über Feedback und Verbesserungsvorschläge.
       Weitere Informationen findest du in unserer [Übersetzungsanleitung](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md).
 
-# Tab labels (must be consistent for MkDocs tab synchronization)
+# Before/After labels: CodeWalkthrough step="..." and tab label="..." values
 tab_labels:
   After: Danach
   Before: Vorher
 
-# Bare admonition titles (keyword → default translated title)
+# Aside and <summary> titles by type (Exercise, Solution, ...)
 admonition_titles:
   note: Hinweis
   tip: Tipp
@@ -28,7 +28,7 @@ admonition_titles:
   danger: Gefahr
   hint: Hinweis
 
-# Standard admonition title translations (high-frequency titles)
+# Translations of frequent English aside and <summary> titles
 admonition_title_glossary:
   "Command output": Befehlsausgabe
   "Directory contents": Verzeichnisinhalt

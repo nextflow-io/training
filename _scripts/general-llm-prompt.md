@@ -39,17 +39,23 @@ General principles:
 ### What to Translate
 
 - Prose text and explanations
-- Comments inside code blocks
-- Admonition titles (the text in quotes)
-- Tab titles
-- Link text (but NOT URLs or anchors)
-- Frontmatter `title` and `description` values
+- Comments inside code blocks, including the text after `[!annotate]`
+- Frontmatter values of `title`, `description`, `sidebar.label`, and the `learning_objectives` and `audience_prerequisites` lists
+- Aside titles: the text in `[...]` after `:::note`, `:::tip`, `:::caution` or `:::danger`
+- `<summary>` text
+- `step="..."` and `label="..."` values (code walkthrough steps, code tabs, `<TabItem>`)
+- `title` and `description` of `<Card>` and `<LinkCard>`, and the text inside `<LinkButton>...</LinkButton>`
+- Quiz questions and answers
+- Link text (but NOT link targets or anchors)
 - Alt text for images
 
 ### What to Keep in English
 
 - All code (except comments)
-- URLs, file paths, and anchors
+- Command output (everything after `# [!output]` in a code block)
+- URLs, file paths, link targets, `href` values and anchors
+- MDX syntax: directive names (`:::note`), component and prop names, `import` lines, `{#id}` heading attributes, `id="quiz-N"`, escapes such as `\{`, `\}` and `&lt;`
+- Frontmatter keys, and all frontmatter values not listed above
 - Nextflow keywords and syntax
 - Tool names (Nextflow, Docker, GitHub, etc.)
 - File format names (FASTQ, BAM, CSV, etc.)
@@ -115,48 +121,39 @@ Code blocks are critical - the code must remain executable.
 1. **Never translate code syntax** - only translate comments
 2. **Always translate code comments** - comments are not executable and should be in the target language
 3. **Preserve exact indentation and spacing**
-4. **Keep all Nextflow keywords in English**: `process`, `workflow`, `channel`, `emit`, `take`, `main`, `input`, `output`, `script`, `shell`, `exec`, `params`, `val`, `path`, `tuple`, `env`
-5. **Keep all operators in English**: `map`, `filter`, `collect`, `view`, `flatten`, `groupTuple`, `join`, `combine`, `mix`, `splitCsv`, `splitFastq`, etc.
-6. **Keep all directives in English**: `publishDir`, `container`, `conda`, `memory`, `cpus`, `time`, `errorStrategy`, `tag`, `label`, `cache`, `executor`, etc.
+4. **Keep the opening fence line exactly as in English** (language, `{1,3-5}` line highlights, `title="..."`, `showLineNumbers`, `startLineNumber=N` and every other attribute), except the values of `step="..."` and `label="..."`, which you translate
+5. **Keep all Nextflow keywords in English**: `process`, `workflow`, `channel`, `emit`, `take`, `main`, `input`, `output`, `script`, `shell`, `exec`, `params`, `val`, `path`, `tuple`, `env`
+6. **Keep all operators in English**: `map`, `filter`, `collect`, `view`, `flatten`, `groupTuple`, `join`, `combine`, `mix`, `splitCsv`, `splitFastq`, etc.
+7. **Keep all directives in English**: `publishDir`, `container`, `conda`, `memory`, `cpus`, `time`, `errorStrategy`, `tag`, `label`, `cache`, `executor`, etc.
+8. **Output exactly the same number of lines in every code block**
 
 ### Examples
 
-**Groovy/Nextflow code:**
+**Nextflow code:**
 
 English:
 
-```groovy
-// Define the input channel
-params.reads = "data/*_{1,2}.fastq.gz"
-
+```nextflow title="main.nf" {2}
 // Create a channel from the input files
-Channel
-    .fromFilePairs(params.reads)  // Creates tuple of (sample_id, [file1, file2])
+channel.fromFilePairs(params.reads)  // Creates tuple of (sample_id, [file1, file2])
     .set { reads_ch }
 ```
 
 Portuguese translation:
 
-```groovy
-// Define o canal de entrada
-params.reads = "data/*_{1,2}.fastq.gz"
-
+```nextflow title="main.nf" {2}
 // Cria um canal a partir dos arquivos de entrada
-Channel
-    .fromFilePairs(params.reads)  // Cria tupla de (sample_id, [file1, file2])
+channel.fromFilePairs(params.reads)  // Cria tupla de (sample_id, [file1, file2])
     .set { reads_ch }
 ```
 
-**Bash/console code:**
+**Bash code:**
 
 English:
 
 ```bash
 # Run the workflow
 nextflow run main.nf --reads "data/*.fastq.gz"
-
-# Check the output
-ls -la results/
 ```
 
 Spanish translation:
@@ -164,132 +161,84 @@ Spanish translation:
 ```bash
 # Ejecutar el flujo de trabajo
 nextflow run main.nf --reads "data/*.fastq.gz"
-
-# Verificar la salida
-ls -la results/
 ```
 
-**Config files:**
+### Code Annotations
+
+A comment that starts with `[!annotate]` is shown as a note next to the line. Keep the comment marker and `[!annotate]`, and translate the text after it:
 
 English:
 
-```groovy
-// Configuration for local execution
-process {
-    executor = 'local'
-    cpus = 2        // Number of CPUs per task
-    memory = '4 GB' // Memory allocation
-}
+```nextflow
+@Function                                // [!annotate] Makes the method callable from Nextflow workflows
 ```
 
-French translation:
+German:
 
-```groovy
-// Configuration pour l'exécution locale
-process {
-    executor = 'local'
-    cpus = 2        // Nombre de CPUs par tâche
-    memory = '4 GB' // Allocation de mémoire
-}
+```nextflow
+@Function                                // [!annotate] Macht die Methode in Nextflow-Workflows aufrufbar
 ```
 
-### Console Output
+Other `[!...]` markers, such as `# [!code highlight]`, are not text. Keep them exactly as they are.
 
-Never translate console output - it shows exactly what the user will see:
+### Command Output
 
-```console
-N E X T F L O W  ~  version 24.04.0
-Launching `main.nf` [happy_darwin] - revision: a1b2c3d4
-executor >  local (3)
-[a1/b2c3d4] process > FASTQC (sample1) [100%] 3 of 3 ✔
+A `bash` block can show a command and its output. The line `# [!output]` (or `# [!output stderr]`) starts the output. Everything from that line to the end of the block is terminal output: never translate any of it, including lines that start with `#`.
+
+```bash
+nextflow run hello.nf
+# [!output]
+ N E X T F L O W   ~  version 25.10.2
+
+Launching `hello.nf` [goofy_torvalds] revision: c33d41f479
+
+executor >  local (1)
+[a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 
-Keep this exactly as shown - do not translate any part of it.
+Keep this exactly as shown. The same applies to `console` blocks and any other block that shows output.
+
+### Inline Code
+
+Inline code is code: never translate it. Keep language suffixes such as `` `channel.of(){:nextflow}` `` unchanged.
 
 ---
 
-## Admonitions
+## Page Structure
 
-Admonitions use special syntax. Translate the title (in quotes) but keep the keyword.
+Pages are MDX: Markdown with JSX components. MDX is strict, and a single broken tag or brace stops the whole site from building. Keep every line of MDX syntax exactly as it is in English, and translate only the text.
 
-### Standard Admonitions
+### Frontmatter
 
-English:
-
-```markdown
-!!! note "Important Note"
-
-    This is important information that users should know.
-
-!!! tip "Pro Tip"
-
-    This is a helpful suggestion.
-
-!!! warning "Caution"
-
-    This warns about potential issues.
-```
-
-Portuguese:
-
-```markdown
-!!! note "Nota Importante"
-
-    Esta é uma informação importante que os usuários devem saber.
-
-!!! tip "Dica"
-
-    Esta é uma sugestão útil.
-
-!!! warning "Cuidado"
-
-    Isto alerta sobre possíveis problemas.
-```
-
-### Collapsible Admonitions
-
-The `???` syntax creates collapsible blocks. `???+` means expanded by default.
+Each page starts with YAML frontmatter. The page title is the `title` value; there is no `# Title` heading in the page body. Translate the values of `title`, `description` and `sidebar.label`, and the items of `learning_objectives` and `audience_prerequisites`. Keep all keys, and all other values, unchanged. Quote a value with single quotes when it contains a colon followed by a space (`title: 'Parte 1: Hello World'`), and double any single quote inside it (`'L''environnement'`).
 
 English:
 
-```markdown
-??? tip "Click to expand"
-
-    Hidden content here.
-
-???+ note "Expanded by default"
-
-    This content is visible initially.
-```
-
-Keep the `???` or `???+` syntax exactly as-is.
-
-### Exercise and Solution Blocks
-
-These are custom admonitions used throughout the training:
-
-English:
-
-````markdown
-!!! exercise "Exercise"
-
-    Try running the workflow with different parameters.
-
-??? solution "Solution"
-
-    Here's how to do it:
-    ```bash
-    nextflow run main.nf --input "*.fastq"
-    ```
-````
-
-Translate "Exercise" and "Solution" per the language glossary.
-
+```yaml
 ---
+title: 'Part 1: Hello World'
+description: In this first part of the course, you write a very basic Hello World workflow.
+tableOfContents: false
+---
+```
 
-## Headings
+Spanish:
 
-### Numbered Headings
+```yaml
+---
+title: 'Parte 1: Hello World'
+description: En esta primera parte del curso, escribe un flujo de trabajo Hello World muy básico.
+tableOfContents: false
+---
+```
+
+Translate the descriptive text of page titles but keep course and module names in English, for example "Part 1: Hello World" becomes "Parte 1: Hello World" (es), "Teil 1: Hello World" (de) or "파트 1: Hello World" (ko).
+
+### Imports
+
+A few pages have `import` lines after the frontmatter, such as `import custom_config from '../../nfcore-use/custom.config?raw';`. Copy them unchanged.
+
+### Headings
 
 Preserve the numbering format exactly:
 
@@ -299,8 +248,6 @@ English:
 ## 1. Getting Started
 
 ### 1.1. Prerequisites
-
-### 1.2. Installation
 ```
 
 Spanish:
@@ -309,130 +256,217 @@ Spanish:
 ## 1. Primeros Pasos
 
 ### 1.1. Requisitos Previos
-
-### 1.2. Instalación
 ```
 
-### Heading Anchors
-
-**Critical**: Preserve anchor IDs exactly. These are used for linking.
-
-English:
+Some headings end with an id attribute, such as `{#11-re-launch-with-resume}`. Keep it at the end of the translated heading, character for character:
 
 ```markdown
-## 1. Getting Started { #getting-started }
-
-### 1.1. Prerequisites { #prerequisites }
+### 1.1. Re-launch with `-resume` {#11-re-launch-with-resume}
 ```
 
 Portuguese:
 
 ```markdown
-## 1. Primeiros Passos { #getting-started }
-
-### 1.1. Pré-requisitos { #prerequisites }
+### 1.1. Reexecutar com `-resume` {#11-re-launch-with-resume}
 ```
-
-The anchor `{ #getting-started }` must NOT be translated.
 
 ---
 
-## Links
+## Asides
 
-### Internal Links
-
-Translate the link text, keep the URL and anchor unchanged:
+Asides (callout boxes) use `:::` directives. Keep the directive name (`note`, `tip`, `caution`, `danger`) and translate the optional title in square brackets. Keep the number of colons: nested asides use `::::` or `:::::` for the outer box.
 
 English:
 
 ```markdown
-See the [installation guide](../setup/install.md#docker) for details.
+:::tip[Pro Tip]
+This is a helpful suggestion.
+:::
+
+:::caution
+This warns about potential issues.
+:::
+```
+
+Portuguese:
+
+```markdown
+:::tip[Dica Profissional]
+Esta é uma sugestão útil.
+:::
+
+:::caution
+Isto alerta sobre possíveis problemas.
+:::
+```
+
+Translate titles as given in the "Admonition Titles" table of the language-specific prompt (for example "Exercise", "Solution" and "Note").
+
+---
+
+## Collapsible Blocks
+
+Collapsible blocks use `<details>`. Keep the tags and the `class` value exactly (`class="exercise"`, `class="solution"`, `class="success"`, ...), keep `open` where it appears, and translate the `<summary>` text and the body. Keep the blank lines around the body.
+
+English:
+
+```markdown
+<details class="exercise" open>
+<summary>Exercise</summary>
+
+Try running the workflow with different parameters.
+
+</details>
 ```
 
 French:
 
 ```markdown
-Consultez le [guide d'installation](../setup/install.md#docker) pour plus de détails.
-```
+<details class="exercise" open>
+<summary>Exercice</summary>
 
-### External Links
+Essayez d'exécuter le workflow avec différents paramètres.
 
-Same rule - translate text, keep URL:
-
-English:
-
-```markdown
-Visit the [Nextflow documentation](https://nextflow.io/docs/latest/) for more information.
-```
-
-German:
-
-```markdown
-Besuchen Sie die [Nextflow-Dokumentation](https://nextflow.io/docs/latest/) für weitere Informationen.
-```
-
-### Reference-Style Links
-
-Keep reference definitions unchanged:
-
-English:
-
-```markdown
-Read more about [channels][channels-docs].
-
-[channels-docs]: https://nextflow.io/docs/latest/channel.html
-```
-
-Italian:
-
-```markdown
-Leggi di più sui [canali][channels-docs].
-
-[channels-docs]: https://nextflow.io/docs/latest/channel.html
+</details>
 ```
 
 ---
 
-## Tabs
+## Tabs and Code Walkthroughs
 
-Tab blocks use `===` syntax. Translate the tab title:
+### Code Walkthroughs (Before/After)
+
+`<CodeWalkthrough>` holds code blocks that show the steps of a change. Translate the `step="..."` value of each block, as given in the "Tab Labels" table of the language-specific prompt. Keep everything else in the fence line.
+
+English:
+
+````markdown
+<CodeWalkthrough>
+
+```nextflow title="hello.nf" step="Before"
+process SAY_HELLO {
+}
+```
+
+```nextflow {3} title="hello.nf" step="After"
+process SAY_HELLO {
+
+    publishDir 'results'
+}
+```
+
+</CodeWalkthrough>
+````
+
+Korean:
+
+````markdown
+<CodeWalkthrough>
+
+```nextflow title="hello.nf" step="전"
+process SAY_HELLO {
+}
+```
+
+```nextflow {3} title="hello.nf" step="후"
+process SAY_HELLO {
+
+    publishDir 'results'
+}
+```
+
+</CodeWalkthrough>
+````
+
+### Code Tabs
+
+`:::code-tabs` shows code blocks as tabs. Translate each `label="..."` value:
+
+````markdown
+:::code-tabs
+```nextflow title="modules/cowpy.nf" label="Process definition"
+input:
+```
+```nextflow title="main.nf" label="Workflow call"
+COWPY(ch_input)
+```
+:::
+````
+
+### Tabs
+
+`<Tabs>` holds `<TabItem label="...">` elements. Translate the `label` value and the content. Keep tool names such as "Docker" or "Conda" in English.
+
+```markdown
+<Tabs>
+
+<TabItem label="Local">
+
+Run the following command locally.
+
+</TabItem>
+
+</Tabs>
+```
+
+---
+
+## Components
+
+Components are written like HTML tags with capitalized names. Keep component names, prop names and every prop value, except the ones listed here as translatable.
+
+- `<LinkButton href="02_hello_channels.mdx" variant="primary" icon="right-arrow">Continue to Part 2</LinkButton>`: translate only the text between the tags.
+- `<Card title="For users">`: translate the `title` value and the content.
+- `<LinkCard title="..." href="..." description="..." />`: translate `title` and `description`.
+- `<CardGrid>`, `<CourseInfo frontmatter={frontmatter} />` and `<Code code={name} lang="..." title="..." />`: copy unchanged.
+- `<kbd>Ctrl</kbd>+<kbd>C</kbd>`: copy unchanged; do not translate key names.
+- `<figure>` and `<figcaption>`: keep the tags, translate the caption text.
+
+### Quizzes
+
+`<Quiz id="quiz-N">` holds a question and its answers as a task list. Keep the `id`, keep `- [ ]` and `- [x]` markers on the same answers, and translate the question and the answers (but not code inside them):
+
+```markdown
+<Quiz id="quiz-1">
+
+What command is used to run a Nextflow workflow?
+- [ ] `nextflow start`
+- [x] `nextflow run`
+
+</Quiz>
+```
+
+---
+
+## Links and Images
+
+Translate the link text. Keep the link target, including the file name, the `.mdx` extension and the `#anchor`, unchanged:
 
 English:
 
 ```markdown
-=== "Gitpod"
-
-    Click the button below to launch in Gitpod.
-
-=== "Local"
-
-    Run the following command locally.
+See the [installation guide](../envsetup/index.mdx#docker) or the [Nextflow documentation](https://nextflow.io/docs/latest/).
 ```
 
-Korean:
+French:
 
 ```markdown
-=== "Gitpod"
-
-    아래 버튼을 클릭하여 Gitpod에서 실행하세요.
-
-=== "로컬"
-
-    다음 명령을 로컬에서 실행하세요.
+Consultez le [guide d'installation](../envsetup/index.mdx#docker) ou la [documentation Nextflow](https://nextflow.io/docs/latest/).
 ```
 
-Note: Keep tool names like "Gitpod" in English.
+For images, translate the alt text and keep the path unchanged: `![Workflow diagram](img/hello_world.svg)` becomes `![Diagramme du workflow](img/hello_world.svg)`.
 
-### Common Tab Labels
+---
 
-These tabs appear frequently in Before/After code comparisons:
+## MDX Escaping
 
-| English | Translate | Examples                                                       |
-| ------- | --------- | -------------------------------------------------------------- |
-| After   | Yes       | Depois (pt), Después (es), Dopo (it), Nach (de), 후 (ko)       |
-| Before  | Yes       | Antes (pt/es), Prima (it), Vor (de), 전 (ko)                   |
-| Gitpod  | No        | Keep in English                                                |
-| Local   | Sometimes | Local (pt/es), Locale (it), Lokal (de) - check language prompt |
+MDX reads `{` and `}` as JavaScript and `<` as the start of a tag. The English text escapes them where they are literal text:
+
+- `\{` and `\}`: keep the backslashes, for example `a map like \{a: 1\}`
+- `&lt;`: keep it as `&lt;`, never write a bare `<` in prose, for example `a &lt; b` or `&lt;sample_id>`
+- `{/* ... */}` is a comment: keep the braces and the `/* */` markers. You can translate the comment text.
+
+Do not add `{`, `}` or `<` to prose that the English does not have. Inside inline code and code blocks, write braces and `<` normally, exactly as in English.
 
 ---
 
@@ -452,102 +486,6 @@ Check the language-specific `llm-prompt.md` for the correct translations. If not
 
 ---
 
-## Page Titles
-
-Page titles (the `# Heading` at the top of each page) follow these rules:
-
-1. **Translate the descriptive text** (e.g., "Part 1", "Getting Started")
-2. **Keep course/module names in English** (e.g., "Hello World", "Hello Channels")
-
-Example:
-
-- English: `# Part 1: Hello World`
-- Spanish: `# Parte 1: Hello World`
-- Korean: `# 파트 1: Hello World`
-- German: `# Teil 1: Hello World`
-
----
-
-## Frontmatter
-
-YAML frontmatter appears at the top of files. Translate only `title` and `description`:
-
-English:
-
-```yaml
----
-title: Getting Started with Nextflow
-description: Learn the basics of writing Nextflow pipelines
-hide:
-  - toc
----
-```
-
-Spanish:
-
-```yaml
----
-title: Primeros Pasos con Nextflow
-description: Aprenda los fundamentos de escribir pipelines en Nextflow
-hide:
-  - toc
----
-```
-
-Keep all other keys and values unchanged (`hide`, `toc`, etc.).
-
----
-
-## Special Elements
-
-### Keyboard Keys
-
-Keep `kbd` tags and their content:
-
-```markdown
-Press ++ctrl+c++ to cancel.
-Press ++cmd+shift+p++ to open the command palette.
-```
-
-Do not translate key names.
-
-### Icons
-
-Keep icon syntax unchanged:
-
-```markdown
-:material-check: Completed
-:warning: Be careful
-```
-
-Translate the text after the icon, not the icon itself.
-
-### Variables and Placeholders
-
-Keep placeholders in angle brackets:
-
-English:
-
-```markdown
-Replace `<username>` with your GitHub username.
-```
-
-French:
-
-```markdown
-Remplacez `<username>` par votre nom d'utilisateur GitHub.
-```
-
-### Snippets
-
-The `--8<--` syntax includes external files. Never modify these:
-
-```markdown
---8<-- "docs/hello_nextflow/img/diagram.svg"
-```
-
----
-
 ## Formatting Preservation
 
 ### Line Breaks
@@ -556,24 +494,11 @@ Maintain the same line break pattern as the source:
 
 - If the source has one sentence per line, keep one sentence per line
 - If the source has multiple sentences on one line, keep them together
-- Preserve blank lines between paragraphs
+- Preserve blank lines between paragraphs, and around tags such as `<details>`, `<TabItem>` and `<Quiz>`
 
 ### Lists
 
-Preserve list formatting exactly:
-
-English:
-
-```markdown
-- First item
-- Second item
-  - Nested item
-  - Another nested item
-- Third item
-
-1. Numbered item
-2. Another numbered item
-```
+Preserve list formatting and indentation exactly. Content nested in a list item, such as an aside or a code block, keeps its indentation.
 
 ### Tables
 
@@ -615,31 +540,31 @@ Note: Keep parameter names (like `--reads`) in English as they are code.
 2. **Translating code syntax**
 
    - Wrong: `Canal.fromPath(...)`
-   - Right: `Channel.fromPath(...)`
+   - Right: `channel.fromPath(...)`
 
-3. **Translating URLs or anchors**
+3. **Translating link targets or anchors**
 
-   - Wrong: `[texto](../configuracao/instalar.md#docker)`
-   - Right: `[texto](../setup/install.md#docker)`
+   - Wrong: `[texto](../configuracao/instalar.mdx#docker)`
+   - Right: `[texto](../setup/install.mdx#docker)`
 
-4. **Translating console output**
+4. **Translating command output**
 
-   - Keep exactly as shown in English
+   - Keep everything after `# [!output]` exactly as in English
 
-5. **Translating placeholder syntax**
+5. **Translating MDX syntax**
 
-   - Wrong: `<nome-de-usuario>`
-   - Right: `<username>`
+   - Wrong: `:::consejo[Truco]`, `<details class="ejercicio">`, `step="Before"` left in English while the text is translated
+   - Right: `:::tip[Truco]`, `<details class="exercise">`, `step="Antes"`
 
-6. **Breaking admonition syntax**
+6. **Breaking MDX**
 
-   - Wrong: `!!! nota "Título"`
-   - Right: `!!! note "Título"`
+   - Wrong: dropping a closing `</details>` or `:::`, removing the backslash from `\{`, writing a bare `<` in prose
+   - Right: every tag, directive and escape from the English source appears in the translation
 
-7. **Modifying heading anchors**
+7. **Modifying heading ids**
 
-   - Wrong: `## Título { #titulo }`
-   - Right: `## Título { #original-anchor }`
+   - Wrong: `## Título {#titulo}`
+   - Right: `## Título {#original-id}`
 
 8. **Inconsistent terminology**
    - Always use the same translation for a term throughout
@@ -651,82 +576,13 @@ Note: Keep parameter names (like `--reads`) in English as they are code.
 
 Before submitting your translation, verify:
 
-- [ ] All code blocks have unchanged syntax (only comments translated)
-- [ ] All links work (URLs and anchors unchanged)
-- [ ] All heading anchors preserved
-- [ ] Admonition keywords unchanged (`note`, `tip`, `warning`, etc.)
+- [ ] All code blocks have unchanged syntax and fence lines (only comments, `[!annotate]` text and `step`/`label` values translated)
+- [ ] Command output unchanged
+- [ ] All link targets, anchors and image paths unchanged
+- [ ] All `{#id}` heading attributes preserved
+- [ ] Every tag, `:::` directive and escape from the English source present and unchanged
+- [ ] Frontmatter keys unchanged, only translatable values translated
 - [ ] Consistent terminology throughout
 - [ ] Natural, readable language
 - [ ] Proper grammar and spelling for the target language
-- [ ] Same formatting as original (line breaks, indentation, lists)
-
----
-
-## UI Strings File
-
-Each language directory contains a `ui-strings.yml` file with translations for UI elements that appear on course landing pages. When translating a new language or updating translations, this file must also be translated.
-
-### Location
-
-```
-docs/<lang>/ui-strings.yml
-```
-
-### Contents
-
-The file contains:
-
-1. **Index page headings**: Labels for course landing page sections
-2. **Default content**: Standard text used when courses don't provide custom content
-
-### Example
-
-English (`docs/en/ui-strings.yml`):
-
-```yaml
-index_page:
-  course_summary: "Course summary"
-  additional_information: "Additional information"
-  technical_requirements: "Technical requirements"
-  learning_objectives: "Learning objectives"
-  audience_prerequisites: "Audience & prerequisites"
-  course_videos: "Course videos"
-
-defaults:
-  technical_requirements: >-
-    You will need a GitHub account OR a local installation of Nextflow.
-    See [Environment options](../envsetup/index.md) for more details.
-  videos: >-
-    Videos are available for each chapter, featuring an instructor working
-    through the exercises. The video for each part of the course is embedded
-    at the top of the corresponding page.
-```
-
-### Translation Rules
-
-- Translate all string values naturally into the target language
-- Keep the YAML structure and keys unchanged
-- The markdown link in `defaults.technical_requirements` should have translated link text but keep the URL unchanged
-- Follow the same tone guidance as for content translation (formal/informal per language)
-
----
-
-## Output Validation
-
-After completing a translation, verify the following before submitting:
-
-### Critical Checks (Breaking if Wrong)
-
-1. **Code blocks executable**: All Nextflow/Groovy/Bash code must run unchanged
-2. **Links functional**: All URLs and anchors preserved exactly
-3. **Heading anchors intact**: `{ #anchor-name }` syntax unchanged
-4. **Admonition keywords valid**: Only `note`, `tip`, `warning`, `danger`, `example`, `quote`, `exercise`, `solution` etc.
-5. **Markdown syntax valid**: No broken tables, lists, or code fences
-
-### Quality Checks
-
-1. **No translated Nextflow syntax**: `Channel`, `process`, `workflow` etc. remain English in code
-2. **Console output unchanged**: Nextflow execution output kept exactly as-is
-3. **Consistent terminology**: Same translation for same term throughout
-4. **Natural language**: Reads fluently, not word-for-word translation
-5. **Formatting preserved**: Same line breaks, indentation, spacing as source
+- [ ] Same formatting as original (line breaks, blank lines, indentation, lists)

@@ -1,8 +1,13 @@
 # Translation configuration
 # Controls which English documentation files are included in automatic translation.
 
-# Directories under docs/en/docs/ to exclude from translation.
+# Directories under docs/src/content/docs/ to exclude from translation.
 # Files in these directories will not be translated, and existing
 # translations will not be flagged as orphaned.
 # Example: ["side_quests", "archive"]
 exclude_dirs: []
+
+# Commit SHA the translations are known to be up to date with.
+# Used instead of the commit recorded in the last "Update translations" PR
+# while that commit is older than this one.
+baseline:
