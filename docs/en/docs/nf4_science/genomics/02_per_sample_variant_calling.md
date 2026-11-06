@@ -848,13 +848,14 @@ No, thank goodness! Just make a minor tweak to the code and Nextflow will handle
 To run on multiple samples, update the test profile to provide an array of file paths instead of a single one.
 This is a quick way to test multi-sample execution; in the next step we'll switch to a more scalable approach using a file of inputs.
 
-First, comment out the type annotation in the parameter declaration, since arrays cannot use typed declarations:
+First, change the type of the parameter declaration from `Path` to `List<Path>`.
+A parameter's type describes the shape of the value it accepts, so a list of files needs a list type:
 
 === "After"
 
     ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
-        // Primary input (array of three samples)
-        input //: Path
+        // Primary input (list of three samples)
+        input: List<Path>
     ```
 
 === "Before"
@@ -1294,7 +1295,7 @@ This CSV file includes a header line that names the columns.
 
 Switch the `input` parameter to point to the `samplesheet.csv` file instead of listing individual samples.
 
-Restore the type annotation in the params block (since it's a single path again):
+Change the parameter type back to `Path`, since the input is a single file again:
 
 === "After"
 
@@ -1306,8 +1307,8 @@ Restore the type annotation in the params block (since it's a single path again)
 === "Before"
 
     ```groovy title="genomics.nf" linenums="10"
-        // Primary input (array of three samples)
-        input
+        // Primary input (list of three samples)
+        input: List<Path>
     ```
 
 Then update the test profile to point to the text file:
