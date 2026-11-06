@@ -63,11 +63,9 @@ tree . -L 2
 
     ```console
     .
-    ├── 1-hello.nf
-    ├── 2-inputs.nf
     ├── data
-    │   ├── greetings-extended.csv
-    │   └── greetings.csv
+    │   ├── greetings.csv
+    │   └── single-greeting.csv
     ├── main.nf
     ├── modules
     │   ├── collectGreetings.nf
@@ -77,13 +75,13 @@ tree . -L 2
     └── nextflow.config
     ```
 
-The **`.nf` files** are workflow scripts of increasing complexity, used in that order through the course.
+The **`main.nf`** file is the workflow script for the pipeline used throughout the course.
 
-The **`data/`** directory contains the CSV input files we'll use starting in section 2.
+The **`data/`** directory contains the CSV input files used by `main.nf`.
 
 The **`modules/`** directory contains the process definitions used by `main.nf`.
 
-The **`nextflow.config`** file is a configuration file that sets minimal environment properties. You can ignore it for now; we'll go over it in section 4.
+The **`nextflow.config`** file is a configuration file that sets minimal environment properties. You can ignore it for now; we'll go over it in Part 2.
 
 ## Readiness checklist
 
