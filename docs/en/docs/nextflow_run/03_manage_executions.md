@@ -1,7 +1,7 @@
 # Part 3: Manage workflow executions
 
 As you run and re-run pipelines, you accumulate execution history and old `work/` directories.
-In [Part 1](./01_run_nextflow.md#23-use-resume-to-skip-completed-work) you already used `-resume` to skip work that was already done.
+In [Part 1](./01_run_nextflow.md#21-run-the-workflow-with-resume) you already used `-resume` to skip work that was already done.
 Here you'll learn how to generate reports about a run, inspect the history of past runs with [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log), and delete old work directories you no longer need with [`nextflow clean`](https://nextflow.io/docs/latest/reference/cli.html#clean).
 
 ---
@@ -109,7 +109,7 @@ Open it in a browser to see a bar for every task, positioned and sized by when i
 
 ![Execution timeline](img/execution_timeline.png)
 
-The timeline makes the fan-out-then-fan-in shape from [Part 1](./01_run_nextflow.md#31-run-the-workflow) visible at a glance: the three `sayHello` tasks run in parallel, then the three `convertToUpper` tasks, then `collectGreetings` and `cowpy` run one after the other since each depends on everything before it.
+The timeline makes the fan-out-then-fan-in shape from [Part 1](./01_run_nextflow.md#21-run-the-workflow-with-resume) visible at a glance: the three `sayHello` tasks run in parallel, then the three `convertToUpper` tasks, then `collectGreetings` and `cowpy` run one after the other since each depends on everything before it.
 
 ### Takeaway
 
