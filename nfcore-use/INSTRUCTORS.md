@@ -18,10 +18,11 @@ Read this before the session; learners don't need it.
 ## Machine resources
 
 - The default codespace has **2 CPUs, about 8 GB of memory and a 32 GB disk**.
-  Parts 1 to 5 run on it.
-- Part 6 asks learners to switch to the **8-core machine (32 GB memory, 64 GB disk)**.
+  Parts 1 and 2, and section 1 of Part 3, run on it.
+- Section 2 of Part 3 asks learners to switch to the **8-core machine (32 GB memory, 64 GB disk)**, and they stay on it through Part 4.
   This uses their quota 4x faster (about 15 hours of the free 120 core-hours per month), restarts the codespace (a few minutes, files are kept, running commands stop), and learners need to `cd /workspaces/training/nfcore-use` again afterwards.
-  Remind learners to switch back at the end.
+- Part 5 runs nothing, so the end of Part 4 tells learners to stop their codespace and switch it back to the 2-core machine type before using it again.
+  Remind them in a live session.
 - **Disk space:** a full `nf-core/rnaseq` test run on the default machine can fill the disk with container images and fail with `no space left on device`.
   The course has learners cancel that run early, but if someone lets it finish: `docker image prune -a`.
 
@@ -42,8 +43,23 @@ Read this before the session; learners don't need it.
 - After Ctrl+C, nf-core prints `Pipeline completed with errors` and `Pipeline failed`.
   This is expected when a run is cancelled.
   Learners should press Ctrl+C once and wait a few seconds.
+- The default-requests run (section 2.3) takes about 14 minutes on a new 8-core codespace, mostly downloading container images.
+  In a timed session, have learners start it before a break.
+- The run with `tuned.config` (section 4.3) takes about 5.5 minutes, compared to about 6.5 minutes with the default requests once the images are downloaded.
+  The time saved on this tiny test dataset is modest; the point is the memory reservation and the number of tasks running in parallel, visible in the execution timeline.
+- Learners' resource numbers will differ slightly from the tables in the lesson.
 
 ### Part 4
+
+- `nf-core/fetchngs` downloads from the ENA, so it needs internet access to `ftp.sra.ebi.ac.uk`.
+  If the network blocks it, demo the step from your screen; learners can follow section 3.2 from the generated samplesheet shown in the lesson.
+- The fetchngs and `-stub` commands don't use `laptop.config`, because learners are on the 8-core machine.
+  A learner who stayed on the default machine gets the same 12 GB memory error as in Part 3; adding `-c laptop.config` fixes it.
+- The final run on the learner's own samplesheet (section 6) uses `tuned.config` from Part 3 and `small_reads.yml`; if a learner skipped writing `tuned.config`, they can use `solutions/tuned.config`.
+- `-preview` only triggers schema validation; the cross-row check (mismatched strandedness) only appears with `-stub`.
+- When the fixed samplesheet passes the `-stub` run, tasks start running; learners can stop it with Ctrl+C.
+
+### Part 5
 
 - Nothing runs in the codespace; everything happens in the browser on nf-co.re.
 - Each scenario has a collapsed hint listing candidate pipelines.
@@ -52,37 +68,20 @@ Read this before the session; learners don't need it.
   Point learners to the output documentation for those.
 - Worked answers are in the collapsed solution blocks at the end of the page.
 
-### Part 5
-
-- `nf-core/fetchngs` downloads from the ENA, so it needs internet access to `ftp.sra.ebi.ac.uk`.
-  If the network blocks it, demo the step from your screen; learners can follow section 3.2 from the generated samplesheet shown in the lesson.
-- The fetchngs and `-stub` commands include `-c laptop.config`: without it, they fail on the default machine with the same 12 GB memory error as in Part 3.
-- `-preview` only triggers schema validation; the cross-row check (mismatched strandedness) only appears with `-stub`.
-- When the fixed samplesheet passes the `-stub` run, tasks start running; learners can stop it with Ctrl+C.
-
-### Part 6
-
-- The default-requests run takes about 14 minutes on a new 8-core codespace, mostly downloading container images.
-  In a timed session, have learners start it before a break.
-- The run with `tuned.config` takes about 5.5 minutes, compared to about 6.5 minutes with the default requests once the images are downloaded.
-  The time saved on this tiny test dataset is modest; the point is the memory reservation and the number of tasks running in parallel, visible in the execution timeline.
-- Learners' resource numbers will differ slightly from the tables in the lesson.
-
 ## Suggested timing
 
-| Part                                   | Duration                                                 |
-| -------------------------------------- | -------------------------------------------------------- |
-| 1. Run a demo pipeline                 | 20 min                                                   |
-| 2. Configure pipeline execution        | 20 min                                                   |
-| 3. Run a production pipeline           | 25 min                                                   |
-| 4. Choose a pipeline                   | 40 min                                                   |
-| 5. Prepare your inputs                 | 40 min                                                   |
-| 6. Scale up and tune compute resources | 40 min, including a machine switch and two pipeline runs |
+| Part                            | Duration                                                   |
+| ------------------------------- | ---------------------------------------------------------- |
+| 1. Run a demo pipeline          | 20 min                                                     |
+| 2. Configure pipeline execution | 20 min                                                     |
+| 3. Run a production pipeline    | 65 min, including a machine switch and three pipeline runs |
+| 4. Run on custom inputs         | 50 min, including a full pipeline run                      |
+| 5. Choose a pipeline            | 45 min                                                     |
 
 ## Known upstream issues
 
 These may come up if learners explore further, or ask why the course works around them:
 
-- `nf-core/fetchngs` 1.13.0 requests 12 GB and 2 CPUs per download (up to 36 GB on retry) for a task that uses about 15 MB; this is why Part 5 runs it with `-c laptop.config`.
+- `nf-core/fetchngs` 1.13.0 requests 12 GB and 2 CPUs per download (up to 36 GB on retry) for a task that uses about 15 MB; this is why it would need `-c laptop.config` on the default machine.
 - `nf-core/differentialabundance` 2.0.0: the Quarto report step fails on Seqera Platform with Fusion enabled (`attempt to write a readonly database`); the analysis itself completes.
 - `nf-core/raredisease` 3.1.2: `PREP_MITOSALT` has no container and fails on AWS Batch.
