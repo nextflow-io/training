@@ -36,7 +36,6 @@ workflow {
 
 output {
     first_output {
-        path 'hello_channels'
-        mode 'copy'
+        path '.'
     }
 }
