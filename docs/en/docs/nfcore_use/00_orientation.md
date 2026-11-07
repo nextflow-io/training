@@ -96,13 +96,13 @@ tree .
     3 directories, 20 files
     ```
 
-- **The `laptop.config` file** is a configuration file we'll use in Parts 3 and 5 to cap resource usage when running a production-scale pipeline locally.
+- **The `laptop.config` file** is a configuration file we'll use in Part 3 to cap resource usage when running a production-scale pipeline locally.
   You can ignore it until then.
 - **The `my_params.yml`, `malformed_samplesheet.csv`, and `custom.config` files** are used in Part 2, to demonstrate setting parameters from a file, input validation, and process-level configuration overrides.
   You can ignore them until then too.
-- **The `data/reads/` directory** contains FASTQ files for a small RNA-seq experiment, and **the `data/sra_ids.csv` file** lists public sequencing runs; both are used in Part 5 to prepare samplesheets.
-- **The `broken_samplesheet_1.csv` and `broken_samplesheet_2.csv` files** contain errors to diagnose and fix in Part 5.
-- **The `solutions/` directory** contains the completed samplesheet from Part 5 and the tuned configuration file from Part 6.
+- **The `data/reads/` directory** contains FASTQ files for a small RNA-seq experiment, and **the `data/sra_ids.csv` file** lists public sequencing runs; both are used in Part 4 to prepare samplesheets.
+- **The `broken_samplesheet_1.csv` and `broken_samplesheet_2.csv` files** contain errors to diagnose and fix in Part 4.
+- **The `solutions/` directory** contains the completed samplesheet from Part 4 and the tuned configuration file from Part 3.
 - **The `INSTRUCTORS.md` file** contains notes for instructors running the course live; you can ignore it.
 
 ## Readiness checklist
