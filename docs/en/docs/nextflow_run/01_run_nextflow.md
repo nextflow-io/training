@@ -370,9 +370,63 @@ This shows all 8 process calls and the task directory for each one.
 Since nothing changed since the previous run, every task was cached.
 The `sayHello` task at `[37/389926]` is the one from the very first run.
 
+### 2.5. Generate an execution timeline
+
+To see how the tasks were scheduled, add `-with-timeline` to the command.
+Leave out `-resume` this time, so that every task runs instead of being retrieved from the cache:
+
+```bash
+nextflow run main.nf --input data/greetings.csv -with-timeline
+```
+
+??? success "Command output"
+
+    ```console hl_lines="6 7 8 9"
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [jolly_noyce] revision: ce74f81996
+
+    executor >  local (8)
+    [86/b36db0] sayHello (1)       | 3 of 3 ✔
+    [dd/ab5042] convertToUpper (3) | 3 of 3 ✔
+    [c0/a425c6] collectGreetings   | 1 of 1 ✔
+    [b7/b79993] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - batch/intermediates/Hola-output.txt
+        - batch/intermediates/Hello-output.txt
+        - batch/intermediates/Bonjour-output.txt
+
+      uppercased:
+        - batch/intermediates/UPPER-Hola-output.txt
+        - batch/intermediates/UPPER-Hello-output.txt
+        - batch/intermediates/UPPER-Bonjour-output.txt
+
+      collected: batch/intermediates/COLLECTED-batch-output.txt
+
+      batch_report: batch/batch-report.txt
+
+      cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
+    ```
+
+All 8 tasks ran, with no `cached` count.
+
+Nextflow writes the timeline to a file named `timeline-<timestamp>.html` in the working directory.
+Open it in a browser to see a bar for every task, positioned and sized by when it ran and how long it took:
+
+![Execution timeline](img/execution_timeline.png)
+
+The timeline makes the fan-out-then-fan-in shape described in [2.1](#21-run-the-workflow-with-resume) visible at a glance: the three `sayHello` tasks run in parallel, then the three `convertToUpper` tasks, then `collectGreetings` and `cowpy` run one after the other since each depends on everything before it.
+Nextflow parallelized these tasks automatically; nothing in the command asked it to.
+
 ### Takeaway
 
 You know how to run a pipeline on multiple inputs processed in parallel, how to use `-resume` to avoid repeating completed work, and how Nextflow keeps each task isolated in its own directory.
+You also know how to see how tasks were scheduled with `-with-timeline`.
 
 ### What's next?
 
@@ -389,3 +443,4 @@ In this part you learned to:
 - Run the pipeline on multiple inputs processed in parallel
 - Use `-resume` to skip completed work when adding new inputs
 - Display each task individually with `-ansi-log false`
+- Visualize how tasks ran in parallel with `-with-timeline`
