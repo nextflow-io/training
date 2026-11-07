@@ -26,7 +26,6 @@ workflow {
 
 output {
     first_output {
-        path 'hello_world'
-        mode 'copy'
+        path '.'
     }
 }
