@@ -82,15 +82,12 @@ workflow {
 
 output {
     first_output {
-        path 'hello_workflow'
-        mode 'copy'
+        path "${params.batch}/intermediates"
     }
     uppercased {
-        path 'hello_workflow'
-        mode 'copy'
+        path "${params.batch}/intermediates"
     }
     collected {
-        path 'hello_workflow'
-        mode 'copy'
+        path "${params.batch}/intermediates"
     }
 }

@@ -18,7 +18,7 @@ To use a module in a workflow, you just add a single-line `include` statement to
 That makes it possible to reuse process definitions in multiple workflows without producing multiple copies of the code.
 
 When we started developing our workflow, we wrote everything in one single code file.
-Now we're going to move the processes out into individual modules.
+Now we're going to put each piece of code in its proper place: the processes go into individual modules, and the parameter values go into the configuration file.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/modules.svg"
@@ -35,28 +35,7 @@ This will make our code more shareable, flexible and maintainable.
 ## 0. Warmup: Run `hello-modules.nf`
 
 We're going to use the workflow script `hello-modules.nf` as a starting point.
-It is equivalent to the script produced by working through Part 3 of this training course, except we've changed the output destinations:
-
-```groovy title="hello-modules.nf" linenums="37" hl_lines="3 7 11 15"
-output {
-    first_output {
-        path 'hello_modules'
-        mode 'copy'
-    }
-    uppercased {
-        path 'hello_modules'
-        mode 'copy'
-    }
-    collected {
-        path 'hello_modules'
-        mode 'copy'
-    }
-    batch_report {
-        path 'hello_modules'
-        mode 'copy'
-    }
-}
-```
+It is equivalent to the script produced by working through Part 3 of this training course.
 
 Just to make sure everything is working, run the script once before making any changes:
 
@@ -81,31 +60,32 @@ nextflow run hello-modules.nf
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - hello_modules/Hola-output.txt
-        - hello_modules/Bonjour-output.txt
-        - hello_modules/Hello-output.txt
+        - batch/intermediates/Hola-output.txt
+        - batch/intermediates/Bonjour-output.txt
+        - batch/intermediates/Hello-output.txt
       uppercased:
-        - hello_modules/UPPER-Hola-output.txt
-        - hello_modules/UPPER-Bonjour-output.txt
-        - hello_modules/UPPER-Hello-output.txt
-      collected: hello_modules/COLLECTED-batch-output.txt
-      batch_report: hello_modules/batch-report.txt
+        - batch/intermediates/UPPER-Hola-output.txt
+        - batch/intermediates/UPPER-Bonjour-output.txt
+        - batch/intermediates/UPPER-Hello-output.txt
+      collected: batch/intermediates/COLLECTED-batch-output.txt
+      batch_report: batch/batch-report.txt
     ```
 
-As previously, you will find the output files in the directory specified in the `output` block (here, `results/hello_modules/`).
+As previously, you will find the output files in the locations specified in the `output` block, under `results/batch/`, since we didn't set a value for `--batch`.
 
 ??? abstract "Directory contents"
 
     ```console
-    results/hello_modules/
-    ├── Bonjour-output.txt
-    ├── COLLECTED-batch-output.txt
-    ├── Hello-output.txt
-    ├── Hola-output.txt
+    results/batch
     ├── batch-report.txt
-    ├── UPPER-Bonjour-output.txt
-    ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
+    └── intermediates
+        ├── Bonjour-output.txt
+        ├── COLLECTED-batch-output.txt
+        ├── Hello-output.txt
+        ├── Hola-output.txt
+        ├── UPPER-Bonjour-output.txt
+        ├── UPPER-Hello-output.txt
+        └── UPPER-Hola-output.txt
     ```
 
 If that worked for you, you're ready to learn how to modularize your workflow code.
@@ -228,15 +208,15 @@ nextflow run hello-modules.nf -resume
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - hello_modules/Hello-output.txt
-        - hello_modules/Bonjour-output.txt
-        - hello_modules/Hola-output.txt
+        - batch/intermediates/Hello-output.txt
+        - batch/intermediates/Bonjour-output.txt
+        - batch/intermediates/Hola-output.txt
       uppercased:
-        - hello_modules/UPPER-Hola-output.txt
-        - hello_modules/UPPER-Bonjour-output.txt
-        - hello_modules/UPPER-Hello-output.txt
-      collected: hello_modules/COLLECTED-batch-output.txt
-      batch_report: hello_modules/batch-report.txt
+        - batch/intermediates/UPPER-Hola-output.txt
+        - batch/intermediates/UPPER-Bonjour-output.txt
+        - batch/intermediates/UPPER-Hello-output.txt
+      collected: batch/intermediates/COLLECTED-batch-output.txt
+      batch_report: batch/batch-report.txt
     ```
 
 This should run quickly very quickly because everything is cached.
@@ -352,15 +332,15 @@ nextflow run hello-modules.nf -resume
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - hello_modules/Hola-output.txt
-        - hello_modules/Hello-output.txt
-        - hello_modules/Bonjour-output.txt
+        - batch/intermediates/Hola-output.txt
+        - batch/intermediates/Hello-output.txt
+        - batch/intermediates/Bonjour-output.txt
       uppercased:
-        - hello_modules/UPPER-Bonjour-output.txt
-        - hello_modules/UPPER-Hello-output.txt
-        - hello_modules/UPPER-Hola-output.txt
-      collected: hello_modules/COLLECTED-batch-output.txt
-      batch_report: hello_modules/batch-report.txt
+        - batch/intermediates/UPPER-Bonjour-output.txt
+        - batch/intermediates/UPPER-Hello-output.txt
+        - batch/intermediates/UPPER-Hola-output.txt
+      collected: batch/intermediates/COLLECTED-batch-output.txt
+      batch_report: batch/batch-report.txt
     ```
 
 This should still produce the same output as previously.
@@ -471,15 +451,15 @@ nextflow run hello-modules.nf -resume
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - hello_modules/Hello-output.txt
-        - hello_modules/Bonjour-output.txt
-        - hello_modules/Hola-output.txt
+        - batch/intermediates/Hello-output.txt
+        - batch/intermediates/Bonjour-output.txt
+        - batch/intermediates/Hola-output.txt
       uppercased:
-        - hello_modules/UPPER-Bonjour-output.txt
-        - hello_modules/UPPER-Hello-output.txt
-        - hello_modules/UPPER-Hola-output.txt
-      collected: hello_modules/COLLECTED-batch-output.txt
-      batch_report: hello_modules/batch-report.txt
+        - batch/intermediates/UPPER-Bonjour-output.txt
+        - batch/intermediates/UPPER-Hello-output.txt
+        - batch/intermediates/UPPER-Hola-output.txt
+      collected: batch/intermediates/COLLECTED-batch-output.txt
+      batch_report: batch/batch-report.txt
     ```
 
 This should still produce the same output as previously.
@@ -492,6 +472,160 @@ Congratulations, you've done all this work and absolutely nothing has changed to
 
 Jokes aside, now your code is more modular, and if you decide to write another pipeline that calls on one of those processes, you just need to type one short `include` statement to use the relevant module.
 This is better than copy-pasting the code, because if later you decide to improve the module, all your pipelines will inherit the improvements.
+
+### What's next?
+
+Move the parameter values out of the workflow script.
+
+---
+
+## 5. Move parameter values to the configuration
+
+The workflow script still sets default values for its parameters in the `params` block:
+
+```groovy title="hello-modules.nf" linenums="8"
+/*
+ * Pipeline parameters
+ */
+params {
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
+}
+```
+
+That was convenient while we were developing the workflow, but these two values are not the same kind of thing:
+
+- `batch = 'batch'` is a true default: a sensible value for anyone who runs the pipeline without specifying one.
+- `input = 'data/greetings.csv'` is a test value: it points to the example data provided with the course, which nobody would want to process by default in a real analysis.
+
+As you saw in Nextflow Run, true defaults belong in the `params` section of `nextflow.config`, and test values belong in a `test` profile.
+The workflow script keeps the parameter declarations and their types, so it is still easy to see at a glance which parameters the pipeline accepts.
+
+### 5.1. Remove the values from the workflow script
+
+In the `params` block of the workflow script, make the following code change:
+
+=== "After"
+
+    ```groovy title="hello-modules.nf" linenums="8" hl_lines="5-6"
+    /*
+     * Pipeline parameters
+     */
+    params {
+        input: Path
+        batch: String
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="hello-modules.nf" linenums="8"
+    /*
+     * Pipeline parameters
+     */
+    params {
+        input: Path = 'data/greetings.csv'
+        batch: String = 'batch'
+    }
+    ```
+
+### 5.2. Add the default value and the test profile to `nextflow.config`
+
+Open `nextflow.config` and make the following change:
+
+=== "After"
+
+    ```groovy title="nextflow.config" linenums="1" hl_lines="3-17"
+    docker.enabled = false
+
+    /*
+     * Pipeline parameters
+     */
+    params {
+        batch = 'batch'
+    }
+
+    /*
+     * Profiles
+     */
+    profiles {
+        test {
+            params.input = 'data/greetings.csv'
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config" linenums="1"
+    docker.enabled = false
+    ```
+
+The `params` section of the configuration file uses `=` to assign values, without types: the types are declared in the workflow script.
+
+### 5.3. Run the workflow without the test profile
+
+Try running the workflow the same way as before:
+
+```bash
+nextflow run hello-modules.nf -resume
+```
+
+??? failure "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `hello-modules.nf` [marvelous_neumann] revision: 9f1f296fc8
+
+    Parameter `input` is required but was not specified on the command line, params file, or config
+    ```
+
+Since `input` no longer has a default value, Nextflow stops before running anything and tells you that the parameter is missing.
+`batch` did not cause an error, because its default value now comes from `nextflow.config`.
+
+### 5.4. Run the workflow with the test profile
+
+Add `-profile test` to provide the test value for `input`:
+
+```bash
+nextflow run hello-modules.nf -profile test -resume
+```
+
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `hello-modules.nf` [agitated_swirles] revision: 9f1f296fc8
+
+    [0f/8795c9] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [6a/eb2510] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [af/479117] collectGreetings   | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - batch/intermediates/Hola-output.txt
+        - batch/intermediates/Bonjour-output.txt
+        - batch/intermediates/Hello-output.txt
+      uppercased:
+        - batch/intermediates/UPPER-Hola-output.txt
+        - batch/intermediates/UPPER-Bonjour-output.txt
+        - batch/intermediates/UPPER-Hello-output.txt
+      collected: batch/intermediates/COLLECTED-batch-output.txt
+      batch_report: batch/batch-report.txt
+    ```
+
+The parameter values are the same as before, so every task is retrieved from the cache.
+
+From now on, run the workflow with `-profile test`, or provide `--input` on the command line.
+
+### Takeaway
+
+You know how to separate the parameter declarations in the workflow script from their values in the configuration, keeping true default values in the `params` section and test values in a `test` profile.
 
 ### What's next?
 
@@ -548,4 +682,14 @@ What are the benefits of using modules? (Select all that apply)
 - [x] Easier maintenance
 - [x] Better organization of workflow code
 - [ ] Faster execution speed
+</quiz>
+
+<quiz>
+Where should the path to the example input data used for testing go?
+- [ ] In the `params` block of the workflow script, as a default value
+- [ ] In the `params` section of `nextflow.config`
+- [x] In a `test` profile in `nextflow.config`
+- [ ] In the module that uses it
+
+Learn more: [5. Move parameter values to the configuration](#5-move-parameter-values-to-the-configuration)
 </quiz>

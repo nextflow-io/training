@@ -60,11 +60,9 @@ workflow {
 
 output {
     first_output {
-        path 'hello_workflow'
-        mode 'copy'
+        path '.'
     }
     uppercased {
-        path 'hello_workflow'
-        mode 'copy'
+        path '.'
     }
 }

@@ -10,9 +10,9 @@ include { cowpy } from './modules/cowpy.nf'
  * Pipeline parameters
  */
 params {
-    input: Path = 'data/greetings.csv'
-    batch: String = 'batch'
-    character: String = 'turkey'
+    input: Path
+    batch: String
+    character: String
 }
 
 workflow {
@@ -41,23 +41,19 @@ workflow {
 
 output {
     first_output {
-        path 'hello_containers/intermediates'
-        mode 'copy'
+        path "${params.batch}/intermediates"
     }
     uppercased {
-        path 'hello_containers/intermediates'
-        mode 'copy'
+        path "${params.batch}/intermediates"
     }
     collected {
-        path 'hello_containers/intermediates'
-        mode 'copy'
+        path "${params.batch}/intermediates"
     }
     batch_report {
-        path 'hello_containers'
-        mode 'copy'
+        path "${params.batch}"
     }
     cowpy_art {
-        path 'hello_containers'
+        path "${params.batch}"
         mode 'copy'
     }
 }

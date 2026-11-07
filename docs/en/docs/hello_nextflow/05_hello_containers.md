@@ -27,10 +27,11 @@ Note that we'll be teaching this using [Docker](https://www.docker.com/get-start
 
     This section of the course assumes you have completed Parts 1-4 of the [Hello Nextflow](./index.md) course and have a complete working pipeline.
 
-    If you're starting the course from this point, you'll need to copy the `modules` directory over from the solutions:
+    If you're starting the course from this point, you'll need to copy the `modules` directory and the `nextflow.config` file over from the solutions:
 
     ```bash
     cp -r solutions/4-hello-modules/modules .
+    cp solutions/4-hello-modules/nextflow.config .
     ```
 
 ---
@@ -38,33 +39,12 @@ Note that we'll be teaching this using [Docker](https://www.docker.com/get-start
 ## 0. Warmup: Run `hello-containers.nf`
 
 We're going to use the workflow script `hello-containers.nf` as a starting point.
-It is equivalent to the script produced by working through Part 4 of this training course, except we've changed the output destinations:
-
-```groovy title="hello-containers.nf" linenums="37" hl_lines="3 7 11 15"
-output {
-    first_output {
-        path 'hello_containers'
-        mode 'copy'
-    }
-    uppercased {
-        path 'hello_containers'
-        mode 'copy'
-    }
-    collected {
-        path 'hello_containers'
-        mode 'copy'
-    }
-    batch_report {
-        path 'hello_containers'
-        mode 'copy'
-    }
-}
-```
+It is equivalent to the script produced by working through Part 4 of this training course.
 
 Just to make sure everything is working, run the script once before making any changes:
 
 ```bash
-nextflow run hello-containers.nf
+nextflow run hello-containers.nf -profile test
 ```
 
 ??? success "Command output"
@@ -84,31 +64,32 @@ nextflow run hello-containers.nf
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - hello_containers/Hola-output.txt
-        - hello_containers/Bonjour-output.txt
-        - hello_containers/Hello-output.txt
+        - batch/intermediates/Hola-output.txt
+        - batch/intermediates/Bonjour-output.txt
+        - batch/intermediates/Hello-output.txt
       uppercased:
-        - hello_containers/UPPER-Bonjour-output.txt
-        - hello_containers/UPPER-Hola-output.txt
-        - hello_containers/UPPER-Hello-output.txt
-      collected: hello_containers/COLLECTED-batch-output.txt
-      batch_report: hello_containers/batch-report.txt
+        - batch/intermediates/UPPER-Bonjour-output.txt
+        - batch/intermediates/UPPER-Hola-output.txt
+        - batch/intermediates/UPPER-Hello-output.txt
+      collected: batch/intermediates/COLLECTED-batch-output.txt
+      batch_report: batch/batch-report.txt
     ```
 
-As previously, you will find the output files in the directory specified in the `output` block (`results/hello_containers/`).
+As previously, you will find the output files under `results/batch/`.
 
 ??? abstract "Directory contents"
 
     ```console
-    results/hello_containers/
-    ├── Bonjour-output.txt
-    ├── COLLECTED-batch-output.txt
-    ├── Hello-output.txt
-    ├── Hola-output.txt
+    results/batch
     ├── batch-report.txt
-    ├── UPPER-Bonjour-output.txt
-    ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
+    └── intermediates
+        ├── Bonjour-output.txt
+        ├── COLLECTED-batch-output.txt
+        ├── Hello-output.txt
+        ├── Hola-output.txt
+        ├── UPPER-Bonjour-output.txt
+        ├── UPPER-Hello-output.txt
+        └── UPPER-Hola-output.txt
     ```
 
 If that worked for you, you're ready to learn how to use containers.
@@ -544,20 +525,20 @@ In the workflow block, make the following code change:
 
 Notice that we declared a new CLI parameter, `params.character`, in order to specify which character we want to have say the greetings.
 
-#### 2.2.3. Add the `character` parameter to the `params` block
+#### 2.2.3. Declare the `character` parameter and set its default value
 
-This is technically optional but it's the recommended practice and it's an opportunity to set a default value for the character while we're at it.
+Declare the new parameter in the `params` block of the workflow script:
 
 === "After"
 
     ```groovy title="hello-containers.nf" linenums="9" hl_lines="7"
     /*
-    * Pipeline parameters
-    */
+     * Pipeline parameters
+     */
     params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-        character: String = 'turkey'
+        input: Path
+        batch: String
+        character: String
     }
     ```
 
@@ -565,15 +546,41 @@ This is technically optional but it's the recommended practice and it's an oppor
 
     ```groovy title="hello-containers.nf" linenums="9"
     /*
-    * Pipeline parameters
-    */
+     * Pipeline parameters
+     */
     params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
+        input: Path
+        batch: String
     }
     ```
 
-Now we can be lazy and skip typing the character parameter in our command lines.
+Then, as you did for `batch` in Part 4, set its default value in the `params` section of `nextflow.config`:
+
+=== "After"
+
+    ```groovy title="nextflow.config" linenums="3" hl_lines="6"
+    /*
+     * Pipeline parameters
+     */
+    params {
+        batch = 'batch'
+        character = 'turkey'
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config" linenums="3"
+    /*
+     * Pipeline parameters
+     */
+    params {
+        batch = 'batch'
+    }
+    ```
+
+A turkey is a sensible choice for anyone who runs the pipeline without picking a character, so it is a true default rather than a test value.
+Now we can skip typing the character parameter in our command lines.
 
 #### 2.2.4. Update the workflow outputs
 
@@ -610,32 +617,33 @@ But for now, let's finish updating the workflow-level outputs.
 
 ##### 2.2.4.2. Update the `output` block
 
-We need to add the final `cowpy_art` output to the `output` block. While we're at it, let's also edit the publishing destinations since now our pipeline is complete and we know what outputs we really care about.
+We need to add the final `cowpy_art` output to the `output` block.
+It is a final result, so we publish it at the top level of the batch directory, next to the report.
 
-In the `output` block, make the following code changes:
+This is also the output that people care about most, so we publish it as a copy rather than a symbolic link, with `mode 'copy'`.
+That way, it remains available even if the `work/` directory is cleaned up.
+The intermediate files keep the default mode.
+
+In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-containers.nf" linenums="42" hl_lines="3 7 11 15 18-21"
+    ```groovy title="hello-containers.nf" linenums="42" hl_lines="14-17"
     output {
         first_output {
-            path 'hello_containers/intermediates'
-            mode 'copy'
+            path "${params.batch}/intermediates"
         }
         uppercased {
-            path 'hello_containers/intermediates'
-            mode 'copy'
+            path "${params.batch}/intermediates"
         }
         collected {
-            path 'hello_containers/intermediates'
-            mode 'copy'
+            path "${params.batch}/intermediates"
         }
         batch_report {
-            path 'hello_containers'
-            mode 'copy'
+            path "${params.batch}"
         }
         cowpy_art {
-            path 'hello_containers'
+            path "${params.batch}"
             mode 'copy'
         }
     }
@@ -643,28 +651,24 @@ In the `output` block, make the following code changes:
 
 === "Before"
 
-    ```groovy title="hello-containers.nf" linenums="42" hl_lines="3 7 11 15"
+    ```groovy title="hello-containers.nf" linenums="42"
     output {
         first_output {
-            path 'hello_containers'
-            mode 'copy'
+            path "${params.batch}/intermediates"
         }
         uppercased {
-            path 'hello_containers'
-            mode 'copy'
+            path "${params.batch}/intermediates"
         }
         collected {
-            path 'hello_containers'
-            mode 'copy'
+            path "${params.batch}/intermediates"
         }
         batch_report {
-            path 'hello_containers'
-            mode 'copy'
+            path "${params.batch}"
         }
     }
     ```
 
-Now the published outputs will be a bit more organized.
+As you saw in Nextflow Run, a publish mode set in the `output` block takes precedence over the default that users can set in their configuration, so this output is always published as a copy.
 
 #### 2.2.5. Run the workflow
 
@@ -679,8 +683,8 @@ Do you think it's going to work?
 Let's delete the previous published outputs to have a clean slate, and run the workflow with the `-resume` flag.
 
 ```bash
-rm -r results/hello_containers/
-nextflow run hello-containers.nf -resume
+rm -r results/batch/
+nextflow run hello-containers.nf -profile test -resume
 ```
 
 ??? failure "Command output (edited for clarity)"
@@ -784,7 +788,7 @@ This tells Nextflow that _if the use of Docker is enabled_, it should use the co
 Notice we said _'if the use of Docker is enabled'_. By default, it is not, so we need to tell Nextflow it's allowed to use Docker.
 We do that in the `nextflow.config` file, which, as you saw in [Nextflow Run](../nextflow_run/02_configure_pipeline.md), Nextflow loads automatically when it is present in the current directory.
 
-We provided a `nextflow.config` file with a single line of code that explicitly disables Docker: `docker.enabled = false`.
+The first line of the `nextflow.config` file we provided explicitly disables Docker: `docker.enabled = false`.
 
 Now, let's switch that to `true` to enable Docker:
 
@@ -811,7 +815,7 @@ Now, let's switch that to `true` to enable Docker:
 Run the workflow with the `-resume` flag:
 
 ```bash
-nextflow run hello-containers.nf -resume
+nextflow run hello-containers.nf -profile test -resume
 ```
 
 ??? success "Command output"
@@ -832,42 +836,43 @@ nextflow run hello-containers.nf -resume
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - hello_containers/intermediates/Bonjour-output.txt
-        - hello_containers/intermediates/Hola-output.txt
-        - hello_containers/intermediates/Hello-output.txt
+        - batch/intermediates/Bonjour-output.txt
+        - batch/intermediates/Hola-output.txt
+        - batch/intermediates/Hello-output.txt
       uppercased:
-        - hello_containers/intermediates/UPPER-Hola-output.txt
-        - hello_containers/intermediates/UPPER-Bonjour-output.txt
-        - hello_containers/intermediates/UPPER-Hello-output.txt
-      collected: hello_containers/intermediates/COLLECTED-batch-output.txt
-      batch_report: hello_containers/batch-report.txt
-      cowpy_art: hello_containers/cowpy-COLLECTED-batch-output.txt
+        - batch/intermediates/UPPER-Hola-output.txt
+        - batch/intermediates/UPPER-Bonjour-output.txt
+        - batch/intermediates/UPPER-Hello-output.txt
+      collected: batch/intermediates/COLLECTED-batch-output.txt
+      batch_report: batch/batch-report.txt
+      cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
     ```
 
 This time it does indeed work!
-As usual you can find the workflow outputs in the corresponding results directory, though this time they are a bit more neatly organized, with only the report and the final output at the top level, and all intermediate files shoved out of the way into a subdirectory.
+As usual you can find the workflow outputs in the results directory, with the report and the final output at the top level of the batch directory, and the intermediate files in a subdirectory.
+The final output is a real file, while the others are symbolic links.
 
 ??? abstract "Directory contents"
 
     ```console
-    results/hello_containers/
+    results/batch
+    ├── batch-report.txt -> /workspaces/training/hello-nextflow/work/.../batch-report.txt
     ├── cowpy-COLLECTED-batch-output.txt
-    ├── intermediates
-    │   ├── Bonjour-output.txt
-    │   ├── COLLECTED-batch-output.txt
-    │   ├── Hello-output.txt
-    │   ├── Hola-output.txt
-    │   ├── UPPER-Bonjour-output.txt
-    │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
-    └── batch-report.txt
+    └── intermediates
+        ├── Bonjour-output.txt -> /workspaces/training/hello-nextflow/work/.../Bonjour-output.txt
+        ├── COLLECTED-batch-output.txt -> /workspaces/training/hello-nextflow/work/.../COLLECTED-batch-output.txt
+        ├── Hello-output.txt -> /workspaces/training/hello-nextflow/work/.../Hello-output.txt
+        ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/.../Hola-output.txt
+        ├── UPPER-Bonjour-output.txt -> /workspaces/training/hello-nextflow/work/.../UPPER-Bonjour-output.txt
+        ├── UPPER-Hello-output.txt -> /workspaces/training/hello-nextflow/work/.../UPPER-Hello-output.txt
+        └── UPPER-Hola-output.txt -> /workspaces/training/hello-nextflow/work/.../UPPER-Hola-output.txt
     ```
 
-The final ASCII art output is in the `results/hello_containers/` directory, under the name `cowpy-COLLECTED-batch-output.txt`.
+The final ASCII art output is in the `results/batch/` directory, under the name `cowpy-COLLECTED-batch-output.txt`.
 
 ??? abstract "File contents"
 
-    ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
+    ```console title="results/batch/cowpy-COLLECTED-batch-output.txt"
     _________
     / HOLA    \
     | HELLO   |
@@ -1099,9 +1104,48 @@ All the hard work we had to do manually in the first section? Nextflow does it f
        ||     ||          i_____;----\.____i""\____\
 ```
 
+### 2.4. Add a Conda package as an alternative
+
+Not everyone can use containers.
+As you saw in Nextflow Run, the same pipeline can supply its software through Conda instead, when the person running it enables Conda.
+For that to work, the process needs to declare a Conda package as well as a container.
+
+The `cowpy` tool is available as the Conda package `conda-forge::cowpy==1.1.5`.
+Add it to the `cowpy` module with the `conda` directive:
+
+=== "After"
+
+    ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="4"
+    process cowpy {
+
+        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+        conda 'conda-forge::cowpy==1.1.5'
+
+        input:
+    ```
+
+=== "Before"
+
+    ```groovy title="modules/cowpy.nf" linenums="4"
+    process cowpy {
+
+        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+
+        input:
+    ```
+
+This doesn't replace the container: Nextflow uses whichever one matches the software packaging technology enabled in the configuration.
+With `docker.enabled = true`, as in our `nextflow.config`, it keeps using the container.
+
+!!! tip
+
+    The [Seqera Containers](https://seqera.io/containers/) search shows the Conda package URI for a tool, even if you're not planning to build a container from it.
+
+To learn how to switch between Docker and Conda, and how to configure the pipeline for other compute environments, see the [Configure Execution](../config_exec/index.md) course.
+
 ### Takeaway
 
-You know how to use containers in Nextflow to run processes.
+You know how to use containers in Nextflow to run processes, and how to declare a Conda package as an alternative.
 
 ### What's next?
 
