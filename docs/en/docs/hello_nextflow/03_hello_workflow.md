@@ -1062,7 +1062,7 @@ This will require two key changes to the process definition: we need a way to co
 
 Conveniently, Nextflow lets us add arbitrary code in the `script:` block of the process definition, which comes in really handy for doing things like this.
 
-That means we can use Nextflow's built-in `size()` function to get the number of files in the `input_files` array, and write the result to file with an `echo` command.
+That means we can use Nextflow's built-in `size()` function to get the number of files in the `input_files` list, and write the result to file with an `echo` command.
 
 In the `collectGreetings` process block, make the following code changes:
 
@@ -1073,7 +1073,7 @@ In the `collectGreetings` process block, make the following code changes:
         count_greetings = input_files.size()
         """
         cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-        echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
+        echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-report.txt'
         """
     ```
 
@@ -1087,6 +1087,20 @@ In the `collectGreetings` process block, make the following code changes:
     ```
 
 The `count_greetings` variable will be computed at runtime.
+
+??? note "What if there is only one greeting?"
+
+    If you run the workflow on a CSV file that contains a single greeting, the report claims a much larger number of greetings.
+    With a single item in the channel, `input_files` holds one file instead of a list of files, and `size()` returns the size of that file in bytes.
+
+    To make Nextflow always provide a list, declare how many files the input accepts with the `arity` option:
+
+    ```groovy
+    input:
+    path input_files, arity: '1..*'
+    ```
+
+    A value of `'1..*'` means one or more files.
 
 #### 4.1.2. Emit the report file and name outputs
 
@@ -1253,7 +1267,7 @@ Open it to verify that the workflow correctly reported the count of greetings th
 ??? abstract "File contents"
 
     ```txt title="trio-report.txt"
-    There were 3 greetings in this batch.
+    Number of greetings processed: 3
     ```
 
 <figure class="excalidraw">
