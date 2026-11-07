@@ -504,11 +504,10 @@ Check your file explorer: this time, Nextflow has also created a new directory c
 
 ??? abstract "Directory contents"
 
-    ```console hl_lines="10-11 22"
+    ```console hl_lines="9-10 19"
     .
     ├── greetings.csv
     ├── hello-channels.nf
-    ├── hello-config.nf
     ├── hello-containers.nf
     ├── hello-modules.nf
     ├── hello-workflow.nf
@@ -521,9 +520,7 @@ Check your file explorer: this time, Nextflow has also created a new directory c
     │   ├── 2-hello-channels
     │   ├── 3-hello-workflow
     │   ├── 4-hello-modules
-    │   ├── 5-hello-containers
-    │   └── 6-hello-config
-    ├── test-params.json
+    │   └── 5-hello-containers
     └── work
         ├── 65
         └── 9f
@@ -1021,7 +1018,7 @@ Once again, you should find the corresponding updated output in your results dir
     In Nextflow, there are multiple places where you can specify values for parameters.
     If the same parameter is set to different values in multiple places, Nexflow will determine what value to use based on the order of precedence that is described [here](https://www.nextflow.io/docs/latest/config.html).
 
-    We'll cover this in more detail in Part 6 (Configuration).
+    The [Configure the pipeline](../nextflow_run/02_configure_pipeline.md) part of Nextflow Run covers this in more detail.
 
 ### Takeaway
 
