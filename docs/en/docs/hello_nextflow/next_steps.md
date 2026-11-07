@@ -15,7 +15,7 @@ Congratulations on completing the Hello Nextflow training course! 🎉
 ## Your journey
 
 You started with a very basic workflow that ran a hardcoded command.
-Over the course of six parts, you transformed that basic workflow into a modular multi-step pipeline that exercises key features of Nextflow including channels, operators, built-in support for containers, and configuration options.
+Over the course of five parts, you transformed that basic workflow into a modular multi-step pipeline that exercises key features of Nextflow including channels, operators, modules, and built-in support for containers.
 
 ### What you built
 
@@ -33,8 +33,6 @@ Over the course of six parts, you transformed that basic workflow into a modular
 3. **`collectGreetings`:** Collects all uppercase greetings into a single batch file
 4. **`cowpy`:** Generates ASCII art using the `cowpy` tool
 
-The workflow configuration supports providing inputs and parameters in a flexible, reproducible way.
-
 ### Skills acquired
 
 Through this hands-on course, you've learned how to:
@@ -49,8 +47,9 @@ You're now equipped with the foundational knowledge to start developing your own
 
 ## Next steps to build your skills
 
-Here are our top 3 suggestions for what to do next:
+Here are our top suggestions for what to do next:
 
+- Learn to configure your pipeline for different compute environments with [Configure Execution](../config_exec/index.md)
 - Apply Nextflow to a scientific analysis use case with [Nextflow for Science](../nf4_science/index.md)
 - Get started with nf-core with [Build with nf-core](../nfcore_build/index.md)
 - Explore more advanced Nextflow features with the [Side Quests](../side_quests/index.md)

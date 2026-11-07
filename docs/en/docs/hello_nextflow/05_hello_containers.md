@@ -344,8 +344,8 @@ ls /my_project
 ??? success "Command output"
 
     ```console
-    data               hello-config.nf      hello-modules.nf   hello-world.nf  nextflow.config  solutions         work
-    hello-channels.nf  hello-containers.nf  hello-workflow.nf  modules         results          test-params.json
+    data               hello-containers.nf  hello-workflow.nf  modules          results    work
+    hello-channels.nf  hello-modules.nf     hello-world.nf     nextflow.config  solutions
     ```
 
 You can now see the contents of the working directory from inside the container, including the `greetings.csv` file under `data/`.
@@ -782,10 +782,7 @@ This tells Nextflow that _if the use of Docker is enabled_, it should use the co
 #### 2.3.2. Enable use of Docker via the `nextflow.config` file
 
 Notice we said _'if the use of Docker is enabled'_. By default, it is not, so we need to tell Nextflow it's allowed to use Docker.
-To that end, we are going to slightly anticipate the topic of the next and last part of this course (Part 6), which covers configuration.
-
-One of the main ways Nextflow offers for configuring workflow execution is to use a `nextflow.config` file.
-When such a file is present in the current directory, Nextflow will automatically load it in and apply any configuration it contains.
+We do that in the `nextflow.config` file, which, as you saw in [Nextflow Run](../nextflow_run/02_configure_pipeline.md), Nextflow loads automatically when it is present in the current directory.
 
 We provided a `nextflow.config` file with a single line of code that explicitly disables Docker: `docker.enabled = false`.
 
@@ -1110,9 +1107,8 @@ You know how to use containers in Nextflow to run processes.
 
 Take a break!
 
-When you're ready, move on to [**Part 6: Hello Config**](./06_hello_config.md) to learn how to configure the execution of your pipeline to fit your infrastructure as well as manage configuration of inputs and parameters.
-
-It's the very last part, and then you'll be done with this course!
+You've completed the Hello Nextflow course.
+See [Next steps](next_steps.md) for where to go from here.
 
 ---
 
