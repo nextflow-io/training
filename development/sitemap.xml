@@ -85,6 +85,10 @@
          <lastmod>2026-11-09</lastmod>
     </url>
     <url>
+         <loc>https://training.nextflow.io/hello_nextflow/06_hello_config/</loc>
+         <lastmod>2026-11-09</lastmod>
+    </url>
+    <url>
          <loc>https://training.nextflow.io/hello_nextflow/next_steps/</loc>
          <lastmod>2026-11-09</lastmod>
     </url>
@@ -114,6 +118,10 @@
     </url>
     <url>
          <loc>https://training.nextflow.io/hello_nextflow/transcripts/05_hello_containers/</loc>
+         <lastmod>2026-11-09</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/hello_nextflow/transcripts/06_hello_config/</loc>
          <lastmod>2026-11-09</lastmod>
     </url>
     <url>

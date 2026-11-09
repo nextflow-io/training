@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://training.nextflow.io/hello_nextflow/next_steps/">
       
       
-        <link rel="prev" href="../05_hello_containers/">
+        <link rel="prev" href="../06_hello_config/">
       
       
         <link rel="next" href="../survey/">
@@ -1073,6 +1073,16 @@ md-nav__item--active md-nav__item--nested">
       
 <span class="md-ellipsis">
     Part 5: Hello Containers   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../06_hello_config/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 6: Hello Config   
 </span>
   
   </a>
@@ -2594,7 +2604,7 @@ md-nav__item--active">
 </figure>
 <h2 id="your-journey">Your journey<a class="headerlink" href="#your-journey" title="Permanent link">&para;</a></h2>
 <p>You started with a very basic workflow that ran a hardcoded command.
-Over the course of five parts, you transformed that basic workflow into a modular multi-step pipeline that exercises key features of Nextflow including channels, operators, modules, and built-in support for containers.</p>
+Over the course of six parts, you transformed that basic workflow into a modular multi-step pipeline that exercises key features of Nextflow including channels, operators, built-in support for containers, and configuration options.</p>
 <h3 id="what-you-built">What you built<a class="headerlink" href="#what-you-built" title="Permanent link">&para;</a></h3>
 <ul>
 <li>The final form of the Hello workflow takes as input a CSV file containing text greetings.</li>
@@ -2617,6 +2627,7 @@ Over the course of five parts, you transformed that basic workflow into a modula
 <li><strong><code>collectGreetings</code>:</strong> Collects all uppercase greetings into a single batch file</li>
 <li><strong><code>cowpy</code>:</strong> Generates ASCII art using the <code>cowpy</code> tool</li>
 </ol>
+<p>The workflow configuration supports providing inputs and parameters in a flexible, reproducible way.</p>
 <h3 id="skills-acquired">Skills acquired<a class="headerlink" href="#skills-acquired" title="Permanent link">&para;</a></h3>
 <p>Through this hands-on course, you've learned how to:</p>
 <ul>
@@ -2628,9 +2639,8 @@ Over the course of five parts, you transformed that basic workflow into a modula
 </ul>
 <p>You're now equipped with the foundational knowledge to start developing your own pipelines in Nextflow.</p>
 <h2 id="next-steps-to-build-your-skills">Next steps to build your skills<a class="headerlink" href="#next-steps-to-build-your-skills" title="Permanent link">&para;</a></h2>
-<p>Here are our top suggestions for what to do next:</p>
+<p>Here are our top 3 suggestions for what to do next:</p>
 <ul>
-<li>Learn to configure your pipeline for different compute environments with <a href="../../config_exec/">Configure Execution</a></li>
 <li>Apply Nextflow to a scientific analysis use case with <a href="../../nf4_science/">Nextflow for Science</a></li>
 <li>Get started with nf-core with <a href="../../nfcore_build/">Build with nf-core</a></li>
 <li>Explore more advanced Nextflow features with the <a href="../../side_quests/">Side Quests</a></li>
@@ -4379,7 +4389,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../05_hello_containers/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Part 5: Hello Containers">
+          <a href="../06_hello_config/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Part 6: Hello Config">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -4389,7 +4399,7 @@ window.mkdocsQuizConfig = {
                 Previous
               </span>
               <div class="md-ellipsis">
-                Part 5: Hello Containers
+                Part 6: Hello Config
               </div>
             </div>
           </a>
