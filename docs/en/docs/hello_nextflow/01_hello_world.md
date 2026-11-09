@@ -12,10 +12,6 @@
 
 In this course, you write the Hello pipeline you ran in [Nextflow Run](../nextflow_run/index.md), one piece at a time; see the [course overview](./index.md) for the plan.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
-</figure>
-
 In this first part, you start from a script that does a single thing, writing 'Hello World!' to a file.
 You examine and run it, publish its output, and make the greeting configurable from the command line.
 
