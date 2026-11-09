@@ -37,7 +37,16 @@ This time, we're going to make the following changes to our workflow to better r
 ## 0. Warmup: Run `hello-workflow.nf`
 
 We're going to use the workflow script `hello-workflow.nf` as a starting point.
-It is equivalent to the script produced by working through Part 2 of this training course, except we've removed the `view()` statements.
+It is equivalent to the script produced by working through Part 2 of this training course, except we've removed the `view()` statements and changed the output destination:
+
+```groovy title="hello-workflow.nf" linenums="37" hl_lines="3"
+output {
+    first_output {
+        path 'hello_workflow'
+        mode 'copy'
+    }
+}
+```
 
 This diagram summarizes the current operation of the workflow.
 It should look familiar, except now we're explicitly showing that the outputs of the process are packaged in a channel, just like the inputs were.
@@ -68,21 +77,21 @@ nextflow run hello-workflow.nf
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - Bonjour-output.txt
-        - Hello-output.txt
-        - Hola-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
     ```
 
-As previously, you will find the output files in the `results` directory, alongside the outputs of the previous parts.
+As previously, you will find the output files in the location specified in the `output` block.
+For this chapter, it's under `results/hello_workflow/`.
 
 ??? abstract "Directory contents"
 
     ```console
-    results
-    ├── Bonjour-output.txt -> /workspaces/training/hello-nextflow/work/.../Bonjour-output.txt
-    ├── Hello-output.txt -> /workspaces/training/hello-nextflow/work/.../Hello-output.txt
-    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/.../Hola-output.txt
-    └── output.txt -> /workspaces/training/hello-nextflow/work/.../output.txt
+    results/hello_workflow
+    ├── Bonjour-output.txt
+    ├── Hello-output.txt
+    └── Hola-output.txt
     ```
 
 If that worked for you, you're ready to learn how to assemble a multi-step workflow.
@@ -266,13 +275,15 @@ In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="61" hl_lines="5-7"
+    ```groovy title="hello-workflow.nf" linenums="61" hl_lines="6-9"
     output {
         first_output {
-            path '.'
+            path 'hello_workflow'
+            mode 'copy'
         }
         uppercased {
-            path '.'
+            path 'hello_workflow'
+            mode 'copy'
         }
     }
     ```
@@ -282,19 +293,23 @@ In the `output` block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="61"
     output {
         first_output {
-            path '.'
+            path 'hello_workflow'
+            mode 'copy'
         }
     }
     ```
 
 Once again, the logic is the same as before.
 
-Each output has its own entry, so you can set a different path for each one.
-For now they all go to the top level of the output directory; in section 3, you'll organize them into subdirectories.
+This shows you that you can control the output settings at a very granular level, for every individual output.
+Feel free to try changing the paths or the publish mode for one of the processes to see what happens.
+
+Of course, that does mean we're repeating some information here, which could become inconvenient if we wanted to update the location for all the outputs in the same way.
+Later in the course, you'll learn how to configure these settings for multiple outputs in a structured way.
 
 ### 1.6. Run the workflow with `-resume`
 
-Let's test this using the `-resume` flag, which you used in Nextflow Run, since we've already run the first step of the workflow successfully.
+Let's test this using the `-resume` flag, since we've already run the first step of the workflow successfully.
 
 ```bash
 nextflow run hello-workflow.nf -resume
@@ -316,30 +331,29 @@ nextflow run hello-workflow.nf -resume
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - Hello-output.txt
-        - Hola-output.txt
-        - Bonjour-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
+        - hello_workflow/Bonjour-output.txt
       uppercased:
-        - UPPER-Hola-output.txt
-        - UPPER-Hello-output.txt
-        - UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Bonjour-output.txt
     ```
 
 There is now an extra line in the console output that corresponds to the new process we just added.
 
-You'll find the outputs in the `results` directory as set in the `output` block.
+You'll find the outputs in the `results/hello_workflow` directory as set in the `output` block.
 
 ??? abstract "Directory contents"
 
     ```console
-    results
-    ├── Bonjour-output.txt -> /workspaces/training/hello-nextflow/work/.../Bonjour-output.txt
-    ├── Hello-output.txt -> /workspaces/training/hello-nextflow/work/.../Hello-output.txt
-    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/.../Hola-output.txt
-    ├── output.txt -> /workspaces/training/hello-nextflow/work/.../output.txt
-    ├── UPPER-Bonjour-output.txt -> /workspaces/training/hello-nextflow/work/.../UPPER-Bonjour-output.txt
-    ├── UPPER-Hello-output.txt -> /workspaces/training/hello-nextflow/work/.../UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt -> /workspaces/training/hello-nextflow/work/.../UPPER-Hola-output.txt
+    results/hello_workflow/
+    ├── Bonjour-output.txt
+    ├── Hello-output.txt
+    ├── Hola-output.txt
+    ├── UPPER-Bonjour-output.txt
+    ├── UPPER-Hello-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 That's convenient! But it's still worth taking a look inside the work directory of one of the calls to the second process.
@@ -571,16 +585,19 @@ In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="8-10"
+    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="10-13"
     output {
         first_output {
-            path '.'
+            path 'hello_workflow'
+            mode 'copy'
         }
         uppercased {
-            path '.'
+            path 'hello_workflow'
+            mode 'copy'
         }
         collected {
-            path '.'
+            path 'hello_workflow'
+            mode 'copy'
         }
     }
     ```
@@ -590,10 +607,12 @@ In the `output` block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="82"
     output {
         first_output {
-            path '.'
+            path 'hello_workflow'
+            mode 'copy'
         }
         uppercased {
-            path '.'
+            path 'hello_workflow'
+            mode 'copy'
         }
     }
     ```
@@ -623,17 +642,17 @@ nextflow run hello-workflow.nf -resume
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - Hello-output.txt
-        - Bonjour-output.txt
-        - Hola-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hola-output.txt
       uppercased:
-        - UPPER-Hello-output.txt
-        - UPPER-Bonjour-output.txt
-        - UPPER-Hola-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
       collected:
-        - COLLECTED-output.txt
-        - COLLECTED-output.txt
-        - COLLECTED-output.txt
+        - hello_workflow/COLLECTED-output.txt
+        - hello_workflow/COLLECTED-output.txt
+        - hello_workflow/COLLECTED-output.txt
     ```
 
 It runs successfully, including the third step.
@@ -645,7 +664,7 @@ Now have a look at the contents of the final output file.
 
 ??? abstract "File contents"
 
-    ```console title="results/COLLECTED-output.txt"
+    ```console title="results/hello_workflow/COLLECTED-output.txt"
     HOLA
     ```
 
@@ -743,14 +762,14 @@ nextflow run hello-workflow.nf -resume
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - Hello-output.txt
-        - Bonjour-output.txt
-        - Hola-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hola-output.txt
       uppercased:
-        - UPPER-Bonjour-output.txt
-        - UPPER-Hello-output.txt
-        - UPPER-Hola-output.txt
-      collected: COLLECTED-output.txt
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+      collected: hello_workflow/COLLECTED-output.txt
     ```
 
 It runs successfully, although the log output may look a little messier than this (we cleaned it up for readability).
@@ -771,7 +790,7 @@ Finally, you can have a look at the contents of the output file to satisfy yours
 
 ??? abstract "File contents"
 
-    ```console title="results/COLLECTED-output.txt"
+    ```console title="results/hello_workflow/COLLECTED-output.txt"
     BONJOUR
     HELLO
     HOLA
@@ -962,50 +981,6 @@ You see that to provide multiple inputs to a process, you simply list them in th
 
     You MUST provide the inputs to the process in the EXACT SAME ORDER as they are listed in the input definition block of the process.
 
-#### 3.2.3. Use the batch name to organize the outputs
-
-The `batch` parameter is also a good way to keep the results of different batches apart.
-Each output's `path` can include parameter values, so you can publish each batch to its own subdirectory, and group the intermediate files in a subdirectory of their own.
-
-In the `output` block, make the following code change:
-
-=== "After"
-
-    ```groovy title="hello-workflow.nf" linenums="83" hl_lines="3 6 9"
-    output {
-        first_output {
-            path "${params.batch}/intermediates"
-        }
-        uppercased {
-            path "${params.batch}/intermediates"
-        }
-        collected {
-            path "${params.batch}/intermediates"
-        }
-    }
-    ```
-
-=== "Before"
-
-    ```groovy title="hello-workflow.nf" linenums="83"
-    output {
-        first_output {
-            path '.'
-        }
-        uppercased {
-            path '.'
-        }
-        collected {
-            path '.'
-        }
-    }
-    ```
-
-The double quotes are required for Nextflow to insert the parameter value into the path, as in a process script.
-
-This is how a pipeline author decides how the results are organized.
-As you saw in Nextflow Run, the person running the pipeline can change the location of the output directory, but not the organization within it, except through parameters like `batch` that the author builds into the paths.
-
 ### 3.3. Run the workflow
 
 Let's try running this with a batch name on the command line.
@@ -1031,21 +1006,21 @@ nextflow run hello-workflow.nf -resume --batch trio
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - trio/intermediates/Bonjour-output.txt
-        - trio/intermediates/Hello-output.txt
-        - trio/intermediates/Hola-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
       uppercased:
-        - trio/intermediates/UPPER-Bonjour-output.txt
-        - trio/intermediates/UPPER-Hola-output.txt
-        - trio/intermediates/UPPER-Hello-output.txt
-      collected: trio/intermediates/COLLECTED-trio-output.txt
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+      collected: hello_workflow/COLLECTED-trio-output.txt
     ```
 
 It runs successfully and produces the desired output:
 
 ??? abstract "File contents"
 
-    ```console title="results/trio/intermediates/COLLECTED-trio-output.txt"
+    ```console title="results/hello_workflow/COLLECTED-trio-output.txt"
     HELLO
     BONJOUR
     HOLA
@@ -1087,7 +1062,7 @@ This will require two key changes to the process definition: we need a way to co
 
 Conveniently, Nextflow lets us add arbitrary code in the `script:` block of the process definition, which comes in really handy for doing things like this.
 
-That means we can use Nextflow's built-in `size()` function to get the number of files in the `input_files` list, and write the result to file with an `echo` command.
+That means we can use Nextflow's built-in `size()` function to get the number of files in the `input_files` array, and write the result to file with an `echo` command.
 
 In the `collectGreetings` process block, make the following code changes:
 
@@ -1098,7 +1073,7 @@ In the `collectGreetings` process block, make the following code changes:
         count_greetings = input_files.size()
         """
         cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-        echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-report.txt'
+        echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
         """
     ```
 
@@ -1112,20 +1087,6 @@ In the `collectGreetings` process block, make the following code changes:
     ```
 
 The `count_greetings` variable will be computed at runtime.
-
-??? note "What if there is only one greeting?"
-
-    If you run the workflow on a CSV file that contains a single greeting, the report claims a much larger number of greetings.
-    With a single item in the channel, `input_files` holds one file instead of a list of files, and `size()` returns the size of that file in bytes.
-
-    To make Nextflow always provide a list, declare how many files the input accepts with the `arity` option:
-
-    ```groovy
-    input:
-    path input_files, arity: '1..*'
-    ```
-
-    A value of `'1..*'` means one or more files.
 
 #### 4.1.2. Emit the report file and name outputs
 
@@ -1207,41 +1168,48 @@ In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="87" hl_lines="11-13"
+    ```groovy title="hello-workflow.nf" linenums="86" hl_lines="14-17"
     output {
         first_output {
-            path "${params.batch}/intermediates"
+            path 'hello_workflow'
+            mode 'copy'
         }
         uppercased {
-            path "${params.batch}/intermediates"
+            path 'hello_workflow'
+            mode 'copy'
         }
         collected {
-            path "${params.batch}/intermediates"
+            path 'hello_workflow'
+            mode 'copy'
         }
         batch_report {
-            path "${params.batch}"
+            path 'hello_workflow'
+            mode 'copy'
         }
     }
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="87"
+    ```groovy title="hello-workflow.nf" linenums="80"
     output {
         first_output {
-            path "${params.batch}/intermediates"
+            path 'hello_workflow'
+            mode 'copy'
         }
         uppercased {
-            path "${params.batch}/intermediates"
+            path 'hello_workflow'
+            mode 'copy'
         }
         collected {
-            path "${params.batch}/intermediates"
+            path 'hello_workflow'
+            mode 'copy'
         }
     }
     ```
 
 We don't need to update the `collected` output definition since that name hasn't changed.
-We just need to add the new output, which we publish at the top level of the batch directory, since it is a final result rather than an intermediate file.
+We just need to add the new output.
 
 ### 4.3. Run the workflow
 
@@ -1268,24 +1236,24 @@ nextflow run hello-workflow.nf -resume --batch trio
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - trio/intermediates/Bonjour-output.txt
-        - trio/intermediates/Hello-output.txt
-        - trio/intermediates/Hola-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
       uppercased:
-        - trio/intermediates/UPPER-Bonjour-output.txt
-        - trio/intermediates/UPPER-Hola-output.txt
-        - trio/intermediates/UPPER-Hello-output.txt
-      collected: trio/intermediates/COLLECTED-trio-output.txt
-      batch_report: trio/trio-report.txt
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+      collected: hello_workflow/COLLECTED-trio-output.txt
+      batch_report: hello_workflow/trio-report.txt
     ```
 
-If you look in the `results/trio/` directory, you'll find the new report file, `trio-report.txt`.
+If you look in the `results/hello_workflow/` directory, you'll find the new report file, `trio-report.txt`.
 Open it to verify that the workflow correctly reported the count of greetings that were processed.
 
 ??? abstract "File contents"
 
     ```txt title="trio-report.txt"
-    Number of greetings processed: 3
+    There were 3 greetings in this batch.
     ```
 
 <figure class="excalidraw">

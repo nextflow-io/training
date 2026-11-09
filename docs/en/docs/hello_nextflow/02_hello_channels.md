@@ -30,7 +30,16 @@ You will also learn to use [**operators**](https://nextflow.io/docs/latest/refer
 ## 0. Warmup: Run `hello-channels.nf`
 
 We're going to use the workflow script `hello-channels.nf` as a starting point.
-It is equivalent to the script produced by working through Part 1 of this training course.
+It is equivalent to the script produced by working through Part 1 of this training course, except we've changed the output destination:
+
+```groovy title="hello-channels.nf" linenums="37" hl_lines="3"
+output {
+    first_output {
+        path 'hello_channels'
+        mode 'copy'
+    }
+}
+```
 
 Just to make sure everything is working, run the script once before making any changes:
 
@@ -52,21 +61,25 @@ nextflow run hello-channels.nf --input 'Hello Channels!'
 
       /workspaces/training/hello-nextflow/results
 
-      first_output: output.txt
+      first_output: hello_channels/output.txt
     ```
 
-As previously, you will find the output file named `output.txt` in the `results` directory.
+As previously, you will find the output file named `output.txt` in the `results/hello_channels` directory (as specified in the `output` block of the workflow script, shown above).
 
 ??? abstract "Directory contents"
 
-    ```console title="results"
+    ```console title="results/hello_channels" hl_lines="2-3"
     results
-    └── output.txt -> /workspaces/training/hello-nextflow/work/6f/824bc1.../output.txt
+    ├── hello_channels
+    │   └── output.txt
+    ├── hello_world
+    │   └── output.txt
+    └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
     ```
 
 ??? abstract "File contents"
 
-    ```console title="results/output.txt"
+    ```console title="results/hello_channels/output.txt"
     Hello Channels!
     ```
 
@@ -199,7 +212,7 @@ nextflow run hello-channels.nf
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - output.txt
+        - hello_channels/output.txt
     ```
 
 If you made both edits correctly, you should get a successful execution.
@@ -207,7 +220,7 @@ You can check the results directory to satisfy yourself that the outcome is stil
 
 ??? abstract "File contents"
 
-    ```console title="results/output.txt"
+    ```console title="results/hello_channels/output.txt"
     Hello Channels!
     ```
 
@@ -282,7 +295,7 @@ nextflow run hello-channels.nf
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - output.txt
+        - hello_channels/output.txt
     ```
 
 As you can see, this outputs the channel contents to the console.
@@ -357,9 +370,9 @@ nextflow run hello-channels.nf
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - output.txt
-        - output.txt
-        - output.txt
+        - hello_channels/output.txt
+        - hello_channels/output.txt
+        - hello_channels/output.txt
     ```
 
 It certainly seems to have run just fine.
@@ -369,14 +382,18 @@ However, there is still only one output in the results directory:
 
 ??? abstract "Directory contents"
 
-    ```console title="results"
+    ```console title="results/hello_channels" hl_lines="3"
     results
-    └── output.txt -> /workspaces/training/hello-nextflow/work/.../output.txt
+    ├── hello_channels
+    │   └── output.txt
+    ├── hello_world
+    │   └── output.txt
+    └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
     ```
 
 ??? abstract "File contents"
 
-    ```console title="results/output.txt"
+    ```console title="results/hello_channels/output.txt"
     Hola
     ```
 
@@ -444,9 +461,9 @@ nextflow run hello-channels.nf -ansi-log false
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - output.txt
-        - output.txt
-        - output.txt
+        - hello_channels/output.txt
+        - hello_channels/output.txt
+        - hello_channels/output.txt
     ```
 
 This time we see all three process runs and their associated work subdirectories listed in the output.
@@ -615,9 +632,9 @@ nextflow run hello-channels.nf
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - Bonjour-output.txt
-        - Hola-output.txt
-        - Hello-output.txt
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hola-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 Reverting back to the summary view, the output is summarized on one line again.
@@ -626,11 +643,11 @@ Have a look at the `results` directory to see if all the output greetings are th
 ??? abstract "Directory contents"
 
     ```console
-    results
-    ├── Bonjour-output.txt -> /workspaces/training/hello-nextflow/work/.../Bonjour-output.txt
-    ├── Hello-output.txt -> /workspaces/training/hello-nextflow/work/.../Hello-output.txt
-    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/.../Hola-output.txt
-    └── output.txt -> /workspaces/training/hello-nextflow/work/.../output.txt
+    results/hello_channels/
+    ├── Bonjour-output.txt
+    ├── Hello-output.txt
+    ├── Hola-output.txt
+    └── output.txt
     ```
 
 ??? abstract "File contents"
@@ -983,9 +1000,9 @@ nextflow run hello-channels.nf
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - Bonjour-output.txt
-        - Hola-output.txt
-        - Hello-output.txt
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hola-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 This time it works AND gives us the additional insight into what the contents of the channel look like before and after we run the `flatten()` operator.
@@ -1374,9 +1391,9 @@ nextflow run hello-channels.nf
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - Hola-output.txt
-        - Bonjour-output.txt
-        - Hello-output.txt
+        - hello_channels/Hola-output.txt
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 This time it should run without error.

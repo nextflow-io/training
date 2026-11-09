@@ -21,7 +21,7 @@ process collectGreetings {
     count_greetings = input_files.size()
     """
     cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-    echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-report.txt'
+    echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
     """
 }
 
@@ -56,15 +56,19 @@ workflow {
 
 output {
     first_output {
-        path "${params.batch}/intermediates"
+        path 'hello_modules'
+        mode 'copy'
     }
     uppercased {
-        path "${params.batch}/intermediates"
+        path 'hello_modules'
+        mode 'copy'
     }
     collected {
-        path "${params.batch}/intermediates"
+        path 'hello_modules'
+        mode 'copy'
     }
     batch_report {
-        path "${params.batch}"
+        path 'hello_modules'
+        mode 'copy'
     }
 }

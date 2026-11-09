@@ -9,8 +9,8 @@ include { collectGreetings } from './modules/collectGreetings.nf'
  * Pipeline parameters
  */
 params {
-    input: Path
-    batch: String
+    input: Path = 'data/greetings.csv'
+    batch: String = 'batch'
 }
 
 workflow {
@@ -36,15 +36,19 @@ workflow {
 
 output {
     first_output {
-        path "${params.batch}/intermediates"
+        path 'hello_containers'
+        mode 'copy'
     }
     uppercased {
-        path "${params.batch}/intermediates"
+        path 'hello_containers'
+        mode 'copy'
     }
     collected {
-        path "${params.batch}/intermediates"
+        path 'hello_containers'
+        mode 'copy'
     }
     batch_report {
-        path "${params.batch}"
+        path 'hello_containers'
+        mode 'copy'
     }
 }
