@@ -1422,6 +1422,112 @@ When you're ready, move on to [**Part 3: Hello Workflow**](./03_hello_workflow.m
 
 ---
 
+## Bonus exercises
+
+These optional exercises let you practice what you learned in this part.
+Each one can be solved with what this part covered; open the hint if you get stuck.
+The solutions are also in `solutions/2-hello-channels/bonus/`.
+
+### Exercise 1: Read a CSV file with a header row
+
+Many CSV files start with a header row that names the columns.
+Create a copy of `data/names.csv` called `data/names-header.csv`, and add the header row `name,language,character` at the top.
+Then adapt `hello-channels.nf` so that it reads this file and picks the name by its column name instead of its position.
+The workflow should still greet the same three names.
+
+??? tip "Hint"
+
+    `splitCsv()` has a `header` option.
+    With `header: true`, each row becomes a set of named values, so you can write `row.name` instead of `row[0]`.
+
+??? solution
+
+    ```csv title="data/names-header.csv"
+    name,language,character
+    Mateo,spanish,squirrel
+    Andrea,italian,turtle
+    Celine,french,moose
+    ```
+
+    Point the `input` parameter to the new file:
+
+    ```groovy title="hello-channels.nf" linenums="23" hl_lines="2"
+    params {
+        input: Path = 'data/names-header.csv'
+    }
+    ```
+
+    Then parse the header and pick the column by name:
+
+    ```groovy title="hello-channels.nf" linenums="31" hl_lines="3 5"
+        name_ch = channel.fromPath(params.input)
+                            .view { csv -> "Before splitCsv: $csv" }
+                            .splitCsv(header: true)
+                            .view { row -> "After splitCsv: $row" }
+                            .map { row -> row.name }
+                            .view { name -> "After map: $name" }
+    ```
+
+    Run the workflow:
+
+    ```bash
+    nextflow run hello-channels.nf
+    ```
+
+    ```console title="Output (excerpt)"
+    After splitCsv: [name:Mateo, language:spanish, character:squirrel]
+    After splitCsv: [name:Andrea, language:italian, character:turtle]
+    After splitCsv: [name:Celine, language:french, character:moose]
+    After map: Mateo
+    After map: Andrea
+    After map: Celine
+    ```
+
+    Each row is now a set of named values, and the header row itself is not passed on as a row.
+
+### Exercise 2: Greet only the French names
+
+Starting from `hello-channels.nf` as you left it at the end of this part, change the workflow so that it only greets the names whose language, in the second column of `data/names.csv`, is `french`.
+Only one greeting file should be produced.
+
+??? tip "Hint"
+
+    Use the [`filter()`](https://nextflow.io/docs/latest/reference/operator.html#filter) operator.
+    Like `map()`, it takes a closure, and keeps only the elements for which the closure returns `true`.
+
+??? solution
+
+    Add a `filter()` step between `splitCsv()` and `map()`, while each row still holds all its columns:
+
+    ```groovy title="hello-channels.nf" linenums="31" hl_lines="5"
+        name_ch = channel.fromPath(params.input)
+                            .view { csv -> "Before splitCsv: $csv" }
+                            .splitCsv()
+                            .view { row -> "After splitCsv: $row" }
+                            .filter { row -> row[1] == 'french' }
+                            .map { row -> row[0] }
+                            .view { name -> "After map: $name" }
+    ```
+
+    Run the workflow:
+
+    ```bash
+    nextflow run hello-channels.nf
+    ```
+
+    ```console title="Output (excerpt)"
+    [42/6d5454] sayHello (1) | 1 of 1 ✔
+    Before splitCsv: /workspaces/training/hello-nextflow/data/names.csv
+    After splitCsv: [Mateo, spanish, squirrel]
+    After splitCsv: [Andrea, italian, turtle]
+    After splitCsv: [Celine, french, moose]
+    After map: Celine
+    ```
+
+    All three rows are read, but only Celine's row passes the filter, so `sayHello` runs once and writes `Hello, Celine!`.
+
+---
+
 ## Quiz
 
 <quiz>

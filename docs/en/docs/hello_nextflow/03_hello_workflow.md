@@ -1351,6 +1351,149 @@ When you're ready, move on to [**Part 4: Hello Modules**](./04_hello_modules.md)
 
 ---
 
+## Bonus exercises
+
+These optional exercises let you practice what you learned in this part.
+Each one can be solved with what this part covered; open the hint if you get stuck.
+The solutions are also in `solutions/3-hello-workflow/bonus/`.
+
+### Exercise 1: Sort the collected greetings
+
+As the note in section 2.4.3 points out, the order of the greetings in the collected file can change from one run to the next.
+Starting from `hello-workflow.nf` as it stands at the end of this part, modify `collectGreetings` so that the greetings in the collected file are always in the same order.
+Run it with `--batch sorted` and check `results/sorted/intermediates/COLLECTED-sorted-output.txt`.
+
+??? tip "Hint"
+
+    The script block can hold a shell pipeline: the `sort` command sorts its input lines alphabetically.
+
+??? solution
+
+    Pipe the concatenated files through `sort` before writing the collected file:
+
+    ```groovy title="hello-workflow.nf" linenums="67" hl_lines="4"
+        script:
+        count_greetings = input_files.size()
+        """
+        cat ${input_files} | sort > 'COLLECTED-${batch_name}-output.txt'
+        echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-report.txt'
+        """
+    ```
+
+    ```bash
+    nextflow run hello-workflow.nf --batch sorted
+    ```
+
+    The greetings are now in alphabetical order, whatever order the tasks finished in:
+
+    ```console title="results/sorted/intermediates/COLLECTED-sorted-output.txt"
+    Bonjour, Andrea!
+    Bonjour, Celine!
+    Bonjour, Mateo!
+    ```
+
+### Exercise 2: Add a language
+
+Starting from `hello-workflow.nf` as it stands at the end of this part, add Portuguese to the languages that `translateGreeting` can translate into.
+Run the workflow with `--language portuguese --batch portuguese` and check the collected file.
+
+??? tip "Hint"
+
+    Only the `translations` dictionary in the Python script needs to change; use a romanized greeting such as `Ola`.
+
+??? solution
+
+    Add an entry to the dictionary:
+
+    ```groovy title="hello-workflow.nf" linenums="43" hl_lines="2"
+            'english': 'Hello',
+            'portuguese': 'Ola',
+        }
+    ```
+
+    ```bash
+    nextflow run hello-workflow.nf --language portuguese --batch portuguese
+    ```
+
+    ```console title="results/portuguese/intermediates/COLLECTED-portuguese-output.txt"
+    Ola, Celine!
+    Ola, Andrea!
+    Ola, Mateo!
+    ```
+
+### Challenge: Translate each name into its own language
+
+The second column of `data/names.csv` gives a language for each name.
+Starting from `hello-workflow.nf` as it stands at the end of this part, translate each greeting into the language of its own row, instead of one language for the whole batch.
+Run it with `--batch mixed` and check that the collected file contains `Hola, Mateo!`, `Ciao, Andrea!` and `Bonjour, Celine!`.
+
+??? tip "Hint"
+
+    Each item now needs to carry two values, the name and its language, through `sayHello` to `translateGreeting`.
+    A channel element can be a list of values, and a process can accept and emit it with a `tuple`:
+
+    ```groovy
+    .map { row -> [row[0], row[1]] }       // channel elements: [name, language]
+
+    input:
+    tuple val(name), val(language)          // in sayHello
+
+    output:
+    tuple path("${name}-output.txt"), val(language)
+    ```
+
+    `translateGreeting` then takes `tuple path(input_file), val(language)` as its only input.
+
+??? solution
+
+    Keep both columns in the channel:
+
+    ```groovy title="hello-workflow.nf" linenums="86" hl_lines="3"
+        name_ch = channel.fromPath(params.input)
+                            .splitCsv()
+                            .map { row -> [row[0], row[1]] }
+    ```
+
+    Make `sayHello` accept the pair and pass the language along with its output:
+
+    ```groovy title="hello-workflow.nf" linenums="6" hl_lines="4 7"
+    process sayHello {
+
+        input:
+        tuple val(name), val(language)
+
+        output:
+        tuple path("${name}-output.txt"), val(language)
+    ```
+
+    Make `translateGreeting` take that pair as a single input:
+
+    ```groovy title="hello-workflow.nf" linenums="25" hl_lines="2"
+        input:
+        tuple path(input_file), val(language)
+    ```
+
+    Then call it with the output of `sayHello` alone, and remove the `language` parameter, which is no longer used:
+
+    ```groovy title="hello-workflow.nf" linenums="91" hl_lines="2"
+        // translate the greeting
+        translateGreeting(sayHello.out)
+    ```
+
+    ```bash
+    nextflow run hello-workflow.nf --batch mixed
+    ```
+
+    ```console title="results/mixed/intermediates/COLLECTED-mixed-output.txt"
+    Hola, Mateo!
+    Ciao, Andrea!
+    Bonjour, Celine!
+    ```
+
+    The `first_output` entries in the console output now show each file next to its language, since `sayHello` emits pairs; the files themselves are published as before.
+
+---
+
 ## Quiz
 
 <quiz>

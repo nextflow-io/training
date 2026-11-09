@@ -679,6 +679,148 @@ When you're ready, move on to [**Part 5: Hello Containers**](./05_hello_containe
 
 ---
 
+## Bonus exercises
+
+These optional exercises let you practice what you learned in this part.
+Each one can be solved with what this part covered; open the hint if you get stuck.
+The solutions are also in `solutions/4-hello-modules/bonus/`.
+
+### Exercise 1: Add a profile for Spanish greetings
+
+Starting from your `hello-modules.nf` and `nextflow.config` at the end of this part, add a profile named `spanish` that sets the language to Spanish.
+Then run the workflow with both the `test` and `spanish` profiles, and check that the collected greetings are in Spanish.
+
+??? tip "Hint"
+
+    Write it like the `test` profile, setting `params.language` instead of `params.input`.
+    To activate two profiles, separate their names with a comma.
+
+??? solution
+
+    In `nextflow.config`, add the `spanish` profile next to the `test` profile:
+
+    ```groovy title="nextflow.config" linenums="14" hl_lines="5-7"
+    profiles {
+        test {
+            params.input = 'data/names.csv'
+        }
+        spanish {
+            params.language = 'spanish'
+        }
+    }
+    ```
+
+    Then run the workflow with both profiles:
+
+    ```bash
+    nextflow run hello-modules.nf -profile test,spanish -resume
+    ```
+
+    ```console title="Command output"
+     N E X T F L O W   ~  version 26.04.4
+
+    Launching `hello-modules.nf` [sick_lamarr] revision: 6024dbeca6
+
+    executor >  local (4)
+    [cc/421316] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [f5/9d95df] translateGreeting (3) | 3 of 3 ✔
+    [83/bb51f1] collectGreetings      | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - batch/intermediates/Mateo-output.txt
+        - batch/intermediates/Andrea-output.txt
+        - batch/intermediates/Celine-output.txt
+
+      translated:
+        - batch/intermediates/spanish-Andrea-output.txt
+        - batch/intermediates/spanish-Mateo-output.txt
+        - batch/intermediates/spanish-Celine-output.txt
+
+      collected: batch/intermediates/COLLECTED-batch-output.txt
+
+      batch_report: batch/batch-report.txt
+    ```
+
+    The `sayHello` tasks are cached, and the translation runs again in Spanish:
+
+    ```console title="results/batch/intermediates/COLLECTED-batch-output.txt"
+    Hola, Andrea!
+    Hola, Mateo!
+    Hola, Celine!
+    ```
+
+### Exercise 2: Give each module its own folder
+
+Larger projects often store each module in its own folder, as `modules/<name>/main.nf`, so that files related to the module can sit next to it.
+Starting from your `hello-modules.nf` at the end of this part, move each module file into a folder of its own, with this layout, and update the workflow so it runs as before:
+
+```console
+modules
+├── collectGreetings
+│   └── main.nf
+├── sayHello
+│   └── main.nf
+└── translateGreeting
+    └── main.nf
+```
+
+??? tip "Hint"
+
+    Only the path in each `include` declaration changes.
+
+??? solution
+
+    After moving the files, update the `include` declarations in `hello-modules.nf`:
+
+    ```groovy title="hello-modules.nf" linenums="3" hl_lines="2-4"
+    // Include modules
+    include { sayHello } from './modules/sayHello/main.nf'
+    include { translateGreeting } from './modules/translateGreeting/main.nf'
+    include { collectGreetings } from './modules/collectGreetings/main.nf'
+    ```
+
+    Then run the workflow:
+
+    ```bash
+    nextflow run hello-modules.nf -profile test -resume
+    ```
+
+    ```console title="Command output"
+     N E X T F L O W   ~  version 26.04.4
+
+    Launching `hello-modules.nf` [compassionate_lavoisier] revision: 1a860c4bd9
+
+    [46/7b33a5] sayHello (3)          | 3 of 3, cached: 3 ✔
+    [5c/4b0005] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [81/055f3d] collectGreetings      | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - batch/intermediates/Mateo-output.txt
+        - batch/intermediates/Andrea-output.txt
+        - batch/intermediates/Celine-output.txt
+
+      translated:
+        - batch/intermediates/french-Celine-output.txt
+        - batch/intermediates/french-Mateo-output.txt
+        - batch/intermediates/french-Andrea-output.txt
+
+      collected: batch/intermediates/COLLECTED-batch-output.txt
+
+      batch_report: batch/batch-report.txt
+    ```
+
+    Every task is retrieved from the cache: moving a module to another file doesn't change the work it does.
+
+---
+
 ## Quiz
 
 <quiz>

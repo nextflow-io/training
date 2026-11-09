@@ -661,6 +661,89 @@ When you're ready, move on to [**Part 2: Hello Channels**](./02_hello_channels.m
 
 ---
 
+## Bonus exercises
+
+These optional exercises let you practice what you learned in this part.
+Each one can be solved with what this part covered; open the hint if you get stuck.
+The solutions are also in `solutions/1-hello-world/bonus/`.
+
+### Exercise 1: Add the date to the greeting file
+
+Starting from `hello-world.nf` as you left it at the end of this part, add a second command to the script block of `sayHello` that appends the current date to `output.txt`, on the line after the greeting.
+Run the workflow, check that the published file contains both lines, then look at the `.command.sh` file in the task directory to see the commands Nextflow ran.
+
+??? tip "Hint"
+
+    The `date` command prints the current date, and `>>` appends to a file instead of overwriting it: `date >> output.txt`.
+
+??? solution
+
+    ```groovy title="hello-world.nf" linenums="14" hl_lines="4"
+        script:
+        """
+        echo 'Hello, ${name}!' > output.txt
+        date >> output.txt
+        """
+    ```
+
+    Run the workflow:
+
+    ```bash
+    nextflow run hello-world.nf
+    ```
+
+    The published file contains the greeting, followed by the date (yours will differ):
+
+    ```console title="results/output.txt"
+    Hello, World!
+    Mon Nov  9 15:38:15 EST 2026
+    ```
+
+    The `.command.sh` file in the task directory shows both commands:
+
+    ```console title=".command.sh"
+    #!/bin/bash -ue
+    echo 'Hello, World!' > output.txt
+    date >> output.txt
+    ```
+
+### Exercise 2: Publish the output to a subdirectory
+
+Starting from `hello-world.nf` as you left it at the end of this part, change the workflow so that `output.txt` is published to a `greetings` subdirectory of the results directory, instead of the top level.
+Run the workflow and check where the file ends up.
+
+??? tip "Hint"
+
+    You only need to change one line, in the `output` block.
+
+??? solution
+
+    ```groovy title="hello-world.nf" linenums="37" hl_lines="3"
+    output {
+        first_output {
+            path 'greetings'
+        }
+    }
+    ```
+
+    Run the workflow:
+
+    ```bash
+    nextflow run hello-world.nf
+    ```
+
+    The `Outputs:` section of the console output shows the new location:
+
+    ```console
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: greetings/output.txt
+    ```
+
+---
+
 ## Quiz
 
 <quiz>
