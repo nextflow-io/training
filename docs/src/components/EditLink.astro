@@ -1,0 +1,55 @@
+---
+import Default from '@astrojs/starlight/components/EditLink.astro';
+import { Icon } from '@astrojs/starlight/components';
+
+const { editUrl, entry, locale, isFallback } = Astro.locals.starlightRoute;
+
+// The translation pipeline regenerates translated pages, so a direct edit would be overwritten.
+const translated = editUrl && locale && !isFallback;
+
+const repo = 'https://github.com/nextflow-io/training';
+const translatingUrl = `${repo}/blob/master/TRANSLATING.md`;
+const issueUrl =
+  translated &&
+  `${repo}/issues/new?${new URLSearchParams({
+    title: `Translation issue: ${entry.data.title}`,
+    body: [
+      `Page: ${Astro.url.href}`,
+      'Describe the issue with this translated page below.',
+      `Note: this page's content is AI-generated and regenerated from the English source on each translation run, so it can't be fixed with a direct edit here - see TRANSLATING.md (${translatingUrl}) for how the process works.`,
+    ].join('\n\n'),
+  })}`;
+---
+
+{translated ? (
+  <div class="sl-flex print:hidden">
+    <a href={issueUrl} class="sl-flex">
+      <Icon name="comment-alt" size="1.2em" />
+      Report an issue with this translation
+    </a>
+    <a href={translatingUrl} class="sl-flex">
+      <Icon name="translate" size="1.2em" />
+      Improve translation
+    </a>
+  </div>
+) : (
+  <Default />
+)}
+
+<style>
+  @layer starlight.core {
+    div {
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+    }
+    a {
+      gap: 0.5rem;
+      align-items: center;
+      text-decoration: none;
+      color: var(--sl-color-gray-3);
+    }
+    a:hover {
+      color: var(--sl-color-white);
+    }
+  }
+</style>

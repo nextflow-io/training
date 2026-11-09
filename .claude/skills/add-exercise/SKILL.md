@@ -1,6 +1,6 @@
 ---
 name: add-exercise
-description: Add an interactive exercise with solution to an existing lesson. Creates properly formatted exercise and solution admonition blocks. Use when a lesson needs hands-on practice.
+description: Add an interactive exercise with solution to an existing lesson. Creates properly formatted exercise and solution collapsible blocks. Use when a lesson needs hands-on practice.
 ---
 
 Add an exercise with solution to an existing training lesson.
@@ -17,62 +17,67 @@ Follow these steps:
 
 2. Read the lesson file to understand context
 
-3. Create the exercise using the `??? exercise` admonition:
+3. Create the exercise as a collapsible `<details class="exercise">` block, with the solution nested inside it as `<details class="solution">`.
+   Leave a blank line after each `<summary>` line and before each `</details>`, or the body does not render as Markdown:
 
-   ```markdown
-   ??? exercise "Exercise: [Title]"
+   ````mdx
+   <details class="exercise">
+   <summary>Exercise: [Title]</summary>
 
-       Brief description of what to do.
+   Brief description of what to do.
 
-       1. First step
-       2. Second step
-       3. Expected outcome
+   1. First step
+   2. Second step
+   3. Expected outcome
 
-       !!! tip
+   :::tip
+   Helpful hint if needed
+   :::
 
-           Helpful hint if needed
+   <details class="solution">
+   <summary>Solution</summary>
+
+   Explanation of the solution approach.
+
+   ```nextflow title="filename.nf" showLineNumbers
+   [solution code]
    ```
 
-4. Create the corresponding solution using `??? solution` or `??? result`:
+   ```bash
+   nextflow run filename.nf
+   # [!output]
+   [expected output]
+   ```
 
-   ````markdown
-   ??? solution "Solution"
+   </details>
 
-       Explanation of the solution approach.
-
-       ```groovy title="filename.nf" linenums="1"
-       [solution code]
-       ```
-
-       Expected output:
-
-       ```console title="Output"
-       [expected output]
-       ```
+   </details>
    ````
 
-5. If the exercise requires a solution file:
+   Add `open` (`<details class="exercise" open>`) only if the exercise should show without a click.
+
+4. If the exercise requires a solution file:
 
    - Create the solution script in `[module]/solutions/`
    - Follow naming convention matching the exercise
    - Ensure the solution script is complete and tested
    - Add comments explaining key parts
 
-6. Insert the exercise at an appropriate point in the lesson:
+5. Insert the exercise at an appropriate point in the lesson:
 
    - After explaining the relevant concept
    - Before the section's Takeaway
    - With clear connection to learning objectives
 
-7. Test the exercise:
+6. Test the exercise:
 
    - Verify instructions are clear
    - Confirm solution code works
    - Check that exercise difficulty is appropriate
    - Ensure expected output is correct
 
-8. Remind the user to:
+7. Remind the user to:
    - Test the solution code themselves
    - Consider if hints are needed
-   - Preview how it renders in the docs
+   - Preview how it renders in the docs (`/preview`)
    - Check that file paths in exercise are correct

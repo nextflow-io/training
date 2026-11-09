@@ -1,0 +1,48 @@
+```nextflow title="main.nf"
+workflow {
+}
+```
+
+```nextflow title="modules/local/collectGreetings.nf (excerpt)"
+process collectGreetings {
+}
+```
+
+```nextflow title="main.nf - Combined handlers"
+workflow.onError = {
+}
+```
+
+```nextflow title="nextflow.config"
+docker.enabled = true
+```
+
+```nextflow title="molkart/nextflow.config (excerpt)" nextflow="config"
+profiles {
+}
+```
+
+```groovy title="GreetingExtension.groovy"
+class GreetingExtension extends PluginExtensionPoint {
+}
+```
+
+```groovy title="build.gradle"
+plugins {
+    id 'io.nextflow.nextflow-plugin' version '1.0.0'
+}
+```
+
+```groovy title="tests/main.sayhello.nf.test"
+nextflow_process {
+}
+```
+
+```groovy title="Output"
+package training.plugin
+```
+
+```nextflow title="Output"
+#!/usr/bin/env nextflow
+params.input = 'greetings.csv'
+```

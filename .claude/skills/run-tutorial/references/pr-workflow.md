@@ -4,7 +4,7 @@ When the walkthrough identifies fixable issues, follow this workflow.
 
 ## 1. Independent Verification (MANDATORY for fixes that change lesson meaning)
 
-This step applies to any fix that changes what the lesson teaches or claims - a new or reworded explanation, a behavior claim, pedagogical framing, or where an explanation is placed. A fix that's mechanically checkable instead (a `grep` for a banned pattern returns zero matches, an `hl_lines` count is arithmetically correct, a hash-consistency check passes) can be confirmed directly by rerunning that exact check - skip ahead to step 2 once you've done so.
+This step applies to any fix that changes what the lesson teaches or claims - a new or reworded explanation, a behavior claim, pedagogical framing, or where an explanation is placed. A fix that's mechanically checkable instead (a `grep` for a banned pattern returns zero matches, a highlight range count is arithmetically correct, a hash-consistency check passes) can be confirmed directly by rerunning that exact check - skip ahead to step 2 once you've done so.
 
 For a fix that does qualify, it must be confirmed by a subagent that did not diagnose it - see [Delegation Pattern](../SKILL.md#delegation-pattern) in the main skill. Spawn a fresh subagent and hand it:
 
@@ -25,8 +25,8 @@ This catches a fix that suppresses a symptom (e.g., deleting a failing assertion
 
 **Auto-fixable** (apply programmatically):
 - Extra/missing whitespace in code blocks
-- Incorrect `hl_lines` values
-- Heading numbering errors (use `uv run .github/check_headings.py --fix`)
+- Incorrect highlight ranges (`{...}` on the fence, `# [!code highlight]` on output lines)
+- Heading numbering errors (use `uv run .github/check_headings.py --fix <page>.mdx`)
 - Minor formatting inconsistencies
 
 **Requires manual review** (present options to user):
@@ -66,7 +66,7 @@ Use descriptive branch names based on the tutorial being fixed.
 Stage only the files you're fixing:
 
 ```bash
-git add docs/path/to/file.md
+git add docs/src/content/docs/path/to/file.mdx
 git commit -m "Fix issues in <tutorial-name> tutorial
 
 - <bullet point for each fix>

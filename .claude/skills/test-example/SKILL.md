@@ -28,8 +28,8 @@ Return to repository root after testing for final documentation checks.
 
 2. **Find Related Documentation**
 
-   - Search docs/ for markdown files referencing this script
-   - Identify what the documentation claims about outputs and behavior
+   - Search `docs/src/content/docs/` for `.mdx` pages referencing this script, skipping the translation folders (`<lang>/`). A page may show the script in a code block or import it with `?raw` and render it with `<Code>`
+   - Identify what the documentation claims about outputs and behavior. Documented console output sits inside the `bash` block, after the `# [!output]` line (lines after `# [!output stderr]` are error output)
 
 3. **Run the Script**
 

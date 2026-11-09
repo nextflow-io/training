@@ -1,0 +1,49 @@
+There are two ways to fix this:
+
+<Tabs>
+
+<TabItem label="Option 1: Extract first element">
+
+<CodeWalkthrough>
+
+```nextflow {2} title="bad_channel_shape.nf" showLineNumbers startLineNumber=16 step="Before"
+workflow {
+    PROCESS_FILES(input_ch)
+}
+```
+
+```nextflow {2} title="bad_channel_shape.nf" showLineNumbers startLineNumber=16 step="After"
+workflow {
+    PROCESS_FILES(input_ch.map { sample_id, file -> sample_id })
+}
+```
+
+</CodeWalkthrough>
+
+</TabItem>
+
+<TabItem label="Option 2: Accept tuple in process">
+
+<CodeWalkthrough>
+
+```nextflow {3} title="bad_channel_shape.nf" showLineNumbers step="Before"
+process PROCESS_FILES {
+    input:
+        val sample_name
+}
+```
+
+```nextflow {3} title="bad_channel_shape.nf" showLineNumbers step="After"
+process PROCESS_FILES {
+    input:
+        tuple val(sample_name), val(file_name)
+}
+```
+
+</CodeWalkthrough>
+
+</TabItem>
+
+</Tabs>
+
+Both options work.

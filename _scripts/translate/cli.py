@@ -1,7 +1,7 @@
 """CLI commands for the translation tool.
 
 Provides the typer application with all user-facing commands:
-translate, sync, ci-detect, ci-delete-orphans, ci-run, ci-pr.
+translate, sync, new-lang, ci-detect, ci-delete-orphans, ci-run, ci-pr.
 """
 
 from __future__ import annotations
@@ -9,15 +9,20 @@ from __future__ import annotations
 import asyncio
 import json
 import secrets
+import shutil
 import subprocess
 from pathlib import Path
 
 import typer
+import yaml
 from rich.console import Console
 
 from .config import (
     DOCS_ROOT,
     EN_DOCS,
+    I18N_DIR,
+    LANGUAGE_NAMES,
+    LANGUAGES_DIR,
     REPO_ROOT,
     ConfigError,
     DEFAULT_PARALLEL,
@@ -35,7 +40,8 @@ from .git_utils import (
 )
 from .verify import get_broken_files
 from .models import TranslationFile, TranslationLog
-from .paths import en_to_lang_path, get_translation_languages
+from .paths import en_to_lang_path, get_languages, get_translation_languages
+from .postprocess import fix_anchors_in_language
 
 
 app = typer.Typer(help="Translation CLI for Nextflow training docs")
@@ -60,6 +66,13 @@ def _resolve_en_path(path: Path) -> Path:
         return path.resolve()
 
     raise ConfigError(f"File not found: {path}")
+
+
+def _fix_anchors(lang: str, console: Console) -> None:
+    """Re-point anchors in all pages of a language at the current heading ids."""
+    changed = fix_anchors_in_language(lang)
+    if changed:
+        console.print(f"[cyan]Re-pointed anchors in {changed} {lang} files[/cyan]")
 
 
 # ---------------------------------------------------------------------------
@@ -109,6 +122,7 @@ def _sync_fix(
     else:
         console.print(f"[green]No broken or missing files found for {lang}[/green]")
 
+    _fix_anchors(lang, console)
     console.print("[green]✓ Fix complete[/green]")
 
 
@@ -149,8 +163,9 @@ def _sync_normal(
             if log_file
             else None
         )
-        asyncio.run(translate_all(all_files, parallel, log))
+        asyncio.run(translate_all(all_files, parallel, log, baseline))
 
+    _fix_anchors(lang, console)
     console.print("[green]✓ Sync complete[/green]")
 
 
@@ -163,6 +178,11 @@ def _sync_normal(
 def translate(
     path: Path = typer.Argument(..., help="English file to translate"),
     lang: str = typer.Option(..., "--lang", "-l", help="Target language code"),
+    since: str | None = typer.Option(
+        None,
+        "--since",
+        help="Update incrementally from this commit (default: auto-detect from last translation PR)",
+    ),
 ) -> None:
     """Translate a single file."""
     check_api_key()
@@ -177,15 +197,19 @@ def translate(
 
     en_path = _resolve_en_path(path)
     tf = TranslationFile(en_path, en_to_lang_path(en_path, lang), lang)
+    try:
+        baseline = resolve_baseline(since)
+    except ConfigError:
+        baseline = None
 
     # Use the async path for consistency (includes verification)
-    asyncio.run(_translate_single(tf))
+    asyncio.run(_translate_single(tf, baseline))
 
     console = make_console()
     console.print(f"[green]Done:[/green] {tf.lang_path}")
 
 
-async def _translate_single(tf: TranslationFile) -> None:
+async def _translate_single(tf: TranslationFile, baseline: str | None) -> None:
     """Translate a single file through the unified async path."""
     import anthropic as _anthropic
 
@@ -197,7 +221,7 @@ async def _translate_single(tf: TranslationFile) -> None:
     progress = TranslationProgress([tf], file_lines)
     client = _anthropic.AsyncAnthropic()
 
-    await translate_file_async(tf, semaphore, progress, client)
+    await translate_file_async(tf, semaphore, progress, client, baseline=baseline)
 
 
 @app.command()
@@ -233,6 +257,67 @@ def sync(
         _sync_fix(lang, include, parallel, log_file, console)
     else:
         _sync_normal(lang, include, since, parallel, log_file, console)
+
+
+GLOSSARY_TEMPLATE = """\
+# TODO: translate the values into {name}.
+# Enforced by post-processing, whatever the LLM writes.
+
+translation_notice:
+  text: "AI-assisted translation - [learn more & suggest improvements](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)"
+  homepage:
+    title: "AI-assisted translation"
+    body: |
+      This translation was created using artificial intelligence and reviewed by human translators.
+      We welcome your feedback and suggestions for improvement.
+      See our [translation guide](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) for more information.
+
+# Before/After code walkthrough step labels
+tab_labels: {{}}
+
+# Default aside and <summary> titles, by type (note, tip, exercise, ...)
+admonition_titles: {{}}
+
+# Translations of frequent English aside and <summary> titles
+admonition_title_glossary: {{}}
+"""
+
+
+@app.command("new-lang")
+def new_lang(
+    lang: str = typer.Argument(..., help="Language code, such as 'ja'"),
+    name: str = typer.Option(..., "--name", help="Language name in that language, such as '日本語'"),
+) -> None:
+    """Add a translation language: prompt, glossary, UI strings and name."""
+    console = make_console()
+    lang = lang.lower()
+    lang_dir = LANGUAGES_DIR / lang
+    if lang in get_languages() or lang_dir.exists():
+        console.print(f"[red]Language already exists: {lang}[/red]")
+        raise typer.Exit(code=1)
+
+    lang_dir.mkdir(parents=True)
+    (lang_dir / "llm-prompt.md").write_text(
+        f"# Translation Rules for {name}\n\nTODO: Add language-specific translation rules here.\n",
+        encoding="utf-8",
+    )
+    (lang_dir / "glossary.yml").write_text(
+        GLOSSARY_TEMPLATE.format(name=name), encoding="utf-8"
+    )
+    shutil.copyfile(I18N_DIR / "en.json", I18N_DIR / f"{lang}.json")
+    names = {**get_languages(), lang: name}
+    LANGUAGE_NAMES.write_text(
+        yaml.safe_dump(dict(sorted(names.items())), allow_unicode=True, sort_keys=False),
+        encoding="utf-8",
+    )
+    get_languages.cache_clear()
+
+    for path in (lang_dir / "llm-prompt.md", lang_dir / "glossary.yml", I18N_DIR / f"{lang}.json"):
+        console.print(f"[green]Created:[/green] {path.relative_to(REPO_ROOT)} (translate it)")
+    console.print(f"[green]Added:[/green] {lang}: {name} to {LANGUAGE_NAMES.relative_to(REPO_ROOT)}")
+    console.print(
+        f"\nManual step: add `{lang}: {{ label: '{name}' }}` to `allLocales` in docs/src/locales.mjs"
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -477,7 +562,7 @@ def ci_pr(
         f"[TRANSLATING.md](https://github.com/{github_repository}/blob/master/TRANSLATING.md) "
         f"or edit prompt files:\n"
         f"- `_scripts/general-llm-prompt.md`\n"
-        f"- `docs/*/llm-prompt.md`\n\n"
+        f"- `_scripts/translate/languages/*/llm-prompt.md`\n\n"
         f"Update triggered by: {trigger_line}{commit_quote}"
     )
 

@@ -1,0 +1,21 @@
+---
+title: Hello Nextflow
+hide:
+    - toc
+page_type: index_page
+index_type: course
+additional_information:
+    technical_requirements: true
+    learning_objectives:
+        - Launch and manage execution of Nextflow workflows
+---
+
+# Hello Nextflow
+
+**Hello Nextflow is a hands-on introduction to building reproducible workflows.**
+
+Working through practical examples, you will learn the fundamentals.
+
+<!-- additional_information -->
+
+## Course overview

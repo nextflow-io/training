@@ -19,7 +19,6 @@ See CONTRIBUTING.md for full documentation.
 """
 
 import atexit
-import concurrent.futures
 import hashlib
 import json
 import os
@@ -38,7 +37,7 @@ try:
     from rich.table import Table
 except ImportError:
     print("Error: Required packages not found.")
-    print("Run this script with uv: uv run ./preview_release.py --version 3.0")
+    print("Run this script with uv: uv run ./preview_release.py --version 4.0")
     sys.exit(1)
 
 # Configuration
@@ -151,16 +150,18 @@ def check_dependencies():
         )
         sys.exit(1)
 
-    # Check for Docker
-    result = run_cmd(["docker", "info"], check=False, capture=True)
-    if result.returncode != 0:
+    # Check for Node.js and the Astro app's dependencies
+    if not shutil.which("npm"):
         status_msg(
             "setup",
-            "Docker is not running. Please start Docker Desktop.",
+            f"npm not found. Install Node.js {(DOCS_DIR / '.nvmrc').read_text().strip()} or later.",
             success=False,
         )
         sys.exit(1)
-    status_msg("setup", "Docker running", success=True)
+    if not (DOCS_DIR / "node_modules").exists():
+        status_msg("setup", "Installing site dependencies (npm ci)...")
+        run_cmd(["npm", "ci"], cwd=DOCS_DIR, capture=True)
+    status_msg("setup", "Node.js and site dependencies ready", success=True)
 
     # Check/install mkcert
     if not shutil.which("mkcert"):
@@ -205,15 +206,6 @@ def check_dependencies():
         sys.exit(1)
 
     status_msg("setup", "mkcert CA trusted by system", success=True)
-
-
-def discover_languages() -> list[str]:
-    """Discover all available language directories with mkdocs.yml."""
-    languages = []
-    for lang_dir in sorted(DOCS_DIR.iterdir()):
-        if lang_dir.is_dir() and (lang_dir / "mkdocs.yml").exists():
-            languages.append(lang_dir.name)
-    return languages
 
 
 def generate_certificates():
@@ -290,117 +282,55 @@ def fetch_gh_pages():
         )
 
 
-def compute_source_hash(lang: str) -> str:
-    """Compute a hash of source files for a specific language to detect changes."""
+def compute_source_hash() -> str:
+    """Hash the Astro app's sources (tracked and untracked, minus ignored files) to detect changes."""
+    files = run_cmd(
+        [
+            "git",
+            "ls-files",
+            "-z",
+            "--cached",
+            "--others",
+            "--exclude-standard",
+            str(DOCS_DIR),
+        ],
+        capture=True,
+    ).stdout.split("\0")
     hasher = hashlib.md5()
-    source_path = DOCS_DIR / lang
-
-    for file in sorted(source_path.rglob("*")):
-        if file.is_file() and file.suffix in (
-            ".md",
-            ".yml",
-            ".yaml",
-            ".css",
-            ".js",
-            ".html",
-        ):
-            hasher.update(str(file).encode())
-            hasher.update(file.read_bytes())
-
+    for name in sorted(f for f in files if f):
+        path = Path(name)
+        if path.is_file():
+            hasher.update(name.encode())
+            hasher.update(path.read_bytes())
     return hasher.hexdigest()[:12]
 
 
-def get_lang_paths(version: str, lang: str) -> tuple[Path, Path]:
-    """Get output directory and hash file paths for a language.
+def remove_path(path: Path):
+    if path.is_symlink() or path.is_file():
+        path.unlink()
+    elif path.is_dir():
+        shutil.rmtree(path)
 
-    English is built at the version root, other languages in subdirectories.
+
+def build_prefix(prefix: str, source_hash: str):
+    """Build the site with base /<prefix>/ into the site directory, unless that build is cached.
+
+    Astro writes the base into every URL, so /<version>/ and /latest/ are separate builds,
+    as in production.
     """
-    if lang == "en":
-        return SITE_DIR / version, WORK_DIR / f"{version}-{lang}.hash"
-    return SITE_DIR / version / lang, WORK_DIR / f"{version}-{lang}.hash"
-
-
-def is_cached(output_dir: Path, hash_file: Path, current_hash: str) -> bool:
-    """Check if a build is cached and up-to-date."""
-    return (
-        output_dir.exists()
-        and (output_dir / "index.html").exists()
+    output_dir = SITE_DIR / prefix
+    hash_file = WORK_DIR / f"{prefix}.hash"
+    if (
+        (output_dir / "index.html").exists()
         and hash_file.exists()
-        and hash_file.read_text().strip() == current_hash
-    )
-
-
-def build_single_language(
-    version: str, lang: str, repo_root: Path
-) -> tuple[str, bool, str]:
-    """Build docs for a single language. Returns (lang, success, error_message)."""
-    output_dir, hash_file = get_lang_paths(version, lang)
-    current_hash = compute_source_hash(lang)
-
-    if is_cached(output_dir, hash_file, current_hash):
-        return (lang, True, "cached")
-
-    # Clean and prepare build directory
-    if output_dir.exists():
-        subprocess.run(["rm", "-rf", str(output_dir)], check=False)
-    output_dir.mkdir(parents=True, exist_ok=True)
-    subprocess.run(["chmod", "-R", "777", str(output_dir)], check=False)
-
-    # Build using Docker
-    result = subprocess.run(
-        [
-            "docker",
-            "run",
-            "--rm",
-            "-v",
-            f"{repo_root}:/docs",
-            "-w",
-            f"/docs/docs/{lang}",
-            "ghcr.io/nextflow-io/training-mkdocs:latest",
-            "build",
-            "-d",
-            f"/docs/{output_dir}",
-        ],
-        capture_output=True,
-        text=True,
-    )
-
-    if result.returncode != 0:
-        return (lang, False, result.stderr + result.stdout)
-
-    hash_file.write_text(current_hash)
-    return (lang, True, "built")
-
-
-def build_docs(version: str, languages: list[str], parallel: bool = True):
-    """Build docs for the specified version and languages using Docker."""
-    repo_root = Path.cwd().resolve()
-    (SITE_DIR / version).mkdir(parents=True, exist_ok=True)
-
-    # Check which languages need building
-    to_build = []
-    cached = []
-    for lang in languages:
-        output_dir, hash_file = get_lang_paths(version, lang)
-        if is_cached(output_dir, hash_file, compute_source_hash(lang)):
-            cached.append(lang)
-        else:
-            to_build.append(lang)
-
-    if cached:
+        and hash_file.read_text().strip() == source_hash
+    ):
         status_msg(
-            "setup",
-            f"Cached: {', '.join(cached)} [dim](source unchanged)[/dim]",
-            success=True,
+            "setup", f"/{prefix}/ cached [dim](source unchanged)[/dim]", success=True
         )
-
-    if not to_build:
-        status_msg("setup", f"v{version} already built", success=True)
         return
 
-    status_msg("setup", f"Building: {', '.join(to_build)}...")
-
-    failed = []
+    remove_path(output_dir)
     with Progress(
         TextColumn(""),
         SpinnerColumn(),
@@ -408,43 +338,28 @@ def build_docs(version: str, languages: list[str], parallel: bool = True):
         console=console,
         transient=True,
     ) as progress:
-        if parallel and len(to_build) > 1:
-            progress.add_task(
-                f"Building {len(to_build)} languages in parallel...", total=None
-            )
-            with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
-                futures = {
-                    executor.submit(
-                        build_single_language, version, lang, repo_root
-                    ): lang
-                    for lang in to_build
-                }
-                for future in concurrent.futures.as_completed(futures):
-                    lang, success, msg = future.result()
-                    if not success:
-                        failed.append((lang, msg))
-        else:
-            for lang in to_build:
-                progress.add_task(f"Building {lang}...", total=None)
-                lang, success, msg = build_single_language(version, lang, repo_root)
-                if not success:
-                    failed.append((lang, msg))
-
-    if failed:
-        status_msg(
-            "setup",
-            f"Build failed for: {', '.join(l for l, _ in failed)}",
-            success=False,
+        progress.add_task(f"Building /{prefix}/ (about a minute)...", total=None)
+        result = subprocess.run(
+            ["npx", "astro", "build", "--outDir", str(output_dir.resolve())],
+            cwd=DOCS_DIR,
+            env={**os.environ, "BASE": f"/{prefix}/"},
+            capture_output=True,
+            text=True,
         )
-        for lang, msg in failed:
-            console.print(f"[red]{lang}:[/red] {msg}")
+    if result.returncode != 0:
+        status_msg("setup", f"Build of /{prefix}/ failed", success=False)
+        console.print(result.stdout[-5000:] + result.stderr[-5000:])
         sys.exit(1)
 
-    status_msg(
-        "setup",
-        f"v{version} built successfully ({len(languages)} languages)",
-        success=True,
-    )
+    hash_file.write_text(source_hash)
+    status_msg("setup", f"/{prefix}/ built", success=True)
+
+
+def build_docs(version: str):
+    """Build the current branch as /<version>/ and /latest/."""
+    source_hash = compute_source_hash()
+    for prefix in (version, "latest"):
+        build_prefix(prefix, source_hash)
 
 
 def update_versions_json(version: str):
@@ -476,14 +391,6 @@ def update_versions_json(version: str):
         )
 
     versions_file.write_text(json.dumps(versions, indent=2))
-
-    # Create/update 'latest' symlink
-    latest_link = SITE_DIR / "latest"
-    if latest_link.is_dir() and not latest_link.is_symlink():
-        shutil.rmtree(latest_link)
-    elif latest_link.exists() or latest_link.is_symlink():
-        latest_link.unlink()
-    latest_link.symlink_to(version)
 
     status_msg("setup", f"v{version} set as latest", success=True)
 
@@ -586,7 +493,7 @@ def run_server(version: str):
     "-v",
     "version",
     type=str,
-    help="Version number to publish current branch as (e.g., 3.0)",
+    help="Version number to publish current branch as (e.g., 4.0)",
 )
 @click.option(
     "--clean",
@@ -594,20 +501,8 @@ def run_server(version: str):
     is_flag=True,
     help="Delete work directory on exit (default: keep for faster restart)",
 )
-@click.option(
-    "--all-languages",
-    "-a",
-    is_flag=True,
-    help="Build all languages (default: English only)",
-)
-@click.option(
-    "--sequential",
-    "-s",
-    is_flag=True,
-    help="Build languages sequentially instead of in parallel",
-)
 @click.pass_context
-def cli(ctx, version: str | None, clean: bool, all_languages: bool, sequential: bool):
+def cli(ctx, version: str | None, clean: bool):
     """
     **Preview Release** - Serve training docs locally at production URL.
 
@@ -619,8 +514,8 @@ def cli(ctx, version: str | None, clean: bool, all_languages: bool, sequential: 
 
     **Note:** Do not run with sudo. The script will prompt for sudo when needed.
 
-    **Languages:** By default, only English is built for faster iteration.
-    Use `--all-languages` to build all available translations.
+    The current branch is built twice, as `/<version>/` and `/latest/`, with every
+    language. Each build takes about a minute and is cached until `docs/` changes.
     """
     global _keep_files
     _keep_files = not clean
@@ -630,7 +525,7 @@ def cli(ctx, version: str | None, clean: bool, all_languages: bool, sequential: 
         return
 
     # Ensure we're in the repo root
-    if not Path("docs/en/mkdocs.yml").exists():
+    if not (DOCS_DIR / "astro.config.mjs").exists():
         console.print("[red]Error:[/red] Must be run from the training repository root")
         sys.exit(1)
 
@@ -643,14 +538,6 @@ def cli(ctx, version: str | None, clean: bool, all_languages: bool, sequential: 
             )
             sys.exit(1)
 
-        # Determine which languages to build
-        if all_languages:
-            languages = discover_languages()
-            status_msg("setup", f"Building all languages: {', '.join(languages)}")
-        else:
-            languages = ["en"]
-            status_msg("setup", "Building English only (use -a for all languages)")
-
         # Register cleanup handlers
         atexit.register(cleanup)
         signal.signal(signal.SIGINT, lambda s, f: sys.exit(0))
@@ -661,7 +548,7 @@ def cli(ctx, version: str | None, clean: bool, all_languages: bool, sequential: 
         modify_hosts()  # Do this early so user isn't prompted after long build
         generate_certificates()
         fetch_gh_pages()
-        build_docs(version, languages, parallel=not sequential)
+        build_docs(version)
         update_versions_json(version)
         create_caddyfile()
 
@@ -676,7 +563,7 @@ def cli(ctx, version: str | None, clean: bool, all_languages: bool, sequential: 
 def status():
     """Show current preview release status."""
     # Ensure we're in the repo root
-    if not Path("docs/en/mkdocs.yml").exists():
+    if not (DOCS_DIR / "astro.config.mjs").exists():
         console.print("[red]Error:[/red] Must be run from the training repository root")
         sys.exit(1)
 

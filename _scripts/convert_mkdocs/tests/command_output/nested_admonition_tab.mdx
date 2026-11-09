@@ -1,0 +1,17 @@
+??? exercise "Fix the workflow"
+
+    Run it first:
+
+    ```bash
+    nextflow run buggy.nf
+    # [!output stderr]
+    ERROR ~ Script compilation failed
+    ```
+
+=== "Docker"
+
+    ```bash
+    nextflow run main.nf -profile docker
+    # [!output]
+    Done
+    ```

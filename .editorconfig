@@ -8,11 +8,15 @@ trim_trailing_whitespace = true
 indent_size = 4
 indent_style = space
 
-[*.{md,yml,yaml,html,css,scss,js}]
+[*.{md,mdx,yml,yaml,html,css,scss,js,mjs,ts,astro,toml}]
+indent_size = 2
+
+# npm writes 2 spaces; JSON elsewhere (nf-core pipelines, devcontainers) uses 4
+[docs/**.{json,jsonc}]
 indent_size = 2
 
 # ignore python and markdown
-[*.{py,md}]
+[*.{py,md,mdx}]
 indent_style = unset
 
 # Makefiles require tabs

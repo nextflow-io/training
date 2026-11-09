@@ -1,6 +1,6 @@
 """Heading-based chunking for incremental translation.
 
-Splits markdown files at ``## ``-level headings and compares old vs new
+Splits MDX files at ``## ``-level headings and compares old vs new
 English chunks to determine which sections actually changed.  Unchanged
 sections reuse the existing translation, avoiding expensive LLM calls.
 """
@@ -12,7 +12,7 @@ import re
 from dataclasses import dataclass, field
 from difflib import SequenceMatcher
 
-from .postprocess import CODE_FENCE_RE
+from .postprocess import CODE_FENCE_RE, DIRECTIVE_RE, TAG_RE, mask_inline_code
 
 
 # ---------------------------------------------------------------------------
@@ -76,7 +76,8 @@ def split_into_chunks(text: str) -> list[Chunk]:
     * Chunk 0 is the "preamble" — everything before the first ``## ``.
     * Each subsequent chunk starts at a ``## `` line (outside code blocks)
       and includes all content up to (but not including) the next ``## ``.
-    * ``## `` lines inside fenced code blocks are ignored.
+    * ``## `` lines inside fenced code blocks, JSX elements (``<details>``,
+      ``<Tabs>``, ...) and ``:::`` asides are ignored.
     """
     lines = text.split("\n")
     chunks: list[Chunk] = []
@@ -84,6 +85,7 @@ def split_into_chunks(text: str) -> list[Chunk]:
     current_heading = ""
     in_code = False
     fence = ""
+    depth = 0  # open JSX elements and ::: asides
 
     def _flush():
         content = "\n".join(current_lines)
@@ -98,16 +100,22 @@ def split_into_chunks(text: str) -> list[Chunk]:
 
     for line in lines:
         stripped = line.lstrip()
+        boundary = False
 
-        # Track code fences
-        if not in_code:
-            if m := CODE_FENCE_RE.match(stripped):
-                in_code, fence = True, m.group(1)
-        elif stripped.startswith(fence) and stripped.strip() == fence:
-            in_code, fence = False, ""
+        if in_code:
+            if stripped.startswith(fence) and stripped.strip() == fence:
+                in_code, fence = False, ""
+        elif m := CODE_FENCE_RE.match(stripped):
+            in_code, fence = True, m.group(1)
+        else:
+            boundary = depth == 0 and line.startswith("## ")
+            if m := DIRECTIVE_RE.match(line):
+                depth += 1 if m.group(3) else -1
+            for t in TAG_RE.finditer(mask_inline_code(line)):
+                if not t["self"]:
+                    depth += -1 if t["close"] else 1
 
-        # Start a new chunk at each ## heading (outside code blocks)
-        if not in_code and line.startswith("## "):
+        if boundary:
             _flush()
             current_lines = [line]
             current_heading = line

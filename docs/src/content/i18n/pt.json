@@ -1,0 +1,14 @@
+{
+  "courseInfo.courseSummary": "Resumo do curso",
+  "courseInfo.additionalInformation": "Informações adicionais",
+  "courseInfo.technicalRequirements": "Requisitos técnicos",
+  "courseInfo.learningObjectives": "Objetivos de aprendizado",
+  "courseInfo.audiencePrerequisites": "Público e pré-requisitos",
+  "courseInfo.courseVideos": "Vídeos do curso",
+  "courseInfo.defaultTechnicalRequirements": "Você precisará de uma conta no GitHub OU de uma instalação local do Nextflow. Consulte [Opções de ambiente](../envsetup/index.md) para mais detalhes.",
+  "courseInfo.defaultVideos": "Vídeos estão disponíveis para cada capítulo, com um instrutor trabalhando nos exercícios. O vídeo de cada parte do curso está incorporado no topo da página correspondente.",
+  "courseInfo.viewPlaylist": "Ver a playlist no YouTube",
+  "consent.title": "Consentimento de cookies",
+  "consent.description": "Usamos cookies para reconhecer suas visitas repetidas e preferências, bem como para medir a eficácia da nossa documentação e se os usuários encontram o que procuram. Com seu consentimento, você nos ajuda a melhorar nossos materiais de treinamento. Saiba mais sobre <a href=\"https://seqera.io/privacy-policy/#cookies\" target=\"_blank\" rel=\"noopener\">como usamos cookies</a>.",
+  "consent.posthog": "PostHog Analytics"
+}

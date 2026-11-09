@@ -1,0 +1,70 @@
+An After/Before pair with prose in a tab cannot be a walkthrough:
+
+<Tabs>
+
+<TabItem label="After">
+
+The fixed process:
+
+```nextflow
+process A {}
+```
+
+</TabItem>
+
+<TabItem label="Before">
+
+```nextflow
+process B {}
+```
+
+</TabItem>
+
+</Tabs>
+
+Nor can one where a tab holds two blocks:
+
+<Tabs>
+
+<TabItem label="Before">
+
+```nextflow title="main.nf"
+workflow {}
+```
+
+```nextflow title="nextflow.config"
+docker.enabled = false
+```
+
+</TabItem>
+
+<TabItem label="After">
+
+```nextflow title="main.nf"
+workflow { A() }
+```
+
+```nextflow title="nextflow.config"
+docker.enabled = true
+```
+
+</TabItem>
+
+</Tabs>
+
+Three code tabs with After/Before labels are not a pair:
+
+:::code-tabs
+```nextflow label="Before"
+a
+```
+```nextflow label="After"
+b
+```
+```nextflow label="Original"
+c
+```
+:::
+<!-- warning: tab group ['Before', 'After', 'Original'] looks like After/Before but is not a pair -->
+<!-- warning: After/Before tabs ['Before', 'After'] hold prose or several code blocks: kept as <Tabs> -->
+<!-- warning: After/Before tabs ['After', 'Before'] hold prose or several code blocks: kept as <Tabs> -->

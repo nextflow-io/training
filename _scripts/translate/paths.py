@@ -7,38 +7,55 @@ from pathlib import Path
 
 import yaml
 
-from .config import DOCS_ROOT, EN_DOCS, PRIORITY_DIRS, ConfigError, get_exclude_dirs
+from .config import (
+    DOCS_ROOT,
+    EN_DOCS,
+    LANGUAGE_NAMES,
+    PRIORITY_DIRS,
+    ConfigError,
+    get_exclude_dirs,
+)
 
 
 @lru_cache
 def get_languages() -> dict[str, str]:
     """Load language code -> name mapping from language_names.yml."""
-    path = DOCS_ROOT / "language_names.yml"
-    if not path.exists():
-        raise ConfigError(f"Language names file not found: {path}")
-    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    if not LANGUAGE_NAMES.exists():
+        raise ConfigError(f"Language names file not found: {LANGUAGE_NAMES}")
+    data = yaml.safe_load(LANGUAGE_NAMES.read_text(encoding="utf-8"))
     if not isinstance(data, dict):
-        raise ConfigError(f"Expected dict in {path}, got {type(data).__name__}")
+        raise ConfigError(
+            f"Expected dict in {LANGUAGE_NAMES}, got {type(data).__name__}"
+        )
     return data
 
 
 def get_translation_languages() -> list[str]:
     """Get all translation language codes (excludes English)."""
-    return sorted(
-        d.name
-        for d in DOCS_ROOT.iterdir()
-        if d.is_dir() and (d / "mkdocs.yml").exists() and d.name != "en"
-    )
+    return sorted(code for code in get_languages() if code != "en")
 
 
 def en_to_lang_path(en_path: Path, lang: str) -> Path:
     """Convert English doc path to equivalent path in target language."""
-    return DOCS_ROOT / lang / "docs" / en_path.relative_to(EN_DOCS)
+    return DOCS_ROOT / lang / en_path.relative_to(EN_DOCS)
 
 
 def lang_to_en_path(lang_path: Path, lang: str) -> Path:
     """Convert language doc path to equivalent English path."""
-    return EN_DOCS / lang_path.relative_to(DOCS_ROOT / lang / "docs")
+    return EN_DOCS / lang_path.relative_to(DOCS_ROOT / lang)
+
+
+def is_en_doc(path: Path) -> bool:
+    """True for a published English page: `.mdx` outside the locale dirs, not `_`-prefixed."""
+    try:
+        rel = path.relative_to(EN_DOCS)
+    except ValueError:
+        return False
+    return (
+        path.suffix == ".mdx"
+        and not path.name.startswith("_")
+        and rel.parts[0] not in get_languages()
+    )
 
 
 def _is_excluded(path: Path, exclude_dirs: set[str]) -> bool:
@@ -61,23 +78,23 @@ def iter_en_docs() -> list[Path]:
     seen: set[Path] = set()
 
     def add(p: Path) -> None:
-        if p not in seen and not _is_excluded(p, exclude_dirs):
+        if p not in seen and is_en_doc(p) and not _is_excluded(p, exclude_dirs):
             paths.append(p)
             seen.add(p)
 
     # Root files first
-    for p in sorted(EN_DOCS.glob("*.md")):
+    for p in sorted(EN_DOCS.glob("*.mdx")):
         add(p)
 
     # Priority directories
     for dir_name in PRIORITY_DIRS:
         dir_path = EN_DOCS / dir_name
         if dir_path.exists():
-            for p in sorted(dir_path.rglob("*.md")):
+            for p in sorted(dir_path.rglob("*.mdx")):
                 add(p)
 
     # Remaining
-    for p in sorted(EN_DOCS.rglob("*.md")):
+    for p in sorted(EN_DOCS.rglob("*.mdx")):
         add(p)
 
     return paths

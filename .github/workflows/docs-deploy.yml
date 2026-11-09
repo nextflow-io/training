@@ -1,0 +1,250 @@
+name: Docs deploy
+
+# Publishes the site to R2 (bucket nextflow-training-docs, prefix training/), served by the
+# Router Worker in docs/worker/. One build serves one prefix:
+#   - push to master:    /development/
+#   - release:           /<tag>/ and /latest/, then versions.json
+#   - workflow_dispatch: /<version>/, plus /latest/ if asked, then versions.json
+# The Router Worker is deployed on pushes that change it.
+#
+# Repository secrets, named like seqeralabs/docs's:
+#   CLOUDFLARE_API_TOKEN_TRAINING_REPO   "Workers Scripts: Edit" on nextflow-training, plus R2 Object Read & Write
+#                                        on nextflow-training-docs (rclone's S3 keys are derived from it)
+#   CLOUDFLARE_ACCOUNT_ID_TRAINING_REPO
+
+on:
+  push:
+    branches: [master]
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to republish, such as 4.0. Its R2 prefix is overwritten.
+        type: string
+        required: true
+      ref:
+        description: Git ref to build
+        type: string
+        required: true
+      latest:
+        description: Also publish this build as /latest/
+        type: boolean
+        default: false
+
+permissions: {}
+
+concurrency:
+  group: docs-deploy-${{ github.event.release.tag_name || inputs.version || 'development' }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  BUCKET: nextflow-training-docs
+  RCLONE_VERSION: 1.75.2
+  RCLONE_SHA256: 349ac8fba6ff65d6247043f1750cdcb518ec5d500ef91463a10d37c0ccdf3702
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      version: ${{ steps.plan.outputs.version }}
+      ref: ${{ steps.plan.outputs.ref }}
+      latest: ${{ steps.plan.outputs.latest }}
+      prefixes: ${{ steps.plan.outputs.prefixes }}
+    steps:
+      - name: Plan prefixes
+        id: plan
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          INPUT_VERSION: ${{ inputs.version }}
+          INPUT_REF: ${{ inputs.ref }}
+          INPUT_LATEST: ${{ inputs.latest }}
+        run: |
+          case "$GITHUB_EVENT_NAME" in
+            push) version=development ref=$GITHUB_SHA latest=false ;;
+            release) version=$RELEASE_TAG ref=$RELEASE_TAG latest=true ;;
+            *) version=$INPUT_VERSION ref=$INPUT_REF latest=$INPUT_LATEST ;;
+          esac
+          # The version becomes an R2 prefix, and the Router caches /<digit>… paths for a day.
+          if [ "$version" != development ] && ! printf '%s' "$version" | grep -Eqx '[0-9]+(\.[0-9]+)*'; then
+            echo "::error::Version '$version' is not a version number such as 4.0 or 4.0.1."
+            exit 1
+          fi
+          prefixes=$(jq -cn --arg v "$version" --argjson latest "$latest" '[$v] + if $latest then ["latest"] else [] end')
+          {
+            echo "version=$version"
+            echo "ref=$ref"
+            echo "latest=$latest"
+            echo "prefixes=$prefixes"
+          } >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: plan
+    strategy:
+      matrix:
+        prefix: ${{ fromJSON(needs.plan.outputs.prefixes) }}
+    permissions:
+      contents: read
+    uses: ./.github/workflows/docs-build.yml
+    with:
+      base: /${{ matrix.prefix }}/
+      ref: ${{ needs.plan.outputs.ref }}
+      artifact: site-${{ matrix.prefix }}
+
+  publish:
+    name: Publish /${{ matrix.prefix }}/
+    needs: [plan, build]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        prefix: ${{ fromJSON(needs.plan.outputs.prefixes) }}
+    env: &rclone
+      RCLONE_CONFIG_R2_TYPE: s3
+      RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+      RCLONE_CONFIG_R2_REGION: auto
+      RCLONE_CONFIG_R2_NO_CHECK_BUCKET: "true"
+      RCLONE_CONFIG_R2_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID_TRAINING_REPO }}.r2.cloudflarestorage.com
+    steps:
+      - name: Download site
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: site-${{ matrix.prefix }}
+          path: site
+
+      - name: Pin Codespaces links to the release
+        if: needs.plan.outputs.version != 'development'
+        env:
+          VERSION: ${{ needs.plan.outputs.version }}
+        run: grep -rlZ 'ref=master' site | xargs -0 -r sed -i "s|ref=master|ref=$VERSION|g"
+
+      - &install-rclone
+        name: Install rclone
+        run: |
+          zip="rclone-v$RCLONE_VERSION-linux-amd64.zip"
+          curl -fsSLO "https://downloads.rclone.org/v$RCLONE_VERSION/$zip"
+          echo "$RCLONE_SHA256  $zip" | sha256sum -c -
+          unzip -q "$zip"
+          sudo install "rclone-v$RCLONE_VERSION-linux-amd64/rclone" /usr/local/bin/
+
+      # R2's S3 API takes an API token's ID as the access key and the token's SHA-256 as the secret.
+      - &r2-credentials
+        name: Derive R2 credentials
+        env:
+          TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_TRAINING_REPO }}
+          ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_TRAINING_REPO }}
+        run: |
+          id=$(curl -fsS -H "Authorization: Bearer $TOKEN" "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT/tokens/verify" | jq -er .result.id)
+          secret=$(printf '%s' "$TOKEN" | sha256sum | cut -d' ' -f1)
+          echo "::add-mask::$secret"
+          {
+            echo "RCLONE_CONFIG_R2_ACCESS_KEY_ID=$id"
+            echo "RCLONE_CONFIG_R2_SECRET_ACCESS_KEY=$secret"
+          } >> "$GITHUB_ENV"
+
+      # --checksum skips unchanged files, as every build gives them new mtimes.
+      - name: Sync to R2
+        env:
+          PREFIX: ${{ matrix.prefix }}
+        run: rclone sync site "r2:$BUCKET/training/${PREFIX:?}/" --checksum --fast-list --transfers 32 --checkers 64 --stats-one-line --stats 30s
+
+  versions:
+    name: Update versions.json
+    if: github.event_name != 'push'
+    needs: [plan, publish]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: docs-versions-json
+      cancel-in-progress: false
+    env: *rclone
+    steps:
+      - *install-rclone
+      - *r2-credentials
+
+      # mike's schema, newest first, so the version menus of frozen MkDocs builds keep working.
+      - name: Add the version to versions.json
+        env:
+          VERSION: ${{ needs.plan.outputs.version }}
+          LATEST: ${{ needs.plan.outputs.latest }}
+        run: |
+          rclone cat "r2:$BUCKET/training/versions.json" > versions.json
+          # rclone cat exits 0 for a missing R2 object, and jq turns empty input into an empty file.
+          if [ ! -s versions.json ]; then
+            echo "::error::training/versions.json is missing or empty in R2. Restore it before publishing."
+            exit 1
+          fi
+          jq --arg v "$VERSION" --argjson latest "$LATEST" '
+            (map(select(.version == $v))[0].aliases // []) as $old
+            | map(select(.version != $v))
+            | if $latest then map(.aliases -= ["latest"]) else . end
+            | . + [{version: $v, title: $v, aliases: (if $latest then ($old - ["latest"]) + ["latest"] else $old end)}]
+            | sort_by(.version | split(".") | map(tonumber? // 0)) | reverse
+          ' versions.json > new.json
+          cat new.json
+          rclone copyto new.json "r2:$BUCKET/training/versions.json"
+
+  worker-changes:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      changed: ${{ steps.diff.outputs.changed }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          filter: blob:none
+          persist-credentials: false
+
+      # A failed diff (such as after a force push) counts as a change.
+      - name: Check for Router Worker changes
+        id: diff
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if git diff --quiet "$BEFORE" HEAD -- docs/worker docs/wrangler.jsonc; then
+            echo changed=false >> "$GITHUB_OUTPUT"
+          else
+            echo changed=true >> "$GITHUB_OUTPUT"
+          fi
+
+  worker:
+    name: Deploy Router Worker
+    needs: worker-changes
+    if: needs.worker-changes.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: docs/worker
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: docs/.nvmrc
+          package-manager-cache: false
+
+      - run: npm ci
+      - run: npm test
+
+      - name: Deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_TRAINING_REPO }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_TRAINING_REPO }}
+        run: npm run deploy -- --message "master @ ${GITHUB_SHA:0:7}"

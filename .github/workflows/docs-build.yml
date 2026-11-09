@@ -1,0 +1,146 @@
+name: Docs build
+
+# Builds the Astro site and uploads docs/dist as an artifact. Runs with a read-only
+# token and no secrets, so it is safe for fork PRs.
+#   - pull_request: base /latest/, artifact `site`. docs-preview.yml deploys it.
+#   - workflow_call: called by docs-deploy.yml once per R2 prefix.
+
+on:
+  pull_request:
+  workflow_call:
+    inputs:
+      base:
+        description: Astro base, such as /development/ or /4.0/
+        type: string
+        required: true
+      ref:
+        description: Git ref to build
+        type: string
+        required: true
+      artifact:
+        description: Name of the uploaded dist artifact
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+    working-directory: docs
+
+jobs:
+  build:
+    name: Build ${{ inputs.base || '/latest/' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    concurrency:
+      group: docs-build-${{ github.event.pull_request.number || github.run_id }}-${{ inputs.base }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+    env:
+      BASE: ${{ inputs.base || '/latest/' }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.ref }}
+          # A PR checks out its merge commit; the parent is the base, for the diff below.
+          fetch-depth: ${{ github.event_name == 'pull_request' && 2 || 1 }}
+          persist-credentials: false
+
+      # Translations are about 90% of the build. A PR skips them unless it could break one:
+      # it deletes or renames a file, changes a translated page (the two-letter folders), or
+      # changes anything else in docs/ beyond the English pages. Deploys (workflow_call)
+      # always build every language.
+      - name: Choose languages
+        if: github.event_name == 'pull_request'
+        working-directory: .
+        run: |
+          # awk reads to the end: exiting early would kill git diff with SIGPIPE, which pipefail turns into a failure.
+          reason=$(git diff --name-status --no-renames HEAD^1 HEAD | awk -F'\t' '
+            reason { next }
+            $1 == "D" { reason = "deletes " $2; next }
+            $2 ~ /^docs\/src\/content\/docs\/[a-z][a-z]\// { reason = "changes " $2; next }
+            $2 ~ /^docs\// && $2 !~ /^docs\/src\/content\/docs\// { reason = "changes " $2 }
+            END { print reason }
+          ')
+          if [ -n "$reason" ]; then
+            echo "Building every language: this PR $reason."
+          else
+            echo "::notice::English-only build: this PR changes no file that the translations depend on."
+            echo "TRANSLATIONS=false" >> "$GITHUB_ENV"
+          fi
+
+      - name: Set up Node.js
+        id: node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: docs/.nvmrc
+          cache: npm
+          cache-dependency-path: docs/package-lock.json
+
+      # An exact lockfile and Node match restores node_modules and skips `npm ci`.
+      - name: Cache node_modules
+        id: modules
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: docs/node_modules
+          key: docs-node-modules-${{ runner.os }}-${{ steps.node.outputs.node-version }}-${{ hashFiles('docs/package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.modules.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+
+      - name: Check heading numbering
+        working-directory: .
+        run: find docs/src/content/docs -name '*.mdx' -not -path '*/side_quests/plugin_development/index.mdx' -print0 | xargs -0 -r uv run -q .github/check_headings.py
+
+      - name: Check code block meta
+        run: node scripts/check-fences.mjs src/content/docs
+
+      # The links validator runs inside the build. starlight-codeblocks logs through
+      # Expressive Code, so its warnings carry the astro-expressive-code label.
+      - name: Build site
+        run: |
+          npx astro build 2>&1 | tee "$RUNNER_TEMP/build.log"
+          if sed 's/\x1b\[[0-9;]*m//g' "$RUNNER_TEMP/build.log" | grep -E '\[WARN\] \[(astro-expressive-code|starlight-codeblocks)\]'; then
+            echo "::error::The code block warnings above fail the build."
+            exit 1
+          fi
+
+      - name: Upload site
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ${{ inputs.artifact || 'site' }}
+          path: docs/dist/
+          if-no-files-found: error
+          retention-days: 7
+
+  worker:
+    name: Router Worker tests
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: docs/worker
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: docs/.nvmrc
+          cache: npm
+          cache-dependency-path: docs/worker/package-lock.json
+
+      - run: npm ci
+      - run: npm test
+      - run: npm run typecheck

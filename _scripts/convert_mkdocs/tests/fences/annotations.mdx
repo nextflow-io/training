@@ -1,0 +1,29 @@
+```groovy title="build.gradle"
+nextflowPlugin {
+    nextflowVersion = '25.10.0'       // [!annotate] **`nextflowVersion`**: Minimum Nextflow version required
+    provider = 'training'             // [!annotate] **`provider`**: Your name or organization
+}
+```
+
+Text after the list.
+
+=== "After"
+
+    ```groovy title="GreetingExtension.groovy" showLineNumbers startLineNumber=24
+    @Function                                // [!annotate] Makes the method callable from Nextflow workflows
+    String decorateGreeting(String greeting) {
+        return "*** ${greeting} ***"         // [!annotate] Groovy string interpolation: `${...}` inserts the variable's value into the string
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="GreetingExtension.groovy" showLineNumbers startLineNumber=24
+    @Function
+    ```
+
+```nextflow title="greet.nf"
+include { decorateGreeting } from 'plugin/nf-greeting'  // [!annotate] Multiple functions from the same plugin need separate `include` statements
+def decorated = decorateGreeting(greeting)  // [!annotate]
+```
+<!-- warning: annotation markers [2] have no list item after the block at line 32 -->

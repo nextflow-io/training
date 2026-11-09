@@ -1,0 +1,52 @@
+---
+title: 'Teil 1: Hello World'
+description: Einen ersten Workflow ausführen.
+tableOfContents: false
+---
+
+import hello_config from '../../../../../../hello-nextflow/nextflow.config?raw';
+
+{notice}
+
+Führe einen ersten Workflow aus, wie im [nächsten Abschnitt](#1-ausführen) gezeigt.
+
+![Workflow-Diagramm](../../hello/img/diagram.svg)
+
+## 1. Ausführen
+
+:::tip[Übung]
+Verwende `params {}` in einer Map wie \{a: 1\}, wenn a &lt; b.
+:::
+
+```bash title="Terminal"
+# Workflow ausführen
+nextflow run hello.nf
+# [!output]
+# not a comment
+Hello World!
+```
+
+<details class="success">
+<summary>Befehlsausgabe</summary>
+
+Fertig.
+
+</details>
+
+## 2. Ändern {#2-change-the-workflow}
+
+<CodeWalkthrough>
+
+```nextflow title="hello.nf" step="Vorher"
+println 'a' // [!annotate] Gibt a aus
+```
+
+```nextflow {1} title="hello.nf" step="Danach"
+println 'b' // [!annotate] Prints b
+```
+
+</CodeWalkthrough>
+
+<Code code={hello_config} lang="nextflow" title="nextflow.config" />
+
+<LinkButton href="02_next.mdx#1-anfangen" variant="primary" icon="right-arrow">Weiter</LinkButton>

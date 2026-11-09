@@ -25,9 +25,12 @@ def is_heading(line: str) -> bool:
     return bool(re.match(r"^#+\s+\d+(\.\d+)*\.?\s+", line))
 
 
+LOCALES = {"ca", "de", "es", "fr", "hi", "it", "ko", "pl", "pt", "tr"}
+
+
 def is_english_doc(path: Path) -> bool:
     """
-    Check if a path is under a docs/en/ directory.
+    Check if a path is an English page: docs/src/content/docs/ outside a locale folder.
 
     Heading numbering is a source-content convention, enforced only against
     the English source. Translations can reorder a heading like "Part 1:
@@ -36,8 +39,8 @@ def is_english_doc(path: Path) -> bool:
     """
     parts = path.parts
     return any(
-        part == "docs" and i + 1 < len(parts) and parts[i + 1] == "en"
-        for i, part in enumerate(parts)
+        parts[i : i + 2] == ("content", "docs") and i + 2 < len(parts) and parts[i + 2] not in LOCALES
+        for i in range(len(parts))
     )
 
 

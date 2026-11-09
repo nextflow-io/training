@@ -1,6 +1,6 @@
 ---
 name: Find TODO and FIXME Comments
-description: Search markdown files, Nextflow scripts, and config files for TODO/FIXME comments, categorize by priority, and provide actionable recommendations. Use when you need to identify pending work or track technical debt.
+description: Search pages, Nextflow scripts, and config files for TODO/FIXME comments, categorize by priority, and provide actionable recommendations. Use when you need to identify pending work or track technical debt.
 ---
 
 # Find TODO and FIXME Comments
@@ -11,8 +11,10 @@ Execute from repository root. See [../shared/repo-conventions.md](../shared/repo
 
 ## Tasks to Perform
 
-1. **Search Markdown Files**
-   - Use Grep to find TODO and FIXME in `docs/**/*.md`
+1. **Search Pages**
+   - Use Grep to find TODO and FIXME in `docs/src/content/docs/**/*.mdx`
+   - Skip the translation folders (`docs/src/content/docs/{ca,de,es,fr,hi,it,ko,pl,pt,tr}/`); they mirror the English pages
+   - In pages, TODOs usually sit in MDX comments: `{/* TODO: ... */}`
    - Capture file path, line number, and full comment
    - Note context (which module/lesson)
 
@@ -21,19 +23,19 @@ Execute from repository root. See [../shared/repo-conventions.md](../shared/repo
    - Distinguish between training examples and solution code
    - Note if in core examples or side-quests
 
-3. **Search Configuration Files**
-   - Check `docs/en/mkdocs.yml`
+3. **Search Configuration and Site Files**
+   - Check `docs/astro.config.mjs`, `docs/src/sidebar.mjs` and `docs/src/components/`
    - Check `.github/**/*.yml` and `.github/**/*.py`
-   - Check `CONTRIBUTING.md`
+   - Check `CONTRIBUTING.md` and `TRANSLATING.md`
 
 4. **Categorize Results**
    - **High Priority**: Marked as FIXME, TODO(urgent), or blocking
-   - **Documentation**: TODOs in markdown files
-   - **Code**: TODOs in .nf or .py files
+   - **Documentation**: TODOs in pages
+   - **Code**: TODOs in .nf, .py, .mjs or .astro files
    - **Configuration**: TODOs in config files
 
 5. **Check Known Issues**
-   - Read CONTRIBUTING.md for any documented TODOs
+   - Read CONTRIBUTING.md and TRANSLATING.md for any documented TODOs
    - Note which are tracked vs untracked
 
 ## Output Format
@@ -65,5 +67,6 @@ Total items, High priority count, by category (Documentation/Code/Configuration)
 ## Notes
 
 - Use Grep with pattern `TODO|FIXME` (case insensitive)
+- Exclude `docs/node_modules/`, `docs/dist/` and `docs/.astro/`
 - Distinguish between legitimate TODOs and example comments in training materials
 - Provide actionable priorities, not just a list

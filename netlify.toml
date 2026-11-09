@@ -1,23 +1,29 @@
-# ONLY USED FOR DEPLOY PREVIEWS.
-#
-# Production at https://training.nextflow.io is served by Netlify directly from
-# the `gh-pages` branch (configured in the Netlify UI, no build command). That
-# branch has no netlify.toml of its own, so Netlify just publishes its contents
-# as-is. The versioned, multilingual site under `gh-pages` is built and committed
-# by .github/workflows/docs.yml (which references mike for the version dropdown
-# but constructs the version directories itself rather than calling `mike deploy`).
-#
-# This file is therefore only consulted on PR deploy previews, which build from
-# a master-derived branch where this file IS present. Previews use docs.py
-# build-all to produce a single non-versioned multilingual snapshot.
-[build]
-    command = "curl -LsSf https://astral.sh/uv/install.sh | sh && export PATH=$HOME/.local/bin:$PATH && uv run _scripts/docs.py build-all"
-    publish = "site/"
+################################################################################
+################################################################################
+##                                                                            ##
+##    !!!!!!!!!!!!!!!!!!!!   TEMPORARY FILE: DELETE ME   !!!!!!!!!!!!!!!!!!!!  ##
+##                                                                            ##
+##    DELETE THIS FILE WHEN training.nextflow.io MOVES TO CLOUDFLARE          ##
+##    (the DNS switch planned for the end of November 2026).                  ##
+##                                                                            ##
+##    It exists only so that Netlify builds PR deploy previews of the         ##
+##    Astro site until then. Production on Netlify is served from the         ##
+##    gh-pages branch, which has no build and never reads this file.          ##
+##    After the switch, PR previews come from .github/workflows/              ##
+##    docs-preview.yml (Cloudflare), and Netlify is not used at all.          ##
+##                                                                            ##
+##    DO NOT build on this file. DO NOT copy it. DELETE IT.                   ##
+##                                                                            ##
+################################################################################
+################################################################################
 
-# Netlify's build image installs Python via mise, and with no version pinned it
-# falls back to its legacy default (3.10.6). That release has no GitHub artifact
-# attestations, so mise refuses to install it and the build fails before the
-# build command runs. Pin a current release instead (matches .github/workflows/docs.yml
-# and satisfies `requires-python = ">=3.11"` in _scripts/docs.py).
+# Netlify reads the Node version from docs/.nvmrc. With no BASE set, the site is
+# served from the root, and the version menu stays hidden. English only: the CI
+# build in docs-build.yml still checks the translations when a PR touches them.
+[build]
+  base = "docs"
+  command = "npm ci && npm run build"
+  publish = "dist"
+
 [build.environment]
-    PYTHON_VERSION = "3.14"
+  TRANSLATIONS = "false"

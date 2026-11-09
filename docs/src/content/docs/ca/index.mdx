@@ -1,0 +1,209 @@
+---
+title: Formació en Nextflow
+description: Benvingut/da al portal de formació de la comunitat Nextflow!
+sidebar:
+  label: Inici
+tableOfContents: false
+prev: false
+next: false
+---
+
+<CardGrid>
+
+<Card title="Cursos d'autoservei">
+
+**Benvingut/da al portal de formació de la comunitat Nextflow!**
+
+Seguiu els cursos següents al vostre ritme, en el nostre entorn web o en el vostre propi.
+Cada curs és pràctic, amb exercicis orientats a objectius que podeu completar de manera independent.
+
+<LinkButton href="#catalog-of-nextflow-training-courses" variant="primary" icon="down-arrow">Exploreu els cursos</LinkButton>
+
+</Card>
+
+<Card title="Esdeveniments de formació">
+
+**Busqueu alguna cosa més enllà de l'autoservei?**
+
+Trobeu esdeveniments de formació estructurats, orientació per organitzar les vostres pròpies formacions, i la nostra llicència de codi obert i política de contribució.
+
+<LinkButton href="training_events.mdx" variant="secondary" icon="right-arrow">Vegeu els esdeveniments de formació</LinkButton>
+
+</Card>
+
+</CardGrid>
+
+:::note[Traducció assistida per IA]
+Aquesta traducció ha estat creada utilitzant intel·ligència artificial i revisada per traductors humans.
+Agraïm els vostres comentaris i suggeriments de millora.
+Consulteu la nostra [guia de traducció](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) per a més informació.
+:::
+
+## Catalog of Nextflow training courses
+
+<CardGrid>
+
+<Card title="Per a usuaris">
+
+### Executar pipelines
+
+Apreneu a executar pipelines existents sense escriure cap codi.
+
+<details class="courses">
+<summary>**Nextflow Run:** Executeu pipelines amb Nextflow</summary>
+
+Una introducció ràpida a l'execució de pipelines de Nextflow que no requereix comprendre el codi. Cobreix el llançament de pipelines, la recuperació de sortides, l'ús de contenidors i la configuració de l'execució a un nivell bàsic.
+
+<LinkButton href="nextflow_run/index.mdx" variant="secondary" icon="right-arrow">Veure la formació</LinkButton>
+
+</details>
+
+<details class="courses">
+<summary>**Use nf-core:** Trobeu i executeu pipelines curades per la comunitat</summary>
+
+Una introducció ràpida a la cerca, execució i configuració de pipelines del projecte comunitari nf-core, començant amb un pipeline de demostració mínim i escalant fins a un pipeline d'anàlisi a escala de producció.
+
+<LinkButton href="nfcore_use/index.mdx" variant="secondary" icon="right-arrow">Veure la formació</LinkButton>
+
+</details>
+
+<details class="courses">
+<summary>**Scale with Seqera:** Llanceu i monitoritzeu pipelines a escala</summary>
+
+Una introducció pràctica al llançament i la monitorització de pipelines de Nextflow amb Seqera Platform, tant des de la interfície web com des de la línia de comandes.
+
+<LinkButton href="seqera_scale/index.mdx" variant="secondary" icon="right-arrow">Veure la formació</LinkButton>
+
+</details>
+
+---
+
+### Gestionar l'execució
+
+Apreneu a gestionar l'execució de pipelines de manera eficaç.
+
+<details class="courses">
+<summary>**Configure Execution:** Configureu recursos, reintents i perfils d'execució</summary>
+
+Una introducció pràctica a la configuració de l'execució de pipelines de Nextflow: adaptació a diferents entorns de càlcul, control d'assignacions de recursos i reintents, i canvi entre perfils de configuració predefinits.
+
+<LinkButton href="config_exec/index.mdx" variant="secondary" icon="right-arrow">Veure la formació</LinkButton>
+
+</details>
+
+:::note[Més temes properament]
+L'ajust del rendiment, l'execució en HPC/cloud i més estan planificats per a aquesta secció.
+Voteu sobre què cobrir a continuació en la nostra [breu enquesta d'interès](https://seqera.typeform.com/to/JCs91e8v).
+:::
+
+</Card>
+
+<Card title="Per a desenvolupadors">
+
+### Escriure pipelines
+
+Apreneu a desenvolupar els vostres propis pipelines de Nextflow.
+
+<details class="courses">
+<summary>**Hello Nextflow:** Desenvolupeu els vostres propis pipelines des de zero</summary>
+
+Aquest curs cobreix els components principals del llenguatge Nextflow amb prou detall per permetre el desenvolupament de pipelines senzills però completament funcionals, a més d'elements clau de disseny, desenvolupament i pràctiques de configuració de pipelines.
+
+<LinkButton href="hello_nextflow/index.mdx" variant="secondary" icon="right-arrow">Veure la formació</LinkButton>
+
+</details>
+
+<details class="courses">
+<summary>**Build with nf-core:** Utilitzeu les eines i les regles de nf-core</summary>
+
+Per a desenvolupadors de Nextflow que vulguin aprendre a desenvolupar pipelines compatibles amb [nf-core](https://nf-co.re/).
+El curs cobreix l'estructura dels pipelines de nf-core amb prou detall per permetre el desenvolupament de pipelines senzills però completament funcionals que aprofiten la plantilla de nf-core i les millors pràctiques de desenvolupament, així com l'ús de mòduls de nf-core existents.
+
+<LinkButton href="nfcore_build/index.mdx" variant="secondary" icon="right-arrow">Veure la formació</LinkButton>
+
+</details>
+
+<details class="catalog">
+<summary>**Side Quests:** Aprofundiu en temes avançats de Nextflow</summary>
+
+Una col·lecció de mini-cursos independents destinats a desenvolupadors de Nextflow que vulguin ampliar el seu ventall i/o aprofundir les seves habilitats en temes concrets.
+Es presenten de manera lineal però es poden seguir en qualsevol ordre (vegeu les dependències a la descripció general de cada mini-curs).
+
+<LinkButton href="side_quests/index.mdx" variant="secondary" icon="right-arrow">Exploreu els Side Quests</LinkButton>
+
+</details>
+
+---
+
+### Nextflow per a la Ciència
+
+Apreneu a desenvolupar pipelines de Nextflow per a aplicacions científiques específiques.
+
+<details class="courses">
+<summary>**Genomics:** Desenvolupeu un pipeline de detecció de variants</summary>
+
+Un curs per a investigadors que vulguin aprendre a desenvolupar els seus propis pipelines de genòmica, utilitzant un cas d'ús de detecció de variants per demostrar els patrons essencials de desenvolupament amb Nextflow.
+
+<LinkButton href="nf4_science/genomics/index.mdx" variant="secondary" icon="right-arrow">Veure la formació</LinkButton>
+
+</details>
+
+<details class="courses">
+<summary>**RNAseq:** Desenvolupeu un pipeline de processament de RNAseq massiu</summary>
+
+Un curs per a investigadors que vulguin aprendre a desenvolupar els seus propis pipelines de RNAseq, utilitzant un cas d'ús de processament de RNAseq massiu per demostrar els patrons essencials de desenvolupament amb Nextflow.
+
+<LinkButton href="nf4_science/rnaseq/index.mdx" variant="secondary" icon="right-arrow">Veure la formació</LinkButton>
+
+</details>
+
+<details class="courses">
+<summary>**Bioimaging:** Executeu i configureu pipelines d'imatge</summary>
+
+Un curs per a investigadors que vulguin aprendre a executar i configurar pipelines de bioimatge, utilitzant nf-core/molkart per demostrar els patrons essencials d'ús de Nextflow.
+
+<LinkButton href="nf4_science/imaging/index.mdx" variant="secondary" icon="right-arrow">Veure la formació</LinkButton>
+
+</details>
+
+</Card>
+
+</CardGrid>
+
+## Configuració i ajuda
+
+<CardGrid>
+
+<Card title="Entorn de formació">
+
+Opcions per configurar el vostre entorn per a les formacions de Nextflow.
+
+<LinkButton href="envsetup/index.mdx" variant="secondary" icon="right-arrow">Vegeu els entorns de formació</LinkButton>
+
+</Card>
+
+<Card title="Versions de Nextflow">
+
+Comprensió i gestió de l'evolució de les versions de sintaxi de Nextflow.
+
+<LinkButton href="info/nxf_versions.mdx" variant="secondary" icon="right-arrow">Comproveu els requisits de versió</LinkButton>
+
+</Card>
+
+<Card title="El pipeline Hello">
+
+Resum del que fa el pipeline Hello i com està estructurat.
+
+<LinkButton href="info/hello_pipeline.mdx" variant="secondary" icon="right-arrow">Llegiu el resum</LinkButton>
+
+</Card>
+
+<Card title="Obtenir ajuda">
+
+Recursos útils quan teniu un problema amb la formació de Nextflow.
+
+<LinkButton href="help.mdx" variant="secondary" icon="right-arrow">Trobeu ajuda</LinkButton>
+
+</Card>
+
+</CardGrid>

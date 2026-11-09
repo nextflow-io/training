@@ -1,0 +1,14 @@
+{
+  "courseInfo.courseSummary": "Kurs Özeti",
+  "courseInfo.additionalInformation": "Ek Bilgiler",
+  "courseInfo.technicalRequirements": "Teknik Gereksinimler",
+  "courseInfo.learningObjectives": "Öğrenme Hedefleri",
+  "courseInfo.audiencePrerequisites": "Hedef Kitle ve Ön Koşullar",
+  "courseInfo.courseVideos": "Kurs Videoları",
+  "courseInfo.defaultTechnicalRequirements": "Bir GitHub hesabına VEYA yerel bir Nextflow kurulumuna ihtiyacınız olacak. Daha fazla ayrıntı için [Ortam seçenekleri](../envsetup/index.md) sayfasına bakın.",
+  "courseInfo.defaultVideos": "Her bölüm için eğitmenin alıştırmaları yaptığı videolar mevcuttur. Kursun her bölümüne ait video, ilgili sayfanın üst kısmına yerleştirilmiştir.",
+  "courseInfo.viewPlaylist": "YouTube'da oynatma listesini görüntüle",
+  "consent.title": "Çerez Onayı",
+  "consent.description": "Tekrarlayan ziyaretlerinizi ve tercihlerinizi tanımak, dokümantasyonumuzun etkinliğini ölçmek ve kullanıcıların aradıklarını bulup bulmadığını belirlemek için çerezler kullanıyoruz. Onayınızla eğitim materyallerimizi geliştirmemize yardımcı oluyorsunuz. <a href=\"https://seqera.io/privacy-policy/#cookies\" target=\"_blank\" rel=\"noopener\">Çerezleri nasıl kullandığımız</a> hakkında daha fazla bilgi edinin.",
+  "consent.posthog": "PostHog Analytics"
+}

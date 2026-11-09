@@ -1,0 +1,6 @@
+graph LR
+    A[User runs pipeline] --> B[Parameter validation]
+    B -->|✓ Valid| C[Input data validation]
+    B -->|✗ Invalid| D[Error: Fix parameters]
+    C -->|✓ Valid| E[Pipeline executes]
+    C -->|✗ Invalid| F[Error: Fix input data]

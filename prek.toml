@@ -1,0 +1,44 @@
+# Configuration file for `prek`, a git hook framework written in Rust.
+# See https://prek.j178.dev for more information.
+#:schema https://www.schemastore.org/prek.json
+
+[[repos]]
+repo = "https://github.com/rbubley/mirrors-prettier"
+rev = "v3.9.10"
+hooks = [
+  {
+    id = "prettier",
+    additional_dependencies = [
+      "prettier@3.9.10",
+      "prettier-plugin-astro@1.1.2"
+    ],
+    exclude = '^\.claude/skills/'
+  }
+]
+
+[[repos]]
+repo = "https://github.com/editorconfig-checker/editorconfig-checker.python"
+rev = "3.2.1"
+hooks = [
+  {
+    id = "editorconfig-checker",
+    alias = "ec",
+    exclude = "side-quests/plugin_development/.*/nf-greeting/(COPYING|gradlew)$"
+  }
+]
+
+[[repos]]
+repo = "https://github.com/pre-commit/pre-commit-hooks"
+rev = "v5.0.0"
+hooks = [
+  {
+    id = "trailing-whitespace",
+    exclude_types = ["svg"],
+    exclude = "(^hello-nf-core/solutions/core-hello-.*/)|(side-quests/plugin_development/.*/COPYING$)"
+  },
+  {
+    id = "end-of-file-fixer",
+    exclude_types = ["svg"],
+    exclude = "(^hello-nf-core/solutions/core-hello-.*/)|(side-quests/plugin_development/.*/COPYING$)"
+  }
+]

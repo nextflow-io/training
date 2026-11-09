@@ -58,14 +58,6 @@ class Link(NamedTuple):
     attrs: str | None
 
 
-class HtmlLink(NamedTuple):
-    line_no: int
-    start: int
-    end: int
-    attrs: str
-    text: str
-
-
 @dataclass
 class CodeBlock:
     start_line: int

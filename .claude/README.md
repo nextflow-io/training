@@ -4,109 +4,96 @@ This directory contains Claude AI assistant configuration to help developers cre
 
 ## Files Overview
 
-### `CLAUDE.md` (in repository root)
+### `AGENTS.md` (in repository root)
 
 Core rules and conventions for this repository. Claude automatically follows these guidelines for:
 
 - Nextflow script development (DSL2, process naming, params)
-- Markdown documentation formatting (heading numbering, admonitions, code blocks)
+- Page formatting (MDX frontmatter, heading numbering, asides, code blocks)
 - Repository structure and organization
 - Content style and best practices
 - Common commands and gotchas
 
-### `commands/` Directory
-
-Slash commands for interactive content creation tasks that use templates and require user input.
-
 ### `skills/` Directory
 
-Skills for autonomous multi-step tasks like validation, testing, and analysis.
+Skills for content creation, preview, validation and testing. Run one with `/<name>`, or ask Claude and it picks the skill when relevant.
 
-## Commands vs Skills: Design Rationale
+`skills/shared/repo-conventions.md` holds the directory mapping and file conventions that every skill uses.
 
-### Commands (Interactive, Template-Based)
+## Skill Types: Design Rationale
 
-Commands are used for **content creation** tasks that:
+### Authoring skills (Interactive, Template-Based)
+
+Used for **content creation** tasks that:
 
 - Follow a template or standard structure
 - Need user questions/answers for customization
-- Benefit from showing the full prompt/checklist to the user
 - Are step-by-step guided workflows
 
-### Skills (Autonomous, Multi-Step)
+### Checking skills (Autonomous, Multi-Step)
 
-Skills are used for **validation and testing** tasks that:
+Used for **validation and testing** tasks that:
 
 - Require searching across multiple files
 - Need to run commands and analyze outputs
 - Make decisions based on what they find
 - Can work independently without constant user input
 
-## Available Commands
+## Authoring Skills
 
 ### `/new-module`
 
-**Why a command**: Template-based scaffolding requiring user input about module name, location, and content.
+Creates a complete training module with standard structure under `docs/src/content/docs/`:
 
-Creates a complete training module with standard structure:
-
-- index.md (overview)
-- 00_orientation.md (prerequisites and intro)
+- `index.mdx` (overview with the index page frontmatter)
+- `00_orientation.mdx` (prerequisites and intro)
 - Numbered lesson files
-- survey.md and next_steps.md
-- solutions/ directory
+- `survey.mdx` and `next_steps.mdx`
+- A sidebar group in `docs/src/sidebar.mjs`
 
 ### `/new-lesson`
 
-**Why a command**: Guided workflow that asks questions and fills in a template structure.
-
 Creates a new lesson page within an existing module with:
 
+- `title` and `description` frontmatter
 - Proper heading numbering (1., 1.1., etc.)
 - Takeaway and What's next? sections
 - Placeholder code blocks with proper formatting
-- Standard structure
+- A sidebar entry in `docs/src/sidebar.mjs`
 
 ### `/add-exercise`
 
-**Why a command**: Interactive insertion requiring decisions about placement, content, and difficulty level.
-
 Adds an exercise with solution to an existing lesson:
 
-- Uses `??? exercise` and `??? solution` admonitions
+- Uses `<details class="exercise">` and `<details class="solution">` blocks
 - Creates corresponding solution files if needed
 - Proper formatting and structure
 
-### `/preview`
+### `/preview` and `/stop-preview`
 
-**Why a command**: One-command convenience to start the preview server.
+Start and stop the Astro dev server (`npm run dev` in `docs/`) at http://localhost:4321/. Pages reload on save.
 
-Starts the Docker-based MkDocs preview server:
-
-- Runs the training-specific Docker image
-- Serves on http://0.0.0.0:8000/
-- Auto-refreshes on file changes
-
-## Available Skills
+## Checking Skills
 
 ### `validate`
-
-**Why a skill**: Autonomous multi-step validation requiring searches, tool execution, and analysis.
 
 Runs comprehensive validation and review checks:
 
 - Heading numbering validation (runs check_headings.py)
+- Code block meta audit (runs check-fences.mjs)
+- Site build with the links validator
 - TODO/FIXME comment search and categorization
 - Nextflow script convention checking
-- Orphaned file detection
-- Admonition syntax verification
+- Orphaned page detection (pages missing from the sidebar)
 - Deep lesson review (structure, formatting, content accuracy, teaching effectiveness)
 
-Outputs structured report with actionable recommendations. Includes lesson review functionality.
+Outputs structured report with actionable recommendations.
+
+### `check-highlights` and `check-inline-code`
+
+Check line highlight ranges (`{3-5}`, `# [!code highlight]`) and inline code (`` `x{:nextflow}` ``). `validate` runs both.
 
 ### `test-example`
-
-**Why a skill**: Complex autonomous task requiring script execution, output verification, and comparison with docs.
 
 Tests a Nextflow script and verifies documentation accuracy:
 
@@ -116,16 +103,17 @@ Tests a Nextflow script and verifies documentation accuracy:
 - Compares actual behavior with documented behavior
 - Reports discrepancies and suggests fixes
 
+### `run-tutorial` and `docker-setup`
+
+Walk through a lesson as a learner would, in the training Docker image, and compare every command's output with the page.
+
 ### `find-todos`
 
-**Why a skill**: Search and analysis task that works autonomously across the codebase.
+Searches for TODO/FIXME comments in pages, Nextflow scripts and config files, and groups them by priority.
 
-Searches for TODO/FIXME comments:
+### `starlight-codeblocks`
 
-- Markdown files, Nextflow scripts, config files
-- Categorizes by priority (high, medium, low)
-- Groups by file and provides context
-- Recommends prioritization
+Reference for every code block feature on the site. Vendored unchanged from the `starlight-codeblocks` npm package (`docs/node_modules/starlight-codeblocks/skills/`); copy it again after upgrading the package.
 
 ## Quick Examples
 
@@ -143,9 +131,7 @@ Searches for TODO/FIXME comments:
 /preview
 ```
 
-**Validate and review (skills - Claude invokes these automatically when relevant):**
-
-Claude will automatically use these skills when appropriate, or you can mention them by name:
+**Validate and review:**
 
 - "Can you validate the training materials?"
 - "Please review this lesson for quality"
@@ -154,12 +140,13 @@ Claude will automatically use these skills when appropriate, or you can mention 
 
 ## Key Repository Conventions
 
-### Markdown Files
+### Pages
 
+- `.mdx` files with `title:` and `description:` frontmatter, no H1
 - Each sentence on new line (cleaner git diffs)
 - Numbered headings with trailing periods: `## 1. Section`, `### 1.1. Subsection`
 - Takeaway and What's next? sections at end of major sections
-- Use admonitions: `!!! note`, `!!! tip`, `!!! warning`, `??? exercise`, `??? solution`
+- Asides `:::note`, `:::tip`, `:::caution`; collapsibles `<details class="exercise">`, `<details class="solution">`
 
 ### Nextflow Scripts
 
@@ -171,30 +158,22 @@ Claude will automatically use these skills when appropriate, or you can mention 
 
 ### Code Blocks
 
-Include line numbers, titles, and highlighting:
+Include titles, line numbers and highlighting:
 
-```groovy title="example.nf" linenums="1" hl_lines="3"
+````mdx
+```nextflow {3} title="example.nf" showLineNumbers
 #!/usr/bin/env nextflow
 
 params.greeting = 'Hello'  // highlighted
 ```
-
-## Hooks
-
-### User Prompt Submit Hook
-
-Automatically runs heading validation when you submit a prompt:
-
-- Executes: `uv run .github/check_headings.py docs/**/*.md`
-- Provides immediate feedback on heading numbering issues
-- Non-blocking (allows operation to continue even if issues found)
+````
 
 ## Development Workflow
 
 1. **Create/Edit Content**
 
    - Use `/new-lesson` or `/new-module` for structure
-   - Follow conventions in `CLAUDE.md`
+   - Follow conventions in `AGENTS.md`
    - Add exercises with `/add-exercise`
 
 2. **Review Quality**
@@ -209,16 +188,16 @@ Automatically runs heading validation when you submit a prompt:
 
 4. **Update Navigation**
 
-   - Manually edit `docs/en/mkdocs.yml` to add new content
+   - Add new pages to `docs/src/sidebar.mjs`
    - Or just ask Claude to update it
 
 5. **Preview Locally**
 
-   - Run: `mkdocs serve` or use Docker (see CONTRIBUTING.md)
-   - View at http://127.0.0.1:8000/
+   - Run `cd docs && npm run dev`, or use `/preview` (see CONTRIBUTING.md)
+   - View at http://localhost:4321/
 
 6. **Commit**
-   - Heading validation runs automatically
+   - Run the heading check (CI runs it on every PR)
    - Write clear commit message
    - Push to fork and open PR
 
@@ -227,7 +206,6 @@ Automatically runs heading validation when you submit a prompt:
 Consider also using:
 
 - **Vale**: Linting for docs (can be added as separate PR/hook)
-- **Prettier**: Markdown formatting (install VSCode extension)
 - **Todo Tree**: VSCode extension to track TODO comments
 - **Excalidraw**: VSCode extension for editing diagrams
 
@@ -237,3 +215,5 @@ Consider also using:
 - **TRANSLATING.md** - Translation guide (all translations are AI-generated)
 - **Training Site** - https://training.nextflow.io
 - **Nextflow Docs** - https://www.nextflow.io/docs/latest/
+- **Starlight Docs** - https://starlight.astro.build/
+- **starlight-codeblocks Docs** - https://ewels.github.io/starlight-codeblocks/

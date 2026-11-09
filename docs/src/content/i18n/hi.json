@@ -1,0 +1,14 @@
+{
+  "courseInfo.courseSummary": "कोर्स सारांश",
+  "courseInfo.additionalInformation": "अतिरिक्त जानकारी",
+  "courseInfo.technicalRequirements": "तकनीकी आवश्यकताएँ",
+  "courseInfo.learningObjectives": "सीखने के उद्देश्य",
+  "courseInfo.audiencePrerequisites": "लक्षित दर्शक और पूर्वापेक्षाएँ",
+  "courseInfo.courseVideos": "कोर्स वीडियो",
+  "courseInfo.defaultTechnicalRequirements": "आपको एक GitHub खाता या Nextflow का लोकल इंस्टॉलेशन चाहिए होगा। अधिक जानकारी के लिए [वातावरण विकल्प](../envsetup/index.md) देखें।",
+  "courseInfo.defaultVideos": "प्रत्येक अध्याय के लिए वीडियो उपलब्ध हैं, जिसमें एक प्रशिक्षक अभ्यासों को करके दिखाता है। कोर्स के प्रत्येक भाग का वीडियो संबंधित पेज के शीर्ष पर एम्बेड किया गया है।",
+  "courseInfo.viewPlaylist": "YouTube पर प्लेलिस्ट देखें",
+  "consent.title": "कुकी सहमति",
+  "consent.description": "हम आपकी बार-बार की विज़िट और प्राथमिकताओं को पहचानने के लिए, साथ ही हमारे दस्तावेज़ों की प्रभावशीलता और उपयोगकर्ताओं को उनकी खोज में मदद मिल रही है या नहीं, यह मापने के लिए कुकीज़ का उपयोग करते हैं। आपकी सहमति से, आप हमारी प्रशिक्षण सामग्री को बेहतर बनाने में मदद कर रहे हैं। <a href=\"https://seqera.io/privacy-policy/#cookies\" target=\"_blank\" rel=\"noopener\">हम कुकीज़ का उपयोग कैसे करते हैं</a> इसके बारे में अधिक जानें।",
+  "consent.posthog": "PostHog Analytics"
+}

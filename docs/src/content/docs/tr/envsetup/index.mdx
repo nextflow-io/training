@@ -1,0 +1,53 @@
+---
+title: Ortam seçenekleri
+description: Nextflow eğitimleri için ortamınızı ayarlama seçenekleri
+tableOfContents: false
+prev: false
+next: false
+---
+
+<span class="ai-translation-notice">Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
+
+
+Öğrencilerin yazılım yönetimi ile zaman ve çaba harcamak yerine Nextflow öğrenmeye odaklanmalarını sağlayan tutarlı ve kapsamlı olarak test edilmiş bir ortam sağlamayı hedefliyoruz.
+Bu amaçla, tüm kurslarımızda çalışmak için gerekli tüm yazılımları, kod dosyalarını ve örnek verileri içeren konteynerize bir ortam geliştirdik.
+
+Bu konteynerize ortam, Github Codespaces üzerinde hazır olarak veya Devcontainers eklentisi ile VS Code'da yerel olarak çalıştırılabilir.
+
+<CardGrid>
+
+<Card title="Github Codespaces">
+
+GitHub Codespaces, buluttaki sanal makineler tarafından desteklenen, tüm araçlar ve veriler dahil önceden oluşturulmuş bir eğitim ortamı sağlamamıza olanak tanıyan web tabanlı bir hizmettir. Github hesabı olan herkes için ücretsiz olarak erişilebilir.
+
+<LinkButton href="01_setup.mdx" variant="primary" icon="right-arrow">Github Codespaces kullanın</LinkButton>
+
+</Card>
+
+<Card title="Yerel Devcontainer'lar">
+
+Devcontainer'lı VS Code, tüm eğitim araçları önceden yapılandırılmış, yerel olarak çalışan konteynerize bir geliştirme ortamı sağlar. Codespaces ile aynı önceden oluşturulmuş ortamı sunar ancak tamamen yerel donanımınızda çalışır.
+
+<LinkButton href="03_devcontainer.mdx" variant="primary" icon="right-arrow">Devcontainer'ları yerel olarak kullanın</LinkButton>
+
+</Card>
+
+</CardGrid>
+
+## Manuel kurulum talimatları
+
+Yukarıdaki seçeneklerin hiçbiri ihtiyaçlarınıza uymuyorsa, yazılım bağımlılıklarını manuel olarak yükleyerek ve eğitim deposunu klonlayarak bu ortamı kendi yerel sisteminizde çoğaltabilirsiniz.
+
+<LinkButton href="02_local.mdx" variant="primary" icon="right-arrow">Manuel kurulum</LinkButton>
+
+---
+
+:::note[Gitpod'un kullanımdan kaldırılması]
+Nextflow Eğitimi, Şubat 2025'e kadar [Gitpod](https://gitpod.io) kullanıyordu.
+Ancak Gitpod yapımcıları, ücretsiz işlevselliği [Gitpod Flex](https://www.gitpod.io/blog/introducing-gitpod-flex) sistemi lehine emekliye ayırmaya karar verdi.
+Bu nedenle, önceden kurulum gerektirmeden tek tıklamayla geliştirici ortamı sunan GitHub Codespaces'e geçtik.
+
+Gitpod'a ne zaman kaydolduğunuza ve hizmeti tam olarak ne zaman emekliye ayıracaklarına bağlı olarak, eski bulut IDE'lerinde eğitimi başlatabilirsiniz, ancak ileriye dönük güvenilir erişimi garanti edemeyiz:
+[Gitpod'da aç](https://gitpod.io/#https://github.com/nextflow-io/training).
+:::

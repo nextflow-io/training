@@ -12,13 +12,15 @@ import git
 from .config import (
     DOCS_ROOT,
     EN_DOCS,
+    LANGUAGES_DIR,
     REPO_ROOT,
     SCRIPTS_DIR,
     ConfigError,
     get_exclude_dirs,
+    get_translate_config,
 )
 from .models import TranslationFile
-from .paths import en_to_lang_path, iter_en_docs, lang_to_en_path
+from .paths import en_to_lang_path, is_en_doc, iter_en_docs, lang_to_en_path
 
 
 @lru_cache
@@ -94,7 +96,8 @@ def get_translation_baseline(
     """Get the commit SHA that the last translation was based on.
 
     Finds the most recent merged translation PR and extracts the
-    trigger commit from its body.
+    trigger commit from its body. ``baseline`` in translate_config.yml
+    wins when that PR's commit is older than it.
 
     Raises:
         ConfigError: If no translation PR found or commit cannot be extracted
@@ -121,6 +124,7 @@ def get_translation_baseline(
     prs = repo.get_pulls(state="closed", sort="updated", direction="desc")
     commit_pattern = re.compile(r"commit:?\s*([a-f0-9]{7,40})")
 
+    floor = get_translate_config().get("baseline")
     for pr in prs:
         if not pr.merged:
             continue
@@ -129,8 +133,13 @@ def get_translation_baseline(
         if pr.body:
             match = commit_pattern.search(pr.body)
             if match:
-                return match.group(1)
+                found = match.group(1)
+                if floor and _get_repo().is_ancestor(found, floor):
+                    return str(floor)
+                return found
 
+    if floor:
+        return str(floor)
     raise ConfigError(
         "Could not find baseline commit from previous translation PRs. "
         "Use --since to specify a commit manually."
@@ -163,7 +172,7 @@ def resolve_baseline(since: str | None, console=None) -> str:
 
 def _prompt_paths(lang: str) -> tuple[Path, Path]:
     """Return (general_prompt, lang_prompt) paths for a language."""
-    return SCRIPTS_DIR / "general-llm-prompt.md", DOCS_ROOT / lang / "llm-prompt.md"
+    return SCRIPTS_DIR / "general-llm-prompt.md", LANGUAGES_DIR / lang / "llm-prompt.md"
 
 
 def prompt_changed_since(lang: str, baseline: str) -> bool:
@@ -229,17 +238,18 @@ def get_orphaned_files(lang: str) -> list[Path]:
     Translations in excluded directories are not flagged as orphaned,
     since their English sources are intentionally skipped.
     """
-    lang_docs = DOCS_ROOT / lang / "docs"
+    lang_docs = DOCS_ROOT / lang
     if not lang_docs.exists():
         return []
     exclude_dirs = get_exclude_dirs()
     orphaned = []
-    for p in lang_docs.rglob("*.md"):
+    for p in lang_docs.rglob("*.mdx"):
         # Skip files in excluded directories
         rel = p.relative_to(lang_docs)
         if rel.parts and rel.parts[0] in exclude_dirs:
             continue
-        if not lang_to_en_path(p, lang).exists():
+        en_path = lang_to_en_path(p, lang)
+        if not (is_en_doc(en_path) and en_path.exists()):
             orphaned.append(p)
     return orphaned
 
@@ -255,7 +265,7 @@ def get_renamed_files(baseline: str) -> dict[Path, Path]:
     """
     repo = _get_repo()
     diff_output = repo.git.diff(
-        "--name-status", "-M", f"{baseline}..HEAD", "--", "docs/en/docs/"
+        "--name-status", "-M", f"{baseline}..HEAD", "--", str(EN_DOCS.relative_to(REPO_ROOT))
     )
     renames: dict[Path, Path] = {}
     for line in diff_output.splitlines():
@@ -265,7 +275,8 @@ def get_renamed_files(baseline: str) -> dict[Path, Path]:
         if len(parts) == 3:
             old_path = REPO_ROOT / parts[1]
             new_path = REPO_ROOT / parts[2]
-            renames[old_path] = new_path
+            if is_en_doc(old_path) and is_en_doc(new_path):
+                renames[old_path] = new_path
     return renames
 
 

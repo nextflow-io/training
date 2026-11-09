@@ -22,6 +22,8 @@ The key insight: **to fix a translation, fix the prompt** - not the translated f
 ### Contents
 
 - [How to Improve Existing Translations](#how-to-improve-existing-translations)
+- [Understanding the Translation Prompts](#understanding-the-translation-prompts)
+- [What the Translation Sees](#what-the-translation-sees)
 - [How Translation Updates Work](#how-translation-updates-work)
 - [Reviewing Translation PRs](#reviewing-translation-prs)
 - [How to Add a Missing Course](#how-to-add-a-missing-course)
@@ -38,8 +40,8 @@ Found a translation error or want to suggest an improvement? Here's how to fix i
 ```mermaid
 flowchart TD
     A[Find translation error] --> B{Type of issue?}
-    B -->|Wrong term| C[Update glossary in<br>docs/LANG/llm-prompt.md<br>or glossary.yml]
-    B -->|Wrong style/tone| D[Update grammar rules in<br>docs/LANG/llm-prompt.md]
+    B -->|Wrong term| C[Update glossary in<br>_scripts/translate/languages/LANG/<br>llm-prompt.md or glossary.yml]
+    B -->|Wrong style/tone| D[Update grammar rules in<br>_scripts/translate/languages/LANG/<br>llm-prompt.md]
     B -->|Structural issue| E[Update rules in<br>_scripts/general-llm-prompt.md]
     C --> F[Open PR with prompt change]
     D --> F
@@ -62,10 +64,10 @@ The **only** sustainable way to fix translations is to improve the LLM prompts:
 
 1. **For language-specific issues** (terminology, tone, grammar):
 
-   - Edit `docs/<lang>/llm-prompt.md`
+   - Edit `_scripts/translate/languages/<lang>/llm-prompt.md`
    - Add glossary terms, clarify rules, provide examples
 
-2. **For structural issues** (code blocks, formatting, links):
+2. **For structural issues** (code blocks, MDX syntax, links):
 
    - Edit `_scripts/general-llm-prompt.md`
    - Add rules with before/after examples
@@ -108,17 +110,17 @@ Contains rules that apply to ALL languages:
 
 - What to translate vs keep in English
 - Code block handling (never translate syntax, always translate comments)
-- Formatting preservation (links, anchors, admonitions)
+- Formatting preservation (frontmatter, MDX components, links, anchors)
 - Technical term lists (Nextflow keywords, operators, directives)
 - Validation requirements
 
-### Language-Specific Prompts (`docs/<lang>/llm-prompt.md`)
+### Language-Specific Prompts (`_scripts/translate/languages/<lang>/llm-prompt.md`)
 
 Contains rules specific to each language:
 
 - Grammar and tone (formal/informal)
 - Terms that get translated (with exact translations)
-- Admonition titles
+- Aside and collapsible titles
 - Common expressions
 - Language-specific mistakes to avoid
 
@@ -130,7 +132,7 @@ When prompts conflict, **language-specific rules override general rules**. This 
 
 If you're a native speaker and want to improve translation quality:
 
-1. **Read the current prompt** for your language in `docs/<lang>/llm-prompt.md`
+1. **Read the current prompt** for your language in `_scripts/translate/languages/<lang>/llm-prompt.md`
 2. **Identify the issue type**:
    - Wrong term → Add/update entry in "Terms to Translate"
    - Wrong tone → Clarify in "Grammar & Tone" section
@@ -145,6 +147,36 @@ Good prompt improvements include:
 - Clarifying ambiguous rules with examples
 - Adding common mistakes that keep occurring
 - Regional spelling/grammar preferences
+
+---
+
+## What the Translation Sees
+
+English pages are MDX files under `docs/src/content/docs/`.
+Each translation is the same file at the same relative path under `docs/src/content/docs/<lang>/`.
+A translation must keep the MDX structure intact, or the site build fails.
+
+| Element                  | English source                                                        | In the translation                                                                     |
+| ------------------------ | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Frontmatter              | `title:`, `description:`, `additional_information:` text              | Translate the values; keep keys and `page_type`, `index_type`, `tableOfContents` as is |
+| Code includes            | `import x from '...?raw';` after the frontmatter, `<Code code={x} />` | Keep the `<Code>` tag; the import path is one `../` deeper                             |
+| Images                   | `![Alt](./img/x.excalidraw.svg)`                                      | Translate the alt text; the path points into the English tree (images are not copied)  |
+| Asides                   | `:::tip[Title]` ... `:::`                                             | Translate the title and body; keep the markers                                         |
+| Collapsibles             | `<details class="exercise">`, `<summary>Title</summary>`              | Translate the summary and body; keep the tags and class                                |
+| Components               | `<CodeWalkthrough>`, `<Quiz id="...">`, `<LinkButton href="...">`     | Keep tags and attributes; translate text between the tags                              |
+| Code blocks              | ` ```nextflow {2} title="main.nf" `                                   | Keep the code and the fence meta; translate code comments                              |
+| Command output           | `# [!output]` and the lines after it, inside a `bash` block           | Keep unchanged                                                                         |
+| Annotations              | `// [!annotate] Explanation`                                          | Translate the explanation; keep the marker                                             |
+| Inline code highlighting | `` `channel.of(1){:nextflow}` ``                                      | Keep unchanged                                                                         |
+| Headings and anchors     | `## 1. Title {#custom-id}`                                            | Translate the title; keep the number and `{#custom-id}`                                |
+| Links                    | `[text](../hello_nextflow/01_hello_world.mdx#anchor)`                 | Translate the text; keep the target                                                    |
+| MDX comments and escapes | `{/* ... */}`, `\{`, `\}`, `&lt;`                                     | Keep unchanged                                                                         |
+
+Walkthrough `step="..."` values, code tab `label="..."` values and `<TabItem label>` values are translated.
+Post-processing sets them from `tab_labels` in `glossary.yml` (such as Before and After) and restores every other fence attribute from English.
+Image paths and `?raw` imports need no attention: post-processing points them at the English files.
+
+Pages that have no translation yet show the English page, with a notice that it is not available in that language.
 
 ---
 
@@ -188,11 +220,12 @@ flowchart TD
 - Translations preserve line-by-line structure for easy diff review
 - Each run creates a single PR containing updates for all affected languages
 - The system uses the last merged translation PR's commit SHA as the baseline for change detection
+- `baseline: <commit SHA>` in `_scripts/translate/translate_config.yml` replaces it while the last translation PR's commit is older; `--since <commit>` on `translate` and `sync` overrides both for one run
 - **Translation PRs should be merged promptly** to avoid them stacking up or becoming outdated
 
 ### Excluding Directories from Translation
 
-To prevent specific directories under `docs/en/docs/` from being translated, add them to `_scripts/translate/translate_config.yml`:
+To prevent specific directories under `docs/src/content/docs/` from being translated, add them to `_scripts/translate/translate_config.yml`:
 
 ```yaml
 exclude_dirs:
@@ -200,8 +233,10 @@ exclude_dirs:
   - archive
 ```
 
+Each entry is the name of a top-level directory under `docs/src/content/docs/`.
+
 Excluded directories are skipped during sync (both new and outdated detection) and are not flagged as orphaned.
-Pages in excluded directories still appear on translated sites, showing the English content with a "Translation in Progress" admonition.
+Pages in excluded directories still appear on translated sites, showing the English content.
 
 ---
 
@@ -219,10 +254,11 @@ When reviewing a translation PR, follow these guidelines:
 
 2. **Formatting preservation**
 
-   - Are code blocks intact and properly formatted?
-   - Are admonitions (note, tip, warning) correctly structured?
-   - Are heading anchors preserved (`{ #anchor-name }`)?
-   - Are links working (URLs unchanged, only link text translated)?
+   - Does the PR's docs build pass? A broken MDX tag, brace or frontmatter key fails it
+   - Are code blocks intact, including their fence meta and `# [!output]` sections?
+   - Are asides (`:::note`), collapsibles (`<details>`) and components correctly structured?
+   - Are heading anchors preserved (`{#anchor-name}`)?
+   - Are links working (targets unchanged, only link text translated)? The links validator checks this in the build
 
 3. **Language quality**
    - Is the tone appropriate (formal/informal per language)?
@@ -243,8 +279,8 @@ When you find an issue during review:
 ```mermaid
 flowchart TD
     A[Find translation error] --> B{Type of issue?}
-    B -->|Wrong term| C[Update glossary in<br>docs/LANG/llm-prompt.md<br>or glossary.yml]
-    B -->|Wrong style/tone| D[Update grammar rules in<br>docs/LANG/llm-prompt.md]
+    B -->|Wrong term| C[Update glossary in<br>_scripts/translate/languages/LANG/<br>llm-prompt.md or glossary.yml]
+    B -->|Wrong style/tone| D[Update grammar rules in<br>_scripts/translate/languages/LANG/<br>llm-prompt.md]
     B -->|Structural issue| E[Update rules in<br>_scripts/general-llm-prompt.md]
     C --> F[Close translation PR]
     D --> F
@@ -260,7 +296,7 @@ flowchart TD
 
 2. **Merge the prompt fix to master**:
 
-   - Language-specific issues → edit `docs/<lang>/llm-prompt.md`
+   - Language-specific issues → edit `_scripts/translate/languages/<lang>/llm-prompt.md`
    - General formatting issues → edit `_scripts/general-llm-prompt.md`
 
 3. **Re-trigger the translation workflow**:
@@ -276,7 +312,7 @@ flowchart TD
 If "workflow" is incorrectly translated as "flujo" instead of "flujo de trabajo" in Spanish:
 
 1. Close the current translation PR
-2. Edit `docs/es/llm-prompt.md` and add or update the glossary entry:
+2. Edit `_scripts/translate/languages/es/llm-prompt.md` and add or update the glossary entry:
 
    | English  | Spanish                        |
    | -------- | ------------------------------ |
@@ -314,8 +350,8 @@ For maintainers with `ANTHROPIC_API_KEY` access:
 ```bash
 cd _scripts
 
-# Translate one file at a time
-uv run python -m translate translate nf4_science/index.md --lang pt
+# Translate one file at a time (path relative to docs/src/content/docs/)
+uv run python -m translate translate nf4_science/index.mdx --lang pt
 
 # Or sync all (update outdated + add missing + remove orphaned)
 uv run python -m translate sync pt
@@ -331,25 +367,33 @@ uv run python -m translate sync pt
 
 ## How to Add a New Language
 
-### Step 1: Create Language Structure
+### Step 1: Register the Language
 
-Use the GitHub Actions workflow or CLI:
+1. Run the `new-lang` command from `_scripts/`.
+   It creates the prompt and glossary stubs in `_scripts/translate/languages/<lang>/`, copies `en.json` to `docs/src/content/i18n/<lang>.json` and adds the language to `_scripts/translate/language_names.yml`:
 
-```bash
-cd _scripts
-uv run python docs.py new-lang <lang-code>
-```
+   ```bash
+   cd _scripts
+   uv run python -m translate new-lang sv --name Svenska
+   ```
 
-This creates:
+2. Add the locale to `allLocales` in `docs/src/locales.mjs`, with the language's own name as the label:
 
-- `docs/<lang>/mkdocs.yml` - MkDocs config (inherits from English)
-- `docs/<lang>/llm-prompt.md` - Translation prompt (requires customization)
-- `docs/<lang>/ui-strings.yml` - UI strings (copied from English, requires translation)
-- `docs/<lang>/docs/` - Directory for translated content
+   ```js
+   export const allLocales = {
+     root: { label: "English", lang: "en" },
+     // ...
+     sv: { label: "Svenska" },
+   };
+   ```
+
+3. Translate the values in `docs/src/content/i18n/<lang>.json`; Starlight translates its own UI strings for most languages.
+4. Add the code to `LOCALES` in `.github/check_headings.py`, so the heading check skips the translated pages
+5. Optionally, add a translation for each sidebar group label in `docs/src/sidebar.mjs` (the `translations` maps). Page entries use the translated page titles automatically
 
 ### Step 2: Customize the Translation Prompt
 
-Edit `docs/<lang>/llm-prompt.md` to define:
+Create `_scripts/translate/languages/<lang>/llm-prompt.md` to define:
 
 1. **Grammar preferences**
 
@@ -363,29 +407,25 @@ Edit `docs/<lang>/llm-prompt.md` to define:
    - Terms to translate (with exact translations)
    - Common mistakes to avoid
 
-3. **Admonition titles**
+3. **Aside and collapsible titles**
    - Translations for Note, Tip, Warning, Exercise, Solution
 
-See existing language prompts for examples (e.g., `docs/pt/llm-prompt.md`).
+See existing language prompts for examples (e.g., `_scripts/translate/languages/pt/llm-prompt.md`).
 
 ### Step 3: Create the Post-Processing Glossary
 
-Create `docs/<lang>/glossary.yml` with deterministic translations that are enforced by post-processing (independent of LLM output):
-
-- `translation_notice`: AI translation notice text and homepage admonition
-- `tab_labels`: canonical Before/After translations (must be consistent for MkDocs tab sync)
-- `admonition_titles`: default titles for bare admonitions (note, tip, warning, etc.)
-- `admonition_title_glossary`: translations for common titled admonitions (Command output, Directory contents, etc.)
-
-See `docs/pt/glossary.yml` for an example.
+Create `_scripts/translate/languages/<lang>/glossary.yml` with deterministic translations that are enforced by post-processing (independent of LLM output), such as the AI translation notice and common titles (Command output, Directory contents, ...).
+See `_scripts/translate/languages/pt/glossary.yml` for an example.
 These translations are applied deterministically during post-processing and override whatever the LLM produces, ensuring consistency across all files.
 
-### Step 4: Register the Language
+The keys are:
 
-1. Add the language code to `docs/language_names.yml`
-2. Run `uv run docs.py sync-language-picker` to update the language switcher
+- `translation_notice`: `text` (the notice on every page) and `homepage.title` / `homepage.body` (the aside on the home page)
+- `tab_labels`: walkthrough `step` and tab `label` values, such as `Before` and `After`
+- `admonition_titles`: the default title of each aside and collapsible type
+- `admonition_title_glossary`: exact English aside and `<summary>` titles, such as `Command output`
 
-### Step 5: Generate Initial Translations
+### Step 4: Generate Initial Translations
 
 Use GitHub Actions:
 
@@ -393,7 +433,7 @@ Use GitHub Actions:
 2. Select the new language
 3. Select mode: `normal`
 
-### Step 6: Review and Iterate
+### Step 5: Review and Iterate
 
 1. Review the PR with generated translations
 2. Update `llm-prompt.md` to fix any issues
@@ -406,39 +446,38 @@ Use GitHub Actions:
 
 ```
 docs/
-├── en/                     # English (source)
-│   ├── mkdocs.yml          # Main config
-│   ├── overrides/          # Theme customization
-│   └── docs/               # English content
-├── pt/                     # Portuguese
-│   ├── mkdocs.yml          # Inherits from en
-│   ├── llm-prompt.md       # Translation rules (LLM guidance)
-│   ├── glossary.yml        # Post-processing glossary (deterministic fixes)
-│   ├── ui-strings.yml      # Translated UI strings
-│   └── docs/               # Translated content
-├── es/                     # Spanish
-│   └── ...
-└── ...
+├── astro.config.mjs        # Site config
+└── src/
+    ├── locales.mjs         # The `allLocales` list
+    ├── sidebar.mjs         # Navigation; group labels have per-language `translations`
+    └── content/
+        ├── docs/           # English pages (.mdx), the source
+        │   ├── hello_nextflow/
+        │   ├── ...
+        │   ├── pt/         # Portuguese pages, same relative paths
+        │   ├── es/         # Spanish
+        │   └── ...
+        └── i18n/
+            ├── en.json     # UI strings
+            ├── pt.json
+            └── ...
 
 _scripts/
 ├── pyproject.toml          # Package metadata and dependencies
-├── translate/              # Translation CLI package (python -m translate)
-│   ├── __init__.py         # Package marker
-│   ├── __main__.py         # Entry point
-│   ├── config.py           # Constants and configuration
-│   ├── translate_config.yml# Translation scope config (exclude dirs, etc.)
-│   ├── models.py           # Data structures
-│   ├── paths.py            # Path utilities
-│   ├── prompts.py          # Prompt loading
-│   ├── git_utils.py        # Git operations
-│   ├── api.py              # Claude API calls
-│   ├── postprocess.py      # Translation post-processing and glossary enforcement
-│   ├── verify.py           # Translation verification
-│   ├── progress.py         # Progress tracking
-│   ├── core.py             # Translation orchestration
-│   └── cli.py              # CLI commands
 ├── general-llm-prompt.md   # Shared translation rules
-└── docs.py                 # Build/serve CLI
+└── translate/              # Translation CLI package (python -m translate)
+    ├── language_names.yml  # Language codes and names
+    ├── translate_config.yml# Translation scope config (exclude dirs, etc.)
+    ├── languages/
+    │   ├── pt/
+    │   │   ├── llm-prompt.md   # Translation rules (LLM guidance)
+    │   │   └── glossary.yml    # Post-processing glossary (deterministic fixes)
+    │   └── ...
+    ├── cli.py              # CLI commands
+    ├── core.py             # Translation orchestration
+    ├── postprocess.py      # Translation post-processing and glossary enforcement
+    ├── verify.py           # Translation verification
+    └── ...                 # API calls, git helpers, paths, prompts, progress
 ```
 
 ## CLI Reference (For Maintainers)
@@ -469,14 +508,13 @@ uv run python -m translate sync <lang> --include hello_nextflow
 uv run python -m translate translate <path> --lang <lang>
 ```
 
-### Preview Commands (No API key required)
+### Preview Translations (No API key required)
+
+The site builds every language together:
 
 ```bash
-# Serve docs locally
-uv run docs.py serve <lang>
-
-# Build docs
-uv run docs.py build-lang <lang>
+cd docs
+npm run dev   # then open http://localhost:4321/<lang>/
 ```
 
 ---

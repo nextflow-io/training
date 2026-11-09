@@ -4,6 +4,7 @@ Use this checklist when reviewing a specific lesson file.
 
 ## Structure
 
+- [ ] `title:` and `description:` frontmatter; no H1 in the body
 - [ ] Proper heading numbering with trailing periods
 - [ ] Heading levels match numbering depth (## for 1., ### for 1.1.)
 - [ ] Each major section has "### Takeaway"
@@ -13,11 +14,12 @@ Use this checklist when reviewing a specific lesson file.
 
 ## Formatting
 
-- [ ] Code blocks have proper titles, line numbers, and highlighting
-- [ ] Console output properly formatted with `console title="Output"`
+- [ ] Code blocks have proper titles, line numbers (`showLineNumbers`, `startLineNumber`), and highlights (`{...}`)
+- [ ] Nextflow code uses ` ```nextflow `; real Groovy stays ` ```groovy `
+- [ ] Command output sits in the `bash` block after `# [!output]`, with key lines marked `# [!code highlight]`
 - [ ] File paths use proper markdown formatting
-- [ ] Before/After comparisons use tabbed blocks
-- [ ] Admonitions properly formatted and indented
+- [ ] Before/After comparisons use `<CodeWalkthrough>` with `step="Before"` and `step="After"`
+- [ ] Asides (`:::note`, `:::tip`, `:::caution`) and `<details>` collapsibles properly formatted, with blank lines around the body
 - [ ] Each sentence on new line (for clean diffs)
 
 ## Content Accuracy
@@ -40,7 +42,7 @@ Use this checklist when reviewing a specific lesson file.
 
 ## Cross-References
 
-- [ ] Links to related lessons work
+- [ ] Links to related lessons are relative `.mdx` links and work (the build's links validator checks this)
 - [ ] References to files/scripts are correct
 - [ ] External links are valid
 - [ ] Prerequisites clearly stated
@@ -55,7 +57,7 @@ Use this checklist when reviewing a specific lesson file.
 
 ## Writing Style
 
-See CLAUDE.md for full guidelines.
+See AGENTS.md for full guidelines.
 
 - [ ] No LLM-style interjections ("Remember when...?", "Don't worry") — "Let's" is acceptable in tutorial prose
 - [ ] No exclamation-based emphasis ("Much faster!", "So powerful!")

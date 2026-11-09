@@ -1,0 +1,73 @@
+name: Unit tests
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: unit-tests-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  site:
+    name: Site and Router Worker
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: docs/.nvmrc
+          cache: npm
+          cache-dependency-path: docs/worker/package-lock.json
+
+      # The links plugin's tests use only Node built-ins, so the site needs no `npm ci`.
+      - name: Links plugin
+        working-directory: docs
+        run: npm test
+
+      - name: Preview comment script
+        run: node --test '.github/scripts/*.test.mjs'
+
+      - name: Install Router Worker dependencies
+        working-directory: docs/worker
+        run: npm ci
+
+      - name: Router Worker tests
+        working-directory: docs/worker
+        run: npm test
+
+      - name: Router Worker type check
+        working-directory: docs/worker
+        run: npm run typecheck
+
+  translate:
+    name: Translation pipeline
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+
+      # Offline: fixtures only, no API calls.
+      - name: Translation tests
+        working-directory: _scripts
+        run: uv run --with pytest pytest -q translate/tests

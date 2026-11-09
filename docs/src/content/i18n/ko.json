@@ -1,0 +1,14 @@
+{
+  "courseInfo.courseSummary": "과정 요약",
+  "courseInfo.additionalInformation": "추가 정보",
+  "courseInfo.technicalRequirements": "기술 요구사항",
+  "courseInfo.learningObjectives": "학습 목표",
+  "courseInfo.audiencePrerequisites": "대상 및 선수조건",
+  "courseInfo.courseVideos": "과정 동영상",
+  "courseInfo.defaultTechnicalRequirements": "GitHub 계정 또는 Nextflow 로컬 설치가 필요합니다. 자세한 내용은 [환경 옵션](../envsetup/index.md)을 참조하세요.",
+  "courseInfo.defaultVideos": "각 장에는 강사가 연습 문제를 진행하는 동영상이 제공됩니다. 각 과정 부분의 동영상은 해당 페이지 상단에 포함되어 있습니다.",
+  "courseInfo.viewPlaylist": "YouTube에서 재생목록 보기",
+  "consent.title": "쿠키 동의",
+  "consent.description": "저희는 귀하의 반복 방문과 선호도를 인식하고, 문서의 효과성과 사용자가 원하는 정보를 찾고 있는지 측정하기 위해 쿠키를 사용합니다. 동의해 주시면 교육 자료를 개선하는 데 도움이 됩니다. <a href=\"https://seqera.io/privacy-policy/#cookies\" target=\"_blank\" rel=\"noopener\">쿠키 사용 방법</a>에 대해 자세히 알아보세요.",
+  "consent.posthog": "PostHog 분석"
+}

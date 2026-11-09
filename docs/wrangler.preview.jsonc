@@ -1,0 +1,14 @@
+// PR previews (docs-preview.yml): static assets only, one `wrangler preview --name pr-<N>` per PR.
+// The workflow puts the build under dist-preview/latest/ so preview URLs match production.
+{
+  "$schema": "./worker/node_modules/wrangler/config-schema.json",
+  "name": "nextflow-training-preview",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": true,
+  "preview_urls": true,
+  "previews": {},
+  "assets": {
+    "directory": "./dist-preview",
+    "not_found_handling": "404-page",
+  },
+}

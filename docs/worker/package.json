@@ -1,0 +1,17 @@
+{
+  "name": "training-router",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "dev": "wrangler dev -c ../wrangler.jsonc --persist-to .wrangler/state",
+    "deploy": "wrangler deploy -c ../wrangler.jsonc"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261103.1",
+    "typescript": "7.0.2",
+    "vitest": "5.1.0",
+    "wrangler": "4.157.0"
+  }
+}

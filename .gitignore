@@ -27,3 +27,10 @@ _scripts/.venv/
 
 # Tutorial working directories (created by learners during exercises)
 hello-nf-core/core-hello/
+
+# Astro
+docs/node_modules/
+docs/dist/
+docs/.astro/
+docs/.wrangler/
+docs/dist-preview/
