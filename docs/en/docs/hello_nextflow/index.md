@@ -12,6 +12,7 @@ additional_information:
         - Troubleshoot basic issues
         - Build a simple multi-step workflow from core Nextflow components
         - Distinguish between essential types of channel factories and operators and utilize them effectively in a simple workflow
+        - Configure pipeline execution to run on common computing platforms including HPC and cloud
         - Apply best practices for reproducibility, portability and code re-use that make pipelines FAIR, including code modularity and software containers
     audience_prerequisites:
         - "**Audience:** This course is designed for learners who are completely new to Nextflow and want to develop their own pipelines."
@@ -38,7 +39,7 @@ You will develop a simple Nextflow pipeline that takes some text inputs, runs a 
 
 ### Lesson plan
 
-In order to avoid overwhelming you with concepts and code, we've broken this down into five parts that will each focus on specific aspects of developing pipelines with Nextflow.
+In order to avoid overwhelming you with concepts and code, we've broken this down into six parts that will each focus on specific aspects of developing pipelines with Nextflow.
 
 | Course chapter                                       | Summary                                                                                          | Estimated duration |
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------ |
@@ -47,6 +48,7 @@ In order to avoid overwhelming you with concepts and code, we've broken this dow
 | [Part 3: Hello Workflow](./03_hello_workflow.md)     | Using channels to chain multiple steps together and handle transfer of data between steps        | 60 mins            |
 | [Part 4: Hello Modules](./04_hello_modules.md)       | Applying code modularity principles to increase reusability and decrease maintenance burden      | 20 mins            |
 | [Part 5: Hello Containers](./05_hello_containers.md) | Using containers as a mechanism for managing software dependencies and increase reproducibility  | 60 mins            |
+| [Part 6: Hello Config](./06_hello_config.md)         | Customizing pipeline behavior and optimizing usage in different computational environments | 60 mins            |
 
 By the end of this course, you will be well-prepared for tackling the next steps in your journey to develop reproducible workflows for your scientific computing needs.
 

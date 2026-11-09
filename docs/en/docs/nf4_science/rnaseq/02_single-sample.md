@@ -213,7 +213,7 @@ There are multiple options for providing a default value; here we use a test pro
 #### 1.1.2. Create a test profile with a default value in `nextflow.config`
 
 A test profile provides convenient default values for trying out a workflow without specifying inputs on the command line.
-This is a common convention in the Nextflow ecosystem (see [Use profiles to switch configurations](../../config_exec/03_profiles.md) in Configure Execution for more detail).
+This is a common convention in the Nextflow ecosystem (see [Hello Config](../../hello_nextflow/06_hello_config.md) for more detail).
 
 Add a `profiles` block to `nextflow.config` with a `test` profile that sets the `reads` parameter to one of the test FASTQ files.
 
