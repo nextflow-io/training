@@ -55,9 +55,9 @@ nextflow run hello-containers.nf -profile test
     Launching `hello-containers.nf` [nice_escher] revision: d5dfdc9872
 
     executor >  local (7)
-    [5a/ec1fa1] sayHello (2)       | 3 of 3 ✔
-    [30/32b5b8] convertToUpper (3) | 3 of 3 ✔
-    [d3/be01bc] collectGreetings   | 1 of 1 ✔
+    [c9/f5c686] sayHello (3)       | 3 of 3 ✔
+    [ef/3135a8] convertToUpper (3) | 3 of 3 ✔
+    [7f/f435e3] collectGreetings   | 1 of 1 ✔
 
     Outputs:
 
@@ -67,11 +67,14 @@ nextflow run hello-containers.nf -profile test
         - batch/intermediates/Hola-output.txt
         - batch/intermediates/Bonjour-output.txt
         - batch/intermediates/Hello-output.txt
+
       uppercased:
         - batch/intermediates/UPPER-Bonjour-output.txt
         - batch/intermediates/UPPER-Hola-output.txt
         - batch/intermediates/UPPER-Hello-output.txt
+
       collected: batch/intermediates/COLLECTED-batch-output.txt
+
       batch_report: batch/batch-report.txt
     ```
 
@@ -199,14 +202,14 @@ docker run --rm 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 ??? success "Command output"
 
     ```console
-    ______________________________________________________
+     ______________________________________________________
     < Cowacter, eyes:default, tongue:False, thoughts:False >
-    ------------------------------------------------------
-        \   ^__^
+     ------------------------------------------------------
+         \   ^__^
           \  (oo)\_______
-            (__)\       )\/\
-              ||----w |
-              ||     ||
+             (__)\       )\/\
+               ||----w |
+               ||     ||
     ```
 
 The system spun up the container, ran the `cowpy` command with its parameters, sent the output to the console and finally, shut down the container instance.
@@ -345,31 +348,31 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
 
 ??? success "Command output"
 
-    ```console title="data/greetings.csv"
+    ```console
      ____________________
     / Hello,English,123  \
     | Bonjour,French,456 |
     \ Hola,Spanish,789   /
-    --------------------
+     --------------------
       \                                  ,+*^^*+___+++_
-      \                           ,*^^^^              )
+       \                           ,*^^^^              )
         \                       _+*                     ^**+_
-        \                    +^       _ _++*+_+++_,         )
+         \                    +^       _ _++*+_+++_,         )
                   _+^^*+_    (     ,+*^ ^          \+_        )
-                {       )  (    ,(    ,_+--+--,      ^)      ^\
+                 {       )  (    ,(    ,_+--+--,      ^)      ^\
                 { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
-              {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
+               {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
               ( /  (    (        ,___    ^*+_+* )   <    <      \
-              U _/     )    *--<  ) ^\-----++__)   )    )       )
+               U _/     )    *--<  ) ^\-----++__)   )    )       )
                 (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
               (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
-            (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
+             (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
               *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
               \             \_)^)_)) ))^^^^^^^^^^))^^^^)
-              (_             ^\__^^^^^^^^^^^^))^^^^^^^)
-                ^\___            ^\__^^^^^^))^^^^^^^^)\\
+               (_             ^\__^^^^^^^^^^^^))^^^^^^^)
+                 ^\___            ^\__^^^^^^))^^^^^^^^)\\
                       ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
-                        ___) >____) >___   ^\_\_\_\_\_\_\)
+                         ___) >____) >___   ^\_\_\_\_\_\_\)
                         ^^^//\\_^^//\\_^       ^(\_\_\_\)
                           ^^^ ^^ ^^^ ^
     ```
@@ -427,9 +430,7 @@ This gives us a place to put the process code.
 We can model our `cowpy` process on the other processes we've written previously.
 
 ```groovy title="modules/cowpy.nf" linenums="1"
-#!/usr/bin/env nextflow
-
-// Generate ASCII art with cowpy
+// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
 process cowpy {
 
     input:
@@ -443,7 +444,6 @@ process cowpy {
     """
     cat ${input_file} | cowpy -c "${character}" > cowpy-${input_file}
     """
-
 }
 ```
 
@@ -588,7 +588,7 @@ We need to update the workflow outputs to publish the output of the `cowpy` proc
 
 ##### 2.2.4.1. Update the `publish:` section
 
-In the `workflow block`, make the following code change:
+In the `workflow` block, make the following code change:
 
 === "After"
 
@@ -743,7 +743,7 @@ Edit the `cowpy.nf` module to add the `container` directive to the process defin
 
 === "After"
 
-    ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="3"
+    ```groovy title="modules/cowpy.nf" linenums="2" hl_lines="3"
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -764,7 +764,7 @@ Edit the `cowpy.nf` module to add the `container` directive to the process defin
 
 === "Before"
 
-    ```groovy title="modules/cowpy.nf" linenums="4"
+    ```groovy title="modules/cowpy.nf" linenums="2"
     process cowpy {
 
         input:
@@ -839,12 +839,16 @@ nextflow run hello-containers.nf -profile test -resume
         - batch/intermediates/Bonjour-output.txt
         - batch/intermediates/Hola-output.txt
         - batch/intermediates/Hello-output.txt
+
       uppercased:
         - batch/intermediates/UPPER-Hola-output.txt
         - batch/intermediates/UPPER-Bonjour-output.txt
         - batch/intermediates/UPPER-Hello-output.txt
+
       collected: batch/intermediates/COLLECTED-batch-output.txt
+
       batch_report: batch/batch-report.txt
+
       cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
     ```
 
@@ -873,30 +877,30 @@ The final ASCII art output is in the `results/batch/` directory, under the name 
 ??? abstract "File contents"
 
     ```console title="results/batch/cowpy-COLLECTED-batch-output.txt"
-    _________
-    / HOLA    \
-    | HELLO   |
-    \ BONJOUR /
-    ---------
+     _________
+    / BONJOUR \
+    | HOLA    |
+    \ HELLO   /
+     ---------
       \                                  ,+*^^*+___+++_
-      \                           ,*^^^^              )
+       \                           ,*^^^^              )
         \                       _+*                     ^**+_
-        \                    +^       _ _++*+_+++_,         )
+         \                    +^       _ _++*+_+++_,         )
                   _+^^*+_    (     ,+*^ ^          \+_        )
-                {       )  (    ,(    ,_+--+--,      ^)      ^\
+                 {       )  (    ,(    ,_+--+--,      ^)      ^\
                 { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
-              {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
+               {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
               ( /  (    (        ,___    ^*+_+* )   <    <      \
-              U _/     )    *--<  ) ^\-----++__)   )    )       )
+               U _/     )    *--<  ) ^\-----++__)   )    )       )
                 (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
               (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
-            (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
+             (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
               *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
               \             \_)^)_)) ))^^^^^^^^^^))^^^^)
-              (_             ^\__^^^^^^^^^^^^))^^^^^^^)
-                ^\___            ^\__^^^^^^))^^^^^^^^)\\
+               (_             ^\__^^^^^^^^^^^^))^^^^^^^)
+                 ^\___            ^\__^^^^^^))^^^^^^^^)\\
                       ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
-                        ___) >____) >___   ^\_\_\_\_\_\_\)
+                         ___) >____) >___   ^\_\_\_\_\_\_\)
                         ^^^//\\_^^//\\_^       ^(\_\_\_\)
                           ^^^ ^^ ^^^ ^
     ```
@@ -934,12 +938,13 @@ In that directory, you will find the `.command.run` file that contains all the c
     }
 
     nxf_date() {
-        local ts=$(date +%s%3N);
-        if [[ ${#ts} == 10 ]]; then echo ${ts}000
-        elif [[ $ts == *%3N ]]; then echo ${ts/\%3N/000}
-        elif [[ $ts == *3N ]]; then echo ${ts/3N/000}
-        elif [[ ${#ts} == 13 ]]; then echo $ts
-        else echo "Unexpected timestamp value: $ts"; exit 1
+        local s n
+        read s n < <(date '+%s %N')
+        if [[ $n =~ ^[0-9]+$ ]]; then
+            n=$(printf '%09d' "$((10#$n))")
+            echo "$((s * 1000 + 10#${n:0:3}))"
+        else
+            echo "$((s * 1000))"
         fi
     }
 
@@ -988,7 +993,10 @@ In that directory, you will find the `.command.run` file that contains all the c
     }
 
     nxf_fs_rsync() {
-      rsync -rRl $1 $2
+      local source=$1
+      local target=$2
+      mkdir -p $target
+      rsync -rRl $source $target
     }
 
     nxf_fs_rclone() {
@@ -1066,7 +1074,6 @@ In that directory, you will find the `.command.run` file that contains all the c
     }
 
     $NXF_ENTRY
-
     ```
 
 If you search for `nxf_launch` in this file, you should see something like this:
@@ -1115,7 +1122,7 @@ Add it to the `cowpy` module with the `conda` directive:
 
 === "After"
 
-    ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="4"
+    ```groovy title="modules/cowpy.nf" linenums="2" hl_lines="4"
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -1126,7 +1133,7 @@ Add it to the `cowpy` module with the `conda` directive:
 
 === "Before"
 
-    ```groovy title="modules/cowpy.nf" linenums="4"
+    ```groovy title="modules/cowpy.nf" linenums="2"
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'

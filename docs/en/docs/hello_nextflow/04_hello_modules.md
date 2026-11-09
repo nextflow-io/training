@@ -51,9 +51,9 @@ nextflow run hello-modules.nf
     Launching `hello-modules.nf` [hopeful_avogadro] revision: b09af1237d
 
     executor >  local (7)
-    [0f/8795c9] sayHello (3)       | 3 of 3 ✔
-    [6a/eb2510] convertToUpper (3) | 3 of 3 ✔
-    [af/479117] collectGreetings   | 1 of 1 ✔
+    [c9/763d42] sayHello (3)       | 3 of 3 ✔
+    [60/bc6831] convertToUpper (3) | 3 of 3 ✔
+    [1a/bc5901] collectGreetings   | 1 of 1 ✔
 
     Outputs:
 
@@ -63,11 +63,14 @@ nextflow run hello-modules.nf
         - batch/intermediates/Hola-output.txt
         - batch/intermediates/Bonjour-output.txt
         - batch/intermediates/Hello-output.txt
+
       uppercased:
         - batch/intermediates/UPPER-Hola-output.txt
         - batch/intermediates/UPPER-Bonjour-output.txt
         - batch/intermediates/UPPER-Hello-output.txt
+
       collected: batch/intermediates/COLLECTED-batch-output.txt
+
       batch_report: batch/batch-report.txt
     ```
 
@@ -145,7 +148,7 @@ process sayHello {
 
 Once that is done, delete the process definition from the workflow file.
 
-### 2.3. Add an include declaration before the workflow block
+### 2.3. Add an include declaration before the `params` block
 
 The syntax for including a process from a module is fairly straightforward:
 
@@ -157,13 +160,13 @@ Let's insert that above the `params` block and fill it out appropriately.
 
 === "After"
 
-    ```groovy title="hello-modules.nf" linenums="44" hl_lines="1 2"
+    ```groovy title="hello-modules.nf" linenums="41" hl_lines="1 2"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
 
     /*
-    * Pipeline parameters
-    */
+     * Pipeline parameters
+     */
     params {
         input: Path = 'data/greetings.csv'
         batch: String = 'batch'
@@ -172,10 +175,10 @@ Let's insert that above the `params` block and fill it out appropriately.
 
 === "Before"
 
-    ```groovy title="hello-modules.nf" linenums="44"
+    ```groovy title="hello-modules.nf" linenums="41"
     /*
-    * Pipeline parameters
-    */
+     * Pipeline parameters
+     */
     params {
         input: Path = 'data/greetings.csv'
         batch: String = 'batch'
@@ -199,8 +202,8 @@ nextflow run hello-modules.nf -resume
 
     Launching `hello-modules.nf` [romantic_poisson] revision: 96edfa9ad3
 
-    [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
-    [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
 
     Outputs:
@@ -211,11 +214,14 @@ nextflow run hello-modules.nf -resume
         - batch/intermediates/Hello-output.txt
         - batch/intermediates/Bonjour-output.txt
         - batch/intermediates/Hola-output.txt
+
       uppercased:
         - batch/intermediates/UPPER-Hola-output.txt
         - batch/intermediates/UPPER-Bonjour-output.txt
         - batch/intermediates/UPPER-Hello-output.txt
+
       collected: batch/intermediates/COLLECTED-batch-output.txt
+
       batch_report: batch/batch-report.txt
     ```
 
@@ -277,14 +283,14 @@ Insert the include declaration above the `params` block and fill it out appropri
 
 === "After"
 
-    ```groovy title="hello-modules.nf" linenums="23" hl_lines="3"
+    ```groovy title="hello-modules.nf" linenums="24" hl_lines="3"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
     /*
-    * Pipeline parameters
-    */
+     * Pipeline parameters
+     */
     params {
         input: Path = 'data/greetings.csv'
         batch: String = 'batch'
@@ -293,13 +299,13 @@ Insert the include declaration above the `params` block and fill it out appropri
 
 === "Before"
 
-    ```groovy title="hello-modules.nf" linenums="23"
+    ```groovy title="hello-modules.nf" linenums="24"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
 
     /*
-    * Pipeline parameters
-    */
+     * Pipeline parameters
+     */
     params {
         input: Path = 'data/greetings.csv'
         batch: String = 'batch'
@@ -335,11 +341,14 @@ nextflow run hello-modules.nf -resume
         - batch/intermediates/Hola-output.txt
         - batch/intermediates/Hello-output.txt
         - batch/intermediates/Bonjour-output.txt
+
       uppercased:
         - batch/intermediates/UPPER-Bonjour-output.txt
         - batch/intermediates/UPPER-Hello-output.txt
         - batch/intermediates/UPPER-Hola-output.txt
+
       collected: batch/intermediates/COLLECTED-batch-output.txt
+
       batch_report: batch/batch-report.txt
     ```
 
@@ -401,8 +410,8 @@ Insert the include declaration above the `params` block and fill it out appropri
     include { collectGreetings } from './modules/collectGreetings.nf'
 
     /*
-    * Pipeline parameters
-    */
+     * Pipeline parameters
+     */
     params {
         input: Path = 'data/greetings.csv'
         batch: String = 'batch'
@@ -417,8 +426,8 @@ Insert the include declaration above the `params` block and fill it out appropri
     include { convertToUpper } from './modules/convertToUpper.nf'
 
     /*
-    * Pipeline parameters
-    */
+     * Pipeline parameters
+     */
     params {
         input: Path = 'data/greetings.csv'
         batch: String = 'batch'
@@ -442,8 +451,8 @@ nextflow run hello-modules.nf -resume
 
     Launching `hello-modules.nf` [friendly_coulomb] revision: 7aa2b9bc0f
 
-    [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
-    [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
 
     Outputs:
@@ -454,11 +463,14 @@ nextflow run hello-modules.nf -resume
         - batch/intermediates/Hello-output.txt
         - batch/intermediates/Bonjour-output.txt
         - batch/intermediates/Hola-output.txt
+
       uppercased:
         - batch/intermediates/UPPER-Bonjour-output.txt
         - batch/intermediates/UPPER-Hello-output.txt
         - batch/intermediates/UPPER-Hola-output.txt
+
       collected: batch/intermediates/COLLECTED-batch-output.txt
+
       batch_report: batch/batch-report.txt
     ```
 
@@ -599,9 +611,9 @@ nextflow run hello-modules.nf -profile test -resume
 
     Launching `hello-modules.nf` [agitated_swirles] revision: 9f1f296fc8
 
-    [0f/8795c9] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [6a/eb2510] convertToUpper (3) | 3 of 3, cached: 3 ✔
-    [af/479117] collectGreetings   | 1 of 1, cached: 1 ✔
+    [c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
 
     Outputs:
 
@@ -611,11 +623,14 @@ nextflow run hello-modules.nf -profile test -resume
         - batch/intermediates/Hola-output.txt
         - batch/intermediates/Bonjour-output.txt
         - batch/intermediates/Hello-output.txt
+
       uppercased:
         - batch/intermediates/UPPER-Hola-output.txt
         - batch/intermediates/UPPER-Bonjour-output.txt
         - batch/intermediates/UPPER-Hello-output.txt
+
       collected: batch/intermediates/COLLECTED-batch-output.txt
+
       batch_report: batch/batch-report.txt
     ```
 
@@ -660,12 +675,12 @@ Learn more: [1. Create a directory to store modules](#1-create-a-directory-to-st
 <quiz>
 What is the correct syntax to use a module?
 
-- [ ] `#!groovy import { SAYHELLO } from './modules/sayhello.nf'`
-- [ ] `#!groovy require { SAYHELLO } from './modules/sayhello.nf'`
-- [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
-- [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
+- [ ] `#!groovy import { sayHello } from './modules/sayHello.nf'`
+- [ ] `#!groovy require { sayHello } from './modules/sayHello.nf'`
+- [x] `#!groovy include { sayHello } from './modules/sayHello.nf'`
+- [ ] `#!groovy load { sayHello } from './modules/sayHello.nf'`
 
-Learn more: [2.3. Add an include declaration](#23-add-an-include-declaration-before-the-workflow-block)
+Learn more: [2.3. Add an include declaration](#23-add-an-include-declaration-before-the-params-block)
 </quiz>
 
 <quiz>

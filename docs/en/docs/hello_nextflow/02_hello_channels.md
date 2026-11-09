@@ -233,7 +233,7 @@ Add this tiny line to the workflow block:
         main:
         // create a channel for inputs
         greeting_ch = channel.of('Hello Channels!')
-                             .view()
+                            .view()
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -258,7 +258,7 @@ Add this tiny line to the workflow block:
     }
     ```
 
-The exact amount of spaces doesn't matter as long as it's a multiple of 4; we're just aiming to align the start of the `.view()` statement to the `.of()` part of the channel construction.
+The exact amount of whitespace doesn't matter; we're just lining up the `.view()` statement under the channel construction to make the code easier to read.
 
 Now run the workflow again:
 
@@ -318,15 +318,15 @@ Before the workflow block, make the following code change:
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // create a channel for inputs
     greeting_ch = channel.of('Hello','Bonjour','Hola')
-                         .view()
+                        .view()
     ```
 
 === "Before"
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // create a channel for inputs
-    greeting_ch = channel.of('Hello Channels')
-                         .view()
+    greeting_ch = channel.of('Hello Channels!')
+                        .view()
     ```
 
 The documentation tells us this should work. Can it really be so simple?
@@ -341,7 +341,7 @@ nextflow run hello-channels.nf
 
 ??? success "Command output"
 
-    ```console hl_lines="6"
+    ```console hl_lines="6-9"
     N E X T F L O W   ~  version 26.04.4
 
     Launching `hello-channels.nf` [amazing_crick] revision: 59a9a5888a
@@ -415,7 +415,7 @@ Let's have a look in there.
 That's not even the same greeting we got in the results directory! What's going on?
 
 At this point, we need to tell you that by default, the ANSI logging system writes the logging from multiple calls to the same process on the same line.
-So the status from all three calls to the sayHello() process are landing in the same spot.
+So the status from all three calls to the `sayHello()` process are landing in the same spot.
 
 Fortunately, we can disable that behavior to see the full list of process calls.
 
@@ -526,7 +526,7 @@ You may recall that we hardcoded the output file name for the `sayHello` process
 </figure>
 
 As long as the output files stay in the work subdirectories, isolated from the other processes, that is okay.
-But when they are published to the same results directory, whichever got copied there first gets overwritten by the next one, and so on.
+But when they are published to the same results directory, whichever got published there first gets overwritten by the next one, and so on.
 
 ### 2.2. Ensure the output file names will be unique
 
@@ -702,7 +702,7 @@ Let's take the `greetings_array` variable we just imagined and make it a reality
         greetings_array = ['Hello','Bonjour','Hola']
         // create a channel for inputs
         greeting_ch = channel.of('Hello','Bonjour','Hola')
-                             .view()
+                            .view()
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -719,7 +719,7 @@ Let's take the `greetings_array` variable we just imagined and make it a reality
         main:
         // create a channel for inputs
         greeting_ch = channel.of('Hello','Bonjour','Hola')
-                             .view()
+                            .view()
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -746,7 +746,7 @@ In the workflow block, make the following change:
         greetings_array = ['Hello','Bonjour','Hola']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
-                             .view()
+                            .view()
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -765,7 +765,7 @@ In the workflow block, make the following change:
         greetings_array = ['Hello','Bonjour','Hola']
         // create a channel for inputs
         greeting_ch = channel.of('Hello','Bonjour','Hola')
-                             .view()
+                            .view()
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -792,7 +792,7 @@ nextflow run hello-channels.nf
     Launching `hello-channels.nf` [friendly_koch] revision: 97256837a7
 
     executor >  local (1)
-    [a8/1f6ead] sayHello (1) | 0 of 1
+    [a8/1f6ead] sayHello (1) | 0 of 1 ✘
     [Hello, Bonjour, Hola]
     ERROR ~ Error executing process > 'sayHello (1)'
 
@@ -855,8 +855,8 @@ In the workflow block, make the following code change:
         greetings_array = ['Hello','Bonjour','Hola']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
-                             .view()
-                             .flatten()
+                            .view()
+                            .flatten()
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -875,7 +875,7 @@ In the workflow block, make the following code change:
         greetings_array = ['Hello','Bonjour','Hola']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
-                             .view()
+                            .view()
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -909,9 +909,9 @@ In the workflow block, make the following code change:
         greetings_array = ['Hello','Bonjour','Hola']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
-                             .view { greeting -> "Before flatten: $greeting" }
-                             .flatten()
-                             .view { greeting -> "After flatten: $greeting" }
+                            .view { greeting -> "Before flatten: $greeting" }
+                            .flatten()
+                            .view { greeting -> "After flatten: $greeting" }
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -922,7 +922,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="8-9"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="8"
     workflow {
 
         main:
@@ -930,8 +930,8 @@ In the workflow block, make the following code change:
         greetings_array = ['Hello','Bonjour','Hola']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
-                             .view()
-                             .flatten()
+                            .view()
+                            .flatten()
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -1050,8 +1050,8 @@ Make the following edit to the parameter declaration:
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
-    * Pipeline parameters
-    */
+     * Pipeline parameters
+     */
     params {
         input: Path = 'data/greetings.csv'
     }
@@ -1068,7 +1068,7 @@ Make the following edit to the parameter declaration:
     }
     ```
 
-This assumes the file is co-located with the workflow code.
+This assumes the file is in the `data/` directory relative to where you launch the workflow.
 You'll learn how to deal with other data locations later in your Nextflow journey.
 
 #### 4.1.2. Switch to a channel factory designed to handle a file
@@ -1086,7 +1086,7 @@ In the workflow block, make the following code change:
         main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
-                             .view { greeting -> "Before flatten: $greeting" }
+                            .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
                              // .view { greeting -> "After flatten: $greeting" }
         // emit a greeting
@@ -1107,9 +1107,9 @@ In the workflow block, make the following code change:
         greetings_array = ['Hello','Bonjour','Hola']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
-                             .view { greeting -> "Before flatten: $greeting" }
-                             .flatten()
-                             .view { greeting -> "After flatten: $greeting" }
+                            .view { greeting -> "Before flatten: $greeting" }
+                            .flatten()
+                            .view { greeting -> "After flatten: $greeting" }
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -1118,7 +1118,7 @@ In the workflow block, make the following code change:
     }
     ```
 
-You'll notice we switched the channel input back to `param.input`, and deleted the `greetings_array` declaration since we'll no longer need it.
+You'll notice we switched the channel input back to `params.input`, and deleted the `greetings_array` declaration since we'll no longer need it.
 We've also commented out the `flatten()` and the second `view()` statement.
 
 #### 4.1.3. Run the workflow
@@ -1131,7 +1131,7 @@ nextflow run hello-channels.nf
 
 ??? failure "Command output"
 
-    ```console hl_lines="5 6 9 15"
+    ```console hl_lines="5 6 10 15"
     N E X T F L O W   ~  version 26.04.4
 
     Launching `hello-channels.nf` [peaceful_poisson] revision: a286c08ad5
@@ -1191,9 +1191,9 @@ In the workflow block, make the following code change to replace `flatten()` wit
         main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "Before splitCsv: $csv" }
-                             .splitCsv()
-                             .view { csv -> "After splitCsv: $csv" }
+                            .view { csv -> "Before splitCsv: $csv" }
+                            .splitCsv()
+                            .view { csv -> "After splitCsv: $csv" }
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -1210,7 +1210,7 @@ In the workflow block, make the following code change to replace `flatten()` wit
         main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
-                             .view { greeting -> "Before flatten: $greeting" }
+                            .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
                              // .view { greeting -> "After flatten: $greeting" }
         // emit a greeting
@@ -1234,7 +1234,7 @@ nextflow run hello-channels.nf
 
 ??? failure "Command output"
 
-    ```console hl_lines="7-11 14 19"
+    ```console hl_lines="7-10 14 19"
     N E X T F L O W   ~  version 26.04.4
 
     Launching `hello-channels.nf` [insane_fermat] revision: 8e62fcbeb1
@@ -1310,11 +1310,11 @@ In the workflow block, make the following code change:
         main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "Before splitCsv: $csv" }
-                             .splitCsv()
-                             .view { csv -> "After splitCsv: $csv" }
-                             .map { item -> item[0] }
-                             .view { csv -> "After map: $csv" }
+                            .view { csv -> "Before splitCsv: $csv" }
+                            .splitCsv()
+                            .view { csv -> "After splitCsv: $csv" }
+                            .map { item -> item[0] }
+                            .view { csv -> "After map: $csv" }
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -1331,9 +1331,9 @@ In the workflow block, make the following code change:
         main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "Before splitCsv: $csv" }
-                             .splitCsv()
-                             .view { csv -> "After splitCsv: $csv" }
+                            .view { csv -> "Before splitCsv: $csv" }
+                            .splitCsv()
+                            .view { csv -> "After splitCsv: $csv" }
         // emit a greeting
         sayHello(greeting_ch)
 

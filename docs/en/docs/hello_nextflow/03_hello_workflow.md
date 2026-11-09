@@ -319,6 +319,7 @@ nextflow run hello-workflow.nf -resume
         - Hello-output.txt
         - Hola-output.txt
         - Bonjour-output.txt
+
       uppercased:
         - UPPER-Hola-output.txt
         - UPPER-Hello-output.txt
@@ -420,7 +421,7 @@ We can start writing it based on what we've seen before.
 
 #### 2.2.1. Write the 'obvious' parts of the process
 
-Add the following process definition to the workflow script:
+Add the following process definition to the workflow script, right under the `convertToUpper` process:
 
 ```groovy title="hello-workflow.nf" linenums="37"
 /*
@@ -458,15 +459,15 @@ In the process block, make the following code change:
 === "After"
 
     ```groovy title="hello-workflow.nf" linenums="42" hl_lines="2"
-          input:
-          path input_files
+        input:
+        path input_files
     ```
 
 === "Before"
 
     ```groovy title="hello-workflow.nf" linenums="42" hl_lines="2"
-          input:
-          ???
+        input:
+        ???
     ```
 
 Notice we use the `path` prefix even though we expect this to contain multiple files.
@@ -484,7 +485,7 @@ In the process block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="54" hl_lines="3"
+    ```groovy title="hello-workflow.nf" linenums="48" hl_lines="3"
         script:
         """
         cat ${input_files} > 'COLLECTED-output.txt'
@@ -493,7 +494,7 @@ In the process block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="54"
+    ```groovy title="hello-workflow.nf" linenums="48"
         script:
         """
         cat ??? > 'COLLECTED-output.txt'
@@ -523,21 +524,19 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="75" hl_lines="4 5"
+    ```groovy title="hello-workflow.nf" linenums="70" hl_lines="4 5"
         // convert the greeting to uppercase
         convertToUpper(sayHello.out)
 
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out)
-    }
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="75"
+    ```groovy title="hello-workflow.nf" linenums="70"
         // convert the greeting to uppercase
         convertToUpper(sayHello.out)
-    }
     ```
 
 This connects the output of `convertToUpper()` to the input of `collectGreetings()`.
@@ -614,8 +613,8 @@ nextflow run hello-workflow.nf -resume
     Launching `hello-workflow.nf` [mad_gilbert] revision: 6acfd5e28d
 
     executor >  local (3)
-    [79/33b2f0] sayHello (2)         | 3 of 3, cached: 3 ✔
-    [99/79394f] convertToUpper (3)   | 3 of 3, cached: 3 ✔
+    [b1/5826b5] sayHello (2)         | 3 of 3, cached: 3 ✔
+    [e0/ecf81b] convertToUpper (3)   | 3 of 3, cached: 3 ✔
     [47/50fe4a] collectGreetings (1) | 3 of 3 ✔
 
     Outputs:
@@ -626,10 +625,12 @@ nextflow run hello-workflow.nf -resume
         - Hello-output.txt
         - Bonjour-output.txt
         - Hola-output.txt
+
       uppercased:
         - UPPER-Hello-output.txt
         - UPPER-Bonjour-output.txt
         - UPPER-Hola-output.txt
+
       collected:
         - COLLECTED-output.txt
         - COLLECTED-output.txt
@@ -677,7 +678,6 @@ In the workflow block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
-    }
     ```
 
 === "Before"
@@ -685,7 +685,6 @@ In the workflow block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out)
-    }
     ```
 
 #### 2.4.2. Add some `view()` statements
@@ -701,7 +700,6 @@ Let's also include a couple of `view()` statements to visualize the before and a
         // optional view statements
         convertToUpper.out.view { contents -> "Before collect: $contents" }
         convertToUpper.out.collect().view { contents -> "After collect: $contents" }
-    }
     ```
 
 === "Before"
@@ -709,7 +707,6 @@ Let's also include a couple of `view()` statements to visualize the before and a
     ```groovy title="hello-workflow.nf" linenums="73"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
-    }
     ```
 
 The `view()` statements can go anywhere you want; we put them right after the call for readability.
@@ -735,8 +732,8 @@ nextflow run hello-workflow.nf -resume
     [1e/83586c] collectGreetings   | 1 of 1 ✔
     Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
     Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
-    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
+    Before collect: /workspaces/training/hello-nextflow/work/e0/ecf81b4cacc648b9b994218d5b29d7/UPPER-Hola-output.txt
+    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/e0/ecf81b4cacc648b9b994218d5b29d7/UPPER-Hola-output.txt]
 
     Outputs:
 
@@ -746,10 +743,12 @@ nextflow run hello-workflow.nf -resume
         - Hello-output.txt
         - Bonjour-output.txt
         - Hola-output.txt
+
       uppercased:
         - UPPER-Bonjour-output.txt
         - UPPER-Hello-output.txt
         - UPPER-Hola-output.txt
+
       collected: COLLECTED-output.txt
     ```
 
@@ -944,14 +943,14 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
+    ```groovy title="hello-workflow.nf" linenums="75" hl_lines="2"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
+    ```groovy title="hello-workflow.nf" linenums="75" hl_lines="2"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
     ```
@@ -971,7 +970,7 @@ In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="83" hl_lines="3 6 9"
+    ```groovy title="hello-workflow.nf" linenums="84" hl_lines="3 6 9"
     output {
         first_output {
             path "${params.batch}/intermediates"
@@ -987,7 +986,7 @@ In the `output` block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="83"
+    ```groovy title="hello-workflow.nf" linenums="84"
     output {
         first_output {
             path '.'
@@ -1022,7 +1021,7 @@ nextflow run hello-workflow.nf -resume --batch trio
     Launching `hello-workflow.nf` [confident_rutherford] revision: bc58af409c
 
     executor >  local (1)
-    [79/33b2f0] sayHello (2)       | 3 of 3, cached: 3 ✔
+    [b1/5826b5] sayHello (2)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [b5/f19efe] collectGreetings   | 1 of 1 ✔
 
@@ -1034,10 +1033,12 @@ nextflow run hello-workflow.nf -resume --batch trio
         - trio/intermediates/Bonjour-output.txt
         - trio/intermediates/Hello-output.txt
         - trio/intermediates/Hola-output.txt
+
       uppercased:
         - trio/intermediates/UPPER-Bonjour-output.txt
         - trio/intermediates/UPPER-Hola-output.txt
         - trio/intermediates/UPPER-Hello-output.txt
+
       collected: trio/intermediates/COLLECTED-trio-output.txt
     ```
 
@@ -1093,7 +1094,7 @@ In the `collectGreetings` process block, make the following code changes:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="55" hl_lines="2 5"
+    ```groovy title="hello-workflow.nf" linenums="49" hl_lines="2 5"
         script:
         count_greetings = input_files.size()
         """
@@ -1104,7 +1105,7 @@ In the `collectGreetings` process block, make the following code changes:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="55"
+    ```groovy title="hello-workflow.nf" linenums="49"
         script:
         """
         cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
@@ -1175,11 +1176,11 @@ We need to update the workflow outputs accordingly.
 
 #### 4.2.1. Update the `publish:` section
 
-In the `workflow block`, make the following code change:
+In the `workflow` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="80" hl_lines="4 5"
+    ```groovy title="hello-workflow.nf" linenums="81" hl_lines="4 5"
         publish:
         first_output = sayHello.out
         uppercased = convertToUpper.out
@@ -1189,7 +1190,7 @@ In the `workflow block`, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="80" hl_lines="4"
+    ```groovy title="hello-workflow.nf" linenums="81" hl_lines="4"
         publish:
         first_output = sayHello.out
         uppercased = convertToUpper.out
@@ -1207,7 +1208,7 @@ In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="87" hl_lines="11-13"
+    ```groovy title="hello-workflow.nf" linenums="88" hl_lines="11-13"
     output {
         first_output {
             path "${params.batch}/intermediates"
@@ -1226,7 +1227,7 @@ In the `output` block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="87"
+    ```groovy title="hello-workflow.nf" linenums="88"
     output {
         first_output {
             path "${params.batch}/intermediates"
@@ -1259,8 +1260,8 @@ nextflow run hello-workflow.nf -resume --batch trio
     Launching `hello-workflow.nf` [ecstatic_wilson] revision: c80285f8c8
 
     executor >  local (1)
-    [c5/4c6ca9] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [0e/6cbc59] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [ab/816321] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [e0/ecf81b] convertToUpper (3) | 3 of 3, cached: 3 ✔
     [02/61ead2] collectGreetings   | 1 of 1 ✔
 
     Outputs:
@@ -1271,11 +1272,14 @@ nextflow run hello-workflow.nf -resume --batch trio
         - trio/intermediates/Bonjour-output.txt
         - trio/intermediates/Hello-output.txt
         - trio/intermediates/Hola-output.txt
+
       uppercased:
         - trio/intermediates/UPPER-Bonjour-output.txt
         - trio/intermediates/UPPER-Hola-output.txt
         - trio/intermediates/UPPER-Hello-output.txt
+
       collected: trio/intermediates/COLLECTED-trio-output.txt
+
       batch_report: trio/trio-report.txt
     ```
 

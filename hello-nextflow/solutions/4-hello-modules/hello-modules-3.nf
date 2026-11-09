@@ -1,9 +1,5 @@
 #!/usr/bin/env nextflow
 
-// Include modules
-include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
-
 /*
  * Collect uppercase greetings into a single output file
  */
@@ -24,6 +20,10 @@ process collectGreetings {
     echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-report.txt'
     """
 }
+
+// Include modules
+include { sayHello } from './modules/sayHello.nf'
+include { convertToUpper } from './modules/convertToUpper.nf'
 
 /*
  * Pipeline parameters
