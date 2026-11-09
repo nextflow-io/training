@@ -4,7 +4,7 @@
 process collectGreetings {
 
     input:
-    path input_files
+    path input_files, arity: '1..*'
     val batch_name
 
     output:
@@ -15,6 +15,6 @@ process collectGreetings {
     count_greetings = input_files.size()
     """
     cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-    echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
+    echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-report.txt'
     """
 }

@@ -95,7 +95,7 @@ In plain Nextflow pipelines, `--help` only works if the developer implemented it
 
 ### 1.2. Set parameter values
 
-As covered in [Nextflow Run](../nextflow_run/02_configure_pipeline.md#22-use-a-parameter-file), you can set parameter values on the command line with `--param_name` or collect a set of parameters in a YAML file and pass it with `-params-file`.
+As covered in [Nextflow Run](../nextflow_run/02_configure_pipeline.md#31-use-a-parameter-file), you can set parameter values on the command line with `--param_name` or collect a set of parameters in a YAML file and pass it with `-params-file`.
 Both approaches work the same way with nf-core pipelines.
 
 For example, to skip the trimming step, we want to set the boolean parameter `skip_trim` to `true`.
