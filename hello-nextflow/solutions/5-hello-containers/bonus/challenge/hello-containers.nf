@@ -27,13 +27,13 @@ workflow {
     // translate the greeting
     translateGreeting(sayHello.out, params.language)
     // collect all the greetings into one file
-    collectGreetings(translateGreeting.out.map { greeting_file, character -> greeting_file }.collect(), params.batch)
+    collectGreetings(translateGreeting.out.map { greeting_file, _character -> greeting_file }.collect(), params.batch)
     // generate ASCII art of each greeting with its own character
     cowpy(translateGreeting.out)
 
     publish:
-    first_output = sayHello.out.map { greeting_file, character -> greeting_file }
-    translated = translateGreeting.out.map { greeting_file, character -> greeting_file }
+    first_output = sayHello.out.map { greeting_file, _character -> greeting_file }
+    translated = translateGreeting.out.map { greeting_file, _character -> greeting_file }
     collected = collectGreetings.out.outfile
     batch_report = collectGreetings.out.report
     cowpy_art = cowpy.out

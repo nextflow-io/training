@@ -1448,7 +1448,7 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
 
     Keep both columns in the channel:
 
-    ```groovy title="hello-workflow.nf" linenums="86" hl_lines="3"
+    ```groovy title="hello-workflow.nf" linenums="88" hl_lines="3"
         name_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { row -> [row[0], row[1]] }
@@ -1475,7 +1475,7 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
 
     Then call it with the output of `sayHello` alone, and remove the `language` parameter, which is no longer used:
 
-    ```groovy title="hello-workflow.nf" linenums="91" hl_lines="2"
+    ```groovy title="hello-workflow.nf" linenums="92" hl_lines="2"
         // translate the greeting
         translateGreeting(sayHello.out)
     ```

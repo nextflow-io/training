@@ -19,7 +19,7 @@ Typically, you'd need to install these tools, manage their dependencies, and res
 That is all very tedious and annoying, so we're going to show you how to use **containers** to solve this problem much more conveniently.
 
 A **container** is a lightweight, standalone, executable unit of software created from a container **image** that includes everything needed to run an application including code, system libraries and settings.
-As you might imagine, that is a going to be very helpful for making your pipelines more reproducible.
+As you might imagine, that is going to be very helpful for making your pipelines more reproducible.
 
 Note that we'll be teaching this using [Docker](https://www.docker.com/get-started/), but keep in mind Nextflow supports [several other container technologies](https://nextflow.io/docs/latest/container.html) as well.
 
@@ -311,7 +311,7 @@ To allow the container to access the host filesystem, you can **mount** a **volu
 
 In our case `<outside_path>` will be the current working directory, so we can just use a dot (`.`), and `<inside_path>` is just an alias we make up; let's call it `/my_project` (the inside path must be absolute).
 
-To mount a volume, we replace the paths and add the volume mounting argument to the docker run command as follows:
+To mount a volume, we replace the paths and add the volume mounting argument to the `docker run` command as follows:
 
 ```bash
 docker run --rm -it -v .:/my_project 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' /bin/bash
@@ -1221,7 +1221,7 @@ Find out which other characters `cowpy` offers, pick one, and run the workflow s
 
 ??? tip "Hint"
 
-    Run `cowpy -l` inside the `cowpy` container, as in section 1, to list the characters.
+    Run `cowpy -l` inside the `cowpy` container, as in section 1, to display every character with its name.
     Then set the `character` parameter on the command line, or change its default in `nextflow.config`.
 
 ??? solution
@@ -1290,18 +1290,20 @@ Keep the collected file and the report as they are.
         // translate the greeting
         translateGreeting(sayHello.out, params.language)
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.map { greeting_file, character -> greeting_file }.collect(), params.batch)
+        collectGreetings(translateGreeting.out.map { greeting_file, _character -> greeting_file }.collect(), params.batch)
         // generate ASCII art of each greeting with its own character
         cowpy(translateGreeting.out)
 
         publish:
-        first_output = sayHello.out.map { greeting_file, character -> greeting_file }
-        translated = translateGreeting.out.map { greeting_file, character -> greeting_file }
+        first_output = sayHello.out.map { greeting_file, _character -> greeting_file }
+        translated = translateGreeting.out.map { greeting_file, _character -> greeting_file }
         collected = collectGreetings.out.outfile
         batch_report = collectGreetings.out.report
         cowpy_art = cowpy.out
     }
     ```
+
+    In the `map` closures, the underscore at the start of `_character` tells Nextflow that the variable is deliberately unused, so `nextflow lint` doesn't warn about it.
 
     The `character` parameter is no longer used, so you can remove it from the `params` block and from `nextflow.config`.
 
