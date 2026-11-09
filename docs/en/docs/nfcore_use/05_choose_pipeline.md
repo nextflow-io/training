@@ -1,12 +1,13 @@
-# Part 4: Choose a pipeline for a scientific question
+# Part 5: Choose a pipeline for a scientific question
 
-In Parts 1 to 3, you ran pipelines that were chosen for you.
+In Parts 1 to 4, you ran pipelines that were chosen for you: you configured them, tuned their compute resources, and prepared their inputs.
 In practice, the first challenge is deciding which pipeline to use, or whether any existing pipeline fits your question at all.
 
 The nf-core catalog contains over a hundred pipelines, several of which can look relevant to the same question.
 A pipeline that processes the right data type does not necessarily produce the result you need.
 
 In this part, you take a research scenario, find candidate pipelines, and evaluate them using their documentation and the results of a completed run.
+The evaluation draws on everything you've done in this course: reading a pipeline's documentation and outputs, preparing its inputs, and interpreting its execution report.
 Because you examine runs that have already completed, you can look at real outputs and execution reports without waiting for a pipeline to run.
 
 This part works for individual learners and for groups in a workshop.
@@ -159,10 +160,15 @@ For some releases, only the `pipeline_info/` directory is published; in that cas
 
 ### 3.2. Inputs
 
-Find the samplesheet format in the usage documentation and in `assets/schema_input.json`, the input schema you saw for `nf-core/demo` in [Part 2](./02_configure_execution.md#14-input-validation).
+Find the samplesheet format in the usage documentation and in `assets/schema_input.json`, as you did for `nf-core/rnaseq` in [Part 4](./04_custom_inputs.md#1-find-out-what-the-pipeline-expects).
 
 - What columns does the samplesheet require?
-- Does your scenario provide that information, or would you need to collect more?
+  Write the header and one example row of a samplesheet for your scenario, using placeholder paths for the data files.
+- Does your scenario provide every value, or would you need to collect more information?
+  For each missing value, note where you would get it.
+- Which mistakes in your draft would the input schema catch?
+  Does the usage documentation describe rules that span multiple rows, such as consistency between samples that belong to the same individual or family?
+  As you saw in [Part 4](./04_custom_inputs.md#5-fix-errors-caught-by-the-pipeline), those are checked by the pipeline itself, not by the schema.
 
 ### 3.3. Reference data
 
@@ -178,10 +184,12 @@ Read the output documentation, then look at the output files and the MultiQC rep
 
 ### 3.5. Compute
 
-Open the execution report in the `pipeline_info/` directory of the published results.
+Open the execution report in the `pipeline_info/` directory of the published results, as you did for `nf-core/rnaseq` in [Part 3](./03_run_production_pipeline.md#3-read-the-execution-report).
 
 - Which processes took the longest, and which used the most memory?
-- How might that scale to the size of your dataset?
+- Compare that memory usage with the memory requested by their labels in the pipeline's `conf/base.config` file.
+  Which processes would you right-size for your dataset, and in which direction?
+- How might the run time and memory usage scale to the size of your dataset?
 
 ### Takeaway
 
@@ -244,7 +252,7 @@ There is room for judgment, so a different answer with good reasons is not neces
     The DESeq2 step it runs is a QC step (sample PCA and clustering), not a differential expression test.
     `nf-core/differentialabundance` takes the count matrix from `nf-core/rnaseq`, a sample sheet describing the groups, and a contrasts file defining the comparison, and runs DESeq2 (or limma) to produce differential expression tables, plots and a report.
 
-    **Inputs to prepare**: a samplesheet for `nf-core/rnaseq` (covered in Part 5), then a sample sheet with a `condition` column and a contrasts file for `nf-core/differentialabundance`.
+    **Inputs to prepare**: a samplesheet for `nf-core/rnaseq` (covered in Part 4), then a sample sheet with a `condition` column and a contrasts file for `nf-core/differentialabundance`.
 
     **Reference data**: the `nf-core/rnaseq` documentation recommends providing a recent GENCODE or Ensembl FASTA and GTF rather than the built-in `--genome` references, whose annotations are out of date.
 
@@ -285,9 +293,8 @@ Completed runs let you check outputs and compute needs before running anything y
 
 ### What's next?
 
-The next parts cover practical challenges of running a pipeline on your own data: preparing the samplesheet, troubleshooting validation errors, and tuning compute resources.
-They use `nf-core/rnaseq` as the example; at the end of each part, you can apply the same steps to the pipeline you chose here.
-Head on to [Part 5](./05_inputs.md).
+You've completed the Use nf-core course.
+See [Next steps](next_steps.md) for where to go from here.
 
 ---
 
@@ -298,3 +305,4 @@ In this part you learned to:
 - Define the result an analysis must produce before choosing a pipeline
 - Find candidate pipelines in the nf-core catalog and check their status
 - Evaluate a pipeline's inputs, reference requirements, outputs and compute needs using its documentation and the results of a completed run
+- Apply what you learned about samplesheets and execution reports to a pipeline you haven't run

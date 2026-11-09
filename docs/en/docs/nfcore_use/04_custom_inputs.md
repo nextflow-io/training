@@ -1,4 +1,4 @@
-# Part 5: Prepare your inputs
+# Part 4: Run on custom inputs
 
 In Parts 1 through 3, you ran pipelines with their test profiles, which supply a ready-made input samplesheet.
 To run a pipeline on your own data, you need to provide that samplesheet yourself.
@@ -8,6 +8,9 @@ Each pipeline defines its own set of columns, so the first step is always to fin
 
 In this part, you write a samplesheet for `nf-core/rnaseq` from a set of FASTQ files, generate one for public data, and check both without running the full pipeline.
 You then diagnose and fix samplesheets that fail validation, as real samplesheets often do on the first try.
+Finally, you run the pipeline on the samplesheet you wrote.
+
+This part continues on the 8-core machine you switched to in [Part 3](./03_run_production_pipeline.md#21-change-the-machine-type).
 
 ---
 
@@ -217,25 +220,7 @@ The `test` profile provides the reference files, and `--input` replaces its samp
 
 The pipeline reports success without running any tasks, which means your samplesheet passed validation.
 If you made a mistake, the pipeline stops with a list of errors; sections 4 and 5 cover how to interpret and fix them.
-
-??? tip "Running the full pipeline on this data"
-
-    The files only contain 2,000 read pairs each, which is below the pipeline's default minimum of 10,000 reads per sample after trimming.
-    Samples below that threshold are skipped, so create a file named `small_reads.yml` that lowers it:
-
-    ```yaml title="small_reads.yml"
-    min_trimmed_reads: 1000
-    ```
-
-    Then remove `-preview` and add `-c laptop.config` as in Part 3:
-
-    ```bash
-    nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --input samplesheet.csv --outdir results -c laptop.config -params-file small_reads.yml
-    ```
-
-    The parameter must be set in a params file rather than as `--min_trimmed_reads 1000` on the command line, because command-line values are passed as strings and the pipeline expects an integer.
-
-    On the default 2-core machine, a full run can fill the disk with container images; see the [disk space warning in Part 3](./03_run_production_pipeline.md#13-re-run-with-a-custom-configuration).
+You run the pipeline on this samplesheet for real in section 6.
 
 ### Takeaway
 
@@ -267,11 +252,11 @@ They were chosen because their files are only a few megabytes each.
 Run `nf-core/fetchngs` with these accessions, and request a samplesheet for `nf-core/rnaseq`:
 
 ```bash
-nextflow run nf-core/fetchngs -r 1.13.0 -profile docker -c laptop.config --input data/sra_ids.csv --outdir fetchngs-results --nf_core_pipeline rnaseq
+nextflow run nf-core/fetchngs -r 1.13.0 -profile docker --input data/sra_ids.csv --outdir fetchngs-results --nf_core_pipeline rnaseq
 ```
 
-`nf-core/fetchngs` uses the same nf-core resource labels as `nf-core/rnaseq`, and by default requests 12 GB of memory for each download, more than the default machine has.
-`laptop.config` from Part 3 caps those requests, so the command uses it too.
+`nf-core/fetchngs` uses the same nf-core resource labels as `nf-core/rnaseq`, and by default requests 12 GB of memory for each download, as you saw in [Part 3](./03_run_production_pipeline.md#33-understand-the-cost-of-over-allocation).
+That fits on the 8-core machine, so the command doesn't need a custom configuration; on the default machine, you would need to cap the requests as you did with `laptop.config` in Part 3.
 
 The pipeline downloads the FASTQ files from the ENA, so it needs access to the internet.
 It finishes in about a minute, then prints a warning:
@@ -472,10 +457,9 @@ Every row is individually valid, so the samplesheet passes schema validation.
 The pipeline's own checks run as part of the workflow, which `-preview` skips.
 To reach them without spending time on real computation, use the `-stub` option.
 It runs the pipeline with placeholder commands that produce empty output files instead of running the actual tools.
-The placeholder tasks still request the pipeline's default resources, so add `laptop.config` as in Part 3.
 
 ```bash
-nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker -c laptop.config --input broken_samplesheet_2.csv --outdir results -stub
+nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --input broken_samplesheet_2.csv --outdir results -stub
 ```
 
 ```console title="Command output (excerpt)"
@@ -513,17 +497,6 @@ It is a convenient way to test the logic of a pipeline run, but the outputs it p
 Runs of the same sample must also agree on whether they are single-end or paired-end, and on whether their files are compressed.
 The pipeline's usage documentation describes the rules that apply to its samplesheet.
 
-??? exercise "Apply it to the pipeline you chose in Part 4"
-
-    Find the samplesheet requirements of the pipeline you chose in [Part 4](./04_choose_pipeline.md), in its usage documentation and in its `assets/schema_input.json` file on GitHub.
-
-    1. Write the header and one example row of a samplesheet for your scenario, using placeholder paths for the data files.
-       Note any column whose value your scenario does not provide, and where you would get that information.
-    2. List the rules the input schema enforces: required columns, patterns, accepted values.
-       Which mistakes in your draft samplesheet would it catch?
-    3. Check the usage documentation for rules that span multiple rows, such as consistency between samples that belong to the same individual or family.
-       These are the checks that `-preview` does not reach.
-
 ### Takeaway
 
 Schema validation catches errors within a row; pipeline-specific checks catch inconsistencies across rows.
@@ -531,8 +504,70 @@ Schema validation catches errors within a row; pipeline-specific checks catch in
 
 ### What's next?
 
-Run the pipeline on a bigger machine, and use its reports to tune its compute resource allocations.
-Head on to [Part 6](./06_resources.md).
+Run the pipeline on the samplesheet you wrote.
+
+---
+
+## 6. Run the pipeline on your samplesheet
+
+Your samplesheet from section 2 passed validation, so the pipeline is ready to run on it.
+
+### 6.1. Lower the minimum read count
+
+The files in `data/reads/` only contain 2,000 read pairs each, which is below the pipeline's default minimum of 10,000 reads per sample after trimming.
+Samples below that threshold are skipped, so create a file named `small_reads.yml` that lowers it:
+
+```yaml title="small_reads.yml"
+min_trimmed_reads: 1000
+```
+
+The parameter must be set in a params file rather than as `--min_trimmed_reads 1000` on the command line, because command-line values are passed as strings and the pipeline expects an integer.
+
+### 6.2. Run the pipeline
+
+Run the pipeline with your samplesheet, the params file, and the `tuned.config` file from [Part 3](./03_run_production_pipeline.md#4-right-size-the-resource-allocations):
+
+```bash
+nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --input samplesheet.csv --outdir custom-results -c tuned.config -params-file small_reads.yml
+```
+
+The `test` profile still provides the reference files, while `--input` replaces its samplesheet with yours.
+
+??? success "Command output (excerpt)"
+
+    ```console
+    ...
+    -[nf-core/rnaseq] Pipeline completed successfully-
+    ```
+
+### 6.3. Examine the results
+
+The results are organized the same way as for the test run, with one entry per sample from your samplesheet.
+
+Open the MultiQC report, `custom-results/multiqc/star_salmon/multiqc_report.html`.
+The General Statistics table lists four samples, `WT_1`, `WT_2`, `KO_1` and `KO_2`, plus a row for each read file where a tool reports read 1 and read 2 separately.
+`WT_1` appears only once: the reads from its two lanes were merged into a single sample, as described in [section 1.1](#11-read-the-usage-documentation).
+
+Since the strandedness was set to `auto`, the pipeline inferred it from the reads.
+Find the **Strandedness inference summary** table in the report: it shows `auto` as the value you provided, and `reverse` as the strandedness inferred for all four samples.
+Record it, so that you can set it explicitly in future runs on data from the same library preparation.
+
+### Takeaway
+
+You can run an nf-core pipeline on your own samplesheet, using a params file for parameters and a configuration file for resources.
+
+### What's next?
+
+The last part of the course doesn't run anything, so you can stop your codespace before moving on.
+
+!!! warning "Stop your codespace and reset its machine type"
+
+    The 8-core machine uses your GitHub Codespaces quota four times faster than the default one, and a running codespace keeps using it even when you're not working in it.
+
+    1. Open the Command Palette with ++ctrl+shift+p++ (++cmd+shift+p++ on macOS), then type `Codespaces: Stop Current Codespace` and select it.
+    2. Before you use this codespace again, switch it back to the **2-core** machine type: go to [github.com/codespaces](https://github.com/codespaces), click the **...** menu next to your codespace, and select **Change machine type**.
+
+Then head on to [Part 5](./05_choose_pipeline.md), where you choose a pipeline for a scientific question of your own, building on everything you've done in this course.
 
 ---
 
@@ -546,3 +581,4 @@ In this part you learned to:
 - Check a samplesheet with `-preview` without running the pipeline
 - Interpret schema validation errors by row, field and rule, and fix common samplesheet errors
 - Use `-stub` to trigger pipeline-specific checks that span multiple rows
+- Run a pipeline on your own samplesheet
