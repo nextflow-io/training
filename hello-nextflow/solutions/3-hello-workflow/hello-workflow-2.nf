@@ -74,8 +74,8 @@ workflow {
     collectGreetings(convertToUpper.out.collect())
 
     // optional view statements
-    convertToUpper.out.view { contents -> "Before collect: $contents" }
-    convertToUpper.out.collect().view { contents -> "After collect: $contents" }
+    convertToUpper.out.view { filepath -> "Before collect: $filepath" }
+    convertToUpper.out.collect().view { filepaths -> "After collect: $filepaths" }
 
     publish:
     first_output = sayHello.out
