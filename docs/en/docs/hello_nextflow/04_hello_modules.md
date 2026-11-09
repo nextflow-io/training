@@ -48,26 +48,26 @@ nextflow run hello-modules.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [hopeful_avogadro] revision: b09af1237d
+    Launching `hello-modules.nf` [nostalgic_lorenz] revision: 9f1780070d
 
     executor >  local (7)
-    [c9/763d42] sayHello (3)       | 3 of 3 ✔
-    [60/bc6831] convertToUpper (3) | 3 of 3 ✔
-    [1a/bc5901] collectGreetings   | 1 of 1 ✔
+    [7f/186e62] sayHello (2)          | 3 of 3 ✔
+    [be/ce8eb4] translateGreeting (2) | 3 of 3 ✔
+    [d1/9029f2] collectGreetings      | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - batch/intermediates/Hola-output.txt
-        - batch/intermediates/Bonjour-output.txt
-        - batch/intermediates/Hello-output.txt
+        - batch/intermediates/Mateo-output.txt
+        - batch/intermediates/Celine-output.txt
+        - batch/intermediates/Andrea-output.txt
 
-      uppercased:
-        - batch/intermediates/UPPER-Hola-output.txt
-        - batch/intermediates/UPPER-Bonjour-output.txt
-        - batch/intermediates/UPPER-Hello-output.txt
+      translated:
+        - batch/intermediates/french-Andrea-output.txt
+        - batch/intermediates/french-Mateo-output.txt
+        - batch/intermediates/french-Celine-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
@@ -82,13 +82,13 @@ As previously, you will find the output files in the locations specified in the 
     results/batch
     ├── batch-report.txt
     └── intermediates
-        ├── Bonjour-output.txt
+        ├── Andrea-output.txt
+        ├── Celine-output.txt
         ├── COLLECTED-batch-output.txt
-        ├── Hello-output.txt
-        ├── Hola-output.txt
-        ├── UPPER-Bonjour-output.txt
-        ├── UPPER-Hello-output.txt
-        └── UPPER-Hola-output.txt
+        ├── french-Andrea-output.txt
+        ├── french-Celine-output.txt
+        ├── french-Mateo-output.txt
+        └── Mateo-output.txt
     ```
 
 If that worked for you, you're ready to learn how to modularize your workflow code.
@@ -134,14 +134,14 @@ Copy the whole process definition over from the workflow file to the module file
 process sayHello {
 
     input:
-    val greeting
+    val name
 
     output:
-    path "${greeting}-output.txt"
+    path "${name}-output.txt"
 
     script:
     """
-    echo '${greeting}' > '${greeting}-output.txt'
+    echo 'Hello, ${name}!' > '${name}-output.txt'
     """
 }
 ```
@@ -160,7 +160,7 @@ Let's insert that above the `params` block and fill it out appropriately.
 
 === "After"
 
-    ```groovy title="hello-modules.nf" linenums="41" hl_lines="1 2"
+    ```groovy title="hello-modules.nf" linenums="58" hl_lines="1 2"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
 
@@ -168,19 +168,21 @@ Let's insert that above the `params` block and fill it out appropriately.
      * Pipeline parameters
      */
     params {
-        input: Path = 'data/greetings.csv'
+        input: Path = 'data/names.csv'
+        language: String = 'french'
         batch: String = 'batch'
     }
     ```
 
 === "Before"
 
-    ```groovy title="hello-modules.nf" linenums="41"
+    ```groovy title="hello-modules.nf" linenums="58"
     /*
      * Pipeline parameters
      */
     params {
-        input: Path = 'data/greetings.csv'
+        input: Path = 'data/names.csv'
+        language: String = 'french'
         batch: String = 'batch'
     }
     ```
@@ -200,32 +202,32 @@ nextflow run hello-modules.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [romantic_poisson] revision: 96edfa9ad3
+    Launching `hello-modules.nf` [stoic_mirzakhani] revision: 06c21c34c3
 
-    [c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
-    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+    [7f/186e62] sayHello (2)          | 3 of 3, cached: 3 ✔
+    [be/ce8eb4] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [d1/9029f2] collectGreetings      | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - batch/intermediates/Hello-output.txt
-        - batch/intermediates/Bonjour-output.txt
-        - batch/intermediates/Hola-output.txt
+        - batch/intermediates/Celine-output.txt
+        - batch/intermediates/Andrea-output.txt
+        - batch/intermediates/Mateo-output.txt
 
-      uppercased:
-        - batch/intermediates/UPPER-Hola-output.txt
-        - batch/intermediates/UPPER-Bonjour-output.txt
-        - batch/intermediates/UPPER-Hello-output.txt
+      translated:
+        - batch/intermediates/french-Andrea-output.txt
+        - batch/intermediates/french-Mateo-output.txt
+        - batch/intermediates/french-Celine-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
       batch_report: batch/batch-report.txt
     ```
 
-This should run quickly very quickly because everything is cached.
+This should run very quickly because everything is cached.
 Feel free to check the published outputs.
 
 Nextflow recognized that it's still all the same work to be done, even if the code is split up into multiple files.
@@ -242,38 +244,57 @@ But let's just do two more for now.
 
 ---
 
-## 3. Modularize the `convertToUpper()` process
+## 3. Modularize the `translateGreeting()` process
 
 ### 3.1. Create a file stub for the new module
 
-Create an empty file for the module called `convertToUpper.nf`.
+Create an empty file for the module called `translateGreeting.nf`.
 
 ```bash
-touch modules/convertToUpper.nf
+touch modules/translateGreeting.nf
 ```
 
-### 3.2. Move the `convertToUpper` process code to the module file
+### 3.2. Move the `translateGreeting` process code to the module file
 
 Copy the whole process definition over from the workflow file to the module file.
 
-```groovy title="modules/convertToUpper.nf" linenums="1"
+```groovy title="modules/translateGreeting.nf" linenums="1"
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Use Python to translate the greeting into another language
  */
-process convertToUpper {
+process translateGreeting {
 
     input:
     path input_file
+    val language
 
     output:
-    path "UPPER-${input_file}"
+    path "${language}-${input_file}"
 
     script:
     """
-    cat ${input_file} | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
+    #!/usr/bin/env python3
+
+    translations = {
+        'french': 'Bonjour',
+        'spanish': 'Hola',
+        'italian': 'Ciao',
+        'dutch': 'Hallo',
+        'arabic': 'Marhaban',
+        'japanese': 'Konnichiwa',
+        'english': 'Hello',
+    }
+
+    with open('${input_file}') as greeting_file:
+        greeting = greeting_file.read()
+
+    with open('${language}-${input_file}', 'w') as translated_file:
+        translated_file.write(greeting.replace('Hello', translations['${language}']))
     """
 }
 ```
+
+A module can hold a script block in any language: the Python code moves over exactly as it was.
 
 Once that is done, delete the process definition from the workflow file.
 
@@ -286,13 +307,14 @@ Insert the include declaration above the `params` block and fill it out appropri
     ```groovy title="hello-modules.nf" linenums="24" hl_lines="3"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
-    include { convertToUpper } from './modules/convertToUpper.nf'
+    include { translateGreeting } from './modules/translateGreeting.nf'
 
     /*
      * Pipeline parameters
      */
     params {
-        input: Path = 'data/greetings.csv'
+        input: Path = 'data/names.csv'
+        language: String = 'french'
         batch: String = 'batch'
     }
     ```
@@ -307,7 +329,8 @@ Insert the include declaration above the `params` block and fill it out appropri
      * Pipeline parameters
      */
     params {
-        input: Path = 'data/greetings.csv'
+        input: Path = 'data/names.csv'
+        language: String = 'french'
         batch: String = 'batch'
     }
     ```
@@ -327,25 +350,25 @@ nextflow run hello-modules.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [nauseous_heisenberg] revision: a04a9f2da0
+    Launching `hello-modules.nf` [agitated_sanger] revision: 45bb96d942
 
-    [c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
-    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+    [7f/186e62] sayHello (2)          | 3 of 3, cached: 3 ✔
+    [be/ce8eb4] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [d1/9029f2] collectGreetings      | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - batch/intermediates/Hola-output.txt
-        - batch/intermediates/Hello-output.txt
-        - batch/intermediates/Bonjour-output.txt
+        - batch/intermediates/Andrea-output.txt
+        - batch/intermediates/Mateo-output.txt
+        - batch/intermediates/Celine-output.txt
 
-      uppercased:
-        - batch/intermediates/UPPER-Bonjour-output.txt
-        - batch/intermediates/UPPER-Hello-output.txt
-        - batch/intermediates/UPPER-Hola-output.txt
+      translated:
+        - batch/intermediates/french-Celine-output.txt
+        - batch/intermediates/french-Andrea-output.txt
+        - batch/intermediates/french-Mateo-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
@@ -374,7 +397,7 @@ Copy the whole process definition over from the workflow file to the module file
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
 /*
- * Collect uppercase greetings into a single output file
+ * Collect translated greetings into a single output file
  */
 process collectGreetings {
 
@@ -406,14 +429,15 @@ Insert the include declaration above the `params` block and fill it out appropri
     ```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
-    include { convertToUpper } from './modules/convertToUpper.nf'
+    include { translateGreeting } from './modules/translateGreeting.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
 
     /*
      * Pipeline parameters
      */
     params {
-        input: Path = 'data/greetings.csv'
+        input: Path = 'data/names.csv'
+        language: String = 'french'
         batch: String = 'batch'
     }
     ```
@@ -423,13 +447,14 @@ Insert the include declaration above the `params` block and fill it out appropri
     ```groovy title="hello-modules.nf" linenums="3"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
-    include { convertToUpper } from './modules/convertToUpper.nf'
+    include { translateGreeting } from './modules/translateGreeting.nf'
 
     /*
      * Pipeline parameters
      */
     params {
-        input: Path = 'data/greetings.csv'
+        input: Path = 'data/names.csv'
+        language: String = 'french'
         batch: String = 'batch'
     }
     ```
@@ -449,25 +474,25 @@ nextflow run hello-modules.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [friendly_coulomb] revision: 7aa2b9bc0f
+    Launching `hello-modules.nf` [sleepy_lorenz] revision: 7239c88c96
 
-    [c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
-    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+    [7f/186e62] sayHello (2)          | 3 of 3, cached: 3 ✔
+    [be/ce8eb4] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [d1/9029f2] collectGreetings      | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - batch/intermediates/Hello-output.txt
-        - batch/intermediates/Bonjour-output.txt
-        - batch/intermediates/Hola-output.txt
+        - batch/intermediates/Mateo-output.txt
+        - batch/intermediates/Andrea-output.txt
+        - batch/intermediates/Celine-output.txt
 
-      uppercased:
-        - batch/intermediates/UPPER-Bonjour-output.txt
-        - batch/intermediates/UPPER-Hello-output.txt
-        - batch/intermediates/UPPER-Hola-output.txt
+      translated:
+        - batch/intermediates/french-Andrea-output.txt
+        - batch/intermediates/french-Celine-output.txt
+        - batch/intermediates/french-Mateo-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
@@ -500,15 +525,16 @@ The workflow script still sets default values for its parameters in the `params`
  * Pipeline parameters
  */
 params {
-    input: Path = 'data/greetings.csv'
+    input: Path = 'data/names.csv'
+    language: String = 'french'
     batch: String = 'batch'
 }
 ```
 
-That was convenient while we were developing the workflow, but these two values are not the same kind of thing:
+That was convenient while we were developing the workflow, but these values are not all the same kind of thing:
 
-- `batch = 'batch'` is a true default: a sensible value for anyone who runs the pipeline without specifying one.
-- `input = 'data/greetings.csv'` is a test value: it points to the example data provided with the course, which nobody would want to process by default in a real analysis.
+- `language = 'french'` and `batch = 'batch'` are true defaults: sensible values for anyone who runs the pipeline without specifying them.
+- `input = 'data/names.csv'` is a test value: it points to the example data provided with the course, which nobody would want to process by default in a real analysis.
 
 As you saw in Nextflow Run, true defaults belong in the `params` section of `nextflow.config`, and test values belong in a `test` profile.
 The workflow script keeps the parameter declarations and their types, so it is still easy to see at a glance which parameters the pipeline accepts.
@@ -519,12 +545,13 @@ In the `params` block of the workflow script, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-modules.nf" linenums="8" hl_lines="5-6"
+    ```groovy title="hello-modules.nf" linenums="8" hl_lines="5-7"
     /*
      * Pipeline parameters
      */
     params {
         input: Path
+        language: String
         batch: String
     }
     ```
@@ -536,7 +563,8 @@ In the `params` block of the workflow script, make the following code change:
      * Pipeline parameters
      */
     params {
-        input: Path = 'data/greetings.csv'
+        input: Path = 'data/names.csv'
+        language: String = 'french'
         batch: String = 'batch'
     }
     ```
@@ -547,13 +575,14 @@ Open `nextflow.config` and make the following change:
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="3-17"
+    ```groovy title="nextflow.config" linenums="1" hl_lines="3-18"
     docker.enabled = false
 
     /*
      * Pipeline parameters
      */
     params {
+        language = 'french'
         batch = 'batch'
     }
 
@@ -562,7 +591,7 @@ Open `nextflow.config` and make the following change:
      */
     profiles {
         test {
-            params.input = 'data/greetings.csv'
+            params.input = 'data/names.csv'
         }
     }
     ```
@@ -588,13 +617,13 @@ nextflow run hello-modules.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [marvelous_neumann] revision: 9f1f296fc8
+    Launching `hello-modules.nf` [exotic_northcutt] revision: 6024dbeca6
 
     Parameter `input` is required but was not specified on the command line, params file, or config
     ```
 
 Since `input` no longer has a default value, Nextflow stops before running anything and tells you that the parameter is missing.
-`batch` did not cause an error, because its default value now comes from `nextflow.config`.
+`language` and `batch` did not cause an error, because their default values now come from `nextflow.config`.
 
 ### 5.4. Run the workflow with the test profile
 
@@ -609,25 +638,25 @@ nextflow run hello-modules.nf -profile test -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [agitated_swirles] revision: 9f1f296fc8
+    Launching `hello-modules.nf` [focused_lavoisier] revision: 6024dbeca6
 
-    [c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
-    [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+    [7f/186e62] sayHello (2)          | 3 of 3, cached: 3 ✔
+    [be/ce8eb4] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [d1/9029f2] collectGreetings      | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - batch/intermediates/Hola-output.txt
-        - batch/intermediates/Bonjour-output.txt
-        - batch/intermediates/Hello-output.txt
+        - batch/intermediates/Andrea-output.txt
+        - batch/intermediates/Celine-output.txt
+        - batch/intermediates/Mateo-output.txt
 
-      uppercased:
-        - batch/intermediates/UPPER-Hola-output.txt
-        - batch/intermediates/UPPER-Bonjour-output.txt
-        - batch/intermediates/UPPER-Hello-output.txt
+      translated:
+        - batch/intermediates/french-Mateo-output.txt
+        - batch/intermediates/french-Celine-output.txt
+        - batch/intermediates/french-Andrea-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
@@ -681,6 +710,16 @@ What is the correct syntax to use a module?
 - [ ] `#!groovy load { sayHello } from './modules/sayHello.nf'`
 
 Learn more: [2.3. Add an include declaration](#23-add-an-include-declaration-before-the-params-block)
+</quiz>
+
+<quiz>
+What do you need to change in a process whose script is written in Python when you move it into a module?
+- [ ] Rewrite the script in Bash
+- [ ] Add the Python interpreter to the `include` statement
+- [x] Nothing: the process moves over exactly as it was
+- [ ] Declare the module as a Python module
+
+Learn more: [3.2. Move the `translateGreeting` process code to the module file](#32-move-the-translategreeting-process-code-to-the-module-file)
 </quiz>
 
 <quiz>
