@@ -909,7 +909,7 @@ In the workflow block, make the following code change:
         greetings_array = ['Hello','Bonjour','Hola']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
-                            .view { greeting -> "Before flatten: $greeting" }
+                            .view { greetings -> "Before flatten: $greetings" }
                             .flatten()
                             .view { greeting -> "After flatten: $greeting" }
         // emit a greeting
@@ -940,10 +940,11 @@ In the workflow block, make the following code change:
     }
     ```
 
-You see we've added a second `.view` statement, and for each of them, we've replaced the empty parentheses (`()`) with curly braces containing some code, such as `#!groovy { greeting -> "Before flatten: $greeting" }`.
+You see we've added a second `.view` statement, and for each of them, we've replaced the empty parentheses (`()`) with curly braces containing some code, such as `#!groovy { greeting -> "After flatten: $greeting" }`.
 
 These are called _closures_. The code they contain will be executed for each item in the channel.
-We define a temporary variable for the inner value, here called `greeting` (but it could be any arbitrary name), which is only used within the scope of that closure.
+We define a temporary variable for the inner value, here called `greeting`, which is only used within the scope of that closure.
+The name is up to you, but it's good practice to name it after what the channel contains at that point: before `flatten()`, the channel contains the whole list of greetings, so the first closure calls it `greetings`.
 
 In this example, `$greeting` represents each individual item loaded in the channel.
 This will result in neatly labeled console output.
@@ -1086,7 +1087,7 @@ In the workflow block, make the following code change:
         main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
-                            .view { greeting -> "Before flatten: $greeting" }
+                            .view { greetings -> "Before flatten: $greetings" }
                              // .flatten()
                              // .view { greeting -> "After flatten: $greeting" }
         // emit a greeting
@@ -1107,7 +1108,7 @@ In the workflow block, make the following code change:
         greetings_array = ['Hello','Bonjour','Hola']
         // create a channel for inputs
         greeting_ch = channel.of(greetings_array)
-                            .view { greeting -> "Before flatten: $greeting" }
+                            .view { greetings -> "Before flatten: $greetings" }
                             .flatten()
                             .view { greeting -> "After flatten: $greeting" }
         // emit a greeting
@@ -1193,7 +1194,7 @@ In the workflow block, make the following code change to replace `flatten()` wit
         greeting_ch = channel.fromPath(params.input)
                             .view { csv -> "Before splitCsv: $csv" }
                             .splitCsv()
-                            .view { csv -> "After splitCsv: $csv" }
+                            .view { row -> "After splitCsv: $row" }
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -1210,7 +1211,7 @@ In the workflow block, make the following code change to replace `flatten()` wit
         main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
-                            .view { greeting -> "Before flatten: $greeting" }
+                            .view { greetings -> "Before flatten: $greetings" }
                              // .flatten()
                              // .view { greeting -> "After flatten: $greeting" }
         // emit a greeting
@@ -1222,7 +1223,7 @@ In the workflow block, make the following code change to replace `flatten()` wit
     ```
 
 As you can see, we also updated the before/after `view()` statements.
-Technically we could have used the same variable name (`greeting`) but we updated it to something more appropriate (`csv`) to make the code more readable by others.
+The closure variables are renamed to describe what the channel contains at each point: `csv` for the CSV file before `splitCsv()`, and `row` for each parsed row after it.
 
 #### 4.2.2. Run the workflow again
 
@@ -1312,9 +1313,9 @@ In the workflow block, make the following code change:
         greeting_ch = channel.fromPath(params.input)
                             .view { csv -> "Before splitCsv: $csv" }
                             .splitCsv()
-                            .view { csv -> "After splitCsv: $csv" }
-                            .map { item -> item[0] }
-                            .view { csv -> "After map: $csv" }
+                            .view { row -> "After splitCsv: $row" }
+                            .map { row -> row[0] }
+                            .view { greeting -> "After map: $greeting" }
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -1333,7 +1334,7 @@ In the workflow block, make the following code change:
         greeting_ch = channel.fromPath(params.input)
                             .view { csv -> "Before splitCsv: $csv" }
                             .splitCsv()
-                            .view { csv -> "After splitCsv: $csv" }
+                            .view { row -> "After splitCsv: $row" }
         // emit a greeting
         sayHello(greeting_ch)
 
