@@ -698,8 +698,8 @@ Let's also include a couple of `view()` statements to visualize the before and a
         collectGreetings(convertToUpper.out.collect())
 
         // optional view statements
-        convertToUpper.out.view { contents -> "Before collect: $contents" }
-        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
+        convertToUpper.out.view { filepath -> "Before collect: $filepath" }
+        convertToUpper.out.collect().view { filepaths -> "After collect: $filepaths" }
     ```
 
 === "Before"
@@ -710,6 +710,7 @@ Let's also include a couple of `view()` statements to visualize the before and a
     ```
 
 The `view()` statements can go anywhere you want; we put them right after the call for readability.
+As in Part 2, the closure variables are named after what the channel contains: one file path per element before `collect()`, and a list of all the file paths after it.
 
 #### 2.4.3. Run the workflow again with `-resume`
 
@@ -801,8 +802,8 @@ Before you move on to the next section, we recommend you delete the `view()` sta
         collectGreetings(convertToUpper.out.collect())
 
         // optional view statements
-        convertToUpper.out.view { contents -> "Before collect: $contents" }
-        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
+        convertToUpper.out.view { filepath -> "Before collect: $filepath" }
+        convertToUpper.out.collect().view { filepaths -> "After collect: $filepaths" }
     ```
 
 This is basically the reverse operation from point 2.4.2.
