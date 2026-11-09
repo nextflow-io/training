@@ -944,7 +944,7 @@ You see we've added a second `.view` statement, and for each of them, we've repl
 
 These are called _closures_. The code they contain will be executed for each item in the channel.
 We define a temporary variable for the inner value, here called `greeting`, which is only used within the scope of that closure.
-The name is up to you, but it's good practice to name it after what the channel contains at that point: before `flatten()`, the channel contains the whole list of greetings, so the first closure calls it `greetings`.
+The name is up to you, but it's good practice to name it after what we expect the channel to contain at that point: before `flatten()`, the channel contains the whole list of greetings, so the first closure calls it `greetings`.
 
 In this example, `$greeting` represents each individual item loaded in the channel.
 This will result in neatly labeled console output.
