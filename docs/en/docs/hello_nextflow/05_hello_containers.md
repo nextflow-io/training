@@ -1166,6 +1166,266 @@ See [Next steps](next_steps.md) for where to go from here.
 
 ---
 
+## Bonus exercises
+
+These optional exercises let you practice what you learned in this part.
+Each one can be solved with what this part covered; open the hint if you get stuck.
+The solutions are also in `solutions/5-hello-containers/bonus/`.
+
+### Exercise 1: Run the translation step in a container
+
+The `translateGreeting` process still runs with the Python installed in your environment.
+Starting from `hello-containers.nf` as you left it at the end of this part, make `translateGreeting` run in a container that provides Python.
+Run the workflow, then check the `.command.run` file of one of the `translateGreeting` tasks to confirm which container it used.
+
+??? tip "Hint"
+
+    Add a `container` directive to the process, the same way you did for `cowpy`.
+    Any image that provides Python 3 works, for example `python:3.12-slim`.
+
+??? solution
+
+    Add the `container` directive to the `translateGreeting` module:
+
+    ```groovy title="modules/translateGreeting.nf" linenums="4" hl_lines="3"
+    process translateGreeting {
+
+        container 'python:3.12-slim'
+
+        input:
+    ```
+
+    Then run the workflow:
+
+    ```bash
+    nextflow run hello-containers.nf -profile test
+    ```
+
+    The header of the `.command.run` file of a `translateGreeting` task names the container:
+
+    ```console title="work/8f/df33e4feb78bcdb25c23f731184d02/.command.run"
+    #!/bin/bash
+    ### ---
+    ### name: 'translateGreeting (2)'
+    ### container: 'python:3.12-slim'
+    ### outputs:
+    ### - 'french-Mateo-output.txt'
+    ```
+
+    Now both `translateGreeting` and `cowpy` run in containers, each with its own image.
+
+### Exercise 2: Use a different character
+
+The ASCII art uses the turkey, the default value of the `character` parameter.
+Find out which other characters `cowpy` offers, pick one, and run the workflow so that it draws that character instead.
+
+??? tip "Hint"
+
+    Run `cowpy -l` inside the `cowpy` container, as in section 1, to list the characters.
+    Then set the `character` parameter on the command line, or change its default in `nextflow.config`.
+
+??? solution
+
+    The list of characters includes `koala`.
+    Set it on the command line:
+
+    ```bash
+    nextflow run hello-containers.nf -profile test --character koala
+    ```
+
+    Or change the default in `nextflow.config`:
+
+    ```groovy title="nextflow.config" linenums="6" hl_lines="4"
+    params {
+        language = 'french'
+        batch = 'batch'
+        character = 'koala'
+    }
+    ```
+
+    The ASCII art now shows a koala:
+
+    ```console title="results/batch/cowpy-COLLECTED-batch-output.txt"
+     __________________
+    / Bonjour, Celine! \
+    | Bonjour, Andrea! |
+    \ Bonjour, Mateo!  /
+     ------------------
+      \
+       \
+           ___
+         {~._.~}
+          ( Y )
+         ()~*~()
+         (_)-(_)
+    ```
+
+### Challenge: Give each name its own character
+
+The third column of `data/names.csv` assigns a character to each name: `squirrel` for Mateo, `turtle` for Andrea and `moose` for Celine.
+Make the workflow produce one ASCII art file per name, each drawn by the character from its row, instead of a single drawing of all the greetings.
+Keep the collected file and the report as they are.
+
+??? tip "Hint"
+
+    Carry the character along with each greeting, in a tuple.
+    Map each CSV row to `[row[0], row[2]]`, declare process inputs like `tuple val(name), val(character)` and outputs like `tuple path("${name}-output.txt"), val(character)`, and call `cowpy` on the output of `translateGreeting` rather than on the collected file.
+    Where only the file is needed, remove the character with `map`.
+    If you did the challenge in Part 3, the same approach applies.
+
+??? solution
+
+    In the workflow, build `[name, character]` pairs, pass them through the processes, and call `cowpy` on each translated greeting:
+
+    ```groovy title="hello-containers.nf" linenums="18" hl_lines="4-5 7 9 13-15 18-19"
+    workflow {
+
+        main:
+        // create a channel of [name, character] pairs from a CSV file
+        person_ch = channel.fromPath(params.input)
+                            .splitCsv()
+                            .map { row -> [row[0], row[2]] }
+        // emit a greeting
+        sayHello(person_ch)
+        // translate the greeting
+        translateGreeting(sayHello.out, params.language)
+        // collect all the greetings into one file
+        collectGreetings(translateGreeting.out.map { greeting_file, character -> greeting_file }.collect(), params.batch)
+        // generate ASCII art of each greeting with its own character
+        cowpy(translateGreeting.out)
+
+        publish:
+        first_output = sayHello.out.map { greeting_file, character -> greeting_file }
+        translated = translateGreeting.out.map { greeting_file, character -> greeting_file }
+        collected = collectGreetings.out.outfile
+        batch_report = collectGreetings.out.report
+        cowpy_art = cowpy.out
+    }
+    ```
+
+    The `character` parameter is no longer used, so you can remove it from the `params` block and from `nextflow.config`.
+
+    In the modules, the inputs and outputs carry the character alongside the file:
+
+    ```groovy title="modules/sayHello.nf" linenums="6"
+        input:
+        tuple val(name), val(character)
+
+        output:
+        tuple path("${name}-output.txt"), val(character)
+    ```
+
+    ```groovy title="modules/translateGreeting.nf" linenums="6"
+        input:
+        tuple path(input_file), val(character)
+        val language
+
+        output:
+        tuple path("${language}-${input_file}"), val(character)
+    ```
+
+    ```groovy title="modules/cowpy.nf" linenums="7"
+        input:
+        tuple path(input_file), val(character)
+    ```
+
+    Run the workflow:
+
+    ```bash
+    nextflow run hello-containers.nf -profile test
+    ```
+
+    ??? success "Command output"
+
+        ```console
+        N E X T F L O W   ~  version 26.04.4
+
+        Launching `hello-containers.nf` [stoic_woese] revision: 0dc8d93acb
+
+        executor >  local (10)
+        [9c/09c34b] sayHello (1)          | 3 of 3 ✔
+        [0e/72e83b] translateGreeting (3) | 3 of 3 ✔
+        [ce/a12b97] collectGreetings      | 1 of 1 ✔
+        [0c/65ba03] cowpy (3)             | 3 of 3 ✔
+
+        Outputs:
+
+          /workspaces/training/hello-nextflow/results
+
+          first_output:
+            - batch/intermediates/Celine-output.txt
+            - batch/intermediates/Mateo-output.txt
+            - batch/intermediates/Andrea-output.txt
+
+          translated:
+            - batch/intermediates/french-Mateo-output.txt
+            - batch/intermediates/french-Andrea-output.txt
+            - batch/intermediates/french-Celine-output.txt
+
+          collected: batch/intermediates/COLLECTED-batch-output.txt
+
+          batch_report: batch/batch-report.txt
+
+          cowpy_art:
+            - batch/cowpy-french-Andrea-output.txt
+            - batch/cowpy-french-Mateo-output.txt
+            - batch/cowpy-french-Celine-output.txt
+        ```
+
+    `cowpy` now runs three times, once per name, and each file is drawn by that name's character:
+
+    ```console title="results/batch/cowpy-french-Mateo-output.txt"
+     _________________
+    < Bonjour, Mateo! >
+     -----------------
+      \
+         \
+                      _ _
+           | \__/|  .~    ~.
+           /oo `./      .'
+          {o__,   \    {
+            / .  . )    \
+            `-` '-' \    }
+           .(   _(   )_.'
+          '---.~_ _ _|
+    ```
+
+    ```console title="results/batch/cowpy-french-Andrea-output.txt"
+     __________________
+    < Bonjour, Andrea! >
+     ------------------
+        \                                  ___-------___
+         \                             _-~~             ~~-_
+          \                         _-~                    /~-_
+                 /^\__/^\         /~  \                   /    \
+               /|  O|| O|        /      \_______________/        \
+              | |___||__|      /       /                \          \
+              |          \    /      /                    \          \
+              |   (_______) /______/                        \_________ \
+              |         / /         \                      /            \
+               \         \^\\         \                  /               \     /
+                 \         ||           \______________/      _-_       //\__//
+                   \       ||------_-~~-_ ------------- \ --/~   ~\    || __/
+                     ~-----||====/~     |==================|       |/~~~~~
+                      (_(__/  ./     /                    \_\      \.
+                             (_(___/                         \_____)_)
+    ```
+
+    ```console title="results/batch/cowpy-french-Celine-output.txt"
+     __________________
+    < Bonjour, Celine! >
+     ------------------
+      \
+       \   \_\_    _/_/
+        \      \__/
+               (oo)\_______
+               (__)\       )\/\
+                   ||----w |
+                   ||     ||
+    ```
+
+---
+
 ## Quiz
 
 <quiz>
