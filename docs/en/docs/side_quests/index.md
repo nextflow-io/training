@@ -12,7 +12,7 @@ additional_information:
     - Handle and propagate metadata through multi-step workflows
     - Split and group data channels for parallel and serial processing
     - Test Nextflow workflows using nf-test
-    - Compose complex pipelines from reusable named workflow modules
+    - Compose pipelines from reusable named workflows and from other pipelines
     - Work efficiently with files using Nextflow file operations
     - Debug common workflow issues systematically
     - Use and build Nextflow plugins
@@ -50,7 +50,7 @@ Otherwise, feel free to dive straight into whichever quest calls to you.
 <tr><td><a href="./metadata/">Metadata and Meta Maps</a></td><td>Using metadata maps to track and propagate sample information</td><td>45 mins</td></tr>
 <tr><td><a href="./splitting_and_grouping/">Splitting and Grouping</a></td><td>Techniques for splitting and regrouping data channels</td><td>45 mins</td></tr>
 <tr><th colspan="3">Modular Architecture in Action</th></tr>
-<tr><td><a href="./workflows_of_workflows/">Workflows of Workflows</a></td><td>Composing complex pipelines from reusable named workflow modules</td><td>30 mins</td></tr>
+<tr><td><a href="./composing_pipelines/">Composing Pipelines</a></td><td>Composing pipelines from reusable named workflows, typed interfaces and whole pipelines</td><td>3.5 hours</td></tr>
 <tr><th colspan="3">The Nextflow Extended Universe</th></tr>
 <tr><td><a href="./nf_test/">Testing with nf-test</a></td><td>Writing and running tests for Nextflow workflows</td><td>1 hour</td></tr>
 <tr><td><a href="./plugin_development/">Plugin Development</a></td><td>Using and building Nextflow plugins</td><td>3 hours</td></tr>
