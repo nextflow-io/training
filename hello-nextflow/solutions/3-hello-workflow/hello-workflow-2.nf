@@ -69,12 +69,13 @@ workflow {
     sayHello(greeting_ch)
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
+
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect())
 
     // optional view statements
-    convertToUpper.out.view { item -> "Before collect: ${item}" }
-    convertToUpper.out.collect().view { items -> "After collect: ${items}" }
+    convertToUpper.out.view { contents -> "Before collect: $contents" }
+    convertToUpper.out.collect().view { contents -> "After collect: $contents" }
 
     publish:
     first_output = sayHello.out

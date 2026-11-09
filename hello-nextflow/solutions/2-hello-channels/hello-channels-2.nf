@@ -28,7 +28,7 @@ workflow {
 
     main:
     // create a channel for inputs
-    greeting_ch = channel.of('Hello', 'Bonjour', 'Hola')
+    greeting_ch = channel.of('Hello','Bonjour','Hola')
                         .view()
     // emit a greeting
     sayHello(greeting_ch)

@@ -40,8 +40,8 @@ Open the `hello-world.nf` script in the editor pane.
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
-    */
+     * Use echo to print 'Hello World!' to a file
+     */
     process sayHello {
 
         output:
@@ -76,8 +76,8 @@ The process body must contain a script block which specifies the command to run,
 
 ```groovy title="hello-world.nf" linenums="3"
 /*
-* Use echo to print 'Hello World!' to a file
-*/
+ * Use echo to print 'Hello World!' to a file
+ */
 process sayHello {
 
     output:
@@ -161,7 +161,7 @@ nextflow run hello-world.nf
 The `sayHello` process ran once (`1 of 1 ✔`).
 As you saw in Nextflow Run, the prefix `[65/7be2fa]` is the truncated path to the task directory under `work/`, where Nextflow ran the process.
 
-Open that directory, for example `work/65/7be2fa7be2fad5e71e5f49998f795677fd68` (yours will have a different name), and look at two of its files:
+Open that directory, for example `work/65/7be2fad5e71e5f49998f795677fd68` (yours will have a different name), and look at two of its files:
 
 - **`output.txt`** contains `Hello World!`, the output declared in the process.
 - **`.command.sh`** contains the command Nextflow ran:
@@ -513,17 +513,33 @@ Ok, that was convenient, but in many cases, it makes sense to supply a default v
 
 Let's give the `input` parameter a default value by declaring it before the workflow definition.
 
-```groovy title="hello-world.nf" linenums="20"
-/*
- * Pipeline parameters
- */
-params {
-    input: String = 'Hola mundo!'
-}
-```
+In the workflow script, make the following code change:
+
+=== "After"
+
+    ```groovy title="hello-world.nf" linenums="18" hl_lines="3-8"
+    }
+
+    /*
+     * Pipeline parameters
+     */
+    params {
+        input: String = 'Hola mundo!'
+    }
+
+    workflow {
+    ```
+
+=== "Before"
+
+    ```groovy title="hello-world.nf" linenums="18"
+    }
+
+    workflow {
+    ```
 
 As you see, we can specify the type of input that the workflow expects (Nextflow 25.10.2 and later).
-The syntax is `name: Type = default_value`.
+The syntax is `#!groovy name: Type = default_value`.
 Supported types include `String`, `Integer`, `Float`, `Boolean`, and `Path`.
 
 !!! info
@@ -564,7 +580,7 @@ nextflow run hello-world.nf
 
     ```
     ERROR ~ Script compilation error
-    - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
+    - file : /workspaces/training/hello-nextflow/hello-world.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
           input: String = 'Hola mundo!'
@@ -722,7 +738,7 @@ How do you reference a variable inside a Nextflow script block?
 </quiz>
 
 <quiz>
-In `params { input: String = 'Hola mundo!' }`, what happens when you run the workflow with `--input 'Konnichiwa!'`?
+In `#!groovy params { input: String = 'Hola mundo!' }`, what happens when you run the workflow with `--input 'Konnichiwa!'`?
 - [ ] The workflow fails because the parameter already has a value
 - [x] The command-line value overrides the default
 - [ ] The default value overrides the command-line value

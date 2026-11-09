@@ -71,6 +71,7 @@ workflow {
     sayHello(greeting_ch)
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
+
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
