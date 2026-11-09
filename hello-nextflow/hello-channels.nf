@@ -6,14 +6,14 @@
 process sayHello {
 
     input:
-    val greeting
+    val name
 
     output:
     path 'output.txt'
 
     script:
     """
-    echo '${greeting}' > output.txt
+    echo 'Hello, ${name}!' > output.txt
     """
 }
 
@@ -21,14 +21,14 @@ process sayHello {
  * Pipeline parameters
  */
 params {
-    input: String = 'Hola mundo!'
+    name: String = 'World'
 }
 
 workflow {
 
     main:
     // emit a greeting
-    sayHello(params.input)
+    sayHello(params.name)
 
     publish:
     first_output = sayHello.out

@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
 /*
- * Collect uppercase greetings into a single output file
+ * Collect translated greetings into a single output file
  */
 process collectGreetings {
 
@@ -23,13 +23,14 @@ process collectGreetings {
 
 // Include modules
 include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
+include { translateGreeting } from './modules/translateGreeting.nf'
 
 /*
  * Pipeline parameters
  */
 params {
-    input: Path = 'data/greetings.csv'
+    input: Path = 'data/names.csv'
+    language: String = 'french'
     batch: String = 'batch'
 }
 
@@ -37,19 +38,19 @@ workflow {
 
     main:
     // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.input)
+    name_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { row -> row[0] }
     // emit a greeting
-    sayHello(greeting_ch)
-    // convert the greeting to uppercase
-    convertToUpper(sayHello.out)
+    sayHello(name_ch)
+    // translate the greeting
+    translateGreeting(sayHello.out, params.language)
     // collect all the greetings into one file
-    collectGreetings(convertToUpper.out.collect(), params.batch)
+    collectGreetings(translateGreeting.out.collect(), params.batch)
 
     publish:
     first_output = sayHello.out
-    uppercased = convertToUpper.out
+    translated = translateGreeting.out
     collected = collectGreetings.out.outfile
     batch_report = collectGreetings.out.report
 }
@@ -58,7 +59,7 @@ output {
     first_output {
         path "${params.batch}/intermediates"
     }
-    uppercased {
+    translated {
         path "${params.batch}/intermediates"
     }
     collected {
