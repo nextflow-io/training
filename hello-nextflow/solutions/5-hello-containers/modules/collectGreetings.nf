@@ -1,5 +1,5 @@
 /*
- * Collect uppercase greetings into a single output file
+ * Collect translated greetings into a single output file
  */
 process collectGreetings {
 

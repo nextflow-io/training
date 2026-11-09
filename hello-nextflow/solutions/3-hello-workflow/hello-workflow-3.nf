@@ -6,36 +6,53 @@
 process sayHello {
 
     input:
-    val greeting
+    val name
 
     output:
-    path "${greeting}-output.txt"
+    path "${name}-output.txt"
 
     script:
     """
-    echo '${greeting}' > '${greeting}-output.txt'
+    echo 'Hello, ${name}!' > '${name}-output.txt'
     """
 }
 
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Use Python to translate the greeting into another language
  */
-process convertToUpper {
+process translateGreeting {
 
     input:
     path input_file
+    val language
 
     output:
-    path "UPPER-${input_file}"
+    path "${language}-${input_file}"
 
     script:
     """
-    cat ${input_file} | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
+    #!/usr/bin/env python3
+
+    translations = {
+        'french': 'Bonjour',
+        'spanish': 'Hola',
+        'italian': 'Ciao',
+        'dutch': 'Hallo',
+        'arabic': 'Marhaban',
+        'japanese': 'Konnichiwa',
+        'english': 'Hello',
+    }
+
+    with open('${input_file}') as greeting_file:
+        greeting = greeting_file.read()
+
+    with open('${language}-${input_file}', 'w') as translated_file:
+        translated_file.write(greeting.replace('Hello', translations['${language}']))
     """
 }
 
 /*
- * Collect uppercase greetings into a single output file
+ * Collect translated greetings into a single output file
  */
 process collectGreetings {
 
@@ -56,7 +73,8 @@ process collectGreetings {
  * Pipeline parameters
  */
 params {
-    input: Path = 'data/greetings.csv'
+    input: Path = 'data/names.csv'
+    language: String = 'french'
     batch: String = 'batch'
 }
 
@@ -64,20 +82,19 @@ workflow {
 
     main:
     // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.input)
+    name_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { row -> row[0] }
     // emit a greeting
-    sayHello(greeting_ch)
-    // convert the greeting to uppercase
-    convertToUpper(sayHello.out)
-
+    sayHello(name_ch)
+    // translate the greeting
+    translateGreeting(sayHello.out, params.language)
     // collect all the greetings into one file
-    collectGreetings(convertToUpper.out.collect(), params.batch)
+    collectGreetings(translateGreeting.out.collect(), params.batch)
 
     publish:
     first_output = sayHello.out
-    uppercased = convertToUpper.out
+    translated = translateGreeting.out
     collected = collectGreetings.out
 }
 
@@ -85,7 +102,7 @@ output {
     first_output {
         path "${params.batch}/intermediates"
     }
-    uppercased {
+    translated {
         path "${params.batch}/intermediates"
     }
     collected {

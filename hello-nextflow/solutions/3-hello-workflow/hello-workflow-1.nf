@@ -6,31 +6,37 @@
 process sayHello {
 
     input:
-    val greeting
+    val name
 
     output:
-    path "${greeting}-output.txt"
+    path "${name}-output.txt"
 
     script:
     """
-    echo '${greeting}' > '${greeting}-output.txt'
+    echo 'Hello, ${name}!' > '${name}-output.txt'
     """
 }
 
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Use Python to translate the greeting into French
  */
-process convertToUpper {
+process translateGreeting {
 
     input:
     path input_file
 
     output:
-    path "UPPER-${input_file}"
+    path "french-${input_file}"
 
     script:
     """
-    cat ${input_file} | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
+    #!/usr/bin/env python3
+
+    with open('${input_file}') as greeting_file:
+        greeting = greeting_file.read()
+
+    with open('french-${input_file}', 'w') as translated_file:
+        translated_file.write(greeting.replace('Hello', 'Bonjour'))
     """
 }
 
@@ -38,31 +44,31 @@ process convertToUpper {
  * Pipeline parameters
  */
 params {
-    input: Path = 'data/greetings.csv'
+    input: Path = 'data/names.csv'
 }
 
 workflow {
 
     main:
     // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.input)
+    name_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { row -> row[0] }
     // emit a greeting
-    sayHello(greeting_ch)
-    // convert the greeting to uppercase
-    convertToUpper(sayHello.out)
+    sayHello(name_ch)
+    // translate the greeting
+    translateGreeting(sayHello.out)
 
     publish:
     first_output = sayHello.out
-    uppercased = convertToUpper.out
+    translated = translateGreeting.out
 }
 
 output {
     first_output {
         path '.'
     }
-    uppercased {
+    translated {
         path '.'
     }
 }

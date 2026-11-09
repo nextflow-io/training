@@ -6,14 +6,14 @@
 process sayHello {
 
     input:
-    val greeting
+    val name
 
     output:
-    path "${greeting}-output.txt"
+    path "${name}-output.txt"
 
     script:
     """
-    echo '${greeting}' > '${greeting}-output.txt'
+    echo 'Hello, ${name}!' > '${name}-output.txt'
     """
 }
 
@@ -21,21 +21,21 @@ process sayHello {
  * Pipeline parameters
  */
 params {
-    input: Path = 'data/greetings.csv'
+    input: Path = 'data/names.csv'
 }
 
 workflow {
 
     main:
     // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.input)
+    name_ch = channel.fromPath(params.input)
                         .view { csv -> "Before splitCsv: $csv" }
                         .splitCsv()
                         .view { row -> "After splitCsv: $row" }
                         .map { row -> row[0] }
-                        .view { greeting -> "After map: $greeting" }
+                        .view { name -> "After map: $name" }
     // emit a greeting
-    sayHello(greeting_ch)
+    sayHello(name_ch)
 
     publish:
     first_output = sayHello.out

@@ -6,14 +6,14 @@
 process sayHello {
 
     input:
-    val greeting
+    val name
 
     output:
-    path "${greeting}-output.txt"
+    path "${name}-output.txt"
 
     script:
     """
-    echo '${greeting}' > '${greeting}-output.txt'
+    echo 'Hello, ${name}!' > '${name}-output.txt'
     """
 }
 
@@ -21,17 +21,17 @@ process sayHello {
  * Pipeline parameters
  */
 params {
-    input: String = 'Hola mundo!'
+    name: String = 'World'
 }
 
 workflow {
 
     main:
     // create a channel for inputs
-    greeting_ch = channel.of('Hello','Bonjour','Hola')
+    name_ch = channel.of('Mateo','Andrea','Celine')
                         .view()
     // emit a greeting
-    sayHello(greeting_ch)
+    sayHello(name_ch)
 
     publish:
     first_output = sayHello.out
