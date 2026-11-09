@@ -39,7 +39,7 @@
       
       
       <link rel="icon" href="../../../assets/img/nextflow-icon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -47,10 +47,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
   
@@ -1068,16 +1068,6 @@ md-nav--primary" aria-label="Navigazione" data-md-level="0">
       
 <span class="md-ellipsis">
     Parte 5: Hello Containers   
-</span>
-  
-  </a>
-</li>
-          
-<li class="md-nav__item">
-  <a href="../../../hello_nextflow/06_hello_config/" class="md-nav__link">
-      
-<span class="md-ellipsis">
-    Parte 6: Hello Config   
 </span>
   
   </a>
@@ -2567,7 +2557,7 @@ Questi file non sono funzionali; il loro scopo è solo quello di servire come st
 </ol>
 <p>Ogni passaggio si concentra su un aspetto specifico dello sviluppo del flusso di lavoro.</p>
 <hr />
-<h2 TOOL_A_ACTION="TOOL_A_ACTION" id="1-scrivere-un-flusso-di-lavoro-a-singolo-stadio-che-esegue">1. Scrivere un flusso di lavoro a singolo stadio che esegue<a class="headerlink" href="#1-scrivere-un-flusso-di-lavoro-a-singolo-stadio-che-esegue" title="Permanent link">&para;</a></h2>
+<h2 TOOL_A_ACTION id="1-scrivere-un-flusso-di-lavoro-a-singolo-stadio-che-esegue">1. Scrivere un flusso di lavoro a singolo stadio che esegue<a class="headerlink" href="#1-scrivere-un-flusso-di-lavoro-a-singolo-stadio-che-esegue" title="Permanent link">&para;</a></h2>
 <p>Questo primo passaggio si concentra sulle basi: caricare {PRIMARY_INPUT_TYPE} e {TOOL_A_OUTPUT_DESCRIPTION}.</p>
 <p>Ricordate il comando <code>{TOOL_A_COMMAND_NAME}</code> dalla <a href="../01_method/">Parte 1</a>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">{</span>TOOL_A_COMMAND_SUMMARY<span class="o">}</span>
@@ -2650,7 +2640,7 @@ Questa è una convenzione comune nell'ecosistema Nextflow (vedi <a href="../../.
 Questo rende facile fare riferimento a file di dati e altre risorse senza codificare percorsi assoluti.</p>
 <h4 id="113-configurare-il-canale-di-input">1.1.3. Configurare il canale di input<a class="headerlink" href="#113-configurare-il-canale-di-input" title="Permanent link">&para;</a></h4>
 <p>{INPUT_CHANNEL_INSTRUCTIONS}</p>
-<h3 TOOL_A_NAME="TOOL_A_NAME" id="12-scrivere-il-modulo">1.2. Scrivere il modulo<a class="headerlink" href="#12-scrivere-il-modulo" title="Permanent link">&para;</a></h3>
+<h3 TOOL_A_NAME id="12-scrivere-il-modulo">1.2. Scrivere il modulo<a class="headerlink" href="#12-scrivere-il-modulo" title="Permanent link">&para;</a></h3>
 <p>{MODULE_INSTRUCTIONS_COVERING: container, input, output, script}</p>
 <h3 id="13-importare-e-chiamare-il-modulo-nel-flusso-di-lavoro">1.3. Importare e chiamare il modulo nel flusso di lavoro<a class="headerlink" href="#13-importare-e-chiamare-il-modulo-nel-flusso-di-lavoro" title="Permanent link">&para;</a></h3>
 <p>{IMPORT_AND_CALL_INSTRUCTIONS}</p>
@@ -2682,12 +2672,12 @@ Questo rende facile fare riferimento a file di dati e altre risorse senza codifi
 <h3 id="cosa-ce-dopo">Cosa c'è dopo?<a class="headerlink" href="#cosa-ce-dopo" title="Permanent link">&para;</a></h3>
 <p>Aggiungere un secondo processo per concatenare ulteriori passaggi di analisi.</p>
 <hr />
-<h2 TOOL_B_ACTION="TOOL_B_ACTION" id="2-aggiungere-un-secondo-processo-per-eseguire">2. Aggiungere un secondo processo per eseguire<a class="headerlink" href="#2-aggiungere-un-secondo-processo-per-eseguire" title="Permanent link">&para;</a></h2>
+<h2 TOOL_B_ACTION id="2-aggiungere-un-secondo-processo-per-eseguire">2. Aggiungere un secondo processo per eseguire<a class="headerlink" href="#2-aggiungere-un-secondo-processo-per-eseguire" title="Permanent link">&para;</a></h2>
 <p>{DESCRIBE_WHAT_THIS_STEP_ADDS}</p>
 <p>Ricordate il comando <code>{TOOL_B_COMMAND_NAME}</code> dalla <a href="../01_method/">Parte 1</a>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="o">{</span>TOOL_B_COMMAND_SUMMARY<span class="o">}</span>
 </code></pre></div>
-<h3 TOOL_B_NAME="TOOL_B_NAME" id="21-scrivere-il-modulo">2.1. Scrivere il modulo<a class="headerlink" href="#21-scrivere-il-modulo" title="Permanent link">&para;</a></h3>
+<h3 TOOL_B_NAME id="21-scrivere-il-modulo">2.1. Scrivere il modulo<a class="headerlink" href="#21-scrivere-il-modulo" title="Permanent link">&para;</a></h3>
 <p>{MODULE_INSTRUCTIONS}</p>
 <h3 id="22-importare-e-chiamare-il-modulo-nel-flusso-di-lavoro">2.2. Importare e chiamare il modulo nel flusso di lavoro<a class="headerlink" href="#22-importare-e-chiamare-il-modulo-nel-flusso-di-lavoro" title="Permanent link">&para;</a></h3>
 <p>{IMPORT_AND_CALL_INSTRUCTIONS_CHAINING_OUTPUTS}</p>
@@ -2708,7 +2698,7 @@ Questo rende facile fare riferimento a file di dati e altre risorse senza codifi
 <h2 id="3-adattare-il-flusso-di-lavoro-per-eseguirlo-su-un-batch-di-campioni">3. Adattare il flusso di lavoro per eseguirlo su un batch di campioni<a class="headerlink" href="#3-adattare-il-flusso-di-lavoro-per-eseguirlo-su-un-batch-di-campioni" title="Permanent link">&para;</a></h2>
 <p>Finora, il flusso di lavoro elabora un singolo campione.
 Per gestire più campioni, dobbiamo modificare il modo in cui vengono forniti gli input e sfruttare il paradigma dataflow di Nextflow per parallelizzare l'esecuzione.</p>
-<h3 BATCH_INPUT_INSTRUCTIONS="BATCH_INPUT_INSTRUCTIONS" id="31">3.1.<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<h3 BATCH_INPUT_INSTRUCTIONS id="31">3.1.<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p>{INSTRUCTIONS_FOR_SWITCHING_TO_SAMPLESHEET_OR_BATCH_INPUT}</p>
 <h3 id="32-eseguire-il-flusso-di-lavoro-su-piu-campioni">3.2. Eseguire il flusso di lavoro su più campioni<a class="headerlink" href="#32-eseguire-il-flusso-di-lavoro-su-piu-campioni" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="o">{</span>DOMAIN_DIR<span class="o">}</span>.nf<span class="w"> </span>-profile<span class="w"> </span><span class="nb">test</span>
@@ -4609,10 +4599,10 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../../assets/javascripts/posthog.js"></script>
       

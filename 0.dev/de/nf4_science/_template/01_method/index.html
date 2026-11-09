@@ -39,7 +39,7 @@
       
       
       <link rel="icon" href="../../../assets/img/nextflow-icon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -47,10 +47,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
   
@@ -1068,16 +1068,6 @@ md-nav--primary" aria-label="Navigation" data-md-level="0">
       
 <span class="md-ellipsis">
     Teil 5: Hello Containers   
-</span>
-  
-  </a>
-</li>
-          
-<li class="md-nav__item">
-  <a href="../../../hello_nextflow/06_hello_config/" class="md-nav__link">
-      
-<span class="md-ellipsis">
-    Teil 6: Hello Config   
 </span>
   
   </a>
@@ -2505,7 +2495,7 @@ md-nav--primary" aria-label="Navigation" data-md-level="0">
 <p>Stelle sicher, dass du dich im Verzeichnis <code>nf4-science/{DOMAIN_DIR}</code> befindest, sodass der letzte Teil des Pfads, der angezeigt wird, wenn du <code>pwd</code> eingibst, <code>{DOMAIN_DIR}</code> ist.</p>
 </div>
 <hr />
-<h2 SINGLE_SAMPLE_SECTION_TITLE="SINGLE_SAMPLE_SECTION_TITLE" id="1">1.<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h2 SINGLE_SAMPLE_SECTION_TITLE id="1">1.<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <p>{BRIEF_DESCRIPTION_OF_SINGLE_SAMPLE_APPROACH}</p>
 <p>In diesem Abschnitt testen wir die Befehle, aus denen die Einzelproben-Verarbeitung besteht.
 Dies sind die Befehle, die wir in Teil 2 dieses Kurses in einen Nextflow-Workflow einbinden werden.</p>
@@ -2517,7 +2507,7 @@ Dies sind die Befehle, die wir in Teil 2 dieses Kurses in einen Nextflow-Workflo
 </figure>
 
 <p>Wir beginnen damit, die Befehle an nur einer Probe zu testen.</p>
-<h3 FIRST_TOOL_STEP_TITLE="FIRST_TOOL_STEP_TITLE" id="11">1.1.<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<h3 FIRST_TOOL_STEP_TITLE id="11">1.1.<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
 <p>{BRIEF_DESCRIPTION_OF_STEP}</p>
 <h4 id="111-container-herunterladen">1.1.1. Container herunterladen<a class="headerlink" href="#111-container-herunterladen" title="Permanent link">&para;</a></h4>
 <p>Führe den Befehl <code>docker pull</code> aus, um das Container-Image herunterzuladen:</p>
@@ -2547,7 +2537,7 @@ Dies sind die Befehle, die wir in Teil 2 dieses Kurses in einen Nextflow-Workflo
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">exit</span>
 </code></pre></div>
 <p>Deine Eingabeaufforderung sollte wieder normal sein.</p>
-<h3 SECOND_TOOL_STEP_TITLE="SECOND_TOOL_STEP_TITLE" id="12">1.2.<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<h3 SECOND_TOOL_STEP_TITLE id="12">1.2.<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>{BRIEF_DESCRIPTION_OF_STEP}</p>
 <h4 id="121-container-herunterladen">1.2.1. Container herunterladen<a class="headerlink" href="#121-container-herunterladen" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="o">{</span>TOOL_B_CONTAINER_URI<span class="o">}</span>
@@ -2576,7 +2566,7 @@ Dies sind die Befehle, die wir in Teil 2 dieses Kurses in einen Nextflow-Workflo
 <p>Deine Eingabeaufforderung sollte wieder normal sein.
 Damit ist der Test der Einzelproben-Verarbeitung abgeschlossen.</p>
 <hr />
-<h2 MULTI_SAMPLE_SECTION_TITLE="MULTI_SAMPLE_SECTION_TITLE" id="2">2.<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h2 MULTI_SAMPLE_SECTION_TITLE id="2">2.<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
 <p>{BRIEF_DESCRIPTION_OF_MULTI_SAMPLE_APPROACH}</p>
 <p>{EXPLAIN_WHY_MULTI_SAMPLE_IS_NEEDED}</p>
 <p>In diesem Abschnitt testen wir die zusätzlichen Befehle, die für die Mehrproben-Verarbeitung benötigt werden.
@@ -2588,7 +2578,7 @@ Dies sind die Befehle, die wir in Teil 3 dieses Kurses in einen Nextflow-Workflo
 <figure class="excalidraw">
 </figure>
 
-<h3 AGGREGATION_STEP_TITLE="AGGREGATION_STEP_TITLE" id="21">2.1.<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<h3 AGGREGATION_STEP_TITLE id="21">2.1.<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p>{STEP_INSTRUCTIONS_FOLLOWING_SAME_PATTERN_AS_ABOVE}</p>
 <hr />
 <h3 id="fazit">Fazit<a class="headerlink" href="#fazit" title="Permanent link">&para;</a></h3>
@@ -4482,10 +4472,10 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../../assets/javascripts/posthog.js"></script>
       

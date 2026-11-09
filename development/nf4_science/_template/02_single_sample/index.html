@@ -39,7 +39,7 @@
       
       
       <link rel="icon" href="../../../assets/img/nextflow-icon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -47,10 +47,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
   
@@ -1068,16 +1068,6 @@ md-nav--primary" aria-label="Navigation" data-md-level="0">
       
 <span class="md-ellipsis">
     Part 5: Hello Containers   
-</span>
-  
-  </a>
-</li>
-          
-<li class="md-nav__item">
-  <a href="../../../hello_nextflow/06_hello_config/" class="md-nav__link">
-      
-<span class="md-ellipsis">
-    Part 6: Hello Config   
 </span>
   
   </a>
@@ -2559,7 +2549,7 @@ These files are not functional; their purpose is just to serve as scaffolds for 
 </ol>
 <p>Each step focuses on a specific aspect of workflow development.</p>
 <hr />
-<h2 TOOL_A_ACTION="TOOL_A_ACTION" id="1-write-a-single-stage-workflow-that-runs">1. Write a single-stage workflow that runs<a class="headerlink" href="#1-write-a-single-stage-workflow-that-runs" title="Permanent link">&para;</a></h2>
+<h2 TOOL_A_ACTION id="1-write-a-single-stage-workflow-that-runs">1. Write a single-stage workflow that runs<a class="headerlink" href="#1-write-a-single-stage-workflow-that-runs" title="Permanent link">&para;</a></h2>
 <p>This first step focuses on the basics: loading {PRIMARY_INPUT_TYPE} and {TOOL_A_OUTPUT_DESCRIPTION}.</p>
 <p>Recall the <code>{TOOL_A_COMMAND_NAME}</code> command from <a href="../01_method/">Part 1</a>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">{</span>TOOL_A_COMMAND_SUMMARY<span class="o">}</span>
@@ -2612,7 +2602,7 @@ The container URI was <code>{TOOL_A_CONTAINER_URI}</code>.</p>
 There are multiple options for providing a default value; here we use a test profile.</p>
 <h4 id="112-create-a-test-profile-with-a-default-value-in-nextflowconfig">1.1.2. Create a test profile with a default value in <code>nextflow.config</code><a class="headerlink" href="#112-create-a-test-profile-with-a-default-value-in-nextflowconfig" title="Permanent link">&para;</a></h4>
 <p>A test profile provides convenient default values for trying out a workflow without specifying inputs on the command line.
-This is a common convention in the Nextflow ecosystem (see <a href="../../../hello_nextflow/06_hello_config/">Hello Config</a> for more detail).</p>
+This is a common convention in the Nextflow ecosystem (see <a href="../../../config_exec/03_profiles/">Use profiles to switch configurations</a> in Configure Execution for more detail).</p>
 <p>Add a <code>profiles</code> block to <code>nextflow.config</code> with a <code>test</code> profile that sets the <code>{PRIMARY_PARAM_NAME}</code> parameter to one of the test {PRIMARY_INPUT_TYPE}s.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">After</label><label for="__tabbed_2_2">Before</label></div>
 <div class="tabbed-content">
@@ -2674,7 +2664,7 @@ This makes it easy to reference data files and other resources without hardcodin
 <h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
 <p>Add a second process to chain additional analysis steps.</p>
 <hr />
-<h2 TOOL_B_ACTION="TOOL_B_ACTION" id="2-add-a-second-process-to-run">2. Add a second process to run<a class="headerlink" href="#2-add-a-second-process-to-run" title="Permanent link">&para;</a></h2>
+<h2 TOOL_B_ACTION id="2-add-a-second-process-to-run">2. Add a second process to run<a class="headerlink" href="#2-add-a-second-process-to-run" title="Permanent link">&para;</a></h2>
 <p>{DESCRIBE_WHAT_THIS_STEP_ADDS}</p>
 <p>Recall the <code>{TOOL_B_COMMAND_NAME}</code> command from <a href="../01_method/">Part 1</a>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="o">{</span>TOOL_B_COMMAND_SUMMARY<span class="o">}</span>
@@ -2700,7 +2690,7 @@ This makes it easy to reference data files and other resources without hardcodin
 <h2 id="3-adapt-the-workflow-to-run-on-a-batch-of-samples">3. Adapt the workflow to run on a batch of samples<a class="headerlink" href="#3-adapt-the-workflow-to-run-on-a-batch-of-samples" title="Permanent link">&para;</a></h2>
 <p>So far, the workflow processes a single sample.
 To handle multiple samples, we need to modify how inputs are provided and leverage Nextflow's dataflow paradigm to parallelize execution.</p>
-<h3 BATCH_INPUT_INSTRUCTIONS="BATCH_INPUT_INSTRUCTIONS" id="31">3.1.<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<h3 BATCH_INPUT_INSTRUCTIONS id="31">3.1.<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p>{INSTRUCTIONS_FOR_SWITCHING_TO_SAMPLESHEET_OR_BATCH_INPUT}</p>
 <h3 id="32-run-the-workflow-on-multiple-samples">3.2. Run the workflow on multiple samples<a class="headerlink" href="#32-run-the-workflow-on-multiple-samples" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="o">{</span>DOMAIN_DIR<span class="o">}</span>.nf<span class="w"> </span>-profile<span class="w"> </span><span class="nb">test</span>
@@ -4601,10 +4591,10 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../../assets/javascripts/posthog.js"></script>
       

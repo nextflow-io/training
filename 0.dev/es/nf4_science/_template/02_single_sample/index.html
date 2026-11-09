@@ -39,7 +39,7 @@
       
       
       <link rel="icon" href="../../../assets/img/nextflow-icon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -47,10 +47,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
   
@@ -1068,16 +1068,6 @@ md-nav--primary" aria-label="Navegación" data-md-level="0">
       
 <span class="md-ellipsis">
     Parte 5: Hello Containers   
-</span>
-  
-  </a>
-</li>
-          
-<li class="md-nav__item">
-  <a href="../../../hello_nextflow/06_hello_config/" class="md-nav__link">
-      
-<span class="md-ellipsis">
-    Parte 6: Hello Config   
 </span>
   
   </a>
@@ -2567,7 +2557,7 @@ Estos archivos no son funcionales; su propósito es solo servir como esqueletos 
 </ol>
 <p>Cada paso se enfoca en un aspecto específico del desarrollo de workflows.</p>
 <hr />
-<h2 TOOL_A_ACTION="TOOL_A_ACTION" id="1-escribe-un-workflow-de-una-sola-etapa-que-ejecute">1. Escribe un workflow de una sola etapa que ejecute<a class="headerlink" href="#1-escribe-un-workflow-de-una-sola-etapa-que-ejecute" title="Permanent link">&para;</a></h2>
+<h2 TOOL_A_ACTION id="1-escribe-un-workflow-de-una-sola-etapa-que-ejecute">1. Escribe un workflow de una sola etapa que ejecute<a class="headerlink" href="#1-escribe-un-workflow-de-una-sola-etapa-que-ejecute" title="Permanent link">&para;</a></h2>
 <p>Este primer paso se enfoca en lo básico: cargar {PRIMARY_INPUT_TYPE} y {TOOL_A_OUTPUT_DESCRIPTION}.</p>
 <p>Recuerda el comando <code>{TOOL_A_COMMAND_NAME}</code> de la <a href="../01_method/">Parte 1</a>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">{</span>TOOL_A_COMMAND_SUMMARY<span class="o">}</span>
@@ -2650,7 +2640,7 @@ Esta es una convención común en el ecosistema de Nextflow (consulta <a href=".
 Esto facilita la referencia a archivos de datos y otros recursos sin codificar rutas absolutas.</p>
 <h4 id="113-configura-el-canal-de-entrada">1.1.3. Configura el canal de entrada<a class="headerlink" href="#113-configura-el-canal-de-entrada" title="Permanent link">&para;</a></h4>
 <p>{INPUT_CHANNEL_INSTRUCTIONS}</p>
-<h3 TOOL_A_NAME="TOOL_A_NAME" id="12-escribe-el-modulo-de">1.2. Escribe el módulo de<a class="headerlink" href="#12-escribe-el-modulo-de" title="Permanent link">&para;</a></h3>
+<h3 TOOL_A_NAME id="12-escribe-el-modulo-de">1.2. Escribe el módulo de<a class="headerlink" href="#12-escribe-el-modulo-de" title="Permanent link">&para;</a></h3>
 <p>{MODULE_INSTRUCTIONS_COVERING: container, input, output, script}</p>
 <h3 id="13-importa-y-llama-al-modulo-en-el-workflow">1.3. Importa y llama al módulo en el workflow<a class="headerlink" href="#13-importa-y-llama-al-modulo-en-el-workflow" title="Permanent link">&para;</a></h3>
 <p>{IMPORT_AND_CALL_INSTRUCTIONS}</p>
@@ -2682,12 +2672,12 @@ Esto facilita la referencia a archivos de datos y otros recursos sin codificar r
 <h3 id="que-sigue">¿Qué sigue?<a class="headerlink" href="#que-sigue" title="Permanent link">&para;</a></h3>
 <p>Agrega un segundo proceso para encadenar pasos de análisis adicionales.</p>
 <hr />
-<h2 TOOL_B_ACTION="TOOL_B_ACTION" id="2-agrega-un-segundo-proceso-para-ejecutar">2. Agrega un segundo proceso para ejecutar<a class="headerlink" href="#2-agrega-un-segundo-proceso-para-ejecutar" title="Permanent link">&para;</a></h2>
+<h2 TOOL_B_ACTION id="2-agrega-un-segundo-proceso-para-ejecutar">2. Agrega un segundo proceso para ejecutar<a class="headerlink" href="#2-agrega-un-segundo-proceso-para-ejecutar" title="Permanent link">&para;</a></h2>
 <p>{DESCRIBE_WHAT_THIS_STEP_ADDS}</p>
 <p>Recuerda el comando <code>{TOOL_B_COMMAND_NAME}</code> de la <a href="../01_method/">Parte 1</a>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="o">{</span>TOOL_B_COMMAND_SUMMARY<span class="o">}</span>
 </code></pre></div>
-<h3 TOOL_B_NAME="TOOL_B_NAME" id="21-escribe-el-modulo-de">2.1. Escribe el módulo de<a class="headerlink" href="#21-escribe-el-modulo-de" title="Permanent link">&para;</a></h3>
+<h3 TOOL_B_NAME id="21-escribe-el-modulo-de">2.1. Escribe el módulo de<a class="headerlink" href="#21-escribe-el-modulo-de" title="Permanent link">&para;</a></h3>
 <p>{MODULE_INSTRUCTIONS}</p>
 <h3 id="22-importa-y-llama-al-modulo-en-el-workflow">2.2. Importa y llama al módulo en el workflow<a class="headerlink" href="#22-importa-y-llama-al-modulo-en-el-workflow" title="Permanent link">&para;</a></h3>
 <p>{IMPORT_AND_CALL_INSTRUCTIONS_CHAINING_OUTPUTS}</p>
@@ -2708,7 +2698,7 @@ Esto facilita la referencia a archivos de datos y otros recursos sin codificar r
 <h2 id="3-adapta-el-workflow-para-ejecutarse-en-un-lote-de-muestras">3. Adapta el workflow para ejecutarse en un lote de muestras<a class="headerlink" href="#3-adapta-el-workflow-para-ejecutarse-en-un-lote-de-muestras" title="Permanent link">&para;</a></h2>
 <p>Hasta ahora, el workflow procesa una sola muestra.
 Para manejar múltiples muestras, necesitamos modificar cómo se proporcionan las entradas y aprovechar el paradigma de flujo de datos de Nextflow para paralelizar la ejecución.</p>
-<h3 BATCH_INPUT_INSTRUCTIONS="BATCH_INPUT_INSTRUCTIONS" id="31">3.1.<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<h3 BATCH_INPUT_INSTRUCTIONS id="31">3.1.<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p>{INSTRUCTIONS_FOR_SWITCHING_TO_SAMPLESHEET_OR_BATCH_INPUT}</p>
 <h3 id="32-ejecuta-el-workflow-en-multiples-muestras">3.2. Ejecuta el workflow en múltiples muestras<a class="headerlink" href="#32-ejecuta-el-workflow-en-multiples-muestras" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="o">{</span>DOMAIN_DIR<span class="o">}</span>.nf<span class="w"> </span>-profile<span class="w"> </span><span class="nb">test</span>
@@ -4609,10 +4599,10 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../../assets/javascripts/posthog.js"></script>
       

@@ -39,7 +39,7 @@
       
       
       <link rel="icon" href="../../../assets/img/nextflow-icon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -47,10 +47,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
   
@@ -1068,16 +1068,6 @@ md-nav--primary" aria-label="Navegació" data-md-level="0">
       
 <span class="md-ellipsis">
     Part 5: Hello Containers   
-</span>
-  
-  </a>
-</li>
-          
-<li class="md-nav__item">
-  <a href="../../../hello_nextflow/06_hello_config/" class="md-nav__link">
-      
-<span class="md-ellipsis">
-    Part 6: Hello Config   
 </span>
   
   </a>
@@ -2567,7 +2557,7 @@ Aquests fitxers no són funcionals; el seu propòsit és només servir com a pla
 </ol>
 <p>Cada pas se centra en un aspecte específic del desenvolupament de workflows.</p>
 <hr />
-<h2 TOOL_A_ACTION="TOOL_A_ACTION" id="1-escriure-un-workflow-duna-sola-etapa-que-executi">1. Escriure un workflow d'una sola etapa que executi<a class="headerlink" href="#1-escriure-un-workflow-duna-sola-etapa-que-executi" title="Permanent link">&para;</a></h2>
+<h2 TOOL_A_ACTION id="1-escriure-un-workflow-duna-sola-etapa-que-executi">1. Escriure un workflow d'una sola etapa que executi<a class="headerlink" href="#1-escriure-un-workflow-duna-sola-etapa-que-executi" title="Permanent link">&para;</a></h2>
 <p>Aquest primer pas se centra en els conceptes bàsics: carregar {PRIMARY_INPUT_TYPE} i {TOOL_A_OUTPUT_DESCRIPTION}.</p>
 <p>Recordeu la comanda <code>{TOOL_A_COMMAND_NAME}</code> de la <a href="../01_method/">Part 1</a>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">{</span>TOOL_A_COMMAND_SUMMARY<span class="o">}</span>
@@ -2650,7 +2640,7 @@ Aquesta és una convenció comuna a l'ecosistema Nextflow (vegeu <a href="../../
 Això facilita la referència a fitxers de dades i altres recursos sense codificar camins absoluts.</p>
 <h4 id="113-configurar-el-canal-dentrada">1.1.3. Configurar el canal d'entrada<a class="headerlink" href="#113-configurar-el-canal-dentrada" title="Permanent link">&para;</a></h4>
 <p>{INPUT_CHANNEL_INSTRUCTIONS}</p>
-<h3 TOOL_A_NAME="TOOL_A_NAME" id="12-escriure-el-modul">1.2. Escriure el mòdul<a class="headerlink" href="#12-escriure-el-modul" title="Permanent link">&para;</a></h3>
+<h3 TOOL_A_NAME id="12-escriure-el-modul">1.2. Escriure el mòdul<a class="headerlink" href="#12-escriure-el-modul" title="Permanent link">&para;</a></h3>
 <p>{MODULE_INSTRUCTIONS_COVERING: container, input, output, script}</p>
 <h3 id="13-importar-i-cridar-el-modul-al-workflow">1.3. Importar i cridar el mòdul al workflow<a class="headerlink" href="#13-importar-i-cridar-el-modul-al-workflow" title="Permanent link">&para;</a></h3>
 <p>{IMPORT_AND_CALL_INSTRUCTIONS}</p>
@@ -2682,12 +2672,12 @@ Això facilita la referència a fitxers de dades i altres recursos sense codific
 <h3 id="que-segueix">Què segueix?<a class="headerlink" href="#que-segueix" title="Permanent link">&para;</a></h3>
 <p>Afegir un segon procés per encadenar passos d'anàlisi addicionals.</p>
 <hr />
-<h2 TOOL_B_ACTION="TOOL_B_ACTION" id="2-afegir-un-segon-proces-per-executar">2. Afegir un segon procés per executar<a class="headerlink" href="#2-afegir-un-segon-proces-per-executar" title="Permanent link">&para;</a></h2>
+<h2 TOOL_B_ACTION id="2-afegir-un-segon-proces-per-executar">2. Afegir un segon procés per executar<a class="headerlink" href="#2-afegir-un-segon-proces-per-executar" title="Permanent link">&para;</a></h2>
 <p>{DESCRIBE_WHAT_THIS_STEP_ADDS}</p>
 <p>Recordeu la comanda <code>{TOOL_B_COMMAND_NAME}</code> de la <a href="../01_method/">Part 1</a>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="o">{</span>TOOL_B_COMMAND_SUMMARY<span class="o">}</span>
 </code></pre></div>
-<h3 TOOL_B_NAME="TOOL_B_NAME" id="21-escriure-el-modul">2.1. Escriure el mòdul<a class="headerlink" href="#21-escriure-el-modul" title="Permanent link">&para;</a></h3>
+<h3 TOOL_B_NAME id="21-escriure-el-modul">2.1. Escriure el mòdul<a class="headerlink" href="#21-escriure-el-modul" title="Permanent link">&para;</a></h3>
 <p>{MODULE_INSTRUCTIONS}</p>
 <h3 id="22-importar-i-cridar-el-modul-al-workflow">2.2. Importar i cridar el mòdul al workflow<a class="headerlink" href="#22-importar-i-cridar-el-modul-al-workflow" title="Permanent link">&para;</a></h3>
 <p>{IMPORT_AND_CALL_INSTRUCTIONS_CHAINING_OUTPUTS}</p>
@@ -2708,7 +2698,7 @@ Això facilita la referència a fitxers de dades i altres recursos sense codific
 <h2 id="3-adaptar-el-workflow-per-executar-se-en-un-lot-de-mostres">3. Adaptar el workflow per executar-se en un lot de mostres<a class="headerlink" href="#3-adaptar-el-workflow-per-executar-se-en-un-lot-de-mostres" title="Permanent link">&para;</a></h2>
 <p>Fins ara, el workflow processa una sola mostra.
 Per gestionar múltiples mostres, hem de modificar com es proporcionen les entrades i aprofitar el paradigma de flux de dades de Nextflow per paral·lelitzar l'execució.</p>
-<h3 BATCH_INPUT_INSTRUCTIONS="BATCH_INPUT_INSTRUCTIONS" id="31">3.1.<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<h3 BATCH_INPUT_INSTRUCTIONS id="31">3.1.<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p>{INSTRUCTIONS_FOR_SWITCHING_TO_SAMPLESHEET_OR_BATCH_INPUT}</p>
 <h3 id="32-executar-el-workflow-amb-multiples-mostres">3.2. Executar el workflow amb múltiples mostres<a class="headerlink" href="#32-executar-el-workflow-amb-multiples-mostres" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="o">{</span>DOMAIN_DIR<span class="o">}</span>.nf<span class="w"> </span>-profile<span class="w"> </span><span class="nb">test</span>
@@ -4609,10 +4599,10 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiat al porta-retalls", "clipboard.copy": "C\u00f2pia al porta-retalls", "search.result.more.one": "1 m\u00e9s en aquesta p\u00e0gina", "search.result.more.other": "# m\u00e9s en aquesta p\u00e0gina", "search.result.none": "Cap document coincideix", "search.result.one": "1 document coincident", "search.result.other": "# documents coincidents", "search.result.placeholder": "Escriu per a comen\u00e7ar a cercar", "search.result.term.missing": "Desaparegut", "select.version": "Selecciona la versi\u00f3"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiat al porta-retalls", "clipboard.copy": "C\u00f2pia al porta-retalls", "search.result.more.one": "1 m\u00e9s en aquesta p\u00e0gina", "search.result.more.other": "# m\u00e9s en aquesta p\u00e0gina", "search.result.none": "Cap document coincideix", "search.result.one": "1 document coincident", "search.result.other": "# documents coincidents", "search.result.placeholder": "Escriu per a comen\u00e7ar a cercar", "search.result.term.missing": "Desaparegut", "select.version": "Selecciona la versi\u00f3"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../../assets/javascripts/posthog.js"></script>
       

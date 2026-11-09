@@ -39,7 +39,7 @@
       
       
       <link rel="icon" href="../../../assets/img/nextflow-icon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -47,10 +47,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
   
@@ -1068,16 +1068,6 @@ md-nav--primary" aria-label="네비게이션" data-md-level="0">
       
 <span class="md-ellipsis">
     파트 5: Hello Containers   
-</span>
-  
-  </a>
-</li>
-          
-<li class="md-nav__item">
-  <a href="../../../hello_nextflow/06_hello_config/" class="md-nav__link">
-      
-<span class="md-ellipsis">
-    파트 6: Hello Config   
 </span>
   
   </a>
@@ -2505,7 +2495,7 @@ md-nav--primary" aria-label="네비게이션" data-md-level="0">
 <p><code>nf4-science/{DOMAIN_DIR}</code> 디렉토리에 있는지 확인하세요. <code>pwd</code> 명령을 입력했을 때 경로의 마지막 부분이 <code>{DOMAIN_DIR}</code>이어야 합니다.</p>
 </div>
 <hr />
-<h2 SINGLE_SAMPLE_SECTION_TITLE="SINGLE_SAMPLE_SECTION_TITLE" id="1_1">1.<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h2>
+<h2 SINGLE_SAMPLE_SECTION_TITLE id="1_1">1.<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h2>
 <p>{BRIEF_DESCRIPTION_OF_SINGLE_SAMPLE_APPROACH}</p>
 <p>이 섹션에서는 단일 샘플 처리 방식을 구성하는 명령을 테스트합니다.
 이 명령들은 이 과정의 파트 2에서 Nextflow 워크플로우로 작성할 것입니다.</p>
@@ -2517,7 +2507,7 @@ md-nav--primary" aria-label="네비게이션" data-md-level="0">
 </figure>
 
 <p>먼저 하나의 샘플에서 명령을 테스트합니다.</p>
-<h3 FIRST_TOOL_STEP_TITLE="FIRST_TOOL_STEP_TITLE" id="11">1.1.<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<h3 FIRST_TOOL_STEP_TITLE id="11">1.1.<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
 <p>{BRIEF_DESCRIPTION_OF_STEP}</p>
 <h4 id="111">1.1.1. 컨테이너 가져오기<a class="headerlink" href="#111" title="Permanent link">&para;</a></h4>
 <p><code>docker pull</code> 명령을 실행하여 컨테이너 이미지를 다운로드합니다:</p>
@@ -2547,7 +2537,7 @@ md-nav--primary" aria-label="네비게이션" data-md-level="0">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">exit</span>
 </code></pre></div>
 <p>프롬프트가 정상으로 돌아와야 합니다.</p>
-<h3 SECOND_TOOL_STEP_TITLE="SECOND_TOOL_STEP_TITLE" id="12">1.2.<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<h3 SECOND_TOOL_STEP_TITLE id="12">1.2.<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>{BRIEF_DESCRIPTION_OF_STEP}</p>
 <h4 id="121">1.2.1. 컨테이너 가져오기<a class="headerlink" href="#121" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="o">{</span>TOOL_B_CONTAINER_URI<span class="o">}</span>
@@ -2576,7 +2566,7 @@ md-nav--primary" aria-label="네비게이션" data-md-level="0">
 <p>프롬프트가 정상으로 돌아와야 합니다.
 단일 샘플 처리 테스트가 완료되었습니다.</p>
 <hr />
-<h2 MULTI_SAMPLE_SECTION_TITLE="MULTI_SAMPLE_SECTION_TITLE" id="2">2.<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h2 MULTI_SAMPLE_SECTION_TITLE id="2">2.<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
 <p>{BRIEF_DESCRIPTION_OF_MULTI_SAMPLE_APPROACH}</p>
 <p>{EXPLAIN_WHY_MULTI_SAMPLE_IS_NEEDED}</p>
 <p>이 섹션에서는 다중 샘플 처리에 필요한 추가 명령을 테스트합니다.
@@ -2588,7 +2578,7 @@ md-nav--primary" aria-label="네비게이션" data-md-level="0">
 <figure class="excalidraw">
 </figure>
 
-<h3 AGGREGATION_STEP_TITLE="AGGREGATION_STEP_TITLE" id="21">2.1.<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<h3 AGGREGATION_STEP_TITLE id="21">2.1.<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p>{STEP_INSTRUCTIONS_FOLLOWING_SAME_PATTERN_AS_ABOVE}</p>
 <hr />
 <h3 id="_4">핵심 정리<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
@@ -4482,10 +4472,10 @@ window.mkdocsQuizConfig = {
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": {"alias": true, "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../../assets/javascripts/posthog.js"></script>
       
