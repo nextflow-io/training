@@ -16,17 +16,16 @@ In this training module, you'll learn how to connect processes together in a mul
 This will teach you the Nextflow way of achieving the following:
 
 1. Making data flow from one process to the next
-2. Collecting outputs from multiple process calls into a single process call
-3. Passing additional parameters to a process
-4. Handling multiple outputs coming out of a process
+2. Running a process written in another language
+3. Passing more than one input to a process
+4. Collecting outputs from multiple process calls into a single process call
+5. Handling multiple outputs coming out of a process
 
-To demonstrate, we will continue building on the domain-agnostic Hello World example from Parts 1 and 2.
-This time, we're going to make the following changes to our workflow to better reflect how people build actual workflows:
+To demonstrate, we will continue building on the Hello World example from Parts 1 and 2, and make the following changes to our workflow:
 
-1. Add a second step that converts the greeting to uppercase.
-2. Add a third step that collects all the transformed greetings and writes them into a single file.
-3. Add a parameter to name the final output file and pass that as a secondary input to the collection step.
-4. Make the collection step also report a simple statistic about what was processed.
+1. Add a second step, written in Python, that translates each greeting into another language.
+2. Add a third step that collects all the translated greetings and writes them into a single file named after the batch.
+3. Make the collection step also report a simple statistic about what was processed.
 
 ??? info "How to begin from this section"
 
@@ -58,19 +57,19 @@ nextflow run hello-workflow.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [admiring_lamarr] revision: 4d4053520d
+    Launching `hello-workflow.nf` [jolly_hawking] revision: 7d180e1097
 
     executor >  local (3)
-    [b1/5826b5] sayHello (2) | 3 of 3 ✔
+    [cc/67d554] sayHello (3) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - Bonjour-output.txt
-        - Hello-output.txt
-        - Hola-output.txt
+        - Andrea-output.txt
+        - Celine-output.txt
+        - Mateo-output.txt
     ```
 
 As previously, you will find the output files in the `results` directory, alongside the outputs of the previous parts.
@@ -79,9 +78,9 @@ As previously, you will find the output files in the `results` directory, alongs
 
     ```console
     results
-    ├── Bonjour-output.txt -> /workspaces/training/hello-nextflow/work/.../Bonjour-output.txt
-    ├── Hello-output.txt -> /workspaces/training/hello-nextflow/work/.../Hello-output.txt
-    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/.../Hola-output.txt
+    ├── Andrea-output.txt -> /workspaces/training/hello-nextflow/work/.../Andrea-output.txt
+    ├── Celine-output.txt -> /workspaces/training/hello-nextflow/work/.../Celine-output.txt
+    ├── Mateo-output.txt -> /workspaces/training/hello-nextflow/work/.../Mateo-output.txt
     └── output.txt -> /workspaces/training/hello-nextflow/work/.../output.txt
     ```
 
@@ -89,127 +88,101 @@ If that worked for you, you're ready to learn how to assemble a multi-step workf
 
 ---
 
-## 1. Add a second step to the workflow
+## 1. Add a translation step to the workflow
 
-We're going to add a step to convert each greeting to uppercase.
+We're going to add a step that translates each greeting into another language, for example from `Hello, Mateo!` to `Bonjour, Mateo!`.
+This step is a small Python script, which shows that a process can run code in other languages than the shell.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.svg"
 </figure>
 
-To that end, we need to do three things:
+We'll build it in three steps:
 
-- Define the command we're going to use to do the uppercase conversion.
-- Write a new process that wraps the uppercasing command.
-- Call the new process in the workflow block and set it up to take the output of the `sayHello()` process as input.
+1. Test the translation code in the terminal.
+2. Wrap it in a process that translates into French, and connect it to the output of `sayHello`.
+3. Make the language an input of the process, set by a parameter.
 
-### 1.1. Define the uppercasing command and test it in the terminal
+### 1.1. Test the translation code in the terminal
 
-To do the conversion of the greetings to uppercase, we're going to use a classic UNIX tool called `tr` for 'text replacement', with the following syntax:
+The translation is a simple text replacement: read the greeting, replace `Hello` with the word for hello in the target language, and write the result to a new file.
 
-```bash title="Syntax"
-tr '[a-z]' '[A-Z]'
-```
-
-This is a very naive text replacement one-liner that does not account for accented letters, but it will do a good enough job for demonstrating the Nextflow concepts and that's what matters.
-
-To test it out, we can run the `echo 'Hello World'` command and pipe its output to the `tr` command:
+To test it, create a greeting file the same way `sayHello` does, then run the replacement with `python3`:
 
 ```bash
-echo 'Hello World' | tr '[a-z]' '[A-Z]' > UPPER-output.txt
+echo 'Hello, Mateo!' > Mateo-output.txt
+python3 -c "greeting = open('Mateo-output.txt').read(); open('french-Mateo-output.txt', 'w').write(greeting.replace('Hello', 'Bonjour'))"
 ```
 
-The output is a text file called `UPPER-output.txt` that contains the uppercase version of the `Hello World` string.
+The output is a text file called `french-Mateo-output.txt` that contains the translated greeting.
 
 ??? abstract "File contents"
 
-    ```console title="UPPER-output.txt"
-    HELLO WORLD
+    ```console title="french-Mateo-output.txt"
+    Bonjour, Mateo!
     ```
 
-That's basically what we're going to try to do with our workflow.
+That's what we're going to do in our workflow, for every greeting.
 
-### 1.2. Write the uppercasing step as a Nextflow process
+### 1.2. Write the translation step as a Nextflow process
 
-We can model our new process on the first one, since we want to use all the same components.
+We start with a version that always translates into French, and connect it to the first process.
 
-Add the following process definition to the workflow script, right under the first one:
+#### 1.2.1. Define the process
+
+Add the following process definition to the workflow script, right under the `sayHello` process:
 
 ```groovy title="hello-workflow.nf" linenums="20"
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Use Python to translate the greeting into French
  */
-process convertToUpper {
+process translateGreeting {
 
     input:
     path input_file
 
     output:
-    path "UPPER-${input_file}"
+    path "french-${input_file}"
 
     script:
     """
-    cat ${input_file} | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
+    #!/usr/bin/env python3
+
+    with open('${input_file}') as greeting_file:
+        greeting = greeting_file.read()
+
+    with open('french-${input_file}', 'w') as translated_file:
+        translated_file.write(greeting.replace('Hello', 'Bonjour'))
     """
 }
 ```
 
-In this one, we compose the second output filename based on the input filename, similarly to what we did originally for the output of the first process.
+The structure is the same as for `sayHello`, with two differences.
 
-### 1.3. Add a call to the new process in the workflow block
+First, the input is a file, so it uses the `path` qualifier, and we compose the output filename from the input filename, similarly to what we did for the output of the first process.
 
-Now we need to tell Nextflow to actually call the process that we just defined.
+Second, the script is written in Python.
+The first line of the script, `#!/usr/bin/env python3`, is called a shebang: it tells the system which program should run the script.
+Without it, Nextflow runs the script with the shell, as it did for `sayHello`.
+With it, you can write the script of a process in any language that is available in the environment, such as Python, R or Perl.
 
-In the workflow block, make the following code change:
+The `${input_file}` placeholders work the same way as in a shell script: Nextflow replaces them with the actual file name before running the script.
+Python never sees the placeholders, only the values.
 
-=== "After"
+??? tip "Longer scripts"
 
-    ```groovy title="hello-workflow.nf" linenums="44" hl_lines="10-11"
-    workflow {
+    Writing the code inline is convenient for a few lines.
+    For a longer script, you can save it as a file in a directory named `bin/` next to your workflow script, make it executable, and call it by name in the `script` block.
+    Nextflow adds the `bin/` directory to the `PATH` of every task automatically.
 
-        main:
-        // create a channel for inputs from a CSV file
-        greeting_ch = channel.fromPath(params.input)
-                            .splitCsv()
-                            .map { row -> row[0] }
-        // emit a greeting
-        sayHello(greeting_ch)
-        // convert the greeting to uppercase
-        convertToUpper()
+#### 1.2.2. Pass the output of the first process to the new process
 
-        publish:
-        first_output = sayHello.out
-    }
-    ```
-
-=== "Before"
-
-    ```groovy title="hello-workflow.nf" linenums="44"
-    workflow {
-
-        main:
-        // create a channel for inputs from a CSV file
-        greeting_ch = channel.fromPath(params.input)
-                            .splitCsv()
-                            .map { row -> row[0] }
-        // emit a greeting
-        sayHello(greeting_ch)
-
-        publish:
-        first_output = sayHello.out
-    }
-    ```
-
-This is not yet functional because we have not specified what should be input to the `convertToUpper()` process.
-
-### 1.4. Pass the output of the first process to the second process
-
-Now we need to make the output of the `sayHello()` process flow into the `convertToUpper()` process.
+Now we need to call the new process in the workflow block, and make the output of the `sayHello()` process flow into it.
 
 Conveniently, Nextflow automatically packages the output of a process into a channel, as shown in the diagram in the warmup section.
 We can refer to the output channel of a process as `<process>.out`.
 
-So the output of the `sayHello` process is a channel called `sayHello.out`, which we can plug straight into the call to `convertToUpper()`.
+So the output of the `sayHello` process is a channel called `sayHello.out`, which we can plug straight into the call to `translateGreeting()`.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-connector.svg"
@@ -219,59 +192,77 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // convert the greeting to uppercase
-        convertToUpper(sayHello.out)
+    ```groovy title="hello-workflow.nf" linenums="50" hl_lines="10-11"
+    workflow {
+
+        main:
+        // create a channel for inputs from a CSV file
+        name_ch = channel.fromPath(params.input)
+                            .splitCsv()
+                            .map { row -> row[0] }
+        // emit a greeting
+        sayHello(name_ch)
+        // translate the greeting
+        translateGreeting(sayHello.out)
+
+        publish:
+        first_output = sayHello.out
+    }
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // convert the greeting to uppercase
-        convertToUpper()
+    ```groovy title="hello-workflow.nf" linenums="50"
+    workflow {
+
+        main:
+        // create a channel for inputs from a CSV file
+        name_ch = channel.fromPath(params.input)
+                            .splitCsv()
+                            .map { row -> row[0] }
+        // emit a greeting
+        sayHello(name_ch)
+
+        publish:
+        first_output = sayHello.out
+    }
     ```
 
 For a simple case like this (one output to one input), that's all we need to do to connect two processes!
 
-### 1.5. Set up the workflow output publishing
+#### 1.2.3. Set up the workflow output publishing
 
-Finally, let's update the workflow outputs to publish the results from the second process too.
+Finally, update the workflow outputs to publish the results from the second process too.
 
-#### 1.5.1. Update the `publish:` section of the `workflow` block
-
-In the `workflow` block, make the following code change:
+In the `publish:` section of the `workflow` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="56" hl_lines="3"
+    ```groovy title="hello-workflow.nf" linenums="62" hl_lines="3"
         publish:
         first_output = sayHello.out
-        uppercased = convertToUpper.out
+        translated = translateGreeting.out
     }
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="56"
+    ```groovy title="hello-workflow.nf" linenums="62"
         publish:
         first_output = sayHello.out
     }
     ```
 
-The logic is the same as previously.
-
-#### 1.5.2. Update the `output` block
-
-In the `output` block, make the following code change:
+Then, in the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="61" hl_lines="5-7"
+    ```groovy title="hello-workflow.nf" linenums="67" hl_lines="5-7"
     output {
         first_output {
             path '.'
         }
-        uppercased {
+        translated {
             path '.'
         }
     }
@@ -279,22 +270,20 @@ In the `output` block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="61"
+    ```groovy title="hello-workflow.nf" linenums="67"
     output {
         first_output {
             path '.'
         }
     }
     ```
-
-Once again, the logic is the same as before.
 
 Each output has its own entry, so you can set a different path for each one.
-For now they all go to the top level of the output directory; in section 3, you'll organize them into subdirectories.
+For now they all go to the top level of the output directory; in section 2, you'll organize them into subdirectories.
 
-### 1.6. Run the workflow with `-resume`
+#### 1.2.4. Run the workflow with `-resume`
 
-Let's test this using the `-resume` flag, which you used in Nextflow Run, since we've already run the first step of the workflow successfully.
+Run the workflow with the `-resume` flag, which you used in Nextflow Run, since the first step of the workflow already ran successfully:
 
 ```bash
 nextflow run hello-workflow.nf -resume
@@ -305,69 +294,297 @@ nextflow run hello-workflow.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [high_cantor] revision: d746983511
+    Launching `hello-workflow.nf` [elated_kare] revision: 18a7b68291
 
     executor >  local (3)
-    [ab/816321] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [e0/ecf81b] convertToUpper (3) | 3 of 3 ✔
+    [cc/67d554] sayHello (3)          | 3 of 3, cached: 3 ✔
+    [48/7a1e5e] translateGreeting (2) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - Hello-output.txt
-        - Hola-output.txt
-        - Bonjour-output.txt
+        - Mateo-output.txt
+        - Andrea-output.txt
+        - Celine-output.txt
 
-      uppercased:
-        - UPPER-Hola-output.txt
-        - UPPER-Hello-output.txt
-        - UPPER-Bonjour-output.txt
+      translated:
+        - french-Mateo-output.txt
+        - french-Celine-output.txt
+        - french-Andrea-output.txt
     ```
 
-There is now an extra line in the console output that corresponds to the new process we just added.
+There is now an extra line in the console output that corresponds to the new process we just added, and the `sayHello` tasks were retrieved from the cache.
 
-You'll find the outputs in the `results` directory as set in the `output` block.
+You'll find the translated greetings in the `results` directory, as set in the `output` block.
+
+??? abstract "File contents"
+
+    ```console title="results/french-Mateo-output.txt"
+    Bonjour, Mateo!
+    ```
+
+It's also worth taking a look inside the work directory of one of the calls to the second process.
 
 ??? abstract "Directory contents"
 
     ```console
-    results
-    ├── Bonjour-output.txt -> /workspaces/training/hello-nextflow/work/.../Bonjour-output.txt
-    ├── Hello-output.txt -> /workspaces/training/hello-nextflow/work/.../Hello-output.txt
-    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/.../Hola-output.txt
-    ├── output.txt -> /workspaces/training/hello-nextflow/work/.../output.txt
-    ├── UPPER-Bonjour-output.txt -> /workspaces/training/hello-nextflow/work/.../UPPER-Bonjour-output.txt
-    ├── UPPER-Hello-output.txt -> /workspaces/training/hello-nextflow/work/.../UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt -> /workspaces/training/hello-nextflow/work/.../UPPER-Hola-output.txt
+    work/48/7a1e5e6b9dc4f86f7e500f78526387/
+    ├── french-Mateo-output.txt
+    └── Mateo-output.txt -> /workspaces/training/hello-nextflow/work/db/b83db87d1edc22145ce59b6b283ed5/Mateo-output.txt
     ```
 
-That's convenient! But it's still worth taking a look inside the work directory of one of the calls to the second process.
-
-??? abstract "Directory contents"
-
-    ```console
-    work/e0/ecf81b4cacc648b9b994218d5b29d7/
-    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Hola-output.txt
-    └── UPPER-Hola-output.txt
-    ```
-
-Notice there are two `*-output` files: the output of the first process as well as the output of the second.
+Notice there are two output files: the output of the first process as well as the output of the second.
 
 The output of the first process is in there because Nextflow **staged** it there in order to have everything needed for execution within the same subdirectory.
-
-However, it is actually a symbolic link pointing to the the original file in the subdirectory of the first process call.
+It is a symbolic link pointing to the original file in the subdirectory of the first process call.
 By default, when running on a single machine as we're doing here, Nextflow uses symbolic links rather than copies to stage input and intermediate files.
 
-Now, before moving on, think about how all we did was connect the output of `sayHello` to the input of `convertToUpper` and the two processes could be run in series.
-Nextflow did the hard work of handling individual input and output files and passing them between the two commands for us.
+The `.command.sh` file in the same directory shows the Python script that Nextflow ran, with the file names filled in:
 
+```python title="work/48/7a1e5e6b9dc4f86f7e500f78526387/.command.sh"
+#!/usr/bin/env python3
+
+with open('Mateo-output.txt') as greeting_file:
+    greeting = greeting_file.read()
+
+with open('french-Mateo-output.txt', 'w') as translated_file:
+    translated_file.write(greeting.replace('Hello', 'Bonjour'))
+```
+
+All we did was connect the output of `sayHello` to the input of `translateGreeting`, and Nextflow handled the individual files and passed them between the two steps for us.
 This is one of the reasons Nextflow channels are so powerful: they take care of the busywork involved in connecting workflow steps together.
+
+### 1.3. Make the language an input of the process
+
+Our translation step always translates into French.
+To make it translate into other languages, we'll give the process a second input, `language`, set by a pipeline parameter.
+
+#### 1.3.1. Add the `language` input and a dictionary of translations
+
+Good news: we can declare as many inputs as we want in the process definition.
+
+In the `translateGreeting` process definition, make the following code changes:
+
+=== "After"
+
+    ```groovy title="hello-workflow.nf" linenums="20" hl_lines="2 8 11 17-25 30-31"
+    /*
+     * Use Python to translate the greeting into another language
+     */
+    process translateGreeting {
+
+        input:
+        path input_file
+        val language
+
+        output:
+        path "${language}-${input_file}"
+
+        script:
+        """
+        #!/usr/bin/env python3
+
+        translations = {
+            'french': 'Bonjour',
+            'spanish': 'Hola',
+            'italian': 'Ciao',
+            'dutch': 'Hallo',
+            'arabic': 'Marhaban',
+            'japanese': 'Konnichiwa',
+            'english': 'Hello',
+        }
+
+        with open('${input_file}') as greeting_file:
+            greeting = greeting_file.read()
+
+        with open('${language}-${input_file}', 'w') as translated_file:
+            translated_file.write(greeting.replace('Hello', translations['${language}']))
+        """
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="hello-workflow.nf" linenums="20"
+    /*
+     * Use Python to translate the greeting into French
+     */
+    process translateGreeting {
+
+        input:
+        path input_file
+
+        output:
+        path "french-${input_file}"
+
+        script:
+        """
+        #!/usr/bin/env python3
+
+        with open('${input_file}') as greeting_file:
+            greeting = greeting_file.read()
+
+        with open('french-${input_file}', 'w') as translated_file:
+            translated_file.write(greeting.replace('Hello', 'Bonjour'))
+        """
+    }
+    ```
+
+The new input, `language`, is a plain value, so it uses the `val` qualifier, like the input of `sayHello`.
+
+The script now looks up the word for hello in a Python dictionary called `translations`, using the language as the key.
+Nextflow fills in `${language}` before Python runs, so for French, Python sees `translations['french']`.
+The output file name also starts with the language, so the outputs of different languages don't overwrite each other.
+
+#### 1.3.2. Add a `language` parameter
+
+You already know how to use the `params` system to declare CLI parameters.
+Declare a `language` parameter, with French as the default value.
+
+In the pipeline parameters section, make the following code change:
+
+=== "After"
+
+    ```groovy title="hello-workflow.nf" linenums="54" hl_lines="6"
+    /*
+     * Pipeline parameters
+     */
+    params {
+        input: Path = 'data/names.csv'
+        language: String = 'french'
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="hello-workflow.nf" linenums="54"
+    /*
+     * Pipeline parameters
+     */
+    params {
+        input: Path = 'data/names.csv'
+    }
+    ```
+
+#### 1.3.3. Pass the language to the process
+
+To provide the value of the parameter to the process, add it to the process call.
+
+In the workflow block, make the following code change:
+
+=== "After"
+
+    ```groovy title="hello-workflow.nf" linenums="71" hl_lines="2"
+        // translate the greeting
+        translateGreeting(sayHello.out, params.language)
+    ```
+
+=== "Before"
+
+    ```groovy title="hello-workflow.nf" linenums="71"
+        // translate the greeting
+        translateGreeting(sayHello.out)
+    ```
+
+To provide multiple inputs to a process, you simply list them in the call parentheses, separated by commas.
+
+!!! warning
+
+    You MUST provide the inputs to the process in the EXACT SAME ORDER as they are listed in the input definition block of the process.
+
+Notice that the two inputs are different kinds of things.
+`sayHello.out` is a channel that carries three files, one per greeting, while `params.language` is a single value.
+Nextflow calls the process once per file in the channel, and reuses the single value for every call.
+So each of the three greetings gets translated into the same language.
+
+??? note "What if the language comes from a channel?"
+
+    The value is reused only because `params.language` is a plain value.
+    If you put it in a channel instead, for example with `channel.of('french')`, it is consumed by the first call: the process runs only once, on the first greeting.
+    Nextflow pairs up the elements of channel inputs one by one, and stops when one of the channels runs out.
+
+#### 1.3.4. Run the workflow
+
+Run the workflow again with `-resume`:
+
+```bash
+nextflow run hello-workflow.nf -resume
+```
+
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `hello-workflow.nf` [zen_baekeland] revision: b7b5f456bb
+
+    executor >  local (3)
+    [82/a09e8f] sayHello (2)          | 3 of 3, cached: 3 ✔
+    [de/00358b] translateGreeting (2) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - Mateo-output.txt
+        - Celine-output.txt
+        - Andrea-output.txt
+
+      translated:
+        - french-Andrea-output.txt
+        - french-Mateo-output.txt
+        - french-Celine-output.txt
+    ```
+
+The results are the same as before, since the default language is French.
+However, the `translateGreeting` tasks ran again instead of being retrieved from the cache, because we changed the code of the process.
+
+Now try another language:
+
+```bash
+nextflow run hello-workflow.nf -resume --language spanish
+```
+
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `hello-workflow.nf` [fabulous_roentgen] revision: b7b5f456bb
+
+    executor >  local (3)
+    [db/b83db8] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [19/94ed7a] translateGreeting (3) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - Celine-output.txt
+        - Andrea-output.txt
+        - Mateo-output.txt
+
+      translated:
+        - spanish-Andrea-output.txt
+        - spanish-Mateo-output.txt
+        - spanish-Celine-output.txt
+    ```
+
+The `sayHello` tasks were cached, and the `translateGreeting` tasks ran again with the new input.
+
+??? abstract "File contents"
+
+    ```console title="results/spanish-Mateo-output.txt"
+    Hola, Mateo!
+    ```
 
 ### Takeaway
 
-You know how to chain processes together by providing the output of one step as input to the next step.
+You know how to chain processes together by providing the output of one step as input to the next step, how to write the script of a process in another language, and how to pass more than one input to a process.
 
 ### What's next?
 
@@ -379,7 +596,8 @@ Learn how to collect outputs from batched process calls and feed them into a sin
 
 When we use a process to apply a transformation to each of the elements in a channel, like we're doing here to the multiple greetings, we sometimes want to collect elements from the output channel of that process, and feed them into another process that performs some kind of analysis or summation.
 
-To demonstrate, we'll add a new step to our pipeline that collects all the uppercase greetings produced by the `convertToUpper` process and write them out to a single file.
+To demonstrate, we'll add a new step to our pipeline that collects all the translated greetings produced by the `translateGreeting` process and writes them out to a single file.
+We'll also name that file after a batch name provided as a parameter, so that the results of different batches of inputs don't overwrite each other.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
@@ -389,119 +607,67 @@ Not to spoil the surprise, but this is going to involve a very useful operator.
 
 ### 2.1. Define the collection command and test it in the terminal
 
-The collection step we want to add to our workflow will use the `cat` command to concatenate multiple uppercased greetings into a single file.
+The collection step we want to add to our workflow will use the `cat` command to concatenate multiple translated greetings into a single file.
 
-Let's run the command by itself in the terminal to verify that it works as expected, just like we've done previously.
-
-Run the following in your terminal:
+Run the following in your terminal to verify that it works as expected:
 
 ```bash
-echo 'Hello' | tr '[a-z]' '[A-Z]' > UPPER-Hello-output.txt
-echo 'Bonjour' | tr '[a-z]' '[A-Z]' > UPPER-Bonjour-output.txt
-echo 'Hola' | tr '[a-z]' '[A-Z]' > UPPER-Hola-output.txt
-cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLLECTED-output.txt
+echo 'Bonjour, Mateo!' > french-Mateo-output.txt
+echo 'Bonjour, Andrea!' > french-Andrea-output.txt
+echo 'Bonjour, Celine!' > french-Celine-output.txt
+cat french-Mateo-output.txt french-Andrea-output.txt french-Celine-output.txt > COLLECTED-output.txt
 ```
 
-The output is a text file called `COLLECTED-output.txt` that contains the uppercase versions of the original greetings.
+The output is a text file called `COLLECTED-output.txt` that contains all three greetings.
 
 ??? abstract "File contents"
 
     ```console title="COLLECTED-output.txt"
-    HELLO
-    BONJOUR
-    HOLA
+    Bonjour, Mateo!
+    Bonjour, Andrea!
+    Bonjour, Celine!
     ```
 
 That is the result we want to achieve with our workflow.
 
 ### 2.2. Create a new process to do the collection step
 
-Let's create a new process and call it `collectGreetings()`.
-We can start writing it based on what we've seen before.
+Add the following process definition to the workflow script, right under the `translateGreeting` process:
 
-#### 2.2.1. Write the 'obvious' parts of the process
-
-Add the following process definition to the workflow script, right under the `convertToUpper` process:
-
-```groovy title="hello-workflow.nf" linenums="37"
+```groovy title="hello-workflow.nf" linenums="54"
 /*
- * Collect uppercase greetings into a single output file
+ * Collect translated greetings into a single output file
  */
 process collectGreetings {
 
     input:
-    ???
+    path input_files
+    val batch_name
 
     output:
-    path "COLLECTED-output.txt"
+    path "COLLECTED-${batch_name}-output.txt"
 
     script:
     """
-    cat ??? > 'COLLECTED-output.txt'
+    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
     """
 }
 ```
 
-This is what we can write with confidence based on what you've learned so far.
-But this is not functional!
-It leaves out the input definition(s) and the first half of the script command because we need to figure out how to write that.
+This process has two inputs, like `translateGreeting`:
 
-#### 2.2.2. Define inputs to `collectGreetings()`
+- `input_files` will hold the files to collect.
+  It uses the `path` qualifier even though we expect it to contain multiple files.
+- `batch_name` is a plain value that we use in the output file name, so that each batch gets its own output file.
 
-We need to collect the greetings from all the calls to the `convertToUpper()` process.
-What do we know we can get from the previous step in the workflow?
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.svg"
+</figure>
 
-The channel output by `convertToUpper()` will contain the paths to the individual files containing the uppercased greetings.
-That amounts to one input slot; let's call it `input_files` for simplicity.
-
-In the process block, make the following code change:
-
-=== "After"
-
-    ```groovy title="hello-workflow.nf" linenums="42" hl_lines="2"
-        input:
-        path input_files
-    ```
-
-=== "Before"
-
-    ```groovy title="hello-workflow.nf" linenums="42" hl_lines="2"
-        input:
-        ???
-    ```
-
-Notice we use the `path` prefix even though we expect this to contain multiple files.
-
-#### 2.2.3. Compose the concatenation command
-
-This is where things could get a little tricky, because we need to be able to handle an arbitrary number of input files.
-Specifically, we can't write the command up front, so we need to tell Nextflow how to compose it at runtime based on what inputs flow into the process.
-
-In other words, if we have an input channel containing the element `[file1.txt, file2.txt, file3.txt]`, we need Nextflow to turn that into `cat file1.txt file2.txt file3.txt`.
+The script needs to handle an arbitrary number of input files, so we can't write the command up front.
+In other words, if `input_files` contains `[file1.txt, file2.txt, file3.txt]`, we need Nextflow to turn that into `cat file1.txt file2.txt file3.txt`.
 
 Fortunately, Nextflow is quite happy to do that for us if we simply write `cat ${input_files}` in the script command.
-
-In the process block, make the following code change:
-
-=== "After"
-
-    ```groovy title="hello-workflow.nf" linenums="48" hl_lines="3"
-        script:
-        """
-        cat ${input_files} > 'COLLECTED-output.txt'
-        """
-    ```
-
-=== "Before"
-
-    ```groovy title="hello-workflow.nf" linenums="48"
-        script:
-        """
-        cat ??? > 'COLLECTED-output.txt'
-        """
-    ```
-
-In theory this should handle any arbitrary number of input files.
 
 !!! tip
 
@@ -511,71 +677,97 @@ In theory this should handle any arbitrary number of input files.
 
 ### 2.3. Add the collection step to the workflow
 
-Now we should just need to call the collection process on the output of the uppercasing step.
-That is also a channel, called `convertToUpper.out`.
+Now we need a `batch` parameter, and a call to the collection process on the output of the translation step.
+That output is also a channel, called `translateGreeting.out`.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect-connector.svg"
 </figure>
 
-#### 2.3.1. Connect the process calls
+#### 2.3.1. Add a `batch` parameter
+
+Declare a `batch` parameter, with a default value, in the pipeline parameters section:
+
+=== "After"
+
+    ```groovy title="hello-workflow.nf" linenums="72" hl_lines="7"
+    /*
+     * Pipeline parameters
+     */
+    params {
+        input: Path = 'data/names.csv'
+        language: String = 'french'
+        batch: String = 'batch'
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="hello-workflow.nf" linenums="72"
+    /*
+     * Pipeline parameters
+     */
+    params {
+        input: Path = 'data/names.csv'
+        language: String = 'french'
+    }
+    ```
+
+#### 2.3.2. Connect the process calls
 
 In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="70" hl_lines="4 5"
-        // convert the greeting to uppercase
-        convertToUpper(sayHello.out)
-
+    ```groovy title="hello-workflow.nf" linenums="90" hl_lines="3-4"
+        // translate the greeting
+        translateGreeting(sayHello.out, params.language)
         // collect all the greetings into one file
-        collectGreetings(convertToUpper.out)
+        collectGreetings(translateGreeting.out, params.batch)
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="70"
-        // convert the greeting to uppercase
-        convertToUpper(sayHello.out)
+    ```groovy title="hello-workflow.nf" linenums="90"
+        // translate the greeting
+        translateGreeting(sayHello.out, params.language)
     ```
 
-This connects the output of `convertToUpper()` to the input of `collectGreetings()`.
+This connects the output of `translateGreeting()` to the first input of `collectGreetings()`, and passes the batch name as the second input, just like we did with the language.
 
-#### 2.3.2. Update the `publish:` section
+#### 2.3.3. Update the workflow outputs
 
-In the `workflow` block, make the following code change:
+In the `publish:` section of the `workflow` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="76" hl_lines="4"
+    ```groovy title="hello-workflow.nf" linenums="95" hl_lines="4"
         publish:
         first_output = sayHello.out
-        uppercased = convertToUpper.out
+        translated = translateGreeting.out
         collected = collectGreetings.out
     }
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="76"
+    ```groovy title="hello-workflow.nf" linenums="95"
         publish:
         first_output = sayHello.out
-        uppercased = convertToUpper.out
+        translated = translateGreeting.out
     }
     ```
 
-#### 2.3.3. Update the `output` block
-
-In the `output` block, make the following code change:
+Then, in the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="8-10"
+    ```groovy title="hello-workflow.nf" linenums="101" hl_lines="8-10"
     output {
         first_output {
             path '.'
         }
-        uppercased {
+        translated {
             path '.'
         }
         collected {
@@ -586,12 +778,12 @@ In the `output` block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="82"
+    ```groovy title="hello-workflow.nf" linenums="101"
     output {
         first_output {
             path '.'
         }
-        uppercased {
+        translated {
             path '.'
         }
     }
@@ -610,31 +802,31 @@ nextflow run hello-workflow.nf -resume
     ```console hl_lines="8"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [mad_gilbert] revision: 6acfd5e28d
+    Launching `hello-workflow.nf` [distraught_neumann] revision: 81ba679e7b
 
     executor >  local (3)
-    [b1/5826b5] sayHello (2)         | 3 of 3, cached: 3 ✔
-    [e0/ecf81b] convertToUpper (3)   | 3 of 3, cached: 3 ✔
-    [47/50fe4a] collectGreetings (1) | 3 of 3 ✔
+    [db/b83db8] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [21/3d3992] translateGreeting (1) | 3 of 3, cached: 3 ✔
+    [81/f33ffa] collectGreetings (3)  | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - Hello-output.txt
-        - Bonjour-output.txt
-        - Hola-output.txt
+        - Andrea-output.txt
+        - Celine-output.txt
+        - Mateo-output.txt
 
-      uppercased:
-        - UPPER-Hello-output.txt
-        - UPPER-Bonjour-output.txt
-        - UPPER-Hola-output.txt
+      translated:
+        - french-Mateo-output.txt
+        - french-Celine-output.txt
+        - french-Andrea-output.txt
 
       collected:
-        - COLLECTED-output.txt
-        - COLLECTED-output.txt
-        - COLLECTED-output.txt
+        - COLLECTED-batch-output.txt
+        - COLLECTED-batch-output.txt
+        - COLLECTED-batch-output.txt
     ```
 
 It runs successfully, including the third step.
@@ -646,8 +838,8 @@ Now have a look at the contents of the final output file.
 
 ??? abstract "File contents"
 
-    ```console title="results/COLLECTED-output.txt"
-    HOLA
+    ```console title="results/COLLECTED-batch-output.txt"
+    Bonjour, Celine!
     ```
 
 Oh no. The collection step was run individually on each greeting, which is NOT what we wanted.
@@ -656,7 +848,7 @@ Oh no. The collection step was run individually on each greeting, which is NOT w
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect-no-operator.svg"
 </figure>
 
-We need to do something to tell Nextflow explicitly that we want that third step to run on all the elements in the channel output by `convertToUpper()`.
+We need to do something to tell Nextflow explicitly that we want that third step to run on all the elements in the channel output by `translateGreeting()`.
 
 ### 2.4. Use an operator to collect the greetings into a single input
 
@@ -668,23 +860,23 @@ Specifically, we are going to use the aptly-named [`collect()`](https://nextflow
 
 This time it's going to look a bit different because we're not adding the operator in the context of a channel factory; we're adding it to an output channel.
 
-We take the `convertToUpper.out` and append the `collect()` operator, which gives us `convertToUpper.out.collect()`.
+We take `translateGreeting.out` and append the `collect()` operator, which gives us `translateGreeting.out.collect()`.
 We can plug that directly into the `collectGreetings()` process call.
 
 In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
+    ```groovy title="hello-workflow.nf" linenums="92" hl_lines="2"
         // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect())
+        collectGreetings(translateGreeting.out.collect(), params.batch)
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
+    ```groovy title="hello-workflow.nf" linenums="92"
         // collect all the greetings into one file
-        collectGreetings(convertToUpper.out)
+        collectGreetings(translateGreeting.out, params.batch)
     ```
 
 #### 2.4.2. Add some `view()` statements
@@ -693,20 +885,20 @@ Let's also include a couple of `view()` statements to visualize the before and a
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
+    ```groovy title="hello-workflow.nf" linenums="92" hl_lines="4-6"
         // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect())
+        collectGreetings(translateGreeting.out.collect(), params.batch)
 
         // optional view statements
-        convertToUpper.out.view { filepath -> "Before collect: $filepath" }
-        convertToUpper.out.collect().view { filepaths -> "After collect: $filepaths" }
+        translateGreeting.out.view { filepath -> "Before collect: $filepath" }
+        translateGreeting.out.collect().view { filepaths -> "After collect: $filepaths" }
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="73"
+    ```groovy title="hello-workflow.nf" linenums="92"
         // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect())
+        collectGreetings(translateGreeting.out.collect(), params.batch)
     ```
 
 The `view()` statements can go anywhere you want; we put them right after the call for readability.
@@ -725,32 +917,32 @@ nextflow run hello-workflow.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [soggy_franklin] revision: bc8e1b2726
+    Launching `hello-workflow.nf` [extravagant_ardinghelli] revision: bcb6a9ed23
 
     executor >  local (1)
-    [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
-    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
-    [1e/83586c] collectGreetings   | 1 of 1 ✔
-    Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/e0/ecf81b4cacc648b9b994218d5b29d7/UPPER-Hola-output.txt
-    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/e0/ecf81b4cacc648b9b994218d5b29d7/UPPER-Hola-output.txt]
+    [cc/67d554] sayHello (3)          | 3 of 3, cached: 3 ✔
+    [0b/52ce19] translateGreeting (1) | 3 of 3, cached: 3 ✔
+    [a3/57dbbc] collectGreetings      | 1 of 1 ✔
+    Before collect: /workspaces/training/hello-nextflow/work/de/00358b6b24994662f32825296f1729/french-Celine-output.txt
+    Before collect: /workspaces/training/hello-nextflow/work/0b/52ce1987758e4fb7075711a781e730/french-Mateo-output.txt
+    Before collect: /workspaces/training/hello-nextflow/work/21/3d3992e289ffbbb06e03160a81a9eb/french-Andrea-output.txt
+    After collect: [/workspaces/training/hello-nextflow/work/de/00358b6b24994662f32825296f1729/french-Celine-output.txt, /workspaces/training/hello-nextflow/work/0b/52ce1987758e4fb7075711a781e730/french-Mateo-output.txt, /workspaces/training/hello-nextflow/work/21/3d3992e289ffbbb06e03160a81a9eb/french-Andrea-output.txt]
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - Hello-output.txt
-        - Bonjour-output.txt
-        - Hola-output.txt
+        - Mateo-output.txt
+        - Andrea-output.txt
+        - Celine-output.txt
 
-      uppercased:
-        - UPPER-Bonjour-output.txt
-        - UPPER-Hello-output.txt
-        - UPPER-Hola-output.txt
+      translated:
+        - french-Celine-output.txt
+        - french-Mateo-output.txt
+        - french-Andrea-output.txt
 
-      collected: COLLECTED-output.txt
+      collected: COLLECTED-batch-output.txt
     ```
 
 It runs successfully, although the log output may look a little messier than this (we cleaned it up for readability).
@@ -771,10 +963,10 @@ Finally, you can have a look at the contents of the output file to satisfy yours
 
 ??? abstract "File contents"
 
-    ```console title="results/COLLECTED-output.txt"
-    BONJOUR
-    HELLO
-    HOLA
+    ```console title="results/COLLECTED-batch-output.txt"
+    Bonjour, Celine!
+    Bonjour, Mateo!
+    Bonjour, Andrea!
     ```
 
 This time we have all three greetings in the final output file. Success!
@@ -790,193 +982,41 @@ Before you move on to the next section, we recommend you delete the `view()` sta
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="73"
+    ```groovy title="hello-workflow.nf" linenums="92"
         // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect())
+        collectGreetings(translateGreeting.out.collect(), params.batch)
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
+    ```groovy title="hello-workflow.nf" linenums="92" hl_lines="4-6"
         // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect())
+        collectGreetings(translateGreeting.out.collect(), params.batch)
 
         // optional view statements
-        convertToUpper.out.view { filepath -> "Before collect: $filepath" }
-        convertToUpper.out.collect().view { filepaths -> "After collect: $filepaths" }
+        translateGreeting.out.view { filepath -> "Before collect: $filepath" }
+        translateGreeting.out.collect().view { filepaths -> "After collect: $filepaths" }
     ```
 
 This is basically the reverse operation from point 2.4.2.
 
-### Takeaway
+### 2.5. Use the batch name to organize the outputs
 
-You know how to collect outputs from a batch of process calls and feed them into a joint analysis or summation step.
-
-To recap, this is what you've built so far:
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
-</figure>
-
-### What's next?
-
-Learn how to pass more than one input to a process.
-
----
-
-## 3. Pass additional parameters to a process
-
-We want to be able to name the final output file something specific in order to process subsequent batches of greetings without overwriting the final results.
-
-To that end, we're going to make the following refinements to the workflow:
-
-- Modify the collector process to accept a user-defined name for the output file (`batch_name`)
-- Add a command-line parameter to the workflow (`--batch`) and pass it to the collector process
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.svg"
-</figure>
-
-### 3.1. Modify the collector process
-
-We're going to need to declare the additional input and integrate it into the output file name.
-
-#### 3.1.1. Declare the additional input
-
-Good news: we can declare as many input variables as we want in the process definition.
-Let's call this one `batch_name`.
-
-In the process block, make the following code change:
-
-=== "After"
-
-    ```groovy title="hello-workflow.nf" linenums="42" hl_lines="3"
-        input:
-        path input_files
-        val batch_name
-    ```
-
-=== "Before"
-
-    ```groovy title="hello-workflow.nf" linenums="42"
-        input:
-        path input_files
-    ```
-
-You can set up your processes to expect as many inputs as you want.
-Right now, these are all set up to be required inputs; you _must_ provide a value for the workflow to work.
-
-You will learn how to manage required vs. optional inputs later in your Nextflow journey.
-
-#### 3.1.2. Use the `batch_name` variable in the output file name
-
-We can insert the variable into the output file name in the same way we've composed dynamic file names before.
-
-In the process block, make the following code change:
-
-=== "After"
-
-    ```groovy title="hello-workflow.nf" linenums="46" hl_lines="2 6"
-        output:
-        path "COLLECTED-${batch_name}-output.txt"
-
-        script:
-        """
-        cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-        """
-    ```
-
-=== "Before"
-
-    ```groovy title="hello-workflow.nf" linenums="46" hl_lines="2 6"
-        output:
-        path "COLLECTED-output.txt"
-
-        script:
-        """
-        cat ${input_files} > 'COLLECTED-output.txt'
-        """
-    ```
-
-This sets up the process to use the `batch_name` value to generate a specific filename for the final output of the workflow.
-
-### 3.2. Add a `batch` command-line parameter
-
-Now we need a way to supply the value for `batch_name` and feed it to the process call.
-
-#### 3.2.1. Use `params` to set up the parameter
-
-You already know how to use the `params` system to declare CLI parameters.
-Let's use that to declare a `batch` parameter (with a default value because we are lazy).
-
-In the pipeline parameters section, make the following code changes:
-
-=== "After"
-
-    ```groovy title="hello-workflow.nf" linenums="55" hl_lines="6"
-    /*
-     * Pipeline parameters
-     */
-    params {
-        input: Path = 'data/greetings.csv'
-        batch: String = 'batch'
-    }
-    ```
-
-=== "Before"
-
-    ```groovy title="hello-workflow.nf" linenums="55"
-    /*
-     * Pipeline parameters
-     */
-    params {
-        input: Path = 'data/greetings.csv'
-    }
-    ```
-
-Just like we demonstrated for `--input`, you can override that default value by specifying a value with `--batch` on the command line.
-
-#### 3.2.2. Pass the `batch` parameter to the process
-
-To provide the value of the parameter to the process, we need to add it in the process call.
-
-In the workflow block, make the following code change:
-
-=== "After"
-
-    ```groovy title="hello-workflow.nf" linenums="75" hl_lines="2"
-        // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect(), params.batch)
-    ```
-
-=== "Before"
-
-    ```groovy title="hello-workflow.nf" linenums="75" hl_lines="2"
-        // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect())
-    ```
-
-You see that to provide multiple inputs to a process, you simply list them in the call parentheses, separated by commas.
-
-!!! warning
-
-    You MUST provide the inputs to the process in the EXACT SAME ORDER as they are listed in the input definition block of the process.
-
-#### 3.2.3. Use the batch name to organize the outputs
-
-The `batch` parameter is also a good way to keep the results of different batches apart.
+The `batch` parameter is also a good way to keep the published results of different batches apart.
 Each output's `path` can include parameter values, so you can publish each batch to its own subdirectory, and group the intermediate files in a subdirectory of their own.
+
+#### 2.5.1. Update the output paths
 
 In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="84" hl_lines="3 6 9"
+    ```groovy title="hello-workflow.nf" linenums="101" hl_lines="3 6 9"
     output {
         first_output {
             path "${params.batch}/intermediates"
         }
-        uppercased {
+        translated {
             path "${params.batch}/intermediates"
         }
         collected {
@@ -987,12 +1027,12 @@ In the `output` block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="84"
+    ```groovy title="hello-workflow.nf" linenums="101"
     output {
         first_output {
             path '.'
         }
-        uppercased {
+        translated {
             path '.'
         }
         collected {
@@ -1006,9 +1046,9 @@ The double quotes are required for Nextflow to insert the parameter value into t
 This is how a pipeline author decides how the results are organized.
 As you saw in Nextflow Run, the person running the pipeline can change the location of the output directory, but not the organization within it, except through parameters like `batch` that the author builds into the paths.
 
-### 3.3. Run the workflow
+#### 2.5.2. Run the workflow with a batch name
 
-Let's try running this with a batch name on the command line.
+Run the workflow with a batch name on the command line:
 
 ```bash
 nextflow run hello-workflow.nf -resume --batch trio
@@ -1019,45 +1059,42 @@ nextflow run hello-workflow.nf -resume --batch trio
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [confident_rutherford] revision: bc58af409c
+    Launching `hello-workflow.nf` [zen_ekeblad] revision: 37d4e8924f
 
     executor >  local (1)
-    [b1/5826b5] sayHello (2)       | 3 of 3, cached: 3 ✔
-    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
-    [b5/f19efe] collectGreetings   | 1 of 1 ✔
+    [cc/67d554] sayHello (3)          | 3 of 3, cached: 3 ✔
+    [21/3d3992] translateGreeting (1) | 3 of 3, cached: 3 ✔
+    [24/f2df66] collectGreetings      | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - trio/intermediates/Bonjour-output.txt
-        - trio/intermediates/Hello-output.txt
-        - trio/intermediates/Hola-output.txt
+        - trio/intermediates/Andrea-output.txt
+        - trio/intermediates/Mateo-output.txt
+        - trio/intermediates/Celine-output.txt
 
-      uppercased:
-        - trio/intermediates/UPPER-Bonjour-output.txt
-        - trio/intermediates/UPPER-Hola-output.txt
-        - trio/intermediates/UPPER-Hello-output.txt
+      translated:
+        - trio/intermediates/french-Celine-output.txt
+        - trio/intermediates/french-Andrea-output.txt
+        - trio/intermediates/french-Mateo-output.txt
 
       collected: trio/intermediates/COLLECTED-trio-output.txt
     ```
 
-It runs successfully and produces the desired output:
-
-??? abstract "File contents"
-
-    ```console title="results/trio/intermediates/COLLECTED-trio-output.txt"
-    HELLO
-    BONJOUR
-    HOLA
-    ```
-
-Now, as long as we specify the parameter appropriately, subsequent runs on other batches of inputs won't clobber previous results.
+The collection step ran again, since its batch name input changed, and all the outputs of this batch are now under `results/trio/`.
+As long as you specify a different batch name, subsequent runs on other batches of inputs won't clobber previous results.
 
 ### Takeaway
 
-You know how to pass more than one input to a process.
+You know how to collect outputs from a batch of process calls and feed them into a joint analysis or summation step, and how to use a parameter to organize the published outputs.
+
+To recap, this is what you've built so far:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
+</figure>
 
 ### What's next?
 
@@ -1065,10 +1102,10 @@ Learn how to emit multiple outputs and handle them conveniently.
 
 ---
 
-## 4. Add an output to the collector step
+## 3. Add an output to the collector step
 
 So far we've been using processes that only produced one output each.
-We were able to access their respective outputs very conveniently using the `<process>.out` syntax, which we used both in the context of passing an output to the next process (e.g. `convertToUpper(sayHello.out)`) and in the context of the `publish:` section (e.g. `first_output = sayHello.out`).
+We were able to access their respective outputs very conveniently using the `<process>.out` syntax, which we used both in the context of passing an output to the next process (e.g. `translateGreeting(sayHello.out, params.language)`) and in the context of the `publish:` section (e.g. `first_output = sayHello.out`).
 
 What happens when a process produces more than one?
 How do we handle the multiple outputs?
@@ -1081,11 +1118,11 @@ We can either choose to give those output channels names, which makes it easy to
 
 For demonstration purposes, let's say we want to count the number of greetings that are being collected for a given batch of inputs and report it in a file.
 
-### 4.1. Modify the process to count and output the number of greetings
+### 3.1. Modify the process to count and output the number of greetings
 
 This will require two key changes to the process definition: we need a way to count the greetings and write a report file, then we need to add that report file to the `output` block of the process.
 
-#### 4.1.1. Count the number of greetings collected
+#### 3.1.1. Count the number of greetings collected
 
 Conveniently, Nextflow lets us add arbitrary code in the `script:` block of the process definition, which comes in really handy for doing things like this.
 
@@ -1095,7 +1132,7 @@ In the `collectGreetings` process block, make the following code changes:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="49" hl_lines="2 5"
+    ```groovy title="hello-workflow.nf" linenums="66" hl_lines="2 5"
         script:
         count_greetings = input_files.size()
         """
@@ -1106,7 +1143,7 @@ In the `collectGreetings` process block, make the following code changes:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="49"
+    ```groovy title="hello-workflow.nf" linenums="66"
         script:
         """
         cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
@@ -1117,7 +1154,7 @@ The `count_greetings` variable will be computed at runtime.
 
 ??? note "What if there is only one greeting?"
 
-    If you run the workflow on a CSV file that contains a single greeting, the report claims a much larger number of greetings.
+    If you run the workflow on a CSV file that contains a single name, the report claims a much larger number of greetings.
     With a single item in the channel, `input_files` holds one file instead of a list of files, and `size()` returns the size of that file in bytes.
 
     To make Nextflow always provide a list, declare how many files the input accepts with the `arity` option:
@@ -1129,7 +1166,7 @@ The `count_greetings` variable will be computed at runtime.
 
     A value of `'1..*'` means one or more files.
 
-#### 4.1.2. Emit the report file and name outputs
+#### 3.1.2. Emit the report file and name outputs
 
 In principle all we need to do is to add the report file to the `output:` block.
 
@@ -1139,7 +1176,7 @@ In the process block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="46" hl_lines="2 3"
+    ```groovy title="hello-workflow.nf" linenums="63" hl_lines="2 3"
         output:
         path "COLLECTED-${batch_name}-output.txt", emit: outfile
         path "${batch_name}-report.txt", emit: report
@@ -1147,7 +1184,7 @@ In the process block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="46"
+    ```groovy title="hello-workflow.nf" linenums="63"
         output:
         path "COLLECTED-${batch_name}-output.txt"
     ```
@@ -1162,7 +1199,7 @@ But as the saying goes, why not both?
 
     We prefer naming outputs because otherwise, it's too easy to grab the wrong index by error, especially when the process produces a lot of outputs.
 
-### 4.2. Update the workflow outputs
+### 3.2. Update the workflow outputs
 
 Now that we have two outputs coming out of the `collectGreetings` process, the `collectGreetings.out` output contains two channels:
 
@@ -1175,26 +1212,26 @@ Now that we have two outputs coming out of the `collectGreetings` process, the `
 
 We need to update the workflow outputs accordingly.
 
-#### 4.2.1. Update the `publish:` section
+#### 3.2.1. Update the `publish:` section
 
 In the `workflow` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="81" hl_lines="4 5"
+    ```groovy title="hello-workflow.nf" linenums="98" hl_lines="4 5"
         publish:
         first_output = sayHello.out
-        uppercased = convertToUpper.out
+        translated = translateGreeting.out
         collected = collectGreetings.out.outfile
         batch_report = collectGreetings.out.report
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="81" hl_lines="4"
+    ```groovy title="hello-workflow.nf" linenums="98" hl_lines="4"
         publish:
         first_output = sayHello.out
-        uppercased = convertToUpper.out
+        translated = translateGreeting.out
         collected = collectGreetings.out
     ```
 
@@ -1203,18 +1240,18 @@ When we go to add one more step to our pipeline in Part 5 (Containers), we'll be
 
 But for now, let's finish updating the workflow-level outputs.
 
-#### 4.2.2. Update the `output` block
+#### 3.2.2. Update the `output` block
 
 In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="88" hl_lines="11-13"
+    ```groovy title="hello-workflow.nf" linenums="105" hl_lines="11-13"
     output {
         first_output {
             path "${params.batch}/intermediates"
         }
-        uppercased {
+        translated {
             path "${params.batch}/intermediates"
         }
         collected {
@@ -1228,12 +1265,12 @@ In the `output` block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="88"
+    ```groovy title="hello-workflow.nf" linenums="105"
     output {
         first_output {
             path "${params.batch}/intermediates"
         }
-        uppercased {
+        translated {
             path "${params.batch}/intermediates"
         }
         collected {
@@ -1245,9 +1282,9 @@ In the `output` block, make the following code change:
 We don't need to update the `collected` output definition since that name hasn't changed.
 We just need to add the new output, which we publish at the top level of the batch directory, since it is a final result rather than an intermediate file.
 
-### 4.3. Run the workflow
+### 3.3. Run the workflow
 
-Let's try running this with the current batch of greetings.
+Run the workflow with the same batch name as before:
 
 ```bash
 nextflow run hello-workflow.nf -resume --batch trio
@@ -1258,26 +1295,26 @@ nextflow run hello-workflow.nf -resume --batch trio
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [ecstatic_wilson] revision: c80285f8c8
+    Launching `hello-workflow.nf` [extravagant_mcnulty] revision: 9f1780070d
 
     executor >  local (1)
-    [ab/816321] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [e0/ecf81b] convertToUpper (3) | 3 of 3, cached: 3 ✔
-    [02/61ead2] collectGreetings   | 1 of 1 ✔
+    [82/a09e8f] sayHello (2)          | 3 of 3, cached: 3 ✔
+    [de/00358b] translateGreeting (3) | 3 of 3, cached: 3 ✔
+    [6c/e564ea] collectGreetings      | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - trio/intermediates/Bonjour-output.txt
-        - trio/intermediates/Hello-output.txt
-        - trio/intermediates/Hola-output.txt
+        - trio/intermediates/Mateo-output.txt
+        - trio/intermediates/Andrea-output.txt
+        - trio/intermediates/Celine-output.txt
 
-      uppercased:
-        - trio/intermediates/UPPER-Bonjour-output.txt
-        - trio/intermediates/UPPER-Hola-output.txt
-        - trio/intermediates/UPPER-Hello-output.txt
+      translated:
+        - trio/intermediates/french-Andrea-output.txt
+        - trio/intermediates/french-Celine-output.txt
+        - trio/intermediates/french-Mateo-output.txt
 
       collected: trio/intermediates/COLLECTED-trio-output.txt
 
@@ -1297,7 +1334,8 @@ Open it to verify that the workflow correctly reported the count of greetings th
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect-4-way.svg"
 </figure>
 
-Feel free to add more greetings to the CSV and test what happens.
+Feel free to try the workflow on more names, for example with the `data/names-extended.csv` file, which adds two names to the original three.
+Use `-resume`, and see which tasks Nextflow runs again.
 
 ### Takeaway
 
@@ -1322,7 +1360,7 @@ How do you access the output of a process in the workflow block?
 - [x] `processName.out`
 - [ ] `get(processName)`
 
-Learn more: [1.4. Pass the output of the first process to the second process](#14-pass-the-output-of-the-first-process-to-the-second-process)
+Learn more: [1.2.2. Pass the output of the first process to the new process](#122-pass-the-output-of-the-first-process-to-the-new-process)
 </quiz>
 
 <quiz>
@@ -1332,7 +1370,37 @@ What determines the order of process execution in Nextflow?
 - [x] Data dependencies between processes
 - [ ] Random order for parallel execution
 
-Learn more: [1.4. Pass the output of the first process to the second process](#14-pass-the-output-of-the-first-process-to-the-second-process)
+Learn more: [1.2.2. Pass the output of the first process to the new process](#122-pass-the-output-of-the-first-process-to-the-new-process)
+</quiz>
+
+<quiz>
+What does the line `#!/usr/bin/env python3` at the start of a process script do?
+- [ ] It is a comment that Nextflow ignores
+- [x] It tells the system to run the script with Python instead of the shell
+- [ ] It installs Python in the task environment
+- [ ] It imports the Python standard library
+
+Learn more: [1.2.1. Define the process](#121-define-the-process)
+</quiz>
+
+<quiz>
+A process is called with `translateGreeting(sayHello.out, params.language)`, where `sayHello.out` carries three files and `params.language` is a single value. How many times does the process run?
+- [ ] Once, on all three files
+- [x] Three times, reusing the same language each time
+- [ ] Once per language
+- [ ] It fails because the inputs have different sizes
+
+Learn more: [1.3.3. Pass the language to the process](#133-pass-the-language-to-the-process)
+</quiz>
+
+<quiz>
+When providing multiple inputs to a process, what must be true?
+- [ ] All inputs must be of the same type
+- [ ] Inputs must be provided in alphabetical order
+- [x] The order of inputs must match the order defined in the input block
+- [ ] Only two inputs can be provided at a time
+
+Learn more: [1.3.3. Pass the language to the process](#133-pass-the-language-to-the-process)
 </quiz>
 
 <quiz>
@@ -1340,9 +1408,9 @@ Which operator should replace `???` to gather all outputs into a single list for
 
 ```groovy hl_lines="4"
 workflow {
-    greetings_ch = Channel.of('Hello', 'Bonjour', 'Hola')
-    SAYHELLO(greetings_ch)
-    GATHER_ALL(SAYHELLO.out.???)
+    names_ch = channel.of('Mateo', 'Andrea', 'Celine')
+    sayHello(names_ch)
+    gatherAll(sayHello.out.???)
 }
 ```
 
@@ -1371,7 +1439,7 @@ How do you access a named output from a process?
 - [x] `processName.out.outputName`
 - [ ] `output.processName.outputName`
 
-Learn more: [4.1.2. Emit the report file and name outputs](#412-emit-the-report-file-and-name-outputs)
+Learn more: [3.1.2. Emit the report file and name outputs](#312-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1381,15 +1449,5 @@ What is the correct syntax for naming an output in a process?
 - [x] `emit: outputName`
 - [ ] `label: outputName`
 
-Learn more: [4.1.2. Emit the report file and name outputs](#412-emit-the-report-file-and-name-outputs)
-</quiz>
-
-<quiz>
-When providing multiple inputs to a process, what must be true?
-- [ ] All inputs must be of the same type
-- [ ] Inputs must be provided in alphabetical order
-- [x] The order of inputs must match the order defined in the input block
-- [ ] Only two inputs can be provided at a time
-
-Learn more: [3. Pass additional parameters to a process](#3-pass-additional-parameters-to-a-process)
+Learn more: [3.1.2. Emit the report file and name outputs](#312-emit-the-report-file-and-name-outputs)
 </quiz>

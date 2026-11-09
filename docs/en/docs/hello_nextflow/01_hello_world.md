@@ -13,7 +13,7 @@
 In this course, you write the Hello pipeline you ran in [Nextflow Run](../nextflow_run/index.md), one piece at a time; see the [course overview](./index.md) for the plan.
 
 In this first part, you start from a script that does a single thing, writing 'Hello World!' to a file.
-You examine and run it, publish its output, and make the greeting configurable from the command line.
+You examine and run it, publish its output, and make it greet a name provided on the command line.
 
 ---
 
@@ -148,16 +148,16 @@ nextflow run hello-world.nf
     ```console hl_lines="6"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [goofy_torvalds] revision: c33d41f479
+    Launching `hello-world.nf` [grave_wiles] revision: dc38bebf45
 
     executor >  local (1)
-    [65/7be2fa] sayHello | 1 of 1 ✔
+    [11/2ab905] sayHello | 1 of 1 ✔
     ```
 
 The `sayHello` process ran once (`1 of 1 ✔`).
-As you saw in Nextflow Run, the prefix `[65/7be2fa]` is the truncated path to the task directory under `work/`, where Nextflow ran the process.
+As you saw in Nextflow Run, the prefix `[11/2ab905]` is the truncated path to the task directory under `work/`, where Nextflow ran the process.
 
-Open that directory, for example `work/65/7be2fad5e71e5f49998f795677fd68` (yours will have a different name), and look at two of its files:
+Open that directory, for example `work/11/2ab905b8f0bf001eaefd9112486273` (yours will have a different name), and look at two of its files:
 
 - **`output.txt`** contains `Hello World!`, the output declared in the process.
 - **`.command.sh`** contains the command Nextflow ran:
@@ -287,10 +287,10 @@ nextflow run hello-world.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [jovial_mayer] revision: 35bd3425e5
+    Launching `hello-world.nf` [naughty_coulomb] revision: ca5cb0eccf
 
     executor >  local (1)
-    [9f/48ef97] sayHello | 1 of 1 ✔
+    [48/bf4165] sayHello | 1 of 1 ✔
 
     Outputs:
 
@@ -305,7 +305,7 @@ The console output now ends with the `Outputs:` summary you saw in Nextflow Run,
 
     ```console
     results
-    └── output.txt -> /workspaces/training/hello-nextflow/work/9f/48ef97f110b0dbd83635d7cbe288d2/output.txt
+    └── output.txt -> /workspaces/training/hello-nextflow/work/48/bf4165887e87c51053a3df3daf73b2/output.txt
     ```
 
 The published `output.txt` is a symbolic link to the file in the task directory, which is the default publish mode.
@@ -344,14 +344,14 @@ You know how to publish the outputs of a workflow with a `publish:` section and 
 
 ### What's next?
 
-Learn to provide a variable input via a command-line parameter, and give it a default value.
+Learn to greet a name provided via a command-line parameter, and give it a default value.
 
 ---
 
 ## 3. Use a variable input passed on the command line
 
-In its current state, our workflow uses a greeting hardcoded into the process command.
-We want to add some flexibility by using an input variable, so that we can more easily change the greeting at runtime.
+In its current state, our workflow writes the same hardcoded greeting every time.
+We want to add some flexibility by using an input variable, so that it can greet a name we provide at runtime.
 
 This requires us to make three sets of changes to our script:
 
@@ -367,7 +367,7 @@ We need to edit the process definition to (1) accept an input variable and (2) u
 
 #### 3.1.1. Add an input block to the process definition
 
-First, let's adapt the process definition to accept an input called `greeting`.
+First, let's adapt the process definition to accept an input called `name`.
 
 In the process block, make the following code change:
 
@@ -377,7 +377,7 @@ In the process block, make the following code change:
     process sayHello {
 
         input:
-        val greeting
+        val name
 
         output:
         path 'output.txt'
@@ -392,11 +392,11 @@ In the process block, make the following code change:
         path 'output.txt'
     ```
 
-The `greeting` variable is prefixed by `val` to tell Nextflow it's a value (not a path).
+The `name` variable is prefixed by `val` to tell Nextflow it's a value (not a path).
 
 #### 3.1.2. Edit the process command to use the input variable
 
-Now we swap the original hardcoded value for the value of the input variable we expect to receive.
+Now we insert the input variable into the greeting, in place of the hardcoded `World`.
 
 In the process block, make the following code change:
 
@@ -405,7 +405,7 @@ In the process block, make the following code change:
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
         script:
         """
-        echo '${greeting}' > output.txt
+        echo 'Hello, ${name}!' > output.txt
         """
     ```
 
@@ -422,13 +422,13 @@ The `$` symbol and curly braces (`{ }`) tell Nextflow this is a variable name th
 
 !!! tip
 
-    The curly braces (`{ }`) were technically optional in previous versions of Nextflow, so you might see older workflows where this is written as `echo '$greeting' > output.txt`.
+    The curly braces (`{ }`) were technically optional in previous versions of Nextflow, so you might see older workflows where this is written as `echo 'Hello, $name!' > output.txt`.
 
 Now that the `sayHello()` process is ready to accept a variable input, we need a way to provide an input value to the process call at the workflow level.
 
 ### 3.2. Set up a command-line parameter to capture user input
 
-We could simply hardcode an input directly by making the process call `sayHello('Hello World!')`.
+We could simply hardcode an input directly by making the process call `sayHello('World')`.
 However, when we're doing real work with our workflow, we're going to want to be able to control its inputs from the command line, so we can do something like this:
 
 <figure class="excalidraw">
@@ -439,8 +439,8 @@ Fortunately, Nextflow has a built-in workflow parameter system called [`params`]
 
 The general syntax is to declare `params.<parameter_name>` to tell Nextflow to expect a `--<parameter_name>` parameter on the command line.
 
-Here, we want to create a parameter called `--input`, so we need to declare `params.input` somewhere in the workflow.
-In principle we can write it anywhere; but since we're going to want to give it to the `sayHello()` process call, we can plug it in there directly by writing `sayHello(params.input)`.
+Here, we want to create a parameter called `--name`, so we need to declare `params.name` somewhere in the workflow.
+In principle we can write it anywhere; but since we're going to want to give it to the `sayHello()` process call, we can plug it in there directly by writing `sayHello(params.name)`.
 
 In the workflow block, make the following code change:
 
@@ -448,7 +448,7 @@ In the workflow block, make the following code change:
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
         // emit a greeting
-        sayHello(params.input)
+        sayHello(params.name)
     ```
 
 === "Before"
@@ -458,7 +458,7 @@ In the workflow block, make the following code change:
         sayHello()
     ```
 
-This tells Nextflow to run the `sayHello` process on the value provided through the `--input` parameter.
+This tells Nextflow to run the `sayHello` process on the value provided through the `--name` parameter.
 
 In effect, we've accomplished steps (2) and (3) outlined at the start of the section in a single go.
 
@@ -467,7 +467,7 @@ In effect, we've accomplished steps (2) and (3) outlined at the start of the sec
 Let's run it!
 
 ```bash
-nextflow run hello-world.nf --input 'Bonjour le monde!'
+nextflow run hello-world.nf --name 'Mateo'
 ```
 
 ??? success "Command output"
@@ -475,10 +475,10 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elated_lavoisier] revision: 7c031b42ea
+    Launching `hello-world.nf` [hungry_boyd] revision: c7b2d15844
 
     executor >  local (1)
-    [4b/654319] sayHello | 1 of 1 ✔
+    [c2/128cf0] sayHello | 1 of 1 ✔
 
     Outputs:
 
@@ -489,15 +489,13 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 
 If you made all these edits correctly, you should get another successful execution.
 
-Be sure to open up the output file to check that you now have the new version of the greeting.
+Be sure to open up the output file to check that the greeting now includes the name you provided.
 
 ??? abstract "File contents"
 
     ```console title="results/output.txt"
-    Bonjour le monde!
+    Hello, Mateo!
     ```
-
-Et voilà!
 
 Note how the new execution has overwritten the output file published to the `results` directory.
 
@@ -507,7 +505,7 @@ Ok, that was convenient, but in many cases, it makes sense to supply a default v
 
 #### 3.4.1. Set a default value for the CLI parameter
 
-Let's give the `input` parameter a default value by declaring it before the workflow definition.
+Let's give the `name` parameter a default value by declaring it before the workflow definition.
 
 In the workflow script, make the following code change:
 
@@ -520,7 +518,7 @@ In the workflow script, make the following code change:
      * Pipeline parameters
      */
     params {
-        input: String = 'Hola mundo!'
+        name: String = 'World'
     }
 
     workflow {
@@ -540,7 +538,7 @@ Supported types include `String`, `Integer`, `Float`, `Boolean`, and `Path`.
 
 !!! info
 
-    In older workflows, you may see that whole `params` block written as just `input = 'Hola mundo!'`.
+    In older workflows, you may see that whole `params` block written as just `name = 'World'`.
 
 As you add more parameters to your pipeline, you should add them all to this block, whether or not you need to give them a default value.
 This will make it easy to find all configurable parameters at a glance.
@@ -558,10 +556,10 @@ nextflow run hello-world.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [determined_edison] revision: 3539118582
+    Launching `hello-world.nf` [high_lamarck] revision: 07609cbd83
 
     executor >  local (1)
-    [72/394147] sayHello | 1 of 1 ✔
+    [23/6db169] sayHello | 1 of 1 ✔
 
     Outputs:
 
@@ -578,9 +576,9 @@ nextflow run hello-world.nf
     ERROR ~ Script compilation error
     - file : /workspaces/training/hello-nextflow/hello-world.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
-    @ line 24, column 12.
-          input: String = 'Hola mundo!'
-                  ^
+    @ line 24, column 11.
+          name: String = 'World'
+                 ^
 
     1 error
 
@@ -604,10 +602,10 @@ The output will be in the same place as previously, but the contents should be u
 ??? abstract "File contents"
 
     ```console title="results/output.txt"
-    Hola mundo!
+    Hello, World!
     ```
 
-Nextflow used the default value of the greeting parameter to create the output.
+Nextflow used the default value of the `name` parameter to create the output.
 
 #### 3.4.3. Override the default value
 
@@ -616,7 +614,7 @@ If you provide the parameter on the command line, the CLI value will override th
 Try it out:
 
 ```bash
-nextflow run hello-world.nf --input 'Konnichiwa!'
+nextflow run hello-world.nf --name 'Celine'
 ```
 
 ??? success "Command output"
@@ -624,10 +622,10 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elegant_faraday] revision: 3539118582
+    Launching `hello-world.nf` [compassionate_yonath] revision: 07609cbd83
 
     executor >  local (1)
-    [6f/a12a91] sayHello | 1 of 1 ✔
+    [7d/69c239] sayHello | 1 of 1 ✔
 
     Outputs:
 
@@ -641,7 +639,7 @@ Once again, you should find the corresponding updated output in your results dir
 ??? abstract "File contents"
 
     ```console title="results/output.txt"
-    Konnichiwa!
+    Hello, Celine!
     ```
 
 !!! note
@@ -653,7 +651,7 @@ Once again, you should find the corresponding updated output in your results dir
 
 ### Takeaway
 
-You know how to use a simple variable input provided at runtime via a command-line parameter, as well as set up, use and override default values.
+You know how to insert a variable input into a process command, provide it at runtime via a command-line parameter, and set up, use and override default values.
 
 ### What's next?
 
@@ -734,7 +732,7 @@ How do you reference a variable inside a Nextflow script block?
 </quiz>
 
 <quiz>
-In `#!groovy params { input: String = 'Hola mundo!' }`, what happens when you run the workflow with `--input 'Konnichiwa!'`?
+In `#!groovy params { name: String = 'World' }`, what happens when you run the workflow with `--name 'Celine'`?
 - [ ] The workflow fails because the parameter already has a value
 - [x] The command-line value overrides the default
 - [ ] The default value overrides the command-line value

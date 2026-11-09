@@ -19,18 +19,18 @@ Over the course of five parts, you transformed that basic workflow into a modula
 
 ### What you built
 
-- The final form of the Hello workflow takes as input a CSV file containing text greetings.
-- The four steps are implemented as Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) stored in separate module files.
+- The final form of the Hello workflow takes as input a CSV file containing names.
+- The four steps are implemented as Nextflow processes (`sayHello`, `translateGreeting`, `collectGreetings`, and `cowpy`) stored in separate module files.
 - The results are published to a directory called `results/`.
-- The final output of the pipeline is a plain text file containing ASCII art of a character saying the uppercased greetings.
+- The final output of the pipeline is a plain text file containing ASCII art of a character saying the translated greetings.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
-1. **`sayHello`:** Writes each greeting to its own output file (_e.g._ "Hello-output.txt")
-2. **`convertToUpper`:** Converts each greeting to uppercase (_e.g._ "HELLO")
-3. **`collectGreetings`:** Collects all uppercase greetings into a single batch file
+1. **`sayHello`:** Writes a greeting for each name to its own output file (_e.g._ "Hello, Mateo!" in "Mateo-output.txt")
+2. **`translateGreeting`:** Translates each greeting into the language set by `--language` with a Python script (_e.g._ "Bonjour, Mateo!")
+3. **`collectGreetings`:** Collects all translated greetings into a single batch file
 4. **`cowpy`:** Generates ASCII art using the `cowpy` tool
 
 ### Skills acquired

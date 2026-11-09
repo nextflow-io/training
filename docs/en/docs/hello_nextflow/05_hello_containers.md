@@ -55,23 +55,23 @@ nextflow run hello-containers.nf -profile test
     Launching `hello-containers.nf` [nice_escher] revision: d5dfdc9872
 
     executor >  local (7)
-    [c9/f5c686] sayHello (3)       | 3 of 3 ✔
-    [ef/3135a8] convertToUpper (3) | 3 of 3 ✔
-    [7f/f435e3] collectGreetings   | 1 of 1 ✔
+    [4e/d03419] sayHello (3)          | 3 of 3 ✔
+    [f0/30dce5] translateGreeting (3) | 3 of 3 ✔
+    [18/512341] collectGreetings      | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - batch/intermediates/Hola-output.txt
-        - batch/intermediates/Bonjour-output.txt
-        - batch/intermediates/Hello-output.txt
+        - batch/intermediates/Andrea-output.txt
+        - batch/intermediates/Mateo-output.txt
+        - batch/intermediates/Celine-output.txt
 
-      uppercased:
-        - batch/intermediates/UPPER-Bonjour-output.txt
-        - batch/intermediates/UPPER-Hola-output.txt
-        - batch/intermediates/UPPER-Hello-output.txt
+      translated:
+        - batch/intermediates/french-Mateo-output.txt
+        - batch/intermediates/french-Andrea-output.txt
+        - batch/intermediates/french-Celine-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
@@ -86,13 +86,13 @@ As previously, you will find the output files under `results/batch/`.
     results/batch
     ├── batch-report.txt
     └── intermediates
-        ├── Bonjour-output.txt
+        ├── Andrea-output.txt
+        ├── Celine-output.txt
         ├── COLLECTED-batch-output.txt
-        ├── Hello-output.txt
-        ├── Hola-output.txt
-        ├── UPPER-Bonjour-output.txt
-        ├── UPPER-Hello-output.txt
-        └── UPPER-Hola-output.txt
+        ├── french-Andrea-output.txt
+        ├── french-Celine-output.txt
+        ├── french-Mateo-output.txt
+        └── Mateo-output.txt
     ```
 
 If that worked for you, you're ready to learn how to use containers.
@@ -284,7 +284,7 @@ Because you're inside the container, you can run the `cowpy` command as many tim
     Use the '-c' flag to pick a different character, including:
     `beavis`, `cheese`, `daemon`, `dragonandcow`, `ghostbusters`, `kitty`, `moose`, `milk`, `stegosaurus`, `turkey`, `turtle`, `tux`
 
-This is neat. What would be even neater is if we could feed our `greetings.csv` as input into this.
+This is neat. What would be even neater is if we could feed our `names.csv` file as input into this.
 But since we don't have access to the filesystem, we can't.
 
 Let's fix that.
@@ -332,28 +332,28 @@ ls /my_project
     hello-channels.nf  hello-modules.nf     hello-world.nf     nextflow.config  solutions
     ```
 
-You can now see the contents of the working directory from inside the container, including the `greetings.csv` file under `data/`.
+You can now see the contents of the working directory from inside the container, including the `names.csv` file under `data/`.
 
 This effectively established a tunnel through the container wall that you can use to access that part of your filesystem.
 
 #### 1.3.5. Use the mounted data
 
-Now that we have mounted the working directory into the container, we can use the `cowpy` command to display the contents of the `greetings.csv` file.
+Now that we have mounted the working directory into the container, we can use the `cowpy` command to display the contents of the `names.csv` file.
 
-To do this, we'll use `cat /my_project/data/greetings.csv | ` to pipe the contents of the CSV file into the `cowpy` command.
+To do this, we'll use `cat /my_project/data/names.csv | ` to pipe the contents of the CSV file into the `cowpy` command.
 
 ```bash
-cat /my_project/data/greetings.csv | cowpy -c turkey
+cat /my_project/data/names.csv | cowpy -c turkey
 ```
 
 ??? success "Command output"
 
     ```console
-     ____________________
-    / Hello,English,123  \
-    | Bonjour,French,456 |
-    \ Hola,Spanish,789   /
-     --------------------
+     ________________________
+    / Mateo,spanish,squirrel \
+    | Andrea,italian,turtle  |
+    \ Celine,french,moose    /
+     ------------------------
       \                                  ,+*^^*+___+++_
        \                           ,*^^^^              )
         \                       _+*                     ^**+_
@@ -377,9 +377,8 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
                           ^^^ ^^ ^^^ ^
     ```
 
-This produces the desired ASCII art of a turkey rattling off our example greetings!
-Except here the turkey is repeating the full rows instead of just the greetings.
-We already know our Nextflow workflow will do a better job!
+This produces ASCII art of a turkey reciting the contents of our names file.
+It repeats the full rows rather than greetings, but our Nextflow workflow will take care of that.
 
 Feel free to play around with this command.
 When you're done, exit the container as previously:
@@ -464,7 +463,7 @@ Insert the import declaration above the workflow block and fill it out appropria
     ```groovy title="hello-containers.nf" linenums="3" hl_lines="5"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
-    include { convertToUpper } from './modules/convertToUpper.nf'
+    include { translateGreeting } from './modules/translateGreeting.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
     include { cowpy } from './modules/cowpy.nf'
     ```
@@ -474,7 +473,7 @@ Insert the import declaration above the workflow block and fill it out appropria
     ```groovy title="hello-containers.nf" linenums="3"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
-    include { convertToUpper } from './modules/convertToUpper.nf'
+    include { translateGreeting } from './modules/translateGreeting.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
     ```
 
@@ -491,36 +490,36 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-containers.nf" linenums="19" hl_lines="12-13"
+    ```groovy title="hello-containers.nf" linenums="20" hl_lines="12-13"
         main:
         // create a channel for inputs from a CSV file
-        greeting_ch = channel.fromPath(params.input)
+        name_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { row -> row[0] }
         // emit a greeting
-        sayHello(greeting_ch)
-        // convert the greeting to uppercase
-        convertToUpper(sayHello.out)
+        sayHello(name_ch)
+        // translate the greeting
+        translateGreeting(sayHello.out, params.language)
         // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect(), params.batch)
+        collectGreetings(translateGreeting.out.collect(), params.batch)
         // generate ASCII art of the greetings with cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Before"
 
-    ```groovy title="hello-containers.nf" linenums="19"
+    ```groovy title="hello-containers.nf" linenums="20"
         main:
         // create a channel for inputs from a CSV file
-        greeting_ch = channel.fromPath(params.input)
+        name_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { row -> row[0] }
         // emit a greeting
-        sayHello(greeting_ch)
-        // convert the greeting to uppercase
-        convertToUpper(sayHello.out)
+        sayHello(name_ch)
+        // translate the greeting
+        translateGreeting(sayHello.out, params.language)
         // collect all the greetings into one file
-        collectGreetings(convertToUpper.out.collect(), params.batch)
+        collectGreetings(translateGreeting.out.collect(), params.batch)
     ```
 
 Notice that we declared a new CLI parameter, `params.character`, in order to specify which character we want to have say the greetings.
@@ -531,12 +530,13 @@ Declare the new parameter in the `params` block of the workflow script:
 
 === "After"
 
-    ```groovy title="hello-containers.nf" linenums="9" hl_lines="7"
+    ```groovy title="hello-containers.nf" linenums="9" hl_lines="8"
     /*
      * Pipeline parameters
      */
     params {
         input: Path
+        language: String
         batch: String
         character: String
     }
@@ -550,19 +550,21 @@ Declare the new parameter in the `params` block of the workflow script:
      */
     params {
         input: Path
+        language: String
         batch: String
     }
     ```
 
-Then, as you did for `batch` in Part 4, set its default value in the `params` section of `nextflow.config`:
+Then, as you did for `language` and `batch` in Part 4, set its default value in the `params` section of `nextflow.config`:
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="3" hl_lines="6"
+    ```groovy title="nextflow.config" linenums="3" hl_lines="7"
     /*
      * Pipeline parameters
      */
     params {
+        language = 'french'
         batch = 'batch'
         character = 'turkey'
     }
@@ -575,6 +577,7 @@ Then, as you did for `batch` in Part 4, set its default value in the `params` se
      * Pipeline parameters
      */
     params {
+        language = 'french'
         batch = 'batch'
     }
     ```
@@ -592,10 +595,10 @@ In the `workflow` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-containers.nf" linenums="34" hl_lines="6"
+    ```groovy title="hello-containers.nf" linenums="35" hl_lines="6"
         publish:
         first_output = sayHello.out
-        uppercased = convertToUpper.out
+        translated = translateGreeting.out
         collected = collectGreetings.out.outfile
         batch_report = collectGreetings.out.report
         cowpy_art = cowpy.out
@@ -603,10 +606,10 @@ In the `workflow` block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-containers.nf" linenums="34"
+    ```groovy title="hello-containers.nf" linenums="35"
         publish:
         first_output = sayHello.out
-        uppercased = convertToUpper.out
+        translated = translateGreeting.out
         collected = collectGreetings.out.outfile
         batch_report = collectGreetings.out.report
     ```
@@ -628,12 +631,12 @@ In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-containers.nf" linenums="42" hl_lines="14-17"
+    ```groovy title="hello-containers.nf" linenums="43" hl_lines="14-17"
     output {
         first_output {
             path "${params.batch}/intermediates"
         }
-        uppercased {
+        translated {
             path "${params.batch}/intermediates"
         }
         collected {
@@ -651,12 +654,12 @@ In the `output` block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-containers.nf" linenums="42"
+    ```groovy title="hello-containers.nf" linenums="43"
     output {
         first_output {
             path "${params.batch}/intermediates"
         }
-        uppercased {
+        translated {
             path "${params.batch}/intermediates"
         }
         collected {
@@ -695,10 +698,10 @@ nextflow run hello-containers.nf -profile test -resume
     Launching `hello-containers.nf` [lonely_woese] revision: abf1dccf7f
 
     executor >  local (1)
-    [c9/f5c686] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔
-    [7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔
-    [9b/02e776] cowpy              | 0 of 1 ✘
+    [4e/d03419] sayHello (3)          | 3 of 3, cached: 3 ✔
+    [f0/30dce5] translateGreeting (3) | 3 of 3, cached: 3 ✔
+    [18/512341] collectGreetings      | 1 of 1, cached: 1 ✔
+    [34/2cfe5f] cowpy                 | 0 of 1 ✘
     ERROR ~ Error executing process > 'cowpy'
 
     Caused by:
@@ -719,7 +722,7 @@ nextflow run hello-containers.nf -profile test -resume
       .command.sh: line 2: cowpy: command not found
 
     Work dir:
-      /workspaces/training/hello-nextflow/work/9b/02e7761db848f82db3c3e59ff3a9b6
+      /workspaces/training/hello-nextflow/work/34/2cfe5fad2d498185331192b69e95b4
 
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 
@@ -826,24 +829,24 @@ nextflow run hello-containers.nf -profile test -resume
     Launching `hello-containers.nf` [drunk_perlman] revision: abf1dccf7f
 
     executor >  local (1)
-    [c9/f5c686] sayHello (3)       | 3 of 3, cached: 3 ✔
-    [ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔
-    [7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔
-    [98/656c6c] cowpy              | 1 of 1 ✔
+    [4e/d03419] sayHello (3)          | 3 of 3, cached: 3 ✔
+    [f0/30dce5] translateGreeting (3) | 3 of 3, cached: 3 ✔
+    [18/512341] collectGreetings      | 1 of 1, cached: 1 ✔
+    [68/3e4d74] cowpy                 | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - batch/intermediates/Bonjour-output.txt
-        - batch/intermediates/Hola-output.txt
-        - batch/intermediates/Hello-output.txt
+        - batch/intermediates/Celine-output.txt
+        - batch/intermediates/Mateo-output.txt
+        - batch/intermediates/Andrea-output.txt
 
-      uppercased:
-        - batch/intermediates/UPPER-Hola-output.txt
-        - batch/intermediates/UPPER-Bonjour-output.txt
-        - batch/intermediates/UPPER-Hello-output.txt
+      translated:
+        - batch/intermediates/french-Celine-output.txt
+        - batch/intermediates/french-Andrea-output.txt
+        - batch/intermediates/french-Mateo-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
@@ -863,13 +866,13 @@ The final output is a real file, while the others are symbolic links.
     ├── batch-report.txt -> /workspaces/training/hello-nextflow/work/.../batch-report.txt
     ├── cowpy-COLLECTED-batch-output.txt
     └── intermediates
-        ├── Bonjour-output.txt -> /workspaces/training/hello-nextflow/work/.../Bonjour-output.txt
+        ├── Andrea-output.txt -> /workspaces/training/hello-nextflow/work/.../Andrea-output.txt
+        ├── Celine-output.txt -> /workspaces/training/hello-nextflow/work/.../Celine-output.txt
         ├── COLLECTED-batch-output.txt -> /workspaces/training/hello-nextflow/work/.../COLLECTED-batch-output.txt
-        ├── Hello-output.txt -> /workspaces/training/hello-nextflow/work/.../Hello-output.txt
-        ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/.../Hola-output.txt
-        ├── UPPER-Bonjour-output.txt -> /workspaces/training/hello-nextflow/work/.../UPPER-Bonjour-output.txt
-        ├── UPPER-Hello-output.txt -> /workspaces/training/hello-nextflow/work/.../UPPER-Hello-output.txt
-        └── UPPER-Hola-output.txt -> /workspaces/training/hello-nextflow/work/.../UPPER-Hola-output.txt
+        ├── french-Andrea-output.txt -> /workspaces/training/hello-nextflow/work/.../french-Andrea-output.txt
+        ├── french-Celine-output.txt -> /workspaces/training/hello-nextflow/work/.../french-Celine-output.txt
+        ├── french-Mateo-output.txt -> /workspaces/training/hello-nextflow/work/.../french-Mateo-output.txt
+        └── Mateo-output.txt -> /workspaces/training/hello-nextflow/work/.../Mateo-output.txt
     ```
 
 The final ASCII art output is in the `results/batch/` directory, under the name `cowpy-COLLECTED-batch-output.txt`.
@@ -877,11 +880,11 @@ The final ASCII art output is in the `results/batch/` directory, under the name 
 ??? abstract "File contents"
 
     ```console title="results/batch/cowpy-COLLECTED-batch-output.txt"
-     _________
-    / BONJOUR \
-    | HOLA    |
-    \ HELLO   /
-     ---------
+     __________________
+    / Bonjour, Mateo!  \
+    | Bonjour, Andrea! |
+    \ Bonjour, Celine! /
+     ------------------
       \                                  ,+*^^*+___+++_
        \                           ,*^^^^              )
         \                       _+*                     ^**+_
@@ -905,21 +908,21 @@ The final ASCII art output is in the `results/batch/` directory, under the name 
                           ^^^ ^^ ^^^ ^
     ```
 
-And there it is, our beautiful turkey saying the greetings as desired.
+And there it is, our beautiful turkey saying the translated greetings as desired.
 
 #### 2.3.4. Inspect how Nextflow launched the containerized task
 
 As a final coda to this section, let's take a look at the work subdirectory for one of the `cowpy` process calls to get a bit more insight on how Nextflow works with containers under the hood.
 
 Check the output from your `nextflow run` command to find the path to the work subdirectory for the `cowpy` process.
-Looking at what we got for the run shown above, the console log line for the `cowpy` process starts with `[98/656c6c]`.
-That corresponds to the following truncated directory path: `work/98/656c6c`.
+Looking at what we got for the run shown above, the console log line for the `cowpy` process starts with `[68/3e4d74]`.
+That corresponds to the following truncated directory path: `work/68/3e4d74`.
 
 In that directory, you will find the `.command.run` file that contains all the commands Nextflow ran on your behalf in the course of executing the pipeline.
 
 ??? abstract "File contents"
 
-    ```console title="work/98/656c6c90cce1667c094d880f4b6dcc/.command.run"
+    ```console title="work/68/3e4d74bb763048510ec5d66a80440a/.command.run"
     #!/bin/bash
     ### ---
     ### name: 'cowpy'
@@ -1012,7 +1015,7 @@ In that directory, you will find the `.command.run` file that contains all the c
         local exit_status=${nxf_main_ret:=0}
         [[ ${exit_status} -eq 0 && ${nxf_unstage_ret:=0} -ne 0 ]] && exit_status=${nxf_unstage_ret:=0}
         [[ ${exit_status} -eq 0 && ${last_err} -ne 0 ]] && exit_status=${last_err}
-        printf -- $exit_status > /workspaces/training/hello-nextflow/work/98/656c6c90cce1667c094d880f4b6dcc/.exitcode
+        printf -- $exit_status > /workspaces/training/hello-nextflow/work/68/3e4d74bb763048510ec5d66a80440a/.exitcode
         set +u
         docker rm $NXF_BOXID &>/dev/null || true
         exit $exit_status
@@ -1024,14 +1027,14 @@ In that directory, you will find the `.command.run` file that contains all the c
     }
 
     nxf_launch() {
-        docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/98/656c6c90cce1667c094d880f4b6dcc/.command.sh
+        docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/68/3e4d74bb763048510ec5d66a80440a/.command.sh
     }
 
     nxf_stage() {
         true
         # stage input files
         rm -f COLLECTED-batch-output.txt
-        ln -s /workspaces/training/hello-nextflow/work/7f/f435e3f2cf95979b5f3d7647ae6696/COLLECTED-batch-output.txt COLLECTED-batch-output.txt
+        ln -s /workspaces/training/hello-nextflow/work/18/512341a0581c1627808b98bfa9d543/COLLECTED-batch-output.txt COLLECTED-batch-output.txt
     }
 
     nxf_unstage_outputs() {
@@ -1059,7 +1062,7 @@ In that directory, you will find the `.command.run` file that contains all the c
         export NXF_BOXID="nxf-$(dd bs=18 count=1 if=/dev/urandom 2>/dev/null | base64 | tr +/ 0A | tr -d '\r\n')"
         NXF_SCRATCH=''
         [[ $NXF_DEBUG > 0 ]] && nxf_env
-        touch /workspaces/training/hello-nextflow/work/98/656c6c90cce1667c094d880f4b6dcc/.command.begin
+        touch /workspaces/training/hello-nextflow/work/68/3e4d74bb763048510ec5d66a80440a/.command.begin
         set +u
         set -u
         [[ $NXF_SCRATCH ]] && cd $NXF_SCRATCH
@@ -1080,7 +1083,7 @@ If you search for `nxf_launch` in this file, you should see something like this:
 
 ```console
 nxf_launch() {
-    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/98/656c6c90cce1667c094d880f4b6dcc/.command.sh
+    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/68/3e4d74bb763048510ec5d66a80440a/.command.sh
 }
 ```
 
@@ -1229,4 +1232,14 @@ What does Nextflow automatically handle when running a process in a container? (
 - [x] Cleaning up the container instance after execution
 
 Learn more: [2.3.4. Inspect how Nextflow launched the containerized task](#234-inspect-how-nextflow-launched-the-containerized-task)
+</quiz>
+
+<quiz>
+What happens when a process declares both a `container` and a `conda` directive?
+- [ ] Nextflow runs the process twice, once with each
+- [ ] Nextflow fails with an error
+- [x] Nextflow uses whichever one matches the software packaging technology enabled in the configuration
+- [ ] The `conda` directive always takes precedence
+
+Learn more: [2.4. Add a Conda package as an alternative](#24-add-a-conda-package-as-an-alternative)
 </quiz>

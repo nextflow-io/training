@@ -36,7 +36,7 @@ You will take away the skills and confidence to start developing and running you
 
 This course is designed to be hands-on, with goal-oriented exercises structured to introduce information gradually.
 
-In [Nextflow Run](../nextflow_run/index.md), you ran the finished Hello pipeline: it reads greetings from a CSV file, converts them to uppercase, collects them into a single file, and turns the result into ASCII art.
+In [Nextflow Run](../nextflow_run/index.md), you ran the finished Hello pipeline: it reads names from a CSV file, greets each one, translates the greetings into another language, collects them into a single file, and turns the result into ASCII art.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
@@ -51,9 +51,9 @@ Each part adds a piece of the pipeline, and focuses on the Nextflow concepts nee
 
 | Course chapter | What you add | Estimated duration |
 | --- | --- | --- |
-| [Part 1: Hello World](./01_hello_world.md) | The `sayHello` process, with a greeting provided on the command line: processes, workflows, publishing outputs and parameters | 30 mins |
-| [Part 2: Hello Channels](./02_hello_channels.md) | Reading the greetings from a CSV file: channels, operators and parallel execution | 45 mins |
-| [Part 3: Hello Workflow](./03_hello_workflow.md) | The `convertToUpper` and `collectGreetings` steps: connecting processes with channels, and handling multiple inputs and outputs | 60 mins |
+| [Part 1: Hello World](./01_hello_world.md) | The `sayHello` process, greeting a name provided on the command line: processes, workflows, publishing outputs and parameters | 30 mins |
+| [Part 2: Hello Channels](./02_hello_channels.md) | Reading the names from a CSV file: channels, operators and parallel execution | 45 mins |
+| [Part 3: Hello Workflow](./03_hello_workflow.md) | The `translateGreeting` and `collectGreetings` steps: connecting processes with channels, writing a process in Python, and handling multiple inputs and outputs | 60 mins |
 | [Part 4: Hello Modules](./04_hello_modules.md) | Modules for each process, and parameter values in the configuration: organizing code for reuse and maintenance | 30 mins |
 | [Part 5: Hello Containers](./05_hello_containers.md) | The `cowpy` step: running a process in a container | 60 mins |
 
