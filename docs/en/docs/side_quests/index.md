@@ -10,6 +10,7 @@ additional_information:
     - Set up and configure a productive Nextflow development environment
     - Apply advanced scripting patterns for complex data transformations
     - Handle and propagate metadata through multi-step workflows
+    - Give data and interfaces declared types with static typing and records
     - Split and group data channels for parallel and serial processing
     - Test Nextflow workflows using nf-test
     - Compose complex pipelines from reusable named workflow modules
@@ -48,6 +49,7 @@ Otherwise, feel free to dive straight into whichever quest calls to you.
 <tr><th colspan="3">Deep Dives into Dataflow</th></tr>
 <tr><td><a href="./working_with_files/">File Input Processing</a></td><td>File handling, path operations, and organizing outputs</td><td>45 mins</td></tr>
 <tr><td><a href="./metadata/">Metadata and Meta Maps</a></td><td>Using metadata maps to track and propagate sample information</td><td>45 mins</td></tr>
+<tr><td><a href="./types_and_records/">Types and Records</a></td><td>Static typing and records for data with a declared, checkable shape</td><td>1 hour</td></tr>
 <tr><td><a href="./splitting_and_grouping/">Splitting and Grouping</a></td><td>Techniques for splitting and regrouping data channels</td><td>45 mins</td></tr>
 <tr><th colspan="3">Modular Architecture in Action</th></tr>
 <tr><td><a href="./workflows_of_workflows/">Workflows of Workflows</a></td><td>Composing complex pipelines from reusable named workflow modules</td><td>30 mins</td></tr>
