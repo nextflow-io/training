@@ -10,24 +10,14 @@
 :green_book: The video transcript is available [here](./transcripts/01_hello_world.md).
 ///
 
-In [Nextflow Run](../nextflow_run/index.md), you ran the finished Hello pipeline: it reads greetings from a CSV file, converts them to uppercase, collects them into a single file, and turns the result into ASCII art.
+In this course, you write the Hello pipeline you ran in [Nextflow Run](../nextflow_run/index.md), one piece at a time; see the [course overview](./index.md) for the plan.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
-In this course, you write that pipeline yourself.
-You start from a script that does a single thing, writing 'Hello World!' to a file, and add one piece at a time:
-
-| Part                                                 | What you add                                                               |
-| ---------------------------------------------------- | -------------------------------------------------------------------------- |
-| Part 1: Hello World                                  | The `sayHello` process, with a greeting provided on the command line       |
-| [Part 2: Hello Channels](./02_hello_channels.md)     | Channels and operators, to read the greetings from a CSV file              |
-| [Part 3: Hello Workflow](./03_hello_workflow.md)     | The `convertToUpper` and `collectGreetings` steps, connected with channels |
-| [Part 4: Hello Modules](./04_hello_modules.md)       | Modules, to organize the code into reusable files                          |
-| [Part 5: Hello Containers](./05_hello_containers.md) | The `cowpy` step, which runs in a container                                |
-
-In this first part, you examine and run the starting script, publish its output, and make the greeting configurable from the command line.
+In this first part, you start from a script that does a single thing, writing 'Hello World!' to a file.
+You examine and run it, publish its output, and make the greeting configurable from the command line.
 
 ---
 
