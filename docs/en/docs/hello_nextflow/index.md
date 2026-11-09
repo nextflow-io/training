@@ -14,8 +14,9 @@ additional_information:
         - Distinguish between essential types of channel factories and operators and utilize them effectively in a simple workflow
         - Apply best practices for reproducibility, portability and code re-use that make pipelines FAIR, including code modularity and software containers
     audience_prerequisites:
-        - "**Audience:** This course is designed for learners who are completely new to Nextflow and want to develop their own pipelines."
+        - "**Audience:** This course is designed for learners who are new to developing Nextflow pipelines and want to write their own."
         - "**Skills:** Some familiarity with the command line, basic scripting concepts and common file formats is assumed."
+        - "**Courses:** Must have completed [Nextflow Run](../nextflow_run/index.md), which this course builds on."
         - "**Domain:** The exercises are all domain-agnostic, so no prior scientific knowledge is required."
     videos_playlist: https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n
 ---
@@ -24,7 +25,7 @@ additional_information:
 
 **Hello Nextflow is a hands-on introduction to building reproducible and scalable data analysis workflows.**
 
-Working through practical examples and guided exercises, you will learn the fundamentals of developing pipelines with Nextflow, including how to define processes, connect them into pipelines, manage files and software dependencies, parallelize execution effortlessly, and run workflows across different computing environments.
+Working through practical examples and guided exercises, you will learn the fundamentals of developing pipelines with Nextflow, including how to define processes, connect them into pipelines, manage files and software dependencies, and parallelize execution effortlessly.
 
 You will take away the skills and confidence to start developing and running your own workflows with Nextflow.
 
@@ -34,19 +35,26 @@ You will take away the skills and confidence to start developing and running you
 
 This course is designed to be hands-on, with goal-oriented exercises structured to introduce information gradually.
 
-You will develop a simple Nextflow pipeline that takes some text inputs, runs a few transformation steps, and outputs a single text file containing an ASCII picture of a character saying the transformed text.
+In [Nextflow Run](../nextflow_run/index.md), you ran the finished Hello pipeline: it reads greetings from a CSV file, converts them to uppercase, collects them into a single file, and turns the result into ASCII art.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
+</figure>
+
+In this course, you write that pipeline yourself.
+You start from a script that does a single thing, writing 'Hello World!' to a file, and add one piece at a time.
 
 ### Lesson plan
 
-In order to avoid overwhelming you with concepts and code, we've broken this down into five parts that will each focus on specific aspects of developing pipelines with Nextflow.
+Each part adds a piece of the pipeline, and focuses on the Nextflow concepts needed to build it.
 
-| Course chapter                                       | Summary                                                                                          | Estimated duration |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------ |
-| [Part 1: Hello World](./01_hello_world.md)           | Basic components and principles involved in assembling and running a Nextflow workflow           | 30 mins            |
-| [Part 2: Hello Channels](./02_hello_channels.md)     | Using channels and operators for processing inputs and parallelizing execution effortlessly      | 45 mins            |
-| [Part 3: Hello Workflow](./03_hello_workflow.md)     | Using channels to chain multiple steps together and handle transfer of data between steps        | 60 mins            |
-| [Part 4: Hello Modules](./04_hello_modules.md)       | Applying code modularity principles to increase reusability and decrease maintenance burden      | 20 mins            |
-| [Part 5: Hello Containers](./05_hello_containers.md) | Using containers as a mechanism for managing software dependencies and increase reproducibility  | 60 mins            |
+| Course chapter | What you add | Estimated duration |
+| --- | --- | --- |
+| [Part 1: Hello World](./01_hello_world.md) | The `sayHello` process, with a greeting provided on the command line: processes, workflows, publishing outputs and parameters | 30 mins |
+| [Part 2: Hello Channels](./02_hello_channels.md) | Reading the greetings from a CSV file: channels, operators and parallel execution | 45 mins |
+| [Part 3: Hello Workflow](./03_hello_workflow.md) | The `convertToUpper` and `collectGreetings` steps: connecting processes with channels, and handling multiple inputs and outputs | 60 mins |
+| [Part 4: Hello Modules](./04_hello_modules.md) | Modules for each process, and parameter values in the configuration: organizing code for reuse and maintenance | 30 mins |
+| [Part 5: Hello Containers](./05_hello_containers.md) | The `cowpy` step: running a process in a container | 60 mins |
 
 By the end of this course, you will be well-prepared for tackling the next steps in your journey to develop reproducible workflows for your scientific computing needs.
 
