@@ -373,7 +373,10 @@ In the process block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-world.nf" linenums="6" hl_lines="3-4"
+    ```groovy title="hello-world.nf" linenums="3" hl_lines="2 6-7"
+    /*
+     * Use echo to print a greeting to a file
+     */
     process sayHello {
 
         input:
@@ -385,7 +388,10 @@ In the process block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-world.nf" linenums="6"
+    ```groovy title="hello-world.nf" linenums="3" hl_lines="2"
+    /*
+     * Use echo to print 'Hello World!' to a file
+     */
     process sayHello {
 
         output:
@@ -393,6 +399,7 @@ In the process block, make the following code change:
     ```
 
 The `name` variable is prefixed by `val` to tell Nextflow it's a value (not a path).
+We also update the comment above the process, since it will no longer always print 'Hello World!'.
 
 #### 3.1.2. Edit the process command to use the input variable
 
@@ -742,6 +749,8 @@ Run the workflow and check where the file ends up.
       first_output: greetings/output.txt
     ```
 
+    The `output.txt` at the top level of `results/` is left over from earlier runs: Nextflow does not delete files published by previous runs.
+
 ---
 
 ## Quiz
@@ -812,6 +821,8 @@ How do you reference a variable inside a Nextflow script block?
 - [x] Use `#!groovy ${variable}` syntax
 - [ ] Use `{{variable}}` syntax
 - [ ] Use `[variable]` syntax
+
+Learn more: [3.1.2. Edit the process command to use the input variable](#312-edit-the-process-command-to-use-the-input-variable)
 </quiz>
 
 <quiz>

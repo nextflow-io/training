@@ -129,7 +129,7 @@ Copy the whole process definition over from the workflow file to the module file
 
 ```groovy title="modules/sayHello.nf" linenums="1"
 /*
- * Use echo to print 'Hello World!' to a file
+ * Use echo to print a greeting to a file
  */
 process sayHello {
 
@@ -717,12 +717,12 @@ Then run the workflow with both the `test` and `spanish` profiles, and check tha
     ```
 
     ```console title="Command output"
-     N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.04.4
 
     Launching `hello-modules.nf` [sick_lamarr] revision: 6024dbeca6
 
     executor >  local (4)
-    [cc/421316] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [7f/186e62] sayHello (2)          | 3 of 3, cached: 3 ✔
     [f5/9d95df] translateGreeting (3) | 3 of 3 ✔
     [83/bb51f1] collectGreetings      | 1 of 1 ✔
 
@@ -790,13 +790,13 @@ modules
     ```
 
     ```console title="Command output"
-     N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.04.4
 
     Launching `hello-modules.nf` [compassionate_lavoisier] revision: 1a860c4bd9
 
-    [46/7b33a5] sayHello (3)          | 3 of 3, cached: 3 ✔
-    [5c/4b0005] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [81/055f3d] collectGreetings      | 1 of 1, cached: 1 ✔
+    [7f/186e62] sayHello (2)          | 3 of 3, cached: 3 ✔
+    [be/ce8eb4] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [d1/9029f2] collectGreetings      | 1 of 1, cached: 1 ✔
 
     Outputs:
 

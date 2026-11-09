@@ -1,5 +1,5 @@
 /*
- * Use echo to print 'Hello World!' to a file
+ * Use echo to print a greeting to a file
  */
 process sayHello {
 

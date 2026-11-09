@@ -311,7 +311,7 @@ Let's make them `'Mateo'`, `'Andrea'` and `'Celine'`.
 
 #### 2.1.1. Add more names
 
-Before the workflow block, make the following code change:
+In the workflow block, make the following code change:
 
 === "After"
 
@@ -412,7 +412,7 @@ Let's have a look in there.
     Hello, Celine!
     ```
 
-That's the greeting we got in the results directory, but where are the other two? What's going on?
+That's one of the three greetings, but where are the other two? What's going on?
 
 At this point, we need to tell you that by default, the ANSI logging system writes the logging from multiple calls to the same process on the same line.
 So the status from all three calls to the `sayHello()` process are landing in the same spot.
@@ -1092,8 +1092,8 @@ In the workflow block, make the following code change:
         // create a channel for inputs from a CSV file
         name_ch = channel.fromPath(params.input)
                             .view { names -> "Before flatten: $names" }
-                             // .flatten()
-                             // .view { name -> "After flatten: $name" }
+                            // .flatten()
+                            // .view { name -> "After flatten: $name" }
         // emit a greeting
         sayHello(name_ch)
 
@@ -1104,7 +1104,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="4-8"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="4-10"
     workflow {
 
         main:
@@ -1216,8 +1216,8 @@ In the workflow block, make the following code change to replace `flatten()` wit
         // create a channel for inputs from a CSV file
         name_ch = channel.fromPath(params.input)
                             .view { names -> "Before flatten: $names" }
-                             // .flatten()
-                             // .view { name -> "After flatten: $name" }
+                            // .flatten()
+                            // .view { name -> "After flatten: $name" }
         // emit a greeting
         sayHello(name_ch)
 
@@ -1427,6 +1427,7 @@ When you're ready, move on to [**Part 3: Hello Workflow**](./03_hello_workflow.m
 These optional exercises let you practice what you learned in this part.
 Each one can be solved with what this part covered; open the hint if you get stuck.
 The solutions are also in `solutions/2-hello-channels/bonus/`.
+To run the solution to Exercise 1 directly, add `--input solutions/2-hello-channels/bonus/names-header.csv` to the command.
 
 ### Exercise 1: Read a CSV file with a header row
 
@@ -1487,7 +1488,7 @@ The workflow should still greet the same three names.
 
 ### Exercise 2: Greet only the French names
 
-Starting from `hello-channels.nf` as you left it at the end of this part, change the workflow so that it only greets the names whose language, in the second column of `data/names.csv`, is `french`.
+Starting from `hello-channels.nf` as you left it at the end of section 4, without the changes from Exercise 1, change the workflow so that it only greets the names whose language, in the second column of `data/names.csv`, is `french`.
 Only one greeting file should be produced.
 
 ??? tip "Hint"
