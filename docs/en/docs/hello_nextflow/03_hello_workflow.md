@@ -171,7 +171,7 @@ In the workflow block, make the following code change:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
-                            .map { line -> line[0] }
+                            .map { row -> row[0] }
         // emit a greeting
         sayHello(greeting_ch)
         // convert the greeting to uppercase
@@ -191,7 +191,7 @@ In the workflow block, make the following code change:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
-                            .map { line -> line[0] }
+                            .map { row -> row[0] }
         // emit a greeting
         sayHello(greeting_ch)
 
