@@ -49,6 +49,7 @@ nav:
       - hello_nextflow/03_hello_workflow.md
       - hello_nextflow/04_hello_modules.md
       - hello_nextflow/05_hello_containers.md
+      - hello_nextflow/challenges.md
       - hello_nextflow/next_steps.md
       - hello_nextflow/survey.md
   - Build with nf-core:

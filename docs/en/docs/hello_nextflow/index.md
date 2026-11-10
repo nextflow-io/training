@@ -57,6 +57,8 @@ Each part adds a piece of the pipeline, and focuses on the Nextflow concepts nee
 | [Part 4: Hello Modules](./04_hello_modules.md) | Modules for each process, and parameter values in the configuration: organizing code for reuse and maintenance | 30 mins |
 | [Part 5: Hello Containers](./05_hello_containers.md) | The `cowpy` step: running a process in a container | 60 mins |
 
+After Part 5, the optional [Challenges](./challenges.md) apply the Hello pipeline to Nextflow features that the course does not cover.
+
 By the end of this course, you will be well-prepared for tackling the next steps in your journey to develop reproducible workflows for your scientific computing needs.
 
 Ready to take the course?
