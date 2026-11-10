@@ -33,7 +33,7 @@ workflow {
     cowpy(collectGreetings.out.outfile, params.character)
 
     publish:
-    first_output = sayHello.out
+    greetings = sayHello.out
     translated = translateGreeting.out
     collected = collectGreetings.out.outfile
     batch_report = collectGreetings.out.report
@@ -41,7 +41,7 @@ workflow {
 }
 
 output {
-    first_output {
+    greetings {
         path "${params.batch}/intermediates"
     }
     translated {

@@ -21,11 +21,11 @@ workflow {
     sayHello()
 
     publish:
-    first_output = sayHello.out
+    greetings = sayHello.out
 }
 
 output {
-    first_output {
+    greetings {
         path '.'
     }
 }

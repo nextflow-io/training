@@ -9,11 +9,11 @@ process sayHello {
     val name
 
     output:
-    path "${name}-output.txt"
+    path "${name}.txt"
 
     script:
     """
-    echo 'Hello, ${name}!' > '${name}-output.txt'
+    echo 'Hello, ${name}!' > '${name}.txt'
     """
 }
 
@@ -32,18 +32,18 @@ workflow {
                         .view { csv -> "Before splitCsv: $csv" }
                         .splitCsv()
                         .view { row -> "After splitCsv: $row" }
-                        .filter { row -> row[1] == 'french' }
+                        .filter { row -> row[1] == 'fr' }
                         .map { row -> row[0] }
                         .view { name -> "After map: $name" }
     // emit a greeting
     sayHello(name_ch)
 
     publish:
-    first_output = sayHello.out
+    greetings = sayHello.out
 }
 
 output {
-    first_output {
+    greetings {
         path '.'
     }
 }

@@ -9,11 +9,11 @@ process sayHello {
     val name
 
     output:
-    path "${name}-output.txt"
+    path "${name}.txt"
 
     script:
     """
-    echo 'Hello, ${name}!' > '${name}-output.txt'
+    echo 'Hello, ${name}!' > '${name}.txt'
     """
 }
 
@@ -26,7 +26,7 @@ process translateGreeting {
     path input_file
 
     output:
-    path "spanish-${input_file}"
+    path "es-${input_file}"
 
     script:
     """
@@ -35,7 +35,7 @@ process translateGreeting {
     with open('${input_file}') as greeting_file:
         greeting = greeting_file.read()
 
-    with open('spanish-${input_file}', 'w') as translated_file:
+    with open('es-${input_file}', 'w') as translated_file:
         translated_file.write(greeting.replace('Hello', 'Hola'))
     """
 }
@@ -60,12 +60,12 @@ workflow {
     translateGreeting(sayHello.out)
 
     publish:
-    first_output = sayHello.out
+    greetings = sayHello.out
     translated = translateGreeting.out
 }
 
 output {
-    first_output {
+    greetings {
         path '.'
     }
     translated {

@@ -63,17 +63,17 @@ nextflow run hello-containers.nf -profile test
 
       /workspaces/training/hello-nextflow/results
 
-      first_output:
-        - batch/intermediates/Andrea-output.txt
-        - batch/intermediates/Celine-output.txt
-        - batch/intermediates/Mateo-output.txt
+      greetings:
+        - batch/intermediates/Andrea.txt
+        - batch/intermediates/Celine.txt
+        - batch/intermediates/Mateo.txt
 
       translated:
-        - batch/intermediates/spanish-Celine-output.txt
-        - batch/intermediates/spanish-Andrea-output.txt
-        - batch/intermediates/spanish-Mateo-output.txt
+        - batch/intermediates/es-Celine.txt
+        - batch/intermediates/es-Andrea.txt
+        - batch/intermediates/es-Mateo.txt
 
-      collected: batch/intermediates/COLLECTED-batch-output.txt
+      collected: batch/intermediates/batch-greetings.txt
 
       batch_report: batch/batch-report.txt
     ```
@@ -86,13 +86,13 @@ As previously, you will find the output files under `results/batch/`.
     results/batch
     ├── batch-report.txt
     └── intermediates
-        ├── Andrea-output.txt
-        ├── Celine-output.txt
-        ├── COLLECTED-batch-output.txt
-        ├── Mateo-output.txt
-        ├── spanish-Andrea-output.txt
-        ├── spanish-Celine-output.txt
-        └── spanish-Mateo-output.txt
+        ├── Andrea.txt
+        ├── Celine.txt
+        ├── batch-greetings.txt
+        ├── Mateo.txt
+        ├── es-Andrea.txt
+        ├── es-Celine.txt
+        └── es-Mateo.txt
     ```
 
 If that worked for you, you're ready to learn how to use containers.
@@ -349,11 +349,11 @@ cat /my_project/data/names.csv | cowpy -c turkey
 ??? success "Command output"
 
     ```console
-     ________________________
-    / Mateo,spanish,squirrel \
-    | Andrea,italian,turtle  |
-    \ Celine,french,moose    /
-     ------------------------
+     ___________________
+    / Mateo,es,squirrel \
+    | Andrea,it,turtle  |
+    \ Celine,fr,moose   /
+     -------------------
       \                                  ,+*^^*+___+++_
        \                           ,*^^^^              )
         \                       _+*                     ^**+_
@@ -564,7 +564,7 @@ Then, as you did for `language` and `batch` in Part 4, set its default value in 
      * Pipeline parameters
      */
     params {
-        language = 'spanish'
+        language = 'es'
         batch = 'batch'
         character = 'turkey'
     }
@@ -577,7 +577,7 @@ Then, as you did for `language` and `batch` in Part 4, set its default value in 
      * Pipeline parameters
      */
     params {
-        language = 'spanish'
+        language = 'es'
         batch = 'batch'
     }
     ```
@@ -597,7 +597,7 @@ In the `workflow` block, make the following code change:
 
     ```groovy title="hello-containers.nf" linenums="35" hl_lines="6"
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
         translated = translateGreeting.out
         collected = collectGreetings.out.outfile
         batch_report = collectGreetings.out.report
@@ -608,7 +608,7 @@ In the `workflow` block, make the following code change:
 
     ```groovy title="hello-containers.nf" linenums="35"
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
         translated = translateGreeting.out
         collected = collectGreetings.out.outfile
         batch_report = collectGreetings.out.report
@@ -633,7 +633,7 @@ In the `output` block, make the following code change:
 
     ```groovy title="hello-containers.nf" linenums="43" hl_lines="14-17"
     output {
-        first_output {
+        greetings {
             path "${params.batch}/intermediates"
         }
         translated {
@@ -656,7 +656,7 @@ In the `output` block, make the following code change:
 
     ```groovy title="hello-containers.nf" linenums="43"
     output {
-        first_output {
+        greetings {
             path "${params.batch}/intermediates"
         }
         translated {
@@ -710,7 +710,7 @@ nextflow run hello-containers.nf -profile test -resume
 
     Command executed:
 
-      cat COLLECTED-batch-output.txt | cowpy -c "turkey" > cowpy-COLLECTED-batch-output.txt
+      cat batch-greetings.txt | cowpy -c "turkey" > cowpy-batch-greetings.txt
 
     Command exit status:
       127
@@ -724,9 +724,9 @@ nextflow run hello-containers.nf -profile test -resume
     Work dir:
       /workspaces/training/hello-nextflow/work/8c/1af075ac9cbfc62a1a129f4048e0d6
 
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Oh no, there's an error!
@@ -838,21 +838,21 @@ nextflow run hello-containers.nf -profile test -resume
 
       /workspaces/training/hello-nextflow/results
 
-      first_output:
-        - batch/intermediates/Mateo-output.txt
-        - batch/intermediates/Celine-output.txt
-        - batch/intermediates/Andrea-output.txt
+      greetings:
+        - batch/intermediates/Mateo.txt
+        - batch/intermediates/Celine.txt
+        - batch/intermediates/Andrea.txt
 
       translated:
-        - batch/intermediates/spanish-Mateo-output.txt
-        - batch/intermediates/spanish-Celine-output.txt
-        - batch/intermediates/spanish-Andrea-output.txt
+        - batch/intermediates/es-Mateo.txt
+        - batch/intermediates/es-Celine.txt
+        - batch/intermediates/es-Andrea.txt
 
-      collected: batch/intermediates/COLLECTED-batch-output.txt
+      collected: batch/intermediates/batch-greetings.txt
 
       batch_report: batch/batch-report.txt
 
-      cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
+      cowpy_art: batch/cowpy-batch-greetings.txt
     ```
 
 This time it does indeed work!
@@ -864,22 +864,22 @@ The final output is a real file, while the others are symbolic links.
     ```console
     results/batch
     ├── batch-report.txt -> /workspaces/training/hello-nextflow/work/.../batch-report.txt
-    ├── cowpy-COLLECTED-batch-output.txt
+    ├── cowpy-batch-greetings.txt
     └── intermediates
-        ├── Andrea-output.txt -> /workspaces/training/hello-nextflow/work/.../Andrea-output.txt
-        ├── Celine-output.txt -> /workspaces/training/hello-nextflow/work/.../Celine-output.txt
-        ├── COLLECTED-batch-output.txt -> /workspaces/training/hello-nextflow/work/.../COLLECTED-batch-output.txt
-        ├── Mateo-output.txt -> /workspaces/training/hello-nextflow/work/.../Mateo-output.txt
-        ├── spanish-Andrea-output.txt -> /workspaces/training/hello-nextflow/work/.../spanish-Andrea-output.txt
-        ├── spanish-Celine-output.txt -> /workspaces/training/hello-nextflow/work/.../spanish-Celine-output.txt
-        └── spanish-Mateo-output.txt -> /workspaces/training/hello-nextflow/work/.../spanish-Mateo-output.txt
+        ├── Andrea.txt -> /workspaces/training/hello-nextflow/work/.../Andrea.txt
+        ├── Celine.txt -> /workspaces/training/hello-nextflow/work/.../Celine.txt
+        ├── batch-greetings.txt -> /workspaces/training/hello-nextflow/work/.../batch-greetings.txt
+        ├── Mateo.txt -> /workspaces/training/hello-nextflow/work/.../Mateo.txt
+        ├── es-Andrea.txt -> /workspaces/training/hello-nextflow/work/.../es-Andrea.txt
+        ├── es-Celine.txt -> /workspaces/training/hello-nextflow/work/.../es-Celine.txt
+        └── es-Mateo.txt -> /workspaces/training/hello-nextflow/work/.../es-Mateo.txt
     ```
 
-The final ASCII art output is in the `results/batch/` directory, under the name `cowpy-COLLECTED-batch-output.txt`.
+The final ASCII art output is in the `results/batch/` directory, under the name `cowpy-batch-greetings.txt`.
 
 ??? abstract "File contents"
 
-    ```console title="results/batch/cowpy-COLLECTED-batch-output.txt"
+    ```console title="results/batch/cowpy-batch-greetings.txt"
      _______________
     / Hola, Celine! \
     | Hola, Andrea! |
@@ -928,7 +928,7 @@ In that directory, you will find the `.command.run` file that contains all the c
     ### name: 'cowpy'
     ### container: 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
     ### outputs:
-    ### - 'cowpy-COLLECTED-batch-output.txt'
+    ### - 'cowpy-batch-greetings.txt'
     ### ...
     set -e
     set -u
@@ -1033,8 +1033,8 @@ In that directory, you will find the `.command.run` file that contains all the c
     nxf_stage() {
         true
         # stage input files
-        rm -f COLLECTED-batch-output.txt
-        ln -s /workspaces/training/hello-nextflow/work/cf/2d11607ad44686cd28cef3c4f71d50/COLLECTED-batch-output.txt COLLECTED-batch-output.txt
+        rm -f batch-greetings.txt
+        ln -s /workspaces/training/hello-nextflow/work/cf/2d11607ad44686cd28cef3c4f71d50/batch-greetings.txt batch-greetings.txt
     }
 
     nxf_unstage_outputs() {
@@ -1209,7 +1209,7 @@ Run the workflow, then check the `.command.run` file of one of the `translateGre
     ### name: 'translateGreeting (2)'
     ### container: 'python:3.12-slim'
     ### outputs:
-    ### - 'spanish-Andrea-output.txt'
+    ### - 'es-Andrea.txt'
     ```
 
     Now both `translateGreeting` and `cowpy` run in containers, each with its own image.
@@ -1237,7 +1237,7 @@ Find out which other characters `cowpy` offers, pick one, and run the workflow s
 
     ```groovy title="nextflow.config" linenums="6" hl_lines="4"
     params {
-        language = 'spanish'
+        language = 'es'
         batch = 'batch'
         character = 'koala'
     }
@@ -1245,7 +1245,7 @@ Find out which other characters `cowpy` offers, pick one, and run the workflow s
 
     The ASCII art now shows a koala:
 
-    ```console title="results/batch/cowpy-COLLECTED-batch-output.txt"
+    ```console title="results/batch/cowpy-batch-greetings.txt"
      _______________
     / Hola, Andrea! \
     | Hola, Celine! |
@@ -1269,7 +1269,7 @@ Keep the collected file and the report as they are.
 ??? tip "Hint"
 
     Carry the character along with each greeting, in a tuple.
-    Map each CSV row to `[row[0], row[2]]`, declare process inputs like `tuple val(name), val(character)` and outputs like `tuple path("${name}-output.txt"), val(character)`, and call `cowpy` on the output of `translateGreeting` rather than on the collected file.
+    Map each CSV row to `[row[0], row[2]]`, declare process inputs like `tuple val(name), val(character)` and outputs like `tuple path("${name}.txt"), val(character)`, and call `cowpy` on the output of `translateGreeting` rather than on the collected file.
     Where only the file is needed, remove the character with `map`.
     If you did the challenge in Part 3, the same approach applies.
 
@@ -1295,7 +1295,7 @@ Keep the collected file and the report as they are.
         cowpy(translateGreeting.out)
 
         publish:
-        first_output = sayHello.out.map { greeting_file, _character -> greeting_file }
+        greetings = sayHello.out.map { greeting_file, _character -> greeting_file }
         translated = translateGreeting.out.map { greeting_file, _character -> greeting_file }
         collected = collectGreetings.out.outfile
         batch_report = collectGreetings.out.report
@@ -1314,7 +1314,7 @@ Keep the collected file and the report as they are.
         tuple val(name), val(character)
 
         output:
-        tuple path("${name}-output.txt"), val(character)
+        tuple path("${name}.txt"), val(character)
     ```
 
     ```groovy title="modules/translateGreeting.nf" linenums="6"
@@ -1354,29 +1354,29 @@ Keep the collected file and the report as they are.
 
           /workspaces/training/hello-nextflow/results
 
-          first_output:
-            - batch/intermediates/Mateo-output.txt
-            - batch/intermediates/Andrea-output.txt
-            - batch/intermediates/Celine-output.txt
+          greetings:
+            - batch/intermediates/Mateo.txt
+            - batch/intermediates/Andrea.txt
+            - batch/intermediates/Celine.txt
 
           translated:
-            - batch/intermediates/spanish-Mateo-output.txt
-            - batch/intermediates/spanish-Celine-output.txt
-            - batch/intermediates/spanish-Andrea-output.txt
+            - batch/intermediates/es-Mateo.txt
+            - batch/intermediates/es-Celine.txt
+            - batch/intermediates/es-Andrea.txt
 
-          collected: batch/intermediates/COLLECTED-batch-output.txt
+          collected: batch/intermediates/batch-greetings.txt
 
           batch_report: batch/batch-report.txt
 
           cowpy_art:
-            - batch/cowpy-spanish-Andrea-output.txt
-            - batch/cowpy-spanish-Celine-output.txt
-            - batch/cowpy-spanish-Mateo-output.txt
+            - batch/cowpy-es-Andrea.txt
+            - batch/cowpy-es-Celine.txt
+            - batch/cowpy-es-Mateo.txt
         ```
 
     `cowpy` now runs three times, once per name, and each file is drawn by that name's character:
 
-    ```console title="results/batch/cowpy-spanish-Mateo-output.txt"
+    ```console title="results/batch/cowpy-es-Mateo.txt"
      ______________
     < Hola, Mateo! >
      --------------
@@ -1392,7 +1392,7 @@ Keep the collected file and the report as they are.
           '---.~_ _ _|
     ```
 
-    ```console title="results/batch/cowpy-spanish-Andrea-output.txt"
+    ```console title="results/batch/cowpy-es-Andrea.txt"
      _______________
     < Hola, Andrea! >
      ---------------
@@ -1413,7 +1413,7 @@ Keep the collected file and the report as they are.
                              (_(___/                         \_____)_)
     ```
 
-    ```console title="results/batch/cowpy-spanish-Celine-output.txt"
+    ```console title="results/batch/cowpy-es-Celine.txt"
      _______________
     < Hola, Celine! >
      ---------------

@@ -9,11 +9,11 @@ process sayHello {
     val name
 
     output:
-    path "${name}-output.txt"
+    path "${name}.txt"
 
     script:
     """
-    echo 'Hello, ${name}!' > '${name}-output.txt'
+    echo 'Hello, ${name}!' > '${name}.txt'
     """
 }
 
@@ -32,16 +32,20 @@ process translateGreeting {
     script:
     """
     #!/usr/bin/env python3
+    import sys
 
     translations = {
-        'french': 'Bonjour',
-        'spanish': 'Hola',
-        'italian': 'Ciao',
-        'dutch': 'Hallo',
-        'arabic': 'Marhaban',
-        'japanese': 'Konnichiwa',
-        'english': 'Hello',
+        'es': 'Hola',        # Spanish
+        'fr': 'Bonjour',     # French
+        'it': 'Ciao',        # Italian
+        'nl': 'Hallo',       # Dutch
+        'ar': 'Marhaban',    # Arabic
+        'ja': 'Konnichiwa',  # Japanese
+        'en': 'Hello',       # English
     }
+
+    if '${language}' not in translations:
+        sys.exit('Unsupported language code: ${language}')
 
     with open('${input_file}') as greeting_file:
         greeting = greeting_file.read()
@@ -56,7 +60,7 @@ process translateGreeting {
  */
 params {
     input: Path = 'data/names.csv'
-    language: String = 'spanish'
+    language: String = 'es'
 }
 
 workflow {
@@ -72,12 +76,12 @@ workflow {
     translateGreeting(sayHello.out, params.language)
 
     publish:
-    first_output = sayHello.out
+    greetings = sayHello.out
     translated = translateGreeting.out
 }
 
 output {
-    first_output {
+    greetings {
         path '.'
     }
     translated {
