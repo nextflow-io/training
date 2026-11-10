@@ -1,10 +1,10 @@
 #!/usr/bin/env nextflow
 
 // Include modules
-include { sayHello } from './modules/sayHello.nf'
-include { translateGreeting } from './modules/translateGreeting.nf'
-include { collectGreetings } from './modules/collectGreetings.nf'
-include { cowpy } from './modules/cowpy.nf'
+include { sayHello } from './challenge-modules/sayHello.nf'
+include { translateGreeting } from './challenge-modules/translateGreeting.nf'
+include { collectGreetings } from './challenge-modules/collectGreetings.nf'
+include { cowpy } from './challenge-modules/cowpy.nf'
 
 /*
  * Pipeline parameters
