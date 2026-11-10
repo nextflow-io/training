@@ -15,16 +15,20 @@ process translateGreeting {
     script:
     """
     #!/usr/bin/env python3
+    import sys
 
     translations = {
-        'french': 'Bonjour',
-        'spanish': 'Hola',
-        'italian': 'Ciao',
-        'dutch': 'Hallo',
-        'arabic': 'Marhaban',
-        'japanese': 'Konnichiwa',
-        'english': 'Hello',
+        'es': 'Hola',        # Spanish
+        'fr': 'Bonjour',     # French
+        'it': 'Ciao',        # Italian
+        'nl': 'Hallo',       # Dutch
+        'ar': 'Marhaban',    # Arabic
+        'ja': 'Konnichiwa',  # Japanese
+        'en': 'Hello',       # English
     }
+
+    if '${language}' not in translations:
+        sys.exit('Unsupported language code: ${language}')
 
     with open('${input_file}') as greeting_file:
         greeting = greeting_file.read()

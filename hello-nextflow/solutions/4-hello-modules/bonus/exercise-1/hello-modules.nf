@@ -29,14 +29,14 @@ workflow {
     collectGreetings(translateGreeting.out.collect(), params.batch)
 
     publish:
-    first_output = sayHello.out
+    greetings = sayHello.out
     translated = translateGreeting.out
     collected = collectGreetings.out.outfile
     batch_report = collectGreetings.out.report
 }
 
 output {
-    first_output {
+    greetings {
         path "${params.batch}/intermediates"
     }
     translated {

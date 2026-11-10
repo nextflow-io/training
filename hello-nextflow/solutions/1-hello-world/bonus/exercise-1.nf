@@ -22,7 +22,7 @@ process sayHello {
  * Pipeline parameters
  */
 params {
-    name: String = 'World'
+    name: String = 'Friend'
 }
 
 workflow {
@@ -32,11 +32,11 @@ workflow {
     sayHello(params.name)
 
     publish:
-    first_output = sayHello.out
+    greetings = sayHello.out
 }
 
 output {
-    first_output {
+    greetings {
         path '.'
     }
 }

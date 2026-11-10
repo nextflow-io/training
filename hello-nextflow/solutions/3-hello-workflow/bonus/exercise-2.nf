@@ -9,11 +9,11 @@ process sayHello {
     val name
 
     output:
-    path "${name}-output.txt"
+    path "${name}.txt"
 
     script:
     """
-    echo 'Hello, ${name}!' > '${name}-output.txt'
+    echo 'Hello, ${name}!' > '${name}.txt'
     """
 }
 
@@ -32,17 +32,21 @@ process translateGreeting {
     script:
     """
     #!/usr/bin/env python3
+    import sys
 
     translations = {
-        'french': 'Bonjour',
-        'spanish': 'Hola',
-        'italian': 'Ciao',
-        'dutch': 'Hallo',
-        'arabic': 'Marhaban',
-        'japanese': 'Konnichiwa',
-        'english': 'Hello',
-        'portuguese': 'Ola',
+        'es': 'Hola',        # Spanish
+        'fr': 'Bonjour',     # French
+        'it': 'Ciao',        # Italian
+        'nl': 'Hallo',       # Dutch
+        'ar': 'Marhaban',    # Arabic
+        'ja': 'Konnichiwa',  # Japanese
+        'en': 'Hello',       # English
+        'pt': 'Ola',         # Portuguese
     }
+
+    if '${language}' not in translations:
+        sys.exit('Unsupported language code: ${language}')
 
     with open('${input_file}') as greeting_file:
         greeting = greeting_file.read()
@@ -62,13 +66,13 @@ process collectGreetings {
     val batch_name
 
     output:
-    path "COLLECTED-${batch_name}-output.txt", emit: outfile
+    path "${batch_name}-greetings.txt", emit: outfile
     path "${batch_name}-report.txt", emit: report
 
     script:
     count_greetings = input_files.size()
     """
-    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
+    cat ${input_files} > '${batch_name}-greetings.txt'
     echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-report.txt'
     """
 }
@@ -78,7 +82,7 @@ process collectGreetings {
  */
 params {
     input: Path = 'data/names.csv'
-    language: String = 'spanish'
+    language: String = 'es'
     batch: String = 'batch'
 }
 
@@ -97,14 +101,14 @@ workflow {
     collectGreetings(translateGreeting.out.collect(), params.batch)
 
     publish:
-    first_output = sayHello.out
+    greetings = sayHello.out
     translated = translateGreeting.out
     collected = collectGreetings.out.outfile
     batch_report = collectGreetings.out.report
 }
 
 output {
-    first_output {
+    greetings {
         path "${params.batch}/intermediates"
     }
     translated {

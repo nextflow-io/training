@@ -32,7 +32,7 @@ workflow {
     cowpy(translateGreeting.out)
 
     publish:
-    first_output = sayHello.out.map { greeting_file, _character -> greeting_file }
+    greetings = sayHello.out.map { greeting_file, _character -> greeting_file }
     translated = translateGreeting.out.map { greeting_file, _character -> greeting_file }
     collected = collectGreetings.out.outfile
     batch_report = collectGreetings.out.report
@@ -40,7 +40,7 @@ workflow {
 }
 
 output {
-    first_output {
+    greetings {
         path "${params.batch}/intermediates"
     }
     translated {

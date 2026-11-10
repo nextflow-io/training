@@ -213,7 +213,7 @@ In the workflow script file `hello-world.nf`, add the following lines of code:
         sayHello()
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -228,7 +228,7 @@ In the workflow script file `hello-world.nf`, add the following lines of code:
     }
     ```
 
-You refer to the output of the process with `sayHello.out`, and assign it a name of your choice, here `first_output`.
+You refer to the output of the process with `sayHello.out`, and assign it a name of your choice, here `greetings`.
 
 ### 2.2. Add an `output` block to the script
 
@@ -247,11 +247,11 @@ In the workflow script file `hello-world.nf`, add the following lines of code:
         sayHello()
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
 
     output {
-        first_output {
+        greetings {
             path '.'
         }
     }
@@ -267,11 +267,11 @@ In the workflow script file `hello-world.nf`, add the following lines of code:
         sayHello()
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
-The entry `first_output` matches the name in the `publish:` section.
+The entry `greetings` matches the name in the `publish:` section.
 Its `path` sets where the files are published within the output directory; `'.'` means the top level of that directory.
 
 ### 2.3. Run the workflow
@@ -296,7 +296,7 @@ nextflow run hello-world.nf
 
       /workspaces/training/hello-nextflow/results
 
-      first_output: output.txt
+      greetings: output.txt
     ```
 
 The console output now ends with the `Outputs:` summary you saw in Nextflow Run, and Nextflow has created a `results/` directory:
@@ -491,7 +491,7 @@ nextflow run hello-world.nf --name 'Mateo'
 
       /workspaces/training/hello-nextflow/results
 
-      first_output: output.txt
+      greetings: output.txt
     ```
 
 If you made all these edits correctly, you should get another successful execution.
@@ -525,7 +525,7 @@ In the workflow script, make the following code change:
      * Pipeline parameters
      */
     params {
-        name: String = 'World'
+        name: String = 'Friend'
     }
 
     workflow {
@@ -545,7 +545,7 @@ Supported types include `String`, `Integer`, `Float`, `Boolean`, and `Path`.
 
 !!! info
 
-    In older workflows, you may see that whole `params` block written as just `name = 'World'`.
+    In older workflows, you may see that whole `params` block written as just `name = 'Friend'`.
 
 As you add more parameters to your pipeline, you should add them all to this block, whether or not you need to give them a default value.
 This will make it easy to find all configurable parameters at a glance.
@@ -572,7 +572,7 @@ nextflow run hello-world.nf
 
       /workspaces/training/hello-nextflow/results
 
-      first_output: output.txt
+      greetings: output.txt
     ```
 
 ??? question "If it didn't work"
@@ -584,7 +584,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/hello-world.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 11.
-          name: String = 'World'
+          name: String = 'Friend'
                  ^
 
     1 error
@@ -609,7 +609,7 @@ The output will be in the same place as previously, but the contents should be u
 ??? abstract "File contents"
 
     ```console title="results/output.txt"
-    Hello, World!
+    Hello, Friend!
     ```
 
 Nextflow used the default value of the `name` parameter to create the output.
@@ -638,7 +638,7 @@ nextflow run hello-world.nf --name 'Celine'
 
       /workspaces/training/hello-nextflow/results
 
-      first_output: output.txt
+      greetings: output.txt
     ```
 
 Once again, you should find the corresponding updated output in your results directory.
@@ -702,7 +702,7 @@ Run the workflow, check that the published file contains both lines, then look a
     The published file contains the greeting, followed by the date (yours will differ):
 
     ```console title="results/output.txt"
-    Hello, World!
+    Hello, Friend!
     Mon Nov  9 15:38:15 EST 2026
     ```
 
@@ -710,13 +710,13 @@ Run the workflow, check that the published file contains both lines, then look a
 
     ```console title=".command.sh"
     #!/bin/bash -ue
-    echo 'Hello, World!' > output.txt
+    echo 'Hello, Friend!' > output.txt
     date >> output.txt
     ```
 
 ### Exercise 2: Publish the output to a subdirectory
 
-Starting from `hello-world.nf` as you left it at the end of this part, change the workflow so that `output.txt` is published to a `greetings` subdirectory of the results directory, instead of the top level.
+Starting from `hello-world.nf` as you left it at the end of this part, change the workflow so that `output.txt` is published to a `hello` subdirectory of the results directory, instead of the top level.
 Run the workflow and check where the file ends up.
 
 ??? tip "Hint"
@@ -727,8 +727,8 @@ Run the workflow and check where the file ends up.
 
     ```groovy title="hello-world.nf" linenums="37" hl_lines="3"
     output {
-        first_output {
-            path 'greetings'
+        greetings {
+            path 'hello'
         }
     }
     ```
@@ -746,7 +746,7 @@ Run the workflow and check where the file ends up.
 
       /workspaces/training/hello-nextflow/results
 
-      first_output: greetings/output.txt
+      greetings: hello/output.txt
     ```
 
     The `output.txt` at the top level of `results/` is left over from earlier runs: Nextflow does not delete files published by previous runs.
@@ -826,7 +826,7 @@ Learn more: [3.1.2. Edit the process command to use the input variable](#312-edi
 </quiz>
 
 <quiz>
-In `#!groovy params { name: String = 'World' }`, what happens when you run the workflow with `--name 'Celine'`?
+In `#!groovy params { name: String = 'Friend' }`, what happens when you run the workflow with `--name 'Celine'`?
 - [ ] The workflow fails because the parameter already has a value
 - [x] The command-line value overrides the default
 - [ ] The default value overrides the command-line value

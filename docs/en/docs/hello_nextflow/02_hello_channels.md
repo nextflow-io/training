@@ -52,7 +52,7 @@ nextflow run hello-channels.nf --name 'Channels'
 
       /workspaces/training/hello-nextflow/results
 
-      first_output: output.txt
+      greetings: output.txt
     ```
 
 As previously, you will find the output file named `output.txt` in the `results` directory.
@@ -114,7 +114,7 @@ In the workflow block, add the channel factory code:
         sayHello(params.name)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -128,7 +128,7 @@ In the workflow block, add the channel factory code:
         sayHello(params.name)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -152,7 +152,7 @@ In the workflow block, make the following code change:
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -168,7 +168,7 @@ In the workflow block, make the following code change:
         sayHello(params.name)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -198,7 +198,7 @@ nextflow run hello-channels.nf
 
       /workspaces/training/hello-nextflow/results
 
-      first_output:
+      greetings:
         - output.txt
     ```
 
@@ -238,7 +238,7 @@ Add this tiny line to the workflow block:
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -254,7 +254,7 @@ Add this tiny line to the workflow block:
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -281,7 +281,7 @@ nextflow run hello-channels.nf
 
       /workspaces/training/hello-nextflow/results
 
-      first_output:
+      greetings:
         - output.txt
     ```
 
@@ -356,7 +356,7 @@ nextflow run hello-channels.nf
 
       /workspaces/training/hello-nextflow/results
 
-      first_output:
+      greetings:
         - output.txt
         - output.txt
         - output.txt
@@ -443,7 +443,7 @@ nextflow run hello-channels.nf -ansi-log false
 
       /workspaces/training/hello-nextflow/results
 
-      first_output:
+      greetings:
         - output.txt
         - output.txt
         - output.txt
@@ -554,11 +554,11 @@ In the process block, make the following code changes:
         val name
 
         output:
-        path "${name}-output.txt"
+        path "${name}.txt"
 
         script:
         """
-        echo 'Hello, ${name}!' > '${name}-output.txt'
+        echo 'Hello, ${name}!' > '${name}.txt'
         """
     }
     ```
@@ -614,10 +614,10 @@ nextflow run hello-channels.nf
 
       /workspaces/training/hello-nextflow/results
 
-      first_output:
-        - Mateo-output.txt
-        - Celine-output.txt
-        - Andrea-output.txt
+      greetings:
+        - Mateo.txt
+        - Celine.txt
+        - Andrea.txt
     ```
 
 Reverting back to the summary view, the output is summarized on one line again.
@@ -627,23 +627,23 @@ Have a look at the `results` directory to see if all the greetings are there.
 
     ```console
     results
-    ├── Andrea-output.txt -> /workspaces/training/hello-nextflow/work/.../Andrea-output.txt
-    ├── Celine-output.txt -> /workspaces/training/hello-nextflow/work/.../Celine-output.txt
-    ├── Mateo-output.txt -> /workspaces/training/hello-nextflow/work/.../Mateo-output.txt
+    ├── Andrea.txt -> /workspaces/training/hello-nextflow/work/.../Andrea.txt
+    ├── Celine.txt -> /workspaces/training/hello-nextflow/work/.../Celine.txt
+    ├── Mateo.txt -> /workspaces/training/hello-nextflow/work/.../Mateo.txt
     └── output.txt -> /workspaces/training/hello-nextflow/work/.../output.txt
     ```
 
 ??? abstract "File contents"
 
-    ```console title="Andrea-output.txt"
+    ```console title="Andrea.txt"
     Hello, Andrea!
     ```
 
-    ```console title="Celine-output.txt"
+    ```console title="Celine.txt"
     Hello, Celine!
     ```
 
-    ```console title="Mateo-output.txt"
+    ```console title="Mateo.txt"
     Hello, Mateo!
     ```
 
@@ -707,7 +707,7 @@ Let's take the `names_array` variable we just imagined and make it a reality by 
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -724,7 +724,7 @@ Let's take the `names_array` variable we just imagined and make it a reality by 
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -751,7 +751,7 @@ In the workflow block, make the following change:
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -770,7 +770,7 @@ In the workflow block, make the following change:
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -797,12 +797,12 @@ nextflow run hello-channels.nf
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
-      Missing output file(s) `[Mateo, Andrea, Celine]-output.txt` expected by process `sayHello (1)`
+      Missing output file(s) `[Mateo, Andrea, Celine].txt` expected by process `sayHello (1)`
 
 
     Command executed:
 
-      echo 'Hello, [Mateo, Andrea, Celine]!' > '[Mateo, Andrea, Celine]-output.txt'
+      echo 'Hello, [Mateo, Andrea, Celine]!' > '[Mateo, Andrea, Celine].txt'
 
     Command exit status:
       0
@@ -861,7 +861,7 @@ In the workflow block, make the following code change:
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -880,7 +880,7 @@ In the workflow block, make the following code change:
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -916,7 +916,7 @@ In the workflow block, make the following code change:
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -936,7 +936,7 @@ In the workflow block, make the following code change:
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -983,10 +983,10 @@ nextflow run hello-channels.nf
 
       /workspaces/training/hello-nextflow/results
 
-      first_output:
-        - Mateo-output.txt
-        - Celine-output.txt
-        - Andrea-output.txt
+      greetings:
+        - Mateo.txt
+        - Celine.txt
+        - Andrea.txt
     ```
 
 This time it works AND gives us the additional insight into what the contents of the channel look like before and after we run the `flatten()` operator.
@@ -1017,12 +1017,12 @@ Realistically, we're rarely if ever going to start from an array of values.
 Most likely, we'll have one or more files containing the data that needs to be processed, in some kind of structured format.
 
 We've prepared a CSV file called `names.csv` under `data/`, mimicking the kind of columnar data you might want to process in a real data analysis.
-Each row describes one person: their name, a language and a cowpy character.
+Each row describes one person: their name, a two-letter language code and a cowpy character.
 
 ```csv title="data/names.csv" linenums="1"
-Mateo,spanish,squirrel
-Andrea,italian,turtle
-Celine,french,moose
+Mateo,es,squirrel
+Andrea,it,turtle
+Celine,fr,moose
 ```
 
 For now we only need the names, in the first column.
@@ -1069,7 +1069,7 @@ Make the following edit to the parameter declaration:
      * Pipeline parameters
      */
     params {
-        name: String = 'World'
+        name: String = 'Friend'
     }
     ```
 
@@ -1098,7 +1098,7 @@ In the workflow block, make the following code change:
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -1119,7 +1119,7 @@ In the workflow block, make the following code change:
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -1146,12 +1146,12 @@ nextflow run hello-channels.nf
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
-      File `/workspaces/training/hello-nextflow/data/names.csv-output.txt` is outside the scope of the process work directory: /workspaces/training/hello-nextflow/work/df/d3e28a682956a3e686acf8d4f5ee9d
+      File `/workspaces/training/hello-nextflow/data/names.csv.txt` is outside the scope of the process work directory: /workspaces/training/hello-nextflow/work/df/d3e28a682956a3e686acf8d4f5ee9d
 
 
     Command executed:
 
-      echo 'Hello, /workspaces/training/hello-nextflow/data/names.csv!' > '/workspaces/training/hello-nextflow/data/names.csv-output.txt'
+      echo 'Hello, /workspaces/training/hello-nextflow/data/names.csv!' > '/workspaces/training/hello-nextflow/data/names.csv.txt'
 
     Command exit status:
       -
@@ -1203,7 +1203,7 @@ In the workflow block, make the following code change to replace `flatten()` wit
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -1222,7 +1222,7 @@ In the workflow block, make the following code change to replace `flatten()` wit
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -1247,18 +1247,18 @@ nextflow run hello-channels.nf
     executor >  local (3)
     [46/9ce81d] sayHello (3) | 0 of 3 ✘
     Before splitCsv: /workspaces/training/hello-nextflow/data/names.csv
-    After splitCsv: [Mateo, spanish, squirrel]
-    After splitCsv: [Andrea, italian, turtle]
-    After splitCsv: [Celine, french, moose]
+    After splitCsv: [Mateo, es, squirrel]
+    After splitCsv: [Andrea, it, turtle]
+    After splitCsv: [Celine, fr, moose]
     ERROR ~ Error executing process > 'sayHello (3)'
 
     Caused by:
-      Missing output file(s) `[Celine, french, moose]-output.txt` expected by process `sayHello (3)`
+      Missing output file(s) `[Celine, fr, moose].txt` expected by process `sayHello (3)`
 
 
     Command executed:
 
-      echo 'Hello, [Celine, french, moose]!' > '[Celine, french, moose]-output.txt'
+      echo 'Hello, [Celine, fr, moose]!' > '[Celine, fr, moose].txt'
 
     Command exit status:
       0
@@ -1324,7 +1324,7 @@ In the workflow block, make the following code change:
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -1343,7 +1343,7 @@ In the workflow block, make the following code change:
         sayHello(name_ch)
 
         publish:
-        first_output = sayHello.out
+        greetings = sayHello.out
     }
     ```
 
@@ -1367,9 +1367,9 @@ nextflow run hello-channels.nf
     executor >  local (3)
     [7a/74aa8d] sayHello (2) | 3 of 3 ✔
     Before splitCsv: /workspaces/training/hello-nextflow/data/names.csv
-    After splitCsv: [Mateo, spanish, squirrel]
-    After splitCsv: [Andrea, italian, turtle]
-    After splitCsv: [Celine, french, moose]
+    After splitCsv: [Mateo, es, squirrel]
+    After splitCsv: [Andrea, it, turtle]
+    After splitCsv: [Celine, fr, moose]
     After map: Mateo
     After map: Andrea
     After map: Celine
@@ -1378,10 +1378,10 @@ nextflow run hello-channels.nf
 
       /workspaces/training/hello-nextflow/results
 
-      first_output:
-        - Celine-output.txt
-        - Andrea-output.txt
-        - Mateo-output.txt
+      greetings:
+        - Celine.txt
+        - Andrea.txt
+        - Mateo.txt
     ```
 
 This time it should run without error.
@@ -1445,9 +1445,9 @@ The workflow should still greet the same three names.
 
     ```csv title="data/names-header.csv"
     name,language,character
-    Mateo,spanish,squirrel
-    Andrea,italian,turtle
-    Celine,french,moose
+    Mateo,es,squirrel
+    Andrea,it,turtle
+    Celine,fr,moose
     ```
 
     Point the `input` parameter to the new file:
@@ -1476,9 +1476,9 @@ The workflow should still greet the same three names.
     ```
 
     ```console title="Output (excerpt)"
-    After splitCsv: [name:Mateo, language:spanish, character:squirrel]
-    After splitCsv: [name:Andrea, language:italian, character:turtle]
-    After splitCsv: [name:Celine, language:french, character:moose]
+    After splitCsv: [name:Mateo, language:es, character:squirrel]
+    After splitCsv: [name:Andrea, language:it, character:turtle]
+    After splitCsv: [name:Celine, language:fr, character:moose]
     After map: Mateo
     After map: Andrea
     After map: Celine
@@ -1488,7 +1488,7 @@ The workflow should still greet the same three names.
 
 ### Exercise 2: Greet only the French names
 
-Starting from `hello-channels.nf` as you left it at the end of section 4, without the changes from Exercise 1, change the workflow so that it only greets the names whose language, in the second column of `data/names.csv`, is `french`.
+Starting from `hello-channels.nf` as you left it at the end of section 4, without the changes from Exercise 1, change the workflow so that it only greets the names whose language, in the second column of `data/names.csv`, is `fr`.
 Only one greeting file should be produced.
 
 ??? tip "Hint"
@@ -1505,7 +1505,7 @@ Only one greeting file should be produced.
                             .view { csv -> "Before splitCsv: $csv" }
                             .splitCsv()
                             .view { row -> "After splitCsv: $row" }
-                            .filter { row -> row[1] == 'french' }
+                            .filter { row -> row[1] == 'fr' }
                             .map { row -> row[0] }
                             .view { name -> "After map: $name" }
     ```
@@ -1519,9 +1519,9 @@ Only one greeting file should be produced.
     ```console title="Output (excerpt)"
     [42/6d5454] sayHello (1) | 1 of 1 ✔
     Before splitCsv: /workspaces/training/hello-nextflow/data/names.csv
-    After splitCsv: [Mateo, spanish, squirrel]
-    After splitCsv: [Andrea, italian, turtle]
-    After splitCsv: [Celine, french, moose]
+    After splitCsv: [Mateo, es, squirrel]
+    After splitCsv: [Andrea, it, turtle]
+    After splitCsv: [Celine, fr, moose]
     After map: Celine
     ```
 

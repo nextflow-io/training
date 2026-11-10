@@ -9,11 +9,11 @@ process sayHello {
     val name
 
     output:
-    path "${name}-output.txt"
+    path "${name}.txt"
 
     script:
     """
-    echo 'Hello, ${name}!' > '${name}-output.txt'
+    echo 'Hello, ${name}!' > '${name}.txt'
     """
 }
 
@@ -38,11 +38,11 @@ workflow {
     sayHello(name_ch)
 
     publish:
-    first_output = sayHello.out
+    greetings = sayHello.out
 }
 
 output {
-    first_output {
+    greetings {
         path '.'
     }
 }

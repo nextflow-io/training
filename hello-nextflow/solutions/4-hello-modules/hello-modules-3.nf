@@ -10,13 +10,13 @@ process collectGreetings {
     val batch_name
 
     output:
-    path "COLLECTED-${batch_name}-output.txt", emit: outfile
+    path "${batch_name}-greetings.txt", emit: outfile
     path "${batch_name}-report.txt", emit: report
 
     script:
     count_greetings = input_files.size()
     """
-    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
+    cat ${input_files} > '${batch_name}-greetings.txt'
     echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-report.txt'
     """
 }
@@ -30,7 +30,7 @@ include { translateGreeting } from './modules/translateGreeting.nf'
  */
 params {
     input: Path = 'data/names.csv'
-    language: String = 'spanish'
+    language: String = 'es'
     batch: String = 'batch'
 }
 
@@ -49,14 +49,14 @@ workflow {
     collectGreetings(translateGreeting.out.collect(), params.batch)
 
     publish:
-    first_output = sayHello.out
+    greetings = sayHello.out
     translated = translateGreeting.out
     collected = collectGreetings.out.outfile
     batch_report = collectGreetings.out.report
 }
 
 output {
-    first_output {
+    greetings {
         path "${params.batch}/intermediates"
     }
     translated {
