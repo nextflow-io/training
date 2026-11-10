@@ -814,11 +814,7 @@ You know how to organize a Nextflow pipeline into a project with a `main.nf` wor
 Take a break!
 
 You've completed the Hello Nextflow course.
-From here, you can go two ways:
-
-- **[Challenges](challenges.md)**: extend the Hello pipeline with Nextflow features that the course didn't cover, such as filtering channels, passing several values together through processes, and composing workflows.
-  Each challenge's hint links to the relevant documentation, and each solution points to the side quest that covers the feature in depth.
-- **[Next steps](next_steps.md)**: a summary of what you learned, and the courses to consider next depending on what you want to do with Nextflow.
+Head to the [course summary](next_steps.md) to review what you learned, share your feedback, and choose where to go next.
 
 ---
 

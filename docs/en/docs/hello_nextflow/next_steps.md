@@ -46,20 +46,22 @@ Through this hands-on course, you've learned how to:
 
 You're now equipped with the foundational knowledge to start developing your own pipelines in Nextflow.
 
-## Next steps to build your skills
-
-Here are our top suggestions for what to do next:
-
-- Apply the Hello pipeline to Nextflow features beyond the course with the [Challenges](challenges.md)
-- Learn to configure your pipeline for different compute environments with [Configure Execution](../config_exec/index.md)
-- Apply Nextflow to a scientific analysis use case with [Nextflow for Science](../nf4_science/index.md)
-- Get started with nf-core with [Build with nf-core](../nfcore_build/index.md)
-- Explore more advanced Nextflow features with the [Side Quests](../side_quests/index.md)
-
-Finally, we recommend you have a look at [**Seqera Platform**](https://seqera.io/), a cloud-based platform developed by the creators of Nextflow that makes it even easier to launch and manage your workflows, as well as manage your data and run analyses interactively in any environment.
-
 ## Feedback survey
 
-Before you move on, please take a minute to complete the course survey! Your feedback helps us improve our training materials for everyone.
+Before you move on, please take a minute or two to complete this short survey.
+Your feedback helps us improve our training materials for everyone.
 
-[Take the survey :material-arrow-right:](survey.md){ .md-button .md-button--primary }
+<div data-tf-live="01KGH8MQ30SAHP9H50GVJBQW4S"></div><script src="//embed.typeform.com/next/embed.js"></script>
+
+## Next steps to build your skills
+
+To keep working with the Hello pipeline, try the [Challenges](challenges.md).
+They extend the pipeline with Nextflow features that the course didn't cover; each hint links to the relevant documentation, and each solution points to the side quest that covers the feature in depth.
+
+For further study, we recommend one of these three directions:
+
+- **Build pipelines with nf-core**: learn the community standards and tooling for production-quality pipelines with [Build with nf-core](../nfcore_build/index.md).
+- **Apply Nextflow to a scientific domain**: use what you learned on a real analysis with [Nextflow for Science](../nf4_science/index.md).
+- **Go deeper on specific topics**: explore individual Nextflow features and patterns with the [Side Quests](../side_quests/index.md).
+
+Finally, we recommend you have a look at [**Seqera Platform**](https://seqera.io/), a cloud-based platform developed by the creators of Nextflow that makes it even easier to launch and manage your workflows, as well as manage your data and run analyses interactively in any environment.

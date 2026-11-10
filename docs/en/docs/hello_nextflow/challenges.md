@@ -848,5 +848,4 @@ Keep `cowpy` on the greetings in the first language.
 
 ## What's next?
 
-You've completed the Hello Nextflow course.
-See [Next steps](next_steps.md) for where to go from here.
+Return to the [course summary](next_steps.md#next-steps-to-build-your-skills) to choose a course for further study.
