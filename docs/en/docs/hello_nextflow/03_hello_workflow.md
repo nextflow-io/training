@@ -288,7 +288,7 @@ For now they all go to the same `hello` subdirectory; in section 2.5, you'll org
 
 #### 1.2.4. Run the workflow with `-resume`
 
-Run the workflow with the `-resume` flag, which you used in Nextflow Run, since the first step of the workflow already ran successfully:
+Run the workflow with the `-resume` flag, which reuses the results of steps that already ran successfully ([Part 1 of Nextflow Run](../nextflow_run/01_run_nextflow.md) covers it in detail):
 
 ```bash
 nextflow run hello-workflow.nf -resume
@@ -1139,7 +1139,7 @@ In the `output` block, make the following code change:
 The double quotes are required for Nextflow to insert the parameter value into the path, as in a process script.
 
 This is how a pipeline author decides how the results are organized.
-As you saw in Nextflow Run, the person running the pipeline can change the location of the output directory, but not the organization within it, except through parameters like `batch` that the author builds into the paths.
+The person running the pipeline can change the location of the output directory, as [Part 2 of Nextflow Run](../nextflow_run/02_configure_pipeline.md) shows, but not the organization within it, except through parameters like `batch` that the author builds into the paths.
 
 #### 2.5.2. Run the workflow with a batch name
 

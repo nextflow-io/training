@@ -10,10 +10,18 @@
 :green_book: The video transcript is available [here](./transcripts/01_hello_world.md).
 ///
 
-In this course, you write the Hello pipeline you ran in [Nextflow Run](../nextflow_run/index.md), one piece at a time; see the [course overview](./index.md) for the plan.
+In this course, you write the Hello pipeline from [Nextflow Run](../nextflow_run/index.md) one piece at a time, and each part adds a piece:
 
-In this first part, you start from a script that does a single thing, writing 'Hello World!' to a file.
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-course-map.svg"
+</figure>
+
+In this first part, you write the first step of the pipeline, `sayHello`.
+You start from a script that does a single thing, writing 'Hello World!' to a file.
 You examine and run it, publish its output, and make it greet a name provided on the command line.
+
+This course focuses on writing pipeline code.
+For how to run, configure and manage pipelines, including the `work/` directory, `-resume` and the configuration file, see [Nextflow Run](../nextflow_run/index.md); this course links to the relevant parts as they come up.
 
 ---
 
@@ -155,7 +163,7 @@ nextflow run hello-world.nf
     ```
 
 The `sayHello` process ran once (`1 of 1 ✔`).
-As you saw in Nextflow Run, the prefix `[11/2ab905]` is the truncated path to the task directory under `work/`, where Nextflow ran the process.
+The prefix `[11/2ab905]` is the truncated path to the task directory under `work/`, where Nextflow ran the process; [Part 1 of Nextflow Run](../nextflow_run/01_run_nextflow.md) explains the `work/` directory in detail.
 
 Open that directory, for example `work/11/2ab905b8f0bf001eaefd9112486273` (yours will have a different name), and look at two of its files:
 
@@ -190,7 +198,7 @@ Make the output easy to find by publishing it.
 The output of the `sayHello` process is buried in a task directory under `work/`.
 This is on purpose: Nextflow is in control of the `work/` directory, and you are not supposed to interact with it.
 
-In Nextflow Run, the pipeline published its outputs to a `results/` directory.
+A pipeline usually publishes its final outputs to a `results/` directory.
 The pipeline author sets that up in the workflow script using [workflow output definitions](https://nextflow.io/docs/latest/workflow.html#workflow-outputs).
 This involves two new pieces of code:
 
@@ -302,7 +310,7 @@ nextflow run hello-world.nf
       greetings: output.txt
     ```
 
-The console output now ends with the `Outputs:` summary you saw in Nextflow Run, and Nextflow has created a `results/` directory:
+The console output now ends with an `Outputs:` summary of the published files, and Nextflow has created a `results/` directory:
 
 ??? abstract "Directory contents"
 
@@ -312,7 +320,7 @@ The console output now ends with the `Outputs:` summary you saw in Nextflow Run,
     ```
 
 With the default settings, the output is published at the top level of `results/`, as a symbolic link to the file in the task directory.
-As you saw in Nextflow Run, the person running the pipeline can change the output directory with `-output-dir` and choose a different default publish mode.
+The person running the pipeline can change the output directory with `-output-dir` and choose a different default publish mode, as [Part 2 of Nextflow Run](../nextflow_run/02_configure_pipeline.md) shows.
 
 ### 2.2. Customize the output settings
 

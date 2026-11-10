@@ -719,7 +719,7 @@ This tells Nextflow that _if the use of Docker is enabled_, it should use the co
 #### 2.3.2. Enable use of Docker via the `nextflow.config` file
 
 Notice we said _'if the use of Docker is enabled'_. By default, it is not, so we need to tell Nextflow it's allowed to use Docker.
-We do that in the `nextflow.config` file, which, as you saw in [Nextflow Run](../nextflow_run/02_configure_pipeline.md), Nextflow loads automatically when it is present in the current directory.
+We do that in the `nextflow.config` file, which Nextflow loads automatically when it is present in the current directory; [Part 2 of Nextflow Run](../nextflow_run/02_configure_pipeline.md) covers it in detail.
 
 The `nextflow.config` file we provided contains a single line, which explicitly disables Docker: `docker.enabled = false`.
 
@@ -1046,7 +1046,7 @@ All the hard work we had to do manually in the first section? Nextflow does it f
 ### 2.4. Add a Conda package as an alternative
 
 Not everyone can use containers.
-As you saw in Nextflow Run, the same pipeline can supply its software through Conda instead, when the person running it enables Conda.
+A pipeline can also supply its software through Conda instead, when the person running it enables Conda, as [Part 2 of Nextflow Run](../nextflow_run/02_configure_pipeline.md) shows.
 For that to work, the process needs to declare a Conda package as well as a container.
 
 The `cowpy` tool is available as the Conda package `conda-forge::cowpy==1.1.5`.
@@ -1089,7 +1089,7 @@ You know how to use containers in Nextflow to run processes, and how to declare 
 
 Take a short break if you feel like it.
 
-When you're ready, move on to [**Part 5: Hello Modules**](./05_hello_modules.md) to organize your code into modules and your parameter values into the configuration, giving your pipeline the same layout as the one you ran in Nextflow Run.
+When you're ready, move on to [**Part 5: Hello Modules**](./05_hello_modules.md) to organize your code into modules and your parameter values into the configuration, giving your pipeline the same layout as the finished Hello pipeline in Nextflow Run.
 
 ---
 
