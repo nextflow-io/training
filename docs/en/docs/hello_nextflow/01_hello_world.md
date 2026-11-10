@@ -99,11 +99,11 @@ Another common qualifier is `val`.
 
 Importantly, the output definition does not _determine_ what output will be created.
 It simply _declares_ what is the expected output, so that Nextflow can look for it once execution is complete.
-This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed. Output produced that doesn't match what is declared in the output block will not be passed to downstream processes.
+This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed. Output produced that doesn't match what is declared in the output definition will not be passed to downstream processes.
 
 !!! warning
 
-    This example is brittle because we hardcoded the output filename in two separate places (the script and the output blocks).
+    This example is brittle because we hardcoded the output filename in two separate places (the `script` and the `output` definition).
     If we change one but not the other, the script will break.
     Later on, you'll learn ways to use variables to mitigate this problem.
 
@@ -778,8 +778,7 @@ Run the workflow and check that `greeting.txt` is published to the `results/hell
 
 ??? tip "Hint"
 
-    The file name appears in two places in the process: the `output:` declaration and the `script` block.
-    If you change only one of them, the run fails with a `Missing output file(s)` error, because the file the process declares is not the file its script wrote.
+    The file name appears in two places in the process, as the warning in section 1.1.1 points out.
 
 ??? solution
 
@@ -833,7 +832,7 @@ Run the workflow and check that `greeting.txt` is published to the `results/hell
       echo 'Hello, Friend!' > greeting.txt
     ```
 
-    The command ran successfully, but Nextflow could not find the file declared in the `output:` block.
+    The command ran successfully, but Nextflow could not find the file declared in the `output` definition of the process.
 
 ---
 
@@ -850,7 +849,7 @@ Learn more: [1.1.1. The process definition](#111-the-process-definition)
 </quiz>
 
 <quiz>
-What is the purpose of the output block in a process?
+What is the purpose of the `output` definition in a process?
 - [ ] To print results to the console
 - [ ] To save files to the work directory
 - [x] To declare expected outputs from the process
