@@ -174,7 +174,7 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
     ```
 
     `translateGreeting` then takes `tuple path(input_file), val(language)` as its only input.
-    `collectGreetings` still takes a language for its file names; give it a label that covers all the languages, such as `'multi'`.
+    `collectGreetings` still takes a language for its file names; give it a label such as `'native'`, since each name is greeted in its own language.
 
 ??? solution
 
@@ -209,11 +209,11 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
         // translate each greeting into its own language
         translateGreeting(sayHello.out)
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch, 'multi')
+        collectGreetings(translateGreeting.out.collect(), params.batch, 'native')
     ```
 
     The greetings are now in several languages, so `params.language` no longer describes them.
-    `collectGreetings` still needs a language for its file names, so it gets the label `'multi'` instead.
+    `collectGreetings` still needs a language for its file names, so it gets the label `'native'` instead.
     The `language` parameter is no longer used, so remove it from the `params` block.
 
     `sayHello` now emits pairs, so publish only the file from each pair:
@@ -236,37 +236,37 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
         ```console
         N E X T F L O W   ~  version 26.04.4
 
-        Launching `hello-challenge.nf` [kickass_mclean] revision: 47de51bee7
+        Launching `hello-challenge.nf` [spontaneous_avogadro] revision: a822eaf8ec
 
         executor >  local (7)
-        [db/f6dae4] sayHello (1)          | 3 of 3 ✔
-        [2c/086b0b] translateGreeting (2) | 3 of 3 ✔
-        [d1/9233d5] collectGreetings      | 1 of 1 ✔
+        [04/fd2c8b] sayHello (1)          | 3 of 3 ✔
+        [62/668f35] translateGreeting (1) | 3 of 3 ✔
+        [cf/c8206c] collectGreetings      | 1 of 1 ✔
 
         Outputs:
 
           /workspaces/training/hello-nextflow/results
 
           greetings:
-            - mixed/intermediates/Celine.txt
             - mixed/intermediates/Mateo.txt
+            - mixed/intermediates/Celine.txt
             - mixed/intermediates/Raphael.txt
 
           translated:
-            - mixed/intermediates/it-Raphael.txt
             - mixed/intermediates/fr-Celine.txt
+            - mixed/intermediates/it-Raphael.txt
             - mixed/intermediates/es-Mateo.txt
 
-          collected: mixed/intermediates/mixed-multi-greetings.txt
+          collected: mixed/intermediates/mixed-native-greetings.txt
 
-          batch_report: mixed/mixed-multi-report.txt
+          batch_report: mixed/mixed-native-report.txt
         ```
 
     Each translated file is named after its own language, and the collected file contains one greeting in each language:
 
-    ```console title="results/mixed/intermediates/mixed-multi-greetings.txt"
-    Ciao, Raphael!
+    ```console title="results/mixed/intermediates/mixed-native-greetings.txt"
     Bonjour, Celine!
+    Ciao, Raphael!
     Hola, Mateo!
     ```
 
