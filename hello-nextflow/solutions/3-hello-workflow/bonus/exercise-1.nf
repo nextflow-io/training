@@ -71,7 +71,7 @@ process collectGreetings {
     script:
     count_greetings = input_files.size()
     """
-    cat ${input_files} | sort > '${batch_name}-greetings.txt'
+    cat ${input_files} > '${batch_name}-greetings.txt'
     echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-report.txt'
     """
 }
@@ -112,7 +112,7 @@ output {
         mode 'copy'
     }
     translated {
-        path "${params.batch}/intermediates"
+        path "${params.batch}/translations"
         mode 'copy'
     }
     collected {

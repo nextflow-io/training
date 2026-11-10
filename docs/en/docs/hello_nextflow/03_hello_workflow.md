@@ -1453,51 +1453,89 @@ These optional exercises let you practice what you learned in this part.
 Each one can be solved with what this part covered; open the hint if you get stuck.
 The solutions are also in `solutions/3-hello-workflow/bonus/`.
 
-### Exercise 1: Sort the collected greetings
+### Exercise 1: Put the translations in their own folder
 
-As the note in section 2.4.3 points out, the order of the greetings in the collected file can change from one run to the next.
-Starting from `hello-workflow.nf` as it stands at the end of this part, modify `collectGreetings` so that the greetings in the collected file are always in the same order.
-Run it with `--batch sorted` and check `results/sorted/intermediates/sorted-greetings.txt`.
+Starting from `hello-workflow.nf` as it stands at the end of this part, change where the translated greetings are published, so that they go to a `translations` subdirectory of the batch directory instead of `intermediates`.
+Run the workflow with `--batch trio -resume` and check `results/trio/`.
 
 ??? tip "Hint"
 
-    The script block can hold a shell pipeline: the `sort` command sorts its input lines alphabetically.
+    Where each output is published is set in the `output` block, not in the processes.
 
 ??? solution
 
-    Pipe the concatenated files through `sort` before writing the collected file:
+    Change the `path` of the `translated` output:
 
-    ```groovy title="hello-workflow.nf" linenums="71" hl_lines="4"
-        script:
-        count_greetings = input_files.size()
-        """
-        cat ${input_files} | sort > '${batch_name}-greetings.txt'
-        echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-report.txt'
-        """
-    ```
+    === "After"
+
+        ```groovy title="hello-workflow.nf" linenums="114" hl_lines="2"
+            translated {
+                path "${params.batch}/translations"
+                mode 'copy'
+            }
+        ```
+
+    === "Before"
+
+        ```groovy title="hello-workflow.nf" linenums="114" hl_lines="2"
+            translated {
+                path "${params.batch}/intermediates"
+                mode 'copy'
+            }
+        ```
+
+    Run the workflow:
 
     ```bash
-    nextflow run hello-workflow.nf --batch sorted
+    nextflow run hello-workflow.nf --batch trio -resume
     ```
 
-    The greetings are now in alphabetical order, whatever order the tasks finished in:
+    ```console title="Output (excerpt)"
+    [d6/ce26b4] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [c5/528845] translateGreeting (1) | 3 of 3, cached: 3 ✔
+    [2f/e2703e] collectGreetings      | 1 of 1, cached: 1 ✔
 
-    ```console title="results/sorted/intermediates/sorted-greetings.txt"
-    Hola, Celine!
-    Hola, Mateo!
-    Hola, Raphael!
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      greetings:
+        - trio/intermediates/Celine.txt
+        - trio/intermediates/Raphael.txt
+        - trio/intermediates/Mateo.txt
+
+      translated:
+        - trio/translations/es-Mateo.txt
+        - trio/translations/es-Raphael.txt
+        - trio/translations/es-Celine.txt
+
+      collected: trio/intermediates/trio-greetings.txt
+
+      batch_report: trio/trio-report.txt
     ```
 
-### Exercise 2: Add a language
+    Every task was cached, yet the translated files were published to the new location: Nextflow publishes the outputs of cached tasks too.
+    The copies published to `results/trio/intermediates/` by earlier runs are still there.
 
-Starting from `hello-workflow.nf` as it stands at the end of this part, add Portuguese to the languages that `translateGreeting` can translate into.
-Run the workflow with `--language pt --batch portuguese` and check the collected file.
+### Exercise 2: Add a language, and predict what reruns
+
+Starting from `hello-workflow.nf` as it stands at the end of this part, add Portuguese to the languages that `translateGreeting` can translate into, using the code `pt` and the greeting `Ola`.
+Run the workflow with `--language pt -resume` before and after your change.
+
+Then, before running each of the following commands, predict which steps will run again and which will be cached, and check your predictions:
+
+1. `nextflow run hello-workflow.nf --language pt -resume` (right after adding Portuguese)
+2. `nextflow run hello-workflow.nf --language es -resume`
+3. `nextflow run hello-workflow.nf --language es --batch spanish -resume`
 
 ??? tip "Hint"
 
-    Only the `translations` dictionary in the Python script needs to change; use a romanized greeting such as `Ola`.
+    Before your change, the run fails the same way as the `--language de` example in section 1.3.4.
+    To predict what reruns, ask for each step whether its inputs or its code changed since a previous run.
 
 ??? solution
+
+    Before the change, the run fails with `Unsupported language code: pt`.
 
     Add an entry to the dictionary:
 
@@ -1507,86 +1545,128 @@ Run the workflow with `--language pt --batch portuguese` and check the collected
         }
     ```
 
-    ```bash
-    nextflow run hello-workflow.nf --language pt --batch portuguese
-    ```
+    1. **`--language pt`**: `sayHello` is cached; `translateGreeting` and `collectGreetings` run.
+       The collected file contains the Portuguese greetings:
 
-    ```console title="results/portuguese/intermediates/portuguese-greetings.txt"
-    Ola, Celine!
-    Ola, Raphael!
-    Ola, Mateo!
-    ```
+        ```console title="Output (excerpt)"
+        [d6/ce26b4] sayHello (1)          | 3 of 3, cached: 3 ✔
+        [d1/d0b48a] translateGreeting (2) | 3 of 3 ✔
+        [d1/9389e8] collectGreetings      | 1 of 1 ✔
+        ```
 
-### Challenge: Translate each name into its own language
+        ```console title="results/batch/intermediates/batch-greetings.txt"
+        Ola, Raphael!
+        Ola, Mateo!
+        Ola, Celine!
+        ```
 
-The second column of `data/names.csv` gives a language for each name.
-Starting from `hello-workflow.nf` as it stands at the end of this part, translate each greeting into the language of its own row, instead of one language for the whole batch.
-Run it with `--batch mixed` and check that the collected file contains `Hola, Mateo!`, `Ciao, Raphael!` and `Bonjour, Celine!`.
+    2. **`--language es`**: `translateGreeting` runs again, even though Spanish translations were computed in earlier runs.
+       Adding Portuguese changed the code of `translateGreeting`, and a change to a process's code invalidates all of its cached results.
+       `collectGreetings` runs again because its inputs are new files.
+
+        ```console title="Output (excerpt)"
+        [24/7a5465] sayHello (2)          | 3 of 3, cached: 3 ✔
+        [21/673e8e] translateGreeting (2) | 3 of 3 ✔
+        [dc/e4fd26] collectGreetings      | 1 of 1 ✔
+        ```
+
+    3. **`--batch spanish`**: only `collectGreetings` runs, because the batch name is one of its inputs; the other steps are cached.
+
+        ```console title="Output (excerpt)"
+        [24/7a5465] sayHello (2)          | 3 of 3, cached: 3 ✔
+        [21/673e8e] translateGreeting (1) | 3 of 3, cached: 3 ✔
+        [17/4d3369] collectGreetings      | 1 of 1 ✔
+        ```
+
+### Challenge: Collect both versions of the greetings
+
+Starting from `hello-workflow.nf` as it stands at the end of this part, add a step that writes all the original greetings and all the translated greetings into a single file called `<batch>-bilingual.txt`, published at the top level of the batch directory.
+Run it with `--batch trio -resume`.
 
 ??? tip "Hint"
 
-    Each item now needs to carry two values, the name and its language, through `sayHello` to `translateGreeting`.
-    A channel element can be a list of values, and a process can accept and emit it with a `tuple`:
-
-    ```groovy
-    .map { row -> [row[0], row[1]] }       // channel elements: [name, language]
-
-    input:
-    tuple val(name), val(language)          // in sayHello
-
-    output:
-    tuple path("${name}.txt"), val(language)
-    ```
-
-    `translateGreeting` then takes `tuple path(input_file), val(language)` as its only input.
+    The new process needs two collections of files as inputs, one from `sayHello` and one from `translateGreeting`, plus the batch name.
+    Its script only needs a `cat` command.
 
 ??? solution
 
-    Keep both columns in the channel:
+    Define the new process after `collectGreetings`:
 
-    ```groovy title="hello-workflow.nf" linenums="92" hl_lines="3"
-        name_ch = channel.fromPath(params.input)
-                            .splitCsv()
-                            .map { row -> [row[0], row[1]] }
-    ```
-
-    Make `sayHello` accept the pair and pass the language along with its output:
-
-    ```groovy title="hello-workflow.nf" linenums="6" hl_lines="4 7"
-    process sayHello {
+    ```groovy title="hello-workflow.nf" linenums="79"
+    /*
+     * Combine the original and translated greetings into a single file
+     */
+    process collectBilingual {
 
         input:
-        tuple val(name), val(language)
+        path greetings
+        path translations
+        val batch_name
 
         output:
-        tuple path("${name}.txt"), val(language)
+        path "${batch_name}-bilingual.txt"
+
+        script:
+        """
+        cat ${greetings} ${translations} > '${batch_name}-bilingual.txt'
+        """
+    }
     ```
 
-    Make `translateGreeting` take that pair as a single input:
+    Call it in the workflow, collecting the outputs of both upstream processes, and publish its output:
 
-    ```groovy title="hello-workflow.nf" linenums="25" hl_lines="2"
-        input:
-        tuple path(input_file), val(language)
+    ```groovy title="hello-workflow.nf" linenums="118" hl_lines="3-4 11"
+        // collect all the greetings into one file
+        collectGreetings(translateGreeting.out.collect(), params.batch)
+        // combine the original and translated greetings
+        collectBilingual(sayHello.out.collect(), translateGreeting.out.collect(), params.batch)
+
+        publish:
+        greetings = sayHello.out
+        translated = translateGreeting.out
+        collected = collectGreetings.out.outfile
+        batch_report = collectGreetings.out.report
+        bilingual = collectBilingual.out
+    }
     ```
 
-    Then call it with the output of `sayHello` alone, and remove the `language` parameter, which is no longer used:
+    Add the matching entry to the `output` block:
 
-    ```groovy title="hello-workflow.nf" linenums="95" hl_lines="2"
-        // translate the greeting
-        translateGreeting(sayHello.out)
+    ```groovy title="hello-workflow.nf" linenums="144" hl_lines="5-8"
+        batch_report {
+            path "${params.batch}"
+            mode 'copy'
+        }
+        bilingual {
+            path "${params.batch}"
+            mode 'copy'
+        }
+    }
     ```
+
+    Run the workflow:
 
     ```bash
-    nextflow run hello-workflow.nf --batch mixed
+    nextflow run hello-workflow.nf --batch trio -resume
     ```
 
-    ```console title="results/mixed/intermediates/mixed-greetings.txt"
+    ```console title="Output (excerpt)"
+    [24/7a5465] sayHello (2)          | 3 of 3, cached: 3 ✔
+    [c5/528845] translateGreeting (1) | 3 of 3, cached: 3 ✔
+    [2f/e2703e] collectGreetings      | 1 of 1, cached: 1 ✔
+    [ec/9fc1b2] collectBilingual      | 1 of 1 ✔
+    ```
+
+    Only the new step runs; everything upstream is cached.
+
+    ```console title="results/trio/trio-bilingual.txt"
+    Hello, Celine!
+    Hello, Raphael!
+    Hello, Mateo!
     Hola, Mateo!
-    Ciao, Raphael!
-    Bonjour, Celine!
+    Hola, Raphael!
+    Hola, Celine!
     ```
-
-    The `greetings` entries in the console output now show each file next to its language, since `sayHello` emits pairs; the files themselves are published as before.
 
 ---
 
