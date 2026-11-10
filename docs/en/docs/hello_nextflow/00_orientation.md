@@ -100,8 +100,8 @@ tree . -L 2
     │   ├── 1-hello-world
     │   ├── 2-hello-channels
     │   ├── 3-hello-workflow
-    │   ├── 4-hello-modules
-    │   ├── 5-hello-containers
+    │   ├── 4-hello-containers
+    │   ├── 5-hello-modules
     │   └── challenges
     ```
 

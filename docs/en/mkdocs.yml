@@ -47,8 +47,8 @@ nav:
       - hello_nextflow/01_hello_world.md
       - hello_nextflow/02_hello_channels.md
       - hello_nextflow/03_hello_workflow.md
-      - hello_nextflow/04_hello_modules.md
-      - hello_nextflow/05_hello_containers.md
+      - hello_nextflow/04_hello_containers.md
+      - hello_nextflow/05_hello_modules.md
       - hello_nextflow/challenges.md
       - hello_nextflow/next_steps.md
       - hello_nextflow/survey.md
@@ -367,6 +367,8 @@ plugins:
         "hello_nf-core/04_input_validation.md": "nfcore_build/04_input_validation.md"
         "hello_nf-core/next_steps.md": "nfcore_build/next_steps.md"
         "hello_nf-core/survey.md": "nfcore_build/survey.md"
+        "hello_nextflow/04_hello_modules.md": "hello_nextflow/05_hello_modules.md"
+        "hello_nextflow/05_hello_containers.md": "hello_nextflow/04_hello_containers.md"
         "nextflow_config/index.md": "config_exec/index.md"
         "nextflow_config/00_orientation.md": "config_exec/00_orientation.md"
         "nextflow_config/01_packaging_and_execution.md": "config_exec/01_packaging_and_execution.md"

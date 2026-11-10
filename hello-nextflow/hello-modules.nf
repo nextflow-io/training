@@ -77,12 +77,34 @@ process collectGreetings {
 }
 
 /*
+ * Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+ */
+process cowpy {
+
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    conda 'conda-forge::cowpy==1.1.5'
+
+    input:
+    path input_file
+    val character
+
+    output:
+    path "cowpy-${input_file}"
+
+    script:
+    """
+    cat ${input_file} | cowpy -c "${character}" > cowpy-${input_file}
+    """
+}
+
+/*
  * Pipeline parameters
  */
 params {
     input: Path = 'data/names.csv'
     language: String = 'es'
     batch: String = 'batch'
+    character: String = 'turkey'
 }
 
 workflow {
@@ -98,12 +120,15 @@ workflow {
     translateGreeting(sayHello.out, params.language)
     // collect all the greetings into one file
     collectGreetings(translateGreeting.out.collect(), params.batch)
+    // generate ASCII art of the greetings with cowpy
+    cowpy(collectGreetings.out.outfile, params.character)
 
     publish:
     greetings = sayHello.out
     translated = translateGreeting.out
     collected = collectGreetings.out.outfile
     batch_report = collectGreetings.out.report
+    cowpy_art = cowpy.out
 }
 
 output {
@@ -120,6 +145,10 @@ output {
         mode 'copy'
     }
     batch_report {
+        path "${params.batch}"
+        mode 'copy'
+    }
+    cowpy_art {
         path "${params.batch}"
         mode 'copy'
     }

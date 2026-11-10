@@ -15,12 +15,13 @@ Congratulations on completing the Hello Nextflow training course! 🎉
 ## Your journey
 
 You started with a very basic workflow that ran a hardcoded command.
-Over the course of five parts, you transformed that basic workflow into a modular multi-step pipeline that exercises key features of Nextflow including channels, operators, modules, and built-in support for containers.
+Over the course of five parts, you transformed that basic workflow into a modular multi-step pipeline that exercises key features of Nextflow including channels, operators, built-in support for containers, and modules.
 
 ### What you built
 
 - The final form of the Hello workflow takes as input a CSV file containing names.
 - The four steps are implemented as Nextflow processes (`sayHello`, `translateGreeting`, `collectGreetings`, and `cowpy`) stored in separate module files.
+- The entry workflow is in `main.nf`, and the default parameter values and the `test` and `conda` profiles are in `nextflow.config`.
 - The results are published to a directory called `results/`.
 - The final output of the pipeline is a plain text file containing ASCII art of a character saying the translated greetings.
 

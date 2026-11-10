@@ -1,4 +1,6 @@
-// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+/*
+ * Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+ */
 process cowpy {
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
