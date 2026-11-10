@@ -64,13 +64,13 @@ nextflow run hello-containers.nf -profile test
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - batch/intermediates/Andrea.txt
+        - batch/intermediates/Raphael.txt
         - batch/intermediates/Celine.txt
         - batch/intermediates/Mateo.txt
 
       translated:
         - batch/intermediates/es-Celine.txt
-        - batch/intermediates/es-Andrea.txt
+        - batch/intermediates/es-Raphael.txt
         - batch/intermediates/es-Mateo.txt
 
       collected: batch/intermediates/batch-greetings.txt
@@ -86,13 +86,13 @@ As previously, you will find the output files under `results/batch/`.
     results/batch
     ├── batch-report.txt
     └── intermediates
-        ├── Andrea.txt
-        ├── Celine.txt
         ├── batch-greetings.txt
-        ├── Mateo.txt
-        ├── es-Andrea.txt
+        ├── Celine.txt
         ├── es-Celine.txt
-        └── es-Mateo.txt
+        ├── es-Mateo.txt
+        ├── es-Raphael.txt
+        ├── Mateo.txt
+        └── Raphael.txt
     ```
 
 If that worked for you, you're ready to learn how to use containers.
@@ -351,7 +351,7 @@ cat /my_project/data/names.csv | cowpy -c turkey
     ```console
      ___________________
     / Mateo,es,squirrel \
-    | Andrea,it,turtle  |
+    | Raphael,it,turtle |
     \ Celine,fr,moose   /
      -------------------
       \                                  ,+*^^*+___+++_
@@ -843,12 +843,12 @@ nextflow run hello-containers.nf -profile test -resume
       greetings:
         - batch/intermediates/Mateo.txt
         - batch/intermediates/Celine.txt
-        - batch/intermediates/Andrea.txt
+        - batch/intermediates/Raphael.txt
 
       translated:
         - batch/intermediates/es-Mateo.txt
         - batch/intermediates/es-Celine.txt
-        - batch/intermediates/es-Andrea.txt
+        - batch/intermediates/es-Raphael.txt
 
       collected: batch/intermediates/batch-greetings.txt
 
@@ -867,13 +867,13 @@ As usual you can find the workflow outputs in the results directory, with the re
     ├── batch-report.txt
     ├── cowpy-batch-greetings.txt
     └── intermediates
-        ├── Andrea.txt
-        ├── Celine.txt
         ├── batch-greetings.txt
-        ├── Mateo.txt
-        ├── es-Andrea.txt
+        ├── Celine.txt
         ├── es-Celine.txt
-        └── es-Mateo.txt
+        ├── es-Mateo.txt
+        ├── es-Raphael.txt
+        ├── Mateo.txt
+        └── Raphael.txt
     ```
 
 The final ASCII art output is in the `results/batch/` directory, under the name `cowpy-batch-greetings.txt`.
@@ -881,11 +881,11 @@ The final ASCII art output is in the `results/batch/` directory, under the name 
 ??? abstract "File contents"
 
     ```console title="results/batch/cowpy-batch-greetings.txt"
-     _______________
-    / Hola, Celine! \
-    | Hola, Andrea! |
-    \ Hola, Mateo!  /
-     ---------------
+     ________________
+    / Hola, Celine!  \
+    | Hola, Raphael! |
+    \ Hola, Mateo!   /
+     ----------------
       \                                  ,+*^^*+___+++_
        \                           ,*^^^^              )
         \                       _+*                     ^**+_
@@ -1210,7 +1210,7 @@ Run the workflow, then check the `.command.run` file of one of the `translateGre
     ### name: 'translateGreeting (2)'
     ### container: 'python:3.12-slim'
     ### outputs:
-    ### - 'es-Andrea.txt'
+    ### - 'es-Raphael.txt'
     ```
 
     Now both `translateGreeting` and `cowpy` run in containers, each with its own image.
@@ -1247,11 +1247,11 @@ Find out which other characters `cowpy` offers, pick one, and run the workflow s
     The ASCII art now shows a koala:
 
     ```console title="results/batch/cowpy-batch-greetings.txt"
-     _______________
-    / Hola, Andrea! \
-    | Hola, Celine! |
-    \ Hola, Mateo!  /
-     ---------------
+     ________________
+    / Hola, Celine!  \
+    | Hola, Raphael! |
+    \ Hola, Mateo!   /
+     ----------------
       \
        \
            ___
@@ -1263,7 +1263,7 @@ Find out which other characters `cowpy` offers, pick one, and run the workflow s
 
 ### Challenge: Give each name its own character
 
-The third column of `data/names.csv` assigns a character to each name: `squirrel` for Mateo, `turtle` for Andrea and `moose` for Celine.
+The third column of `data/names.csv` assigns a character to each name: `squirrel` for Mateo, `turtle` for Raphael and `moose` for Celine.
 Make the workflow produce one ASCII art file per name, each drawn by the character from its row, instead of a single drawing of all the greetings.
 Keep the collected file and the report as they are.
 
@@ -1357,20 +1357,20 @@ Keep the collected file and the report as they are.
 
           greetings:
             - batch/intermediates/Mateo.txt
-            - batch/intermediates/Andrea.txt
+            - batch/intermediates/Raphael.txt
             - batch/intermediates/Celine.txt
 
           translated:
             - batch/intermediates/es-Mateo.txt
             - batch/intermediates/es-Celine.txt
-            - batch/intermediates/es-Andrea.txt
+            - batch/intermediates/es-Raphael.txt
 
           collected: batch/intermediates/batch-greetings.txt
 
           batch_report: batch/batch-report.txt
 
           cowpy_art:
-            - batch/cowpy-es-Andrea.txt
+            - batch/cowpy-es-Raphael.txt
             - batch/cowpy-es-Celine.txt
             - batch/cowpy-es-Mateo.txt
         ```
@@ -1393,10 +1393,10 @@ Keep the collected file and the report as they are.
           '---.~_ _ _|
     ```
 
-    ```console title="results/batch/cowpy-es-Andrea.txt"
-     _______________
-    < Hola, Andrea! >
-     ---------------
+    ```console title="results/batch/cowpy-es-Raphael.txt"
+     ________________
+    < Hola, Raphael! >
+     ----------------
         \                                  ___-------___
          \                             _-~~             ~~-_
           \                         _-~                    /~-_

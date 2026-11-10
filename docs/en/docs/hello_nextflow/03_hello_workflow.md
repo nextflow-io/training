@@ -67,7 +67,7 @@ nextflow run hello-workflow.nf
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - hello/Andrea.txt
+        - hello/Raphael.txt
         - hello/Celine.txt
         - hello/Mateo.txt
     ```
@@ -79,10 +79,10 @@ As previously, you will find the output files in the `results/hello` directory, 
     ```console
     results
     ├── hello
-    │   ├── Andrea.txt
     │   ├── Celine.txt
     │   ├── Mateo.txt
-    │   └── output.txt
+    │   ├── output.txt
+    │   └── Raphael.txt
     └── output.txt -> /workspaces/training/hello-nextflow/work/.../output.txt
     ```
 
@@ -312,11 +312,11 @@ nextflow run hello-workflow.nf -resume
       greetings:
         - hello/Celine.txt
         - hello/Mateo.txt
-        - hello/Andrea.txt
+        - hello/Raphael.txt
 
       translated:
         - hello/es-Mateo.txt
-        - hello/es-Andrea.txt
+        - hello/es-Raphael.txt
         - hello/es-Celine.txt
     ```
 
@@ -542,11 +542,11 @@ nextflow run hello-workflow.nf -resume
       greetings:
         - hello/Celine.txt
         - hello/Mateo.txt
-        - hello/Andrea.txt
+        - hello/Raphael.txt
 
       translated:
         - hello/es-Mateo.txt
-        - hello/es-Andrea.txt
+        - hello/es-Raphael.txt
         - hello/es-Celine.txt
     ```
 
@@ -575,12 +575,12 @@ nextflow run hello-workflow.nf -resume --language fr
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - hello/Andrea.txt
+        - hello/Raphael.txt
         - hello/Mateo.txt
         - hello/Celine.txt
 
       translated:
-        - hello/fr-Andrea.txt
+        - hello/fr-Raphael.txt
         - hello/fr-Celine.txt
         - hello/fr-Mateo.txt
     ```
@@ -691,9 +691,9 @@ Run the following in your terminal to verify that it works as expected:
 
 ```bash
 echo 'Hola, Mateo!' > es-Mateo.txt
-echo 'Hola, Andrea!' > es-Andrea.txt
+echo 'Hola, Raphael!' > es-Raphael.txt
 echo 'Hola, Celine!' > es-Celine.txt
-cat es-Mateo.txt es-Andrea.txt es-Celine.txt > greetings.txt
+cat es-Mateo.txt es-Raphael.txt es-Celine.txt > greetings.txt
 ```
 
 The output is a text file called `greetings.txt` that contains all three greetings.
@@ -702,7 +702,7 @@ The output is a text file called `greetings.txt` that contains all three greetin
 
     ```console title="greetings.txt"
     Hola, Mateo!
-    Hola, Andrea!
+    Hola, Raphael!
     Hola, Celine!
     ```
 
@@ -897,14 +897,14 @@ nextflow run hello-workflow.nf -resume
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - hello/Andrea.txt
+        - hello/Raphael.txt
         - hello/Celine.txt
         - hello/Mateo.txt
 
       translated:
         - hello/es-Mateo.txt
         - hello/es-Celine.txt
-        - hello/es-Andrea.txt
+        - hello/es-Raphael.txt
 
       collected:
         - hello/batch-greetings.txt
@@ -922,7 +922,7 @@ Now have a look at the contents of the final output file.
 ??? abstract "File contents"
 
     ```console title="results/hello/batch-greetings.txt"
-    Hola, Andrea!
+    Hola, Raphael!
     ```
 
 Oh no. The collection step was run individually on each greeting, which is NOT what we wanted.
@@ -1007,22 +1007,22 @@ nextflow run hello-workflow.nf -resume
     [ae/3c0ca0] translateGreeting (2) | 3 of 3, cached: 3 ✔
     [db/6e3931] collectGreetings      | 1 of 1 ✔
     Before collect: /workspaces/training/hello-nextflow/work/44/9c4185f2ac241b19cb56a67526a966/es-Celine.txt
-    Before collect: /workspaces/training/hello-nextflow/work/8c/174fc0d15b4f859d0914e3ae0e5fbd/es-Andrea.txt
+    Before collect: /workspaces/training/hello-nextflow/work/8c/174fc0d15b4f859d0914e3ae0e5fbd/es-Raphael.txt
     Before collect: /workspaces/training/hello-nextflow/work/ae/3c0ca00c751ea9330d7f103d4eae25/es-Mateo.txt
-    After collect: [/workspaces/training/hello-nextflow/work/44/9c4185f2ac241b19cb56a67526a966/es-Celine.txt, /workspaces/training/hello-nextflow/work/8c/174fc0d15b4f859d0914e3ae0e5fbd/es-Andrea.txt, /workspaces/training/hello-nextflow/work/ae/3c0ca00c751ea9330d7f103d4eae25/es-Mateo.txt]
+    After collect: [/workspaces/training/hello-nextflow/work/44/9c4185f2ac241b19cb56a67526a966/es-Celine.txt, /workspaces/training/hello-nextflow/work/8c/174fc0d15b4f859d0914e3ae0e5fbd/es-Raphael.txt, /workspaces/training/hello-nextflow/work/ae/3c0ca00c751ea9330d7f103d4eae25/es-Mateo.txt]
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - hello/Andrea.txt
+        - hello/Raphael.txt
         - hello/Mateo.txt
         - hello/Celine.txt
 
       translated:
         - hello/es-Celine.txt
-        - hello/es-Andrea.txt
+        - hello/es-Raphael.txt
         - hello/es-Mateo.txt
 
       collected: hello/batch-greetings.txt
@@ -1048,7 +1048,7 @@ Finally, you can have a look at the contents of the output file to satisfy yours
 
     ```console title="results/hello/batch-greetings.txt"
     Hola, Celine!
-    Hola, Andrea!
+    Hola, Raphael!
     Hola, Mateo!
     ```
 
@@ -1162,11 +1162,11 @@ nextflow run hello-workflow.nf -resume --batch trio
       greetings:
         - trio/intermediates/Mateo.txt
         - trio/intermediates/Celine.txt
-        - trio/intermediates/Andrea.txt
+        - trio/intermediates/Raphael.txt
 
       translated:
         - trio/intermediates/es-Celine.txt
-        - trio/intermediates/es-Andrea.txt
+        - trio/intermediates/es-Raphael.txt
         - trio/intermediates/es-Mateo.txt
 
       collected: trio/intermediates/trio-greetings.txt
@@ -1403,14 +1403,14 @@ nextflow run hello-workflow.nf -resume --batch trio
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - trio/intermediates/Andrea.txt
+        - trio/intermediates/Raphael.txt
         - trio/intermediates/Mateo.txt
         - trio/intermediates/Celine.txt
 
       translated:
         - trio/intermediates/es-Mateo.txt
         - trio/intermediates/es-Celine.txt
-        - trio/intermediates/es-Andrea.txt
+        - trio/intermediates/es-Raphael.txt
 
       collected: trio/intermediates/trio-greetings.txt
 
@@ -1483,9 +1483,9 @@ Run it with `--batch sorted` and check `results/sorted/intermediates/sorted-gree
     The greetings are now in alphabetical order, whatever order the tasks finished in:
 
     ```console title="results/sorted/intermediates/sorted-greetings.txt"
-    Hola, Andrea!
     Hola, Celine!
     Hola, Mateo!
+    Hola, Raphael!
     ```
 
 ### Exercise 2: Add a language
@@ -1513,7 +1513,7 @@ Run the workflow with `--language pt --batch portuguese` and check the collected
 
     ```console title="results/portuguese/intermediates/portuguese-greetings.txt"
     Ola, Celine!
-    Ola, Andrea!
+    Ola, Raphael!
     Ola, Mateo!
     ```
 
@@ -1521,7 +1521,7 @@ Run the workflow with `--language pt --batch portuguese` and check the collected
 
 The second column of `data/names.csv` gives a language for each name.
 Starting from `hello-workflow.nf` as it stands at the end of this part, translate each greeting into the language of its own row, instead of one language for the whole batch.
-Run it with `--batch mixed` and check that the collected file contains `Hola, Mateo!`, `Ciao, Andrea!` and `Bonjour, Celine!`.
+Run it with `--batch mixed` and check that the collected file contains `Hola, Mateo!`, `Ciao, Raphael!` and `Bonjour, Celine!`.
 
 ??? tip "Hint"
 
@@ -1582,7 +1582,7 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
 
     ```console title="results/mixed/intermediates/mixed-greetings.txt"
     Hola, Mateo!
-    Ciao, Andrea!
+    Ciao, Raphael!
     Bonjour, Celine!
     ```
 
@@ -1647,7 +1647,7 @@ Which operator should replace `???` to gather all outputs into a single list for
 
 ```groovy hl_lines="4"
 workflow {
-    names_ch = channel.of('Mateo', 'Andrea', 'Celine')
+    names_ch = channel.of('Mateo', 'Raphael', 'Celine')
     sayHello(names_ch)
     gatherAll(sayHello.out.???)
 }

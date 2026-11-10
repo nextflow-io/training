@@ -21,7 +21,7 @@ process sayHello {
  * Pipeline parameters
  */
 params {
-    input: Path = 'data/names-header.csv'
+    input: Path = 'data/names.csv'
 }
 
 workflow {
@@ -29,11 +29,8 @@ workflow {
     main:
     // create a channel for inputs from a CSV file
     name_ch = channel.fromPath(params.input)
-                        .view { csv -> "Before splitCsv: $csv" }
-                        .splitCsv(header: true)
-                        .view { row -> "After splitCsv: $row" }
-                        .map { row -> row.name }
-                        .view { name -> "After map: $name" }
+                        .splitCsv()
+                        .map { row -> row[1] }
     // emit a greeting
     sayHello(name_ch)
 
