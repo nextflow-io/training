@@ -18,7 +18,7 @@ process sayHello {
 }
 
 /*
- * Use Python to translate the greeting into French
+ * Use Python to translate the greeting into Spanish
  */
 process translateGreeting {
 
@@ -26,7 +26,7 @@ process translateGreeting {
     path input_file
 
     output:
-    path "french-${input_file}"
+    path "spanish-${input_file}"
 
     script:
     """
@@ -35,8 +35,8 @@ process translateGreeting {
     with open('${input_file}') as greeting_file:
         greeting = greeting_file.read()
 
-    with open('french-${input_file}', 'w') as translated_file:
-        translated_file.write(greeting.replace('Hello', 'Bonjour'))
+    with open('spanish-${input_file}', 'w') as translated_file:
+        translated_file.write(greeting.replace('Hello', 'Hola'))
     """
 }
 

@@ -29,7 +29,7 @@ Over the course of five parts, you transformed that basic workflow into a modula
 </figure>
 
 1. **`sayHello`:** Writes a greeting for each name to its own output file (_e.g._ "Hello, Mateo!" in "Mateo-output.txt")
-2. **`translateGreeting`:** Translates each greeting into the language set by `--language` with a Python script (_e.g._ "Bonjour, Mateo!")
+2. **`translateGreeting`:** Translates each greeting into the language set by `--language` with a Python script (_e.g._ "Hola, Mateo!")
 3. **`collectGreetings`:** Collects all translated greetings into a single batch file
 4. **`cowpy`:** Generates ASCII art using the `cowpy` tool
 

@@ -63,7 +63,7 @@ include { sayHello } from './modules/sayHello.nf'
  */
 params {
     input: Path = 'data/names.csv'
-    language: String = 'french'
+    language: String = 'spanish'
     batch: String = 'batch'
 }
 

@@ -48,12 +48,12 @@ nextflow run hello-modules.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [nostalgic_lorenz] revision: 9f1780070d
+    Launching `hello-modules.nf` [cranky_waddington] revision: b4393cf728
 
     executor >  local (7)
-    [7f/186e62] sayHello (2)          | 3 of 3 ✔
-    [be/ce8eb4] translateGreeting (2) | 3 of 3 ✔
-    [d1/9029f2] collectGreetings      | 1 of 1 ✔
+    [d5/968820] sayHello (3)          | 3 of 3 ✔
+    [27/1b8c0b] translateGreeting (2) | 3 of 3 ✔
+    [51/cd354d] collectGreetings      | 1 of 1 ✔
 
     Outputs:
 
@@ -65,9 +65,9 @@ nextflow run hello-modules.nf
         - batch/intermediates/Andrea-output.txt
 
       translated:
-        - batch/intermediates/french-Andrea-output.txt
-        - batch/intermediates/french-Mateo-output.txt
-        - batch/intermediates/french-Celine-output.txt
+        - batch/intermediates/spanish-Mateo-output.txt
+        - batch/intermediates/spanish-Andrea-output.txt
+        - batch/intermediates/spanish-Celine-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
@@ -85,10 +85,10 @@ As previously, you will find the output files in the locations specified in the 
         ├── Andrea-output.txt
         ├── Celine-output.txt
         ├── COLLECTED-batch-output.txt
-        ├── french-Andrea-output.txt
-        ├── french-Celine-output.txt
-        ├── french-Mateo-output.txt
-        └── Mateo-output.txt
+        ├── Mateo-output.txt
+        ├── spanish-Andrea-output.txt
+        ├── spanish-Celine-output.txt
+        └── spanish-Mateo-output.txt
     ```
 
 If that worked for you, you're ready to learn how to modularize your workflow code.
@@ -169,7 +169,7 @@ Let's insert that above the `params` block and fill it out appropriately.
      */
     params {
         input: Path = 'data/names.csv'
-        language: String = 'french'
+        language: String = 'spanish'
         batch: String = 'batch'
     }
     ```
@@ -182,7 +182,7 @@ Let's insert that above the `params` block and fill it out appropriately.
      */
     params {
         input: Path = 'data/names.csv'
-        language: String = 'french'
+        language: String = 'spanish'
         batch: String = 'batch'
     }
     ```
@@ -202,25 +202,25 @@ nextflow run hello-modules.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [stoic_mirzakhani] revision: 06c21c34c3
+    Launching `hello-modules.nf` [irreverent_nightingale] revision: c301d4f9fa
 
-    [7f/186e62] sayHello (2)          | 3 of 3, cached: 3 ✔
-    [be/ce8eb4] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [d1/9029f2] collectGreetings      | 1 of 1, cached: 1 ✔
+    [d5/968820] sayHello (3)          | 3 of 3, cached: 3 ✔
+    [27/1b8c0b] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [51/cd354d] collectGreetings      | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - batch/intermediates/Celine-output.txt
         - batch/intermediates/Andrea-output.txt
         - batch/intermediates/Mateo-output.txt
+        - batch/intermediates/Celine-output.txt
 
       translated:
-        - batch/intermediates/french-Andrea-output.txt
-        - batch/intermediates/french-Mateo-output.txt
-        - batch/intermediates/french-Celine-output.txt
+        - batch/intermediates/spanish-Celine-output.txt
+        - batch/intermediates/spanish-Andrea-output.txt
+        - batch/intermediates/spanish-Mateo-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
@@ -314,7 +314,7 @@ Insert the include declaration above the `params` block and fill it out appropri
      */
     params {
         input: Path = 'data/names.csv'
-        language: String = 'french'
+        language: String = 'spanish'
         batch: String = 'batch'
     }
     ```
@@ -330,7 +330,7 @@ Insert the include declaration above the `params` block and fill it out appropri
      */
     params {
         input: Path = 'data/names.csv'
-        language: String = 'french'
+        language: String = 'spanish'
         batch: String = 'batch'
     }
     ```
@@ -350,25 +350,25 @@ nextflow run hello-modules.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [agitated_sanger] revision: 45bb96d942
+    Launching `hello-modules.nf` [cranky_shannon] revision: e8669b1308
 
-    [7f/186e62] sayHello (2)          | 3 of 3, cached: 3 ✔
-    [be/ce8eb4] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [d1/9029f2] collectGreetings      | 1 of 1, cached: 1 ✔
+    [d5/968820] sayHello (3)          | 3 of 3, cached: 3 ✔
+    [27/1b8c0b] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [51/cd354d] collectGreetings      | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
+        - batch/intermediates/Celine-output.txt
         - batch/intermediates/Andrea-output.txt
         - batch/intermediates/Mateo-output.txt
-        - batch/intermediates/Celine-output.txt
 
       translated:
-        - batch/intermediates/french-Celine-output.txt
-        - batch/intermediates/french-Andrea-output.txt
-        - batch/intermediates/french-Mateo-output.txt
+        - batch/intermediates/spanish-Mateo-output.txt
+        - batch/intermediates/spanish-Andrea-output.txt
+        - batch/intermediates/spanish-Celine-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
@@ -437,7 +437,7 @@ Insert the include declaration above the `params` block and fill it out appropri
      */
     params {
         input: Path = 'data/names.csv'
-        language: String = 'french'
+        language: String = 'spanish'
         batch: String = 'batch'
     }
     ```
@@ -454,7 +454,7 @@ Insert the include declaration above the `params` block and fill it out appropri
      */
     params {
         input: Path = 'data/names.csv'
-        language: String = 'french'
+        language: String = 'spanish'
         batch: String = 'batch'
     }
     ```
@@ -474,11 +474,11 @@ nextflow run hello-modules.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [sleepy_lorenz] revision: 7239c88c96
+    Launching `hello-modules.nf` [irreverent_shaw] revision: bd0f694fe5
 
-    [7f/186e62] sayHello (2)          | 3 of 3, cached: 3 ✔
-    [be/ce8eb4] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [d1/9029f2] collectGreetings      | 1 of 1, cached: 1 ✔
+    [d5/968820] sayHello (3)          | 3 of 3, cached: 3 ✔
+    [27/1b8c0b] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [51/cd354d] collectGreetings      | 1 of 1, cached: 1 ✔
 
     Outputs:
 
@@ -486,13 +486,13 @@ nextflow run hello-modules.nf -resume
 
       first_output:
         - batch/intermediates/Mateo-output.txt
-        - batch/intermediates/Andrea-output.txt
         - batch/intermediates/Celine-output.txt
+        - batch/intermediates/Andrea-output.txt
 
       translated:
-        - batch/intermediates/french-Andrea-output.txt
-        - batch/intermediates/french-Celine-output.txt
-        - batch/intermediates/french-Mateo-output.txt
+        - batch/intermediates/spanish-Andrea-output.txt
+        - batch/intermediates/spanish-Celine-output.txt
+        - batch/intermediates/spanish-Mateo-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
@@ -526,14 +526,14 @@ The workflow script still sets default values for its parameters in the `params`
  */
 params {
     input: Path = 'data/names.csv'
-    language: String = 'french'
+    language: String = 'spanish'
     batch: String = 'batch'
 }
 ```
 
 That was convenient while we were developing the workflow, but these values are not all the same kind of thing:
 
-- `language = 'french'` and `batch = 'batch'` are true defaults: sensible values for anyone who runs the pipeline without specifying them.
+- `language = 'spanish'` and `batch = 'batch'` are true defaults: sensible values for anyone who runs the pipeline without specifying them.
 - `input = 'data/names.csv'` is a test value: it points to the example data provided with the course, which nobody would want to process by default in a real analysis.
 
 As you saw in Nextflow Run, true defaults belong in the `params` section of `nextflow.config`, and test values belong in a `test` profile.
@@ -564,7 +564,7 @@ In the `params` block of the workflow script, make the following code change:
      */
     params {
         input: Path = 'data/names.csv'
-        language: String = 'french'
+        language: String = 'spanish'
         batch: String = 'batch'
     }
     ```
@@ -582,7 +582,7 @@ Open `nextflow.config` and make the following change:
      * Pipeline parameters
      */
     params {
-        language = 'french'
+        language = 'spanish'
         batch = 'batch'
     }
 
@@ -617,7 +617,7 @@ nextflow run hello-modules.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [exotic_northcutt] revision: 6024dbeca6
+    Launching `hello-modules.nf` [modest_austin] revision: 6024dbeca6
 
     Parameter `input` is required but was not specified on the command line, params file, or config
     ```
@@ -638,11 +638,11 @@ nextflow run hello-modules.nf -profile test -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [focused_lavoisier] revision: 6024dbeca6
+    Launching `hello-modules.nf` [jolly_einstein] revision: 6024dbeca6
 
-    [7f/186e62] sayHello (2)          | 3 of 3, cached: 3 ✔
-    [be/ce8eb4] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [d1/9029f2] collectGreetings      | 1 of 1, cached: 1 ✔
+    [d5/968820] sayHello (3)          | 3 of 3, cached: 3 ✔
+    [27/1b8c0b] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [51/cd354d] collectGreetings      | 1 of 1, cached: 1 ✔
 
     Outputs:
 
@@ -654,9 +654,9 @@ nextflow run hello-modules.nf -profile test -resume
         - batch/intermediates/Mateo-output.txt
 
       translated:
-        - batch/intermediates/french-Mateo-output.txt
-        - batch/intermediates/french-Celine-output.txt
-        - batch/intermediates/french-Andrea-output.txt
+        - batch/intermediates/spanish-Andrea-output.txt
+        - batch/intermediates/spanish-Celine-output.txt
+        - batch/intermediates/spanish-Mateo-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
@@ -685,10 +685,10 @@ These optional exercises let you practice what you learned in this part.
 Each one can be solved with what this part covered; open the hint if you get stuck.
 The solutions are also in `solutions/4-hello-modules/bonus/`.
 
-### Exercise 1: Add a profile for Spanish greetings
+### Exercise 1: Add a profile for French greetings
 
-Starting from your `hello-modules.nf` and `nextflow.config` at the end of this part, add a profile named `spanish` that sets the language to Spanish.
-Then run the workflow with both the `test` and `spanish` profiles, and check that the collected greetings are in Spanish.
+Starting from your `hello-modules.nf` and `nextflow.config` at the end of this part, add a profile named `french` that sets the language to French.
+Then run the workflow with both the `test` and `french` profiles, and check that the collected greetings are in French.
 
 ??? tip "Hint"
 
@@ -697,15 +697,15 @@ Then run the workflow with both the `test` and `spanish` profiles, and check tha
 
 ??? solution
 
-    In `nextflow.config`, add the `spanish` profile next to the `test` profile:
+    In `nextflow.config`, add the `french` profile next to the `test` profile:
 
     ```groovy title="nextflow.config" linenums="14" hl_lines="5-7"
     profiles {
         test {
             params.input = 'data/names.csv'
         }
-        spanish {
-            params.language = 'spanish'
+        french {
+            params.language = 'french'
         }
     }
     ```
@@ -713,44 +713,44 @@ Then run the workflow with both the `test` and `spanish` profiles, and check tha
     Then run the workflow with both profiles:
 
     ```bash
-    nextflow run hello-modules.nf -profile test,spanish -resume
+    nextflow run hello-modules.nf -profile test,french -resume
     ```
 
     ```console title="Command output"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [sick_lamarr] revision: 6024dbeca6
+    Launching `hello-modules.nf` [agitated_kalman] revision: 6024dbeca6
 
     executor >  local (4)
-    [7f/186e62] sayHello (2)          | 3 of 3, cached: 3 ✔
-    [f5/9d95df] translateGreeting (3) | 3 of 3 ✔
-    [83/bb51f1] collectGreetings      | 1 of 1 ✔
+    [d5/968820] sayHello (3)          | 3 of 3, cached: 3 ✔
+    [ed/d7f3e3] translateGreeting (3) | 3 of 3 ✔
+    [80/1d28d0] collectGreetings      | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
-        - batch/intermediates/Mateo-output.txt
         - batch/intermediates/Andrea-output.txt
         - batch/intermediates/Celine-output.txt
+        - batch/intermediates/Mateo-output.txt
 
       translated:
-        - batch/intermediates/spanish-Andrea-output.txt
-        - batch/intermediates/spanish-Mateo-output.txt
-        - batch/intermediates/spanish-Celine-output.txt
+        - batch/intermediates/french-Celine-output.txt
+        - batch/intermediates/french-Andrea-output.txt
+        - batch/intermediates/french-Mateo-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
       batch_report: batch/batch-report.txt
     ```
 
-    The `sayHello` tasks are cached, and the translation runs again in Spanish:
+    The `sayHello` tasks are cached, and the translation runs again in French:
 
     ```console title="results/batch/intermediates/COLLECTED-batch-output.txt"
-    Hola, Andrea!
-    Hola, Mateo!
-    Hola, Celine!
+    Bonjour, Celine!
+    Bonjour, Andrea!
+    Bonjour, Mateo!
     ```
 
 ### Exercise 2: Give each module its own folder
@@ -792,25 +792,25 @@ modules
     ```console title="Command output"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [compassionate_lavoisier] revision: 1a860c4bd9
+    Launching `hello-modules.nf` [romantic_baekeland] revision: 1a860c4bd9
 
-    [7f/186e62] sayHello (2)          | 3 of 3, cached: 3 ✔
-    [be/ce8eb4] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [d1/9029f2] collectGreetings      | 1 of 1, cached: 1 ✔
+    [d5/968820] sayHello (3)          | 3 of 3, cached: 3 ✔
+    [27/1b8c0b] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [51/cd354d] collectGreetings      | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       first_output:
+        - batch/intermediates/Celine-output.txt
         - batch/intermediates/Mateo-output.txt
         - batch/intermediates/Andrea-output.txt
-        - batch/intermediates/Celine-output.txt
 
       translated:
-        - batch/intermediates/french-Celine-output.txt
-        - batch/intermediates/french-Mateo-output.txt
-        - batch/intermediates/french-Andrea-output.txt
+        - batch/intermediates/spanish-Celine-output.txt
+        - batch/intermediates/spanish-Mateo-output.txt
+        - batch/intermediates/spanish-Andrea-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
