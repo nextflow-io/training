@@ -77,7 +77,7 @@ process collectGreetings {
  */
 params {
     input: Path = 'data/names.csv'
-    language: String = 'french'
+    language: String = 'spanish'
     batch: String = 'batch'
 }
 
