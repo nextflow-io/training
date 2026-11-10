@@ -29,6 +29,13 @@ Through this hands-on course, you've learned how to:
 
 You're now equipped with the foundational knowledge to start integrating existing Nextflow pipelines into your own work.
 
+## Feedback survey
+
+Before you move on, please take a minute or two to complete this short survey.
+Your feedback helps us improve our training materials for everyone.
+
+<div data-tf-live="01M2DNWERQ51HXFWQFJRSEMRK1"></div><script src="//embed.typeform.com/next/embed.js"></script>
+
 ## Next steps to build your skills
 
 Here are our top suggestions for what to do next:
@@ -42,9 +49,3 @@ Or, if you're ready to stop just running Nextflow and start writing it, become a
 ## Getting help
 
 For help resources and community support, see the [Help page](../help.md).
-
-## Feedback survey
-
-Before you move on, please take a minute to complete the course survey! Your feedback helps us improve our training materials for everyone.
-
-[Take the survey :material-arrow-right:](survey.md){ .md-button .md-button--primary }

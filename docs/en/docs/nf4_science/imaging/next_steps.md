@@ -4,6 +4,13 @@ Congratulations on completing the Nextflow for Bioimaging training!
 
 You now have the foundational skills to run and configure Nextflow pipelines for imaging data analysis.
 
+## Feedback survey
+
+Before you move on, please take a minute or two to complete this short survey.
+Your feedback helps us improve our training materials for everyone.
+
+<div data-tf-live="01K8GYZC9RJ7ASGKJYVG5ZETQW"></div><script src="//embed.typeform.com/next/embed.js"></script>
+
 ## Continue learning
 
 Here are some recommended next steps to deepen your Nextflow knowledge:
