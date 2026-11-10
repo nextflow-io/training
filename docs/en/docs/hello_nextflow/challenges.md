@@ -276,15 +276,18 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
 
 ## Challenge 4: Give each name its own character
 
-Start from `main.nf` as it stands at the end of Part 5:
+Start from `main.nf` and its modules as they stand at the end of Part 5:
 
 ```bash
 cp solutions/5-hello-modules/main.nf hello-challenge.nf
+cp -r modules challenge-modules
 ```
 
 At the end of Part 5, the pipeline project consists of `main.nf`, the modules in `modules/`, and the parameter values and profiles in `nextflow.config`.
-The copy uses the same modules and configuration.
-This challenge changes the modules, which `main.nf` also uses, so make a copy of the `modules` directory first if you want to keep a working version of `main.nf`.
+This challenge changes the modules, which `main.nf` and Challenges 5 and 6 also use, so the second command copies them to `challenge-modules/`.
+Point the `include` declarations in `hello-challenge.nf` at `./challenge-modules/...` and edit only those copies, so that `main.nf` and the other challenges keep working.
+As in Part 5 Exercise 2, Nextflow finds each module from the path in its `include` declaration.
+`hello-challenge.nf` uses the same configuration as `main.nf`.
 
 The third column of `data/names.csv` assigns a character to each name: `squirrel` for Mateo, `turtle` for Raphael and `moose` for Celine.
 Make the workflow produce one ASCII art file per name, each drawn by the character from its row, instead of a single drawing of all the greetings.
@@ -298,6 +301,16 @@ Keep the collected file and the report as they are.
     Challenge 3 uses the same approach.
 
 ??? solution
+
+    In `hello-challenge.nf`, include the modules from `challenge-modules/`:
+
+    ```groovy title="hello-challenge.nf" linenums="3" hl_lines="2-5"
+    // Include modules
+    include { sayHello } from './challenge-modules/sayHello.nf'
+    include { translateGreeting } from './challenge-modules/translateGreeting.nf'
+    include { collectGreetings } from './challenge-modules/collectGreetings.nf'
+    include { cowpy } from './challenge-modules/cowpy.nf'
+    ```
 
     In the workflow, build `[name, character]` pairs, pass them through the processes, and call `cowpy` on each translated greeting:
 
@@ -332,9 +345,9 @@ Keep the collected file and the report as they are.
     The `character` parameter is no longer used, so you can remove it from the `params` block of `hello-challenge.nf`.
     Keep its default value in `nextflow.config`, since `main.nf` still uses it.
 
-    In the modules, the inputs and outputs carry the character alongside the file:
+    In the modules in `challenge-modules/`, the inputs and outputs carry the character alongside the file:
 
-    ```groovy title="modules/sayHello.nf" linenums="6" hl_lines="2 5"
+    ```groovy title="challenge-modules/sayHello.nf" linenums="6" hl_lines="2 5"
         input:
         tuple val(name), val(character)
 
@@ -342,7 +355,7 @@ Keep the collected file and the report as they are.
         tuple path("${name}.txt"), val(character)
     ```
 
-    ```groovy title="modules/translateGreeting.nf" linenums="6" hl_lines="2 6"
+    ```groovy title="challenge-modules/translateGreeting.nf" linenums="6" hl_lines="2 6"
         input:
         tuple path(input_file), val(character)
         val language
@@ -351,7 +364,7 @@ Keep the collected file and the report as they are.
         tuple path("${language}-${input_file}"), val(character)
     ```
 
-    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2"
+    ```groovy title="challenge-modules/cowpy.nf" linenums="9" hl_lines="2"
         input:
         tuple path(input_file), val(character)
     ```
@@ -451,13 +464,15 @@ Keep the collected file and the report as they are.
                    ||     ||
     ```
 
-    The solution directory contains its own copy of the modified modules, so you can run the solution directly:
+    The solution directory contains its own `challenge-modules/` with the modified modules, so you can run the solution directly:
 
     ```bash
     nextflow run solutions/challenges/challenge-4/hello-challenge.nf -profile test
     ```
 
-    To learn more about carrying metadata such as the character alongside each file, see the [Metadata and Meta Maps](../side_quests/metadata/index.md#15-use-a-meta-map-file-interface) side quest.
+    The [Metadata and Meta Maps](../side_quests/metadata/index.md) side quest covers this pattern in depth.
+    Its [section 1.4](../side_quests/metadata/index.md#14-group-everything-as-a-single-input-to-the-process) groups several values into one tuple input, as you did here.
+    [Section 1.5](../side_quests/metadata/index.md#15-use-a-meta-map-file-interface) then solves a problem much like this one, with a `cowpy` character per row, using a meta map: a single map that holds all of a sample's metadata next to its file, so that adding a field doesn't change the input and output declarations of every process.
 
 ---
 
