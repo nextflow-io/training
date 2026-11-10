@@ -62,11 +62,11 @@ nextflow run hello-modules.nf
       greetings:
         - batch/intermediates/Mateo.txt
         - batch/intermediates/Celine.txt
-        - batch/intermediates/Andrea.txt
+        - batch/intermediates/Raphael.txt
 
       translated:
         - batch/intermediates/es-Mateo.txt
-        - batch/intermediates/es-Andrea.txt
+        - batch/intermediates/es-Raphael.txt
         - batch/intermediates/es-Celine.txt
 
       collected: batch/intermediates/batch-greetings.txt
@@ -82,13 +82,13 @@ As previously, you will find the output files in the locations specified in the 
     results/batch
     ├── batch-report.txt
     └── intermediates
-        ├── Andrea.txt
         ├── batch-greetings.txt
         ├── Celine.txt
-        ├── es-Andrea.txt
         ├── es-Celine.txt
         ├── es-Mateo.txt
-        └── Mateo.txt
+        ├── es-Raphael.txt
+        ├── Mateo.txt
+        └── Raphael.txt
     ```
 
 If that worked for you, you're ready to learn how to modularize your workflow code.
@@ -213,13 +213,13 @@ nextflow run hello-modules.nf -resume
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - batch/intermediates/Andrea.txt
+        - batch/intermediates/Raphael.txt
         - batch/intermediates/Mateo.txt
         - batch/intermediates/Celine.txt
 
       translated:
         - batch/intermediates/es-Celine.txt
-        - batch/intermediates/es-Andrea.txt
+        - batch/intermediates/es-Raphael.txt
         - batch/intermediates/es-Mateo.txt
 
       collected: batch/intermediates/batch-greetings.txt
@@ -366,12 +366,12 @@ nextflow run hello-modules.nf -resume
 
       greetings:
         - batch/intermediates/Celine.txt
-        - batch/intermediates/Andrea.txt
+        - batch/intermediates/Raphael.txt
         - batch/intermediates/Mateo.txt
 
       translated:
         - batch/intermediates/es-Mateo.txt
-        - batch/intermediates/es-Andrea.txt
+        - batch/intermediates/es-Raphael.txt
         - batch/intermediates/es-Celine.txt
 
       collected: batch/intermediates/batch-greetings.txt
@@ -491,10 +491,10 @@ nextflow run hello-modules.nf -resume
       greetings:
         - batch/intermediates/Mateo.txt
         - batch/intermediates/Celine.txt
-        - batch/intermediates/Andrea.txt
+        - batch/intermediates/Raphael.txt
 
       translated:
-        - batch/intermediates/es-Andrea.txt
+        - batch/intermediates/es-Raphael.txt
         - batch/intermediates/es-Celine.txt
         - batch/intermediates/es-Mateo.txt
 
@@ -653,12 +653,12 @@ nextflow run hello-modules.nf -profile test -resume
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - batch/intermediates/Andrea.txt
+        - batch/intermediates/Raphael.txt
         - batch/intermediates/Celine.txt
         - batch/intermediates/Mateo.txt
 
       translated:
-        - batch/intermediates/es-Andrea.txt
+        - batch/intermediates/es-Raphael.txt
         - batch/intermediates/es-Celine.txt
         - batch/intermediates/es-Mateo.txt
 
@@ -735,13 +735,13 @@ Then run the workflow with both the `test` and `french` profiles, and check that
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - batch/intermediates/Andrea.txt
+        - batch/intermediates/Raphael.txt
         - batch/intermediates/Celine.txt
         - batch/intermediates/Mateo.txt
 
       translated:
         - batch/intermediates/fr-Celine.txt
-        - batch/intermediates/fr-Andrea.txt
+        - batch/intermediates/fr-Raphael.txt
         - batch/intermediates/fr-Mateo.txt
 
       collected: batch/intermediates/batch-greetings.txt
@@ -753,7 +753,7 @@ Then run the workflow with both the `test` and `french` profiles, and check that
 
     ```console title="results/batch/intermediates/batch-greetings.txt"
     Bonjour, Celine!
-    Bonjour, Andrea!
+    Bonjour, Raphael!
     Bonjour, Mateo!
     ```
 
@@ -809,12 +809,12 @@ modules
       greetings:
         - batch/intermediates/Celine.txt
         - batch/intermediates/Mateo.txt
-        - batch/intermediates/Andrea.txt
+        - batch/intermediates/Raphael.txt
 
       translated:
         - batch/intermediates/es-Celine.txt
         - batch/intermediates/es-Mateo.txt
-        - batch/intermediates/es-Andrea.txt
+        - batch/intermediates/es-Raphael.txt
 
       collected: batch/intermediates/batch-greetings.txt
 

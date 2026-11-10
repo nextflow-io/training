@@ -29,12 +29,8 @@ workflow {
     main:
     // create a channel for inputs from a CSV file
     name_ch = channel.fromPath(params.input)
-                        .view { csv -> "Before splitCsv: $csv" }
                         .splitCsv()
-                        .view { row -> "After splitCsv: $row" }
-                        .filter { row -> row[1] == 'fr' }
                         .map { row -> row[0] }
-                        .view { name -> "After map: $name" }
     // emit a greeting
     sayHello(name_ch)
 

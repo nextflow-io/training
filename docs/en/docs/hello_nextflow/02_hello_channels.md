@@ -89,10 +89,10 @@ Functionally this will be similar to how we had it set up before, but instead of
 This is the line of code we're going to use:
 
 ```console title="Syntax"
-name_ch = channel.of('Mateo')
+name_ch = channel.of('Ziggy')
 ```
 
-This creates a channel called `name_ch` using the `channel.of()` channel factory, which sets up a simple queue channel, and loads the string `'Mateo'` to use as the name value.
+This creates a channel called `name_ch` using the `channel.of()` channel factory, which sets up a simple queue channel, and loads the string `'Ziggy'` to use as the name value.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.svg"
@@ -111,7 +111,7 @@ In the workflow block, add the channel factory code:
 
         main:
         // create a channel for inputs
-        name_ch = channel.of('Mateo')
+        name_ch = channel.of('Ziggy')
         // emit a greeting
         sayHello(params.name)
 
@@ -149,7 +149,7 @@ In the workflow block, make the following code change:
 
         main:
         // create a channel for inputs
-        name_ch = channel.of('Mateo')
+        name_ch = channel.of('Ziggy')
         // emit a greeting
         sayHello(name_ch)
 
@@ -165,7 +165,7 @@ In the workflow block, make the following code change:
 
         main:
         // create a channel for inputs
-        name_ch = channel.of('Mateo')
+        name_ch = channel.of('Ziggy')
         // emit a greeting
         sayHello(params.name)
 
@@ -176,7 +176,7 @@ In the workflow block, make the following code change:
 
 This tells Nextflow to run the `sayHello` process on the contents of the `name_ch` channel.
 
-Now our workflow is properly functional; it is the explicit equivalent of writing `sayHello('Mateo')`.
+Now our workflow is properly functional; it is the explicit equivalent of writing `sayHello('Ziggy')`.
 
 ### 1.3. Run the workflow
 
@@ -210,7 +210,7 @@ You can check the results directory to see the greeting for the name we loaded i
 ??? abstract "File contents"
 
     ```console title="results/hello/output.txt"
-    Hello, Mateo!
+    Hello, Ziggy!
     ```
 
 So we've increased the flexibility of our workflow while keeping the same kind of result.
@@ -234,7 +234,7 @@ Add this tiny line to the workflow block:
 
         main:
         // create a channel for inputs
-        name_ch = channel.of('Mateo')
+        name_ch = channel.of('Ziggy')
                             .view()
         // emit a greeting
         sayHello(name_ch)
@@ -251,7 +251,7 @@ Add this tiny line to the workflow block:
 
         main:
         // create a channel for inputs
-        name_ch = channel.of('Mateo')
+        name_ch = channel.of('Ziggy')
         // emit a greeting
         sayHello(name_ch)
 
@@ -277,7 +277,7 @@ nextflow run hello-channels.nf
 
     executor >  local (1)
     [41/a766f3] sayHello (1) | 1 of 1 ✔
-    Mateo
+    Ziggy
 
     Outputs:
 
@@ -309,7 +309,7 @@ Workflows typically run on batches of inputs that are meant to be processed in b
 Conveniently, the `channel.of()` channel factory we've been using is quite happy to accept more than one value, so we don't need to modify that at all.
 We can just load multiple values into the channel.
 
-Let's make them `'Mateo'`, `'Andrea'` and `'Celine'`.
+Let's make them `'Mateo'`, `'Raphael'` and `'Celine'`.
 
 #### 2.1.1. Add more names
 
@@ -319,7 +319,7 @@ In the workflow block, make the following code change:
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
         // create a channel for inputs
-        name_ch = channel.of('Mateo','Andrea','Celine')
+        name_ch = channel.of('Mateo','Raphael','Celine')
                             .view()
     ```
 
@@ -327,7 +327,7 @@ In the workflow block, make the following code change:
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
         // create a channel for inputs
-        name_ch = channel.of('Mateo')
+        name_ch = channel.of('Ziggy')
                             .view()
     ```
 
@@ -351,7 +351,7 @@ nextflow run hello-channels.nf
     executor >  local (3)
     [a7/df0f53] sayHello (3) | 3 of 3 ✔
     Mateo
-    Andrea
+    Raphael
     Celine
 
     Outputs:
@@ -437,7 +437,7 @@ nextflow run hello-channels.nf -ansi-log false
     N E X T F L O W  ~  version 26.04.4
     Launching `hello-channels.nf` [amazing_mendel] - revision: cdd5bd6ff4
     Mateo
-    Andrea
+    Raphael
     Celine
     [c3/557357] Submitted process > sayHello (1)
     [24/a64e64] Submitted process > sayHello (2)
@@ -512,7 +512,7 @@ Anyway, now that we have the subdirectories of each process call, we can look fo
     ```
 
     ```txt title="work/24/a64e64785030d9c2c7731ffcfa2469/output.txt"
-    Hello, Andrea!
+    Hello, Raphael!
     ```
 
     ```txt title="work/3c/1ef83bfb5e198624a40f13a767eef6/output.txt"
@@ -611,7 +611,7 @@ nextflow run hello-channels.nf
     executor >  local (3)
     [12/0c7a46] sayHello (2) | 3 of 3 ✔
     Mateo
-    Andrea
+    Raphael
     Celine
 
     Outputs:
@@ -621,7 +621,7 @@ nextflow run hello-channels.nf
       greetings:
         - hello/Mateo.txt
         - hello/Celine.txt
-        - hello/Andrea.txt
+        - hello/Raphael.txt
     ```
 
 Reverting back to the summary view, the output is summarized on one line again.
@@ -632,18 +632,14 @@ Have a look at the `results` directory to see if all the greetings are there.
     ```console
     results
     ├── hello
-    │   ├── Andrea.txt
     │   ├── Celine.txt
     │   ├── Mateo.txt
+    │   ├── Raphael.txt
     │   └── output.txt
     └── output.txt -> /workspaces/training/hello-nextflow/work/.../output.txt
     ```
 
 ??? abstract "File contents"
-
-    ```console title="results/hello/Andrea.txt"
-    Hello, Andrea!
-    ```
 
     ```console title="results/hello/Celine.txt"
     Hello, Celine!
@@ -651,6 +647,10 @@ Have a look at the `results` directory to see if all the greetings are there.
 
     ```console title="results/hello/Mateo.txt"
     Hello, Mateo!
+    ```
+
+    ```console title="results/hello/Raphael.txt"
+    Hello, Raphael!
     ```
 
 Success! Now we can add as many names as we like without worrying about output files being overwritten.
@@ -679,7 +679,7 @@ What if we wanted to provide those multiple inputs in a different way?
 
 For example, imagine we set up an input variable containing an array of elements like this:
 
-`names_array = ['Mateo','Andrea','Celine']`
+`names_array = ['Mateo','Raphael','Celine']`
 
 Can we load that into our output channel and expect it to work?
 
@@ -705,9 +705,9 @@ Let's take the `names_array` variable we just imagined and make it a reality by 
 
         main:
         // declare an array of input names
-        names_array = ['Mateo','Andrea','Celine']
+        names_array = ['Mateo','Raphael','Celine']
         // create a channel for inputs
-        name_ch = channel.of('Mateo','Andrea','Celine')
+        name_ch = channel.of('Mateo','Raphael','Celine')
                             .view()
         // emit a greeting
         sayHello(name_ch)
@@ -724,7 +724,7 @@ Let's take the `names_array` variable we just imagined and make it a reality by 
 
         main:
         // create a channel for inputs
-        name_ch = channel.of('Mateo','Andrea','Celine')
+        name_ch = channel.of('Mateo','Raphael','Celine')
                             .view()
         // emit a greeting
         sayHello(name_ch)
@@ -738,7 +738,7 @@ This is not yet functional, we've just added a declaration for the array.
 
 #### 3.1.2. Set array of names as the input to the channel factory
 
-Now we're going to replace the values `'Mateo','Andrea','Celine'` currently hardcoded in the channel factory with the `names_array` we just created.
+Now we're going to replace the values `'Mateo','Raphael','Celine'` currently hardcoded in the channel factory with the `names_array` we just created.
 
 In the workflow block, make the following change:
 
@@ -749,7 +749,7 @@ In the workflow block, make the following change:
 
         main:
         // declare an array of input names
-        names_array = ['Mateo','Andrea','Celine']
+        names_array = ['Mateo','Raphael','Celine']
         // create a channel for inputs
         name_ch = channel.of(names_array)
                             .view()
@@ -768,9 +768,9 @@ In the workflow block, make the following change:
 
         main:
         // declare an array of input names
-        names_array = ['Mateo','Andrea','Celine']
+        names_array = ['Mateo','Raphael','Celine']
         // create a channel for inputs
-        name_ch = channel.of('Mateo','Andrea','Celine')
+        name_ch = channel.of('Mateo','Raphael','Celine')
                             .view()
         // emit a greeting
         sayHello(name_ch)
@@ -799,16 +799,16 @@ nextflow run hello-channels.nf
 
     executor >  local (1)
     [d2/7d5016] sayHello (1) | 0 of 1 ✘
-    [Mateo, Andrea, Celine]
+    [Mateo, Raphael, Celine]
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
-      Missing output file(s) `[Mateo, Andrea, Celine].txt` expected by process `sayHello (1)`
+      Missing output file(s) `[Mateo, Raphael, Celine].txt` expected by process `sayHello (1)`
 
 
     Command executed:
 
-      echo 'Hello, [Mateo, Andrea, Celine]!' > '[Mateo, Andrea, Celine].txt'
+      echo 'Hello, [Mateo, Raphael, Celine]!' > '[Mateo, Raphael, Celine].txt'
 
     Command exit status:
       0
@@ -828,7 +828,7 @@ Oh no! There's an error!
 
 Look at the output of `view()` and the error messages.
 
-It looks like Nextflow tried to run a single process call, using `[Mateo, Andrea, Celine]` as a single string value, instead of using the three strings in the array as separate values.
+It looks like Nextflow tried to run a single process call, using `[Mateo, Raphael, Celine]` as a single string value, instead of using the three strings in the array as separate values.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
@@ -858,7 +858,7 @@ In the workflow block, make the following code change:
 
         main:
         // declare an array of input names
-        names_array = ['Mateo','Andrea','Celine']
+        names_array = ['Mateo','Raphael','Celine']
         // create a channel for inputs
         name_ch = channel.of(names_array)
                             .view()
@@ -878,7 +878,7 @@ In the workflow block, make the following code change:
 
         main:
         // declare an array of input names
-        names_array = ['Mateo','Andrea','Celine']
+        names_array = ['Mateo','Raphael','Celine']
         // create a channel for inputs
         name_ch = channel.of(names_array)
                             .view()
@@ -912,7 +912,7 @@ In the workflow block, make the following code change:
 
         main:
         // declare an array of input names
-        names_array = ['Mateo','Andrea','Celine']
+        names_array = ['Mateo','Raphael','Celine']
         // create a channel for inputs
         name_ch = channel.of(names_array)
                             .view { names -> "Before flatten: $names" }
@@ -933,7 +933,7 @@ In the workflow block, make the following code change:
 
         main:
         // declare an array of input names
-        names_array = ['Mateo','Andrea','Celine']
+        names_array = ['Mateo','Raphael','Celine']
         // create a channel for inputs
         name_ch = channel.of(names_array)
                             .view()
@@ -980,9 +980,9 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [25/82982d] sayHello (2) | 3 of 3 ✔
-    Before flatten: [Mateo, Andrea, Celine]
+    Before flatten: [Mateo, Raphael, Celine]
     After flatten: Mateo
-    After flatten: Andrea
+    After flatten: Raphael
     After flatten: Celine
 
     Outputs:
@@ -992,7 +992,7 @@ nextflow run hello-channels.nf
       greetings:
         - hello/Mateo.txt
         - hello/Celine.txt
-        - hello/Andrea.txt
+        - hello/Raphael.txt
     ```
 
 This time it works AND gives us the additional insight into what the contents of the channel look like before and after we run the `flatten()` operator.
@@ -1027,7 +1027,7 @@ Each row describes one person: their name, a two-letter language code and a cowp
 
 ```csv title="data/names.csv" linenums="1"
 Mateo,es,squirrel
-Andrea,it,turtle
+Raphael,it,turtle
 Celine,fr,moose
 ```
 
@@ -1115,7 +1115,7 @@ In the workflow block, make the following code change:
 
         main:
         // declare an array of input names
-        names_array = ['Mateo','Andrea','Celine']
+        names_array = ['Mateo','Raphael','Celine']
         // create a channel for inputs
         name_ch = channel.of(names_array)
                             .view { names -> "Before flatten: $names" }
@@ -1254,7 +1254,7 @@ nextflow run hello-channels.nf
     [46/9ce81d] sayHello (3) | 0 of 3 ✘
     Before splitCsv: /workspaces/training/hello-nextflow/data/names.csv
     After splitCsv: [Mateo, es, squirrel]
-    After splitCsv: [Andrea, it, turtle]
+    After splitCsv: [Raphael, it, turtle]
     After splitCsv: [Celine, fr, moose]
     ERROR ~ Error executing process > 'sayHello (3)'
 
@@ -1374,10 +1374,10 @@ nextflow run hello-channels.nf
     [7a/74aa8d] sayHello (2) | 3 of 3 ✔
     Before splitCsv: /workspaces/training/hello-nextflow/data/names.csv
     After splitCsv: [Mateo, es, squirrel]
-    After splitCsv: [Andrea, it, turtle]
+    After splitCsv: [Raphael, it, turtle]
     After splitCsv: [Celine, fr, moose]
     After map: Mateo
-    After map: Andrea
+    After map: Raphael
     After map: Celine
 
     Outputs:
@@ -1386,7 +1386,7 @@ nextflow run hello-channels.nf
 
       greetings:
         - hello/Celine.txt
-        - hello/Andrea.txt
+        - hello/Raphael.txt
         - hello/Mateo.txt
     ```
 
@@ -1433,105 +1433,143 @@ When you're ready, move on to [**Part 3: Hello Workflow**](./03_hello_workflow.m
 These optional exercises let you practice what you learned in this part.
 Each one can be solved with what this part covered; open the hint if you get stuck.
 The solutions are also in `solutions/2-hello-channels/bonus/`.
-To run the solution to Exercise 1 directly, add `--input solutions/2-hello-channels/bonus/names-header.csv` to the command.
 
-### Exercise 1: Read a CSV file with a header row
+### Exercise 1: Greet your own list of names
 
-Many CSV files start with a header row that names the columns.
-Create a copy of `data/names.csv` called `data/names-header.csv`, and add the header row `name,language,character` at the top.
-Then adapt `hello-channels.nf` so that it reads this file and picks the name by its column name instead of its position.
-The workflow should still greet the same three names.
+Create a CSV file called `data/my-names.csv` with a few names of your choice, in the same format as `data/names.csv`: one row per name, with a language code and a character in the second and third columns.
+Run `hello-channels.nf` on your file without editing the script, and check that `results/hello/` contains one greeting file per name.
 
 ??? tip "Hint"
 
-    `splitCsv()` has a `header` option.
-    With `header: true`, each row becomes a set of named values, so you can write `row.name` instead of `row[0]`.
+    The script reads its input file from the `input` parameter, which you can set on the command line.
 
 ??? solution
 
-    ```csv title="data/names-header.csv"
-    name,language,character
-    Mateo,es,squirrel
-    Andrea,it,turtle
-    Celine,fr,moose
+    Any names work; here is an example:
+
+    ```csv title="data/my-names.csv"
+    Ziggy,en,tux
+    Noor,ar,kitty
+    Kenji,ja,dragonandcow
     ```
 
-    Point the `input` parameter to the new file:
-
-    ```groovy title="hello-channels.nf" linenums="23" hl_lines="2"
-    params {
-        input: Path = 'data/names-header.csv'
-    }
-    ```
-
-    Then parse the header and pick the column by name:
-
-    ```groovy title="hello-channels.nf" linenums="31" hl_lines="3 5"
-        name_ch = channel.fromPath(params.input)
-                            .view { csv -> "Before splitCsv: $csv" }
-                            .splitCsv(header: true)
-                            .view { row -> "After splitCsv: $row" }
-                            .map { row -> row.name }
-                            .view { name -> "After map: $name" }
-    ```
-
-    Run the workflow:
+    Pass the file to the `input` parameter on the command line:
 
     ```bash
-    nextflow run hello-channels.nf
+    nextflow run hello-channels.nf --input data/my-names.csv
     ```
 
     ```console title="Output (excerpt)"
-    After splitCsv: [name:Mateo, language:es, character:squirrel]
-    After splitCsv: [name:Andrea, language:it, character:turtle]
-    After splitCsv: [name:Celine, language:fr, character:moose]
-    After map: Mateo
-    After map: Andrea
-    After map: Celine
+    Before splitCsv: /workspaces/training/hello-nextflow/data/my-names.csv
+    After splitCsv: [Ziggy, en, tux]
+    After splitCsv: [Noor, ar, kitty]
+    After splitCsv: [Kenji, ja, dragonandcow]
+    After map: Ziggy
+    After map: Noor
+    After map: Kenji
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      greetings:
+        - hello/Noor.txt
+        - hello/Kenji.txt
+        - hello/Ziggy.txt
     ```
 
-    Each row is now a set of named values, and the header row itself is not passed on as a row.
+    Each row of the file becomes one element in the channel, so `sayHello` runs once per name and writes one file per name.
+    The greeting files from earlier runs are still in `results/hello/` alongside the new ones.
 
-### Exercise 2: Greet only the French names
+### Exercise 2: Find the bug
 
-Starting from `hello-channels.nf` as you left it at the end of section 4, without the changes from Exercise 1, change the workflow so that it only greets the names whose language, in the second column of `data/names.csv`, is `fr`.
-Only one greeting file should be produced.
+A colleague adapted the workflow, but when they run it, it writes `es.txt`, `it.txt` and `fr.txt` instead of one file per name, and each file contains a greeting like `Hello, es!`.
+Their script is `solutions/2-hello-channels/bonus/exercise-2-start.nf`.
+Copy it to `hello-bug.nf`, run it to see the problem, then find the cause and fix it.
 
 ??? tip "Hint"
 
-    Use the [`filter()`](https://nextflow.io/docs/latest/reference/operator.html#filter) operator.
-    Like `map()`, it takes a closure, and keeps only the elements for which the closure returns `true`.
+    Inspect the contents of the channel after each operator with `view()`, as you did in sections 3.2.2 and 4.3.
 
 ??? solution
 
-    Add a `filter()` step between `splitCsv()` and `map()`, while each row still holds all its columns:
+    Add `view()` statements after `splitCsv()` and after `map()`:
 
-    ```groovy title="hello-channels.nf" linenums="31" hl_lines="5"
+    ```groovy title="hello-bug.nf" linenums="31" hl_lines="3 5"
         name_ch = channel.fromPath(params.input)
-                            .view { csv -> "Before splitCsv: $csv" }
                             .splitCsv()
                             .view { row -> "After splitCsv: $row" }
-                            .filter { row -> row[1] == 'fr' }
-                            .map { row -> row[0] }
+                            .map { row -> row[1] }
                             .view { name -> "After map: $name" }
     ```
 
     Run the workflow:
 
     ```bash
-    nextflow run hello-channels.nf
+    nextflow run hello-bug.nf
     ```
 
     ```console title="Output (excerpt)"
-    [42/6d5454] sayHello (1) | 1 of 1 ✔
-    Before splitCsv: /workspaces/training/hello-nextflow/data/names.csv
     After splitCsv: [Mateo, es, squirrel]
-    After splitCsv: [Andrea, it, turtle]
+    After splitCsv: [Raphael, it, turtle]
     After splitCsv: [Celine, fr, moose]
-    After map: Celine
+    After map: es
+    After map: it
+    After map: fr
     ```
 
-    All three rows are read, but only Celine's row passes the filter, so `sayHello` runs once and writes `Hello, Celine!`.
+    The rows are parsed correctly, but `map()` returns the language codes instead of the names.
+    It picks `row[1]`, the second column; the names are in the first column, `row[0]`.
+
+    Fix the index in `map()`:
+
+    === "After"
+
+        ```groovy title="hello-bug.nf" linenums="31" hl_lines="4"
+            name_ch = channel.fromPath(params.input)
+                                .splitCsv()
+                                .view { row -> "After splitCsv: $row" }
+                                .map { row -> row[0] }
+                                .view { name -> "After map: $name" }
+        ```
+
+    === "Before"
+
+        ```groovy title="hello-bug.nf" linenums="31" hl_lines="4"
+            name_ch = channel.fromPath(params.input)
+                                .splitCsv()
+                                .view { row -> "After splitCsv: $row" }
+                                .map { row -> row[1] }
+                                .view { name -> "After map: $name" }
+        ```
+
+    Run the workflow again:
+
+    ```bash
+    nextflow run hello-bug.nf
+    ```
+
+    ```console title="Output (excerpt)"
+    After splitCsv: [Mateo, es, squirrel]
+    After splitCsv: [Raphael, it, turtle]
+    After splitCsv: [Celine, fr, moose]
+    After map: Mateo
+    After map: Raphael
+    After map: Celine
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      greetings:
+        - hello/Raphael.txt
+        - hello/Mateo.txt
+        - hello/Celine.txt
+    ```
+
+    The workflow now writes one file per name again.
+    The `es.txt`, `it.txt` and `fr.txt` files from the buggy run are still in `results/hello/`; you can delete them.
+    The fixed script, without the `view()` statements, is `solutions/2-hello-channels/bonus/exercise-2.nf`.
 
 ---
 
@@ -1551,12 +1589,12 @@ Learn more: [1.1. Create an input channel](#11-create-an-input-channel)
 What will this code output?
 
 ```groovy
-channel.of('Mateo', 'Andrea', 'Celine')
+channel.of('Mateo', 'Raphael', 'Celine')
     .view()
 ```
 
-- [ ] `['Mateo', 'Andrea', 'Celine']` (a single list)
-- [x] Each element on a separate line: `Mateo`, `Andrea`, `Celine`
+- [ ] `['Mateo', 'Raphael', 'Celine']` (a single list)
+- [x] Each element on a separate line: `Mateo`, `Raphael`, `Celine`
 - [ ] Nothing (channels don't print by default)
 - [ ] An error (invalid syntax)
 
