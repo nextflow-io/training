@@ -17,7 +17,7 @@ additional_information:
     audience_prerequisites:
         - "**Audience:** This course is designed for learners who are new to developing Nextflow pipelines and want to write their own."
         - "**Skills:** Some familiarity with the command line, basic scripting concepts and common file formats is assumed."
-        - "**Courses:** Must have completed [Nextflow Run](../nextflow_run/index.md), which this course builds on."
+        - "**Courses:** Builds on [Nextflow Run](../nextflow_run/index.md), which we recommend taking first."
         - "**Domain:** The exercises are all domain-agnostic, so no prior scientific knowledge is required."
     videos_playlist: https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n
 ---
@@ -36,7 +36,8 @@ You will take away the skills and confidence to start developing and running you
 
 This course is designed to be hands-on, with goal-oriented exercises structured to introduce information gradually.
 
-In [Nextflow Run](../nextflow_run/index.md), you ran the finished Hello pipeline: it reads names from a CSV file, greets each one, translates the greetings into another language, collects them into a single file, and turns the result into ASCII art.
+This course is based on the Hello pipeline from [Nextflow Run](../nextflow_run/index.md), where learners run the finished pipeline and learn how to configure and manage its executions.
+The pipeline reads names from a CSV file, greets each one, translates the greetings into another language, collects them into a single file, and turns the result into ASCII art.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
@@ -44,6 +45,10 @@ In [Nextflow Run](../nextflow_run/index.md), you ran the finished Hello pipeline
 
 In this course, you write that pipeline yourself.
 You start from a script that does a single thing, writing 'Hello World!' to a file, and add one piece at a time.
+
+This course focuses on writing pipeline code.
+It does not repeat how to run, configure and manage pipelines, which Nextflow Run covers, so we recommend taking Nextflow Run first.
+Where this course relies on something from Nextflow Run, it points to the relevant part.
 
 ### Lesson plan
 

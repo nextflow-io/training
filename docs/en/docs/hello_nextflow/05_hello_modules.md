@@ -108,7 +108,7 @@ If that worked for you, you're ready to organize your pipeline code.
 ## 1. Rename the workflow file to `main.nf`
 
 By convention, the workflow file that holds the entry workflow of a Nextflow project is called `main.nf`.
-It is the file you ran in Nextflow Run, and it is the file Nextflow looks for when you run a pipeline from a repository without naming a script.
+It is the entry script of the finished Hello pipeline in Nextflow Run, and it is the file Nextflow looks for when you run a pipeline from a repository without naming a script.
 
 Rename `hello-modules.nf` to `main.nf`:
 
@@ -688,7 +688,7 @@ Add a profile to run the pipeline with Conda instead of Docker.
 ## 6. Add a `conda` profile
 
 In Part 4, you gave the `cowpy` process both a container and a Conda package, and enabled Docker in `nextflow.config`.
-The pipeline you ran in Nextflow Run is set up the same way: it uses Docker by default, and provides a `conda` profile to use Conda instead.
+The finished Hello pipeline in Nextflow Run is set up the same way: it uses Docker by default, and provides a `conda` profile to use Conda instead.
 
 ### 6.1. Add the profile to `nextflow.config`
 
@@ -776,7 +776,7 @@ You know how to add a profile that switches the pipeline from Docker to Conda.
 
 ### What's next?
 
-Compare your project with the pipeline you ran in Nextflow Run.
+Compare your project with the finished Hello pipeline from Nextflow Run.
 
 ---
 
@@ -797,7 +797,7 @@ Here are the files that make up your pipeline project now, leaving out the other
     └── nextflow.config
     ```
 
-This is the same layout as the pipeline you ran in [Nextflow Run](../nextflow_run/index.md):
+This is the same layout as the finished Hello pipeline in [Nextflow Run](../nextflow_run/index.md):
 
 - `main.nf` holds the entry workflow.
 - `modules/` holds one module file per process.
