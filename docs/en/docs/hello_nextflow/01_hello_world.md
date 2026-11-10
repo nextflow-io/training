@@ -312,7 +312,18 @@ The published `output.txt` is a symbolic link to the file in the task directory,
 As you saw in Nextflow Run, the person running the pipeline can choose a different default mode, and the output directory itself can be changed with `-output-dir`.
 
 The `path` of each output is how the author organizes the results into subdirectories.
-You will use it in Part 3, when the pipeline produces several kinds of outputs, and in Part 5 you will set a specific publish mode for the final output.
+For example, the following `output` block would publish the file to `results/hello/` instead of the top level of `results/`:
+
+```groovy
+output {
+    greetings {
+        path 'hello'
+    }
+}
+```
+
+The `Outputs:` summary would then list it as `greetings: hello/output.txt`.
+You will use subdirectories in Part 3, when the pipeline produces several kinds of outputs, and in Part 5 you will set a specific publish mode for the final output.
 
 ### 2.4. Note on process-level `publishDir` directives
 
@@ -668,68 +679,39 @@ When you're ready, move on to [**Part 2: Hello Channels**](./02_hello_channels.m
 
 ---
 
-## Bonus exercises
+## Bonus exercise
 
-These optional exercises let you practice what you learned in this part.
-Each one can be solved with what this part covered; open the hint if you get stuck.
-The solutions are also in `solutions/1-hello-world/bonus/`.
+This optional exercise lets you practice what you learned in this part.
+It can be solved with what this part covered; open the hint if you get stuck.
+The solution is also in `solutions/1-hello-world/bonus/`.
 
-### Exercise 1: Add the date to the greeting file
+### Exercise: Rename the output file
 
-Starting from `hello-world.nf` as you left it at the end of this part, add a second command to the script block of `sayHello` that appends the current date to `output.txt`, on the line after the greeting.
-Run the workflow, check that the published file contains both lines, then look at the `.command.sh` file in the task directory to see the commands Nextflow ran.
+Starting from `hello-world.nf` as you left it at the end of this part, change the `sayHello` process so that it writes the greeting to a file called `greeting.txt` instead of `output.txt`.
+Run the workflow and check that `greeting.txt` is published to the results directory.
 
 ??? tip "Hint"
 
-    The `date` command prints the current date, and `>>` appends to a file instead of overwriting it: `date >> output.txt`.
+    The file name appears in two places in the process: the `output:` declaration and the `script` block.
+    If you change only one of them, the run fails with a `Missing output file(s)` error, because the file the process declares is not the file its script wrote.
 
 ??? solution
 
-    ```groovy title="hello-world.nf" linenums="14" hl_lines="4"
+    Change the file name in both places:
+
+    ```groovy title="hello-world.nf" linenums="6" hl_lines="7 11"
+    process sayHello {
+
+        input:
+        val name
+
+        output:
+        path 'greeting.txt'
+
         script:
         """
-        echo 'Hello, ${name}!' > output.txt
-        date >> output.txt
+        echo 'Hello, ${name}!' > greeting.txt
         """
-    ```
-
-    Run the workflow:
-
-    ```bash
-    nextflow run hello-world.nf
-    ```
-
-    The published file contains the greeting, followed by the date (yours will differ):
-
-    ```console title="results/output.txt"
-    Hello, Friend!
-    Mon Nov  9 15:38:15 EST 2026
-    ```
-
-    The `.command.sh` file in the task directory shows both commands:
-
-    ```console title=".command.sh"
-    #!/bin/bash -ue
-    echo 'Hello, Friend!' > output.txt
-    date >> output.txt
-    ```
-
-### Exercise 2: Publish the output to a subdirectory
-
-Starting from `hello-world.nf` as you left it at the end of this part, change the workflow so that `output.txt` is published to a `hello` subdirectory of the results directory, instead of the top level.
-Run the workflow and check where the file ends up.
-
-??? tip "Hint"
-
-    You only need to change one line, in the `output` block.
-
-??? solution
-
-    ```groovy title="hello-world.nf" linenums="37" hl_lines="3"
-    output {
-        greetings {
-            path 'hello'
-        }
     }
     ```
 
@@ -739,17 +721,33 @@ Run the workflow and check where the file ends up.
     nextflow run hello-world.nf
     ```
 
-    The `Outputs:` section of the console output shows the new location:
+    The `Outputs:` section of the console output shows the new file name:
 
     ```console
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
-      greetings: hello/output.txt
+      greetings: greeting.txt
     ```
 
-    The `output.txt` at the top level of `results/` is left over from earlier runs: Nextflow does not delete files published by previous runs.
+    The `output.txt` file in `results/` is left over from earlier runs: Nextflow does not delete files published by previous runs.
+
+    If you changed only the `script` block, the run fails instead:
+
+    ```console
+    ERROR ~ Error executing process > 'sayHello'
+
+    Caused by:
+      Missing output file(s) `output.txt` expected by process `sayHello`
+
+
+    Command executed:
+
+      echo 'Hello, Friend!' > greeting.txt
+    ```
+
+    The command ran successfully, but Nextflow could not find the file declared in the `output:` block.
 
 ---
 

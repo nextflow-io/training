@@ -9,11 +9,11 @@ process sayHello {
     val name
 
     output:
-    path 'output.txt'
+    path 'greeting.txt'
 
     script:
     """
-    echo 'Hello, ${name}!' > output.txt
+    echo 'Hello, ${name}!' > greeting.txt
     """
 }
 
@@ -36,6 +36,6 @@ workflow {
 
 output {
     greetings {
-        path 'hello'
+        path '.'
     }
 }
