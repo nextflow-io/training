@@ -1448,9 +1448,9 @@ Run `hello-channels.nf` on your file without editing the script, and check that 
     Any names work; here is an example:
 
     ```csv title="data/my-names.csv"
-    Ziggy,en,tux
+    Shaun,en,sheep
     Noor,ar,kitty
-    Kenji,ja,dragonandcow
+    Hikari,ja,hellokitty
     ```
 
     Pass the file to the `input` parameter on the command line:
@@ -1461,12 +1461,12 @@ Run `hello-channels.nf` on your file without editing the script, and check that 
 
     ```console title="Output (excerpt)"
     Before splitCsv: /workspaces/training/hello-nextflow/data/my-names.csv
-    After splitCsv: [Ziggy, en, tux]
+    After splitCsv: [Shaun, en, sheep]
     After splitCsv: [Noor, ar, kitty]
-    After splitCsv: [Kenji, ja, dragonandcow]
-    After map: Ziggy
+    After splitCsv: [Hikari, ja, hellokitty]
+    After map: Shaun
     After map: Noor
-    After map: Kenji
+    After map: Hikari
 
     Outputs:
 
@@ -1474,8 +1474,8 @@ Run `hello-channels.nf` on your file without editing the script, and check that 
 
       greetings:
         - hello/Noor.txt
-        - hello/Kenji.txt
-        - hello/Ziggy.txt
+        - hello/Hikari.txt
+        - hello/Shaun.txt
     ```
 
     Each row of the file becomes one element in the channel, so `sayHello` runs once per name and writes one file per name.
