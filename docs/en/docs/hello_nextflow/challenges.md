@@ -11,7 +11,8 @@ The hint for each challenge introduces the new feature and links to the Nextflow
 Each solution ends with a pointer to the side quest that covers the feature in depth.
 
 The solution files are in `solutions/challenges/`, one directory per challenge.
-To run a solution directly, launch it from the `hello-nextflow` directory:
+To run a solution directly, launch it from the `hello-nextflow` directory.
+Challenges 4 to 6 also need the `nextflow.config` from the end of Part 5 in that directory, which you already have if you completed the course; otherwise, copy it with `cp solutions/5-hello-modules/nextflow.config .` first.
 
 ```bash
 nextflow run solutions/challenges/challenge-2/hello-challenge.nf
@@ -452,6 +453,375 @@ Keep the collected file and the report as they are.
     ```
 
     To learn more about carrying metadata such as the character alongside each file, see the [Metadata and Meta Maps](../side_quests/metadata/index.md#15-use-a-meta-map-file-interface) side quest.
+
+---
+
+## Challenge 5: Make the workflow composable
+
+Start from `main.nf` as it stands at the end of Part 5:
+
+```bash
+cp solutions/5-hello-modules/main.nf hello-challenge.nf
+```
+
+The copy uses the same modules and configuration as `main.nf`.
+This challenge doesn't change them.
+
+Move the three greeting steps, `sayHello`, `translateGreeting` and `collectGreetings`, into a named workflow called `GREET`, in a new file `workflows/greet.nf`.
+`GREET` takes the channel of names, the language and the batch name as inputs, and outputs the greetings, the translated greetings, the collected file and the report.
+The entry workflow in `hello-challenge.nf` then calls `GREET`, passes the collected file to `cowpy`, and publishes the same outputs as before.
+
+??? tip "Hint"
+
+    A named workflow declares its inputs in a `take:` section and its outputs in an `emit:` section, around the `main:` section that holds its logic (see [Takes and emits](https://nextflow.io/docs/latest/workflow.html#takes-and-emits)):
+
+    ```groovy
+    workflow GREET {
+
+        take:
+        names_ch
+
+        main:
+        sayHello(names_ch)
+
+        emit:
+        greetings = sayHello.out
+    }
+    ```
+
+    You [include](https://nextflow.io/docs/latest/reference/syntax.html#include) a named workflow the same way as a process, and its named outputs are available as `GREET.out.greetings` and so on.
+    The paths in `include` declarations are relative to the file that contains them, so `workflows/greet.nf` includes the modules from `../modules/`.
+
+??? solution
+
+    Create `workflows/greet.nf` with the three greeting steps:
+
+    ```groovy title="workflows/greet.nf" linenums="1" hl_lines="2-4 6 9-11 17 19 22-25"
+    // Include modules
+    include { sayHello } from '../modules/sayHello.nf'
+    include { translateGreeting } from '../modules/translateGreeting.nf'
+    include { collectGreetings } from '../modules/collectGreetings.nf'
+
+    workflow GREET {
+
+        take:
+        names_ch
+        language
+        batch_name
+
+        main:
+        // emit a greeting
+        sayHello(names_ch)
+        // translate the greeting
+        translateGreeting(sayHello.out, language)
+        // collect all the greetings into one file
+        collectGreetings(translateGreeting.out.collect(), batch_name)
+
+        emit:
+        greetings = sayHello.out
+        translated = translateGreeting.out
+        collected = collectGreetings.out.outfile
+        report = collectGreetings.out.report
+    }
+    ```
+
+    The `include` paths start with `../` because the file is in `workflows/`, one level below the `modules` directory.
+    Inside `GREET`, the language and the batch name come from the `take:` inputs instead of `params`.
+
+    In `hello-challenge.nf`, include `GREET` instead of the three modules, call it, and publish its outputs:
+
+    ```groovy title="hello-challenge.nf" linenums="1" hl_lines="4 25 27 30-33"
+    #!/usr/bin/env nextflow
+
+    // Include the greeting workflow and the cowpy module
+    include { GREET } from './workflows/greet.nf'
+    include { cowpy } from './modules/cowpy.nf'
+
+    /*
+     * Pipeline parameters
+     */
+    params {
+        input: Path
+        language: String
+        batch: String
+        character: String
+    }
+
+    workflow {
+
+        main:
+        // create a channel for inputs from a CSV file
+        name_ch = channel.fromPath(params.input)
+                            .splitCsv()
+                            .map { row -> row[0] }
+        // greet, translate and collect
+        GREET(name_ch, params.language, params.batch)
+        // generate ASCII art of the greetings with cowpy
+        cowpy(GREET.out.collected, params.character)
+
+        publish:
+        greetings = GREET.out.greetings
+        translated = GREET.out.translated
+        collected = GREET.out.collected
+        batch_report = GREET.out.report
+        cowpy_art = cowpy.out
+    }
+    ```
+
+    The `output` block stays as it is.
+
+    Only the entry workflow can publish outputs, so `GREET` emits everything that needs to be published, including the intermediate greetings and translations, and the entry workflow publishes them from `GREET.out`.
+
+    Run the workflow:
+
+    ```bash
+    nextflow run hello-challenge.nf -profile test
+    ```
+
+    ??? success "Command output"
+
+        ```console
+        N E X T F L O W   ~  version 26.04.4
+
+        Launching `hello-challenge.nf` [grave_brattain] revision: 60ca931fc8
+
+        executor >  local (8)
+        [c1/821909] GREET:sayHello (3)          | 3 of 3 ✔
+        [92/75fd7b] GREET:translateGreeting (1) | 3 of 3 ✔
+        [18/f0d1d4] GREET:collectGreetings      | 1 of 1 ✔
+        [b4/076a81] cowpy                       | 1 of 1 ✔
+
+        Outputs:
+
+          /workspaces/training/hello-nextflow/results
+
+          greetings:
+            - batch/intermediates/Mateo.txt
+            - batch/intermediates/Raphael.txt
+            - batch/intermediates/Celine.txt
+
+          translated:
+            - batch/intermediates/es-Raphael.txt
+            - batch/intermediates/es-Celine.txt
+            - batch/intermediates/es-Mateo.txt
+
+          collected: batch/intermediates/batch-greetings.txt
+
+          batch_report: batch/batch-report.txt
+
+          cowpy_art: batch/cowpy-batch-greetings.txt
+        ```
+
+    The processes called inside `GREET` are listed as `GREET:sayHello` and so on, and the published outputs are the same as with `main.nf`.
+
+    The solution directory contains its own copy of the modules and the configuration, so you can run the solution directly:
+
+    ```bash
+    nextflow run solutions/challenges/challenge-5/hello-challenge.nf -profile test
+    ```
+
+    To learn more about composing workflows, see the [Workflows of Workflows](../side_quests/workflows_of_workflows/index.md#12-make-the-workflow-composable) side quest.
+
+---
+
+## Challenge 6: Translate into two languages in one run
+
+Start from `main.nf` as it stands at the end of Part 5:
+
+```bash
+cp solutions/5-hello-modules/main.nf hello-challenge.nf
+```
+
+The copy uses the same modules and configuration as `main.nf`.
+
+`translateGreeting` takes the language as an input, so translating into a second language looks like a matter of calling it a second time.
+However, a process can only be called once in a workflow.
+A second call to `translateGreeting` fails with this error:
+
+```console
+Process 'translateGreeting' has been already used -- If you need to reuse the same component, include it with a different name or include it in a different workflow context
+```
+
+Add a `second_language` parameter with the default value `fr`, and make the workflow translate the greetings into both languages.
+Collect the second-language greetings into their own file and report, and publish them alongside the existing outputs.
+Keep `cowpy` on the greetings in the first language.
+
+??? tip "Hint"
+
+    Include the same process a second time under a different name with `include { ... as ... }` (see [Calling processes and workflows](https://nextflow.io/docs/latest/workflow.html#calling-processes-and-workflows)):
+
+    ```groovy
+    include { translateGreeting as translateSecond } from './modules/translateGreeting.nf'
+    ```
+
+    `translateSecond` is then a separate process that runs the same code, and you can call it with its own inputs.
+    `collectGreetings` needs the same treatment, with a batch name that doesn't clash with the first one, such as `"${params.batch}-${params.second_language}"`.
+
+??? solution
+
+    Add the default value of the new parameter to the `params` section of `nextflow.config`:
+
+    ```groovy title="nextflow.config" linenums="6" hl_lines="3"
+    params {
+        language = 'es'
+        second_language = 'fr'
+        batch = 'batch'
+        character = 'turkey'
+    }
+    ```
+
+    `main.nf` doesn't declare `second_language`, and still runs as before with this configuration.
+
+    In `hello-challenge.nf`, include `translateGreeting` and `collectGreetings` a second time under aliases:
+
+    ```groovy title="hello-challenge.nf" linenums="3" hl_lines="5-6"
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
+    include { translateGreeting } from './modules/translateGreeting.nf'
+    include { collectGreetings } from './modules/collectGreetings.nf'
+    include { translateGreeting as translateSecond } from './modules/translateGreeting.nf'
+    include { collectGreetings as collectSecond } from './modules/collectGreetings.nf'
+    include { cowpy } from './modules/cowpy.nf'
+    ```
+
+    Declare the new parameter:
+
+    ```groovy title="hello-challenge.nf" linenums="14" hl_lines="4"
+    params {
+        input: Path
+        language: String
+        second_language: String
+        batch: String
+        character: String
+    }
+    ```
+
+    In the workflow, call the aliased processes on the same greetings, and publish their outputs:
+
+    ```groovy title="hello-challenge.nf" linenums="22" hl_lines="14-17 27-29"
+    workflow {
+
+        main:
+        // create a channel for inputs from a CSV file
+        name_ch = channel.fromPath(params.input)
+                            .splitCsv()
+                            .map { row -> row[0] }
+        // emit a greeting
+        sayHello(name_ch)
+        // translate the greeting
+        translateGreeting(sayHello.out, params.language)
+        // collect all the greetings into one file
+        collectGreetings(translateGreeting.out.collect(), params.batch)
+        // translate the greeting into the second language
+        translateSecond(sayHello.out, params.second_language)
+        // collect the second-language greetings under their own batch name
+        collectSecond(translateSecond.out.collect(), "${params.batch}-${params.second_language}")
+        // generate ASCII art of the greetings with cowpy
+        cowpy(collectGreetings.out.outfile, params.character)
+
+        publish:
+        greetings = sayHello.out
+        translated = translateGreeting.out
+        collected = collectGreetings.out.outfile
+        batch_report = collectGreetings.out.report
+        cowpy_art = cowpy.out
+        translated_second = translateSecond.out
+        collected_second = collectSecond.out.outfile
+        batch_report_second = collectSecond.out.report
+    }
+    ```
+
+    Add the three new outputs to the `output` block, in the same directories as their first-language counterparts:
+
+    ```groovy title="hello-challenge.nf" linenums="70" hl_lines="5-16"
+        cowpy_art {
+            path "${params.batch}"
+            mode 'copy'
+        }
+        translated_second {
+            path "${params.batch}/intermediates"
+            mode 'copy'
+        }
+        collected_second {
+            path "${params.batch}/intermediates"
+            mode 'copy'
+        }
+        batch_report_second {
+            path "${params.batch}"
+            mode 'copy'
+        }
+    }
+    ```
+
+    Run the workflow:
+
+    ```bash
+    nextflow run hello-challenge.nf -profile test
+    ```
+
+    ??? success "Command output"
+
+        ```console
+        N E X T F L O W   ~  version 26.04.4
+
+        Launching `hello-challenge.nf` [gloomy_liskov] revision: 6a44e05e1b
+
+        executor >  local (12)
+        [0c/555567] sayHello (3)          | 3 of 3 ✔
+        [ac/f258c8] translateGreeting (3) | 3 of 3 ✔
+        [21/5068ea] collectGreetings      | 1 of 1 ✔
+        [9b/234432] translateSecond (3)   | 3 of 3 ✔
+        [c5/eb75d5] collectSecond         | 1 of 1 ✔
+        [57/ae9d7f] cowpy                 | 1 of 1 ✔
+
+        Outputs:
+
+          /workspaces/training/hello-nextflow/results
+
+          greetings:
+            - batch/intermediates/Raphael.txt
+            - batch/intermediates/Celine.txt
+            - batch/intermediates/Mateo.txt
+
+          translated:
+            - batch/intermediates/es-Raphael.txt
+            - batch/intermediates/es-Celine.txt
+            - batch/intermediates/es-Mateo.txt
+
+          collected: batch/intermediates/batch-greetings.txt
+
+          batch_report: batch/batch-report.txt
+
+          cowpy_art: batch/cowpy-batch-greetings.txt
+
+          translated_second:
+            - batch/intermediates/fr-Raphael.txt
+            - batch/intermediates/fr-Celine.txt
+            - batch/intermediates/fr-Mateo.txt
+
+          collected_second: batch/intermediates/batch-fr-greetings.txt
+
+          batch_report_second: batch/batch-fr-report.txt
+        ```
+
+    `translateSecond` and `collectSecond` are listed as separate processes, and the second collected file contains the French greetings:
+
+    ```console title="results/batch/intermediates/batch-fr-greetings.txt"
+    Bonjour, Raphael!
+    Bonjour, Celine!
+    Bonjour, Mateo!
+    ```
+
+    Aliases work for workflows too.
+    With the `GREET` workflow from Challenge 5, you could include it twice, as in `include { GREET as GREET_SECOND } from './workflows/greet.nf'`, and call each one with its own language and batch name.
+
+    The solution directory contains its own copy of the modules and the configuration, so you can run the solution directly:
+
+    ```bash
+    nextflow run solutions/challenges/challenge-6/hello-challenge.nf -profile test
+    ```
+
+    To learn more about including workflows, with or without an alias, see the [Workflows of Workflows](../side_quests/workflows_of_workflows/index.md#key-patterns) side quest.
 
 ---
 
