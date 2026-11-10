@@ -174,6 +174,7 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
     ```
 
     `translateGreeting` then takes `tuple path(input_file), val(language)` as its only input.
+    `collectGreetings` still takes a language for its file names; give it a label that covers all the languages, such as `'multi'`.
 
 ??? solution
 
@@ -196,9 +197,9 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
         tuple path(input_file), val(language)
     ```
 
-    In the workflow, keep both columns in the channel, and call `translateGreeting` with the output of `sayHello` alone:
+    In the workflow, keep both columns in the channel, call `translateGreeting` with the output of `sayHello` alone, and give `collectGreetings` a fixed language label:
 
-    ```groovy title="hello-challenge.nf" linenums="89" hl_lines="1-2 4 6-8"
+    ```groovy title="hello-challenge.nf" linenums="90" hl_lines="1-2 4 6-8 10"
         // create a channel of [name, language] pairs from a CSV file
         person_ch = channel.fromPath(params.input)
                             .splitCsv()
@@ -207,13 +208,17 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
         sayHello(person_ch)
         // translate each greeting into its own language
         translateGreeting(sayHello.out)
+        // collect all the greetings into one file
+        collectGreetings(translateGreeting.out.collect(), params.batch, 'multi')
     ```
 
+    The greetings are now in several languages, so `params.language` no longer describes them.
+    `collectGreetings` still needs a language for its file names, so it gets the label `'multi'` instead.
     The `language` parameter is no longer used, so remove it from the `params` block.
 
     `sayHello` now emits pairs, so publish only the file from each pair:
 
-    ```groovy title="hello-challenge.nf" linenums="100" hl_lines="2"
+    ```groovy title="hello-challenge.nf" linenums="101" hl_lines="2"
         publish:
         greetings = sayHello.out.map { greeting_file, _language -> greeting_file }
     ```
@@ -231,12 +236,12 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
         ```console
         N E X T F L O W   ~  version 26.04.4
 
-        Launching `hello-challenge.nf` [shrivelled_leibniz] revision: 6e10bef93d
+        Launching `hello-challenge.nf` [kickass_mclean] revision: 47de51bee7
 
         executor >  local (7)
-        [a8/428799] sayHello (1)          | 3 of 3 ✔
-        [95/2e24c9] translateGreeting (2) | 3 of 3 ✔
-        [10/f0e0da] collectGreetings      | 1 of 1 ✔
+        [db/f6dae4] sayHello (1)          | 3 of 3 ✔
+        [2c/086b0b] translateGreeting (2) | 3 of 3 ✔
+        [d1/9233d5] collectGreetings      | 1 of 1 ✔
 
         Outputs:
 
@@ -244,25 +249,25 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
 
           greetings:
             - mixed/intermediates/Celine.txt
-            - mixed/intermediates/Raphael.txt
             - mixed/intermediates/Mateo.txt
+            - mixed/intermediates/Raphael.txt
 
           translated:
+            - mixed/intermediates/it-Raphael.txt
             - mixed/intermediates/fr-Celine.txt
             - mixed/intermediates/es-Mateo.txt
-            - mixed/intermediates/it-Raphael.txt
 
-          collected: mixed/intermediates/mixed-greetings.txt
+          collected: mixed/intermediates/mixed-multi-greetings.txt
 
-          batch_report: mixed/mixed-report.txt
+          batch_report: mixed/mixed-multi-report.txt
         ```
 
     Each translated file is named after its own language, and the collected file contains one greeting in each language:
 
-    ```console title="results/mixed/intermediates/mixed-greetings.txt"
+    ```console title="results/mixed/intermediates/mixed-multi-greetings.txt"
+    Ciao, Raphael!
     Bonjour, Celine!
     Hola, Mateo!
-    Ciao, Raphael!
     ```
 
     To learn more about passing several values together through a process, see the [Metadata and Meta Maps](../side_quests/metadata/index.md#14-group-everything-as-a-single-input-to-the-process) side quest.
@@ -309,7 +314,7 @@ Keep the collected file and the report as they are.
         // translate the greeting
         translateGreeting(sayHello.out, params.language)
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.map { greeting_file, _character -> greeting_file }.collect(), params.batch)
+        collectGreetings(translateGreeting.out.map { greeting_file, _character -> greeting_file }.collect(), params.batch, params.language)
         // generate ASCII art of each greeting with its own character
         cowpy(translateGreeting.out)
 
@@ -362,36 +367,36 @@ Keep the collected file and the report as they are.
         ```console
         N E X T F L O W   ~  version 26.04.4
 
-        Launching `hello-challenge.nf` [grave_aryabhata] revision: 4c3e11a405
+        Launching `hello-challenge.nf` [sad_yalow] revision: ad8a2fcdf6
 
         executor >  local (10)
-        [a7/48b8db] sayHello (1)          | 3 of 3 ✔
-        [6a/ded0ef] translateGreeting (1) | 3 of 3 ✔
-        [7f/822685] collectGreetings      | 1 of 1 ✔
-        [09/74578f] cowpy (3)             | 3 of 3 ✔
+        [46/3ddbb0] sayHello (3)          | 3 of 3 ✔
+        [8a/f6d7fa] translateGreeting (3) | 3 of 3 ✔
+        [18/d4f150] collectGreetings      | 1 of 1 ✔
+        [5e/8e16a3] cowpy (2)             | 3 of 3 ✔
 
         Outputs:
 
           /workspaces/training/hello-nextflow/results
 
           greetings:
-            - batch/intermediates/Celine.txt
             - batch/intermediates/Mateo.txt
+            - batch/intermediates/Celine.txt
             - batch/intermediates/Raphael.txt
 
           translated:
+            - batch/intermediates/es-Celine.txt
             - batch/intermediates/es-Mateo.txt
             - batch/intermediates/es-Raphael.txt
-            - batch/intermediates/es-Celine.txt
 
-          collected: batch/intermediates/batch-greetings.txt
+          collected: batch/intermediates/batch-es-greetings.txt
 
-          batch_report: batch/batch-report.txt
+          batch_report: batch/batch-es-report.txt
 
           cowpy_art:
-            - batch/cowpy-es-Mateo.txt
             - batch/cowpy-es-Raphael.txt
             - batch/cowpy-es-Celine.txt
+            - batch/cowpy-es-Mateo.txt
         ```
 
     `cowpy` now runs three times, once per name, and each file is drawn by that name's character:
@@ -515,7 +520,7 @@ The entry workflow in `hello-challenge.nf` then calls `GREET`, passes the collec
         // translate the greeting
         translateGreeting(sayHello.out, language)
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), batch_name)
+        collectGreetings(translateGreeting.out.collect(), batch_name, language)
 
         emit:
         greetings = sayHello.out
@@ -526,7 +531,7 @@ The entry workflow in `hello-challenge.nf` then calls `GREET`, passes the collec
     ```
 
     The `include` paths start with `../` because the file is in `workflows/`, one level below the `modules` directory.
-    Inside `GREET`, the language and the batch name come from the `take:` inputs instead of `params`.
+    Inside `GREET`, the language and the batch name come from the `take:` inputs instead of `params`, and the language goes to both `translateGreeting` and `collectGreetings`.
 
     In `hello-challenge.nf`, include `GREET` instead of the three modules, call it, and publish its outputs:
 
@@ -583,13 +588,13 @@ The entry workflow in `hello-challenge.nf` then calls `GREET`, passes the collec
         ```console
         N E X T F L O W   ~  version 26.04.4
 
-        Launching `hello-challenge.nf` [grave_brattain] revision: 60ca931fc8
+        Launching `hello-challenge.nf` [condescending_euclid] revision: 60ca931fc8
 
         executor >  local (8)
-        [c1/821909] GREET:sayHello (3)          | 3 of 3 ✔
-        [92/75fd7b] GREET:translateGreeting (1) | 3 of 3 ✔
-        [18/f0d1d4] GREET:collectGreetings      | 1 of 1 ✔
-        [b4/076a81] cowpy                       | 1 of 1 ✔
+        [09/6a23d7] GREET:sayHello (3)          | 3 of 3 ✔
+        [38/d26278] GREET:translateGreeting (2) | 3 of 3 ✔
+        [31/dca02b] GREET:collectGreetings      | 1 of 1 ✔
+        [f6/95ef51] cowpy                       | 1 of 1 ✔
 
         Outputs:
 
@@ -597,19 +602,19 @@ The entry workflow in `hello-challenge.nf` then calls `GREET`, passes the collec
 
           greetings:
             - batch/intermediates/Mateo.txt
-            - batch/intermediates/Raphael.txt
             - batch/intermediates/Celine.txt
+            - batch/intermediates/Raphael.txt
 
           translated:
+            - batch/intermediates/es-Mateo.txt
             - batch/intermediates/es-Raphael.txt
             - batch/intermediates/es-Celine.txt
-            - batch/intermediates/es-Mateo.txt
 
-          collected: batch/intermediates/batch-greetings.txt
+          collected: batch/intermediates/batch-es-greetings.txt
 
-          batch_report: batch/batch-report.txt
+          batch_report: batch/batch-es-report.txt
 
-          cowpy_art: batch/cowpy-batch-greetings.txt
+          cowpy_art: batch/cowpy-batch-es-greetings.txt
         ```
 
     The processes called inside `GREET` are listed as `GREET:sayHello` and so on, and the published outputs are the same as with `main.nf`.
@@ -655,7 +660,8 @@ Keep `cowpy` on the greetings in the first language.
     ```
 
     `translateSecond` is then a separate process that runs the same code, and you can call it with its own inputs.
-    `collectGreetings` needs the same treatment, with a batch name that doesn't clash with the first one, such as `"${params.batch}-${params.second_language}"`.
+    `collectGreetings` needs the same treatment.
+    Since it includes the language in its file names, the second collection doesn't clash with the first.
 
 ??? solution
 
@@ -711,11 +717,11 @@ Keep `cowpy` on the greetings in the first language.
         // translate the greeting
         translateGreeting(sayHello.out, params.language)
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch)
+        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
         // translate the greeting into the second language
         translateSecond(sayHello.out, params.second_language)
-        // collect the second-language greetings under their own batch name
-        collectSecond(translateSecond.out.collect(), "${params.batch}-${params.second_language}")
+        // collect the second-language greetings into one file
+        collectSecond(translateSecond.out.collect(), params.batch, params.second_language)
         // generate ASCII art of the greetings with cowpy
         cowpy(collectGreetings.out.outfile, params.character)
 
@@ -764,15 +770,15 @@ Keep `cowpy` on the greetings in the first language.
         ```console
         N E X T F L O W   ~  version 26.04.4
 
-        Launching `hello-challenge.nf` [gloomy_liskov] revision: 6a44e05e1b
+        Launching `hello-challenge.nf` [amazing_monod] revision: 72805d564b
 
         executor >  local (12)
-        [0c/555567] sayHello (3)          | 3 of 3 ✔
-        [ac/f258c8] translateGreeting (3) | 3 of 3 ✔
-        [21/5068ea] collectGreetings      | 1 of 1 ✔
-        [9b/234432] translateSecond (3)   | 3 of 3 ✔
-        [c5/eb75d5] collectSecond         | 1 of 1 ✔
-        [57/ae9d7f] cowpy                 | 1 of 1 ✔
+        [b7/46b999] sayHello (1)          | 3 of 3 ✔
+        [99/01b3ba] translateGreeting (1) | 3 of 3 ✔
+        [c5/bb42d2] collectGreetings      | 1 of 1 ✔
+        [95/cad795] translateSecond (1)   | 3 of 3 ✔
+        [c8/a5059e] collectSecond         | 1 of 1 ✔
+        [f2/a3307c] cowpy                 | 1 of 1 ✔
 
         Outputs:
 
@@ -784,20 +790,20 @@ Keep `cowpy` on the greetings in the first language.
             - batch/intermediates/Mateo.txt
 
           translated:
-            - batch/intermediates/es-Raphael.txt
             - batch/intermediates/es-Celine.txt
             - batch/intermediates/es-Mateo.txt
+            - batch/intermediates/es-Raphael.txt
 
-          collected: batch/intermediates/batch-greetings.txt
+          collected: batch/intermediates/batch-es-greetings.txt
 
-          batch_report: batch/batch-report.txt
+          batch_report: batch/batch-es-report.txt
 
-          cowpy_art: batch/cowpy-batch-greetings.txt
+          cowpy_art: batch/cowpy-batch-es-greetings.txt
 
           translated_second:
-            - batch/intermediates/fr-Raphael.txt
             - batch/intermediates/fr-Celine.txt
             - batch/intermediates/fr-Mateo.txt
+            - batch/intermediates/fr-Raphael.txt
 
           collected_second: batch/intermediates/batch-fr-greetings.txt
 
@@ -807,13 +813,13 @@ Keep `cowpy` on the greetings in the first language.
     `translateSecond` and `collectSecond` are listed as separate processes, and the second collected file contains the French greetings:
 
     ```console title="results/batch/intermediates/batch-fr-greetings.txt"
-    Bonjour, Raphael!
     Bonjour, Celine!
     Bonjour, Mateo!
+    Bonjour, Raphael!
     ```
 
     Aliases work for workflows too.
-    With the `GREET` workflow from Challenge 5, you could include it twice, as in `include { GREET as GREET_SECOND } from './workflows/greet.nf'`, and call each one with its own language and batch name.
+    With the `GREET` workflow from Challenge 5, you could include it twice, as in `include { GREET as GREET_SECOND } from './workflows/greet.nf'`, and call each one with its own language.
 
     The solution directory contains its own copy of the modules and the configuration, so you can run the solution directly:
 

@@ -62,16 +62,17 @@ process collectGreetings {
     input:
     path input_files
     val batch_name
+    val language
 
     output:
-    path "${batch_name}-greetings.txt", emit: outfile
-    path "${batch_name}-report.txt", emit: report
+    path "${batch_name}-${language}-greetings.txt", emit: outfile
+    path "${batch_name}-${language}-report.txt", emit: report
 
     script:
     count_greetings = input_files.size()
     """
-    cat ${input_files} > '${batch_name}-greetings.txt'
-    echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-report.txt'
+    cat ${input_files} > '${batch_name}-${language}-greetings.txt'
+    echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-${language}-report.txt'
     """
 }
 
@@ -95,7 +96,7 @@ workflow {
     // translate each greeting into its own language
     translateGreeting(sayHello.out)
     // collect all the greetings into one file
-    collectGreetings(translateGreeting.out.collect(), params.batch)
+    collectGreetings(translateGreeting.out.collect(), params.batch, 'multi')
 
     publish:
     greetings = sayHello.out.map { greeting_file, _language -> greeting_file }
