@@ -96,7 +96,7 @@ workflow {
     // translate each greeting into its own language
     translateGreeting(sayHello.out)
     // collect all the greetings into one file
-    collectGreetings(translateGreeting.out.collect(), params.batch, 'multi')
+    collectGreetings(translateGreeting.out.collect(), params.batch, 'native')
 
     publish:
     greetings = sayHello.out.map { greeting_file, _language -> greeting_file }

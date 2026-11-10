@@ -1587,12 +1587,12 @@ Then, before running each of the following commands, predict which steps will ru
 
 ### Exercise 3: Collect both versions of the greetings
 
-Starting from `hello-workflow.nf` as it stands at the end of this part, add a step that writes all the original greetings and all the translated greetings into a single file called `<batch>-bilingual.txt`, published at the top level of the batch directory.
+Starting from `hello-workflow.nf` as it stands at the end of this part, add a step that writes all the original greetings and all the translated greetings into a single file called `<batch>-<language>-bilingual.txt`, published at the top level of the batch directory.
 Run it with `--batch trio -resume`.
 
 ??? tip "Hint"
 
-    The new process needs two collections of files as inputs, one from `sayHello` and one from `translateGreeting`, plus the batch name.
+    The new process needs two collections of files as inputs, one from `sayHello` and one from `translateGreeting`, plus the batch name and the language for the output file name, as in `collectGreetings`.
     Its script only needs a `cat` command.
 
 ??? solution
@@ -1609,24 +1609,25 @@ Run it with `--batch trio -resume`.
         path greetings
         path translations
         val batch_name
+        val language
 
         output:
-        path "${batch_name}-bilingual.txt"
+        path "${batch_name}-${language}-bilingual.txt"
 
         script:
         """
-        cat ${greetings} ${translations} > '${batch_name}-bilingual.txt'
+        cat ${greetings} ${translations} > '${batch_name}-${language}-bilingual.txt'
         """
     }
     ```
 
     Call it in the workflow, collecting the outputs of both upstream processes, and publish its output:
 
-    ```groovy title="hello-workflow.nf" linenums="119" hl_lines="3-4 11"
+    ```groovy title="hello-workflow.nf" linenums="120" hl_lines="3-4 11"
         // collect all the greetings into one file
         collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
         // combine the original and translated greetings
-        collectBilingual(sayHello.out.collect(), translateGreeting.out.collect(), params.batch)
+        collectBilingual(sayHello.out.collect(), translateGreeting.out.collect(), params.batch, params.language)
 
         publish:
         greetings = sayHello.out
@@ -1639,7 +1640,7 @@ Run it with `--batch trio -resume`.
 
     Add the matching entry to the `output` block:
 
-    ```groovy title="hello-workflow.nf" linenums="145" hl_lines="5-8"
+    ```groovy title="hello-workflow.nf" linenums="146" hl_lines="5-8"
         batch_report {
             path "${params.batch}"
             mode 'copy'
@@ -1658,21 +1659,21 @@ Run it with `--batch trio -resume`.
     ```
 
     ```console title="Output (excerpt)"
-    [b9/b0f3cc] sayHello (2)          | 3 of 3, cached: 3 ✔
-    [8c/c68278] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [bc/6dfd8d] collectGreetings      | 1 of 1, cached: 1 ✔
-    [37/20c3a0] collectBilingual      | 1 of 1 ✔
+    [d6/ecc555] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [c1/4aa2cd] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [1f/5bd588] collectGreetings      | 1 of 1, cached: 1 ✔
+    [85/bc54e8] collectBilingual      | 1 of 1 ✔
     ```
 
     Only the new step runs; everything upstream is cached.
 
-    ```console title="results/trio/trio-bilingual.txt"
-    Hello, Celine!
+    ```console title="results/trio/trio-es-bilingual.txt"
     Hello, Raphael!
     Hello, Mateo!
+    Hello, Celine!
+    Hola, Raphael!
     Hola, Celine!
     Hola, Mateo!
-    Hola, Raphael!
     ```
 
 ---
