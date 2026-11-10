@@ -197,7 +197,11 @@ This involves two new pieces of code:
 1. A `publish:` section inside the `workflow` body, listing the process outputs to publish.
 2. An `output` block, outside the `workflow` body, specifying how to publish them.
 
-### 2.1. Declare the output of the `sayHello` process
+### 2.1. Default settings
+
+Start by publishing the output of `sayHello` with Nextflow's default settings.
+
+#### 2.1.1. Declare the output of the `sayHello` process
 
 Add a `publish:` section to the workflow body (the same kind of code element as the `main:` section) and list the output of the `sayHello` process.
 
@@ -230,7 +234,7 @@ In the workflow script file `hello-world.nf`, add the following lines of code:
 
 You refer to the output of the process with `sayHello.out`, and assign it a name of your choice, here `greetings`.
 
-### 2.2. Add an `output` block to the script
+#### 2.1.2. Add an `output` block to the script
 
 Now add the `output` block, which describes how to publish each output listed in the `publish:` section.
 This block sits **outside** and **below** the `workflow` block.
@@ -239,7 +243,7 @@ In the workflow script file `hello-world.nf`, add the following lines of code:
 
 === "After"
 
-    ```groovy title="hello-world.nf" linenums="17" hl_lines="11-15"
+    ```groovy title="hello-world.nf" linenums="17" hl_lines="11-14"
     workflow {
 
         main:
@@ -252,7 +256,6 @@ In the workflow script file `hello-world.nf`, add the following lines of code:
 
     output {
         greetings {
-            path '.'
         }
     }
     ```
@@ -272,9 +275,9 @@ In the workflow script file `hello-world.nf`, add the following lines of code:
     ```
 
 The entry `greetings` matches the name in the `publish:` section.
-Its `path` sets where the files are published within the output directory; `'.'` means the top level of that directory.
+It is empty for now, so Nextflow publishes the output with its default settings.
 
-### 2.3. Run the workflow
+#### 2.1.3. Run the workflow
 
 Run the modified workflow script:
 
@@ -287,10 +290,10 @@ nextflow run hello-world.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [naughty_coulomb] revision: ca5cb0eccf
+    Launching `hello-world.nf` [evil_carson] revision: 43c662561c
 
     executor >  local (1)
-    [48/bf4165] sayHello | 1 of 1 ✔
+    [99/bf7b2a] sayHello | 1 of 1 ✔
 
     Outputs:
 
@@ -305,27 +308,110 @@ The console output now ends with the `Outputs:` summary you saw in Nextflow Run,
 
     ```console
     results
-    └── output.txt -> /workspaces/training/hello-nextflow/work/48/bf4165887e87c51053a3df3daf73b2/output.txt
+    └── output.txt -> /workspaces/training/hello-nextflow/work/99/bf7b2a1e183d53bad9c4dc7553ec96/output.txt
     ```
 
-The published `output.txt` is a symbolic link to the file in the task directory, which is the default publish mode.
-As you saw in Nextflow Run, the person running the pipeline can choose a different default mode, and the output directory itself can be changed with `-output-dir`.
+With the default settings, the output is published at the top level of `results/`, as a symbolic link to the file in the task directory.
+As you saw in Nextflow Run, the person running the pipeline can change the output directory with `-output-dir` and choose a different default publish mode.
 
-The `path` of each output is how the author organizes the results into subdirectories.
-For example, the following `output` block would publish the file to `results/hello/` instead of the top level of `results/`:
+### 2.2. Customize the output settings
 
-```groovy
-output {
-    greetings {
-        path 'hello'
+As the pipeline author, you can set where each output is published within the output directory, and how.
+
+#### 2.2.1. Publish to a subdirectory
+
+In the workflow script file `hello-world.nf`, add a `path` to the `greetings` output:
+
+=== "After"
+
+    ```groovy title="hello-world.nf" linenums="27" hl_lines="3"
+    output {
+        greetings {
+            path 'hello'
+        }
     }
-}
+    ```
+
+=== "Before"
+
+    ```groovy title="hello-world.nf" linenums="27"
+    output {
+        greetings {
+        }
+    }
+    ```
+
+The `path` sets where the files are published within the output directory, here a `hello` subdirectory.
+
+#### 2.2.2. Set the publish mode
+
+In the workflow script file `hello-world.nf`, add a `mode` to the `greetings` output:
+
+=== "After"
+
+    ```groovy title="hello-world.nf" linenums="27" hl_lines="4"
+    output {
+        greetings {
+            path 'hello'
+            mode 'copy'
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="hello-world.nf" linenums="27"
+    output {
+        greetings {
+            path 'hello'
+        }
+    }
+    ```
+
+The `mode` sets how the files are published.
+With `'copy'`, Nextflow publishes a copy of the file instead of a symbolic link, so the results stay available even if you delete the `work/` directory.
+A mode set in the `output` block takes precedence over the default that users can set in their configuration.
+
+#### 2.2.3. Run the workflow
+
+Run the workflow again:
+
+```bash
+nextflow run hello-world.nf
 ```
 
-The `Outputs:` summary would then list it as `greetings: hello/output.txt`.
-You will use subdirectories in Part 3, when the pipeline produces several kinds of outputs, and in Part 5 you will set a specific publish mode for the final output.
+??? success "Command output"
 
-### 2.4. Note on process-level `publishDir` directives
+    ```console
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `hello-world.nf` [cranky_kalam] revision: afe6b9ece6
+
+    executor >  local (1)
+    [0d/1b76d4] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      greetings: hello/output.txt
+    ```
+
+The `Outputs:` summary now lists the file under `hello/`.
+
+??? abstract "Directory contents"
+
+    ```console
+    results
+    ├── hello
+    │   └── output.txt
+    └── output.txt -> /workspaces/training/hello-nextflow/work/99/bf7b2a1e183d53bad9c4dc7553ec96/output.txt
+    ```
+
+The new `output.txt` in `results/hello/` is a regular file, not a symbolic link.
+The symbolic link at the top level of `results/` is left over from the previous run: Nextflow does not delete files published by earlier runs.
+
+### 2.3. Note on process-level `publishDir` directives
 
 Until very recently, the established way to publish outputs was to do it at the level of each individual process using a `publishDir` directive.
 
@@ -334,7 +420,7 @@ To achieve what we just did for the outputs of the `sayHello` process, we would 
 ```groovy title="hello-world.nf" linenums="6" hl_lines="3"
 process sayHello {
 
-    publishDir 'results/hello_world', mode: 'copy'
+    publishDir 'results/hello', mode: 'copy'
 
     output:
     path 'output.txt'
@@ -351,7 +437,7 @@ However, we do not recommend using it in any new work as it will eventually be d
 
 ### Takeaway
 
-You know how to publish the outputs of a workflow with a `publish:` section and an `output` block.
+You know how to publish the outputs of a workflow with a `publish:` section and an `output` block, and how to set the subdirectory and publish mode of each output.
 
 ### What's next?
 
@@ -502,7 +588,7 @@ nextflow run hello-world.nf --name 'Mateo'
 
       /workspaces/training/hello-nextflow/results
 
-      greetings: output.txt
+      greetings: hello/output.txt
     ```
 
 If you made all these edits correctly, you should get another successful execution.
@@ -511,11 +597,11 @@ Be sure to open up the output file to check that the greeting now includes the n
 
 ??? abstract "File contents"
 
-    ```console title="results/output.txt"
+    ```console title="results/hello/output.txt"
     Hello, Mateo!
     ```
 
-Note how the new execution has overwritten the output file published to the `results` directory.
+Note how the new execution has overwritten the output file published to the `results/hello/` directory.
 
 ### 3.4. Use default values for command line parameters
 
@@ -583,7 +669,7 @@ nextflow run hello-world.nf
 
       /workspaces/training/hello-nextflow/results
 
-      greetings: output.txt
+      greetings: hello/output.txt
     ```
 
 ??? question "If it didn't work"
@@ -619,7 +705,7 @@ The output will be in the same place as previously, but the contents should be u
 
 ??? abstract "File contents"
 
-    ```console title="results/output.txt"
+    ```console title="results/hello/output.txt"
     Hello, Friend!
     ```
 
@@ -649,14 +735,14 @@ nextflow run hello-world.nf --name 'Celine'
 
       /workspaces/training/hello-nextflow/results
 
-      greetings: output.txt
+      greetings: hello/output.txt
     ```
 
 Once again, you should find the corresponding updated output in your results directory.
 
 ??? abstract "File contents"
 
-    ```console title="results/output.txt"
+    ```console title="results/hello/output.txt"
     Hello, Celine!
     ```
 
@@ -688,7 +774,7 @@ The solution is also in `solutions/1-hello-world/bonus/`.
 ### Exercise: Rename the output file
 
 Starting from `hello-world.nf` as you left it at the end of this part, change the `sayHello` process so that it writes the greeting to a file called `greeting.txt` instead of `output.txt`.
-Run the workflow and check that `greeting.txt` is published to the results directory.
+Run the workflow and check that `greeting.txt` is published to the `results/hello/` directory.
 
 ??? tip "Hint"
 
@@ -728,10 +814,10 @@ Run the workflow and check that `greeting.txt` is published to the results direc
 
       /workspaces/training/hello-nextflow/results
 
-      greetings: greeting.txt
+      greetings: hello/greeting.txt
     ```
 
-    The `output.txt` file in `results/` is left over from earlier runs: Nextflow does not delete files published by previous runs.
+    The `output.txt` file in `results/hello/` is left over from earlier runs: Nextflow does not delete files published by previous runs.
 
     If you changed only the `script` block, the run fails instead:
 
@@ -790,7 +876,7 @@ How does an entry in the `output` block relate to the workflow?
 - [ ] It must have the same name as the output file
 - [ ] It can have any name; Nextflow matches outputs by order
 
-Learn more: [2.2. Add an `output` block to the script](#22-add-an-output-block-to-the-script)
+Learn more: [2.1.2. Add an `output` block to the script](#212-add-an-output-block-to-the-script)
 </quiz>
 
 <quiz>
@@ -800,7 +886,7 @@ What is the default mode for publishing workflow outputs?
 - [ ] Move files to the output directory
 - [ ] Compress files in the output directory
 
-Learn more: [2.3. Run the workflow](#23-run-the-workflow)
+Learn more: [2.1.3. Run the workflow](#213-run-the-workflow)
 </quiz>
 
 <quiz>

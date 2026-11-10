@@ -39,6 +39,7 @@ workflow {
 
 output {
     greetings {
-        path '.'
+        path 'hello'
+        mode 'copy'
     }
 }

@@ -109,14 +109,18 @@ workflow {
 output {
     greetings {
         path "${params.batch}/intermediates"
+        mode 'copy'
     }
     translated {
         path "${params.batch}/intermediates"
+        mode 'copy'
     }
     collected {
         path "${params.batch}/intermediates"
+        mode 'copy'
     }
     batch_report {
         path "${params.batch}"
+        mode 'copy'
     }
 }

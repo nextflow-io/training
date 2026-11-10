@@ -621,29 +621,29 @@ But for now, let's finish updating the workflow-level outputs.
 ##### 2.2.4.2. Update the `output` block
 
 We need to add the final `cowpy_art` output to the `output` block.
-It is a final result, so we publish it at the top level of the batch directory, next to the report.
-
-This is also the output that people care about most, so we publish it as a copy rather than a symbolic link, with `mode 'copy'`.
-That way, it remains available even if the `work/` directory is cleaned up.
-The intermediate files keep the default mode.
+It is a final result, so we publish it at the top level of the batch directory, next to the report, and as a copy like the other outputs.
 
 In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-containers.nf" linenums="43" hl_lines="14-17"
+    ```groovy title="hello-containers.nf" linenums="43" hl_lines="18-21"
     output {
         greetings {
             path "${params.batch}/intermediates"
+            mode 'copy'
         }
         translated {
             path "${params.batch}/intermediates"
+            mode 'copy'
         }
         collected {
             path "${params.batch}/intermediates"
+            mode 'copy'
         }
         batch_report {
             path "${params.batch}"
+            mode 'copy'
         }
         cowpy_art {
             path "${params.batch}"
@@ -658,20 +658,22 @@ In the `output` block, make the following code change:
     output {
         greetings {
             path "${params.batch}/intermediates"
+            mode 'copy'
         }
         translated {
             path "${params.batch}/intermediates"
+            mode 'copy'
         }
         collected {
             path "${params.batch}/intermediates"
+            mode 'copy'
         }
         batch_report {
             path "${params.batch}"
+            mode 'copy'
         }
     }
     ```
-
-As you saw in Nextflow Run, a publish mode set in the `output` block takes precedence over the default that users can set in their configuration, so this output is always published as a copy.
 
 #### 2.2.5. Run the workflow
 
@@ -857,22 +859,21 @@ nextflow run hello-containers.nf -profile test -resume
 
 This time it does indeed work!
 As usual you can find the workflow outputs in the results directory, with the report and the final output at the top level of the batch directory, and the intermediate files in a subdirectory.
-The final output is a real file, while the others are symbolic links.
 
 ??? abstract "Directory contents"
 
     ```console
     results/batch
-    ├── batch-report.txt -> /workspaces/training/hello-nextflow/work/.../batch-report.txt
+    ├── batch-report.txt
     ├── cowpy-batch-greetings.txt
     └── intermediates
-        ├── Andrea.txt -> /workspaces/training/hello-nextflow/work/.../Andrea.txt
-        ├── Celine.txt -> /workspaces/training/hello-nextflow/work/.../Celine.txt
-        ├── batch-greetings.txt -> /workspaces/training/hello-nextflow/work/.../batch-greetings.txt
-        ├── Mateo.txt -> /workspaces/training/hello-nextflow/work/.../Mateo.txt
-        ├── es-Andrea.txt -> /workspaces/training/hello-nextflow/work/.../es-Andrea.txt
-        ├── es-Celine.txt -> /workspaces/training/hello-nextflow/work/.../es-Celine.txt
-        └── es-Mateo.txt -> /workspaces/training/hello-nextflow/work/.../es-Mateo.txt
+        ├── Andrea.txt
+        ├── Celine.txt
+        ├── batch-greetings.txt
+        ├── Mateo.txt
+        ├── es-Andrea.txt
+        ├── es-Celine.txt
+        └── es-Mateo.txt
     ```
 
 The final ASCII art output is in the `results/batch/` directory, under the name `cowpy-batch-greetings.txt`.
