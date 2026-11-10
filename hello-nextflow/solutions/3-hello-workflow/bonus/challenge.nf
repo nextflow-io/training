@@ -6,10 +6,10 @@
 process sayHello {
 
     input:
-    tuple val(name), val(language)
+    val name
 
     output:
-    tuple path("${name}.txt"), val(language)
+    path "${name}.txt"
 
     script:
     """
@@ -23,7 +23,8 @@ process sayHello {
 process translateGreeting {
 
     input:
-    tuple path(input_file), val(language)
+    path input_file
+    val language
 
     output:
     path "${language}-${input_file}"
@@ -76,10 +77,30 @@ process collectGreetings {
 }
 
 /*
+ * Combine the original and translated greetings into a single file
+ */
+process collectBilingual {
+
+    input:
+    path greetings
+    path translations
+    val batch_name
+
+    output:
+    path "${batch_name}-bilingual.txt"
+
+    script:
+    """
+    cat ${greetings} ${translations} > '${batch_name}-bilingual.txt'
+    """
+}
+
+/*
  * Pipeline parameters
  */
 params {
     input: Path = 'data/names.csv'
+    language: String = 'es'
     batch: String = 'batch'
 }
 
@@ -89,19 +110,22 @@ workflow {
     // create a channel for inputs from a CSV file
     name_ch = channel.fromPath(params.input)
                         .splitCsv()
-                        .map { row -> [row[0], row[1]] }
+                        .map { row -> row[0] }
     // emit a greeting
     sayHello(name_ch)
     // translate the greeting
-    translateGreeting(sayHello.out)
+    translateGreeting(sayHello.out, params.language)
     // collect all the greetings into one file
     collectGreetings(translateGreeting.out.collect(), params.batch)
+    // combine the original and translated greetings
+    collectBilingual(sayHello.out.collect(), translateGreeting.out.collect(), params.batch)
 
     publish:
     greetings = sayHello.out
     translated = translateGreeting.out
     collected = collectGreetings.out.outfile
     batch_report = collectGreetings.out.report
+    bilingual = collectBilingual.out
 }
 
 output {
@@ -118,6 +142,10 @@ output {
         mode 'copy'
     }
     batch_report {
+        path "${params.batch}"
+        mode 'copy'
+    }
+    bilingual {
         path "${params.batch}"
         mode 'copy'
     }
