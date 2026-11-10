@@ -66,9 +66,11 @@ workflow {
 
 output {
     greetings {
-        path '.'
+        path 'hello'
+        mode 'copy'
     }
     translated {
-        path '.'
+        path 'hello'
+        mode 'copy'
     }
 }

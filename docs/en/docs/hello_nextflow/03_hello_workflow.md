@@ -67,20 +67,22 @@ nextflow run hello-workflow.nf
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - Andrea.txt
-        - Celine.txt
-        - Mateo.txt
+        - hello/Andrea.txt
+        - hello/Celine.txt
+        - hello/Mateo.txt
     ```
 
-As previously, you will find the output files in the `results` directory, alongside the outputs of the previous parts.
+As previously, you will find the output files in the `results/hello` directory, alongside the outputs of the previous parts.
 
 ??? abstract "Directory contents"
 
     ```console
     results
-    ├── Andrea.txt -> /workspaces/training/hello-nextflow/work/.../Andrea.txt
-    ├── Celine.txt -> /workspaces/training/hello-nextflow/work/.../Celine.txt
-    ├── Mateo.txt -> /workspaces/training/hello-nextflow/work/.../Mateo.txt
+    ├── hello
+    │   ├── Andrea.txt
+    │   ├── Celine.txt
+    │   ├── Mateo.txt
+    │   └── output.txt
     └── output.txt -> /workspaces/training/hello-nextflow/work/.../output.txt
     ```
 
@@ -257,13 +259,15 @@ Then, in the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="67" hl_lines="5-7"
+    ```groovy title="hello-workflow.nf" linenums="67" hl_lines="6-9"
     output {
         greetings {
-            path '.'
+            path 'hello'
+            mode 'copy'
         }
         translated {
-            path '.'
+            path 'hello'
+            mode 'copy'
         }
     }
     ```
@@ -273,13 +277,14 @@ Then, in the `output` block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="67"
     output {
         greetings {
-            path '.'
+            path 'hello'
+            mode 'copy'
         }
     }
     ```
 
 Each output has its own entry, so you can set a different path for each one.
-For now they all go to the top level of the output directory; in section 2, you'll organize them into subdirectories.
+For now they all go to the same `hello` subdirectory; in section 2.5, you'll organize them by batch.
 
 #### 1.2.4. Run the workflow with `-resume`
 
@@ -305,23 +310,23 @@ nextflow run hello-workflow.nf -resume
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - Celine.txt
-        - Mateo.txt
-        - Andrea.txt
+        - hello/Celine.txt
+        - hello/Mateo.txt
+        - hello/Andrea.txt
 
       translated:
-        - es-Mateo.txt
-        - es-Andrea.txt
-        - es-Celine.txt
+        - hello/es-Mateo.txt
+        - hello/es-Andrea.txt
+        - hello/es-Celine.txt
     ```
 
 There is now an extra line in the console output that corresponds to the new process we just added, and the `sayHello` tasks were retrieved from the cache.
 
-You'll find the translated greetings in the `results` directory, as set in the `output` block.
+You'll find the translated greetings in the `results/hello` directory, as set in the `output` block.
 
 ??? abstract "File contents"
 
-    ```console title="results/es-Mateo.txt"
+    ```console title="results/hello/es-Mateo.txt"
     Hola, Mateo!
     ```
 
@@ -535,14 +540,14 @@ nextflow run hello-workflow.nf -resume
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - Celine.txt
-        - Mateo.txt
-        - Andrea.txt
+        - hello/Celine.txt
+        - hello/Mateo.txt
+        - hello/Andrea.txt
 
       translated:
-        - es-Mateo.txt
-        - es-Andrea.txt
-        - es-Celine.txt
+        - hello/es-Mateo.txt
+        - hello/es-Andrea.txt
+        - hello/es-Celine.txt
     ```
 
 The results are the same as before, since the default language is Spanish.
@@ -570,21 +575,21 @@ nextflow run hello-workflow.nf -resume --language fr
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - Andrea.txt
-        - Mateo.txt
-        - Celine.txt
+        - hello/Andrea.txt
+        - hello/Mateo.txt
+        - hello/Celine.txt
 
       translated:
-        - fr-Andrea.txt
-        - fr-Celine.txt
-        - fr-Mateo.txt
+        - hello/fr-Andrea.txt
+        - hello/fr-Celine.txt
+        - hello/fr-Mateo.txt
     ```
 
 The `sayHello` tasks were cached, and the `translateGreeting` tasks ran again with the new input.
 
 ??? abstract "File contents"
 
-    ```console title="results/fr-Mateo.txt"
+    ```console title="results/hello/fr-Mateo.txt"
     Bonjour, Mateo!
     ```
 
@@ -835,16 +840,19 @@ Then, in the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="105" hl_lines="8-10"
+    ```groovy title="hello-workflow.nf" linenums="105" hl_lines="10-13"
     output {
         greetings {
-            path '.'
+            path 'hello'
+            mode 'copy'
         }
         translated {
-            path '.'
+            path 'hello'
+            mode 'copy'
         }
         collected {
-            path '.'
+            path 'hello'
+            mode 'copy'
         }
     }
     ```
@@ -854,10 +862,12 @@ Then, in the `output` block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="105"
     output {
         greetings {
-            path '.'
+            path 'hello'
+            mode 'copy'
         }
         translated {
-            path '.'
+            path 'hello'
+            mode 'copy'
         }
     }
     ```
@@ -887,19 +897,19 @@ nextflow run hello-workflow.nf -resume
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - Andrea.txt
-        - Celine.txt
-        - Mateo.txt
+        - hello/Andrea.txt
+        - hello/Celine.txt
+        - hello/Mateo.txt
 
       translated:
-        - es-Mateo.txt
-        - es-Celine.txt
-        - es-Andrea.txt
+        - hello/es-Mateo.txt
+        - hello/es-Celine.txt
+        - hello/es-Andrea.txt
 
       collected:
-        - batch-greetings.txt
-        - batch-greetings.txt
-        - batch-greetings.txt
+        - hello/batch-greetings.txt
+        - hello/batch-greetings.txt
+        - hello/batch-greetings.txt
     ```
 
 It runs successfully, including the third step.
@@ -911,7 +921,7 @@ Now have a look at the contents of the final output file.
 
 ??? abstract "File contents"
 
-    ```console title="results/batch-greetings.txt"
+    ```console title="results/hello/batch-greetings.txt"
     Hola, Andrea!
     ```
 
@@ -1006,16 +1016,16 @@ nextflow run hello-workflow.nf -resume
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - Andrea.txt
-        - Mateo.txt
-        - Celine.txt
+        - hello/Andrea.txt
+        - hello/Mateo.txt
+        - hello/Celine.txt
 
       translated:
-        - es-Celine.txt
-        - es-Andrea.txt
-        - es-Mateo.txt
+        - hello/es-Celine.txt
+        - hello/es-Andrea.txt
+        - hello/es-Mateo.txt
 
-      collected: batch-greetings.txt
+      collected: hello/batch-greetings.txt
     ```
 
 It runs successfully, although the log output may look a little messier than this (we cleaned it up for readability).
@@ -1036,7 +1046,7 @@ Finally, you can have a look at the contents of the output file to satisfy yours
 
 ??? abstract "File contents"
 
-    ```console title="results/batch-greetings.txt"
+    ```console title="results/hello/batch-greetings.txt"
     Hola, Celine!
     Hola, Andrea!
     Hola, Mateo!
@@ -1084,16 +1094,19 @@ In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="105" hl_lines="3 6 9"
+    ```groovy title="hello-workflow.nf" linenums="105" hl_lines="3 7 11"
     output {
         greetings {
             path "${params.batch}/intermediates"
+            mode 'copy'
         }
         translated {
             path "${params.batch}/intermediates"
+            mode 'copy'
         }
         collected {
             path "${params.batch}/intermediates"
+            mode 'copy'
         }
     }
     ```
@@ -1103,13 +1116,16 @@ In the `output` block, make the following code change:
     ```groovy title="hello-workflow.nf" linenums="105"
     output {
         greetings {
-            path '.'
+            path 'hello'
+            mode 'copy'
         }
         translated {
-            path '.'
+            path 'hello'
+            mode 'copy'
         }
         collected {
-            path '.'
+            path 'hello'
+            mode 'copy'
         }
     }
     ```
@@ -1319,19 +1335,23 @@ In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="109" hl_lines="11-13"
+    ```groovy title="hello-workflow.nf" linenums="109" hl_lines="14-17"
     output {
         greetings {
             path "${params.batch}/intermediates"
+            mode 'copy'
         }
         translated {
             path "${params.batch}/intermediates"
+            mode 'copy'
         }
         collected {
             path "${params.batch}/intermediates"
+            mode 'copy'
         }
         batch_report {
             path "${params.batch}"
+            mode 'copy'
         }
     }
     ```
@@ -1342,12 +1362,15 @@ In the `output` block, make the following code change:
     output {
         greetings {
             path "${params.batch}/intermediates"
+            mode 'copy'
         }
         translated {
             path "${params.batch}/intermediates"
+            mode 'copy'
         }
         collected {
             path "${params.batch}/intermediates"
+            mode 'copy'
         }
     }
     ```
