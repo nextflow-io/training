@@ -1325,7 +1325,7 @@ In the `workflow` block, make the following code change:
     ```
 
 As you can see, referring to specific process outputs is now trivial.
-When we go to add one more step to our pipeline in Part 5 (Containers), we'll be able to easily refer to `collectGreetings.out.outfile` and hand it to the new process (spoiler: the new process is called `cowpy`).
+When we go to add one more step to our pipeline in Part 4 (Containers), we'll be able to easily refer to `collectGreetings.out.outfile` and hand it to the new process (spoiler: the new process is called `cowpy`).
 
 But for now, let's finish updating the workflow-level outputs.
 
@@ -1443,7 +1443,7 @@ More generally, you understand the key principles involved in connecting process
 
 Take an extra long break, you've earned it.
 
-When you're ready, move on to [**Part 4: Hello Modules**](./04_hello_modules.md) to learn how to modularize your code for better maintainability and code efficiency.
+When you're ready, move on to [**Part 4: Hello Containers**](./04_hello_containers.md) to learn how to use containers to manage software dependencies more conveniently and reproducibly.
 
 ---
 

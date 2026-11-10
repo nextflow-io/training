@@ -34,7 +34,7 @@ We provide the following data and related resources:
 
 The four main tools involved are [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) for quality control metrics collection, [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) for adapter trimming (bundles Cutadapt and FastQC for post-trimming QC), [HISAT2](http://daehwankimlab.github.io/hisat2/) for spliced alignment to a reference genome, and [MultiQC](https://multiqc.info/) for aggregated QC report generation.
 
-These tools are not installed in the GitHub Codespaces environment, so we'll use them via containers retrieved via the Seqera Containers service (see [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
+These tools are not installed in the GitHub Codespaces environment, so we'll use them via containers retrieved via the Seqera Containers service (see [Hello Containers](../../hello_nextflow/04_hello_containers.md)).
 
 !!! tip
 

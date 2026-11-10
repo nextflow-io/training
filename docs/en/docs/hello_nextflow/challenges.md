@@ -270,14 +270,15 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
 
 ## Challenge 4: Give each name its own character
 
-Start from `hello-containers.nf` as it stands at the end of Part 5:
+Start from `main.nf` as it stands at the end of Part 5:
 
 ```bash
-cp solutions/5-hello-containers/hello-containers-2.nf hello-challenge.nf
+cp solutions/5-hello-modules/main.nf hello-challenge.nf
 ```
 
-The copy uses the modules in `modules/` and the settings in `nextflow.config` from Parts 4 and 5.
-This challenge changes the modules, which `hello-containers.nf` also uses, so make a copy of the `modules` directory first if you want to keep a working version of `hello-containers.nf`.
+At the end of Part 5, the pipeline project consists of `main.nf`, the modules in `modules/`, and the parameter values and profiles in `nextflow.config`.
+The copy uses the same modules and configuration.
+This challenge changes the modules, which `main.nf` also uses, so make a copy of the `modules` directory first if you want to keep a working version of `main.nf`.
 
 The third column of `data/names.csv` assigns a character to each name: `squirrel` for Mateo, `turtle` for Raphael and `moose` for Celine.
 Make the workflow produce one ASCII art file per name, each drawn by the character from its row, instead of a single drawing of all the greetings.
@@ -322,7 +323,8 @@ Keep the collected file and the report as they are.
 
     In the `map` closures, the underscore at the start of `_character` tells Nextflow that the variable is deliberately unused, so `nextflow lint` doesn't warn about it.
 
-    The `character` parameter is no longer used, so you can remove it from the `params` block and from `nextflow.config`.
+    The `character` parameter is no longer used, so you can remove it from the `params` block of `hello-challenge.nf`.
+    Keep its default value in `nextflow.config`, since `main.nf` still uses it.
 
     In the modules, the inputs and outputs carry the character alongside the file:
 
@@ -343,7 +345,7 @@ Keep the collected file and the report as they are.
         tuple path("${language}-${input_file}"), val(character)
     ```
 
-    ```groovy title="modules/cowpy.nf" linenums="7" hl_lines="2"
+    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2"
         input:
         tuple path(input_file), val(character)
     ```
@@ -359,27 +361,27 @@ Keep the collected file and the report as they are.
         ```console
         N E X T F L O W   ~  version 26.04.4
 
-        Launching `hello-challenge.nf` [stupefied_kowalevski] revision: 4c3e11a405
+        Launching `hello-challenge.nf` [grave_aryabhata] revision: 4c3e11a405
 
         executor >  local (10)
-        [ab/d91fd4] sayHello (1)          | 3 of 3 ✔
-        [2f/fe7a16] translateGreeting (3) | 3 of 3 ✔
-        [fa/242a27] collectGreetings      | 1 of 1 ✔
-        [57/9f025a] cowpy (2)             | 3 of 3 ✔
+        [a7/48b8db] sayHello (1)          | 3 of 3 ✔
+        [6a/ded0ef] translateGreeting (1) | 3 of 3 ✔
+        [7f/822685] collectGreetings      | 1 of 1 ✔
+        [09/74578f] cowpy (3)             | 3 of 3 ✔
 
         Outputs:
 
           /workspaces/training/hello-nextflow/results
 
           greetings:
-            - batch/intermediates/Raphael.txt
             - batch/intermediates/Celine.txt
             - batch/intermediates/Mateo.txt
+            - batch/intermediates/Raphael.txt
 
           translated:
-            - batch/intermediates/es-Celine.txt
-            - batch/intermediates/es-Raphael.txt
             - batch/intermediates/es-Mateo.txt
+            - batch/intermediates/es-Raphael.txt
+            - batch/intermediates/es-Celine.txt
 
           collected: batch/intermediates/batch-greetings.txt
 
@@ -387,8 +389,8 @@ Keep the collected file and the report as they are.
 
           cowpy_art:
             - batch/cowpy-es-Mateo.txt
-            - batch/cowpy-es-Celine.txt
             - batch/cowpy-es-Raphael.txt
+            - batch/cowpy-es-Celine.txt
         ```
 
     `cowpy` now runs three times, once per name, and each file is drawn by that name's character:
