@@ -197,7 +197,7 @@ This involves two new pieces of code:
 1. A `publish:` section inside the `workflow` body, listing the process outputs to publish.
 2. An `output` block, outside the `workflow` body, specifying how to publish them.
 
-### 2.1. Default settings
+### 2.1. Publish with default settings
 
 Start by publishing the output of `sayHello` with Nextflow's default settings.
 
