@@ -63,13 +63,14 @@ process collectGreetings {
     input:
     path input_files
     val batch_name
+    val language
 
     output:
-    path "${batch_name}-greetings.txt"
+    path "${batch_name}-${language}-greetings.txt"
 
     script:
     """
-    cat ${input_files} > '${batch_name}-greetings.txt'
+    cat ${input_files} > '${batch_name}-${language}-greetings.txt'
     """
 }
 
@@ -94,7 +95,7 @@ workflow {
     // translate the greeting
     translateGreeting(sayHello.out, params.language)
     // collect all the greetings into one file
-    collectGreetings(translateGreeting.out.collect(), params.batch)
+    collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
 
     publish:
     greetings = sayHello.out

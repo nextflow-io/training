@@ -45,30 +45,30 @@ nextflow run hello-containers.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [silly_marconi] revision: 46b6806368
+    Launching `hello-containers.nf` [evil_poitras] revision: bb1df0f734
 
     executor >  local (7)
-    [ee/3e305b] sayHello (2)          | 3 of 3 ✔
-    [da/209eda] translateGreeting (3) | 3 of 3 ✔
-    [35/97a6ca] collectGreetings      | 1 of 1 ✔
+    [2d/7e3ffe] sayHello (2)          | 3 of 3 ✔
+    [f4/e5528d] translateGreeting (1) | 3 of 3 ✔
+    [93/a1e241] collectGreetings      | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - batch/intermediates/Celine.txt
         - batch/intermediates/Mateo.txt
+        - batch/intermediates/Celine.txt
         - batch/intermediates/Raphael.txt
 
       translated:
-        - batch/intermediates/es-Mateo.txt
-        - batch/intermediates/es-Celine.txt
         - batch/intermediates/es-Raphael.txt
+        - batch/intermediates/es-Celine.txt
+        - batch/intermediates/es-Mateo.txt
 
-      collected: batch/intermediates/batch-greetings.txt
+      collected: batch/intermediates/batch-es-greetings.txt
 
-      batch_report: batch/batch-report.txt
+      batch_report: batch/batch-es-report.txt
     ```
 
 As previously, you will find the output files in the locations specified in the `output` block, under `results/batch/`, since we didn't set a value for `--batch`.
@@ -77,9 +77,9 @@ As previously, you will find the output files in the locations specified in the 
 
     ```console
     results/batch
-    ├── batch-report.txt
+    ├── batch-es-report.txt
     └── intermediates
-        ├── batch-greetings.txt
+        ├── batch-es-greetings.txt
         ├── Celine.txt
         ├── es-Celine.txt
         ├── es-Mateo.txt
@@ -409,7 +409,7 @@ We can model our `cowpy` process on the other processes we've written previously
 
 Add the following process definition to the workflow script, right under the `collectGreetings` process:
 
-```groovy title="hello-containers.nf" linenums="79"
+```groovy title="hello-containers.nf" linenums="80"
 /*
  * Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
  */
@@ -448,7 +448,7 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-containers.nf" linenums="108" hl_lines="12-13"
+    ```groovy title="hello-containers.nf" linenums="109" hl_lines="12-13"
         main:
         // create a channel for inputs from a CSV file
         name_ch = channel.fromPath(params.input)
@@ -459,14 +459,14 @@ In the workflow block, make the following code change:
         // translate the greeting
         translateGreeting(sayHello.out, params.language)
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch)
+        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
         // generate ASCII art of the greetings with cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Before"
 
-    ```groovy title="hello-containers.nf" linenums="108"
+    ```groovy title="hello-containers.nf" linenums="109"
         main:
         // create a channel for inputs from a CSV file
         name_ch = channel.fromPath(params.input)
@@ -477,7 +477,7 @@ In the workflow block, make the following code change:
         // translate the greeting
         translateGreeting(sayHello.out, params.language)
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch)
+        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
     ```
 
 Notice that we used a new CLI parameter, `params.character`, in order to specify which character we want to have say the greetings.
@@ -488,7 +488,7 @@ Declare the new parameter in the `params` block of the workflow script, with a d
 
 === "After"
 
-    ```groovy title="hello-containers.nf" linenums="97" hl_lines="8"
+    ```groovy title="hello-containers.nf" linenums="98" hl_lines="8"
     /*
      * Pipeline parameters
      */
@@ -502,7 +502,7 @@ Declare the new parameter in the `params` block of the workflow script, with a d
 
 === "Before"
 
-    ```groovy title="hello-containers.nf" linenums="97"
+    ```groovy title="hello-containers.nf" linenums="98"
     /*
      * Pipeline parameters
      */
@@ -525,7 +525,7 @@ In the `workflow` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-containers.nf" linenums="123" hl_lines="6"
+    ```groovy title="hello-containers.nf" linenums="124" hl_lines="6"
         publish:
         greetings = sayHello.out
         translated = translateGreeting.out
@@ -536,7 +536,7 @@ In the `workflow` block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-containers.nf" linenums="123"
+    ```groovy title="hello-containers.nf" linenums="124"
         publish:
         greetings = sayHello.out
         translated = translateGreeting.out
@@ -555,7 +555,7 @@ In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-containers.nf" linenums="131" hl_lines="18-21"
+    ```groovy title="hello-containers.nf" linenums="132" hl_lines="18-21"
     output {
         greetings {
             path "${params.batch}/intermediates"
@@ -582,7 +582,7 @@ In the `output` block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-containers.nf" linenums="131"
+    ```groovy title="hello-containers.nf" linenums="132"
     output {
         greetings {
             path "${params.batch}/intermediates"
@@ -625,13 +625,13 @@ nextflow run hello-containers.nf -resume
     ```console hl_lines="10 13 20-21 26-27"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [drunk_volta] revision: d556f0c202
+    Launching `hello-containers.nf` [distraught_salas] revision: ef370ae430
 
     executor >  local (1)
-    [9c/585177] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [a5/fad4ed] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [35/97a6ca] collectGreetings      | 1 of 1, cached: 1 ✔
-    [40/8343af] cowpy                 | 0 of 1 ✘
+    [ce/83663a] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [c2/d82633] translateGreeting (1) | 3 of 3, cached: 3 ✔
+    [93/a1e241] collectGreetings      | 1 of 1, cached: 1 ✔
+    [72/4be2f7] cowpy                 | 0 of 1 ✘
     ERROR ~ Error executing process > 'cowpy'
 
     Caused by:
@@ -640,7 +640,7 @@ nextflow run hello-containers.nf -resume
 
     Command executed:
 
-      cat batch-greetings.txt | cowpy -c "turkey" > cowpy-batch-greetings.txt
+      cat batch-es-greetings.txt | cowpy -c "turkey" > cowpy-batch-es-greetings.txt
 
     Command exit status:
       127
@@ -652,9 +652,9 @@ nextflow run hello-containers.nf -resume
       .command.sh: line 2: cowpy: command not found
 
     Work dir:
-      /workspaces/training/hello-nextflow/work/40/8343af5f23981c224979f1896728e5
+      /workspaces/training/hello-nextflow/work/72/4be2f70a8676312e8dde1b1f9522b4
 
-    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 
      -- Check '.nextflow.log' file for details
     ```
@@ -676,7 +676,7 @@ Edit the `cowpy` process definition in `hello-containers.nf` to add the `contain
 
 === "After"
 
-    ```groovy title="hello-containers.nf" linenums="82" hl_lines="3"
+    ```groovy title="hello-containers.nf" linenums="83" hl_lines="3"
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -697,7 +697,7 @@ Edit the `cowpy` process definition in `hello-containers.nf` to add the `contain
 
 === "Before"
 
-    ```groovy title="hello-containers.nf" linenums="82"
+    ```groovy title="hello-containers.nf" linenums="83"
     process cowpy {
 
         input:
@@ -756,13 +756,13 @@ nextflow run hello-containers.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [high_plateau] revision: e6dfcd4a4a
+    Launching `hello-containers.nf` [drunk_spence] revision: bfe2e017c2
 
     executor >  local (1)
-    [b8/e88fb6] sayHello (3)          | 3 of 3, cached: 3 ✔
-    [ad/ee6d4c] translateGreeting (1) | 3 of 3, cached: 3 ✔
-    [35/97a6ca] collectGreetings      | 1 of 1, cached: 1 ✔
-    [c2/55841f] cowpy                 | 1 of 1 ✔
+    [ce/83663a] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [f4/e5528d] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [93/a1e241] collectGreetings      | 1 of 1, cached: 1 ✔
+    [fd/d71f5c] cowpy                 | 1 of 1 ✔
 
     Outputs:
 
@@ -770,19 +770,19 @@ nextflow run hello-containers.nf -resume
 
       greetings:
         - batch/intermediates/Celine.txt
-        - batch/intermediates/Raphael.txt
         - batch/intermediates/Mateo.txt
+        - batch/intermediates/Raphael.txt
 
       translated:
-        - batch/intermediates/es-Mateo.txt
-        - batch/intermediates/es-Raphael.txt
         - batch/intermediates/es-Celine.txt
+        - batch/intermediates/es-Raphael.txt
+        - batch/intermediates/es-Mateo.txt
 
-      collected: batch/intermediates/batch-greetings.txt
+      collected: batch/intermediates/batch-es-greetings.txt
 
-      batch_report: batch/batch-report.txt
+      batch_report: batch/batch-es-report.txt
 
-      cowpy_art: batch/cowpy-batch-greetings.txt
+      cowpy_art: batch/cowpy-batch-es-greetings.txt
     ```
 
 This time it does indeed work!
@@ -792,10 +792,10 @@ As usual you can find the workflow outputs in the results directory, with the re
 
     ```console
     results/batch
-    ├── batch-report.txt
-    ├── cowpy-batch-greetings.txt
+    ├── batch-es-report.txt
+    ├── cowpy-batch-es-greetings.txt
     └── intermediates
-        ├── batch-greetings.txt
+        ├── batch-es-greetings.txt
         ├── Celine.txt
         ├── es-Celine.txt
         ├── es-Mateo.txt
@@ -804,15 +804,15 @@ As usual you can find the workflow outputs in the results directory, with the re
         └── Raphael.txt
     ```
 
-The final ASCII art output is in the `results/batch/` directory, under the name `cowpy-batch-greetings.txt`.
+The final ASCII art output is in the `results/batch/` directory, under the name `cowpy-batch-es-greetings.txt`.
 
 ??? abstract "File contents"
 
-    ```console title="results/batch/cowpy-batch-greetings.txt"
+    ```console title="results/batch/cowpy-batch-es-greetings.txt"
      ________________
-    / Hola, Mateo!   \
+    / Hola, Raphael! \
     | Hola, Celine!  |
-    \ Hola, Raphael! /
+    \ Hola, Mateo!   /
      ----------------
       \                                  ,+*^^*+___+++_
        \                           ,*^^^^              )
@@ -844,20 +844,20 @@ And there it is, our beautiful turkey saying the translated greetings as desired
 As a final coda to this section, let's take a look at the work subdirectory for one of the `cowpy` process calls to get a bit more insight on how Nextflow works with containers under the hood.
 
 Check the output from your `nextflow run` command to find the path to the work subdirectory for the `cowpy` process.
-Looking at what we got for the run shown above, the console log line for the `cowpy` process starts with `[c2/55841f]`.
-That corresponds to the following truncated directory path: `work/c2/55841f`.
+Looking at what we got for the run shown above, the console log line for the `cowpy` process starts with `[fd/d71f5c]`.
+That corresponds to the following truncated directory path: `work/fd/d71f5c`.
 
 In that directory, you will find the `.command.run` file that contains all the commands Nextflow ran on your behalf in the course of executing the pipeline.
 
 ??? abstract "File contents"
 
-    ```console title="work/c2/55841f89caec5b92d8b995514be243/.command.run"
+    ```console title="work/fd/d71f5c90fe222eedd0bb39f8ea8f15/.command.run"
     #!/bin/bash
     ### ---
     ### name: 'cowpy'
     ### container: 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
     ### outputs:
-    ### - 'cowpy-batch-greetings.txt'
+    ### - 'cowpy-batch-es-greetings.txt'
     ### ...
     set -e
     set -u
@@ -944,7 +944,7 @@ In that directory, you will find the `.command.run` file that contains all the c
         local exit_status=${nxf_main_ret:=0}
         [[ ${exit_status} -eq 0 && ${nxf_unstage_ret:=0} -ne 0 ]] && exit_status=${nxf_unstage_ret:=0}
         [[ ${exit_status} -eq 0 && ${last_err} -ne 0 ]] && exit_status=${last_err}
-        printf -- $exit_status > /workspaces/training/hello-nextflow/work/c2/55841f89caec5b92d8b995514be243/.exitcode
+        printf -- $exit_status > /workspaces/training/hello-nextflow/work/fd/d71f5c90fe222eedd0bb39f8ea8f15/.exitcode
         set +u
         docker rm $NXF_BOXID &>/dev/null || true
         exit $exit_status
@@ -956,14 +956,14 @@ In that directory, you will find the `.command.run` file that contains all the c
     }
 
     nxf_launch() {
-        docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/c2/55841f89caec5b92d8b995514be243/.command.sh
+        docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/fd/d71f5c90fe222eedd0bb39f8ea8f15/.command.sh
     }
 
     nxf_stage() {
         true
         # stage input files
-        rm -f batch-greetings.txt
-        ln -s /workspaces/training/hello-nextflow/work/35/97a6ca28975c881dd081b11311a8de/batch-greetings.txt batch-greetings.txt
+        rm -f batch-es-greetings.txt
+        ln -s /workspaces/training/hello-nextflow/work/93/a1e241bce7ab57b6d7fe663c99ef8b/batch-es-greetings.txt batch-es-greetings.txt
     }
 
     nxf_unstage_outputs() {
@@ -991,7 +991,7 @@ In that directory, you will find the `.command.run` file that contains all the c
         export NXF_BOXID="nxf-$(dd bs=18 count=1 if=/dev/urandom 2>/dev/null | base64 | tr +/ 0A | tr -d '\r\n')"
         NXF_SCRATCH=''
         [[ $NXF_DEBUG > 0 ]] && nxf_env
-        touch /workspaces/training/hello-nextflow/work/c2/55841f89caec5b92d8b995514be243/.command.begin
+        touch /workspaces/training/hello-nextflow/work/fd/d71f5c90fe222eedd0bb39f8ea8f15/.command.begin
         set +u
         set -u
         [[ $NXF_SCRATCH ]] && cd $NXF_SCRATCH
@@ -1012,7 +1012,7 @@ If you search for `nxf_launch` in this file, you should see something like this:
 
 ```console
 nxf_launch() {
-    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/c2/55841f89caec5b92d8b995514be243/.command.sh
+    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/fd/d71f5c90fe222eedd0bb39f8ea8f15/.command.sh
 }
 ```
 
@@ -1054,7 +1054,7 @@ Add it to the `cowpy` process with the `conda` directive:
 
 === "After"
 
-    ```groovy title="hello-containers.nf" linenums="82" hl_lines="4"
+    ```groovy title="hello-containers.nf" linenums="83" hl_lines="4"
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -1065,7 +1065,7 @@ Add it to the `cowpy` process with the `conda` directive:
 
 === "Before"
 
-    ```groovy title="hello-containers.nf" linenums="82"
+    ```groovy title="hello-containers.nf" linenums="83"
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -1162,7 +1162,7 @@ Pick another character that `cowpy` offers, and run the workflow so that it draw
 
     Or change the default value in the `params` block of `hello-containers.nf`:
 
-    ```groovy title="hello-containers.nf" linenums="100" hl_lines="8"
+    ```groovy title="hello-containers.nf" linenums="101" hl_lines="8"
     /*
      * Pipeline parameters
      */
@@ -1176,7 +1176,7 @@ Pick another character that `cowpy` offers, and run the workflow so that it draw
 
     The ASCII art now shows a stegosaurus:
 
-    ```console title="results/batch/cowpy-batch-greetings.txt"
+    ```console title="results/batch/cowpy-batch-es-greetings.txt"
      ________________
     / Hola, Celine!  \
     | Hola, Mateo!   |

@@ -54,13 +54,13 @@ nextflow run hello-modules.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [gloomy_allen] revision: 7ee3317a43
+    Launching `hello-modules.nf` [festering_blackwell] revision: 59e22ae249
 
     executor >  local (8)
-    [af/20bfde] sayHello (3)          | 3 of 3 ✔
-    [13/ca437e] translateGreeting (2) | 3 of 3 ✔
-    [bb/cc92b4] collectGreetings      | 1 of 1 ✔
-    [5d/fa8c0a] cowpy                 | 1 of 1 ✔
+    [86/5fe4eb] sayHello (3)          | 3 of 3 ✔
+    [94/86c052] translateGreeting (1) | 3 of 3 ✔
+    [f4/f3bf84] collectGreetings      | 1 of 1 ✔
+    [58/363929] cowpy                 | 1 of 1 ✔
 
     Outputs:
 
@@ -73,14 +73,14 @@ nextflow run hello-modules.nf
 
       translated:
         - batch/intermediates/es-Celine.txt
-        - batch/intermediates/es-Raphael.txt
         - batch/intermediates/es-Mateo.txt
+        - batch/intermediates/es-Raphael.txt
 
-      collected: batch/intermediates/batch-greetings.txt
+      collected: batch/intermediates/batch-es-greetings.txt
 
-      batch_report: batch/batch-report.txt
+      batch_report: batch/batch-es-report.txt
 
-      cowpy_art: batch/cowpy-batch-greetings.txt
+      cowpy_art: batch/cowpy-batch-es-greetings.txt
     ```
 
 As previously, you will find the output files under `results/batch/`.
@@ -89,10 +89,10 @@ As previously, you will find the output files under `results/batch/`.
 
     ```console
     results/batch
-    ├── batch-report.txt
-    ├── cowpy-batch-greetings.txt
+    ├── batch-es-report.txt
+    ├── cowpy-batch-es-greetings.txt
     └── intermediates
-        ├── batch-greetings.txt
+        ├── batch-es-greetings.txt
         ├── Celine.txt
         ├── es-Celine.txt
         ├── es-Mateo.txt
@@ -128,32 +128,32 @@ nextflow run main.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [prickly_mcclintock] revision: 7ee3317a43
+    Launching `main.nf` [hopeful_dijkstra] revision: 59e22ae249
 
-    [af/20bfde] sayHello (3)          | 3 of 3, cached: 3 ✔
-    [85/cfe1c1] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [bb/cc92b4] collectGreetings      | 1 of 1, cached: 1 ✔
-    [5d/fa8c0a] cowpy                 | 1 of 1, cached: 1 ✔
+    [28/2c0f08] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [04/a4d382] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [f4/f3bf84] collectGreetings      | 1 of 1, cached: 1 ✔
+    [58/363929] cowpy                 | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
+        - batch/intermediates/Raphael.txt
         - batch/intermediates/Mateo.txt
         - batch/intermediates/Celine.txt
-        - batch/intermediates/Raphael.txt
 
       translated:
+        - batch/intermediates/es-Celine.txt
         - batch/intermediates/es-Raphael.txt
         - batch/intermediates/es-Mateo.txt
-        - batch/intermediates/es-Celine.txt
 
-      collected: batch/intermediates/batch-greetings.txt
+      collected: batch/intermediates/batch-es-greetings.txt
 
-      batch_report: batch/batch-report.txt
+      batch_report: batch/batch-es-report.txt
 
-      cowpy_art: batch/cowpy-batch-greetings.txt
+      cowpy_art: batch/cowpy-batch-es-greetings.txt
     ```
 
 Every task is retrieved from the cache: the name of the workflow file doesn't change the work to be done.
@@ -233,7 +233,7 @@ Insert that above the `params` block and fill it out appropriately.
 
 === "After"
 
-    ```groovy title="main.nf" linenums="83" hl_lines="1 2"
+    ```groovy title="main.nf" linenums="84" hl_lines="1 2"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
 
@@ -250,7 +250,7 @@ Insert that above the `params` block and fill it out appropriately.
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="83"
+    ```groovy title="main.nf" linenums="84"
     /*
      * Pipeline parameters
      */
@@ -277,32 +277,32 @@ nextflow run main.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [stupefied_heyrovsky] revision: 2b4ceaccc1
+    Launching `main.nf` [evil_knuth] revision: d4ad5b65e6
 
-    [7c/30082d] sayHello (2)          | 3 of 3, cached: 3 ✔
-    [13/ca437e] translateGreeting (1) | 3 of 3, cached: 3 ✔
-    [bb/cc92b4] collectGreetings      | 1 of 1, cached: 1 ✔
-    [5d/fa8c0a] cowpy                 | 1 of 1, cached: 1 ✔
+    [86/5fe4eb] sayHello (3)          | 3 of 3, cached: 3 ✔
+    [04/a4d382] translateGreeting (3) | 3 of 3, cached: 3 ✔
+    [f4/f3bf84] collectGreetings      | 1 of 1, cached: 1 ✔
+    [58/363929] cowpy                 | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - batch/intermediates/Mateo.txt
         - batch/intermediates/Raphael.txt
         - batch/intermediates/Celine.txt
+        - batch/intermediates/Mateo.txt
 
       translated:
-        - batch/intermediates/es-Celine.txt
         - batch/intermediates/es-Raphael.txt
+        - batch/intermediates/es-Celine.txt
         - batch/intermediates/es-Mateo.txt
 
-      collected: batch/intermediates/batch-greetings.txt
+      collected: batch/intermediates/batch-es-greetings.txt
 
-      batch_report: batch/batch-report.txt
+      batch_report: batch/batch-es-report.txt
 
-      cowpy_art: batch/cowpy-batch-greetings.txt
+      cowpy_art: batch/cowpy-batch-es-greetings.txt
     ```
 
 This should run very quickly because everything is cached.
@@ -383,16 +383,17 @@ process collectGreetings {
     input:
     path input_files
     val batch_name
+    val language
 
     output:
-    path "${batch_name}-greetings.txt", emit: outfile
-    path "${batch_name}-report.txt", emit: report
+    path "${batch_name}-${language}-greetings.txt", emit: outfile
+    path "${batch_name}-${language}-report.txt", emit: report
 
     script:
     count_greetings = input_files.size()
     """
-    cat ${input_files} > '${batch_name}-greetings.txt'
-    echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-report.txt'
+    cat ${input_files} > '${batch_name}-${language}-greetings.txt'
+    echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-${language}-report.txt'
     """
 }
 ```
@@ -469,12 +470,12 @@ nextflow run main.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [nice_goldwasser] revision: 8f06173e8e
+    Launching `main.nf` [crazy_rubens] revision: ceb815abde
 
-    [27/8c5bbb] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [9f/7438fc] translateGreeting (1) | 3 of 3, cached: 3 ✔
-    [bb/cc92b4] collectGreetings      | 1 of 1, cached: 1 ✔
-    [5d/fa8c0a] cowpy                 | 1 of 1, cached: 1 ✔
+    [28/2c0f08] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [b6/a64f34] translateGreeting (3) | 3 of 3, cached: 3 ✔
+    [f4/f3bf84] collectGreetings      | 1 of 1, cached: 1 ✔
+    [58/363929] cowpy                 | 1 of 1, cached: 1 ✔
 
     Outputs:
 
@@ -486,15 +487,15 @@ nextflow run main.nf -resume
         - batch/intermediates/Celine.txt
 
       translated:
-        - batch/intermediates/es-Celine.txt
         - batch/intermediates/es-Mateo.txt
         - batch/intermediates/es-Raphael.txt
+        - batch/intermediates/es-Celine.txt
 
-      collected: batch/intermediates/batch-greetings.txt
+      collected: batch/intermediates/batch-es-greetings.txt
 
-      batch_report: batch/batch-report.txt
+      batch_report: batch/batch-es-report.txt
 
-      cowpy_art: batch/cowpy-batch-greetings.txt
+      cowpy_art: batch/cowpy-batch-es-greetings.txt
     ```
 
 Every task is retrieved from the cache once again, including `cowpy`, which still runs in its container.
@@ -621,7 +622,7 @@ nextflow run main.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [thirsty_shannon] revision: 08b281282b
+    Launching `main.nf` [shrivelled_goldberg] revision: f1abb39e4d
 
     Parameter `input` is required but was not specified on the command line, params file, or config
     ```
@@ -642,12 +643,12 @@ nextflow run main.nf -profile test -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [fabulous_swanson] revision: 08b281282b
+    Launching `main.nf` [reverent_tuckerman] revision: f1abb39e4d
 
-    [7c/30082d] sayHello (2)          | 3 of 3, cached: 3 ✔
-    [13/ca437e] translateGreeting (3) | 3 of 3, cached: 3 ✔
-    [bb/cc92b4] collectGreetings      | 1 of 1, cached: 1 ✔
-    [5d/fa8c0a] cowpy                 | 1 of 1, cached: 1 ✔
+    [28/2c0f08] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [04/a4d382] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [f4/f3bf84] collectGreetings      | 1 of 1, cached: 1 ✔
+    [58/363929] cowpy                 | 1 of 1, cached: 1 ✔
 
     Outputs:
 
@@ -655,19 +656,19 @@ nextflow run main.nf -profile test -resume
 
       greetings:
         - batch/intermediates/Celine.txt
-        - batch/intermediates/Raphael.txt
         - batch/intermediates/Mateo.txt
+        - batch/intermediates/Raphael.txt
 
       translated:
         - batch/intermediates/es-Raphael.txt
-        - batch/intermediates/es-Celine.txt
         - batch/intermediates/es-Mateo.txt
+        - batch/intermediates/es-Celine.txt
 
-      collected: batch/intermediates/batch-greetings.txt
+      collected: batch/intermediates/batch-es-greetings.txt
 
-      batch_report: batch/batch-report.txt
+      batch_report: batch/batch-es-report.txt
 
-      cowpy_art: batch/cowpy-batch-greetings.txt
+      cowpy_art: batch/cowpy-batch-es-greetings.txt
     ```
 
 The parameter values are the same as before, so every task is retrieved from the cache.
@@ -733,13 +734,13 @@ nextflow run main.nf -profile test,conda -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [disturbed_pauling] revision: 08b281282b
+    Launching `main.nf` [reverent_boltzmann] revision: f1abb39e4d
 
     executor >  local (1)
-    [7c/30082d] sayHello (2)          | 3 of 3, cached: 3 ✔
-    [13/ca437e] translateGreeting (3) | 3 of 3, cached: 3 ✔
-    [bb/cc92b4] collectGreetings      | 1 of 1, cached: 1 ✔
-    [13/c2c6ae] cowpy                 | 1 of 1 ✔
+    [28/2c0f08] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [b6/a64f34] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [f4/f3bf84] collectGreetings      | 1 of 1, cached: 1 ✔
+    [80/da8e76] cowpy                 | 1 of 1 ✔
     Creating env using conda: conda-forge::cowpy==1.1.5 [cache /workspaces/training/hello-nextflow/work/conda/env-898314d566668b6587ad714ae06b8520]
 
     Outputs:
@@ -753,14 +754,14 @@ nextflow run main.nf -profile test,conda -resume
 
       translated:
         - batch/intermediates/es-Raphael.txt
-        - batch/intermediates/es-Celine.txt
         - batch/intermediates/es-Mateo.txt
+        - batch/intermediates/es-Celine.txt
 
-      collected: batch/intermediates/batch-greetings.txt
+      collected: batch/intermediates/batch-es-greetings.txt
 
-      batch_report: batch/batch-report.txt
+      batch_report: batch/batch-es-report.txt
 
-      cowpy_art: batch/cowpy-batch-greetings.txt
+      cowpy_art: batch/cowpy-batch-es-greetings.txt
     ```
 
 Nextflow creates a Conda environment from the package declared in the `conda` directive of `cowpy`, and runs the task in that environment.
@@ -861,41 +862,63 @@ Then run the workflow with both the `test` and `french` profiles, and check that
     ```console title="Command output"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [curious_ramanujan] revision: 08b281282b
+    Launching `main.nf` [pensive_poincare] revision: f1abb39e4d
 
     executor >  local (5)
-    [27/8c5bbb] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [bb/be3b2b] translateGreeting (3) | 3 of 3 ✔
-    [98/96bf9b] collectGreetings      | 1 of 1 ✔
-    [20/8acc16] cowpy                 | 1 of 1 ✔
+    [a8/2163f5] sayHello (2)          | 3 of 3, cached: 3 ✔
+    [35/0d1831] translateGreeting (1) | 3 of 3 ✔
+    [a9/4a6008] collectGreetings      | 1 of 1 ✔
+    [b2/62ff99] cowpy                 | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - batch/intermediates/Celine.txt
         - batch/intermediates/Mateo.txt
         - batch/intermediates/Raphael.txt
+        - batch/intermediates/Celine.txt
 
       translated:
         - batch/intermediates/fr-Celine.txt
         - batch/intermediates/fr-Raphael.txt
         - batch/intermediates/fr-Mateo.txt
 
-      collected: batch/intermediates/batch-greetings.txt
+      collected: batch/intermediates/batch-fr-greetings.txt
 
-      batch_report: batch/batch-report.txt
+      batch_report: batch/batch-fr-report.txt
 
-      cowpy_art: batch/cowpy-batch-greetings.txt
+      cowpy_art: batch/cowpy-batch-fr-greetings.txt
     ```
 
     The `sayHello` tasks are cached, and the translation runs again in French, followed by the steps that depend on it:
 
-    ```console title="results/batch/intermediates/batch-greetings.txt"
+    ```console title="results/batch/intermediates/batch-fr-greetings.txt"
     Bonjour, Celine!
     Bonjour, Raphael!
     Bonjour, Mateo!
+    ```
+
+    Since the collected file, the report and the ASCII art are named after the language, the French results are published next to the Spanish ones instead of overwriting them:
+
+    ```console title="Directory contents"
+    results/batch
+    ├── batch-es-report.txt
+    ├── batch-fr-report.txt
+    ├── cowpy-batch-es-greetings.txt
+    ├── cowpy-batch-fr-greetings.txt
+    └── intermediates
+        ├── batch-es-greetings.txt
+        ├── batch-fr-greetings.txt
+        ├── Celine.txt
+        ├── es-Celine.txt
+        ├── es-Mateo.txt
+        ├── es-Raphael.txt
+        ├── fr-Celine.txt
+        ├── fr-Mateo.txt
+        ├── fr-Raphael.txt
+        ├── Mateo.txt
+        └── Raphael.txt
     ```
 
 ### Exercise 2: Give each module its own folder
@@ -940,32 +963,32 @@ modules
     ```console title="Command output"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [loquacious_hilbert] revision: 8ca438eb03
+    Launching `main.nf` [condescending_jennings] revision: b5835a4414
 
-    [27/8c5bbb] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [13/ca437e] translateGreeting (1) | 3 of 3, cached: 3 ✔
-    [bb/cc92b4] collectGreetings      | 1 of 1, cached: 1 ✔
-    [5d/fa8c0a] cowpy                 | 1 of 1, cached: 1 ✔
+    [28/2c0f08] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [04/a4d382] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [f4/f3bf84] collectGreetings      | 1 of 1, cached: 1 ✔
+    [58/363929] cowpy                 | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
+        - batch/intermediates/Raphael.txt
         - batch/intermediates/Mateo.txt
         - batch/intermediates/Celine.txt
-        - batch/intermediates/Raphael.txt
 
       translated:
         - batch/intermediates/es-Celine.txt
         - batch/intermediates/es-Raphael.txt
         - batch/intermediates/es-Mateo.txt
 
-      collected: batch/intermediates/batch-greetings.txt
+      collected: batch/intermediates/batch-es-greetings.txt
 
-      batch_report: batch/batch-report.txt
+      batch_report: batch/batch-es-report.txt
 
-      cowpy_art: batch/cowpy-batch-greetings.txt
+      cowpy_art: batch/cowpy-batch-es-greetings.txt
     ```
 
     Every task is retrieved from the cache: moving a module to another file doesn't change the work it does.

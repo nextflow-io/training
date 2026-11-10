@@ -27,7 +27,7 @@ workflow {
     // translate the greeting
     translateGreeting(sayHello.out, params.language)
     // collect all the greetings into one file
-    collectGreetings(translateGreeting.out.map { greeting_file, _character -> greeting_file }.collect(), params.batch)
+    collectGreetings(translateGreeting.out.map { greeting_file, _character -> greeting_file }.collect(), params.batch, params.language)
     // generate ASCII art of each greeting with its own character
     cowpy(translateGreeting.out)
 

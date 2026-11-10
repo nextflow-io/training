@@ -24,7 +24,7 @@ This will teach you the Nextflow way of achieving the following:
 To demonstrate, we will continue building on the Hello World example from Parts 1 and 2, and make the following changes to our workflow:
 
 1. Add a second step, written in Python, that translates each greeting into another language.
-2. Add a third step that collects all the translated greetings and writes them into a single file named after the batch.
+2. Add a third step that collects all the translated greetings and writes them into a single file named after the batch and the language.
 3. Make the collection step also report a simple statistic about what was processed.
 
 ??? info "How to begin from this section"
@@ -57,10 +57,10 @@ nextflow run hello-workflow.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [curious_albattani] revision: cef606f370
+    Launching `hello-workflow.nf` [insane_mcclintock] revision: a5c7393158
 
     executor >  local (3)
-    [b0/9e0333] sayHello (1) | 3 of 3 ✔
+    [de/80214d] sayHello (1) | 3 of 3 ✔
 
     Outputs:
 
@@ -299,11 +299,11 @@ nextflow run hello-workflow.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [suspicious_agnesi] revision: fa84af21f4
+    Launching `hello-workflow.nf` [big_lavoisier] revision: 8156c795db
 
     executor >  local (3)
-    [0d/1a60fc] sayHello (2)          | 3 of 3, cached: 3 ✔
-    [c7/6a78e1] translateGreeting (3) | 3 of 3 ✔
+    [de/80214d] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [0a/ddbb28] translateGreeting (3) | 3 of 3 ✔
 
     Outputs:
 
@@ -316,8 +316,8 @@ nextflow run hello-workflow.nf -resume
 
       translated:
         - hello/es-Mateo.txt
-        - hello/es-Raphael.txt
         - hello/es-Celine.txt
+        - hello/es-Raphael.txt
     ```
 
 There is now an extra line in the console output that corresponds to the new process we just added, and the `sayHello` tasks were retrieved from the cache.
@@ -335,8 +335,8 @@ It's also worth taking a look inside the work directory of one of the calls to t
 ??? abstract "Directory contents"
 
     ```console
-    work/45/3f7825238437f4f4467cd6a84ef195/
-    ├── Mateo.txt -> /workspaces/training/hello-nextflow/work/b0/9e0333111ec99af27dede6f689dc5b/Mateo.txt
+    work/91/48b2f2d05f033db2bc56786e878ccb/
+    ├── Mateo.txt -> /workspaces/training/hello-nextflow/work/de/80214d8e5f5bd119db54b637492566/Mateo.txt
     └── es-Mateo.txt
     ```
 
@@ -348,7 +348,7 @@ By default, when running on a single machine as we're doing here, Nextflow uses 
 
 The `.command.sh` file in the same directory shows the Python script that Nextflow ran, with the file names filled in:
 
-```python title="work/45/3f7825238437f4f4467cd6a84ef195/.command.sh"
+```python title="work/91/48b2f2d05f033db2bc56786e878ccb/.command.sh"
 #!/usr/bin/env python3
 
 with open('Mateo.txt') as greeting_file:
@@ -529,25 +529,25 @@ nextflow run hello-workflow.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [irreverent_dubinsky] revision: ebdc8255be
+    Launching `hello-workflow.nf` [ecstatic_kare] revision: 43d1d98a81
 
     executor >  local (3)
-    [55/f9a2a6] sayHello (3)          | 3 of 3, cached: 3 ✔
-    [44/9c4185] translateGreeting (1) | 3 of 3 ✔
+    [a0/e8afc6] sayHello (3)          | 3 of 3, cached: 3 ✔
+    [70/db85f7] translateGreeting (3) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
+        - hello/Raphael.txt
         - hello/Celine.txt
         - hello/Mateo.txt
-        - hello/Raphael.txt
 
       translated:
-        - hello/es-Mateo.txt
         - hello/es-Raphael.txt
         - hello/es-Celine.txt
+        - hello/es-Mateo.txt
     ```
 
 The results are the same as before, since the default language is Spanish.
@@ -564,25 +564,25 @@ nextflow run hello-workflow.nf -resume --language fr
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [gloomy_maxwell] revision: ebdc8255be
+    Launching `hello-workflow.nf` [cranky_bartik] revision: 43d1d98a81
 
     executor >  local (3)
-    [b0/9e0333] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [e1/d0a3dd] translateGreeting (2) | 3 of 3 ✔
+    [b9/b0f3cc] sayHello (2)          | 3 of 3, cached: 3 ✔
+    [1c/2105c7] translateGreeting (3) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - hello/Raphael.txt
         - hello/Mateo.txt
+        - hello/Raphael.txt
         - hello/Celine.txt
 
       translated:
+        - hello/fr-Mateo.txt
         - hello/fr-Raphael.txt
         - hello/fr-Celine.txt
-        - hello/fr-Mateo.txt
     ```
 
 The `sayHello` tasks were cached, and the `translateGreeting` tasks ran again with the new input.
@@ -604,15 +604,15 @@ nextflow run hello-workflow.nf -resume --language de
     ```console hl_lines="44-45"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [gigantic_rosalind] revision: 89eca833a5
+    Launching `hello-workflow.nf` [distracted_aryabhata] revision: 43d1d98a81
 
     executor >  local (3)
-    [cc/023c93] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [09/342f5a] translateGreeting (3) | 0 of 3 ✘
-    ERROR ~ Error executing process > 'translateGreeting (3)'
+    [b9/b0f3cc] sayHello (2)          | 3 of 3, cached: 3 ✔
+    [6f/077818] translateGreeting (3) | 0 of 3 ✘
+    ERROR ~ Error executing process > 'translateGreeting (2)'
 
     Caused by:
-      Process `translateGreeting (3)` terminated with an error exit status (1)
+      Process `translateGreeting (2)` terminated with an error exit status (1)
 
 
     Command executed:
@@ -633,10 +633,10 @@ nextflow run hello-workflow.nf -resume --language de
       if 'de' not in translations:
           sys.exit('Unsupported language code: de')
 
-      with open('Mateo.txt') as greeting_file:
+      with open('Celine.txt') as greeting_file:
           greeting = greeting_file.read()
 
-      with open('de-Mateo.txt', 'w') as translated_file:
+      with open('de-Celine.txt', 'w') as translated_file:
           translated_file.write(greeting.replace('Hello', translations['de']))
 
     Command exit status:
@@ -649,9 +649,9 @@ nextflow run hello-workflow.nf -resume --language de
       Unsupported language code: de
 
     Work dir:
-      /workspaces/training/hello-nextflow/work/09/342f5abdee49ba5388f9cb6013731e
+      /workspaces/training/hello-nextflow/work/de/16ca8f63019527a398fd00f145c13c
 
-    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
      -- Check '.nextflow.log' file for details
     ```
@@ -675,7 +675,7 @@ Learn how to collect outputs from batched process calls and feed them into a sin
 When we use a process to apply a transformation to each of the elements in a channel, like we're doing here to the multiple greetings, we sometimes want to collect elements from the output channel of that process, and feed them into another process that performs some kind of analysis or summation.
 
 To demonstrate, we'll add a new step to our pipeline that collects all the translated greetings produced by the `translateGreeting` process and writes them out to a single file.
-We'll also name that file after a batch name provided as a parameter, so that the results of different batches of inputs don't overwrite each other.
+We'll also name that file after a batch name provided as a parameter and after the language, so that the results of different batches of inputs, and of different languages, don't overwrite each other.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
@@ -721,22 +721,27 @@ process collectGreetings {
     input:
     path input_files
     val batch_name
+    val language
 
     output:
-    path "${batch_name}-greetings.txt"
+    path "${batch_name}-${language}-greetings.txt"
 
     script:
     """
-    cat ${input_files} > '${batch_name}-greetings.txt'
+    cat ${input_files} > '${batch_name}-${language}-greetings.txt'
     """
 }
 ```
 
-This process has two inputs, like `translateGreeting`:
+This process has three inputs:
 
 - `input_files` will hold the files to collect.
   It uses the `path` qualifier even though we expect it to contain multiple files.
-- `batch_name` is a plain value that we use in the output file name, so that each batch gets its own output file.
+- `batch_name` is the name of the batch, which we use in the output file name, so that each batch gets its own output file.
+- `language` is the language of the greetings, which we also use in the output file name.
+  A batch names a group of samples, which you may translate into several languages; including the language in the file name keeps the results of different languages apart.
+
+`batch_name` and `language` are plain values, so they use the `val` qualifier, like the `language` input of `translateGreeting` in section 1.3.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.svg"
@@ -768,7 +773,7 @@ Declare a `batch` parameter, with a default value, in the pipeline parameters se
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="76" hl_lines="7"
+    ```groovy title="hello-workflow.nf" linenums="77" hl_lines="7"
     /*
      * Pipeline parameters
      */
@@ -781,7 +786,7 @@ Declare a `batch` parameter, with a default value, in the pipeline parameters se
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="76"
+    ```groovy title="hello-workflow.nf" linenums="77"
     /*
      * Pipeline parameters
      */
@@ -797,21 +802,22 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="94" hl_lines="3-4"
+    ```groovy title="hello-workflow.nf" linenums="95" hl_lines="3-4"
         // translate the greeting
         translateGreeting(sayHello.out, params.language)
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out, params.batch)
+        collectGreetings(translateGreeting.out, params.batch, params.language)
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="94"
+    ```groovy title="hello-workflow.nf" linenums="95"
         // translate the greeting
         translateGreeting(sayHello.out, params.language)
     ```
 
-This connects the output of `translateGreeting()` to the first input of `collectGreetings()`, and passes the batch name as the second input, just like we did with the language.
+This connects the output of `translateGreeting()` to the first input of `collectGreetings()`, and passes the batch name and the language as the second and third inputs.
+The language comes from the same `params.language` parameter as for `translateGreeting()`, so the collected file is named after the language the greetings were translated into.
 
 #### 2.3.3. Update the workflow outputs
 
@@ -819,7 +825,7 @@ In the `publish:` section of the `workflow` block, make the following code chang
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="99" hl_lines="4"
+    ```groovy title="hello-workflow.nf" linenums="100" hl_lines="4"
         publish:
         greetings = sayHello.out
         translated = translateGreeting.out
@@ -829,7 +835,7 @@ In the `publish:` section of the `workflow` block, make the following code chang
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="99"
+    ```groovy title="hello-workflow.nf" linenums="100"
         publish:
         greetings = sayHello.out
         translated = translateGreeting.out
@@ -840,7 +846,7 @@ Then, in the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="105" hl_lines="10-13"
+    ```groovy title="hello-workflow.nf" linenums="106" hl_lines="10-13"
     output {
         greetings {
             path 'hello'
@@ -859,7 +865,7 @@ Then, in the `output` block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="105"
+    ```groovy title="hello-workflow.nf" linenums="106"
     output {
         greetings {
             path 'hello'
@@ -885,31 +891,31 @@ nextflow run hello-workflow.nf -resume
     ```console hl_lines="8"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [backstabbing_lumiere] revision: d2c08a3285
+    Launching `hello-workflow.nf` [grave_sammet] revision: 82ba305f70
 
     executor >  local (3)
-    [55/f9a2a6] sayHello (3)          | 3 of 3, cached: 3 ✔
-    [44/9c4185] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [d9/315433] collectGreetings (3)  | 3 of 3 ✔
+    [b9/b0f3cc] sayHello (2)          | 3 of 3, cached: 3 ✔
+    [70/db85f7] translateGreeting (1) | 3 of 3, cached: 3 ✔
+    [7f/e58672] collectGreetings (1)  | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
+        - hello/Mateo.txt
         - hello/Raphael.txt
         - hello/Celine.txt
-        - hello/Mateo.txt
 
       translated:
-        - hello/es-Mateo.txt
         - hello/es-Celine.txt
         - hello/es-Raphael.txt
+        - hello/es-Mateo.txt
 
       collected:
-        - hello/batch-greetings.txt
-        - hello/batch-greetings.txt
-        - hello/batch-greetings.txt
+        - hello/batch-es-greetings.txt
+        - hello/batch-es-greetings.txt
+        - hello/batch-es-greetings.txt
     ```
 
 It runs successfully, including the third step.
@@ -921,8 +927,8 @@ Now have a look at the contents of the final output file.
 
 ??? abstract "File contents"
 
-    ```console title="results/hello/batch-greetings.txt"
-    Hola, Raphael!
+    ```console title="results/hello/batch-es-greetings.txt"
+    Hola, Celine!
     ```
 
 Oh no. The collection step was run individually on each greeting, which is NOT what we wanted.
@@ -950,16 +956,16 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="96" hl_lines="2"
+    ```groovy title="hello-workflow.nf" linenums="97" hl_lines="2"
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch)
+        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="96"
+    ```groovy title="hello-workflow.nf" linenums="97"
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out, params.batch)
+        collectGreetings(translateGreeting.out, params.batch, params.language)
     ```
 
 #### 2.4.2. Add some `view()` statements
@@ -968,9 +974,9 @@ Let's also include a couple of `view()` statements to visualize the before and a
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="96" hl_lines="4-6"
+    ```groovy title="hello-workflow.nf" linenums="97" hl_lines="4-6"
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch)
+        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
 
         // optional view statements
         translateGreeting.out.view { filepath -> "Before collect: $filepath" }
@@ -979,9 +985,9 @@ Let's also include a couple of `view()` statements to visualize the before and a
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="96"
+    ```groovy title="hello-workflow.nf" linenums="97"
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch)
+        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
     ```
 
 The `view()` statements can go anywhere you want; we put them right after the call for readability.
@@ -1000,16 +1006,16 @@ nextflow run hello-workflow.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [serene_panini] revision: 116be6008d
+    Launching `hello-workflow.nf` [friendly_jones] revision: 4999bc3bbf
 
     executor >  local (1)
-    [b0/9e0333] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [ae/3c0ca0] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [db/6e3931] collectGreetings      | 1 of 1 ✔
-    Before collect: /workspaces/training/hello-nextflow/work/44/9c4185f2ac241b19cb56a67526a966/es-Celine.txt
-    Before collect: /workspaces/training/hello-nextflow/work/8c/174fc0d15b4f859d0914e3ae0e5fbd/es-Raphael.txt
-    Before collect: /workspaces/training/hello-nextflow/work/ae/3c0ca00c751ea9330d7f103d4eae25/es-Mateo.txt
-    After collect: [/workspaces/training/hello-nextflow/work/44/9c4185f2ac241b19cb56a67526a966/es-Celine.txt, /workspaces/training/hello-nextflow/work/8c/174fc0d15b4f859d0914e3ae0e5fbd/es-Raphael.txt, /workspaces/training/hello-nextflow/work/ae/3c0ca00c751ea9330d7f103d4eae25/es-Mateo.txt]
+    [de/80214d] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [70/db85f7] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [07/2ba1ad] collectGreetings      | 1 of 1 ✔
+    Before collect: /workspaces/training/hello-nextflow/work/e5/489701e8059adb1a2871f9e80c8336/es-Celine.txt
+    Before collect: /workspaces/training/hello-nextflow/work/8c/c68278fcd02531144ff23a72a15080/es-Raphael.txt
+    Before collect: /workspaces/training/hello-nextflow/work/70/db85f73a027a0fdb7f78c0bbc2f1c7/es-Mateo.txt
+    After collect: [/workspaces/training/hello-nextflow/work/e5/489701e8059adb1a2871f9e80c8336/es-Celine.txt, /workspaces/training/hello-nextflow/work/8c/c68278fcd02531144ff23a72a15080/es-Raphael.txt, /workspaces/training/hello-nextflow/work/70/db85f73a027a0fdb7f78c0bbc2f1c7/es-Mateo.txt]
 
     Outputs:
 
@@ -1025,7 +1031,7 @@ nextflow run hello-workflow.nf -resume
         - hello/es-Raphael.txt
         - hello/es-Mateo.txt
 
-      collected: hello/batch-greetings.txt
+      collected: hello/batch-es-greetings.txt
     ```
 
 It runs successfully, although the log output may look a little messier than this (we cleaned it up for readability).
@@ -1046,7 +1052,7 @@ Finally, you can have a look at the contents of the output file to satisfy yours
 
 ??? abstract "File contents"
 
-    ```console title="results/hello/batch-greetings.txt"
+    ```console title="results/hello/batch-es-greetings.txt"
     Hola, Celine!
     Hola, Raphael!
     Hola, Mateo!
@@ -1065,16 +1071,16 @@ Before you move on to the next section, we recommend you delete the `view()` sta
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="96"
+    ```groovy title="hello-workflow.nf" linenums="97"
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch)
+        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="96" hl_lines="4-6"
+    ```groovy title="hello-workflow.nf" linenums="97" hl_lines="4-6"
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch)
+        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
 
         // optional view statements
         translateGreeting.out.view { filepath -> "Before collect: $filepath" }
@@ -1094,7 +1100,7 @@ In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="105" hl_lines="3 7 11"
+    ```groovy title="hello-workflow.nf" linenums="106" hl_lines="3 7 11"
     output {
         greetings {
             path "${params.batch}/intermediates"
@@ -1113,7 +1119,7 @@ In the `output` block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="105"
+    ```groovy title="hello-workflow.nf" linenums="106"
     output {
         greetings {
             path 'hello'
@@ -1148,28 +1154,28 @@ nextflow run hello-workflow.nf -resume --batch trio
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [nostalgic_noyce] revision: 45b5328138
+    Launching `hello-workflow.nf` [stoic_darwin] revision: 1b30598ce0
 
     executor >  local (1)
-    [55/f9a2a6] sayHello (3)          | 3 of 3, cached: 3 ✔
-    [ae/3c0ca0] translateGreeting (1) | 3 of 3, cached: 3 ✔
-    [93/8804a2] collectGreetings      | 1 of 1 ✔
+    [b9/b0f3cc] sayHello (2)          | 3 of 3, cached: 3 ✔
+    [70/db85f7] translateGreeting (3) | 3 of 3, cached: 3 ✔
+    [a8/764b2d] collectGreetings      | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - trio/intermediates/Mateo.txt
         - trio/intermediates/Celine.txt
         - trio/intermediates/Raphael.txt
+        - trio/intermediates/Mateo.txt
 
       translated:
         - trio/intermediates/es-Celine.txt
         - trio/intermediates/es-Raphael.txt
         - trio/intermediates/es-Mateo.txt
 
-      collected: trio/intermediates/trio-greetings.txt
+      collected: trio/intermediates/trio-es-greetings.txt
     ```
 
 The collection step ran again, since its batch name input changed, and all the outputs of this batch are now under `results/trio/`.
@@ -1221,21 +1227,21 @@ In the `collectGreetings` process block, make the following code changes:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="70" hl_lines="2 5"
+    ```groovy title="hello-workflow.nf" linenums="71" hl_lines="2 5"
         script:
         count_greetings = input_files.size()
         """
-        cat ${input_files} > '${batch_name}-greetings.txt'
-        echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-report.txt'
+        cat ${input_files} > '${batch_name}-${language}-greetings.txt'
+        echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-${language}-report.txt'
         """
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="70"
+    ```groovy title="hello-workflow.nf" linenums="71"
         script:
         """
-        cat ${input_files} > '${batch_name}-greetings.txt'
+        cat ${input_files} > '${batch_name}-${language}-greetings.txt'
         """
     ```
 
@@ -1265,17 +1271,17 @@ In the process block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="67" hl_lines="2 3"
+    ```groovy title="hello-workflow.nf" linenums="68" hl_lines="2 3"
         output:
-        path "${batch_name}-greetings.txt", emit: outfile
-        path "${batch_name}-report.txt", emit: report
+        path "${batch_name}-${language}-greetings.txt", emit: outfile
+        path "${batch_name}-${language}-report.txt", emit: report
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="67"
+    ```groovy title="hello-workflow.nf" linenums="68"
         output:
-        path "${batch_name}-greetings.txt"
+        path "${batch_name}-${language}-greetings.txt"
     ```
 
 The `emit:` tags are optional, and we could have added a tag to only one of the outputs.
@@ -1307,7 +1313,7 @@ In the `workflow` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="102" hl_lines="4 5"
+    ```groovy title="hello-workflow.nf" linenums="103" hl_lines="4 5"
         publish:
         greetings = sayHello.out
         translated = translateGreeting.out
@@ -1317,7 +1323,7 @@ In the `workflow` block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="102" hl_lines="4"
+    ```groovy title="hello-workflow.nf" linenums="103" hl_lines="4"
         publish:
         greetings = sayHello.out
         translated = translateGreeting.out
@@ -1335,7 +1341,7 @@ In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="109" hl_lines="14-17"
+    ```groovy title="hello-workflow.nf" linenums="110" hl_lines="14-17"
     output {
         greetings {
             path "${params.batch}/intermediates"
@@ -1358,7 +1364,7 @@ In the `output` block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="109"
+    ```groovy title="hello-workflow.nf" linenums="110"
     output {
         greetings {
             path "${params.batch}/intermediates"
@@ -1391,38 +1397,38 @@ nextflow run hello-workflow.nf -resume --batch trio
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [chaotic_miescher] revision: b4393cf728
+    Launching `hello-workflow.nf` [fabulous_boyd] revision: bb1df0f734
 
     executor >  local (1)
-    [55/f9a2a6] sayHello (3)          | 3 of 3, cached: 3 ✔
-    [44/9c4185] translateGreeting (3) | 3 of 3, cached: 3 ✔
-    [06/567dd8] collectGreetings      | 1 of 1 ✔
+    [a0/e8afc6] sayHello (3)          | 3 of 3, cached: 3 ✔
+    [70/db85f7] translateGreeting (1) | 3 of 3, cached: 3 ✔
+    [bc/6dfd8d] collectGreetings      | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - trio/intermediates/Raphael.txt
         - trio/intermediates/Mateo.txt
         - trio/intermediates/Celine.txt
+        - trio/intermediates/Raphael.txt
 
       translated:
-        - trio/intermediates/es-Mateo.txt
         - trio/intermediates/es-Celine.txt
         - trio/intermediates/es-Raphael.txt
+        - trio/intermediates/es-Mateo.txt
 
-      collected: trio/intermediates/trio-greetings.txt
+      collected: trio/intermediates/trio-es-greetings.txt
 
-      batch_report: trio/trio-report.txt
+      batch_report: trio/trio-es-report.txt
     ```
 
-If you look in the `results/trio/` directory, you'll find the new report file, `trio-report.txt`.
+If you look in the `results/trio/` directory, you'll find the new report file, `trio-es-report.txt`.
 Open it to verify that the workflow correctly reported the count of greetings that were processed.
 
 ??? abstract "File contents"
 
-    ```txt title="trio-report.txt"
+    ```txt title="trio-es-report.txt"
     Number of greetings processed: 3
     ```
 
@@ -1468,7 +1474,7 @@ Run the workflow with `--batch trio -resume` and check `results/trio/`.
 
     === "After"
 
-        ```groovy title="hello-workflow.nf" linenums="114" hl_lines="2"
+        ```groovy title="hello-workflow.nf" linenums="115" hl_lines="2"
             translated {
                 path "${params.batch}/translations"
                 mode 'copy'
@@ -1477,7 +1483,7 @@ Run the workflow with `--batch trio -resume` and check `results/trio/`.
 
     === "Before"
 
-        ```groovy title="hello-workflow.nf" linenums="114" hl_lines="2"
+        ```groovy title="hello-workflow.nf" linenums="115" hl_lines="2"
             translated {
                 path "${params.batch}/intermediates"
                 mode 'copy'
@@ -1491,9 +1497,9 @@ Run the workflow with `--batch trio -resume` and check `results/trio/`.
     ```
 
     ```console title="Output (excerpt)"
-    [d6/ce26b4] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [c5/528845] translateGreeting (1) | 3 of 3, cached: 3 ✔
-    [2f/e2703e] collectGreetings      | 1 of 1, cached: 1 ✔
+    [de/80214d] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [70/db85f7] translateGreeting (3) | 3 of 3, cached: 3 ✔
+    [bc/6dfd8d] collectGreetings      | 1 of 1, cached: 1 ✔
 
     Outputs:
 
@@ -1505,13 +1511,13 @@ Run the workflow with `--batch trio -resume` and check `results/trio/`.
         - trio/intermediates/Mateo.txt
 
       translated:
-        - trio/translations/es-Mateo.txt
         - trio/translations/es-Raphael.txt
         - trio/translations/es-Celine.txt
+        - trio/translations/es-Mateo.txt
 
-      collected: trio/intermediates/trio-greetings.txt
+      collected: trio/intermediates/trio-es-greetings.txt
 
-      batch_report: trio/trio-report.txt
+      batch_report: trio/trio-es-report.txt
     ```
 
     Every task was cached, yet the translated files were published to the new location: Nextflow publishes the outputs of cached tasks too.
@@ -1549,12 +1555,12 @@ Then, before running each of the following commands, predict which steps will ru
        The collected file contains the Portuguese greetings:
 
         ```console title="Output (excerpt)"
-        [d6/ce26b4] sayHello (1)          | 3 of 3, cached: 3 ✔
-        [d1/d0b48a] translateGreeting (2) | 3 of 3 ✔
-        [d1/9389e8] collectGreetings      | 1 of 1 ✔
+        [a0/e8afc6] sayHello (3)          | 3 of 3, cached: 3 ✔
+        [a3/9b0265] translateGreeting (3) | 3 of 3 ✔
+        [ec/5f871f] collectGreetings      | 1 of 1 ✔
         ```
 
-        ```console title="results/batch/intermediates/batch-greetings.txt"
+        ```console title="results/batch/intermediates/batch-pt-greetings.txt"
         Ola, Raphael!
         Ola, Mateo!
         Ola, Celine!
@@ -1562,20 +1568,21 @@ Then, before running each of the following commands, predict which steps will ru
 
     2. **`--language es`**: `translateGreeting` runs again, even though Spanish translations were computed in earlier runs.
        Adding Portuguese changed the code of `translateGreeting`, and a change to a process's code invalidates all of its cached results.
-       `collectGreetings` runs again because its inputs are new files.
+       `collectGreetings` runs again because its inputs changed: the files are new, and the language is different.
+       Since the language is part of the collected file names, the Spanish results are published next to the Portuguese ones instead of replacing them.
 
         ```console title="Output (excerpt)"
-        [24/7a5465] sayHello (2)          | 3 of 3, cached: 3 ✔
-        [21/673e8e] translateGreeting (2) | 3 of 3 ✔
-        [dc/e4fd26] collectGreetings      | 1 of 1 ✔
+        [b9/b0f3cc] sayHello (2)          | 3 of 3, cached: 3 ✔
+        [ef/8ce377] translateGreeting (3) | 3 of 3 ✔
+        [72/8426e2] collectGreetings      | 1 of 1 ✔
         ```
 
     3. **`--batch spanish`**: only `collectGreetings` runs, because the batch name is one of its inputs; the other steps are cached.
 
         ```console title="Output (excerpt)"
-        [24/7a5465] sayHello (2)          | 3 of 3, cached: 3 ✔
-        [21/673e8e] translateGreeting (1) | 3 of 3, cached: 3 ✔
-        [17/4d3369] collectGreetings      | 1 of 1 ✔
+        [de/80214d] sayHello (1)          | 3 of 3, cached: 3 ✔
+        [1a/0f2b2c] translateGreeting (2) | 3 of 3, cached: 3 ✔
+        [1e/fae542] collectGreetings      | 1 of 1 ✔
         ```
 
 ### Exercise 3: Collect both versions of the greetings
@@ -1592,7 +1599,7 @@ Run it with `--batch trio -resume`.
 
     Define the new process after `collectGreetings`:
 
-    ```groovy title="hello-workflow.nf" linenums="79"
+    ```groovy title="hello-workflow.nf" linenums="80"
     /*
      * Combine the original and translated greetings into a single file
      */
@@ -1615,9 +1622,9 @@ Run it with `--batch trio -resume`.
 
     Call it in the workflow, collecting the outputs of both upstream processes, and publish its output:
 
-    ```groovy title="hello-workflow.nf" linenums="118" hl_lines="3-4 11"
+    ```groovy title="hello-workflow.nf" linenums="119" hl_lines="3-4 11"
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch)
+        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
         // combine the original and translated greetings
         collectBilingual(sayHello.out.collect(), translateGreeting.out.collect(), params.batch)
 
@@ -1632,7 +1639,7 @@ Run it with `--batch trio -resume`.
 
     Add the matching entry to the `output` block:
 
-    ```groovy title="hello-workflow.nf" linenums="144" hl_lines="5-8"
+    ```groovy title="hello-workflow.nf" linenums="145" hl_lines="5-8"
         batch_report {
             path "${params.batch}"
             mode 'copy'
@@ -1651,10 +1658,10 @@ Run it with `--batch trio -resume`.
     ```
 
     ```console title="Output (excerpt)"
-    [24/7a5465] sayHello (2)          | 3 of 3, cached: 3 ✔
-    [c5/528845] translateGreeting (1) | 3 of 3, cached: 3 ✔
-    [2f/e2703e] collectGreetings      | 1 of 1, cached: 1 ✔
-    [ec/9fc1b2] collectBilingual      | 1 of 1 ✔
+    [b9/b0f3cc] sayHello (2)          | 3 of 3, cached: 3 ✔
+    [8c/c68278] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [bc/6dfd8d] collectGreetings      | 1 of 1, cached: 1 ✔
+    [37/20c3a0] collectBilingual      | 1 of 1 ✔
     ```
 
     Only the new step runs; everything upstream is cached.
@@ -1663,9 +1670,9 @@ Run it with `--batch trio -resume`.
     Hello, Celine!
     Hello, Raphael!
     Hello, Mateo!
+    Hola, Celine!
     Hola, Mateo!
     Hola, Raphael!
-    Hola, Celine!
     ```
 
 ---

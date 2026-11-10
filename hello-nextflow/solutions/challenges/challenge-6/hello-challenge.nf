@@ -31,11 +31,11 @@ workflow {
     // translate the greeting
     translateGreeting(sayHello.out, params.language)
     // collect all the greetings into one file
-    collectGreetings(translateGreeting.out.collect(), params.batch)
+    collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
     // translate the greeting into the second language
     translateSecond(sayHello.out, params.second_language)
-    // collect the second-language greetings under their own batch name
-    collectSecond(translateSecond.out.collect(), "${params.batch}-${params.second_language}")
+    // collect the second-language greetings into one file
+    collectSecond(translateSecond.out.collect(), params.batch, params.second_language)
     // generate ASCII art of the greetings with cowpy
     cowpy(collectGreetings.out.outfile, params.character)
 

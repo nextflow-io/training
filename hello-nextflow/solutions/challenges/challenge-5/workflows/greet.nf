@@ -16,7 +16,7 @@ workflow GREET {
     // translate the greeting
     translateGreeting(sayHello.out, language)
     // collect all the greetings into one file
-    collectGreetings(translateGreeting.out.collect(), batch_name)
+    collectGreetings(translateGreeting.out.collect(), batch_name, language)
 
     emit:
     greetings = sayHello.out
