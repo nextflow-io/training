@@ -49,6 +49,7 @@ You're now equipped with the foundational knowledge to start developing your own
 
 Here are our top suggestions for what to do next:
 
+- Apply the Hello pipeline to Nextflow features beyond the course with the [Challenges](challenges.md)
 - Learn to configure your pipeline for different compute environments with [Configure Execution](../config_exec/index.md)
 - Apply Nextflow to a scientific analysis use case with [Nextflow for Science](../nf4_science/index.md)
 - Get started with nf-core with [Build with nf-core](../nfcore_build/index.md)

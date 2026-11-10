@@ -101,7 +101,8 @@ tree . -L 2
     │   ├── 2-hello-channels
     │   ├── 3-hello-workflow
     │   ├── 4-hello-modules
-    │   └── 5-hello-containers
+    │   ├── 5-hello-containers
+    │   └── challenges
     ```
 
 Click on the colored box to expand the section and view its contents.
