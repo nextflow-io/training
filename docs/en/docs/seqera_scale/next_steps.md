@@ -32,6 +32,13 @@ Through this hands-on course, you've learned how to:
 
 You're now equipped to run and monitor your own pipelines on Seqera Platform, at scale.
 
+## Feedback survey
+
+Before you move on, please take a minute or two to complete this short survey.
+Your feedback helps us improve our training materials for everyone.
+
+<div data-tf-live="01M2DPPKQ5J66KZ94JGVSGZ8J8"></div><script src="//embed.typeform.com/next/embed.js"></script>
+
 ## Next steps to build your skills
 
 Here are our top suggestions for what to do next:
@@ -43,9 +50,3 @@ Here are our top suggestions for what to do next:
 ## Getting help
 
 For help resources and community support, see the [Help page](../help.md).
-
-## Feedback survey
-
-Before you move on, please take a minute to complete the course survey! Your feedback helps us improve our training materials for everyone.
-
-[Take the survey :material-arrow-right:](survey.md){ .md-button .md-button--primary }
