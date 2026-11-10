@@ -1578,7 +1578,7 @@ Then, before running each of the following commands, predict which steps will ru
         [17/4d3369] collectGreetings      | 1 of 1 ✔
         ```
 
-### Challenge: Collect both versions of the greetings
+### Exercise 3: Collect both versions of the greetings
 
 Starting from `hello-workflow.nf` as it stands at the end of this part, add a step that writes all the original greetings and all the translated greetings into a single file called `<batch>-bilingual.txt`, published at the top level of the batch directory.
 Run it with `--batch trio -resume`.
