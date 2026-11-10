@@ -11,7 +11,7 @@
 ///
 
 This section covers how to organize your workflow code to make development and maintenance of your pipeline more efficient and sustainable.
-Specifically, we are going to demonstrate how to use [**modules**](https://nextflow.io/docs/latest/module.html).
+Specifically, we are going to demonstrate how to use [**modules**](https://nextflow.io/docs/latest/modules.html).
 
 In Nextflow, a **module** is a standalone code file, often encapsulating a single process definition.
 To use a module in a workflow, you just add a single-line `include` statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
