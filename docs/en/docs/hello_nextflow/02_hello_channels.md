@@ -316,17 +316,17 @@ In the workflow block, make the following code change:
 === "After"
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
-    // create a channel for inputs
-    name_ch = channel.of('Mateo','Andrea','Celine')
-                        .view()
+        // create a channel for inputs
+        name_ch = channel.of('Mateo','Andrea','Celine')
+                            .view()
     ```
 
 === "Before"
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
-    // create a channel for inputs
-    name_ch = channel.of('Mateo')
-                        .view()
+        // create a channel for inputs
+        name_ch = channel.of('Mateo')
+                            .view()
     ```
 
 The documentation tells us this should work. Can it really be so simple?
