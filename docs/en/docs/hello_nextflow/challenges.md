@@ -10,6 +10,17 @@ Your own course scripts stay as they are.
 The hint for each challenge introduces the new feature and links to the Nextflow documentation.
 Each solution ends with a pointer to the side quest that covers the feature in depth.
 
+Here is what each challenge covers:
+
+| Challenge                                                                                                              | Starts from the end of | New feature                                       | Side quest                                                               |
+| ---------------------------------------------------------------------------------------------------------------------- | ---------------------- | ------------------------------------------------- | ------------------------------------------------------------------------ |
+| [1. Read a CSV file with a header row](#challenge-1-read-a-csv-file-with-a-header-row)                                 | Part 2                 | `splitCsv()` with a header row                    | [Splitting and Grouping](../side_quests/splitting_and_grouping/index.md) |
+| [2. Greet only the French names](#challenge-2-greet-only-the-french-names)                                             | Part 2                 | The `filter()` operator                           | [Splitting and Grouping](../side_quests/splitting_and_grouping/index.md) |
+| [3. Greet each name in its own language](#challenge-3-greet-each-name-in-its-own-language)                             | Part 3                 | Tuples in channels and process inputs and outputs | [Metadata and Meta Maps](../side_quests/metadata/index.md)               |
+| [4. Give each name its own character](#challenge-4-give-each-name-its-own-character)                                   | Part 5                 | Tuples across modules                             | [Metadata and Meta Maps](../side_quests/metadata/index.md)               |
+| [5. Package the greeting steps as a reusable workflow](#challenge-5-package-the-greeting-steps-as-a-reusable-workflow) | Part 5                 | Named workflows with `take` and `emit`            | [Workflows of Workflows](../side_quests/workflows_of_workflows/index.md) |
+| [6. Translate into two languages in one run](#challenge-6-translate-into-two-languages-in-one-run)                     | Part 5                 | Including a module under an alias                 | [Workflows of Workflows](../side_quests/workflows_of_workflows/index.md) |
+
 The solution files are in `solutions/challenges/`, one directory per challenge.
 To run a solution directly, launch it from the `hello-nextflow` directory.
 Challenges 4 to 6 also need the `nextflow.config` from the end of Part 5 in that directory, which you already have if you completed the course; otherwise, copy it with `cp solutions/5-hello-modules/nextflow.config .` first.
@@ -20,7 +31,7 @@ nextflow run solutions/challenges/challenge-2/hello-challenge.nf
 
 ---
 
-## Challenge 1: Read CSV columns by name, using a header row
+## Challenge 1: Read a CSV file with a header row
 
 Start from `hello-channels.nf` as it stands at the end of Part 2:
 
@@ -95,7 +106,7 @@ The workflow should still greet the same three names.
 
 ---
 
-## Challenge 2: Filter channel contents to greet only the French names
+## Challenge 2: Greet only the French names
 
 Start from `hello-channels.nf` as it stands at the end of Part 2:
 
@@ -146,7 +157,7 @@ Only one greeting file should be produced.
 
 ---
 
-## Challenge 3: Use tuples to greet each name in its own language
+## Challenge 3: Greet each name in its own language
 
 Start from `hello-workflow.nf` as it stands at the end of Part 3:
 
@@ -274,7 +285,7 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
 
 ---
 
-## Challenge 4: Use tuples across modules to give each name its own character
+## Challenge 4: Give each name its own character
 
 Start from `main.nf` and its modules as they stand at the end of Part 5:
 
@@ -476,7 +487,7 @@ Keep the collected file and the report as they are.
 
 ---
 
-## Challenge 5: Compose workflows by moving steps into a subworkflow
+## Challenge 5: Package the greeting steps as a reusable workflow
 
 Start from `main.nf` as it stands at the end of Part 5:
 
@@ -644,7 +655,7 @@ The entry workflow in `hello-challenge.nf` then calls `GREET`, passes the collec
 
 ---
 
-## Challenge 6: Reuse a process with an alias to translate into two languages
+## Challenge 6: Translate into two languages in one run
 
 Start from `main.nf` as it stands at the end of Part 5:
 
