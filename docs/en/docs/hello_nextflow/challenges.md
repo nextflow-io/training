@@ -354,7 +354,8 @@ Keep the collected file and the report as they are.
     In the `map` closures, the underscore at the start of `_character` tells Nextflow that the variable is deliberately unused, so `nextflow lint` doesn't warn about it.
 
     The `character` parameter is no longer used, so you can remove it from the `params` block of `hello-challenge.nf`.
-    Keep its default value in `nextflow.config`, since `main.nf` still uses it.
+    Keep its values in `nextflow.config`, since `main.nf` still uses them.
+    The `tux` value from the `test` profile has no effect on `hello-challenge.nf`: each drawing uses the character from its own row.
 
     In the modules in `challenge-modules/`, the inputs and outputs carry the character alongside the file:
 
@@ -391,41 +392,41 @@ Keep the collected file and the report as they are.
         ```console
         N E X T F L O W   ~  version 26.04.4
 
-        Launching `hello-challenge.nf` [sad_yalow] revision: ad8a2fcdf6
+        Launching `hello-challenge.nf` [disturbed_stonebraker] revision: 987e9b3a29
 
         executor >  local (10)
-        [46/3ddbb0] sayHello (3)          | 3 of 3 ✔
-        [8a/f6d7fa] translateGreeting (3) | 3 of 3 ✔
-        [18/d4f150] collectGreetings      | 1 of 1 ✔
-        [5e/8e16a3] cowpy (2)             | 3 of 3 ✔
+        [cd/04bc7d] sayHello (2)          | 3 of 3 ✔
+        [38/b93a35] translateGreeting (3) | 3 of 3 ✔
+        [96/aa2a12] collectGreetings      | 1 of 1 ✔
+        [ec/b3710e] cowpy (3)             | 3 of 3 ✔
 
         Outputs:
 
           /workspaces/training/hello-nextflow/results
 
           greetings:
-            - batch/intermediates/Mateo.txt
-            - batch/intermediates/Celine.txt
-            - batch/intermediates/Raphael.txt
+            - test/intermediates/Mateo.txt
+            - test/intermediates/Celine.txt
+            - test/intermediates/Raphael.txt
 
           translated:
-            - batch/intermediates/es-Celine.txt
-            - batch/intermediates/es-Mateo.txt
-            - batch/intermediates/es-Raphael.txt
+            - test/intermediates/es-Celine.txt
+            - test/intermediates/es-Mateo.txt
+            - test/intermediates/es-Raphael.txt
 
-          collected: batch/intermediates/batch-es-greetings.txt
+          collected: test/intermediates/test-es-greetings.txt
 
-          batch_report: batch/batch-es-report.txt
+          batch_report: test/test-es-report.txt
 
           cowpy_art:
-            - batch/cowpy-es-Raphael.txt
-            - batch/cowpy-es-Celine.txt
-            - batch/cowpy-es-Mateo.txt
+            - test/cowpy-es-Mateo.txt
+            - test/cowpy-es-Celine.txt
+            - test/cowpy-es-Raphael.txt
         ```
 
     `cowpy` now runs three times, once per name, and each file is drawn by that name's character:
 
-    ```console title="results/batch/cowpy-es-Mateo.txt"
+    ```console title="results/test/cowpy-es-Mateo.txt"
      ______________
     < Hola, Mateo! >
      --------------
@@ -441,7 +442,7 @@ Keep the collected file and the report as they are.
           '---.~_ _ _|
     ```
 
-    ```console title="results/batch/cowpy-es-Raphael.txt"
+    ```console title="results/test/cowpy-es-Raphael.txt"
      ________________
     < Hola, Raphael! >
      ----------------
@@ -462,7 +463,7 @@ Keep the collected file and the report as they are.
                              (_(___/                         \_____)_)
     ```
 
-    ```console title="results/batch/cowpy-es-Celine.txt"
+    ```console title="results/test/cowpy-es-Celine.txt"
      _______________
     < Hola, Celine! >
      ---------------
@@ -614,33 +615,33 @@ The entry workflow in `hello-challenge.nf` then calls `GREET`, passes the collec
         ```console
         N E X T F L O W   ~  version 26.04.4
 
-        Launching `hello-challenge.nf` [condescending_euclid] revision: 60ca931fc8
+        Launching `hello-challenge.nf` [romantic_lavoisier] revision: 60ca931fc8
 
         executor >  local (8)
-        [09/6a23d7] GREET:sayHello (3)          | 3 of 3 ✔
-        [38/d26278] GREET:translateGreeting (2) | 3 of 3 ✔
-        [31/dca02b] GREET:collectGreetings      | 1 of 1 ✔
-        [f6/95ef51] cowpy                       | 1 of 1 ✔
+        [af/bfca39] GREET:sayHello (1)          | 3 of 3 ✔
+        [ef/595f11] GREET:translateGreeting (3) | 3 of 3 ✔
+        [74/8d690f] GREET:collectGreetings      | 1 of 1 ✔
+        [d0/0236db] cowpy                       | 1 of 1 ✔
 
         Outputs:
 
           /workspaces/training/hello-nextflow/results
 
           greetings:
-            - batch/intermediates/Mateo.txt
-            - batch/intermediates/Celine.txt
-            - batch/intermediates/Raphael.txt
+            - test/intermediates/Raphael.txt
+            - test/intermediates/Celine.txt
+            - test/intermediates/Mateo.txt
 
           translated:
-            - batch/intermediates/es-Mateo.txt
-            - batch/intermediates/es-Raphael.txt
-            - batch/intermediates/es-Celine.txt
+            - test/intermediates/es-Raphael.txt
+            - test/intermediates/es-Mateo.txt
+            - test/intermediates/es-Celine.txt
 
-          collected: batch/intermediates/batch-es-greetings.txt
+          collected: test/intermediates/test-es-greetings.txt
 
-          batch_report: batch/batch-es-report.txt
+          batch_report: test/test-es-report.txt
 
-          cowpy_art: batch/cowpy-batch-es-greetings.txt
+          cowpy_art: test/cowpy-test-es-greetings.txt
         ```
 
     The processes called inside `GREET` are listed as `GREET:sayHello` and so on, and the published outputs are the same as with `main.nf`.
@@ -796,49 +797,49 @@ Keep `cowpy` on the greetings in the first language.
         ```console
         N E X T F L O W   ~  version 26.04.4
 
-        Launching `hello-challenge.nf` [amazing_monod] revision: 72805d564b
+        Launching `hello-challenge.nf` [jovial_marconi] revision: 72805d564b
 
         executor >  local (12)
-        [b7/46b999] sayHello (1)          | 3 of 3 ✔
-        [99/01b3ba] translateGreeting (1) | 3 of 3 ✔
-        [c5/bb42d2] collectGreetings      | 1 of 1 ✔
-        [95/cad795] translateSecond (1)   | 3 of 3 ✔
-        [c8/a5059e] collectSecond         | 1 of 1 ✔
-        [f2/a3307c] cowpy                 | 1 of 1 ✔
+        [cc/272efd] sayHello (1)          | 3 of 3 ✔
+        [c2/4b2b04] translateGreeting (1) | 3 of 3 ✔
+        [da/4d2f05] collectGreetings      | 1 of 1 ✔
+        [1a/fd2576] translateSecond (3)   | 3 of 3 ✔
+        [33/7c130b] collectSecond         | 1 of 1 ✔
+        [2e/f89690] cowpy                 | 1 of 1 ✔
 
         Outputs:
 
           /workspaces/training/hello-nextflow/results
 
           greetings:
-            - batch/intermediates/Raphael.txt
-            - batch/intermediates/Celine.txt
-            - batch/intermediates/Mateo.txt
+            - test/intermediates/Mateo.txt
+            - test/intermediates/Celine.txt
+            - test/intermediates/Raphael.txt
 
           translated:
-            - batch/intermediates/es-Celine.txt
-            - batch/intermediates/es-Mateo.txt
-            - batch/intermediates/es-Raphael.txt
+            - test/intermediates/es-Raphael.txt
+            - test/intermediates/es-Celine.txt
+            - test/intermediates/es-Mateo.txt
 
-          collected: batch/intermediates/batch-es-greetings.txt
+          collected: test/intermediates/test-es-greetings.txt
 
-          batch_report: batch/batch-es-report.txt
+          batch_report: test/test-es-report.txt
 
-          cowpy_art: batch/cowpy-batch-es-greetings.txt
+          cowpy_art: test/cowpy-test-es-greetings.txt
 
           translated_second:
-            - batch/intermediates/fr-Celine.txt
-            - batch/intermediates/fr-Mateo.txt
-            - batch/intermediates/fr-Raphael.txt
+            - test/intermediates/fr-Celine.txt
+            - test/intermediates/fr-Mateo.txt
+            - test/intermediates/fr-Raphael.txt
 
-          collected_second: batch/intermediates/batch-fr-greetings.txt
+          collected_second: test/intermediates/test-fr-greetings.txt
 
-          batch_report_second: batch/batch-fr-report.txt
+          batch_report_second: test/test-fr-report.txt
         ```
 
     `translateSecond` and `collectSecond` are listed as separate processes, and the second collected file contains the French greetings:
 
-    ```console title="results/batch/intermediates/batch-fr-greetings.txt"
+    ```console title="results/test/intermediates/test-fr-greetings.txt"
     Bonjour, Celine!
     Bonjour, Mateo!
     Bonjour, Raphael!
