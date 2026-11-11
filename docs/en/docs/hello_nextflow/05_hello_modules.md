@@ -20,10 +20,6 @@ That makes it possible to reuse process definitions in multiple workflows withou
 When we started developing our workflow, we wrote everything in one single code file.
 Now we're going to give the project the standard layout of a Nextflow pipeline: the workflow file becomes `main.nf`, the processes go into individual modules, and the parameter values go into the configuration file.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/modules.svg"
-</figure>
-
 This will make our code more shareable, flexible and maintainable.
 
 This part reorganizes the code of the pipeline you built in Parts 1 to 4, without changing what it does:
@@ -111,7 +107,11 @@ If that worked for you, you're ready to organize your pipeline code.
 
 ---
 
-## 1. Rename the workflow file to `main.nf`
+## 1. Organize the code into modules
+
+The first step is to give the code the standard file layout: an entry workflow file called `main.nf`, and one module file per process in a `modules/` directory.
+
+### 1.1. Rename the workflow file to `main.nf`
 
 By convention, the workflow file that holds the entry workflow of a Nextflow project is called `main.nf`.
 It is the entry script of the finished Hello pipeline in Nextflow Run, and it is the file Nextflow looks for when you run a pipeline from a repository without naming a script.
@@ -164,17 +164,7 @@ nextflow run main.nf -resume
 
 Every task is retrieved from the cache: the name of the workflow file doesn't change the work to be done.
 
-### Takeaway
-
-You know that the entry workflow file of a Nextflow project is conventionally called `main.nf`.
-
-### What's next?
-
-Move the processes into modules.
-
----
-
-## 2. Create a directory to store modules
+### 1.2. Create a directory to store modules
 
 It is best practice to store your modules in a specific directory.
 You can call that directory anything you want, but the convention is to call it `modules/`.
@@ -183,16 +173,14 @@ You can call that directory anything you want, but the convention is to call it 
 mkdir modules
 ```
 
----
-
-## 3. Create a module for `sayHello()`
+### 1.3. Create a module for `sayHello()`
 
 In its simplest form, turning an existing process into a module is little more than a copy-paste operation.
 We're going to create a file stub for the module, copy the relevant code over then delete it from the main workflow file.
 
 Then all we'll need to do is add an `include` statement so that Nextflow will know to pull in the relevant code at runtime.
 
-### 3.1. Create a file stub for the new module
+#### 1.3.1. Create a file stub for the new module
 
 Create an empty file for the module called `sayHello.nf`.
 
@@ -202,7 +190,7 @@ touch modules/sayHello.nf
 
 This gives us a place to put the process code.
 
-### 3.2. Move the `sayHello` process code to the module file
+#### 1.3.2. Move the `sayHello` process code to the module file
 
 Copy the whole process definition over from the workflow file to the module file.
 
@@ -227,7 +215,7 @@ process sayHello {
 
 Once that is done, delete the process definition from the workflow file.
 
-### 3.3. Add an include declaration before the `params` block
+#### 1.3.3. Add an include declaration before the `params` block
 
 The syntax for including a process from a module is fairly straightforward:
 
@@ -270,7 +258,13 @@ Insert that above the `params` block and fill it out appropriately.
 
 You see we've filled in the process name, `sayHello`, and the path to the file containing the module code, `./modules/sayHello.nf`.
 
-### 3.4. Run the workflow
+Once all four processes are in modules, the workflow file will include each module file this way:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/modules.svg"
+</figure>
+
+#### 1.3.4. Run the workflow
 
 We're running the workflow with essentially the same code and inputs as before, so run it with the `-resume` flag and see what happens.
 
@@ -316,21 +310,11 @@ Feel free to check the published outputs.
 
 Nextflow recognized that it's still all the same work to be done, even if the code is split up into multiple files.
 
-### Takeaway
-
-You know how to extract a process into a local module and you know doing this doesn't break the resumability of the workflow.
-
-### What's next?
-
-Modularize the other three processes the same way.
-
----
-
-## 4. Modularize the remaining processes
+### 1.4. Modularize the remaining processes
 
 The `translateGreeting`, `collectGreetings` and `cowpy` processes follow exactly the same pattern as `sayHello`.
 
-### 4.1. Move the process code into module files
+#### 1.4.1. Move the process code into module files
 
 Create an empty file for each of the three modules:
 
@@ -432,7 +416,7 @@ The `container` and `conda` directives of `cowpy` move with the process, so the 
 
 Once that is done, delete the three process definitions from the workflow file.
 
-### 4.2. Add the include declarations
+#### 1.4.2. Add the include declarations
 
 Add an include declaration for each of the new modules, under the one for `sayHello`:
 
@@ -457,13 +441,13 @@ The workflow file now contains only the include declarations, the `params` block
 
 !!! tip "Skip the copy-pasting"
 
-    If you're short on time, this command brings your directory to the end state of sections 4.1 and 4.2, by copying the four module files and the updated workflow file from the solutions:
+    If you're short on time, this command brings your directory to the end state of sections 1.4.1 and 1.4.2, by copying the four module files and the updated workflow file from the solutions:
 
     ```bash
     cp solutions/5-hello-modules/modules/*.nf modules/ && cp solutions/5-hello-modules/main-2.nf main.nf
     ```
 
-### 4.3. Run the workflow
+#### 1.4.3. Run the workflow
 
 Run the workflow with the `-resume` flag:
 
@@ -508,11 +492,9 @@ Every task is retrieved from the cache once again, including `cowpy`, which stil
 
 ### Takeaway
 
-You know how to modularize multiple processes in a workflow.
+You know that the entry workflow file of a Nextflow project is conventionally called `main.nf`, and how to move processes into local modules without breaking the resumability of the workflow.
 
-Congratulations, you've done all this work and absolutely nothing has changed to how the pipeline works!
-
-Jokes aside, now your code is more modular, and if you decide to write another pipeline that calls on one of those processes, you just need to type one short `include` statement to use the relevant module.
+If you write another pipeline that calls on one of those processes, you just need to type one short `include` statement to use the relevant module.
 This is better than copy-pasting the code, because if later you decide to improve the module, all your pipelines will inherit the improvements.
 
 When you add a new step to a pipeline organized this way, you can write it as a module from the start: create the module file, include it in `main.nf`, and call it in the workflow.
@@ -523,7 +505,11 @@ Move the parameter values out of the workflow script.
 
 ---
 
-## 5. Move parameter values to the configuration
+## 2. Organize the configuration
+
+With the code in modules, the next step is to organize the configuration: move the parameter values into `nextflow.config`, and add a profile for running with Conda.
+
+### 2.1. Move parameter values to the configuration
 
 The workflow script still sets default values for its parameters in the `params` block:
 
@@ -547,7 +533,7 @@ That was convenient while we were developing the workflow, but these values are 
 True defaults belong in the `params` section of `nextflow.config`, and test values belong in a `test` profile.
 The workflow script keeps the parameter declarations and their types, so it is still easy to see at a glance which parameters the pipeline accepts.
 
-### 5.1. Remove the values from the workflow script
+#### 2.1.1. Remove the values from the workflow script
 
 In the `params` block of the workflow script, make the following code change:
 
@@ -579,7 +565,7 @@ In the `params` block of the workflow script, make the following code change:
     }
     ```
 
-### 5.2. Add the default values and the test profile to `nextflow.config`
+#### 2.1.2. Add the default values and the test profile to `nextflow.config`
 
 Open `nextflow.config` and make the following change:
 
@@ -615,7 +601,7 @@ Open `nextflow.config` and make the following change:
 
 The `params` section of the configuration file uses `=` to assign values, without types: the types are declared in the workflow script.
 
-### 5.3. Run the workflow without the test profile
+#### 2.1.3. Run the workflow without the test profile
 
 Try running the workflow the same way as before:
 
@@ -636,7 +622,7 @@ nextflow run main.nf -resume
 Since `input` no longer has a default value, Nextflow stops before running anything and tells you that the parameter is missing.
 `language`, `batch` and `character` did not cause an error, because their default values now come from `nextflow.config`.
 
-### 5.4. Run the workflow with the test profile
+#### 2.1.4. Run the workflow with the test profile
 
 Add `-profile test` to provide the test value for `input`:
 
@@ -681,22 +667,12 @@ The parameter values are the same as before, so every task is retrieved from the
 
 From now on, run the workflow with `-profile test`, or provide `--input` on the command line.
 
-### Takeaway
-
-You know how to separate the parameter declarations in the workflow script from their values in the configuration, keeping true default values in the `params` section and test values in a `test` profile.
-
-### What's next?
-
-Add a profile to run the pipeline with Conda instead of Docker.
-
----
-
-## 6. Add a `conda` profile
+### 2.2. Add a `conda` profile
 
 In Part 4, you gave the `cowpy` process both a container and a Conda package, and enabled Docker in `nextflow.config`.
 The finished Hello pipeline in Nextflow Run is set up the same way: it uses Docker by default, and provides a `conda` profile to use Conda instead.
 
-### 6.1. Add the profile to `nextflow.config`
+#### 2.2.1. Add the profile to `nextflow.config`
 
 In the `profiles` section of `nextflow.config`, make the following change:
 
@@ -727,7 +703,7 @@ In the `profiles` section of `nextflow.config`, make the following change:
 The `conda` profile turns Docker off and turns Conda on.
 Docker stays enabled by default, since the settings in a profile only apply when you activate it.
 
-### 6.2. Run the workflow with the `conda` profile
+#### 2.2.2. Run the workflow with the `conda` profile
 
 Activate both the `test` and `conda` profiles, separating their names with a comma:
 
@@ -778,42 +754,11 @@ When you run the workflow without the `conda` profile, it uses Docker again.
 
 ### Takeaway
 
-You know how to add a profile that switches the pipeline from Docker to Conda.
+You know how to separate the parameter declarations in the workflow script from their values in the configuration, keeping true default values in the `params` section and test values in a `test` profile.
+You also know how to add a profile that switches the pipeline from Docker to Conda.
 
-### What's next?
-
-Compare your project with the finished Hello pipeline from Nextflow Run.
-
----
-
-## 7. Compare with the pipeline from Nextflow Run
-
-Here are the files that make up your pipeline project now, leaving out the other files in the directory:
-
-??? abstract "Directory contents"
-
-    ```console
-    .
-    ├── main.nf
-    ├── modules
-    │   ├── collectGreetings.nf
-    │   ├── cowpy.nf
-    │   ├── sayHello.nf
-    │   └── translateGreeting.nf
-    └── nextflow.config
-    ```
-
-This is the same layout as the finished Hello pipeline in [Nextflow Run](../nextflow_run/index.md):
-
-- `main.nf` holds the entry workflow.
-- `modules/` holds one module file per process.
-- `nextflow.config` holds the default parameter values and the `test` and `conda` profiles.
-
-Since your project follows these conventions, anyone who knows how a Nextflow pipeline is organized can find their way around it.
-
-### Takeaway
-
-You know how to organize a Nextflow pipeline into a project with a `main.nf` workflow file, modules and a configuration file.
+Your project now has the standard layout of a Nextflow pipeline, the same as the finished Hello pipeline in [Nextflow Run](../nextflow_run/index.md): `main.nf` holds the entry workflow, `modules/` holds one module file per process, and `nextflow.config` holds the default parameter values and the `test` and `conda` profiles.
+Anyone who knows how a Nextflow pipeline is organized can find their way around it.
 
 ### What's next?
 
@@ -1010,7 +955,7 @@ What is the conventional name of the file that holds the entry workflow of a Nex
 - [ ] `nextflow.nf`
 - [ ] `pipeline.nf`
 
-Learn more: [1. Rename the workflow file to `main.nf`](#1-rename-the-workflow-file-to-mainnf)
+Learn more: [1.1. Rename the workflow file to `main.nf`](#11-rename-the-workflow-file-to-mainnf)
 </quiz>
 
 <quiz>
@@ -1020,7 +965,7 @@ What is a module in Nextflow?
 - [ ] A workflow definition
 - [ ] A channel operator
 
-Learn more: [3. Create a module for `sayHello()`](#3-create-a-module-for-sayhello)
+Learn more: [1.3. Create a module for `sayHello()`](#13-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
@@ -1030,7 +975,7 @@ What convention is typically used for storing module files?
 - [x] In a `modules/` directory
 - [ ] In a `lib/` directory
 
-Learn more: [2. Create a directory to store modules](#2-create-a-directory-to-store-modules)
+Learn more: [1.2. Create a directory to store modules](#12-create-a-directory-to-store-modules)
 </quiz>
 
 <quiz>
@@ -1041,7 +986,7 @@ What is the correct syntax to use a module?
 - [x] `#!groovy include { sayHello } from './modules/sayHello.nf'`
 - [ ] `#!groovy load { sayHello } from './modules/sayHello.nf'`
 
-Learn more: [3.3. Add an include declaration](#33-add-an-include-declaration-before-the-params-block)
+Learn more: [1.3.3. Add an include declaration](#133-add-an-include-declaration-before-the-params-block)
 </quiz>
 
 <quiz>
@@ -1051,7 +996,7 @@ What do you need to change in a process whose script is written in Python when y
 - [x] Nothing: the process moves over exactly as it was
 - [ ] Declare the module as a Python module
 
-Learn more: [4.1. Move the process code into module files](#41-move-the-process-code-into-module-files)
+Learn more: [1.4.1. Move the process code into module files](#141-move-the-process-code-into-module-files)
 </quiz>
 
 <quiz>
@@ -1077,7 +1022,7 @@ Where should the path to the example input data used for testing go?
 - [x] In a `test` profile in `nextflow.config`
 - [ ] In the module that uses it
 
-Learn more: [5. Move parameter values to the configuration](#5-move-parameter-values-to-the-configuration)
+Learn more: [2.1. Move parameter values to the configuration](#21-move-parameter-values-to-the-configuration)
 </quiz>
 
 <quiz>
@@ -1087,5 +1032,5 @@ What does the `conda` profile in `nextflow.config` do when you activate it?
 - [ ] It runs every process twice, once with Docker and once with Conda
 - [ ] It converts the containers into Conda packages
 
-Learn more: [6. Add a `conda` profile](#6-add-a-conda-profile)
+Learn more: [2.2. Add a `conda` profile](#22-add-a-conda-profile)
 </quiz>
