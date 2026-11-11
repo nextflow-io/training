@@ -53,12 +53,6 @@ Part 5 doesn't change what the pipeline does: it organizes the code into a proje
 --8<-- "docs/en/docs/hello_nextflow/img/hello-course-code.svg"
 </figure>
 
-Here is the finished pipeline in more detail, with the files it produces:
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
-</figure>
-
 This course focuses on writing pipeline code.
 It does not repeat how to run, configure and manage pipelines, which Nextflow Run covers, so we recommend taking Nextflow Run first.
 Where this course relies on something from Nextflow Run, it points to the relevant part.
