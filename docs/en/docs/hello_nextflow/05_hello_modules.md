@@ -26,6 +26,12 @@ Now we're going to give the project the standard layout of a Nextflow pipeline: 
 
 This will make our code more shareable, flexible and maintainable.
 
+Here is where this part fits in the course:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-course-map-part5.svg"
+</figure>
+
 ??? info "How to begin from this section"
 
     This section of the course assumes you have completed Parts 1-4 of the [Hello Nextflow](./index.md) course and have a complete working pipeline.
