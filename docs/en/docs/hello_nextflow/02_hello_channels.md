@@ -21,6 +21,12 @@ Channels are queues designed to handle inputs efficiently and shuttle them from 
 In this part of the course, you will learn how to use a channel to handle multiple inputs from a variety of different sources.
 You will also learn to use [**operators**](https://nextflow.io/docs/latest/reference/operator.html) to transform channel contents as needed.
 
+Here is where this part fits in the course:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-course-map-part2.svg"
+</figure>
+
 ??? info "How to begin from this section"
 
     This section of the course assumes you have completed Part 1 of the [Hello Nextflow](./index.md) course, but if you are comfortable with the basics covered in that section, you can start from here without doing anything special.

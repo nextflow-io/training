@@ -23,6 +23,12 @@ As you might imagine, that is going to be very helpful for making your pipelines
 
 Note that we'll be teaching this using [Docker](https://www.docker.com/get-started/), but keep in mind Nextflow supports [several other container technologies](https://nextflow.io/docs/latest/container.html) as well.
 
+Here is where this part fits in the course:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-course-map-part4.svg"
+</figure>
+
 ??? info "How to begin from this section"
 
     This section of the course assumes you have completed Parts 1-3 of the [Hello Nextflow](./index.md) course, but if you are comfortable with the basics covered in those sections, you can start from here without doing anything special.

@@ -27,6 +27,12 @@ To demonstrate, we will continue building on the Hello World example from Parts 
 2. Add a third step that collects all the translated greetings and writes them into a single file named after the batch and the language.
 3. Make the collection step also report a simple statistic about what was processed.
 
+Here is where this part fits in the course:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-course-map-part3.svg"
+</figure>
+
 ??? info "How to begin from this section"
 
     This section of the course assumes you have completed Parts 1-2 of the [Hello Nextflow](./index.md) course, but if you are comfortable with the basics covered in those sections, you can start from here without doing anything special.

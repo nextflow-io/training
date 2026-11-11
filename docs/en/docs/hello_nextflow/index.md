@@ -39,12 +39,21 @@ This course is designed to be hands-on, with goal-oriented exercises structured 
 This course is based on the Hello pipeline from [Nextflow Run](../nextflow_run/index.md), where learners run the finished pipeline and learn how to configure and manage its executions.
 The pipeline reads names from a CSV file, greets each one, translates the greetings into another language, collects them into a single file, and turns the result into ASCII art.
 
+In this course, you write that pipeline yourself.
+You start from a script that does a single thing, writing 'Hello World!' to a file, and add one piece at a time:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-course-map.svg"
+</figure>
+
+Parts 1 to 4 each add a piece of the pipeline, all in a single script file.
+Part 5 doesn't change what the pipeline does: it organizes the code into a project, with a `main.nf` workflow file, a module for each process and a configuration file.
+
+Here is the finished pipeline in more detail, with the files it produces:
+
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
-
-In this course, you write that pipeline yourself.
-You start from a script that does a single thing, writing 'Hello World!' to a file, and add one piece at a time.
 
 This course focuses on writing pipeline code.
 It does not repeat how to run, configure and manage pipelines, which Nextflow Run covers, so we recommend taking Nextflow Run first.
