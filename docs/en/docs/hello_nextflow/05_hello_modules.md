@@ -56,27 +56,27 @@ nextflow run hello-modules.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [happy_visvesvaraya] revision: 59e22ae249
+    Launching `hello-modules.nf` [suspicious_mahavira] revision: a94f0f7888
 
     executor >  local (8)
-    [4f/8190b1] sayHello (1)          | 3 of 3 ✔
-    [a4/c65a8e] translateGreeting (3) | 3 of 3 ✔
-    [4e/7c86bf] collectGreetings      | 1 of 1 ✔
-    [02/81f1ca] cowpy                 | 1 of 1 ✔
+    [4c/5eb228] sayHello (Celine)                  | 3 of 3 ✔
+    [c1/c55d1e] translateGreeting (es-Raphael.txt) | 3 of 3 ✔
+    [06/430547] collectGreetings (batch)           | 1 of 1 ✔
+    [50/bbafd2] cowpy (turkey)                     | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - batch/intermediates/Celine.txt
-        - batch/intermediates/Raphael.txt
         - batch/intermediates/Mateo.txt
+        - batch/intermediates/Raphael.txt
+        - batch/intermediates/Celine.txt
 
       translated:
+        - batch/intermediates/es-Mateo.txt
         - batch/intermediates/es-Celine.txt
         - batch/intermediates/es-Raphael.txt
-        - batch/intermediates/es-Mateo.txt
 
       collected: batch/intermediates/batch-es-greetings.txt
 
@@ -134,26 +134,26 @@ nextflow run main.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [goofy_leakey] revision: 59e22ae249
+    Launching `main.nf` [awesome_marconi] revision: a94f0f7888
 
-    [ea/83e7b8] sayHello (2)          | 3 of 3, cached: 3 ✔
-    [a4/c65a8e] translateGreeting (1) | 3 of 3, cached: 3 ✔
-    [4e/7c86bf] collectGreetings      | 1 of 1, cached: 1 ✔
-    [02/81f1ca] cowpy                 | 1 of 1, cached: 1 ✔
+    [4c/5eb228] sayHello (Celine)                 | 3 of 3, cached: 3 ✔
+    [63/eb68b8] translateGreeting (es-Celine.txt) | 3 of 3, cached: 3 ✔
+    [06/430547] collectGreetings (batch)          | 1 of 1, cached: 1 ✔
+    [50/bbafd2] cowpy (turkey)                    | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
+        - batch/intermediates/Raphael.txt
         - batch/intermediates/Mateo.txt
         - batch/intermediates/Celine.txt
-        - batch/intermediates/Raphael.txt
 
       translated:
-        - batch/intermediates/es-Celine.txt
-        - batch/intermediates/es-Raphael.txt
         - batch/intermediates/es-Mateo.txt
+        - batch/intermediates/es-Raphael.txt
+        - batch/intermediates/es-Celine.txt
 
       collected: batch/intermediates/batch-es-greetings.txt
 
@@ -200,6 +200,8 @@ Copy the whole process definition over from the workflow file to the module file
  */
 process sayHello {
 
+    tag "${name}"
+
     input:
     val name
 
@@ -227,7 +229,7 @@ Insert that above the `params` block and fill it out appropriately.
 
 === "After"
 
-    ```groovy title="main.nf" linenums="84" hl_lines="1 2"
+    ```groovy title="main.nf" linenums="90" hl_lines="1 2"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
 
@@ -244,7 +246,7 @@ Insert that above the `params` block and fill it out appropriately.
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="84"
+    ```groovy title="main.nf" linenums="90"
     /*
      * Pipeline parameters
      */
@@ -277,26 +279,26 @@ nextflow run main.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [wise_mayer] revision: d4ad5b65e6
+    Launching `main.nf` [nasty_heisenberg] revision: 89ffc7e3d2
 
-    [ea/83e7b8] sayHello (2)          | 3 of 3, cached: 3 ✔
-    [a4/c65a8e] translateGreeting (3) | 3 of 3, cached: 3 ✔
-    [4e/7c86bf] collectGreetings      | 1 of 1, cached: 1 ✔
-    [02/81f1ca] cowpy                 | 1 of 1, cached: 1 ✔
+    [4c/5eb228] sayHello (Celine)                  | 3 of 3, cached: 3 ✔
+    [c1/c55d1e] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
+    [06/430547] collectGreetings (batch)           | 1 of 1, cached: 1 ✔
+    [50/bbafd2] cowpy (turkey)                     | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
+        - batch/intermediates/Mateo.txt
         - batch/intermediates/Celine.txt
         - batch/intermediates/Raphael.txt
-        - batch/intermediates/Mateo.txt
 
       translated:
+        - batch/intermediates/es-Mateo.txt
         - batch/intermediates/es-Celine.txt
         - batch/intermediates/es-Raphael.txt
-        - batch/intermediates/es-Mateo.txt
 
       collected: batch/intermediates/batch-es-greetings.txt
 
@@ -329,6 +331,8 @@ Copy each process definition over from the workflow file to its module file:
  * Use Python to translate the greeting into another language
  */
 process translateGreeting {
+
+    tag "${language}-${input_file}"
 
     input:
     path input_file
@@ -370,6 +374,8 @@ process translateGreeting {
  */
 process collectGreetings {
 
+    tag "${batch_name}"
+
     input:
     path input_files
     val batch_name
@@ -393,6 +399,8 @@ process collectGreetings {
  * Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
  */
 process cowpy {
+
+    tag "${character}"
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
     conda 'conda-forge::cowpy==1.1.5'
@@ -460,26 +468,26 @@ nextflow run main.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [compassionate_shannon] revision: ceb815abde
+    Launching `main.nf` [special_ptolemy] revision: ceb815abde
 
-    [4f/8190b1] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [a4/c65a8e] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [4e/7c86bf] collectGreetings      | 1 of 1, cached: 1 ✔
-    [02/81f1ca] cowpy                 | 1 of 1, cached: 1 ✔
+    [4c/5eb228] sayHello (Celine)                  | 3 of 3, cached: 3 ✔
+    [c1/c55d1e] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
+    [06/430547] collectGreetings (batch)           | 1 of 1, cached: 1 ✔
+    [50/bbafd2] cowpy (turkey)                     | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - batch/intermediates/Raphael.txt
         - batch/intermediates/Mateo.txt
         - batch/intermediates/Celine.txt
+        - batch/intermediates/Raphael.txt
 
       translated:
         - batch/intermediates/es-Celine.txt
-        - batch/intermediates/es-Raphael.txt
         - batch/intermediates/es-Mateo.txt
+        - batch/intermediates/es-Raphael.txt
 
       collected: batch/intermediates/batch-es-greetings.txt
 
@@ -631,25 +639,25 @@ nextflow run main.nf --input data/names.csv -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [shrivelled_fourier] revision: f1abb39e4d
+    Launching `main.nf` [lethal_kare] revision: f1abb39e4d
 
-    [4f/8190b1] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [26/30812b] translateGreeting (1) | 3 of 3, cached: 3 ✔
-    [4e/7c86bf] collectGreetings      | 1 of 1, cached: 1 ✔
-    [02/81f1ca] cowpy                 | 1 of 1, cached: 1 ✔
+    [f2/e0daf2] sayHello (Raphael)                 | 3 of 3, cached: 3 ✔
+    [c1/c55d1e] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
+    [06/430547] collectGreetings (batch)           | 1 of 1, cached: 1 ✔
+    [50/bbafd2] cowpy (turkey)                     | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - batch/intermediates/Raphael.txt
         - batch/intermediates/Mateo.txt
         - batch/intermediates/Celine.txt
+        - batch/intermediates/Raphael.txt
 
       translated:
-        - batch/intermediates/es-Celine.txt
         - batch/intermediates/es-Mateo.txt
+        - batch/intermediates/es-Celine.txt
         - batch/intermediates/es-Raphael.txt
 
       collected: batch/intermediates/batch-es-greetings.txt
@@ -729,13 +737,13 @@ nextflow run main.nf -profile test -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [sick_bassi] revision: f1abb39e4d
+    Launching `main.nf` [loving_brenner] revision: f1abb39e4d
 
     executor >  local (2)
-    [4f/8190b1] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [a4/c65a8e] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [26/79001a] collectGreetings      | 1 of 1 ✔
-    [4d/1a509e] cowpy                 | 1 of 1 ✔
+    [9c/c67843] sayHello (Mateo)                   | 3 of 3, cached: 3 ✔
+    [c1/c55d1e] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
+    [99/dc4374] collectGreetings (test)            | 1 of 1 ✔
+    [c5/2440e4] cowpy (tux)                        | 1 of 1 ✔
 
     Outputs:
 
@@ -747,9 +755,9 @@ nextflow run main.nf -profile test -resume
         - test/intermediates/Raphael.txt
 
       translated:
+        - test/intermediates/es-Mateo.txt
         - test/intermediates/es-Celine.txt
         - test/intermediates/es-Raphael.txt
-        - test/intermediates/es-Mateo.txt
 
       collected: test/intermediates/test-es-greetings.txt
 
@@ -837,13 +845,13 @@ nextflow run main.nf -profile test,conda -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [festering_northcutt] revision: f1abb39e4d
+    Launching `main.nf` [reverent_church] revision: f1abb39e4d
 
     executor >  local (1)
-    [98/eb25c9] sayHello (3)          | 3 of 3, cached: 3 ✔
-    [99/0b21af] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [26/79001a] collectGreetings      | 1 of 1, cached: 1 ✔
-    [87/dda317] cowpy                 | 1 of 1 ✔
+    [9c/c67843] sayHello (Mateo)                   | 3 of 3, cached: 3 ✔
+    [c1/c55d1e] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
+    [99/dc4374] collectGreetings (test)            | 1 of 1, cached: 1 ✔
+    [1d/6735b3] cowpy (tux)                        | 1 of 1 ✔
     Creating env using conda: conda-forge::cowpy==1.1.5 [cache /workspaces/training/hello-nextflow/work/conda/env-898314d566668b6587ad714ae06b8520]
 
     Outputs:
@@ -851,14 +859,14 @@ nextflow run main.nf -profile test,conda -resume
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - test/intermediates/Mateo.txt
-        - test/intermediates/Celine.txt
         - test/intermediates/Raphael.txt
+        - test/intermediates/Celine.txt
+        - test/intermediates/Mateo.txt
 
       translated:
+        - test/intermediates/es-Celine.txt
         - test/intermediates/es-Mateo.txt
         - test/intermediates/es-Raphael.txt
-        - test/intermediates/es-Celine.txt
 
       collected: test/intermediates/test-es-greetings.txt
 
@@ -937,26 +945,26 @@ Then run the workflow with both the `test` and `french` profiles, and check that
     ```console title="Command output"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [insane_carlsson] revision: f1abb39e4d
+    Launching `main.nf` [mighty_mercator] revision: f1abb39e4d
 
     executor >  local (5)
-    [4f/8190b1] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [a9/1813fb] translateGreeting (2) | 3 of 3 ✔
-    [6d/3b94a8] collectGreetings      | 1 of 1 ✔
-    [3f/e03d5a] cowpy                 | 1 of 1 ✔
+    [f2/e0daf2] sayHello (Raphael)               | 3 of 3, cached: 3 ✔
+    [17/8eac23] translateGreeting (fr-Mateo.txt) | 3 of 3 ✔
+    [fa/04dc6b] collectGreetings (test)          | 1 of 1 ✔
+    [c8/397e0b] cowpy (tux)                      | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
+        - test/intermediates/Celine.txt
         - test/intermediates/Raphael.txt
         - test/intermediates/Mateo.txt
-        - test/intermediates/Celine.txt
 
       translated:
-        - test/intermediates/fr-Celine.txt
         - test/intermediates/fr-Raphael.txt
+        - test/intermediates/fr-Celine.txt
         - test/intermediates/fr-Mateo.txt
 
       collected: test/intermediates/test-fr-greetings.txt
@@ -1038,26 +1046,26 @@ modules
     ```console title="Command output"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [zen_lamarr] revision: b5835a4414
+    Launching `main.nf` [evil_hypatia] revision: b5835a4414
 
-    [4f/8190b1] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [26/30812b] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [26/79001a] collectGreetings      | 1 of 1, cached: 1 ✔
-    [4d/1a509e] cowpy                 | 1 of 1, cached: 1 ✔
+    [9c/c67843] sayHello (Mateo)                 | 3 of 3, cached: 3 ✔
+    [01/58d58b] translateGreeting (es-Mateo.txt) | 3 of 3, cached: 3 ✔
+    [99/dc4374] collectGreetings (test)          | 1 of 1, cached: 1 ✔
+    [c5/2440e4] cowpy (tux)                      | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - test/intermediates/Celine.txt
         - test/intermediates/Raphael.txt
         - test/intermediates/Mateo.txt
+        - test/intermediates/Celine.txt
 
       translated:
-        - test/intermediates/es-Mateo.txt
         - test/intermediates/es-Celine.txt
         - test/intermediates/es-Raphael.txt
+        - test/intermediates/es-Mateo.txt
 
       collected: test/intermediates/test-es-greetings.txt
 

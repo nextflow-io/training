@@ -5,6 +5,8 @@
  */
 process translateGreeting {
 
+    tag "${language}-${input_file}"
+
     input:
     path input_file
     val language
@@ -43,6 +45,8 @@ process translateGreeting {
  */
 process collectGreetings {
 
+    tag "${batch_name}"
+
     input:
     path input_files
     val batch_name
@@ -64,6 +68,8 @@ process collectGreetings {
  * Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
  */
 process cowpy {
+
+    tag "${character}"
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
     conda 'conda-forge::cowpy==1.1.5'

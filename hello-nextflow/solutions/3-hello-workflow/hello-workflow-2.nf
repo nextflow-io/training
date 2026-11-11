@@ -5,6 +5,8 @@
  */
 process sayHello {
 
+    tag "${name}"
+
     input:
     val name
 
@@ -21,6 +23,8 @@ process sayHello {
  * Use Python to translate the greeting into another language
  */
 process translateGreeting {
+
+    tag "${language}-${input_file}"
 
     input:
     path input_file

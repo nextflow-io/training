@@ -3,6 +3,8 @@
  */
 process translateGreeting {
 
+    tag "${language}-${input_file}"
+
     input:
     path input_file
     val language
