@@ -109,12 +109,6 @@ Importantly, the output definition does not _determine_ what output will be crea
 It simply _declares_ what is the expected output, so that Nextflow can look for it once execution is complete.
 This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed. Output produced that doesn't match what is declared in the output definition will not be passed to downstream processes.
 
-!!! warning
-
-    This example is brittle because we hardcoded the output filename in two separate places (the `script` and the `output` definition).
-    If we change one but not the other, the script will break.
-    Later on, you'll learn ways to use variables to mitigate this problem.
-
 In a real-world pipeline, a process usually contains additional blocks such as directives and inputs, which we'll introduce in a little bit.
 
 #### 1.1.2. The `workflow` definition
@@ -786,7 +780,7 @@ Run the workflow and check that `greeting.txt` is published to the `results/hell
 
 ??? tip "Hint"
 
-    The file name appears in two places in the process, as the warning in section 1.1.1 points out.
+    The file name appears in two places in the process: the `output` definition declares it, and the `script` writes it.
 
 ??? solution
 
@@ -847,29 +841,29 @@ Run the workflow and check that `greeting.txt` is published to the `results/hell
 ## Quiz
 
 <quiz>
-What are the minimum required components of a Nextflow process?
-- [ ] Input and output blocks only
-- [x] Output and script blocks
-- [ ] Input, output, and script blocks
-- [ ] Only a script block
+Which block must the body of a process contain?
+- [ ] An `output` block
+- [ ] A `publish:` section
+- [ ] An `input` block
+- [x] A `script` block
 
-Learn more: [1.1.1. The process definition](#111-the-process-definition)
+Learn more: [1.1.1. The `process` definition](#111-the-process-definition)
 </quiz>
 
 <quiz>
 What is the purpose of the `output` definition in a process?
-- [ ] To print results to the console
 - [ ] To save files to the work directory
 - [x] To declare expected outputs from the process
 - [ ] To define environment variables
+- [ ] To print results to the console
 
-Learn more: [1.1.1. The process definition](#111-the-process-definition)
+Learn more: [1.1.1. The `process` definition](#111-the-process-definition)
 </quiz>
 
 <quiz>
 Which file in a task directory contains the command that Nextflow ran?
-- [ ] `.command.run`
 - [x] `.command.sh`
+- [ ] `.command.run`
 - [ ] `.command.log`
 - [ ] `.command.out`
 
@@ -878,19 +872,19 @@ Learn more: [1.2. Run the workflow](#12-run-the-workflow)
 
 <quiz>
 How does an entry in the `output` block relate to the workflow?
-- [ ] It must have the same name as the process
-- [x] It must have the same name as an output listed in the `publish:` section
 - [ ] It must have the same name as the output file
+- [x] It must have the same name as an output listed in the `publish:` section
 - [ ] It can have any name; Nextflow matches outputs by order
+- [ ] It must have the same name as the process
 
 Learn more: [2.1.2. Add an `output` block to the script](#212-add-an-output-block-to-the-script)
 </quiz>
 
 <quiz>
 What is the default mode for publishing workflow outputs?
+- [ ] Move files to the output directory
 - [ ] Copy files to the output directory
 - [x] Create symbolic links in the output directory
-- [ ] Move files to the output directory
 - [ ] Compress files in the output directory
 
 Learn more: [2.1.3. Run the workflow](#213-run-the-workflow)
@@ -898,30 +892,30 @@ Learn more: [2.1.3. Run the workflow](#213-run-the-workflow)
 
 <quiz>
 How do you pass a parameter value to a Nextflow workflow from the command line?
-- [ ] `-parameter value`
-- [ ] `--parameter:value`
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
+- [ ] `-parameter value`
+- [ ] `--parameter:value`
 
 Learn more: [3.2. Set up a command-line parameter to capture user input](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 
 <quiz>
 How do you reference a variable inside a Nextflow script block?
+- [ ] Use `[variable]` syntax
 - [ ] Use `%variable%` syntax
 - [x] Use `#!groovy ${variable}` syntax
 - [ ] Use `{{variable}}` syntax
-- [ ] Use `[variable]` syntax
 
 Learn more: [3.1.2. Edit the process command to use the input variable](#312-edit-the-process-command-to-use-the-input-variable)
 </quiz>
 
 <quiz>
 In `#!groovy params { name: String = 'Friend' }`, what happens when you run the workflow with `--name 'Celine'`?
-- [ ] The workflow fails because the parameter already has a value
 - [x] The command-line value overrides the default
-- [ ] The default value overrides the command-line value
 - [ ] Both values are passed to the process
+- [ ] The workflow fails because the parameter already has a value
+- [ ] The default value overrides the command-line value
 
 Learn more: [3.4.3. Override the default value](#343-override-the-default-value)
 </quiz>

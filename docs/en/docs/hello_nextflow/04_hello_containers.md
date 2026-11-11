@@ -1210,76 +1210,78 @@ Pick another character that `cowpy` offers, and run the workflow so that it draw
 
 <quiz>
 What is a container?
-- [ ] A type of virtual machine
-- [ ] A file compression format
 - [x] A lightweight, standalone executable unit that includes everything needed to run an application
+- [ ] A file compression format
+- [ ] A type of virtual machine
 - [ ] A network protocol
 </quiz>
 
 <quiz>
 What is the difference between a container image and a container instance?
-- [ ] They are the same thing
-- [x] An image is a template; an instance is a running container created from that image
 - [ ] An instance is a template; an image is a running container
 - [ ] Images are for Docker; instances are for Singularity
+- [ ] They are the same thing
+- [x] An image is a template; an instance is a running container created from that image
+
+Learn more: [1.1. Pull the container image](#11-pull-the-container-image)
 </quiz>
 
 <quiz>
 What does the `-v` flag do in a `docker run` command?
-- [ ] Enables verbose output
+- [ ] Specifies the version of the container
 - [ ] Validates the container
 - [x] Mounts a volume from the host system into the container
-- [ ] Specifies the version of the container
+- [ ] Enables verbose output
 
 Learn more: [1.3.4. Mount data into the container](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
 Why do you need to mount volumes when using containers?
-- [ ] To improve container performance
 - [ ] To save disk space
-- [x] Because containers are isolated from the host filesystem by default
+- [ ] To improve container performance
 - [ ] To enable networking
+- [x] Because containers are isolated from the host filesystem by default
 
 Learn more: [1.3.4. Mount data into the container](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
 How do you specify a container for a Nextflow process?
-- [ ] `docker 'container-uri'`
+- [ ] `use 'container-uri'`
 - [ ] `image 'container-uri'`
 - [x] `container 'container-uri'`
-- [ ] `use 'container-uri'`
+- [ ] `docker 'container-uri'`
 
-Learn more: [2.3.1. Specify a container for cowpy](#231-specify-a-container-for-cowpy)
+Learn more: [2.3.1. Specify a container for `cowpy`](#231-specify-a-container-for-cowpy)
 </quiz>
 
 <quiz>
 Which `nextflow.config` setting enables Docker for your workflow?
-- [ ] `#!groovy process.docker = true`
 - [x] `#!groovy docker.enabled = true`
 - [ ] `#!groovy container.engine = 'docker'`
 - [ ] `#!groovy docker.activate = true`
+- [ ] `#!groovy process.docker = true`
 
 Learn more: [2.3.2. Enable use of Docker via the `nextflow.config` file](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 
 <quiz>
 What does Nextflow automatically handle when running a process in a container? (Select all that apply)
+- [x] Running the process script inside the container
 - [x] Pulling the container image if needed
 - [x] Mounting the work directory
-- [x] Running the process script inside the container
-- [x] Cleaning up the container instance after execution
+- [ ] Enabling Docker if the configuration does not enable it
 
 Learn more: [2.3.4. Inspect how Nextflow launched the containerized task](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>
 
 <quiz>
 What happens when a process declares both a `container` and a `conda` directive?
-- [ ] Nextflow runs the process twice, once with each
 - [ ] Nextflow fails with an error
 - [x] Nextflow uses whichever one matches the software packaging technology enabled in the configuration
 - [ ] The `conda` directive always takes precedence
+- [ ] Nextflow runs the process twice, once with each
 
 Learn more: [2.4. Add a Conda package as an alternative](#24-add-a-conda-package-as-an-alternative)
 </quiz>

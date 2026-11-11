@@ -950,9 +950,9 @@ modules
 
 <quiz>
 What is the conventional name of the file that holds the entry workflow of a Nextflow project?
+- [ ] `nextflow.nf`
 - [ ] `workflow.nf`
 - [x] `main.nf`
-- [ ] `nextflow.nf`
 - [ ] `pipeline.nf`
 
 Learn more: [1.1. Rename the workflow file to `main.nf`](#11-rename-the-workflow-file-to-mainnf)
@@ -960,19 +960,19 @@ Learn more: [1.1. Rename the workflow file to `main.nf`](#11-rename-the-workflow
 
 <quiz>
 What is a module in Nextflow?
-- [ ] A configuration file
-- [x] A standalone file that can contain process definitions
 - [ ] A workflow definition
+- [ ] A configuration file
 - [ ] A channel operator
+- [x] A standalone file that can contain process definitions
 
 Learn more: [1.3. Create a module for `sayHello()`](#13-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
 What convention is typically used for storing module files?
-- [ ] In the same directory as the workflow
-- [ ] In a `bin/` directory
 - [x] In a `modules/` directory
+- [ ] In a `bin/` directory
+- [ ] In the same directory as the workflow
 - [ ] In a `lib/` directory
 
 Learn more: [1.2. Create a directory to store modules](#12-create-a-directory-to-store-modules)
@@ -981,45 +981,47 @@ Learn more: [1.2. Create a directory to store modules](#12-create-a-directory-to
 <quiz>
 What is the correct syntax to use a module?
 
-- [ ] `#!groovy import { sayHello } from './modules/sayHello.nf'`
 - [ ] `#!groovy require { sayHello } from './modules/sayHello.nf'`
-- [x] `#!groovy include { sayHello } from './modules/sayHello.nf'`
+- [ ] `#!groovy import { sayHello } from './modules/sayHello.nf'`
 - [ ] `#!groovy load { sayHello } from './modules/sayHello.nf'`
+- [x] `#!groovy include { sayHello } from './modules/sayHello.nf'`
 
-Learn more: [1.3.3. Add an include declaration](#133-add-an-include-declaration-before-the-params-block)
+Learn more: [1.3.3. Add an include declaration before the `params` block](#133-add-an-include-declaration-before-the-params-block)
 </quiz>
 
 <quiz>
 What do you need to change in a process whose script is written in Python when you move it into a module?
-- [ ] Rewrite the script in Bash
-- [ ] Add the Python interpreter to the `include` statement
-- [x] Nothing: the process moves over exactly as it was
 - [ ] Declare the module as a Python module
+- [x] Nothing: the process moves over exactly as it was
+- [ ] Add the Python interpreter to the `include` statement
+- [ ] Rewrite the script in Bash
 
 Learn more: [1.4.1. Move the process code into module files](#141-move-the-process-code-into-module-files)
 </quiz>
 
 <quiz>
 What happens to the `-resume` functionality when using modules?
+- [ ] It only works for local modules
 - [ ] It no longer works
 - [ ] It requires additional configuration
 - [x] It works the same as before
-- [ ] It only works for local modules
+
+Learn more: [1.3.4. Run the workflow](#134-run-the-workflow)
 </quiz>
 
 <quiz>
 What are the benefits of using modules? (Select all that apply)
+- [ ] Faster execution speed
+- [x] Better organization of workflow code
 - [x] Code reusability across workflows
 - [x] Easier maintenance
-- [x] Better organization of workflow code
-- [ ] Faster execution speed
 </quiz>
 
 <quiz>
 Where should the path to the example input data used for testing go?
 - [ ] In the `params` block of the workflow script, as a default value
-- [ ] In the `params` section of `nextflow.config`
 - [x] In a `test` profile in `nextflow.config`
+- [ ] In the `params` section of `nextflow.config`
 - [ ] In the module that uses it
 
 Learn more: [2.1. Move parameter values to the configuration](#21-move-parameter-values-to-the-configuration)
@@ -1027,10 +1029,10 @@ Learn more: [2.1. Move parameter values to the configuration](#21-move-parameter
 
 <quiz>
 What does the `conda` profile in `nextflow.config` do when you activate it?
-- [ ] It installs Conda in your environment
-- [x] It disables Docker and enables Conda, so processes use their `conda` packages instead of their containers
-- [ ] It runs every process twice, once with Docker and once with Conda
 - [ ] It converts the containers into Conda packages
+- [ ] It runs every process twice, once with Docker and once with Conda
+- [x] It disables Docker and enables Conda, so processes use their `conda` packages instead of their containers
+- [ ] It installs Conda in your environment
 
 Learn more: [2.2. Add a `conda` profile](#22-add-a-conda-profile)
 </quiz>

@@ -1688,50 +1688,50 @@ Run it with `--batch trio -resume`.
 
 <quiz>
 How do you access the output of a process in the workflow block?
-- [ ] `process.output`
-- [ ] `output.processName`
 - [x] `processName.out`
+- [ ] `output.processName`
+- [ ] `process.output`
 - [ ] `get(processName)`
 
 Learn more: [1.2.2. Pass the output of the first process to the new process](#122-pass-the-output-of-the-first-process-to-the-new-process)
 </quiz>
 
 <quiz>
-What determines the order of process execution in Nextflow?
-- [ ] The order processes are written in the workflow block
-- [ ] Alphabetical order by process name
-- [x] Data dependencies between processes
-- [ ] Random order for parallel execution
+Why does the task directory of a `translateGreeting` call also contain the greeting file produced by `sayHello`?
+- [ ] The `output` block copied it there to publish it
+- [ ] The `translateGreeting` process ran `sayHello` again to recreate it
+- [ ] Both processes ran in the same task directory
+- [x] Nextflow staged it there as an input, as a symbolic link to the original file
 
-Learn more: [1.2.2. Pass the output of the first process to the new process](#122-pass-the-output-of-the-first-process-to-the-new-process)
+Learn more: [1.2.4. Run the workflow with `-resume`](#124-run-the-workflow-with-resume)
 </quiz>
 
 <quiz>
 What does the line `#!/usr/bin/env python3` at the start of a process script do?
-- [ ] It is a comment that Nextflow ignores
-- [x] It tells the system to run the script with Python instead of the shell
-- [ ] It installs Python in the task environment
 - [ ] It imports the Python standard library
+- [x] It tells the system to run the script with Python instead of the shell
+- [ ] It is a comment that Nextflow ignores
+- [ ] It installs Python in the task environment
 
 Learn more: [1.2.1. Define the process](#121-define-the-process)
 </quiz>
 
 <quiz>
 A process is called with `translateGreeting(sayHello.out, params.language)`, where `sayHello.out` carries three files and `params.language` is a single value. How many times does the process run?
-- [ ] Once, on all three files
 - [x] Three times, reusing the same language each time
-- [ ] Once per language
 - [ ] It fails because the inputs have different sizes
+- [ ] Once per language
+- [ ] Once, on all three files
 
 Learn more: [1.3.3. Pass the language to the process](#133-pass-the-language-to-the-process)
 </quiz>
 
 <quiz>
 When providing multiple inputs to a process, what must be true?
+- [ ] Only two inputs can be provided at a time
 - [ ] All inputs must be of the same type
 - [ ] Inputs must be provided in alphabetical order
 - [x] The order of inputs must match the order defined in the input block
-- [ ] Only two inputs can be provided at a time
 
 Learn more: [1.3.3. Pass the language to the process](#133-pass-the-language-to-the-process)
 </quiz>
@@ -1748,29 +1748,29 @@ workflow {
 ```
 
 - [ ] `flatten()`
+- [ ] `join()`
 - [x] `collect()`
 - [ ] `mix()`
-- [ ] `join()`
 
 Learn more: [2.4. Use an operator to collect the greetings into a single input](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
 When should you use the `collect()` operator?
-- [ ] When you want to process items in parallel
 - [ ] When you need to filter channel contents
 - [x] When a downstream process needs all items from an upstream process
 - [ ] When you want to split data across multiple processes
+- [ ] When you want to process items in parallel
 
 Learn more: [2.4. Use an operator to collect the greetings into a single input](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
 How do you access a named output from a process?
-- [ ] `processName.outputName`
+- [ ] `output.processName.outputName`
 - [ ] `processName.get(outputName)`
 - [x] `processName.out.outputName`
-- [ ] `output.processName.outputName`
+- [ ] `processName.outputName`
 
 Learn more: [3.1.2. Emit the report file and name outputs](#312-emit-the-report-file-and-name-outputs)
 </quiz>
@@ -1778,9 +1778,9 @@ Learn more: [3.1.2. Emit the report file and name outputs](#312-emit-the-report-
 <quiz>
 What is the correct syntax for naming an output in a process?
 - [ ] `name: outputName`
-- [ ] `output: outputName`
 - [x] `emit: outputName`
 - [ ] `label: outputName`
+- [ ] `output: outputName`
 
 Learn more: [3.1.2. Emit the report file and name outputs](#312-emit-the-report-file-and-name-outputs)
 </quiz>
