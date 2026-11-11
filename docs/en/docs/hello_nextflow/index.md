@@ -49,6 +49,10 @@ You start from a script that does a single thing, writing 'Hello World!' to a fi
 Parts 1 to 4 each add a piece of the pipeline, all in a single script file.
 Part 5 doesn't change what the pipeline does: it organizes the code into a project, with a `main.nf` workflow file, a module for each process and a configuration file.
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-course-code.svg"
+</figure>
+
 Here is the finished pipeline in more detail, with the files it produces:
 
 <figure class="excalidraw">
