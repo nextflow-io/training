@@ -56,27 +56,27 @@ nextflow run hello-modules.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [festering_blackwell] revision: 59e22ae249
+    Launching `hello-modules.nf` [happy_visvesvaraya] revision: 59e22ae249
 
     executor >  local (8)
-    [86/5fe4eb] sayHello (3)          | 3 of 3 ✔
-    [94/86c052] translateGreeting (1) | 3 of 3 ✔
-    [f4/f3bf84] collectGreetings      | 1 of 1 ✔
-    [58/363929] cowpy                 | 1 of 1 ✔
+    [4f/8190b1] sayHello (1)          | 3 of 3 ✔
+    [a4/c65a8e] translateGreeting (3) | 3 of 3 ✔
+    [4e/7c86bf] collectGreetings      | 1 of 1 ✔
+    [02/81f1ca] cowpy                 | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
+        - batch/intermediates/Celine.txt
         - batch/intermediates/Raphael.txt
         - batch/intermediates/Mateo.txt
-        - batch/intermediates/Celine.txt
 
       translated:
         - batch/intermediates/es-Celine.txt
-        - batch/intermediates/es-Mateo.txt
         - batch/intermediates/es-Raphael.txt
+        - batch/intermediates/es-Mateo.txt
 
       collected: batch/intermediates/batch-es-greetings.txt
 
@@ -134,21 +134,21 @@ nextflow run main.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [hopeful_dijkstra] revision: 59e22ae249
+    Launching `main.nf` [goofy_leakey] revision: 59e22ae249
 
-    [28/2c0f08] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [04/a4d382] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [f4/f3bf84] collectGreetings      | 1 of 1, cached: 1 ✔
-    [58/363929] cowpy                 | 1 of 1, cached: 1 ✔
+    [ea/83e7b8] sayHello (2)          | 3 of 3, cached: 3 ✔
+    [a4/c65a8e] translateGreeting (1) | 3 of 3, cached: 3 ✔
+    [4e/7c86bf] collectGreetings      | 1 of 1, cached: 1 ✔
+    [02/81f1ca] cowpy                 | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - batch/intermediates/Raphael.txt
         - batch/intermediates/Mateo.txt
         - batch/intermediates/Celine.txt
+        - batch/intermediates/Raphael.txt
 
       translated:
         - batch/intermediates/es-Celine.txt
@@ -277,25 +277,25 @@ nextflow run main.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [evil_knuth] revision: d4ad5b65e6
+    Launching `main.nf` [wise_mayer] revision: d4ad5b65e6
 
-    [86/5fe4eb] sayHello (3)          | 3 of 3, cached: 3 ✔
-    [04/a4d382] translateGreeting (3) | 3 of 3, cached: 3 ✔
-    [f4/f3bf84] collectGreetings      | 1 of 1, cached: 1 ✔
-    [58/363929] cowpy                 | 1 of 1, cached: 1 ✔
+    [ea/83e7b8] sayHello (2)          | 3 of 3, cached: 3 ✔
+    [a4/c65a8e] translateGreeting (3) | 3 of 3, cached: 3 ✔
+    [4e/7c86bf] collectGreetings      | 1 of 1, cached: 1 ✔
+    [02/81f1ca] cowpy                 | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - batch/intermediates/Raphael.txt
         - batch/intermediates/Celine.txt
+        - batch/intermediates/Raphael.txt
         - batch/intermediates/Mateo.txt
 
       translated:
-        - batch/intermediates/es-Raphael.txt
         - batch/intermediates/es-Celine.txt
+        - batch/intermediates/es-Raphael.txt
         - batch/intermediates/es-Mateo.txt
 
       collected: batch/intermediates/batch-es-greetings.txt
@@ -460,12 +460,12 @@ nextflow run main.nf -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [crazy_rubens] revision: ceb815abde
+    Launching `main.nf` [compassionate_shannon] revision: ceb815abde
 
-    [28/2c0f08] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [b6/a64f34] translateGreeting (3) | 3 of 3, cached: 3 ✔
-    [f4/f3bf84] collectGreetings      | 1 of 1, cached: 1 ✔
-    [58/363929] cowpy                 | 1 of 1, cached: 1 ✔
+    [4f/8190b1] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [a4/c65a8e] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [4e/7c86bf] collectGreetings      | 1 of 1, cached: 1 ✔
+    [02/81f1ca] cowpy                 | 1 of 1, cached: 1 ✔
 
     Outputs:
 
@@ -477,9 +477,9 @@ nextflow run main.nf -resume
         - batch/intermediates/Celine.txt
 
       translated:
-        - batch/intermediates/es-Mateo.txt
-        - batch/intermediates/es-Raphael.txt
         - batch/intermediates/es-Celine.txt
+        - batch/intermediates/es-Raphael.txt
+        - batch/intermediates/es-Mateo.txt
 
       collected: batch/intermediates/batch-es-greetings.txt
 
@@ -507,9 +507,9 @@ Move the parameter values out of the workflow script.
 
 ## 2. Organize the configuration
 
-With the code in modules, the next step is to organize the configuration: move the parameter values into `nextflow.config`, and add a profile for running with Conda.
+With the code in modules, the next step is to organize the configuration: move the default parameter values into `nextflow.config`, put the test values in a `test` profile, and add a profile for running with Conda.
 
-### 2.1. Move parameter values to the configuration
+### 2.1. Move the default values to the configuration
 
 The workflow script still sets default values for its parameters in the `params` block:
 
@@ -530,7 +530,8 @@ That was convenient while we were developing the workflow, but these values are 
 - `language = 'es'`, `batch = 'batch'` and `character = 'turkey'` are true defaults: sensible values for anyone who runs the pipeline without specifying them.
 - `input = 'data/names.csv'` is a test value: it points to the example data provided with the course, which nobody would want to process by default in a real analysis.
 
-True defaults belong in the `params` section of `nextflow.config`, and test values belong in a `test` profile.
+True defaults belong in the `params` section of `nextflow.config`.
+The test value doesn't belong among them; you'll give it its own place in section 2.2.
 The workflow script keeps the parameter declarations and their types, so it is still easy to see at a glance which parameters the pipeline accepts.
 
 #### 2.1.1. Remove the values from the workflow script
@@ -565,13 +566,114 @@ In the `params` block of the workflow script, make the following code change:
     }
     ```
 
-#### 2.1.2. Add the default values and the test profile to `nextflow.config`
+#### 2.1.2. Add the default values to `nextflow.config`
 
 Open `nextflow.config` and make the following change:
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="3-19"
+    ```groovy title="nextflow.config" linenums="1" hl_lines="3-10"
+    docker.enabled = true
+
+    /*
+     * Pipeline parameters
+     */
+    params {
+        language = 'es'
+        batch = 'batch'
+        character = 'turkey'
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config" linenums="1"
+    docker.enabled = true
+    ```
+
+The `params` section of the configuration file uses `=` to assign values, without types: the types are declared in the workflow script.
+There is no default value for `input`.
+
+#### 2.1.3. Run the workflow without an input file
+
+Try running the workflow the same way as before:
+
+```bash
+nextflow run main.nf -resume
+```
+
+??? failure "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [cheeky_euclid] revision: f1abb39e4d
+
+    Parameter `input` is required but was not specified on the command line, params file, or config
+    ```
+
+Since `input` no longer has a default value, Nextflow stops before running anything and tells you that the parameter is missing.
+`language`, `batch` and `character` did not cause an error, because their default values now come from `nextflow.config`.
+
+The input has no default value on purpose.
+No input file makes sense for every analysis, so whoever runs the pipeline has to say which file to process.
+
+#### 2.1.4. Provide the input file on the command line
+
+Provide the input file with `--input`:
+
+```bash
+nextflow run main.nf --input data/names.csv -resume
+```
+
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [shrivelled_fourier] revision: f1abb39e4d
+
+    [4f/8190b1] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [26/30812b] translateGreeting (1) | 3 of 3, cached: 3 ✔
+    [4e/7c86bf] collectGreetings      | 1 of 1, cached: 1 ✔
+    [02/81f1ca] cowpy                 | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      greetings:
+        - batch/intermediates/Raphael.txt
+        - batch/intermediates/Mateo.txt
+        - batch/intermediates/Celine.txt
+
+      translated:
+        - batch/intermediates/es-Celine.txt
+        - batch/intermediates/es-Mateo.txt
+        - batch/intermediates/es-Raphael.txt
+
+      collected: batch/intermediates/batch-es-greetings.txt
+
+      batch_report: batch/batch-es-report.txt
+
+      cowpy_art: batch/cowpy-batch-es-greetings.txt
+    ```
+
+The parameter values are the same as before, so every task is retrieved from the cache, and the outputs are still published under `results/batch/`.
+
+### 2.2. Create a test profile
+
+Typing the path to the input file every time gets tedious when you run the pipeline repeatedly to test it.
+You may also want test runs to be easy to tell apart from real ones.
+A `test` profile solves both: it bundles a test input file with any other values you want to use for testing, and you activate it with a single option.
+
+#### 2.2.1. Add the profile to `nextflow.config`
+
+In `nextflow.config`, make the following change:
+
+=== "After"
+
+    ```groovy title="nextflow.config" linenums="1" hl_lines="12-21"
     docker.enabled = true
 
     /*
@@ -589,6 +691,8 @@ Open `nextflow.config` and make the following change:
     profiles {
         test {
             params.input = 'data/names.csv'
+            params.batch = 'test'
+            params.character = 'tux'
         }
     }
     ```
@@ -597,34 +701,24 @@ Open `nextflow.config` and make the following change:
 
     ```groovy title="nextflow.config" linenums="1"
     docker.enabled = true
+
+    /*
+     * Pipeline parameters
+     */
+    params {
+        language = 'es'
+        batch = 'batch'
+        character = 'turkey'
+    }
     ```
 
-The `params` section of the configuration file uses `=` to assign values, without types: the types are declared in the workflow script.
+The `test` profile sets `input` to the example data file.
+It also overrides two default values: it names the batch `test`, so test outputs are published to `results/test/`, and it has the ASCII art drawn by the `tux` character.
+When you activate the profile, its values take precedence over the ones in the `params` section.
 
-#### 2.1.3. Run the workflow without the test profile
+#### 2.2.2. Run the workflow with the test profile
 
-Try running the workflow the same way as before:
-
-```bash
-nextflow run main.nf -resume
-```
-
-??? failure "Command output"
-
-    ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `main.nf` [shrivelled_goldberg] revision: f1abb39e4d
-
-    Parameter `input` is required but was not specified on the command line, params file, or config
-    ```
-
-Since `input` no longer has a default value, Nextflow stops before running anything and tells you that the parameter is missing.
-`language`, `batch` and `character` did not cause an error, because their default values now come from `nextflow.config`.
-
-#### 2.1.4. Run the workflow with the test profile
-
-Add `-profile test` to provide the test value for `input`:
+Run the workflow with `-profile test`:
 
 ```bash
 nextflow run main.nf -profile test -resume
@@ -635,53 +729,78 @@ nextflow run main.nf -profile test -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [reverent_tuckerman] revision: f1abb39e4d
+    Launching `main.nf` [sick_bassi] revision: f1abb39e4d
 
-    [28/2c0f08] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [04/a4d382] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [f4/f3bf84] collectGreetings      | 1 of 1, cached: 1 ✔
-    [58/363929] cowpy                 | 1 of 1, cached: 1 ✔
+    executor >  local (2)
+    [4f/8190b1] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [a4/c65a8e] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [26/79001a] collectGreetings      | 1 of 1 ✔
+    [4d/1a509e] cowpy                 | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - batch/intermediates/Celine.txt
-        - batch/intermediates/Mateo.txt
-        - batch/intermediates/Raphael.txt
+        - test/intermediates/Celine.txt
+        - test/intermediates/Mateo.txt
+        - test/intermediates/Raphael.txt
 
       translated:
-        - batch/intermediates/es-Raphael.txt
-        - batch/intermediates/es-Mateo.txt
-        - batch/intermediates/es-Celine.txt
+        - test/intermediates/es-Celine.txt
+        - test/intermediates/es-Raphael.txt
+        - test/intermediates/es-Mateo.txt
 
-      collected: batch/intermediates/batch-es-greetings.txt
+      collected: test/intermediates/test-es-greetings.txt
 
-      batch_report: batch/batch-es-report.txt
+      batch_report: test/test-es-report.txt
 
-      cowpy_art: batch/cowpy-batch-es-greetings.txt
+      cowpy_art: test/cowpy-test-es-greetings.txt
     ```
 
-The parameter values are the same as before, so every task is retrieved from the cache.
+The `sayHello` and `translateGreeting` tasks are retrieved from the cache, because the profile doesn't change their inputs.
+`collectGreetings` and `cowpy` run again, because the batch name and the character changed.
+
+The outputs are published under `results/test/`, separate from the outputs of your earlier runs in `results/batch/`, and the ASCII art is drawn by `tux`:
+
+```console title="results/test/cowpy-test-es-greetings.txt"
+ ________________
+/ Hola, Celine!  \
+| Hola, Raphael! |
+\ Hola, Mateo!   /
+ ----------------
+   \
+    \
+        .--.
+       |o_o |
+       |:_/ |
+      //   \ \
+     (|     | )
+    /'\_   _/`\
+    \___)=(___/
+```
+
+The run shows how the profile combines with the defaults: it supplies the test input, overrides `batch` and `character`, and leaves `language` at its default value, `es`.
 
 From now on, run the workflow with `-profile test`, or provide `--input` on the command line.
 
-### 2.2. Add a `conda` profile
+### 2.3. Add a `conda` profile
 
 In Part 4, you gave the `cowpy` process both a container and a Conda package, and enabled Docker in `nextflow.config`.
 The finished Hello pipeline in Nextflow Run is set up the same way: it uses Docker by default, and provides a `conda` profile to use Conda instead.
 
-#### 2.2.1. Add the profile to `nextflow.config`
+#### 2.3.1. Add the profile to `nextflow.config`
 
 In the `profiles` section of `nextflow.config`, make the following change:
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="15" hl_lines="5-8"
+    ```groovy title="nextflow.config" linenums="15" hl_lines="7-10"
     profiles {
         test {
             params.input = 'data/names.csv'
+            params.batch = 'test'
+            params.character = 'tux'
         }
         conda {
             docker.enabled = false
@@ -696,6 +815,8 @@ In the `profiles` section of `nextflow.config`, make the following change:
     profiles {
         test {
             params.input = 'data/names.csv'
+            params.batch = 'test'
+            params.character = 'tux'
         }
     }
     ```
@@ -703,7 +824,7 @@ In the `profiles` section of `nextflow.config`, make the following change:
 The `conda` profile turns Docker off and turns Conda on.
 Docker stays enabled by default, since the settings in a profile only apply when you activate it.
 
-#### 2.2.2. Run the workflow with the `conda` profile
+#### 2.3.2. Run the workflow with the `conda` profile
 
 Activate both the `test` and `conda` profiles, separating their names with a comma:
 
@@ -716,13 +837,13 @@ nextflow run main.nf -profile test,conda -resume
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [reverent_boltzmann] revision: f1abb39e4d
+    Launching `main.nf` [festering_northcutt] revision: f1abb39e4d
 
     executor >  local (1)
-    [28/2c0f08] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [b6/a64f34] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [f4/f3bf84] collectGreetings      | 1 of 1, cached: 1 ✔
-    [80/da8e76] cowpy                 | 1 of 1 ✔
+    [98/eb25c9] sayHello (3)          | 3 of 3, cached: 3 ✔
+    [99/0b21af] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [26/79001a] collectGreetings      | 1 of 1, cached: 1 ✔
+    [87/dda317] cowpy                 | 1 of 1 ✔
     Creating env using conda: conda-forge::cowpy==1.1.5 [cache /workspaces/training/hello-nextflow/work/conda/env-898314d566668b6587ad714ae06b8520]
 
     Outputs:
@@ -730,20 +851,20 @@ nextflow run main.nf -profile test,conda -resume
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - batch/intermediates/Raphael.txt
-        - batch/intermediates/Celine.txt
-        - batch/intermediates/Mateo.txt
+        - test/intermediates/Mateo.txt
+        - test/intermediates/Celine.txt
+        - test/intermediates/Raphael.txt
 
       translated:
-        - batch/intermediates/es-Raphael.txt
-        - batch/intermediates/es-Mateo.txt
-        - batch/intermediates/es-Celine.txt
+        - test/intermediates/es-Mateo.txt
+        - test/intermediates/es-Raphael.txt
+        - test/intermediates/es-Celine.txt
 
-      collected: batch/intermediates/batch-es-greetings.txt
+      collected: test/intermediates/test-es-greetings.txt
 
-      batch_report: batch/batch-es-report.txt
+      batch_report: test/test-es-report.txt
 
-      cowpy_art: batch/cowpy-batch-es-greetings.txt
+      cowpy_art: test/cowpy-test-es-greetings.txt
     ```
 
 Nextflow creates a Conda environment from the package declared in the `conda` directive of `cowpy`, and runs the task in that environment.
@@ -754,7 +875,8 @@ When you run the workflow without the `conda` profile, it uses Docker again.
 
 ### Takeaway
 
-You know how to separate the parameter declarations in the workflow script from their values in the configuration, keeping true default values in the `params` section and test values in a `test` profile.
+You know how to separate the parameter declarations in the workflow script from their values in the configuration.
+True default values go in the `params` section of `nextflow.config`, and the test input, along with any values that should differ for test runs, goes in a `test` profile.
 You also know how to add a profile that switches the pipeline from Docker to Conda.
 
 Your project now has the standard layout of a Nextflow pipeline, the same as the finished Hello pipeline in [Nextflow Run](../nextflow_run/index.md): `main.nf` holds the entry workflow, `modules/` holds one module file per process, and `nextflow.config` holds the default parameter values and the `test` and `conda` profiles.
@@ -789,10 +911,12 @@ Then run the workflow with both the `test` and `french` profiles, and check that
 
     In `nextflow.config`, add the `french` profile next to the `test` profile:
 
-    ```groovy title="nextflow.config" linenums="15" hl_lines="5-7"
+    ```groovy title="nextflow.config" linenums="15" hl_lines="7-9"
     profiles {
         test {
             params.input = 'data/names.csv'
+            params.batch = 'test'
+            params.character = 'tux'
         }
         french {
             params.language = 'fr'
@@ -813,38 +937,38 @@ Then run the workflow with both the `test` and `french` profiles, and check that
     ```console title="Command output"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [pensive_poincare] revision: f1abb39e4d
+    Launching `main.nf` [insane_carlsson] revision: f1abb39e4d
 
     executor >  local (5)
-    [a8/2163f5] sayHello (2)          | 3 of 3, cached: 3 ✔
-    [35/0d1831] translateGreeting (1) | 3 of 3 ✔
-    [a9/4a6008] collectGreetings      | 1 of 1 ✔
-    [b2/62ff99] cowpy                 | 1 of 1 ✔
+    [4f/8190b1] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [a9/1813fb] translateGreeting (2) | 3 of 3 ✔
+    [6d/3b94a8] collectGreetings      | 1 of 1 ✔
+    [3f/e03d5a] cowpy                 | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - batch/intermediates/Mateo.txt
-        - batch/intermediates/Raphael.txt
-        - batch/intermediates/Celine.txt
+        - test/intermediates/Raphael.txt
+        - test/intermediates/Mateo.txt
+        - test/intermediates/Celine.txt
 
       translated:
-        - batch/intermediates/fr-Celine.txt
-        - batch/intermediates/fr-Raphael.txt
-        - batch/intermediates/fr-Mateo.txt
+        - test/intermediates/fr-Celine.txt
+        - test/intermediates/fr-Raphael.txt
+        - test/intermediates/fr-Mateo.txt
 
-      collected: batch/intermediates/batch-fr-greetings.txt
+      collected: test/intermediates/test-fr-greetings.txt
 
-      batch_report: batch/batch-fr-report.txt
+      batch_report: test/test-fr-report.txt
 
-      cowpy_art: batch/cowpy-batch-fr-greetings.txt
+      cowpy_art: test/cowpy-test-fr-greetings.txt
     ```
 
     The `sayHello` tasks are cached, and the translation runs again in French, followed by the steps that depend on it:
 
-    ```console title="results/batch/intermediates/batch-fr-greetings.txt"
+    ```console title="results/test/intermediates/test-fr-greetings.txt"
     Bonjour, Celine!
     Bonjour, Raphael!
     Bonjour, Mateo!
@@ -853,23 +977,23 @@ Then run the workflow with both the `test` and `french` profiles, and check that
     Since the collected file, the report and the ASCII art are named after the language, the French results are published next to the Spanish ones instead of overwriting them:
 
     ```console title="Directory contents"
-    results/batch
-    ├── batch-es-report.txt
-    ├── batch-fr-report.txt
-    ├── cowpy-batch-es-greetings.txt
-    ├── cowpy-batch-fr-greetings.txt
-    └── intermediates
-        ├── batch-es-greetings.txt
-        ├── batch-fr-greetings.txt
-        ├── Celine.txt
-        ├── es-Celine.txt
-        ├── es-Mateo.txt
-        ├── es-Raphael.txt
-        ├── fr-Celine.txt
-        ├── fr-Mateo.txt
-        ├── fr-Raphael.txt
-        ├── Mateo.txt
-        └── Raphael.txt
+    results/test
+    ├── cowpy-test-es-greetings.txt
+    ├── cowpy-test-fr-greetings.txt
+    ├── intermediates
+    │   ├── Celine.txt
+    │   ├── es-Celine.txt
+    │   ├── es-Mateo.txt
+    │   ├── es-Raphael.txt
+    │   ├── fr-Celine.txt
+    │   ├── fr-Mateo.txt
+    │   ├── fr-Raphael.txt
+    │   ├── Mateo.txt
+    │   ├── Raphael.txt
+    │   ├── test-es-greetings.txt
+    │   └── test-fr-greetings.txt
+    ├── test-es-report.txt
+    └── test-fr-report.txt
     ```
 
 ### Exercise 2: Give each module its own folder
@@ -914,32 +1038,32 @@ modules
     ```console title="Command output"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [condescending_jennings] revision: b5835a4414
+    Launching `main.nf` [zen_lamarr] revision: b5835a4414
 
-    [28/2c0f08] sayHello (1)          | 3 of 3, cached: 3 ✔
-    [04/a4d382] translateGreeting (2) | 3 of 3, cached: 3 ✔
-    [f4/f3bf84] collectGreetings      | 1 of 1, cached: 1 ✔
-    [58/363929] cowpy                 | 1 of 1, cached: 1 ✔
+    [4f/8190b1] sayHello (1)          | 3 of 3, cached: 3 ✔
+    [26/30812b] translateGreeting (2) | 3 of 3, cached: 3 ✔
+    [26/79001a] collectGreetings      | 1 of 1, cached: 1 ✔
+    [4d/1a509e] cowpy                 | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - batch/intermediates/Raphael.txt
-        - batch/intermediates/Mateo.txt
-        - batch/intermediates/Celine.txt
+        - test/intermediates/Celine.txt
+        - test/intermediates/Raphael.txt
+        - test/intermediates/Mateo.txt
 
       translated:
-        - batch/intermediates/es-Celine.txt
-        - batch/intermediates/es-Raphael.txt
-        - batch/intermediates/es-Mateo.txt
+        - test/intermediates/es-Mateo.txt
+        - test/intermediates/es-Celine.txt
+        - test/intermediates/es-Raphael.txt
 
-      collected: batch/intermediates/batch-es-greetings.txt
+      collected: test/intermediates/test-es-greetings.txt
 
-      batch_report: batch/batch-es-report.txt
+      batch_report: test/test-es-report.txt
 
-      cowpy_art: batch/cowpy-batch-es-greetings.txt
+      cowpy_art: test/cowpy-test-es-greetings.txt
     ```
 
     Every task is retrieved from the cache: moving a module to another file doesn't change the work it does.
@@ -1024,7 +1148,7 @@ Where should the path to the example input data used for testing go?
 - [ ] In the `params` section of `nextflow.config`
 - [ ] In the module that uses it
 
-Learn more: [2.1. Move parameter values to the configuration](#21-move-parameter-values-to-the-configuration)
+Learn more: [2.2. Create a test profile](#22-create-a-test-profile)
 </quiz>
 
 <quiz>
@@ -1034,5 +1158,5 @@ What does the `conda` profile in `nextflow.config` do when you activate it?
 - [x] It disables Docker and enables Conda, so processes use their `conda` packages instead of their containers
 - [ ] It installs Conda in your environment
 
-Learn more: [2.2. Add a `conda` profile](#22-add-a-conda-profile)
+Learn more: [2.3. Add a `conda` profile](#23-add-a-conda-profile)
 </quiz>
