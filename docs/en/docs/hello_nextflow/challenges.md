@@ -20,7 +20,7 @@ nextflow run solutions/challenges/challenge-2/hello-challenge.nf
 
 ---
 
-## Challenge 1: Read a CSV file with a header row
+## Challenge 1: Read CSV columns by name, using a header row
 
 Start from `hello-channels.nf` as it stands at the end of Part 2:
 
@@ -95,7 +95,7 @@ The workflow should still greet the same three names.
 
 ---
 
-## Challenge 2: Greet only the French names
+## Challenge 2: Filter channel contents to greet only the French names
 
 Start from `hello-channels.nf` as it stands at the end of Part 2:
 
@@ -146,7 +146,7 @@ Only one greeting file should be produced.
 
 ---
 
-## Challenge 3: Translate each name into its own language
+## Challenge 3: Use tuples to greet each name in its own language
 
 Start from `hello-workflow.nf` as it stands at the end of Part 3:
 
@@ -274,7 +274,7 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
 
 ---
 
-## Challenge 4: Give each name its own character
+## Challenge 4: Use tuples across modules to give each name its own character
 
 Start from `main.nf` and its modules as they stand at the end of Part 5:
 
@@ -476,7 +476,7 @@ Keep the collected file and the report as they are.
 
 ---
 
-## Challenge 5: Make the workflow composable
+## Challenge 5: Compose workflows by moving steps into a subworkflow
 
 Start from `main.nf` as it stands at the end of Part 5:
 
@@ -644,7 +644,7 @@ The entry workflow in `hello-challenge.nf` then calls `GREET`, passes the collec
 
 ---
 
-## Challenge 6: Translate into two languages in one run
+## Challenge 6: Reuse a process with an alias to translate into two languages
 
 Start from `main.nf` as it stands at the end of Part 5:
 
