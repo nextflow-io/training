@@ -5,6 +5,8 @@
  */
 process sayHello {
 
+    tag "${name}"
+
     input:
     val name
 
@@ -21,6 +23,8 @@ process sayHello {
  * Use Python to translate the greeting into another language
  */
 process translateGreeting {
+
+    tag "${language}-${input_file}"
 
     input:
     path input_file
@@ -60,6 +64,8 @@ process translateGreeting {
  * Collect translated greetings into a single output file
  */
 process collectGreetings {
+
+    tag "${batch_name}"
 
     input:
     path input_files

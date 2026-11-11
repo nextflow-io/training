@@ -3,6 +3,8 @@
  */
 process sayHello {
 
+    tag "${name}"
+
     input:
     tuple val(name), val(character)
 

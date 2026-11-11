@@ -668,9 +668,101 @@ Success! Now we can add as many names as we like without worrying about output f
     The metadata is typically provided via a 'sample sheet' or equivalents.
     You'll learn how to do that later in your Nextflow training (see [Metadata side quest](../side_quests/metadata/index.md)).
 
+### 2.3. Tag each task with its input
+
+When a process runs several tasks, the console identifies them as `sayHello (1)`, `sayHello (2)` and `sayHello (3)`.
+Those numbers don't tell you which input each task processed.
+
+The [`tag`](https://nextflow.io/docs/latest/reference/process.html#tag) directive gives each task a label.
+Nextflow shows that label next to the process name in the console output, in the `-ansi-log false` output and in error messages, which helps you find the task that failed when something goes wrong.
+
+#### 2.3.1. Add a tag to the process
+
+A directive is a setting in the process definition that controls how Nextflow runs its tasks.
+Directives go at the top of the process body, before the `input:` block.
+
+In the process block, make the following code change:
+
+=== "After"
+
+    ```groovy title="hello-channels.nf" linenums="6" hl_lines="3"
+    process sayHello {
+
+        tag "${name}"
+
+        input:
+        val name
+
+        output:
+        path "${name}.txt"
+
+        script:
+        """
+        echo 'Hello, ${name}!' > '${name}.txt'
+        """
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="hello-channels.nf" linenums="6"
+    process sayHello {
+
+        input:
+        val name
+
+        output:
+        path "${name}.txt"
+
+        script:
+        """
+        echo 'Hello, ${name}!' > '${name}.txt'
+        """
+    }
+    ```
+
+The tag uses the `name` input, so each task is labeled with the name it greets.
+Like the output file name, it needs double quotes.
+
+#### 2.3.2. Run the workflow
+
+Run the workflow with `-ansi-log false` to see one line per task:
+
+```bash
+nextflow run hello-channels.nf -ansi-log false
+```
+
+??? success "Command output"
+
+    ```console hl_lines="6-8"
+    N E X T F L O W  ~  version 26.04.4
+    Launching `hello-channels.nf` [naughty_goldberg] - revision: 65cf1a89b7
+    Mateo
+    Raphael
+    Celine
+    [dd/5ec36b] Submitted process > sayHello (Mateo)
+    [8d/a35cd3] Submitted process > sayHello (Celine)
+    [e6/5f0829] Submitted process > sayHello (Raphael)
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      greetings:
+        - hello/Mateo.txt
+        - hello/Celine.txt
+        - hello/Raphael.txt
+    ```
+
+Each task is now labeled with the name it processed.
+In the default view, the summary line shows the tag of the most recent task, for example `sayHello (Mateo)`.
+
+The tag is only a label: it doesn't change what the task does.
+It doesn't affect caching either: running the workflow with `-resume` right after adding the tag reuses all three cached tasks.
+
 ### Takeaway
 
-You know how to feed multiple input elements through a channel.
+You know how to feed multiple input elements through a channel, and how to tag each task with its input.
 
 ### What's next?
 
@@ -706,7 +798,7 @@ Let's take the `names_array` variable we just imagined and make it a reality by 
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="4 5"
+    ```groovy title="hello-channels.nf" linenums="29" hl_lines="4 5"
     workflow {
 
         main:
@@ -725,7 +817,7 @@ Let's take the `names_array` variable we just imagined and make it a reality by 
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="27"
+    ```groovy title="hello-channels.nf" linenums="29"
     workflow {
 
         main:
@@ -750,7 +842,7 @@ In the workflow block, make the following change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    ```groovy title="hello-channels.nf" linenums="29" hl_lines="7"
     workflow {
 
         main:
@@ -769,7 +861,7 @@ In the workflow block, make the following change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    ```groovy title="hello-channels.nf" linenums="29" hl_lines="7"
     workflow {
 
         main:
@@ -801,15 +893,15 @@ nextflow run hello-channels.nf
     ```console hl_lines="7 11 16"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [happy_dijkstra] revision: 5539b2ee39
+    Launching `hello-channels.nf` [fervent_hypatia] revision: 5fc69e8e12
 
     executor >  local (1)
-    [d2/7d5016] sayHello (1) | 0 of 1 ✘
+    [f5/a168e9] sayHello ([Mateo, Raphael, Celine]) | 0 of 1 ✘
     [Mateo, Raphael, Celine]
-    ERROR ~ Error executing process > 'sayHello (1)'
+    ERROR ~ Error executing process > 'sayHello ([Mateo, Raphael, Celine])'
 
     Caused by:
-      Missing output file(s) `[Mateo, Raphael, Celine].txt` expected by process `sayHello (1)`
+      Missing output file(s) `[Mateo, Raphael, Celine].txt` expected by process `sayHello ([Mateo, Raphael, Celine])`
 
 
     Command executed:
@@ -823,9 +915,9 @@ nextflow run hello-channels.nf
       (empty)
 
     Work dir:
-      /workspaces/training/hello-nextflow/work/d2/7d5016c135c10e18df126e658ac26b
+      /workspaces/training/hello-nextflow/work/f5/a168e911988fe282771719ea39dacf
 
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
 
     -- Check '.nextflow.log' file for details
     ```
@@ -835,6 +927,7 @@ Oh no! There's an error!
 Look at the output of `view()` and the error messages.
 
 It looks like Nextflow tried to run a single process call, using `[Mateo, Raphael, Celine]` as a single string value, instead of using the three strings in the array as separate values.
+The task's tag in the error message, `sayHello ([Mateo, Raphael, Celine])`, shows the same thing.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
@@ -859,7 +952,7 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="9"
+    ```groovy title="hello-channels.nf" linenums="29" hl_lines="9"
     workflow {
 
         main:
@@ -879,7 +972,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="27"
+    ```groovy title="hello-channels.nf" linenums="29"
     workflow {
 
         main:
@@ -913,7 +1006,7 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="8-10"
+    ```groovy title="hello-channels.nf" linenums="29" hl_lines="8-10"
     workflow {
 
         main:
@@ -934,7 +1027,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="8"
+    ```groovy title="hello-channels.nf" linenums="29" hl_lines="8"
     workflow {
 
         main:
@@ -982,10 +1075,10 @@ nextflow run hello-channels.nf
     ```console hl_lines="7-10"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [stupefied_wing] revision: 4d592f7b48
+    Launching `hello-channels.nf` [amazing_varahamihira] revision: 1bec79ebf8
 
     executor >  local (3)
-    [25/82982d] sayHello (2) | 3 of 3 ✔
+    [29/1adbca] sayHello (Celine) | 3 of 3 ✔
     Before flatten: [Mateo, Raphael, Celine]
     After flatten: Mateo
     After flatten: Raphael
@@ -996,9 +1089,9 @@ nextflow run hello-channels.nf
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - hello/Mateo.txt
         - hello/Celine.txt
         - hello/Raphael.txt
+        - hello/Mateo.txt
     ```
 
 This time it works AND gives us the additional insight into what the contents of the channel look like before and after we run the `flatten()` operator.
@@ -1065,7 +1158,7 @@ Make the following edit to the parameter declaration:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
+    ```groovy title="hello-channels.nf" linenums="22" hl_lines="5"
     /*
      * Pipeline parameters
      */
@@ -1076,7 +1169,7 @@ Make the following edit to the parameter declaration:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
+    ```groovy title="hello-channels.nf" linenums="22" hl_lines="5"
     /*
      * Pipeline parameters
      */
@@ -1097,7 +1190,7 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="4-8"
+    ```groovy title="hello-channels.nf" linenums="29" hl_lines="4-8"
     workflow {
 
         main:
@@ -1116,7 +1209,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="4-10"
+    ```groovy title="hello-channels.nf" linenums="29" hl_lines="4-10"
     workflow {
 
         main:
@@ -1151,14 +1244,14 @@ nextflow run hello-channels.nf
     ```console hl_lines="5 6 10 15"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [exotic_plateau] revision: 8a8ed28d3c
+    Launching `hello-channels.nf` [loving_shockley] revision: a9490e09be
 
     [-        ] sayHello | 0 of 1
     Before flatten: /workspaces/training/hello-nextflow/data/names.csv
-    ERROR ~ Error executing process > 'sayHello (1)'
+    ERROR ~ Error executing process > 'sayHello (/workspaces/training/hello-nextflow/data/names.csv)'
 
     Caused by:
-      File `/workspaces/training/hello-nextflow/data/names.csv.txt` is outside the scope of the process work directory: /workspaces/training/hello-nextflow/work/df/d3e28a682956a3e686acf8d4f5ee9d
+      File `/workspaces/training/hello-nextflow/data/names.csv.txt` is outside the scope of the process work directory: /workspaces/training/hello-nextflow/work/4c/a91833ecefd0f369b9c5591ccd0b96
 
 
     Command executed:
@@ -1172,9 +1265,9 @@ nextflow run hello-channels.nf
       (empty)
 
     Work dir:
-      /workspaces/training/hello-nextflow/work/df/d3e28a682956a3e686acf8d4f5ee9d
+      /workspaces/training/hello-nextflow/work/4c/a91833ecefd0f369b9c5591ccd0b96
 
-    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
     -- Check '.nextflow.log' file for details
     ```
@@ -1202,7 +1295,7 @@ In the workflow block, make the following code change to replace `flatten()` wit
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="6-8"
+    ```groovy title="hello-channels.nf" linenums="29" hl_lines="6-8"
     workflow {
 
         main:
@@ -1221,7 +1314,7 @@ In the workflow block, make the following code change to replace `flatten()` wit
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="6-8"
+    ```groovy title="hello-channels.nf" linenums="29" hl_lines="6-8"
     workflow {
 
         main:
@@ -1254,23 +1347,23 @@ nextflow run hello-channels.nf
     ```console hl_lines="7-10 14 19"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [elegant_brown] revision: fe77324844
+    Launching `hello-channels.nf` [evil_thompson] revision: 564e4b18bf
 
     executor >  local (3)
-    [46/9ce81d] sayHello (3) | 0 of 3 ✘
+    [bf/9aa4bc] sayHello ([Raphael, it, turtle]) | 0 of 3 ✘
     Before splitCsv: /workspaces/training/hello-nextflow/data/names.csv
     After splitCsv: [Mateo, es, squirrel]
     After splitCsv: [Raphael, it, turtle]
     After splitCsv: [Celine, fr, moose]
-    ERROR ~ Error executing process > 'sayHello (3)'
+    ERROR ~ Error executing process > 'sayHello ([Mateo, es, squirrel])'
 
     Caused by:
-      Missing output file(s) `[Celine, fr, moose].txt` expected by process `sayHello (3)`
+      Missing output file(s) `[Mateo, es, squirrel].txt` expected by process `sayHello ([Mateo, es, squirrel])`
 
 
     Command executed:
 
-      echo 'Hello, [Celine, fr, moose]!' > '[Celine, fr, moose].txt'
+      echo 'Hello, [Mateo, es, squirrel]!' > '[Mateo, es, squirrel].txt'
 
     Command exit status:
       0
@@ -1279,7 +1372,7 @@ nextflow run hello-channels.nf
       (empty)
 
     Work dir:
-      /workspaces/training/hello-nextflow/work/46/9ce81d06e91d7dbfae4eb960c11a91
+      /workspaces/training/hello-nextflow/work/a0/d3170d053b091e8393c904e7b15936
 
     Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 
@@ -1321,7 +1414,7 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="9 10"
+    ```groovy title="hello-channels.nf" linenums="29" hl_lines="9 10"
     workflow {
 
         main:
@@ -1342,7 +1435,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="27"
+    ```groovy title="hello-channels.nf" linenums="29"
     workflow {
 
         main:
@@ -1374,10 +1467,10 @@ nextflow run hello-channels.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [nauseous_jones] revision: 289cdedebd
+    Launching `hello-channels.nf` [crazy_stonebraker] revision: ea94eda94c
 
     executor >  local (3)
-    [7a/74aa8d] sayHello (2) | 3 of 3 ✔
+    [88/9058d5] sayHello (Mateo) | 3 of 3 ✔
     Before splitCsv: /workspaces/training/hello-nextflow/data/names.csv
     After splitCsv: [Mateo, es, squirrel]
     After splitCsv: [Raphael, it, turtle]
@@ -1501,7 +1594,7 @@ Copy it to `hello-bug.nf`, run it to see the problem, then find the cause and fi
 
     Add `view()` statements after `splitCsv()` and after `map()`:
 
-    ```groovy title="hello-bug.nf" linenums="31" hl_lines="3 5"
+    ```groovy title="hello-bug.nf" linenums="33" hl_lines="3 5"
         name_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .view { row -> "After splitCsv: $row" }
@@ -1531,7 +1624,7 @@ Copy it to `hello-bug.nf`, run it to see the problem, then find the cause and fi
 
     === "After"
 
-        ```groovy title="hello-bug.nf" linenums="31" hl_lines="4"
+        ```groovy title="hello-bug.nf" linenums="33" hl_lines="4"
             name_ch = channel.fromPath(params.input)
                                 .splitCsv()
                                 .view { row -> "After splitCsv: $row" }
@@ -1541,7 +1634,7 @@ Copy it to `hello-bug.nf`, run it to see the problem, then find the cause and fi
 
     === "Before"
 
-        ```groovy title="hello-bug.nf" linenums="31" hl_lines="4"
+        ```groovy title="hello-bug.nf" linenums="33" hl_lines="4"
             name_ch = channel.fromPath(params.input)
                                 .splitCsv()
                                 .view { row -> "After splitCsv: $row" }

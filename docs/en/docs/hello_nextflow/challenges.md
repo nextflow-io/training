@@ -61,7 +61,7 @@ The workflow should still greet the same three names.
 
     Point the `input` parameter to the new file:
 
-    ```groovy title="hello-challenge.nf" linenums="23" hl_lines="2"
+    ```groovy title="hello-challenge.nf" linenums="25" hl_lines="2"
     params {
         input: Path = 'data/names-header.csv'
     }
@@ -69,7 +69,7 @@ The workflow should still greet the same three names.
 
     Then parse the header and pick the column by name:
 
-    ```groovy title="hello-challenge.nf" linenums="31" hl_lines="3 5"
+    ```groovy title="hello-challenge.nf" linenums="33" hl_lines="3 5"
         name_ch = channel.fromPath(params.input)
                             .view { csv -> "Before splitCsv: $csv" }
                             .splitCsv(header: true)
@@ -126,7 +126,7 @@ Only one greeting file should be produced.
 
     Add a `filter()` step between `splitCsv()` and `map()`, while each row still holds all its columns:
 
-    ```groovy title="hello-challenge.nf" linenums="31" hl_lines="5"
+    ```groovy title="hello-challenge.nf" linenums="33" hl_lines="5"
         name_ch = channel.fromPath(params.input)
                             .view { csv -> "Before splitCsv: $csv" }
                             .splitCsv()
@@ -143,7 +143,7 @@ Only one greeting file should be produced.
     ```
 
     ```console title="Output (excerpt)"
-    [3f/9c1f02] sayHello (1) | 1 of 1 ✔
+    [b3/4be621] sayHello (Celine) | 1 of 1 ✔
     Before splitCsv: /workspaces/training/hello-nextflow/data/names.csv
     After splitCsv: [Mateo, es, squirrel]
     After splitCsv: [Raphael, it, turtle]
@@ -191,8 +191,10 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
 
     Make `sayHello` accept the pair and pass the language along with its output:
 
-    ```groovy title="hello-challenge.nf" linenums="6" hl_lines="4 7"
+    ```groovy title="hello-challenge.nf" linenums="6" hl_lines="6 9"
     process sayHello {
+
+        tag "${name}"
 
         input:
         tuple val(name), val(language)
@@ -203,14 +205,14 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
 
     Make `translateGreeting` take that pair as a single input:
 
-    ```groovy title="hello-challenge.nf" linenums="25" hl_lines="2"
+    ```groovy title="hello-challenge.nf" linenums="29" hl_lines="2"
         input:
         tuple path(input_file), val(language)
     ```
 
     In the workflow, keep both columns in the channel, call `translateGreeting` with the output of `sayHello` alone, and give `collectGreetings` a fixed language label:
 
-    ```groovy title="hello-challenge.nf" linenums="90" hl_lines="1-2 4 6-8 10"
+    ```groovy title="hello-challenge.nf" linenums="96" hl_lines="1-2 4 6-8 10"
         // create a channel of [name, language] pairs from a CSV file
         person_ch = channel.fromPath(params.input)
                             .splitCsv()
@@ -229,7 +231,7 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
 
     `sayHello` now emits pairs, so publish only the file from each pair:
 
-    ```groovy title="hello-challenge.nf" linenums="101" hl_lines="2"
+    ```groovy title="hello-challenge.nf" linenums="107" hl_lines="2"
         publish:
         greetings = sayHello.out.map { greeting_file, _language -> greeting_file }
     ```
@@ -247,12 +249,12 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
         ```console
         N E X T F L O W   ~  version 26.04.4
 
-        Launching `hello-challenge.nf` [spontaneous_avogadro] revision: a822eaf8ec
+        Launching `hello-challenge.nf` [tiny_stonebraker] revision: 45bd8a8a20
 
         executor >  local (7)
-        [04/fd2c8b] sayHello (1)          | 3 of 3 ✔
-        [62/668f35] translateGreeting (1) | 3 of 3 ✔
-        [cf/c8206c] collectGreetings      | 1 of 1 ✔
+        [db/a508b3] sayHello (Raphael)                 | 3 of 3 ✔
+        [dc/1ace3b] translateGreeting (it-Raphael.txt) | 3 of 3 ✔
+        [22/e69199] collectGreetings (mixed)           | 1 of 1 ✔
 
         Outputs:
 
@@ -264,9 +266,9 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
             - mixed/intermediates/Raphael.txt
 
           translated:
+            - mixed/intermediates/es-Mateo.txt
             - mixed/intermediates/fr-Celine.txt
             - mixed/intermediates/it-Raphael.txt
-            - mixed/intermediates/es-Mateo.txt
 
           collected: mixed/intermediates/mixed-native-greetings.txt
 
@@ -359,7 +361,7 @@ Keep the collected file and the report as they are.
 
     In the modules in `challenge-modules/`, the inputs and outputs carry the character alongside the file:
 
-    ```groovy title="challenge-modules/sayHello.nf" linenums="6" hl_lines="2 5"
+    ```groovy title="challenge-modules/sayHello.nf" linenums="8" hl_lines="2 5"
         input:
         tuple val(name), val(character)
 
@@ -367,7 +369,7 @@ Keep the collected file and the report as they are.
         tuple path("${name}.txt"), val(character)
     ```
 
-    ```groovy title="challenge-modules/translateGreeting.nf" linenums="6" hl_lines="2 6"
+    ```groovy title="challenge-modules/translateGreeting.nf" linenums="8" hl_lines="2 6"
         input:
         tuple path(input_file), val(character)
         val language
@@ -376,7 +378,7 @@ Keep the collected file and the report as they are.
         tuple path("${language}-${input_file}"), val(character)
     ```
 
-    ```groovy title="challenge-modules/cowpy.nf" linenums="9" hl_lines="2"
+    ```groovy title="challenge-modules/cowpy.nf" linenums="11" hl_lines="2"
         input:
         tuple path(input_file), val(character)
     ```
@@ -392,35 +394,35 @@ Keep the collected file and the report as they are.
         ```console
         N E X T F L O W   ~  version 26.04.4
 
-        Launching `hello-challenge.nf` [disturbed_stonebraker] revision: 987e9b3a29
+        Launching `hello-challenge.nf` [nice_meninsky] revision: 987e9b3a29
 
         executor >  local (10)
-        [cd/04bc7d] sayHello (2)          | 3 of 3 ✔
-        [38/b93a35] translateGreeting (3) | 3 of 3 ✔
-        [96/aa2a12] collectGreetings      | 1 of 1 ✔
-        [ec/b3710e] cowpy (3)             | 3 of 3 ✔
+        [bb/310fae] sayHello (Mateo)                  | 3 of 3 ✔
+        [e3/265804] translateGreeting (es-Mateo.txt)  | 3 of 3 ✔
+        [57/bca6b4] collectGreetings (test)           | 1 of 1 ✔
+        [aa/13c331] cowpy (turtle)                    | 3 of 3 ✔
 
         Outputs:
 
           /workspaces/training/hello-nextflow/results
 
           greetings:
-            - test/intermediates/Mateo.txt
             - test/intermediates/Celine.txt
             - test/intermediates/Raphael.txt
+            - test/intermediates/Mateo.txt
 
           translated:
             - test/intermediates/es-Celine.txt
-            - test/intermediates/es-Mateo.txt
             - test/intermediates/es-Raphael.txt
+            - test/intermediates/es-Mateo.txt
 
           collected: test/intermediates/test-es-greetings.txt
 
           batch_report: test/test-es-report.txt
 
           cowpy_art:
-            - test/cowpy-es-Mateo.txt
             - test/cowpy-es-Celine.txt
+            - test/cowpy-es-Mateo.txt
             - test/cowpy-es-Raphael.txt
         ```
 
@@ -615,13 +617,13 @@ The entry workflow in `hello-challenge.nf` then calls `GREET`, passes the collec
         ```console
         N E X T F L O W   ~  version 26.04.4
 
-        Launching `hello-challenge.nf` [romantic_lavoisier] revision: 60ca931fc8
+        Launching `hello-challenge.nf` [sleepy_euler] revision: 60ca931fc8
 
         executor >  local (8)
-        [af/bfca39] GREET:sayHello (1)          | 3 of 3 ✔
-        [ef/595f11] GREET:translateGreeting (3) | 3 of 3 ✔
-        [74/8d690f] GREET:collectGreetings      | 1 of 1 ✔
-        [d0/0236db] cowpy                       | 1 of 1 ✔
+        [86/2ab589] GREET:sayHello (Raphael)                | 3 of 3 ✔
+        [24/7927ad] GREET:translateGreeting (es-Celine.txt) | 3 of 3 ✔
+        [26/cfb209] GREET:collectGreetings (test)           | 1 of 1 ✔
+        [ac/e5e1e5] cowpy (tux)                             | 1 of 1 ✔
 
         Outputs:
 
@@ -634,8 +636,8 @@ The entry workflow in `hello-challenge.nf` then calls `GREET`, passes the collec
 
           translated:
             - test/intermediates/es-Raphael.txt
-            - test/intermediates/es-Mateo.txt
             - test/intermediates/es-Celine.txt
+            - test/intermediates/es-Mateo.txt
 
           collected: test/intermediates/test-es-greetings.txt
 
@@ -797,24 +799,24 @@ Keep `cowpy` on the greetings in the first language.
         ```console
         N E X T F L O W   ~  version 26.04.4
 
-        Launching `hello-challenge.nf` [jovial_marconi] revision: 72805d564b
+        Launching `hello-challenge.nf` [irreverent_linnaeus] revision: 72805d564b
 
         executor >  local (12)
-        [cc/272efd] sayHello (1)          | 3 of 3 ✔
-        [c2/4b2b04] translateGreeting (1) | 3 of 3 ✔
-        [da/4d2f05] collectGreetings      | 1 of 1 ✔
-        [1a/fd2576] translateSecond (3)   | 3 of 3 ✔
-        [33/7c130b] collectSecond         | 1 of 1 ✔
-        [2e/f89690] cowpy                 | 1 of 1 ✔
+        [e3/2c1384] sayHello (Mateo)                  | 3 of 3 ✔
+        [32/f9e167] translateGreeting (es-Mateo.txt)  | 3 of 3 ✔
+        [66/df0569] collectGreetings (test)           | 1 of 1 ✔
+        [a4/40b5f2] translateSecond (fr-Mateo.txt)    | 3 of 3 ✔
+        [03/75f3b5] collectSecond (test)              | 1 of 1 ✔
+        [93/7968e6] cowpy (tux)                       | 1 of 1 ✔
 
         Outputs:
 
           /workspaces/training/hello-nextflow/results
 
           greetings:
-            - test/intermediates/Mateo.txt
             - test/intermediates/Celine.txt
             - test/intermediates/Raphael.txt
+            - test/intermediates/Mateo.txt
 
           translated:
             - test/intermediates/es-Raphael.txt
@@ -829,8 +831,8 @@ Keep `cowpy` on the greetings in the first language.
 
           translated_second:
             - test/intermediates/fr-Celine.txt
-            - test/intermediates/fr-Mateo.txt
             - test/intermediates/fr-Raphael.txt
+            - test/intermediates/fr-Mateo.txt
 
           collected_second: test/intermediates/test-fr-greetings.txt
 

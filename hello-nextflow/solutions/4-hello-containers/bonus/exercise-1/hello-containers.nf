@@ -5,6 +5,8 @@
  */
 process sayHello {
 
+    tag "${name}"
+
     input:
     val name
 
@@ -21,6 +23,8 @@ process sayHello {
  * Use Python to translate the greeting into another language
  */
 process translateGreeting {
+
+    tag "${language}-${input_file}"
 
     container 'python:3.12-slim'
 
@@ -62,6 +66,8 @@ process translateGreeting {
  */
 process collectGreetings {
 
+    tag "${batch_name}"
+
     input:
     path input_files
     val batch_name
@@ -83,6 +89,8 @@ process collectGreetings {
  * Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
  */
 process cowpy {
+
+    tag "${character}"
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
     conda 'conda-forge::cowpy==1.1.5'

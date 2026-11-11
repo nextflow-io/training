@@ -3,6 +3,8 @@
  */
 process collectGreetings {
 
+    tag "${batch_name}"
+
     input:
     path input_files
     val batch_name
