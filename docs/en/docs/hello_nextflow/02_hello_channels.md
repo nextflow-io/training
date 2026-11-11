@@ -1583,10 +1583,10 @@ Copy it to `hello-bug.nf`, run it to see the problem, then find the cause and fi
 
 <quiz>
 What is a channel in Nextflow?
-- [ ] A file path specification
-- [ ] A process definition
-- [x] A queue-like structure for passing data between processes
 - [ ] A configuration setting
+- [x] A queue-like structure for passing data between processes
+- [ ] A process definition
+- [ ] A file path specification
 
 Learn more: [1.1. Create an input channel](#11-create-an-input-channel)
 </quiz>
@@ -1599,20 +1599,20 @@ channel.of('Mateo', 'Raphael', 'Celine')
     .view()
 ```
 
-- [ ] `['Mateo', 'Raphael', 'Celine']` (a single list)
-- [x] Each element on a separate line: `Mateo`, `Raphael`, `Celine`
-- [ ] Nothing (channels don't print by default)
 - [ ] An error (invalid syntax)
+- [ ] Nothing (channels don't print by default)
+- [x] Each element on a separate line: `Mateo`, `Raphael`, `Celine`
+- [ ] `['Mateo', 'Raphael', 'Celine']` (a single list)
 
-Learn more: [1.1. Create an input channel](#11-create-an-input-channel)
+Learn more: [2.1.2. Run the command and look at the log output](#212-run-the-command-and-look-at-the-log-output)
 </quiz>
 
 <quiz>
 When a channel contains multiple values, how does Nextflow handle process execution?
-- [ ] The process runs once with all values
 - [x] The process runs once for each value in the channel
 - [ ] The process runs only with the first value
 - [ ] The process runs only with the last value
+- [ ] The process runs once with all values
 
 Learn more: [2. Modify the workflow to run on multiple input values](#2-modify-the-workflow-to-run-on-multiple-input-values)
 </quiz>
@@ -1629,20 +1629,20 @@ Learn more: [3.2.1. Add the `flatten()` operator](#321-add-the-flatten-operator)
 
 <quiz>
 What is the purpose of the `view()` operator?
-- [ ] To filter channel contents
-- [ ] To transform channel elements
-- [x] To inspect and debug channel contents
 - [ ] To save channel contents to a file
+- [ ] To transform channel elements
+- [ ] To filter channel contents
+- [x] To inspect and debug channel contents
 
 Learn more: [1.4. Use `view()` to inspect the channel contents](#14-use-view-to-inspect-the-channel-contents)
 </quiz>
 
 <quiz>
 What does `splitCsv()` do?
-- [ ] Creates a CSV file from channel contents
-- [ ] Splits a string by commas
 - [x] Parses a CSV file into arrays representing each row
 - [ ] Merges multiple CSV files
+- [ ] Creates a CSV file from channel contents
+- [ ] Splits a string by commas
 
 Learn more: [4.2. Use the `splitCsv()` operator to parse the file](#42-use-the-splitcsv-operator-to-parse-the-file)
 </quiz>
@@ -1651,18 +1651,18 @@ Learn more: [4.2. Use the `splitCsv()` operator to parse the file](#42-use-the-s
 What is the purpose of the `map()` operator?
 - [ ] To filter elements from a channel
 - [ ] To combine multiple channels
-- [x] To transform each element in a channel
 - [ ] To count elements in a channel
+- [x] To transform each element in a channel
 
 Learn more: [4.3. Use the `map()` operator to extract the names](#43-use-the-map-operator-to-extract-the-names)
 </quiz>
 
 <quiz>
 Why is it important to use dynamic output filenames when processing multiple inputs?
-- [ ] To improve performance
-- [ ] To reduce disk space
-- [x] To prevent output files from overwriting each other
 - [ ] To enable resume functionality
+- [x] To prevent output files from overwriting each other
+- [ ] To reduce disk space
+- [ ] To improve performance
 
 Learn more: [2.2. Ensure the output file names will be unique](#22-ensure-the-output-file-names-will-be-unique)
 </quiz>
