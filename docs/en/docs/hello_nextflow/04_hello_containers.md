@@ -611,12 +611,6 @@ In the `output` block, make the following code change:
 
 #### 2.2.4. Run the workflow
 
-Just to recap, this is what we are aiming for:
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
-</figure>
-
 Do you think it's going to work?
 
 Let's delete the previous published outputs to have a clean slate, and run the workflow with the `-resume` flag.
@@ -1090,6 +1084,12 @@ In Part 5, you will add a profile that switches the pipeline to Conda.
 ### Takeaway
 
 You know how to use containers in Nextflow to run processes, and how to declare a Conda package as an alternative.
+
+The pipeline is now complete, with all four steps:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
+</figure>
 
 ### What's next?
 
