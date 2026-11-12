@@ -18,15 +18,15 @@ workflow {
 
     main:
     // emit a greeting
-    sayHello()
+    greeting = sayHello()
 
     publish:
-    first_output = sayHello.out
+    greetings = greeting
 }
 
 output {
-    first_output {
-        path 'hello_world'
+    greetings {
+        path 'hello'
         mode 'copy'
     }
 }

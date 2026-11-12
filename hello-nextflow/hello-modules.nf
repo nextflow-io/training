@@ -1,57 +1,108 @@
 #!/usr/bin/env nextflow
 
 /*
- * Use echo to print 'Hello World!' to a file
+ * Use echo to print a greeting to a file
  */
 process sayHello {
 
+    tag "${name}"
+
     input:
-    val greeting
+    val name
 
     output:
-    path "${greeting}-output.txt"
+    path "${name}.txt"
 
     script:
     """
-    echo '${greeting}' > '${greeting}-output.txt'
+    echo 'Hello, ${name}!' > '${name}.txt'
     """
 }
 
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Use Python to translate the greeting into another language
  */
-process convertToUpper {
+process translateGreeting {
+
+    tag "${language}-${input_file}"
 
     input:
     path input_file
+    val language
 
     output:
-    path "UPPER-${input_file}"
+    path "${language}-${input_file}"
 
     script:
     """
-    cat ${input_file} | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
+    #!/usr/bin/env python3
+    import sys
+
+    translations = {
+        'es': 'Hola',        # Spanish
+        'fr': 'Bonjour',     # French
+        'it': 'Ciao',        # Italian
+        'nl': 'Hallo',       # Dutch
+        'ar': 'Marhaban',    # Arabic
+        'ja': 'Konnichiwa',  # Japanese
+        'en': 'Hello',       # English
+    }
+
+    if '${language}' not in translations:
+        sys.exit('Unsupported language code: ${language}')
+
+    with open('${input_file}') as greeting_file:
+        greeting = greeting_file.read()
+
+    with open('${language}-${input_file}', 'w') as translated_file:
+        translated_file.write(greeting.replace('Hello', translations['${language}']))
     """
 }
 
 /*
- * Collect uppercase greetings into a single output file
+ * Collect translated greetings into a single output file
  */
 process collectGreetings {
+
+    tag "${batch_name}"
 
     input:
     path input_files
     val batch_name
+    val language
 
     output:
-    path "COLLECTED-${batch_name}-output.txt", emit: outfile
-    path "${batch_name}-report.txt", emit: report
+    path "${batch_name}-${language}-greetings.txt", emit: outfile
+    path "${batch_name}-${language}-report.txt", emit: report
 
     script:
     count_greetings = input_files.size()
     """
-    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-    echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
+    cat ${input_files} > '${batch_name}-${language}-greetings.txt'
+    echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-${language}-report.txt'
+    """
+}
+
+/*
+ * Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+ */
+process cowpy {
+
+    tag "${character}"
+
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    conda 'conda-forge::cowpy==1.1.5'
+
+    input:
+    path input_file
+    val character
+
+    output:
+    path "cowpy-${input_file}"
+
+    script:
+    """
+    cat ${input_file} | cowpy -c "${character}" > cowpy-${input_file}
     """
 }
 
@@ -59,46 +110,55 @@ process collectGreetings {
  * Pipeline parameters
  */
 params {
-    input: Path = 'data/greetings.csv'
+    input: Path = 'data/names.csv'
+    language: String = 'es'
     batch: String = 'batch'
+    character: String = 'turkey'
 }
 
 workflow {
 
     main:
     // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.input)
+    name_ch = channel.fromPath(params.input)
                         .splitCsv()
-                        .map { line -> line[0] }
+                        .map { row -> row[0] }
     // emit a greeting
-    sayHello(greeting_ch)
-    // convert the greeting to uppercase
-    convertToUpper(sayHello.out)
+    greetings_ch = sayHello(name_ch)
+    // translate the greeting
+    translated_ch = translateGreeting(greetings_ch, params.language)
     // collect all the greetings into one file
-    collectGreetings(convertToUpper.out.collect(), params.batch)
+    collected_out = collectGreetings(translated_ch.collect(), params.batch, params.language)
+    // generate ASCII art of the greetings with cowpy
+    cowpy_ch = cowpy(collected_out.outfile, params.character)
 
     publish:
-    first_output = sayHello.out
-    uppercased = convertToUpper.out
-    collected = collectGreetings.out.outfile
-    batch_report = collectGreetings.out.report
+    greetings = greetings_ch
+    translated = translated_ch
+    collected = collected_out.outfile
+    batch_report = collected_out.report
+    cowpy_art = cowpy_ch
 }
 
 output {
-    first_output {
-        path 'hello_modules'
+    greetings {
+        path "${params.batch}/intermediates"
         mode 'copy'
     }
-    uppercased {
-        path 'hello_modules'
+    translated {
+        path "${params.batch}/intermediates"
         mode 'copy'
     }
     collected {
-        path 'hello_modules'
+        path "${params.batch}/intermediates"
         mode 'copy'
     }
     batch_report {
-        path 'hello_modules'
+        path "${params.batch}"
+        mode 'copy'
+    }
+    cowpy_art {
+        path "${params.batch}"
         mode 'copy'
     }
 }

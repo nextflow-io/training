@@ -1,15 +1,94 @@
 #!/usr/bin/env nextflow
 
-// Include modules
-include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
-include { collectGreetings } from './modules/collectGreetings.nf'
+/*
+ * Use echo to print a greeting to a file
+ */
+process sayHello {
+
+    tag "${name}"
+
+    input:
+    val name
+
+    output:
+    path "${name}.txt"
+
+    script:
+    """
+    echo 'Hello, ${name}!' > '${name}.txt'
+    """
+}
+
+/*
+ * Use Python to translate the greeting into another language
+ */
+process translateGreeting {
+
+    tag "${language}-${input_file}"
+
+    input:
+    path input_file
+    val language
+
+    output:
+    path "${language}-${input_file}"
+
+    script:
+    """
+    #!/usr/bin/env python3
+    import sys
+
+    translations = {
+        'es': 'Hola',        # Spanish
+        'fr': 'Bonjour',     # French
+        'it': 'Ciao',        # Italian
+        'nl': 'Hallo',       # Dutch
+        'ar': 'Marhaban',    # Arabic
+        'ja': 'Konnichiwa',  # Japanese
+        'en': 'Hello',       # English
+    }
+
+    if '${language}' not in translations:
+        sys.exit('Unsupported language code: ${language}')
+
+    with open('${input_file}') as greeting_file:
+        greeting = greeting_file.read()
+
+    with open('${language}-${input_file}', 'w') as translated_file:
+        translated_file.write(greeting.replace('Hello', translations['${language}']))
+    """
+}
+
+/*
+ * Collect translated greetings into a single output file
+ */
+process collectGreetings {
+
+    tag "${batch_name}"
+
+    input:
+    path input_files
+    val batch_name
+    val language
+
+    output:
+    path "${batch_name}-${language}-greetings.txt", emit: outfile
+    path "${batch_name}-${language}-report.txt", emit: report
+
+    script:
+    count_greetings = input_files.size()
+    """
+    cat ${input_files} > '${batch_name}-${language}-greetings.txt'
+    echo 'Number of greetings processed: ${count_greetings}' > '${batch_name}-${language}-report.txt'
+    """
+}
 
 /*
  * Pipeline parameters
  */
 params {
-    input: Path = 'data/greetings.csv'
+    input: Path = 'data/names.csv'
+    language: String = 'es'
     batch: String = 'batch'
 }
 
@@ -17,38 +96,38 @@ workflow {
 
     main:
     // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.input)
+    name_ch = channel.fromPath(params.input)
                         .splitCsv()
-                        .map { line -> line[0] }
+                        .map { row -> row[0] }
     // emit a greeting
-    sayHello(greeting_ch)
-    // convert the greeting to uppercase
-    convertToUpper(sayHello.out)
+    greetings_ch = sayHello(name_ch)
+    // translate the greeting
+    translated_ch = translateGreeting(greetings_ch, params.language)
     // collect all the greetings into one file
-    collectGreetings(convertToUpper.out.collect(), params.batch)
+    collected_out = collectGreetings(translated_ch.collect(), params.batch, params.language)
 
     publish:
-    first_output = sayHello.out
-    uppercased = convertToUpper.out
-    collected = collectGreetings.out.outfile
-    batch_report = collectGreetings.out.report
+    greetings = greetings_ch
+    translated = translated_ch
+    collected = collected_out.outfile
+    batch_report = collected_out.report
 }
 
 output {
-    first_output {
-        path 'hello_containers'
+    greetings {
+        path "${params.batch}/intermediates"
         mode 'copy'
     }
-    uppercased {
-        path 'hello_containers'
+    translated {
+        path "${params.batch}/intermediates"
         mode 'copy'
     }
     collected {
-        path 'hello_containers'
+        path "${params.batch}/intermediates"
         mode 'copy'
     }
     batch_report {
-        path 'hello_containers'
+        path "${params.batch}"
         mode 'copy'
     }
 }

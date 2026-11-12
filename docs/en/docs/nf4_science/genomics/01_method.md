@@ -29,7 +29,7 @@ We provide the following data and related resources:
 
 The two main tools involved are [Samtools](https://www.htslib.org/), a widely used toolkit for manipulating sequence alignment files, and [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), a set of tools for variant discovery developed at the Broad Institute.
 
-These tools are not installed in the GitHub Codespaces environment, so we'll use them via containers retrieved via the Seqera Containers service (see [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
+These tools are not installed in the GitHub Codespaces environment, so we'll use them via containers retrieved via the Seqera Containers service (see [Hello Containers](../../hello_nextflow/04_hello_containers.md)).
 
 !!! tip
 

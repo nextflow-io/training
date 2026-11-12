@@ -1765,7 +1765,7 @@ nextflow run missing_software.nf -profile docker
 
 !!! note
 
-    To learn more about how Nextflow uses containers, see [Hello Nextflow](../../hello_nextflow/05_hello_containers.md)
+    To learn more about how Nextflow uses containers, see [Hello Nextflow](../../hello_nextflow/04_hello_containers.md)
 
 ### 3.3. Bad resource configuration
 

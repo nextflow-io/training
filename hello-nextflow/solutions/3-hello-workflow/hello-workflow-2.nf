@@ -1,53 +1,61 @@
 #!/usr/bin/env nextflow
 
 /*
- * Use echo to print 'Hello World!' to a file
+ * Use echo to print a greeting to a file
  */
 process sayHello {
 
+    tag "${name}"
+
     input:
-    val greeting
+    val name
 
     output:
-    path "${greeting}-output.txt"
+    path "${name}.txt"
 
     script:
     """
-    echo '${greeting}' > '${greeting}-output.txt'
+    echo 'Hello, ${name}!' > '${name}.txt'
     """
 }
 
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Use Python to translate the greeting into another language
  */
-process convertToUpper {
+process translateGreeting {
+
+    tag "${language}-${input_file}"
 
     input:
     path input_file
+    val language
 
     output:
-    path "UPPER-${input_file}"
+    path "${language}-${input_file}"
 
     script:
     """
-    cat ${input_file} | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
-    """
-}
+    #!/usr/bin/env python3
+    import sys
 
-/*
- * Collect uppercase greetings into a single output file
- */
-process collectGreetings {
+    translations = {
+        'es': 'Hola',        # Spanish
+        'fr': 'Bonjour',     # French
+        'it': 'Ciao',        # Italian
+        'nl': 'Hallo',       # Dutch
+        'ar': 'Marhaban',    # Arabic
+        'ja': 'Konnichiwa',  # Japanese
+        'en': 'Hello',       # English
+    }
 
-    input:
-    path input_files
+    if '${language}' not in translations:
+        sys.exit('Unsupported language code: ${language}')
 
-    output:
-    path "COLLECTED-output.txt"
+    with open('${input_file}') as greeting_file:
+        greeting = greeting_file.read()
 
-    script:
-    """
-    cat ${input_files} > 'COLLECTED-output.txt'
+    with open('${language}-${input_file}', 'w') as translated_file:
+        translated_file.write(greeting.replace('Hello', translations['${language}']))
     """
 }
 
@@ -55,44 +63,34 @@ process collectGreetings {
  * Pipeline parameters
  */
 params {
-    input: Path = 'data/greetings.csv'
+    input: Path = 'data/names.csv'
+    language: String = 'es'
 }
 
 workflow {
 
     main:
     // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.input)
+    name_ch = channel.fromPath(params.input)
                         .splitCsv()
-                        .map { line -> line[0] }
+                        .map { row -> row[0] }
     // emit a greeting
-    sayHello(greeting_ch)
-    // convert the greeting to uppercase
-    convertToUpper(sayHello.out)
-    // collect all the greetings into one file
-    collectGreetings(convertToUpper.out.collect())
-
-    // optional view statements
-    convertToUpper.out.view { item -> "Before collect: ${item}" }
-    convertToUpper.out.collect().view { items -> "After collect: ${items}" }
+    greetings_ch = sayHello(name_ch)
+    // translate the greeting
+    translated_ch = translateGreeting(greetings_ch, params.language)
 
     publish:
-    first_output = sayHello.out
-    uppercased = convertToUpper.out
-    collected = collectGreetings.out
+    greetings = greetings_ch
+    translated = translated_ch
 }
 
 output {
-    first_output {
-        path 'hello_workflow'
+    greetings {
+        path 'hello'
         mode 'copy'
     }
-    uppercased {
-        path 'hello_workflow'
-        mode 'copy'
-    }
-    collected {
-        path 'hello_workflow'
+    translated {
+        path 'hello'
         mode 'copy'
     }
 }

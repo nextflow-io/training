@@ -306,7 +306,7 @@ To access the `character` column, add the `map` operation before the `.view()` o
             .view()
     ```
 
-This way of accessing a specific field is explained in more detail in [this section](../../hello_nextflow/02_hello_channels.md#43-use-the-map-operator-to-extract-the-greetings) of Hello Nextflow, if you need a reminder of how that works.
+This way of accessing a specific field is explained in more detail in [this section](../../hello_nextflow/02_hello_channels.md#43-use-the-map-operator-to-extract-the-names) of Hello Nextflow, if you need a reminder of how that works.
 
 #### 1.2.2. Run the workflow
 
