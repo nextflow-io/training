@@ -59,13 +59,13 @@ workflow {
                         .splitCsv()
                         .map { row -> row[0] }
     // emit a greeting
-    sayHello(name_ch)
+    greetings_ch = sayHello(name_ch)
     // translate the greeting
-    translateGreeting(sayHello.out)
+    translated_ch = translateGreeting(greetings_ch)
 
     publish:
-    greetings = sayHello.out
-    translated = translateGreeting.out
+    greetings = greetings_ch
+    translated = translated_ch
 }
 
 output {

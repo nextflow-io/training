@@ -205,27 +205,27 @@ Start by publishing the output of `sayHello` with Nextflow's default settings.
 
 #### 2.1.1. Declare the output of the `sayHello` process
 
-Add a `publish:` section to the workflow body (the same kind of code element as the `main:` section) and list the output of the `sayHello` process.
+Give the output of the `sayHello` call a name, then add a `publish:` section to the workflow body (the same kind of code element as the `main:` section) and list that output.
 
-In the workflow script file `hello-world.nf`, add the following lines of code:
+In the workflow script file `hello-world.nf`, make the following code changes:
 
 === "After"
 
-    ```groovy title="hello-world.nf" linenums="17" hl_lines="7-8"
+    ```groovy title="hello-world.nf" linenums="17" hl_lines="5 7-8"
     workflow {
 
         main:
         // emit a greeting
-        sayHello()
+        greeting = sayHello()
 
         publish:
-        greetings = sayHello.out
+        greetings = greeting
     }
     ```
 
 === "Before"
 
-    ```groovy title="hello-world.nf" linenums="17"
+    ```groovy title="hello-world.nf" linenums="17" hl_lines="5"
     workflow {
 
         main:
@@ -234,7 +234,9 @@ In the workflow script file `hello-world.nf`, add the following lines of code:
     }
     ```
 
-You refer to the output of the process with `sayHello.out`, and assign it a name of your choice, here `greetings`.
+Calling a process returns its output, so `greeting = sayHello()` gives that output a name, `greeting`, that you can use later in the workflow.
+The `publish:` section then lists it for publishing as `greetings = greeting`, where `greetings` is a name of your choice.
+Existing pipelines often write `sayHello.out` instead, which refers to the same output.
 
 #### 2.1.2. Add an `output` block to the script
 
@@ -250,10 +252,10 @@ In the workflow script file `hello-world.nf`, add the following lines of code:
 
         main:
         // emit a greeting
-        sayHello()
+        greeting = sayHello()
 
         publish:
-        greetings = sayHello.out
+        greetings = greeting
     }
 
     output {
@@ -269,10 +271,10 @@ In the workflow script file `hello-world.nf`, add the following lines of code:
 
         main:
         // emit a greeting
-        sayHello()
+        greeting = sayHello()
 
         publish:
-        greetings = sayHello.out
+        greetings = greeting
     }
     ```
 
@@ -554,14 +556,14 @@ In the workflow block, make the following code change:
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
         // emit a greeting
-        sayHello(params.name)
+        greeting = sayHello(params.name)
     ```
 
 === "Before"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
         // emit a greeting
-        sayHello()
+        greeting = sayHello()
     ```
 
 This tells Nextflow to run the `sayHello` process on the value provided through the `--name` parameter.

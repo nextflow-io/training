@@ -23,20 +23,20 @@ workflow {
                         .splitCsv()
                         .map { row -> [row[0], row[2]] }
     // emit a greeting
-    sayHello(person_ch)
+    greetings_ch = sayHello(person_ch)
     // translate the greeting
-    translateGreeting(sayHello.out, params.language)
+    translated_ch = translateGreeting(greetings_ch, params.language)
     // collect all the greetings into one file
-    collectGreetings(translateGreeting.out.map { greeting_file, _character -> greeting_file }.collect(), params.batch, params.language)
+    collected_out = collectGreetings(translated_ch.map { greeting_file, _character -> greeting_file }.collect(), params.batch, params.language)
     // generate ASCII art of each greeting with its own character
-    cowpy(translateGreeting.out)
+    cowpy_ch = cowpy(translated_ch)
 
     publish:
-    greetings = sayHello.out.map { greeting_file, _character -> greeting_file }
-    translated = translateGreeting.out.map { greeting_file, _character -> greeting_file }
-    collected = collectGreetings.out.outfile
-    batch_report = collectGreetings.out.report
-    cowpy_art = cowpy.out
+    greetings = greetings_ch.map { greeting_file, _character -> greeting_file }
+    translated = translated_ch.map { greeting_file, _character -> greeting_file }
+    collected = collected_out.outfile
+    batch_report = collected_out.report
+    cowpy_art = cowpy_ch
 }
 
 output {

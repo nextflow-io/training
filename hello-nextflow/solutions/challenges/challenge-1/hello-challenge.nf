@@ -37,10 +37,10 @@ workflow {
                         .map { row -> row.name }
                         .view { name -> "After map: $name" }
     // emit a greeting
-    sayHello(name_ch)
+    greetings_ch = sayHello(name_ch)
 
     publish:
-    greetings = sayHello.out
+    greetings = greetings_ch
 }
 
 output {

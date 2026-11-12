@@ -450,8 +450,8 @@ Now we need to call the process in the workflow, give it a character to use, and
 
 Let's connect the `cowpy()` process to the output of the `collectGreetings()` process, which as you may recall produces two outputs:
 
-- `collectGreetings.out.outfile` contains the output file <--_what we want_
-- `collectGreetings.out.report` contains the report file with the count of greetings per batch
+- `collected_out.outfile` contains the output file <--_what we want_
+- `collected_out.report` contains the report file with the count of greetings per batch
 
 In the workflow block, make the following code change:
 
@@ -464,13 +464,13 @@ In the workflow block, make the following code change:
                             .splitCsv()
                             .map { row -> row[0] }
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
         // translate the greeting
-        translateGreeting(sayHello.out, params.language)
+        translated_ch = translateGreeting(greetings_ch, params.language)
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
+        collected_out = collectGreetings(translated_ch.collect(), params.batch, params.language)
         // generate ASCII art of the greetings with cowpy
-        cowpy(collectGreetings.out.outfile, params.character)
+        cowpy_ch = cowpy(collected_out.outfile, params.character)
     ```
 
 === "Before"
@@ -482,11 +482,11 @@ In the workflow block, make the following code change:
                             .splitCsv()
                             .map { row -> row[0] }
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
         // translate the greeting
-        translateGreeting(sayHello.out, params.language)
+        translated_ch = translateGreeting(greetings_ch, params.language)
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
+        collected_out = collectGreetings(translated_ch.collect(), params.batch, params.language)
     ```
 
 Notice that we used a new CLI parameter, `params.character`, in order to specify which character we want to have say the greetings.
@@ -536,24 +536,24 @@ In the `workflow` block, make the following code change:
 
     ```groovy title="hello-containers.nf" linenums="132" hl_lines="6"
         publish:
-        greetings = sayHello.out
-        translated = translateGreeting.out
-        collected = collectGreetings.out.outfile
-        batch_report = collectGreetings.out.report
-        cowpy_art = cowpy.out
+        greetings = greetings_ch
+        translated = translated_ch
+        collected = collected_out.outfile
+        batch_report = collected_out.report
+        cowpy_art = cowpy_ch
     ```
 
 === "Before"
 
     ```groovy title="hello-containers.nf" linenums="132"
         publish:
-        greetings = sayHello.out
-        translated = translateGreeting.out
-        collected = collectGreetings.out.outfile
-        batch_report = collectGreetings.out.report
+        greetings = greetings_ch
+        translated = translated_ch
+        collected = collected_out.outfile
+        batch_report = collected_out.report
     ```
 
-The `cowpy` process only produces one output so we can refer to it the usual way by appending `.out`.
+The `cowpy` process only produces one output, so its result `cowpy_ch` is a single channel that we can publish directly.
 
 ##### 2.2.3.2. Update the `output` block
 

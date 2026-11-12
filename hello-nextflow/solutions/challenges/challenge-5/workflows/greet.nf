@@ -12,15 +12,15 @@ workflow GREET {
 
     main:
     // emit a greeting
-    sayHello(names_ch)
+    greetings_ch = sayHello(names_ch)
     // translate the greeting
-    translateGreeting(sayHello.out, language)
+    translated_ch = translateGreeting(greetings_ch, language)
     // collect all the greetings into one file
-    collectGreetings(translateGreeting.out.collect(), batch_name, language)
+    collected_out = collectGreetings(translated_ch.collect(), batch_name, language)
 
     emit:
-    greetings = sayHello.out
-    translated = translateGreeting.out
-    collected = collectGreetings.out.outfile
-    report = collectGreetings.out.report
+    greetings = greetings_ch
+    translated = translated_ch
+    collected = collected_out.outfile
+    report = collected_out.report
 }

@@ -191,9 +191,8 @@ Python never sees the placeholders, only the values.
 Now we need to call the new process in the workflow block, and make the output of the `sayHello()` process flow into it.
 
 Conveniently, Nextflow automatically packages the output of a process into a channel, as shown in the diagram in the warmup section.
-We can refer to the output channel of a process as `<process>.out`.
-
-So the output of the `sayHello` process is a channel called `sayHello.out`, which we can plug straight into the call to `translateGreeting()`.
+The workflow already assigns the output channel of `sayHello()` to `greetings_ch`, so we can plug `greetings_ch` straight into the call to `translateGreeting()`.
+The call to `translateGreeting()` returns a channel in turn, which we assign to `translated_ch`.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-connector.svg"
@@ -212,12 +211,12 @@ In the workflow block, make the following code change:
                             .splitCsv()
                             .map { row -> row[0] }
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
         // translate the greeting
-        translateGreeting(sayHello.out)
+        translated_ch = translateGreeting(greetings_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -232,10 +231,10 @@ In the workflow block, make the following code change:
                             .splitCsv()
                             .map { row -> row[0] }
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -251,8 +250,8 @@ In the `publish:` section of the `workflow` block, make the following code chang
 
     ```groovy title="hello-workflow.nf" linenums="66" hl_lines="3"
         publish:
-        greetings = sayHello.out
-        translated = translateGreeting.out
+        greetings = greetings_ch
+        translated = translated_ch
     }
     ```
 
@@ -260,7 +259,7 @@ In the `publish:` section of the `workflow` block, make the following code chang
 
     ```groovy title="hello-workflow.nf" linenums="66"
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -503,14 +502,14 @@ In the workflow block, make the following code change:
 
     ```groovy title="hello-workflow.nf" linenums="79" hl_lines="2"
         // translate the greeting
-        translateGreeting(sayHello.out, params.language)
+        translated_ch = translateGreeting(greetings_ch, params.language)
     ```
 
 === "Before"
 
     ```groovy title="hello-workflow.nf" linenums="79"
         // translate the greeting
-        translateGreeting(sayHello.out)
+        translated_ch = translateGreeting(greetings_ch)
     ```
 
 To provide multiple inputs to a process, you simply list them in the call parentheses, separated by commas.
@@ -520,7 +519,7 @@ To provide multiple inputs to a process, you simply list them in the call parent
     You MUST provide the inputs to the process in the EXACT SAME ORDER as they are listed in the input definition block of the process.
 
 Notice that the two inputs are different kinds of things.
-`sayHello.out` is a channel that carries three files, one per greeting, while `params.language` is a single value.
+`greetings_ch` is a channel that carries three files, one per greeting, while `params.language` is a single value.
 Nextflow calls the process once per file in the channel, and reuses the single value for every call.
 So each of the three greetings gets translated into the same language.
 
@@ -778,7 +777,7 @@ Fortunately, Nextflow is quite happy to do that for us if we simply write `cat $
 ### 2.3. Add the collection step to the workflow
 
 Now we need a `batch` parameter, and a call to the collection process on the output of the translation step.
-That output is also a channel, called `translateGreeting.out`.
+That output is also a channel, `translated_ch`.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect-connector.svg"
@@ -821,16 +820,16 @@ In the workflow block, make the following code change:
 
     ```groovy title="hello-workflow.nf" linenums="101" hl_lines="3-4"
         // translate the greeting
-        translateGreeting(sayHello.out, params.language)
+        translated_ch = translateGreeting(greetings_ch, params.language)
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out, params.batch, params.language)
+        collected_ch = collectGreetings(translated_ch, params.batch, params.language)
     ```
 
 === "Before"
 
     ```groovy title="hello-workflow.nf" linenums="101"
         // translate the greeting
-        translateGreeting(sayHello.out, params.language)
+        translated_ch = translateGreeting(greetings_ch, params.language)
     ```
 
 This connects the output of `translateGreeting()` to the first input of `collectGreetings()`, and passes the batch name and the language as the second and third inputs.
@@ -844,9 +843,9 @@ In the `publish:` section of the `workflow` block, make the following code chang
 
     ```groovy title="hello-workflow.nf" linenums="106" hl_lines="4"
         publish:
-        greetings = sayHello.out
-        translated = translateGreeting.out
-        collected = collectGreetings.out
+        greetings = greetings_ch
+        translated = translated_ch
+        collected = collected_ch
     }
     ```
 
@@ -854,8 +853,8 @@ In the `publish:` section of the `workflow` block, make the following code chang
 
     ```groovy title="hello-workflow.nf" linenums="106"
         publish:
-        greetings = sayHello.out
-        translated = translateGreeting.out
+        greetings = greetings_ch
+        translated = translated_ch
     }
     ```
 
@@ -966,7 +965,7 @@ Specifically, we are going to use the aptly-named [`collect()`](https://nextflow
 
 This time it's going to look a bit different because we're not adding the operator in the context of a channel factory; we're adding it to an output channel.
 
-We take `translateGreeting.out` and append the `collect()` operator, which gives us `translateGreeting.out.collect()`.
+We take `translated_ch` and append the `collect()` operator, which gives us `translated_ch.collect()`.
 We can plug that directly into the `collectGreetings()` process call.
 
 In the workflow block, make the following code change:
@@ -975,14 +974,14 @@ In the workflow block, make the following code change:
 
     ```groovy title="hello-workflow.nf" linenums="103" hl_lines="2"
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
+        collected_ch = collectGreetings(translated_ch.collect(), params.batch, params.language)
     ```
 
 === "Before"
 
     ```groovy title="hello-workflow.nf" linenums="103"
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out, params.batch, params.language)
+        collected_ch = collectGreetings(translated_ch, params.batch, params.language)
     ```
 
 #### 2.4.2. Add some `view()` statements
@@ -993,18 +992,18 @@ Let's also include a couple of `view()` statements to visualize the before and a
 
     ```groovy title="hello-workflow.nf" linenums="103" hl_lines="4-6"
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
+        collected_ch = collectGreetings(translated_ch.collect(), params.batch, params.language)
 
         // optional view statements
-        translateGreeting.out.view { filepath -> "Before collect: $filepath" }
-        translateGreeting.out.collect().view { filepaths -> "After collect: $filepaths" }
+        translated_ch.view { filepath -> "Before collect: $filepath" }
+        translated_ch.collect().view { filepaths -> "After collect: $filepaths" }
     ```
 
 === "Before"
 
     ```groovy title="hello-workflow.nf" linenums="103"
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
+        collected_ch = collectGreetings(translated_ch.collect(), params.batch, params.language)
     ```
 
 The `view()` statements can go anywhere you want; we put them right after the call for readability.
@@ -1090,18 +1089,18 @@ Before you move on to the next section, we recommend you delete the `view()` sta
 
     ```groovy title="hello-workflow.nf" linenums="103"
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
+        collected_ch = collectGreetings(translated_ch.collect(), params.batch, params.language)
     ```
 
 === "Before"
 
     ```groovy title="hello-workflow.nf" linenums="103" hl_lines="4-6"
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
+        collected_ch = collectGreetings(translated_ch.collect(), params.batch, params.language)
 
         // optional view statements
-        translateGreeting.out.view { filepath -> "Before collect: $filepath" }
-        translateGreeting.out.collect().view { filepaths -> "After collect: $filepaths" }
+        translated_ch.view { filepath -> "Before collect: $filepath" }
+        translated_ch.collect().view { filepaths -> "After collect: $filepaths" }
     ```
 
 This is basically the reverse operation from point 2.4.2.
@@ -1217,7 +1216,7 @@ Learn how to emit multiple outputs and handle them conveniently.
 ## 3. Add an output to the collector step
 
 So far we've been using processes that only produced one output each.
-We were able to access their respective outputs very conveniently using the `<process>.out` syntax, which we used both in the context of passing an output to the next process (e.g. `translateGreeting(sayHello.out, params.language)`) and in the context of the `publish:` section (e.g. `greetings = sayHello.out`).
+We assigned the output of each call to a channel name, which we used both in the context of passing an output to the next process (e.g. `translateGreeting(greetings_ch, params.language)`) and in the context of the `publish:` section (e.g. `greetings = greetings_ch`).
 
 What happens when a process produces more than one?
 How do we handle the multiple outputs?
@@ -1307,16 +1306,20 @@ But as the saying goes, why not both?
 !!! tip
 
     If you don't name the outputs of a process using `emit:`, you can still access them individually by using their respective (zero-based) index.
-    For example, you would use `<process>.out[0]` to get the first output, `<process>.out[1]` to get the second output, and so on.
+    For example, with `collected_out = collectGreetings(...)`, you would use `collected_out[0]` to get the first output, `collected_out[1]` to get the second output, and so on.
 
     We prefer naming outputs because otherwise, it's too easy to grab the wrong index by error, especially when the process produces a lot of outputs.
 
 ### 3.2. Update the workflow outputs
 
-Now that we have two outputs coming out of the `collectGreetings` process, the `collectGreetings.out` output contains two channels:
+Now that the `collectGreetings` process has two outputs, calling it returns two channels instead of one.
+You assign the result to a name as before, here `collected_out`, and read each channel by its `emit:` name:
 
-- `collectGreetings.out.outfile` contains the final output file
-- `collectGreetings.out.report` contains the report file
+- `collected_out.outfile` contains the final output file
+- `collected_out.report` contains the report file
+
+The `_out` suffix signals that `collected_out` holds several outputs rather than a single channel.
+Existing pipelines often write `collectGreetings.out.outfile` and `collectGreetings.out.report` instead, which refer to the same channels.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect-report.svg"
@@ -1326,29 +1329,35 @@ We need to update the workflow outputs accordingly.
 
 #### 3.2.1. Update the `publish:` section
 
-In the `workflow` block, make the following code change:
+In the `workflow` block, rename the result of the `collectGreetings()` call and publish both outputs:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="109" hl_lines="4 5"
+    ```groovy title="hello-workflow.nf" linenums="106" hl_lines="2 7 8"
+        // collect all the greetings into one file
+        collected_out = collectGreetings(translated_ch.collect(), params.batch, params.language)
+
         publish:
-        greetings = sayHello.out
-        translated = translateGreeting.out
-        collected = collectGreetings.out.outfile
-        batch_report = collectGreetings.out.report
+        greetings = greetings_ch
+        translated = translated_ch
+        collected = collected_out.outfile
+        batch_report = collected_out.report
     ```
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="109" hl_lines="4"
+    ```groovy title="hello-workflow.nf" linenums="106" hl_lines="2 7"
+        // collect all the greetings into one file
+        collected_ch = collectGreetings(translated_ch.collect(), params.batch, params.language)
+
         publish:
-        greetings = sayHello.out
-        translated = translateGreeting.out
-        collected = collectGreetings.out
+        greetings = greetings_ch
+        translated = translated_ch
+        collected = collected_ch
     ```
 
 As you can see, referring to specific process outputs is now trivial.
-When we go to add one more step to our pipeline in Part 4 (Containers), we'll be able to easily refer to `collectGreetings.out.outfile` and hand it to the new process (spoiler: the new process is called `cowpy`).
+When we go to add one more step to our pipeline in Part 4 (Containers), we'll be able to easily refer to `collected_out.outfile` and hand it to the new process (spoiler: the new process is called `cowpy`).
 
 But for now, let's finish updating the workflow-level outputs.
 
@@ -1644,16 +1653,16 @@ Run it with `--batch trio -resume`.
 
     ```groovy title="hello-workflow.nf" linenums="128" hl_lines="3-4 11"
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
+        collected_out = collectGreetings(translated_ch.collect(), params.batch, params.language)
         // combine the original and translated greetings
-        collectBilingual(sayHello.out.collect(), translateGreeting.out.collect(), params.batch, params.language)
+        bilingual_ch = collectBilingual(greetings_ch.collect(), translated_ch.collect(), params.batch, params.language)
 
         publish:
-        greetings = sayHello.out
-        translated = translateGreeting.out
-        collected = collectGreetings.out.outfile
-        batch_report = collectGreetings.out.report
-        bilingual = collectBilingual.out
+        greetings = greetings_ch
+        translated = translated_ch
+        collected = collected_out.outfile
+        batch_report = collected_out.report
+        bilingual = bilingual_ch
     }
     ```
 
@@ -1700,11 +1709,11 @@ Run it with `--batch trio -resume`.
 ## Quiz
 
 <quiz>
-How do you access the output of a process in the workflow block?
-- [x] `processName.out`
-- [ ] `output.processName`
-- [ ] `process.output`
-- [ ] `get(processName)`
+In the workflow block, which line makes the output of `sayHello(name_ch)` available to the next step?
+- [x] `greetings_ch = sayHello(name_ch)`
+- [ ] `sayHello(name_ch) -> greetings_ch`
+- [ ] `sayHello(name_ch).output = greetings_ch`
+- [ ] `greetings_ch << sayHello(name_ch)`
 
 Learn more: [1.2.2. Pass the output of the first process to the new process](#122-pass-the-output-of-the-first-process-to-the-new-process)
 </quiz>
@@ -1730,7 +1739,7 @@ Learn more: [1.2.1. Define the process](#121-define-the-process)
 </quiz>
 
 <quiz>
-A process is called with `translateGreeting(sayHello.out, params.language)`, where `sayHello.out` carries three files and `params.language` is a single value. How many times does the process run?
+A process is called with `translateGreeting(greetings_ch, params.language)`, where `greetings_ch` carries three files and `params.language` is a single value. How many times does the process run?
 - [x] Three times, reusing the same language each time
 - [ ] It fails because the inputs have different sizes
 - [ ] Once per language
@@ -1755,8 +1764,8 @@ Which operator should replace `???` to gather all outputs into a single list for
 ```groovy hl_lines="4"
 workflow {
     names_ch = channel.of('Mateo', 'Raphael', 'Celine')
-    sayHello(names_ch)
-    gatherAll(sayHello.out.???)
+    greetings_ch = sayHello(names_ch)
+    gatherAll(greetings_ch.???)
 }
 ```
 
@@ -1779,13 +1788,13 @@ Learn more: [2.4. Use an operator to collect the greetings into a single input](
 </quiz>
 
 <quiz>
-How do you access a named output from a process?
-- [ ] `output.processName.outputName`
-- [ ] `processName.get(outputName)`
-- [x] `processName.out.outputName`
-- [ ] `processName.outputName`
+A process with named outputs is called as `collected_out = collectGreetings(...)`. How do you access its `report` output?
+- [ ] `output.collected_out.report`
+- [ ] `collected_out.get(report)`
+- [x] `collected_out.report`
+- [ ] `collectGreetings.report`
 
-Learn more: [3.1.2. Emit the report file and name outputs](#312-emit-the-report-file-and-name-outputs)
+Learn more: [3.2. Update the workflow outputs](#32-update-the-workflow-outputs)
 </quiz>
 
 <quiz>

@@ -22,16 +22,16 @@ workflow {
                         .splitCsv()
                         .map { row -> row[0] }
     // greet, translate and collect
-    GREET(name_ch, params.language, params.batch)
+    greet_out = GREET(name_ch, params.language, params.batch)
     // generate ASCII art of the greetings with cowpy
-    cowpy(GREET.out.collected, params.character)
+    cowpy_ch = cowpy(greet_out.collected, params.character)
 
     publish:
-    greetings = GREET.out.greetings
-    translated = GREET.out.translated
-    collected = GREET.out.collected
-    batch_report = GREET.out.report
-    cowpy_art = cowpy.out
+    greetings = greet_out.greetings
+    translated = greet_out.translated
+    collected = greet_out.collected
+    batch_report = greet_out.report
+    cowpy_art = cowpy_ch
 }
 
 output {
