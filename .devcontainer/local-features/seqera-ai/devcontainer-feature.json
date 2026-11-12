@@ -1,0 +1,6 @@
+{
+    "id": "seqera-ai",
+    "name": "Install Seqera AI CLI",
+    "description": "Install the Seqera AI CLI (npm package 'seqera'), the command-line interface to Seqera AI",
+    "installsAfter": ["ghcr.io/devcontainers/features/node"]
+}
