@@ -20,6 +20,7 @@ Table of contents:
     - [Word highlighting](#word-highlighting)
   - [TODO / FIXME](#todo--fixme)
   - [Preview Release](#preview-release)
+  - [Releasing](#releasing)
 
 ## Contribution model
 
@@ -397,3 +398,24 @@ A hash of source files (`docs/en/`) is computed to detect changes.
 If you modify source files, the docs will be rebuilt automatically on the next run.
 
 Use `--clean` to delete the work directory on exit, or manually remove `.preview-release/` to force a fresh build.
+
+## Releasing
+
+Each version of the site comes from a GitHub release.
+Publishing a release triggers `.github/workflows/docs.yml`, which builds every language, deploys the site under `/<version>/` and `/latest/`, and updates `versions.json`.
+It also triggers `.github/workflows/docker-devcontainer.yml`, which pushes the dev container image tagged with the version.
+
+Update translations before you publish, or the translated sites ship with outdated content.
+
+1. Merge the content PRs for the release into `master`.
+2. Run the **Draft release** workflow (**Actions** → **Draft release** → **Run workflow**) with the new version, e.g. `3.9`.
+   - If translations are out of date, the workflow fails and starts the **Translate** workflow. Review and merge the translation PR it opens (see [TRANSLATING.md](TRANSLATING.md#how-translation-updates-work)), then run **Draft release** again.
+   - If a translation PR is already open, the workflow fails until you merge it.
+3. Edit the draft release notes. Follow the format of previous releases: a **Content Updates** section grouped by course, an **Environment and Tooling** section, then the generated list of PRs.
+4. Publish the release from the GitHub UI or with `gh release edit <version> --draft=false`. Do not publish it from a workflow: releases published with `GITHUB_TOKEN` do not trigger `docs.yml`.
+5. Check the deployment:
+   - The **Publish docs** and **pages build and deployment** runs succeed.
+   - `https://training.nextflow.io/versions.json` lists the new version with the `latest` alias.
+   - Pages changed in the release show the new content, including at least one translated page.
+
+For an urgent fix, run **Draft release** with **Skip the translation check** enabled, then publish a translations-only patch release afterwards (e.g. `3.6.1`).
