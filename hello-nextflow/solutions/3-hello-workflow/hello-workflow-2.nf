@@ -75,13 +75,13 @@ workflow {
                         .splitCsv()
                         .map { row -> row[0] }
     // emit a greeting
-    sayHello(name_ch)
+    greetings_ch = sayHello(name_ch)
     // translate the greeting
-    translateGreeting(sayHello.out, params.language)
+    translated_ch = translateGreeting(greetings_ch, params.language)
 
     publish:
-    greetings = sayHello.out
-    translated = translateGreeting.out
+    greetings = greetings_ch
+    translated = translated_ch
 }
 
 output {

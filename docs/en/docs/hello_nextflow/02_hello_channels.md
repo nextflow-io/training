@@ -119,10 +119,10 @@ In the workflow block, add the channel factory code:
         // create a channel for inputs
         name_ch = channel.of('Ziggy')
         // emit a greeting
-        sayHello(params.name)
+        greeting = sayHello(params.name)
 
         publish:
-        greetings = sayHello.out
+        greetings = greeting
     }
     ```
 
@@ -133,10 +133,10 @@ In the workflow block, add the channel factory code:
 
         main:
         // emit a greeting
-        sayHello(params.name)
+        greeting = sayHello(params.name)
 
         publish:
-        greetings = sayHello.out
+        greetings = greeting
     }
     ```
 
@@ -150,37 +150,38 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7 10"
     workflow {
 
         main:
         // create a channel for inputs
         name_ch = channel.of('Ziggy')
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7 10"
     workflow {
 
         main:
         // create a channel for inputs
         name_ch = channel.of('Ziggy')
         // emit a greeting
-        sayHello(params.name)
+        greeting = sayHello(params.name)
 
         publish:
-        greetings = sayHello.out
+        greetings = greeting
     }
     ```
 
 This tells Nextflow to run the `sayHello` process on the contents of the `name_ch` channel.
+The output of a process is a channel too, so the result is renamed `greetings_ch`, with the same `_ch` suffix as `name_ch`.
 
 Now our workflow is properly functional; it is the explicit equivalent of writing `sayHello('Ziggy')`.
 
@@ -243,10 +244,10 @@ Add this tiny line to the workflow block:
         name_ch = channel.of('Ziggy')
                             .view()
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -259,10 +260,10 @@ Add this tiny line to the workflow block:
         // create a channel for inputs
         name_ch = channel.of('Ziggy')
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -808,10 +809,10 @@ Let's take the `names_array` variable we just imagined and make it a reality by 
         name_ch = channel.of('Mateo','Raphael','Celine')
                             .view()
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -825,10 +826,10 @@ Let's take the `names_array` variable we just imagined and make it a reality by 
         name_ch = channel.of('Mateo','Raphael','Celine')
                             .view()
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -852,10 +853,10 @@ In the workflow block, make the following change:
         name_ch = channel.of(names_array)
                             .view()
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -871,10 +872,10 @@ In the workflow block, make the following change:
         name_ch = channel.of('Mateo','Raphael','Celine')
                             .view()
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -963,10 +964,10 @@ In the workflow block, make the following code change:
                             .view()
                             .flatten()
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -982,10 +983,10 @@ In the workflow block, make the following code change:
         name_ch = channel.of(names_array)
                             .view()
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -1018,10 +1019,10 @@ In the workflow block, make the following code change:
                             .flatten()
                             .view { name -> "After flatten: $name" }
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -1038,10 +1039,10 @@ In the workflow block, make the following code change:
                             .view()
                             .flatten()
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -1200,10 +1201,10 @@ In the workflow block, make the following code change:
                             // .flatten()
                             // .view { name -> "After flatten: $name" }
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -1221,10 +1222,10 @@ In the workflow block, make the following code change:
                             .flatten()
                             .view { name -> "After flatten: $name" }
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -1305,10 +1306,10 @@ In the workflow block, make the following code change to replace `flatten()` wit
                             .splitCsv()
                             .view { row -> "After splitCsv: $row" }
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -1324,10 +1325,10 @@ In the workflow block, make the following code change to replace `flatten()` wit
                             // .flatten()
                             // .view { name -> "After flatten: $name" }
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -1426,10 +1427,10 @@ In the workflow block, make the following code change:
                             .map { row -> row[0] }
                             .view { name -> "After map: $name" }
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
@@ -1445,10 +1446,10 @@ In the workflow block, make the following code change:
                             .splitCsv()
                             .view { row -> "After splitCsv: $row" }
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
 
         publish:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 

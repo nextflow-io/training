@@ -34,10 +34,10 @@ workflow {
                         .splitCsv()
                         .map { row -> row[0] }
     // emit a greeting
-    sayHello(name_ch)
+    greetings_ch = sayHello(name_ch)
 
     publish:
-    greetings = sayHello.out
+    greetings = greetings_ch
 }
 
 output {

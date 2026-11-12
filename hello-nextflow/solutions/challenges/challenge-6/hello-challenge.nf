@@ -27,27 +27,27 @@ workflow {
                         .splitCsv()
                         .map { row -> row[0] }
     // emit a greeting
-    sayHello(name_ch)
+    greetings_ch = sayHello(name_ch)
     // translate the greeting
-    translateGreeting(sayHello.out, params.language)
+    translated_ch = translateGreeting(greetings_ch, params.language)
     // collect all the greetings into one file
-    collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
+    collected_out = collectGreetings(translated_ch.collect(), params.batch, params.language)
     // translate the greeting into the second language
-    translateSecond(sayHello.out, params.second_language)
+    translated_second_ch = translateSecond(greetings_ch, params.second_language)
     // collect the second-language greetings into one file
-    collectSecond(translateSecond.out.collect(), params.batch, params.second_language)
+    collected_second_out = collectSecond(translated_second_ch.collect(), params.batch, params.second_language)
     // generate ASCII art of the greetings with cowpy
-    cowpy(collectGreetings.out.outfile, params.character)
+    cowpy_ch = cowpy(collected_out.outfile, params.character)
 
     publish:
-    greetings = sayHello.out
-    translated = translateGreeting.out
-    collected = collectGreetings.out.outfile
-    batch_report = collectGreetings.out.report
-    cowpy_art = cowpy.out
-    translated_second = translateSecond.out
-    collected_second = collectSecond.out.outfile
-    batch_report_second = collectSecond.out.report
+    greetings = greetings_ch
+    translated = translated_ch
+    collected = collected_out.outfile
+    batch_report = collected_out.report
+    cowpy_art = cowpy_ch
+    translated_second = translated_second_ch
+    collected_second = collected_second_out.outfile
+    batch_report_second = collected_second_out.report
 }
 
 output {

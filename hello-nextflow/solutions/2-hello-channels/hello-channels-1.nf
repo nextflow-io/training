@@ -31,10 +31,10 @@ workflow {
     name_ch = channel.of('Ziggy')
                         .view()
     // emit a greeting
-    sayHello(name_ch)
+    greetings_ch = sayHello(name_ch)
 
     publish:
-    greetings = sayHello.out
+    greetings = greetings_ch
 }
 
 output {

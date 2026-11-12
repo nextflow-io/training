@@ -97,16 +97,16 @@ workflow {
                         .splitCsv()
                         .map { row -> row[0] }
     // emit a greeting
-    sayHello(name_ch)
+    greetings_ch = sayHello(name_ch)
     // translate the greeting
-    translateGreeting(sayHello.out, params.language)
+    translated_ch = translateGreeting(greetings_ch, params.language)
     // collect all the greetings into one file
-    collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
+    collected_ch = collectGreetings(translated_ch.collect(), params.batch, params.language)
 
     publish:
-    greetings = sayHello.out
-    translated = translateGreeting.out
-    collected = collectGreetings.out
+    greetings = greetings_ch
+    translated = translated_ch
+    collected = collected_ch
 }
 
 output {

@@ -218,11 +218,11 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
                             .splitCsv()
                             .map { row -> [row[0], row[1]] }
         // emit a greeting
-        sayHello(person_ch)
+        greetings_ch = sayHello(person_ch)
         // translate each greeting into its own language
-        translateGreeting(sayHello.out)
+        translated_ch = translateGreeting(greetings_ch)
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch, 'native')
+        collected_out = collectGreetings(translated_ch.collect(), params.batch, 'native')
     ```
 
     The greetings are now in several languages, so `params.language` no longer describes them.
@@ -233,7 +233,7 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
 
     ```groovy title="hello-challenge.nf" linenums="107" hl_lines="2"
         publish:
-        greetings = sayHello.out.map { greeting_file, _language -> greeting_file }
+        greetings = greetings_ch.map { greeting_file, _language -> greeting_file }
     ```
 
     In the `map` closure, the underscore at the start of `_language` tells Nextflow that the variable is deliberately unused, so `nextflow lint` doesn't warn about it.
@@ -336,20 +336,20 @@ Keep the collected file and the report as they are.
                             .splitCsv()
                             .map { row -> [row[0], row[2]] }
         // emit a greeting
-        sayHello(person_ch)
+        greetings_ch = sayHello(person_ch)
         // translate the greeting
-        translateGreeting(sayHello.out, params.language)
+        translated_ch = translateGreeting(greetings_ch, params.language)
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.map { greeting_file, _character -> greeting_file }.collect(), params.batch, params.language)
+        collected_out = collectGreetings(translated_ch.map { greeting_file, _character -> greeting_file }.collect(), params.batch, params.language)
         // generate ASCII art of each greeting with its own character
-        cowpy(translateGreeting.out)
+        cowpy_ch = cowpy(translated_ch)
 
         publish:
-        greetings = sayHello.out.map { greeting_file, _character -> greeting_file }
-        translated = translateGreeting.out.map { greeting_file, _character -> greeting_file }
-        collected = collectGreetings.out.outfile
-        batch_report = collectGreetings.out.report
-        cowpy_art = cowpy.out
+        greetings = greetings_ch.map { greeting_file, _character -> greeting_file }
+        translated = translated_ch.map { greeting_file, _character -> greeting_file }
+        collected = collected_out.outfile
+        batch_report = collected_out.report
+        cowpy_art = cowpy_ch
     }
     ```
 
@@ -516,14 +516,14 @@ The entry workflow in `hello-challenge.nf` then calls `GREET`, passes the collec
         names_ch
 
         main:
-        sayHello(names_ch)
+        greetings_ch = sayHello(names_ch)
 
         emit:
-        greetings = sayHello.out
+        greetings = greetings_ch
     }
     ```
 
-    You [include](https://nextflow.io/docs/latest/reference/syntax.html#include) a named workflow the same way as a process, and its named outputs are available as `GREET.out.greetings` and so on.
+    You [include](https://nextflow.io/docs/latest/reference/syntax.html#include) a named workflow the same way as a process, and call it the same way too: with `greet_out = GREET(...)`, its named outputs are available as `greet_out.greetings` and so on.
     The paths in `include` declarations are relative to the file that contains them, so `workflows/greet.nf` includes the modules from `../modules/`.
 
 ??? solution
@@ -545,17 +545,17 @@ The entry workflow in `hello-challenge.nf` then calls `GREET`, passes the collec
 
         main:
         // emit a greeting
-        sayHello(names_ch)
+        greetings_ch = sayHello(names_ch)
         // translate the greeting
-        translateGreeting(sayHello.out, language)
+        translated_ch = translateGreeting(greetings_ch, language)
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), batch_name, language)
+        collected_out = collectGreetings(translated_ch.collect(), batch_name, language)
 
         emit:
-        greetings = sayHello.out
-        translated = translateGreeting.out
-        collected = collectGreetings.out.outfile
-        report = collectGreetings.out.report
+        greetings = greetings_ch
+        translated = translated_ch
+        collected = collected_out.outfile
+        report = collected_out.report
     }
     ```
 
@@ -589,22 +589,22 @@ The entry workflow in `hello-challenge.nf` then calls `GREET`, passes the collec
                             .splitCsv()
                             .map { row -> row[0] }
         // greet, translate and collect
-        GREET(name_ch, params.language, params.batch)
+        greet_out = GREET(name_ch, params.language, params.batch)
         // generate ASCII art of the greetings with cowpy
-        cowpy(GREET.out.collected, params.character)
+        cowpy_ch = cowpy(greet_out.collected, params.character)
 
         publish:
-        greetings = GREET.out.greetings
-        translated = GREET.out.translated
-        collected = GREET.out.collected
-        batch_report = GREET.out.report
-        cowpy_art = cowpy.out
+        greetings = greet_out.greetings
+        translated = greet_out.translated
+        collected = greet_out.collected
+        batch_report = greet_out.report
+        cowpy_art = cowpy_ch
     }
     ```
 
     The `output` block stays as it is.
 
-    Only the entry workflow can publish outputs, so `GREET` emits everything that needs to be published, including the intermediate greetings and translations, and the entry workflow publishes them from `GREET.out`.
+    Only the entry workflow can publish outputs, so `GREET` emits everything that needs to be published, including the intermediate greetings and translations, and the entry workflow publishes them from `greet_out`.
 
     Run the workflow:
 
@@ -742,27 +742,27 @@ Keep `cowpy` on the greetings in the first language.
                             .splitCsv()
                             .map { row -> row[0] }
         // emit a greeting
-        sayHello(name_ch)
+        greetings_ch = sayHello(name_ch)
         // translate the greeting
-        translateGreeting(sayHello.out, params.language)
+        translated_ch = translateGreeting(greetings_ch, params.language)
         // collect all the greetings into one file
-        collectGreetings(translateGreeting.out.collect(), params.batch, params.language)
+        collected_out = collectGreetings(translated_ch.collect(), params.batch, params.language)
         // translate the greeting into the second language
-        translateSecond(sayHello.out, params.second_language)
+        translated_second_ch = translateSecond(greetings_ch, params.second_language)
         // collect the second-language greetings into one file
-        collectSecond(translateSecond.out.collect(), params.batch, params.second_language)
+        collected_second_out = collectSecond(translated_second_ch.collect(), params.batch, params.second_language)
         // generate ASCII art of the greetings with cowpy
-        cowpy(collectGreetings.out.outfile, params.character)
+        cowpy_ch = cowpy(collected_out.outfile, params.character)
 
         publish:
-        greetings = sayHello.out
-        translated = translateGreeting.out
-        collected = collectGreetings.out.outfile
-        batch_report = collectGreetings.out.report
-        cowpy_art = cowpy.out
-        translated_second = translateSecond.out
-        collected_second = collectSecond.out.outfile
-        batch_report_second = collectSecond.out.report
+        greetings = greetings_ch
+        translated = translated_ch
+        collected = collected_out.outfile
+        batch_report = collected_out.report
+        cowpy_art = cowpy_ch
+        translated_second = translated_second_ch
+        collected_second = collected_second_out.outfile
+        batch_report_second = collected_second_out.report
     }
     ```
 
