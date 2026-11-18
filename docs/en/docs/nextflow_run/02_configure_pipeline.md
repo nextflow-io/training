@@ -89,7 +89,7 @@ Nextflow also lets you set different values for individual named processes or gr
 
 ### 1.3. Pipeline parameters
 
-Parameters are the pipeline's command-line inputs, the same `--input`, `--batch` and `--character` flags you've already been setting directly on the command line.
+Parameters are the pipeline's command-line inputs: `--input`, which you've been setting directly on the command line since Part 1, plus `--batch` and `--character`.
 Setting defaults for them here means you don't have to type them out every time, though as you'll see later in this part, there are a couple of other ways to supply them too.
 
 ```groovy title="nextflow.config" linenums="14"
@@ -371,7 +371,7 @@ Learn how to supply and share pipeline parameters.
 ## 3. Configure pipeline parameters
 
 Parameters describe the analysis itself: which inputs to process and how.
-You've already set them on the command line and seen their defaults in `nextflow.config`.
+You've already set `--input` on the command line and seen the defaults for all of them in `nextflow.config`.
 This section covers a more shareable way to supply them, what happens when the same parameter is set in more than one place, and what happens when a value is invalid.
 
 ### 3.1. Use a parameter file
