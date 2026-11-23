@@ -47,7 +47,7 @@ nextflow run hello-channels.nf --name 'Channels'
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-channels.nf` [golden_venter] revision: f21dee2374
 
@@ -196,7 +196,7 @@ nextflow run hello-channels.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-channels.nf` [nostalgic_kilby] revision: 06dd96549e
 
@@ -278,7 +278,7 @@ nextflow run hello-channels.nf
 ??? success "Command output"
 
     ```console hl_lines="7"
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-channels.nf` [thirsty_yalow] revision: 9e26d9820a
 
@@ -351,7 +351,7 @@ nextflow run hello-channels.nf
 ??? success "Command output"
 
     ```console hl_lines="6-9"
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-channels.nf` [golden_hirsch] revision: d1e8d5642d
 
@@ -611,7 +611,7 @@ nextflow run hello-channels.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-channels.nf` [compassionate_wegener] revision: 26c5f6a4a1
 
@@ -892,7 +892,7 @@ nextflow run hello-channels.nf
 ??? failure "Command output"
 
     ```console hl_lines="7 11 16"
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-channels.nf` [adoring_hawking] revision: 0364b5beab
 
@@ -1074,7 +1074,7 @@ nextflow run hello-channels.nf
 ??? success "Command output"
 
     ```console hl_lines="7-10"
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-channels.nf` [elated_raman] revision: 8df9803051
 
@@ -1243,7 +1243,7 @@ nextflow run hello-channels.nf
 ??? failure "Command output"
 
     ```console hl_lines="5 6 10 15"
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-channels.nf` [thirsty_jones] revision: e5a322bfeb
 
@@ -1346,7 +1346,7 @@ nextflow run hello-channels.nf
 ??? failure "Command output"
 
     ```console hl_lines="7-10 14 19"
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-channels.nf` [fabulous_banach] revision: a43886168e
 
@@ -1466,7 +1466,7 @@ nextflow run hello-channels.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-channels.nf` [marvelous_poisson] revision: 1428f8da8b
 

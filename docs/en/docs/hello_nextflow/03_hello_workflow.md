@@ -61,7 +61,7 @@ nextflow run hello-workflow.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-workflow.nf` [hungry_curran] revision: 451e6bb952
 
@@ -305,7 +305,7 @@ nextflow run hello-workflow.nf -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-workflow.nf` [fabulous_jepsen] revision: 6666356a1f
 
@@ -540,7 +540,7 @@ nextflow run hello-workflow.nf -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-workflow.nf` [hopeful_mandelbrot] revision: 51cc879712
 
@@ -575,7 +575,7 @@ nextflow run hello-workflow.nf -resume --language fr
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-workflow.nf` [lonely_davinci] revision: 51cc879712
 
@@ -615,7 +615,7 @@ nextflow run hello-workflow.nf -resume --language de
 ??? failure "Command output"
 
     ```console hl_lines="44-45"
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-workflow.nf` [spontaneous_bell] revision: 51cc879712
 
@@ -905,7 +905,7 @@ nextflow run hello-workflow.nf -resume
 ??? success "Command output"
 
     ```console hl_lines="8"
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-workflow.nf` [kickass_sanger] revision: 8d4f16d465
 
@@ -1020,7 +1020,7 @@ nextflow run hello-workflow.nf -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-workflow.nf` [loquacious_tuckerman] revision: 17c7a7ff85
 
@@ -1168,7 +1168,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-workflow.nf` [nostalgic_williams] revision: 71acf8e3a3
 
@@ -1421,7 +1421,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-workflow.nf` [stoic_bell] revision: 894719601e
 

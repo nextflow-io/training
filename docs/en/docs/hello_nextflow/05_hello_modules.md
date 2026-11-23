@@ -54,7 +54,7 @@ nextflow run hello-modules.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-modules.nf` [hopeful_babbage] revision: 91c8df337b
 
@@ -132,7 +132,7 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `main.nf` [festering_meninsky] revision: 91c8df337b
 
@@ -277,7 +277,7 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `main.nf` [suspicious_chandrasekhar] revision: 408483af68
 
@@ -466,7 +466,7 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `main.nf` [awesome_mahavira] revision: 794a6d172f
 
@@ -613,7 +613,7 @@ nextflow run main.nf -resume
 ??? failure "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `main.nf` [suspicious_kowalevski] revision: 6164e6b941
 
@@ -637,7 +637,7 @@ nextflow run main.nf --input data/names.csv -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `main.nf` [jovial_ekeblad] revision: 6164e6b941
 
@@ -735,7 +735,7 @@ nextflow run main.nf -profile test -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `main.nf` [lethal_shockley] revision: 6164e6b941
 
@@ -843,7 +843,7 @@ nextflow run main.nf -profile test,conda -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `main.nf` [modest_saha] revision: 6164e6b941
 
@@ -943,7 +943,7 @@ Then run the workflow with both the `test` and `french` profiles, and check that
     ```
 
     ```console title="Command output"
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `main.nf` [suspicious_leavitt] revision: 6164e6b941
 
@@ -1044,7 +1044,7 @@ modules
     ```
 
     ```console title="Command output"
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `main.nf` [big_kimura] revision: deff6b13ac
 

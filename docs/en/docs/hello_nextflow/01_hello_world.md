@@ -148,7 +148,7 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-world.nf` [nostalgic_brenner] revision: dc38bebf45
 
@@ -292,7 +292,7 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-world.nf` [mighty_austin] revision: 5cc6feed6c
 
@@ -387,7 +387,7 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-world.nf` [voluminous_ritchie] revision: ce41db3741
 
@@ -581,7 +581,7 @@ nextflow run hello-world.nf --name 'Mateo'
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-world.nf` [hopeful_nightingale] revision: aec5df94d0
 
@@ -662,7 +662,7 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-world.nf` [lonely_mcnulty] revision: f21dee2374
 
@@ -728,7 +728,7 @@ nextflow run hello-world.nf --name 'Celine'
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-world.nf` [pedantic_yonath] revision: f21dee2374
 

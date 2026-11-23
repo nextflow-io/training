@@ -247,7 +247,7 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
     ??? success "Command output"
 
         ```console
-        N E X T F L O W   ~  version 26.10.7
+         N E X T F L O W   ~  version 26.10.7
 
         Launching `hello-challenge.nf` [loving_stallman] revision: 14b81b681a
 
@@ -392,7 +392,7 @@ Keep the collected file and the report as they are.
     ??? success "Command output"
 
         ```console
-        N E X T F L O W   ~  version 26.10.7
+         N E X T F L O W   ~  version 26.10.7
 
         Launching `hello-challenge.nf` [loving_varahamihira] revision: 1a882b4ad2
 
@@ -615,7 +615,7 @@ The entry workflow in `hello-challenge.nf` then calls `GREET`, passes the collec
     ??? success "Command output"
 
         ```console
-        N E X T F L O W   ~  version 26.10.7
+         N E X T F L O W   ~  version 26.10.7
 
         Launching `hello-challenge.nf` [wise_colden] revision: 40b89c26d3
 
@@ -797,7 +797,7 @@ Keep `cowpy` on the greetings in the first language.
     ??? success "Command output"
 
         ```console
-        N E X T F L O W   ~  version 26.10.7
+         N E X T F L O W   ~  version 26.10.7
 
         Launching `hello-challenge.nf` [ecstatic_mirzakhani] revision: db63a39de6
 

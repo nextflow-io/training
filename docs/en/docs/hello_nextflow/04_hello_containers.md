@@ -49,7 +49,7 @@ nextflow run hello-containers.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-containers.nf` [prickly_archimedes] revision: 894719601e
 
@@ -327,11 +327,13 @@ ls /my_project
 ??? success "Command output"
 
     ```console
-    data               hello-containers.nf  hello-workflow.nf  nextflow.config  solutions
-    hello-channels.nf  hello-modules.nf     hello-world.nf     results          work
+    Mateo.txt      es-Raphael.txt       hello-modules.nf   results
+    data           greetings.txt        hello-workflow.nf  solutions
+    es-Celine.txt  hello-channels.nf    hello-world.nf     work
+    es-Mateo.txt   hello-containers.nf  nextflow.config
     ```
 
-You can now see the contents of the working directory from inside the container, including the `names.csv` file under `data/`.
+You can now see the contents of the working directory from inside the container, including the files you created in Part 3 and the `names.csv` file under `data/`.
 
 This effectively established a tunnel through the container wall that you can use to access that part of your filesystem.
 
@@ -626,7 +628,7 @@ nextflow run hello-containers.nf -resume
 ??? failure "Command output"
 
     ```console hl_lines="10 13 20-21 26-27"
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-containers.nf` [compassionate_engelbart] revision: 41f3a1ec21
 
@@ -761,7 +763,7 @@ nextflow run hello-containers.nf -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.10.7
+     N E X T F L O W   ~  version 26.10.7
 
     Launching `hello-containers.nf` [clever_kalam] revision: 004bbd480f
 
