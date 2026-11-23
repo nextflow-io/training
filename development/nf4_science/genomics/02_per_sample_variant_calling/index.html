@@ -43,7 +43,7 @@
       
       
       <link rel="icon" href="../../../assets/img/nextflow-icon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
     
     
       
@@ -4709,13 +4709,14 @@ Do you need to write a bash script that loops through all your samples?</p>
 <h3 id="31-update-the-input-to-list-three-samples">3.1. Update the input to list three samples<a class="headerlink" href="#31-update-the-input-to-list-three-samples" title="Permanent link">&para;</a></h3>
 <p>To run on multiple samples, update the test profile to provide an array of file paths instead of a single one.
 This is a quick way to test multi-sample execution; in the next step we'll switch to a more scalable approach using a file of inputs.</p>
-<p>First, comment out the type annotation in the parameter declaration, since arrays cannot use typed declarations:</p>
+<p>First, change the type of the parameter declaration from <code>Path</code> to <code>List&lt;Path&gt;</code>.
+A parameter's type describes the shape of the value it accepts, so a list of files needs a list type:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">After</label><label for="__tabbed_17_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-10">10</a></span>
-<span class="normal"><a href="#__codelineno-45-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-45-10" name="__codelineno-45-10"></a><span class="hll"><span class="w">    </span><span class="c1">// Primary input (array of three samples)</span>
-</span><a id="__codelineno-45-11" name="__codelineno-45-11"></a><span class="hll"><span class="w">    </span><span class="n">input</span><span class="w"> </span><span class="c1">//: Path</span>
+<span class="normal"><a href="#__codelineno-45-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-45-10" name="__codelineno-45-10"></a><span class="hll"><span class="w">    </span><span class="c1">// Primary input (list of three samples)</span>
+</span><a id="__codelineno-45-11" name="__codelineno-45-11"></a><span class="hll"><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Path</span><span class="o">&gt;</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5149,7 +5150,7 @@ If you are not running this in the training environment we provide, you will nee
 </div>
 <h3 id="42-update-the-parameter-and-test-profile">4.2. Update the parameter and test profile<a class="headerlink" href="#42-update-the-parameter-and-test-profile" title="Permanent link">&para;</a></h3>
 <p>Switch the <code>input</code> parameter to point to the <code>samplesheet.csv</code> file instead of listing individual samples.</p>
-<p>Restore the type annotation in the params block (since it's a single path again):</p>
+<p>Change the parameter type back to <code>Path</code>, since the input is a single file again:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="24:2"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><input id="__tabbed_24_2" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">After</label><label for="__tabbed_24_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5160,8 +5161,8 @@ If you are not running this in the training environment we provide, you will nee
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-71-10">10</a></span>
-<span class="normal"><a href="#__codelineno-71-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-71-10" name="__codelineno-71-10"></a><span class="w">    </span><span class="c1">// Primary input (array of three samples)</span>
-<a id="__codelineno-71-11" name="__codelineno-71-11"></a><span class="w">    </span><span class="n">input</span>
+<span class="normal"><a href="#__codelineno-71-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-71-10" name="__codelineno-71-10"></a><span class="w">    </span><span class="c1">// Primary input (list of three samples)</span>
+<a id="__codelineno-71-11" name="__codelineno-71-11"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Path</span><span class="o">&gt;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
