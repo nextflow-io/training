@@ -399,6 +399,13 @@ nextflow run nf-core/demo -profile test,docker --outdir demo-results
 
 If your output matches that, congratulations! You've just run your first nf-core pipeline.
 
+??? warning "Didn't work?"
+
+    If the run failed with `Validation of pipeline parameters failed!` and complaints about missing `sample` and `fastq_1` fields, check which directory you launched it from.
+    Nextflow loads any `nextflow.config` file present in the launch directory and gives it priority over the pipeline's own configuration.
+    Other course directories, such as `nextflow-run/`, contain a `nextflow.config` that sets its own `input` parameter and `test` profile, which replace the pipeline's test samplesheet.
+    Change to the `nfcore-use/` directory and run the command again.
+
 You'll notice that there is a lot more console output than when you run a basic Nextflow pipeline.
 There's a header that includes a summary of the pipeline's version, inputs and outputs, and a few elements of configuration.
 
