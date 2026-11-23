@@ -284,6 +284,9 @@ Efficient navigation is crucial when working with complex workflows spanning mul
     process FASTQC {
         tag "${sample_id}"
 
+        // Container directive for reproducibility
+        container 'biocontainers/fastqc:v0.11.9_cv8'
+
         input:
         tuple val(sample_id), path(reads)
 

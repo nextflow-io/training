@@ -1832,8 +1832,10 @@ Increase the time limit to a realistic value:
 
 === "After"
 
-    ```groovy title="bad_resources.nf" hl_lines="3" linenums="3"
+    ```groovy title="bad_resources.nf" hl_lines="5" linenums="3"
     process PROCESS_FILES {
+
+        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
         time '100 s'  // Fixed: Realistic time limit
 
@@ -1853,8 +1855,10 @@ Increase the time limit to a realistic value:
 
 === "Before"
 
-    ```groovy title="bad_resources.nf" hl_lines="3" linenums="3"
+    ```groovy title="bad_resources.nf" hl_lines="5" linenums="3"
     process PROCESS_FILES {
+
+        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
         time '1 ms'  // ERROR: Unrealistic time limit
 
