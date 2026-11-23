@@ -38,15 +38,15 @@ nextflow run main.nf --input data/single-greeting.csv
 ??? success "Command output"
 
     ```console hl_lines="6 7 8 9"
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [angry_hoover] revision: ce74f81996
+    Launching `main.nf` [nice_roentgen] revision: f5f2664c7a
 
     executor >  local (4)
-    [37/389926] sayHello (1)       | 1 of 1 ✔
-    [b4/e2daac] convertToUpper (1) | 1 of 1 ✔
-    [61/30b1af] collectGreetings   | 1 of 1 ✔
-    [24/5fad08] cowpy              | 1 of 1 ✔
+    [22/53a51e] sayHello (1)       | 1 of 1 ✔
+    [0e/7cf8e6] convertToUpper (1) | 1 of 1 ✔
+    [62/4af596] collectGreetings   | 1 of 1 ✔
+    [b8/071a5e] cowpy              | 1 of 1 ✔
 
     Outputs:
 
@@ -68,14 +68,14 @@ nextflow run main.nf --input data/single-greeting.csv
 The key lines in the output are the process status lines, one per step:
 
 ```console
-[37/389926] sayHello (1)       | 1 of 1 ✔
-[b4/e2daac] convertToUpper (1) | 1 of 1 ✔
-[61/30b1af] collectGreetings   | 1 of 1 ✔
-[24/5fad08] cowpy              | 1 of 1 ✔
+[22/53a51e] sayHello (1)       | 1 of 1 ✔
+[0e/7cf8e6] convertToUpper (1) | 1 of 1 ✔
+[62/4af596] collectGreetings   | 1 of 1 ✔
+[b8/071a5e] cowpy              | 1 of 1 ✔
 ```
 
 Each of the four processes ran successfully once.
-The prefix in brackets, such as `[37/389926]`, is a truncated path to the task's working directory; more on that in [1.3](#13-explore-the-work-directory).
+The prefix in brackets, such as `[22/53a51e]`, is a truncated path to the task's working directory; more on that in [1.3](#13-explore-the-work-directory).
 The `Outputs:` block that follows lists every file the pipeline published, grouped under labels defined by the pipeline author.
 
 With a single input, `collectGreetings` has only one file to merge, so this step doesn't do much yet.
@@ -143,10 +143,10 @@ The `character` parameter defaults to `turkey` in `nextflow.config`, which is wh
 
 Behind the scenes, Nextflow creates a unique task directory for every process call inside a directory named `work/`.
 The hash shown in the console output is the path to that directory.
-For example, the `sayHello` task ran in `work/37/389926...`:
+For example, the `sayHello` task ran in `work/22/53a51e...`:
 
 ```bash
-ls -a work/37/389926*
+ls -a work/22/53a51e*
 ```
 
 Inside you will find the output file along with several hidden log files:
@@ -158,7 +158,7 @@ Inside you will find the output file along with several hidden log files:
 
 The `.command.sh` file is especially useful when debugging; it shows precisely what was executed:
 
-```console title="work/37/389926.../.command.sh"
+```console title="work/22/53a51e.../.command.sh"
 #!/bin/bash -ue
 echo 'Hello' > 'Hello-output.txt'
 ```
@@ -167,8 +167,8 @@ Each of the four tasks has its own directory.
 When one step uses the output of another, Nextflow places a symbolic link to the upstream file in the downstream task's directory.
 For example, the `convertToUpper` task directory contains a link to the file produced by `sayHello`, next to its own output:
 
-```console title="work/b4/e2daac.../"
-Hello-output.txt -> /workspaces/training/nextflow-run/work/37/389926.../Hello-output.txt
+```console title="work/0e/7cf8e6.../"
+Hello-output.txt -> /workspaces/training/nextflow-run/work/22/53a51e.../Hello-output.txt
 UPPER-Hello-output.txt
 ```
 
@@ -200,15 +200,15 @@ nextflow run main.nf --input data/greetings.csv -resume
 ??? success "Command output"
 
     ```console hl_lines="6 7 8 9"
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [tender_allen] revision: ce74f81996
+    Launching `main.nf` [evil_khorana] revision: f5f2664c7a
 
     executor >  local (6)
-    [c4/642d20] sayHello (3)       | 3 of 3, cached: 1 ✔
-    [7b/4dcc18] convertToUpper (3) | 3 of 3, cached: 1 ✔
-    [49/d09e85] collectGreetings   | 1 of 1 ✔
-    [71/6b5c76] cowpy              | 1 of 1 ✔
+    [0d/81f54a] sayHello (3)       | 3 of 3, cached: 1 ✔
+    [9d/fda092] convertToUpper (3) | 3 of 3, cached: 1 ✔
+    [9d/b05c40] collectGreetings   | 1 of 1 ✔
+    [d7/ae3d9f] cowpy              | 1 of 1 ✔
 
     Outputs:
 
@@ -312,15 +312,15 @@ It's also what lets `-resume` cache and reuse individual tasks independently: ea
 `collectGreetings` shows how this works across steps and across runs.
 It depends on the outputs of all three `convertToUpper` tasks, which live in three different task directories, so Nextflow places links to those files in `collectGreetings`'s own directory:
 
-```console title="work/49/d09e85.../"
+```console title="work/9d/b05c40.../"
 COLLECTED-batch-output.txt
-UPPER-Bonjour-output.txt -> /workspaces/training/nextflow-run/work/3d/84f6a0.../UPPER-Bonjour-output.txt
-UPPER-Hello-output.txt   -> /workspaces/training/nextflow-run/work/b4/e2daac.../UPPER-Hello-output.txt
-UPPER-Hola-output.txt    -> /workspaces/training/nextflow-run/work/7b/4dcc18.../UPPER-Hola-output.txt
+UPPER-Bonjour-output.txt -> /workspaces/training/nextflow-run/work/b5/146e85.../UPPER-Bonjour-output.txt
+UPPER-Hello-output.txt   -> /workspaces/training/nextflow-run/work/0e/7cf8e6.../UPPER-Hello-output.txt
+UPPER-Hola-output.txt    -> /workspaces/training/nextflow-run/work/9d/fda092.../UPPER-Hola-output.txt
 batch-report.txt
 ```
 
-The link for `UPPER-Hello-output.txt` points to `work/b4/e2daac...`: the `convertToUpper` task directory from the first run, which this run reused.
+The link for `UPPER-Hello-output.txt` points to `work/0e/7cf8e6...`: the `convertToUpper` task directory from the first run, which this run reused.
 
 ### 2.4. Run the workflow again with `-ansi-log false`
 
@@ -334,30 +334,30 @@ nextflow run main.nf --input data/greetings.csv -resume -ansi-log false
 ??? success "Command output"
 
     ```console
-    N E X T F L O W  ~  version 26.04.4
-    Launching `main.nf` [cheesy_kimura] - revision: ce74f81996
-    [05/f5306b] Cached process > sayHello (2)
-    [c4/642d20] Cached process > sayHello (3)
-    [37/389926] Cached process > sayHello (1)
-    [7b/4dcc18] Cached process > convertToUpper (1)
-    [3d/84f6a0] Cached process > convertToUpper (2)
-    [b4/e2daac] Cached process > convertToUpper (3)
-    [49/d09e85] Cached process > collectGreetings
-    [71/6b5c76] Cached process > cowpy
+    N E X T F L O W  ~  version 26.10.7
+    Launching `main.nf` [tiny_mestorf] - revision: f5f2664c7a
+    [98/28bfda] Cached process > sayHello (2)
+    [22/53a51e] Cached process > sayHello (1)
+    [0d/81f54a] Cached process > sayHello (3)
+    [9d/fda092] Cached process > convertToUpper (3)
+    [0e/7cf8e6] Cached process > convertToUpper (1)
+    [b5/146e85] Cached process > convertToUpper (2)
+    [9d/b05c40] Cached process > collectGreetings
+    [d7/ae3d9f] Cached process > cowpy
 
     Outputs:
 
       /workspaces/training/nextflow-run/results
 
       first_output:
+        - batch/intermediates/Hello-output.txt
         - batch/intermediates/Bonjour-output.txt
         - batch/intermediates/Hola-output.txt
-        - batch/intermediates/Hello-output.txt
 
       uppercased:
         - batch/intermediates/UPPER-Hola-output.txt
-        - batch/intermediates/UPPER-Bonjour-output.txt
         - batch/intermediates/UPPER-Hello-output.txt
+        - batch/intermediates/UPPER-Bonjour-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
@@ -368,7 +368,7 @@ nextflow run main.nf --input data/greetings.csv -resume -ansi-log false
 
 This shows all 8 process calls and the task directory for each one.
 Since nothing changed since the previous run, every task was cached.
-The `sayHello` task at `[37/389926]` is the one from the very first run.
+The `sayHello` task at `[22/53a51e]` is the one from the very first run.
 
 ### 2.5. Generate an execution timeline
 
@@ -382,29 +382,29 @@ nextflow run main.nf --input data/greetings.csv -with-timeline
 ??? success "Command output"
 
     ```console hl_lines="6 7 8 9"
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [jolly_noyce] revision: ce74f81996
+    Launching `main.nf` [extravagant_hirsch] revision: f5f2664c7a
 
     executor >  local (8)
-    [86/b36db0] sayHello (1)       | 3 of 3 ✔
-    [dd/ab5042] convertToUpper (3) | 3 of 3 ✔
-    [c0/a425c6] collectGreetings   | 1 of 1 ✔
-    [b7/b79993] cowpy              | 1 of 1 ✔
+    [92/acf163] sayHello (3)       | 3 of 3 ✔
+    [8b/36fc3a] convertToUpper (3) | 3 of 3 ✔
+    [c7/49cc27] collectGreetings   | 1 of 1 ✔
+    [01/b73b07] cowpy              | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/nextflow-run/results
 
       first_output:
-        - batch/intermediates/Hola-output.txt
         - batch/intermediates/Hello-output.txt
         - batch/intermediates/Bonjour-output.txt
+        - batch/intermediates/Hola-output.txt
 
       uppercased:
-        - batch/intermediates/UPPER-Hola-output.txt
-        - batch/intermediates/UPPER-Hello-output.txt
         - batch/intermediates/UPPER-Bonjour-output.txt
+        - batch/intermediates/UPPER-Hello-output.txt
+        - batch/intermediates/UPPER-Hola-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 

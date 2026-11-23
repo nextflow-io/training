@@ -20,10 +20,10 @@ Every time you launch a Nextflow workflow, a line gets written to a log file cal
 ??? abstract "File contents"
 
     ```txt title=".nextflow/history" linenums="1"
-    2026-09-13 01:47:58	2.8s	determined_ramanujan	OK	ce74f81996b8ce999853fdbb25ba7969	03078950-5011-414f-992b-8fe1bd219ac2	nextflow run main.nf --input data/greetings.csv --character turkey
-    2026-09-13 01:48:03	3s	prickly_cuvier	OK	ce74f81996b8ce999853fdbb25ba7969	5a9e8bf7-a7db-4c2c-b1d8-3bd4c7266528	nextflow run main.nf --input data/greetings.csv --character tux
-    2026-09-13 01:48:09	2.3s	elegant_panini	OK	ce74f81996b8ce999853fdbb25ba7969	517ccc29-9db7-4d8d-8ea0-c8db6e9ac653	nextflow run main.nf --input data/greetings.csv --character stegosaurus
-    2026-09-13 01:48:14	1.5s	deadly_lamport	OK	ce74f81996b8ce999853fdbb25ba7969	517ccc29-9db7-4d8d-8ea0-c8db6e9ac653	nextflow run main.nf --input data/greetings.csv --character stegosaurus -resume
+    2026-11-23 23:37:27	2.5s	soggy_heyrovsky	OK	f5f2664c7a42831ad27cde8269282db8	43d52f9c-245a-4b8c-a22a-e972440278fe	nextflow run main.nf --input data/greetings.csv --character turkey
+    2026-11-23 23:37:31	2.3s	cheesy_ptolemy	OK	f5f2664c7a42831ad27cde8269282db8	b19e5c7e-693b-411e-924b-827e0cea9423	nextflow run main.nf --input data/greetings.csv --character tux
+    2026-11-23 23:37:35	2.6s	silly_mercator	OK	f5f2664c7a42831ad27cde8269282db8	aeb89dce-8133-4a2f-b622-ef67fb9309e1	nextflow run main.nf --input data/greetings.csv --character stegosaurus
+    2026-11-23 23:37:39	1.9s	silly_galileo	OK	f5f2664c7a42831ad27cde8269282db8	aeb89dce-8133-4a2f-b622-ef67fb9309e1	nextflow run main.nf --input data/greetings.csv --character stegosaurus -resume
     ```
 
 Each line gives you the timestamp, duration, run name, status, revision ID, session ID, and full command line for a run launched from this directory.
@@ -42,11 +42,11 @@ nextflow log
 ??? success "Command output"
 
     ```console linenums="1"
-    TIMESTAMP          	DURATION	RUN NAME            	STATUS	REVISION ID	SESSION ID                          	COMMAND
-    2026-09-13 01:47:58	2.8s    	determined_ramanujan	OK    	ce74f81996 	03078950-5011-414f-992b-8fe1bd219ac2	nextflow run main.nf --input data/greetings.csv --character turkey
-    2026-09-13 01:48:03	3s      	prickly_cuvier      	OK    	ce74f81996 	5a9e8bf7-a7db-4c2c-b1d8-3bd4c7266528	nextflow run main.nf --input data/greetings.csv --character tux
-    2026-09-13 01:48:09	2.3s    	elegant_panini      	OK    	ce74f81996 	517ccc29-9db7-4d8d-8ea0-c8db6e9ac653	nextflow run main.nf --input data/greetings.csv --character stegosaurus
-    2026-09-13 01:48:14	1.5s    	deadly_lamport      	OK    	ce74f81996 	517ccc29-9db7-4d8d-8ea0-c8db6e9ac653	nextflow run main.nf --input data/greetings.csv --character stegosaurus -resume
+    TIMESTAMP          	DURATION	RUN NAME       	STATUS	REVISION ID	SESSION ID                          	COMMAND
+    2026-11-23 23:37:27	2.5s    	soggy_heyrovsky	OK    	f5f2664c7a 	43d52f9c-245a-4b8c-a22a-e972440278fe	nextflow run main.nf --input data/greetings.csv --character turkey
+    2026-11-23 23:37:31	2.3s    	cheesy_ptolemy 	OK    	f5f2664c7a 	b19e5c7e-693b-411e-924b-827e0cea9423	nextflow run main.nf --input data/greetings.csv --character tux
+    2026-11-23 23:37:35	2.6s    	silly_mercator 	OK    	f5f2664c7a 	aeb89dce-8133-4a2f-b622-ef67fb9309e1	nextflow run main.nf --input data/greetings.csv --character stegosaurus
+    2026-11-23 23:37:39	1.9s    	silly_galileo  	OK    	f5f2664c7a 	aeb89dce-8133-4a2f-b622-ef67fb9309e1	nextflow run main.nf --input data/greetings.csv --character stegosaurus -resume
     ```
 
 Nextflow groups the caching information it uses for `-resume` under `.nextflow/cache`, keyed by session ID.
@@ -72,7 +72,7 @@ Run enough pipelines during development and those subdirectories add up, so Next
 `nextflow clean` supports several ways to select what to remove; see the [reference documentation](https://www.nextflow.io/docs/latest/reference/cli.html#clean) for the full list.
 Here you'll delete everything from runs before a given run, using its run name.
 
-Look up the most recent run you want to keep using `nextflow log`; in the [example from 1.2](#12-use-nextflow-log-for-a-friendlier-view) that's `elegant_panini`, the last plain run before the `-resume` one.
+Look up the most recent run you want to keep using `nextflow log`; in the [example from 1.2](#12-use-nextflow-log-for-a-friendlier-view) that's `silly_mercator`, the last plain run before the `-resume` one.
 The run name is the machine-generated two-part string shown in the `Launching (...)` console line, or in the `RUN NAME` column of `nextflow log`.
 
 ### 2.2. Do a dry run
@@ -80,32 +80,32 @@ The run name is the machine-generated two-part string shown in the `Launching (.
 Add `-n` first to check what a given command would delete without actually deleting anything:
 
 ```bash
-nextflow clean -before elegant_panini -n
+nextflow clean -before silly_mercator -n
 ```
 
 ??? success "Command output"
 
     ```console
-    Would remove /workspaces/training/nextflow-run/work/e5/9ec3fe24deb5d1ffa478dff5e5e1d4
-    Would remove /workspaces/training/nextflow-run/work/75/36b1ece86b213c331852d0a3dc659b
-    Would remove /workspaces/training/nextflow-run/work/be/8157808f28699259b5ff37e4bf9f72
-    Would remove /workspaces/training/nextflow-run/work/f3/d828b7ba6b315eb08e0f96168119f5
-    Would remove /workspaces/training/nextflow-run/work/94/7a2d7ef67d81b6e66430f300816698
-    Would remove /workspaces/training/nextflow-run/work/eb/e37c5c8638c45916de3d9794d6d22f
-    Would remove /workspaces/training/nextflow-run/work/3f/f56a705a6370f6c615aff22d3f240a
-    Would remove /workspaces/training/nextflow-run/work/25/4922fa35ba2c6087777ddce20e9f2f
-    Would remove /workspaces/training/nextflow-run/work/a4/2de7bcc2f8fc974261f7280c1480f7
-    Would remove /workspaces/training/nextflow-run/work/48/8c49bded446d4fcb78c8125318c5e3
-    Would remove /workspaces/training/nextflow-run/work/8e/c9834a9bdd7c21de2991d959201a9d
-    Would remove /workspaces/training/nextflow-run/work/d5/a9055dc8c817c6c1f436494685955c
-    Would remove /workspaces/training/nextflow-run/work/27/9473df9e55e35c8869d9571b480926
-    Would remove /workspaces/training/nextflow-run/work/d3/ebc066e1d844232b9f5ee0a7d87464
-    Would remove /workspaces/training/nextflow-run/work/91/17ef1815ed06b8f177d0135d8ef0dc
-    Would remove /workspaces/training/nextflow-run/work/12/0443f9fcff27a552d4bc73aaedf24a
+    Would remove /workspaces/training/nextflow-run/work/7c/5801ce6e01159a03b56278824151e5
+    Would remove /workspaces/training/nextflow-run/work/82/5a06fd4cb701738f88022546aaedea
+    Would remove /workspaces/training/nextflow-run/work/2f/130379895837b7a95fe652adc335a3
+    Would remove /workspaces/training/nextflow-run/work/3a/b9f6c79dd7bd225e63a2024f10ea63
+    Would remove /workspaces/training/nextflow-run/work/7a/b2502a27862d8b859b46f86fe110e1
+    Would remove /workspaces/training/nextflow-run/work/99/b0f0a37ab91cd109e4f40f7eeccc88
+    Would remove /workspaces/training/nextflow-run/work/23/2ba361a071b20dba45fd6b271247f1
+    Would remove /workspaces/training/nextflow-run/work/d2/c79a535f01076389275c2b66574c8f
+    Would remove /workspaces/training/nextflow-run/work/bf/da869e3a9d07e755c86287f451bfdb
+    Would remove /workspaces/training/nextflow-run/work/be/8f9ba84dab8e42e4b8e6c7e619fe03
+    Would remove /workspaces/training/nextflow-run/work/4b/6553fb233c0ae93f0827c0bcdd0e88
+    Would remove /workspaces/training/nextflow-run/work/a4/e13b1ad066c5ab77a6731e68b3cdaa
+    Would remove /workspaces/training/nextflow-run/work/9f/b630d59ea3eef8c1b712e34fbf2d96
+    Would remove /workspaces/training/nextflow-run/work/a0/2a5226725af0509c4b00f800364853
+    Would remove /workspaces/training/nextflow-run/work/20/6212cc5a86a58e100935966c9f74eb
+    Would remove /workspaces/training/nextflow-run/work/8a/0707e0d57c39f1e0ae62bb2c6cc034
     ```
 
 That's 16 task directories: the 8 tasks from the `turkey` run plus the 8 from the `tux` run, exactly as many as you'd expect for two full runs of this four-process pipeline.
-The `elegant_panini` run itself, and the cached tasks the `-resume` run reused from it, are left alone.
+The `silly_mercator` run itself, and the cached tasks the `-resume` run reused from it, are left alone.
 
 Your output will list different directory names, and how many lines you get depends on how many runs you've done; if you don't see any lines, either the run name doesn't match one in your log, or there's nothing to delete before it.
 
@@ -114,31 +114,31 @@ Your output will list different directory names, and how many lines you get depe
 Once the dry run looks right, re-run the same command with `-f` instead of `-n`:
 
 ```bash
-nextflow clean -before elegant_panini -f
+nextflow clean -before silly_mercator -f
 ```
 
 ??? success "Command output"
 
     ```console
-    Removed /workspaces/training/nextflow-run/work/e5/9ec3fe24deb5d1ffa478dff5e5e1d4
-    Removed /workspaces/training/nextflow-run/work/75/36b1ece86b213c331852d0a3dc659b
-    Removed /workspaces/training/nextflow-run/work/be/8157808f28699259b5ff37e4bf9f72
-    Removed /workspaces/training/nextflow-run/work/f3/d828b7ba6b315eb08e0f96168119f5
-    Removed /workspaces/training/nextflow-run/work/94/7a2d7ef67d81b6e66430f300816698
-    Removed /workspaces/training/nextflow-run/work/eb/e37c5c8638c45916de3d9794d6d22f
-    Removed /workspaces/training/nextflow-run/work/3f/f56a705a6370f6c615aff22d3f240a
-    Removed /workspaces/training/nextflow-run/work/25/4922fa35ba2c6087777ddce20e9f2f
-    Removed /workspaces/training/nextflow-run/work/a4/2de7bcc2f8fc974261f7280c1480f7
-    Removed /workspaces/training/nextflow-run/work/48/8c49bded446d4fcb78c8125318c5e3
-    Removed /workspaces/training/nextflow-run/work/8e/c9834a9bdd7c21de2991d959201a9d
-    Removed /workspaces/training/nextflow-run/work/d5/a9055dc8c817c6c1f436494685955c
-    Removed /workspaces/training/nextflow-run/work/27/9473df9e55e35c8869d9571b480926
-    Removed /workspaces/training/nextflow-run/work/d3/ebc066e1d844232b9f5ee0a7d87464
-    Removed /workspaces/training/nextflow-run/work/91/17ef1815ed06b8f177d0135d8ef0dc
-    Removed /workspaces/training/nextflow-run/work/12/0443f9fcff27a552d4bc73aaedf24a
+    Removed /workspaces/training/nextflow-run/work/7c/5801ce6e01159a03b56278824151e5
+    Removed /workspaces/training/nextflow-run/work/82/5a06fd4cb701738f88022546aaedea
+    Removed /workspaces/training/nextflow-run/work/2f/130379895837b7a95fe652adc335a3
+    Removed /workspaces/training/nextflow-run/work/3a/b9f6c79dd7bd225e63a2024f10ea63
+    Removed /workspaces/training/nextflow-run/work/7a/b2502a27862d8b859b46f86fe110e1
+    Removed /workspaces/training/nextflow-run/work/99/b0f0a37ab91cd109e4f40f7eeccc88
+    Removed /workspaces/training/nextflow-run/work/23/2ba361a071b20dba45fd6b271247f1
+    Removed /workspaces/training/nextflow-run/work/d2/c79a535f01076389275c2b66574c8f
+    Removed /workspaces/training/nextflow-run/work/bf/da869e3a9d07e755c86287f451bfdb
+    Removed /workspaces/training/nextflow-run/work/be/8f9ba84dab8e42e4b8e6c7e619fe03
+    Removed /workspaces/training/nextflow-run/work/4b/6553fb233c0ae93f0827c0bcdd0e88
+    Removed /workspaces/training/nextflow-run/work/a4/e13b1ad066c5ab77a6731e68b3cdaa
+    Removed /workspaces/training/nextflow-run/work/9f/b630d59ea3eef8c1b712e34fbf2d96
+    Removed /workspaces/training/nextflow-run/work/a0/2a5226725af0509c4b00f800364853
+    Removed /workspaces/training/nextflow-run/work/20/6212cc5a86a58e100935966c9f74eb
+    Removed /workspaces/training/nextflow-run/work/8a/0707e0d57c39f1e0ae62bb2c6cc034
     ```
 
-`nextflow clean` empties the task directories but leaves the two-character parent directories (like `e5/`) in place.
+`nextflow clean` empties the task directories but leaves the two-character parent directories (like `7c/`) in place.
 
 !!! warning
 

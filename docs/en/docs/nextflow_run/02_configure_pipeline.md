@@ -141,29 +141,29 @@ nextflow run main.nf -profile test
 ??? success "Command output"
 
     ```console hl_lines="6 7 8 9"
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [reverent_heisenberg] revision: ce74f81996
+    Launching `main.nf` [prickly_pike] revision: f5f2664c7a
 
     executor >  local (8)
-    [3d/8a12c7] sayHello (3)       | 3 of 3 ✔
-    [e7/e0934f] convertToUpper (2) | 3 of 3 ✔
-    [1d/616569] collectGreetings   | 1 of 1 ✔
-    [44/7d46cf] cowpy              | 1 of 1 ✔
+    [cd/345227] sayHello (2)       | 3 of 3 ✔
+    [72/317d0f] convertToUpper (3) | 3 of 3 ✔
+    [d0/907439] collectGreetings   | 1 of 1 ✔
+    [84/cb9596] cowpy              | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/nextflow-run/results
 
       first_output:
-        - test/intermediates/Bonjour-output.txt
         - test/intermediates/Hello-output.txt
         - test/intermediates/Hola-output.txt
+        - test/intermediates/Bonjour-output.txt
 
       uppercased:
-        - test/intermediates/UPPER-Bonjour-output.txt
         - test/intermediates/UPPER-Hello-output.txt
         - test/intermediates/UPPER-Hola-output.txt
+        - test/intermediates/UPPER-Bonjour-output.txt
 
       collected: test/intermediates/COLLECTED-test-output.txt
 
@@ -208,29 +208,29 @@ nextflow run main.nf -with-report
 ??? success "Command output"
 
     ```console hl_lines="6 7 8 9"
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [intergalactic_dalembert] revision: ce74f81996
+    Launching `main.nf` [furious_gates] revision: f5f2664c7a
 
     executor >  local (8)
-    [34/23f10f] sayHello (2)       | 3 of 3 ✔
-    [af/cab69d] convertToUpper (3) | 3 of 3 ✔
-    [9e/d73afb] collectGreetings   | 1 of 1 ✔
-    [3c/392db0] cowpy              | 1 of 1 ✔
+    [58/66e6ca] sayHello (3)       | 3 of 3 ✔
+    [00/a614e2] convertToUpper (2) | 3 of 3 ✔
+    [5d/d95f15] collectGreetings   | 1 of 1 ✔
+    [db/35f842] cowpy              | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/nextflow-run/results
 
       first_output:
-        - batch/intermediates/Bonjour-output.txt
         - batch/intermediates/Hello-output.txt
+        - batch/intermediates/Bonjour-output.txt
         - batch/intermediates/Hola-output.txt
 
       uppercased:
-        - batch/intermediates/UPPER-Bonjour-output.txt
-        - batch/intermediates/UPPER-Hello-output.txt
         - batch/intermediates/UPPER-Hola-output.txt
+        - batch/intermediates/UPPER-Hello-output.txt
+        - batch/intermediates/UPPER-Bonjour-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
@@ -276,29 +276,30 @@ nextflow run main.nf -c custom.config -with-report
 ??? success "Command output"
 
     ```console hl_lines="6 7 8 9"
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [exotic_cray] revision: ce74f81996
+    Launching `main.nf` [wise_blackwell] revision: f5f2664c7a
 
     executor >  local (8)
-    [77/e02315] sayHello (1)       | 3 of 3 ✔
-    [a6/ccf44b] convertToUpper (3) | 3 of 3 ✔
-    [56/fd1296] collectGreetings   | 1 of 1 ✔
-    [2c/205a94] cowpy              | 1 of 1 ✔
+    [db/cd2f0c] sayHello (1)       | 3 of 3 ✔
+    [cb/8c6ae7] convertToUpper (1) | 3 of 3 ✔
+    [e8/b4565b] collectGreetings   | 1 of 1 ✔
+    [ab/862866] cowpy              | 1 of 1 ✔
+    Creating env using conda: conda-forge::cowpy==1.1.5 [cache /workspaces/training/nextflow-run/work/conda/env-898314d566668b6587ad714ae06b8520]
 
     Outputs:
 
       /workspaces/training/nextflow-run/results
 
       first_output:
-        - batch/intermediates/Bonjour-output.txt
         - batch/intermediates/Hello-output.txt
+        - batch/intermediates/Bonjour-output.txt
         - batch/intermediates/Hola-output.txt
 
       uppercased:
+        - batch/intermediates/UPPER-Hola-output.txt
         - batch/intermediates/UPPER-Bonjour-output.txt
         - batch/intermediates/UPPER-Hello-output.txt
-        - batch/intermediates/UPPER-Hola-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
@@ -403,29 +404,29 @@ nextflow run main.nf -params-file test-params.yaml
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [sharp_faraday] revision: ce74f81996
+    Launching `main.nf` [shrivelled_kay] revision: f5f2664c7a
 
     executor >  local (8)
-    [1c/9ff63e] sayHello (1)       | 3 of 3 ✔
-    [3b/bb5691] convertToUpper (2) | 3 of 3 ✔
-    [cd/2c1f6e] collectGreetings   | 1 of 1 ✔
-    [89/c333bc] cowpy              | 1 of 1 ✔
+    [c0/60d6e3] sayHello (2)       | 3 of 3 ✔
+    [53/ae5c04] convertToUpper (3) | 3 of 3 ✔
+    [ac/80eccf] collectGreetings   | 1 of 1 ✔
+    [cd/57c79f] cowpy              | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/nextflow-run/results
 
       first_output:
-        - yaml/intermediates/Bonjour-output.txt
-        - yaml/intermediates/Hello-output.txt
         - yaml/intermediates/Hola-output.txt
+        - yaml/intermediates/Hello-output.txt
+        - yaml/intermediates/Bonjour-output.txt
 
       uppercased:
-        - yaml/intermediates/UPPER-Bonjour-output.txt
         - yaml/intermediates/UPPER-Hello-output.txt
         - yaml/intermediates/UPPER-Hola-output.txt
+        - yaml/intermediates/UPPER-Bonjour-output.txt
 
       collected: yaml/intermediates/COLLECTED-yaml-output.txt
 
@@ -438,9 +439,9 @@ nextflow run main.nf -params-file test-params.yaml
 
     ```console title="results/yaml/cowpy-COLLECTED-yaml-output.txt"
      _________
-    / BONJOUR \
+    / HELLO   \
     | HOLA    |
-    \ HELLO   /
+    \ BONJOUR /
      ---------
     \                             .       .
      \                           / `.   .' "
@@ -475,29 +476,29 @@ nextflow run main.nf -params-file test-params.yaml --character tux
 ??? success "Command output"
 
     ```console hl_lines="6 7 8 9"
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [fervent_banach] revision: ce74f81996
+    Launching `main.nf` [nice_aryabhata] revision: f5f2664c7a
 
     executor >  local (8)
-    [5a/7abca5] sayHello (1)       | 3 of 3 ✔
-    [c8/acbc88] convertToUpper (3) | 3 of 3 ✔
-    [24/8cf0a6] collectGreetings   | 1 of 1 ✔
-    [11/977dc4] cowpy              | 1 of 1 ✔
+    [79/0c0d81] sayHello (2)       | 3 of 3 ✔
+    [29/85f21c] convertToUpper (3) | 3 of 3 ✔
+    [e5/c62750] collectGreetings   | 1 of 1 ✔
+    [18/96f851] cowpy              | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/nextflow-run/results
 
       first_output:
-        - yaml/intermediates/Bonjour-output.txt
         - yaml/intermediates/Hello-output.txt
         - yaml/intermediates/Hola-output.txt
+        - yaml/intermediates/Bonjour-output.txt
 
       uppercased:
+        - yaml/intermediates/UPPER-Hola-output.txt
         - yaml/intermediates/UPPER-Bonjour-output.txt
         - yaml/intermediates/UPPER-Hello-output.txt
-        - yaml/intermediates/UPPER-Hola-output.txt
 
       collected: yaml/intermediates/COLLECTED-yaml-output.txt
 
@@ -513,8 +514,8 @@ The ASCII art now shows the tux penguin instead of the stegosaurus, because the 
 
     ```console title="results/yaml/cowpy-COLLECTED-yaml-output.txt"
      _________
-    / BONJOUR \
-    | HOLA    |
+    / HOLA    \
+    | BONJOUR |
     \ HELLO   /
      ---------
        \
@@ -549,9 +550,9 @@ nextflow run main.nf --input data/nonexistent.csv
 ??? failure "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [sleepy_shannon] revision: ce74f81996
+    Launching `main.nf` [romantic_payne] revision: f5f2664c7a
 
     Input file 'data/nonexistent.csv' does not exist
     ```
@@ -595,29 +596,29 @@ nextflow run main.nf -output-dir outputs
 ??? success "Command output"
 
     ```console hl_lines="6 7 8 9"
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [serene_kimura] revision: ce74f81996
+    Launching `main.nf` [admiring_brazil] revision: f5f2664c7a
 
     executor >  local (8)
-    [31/df5c15] sayHello (3)       | 3 of 3 ✔
-    [08/8bb2e5] convertToUpper (1) | 3 of 3 ✔
-    [e5/5814da] collectGreetings   | 1 of 1 ✔
-    [cf/8ab8c6] cowpy              | 1 of 1 ✔
+    [45/cffb73] sayHello (2)       | 3 of 3 ✔
+    [3b/10443d] convertToUpper (3) | 3 of 3 ✔
+    [fd/0259d2] collectGreetings   | 1 of 1 ✔
+    [78/41dcd8] cowpy              | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/nextflow-run/outputs
 
       first_output:
-        - batch/intermediates/Bonjour-output.txt
-        - batch/intermediates/Hello-output.txt
         - batch/intermediates/Hola-output.txt
+        - batch/intermediates/Hello-output.txt
+        - batch/intermediates/Bonjour-output.txt
 
       uppercased:
-        - batch/intermediates/UPPER-Bonjour-output.txt
-        - batch/intermediates/UPPER-Hello-output.txt
         - batch/intermediates/UPPER-Hola-output.txt
+        - batch/intermediates/UPPER-Hello-output.txt
+        - batch/intermediates/UPPER-Bonjour-output.txt
 
       collected: batch/intermediates/COLLECTED-batch-output.txt
 
@@ -660,7 +661,7 @@ By default, Nextflow publishes outputs as symlinks that point to the locations o
 
 ```console
 $ ls -l results/batch/intermediates/Hello-output.txt
-lrwxr-xr-x  ...  Hello-output.txt -> /workspaces/training/nextflow-run/work/b7/b8c4d1.../Hello-output.txt
+lrwxr-xr-x  ...  Hello-output.txt -> /workspaces/training/nextflow-run/work/db/cd2f0c.../Hello-output.txt
 ```
 
 Pipeline authors can set the 'publish mode' to either `'copy'` or `'move'` for each individual output in the `output` block.
@@ -702,29 +703,29 @@ nextflow run main.nf --batch withmode
 ??? success "Command output"
 
     ```console hl_lines="6 7 8 9"
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [angry_noether] revision: ce74f81996
+    Launching `main.nf` [adoring_ride] revision: f5f2664c7a
 
     executor >  local (8)
-    [41/2b478d] sayHello (3)       | 3 of 3 ✔
-    [bf/dd2840] convertToUpper (2) | 3 of 3 ✔
-    [ea/364e97] collectGreetings   | 1 of 1 ✔
-    [10/76fe7b] cowpy              | 1 of 1 ✔
+    [68/715bd7] sayHello (1)       | 3 of 3 ✔
+    [65/ace448] convertToUpper (1) | 3 of 3 ✔
+    [d2/938bab] collectGreetings   | 1 of 1 ✔
+    [91/41b900] cowpy              | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/nextflow-run/results
 
       first_output:
-        - withmode/intermediates/Bonjour-output.txt
         - withmode/intermediates/Hello-output.txt
+        - withmode/intermediates/Bonjour-output.txt
         - withmode/intermediates/Hola-output.txt
 
       uppercased:
         - withmode/intermediates/UPPER-Bonjour-output.txt
-        - withmode/intermediates/UPPER-Hello-output.txt
         - withmode/intermediates/UPPER-Hola-output.txt
+        - withmode/intermediates/UPPER-Hello-output.txt
 
       collected: withmode/intermediates/COLLECTED-withmode-output.txt
 
