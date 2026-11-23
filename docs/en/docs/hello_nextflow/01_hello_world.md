@@ -415,29 +415,29 @@ The `Outputs:` summary now lists the file under `hello/`.
 The new `output.txt` in `results/hello/` is a regular file, not a symbolic link.
 The symbolic link at the top level of `results/` is left over from the previous run: Nextflow does not delete files published by earlier runs.
 
-### 2.3. Note on process-level `publishDir` directives
+!!! note "Process-level `publishDir` directives"
 
-Until very recently, the established way to publish outputs was to do it at the level of each individual process using a `publishDir` directive.
+    Until very recently, the established way to publish outputs was to do it at the level of each individual process using a `publishDir` directive.
 
-To achieve what we just did for the outputs of the `sayHello` process, we would have instead added the following line to the process definition:
+    To achieve what we just did for the outputs of the `sayHello` process, we would have instead added the following line to the process definition:
 
-```groovy title="hello-world.nf" linenums="6" hl_lines="3"
-process sayHello {
+    ```groovy title="hello-world.nf" linenums="6" hl_lines="3"
+    process sayHello {
 
-    publishDir 'results/hello', mode: 'copy'
+        publishDir 'results/hello', mode: 'copy'
 
-    output:
-    path 'output.txt'
+        output:
+        path 'output.txt'
 
-    script:
-    """
-    echo 'Hello World!' > output.txt
-    """
-}
-```
+        script:
+        """
+        echo 'Hello World!' > output.txt
+        """
+    }
+    ```
 
-You will still find this code pattern all over the place in older Nextflow pipelines and process modules, so it's important to be aware of it.
-However, we do not recommend using it in any new work as it will eventually be disallowed in future versions of the Nextflow language.
+    You will still find this code pattern all over the place in older Nextflow pipelines and process modules, so it's important to be aware of it.
+    However, we do not recommend using it in any new work as it will eventually be disallowed in future versions of the Nextflow language.
 
 ### Takeaway
 
