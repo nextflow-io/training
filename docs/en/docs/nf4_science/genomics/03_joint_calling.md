@@ -85,7 +85,7 @@ Make sure you add a backslash (`\`) at the end of the previous line when you add
 
 === "After"
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="22" hl_lines="5 7"
+    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="20" hl_lines="5 7"
         """
         gatk HaplotypeCaller \
             -R ${ref_fasta} \
@@ -98,7 +98,7 @@ Make sure you add a backslash (`\`) at the end of the previous line when you add
 
 === "Before"
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="22" hl_lines="5"
+    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="20" hl_lines="5"
         """
         gatk HaplotypeCaller \
             -R ${ref_fasta} \
@@ -115,7 +115,7 @@ Since we changed the command output from `.vcf` to `.g.vcf`, the process `output
 
 === "After"
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="17" hl_lines="2 3"
+    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="15" hl_lines="2 3"
         output:
         path "${input_bam}.g.vcf"     , emit: vcf
         path "${input_bam}.g.vcf.idx" , emit: idx
@@ -123,7 +123,7 @@ Since we changed the command output from `.vcf` to `.g.vcf`, the process `output
 
 === "Before"
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="17" hl_lines="2 3"
+    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="15" hl_lines="2 3"
         output:
         path "${input_bam}.vcf"     , emit: vcf
         path "${input_bam}.vcf.idx" , emit: idx
@@ -450,8 +450,6 @@ Go ahead and fill in the process definition using the information provided above
 === "Before"
 
     ```groovy title="modules/gatk_jointgenotyping.nf" linenums="1"
-    #!/usr/bin/env nextflow
-
     /*
      * Combine GVCFs into GenomicsDB datastore and run joint genotyping to produce cohort-level calls
      */
@@ -472,9 +470,7 @@ Go ahead and fill in the process definition using the information provided above
 
 === "After"
 
-    ```groovy title="modules/gatk_jointgenotyping.nf" linenums="1" hl_lines="8 11-17 20-21 24-25 29-33"
-    #!/usr/bin/env nextflow
-
+    ```groovy title="modules/gatk_jointgenotyping.nf" linenums="1" hl_lines="6 9-15 18-19 22-23 27-31"
     /*
      * Combine GVCFs into GenomicsDB datastore and run joint genotyping to produce cohort-level calls
      */

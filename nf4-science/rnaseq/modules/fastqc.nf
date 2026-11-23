@@ -1,5 +1,3 @@
-#!/usr/bin/env nextflow
-
 /*
  * Run FastQC on input reads
  */
