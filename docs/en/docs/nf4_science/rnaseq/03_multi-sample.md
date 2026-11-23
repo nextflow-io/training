@@ -387,8 +387,6 @@ Go ahead and fill in the process definition by yourself using the information pr
 === "Before"
 
     ```groovy title="modules/multiqc.nf" linenums="1"
-    #!/usr/bin/env nextflow
-
     /*
      * Aggregate QC reports with MultiQC
      */
@@ -409,9 +407,7 @@ Go ahead and fill in the process definition by yourself using the information pr
 
 === "After"
 
-    ```groovy title="modules/multiqc.nf" linenums="1" hl_lines="8 11 12 15 16 20"
-    #!/usr/bin/env nextflow
-
+    ```groovy title="modules/multiqc.nf" linenums="1" hl_lines="6 9 10 13 14 18"
     /*
      * Aggregate QC reports with MultiQC
      */
@@ -806,7 +802,7 @@ The only change needed is in the output block: since we now get two FastQC repor
 
 === "After"
 
-    ```groovy title="modules/fastqc_pe.nf" linenums="10" hl_lines="2 3"
+    ```groovy title="modules/fastqc_pe.nf" linenums="8" hl_lines="2 3"
         output:
         path "*_fastqc.zip", emit: zip
         path "*_fastqc.html", emit: html
@@ -814,7 +810,7 @@ The only change needed is in the output block: since we now get two FastQC repor
 
 === "Before"
 
-    ```groovy title="modules/fastqc_pe.nf" linenums="10"
+    ```groovy title="modules/fastqc_pe.nf" linenums="8"
         output:
         path "${reads.simpleName}_fastqc.zip", emit: zip
         path "${reads.simpleName}_fastqc.html", emit: html
@@ -854,7 +850,7 @@ This module needs more substantial changes:
 
 === "After"
 
-    ```groovy title="modules/trim_galore_pe.nf" linenums="8" hl_lines="2 5 7 8 12"
+    ```groovy title="modules/trim_galore_pe.nf" linenums="5" hl_lines="2 5 7 8 12"
         input:
         tuple path(read1), path(read2)
 
@@ -872,7 +868,7 @@ This module needs more substantial changes:
 
 === "Before"
 
-    ```groovy title="modules/trim_galore_pe.nf" linenums="8"
+    ```groovy title="modules/trim_galore_pe.nf" linenums="5"
         input:
         path reads
 
@@ -919,7 +915,7 @@ This module needs similar changes:
 
 === "After"
 
-    ```groovy title="modules/hisat2_align_pe.nf" linenums="8" hl_lines="2 6 7 12 13 14"
+    ```groovy title="modules/hisat2_align_pe.nf" linenums="5" hl_lines="2 6 7 12 13 14"
         input:
         tuple path(read1), path(read2)
         path index_zip
@@ -939,7 +935,7 @@ This module needs similar changes:
 
 === "Before"
 
-    ```groovy title="modules/hisat2_align_pe.nf" linenums="8"
+    ```groovy title="modules/hisat2_align_pe.nf" linenums="5"
         input:
         path reads
         path index_zip
