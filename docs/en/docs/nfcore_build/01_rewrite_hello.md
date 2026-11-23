@@ -362,9 +362,9 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `./core-hello/main.nf` [cheesy_avogadro] revision: d6bbba9521
+    Launching `./core-hello/main.nf` [hungry_euclid] revision: d6bbba9521
 
     WARN: Unrecognized config option 'validation.defaultIgnoreParams'
     WARN: Unrecognized config option 'validation.monochromeLogs'
@@ -377,10 +377,10 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
       config_profile_description: Minimal test dataset to check pipeline function
 
     Generic options
-      trace_report_suffix       : 2026-06-23_16-56-58
+      trace_report_suffix       : 2026-11-23_22-43-13
 
     Core Nextflow options
-      runName                   : cheesy_avogadro
+      runName                   : hungry_euclid
       containerEngine           : docker
       launchDir                 : /workspaces/training/nfcore-build
       workDir                   : /workspaces/training/nfcore-build/work
@@ -432,12 +432,12 @@ tree core-hello-results
     ```console
     core-hello-results
     └── pipeline_info
-        ├── execution_report_2026-06-23_16-56-58.html
-        ├── execution_timeline_2026-06-23_16-56-58.html
-        ├── execution_trace_2026-06-23_16-56-58.txt
+        ├── execution_report_2026-11-23_22-43-13.html
+        ├── execution_timeline_2026-11-23_22-43-13.html
+        ├── execution_trace_2026-11-23_22-43-13.txt
         ├── hello_software_versions.yml
-        ├── params_2026-06-23_16-57-00.json
-        └── pipeline_dag_2026-06-23_16-56-58.html
+        ├── params_2026-11-23_22-43-14.json
+        └── pipeline_dag_2026-11-23_22-43-13.html
 
     1 directory, 6 files
     ```
@@ -609,15 +609,15 @@ nextflow run original-hello/hello.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `original-hello/hello.nf` [sharp_dijkstra] revision: 319b99ee58
+    Launching `original-hello/hello.nf` [condescending_brahmagupta] revision: 319b99ee58
 
     executor >  local (8)
-    [23/4eb61e] sayHello (3)       | 3 of 3 ✔
-    [c8/81a076] convertToUpper (1) | 3 of 3 ✔
-    [90/ea197e] collectGreetings   | 1 of 1 ✔
-    [da/3df79a] cowpy              | 1 of 1 ✔
+    [14/f12669] sayHello (2)       | 3 of 3 ✔
+    [46/50c534] convertToUpper (3) | 3 of 3 ✔
+    [78/943809] collectGreetings   | 1 of 1 ✔
+    [40/cf2f85] cowpy              | 1 of 1 ✔
     ```
 
 If that works for you, you're ready to start hacking.
@@ -912,16 +912,16 @@ If you made all the changes correctly, this should run to completion.
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `original-hello/main.nf` [irreverent_cajal] revision: 619249b1d7
+    Launching `./original-hello/main.nf` [modest_sinoussi] revision: 619249b1d7
 
     executor >  local (8)
-    [50/b02a90] HELLO:sayHello (1)       | 3 of 3 ✔
-    [c0/3c336a] HELLO:convertToUpper (2) | 3 of 3 ✔
-    [5c/47bb4f] HELLO:collectGreetings   | 1 of 1 ✔
-    [07/bfc706] HELLO:cowpy              | 1 of 1 ✔
-    Output: /workspaces/training/nfcore-build/work/07/bfc7061fa521e86f4e1954191ab4c4/cowpy-COLLECTED-test-batch-output.txt
+    [5f/4bdfc0] HELLO:sayHello (3)       | 3 of 3 ✔
+    [bd/5ac37a] HELLO:convertToUpper (3) | 3 of 3 ✔
+    [67/d32e99] HELLO:collectGreetings   | 1 of 1 ✔
+    [24/3d27e8] HELLO:cowpy              | 1 of 1 ✔
+    Output: /workspaces/training/nfcore-build/work/24/3d27e816a20e7304125692d609178c/cowpy-COLLECTED-test-batch-output.txt
     ```
 
 This means we've successfully upgraded our `HELLO` workflow to be composable.
@@ -1678,10 +1678,10 @@ If you've done all of the modifications correctly, it should run to completion.
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
     Downloading plugin nf-schema@2.7.2
-    Launching `core-hello/main.nf` [voluminous_caravaggio] revision: d6bbba9521
+    Launching `core-hello/main.nf` [insane_payne] revision: d6bbba9521
 
     Input/output options
       input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
@@ -1693,10 +1693,10 @@ If you've done all of the modifications correctly, it should run to completion.
 
     Generic options
       validate_params           : false
-      trace_report_suffix       : 2026-06-23_16-58-45
+      trace_report_suffix       : 2026-11-23_22-44-19
 
     Core Nextflow options
-      runName                   : voluminous_caravaggio
+      runName                   : insane_payne
       containerEngine           : docker
       launchDir                 : /workspaces/training/nfcore-build
       workDir                   : /workspaces/training/nfcore-build/work
@@ -1708,10 +1708,10 @@ If you've done all of the modifications correctly, it should run to completion.
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
     executor >  local (8)
-    [30/fc3bdb] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
-    [55/58b611] CORE_HELLO:HELLO:convertToUpper (1) | 3 of 3 ✔
-    [12/83c0bc] CORE_HELLO:HELLO:collectGreetings   | 1 of 1 ✔
-    [18/4894fd] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
+    [c2/7610da] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
+    [b2/a83863] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [a2/7fcc1b] CORE_HELLO:HELLO:collectGreetings   | 1 of 1 ✔
+    [fe/9d5c40] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -1733,17 +1733,17 @@ tree core-hello-results
     ```console
     core-hello-results
     └── pipeline_info
-        ├── execution_report_2026-06-23_16-56-58.html
-        ├── execution_report_2026-06-23_16-58-45.html
-        ├── execution_timeline_2026-06-23_16-56-58.html
-        ├── execution_timeline_2026-06-23_16-58-45.html
-        ├── execution_trace_2026-06-23_16-56-58.txt
-        ├── execution_trace_2026-06-23_16-58-45.txt
+        ├── execution_report_2026-11-23_22-43-13.html
+        ├── execution_report_2026-11-23_22-44-19.html
+        ├── execution_timeline_2026-11-23_22-43-13.html
+        ├── execution_timeline_2026-11-23_22-44-19.html
+        ├── execution_trace_2026-11-23_22-43-13.txt
+        ├── execution_trace_2026-11-23_22-44-19.txt
         ├── hello_software_versions.yml
-        ├── params_2026-06-23_16-57-00.json
-        ├── params_2026-06-23_16-58-47.json
-        ├── pipeline_dag_2026-06-23_16-56-58.html
-        └── pipeline_dag_2026-06-23_16-58-45.html
+        ├── params_2026-11-23_22-43-14.json
+        ├── params_2026-11-23_22-44-22.json
+        ├── pipeline_dag_2026-11-23_22-43-13.html
+        └── pipeline_dag_2026-11-23_22-44-19.html
 
     1 directory, 11 files
     ```

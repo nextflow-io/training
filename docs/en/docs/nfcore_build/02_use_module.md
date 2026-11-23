@@ -820,9 +820,9 @@ This should run reasonably quickly.
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `./main.nf` [cheesy_bhabha] revision: d6bbba9521
+    Launching `./main.nf` [romantic_turing] revision: d6bbba9521
 
     Input/output options
       input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
@@ -834,10 +834,10 @@ This should run reasonably quickly.
 
     Generic options
       validate_params           : false
-      trace_report_suffix       : 2026-06-23_16-55-02
+      trace_report_suffix       : 2026-11-23_22-45-15
 
     Core Nextflow options
-      runName                   : cheesy_bhabha
+      runName                   : romantic_turing
       containerEngine           : docker
       launchDir                 : /workspaces/training/nfcore-build/core-hello
       workDir                   : /workspaces/training/nfcore-build/core-hello/work
@@ -849,10 +849,10 @@ This should run reasonably quickly.
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
     executor >  local (8)
-    [bf/aa86d7] CORE_HELLO:HELLO:sayHello (3)            | 3 of 3 ✔
-    [0a/df448e] CORE_HELLO:HELLO:convertToUpper (3)      | 3 of 3 ✔
-    [82/ded72f] CORE_HELLO:HELLO:FIND_CONCATENATE (test) | 1 of 1 ✔
-    [9d/0130bf] CORE_HELLO:HELLO:cowpy                   | 1 of 1 ✔
+    [36/dbe3ed] CORE_HELLO:HELLO:sayHello (2)            | 3 of 3 ✔
+    [ad/d30403] CORE_HELLO:HELLO:convertToUpper (3)      | 3 of 3 ✔
+    [f0/554e34] CORE_HELLO:HELLO:FIND_CONCATENATE (test) | 1 of 1 ✔
+    [7b/0ce1e6] CORE_HELLO:HELLO:cowpy                   | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 

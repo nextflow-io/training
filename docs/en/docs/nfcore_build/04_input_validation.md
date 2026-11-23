@@ -417,15 +417,15 @@ nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -p
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `./main.nf` [peaceful_wozniak] revision: d6bbba9521
+    Launching `./main.nf` [peaceful_kimura] revision: d6bbba9521
 
     executor >  local (8)
-    [de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)                | 3 of 3 ✔
-    [4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3)          | 3 of 3 ✔
-    [8a/b9c0d1] CORE_HELLO:HELLO:FIND_CONCATENATE (my-batch) | 1 of 1 ✔
-    [e2/f3a4b5] CORE_HELLO:HELLO:COWPY (my-batch)            | 1 of 1 ✔
+    [7a/86a8c3] CORE_HELLO:HELLO:sayHello (1)                | 3 of 3 ✔
+    [52/53dea9] CORE_HELLO:HELLO:convertToUpper (3)          | 3 of 3 ✔
+    [4d/6006e5] CORE_HELLO:HELLO:FIND_CONCATENATE (my-batch) | 1 of 1 ✔
+    [39/532a4b] CORE_HELLO:HELLO:COWPY (my-batch)            | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -732,10 +732,10 @@ nextflow run . --outdir core-hello-results -profile test,docker
 
 
     executor >  local (8)
-    [c1/39f64a] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
-    [44/c3fb82] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [62/80fab2] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
-    [e1/4db4fd] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
+    [83/800868] CORE_HELLO:HELLO:sayHello (1)            | 3 of 3 ✔
+    [a8/8165db] CORE_HELLO:HELLO:convertToUpper (3)      | 3 of 3 ✔
+    [0f/e9dc7c] CORE_HELLO:HELLO:FIND_CONCATENATE (test) | 1 of 1 ✔
+    [66/ec93c2] CORE_HELLO:HELLO:COWPY (test)            | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -784,9 +784,9 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results --batc
 ??? failure "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `./main.nf` [trusting_ochoa] revision: d6bbba9521
+    Launching `./main.nf` [insane_stonebraker] revision: d6bbba9521
 
     Input/output options
       input              : assets/invalid_greetings.csv
@@ -794,10 +794,10 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results --batc
       outdir             : test-results
 
     Generic options
-      trace_report_suffix: 2025-11-21_07-35-12
+      trace_report_suffix: 2026-11-23_22-49-12
 
     Core Nextflow options
-      runName            : trusting_ochoa
+      runName            : insane_stonebraker
       containerEngine    : docker
       launchDir          : /workspaces/training/nfcore-build/core-hello
       workDir            : /workspaces/training/nfcore-build/core-hello/work
