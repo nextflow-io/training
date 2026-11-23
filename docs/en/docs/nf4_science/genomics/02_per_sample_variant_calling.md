@@ -48,8 +48,6 @@ As a starting point, we provide you with a workflow file, `genomics.nf`, that ou
     ```
 
     ```groovy title="modules/samtools_index.nf"
-    #!/usr/bin/env nextflow
-
     /*
      * Generate BAM index file
      */
@@ -69,8 +67,6 @@ As a starting point, we provide you with a workflow file, `genomics.nf`, that ou
     ```
 
     ```groovy title="modules/gatk_haplotypecaller.nf"
-    #!/usr/bin/env nextflow
-
     /*
      * Call variants with GATK HaplotypeCaller
      */
@@ -232,8 +228,6 @@ Go ahead and fill in the process definition by yourself using the information pr
 === "Before"
 
     ```groovy title="modules/samtools_index.nf" linenums="1"
-    #!/usr/bin/env nextflow
-
     /*
      * Generate BAM index file
      */
@@ -254,9 +248,7 @@ Go ahead and fill in the process definition by yourself using the information pr
 
 === "After"
 
-    ```groovy title="modules/samtools_index.nf" linenums="1" hl_lines="8 11 14 18"
-    #!/usr/bin/env nextflow
-
+    ```groovy title="modules/samtools_index.nf" linenums="1" hl_lines="6 9 12 16"
     /*
      * Generate BAM index file
      */
@@ -582,8 +574,6 @@ Go ahead and fill in the process definition by yourself using the information pr
 === "Before"
 
     ```groovy title="modules/gatk_haplotypecaller.nf" linenums="1"
-    #!/usr/bin/env nextflow
-
     /*
      * Call variants with GATK HaplotypeCaller
      */
@@ -604,9 +594,7 @@ Go ahead and fill in the process definition by yourself using the information pr
 
 === "After"
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="1" hl_lines="8 11-16 19-20 24-28"
-    #!/usr/bin/env nextflow
-
+    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="1" hl_lines="6 9-14 17-18 22-26"
     /*
      * Call variants with GATK HaplotypeCaller
      */
@@ -1079,14 +1067,14 @@ Update the output in `modules/samtools_index.nf` to include the BAM file:
 
 === "After"
 
-    ```groovy title="modules/samtools_index.nf" linenums="14" hl_lines="2"
+    ```groovy title="modules/samtools_index.nf" linenums="11" hl_lines="2"
         output:
         tuple path(input_bam), path("${input_bam}.bai")
     ```
 
 === "Before"
 
-    ```groovy title="modules/samtools_index.nf" linenums="14"
+    ```groovy title="modules/samtools_index.nf" linenums="11"
         output:
         path "${input_bam}.bai"
     ```
@@ -1101,14 +1089,14 @@ Update `modules/gatk_haplotypecaller.nf`:
 
 === "After"
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="11" hl_lines="2"
+    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="8" hl_lines="2"
         input:
         tuple path(input_bam), path(input_bam_index)
     ```
 
 === "Before"
 
-    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="11"
+    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="8"
         input:
         path input_bam
         path input_bam_index

@@ -53,8 +53,6 @@ As a starting point, we provide you with a workflow file, `rnaseq.nf`, that outl
     ```
 
     ```groovy title="modules/fastqc.nf"
-    #!/usr/bin/env nextflow
-
     /*
      * Run FastQC on input reads
      */
@@ -74,8 +72,6 @@ As a starting point, we provide you with a workflow file, `rnaseq.nf`, that outl
     ```
 
     ```groovy title="modules/trim_galore.nf"
-    #!/usr/bin/env nextflow
-
     /*
      * Trim adapters and run post-trimming QC
      */
@@ -95,8 +91,6 @@ As a starting point, we provide you with a workflow file, `rnaseq.nf`, that outl
     ```
 
     ```groovy title="modules/hisat2_align.nf"
-    #!/usr/bin/env nextflow
-
     /*
      * Align reads to a reference genome
      */
@@ -116,8 +110,6 @@ As a starting point, we provide you with a workflow file, `rnaseq.nf`, that outl
     ```
 
     ```groovy title="modules/multiqc.nf"
-    #!/usr/bin/env nextflow
-
     /*
      * Aggregate QC reports with MultiQC
      */
@@ -291,8 +283,6 @@ Go ahead and fill in the process definition by yourself using the information pr
 === "Before"
 
     ```groovy title="modules/fastqc.nf" linenums="1"
-    #!/usr/bin/env nextflow
-
     /*
      * Run FastQC on input reads
      */
@@ -313,9 +303,7 @@ Go ahead and fill in the process definition by yourself using the information pr
 
 === "After"
 
-    ```groovy title="modules/fastqc.nf" linenums="1" hl_lines="8 11 14 15 19"
-    #!/usr/bin/env nextflow
-
+    ```groovy title="modules/fastqc.nf" linenums="1" hl_lines="6 9 12 13 17"
     /*
      * Run FastQC on input reads
      */
@@ -547,8 +535,6 @@ Go ahead and fill in the process definition by yourself using the information pr
 === "Before"
 
     ```groovy title="modules/trim_galore.nf" linenums="1"
-    #!/usr/bin/env nextflow
-
     /*
      * Trim adapters and run post-trimming QC
      */
@@ -569,9 +555,7 @@ Go ahead and fill in the process definition by yourself using the information pr
 
 === "After"
 
-    ```groovy title="modules/trim_galore.nf" linenums="1" hl_lines="8 11 14 15 16 20"
-    #!/usr/bin/env nextflow
-
+    ```groovy title="modules/trim_galore.nf" linenums="1" hl_lines="6 9 12 13 14 18"
     /*
      * Trim adapters and run post-trimming QC
      */
@@ -890,8 +874,6 @@ Go ahead and fill in the process definition by yourself using the information pr
 === "Before"
 
     ```groovy title="modules/hisat2_align.nf" linenums="1"
-    #!/usr/bin/env nextflow
-
     /*
      * Align reads to a reference genome
      */
@@ -912,9 +894,7 @@ Go ahead and fill in the process definition by yourself using the information pr
 
 === "After"
 
-    ```groovy title="modules/hisat2_align.nf" linenums="1" hl_lines="8 11 12 15 16 20 21 22 23"
-    #!/usr/bin/env nextflow
-
+    ```groovy title="modules/hisat2_align.nf" linenums="1" hl_lines="6 9 10 13 14 18 19 20 21"
     /*
      * Align reads to a reference genome
      */
