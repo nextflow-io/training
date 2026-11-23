@@ -146,6 +146,9 @@ nextflow clean -before silly_mercator -f
     That breaks Nextflow's ability to resume execution without re-running the corresponding processes, so only clean up runs you're confident you won't need to resume from.
     This is also why it's worth publishing anything you care about to `results/` with `mode 'copy'` rather than relying on the `work/` directory or a `symlink` publish mode.
 
+    `nextflow clean -f` also removes the cleaned runs from the execution history, without telling you: afterwards they no longer appear in `nextflow log`.
+    Note down any run names or session IDs you still need before you clean.
+
 ### Takeaway
 
 You know how to remove old work directories with `nextflow clean`, and why doing so trades away the ability to resume from those runs.

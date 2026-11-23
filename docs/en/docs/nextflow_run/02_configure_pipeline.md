@@ -255,7 +255,7 @@ Comparing what each task was allocated with what it actually used is also how yo
 ### 2.2. Use a run-specific configuration file
 
 Say you're moving the pipeline to a machine that doesn't have Docker, and you want to give every process more room to work with.
-Create a new configuration file with just the overrides you need:
+A configuration file called `custom.config`, with just the overrides you need, is already provided in your working directory:
 
 ```groovy title="custom.config" linenums="1"
 process {
