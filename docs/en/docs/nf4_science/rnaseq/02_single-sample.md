@@ -475,12 +475,12 @@ nextflow run rnaseq.nf -profile test
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `rnaseq.nf` [fabulous_engelbart] revision: 859d80cde8
+    Launching `rnaseq.nf` [romantic_meucci] revision: 859d80cde8
 
     executor >  local (1)
-    [4e/36fb3d] FASTQC (1) | 1 of 1 ✔
+    [4a/684311] FASTQC (1) | 1 of 1 ✔
 
     Outputs:
 
@@ -746,13 +746,13 @@ nextflow run rnaseq.nf -profile test
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `rnaseq.nf` [stupefied_volhard] revision: faaf310b2f
+    Launching `rnaseq.nf` [boring_sinoussi] revision: faaf310b2f
 
     executor >  local (2)
-    [a3/ac9284] FASTQC (1)      | 1 of 1 ✔
-    [55/c4d983] TRIM_GALORE (1) | 1 of 1 ✔
+    [e0/d6b12b] FASTQC (1)      | 1 of 1 ✔
+    [41/9cc017] TRIM_GALORE (1) | 1 of 1 ✔
 
     Outputs:
 
@@ -1112,14 +1112,14 @@ nextflow run rnaseq.nf -profile test
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `rnaseq.nf` [nauseous_allen] revision: 45d77a9709
+    Launching `rnaseq.nf` [disturbed_wescoff] revision: 45d77a9709
 
     executor >  local (3)
-    [57/b3c2cb] FASTQC (1)       | 1 of 1 ✔
-    [98/451aef] TRIM_GALORE (1)  | 1 of 1 ✔
-    [78/7cf2c3] HISAT2_ALIGN (1) | 1 of 1 ✔
+    [f6/275c84] FASTQC (1)       | 1 of 1 ✔
+    [5f/f7c0ea] TRIM_GALORE (1)  | 1 of 1 ✔
+    [c1/863cea] HISAT2_ALIGN (1) | 1 of 1 ✔
 
     Outputs:
 
