@@ -1,5 +1,3 @@
-#!/usr/bin/env nextflow
-
 /*
  * Generate BAM index file
  */
