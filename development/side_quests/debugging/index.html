@@ -7217,22 +7217,26 @@ On Nextflow 26.04, the task runs with <code>id</code> set to <code>null</code> a
 <span class="normal"><a href="#__codelineno-92-15">15</a></span>
 <span class="normal"><a href="#__codelineno-92-16">16</a></span>
 <span class="normal"><a href="#__codelineno-92-17">17</a></span>
-<span class="normal"><a href="#__codelineno-92-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-92-3" name="__codelineno-92-3"></a><span class="n">process</span><span class="w"> </span><span class="n">PROCESS_FILES</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-92-18">18</a></span>
+<span class="normal"><a href="#__codelineno-92-19">19</a></span>
+<span class="normal"><a href="#__codelineno-92-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-92-3" name="__codelineno-92-3"></a><span class="n">process</span><span class="w"> </span><span class="n">PROCESS_FILES</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-92-4" name="__codelineno-92-4"></a>
-<a id="__codelineno-92-5" name="__codelineno-92-5"></a><span class="hll"><span class="w">    </span><span class="n">time</span><span class="w"> </span><span class="s1">'100 s'</span><span class="w">  </span><span class="c1">// Fixed: Realistic time limit</span>
-</span><a id="__codelineno-92-6" name="__codelineno-92-6"></a>
-<a id="__codelineno-92-7" name="__codelineno-92-7"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-92-8" name="__codelineno-92-8"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">sample_name</span>
-<a id="__codelineno-92-9" name="__codelineno-92-9"></a>
-<a id="__codelineno-92-10" name="__codelineno-92-10"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-92-11" name="__codelineno-92-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${sample_name}_output.txt"</span>
-<a id="__codelineno-92-12" name="__codelineno-92-12"></a>
-<a id="__codelineno-92-13" name="__codelineno-92-13"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-92-14" name="__codelineno-92-14"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-92-15" name="__codelineno-92-15"></a><span class="s2">    sleep 1</span>
-<a id="__codelineno-92-16" name="__codelineno-92-16"></a><span class="s2">    cowpy ${sample_name} &gt; ${sample_name}_output.txt</span>
-<a id="__codelineno-92-17" name="__codelineno-92-17"></a><span class="s2">    """</span>
-<a id="__codelineno-92-18" name="__codelineno-92-18"></a><span class="o">}</span>
+<a id="__codelineno-92-5" name="__codelineno-92-5"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
+<a id="__codelineno-92-6" name="__codelineno-92-6"></a>
+<a id="__codelineno-92-7" name="__codelineno-92-7"></a><span class="hll"><span class="w">    </span><span class="n">time</span><span class="w"> </span><span class="s1">'100 s'</span><span class="w">  </span><span class="c1">// Fixed: Realistic time limit</span>
+</span><a id="__codelineno-92-8" name="__codelineno-92-8"></a>
+<a id="__codelineno-92-9" name="__codelineno-92-9"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-92-10" name="__codelineno-92-10"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">sample_name</span>
+<a id="__codelineno-92-11" name="__codelineno-92-11"></a>
+<a id="__codelineno-92-12" name="__codelineno-92-12"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-92-13" name="__codelineno-92-13"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${sample_name}_output.txt"</span>
+<a id="__codelineno-92-14" name="__codelineno-92-14"></a>
+<a id="__codelineno-92-15" name="__codelineno-92-15"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-92-16" name="__codelineno-92-16"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-92-17" name="__codelineno-92-17"></a><span class="s2">    sleep 1</span>
+<a id="__codelineno-92-18" name="__codelineno-92-18"></a><span class="s2">    cowpy ${sample_name} &gt; ${sample_name}_output.txt</span>
+<a id="__codelineno-92-19" name="__codelineno-92-19"></a><span class="s2">    """</span>
+<a id="__codelineno-92-20" name="__codelineno-92-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -7251,22 +7255,26 @@ On Nextflow 26.04, the task runs with <code>id</code> set to <code>null</code> a
 <span class="normal"><a href="#__codelineno-93-15">15</a></span>
 <span class="normal"><a href="#__codelineno-93-16">16</a></span>
 <span class="normal"><a href="#__codelineno-93-17">17</a></span>
-<span class="normal"><a href="#__codelineno-93-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-93-3" name="__codelineno-93-3"></a><span class="n">process</span><span class="w"> </span><span class="n">PROCESS_FILES</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-93-18">18</a></span>
+<span class="normal"><a href="#__codelineno-93-19">19</a></span>
+<span class="normal"><a href="#__codelineno-93-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-93-3" name="__codelineno-93-3"></a><span class="n">process</span><span class="w"> </span><span class="n">PROCESS_FILES</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-93-4" name="__codelineno-93-4"></a>
-<a id="__codelineno-93-5" name="__codelineno-93-5"></a><span class="hll"><span class="w">    </span><span class="n">time</span><span class="w"> </span><span class="s1">'1 ms'</span><span class="w">  </span><span class="c1">// ERROR: Unrealistic time limit</span>
-</span><a id="__codelineno-93-6" name="__codelineno-93-6"></a>
-<a id="__codelineno-93-7" name="__codelineno-93-7"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-93-8" name="__codelineno-93-8"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">sample_name</span>
-<a id="__codelineno-93-9" name="__codelineno-93-9"></a>
-<a id="__codelineno-93-10" name="__codelineno-93-10"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-93-11" name="__codelineno-93-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${sample_name}_output.txt"</span>
-<a id="__codelineno-93-12" name="__codelineno-93-12"></a>
-<a id="__codelineno-93-13" name="__codelineno-93-13"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-93-14" name="__codelineno-93-14"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-93-15" name="__codelineno-93-15"></a><span class="s2">    sleep 1  # Takes 1 second, but time limit is 1ms</span>
-<a id="__codelineno-93-16" name="__codelineno-93-16"></a><span class="s2">    cowpy ${sample_name} &gt; ${sample_name}_output.txt</span>
-<a id="__codelineno-93-17" name="__codelineno-93-17"></a><span class="s2">    """</span>
-<a id="__codelineno-93-18" name="__codelineno-93-18"></a><span class="o">}</span>
+<a id="__codelineno-93-5" name="__codelineno-93-5"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
+<a id="__codelineno-93-6" name="__codelineno-93-6"></a>
+<a id="__codelineno-93-7" name="__codelineno-93-7"></a><span class="hll"><span class="w">    </span><span class="n">time</span><span class="w"> </span><span class="s1">'1 ms'</span><span class="w">  </span><span class="c1">// ERROR: Unrealistic time limit</span>
+</span><a id="__codelineno-93-8" name="__codelineno-93-8"></a>
+<a id="__codelineno-93-9" name="__codelineno-93-9"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-93-10" name="__codelineno-93-10"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">sample_name</span>
+<a id="__codelineno-93-11" name="__codelineno-93-11"></a>
+<a id="__codelineno-93-12" name="__codelineno-93-12"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-93-13" name="__codelineno-93-13"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${sample_name}_output.txt"</span>
+<a id="__codelineno-93-14" name="__codelineno-93-14"></a>
+<a id="__codelineno-93-15" name="__codelineno-93-15"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-93-16" name="__codelineno-93-16"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-93-17" name="__codelineno-93-17"></a><span class="s2">    sleep 1  # Takes 1 second, but time limit is 1ms</span>
+<a id="__codelineno-93-18" name="__codelineno-93-18"></a><span class="s2">    cowpy ${sample_name} &gt; ${sample_name}_output.txt</span>
+<a id="__codelineno-93-19" name="__codelineno-93-19"></a><span class="s2">    """</span>
+<a id="__codelineno-93-20" name="__codelineno-93-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>

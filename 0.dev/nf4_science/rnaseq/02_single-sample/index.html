@@ -3567,81 +3567,73 @@ Specifically, working through section 1.2.3 creates the genome index file (<code
 <a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">    </span><span class="c1">// Configure publish targets</span>
 <a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="o">}</span>
 </code></pre></div>
-<div class="highlight"><span class="filename">modules/fastqc.nf</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="cm">/*</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="cm"> * Run FastQC on input reads</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="cm"> */</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">{</span>
+<div class="highlight"><span class="filename">modules/fastqc.nf</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cm">/*</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="cm"> * Run FastQC on input reads</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="cm"> */</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="n">container</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="n">container</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nl">output:</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="s2">    """</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="o">}</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="s2">    """</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="o">}</span>
 </code></pre></div>
-<div class="highlight"><span class="filename">modules/trim_galore.nf</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="cm">/*</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="cm"> * Trim adapters and run post-trimming QC</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="cm"> */</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">process</span><span class="w"> </span><span class="n">TRIM_GALORE</span><span class="w"> </span><span class="o">{</span>
+<div class="highlight"><span class="filename">modules/trim_galore.nf</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cm">/*</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="cm"> * Trim adapters and run post-trimming QC</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="cm"> */</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">process</span><span class="w"> </span><span class="n">TRIM_GALORE</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="n">container</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="n">container</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nl">output:</span>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="s2">    """</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="o">}</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="s2">    """</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="o">}</span>
 </code></pre></div>
-<div class="highlight"><span class="filename">modules/hisat2_align.nf</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="cm">/*</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="cm"> * Align reads to a reference genome</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="cm"> */</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">process</span><span class="w"> </span><span class="n">HISAT2_ALIGN</span><span class="w"> </span><span class="o">{</span>
+<div class="highlight"><span class="filename">modules/hisat2_align.nf</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cm">/*</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="cm"> * Align reads to a reference genome</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="cm"> */</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">process</span><span class="w"> </span><span class="n">HISAT2_ALIGN</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">container</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="n">container</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nl">output:</span>
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="s2">    """</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="o">}</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="s2">    """</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="o">}</span>
 </code></pre></div>
-<div class="highlight"><span class="filename">modules/multiqc.nf</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="cm">/*</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="cm"> * Aggregate QC reports with MultiQC</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="cm"> */</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">process</span><span class="w"> </span><span class="n">MULTIQC</span><span class="w"> </span><span class="o">{</span>
+<div class="highlight"><span class="filename">modules/multiqc.nf</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="cm">/*</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="cm"> * Aggregate QC reports with MultiQC</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="cm"> */</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">process</span><span class="w"> </span><span class="n">MULTIQC</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="n">container</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="n">container</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="nl">output:</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="s2">    """</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="o">}</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="s2">    """</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="o">}</span>
 </code></pre></div>
 </details>
 <p>These files are not functional; their purpose is just to serve as scaffolds for you to fill in with the interesting parts of the code.</p>
@@ -3821,26 +3813,22 @@ You should recognize the main structural elements; if not, consider reading thro
 <span class="normal"><a href="#__codelineno-12-13">13</a></span>
 <span class="normal"><a href="#__codelineno-12-14">14</a></span>
 <span class="normal"><a href="#__codelineno-12-15">15</a></span>
-<span class="normal"><a href="#__codelineno-12-16">16</a></span>
-<span class="normal"><a href="#__codelineno-12-17">17</a></span>
-<span class="normal"><a href="#__codelineno-12-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2"></a>
-<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="cm">/*</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="cm"> * Run FastQC on input reads</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="cm"> */</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="cm">/*</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="cm"> * Run FastQC on input reads</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="cm"> */</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="w">    </span><span class="n">container</span>
 <a id="__codelineno-12-7" name="__codelineno-12-7"></a>
-<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="n">container</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-12-9" name="__codelineno-12-9"></a>
-<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="w">    </span><span class="nl">output:</span>
 <a id="__codelineno-12-11" name="__codelineno-12-11"></a>
-<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-12-13" name="__codelineno-12-13"></a>
-<a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-12-16" name="__codelineno-12-16"></a>
-<a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="s2">    """</span>
-<a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="o">}</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a>
+<a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="s2">    """</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -3862,29 +3850,25 @@ You should recognize the main structural elements; if not, consider reading thro
 <span class="normal"><a href="#__codelineno-13-16">16</a></span>
 <span class="normal"><a href="#__codelineno-13-17">17</a></span>
 <span class="normal"><a href="#__codelineno-13-18">18</a></span>
-<span class="normal"><a href="#__codelineno-13-19">19</a></span>
-<span class="normal"><a href="#__codelineno-13-20">20</a></span>
-<span class="normal"><a href="#__codelineno-13-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2"></a>
-<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="cm">/*</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="cm"> * Run FastQC on input reads</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="cm"> */</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7"></a>
-<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">"community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"</span>
-</span><a id="__codelineno-13-9" name="__codelineno-13-9"></a>
-<a id="__codelineno-13-10" name="__codelineno-13-10"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">reads</span>
-</span><a id="__codelineno-13-12" name="__codelineno-13-12"></a>
-<a id="__codelineno-13-13" name="__codelineno-13-13"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-13-14" name="__codelineno-13-14"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}_fastqc.zip"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">zip</span>
-</span><a id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}_fastqc.html"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">html</span>
-</span><a id="__codelineno-13-16" name="__codelineno-13-16"></a>
-<a id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-13-19" name="__codelineno-13-19"></a><span class="hll"><span class="s2">    fastqc ${reads}</span>
-</span><a id="__codelineno-13-20" name="__codelineno-13-20"></a><span class="s2">    """</span>
-<a id="__codelineno-13-21" name="__codelineno-13-21"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-13-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="cm">/*</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="cm"> * Run FastQC on input reads</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="cm"> */</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">"community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"</span>
+</span><a id="__codelineno-13-7" name="__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">reads</span>
+</span><a id="__codelineno-13-10" name="__codelineno-13-10"></a>
+<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}_fastqc.zip"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">zip</span>
+</span><a id="__codelineno-13-13" name="__codelineno-13-13"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}_fastqc.html"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">html</span>
+</span><a id="__codelineno-13-14" name="__codelineno-13-14"></a>
+<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="hll"><span class="s2">    fastqc ${reads}</span>
+</span><a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="s2">    """</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4105,26 +4089,22 @@ The container URI was <code>community.wave.seqera.io/library/trim-galore:0.6.10-
 <span class="normal"><a href="#__codelineno-27-13">13</a></span>
 <span class="normal"><a href="#__codelineno-27-14">14</a></span>
 <span class="normal"><a href="#__codelineno-27-15">15</a></span>
-<span class="normal"><a href="#__codelineno-27-16">16</a></span>
-<span class="normal"><a href="#__codelineno-27-17">17</a></span>
-<span class="normal"><a href="#__codelineno-27-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2"></a>
-<a id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="cm">/*</span>
-<a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="cm"> * Trim adapters and run post-trimming QC</span>
-<a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="cm"> */</span>
-<a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="n">process</span><span class="w"> </span><span class="n">TRIM_GALORE</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-27-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="cm">/*</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="cm"> * Trim adapters and run post-trimming QC</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="cm"> */</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="n">process</span><span class="w"> </span><span class="n">TRIM_GALORE</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5"></a>
+<a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="w">    </span><span class="n">container</span>
 <a id="__codelineno-27-7" name="__codelineno-27-7"></a>
-<a id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="w">    </span><span class="n">container</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-27-9" name="__codelineno-27-9"></a>
-<a id="__codelineno-27-10" name="__codelineno-27-10"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10"></a><span class="w">    </span><span class="nl">output:</span>
 <a id="__codelineno-27-11" name="__codelineno-27-11"></a>
-<a id="__codelineno-27-12" name="__codelineno-27-12"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-27-13" name="__codelineno-27-13"></a>
-<a id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-27-15" name="__codelineno-27-15"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-27-16" name="__codelineno-27-16"></a>
-<a id="__codelineno-27-17" name="__codelineno-27-17"></a><span class="s2">    """</span>
-<a id="__codelineno-27-18" name="__codelineno-27-18"></a><span class="o">}</span>
+<a id="__codelineno-27-12" name="__codelineno-27-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-27-13" name="__codelineno-27-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-27-14" name="__codelineno-27-14"></a>
+<a id="__codelineno-27-15" name="__codelineno-27-15"></a><span class="s2">    """</span>
+<a id="__codelineno-27-16" name="__codelineno-27-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -4147,30 +4127,26 @@ The container URI was <code>community.wave.seqera.io/library/trim-galore:0.6.10-
 <span class="normal"><a href="#__codelineno-28-17">17</a></span>
 <span class="normal"><a href="#__codelineno-28-18">18</a></span>
 <span class="normal"><a href="#__codelineno-28-19">19</a></span>
-<span class="normal"><a href="#__codelineno-28-20">20</a></span>
-<span class="normal"><a href="#__codelineno-28-21">21</a></span>
-<span class="normal"><a href="#__codelineno-28-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-28-2" name="__codelineno-28-2"></a>
-<a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="cm">/*</span>
-<a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="cm"> * Trim adapters and run post-trimming QC</span>
-<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="cm"> */</span>
-<a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="n">process</span><span class="w"> </span><span class="n">TRIM_GALORE</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-28-7" name="__codelineno-28-7"></a>
-<a id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">"community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"</span>
-</span><a id="__codelineno-28-9" name="__codelineno-28-9"></a>
-<a id="__codelineno-28-10" name="__codelineno-28-10"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-28-11" name="__codelineno-28-11"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">reads</span>
-</span><a id="__codelineno-28-12" name="__codelineno-28-12"></a>
-<a id="__codelineno-28-13" name="__codelineno-28-13"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-28-14" name="__codelineno-28-14"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}_trimmed.fq.gz"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">trimmed_reads</span>
-</span><a id="__codelineno-28-15" name="__codelineno-28-15"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads}_trimming_report.txt"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">trimming_reports</span>
-</span><a id="__codelineno-28-16" name="__codelineno-28-16"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}_trimmed_fastqc.{zip,html}"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">fastqc_reports</span>
-</span><a id="__codelineno-28-17" name="__codelineno-28-17"></a>
-<a id="__codelineno-28-18" name="__codelineno-28-18"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-28-19" name="__codelineno-28-19"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-28-20" name="__codelineno-28-20"></a><span class="hll"><span class="s2">    trim_galore --fastqc ${reads}</span>
-</span><a id="__codelineno-28-21" name="__codelineno-28-21"></a><span class="s2">    """</span>
-<a id="__codelineno-28-22" name="__codelineno-28-22"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-28-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="cm">/*</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="cm"> * Trim adapters and run post-trimming QC</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="cm"> */</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="n">process</span><span class="w"> </span><span class="n">TRIM_GALORE</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5"></a>
+<a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">"community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"</span>
+</span><a id="__codelineno-28-7" name="__codelineno-28-7"></a>
+<a id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">reads</span>
+</span><a id="__codelineno-28-10" name="__codelineno-28-10"></a>
+<a id="__codelineno-28-11" name="__codelineno-28-11"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-28-12" name="__codelineno-28-12"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}_trimmed.fq.gz"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">trimmed_reads</span>
+</span><a id="__codelineno-28-13" name="__codelineno-28-13"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads}_trimming_report.txt"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">trimming_reports</span>
+</span><a id="__codelineno-28-14" name="__codelineno-28-14"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}_trimmed_fastqc.{zip,html}"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">fastqc_reports</span>
+</span><a id="__codelineno-28-15" name="__codelineno-28-15"></a>
+<a id="__codelineno-28-16" name="__codelineno-28-16"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-28-17" name="__codelineno-28-17"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-28-18" name="__codelineno-28-18"></a><span class="hll"><span class="s2">    trim_galore --fastqc ${reads}</span>
+</span><a id="__codelineno-28-19" name="__codelineno-28-19"></a><span class="s2">    """</span>
+<a id="__codelineno-28-20" name="__codelineno-28-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4519,26 +4495,22 @@ The container URI was <code>community.wave.seqera.io/library/hisat2_samtools:5e4
 <span class="normal"><a href="#__codelineno-46-13">13</a></span>
 <span class="normal"><a href="#__codelineno-46-14">14</a></span>
 <span class="normal"><a href="#__codelineno-46-15">15</a></span>
-<span class="normal"><a href="#__codelineno-46-16">16</a></span>
-<span class="normal"><a href="#__codelineno-46-17">17</a></span>
-<span class="normal"><a href="#__codelineno-46-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-46-2" name="__codelineno-46-2"></a>
-<a id="__codelineno-46-3" name="__codelineno-46-3"></a><span class="cm">/*</span>
-<a id="__codelineno-46-4" name="__codelineno-46-4"></a><span class="cm"> * Align reads to a reference genome</span>
-<a id="__codelineno-46-5" name="__codelineno-46-5"></a><span class="cm"> */</span>
-<a id="__codelineno-46-6" name="__codelineno-46-6"></a><span class="n">process</span><span class="w"> </span><span class="n">HISAT2_ALIGN</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-46-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1"></a><span class="cm">/*</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2"></a><span class="cm"> * Align reads to a reference genome</span>
+<a id="__codelineno-46-3" name="__codelineno-46-3"></a><span class="cm"> */</span>
+<a id="__codelineno-46-4" name="__codelineno-46-4"></a><span class="n">process</span><span class="w"> </span><span class="n">HISAT2_ALIGN</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-46-5" name="__codelineno-46-5"></a>
+<a id="__codelineno-46-6" name="__codelineno-46-6"></a><span class="w">    </span><span class="n">container</span>
 <a id="__codelineno-46-7" name="__codelineno-46-7"></a>
-<a id="__codelineno-46-8" name="__codelineno-46-8"></a><span class="w">    </span><span class="n">container</span>
+<a id="__codelineno-46-8" name="__codelineno-46-8"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-46-9" name="__codelineno-46-9"></a>
-<a id="__codelineno-46-10" name="__codelineno-46-10"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-46-10" name="__codelineno-46-10"></a><span class="w">    </span><span class="nl">output:</span>
 <a id="__codelineno-46-11" name="__codelineno-46-11"></a>
-<a id="__codelineno-46-12" name="__codelineno-46-12"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-46-13" name="__codelineno-46-13"></a>
-<a id="__codelineno-46-14" name="__codelineno-46-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-46-15" name="__codelineno-46-15"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-46-16" name="__codelineno-46-16"></a>
-<a id="__codelineno-46-17" name="__codelineno-46-17"></a><span class="s2">    """</span>
-<a id="__codelineno-46-18" name="__codelineno-46-18"></a><span class="o">}</span>
+<a id="__codelineno-46-12" name="__codelineno-46-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-46-13" name="__codelineno-46-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-46-14" name="__codelineno-46-14"></a>
+<a id="__codelineno-46-15" name="__codelineno-46-15"></a><span class="s2">    """</span>
+<a id="__codelineno-46-16" name="__codelineno-46-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -4564,33 +4536,29 @@ The container URI was <code>community.wave.seqera.io/library/hisat2_samtools:5e4
 <span class="normal"><a href="#__codelineno-47-20">20</a></span>
 <span class="normal"><a href="#__codelineno-47-21">21</a></span>
 <span class="normal"><a href="#__codelineno-47-22">22</a></span>
-<span class="normal"><a href="#__codelineno-47-23">23</a></span>
-<span class="normal"><a href="#__codelineno-47-24">24</a></span>
-<span class="normal"><a href="#__codelineno-47-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-47-2" name="__codelineno-47-2"></a>
-<a id="__codelineno-47-3" name="__codelineno-47-3"></a><span class="cm">/*</span>
-<a id="__codelineno-47-4" name="__codelineno-47-4"></a><span class="cm"> * Align reads to a reference genome</span>
-<a id="__codelineno-47-5" name="__codelineno-47-5"></a><span class="cm"> */</span>
-<a id="__codelineno-47-6" name="__codelineno-47-6"></a><span class="n">process</span><span class="w"> </span><span class="n">HISAT2_ALIGN</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-47-7" name="__codelineno-47-7"></a>
-<a id="__codelineno-47-8" name="__codelineno-47-8"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">"community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e"</span>
-</span><a id="__codelineno-47-9" name="__codelineno-47-9"></a>
-<a id="__codelineno-47-10" name="__codelineno-47-10"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-47-11" name="__codelineno-47-11"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">reads</span>
-</span><a id="__codelineno-47-12" name="__codelineno-47-12"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">index_zip</span>
-</span><a id="__codelineno-47-13" name="__codelineno-47-13"></a>
-<a id="__codelineno-47-14" name="__codelineno-47-14"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-47-15" name="__codelineno-47-15"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}.bam"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">bam</span>
-</span><a id="__codelineno-47-16" name="__codelineno-47-16"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}.hisat2.log"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">log</span>
-</span><a id="__codelineno-47-17" name="__codelineno-47-17"></a>
-<a id="__codelineno-47-18" name="__codelineno-47-18"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-47-19" name="__codelineno-47-19"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-47-20" name="__codelineno-47-20"></a><span class="hll"><span class="s2">    tar -xzvf ${index_zip}</span>
-</span><a id="__codelineno-47-21" name="__codelineno-47-21"></a><span class="hll"><span class="s2">    hisat2 -x ${index_zip.simpleName} -U ${reads} \</span>
-</span><a id="__codelineno-47-22" name="__codelineno-47-22"></a><span class="hll"><span class="s2">        --new-summary --summary-file ${reads.simpleName}.hisat2.log | \</span>
-</span><a id="__codelineno-47-23" name="__codelineno-47-23"></a><span class="hll"><span class="s2">        samtools view -bS -o ${reads.simpleName}.bam</span>
-</span><a id="__codelineno-47-24" name="__codelineno-47-24"></a><span class="s2">    """</span>
-<a id="__codelineno-47-25" name="__codelineno-47-25"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-47-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1"></a><span class="cm">/*</span>
+<a id="__codelineno-47-2" name="__codelineno-47-2"></a><span class="cm"> * Align reads to a reference genome</span>
+<a id="__codelineno-47-3" name="__codelineno-47-3"></a><span class="cm"> */</span>
+<a id="__codelineno-47-4" name="__codelineno-47-4"></a><span class="n">process</span><span class="w"> </span><span class="n">HISAT2_ALIGN</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-47-5" name="__codelineno-47-5"></a>
+<a id="__codelineno-47-6" name="__codelineno-47-6"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">"community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e"</span>
+</span><a id="__codelineno-47-7" name="__codelineno-47-7"></a>
+<a id="__codelineno-47-8" name="__codelineno-47-8"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-47-9" name="__codelineno-47-9"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">reads</span>
+</span><a id="__codelineno-47-10" name="__codelineno-47-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">index_zip</span>
+</span><a id="__codelineno-47-11" name="__codelineno-47-11"></a>
+<a id="__codelineno-47-12" name="__codelineno-47-12"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-47-13" name="__codelineno-47-13"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}.bam"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">bam</span>
+</span><a id="__codelineno-47-14" name="__codelineno-47-14"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}.hisat2.log"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">log</span>
+</span><a id="__codelineno-47-15" name="__codelineno-47-15"></a>
+<a id="__codelineno-47-16" name="__codelineno-47-16"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-47-17" name="__codelineno-47-17"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-47-18" name="__codelineno-47-18"></a><span class="hll"><span class="s2">    tar -xzvf ${index_zip}</span>
+</span><a id="__codelineno-47-19" name="__codelineno-47-19"></a><span class="hll"><span class="s2">    hisat2 -x ${index_zip.simpleName} -U ${reads} \</span>
+</span><a id="__codelineno-47-20" name="__codelineno-47-20"></a><span class="hll"><span class="s2">        --new-summary --summary-file ${reads.simpleName}.hisat2.log | \</span>
+</span><a id="__codelineno-47-21" name="__codelineno-47-21"></a><span class="hll"><span class="s2">        samtools view -bS -o ${reads.simpleName}.bam</span>
+</span><a id="__codelineno-47-22" name="__codelineno-47-22"></a><span class="s2">    """</span>
+<a id="__codelineno-47-23" name="__codelineno-47-23"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>

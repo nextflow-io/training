@@ -3730,26 +3730,22 @@ This is cleaner than chaining <code>.mix()</code> onto one of the output channel
 <span class="normal"><a href="#__codelineno-16-13">13</a></span>
 <span class="normal"><a href="#__codelineno-16-14">14</a></span>
 <span class="normal"><a href="#__codelineno-16-15">15</a></span>
-<span class="normal"><a href="#__codelineno-16-16">16</a></span>
-<span class="normal"><a href="#__codelineno-16-17">17</a></span>
-<span class="normal"><a href="#__codelineno-16-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2"></a>
-<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="cm">/*</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="cm"> * Aggregate QC reports with MultiQC</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="cm"> */</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="n">process</span><span class="w"> </span><span class="n">MULTIQC</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-16-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="cm">/*</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="cm"> * Aggregate QC reports with MultiQC</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="cm"> */</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="n">process</span><span class="w"> </span><span class="n">MULTIQC</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5"></a>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">    </span><span class="n">container</span>
 <a id="__codelineno-16-7" name="__codelineno-16-7"></a>
-<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">    </span><span class="n">container</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-16-9" name="__codelineno-16-9"></a>
-<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">    </span><span class="nl">output:</span>
 <a id="__codelineno-16-11" name="__codelineno-16-11"></a>
-<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-16-13" name="__codelineno-16-13"></a>
-<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-16-16" name="__codelineno-16-16"></a>
-<a id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="s2">    """</span>
-<a id="__codelineno-16-18" name="__codelineno-16-18"></a><span class="o">}</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14"></a>
+<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="s2">    """</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -3772,30 +3768,26 @@ This is cleaner than chaining <code>.mix()</code> onto one of the output channel
 <span class="normal"><a href="#__codelineno-17-17">17</a></span>
 <span class="normal"><a href="#__codelineno-17-18">18</a></span>
 <span class="normal"><a href="#__codelineno-17-19">19</a></span>
-<span class="normal"><a href="#__codelineno-17-20">20</a></span>
-<span class="normal"><a href="#__codelineno-17-21">21</a></span>
-<span class="normal"><a href="#__codelineno-17-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2"></a>
-<a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="cm">/*</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="cm"> * Aggregate QC reports with MultiQC</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="cm"> */</span>
-<a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="n">process</span><span class="w"> </span><span class="n">MULTIQC</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-17-7" name="__codelineno-17-7"></a>
-<a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">"community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c"</span>
-</span><a id="__codelineno-17-9" name="__codelineno-17-9"></a>
-<a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">'*'</span>
-</span><a id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="hll"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">output_name</span>
-</span><a id="__codelineno-17-13" name="__codelineno-17-13"></a>
-<a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${output_name}.html"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">report</span>
-</span><a id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${output_name}_data"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">data</span>
-</span><a id="__codelineno-17-17" name="__codelineno-17-17"></a>
-<a id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-17-19" name="__codelineno-17-19"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-17-20" name="__codelineno-17-20"></a><span class="hll"><span class="s2">    multiqc . -n ${output_name}.html</span>
-</span><a id="__codelineno-17-21" name="__codelineno-17-21"></a><span class="s2">    """</span>
-<a id="__codelineno-17-22" name="__codelineno-17-22"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-17-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="cm">/*</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="cm"> * Aggregate QC reports with MultiQC</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="cm"> */</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="n">process</span><span class="w"> </span><span class="n">MULTIQC</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5"></a>
+<a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">"community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c"</span>
+</span><a id="__codelineno-17-7" name="__codelineno-17-7"></a>
+<a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">'*'</span>
+</span><a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="hll"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">output_name</span>
+</span><a id="__codelineno-17-11" name="__codelineno-17-11"></a>
+<a id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${output_name}.html"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">report</span>
+</span><a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${output_name}_data"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">data</span>
+</span><a id="__codelineno-17-15" name="__codelineno-17-15"></a>
+<a id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="hll"><span class="s2">    multiqc . -n ${output_name}.html</span>
+</span><a id="__codelineno-17-19" name="__codelineno-17-19"></a><span class="s2">    """</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4187,19 +4179,19 @@ The only change needed is in the output block: since we now get two FastQC repor
 <div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">After</label><label for="__tabbed_13_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/fastqc_pe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-10">10</a></span>
-<span class="normal"><a href="#__codelineno-37-11">11</a></span>
-<span class="normal"><a href="#__codelineno-37-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-10" name="__codelineno-37-10"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-37-11" name="__codelineno-37-11"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"*_fastqc.zip"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">zip</span>
-</span><a id="__codelineno-37-12" name="__codelineno-37-12"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"*_fastqc.html"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">html</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/fastqc_pe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-37-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-37-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-8" name="__codelineno-37-8"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-37-9" name="__codelineno-37-9"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"*_fastqc.zip"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">zip</span>
+</span><a id="__codelineno-37-10" name="__codelineno-37-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"*_fastqc.html"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">html</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/fastqc_pe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-10">10</a></span>
-<span class="normal"><a href="#__codelineno-38-11">11</a></span>
-<span class="normal"><a href="#__codelineno-38-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-10" name="__codelineno-38-10"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-38-11" name="__codelineno-38-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}_fastqc.zip"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">zip</span>
-<a id="__codelineno-38-12" name="__codelineno-38-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}_fastqc.html"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">html</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/fastqc_pe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-38-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-38-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-8" name="__codelineno-38-8"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-38-9" name="__codelineno-38-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}_fastqc.zip"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">zip</span>
+<a id="__codelineno-38-10" name="__codelineno-38-10"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}_fastqc.html"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">html</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4232,7 +4224,10 @@ The only change needed is in the output block: since we now get two FastQC repor
 <div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">After</label><label for="__tabbed_15_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/trim_galore_pe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-8"> 8</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/trim_galore_pe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-42-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-42-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-42-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-42-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-42-10">10</a></span>
 <span class="normal"><a href="#__codelineno-42-11">11</a></span>
@@ -4241,26 +4236,26 @@ The only change needed is in the output block: since we now get two FastQC repor
 <span class="normal"><a href="#__codelineno-42-14">14</a></span>
 <span class="normal"><a href="#__codelineno-42-15">15</a></span>
 <span class="normal"><a href="#__codelineno-42-16">16</a></span>
-<span class="normal"><a href="#__codelineno-42-17">17</a></span>
-<span class="normal"><a href="#__codelineno-42-18">18</a></span>
-<span class="normal"><a href="#__codelineno-42-19">19</a></span>
-<span class="normal"><a href="#__codelineno-42-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-8" name="__codelineno-42-8"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-42-9" name="__codelineno-42-9"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">read1</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">read2</span><span class="o">)</span>
-</span><a id="__codelineno-42-10" name="__codelineno-42-10"></a>
-<a id="__codelineno-42-11" name="__codelineno-42-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-42-12" name="__codelineno-42-12"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"*_val_1.fq.gz"</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"*_val_2.fq.gz"</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">trimmed_reads</span>
-</span><a id="__codelineno-42-13" name="__codelineno-42-13"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"*_trimming_report.txt"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">trimming_reports</span>
-<a id="__codelineno-42-14" name="__codelineno-42-14"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"*_val_1_fastqc.{zip,html}"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">fastqc_reports_1</span>
-</span><a id="__codelineno-42-15" name="__codelineno-42-15"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"*_val_2_fastqc.{zip,html}"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">fastqc_reports_2</span>
-</span><a id="__codelineno-42-16" name="__codelineno-42-16"></a>
-<a id="__codelineno-42-17" name="__codelineno-42-17"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-42-18" name="__codelineno-42-18"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-42-19" name="__codelineno-42-19"></a><span class="hll"><span class="s2">    trim_galore --fastqc --paired ${read1} ${read2}</span>
-</span><a id="__codelineno-42-20" name="__codelineno-42-20"></a><span class="s2">    """</span>
+<span class="normal"><a href="#__codelineno-42-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-5" name="__codelineno-42-5"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-42-6" name="__codelineno-42-6"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">read1</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">read2</span><span class="o">)</span>
+</span><a id="__codelineno-42-7" name="__codelineno-42-7"></a>
+<a id="__codelineno-42-8" name="__codelineno-42-8"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-42-9" name="__codelineno-42-9"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"*_val_1.fq.gz"</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"*_val_2.fq.gz"</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">trimmed_reads</span>
+</span><a id="__codelineno-42-10" name="__codelineno-42-10"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"*_trimming_report.txt"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">trimming_reports</span>
+<a id="__codelineno-42-11" name="__codelineno-42-11"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"*_val_1_fastqc.{zip,html}"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">fastqc_reports_1</span>
+</span><a id="__codelineno-42-12" name="__codelineno-42-12"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"*_val_2_fastqc.{zip,html}"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">fastqc_reports_2</span>
+</span><a id="__codelineno-42-13" name="__codelineno-42-13"></a>
+<a id="__codelineno-42-14" name="__codelineno-42-14"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-42-15" name="__codelineno-42-15"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-42-16" name="__codelineno-42-16"></a><span class="hll"><span class="s2">    trim_galore --fastqc --paired ${read1} ${read2}</span>
+</span><a id="__codelineno-42-17" name="__codelineno-42-17"></a><span class="s2">    """</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/trim_galore_pe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-8"> 8</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/trim_galore_pe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-43-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-43-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-43-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-43-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-43-10">10</a></span>
 <span class="normal"><a href="#__codelineno-43-11">11</a></span>
@@ -4268,21 +4263,18 @@ The only change needed is in the output block: since we now get two FastQC repor
 <span class="normal"><a href="#__codelineno-43-13">13</a></span>
 <span class="normal"><a href="#__codelineno-43-14">14</a></span>
 <span class="normal"><a href="#__codelineno-43-15">15</a></span>
-<span class="normal"><a href="#__codelineno-43-16">16</a></span>
-<span class="normal"><a href="#__codelineno-43-17">17</a></span>
-<span class="normal"><a href="#__codelineno-43-18">18</a></span>
-<span class="normal"><a href="#__codelineno-43-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-43-8" name="__codelineno-43-8"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-43-9" name="__codelineno-43-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">reads</span>
-<a id="__codelineno-43-10" name="__codelineno-43-10"></a>
-<a id="__codelineno-43-11" name="__codelineno-43-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-43-12" name="__codelineno-43-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}_trimmed.fq.gz"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">trimmed_reads</span>
-<a id="__codelineno-43-13" name="__codelineno-43-13"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads}_trimming_report.txt"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">trimming_reports</span>
-<a id="__codelineno-43-14" name="__codelineno-43-14"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}_trimmed_fastqc.{zip,html}"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">fastqc_reports</span>
-<a id="__codelineno-43-15" name="__codelineno-43-15"></a>
-<a id="__codelineno-43-16" name="__codelineno-43-16"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-43-17" name="__codelineno-43-17"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-43-18" name="__codelineno-43-18"></a><span class="s2">    trim_galore --fastqc ${reads}</span>
-<a id="__codelineno-43-19" name="__codelineno-43-19"></a><span class="s2">    """</span>
+<span class="normal"><a href="#__codelineno-43-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-43-5" name="__codelineno-43-5"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-43-6" name="__codelineno-43-6"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">reads</span>
+<a id="__codelineno-43-7" name="__codelineno-43-7"></a>
+<a id="__codelineno-43-8" name="__codelineno-43-8"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-43-9" name="__codelineno-43-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}_trimmed.fq.gz"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">trimmed_reads</span>
+<a id="__codelineno-43-10" name="__codelineno-43-10"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads}_trimming_report.txt"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">trimming_reports</span>
+<a id="__codelineno-43-11" name="__codelineno-43-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}_trimmed_fastqc.{zip,html}"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">fastqc_reports</span>
+<a id="__codelineno-43-12" name="__codelineno-43-12"></a>
+<a id="__codelineno-43-13" name="__codelineno-43-13"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-43-14" name="__codelineno-43-14"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-43-15" name="__codelineno-43-15"></a><span class="s2">    trim_galore --fastqc ${reads}</span>
+<a id="__codelineno-43-16" name="__codelineno-43-16"></a><span class="s2">    """</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4314,7 +4306,10 @@ The only change needed is in the output block: since we now get two FastQC repor
 <div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">After</label><label for="__tabbed_17_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/hisat2_align_pe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-8"> 8</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/hisat2_align_pe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-47-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-47-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-47-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-47-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-47-10">10</a></span>
 <span class="normal"><a href="#__codelineno-47-11">11</a></span>
@@ -4325,28 +4320,28 @@ The only change needed is in the output block: since we now get two FastQC repor
 <span class="normal"><a href="#__codelineno-47-16">16</a></span>
 <span class="normal"><a href="#__codelineno-47-17">17</a></span>
 <span class="normal"><a href="#__codelineno-47-18">18</a></span>
-<span class="normal"><a href="#__codelineno-47-19">19</a></span>
-<span class="normal"><a href="#__codelineno-47-20">20</a></span>
-<span class="normal"><a href="#__codelineno-47-21">21</a></span>
-<span class="normal"><a href="#__codelineno-47-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-8" name="__codelineno-47-8"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-47-9" name="__codelineno-47-9"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">read1</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">read2</span><span class="o">)</span>
-</span><a id="__codelineno-47-10" name="__codelineno-47-10"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">index_zip</span>
-<a id="__codelineno-47-11" name="__codelineno-47-11"></a>
-<a id="__codelineno-47-12" name="__codelineno-47-12"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-47-13" name="__codelineno-47-13"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${read1.simpleName}.bam"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">bam</span>
-</span><a id="__codelineno-47-14" name="__codelineno-47-14"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${read1.simpleName}.hisat2.log"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">log</span>
-</span><a id="__codelineno-47-15" name="__codelineno-47-15"></a>
-<a id="__codelineno-47-16" name="__codelineno-47-16"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-47-17" name="__codelineno-47-17"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-47-18" name="__codelineno-47-18"></a><span class="s2">    tar -xzvf ${index_zip}</span>
-<a id="__codelineno-47-19" name="__codelineno-47-19"></a><span class="hll"><span class="s2">    hisat2 -x ${index_zip.simpleName} -1 ${read1} -2 ${read2} \</span>
-</span><a id="__codelineno-47-20" name="__codelineno-47-20"></a><span class="hll"><span class="s2">        --new-summary --summary-file ${read1.simpleName}.hisat2.log | \</span>
-</span><a id="__codelineno-47-21" name="__codelineno-47-21"></a><span class="hll"><span class="s2">        samtools view -bS -o ${read1.simpleName}.bam</span>
-</span><a id="__codelineno-47-22" name="__codelineno-47-22"></a><span class="s2">    """</span>
+<span class="normal"><a href="#__codelineno-47-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-5" name="__codelineno-47-5"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-47-6" name="__codelineno-47-6"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">read1</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">read2</span><span class="o">)</span>
+</span><a id="__codelineno-47-7" name="__codelineno-47-7"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">index_zip</span>
+<a id="__codelineno-47-8" name="__codelineno-47-8"></a>
+<a id="__codelineno-47-9" name="__codelineno-47-9"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-47-10" name="__codelineno-47-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${read1.simpleName}.bam"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">bam</span>
+</span><a id="__codelineno-47-11" name="__codelineno-47-11"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${read1.simpleName}.hisat2.log"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">log</span>
+</span><a id="__codelineno-47-12" name="__codelineno-47-12"></a>
+<a id="__codelineno-47-13" name="__codelineno-47-13"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-47-14" name="__codelineno-47-14"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-47-15" name="__codelineno-47-15"></a><span class="s2">    tar -xzvf ${index_zip}</span>
+<a id="__codelineno-47-16" name="__codelineno-47-16"></a><span class="hll"><span class="s2">    hisat2 -x ${index_zip.simpleName} -1 ${read1} -2 ${read2} \</span>
+</span><a id="__codelineno-47-17" name="__codelineno-47-17"></a><span class="hll"><span class="s2">        --new-summary --summary-file ${read1.simpleName}.hisat2.log | \</span>
+</span><a id="__codelineno-47-18" name="__codelineno-47-18"></a><span class="hll"><span class="s2">        samtools view -bS -o ${read1.simpleName}.bam</span>
+</span><a id="__codelineno-47-19" name="__codelineno-47-19"></a><span class="s2">    """</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/hisat2_align_pe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-8"> 8</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/hisat2_align_pe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-48-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-48-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-48-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-48-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-48-10">10</a></span>
 <span class="normal"><a href="#__codelineno-48-11">11</a></span>
@@ -4357,24 +4352,21 @@ The only change needed is in the output block: since we now get two FastQC repor
 <span class="normal"><a href="#__codelineno-48-16">16</a></span>
 <span class="normal"><a href="#__codelineno-48-17">17</a></span>
 <span class="normal"><a href="#__codelineno-48-18">18</a></span>
-<span class="normal"><a href="#__codelineno-48-19">19</a></span>
-<span class="normal"><a href="#__codelineno-48-20">20</a></span>
-<span class="normal"><a href="#__codelineno-48-21">21</a></span>
-<span class="normal"><a href="#__codelineno-48-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-8" name="__codelineno-48-8"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-48-9" name="__codelineno-48-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">reads</span>
-<a id="__codelineno-48-10" name="__codelineno-48-10"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">index_zip</span>
-<a id="__codelineno-48-11" name="__codelineno-48-11"></a>
-<a id="__codelineno-48-12" name="__codelineno-48-12"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-48-13" name="__codelineno-48-13"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}.bam"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">bam</span>
-<a id="__codelineno-48-14" name="__codelineno-48-14"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}.hisat2.log"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">log</span>
-<a id="__codelineno-48-15" name="__codelineno-48-15"></a>
-<a id="__codelineno-48-16" name="__codelineno-48-16"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-48-17" name="__codelineno-48-17"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-48-18" name="__codelineno-48-18"></a><span class="s2">    tar -xzvf ${index_zip}</span>
-<a id="__codelineno-48-19" name="__codelineno-48-19"></a><span class="s2">    hisat2 -x ${index_zip.simpleName} -U ${reads} \</span>
-<a id="__codelineno-48-20" name="__codelineno-48-20"></a><span class="s2">        --new-summary --summary-file ${reads.simpleName}.hisat2.log | \</span>
-<a id="__codelineno-48-21" name="__codelineno-48-21"></a><span class="s2">        samtools view -bS -o ${reads.simpleName}.bam</span>
-<a id="__codelineno-48-22" name="__codelineno-48-22"></a><span class="s2">    """</span>
+<span class="normal"><a href="#__codelineno-48-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-5" name="__codelineno-48-5"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-48-6" name="__codelineno-48-6"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">reads</span>
+<a id="__codelineno-48-7" name="__codelineno-48-7"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">index_zip</span>
+<a id="__codelineno-48-8" name="__codelineno-48-8"></a>
+<a id="__codelineno-48-9" name="__codelineno-48-9"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-48-10" name="__codelineno-48-10"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}.bam"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">bam</span>
+<a id="__codelineno-48-11" name="__codelineno-48-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${reads.simpleName}.hisat2.log"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">log</span>
+<a id="__codelineno-48-12" name="__codelineno-48-12"></a>
+<a id="__codelineno-48-13" name="__codelineno-48-13"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-48-14" name="__codelineno-48-14"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-48-15" name="__codelineno-48-15"></a><span class="s2">    tar -xzvf ${index_zip}</span>
+<a id="__codelineno-48-16" name="__codelineno-48-16"></a><span class="s2">    hisat2 -x ${index_zip.simpleName} -U ${reads} \</span>
+<a id="__codelineno-48-17" name="__codelineno-48-17"></a><span class="s2">        --new-summary --summary-file ${reads.simpleName}.hisat2.log | \</span>
+<a id="__codelineno-48-18" name="__codelineno-48-18"></a><span class="s2">        samtools view -bS -o ${reads.simpleName}.bam</span>
+<a id="__codelineno-48-19" name="__codelineno-48-19"></a><span class="s2">    """</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
