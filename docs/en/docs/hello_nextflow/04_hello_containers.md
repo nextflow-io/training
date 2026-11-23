@@ -49,14 +49,14 @@ nextflow run hello-containers.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-containers.nf` [thirsty_hodgkin] revision: 375ebf79eb
+    Launching `hello-containers.nf` [prickly_archimedes] revision: 894719601e
 
     executor >  local (7)
-    [9c/a39761] sayHello (Raphael)                 | 3 of 3 ✔
-    [f3/bcabf9] translateGreeting (es-Raphael.txt) | 3 of 3 ✔
-    [fb/b224c8] collectGreetings (batch)           | 1 of 1 ✔
+    [db/b4d2cd] sayHello (Celine)                 | 3 of 3 ✔
+    [8b/4d5295] translateGreeting (es-Celine.txt) | 3 of 3 ✔
+    [c0/20980b] collectGreetings (batch)          | 1 of 1 ✔
 
     Outputs:
 
@@ -69,8 +69,8 @@ nextflow run hello-containers.nf
 
       translated:
         - batch/intermediates/es-Mateo.txt
-        - batch/intermediates/es-Celine.txt
         - batch/intermediates/es-Raphael.txt
+        - batch/intermediates/es-Celine.txt
 
       collected: batch/intermediates/batch-es-greetings.txt
 
@@ -626,15 +626,15 @@ nextflow run hello-containers.nf -resume
 ??? failure "Command output"
 
     ```console hl_lines="10 13 20-21 26-27"
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-containers.nf` [voluminous_fermi] revision: d04231000e
+    Launching `hello-containers.nf` [compassionate_engelbart] revision: 41f3a1ec21
 
     executor >  local (1)
-    [55/a8409a] sayHello (Mateo)                 | 3 of 3, cached: 3 ✔
-    [64/bd05b8] translateGreeting (es-Mateo.txt) | 3 of 3, cached: 3 ✔
-    [fb/b224c8] collectGreetings (batch)         | 1 of 1, cached: 1 ✔
-    [5d/791ebb] cowpy (turkey)                   | 0 of 1 ✘
+    [db/b4d2cd] sayHello (Celine)                 | 3 of 3, cached: 3 ✔
+    [8b/4d5295] translateGreeting (es-Celine.txt) | 3 of 3, cached: 3 ✔
+    [c0/20980b] collectGreetings (batch)          | 1 of 1, cached: 1 ✔
+    [8b/419a4a] cowpy (turkey)                    | 0 of 1 ✘
     ERROR ~ Error executing process > 'cowpy (turkey)'
 
     Caused by:
@@ -655,9 +655,9 @@ nextflow run hello-containers.nf -resume
       .command.sh: line 2: cowpy: command not found
 
     Work dir:
-      /workspaces/training/hello-nextflow/work/5d/791ebb05338a1301c853a982c075a9
+      /workspaces/training/hello-nextflow/work/8b/419a4a76d38a92b26925e258d7137d
 
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 
      -- Check '.nextflow.log' file for details
     ```
@@ -761,29 +761,29 @@ nextflow run hello-containers.nf -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-containers.nf` [soggy_ochoa] revision: fe2fb69f4f
+    Launching `hello-containers.nf` [clever_kalam] revision: 004bbd480f
 
     executor >  local (1)
-    [55/a8409a] sayHello (Mateo)                   | 3 of 3, cached: 3 ✔
-    [f3/bcabf9] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
-    [fb/b224c8] collectGreetings (batch)           | 1 of 1, cached: 1 ✔
-    [a2/0a3c2c] cowpy (turkey)                     | 1 of 1 ✔
+    [14/89e2f2] sayHello (Raphael)                | 3 of 3, cached: 3 ✔
+    [8b/4d5295] translateGreeting (es-Celine.txt) | 3 of 3, cached: 3 ✔
+    [c0/20980b] collectGreetings (batch)          | 1 of 1, cached: 1 ✔
+    [10/9a726a] cowpy (turkey)                    | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
+        - batch/intermediates/Mateo.txt
         - batch/intermediates/Raphael.txt
         - batch/intermediates/Celine.txt
-        - batch/intermediates/Mateo.txt
 
       translated:
-        - batch/intermediates/es-Celine.txt
-        - batch/intermediates/es-Mateo.txt
         - batch/intermediates/es-Raphael.txt
+        - batch/intermediates/es-Mateo.txt
+        - batch/intermediates/es-Celine.txt
 
       collected: batch/intermediates/batch-es-greetings.txt
 
@@ -817,9 +817,9 @@ The final ASCII art output is in the `results/batch/` directory, under the name 
 
     ```console title="results/batch/cowpy-batch-es-greetings.txt"
      ________________
-    / Hola, Raphael! \
-    | Hola, Celine!  |
-    \ Hola, Mateo!   /
+    / Hola, Mateo!   \
+    | Hola, Raphael! |
+    \ Hola, Celine!  /
      ----------------
       \                                  ,+*^^*+___+++_
        \                           ,*^^^^              )
@@ -851,20 +851,20 @@ And there it is, our beautiful turkey saying the translated greetings as desired
 As a final coda to this section, let's take a look at the work subdirectory for one of the `cowpy` process calls to get a bit more insight on how Nextflow works with containers under the hood.
 
 Check the output from your `nextflow run` command to find the path to the work subdirectory for the `cowpy` process.
-Looking at what we got for the run shown above, the console log line for the `cowpy` process starts with `[a2/0a3c2c]`.
-That corresponds to the following truncated directory path: `work/a2/0a3c2c`.
+Looking at what we got for the run shown above, the console log line for the `cowpy` process starts with `[10/9a726a]`.
+That corresponds to the following truncated directory path: `work/10/9a726a`.
 
 In that directory, you will find the `.command.run` file that contains all the commands Nextflow ran on your behalf in the course of executing the pipeline.
 
 ??? abstract "File contents"
 
-    ```console title="work/a2/0a3c2c41b7434d3362a38366bb07e9/.command.run"
+    ```console title="work/10/9a726a9c0596d8d5952c71fd4d0ca8/.command.run"
     #!/bin/bash
     ### ---
-    ### name: 'cowpy (turkey)'
-    ### container: 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    ### name: "cowpy (turkey)"
+    ### container: "community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273"
     ### outputs:
-    ### - 'cowpy-batch-es-greetings.txt'
+    ### - "cowpy-batch-es-greetings.txt"
     ### ...
     set -e
     set -u
@@ -951,8 +951,8 @@ In that directory, you will find the `.command.run` file that contains all the c
         local exit_status=${nxf_main_ret:=0}
         [[ ${exit_status} -eq 0 && ${nxf_unstage_ret:=0} -ne 0 ]] && exit_status=${nxf_unstage_ret:=0}
         [[ ${exit_status} -eq 0 && ${last_err} -ne 0 ]] && exit_status=${last_err}
-        printf -- $exit_status > /workspaces/training/hello-nextflow/work/a2/0a3c2c41b7434d3362a38366bb07e9/.exitcode
         set +u
+        printf -- $exit_status > /workspaces/training/hello-nextflow/work/10/9a726a9c0596d8d5952c71fd4d0ca8/.exitcode
         docker rm $NXF_BOXID &>/dev/null || true
         exit $exit_status
     }
@@ -963,14 +963,14 @@ In that directory, you will find the `.command.run` file that contains all the c
     }
 
     nxf_launch() {
-        docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/a2/0a3c2c41b7434d3362a38366bb07e9/.command.sh
+        docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/10/9a726a9c0596d8d5952c71fd4d0ca8/.command.sh
     }
 
     nxf_stage() {
         true
         # stage input files
         rm -f batch-es-greetings.txt
-        ln -s /workspaces/training/hello-nextflow/work/fb/b224c8eaba56b6bf62a72d5727dc6a/batch-es-greetings.txt batch-es-greetings.txt
+        ln -sfn /workspaces/training/hello-nextflow/work/c0/20980b315c1f9e903db49478faa214/batch-es-greetings.txt batch-es-greetings.txt
     }
 
     nxf_unstage_outputs() {
@@ -983,7 +983,7 @@ In that directory, you will find the `.command.run` file that contains all the c
 
     nxf_unstage() {
         if [[ ${nxf_main_ret:=0} == 0 ]]; then
-            (set -e -o pipefail; (nxf_unstage_outputs | tee -a .command.out) 3>&1 1>&2 2>&3 | tee -a .command.err)
+            (set -e -o pipefail; (nxf_unstage_outputs | tee -a .command.out) 3>&1 1>&2 2>&3 | tee -a .command.err) 3>&1 1>&2 2>&3
             nxf_unstage_ret=$?
         fi
         nxf_unstage_controls
@@ -998,7 +998,7 @@ In that directory, you will find the `.command.run` file that contains all the c
         export NXF_BOXID="nxf-$(dd bs=18 count=1 if=/dev/urandom 2>/dev/null | base64 | tr +/ 0A | tr -d '\r\n')"
         NXF_SCRATCH=''
         [[ $NXF_DEBUG > 0 ]] && nxf_env
-        touch /workspaces/training/hello-nextflow/work/a2/0a3c2c41b7434d3362a38366bb07e9/.command.begin
+        touch /workspaces/training/hello-nextflow/work/10/9a726a9c0596d8d5952c71fd4d0ca8/.command.begin
         set +u
         set -u
         [[ $NXF_SCRATCH ]] && cd $NXF_SCRATCH
@@ -1006,7 +1006,7 @@ In that directory, you will find the `.command.run` file that contains all the c
         nxf_stage
 
         set +e
-        (set -o pipefail; (nxf_launch | tee .command.out) 3>&1 1>&2 2>&3 | tee .command.err) &
+        (set -o pipefail; (nxf_launch | tee .command.out) 3>&1 1>&2 2>&3 | tee .command.err) 3>&1 1>&2 2>&3 &
         pid=$!
         wait $pid || nxf_main_ret=$?
         nxf_unstage
@@ -1019,7 +1019,7 @@ If you search for `nxf_launch` in this file, you should see something like this:
 
 ```console
 nxf_launch() {
-    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/a2/0a3c2c41b7434d3362a38366bb07e9/.command.sh
+    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/10/9a726a9c0596d8d5952c71fd4d0ca8/.command.sh
 }
 ```
 
@@ -1149,13 +1149,13 @@ Run the workflow, then check the `.command.run` file of one of the `translateGre
 
     The header of the `.command.run` file of a `translateGreeting` task names the container:
 
-    ```console title="work/4f/9839f24779f838e13e95d6df600814/.command.run"
+    ```console title="work/e1/98ab798b6113a533df6ef00e09ff3e/.command.run"
     #!/bin/bash
     ### ---
-    ### name: 'translateGreeting (es-Mateo.txt)'
-    ### container: 'python:3.12-slim'
+    ### name: "translateGreeting (es-Mateo.txt)"
+    ### container: "python:3.12-slim"
     ### outputs:
-    ### - 'es-Mateo.txt'
+    ### - "es-Mateo.txt"
     ```
 
     Now both `translateGreeting` and `cowpy` run in containers, each with its own image.
@@ -1198,8 +1198,8 @@ Pick another character that `cowpy` offers, and run the workflow so that it draw
     ```console title="results/batch/cowpy-batch-es-greetings.txt"
      ________________
     / Hola, Celine!  \
-    | Hola, Mateo!   |
-    \ Hola, Raphael! /
+    | Hola, Raphael! |
+    \ Hola, Mateo!   /
      ----------------
     \                             .       .
      \                           / `.   .' "

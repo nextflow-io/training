@@ -143,7 +143,7 @@ Only one greeting file should be produced.
     ```
 
     ```console title="Output (excerpt)"
-    [b3/4be621] sayHello (Celine) | 1 of 1 ✔
+    [19/1c5874] sayHello (Celine) | 1 of 1 ✔
     Before splitCsv: /workspaces/training/hello-nextflow/data/names.csv
     After splitCsv: [Mateo, es, squirrel]
     After splitCsv: [Raphael, it, turtle]
@@ -247,14 +247,14 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
     ??? success "Command output"
 
         ```console
-        N E X T F L O W   ~  version 26.04.4
+        N E X T F L O W   ~  version 26.10.7
 
-        Launching `hello-challenge.nf` [tiny_stonebraker] revision: 45bd8a8a20
+        Launching `hello-challenge.nf` [loving_stallman] revision: 14b81b681a
 
         executor >  local (7)
-        [db/a508b3] sayHello (Raphael)                 | 3 of 3 ✔
-        [dc/1ace3b] translateGreeting (it-Raphael.txt) | 3 of 3 ✔
-        [22/e69199] collectGreetings (mixed)           | 1 of 1 ✔
+        [84/0c2d79] sayHello (Raphael)                 | 3 of 3 ✔
+        [45/83cea3] translateGreeting (it-Raphael.txt) | 3 of 3 ✔
+        [13/3a83f8] collectGreetings (mixed)           | 1 of 1 ✔
 
         Outputs:
 
@@ -266,8 +266,8 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
             - mixed/intermediates/Raphael.txt
 
           translated:
-            - mixed/intermediates/es-Mateo.txt
             - mixed/intermediates/fr-Celine.txt
+            - mixed/intermediates/es-Mateo.txt
             - mixed/intermediates/it-Raphael.txt
 
           collected: mixed/intermediates/mixed-native-greetings.txt
@@ -279,8 +279,8 @@ Run it with `--batch mixed` and check that the collected file contains `Hola, Ma
 
     ```console title="results/mixed/intermediates/mixed-native-greetings.txt"
     Bonjour, Celine!
-    Ciao, Raphael!
     Hola, Mateo!
+    Ciao, Raphael!
     ```
 
     To learn more about passing several values together through a process, see the [Metadata and Meta Maps](../side_quests/metadata/index.md#14-group-everything-as-a-single-input-to-the-process) side quest.
@@ -392,28 +392,28 @@ Keep the collected file and the report as they are.
     ??? success "Command output"
 
         ```console
-        N E X T F L O W   ~  version 26.04.4
+        N E X T F L O W   ~  version 26.10.7
 
-        Launching `hello-challenge.nf` [nice_meninsky] revision: 987e9b3a29
+        Launching `hello-challenge.nf` [loving_varahamihira] revision: 1a882b4ad2
 
         executor >  local (10)
-        [bb/310fae] sayHello (Mateo)                  | 3 of 3 ✔
-        [e3/265804] translateGreeting (es-Mateo.txt)  | 3 of 3 ✔
-        [57/bca6b4] collectGreetings (test)           | 1 of 1 ✔
-        [aa/13c331] cowpy (turtle)                    | 3 of 3 ✔
+        [20/26f5c5] sayHello (Mateo)                  | 3 of 3 ✔
+        [78/a33880] translateGreeting (es-Mateo.txt)  | 3 of 3 ✔
+        [bc/0c52b4] collectGreetings (test)           | 1 of 1 ✔
+        [42/b4b93b] cowpy (squirrel)                  | 3 of 3 ✔
 
         Outputs:
 
           /workspaces/training/hello-nextflow/results
 
           greetings:
-            - test/intermediates/Celine.txt
             - test/intermediates/Raphael.txt
+            - test/intermediates/Celine.txt
             - test/intermediates/Mateo.txt
 
           translated:
-            - test/intermediates/es-Celine.txt
             - test/intermediates/es-Raphael.txt
+            - test/intermediates/es-Celine.txt
             - test/intermediates/es-Mateo.txt
 
           collected: test/intermediates/test-es-greetings.txt
@@ -421,9 +421,9 @@ Keep the collected file and the report as they are.
           batch_report: test/test-es-report.txt
 
           cowpy_art:
+            - test/cowpy-es-Raphael.txt
             - test/cowpy-es-Celine.txt
             - test/cowpy-es-Mateo.txt
-            - test/cowpy-es-Raphael.txt
         ```
 
     `cowpy` now runs three times, once per name, and each file is drawn by that name's character:
@@ -615,29 +615,29 @@ The entry workflow in `hello-challenge.nf` then calls `GREET`, passes the collec
     ??? success "Command output"
 
         ```console
-        N E X T F L O W   ~  version 26.04.4
+        N E X T F L O W   ~  version 26.10.7
 
-        Launching `hello-challenge.nf` [sleepy_euler] revision: 60ca931fc8
+        Launching `hello-challenge.nf` [wise_colden] revision: 40b89c26d3
 
         executor >  local (8)
-        [86/2ab589] GREET:sayHello (Raphael)                | 3 of 3 ✔
-        [24/7927ad] GREET:translateGreeting (es-Celine.txt) | 3 of 3 ✔
-        [26/cfb209] GREET:collectGreetings (test)           | 1 of 1 ✔
-        [ac/e5e1e5] cowpy (tux)                             | 1 of 1 ✔
+        [41/6b7df0] GREET:sayHello (Raphael)                 | 3 of 3 ✔
+        [86/ffbe78] GREET:translateGreeting (es-Raphael.txt) | 3 of 3 ✔
+        [4d/3ff323] GREET:collectGreetings (test)            | 1 of 1 ✔
+        [ee/b62338] cowpy (tux)                              | 1 of 1 ✔
 
         Outputs:
 
           /workspaces/training/hello-nextflow/results
 
           greetings:
-            - test/intermediates/Raphael.txt
-            - test/intermediates/Celine.txt
             - test/intermediates/Mateo.txt
+            - test/intermediates/Celine.txt
+            - test/intermediates/Raphael.txt
 
           translated:
-            - test/intermediates/es-Raphael.txt
-            - test/intermediates/es-Celine.txt
             - test/intermediates/es-Mateo.txt
+            - test/intermediates/es-Celine.txt
+            - test/intermediates/es-Raphael.txt
 
           collected: test/intermediates/test-es-greetings.txt
 
@@ -673,7 +673,7 @@ However, a process can only be called once in a workflow.
 A second call to `translateGreeting` fails with this error:
 
 ```console
-Process 'translateGreeting' has been already used -- If you need to reuse the same component, include it with a different name or include it in a different workflow context
+Process 'translateGreeting' was called twice -- include it with a different alias or call it in a different workflow
 ```
 
 Add a `second_language` parameter with the default value `fr`, and make the workflow translate the greetings into both languages.
@@ -797,17 +797,17 @@ Keep `cowpy` on the greetings in the first language.
     ??? success "Command output"
 
         ```console
-        N E X T F L O W   ~  version 26.04.4
+        N E X T F L O W   ~  version 26.10.7
 
-        Launching `hello-challenge.nf` [irreverent_linnaeus] revision: 72805d564b
+        Launching `hello-challenge.nf` [ecstatic_mirzakhani] revision: db63a39de6
 
         executor >  local (12)
-        [e3/2c1384] sayHello (Mateo)                  | 3 of 3 ✔
-        [32/f9e167] translateGreeting (es-Mateo.txt)  | 3 of 3 ✔
-        [66/df0569] collectGreetings (test)           | 1 of 1 ✔
-        [a4/40b5f2] translateSecond (fr-Mateo.txt)    | 3 of 3 ✔
-        [03/75f3b5] collectSecond (test)              | 1 of 1 ✔
-        [93/7968e6] cowpy (tux)                       | 1 of 1 ✔
+        [20/f7231c] sayHello (Raphael)                 | 3 of 3 ✔
+        [ad/90c9dc] translateGreeting (es-Raphael.txt) | 3 of 3 ✔
+        [b0/2bcfc6] collectGreetings (test)            | 1 of 1 ✔
+        [1c/782a6d] translateSecond (fr-Mateo.txt)     | 3 of 3 ✔
+        [8d/3764ae] collectSecond (test)               | 1 of 1 ✔
+        [ae/d6690a] cowpy (tux)                        | 1 of 1 ✔
 
         Outputs:
 
@@ -819,9 +819,9 @@ Keep `cowpy` on the greetings in the first language.
             - test/intermediates/Mateo.txt
 
           translated:
-            - test/intermediates/es-Raphael.txt
-            - test/intermediates/es-Celine.txt
             - test/intermediates/es-Mateo.txt
+            - test/intermediates/es-Celine.txt
+            - test/intermediates/es-Raphael.txt
 
           collected: test/intermediates/test-es-greetings.txt
 
@@ -843,8 +843,8 @@ Keep `cowpy` on the greetings in the first language.
 
     ```console title="results/test/intermediates/test-fr-greetings.txt"
     Bonjour, Celine!
-    Bonjour, Mateo!
     Bonjour, Raphael!
+    Bonjour, Mateo!
     ```
 
     Aliases work for workflows too.

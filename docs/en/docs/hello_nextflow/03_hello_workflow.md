@@ -61,21 +61,21 @@ nextflow run hello-workflow.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-workflow.nf` [mighty_becquerel] revision: 42ced9ea2d
+    Launching `hello-workflow.nf` [hungry_curran] revision: 451e6bb952
 
     executor >  local (3)
-    [1f/03f176] sayHello (Celine) | 3 of 3 ✔
+    [3b/b013b6] sayHello (Raphael) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - hello/Raphael.txt
         - hello/Mateo.txt
         - hello/Celine.txt
+        - hello/Raphael.txt
     ```
 
 As previously, you will find the output files in the `results/hello` directory, alongside the outputs of the previous parts.
@@ -305,13 +305,13 @@ nextflow run hello-workflow.nf -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-workflow.nf` [desperate_baekeland] revision: 18c770fedd
+    Launching `hello-workflow.nf` [fabulous_jepsen] revision: 6666356a1f
 
     executor >  local (3)
-    [1f/03f176] sayHello (Celine)               | 3 of 3, cached: 3 ✔
-    [f7/fb36e4] translateGreeting (Raphael.txt) | 3 of 3 ✔
+    [ca/b33d6f] sayHello (Celine)              | 3 of 3, cached: 3 ✔
+    [a2/ba648d] translateGreeting (Celine.txt) | 3 of 3 ✔
 
     Outputs:
 
@@ -319,13 +319,13 @@ nextflow run hello-workflow.nf -resume
 
       greetings:
         - hello/Raphael.txt
-        - hello/Celine.txt
         - hello/Mateo.txt
+        - hello/Celine.txt
 
       translated:
-        - hello/es-Celine.txt
-        - hello/es-Mateo.txt
         - hello/es-Raphael.txt
+        - hello/es-Mateo.txt
+        - hello/es-Celine.txt
     ```
 
 There is now an extra line in the console output that corresponds to the new process we just added, and the `sayHello` tasks were retrieved from the cache.
@@ -343,8 +343,8 @@ It's also worth taking a look inside the work directory of one of the calls to t
 ??? abstract "Directory contents"
 
     ```console
-    work/2a/ab0718b375f74cf4c244ffcb0399ca/
-    ├── Mateo.txt -> /workspaces/training/hello-nextflow/work/cf/a496aeed43fb0da1f62ca9ebedbb18/Mateo.txt
+    work/04/ed1af8616b521098c5d7755d1d18bd/
+    ├── Mateo.txt -> /workspaces/training/hello-nextflow/work/c8/1d9afcca03e41f83ffb571fca25f01/Mateo.txt
     └── es-Mateo.txt
     ```
 
@@ -356,7 +356,7 @@ By default, when running on a single machine as we're doing here, Nextflow uses 
 
 The `.command.sh` file in the same directory shows the Python script that Nextflow ran, with the file names filled in:
 
-```python title="work/2a/ab0718b375f74cf4c244ffcb0399ca/.command.sh"
+```python title="work/04/ed1af8616b521098c5d7755d1d18bd/.command.sh"
 #!/usr/bin/env python3
 
 with open('Mateo.txt') as greeting_file:
@@ -540,27 +540,27 @@ nextflow run hello-workflow.nf -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-workflow.nf` [pedantic_euler] revision: 861ea927ab
+    Launching `hello-workflow.nf` [hopeful_mandelbrot] revision: 51cc879712
 
     executor >  local (3)
-    [cf/a496ae] sayHello (Mateo)                 | 3 of 3, cached: 3 ✔
-    [b8/7fc215] translateGreeting (es-Mateo.txt) | 3 of 3 ✔
+    [ca/b33d6f] sayHello (Celine)                 | 3 of 3, cached: 3 ✔
+    [54/9b3150] translateGreeting (es-Celine.txt) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - hello/Celine.txt
-        - hello/Mateo.txt
         - hello/Raphael.txt
+        - hello/Mateo.txt
+        - hello/Celine.txt
 
       translated:
-        - hello/es-Celine.txt
-        - hello/es-Raphael.txt
         - hello/es-Mateo.txt
+        - hello/es-Raphael.txt
+        - hello/es-Celine.txt
     ```
 
 The results are the same as before, since the default language is Spanish.
@@ -575,13 +575,13 @@ nextflow run hello-workflow.nf -resume --language fr
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-workflow.nf` [distracted_kalman] revision: 861ea927ab
+    Launching `hello-workflow.nf` [lonely_davinci] revision: 51cc879712
 
     executor >  local (3)
-    [cf/a496ae] sayHello (Mateo)                  | 3 of 3, cached: 3 ✔
-    [54/7a4a37] translateGreeting (fr-Mateo.txt)  | 3 of 3 ✔
+    [c8/1d9afc] sayHello (Mateo)                  | 3 of 3, cached: 3 ✔
+    [f9/3d09b5] translateGreeting (fr-Celine.txt) | 3 of 3 ✔
 
     Outputs:
 
@@ -593,9 +593,9 @@ nextflow run hello-workflow.nf -resume --language fr
         - hello/Celine.txt
 
       translated:
-        - hello/fr-Celine.txt
         - hello/fr-Raphael.txt
         - hello/fr-Mateo.txt
+        - hello/fr-Celine.txt
     ```
 
 The `sayHello` tasks were cached, and the `translateGreeting` tasks ran again with the new input.
@@ -615,17 +615,17 @@ nextflow run hello-workflow.nf -resume --language de
 ??? failure "Command output"
 
     ```console hl_lines="44-45"
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-workflow.nf` [astonishing_jones] revision: 861ea927ab
+    Launching `hello-workflow.nf` [spontaneous_bell] revision: 51cc879712
 
     executor >  local (3)
-    [1f/03f176] sayHello (Celine)                  | 3 of 3, cached: 3 ✔
-    [94/cb45cc] translateGreeting (de-Raphael.txt) | 0 of 3 ✘
-    ERROR ~ Error executing process > 'translateGreeting (de-Mateo.txt)'
+    [ca/b33d6f] sayHello (Celine)                 | 3 of 3, cached: 3 ✔
+    [0c/deee58] translateGreeting (de-Celine.txt) | 0 of 3 ✘
+    ERROR ~ Error executing process > 'translateGreeting (de-Raphael.txt)'
 
     Caused by:
-      Process `translateGreeting (de-Mateo.txt)` terminated with an error exit status (1)
+      Process `translateGreeting (de-Raphael.txt)` terminated with an error exit status (1)
 
 
     Command executed:
@@ -646,10 +646,10 @@ nextflow run hello-workflow.nf -resume --language de
       if 'de' not in translations:
           sys.exit('Unsupported language code: de')
 
-      with open('Mateo.txt') as greeting_file:
+      with open('Raphael.txt') as greeting_file:
           greeting = greeting_file.read()
 
-      with open('de-Mateo.txt', 'w') as translated_file:
+      with open('de-Raphael.txt', 'w') as translated_file:
           translated_file.write(greeting.replace('Hello', translations['de']))
 
     Command exit status:
@@ -662,11 +662,11 @@ nextflow run hello-workflow.nf -resume --language de
       Unsupported language code: de
 
     Work dir:
-      /workspaces/training/hello-nextflow/work/9e/94d39bec1a83bf0013f2fc54436a4b
+      /workspaces/training/hello-nextflow/work/52/aa8f161d4a07b46eabb90f20c3a8b2
 
     Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 The run fails, and the error report shows the script as Nextflow ran it, with `de` filled in.
@@ -905,28 +905,28 @@ nextflow run hello-workflow.nf -resume
 ??? success "Command output"
 
     ```console hl_lines="8"
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-workflow.nf` [stoic_banach] revision: 512c90ea42
+    Launching `hello-workflow.nf` [kickass_sanger] revision: 8d4f16d465
 
     executor >  local (3)
-    [1f/03f176] sayHello (Celine)                  | 3 of 3, cached: 3 ✔
-    [52/df8eff] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
-    [8a/eb1442] collectGreetings (batch)           | 3 of 3 ✔
+    [c8/1d9afc] sayHello (Mateo)                   | 3 of 3, cached: 3 ✔
+    [3a/f97a23] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
+    [d9/0afd55] collectGreetings (batch)           | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - hello/Raphael.txt
         - hello/Celine.txt
+        - hello/Raphael.txt
         - hello/Mateo.txt
 
       translated:
         - hello/es-Celine.txt
-        - hello/es-Mateo.txt
         - hello/es-Raphael.txt
+        - hello/es-Mateo.txt
 
       collected:
         - hello/batch-es-greetings.txt
@@ -944,7 +944,7 @@ Now have a look at the contents of the final output file.
 ??? abstract "File contents"
 
     ```console title="results/hello/batch-es-greetings.txt"
-    Hola, Celine!
+    Hola, Mateo!
     ```
 
 Oh no. The collection step was run individually on each greeting, which is NOT what we wanted.
@@ -1020,27 +1020,27 @@ nextflow run hello-workflow.nf -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-workflow.nf` [lonely_nightingale] revision: 98ed72b5e7
+    Launching `hello-workflow.nf` [loquacious_tuckerman] revision: 17c7a7ff85
 
     executor >  local (1)
-    [1f/03f176] sayHello (Celine)                  | 3 of 3, cached: 3 ✔
-    [52/df8eff] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
-    [19/085ee1] collectGreetings (batch)           | 1 of 1 ✔
-    Before collect: /workspaces/training/hello-nextflow/work/b8/7fc215ebc8eabfe57b3e3e07de1ceb/es-Mateo.txt
-    Before collect: /workspaces/training/hello-nextflow/work/52/df8effab27c7ac0c7e9a4c9ebb7072/es-Raphael.txt
-    Before collect: /workspaces/training/hello-nextflow/work/00/c5c01f2a09b6304128c99dd11fd228/es-Celine.txt
-    After collect: [/workspaces/training/hello-nextflow/work/b8/7fc215ebc8eabfe57b3e3e07de1ceb/es-Mateo.txt, /workspaces/training/hello-nextflow/work/52/df8effab27c7ac0c7e9a4c9ebb7072/es-Raphael.txt, /workspaces/training/hello-nextflow/work/00/c5c01f2a09b6304128c99dd11fd228/es-Celine.txt]
+    [c8/1d9afc] sayHello (Mateo)                  | 3 of 3, cached: 3 ✔
+    [54/9b3150] translateGreeting (es-Celine.txt) | 3 of 3, cached: 3 ✔
+    [e2/56b5b1] collectGreetings (batch)          | 1 of 1 ✔
+    Before collect: /workspaces/training/hello-nextflow/work/a5/e7cd27b0e21c0f3f36831222d7de68/es-Mateo.txt
+    Before collect: /workspaces/training/hello-nextflow/work/3a/f97a23653270f6a94ab11d07cf8b46/es-Raphael.txt
+    Before collect: /workspaces/training/hello-nextflow/work/54/9b3150fc0eec1f7954d6da98da6300/es-Celine.txt
+    After collect: [/workspaces/training/hello-nextflow/work/a5/e7cd27b0e21c0f3f36831222d7de68/es-Mateo.txt, /workspaces/training/hello-nextflow/work/3a/f97a23653270f6a94ab11d07cf8b46/es-Raphael.txt, /workspaces/training/hello-nextflow/work/54/9b3150fc0eec1f7954d6da98da6300/es-Celine.txt]
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - hello/Raphael.txt
         - hello/Celine.txt
         - hello/Mateo.txt
+        - hello/Raphael.txt
 
       translated:
         - hello/es-Mateo.txt
@@ -1069,9 +1069,9 @@ Finally, you can have a look at the contents of the output file to satisfy yours
 ??? abstract "File contents"
 
     ```console title="results/hello/batch-es-greetings.txt"
-    Hola, Celine!
-    Hola, Raphael!
     Hola, Mateo!
+    Hola, Raphael!
+    Hola, Celine!
     ```
 
 This time we have all three greetings in the final output file. Success!
@@ -1168,14 +1168,14 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-workflow.nf` [scruffy_franklin] revision: f3e169ca36
+    Launching `hello-workflow.nf` [nostalgic_williams] revision: 71acf8e3a3
 
     executor >  local (1)
-    [1f/03f176] sayHello (Celine)                 | 3 of 3, cached: 3 ✔
-    [00/c5c01f] translateGreeting (es-Celine.txt) | 3 of 3, cached: 3 ✔
-    [7d/4c5007] collectGreetings (trio)           | 1 of 1 ✔
+    [c8/1d9afc] sayHello (Mateo)                  | 3 of 3, cached: 3 ✔
+    [54/9b3150] translateGreeting (es-Celine.txt) | 3 of 3, cached: 3 ✔
+    [f3/63fec2] collectGreetings (trio)           | 1 of 1 ✔
 
     Outputs:
 
@@ -1183,8 +1183,8 @@ nextflow run hello-workflow.nf -resume --batch trio
 
       greetings:
         - trio/intermediates/Raphael.txt
-        - trio/intermediates/Celine.txt
         - trio/intermediates/Mateo.txt
+        - trio/intermediates/Celine.txt
 
       translated:
         - trio/intermediates/es-Mateo.txt
@@ -1421,28 +1421,28 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-workflow.nf` [loquacious_ride] revision: 375ebf79eb
+    Launching `hello-workflow.nf` [stoic_bell] revision: 894719601e
 
     executor >  local (1)
-    [1f/03f176] sayHello (Celine)                 | 3 of 3, cached: 3 ✔
-    [00/c5c01f] translateGreeting (es-Celine.txt) | 3 of 3, cached: 3 ✔
-    [c1/d3a120] collectGreetings (trio)           | 1 of 1 ✔
+    [c8/1d9afc] sayHello (Mateo)                   | 3 of 3, cached: 3 ✔
+    [3a/f97a23] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
+    [50/966f92] collectGreetings (trio)            | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - trio/intermediates/Celine.txt
         - trio/intermediates/Raphael.txt
         - trio/intermediates/Mateo.txt
+        - trio/intermediates/Celine.txt
 
       translated:
-        - trio/intermediates/es-Raphael.txt
         - trio/intermediates/es-Mateo.txt
         - trio/intermediates/es-Celine.txt
+        - trio/intermediates/es-Raphael.txt
 
       collected: trio/intermediates/trio-es-greetings.txt
 
@@ -1523,18 +1523,18 @@ Run the workflow with `--batch trio -resume` and check `results/trio/`.
     ```
 
     ```console title="Output (excerpt)"
-    [1f/03f176] sayHello (Celine)                  | 3 of 3, cached: 3 ✔
-    [52/df8eff] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
-    [c1/d3a120] collectGreetings (trio)            | 1 of 1, cached: 1 ✔
+    [c8/1d9afc] sayHello (Mateo)                   | 3 of 3, cached: 3 ✔
+    [3a/f97a23] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
+    [50/966f92] collectGreetings (trio)            | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - trio/intermediates/Mateo.txt
         - trio/intermediates/Celine.txt
         - trio/intermediates/Raphael.txt
+        - trio/intermediates/Mateo.txt
 
       translated:
         - trio/translations/es-Mateo.txt
@@ -1581,9 +1581,9 @@ Then, before running each of the following commands, predict which steps will ru
        The collected file contains the Portuguese greetings:
 
         ```console title="Output (excerpt)"
-        [03/4bf37b] sayHello (Raphael)                | 3 of 3, cached: 3 ✔
-        [63/700a01] translateGreeting (pt-Mateo.txt)  | 3 of 3 ✔
-        [fd/bcdd3a] collectGreetings (batch)          | 1 of 1 ✔
+        [c8/1d9afc] sayHello (Mateo)                  | 3 of 3, cached: 3 ✔
+        [33/0f91cc] translateGreeting (pt-Celine.txt) | 3 of 3 ✔
+        [37/9922fd] collectGreetings (batch)          | 1 of 1 ✔
         ```
 
         ```console title="results/batch/intermediates/batch-pt-greetings.txt"
@@ -1598,17 +1598,17 @@ Then, before running each of the following commands, predict which steps will ru
        Since the language is part of the collected file names, the Spanish results are published next to the Portuguese ones instead of replacing them.
 
         ```console title="Output (excerpt)"
-        [1f/03f176] sayHello (Celine)                  | 3 of 3, cached: 3 ✔
-        [00/fb475e] translateGreeting (es-Raphael.txt) | 3 of 3 ✔
-        [3b/b95314] collectGreetings (batch)           | 1 of 1 ✔
+        [3b/b013b6] sayHello (Raphael)               | 3 of 3, cached: 3 ✔
+        [13/0dc549] translateGreeting (es-Mateo.txt) | 3 of 3 ✔
+        [53/c05537] collectGreetings (batch)         | 1 of 1 ✔
         ```
 
     3. **`--batch spanish`**: only `collectGreetings` runs, because the batch name is one of its inputs; the other steps are cached.
 
         ```console title="Output (excerpt)"
-        [03/4bf37b] sayHello (Raphael)               | 3 of 3, cached: 3 ✔
-        [b4/a7125b] translateGreeting (es-Mateo.txt) | 3 of 3, cached: 3 ✔
-        [29/cb8ddc] collectGreetings (spanish)       | 1 of 1 ✔
+        [c8/1d9afc] sayHello (Mateo)                   | 3 of 3, cached: 3 ✔
+        [45/54b0b3] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
+        [38/ec2e7e] collectGreetings (spanish)         | 1 of 1 ✔
         ```
 
 ### Exercise 3: Collect both versions of the greetings
@@ -1687,10 +1687,10 @@ Run it with `--batch trio -resume`.
     ```
 
     ```console title="Output (excerpt)"
-    [1f/03f176] sayHello (Celine)                  | 3 of 3, cached: 3 ✔
-    [52/df8eff] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
-    [c1/d3a120] collectGreetings (trio)            | 1 of 1, cached: 1 ✔
-    [7f/557284] collectBilingual (trio)            | 1 of 1 ✔
+    [c8/1d9afc] sayHello (Mateo)                   | 3 of 3, cached: 3 ✔
+    [3a/f97a23] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
+    [50/966f92] collectGreetings (trio)            | 1 of 1, cached: 1 ✔
+    [21/ee476b] collectBilingual (trio)            | 1 of 1 ✔
     ```
 
     Only the new step runs; everything upstream is cached.
@@ -1699,9 +1699,9 @@ Run it with `--batch trio -resume`.
     Hello, Raphael!
     Hello, Mateo!
     Hello, Celine!
-    Hola, Raphael!
-    Hola, Celine!
     Hola, Mateo!
+    Hola, Celine!
+    Hola, Raphael!
     ```
 
 ---

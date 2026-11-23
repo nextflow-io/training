@@ -47,12 +47,12 @@ nextflow run hello-channels.nf --name 'Channels'
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-channels.nf` [fabulous_lamarck] revision: 07609cbd83
+    Launching `hello-channels.nf` [golden_venter] revision: f21dee2374
 
     executor >  local (1)
-    [c7/c5367c] sayHello | 1 of 1 ✔
+    [99/bf870e] sayHello | 1 of 1 ✔
 
     Outputs:
 
@@ -196,12 +196,12 @@ nextflow run hello-channels.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-channels.nf` [voluminous_leakey] revision: 857551c2e8
+    Launching `hello-channels.nf` [nostalgic_kilby] revision: 06dd96549e
 
     executor >  local (1)
-    [39/e7facf] sayHello (1) | 1 of 1 ✔
+    [9e/f67724] sayHello (1) | 1 of 1 ✔
 
     Outputs:
 
@@ -278,12 +278,12 @@ nextflow run hello-channels.nf
 ??? success "Command output"
 
     ```console hl_lines="7"
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-channels.nf` [stupefied_heisenberg] revision: a7a1ebd855
+    Launching `hello-channels.nf` [thirsty_yalow] revision: 9e26d9820a
 
     executor >  local (1)
-    [41/a766f3] sayHello (1) | 1 of 1 ✔
+    [4b/ed246a] sayHello (1) | 1 of 1 ✔
     Ziggy
 
     Outputs:
@@ -351,12 +351,12 @@ nextflow run hello-channels.nf
 ??? success "Command output"
 
     ```console hl_lines="6-9"
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-channels.nf` [determined_hoover] revision: cdd5bd6ff4
+    Launching `hello-channels.nf` [golden_hirsch] revision: d1e8d5642d
 
     executor >  local (3)
-    [a7/df0f53] sayHello (3) | 3 of 3 ✔
+    [eb/e93014] sayHello (2) | 3 of 3 ✔
     Mateo
     Raphael
     Celine
@@ -388,7 +388,7 @@ However, there is still only one output in the results directory:
 ??? abstract "File contents"
 
     ```console title="results/hello/output.txt"
-    Hello, Celine!
+    Hello, Raphael!
     ```
 
 You should see the greeting for one of the three names in there, though the one you got might be different from what is shown here.
@@ -400,13 +400,13 @@ Can you think of why that might be?
 
 _In the diagram, the channel is represented in green, and the order of elements is represented like marbles in a pipe: the first one loaded is on the right, then the second one in the middle, then the third is on the left._
 
-Looking back at the execution monitor, it gave us only one subdirectory path (`a7/df0f53`).
+Looking back at the execution monitor, it gave us only one subdirectory path (`eb/e93014`).
 Let's have a look in there.
 
 ??? abstract "Directory contents"
 
     ```console hl_lines="9"
-    work/a7/df0f53dbc94195e686e4222b3baa53/
+    work/eb/e9301422244d04a68dbd3689e598d0/
     ├── .command.begin
     ├── .command.err
     ├── .command.log
@@ -419,8 +419,8 @@ Let's have a look in there.
 
 ??? abstract "File contents"
 
-    ```console title="work/a7/df0f53dbc94195e686e4222b3baa53/output.txt"
-    Hello, Celine!
+    ```console title="work/eb/e9301422244d04a68dbd3689e598d0/output.txt"
+    Hello, Raphael!
     ```
 
 That's one of the three greetings, but where are the other two? What's going on?
@@ -441,14 +441,14 @@ nextflow run hello-channels.nf -ansi-log false
 ??? success "Command output"
 
     ```console
-    N E X T F L O W  ~  version 26.04.4
-    Launching `hello-channels.nf` [amazing_mendel] - revision: cdd5bd6ff4
+    N E X T F L O W  ~  version 26.10.7
+    Launching `hello-channels.nf` [sick_watson] - revision: d1e8d5642d
     Mateo
     Raphael
     Celine
-    [c3/557357] Submitted process > sayHello (1)
-    [24/a64e64] Submitted process > sayHello (2)
-    [3c/1ef83b] Submitted process > sayHello (3)
+    [3f/e4e96a] Submitted process > sayHello (2)
+    [f7/678031] Submitted process > sayHello (1)
+    [f6/3caa46] Submitted process > sayHello (3)
 
     Outputs:
 
@@ -477,7 +477,7 @@ Anyway, now that we have the subdirectories of each process call, we can look fo
 ??? abstract "Directory contents"
 
     ```console
-    work/c3/5573571b6ea4e9c12bd95edf56fc94/
+    work/3f/e4e96a6d8078ae0112c80235ac3094/
     ├── .command.begin
     ├── .command.err
     ├── .command.log
@@ -489,7 +489,7 @@ Anyway, now that we have the subdirectories of each process call, we can look fo
     ```
 
     ```console
-    work/24/a64e64785030d9c2c7731ffcfa2469/
+    work/f7/67803162a7faae46d3166396371481/
     ├── .command.begin
     ├── .command.err
     ├── .command.log
@@ -501,7 +501,7 @@ Anyway, now that we have the subdirectories of each process call, we can look fo
     ```
 
     ```console
-    work/3c/1ef83bfb5e198624a40f13a767eef6/
+    work/f6/3caa461bc749acaa0eb7bf832bc6b1/
     ├── .command.begin
     ├── .command.err
     ├── .command.log
@@ -514,15 +514,15 @@ Anyway, now that we have the subdirectories of each process call, we can look fo
 
 ??? abstract "File contents"
 
-    ```txt title="work/c3/5573571b6ea4e9c12bd95edf56fc94/output.txt"
-    Hello, Mateo!
-    ```
-
-    ```txt title="work/24/a64e64785030d9c2c7731ffcfa2469/output.txt"
+    ```txt title="work/3f/e4e96a6d8078ae0112c80235ac3094/output.txt"
     Hello, Raphael!
     ```
 
-    ```txt title="work/3c/1ef83bfb5e198624a40f13a767eef6/output.txt"
+    ```txt title="work/f7/67803162a7faae46d3166396371481/output.txt"
+    Hello, Mateo!
+    ```
+
+    ```txt title="work/f6/3caa461bc749acaa0eb7bf832bc6b1/output.txt"
     Hello, Celine!
     ```
 
@@ -611,12 +611,12 @@ nextflow run hello-channels.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-channels.nf` [grave_pare] revision: 80650ff4ed
+    Launching `hello-channels.nf` [compassionate_wegener] revision: 26c5f6a4a1
 
     executor >  local (3)
-    [12/0c7a46] sayHello (2) | 3 of 3 ✔
+    [d1/88ae06] sayHello (1) | 3 of 3 ✔
     Mateo
     Raphael
     Celine
@@ -626,9 +626,9 @@ nextflow run hello-channels.nf
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - hello/Mateo.txt
         - hello/Celine.txt
         - hello/Raphael.txt
+        - hello/Mateo.txt
     ```
 
 Reverting back to the summary view, the output is summarized on one line again.
@@ -736,14 +736,14 @@ nextflow run hello-channels.nf -ansi-log false
 ??? success "Command output"
 
     ```console hl_lines="6-8"
-    N E X T F L O W  ~  version 26.04.4
-    Launching `hello-channels.nf` [naughty_goldberg] - revision: 65cf1a89b7
+    N E X T F L O W  ~  version 26.10.7
+    Launching `hello-channels.nf` [extravagant_poitras] - revision: 404f0d7b64
     Mateo
     Raphael
     Celine
-    [dd/5ec36b] Submitted process > sayHello (Mateo)
-    [8d/a35cd3] Submitted process > sayHello (Celine)
-    [e6/5f0829] Submitted process > sayHello (Raphael)
+    [39/80263c] Submitted process > sayHello (Mateo)
+    [98/3d0591] Submitted process > sayHello (Celine)
+    [d3/06fa21] Submitted process > sayHello (Raphael)
 
     Outputs:
 
@@ -751,8 +751,8 @@ nextflow run hello-channels.nf -ansi-log false
 
       greetings:
         - hello/Mateo.txt
-        - hello/Celine.txt
         - hello/Raphael.txt
+        - hello/Celine.txt
     ```
 
 Each task is now labeled with the name it processed.
@@ -892,12 +892,12 @@ nextflow run hello-channels.nf
 ??? failure "Command output"
 
     ```console hl_lines="7 11 16"
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-channels.nf` [fervent_hypatia] revision: 5fc69e8e12
+    Launching `hello-channels.nf` [adoring_hawking] revision: 0364b5beab
 
     executor >  local (1)
-    [f5/a168e9] sayHello ([Mateo, Raphael, Celine]) | 0 of 1 ✘
+    [98/9b209f] sayHello ([Mateo, Raphael, Celine]) | 0 of 1 ✘
     [Mateo, Raphael, Celine]
     ERROR ~ Error executing process > 'sayHello ([Mateo, Raphael, Celine])'
 
@@ -916,11 +916,11 @@ nextflow run hello-channels.nf
       (empty)
 
     Work dir:
-      /workspaces/training/hello-nextflow/work/f5/a168e911988fe282771719ea39dacf
+      /workspaces/training/hello-nextflow/work/98/9b209f85f4599e5514c6631e42966b
 
-    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Oh no! There's an error!
@@ -1074,12 +1074,12 @@ nextflow run hello-channels.nf
 ??? success "Command output"
 
     ```console hl_lines="7-10"
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-channels.nf` [amazing_varahamihira] revision: 1bec79ebf8
+    Launching `hello-channels.nf` [elated_raman] revision: 8df9803051
 
     executor >  local (3)
-    [29/1adbca] sayHello (Celine) | 3 of 3 ✔
+    [37/90c809] sayHello (Raphael) | 3 of 3 ✔
     Before flatten: [Mateo, Raphael, Celine]
     After flatten: Mateo
     After flatten: Raphael
@@ -1091,8 +1091,8 @@ nextflow run hello-channels.nf
 
       greetings:
         - hello/Celine.txt
-        - hello/Raphael.txt
         - hello/Mateo.txt
+        - hello/Raphael.txt
     ```
 
 This time it works AND gives us the additional insight into what the contents of the channel look like before and after we run the `flatten()` operator.
@@ -1243,16 +1243,16 @@ nextflow run hello-channels.nf
 ??? failure "Command output"
 
     ```console hl_lines="5 6 10 15"
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-channels.nf` [loving_shockley] revision: a9490e09be
+    Launching `hello-channels.nf` [thirsty_jones] revision: e5a322bfeb
 
     [-        ] sayHello | 0 of 1
     Before flatten: /workspaces/training/hello-nextflow/data/names.csv
     ERROR ~ Error executing process > 'sayHello (/workspaces/training/hello-nextflow/data/names.csv)'
 
     Caused by:
-      File `/workspaces/training/hello-nextflow/data/names.csv.txt` is outside the scope of the process work directory: /workspaces/training/hello-nextflow/work/4c/a91833ecefd0f369b9c5591ccd0b96
+      File `/workspaces/training/hello-nextflow/data/names.csv.txt` is outside the scope of the process work directory: /workspaces/training/hello-nextflow/work/56/eb8d1e8fb2f90bc5583c911ecf8af0
 
 
     Command executed:
@@ -1266,11 +1266,11 @@ nextflow run hello-channels.nf
       (empty)
 
     Work dir:
-      /workspaces/training/hello-nextflow/work/4c/a91833ecefd0f369b9c5591ccd0b96
+      /workspaces/training/hello-nextflow/work/56/eb8d1e8fb2f90bc5583c911ecf8af0
 
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Oh no, it doesn't work. Have a look at the start of the console output and error message.
@@ -1346,12 +1346,12 @@ nextflow run hello-channels.nf
 ??? failure "Command output"
 
     ```console hl_lines="7-10 14 19"
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-channels.nf` [evil_thompson] revision: 564e4b18bf
+    Launching `hello-channels.nf` [fabulous_banach] revision: a43886168e
 
     executor >  local (3)
-    [bf/9aa4bc] sayHello ([Raphael, it, turtle]) | 0 of 3 ✘
+    [1a/c6b894] sayHello ([Raphael, it, turtle]) | 0 of 3 ✘
     Before splitCsv: /workspaces/training/hello-nextflow/data/names.csv
     After splitCsv: [Mateo, es, squirrel]
     After splitCsv: [Raphael, it, turtle]
@@ -1373,11 +1373,11 @@ nextflow run hello-channels.nf
       (empty)
 
     Work dir:
-      /workspaces/training/hello-nextflow/work/a0/d3170d053b091e8393c904e7b15936
+      /workspaces/training/hello-nextflow/work/4f/949691e5c75fefaee7fb21f76a19dd
 
-    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Interestingly, this fails too, but with a different error.
@@ -1466,12 +1466,12 @@ nextflow run hello-channels.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-channels.nf` [crazy_stonebraker] revision: ea94eda94c
+    Launching `hello-channels.nf` [marvelous_poisson] revision: 1428f8da8b
 
     executor >  local (3)
-    [88/9058d5] sayHello (Mateo) | 3 of 3 ✔
+    [08/0d03ea] sayHello (Celine) | 3 of 3 ✔
     Before splitCsv: /workspaces/training/hello-nextflow/data/names.csv
     After splitCsv: [Mateo, es, squirrel]
     After splitCsv: [Raphael, it, turtle]
@@ -1485,9 +1485,9 @@ nextflow run hello-channels.nf
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - hello/Celine.txt
         - hello/Raphael.txt
         - hello/Mateo.txt
+        - hello/Celine.txt
     ```
 
 This time it should run without error.
@@ -1574,8 +1574,8 @@ Run `hello-channels.nf` on your file without editing the script, and check that 
 
       greetings:
         - hello/Noor.txt
-        - hello/Hikari.txt
         - hello/Shaun.txt
+        - hello/Hikari.txt
     ```
 
     Each row of the file becomes one element in the channel, so `sayHello` runs once per name and writes one file per name.
@@ -1662,8 +1662,8 @@ Copy it to `hello-bug.nf`, run it to see the problem, then find the cause and fi
       /workspaces/training/hello-nextflow/results
 
       greetings:
-        - hello/Raphael.txt
         - hello/Mateo.txt
+        - hello/Raphael.txt
         - hello/Celine.txt
     ```
 

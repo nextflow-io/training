@@ -148,18 +148,18 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-world.nf` [grave_wiles] revision: dc38bebf45
+    Launching `hello-world.nf` [nostalgic_brenner] revision: dc38bebf45
 
     executor >  local (1)
-    [11/2ab905] sayHello | 1 of 1 ✔
+    [e9/14cb54] sayHello | 1 of 1 ✔
     ```
 
 The `sayHello` process ran once (`1 of 1 ✔`).
-The prefix `[11/2ab905]` is the truncated path to the task directory under `work/`, where Nextflow ran the process; [Part 1 of Nextflow Run](../nextflow_run/01_run_nextflow.md) explains the `work/` directory in detail.
+The prefix `[e9/14cb54]` is the truncated path to the task directory under `work/`, where Nextflow ran the process; [Part 1 of Nextflow Run](../nextflow_run/01_run_nextflow.md) explains the `work/` directory in detail.
 
-Open that directory, for example `work/11/2ab905b8f0bf001eaefd9112486273` (yours will have a different name), and look at two of its files:
+Open that directory, for example `work/e9/14cb54bfc3bd4acf282508deb9d8b5` (yours will have a different name), and look at two of its files:
 
 - **`output.txt`** contains `Hello World!`, the output declared in the process.
 - **`.command.sh`** contains the command Nextflow ran:
@@ -292,12 +292,12 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-world.nf` [evil_carson] revision: 43c662561c
+    Launching `hello-world.nf` [mighty_austin] revision: 5cc6feed6c
 
     executor >  local (1)
-    [99/bf7b2a] sayHello | 1 of 1 ✔
+    [9f/2d4554] sayHello | 1 of 1 ✔
 
     Outputs:
 
@@ -312,7 +312,7 @@ The console output now ends with an `Outputs:` summary of the published files, a
 
     ```console
     results
-    └── output.txt -> /workspaces/training/hello-nextflow/work/99/bf7b2a1e183d53bad9c4dc7553ec96/output.txt
+    └── output.txt -> /workspaces/training/hello-nextflow/work/9f/2d4554875e5a3e9610f30b40387a73/output.txt
     ```
 
 With the default settings, the output is published at the top level of `results/`, as a symbolic link to the file in the task directory.
@@ -387,12 +387,12 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-world.nf` [cranky_kalam] revision: afe6b9ece6
+    Launching `hello-world.nf` [voluminous_ritchie] revision: ce41db3741
 
     executor >  local (1)
-    [0d/1b76d4] sayHello | 1 of 1 ✔
+    [09/6dbde0] sayHello | 1 of 1 ✔
 
     Outputs:
 
@@ -409,7 +409,7 @@ The `Outputs:` summary now lists the file under `hello/`.
     results
     ├── hello
     │   └── output.txt
-    └── output.txt -> /workspaces/training/hello-nextflow/work/99/bf7b2a1e183d53bad9c4dc7553ec96/output.txt
+    └── output.txt -> /workspaces/training/hello-nextflow/work/9f/2d4554875e5a3e9610f30b40387a73/output.txt
     ```
 
 The new `output.txt` in `results/hello/` is a regular file, not a symbolic link.
@@ -581,12 +581,12 @@ nextflow run hello-world.nf --name 'Mateo'
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-world.nf` [hungry_boyd] revision: c7b2d15844
+    Launching `hello-world.nf` [hopeful_nightingale] revision: aec5df94d0
 
     executor >  local (1)
-    [c2/128cf0] sayHello | 1 of 1 ✔
+    [88/02123e] sayHello | 1 of 1 ✔
 
     Outputs:
 
@@ -662,12 +662,12 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-world.nf` [high_lamarck] revision: 07609cbd83
+    Launching `hello-world.nf` [lonely_mcnulty] revision: f21dee2374
 
     executor >  local (1)
-    [23/6db169] sayHello | 1 of 1 ✔
+    [a0/814b4b] sayHello | 1 of 1 ✔
 
     Outputs:
 
@@ -728,12 +728,12 @@ nextflow run hello-world.nf --name 'Celine'
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-world.nf` [compassionate_yonath] revision: 07609cbd83
+    Launching `hello-world.nf` [pedantic_yonath] revision: f21dee2374
 
     executor >  local (1)
-    [7d/69c239] sayHello | 1 of 1 ✔
+    [a4/684b25] sayHello | 1 of 1 ✔
 
     Outputs:
 
