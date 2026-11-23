@@ -3271,6 +3271,13 @@ Here we'll use Docker for the container system and <code>demo-results</code>, re
 </code></pre></div>
 </details>
 <p>If your output matches that, congratulations! You've just run your first nf-core pipeline.</p>
+<details class="warning">
+<summary>Didn't work?</summary>
+<p>If the run failed with <code>Validation of pipeline parameters failed!</code> and complaints about missing <code>sample</code> and <code>fastq_1</code> fields, check which directory you launched it from.
+Nextflow loads any <code>nextflow.config</code> file present in the launch directory and gives it priority over the pipeline's own configuration.
+Other course directories, such as <code>nextflow-run/</code>, contain a <code>nextflow.config</code> that sets its own <code>input</code> parameter and <code>test</code> profile, which replace the pipeline's test samplesheet.
+Change to the <code>nfcore-use/</code> directory and run the command again.</p>
+</details>
 <p>You'll notice that there is a lot more console output than when you run a basic Nextflow pipeline.
 There's a header that includes a summary of the pipeline's version, inputs and outputs, and a few elements of configuration.</p>
 <p>Your output will show different timestamps, execution names, revision hashes, and file paths, but the overall structure and process execution should be similar.</p>
