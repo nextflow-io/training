@@ -381,6 +381,7 @@ import nextflow.script.dsl.Description
  *     }
  */
 @ScopeName('greeting')                       // (1)!
+@Description('Options for the nf-greeting plugin')
 class GreetingConfig implements ConfigScope { // (2)!
 
     GreetingConfig() {}
@@ -415,7 +416,7 @@ Key points:
 - **`@ScopeName('greeting')`**: Maps to the `greeting { }` block in config
 - **`implements ConfigScope`**: Required interface for config classes
 - **`@ConfigOption`**: Each field becomes a configuration option
-- **`@Description`**: Documents each option for language server support (imported from `nextflow.script.dsl`)
+- **`@Description`**: Documents the scope and each option for language server support (imported from `nextflow.script.dsl`). The class-level `@Description` is required: without it, the build fails when it generates the plugin's config spec.
 - **Constructors**: Both no-arg and Map constructors are needed
 
 ### 3.2. Register the config class
