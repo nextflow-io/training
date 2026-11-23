@@ -9,26 +9,20 @@ Agora vamos aprender duas abordagens melhores para gerenciar entradas: **arquivo
 
 ### 1.1. O problema com linhas de comando longas
 
-Lembre-se do nosso comando da Parte 2:
+Na Parte 2, já usamos um arquivo de parâmetros para manter o comando curto e preservar os valores digitados (como os parâmetros inteiros de pré-processamento) intactos:
 
 ```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose" \
-  --outdir results
+nextflow run ./molkart -params-file params.yaml --segmentation_method "mesmer,cellpose,stardist"
 ```
 
-Isso funciona, mas é difícil de reproduzir, compartilhar ou modificar.
+Passar muitos parâmetros individualmente na linha de comando é difícil de reproduzir, compartilhar ou modificar.
 E se você precisar executar a mesma análise novamente no próximo mês?
 E se um colaborador quiser usar suas configurações exatas?
+Um arquivo de parâmetros resolve isso.
 
-### 1.2. Solução: Use um arquivo de parâmetros
+### 1.2. O arquivo de parâmetros
 
-Crie um arquivo chamado `params.yaml`:
+Aqui está o arquivo `params.yaml` que temos usado:
 
 ```yaml title="params.yaml"
 input: "data/samplesheet.csv"
@@ -40,13 +34,16 @@ clahe_pyramid_tile: 368
 segmentation_method: "cellpose"
 ```
 
-Agora seu comando se torna:
+Cada parâmetro é escrito como um par `chave: valor`.
+Escrever inteiros sem aspas (por exemplo, `mindagap_tilesize: 90`) preserva o tipo inteiro, o que a validação de parâmetros do pipeline exige.
+
+Seu comando se torna:
 
 ```bash
 nextflow run ./molkart -params-file params.yaml -resume
 ```
 
-É isso! O arquivo de parâmetros documenta sua configuração exata e facilita a reexecução ou compartilhamento.
+O arquivo de parâmetros documenta sua configuração exata e facilita a reexecução ou compartilhamento.
 
 ### 1.3. Sobrescrevendo parâmetros
 
@@ -58,7 +55,7 @@ nextflow run ./molkart -params-file params.yaml --segmentation_method "stardist"
 
 A linha acima altera o `segmentation_method` para `stardist` e o nome do `--outdir` para `stardist_results` em vez dos parâmetros no arquivo `params.yaml`.
 Além disso, você pode ver que a flag `-resume` nos permitiu reutilizar os resultados de pré-processamento da execução anterior, economizando tempo.
-Você pode usar esse padrão para testar rapidamente diferentes variações do fluxo de trabalho.
+Você pode usar esse padrão para testar rapidamente diferentes variações do pipeline.
 
 ### Conclusão
 
@@ -125,7 +122,7 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! warning "Aviso"
+!!! Warning "Aviso"
 
     Observe que os caminhos na planilha de amostras são relativos a onde você **executa** o Nextflow, não onde a planilha de amostras está localizada.
 

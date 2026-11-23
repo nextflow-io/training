@@ -72,7 +72,7 @@ Deklariere in der Haupt-Workflow-Datei `{DOMAIN_DIR}.nf` unter dem Abschnitt `Pi
      * Pipeline parameters
      */
     params {
-        // Primary input
+        // Primäre Eingabe
         {PRIMARY_PARAM_NAME}: Path
     }
     ```
@@ -84,7 +84,7 @@ Deklariere in der Haupt-Workflow-Datei `{DOMAIN_DIR}.nf` unter dem Abschnitt `Pi
      * Pipeline parameters
      */
 
-    // Primary input
+    // Primäre Eingabe
     ```
 
 Das richtet den CLI-Parameter ein, aber wir wollen nicht jedes Mal den Dateipfad eingeben, wenn wir den Workflow während der Entwicklung ausführen.
@@ -143,12 +143,19 @@ nextflow run {DOMAIN_DIR}.nf -profile test
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `{DOMAIN_DIR}.nf` [{RUN_NAME}] DSL2 - revision: {HASH}
+    Launching `{DOMAIN_DIR}.nf` [{RUN_NAME}] revision: {HASH}
 
     executor >  local (1)
     [{HASH}] {PROCESS_A_NAME} (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/{DOMAIN_DIR}/results
+
+      {OUTPUT_NAME}:
+        - {OUTPUT_SUBDIR}/{OUTPUT_FILE}
     ```
 
 {VERIFY_OUTPUT_INSTRUCTIONS}

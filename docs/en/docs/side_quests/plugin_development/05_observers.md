@@ -210,6 +210,28 @@ Edit `GreetingFactory.groovy` to add the new observer:
     We've replaced the Java-style `List.<TraceObserver>of(...)` with Groovy's simpler list literal `[...]`.
     Both return a `Collection`, but the Groovy syntax is more readable when adding multiple items.
 
+The template's unit test for the factory expects exactly one observer, so it fails now that the factory creates two.
+Update `nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy` to expect both:
+
+=== "After"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="17" hl_lines="2-4"
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+    ```
+
+=== "Before"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="17" hl_lines="2-3"
+            then:
+            result.size() == 1
+            result.first() instanceof GreetingObserver
+        }
+    ```
+
 ### 2.3. Build, install, and test
 
 ```bash
@@ -232,7 +254,7 @@ You should see "✓ Task completed!" printed five times (once per task), interle
 Decorated: *** Hello ***
 ✓ Task completed!
 ✓ Task completed!
-Decorated: *** Holà ***
+Decorated: *** Hola ***
 ✓ Task completed!
 ...
 Pipeline complete! 👋
@@ -259,11 +281,12 @@ When the entire workflow finishes, the observer prints the final total.
 
 Update `TaskCounterObserver.groovy` with the highlighted changes:
 
-```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="14 18-19 22-24"
+```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="5 15 19-20 23-25"
 package training.plugin
 
 import groovy.transform.CompileStatic
 import nextflow.processor.TaskHandler
+import java.util.concurrent.atomic.AtomicInteger
 import nextflow.trace.TraceObserver
 import nextflow.trace.TraceRecord
 
@@ -273,23 +296,23 @@ import nextflow.trace.TraceRecord
 @CompileStatic
 class TaskCounterObserver implements TraceObserver {
 
-    private int taskCount = 0                // (1)!
+    private final AtomicInteger taskCount = new AtomicInteger()  // (1)!
 
     @Override
     void onProcessComplete(TaskHandler handler, TraceRecord trace) {
-        taskCount++                          // (2)!
-        println "📊 Tasks completed so far: ${taskCount}"
+        final count = taskCount.incrementAndGet()                 // (2)!
+        println "📊 Tasks completed so far: ${count}"
     }
 
     @Override
-    void onFlowComplete() {                  // (3)!
-        println "📈 Final task count: ${taskCount}"
+    void onFlowComplete() {                                       // (3)!
+        println "📈 Final task count: ${taskCount.get()}"
     }
 }
 ```
 
-1. `taskCount` is a variable that belongs to the observer object. It keeps its value between method calls, so it can accumulate a count across the whole workflow run. `private` means only this class can access it.
-2. `taskCount++` adds one to the counter. This line runs every time a task completes, so the count grows as the workflow progresses.
+1. `taskCount` is a variable that belongs to the observer object. It keeps its value between method calls, so it can accumulate a count across the whole workflow run. `private` means only this class can access it. Nextflow can report several task completions at the same time from different threads, so the counter is an `AtomicInteger`, which stays correct under concurrent updates where a plain `int` can lose increments.
+2. `incrementAndGet()` adds one to the counter and returns the new value. This line runs every time a task completes, so the count grows as the workflow progresses.
 3. `onFlowComplete` is a second lifecycle hook. It runs once when the workflow finishes, making it a good place to print a summary.
 
 In summary:
@@ -308,12 +331,12 @@ nextflow run greet.nf -ansi-log false
 ??? example "Output"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
-    Launching `greet.nf` [pensive_engelbart] DSL2 - revision: 85fefd90d0
+    N E X T F L O W  ~  version 26.04.4
+    Launching `greet.nf` [pensive_engelbart] - revision: bef1bea9f0
     Pipeline is starting! 🚀
     Reversed: olleH
     Reversed: ruojnoB
-    Reversed: àloH
+    Reversed: aloH
     Reversed: oaiC
     Reversed: ollaH
     [be/bd8e72] Submitted process > SAY_HELLO (2)
@@ -324,7 +347,7 @@ nextflow run greet.nf -ansi-log false
     [85/a6b3ad] Submitted process > SAY_HELLO (4)
     📊 Tasks completed so far: 1
     📊 Tasks completed so far: 2
-    Decorated: *** Holà ***
+    Decorated: *** Hola ***
     📊 Tasks completed so far: 3
     Decorated: *** Ciao ***
     [3c/be6686] Submitted process > SAY_HELLO (5)
@@ -387,12 +410,13 @@ First, update `greet.nf` so the `SAY_HELLO` process publishes its output files:
 
 Add an `onFilePublish` method and the required import to `TaskCounterObserver.groovy`:
 
-```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="5 23-26"
+```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="5 24-27"
 package training.plugin
 
 import groovy.transform.CompileStatic
 import nextflow.processor.TaskHandler
 import java.nio.file.Path
+import java.util.concurrent.atomic.AtomicInteger
 import nextflow.trace.TraceObserver
 import nextflow.trace.TraceRecord
 
@@ -402,12 +426,12 @@ import nextflow.trace.TraceRecord
 @CompileStatic
 class TaskCounterObserver implements TraceObserver {
 
-    private int taskCount = 0
+    private final AtomicInteger taskCount = new AtomicInteger()
 
     @Override
     void onProcessComplete(TaskHandler handler, TraceRecord trace) {
-        taskCount++
-        println "📊 Tasks completed so far: ${taskCount}"
+        final count = taskCount.incrementAndGet()
+        println "📊 Tasks completed so far: ${count}"
     }
 
     @Override
@@ -417,7 +441,7 @@ class TaskCounterObserver implements TraceObserver {
 
     @Override
     void onFlowComplete() {
-        println "📈 Final task count: ${taskCount}"
+        println "📈 Final task count: ${taskCount.get()}"
     }
 }
 ```

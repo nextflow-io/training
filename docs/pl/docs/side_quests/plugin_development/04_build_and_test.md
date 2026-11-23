@@ -215,16 +215,16 @@ make test
 
     ```console
     BUILD SUCCESSFUL in 5s
-    6 actionable tasks: 6 executed
+    7 actionable tasks: 7 executed
     ```
 
     **Gdzie są wyniki testów?** Gradle ukrywa szczegółowe wyjście, gdy wszystkie testy przechodzą.
     „BUILD SUCCESSFUL" oznacza, że wszystko zadziałało.
     Jeśli jakiś test nie przejdzie, zobaczysz szczegółowe komunikaty o błędach.
 
-??? exercise "Ćwiczenie"
+??? exercise "Dodaj test przypadku brzegowego"
 
-    Dodaj test sprawdzający przypadek brzegowy: czy `reverseGreeting` obsługuje pusty string.
+    Dodaj test sprawdzający, czy `reverseGreeting` obsługuje pusty string.
     Co powinno zwrócić `reverseGreeting('')`?
     Dodaj test, uruchom `make test` i sprawdź, czy przechodzi.
 

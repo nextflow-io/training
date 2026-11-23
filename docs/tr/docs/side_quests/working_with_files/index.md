@@ -27,10 +27,8 @@ Bu beceriler, farklı türde dosya girdilerini büyük bir esneklikle işleyebil
 
 Bu yan göreve başlamadan önce şunları yapmış olmanız gerekir:
 
-- [Hello Nextflow](../../hello_nextflow/) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmak.
+- [Hello Nextflow](../../hello_nextflow/index.md) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmak.
 - Temel Nextflow kavramları ve mekanizmaları (süreçler, kanallar, operatörler) konusunda rahat olmak.
-
-<!-- I removed the suggestion to do the metamaps SQ first because that works more naturally after -->
 
 ---
 
@@ -38,7 +36,7 @@ Bu yan göreve başlamadan önce şunları yapmış olmanız gerekir:
 
 #### Eğitim kod alanını açın
 
-Henüz yapmadıysanız, eğitim ortamını [Ortam Kurulumu](../envsetup/index.md) sayfasında açıklandığı şekilde açtığınızdan emin olun.
+Henüz yapmadıysanız, eğitim ortamını [Ortam Kurulumu](../../envsetup/index.md) sayfasında açıklandığı şekilde açtığınızdan emin olun.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -55,6 +53,8 @@ VSCode'u bu dizine odaklanacak şekilde ayarlayabilirsiniz:
 ```bash
 code .
 ```
+
+Düzenleyici, proje dizinine odaklanmış şekilde açılır.
 
 #### Materyalleri inceleyin
 
@@ -131,11 +131,19 @@ Tüm kutuları işaretleyebildiyseniz, başlayabilirsiniz.
 #!/usr/bin/env nextflow
 
 workflow {
-
+    main:
     // Bir dize yolundan Path nesnesi oluştur
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
     println "${myFile} is of class ${myFile.class}"
+
+    publish:
+    analysis_results = channel.empty()
+}
+
+output {
+    analysis_results {
+    }
 }
 ```
 
@@ -155,11 +163,17 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
+    Launching `main.nf` [happy_goodall] revision: 464aa64101
 
-    data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String
+    data/patientA_rep1_normal_R1_001.fastq.gz is of class class java.lang.String
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Gördüğünüz gibi, Nextflow dize yolunu tam olarak yazdığımız şekilde yazdırdı.
@@ -203,11 +217,17 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
+    Launching `main.nf` [jolly_fermi] revision: 8efdfe2c7c
 
     /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Bu sefer, girdi olarak verdiğimiz göreli yol yerine tam mutlak yolu görüyorsunuz.
@@ -226,6 +246,8 @@ Path nesnesinin sınıfının `sun.nio.fs.UnixPath` olduğuna da dikkat edin: bu
     - **Path nesnesi**: Nextflow'un üzerinde işlem yapabildiği akıllı bir dosya referansı
 
     Şöyle düşünebilirsiniz: bir yol dizesi kağıda yazılmış bir adres gibidir; Path nesnesi ise o adresin bir GPS cihazına yüklenmiş hali gibidir; cihaz oraya nasıl gidileceğini bilir ve yolculuk hakkında ayrıntılar sunabilir.
+
+Bu farkı anlamak, Nextflow'da dosya işlemlerini doğru kullanmanın anahtarıdır.
 
 ### 1.3. Dosya özelliklerine erişme
 
@@ -265,15 +287,21 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
+    Launching `main.nf` [mad_leavitt] revision: 33fa67b5f9
 
-    File object class: sun.nio.fs.UnixPath
+    File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
     Extension: gz
     Parent directory: /workspaces/training/side-quests/working_with_files/data
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Yukarıda konsola yazdırılan çeşitli dosya özelliklerini görebilirsiniz.
@@ -310,8 +338,6 @@ Süreci iş akışında kullanmak için, iş akışı bloğundan önce bir inclu
 Modül dosyasını açarak kodunu inceleyebilirsiniz:
 
 ```groovy title="modules/count_lines.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 process COUNT_LINES {
     debug true
 
@@ -334,7 +360,9 @@ Gördüğünüz gibi, dosyayı açıp içindeki satır sayısını sayan oldukç
     Süreç tanımındaki `debug true` yönergesi, Nextflow'un betiğinizden gelen çıktıyı (satır sayısı "40" gibi) doğrudan yürütme günlüğüne yazdırmasını sağlar.
     Bu olmadan yalnızca süreç yürütme durumunu görürsünüz; betiğinizden gelen gerçek çıktıyı göremezsiniz.
 
-    Nextflow süreçlerinde hata ayıklama hakkında daha fazla bilgi için [Nextflow İş Akışlarında Hata Ayıklama](debugging.md) yan görevine bakın.
+    Nextflow süreçlerinde hata ayıklama hakkında daha fazla bilgi için [Nextflow İş Akışlarında Hata Ayıklama](../debugging/index.md) yan görevine bakın.
+
+Modül içe aktarıldı ve kodu incelendi; artık süreci iş akışından çağırabiliriz.
 
 #### 1.4.2. `COUNT_LINES` çağrısı ekleme
 
@@ -382,9 +410,9 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [cheeky_hypatia] DSL2 - revision: 281d13c414
+    Launching `main.nf` [peaceful_plateau] revision: 91b633f022
 
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
@@ -392,9 +420,15 @@ nextflow run main.nf
     Extension: gz
     Parent directory: /workspaces/training/side-quests/working_with_files/data
     executor >  local (1)
-    [e9/341c05] COUNT_LINES [100%] 1 of 1 ✔
-    Processing file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+    [25/7946de] COUNT_LINES | 1 of 1 ✔
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Bu, dosya üzerinde bir süreç içinde uygun şekilde işlem yapabildiğimizi göstermektedir.
@@ -465,10 +499,11 @@ nextflow run main.nf
 ??? failure "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [friendly_goodall] DSL2 - revision: ae50609b20
+    Launching `main.nf` [high_meninsky] revision: 74cc0a3ffc
 
+    File object class: class java.lang.String
     [-        ] COUNT_LINES -
     ERROR ~ Error executing process > 'COUNT_LINES'
 
@@ -479,7 +514,7 @@ nextflow run main.nf
 
     Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Önemli olan kısım şudur:
@@ -506,7 +541,7 @@ Modülde aşağıdaki düzenlemeyi yapın:
 
 === "Sonra"
 
-    ```groovy title="modules/count_lines.nf" linenums="3" hl_lines="5"
+    ```groovy title="modules/count_lines.nf" linenums="1" hl_lines="5"
     process COUNT_LINES {
         debug true
 
@@ -516,7 +551,7 @@ Modülde aşağıdaki düzenlemeyi yapın:
 
 === "Önce"
 
-    ```groovy title="modules/count_lines.nf" linenums="3" hl_lines="5"
+    ```groovy title="modules/count_lines.nf" linenums="1" hl_lines="5"
     process COUNT_LINES {
         debug true
 
@@ -533,12 +568,13 @@ nextflow run main.nf
 ??? failure "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [soggy_golick] DSL2 - revision: ae50609b20
+    Launching `main.nf` [berserk_wing] revision: 74cc0a3ffc
 
+    File object class: class java.lang.String
     executor >  local (1)
-    [b3/b3023c] COUNT_LINES [  0%] 0 of 1 ✘
+    [62/3b29eb] COUNT_LINES | 0 of 1 ✘
     ERROR ~ Error executing process > 'COUNT_LINES'
 
     Caused by:
@@ -564,11 +600,11 @@ nextflow run main.nf
       0
 
     Work dir:
-      /workspaces/training/side-quests/working_with_files/work/b3/b3023cb2ccb986851301d8e369e79f
+      /workspaces/training/side-quests/working_with_files/work/62/3b29ebab00b110d9dcccb061bfce50
 
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Süreç yukarıda belirtildiği gibi hata ayıklama bilgisi çıktısı verecek şekilde ayarlandığından, hata hakkında çok sayıda ayrıntı gösterilmektedir.
@@ -600,6 +636,8 @@ Bu iki örnek birlikte ele alındığında, bir girdinin dosya olarak yönetilme
 !!! note "Not"
 
     Bir sonraki bölüme geçmeden önce her iki kasıtlı hatayı da düzelttiğinizden emin olun.
+
+Her iki düzeltme uygulandığında, iş akışı girdi dosyasını doğru şekilde taşır ve işler.
 
 ### Özetle
 
@@ -680,9 +718,9 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+    Launching `main.nf` [admiring_bhaskara] revision: 8804122967
 
     File object class: class nextflow.file.http.XPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
@@ -690,9 +728,15 @@ nextflow run main.nf
     Extension: gz
     Parent directory: /nextflow-io/training/master/side-quests/working_with_files/data
     executor >  local (1)
-    [8a/2ab7ca] COUNT_LINES [100%] 1 of 1 ✔
+    [07/246c2a] COUNT_LINES | 1 of 1 ✔
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Çalışıyor! Çok az şeyin değiştiğini görebilirsiniz.
@@ -707,10 +751,10 @@ Bunu, sürecin karma değerinde bulunan çalışma dizininin içeriğine bakarak
 
 ??? abstract "Çalışma dizini içeriği"
 
-    Süreç karması `8a/2ab7ca` ise çalışma dizinini şu şekilde inceleyebilirsiniz:
+    Süreç karması `07/246c2a` ise çalışma dizinini şu şekilde inceleyebilirsiniz:
 
     ```console
-    $ ls -la work/8a/2ab7ca*/
+    $ ls -la work/07/246c2a*/
     total 16
     drwxr-xr-x  6 user  staff   192 Jan 28 10:00 .
     drwxr-xr-x  3 user  staff    96 Jan 28 10:00 ..
@@ -779,6 +823,8 @@ Bu yan görevin geri kalanında yerel örnek dosyalarımızı kullanmaya devam e
         println "Parent directory: ${myFile.parent}"
     ```
 
+İş akışı artık yerel girdi dosyasını kullanmaya geri döndü.
+
 ### Özetle
 
 - Uzak verilere URI kullanılarak erişilir (HTTP, FTP, S3, Azure, Google Cloud)
@@ -799,15 +845,10 @@ Bunu yapmanın naif bir yolu, `file()` metodunu [`channel.of()`](https://www.nex
 
 ```groovy title="Syntax example"
 ch_files = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')],
-                      [file('data/patientA_rep1_normal_R1_001.fastq.gz')])
+                      [file('data/patientA_rep1_normal_R2_001.fastq.gz')])
 ```
 
 Bu çalışır; ancak hantaldır.
-
-!!! tip "`file()` ile `channel.fromPath()` ne zaman kullanılır?"
-
-    - Doğrudan işleme için tek bir Path nesnesine ihtiyaç duyduğunuzda `file()` kullanın (bir dosyanın var olup olmadığını kontrol etmek, özelliklerine erişmek veya tek bir süreç çağrısına iletmek için)
-    - Özellikle glob desenleriyle birden fazla dosya tutabilen bir kanala ihtiyaç duyduğunuzda ya da dosyalar birden fazla süreçten geçecekse `channel.fromPath()` kullanın
 
 İşte burada [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath) devreye girer: bir veya daha fazla statik dosya dizesinden ve glob desenlerinden kanal oluşturmak için ihtiyaç duyduğumuz tüm işlevselliği bir araya getiren kullanışlı bir kanal fabrikasıdır.
 
@@ -863,17 +904,28 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [grave_meucci] DSL2 - revision: b09964a583
+    Launching `main.nf` [focused_hawking] revision: 1e7d8bf645
 
     Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Gördüğünüz gibi, dosya yolu kanalda `Path` türünde bir nesne olarak yüklenmektedir.
 Bu, `file()`'ın yapacağına benzer; ancak şimdi istediğimizde daha fazla dosya yükleyebileceğimiz bir kanalımız var.
 
 `channel.fromPath()` kullanmak, bir dosya listesiyle doldurulmuş yeni bir kanal oluşturmanın kullanışlı bir yoludur.
+
+!!! tip "`file()` ile `channel.fromPath()` ne zaman kullanılır?"
+
+    - Doğrudan işleme için tek bir Path nesnesine ihtiyaç duyduğunuzda `file()` kullanın (bir dosyanın var olup olmadığını kontrol etmek, özelliklerine erişmek veya tek bir süreç çağrısına iletmek için)
+    - Özellikle glob desenleriyle birden fazla dosya tutabilen bir kanala ihtiyaç duyduğunuzda ya da dosyalar birden fazla süreçten geçecekse `channel.fromPath()` kullanın
 
 ### 3.2. Kanaldaki dosyaların özelliklerini görüntüleme
 
@@ -920,19 +972,25 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [furious_swanson] DSL2 - revision: c35c34950d
+    Launching `main.nf` [intergalactic_snyder] revision: dcc1cc023d
 
     executor >  local (1)
-    [9d/6701a6] COUNT_LINES (1) [100%] 1 of 1 ✔
-    File object class: sun.nio.fs.UnixPath
+    [d4/1f7691] COUNT_LINES (1) | 1 of 1 ✔
+    File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
     Extension: gz
     Parent directory: /workspaces/training/side-quests/working_with_files/data
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 İşte bu kadar; öncekiyle aynı sonuçlar, ancak artık dosya bir kanalda olduğu için daha fazlasını ekleyebiliriz.
@@ -989,12 +1047,12 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
+    Launching `main.nf` [golden_euclid] revision: c4e05e506e
 
     executor >  local (2)
-    [3c/a65de5] COUNT_LINES (2) [100%] 2 of 2 ✔
+    [f8/07d274] COUNT_LINES (2) | 2 of 2 ✔
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
@@ -1010,6 +1068,12 @@ nextflow run main.nf
 
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Gördüğünüz gibi, kanalımızda artık iki Path nesnesi var; bu, Nextflow'un dosya adı genişletmeyi doğru şekilde yaptığını ve her iki dosyayı da beklendiği gibi yükleyip işlediğini göstermektedir.
@@ -1094,19 +1158,25 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [suspicious_mahavira] DSL2 - revision: ae8edc4e48
+    Launching `main.nf` [clever_fermi] revision: a6f82347c3
 
     executor >  local (2)
-    [e9/55774b] COUNT_LINES (2) [100%] 2 of 2 ✔
-    [patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [7e/3ff80a] COUNT_LINES (1) | 2 of 2 ✔
     [patientA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    Processing file: patientA_rep1_normal_R2_001.fastq.gz
+    40
+
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
 
-    Processing file: patientA_rep1_normal_R2_001.fastq.gz
-    40
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Kanaldaki her öğe artık `simpleName`'i ve orijinal dosya nesnesini içeren bir demettir.
@@ -1150,19 +1220,25 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
+    Launching `main.nf` [furious_mccarthy] revision: 3d5d5ba03e
 
     executor >  local (2)
-    [e7/da2f4b] COUNT_LINES (2) [100%] 2 of 2 ✔
-    [[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [04/e6268e] COUNT_LINES (2) | 2 of 2 ✔
     [[patientA, rep1, normal, R1, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
 
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Artık kanalımızdaki her öğenin demeti, üst veri listesini (_örn._ `[patientA, rep1, normal, R1, 001]`) ve orijinal dosya nesnesini içermektedir.
@@ -1251,19 +1327,25 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
+    Launching `main.nf` [friendly_gauss] revision: 1f50ccaf76
 
     executor >  local (2)
-    [1b/e7fb27] COUNT_LINES (1) [100%] 2 of 2 ✔
-    [[id:patientA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [13/376824] COUNT_LINES (2) | 2 of 2 ✔
     [[id:patientA, replicate:1, type:normal, readNum:1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [[id:patientA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
 
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Artık üst veri düzgün biçimde etiketlenmiştir (_örn._ `[id:patientA, replicate:1, type:normal, readNum:2]`); bu sayede neyin ne olduğunu anlamak çok daha kolaydır.
@@ -1323,10 +1405,10 @@ Bu, daha önce kullandığımız glob desenine benzer; ancak bu, çiftin iki üy
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         /* Şimdilik eşleştirmeyi yorum satırına alalım, sonra geri döneceğiz!
         ch_files.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type,
                     readNum: readNum,
@@ -1341,13 +1423,13 @@ Bu, daha önce kullandığımız glob desenine benzer; ancak bu, çiftin iki üy
 === "Önce"
 
     ```groovy title="main.nf" linenums="7" hl_lines="1-2"
-        // channel.fromFilePairs ile dosyaları yükle
+        // channel.fromPath ile dosyaları yükle
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type,
                     readNum: readNum,
@@ -1369,12 +1451,11 @@ nextflow run main.nf
 
 ??? failure "Komut çıktısı"
 
-    ```console hl_lines="7-8"
-     N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="6-7"
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [angry_koch] DSL2 - revision: 44fdf66105
+    Launching `main.nf` [distraught_bernard] revision: 4ad8fb92de
 
-    [-        ] COUNT_LINES -
     [-        ] COUNT_LINES -
     [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
     ERROR ~ Error executing process > 'COUNT_LINES (1)'
@@ -1384,9 +1465,9 @@ nextflow run main.nf
 
 
 
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Eyvah, bu sefer çalıştırma başarısız oldu!
@@ -1437,11 +1518,17 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console hl_lines="5"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [fabulous_davinci] DSL2 - revision: 22b53268dc
+    Launching `main.nf` [furious_mcclintock] revision: a243ca25cb
 
     [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Yaşasın, bu sefer iş akışı başarılı oldu!
@@ -1462,10 +1549,10 @@ Ancak `id` alanından geri kalan üst veriyi hâlâ çıkarmamız gerekiyor.
         // channel.fromFilePairs ile dosyaları yükle
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id, files ->
-            def (sample, replicate, type) = id.tokenize('_')
+            def (patient, replicate, type) = id.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type
                 ],
@@ -1482,10 +1569,10 @@ Ancak `id` alanından geri kalan üst veriyi hâlâ çıkarmamız gerekiyor.
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         /* Şimdilik eşleştirmeyi yorum satırına alalım, sonra geri döneceğiz!
         ch_files.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type,
                     readNum: readNum,
@@ -1512,11 +1599,17 @@ nextflow run main.nf
 
     ```console
 
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
+    Launching `main.nf` [stoic_ramanujan] revision: 90004d32f8
 
     [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 İşte bu: çıktı demetinin ilk konumunda üst veri map'i (`[id:patientA, replicate:1, type:normal]`), ardından tasarlandığı gibi eşleştirilmiş dosyaların demeti yer almaktadır.
@@ -1570,18 +1663,14 @@ Bu süreci iş akışında kullanmak için, iş akışı bloğundan önce bir mo
 Modül dosyasını açarak kodunu inceleyebilirsiniz:
 
 ```groovy title="modules/analyze_reads.nf - process example" linenums="1"
-#!/usr/bin/env nextflow
-
 process ANALYZE_READS {
     tag { meta.id }
-
-    publishDir { "results/${meta.id}" }, mode: 'copy'
 
     input:
     tuple val(meta), path(files)
 
     output:
-    tuple val(meta.id), path("${meta.id}_stats.txt")
+    tuple val(meta), path("${meta.id}_stats.txt")
 
     script:
     """
@@ -1598,14 +1687,15 @@ process ANALYZE_READS {
 
 !!! note "Not"
 
-    `tag` ve `publishDir` yönergeleri, dize enterpolasyonu (`"${...}"`) yerine closure sözdizimi (`{ ... }`) kullanır.
-    Bunun nedeni, bu yönergelerin çalışma zamanına kadar kullanılamayan girdi değişkenlerine (`meta`) başvurmasıdır.
-    Closure sözdizimi, değerlendirmeyi süreç gerçekten çalışana kadar erteler.
+    `tag` yönergesi, closure sözdizimi (`{ ... }`) kullanır; çünkü süreç çalışana kadar kullanılamayan girdi değişkenlerine (`meta`) başvurur.
+    Closure, değerlendirmeyi çalışma zamanına kadar erteler.
 
 !!! note "Not"
 
     Üst veri map'imizi kurala uygun olarak `meta` olarak adlandırıyoruz.
-    Meta map'lere daha ayrıntılı bir bakış için [Üst Veri ve Meta Map'ler](../metadata/) yan görevine bakın.
+    Meta map'lere daha ayrıntılı bir bakış için [Üst Veri ve Meta Map'ler](../metadata/index.md) yan görevine bakın.
+
+`ANALYZE_READS` süreci içe aktarıldı ve kodu incelendi; artık iş akışında bu sürece bir çağrı ekleyebiliriz.
 
 ### 6.2. Süreci iş akışında çağırmak
 
@@ -1623,7 +1713,7 @@ Yeniden eşleştirilmiş içeriği `ANALYZE_READS` sürecine beslemek (ve bunu a
 
 Bunu [`set`](https://www.nextflow.io/docs/latest/reference/operator.html#set) operatörünü kullanarak yapabiliriz.
 
-Ana iş akışında `.view()` operatörünü `.set { ch_samples }` ile değiştirin ve kanala adıyla başvurabildiğimizi test eden bir satır ekleyin.
+Ana iş akışında `.view()` operatörünü `#!groovy .set { ch_samples }` ile değiştirin ve kanala adıyla başvurabildiğimizi test eden bir satır ekleyin.
 
 === "Sonra"
 
@@ -1631,10 +1721,10 @@ Ana iş akışında `.view()` operatörünü `.set { ch_samples }` ile değişti
         // channel.fromFilePairs ile dosyaları yükle
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (patient, replicate, type) = id.tokenize('_')
            [
                [
-                   id: sample,
+                   id: patient,
                    replicate: replicate.replace('rep', ''),
                    type: type
                ],
@@ -1653,10 +1743,10 @@ Ana iş akışında `.view()` operatörünü `.set { ch_samples }` ile değişti
         // channel.fromFilePairs ile dosyaları yükle
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (patient, replicate, type) = id.tokenize('_')
            [
                [
-                   id: sample,
+                   id: patient,
                    replicate: replicate.replace('rep', ''),
                    type: type
                ],
@@ -1664,7 +1754,6 @@ Ana iş akışında `.view()` operatörünü `.set { ch_samples }` ile değişti
            ]
         }
         .view()
-    }
     ```
 
 Bunu çalıştıralım:
@@ -1676,11 +1765,17 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [goofy_kirch] DSL2 - revision: 3313283e42
+    Launching `main.nf` [deadly_sax] revision: cec43c6067
 
     [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Bu, artık kanala adıyla başvurabildiğimizi doğrulamaktadır.
@@ -1691,19 +1786,79 @@ Bu, artık kanala adıyla başvurabildiğimizi doğrulamaktadır.
 
 Ana iş akışında aşağıdaki kod değişikliklerini yapın:
 
+1. Kanal kurulumunu yeniden düzenleyin: `ch_files.map {}` ifadesini `ch_samples = ch_files.map {}` olarak değiştirin (`.set` operatörünü kaldırarak doğrudan atama yapın) ve `[]` yerine `tuple()` kullanın
+2. `.view()` çağrısını `ANALYZE_READS(ch_samples)` çağrısıyla değiştirin
+3. `publish:` bölümünde `channel.empty()` ifadesini `ANALYZE_READS.out` ile değiştirin
+4. `output {}` bloğuna bir `path` closure ekleyin
+
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="23"
+    ```groovy title="main.nf" linenums="5" hl_lines="5 7 14 17 18 21 26"
+    workflow {
+        main:
+        // channel.fromFilePairs ile dosyaları yükle
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_samples = ch_files.map { id,  files ->
+           def (patient, replicate, type) = id.tokenize('_')
+           tuple(
+               [
+                   id: patient,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           )
+        }
+
         // Analizi çalıştır
         ANALYZE_READS(ch_samples)
+
+        publish:
+        analysis_results = ANALYZE_READS.out
+    }
+
+    output {
+        analysis_results {
+            path { meta, file -> "${meta.id}" }
+        }
+    }
     ```
 
 === "Önce"
 
-    ```groovy title="main.nf" linenums="23"
+    ```groovy title="main.nf" linenums="5"
+    workflow {
+        main:
+        // channel.fromFilePairs ile dosyaları yükle
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_files.map { id,  files ->
+           def (patient, replicate, type) = id.tokenize('_')
+           [
+               [
+                   id: patient,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           ]
+        }
+            .set { ch_samples }
+
         // Geçici: ch_samples'a göz at
         ch_samples.view()
+
+        publish:
+        analysis_results = channel.empty()
+    }
+
+    output {
+        analysis_results {
+        }
+    }
     ```
+
+`output {}` bloğundaki `path` closure, her çıktı öğesini alır ve alt dizin yapısını belirler.
+Burada sonuçları hastaya göre düzenlemek için `meta.id` kullanıyoruz.
 
 Bunu çalıştıralım:
 
@@ -1714,15 +1869,22 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [shrivelled_cori] DSL2 - revision: b546a31769
+    Launching `main.nf` [shrivelled_mahavira] revision: 899bbde2fb
 
     executor >  local (1)
-    [b5/110360] process > ANALYZE_READS (patientA) [100%] 1 of 1 ✔
+    [7b/bd6568] ANALYZE_READS (patientA) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
+        - [{id: patientA, replicate: '1', type: normal}, patientA/patientA_stats.txt]
     ```
 
-Bu süreç çıktılarını bir `results` dizinine yayımlamak üzere ayarlanmıştır; bu nedenle oraya bir göz atın.
+Çıktılar bir `results` dizinine yayımlanmaktadır; bu nedenle oraya bir göz atın.
 
 ??? abstract "Dizin ve dosya içeriği"
 
@@ -1779,12 +1941,26 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [big_stonebraker] DSL2 - revision: f7f9b8a76c
+    Launching `main.nf` [deadly_kalam] revision: fb40b3e08e
 
     executor >  local (8)
-    [d5/441891] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
+    [19/6c1e76] ANALYZE_READS (patientA) | 8 of 8 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
+        - [{id: patientB, replicate: '1', type: tumor}, patientB/patientB_stats.txt]
+        - [{id: patientA, replicate: '2', type: tumor}, patientA/patientA_stats.txt]
+        - [{id: patientC, replicate: '1', type: normal}, patientC/patientC_stats.txt]
+        - [{id: patientB, replicate: '1', type: normal}, patientB/patientB_stats.txt]
+        - [{id: patientA, replicate: '1', type: normal}, patientA/patientA_stats.txt]
+        - [{id: patientA, replicate: '1', type: tumor}, patientA/patientA_stats.txt]
+        - [{id: patientA, replicate: '2', type: normal}, patientA/patientA_stats.txt]
+        - [{id: patientC, replicate: '1', type: tumor}, patientC/patientC_stats.txt]
     ```
 
 Sonuçlar dizini artık mevcut tüm veriler için sonuçlar içermelidir.
@@ -1811,18 +1987,22 @@ Her seferinde çıktı dosyasının üzerine yazıyoruz.
 
 Hasta üst verisine erişimimiz olduğundan, bunu yayımlanan dosyaları benzersiz kılmak için kullanabiliriz; ya dizin yapısına ya da dosya adlarının kendisine farklılaştırıcı üst veri ekleyerek.
 
-İş akışında aşağıdaki değişikliği yapın:
+`output {}` bloğunda aşağıdaki değişikliği yapın:
 
 === "Sonra"
 
-    ```groovy title="modules/analyze_reads.nf" linenums="6"
-        publishDir { "results/${meta.type}/${meta.id}/${meta.replicate}" }, mode: 'copy'
+    ```groovy title="main.nf" hl_lines="2"
+    analysis_results {
+        path { meta, file -> "${meta.type}/${meta.id}/${meta.replicate}" }
+    }
     ```
 
 === "Önce"
 
-    ```groovy title="modules/analyze_reads.nf" linenums="6"
-        publishDir { "results/${meta.id}" }, mode: 'copy'
+    ```groovy title="main.nf" hl_lines="2"
+    analysis_results {
+        path { meta, file -> "${meta.id}" }
+    }
     ```
 
 Burada örnek türleri ve replikatlar için ek dizin düzeyleri kullanma seçeneğini gösteriyoruz; ancak bunu dosya adı düzeyinde de deneyebilirsiniz.
@@ -1837,12 +2017,26 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+    Launching `main.nf` [nasty_hirsch] revision: c2c7aae0f7
 
     executor >  local (8)
-    [e3/449081] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
+    [09/9f239c] ANALYZE_READS (patientB) | 8 of 8 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
+        - [{id: patientB, replicate: '1', type: normal}, normal/patientB/1/patientB_stats.txt]
+        - [{id: patientB, replicate: '1', type: tumor}, tumor/patientB/1/patientB_stats.txt]
+        - [{id: patientC, replicate: '1', type: normal}, normal/patientC/1/patientC_stats.txt]
+        - [{id: patientA, replicate: '1', type: tumor}, tumor/patientA/1/patientA_stats.txt]
+        - [{id: patientA, replicate: '1', type: normal}, normal/patientA/1/patientA_stats.txt]
+        - [{id: patientA, replicate: '2', type: normal}, normal/patientA/2/patientA_stats.txt]
+        - [{id: patientC, replicate: '1', type: tumor}, tumor/patientC/1/patientC_stats.txt]
+        - [{id: patientA, replicate: '2', type: tumor}, tumor/patientA/2/patientA_stats.txt]
     ```
 
 Şimdi results dizinini kontrol edin:
@@ -1886,11 +2080,11 @@ Bu şekilde bir map'e yüklenmiş üst veriniz olduğunda yapabileceğiniz çok 
 3. Üst veri değerlerine göre verileri bölmek, birleştirmek ve yeniden birleştirmek
 
 Üst veriyi açık tutma ve veriye bağlı (dosya adlarına kodlanmış yerine) bu deseni, sağlam ve bakımı kolay analiz iş akışları oluşturmayı mümkün kılan Nextflow'daki temel en iyi uygulamalardan biridir.
-Bu konuda daha fazla bilgi edinmek için [Üst Veri ve Meta Map'ler](../metadata/) yan görevine bakabilirsiniz.
+Bu konuda daha fazla bilgi edinmek için [Üst Veri ve Meta Map'ler](../metadata/index.md) yan görevine bakabilirsiniz.
 
 ### Özetle
 
-- `publishDir` yönergesi, çıktıları üst veri değerlerine göre düzenleyebilir
+- `output {}` bloğu, dinamik path closure'ları kullanarak çıktıları üst veri değerlerine göre düzenleyebilir
 - Demetlerdeki üst veri, sonuçların yapılandırılmış organizasyonunu sağlar
 - Bu yaklaşım, net veri kaynağı izlenebilirliğiyle bakımı kolay iş akışları oluşturur
 - Süreçler, girdi olarak üst veri ve dosya demetleri alabilir
@@ -1995,27 +2189,26 @@ Bu teknikleri kendi çalışmalarınızda uygulamak, özellikle karmaşık adlan
 5.  **`channel.fromFilePairs` ile basitleştirme:** İlgili dosyaları otomatik olarak eşleştirmek ve eşleştirilmiş dosya kimliklerinden üst veri çıkarmak için `channel.fromFilePairs()` kullandık.
 
     ```groovy
-    ch_pairs = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
+    ch_files = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
     ```
 
-6.  **Süreçlerde Dosya İşlemlerini Kullanmak:** Dosya işlemlerini uygun girdi yönetimiyle Nextflow süreçlerine entegre ettik; çıktıları üst veriye göre düzenlemek için `publishDir` kullandık.
+6.  **Süreçlerde Dosya İşlemlerini Kullanmak:** Dosya işlemlerini uygun girdi yönetimiyle Nextflow süreçlerine entegre ettik; çıktıları üst veriye göre düzenlemek için `output {}` bloğunu kullandık.
 
     - Süreç girdileriyle meta map ilişkilendirme
 
     ```groovy
     ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-    ch_files.map { id,  files ->
-        def (sample, replicate, type, readNum) = id.tokenize('_')
-        [
+    ch_samples = ch_files.map { id,  files ->
+        def (patient, replicate, type) = id.tokenize('_')
+        tuple(
             [
-                id: sample,
+                id: patient,
                 replicate: replicate.replace('rep', ''),
                 type: type
             ],
-             files
-        ]
+            files
+        )
     }
-        .set { ch_samples }
 
     ANALYZE_READS(ch_samples)
     ```
@@ -2023,7 +2216,11 @@ Bu teknikleri kendi çalışmalarınızda uygulamak, özellikle karmaşık adlan
     - Çıktıları üst veriye göre düzenleme
 
     ```groovy
-    publishDir { "results/${meta.type}/${meta.id}/${meta.replicate}" }, mode: 'copy'
+    output {
+        analysis_results {
+            path { meta, file -> "${meta.type}/${meta.id}/${meta.replicate}" }
+        }
+    }
     ```
 
 ### Ek kaynaklar
@@ -2036,4 +2233,4 @@ Bu teknikleri kendi çalışmalarınızda uygulamak, özellikle karmaşık adlan
 
 ## Sırada ne var?
 
-[Yan Görevler menüsüne](../) dönün veya listedeki bir sonraki konuya geçmek için sayfanın sağ alt köşesindeki düğmeye tıklayın.
+[Yan Görevler menüsüne](../index.md) dönün veya listedeki bir sonraki konuya geçmek için sayfanın sağ alt köşesindeki düğmeye tıklayın.

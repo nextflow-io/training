@@ -9,26 +9,20 @@ Part 2에서는 명령줄에서 여러 매개변수를 사용하여 molkart를 �
 
 ### 1.1. 긴 명령줄의 문제점
 
-Part 2의 명령을 다시 살펴보겠습니다:
+Part 2에서는 명령을 간결하게 유지하고 정수형 전처리 매개변수와 같이 직접 입력한 값을 그대로 보존하기 위해 매개변수 파일을 사용했습니다:
 
 ```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose" \
-  --outdir results
+nextflow run ./molkart -params-file params.yaml --segmentation_method "mesmer,cellpose,stardist"
 ```
 
-이 방법은 작동하지만, 재현하거나 공유하거나 수정하기 어렵습니다.
+많은 매개변수를 명령줄에서 개별적으로 전달하면 재현하거나 공유하거나 수정하기 어렵습니다.
 다음 달에 동일한 분석을 다시 실행해야 한다면 어떻게 하시겠습니까?
 동료가 정확히 같은 설정을 사용하고 싶어한다면 어떻게 하시겠습니까?
+매개변수 파일이 이 문제를 해결합니다.
 
-### 1.2. 해결책: 매개변수 파일 사용
+### 1.2. 매개변수 파일
 
-`params.yaml`이라는 파일을 생성하십시오:
+지금까지 사용해 온 `params.yaml` 파일은 다음과 같습니다:
 
 ```yaml title="params.yaml"
 input: "data/samplesheet.csv"
@@ -40,13 +34,16 @@ clahe_pyramid_tile: 368
 segmentation_method: "cellpose"
 ```
 
-이제 명령이 다음과 같이 간단해집니다:
+각 매개변수는 `key: value` 쌍으로 작성됩니다.
+정수를 따옴표 없이 작성하면(예: `mindagap_tilesize: 90`) 정수형이 유지되며, 파이프라인의 매개변수 유효성 검사에서 이를 요구합니다.
+
+명령은 다음과 같이 간단해집니다:
 
 ```bash
 nextflow run ./molkart -params-file params.yaml -resume
 ```
 
-이것으로 끝입니다! 매개변수 파일은 정확한 설정을 문서화하고 재실행이나 공유를 쉽게 만듭니다.
+매개변수 파일은 정확한 설정을 문서화하고 재실행이나 공유를 쉽게 만듭니다.
 
 ### 1.3. 매개변수 재정의하기
 

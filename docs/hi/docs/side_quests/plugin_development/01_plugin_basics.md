@@ -88,7 +88,7 @@ nextflow run hello.nf
 ```console title="Output"
 Output: Hello_aBcDeFgH
 Output: Bonjour_xYzWvUtS
-Output: Holà_qRsPdMnK
+Output: Hola_qRsPdMnK
 Output: Ciao_jLhGfEcB
 Output: Hallo_tNwOiAuR
 ```
@@ -194,7 +194,7 @@ nextflow run hello.nf
 Pipeline is starting! 🚀
 Output: Hello_yqvtclcc
 Output: Bonjour_vwwpyzcs
-Output: Holà_wrghmgab
+Output: Hola_wrghmgab
 Output: Ciao_noniajuy
 Output: Hallo_tvrtuxtp
 Pipeline complete! 👋
@@ -354,7 +354,7 @@ nextflow run hello.nf
 Pipeline is starting! 🚀
 Output: Hello_diozjdwm
 Output: Bonjour_speathmm
-Output: Holà_dllxnzap
+Output: Hola_dllxnzap
 Output: Ciao_wzueddzc
 Output: Hallo_hsxwrjbh
 Pipeline complete! 👋
@@ -375,7 +375,7 @@ Schema validation क्या पकड़ता है यह देखने 
 message,language
 Hello,English
 Bonjour,French
-Holà,Spanish
+Hola,Spanish
 Ciao,Italian
 Hallo,German
 ```
@@ -386,7 +386,7 @@ Hallo,German
 nextflow run hello.nf
 ```
 
-```console title="Output"
+```console title="Output (partial)"
 ERROR ~ Validation of samplesheet failed!
 
 The following errors have been detected in greetings.csv:
@@ -396,6 +396,8 @@ The following errors have been detected in greetings.csv:
 -> Entry 3: Missing required field(s): greeting
 -> Entry 4: Missing required field(s): greeting
 -> Entry 5: Missing required field(s): greeting
+
+ -- Check script 'hello.nf' at line: 20 or see '.nextflow.log' file for more details
 ```
 
 पाइपलाइन चलने से मना कर देती है क्योंकि schema को `greeting` column चाहिए और वह नहीं मिल रही।
@@ -406,7 +408,7 @@ The following errors have been detected in greetings.csv:
 greeting,lang
 Hello,English
 Bonjour,French
-Holà,Spanish
+Hola,Spanish
 Ciao,Italian
 Hallo,German
 ```
@@ -478,7 +480,7 @@ Found the following unidentified headers in greetings.csv:
 greeting,language
 Hello,English
 Bonjour,French
-Holà,Spanish
+Hola,Spanish
 Ciao,Italian
 Hallo,German
 ```
@@ -511,7 +513,7 @@ nf-hello और nf-schema दोनों function plugins हैं: वे fun
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -534,8 +536,10 @@ Plugin execution के दौरान कई INFO और WARN messages उत�
 ये local machine पर चलने वाले एक छोटे उदाहरण के लिए सामान्य हैं:
 
 ```console title="Output (partial)"
-nf-co2footprint plugin  ~  version 1.2.0
+nf-co2footprint plugin  ~  version 1.3.0
+INFO - [nf-co2footprint] 🔕 Repeated task-specific messages (🔁) are only logged once in the console. Further occurrences are logged at DEBUG level, appearing only in the `.nextflow.log` file.
 WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.
+INFO - [nf-co2footprint] Electricity Maps API key is not set. To retrieve real-time carbon intensity values, please provide a key with the parameter `emApiKey`.
 INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.
 WARN - [nf-co2footprint] Executor 'null' not mapped.
 WARN - [nf-co2footprint] Fallback to: `machineType = null`, `pue = 1.0`. ...
@@ -550,7 +554,7 @@ Zone, executor, CPU model, और memory के बारे में warnings 
 अंत में, इस तरह की एक line देखो:
 
 ```console title="Output (partial)"
-🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.
+INFO - [nf-co2footprint] 🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.
 ```
 
 (तुम्हारे numbers अलग होंगे।)
@@ -559,33 +563,27 @@ Zone, executor, CPU model, और memory के बारे में warnings 
 
 Plugin तुम्हारी working directory में आउटपुट फ़ाइलें उत्पन्न करता है:
 
-```bash
-ls co2footprint_*
-```
+??? abstract "डायरेक्टरी सामग्री"
 
-```console title="Output"
-co2footprint_report_<timestamp>.html
-co2footprint_summary_<timestamp>.txt
-co2footprint_trace_<timestamp>.txt
-```
+    ```console
+    co2footprint_report_<timestamp>.html
+    co2footprint_summary_<timestamp>.txt
+    co2footprint_trace_<timestamp>.txt
+    ```
 
-Summary देखो:
+??? abstract "फ़ाइल सामग्री"
 
-```bash
-cat co2footprint_summary_*.txt
-```
+    ```console title="co2footprint_summary_<timestamp>.txt"
+    Total CO₂e footprint measures of this workflow run (including cached tasks):
+      CO₂e emissions: 60.84 ug
+      Energy consumption: 126.76 uWh
+      CO₂e emissions (market): -
 
-```console title="Output"
-Total CO₂e footprint measures of this workflow run (including cached tasks):
-  CO₂e emissions: 60.84 ug
-  Energy consumption: 126.76 uWh
-  CO₂e emissions (market): -
-
-Which equals:
-  - 3.48E-7 km travelled by car
-  - It takes one tree 0.17s to sequester the equivalent amount of CO₂ from the atmosphere
-  - 1.22E-7 % of a flight from Paris to London
-```
+    Which equals:
+      - 3.48E-7 km travelled by car
+      - It takes one tree 0.17s to sequester the equivalent amount of CO₂ from the atmosphere
+      - 1.22E-7 % of a flight from Paris to London
+    ```
 
 (तुम्हारे numbers अलग होंगे।)
 
@@ -606,7 +604,7 @@ nf-co2footprint plugin एक `co2footprint` configuration scope परिभा
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
 
     co2footprint {
@@ -620,7 +618,7 @@ nf-co2footprint plugin एक `co2footprint` configuration scope परिभा
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -640,11 +638,6 @@ INFO - [nf-co2footprint] Using fallback carbon intensity from GB from CI table: 
 
 Zone warning चली गई।
 Plugin अब global fallback (480.0 gCO₂eq/kWh) के बजाय GB-specific carbon intensity (163.92 gCO₂eq/kWh) का उपयोग करता है।
-
-!!! note "नोट"
-
-    तुम्हें `WARN: Unrecognized config option 'co2footprint.location'` message भी दिख सकता है।
-    यह केवल दिखावटी है और इसे सुरक्षित रूप से नज़रअंदाज़ किया जा सकता है; plugin फिर भी value को सही तरीके से पढ़ता है।
 
 भाग 6 में, तुम अपने plugin के लिए एक configuration scope बनाओगे।
 

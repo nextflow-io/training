@@ -88,7 +88,7 @@ nextflow run hello.nf
 ```console title="Output"
 Output: Hello_aBcDeFgH
 Output: Bonjour_xYzWvUtS
-Output: Holà_qRsPdMnK
+Output: Hola_qRsPdMnK
 Output: Ciao_jLhGfEcB
 Output: Hallo_tNwOiAuR
 ```
@@ -194,7 +194,7 @@ nextflow run hello.nf
 Pipeline is starting! 🚀
 Output: Hello_yqvtclcc
 Output: Bonjour_vwwpyzcs
-Output: Holà_wrghmgab
+Output: Hola_wrghmgab
 Output: Ciao_noniajuy
 Output: Hallo_tvrtuxtp
 Pipeline complete! 👋
@@ -354,7 +354,7 @@ nextflow run hello.nf
 Pipeline is starting! 🚀
 Output: Hello_diozjdwm
 Output: Bonjour_speathmm
-Output: Holà_dllxnzap
+Output: Hola_dllxnzap
 Output: Ciao_wzueddzc
 Output: Hallo_hsxwrjbh
 Pipeline complete! 👋
@@ -375,7 +375,7 @@ Renomeie a coluna obrigatória `greeting` para `message`:
 message,language
 Hello,English
 Bonjour,French
-Holà,Spanish
+Hola,Spanish
 Ciao,Italian
 Hallo,German
 ```
@@ -386,7 +386,7 @@ Execute o pipeline:
 nextflow run hello.nf
 ```
 
-```console title="Output"
+```console title="Output (partial)"
 ERROR ~ Validation of samplesheet failed!
 
 The following errors have been detected in greetings.csv:
@@ -396,6 +396,8 @@ The following errors have been detected in greetings.csv:
 -> Entry 3: Missing required field(s): greeting
 -> Entry 4: Missing required field(s): greeting
 -> Entry 5: Missing required field(s): greeting
+
+ -- Check script 'hello.nf' at line: 20 or see '.nextflow.log' file for more details
 ```
 
 O pipeline se recusa a executar porque o schema exige uma coluna `greeting` e não consegue encontrá-la.
@@ -406,7 +408,7 @@ Agora restaure a coluna obrigatória, mas renomeie a coluna opcional `language` 
 greeting,lang
 Hello,English
 Bonjour,French
-Holà,Spanish
+Hola,Spanish
 Ciao,Italian
 Hallo,German
 ```
@@ -478,7 +480,7 @@ Restaure o `greetings.csv` ao seu estado original e remova o bloco `validation` 
 greeting,language
 Hello,English
 Bonjour,French
-Holà,Spanish
+Hola,Spanish
 Ciao,Italian
 Hallo,German
 ```
@@ -511,7 +513,7 @@ Atualize o `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -534,8 +536,10 @@ O plugin produz várias mensagens INFO e WARN durante a execução.
 Isso é normal para um exemplo pequeno sendo executado em uma máquina local:
 
 ```console title="Output (partial)"
-nf-co2footprint plugin  ~  version 1.2.0
+nf-co2footprint plugin  ~  version 1.3.0
+INFO - [nf-co2footprint] 🔕 Repeated task-specific messages (🔁) are only logged once in the console. Further occurrences are logged at DEBUG level, appearing only in the `.nextflow.log` file.
 WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.
+INFO - [nf-co2footprint] Electricity Maps API key is not set. To retrieve real-time carbon intensity values, please provide a key with the parameter `emApiKey`.
 INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.
 WARN - [nf-co2footprint] Executor 'null' not mapped.
 WARN - [nf-co2footprint] Fallback to: `machineType = null`, `pue = 1.0`. ...
@@ -550,7 +554,7 @@ Em um ambiente de produção (por exemplo, um cluster HPC ou nuvem), esses valor
 Ao final, procure uma linha como:
 
 ```console title="Output (partial)"
-🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.
+INFO - [nf-co2footprint] 🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.
 ```
 
 (Seus números serão diferentes.)
@@ -559,33 +563,27 @@ Ao final, procure uma linha como:
 
 O plugin gera arquivos de saída no seu diretório de trabalho:
 
-```bash
-ls co2footprint_*
-```
+??? abstract "Conteúdo do diretório"
 
-```console title="Output"
-co2footprint_report_<timestamp>.html
-co2footprint_summary_<timestamp>.txt
-co2footprint_trace_<timestamp>.txt
-```
+    ```console
+    co2footprint_report_<timestamp>.html
+    co2footprint_summary_<timestamp>.txt
+    co2footprint_trace_<timestamp>.txt
+    ```
 
-Veja o resumo:
+??? abstract "Conteúdo do arquivo"
 
-```bash
-cat co2footprint_summary_*.txt
-```
+    ```console title="co2footprint_summary_<timestamp>.txt"
+    Total CO₂e footprint measures of this workflow run (including cached tasks):
+      CO₂e emissions: 60.84 ug
+      Energy consumption: 126.76 uWh
+      CO₂e emissions (market): -
 
-```console title="Output"
-Total CO₂e footprint measures of this workflow run (including cached tasks):
-  CO₂e emissions: 60.84 ug
-  Energy consumption: 126.76 uWh
-  CO₂e emissions (market): -
-
-Which equals:
-  - 3.48E-7 km travelled by car
-  - It takes one tree 0.17s to sequester the equivalent amount of CO₂ from the atmosphere
-  - 1.22E-7 % of a flight from Paris to London
-```
+    Which equals:
+      - 3.48E-7 km travelled by car
+      - It takes one tree 0.17s to sequester the equivalent amount of CO₂ from the atmosphere
+      - 1.22E-7 % of a flight from Paris to London
+    ```
 
 (Seus números serão diferentes.)
 
@@ -606,7 +604,7 @@ Adicione um bloco `co2footprint` ao `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
 
     co2footprint {
@@ -620,7 +618,7 @@ Adicione um bloco `co2footprint` ao `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -640,11 +638,6 @@ INFO - [nf-co2footprint] Using fallback carbon intensity from GB from CI table: 
 
 O aviso de zona desapareceu.
 O plugin agora usa a intensidade de carbono específica do GB (163.92 gCO₂eq/kWh) em vez do valor global de fallback (480.0 gCO₂eq/kWh).
-
-!!! note "Nota"
-
-    Você também pode ver uma mensagem `WARN: Unrecognized config option 'co2footprint.location'`.
-    Isso é apenas cosmético e pode ser ignorado com segurança; o plugin ainda lê o valor corretamente.
 
 Na Parte 6, você criará um escopo de configuração para o seu próprio plugin.
 

@@ -35,4 +35,4 @@ Aquest curs assumeix una familiaritat mínima amb el següent:
 - Experiència amb la línia de comandes
 - Familiaritat bàsica amb formats de fitxer d'imatge (imatges TIFF, dades tabulars)
 
-Per als requisits tècnics i la configuració de l'entorn, consulteu el mini-curs de [Configuració de l'entorn](../../envsetup/).
+Per als requisits tècnics i la configuració de l'entorn, consulteu el mini-curs de [Configuració de l'entorn](../../envsetup/index.md).

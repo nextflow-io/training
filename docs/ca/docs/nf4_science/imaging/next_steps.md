@@ -18,8 +18,8 @@ Aquí tens alguns passos recomanats per aprofundir en el teu coneixement de Next
 
 Si vols aprendre a escriure pipelines de Nextflow:
 
-- **[Hello Nextflow](../../hello_nextflow/)**: Formació completa de desenvolupament amb Nextflow
-- **[Side Quests](../../side_quests/)**: Temes avançats per a desenvolupadors de pipelines
+- **[Hello Nextflow](../../hello_nextflow/index.md)**: Formació completa de desenvolupament amb Nextflow
+- **[Side Quests](../../side_quests/index.md)**: Temes avançats per a desenvolupadors de pipelines
 
 ### Uneix-te a la comunitat
 

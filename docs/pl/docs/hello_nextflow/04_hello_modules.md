@@ -66,17 +66,32 @@ Aby upewnić się, że wszystko działa, uruchom skrypt raz przed wprowadzeniem 
 nextflow run hello-modules.nf
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [hopeful_avogadro] DSL2 - revision: b09af1237d
+    Launching `hello-modules.nf` [hopeful_avogadro] revision: b09af1237d
 
     executor >  local (7)
-    [0f/8795c9] sayHello (3)       [100%] 3 of 3 ✔
-    [6a/eb2510] convertToUpper (3) [100%] 3 of 3 ✔
-    [af/479117] collectGreetings   [100%] 1 of 1 ✔
+    [0f/8795c9] sayHello (3)       | 3 of 3 ✔
+    [6a/eb2510] convertToUpper (3) | 3 of 3 ✔
+    [af/479117] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_modules/Hola-output.txt
+        - hello_modules/Bonjour-output.txt
+        - hello_modules/Hello-output.txt
+      uppercased:
+        - hello_modules/UPPER-Hola-output.txt
+        - hello_modules/UPPER-Bonjour-output.txt
+        - hello_modules/UPPER-Hello-output.txt
+      collected: hello_modules/COLLECTED-batch-output.txt
+      batch_report: hello_modules/batch-report.txt
     ```
 
 Jak poprzednio, pliki wyjściowe znajdziesz w katalogu określonym w bloku `output` (tutaj `results/hello_modules/`).
@@ -88,11 +103,11 @@ Jak poprzednio, pliki wyjściowe znajdziesz w katalogu określonym w bloku `outp
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Jeśli to zadziałało, jesteś gotowy do nauki modularyzacji kodu workflow'u.
@@ -156,8 +171,8 @@ Po wykonaniu tego usuń definicję procesu z pliku workflow'u.
 
 Składnia importowania procesu z modułu jest dość prosta:
 
-```groovy title="Składnia: Deklaracja importu"
-include { <NAZWA_PROCESU> } from '<ścieżka_do_modułu>'
+```groovy title="Syntax: include declaration"
+include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
 Wstawmy ją powyżej bloku `params` i wypełnijmy odpowiednio.
@@ -172,7 +187,7 @@ Wstawmy ją powyżej bloku `params` i wypełnijmy odpowiednio.
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -184,7 +199,7 @@ Wstawmy ją powyżej bloku `params` i wypełnijmy odpowiednio.
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -199,16 +214,31 @@ Uruchamiamy workflow z zasadniczo tym samym kodem i wejściami co poprzednio, wi
 nextflow run hello-modules.nf -resume
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [romantic_poisson] DSL2 - revision: 96edfa9ad3
+    Launching `hello-modules.nf` [romantic_poisson] revision: 96edfa9ad3
 
     [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
     [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_modules/Hello-output.txt
+        - hello_modules/Bonjour-output.txt
+        - hello_modules/Hola-output.txt
+      uppercased:
+        - hello_modules/UPPER-Hola-output.txt
+        - hello_modules/UPPER-Bonjour-output.txt
+        - hello_modules/UPPER-Hello-output.txt
+      collected: hello_modules/COLLECTED-batch-output.txt
+      batch_report: hello_modules/batch-report.txt
     ```
 
 To powinno się wykonać bardzo szybko, ponieważ wszystko jest w cache.
@@ -256,7 +286,7 @@ process convertToUpper {
 
     script:
     """
-    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat ${input_file} | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
     """
 }
 ```
@@ -278,7 +308,7 @@ Wstaw deklarację importu powyżej bloku `params` i wypełnij ją odpowiednio.
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -293,7 +323,7 @@ Wstaw deklarację importu powyżej bloku `params` i wypełnij ją odpowiednio.
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -308,16 +338,31 @@ Uruchom z flagą `-resume`.
 nextflow run hello-modules.nf -resume
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [nauseous_heisenberg] DSL2 - revision: a04a9f2da0
+    Launching `hello-modules.nf` [nauseous_heisenberg] revision: a04a9f2da0
 
     [c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
     [60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_modules/Hola-output.txt
+        - hello_modules/Hello-output.txt
+        - hello_modules/Bonjour-output.txt
+      uppercased:
+        - hello_modules/UPPER-Bonjour-output.txt
+        - hello_modules/UPPER-Hello-output.txt
+        - hello_modules/UPPER-Hola-output.txt
+      collected: hello_modules/COLLECTED-batch-output.txt
+      batch_report: hello_modules/batch-report.txt
     ```
 
 To powinno nadal produkować takie samo wyjście jak poprzednio.
@@ -381,7 +426,7 @@ Wstaw deklarację importu powyżej bloku `params` i wypełnij ją odpowiednio.
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -397,7 +442,7 @@ Wstaw deklarację importu powyżej bloku `params` i wypełnij ją odpowiednio.
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -412,16 +457,31 @@ Uruchom z flagą `-resume`.
 nextflow run hello-modules.nf -resume
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [friendly_coulomb] DSL2 - revision: 7aa2b9bc0f
+    Launching `hello-modules.nf` [friendly_coulomb] revision: 7aa2b9bc0f
 
     [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
     [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_modules/Hello-output.txt
+        - hello_modules/Bonjour-output.txt
+        - hello_modules/Hola-output.txt
+      uppercased:
+        - hello_modules/UPPER-Bonjour-output.txt
+        - hello_modules/UPPER-Hello-output.txt
+        - hello_modules/UPPER-Hola-output.txt
+      collected: hello_modules/COLLECTED-batch-output.txt
+      batch_report: hello_modules/batch-report.txt
     ```
 
 To powinno nadal produkować takie samo wyjście jak poprzednio.
@@ -452,7 +512,7 @@ Czym jest moduł w Nextflow?
 - [ ] Definicja workflow'u
 - [ ] Operator kanału
 
-Dowiedz się więcej: [2. Utwórz moduł dla `sayHello()`](#2-utworz-modul-dla-sayhello)
+Dowiedz się więcej: [2. Utwórz moduł dla `sayHello()`](#2-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
@@ -462,7 +522,7 @@ Jaka konwencja jest zwykle stosowana do przechowywania plików modułów?
 - [x] W katalogu `modules/`
 - [ ] W katalogu `lib/`
 
-Dowiedz się więcej: [1. Utwórz katalog do przechowywania modułów](#1-utworz-katalog-do-przechowywania-modulow)
+Dowiedz się więcej: [1. Utwórz katalog do przechowywania modułów](#1-create-a-directory-to-store-modules)
 </quiz>
 
 <quiz>
@@ -473,7 +533,7 @@ Jaka jest poprawna składnia do użycia modułu?
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Dowiedz się więcej: [2.3. Dodaj deklarację importu](#23-dodaj-deklaracje-importu-przed-blokiem-workflow)
+Dowiedz się więcej: [2.3. Dodaj deklarację importu](#23-add-an-include-declaration-before-the-workflow-block)
 </quiz>
 
 <quiz>

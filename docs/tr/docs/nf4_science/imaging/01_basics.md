@@ -20,12 +20,12 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 Konsol çıktınız şuna benzer görünmelidir:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 26.04.4
 
-Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d
 
 executor >  local (1)
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 Tebrikler, ilk Nextflow workflow'unuzu çalıştırdınız!
@@ -33,7 +33,7 @@ Tebrikler, ilk Nextflow workflow'unuzu çalıştırdınız!
 Buradaki en önemli çıktı son satırdır (satır 6):
 
 ```console title="Output" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 Bu bize `sayHello` sürecinin bir kez başarıyla çalıştırıldığını söylüyor (`1 of 1 ✔`).
@@ -84,19 +84,19 @@ Bu kafa karıştırıcı gelebilir, o yüzden pratikte bunun nasıl göründüğ
 Daha önce çalıştırdığımız workflow'un konsol çıktısına geri dönersek, şu satırımız vardı:
 
 ```console title="Excerpt of command output" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
-Satırın `[a3/7be2fa]` ile nasıl başladığını görüyor musunuz?
+Satırın `[71/8143bd]` ile nasıl başladığını görüyor musunuz?
 Bu, o süreç çağrısı için görev dizini yolunun kısaltılmış bir biçimidir ve `sayHello` süreç çağrısının çıktısını `work/` dizin yolu içinde nerede bulacağınızı söyler.
 
-Tam yolu aşağıdaki komutu yazarak (kendi terminalinizde gördüğünüzle `a3/7be2fa` yerine koyarak) ve tab tuşuna basarak yolu otomatik tamamlayarak veya bir yıldız işareti ekleyerek bulabilirsiniz:
+Tam yolu aşağıdaki komutu yazarak (kendi terminalinizde gördüğünüzle `71/8143bd` yerine koyarak) ve tab tuşuna basarak yolu otomatik tamamlayarak veya bir yıldız işareti ekleyerek bulabilirsiniz:
 
 ```bash
-tree work/a3/7be2fa*
+tree work/71/8143bd*
 ```
 
-Bu, tam dizin yolunu vermelidir: `work/a3/7be2fa7be2fad5e71e5f49998f795677fd68`
+Bu, tam dizin yolunu vermelidir: `work/71/8143bd5ed3420e23c5f0dc1a05056d`
 
 Orada ne olduğuna bir göz atalım.
 
@@ -116,8 +116,8 @@ Tam alt dizin adları sisteminizde farklı olacaktır.
 
 ```console title="work/"
 work
-└── a3
-    └── 7be2fad5e71e5f49998f795677fd68
+└── 71
+    └── 8143bd5ed3420e23c5f0dc1a05056d
         ├── .command.begin
         ├── .command.err
         ├── .command.log
@@ -136,7 +136,7 @@ Açarsanız, yine `Hello World!` selamlamasını bulacaksınız.
 <details>
   <summary>output.txt dosyasının içeriği</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" linenums="1"
 Hello World!
 ```
 
@@ -159,10 +159,9 @@ Bunlar, Nextflow'un görev yürütmenin bir parçası olarak yazdığı yardımc
 <details>
   <summary>Dosya içeriği</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/.command.sh" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" linenums="1"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
-
 ```
 
 </details>
@@ -357,14 +356,14 @@ nextflow run hello-world.nf --greeting 'Hello World!' -resume
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
 
-    [a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
+    [71/8143bd] sayHello | 1 of 1, cached: 1 ✔
     ```
 
-Süreç durum satırına eklenmiş olan `cached:` kısmına bakın (satır 5); bu, Nextflow'un bu çalışmayı zaten yaptığını tanıdığı ve önceki başarılı çalıştırmadan sonucu yeniden kullandığı anlamına gelir.
+Süreç durum satırına eklenmiş olan `cached:` kısmına bakın; bu, Nextflow'un bu çalışmayı zaten yaptığını tanıdığı ve önceki başarılı çalıştırmadan sonucu yeniden kullandığı anlamına gelir.
 
 Ayrıca çalışma alt dizini hash'inin önceki çalıştırmayla aynı olduğunu görebilirsiniz.
 Nextflow tam anlamıyla size önceki çalıştırmayı gösteriyor ve "Bunu zaten orada yaptım" diyor.

@@ -11,6 +11,7 @@
 #     "pymdown-extensions>=10.12",
 #     "mkdocs-enumerate-headings-plugin>=0.6.0",
 #     "mkdocs-quiz>=1.5.4",
+#     "mkdocs-redirects>=1.2.2",
 #     "mike",
 # ]
 # ///

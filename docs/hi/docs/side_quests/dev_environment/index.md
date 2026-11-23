@@ -10,7 +10,7 @@
 
 ## पहले तुम्हें क्या जानना चाहिए
 
-यह गाइड मानती है कि तुमने [Hello Nextflow](../hello_nextflow/) प्रशिक्षण कोर्स पूरा कर लिया है और Nextflow की बुनियादी अवधारणाओं से परिचित हो, जिनमें शामिल हैं:
+यह गाइड मानती है कि तुमने [Hello Nextflow](../../hello_nextflow/index.md) प्रशिक्षण कोर्स पूरा कर लिया है और Nextflow की बुनियादी अवधारणाओं से परिचित हो, जिनमें शामिल हैं:
 
 - **बुनियादी वर्कफ़्लो संरचना**: प्रोसेस, वर्कफ़्लो, और वे एक-दूसरे से कैसे जुड़ते हैं, यह समझना
 - **चैनल ऑपरेशन**: चैनल बनाना, प्रोसेस के बीच डेटा पास करना, और बुनियादी ऑपरेटर का उपयोग करना
@@ -30,7 +30,7 @@
 
 !!! info "अभी IDE फ़ीचर्स क्यों?"
 
-    तुम शायद [Hello Nextflow](../hello_nextflow/) कोर्स के दौरान पहले से ही VS Code का उपयोग कर रहे थे, लेकिन हमने IDE फ़ीचर्स की बजाय Nextflow की बुनियादी बातें सीखने पर ध्यान केंद्रित रखा। अब जब तुम प्रोसेस, वर्कफ़्लो, चैनल, और मॉड्यूल जैसी बुनियादी Nextflow अवधारणाओं से परिचित हो, तो तुम उन परिष्कृत IDE फ़ीचर्स का लाभ उठाने के लिए तैयार हो जो तुम्हें एक अधिक कुशल डेवलपर बनाएंगे।
+    तुम शायद [Hello Nextflow](../../hello_nextflow/index.md) कोर्स के दौरान पहले से ही VS Code का उपयोग कर रहे थे, लेकिन हमने IDE फ़ीचर्स की बजाय Nextflow की बुनियादी बातें सीखने पर ध्यान केंद्रित रखा। अब जब तुम प्रोसेस, वर्कफ़्लो, चैनल, और मॉड्यूल जैसी बुनियादी Nextflow अवधारणाओं से परिचित हो, तो तुम उन परिष्कृत IDE फ़ीचर्स का लाभ उठाने के लिए तैयार हो जो तुम्हें एक अधिक कुशल डेवलपर बनाएंगे।
 
     इसे अपने डेवलपमेंट एनवायरनमेंट को "लेवल अप" करने के रूप में सोचो - वही एडिटर जिसे तुम उपयोग कर रहे हो, उसमें बहुत अधिक शक्तिशाली क्षमताएं हैं जो वास्तव में मूल्यवान बन जाती हैं जब तुम समझते हो कि वे तुम्हारी किसमें मदद कर रहे हैं।
 
@@ -74,7 +74,7 @@ tree .
 │   └── utils.nf
 └── nextflow.config
 
-3 directories, 12 files
+2 directories, 12 files
 ```
 
 !!! note "उदाहरण फ़ाइलों के बारे में"
@@ -99,18 +99,18 @@ tree .
 एक्सटेंशन मैन्युअल रूप से इंस्टॉल करने के लिए:
 
 1. VS Code खोलो
-2. बाईं ओर एक्सटेंशन आइकन क्लिक करके Extensions व्यू पर जाओ: ![extensions icon](img/extensions_icon.png) (यदि तुम VSCode लोकल रूप से चला रहे हो तो शॉर्टकट `Ctrl/Cmd+Shift+X`)
+2. बाईं ओर एक्सटेंशन आइकन क्लिक करके Extensions व्यू पर जाओ: ![extensions icon](../img/extensions_icon.png) (यदि तुम VSCode लोकल रूप से चला रहे हो तो शॉर्टकट `Ctrl/Cmd+Shift+X`)
 3. "Nextflow" खोजो
 4. आधिकारिक Nextflow एक्सटेंशन इंस्टॉल करो
 
-![Install Nextflow Extension](img/install_extension.png)
+![Install Nextflow Extension](../img/install_extension.png)
 
 ### 0.2. वर्कस्पेस लेआउट
 
 चूँकि तुम Hello Nextflow के दौरान VS Code का उपयोग कर रहे थे, तुम पहले से बुनियादी बातों से परिचित हो। इस सत्र के लिए अपना वर्कस्पेस कुशलता से व्यवस्थित करने का तरीका यहाँ है:
 
 - **Editor Area**: फ़ाइलें देखने और संपादित करने के लिए। तुम इसे फ़ाइलों की तुलना करने के लिए कई पैन में विभाजित कर सकते हो।
-- **File Explorer** क्लिक करो (![file explorer icon](img/files_icon.png)) (`Ctrl/Cmd+Shift+E`): तुम्हारे सिस्टम पर लोकल फ़ाइलें और फ़ोल्डर। फ़ाइलों के बीच नेविगेट करने के लिए इसे बाईं ओर खुला रखो।
+- **File Explorer** क्लिक करो (![file explorer icon](../img/files_icon.png)) (`Ctrl/Cmd+Shift+E`): तुम्हारे सिस्टम पर लोकल फ़ाइलें और फ़ोल्डर। फ़ाइलों के बीच नेविगेट करने के लिए इसे बाईं ओर खुला रखो।
 - **Integrated Terminal** (Windows और MacOS दोनों के लिए `Ctrl+Shift+` बैकटिक): कंप्यूटर के साथ इंटरैक्ट करने के लिए नीचे एक टर्मिनल। Nextflow या अन्य कमांड चलाने के लिए इसका उपयोग करो।
 - **Problems Panel** (`Ctrl+Shift+M`): VS Code यहाँ पता की गई किसी भी त्रुटि और समस्या को दिखाएगा। यह एक नज़र में समस्याओं को उजागर करने के लिए उपयोगी है।
 
@@ -134,7 +134,7 @@ tree .
 
 सिंटैक्स हाइलाइटिंग को क्रिया में देखने के लिए `basic_workflow.nf` खोलो:
 
-![Syntax Showcase](img/syntax_showcase.png)
+![Syntax Showcase](../img/syntax_showcase.png)
 
 ध्यान दो कि VS Code कैसे हाइलाइट करता है:
 
@@ -182,7 +182,7 @@ VS Code के ऑटो-कम्पलीशन फ़ीचर्स तु�
 
 `basic_workflow.nf` फिर से खोलो और workflow ब्लॉक में `channel.` टाइप करने की कोशिश करो:
 
-![Channel auto-completion](img/autocomplete_channel.png)
+![Channel auto-completion](../img/autocomplete_channel.png)
 
 तुम्हें इनके लिए सुझाव दिखेंगे:
 
@@ -196,19 +196,19 @@ VS Code के ऑटो-कम्पलीशन फ़ीचर्स तु�
 
 तुम चैनल पर लागू करने के लिए उपलब्ध ऑपरेटर भी खोज सकते हो। उदाहरण के लिए, उपलब्ध ऑपरेशन देखने के लिए `FASTQC.out.html.` टाइप करो:
 
-![Channel operations auto-completion](img/autocomplete_operators.png)
+![Channel operations auto-completion](../img/autocomplete_operators.png)
 
 #### Process Directives
 
 एक process script ब्लॉक के अंदर, उपलब्ध runtime प्रॉपर्टी देखने के लिए `task.` टाइप करो:
 
-![Task properties auto-completion](img/autocomplete_task.png)
+![Task properties auto-completion](../img/autocomplete_task.png)
 
 #### कॉन्फ़िगरेशन
 
 nextflow.config खोलो और उपलब्ध process directives देखने के लिए कहीं भी `process.` टाइप करो:
 
-![Config auto-completion](img/autocomplete_config.png)
+![Config auto-completion](../img/autocomplete_config.png)
 
 तुम्हें इनके लिए सुझाव दिखेंगे:
 
@@ -234,17 +234,17 @@ VS Code की रियल-टाइम त्रुटि पहचान त�
 
 पहचान को क्रिया में देखने के लिए एक जानबूझकर त्रुटि बनाते हैं। `basic_workflow.nf` खोलो और process का नाम `FASTQC` से `FASTQ` (या किसी अन्य अमान्य नाम) में बदलो। VS Code तुरंत workflow ब्लॉक में त्रुटि को लाल लहरदार रेखांकन के साथ हाइलाइट करेगा:
 
-![Error underline](img/error_underline.png)
+![Error underline](../img/error_underline.png)
 
 ### 3.2. Problems Panel
 
 व्यक्तिगत त्रुटि हाइलाइटिंग से परे, VS Code एक केंद्रीकृत Problems panel प्रदान करता है जो तुम्हारे वर्कस्पेस में सभी त्रुटियों, चेतावनियों, और जानकारी संदेशों को एकत्रित करता है। इसे `Ctrl/Cmd+Shift+M` से खोलो और केवल वर्तमान फ़ाइल से संबंधित त्रुटियाँ दिखाने के लिए फ़िल्टर आइकन का उपयोग करो:
 
-![Filter the problems panel](img/active_file.png)
+![Filter the problems panel](../img/active_file.png)
 
 सीधे समस्याग्रस्त लाइन पर जाने के लिए किसी भी समस्या पर क्लिक करो
 
-![Problems Panel](img/problems_panel.png)
+![Problems Panel](../img/problems_panel.png)
 
 process का नाम वापस `FASTQC` में बदलकर त्रुटि ठीक करो।
 
@@ -285,7 +285,6 @@ Nextflow language server इन समस्याओं को Problems panel �
     ```groovy title="basic_workflow.nf" linenums="3"
     process FASTQC {
         tag "${sample_id}"
-        publishDir "${params.output_dir}/fastqc", mode: 'copy'
 
         input:
         tuple val(sample_id), path(reads)
@@ -309,13 +308,13 @@ Nextflow language server इन समस्याओं को Problems panel �
 
 यदि तुम `FASTQC` जैसे process नाम पर माउस ले जाते हो, तो तुम्हें मॉड्यूल इंटरफ़ेस (इनपुट और आउटपुट) के साथ एक पॉपअप दिखेगा:
 
-![Go to definition](img/syntax.png)
+![Go to definition](../img/syntax.png)
 
 यह फ़ीचर वर्कफ़्लो लिखते समय विशेष रूप से मूल्यवान है, क्योंकि यह तुम्हें मॉड्यूल फ़ाइल सीधे खोले बिना मॉड्यूल इंटरफ़ेस समझने देता है।
 
 **Ctrl/Cmd-click** का उपयोग करके तुम किसी भी process, मॉड्यूल, या वेरिएबल परिभाषा पर तेज़ी से नेविगेट कर सकते हो। स्क्रिप्ट के शीर्ष पर मॉड्यूल फ़ाइल के लिंक पर माउस ले जाओ, और सुझाए अनुसार लिंक का अनुसरण करो:
 
-![Follow link](img/follow_link.png)
+![Follow link](../img/follow_link.png)
 
 यही बात process नामों के लिए भी काम करती है। `basic_workflow.nf` पर वापस जाओ और workflow ब्लॉक में `FASTQC` process नाम पर यह आज़माओ। यह तुम्हें सीधे process नाम पर ले जाता है (जो इस उदाहरण में मॉड्यूल फ़ाइल के समान है, लेकिन बहुत बड़ी फ़ाइल के बीच में हो सकता है)।
 
@@ -334,7 +333,7 @@ Nextflow language server इन समस्याओं को Problems panel �
 
 `complex_workflow.nf` अभी भी खुला होने पर, VSCode के शीर्ष पर सर्च बार में `@` टाइप करके फ़ाइल के सभी सिंबल का अवलोकन प्राप्त कर सकते हो (कीबोर्ड शॉर्टकट `Ctrl/Cmd+Shift+O` है, लेकिन Codespaces में काम नहीं कर सकता)। यह सिंबल नेविगेशन पैनल खोलता है, जो वर्तमान फ़ाइल के सभी सिंबल सूचीबद्ध करता है:
 
-![Symbol navigation](img/symbols.png)
+![Symbol navigation](../img/symbols.png)
 
 यह दिखाता है:
 
@@ -348,15 +347,15 @@ Nextflow language server इन समस्याओं को Problems panel �
 
 यह समझना कि तुम्हारे कोडबेस में कोई process या वेरिएबल कहाँ उपयोग किया जाता है, बहुत मददगार हो सकता है। उदाहरण के लिए, यदि तुम `FASTQC` process के सभी संदर्भ खोजना चाहते हो, तो पहले इसकी परिभाषा पर नेविगेट करो। तुम `modules/fastqc.nf` सीधे खोलकर या ऊपर बताए अनुसार `Ctrl/Cmd-click` के साथ VS Code के quick navigation फ़ीचर का उपयोग करके ऐसा कर सकते हो। process परिभाषा पर पहुँचने के बाद, `FASTQC` process नाम पर राइट-क्लिक करो और सभी उदाहरण देखने के लिए context menu से "Find All References" चुनो।
 
-![Find references](img/references.png)
+![Find references](../img/references.png)
 
 यह फ़ीचर तुम्हारे वर्कस्पेस में `FASTQC` के सभी संदर्भ प्रदर्शित करता है, जिसमें दो अलग-अलग वर्कफ़्लो में इसका उपयोग शामिल है। `FASTQC` process में संशोधनों के संभावित प्रभाव का आकलन करने के लिए यह जानकारी महत्वपूर्ण है।
 
 ### 4.4. Outline Panel
 
-Outline panel, Explorer sidebar में स्थित है (![Explorer icon](img/files_icon.png) क्लिक करो), और तुम्हारी वर्तमान फ़ाइल के सभी सिंबल का एक सुविधाजनक अवलोकन प्रदान करता है। यह फ़ीचर तुम्हें functions, variables, और अन्य प्रमुख एलिमेंट को hierarchical view में प्रदर्शित करके अपने कोड की संरचना को जल्दी नेविगेट और प्रबंधित करने देता है।
+Outline panel, Explorer sidebar में स्थित है (![Explorer icon](../img/files_icon.png) क्लिक करो), और तुम्हारी वर्तमान फ़ाइल के सभी सिंबल का एक सुविधाजनक अवलोकन प्रदान करता है। यह फ़ीचर तुम्हें functions, variables, और अन्य प्रमुख एलिमेंट को hierarchical view में प्रदर्शित करके अपने कोड की संरचना को जल्दी नेविगेट और प्रबंधित करने देता है।
 
-![Outline panel](img/outline.png)
+![Outline panel](../img/outline.png)
 
 फ़ाइल ब्राउज़र का उपयोग किए बिना अपने कोड के विभिन्न भागों में जल्दी नेविगेट करने के लिए Outline panel का उपयोग करो।
 
@@ -364,11 +363,11 @@ Outline panel, Explorer sidebar में स्थित है (![Explorer ico
 
 VS Code का Nextflow एक्सटेंशन तुम्हारे वर्कफ़्लो को Directed Acyclic Graph (DAG) के रूप में विज़ुअलाइज़ कर सकता है। यह तुम्हें प्रोसेस के बीच डेटा फ्लो और निर्भरताएं समझने में मदद करता है। `complex_workflow.nf` खोलो और `workflow {` के ऊपर "Preview DAG" बटन क्लिक करो (इस फ़ाइल में दूसरा `workflow` ब्लॉक):
 
-![DAG preview](img/dag_preview.png)
+![DAG preview](../img/dag_preview.png)
 
 यह केवल 'entry' वर्कफ़्लो है, लेकिन तुम ऊपर `workflow RNASEQ_PIPELINE {` के ऊपर "Preview DAG" बटन क्लिक करके inner वर्कफ़्लो का DAG भी preview कर सकते हो:
 
-![DAG preview inner workflow](img/dag_preview_inner.png)
+![DAG preview inner workflow](../img/dag_preview_inner.png)
 
 इस वर्कफ़्लो के लिए, तुम DAG में nodes का उपयोग करके कोड में संबंधित process परिभाषाओं पर नेविगेट कर सकते हो। किसी node पर क्लिक करो, और यह तुम्हें editor में संबंधित process परिभाषा पर ले जाएगा। विशेष रूप से जब कोई वर्कफ़्लो बड़े आकार में बढ़ता है, तो यह कोड में नेविगेट करने और प्रोसेस कैसे जुड़े हैं यह समझने में वास्तव में मदद कर सकता है।
 
@@ -407,7 +406,7 @@ VS Code तुम्हें मिलती-जुलती फ़ाइले
 3. `modules/fastqc.nf` टैब पर राइट-क्लिक करो और "Split Right" चुनो
 4. अब तुम दोनों फ़ाइलें साथ-साथ देख सकते हो
 
-![Split editor](img/split_editor.png)
+![Split editor](../img/split_editor.png)
 
 यह तब अमूल्य है जब:
 
@@ -419,13 +418,13 @@ VS Code तुम्हें मिलती-जुलती फ़ाइले
 
 कभी-कभी तुम्हें अपने पूरे प्रोजेक्ट में विशिष्ट पैटर्न कहाँ उपयोग किए जाते हैं, यह खोजना होता है। सर्च पैनल खोलने के लिए `Ctrl/Cmd+Shift+F` दबाओ।
 
-वर्कस्पेस में `publishDir` खोजने की कोशिश करो:
+वर्कस्पेस में `container` खोजने की कोशिश करो:
 
-![Project search](img/project_search.png)
+![Project search](../img/project_search.png)
 
-यह तुम्हें हर वह फ़ाइल दिखाता है जो publish directories का उपयोग करती है, जिससे तुम्हें मदद मिलती है:
+यह तुम्हें हर वह फ़ाइल दिखाता है जो container directive का उपयोग करती है, जिससे तुम्हें मदद मिलती है:
 
-- आउटपुट संगठन पैटर्न समझना
+- यह समझना कि कौन से प्रोसेस कंटेनर का उपयोग करते हैं
 - विशिष्ट directives के उदाहरण खोजना
 - मॉड्यूल में सुसंगतता सुनिश्चित करना
 
@@ -492,7 +491,7 @@ VS Code तुरंत:
 
 `complex_workflow.nf` में, process परिभाषाओं के बगल में छोटे तीर देखो। प्रोसेस को fold (collapse) करने के लिए उन पर क्लिक करो:
 
-![Code folding](img/code_folding.png)
+![Code folding](../img/code_folding.png)
 
 यह तुम्हें implementation details में खोए बिना वर्कफ़्लो संरचना का उच्च-स्तरीय अवलोकन देता है।
 
@@ -546,11 +545,11 @@ VS Code केवल कोड संपादित करने से पर�
 - Inline diff views
 - Commit और push क्षमताएं
 
-Source Control panel खोलने के लिए source control बटन (![Source control icon](img/source_control_icon.png)) (`Ctrl+Shift+G` या यदि तुम VSCode लोकल रूप से काम कर रहे हो तो `Cmd+Shift+G`) का उपयोग करो ताकि git changes देख सको और सीधे editor में commits stage कर सको।
+Source Control panel खोलने के लिए source control बटन (![Source control icon](../img/source_control_icon.png)) (`Ctrl+Shift+G` या यदि तुम VS Code लोकल रूप से काम कर रहे हो तो `Cmd+Shift+G`) का उपयोग करो ताकि git changes देख सको और सीधे editor में commits stage कर सको।
 
-![Source Control Panel](img/source_control.png)
+![Source Control Panel](../img/source_control.png)
 
-### 7.2. वर्कफ़्लो चलाना और परिणाम जाँचना
+### 7.2. वर्कफ़्लो चलाना और जाँचना
 
 आइए एक वर्कफ़्लो चलाएं और फिर परिणाम जाँचें। Integrated terminal में (Windows और MacOS दोनों में `Ctrl+Shift+` बैकटिक), बुनियादी वर्कफ़्लो चलाओ:
 
@@ -620,8 +619,8 @@ nextflow run basic_workflow.nf --input data/sample_data.csv --output_dir results
 
 इन IDE कौशलों को अन्य प्रशिक्षण मॉड्यूल के माध्यम से काम करते समय लागू करो, उदाहरण के लिए:
 
-- **[nf-test](nf-test.md)**: अपने वर्कफ़्लो के लिए व्यापक test suites बनाओ
-- **[Hello nf-core](../../hello_nf-core/)**: community standards के साथ production-quality पाइपलाइन बनाओ
+- **[nf-test](../nf_test/index.md)**: अपने वर्कफ़्लो के लिए व्यापक test suites बनाओ
+- **[Build with nf-core](../../nfcore_build/index.md)**: community standards के साथ production-quality पाइपलाइन बनाओ
 
 इन IDE फ़ीचर्स की वास्तविक शक्ति तब उभरती है जब तुम बड़े, अधिक जटिल प्रोजेक्ट पर काम करते हो। इन्हें धीरे-धीरे अपने वर्कफ़्लो में शामिल करना शुरू करो - कुछ सत्रों के भीतर, ये स्वाभाविक हो जाएंगे और Nextflow डेवलपमेंट के प्रति तुम्हारे दृष्टिकोण को बदल देंगे।
 

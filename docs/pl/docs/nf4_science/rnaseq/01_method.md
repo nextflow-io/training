@@ -40,7 +40,7 @@ Narzędzia te nie są zainstalowane w środowisku GitHub Codespaces, więc użyj
 
 !!! tip "Wskazówka"
 
-     Upewnij się, że jesteś w katalogu `nf4-science/rnaseq`. Ostatnia część ścieżki wyświetlana po wpisaniu `pwd` powinna brzmieć `rnaseq`.
+    Upewnij się, że jesteś w katalogu `nf4-science/rnaseq`. Ostatnia część ścieżki wyświetlana po wpisaniu `pwd` powinna brzmieć `rnaseq`.
 
 ---
 
@@ -732,7 +732,7 @@ ls ENCSR000COQ1_1*
 
 ??? abstract "Zawartość katalogu"
 
-    ```console title="Wyjście"
+    ```console title="Output"
     ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
     ```
 

@@ -21,14 +21,14 @@ process sayHello {
  * Pipeline parameters
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 
 workflow {
 
     main:
     // declare an array of input greetings
-    greetings_array = ['Hello','Bonjour','Holà']
+    greetings_array = ['Hello','Bonjour','Hola']
     // create a channel for inputs
     greeting_ch = channel.of(greetings_array)
                         .view { greeting -> "Before flatten: $greeting" }

@@ -92,13 +92,12 @@ Perform the following checks **only on files within the determined scope**:
 
 8. **Check Writing Style**
    - Search for LLM-style patterns that should be avoided:
-     - `Let's` or `let's` at start of sentences
      - `Remember when` or `Remember that` callbacks
      - `Don't worry` reassurances
-     - `worth mentioning` or `important to note` padding
      - Exclamation marks used for emphasis (not in code/output)
    - Check for em-dash elaborations (space-hyphen-space followed by lowercase) that could be periods
    - Flag any issues found for manual review
+   - **Do NOT flag**: `Let's` / `let's`, `worth mentioning`, or `important to note` — these are acceptable in tutorial prose
 
 9. **Deep Lesson Review** (when reviewing a specific lesson file)
 

@@ -155,8 +155,8 @@ Development process को अधिक शैक्षिक बनाने �
 
 !!! tip "सुझाव"
 
-     सुनिश्चित करो कि तुम सही working डायरेक्टरी में हो:
-     `cd /workspaces/training/nf4-science/rnaseq`
+    सुनिश्चित करो कि तुम सही working डायरेक्टरी में हो:
+    `cd /workspaces/training/nf4-science/rnaseq`
 
 ---
 
@@ -185,7 +185,7 @@ Container URI था `community.wave.seqera.io/library/trim-galore:0.6.10--1bf8c
 
 #### 1.1.1. एक इनपुट पैरामीटर declaration जोड़ें
 
-`rnaseq.nf` में, `Pipeline parameters` section के तहत, `input` नाम का एक पैरामीटर `Path` type के साथ declare करो।
+`rnaseq.nf` में, `Pipeline parameters` section के तहत, `reads` नाम का एक पैरामीटर `Path` type के साथ declare करो।
 
 === "बाद में"
 
@@ -217,7 +217,7 @@ Default value प्रदान करने के लिए कई विक�
 एक test profile command line पर इनपुट specify किए बिना workflow को try करने के लिए सुविधाजनक default values प्रदान करता है।
 यह Nextflow ecosystem में एक सामान्य convention है (अधिक विवरण के लिए [Hello Config](../../hello_nextflow/06_hello_config.md) देखें)।
 
-`nextflow.config` में एक `profiles` block जोड़ें जिसमें एक `test` profile हो जो `input` पैरामीटर को test FASTQ फ़ाइलों में से एक पर सेट करता है।
+`nextflow.config` में एक `profiles` block जोड़ें जिसमें एक `test` profile हो जो `reads` पैरामीटर को test FASTQ फ़ाइलों में से एक पर सेट करता है।
 
 === "बाद में"
 
@@ -268,9 +268,9 @@ Workflow block में, `.fromPath` channel factory का उपयोग क
     workflow {
 
         main:
-        // Create input channel
+        // इनपुट channel बनाएं
 
-        // Call processes
+        // Processes को call करें
 
         publish:
         // Declare outputs to publish
@@ -394,7 +394,7 @@ Workflow block में `FASTQC` के लिए एक call जोड़े�
         // एक फ़ाइल path से इनपुट channel बनाएं
         read_ch = channel.fromPath(params.input)
 
-        // Call processes
+        // Processes को call करें
 
         publish:
         // Declare outputs to publish
@@ -477,12 +477,22 @@ nextflow run rnaseq.nf -profile test
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `rnaseq.nf` [mad_lorenz] DSL2 - revision: 5846a164d2
+    Launching `rnaseq.nf` [fabulous_engelbart] revision: 859d80cde8
 
     executor >  local (1)
-    [7b/8ee79e] FASTQC (1) | 1 of 1 ✔
+    [4e/36fb3d] FASTQC (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/rnaseq/results
+
+      fastqc_zip:
+        - fastqc/ENCSR000COQ1_1_fastqc.zip
+
+      fastqc_html:
+        - fastqc/ENCSR000COQ1_1_fastqc.html
     ```
 
 यह बहुत जल्दी चलना चाहिए अगर तुमने भाग 1 पर काम किया है और पहले से ही कंटेनर को pull कर लिया है।
@@ -738,13 +748,32 @@ nextflow run rnaseq.nf -profile test
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `rnaseq.nf` [gloomy_becquerel] DSL2 - revision: bb11055736
+    Launching `rnaseq.nf` [stupefied_volhard] revision: faaf310b2f
 
     executor >  local (2)
-    [f6/c8ef2e] FASTQC (1)      | 1 of 1 ✔
-    [58/c58d8a] TRIM_GALORE (1) | 1 of 1 ✔
+    [a3/ac9284] FASTQC (1)      | 1 of 1 ✔
+    [55/c4d983] TRIM_GALORE (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/rnaseq/results
+
+      fastqc_zip:
+        - fastqc/ENCSR000COQ1_1_fastqc.zip
+
+      fastqc_html:
+        - fastqc/ENCSR000COQ1_1_fastqc.html
+
+      trimmed_reads:
+        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+
+      trimming_reports:
+        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+
+      trimming_fastqc:
+        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
     ```
 
 यह भी बहुत जल्दी चलना चाहिए, क्योंकि हम इतनी छोटी इनपुट फ़ाइल पर चला रहे हैं।
@@ -947,7 +976,7 @@ Trimmed reads पिछले step द्वारा आउटपुट कि�
 
 === "बाद में"
 
-    ```groovy title="rnaseq.nf" linenums="19" hl_lines="14-15"
+    ```groovy title="rnaseq.nf" linenums="19" hl_lines="13-14"
     workflow {
 
         main:
@@ -1085,14 +1114,39 @@ nextflow run rnaseq.nf -profile test
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `rnaseq.nf` [elated_stonebraker] DSL2 - revision: e8e57d0cdd
+    Launching `rnaseq.nf` [nauseous_allen] revision: 45d77a9709
 
     executor >  local (3)
-    [e8/fa29d6] FASTQC (1)       | 1 of 1 ✔
-    [ca/ffdde2] TRIM_GALORE (1)  | 1 of 1 ✔
-    [b6/1c6ca3] HISAT2_ALIGN (1) | 1 of 1 ✔
+    [57/b3c2cb] FASTQC (1)       | 1 of 1 ✔
+    [98/451aef] TRIM_GALORE (1)  | 1 of 1 ✔
+    [78/7cf2c3] HISAT2_ALIGN (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/rnaseq/results
+
+      fastqc_zip:
+        - fastqc/ENCSR000COQ1_1_fastqc.zip
+
+      fastqc_html:
+        - fastqc/ENCSR000COQ1_1_fastqc.html
+
+      trimmed_reads:
+        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+
+      trimming_reports:
+        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+
+      trimming_fastqc:
+        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
+
+      bam:
+        - align/ENCSR000COQ1_1_trimmed.bam
+
+      align_log:
+        - align/ENCSR000COQ1_1_trimmed.hisat2.log
     ```
 
 तुम results डायरेक्टरी में alignment outputs पा सकते हो।

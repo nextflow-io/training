@@ -25,6 +25,22 @@ def is_heading(line: str) -> bool:
     return bool(re.match(r"^#+\s+\d+(\.\d+)*\.?\s+", line))
 
 
+def is_english_doc(path: Path) -> bool:
+    """
+    Check if a path is under a docs/en/ directory.
+
+    Heading numbering is a source-content convention, enforced only against
+    the English source. Translations can reorder a heading like "Part 1:
+    ..." to put the number first (e.g. Turkish "1. Bölüm: ..."), which
+    otherwise falsely looks like a "1." numbered heading to this checker.
+    """
+    parts = path.parts
+    return any(
+        part == "docs" and i + 1 < len(parts) and parts[i + 1] == "en"
+        for i, part in enumerate(parts)
+    )
+
+
 def has_trailing_period(heading_text: str) -> bool:
     """Check if heading ends with a period."""
     return bool(re.match(r"^#+\s+\d+(\.\d+)*\.\s+", heading_text))
@@ -173,6 +189,11 @@ def check(
     """
     # Filter out files in transcripts directories
     markdown_files = [f for f in markdown_files if "transcripts" not in f.parts]
+
+    # Heading numbering is only enforced against the English source; other
+    # languages can legitimately reorder heading text in a way that looks
+    # like numbered-heading markup to this checker (see is_english_doc).
+    markdown_files = [f for f in markdown_files if is_english_doc(f)]
 
     has_errors = False
     all_error_messages = []

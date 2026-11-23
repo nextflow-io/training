@@ -15,7 +15,7 @@ additional_information:
   audience_prerequisites:
     - "**Public :** Ce cours est destiné aux chercheur·euses en transcriptomique et dans les domaines connexes qui souhaitent développer ou personnaliser des pipelines d'analyse de données."
     - "**Compétences :** Une certaine familiarité avec la ligne de commande, les concepts de base du scripting et les formats de fichiers ARNseq courants est supposée."
-    - "**Prérequis :** Concepts et outils fondamentaux de Nextflow couverts dans [Hello Nextflow](../../hello_nextflow/)."
+    - "**Prérequis :** Concepts et outils fondamentaux de Nextflow couverts dans [Hello Nextflow](../../hello_nextflow/index.md)."
 ---
 
 # Nextflow pour l'ARNseq
@@ -24,7 +24,7 @@ additional_information:
 
 **Un cours pratique appliquant Nextflow à un cas d'usage réel de transcriptomique : traitement d'ARNseq en bulk avec Trim Galore, HISAT2 et FastQC.**
 
-Ce cours s'appuie sur la formation débutant [Hello Nextflow](../../hello_nextflow/) et démontre comment utiliser Nextflow dans le contexte spécifique de l'analyse d'ARNseq en bulk.
+Ce cours s'appuie sur la formation débutant [Hello Nextflow](../../hello_nextflow/index.md) et démontre comment utiliser Nextflow dans le contexte spécifique de l'analyse d'ARNseq en bulk.
 Vous implémenterez un pipeline de traitement qui élimine les séquences adaptatrices, aligne les lectures sur un génome de référence et effectue un contrôle qualité (QC) à plusieurs étapes.
 
 <!-- additional_information -->

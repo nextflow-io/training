@@ -51,8 +51,8 @@
 
 !!! note "नोट"
 
-     सुनिश्चित करो कि तुम सही वर्किंग डायरेक्टरी में हो:
-     `cd /workspaces/training/nf4-science/{DOMAIN_DIR}`
+    सुनिश्चित करो कि तुम सही वर्किंग डायरेक्टरी में हो:
+    `cd /workspaces/training/nf4-science/{DOMAIN_DIR}`
 
 ---
 

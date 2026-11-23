@@ -266,21 +266,21 @@ nextflow run greet.nf
 ??? example "출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `greet.nf` [elated_marconi] DSL2 - revision: cd8d52c97c
+    Launching `greet.nf` [elated_marconi] revision: 8cc49dbe33
 
     Pipeline is starting! 🚀
     executor >  local (5)
-    [fe/109754] process > SAY_HELLO (5) [100%] 5 of 5 ✔
+    [fe/109754] SAY_HELLO (5) | 5 of 5 ✔
     Reversed: olleH
     Reversed: ruojnoB
-    Reversed: àloH
+    Reversed: aloH
     Reversed: oaiC
     Reversed: ollaH
     Output: Hello
     Output: Bonjour
-    Output: Holà
+    Output: Hola
     Output: Ciao
     Output: Hallo
     Pipeline complete! 👋
@@ -350,7 +350,7 @@ nextflow run greet.nf
     }
     ```
 
-이 함수는 Groovy 문자열 보간(`"*** ${greeting} ***"`)을 사용하여 인사말 변수를 문자열 안에 삽입합니다.
+이 함수는 Groovy 문자열 보간(`#!groovy "*** ${greeting} ***"`)을 사용하여 인사말 변수를 문자열 안에 삽입합니다.
 
 빌드, 설치 후 워크플로우를 업데이트합니다:
 
@@ -443,21 +443,21 @@ nextflow run greet.nf
 ??? example "출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `greet.nf` [elated_marconi] DSL2 - revision: cd8d52c97c
+    Launching `greet.nf` [elated_marconi] revision: bef1bea9f0
 
     Pipeline is starting! 🚀
     executor >  local (5)
-    [fe/109754] process > SAY_HELLO (5) [100%] 5 of 5 ✔
+    [fe/109754] SAY_HELLO (5) | 5 of 5 ✔
     Reversed: olleH
     Reversed: ruojnoB
-    Reversed: àloH
+    Reversed: aloH
     Reversed: oaiC
     Reversed: ollaH
     Decorated: *** Hello ***
     Decorated: *** Bonjour ***
-    Decorated: *** Holà ***
+    Decorated: *** Hola ***
     Decorated: *** Ciao ***
     Decorated: *** Hallo ***
     Pipeline complete! 👋

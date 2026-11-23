@@ -9,26 +9,20 @@ Ora impareremo due approcci migliori per gestire gli input: **file di parametri*
 
 ### 1.1. Il problema delle righe di comando lunghe
 
-Ricordiamo il nostro comando dalla Parte 2:
+Nella Parte 2 abbiamo già utilizzato un file di parametri per mantenere il comando breve e preservare i valori digitati (come i parametri interi di pre-elaborazione) intatti:
 
 ```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose" \
-  --outdir results
+nextflow run ./molkart -params-file params.yaml --segmentation_method "mesmer,cellpose,stardist"
 ```
 
-Questo funziona, ma è difficile da riprodurre, condividere o modificare.
+Passare molti parametri singolarmente dalla riga di comando è difficile da riprodurre, condividere o modificare.
 Cosa succede se è necessario eseguire nuovamente la stessa analisi il prossimo mese?
 Cosa succede se un collaboratore vuole utilizzare le vostre stesse impostazioni?
+Un file di parametri risolve questo problema.
 
-### 1.2. Soluzione: Utilizzare un file di parametri
+### 1.2. Il file di parametri
 
-Creare un file chiamato `params.yaml`:
+Ecco il file `params.yaml` che abbiamo utilizzato:
 
 ```yaml title="params.yaml"
 input: "data/samplesheet.csv"
@@ -40,13 +34,16 @@ clahe_pyramid_tile: 368
 segmentation_method: "cellpose"
 ```
 
-Ora il vostro comando diventa:
+Ogni parametro è scritto come una coppia `chiave: valore`.
+Scrivere i numeri interi senza virgolette (ad esempio `mindagap_tilesize: 90`) preserva il loro tipo intero, richiesto dalla validazione dei parametri della pipeline.
+
+Il vostro comando diventa:
 
 ```bash
 nextflow run ./molkart -params-file params.yaml -resume
 ```
 
-Ecco fatto! Il file di parametri documenta la vostra configurazione esatta e rende facile rieseguire o condividere.
+Il file di parametri documenta la vostra configurazione esatta e rende facile rieseguire o condividere.
 
 ### 1.3. Sovrascrittura dei parametri
 
@@ -58,16 +55,16 @@ nextflow run ./molkart -params-file params.yaml --segmentation_method "stardist"
 
 La riga sopra cambia il `segmentation_method` in `stardist` e il nome di `--outdir` in `stardist_results` invece dei parametri nel file `params.yaml`.
 Inoltre, potete vedere che il flag `-resume` ci ha permesso di riutilizzare i risultati di pre-elaborazione dall'esecuzione precedente, risparmiando tempo.
-Può utilizzare questo schema per testare rapidamente diverse variazioni della pipeline.
+Potete utilizzare questo schema per testare rapidamente diverse variazioni della pipeline.
 
 ### Takeaway
 
 I file di parametri rendono le vostre analisi riproducibili e facili da condividere.
-Li utilizzi per qualsiasi lavoro di analisi reale.
+Utilizzateli per qualsiasi lavoro di analisi reale.
 
-### Prossimi passi
+### Cosa c'è dopo?
 
-Scopra come i samplesheet organizzano le informazioni su più campioni.
+Scoprite come i samplesheet organizzano le informazioni su più campioni.
 
 ---
 
@@ -125,7 +122,7 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! warning "Avviso"
+!!! Warning "Avviso"
 
     Noti che i percorsi nel samplesheet sono relativi a dove **esegue** Nextflow, non a dove si trova il samplesheet.
 

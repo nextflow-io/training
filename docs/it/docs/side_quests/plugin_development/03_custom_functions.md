@@ -266,21 +266,21 @@ nextflow run greet.nf
 ??? example "Output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `greet.nf` [elated_marconi] DSL2 - revision: cd8d52c97c
+    Launching `greet.nf` [elated_marconi] revision: 8cc49dbe33
 
     Pipeline is starting! 🚀
     executor >  local (5)
-    [fe/109754] process > SAY_HELLO (5) [100%] 5 of 5 ✔
+    [fe/109754] SAY_HELLO (5) | 5 of 5 ✔
     Reversed: olleH
     Reversed: ruojnoB
-    Reversed: àloH
+    Reversed: aloH
     Reversed: oaiC
     Reversed: ollaH
     Output: Hello
     Output: Bonjour
-    Output: Holà
+    Output: Hola
     Output: Ciao
     Output: Hallo
     Pipeline complete! 👋
@@ -350,7 +350,7 @@ Modificate `GreetingExtension.groovy` per aggiungere `decorateGreeting` dopo `re
     }
     ```
 
-Questa funzione usa l'interpolazione di stringhe di Groovy (`"*** ${greeting} ***"`) per incorporare la variabile del saluto all'interno di una stringa.
+Questa funzione usa l'interpolazione di stringhe di Groovy (`#!groovy "*** ${greeting} ***"`) per incorporare la variabile del saluto all'interno di una stringa.
 
 Compilate, installate e aggiornate il flusso di lavoro:
 
@@ -443,21 +443,21 @@ nextflow run greet.nf
 ??? example "Output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `greet.nf` [elated_marconi] DSL2 - revision: cd8d52c97c
+    Launching `greet.nf` [elated_marconi] revision: bef1bea9f0
 
     Pipeline is starting! 🚀
     executor >  local (5)
-    [fe/109754] process > SAY_HELLO (5) [100%] 5 of 5 ✔
+    [fe/109754] SAY_HELLO (5) | 5 of 5 ✔
     Reversed: olleH
     Reversed: ruojnoB
-    Reversed: àloH
+    Reversed: aloH
     Reversed: oaiC
     Reversed: ollaH
     Decorated: *** Hello ***
     Decorated: *** Bonjour ***
-    Decorated: *** Holà ***
+    Decorated: *** Hola ***
     Decorated: *** Ciao ***
     Decorated: *** Hallo ***
     Pipeline complete! 👋

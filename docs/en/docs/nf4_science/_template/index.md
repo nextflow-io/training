@@ -14,14 +14,14 @@ additional_information:
   audience_prerequisites:
     - "**Audience:** This course is designed for researchers in {DOMAIN} and related fields who want to develop or customize data analysis pipelines."
     - "**Skills:** Some familiarity with the command line, basic scripting concepts, and common {DOMAIN} file formats is assumed."
-    - "**Prerequisites:** Foundational Nextflow concepts and tooling covered in [Hello Nextflow](../../hello_nextflow/)."
+    - "**Prerequisites:** Foundational Nextflow concepts and tooling covered in [Hello Nextflow](../../hello_nextflow/index.md)."
 ---
 
 # Nextflow for {DOMAIN}
 
 **A hands-on course applying Nextflow to a real-world {DOMAIN} use case: {METHOD_SHORT_DESCRIPTION}.**
 
-This course builds on the [Hello Nextflow](../../hello_nextflow/) beginner training and demonstrates how to use Nextflow in the specific context of the {DOMAIN} domain.
+This course builds on the [Hello Nextflow](../../hello_nextflow/index.md) beginner training and demonstrates how to use Nextflow in the specific context of the {DOMAIN} domain.
 You will implement a {METHOD} pipeline with [{TOOL_A}]({TOOL_A_URL}) and [{TOOL_B}]({TOOL_B_URL}).
 
 <!-- additional_information -->

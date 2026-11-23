@@ -254,9 +254,9 @@ If we want a number instead, for example, we could write float, and that would s
 
 So that type safety is a very new feature of Nextflow, but really powerful to make your code safer to write and to run.
 
-Then after that we've got an equal symbol and then the default value here. Nextflow is written in Barcelona originally, so it seems appropriate that we've got some, Spanish here, _"Holà mundo!"_ as a default.
+Then after that we've got an equal symbol and then the default value here. Nextflow is written in Barcelona originally, so it seems appropriate that we've got some, Spanish here, _"Hola mundo!"_ as a default.
 
-Right i'm gonna save that script, go back, run the script again without _--input_. And this time it should run and it will create our new file up in _results_. And in this file now it says _"Holà mundo!"_.
+Right i'm gonna save that script, go back, run the script again without _--input_. And this time it should run and it will create our new file up in _results_. And in this file now it says _"Hola mundo!"_.
 
 This is just a default though, so it doesn't mean that we can't still do the same thing as before. If I go back and find my old script here, _"Hej Världen"_, because I do _--input_ on the command line, that will overwrite that default and use that again in the output.txt file.
 

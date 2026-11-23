@@ -18,12 +18,12 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 Your console output should look something like this:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 26.04.4
 
-Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d
 
 executor >  local (1)
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 Congratulations, you just ran your first Nextflow workflow!
@@ -31,7 +31,7 @@ Congratulations, you just ran your first Nextflow workflow!
 The most important output here is the last line (line 6):
 
 ```console title="Output" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 This tells us that the `sayHello` process was successfully executed once (`1 of 1 ✔`).
@@ -82,19 +82,19 @@ That may sound confusing, so let's see what that looks like in practice.
 Going back to the console output for the workflow we ran earlier, we had this line:
 
 ```console title="Excerpt of command output" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
-See how the line starts with `[a3/7be2fa]`?
+See how the line starts with `[71/8143bd]`?
 That is a truncated form of the task directory path for that one process call, and tells you where to find the output of the `sayHello` process call within the `work/` directory path.
 
-You can find the full path by typing the following command (replacing `a3/7be2fa` with what you see in your own terminal) and pressing the tab key to autocomplete the path or adding an asterisk:
+You can find the full path by typing the following command (replacing `71/8143bd` with what you see in your own terminal) and pressing the tab key to autocomplete the path or adding an asterisk:
 
 ```bash
-tree work/a3/7be2fa*
+tree work/71/8143bd*
 ```
 
-This should yield the full path directory path: `work/a3/7be2fa7be2fad5e71e5f49998f795677fd68`
+This should yield the full path directory path: `work/71/8143bd5ed3420e23c5f0dc1a05056d`
 
 Let's take a look at what's in there.
 
@@ -114,8 +114,8 @@ The exact subdirectory names will be different on your system.
 
 ```console title="work/"
 work
-└── a3
-    └── 7be2fad5e71e5f49998f795677fd68
+└── 71
+    └── 8143bd5ed3420e23c5f0dc1a05056d
         ├── .command.begin
         ├── .command.err
         ├── .command.log
@@ -134,7 +134,7 @@ If you open it, you will find the `Hello World!` greeting again.
 <details>
   <summary>File contents of output.txt</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" linenums="1"
 Hello World!
 ```
 
@@ -157,10 +157,9 @@ The `.command.sh` file is especially useful because it shows you the main comman
 <details>
   <summary>File contents</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/.command.sh" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" linenums="1"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
-
 ```
 
 </details>
@@ -355,14 +354,14 @@ nextflow run hello-world.nf --greeting 'Hello World!' -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
 
-    [a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
+    [71/8143bd] sayHello | 1 of 1, cached: 1 ✔
     ```
 
-Look for the `cached:` bit that has been added in the process status line (line 5), which means that Nextflow has recognized that it has already done this work and simply reused the result from the previous successful run.
+Look for the `cached:` bit that has been added in the process status line, which means that Nextflow has recognized that it has already done this work and simply reused the result from the previous successful run.
 
 You can also see that the work subdirectory hash is the same as in the previous run.
 Nextflow is literally pointing you to the previous execution and saying "I already did that over there."

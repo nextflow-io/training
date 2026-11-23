@@ -7,26 +7,20 @@ Now we'll learn two better approaches for managing inputs: **parameter files** a
 
 ### 1.1. The problem with long command lines
 
-Recall our command from Part 2:
+In Part 2 we already used a parameter file to keep the command short and keep typed values (such as the integer preprocessing parameters) intact:
 
 ```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose" \
-  --outdir results
+nextflow run ./molkart -params-file params.yaml --segmentation_method "mesmer,cellpose,stardist"
 ```
 
-This works, but it's hard to reproduce, share, or modify.
+Passing many parameters individually on the command line is hard to reproduce, share, or modify.
 What if you need to run the same analysis again next month?
 What if a collaborator wants to use your exact settings?
+A parameter file solves this.
 
-### 1.2. Solution: Use a parameter file
+### 1.2. The parameter file
 
-Create a file called `params.yaml`:
+Here is the `params.yaml` file we have been using:
 
 ```yaml title="params.yaml"
 input: "data/samplesheet.csv"
@@ -38,13 +32,16 @@ clahe_pyramid_tile: 368
 segmentation_method: "cellpose"
 ```
 
-Now your command becomes:
+Each parameter is written as a `key: value` pair.
+Writing integers without quotes (for example `mindagap_tilesize: 90`) preserves their integer type, which the pipeline's parameter validation requires.
+
+Your command becomes:
 
 ```bash
 nextflow run ./molkart -params-file params.yaml -resume
 ```
 
-That's it! The parameter file documents your exact configuration and makes it easy to rerun or share.
+The parameter file documents your exact configuration and makes it easy to rerun or share.
 
 ### 1.3. Overriding parameters
 

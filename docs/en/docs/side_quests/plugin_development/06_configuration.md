@@ -232,6 +232,54 @@ The factory has access to the Nextflow session and its configuration, so it is t
 The factory now reads `greeting.enabled` from the config and returns an empty list if the user has set it to `false`.
 When the list is empty, no observers are created, so the plugin's lifecycle hooks are silently skipped.
 
+The factory test from Part 5 passes a bare `Mock(Session)`, which has no config, so `navigate()` now fails with a `NullPointerException`.
+Update `nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy` to give the mock session a config, and add a test for the disabled case:
+
+=== "After"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="4-6 8 15-25"
+        def 'should create the observer instance' () {
+            given:
+            def factory = new GreetingFactory()
+            def session = Mock(Session) {
+                getConfig() >> [greeting: [enabled: true]]
+            }
+            when:
+            def result = factory.create(session)
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+
+        def 'should return empty list when disabled' () {
+            given:
+            def factory = new GreetingFactory()
+            def session = Mock(Session) {
+                getConfig() >> [greeting: [enabled: false]]
+            }
+            when:
+            def result = factory.create(session)
+            then:
+            result.isEmpty()
+        }
+    ```
+
+=== "Before"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="5"
+        def 'should create the observer instance' () {
+            given:
+            def factory = new GreetingFactory()
+            when:
+            def result = factory.create(Mock(Session))
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+    ```
+
 ### 2.1. Build and test
 
 Rebuild and install the plugin:

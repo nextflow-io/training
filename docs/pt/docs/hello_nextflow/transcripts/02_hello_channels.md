@@ -136,7 +136,7 @@ Se você está interessado em como fazer isso com as melhores práticas, há uma
 
 Ok. A seguir vamos explorar um pouco sobre como os canais são estruturados e como eles diferem de outros tipos de estruturas de dados na linguagem de codificação. E vou pensar um pouco sobre como eu poderia potencialmente usar um array, que pode ser um conceito familiar se você veio de outras linguagens.
 
-Posso usar um array em um canal? Vamos tentar. Vou criar um array, e copiei isso da documentação, _"greetings_array"_ e _"Hello", "Bonjour"_ e _"Holà"_. E então vou colocar isso aqui em vez das minhas strings codificadas. Então vou dizer "channel.of" _"greetings_array"_, passando este array para um canal. Vamos tentar.
+Posso usar um array em um canal? Vamos tentar. Vou criar um array, e copiei isso da documentação, _"greetings_array"_ e _"Hello", "Bonjour"_ e _"Hola"_. E então vou colocar isso aqui em vez das minhas strings codificadas. Então vou dizer "channel.of" _"greetings_array"_, passando este array para um canal. Vamos tentar.
 
 Abrir o terminal, e executar o pipeline.
 
@@ -212,7 +212,7 @@ Ok, vamos dar uma olhada neste canal e ver como ele se parece. Podemos fazer _".
 
 Se eu executar novamente, ainda vai falhar, mas vai nos mostrar o que está dentro deste canal. Não é particularmente emocionante. É aquela variável _path_. Então você pode ver que é apenas uma string aqui porque está sendo impressa no terminal, mas é um objeto _path_, que contém a informação e metadados sobre este arquivo.
 
-Não queremos passar os metadados do arquivo para a entrada. Queremos passar o conteúdo daquele arquivo. Se olharmos o arquivo _greetings.csv_, você pode ver aqui que tem essas diferentes variáveis aqui. _Hello, Bonjour, Holà_ novamente. E essas são as coisas que realmente queremos estar passando para nosso processo, não apenas o arquivo em si como um único objeto.
+Não queremos passar os metadados do arquivo para a entrada. Queremos passar o conteúdo daquele arquivo. Se olharmos o arquivo _greetings.csv_, você pode ver aqui que ele tem essas diferentes variáveis. _Hello, Bonjour, Hola_ novamente. E essas são as coisas que realmente queremos estar passando para nosso processo, não apenas o arquivo em si como um único objeto.
 
 Então precisamos analisar este arquivo CSV. Precisamos desempacotá-lo, chegar ao conteúdo do arquivo CSV, e então passar o conteúdo dentro do canal para o processo.
 
@@ -224,15 +224,15 @@ Ok. Ainda falhou, mas de uma maneira nova e emocionante, o que é progresso.
 
 Desta vez novamente, temos algum problema com nosso script, que foi renderizado. Agora. Não temos mais o caminho final, mas temos um array de variáveis, que se parece muito com o erro que tivemos anteriormente quando estávamos passando um array como uma entrada fixa.
 
-Com nosso log do operador view, podemos ver antes de _splitCsv_ era o caminho. E com certeza, depois de _splitCsv_, temos três saídas diferentes e cada uma dessas saídas se parece muito com cada uma das linhas do arquivo _greetings.csv_, o que faz sentido.
+Com nosso log do operador view, podemos ver que antes do _splitCsv_ era o caminho. E com certeza, depois do _splitCsv_, temos três saídas diferentes e cada uma dessas saídas se parece muito com cada uma das linhas do arquivo _greetings.csv_, o que faz sentido.
 
-Então o que aconteceu aqui é que o Nextflow analisou este arquivo CSV nos deu três objetos, um array para cada linha do arquivo CSV. Então três vezes passamos um array de variáveis para o canal em vez de um único valor de string.
+Então o que aconteceu aqui é que o Nextflow analisou este arquivo CSV e nos deu três objetos, um array para cada linha do arquivo CSV. Então três vezes passamos um array de variáveis para o canal em vez de um único valor de string.
 
-Ok, então da última vez que tivemos este problema, usamos _flatten_. Vamos apenas muito rapidamente. Tentar flatten e ver o que acontece.
+Ok, então da última vez que tivemos este problema, usamos _flatten_. Vamos apenas muito rapidamente tentar flatten e ver o que acontece.
 
 Posso chamar essas variáveis do que quiser. Então vou chamá-la de _myarray_ porque não é mais realmente um CSV. Vamos tentar executar novamente e ver o que acontece com _flatten_.
 
-Então desta vez vamos executar, analisamos o CSV em três objetos de array, e então achatamos. E desta vez passou. E o pipeline Nextflow executou. No entanto você pode ver que _flatten_ realmente vai com tudo e achata tudo. E então obtemos três entradas de array independentes para cada linha. E então executou o processo três vezes cada linha de um CSV. E agora temos um monte de arquivos de resultados, e 123, 456, e todos os tipos de coisas, não apenas aquela primeira coluna do CSV, que é o que realmente queríamos.
+Então desta vez vamos executar, analisamos o CSV em três objetos de array, e então achatamos. E desta vez passou. E o pipeline Nextflow executou. No entanto, você pode ver que _flatten_ realmente vai com tudo e achata tudo. E então obtemos três entradas de array independentes para cada linha. E então executou o processo três vezes para cada linha do CSV. E agora temos um monte de arquivos de resultados, com 123, 456, e todo tipo de coisa, não apenas aquela primeira coluna do CSV, que é o que realmente queríamos.
 
 ## 4.3. Usar o operador map() para extrair as saudações
 
@@ -246,7 +246,7 @@ Arrays no Nextflow são baseados em zero, então vamos dizer apenas o primeiro e
 
 E agora, podemos executar o pipeline novamente e ver se faz o que esperamos.
 
-Com certeza, depois de _splitCsv_ temos nossos arrays, e então depois do _map_, temos nossas strings limpas e agradáveis, apenas _"Hello", "Bonjour"_ e _"Holà"_. E o pipeline agora está fazendo o que queremos. Fantástico.
+Com certeza, depois de _splitCsv_ temos nossos arrays, e então depois do _map_, temos nossas strings limpas e agradáveis, apenas _"Hello", "Bonjour"_ e _"Hola"_. E o pipeline agora está fazendo o que queremos. Fantástico.
 
 Então podemos nos livrar de todos esses comandos view agora. Não precisamos mais deles.
 

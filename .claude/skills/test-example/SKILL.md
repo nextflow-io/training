@@ -34,7 +34,7 @@ Return to repository root after testing for final documentation checks.
 3. **Run the Script**
 
    - Change to the script's directory
-   - Run: `nextflow run [script.nf]`
+   - Run: `env -u CLAUDECODE NXF_AGENT_MODE=false nextflow run [script.nf]` — see [Console Output Mode](../shared/repo-conventions.md#console-output-mode-critical): without this override, Nextflow 26.04+ renders in agent mode and the captured output will not match what learners see
    - Capture console output
    - Note the work directory hash
 
@@ -47,7 +47,7 @@ Return to repository root after testing for final documentation checks.
 
 5. **Test with Resume**
 
-   - Run: `nextflow run [script.nf] -resume`
+   - Run: `env -u CLAUDECODE NXF_AGENT_MODE=false nextflow run [script.nf] -resume`
    - Verify processes show as "cached"
    - Confirm work directory hash is reused
 

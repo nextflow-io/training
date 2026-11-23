@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 बल्क RNAseq डेटा को प्रोसेस और विश्लेषण करने के लिए कई वैध विधियाँ हैं।
-इस कोर्स के लिए, हम [Babraham Institute](https://www.babraham.ac.uk/) में डॉ. साइमन एंड्रूज और लौरा बिगिंस द्वारा [यहाँ](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) वर्णित विधि का अनुसरण कर रहे हैं।
+इस कोर्स के लिए, हम [Babraham Institute](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) में डॉ. साइमन एंड्रूज और लौरा बिगिंस द्वारा [यहाँ](https://www.babraham.ac.uk/) वर्णित विधि का अनुसरण कर रहे हैं।
 
 हमारा लक्ष्य एक workflow विकसित करना है जो निम्नलिखित प्रोसेसिंग चरणों को लागू करता है: बल्क RNAseq नमूने में reads पर प्रारंभिक गुणवत्ता नियंत्रण चलाना, reads से adapter अनुक्रम ट्रिम करना, reads को reference genome के साथ संरेखित करना, और एक व्यापक गुणवत्ता नियंत्रण (QC) रिपोर्ट तैयार करना।
 
@@ -40,7 +40,7 @@
 
 !!! tip "सुझाव"
 
-     सुनिश्चित करें कि तुम `nf4-science/rnaseq` डायरेक्टरी में हो। जब तुम `pwd` टाइप करते हो तो दिखाए गए path का अंतिम भाग `rnaseq` होना चाहिए।
+    सुनिश्चित करें कि तुम `nf4-science/rnaseq` डायरेक्टरी में हो। जब तुम `pwd` टाइप करते हो तो दिखाए गए path का अंतिम भाग `rnaseq` होना चाहिए।
 
 ---
 
@@ -732,7 +732,7 @@ ls ENCSR000COQ1_1*
 
 ??? abstract "डायरेक्टरी सामग्री"
 
-    ```console title="आउटपुट"
+    ```console title="Output"
     ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
     ```
 

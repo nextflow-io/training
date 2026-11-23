@@ -226,7 +226,7 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--7
 gatk HaplotypeCaller \
         -R /data/ref/ref.fasta \
         -I /data/bam/reads_mother.bam \
-        -O /data/vcf/reads_mother.vcf \
+        -O reads_mother.vcf \
         -L /data/ref/intervals.bed
 ```
 
@@ -911,7 +911,7 @@ gatk HaplotypeCaller \
     17:30:10.161 INFO  HaplotypeCaller - HTSJDK Defaults.COMPRESSION_LEVEL : 2
     17:30:10.161 INFO  HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_READ_FOR_SAMTOOLS : false
     17:30:10.161 INFO  HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_SAMTOOLS : true
-    17:30:10.161 INFO  HaplotypeCaller -HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_TRIBBLE : false
+    17:30:10.161 INFO  HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_TRIBBLE : false
     17:30:10.161 INFO  HaplotypeCaller - Deflater: IntelDeflater
     17:30:10.162 INFO  HaplotypeCaller - Inflater: IntelInflater
     17:30:10.162 INFO  HaplotypeCaller - GCS max retries/reopens: 20

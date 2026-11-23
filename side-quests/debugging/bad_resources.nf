@@ -14,6 +14,7 @@ process PROCESS_FILES {
 
     script:
     """
+    sleep 1  # Takes 1 second, but time limit is 1ms
     cowpy ${sample_name} > ${sample_name}_output.txt
     """
 }

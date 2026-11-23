@@ -9,26 +9,20 @@ Bölüm 2'de molkart'ı komut satırında birden fazla parametre ile çalıştı
 
 ### 1.1. Uzun komut satırlarıyla ilgili sorun
 
-Bölüm 2'deki komutumuzu hatırlayın:
+Bölüm 2'de komutu kısa tutmak ve yazılan değerleri (ön işleme için kullanılan tam sayı parametreleri gibi) olduğu gibi korumak amacıyla zaten bir parametre dosyası kullandık:
 
 ```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose" \
-  --outdir results
+nextflow run ./molkart -params-file params.yaml --segmentation_method "mesmer,cellpose,stardist"
 ```
 
-Bu işe yarar, ancak tekrar üretmek, paylaşmak veya değiştirmek zordur.
+Birçok parametreyi komut satırında tek tek geçirmek, tekrar üretmeyi, paylaşmayı veya değiştirmeyi zorlaştırır.
 Aynı analizi önümüzdeki ay tekrar çalıştırmanız gerekirse ne olur?
 Bir iş arkadaşınız tam ayarlarınızı kullanmak isterse ne olur?
+Bir parametre dosyası bu sorunu çözer.
 
-### 1.2. Çözüm: Parametre dosyası kullanın
+### 1.2. Parametre dosyası
 
-`params.yaml` adında bir dosya oluşturun:
+Kullandığımız `params.yaml` dosyası şu şekildedir:
 
 ```yaml title="params.yaml"
 input: "data/samplesheet.csv"
@@ -40,13 +34,16 @@ clahe_pyramid_tile: 368
 segmentation_method: "cellpose"
 ```
 
-Artık komutunuz şu hale gelir:
+Her parametre `anahtar: değer` çifti olarak yazılır.
+Tam sayıları tırnak işareti olmadan yazmak (örneğin `mindagap_tilesize: 90`), bu değerlerin tam sayı türünü korur; pipeline'ın parametre doğrulaması bunu gerektirir.
+
+Komutunuz şu hale gelir:
 
 ```bash
 nextflow run ./molkart -params-file params.yaml -resume
 ```
 
-Bu kadar! Parametre dosyası tam yapılandırmanızı belgeler ve tekrar çalıştırmayı ya da paylaşmayı kolaylaştırır.
+Parametre dosyası tam yapılandırmanızı belgeler ve tekrar çalıştırmayı ya da paylaşmayı kolaylaştırır.
 
 ### 1.3. Parametreleri geçersiz kılma
 

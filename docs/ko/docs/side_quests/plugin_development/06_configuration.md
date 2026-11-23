@@ -234,6 +234,54 @@ Nextflow가 `greeting`을 유효한 스코프로 선언한 것이 없기 때문�
 팩토리는 이제 설정에서 `greeting.enabled`를 읽고, 사용자가 `false`로 설정한 경우 빈 목록을 반환합니다.
 목록이 비어 있으면 옵저버가 생성되지 않으므로 플러그인의 라이프사이클 훅이 자동으로 건너뜁니다.
 
+5부의 팩토리 테스트는 설정이 없는 `Mock(Session)`을 전달하므로, `navigate()`가 이제 `NullPointerException`으로 실패합니다.
+`nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy`를 수정하여 mock 세션에 설정을 추가하고, 비활성화 케이스에 대한 테스트를 추가합니다:
+
+=== "후"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="4-6 8 15-25"
+        def 'should create the observer instance' () {
+            given:
+            def factory = new GreetingFactory()
+            def session = Mock(Session) {
+                getConfig() >> [greeting: [enabled: true]]
+            }
+            when:
+            def result = factory.create(session)
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+
+        def 'should return empty list when disabled' () {
+            given:
+            def factory = new GreetingFactory()
+            def session = Mock(Session) {
+                getConfig() >> [greeting: [enabled: false]]
+            }
+            when:
+            def result = factory.create(session)
+            then:
+            result.isEmpty()
+        }
+    ```
+
+=== "전"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="5"
+        def 'should create the observer instance' () {
+            given:
+            def factory = new GreetingFactory()
+            when:
+            def result = factory.create(Mock(Session))
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+    ```
+
 ### 2.1. 빌드 및 테스트
 
 플러그인을 다시 빌드하고 설치합니다:

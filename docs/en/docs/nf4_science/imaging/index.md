@@ -33,4 +33,4 @@ This course assumes some minimal familiarity with the following:
 - Experience with the command line
 - Basic familiarity with imaging file formats (TIFF images, tabular data)
 
-For technical requirements and environment setup, see the [Environment Setup](../../envsetup/) mini-course.
+For technical requirements and environment setup, see the [Environment Setup](../../envsetup/index.md) mini-course.

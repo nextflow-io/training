@@ -47,12 +47,12 @@
 1. **{MODIFICATION_STEP_SUMMARY}.**
    프로세스 명령과 출력을 업데이트하는 방법을 다룹니다.
 2. **{AGGREGATION_STEP_SUMMARY}.**
-   `collect()` 연산자{AND_OTHER_CONCEPTS}를 소개합니다.
+   `collect()` 연산자 {AND_OTHER_CONCEPTS}를 소개합니다.
 
 !!! note "참고"
 
-     올바른 작업 디렉토리에 있는지 확인하세요:
-     `cd /workspaces/training/nf4-science/{DOMAIN_DIR}`
+    올바른 작업 디렉토리에 있는지 확인하세요:
+    `cd /workspaces/training/nf4-science/{DOMAIN_DIR}`
 
 ---
 

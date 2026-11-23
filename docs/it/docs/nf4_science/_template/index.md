@@ -14,7 +14,7 @@ additional_information:
   audience_prerequisites:
     - "**Pubblico:** Questo corso è progettato per ricercatori in {DOMAIN} e campi correlati che desiderano sviluppare o personalizzare pipeline di analisi dati."
     - "**Competenze:** Si presume una certa familiarità con la riga di comando, concetti di scripting di base e formati di file comuni in {DOMAIN}."
-    - "**Prerequisiti:** Concetti fondamentali di Nextflow e strumenti trattati in [Hello Nextflow](../../hello_nextflow/)."
+    - "**Prerequisiti:** Concetti fondamentali di Nextflow e strumenti trattati in [Hello Nextflow](../../hello_nextflow/index.md)."
 ---
 
 # Nextflow per {DOMAIN}
@@ -23,7 +23,7 @@ additional_information:
 
 **Un corso pratico che applica Nextflow a un caso d'uso reale in {DOMAIN}: {METHOD_SHORT_DESCRIPTION}.**
 
-Questo corso si basa sulla formazione per principianti [Hello Nextflow](../../hello_nextflow/) e dimostra come utilizzare Nextflow nel contesto specifico del dominio {DOMAIN}.
+Questo corso si basa sulla formazione per principianti [Hello Nextflow](../../hello_nextflow/index.md) e dimostra come utilizzare Nextflow nel contesto specifico del dominio {DOMAIN}.
 Implementerete una pipeline {METHOD} con [{TOOL_A}]({TOOL_A_URL}) e [{TOOL_B}]({TOOL_B_URL}).
 
 <!-- additional_information -->

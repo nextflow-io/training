@@ -21,7 +21,7 @@ process sayHello {
  * Pipeline parameters
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 
 workflow {

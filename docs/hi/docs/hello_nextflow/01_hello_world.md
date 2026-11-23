@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=hi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -21,7 +21,7 @@ Hello Nextflow training course के इस पहले भाग में, �
 
 ---
 
-## 0. Warmup: Hello World उदाहरण को सीधे चलाएं
+## 0. वार्मअप: Hello World उदाहरण को सीधे चलाएं
 
 चलो इसे एक simple command के साथ demonstrate करते हैं जिसे हम सीधे terminal में चलाते हैं, यह दिखाने के लिए कि यह क्या करता है इससे पहले कि हम इसे Nextflow में wrap करें।
 
@@ -214,10 +214,10 @@ nextflow run hello-world.nf
 
 ??? success "कमांड आउटपुट"
 
-    ```console hl_lines="7"
-    N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="6"
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [65/7be2fa] sayHello | 1 of 1 ✔
@@ -244,7 +244,7 @@ nextflow run hello-world.nf
 प्रत्येक process call के लिए, Nextflow एक nested subdirectory बनाता है, जिसे unique बनाने के लिए hash के साथ named किया जाता है, जहाँ यह सभी आवश्यक inputs को stage करेगा (default रूप से symlinks का उपयोग करके), helper files लिखेगा, और logs और process के किसी भी outputs को लिखेगा।
 
 उस subdirectory का path console output में square brackets में truncated form में दिखाया जाता है।
-ऊपर दिखाए गए run के लिए हमें जो मिला उसे देखते हुए, sayHello process के लिए console log line `[65/7be2fa]` से शुरू होती है। यह निम्नलिखित directory path से correspond करता है: `work/65/7be2fad5e71e5f49998f795677fd68`
+ऊपर दिखाए गए run के लिए हमें जो मिला उसे देखते हुए, sayHello process के लिए console log line `[65/7be2fa]` से शुरू होती है। यह निम्नलिखित directory path से correspond करता है: `work/65/7be2fa7be2fad5e71e5f49998f795677fd68`
 
 चलो देखते हैं कि वहाँ क्या है।
 
@@ -486,17 +486,23 @@ nextflow run hello-world.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [jovial_mayer] revision: 35bd3425e5
 
     executor >  local (1)
     [9f/48ef97] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: output.txt
     ```
 
-Terminal output परिचित दिखना चाहिए। बाहरी रूप से, कुछ भी नहीं बदला है।
+Terminal output अब एक `Outputs:` summary के साथ समाप्त होता है जो published outputs और उस directory को list करता है जहाँ वे लिखे गए थे।
 
-हालाँकि, अपना file explorer check करो: इस बार, Nextflow ने `results/` नामक एक new directory बनाई है।
+अपना file explorer check करो: इस बार, Nextflow ने `results/` नामक एक new directory भी बनाई है।
 
 ??? abstract "डायरेक्टरी सामग्री"
 
@@ -574,12 +580,18 @@ nextflow run hello-world.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [8c/79499c] process > sayHello [100%] 1 of 1 ✔
+    [8c/79499c] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 इस बार result specified subdirectory के तहत लिखा जाता है।
@@ -653,12 +665,18 @@ nextflow run hello-world.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [df/521638] process > sayHello [100%] 1 of 1 ✔
+    [df/521638] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 इस बार, यदि तुम results देखो, तो file एक proper copy है बजाय सिर्फ एक symlink के।
@@ -767,19 +785,19 @@ Process block में, निम्नलिखित code change करो:
 === "बाद में"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo '${greeting}' > output.txt
-    """
+        script:
+        """
+        echo '${greeting}' > output.txt
+        """
     ```
 
 === "पहले"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo 'Hello World!' > output.txt
-    """
+        script:
+        """
+        echo 'Hello World!' > output.txt
+        """
     ```
 
 `$` symbol और curly braces (`{ }`) Nextflow को बताते हैं कि यह एक variable name है जिसे actual input value से replace किया जाना चाहिए (=interpolated)।
@@ -811,15 +829,15 @@ Workflow block में, निम्नलिखित code change करो:
 === "बाद में"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // एक अभिवादन emit करें
-    sayHello(params.input)
+        // एक अभिवादन emit करें
+        sayHello(params.input)
     ```
 
 === "पहले"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // एक अभिवादन emit करें
-    sayHello()
+        // एक अभिवादन emit करें
+        sayHello()
     ```
 
 यह Nextflow को बताता है कि `--input` parameter के माध्यम से provide की गई value पर `sayHello` process चलाएं।
@@ -837,12 +855,18 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
+    Launching `hello-world.nf` [elated_lavoisier] revision: 7c031b42ea
 
     executor >  local (1)
     [4b/654319] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 यदि तुमने ये सभी edits correctly किए, तो तुम्हें एक और successful execution मिलनी चाहिए।
@@ -865,7 +889,7 @@ Note करो कि new execution ने `results` directory में publish
     तुम Nextflow-level parameters को pipeline-level parameters से readily distinguish कर सकते हो।
 
     - Pipeline पर apply होने वाले Parameters हमेशा double hyphen (`--`) लेते हैं।
-    - Nextflow setting को modify करने वाले Parameters, _जैसे_ `-resume` feature जो हमने पहले use किया, single hyphen (`-`) लेते हैं।
+    - Nextflow setting को modify करने वाले Parameters, _जैसे_ `-o` feature जो हमने पहले mention किया, single hyphen (`-`) लेते हैं।
 
 ### 3.4. Command line parameters के लिए default values use करें
 
@@ -880,7 +904,7 @@ Note करो कि new execution ने `results` directory में publish
  * Pipeline parameters
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -890,7 +914,7 @@ Supported types में `String`, `Integer`, `Float`, `Boolean`, और `Path`
 
 !!! info "जानकारी"
 
-    पुराने workflows में, तुम देख सकते हो कि पूरा `params` block सिर्फ `input = 'Holà mundo!'` के रूप में लिखा गया है।
+    पुराने workflows में, तुम देख सकते हो कि पूरा `params` block सिर्फ `input = 'Hola mundo!'` के रूप में लिखा गया है।
 
 जैसे-जैसे तुम अपने pipeline में more parameters add करते हो, तुम्हें उन सभी को इस block में add करना चाहिए, चाहे तुम्हें उन्हें default value देने की need हो या नहीं।
 यह एक glance में सभी configurable parameters खोजना आसान बना देगा।
@@ -906,12 +930,18 @@ nextflow run hello-world.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [determined_edison] revision: 3539118582
 
     executor >  local (1)
     [72/394147] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 ??? question "यदि यह काम नहीं किया"
@@ -923,7 +953,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -936,7 +966,8 @@ nextflow run hello-world.nf
     यह course की शुरुआत में mention किया गया था, लेकिन शायद तुमने इसे miss कर दिया।
     [Nextflow versions](../info/nxf_versions.md) help material check करो।
 
-    संक्षेप में, यदि तुम Nextflow `25.10` use कर रहे हो तो तुम्हें v2 language parser enable करना होगा:
+    v2 parser Nextflow 26.04 से default है, इसलिए तुम यह केवल पुराने versions पर देखोगे।
+    26.04 से पहले के version पर तुम्हें v2 language parser enable करना होगा:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
@@ -947,7 +978,7 @@ Output पहले जैसी same place में होगा, लेकि
 ??? abstract "फ़ाइल सामग्री"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 Nextflow ने output बनाने के लिए greeting parameter की default value use की।
@@ -965,12 +996,18 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [elegant_faraday] revision: 3539118582
 
     executor >  local (1)
     [6f/a12a91] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 एक बार फिर, तुम्हें अपनी results directory में corresponding updated output मिलनी चाहिए।
@@ -1020,17 +1057,23 @@ Specifically, इस mode में, कोई भी processes जो पहल
 इसे use करने के लिए, simply अपने command में `-resume` add करो और इसे run करो:
 
 ```bash
-nextflow run hello-world.nf -resume
+nextflow run hello-world.nf --input 'Konnichiwa!' -resume
 ```
 
 ??? success "कमांड आउटपुट"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [golden_cantor] revision: 35bd3425e5
 
     [62/49a1f8] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Console output परिचित दिखना चाहिए, लेकिन एक चीज़ है जो पहले की तुलना में थोड़ी different है।
@@ -1095,7 +1138,7 @@ Development process के दौरान, तुम typically अपनी dra
 
 #### 4.3.1. Deletion criteria determine करें
 
-यह determine करने के लिए कई [options](https://nextflow.io/docs/latest/reference/cli.html#clean) हैं कि क्या delete करना है।
+यह determine करने के लिए कई [options](https://www.nextflow.io/docs/latest/reference/cli.html#clean) हैं कि क्या delete करना है।
 
 यहाँ हम तुम्हें एक example दिखाते हैं जो given run से पहले के runs की सभी subdirectories delete करता है, इसके run name का उपयोग करके specified।
 
@@ -1169,7 +1212,7 @@ Nextflow process के minimum required components क्या हैं?
 - [ ] Input, output, और script blocks
 - [ ] केवल एक script block
 
-और जानें: [1.1.1. `process` definition](#111-process-definition)
+और जानें: [1.1.1. `process` definition](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1179,7 +1222,7 @@ Process में output block का purpose क्या है?
 - [x] Process से expected outputs declare करना
 - [ ] Environment variables define करना
 
-और जानें: [1.1.1. `process` definition](#111-process-definition)
+और जानें: [1.1.1. `process` definition](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1210,7 +1253,7 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-और जानें: [1.2.2. `work` directory में output और logs खोजें](#122-work-directory-में-output-और-logs-खोजें)
+और जानें: [1.2.2. `work` directory में output और logs खोजें](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -1220,7 +1263,7 @@ work/a3/7be2fa.../
 - [x] उन processes को skip करता है जो पहले से successfully complete हो चुके हैं
 - [ ] Workflow का backup बनाता है
 
-और जानें: [4.1. `-resume` के साथ workflow re-launch करें](#41--resume-के-साथ-workflow-re-launch-करें)
+और जानें: [4.1. `-resume` के साथ workflow re-launch करें](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -1230,7 +1273,7 @@ Workflow outputs publish करने के लिए default mode क्या
 - [ ] Files को output directory में move करना
 - [ ] Output directory में files compress करना
 
-और जानें: [2.3. Publish mode को copy पर सेट करें](#23-publish-mode-को-copy-पर-सेट-करें)
+और जानें: [2.3. Publish mode को copy पर सेट करें](#23-set-the-publish-mode-to-copy)
 </quiz>
 
 <quiz>
@@ -1240,7 +1283,7 @@ Command line से Nextflow workflow को parameter value कैसे pass �
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-और जानें: [3.2. User input capture करने के लिए command-line parameter set up करें](#32-user-input-capture-करने-के-लिए-command-line-parameter-set-up-करें)
+और जानें: [3.2. User input capture करने के लिए command-line parameter set up करें](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 
 <quiz>

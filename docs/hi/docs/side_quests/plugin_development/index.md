@@ -21,11 +21,17 @@ Parts 2-6 में अपना खुद का plugin बनाना शा�
 
 **Prerequisites**
 
-- एक GitHub account या [यहाँ](../../envsetup/02_local) बताए अनुसार लोकल इंस्टॉलेशन।
+- एक GitHub account या [यहाँ](../../envsetup/02_local.md) बताए अनुसार लोकल इंस्टॉलेशन।
 - [Hello Nextflow](../../hello_nextflow/index.md) कोर्स पूरा किया हो या समकक्ष अनुभव हो।
 - Java 21 या उससे नया संस्करण (प्रशिक्षण वातावरण में शामिल है; केवल Parts 2-6 के लिए आवश्यक है)।
 
 **Working directory:** `side-quests/plugin_development`
+
+#### Training codespace खोलें
+
+अगर तुमने अभी तक ऐसा नहीं किया है, तो [Environment Setup](../../envsetup/index.md) में बताए अनुसार training environment ज़रूर खोलो।
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 ## Learning objectives
 

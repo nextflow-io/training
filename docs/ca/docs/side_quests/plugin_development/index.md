@@ -21,11 +21,17 @@ No cal experiència prèvia amb Java ni Groovy.
 
 **Prerequisits**
 
-- Un compte de GitHub O una instal·lació local tal com es descriu [aquí](../../envsetup/02_local).
+- Un compte de GitHub O una instal·lació local tal com es descriu [aquí](../../envsetup/02_local.md).
 - Haver completat el curs [Hello Nextflow](../../hello_nextflow/index.md) o equivalent.
 - Java 21 o posterior (inclòs a l'entorn de formació; només necessari per a les Parts 2-6).
 
 **Directori de treball:** `side-quests/plugin_development`
+
+#### Obriu l'espai de codi de formació
+
+Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../../envsetup/index.md).
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 ## Objectius d'aprenentatge
 

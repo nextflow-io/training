@@ -49,8 +49,8 @@ We've broken this down into two steps:
 
 !!! note
 
-     Make sure you're in the correct working directory:
-     `cd /workspaces/training/nf4-science/{DOMAIN_DIR}`
+    Make sure you're in the correct working directory:
+    `cd /workspaces/training/nf4-science/{DOMAIN_DIR}`
 
 ---
 

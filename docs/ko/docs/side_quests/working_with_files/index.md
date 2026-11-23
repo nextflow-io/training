@@ -27,10 +27,8 @@ Nextflow는 파일을 효율적으로 처리할 수 있는 강력한 도구를 �
 
 이 사이드 퀘스트를 시작하기 전에 다음을 완료해야 합니다:
 
-- [Hello Nextflow](../../hello_nextflow/) 튜토리얼 또는 동급의 입문 과정 완료
+- [Hello Nextflow](../../hello_nextflow/index.md) 튜토리얼 또는 동급의 입문 과정 완료
 - 기본적인 Nextflow 개념과 메커니즘(프로세스, 채널, 연산자)에 익숙할 것
-
-<!-- I removed the suggestion to do the metamaps SQ first because that works more naturally after -->
 
 ---
 
@@ -38,7 +36,7 @@ Nextflow는 파일을 효율적으로 처리할 수 있는 강력한 도구를 �
 
 #### 교육 코드스페이스 열기
 
-아직 열지 않았다면, [환경 설정](../envsetup/index.md)에 설명된 대로 교육 환경을 열어 주세요.
+아직 열지 않았다면, [환경 설정](../../envsetup/index.md)에 설명된 대로 교육 환경을 열어 주세요.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -55,6 +53,8 @@ VSCode에서 이 디렉토리를 포커스로 설정할 수 있습니다:
 ```bash
 code .
 ```
+
+편집기가 프로젝트 디렉토리를 포커스로 열립니다.
 
 #### 자료 검토
 
@@ -131,11 +131,19 @@ _이 실험 설계에 익숙하지 않더라도 이 튜토리얼을 이해하는
 #!/usr/bin/env nextflow
 
 workflow {
-
+    main:
     // 문자열 경로에서 Path 객체 생성
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
     println "${myFile} is of class ${myFile.class}"
+
+    publish:
+    analysis_results = channel.empty()
+}
+
+output {
+    analysis_results {
+    }
 }
 ```
 
@@ -155,11 +163,17 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
+    Launching `main.nf` [happy_goodall] revision: 464aa64101
 
-    data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String
+    data/patientA_rep1_normal_R1_001.fastq.gz is of class class java.lang.String
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 보시다시피, Nextflow는 우리가 작성한 그대로 문자열 경로를 출력했습니다.
@@ -203,11 +217,17 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
+    Launching `main.nf` [jolly_fermi] revision: 8efdfe2c7c
 
     /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 이번에는 입력으로 제공한 상대 경로 대신 전체 절대 경로가 표시됩니다.
@@ -226,6 +246,8 @@ Path 객체의 클래스가 `sun.nio.fs.UnixPath`임을 확인할 수 있습니�
     - **Path 객체**: Nextflow가 작업할 수 있는 스마트한 파일 참조
 
     이렇게 생각해 보세요: 경로 문자열은 종이에 주소를 적는 것과 같고, Path 객체는 GPS 장치에 주소를 입력하여 경로를 안내받고 여정에 대한 세부 정보를 알 수 있는 것과 같습니다.
+
+Nextflow에서 파일 작업을 올바르게 사용하려면 이 차이를 이해하는 것이 중요합니다.
 
 ### 1.3. 파일 속성 접근
 
@@ -265,15 +287,21 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
+    Launching `main.nf` [mad_leavitt] revision: 33fa67b5f9
 
-    File object class: sun.nio.fs.UnixPath
+    File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
     Extension: gz
     Parent directory: /workspaces/training/side-quests/working_with_files/data
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 위에서 다양한 파일 속성이 콘솔에 출력된 것을 확인할 수 있습니다.
@@ -310,8 +338,6 @@ nextflow run main.nf
 모듈 파일을 열어 코드를 검토할 수 있습니다:
 
 ```groovy title="modules/count_lines.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 process COUNT_LINES {
     debug true
 
@@ -334,7 +360,9 @@ process COUNT_LINES {
     프로세스 정의의 `debug true` 지시문은 Nextflow가 스크립트의 출력(예: 줄 수 "40")을 실행 로그에 직접 출력하도록 합니다.
     이 지시문이 없으면 프로세스 실행 상태만 볼 수 있고 스크립트의 실제 출력은 볼 수 없습니다.
 
-    Nextflow 프로세스 디버깅에 대한 자세한 내용은 [Nextflow 워크플로우 디버깅](debugging.md) 사이드 퀘스트를 참조하세요.
+    Nextflow 프로세스 디버깅에 대한 자세한 내용은 [Nextflow 워크플로우 디버깅](../debugging/index.md) 사이드 퀘스트를 참조하세요.
+
+모듈을 가져오고 코드를 검토했으므로, 이제 워크플로우에서 프로세스를 실행할 수 있습니다.
 
 #### 1.4.2. `COUNT_LINES` 실행 추가
 
@@ -382,9 +410,9 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [cheeky_hypatia] DSL2 - revision: 281d13c414
+    Launching `main.nf` [peaceful_plateau] revision: 91b633f022
 
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
@@ -392,9 +420,15 @@ nextflow run main.nf
     Extension: gz
     Parent directory: /workspaces/training/side-quests/working_with_files/data
     executor >  local (1)
-    [e9/341c05] COUNT_LINES [100%] 1 of 1 ✔
-    Processing file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+    [25/7946de] COUNT_LINES | 1 of 1 ✔
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 프로세스 내에서 파일을 적절히 처리할 수 있음을 보여줍니다.
@@ -465,10 +499,11 @@ nextflow run main.nf
 ??? failure "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [friendly_goodall] DSL2 - revision: ae50609b20
+    Launching `main.nf` [high_meninsky] revision: 74cc0a3ffc
 
+    File object class: class java.lang.String
     [-        ] COUNT_LINES -
     ERROR ~ Error executing process > 'COUNT_LINES'
 
@@ -479,7 +514,7 @@ nextflow run main.nf
 
     Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 중요한 부분은 다음입니다:
@@ -506,7 +541,7 @@ Nextflow는 즉시 문제를 감지하고 프로세스를 시작하기 전에 �
 
 === "후"
 
-    ```groovy title="modules/count_lines.nf" linenums="3" hl_lines="5"
+    ```groovy title="modules/count_lines.nf" linenums="1" hl_lines="5"
     process COUNT_LINES {
         debug true
 
@@ -516,7 +551,7 @@ Nextflow는 즉시 문제를 감지하고 프로세스를 시작하기 전에 �
 
 === "전"
 
-    ```groovy title="modules/count_lines.nf" linenums="3" hl_lines="5"
+    ```groovy title="modules/count_lines.nf" linenums="1" hl_lines="5"
     process COUNT_LINES {
         debug true
 
@@ -533,12 +568,13 @@ nextflow run main.nf
 ??? failure "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [soggy_golick] DSL2 - revision: ae50609b20
+    Launching `main.nf` [berserk_wing] revision: 74cc0a3ffc
 
+    File object class: class java.lang.String
     executor >  local (1)
-    [b3/b3023c] COUNT_LINES [  0%] 0 of 1 ✘
+    [62/3b29eb] COUNT_LINES | 0 of 1 ✘
     ERROR ~ Error executing process > 'COUNT_LINES'
 
     Caused by:
@@ -564,11 +600,11 @@ nextflow run main.nf
       0
 
     Work dir:
-      /workspaces/training/side-quests/working_with_files/work/b3/b3023cb2ccb986851301d8e369e79f
+      /workspaces/training/side-quests/working_with_files/work/62/3b29ebab00b110d9dcccb061bfce50
 
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 위에서 언급한 것처럼 프로세스가 디버깅 정보를 출력하도록 설정되어 있어 오류에 대한 많은 세부 정보가 표시됩니다.
@@ -600,6 +636,8 @@ Command error:
 !!! note "참고"
 
     다음 섹션으로 진행하기 전에 두 가지 의도적인 오류를 모두 수정하세요.
+
+두 가지 수정 사항을 모두 적용하면 워크플로우가 입력 파일을 올바르게 스테이징하고 처리합니다.
 
 ### 핵심 정리
 
@@ -680,9 +718,9 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+    Launching `main.nf` [admiring_bhaskara] revision: 8804122967
 
     File object class: class nextflow.file.http.XPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
@@ -690,9 +728,15 @@ nextflow run main.nf
     Extension: gz
     Parent directory: /nextflow-io/training/master/side-quests/working_with_files/data
     executor >  local (1)
-    [8a/2ab7ca] COUNT_LINES [100%] 1 of 1 ✔
+    [07/246c2a] COUNT_LINES | 1 of 1 ✔
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 작동합니다! 거의 변경된 것이 없음을 확인할 수 있습니다.
@@ -707,10 +751,10 @@ nextflow run main.nf
 
 ??? abstract "작업 디렉토리 내용"
 
-    프로세스 해시가 `8a/2ab7ca`인 경우 work directory를 탐색할 수 있습니다:
+    프로세스 해시가 `07/246c2a`인 경우 work directory를 탐색할 수 있습니다:
 
     ```console
-    $ ls -la work/8a/2ab7ca*/
+    $ ls -la work/07/246c2a*/
     total 16
     drwxr-xr-x  6 user  staff   192 Jan 28 10:00 .
     drwxr-xr-x  3 user  staff    96 Jan 28 10:00 ..
@@ -779,6 +823,8 @@ nextflow run main.nf
         println "Parent directory: ${myFile.parent}"
     ```
 
+워크플로우가 이제 로컬 입력 파일을 사용하도록 돌아왔습니다.
+
 ### 핵심 정리
 
 - 원격 데이터는 URI(HTTP, FTP, S3, Azure, Google Cloud)를 사용하여 접근합니다
@@ -799,15 +845,10 @@ nextflow run main.nf
 
 ```groovy title="Syntax example"
 ch_files = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')],
-                      [file('data/patientA_rep1_normal_R1_001.fastq.gz')])
+                      [file('data/patientA_rep1_normal_R2_001.fastq.gz')])
 ```
 
 작동하기는 하지만 번거롭습니다.
-
-!!! tip "`file()` vs `channel.fromPath()` 사용 시기"
-
-    - 단일 Path 객체가 필요한 경우(파일 존재 여부 확인, 속성 읽기, 단일 프로세스 실행에 전달)에는 `file()`을 사용하세요
-    - 여러 파일을 담을 수 있는 채널이 필요한 경우, 특히 glob 패턴을 사용하거나 파일이 여러 프로세스를 통해 흐를 때는 `channel.fromPath()`를 사용하세요
 
 여기서 [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath)가 등장합니다. 하나 이상의 정적 파일 문자열과 glob 패턴에서 채널을 생성하는 데 필요한 모든 기능을 번들로 제공하는 편리한 채널 팩토리입니다.
 
@@ -863,17 +904,28 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [grave_meucci] DSL2 - revision: b09964a583
+    Launching `main.nf` [focused_hawking] revision: 1e7d8bf645
 
     Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 보시다시피, 파일 경로가 채널에서 `Path` 유형 객체로 로드되고 있습니다.
 이것은 `file()`이 했을 것과 유사하지만, 이제 원하는 경우 더 많은 파일을 로드할 수 있는 채널이 생겼습니다.
 
 `channel.fromPath()`는 파일 목록으로 채워진 새 채널을 생성하는 편리한 방법입니다.
+
+!!! tip "`file()` vs `channel.fromPath()` 사용 시기"
+
+    - 단일 Path 객체가 필요한 경우(파일 존재 여부 확인, 속성 읽기, 단일 프로세스 실행에 전달)에는 `file()`을 사용하세요
+    - 여러 파일을 담을 수 있는 채널이 필요한 경우, 특히 glob 패턴을 사용하거나 파일이 여러 프로세스를 통해 흐를 때는 `channel.fromPath()`를 사용하세요
 
 ### 3.2. 채널의 파일 속성 보기
 
@@ -920,19 +972,25 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [furious_swanson] DSL2 - revision: c35c34950d
+    Launching `main.nf` [intergalactic_snyder] revision: dcc1cc023d
 
     executor >  local (1)
-    [9d/6701a6] COUNT_LINES (1) [100%] 1 of 1 ✔
-    File object class: sun.nio.fs.UnixPath
+    [d4/1f7691] COUNT_LINES (1) | 1 of 1 ✔
+    File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
     Extension: gz
     Parent directory: /workspaces/training/side-quests/working_with_files/data
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 이전과 동일한 결과이지만, 이제 파일이 채널에 있으므로 더 많은 파일을 추가할 수 있습니다.
@@ -989,12 +1047,12 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
+    Launching `main.nf` [golden_euclid] revision: c4e05e506e
 
     executor >  local (2)
-    [3c/a65de5] COUNT_LINES (2) [100%] 2 of 2 ✔
+    [f8/07d274] COUNT_LINES (2) | 2 of 2 ✔
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
@@ -1010,6 +1068,12 @@ nextflow run main.nf
 
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 보시다시피, 이제 채널에 두 개의 Path 객체가 있습니다. Nextflow가 파일 이름 확장을 올바르게 수행하고 두 파일을 모두 로드하고 처리했음을 보여줍니다.
@@ -1094,19 +1158,25 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [suspicious_mahavira] DSL2 - revision: ae8edc4e48
+    Launching `main.nf` [clever_fermi] revision: a6f82347c3
 
     executor >  local (2)
-    [e9/55774b] COUNT_LINES (2) [100%] 2 of 2 ✔
-    [patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [7e/3ff80a] COUNT_LINES (1) | 2 of 2 ✔
     [patientA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    Processing file: patientA_rep1_normal_R2_001.fastq.gz
+    40
+
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
 
-    Processing file: patientA_rep1_normal_R2_001.fastq.gz
-    40
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 채널의 각 요소는 이제 `simpleName`과 원래 파일 객체를 포함하는 튜플입니다.
@@ -1150,19 +1220,25 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
+    Launching `main.nf` [furious_mccarthy] revision: 3d5d5ba03e
 
     executor >  local (2)
-    [e7/da2f4b] COUNT_LINES (2) [100%] 2 of 2 ✔
-    [[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [04/e6268e] COUNT_LINES (2) | 2 of 2 ✔
     [[patientA, rep1, normal, R1, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
 
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 이제 채널의 각 요소에 대한 튜플에는 메타데이터 목록(_예:_ `[patientA, rep1, normal, R1, 001]`)과 원래 파일 객체가 포함됩니다.
@@ -1251,19 +1327,25 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
+    Launching `main.nf` [friendly_gauss] revision: 1f50ccaf76
 
     executor >  local (2)
-    [1b/e7fb27] COUNT_LINES (1) [100%] 2 of 2 ✔
-    [[id:patientA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [13/376824] COUNT_LINES (2) | 2 of 2 ✔
     [[id:patientA, replicate:1, type:normal, readNum:1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [[id:patientA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
 
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 이제 메타데이터가 명확하게 레이블링되어(_예:_ `[id:patientA, replicate:1, type:normal, readNum:2]`) 무엇이 무엇인지 훨씬 쉽게 알 수 있습니다.
@@ -1323,10 +1405,10 @@ data/patientA_rep1_normal_R{1,2}_001.fastq.gz
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         /* 지금은 매핑을 주석 처리합니다. 나중에 다시 살펴볼 것입니다!
         ch_files.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type,
                     readNum: readNum,
@@ -1341,13 +1423,13 @@ data/patientA_rep1_normal_R{1,2}_001.fastq.gz
 === "전"
 
     ```groovy title="main.nf" linenums="7" hl_lines="1-2"
-        // channel.fromFilePairs로 파일 로드
+        // channel.fromPath로 파일 로드
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type,
                     readNum: readNum,
@@ -1369,12 +1451,11 @@ nextflow run main.nf
 
 ??? failure "명령 출력"
 
-    ```console hl_lines="7-8"
-     N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="6-7"
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [angry_koch] DSL2 - revision: 44fdf66105
+    Launching `main.nf` [distraught_bernard] revision: 4ad8fb92de
 
-    [-        ] COUNT_LINES -
     [-        ] COUNT_LINES -
     [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
     ERROR ~ Error executing process > 'COUNT_LINES (1)'
@@ -1384,9 +1465,9 @@ nextflow run main.nf
 
 
 
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 이런, 이번에는 실행이 실패했습니다!
@@ -1437,11 +1518,17 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console hl_lines="5"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [fabulous_davinci] DSL2 - revision: 22b53268dc
+    Launching `main.nf` [furious_mcclintock] revision: a243ca25cb
 
     [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 이번에는 워크플로우가 성공했습니다!
@@ -1462,10 +1549,10 @@ nextflow run main.nf
         // channel.fromFilePairs로 파일 로드
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id, files ->
-            def (sample, replicate, type) = id.tokenize('_')
+            def (patient, replicate, type) = id.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type
                 ],
@@ -1482,10 +1569,10 @@ nextflow run main.nf
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         /* 지금은 매핑을 주석 처리합니다. 나중에 다시 살펴볼 것입니다!
         ch_files.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type,
                     readNum: readNum,
@@ -1512,11 +1599,17 @@ nextflow run main.nf
 
     ```console
 
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
+    Launching `main.nf` [stoic_ramanujan] revision: 90004d32f8
 
     [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 결과가 나왔습니다: 출력 튜플의 첫 번째 위치에 메타데이터 map(`[id:patientA, replicate:1, type:normal]`)이 있고, 그 뒤에 의도한 대로 페어드 파일의 튜플이 있습니다.
@@ -1527,7 +1620,7 @@ nextflow run main.nf
 
 ### 핵심 정리
 
-- [`channel.fromFilePairs()`는 관련 파일을 자동으로 찾아 쌍으로 묶습니다](https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs)
+- [`channel.fromFilePairs()` 는 관련 파일을 자동으로 찾아 쌍으로 묶습니다](https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs)
 - 이를 통해 파이프라인에서 페어드 엔드 리드 처리가 단순화됩니다
 - 페어드 파일은 `[id, [file1, file2]]` 튜플로 그룹화할 수 있습니다
 - 메타데이터 추출은 개별 파일이 아닌 페어드 파일 ID에서 수행할 수 있습니다
@@ -1570,18 +1663,14 @@ nextflow run main.nf
 모듈 파일을 열어 코드를 검토할 수 있습니다:
 
 ```groovy title="modules/analyze_reads.nf - process example" linenums="1"
-#!/usr/bin/env nextflow
-
 process ANALYZE_READS {
     tag { meta.id }
-
-    publishDir { "results/${meta.id}" }, mode: 'copy'
 
     input:
     tuple val(meta), path(files)
 
     output:
-    tuple val(meta.id), path("${meta.id}_stats.txt")
+    tuple val(meta), path("${meta.id}_stats.txt")
 
     script:
     """
@@ -1598,14 +1687,15 @@ process ANALYZE_READS {
 
 !!! note "참고"
 
-    `tag`와 `publishDir` 지시문은 문자열 보간(`"${...}"`) 대신 closure 문법(`{ ... }`)을 사용합니다.
-    이는 이러한 지시문이 런타임까지 사용할 수 없는 입력 변수(`meta`)를 참조하기 때문입니다.
-    closure 문법은 프로세스가 실제로 실행될 때까지 평가를 지연시킵니다.
+    `tag` 지시문은 프로세스가 실행될 때까지 사용할 수 없는 입력 변수(`meta`)를 참조하기 때문에 closure 문법(`{ ... }`)을 사용합니다.
+    closure는 런타임까지 평가를 지연시킵니다.
 
 !!! note "참고"
 
     관례에 따라 메타데이터 map을 `meta`라고 부릅니다.
-    meta map에 대한 자세한 내용은 [메타데이터와 meta map](../metadata/) 사이드 퀘스트를 참조하세요.
+    meta map에 대한 자세한 내용은 [메타데이터와 meta map](../metadata/index.md) 사이드 퀘스트를 참조하세요.
+
+`ANALYZE_READS` 프로세스를 가져오고 코드를 검토했으므로, 이제 워크플로우에서 프로세스를 실행하는 호출을 추가할 수 있습니다.
 
 ### 6.2. 워크플로우에서 프로세스 실행
 
@@ -1623,7 +1713,7 @@ process ANALYZE_READS {
 
 [`set`](https://www.nextflow.io/docs/latest/reference/operator.html#set) 연산자를 사용하여 이를 수행할 수 있습니다.
 
-메인 워크플로우에서 `.view()` 연산자를 `.set { ch_samples }`로 교체하고, 이름으로 채널을 참조할 수 있는지 테스트하는 줄을 추가합니다.
+메인 워크플로우에서 `.view()` 연산자를 `#!groovy .set { ch_samples }`로 교체하고, 이름으로 채널을 참조할 수 있는지 테스트하는 줄을 추가합니다.
 
 === "후"
 
@@ -1631,10 +1721,10 @@ process ANALYZE_READS {
         // channel.fromFilePairs로 파일 로드
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (patient, replicate, type) = id.tokenize('_')
            [
                [
-                   id: sample,
+                   id: patient,
                    replicate: replicate.replace('rep', ''),
                    type: type
                ],
@@ -1653,10 +1743,10 @@ process ANALYZE_READS {
         // channel.fromFilePairs로 파일 로드
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (patient, replicate, type) = id.tokenize('_')
            [
                [
-                   id: sample,
+                   id: patient,
                    replicate: replicate.replace('rep', ''),
                    type: type
                ],
@@ -1664,7 +1754,6 @@ process ANALYZE_READS {
            ]
         }
         .view()
-    }
     ```
 
 실행합니다:
@@ -1676,11 +1765,17 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [goofy_kirch] DSL2 - revision: 3313283e42
+    Launching `main.nf` [deadly_sax] revision: cec43c6067
 
     [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 이제 이름으로 채널을 참조할 수 있음을 확인했습니다.
@@ -1691,19 +1786,79 @@ nextflow run main.nf
 
 메인 워크플로우에서 다음과 같이 코드를 변경합니다:
 
+1. 채널 설정 리팩토링: `ch_files.map {}`을 `ch_samples = ch_files.map {}`으로 변경(`.set` 연산자를 제거하고 직접 할당)하고 `[]` 대신 `tuple()`을 사용합니다
+2. `.view()` 호출을 `ANALYZE_READS(ch_samples)` 호출로 교체합니다
+3. `publish:` 섹션에서 `channel.empty()`를 `ANALYZE_READS.out`으로 교체합니다
+4. `output {}` 블록에 `path` closure를 추가합니다
+
 === "후"
 
-    ```groovy title="main.nf" linenums="23"
+    ```groovy title="main.nf" linenums="5" hl_lines="5 7 14 17 18 21 26"
+    workflow {
+        main:
+        // channel.fromFilePairs로 파일 로드
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_samples = ch_files.map { id,  files ->
+           def (patient, replicate, type) = id.tokenize('_')
+           tuple(
+               [
+                   id: patient,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           )
+        }
+
         // 분석 실행
         ANALYZE_READS(ch_samples)
+
+        publish:
+        analysis_results = ANALYZE_READS.out
+    }
+
+    output {
+        analysis_results {
+            path { meta, file -> "${meta.id}" }
+        }
+    }
     ```
 
 === "전"
 
-    ```groovy title="main.nf" linenums="23"
+    ```groovy title="main.nf" linenums="5"
+    workflow {
+        main:
+        // channel.fromFilePairs로 파일 로드
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_files.map { id,  files ->
+           def (patient, replicate, type) = id.tokenize('_')
+           [
+               [
+                   id: patient,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           ]
+        }
+            .set { ch_samples }
+
         // 임시: ch_samples 내용 확인
         ch_samples.view()
+
+        publish:
+        analysis_results = channel.empty()
+    }
+
+    output {
+        analysis_results {
+        }
+    }
     ```
+
+`output {}` 블록의 `path` closure는 각 출력 요소를 받아 하위 디렉토리 구조를 결정합니다.
+여기서는 `meta.id`를 사용하여 환자별로 결과를 구성합니다.
 
 실행합니다:
 
@@ -1714,15 +1869,22 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [shrivelled_cori] DSL2 - revision: b546a31769
+    Launching `main.nf` [shrivelled_mahavira] revision: 899bbde2fb
 
     executor >  local (1)
-    [b5/110360] process > ANALYZE_READS (patientA) [100%] 1 of 1 ✔
+    [7b/bd6568] ANALYZE_READS (patientA) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
+        - [{id: patientA, replicate: '1', type: normal}, patientA/patientA_stats.txt]
     ```
 
-이 프로세스는 출력을 `results` 디렉토리에 게시하도록 설정되어 있으므로 확인해 봅니다.
+출력이 `results` 디렉토리에 게시되므로 확인해 봅니다.
 
 ??? abstract "디렉토리 및 파일 내용"
 
@@ -1779,12 +1941,26 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [big_stonebraker] DSL2 - revision: f7f9b8a76c
+    Launching `main.nf` [deadly_kalam] revision: fb40b3e08e
 
     executor >  local (8)
-    [d5/441891] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
+    [19/6c1e76] ANALYZE_READS (patientA) | 8 of 8 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
+        - [{id: patientB, replicate: '1', type: tumor}, patientB/patientB_stats.txt]
+        - [{id: patientA, replicate: '2', type: tumor}, patientA/patientA_stats.txt]
+        - [{id: patientC, replicate: '1', type: normal}, patientC/patientC_stats.txt]
+        - [{id: patientB, replicate: '1', type: normal}, patientB/patientB_stats.txt]
+        - [{id: patientA, replicate: '1', type: normal}, patientA/patientA_stats.txt]
+        - [{id: patientA, replicate: '1', type: tumor}, patientA/patientA_stats.txt]
+        - [{id: patientA, replicate: '2', type: normal}, patientA/patientA_stats.txt]
+        - [{id: patientC, replicate: '1', type: tumor}, patientC/patientC_stats.txt]
     ```
 
 이제 results 디렉토리에 사용 가능한 모든 데이터에 대한 결과가 포함되어야 합니다.
@@ -1811,18 +1987,22 @@ nextflow run main.nf
 
 환자 메타데이터에 접근할 수 있으므로, 디렉토리 구조나 파일 이름 자체에 차별화 메타데이터를 포함하여 게시된 파일을 고유하게 만들 수 있습니다.
 
-워크플로우를 다음과 같이 변경합니다:
+`output {}` 블록을 다음과 같이 변경합니다:
 
 === "후"
 
-    ```groovy title="modules/analyze_reads.nf" linenums="6"
-        publishDir { "results/${meta.type}/${meta.id}/${meta.replicate}" }, mode: 'copy'
+    ```groovy title="main.nf" hl_lines="2"
+    analysis_results {
+        path { meta, file -> "${meta.type}/${meta.id}/${meta.replicate}" }
+    }
     ```
 
 === "전"
 
-    ```groovy title="modules/analyze_reads.nf" linenums="6"
-        publishDir { "results/${meta.id}" }, mode: 'copy'
+    ```groovy title="main.nf" hl_lines="2"
+    analysis_results {
+        path { meta, file -> "${meta.id}" }
+    }
     ```
 
 여기서는 샘플 유형과 리플리케이트를 처리하기 위해 추가 디렉토리 수준을 사용하는 옵션을 보여주지만, 파일 이름 수준에서도 실험해 볼 수 있습니다.
@@ -1837,12 +2017,26 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+    Launching `main.nf` [nasty_hirsch] revision: c2c7aae0f7
 
     executor >  local (8)
-    [e3/449081] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
+    [09/9f239c] ANALYZE_READS (patientB) | 8 of 8 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
+        - [{id: patientB, replicate: '1', type: normal}, normal/patientB/1/patientB_stats.txt]
+        - [{id: patientB, replicate: '1', type: tumor}, tumor/patientB/1/patientB_stats.txt]
+        - [{id: patientC, replicate: '1', type: normal}, normal/patientC/1/patientC_stats.txt]
+        - [{id: patientA, replicate: '1', type: tumor}, tumor/patientA/1/patientA_stats.txt]
+        - [{id: patientA, replicate: '1', type: normal}, normal/patientA/1/patientA_stats.txt]
+        - [{id: patientA, replicate: '2', type: normal}, normal/patientA/2/patientA_stats.txt]
+        - [{id: patientC, replicate: '1', type: tumor}, tumor/patientC/1/patientC_stats.txt]
+        - [{id: patientA, replicate: '2', type: tumor}, tumor/patientA/2/patientA_stats.txt]
     ```
 
 이제 results 디렉토리를 확인합니다:
@@ -1886,11 +2080,11 @@ nextflow run main.nf
 3. 메타데이터 값을 기반으로 데이터 분리, 결합 및 재결합
 
 메타데이터를 명시적으로 유지하고 데이터에 첨부하는 이 패턴(파일 이름에 인코딩하는 대신)은 견고하고 유지 관리 가능한 분석 워크플로우를 구축할 수 있게 하는 Nextflow의 핵심 모범 사례입니다.
-이에 대한 자세한 내용은 [메타데이터와 meta map](../metadata/) 사이드 퀘스트에서 확인할 수 있습니다.
+이에 대한 자세한 내용은 [메타데이터와 meta map](../metadata/index.md) 사이드 퀘스트에서 확인할 수 있습니다.
 
 ### 핵심 정리
 
-- `publishDir` 지시문은 메타데이터 값을 기반으로 출력을 구성할 수 있습니다
+- `output {}` 블록은 동적 path closure를 사용하여 메타데이터 값을 기반으로 출력을 구성할 수 있습니다
 - 튜플의 메타데이터는 결과의 구조화된 구성을 가능하게 합니다
 - 이 접근 방식은 명확한 데이터 출처를 가진 유지 관리 가능한 워크플로우를 생성합니다
 - 프로세스는 메타데이터와 파일의 튜플을 입력으로 받을 수 있습니다
@@ -1915,7 +2109,7 @@ nextflow run main.nf
     myFile = file('path/to/file.txt')
     ```
 
-    - 파일 속성 가져오기
+    -파일 속성 가져오기
 
     ```groovy
     println myFile.name       // file.txt
@@ -1995,27 +2189,26 @@ nextflow run main.nf
 5.  **channel.fromFilePairs로 단순화:** `channel.fromFilePairs()`를 사용하여 관련 파일을 자동으로 쌍으로 묶고 페어드 파일 ID에서 메타데이터를 추출했습니다.
 
     ```groovy
-    ch_pairs = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
+    ch_files = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
     ```
 
-6.  **프로세스에서 파일 작업 사용:** 적절한 입력 처리를 통해 파일 작업을 Nextflow 프로세스에 통합하고, `publishDir`을 사용하여 메타데이터를 기반으로 출력을 구성했습니다.
+6.  **프로세스에서 파일 작업 사용:** 적절한 입력 처리를 통해 파일 작업을 Nextflow 프로세스에 통합하고, `output {}` 블록을 사용하여 메타데이터를 기반으로 출력을 구성했습니다.
 
     - 프로세스 입력에 meta map 연결
 
     ```groovy
     ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-    ch_files.map { id,  files ->
-        def (sample, replicate, type, readNum) = id.tokenize('_')
-        [
+    ch_samples = ch_files.map { id,  files ->
+        def (patient, replicate, type) = id.tokenize('_')
+        tuple(
             [
-                id: sample,
+                id: patient,
                 replicate: replicate.replace('rep', ''),
                 type: type
             ],
-             files
-        ]
+            files
+        )
     }
-        .set { ch_samples }
 
     ANALYZE_READS(ch_samples)
     ```
@@ -2023,7 +2216,11 @@ nextflow run main.nf
     - 메타데이터를 기반으로 출력 구성
 
     ```groovy
-    publishDir { "results/${meta.type}/${meta.id}/${meta.replicate}" }, mode: 'copy'
+    output {
+        analysis_results {
+            path { meta, file -> "${meta.type}/${meta.id}/${meta.replicate}" }
+        }
+    }
     ```
 
 ### 추가 자료
@@ -2036,4 +2233,4 @@ nextflow run main.nf
 
 ## 다음 단계
 
-[사이드 퀘스트 메뉴](../)로 돌아가거나 페이지 오른쪽 하단의 버튼을 클릭하여 목록의 다음 주제로 이동하세요.
+[사이드 퀘스트 메뉴](../index.md)로 돌아가거나 페이지 오른쪽 하단의 버튼을 클릭하여 목록의 다음 주제로 이동하세요.

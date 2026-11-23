@@ -238,41 +238,41 @@ Dość złożona logika z bardzo małą składnią tutaj. I możesz mieć nadzie
 
 ## 3.4. Użyj wartości domyślnych dla parametrów wiersza poleceń
 
-Dobra, to świetne. Problem jednak teraz jest taki, że za każdym razem, gdy uruchamiam ten pipeline, muszę zrobić dash, input, żeby się uruchomił.
+Dobra, to świetne. Problem jednak teraz jest taki, że za każdym razem, gdy uruchamiam ten pipeline, muszę podać parametr `--input`, żeby się uruchomił.
 
-Jeśli spróbuję uruchomić bez tego parametru, teraz Nextflow wyrzuci błąd mówiący, że potrzebował tego parametru i nie został ustawiony. i więc nie wiedział, co zrobić.
+Jeśli spróbuję uruchomić bez tego parametru, Nextflow wyrzuci błąd mówiący, że parametr był wymagany, ale nie został ustawiony — i dlatego nie wiedział, co zrobić.
 
-To jest fajne nowe coś, przy okazji. W przeszłości Nextflow po prostu uruchomiłby się z pustym stringiem i miałbyś wszelkiego rodzaju dziwne błędy, które byłyby trudne do zrozumienia. Ale w nowym parserze składni Nextflow'a jest trochę bardziej ostrożny i mówi Ci od razu.
+To przy okazji całkiem nowa funkcja. W przeszłości Nextflow po prostu uruchomiłby się z pustym stringiem, a Ty miałbyś wszelkiego rodzaju dziwne błędy, trudne do zrozumienia. Nowy parser składni Nextflow'a jest jednak ostrożniejszy i informuje Cię o problemie od razu.
 
-Więc nie zawsze chcemy określać każdą pojedynczą opcję. Dobrą praktyką jest określanie rozsądnych wartości domyślnych. Więc jak to robimy w naszym skrypcie?
+Nie zawsze chcemy określać każdą pojedynczą opcję. Dobrą praktyką jest definiowanie rozsądnych wartości domyślnych. Jak to zrobić w naszym skrypcie?
 
-Zauważysz, że gdy to napisaliśmy, po prostu umieściliśmy _params.input_ bezpośrednio tam, gdzie go używamy. Więc oczywistym rozwiązaniem jest zdefiniowanie wartości domyślnej, i robimy to na górze skryptu tutaj w specjalnym bloku params w workflow'ie. To jest w skrypcie workflow tutaj.
+Zauważysz, że gdy to pisaliśmy, umieściliśmy _params.input_ bezpośrednio tam, gdzie go używamy. Oczywistym rozwiązaniem jest więc zdefiniowanie wartości domyślnej — robimy to na górze skryptu, w specjalnym bloku params w workflow'ie.
 
-Znowu, trochę nowej składni tutaj, więc zwróć uwagę. To są naprawdę fajne rzeczy. Mamy nazwę parametru, który będzie oczekiwany tutaj.
+Znowu trochę nowej składni, więc zwróć uwagę. To naprawdę fajne rzeczy. Mamy nazwę parametru, który będzie tu oczekiwany.
 
-A następnie po tym znaku dwukropka definiujemy typ zmiennej. Nie musisz tego robić, możesz po prostu zostawić to puste, ale to jest naprawdę miłe. Mówi Nextflow'owi, że oczekujemy stringa i traktuj go jako taki.
+Po znaku dwukropka definiujemy typ zmiennej. Nie musisz tego robić — możesz po prostu zostawić to puste — ale to bardzo przydatne. Mówi Nextflow'owi, że oczekujemy stringa i żeby traktował go jako taki.
 
-Jeśli chcemy liczby zamiast tego, na przykład, moglibyśmy napisać float, i to by powiedziało, że chcemy liczby zmiennoprzecinkowej. A jeśli spróbujemy uruchomić z tym, wtedy wyrzuci błąd. Jeśli damy mu stringa, który nie jest float'em. I również przekaże go jako taki. Jeśli zrobimy string, wtedy wie, że to jest string. I nawet jeśli ma wiodące zera i jest całkowicie numeryczny, nadal przekaże go jako faktyczny string.
+Jeśli zamiast tego chcemy liczby, możemy napisać `float` — to oznacza, że oczekujemy liczby zmiennoprzecinkowej. Jeśli spróbujemy uruchomić pipeline z wartością, która nie jest float'em, Nextflow wyrzuci błąd. Jeśli natomiast zdefiniujemy typ `string`, Nextflow wie, że to string — i nawet jeśli wartość składa się wyłącznie z cyfr i ma wiodące zera, nadal przekaże ją jako faktyczny string.
 
-Więc to bezpieczeństwo typów jest bardzo nową funkcją Nextflow'a, ale naprawdę potężną, żeby uczynić Twój kod bezpieczniejszym do pisania i uruchamiania.
+Bezpieczeństwo typów to bardzo nowa funkcja Nextflow'a, ale naprawdę potężna — sprawia, że kod jest bezpieczniejszy w pisaniu i uruchamianiu.
 
-Następnie po tym mamy znak równości, a następnie wartość domyślną tutaj. Nextflow został napisany w Barcelonie pierwotnie, więc wydaje się odpowiednie, że mamy trochę hiszpańskiego tutaj, _"Holà mundo!"_ jako wartość domyślną.
+Po typie mamy znak równości, a następnie wartość domyślną. Nextflow powstał pierwotnie w Barcelonie, więc wydaje się odpowiednie, że mamy tu trochę hiszpańskiego: _"Hola mundo!"_ jako wartość domyślną.
 
-Dobra, zapiszę ten skrypt, wrócę, uruchomię skrypt ponownie bez _--input_. I tym razem powinien się uruchomić i utworzy nasz nowy plik w _results_. I w tym pliku teraz mówi _"Holà mundo!"_.
+Dobra, zapiszę ten skrypt, wrócę i uruchomię go ponownie bez _--input_. Tym razem powinien się uruchomić i utworzyć nowy plik w _results_. W tym pliku widnieje teraz _"Hola mundo!"_.
 
-To jest tylko wartość domyślna, więc nie oznacza to, że nie możemy nadal robić tego samego co wcześniej. Jeśli wrócę i znajdę mój stary skrypt tutaj, _"Hej Världen"_, ponieważ robię _--input_ w wierszu poleceń, to nadpisze tę wartość domyślną i użyje tego ponownie w pliku output.txt.
+To tylko wartość domyślna, więc nie oznacza, że nie możemy nadal robić tego samego co wcześniej. Jeśli wrócę i użyję starego wejścia _"Hej Världen"_ — podając _--input_ w wierszu poleceń — nadpisze ono wartość domyślną i zostanie użyte w pliku output.txt.
 
-Więc to w skrypcie jest tylko wartością domyślną, którą ustawiam.
+To, co jest w skrypcie, to tylko wartość domyślna, którą ustawiam.
 
-W miarę jak budujemy nasz workflow, żeby był bardziej złożony i zawierał więcej parametrów, ten blok params na górze skryptu zacznie zbierać je wszystkie w jednym miejscu.
+W miarę jak nasz workflow staje się bardziej złożony i zawiera więcej parametrów, blok params na górze skryptu zacznie zbierać je wszystkie w jednym miejscu.
 
-I kończysz z tą całkiem ładną symetrią w swoim skrypcie, gdzie faktycznie masz wszystkie swoje wejścia workflow tutaj i wyjścia workflow na dole. I jest bardzo jasne, jaki jest interfejs Twojego workflow'u do świata zewnętrznego. Więc możesz bardzo szybko podnieść nowy pipeline z nową składnią i zrozumieć, jak go używać.
+Otrzymujesz w ten sposób całkiem elegancką symetrię w skrypcie: wszystkie wejścia workflow'u są na górze, a wyjścia na dole. Interfejs workflow'u ze światem zewnętrznym jest bardzo czytelny. Możesz więc szybko zapoznać się z nowym pipeline'em i od razu zrozumieć, jak go używać.
 
-Jeszcze jedna ostatnia fajna rzecz. Nie musimy ustawiać wartości domyślnej z tym. Jeśli zrobimy params input, ale nie ustawimy wartości domyślnej, wtedy mówi Nextflow'owi, że ten parametr jest wymagany, i znowu, pipeline nie uruchomi się bez niego, ale da Ci bardziej użyteczny komunikat o błędzie zamiast czegoś o tym, że jest null.
+Jeszcze jedna ostatnia fajna rzecz. Nie musimy ustawiać wartości domyślnej. Jeśli zdefiniujemy parametr w bloku params, ale nie podamy wartości domyślnej, Nextflow uzna go za wymagany — i pipeline nie uruchomi się bez niego, ale zamiast enigmatycznego komunikatu o wartości null otrzymasz bardziej użyteczny komunikat o błędzie.
 
-Więc mówi, że oczekujemy, że jego input jest wymagany, ale nie został określony w wierszu poleceń. Bardzo miłe.
+Nextflow poinformuje Cię, że parametr input jest wymagany, ale nie został podany w wierszu poleceń. Bardzo przydatne.
 
-Dobra, więc miejmy nadzieję, że teraz jest jasne, jak skonfigurować Twój pipeline Nextflow'a ze zmiennymi wejściami i parametrami, jak ustawić wartość domyślną, ustawić typy, może to być Boolean true false flaga lub integer lub różne typy tutaj. Jak przekazać je do Twojego workflow'u, gdzie to przechodzi, a następnie interpoluje do Twojego procesu. A także wiesz, jak dostosować te w wierszu poleceń, gdy uruchamiasz Nextflow'a. To zaczyna wyglądać ciekawiej niż nasze proste polecenie bash.
+Mamy więc nadzieję, że teraz jest jasne, jak skonfigurować pipeline Nextflow'a ze zmiennymi wejściami i parametrami: jak ustawić wartość domyślną, jak określić typy (Boolean, integer, string i inne), jak przekazać parametry do workflow'u, skąd trafiają do procesu przez interpolację, oraz jak dostosowywać je w wierszu poleceń podczas uruchamiania Nextflow'a. Zaczyna to wyglądać ciekawiej niż nasze proste polecenie bash.
 
 ## 4. Zarządzaj wykonaniami workflow'u
 

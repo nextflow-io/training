@@ -2,53 +2,62 @@
 title: Side Quests
 hide:
   - toc
+page_type: index_page
+index_type: course
+additional_information:
+  technical_requirements: true
+  learning_objectives:
+    - Set up and configure a productive Nextflow development environment
+    - Apply advanced scripting patterns for complex data transformations
+    - Handle and propagate metadata through multi-step workflows
+    - Split and group data channels for parallel and serial processing
+    - Test Nextflow workflows using nf-test
+    - Compose complex pipelines from reusable named workflow modules
+    - Work efficiently with files using Nextflow file operations
+    - Debug common workflow issues systematically
+    - Use and build Nextflow plugins
+  audience_prerequisites:
+    - "**Audience:** This collection is designed for learners who have completed the Hello Nextflow beginner course and want to go deeper into specific topics."
+    - "**Skills:** Experience with the command line and familiarity with basic Nextflow concepts and tooling is assumed."
+    - "**Courses:** Must have completed [Hello Nextflow](../hello_nextflow/index.md) or equivalent."
 ---
 
 # Side Quests
 
-This is a collection of standalone training mini-courses that go deeper into specific topics. You can go through them in any order.
+**Side Quests are standalone training mini-courses that go deeper into specific Nextflow topics.**
 
-Let's get started! Click on the "Open in GitHub Codespaces" button below to launch the training environment (preferably in a separate tab), then read on while it loads.
+Each side quest can be done independently, in any order, to build your skills in the specific areas that matter most to your own projects.
+Together, they cover the skills you need to move from simple pipelines to production-ready workflows.
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+<!-- additional_information -->
 
-## Prerequisites
+### Browse by Topic
 
-The specific prerequisites of each mini-courses vary and are documented in the corresponding pages.
-Nevertheless, they all assume some minimal familiarity with the following:
+If this is your first time taking one of our trainings, start with the [Getting started](./orientation.md) page for an overview of the training environment and materials.
+Otherwise, feel free to dive straight into whichever quest calls to you.
 
-- Experience with the command line
-- Foundational Nextflow concepts and tooling covered in the [Hello Nextflow](../../hello_nextflow/) beginner training course.
+<table>
+<thead>
+<tr><th>Side Quest</th><th>Summary</th><th>Time Estimate</th></tr>
+</thead>
+<tbody>
+<tr><th colspan="3">Developer Tools &amp; Tricks</th></tr>
+<tr><td><a href="./dev_environment/">Development Environment</a></td><td>Set up and configure a productive local Nextflow development environment</td><td>45 mins</td></tr>
+<tr><td><a href="./debugging/">Troubleshooting Workflows</a></td><td>Identifying and fixing common workflow errors</td><td>1 hour</td></tr>
+<tr><td><a href="./essential_scripting_patterns/">Essential Scripting Patterns</a></td><td>Advanced scripting techniques for common workflow challenges</td><td>90 mins</td></tr>
+<tr><th colspan="3">Deep Dives into Dataflow</th></tr>
+<tr><td><a href="./working_with_files/">File Input Processing</a></td><td>File handling, path operations, and organizing outputs</td><td>45 mins</td></tr>
+<tr><td><a href="./metadata/">Metadata and Meta Maps</a></td><td>Using metadata maps to track and propagate sample information</td><td>45 mins</td></tr>
+<tr><td><a href="./splitting_and_grouping/">Splitting and Grouping</a></td><td>Techniques for splitting and regrouping data channels</td><td>45 mins</td></tr>
+<tr><th colspan="3">Modular Architecture in Action</th></tr>
+<tr><td><a href="./workflows_of_workflows/">Workflows of Workflows</a></td><td>Composing complex pipelines from reusable named workflow modules</td><td>30 mins</td></tr>
+<tr><th colspan="3">The Nextflow Extended Universe</th></tr>
+<tr><td><a href="./nf_test/">Testing with nf-test</a></td><td>Writing and running tests for Nextflow workflows</td><td>1 hour</td></tr>
+<tr><td><a href="./plugin_development/">Plugin Development</a></td><td>Using and building Nextflow plugins</td><td>3 hours</td></tr>
+</tbody>
+</table>
 
-For technical requirements and environment setup, see the [Environment Setup](../../envsetup/) mini-course.
+[Get started :material-arrow-right:](orientation.md){ .md-button .md-button--primary }
 
-**If this is the first time you delve into the Side Quests, make sure to check out the [Orientation](./orientation.md) page first!**
-
-Otherwise, select a side quest from the table below.
-
-## Side Quests
-
-| Side Quest                                                               | Time Estimate for Teaching |
-| ------------------------------------------------------------------------ | -------------------------- |
-| [Nextflow development environment walkthrough](./dev_environment/)       | 45 mins                    |
-| [Essential Nextflow Scripting Patterns](./essential_scripting_patterns/) | 90 mins                    |
-| [Metadata in workflows](./metadata/)                                     | 45 mins                    |
-| [Splitting and Grouping](./splitting_and_grouping/)                      | 45 mins                    |
-| [Testing with nf-test](./nf_test/)                                       | 1 hour                     |
-| [Workflows of workflows](./workflows_of_workflows/)                      | 30 mins                    |
-| [Working with files](./working_with_files/)                              | 45 mins                    |
-| [Debugging workflows](./debugging/)                                      | 1 hour                     |
-
-## Multi-part courses
-
-!!! exercise "Plugin Development"
-
-    !!! tip inline end ""
-
-        :material-run-fast: Learn to use and build Nextflow plugins.
-
-    This course covers using existing plugins in your workflows and building your own from scratch, including custom functions, workflow monitoring, configuration, and distribution.
-
-    [Start the Plugin Development training :material-arrow-right:](plugin_development/){ .md-button .md-button--primary }
-
-Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div>

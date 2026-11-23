@@ -240,7 +240,7 @@ Lògica bastant complexa amb molt poca sintaxi aquí. I esperem que pugueu veure
 
 D'acord, això és genial. El problema però ara és, cada vegada que executo aquest pipeline, necessito fer guió, input perquè s'executi.
 
-Si intento executar sense aquest paràmetre, ara Nextflow llançarà un error dient que necessitava aquest paràmetre i no estava establert. i així que no sabia què fer.
+Si intento executar sense aquest paràmetre, ara Nextflow llançarà un error dient que necessitava aquest paràmetre i no estava establert. I per tant no sabia què fer.
 
 Això és una cosa nova interessant, per cert. En el passat, Nextflow simplement s'hauria executat amb una cadena buida, i hauríeu tingut tot tipus d'errors estranys, que haurien estat difícils d'entendre. Però en el nou analitzador de sintaxi de Nextflow, és una mica més acurat i us ho diu immediatament.
 
@@ -250,15 +250,15 @@ Notareu que quan vam escriure això, només vam posar _params.input_ directament
 
 De nou, alguna sintaxi nova aquí, així que pareu atenció. Això és realment interessant. Tenim el nom del paràmetre, que s'esperarà aquí.
 
-I després després d'aquest caràcter de dos punts, estem definint un tipus de la variable. No heu de fer això, podeu deixar-ho en blanc, però és realment agradable. Diu a Nextflow que esperem una cadena i tractar-la com a tal.
+I després d'aquest caràcter de dos punts, estem definint un tipus de la variable. No heu de fer això, podeu deixar-ho en blanc, però és realment agradable. Diu a Nextflow que esperem una cadena i tractar-la com a tal.
 
 Si volem un número en lloc d'això, per exemple, podríem escriure float, i això diria que volem un número de coma flotant. I si intentem executar amb això, llavors llançarà un error. Si li donem una cadena, que no és un float. I també el passarà com a tal. Com si fem string, llavors sap que és una cadena. I fins i tot si té zeros inicials i és tot numèric, encara el passarà com una cadena real.
 
 Així que aquesta seguretat de tipus és una característica molt nova de Nextflow, però realment potent per fer el vostre codi més segur d'escriure i executar.
 
-Després d'això tenim un símbol igual i després el valor per defecte aquí. Nextflow es va escriure a Barcelona originalment, així que sembla apropiat que tinguem una mica d'espanyol aquí, _"Holà mundo!"_ com a valor per defecte.
+Després d'això tenim un símbol igual i després el valor per defecte aquí. Nextflow es va escriure a Barcelona originalment, així que sembla apropiat que tinguem una mica d'espanyol aquí, _"Hola mundo!"_ com a valor per defecte.
 
-D'acord, desaré aquest script, tornaré, executaré l'script de nou sense _--input_. I aquesta vegada hauria d'executar-se i crearà el nostre nou fitxer a _results_. I en aquest fitxer ara diu _"Holà mundo!"_.
+D'acord, desaré aquest script, tornaré, executaré l'script de nou sense _--input_. I aquesta vegada hauria d'executar-se i crearà el nostre nou fitxer a _results_. I en aquest fitxer ara diu _"Hola mundo!"_.
 
 Això és només un valor per defecte però, així que no significa que no puguem fer encara el mateix que abans. Si torno i trobo el meu antic script aquí, _"Hej Världen"_, perquè faig _--input_ a la línia de comandes, això sobreescriurà aquest valor per defecte i utilitzarà això de nou al fitxer output.txt.
 

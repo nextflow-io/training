@@ -21,7 +21,7 @@ workflow {
             ['sample3', 'file3.txt'],
         )
         .view { item -> "Channel content: ${item}" }
-        .map { tuple -> tuple[0] }
+        .map { sample_id, file -> sample_id }
         .view { item -> "After mapping: ${item}" }
 
     PROCESS_FILES(input_ch)

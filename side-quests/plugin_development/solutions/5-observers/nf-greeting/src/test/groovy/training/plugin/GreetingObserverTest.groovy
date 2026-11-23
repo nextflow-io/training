@@ -15,8 +15,9 @@ class GreetingObserverTest extends Specification {
         when:
         def result = factory.create(Mock(Session))
         then:
-        result.size() == 1
-        result.first() instanceof GreetingObserver
+        result.size() == 2
+        result[0] instanceof GreetingObserver
+        result[1] instanceof TaskCounterObserver
     }
 
 }

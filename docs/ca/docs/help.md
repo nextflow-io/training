@@ -10,6 +10,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+
 Tant si teniu dificultats per començar, us quedeu encallats a mig camí o teniu preguntes de seguiment, no dubteu a contactar-nos! El nostre equip de comunitat està aquí per ajudar-vos, i la comunitat de Nextflow en general és molt activa, inclusiva i desitjosa d'ajudar.
 
 Aquí teniu les principals opcions disponibles segons el que busqueu.
@@ -63,15 +64,5 @@ Aquí teniu les principals opcions disponibles segons el que busqueu.
     Nextflow és un programari lliure de codi obert desenvolupat per [Seqera](https://seqera.io/), una empresa amb seu a Espanya i oficines satèl·lit al Regne Unit i els Estats Units. Oferim serveis de suport professional per a Nextflow, incloent formació personalitzada.
 
     [Poseu-vos en contacte:material-arrow-right:](https://seqera.io/demo/){ .md-button .md-button--primary .mt-1 }
-
-</div>
-
----
-
-<div markdown class="homepage_logos">
-
-![Seqera](assets/img/seqera_logo.png#only-light)
-
-![Seqera](assets/img/seqera_logo_dark.png#only-dark)
 
 </div>

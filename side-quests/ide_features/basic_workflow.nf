@@ -2,7 +2,6 @@
 
 process FASTQC {
     tag "${sample_id}"
-    publishDir "${params.output_dir}/fastqc", mode: 'copy'
 
     input:
     tuple val(sample_id), path(reads)
@@ -33,18 +32,32 @@ params{
  * Main workflow demonstrating module usage and navigation
  */
 workflow {
+    main:
     // Create input channel from CSV file
     ch_input = channel.fromPath(params.input, checkIfExists: true)
         .splitCsv(header: true)
         .map { row ->
             return [row.sample_id, file(row.fastq_path)]
         }
-        .view { "Processing sample: ${it[0]} -> ${it[1]}" }
+        .view { sample_id, fastq -> "Processing sample: ${sample_id} -> ${fastq}" }
 
     // Run FastQC process - Ctrl-click on FASTQC to navigate to module
     FASTQC(ch_input)
 
     // View outputs
-    FASTQC.out.html.view { "FastQC report: ${it}" }
-    FASTQC.out.zip.view { "FastQC data: ${it}" }
+    FASTQC.out.html.view { report -> "FastQC report: ${report}" }
+    FASTQC.out.zip.view { data -> "FastQC data: ${data}" }
+
+    publish:
+    fastqc_html = FASTQC.out.html
+    fastqc_zip = FASTQC.out.zip
+}
+
+output {
+    fastqc_html {
+        path 'fastqc'
+    }
+    fastqc_zip {
+        path 'fastqc'
+    }
 }

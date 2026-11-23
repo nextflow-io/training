@@ -214,10 +214,10 @@ nextflow run hello-world.nf
 
 ??? success "Komut çıktısı"
 
-    ```console hl_lines="7"
-    N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="6"
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [65/7be2fa] sayHello | 1 of 1 ✔
@@ -486,17 +486,23 @@ nextflow run hello-world.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [jovial_mayer] revision: 35bd3425e5
 
     executor >  local (1)
     [9f/48ef97] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: output.txt
     ```
 
-Terminal çıktısı tanıdık görünmeli. Dışarıdan hiçbir şey değişmedi.
+Terminal çıktısı artık yayınlanan çıktıları ve yazıldıkları dizini listeleyen bir `Outputs:` özeti ile sona erer.
 
-Ancak dosya gezgininizi kontrol edin: bu sefer Nextflow `results/` adında yeni bir dizin oluşturdu.
+Dosya gezgininizi kontrol edin: bu sefer Nextflow `results/` adında yeni bir dizin de oluşturdu.
 
 ??? abstract "Dizin içeriği"
 
@@ -574,12 +580,18 @@ nextflow run hello-world.nf
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [8c/79499c] process > sayHello [100%] 1 of 1 ✔
+    [8c/79499c] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Bu sefer sonuç belirtilen alt dizine yazılır.
@@ -653,12 +665,18 @@ nextflow run hello-world.nf
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [df/521638] process > sayHello [100%] 1 of 1 ✔
+    [df/521638] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Bu sefer, sonuçlara bakarsanız, dosya yalnızca bir sembolik bağlantı yerine düzgün bir kopyadır.
@@ -767,19 +785,19 @@ Süreç bloğunda aşağıdaki kod değişikliğini yapın:
 === "Sonra"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo '${greeting}' > output.txt
-    """
+        script:
+        """
+        echo '${greeting}' > output.txt
+        """
     ```
 
 === "Önce"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo 'Hello World!' > output.txt
-    """
+        script:
+        """
+        echo 'Hello World!' > output.txt
+        """
     ```
 
 `$` simgesi ve süslü parantezler (`{ }`) Nextflow'a bunun gerçek girdi değeriyle değiştirilmesi gereken (=enterpolasyon) bir değişken adı olduğunu söyler.
@@ -799,7 +817,7 @@ Ancak, iş akışımızla gerçek iş yaptığımızda, girdilerini komut satır
 --8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
 </figure>
 
-Neyse ki, Nextflow'un [yerleşik](https://nextflow.io/docs/latest/config.html#params) iş akışı parametre sistemi `params` vardır ve bu, CLI parametrelerini bildirmeyi ve kullanmayı kolaylaştırır.
+Neyse ki, Nextflow'un [`params`](https://nextflow.io/docs/latest/config.html#params) adlı yerleşik iş akışı parametre sistemi vardır ve bu, CLI parametrelerini bildirmeyi ve kullanmayı kolaylaştırır.
 
 Genel söz dizimi, komut satırında bir `--<parametre_adı>` parametresi beklemek için `params.<parametre_adı>` bildirmektir.
 
@@ -811,15 +829,15 @@ Prensipte bunu herhangi bir yere yazabiliriz; ancak bunu `sayHello()` süreç ç
 === "Sonra"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // bir selamlama yayınla
-    sayHello(params.input)
+        // bir selamlama yayınla
+        sayHello(params.input)
     ```
 
 === "Önce"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // bir selamlama yayınla
-    sayHello()
+        // bir selamlama yayınla
+        sayHello()
     ```
 
 Bu, Nextflow'a `sayHello` sürecini `--input` parametresi aracılığıyla sağlanan değer üzerinde çalıştırmasını söyler.
@@ -837,12 +855,18 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
+    Launching `hello-world.nf` [elated_lavoisier] revision: 7c031b42ea
 
     executor >  local (1)
     [4b/654319] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Tüm bu düzenlemeleri doğru yaptıysanız, başka bir başarılı yürütme elde etmelisiniz.
@@ -855,7 +879,7 @@ Artık selamlamanın yeni sürümüne sahip olduğunuzdan emin olmak için çık
     Bonjour le monde!
     ```
 
-Voilà!
+Et voilà!
 
 Yeni yürütmenin `results` dizinine yayınlanan çıktı dosyasını nasıl üzerine yazdığına dikkat edin.
 Ancak, önceki çalıştırmaların sonuçları `work` altındaki görev dizinlerinde hâlâ korunmaktadır.
@@ -865,7 +889,7 @@ Ancak, önceki çalıştırmaların sonuçları `work` altındaki görev dizinle
     Nextflow düzeyindeki parametreleri iş akışı düzeyindeki parametrelerden kolayca ayırt edebilirsiniz.
 
     - Bir iş akışına uygulanan parametreler her zaman çift tire (`--`) alır.
-    - Bir Nextflow ayarını değiştiren parametreler, örneğin daha önce kullandığımız `-resume` özelliği, tek tire (`-`) alır.
+    - Bir Nextflow ayarını değiştiren parametreler, örneğin daha önce bahsettiğimiz `-o` özelliği, tek tire (`-`) alır.
 
 ### 3.4. Komut satırı parametreleri için varsayılan değerler kullanın
 
@@ -880,7 +904,7 @@ Tamam, bu uygundu, ancak birçok durumda, her çalıştırma için belirtmek zor
  * Pipeline parametreleri
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -890,7 +914,7 @@ Desteklenen türler arasında `String`, `Integer`, `Float`, `Boolean` ve `Path` 
 
 !!! info "Bilgi"
 
-    Eski iş akışlarında, tüm bu `params` bloğunun sadece `input = 'Holà mundo!'` olarak yazıldığını görebilirsiniz.
+    Eski iş akışlarında, tüm bu `params` bloğunun sadece `input = 'Hola mundo!'` olarak yazıldığını görebilirsiniz.
 
 İş akışınıza daha fazla parametre ekledikçe, varsayılan değer vermeniz gerekip gerekmediğine bakılmaksızın hepsini bu bloğa eklemelisiniz.
 Bu, yapılandırılabilir tüm parametreleri bir bakışta bulmayı kolaylaştıracaktır.
@@ -906,12 +930,18 @@ nextflow run hello-world.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [determined_edison] revision: 3539118582
 
     executor >  local (1)
     [72/394147] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 ??? question "İşe yaramadıysa"
@@ -923,7 +953,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -936,7 +966,8 @@ nextflow run hello-world.nf
     Bu kursun başında bahsedilmişti, ama belki kaçırmışsınızdır.
     [Nextflow sürümleri](../info/nxf_versions.md) yardım materyaline bakın.
 
-    Kısacası, Nextflow `25.10` kullanıyorsanız v2 dil ayrıştırıcısını etkinleştirmeniz gerekir:
+    v2 ayrıştırıcısı Nextflow 26.04 ve sonrasında varsayılan olarak gelir; bu nedenle bu sorunu yalnızca daha eski sürümlerde göreceksiniz.
+    26.04 öncesi bir sürümde v2 dil ayrıştırıcısını etkinleştirmeniz gerekir:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
@@ -947,7 +978,7 @@ nextflow run hello-world.nf
 ??? abstract "Dosya içeriği"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 Nextflow, çıktıyı oluşturmak için selamlama parametresinin varsayılan değerini kullandı.
@@ -965,12 +996,18 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [elegant_faraday] revision: 3539118582
 
     executor >  local (1)
     [6f/a12a91] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Bir kez daha, sonuçlar dizininizde karşılık gelen güncellenmiş çıktıyı bulmalısınız.
@@ -1020,17 +1057,23 @@ Bunu yapmanın iki önemli avantajı vardır:
 Kullanmak için komutunuza `-resume` eklemeniz ve çalıştırmanız yeterlidir:
 
 ```bash
-nextflow run hello-world.nf -resume
+nextflow run hello-world.nf --input 'Konnichiwa!' -resume
 ```
 
 ??? success "Komut çıktısı"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [golden_cantor] revision: 35bd3425e5
 
     [62/49a1f8] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Konsol çıktısı tanıdık görünmeli, ancak daha öncesine kıyasla biraz farklı bir şey var.

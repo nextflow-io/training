@@ -35,13 +35,12 @@ Nextflow 문서 매뉴얼에서는 [환경 설정](https://www.nextflow.io/docs/
 Nextflow 자체와 nf-core 도구를 설치해야 합니다. 아래 링크된 문서에 자세히 설명되어 있습니다:
 
 - [Nextflow 설치](https://www.nextflow.io/docs/latest/install.html)
-- [nf-core 도구](https://nf-co.re/docs/nf-core-tools/installation)
+- [nf-core 도구](https://nf-co.re/docs/nf-core-tools/cli/installation)
 
 Nextflow의 경우 self-install 옵션을, nf-core 도구의 경우 PyPI 옵션을 사용하는 것을 권장합니다.
 
 !!! warning "버전 호환성"
 
-    <!-- Any update to this content needs to be copied to the home page -->
     **2026년 1월 기준, 별도의 언급이 없는 한 모든 Nextflow 교육 과정은 strict v2 구문이 활성화된 Nextflow 버전 25.10.2 이상을 필요로 합니다.**
 
     버전 요구 사항 및 strict v2 구문에 대한 자세한 내용은 [Nextflow 버전](../info/nxf_versions.md) 가이드를 참조하십시오.

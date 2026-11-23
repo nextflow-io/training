@@ -28,10 +28,10 @@ Aquestes habilitats us ajudaran a construir workflows que puguin gestionar múlt
 
 Abans d'abordar aquesta missió secundària, hauríeu de:
 
-- Haver completat el tutorial [Hello Nextflow](../hello_nextflow/README.md) o un curs equivalent per a principiants.
+- Haver completat el tutorial [Hello Nextflow](../../hello_nextflow/index.md) o un curs equivalent per a principiants.
 - Estar còmodes amb els conceptes i mecanismes bàsics de Nextflow (processos, canals, operadors, treball amb fitxers, metadades)
 
-**Opcional:** Recomanem completar primer la missió secundària [Metadata in workflows](../metadata/).
+**Opcional:** Recomanem completar primer la missió secundària [Metadata in workflows](../metadata/index.md).
 Aquesta cobreix els fonaments de la lectura de fitxers CSV amb `splitCsv` i la creació de mapes de metadades, que utilitzarem àmpliament aquí.
 
 ---
@@ -40,7 +40,7 @@ Aquesta cobreix els fonaments de la lectura de fitxers CSV amb `splitCsv` i la c
 
 #### Obriu l'espai de treball de formació
 
-Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../envsetup/index.md).
+Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -57,6 +57,8 @@ Podeu configurar VSCode perquè es centri en aquest directori:
 ```bash
 code .
 ```
+
+L'editor s'obre amb el directori del projecte en focus.
 
 #### Reviseu els materials
 
@@ -93,6 +95,8 @@ Per al pacient A específicament, tenim dos conjunts de rèpliques tècniques (r
 !!! note "Nota"
 
     No us preocupeu si no esteu familiaritzats amb aquest disseny experimental, no és crític per entendre aquest tutorial.
+
+Amb el contingut de les dades entès, podem veure què ha d'aconseguir el workflow.
 
 #### Reviseu l'assignació
 
@@ -135,7 +139,7 @@ workflow {
 
     Al llarg d'aquest tutorial, utilitzarem el prefix `ch_` per a totes les variables de canal per indicar clarament que són canals de Nextflow.
 
-Si heu completat la missió secundària [Metadata in workflows](../metadata/), reconeixereu aquest patró. Utilitzarem `splitCsv` per llegir el CSV i estructurar immediatament les dades amb un mapa de metadades per separar les metadades de les rutes dels fitxers.
+Si heu completat la missió secundària [Metadata in workflows](../metadata/index.md), reconeixereu aquest patró. Utilitzarem `splitCsv` per llegir el CSV i estructurar immediatament les dades amb un mapa de metadades per separar les metadades de les rutes dels fitxers.
 
 !!! info "Info"
 
@@ -150,7 +154,7 @@ Apliqueu aquests canvis a `main.nf`:
 
 === "Després"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2-6"
+    ```groovy title="main.nf" linenums="2" hl_lines="1-6"
         ch_samples = channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
@@ -174,9 +178,9 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
+    Launching `main.nf` [wise_venter] revision: 9211c186b2
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
@@ -230,9 +234,9 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d
+    Launching `main.nf` [high_knuth] revision: bc0db74ccc
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
@@ -251,6 +255,8 @@ Això s'aconsegueix amb la closure única que hem introduït anteriorment:
 ```groovy title="main.nf" linenums="7"
     .filter { meta, file -> meta.type == 'normal' }
 ```
+
+Aquest filtre s'encadena directament en l'operació del canal.
 
 ### 2.2. Crear canals filtrats separats
 
@@ -291,9 +297,9 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74
+    Launching `main.nf` [shrivelled_rubens] revision: 636aae17ff
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
@@ -334,21 +340,25 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
+    Launching `main.nf` [elated_jepsen] revision: c96ba8f734
 
-    Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
     Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
     Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
     Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
     Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
     Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
-Hem separat les mostres normals i tumorals en dos canals diferents, i hem utilitzat una closure subministrada a `view()` per etiquetar-les de manera diferent a la sortida: `ch_tumor_samples.view{'Tumor sample: ' + it}`.
+Hem separat les mostres normals i tumorals en dos canals diferents, i hem utilitzat una closure subministrada a `view()` per etiquetar-les de manera diferent a la sortida: `#!groovy ch_tumor_samples.view{'Tumor sample: ' + it}`.
+
+!!! note "Nota"
+
+    L'ordre relatiu de les línies `Normal sample:` i `Tumor sample:` pot variar entre execucions, ja que les dues crides a `view()` pertanyen a canals independents que s'executen de manera concurrent. L'ordre de les mostres _dins_ de cada etiqueta sempre es preserva.
 
 ### Conclusió
 
@@ -383,18 +393,18 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
+    Launching `main.nf` [exotic_bassi] revision: c96ba8f734
 
     Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
     Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
     Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
 Podem veure que el camp `id` és el primer element de cada mapa de metadades. Perquè `join` funcioni, hauríem d'aïllar el camp `id` en cada tupla. Després d'això, podem simplement utilitzar l'operador `join` per combinar els dos canals.
@@ -438,18 +448,18 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d
+    Launching `main.nf` [compassionate_monod] revision: 3132715893
 
-    Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
     Normal sample: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     Normal sample: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     Normal sample: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
     Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
 Pot ser subtil, però hauríeu de poder veure que el primer element de cada tupla és el camp `id`.
@@ -496,9 +506,9 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889
+    Launching `main.nf` [desperate_shaw] revision: 5508db4b8b
 
     [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -525,7 +535,7 @@ A continuació, considerarem la situació en què voleu unir per múltiples camp
 
 ### 3.2. Unir per múltiples camps
 
-Tenim 2 rèpliques per a la mostra A, però només 1 per a les mostres B i C. En aquest cas hem pogut unir-les efectivament utilitzant el camp `id`, però, què passaria si estiguessin desincronitzades? Podríem barrejar les mostres normals i tumorals de rèpliques diferents!
+Tenim 2 rèpliques per al pacient A, però només 1 per als pacients B i C. En aquest cas hem pogut unir-les efectivament utilitzant el camp `id`, però, què passaria si estiguessin desincronitzades? Podríem barrejar les mostres normals i tumorals de rèpliques diferents!
 
 Per evitar-ho, podem unir per múltiples camps. En realitat hi ha múltiples maneres d'aconseguir-ho, però ens centrarem en crear una nova clau d'unió que inclogui tant l'`id` de la mostra com el número de `replicate`.
 
@@ -562,9 +572,9 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee
+    Launching `main.nf` [lonely_solvay] revision: 3c97c335d2
 
     [[patientA, 1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [[patientA, 2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -611,9 +621,9 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7
+    Launching `main.nf` [scruffy_swanson] revision: a8478c9d0a
 
     [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -658,7 +668,7 @@ Per fer-ho, primer definim la closure com una nova variable:
 
 Hem definit la transformació map com una variable amb nom que podem reutilitzar.
 
-Tingueu en compte que també convertim la ruta del fitxer a un objecte Path utilitzant `file()` perquè qualsevol procés que rebi aquest canal pugui gestionar el fitxer correctament (per a més informació vegeu [Working with files](../working_with_files/)).
+Tingueu en compte que també convertim la ruta del fitxer a un objecte Path utilitzant `file()` perquè qualsevol procés que rebi aquest canal pugui gestionar el fitxer correctament (per a més informació vegeu [Working with files](../working_with_files/index.md)).
 
 Implementem la closure al nostre workflow:
 
@@ -698,15 +708,17 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d
+    Launching `main.nf` [admiring_turing] revision: 06c4cbbb2e
 
-    [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    [[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
+    [[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
+    [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]
     ```
+
+    Com que la closure ara embolcalla cada ruta amb `file()`, les entrades de fitxer apareixen com a rutes absolutes resoltes en lloc dels noms de fitxer simples del full de mostres.
 
 Utilitzar una closure amb nom ens permet reutilitzar la mateixa transformació en múltiples llocs, reduint el risc d'errors i fent el codi més llegible i mantenible.
 
@@ -717,21 +729,21 @@ Tenim moltes dades duplicades al nostre workflow. Cada element de les mostres un
 ```groovy
 [
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
   ],
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
     "type": "normal",
   ],
-  "sampleC_rep1_normal.bam"
+  "patientC_rep1_normal.bam",
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
     "type": "tumor",
   ],
-  "sampleC_rep1_tumor.bam"
+  "patientC_rep1_tumor.bam"
 ]
 ```
 
@@ -760,6 +772,10 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [scruffy_tuckerman] revision: 791ad3c1fb
+
     [[id:patientA, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
     [[id:patientB, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
@@ -797,15 +813,17 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd
+    Launching `main.nf` [intergalactic_lagrange] revision: 8c8750a19d
 
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
     [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
     [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
     ```
+
+Cada tupla ara conté només la clau d'agrupació i les dues rutes de fitxer, sense camps repetits.
 
 ### Conclusió
 
@@ -873,9 +891,9 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b
+    Launching `main.nf` [lethal_northcutt] revision: 09667ddd59
 
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr1]
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr2]
@@ -955,9 +973,9 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
+    Launching `main.nf` [hungry_engelbart] revision: 45db6a7dd7
 
     [[id:patientA, repeat:1, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, repeat:1, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
@@ -988,7 +1006,7 @@ En aquesta secció, heu après:
 
 ## 5. Agregar mostres amb `groupTuple`
 
-A les seccions anteriors, hem après a dividir les dades d'un fitxer d'entrada i filtrar per camps específics (en el nostre cas mostres normals i tumorals). Però això només cobreix un únic tipus d'unió. I si volem agrupar mostres per un atribut específic? Per exemple, en lloc d'unir parells normal-tumor coincidents, potser volem processar totes les mostres de "sampleA" juntes independentment del seu tipus. Aquest patró és comú en workflows de bioinformàtica on potser voleu processar mostres relacionades per separat per raons d'eficiència abans de comparar o combinar els resultats al final.
+A les seccions anteriors, hem après a dividir les dades d'un fitxer d'entrada i filtrar per camps específics (en el nostre cas mostres normals i tumorals). Però això només cobreix un únic tipus d'unió. I si volem agrupar mostres per un atribut específic? Per exemple, en lloc d'unir parells normal-tumor coincidents, potser volem processar totes les mostres de "patientA" juntes independentment del seu tipus. Aquest patró és comú en workflows de bioinformàtica on potser voleu processar mostres relacionades per separat per raons d'eficiència abans de comparar o combinar els resultats al final.
 
 Nextflow inclou mètodes integrats per fer-ho, el principal que veurem és `groupTuple`.
 
@@ -1000,7 +1018,7 @@ El primer pas és similar al que hem fet a la secció anterior. Hem d'aïllar la
 
 ```groovy title="main.nf" linenums="1"
 {
-  "id": "sampleA",
+  "id": "patientA",
   "repeat": "1",
   "interval": "chr1"
 }
@@ -1056,9 +1074,9 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76
+    Launching `main.nf` [stupefied_kirch] revision: c5bd1a7c31
 
     [[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
@@ -1120,9 +1138,9 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d
+    Launching `main.nf` [soggy_borg] revision: cc057d5f49
 
     [[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
     [[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
@@ -1140,6 +1158,8 @@ Observeu que les nostres dades han canviat d'estructura i dins de cada element d
 !!! note "Nota"
 
     [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) és l'operació inversa de groupTuple. Desempaqueta els elements d'un canal i els aplana. Proveu d'afegir `transpose` i desfer l'agrupació que hem realitzat anteriorment!
+
+Ambdues direccions de l'operació — agrupar i desagrupar — formen ara part del vostre conjunt d'eines.
 
 ### Conclusió
 
@@ -1168,7 +1188,7 @@ Dominar aquestes operacions de canal us permetrà construir pipelines flexibles 
 
 ### Patrons clau
 
-1.  **Crear dades d'entrada estructurades:** Partint d'un fitxer CSV amb mapes de metadades (basant-se en patrons de [Metadata in workflows](../metadata/))
+1.  **Crear dades d'entrada estructurades:** Partint d'un fitxer CSV amb mapes de metadades (basant-se en patrons de [Metadata in workflows](../metadata/index.md))
 
     ```groovy
     ch_samples = channel.fromPath("./data/samplesheet.csv")
@@ -1181,7 +1201,7 @@ Dominar aquestes operacions de canal us permetrà construir pipelines flexibles 
 2.  **Dividir dades en canals separats:** Hem utilitzat `filter` per dividir les dades en fluxos independents basant-nos en el camp `type`
 
     ```groovy
-    channel.filter { it.type == 'tumor' }
+    channel.filter { meta, file -> meta.type == 'tumor' }
     ```
 
 3.  **Unir mostres coincidents:** Hem utilitzat `join` per recombinar mostres relacionades basant-nos en els camps `id` i `repeat`
@@ -1189,31 +1209,31 @@ Dominar aquestes operacions de canal us permetrà construir pipelines flexibles 
     - Unir dos canals per clau (primer element de la tupla)
 
     ```groovy
-    tumor_ch.join(normal_ch)
+    ch_normal_samples.join(ch_tumor_samples)
     ```
 
     - Extreure la clau d'unió i unir per aquest valor
 
     ```groovy
-    tumor_ch.map { meta, file -> [meta.id, meta, file] }
+    ch_normal_samples.map { meta, file -> [meta.id, meta, file] }
         .join(
-          normal_ch.map { meta, file -> [meta.id, meta, file] }
+          ch_tumor_samples.map { meta, file -> [meta.id, meta, file] }
         )
     ```
 
-    - Unir per múltiples camps utilitzant subMap
+    - Unir per múltiples camps utilitzant `subMap`
 
     ```groovy
-    tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+    ch_normal_samples.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         .join(
-          normal_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+          ch_tumor_samples.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         )
     ```
 
 4.  **Distribuir per intervals:** Hem utilitzat `combine` per crear productes cartesians de mostres amb intervals genòmics per al processament paral·lel.
 
     ```groovy
-    samples_ch.combine(intervals_ch)
+    ch_joined_samples.combine(ch_intervals)
     ```
 
 5.  **Agregar per claus d'agrupació:** Hem utilitzat `groupTuple` per agrupar pel primer element de cada tupla, recollint així les mostres que comparteixen els camps `id` i `interval` i fusionant les rèpliques tècniques.
@@ -1249,4 +1269,4 @@ Dominar aquestes operacions de canal us permetrà construir pipelines flexibles 
 
 ## Què segueix?
 
-Torneu al [menú de missions secundàries](../) o feu clic al botó a la part inferior dreta de la pàgina per continuar amb el tema següent de la llista.
+Torneu al [menú de missions secundàries](../index.md) o feu clic al botó a la part inferior dreta de la pàgina per continuar amb el tema següent de la llista.

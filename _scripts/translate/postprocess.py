@@ -296,12 +296,19 @@ def strip_translation_notice(lines: list[str]) -> list[str]:
     while i < len(lines):
         # Span-style notice (single line)
         if _NOTICE_SPAN_LINE_RE.match(lines[i]):
-            # Also skip surrounding blank lines to avoid double-blanks
+            # Also skip one surrounding blank line to avoid double-blanks:
+            # the notice is normally padded by a blank line on each side, so
+            # removing the notice plus one trailing blank collapses that
+            # pair back down to the single blank line already emitted.
             i += 1
+            if i < len(lines) and lines[i].strip() == "":
+                i += 1
             continue
         # Any line mentioning the notice class (catch partial/malformed spans)
         if NOTICE_SPAN_RE.search(lines[i]):
             i += 1
+            if i < len(lines) and lines[i].strip() == "":
+                i += 1
             continue
         # Admonition-style notice: !!! note block referencing TRANSLATING.md
         if _NOTICE_ADMN_START_RE.match(lines[i]):
@@ -612,7 +619,15 @@ def fix_frontmatter(text: str, source_text: str, lang: str) -> str:
     if en_fm is None:
         # English has no frontmatter — strip any the LLM may have added
         _, body = _parse_frontmatter(text)
-        return body.lstrip("\n")
+        body = body.lstrip("\n")
+        # _parse_frontmatter only recognizes a *closed* "---...---" block.
+        # An unclosed leading "---" (e.g. the LLM emitted a stray/empty
+        # frontmatter opener) isn't real frontmatter but would otherwise
+        # survive as spurious content, so strip it here too.
+        first_line, _, rest = body.partition("\n")
+        if first_line.strip() == "---":
+            body = rest.lstrip("\n")
+        return body
 
     en_raw, _ = _split_frontmatter(source_text)
     trans_fm, body = _parse_frontmatter(text)
@@ -750,8 +765,8 @@ def ensure_translation_notice(text: str, lang: str, is_homepage: bool = False) -
 
     # Insert: blank line, notice, blank line after H1
     insert_at = h1_idx + 1
-    # Skip any existing blank line after heading
-    if insert_at < len(lines) and lines[insert_at].strip() == "":
+    # Skip any existing blank lines after heading
+    while insert_at < len(lines) and lines[insert_at].strip() == "":
         insert_at += 1
     lines = lines[: h1_idx + 1] + ["", notice_span, ""] + lines[insert_at:]
     return "\n".join(lines)

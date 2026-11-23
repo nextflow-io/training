@@ -1,38 +1,38 @@
-# वर्कफ़्लो डीबगिंग
+# वर्कफ़्लो की समस्या निवारण
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-डीबगिंग एक महत्वपूर्ण कौशल है जो तुम्हें घंटों की परेशानी से बचा सकती है और तुम्हें एक बेहतर Nextflow डेवलपर बनने में मदद कर सकती है। अपने करियर में, खासकर जब तुम शुरुआत कर रहे हो, वर्कफ़्लो बनाते और बनाए रखते समय तुम्हें बग्स का सामना करना पड़ेगा। व्यवस्थित डीबगिंग तरीके सीखने से तुम समस्याओं को जल्दी पहचान और हल कर पाओगे।
+डीबगिंग एक महत्वपूर्ण कौशल है जो तुम्हें घंटों की निराशा से बचा सकती है और तुम्हें एक बेहतर Nextflow डेवलपर बनने में मदद कर सकती है। अपने करियर में, खासकर जब तुम शुरुआत कर रहे हो, वर्कफ़्लो बनाते और बनाए रखते समय तुम्हें बग्स का सामना करना पड़ेगा। व्यवस्थित डीबगिंग तरीके सीखने से तुम्हें समस्याओं को जल्दी पहचानने और हल करने में मदद मिलेगी।
 
 ### सीखने के लक्ष्य
 
-इस side quest में, हम Nextflow वर्कफ़्लो के लिए **व्यवस्थित डीबगिंग तकनीकें** खोजेंगे:
+इस साइड क्वेस्ट में, हम Nextflow वर्कफ़्लो के लिए **व्यवस्थित डीबगिंग तकनीकों** का पता लगाएंगे:
 
-- **Syntax error डीबगिंग**: IDE फ़ीचर्स और Nextflow error messages का प्रभावी उपयोग
-- **Channel डीबगिंग**: डेटा फ़्लो समस्याओं और channel structure की समस्याओं का निदान
-- **Process डीबगिंग**: execution failures और resource समस्याओं की जांच
+- **सिंटैक्स एरर डीबगिंग**: IDE फीचर्स और Nextflow एरर मैसेज का प्रभावी उपयोग
+- **चैनल डीबगिंग**: डेटा फ्लो समस्याओं और चैनल संरचना की समस्याओं का निदान
+- **प्रोसेस डीबगिंग**: एक्जीक्यूशन विफलताओं और रिसोर्स समस्याओं की जांच
 - **बिल्ट-इन डीबगिंग टूल्स**: Nextflow के preview mode, stub running, और work directories का उपयोग
 - **व्यवस्थित तरीके**: कुशल डीबगिंग के लिए चार-चरण की पद्धति
 
-अंत में, तुम्हारे पास एक मजबूत डीबगिंग पद्धति होगी जो निराशाजनक error messages को समाधान के स्पष्ट रोडमैप में बदल देगी।
+अंत में, तुम्हारे पास एक मजबूत डीबगिंग पद्धति होगी जो निराशाजनक एरर मैसेज को समाधान के स्पष्ट रोडमैप में बदल देगी।
 
-### पूर्वापेक्षाएँ
+### पूर्वापेक्षाएं
 
-इस side quest को शुरू करने से पहले, तुम्हें:
+इस साइड क्वेस्ट को शुरू करने से पहले, तुम्हें:
 
-- [Hello Nextflow](../hello_nextflow/README.md) ट्यूटोरियल या समकक्ष शुरुआती कोर्स पूरा करना चाहिए।
-- बुनियादी Nextflow अवधारणाओं और तंत्रों (processes, channels, operators) का उपयोग करने में सहज होना चाहिए।
+- [Hello Nextflow](../../hello_nextflow/index.md) ट्यूटोरियल या समकक्ष शुरुआती कोर्स पूरा करना चाहिए।
+- बुनियादी Nextflow अवधारणाओं और तंत्रों (प्रोसेस, चैनल, ऑपरेटर) का उपयोग करने में सहज होना चाहिए।
 
-**वैकल्पिक:** हम पहले [IDE Features for Nextflow Development](../dev_environment/) side quest पूरा करने की सलाह देते हैं।
-यह डीबगिंग को सपोर्ट करने वाले IDE फ़ीचर्स (syntax highlighting, error detection, आदि) का व्यापक कवरेज देता है, जिनका हम यहाँ भरपूर उपयोग करेंगे।
+**वैकल्पिक:** हम अनुशंसा करते हैं कि पहले [IDE Features for Nextflow Development](../dev_environment/index.md) साइड क्वेस्ट पूरा करो।
+इसमें IDE फीचर्स का व्यापक कवरेज है जो डीबगिंग में सहायता करते हैं (सिंटैक्स हाइलाइटिंग, एरर डिटेक्शन, आदि), जिनका हम यहाँ भरपूर उपयोग करेंगे।
 
 ---
 
 ## 0. शुरू करना
 
-#### Training codespace खोलो
+#### ट्रेनिंग codespace खोलो
 
-अगर तुमने अभी तक नहीं किया है, तो [Environment Setup](../envsetup/index.md) में बताए अनुसार training environment खोलना सुनिश्चित करो।
+अगर तुमने अभी तक नहीं किया है, तो [Environment Setup](../../envsetup/index.md) में बताए अनुसार ट्रेनिंग वातावरण खोलना सुनिश्चित करो।
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -44,7 +44,7 @@
 cd side-quests/debugging
 ```
 
-तुम VSCode को इस डायरेक्टरी पर फ़ोकस करने के लिए सेट कर सकते हो:
+तुम VSCode को इस डायरेक्टरी पर फोकस करने के लिए सेट कर सकते हो:
 
 ```bash
 code .
@@ -52,7 +52,7 @@ code .
 
 #### सामग्री की समीक्षा करो
 
-तुम्हें विभिन्न प्रकार के बग्स वाले example वर्कफ़्लो का एक सेट मिलेगा जिनका हम अभ्यास के लिए उपयोग करेंगे:
+तुम्हें विभिन्न प्रकार के बग्स वाले उदाहरण वर्कफ़्लो का एक सेट मिलेगा जिनका उपयोग हम अभ्यास के लिए करेंगे:
 
 ??? abstract "डायरेक्टरी सामग्री"
 
@@ -83,24 +83,24 @@ code .
     └── no_such_var.nf
     ```
 
-ये फ़ाइलें उन सामान्य डीबगिंग परिदृश्यों को दर्शाती हैं जो तुम्हें वास्तविक विकास में मिलेंगे।
+ये फ़ाइलें वास्तविक दुनिया के विकास में आने वाले सामान्य डीबगिंग परिदृश्यों को दर्शाती हैं।
 
 #### असाइनमेंट की समीक्षा करो
 
-तुम्हारी चुनौती है कि प्रत्येक वर्कफ़्लो चलाओ, error(s) पहचानो, और उन्हें ठीक करो।
+तुम्हारी चुनौती है कि प्रत्येक वर्कफ़्लो चलाओ, एरर(एरर्स) की पहचान करो, और उन्हें ठीक करो।
 
-प्रत्येक buggy वर्कफ़्लो के लिए:
+प्रत्येक बगी वर्कफ़्लो के लिए:
 
-1. **वर्कफ़्लो चलाओ** और error देखो
-2. **Error message का विश्लेषण करो**: Nextflow तुम्हें क्या बता रहा है?
+1. **वर्कफ़्लो चलाओ** और एरर देखो
+2. **एरर मैसेज का विश्लेषण करो**: Nextflow तुम्हें क्या बता रहा है?
 3. **दिए गए संकेतों का उपयोग करके कोड में समस्या ढूंढो**
 4. **बग ठीक करो** और सत्यापित करो कि तुम्हारा समाधान काम करता है
 5. **अगले सेक्शन पर जाने से पहले फ़ाइल रीसेट करो** (`git checkout <filename>` का उपयोग करो)
 
-अभ्यास सरल syntax errors से शुरू होकर अधिक सूक्ष्म runtime समस्याओं तक बढ़ते हैं।
-समाधान inline चर्चा किए गए हैं, लेकिन आगे पढ़ने से पहले प्रत्येक को खुद हल करने की कोशिश करो।
+अभ्यास सरल सिंटैक्स एरर से लेकर अधिक सूक्ष्म रनटाइम समस्याओं तक बढ़ते हैं।
+समाधान इनलाइन चर्चा किए गए हैं, लेकिन आगे पढ़ने से पहले प्रत्येक को खुद हल करने की कोशिश करो।
 
-#### तैयारी की जाँच सूची
+#### तैयारी की जांच सूची
 
 क्या तुम शुरू करने के लिए तैयार हो?
 
@@ -113,13 +113,13 @@ code .
 
 ---
 
-## 1. Syntax Errors
+## 1. सिंटैक्स एरर
 
-Syntax errors सबसे सामान्य प्रकार की errors हैं जो तुम Nextflow कोड लिखते समय पाओगे। ये तब होती हैं जब कोड Nextflow DSL के अपेक्षित syntax नियमों के अनुरूप नहीं होता। ये errors तुम्हारे वर्कफ़्लो को बिल्कुल भी चलने से रोकती हैं, इसलिए यह सीखना महत्वपूर्ण है कि उन्हें जल्दी कैसे पहचानें और ठीक करें।
+सिंटैक्स एरर सबसे सामान्य प्रकार की एरर हैं जो तुम Nextflow कोड लिखते समय पाओगे। ये तब होती हैं जब कोड Nextflow DSL के अपेक्षित सिंटैक्स नियमों के अनुरूप नहीं होता। ये एरर तुम्हारे वर्कफ़्लो को बिल्कुल भी चलने से रोकती हैं, इसलिए यह सीखना महत्वपूर्ण है कि उन्हें जल्दी कैसे पहचाना और ठीक किया जाए।
 
-### 1.1. Missing braces
+### 1.1. गायब ब्रेसेज़
 
-सबसे सामान्य syntax errors में से एक, और कभी-कभी डीबग करने के लिए अधिक जटिल, **missing या mismatched brackets** है।
+सबसे सामान्य सिंटैक्स एरर में से एक, और कभी-कभी डीबग करने के लिए अधिक जटिल एरर में से एक है **गायब या बेमेल ब्रैकेट**।
 
 चलो एक व्यावहारिक उदाहरण से शुरू करते हैं।
 
@@ -132,9 +132,9 @@ nextflow run bad_syntax.nf
 ??? failure "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_syntax.nf` [stupefied_bhabha] DSL2 - revision: ca6327fad2
+    Launching `bad_syntax.nf` [nice_kalam] revision: 550b9a8873
 
     Error bad_syntax.nf:24:1: Unexpected input: '<EOF>'
 
@@ -143,15 +143,15 @@ nextflow run bad_syntax.nf
      -- Check '.nextflow.log' file for details
     ```
 
-**Syntax error messages के मुख्य तत्व:**
+**सिंटैक्स एरर मैसेज के मुख्य तत्व:**
 
-- **फ़ाइल और स्थान**: दिखाता है कि कौन सी फ़ाइल और line/column में error है (`bad_syntax.nf:24:1`)
-- **Error विवरण**: बताता है कि parser को क्या मिला जो उसे अपेक्षित नहीं था (`Unexpected input: '<EOF>'`)
-- **EOF संकेतक**: `<EOF>` (End Of File) message इंगित करता है कि parser फ़ाइल के अंत तक पहुँच गया जबकि अभी भी अधिक content की अपेक्षा थी - unclosed braces का एक क्लासिक संकेत
+- **फ़ाइल और स्थान**: दिखाता है कि कौन सी फ़ाइल और लाइन/कॉलम में एरर है (`bad_syntax.nf:24:1`)
+- **एरर विवरण**: बताता है कि पार्सर को क्या मिला जो उसे अपेक्षित नहीं था (`Unexpected input: '<EOF>'`)
+- **EOF संकेतक**: `<EOF>` (End Of File) मैसेज इंगित करता है कि पार्सर फ़ाइल के अंत तक पहुंच गया जबकि अभी भी अधिक सामग्री की अपेक्षा थी - यह बंद न किए गए ब्रेसेज़ का एक क्लासिक संकेत है
 
-#### कोड जाँचो
+#### कोड की जांच करो
 
-अब, `bad_syntax.nf` की जाँच करते हैं यह समझने के लिए कि error क्या कारण है:
+अब, `bad_syntax.nf` की जांच करते हैं यह समझने के लिए कि एरर क्या कारण है:
 
 ```groovy title="bad_syntax.nf" hl_lines="14" linenums="1"
 #!/usr/bin/env nextflow
@@ -167,31 +167,31 @@ process PROCESS_FILES {
     """
     echo "Processing ${sample_name}" > ${sample_name}_output.txt
     """
-// process के लिए closing brace गायब है
+// प्रोसेस के लिए closing brace गायब है
 
 workflow {
 
     // इनपुट चैनल बनाओ
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-    // इनपुट चैनल के साथ process को कॉल करो
+    // इनपुट चैनल के साथ प्रोसेस को कॉल करो
     PROCESS_FILES(input_ch)
 }
 ```
 
-इस उदाहरण के लिए हमने तुम्हें एक comment छोड़ा है जो दिखाता है कि error कहाँ है। Nextflow VSCode extension भी तुम्हें कुछ संकेत दे रहा होगा, mismatched brace को लाल रंग में दिखाकर और फ़ाइल के समय से पहले समाप्त होने को हाइलाइट करके:
+इस उदाहरण के लिए हमने तुम्हारे लिए एक कमेंट छोड़ा है जो दिखाता है कि एरर कहाँ है। Nextflow VSCode एक्सटेंशन भी तुम्हें कुछ संकेत दे रहा होगा कि क्या गलत हो सकता है, बेमेल ब्रेस को लाल रंग में दिखाकर और फ़ाइल के समय से पहले समाप्त होने को हाइलाइट करके:
 
-![Bad syntax](img/bad_syntax.png)
+![Bad syntax](../img/bad_syntax.png)
 
-**Bracket errors के लिए डीबगिंग रणनीति:**
+**ब्रैकेट एरर के लिए डीबगिंग रणनीति:**
 
-1. VS Code के bracket matching का उपयोग करो (cursor को bracket के बगल में रखो)
-2. bracket-संबंधित messages के लिए Problems panel जाँचो
+1. VS Code के bracket matching का उपयोग करो (ब्रैकेट के बगल में कर्सर रखो)
+2. ब्रैकेट-संबंधित मैसेज के लिए Problems panel जांचो
 3. सुनिश्चित करो कि प्रत्येक opening `{` का एक corresponding closing `}` है
 
 #### कोड ठीक करो
 
-comment को missing closing brace से बदलो:
+कमेंट को गायब closing brace से बदलो:
 
 === "बाद में"
 
@@ -209,14 +209,14 @@ comment को missing closing brace से बदलो:
         """
         echo "Processing ${sample_name}" > ${sample_name}_output.txt
         """
-    }  // missing closing brace जोड़ो
+    }  // गायब closing brace जोड़ो
 
     workflow {
 
         // इनपुट चैनल बनाओ
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // इनपुट चैनल के साथ process को कॉल करो
+        // इनपुट चैनल के साथ प्रोसेस को कॉल करो
         PROCESS_FILES(input_ch)
     }
     ```
@@ -237,14 +237,14 @@ comment को missing closing brace से बदलो:
         """
         echo "Processing ${sample_name}" > ${sample_name}_output.txt
         """
-    // process के लिए closing brace गायब है
+    // प्रोसेस के लिए closing brace गायब है
 
     workflow {
 
         // इनपुट चैनल बनाओ
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // इनपुट चैनल के साथ process को कॉल करो
+        // इनपुट चैनल के साथ प्रोसेस को कॉल करो
         PROCESS_FILES(input_ch)
     }
     ```
@@ -260,17 +260,17 @@ nextflow run bad_syntax.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_syntax.nf` [insane_faggin] DSL2 - revision: 961938ee2b
+    Launching `bad_syntax.nf` [small_morse] revision: 27352249e7
 
     executor >  local (3)
-    [48/cd7f54] PROCESS_FILES (1) | 3 of 3 ✔
+    [f5/dd6f46] PROCESS_FILES (1) | 3 of 3 ✔
     ```
 
-### 1.2. गलत process keywords या directives का उपयोग
+### 1.2. गलत प्रोसेस कीवर्ड या निर्देशों का उपयोग
 
-एक और सामान्य syntax error **invalid process definition** है। यह तब हो सकता है जब तुम आवश्यक blocks को define करना भूल जाते हो या process definition में गलत directives का उपयोग करते हो।
+एक और सामान्य सिंटैक्स एरर है **अमान्य प्रोसेस परिभाषा**। यह तब हो सकता है जब तुम आवश्यक ब्लॉक परिभाषित करना भूल जाते हो या प्रोसेस परिभाषा में गलत निर्देशों का उपयोग करते हो।
 
 #### पाइपलाइन चलाओ
 
@@ -281,9 +281,9 @@ nextflow run invalid_process.nf
 ??? failure "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `invalid_process.nf` [nasty_jepsen] DSL2 - revision: da9758d614
+    Launching `invalid_process.nf` [astonishing_pesquet] revision: f42559404a
 
     Error invalid_process.nf:3:1: Invalid process definition -- check for missing or out-of-order section labels
     │   3 | process PROCESS_FILES {
@@ -298,15 +298,15 @@ nextflow run invalid_process.nf
      -- Check '.nextflow.log' file for details
     ```
 
-#### कोड जाँचो
+#### कोड की जांच करो
 
-Error "Invalid process definition" इंगित करती है और समस्या के आसपास का context दिखाती है। Lines 3-7 को देखने पर, हम line 4 पर `inputs:` देख सकते हैं, जो समस्या है। चलो `invalid_process.nf` की जाँच करते हैं:
+एरर "Invalid process definition" इंगित करती है और समस्या के आसपास का संदर्भ दिखाती है। लाइन 3-7 को देखते हुए, हम लाइन 4 पर `inputs:` देख सकते हैं, जो समस्या है। चलो `invalid_process.nf` की जांच करते हैं:
 
 ```groovy title="invalid_process.nf" hl_lines="4" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
-    inputs:  // ERROR: 'inputs' नहीं, 'input' होना चाहिए
+    inputs:  // एरर: 'inputs' नहीं, 'input' होना चाहिए
     val sample_name
 
     output:
@@ -323,18 +323,18 @@ workflow {
     // इनपुट चैनल बनाओ
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-    // इनपुट चैनल के साथ process को कॉल करो
+    // इनपुट चैनल के साथ प्रोसेस को कॉल करो
     PROCESS_FILES(input_ch)
 }
 ```
 
-Error context में line 4 को देखने पर, हम समस्या पहचान सकते हैं: हम सही `input` directive के बजाय `inputs` का उपयोग कर रहे हैं। Nextflow VSCode extension भी इसे flag करेगा:
+एरर संदर्भ में लाइन 4 को देखते हुए, हम समस्या देख सकते हैं: हम सही `input` निर्देश के बजाय `inputs` का उपयोग कर रहे हैं। Nextflow VSCode एक्सटेंशन भी इसे फ्लैग करेगा:
 
-![Invalid process message](img/invalid_process_message.png)
+![Invalid process message](../img/invalid_process_message.png)
 
 #### कोड ठीक करो
 
-[documentation](https://www.nextflow.io/docs/latest/process.html#) का संदर्भ लेकर गलत keyword को सही से बदलो:
+[दस्तावेज़ीकरण](https://www.nextflow.io/docs/latest/process.html#) का संदर्भ लेकर गलत कीवर्ड को सही से बदलो:
 
 === "बाद में"
 
@@ -359,7 +359,7 @@ Error context में line 4 को देखने पर, हम समस�
         // इनपुट चैनल बनाओ
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // इनपुट चैनल के साथ process को कॉल करो
+        // इनपुट चैनल के साथ प्रोसेस को कॉल करो
         PROCESS_FILES(input_ch)
     }
     ```
@@ -370,7 +370,7 @@ Error context में line 4 को देखने पर, हम समस�
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        inputs:  // ERROR: 'inputs' नहीं, 'input' होना चाहिए
+        inputs:  // एरर: 'inputs' नहीं, 'input' होना चाहिए
         val sample_name
 
         output:
@@ -387,7 +387,7 @@ Error context में line 4 को देखने पर, हम समस�
         // इनपुट चैनल बनाओ
         input_ch = channel.of('sample1', 'sample2', 'sample3')
 
-        // इनपुट चैनल के साथ process को कॉल करो
+        // इनपुट चैनल के साथ प्रोसेस को कॉल करो
         PROCESS_FILES(input_ch)
     }
     ```
@@ -403,17 +403,17 @@ nextflow run invalid_process.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `invalid_process.nf` [silly_fermi] DSL2 - revision: 961938ee2b
+    Launching `invalid_process.nf` [confident_banach] revision: 74483e75bc
 
     executor >  local (3)
-    [b7/76cd9d] PROCESS_FILES (2) | 3 of 3 ✔
+    [29/87d6b8] PROCESS_FILES (1) | 3 of 3 ✔
     ```
 
-### 1.3. गलत variable names का उपयोग
+### 1.3. गलत वेरिएबल नामों का उपयोग
 
-तुम्हारे script blocks में जो variable names उपयोग करते हो वे valid होने चाहिए, या तो inputs से derived या script से पहले insert किए गए Groovy कोड से। लेकिन जब तुम पाइपलाइन development की शुरुआत में complexity से जूझ रहे होते हो, तो variable naming में गलतियाँ करना आसान है, और Nextflow तुम्हें जल्दी बता देगा।
+तुम्हारे script ब्लॉक में उपयोग किए जाने वाले वेरिएबल नाम वैध होने चाहिए, जो या तो इनपुट से या script से पहले डाले गए Groovy कोड से प्राप्त हों। लेकिन जब तुम पाइपलाइन विकास की शुरुआत में जटिलता से जूझ रहे होते हो, तो वेरिएबल नामकरण में गलतियाँ करना आसान है, और Nextflow तुम्हें जल्दी बता देगा।
 
 #### पाइपलाइन चलाओ
 
@@ -424,9 +424,9 @@ nextflow run no_such_var.nf
 ??? failure "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `no_such_var.nf` [gloomy_meninsky] DSL2 - revision: 0c4d3bc28c
+    Launching `no_such_var.nf` [spontaneous_pasteur] revision: 0c4d3bc28c
 
     Error no_such_var.nf:17:39: `undefined_var` is not defined
     │  17 |     echo "Using undefined variable: ${undefined_var}" >> ${output_pref
@@ -437,11 +437,11 @@ nextflow run no_such_var.nf
      -- Check '.nextflow.log' file for details
     ```
 
-Error compile time पर पकड़ी जाती है और सीधे line 17 पर undefined variable की ओर इशारा करती है, एक caret के साथ जो बिल्कुल वहाँ इंगित करता है जहाँ समस्या है।
+एरर compile time पर पकड़ी जाती है और सीधे लाइन 17 पर अपरिभाषित वेरिएबल की ओर इशारा करती है, एक caret के साथ जो बिल्कुल वहाँ इंगित करता है जहाँ समस्या है।
 
-#### कोड जाँचो
+#### कोड की जांच करो
 
-चलो `no_such_var.nf` की जाँच करते हैं:
+चलो `no_such_var.nf` की जांच करते हैं:
 
 ```groovy title="no_such_var.nf" hl_lines="17" linenums="1"
 #!/usr/bin/env nextflow
@@ -454,13 +454,13 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // script से पहले Groovy कोड में variables define करो
+    // script से पहले Groovy कोड में वेरिएबल परिभाषित करो
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
     """
     echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var define नहीं है
+    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // एरर: undefined_var परिभाषित नहीं है
     """
 }
 
@@ -470,11 +470,11 @@ workflow {
 }
 ```
 
-Error message इंगित करती है कि variable script template में पहचाना नहीं गया, और वहाँ तुम देख सकते हो - script block में `${undefined_var}` का उपयोग किया गया है, लेकिन कहीं और define नहीं किया गया।
+एरर मैसेज इंगित करता है कि वेरिएबल script टेम्पलेट में पहचाना नहीं गया है, और वहाँ तुम देख सकते हो - script ब्लॉक में `#!groovy ${undefined_var}` का उपयोग किया गया है, लेकिन कहीं और परिभाषित नहीं किया गया है।
 
 #### कोड ठीक करो
 
-अगर तुम्हें 'No such variable' error मिलती है, तो तुम इसे variable define करके (input variable names सही करके या script से पहले Groovy कोड edit करके), या अगर इसकी जरूरत नहीं है तो script block से हटाकर ठीक कर सकते हो:
+अगर तुम्हें 'No such variable' एरर मिलती है, तो तुम इसे या तो वेरिएबल परिभाषित करके (इनपुट वेरिएबल नाम सही करके या script से पहले Groovy कोड संपादित करके), या script ब्लॉक से इसे हटाकर ठीक कर सकते हो अगर इसकी जरूरत नहीं है:
 
 === "बाद में"
 
@@ -486,16 +486,16 @@ Error message इंगित करती है कि variable script templat
         val sample_name
 
         output:
-        path "${sample_name}_output.txt"
+        path "${sample_name}_processed.txt"
 
         script:
-        // script से पहले Groovy कोड में variables define करो
+        // script से पहले Groovy कोड में वेरिएबल परिभाषित करो
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        """  // undefined_var वाली line हटाई
+        """  // undefined_var वाली लाइन हटाई
     }
 
     workflow {
@@ -514,16 +514,16 @@ Error message इंगित करती है कि variable script templat
         val sample_name
 
         output:
-        path "${sample_name}_output.txt"
+        path "${sample_name}_processed.txt"
 
         script:
-        // script से पहले Groovy कोड में variables define करो
+        // script से पहले Groovy कोड में वेरिएबल परिभाषित करो
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var define नहीं है
+        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // एरर: undefined_var परिभाषित नहीं है
         """
     }
 
@@ -544,17 +544,17 @@ nextflow run no_such_var.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `no_such_var.nf` [suspicious_venter] DSL2 - revision: 6ba490f7c5
+    Launching `no_such_var.nf` [suspicious_venter] revision: 229f1da893
 
     executor >  local (3)
-    [21/237300] PROCESS_FILES (2) | 3 of 3 ✔
+    [26/b4370c] PROCESS_FILES (3) | 3 of 3 ✔
     ```
 
-### 1.4. Bash variables का गलत उपयोग
+### 1.4. Bash वेरिएबल का गलत उपयोग
 
-Nextflow में शुरुआत करते समय, Nextflow (Groovy) और Bash variables के बीच अंतर समझना मुश्किल हो सकता है। यह bad variable error का एक और रूप उत्पन्न कर सकता है जो script block की Bash content में variables का उपयोग करने की कोशिश करते समय दिखाई देता है।
+Nextflow में शुरुआत करते समय, Nextflow (Groovy) और Bash वेरिएबल के बीच अंतर समझना मुश्किल हो सकता है। यह बुरे वेरिएबल एरर का एक और रूप उत्पन्न कर सकता है जो script ब्लॉक की Bash सामग्री में वेरिएबल का उपयोग करने की कोशिश करते समय प्रकट होता है।
 
 #### पाइपलाइन चलाओ
 
@@ -565,9 +565,9 @@ nextflow run bad_bash_var.nf
 ??? failure "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_bash_var.nf` [infallible_mandelbrot] DSL2 - revision: 0853c11080
+    Launching `bad_bash_var.nf` [hopeful_koch] revision: 0853c11080
 
     Error bad_bash_var.nf:13:42: `prefix` is not defined
     │  13 |     echo "Processing ${sample_name}" > ${prefix}.txt
@@ -578,9 +578,9 @@ nextflow run bad_bash_var.nf
      -- Check '.nextflow.log' file for details
     ```
 
-#### कोड जाँचो
+#### कोड की जांच करो
 
-Error line 13 की ओर इशारा करती है जहाँ `${prefix}` का उपयोग किया गया है। चलो `bad_bash_var.nf` की जाँच करते हैं यह देखने के लिए कि समस्या क्या है:
+एरर लाइन 13 की ओर इशारा करती है जहाँ `#!groovy ${prefix}` का उपयोग किया गया है। चलो `bad_bash_var.nf` की जांच करते हैं यह देखने के लिए कि समस्या क्या है:
 
 ```groovy title="bad_bash_var.nf" hl_lines="13" linenums="1"
 #!/usr/bin/env nextflow
@@ -595,16 +595,16 @@ process PROCESS_FILES {
     script:
     """
     prefix="${sample_name}_output"
-    echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} Groovy syntax है, Bash नहीं
+    echo "Processing ${sample_name}" > ${prefix}.txt  # एरर: ${prefix} Groovy सिंटैक्स है, Bash नहीं
     """
 }
 ```
 
-इस उदाहरण में, हम Bash में `prefix` variable define कर रहे हैं, लेकिन Nextflow process में `$` syntax जो हमने इसे refer करने के लिए उपयोग किया (`${prefix}`) को Groovy variable के रूप में interpret किया जाता है, Bash के रूप में नहीं। Groovy context में variable exist नहीं करता, इसलिए हमें 'no such variable' error मिलती है।
+इस उदाहरण में, हम Bash में `prefix` वेरिएबल परिभाषित कर रहे हैं, लेकिन Nextflow प्रोसेस में `$` सिंटैक्स जिसका उपयोग हमने इसे संदर्भित करने के लिए किया (`#!groovy ${prefix}`) को Groovy वेरिएबल के रूप में व्याख्यायित किया जाता है, Bash के रूप में नहीं। वेरिएबल Groovy संदर्भ में मौजूद नहीं है, इसलिए हमें 'no such variable' एरर मिलती है।
 
 #### कोड ठीक करो
 
-अगर तुम Bash variable का उपयोग करना चाहते हो, तो तुम्हें dollar sign को इस तरह escape करना होगा:
+अगर तुम Bash वेरिएबल का उपयोग करना चाहते हो, तो तुम्हें dollar sign को इस तरह escape करना होगा:
 
 === "बाद में"
 
@@ -646,12 +646,12 @@ process PROCESS_FILES {
         script:
         """
         prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} Groovy syntax है, Bash नहीं
+        echo "Processing ${sample_name}" > ${prefix}.txt  # एरर: ${prefix} Groovy सिंटैक्स है, Bash नहीं
         """
     }
     ```
 
-यह Nextflow को इसे Bash variable के रूप में interpret करने के लिए कहता है।
+यह Nextflow को इसे Bash वेरिएबल के रूप में व्याख्यायित करने के लिए कहता है।
 
 #### पाइपलाइन चलाओ
 
@@ -664,17 +664,17 @@ nextflow run bad_bash_var.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_bash_var.nf` [naughty_franklin] DSL2 - revision: 58c1c83709
+    Launching `bad_bash_var.nf` [naughty_franklin] revision: 9c672c6a1b
 
     executor >  local (3)
-    [4e/560285] PROCESS_FILES (2) | 3 of 3 ✔
+    [cf/19a490] PROCESS_FILES (3) | 3 of 3 ✔
     ```
 
-!!! tip "Groovy बनाम Bash Variables"
+!!! tip "Groovy बनाम Bash वेरिएबल"
 
-    String concatenation या prefix/suffix operations जैसे सरल variable manipulations के लिए, script block में Bash variables के बजाय script section में Groovy variables का उपयोग करना आमतौर पर अधिक readable होता है:
+    सरल वेरिएबल मैनिपुलेशन जैसे string concatenation या prefix/suffix ऑपरेशन के लिए, script ब्लॉक में Bash वेरिएबल के बजाय script सेक्शन में Groovy वेरिएबल का उपयोग करना आमतौर पर अधिक पठनीय होता है:
 
     ```groovy linenums="1"
     script:
@@ -685,11 +685,11 @@ nextflow run bad_bash_var.nf
     """
     ```
 
-    यह तरीका dollar signs escape करने की जरूरत से बचाता है और कोड को पढ़ने और maintain करने में आसान बनाता है।
+    यह तरीका dollar signs को escape करने की जरूरत से बचाता है और कोड को पढ़ने और बनाए रखने में आसान बनाता है।
 
-### 1.5. Workflow Block के बाहर Statements
+### 1.5. Workflow ब्लॉक के बाहर स्टेटमेंट
 
-Nextflow VSCode extension code structure की उन समस्याओं को highlight करता है जो errors का कारण बनेंगी। एक सामान्य उदाहरण `workflow {}` block के बाहर channels define करना है - यह अब एक syntax error के रूप में enforce किया जाता है।
+Nextflow VSCode एक्सटेंशन कोड संरचना की समस्याओं को हाइलाइट करता है जो एरर का कारण बनेंगी। एक सामान्य उदाहरण है `workflow {}` ब्लॉक के बाहर चैनल परिभाषित करना - यह अब एक सिंटैक्स एरर के रूप में लागू किया गया है।
 
 #### पाइपलाइन चलाओ
 
@@ -700,11 +700,11 @@ nextflow run badpractice_syntax.nf
 ??? failure "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `badpractice_syntax.nf` [intergalactic_colden] DSL2 - revision: 5e4b291bde
+    Launching `badpractice_syntax.nf` [fervent_miescher] revision: 5e4b291bde
 
-    Error badpractice_syntax.nf:3:1: Statements cannot be mixed with script declarations -- move statements into a process or workflow
+    Error badpractice_syntax.nf:3:1: Statements cannot be mixed with script declarations -- move statements into a process, workflow, or function
     │   3 | input_ch = channel.of('sample1', 'sample2', 'sample3')
     ╰     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -713,16 +713,16 @@ nextflow run badpractice_syntax.nf
      -- Check '.nextflow.log' file for details
     ```
 
-Error message स्पष्ट रूप से समस्या इंगित करती है: statements (जैसे channel definitions) को workflow या process block के बाहर script declarations के साथ mix नहीं किया जा सकता।
+एरर मैसेज स्पष्ट रूप से समस्या इंगित करता है: स्टेटमेंट (जैसे चैनल परिभाषाएं) को workflow या process ब्लॉक के बाहर script declarations के साथ मिश्रित नहीं किया जा सकता।
 
-#### कोड जाँचो
+#### कोड की जांच करो
 
-चलो `badpractice_syntax.nf` की जाँच करते हैं यह देखने के लिए कि error क्या कारण है:
+चलो `badpractice_syntax.nf` की जांच करते हैं यह देखने के लिए कि एरर क्या कारण है:
 
 ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
 #!/usr/bin/env nextflow
 
-input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel workflow के बाहर define किया गया
+input_ch = channel.of('sample1', 'sample2', 'sample3')  // एरर: workflow के बाहर चैनल परिभाषित
 
 process PROCESS_FILES {
     input:
@@ -732,7 +732,7 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // script से पहले Groovy कोड में variables define करो
+    // script से पहले Groovy कोड में वेरिएबल परिभाषित करो
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -746,13 +746,13 @@ workflow {
 }
 ```
 
-VSCode extension `input_ch` variable को workflow block के बाहर define किए जाने के रूप में भी highlight करेगा:
+VSCode एक्सटेंशन `input_ch` वेरिएबल को भी हाइलाइट करेगा जो workflow ब्लॉक के बाहर परिभाषित है:
 
-![Non-lethal syntax error](img/nonlethal.png)
+![Non-lethal syntax error](../img/nonlethal.png)
 
 #### कोड ठीक करो
 
-Channel definition को workflow block के अंदर ले जाओ:
+चैनल परिभाषा को workflow ब्लॉक के अंदर ले जाओ:
 
 === "बाद में"
 
@@ -767,7 +767,7 @@ Channel definition को workflow block के अंदर ले जाओ:
         path "${sample_name}_processed.txt"
 
         script:
-        // script से पहले Groovy कोड में variables define करो
+        // script से पहले Groovy कोड में वेरिएबल परिभाषित करो
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -777,7 +777,7 @@ Channel definition को workflow block के अंदर ले जाओ:
     }
 
     workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')  // workflow block के अंदर ले जाया गया
+        input_ch = channel.of('sample1', 'sample2', 'sample3')  // workflow ब्लॉक के अंदर ले जाया गया
         PROCESS_FILES(input_ch)
     }
     ```
@@ -787,7 +787,7 @@ Channel definition को workflow block के अंदर ले जाओ:
     ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
     #!/usr/bin/env nextflow
 
-    input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel workflow के बाहर define किया गया
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  // एरर: workflow के बाहर चैनल परिभाषित
 
     process PROCESS_FILES {
         input:
@@ -797,7 +797,7 @@ Channel definition को workflow block के अंदर ले जाओ:
         path "${sample_name}_processed.txt"
 
         script:
-        // script से पहले Groovy कोड में variables define करो
+        // script से पहले Groovy कोड में वेरिएबल परिभाषित करो
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -813,7 +813,7 @@ Channel definition को workflow block के अंदर ले जाओ:
 
 #### पाइपलाइन चलाओ
 
-Fix काम करता है यह पुष्टि करने के लिए वर्कफ़्लो फिर से चलाओ:
+यह पुष्टि करने के लिए कि फिक्स काम करता है, वर्कफ़्लो फिर से चलाओ:
 
 ```bash
 nextflow run badpractice_syntax.nf
@@ -822,41 +822,41 @@ nextflow run badpractice_syntax.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `badpractice_syntax.nf` [naughty_ochoa] DSL2 - revision: 5e4b291bde
+    Launching `badpractice_syntax.nf` [naughty_ochoa] revision: 92d029754c
 
     executor >  local (3)
-    [6a/84a608] PROCESS_FILES (2) | 3 of 3 ✔
+    [f0/350ff4] PROCESS_FILES (2) | 3 of 3 ✔
     ```
 
-अपने input channels को workflow block के अंदर define रखो, और सामान्य रूप से extension द्वारा की गई किसी भी अन्य सिफारिश का पालन करो।
+अपने इनपुट चैनल को workflow ब्लॉक के भीतर परिभाषित रखो, और सामान्य रूप से एक्सटेंशन द्वारा की गई किसी भी अन्य सिफारिश का पालन करो।
 
 ### सारांश
 
-तुम Nextflow error messages और IDE visual indicators का उपयोग करके syntax errors को व्यवस्थित रूप से पहचान और ठीक कर सकते हो। सामान्य syntax errors में missing braces, गलत process keywords, undefined variables, और Bash बनाम Nextflow variables का अनुचित उपयोग शामिल हैं। VSCode extension इनमें से कई को runtime से पहले पकड़ने में मदद करता है। इन syntax debugging skills के साथ, तुम सबसे सामान्य Nextflow syntax errors को जल्दी हल कर पाओगे और अधिक जटिल runtime समस्याओं से निपटने के लिए आगे बढ़ पाओगे।
+तुम Nextflow एरर मैसेज और IDE विज़ुअल संकेतकों का उपयोग करके सिंटैक्स एरर को व्यवस्थित रूप से पहचान और ठीक कर सकते हो। सामान्य सिंटैक्स एरर में गायब ब्रेसेज़, गलत प्रोसेस कीवर्ड, अपरिभाषित वेरिएबल, और Bash बनाम Nextflow वेरिएबल का अनुचित उपयोग शामिल हैं। VSCode एक्सटेंशन रनटाइम से पहले इनमें से कई को पकड़ने में मदद करता है। इन सिंटैक्स डीबगिंग कौशल के साथ, तुम सबसे सामान्य Nextflow सिंटैक्स एरर को जल्दी हल कर पाओगे और अधिक जटिल रनटाइम समस्याओं से निपटने के लिए आगे बढ़ पाओगे।
 
 ### आगे क्या है?
 
-अधिक जटिल channel structure errors को debug करना सीखो जो तब भी होती हैं जब syntax सही हो।
+अधिक जटिल चैनल संरचना एरर को डीबग करना सीखो जो तब भी होती हैं जब सिंटैक्स सही हो।
 
 ---
 
-## 2. Channel Structure Errors
+## 2. चैनल संरचना एरर
 
-Channel structure errors syntax errors से अधिक सूक्ष्म होती हैं क्योंकि कोड syntactically सही होता है, लेकिन data shapes वह नहीं होते जो processes अपेक्षित करती हैं। Nextflow पाइपलाइन चलाने की कोशिश करेगा, लेकिन पा सकता है कि inputs की संख्या उसकी अपेक्षा से मेल नहीं खाती और fail हो जाएगा। ये errors आमतौर पर केवल runtime पर दिखाई देती हैं और तुम्हारे वर्कफ़्लो से गुजरने वाले data की समझ की आवश्यकता होती है।
+चैनल संरचना एरर सिंटैक्स एरर से अधिक सूक्ष्म होती हैं क्योंकि कोड सिंटैक्टिकली सही है, लेकिन डेटा के आकार प्रोसेस की अपेक्षाओं से मेल नहीं खाते। Nextflow पाइपलाइन चलाने की कोशिश करेगा, लेकिन पा सकता है कि इनपुट की संख्या अपेक्षित से मेल नहीं खाती और विफल हो जाएगा। ये एरर आमतौर पर केवल रनटाइम पर दिखाई देती हैं और तुम्हारे वर्कफ़्लो से गुजरने वाले डेटा की समझ की आवश्यकता होती है।
 
-!!! tip "`.view()` के साथ Channels को Debug करना"
+!!! tip "`.view()` के साथ चैनल डीबग करना"
 
-    इस section में, याद रखो कि तुम अपने वर्कफ़्लो में किसी भी बिंदु पर channel content inspect करने के लिए `.view()` operator का उपयोग कर सकते हो। यह channel structure समस्याओं को समझने के लिए सबसे शक्तिशाली debugging tools में से एक है। हम section 2.4 में इस तकनीक को विस्तार से explore करेंगे, लेकिन examples के माध्यम से काम करते समय इसका उपयोग करने के लिए स्वतंत्र महसूस करो।
+    इस सेक्शन में, याद रखो कि तुम अपने वर्कफ़्लो में किसी भी बिंदु पर चैनल सामग्री का निरीक्षण करने के लिए `.view()` ऑपरेटर का उपयोग कर सकते हो। यह चैनल संरचना समस्याओं को समझने के लिए सबसे शक्तिशाली डीबगिंग टूल में से एक है। हम इस तकनीक को सेक्शन 2.4 में विस्तार से देखेंगे, लेकिन उदाहरणों के माध्यम से काम करते समय इसका उपयोग करने के लिए स्वतंत्र महसूस करो।
 
     ```groovy
-    my_channel.view()  // दिखाता है कि channel से क्या गुजर रहा है
+    my_channel.view()  // चैनल से क्या गुजर रहा है यह दिखाता है
     ```
 
-### 2.1. Input Channels की गलत संख्या
+### 2.1. इनपुट चैनल की गलत संख्या
 
-यह error तब होती है जब तुम एक process की अपेक्षा से अलग संख्या में channels pass करते हो।
+यह एरर तब होती है जब तुम एक प्रोसेस की अपेक्षा से अलग संख्या में चैनल पास करते हो।
 
 #### पाइपलाइन चलाओ
 
@@ -867,9 +867,9 @@ nextflow run bad_number_inputs.nf
 ??? failure "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_number_inputs.nf` [happy_swartz] DSL2 - revision: d83e58dcd3
+    Launching `bad_number_inputs.nf` [desperate_carson] revision: d83e58dcd3
 
     Error bad_number_inputs.nf:23:5: Incorrect number of call arguments, expected 1 but received 2
     │  23 |     PROCESS_FILES(samples_ch, files_ch)
@@ -880,16 +880,16 @@ nextflow run bad_number_inputs.nf
      -- Check '.nextflow.log' file for details
     ```
 
-#### कोड जाँचो
+#### कोड की जांच करो
 
-Error message स्पष्ट रूप से बताती है कि call को 1 argument अपेक्षित था लेकिन 2 मिले, और line 23 की ओर इशारा करती है। चलो `bad_number_inputs.nf` की जाँच करते हैं:
+एरर मैसेज स्पष्ट रूप से बताता है कि call को 1 आर्गुमेंट की अपेक्षा थी लेकिन 2 मिले, और लाइन 23 की ओर इशारा करता है। चलो `bad_number_inputs.nf` की जांच करते हैं:
 
 ```groovy title="bad_number_inputs.nf" hl_lines="5 23" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Process केवल 1 input अपेक्षित करता है
+        val sample_name  // प्रोसेस केवल 1 इनपुट चैनल की अपेक्षा करता है
 
     output:
         path "${sample_name}_output.txt"
@@ -902,22 +902,22 @@ process PROCESS_FILES {
 
 workflow {
 
-    // दो अलग channels बनाओ
+    // दो अलग चैनल बनाओ
     samples_ch = channel.of('sample1', 'sample2', 'sample3')
     files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-    // ERROR: 2 channels pass कर रहे हैं लेकिन process केवल 1 अपेक्षित करता है
+    // एरर: 2 चैनल पास किए जा रहे हैं लेकिन प्रोसेस केवल 1 की अपेक्षा करता है
     PROCESS_FILES(samples_ch, files_ch)
 }
 ```
 
-तुम mismatched `PROCESS_FILES` call देख सकते हो, जो multiple input channels supply कर रहा है जबकि process केवल एक define करता है। VSCode extension भी process call को लाल रंग में underline करेगा, और mouse over करने पर diagnostic message देगा:
+तुम्हें बेमेल `PROCESS_FILES` call दिखनी चाहिए, जो कई इनपुट चैनल प्रदान कर रही है जबकि प्रोसेस केवल एक परिभाषित करता है। VSCode एक्सटेंशन प्रोसेस call को लाल रंग में अंडरलाइन भी करेगा, और माउस ओवर करने पर एक diagnostic मैसेज प्रदान करेगा:
 
-![Incorrect number of args message](img/incorrect_num_args.png)
+![Incorrect number of args message](../img/incorrect_num_args.png)
 
 #### कोड ठीक करो
 
-इस specific उदाहरण के लिए, process एक single channel अपेक्षित करता है और दूसरे channel की जरूरत नहीं है, इसलिए हम केवल `samples_ch` channel pass करके इसे ठीक कर सकते हैं:
+इस विशिष्ट उदाहरण के लिए, प्रोसेस एक single चैनल की अपेक्षा करता है और दूसरे चैनल की आवश्यकता नहीं है, इसलिए हम केवल `samples_ch` चैनल पास करके इसे ठीक कर सकते हैं:
 
 === "बाद में"
 
@@ -926,7 +926,7 @@ workflow {
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process केवल 1 input अपेक्षित करता है
+            val sample_name  // प्रोसेस केवल 1 इनपुट चैनल की अपेक्षा करता है
 
         output:
             path "${sample_name}_output.txt"
@@ -939,11 +939,11 @@ workflow {
 
     workflow {
 
-        // दो अलग channels बनाओ
+        // दो अलग चैनल बनाओ
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // ठीक किया: केवल वह channel pass करो जो process अपेक्षित करता है
+        // ठीक किया: केवल वह चैनल पास करो जो प्रोसेस अपेक्षा करता है
         PROCESS_FILES(samples_ch)
     }
     ```
@@ -955,7 +955,7 @@ workflow {
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process केवल 1 input अपेक्षित करता है
+            val sample_name  // प्रोसेस केवल 1 इनपुट चैनल की अपेक्षा करता है
 
         output:
             path "${sample_name}_output.txt"
@@ -968,11 +968,11 @@ workflow {
 
     workflow {
 
-        // दो अलग channels बनाओ
+        // दो अलग चैनल बनाओ
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // ERROR: 2 channels pass कर रहे हैं लेकिन process केवल 1 अपेक्षित करता है
+        // एरर: 2 चैनल पास किए जा रहे हैं लेकिन प्रोसेस केवल 1 की अपेक्षा करता है
         PROCESS_FILES(samples_ch, files_ch)
     }
     ```
@@ -986,19 +986,19 @@ nextflow run bad_number_inputs.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_number_inputs.nf` [big_euler] DSL2 - revision: e302bd87be
+    Launching `bad_number_inputs.nf` [big_euler] revision: e302bd87be
 
     executor >  local (3)
-    [48/497f7b] PROCESS_FILES (3) | 3 of 3 ✔
+    [47/1d039f] PROCESS_FILES (3) | 3 of 3 ✔
     ```
 
-इस उदाहरण की तुलना में अधिक सामान्य रूप से, तुम एक process में additional inputs जोड़ सकते हो और workflow call को तदनुसार update करना भूल सकते हो, जो इस प्रकार की error का कारण बन सकता है। सौभाग्य से, यह समझने और ठीक करने में आसान errors में से एक है, क्योंकि error message mismatch के बारे में काफी स्पष्ट है।
+इस उदाहरण की तुलना में अधिक सामान्य रूप से, तुम किसी प्रोसेस में अतिरिक्त इनपुट जोड़ सकते हो और workflow call को तदनुसार अपडेट करना भूल सकते हो, जो इस प्रकार की एरर का कारण बन सकता है। सौभाग्य से, यह समझने और ठीक करने में आसान एरर में से एक है, क्योंकि एरर मैसेज बेमेल के बारे में काफी स्पष्ट है।
 
-### 2.2. Channel Exhaustion (Process अपेक्षा से कम बार चलता है)
+### 2.2. चैनल समाप्ति (प्रोसेस अपेक्षा से कम बार चलता है)
 
-कुछ channel structure errors बहुत अधिक सूक्ष्म होती हैं और कोई errors बिल्कुल नहीं produce करती हैं। इनमें से सबसे सामान्य शायद वह challenge है जो नए Nextflow users को यह समझने में होती है कि queue channels exhausted हो सकते हैं और items खत्म हो सकते हैं, जिसका अर्थ है कि वर्कफ़्लो समय से पहले समाप्त हो जाता है।
+कुछ चैनल संरचना एरर बहुत अधिक सूक्ष्म होती हैं और कोई एरर नहीं उत्पन्न करती हैं। इनमें से सबसे सामान्य शायद वह चुनौती है जो नए Nextflow उपयोगकर्ताओं को यह समझने में होती है कि queue channel समाप्त हो सकते हैं और आइटम खत्म हो सकते हैं, जिसका अर्थ है कि वर्कफ़्लो समय से पहले समाप्त हो जाता है।
 
 #### पाइपलाइन चलाओ
 
@@ -1008,20 +1008,20 @@ nextflow run exhausted.nf
 
 ??? success "कमांड आउटपुट"
 
-```console title="Exhausted channel output"
- N E X T F L O W   ~  version 25.10.2
+    ```console title="Exhausted channel output"
+     N E X T F L O W   ~  version 26.04.4
 
-Launching `exhausted.nf` [extravagant_gauss] DSL2 - revision: 08cff7ba2a
+    Launching `exhausted.nf` [romantic_liskov] revision: 31a6ae1494
 
-executor >  local (1)
-[bd/f61fff] PROCESS_FILES (1) [100%] 1 of 1 ✔
-```
+    executor >  local (1)
+    [10/82e235] PROCESS_FILES (1) | 1 of 1 ✔
+    ```
 
-यह वर्कफ़्लो बिना error के पूरा होता है, लेकिन यह केवल एक ही नमूने को process करता है!
+यह वर्कफ़्लो बिना एरर के पूरा होता है, लेकिन यह केवल एक नमूना प्रोसेस करता है!
 
-#### कोड जाँचो
+#### कोड की जांच करो
 
-चलो `exhausted.nf` की जाँच करते हैं यह देखने के लिए कि क्या यह सही है:
+चलो `exhausted.nf` की जांच करते हैं यह देखने के लिए कि क्या यह सही है:
 
 ```groovy title="exhausted.nf" hl_lines="23 24" linenums="1"
 #!/usr/bin/env nextflow
@@ -1035,7 +1035,7 @@ process PROCESS_FILES {
     path "${output_prefix}.txt"
 
     script:
-    // script से पहले Groovy कोड में variables define करो
+    // script से पहले Groovy कोड में वेरिएबल परिभाषित करो
     output_prefix = "${reference}_${sample_name}"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -1053,64 +1053,65 @@ workflow {
 }
 ```
 
-Process तीन बार के बजाय केवल एक बार चलता है क्योंकि `reference_ch` channel एक queue channel है जो पहले process execution के बाद exhausted हो जाता है। जब एक channel exhausted हो जाता है, तो पूरा process रुक जाता है, भले ही अन्य channels में अभी भी items हों।
+प्रोसेस तीन बार के बजाय केवल एक बार चलता है क्योंकि `reference_ch` चैनल एक queue channel है जो पहले प्रोसेस एक्जीक्यूशन के बाद समाप्त हो जाता है। जब एक चैनल समाप्त हो जाता है, तो पूरी प्रोसेस रुक जाती है, भले ही अन्य चैनल में अभी भी आइटम हों।
 
-यह एक सामान्य pattern है जहाँ तुम्हारे पास एक single reference फ़ाइल है जिसे multiple samples में reuse करने की जरूरत है। समाधान reference channel को एक value channel में convert करना है जिसे अनिश्चित काल तक reuse किया जा सकता है।
+यह एक सामान्य पैटर्न है जहाँ तुम्हारे पास एक single reference फ़ाइल है जिसे कई नमूनों में पुनः उपयोग करने की आवश्यकता है। समाधान है reference चैनल को एक value channel में बदलना जिसे अनिश्चित काल तक पुनः उपयोग किया जा सके।
 
 #### कोड ठीक करो
 
-इसे address करने के कुछ तरीके हैं जो इस बात पर निर्भर करते हैं कि कितनी फ़ाइलें प्रभावित हैं।
+इसे संबोधित करने के कुछ तरीके हैं जो इस बात पर निर्भर करते हैं कि कितनी फ़ाइलें प्रभावित हैं।
 
-**Option 1**: तुम्हारे पास एक single reference फ़ाइल है जिसे तुम बहुत बार reuse कर रहे हो। तुम simply एक value channel type बना सकते हो, जिसे बार-बार उपयोग किया जा सकता है। इसके तीन तरीके हैं:
+**विकल्प 1**: तुम्हारे पास एक single reference फ़ाइल है जिसे तुम बहुत अधिक पुनः उपयोग कर रहे हो। तुम बस एक value channel type बना सकते हो, जिसे बार-बार उपयोग किया जा सकता है। इसे करने के तीन तरीके हैं:
 
 **1a** `channel.value()` का उपयोग करो:
 
 ```groovy title="exhausted.nf (fixed - Option 1a)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.value('baseline_reference')  // Value channel को reuse किया जा सकता है
+    reference_ch = channel.value('baseline_reference')  // Value channel को पुनः उपयोग किया जा सकता है
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }
 ```
 
-**1b** `first()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#first) का उपयोग करो:
+**1b** `first()` [ऑपरेटर](https://www.nextflow.io/docs/latest/reference/operator.html#first) का उपयोग करो:
 
 ```groovy title="exhausted.nf (fixed - Option 1b)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').first()  // Value channel में convert करो
+    reference_ch = channel.of('baseline_reference').first()  // value channel में बदलो
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }
 ```
 
-**1c.** `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect) का उपयोग करो:
+**1c.** `collect()` [ऑपरेटर](https://www.nextflow.io/docs/latest/reference/operator.html#collect) का उपयोग करो।
+`collect()` एक list emit करता है, इसलिए single आइटम निकालने के लिए `map` का उपयोग करो:
 
 ```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').collect()  // Value channel में convert करो
+    reference_ch = channel.of('baseline_reference').collect().map { refs -> refs[0] }  // value channel में बदलो
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }
 ```
 
-**Option 2**: अधिक जटिल परिदृश्यों में, शायद जहाँ sample channel में सभी samples के लिए multiple reference फ़ाइलें हैं, तुम `combine` operator का उपयोग करके एक नया channel बना सकते हो जो दोनों channels को tuples में combine करता है:
+**विकल्प 2**: अधिक जटिल परिदृश्यों में, शायद जहाँ sample channel में सभी नमूनों के लिए कई reference फ़ाइलें हैं, तुम `combine` ऑपरेटर का उपयोग करके एक नया चैनल बना सकते हो जो दोनों चैनल को tuples में जोड़ता है:
 
 ```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="4" linenums="21"
 workflow {
     reference_ch = channel.of('baseline_reference','other_reference')
     input_ch = channel.of('sample1', 'sample2', 'sample3')
-    combined_ch = reference_ch.combine(input_ch)  // Cartesian product बनाता है
+    combined_ch = reference_ch.combine(input_ch)  // cartesian product बनाता है
 
     PROCESS_FILES(combined_ch)
 }
 ```
 
-`.combine()` operator दोनों channels का cartesian product generate करता है, इसलिए `reference_ch` में प्रत्येक item `input_ch` में प्रत्येक item के साथ pair होगा। यह process को reference का उपयोग करते हुए प्रत्येक sample के लिए चलने देता है।
+`.combine()` ऑपरेटर दोनों चैनल का cartesian product उत्पन्न करता है, इसलिए `reference_ch` में प्रत्येक आइटम `input_ch` में प्रत्येक आइटम के साथ जोड़ा जाएगा। यह प्रोसेस को reference का उपयोग करते हुए प्रत्येक नमूने के लिए चलने की अनुमति देता है।
 
-इसके लिए process input को adjust करने की जरूरत है। हमारे उदाहरण में, process definition की शुरुआत को इस प्रकार adjust करना होगा:
+इसके लिए प्रोसेस इनपुट को समायोजित करने की आवश्यकता है। हमारे उदाहरण में, प्रोसेस परिभाषा की शुरुआत को इस प्रकार समायोजित करने की आवश्यकता होगी:
 
 ```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="5" linenums="1"
 #!/usr/bin/env nextflow
@@ -1124,7 +1125,7 @@ process PROCESS_FILES {
 
 #### पाइपलाइन चलाओ
 
-ऊपर दिए गए fixes में से एक try करो और वर्कफ़्लो फिर से चलाओ:
+ऊपर दिए गए किसी एक फिक्स को आज़माओ और वर्कफ़्लो फिर से चलाओ (नीचे दिया गया आउटपुट विकल्प 1a का उपयोग करता है):
 
 ```bash
 nextflow run exhausted.nf
@@ -1133,19 +1134,19 @@ nextflow run exhausted.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `exhausted.nf` [maniac_leavitt] DSL2 - revision: f372a56a7d
+    Launching `exhausted.nf` [maniac_leavitt] revision: 74571a002a
 
     executor >  local (3)
-    [80/0779e9] PROCESS_FILES (3) | 3 of 3 ✔
+    [d9/886888] PROCESS_FILES (2) | 3 of 3 ✔
     ```
 
-अब तुम्हें केवल एक के बजाय तीनों samples process होते दिखने चाहिए।
+अब तुम्हें केवल एक के बजाय तीनों नमूने प्रोसेस होते दिखने चाहिए।
 
-### 2.3. गलत Channel Content Structure
+### 2.3. गलत चैनल सामग्री संरचना
 
-जब वर्कफ़्लो एक निश्चित स्तर की जटिलता तक पहुँचते हैं, तो प्रत्येक channel की internal structures का track रखना थोड़ा मुश्किल हो सकता है, और लोग आमतौर पर process की अपेक्षाओं और channel में वास्तव में क्या है के बीच mismatches generate करते हैं। यह पहले चर्चा की गई समस्या से अधिक सूक्ष्म है, जहाँ channels की संख्या गलत थी। इस मामले में, तुम्हारे पास input channels की सही संख्या हो सकती है, लेकिन उनमें से एक या अधिक की internal structure process की अपेक्षाओं से मेल नहीं खाती।
+जब वर्कफ़्लो एक निश्चित स्तर की जटिलता तक पहुंचते हैं, तो प्रत्येक चैनल की आंतरिक संरचनाओं का ट्रैक रखना थोड़ा मुश्किल हो सकता है, और लोग आमतौर पर प्रोसेस की अपेक्षाओं और चैनल में वास्तव में क्या है के बीच बेमेल उत्पन्न करते हैं। यह पहले चर्चा की गई समस्या से अधिक सूक्ष्म है, जहाँ चैनल की संख्या गलत थी। इस मामले में, तुम्हारे पास इनपुट चैनल की सही संख्या हो सकती है, लेकिन उनमें से एक या अधिक की आंतरिक संरचना प्रोसेस की अपेक्षाओं से मेल नहीं खाती।
 
 #### पाइपलाइन चलाओ
 
@@ -1156,11 +1157,12 @@ nextflow run bad_channel_shape.nf
 ??? failure "कमांड आउटपुट"
 
     ```console
-    Launching `bad_channel_shape.nf` [hopeful_pare] DSL2 - revision: ffd66071a1
+     N E X T F L O W   ~  version 26.04.4
+
+    Launching `bad_channel_shape.nf` [disturbed_hilbert] revision: 3046f86036
 
     executor >  local (3)
-    executor >  local (3)
-    [3f/c2dcb3] PROCESS_FILES (3) [  0%] 0 of 3 ✘
+    [13/2d7cf7] PROCESS_FILES (2) | 0 of 3 ✘
     ERROR ~ Error executing process > 'PROCESS_FILES (1)'
 
     Caused by:
@@ -1178,23 +1180,23 @@ nextflow run bad_channel_shape.nf
       (empty)
 
     Work dir:
-      /workspaces/training/side-quests/debugging/work/d6/1fb69d1d93300bbc9d42f1875b981e
+      /workspaces/training/side-quests/debugging/work/fc/20d7bd091eb9f7f63b76ab3a802cac
 
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 
     -- Check '.nextflow.log' file for details
     ```
 
-#### कोड जाँचो
+#### कोड की जांच करो
 
-Error message में square brackets यहाँ clue प्रदान करते हैं - process tuple को एक single value के रूप में treat कर रहा है, जो हम नहीं चाहते। चलो `bad_channel_shape.nf` की जाँच करते हैं:
+एरर मैसेज में square brackets यहाँ संकेत प्रदान करते हैं - प्रोसेस tuple को एक single value के रूप में मान रहा है, जो हम नहीं चाहते। चलो `bad_channel_shape.nf` की जांच करते हैं:
 
 ```groovy title="bad_channel_shape.nf" hl_lines="5 20-22" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Single value अपेक्षित है, tuple मिलता है
+        val sample_name  // single value की अपेक्षा करता है, tuple मिलता है
 
     output:
         path "${sample_name}_output.txt"
@@ -1207,7 +1209,7 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Channel tuples emit करता है, लेकिन process single values अपेक्षित करता है
+    // चैनल tuples emit करता है, लेकिन प्रोसेस single values की अपेक्षा करता है
     input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
@@ -1217,13 +1219,48 @@ workflow {
 }
 ```
 
-तुम देख सकते हो कि हम tuples से बना channel generate कर रहे हैं: `['sample1', 'file1.txt']`, लेकिन process एक single value, `val sample_name` अपेक्षित करता है। Executed command दिखाता है कि process `[sample3, file3.txt]_output.txt` नाम की फ़ाइल बनाने की कोशिश कर रहा है, जो intended output नहीं है।
+तुम देख सकते हो कि हम tuples से बना एक चैनल उत्पन्न कर रहे हैं: `['sample1', 'file1.txt']`, लेकिन प्रोसेस एक single value, `val sample_name` की अपेक्षा करता है। एक्जीक्यूट किया गया कमांड दिखाता है कि प्रोसेस `[sample3, file3.txt]_output.txt` नाम की फ़ाइल बनाने की कोशिश कर रहा है, जो इच्छित आउटपुट नहीं है।
 
 #### कोड ठीक करो
 
-इसे ठीक करने के लिए, अगर process को दोनों inputs की जरूरत है तो हम process को tuple accept करने के लिए adjust कर सकते हैं:
+इसे ठीक करने के दो तरीके हैं:
 
-=== "Option 1: Process में tuple accept करो"
+1. डेटा को प्रोसेस के अनुसार reshape करो
+2. प्रोसेस को डेटा के अनुसार बदलो
+
+=== "विकल्प 1: पहला तत्व निकालो"
+
+    === "बाद में"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        workflow {
+
+            // चैनल tuples emit करता है, लेकिन प्रोसेस single values की अपेक्षा करता है
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch.map { sample_id, file -> sample_id })  // ठीक किया: पहला तत्व निकालो
+        }
+        ```
+
+    === "पहले"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        workflow {
+
+            // चैनल tuples emit करता है, लेकिन प्रोसेस single values की अपेक्षा करता है
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch)
+        }
+        ```
+
+=== "विकल्प 2: प्रोसेस में tuple स्वीकार करो"
 
     === "बाद में"
 
@@ -1232,7 +1269,7 @@ workflow {
 
         process PROCESS_FILES {
             input:
-                tuple val(sample_name), val(file_name)  // ठीक किया: Tuple accept करो
+                tuple val(sample_name), val(file_name)  // ठीक किया: tuple स्वीकार करो
 
             output:
                 path "${sample_name}_output.txt"
@@ -1245,7 +1282,7 @@ workflow {
 
         workflow {
 
-            // Channel tuples emit करता है, लेकिन process single values अपेक्षित करता है
+            // चैनल tuples emit करता है, लेकिन प्रोसेस single values की अपेक्षा करता है
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1262,7 +1299,7 @@ workflow {
 
         process PROCESS_FILES {
             input:
-                val sample_name  // Single value अपेक्षित है, tuple मिलता है
+                val sample_name  // single value की अपेक्षा करता है, tuple मिलता है
 
             output:
                 path "${sample_name}_output.txt"
@@ -1275,39 +1312,7 @@ workflow {
 
         workflow {
 
-            // Channel tuples emit करता है, लेकिन process single values अपेक्षित करता है
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch)
-        }
-        ```
-
-=== "Option 2: पहला element extract करो"
-
-    === "बाद में"
-
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
-        workflow {
-
-            // Channel tuples emit करता है, लेकिन process single values अपेक्षित करता है
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch.map { it[0] })  // ठीक किया: पहला element extract करो
-        }
-        ```
-
-    === "पहले"
-
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
-        workflow {
-
-            // Channel tuples emit करता है, लेकिन process single values अपेक्षित करता है
+            // चैनल tuples emit करता है, लेकिन प्रोसेस single values की अपेक्षा करता है
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1319,7 +1324,7 @@ workflow {
 
 #### पाइपलाइन चलाओ
 
-Solutions में से एक चुनो और वर्कफ़्लो फिर से चलाओ:
+समाधानों में से एक चुनो और वर्कफ़्लो फिर से चलाओ (नीचे दिया गया आउटपुट विकल्प 2 का उपयोग करता है):
 
 ```bash
 nextflow run bad_channel_shape.nf
@@ -1328,23 +1333,122 @@ nextflow run bad_channel_shape.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_channel_shape.nf` [clever_thompson] DSL2 - revision: 8cbcae3746
+    Launching `bad_channel_shape.nf` [clever_thompson] revision: 9b60aec7be
 
     executor >  local (3)
-    [bb/80a958] PROCESS_FILES (2) | 3 of 3 ✔
+    [81/d0f3ea] PROCESS_FILES (1) | 3 of 3 ✔
     ```
 
-### 2.4. Channel Debugging Techniques
+#### आगे जाना: record types
 
-#### Channel Inspection के लिए `.view()` का उपयोग
+विकल्प 1 और 2 इस बेमेल को ठीक करते हैं, लेकिन कोई भी अगले बेमेल को नहीं रोकता।
+एक tuple positional होता है, इसलिए प्रोसेस केवल यह जानता है कि उसे values की एक list मिल रही है।
+अगर कोई चैनल values को गलत क्रम में emit करता है, या किसी को छोड़ देता है, तो एरर बाद में दिखाई देती है और कारण की बजाय लक्षण की ओर इशारा करती है।
 
-Channels के लिए सबसे शक्तिशाली debugging tool `.view()` operator है। `.view()` के साथ, तुम debugging में मदद के लिए सभी stages पर अपने channels की shape समझ सकते हो।
+Record types इसे डेटा को एक declared shape देकर संबोधित करते हैं।
+एक record named, typed fields परिभाषित करता है, और एक प्रोसेस उस record type को declare करता है जिसे वह स्वीकार करता है।
+Nextflow प्रत्येक value को उस declaration के विरुद्ध जांचता है।
+
+!!! note "Record types एक नई सुविधा हैं"
+
+    Record types को Nextflow 26.04 में पेश किया गया था और इसके लिए `nextflow.enable.types` flag की आवश्यकता है।
+    26.04 पर, Nextflow एक चेतावनी प्रिंट करता है कि static typing एक preview feature है।
+    एक भविष्य का प्रशिक्षण कोर्स इन्हें विस्तार से कवर करेगा।
+
+यहाँ वही वर्कफ़्लो record के साथ लिखा गया है:
+
+```groovy title="bad_channel_shape.nf" hl_lines="3 5-8 12 15 19 27-29" linenums="1"
+#!/usr/bin/env nextflow
+
+nextflow.enable.types = true
+
+record Sample {
+    id: String
+    file_name: String
+}
+
+process PROCESS_FILES {
+    input:
+        sample: Sample  // named fields वाला record स्वीकार करो
+
+    output:
+        file("${sample.id}_output.txt")
+
+    script:
+    """
+    echo "Processing ${sample.id}" > ${sample.id}_output.txt
+    """
+}
+
+workflow {
+
+    // चैनल named fields वाले records emit करता है
+    input_ch = channel.of(
+      record(id: 'sample1', file_name: 'file1.txt'),
+      record(id: 'sample2', file_name: 'file2.txt'),
+      record(id: 'sample3', file_name: 'file3.txt')
+    )
+    PROCESS_FILES(input_ch)
+}
+```
+
+मूल से बदलाव ये हैं:
+
+- `nextflow.enable.types = true` typed syntax को सक्षम करता है
+- `record Sample { ... }` उन fields को declare करता है जो प्रत्येक sample में होने चाहिए
+- `sample: Sample` declare करता है कि प्रोसेस एक `Sample` record स्वीकार करता है
+- `record(id: ..., file_name: ...)` चैनल में प्रत्येक record बनाता है
+- `sample.id` position की बजाय नाम से एक field तक पहुंचता है
+
+अगर किसी record में कोई field गायब है, तो Nextflow एरर में उस field का नाम बताता है।
+इसे देखने के लिए, दूसरे record से `id` हटाओ:
+
+```groovy title="bad_channel_shape.nf" hl_lines="3" linenums="26"
+    input_ch = channel.of(
+      record(id: 'sample1', file_name: 'file1.txt'),
+      record(file_name: 'file2.txt'),
+      record(id: 'sample3', file_name: 'file3.txt')
+    )
+```
+
+वर्कफ़्लो चलाओ:
+
+```bash
+nextflow run bad_channel_shape.nf
+```
+
+??? failure "कमांड आउटपुट"
+
+    ```console
+     N E X T F L O W   ~  version 26.10.0
+
+    Launching `bad_channel_shape.nf` [condescending_sammet] revision: 15c9f9aa87
+
+    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
+
+    Caused by:
+      [PROCESS_FILES (2)] input field `id` at index 0 cannot be null -- append `?` to the type annotation to mark it as nullable
+
+
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+     -- Check '.nextflow.log' file for details
+    ```
+
+इस एरर के लिए Nextflow 26.10 या बाद का संस्करण आवश्यक है।
+Nextflow 26.04 पर, कार्य `id` को `null` सेट करके चलता है और `null_output.txt` लिखता है।
+
+### 2.4. चैनल डीबगिंग तकनीकें
+
+#### चैनल निरीक्षण के लिए `.view()` का उपयोग
+
+चैनल के लिए सबसे शक्तिशाली डीबगिंग टूल `.view()` ऑपरेटर है। `.view()` के साथ, तुम डीबगिंग में मदद के लिए सभी चरणों में अपने चैनल के आकार को समझ सकते हो।
 
 #### पाइपलाइन चलाओ
 
-इसे action में देखने के लिए `bad_channel_shape_viewed.nf` चलाओ:
+इसे क्रिया में देखने के लिए `bad_channel_shape_viewed.nf` चलाओ:
 
 ```bash
 nextflow run bad_channel_shape_viewed.nf
@@ -1353,12 +1457,12 @@ nextflow run bad_channel_shape_viewed.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_channel_shape_viewed.nf` [maniac_poisson] DSL2 - revision: b4f24dc9da
+    Launching `bad_channel_shape_viewed.nf` [sleepy_cajal] revision: 03e79cdbad
 
     executor >  local (3)
-    [c0/db76b3] PROCESS_FILES (3) [100%] 3 of 3 ✔
+    [dc/6e5c24] PROCESS_FILES (2) | 3 of 3 ✔
     Channel content: [sample1, file1.txt]
     Channel content: [sample2, file2.txt]
     Channel content: [sample3, file3.txt]
@@ -1367,22 +1471,22 @@ nextflow run bad_channel_shape_viewed.nf
     After mapping: sample3
     ```
 
-#### कोड जाँचो
+#### कोड की जांच करो
 
-चलो `bad_channel_shape_viewed.nf` की जाँच करते हैं यह देखने के लिए कि `.view()` का उपयोग कैसे किया जाता है:
+चलो `bad_channel_shape_viewed.nf` की जांच करते हैं यह देखने के लिए कि `.view()` का उपयोग कैसे किया जाता है:
 
 ```groovy title="bad_channel_shape_viewed.nf" linenums="16" hl_lines="9 11"
 workflow {
 
-    // Channel tuples emit करता है, लेकिन process single values अपेक्षित करता है
+    // चैनल tuples emit करता है, लेकिन प्रोसेस single values की अपेक्षा करता है
     input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
     )
-    .view { "Channel content: $it" }  // Debug: Original channel content दिखाओ
-    .map { tuple -> tuple[0] }        // Transform: पहला element extract करो
-    .view { "After mapping: $it" }    // Debug: Transformed channel content दिखाओ
+    .view { item -> "Channel content: ${item}" }  // डीबग: मूल चैनल सामग्री दिखाओ
+    .map { sample_id, file -> sample_id }         // रूपांतरण: पहला तत्व निकालो
+    .view { item -> "After mapping: ${item}" } // डीबग: रूपांतरित चैनल सामग्री दिखाओ
 
     PROCESS_FILES(input_ch)
 }
@@ -1390,12 +1494,12 @@ workflow {
 
 #### कोड ठीक करो
 
-भविष्य में channel content समझने के लिए `.view()` operations का अत्यधिक उपयोग करने से बचाने के लिए, कुछ comments जोड़ना उचित है:
+भविष्य में चैनल सामग्री को समझने के लिए अत्यधिक `.view()` ऑपरेशन का उपयोग करने से बचाने के लिए, कुछ कमेंट जोड़ना उचित है:
 
 ```groovy title="bad_channel_shape_viewed.nf (with comments)" linenums="16" hl_lines="8 9"
 workflow {
 
-    // Channel tuples emit करता है, लेकिन process single values अपेक्षित करता है
+    // चैनल tuples emit करता है, लेकिन प्रोसेस single values की अपेक्षा करता है
     input_ch = channel.of(
             ['sample1', 'file1.txt'],
             ['sample2', 'file2.txt'],
@@ -1407,7 +1511,7 @@ workflow {
 }
 ```
 
-यह और अधिक महत्वपूर्ण हो जाएगा जैसे-जैसे तुम्हारे वर्कफ़्लो जटिलता में बढ़ते हैं और channel structure अधिक अपारदर्शी हो जाती है।
+यह अधिक महत्वपूर्ण हो जाएगा जैसे-जैसे तुम्हारे वर्कफ़्लो जटिलता में बढ़ते हैं और चैनल संरचना अधिक अपारदर्शी हो जाती है।
 
 #### पाइपलाइन चलाओ
 
@@ -1418,12 +1522,12 @@ nextflow run bad_channel_shape_viewed.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_channel_shape_viewed.nf` [marvelous_koch] DSL2 - revision: 03e79cdbad
+    Launching `bad_channel_shape_viewed.nf` [marvelous_koch] revision: 03e79cdbad
 
     executor >  local (3)
-    [ff/d67cec] PROCESS_FILES (2) | 3 of 3 ✔
+    [dc/6e5c24] PROCESS_FILES (2) | 3 of 3 ✔
     Channel content: [sample1, file1.txt]
     Channel content: [sample2, file2.txt]
     Channel content: [sample3, file3.txt]
@@ -1434,21 +1538,21 @@ nextflow run bad_channel_shape_viewed.nf
 
 ### सारांश
 
-Valid Nextflow syntax के साथ कई channel structure errors बनाई जा सकती हैं। तुम data flow समझकर, inspection के लिए `.view()` operators का उपयोग करके, और unexpected tuple structures को इंगित करने वाले square brackets जैसे error message patterns को पहचानकर channel structure errors को debug कर सकते हो।
+वैध Nextflow सिंटैक्स के साथ कई चैनल संरचना एरर बनाई जा सकती हैं। तुम डेटा फ्लो को समझकर, निरीक्षण के लिए `.view()` ऑपरेटर का उपयोग करके, और एरर मैसेज पैटर्न को पहचानकर चैनल संरचना एरर को डीबग कर सकते हो जैसे square brackets जो अप्रत्याशित tuple संरचनाओं को इंगित करते हैं।
 
 ### आगे क्या है?
 
-Process definitions द्वारा बनाई गई errors के बारे में जानो।
+प्रोसेस परिभाषाओं द्वारा बनाई गई एरर के बारे में जानो।
 
 ---
 
-## 3. Process Structure Errors
+## 3. प्रोसेस संरचना एरर
 
-Processes से संबंधित अधिकांश errors जो तुम encounter करोगे वे command बनाने में की गई गलतियों या underlying software से संबंधित समस्याओं से संबंधित होंगी। फिर भी, ऊपर channel समस्याओं की तरह, तुम process definition में ऐसी गलतियाँ कर सकते हो जो syntax errors के रूप में qualify नहीं होतीं, लेकिन run time पर errors का कारण बनेंगी।
+प्रोसेस से संबंधित अधिकांश एरर जो तुम्हें मिलेंगी, वे कमांड बनाने में की गई गलतियों या अंतर्निहित सॉफ़्टवेयर से संबंधित समस्याओं से संबंधित होंगी। फिर भी, ऊपर चैनल समस्याओं के समान, तुम प्रोसेस परिभाषा में ऐसी गलतियाँ कर सकते हो जो सिंटैक्स एरर के रूप में योग्य नहीं हैं, लेकिन रन टाइम पर एरर का कारण बनेंगी।
 
-### 3.1. Missing Output Files
+### 3.1. गायब आउटपुट फ़ाइलें
 
-Processes लिखते समय एक सामान्य error यह है कि कुछ ऐसा करना जो process की अपेक्षाओं और जो generate होता है के बीच mismatch पैदा करे।
+प्रोसेस लिखते समय एक सामान्य एरर है कुछ ऐसा करना जो प्रोसेस की अपेक्षाओं और जो उत्पन्न होता है के बीच बेमेल उत्पन्न करता है।
 
 #### पाइपलाइन चलाओ
 
@@ -1459,13 +1563,12 @@ nextflow run missing_output.nf
 ??? failure "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `missing_output.nf` [zen_stone] DSL2 - revision: 37ff61f926
+    Launching `missing_output.nf` [evil_gilbert] revision: 3d5117f7e2
 
     executor >  local (3)
-    executor >  local (3)
-    [fd/2642e9] process > PROCESS_FILES (2) [ 66%] 2 of 3, failed: 2
+    [45/146e39] PROCESS_FILES (1) | 0 of 3 ✘
     ERROR ~ Error executing process > 'PROCESS_FILES (3)'
 
     Caused by:
@@ -1483,16 +1586,16 @@ nextflow run missing_output.nf
       (empty)
 
     Work dir:
-      /workspaces/training/side-quests/debugging/work/02/9604d49fb8200a74d737c72a6c98ed
+      /workspaces/training/side-quests/debugging/work/2b/85afc51ff8d820df3b97b8a7154a30
 
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
 
     -- Check '.nextflow.log' file for details
     ```
 
-#### कोड जाँचो
+#### कोड की जांच करो
 
-Error message इंगित करती है कि process `sample3.txt` नाम की output फ़ाइल produce करने की अपेक्षा करता था, लेकिन script वास्तव में `sample3_output.txt` बनाता है। चलो `missing_output.nf` में process definition की जाँच करते हैं:
+एरर मैसेज इंगित करता है कि प्रोसेस `sample3.txt` नाम की आउटपुट फ़ाइल उत्पन्न करने की अपेक्षा करता था, लेकिन script वास्तव में `sample3_output.txt` बनाती है। चलो `missing_output.nf` में प्रोसेस परिभाषा की जांच करते हैं:
 
 ```groovy title="missing_output.nf" linenums="3" hl_lines="6 10"
 process PROCESS_FILES {
@@ -1509,20 +1612,20 @@ process PROCESS_FILES {
 }
 ```
 
-तुम देख सकते हो कि `output:` block में output file name और script में उपयोग किए गए के बीच mismatch है। यह mismatch process को fail करता है। अगर तुम्हें इस प्रकार की error मिलती है, तो वापस जाओ और जाँचो कि outputs तुम्हारी process definition और तुम्हारे output block के बीच match करते हैं।
+तुम्हें देखना चाहिए कि `output:` ब्लॉक में आउटपुट फ़ाइल नाम और script में उपयोग किए गए नाम के बीच बेमेल है। यह बेमेल प्रोसेस को विफल करता है। अगर तुम्हें इस प्रकार की एरर मिलती है, तो वापस जाओ और जांचो कि तुम्हारी प्रोसेस परिभाषा और आउटपुट ब्लॉक के बीच आउटपुट मेल खाते हैं।
 
-अगर समस्या अभी भी स्पष्ट नहीं है, तो वास्तव में बनाई गई output files की पहचान करने के लिए work directory की जाँच करो:
+अगर समस्या अभी भी स्पष्ट नहीं है, तो वास्तव में बनाई गई आउटपुट फ़ाइलों की पहचान करने के लिए work directory की जांच करो:
 
 ```bash
 ❯ ls -h work/02/9604d49fb8200a74d737c72a6c98ed
 sample3_output.txt
 ```
 
-इस उदाहरण के लिए यह हमें highlight करेगा कि हमारी `output:` definition के विपरीत, output file name में एक `_output` suffix शामिल किया जा रहा है।
+इस उदाहरण के लिए यह हमें उजागर करेगा कि आउटपुट फ़ाइल नाम में एक `_output` suffix जोड़ा जा रहा है, जो हमारी `output:` परिभाषा के विपरीत है।
 
 #### कोड ठीक करो
 
-Output filename को consistent बनाकर mismatch ठीक करो:
+आउटपुट फ़ाइल नाम को सुसंगत बनाकर बेमेल ठीक करो:
 
 === "बाद में"
 
@@ -1532,7 +1635,7 @@ Output filename को consistent बनाकर mismatch ठीक करो:
         val sample_name
 
         output:
-        path "${sample_name}_output.txt"  // ठीक किया: Script output से match करो
+        path "${sample_name}_output.txt"  // ठीक किया: script आउटपुट से मेल खाओ
 
         script:
         """
@@ -1567,17 +1670,17 @@ nextflow run missing_output.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `missing_output.nf` [elated_hamilton] DSL2 - revision: 961938ee2b
+    Launching `missing_output.nf` [elated_hamilton] revision: d7ad486bce
 
     executor >  local (3)
-    [16/1c437c] PROCESS_FILES (3) | 3 of 3 ✔
+    [70/6d4479] PROCESS_FILES (1) | 3 of 3 ✔
     ```
 
-### 3.2. Missing software
+### 3.2. गायब सॉफ़्टवेयर
 
-Errors का एक और वर्ग software provisioning में गलतियों के कारण होता है। `missing_software.nf` एक syntactically valid वर्कफ़्लो है, लेकिन यह `cowpy` command provide करने के लिए कुछ external software पर निर्भर करता है।
+एरर का एक और वर्ग सॉफ़्टवेयर प्रावधान में गलतियों के कारण होता है। `missing_software.nf` एक सिंटैक्टिकली वैध वर्कफ़्लो है, लेकिन यह उस `cowpy` कमांड के लिए कुछ बाहरी सॉफ़्टवेयर पर निर्भर करता है जिसका वह उपयोग करता है।
 
 #### पाइपलाइन चलाओ
 
@@ -1588,15 +1691,15 @@ nextflow run missing_software.nf
 ??? failure "कमांड आउटपुट"
 
     ```console hl_lines="12 18"
-    ERROR ~ Error executing process > 'PROCESS_FILES (3)'
+    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
 
     Caused by:
-      Process `PROCESS_FILES (3)` terminated with an error exit status (127)
+      Process `PROCESS_FILES (2)` terminated with an error exit status (127)
 
 
     Command executed:
 
-      cowpy sample3 > sample3_output.txt
+      cowpy sample2 > sample2_output.txt
 
     Command exit status:
       127
@@ -1608,18 +1711,18 @@ nextflow run missing_software.nf
       .command.sh: line 2: cowpy: command not found
 
     Work dir:
-      /workspaces/training/side-quests/debugging/work/82/42a5bfb60c9c6ee63ebdbc2d51aa6e
+      /workspaces/training/side-quests/debugging/work/2f/bcf8fad6fd101c76950c92062ce299
 
-    Tip: you can try to figure out what's wrong by changing to the process work directory and showing the script file named `.command.sh`
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 
     -- Check '.nextflow.log' file for details
     ```
 
-Process के पास वह command नहीं है जो हम specify कर रहे हैं। कभी-कभी यह इसलिए होता है क्योंकि एक script वर्कफ़्लो `bin` डायरेक्टरी में present है, लेकिन executable नहीं बनाया गया है। अन्य बार यह इसलिए होता है क्योंकि software उस container या environment में install नहीं है जहाँ वर्कफ़्लो चल रहा है।
+प्रोसेस के पास उस कमांड तक पहुंच नहीं है जो हम निर्दिष्ट कर रहे हैं। कभी-कभी यह इसलिए होता है क्योंकि एक script वर्कफ़्लो `bin` डायरेक्टरी में मौजूद है, लेकिन executable नहीं बनाई गई है। अन्य बार यह इसलिए होता है क्योंकि सॉफ़्टवेयर उस कंटेनर या वातावरण में इंस्टॉल नहीं है जहाँ वर्कफ़्लो चल रहा है।
 
-#### कोड जाँचो
+#### कोड की जांच करो
 
-उस `127` exit code पर ध्यान दो - यह तुम्हें बिल्कुल समस्या बताता है। चलो `missing_software.nf` की जाँच करते हैं:
+उस `127` exit code पर ध्यान दो - यह तुम्हें बिल्कुल समस्या बताता है। चलो `missing_software.nf` की जांच करते हैं:
 
 ```groovy title="missing_software.nf" linenums="3" hl_lines="3"
 process PROCESS_FILES {
@@ -1641,7 +1744,7 @@ process PROCESS_FILES {
 
 #### कोड ठीक करो
 
-हम यहाँ थोड़े dishonest रहे हैं, और वास्तव में कोड में कुछ भी गलत नहीं है। हमें बस process को इस तरह चलाने के लिए आवश्यक configuration specify करनी है कि उसके पास प्रश्न में command तक access हो। इस मामले में process में एक container definition है, इसलिए हमें बस Docker enabled के साथ वर्कफ़्लो चलाना है।
+हम यहाँ थोड़े बेईमान रहे हैं, और वास्तव में कोड में कुछ भी गलत नहीं है। हमें बस प्रोसेस को इस तरह से चलाने के लिए आवश्यक कॉन्फ़िगरेशन निर्दिष्ट करने की आवश्यकता है कि उसके पास प्रश्न में कमांड तक पहुंच हो। इस मामले में प्रोसेस में एक container परिभाषा है, इसलिए हमें बस Docker enabled के साथ वर्कफ़्लो चलाना है।
 
 #### पाइपलाइन चलाओ
 
@@ -1654,25 +1757,25 @@ nextflow run missing_software.nf -profile docker
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `missing_software.nf` [awesome_stonebraker] DSL2 - revision: 0296d12839
+    Launching `missing_software.nf` [awesome_stonebraker] revision: 0296d12839
 
     executor >  local (3)
-    [38/ab20d1] PROCESS_FILES (1) | 3 of 3 ✔
+    [33/bf8d3e] PROCESS_FILES (3) | 3 of 3 ✔
     ```
 
 !!! note "नोट"
 
-    Nextflow containers का उपयोग कैसे करता है इसके बारे में अधिक जानने के लिए, [Hello Nextflow](../hello_nextflow/05_hello_containers.md) देखो
+    Nextflow कंटेनर का उपयोग कैसे करता है इसके बारे में अधिक जानने के लिए, [Hello Nextflow](../../hello_nextflow/05_hello_containers.md) देखो
 
-### 3.3. गलत resource configuration
+### 3.3. खराब रिसोर्स कॉन्फ़िगरेशन
 
-Production उपयोग में, तुम अपने processes पर resources configure करोगे। उदाहरण के लिए `memory` तुम्हारे process के लिए उपलब्ध memory की maximum मात्रा define करता है, और अगर process उससे अधिक हो जाता है, तो तुम्हारा scheduler आमतौर पर process को kill कर देगा और `137` का exit code return करेगा। हम यहाँ वह demonstrate नहीं कर सकते क्योंकि हम `local` executor का उपयोग कर रहे हैं, लेकिन हम `time` के साथ कुछ similar दिखा सकते हैं।
+प्रोडक्शन उपयोग में, तुम अपने प्रोसेस पर रिसोर्स कॉन्फ़िगर करोगे। उदाहरण के लिए `memory` तुम्हारे प्रोसेस के लिए उपलब्ध मेमोरी की अधिकतम मात्रा परिभाषित करता है, और अगर प्रोसेस उससे अधिक हो जाता है, तो तुम्हारा scheduler आमतौर पर प्रोसेस को kill कर देगा और `137` का exit code वापस करेगा। हम यहाँ इसे प्रदर्शित नहीं कर सकते क्योंकि हम `local` executor का उपयोग कर रहे हैं, लेकिन हम `time` के साथ कुछ इसी तरह दिखा सकते हैं।
 
 #### पाइपलाइन चलाओ
 
-`bad_resources.nf` में 1 millisecond के unrealistic time bound के साथ process configuration है:
+`bad_resources.nf` में 1 millisecond के अवास्तविक time bound के साथ प्रोसेस कॉन्फ़िगरेशन है:
 
 ```bash
 nextflow run bad_resources.nf -profile docker
@@ -1681,46 +1784,33 @@ nextflow run bad_resources.nf -profile docker
 ??? failure "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_resources.nf` [disturbed_elion] DSL2 - revision: 27d2066e86
+    Launching `bad_resources.nf` [curious_escher] revision: e6e544e786
 
     executor >  local (3)
-    [c0/ded8e1] PROCESS_FILES (3) | 0 of 3 ✘
-    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
+    [83/c8c4af] PROCESS_FILES (2) | 0 of 3
+    WARN: Killing running tasks (2)
+    ERROR ~ Error executing process > 'PROCESS_FILES (1)'
 
     Caused by:
-      Process exceeded running time limit (1ms)
+      process hasn't exited
 
-    Command executed:
 
-      cowpy sample2 > sample2_output.txt
-
-    Command exit status:
-      -
-
-    Command output:
-      (empty)
-
-    Work dir:
-      /workspaces/training/side-quests/debugging/work/53/f0a4cc56d6b3dc2a6754ff326f1349
-
-    Container:
-      community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
-
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
      -- Check '.nextflow.log' file for details
     ```
 
-#### कोड जाँचो
+#### कोड की जांच करो
 
-चलो `bad_resources.nf` की जाँच करते हैं:
+चलो `bad_resources.nf` की जांच करते हैं:
 
-```groovy title="bad_resources.nf" linenums="3" hl_lines="3"
+```groovy title="bad_resources.nf" linenums="3" hl_lines="5"
 process PROCESS_FILES {
 
-    time '1 ms'  // ERROR: Unrealistic time limit
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+
+    time '1 ms'  // एरर: अवास्तविक time limit
 
     input:
     val sample_name
@@ -1730,24 +1820,24 @@ process PROCESS_FILES {
 
     script:
     """
-    sleep 1  // 1 second लेता है, लेकिन time limit 1ms है
+    sleep 1  # 1 सेकंड लेता है, लेकिन time limit 1ms है
     cowpy ${sample_name} > ${sample_name}_output.txt
     """
 }
 ```
 
-हम जानते हैं कि process एक second से अधिक समय लेगा (हमने यह सुनिश्चित करने के लिए एक sleep जोड़ा है), लेकिन process 1 millisecond के बाद timeout होने के लिए set है। किसी ने अपनी configuration के साथ थोड़ा unrealistic हो गया!
+हम जानते हैं कि प्रोसेस एक सेकंड से अधिक समय लेगा (हमने यह सुनिश्चित करने के लिए एक sleep जोड़ा है), लेकिन प्रोसेस 1 millisecond के बाद timeout होने के लिए सेट है। किसी ने अपने कॉन्फ़िगरेशन के साथ थोड़ा अवास्तविक काम किया है!
 
 #### कोड ठीक करो
 
-Time limit को एक realistic value तक बढ़ाओ:
+time limit को एक यथार्थवादी मान तक बढ़ाओ:
 
 === "बाद में"
 
     ```groovy title="bad_resources.nf" hl_lines="3" linenums="3"
     process PROCESS_FILES {
 
-        time '100 s'  // ठीक किया: Realistic time limit
+        time '100 s'  // ठीक किया: यथार्थवादी time limit
 
         input:
         val sample_name
@@ -1768,7 +1858,7 @@ Time limit को एक realistic value तक बढ़ाओ:
     ```groovy title="bad_resources.nf" hl_lines="3" linenums="3"
     process PROCESS_FILES {
 
-        time '1 ms'  // ERROR: Unrealistic time limit
+        time '1 ms'  // एरर: अवास्तविक time limit
 
         input:
         val sample_name
@@ -1778,7 +1868,7 @@ Time limit को एक realistic value तक बढ़ाओ:
 
         script:
         """
-        sleep 1  // 1 second लेता है, लेकिन time limit 1ms है
+        sleep 1  # 1 सेकंड लेता है, लेकिन time limit 1ms है
         cowpy ${sample_name} > ${sample_name}_output.txt
         """
     }
@@ -1793,27 +1883,27 @@ nextflow run bad_resources.nf -profile docker
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_resources.nf` [friendly_mcclintock] DSL2 - revision: 381567d2c1
+    Launching `bad_resources.nf` [friendly_mcclintock] revision: 4304ffa21c
 
     executor >  local (3)
-    [c2/9b4c41] PROCESS_FILES (3) | 3 of 3 ✔
+    [96/b70b83] PROCESS_FILES (3) | 3 of 3 ✔
     ```
 
-अगर तुम अपने error messages ध्यान से पढ़ते हो तो इस तरह की failures तुम्हें ज्यादा देर तक परेशान नहीं करेंगी। लेकिन सुनिश्चित करो कि तुम उन commands की resource requirements समझते हो जो तुम चला रहे हो ताकि तुम अपने resource directives को उचित रूप से configure कर सको।
+`local` executor पर एरर scheduler की तुलना में कम स्पष्ट होती है: तुम्हें time limit का नाम लेने वाले मैसेज की बजाय `process hasn't exited` और `WARN: Killing running tasks` मिलता है। यहाँ समझने वाली बात यह है कि Nextflow एक कार्य को तब kill करता है जब वह तुम्हारे द्वारा दिए गए रिसोर्स से अधिक हो जाता है, इसलिए जब कोई प्रोसेस script-level एरर के बिना terminate हो जाए, तो उसके resource निर्देशों की जांच करो। यहाँ दोषी `time` निर्देश है, जो प्रोसेस के काम के लिए बहुत कम है। सुनिश्चित करो कि तुम उन कमांड की रिसोर्स आवश्यकताओं को समझते हो जो तुम चला रहे हो ताकि तुम अपने resource निर्देशों को उचित रूप से कॉन्फ़िगर कर सको।
 
-### 3.4. Process Debugging Techniques
+### 3.4. प्रोसेस डीबगिंग तकनीकें
 
-जब processes fail होती हैं या अप्रत्याशित रूप से behave करती हैं, तो तुम्हें यह investigate करने के लिए व्यवस्थित techniques की जरूरत है कि क्या गलत हुआ। Work directory में process execution को debug करने के लिए सभी जानकारी होती है।
+जब प्रोसेस विफल होते हैं या अप्रत्याशित रूप से व्यवहार करते हैं, तो तुम्हें यह जांचने के लिए व्यवस्थित तकनीकों की आवश्यकता है कि क्या गलत हुआ। work directory में प्रोसेस एक्जीक्यूशन को डीबग करने के लिए आवश्यक सभी जानकारी होती है।
 
-#### Work Directory Inspection का उपयोग
+#### Work Directory निरीक्षण का उपयोग
 
-Processes के लिए सबसे शक्तिशाली debugging tool work directory की जाँच करना है। जब एक process fail होती है, Nextflow उस specific process execution के लिए एक work directory बनाता है जिसमें यह समझने के लिए सभी फ़ाइलें होती हैं कि क्या हुआ।
+प्रोसेस के लिए सबसे शक्तिशाली डीबगिंग टूल work directory की जांच करना है। जब कोई प्रोसेस विफल होता है, तो Nextflow उस विशिष्ट प्रोसेस एक्जीक्यूशन के लिए एक work directory बनाता है जिसमें यह समझने के लिए आवश्यक सभी फ़ाइलें होती हैं कि क्या हुआ।
 
 #### पाइपलाइन चलाओ
 
-Work directory inspection demonstrate करने के लिए पहले के `missing_output.nf` उदाहरण का उपयोग करते हैं (अगर जरूरत हो तो output naming mismatch फिर से generate करो):
+work directory निरीक्षण प्रदर्शित करने के लिए पहले के `missing_output.nf` उदाहरण का उपयोग करते हैं (अगर जरूरत हो तो आउटपुट नामकरण बेमेल फिर से उत्पन्न करो):
 
 ```bash
 nextflow run missing_output.nf
@@ -1822,20 +1912,21 @@ nextflow run missing_output.nf
 ??? failure "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `missing_output.nf` [irreverent_payne] DSL2 - revision: 3d5117f7e2
+    Launching `missing_output.nf` [irreverent_payne] revision: 3d5117f7e2
 
     executor >  local (3)
-    [5d/d544a4] PROCESS_FILES (2) | 0 of 3 ✘
-    ERROR ~ Error executing process > 'PROCESS_FILES (1)'
+    [f0/42f283] PROCESS_FILES (2) | 0 of 3 ✘
+    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
 
     Caused by:
-      Missing output file(s) `sample1.txt` expected by process `PROCESS_FILES (1)`
+      Missing output file(s) `sample2.txt` expected by process `PROCESS_FILES (2)`
+
 
     Command executed:
 
-      echo "Processing sample1" > sample1_output.txt
+      echo "Processing sample2" > sample2_output.txt
 
     Command exit status:
       0
@@ -1844,80 +1935,80 @@ nextflow run missing_output.nf
       (empty)
 
     Work dir:
-      /workspaces/training/side-quests/debugging/work/1e/2011154d0b0f001cd383d7364b5244
+      /workspaces/training/side-quests/debugging/work/f0/42f283a25543dad8d56b192e314f41
 
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
 
      -- Check '.nextflow.log' file for details
     ```
 
-#### Work directory जाँचो
+#### Work Directory की जांच करो
 
-जब तुम्हें यह error मिलती है, तो work directory में सभी debugging जानकारी होती है। Error message से work directory path ढूंढो और उसकी contents की जाँच करो:
+जब तुम्हें यह एरर मिलती है, तो work directory में सभी डीबगिंग जानकारी होती है। एरर मैसेज से work directory path ढूंढो और इसकी सामग्री की जांच करो:
 
 ```bash
-# Error message से work directory ढूंढो
+# एरर मैसेज से work directory ढूंढो
 ls work/02/9604d49fb8200a74d737c72a6c98ed/
 ```
 
-फिर तुम key files की जाँच कर सकते हो:
+फिर तुम मुख्य फ़ाइलों की जांच कर सकते हो:
 
-##### Command Script जाँचो
+##### Command Script की जांच करो
 
-`.command.sh` फ़ाइल दिखाती है कि exactly कौन सा command execute किया गया था:
+`.command.sh` फ़ाइल दिखाती है कि वास्तव में कौन सा कमांड एक्जीक्यूट किया गया था:
 
 ```bash
-# Executed command देखो
+# एक्जीक्यूट किया गया कमांड देखो
 cat work/02/9604d49fb8200a74d737c72a6c98ed/.command.sh
 ```
 
-यह reveal करता है:
+यह प्रकट करता है:
 
-- **Variable substitution**: क्या Nextflow variables properly expand हुए
-- **File paths**: क्या input files correctly located थीं
-- **Command structure**: क्या script syntax सही है
+- **वेरिएबल प्रतिस्थापन**: क्या Nextflow वेरिएबल ठीक से expand किए गए थे
+- **फ़ाइल पथ**: क्या इनपुट फ़ाइलें सही ढंग से स्थित थीं
+- **कमांड संरचना**: क्या script सिंटैक्स सही है
 
-देखने के लिए सामान्य समस्याएँ:
+देखने के लिए सामान्य समस्याएं:
 
-- **Missing quotes**: Spaces वाले variables को proper quoting की जरूरत है
-- **Wrong file paths**: Input files जो exist नहीं करतीं या wrong locations में हैं
-- **Incorrect variable names**: Variable references में typos
-- **Missing environment setup**: Commands जो specific environments पर निर्भर करती हैं
+- **गायब quotes**: spaces वाले वेरिएबल को उचित quoting की आवश्यकता है
+- **गलत फ़ाइल पथ**: इनपुट फ़ाइलें जो मौजूद नहीं हैं या गलत स्थानों पर हैं
+- **गलत वेरिएबल नाम**: वेरिएबल संदर्भों में टाइपो
+- **गायब environment setup**: कमांड जो विशिष्ट वातावरण पर निर्भर करते हैं
 
-##### Error Output जाँचो
+##### एरर आउटपुट की जांच करो
 
-`.command.err` फ़ाइल में actual error messages होती हैं:
+`.command.err` फ़ाइल में वास्तविक एरर मैसेज होते हैं:
 
 ```bash
-# Error output देखो
+# एरर आउटपुट देखो
 cat work/02/9604d49fb8200a74d737c72a6c98ed/.command.err
 ```
 
 यह फ़ाइल दिखाएगी:
 
 - **Exit codes**: 127 (command not found), 137 (killed), आदि
-- **Permission errors**: File access समस्याएँ
-- **Software errors**: Application-specific error messages
-- **Resource errors**: Memory/time limit exceeded
+- **Permission errors**: फ़ाइल एक्सेस समस्याएं
+- **Software errors**: एप्लिकेशन-विशिष्ट एरर मैसेज
+- **Resource errors**: मेमोरी/time limit exceeded
 
-##### Standard Output जाँचो
+##### Standard Output की जांच करो
 
-`.command.out` फ़ाइल दिखाती है कि तुम्हारे command ने क्या produce किया:
+`.command.out` फ़ाइल दिखाती है कि तुम्हारे कमांड ने क्या उत्पन्न किया:
 
 ```bash
 # Standard output देखो
 cat work/02/9604d49fb8200a74d737c72a6c98ed/.command.out
 ```
 
-यह verify करने में मदद करता है:
+यह सत्यापित करने में मदद करता है:
 
-- **Expected output**: क्या command ने सही results produce किए
-- **Partial execution**: क्या command शुरू हुआ लेकिन बीच में fail हो गया
-- **Debug information**: तुम्हारे script से कोई diagnostic output
+- **अपेक्षित आउटपुट**: क्या कमांड ने सही परिणाम उत्पन्न किए
+- **आंशिक एक्जीक्यूशन**: क्या कमांड शुरू हुआ लेकिन बीच में विफल हो गया
+- **डीबग जानकारी**: तुम्हारी script से कोई diagnostic आउटपुट
 
-##### Exit Code जाँचो
+##### Exit Code की जांच करो
 
-`.exitcode` फ़ाइल में process का exit code होता है:
+`.exitcode` फ़ाइल में प्रोसेस के लिए exit code होता है:
 
 ```bash
 # Exit code देखो
@@ -1926,25 +2017,25 @@ cat work/*/*/.exitcode
 
 सामान्य exit codes और उनके अर्थ:
 
-- **Exit code 127**: Command not found - software installation जाँचो
-- **Exit code 137**: Process killed - memory/time limits जाँचो
+- **Exit code 127**: Command not found - सॉफ़्टवेयर इंस्टॉलेशन जांचो
+- **Exit code 137**: Process killed - मेमोरी/time limits जांचो
 
-##### File Existence जाँचो
+##### फ़ाइल अस्तित्व की जांच करो
 
-जब processes missing output files के कारण fail होती हैं, तो जाँचो कि वास्तव में कौन सी files बनाई गई थीं:
+जब प्रोसेस गायब आउटपुट फ़ाइलों के कारण विफल होते हैं, तो जांचो कि वास्तव में कौन सी फ़ाइलें बनाई गई थीं:
 
 ```bash
-# Work directory में सभी files list करो
+# work directory में सभी फ़ाइलें सूचीबद्ध करो
 ls -la work/02/9604d49fb8200a74d737c72a6c98ed/
 ```
 
-यह identify करने में मदद करता है:
+यह पहचानने में मदद करता है:
 
-- **File naming mismatches**: Output files जिनके नाम अपेक्षित से अलग हैं
-- **Permission issues**: Files जो बनाई नहीं जा सकीं
-- **Path problems**: Files जो wrong directories में बनाई गईं
+- **फ़ाइल नामकरण बेमेल**: अपेक्षित से अलग नामों वाली आउटपुट फ़ाइलें
+- **Permission समस्याएं**: फ़ाइलें जो नहीं बनाई जा सकीं
+- **Path समस्याएं**: गलत डायरेक्टरी में बनाई गई फ़ाइलें
 
-हमारे पहले के उदाहरण में, इसने हमें confirm किया कि जबकि हमारी अपेक्षित `sample3.txt` present नहीं थी, `sample3_output.txt` थी:
+हमारे पहले के उदाहरण में, इसने हमें पुष्टि की कि जबकि हमारी अपेक्षित `sample3.txt` मौजूद नहीं थी, `sample3_output.txt` थी:
 
 ```bash
 ❯ ls -h work/02/9604d49fb8200a74d737c72a6c98ed
@@ -1953,25 +2044,25 @@ sample3_output.txt
 
 ### सारांश
 
-Process debugging के लिए work directories की जाँच करना जरूरी है यह समझने के लिए कि क्या गलत हुआ। Key files में `.command.sh` (executed script), `.command.err` (error messages), और `.command.out` (standard output) शामिल हैं। Exit codes जैसे 127 (command not found) और 137 (process killed) failure के प्रकार के बारे में तत्काल diagnostic clues प्रदान करते हैं।
+प्रोसेस डीबगिंग के लिए यह समझने के लिए work directories की जांच करना आवश्यक है कि क्या गलत हुआ। मुख्य फ़ाइलों में `.command.sh` (एक्जीक्यूट की गई script), `.command.err` (एरर मैसेज), और `.command.out` (standard output) शामिल हैं। Exit codes जैसे 127 (command not found) और 137 (process killed) विफलता के प्रकार के बारे में तत्काल diagnostic संकेत प्रदान करते हैं।
 
 ### आगे क्या है?
 
-Nextflow के built-in debugging tools और troubleshooting के व्यवस्थित तरीकों के बारे में जानो।
+Nextflow के बिल्ट-इन डीबगिंग टूल और समस्या निवारण के व्यवस्थित तरीकों के बारे में जानो।
 
 ---
 
-## 4. Built-in Debugging Tools और Advanced Techniques
+## 4. बिल्ट-इन डीबगिंग टूल और उन्नत तकनीकें
 
-Nextflow workflow execution को debug और analyze करने के लिए कई शक्तिशाली built-in tools प्रदान करता है। ये tools तुम्हें यह समझने में मदद करते हैं कि क्या गलत हुआ, कहाँ गलत हुआ, और इसे कुशलतापूर्वक कैसे ठीक किया जाए।
+Nextflow वर्कफ़्लो एक्जीक्यूशन को डीबग और विश्लेषण करने के लिए कई शक्तिशाली बिल्ट-इन टूल प्रदान करता है। ये टूल तुम्हें यह समझने में मदद करते हैं कि क्या गलत हुआ, कहाँ गलत हुआ, और इसे कुशलतापूर्वक कैसे ठीक किया जाए।
 
-### 4.1. Real-time Process Output
+### 4.1. रियल-टाइम प्रोसेस आउटपुट
 
-कभी-कभी तुम्हें देखना होता है कि running processes के अंदर क्या हो रहा है। तुम real-time process output enable कर सकते हो, जो तुम्हें दिखाता है कि प्रत्येक कार्य execute होते समय exactly क्या कर रहा है।
+कभी-कभी तुम्हें यह देखने की जरूरत होती है कि चल रहे प्रोसेस के अंदर क्या हो रहा है। तुम रियल-टाइम प्रोसेस आउटपुट enable कर सकते हो, जो तुम्हें दिखाता है कि प्रत्येक कार्य एक्जीक्यूट होते समय वास्तव में क्या कर रहा है।
 
 #### पाइपलाइन चलाओ
 
-हमारे पहले के examples से `bad_channel_shape_viewed.nf` ने `.view()` का उपयोग करके channel content print किया, लेकिन हम process के अंदर से variables echo करने के लिए `debug` directive का भी उपयोग कर सकते हैं, जिसे हम `bad_channel_shape_viewed_debug.nf` में demonstrate करते हैं। वर्कफ़्लो चलाओ:
+हमारे पहले के उदाहरणों से `bad_channel_shape_viewed.nf` ने `.view()` का उपयोग करके चैनल सामग्री प्रिंट की, लेकिन हम प्रोसेस के भीतर से वेरिएबल echo करने के लिए `debug` निर्देश का भी उपयोग कर सकते हैं, जिसे हम `bad_channel_shape_viewed_debug.nf` में प्रदर्शित करते हैं। वर्कफ़्लो चलाओ:
 
 ```bash
 nextflow run bad_channel_shape_viewed_debug.nf
@@ -1980,32 +2071,32 @@ nextflow run bad_channel_shape_viewed_debug.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_channel_shape_viewed_debug.nf` [agitated_crick] DSL2 - revision: ea3676d9ec
+    Launching `bad_channel_shape_viewed_debug.nf` [infallible_shirley] revision: 37cbda227b
 
     executor >  local (3)
-    [c6/2dac51] process > PROCESS_FILES (3) [100%] 3 of 3 ✔
+    [a1/59e59a] PROCESS_FILES (3) | 3 of 3 ✔
     Channel content: [sample1, file1.txt]
     Channel content: [sample2, file2.txt]
     Channel content: [sample3, file3.txt]
     After mapping: sample1
     After mapping: sample2
     After mapping: sample3
-    Sample name inside process is sample2
-
     Sample name inside process is sample1
+
+    Sample name inside process is sample2
 
     Sample name inside process is sample3
     ```
 
-#### कोड जाँचो
+#### कोड की जांच करो
 
-चलो `bad_channel_shape_viewed_debug.nf` की जाँच करते हैं यह देखने के लिए कि `debug` directive कैसे काम करता है:
+चलो `bad_channel_shape_viewed_debug.nf` की जांच करते हैं यह देखने के लिए कि `debug` निर्देश कैसे काम करता है:
 
 ```groovy title="bad_channel_shape_viewed_debug.nf" linenums="3" hl_lines="2"
 process PROCESS_FILES {
-    debug true  // Real-time output enable करो
+    debug true  // रियल-टाइम आउटपुट enable करो
 
     input:
     val sample_name
@@ -2021,21 +2112,21 @@ process PROCESS_FILES {
 }
 ```
 
-`debug` directive एक process के environment को समझने का एक quick और convenient तरीका हो सकता है।
+`debug` निर्देश एक प्रोसेस के वातावरण को समझने का एक त्वरित और सुविधाजनक तरीका हो सकता है।
 
 ### 4.2. Preview Mode
 
-कभी-कभी तुम किसी भी process के चलने से पहले समस्याओं को पकड़ना चाहते हो। Nextflow इस प्रकार की proactive debugging के लिए एक flag प्रदान करता है: `-preview`।
+कभी-कभी तुम किसी भी प्रोसेस के चलने से पहले समस्याओं को पकड़ना चाहते हो। Nextflow इस प्रकार की सक्रिय डीबगिंग के लिए एक flag प्रदान करता है: `-preview`।
 
 #### पाइपलाइन चलाओ
 
-Preview mode तुम्हें commands execute किए बिना workflow logic test करने देता है। यह actual commands चलाए बिना तुम्हारे वर्कफ़्लो की structure जाँचने और यह सुनिश्चित करने के लिए काफी उपयोगी हो सकता है कि processes सही तरीके से connected हैं।
+Preview mode तुम्हें कमांड एक्जीक्यूट किए बिना वर्कफ़्लो लॉजिक का परीक्षण करने देता है। यह तुम्हारे वर्कफ़्लो की संरचना को जल्दी से जांचने और यह सुनिश्चित करने के लिए काफी उपयोगी हो सकता है कि प्रोसेस बिना किसी वास्तविक कमांड चलाए सही ढंग से जुड़े हैं।
 
 !!! note "नोट"
 
-    अगर तुमने पहले `bad_syntax.nf` ठीक किया था, तो यह command चलाने से पहले script block के बाद closing brace हटाकर syntax error फिर से introduce करो।
+    अगर तुमने पहले `bad_syntax.nf` ठीक किया था, तो इस कमांड को चलाने से पहले script ब्लॉक के बाद closing brace हटाकर सिंटैक्स एरर फिर से डालो।
 
-यह command चलाओ:
+यह कमांड चलाओ:
 
 ```bash
 nextflow run bad_syntax.nf -preview
@@ -2044,9 +2135,9 @@ nextflow run bad_syntax.nf -preview
 ??? failure "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_syntax.nf` [magical_mercator] DSL2 - revision: 550b9a8873
+    Launching `bad_syntax.nf` [magical_mercator] revision: 550b9a8873
 
     Error bad_syntax.nf:24:1: Unexpected input: '<EOF>'
 
@@ -2055,17 +2146,17 @@ nextflow run bad_syntax.nf -preview
      -- Check '.nextflow.log' file for details
     ```
 
-Preview mode किसी भी process को चलाए बिना syntax errors को जल्दी पकड़ने के लिए विशेष रूप से उपयोगी है। यह execution से पहले workflow structure और process connections को validate करता है।
+Preview mode किसी भी प्रोसेस को चलाए बिना सिंटैक्स एरर को जल्दी पकड़ने के लिए विशेष रूप से उपयोगी है। यह एक्जीक्यूशन से पहले वर्कफ़्लो संरचना और प्रोसेस कनेक्शन को validate करता है।
 
-### 4.3. Logic Testing के लिए Stub Running
+### 4.3. लॉजिक परीक्षण के लिए Stub Running
 
-कभी-कभी errors debug करना मुश्किल होता है क्योंकि commands बहुत लंबा समय लेती हैं, special software की जरूरत होती है, या जटिल कारणों से fail होती हैं। Stub running तुम्हें actual commands execute किए बिना workflow logic test करने देता है।
+कभी-कभी एरर को डीबग करना मुश्किल होता है क्योंकि कमांड बहुत लंबे समय लेते हैं, विशेष सॉफ़्टवेयर की आवश्यकता होती है, या जटिल कारणों से विफल होते हैं। Stub running तुम्हें वास्तविक कमांड एक्जीक्यूट किए बिना वर्कफ़्लो लॉजिक का परीक्षण करने देता है।
 
 #### पाइपलाइन चलाओ
 
-जब तुम एक Nextflow process develop कर रहे हो, तो तुम `stub` directive का उपयोग करके 'dummy' commands define कर सकते हो जो real command चलाए बिना सही form के outputs generate करती हैं। यह तरीका विशेष रूप से valuable है जब तुम actual software की जटिलताओं से निपटने से पहले यह verify करना चाहते हो कि तुम्हारा workflow logic सही है।
+जब तुम एक Nextflow प्रोसेस विकसित कर रहे हो, तो तुम `stub` निर्देश का उपयोग करके 'dummy' कमांड परिभाषित कर सकते हो जो वास्तविक कमांड चलाए बिना सही रूप के आउटपुट उत्पन्न करते हैं। यह तरीका विशेष रूप से मूल्यवान है जब तुम वास्तविक सॉफ़्टवेयर की जटिलताओं से निपटने से पहले यह सत्यापित करना चाहते हो कि तुम्हारा वर्कफ़्लो लॉजिक सही है।
 
-उदाहरण के लिए, याद करो हमारा `missing_software.nf`? वह जहाँ हमारे पास missing software था जिसने वर्कफ़्लो को तब तक चलने से रोका जब तक हमने `-profile docker` नहीं जोड़ा? `missing_software_with_stub.nf` एक बहुत similar वर्कफ़्लो है। अगर हम इसे उसी तरह चलाते हैं, तो हम वही error generate करेंगे:
+उदाहरण के लिए, याद करो हमारा `missing_software.nf` पहले से? वह जहाँ हमारे पास गायब सॉफ़्टवेयर था जिसने वर्कफ़्लो को तब तक चलने से रोका जब तक हमने `-profile docker` नहीं जोड़ा? `missing_software_with_stub.nf` एक बहुत समान वर्कफ़्लो है। अगर हम इसे उसी तरह चलाते हैं, तो हम वही एरर उत्पन्न करेंगे:
 
 ```bash
 nextflow run missing_software_with_stub.nf
@@ -2094,14 +2185,14 @@ nextflow run missing_software_with_stub.nf
       .command.sh: line 2: cowpy: command not found
 
     Work dir:
-      /workspaces/training/side-quests/debugging/work/82/42a5bfb60c9c6ee63ebdbc2d51aa6e
+      /workspaces/training/side-quests/debugging/work/cd/b8686a0d27df5be779a38fed616d01
 
-    Tip: you can try to figure out what's wrong by changing to the process work directory and showing the script file named `.command.sh`
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
     -- Check '.nextflow.log' file for details
     ```
 
-हालाँकि, यह वर्कफ़्लो `-stub-run` के साथ चलाने पर errors produce नहीं करेगा, `docker` profile के बिना भी:
+हालांकि, यह वर्कफ़्लो `-stub-run` के साथ चलाने पर एरर उत्पन्न नहीं करेगा, यहाँ तक कि `docker` profile के बिना भी:
 
 ```bash
 nextflow run missing_software_with_stub.nf -stub-run
@@ -2110,17 +2201,17 @@ nextflow run missing_software_with_stub.nf -stub-run
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `missing_software_with_stub.nf` [astonishing_shockley] DSL2 - revision: f1f4f05d7d
+    Launching `missing_software_with_stub.nf` [astonishing_shockley] revision: f1f4f05d7d
 
     executor >  local (3)
-    [b5/2517a3] PROCESS_FILES (3) | 3 of 3 ✔
+    [ba/416414] PROCESS_FILES (2) | 3 of 3 ✔
     ```
 
-#### कोड जाँचो
+#### कोड की जांच करो
 
-चलो `missing_software_with_stub.nf` की जाँच करते हैं:
+चलो `missing_software_with_stub.nf` की जांच करते हैं:
 
 ```groovy title="missing_software.nf (with stub)" hl_lines="16-19" linenums="3"
 process PROCESS_FILES {
@@ -2145,68 +2236,68 @@ process PROCESS_FILES {
 }
 ```
 
-`missing_software.nf` की तुलना में, इस process में एक `stub:` directive है जो एक command specify करता है जिसे `script:` में specified के बजाय उपयोग किया जाएगा, इस event में कि Nextflow stub mode में चलाया जाए।
+`missing_software.nf` की तुलना में, इस प्रोसेस में एक `stub:` निर्देश है जो एक कमांड निर्दिष्ट करता है जिसे `script:` में निर्दिष्ट के बजाय उपयोग किया जाएगा, इस स्थिति में कि Nextflow stub mode में चलाया जाए।
 
-`touch` command जो हम यहाँ उपयोग कर रहे हैं वह किसी software या appropriate inputs पर निर्भर नहीं करती, और सभी situations में चलेगी, जिससे हम process internals की चिंता किए बिना workflow logic debug कर सकते हैं।
+`touch` कमांड जिसका हम यहाँ उपयोग कर रहे हैं वह किसी भी सॉफ़्टवेयर या उचित इनपुट पर निर्भर नहीं करता, और सभी स्थितियों में चलेगा, जिससे हम प्रोसेस आंतरिक के बारे में चिंता किए बिना वर्कफ़्लो लॉजिक को डीबग कर सकते हैं।
 
-**Stub running debug करने में मदद करता है:**
+**Stub running डीबग करने में मदद करता है:**
 
-- Channel structure और data flow
-- Process connections और dependencies
-- Parameter propagation
-- Software dependencies के बिना workflow logic
+- चैनल संरचना और डेटा फ्लो
+- प्रोसेस कनेक्शन और dependencies
+- पैरामीटर प्रसार
+- सॉफ़्टवेयर dependencies के बिना वर्कफ़्लो लॉजिक
 
-### 4.4. व्यवस्थित Debugging Approach
+### 4.4. व्यवस्थित डीबगिंग तरीका
 
-अब जब तुमने individual debugging techniques सीखी हैं - trace files और work directories से लेकर preview mode, stub running, और resource monitoring तक - चलो उन्हें एक व्यवस्थित पद्धति में जोड़ते हैं। एक structured approach होने से तुम्हें जटिल errors से overwhelmed होने से बचाता है और यह सुनिश्चित करता है कि तुम महत्वपूर्ण clues miss नहीं करते।
+अब जब तुमने व्यक्तिगत डीबगिंग तकनीकें सीखी हैं - trace files और work directories से लेकर preview mode, stub running, और resource monitoring तक - चलो उन्हें एक व्यवस्थित पद्धति में एक साथ जोड़ते हैं। एक संरचित तरीका होने से तुम जटिल एरर से अभिभूत होने से बचते हो और यह सुनिश्चित करते हो कि तुम महत्वपूर्ण संकेत नहीं चूकते।
 
-यह पद्धति हमारे द्वारा cover किए गए सभी tools को एक efficient workflow में combine करती है:
+यह पद्धति हमारे द्वारा कवर किए गए सभी टूल को एक कुशल वर्कफ़्लो में जोड़ती है:
 
-**चार-चरण Debugging Method:**
+**चार-चरण डीबगिंग विधि:**
 
-**Phase 1: Syntax Error Resolution (5 मिनट)**
+**चरण 1: सिंटैक्स एरर समाधान (5 मिनट)**
 
-1. VSCode या तुम्हारे IDE में red underlines जाँचो
-2. Syntax समस्याओं की पहचान करने के लिए `nextflow run workflow.nf -preview` चलाओ
-3. सभी syntax errors ठीक करो (missing braces, trailing commas, आदि)
-4. आगे बढ़ने से पहले सुनिश्चित करो कि वर्कफ़्लो successfully parse होता है
+1. VSCode या तुम्हारे IDE में लाल underlines की जांच करो
+2. सिंटैक्स समस्याओं की पहचान करने के लिए `nextflow run workflow.nf -preview` चलाओ
+3. सभी सिंटैक्स एरर ठीक करो (गायब ब्रेसेज़, trailing commas, आदि)
+4. आगे बढ़ने से पहले सुनिश्चित करो कि वर्कफ़्लो सफलतापूर्वक parse होता है
 
-**Phase 2: Quick Assessment (5 मिनट)**
+**चरण 2: त्वरित मूल्यांकन (5 मिनट)**
 
-1. Runtime error messages ध्यान से पढ़ो
-2. जाँचो कि यह runtime, logic, या resource error है
-3. Basic workflow logic test करने के लिए preview mode का उपयोग करो
+1. रनटाइम एरर मैसेज ध्यान से पढ़ो
+2. जांचो कि यह रनटाइम, लॉजिक, या resource एरर है
+3. बुनियादी वर्कफ़्लो लॉजिक का परीक्षण करने के लिए preview mode का उपयोग करो
 
-**Phase 3: Detailed Investigation (15-30 मिनट)**
+**चरण 3: विस्तृत जांच (15-30 मिनट)**
 
-1. Failed कार्य की work directory ढूंढो
-2. Log files की जाँच करो
-3. Channels inspect करने के लिए `.view()` operators जोड़ो
-4. Execution के बिना workflow logic test करने के लिए `-stub-run` का उपयोग करो
+1. विफल कार्य की work directory ढूंढो
+2. log files की जांच करो
+3. चैनल निरीक्षण के लिए `.view()` ऑपरेटर जोड़ो
+4. एक्जीक्यूशन के बिना वर्कफ़्लो लॉजिक का परीक्षण करने के लिए `-stub-run` का उपयोग करो
 
-**Phase 4: Fix and Validate (15 मिनट)**
+**चरण 4: ठीक करो और validate करो (15 मिनट)**
 
-1. Minimal targeted fixes करो
-2. Resume के साथ test करो: `nextflow run workflow.nf -resume`
-3. Complete workflow execution verify करो
+1. न्यूनतम लक्षित फिक्स करो
+2. resume के साथ परीक्षण करो: `nextflow run workflow.nf -resume`
+3. पूर्ण वर्कफ़्लो एक्जीक्यूशन सत्यापित करो
 
-!!! tip "Efficient Debugging के लिए Resume का उपयोग"
+!!! tip "कुशल डीबगिंग के लिए Resume का उपयोग"
 
-    एक बार जब तुमने समस्या identify कर ली, तो तुम्हें अपने वर्कफ़्लो के successful parts को फिर से चलाने में समय बर्बाद किए बिना अपने fixes test करने का एक efficient तरीका चाहिए। Nextflow की `-resume` functionality debugging के लिए invaluable है।
+    एक बार जब तुमने समस्या की पहचान कर ली, तो तुम्हें अपने वर्कफ़्लो के सफल हिस्सों को फिर से चलाने में समय बर्बाद किए बिना अपने फिक्स का परीक्षण करने का एक कुशल तरीका चाहिए। Nextflow की `-resume` कार्यक्षमता डीबगिंग के लिए अमूल्य है।
 
-    अगर तुमने [Hello Nextflow](../hello_nextflow/) के माध्यम से काम किया है तो तुम `-resume` से मिले होगे, और यह महत्वपूर्ण है कि तुम debugging करते समय इसका अच्छा उपयोग करो ताकि तुम्हारी problem process से पहले की processes चलने का इंतजार करते हुए समय बर्बाद न हो।
+    तुम `-resume` से परिचित होगे अगर तुमने [Hello Nextflow](../../hello_nextflow/index.md) के माध्यम से काम किया है, और यह महत्वपूर्ण है कि तुम डीबगिंग करते समय इसका अच्छा उपयोग करो ताकि तुम्हारी समस्या प्रोसेस से पहले के प्रोसेस चलने का इंतजार करते हुए समय बर्बाद न हो।
 
-    **Resume debugging strategy:**
+    **Resume डीबगिंग रणनीति:**
 
-    1. Failure तक वर्कफ़्लो चलाओ
-    2. Failed कार्य के लिए work directory की जाँच करो
-    3. Specific समस्या ठीक करो
-    4. केवल fix test करने के लिए resume करो
-    5. वर्कफ़्लो complete होने तक repeat करो
+    1. विफलता तक वर्कफ़्लो चलाओ
+    2. विफल कार्य के लिए work directory की जांच करो
+    3. विशिष्ट समस्या ठीक करो
+    4. केवल फिक्स का परीक्षण करने के लिए resume करो
+    5. वर्कफ़्लो पूरा होने तक दोहराओ
 
-#### Debugging Configuration Profile
+#### डीबगिंग कॉन्फ़िगरेशन Profile
 
-इस व्यवस्थित approach को और अधिक efficient बनाने के लिए, तुम एक dedicated debugging configuration बना सकते हो जो automatically उन सभी tools को enable करती है जिनकी तुम्हें जरूरत है:
+इस व्यवस्थित तरीके को और भी कुशल बनाने के लिए, तुम एक समर्पित डीबगिंग कॉन्फ़िगरेशन बना सकते हो जो स्वचालित रूप से तुम्हारी जरूरत के सभी टूल enable करता है:
 
 ```groovy title="nextflow.config (debug profile)" linenums="1"
 profiles {
@@ -2215,7 +2306,7 @@ profiles {
             debug = true
             cleanup = false
 
-            // Debugging के लिए conservative resources
+            // डीबगिंग के लिए conservative resources
             maxForks = 1
             memory = '2.GB'
             cpus = 1
@@ -2230,17 +2321,17 @@ profiles {
 nextflow run workflow.nf -profile debug
 ```
 
-यह profile real-time output enable करता है, work directories preserve करता है, और easier debugging के लिए parallelization limit करता है।
+यह profile रियल-टाइम आउटपुट enable करता है, work directories को preserve करता है, और आसान डीबगिंग के लिए parallelization को सीमित करता है।
 
-### 4.5. व्यावहारिक Debugging अभ्यास
+### 4.5. व्यावहारिक डीबगिंग अभ्यास
 
-अब व्यवस्थित debugging approach को practice में लगाने का समय है। `buggy_workflow.nf` वर्कफ़्लो में कई सामान्य errors हैं जो real-world development में तुम्हें मिलने वाली समस्याओं के प्रकारों को represent करती हैं।
+अब व्यवस्थित डीबगिंग तरीके को व्यवहार में लाने का समय है। वर्कफ़्लो `buggy_workflow.nf` में कई सामान्य एरर हैं जो वास्तविक दुनिया के विकास में आने वाली समस्याओं के प्रकारों का प्रतिनिधित्व करती हैं।
 
 !!! exercise "अभ्यास"
 
-    `buggy_workflow.nf` में सभी errors identify और fix करने के लिए व्यवस्थित debugging approach का उपयोग करो। यह वर्कफ़्लो एक CSV फ़ाइल से sample data process करने की कोशिश करता है लेकिन इसमें सामान्य debugging scenarios को represent करने वाले multiple intentional bugs हैं।
+    `buggy_workflow.nf` में सभी एरर की पहचान करने और उन्हें ठीक करने के लिए व्यवस्थित डीबगिंग तरीके का उपयोग करो। यह वर्कफ़्लो एक CSV फ़ाइल से नमूना डेटा प्रोसेस करने की कोशिश करता है लेकिन इसमें सामान्य डीबगिंग परिदृश्यों का प्रतिनिधित्व करने वाले कई जानबूझकर बग हैं।
 
-    पहली error देखने के लिए वर्कफ़्लो चलाकर शुरू करो:
+    पहली एरर देखने के लिए वर्कफ़्लो चलाकर शुरू करो:
 
     ```bash
     nextflow run buggy_workflow.nf
@@ -2249,199 +2340,213 @@ nextflow run workflow.nf -profile debug
     ??? failure "कमांड आउटपुट"
 
         ```console
-        N E X T F L O W   ~  version 25.10.2
+         N E X T F L O W   ~  version 26.04.4
 
-        Launching `buggy_workflow.nf` [wise_ramanujan] DSL2 - revision: d51a8e83fd
+        Launching `buggy_workflow.nf` [happy_aryabhata] revision: 6a296ff695
 
-        ERROR ~ Range [11, 12) out of bounds for length 11
+        Error buggy_workflow.nf:25:12: Unexpected input: '\n'
+        │  25 |     script:
+        ╰     |            ^
+
+        ERROR ~ Script compilation failed
 
          -- Check '.nextflow.log' file for details
         ```
 
-        यह cryptic error `params{}` block में line 11-12 के आसपास एक parsing समस्या इंगित करती है। v2 parser structural समस्याओं को जल्दी पकड़ता है।
+        parser लाइन 25 (`script:`) की ओर इशारा करता है, लेकिन असली समस्या उससे ऊपर है: लाइन 23 पर `output:` declaration के बाद trailing comma parser को एक और आउटपुट की उम्मीद में छोड़ देता है, इसलिए जब वह `script:` तक पहुंचता है तो विफल हो जाता है। यह काम करने के लिए कई सिंटैक्स एरर में से पहला है।
 
-    तुमने जो चार-चरण debugging method सीखी है उसे apply करो:
+    तुमने जो चार-चरण डीबगिंग विधि सीखी है उसे लागू करो:
 
-    **Phase 1: Syntax Error Resolution**
-    - VSCode या तुम्हारे IDE में red underlines जाँचो
-    - Syntax समस्याओं की पहचान करने के लिए `nextflow run workflow.nf -preview` चलाओ
-    - सभी syntax errors ठीक करो (missing braces, trailing commas, आदि)
-    - आगे बढ़ने से पहले सुनिश्चित करो कि वर्कफ़्लो successfully parse होता है
+    **चरण 1: सिंटैक्स एरर समाधान**
+    - VSCode या तुम्हारे IDE में लाल underlines की जांच करो
+    - सिंटैक्स समस्याओं की पहचान करने के लिए `nextflow run workflow.nf -preview` चलाओ
+    - सभी सिंटैक्स एरर ठीक करो (गायब ब्रेसेज़, trailing commas, आदि)
+    - आगे बढ़ने से पहले सुनिश्चित करो कि वर्कफ़्लो सफलतापूर्वक parse होता है
 
-    **Phase 2: Quick Assessment**
-    - Runtime error messages ध्यान से पढ़ो
-    - पहचानो कि errors runtime, logic, या resource-related हैं
-    - Basic workflow logic test करने के लिए `-preview` mode का उपयोग करो
+    **चरण 2: त्वरित मूल्यांकन**
+    - रनटाइम एरर मैसेज ध्यान से पढ़ो
+    - पहचानो कि एरर रनटाइम, लॉजिक, या resource-संबंधित हैं
+    - बुनियादी वर्कफ़्लो लॉजिक का परीक्षण करने के लिए `-preview` mode का उपयोग करो
 
-    **Phase 3: Detailed Investigation**
-    - Failed कार्यों के लिए work directories की जाँच करो
-    - Channels inspect करने के लिए `.view()` operators जोड़ो
-    - Work directories में log files जाँचो
-    - Execution के बिना workflow logic test करने के लिए `-stub-run` का उपयोग करो
+    **चरण 3: विस्तृत जांच**
+    - विफल कार्यों के लिए work directories की जांच करो
+    - चैनल निरीक्षण के लिए `.view()` ऑपरेटर जोड़ो
+    - work directories में log files जांचो
+    - एक्जीक्यूशन के बिना वर्कफ़्लो लॉजिक का परीक्षण करने के लिए `-stub-run` का उपयोग करो
 
-    **Phase 4: Fix and Validate**
-    - Targeted fixes करो
-    - Fixes efficiently test करने के लिए `-resume` का उपयोग करो
-    - Complete workflow execution verify करो
+    **चरण 4: ठीक करो और validate करो**
+    - लक्षित फिक्स करो
+    - फिक्स को कुशलतापूर्वक परीक्षण करने के लिए `-resume` का उपयोग करो
+    - पूर्ण वर्कफ़्लो एक्जीक्यूशन सत्यापित करो
 
-    **तुम्हारे पास उपलब्ध Debugging Tools:**
+    **तुम्हारे पास उपलब्ध डीबगिंग टूल:**
     ```bash
-    # Syntax checking के लिए Preview mode
+    # सिंटैक्स जांच के लिए preview mode
     nextflow run buggy_workflow.nf -preview
 
-    # Detailed output के लिए Debug profile
+    # विस्तृत आउटपुट के लिए debug profile
     nextflow run buggy_workflow.nf -profile debug
 
-    # Logic testing के लिए Stub running
+    # लॉजिक परीक्षण के लिए stub running
     nextflow run buggy_workflow.nf -stub-run
 
-    # Fixes के बाद Resume
+    # फिक्स के बाद resume
     nextflow run buggy_workflow.nf -resume
     ```
 
     ??? solution "समाधान"
-        `buggy_workflow.nf` में 9 या 10 distinct errors हैं (गिनने के तरीके पर निर्भर करते हुए) जो सभी major debugging categories को cover करती हैं। यहाँ प्रत्येक error और उसे कैसे ठीक करें का व्यवस्थित breakdown है।
+        `buggy_workflow.nf` में 10 अलग-अलग एरर हैं जो सभी प्रमुख डीबगिंग श्रेणियों को कवर करती हैं। यहाँ प्रत्येक एरर और उसे कैसे ठीक करें का व्यवस्थित विवरण है, उस क्रम में जिसमें तुम उन्हें Nextflow 26.04 पर वास्तव में सामना करते हो। compiler वर्कफ़्लो को दो passes में resolve करता है: पहले यह सिंटैक्स parse करता है, फिर यह statically जांचता है कि हर वेरिएबल defined है। इसलिए तुम पहले सिंटैक्स एरर साफ करते हो, फिर undefined-variable एरर का एक batch, इससे पहले कि वर्कफ़्लो बिल्कुल चले और runtime एरर शुरू हों।
 
-        चलो उन syntax errors से शुरू करते हैं:
+        चलो उन सिंटैक्स एरर से शुरू करते हैं:
 
-        **Error 1: Syntax Error - Trailing Comma**
+        **एरर 1: सिंटैक्स एरर - Trailing Comma**
         ```groovy linenums="21"
         output:
-            path "${sample_id}_result.txt",  // ERROR: Trailing comma
+            path "${sample_id}_result.txt",  // एरर: trailing comma
         ```
-        **Fix:** Trailing comma हटाओ
+        **फिक्स:** trailing comma हटाओ
         ```groovy linenums="21"
         output:
             path "${sample_id}_result.txt"
         ```
 
-        **Error 2: Syntax Error - Missing Closing Brace**
+        comma हटने के बाद, parser फ़ाइल के अंत तक उस brace को ढूंढता है जो `processFiles` को बंद करनी चाहिए और `Unexpected input: '<EOF>'` रिपोर्ट करता है।
+
+        **एरर 2: सिंटैक्स एरर - गायब Closing Brace**
         ```groovy linenums="24"
         script:
         """
         echo "Processing: ${sample}"
         cat ${input_file} > ${sample}_result.txt
         """
-        // ERROR: processFiles process के लिए closing brace गायब है
+        // एरर: processFiles प्रोसेस के लिए closing brace गायब है
         ```
-        **Fix:** Missing closing brace जोड़ो
+        **फिक्स:** गायब closing brace जोड़ो
         ```groovy linenums="29"
         """
         echo "Processing: ${sample_id}"
         cat ${input_file} > ${sample_id}_result.txt
         """
-        }  // Missing closing brace जोड़ो
+        }  // गायब closing brace जोड़ो
         ```
 
-        **Error 3: Variable Name Error**
-        ```groovy linenums="26"
-        echo "Processing: ${sample}"     // ERROR: sample_id होना चाहिए
-        cat ${input_file} > ${sample}_result.txt  // ERROR: sample_id होना चाहिए
+        अब सिंटैक्स parse होता है, इसलिए static type checker चलता है। यह एक साथ हर undefined वेरिएबल रिपोर्ट करता है, वर्कफ़्लो चलने से पहले:
+
+        ```console
+        Error buggy_workflow.nf:86:29: `sample_ids` is not defined
+        Error buggy_workflow.nf:27:25: `sample` is not defined
+        Error buggy_workflow.nf:28:27: `sample` is not defined
+        Error buggy_workflow.nf:49:33: `i` is not defined
         ```
-        **Fix:** सही input variable name का उपयोग करो
+
+        ये चार लाइनें तीन अलग-अलग बग से मेल खाती हैं, नीचे एरर 3, 4 और 5। उनमें से आखिरी, `i`, एक Bash वेरिएबल है जिसे type checker Nextflow वेरिएबल से अलग नहीं कर सकता, इसलिए यह यहाँ compile time पर सामने आता है न कि runtime failure के रूप में। दोबारा चलाने से पहले तीनों ठीक करो।
+
+        **एरर 3: वेरिएबल नाम एरर**
+        ```groovy linenums="26"
+        echo "Processing: ${sample}"     // एरर: sample_id होना चाहिए
+        cat ${input_file} > ${sample}_result.txt  // एरर: sample_id होना चाहिए
+        ```
+        **फिक्स:** सही इनपुट वेरिएबल नाम का उपयोग करो
         ```groovy linenums="26"
         echo "Processing: ${sample_id}"
         cat ${input_file} > ${sample_id}_result.txt
         ```
 
-        **Error 4: Undefined Variable Error**
+        **एरर 4: अपरिभाषित वेरिएबल एरर**
         ```groovy linenums="87"
-        heavy_ch = heavyProcess(sample_ids)  // ERROR: sample_ids undefined है
+        heavy_ch = heavyProcess(sample_ids)  // एरर: sample_ids अपरिभाषित है
         ```
-        **Fix:** सही channel का उपयोग करो और sample IDs extract करो
+        **फिक्स:** सही चैनल का उपयोग करो
         ```groovy linenums="87"
         heavy_ch = heavyProcess(input_ch)
         ```
 
-        इस बिंदु पर वर्कफ़्लो चलेगा, लेकिन हमें अभी भी errors मिलेंगी (जैसे `processFiles` में `Path value cannot be null`), जो bad channel structure के कारण हैं।
-
-        **Error 5: Channel Structure Error - Wrong Map Output**
-        ```groovy linenums="83"
-        .map { row -> row.sample_id }  // ERROR: processFiles tuple अपेक्षित करता है
-        ```
-        **Fix:** वह tuple structure return करो जो processFiles अपेक्षित करता है
-        ```groovy linenums="83"
-        .map { row -> [row.sample_id, file(row.fastq_path)] }
-        ```
-
-        लेकिन यह ऊपर `heavyProcess()` चलाने के लिए हमारे fix को break करेगा, इसलिए हमें उस process को केवल sample IDs pass करने के लिए map का उपयोग करना होगा:
-
-        **Error 6: heavyProcess के लिए Bad channel structure**
-        ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch)  // ERROR: input_ch में अब प्रति emission 2 elements हैं - heavyProcess को केवल 1 (पहला) चाहिए
-        ```
-        **Fix:** सही channel का उपयोग करो और sample IDs extract करो
-        ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch.map{it[0]})
-        ```
-
-        अब हम थोड़ा आगे जाते हैं लेकिन `No such variable: i` के बारे में error मिलती है, क्योंकि हमने एक Bash variable escape नहीं किया।
-
-        **Error 7: Bash Variable Escaping Error**
+        **एरर 5: Bash वेरिएबल Escaping एरर**
         ```groovy linenums="48"
-        echo "Heavy computation $i for ${sample_id}"  // ERROR: $i escape नहीं किया गया
+        echo "Heavy computation $i for ${sample_id}"  // एरर: $i एक undefined Nextflow वेरिएबल जैसा दिखता है
         ```
-        **Fix:** Bash variable escape करो
+        **फिक्स:** bash वेरिएबल escape करो ताकि Nextflow इसे shell के लिए छोड़ दे
         ```groovy linenums="48"
         echo "Heavy computation \${i} for ${sample_id}"
         ```
 
-        अब हमें `Process exceeded running time limit (1ms)` मिलता है, इसलिए हम relevant process के लिए run time limit ठीक करते हैं:
+        इन्हें resolve करने के बाद वर्कफ़्लो compile होता है और चलना शुरू होता है। पहली runtime एरर `processFiles` से आती है, जो एक tuple की अपेक्षा करता है लेकिन उसे एक bare value दी जा रही है: `Input tuple does not match tuple declaration in process 'processFiles' -- offending value: sample_003`।
 
-        **Error 8: Resource Configuration Error**
-        ```groovy linenums="36"
-        time '1 ms'  // ERROR: Unrealistic time limit
+        **एरर 6: चैनल संरचना एरर - गलत Map आउटपुट**
+        ```groovy linenums="83"
+        .map { row -> row.sample_id }  // एरर: processFiles tuple की अपेक्षा करता है
         ```
-        **Fix:** Realistic time limit तक बढ़ाओ
+        **फिक्स:** वह tuple संरचना वापस करो जो processFiles अपेक्षा करता है
+        ```groovy linenums="83"
+        .map { row -> [row.sample_id, file(row.fastq_path)] }
+        ```
+
+        यह `processFiles` ठीक करता है, लेकिन `input_ch` अब एक दो-तत्व tuple emit करता है, और `heavyProcess` को अभी भी पूरा tuple दिया जा रहा है जहाँ वह एक single value की अपेक्षा करता है। tuple script में `[sample_005, /path/sample_005.fastq.gz]` के रूप में render होता है, जो Bash कमांड को syntax error और exit status 2 के साथ तोड़ देता है।
+
+        **एरर 7: heavyProcess के लिए खराब चैनल संरचना**
+        ```groovy linenums="87"
+        heavy_ch = heavyProcess(input_ch)  // एरर: input_ch अब 2-तत्व tuple emit करता है; heavyProcess को केवल पहला तत्व चाहिए
+        ```
+        **फिक्स:** केवल sample IDs पास करो
+        ```groovy linenums="87"
+        heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
+        ```
+
+        अब `heavyProcess` चलता है, लेकिन अपनी time limit से टकराता है। `local` executor पर मैसेज `process hasn't exited` होता है (साथ में `WARN: Killing running tasks` मैसेज) न कि एक explicit timeout, इसलिए killed task को उसके `time` निर्देश से जोड़ो:
+
+        **एरर 8: Resource कॉन्फ़िगरेशन एरर**
+        ```groovy linenums="36"
+        time '1 ms'  // एरर: अवास्तविक time limit
+        ```
+        **फिक्स:** एक यथार्थवादी time limit तक बढ़ाओ
         ```groovy linenums="36"
         time '100 s'
         ```
 
-        अगला हमारे पास resolve करने के लिए एक `Missing output file(s)` error है:
+        अगला हमारे पास हल करने के लिए एक `Missing output file(s)` एरर है, क्योंकि script `${sample_id}.txt` लिखता है लेकिन output declaration `${sample_id}_heavy.txt` की अपेक्षा करता है:
 
-        **Error 9: Output File Name Mismatch**
+        **एरर 9: आउटपुट फ़ाइल नाम बेमेल**
         ```groovy linenums="49"
-        done > ${sample_id}.txt  // ERROR: Wrong filename, output declaration से match होना चाहिए
+        done > ${sample_id}.txt  // एरर: गलत फ़ाइलनाम, output declaration से मेल खाना चाहिए
         ```
-        **Fix:** Output declaration से match करो
+        **फिक्स:** output declaration से मेल खाओ
         ```groovy linenums="49"
         done > ${sample_id}_heavy.txt
         ```
 
-        पहले दो processes चले, लेकिन तीसरा नहीं।
+        वर्कफ़्लो अब बिना एरर के पूरा होता है, लेकिन `files` आउटपुट खाली है: `handleFiles` कभी नहीं चला। इसका input channel, `channel.fromPath("*.txt")`, launch directory में कोई फ़ाइल match नहीं करता, इसलिए प्रोसेस जोर से विफल होने के बजाय बस skip हो जाता है।
 
-        **Error 10: Output File Name Mismatch**
+        **एरर 10: गलत चैनल स्रोत**
         ```groovy linenums="88"
-        file_ch = channel.fromPath("*.txt") // Error: pwd से input लेने की कोशिश कर रहा है process से नहीं
+        file_ch = channel.fromPath("*.txt") // एरर: किसी प्रोसेस से नहीं बल्कि pwd से इनपुट लेने की कोशिश कर रहा है
         handleFiles(file_ch)
         ```
-        **Fix:** Previous process से output लो
+        **फिक्स:** पिछले प्रोसेस से आउटपुट लो
         ```groovy linenums="88"
-        handleFiles(heavyProcess.out)
+        file_ch = handleFiles(heavy_ch)
         ```
 
-        इसके साथ, पूरा वर्कफ़्लो चलना चाहिए।
+        इसके साथ, पूरा वर्कफ़्लो शुरू से अंत तक चलता है और तीनों आउटपुट populated हैं।
 
-        **पूरा Corrected Workflow:**
+        **पूर्ण सही वर्कफ़्लो:**
         ```groovy linenums="1"
         #!/usr/bin/env nextflow
 
         /*
-        * Debugging exercises के लिए Buggy workflow
-        * इस workflow में learning purposes के लिए कई intentional bugs हैं
+        * डीबगिंग अभ्यास के लिए बगी वर्कफ़्लो
+        * इस वर्कफ़्लो में सीखने के उद्देश्यों के लिए कई जानबूझकर बग हैं
         */
 
         params{
-            // Missing validation के साथ Parameters
+            // गायब validation के साथ पैरामीटर
             input: Path = 'data/sample_data.csv'
             output: String = 'results'
         }
 
         /*
-        * Input/output mismatch वाला Process
+        * इनपुट/आउटपुट बेमेल वाला प्रोसेस
         */
         process processFiles {
-            publishDir "${params.output}/processed", mode: 'copy'
 
             input:
                 tuple val(sample_id), path(input_file)
@@ -2457,10 +2562,9 @@ nextflow run workflow.nf -profile debug
         }
 
         /*
-        * Resource समस्याओं वाला Process
+        * resource समस्याओं वाला प्रोसेस
         */
         process heavyProcess {
-            publishDir "${params.output}/heavy", mode: 'copy'
 
             time '100 s'
 
@@ -2472,18 +2576,17 @@ nextflow run workflow.nf -profile debug
 
             script:
             """
-            # Heavy computation simulate करो
-            for i in {1..1000000}; do
+            # भारी computation simulate करो
+            for i in {1..10000}; do
                 echo "Heavy computation \$i for ${sample_id}"
             done > ${sample_id}_heavy.txt
             """
         }
 
         /*
-        * File handling समस्याओं वाला Process
+        * फ़ाइल handling समस्याओं वाला प्रोसेस
         */
         process handleFiles {
-            publishDir "${params.output}/files", mode: 'copy'
 
             input:
                 path input_file
@@ -2500,11 +2603,11 @@ nextflow run workflow.nf -profile debug
         }
 
         /*
-        * Channel समस्याओं वाला Main workflow
+        * चैनल समस्याओं वाला मुख्य वर्कफ़्लो
         */
         workflow {
-
-            // Incorrect usage के साथ Channel
+            main:
+            // गलत उपयोग वाला चैनल
             input_ch = channel
                 .fromPath(params.input)
                 .splitCsv(header: true)
@@ -2512,136 +2615,153 @@ nextflow run workflow.nf -profile debug
 
             processed_ch = processFiles(input_ch)
 
-            heavy_ch = heavyProcess(input_ch.map{it[0]})
+            heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
 
-            handleFiles(heavyProcess.out)
+            file_ch = handleFiles(heavy_ch)
+
+            publish:
+            processed = processed_ch
+            heavy = heavy_ch
+            files = file_ch
+        }
+
+        output {
+            processed {
+                path 'processed'
+            }
+            heavy {
+                path 'heavy'
+            }
+            files {
+                path 'files'
+            }
         }
         ```
 
-**Cover किए गए Error Categories:**
+**कवर की गई एरर श्रेणियां:**
 
-- **Syntax errors**: Missing braces, trailing commas, undefined variables
-- **Channel structure errors**: Wrong data shapes, undefined channels
-- **Process errors**: Output file mismatches, variable escaping
-- **Resource errors**: Unrealistic time limits
+- **सिंटैक्स एरर**: गायब ब्रेसेज़, trailing commas, अपरिभाषित वेरिएबल
+- **चैनल संरचना एरर**: गलत डेटा आकार, अपरिभाषित चैनल
+- **प्रोसेस एरर**: आउटपुट फ़ाइल बेमेल, वेरिएबल escaping
+- **Resource एरर**: अवास्तविक time limits
 
-**Key Debugging Lessons:**
+**मुख्य डीबगिंग सबक:**
 
-1. **Error messages ध्यान से पढ़ो** - वे अक्सर सीधे समस्या की ओर इशारा करते हैं
-2. **व्यवस्थित approaches का उपयोग करो** - एक बार में एक error ठीक करो और `-resume` के साथ test करो
-3. **Data flow समझो** - channel structure errors अक्सर सबसे सूक्ष्म होती हैं
-4. **Work directories जाँचो** - जब processes fail होती हैं, logs तुम्हें exactly बताते हैं कि क्या गलत हुआ
+1. **एरर मैसेज ध्यान से पढ़ो** - वे अक्सर सीधे समस्या की ओर इशारा करते हैं
+2. **व्यवस्थित तरीकों का उपयोग करो** - एक बार में एक एरर ठीक करो और `-resume` के साथ परीक्षण करो
+3. **डेटा फ्लो समझो** - चैनल संरचना एरर अक्सर सबसे सूक्ष्म होती हैं
+4. **work directories जांचो** - जब प्रोसेस विफल होते हैं, तो logs तुम्हें बिल्कुल बताते हैं कि क्या गलत हुआ
 
 ---
 
 ## सारांश
 
-इस side quest में, तुमने Nextflow वर्कफ़्लो को debug करने के लिए व्यवस्थित techniques का एक set सीखा है।
-अपने काम में इन techniques को apply करने से तुम अपने computer से लड़ने में कम समय बिताओगे, समस्याओं को तेजी से हल करोगे और भविष्य की समस्याओं से खुद को बचाओगे।
+इस साइड क्वेस्ट में, तुमने Nextflow वर्कफ़्लो को डीबग करने के लिए व्यवस्थित तकनीकों का एक सेट सीखा है।
+अपने काम में इन तकनीकों को लागू करने से तुम अपने कंप्यूटर से लड़ने में कम समय बिताओगे, समस्याओं को तेज़ी से हल करोगे और भविष्य की समस्याओं से खुद को बचाओगे।
 
-### Key patterns
+### मुख्य पैटर्न
 
-**1. Syntax errors को कैसे identify और fix करें**:
+**1. सिंटैक्स एरर की पहचान और उन्हें कैसे ठीक करें:**
 
-- Nextflow error messages interpret करना और समस्याओं को locate करना
-- सामान्य syntax errors: missing braces, incorrect keywords, undefined variables
-- Nextflow (Groovy) और Bash variables के बीच अंतर करना
-- Early error detection के लिए VS Code extension features का उपयोग
+- Nextflow एरर मैसेज की व्याख्या करना और समस्याओं का पता लगाना
+- सामान्य सिंटैक्स एरर: गायब ब्रेसेज़, गलत कीवर्ड, अपरिभाषित वेरिएबल
+- Nextflow (Groovy) और Bash वेरिएबल के बीच अंतर करना
+- प्रारंभिक एरर डिटेक्शन के लिए VS Code एक्सटेंशन फीचर्स का उपयोग करना
 
 ```groovy
-// Missing brace - IDE में red underlines देखो
+// गायब brace - IDE में लाल underlines देखो
 process FOO {
     script:
     """
     echo "hello"
     """
-// } <-- गायब है!
+// } <-- गायब!
 
-// Wrong keyword
+// गलत कीवर्ड
 inputs:  // 'input:' होना चाहिए
 
-// Undefined variable - Bash variables के लिए backslash से escape करो
-echo "${undefined_var}"      // Nextflow variable (error अगर define नहीं है)
-echo "\${bash_var}"          // Bash variable (escaped)
+// अपरिभाषित वेरिएबल - Bash वेरिएबल के लिए backslash से escape करो
+echo "${undefined_var}"      // Nextflow वेरिएबल (परिभाषित न होने पर एरर)
+echo "\${bash_var}"          // Bash वेरिएबल (escaped)
 ```
 
-**2. Channel structure समस्याओं को कैसे debug करें**:
+**2. चैनल संरचना समस्याओं को कैसे डीबग करें:**
 
-- Channel cardinality और exhaustion समस्याओं को समझना
-- Channel content structure mismatches debug करना
-- Channel inspection के लिए `.view()` operators का उपयोग
-- Output में square brackets जैसे error patterns को पहचानना
+- चैनल cardinality और exhaustion समस्याओं को समझना
+- चैनल सामग्री संरचना बेमेल को डीबग करना
+- चैनल निरीक्षण के लिए `.view()` ऑपरेटर का उपयोग करना
+- आउटपुट में square brackets जैसे एरर पैटर्न को पहचानना
 
 ```groovy
-// Channel content inspect करो
-my_channel.view { "Content: $it" }
+// चैनल सामग्री निरीक्षण करो
+my_channel.view { item -> "Content: ${item}" }
 
-// Queue को value channel में convert करो (exhaustion रोकता है)
+// queue को value channel में बदलो (exhaustion रोकता है)
 reference_ch = channel.value('ref.fa')
 // या
 reference_ch = channel.of('ref.fa').first()
 ```
 
-**3. Process execution समस्याओं को कैसे troubleshoot करें**:
+**3. प्रोसेस एक्जीक्यूशन समस्याओं का निवारण कैसे करें:**
 
-- Missing output file errors का निदान
-- Exit codes समझना (missing software के लिए 127, memory समस्याओं के लिए 137)
-- Work directories और command files की जाँच
-- Resources को उचित रूप से configure करना
+- गायब आउटपुट फ़ाइल एरर का निदान करना
+- exit codes समझना (गायब सॉफ़्टवेयर के लिए 127, मेमोरी समस्याओं के लिए 137)
+- work directories और command files की जांच करना
+- resources को उचित रूप से कॉन्फ़िगर करना
 
 ```bash
-# Actually क्या execute हुआ जाँचो
+# वास्तव में क्या एक्जीक्यूट किया गया था जांचो
 cat work/ab/cdef12/.command.sh
 
-# Error output जाँचो
+# एरर आउटपुट जांचो
 cat work/ab/cdef12/.command.err
 
 # Exit code 127 = command not found
 # Exit code 137 = killed (memory/time limit)
 ```
 
-**4. Nextflow के built-in debugging tools का उपयोग कैसे करें**:
+**4. Nextflow के बिल्ट-इन डीबगिंग टूल का उपयोग कैसे करें:**
 
-- Preview mode और real-time debugging का उपयोग
-- Logic testing के लिए stub running implement करना
-- Efficient debugging cycles के लिए resume apply करना
-- चार-चरण व्यवस्थित debugging methodology का पालन
+- preview mode और रियल-टाइम डीबगिंग का लाभ उठाना
+- लॉजिक परीक्षण के लिए stub running लागू करना
+- कुशल डीबगिंग cycles के लिए resume लागू करना
+- चार-चरण व्यवस्थित डीबगिंग पद्धति का पालन करना
 
-!!! tip "Quick Debugging Reference"
+!!! tip "त्वरित डीबगिंग संदर्भ"
 
-    **Syntax errors?** → VSCode warnings जाँचो, `nextflow run workflow.nf -preview` चलाओ
+    **सिंटैक्स एरर?** → VSCode चेतावनियाँ जांचो, `nextflow run workflow.nf -preview` चलाओ
 
-    **Channel समस्याएँ?** → Content inspect करने के लिए `.view()` का उपयोग करो: `my_channel.view()`
+    **चैनल समस्याएं?** → सामग्री निरीक्षण के लिए `.view()` का उपयोग करो: `my_channel.view()`
 
-    **Process failures?** → Work directory files जाँचो:
+    **प्रोसेस विफलताएं?** → work directory फ़ाइलें जांचो:
 
-    - `.command.sh` - executed script
-    - `.command.err` - error messages
+    - `.command.sh` - एक्जीक्यूट की गई script
+    - `.command.err` - एरर मैसेज
     - `.exitcode` - exit status (127 = command not found, 137 = killed)
 
-    **Mysterious behavior?** → Workflow logic test करने के लिए `-stub-run` के साथ चलाओ
+    **रहस्यमय व्यवहार?** → वर्कफ़्लो लॉजिक का परीक्षण करने के लिए `-stub-run` के साथ चलाओ
 
-    **Fixes किए?** → Testing में समय बचाने के लिए `-resume` का उपयोग करो: `nextflow run workflow.nf -resume`
+    **फिक्स किए?** → परीक्षण में समय बचाने के लिए `-resume` का उपयोग करो: `nextflow run workflow.nf -resume`
 
 ---
 
 ### अतिरिक्त संसाधन
 
-- [Nextflow troubleshooting guide](https://www.nextflow.io/docs/latest/troubleshooting.html): Official troubleshooting documentation
-- [Understanding Nextflow channels](https://www.nextflow.io/docs/latest/channel.html): Channel types और behavior में deep dive
-- [Process directives reference](https://www.nextflow.io/docs/latest/process.html#directives): सभी available process configuration options
-- [nf-test](https://www.nf-test.com/): Nextflow पाइपलाइन के लिए testing framework
-- [Nextflow Slack community](https://www.nextflow.io/slack-invite.html): Community से मदद लो
+- [Nextflow troubleshooting guide](https://www.nextflow.io/docs/latest/troubleshooting.html): आधिकारिक troubleshooting दस्तावेज़ीकरण
+- [Understanding Nextflow channels](https://www.nextflow.io/docs/latest/channel.html): चैनल प्रकारों और व्यवहार में गहरी जानकारी
+- [Process directives reference](https://www.nextflow.io/docs/latest/process.html#directives): सभी उपलब्ध प्रोसेस कॉन्फ़िगरेशन विकल्प
+- [nf-test](https://www.nf-test.com/): Nextflow पाइपलाइन के लिए परीक्षण framework
+- [Nextflow Slack community](https://www.nextflow.io/slack-invite.html): समुदाय से मदद लो
 
-Production वर्कफ़्लो के लिए, consider करो:
+प्रोडक्शन वर्कफ़्लो के लिए, विचार करो:
 
-- Scale पर monitoring और debugging के लिए [Seqera Platform](https://seqera.io/platform/) सेट करना
-- Reproducible software environments के लिए [Wave containers](https://seqera.io/wave/) का उपयोग
+- बड़े पैमाने पर monitoring और डीबगिंग के लिए [Seqera Platform](https://seqera.io/platform/) सेट करना
+- reproducible सॉफ़्टवेयर वातावरण के लिए [Wave containers](https://seqera.io/wave/) का उपयोग करना
 
-**याद रखो:** Effective debugging एक ऐसा कौशल है जो practice के साथ बेहतर होता है। यहाँ तुमने जो व्यवस्थित पद्धति और comprehensive toolkit हासिल की है वह तुम्हारी Nextflow development journey में तुम्हारी अच्छी सेवा करेगी।
+**याद रखो:** प्रभावी डीबगिंग एक कौशल है जो अभ्यास के साथ बेहतर होता है। यहाँ तुमने जो व्यवस्थित पद्धति और व्यापक toolkit हासिल की है, वह तुम्हारी Nextflow विकास यात्रा में तुम्हारी अच्छी सेवा करेगी।
 
 ---
 
 ## आगे क्या है?
 
-[Side Quests के menu](../) पर वापस जाओ या list में अगले topic पर जाने के लिए page के नीचे दाईं ओर button click करो।
+[साइड क्वेस्ट के मेनू](../index.md) पर वापस जाओ या सूची में अगले विषय पर जाने के लिए पृष्ठ के नीचे दाईं ओर बटन पर क्लिक करो।

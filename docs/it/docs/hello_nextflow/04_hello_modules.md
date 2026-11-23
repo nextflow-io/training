@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=it" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -69,30 +69,45 @@ nextflow run hello-modules.nf
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [hopeful_avogadro] DSL2 - revision: b09af1237d
+    Launching `hello-modules.nf` [hopeful_avogadro] revision: b09af1237d
 
     executor >  local (7)
-    [0f/8795c9] sayHello (3)       [100%] 3 of 3 ✔
-    [6a/eb2510] convertToUpper (3) [100%] 3 of 3 ✔
-    [af/479117] collectGreetings   [100%] 1 of 1 ✔
+    [0f/8795c9] sayHello (3)       | 3 of 3 ✔
+    [6a/eb2510] convertToUpper (3) | 3 of 3 ✔
+    [af/479117] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_modules/Hola-output.txt
+        - hello_modules/Bonjour-output.txt
+        - hello_modules/Hello-output.txt
+      uppercased:
+        - hello_modules/UPPER-Hola-output.txt
+        - hello_modules/UPPER-Bonjour-output.txt
+        - hello_modules/UPPER-Hello-output.txt
+      collected: hello_modules/COLLECTED-batch-output.txt
+      batch_report: hello_modules/batch-report.txt
     ```
 
 Come in precedenza, troverete i file di output nella directory specificata nel blocco `output` (qui, `results/hello_modules/`).
 
-??? abstract "Directory contents"
+??? abstract "Contenuto della directory"
 
     ```console
     results/hello_modules/
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Se tutto ha funzionato, siete pronti a imparare come modularizzare il codice del workflow.
@@ -156,8 +171,8 @@ Una volta fatto, cancellate la definizione del processo dal file del workflow.
 
 La sintassi per includere un processo da un modulo è abbastanza semplice:
 
-```groovy title="Sintassi: dichiarazione di include"
-include { <PROCESS_NAME> } from '<percorso_al_modulo>'
+```groovy title="Syntax: include declaration"
+include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
 Inseriamola sopra il blocco `params` e compiliamola appropriatamente.
@@ -172,7 +187,7 @@ Inseriamola sopra il blocco `params` e compiliamola appropriatamente.
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -184,7 +199,7 @@ Inseriamola sopra il blocco `params` e compiliamola appropriatamente.
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -202,13 +217,28 @@ nextflow run hello-modules.nf -resume
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [romantic_poisson] DSL2 - revision: 96edfa9ad3
+    Launching `hello-modules.nf` [romantic_poisson] revision: 96edfa9ad3
 
     [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
     [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_modules/Hello-output.txt
+        - hello_modules/Bonjour-output.txt
+        - hello_modules/Hola-output.txt
+      uppercased:
+        - hello_modules/UPPER-Hola-output.txt
+        - hello_modules/UPPER-Bonjour-output.txt
+        - hello_modules/UPPER-Hello-output.txt
+      collected: hello_modules/COLLECTED-batch-output.txt
+      batch_report: hello_modules/batch-report.txt
     ```
 
 Questo dovrebbe funzionare molto velocemente perché tutto è in cache.
@@ -244,7 +274,7 @@ Copiate l'intera definizione del processo dal file del workflow al file del modu
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Usa uno strumento di sostituzione testo per convertire il saluto in maiuscolo
  */
 process convertToUpper {
 
@@ -256,7 +286,7 @@ process convertToUpper {
 
     script:
     """
-    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat ${input_file} | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
     """
 }
 ```
@@ -278,7 +308,7 @@ Inserite la dichiarazione di include sopra il blocco `params` e compilatela appr
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -293,7 +323,7 @@ Inserite la dichiarazione di include sopra il blocco `params` e compilatela appr
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -311,13 +341,28 @@ nextflow run hello-modules.nf -resume
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [nauseous_heisenberg] DSL2 - revision: a04a9f2da0
+    Launching `hello-modules.nf` [nauseous_heisenberg] revision: a04a9f2da0
 
     [c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
     [60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_modules/Hola-output.txt
+        - hello_modules/Hello-output.txt
+        - hello_modules/Bonjour-output.txt
+      uppercased:
+        - hello_modules/UPPER-Bonjour-output.txt
+        - hello_modules/UPPER-Hello-output.txt
+        - hello_modules/UPPER-Hola-output.txt
+      collected: hello_modules/COLLECTED-batch-output.txt
+      batch_report: hello_modules/batch-report.txt
     ```
 
 Questo dovrebbe ancora produrre lo stesso output di prima.
@@ -342,7 +387,7 @@ Copiate l'intera definizione del processo dal file del workflow al file del modu
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
 /*
- * Collect uppercase greetings into a single output file
+ * Raccoglie i saluti in maiuscolo in un unico file di output
  */
 process collectGreetings {
 
@@ -381,7 +426,7 @@ Inserite la dichiarazione di include sopra il blocco `params` e compilatela appr
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -397,7 +442,7 @@ Inserite la dichiarazione di include sopra il blocco `params` e compilatela appr
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -415,13 +460,28 @@ nextflow run hello-modules.nf -resume
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [friendly_coulomb] DSL2 - revision: 7aa2b9bc0f
+    Launching `hello-modules.nf` [friendly_coulomb] revision: 7aa2b9bc0f
 
     [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
     [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_modules/Hello-output.txt
+        - hello_modules/Bonjour-output.txt
+        - hello_modules/Hola-output.txt
+      uppercased:
+        - hello_modules/UPPER-Bonjour-output.txt
+        - hello_modules/UPPER-Hello-output.txt
+        - hello_modules/UPPER-Hola-output.txt
+      collected: hello_modules/COLLECTED-batch-output.txt
+      batch_report: hello_modules/batch-report.txt
     ```
 
 Questo dovrebbe ancora produrre lo stesso output di prima.
@@ -452,7 +512,7 @@ Cos'è un modulo in Nextflow?
 - [ ] Una definizione di workflow
 - [ ] Un operatore di canali
 
-Per approfondire: [2. Creare un modulo per `sayHello()`](#2-creare-un-modulo-per-sayhello)
+Per approfondire: [2. Creare un modulo per `sayHello()`](#2-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
@@ -462,7 +522,7 @@ Quale convenzione viene tipicamente usata per memorizzare i file dei moduli?
 - [x] In una directory `modules/`
 - [ ] In una directory `lib/`
 
-Per approfondire: [1. Creare una directory per memorizzare i moduli](#1-creare-una-directory-per-memorizzare-i-moduli)
+Per approfondire: [1. Creare una directory per memorizzare i moduli](#1-create-a-directory-to-store-modules)
 </quiz>
 
 <quiz>
@@ -473,7 +533,7 @@ Qual è la sintassi corretta per usare un modulo?
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Per approfondire: [2.3. Aggiungere una dichiarazione di include](#23-aggiungere-una-dichiarazione-di-include-prima-del-blocco-workflow)
+Per approfondire: [2.3. Aggiungere una dichiarazione di include](#23-add-an-include-declaration-before-the-workflow-block)
 </quiz>
 
 <quiz>

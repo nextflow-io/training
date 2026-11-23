@@ -214,10 +214,10 @@ nextflow run hello-world.nf
 
 ??? success "명령 출력"
 
-    ```console hl_lines="7"
-    N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="6"
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [65/7be2fa] sayHello | 1 of 1 ✔
@@ -486,17 +486,23 @@ nextflow run hello-world.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [jovial_mayer] revision: 35bd3425e5
 
     executor >  local (1)
     [9f/48ef97] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: output.txt
     ```
 
-터미널 출력은 익숙해 보일 것입니다. 외부적으로는 아무것도 변경되지 않았습니다.
+터미널 출력은 이제 게시된 출력과 해당 출력이 저장된 디렉토리를 나열하는 `Outputs:` 요약으로 끝납니다.
 
-그러나 파일 탐색기를 확인하십시오: 이번에는 Nextflow가 `results/`라는 새 디렉토리를 생성했습니다.
+파일 탐색기를 확인하십시오: 이번에는 Nextflow가 `results/`라는 새 디렉토리도 생성했습니다.
 
 ??? abstract "디렉토리 내용"
 
@@ -574,12 +580,18 @@ nextflow run hello-world.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [8c/79499c] process > sayHello [100%] 1 of 1 ✔
+    [8c/79499c] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 이번에는 결과가 지정된 하위 디렉토리 아래에 기록됩니다.
@@ -653,12 +665,18 @@ nextflow run hello-world.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [df/521638] process > sayHello [100%] 1 of 1 ✔
+    [df/521638] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 이번에는 결과를 보면 파일이 심볼릭 링크가 아닌 적절한 복사본입니다.
@@ -723,7 +741,7 @@ process sayHello {
 2. 사용자 입력을 캡처하기 위한 명령줄 매개변수 설정
 3. 워크플로우 본문에서 프로세스에 입력 전달
 
-이러한 변경을 한 번에 하나씩 수행해 보겠습니다.
+이러한 변경을 한 번에 하나씩 수행합니다.
 
 ### 3.1. `sayHello` 프로세스가 변수 입력을 기대하도록 변경
 
@@ -731,7 +749,7 @@ process sayHello {
 
 #### 3.1.1. 프로세스 정의에 입력 블록 추가
 
-먼저 `greeting`이라는 입력을 받도록 프로세스 정의를 조정해 보겠습니다.
+먼저 `greeting`이라는 입력을 받도록 프로세스 정의를 조정합니다.
 
 프로세스 블록에서 다음 코드 변경을 수행하십시오:
 
@@ -767,19 +785,19 @@ process sayHello {
 === "후"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo '${greeting}' > output.txt
-    """
+        script:
+        """
+        echo '${greeting}' > output.txt
+        """
     ```
 
 === "전"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo 'Hello World!' > output.txt
-    """
+        script:
+        """
+        echo 'Hello World!' > output.txt
+        """
     ```
 
 `$` 기호와 중괄호(`{ }`)는 Nextflow에게 이것이 실제 입력 값으로 대체(=보간)해야 하는 변수 이름임을 알려줍니다.
@@ -788,38 +806,38 @@ process sayHello {
 
     중괄호(`{ }`)는 이전 버전의 Nextflow에서는 기술적으로 선택 사항이었으므로 `echo '$greeting' > output.txt`로 작성된 이전 워크플로우를 볼 수 있습니다.
 
-이제 `sayHello()` 프로세스가 변수 입력을 받을 준비가 되었으므로 워크플로우 수준에서 프로세스 호출에 입력 값을 제공하는 방법이 필요합니다.
+이제 `sayHello()` 프로세스가 변수 입력을 받을 준비가 되었으므로 워크플로우 수준에서 process 실행에 입력 값을 제공하는 방법이 필요합니다.
 
 ### 3.2. 사용자 입력을 캡처하기 위한 명령줄 매개변수 설정
 
-`sayHello('Hello World!')`를 프로세스 호출로 만들어 입력을 직접 하드코딩할 수 있습니다.
+`sayHello('Hello World!')`를 process 실행으로 만들어 입력을 직접 하드코딩할 수 있습니다.
 그러나 워크플로우로 실제 작업을 수행할 때는 명령줄에서 입력을 제어할 수 있어야 합니다. 예를 들어 다음과 같이 할 수 있습니다:
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
 </figure>
 
-좋은 소식은 Nextflow에는 CLI 매개변수를 쉽게 선언하고 사용할 수 있는 [`params`](https://nextflow.io/docs/latest/config.html#params)라는 내장 워크플로우 매개변수 시스템이 있다는 것입니다.
+다행히 Nextflow에는 CLI 매개변수를 쉽게 선언하고 사용할 수 있는 [`params`](https://nextflow.io/docs/latest/config.html#params)라는 내장 워크플로우 매개변수 시스템이 있습니다.
 
 일반적인 구문은 `params.<parameter_name>`을 선언하여 Nextflow에게 명령줄에서 `--<parameter_name>` 매개변수를 기대하도록 알리는 것입니다.
 
 여기서는 `--input`이라는 매개변수를 만들고 싶으므로 워크플로우 어딘가에 `params.input`을 선언해야 합니다.
-원칙적으로 어디에나 쓸 수 있지만, `sayHello()` 프로세스 호출에 전달해야 하므로 `sayHello(params.input)`을 작성하여 직접 연결할 수 있습니다.
+원칙적으로 어디에나 쓸 수 있지만, `sayHello()` process 실행에 전달해야 하므로 `sayHello(params.input)`을 작성하여 직접 연결할 수 있습니다.
 
 워크플로우 블록에서 다음 코드 변경을 수행하십시오:
 
 === "후"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // 인사말을 내보냅니다
-    sayHello(params.input)
+        // 인사말을 내보냅니다
+        sayHello(params.input)
     ```
 
 === "전"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // 인사말을 내보냅니다
-    sayHello()
+        // 인사말을 내보냅니다
+        sayHello()
     ```
 
 이것은 Nextflow에게 `--input` 매개변수를 통해 제공된 값으로 `sayHello` 프로세스를 실행하도록 지시합니다.
@@ -828,7 +846,7 @@ process sayHello {
 
 ### 3.3. 워크플로우 명령 실행
 
-실행해 보겠습니다!
+실행합니다!
 
 ```bash
 nextflow run hello-world.nf --input 'Bonjour le monde!'
@@ -837,15 +855,21 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
+    Launching `hello-world.nf` [elated_lavoisier] revision: 7c031b42ea
 
     executor >  local (1)
     [4b/654319] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
-이러한 편집을 모두 올바르게 수행했다면 또 다른 성공적인 실행을 얻어야 합니다.
+이러한 편집을 모두 올바르게 수행했다면 또 다른 성공적인 실행 결과를 얻을 수 있습니다.
 
 출력 파일을 열어 이제 새 버전의 인사말이 있는지 확인하십시오.
 
@@ -865,22 +889,22 @@ Et voilà!
     Nextflow 수준 매개변수와 파이프라인 수준 매개변수를 쉽게 구분할 수 있습니다.
 
     - 파이프라인에 적용되는 매개변수는 항상 이중 하이픈(`--`)을 사용합니다.
-    - Nextflow 설정을 수정하는 매개변수, 예를 들어 앞서 사용한 `-resume` 기능은 단일 하이픈(`-`)을 사용합니다.
+    - Nextflow 설정을 수정하는 매개변수, 예를 들어 앞서 언급한 `-resume` 기능은 단일 하이픈(`-`)을 사용합니다.
 
 ### 3.4. 명령줄 매개변수에 기본값 사용
 
-좋습니다. 편리했지만, 많은 경우 모든 실행에 지정할 필요가 없도록 매개변수에 기본값을 제공하는 것이 좋습니다.
+편리했지만, 많은 경우 모든 실행에 지정할 필요가 없도록 매개변수에 기본값을 제공하는 것이 좋습니다.
 
 #### 3.4.1. CLI 매개변수에 기본값 설정
 
-워크플로우 정의 전에 `input` 매개변수를 선언하여 기본값을 제공해 보겠습니다.
+워크플로우 정의 전에 `input` 매개변수를 선언하여 기본값을 제공합니다.
 
 ```groovy title="hello-world.nf" linenums="20"
 /*
  * 파이프라인 매개변수
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -890,9 +914,9 @@ params {
 
 !!! info "정보"
 
-    이전 워크플로우에서는 전체 `params` 블록이 `input = 'Holà mundo!'`로만 작성된 것을 볼 수 있습니다.
+    이전 워크플로우에서는 전체 `params` 블록이 `input = 'Hola mundo!'`로만 작성된 것을 볼 수 있습니다.
 
-파이프라인에 더 많은 매개변수를 추가할 때 기본값을 제공해야 하든 아니든 이 블록에 모두 추가해야 합니다.
+파이프라인에 더 많은 매개변수를 추가할 때 기본값을 제공해야 하든 아니든 이 블록에 모두 추가하십시오.
 이렇게 하면 한눈에 모든 설정 가능한 매개변수를 쉽게 찾을 수 있습니다.
 
 #### 3.4.2. 매개변수를 지정하지 않고 워크플로우 다시 실행
@@ -906,12 +930,18 @@ nextflow run hello-world.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [determined_edison] revision: 3539118582
 
     executor >  local (1)
     [72/394147] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 ??? question "작동하지 않았다면"
@@ -923,7 +953,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -936,7 +966,8 @@ nextflow run hello-world.nf
     이것은 과정 시작 부분에서 언급되었지만 놓쳤을 수 있습니다.
     [Nextflow 버전](../info/nxf_versions.md) 도움말 자료를 확인하십시오.
 
-    간단히 말해서, Nextflow `25.10`을 사용하는 경우 v2 언어 분석기를 활성화해야 합니다:
+    v2 분석기는 Nextflow 26.04부터 기본값으로 설정되어 있으므로 이전 버전에서만 이 문제가 발생합니다.
+    26.04 이전 버전을 사용하는 경우 v2 언어 분석기를 활성화해야 합니다:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
@@ -947,7 +978,7 @@ nextflow run hello-world.nf
 ??? abstract "파일 내용"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 Nextflow는 인사말 매개변수의 기본값을 사용하여 출력을 생성했습니다.
@@ -965,12 +996,18 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [elegant_faraday] revision: 3539118582
 
     executor >  local (1)
     [6f/a12a91] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 다시 한번 results 디렉토리에서 해당하는 업데이트된 출력을 찾을 수 있습니다.
@@ -1004,8 +1041,6 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 
 여기서는 동일한 워크플로우를 다시 실행해야 할 때 [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) 기능을 사용하는 방법, [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log)로 과거 실행 로그를 검사하는 방법, [`nextflow clean`](https://nextflow.io/docs/latest/reference/cli.html#clean)으로 이전 작업 디렉토리를 삭제하는 방법을 보여드립니다.
 
-<!-- Any other cool options we should include? Added log -->
-
 ### 4.1. `-resume`으로 워크플로우 다시 실행
 
 때로는 이전에 이미 실행한 파이프라인을 이미 성공적으로 완료된 단계를 다시 수행하지 않고 다시 실행하고 싶을 것입니다.
@@ -1022,17 +1057,23 @@ Nextflow에는 이를 수행할 수 있는 [`-resume`](https://nextflow.io/docs/
 사용하려면 명령에 `-resume`을 추가하고 실행하기만 하면 됩니다:
 
 ```bash
-nextflow run hello-world.nf -resume
+nextflow run hello-world.nf --input 'Konnichiwa!' -resume
 ```
 
 ??? success "명령 출력"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [golden_cantor] revision: 35bd3425e5
 
     [62/49a1f8] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 콘솔 출력은 익숙해 보이지만, 이전과 약간 다른 점이 있습니다.

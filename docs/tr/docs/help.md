@@ -12,6 +12,7 @@ hide:
 
 
 
+
 İster başlamakta zorlanıyor olun, ister ortada takılıp kalın veya takip soruları olsun, iletişime geçmekten çekinmeyin! Topluluk ekibimiz yardım etmek için burada ve genel olarak Nextflow topluluğu çok aktif, kapsayıcı ve yardımseverdir.
 
 Aradığınıza bağlı olarak mevcut olan temel seçenekler şunlardır.
@@ -65,15 +66,5 @@ Aradığınıza bağlı olarak mevcut olan temel seçenekler şunlardır.
     Nextflow, İspanya merkezli olup İngiltere ve ABD'de uydu ofisleri bulunan [Seqera](https://seqera.io/) tarafından geliştirilen ücretsiz, açık kaynaklı bir yazılımdır. Özel eğitim dahil olmak üzere Nextflow için profesyonel destek hizmetleri sunuyoruz.
 
     [İletişime geçin :material-arrow-right:](https://seqera.io/demo/){ .md-button .md-button--primary .mt-1 }
-
-</div>
-
----
-
-<div markdown class="homepage_logos">
-
-![Seqera](assets/img/seqera_logo.png#only-light)
-
-![Seqera](assets/img/seqera_logo_dark.png#only-dark)
 
 </div>

@@ -214,10 +214,10 @@ nextflow run hello-world.nf
 
 ??? success "Sortie de la commande"
 
-    ```console hl_lines="7"
-    N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="6"
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [65/7be2fa] sayHello | 1 of 1 ✔
@@ -244,7 +244,7 @@ Dans le répertoire `work`, Nextflow organise les sorties et les logs par appel 
 Pour chaque appel de **process**, Nextflow crée un sous-répertoire imbriqué, nommé avec un hash pour le rendre unique, où il préparera toutes les entrées nécessaires (en utilisant des liens symboliques par défaut), écrira les fichiers d'aide, et écrira les logs et toutes les sorties du **process**.
 
 Le chemin vers ce sous-répertoire est affiché sous forme tronquée entre crochets dans la sortie console.
-En regardant ce que nous avons obtenu pour l'exécution montrée ci-dessus, la ligne de log console pour le **process** sayHello commence par `[65/7be2fa]`. Cela correspond au chemin de répertoire suivant : `work/65/7be2fad5e71e5f49998f795677fd68`
+En regardant ce que nous avons obtenu pour l'exécution montrée ci-dessus, la ligne de log console pour le **process** sayHello commence par `[65/7be2fa]`. Cela correspond au chemin de répertoire suivant : `work/65/7be2fa7be2fad5e71e5f49998f795677fd68`
 
 Voyons ce qu'il y a dedans.
 
@@ -390,7 +390,7 @@ Comme vous venez de l'apprendre, la sortie produite par notre pipeline est enfou
 Ceci est fait exprès ; Nextflow contrôle ce répertoire et nous ne sommes pas censés interagir avec lui.
 Cependant, cela rend peu pratique la récupération des sorties qui nous importent.
 
-Heureusement, Nextflow fournit un moyen de publier les sorties dans un répertoire désigné en utilisant des [définitions de sortie au niveau du workflow](https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs).
+Heureusement, Nextflow fournit un moyen de publier les sorties dans un répertoire désigné en utilisant des [définitions de sortie au niveau du workflow](https://nextflow.io/docs/latest/workflow.html#workflow-outputs).
 
 ### 2.1. Utilisation de base
 
@@ -486,17 +486,23 @@ nextflow run hello-world.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [jovial_mayer] revision: 35bd3425e5
 
     executor >  local (1)
     [9f/48ef97] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: output.txt
     ```
 
-La sortie du terminal devrait sembler familière. Extérieurement, rien n'a changé.
+La sortie du terminal se termine maintenant par un résumé `Outputs:` listant les sorties publiées et le répertoire dans lequel elles ont été écrites.
 
-Cependant, vérifiez votre explorateur de fichiers : cette fois, Nextflow a créé un nouveau répertoire appelé `results/`.
+Vérifiez votre explorateur de fichiers : cette fois, Nextflow a également créé un nouveau répertoire appelé `results/`.
 
 ??? abstract "Contenu du répertoire"
 
@@ -574,12 +580,18 @@ nextflow run hello-world.nf
 ??? success "Sortie de la commande"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [8c/79499c] process > sayHello [100%] 1 of 1 ✔
+    [8c/79499c] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Cette fois, le résultat est écrit sous le sous-répertoire spécifié.
@@ -653,12 +665,18 @@ nextflow run hello-world.nf
 ??? success "Sortie de la commande"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [df/521638] process > sayHello [100%] 1 of 1 ✔
+    [df/521638] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Cette fois, si vous regardez les résultats, le fichier est une vraie copie au lieu d'un simple lien symbolique.
@@ -714,24 +732,24 @@ Apprendre à fournir une entrée variable via un paramètre de ligne de commande
 
 ## 3. Utiliser une entrée variable passée en ligne de commande
 
-Dans son état actuel, notre workflow utilise une salutation codée en dur dans la commande du **process**.
+Dans son état actuel, notre workflow utilise une salutation codée en dur dans la commande du processus.
 Nous voulons ajouter de la flexibilité en utilisant une variable d'entrée, afin de pouvoir plus facilement changer la salutation au moment de l'exécution.
 
 Cela nécessite que nous apportions trois ensembles de modifications à notre script :
 
-1. Modifier le **process** pour attendre une entrée variable
+1. Modifier le processus pour attendre une entrée variable
 2. Configurer un paramètre de ligne de commande pour capturer l'entrée utilisateur
-3. Passer l'entrée au **process** dans le corps du workflow
+3. Passer l'entrée au processus dans le corps du workflow
 
 Faisons ces modifications une à la fois.
 
 ### 3.1. Modifier le processus `sayHello` pour attendre une entrée variable
 
-Nous devons modifier la définition du **process** pour (1) accepter une variable d'entrée et (2) utiliser cette variable dans la ligne de commande.
+Nous devons modifier la définition du processus pour (1) accepter une variable d'entrée et (2) utiliser cette variable dans la ligne de commande.
 
 #### 3.1.1. Ajouter un bloc input à la définition du processus
 
-D'abord, adaptons la définition du **process** pour accepter une entrée appelée `greeting`.
+D'abord, adaptons la définition du processus pour accepter une entrée appelée `greeting`.
 
 Dans le bloc process, faites la modification de code suivante :
 
@@ -767,19 +785,19 @@ Dans le bloc process, faites la modification de code suivante :
 === "Après"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo '${greeting}' > output.txt
-    """
+        script:
+        """
+        echo '${greeting}' > output.txt
+        """
     ```
 
 === "Avant"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo 'Hello World!' > output.txt
-    """
+        script:
+        """
+        echo 'Hello World!' > output.txt
+        """
     ```
 
 Le symbole `$` et les accolades (`{ }`) indiquent à Nextflow que c'est un nom de variable qui doit être remplacé par la valeur d'entrée réelle (=interpolé).
@@ -788,11 +806,11 @@ Le symbole `$` et les accolades (`{ }`) indiquent à Nextflow que c'est un nom d
 
     Les accolades (`{ }`) étaient techniquement optionnelles dans les versions précédentes de Nextflow, vous pourriez donc voir des anciens workflows où ceci est écrit comme `echo '$greeting' > output.txt`.
 
-Maintenant que le **process** `sayHello()` est prêt à accepter une entrée variable, nous avons besoin d'un moyen de fournir une valeur d'entrée à l'appel du **process** au niveau du workflow.
+Maintenant que le processus `sayHello()` est prêt à accepter une entrée variable, nous avons besoin d'un moyen de fournir une valeur d'entrée à l'appel du processus au niveau du workflow.
 
 ### 3.2. Configurer un paramètre de ligne de commande pour capturer l'entrée utilisateur
 
-Nous pourrions simplement coder en dur une entrée directement en faisant l'appel de **process** `sayHello('Hello World!')`.
+Nous pourrions simplement coder en dur une entrée directement en faisant l'appel de processus `sayHello('Hello World!')`.
 Cependant, lorsque nous faisons un vrai travail avec notre workflow, nous allons vouloir pouvoir contrôler ses entrées depuis la ligne de commande, afin de pouvoir faire quelque chose comme ceci :
 
 <figure class="excalidraw">
@@ -804,25 +822,25 @@ Bonne nouvelle : Nextflow dispose d'un système de paramètres de workflow inté
 La syntaxe générale est de déclarer `params.<nom_paramètre>` pour indiquer à Nextflow d'attendre un paramètre `--<nom_paramètre>` sur la ligne de commande.
 
 Ici, nous voulons créer un paramètre appelé `--input`, donc nous devons déclarer `params.input` quelque part dans le workflow.
-En principe, nous pouvons l'écrire n'importe où ; mais puisque nous allons vouloir le donner à l'appel du **process** `sayHello()`, nous pouvons le brancher directement là en écrivant `sayHello(params.input)`.
+En principe, nous pouvons l'écrire n'importe où ; mais puisque nous allons vouloir le donner à l'appel du processus `sayHello()`, nous pouvons le brancher directement là en écrivant `sayHello(params.input)`.
 
 Dans le bloc workflow, faites la modification de code suivante :
 
 === "Après"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // émettre une salutation
-    sayHello(params.input)
+        // émettre une salutation
+        sayHello(params.input)
     ```
 
 === "Avant"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // émettre une salutation
-    sayHello()
+        // émettre une salutation
+        sayHello()
     ```
 
-Cela indique à Nextflow d'exécuter le **process** `sayHello` sur la valeur fournie via le paramètre `--input`.
+Cela indique à Nextflow d'exécuter le processus `sayHello` sur la valeur fournie via le paramètre `--input`.
 
 En effet, nous avons accompli les étapes (2) et (3) décrites au début de la section en une seule fois.
 
@@ -837,12 +855,18 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
+    Launching `hello-world.nf` [elated_lavoisier] revision: 7c031b42ea
 
     executor >  local (1)
     [4b/654319] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Si vous avez fait toutes ces modifications correctement, vous devriez obtenir une autre exécution réussie.
@@ -855,7 +879,7 @@ Assurez-vous d'ouvrir le fichier de sortie pour vérifier que vous avez maintena
     Bonjour le monde!
     ```
 
-Voilà !
+Et voilà !
 
 Notez comment la nouvelle exécution a écrasé le fichier de sortie publié dans le répertoire `results`.
 Cependant, les résultats des exécutions précédentes sont toujours préservés dans les répertoires de tâches sous `work`.
@@ -865,7 +889,7 @@ Cependant, les résultats des exécutions précédentes sont toujours préservé
     Vous pouvez facilement distinguer les paramètres au niveau de Nextflow des paramètres au niveau du pipeline.
 
     - Les paramètres qui s'appliquent à un pipeline prennent toujours un double tiret (`--`).
-    - Les paramètres qui modifient un paramètre Nextflow, _par exemple_ la fonctionnalité `-resume` que nous avons utilisée précédemment, prennent un simple tiret (`-`).
+    - Les paramètres qui modifient un paramètre Nextflow, _par exemple_ la fonctionnalité `-o` mentionnée précédemment, prennent un simple tiret (`-`).
 
 ### 3.4. Utiliser des valeurs par défaut pour les paramètres de ligne de commande
 
@@ -880,7 +904,7 @@ Donnons au paramètre `input` une valeur par défaut en le déclarant avant la d
  * Paramètres du pipeline
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -890,7 +914,7 @@ Les types supportés incluent `String`, `Integer`, `Float`, `Boolean` et `Path`.
 
 !!! info "Info"
 
-    Dans les anciens workflows, vous pouvez voir que tout ce bloc `params` est écrit simplement comme `input = 'Holà mundo!'`.
+    Dans les anciens workflows, vous pouvez voir que tout ce bloc `params` est écrit simplement comme `input = 'Hola mundo!'`.
 
 À mesure que vous ajoutez plus de paramètres à votre pipeline, vous devriez tous les ajouter à ce bloc, que vous ayez besoin de leur donner une valeur par défaut ou non.
 Cela facilitera la recherche de tous les paramètres configurables en un coup d'œil.
@@ -906,12 +930,18 @@ nextflow run hello-world.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [determined_edison] revision: 3539118582
 
     executor >  local (1)
     [72/394147] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 ??? question "Si cela n'a pas fonctionné"
@@ -923,7 +953,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -936,7 +966,8 @@ nextflow run hello-world.nf
     Cela a été mentionné au début du cours, mais vous l'avez peut-être manqué.
     Consultez le matériel d'aide sur les [versions de Nextflow](../info/nxf_versions.md).
 
-    En bref, si vous utilisez Nextflow `25.10`, vous devez activer l'analyseur de langage v2 :
+    L'analyseur v2 est celui par défaut à partir de Nextflow 26.04, vous ne rencontrerez donc ce problème que sur des versions antérieures.
+    Sur une version antérieure à 26.04, vous devez activer l'analyseur de langage v2 :
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
@@ -947,7 +978,7 @@ La sortie sera au même endroit que précédemment, mais le contenu devrait êtr
 ??? abstract "Contenu du fichier"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 Nextflow a utilisé la valeur par défaut du paramètre greeting pour créer la sortie.
@@ -965,12 +996,18 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [elegant_faraday] revision: 3539118582
 
     executor >  local (1)
     [6f/a12a91] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Encore une fois, vous devriez trouver la sortie mise à jour correspondante dans votre répertoire de résultats.
@@ -1004,8 +1041,6 @@ Savoir comment lancer des workflows et récupérer les sorties est très bien, m
 
 Ici, nous vous montrons comment utiliser la fonctionnalité [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) lorsque vous devez relancer le même workflow, comment inspecter le journal des exécutions passées avec [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log), et comment supprimer les anciens répertoires de travail avec [`nextflow clean`](https://nextflow.io/docs/latest/reference/cli.html#clean).
 
-<!-- Any other cool options we should include? Added log -->
-
 ### 4.1. Relancer un workflow avec `-resume`
 
 Parfois, vous allez vouloir relancer un pipeline que vous avez déjà lancé précédemment sans refaire les étapes qui se sont déjà terminées avec succès.
@@ -1022,17 +1057,23 @@ Il y a deux avantages clés à faire cela :
 Pour l'utiliser, ajoutez simplement `-resume` à votre commande et exécutez-la :
 
 ```bash
-nextflow run hello-world.nf -resume
+nextflow run hello-world.nf --input 'Konnichiwa!' -resume
 ```
 
 ??? success "Sortie de la commande"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [golden_cantor] revision: 35bd3425e5
 
     [62/49a1f8] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 La sortie console devrait sembler familière, mais il y a une chose qui est un peu différente par rapport à avant.
@@ -1171,7 +1212,7 @@ Quels sont les composants minimaux requis d'un processus Nextflow ?
 - [ ] Blocs input, output et script
 - [ ] Uniquement un bloc script
 
-En savoir plus : [1.1.1. La définition du processus](#111-la-definition-du-process)
+En savoir plus : [1.1.1. La définition du processus](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1181,7 +1222,7 @@ Quel est le but du bloc output dans un processus ?
 - [x] Déclarer les sorties attendues du processus
 - [ ] Définir les variables d'environnement
 
-En savoir plus : [1.1.1. La définition du processus](#111-la-definition-du-process)
+En savoir plus : [1.1.1. La définition du processus](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1212,7 +1253,7 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-En savoir plus : [1.2.2. Trouver la sortie et les logs dans le répertoire `work`](#122-trouver-la-sortie-et-les-logs-dans-le-repertoire-work)
+En savoir plus : [1.2.2. Trouver la sortie et les logs dans le répertoire `work`](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -1222,7 +1263,7 @@ Que fait le drapeau `-resume` ?
 - [x] Ignore les processus qui se sont déjà terminés avec succès
 - [ ] Crée une sauvegarde du workflow
 
-En savoir plus : [4.1. Relancer un workflow avec `-resume`](#41-relancer-un-workflow-avec--resume)
+En savoir plus : [4.1. Relancer un workflow avec `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -1232,7 +1273,7 @@ Quel est le mode par défaut pour publier les sorties du workflow ?
 - [ ] Déplacer les fichiers dans le répertoire de sortie
 - [ ] Compresser les fichiers dans le répertoire de sortie
 
-En savoir plus : [2.3. Définir le mode de publication sur copy](#23-definir-le-mode-de-publication-sur-copy)
+En savoir plus : [2.3. Définir le mode de publication sur copy](#23-set-the-publish-mode-to-copy)
 </quiz>
 
 <quiz>
@@ -1242,7 +1283,7 @@ Comment passez-vous une valeur de paramètre à un workflow Nextflow depuis la l
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-En savoir plus : [3.2. Configurer un paramètre de ligne de commande pour capturer l'entrée utilisateur](#32-configurer-un-parametre-de-ligne-de-commande-pour-capturer-lentree-utilisateur)
+En savoir plus : [3.2. Configurer un paramètre de ligne de commande pour capturer l'entrée utilisateur](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 
 <quiz>

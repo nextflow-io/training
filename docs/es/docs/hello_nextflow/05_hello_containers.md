@@ -72,15 +72,29 @@ nextflow run hello-containers.nf
 ??? success "Salida del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872
+    Launching `hello-containers.nf` [nice_escher] revision: d5dfdc9872
 
-    executor > local (7)
-    [5a/ec1fa1] sayHello (2) [100%] 3 of 3 ✔
-    [30/32b5b8] convertToUpper (3) [100%] 3 of 3 ✔
-    [d3/be01bc] collectGreetings [100%] 1 of 1 ✔
+    executor >  local (7)
+    [5a/ec1fa1] sayHello (2)       | 3 of 3 ✔
+    [30/32b5b8] convertToUpper (3) | 3 of 3 ✔
+    [d3/be01bc] collectGreetings   | 1 of 1 ✔
 
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_containers/Hola-output.txt
+        - hello_containers/Bonjour-output.txt
+        - hello_containers/Hello-output.txt
+      uppercased:
+        - hello_containers/UPPER-Bonjour-output.txt
+        - hello_containers/UPPER-Hola-output.txt
+        - hello_containers/UPPER-Hello-output.txt
+      collected: hello_containers/COLLECTED-batch-output.txt
+      batch_report: hello_containers/batch-report.txt
     ```
 
 Como anteriormente, encontrará los archivos de salida en el directorio especificado en el bloque `output` (`results/hello_containers/`).
@@ -92,11 +106,11 @@ Como anteriormente, encontrará los archivos de salida en el directorio especifi
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Si eso funcionó para usted, está listo para aprender cómo usar contenedores.
@@ -259,22 +273,22 @@ Ahora que está dentro del contenedor, puede ejecutar el comando `cowpy` directa
 Por ejemplo, la documentación de la herramienta dice que podemos cambiar el personaje ('cowacter') con `-c`.
 
 ```bash
-cowpy "Hello Containers" -c tux
+echo "Hello Containers" | cowpy -c tux
 ```
 
 ??? success "Salida del comando"
 
     ```console
-    __________________
+     __________________
     < Hello Containers >
-    ------------------
-      \
+     ------------------
+       \
         \
             .--.
-          |o_o |
-          |:_/ |
+           |o_o |
+           |:_/ |
           //   \ \
-        (|     | )
+         (|     | )
         /'\_   _/`\
         \___)=(___/
     ```
@@ -356,7 +370,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
      ____________________
     / Hello,English,123  \
     | Bonjour,French,456 |
-    \ Holà,Spanish,789   /
+    \ Hola,Spanish,789   /
     --------------------
       \                                  ,+*^^*+___+++_
       \                           ,*^^^^              )
@@ -667,22 +681,22 @@ Solo para recapitular, esto es lo que estamos buscando:
 Eliminemos las salidas publicadas anteriores para tener un estado limpio, y ejecutemos el workflow con la bandera `-resume`.
 
 ```bash
-rm -r hello_containers/
+rm -r results/hello_containers/
 nextflow run hello-containers.nf -resume
 ```
 
 ??? failure "Salida del comando (editada para claridad)"
 
     ```console hl_lines="10 13 20-21 26-27"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [lonely_woese] DSL2 - revision: abf1dccf7f
+    Launching `hello-containers.nf` [lonely_woese] revision: abf1dccf7f
 
     executor >  local (1)
-    [c9/f5c686] sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [ef/3135a8] convertToUpper (3) [100%] 3 of 3, cached: 3 ✔
-    [7f/f435e3] collectGreetings   [100%] 1 of 1, cached: 1 ✔
-    [9b/02e776] cowpy              [  0%] 0 of 1 ✘
+    [c9/f5c686] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔
+    [9b/02e776] cowpy              | 0 of 1 ✘
     ERROR ~ Error executing process > 'cowpy'
 
     Caused by:
@@ -706,9 +720,6 @@ nextflow run hello-containers.nf -resume
       /workspaces/training/hello-nextflow/work/9b/02e7761db848f82db3c3e59ff3a9b6
 
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-
-    -- Check '.nextflow.log' file for details
-    ERROR ~ Cannot access first() element from an empty List
 
     -- Check '.nextflow.log' file for details
     ```
@@ -811,15 +822,31 @@ nextflow run hello-containers.nf -resume
 ??? success "Salida del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [drunk_perlman] DSL2 - revision: abf1dccf7f
+    Launching `hello-containers.nf` [drunk_perlman] revision: abf1dccf7f
 
     executor >  local (1)
-    [c9/f5c686] sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [ef/3135a8] convertToUpper (3) [100%] 3 of 3, cached: 3 ✔
-    [7f/f435e3] collectGreetings   [100%] 1 of 1, cached: 1 ✔
-    [98/656c6c] cowpy              [100%] 1 of 1 ✔
+    [c9/f5c686] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔
+    [98/656c6c] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_containers/intermediates/Bonjour-output.txt
+        - hello_containers/intermediates/Hola-output.txt
+        - hello_containers/intermediates/Hello-output.txt
+      uppercased:
+        - hello_containers/intermediates/UPPER-Hola-output.txt
+        - hello_containers/intermediates/UPPER-Bonjour-output.txt
+        - hello_containers/intermediates/UPPER-Hello-output.txt
+      collected: hello_containers/intermediates/COLLECTED-batch-output.txt
+      batch_report: hello_containers/batch-report.txt
+      cowpy_art: hello_containers/cowpy-COLLECTED-batch-output.txt
     ```
 
 ¡Esta vez sí funciona!
@@ -834,10 +861,10 @@ Como de costumbre, puede encontrar las salidas del workflow en el directorio de 
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
@@ -847,7 +874,7 @@ La salida final de arte ASCII está en el directorio `results/hello_containers/`
 
     ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------

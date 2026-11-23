@@ -35,4 +35,4 @@ Este curso asume cierta familiaridad mínima con lo siguiente:
 - Experiencia con la línea de comandos
 - Familiaridad básica con formatos de archivos de imágenes (imágenes TIFF, datos tabulares)
 
-Para requisitos técnicos y configuración del entorno, consulte el mini-curso de [Configuración del Entorno](../../envsetup/).
+Para requisitos técnicos y configuración del entorno, consulte el mini-curso de [Configuración del Entorno](../../envsetup/index.md).

@@ -69,18 +69,32 @@ Aby upewnić się, że wszystko działa, uruchom skrypt raz przed wprowadzeniem 
 nextflow run hello-containers.nf
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872
+    Launching `hello-containers.nf` [nice_escher] revision: d5dfdc9872
 
-    executor > local (7)
-    [5a/ec1fa1] sayHello (2) [100%] 3 of 3 ✔
-    [30/32b5b8] convertToUpper (3) [100%] 3 of 3 ✔
-    [d3/be01bc] collectGreetings [100%] 1 of 1 ✔
+    executor >  local (7)
+    [5a/ec1fa1] sayHello (2)       | 3 of 3 ✔
+    [30/32b5b8] convertToUpper (3) | 3 of 3 ✔
+    [d3/be01bc] collectGreetings   | 1 of 1 ✔
 
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_containers/Hola-output.txt
+        - hello_containers/Bonjour-output.txt
+        - hello_containers/Hello-output.txt
+      uppercased:
+        - hello_containers/UPPER-Bonjour-output.txt
+        - hello_containers/UPPER-Hola-output.txt
+        - hello_containers/UPPER-Hello-output.txt
+      collected: hello_containers/COLLECTED-batch-output.txt
+      batch_report: hello_containers/batch-report.txt
     ```
 
 Jak poprzednio, pliki wyjściowe znajdziesz w katalogu określonym w bloku `output` (`results/hello_containers/`).
@@ -92,11 +106,11 @@ Jak poprzednio, pliki wyjściowe znajdziesz w katalogu określonym w bloku `outp
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Jeśli to zadziałało, jesteś gotowy do nauki używania kontenerów.
@@ -115,8 +129,8 @@ Aby użyć kontenera, zazwyczaj pobierasz lub _ściągasz_ obraz kontenera z rej
 
 Ogólna składnia jest następująca:
 
-```bash title="Składnia"
-docker pull '<kontener>'
+```bash title="Syntax"
+docker pull '<container>'
 ```
 
 Część `docker pull` to instrukcja dla systemu kontenerowego, aby pobrał obraz kontenera z repozytorium.
@@ -125,7 +139,7 @@ Część `'<kontener>'` to adres URI obrazu kontenera.
 
 Jako przykład pobierzmy obraz kontenera zawierający [cowpy](https://github.com/jeffbuttars/cowpy), pythonową implementację narzędzia o nazwie `cowsay`, które generuje grafikę ASCII do wyświetlania dowolnych tekstów wejściowych w zabawny sposób.
 
-```txt title="Przykład"
+```txt title="Example"
  ________________________
 < Are we having fun yet? >
  ------------------------
@@ -155,7 +169,7 @@ Uruchom pełne polecenie pobierania:
 docker pull 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     1.1.5--3db457ae1977a273: Pulling from library/cowpy
@@ -187,8 +201,8 @@ To świetne rozwiązanie do uruchamiania jednorazowych poleceń.
 
 Ogólna składnia jest następująca:
 
-```bash title="Składnia"
-docker run --rm '<kontener>' [polecenie narzędzia]
+```bash title="Syntax"
+docker run --rm '<container>' [tool command]
 ```
 
 Część `docker run --rm '<kontener>'` to instrukcja dla systemu, aby uruchomił instancję kontenera z obrazu i wykonał w niej polecenie.
@@ -203,7 +217,7 @@ W pełni złożone polecenie wykonania kontenera wygląda tak; uruchom je:
 docker run --rm 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' cowpy
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     ______________________________________________________
@@ -239,7 +253,7 @@ Możesz to sprawdzić, uruchamiając `ls /`, aby wylistować zawartość katalog
 ls /
 ```
 
-??? abstract "Wynik polecenia"
+??? abstract "Wyjście polecenia"
 
     ```console
     bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
@@ -259,22 +273,22 @@ Teraz, gdy jesteś wewnątrz kontenera, możesz uruchomić polecenie `cowpy` bez
 Na przykład dokumentacja narzędzia mówi, że możemy zmienić postać ('cowacter') za pomocą `-c`.
 
 ```bash
-cowpy "Hello Containers" -c tux
+echo "Hello Containers" | cowpy -c tux
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
-    __________________
+     __________________
     < Hello Containers >
-    ------------------
-      \
+     ------------------
+       \
         \
             .--.
-          |o_o |
-          |:_/ |
+           |o_o |
+           |:_/ |
           //   \ \
-        (|     | )
+         (|     | )
         /'\_   _/`\
         \___)=(___/
     ```
@@ -283,7 +297,7 @@ Teraz wynik pokazuje pingwina Linuxa, Tuxa, zamiast domyślnej krowy, ponieważ 
 
 Ponieważ jesteś wewnątrz kontenera, możesz uruchamiać polecenie `cowpy` ile razy chcesz, zmieniając parametry wejściowe, bez konieczności zajmowania się poleceniami Docker.
 
-!!! tip "Wskazówka"
+!!! Tip "Wskazówka"
 
     Użyj flagi '-c', aby wybrać inną postać, w tym:
     `beavis`, `cheese`, `daemon`, `dragonandcow`, `ghostbusters`, `kitty`, `moose`, `milk`, `stegosaurus`, `turkey`, `turtle`, `tux`
@@ -309,8 +323,8 @@ Jak wspomniano wcześniej, kontener jest domyślnie odizolowany od systemu hosta
 
 Aby pozwolić kontenerowi na dostęp do systemu plików hosta, możesz **zamontować** **wolumen** z systemu hosta do kontenera, używając następującej składni:
 
-```bash title="Składnia"
--v <ścieżka_zewnętrzna>:<ścieżka_wewnętrzna>
+```bash title="Syntax"
+-v <outside_path>:<inside_path>
 ```
 
 W naszym przypadku `<ścieżka_zewnętrzna>` będzie bieżącym katalogiem roboczym, więc możemy po prostu użyć kropki (`.`), a `<ścieżka_wewnętrzna>` to alias, który wymyślamy; nazwijmy go `/my_project` (ścieżka wewnętrzna musi być bezwzględna).
@@ -329,7 +343,7 @@ Możesz sprawdzić, czy to działa, wylistowując zawartość `/my_project`:
 ls /my_project
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     data               hello-config.nf      hello-modules.nf   hello-world.nf  nextflow.config  solutions         work
@@ -350,13 +364,13 @@ W tym celu użyjemy `cat /my_project/data/greetings.csv | `, aby przekierować z
 cat /my_project/data/greetings.csv | cowpy -c turkey
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console title="data/greetings.csv"
      ____________________
     / Hello,English,123  \
     | Bonjour,French,456 |
-    \ Holà,Spanish,789   /
+    \ Hola,Spanish,789   /
     --------------------
       \                                  ,+*^^*+___+++_
       \                           ,*^^^^              )
@@ -369,7 +383,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
               ( /  (    (        ,___    ^*+_+* )   <    <      \
               U _/     )    *--<  ) ^\-----++__)   )    )       )
                 (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))^)) )  )  ))^^^^^))^^^)__/     +^^
+              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
             (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
               *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
               \             \_)^)_)) ))^^^^^^^^^^))^^^^)
@@ -667,22 +681,22 @@ Myślisz, że zadziała?
 Usuńmy poprzednie opublikowane wyjścia, aby mieć czystą kartę, i uruchommy workflow z flagą `-resume`.
 
 ```bash
-rm -r hello_containers/
+rm -r results/hello_containers/
 nextflow run hello-containers.nf -resume
 ```
 
-??? failure "Wynik polecenia (zredagowany dla przejrzystości)"
+??? failure "Wyjście polecenia (zredagowane dla przejrzystości)"
 
     ```console hl_lines="10 13 20-21 26-27"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [lonely_woese] DSL2 - revision: abf1dccf7f
+    Launching `hello-containers.nf` [lonely_woese] revision: abf1dccf7f
 
     executor >  local (1)
-    [c9/f5c686] sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [ef/3135a8] convertToUpper (3) [100%] 3 of 3, cached: 3 ✔
-    [7f/f435e3] collectGreetings   [100%] 1 of 1, cached: 1 ✔
-    [9b/02e776] cowpy              [  0%] 0 of 1 ✘
+    [c9/f5c686] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔
+    [9b/02e776] cowpy              | 0 of 1 ✘
     ERROR ~ Error executing process > 'cowpy'
 
     Caused by:
@@ -706,9 +720,6 @@ nextflow run hello-containers.nf -resume
       /workspaces/training/hello-nextflow/work/9b/02e7761db848f82db3c3e59ff3a9b6
 
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-
-    -- Check '.nextflow.log' file for details
-    ERROR ~ Cannot access first() element from an empty List
 
     -- Check '.nextflow.log' file for details
     ```
@@ -808,18 +819,34 @@ Uruchom workflow z flagą `-resume`:
 nextflow run hello-containers.nf -resume
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [drunk_perlman] DSL2 - revision: abf1dccf7f
+    Launching `hello-containers.nf` [drunk_perlman] revision: abf1dccf7f
 
     executor >  local (1)
-    [c9/f5c686] sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [ef/3135a8] convertToUpper (3) [100%] 3 of 3, cached: 3 ✔
-    [7f/f435e3] collectGreetings   [100%] 1 of 1, cached: 1 ✔
-    [98/656c6c] cowpy              [100%] 1 of 1 ✔
+    [c9/f5c686] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔
+    [98/656c6c] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_containers/intermediates/Bonjour-output.txt
+        - hello_containers/intermediates/Hola-output.txt
+        - hello_containers/intermediates/Hello-output.txt
+      uppercased:
+        - hello_containers/intermediates/UPPER-Hola-output.txt
+        - hello_containers/intermediates/UPPER-Bonjour-output.txt
+        - hello_containers/intermediates/UPPER-Hello-output.txt
+      collected: hello_containers/intermediates/COLLECTED-batch-output.txt
+      batch_report: hello_containers/batch-report.txt
+      cowpy_art: hello_containers/cowpy-COLLECTED-batch-output.txt
     ```
 
 Tym razem rzeczywiście działa!
@@ -834,10 +861,10 @@ Jak zwykle wyjścia workflow'a znajdziesz w odpowiednim katalogu results, choć 
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
@@ -847,7 +874,7 @@ Końcowa grafika ASCII znajduje się w katalogu `results/hello_containers/`, pod
 
     ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -862,7 +889,7 @@ Końcowa grafika ASCII znajduje się w katalogu `results/hello_containers/`, pod
               ( /  (    (        ,___    ^*+_+* )   <    <      \
               U _/     )    *--<  ) ^\-----++__)   )    )       )
                 (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))^^)) )  )  ))^^^^^))^^^)__/     +^^
+              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
             (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
               *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
               \             \_)^)_)) ))^^^^^^^^^^))^^^^)
@@ -1116,7 +1143,7 @@ Co robi flaga `-v` w poleceniu `docker run`?
 - [x] Montuje wolumen z systemu hosta do kontenera
 - [ ] Określa wersję kontenera
 
-Dowiedz się więcej: [1.3.4. Zamontuj dane w kontenerze](#134-zamontuj-dane-w-kontenerze)
+Dowiedz się więcej: [1.3.4. Zamontuj dane w kontenerze](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1126,7 +1153,7 @@ Dlaczego trzeba montować wolumeny podczas używania kontenerów?
 - [x] Ponieważ kontenery są domyślnie odizolowane od systemu plików hosta
 - [ ] Aby włączyć sieć
 
-Dowiedz się więcej: [1.3.4. Zamontuj dane w kontenerze](#134-zamontuj-dane-w-kontenerze)
+Dowiedz się więcej: [1.3.4. Zamontuj dane w kontenerze](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1136,7 +1163,7 @@ Jak określasz kontener dla procesu Nextflow'a?
 - [x] `container 'container-uri'`
 - [ ] `use 'container-uri'`
 
-Dowiedz się więcej: [2.3.1. Określ kontener dla cowpy](#231-okresl-kontener-dla-cowpy)
+Dowiedz się więcej: [2.3.1. Określ kontener dla cowpy](#231-specify-a-container-for-cowpy)
 </quiz>
 
 <quiz>
@@ -1146,7 +1173,7 @@ Które ustawienie `nextflow.config` włącza Docker dla Twojego workflow'a?
 - [ ] `#!groovy container.engine = 'docker'`
 - [ ] `#!groovy docker.activate = true`
 
-Dowiedz się więcej: [2.3.2. Włącz użycie Docker przez plik `nextflow.config`](#232-wlacz-uzycie-docker-przez-plik-nextflowconfig)
+Dowiedz się więcej: [2.3.2. Włącz użycie Docker przez plik `nextflow.config`](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 
 <quiz>
@@ -1156,5 +1183,5 @@ Co Nextflow automatycznie obsługuje podczas uruchamiania procesu w kontenerze? 
 - [x] Uruchamianie skryptu procesu wewnątrz kontenera
 - [x] Czyszczenie instancji kontenera po wykonaniu
 
-Dowiedz się więcej: [2.3.4. Sprawdź, jak Nextflow uruchomił skonteneryzowane zadanie](#234-sprawdz-jak-nextflow-uruchomil-skonteneryzowane-zadanie)
+Dowiedz się więcej: [2.3.4. Sprawdź, jak Nextflow uruchomił skonteneryzowane zadanie](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>

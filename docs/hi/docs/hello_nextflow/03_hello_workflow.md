@@ -67,12 +67,21 @@ nextflow run hello-workflow.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [admiring_lamarr] DSL2 - revision: 4d4053520d
+    Launching `hello-workflow.nf` [admiring_lamarr] revision: 4d4053520d
 
     executor >  local (3)
-    [b1/5826b5] process > sayHello (2) [100%] 3 of 3 ✔
+    [b1/5826b5] sayHello (2) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
     ```
 
 पहले की तरह, तुम्हें output फ़ाइलें `output` ब्लॉक में निर्दिष्ट स्थान पर मिलेंगी।
@@ -84,7 +93,7 @@ nextflow run hello-workflow.nf
     results/hello_workflow
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    └── Holà-output.txt
+    └── Hola-output.txt
     ```
 
 अगर यह तुम्हारे लिए काम कर गया, तो तुम multi-step workflow को असेंबल करना सीखने के लिए तैयार हो।
@@ -113,7 +122,7 @@ Greetings को uppercase में बदलने के लिए, हम `t
 tr '[a-z]' '[A-Z]'
 ```
 
-यह एक बहुत ही सरल text replacement one-liner है जो accented letters को ध्यान में नहीं रखता, इसलिए उदाहरण के लिए 'Holà' 'HOLà' बन जाएगा, लेकिन यह Nextflow अवधारणाओं को प्रदर्शित करने के लिए काफी अच्छा काम करेगा और यही मायने रखता है।
+यह एक बहुत ही सरल text replacement one-liner है जो accented letters को ध्यान में नहीं रखता, लेकिन यह Nextflow अवधारणाओं को प्रदर्शित करने के लिए काफी अच्छा काम करेगा और यही मायने रखता है।
 
 इसे टेस्ट करने के लिए, हम `echo 'Hello World'` कमांड चला सकते हैं और इसके output को `tr` कमांड में pipe कर सकते हैं:
 
@@ -151,7 +160,7 @@ process convertToUpper {
 
     script:
     """
-    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat ${input_file} | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
     """
 }
 ```
@@ -311,13 +320,26 @@ nextflow run hello-workflow.nf -resume
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [high_cantor] DSL2 - revision: d746983511
+    Launching `hello-workflow.nf` [high_cantor] revision: d746983511
 
     executor >  local (3)
-    [ab/816321] process > sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [e0/ecf81b] process > convertToUpper (3) [100%] 3 of 3 ✔
+    [ab/816321] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [e0/ecf81b] convertToUpper (3) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
+        - hello_workflow/Bonjour-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Hola-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Bonjour-output.txt
     ```
 
 Console output में अब एक अतिरिक्त लाइन है जो हमने अभी जोड़े गए नए process से मेल खाती है।
@@ -330,10 +352,10 @@ Console output में अब एक अतिरिक्त लाइन ह
     results/hello_workflow/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 यह सुविधाजनक है! लेकिन दूसरे process की calls में से एक की work डायरेक्टरी के अंदर देखना अभी भी उचित है।
@@ -342,8 +364,8 @@ Console output में अब एक अतिरिक्त लाइन ह
 
     ```console
     work/e0/ecf81b4cacc648b9b994218d5b29d7/
-    ├── Holà-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Holà-output.txt
-    └── UPPER-Holà-output.txt
+    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Hola-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 ध्यान दें कि दो `*-output` फ़ाइलें हैं: पहले process का output साथ ही दूसरे का output।
@@ -391,8 +413,8 @@ Nextflow ने व्यक्तिगत input और output फ़ाइल�
 ```bash
 echo 'Hello' | tr '[a-z]' '[A-Z]' > UPPER-Hello-output.txt
 echo 'Bonjour' | tr '[a-z]' '[A-Z]' > UPPER-Bonjour-output.txt
-echo 'Holà' | tr '[a-z]' '[A-Z]' > UPPER-Holà-output.txt
-cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Holà-output.txt > COLLECTED-output.txt
+echo 'Hola' | tr '[a-z]' '[A-Z]' > UPPER-Hola-output.txt
+cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLLECTED-output.txt
 ```
 
 Output एक टेक्स्ट फ़ाइल है जिसे `COLLECTED-output.txt` कहा जाता है जिसमें मूल greetings के uppercase संस्करण होते हैं।
@@ -402,7 +424,7 @@ Output एक टेक्स्ट फ़ाइल है जिसे `COLLECT
     ```console title="COLLECTED-output.txt"
     HELLO
     BONJOUR
-    HOLà
+    HOLA
     ```
 
 यही वह परिणाम है जिसे हम अपने workflow के साथ प्राप्त करना चाहते हैं।
@@ -500,7 +522,7 @@ Process ब्लॉक में, निम्नलिखित कोड प�
 
     कुछ command-line टूल्स को प्रत्येक input फ़ाइल के लिए एक argument (जैसे `-input`) प्रदान करने की आवश्यकता होती है।
     उस स्थिति में, हमें कमांड को compose करने के लिए थोड़ा अतिरिक्त काम करना होगा।
-    तुम इसका एक उदाहरण [Nextflow for Genomics](../../nf4_science/genomics/) प्रशिक्षण कोर्स में देख सकते हो।
+    तुम इसका एक उदाहरण [Nextflow for Genomics](../nf4_science/genomics/index.md) प्रशिक्षण कोर्स में देख सकते हो।
 
 ### 2.3. Workflow में collection स्टेप जोड़ें
 
@@ -536,7 +558,68 @@ Workflow ब्लॉक में, निम्नलिखित कोड प
 
 यह `convertToUpper()` के output को `collectGreetings()` के input से जोड़ता है।
 
-#### 2.3.2. `-resume` के साथ workflow चलाएं
+#### 2.3.2. `publish:` सेक्शन को अपडेट करें
+
+`workflow` ब्लॉक में, निम्नलिखित कोड परिवर्तन करें:
+
+=== "बाद में"
+
+    ```groovy title="hello-workflow.nf" linenums="76" hl_lines="4"
+        publish:
+        first_output = sayHello.out
+        uppercased = convertToUpper.out
+        collected = collectGreetings.out
+    }
+    ```
+
+=== "पहले"
+
+    ```groovy title="hello-workflow.nf" linenums="76"
+        publish:
+        first_output = sayHello.out
+        uppercased = convertToUpper.out
+    }
+    ```
+
+#### 2.3.3. `output` ब्लॉक को अपडेट करें
+
+`output` ब्लॉक में, निम्नलिखित कोड परिवर्तन करें:
+
+=== "बाद में"
+
+    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="10-13"
+    output {
+        first_output {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        uppercased {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        collected {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+    }
+    ```
+
+=== "पहले"
+
+    ```groovy title="hello-workflow.nf" linenums="82"
+    output {
+        first_output {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        uppercased {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+    }
+    ```
+
+#### 2.3.4. `-resume` के साथ workflow चलाएं
 
 आइए इसे आज़माएं।
 
@@ -547,14 +630,31 @@ nextflow run hello-workflow.nf -resume
 ??? success "कमांड आउटपुट"
 
     ```console hl_lines="8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [mad_gilbert] DSL2 - revision: 6acfd5e28d
+    Launching `hello-workflow.nf` [mad_gilbert] revision: 6acfd5e28d
 
     executor >  local (3)
     [79/33b2f0] sayHello (2)         | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (3)   | 3 of 3, cached: 3 ✔
     [47/50fe4a] collectGreetings (1) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+      collected:
+        - hello_workflow/COLLECTED-output.txt
+        - hello_workflow/COLLECTED-output.txt
+        - hello_workflow/COLLECTED-output.txt
     ```
 
 यह सफलतापूर्वक चलता है, तीसरे स्टेप सहित।
@@ -566,8 +666,8 @@ nextflow run hello-workflow.nf -resume
 
 ??? abstract "फ़ाइल सामग्री"
 
-    ```console title="results/COLLECTED-output.txt"
-    Holà
+    ```console title="results/hello_workflow/COLLECTED-output.txt"
+    HOLA
     ```
 
 ओह नहीं। Collection स्टेप प्रत्येक greeting पर व्यक्तिगत रूप से चलाया गया, जो हम नहीं चाहते थे।
@@ -646,17 +746,32 @@ nextflow run hello-workflow.nf -resume
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+    Launching `hello-workflow.nf` [soggy_franklin] revision: bc8e1b2726
 
+    executor >  local (1)
     [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1 ✔
     Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
     Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
-    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
+    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
+    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+      collected: hello_workflow/COLLECTED-output.txt
     ```
 
 यह सफलतापूर्वक चलता है, हालाँकि log output इससे थोड़ा अधिक messy दिख सकता है (हमने readability के लिए इसे साफ किया)।
@@ -677,10 +792,10 @@ nextflow run hello-workflow.nf -resume
 
 ??? abstract "फ़ाइल सामग्री"
 
-    ```console title="results/COLLECTED-output.txt"
+    ```console title="results/hello_workflow/COLLECTED-output.txt"
     BONJOUR
     HELLO
-    HOLà
+    HOLA
     ```
 
 इस बार हमारे पास अंतिम output फ़ाइल में सभी तीन greetings हैं। सफलता!
@@ -879,24 +994,38 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [confident_rutherford] DSL2 - revision: bc58af409c
+    Launching `hello-workflow.nf` [confident_rutherford] revision: bc58af409c
 
     executor >  local (1)
     [79/33b2f0] sayHello (2)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [b5/f19efe] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+      collected: hello_workflow/COLLECTED-trio-output.txt
     ```
 
 यह सफलतापूर्वक चलता है और वांछित output उत्पन्न करता है:
 
 ??? abstract "फ़ाइल सामग्री"
 
-    ```console title="results/COLLECTED-trio-output.txt"
+    ```console title="results/hello_workflow/COLLECTED-trio-output.txt"
     HELLO
     BONJOUR
-    HOLà
+    HOLA
     ```
 
 अब, जब तक हम पैरामीटर को उचित रूप से निर्दिष्ट करते हैं, inputs के अन्य batches पर बाद के runs पिछले परिणामों को clobber नहीं करेंगे।
@@ -1095,14 +1224,29 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [ecstatic_wilson] DSL2 - revision: c80285f8c8
+    Launching `hello-workflow.nf` [ecstatic_wilson] revision: c80285f8c8
 
     executor >  local (1)
-    [c5/4c6ca9] sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [0e/6cbc59] convertToUpper (3) [100%] 3 of 3, cached: 3 ✔
-    [02/61ead2] collectGreetings   [100%] 1 of 1 ✔
+    [c5/4c6ca9] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [0e/6cbc59] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [02/61ead2] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+      collected: hello_workflow/COLLECTED-trio-output.txt
+      batch_report: hello_workflow/trio-report.txt
     ```
 
 अगर तुम `results/hello_workflow/` डायरेक्टरी में देखते हो, तो तुम्हें नई report फ़ाइल मिलेगी, `trio-report.txt`।
@@ -1212,5 +1356,5 @@ workflow {
 - [x] Inputs का क्रम input ब्लॉक में परिभाषित क्रम से मेल खाना चाहिए
 - [ ] एक समय में केवल दो inputs प्रदान किए जा सकते हैं
 
-और जानें: [3. एक process को एक से अधिक input पास करें](#3-pass-more-than-one-input-to-a-process)
+और जानें: [3. एक process को अतिरिक्त पैरामीटर पास करें](#3-pass-additional-parameters-to-a-process)
 </quiz>

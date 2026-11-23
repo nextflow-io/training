@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=it" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -72,31 +72,45 @@ nextflow run hello-containers.nf
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872
+    Launching `hello-containers.nf` [nice_escher] revision: d5dfdc9872
 
-    executor > local (7)
-    [5a/ec1fa1] sayHello (2) [100%] 3 of 3 ✔
-    [30/32b5b8] convertToUpper (3) [100%] 3 of 3 ✔
-    [d3/be01bc] collectGreetings [100%] 1 of 1 ✔
+    executor >  local (7)
+    [5a/ec1fa1] sayHello (2)       | 3 of 3 ✔
+    [30/32b5b8] convertToUpper (3) | 3 of 3 ✔
+    [d3/be01bc] collectGreetings   | 1 of 1 ✔
 
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_containers/Hola-output.txt
+        - hello_containers/Bonjour-output.txt
+        - hello_containers/Hello-output.txt
+      uppercased:
+        - hello_containers/UPPER-Bonjour-output.txt
+        - hello_containers/UPPER-Hola-output.txt
+        - hello_containers/UPPER-Hello-output.txt
+      collected: hello_containers/COLLECTED-batch-output.txt
+      batch_report: hello_containers/batch-report.txt
     ```
 
 Come in precedenza, troverete i file di output nella directory specificata nel blocco `output` (`results/hello_containers/`).
 
-??? abstract "Directory contents"
+??? abstract "Contenuto della directory"
 
     ```console
     results/hello_containers/
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Se tutto ha funzionato, siete pronti a imparare come usare i container.
@@ -259,22 +273,22 @@ Ora che siete all'interno del container, potete eseguire il comando `cowpy` dire
 Per esempio, la documentazione dello strumento dice che possiamo cambiare il personaggio ('cowacter') con `-c`.
 
 ```bash
-cowpy "Hello Containers" -c tux
+echo "Hello Containers" | cowpy -c tux
 ```
 
 ??? success "Output del comando"
 
     ```console
-    __________________
+     __________________
     < Hello Containers >
-    ------------------
-      \
+     ------------------
+       \
         \
             .--.
-          |o_o |
-          |:_/ |
+           |o_o |
+           |:_/ |
           //   \ \
-        (|     | )
+         (|     | )
         /'\_   _/`\
         \___)=(___/
     ```
@@ -356,7 +370,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
      ____________________
     / Hello,English,123  \
     | Bonjour,French,456 |
-    \ Holà,Spanish,789   /
+    \ Hola,Spanish,789   /
     --------------------
       \                                  ,+*^^*+___+++_
       \                           ,*^^^^              )
@@ -667,22 +681,22 @@ Pensate che funzionerà?
 Cancelliamo gli output pubblicati precedenti per avere una lavagna pulita, ed eseguiamo il flusso di lavoro con il flag `-resume`.
 
 ```bash
-rm -r hello_containers/
+rm -r results/hello_containers/
 nextflow run hello-containers.nf -resume
 ```
 
 ??? failure "Output del comando (modificato per chiarezza)"
 
     ```console hl_lines="10 13 20-21 26-27"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [lonely_woese] DSL2 - revision: abf1dccf7f
+    Launching `hello-containers.nf` [lonely_woese] revision: abf1dccf7f
 
     executor >  local (1)
-    [c9/f5c686] sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [ef/3135a8] convertToUpper (3) [100%] 3 of 3, cached: 3 ✔
-    [7f/f435e3] collectGreetings   [100%] 1 of 1, cached: 1 ✔
-    [9b/02e776] cowpy              [  0%] 0 of 1 ✘
+    [c9/f5c686] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔
+    [9b/02e776] cowpy              | 0 of 1 ✘
     ERROR ~ Error executing process > 'cowpy'
 
     Caused by:
@@ -706,9 +720,6 @@ nextflow run hello-containers.nf -resume
       /workspaces/training/hello-nextflow/work/9b/02e7761db848f82db3c3e59ff3a9b6
 
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-
-    -- Check '.nextflow.log' file for details
-    ERROR ~ Cannot access first() element from an empty List
 
     -- Check '.nextflow.log' file for details
     ```
@@ -811,21 +822,37 @@ nextflow run hello-containers.nf -resume
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [drunk_perlman] DSL2 - revision: abf1dccf7f
+    Launching `hello-containers.nf` [drunk_perlman] revision: abf1dccf7f
 
     executor >  local (1)
-    [c9/f5c686] sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [ef/3135a8] convertToUpper (3) [100%] 3 of 3, cached: 3 ✔
-    [7f/f435e3] collectGreetings   [100%] 1 of 1, cached: 1 ✔
-    [98/656c6c] cowpy              [100%] 1 of 1 ✔
+    [c9/f5c686] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔
+    [98/656c6c] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_containers/intermediates/Bonjour-output.txt
+        - hello_containers/intermediates/Hola-output.txt
+        - hello_containers/intermediates/Hello-output.txt
+      uppercased:
+        - hello_containers/intermediates/UPPER-Hola-output.txt
+        - hello_containers/intermediates/UPPER-Bonjour-output.txt
+        - hello_containers/intermediates/UPPER-Hello-output.txt
+      collected: hello_containers/intermediates/COLLECTED-batch-output.txt
+      batch_report: hello_containers/batch-report.txt
+      cowpy_art: hello_containers/cowpy-COLLECTED-batch-output.txt
     ```
 
 Questa volta funziona davvero!
 Come al solito potete trovare gli output del flusso di lavoro nella directory dei risultati corrispondente, anche se questa volta sono un po' più ordinatamente organizzati, con solo il report e l'output finale al livello superiore, e tutti i file intermedi spostati in una sottodirectory.
 
-??? abstract "Directory contents"
+??? abstract "Contenuto della directory"
 
     ```console
     results/hello_containers/
@@ -834,20 +861,20 @@ Come al solito potete trovare gli output del flusso di lavoro nella directory de
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
 L'output ASCII art finale è nella directory `results/hello_containers/`, sotto il nome `cowpy-COLLECTED-batch-output.txt`.
 
-??? abstract "File contents"
+??? abstract "Contenuto del file"
 
     ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -886,7 +913,7 @@ Questo corrisponde al seguente percorso di directory troncato: `work/98/656c6c`.
 
 In quella directory, troverete il file `.command.run` che contiene tutti i comandi che Nextflow ha eseguito per vostro conto nel corso dell'esecuzione della pipeline.
 
-??? abstract "File contents"
+??? abstract "Contenuto del file"
 
     ```console title="work/98/656c6c90cce1667c094d880f4b6dcc/.command.run"
     #!/bin/bash
@@ -1083,7 +1110,7 @@ Sapete come usare i container in Nextflow per eseguire processi.
 
 ### Cosa c'è dopo?
 
-Prendetevi una piccola pausa!
+Prendetevi una pausa!
 
 Quando siete pronti, passate alla [**Parte 6: Hello Config**](./06_hello_config.md) per imparare come configurare l'esecuzione della vostra pipeline per adattarla alla vostra infrastruttura e gestire la configurazione di input e parametri.
 
@@ -1116,7 +1143,7 @@ Cosa fa il flag `-v` in un comando `docker run`?
 - [x] Monta un volume dal sistema host nel container
 - [ ] Specifica la versione del container
 
-Per approfondire: [1.3.4. Montare i dati nel container](#134-montare-i-dati-nel-container)
+Per approfondire: [1.3.4. Montare i dati nel container](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1126,7 +1153,7 @@ Perché è necessario montare i volumi quando si usano i container?
 - [x] Perché i container sono isolati dal filesystem host per impostazione predefinita
 - [ ] Per abilitare il networking
 
-Per approfondire: [1.3.4. Montare i dati nel container](#134-montare-i-dati-nel-container)
+Per approfondire: [1.3.4. Montare i dati nel container](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1136,7 +1163,7 @@ Come si specifica un container per un processo Nextflow?
 - [x] `container 'container-uri'`
 - [ ] `use 'container-uri'`
 
-Per approfondire: [2.3.1. Specificare un container per cowpy](#231-specificare-un-container-per-cowpy)
+Per approfondire: [2.3.1. Specificare un container per cowpy](#231-specify-a-container-for-cowpy)
 </quiz>
 
 <quiz>
@@ -1146,7 +1173,7 @@ Quale impostazione `nextflow.config` abilita Docker per il vostro flusso di lavo
 - [ ] `#!groovy container.engine = 'docker'`
 - [ ] `#!groovy docker.activate = true`
 
-Per approfondire: [2.3.2. Abilitare l'uso di Docker tramite il file `nextflow.config`](#232-abilitare-luso-di-docker-tramite-il-file-nextflowconfig)
+Per approfondire: [2.3.2. Abilitare l'uso di Docker tramite il file `nextflow.config`](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 
 <quiz>
@@ -1156,5 +1183,5 @@ Cosa gestisce automaticamente Nextflow quando esegue un processo in un container
 - [x] Eseguire lo script del processo all'interno del container
 - [x] Pulire l'istanza container dopo l'esecuzione
 
-Per approfondire: [2.3.4. Ispezionare come Nextflow ha lanciato l'attività containerizzata](#234-ispezionare-come-nextflow-ha-lanciato-lattivita-containerizzata)
+Per approfondire: [2.3.4. Ispezionare come Nextflow ha lanciato l'attività containerizzata](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>

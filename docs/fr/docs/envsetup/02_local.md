@@ -35,13 +35,12 @@ Le manuel de documentation Nextflow fournit des instructions pour installer ces 
 Vous devrez installer Nextflow lui-même, ainsi que les outils nf-core, comme détaillé dans les articles liés ci-dessous :
 
 - [Installation de Nextflow](https://www.nextflow.io/docs/latest/install.html)
-- [Outils nf-core](https://nf-co.re/docs/nf-core-tools/installation)
+- [Outils nf-core](https://nf-co.re/docs/nf-core-tools/cli/installation)
 
 Nous recommandons d'utiliser l'option d'auto-installation pour Nextflow et l'option PyPI pour les outils nf-core.
 
 !!! warning "Compatibilité des versions"
 
-    <!-- Any update to this content needs to be copied to the home page -->
     **Depuis janvier 2026, tous nos cours de formation Nextflow nécessitent Nextflow version 25.10.2 ou ultérieure, avec la syntaxe stricte v2 activée, sauf indication contraire.**
 
     Pour plus d'informations sur les exigences de version et la syntaxe stricte v2, veuillez consulter le guide [Versions de Nextflow](../info/nxf_versions.md).

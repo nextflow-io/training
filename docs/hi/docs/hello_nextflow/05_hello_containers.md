@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=hi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -25,7 +25,7 @@ Typically, तुम्हें इन tools को install करना हो
 
 Note करो कि हम यह [Docker](https://www.docker.com/get-started/) का उपयोग करके teach करेंगे, लेकिन ध्यान रखो कि Nextflow [कई अन्य container technologies](https://nextflow.io/docs/latest/container.html) को भी support करता है।
 
-??? info "इस section से कैसे शुरू करें"
+??? info "इस खंड से कैसे शुरू करें"
 
     Course का यह section मानता है कि तुमने [Hello Nextflow](./index.md) course के Parts 1-4 complete कर लिए हैं और एक complete working pipeline है।
 
@@ -72,31 +72,45 @@ nextflow run hello-containers.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872
+    Launching `hello-containers.nf` [nice_escher] revision: d5dfdc9872
 
-    executor > local (7)
-    [5a/ec1fa1] sayHello (2) [100%] 3 of 3 ✔
-    [30/32b5b8] convertToUpper (3) [100%] 3 of 3 ✔
-    [d3/be01bc] collectGreetings [100%] 1 of 1 ✔
+    executor >  local (7)
+    [5a/ec1fa1] sayHello (2)       | 3 of 3 ✔
+    [30/32b5b8] convertToUpper (3) | 3 of 3 ✔
+    [d3/be01bc] collectGreetings   | 1 of 1 ✔
 
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_containers/Hola-output.txt
+        - hello_containers/Bonjour-output.txt
+        - hello_containers/Hello-output.txt
+      uppercased:
+        - hello_containers/UPPER-Bonjour-output.txt
+        - hello_containers/UPPER-Hola-output.txt
+        - hello_containers/UPPER-Hello-output.txt
+      collected: hello_containers/COLLECTED-batch-output.txt
+      batch_report: hello_containers/batch-report.txt
     ```
 
 पहले की तरह, तुम्हें output files `output` block में specified directory (`results/hello_containers/`) में मिलेंगी।
 
-??? abstract "डायरेक्टरी contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     results/hello_containers/
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 यदि यह तुम्हारे लिए काम किया, तो तुम containers use करना सीखने के लिए ready हो।
@@ -125,7 +139,7 @@ docker pull '<container>'
 
 एक example के रूप में, चलो एक container image pull करते हैं जिसमें [cowpy](https://github.com/jeffbuttars/cowpy) है, `cowsay` नामक tool का python implementation जो arbitrary text inputs को fun तरीके से display करने के लिए ASCII art generate करता है।
 
-```txt title="उदाहरण"
+```txt title="Example"
  ________________________
 < Are we having fun yet? >
  ------------------------
@@ -259,22 +273,22 @@ ls /
 Example के लिए, tool documentation कहता है कि हम `-c` के साथ character ('cowacter') change कर सकते हैं।
 
 ```bash
-cowpy "Hello Containers" -c tux
+echo "Hello Containers" | cowpy -c tux
 ```
 
 ??? success "कमांड आउटपुट"
 
     ```console
-    __________________
+     __________________
     < Hello Containers >
-    ------------------
-      \
+     ------------------
+       \
         \
             .--.
-          |o_o |
-          |:_/ |
+           |o_o |
+           |:_/ |
           //   \ \
-        (|     | )
+         (|     | )
         /'\_   _/`\
         \___)=(___/
     ```
@@ -283,7 +297,7 @@ cowpy "Hello Containers" -c tux
 
 क्योंकि तुम container के अंदर हो, तुम `cowpy` command जितनी बार चाहो उतनी बार run कर सकते हो, input parameters vary करते हुए, बिना Docker commands की परेशानी के।
 
-!!! Tip
+!!! Tip "सुझाव"
 
     एक different character pick करने के लिए '-c' flag use करो, जिनमें शामिल हैं:
     `beavis`, `cheese`, `daemon`, `dragonandcow`, `ghostbusters`, `kitty`, `moose`, `milk`, `stegosaurus`, `turkey`, `turtle`, `tux`
@@ -356,7 +370,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
      ____________________
     / Hello,English,123  \
     | Bonjour,French,456 |
-    \ Holà,Spanish,789   /
+    \ Hola,Spanish,789   /
     --------------------
       \                                  ,+*^^*+___+++_
       \                           ,*^^^^              )
@@ -667,22 +681,22 @@ Notice करो कि हमने एक new CLI parameter, `params.character
 चलो पिछली published outputs delete करते हैं clean slate के लिए, और workflow को `-resume` flag के साथ run करते हैं।
 
 ```bash
-rm -r hello_containers/
+rm -r results/hello_containers/
 nextflow run hello-containers.nf -resume
 ```
 
-??? failure "कमांड आउटपुट (clarity के लिए edited)"
+??? failure "कमांड आउटपुट (स्पष्टता के लिए संपादित)"
 
     ```console hl_lines="10 13 20-21 26-27"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [lonely_woese] DSL2 - revision: abf1dccf7f
+    Launching `hello-containers.nf` [lonely_woese] revision: abf1dccf7f
 
     executor >  local (1)
-    [c9/f5c686] sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [ef/3135a8] convertToUpper (3) [100%] 3 of 3, cached: 3 ✔
-    [7f/f435e3] collectGreetings   [100%] 1 of 1, cached: 1 ✔
-    [9b/02e776] cowpy              [  0%] 0 of 1 ✘
+    [c9/f5c686] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔
+    [9b/02e776] cowpy              | 0 of 1 ✘
     ERROR ~ Error executing process > 'cowpy'
 
     Caused by:
@@ -706,9 +720,6 @@ nextflow run hello-containers.nf -resume
       /workspaces/training/hello-nextflow/work/9b/02e7761db848f82db3c3e59ff3a9b6
 
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-
-    -- Check '.nextflow.log' file for details
-    ERROR ~ Cannot access first() element from an empty List
 
     -- Check '.nextflow.log' file for details
     ```
@@ -794,7 +805,7 @@ Workflow execution configure करने के लिए Nextflow जो main 
     docker.enabled = false
     ```
 
-!!! tip
+!!! tip "सुझाव"
 
     Command-line से, per-run basis पर, `-with-docker <container>` parameter use करके Docker execution enable करना possible है।
     हालाँकि, वह हमें केवल entire workflow के लिए एक container specify करने देता है, जबकि हमने अभी जो approach दिखाया वह हमें per process different container specify करने देता है।
@@ -811,21 +822,37 @@ nextflow run hello-containers.nf -resume
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [drunk_perlman] DSL2 - revision: abf1dccf7f
+    Launching `hello-containers.nf` [drunk_perlman] revision: abf1dccf7f
 
     executor >  local (1)
-    [c9/f5c686] sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [ef/3135a8] convertToUpper (3) [100%] 3 of 3, cached: 3 ✔
-    [7f/f435e3] collectGreetings   [100%] 1 of 1, cached: 1 ✔
-    [98/656c6c] cowpy              [100%] 1 of 1 ✔
+    [c9/f5c686] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔
+    [98/656c6c] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_containers/intermediates/Bonjour-output.txt
+        - hello_containers/intermediates/Hola-output.txt
+        - hello_containers/intermediates/Hello-output.txt
+      uppercased:
+        - hello_containers/intermediates/UPPER-Hola-output.txt
+        - hello_containers/intermediates/UPPER-Bonjour-output.txt
+        - hello_containers/intermediates/UPPER-Hello-output.txt
+      collected: hello_containers/intermediates/COLLECTED-batch-output.txt
+      batch_report: hello_containers/batch-report.txt
+      cowpy_art: hello_containers/cowpy-COLLECTED-batch-output.txt
     ```
 
 इस बार यह indeed काम करता है!
 Usual की तरह तुम corresponding results directory में workflow outputs पा सकते हो, हालाँकि इस बार वे थोड़ी अधिक neatly organized हैं, केवल report और final output top level पर, और सभी intermediate files एक subdirectory में out of the way shove किए गए।
 
-??? abstract "डायरेक्टरी contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     results/hello_containers/
@@ -834,20 +861,20 @@ Usual की तरह तुम corresponding results directory में workf
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
 Final ASCII art output `results/hello_containers/` directory में है, `cowpy-COLLECTED-batch-output.txt` नाम के under।
 
-??? abstract "फ़ाइल contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -886,7 +913,7 @@ Final ASCII art output `results/hello_containers/` directory में है, `
 
 उस directory में, तुम्हें `.command.run` file मिलेगी जिसमें सभी commands हैं जो Nextflow ने pipeline execute करने के course में तुम्हारी behalf पर run कीं।
 
-??? abstract "फ़ाइल contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="work/98/656c6c90cce1667c094d880f4b6dcc/.command.run"
     #!/bin/bash
@@ -1116,7 +1143,7 @@ Container image और container instance में क्या difference ह�
 - [x] Host system से container में volume mount करता है
 - [ ] Container का version specify करता है
 
-और जानें: [1.3.4. Container में data mount करें](#134-container-में-data-mount-करें)
+और जानें: [1.3.4. Container में data mount करें](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1126,7 +1153,7 @@ Containers use करते समय volumes mount करने की need क
 - [x] क्योंकि containers default रूप से host filesystem से isolated हैं
 - [ ] Networking enable करने के लिए
 
-और जानें: [1.3.4. Container में data mount करें](#134-container-में-data-mount-करें)
+और जानें: [1.3.4. Container में data mount करें](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1136,7 +1163,7 @@ Nextflow process के लिए container कैसे specify करते �
 - [x] `container 'container-uri'`
 - [ ] `use 'container-uri'`
 
-और जानें: [2.3.1. `cowpy` के लिए container specify करें](#231-cowpy-के-लिए-container-specify-करें)
+और जानें: [2.3.1. `cowpy` के लिए container specify करें](#231-specify-a-container-for-cowpy)
 </quiz>
 
 <quiz>
@@ -1146,7 +1173,7 @@ Nextflow process के लिए container कैसे specify करते �
 - [ ] `#!groovy container.engine = 'docker'`
 - [ ] `#!groovy docker.activate = true`
 
-और जानें: [2.3.2. `nextflow.config` file के माध्यम से Docker use enable करें](#232-nextflowconfig-file-के-माध्यम-से-docker-use-enable-करें)
+और जानें: [2.3.2. `nextflow.config` file के माध्यम से Docker use enable करें](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 
 <quiz>
@@ -1156,5 +1183,5 @@ Container में process run करते समय Nextflow automatically �
 - [x] Container के अंदर process script run करना
 - [x] Execution के बाद container instance clean up करना
 
-और जानें: [2.3.4. Inspect करें कि Nextflow ने containerized task कैसे launch की](#234-inspect-करें-कि-nextflow-ने-containerized-task-कैसे-launch-की)
+और जानें: [2.3.4. Inspect करें कि Nextflow ने containerized task कैसे launch की](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>

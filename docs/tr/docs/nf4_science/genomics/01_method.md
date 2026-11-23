@@ -226,7 +226,7 @@ Aynı durum referans genomun yardımcı dosyaları (indeks ve dizi sözlüğü d
 gatk HaplotypeCaller \
         -R /data/ref/ref.fasta \
         -I /data/bam/reads_mother.bam \
-        -O /data/vcf/reads_mother.vcf \
+        -O reads_mother.vcf \
         -L /data/ref/intervals.bed
 ```
 

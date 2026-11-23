@@ -52,12 +52,18 @@ nextflow run hello-channels.nf --input 'Hello Channels!'
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [wise_jennings] DSL2 - revision: b24f4902d6
+    Launching `hello-channels.nf` [wise_jennings] revision: b24f4902d6
 
     executor >  local (1)
-    [6f/824bc1] process > sayHello [100%] 1 of 1 ✔
+    [6f/824bc1] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_channels/output.txt
     ```
 
 이전과 마찬가지로, 위에 표시된 워크플로우 스크립트의 `output` 블록에 지정된 대로 `results/hello_channels` 디렉토리에서 `output.txt`라는 이름의 출력 파일을 찾을 수 있습니다.
@@ -196,12 +202,19 @@ nextflow run hello-channels.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [fabulous_crick] DSL2 - revision: 23e20f76e8
+    Launching `hello-channels.nf` [fabulous_crick] revision: 23e20f76e8
 
     executor >  local (1)
-    [c0/4f1872] process > sayHello (1) [100%] 1 of 1 ✔
+    [c0/4f1872] sayHello (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
     ```
 
 두 편집을 모두 올바르게 수행했다면 성공적으로 실행될 것입니다.
@@ -229,7 +242,7 @@ workflow 블록에 이 작은 라인을 추가하십시오:
 
 === "후"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="6"
     workflow {
 
         main:
@@ -271,13 +284,20 @@ nextflow run hello-channels.nf
 ??? success "명령 출력"
 
     ```console hl_lines="7"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [scruffy_shaw] DSL2 - revision: 2ede41e14a
+    Launching `hello-channels.nf` [scruffy_shaw] revision: 2ede41e14a
 
     executor >  local (1)
-    [ef/f7e40a] sayHello (1) [100%] 1 of 1 ✔
+    [ef/f7e40a] sayHello (1) | 1 of 1 ✔
     Hello Channels!
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
     ```
 
 보시다시피 channel 내용이 콘솔에 출력됩니다.
@@ -302,7 +322,7 @@ Channel을 사용하여 워크플로우가 여러 입력 값을 반복 처리하
 편리하게도, 사용해 온 `channel.of()` channel 팩토리는 둘 이상의 값을 기꺼이 허용하므로 전혀 수정할 필요가 없습니다.
 Channel에 여러 값을 로드하기만 하면 됩니다.
 
-`'Hello'`, `'Bonjour'`, `'Holà'`로 만들어 봅시다.
+`'Hello'`, `'Bonjour'`, `'Hola'`로 만들어 봅시다.
 
 #### 2.1.1. 더 많은 인사말 추가
 
@@ -312,7 +332,7 @@ workflow 블록 전에 다음 코드 변경을 수행하십시오:
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // 입력용 channel 생성
-    greeting_ch = channel.of('Hello','Bonjour','Holà')
+    greeting_ch = channel.of('Hello','Bonjour','Hola')
                          .view()
     ```
 
@@ -337,15 +357,24 @@ nextflow run hello-channels.nf
 ??? success "명령 출력"
 
     ```console hl_lines="6"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [amazing_crick] DSL2 - revision: 59a9a5888a
+    Launching `hello-channels.nf` [amazing_crick] revision: 59a9a5888a
 
     executor >  local (3)
-    [f4/c9962c] process > sayHello (1) [100%] 3 of 3 ✔
+    [f4/c9962c] sayHello (1) | 3 of 3 ✔
     Hello
     Bonjour
-    Holà
+    Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
+        - hello_channels/output.txt
+        - hello_channels/output.txt
     ```
 
 확실히 잘 실행된 것 같습니다.
@@ -367,7 +396,7 @@ nextflow run hello-channels.nf
 ??? abstract "파일 내용"
 
     ```console title="results/hello_channels/output.txt"
-    Holà
+    Hola
     ```
 
 세 개의 인사말 중 하나가 있어야 하지만, 여기에 표시된 것과 다를 수 있습니다.
@@ -420,14 +449,23 @@ nextflow run hello-channels.nf -ansi-log false
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W  ~  version 25.10.2
-    Launching `hello-channels.nf` [desperate_monod] DSL2 - revision: 59a9a5888a
+    N E X T F L O W  ~  version 26.04.4
+    Launching `hello-channels.nf` [desperate_monod] - revision: 59a9a5888a
     Hello
     Bonjour
-    Holà
+    Hola
     [23/871c7e] Submitted process > sayHello (2)
     [7f/21e2c2] Submitted process > sayHello (1)
     [f4/ea10a6] Submitted process > sayHello (3)
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
+        - hello_channels/output.txt
+        - hello_channels/output.txt
     ```
 
 이번에는 세 개의 process 실행과 관련 작업 하위 디렉토리가 모두 출력에 나열됩니다.
@@ -493,7 +531,7 @@ nextflow run hello-channels.nf -ansi-log false
     ```
 
     ```txt title="work/f4/ea10a680d5687596d3eaa3fcf69272/output.txt"
-    Holà
+    Hola
     ```
 
 이것은 세 개의 process가 모두 성공적으로 실행되었음을 보여줍니다.
@@ -581,15 +619,24 @@ nextflow run hello-channels.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [sharp_minsky] DSL2 - revision: 16a291febe
+    Launching `hello-channels.nf` [sharp_minsky] revision: 16a291febe
 
     executor >  local (3)
-    [e8/33ee64] sayHello (2) [100%] 3 of 3 ✔
+    [e8/33ee64] sayHello (2) | 3 of 3 ✔
     Hello
     Bonjour
-    Holà
+    Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hola-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 요약 보기로 돌아가면 출력이 다시 한 줄로 요약됩니다.
@@ -601,11 +648,9 @@ nextflow run hello-channels.nf
     results/hello_channels/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     └── output.txt
     ```
-
-그렇습니다! 각각 예상한 내용이 들어 있습니다.
 
 ??? abstract "파일 내용"
 
@@ -617,8 +662,8 @@ nextflow run hello-channels.nf
     Hello
     ```
 
-    ```console title="Holà-output.txt"
-    Holà
+    ```console title="Hola-output.txt"
+    Hola
     ```
 
 성공입니다! 이제 출력 파일이 덮어쓰여지는 것에 대해 걱정하지 않고 원하는 만큼 많은 인사말을 추가할 수 있습니다.
@@ -628,7 +673,7 @@ nextflow run hello-channels.nf
     실제로 입력 데이터 자체를 기반으로 파일 이름을 지정하는 것은 거의 항상 비실용적입니다.
     동적 파일 이름을 생성하는 더 좋은 방법은 입력 파일과 함께 메타데이터를 process에 전달하는 것입니다.
     메타데이터는 일반적으로 'sample sheet' 또는 이와 동등한 것을 통해 제공됩니다.
-    나중에 Nextflow 교육에서 이를 수행하는 방법을 학습합니다([메타데이터 사이드 퀘스트](../side_quests/metadata.md) 참조).
+    나중에 Nextflow 교육에서 이를 수행하는 방법을 학습합니다([메타데이터 사이드 퀘스트](../side_quests/metadata/index.md) 참조).
 
 ### 핵심 정리
 
@@ -647,7 +692,7 @@ Channel을 통해 여러 입력 요소를 공급하는 방법을 알게 되었�
 
 예를 들어, 다음과 같이 요소 배열을 포함하는 입력 변수를 설정한다고 상상해 보십시오:
 
-`greetings_array = ['Hello','Bonjour','Holà']`
+`greetings_array = ['Hello','Bonjour','Hola']`
 
 이것을 출력 channel에 로드하고 작동할 것으로 기대할 수 있을까요?
 
@@ -673,9 +718,9 @@ Channel을 통해 여러 입력 요소를 공급하는 방법을 알게 되었�
 
         main:
         // 입력 인사말 배열 선언
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // 입력용 channel 생성
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // 인사말을 내보냅니다
         sayHello(greeting_ch)
@@ -692,7 +737,7 @@ Channel을 통해 여러 입력 요소를 공급하는 방법을 알게 되었�
 
         main:
         // 입력용 channel 생성
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // 인사말을 내보냅니다
         sayHello(greeting_ch)
@@ -706,7 +751,7 @@ Channel을 통해 여러 입력 요소를 공급하는 방법을 알게 되었�
 
 #### 3.1.2. Channel 팩토리에 인사말 배열을 입력으로 설정
 
-이제 channel 팩토리에 현재 하드코딩된 값 `'Hello','Bonjour','Holà'`를 방금 생성한 `greetings_array`로 교체할 것입니다.
+이제 channel 팩토리에 현재 하드코딩된 값 `'Hello','Bonjour','Hola'`를 방금 생성한 `greetings_array`로 교체할 것입니다.
 
 workflow 블록에서 다음 변경을 수행하십시오:
 
@@ -717,7 +762,7 @@ workflow 블록에서 다음 변경을 수행하십시오:
 
         main:
         // 입력 인사말 배열 선언
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // 입력용 channel 생성
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -736,9 +781,9 @@ workflow 블록에서 다음 변경을 수행하십시오:
 
         main:
         // 입력 인사말 배열 선언
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // 입력용 channel 생성
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // 인사말을 내보냅니다
         sayHello(greeting_ch)
@@ -761,22 +806,22 @@ nextflow run hello-channels.nf
 ??? failure "명령 출력"
 
     ```console hl_lines="7 11 16"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [friendly_koch] DSL2 - revision: 97256837a7
+    Launching `hello-channels.nf` [friendly_koch] revision: 97256837a7
 
     executor >  local (1)
     [a8/1f6ead] sayHello (1) | 0 of 1
-    [Hello, Bonjour, Holà]
+    [Hello, Bonjour, Hola]
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
-      Missing output file(s) `[Hello, Bonjour, Holà]-output.txt` expected by process `sayHello (1)`
+      Missing output file(s) `[Hello, Bonjour, Hola]-output.txt` expected by process `sayHello (1)`
 
 
     Command executed:
 
-      echo '[Hello, Bonjour, Holà]' > '[Hello, Bonjour, Holà]-output.txt'
+      echo '[Hello, Bonjour, Hola]' > '[Hello, Bonjour, Hola]-output.txt'
 
     Command exit status:
       0
@@ -796,7 +841,7 @@ nextflow run hello-channels.nf
 
 `view()`의 출력과 오류 메시지를 살펴보십시오.
 
-Nextflow가 배열의 세 문자열을 별도의 값으로 사용하는 대신 `[Hello, Bonjour, Holà]`를 단일 문자열 값으로 사용하여 단일 process 실행을 시도한 것 같습니다.
+Nextflow가 배열의 세 문자열을 별도의 값으로 사용하는 대신 `[Hello, Bonjour, Hola]`를 단일 문자열 값으로 사용하여 단일 process 실행을 시도한 것 같습니다.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
@@ -826,7 +871,7 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
 
         main:
         // 입력 인사말 배열 선언
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // 입력용 channel 생성
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -846,7 +891,7 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
 
         main:
         // 입력 인사말 배열 선언
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // 입력용 channel 생성
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -880,7 +925,7 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
 
         main:
         // 입력 인사말 배열 선언
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // 입력용 channel 생성
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
@@ -901,7 +946,7 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
 
         main:
         // 입력 인사말 배열 선언
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // 입력용 channel 생성
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -914,7 +959,7 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
     }
     ```
 
-두 번째 `.view` 문을 추가했으며, 각각에 대해 빈 괄호(`()`)를 `{ greeting -> "Before flatten: $greeting" }`와 같은 코드가 포함된 중괄호로 교체했습니다.
+두 번째 `.view` 문을 추가했으며, 각각에 대해 빈 괄호(`()`)를 `#!groovy { greeting -> "Before flatten: $greeting" }`와 같은 코드가 포함된 중괄호로 교체했습니다.
 
 이것을 *클로저*라고 합니다. 포함된 코드는 channel의 각 항목에 대해 실행됩니다.
 해당 클로저의 범위 내에서만 사용되는 내부 값에 대한 임시 변수를 정의합니다. 여기서는 `greeting`이라고 합니다(임의의 이름일 수 있음).
@@ -940,16 +985,25 @@ nextflow run hello-channels.nf
 ??? success "명령 출력"
 
     ```console hl_lines="7-10"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [sleepy_gutenberg] DSL2 - revision: 1db4f760ee
+    Launching `hello-channels.nf` [sleepy_gutenberg] revision: 1db4f760ee
 
     executor >  local (3)
-    [b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔
-    Before flatten: [Hello, Bonjour, Holà]
+    [b1/6a1e15] sayHello (2) | 3 of 3 ✔
+    Before flatten: [Hello, Bonjour, Hola]
     After flatten: Hello
     After flatten: Bonjour
-    After flatten: Holà
+    After flatten: Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hola-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 이번에는 작동하며 `flatten()` 연산자를 실행하기 전과 후에 channel의 내용이 어떻게 보이는지에 대한 추가 통찰력을 제공합니다.
@@ -985,7 +1039,7 @@ nextflow run hello-channels.nf
 ```csv title="data/greetings.csv" linenums="1"
 Hello,English,123
 Bonjour,French,456
-Holà,Spanish,789
+Hola,Spanish,789
 ```
 
 다음 작업은 이 파일에서 값을 읽도록 워크플로우를 조정하는 것입니다.
@@ -994,7 +1048,7 @@ Holà,Spanish,789
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-csv.svg"
 </figure>
 
-이를 구현하는 방법을 살펴봅시다.
+이를 구현하는 방법을 살펴봅니다.
 
 ### 4.1. CSV 파일을 인사말 소스로 기대하도록 스크립트 수정
 
@@ -1027,7 +1081,9 @@ Holà,Spanish,789
     /*
      * 파이프라인 매개변수
      */
-    input: String = 'Holà mundo!'
+    params {
+        input: String = 'Hola mundo!'
+    }
     ```
 
 이것은 파일이 워크플로우 코드와 같은 위치에 있다고 가정합니다.
@@ -1066,7 +1122,7 @@ workflow 블록에서 다음 코드 변경을 수행하십시오:
 
         main:
         // 입력 인사말 배열 선언
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // 입력용 channel 생성
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
@@ -1093,12 +1149,12 @@ nextflow run hello-channels.nf
 
 ??? failure "명령 출력"
 
-    ```console hl_lines="5 6 9 14"
-     N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="5 6 9 15"
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5
+    Launching `hello-channels.nf` [peaceful_poisson] revision: a286c08ad5
 
-    [-        ] sayHello [  0%] 0 of 1
+    [-        ] sayHello | 0 of 1
     Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 
@@ -1197,16 +1253,16 @@ nextflow run hello-channels.nf
 ??? failure "명령 출력"
 
     ```console hl_lines="7-11 14 19"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [insane_fermat] DSL2 - revision: 8e62fcbeb1
+    Launching `hello-channels.nf` [insane_fermat] revision: 8e62fcbeb1
 
     executor >  local (3)
-    [24/76da2f] sayHello (2) [  0%] 0 of 3 ✘
+    [24/76da2f] sayHello (2) | 0 of 3 ✘
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    After splitCsv: [Hola, Spanish, 789]
     ERROR ~ Error executing process > 'sayHello (2)'
 
     Caused by:
@@ -1258,7 +1314,7 @@ nextflow run hello-channels.nf
 
 이것은 'channel의 각 행에 대해 포함된 0번째(첫 번째) 항목을 가져오라'는 의미입니다.
 
-이것을 CSV 파싱에 적용해 봅시다.
+이것을 CSV 파싱에 적용해 봅니다.
 
 #### 4.3.1. Channel에 `map()` 적용
 
@@ -1317,19 +1373,28 @@ nextflow run hello-channels.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [focused_volhard] DSL2 - revision: de435e45be
+    Launching `hello-channels.nf` [focused_volhard] revision: de435e45be
 
     executor >  local (3)
-    [54/6eebe3] sayHello (3) [100%] 3 of 3 ✔
+    [54/6eebe3] sayHello (3) | 3 of 3 ✔
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    After splitCsv: [Hola, Spanish, 789]
     After map: Hello
     After map: Bonjour
-    After map: Holà
+    After map: Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Hola-output.txt
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 이번에는 오류 없이 실행될 것입니다.

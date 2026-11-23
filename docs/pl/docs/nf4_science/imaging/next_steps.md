@@ -8,7 +8,7 @@ Posiadasz teraz podstawowe umiejętności do uruchamiania i konfigurowania pipel
 
 ## Kontynuuj naukę
 
-Oto kilka zalecanych następnych kroków, aby pogłębić Swoją wiedzę o Nextflow:
+Oto kilka zalecanych następnych kroków, aby pogłębić Twoją wiedzę o Nextflow:
 
 ### Odkryj więcej pipeline'ów nf-core
 
@@ -18,8 +18,8 @@ Oto kilka zalecanych następnych kroków, aby pogłębić Swoją wiedzę o Nextf
 
 Jeśli chcesz nauczyć się pisać pipeline'y Nextflow:
 
-- **[Hello Nextflow](../../hello_nextflow/)**: Kompleksowe szkolenie z tworzenia w Nextflow
-- **[Side Quests](../../side_quests/)**: Zaawansowane tematy dla twórców pipeline'ów
+- **[Hello Nextflow](../../hello_nextflow/index.md)**: Kompleksowe szkolenie z tworzenia w Nextflow
+- **[Side Quests](../../side_quests/index.md)**: Zaawansowane tematy dla twórców pipeline'ów
 
 ### Dołącz do społeczności
 

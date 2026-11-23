@@ -28,10 +28,10 @@ Nextflow의 채널 시스템은 이러한 유연성의 핵심입니다. 채널�
 
 이 사이드 퀘스트를 시작하기 전에 다음을 준비하세요.
 
-- [Hello Nextflow](../hello_nextflow/README.md) 튜토리얼 또는 동급의 입문 과정을 완료해야 합니다.
+- [Hello Nextflow](../../hello_nextflow/index.md) 튜토리얼 또는 동급의 입문 과정을 완료해야 합니다.
 - 기본 Nextflow 개념과 메커니즘(프로세스, 채널, 연산자, 파일 작업, 메타 데이터)에 익숙해야 합니다.
 
-**선택 사항:** [워크플로우의 메타데이터](../metadata/) 사이드 퀘스트를 먼저 완료하는 것을 권장합니다.
+**선택 사항:** [워크플로우의 메타데이터](../metadata/index.md) 사이드 퀘스트를 먼저 완료하는 것을 권장합니다.
 해당 퀘스트에서는 `splitCsv`로 CSV 파일을 읽고 meta map을 생성하는 기본 사항을 다루며, 여기서도 이를 많이 활용합니다.
 
 ---
@@ -40,7 +40,7 @@ Nextflow의 채널 시스템은 이러한 유연성의 핵심입니다. 채널�
 
 #### 교육 코드스페이스 열기
 
-아직 열지 않았다면 [환경 설정](../envsetup/index.md)에 설명된 대로 교육 환경을 열어 주세요.
+아직 열지 않았다면 [환경 설정](../../envsetup/index.md)에 설명된 대로 교육 환경을 열어 주세요.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -57,6 +57,8 @@ VSCode에서 이 디렉토리에 포커스를 설정할 수 있습니다.
 ```bash
 code .
 ```
+
+편집기가 프로젝트 디렉토리에 포커스를 맞춘 상태로 열립니다.
 
 #### 자료 검토
 
@@ -93,6 +95,8 @@ patientC,1,tumor,patientC_rep1_tumor.bam
 !!! note "참고"
 
     이 실험 설계에 익숙하지 않더라도 걱정하지 마세요. 이 튜토리얼을 이해하는 데 필수적인 내용은 아닙니다.
+
+데이터 내용을 파악했으니, 이제 워크플로우가 수행해야 할 작업을 살펴봅니다.
 
 #### 과제 검토
 
@@ -135,7 +139,7 @@ workflow {
 
     이 튜토리얼 전반에 걸쳐 모든 채널 변수에 `ch_` 접두사를 사용하여 Nextflow 채널임을 명확히 나타냅니다.
 
-[워크플로우의 메타데이터](../metadata/) 사이드 퀘스트를 완료했다면 이 패턴을 알아볼 것입니다. `splitCsv`를 사용하여 CSV를 읽고 meta map으로 데이터를 구조화하여 메타데이터와 파일 경로를 분리합니다.
+[워크플로우의 메타데이터](../metadata/index.md) 사이드 퀘스트를 완료했다면 이 패턴을 알아볼 것입니다. `splitCsv`를 사용하여 CSV를 읽고 meta map으로 데이터를 구조화하여 메타데이터와 파일 경로를 분리합니다.
 
 !!! info "정보"
 
@@ -150,7 +154,7 @@ workflow {
 
 === "후"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2-6"
+    ```groovy title="main.nf" linenums="2" hl_lines="1-6"
         ch_samples = channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
@@ -174,9 +178,9 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
+    Launching `main.nf` [wise_venter] revision: 9211c186b2
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
@@ -230,9 +234,9 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d
+    Launching `main.nf` [high_knuth] revision: bc0db74ccc
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
@@ -251,6 +255,8 @@ nextflow run main.nf
 ```groovy title="main.nf" linenums="7"
     .filter { meta, file -> meta.type == 'normal' }
 ```
+
+이 filter는 채널 연산에 직접 연결됩니다.
 
 ### 2.2. 별도의 필터링된 채널 생성
 
@@ -291,9 +297,9 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74
+    Launching `main.nf` [shrivelled_rubens] revision: 636aae17ff
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
@@ -334,21 +340,25 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
+    Launching `main.nf` [elated_jepsen] revision: c96ba8f734
 
-    Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
     Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
     Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
     Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
     Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
     Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
-정상 샘플과 종양 샘플을 두 개의 다른 채널로 분리하고, `view()`에 제공된 closure를 사용하여 출력에서 다르게 레이블을 지정했습니다: `ch_tumor_samples.view{'Tumor sample: ' + it}`.
+정상 샘플과 종양 샘플을 두 개의 다른 채널로 분리하고, `view()`에 제공된 closure를 사용하여 출력에서 다르게 레이블을 지정했습니다: `#!groovy ch_tumor_samples.view{'Tumor sample: ' + it}`.
+
+!!! note "참고"
+
+    `Normal sample:`과 `Tumor sample:` 줄의 상대적인 순서는 실행마다 달라질 수 있습니다. 두 `view()` 호출이 동시에 실행되는 독립적인 채널에 속하기 때문입니다. 각 레이블 _내부_ 샘플의 순서는 항상 유지됩니다.
 
 ### 핵심 정리
 
@@ -383,18 +393,18 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
+    Launching `main.nf` [exotic_bassi] revision: c96ba8f734
 
     Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
     Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
     Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
 `id` 필드가 각 meta map의 첫 번째 요소임을 알 수 있습니다. `join`이 작동하려면 각 튜플에서 `id` 필드를 분리해야 합니다. 그런 다음 `join` 연산자를 사용하여 두 채널을 결합할 수 있습니다.
@@ -438,18 +448,18 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d
+    Launching `main.nf` [compassionate_monod] revision: 3132715893
 
-    Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
     Normal sample: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     Normal sample: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     Normal sample: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
     Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
 미묘할 수 있지만, 각 튜플의 첫 번째 요소가 `id` 필드임을 확인할 수 있습니다.
@@ -496,9 +506,9 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889
+    Launching `main.nf` [desperate_shaw] revision: 5508db4b8b
 
     [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -525,7 +535,7 @@ nextflow run main.nf
 
 ### 3.2. 여러 필드로 Join
 
-sampleA에는 2개의 반복이 있지만 sampleB와 sampleC에는 1개만 있습니다. 이 경우 `id` 필드를 사용하여 효과적으로 join할 수 있었지만, 동기화가 맞지 않으면 어떻게 될까요? 서로 다른 반복의 정상 샘플과 종양 샘플이 혼합될 수 있습니다!
+patientA에는 2개의 반복이 있지만 patientB와 patientC에는 1개만 있습니다. 이 경우 `id` 필드를 사용하여 효과적으로 join할 수 있었지만, 동기화가 맞지 않으면 어떻게 될까요? 서로 다른 반복의 정상 샘플과 종양 샘플이 혼합될 수 있습니다!
 
 이를 방지하기 위해 여러 필드로 join할 수 있습니다. 이를 달성하는 방법은 여러 가지가 있지만, 샘플 `id`와 `replicate` 번호를 모두 포함하는 새 joining 키를 생성하는 방법에 집중합니다.
 
@@ -562,9 +572,9 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee
+    Launching `main.nf` [lonely_solvay] revision: 3c97c335d2
 
     [[patientA, 1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [[patientA, 2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -611,9 +621,9 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7
+    Launching `main.nf` [scruffy_swanson] revision: a8478c9d0a
 
     [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -658,7 +668,7 @@ nextflow run main.nf
 
 map 변환을 재사용 가능한 이름 있는 변수로 정의했습니다.
 
-또한 `file()`을 사용하여 파일 경로를 Path 객체로 변환하여 이 채널을 받는 모든 프로세스가 파일을 올바르게 처리할 수 있도록 합니다(자세한 내용은 [파일 작업](../working_with_files/) 참조).
+또한 `file()`을 사용하여 파일 경로를 Path 객체로 변환하여 이 채널을 받는 모든 프로세스가 파일을 올바르게 처리할 수 있도록 합니다(자세한 내용은 [파일 작업](../working_with_files/index.md) 참조).
 
 워크플로우에 closure를 적용합니다.
 
@@ -698,15 +708,17 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d
+    Launching `main.nf` [admiring_turing] revision: 06c4cbbb2e
 
-    [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    [[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
+    [[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
+    [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]
     ```
+
+    closure가 각 경로를 `file()`로 감싸므로, 파일 항목이 샘플시트의 파일명 그대로가 아닌 절대 경로로 표시됩니다.
 
 이름 있는 closure를 사용하면 여러 곳에서 동일한 변환을 재사용할 수 있어 오류 위험을 줄이고 코드를 더 읽기 쉽고 유지 관리하기 쉽게 만들 수 있습니다.
 
@@ -717,21 +729,21 @@ nextflow run main.nf
 ```groovy
 [
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
   ],
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
     "type": "normal",
   ],
-  "sampleC_rep1_normal.bam"
+  "patientC_rep1_normal.bam",
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
     "type": "tumor",
   ],
-  "sampleC_rep1_tumor.bam"
+  "patientC_rep1_tumor.bam"
 ]
 ```
 
@@ -760,6 +772,10 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [scruffy_tuckerman] revision: 791ad3c1fb
+
     [[id:patientA, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
     [[id:patientB, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
@@ -797,15 +813,17 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd
+    Launching `main.nf` [intergalactic_lagrange] revision: 8c8750a19d
 
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
     [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
     [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
     ```
+
+각 튜플에는 이제 그룹화 키와 두 파일 경로만 포함되며, 반복되는 필드가 없습니다.
 
 ### 핵심 정리
 
@@ -873,9 +891,9 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b
+    Launching `main.nf` [lethal_northcutt] revision: 09667ddd59
 
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr1]
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr2]
@@ -955,9 +973,9 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
+    Launching `main.nf` [hungry_engelbart] revision: 45db6a7dd7
 
     [[id:patientA, repeat:1, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, repeat:1, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
@@ -988,7 +1006,7 @@ nextflow run main.nf
 
 ## 5. `groupTuple`을 사용하여 샘플 집계
 
-이전 섹션에서는 입력 파일에서 데이터를 분할하고 특정 필드(정상 및 종양 샘플)로 필터링하는 방법을 학습했습니다. 하지만 이는 단일 유형의 결합만 다룹니다. 특정 속성으로 샘플을 그룹화하려면 어떻게 해야 할까요? 예를 들어, 매칭된 정상-종양 쌍을 join하는 대신 유형에 관계없이 "sampleA"의 모든 샘플을 함께 처리하려 할 수 있습니다. 이 패턴은 마지막에 결과를 비교하거나 결합하기 전에 효율성을 위해 관련 샘플을 독립적으로 처리하려는 생물정보학 워크플로우에서 일반적입니다.
+이전 섹션에서는 입력 파일에서 데이터를 분할하고 특정 필드(정상 및 종양 샘플)로 필터링하는 방법을 학습했습니다. 하지만 이는 단일 유형의 결합만 다룹니다. 특정 속성으로 샘플을 그룹화하려면 어떻게 해야 할까요? 예를 들어, 매칭된 정상-종양 쌍을 join하는 대신 유형에 관계없이 "patientA"의 모든 샘플을 함께 처리하려 할 수 있습니다. 이 패턴은 마지막에 결과를 비교하거나 결합하기 전에 효율성을 위해 관련 샘플을 독립적으로 처리하려는 생물정보학 워크플로우에서 일반적입니다.
 
 Nextflow에는 이를 위한 내장 메서드가 있으며, 주로 살펴볼 것은 `groupTuple`입니다.
 
@@ -1000,7 +1018,7 @@ Nextflow에는 이를 위한 내장 메서드가 있으며, 주로 살펴볼 것
 
 ```groovy title="main.nf" linenums="1"
 {
-  "id": "sampleA",
+  "id": "patientA",
   "repeat": "1",
   "interval": "chr1"
 }
@@ -1056,9 +1074,9 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76
+    Launching `main.nf` [stupefied_kirch] revision: c5bd1a7c31
 
     [[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
@@ -1120,9 +1138,9 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d
+    Launching `main.nf` [soggy_borg] revision: cc057d5f49
 
     [[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
     [[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
@@ -1140,6 +1158,8 @@ nextflow run main.nf
 !!! note "참고"
 
     [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose)는 groupTuple의 반대입니다. 채널의 항목을 풀고 평탄화합니다. `transpose`를 추가하여 위에서 수행한 그룹화를 되돌려 보세요!
+
+그룹화와 그룹 해제, 두 방향의 연산이 이제 여러분의 도구 상자에 추가되었습니다.
 
 ### 핵심 정리
 
@@ -1168,7 +1188,7 @@ nextflow run main.nf
 
 ### 핵심 패턴
 
-1.  **구조화된 입력 데이터 생성:** meta map이 있는 CSV 파일에서 시작([워크플로우의 메타데이터](../metadata/)의 패턴 기반)
+1.  **구조화된 입력 데이터 생성:** meta map이 있는 CSV 파일에서 시작([워크플로우의 메타데이터](../metadata/index.md)의 패턴 기반)
 
     ```groovy
     ch_samples = channel.fromPath("./data/samplesheet.csv")
@@ -1181,7 +1201,7 @@ nextflow run main.nf
 2.  **데이터를 별도 채널로 분할:** `filter`를 사용하여 `type` 필드를 기반으로 데이터를 독립적인 스트림으로 분리
 
     ```groovy
-    channel.filter { it.type == 'tumor' }
+    channel.filter { meta, file -> meta.type == 'tumor' }
     ```
 
 3.  **매칭된 샘플 결합:** `join`을 사용하여 `id`와 `repeat` 필드를 기반으로 관련 샘플을 재결합
@@ -1189,31 +1209,31 @@ nextflow run main.nf
     - 키(튜플의 첫 번째 요소)로 두 채널 join
 
     ```groovy
-    tumor_ch.join(normal_ch)
+    ch_normal_samples.join(ch_tumor_samples)
     ```
 
     - joining 키를 추출하고 이 값으로 join
 
     ```groovy
-    tumor_ch.map { meta, file -> [meta.id, meta, file] }
+    ch_normal_samples.map { meta, file -> [meta.id, meta, file] }
         .join(
-          normal_ch.map { meta, file -> [meta.id, meta, file] }
+          ch_tumor_samples.map { meta, file -> [meta.id, meta, file] }
         )
     ```
 
-    - subMap을 사용하여 여러 필드로 join
+    - `subMap`을 사용하여 여러 필드로 join
 
     ```groovy
-    tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+    ch_normal_samples.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         .join(
-          normal_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+          ch_tumor_samples.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         )
     ```
 
 4.  **구간에 분배:** `combine`을 사용하여 병렬 처리를 위해 유전체 구간과 샘플의 카르테시안 곱을 생성
 
     ```groovy
-    samples_ch.combine(intervals_ch)
+    ch_joined_samples.combine(ch_intervals)
     ```
 
 5.  **그룹화 키로 집계:** `groupTuple`을 사용하여 각 튜플의 첫 번째 요소로 그룹화하여 `id`와 `interval` 필드를 공유하는 샘플을 수집하고 기술적 반복을 병합
@@ -1249,4 +1269,4 @@ nextflow run main.nf
 
 ## 다음 단계
 
-[사이드 퀘스트 메뉴](../)로 돌아가거나 페이지 오른쪽 하단의 버튼을 클릭하여 목록의 다음 주제로 이동하세요.
+[사이드 퀘스트 메뉴](../index.md)로 돌아가거나 페이지 오른쪽 하단의 버튼을 클릭하여 목록의 다음 주제로 이동하세요.

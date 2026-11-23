@@ -52,12 +52,18 @@ nextflow run hello-channels.nf --input 'Hello Channels!'
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [wise_jennings] DSL2 - revision: b24f4902d6
+    Launching `hello-channels.nf` [wise_jennings] revision: b24f4902d6
 
     executor >  local (1)
-    [6f/824bc1] process > sayHello [100%] 1 of 1 ✔
+    [6f/824bc1] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_channels/output.txt
     ```
 
 Com abans, trobareu el fitxer de sortida anomenat `output.txt` al directori `results/hello_channels` (tal com s'especifica al bloc `output` de l'script de workflow, mostrat més amunt).
@@ -196,12 +202,19 @@ nextflow run hello-channels.nf
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [fabulous_crick] DSL2 - revision: 23e20f76e8
+    Launching `hello-channels.nf` [fabulous_crick] revision: 23e20f76e8
 
     executor >  local (1)
-    [c0/4f1872] process > sayHello (1) [100%] 1 of 1 ✔
+    [c0/4f1872] sayHello (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
     ```
 
 Si heu fet les dues edicions correctament, hauríeu d'obtenir una execució exitosa.
@@ -229,7 +242,7 @@ Afegiu aquesta petita línia al bloc workflow:
 
 === "Després"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="6"
     workflow {
 
         main:
@@ -271,13 +284,20 @@ nextflow run hello-channels.nf
 ??? success "Sortida de la comanda"
 
     ```console hl_lines="7"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [scruffy_shaw] DSL2 - revision: 2ede41e14a
+    Launching `hello-channels.nf` [scruffy_shaw] revision: 2ede41e14a
 
     executor >  local (1)
-    [ef/f7e40a] sayHello (1) [100%] 1 of 1 ✔
+    [ef/f7e40a] sayHello (1) | 1 of 1 ✔
     Hello Channels!
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
     ```
 
 Com podeu veure, això mostra el contingut del canal a la consola.
@@ -302,7 +322,7 @@ Els workflows normalment s'executen amb lots d'entrades que estan destinades a s
 Convenientment, el constructor de canals `channel.of()` que hem estat utilitzant està molt content d'acceptar més d'un valor, així que no necessitem modificar-lo en absolut.
 Simplement podem carregar múltiples valors al canal.
 
-Fem-los `'Hello'`, `'Bonjour'` i `'Holà'`.
+Fem-los `'Hello'`, `'Bonjour'` i `'Hola'`.
 
 #### 2.1.1. Afegiu més salutacions
 
@@ -312,7 +332,7 @@ Al bloc workflow, feu el següent canvi de codi:
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // crea un canal per a les entrades
-    greeting_ch = channel.of('Hello','Bonjour','Holà')
+    greeting_ch = channel.of('Hello','Bonjour','Hola')
                          .view()
     ```
 
@@ -337,15 +357,24 @@ nextflow run hello-channels.nf
 ??? success "Sortida de la comanda"
 
     ```console hl_lines="6"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [amazing_crick] DSL2 - revision: 59a9a5888a
+    Launching `hello-channels.nf` [amazing_crick] revision: 59a9a5888a
 
     executor >  local (3)
-    [f4/c9962c] process > sayHello (1) [100%] 3 of 3 ✔
+    [f4/c9962c] sayHello (1) | 3 of 3 ✔
     Hello
     Bonjour
-    Holà
+    Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
+        - hello_channels/output.txt
+        - hello_channels/output.txt
     ```
 
 Certament sembla que s'ha executat correctament.
@@ -367,7 +396,7 @@ No obstant això, encara només hi ha una sortida al directori de resultats:
 ??? abstract "Contingut del fitxer"
 
     ```console title="results/hello_channels/output.txt"
-    Holà
+    Hola
     ```
 
 Hauríeu de veure una de les tres salutacions allà, encara que la que heu obtingut pot ser diferent del que es mostra aquí.
@@ -420,14 +449,23 @@ nextflow run hello-channels.nf -ansi-log false
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W  ~  version 25.10.2
-    Launching `hello-channels.nf` [desperate_monod] DSL2 - revision: 59a9a5888a
+    N E X T F L O W  ~  version 26.04.4
+    Launching `hello-channels.nf` [desperate_monod] - revision: 59a9a5888a
     Hello
     Bonjour
-    Holà
+    Hola
     [23/871c7e] Submitted process > sayHello (2)
     [7f/21e2c2] Submitted process > sayHello (1)
     [f4/ea10a6] Submitted process > sayHello (3)
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
+        - hello_channels/output.txt
+        - hello_channels/output.txt
     ```
 
 Aquesta vegada veiem les tres execucions de procés i els seus subdirectoris de treball associats llistats a la sortida.
@@ -493,7 +531,7 @@ De totes maneres, ara que tenim els subdirectoris de cada crida de procés, pode
     ```
 
     ```txt title="work/f4/ea10a680d5687596d3eaa3fcf69272/output.txt"
-    Holà
+    Hola
     ```
 
 Això mostra que els tres processos s'han executat amb èxit (visca).
@@ -581,15 +619,24 @@ nextflow run hello-channels.nf
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [sharp_minsky] DSL2 - revision: 16a291febe
+    Launching `hello-channels.nf` [sharp_minsky] revision: 16a291febe
 
     executor >  local (3)
-    [e8/33ee64] sayHello (2) [100%] 3 of 3 ✔
+    [e8/33ee64] sayHello (2) | 3 of 3 ✔
     Hello
     Bonjour
-    Holà
+    Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hola-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 Tornant a la vista de resum, la sortida es resumeix en una línia de nou.
@@ -601,11 +648,9 @@ Doneu una ullada al directori `results` per veure si totes les salutacions de so
     results/hello_channels/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     └── output.txt
     ```
-
-Sí! I cadascun té el contingut esperat.
 
 ??? abstract "Contingut del fitxer"
 
@@ -617,8 +662,8 @@ Sí! I cadascun té el contingut esperat.
     Hello
     ```
 
-    ```console title="Holà-output.txt"
-    Holà
+    ```console title="Hola-output.txt"
+    Hola
     ```
 
 Èxit! Ara podem afegir tantes salutacions com vulguem sense preocupar-nos que els fitxers de sortida siguin sobreescrits.
@@ -628,7 +673,7 @@ Sí! I cadascun té el contingut esperat.
     A la pràctica, anomenar fitxers basant-se en les dades d'entrada mateixes és gairebé sempre impràctic.
     La millor manera de generar noms de fitxer dinàmics és passar metadades a un procés juntament amb els fitxers d'entrada.
     Les metadades normalment es proporcionen mitjançant un 'full de mostres' o equivalents.
-    Aprendreu com fer-ho més endavant a la vostra formació de Nextflow (vegeu [Missió secundària de metadades](../side_quests/metadata.md)).
+    Aprendreu com fer-ho més endavant a la vostra formació de Nextflow (vegeu [Missió secundària de metadades](../side_quests/metadata/index.md)).
 
 ### Conclusió
 
@@ -647,7 +692,7 @@ Què passa si volíem proporcionar aquestes múltiples entrades d'una manera dif
 
 Per exemple, imagineu que configurem una variable d'entrada que conté un array d'elements com aquest:
 
-`greetings_array = ['Hello','Bonjour','Holà']`
+`greetings_array = ['Hello','Bonjour','Hola']`
 
 Podem carregar això al nostre canal de sortida i esperar que funcioni?
 
@@ -673,9 +718,9 @@ Prenem la variable `greetings_array` que acabem d'imaginar i fem-la realitat afe
 
         main:
         // declara un array de salutacions d'entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // crea un canal per a les entrades
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // emet una salutacio
         sayHello(greeting_ch)
@@ -692,7 +737,7 @@ Prenem la variable `greetings_array` que acabem d'imaginar i fem-la realitat afe
 
         main:
         // crea un canal per a les entrades
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // emet una salutacio
         sayHello(greeting_ch)
@@ -706,7 +751,7 @@ Això encara no és funcional, només hem afegit una declaració per a l'array.
 
 #### 3.1.2. Establiu l'array de salutacions com a entrada al constructor de canals
 
-Ara substituirem els valors `'Hello','Bonjour','Holà'` actualment codificats al constructor de canals amb el `greetings_array` que acabem de crear.
+Ara substituirem els valors `'Hello','Bonjour','Hola'` actualment codificats al constructor de canals amb el `greetings_array` que acabem de crear.
 
 Al bloc workflow, feu el següent canvi:
 
@@ -717,7 +762,7 @@ Al bloc workflow, feu el següent canvi:
 
         main:
         // declara un array de salutacions d'entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // crea un canal per a les entrades
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -736,9 +781,9 @@ Al bloc workflow, feu el següent canvi:
 
         main:
         // declara un array de salutacions d'entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // crea un canal per a les entrades
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // emet una salutacio
         sayHello(greeting_ch)
@@ -761,22 +806,22 @@ nextflow run hello-channels.nf
 ??? failure "Sortida de la comanda"
 
     ```console hl_lines="7 11 16"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [friendly_koch] DSL2 - revision: 97256837a7
+    Launching `hello-channels.nf` [friendly_koch] revision: 97256837a7
 
     executor >  local (1)
     [a8/1f6ead] sayHello (1) | 0 of 1
-    [Hello, Bonjour, Holà]
+    [Hello, Bonjour, Hola]
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
-      Missing output file(s) `[Hello, Bonjour, Holà]-output.txt` expected by process `sayHello (1)`
+      Missing output file(s) `[Hello, Bonjour, Hola]-output.txt` expected by process `sayHello (1)`
 
 
     Command executed:
 
-      echo '[Hello, Bonjour, Holà]' > '[Hello, Bonjour, Holà]-output.txt'
+      echo '[Hello, Bonjour, Hola]' > '[Hello, Bonjour, Hola]-output.txt'
 
     Command exit status:
       0
@@ -796,7 +841,7 @@ Oh no! Hi ha un error!
 
 Mireu la sortida de `view()` i els missatges d'error.
 
-Sembla que Nextflow va intentar executar una única crida de procés, utilitzant `[Hello, Bonjour, Holà]` com un únic valor de cadena, en lloc d'utilitzar les tres cadenes de l'array com a valors separats.
+Sembla que Nextflow va intentar executar una única crida de procés, utilitzant `[Hello, Bonjour, Hola]` com un únic valor de cadena, en lloc d'utilitzar les tres cadenes de l'array com a valors separats.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
@@ -826,7 +871,7 @@ Al bloc workflow, feu el següent canvi de codi:
 
         main:
         // declara un array de salutacions d'entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // crea un canal per a les entrades
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -846,7 +891,7 @@ Al bloc workflow, feu el següent canvi de codi:
 
         main:
         // declara un array de salutacions d'entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // crea un canal per a les entrades
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -880,7 +925,7 @@ Al bloc workflow, feu el següent canvi de codi:
 
         main:
         // declara un array de salutacions d'entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // crea un canal per a les entrades
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
@@ -901,7 +946,7 @@ Al bloc workflow, feu el següent canvi de codi:
 
         main:
         // declara un array de salutacions d'entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // crea un canal per a les entrades
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -914,7 +959,7 @@ Al bloc workflow, feu el següent canvi de codi:
     }
     ```
 
-Veieu que hem afegit una segona instrucció `.view`, i per a cadascuna d'elles, hem substituït els parèntesis buits (`()`) amb claus que contenen codi, com ara `{ greeting -> "Abans de flatten: $greeting" }`.
+Veieu que hem afegit una segona instrucció `.view`, i per a cadascuna d'elles, hem substituït els parèntesis buits (`()`) amb claus que contenen codi, com ara `#!groovy { greeting -> "Before flatten: $greeting" }`.
 
 Aquestes s'anomenen _closures_. El codi que contenen s'executarà per a cada element del canal.
 Definim una variable temporal per al valor intern, aquí anomenada `greeting` (però podria ser qualsevol nom arbitrari), que només s'utilitza dins de l'àmbit d'aquesta closure.
@@ -941,16 +986,25 @@ nextflow run hello-channels.nf
 ??? success "Sortida de la comanda"
 
     ```console hl_lines="7-10"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [sleepy_gutenberg] DSL2 - revision: 1db4f760ee
+    Launching `hello-channels.nf` [sleepy_gutenberg] revision: 1db4f760ee
 
     executor >  local (3)
-    [b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔
-    Before flatten: [Hello, Bonjour, Holà]
+    [b1/6a1e15] sayHello (2) | 3 of 3 ✔
+    Before flatten: [Hello, Bonjour, Hola]
     After flatten: Hello
     After flatten: Bonjour
-    After flatten: Holà
+    After flatten: Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hola-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 Aquesta vegada funciona I ens dóna la visió addicional de com es veu el contingut del canal abans i després d'executar l'operador `flatten()`.
@@ -986,7 +1040,7 @@ Hem preparat un fitxer CSV anomenat `greetings.csv` que conté diverses salutaci
 ```csv title="data/greetings.csv" linenums="1"
 Hello,English,123
 Bonjour,French,456
-Holà,Spanish,789
+Hola,Spanish,789
 ```
 
 La nostra següent tasca és adaptar el nostre workflow per llegir els valors d'aquest fitxer.
@@ -1015,7 +1069,7 @@ Feu la següent edició a la declaració del paràmetre:
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
-    * Parametres del pipeline
+    * Paràmetres del pipeline
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -1026,9 +1080,11 @@ Feu la següent edició a la declaració del paràmetre:
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
-     * Parametres del pipeline
+     * Paràmetres del pipeline
      */
-    input: String = 'Holà mundo!'
+    params {
+        input: String = 'Hola mundo!'
+    }
     ```
 
 Això assumeix que el fitxer està col·locat amb el codi del workflow.
@@ -1051,8 +1107,8 @@ Al bloc workflow, feu el següent canvi de codi:
         greeting_ch = channel.fromPath(params.input)
                              .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
-                             // .view { greeting -> "Després de flatten: $greeting" }
-        // emet una salutacio
+                             // .view { greeting -> "After flatten: $greeting" }
+        // emet una salutació
         sayHello(greeting_ch)
 
         publish:
@@ -1067,13 +1123,13 @@ Al bloc workflow, feu el següent canvi de codi:
 
         main:
         // declara un array de salutacions d'entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // crea un canal per a les entrades
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
                              .flatten()
                              .view { greeting -> "After flatten: $greeting" }
-        // emet una salutacio
+        // emet una salutació
         sayHello(greeting_ch)
 
         publish:
@@ -1094,12 +1150,12 @@ nextflow run hello-channels.nf
 
 ??? failure "Sortida de la comanda"
 
-    ```console hl_lines="5 6 9 14"
-     N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="5 6 9 15"
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5
+    Launching `hello-channels.nf` [peaceful_poisson] revision: a286c08ad5
 
-    [-        ] sayHello [  0%] 0 of 1
+    [-        ] sayHello | 0 of 1
     Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 
@@ -1157,7 +1213,7 @@ Al bloc workflow, feu el següent canvi de codi per substituir `flatten()` amb `
                              .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
                              .view { csv -> "After splitCsv: $csv" }
-        // emet una salutacio
+        // emet una salutació
         sayHello(greeting_ch)
 
         publish:
@@ -1175,8 +1231,8 @@ Al bloc workflow, feu el següent canvi de codi per substituir `flatten()` amb `
         greeting_ch = channel.fromPath(params.input)
                              .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
-                             // .view { greeting -> "Després de flatten: $greeting" }
-        // emet una salutacio
+                             // .view { greeting -> "After flatten: $greeting" }
+        // emet una salutació
         sayHello(greeting_ch)
 
         publish:
@@ -1198,16 +1254,16 @@ nextflow run hello-channels.nf
 ??? failure "Sortida de la comanda"
 
     ```console hl_lines="7-11 14 19"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [insane_fermat] DSL2 - revision: 8e62fcbeb1
+    Launching `hello-channels.nf` [insane_fermat] revision: 8e62fcbeb1
 
     executor >  local (3)
-    [24/76da2f] sayHello (2) [  0%] 0 of 3 ✘
+    [24/76da2f] sayHello (2) | 0 of 3 ✘
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    After splitCsv: [Hola, Spanish, 789]
     ERROR ~ Error executing process > 'sayHello (2)'
 
     Caused by:
@@ -1278,7 +1334,7 @@ Al bloc workflow, feu el següent canvi de codi:
                              .view { csv -> "After splitCsv: $csv" }
                              .map { item -> item[0] }
                              .view { csv -> "After map: $csv" }
-        // emet una salutacio
+        // emet una salutació
         sayHello(greeting_ch)
 
         publish:
@@ -1297,7 +1353,7 @@ Al bloc workflow, feu el següent canvi de codi:
                              .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
                              .view { csv -> "After splitCsv: $csv" }
-        // emet una salutacio
+        // emet una salutació
         sayHello(greeting_ch)
 
         publish:
@@ -1318,28 +1374,37 @@ nextflow run hello-channels.nf
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [focused_volhard] DSL2 - revision: de435e45be
+    Launching `hello-channels.nf` [focused_volhard] revision: de435e45be
 
     executor >  local (3)
-    [54/6eebe3] sayHello (3) [100%] 3 of 3 ✔
+    [54/6eebe3] sayHello (3) | 3 of 3 ✔
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    After splitCsv: [Hola, Spanish, 789]
     After map: Hello
     After map: Bonjour
-    After map: Holà
+    After map: Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Hola-output.txt
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 Aquesta vegada hauria d'executar-se sense error.
 
 Mirant la sortida de les instruccions `view()`, veieu el següent:
 
-- Una única instrucció `Abans de splitCsv:`: en aquell moment el canal conté un element, el camí del fitxer original.
-- Tres instruccions separades `Després de splitCsv:`: una per a cada salutació, però cadascuna està continguda dins d'un array que correspon a aquella línia del fitxer.
-- Tres instruccions separades `Després de map:`: una per a cada salutació, que ara són elements individuals al canal.
+- Una única instrucció `Before splitCsv:`: en aquell moment el canal conté un element, el camí del fitxer original.
+- Tres instruccions separades `After splitCsv:`: una per a cada salutació, però cadascuna està continguda dins d'un array que correspon a aquella línia del fitxer.
+- Tres instruccions separades `After map:`: una per a cada salutació, que ara són elements individuals al canal.
 
 _Tingueu en compte que les línies poden aparèixer en un ordre diferent a la vostra sortida._
 

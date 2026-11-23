@@ -234,6 +234,54 @@ Die Factory hat Zugriff auf die Nextflow-Session und ihre Konfiguration und ist 
 Die Factory liest jetzt `greeting.enabled` aus der Konfiguration und gibt eine leere Liste zurück, wenn die Benutzer\*innen es auf `false` gesetzt haben.
 Wenn die Liste leer ist, werden keine Observer erstellt und die Lifecycle-Hooks des Plugins werden stillschweigend übersprungen.
 
+Der Factory-Test aus Teil 5 übergibt ein einfaches `Mock(Session)` ohne Konfiguration, weshalb `navigate()` jetzt mit einer `NullPointerException` fehlschlägt.
+Aktualisiere `nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy`, um der Mock-Session eine Konfiguration zu geben, und füge einen Test für den deaktivierten Fall hinzu:
+
+=== "Danach"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="4-6 8 15-25"
+        def 'should create the observer instance' () {
+            given:
+            def factory = new GreetingFactory()
+            def session = Mock(Session) {
+                getConfig() >> [greeting: [enabled: true]]
+            }
+            when:
+            def result = factory.create(session)
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+
+        def 'should return empty list when disabled' () {
+            given:
+            def factory = new GreetingFactory()
+            def session = Mock(Session) {
+                getConfig() >> [greeting: [enabled: false]]
+            }
+            when:
+            def result = factory.create(session)
+            then:
+            result.isEmpty()
+        }
+    ```
+
+=== "Vorher"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="5"
+        def 'should create the observer instance' () {
+            given:
+            def factory = new GreetingFactory()
+            when:
+            def result = factory.create(Mock(Session))
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+    ```
+
 ### 2.1. Bauen und testen
 
 Das Plugin neu bauen und installieren:

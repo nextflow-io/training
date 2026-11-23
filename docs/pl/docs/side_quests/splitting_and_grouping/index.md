@@ -28,10 +28,10 @@ Te umiejętności pomogą Ci budować workflow'y, które efektywnie obsługują 
 
 Przed przystąpieniem do tego zadania pobocznego powinieneś:
 
-- Ukończyć samouczek [Hello Nextflow](../hello_nextflow/README.md) lub równoważny kurs dla początkujących.
+- Ukończyć samouczek [Hello Nextflow](../../hello_nextflow/index.md) lub równoważny kurs dla początkujących.
 - Swobodnie posługiwać się podstawowymi konceptami i mechanizmami Nextflow'a (procesy, kanały, operatory, praca z plikami, metadane).
 
-**Opcjonalnie:** Zalecamy wcześniejsze ukończenie zadania pobocznego [Metadata in workflows](../metadata/).
+**Opcjonalnie:** Zalecamy wcześniejsze ukończenie zadania pobocznego [Metadata in workflows](../metadata/index.md).
 Omawia ono podstawy odczytywania plików CSV za pomocą `splitCsv` i tworzenia map metadanych, z których będziemy tu intensywnie korzystać.
 
 ---
@@ -40,7 +40,7 @@ Omawia ono podstawy odczytywania plików CSV za pomocą `splitCsv` i tworzenia m
 
 #### Otwórz środowisko szkoleniowe
 
-Jeśli jeszcze tego nie zrobiłeś, otwórz środowisko szkoleniowe zgodnie z opisem w sekcji [Konfiguracja środowiska](../envsetup/index.md).
+Jeśli jeszcze tego nie zrobiłeś, otwórz środowisko szkoleniowe zgodnie z opisem w sekcji [Konfiguracja środowiska](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -57,6 +57,8 @@ Możesz ustawić VSCode tak, aby skupiał się na tym katalogu:
 ```bash
 code .
 ```
+
+Edytor otwiera się z katalogiem projektu w centrum uwagi.
 
 #### Przejrzyj materiały
 
@@ -93,6 +95,8 @@ Dla pacjenta A mamy dwa zestawy replik technicznych (powtórzeń).
 !!! note "Uwaga"
 
     Nie martw się, jeśli nie znasz tego projektu eksperymentalnego — nie jest to kluczowe dla zrozumienia tego samouczka.
+
+Mając już rozeznanie w zawartości danych, możemy przyjrzeć się temu, co workflow musi wykonać.
 
 #### Zapoznaj się z zadaniem
 
@@ -135,7 +139,7 @@ workflow {
 
     W całym tym samouczku będziemy używać prefiksu `ch_` dla wszystkich zmiennych kanałów, aby wyraźnie wskazać, że są to kanały Nextflow'a.
 
-Jeśli ukończyłeś zadanie poboczne [Metadata in workflows](../metadata/), rozpoznasz ten wzorzec. Użyjemy `splitCsv` do odczytania pliku CSV i natychmiastowego ustrukturyzowania danych za pomocą mapy metadanych, aby oddzielić metadane od ścieżek do plików.
+Jeśli ukończyłeś zadanie poboczne [Metadata in workflows](../metadata/index.md), rozpoznasz ten wzorzec. Użyjemy `splitCsv` do odczytania pliku CSV i natychmiastowego ustrukturyzowania danych za pomocą mapy metadanych, aby oddzielić metadane od ścieżek do plików.
 
 !!! info "Info"
 
@@ -150,7 +154,7 @@ Wprowadź następujące zmiany w `main.nf`:
 
 === "Po"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2-6"
+    ```groovy title="main.nf" linenums="2" hl_lines="1-6"
         ch_samples = channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
@@ -174,9 +178,9 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
+    Launching `main.nf` [wise_venter] revision: 9211c186b2
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
@@ -230,9 +234,9 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d
+    Launching `main.nf` [high_knuth] revision: bc0db74ccc
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
@@ -251,6 +255,8 @@ Realizuje to pojedyncze domknięcie wprowadzone powyżej:
 ```groovy title="main.nf" linenums="7"
     .filter { meta, file -> meta.type == 'normal' }
 ```
+
+Ten filtr jest dołączony bezpośrednio w operacji na kanale.
 
 ### 2.2. Tworzenie osobnych przefiltrowanych kanałów
 
@@ -291,9 +297,9 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74
+    Launching `main.nf` [shrivelled_rubens] revision: 636aae17ff
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
@@ -334,21 +340,25 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
+    Launching `main.nf` [elated_jepsen] revision: c96ba8f734
 
-    Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
     Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
     Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
     Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
     Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
     Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
-Rozdzieliliśmy próbki normalne i nowotworowe na dwa różne kanały i użyliśmy domknięcia przekazanego do `view()`, aby oznaczyć je inaczej w wyjściu: `ch_tumor_samples.view{'Tumor sample: ' + it}`.
+Rozdzieliliśmy próbki normalne i nowotworowe na dwa różne kanały i użyliśmy domknięcia przekazanego do `view()`, aby oznaczyć je inaczej w wyjściu: `#!groovy ch_tumor_samples.view{'Tumor sample: ' + it}`.
+
+!!! note "Uwaga"
+
+    Względna kolejność linii `Normal sample:` i `Tumor sample:` może się różnić między uruchomieniami, ponieważ oba wywołania `view()` należą do niezależnych kanałów wykonywanych współbieżnie. Kolejność próbek _w obrębie_ każdej etykiety jest zawsze zachowana.
 
 ### Podsumowanie
 
@@ -383,18 +393,18 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
+    Launching `main.nf` [exotic_bassi] revision: c96ba8f734
 
     Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
     Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
     Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
 Widzimy, że pole `id` jest pierwszym elementem każdej mapy metadanych. Aby `join` działał, powinniśmy wyizolować pole `id` w każdej krotce. Następnie możemy po prostu użyć operatora `join` do połączenia dwóch kanałów.
@@ -438,18 +448,18 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d
+    Launching `main.nf` [compassionate_monod] revision: 3132715893
 
-    Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
     Normal sample: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     Normal sample: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     Normal sample: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
     Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
 Może to być subtelne, ale powinieneś zauważyć, że pierwszym elementem każdej krotki jest pole `id`.
@@ -496,9 +506,9 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889
+    Launching `main.nf` [desperate_shaw] revision: 5508db4b8b
 
     [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -525,7 +535,7 @@ Następnie rozważymy sytuację, w której chcemy łączyć na podstawie wielu p
 
 ### 3.2. Łączenie na podstawie wielu pól
 
-Mamy 2 repliki dla próbki A, ale tylko 1 dla próbek B i C. W tym przypadku byliśmy w stanie skutecznie je połączyć, używając pola `id`, ale co by się stało, gdyby były niesynchronizowane? Moglibyśmy pomylić próbki normalne i nowotworowe z różnych replik!
+Mamy 2 repliki dla pacjenta A, ale tylko 1 dla pacjentów B i C. W tym przypadku byliśmy w stanie skutecznie je połączyć, używając pola `id`, ale co by się stało, gdyby były niesynchronizowane? Moglibyśmy pomylić próbki normalne i nowotworowe z różnych replik!
 
 Aby tego uniknąć, możemy łączyć na podstawie wielu pól. Istnieje kilka sposobów, aby to osiągnąć, ale skupimy się na tworzeniu nowego klucza łączenia, który zawiera zarówno `id` próbki, jak i numer `replicate`.
 
@@ -562,9 +572,9 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee
+    Launching `main.nf` [lonely_solvay] revision: 3c97c335d2
 
     [[patientA, 1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [[patientA, 2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -611,9 +621,9 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7
+    Launching `main.nf` [scruffy_swanson] revision: a8478c9d0a
 
     [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -658,7 +668,7 @@ W tym celu najpierw definiujemy domknięcie jako nową zmienną:
 
 Zdefiniowaliśmy transformację map jako nazwaną zmienną, którą możemy ponownie wykorzystać.
 
-Zwróć uwagę, że konwertujemy też ścieżkę do pliku na obiekt Path za pomocą `file()`, aby każdy proces otrzymujący ten kanał mógł poprawnie obsłużyć plik (więcej informacji znajdziesz w sekcji [Working with files](../working_with_files/)).
+Zwróć uwagę, że konwertujemy też ścieżkę do pliku na obiekt Path za pomocą `file()`, aby każdy proces otrzymujący ten kanał mógł poprawnie obsłużyć plik (więcej informacji znajdziesz w sekcji [Working with files](../working_with_files/index.md)).
 
 Zaimplementujmy domknięcie w naszym workflow'u:
 
@@ -698,15 +708,17 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d
+    Launching `main.nf` [admiring_turing] revision: 06c4cbbb2e
 
-    [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    [[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
+    [[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
+    [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]
     ```
+
+    Ponieważ domknięcie opakowuje teraz każdą ścieżkę za pomocą `file()`, wpisy plików pojawiają się jako rozwiązane ścieżki bezwzględne, a nie same nazwy plików z arkusza próbek.
 
 Użycie nazwanego domknięcia pozwala nam ponownie wykorzystać tę samą transformację w wielu miejscach, zmniejszając ryzyko błędów i czyniąc kod bardziej czytelnym i łatwym w utrzymaniu.
 
@@ -717,21 +729,21 @@ W naszym workflow'u mamy dużo zduplikowanych danych. Każdy element w połączo
 ```groovy
 [
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
   ],
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
     "type": "normal",
   ],
-  "sampleC_rep1_normal.bam"
+  "patientC_rep1_normal.bam",
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
     "type": "tumor",
   ],
-  "sampleC_rep1_tumor.bam"
+  "patientC_rep1_tumor.bam"
 ]
 ```
 
@@ -760,6 +772,10 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [scruffy_tuckerman] revision: 791ad3c1fb
+
     [[id:patientA, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
     [[id:patientB, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
@@ -797,15 +813,17 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd
+    Launching `main.nf` [intergalactic_lagrange] revision: 8c8750a19d
 
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
     [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
     [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
     ```
+
+Każda krotka zawiera teraz tylko klucz grupowania i dwie ścieżki do plików, bez powtarzających się pól.
 
 ### Podsumowanie
 
@@ -873,9 +891,9 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b
+    Launching `main.nf` [lethal_northcutt] revision: 09667ddd59
 
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr1]
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr2]
@@ -955,9 +973,9 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
+    Launching `main.nf` [hungry_engelbart] revision: 45db6a7dd7
 
     [[id:patientA, repeat:1, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, repeat:1, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
@@ -988,7 +1006,7 @@ W tej sekcji nauczyłeś się:
 
 ## 5. Agregowanie próbek za pomocą `groupTuple`
 
-W poprzednich sekcjach nauczyliśmy się dzielić dane z pliku wejściowego i filtrować według określonych pól (w naszym przypadku próbki normalne i nowotworowe). Obejmuje to jednak tylko jeden typ łączenia. Co jeśli chcemy grupować próbki według określonego atrybutu? Na przykład, zamiast łączyć dopasowane pary normalny-nowotworowy, możemy chcieć przetwarzać wszystkie próbki z „próbki A" razem, niezależnie od ich typu. Ten wzorzec jest powszechny w workflow'ach bioinformatycznych, gdzie możesz chcieć przetwarzać powiązane próbki osobno ze względów wydajnościowych, zanim porównasz lub połączysz wyniki na końcu.
+W poprzednich sekcjach nauczyliśmy się dzielić dane z pliku wejściowego i filtrować według określonych pól (w naszym przypadku próbki normalne i nowotworowe). Obejmuje to jednak tylko jeden typ łączenia. Co jeśli chcemy grupować próbki według określonego atrybutu? Na przykład, zamiast łączyć dopasowane pary normalny-nowotworowy, możemy chcieć przetwarzać wszystkie próbki z „pacjenta A" razem, niezależnie od ich typu. Ten wzorzec jest powszechny w workflow'ach bioinformatycznych, gdzie możesz chcieć przetwarzać powiązane próbki osobno ze względów wydajnościowych, zanim porównasz lub połączysz wyniki na końcu.
 
 Nextflow zawiera wbudowane metody do tego celu — główną, którą omówimy, jest `groupTuple`.
 
@@ -1000,7 +1018,7 @@ Pierwszy krok jest podobny do tego, co robiliśmy w poprzedniej sekcji. Musimy w
 
 ```groovy title="main.nf" linenums="1"
 {
-  "id": "sampleA",
+  "id": "patientA",
   "repeat": "1",
   "interval": "chr1"
 }
@@ -1056,9 +1074,9 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76
+    Launching `main.nf` [stupefied_kirch] revision: c5bd1a7c31
 
     [[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
@@ -1120,9 +1138,9 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d
+    Launching `main.nf` [soggy_borg] revision: cc057d5f49
 
     [[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
     [[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
@@ -1140,6 +1158,8 @@ Zwróć uwagę, że struktura danych uległa zmianie — pliki w każdym elemenc
 !!! note "Uwaga"
 
     [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) jest odwrotnością `groupTuple`. Rozpakowuje elementy w kanale i spłaszcza je. Spróbuj dodać `transpose` i cofnąć grupowanie, które wykonaliśmy powyżej!
+
+Obie strony tej operacji — grupowanie i rozgrupowywanie — są teraz w Twoim arsenale.
 
 ### Podsumowanie
 
@@ -1168,7 +1188,7 @@ Opanowanie tych operacji na kanałach pozwoli Ci budować elastyczne, skalowalne
 
 ### Kluczowe wzorce
 
-1.  **Tworzenie ustrukturyzowanych danych wejściowych:** Zaczynając od pliku CSV z mapami metadanych (bazując na wzorcach z [Metadata in workflows](../metadata/))
+1.  **Tworzenie ustrukturyzowanych danych wejściowych:** Zaczynając od pliku CSV z mapami metadanych (bazując na wzorcach z [Metadata in workflows](../metadata/index.md))
 
     ```groovy
     ch_samples = channel.fromPath("./data/samplesheet.csv")
@@ -1181,7 +1201,7 @@ Opanowanie tych operacji na kanałach pozwoli Ci budować elastyczne, skalowalne
 2.  **Podział danych na osobne kanały:** Użyliśmy `filter` do podziału danych na niezależne strumienie na podstawie pola `type`
 
     ```groovy
-    channel.filter { it.type == 'tumor' }
+    channel.filter { meta, file -> meta.type == 'tumor' }
     ```
 
 3.  **Łączenie dopasowanych próbek:** Użyliśmy `join` do ponownego łączenia powiązanych próbek na podstawie pól `id` i `repeat`
@@ -1189,31 +1209,31 @@ Opanowanie tych operacji na kanałach pozwoli Ci budować elastyczne, skalowalne
     - Łączenie dwóch kanałów według klucza (pierwszego elementu krotki)
 
     ```groovy
-    tumor_ch.join(normal_ch)
+    ch_normal_samples.join(ch_tumor_samples)
     ```
 
     - Wyodrębnienie klucza łączenia i łączenie według tej wartości
 
     ```groovy
-    tumor_ch.map { meta, file -> [meta.id, meta, file] }
+    ch_normal_samples.map { meta, file -> [meta.id, meta, file] }
         .join(
-          normal_ch.map { meta, file -> [meta.id, meta, file] }
+          ch_tumor_samples.map { meta, file -> [meta.id, meta, file] }
         )
     ```
 
-    - Łączenie na wielu polach przy użyciu subMap
+    - Łączenie na wielu polach przy użyciu `subMap`
 
     ```groovy
-    tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+    ch_normal_samples.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         .join(
-          normal_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+          ch_tumor_samples.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         )
     ```
 
 4.  **Rozdzielanie na interwały:** Użyliśmy `combine` do tworzenia iloczynów kartezjańskich próbek z interwałami genomicznymi do przetwarzania równoległego.
 
     ```groovy
-    samples_ch.combine(intervals_ch)
+    ch_joined_samples.combine(ch_intervals)
     ```
 
 5.  **Agregowanie według kluczy grupowania:** Użyliśmy `groupTuple` do grupowania według pierwszego elementu każdej krotki, zbierając tym samym próbki współdzielące pola `id` i `interval` oraz łącząc repliki techniczne.
@@ -1249,4 +1269,4 @@ Opanowanie tych operacji na kanałach pozwoli Ci budować elastyczne, skalowalne
 
 ## Co dalej?
 
-Wróć do [menu zadań pobocznych](../) lub kliknij przycisk w prawym dolnym rogu strony, aby przejść do następnego tematu na liście.
+Wróć do [menu zadań pobocznych](../index.md) lub kliknij przycisk w prawym dolnym rogu strony, aby przejść do następnego tematu na liście.

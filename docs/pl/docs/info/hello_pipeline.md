@@ -8,7 +8,7 @@ hide:
 
 # Pipeline Hello
 
-<span class="ai-translation-notice">:material-information-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Większość naszych kursów szkoleniowych używa prostego, domenowo-agnostycznego pipeline'u do demonstracji koncepcji i mechanizmów Nextflow.
 Kurs Hello Nextflow pokazuje, jak rozwijać ten pipeline krok po kroku, wyjaśniając każdą decyzję projektową i implementacyjną.
@@ -43,7 +43,7 @@ Wyniki są publikowane do katalogu o nazwie `results/`, a końcowe wyjście pipe
   _________
 / BONJOUR \
 | HELLO   |
-\ HOLà    /
+\ HOLA    /
 ---------
   \                                  ,+*^^*+___+++_
   \                           ,*^^^^              )
@@ -69,13 +69,3 @@ Wyniki są publikowane do katalogu o nazwie `results/`, a końcowe wyjście pipe
 ```
 
 Możesz napotkać pewne różnice w szczegółach w zależności od kursu, w którym pipeline jest prezentowany.
-
----
-
-<div markdown class="homepage_logos">
-
-![Seqera](../assets/img/seqera_logo.png#only-light)
-
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
-
-</div>

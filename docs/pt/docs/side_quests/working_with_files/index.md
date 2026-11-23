@@ -1,4 +1,4 @@
-# Processamento de entrada de arquivos
+# Processamento de Entrada de Arquivos
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
@@ -27,10 +27,8 @@ Essas habilidades vão ajudá-lo a construir fluxos de trabalho capazes de lidar
 
 Antes de embarcar nesta side quest, você deve:
 
-- Ter concluído o tutorial [Hello Nextflow](../../hello_nextflow/) ou um curso equivalente para iniciantes.
+- Ter concluído o tutorial [Hello Nextflow](../../hello_nextflow/index.md) ou um curso equivalente para iniciantes.
 - Estar confortável com os conceitos e mecanismos básicos do Nextflow (processos, canais, operadores)
-
-<!-- I removed the suggestion to do the metamaps SQ first because that works more naturally after -->
 
 ---
 
@@ -38,7 +36,7 @@ Antes de embarcar nesta side quest, você deve:
 
 #### Abra o codespace de treinamento
 
-Se ainda não tiver feito isso, certifique-se de abrir o ambiente de treinamento conforme descrito em [Configuração do Ambiente](../envsetup/index.md).
+Se ainda não tiver feito isso, certifique-se de abrir o ambiente de treinamento conforme descrito em [Configuração do Ambiente](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -55,6 +53,8 @@ Você pode configurar o VSCode para focar neste diretório:
 ```bash
 code .
 ```
+
+O editor abre com o diretório do projeto em foco.
 
 #### Revise os materiais
 
@@ -131,11 +131,19 @@ Dê uma olhada no arquivo de fluxo de trabalho `main.nf`:
 #!/usr/bin/env nextflow
 
 workflow {
-
+    main:
     // Cria um objeto Path a partir de um caminho em string
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
     println "${myFile} is of class ${myFile.class}"
+
+    publish:
+    analysis_results = channel.empty()
+}
+
+output {
+    analysis_results {
+    }
 }
 ```
 
@@ -155,11 +163,17 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
+    Launching `main.nf` [happy_goodall] revision: 464aa64101
 
-    data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String
+    data/patientA_rep1_normal_R1_001.fastq.gz is of class class java.lang.String
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Como você pode ver, o Nextflow imprimiu o caminho em string exatamente como o escrevemos.
@@ -203,11 +217,17 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
+    Launching `main.nf` [jolly_fermi] revision: 8efdfe2c7c
 
     /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Desta vez, você vê o caminho absoluto completo em vez do caminho relativo que fornecemos como entrada.
@@ -226,6 +246,8 @@ Como veremos mais adiante, arquivos remotos terão nomes de classe diferentes (c
     - **Objeto Path**: Uma referência inteligente a um arquivo com a qual o Nextflow pode trabalhar
 
     Pense assim: uma string de caminho é como escrever um endereço em um papel, enquanto um objeto Path é como ter o endereço carregado em um GPS que sabe como navegar até lá e pode lhe dar detalhes sobre o trajeto.
+
+Entender essa diferença é fundamental para usar operações de arquivo corretamente no Nextflow.
 
 ### 1.3. Acessar atributos de arquivos
 
@@ -265,15 +287,21 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
+    Launching `main.nf` [mad_leavitt] revision: 33fa67b5f9
 
-    File object class: sun.nio.fs.UnixPath
+    File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
     Extension: gz
     Parent directory: /workspaces/training/side-quests/working_with_files/data
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Você vê os vários atributos do arquivo impressos no console acima.
@@ -310,8 +338,6 @@ Para usar o processo no fluxo de trabalho, você só precisa adicionar uma instr
 Você pode abrir o arquivo do módulo para examinar seu código:
 
 ```groovy title="modules/count_lines.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 process COUNT_LINES {
     debug true
 
@@ -334,7 +360,9 @@ Como você pode ver, é um script bastante simples que descomprime o arquivo e c
     A diretiva `debug true` na definição do processo faz com que o Nextflow imprima a saída do seu script (como a contagem de linhas "40") diretamente no log de execução.
     Sem isso, você veria apenas o status de execução do processo, mas não a saída real do seu script.
 
-    Para mais informações sobre depuração de processos Nextflow, consulte a side quest [Depurando Fluxos de Trabalho Nextflow](debugging.md).
+    Para mais informações sobre depuração de processos Nextflow, consulte a side quest [Depurando Fluxos de Trabalho Nextflow](../debugging/index.md).
+
+Com o módulo importado e seu código examinado, podemos chamar o processo a partir do fluxo de trabalho.
 
 #### 1.4.2. Adicionar uma chamada ao `COUNT_LINES`
 
@@ -382,9 +410,9 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [cheeky_hypatia] DSL2 - revision: 281d13c414
+    Launching `main.nf` [peaceful_plateau] revision: 91b633f022
 
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
@@ -392,9 +420,15 @@ nextflow run main.nf
     Extension: gz
     Parent directory: /workspaces/training/side-quests/working_with_files/data
     executor >  local (1)
-    [e9/341c05] COUNT_LINES [100%] 1 of 1 ✔
-    Processing file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+    [25/7946de] COUNT_LINES | 1 of 1 ✔
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Isso mostra que somos capazes de operar no arquivo adequadamente dentro de um processo.
@@ -465,10 +499,11 @@ nextflow run main.nf
 ??? failure "Saída do comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [friendly_goodall] DSL2 - revision: ae50609b20
+    Launching `main.nf` [high_meninsky] revision: 74cc0a3ffc
 
+    File object class: class java.lang.String
     [-        ] COUNT_LINES -
     ERROR ~ Error executing process > 'COUNT_LINES'
 
@@ -479,7 +514,7 @@ nextflow run main.nf
 
     Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Esta é a parte importante:
@@ -506,7 +541,7 @@ Faça a seguinte edição no módulo:
 
 === "Depois"
 
-    ```groovy title="modules/count_lines.nf" linenums="3" hl_lines="5"
+    ```groovy title="modules/count_lines.nf" linenums="1" hl_lines="5"
     process COUNT_LINES {
         debug true
 
@@ -516,7 +551,7 @@ Faça a seguinte edição no módulo:
 
 === "Antes"
 
-    ```groovy title="modules/count_lines.nf" linenums="3" hl_lines="5"
+    ```groovy title="modules/count_lines.nf" linenums="1" hl_lines="5"
     process COUNT_LINES {
         debug true
 
@@ -533,12 +568,13 @@ nextflow run main.nf
 ??? failure "Saída do comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [soggy_golick] DSL2 - revision: ae50609b20
+    Launching `main.nf` [berserk_wing] revision: 74cc0a3ffc
 
+    File object class: class java.lang.String
     executor >  local (1)
-    [b3/b3023c] COUNT_LINES [  0%] 0 of 1 ✘
+    [62/3b29eb] COUNT_LINES | 0 of 1 ✘
     ERROR ~ Error executing process > 'COUNT_LINES'
 
     Caused by:
@@ -564,11 +600,11 @@ nextflow run main.nf
       0
 
     Work dir:
-      /workspaces/training/side-quests/working_with_files/work/b3/b3023cb2ccb986851301d8e369e79f
+      /workspaces/training/side-quests/working_with_files/work/62/3b29ebab00b110d9dcccb061bfce50
 
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Isso mostra muitos detalhes sobre o erro porque o processo está configurado para exibir informações de depuração, conforme mencionado acima.
@@ -600,6 +636,8 @@ Juntos, esses dois exemplos mostram como é importante dizer ao Nextflow se uma 
 !!! note "Nota"
 
     Certifique-se de voltar e corrigir ambos os erros intencionais antes de continuar para a próxima seção.
+
+Com ambas as correções aplicadas, o fluxo de trabalho faz o staging e processa corretamente o arquivo de entrada.
 
 ### Conclusão
 
@@ -680,9 +718,9 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+    Launching `main.nf` [admiring_bhaskara] revision: 8804122967
 
     File object class: class nextflow.file.http.XPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
@@ -690,9 +728,15 @@ nextflow run main.nf
     Extension: gz
     Parent directory: /nextflow-io/training/master/side-quests/working_with_files/data
     executor >  local (1)
-    [8a/2ab7ca] COUNT_LINES [100%] 1 of 1 ✔
+    [07/246c2a] COUNT_LINES | 1 of 1 ✔
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Funcionou! Você pode ver que muito pouco mudou.
@@ -707,10 +751,10 @@ Você pode verificar que isso aconteceu aqui, olhando o conteúdo do diretório 
 
 ??? abstract "Conteúdo do diretório work"
 
-    Se o hash do processo fosse `8a/2ab7ca`, você poderia explorar o diretório de trabalho:
+    Se o hash do processo fosse `07/246c2a`, você poderia explorar o diretório de trabalho:
 
     ```console
-    $ ls -la work/8a/2ab7ca*/
+    $ ls -la work/07/246c2a*/
     total 16
     drwxr-xr-x  6 user  staff   192 Jan 28 10:00 .
     drwxr-xr-x  3 user  staff    96 Jan 28 10:00 ..
@@ -779,6 +823,8 @@ Vamos voltar a usar nossos arquivos de exemplo locais para o restante desta side
         println "Parent directory: ${myFile.parent}"
     ```
 
+O fluxo de trabalho agora voltou a usar o arquivo de entrada local.
+
 ### Conclusão
 
 - Dados remotos são acessados usando um URI (HTTP, FTP, S3, Azure, Google Cloud)
@@ -799,15 +845,10 @@ Uma forma ingênua de fazer isso seria combinar o método `file()` com [`channel
 
 ```groovy title="Syntax example"
 ch_files = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')],
-                      [file('data/patientA_rep1_normal_R1_001.fastq.gz')])
+                      [file('data/patientA_rep1_normal_R2_001.fastq.gz')])
 ```
 
 Isso funciona, mas é desajeitado.
-
-!!! tip "Quando usar `file()` vs `channel.fromPath()`"
-
-    - Use `file()` quando precisar de um único objeto Path para manipulação direta (verificar se um arquivo existe, ler seus atributos ou passar para uma única invocação de processo)
-    - Use `channel.fromPath()` quando precisar de um canal que possa conter múltiplos arquivos, especialmente com padrões glob, ou quando os arquivos fluirão por múltiplos processos
 
 É aqui que entra o [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath): um channel factory conveniente que agrupa toda a funcionalidade necessária para gerar um canal a partir de uma ou mais strings de arquivo estáticas, bem como padrões glob.
 
@@ -863,17 +904,28 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [grave_meucci] DSL2 - revision: b09964a583
+    Launching `main.nf` [focused_hawking] revision: 1e7d8bf645
 
     Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Como você pode ver, o caminho do arquivo está sendo carregado como um objeto do tipo `Path` no canal.
 Isso é semelhante ao que `file()` teria feito, exceto que agora temos um canal no qual podemos carregar mais arquivos se quisermos.
 
 Usar `channel.fromPath()` é uma forma conveniente de criar um novo canal populado por uma lista de arquivos.
+
+!!! tip "Quando usar `file()` vs `channel.fromPath()`"
+
+    - Use `file()` quando precisar de um único objeto Path para manipulação direta (verificar se um arquivo existe, ler seus atributos ou passar para uma única invocação de processo)
+    - Use `channel.fromPath()` quando precisar de um canal que possa conter múltiplos arquivos, especialmente com padrões glob, ou quando os arquivos fluirão por múltiplos processos
 
 ### 3.2. Visualizar atributos de arquivos no canal
 
@@ -920,19 +972,25 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [furious_swanson] DSL2 - revision: c35c34950d
+    Launching `main.nf` [intergalactic_snyder] revision: dcc1cc023d
 
     executor >  local (1)
-    [9d/6701a6] COUNT_LINES (1) [100%] 1 of 1 ✔
-    File object class: sun.nio.fs.UnixPath
+    [d4/1f7691] COUNT_LINES (1) | 1 of 1 ✔
+    File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
     Extension: gz
     Parent directory: /workspaces/training/side-quests/working_with_files/data
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 E aí está, os mesmos resultados de antes, mas agora temos o arquivo em um canal, então podemos adicionar mais.
@@ -989,12 +1047,12 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
+    Launching `main.nf` [golden_euclid] revision: c4e05e506e
 
     executor >  local (2)
-    [3c/a65de5] COUNT_LINES (2) [100%] 2 of 2 ✔
+    [f8/07d274] COUNT_LINES (2) | 2 of 2 ✔
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
@@ -1010,6 +1068,12 @@ nextflow run main.nf
 
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Como você pode ver, agora temos dois objetos Path em nosso canal, o que mostra que o Nextflow fez a expansão de nome de arquivo corretamente e carregou e processou ambos os arquivos conforme esperado.
@@ -1094,19 +1158,25 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [suspicious_mahavira] DSL2 - revision: ae8edc4e48
+    Launching `main.nf` [clever_fermi] revision: a6f82347c3
 
     executor >  local (2)
-    [e9/55774b] COUNT_LINES (2) [100%] 2 of 2 ✔
-    [patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [7e/3ff80a] COUNT_LINES (1) | 2 of 2 ✔
     [patientA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    Processing file: patientA_rep1_normal_R2_001.fastq.gz
+    40
+
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
 
-    Processing file: patientA_rep1_normal_R2_001.fastq.gz
-    40
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Cada elemento no canal agora é uma tupla contendo o `simpleName` e o objeto de arquivo original.
@@ -1150,19 +1220,25 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
+    Launching `main.nf` [furious_mccarthy] revision: 3d5d5ba03e
 
     executor >  local (2)
-    [e7/da2f4b] COUNT_LINES (2) [100%] 2 of 2 ✔
-    [[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [04/e6268e] COUNT_LINES (2) | 2 of 2 ✔
     [[patientA, rep1, normal, R1, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
 
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Agora a tupla para cada elemento em nosso canal contém a lista de metadados (_ex.:_ `[patientA, rep1, normal, R1, 001]`) e o objeto de arquivo original.
@@ -1251,19 +1327,25 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
+    Launching `main.nf` [friendly_gauss] revision: 1f50ccaf76
 
     executor >  local (2)
-    [1b/e7fb27] COUNT_LINES (1) [100%] 2 of 2 ✔
-    [[id:patientA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [13/376824] COUNT_LINES (2) | 2 of 2 ✔
     [[id:patientA, replicate:1, type:normal, readNum:1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [[id:patientA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
 
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Agora os metadados estão claramente rotulados (_ex.:_ `[id:patientA, replicate:1, type:normal, readNum:2]`), então é muito mais fácil identificar o que é o quê.
@@ -1323,10 +1405,10 @@ Vamos atualizar o fluxo de trabalho `main.nf` adequadamente:
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         /* Comentando o mapeamento por enquanto, voltaremos a ele!
         ch_files.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type,
                     readNum: readNum,
@@ -1341,13 +1423,13 @@ Vamos atualizar o fluxo de trabalho `main.nf` adequadamente:
 === "Antes"
 
     ```groovy title="main.nf" linenums="7" hl_lines="1-2"
-        // Carrega arquivos com channel.fromFilePairs
+        // Carrega arquivos com channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type,
                     readNum: readNum,
@@ -1369,12 +1451,11 @@ nextflow run main.nf
 
 ??? failure "Saída do comando"
 
-    ```console hl_lines="7-8"
-     N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="6-7"
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [angry_koch] DSL2 - revision: 44fdf66105
+    Launching `main.nf` [distraught_bernard] revision: 4ad8fb92de
 
-    [-        ] COUNT_LINES -
     [-        ] COUNT_LINES -
     [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
     ERROR ~ Error executing process > 'COUNT_LINES (1)'
@@ -1384,9 +1465,9 @@ nextflow run main.nf
 
 
 
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Ops, desta vez a execução falhou!
@@ -1437,11 +1518,17 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console hl_lines="5"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [fabulous_davinci] DSL2 - revision: 22b53268dc
+    Launching `main.nf` [furious_mcclintock] revision: a243ca25cb
 
     [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Eba, desta vez o fluxo de trabalho foi bem-sucedido!
@@ -1462,10 +1549,10 @@ Descomente a operação map no fluxo de trabalho e faça as seguintes edições:
         // Carrega arquivos com channel.fromFilePairs
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id, files ->
-            def (sample, replicate, type) = id.tokenize('_')
+            def (patient, replicate, type) = id.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type
                 ],
@@ -1482,10 +1569,10 @@ Descomente a operação map no fluxo de trabalho e faça as seguintes edições:
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         /* Comentando o mapeamento por enquanto, voltaremos a ele!
         ch_files.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type,
                     readNum: readNum,
@@ -1512,11 +1599,17 @@ nextflow run main.nf
 
     ```console
 
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
+    Launching `main.nf` [stoic_ramanujan] revision: 90004d32f8
 
     [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 E aí está: temos o map de metadados (`[id:patientA, replicate:1, type:normal]`) na primeira posição da tupla de saída, seguido pela tupla de arquivos pareados, como pretendido.
@@ -1570,18 +1663,14 @@ Faça a seguinte edição no fluxo de trabalho:
 Você pode abrir o arquivo do módulo para examinar seu código:
 
 ```groovy title="modules/analyze_reads.nf - process example" linenums="1"
-#!/usr/bin/env nextflow
-
 process ANALYZE_READS {
     tag { meta.id }
-
-    publishDir { "results/${meta.id}" }, mode: 'copy'
 
     input:
     tuple val(meta), path(files)
 
     output:
-    tuple val(meta.id), path("${meta.id}_stats.txt")
+    tuple val(meta), path("${meta.id}_stats.txt")
 
     script:
     """
@@ -1598,14 +1687,15 @@ process ANALYZE_READS {
 
 !!! note "Nota"
 
-    As diretivas `tag` e `publishDir` usam sintaxe de closure (`{ ... }`) em vez de interpolação de string (`"${...}"`).
-    Isso ocorre porque essas diretivas fazem referência a variáveis de entrada (`meta`) que não estão disponíveis até o tempo de execução.
-    A sintaxe de closure adia a avaliação até que o processo realmente seja executado.
+    A diretiva `tag` usa sintaxe de closure (`{ ... }`) porque faz referência a variáveis de entrada (`meta`) que não estão disponíveis até que o processo seja executado.
+    A closure adia a avaliação até o tempo de execução.
 
 !!! note "Nota"
 
     Estamos chamando nosso map de metadados de `meta` por convenção.
-    Para uma análise mais aprofundada dos meta maps, consulte a side quest [Metadados e meta maps](../metadata/).
+    Para uma análise mais aprofundada dos meta maps, consulte a side quest [Metadados e meta maps](../metadata/index.md).
+
+Com o processo `ANALYZE_READS` importado e seu código revisado, podemos adicionar uma chamada a ele no fluxo de trabalho.
 
 ### 6.2. Chamar o processo no fluxo de trabalho
 
@@ -1623,7 +1713,7 @@ Para alimentar o conteúdo remapeado ao processo `ANALYZE_READS` (e fazê-lo de 
 
 Podemos fazer isso usando o operador [`set`](https://www.nextflow.io/docs/latest/reference/operator.html#set).
 
-No fluxo de trabalho principal, substitua o operador `.view()` por `.set { ch_samples }`, e adicione uma linha testando que podemos nos referir ao canal pelo nome.
+No fluxo de trabalho principal, substitua o operador `.view()` por `#!groovy .set { ch_samples }`, e adicione uma linha testando que podemos nos referir ao canal pelo nome.
 
 === "Depois"
 
@@ -1631,10 +1721,10 @@ No fluxo de trabalho principal, substitua o operador `.view()` por `.set { ch_sa
         // Carrega arquivos com channel.fromFilePairs
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (patient, replicate, type) = id.tokenize('_')
            [
                [
-                   id: sample,
+                   id: patient,
                    replicate: replicate.replace('rep', ''),
                    type: type
                ],
@@ -1653,10 +1743,10 @@ No fluxo de trabalho principal, substitua o operador `.view()` por `.set { ch_sa
         // Carrega arquivos com channel.fromFilePairs
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (patient, replicate, type) = id.tokenize('_')
            [
                [
-                   id: sample,
+                   id: patient,
                    replicate: replicate.replace('rep', ''),
                    type: type
                ],
@@ -1664,7 +1754,6 @@ No fluxo de trabalho principal, substitua o operador `.view()` por `.set { ch_sa
            ]
         }
         .view()
-    }
     ```
 
 Vamos executar isso:
@@ -1676,11 +1765,17 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [goofy_kirch] DSL2 - revision: 3313283e42
+    Launching `main.nf` [deadly_sax] revision: cec43c6067
 
     [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Isso confirma que agora podemos nos referir ao canal pelo nome.
@@ -1691,19 +1786,79 @@ Agora vamos realmente chamar o processo `ANALYZE_READS` no canal `ch_samples`.
 
 No fluxo de trabalho principal, faça as seguintes alterações no código:
 
+1. Refatorar a configuração do canal: mudar `ch_files.map {}` para `ch_samples = ch_files.map {}` (atribuição direta, removendo o operador `.set`) e usar `tuple()` em vez de `[]`
+2. Substituir a chamada `.view()` por uma chamada a `ANALYZE_READS(ch_samples)`
+3. Substituir `channel.empty()` por `ANALYZE_READS.out` na seção `publish:`
+4. Adicionar uma closure `path` ao bloco `output {}`
+
 === "Depois"
 
-    ```groovy title="main.nf" linenums="23"
+    ```groovy title="main.nf" linenums="5" hl_lines="5 7 14 17 18 21 26"
+    workflow {
+        main:
+        // Carrega arquivos com channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_samples = ch_files.map { id,  files ->
+           def (patient, replicate, type) = id.tokenize('_')
+           tuple(
+               [
+                   id: patient,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           )
+        }
+
         // Executa a análise
         ANALYZE_READS(ch_samples)
+
+        publish:
+        analysis_results = ANALYZE_READS.out
+    }
+
+    output {
+        analysis_results {
+            path { meta, file -> "${meta.id}" }
+        }
+    }
     ```
 
 === "Antes"
 
-    ```groovy title="main.nf" linenums="23"
+    ```groovy title="main.nf" linenums="5"
+    workflow {
+        main:
+        // Carrega arquivos com channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_files.map { id,  files ->
+           def (patient, replicate, type) = id.tokenize('_')
+           [
+               [
+                   id: patient,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           ]
+        }
+            .set { ch_samples }
+
         // Temporário: inspecionar ch_samples
         ch_samples.view()
+
+        publish:
+        analysis_results = channel.empty()
+    }
+
+    output {
+        analysis_results {
+        }
+    }
     ```
+
+A closure `path` no bloco `output {}` recebe cada elemento de saída e determina a estrutura de subdiretórios.
+Aqui usamos `meta.id` para organizar os resultados por paciente.
 
 Vamos executar isso:
 
@@ -1714,15 +1869,22 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [shrivelled_cori] DSL2 - revision: b546a31769
+    Launching `main.nf` [shrivelled_mahavira] revision: 899bbde2fb
 
     executor >  local (1)
-    [b5/110360] process > ANALYZE_READS (patientA) [100%] 1 of 1 ✔
+    [7b/bd6568] ANALYZE_READS (patientA) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
+        - [{id: patientA, replicate: '1', type: normal}, patientA/patientA_stats.txt]
     ```
 
-Este processo está configurado para publicar suas saídas em um diretório `results`, então dê uma olhada lá.
+As saídas são publicadas em um diretório `results`, então dê uma olhada lá.
 
 ??? abstract "Conteúdo do diretório e arquivo"
 
@@ -1779,12 +1941,26 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [big_stonebraker] DSL2 - revision: f7f9b8a76c
+    Launching `main.nf` [deadly_kalam] revision: fb40b3e08e
 
     executor >  local (8)
-    [d5/441891] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
+    [19/6c1e76] ANALYZE_READS (patientA) | 8 of 8 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
+        - [{id: patientB, replicate: '1', type: tumor}, patientB/patientB_stats.txt]
+        - [{id: patientA, replicate: '2', type: tumor}, patientA/patientA_stats.txt]
+        - [{id: patientC, replicate: '1', type: normal}, patientC/patientC_stats.txt]
+        - [{id: patientB, replicate: '1', type: normal}, patientB/patientB_stats.txt]
+        - [{id: patientA, replicate: '1', type: normal}, patientA/patientA_stats.txt]
+        - [{id: patientA, replicate: '1', type: tumor}, patientA/patientA_stats.txt]
+        - [{id: patientA, replicate: '2', type: normal}, patientA/patientA_stats.txt]
+        - [{id: patientC, replicate: '1', type: tumor}, patientC/patientC_stats.txt]
     ```
 
 O diretório de resultados agora deve conter resultados para todos os dados disponíveis.
@@ -1811,18 +1987,22 @@ Estamos sobrescrevendo o arquivo de saída a cada vez.
 
 Como temos acesso aos metadados do paciente, podemos usá-los para tornar os arquivos publicados únicos incluindo metadados diferenciadores, seja na estrutura de diretórios ou nos próprios nomes de arquivo.
 
-Faça a seguinte alteração no fluxo de trabalho:
+Faça a seguinte alteração no bloco `output {}`:
 
 === "Depois"
 
-    ```groovy title="modules/analyze_reads.nf" linenums="6"
-        publishDir { "results/${meta.type}/${meta.id}/${meta.replicate}" }, mode: 'copy'
+    ```groovy title="main.nf" hl_lines="2"
+    analysis_results {
+        path { meta, file -> "${meta.type}/${meta.id}/${meta.replicate}" }
+    }
     ```
 
 === "Antes"
 
-    ```groovy title="modules/analyze_reads.nf" linenums="6"
-        publishDir { "results/${meta.id}" }, mode: 'copy'
+    ```groovy title="main.nf" hl_lines="2"
+    analysis_results {
+        path { meta, file -> "${meta.id}" }
+    }
     ```
 
 Aqui mostramos a opção de usar níveis de diretório adicionais para acomodar tipos de amostras e réplicas, mas você poderia experimentar fazer isso no nível do nome do arquivo também.
@@ -1837,12 +2017,26 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+    Launching `main.nf` [nasty_hirsch] revision: c2c7aae0f7
 
     executor >  local (8)
-    [e3/449081] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
+    [09/9f239c] ANALYZE_READS (patientB) | 8 of 8 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
+        - [{id: patientB, replicate: '1', type: normal}, normal/patientB/1/patientB_stats.txt]
+        - [{id: patientB, replicate: '1', type: tumor}, tumor/patientB/1/patientB_stats.txt]
+        - [{id: patientC, replicate: '1', type: normal}, normal/patientC/1/patientC_stats.txt]
+        - [{id: patientA, replicate: '1', type: tumor}, tumor/patientA/1/patientA_stats.txt]
+        - [{id: patientA, replicate: '1', type: normal}, normal/patientA/1/patientA_stats.txt]
+        - [{id: patientA, replicate: '2', type: normal}, normal/patientA/2/patientA_stats.txt]
+        - [{id: patientC, replicate: '1', type: tumor}, tumor/patientC/1/patientC_stats.txt]
+        - [{id: patientA, replicate: '2', type: tumor}, tumor/patientA/2/patientA_stats.txt]
     ```
 
 Verifique o diretório de resultados agora:
@@ -1886,11 +2080,11 @@ Há muito mais que você pode fazer quando tiver seus metadados carregados em um
 3. Dividir, unir e recombinar dados com base em valores de metadados
 
 Esse padrão de manter os metadados explícitos e anexados aos dados (em vez de codificados em nomes de arquivos) é uma prática recomendada fundamental no Nextflow que permite construir fluxos de trabalho de análise robustos e fáceis de manter.
-Você pode aprender mais sobre isso na side quest [Metadados e meta maps](../metadata/).
+Você pode aprender mais sobre isso na side quest [Metadados e meta maps](../metadata/index.md).
 
 ### Conclusão
 
-- A diretiva `publishDir` pode organizar saídas com base em valores de metadados
+- O bloco `output {}` pode organizar saídas com base em valores de metadados usando closures de caminho dinâmicas
 - Metadados em tuplas permitem a organização estruturada dos resultados
 - Essa abordagem cria fluxos de trabalho fáceis de manter com proveniência clara dos dados
 - Processos podem receber tuplas de metadados e arquivos como entrada
@@ -1995,27 +2189,26 @@ Aplicar essas técnicas em seu próprio trabalho permitirá que você construa f
 5.  **Simplificando com channel.fromFilePairs:** Usamos `channel.fromFilePairs()` para emparelhar automaticamente arquivos relacionados e extrair metadados de IDs de arquivos pareados.
 
     ```groovy
-    ch_pairs = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
+    ch_files = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
     ```
 
-6.  **Usando operações de arquivo em processos:** Integramos operações de arquivo em processos Nextflow com o tratamento adequado de entradas, usando `publishDir` para organizar saídas com base em metadados.
+6.  **Usando operações de arquivo em processos:** Integramos operações de arquivo em processos Nextflow com o tratamento adequado de entradas, usando o bloco `output {}` para organizar saídas com base em metadados.
 
     - Associar um meta map com as entradas do processo
 
     ```groovy
     ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-    ch_files.map { id,  files ->
-        def (sample, replicate, type, readNum) = id.tokenize('_')
-        [
+    ch_samples = ch_files.map { id,  files ->
+        def (patient, replicate, type) = id.tokenize('_')
+        tuple(
             [
-                id: sample,
+                id: patient,
                 replicate: replicate.replace('rep', ''),
                 type: type
             ],
-             files
-        ]
+            files
+        )
     }
-        .set { ch_samples }
 
     ANALYZE_READS(ch_samples)
     ```
@@ -2023,7 +2216,11 @@ Aplicar essas técnicas em seu próprio trabalho permitirá que você construa f
     - Organizar saídas com base em metadados
 
     ```groovy
-    publishDir { "results/${meta.type}/${meta.id}/${meta.replicate}" }, mode: 'copy'
+    output {
+        analysis_results {
+            path { meta, file -> "${meta.type}/${meta.id}/${meta.replicate}" }
+        }
+    }
     ```
 
 ### Recursos adicionais
@@ -2036,4 +2233,4 @@ Aplicar essas técnicas em seu próprio trabalho permitirá que você construa f
 
 ## O que vem a seguir?
 
-Volte ao [menu de Side Quests](../) ou clique no botão no canto inferior direito da página para avançar para o próximo tópico da lista.
+Volte ao [menu de Side Quests](../index.md) ou clique no botão no canto inferior direito da página para avançar para o próximo tópico da lista.

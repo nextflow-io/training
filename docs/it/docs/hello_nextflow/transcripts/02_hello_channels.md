@@ -136,7 +136,7 @@ Se siete interessati a come fare questo con le best practice, c'è una side ques
 
 Okay. Ora esploreremo un po' come sono strutturati i canali e come differiscono da altri tipi di strutture dati nel linguaggio di codifica. E penserò un po' a come potrei potenzialmente usare un array, che potrebbe essere un concetto familiare se venite da altri linguaggi.
 
-Posso usare un array in un canale? Proviamoci. Creerò un array, e l'ho copiato dai documenti, _"greetings_array"_ e _"Hello", "Bonjour"_ e _"Holà"_. E poi lo metterò qui invece delle mie stringhe hardcodate. Quindi dirò "channel.of" _"greetings_array"_, passando questo array in un canale. Proviamolo.
+Posso usare un array in un canale? Proviamoci. Creerò un array, e l'ho copiato dai documenti, _"greetings_array"_ e _"Hello", "Bonjour"_ e _"Hola"_. E poi lo metterò qui invece delle mie stringhe hardcodate. Quindi dirò "channel.of" _"greetings_array"_, passando questo array in un canale. Proviamolo.
 
 Apro il terminale, ed eseguo la pipeline.
 
@@ -148,7 +148,7 @@ Quindi scomponiamo questo sezione per sezione. Dice che l'errore è stato causat
 
 E potete vedere qui il nostro comando echo è stato effettivamente eseguito solo una volta e ha usato l'intero array, ma in una rappresentazione stringa, che non è davvero quello che volevamo.
 
-E poi il comando è uscito così, e quella era la directory work dove possiamo andare e vedere i file per capire un po' di più.
+E poi il comando è uscito così, e quella era la directory di lavoro dove possiamo andare e vedere i file per capire un po' di più.
 
 Okay. Quindi quello che è successo è stato. Nextflow ha semplicemente passato questo intero array come un singolo elemento del canale al processo, il che significava che il processo è stato eseguito solo una volta. Aveva un'attività e non ha usato i dati in una struttura che ci aspettavamo.
 
@@ -212,7 +212,7 @@ Okay, diamo un'occhiata a questo canale e vediamo come appare. Possiamo fare _".
 
 Se lo eseguo di nuovo, fallirà ancora, ma ci mostrerà cosa c'è dentro questo canale. Non è particolarmente eccitante. È quella variabile _path_. Quindi potete vedere che è solo una stringa qui perché viene stampata su un terminale, ma è un oggetto _path_, che contiene le informazioni e i metadati su questo file.
 
-Non vogliamo passare i metadati del file all'input. Vogliamo passare i contenuti di quel file. Se guardiamo il file _greetings.csv_, potete vedere qui che ha queste diverse variabili qui. _Hello, Bonjour, Holà_ di nuovo. E queste sono le cose che vogliamo davvero passare al nostro processo, non solo il file stesso come un singolo oggetto.
+Non vogliamo passare i metadati del file all'input. Vogliamo passare i contenuti di quel file. Se guardiamo il file _greetings.csv_, potete vedere qui che ha queste diverse variabili. _Hello, Bonjour, Hola_ di nuovo. E queste sono le cose che vogliamo davvero passare al nostro processo, non solo il file stesso come un singolo oggetto.
 
 Quindi dobbiamo analizzare questo file CSV. Dobbiamo spacchettarlo, arrivare ai contenuti del file CSV, e poi passare i contenuti all'interno del canale al processo.
 
@@ -230,9 +230,9 @@ Quindi quello che è successo qui è che Nextflow ha analizzato questo file CSV 
 
 Okay, quindi l'ultima volta che abbiamo avuto questo problema, abbiamo usato _flatten_. Proviamo molto rapidamente. Proviamo flatten e vediamo cosa succede.
 
-Posso chiamare queste variabili, qualunque cosa. Quindi lo chiamerò _myarray_ perché non è più davvero un CSV. Proviamo a eseguirlo di nuovo e vediamo cosa succede con _flatten_.
+Posso chiamare queste variabili come voglio. Quindi lo chiamerò _myarray_ perché non è più davvero un CSV. Proviamo a eseguirlo di nuovo e vediamo cosa succede con _flatten_.
 
-Quindi questa volta eseguiremo, abbiamo analizzato il CSV in tre oggetti array, e poi l'abbiamo appiattito. E questa volta è passato. E la pipeline Nextflow è stata eseguita. Tuttavia potete vedere che _flatten_ va davvero a fondo e appiattisce tutto. E quindi otteniamo tre voci di array indipendenti per ogni riga. E quindi ha eseguito il processo tre volte ogni riga di un CSV. E ora abbiamo un mucchio di file di risultati, e 123, 456, e tutti i tipi di cose, non solo quella prima colonna del CSV, che è quello che volevamo davvero.
+Quindi questa volta eseguiremo, abbiamo analizzato il CSV in tre oggetti array, e poi l'abbiamo appiattito. E questa volta è passato. E la pipeline Nextflow è stata eseguita. Tuttavia potete vedere che _flatten_ va davvero a fondo e appiattisce tutto. E quindi otteniamo tre voci di array indipendenti per ogni riga. E quindi ha eseguito il processo tre volte per ogni riga di un CSV. E ora abbiamo un mucchio di file di risultati, e 123, 456, e tutti i tipi di cose, non solo quella prima colonna del CSV, che è quello che volevamo davvero.
 
 ## 4.3. Usare l'operatore map() per estrarre i saluti
 
@@ -246,7 +246,7 @@ Gli array in Nextflow sono basati su zero, quindi diremo solo il primo elemento,
 
 E ora, possiamo eseguire di nuovo la pipeline e vedere se fa quello che ci aspettiamo.
 
-Sicuramente, dopo _splitCsv_ abbiamo i nostri array, e poi dopo il _map,_ abbiamo le nostre belle stringhe pulite, solo _"Hello", "Bonjour"_ e _"Holà"_. E la pipeline sta ora facendo quello che vogliamo. Fantastico.
+Sicuramente, dopo _splitCsv_ abbiamo i nostri array, e poi dopo il _map,_ abbiamo le nostre belle stringhe pulite, solo _"Hello", "Bonjour"_ e _"Hola"_. E la pipeline sta ora facendo quello che vogliamo. Fantastico.
 
 Quindi possiamo sbarazzarci di tutti questi comandi view ora. Non ne abbiamo più bisogno.
 

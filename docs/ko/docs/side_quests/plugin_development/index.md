@@ -21,11 +21,17 @@ Java 또는 Groovy 사전 경험은 필요하지 않습니다.
 
 **사전 요구 사항**
 
-- GitHub 계정 또는 [여기](../../envsetup/02_local)에 설명된 로컬 설치 환경.
+- GitHub 계정 또는 [여기](../../envsetup/02_local.md)에 설명된 로컬 설치 환경.
 - [Hello Nextflow](../../hello_nextflow/index.md) 과정 또는 동등한 수준의 학습 완료.
 - Java 21 이상 (교육 환경에 포함되어 있으며, 파트 2~6에서만 필요합니다).
 
 **작업 디렉토리:** `side-quests/plugin_development`
+
+#### 교육 코드스페이스 열기
+
+아직 열지 않으셨다면 [환경 설정](../../envsetup/index.md)에 설명된 대로 교육 환경을 열어 주세요.
+
+[![GitHub Codespaces에서 열기](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 ## 학습 목표
 

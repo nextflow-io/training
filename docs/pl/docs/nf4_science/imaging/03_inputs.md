@@ -9,26 +9,20 @@ Teraz poznamy dwa lepsze podejścia do zarządzania wejściami: **pliki parametr
 
 ### 1.1. Problem z długimi wierszami poleceń
 
-Przypomnijmy sobie nasze polecenie z Części 2:
+W Części 2 używaliśmy już pliku parametrów, aby skrócić polecenie i zachować wpisane wartości (takie jak całkowitoliczbowe parametry przetwarzania wstępnego) w niezmienionej postaci:
 
 ```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose" \
-  --outdir results
+nextflow run ./molkart -params-file params.yaml --segmentation_method "mesmer,cellpose,stardist"
 ```
 
-To działa, ale trudno to odtworzyć, udostępnić lub zmodyfikować.
+Podawanie wielu parametrów osobno w wierszu poleceń jest trudne do odtworzenia, udostępnienia lub modyfikacji.
 Co jeśli musisz ponownie uruchomić tę samą analizę za miesiąc?
 Co jeśli współpracownik chce użyć dokładnie Twoich ustawień?
+Plik parametrów rozwiązuje ten problem.
 
-### 1.2. Rozwiązanie: Użyj pliku parametrów
+### 1.2. Plik parametrów
 
-Utwórz plik o nazwie `params.yaml`:
+Oto plik `params.yaml`, którego używaliśmy:
 
 ```yaml title="params.yaml"
 input: "data/samplesheet.csv"
@@ -40,13 +34,16 @@ clahe_pyramid_tile: 368
 segmentation_method: "cellpose"
 ```
 
-Teraz Twoje polecenie staje się:
+Każdy parametr jest zapisany jako para `klucz: wartość`.
+Zapisywanie liczb całkowitych bez cudzysłowów (na przykład `mindagap_tilesize: 90`) zachowuje ich typ całkowitoliczbowy, którego wymaga walidacja parametrów pipeline'u.
+
+Twoje polecenie staje się wtedy:
 
 ```bash
 nextflow run ./molkart -params-file params.yaml -resume
 ```
 
-To wszystko! Plik parametrów dokumentuje dokładną konfigurację i ułatwia ponowne uruchomienie lub udostępnienie.
+Plik parametrów dokumentuje dokładną konfigurację i ułatwia ponowne uruchomienie lub udostępnienie.
 
 ### 1.3. Nadpisywanie parametrów
 
@@ -125,7 +122,7 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! warning "Ostrzeżenie"
+!!! Warning "Ostrzeżenie"
 
     Zauważ, że ścieżki w arkuszu próbek są względne względem miejsca, **z którego uruchamiasz** Nextflow'a, a nie względem miejsca, w którym znajduje się arkusz próbek.
 

@@ -47,6 +47,7 @@ def separateMetadata(row) {
 }
 
 workflow {
+    main:
     validateInputs()
 
     ch_samples = channel.fromPath(params.input)
@@ -86,5 +87,14 @@ workflow {
             println("❌ Pipeline failed!")
             println("Error: ${workflow.errorMessage}")
         }
+    }
+
+    publish:
+    reports = GENERATE_REPORT.out
+}
+
+output {
+    reports {
+        path 'reports'
     }
 }

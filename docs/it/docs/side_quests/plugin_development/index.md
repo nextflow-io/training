@@ -21,11 +21,17 @@ Non è richiesta alcuna esperienza precedente con Java o Groovy.
 
 **Prerequisiti**
 
-- Un account GitHub OPPURE un'installazione locale come descritto [qui](../../envsetup/02_local).
+- Un account GitHub OPPURE un'installazione locale come descritto [qui](../../envsetup/02_local.md).
 - Aver completato il corso [Hello Nextflow](../../hello_nextflow/index.md) o equivalente.
 - Java 21 o versione successiva (incluso nell'ambiente di formazione; necessario solo per le Parti 2-6).
 
 **Directory di lavoro:** `side-quests/plugin_development`
+
+#### Aprire il codespace di formazione
+
+Se non lo avete ancora fatto, assicuratevi di aprire l'ambiente di formazione come descritto nella sezione [Environment Setup](../../envsetup/index.md).
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 ## Obiettivi di apprendimento
 

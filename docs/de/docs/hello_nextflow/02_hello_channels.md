@@ -52,12 +52,18 @@ nextflow run hello-channels.nf --input 'Hello Channels!'
 ??? success "Befehlsausgabe"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [wise_jennings] DSL2 - revision: b24f4902d6
+    Launching `hello-channels.nf` [wise_jennings] revision: b24f4902d6
 
     executor >  local (1)
-    [6f/824bc1] process > sayHello [100%] 1 of 1 ✔
+    [6f/824bc1] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_channels/output.txt
     ```
 
 Wie zuvor findest du die Ausgabedatei `output.txt` im Verzeichnis `results/hello_channels` (wie im `output`-Block des Workflow-Skripts oben angegeben).
@@ -196,12 +202,19 @@ nextflow run hello-channels.nf
 ??? success "Befehlsausgabe"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [fabulous_crick] DSL2 - revision: 23e20f76e8
+    Launching `hello-channels.nf` [fabulous_crick] revision: 23e20f76e8
 
     executor >  local (1)
-    [c0/4f1872] process > sayHello (1) [100%] 1 of 1 ✔
+    [c0/4f1872] sayHello (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
     ```
 
 Wenn du beide Änderungen korrekt vorgenommen hast, solltest du eine erfolgreiche Ausführung erhalten.
@@ -229,7 +242,7 @@ Füge diese kleine Zeile zum Workflow-Block hinzu:
 
 === "Danach"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="6"
     workflow {
 
         main:
@@ -271,13 +284,20 @@ nextflow run hello-channels.nf
 ??? success "Befehlsausgabe"
 
     ```console hl_lines="7"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [scruffy_shaw] DSL2 - revision: 2ede41e14a
+    Launching `hello-channels.nf` [scruffy_shaw] revision: 2ede41e14a
 
     executor >  local (1)
-    [ef/f7e40a] sayHello (1) [100%] 1 of 1 ✔
+    [ef/f7e40a] sayHello (1) | 1 of 1 ✔
     Hello Channels!
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
     ```
 
 Wie du sehen kannst, gibt dies die Channel-Inhalte in der Konsole aus.
@@ -302,7 +322,7 @@ Workflows werden typischerweise auf Stapel von Eingaben ausgeführt, die in gro�
 Praktischerweise ist die `channel.of()` Channel Factory, die wir verwendet haben, durchaus bereit, mehr als einen Wert zu akzeptieren, daher müssen wir das überhaupt nicht ändern.
 Wir können einfach mehrere Werte in den Channel laden.
 
-Machen wir sie zu `'Hello'`, `'Bonjour'` und `'Holà'`.
+Machen wir sie zu `'Hello'`, `'Bonjour'` und `'Hola'`.
 
 #### 2.1.1. Weitere Begrüßungen hinzufügen
 
@@ -312,7 +332,7 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // Einen Channel für Eingaben erstellen
-    greeting_ch = channel.of('Hello','Bonjour','Holà')
+    greeting_ch = channel.of('Hello','Bonjour','Hola')
                          .view()
     ```
 
@@ -337,15 +357,24 @@ nextflow run hello-channels.nf
 ??? success "Befehlsausgabe"
 
     ```console hl_lines="6"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [amazing_crick] DSL2 - revision: 59a9a5888a
+    Launching `hello-channels.nf` [amazing_crick] revision: 59a9a5888a
 
     executor >  local (3)
-    [f4/c9962c] process > sayHello (1) [100%] 3 of 3 ✔
+    [f4/c9962c] sayHello (1) | 3 of 3 ✔
     Hello
     Bonjour
-    Holà
+    Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
+        - hello_channels/output.txt
+        - hello_channels/output.txt
     ```
 
 Es scheint tatsächlich gut gelaufen zu sein.
@@ -367,7 +396,7 @@ Allerdings gibt es im Ergebnisverzeichnis immer noch nur eine Ausgabe:
 ??? abstract "Dateiinhalt"
 
     ```console title="results/hello_channels/output.txt"
-    Holà
+    Hola
     ```
 
 Du solltest eine der drei Begrüßungen darin sehen, aber die, die du bekommen hast, könnte anders sein als hier gezeigt.
@@ -420,14 +449,23 @@ nextflow run hello-channels.nf -ansi-log false
 ??? success "Befehlsausgabe"
 
     ```console
-     N E X T F L O W  ~  version 25.10.2
-    Launching `hello-channels.nf` [desperate_monod] DSL2 - revision: 59a9a5888a
+    N E X T F L O W  ~  version 26.04.4
+    Launching `hello-channels.nf` [desperate_monod] - revision: 59a9a5888a
     Hello
     Bonjour
-    Holà
+    Hola
     [23/871c7e] Submitted process > sayHello (2)
     [7f/21e2c2] Submitted process > sayHello (1)
     [f4/ea10a6] Submitted process > sayHello (3)
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
+        - hello_channels/output.txt
+        - hello_channels/output.txt
     ```
 
 Diesmal sehen wir alle drei Prozess-Ausführungen und ihre zugehörigen Work-Unterverzeichnisse in der Ausgabe aufgelistet.
@@ -493,7 +531,7 @@ Wie auch immer, jetzt da wir die Unterverzeichnisse jedes Prozess-Aufrufs haben,
     ```
 
     ```txt title="work/f4/ea10a680d5687596d3eaa3fcf69272/output.txt"
-    Holà
+    Hola
     ```
 
 Dies zeigt, dass alle drei Prozesse erfolgreich ausgeführt wurden (juhu).
@@ -581,15 +619,24 @@ nextflow run hello-channels.nf
 ??? success "Befehlsausgabe"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [sharp_minsky] DSL2 - revision: 16a291febe
+    Launching `hello-channels.nf` [sharp_minsky] revision: 16a291febe
 
     executor >  local (3)
-    [e8/33ee64] sayHello (2) [100%] 3 of 3 ✔
+    [e8/33ee64] sayHello (2) | 3 of 3 ✔
     Hello
     Bonjour
-    Holà
+    Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hola-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 Zurück in der Zusammenfassungsansicht wird die Ausgabe wieder auf einer Zeile zusammengefasst.
@@ -601,11 +648,9 @@ Schau in das `results`-Verzeichnis, um zu sehen, ob alle Ausgabebegrüßungen da
     results/hello_channels/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     └── output.txt
     ```
-
-Ja! Und sie haben jeweils die erwarteten Inhalte.
 
 ??? abstract "Dateiinhalt"
 
@@ -617,8 +662,8 @@ Ja! Und sie haben jeweils die erwarteten Inhalte.
     Hello
     ```
 
-    ```console title="Holà-output.txt"
-    Holà
+    ```console title="Hola-output.txt"
+    Hola
     ```
 
 Erfolg! Jetzt können wir so viele Begrüßungen hinzufügen, wie wir möchten, ohne uns Sorgen zu machen, dass Ausgabedateien überschrieben werden.
@@ -628,7 +673,7 @@ Erfolg! Jetzt können wir so viele Begrüßungen hinzufügen, wie wir möchten, 
     In der Praxis ist das Benennen von Dateien basierend auf den Eingabedaten selbst fast immer unpraktisch.
     Der bessere Weg, dynamische Dateinamen zu generieren, ist, Metadaten zusammen mit den Eingabedateien an einen Prozess zu übergeben.
     Die Metadaten werden typischerweise über ein 'Sample Sheet' oder Äquivalente bereitgestellt.
-    Du wirst später in deinem Nextflow-Training lernen, wie du das machst (siehe [Metadaten-Side Quest](../side_quests/metadata.md)).
+    Du wirst später in deinem Nextflow-Training lernen, wie du das machst (siehe [Metadaten-Side Quest](../side_quests/metadata/index.md)).
 
 ### Fazit
 
@@ -647,7 +692,7 @@ Was ist, wenn wir diese mehreren Eingaben auf eine andere Weise bereitstellen wo
 
 Stell dir zum Beispiel vor, wir richten eine Eingabevariable ein, die ein Array von Elementen enthält wie dieses:
 
-`greetings_array = ['Hello','Bonjour','Holà']`
+`greetings_array = ['Hello','Bonjour','Hola']`
 
 Können wir das in unseren Channel laden und erwarten, dass es funktioniert?
 
@@ -673,9 +718,9 @@ Lass uns die `greetings_array`-Variable, die wir uns gerade vorgestellt haben, R
 
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // Einen Channel für Eingaben erstellen
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
@@ -692,7 +737,7 @@ Lass uns die `greetings_array`-Variable, die wir uns gerade vorgestellt haben, R
 
         main:
         // Einen Channel für Eingaben erstellen
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
@@ -706,7 +751,7 @@ Dies ist noch nicht funktionsfähig, wir haben nur eine Deklaration für das Arr
 
 #### 3.1.2. Das Array von Begrüßungen als Eingabe für die Channel Factory setzen
 
-Jetzt werden wir die Werte `'Hello','Bonjour','Holà'`, die derzeit in der Channel Factory fest codiert sind, durch das `greetings_array` ersetzen, das wir gerade erstellt haben.
+Jetzt werden wir die Werte `'Hello','Bonjour','Hola'`, die derzeit in der Channel Factory fest codiert sind, durch das `greetings_array` ersetzen, das wir gerade erstellt haben.
 
 Nimm im Workflow-Block die folgende Änderung vor:
 
@@ -717,7 +762,7 @@ Nimm im Workflow-Block die folgende Änderung vor:
 
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // Einen Channel für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -736,9 +781,9 @@ Nimm im Workflow-Block die folgende Änderung vor:
 
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // Einen Channel für Eingaben erstellen
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
@@ -761,22 +806,22 @@ nextflow run hello-channels.nf
 ??? failure "Befehlsausgabe"
 
     ```console hl_lines="7 11 16"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [friendly_koch] DSL2 - revision: 97256837a7
+    Launching `hello-channels.nf` [friendly_koch] revision: 97256837a7
 
     executor >  local (1)
     [a8/1f6ead] sayHello (1) | 0 of 1
-    [Hello, Bonjour, Holà]
+    [Hello, Bonjour, Hola]
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
-      Missing output file(s) `[Hello, Bonjour, Holà]-output.txt` expected by process `sayHello (1)`
+      Missing output file(s) `[Hello, Bonjour, Hola]-output.txt` expected by process `sayHello (1)`
 
 
     Command executed:
 
-      echo '[Hello, Bonjour, Holà]' > '[Hello, Bonjour, Holà]-output.txt'
+      echo '[Hello, Bonjour, Hola]' > '[Hello, Bonjour, Hola]-output.txt'
 
     Command exit status:
       0
@@ -796,7 +841,7 @@ Oh nein! Es gibt einen Fehler!
 
 Schau dir die Ausgabe von `view()` und die Fehlermeldungen an.
 
-Es sieht so aus, als hätte Nextflow versucht, einen einzelnen Prozess-Aufruf auszuführen, wobei `[Hello, Bonjour, Holà]` als Stringwert verwendet wurde, anstatt die drei Strings im Array als separate Werte zu verwenden.
+Es sieht so aus, als hätte Nextflow versucht, einen einzelnen Prozess-Aufruf auszuführen, wobei `[Hello, Bonjour, Hola]` als Stringwert verwendet wurde, anstatt die drei Strings im Array als separate Werte zu verwenden.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
@@ -826,7 +871,7 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
 
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // Einen Channel für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -846,7 +891,7 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
 
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // Einen Channel für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -880,7 +925,7 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
 
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // Einen Channel für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
@@ -901,7 +946,7 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
 
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // Einen Channel für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -914,7 +959,7 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
     }
     ```
 
-Du siehst, wir haben eine zweite `.view`-Anweisung hinzugefügt, und für jede von ihnen haben wir die leeren Klammern (`()`) durch geschweifte Klammern mit etwas Code ersetzt, wie `{ greeting -> "Before flatten: $greeting" }`.
+Du siehst, wir haben eine zweite `.view`-Anweisung hinzugefügt, und für jede von ihnen haben wir die leeren Klammern (`()`) durch geschweifte Klammern mit etwas Code ersetzt, wie `#!groovy { greeting -> "Before flatten: $greeting" }`.
 
 Diese werden _Closures_ genannt. Der Code, den sie enthalten, wird für jedes Element im Channel ausgeführt.
 Wir definieren eine temporäre Variable für den inneren Wert, hier `greeting` genannt (aber es könnte ein beliebiger Name sein), die nur innerhalb des Gültigkeitsbereichs dieser Closure verwendet wird.
@@ -941,16 +986,25 @@ nextflow run hello-channels.nf
 ??? success "Befehlsausgabe"
 
     ```console hl_lines="7-10"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [sleepy_gutenberg] DSL2 - revision: 1db4f760ee
+    Launching `hello-channels.nf` [sleepy_gutenberg] revision: 1db4f760ee
 
     executor >  local (3)
-    [b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔
-    Before flatten: [Hello, Bonjour, Holà]
+    [b1/6a1e15] sayHello (2) | 3 of 3 ✔
+    Before flatten: [Hello, Bonjour, Hola]
     After flatten: Hello
     After flatten: Bonjour
-    After flatten: Holà
+    After flatten: Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hola-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 Diesmal funktioniert es UND gibt uns den zusätzlichen Einblick, wie die Inhalte des Channels vor und nach der Ausführung des `flatten()`-Operators aussehen.
@@ -986,7 +1040,7 @@ Wir haben eine CSV-Datei namens `greetings.csv` vorbereitet, die mehrere Eingabe
 ```csv title="data/greetings.csv" linenums="1"
 Hello,English,123
 Bonjour,French,456
-Holà,Spanish,789
+Hola,Spanish,789
 ```
 
 Unsere nächste Aufgabe ist es, unseren Workflow anzupassen, um die Werte aus dieser Datei einzulesen.
@@ -1028,7 +1082,9 @@ Nimm die folgende Änderung an der Parameterdeklaration vor:
     /*
      * Pipeline-Parameter
      */
-    input: String = 'Holà mundo!'
+    params {
+        input: String = 'Hola mundo!'
+    }
     ```
 
 Dies setzt voraus, dass die Datei am selben Ort wie der Workflow-Code liegt.
@@ -1067,7 +1123,7 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
 
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // Einen Channel für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
@@ -1094,12 +1150,12 @@ nextflow run hello-channels.nf
 
 ??? failure "Befehlsausgabe"
 
-    ```console hl_lines="5 6 9 14"
-     N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="5 6 9 15"
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5
+    Launching `hello-channels.nf` [peaceful_poisson] revision: a286c08ad5
 
-    [-        ] sayHello [  0%] 0 of 1
+    [-        ] sayHello | 0 of 1
     Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 
@@ -1198,16 +1254,16 @@ nextflow run hello-channels.nf
 ??? failure "Befehlsausgabe"
 
     ```console hl_lines="7-11 14 19"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [insane_fermat] DSL2 - revision: 8e62fcbeb1
+    Launching `hello-channels.nf` [insane_fermat] revision: 8e62fcbeb1
 
     executor >  local (3)
-    [24/76da2f] sayHello (2) [  0%] 0 of 3 ✘
+    [24/76da2f] sayHello (2) | 0 of 3 ✘
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    After splitCsv: [Hola, Spanish, 789]
     ERROR ~ Error executing process > 'sayHello (2)'
 
     Caused by:
@@ -1318,19 +1374,28 @@ nextflow run hello-channels.nf
 ??? success "Befehlsausgabe"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [focused_volhard] DSL2 - revision: de435e45be
+    Launching `hello-channels.nf` [focused_volhard] revision: de435e45be
 
     executor >  local (3)
-    [54/6eebe3] sayHello (3) [100%] 3 of 3 ✔
+    [54/6eebe3] sayHello (3) | 3 of 3 ✔
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    After splitCsv: [Hola, Spanish, 789]
     After map: Hello
     After map: Bonjour
-    After map: Holà
+    After map: Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Hola-output.txt
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 Diesmal sollte es ohne Fehler laufen.
@@ -1380,7 +1445,7 @@ Was ist ein Channel in Nextflow?
 - [x] Eine warteschlangenartige Struktur zum Übergeben von Daten zwischen Prozessen
 - [ ] Eine Konfigurationseinstellung
 
-Mehr erfahren: [1.1. Einen Eingabe-Channel erstellen](#11-einen-eingabe-channel-erstellen)
+Mehr erfahren: [1.1. Einen Eingabe-Channel erstellen](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1396,7 +1461,7 @@ channel.of('Hello', 'Bonjour', 'Hola')
 - [ ] Nichts (Channels drucken standardmäßig nicht)
 - [ ] Einen Fehler (ungültige Syntax)
 
-Mehr erfahren: [1.1. Einen Eingabe-Channel erstellen](#11-einen-eingabe-channel-erstellen)
+Mehr erfahren: [1.1. Einen Eingabe-Channel erstellen](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1406,7 +1471,7 @@ Wenn ein Channel mehrere Werte enthält, wie handhabt Nextflow die Prozess-Ausf�
 - [ ] Der Prozess läuft nur mit dem ersten Wert
 - [ ] Der Prozess läuft nur mit dem letzten Wert
 
-Mehr erfahren: [2. Den Workflow so modifizieren, dass er mit mehreren Eingabewerten läuft](#2-den-workflow-so-modifizieren-dass-er-mit-mehreren-eingabewerten-lauft)
+Mehr erfahren: [2. Den Workflow so modifizieren, dass er mit mehreren Eingabewerten läuft](#2-modify-the-workflow-to-run-on-multiple-input-values)
 </quiz>
 
 <quiz>
@@ -1416,7 +1481,7 @@ Was macht der `flatten()`-Operator?
 - [x] Entpackt Arrays in einzelne Elemente
 - [ ] Entfernt doppelte Elemente
 
-Mehr erfahren: [3.2.1. Den `flatten()`-Operator hinzufügen](#321-den-flatten-operator-hinzufugen)
+Mehr erfahren: [3.2.1. Den `flatten()`-Operator hinzufügen](#321-add-the-flatten-operator)
 </quiz>
 
 <quiz>
@@ -1426,7 +1491,7 @@ Was ist der Zweck des `view()`-Operators?
 - [x] Channel-Inhalte zu inspizieren und zu debuggen
 - [ ] Channel-Inhalte in eine Datei zu speichern
 
-Mehr erfahren: [1.4. `view()` verwenden, um Channel-Inhalte zu inspizieren](#14-view-verwenden-um-channel-inhalte-zu-inspizieren)
+Mehr erfahren: [1.4. `view()` verwenden, um Channel-Inhalte zu inspizieren](#14-use-view-to-inspect-the-channel-contents)
 </quiz>
 
 <quiz>
@@ -1436,7 +1501,7 @@ Was macht `splitCsv()`?
 - [x] Parst eine CSV-Datei in Arrays, die jede Zeile repräsentieren
 - [ ] Führt mehrere CSV-Dateien zusammen
 
-Mehr erfahren: [4.2. Den `splitCsv()`-Operator verwenden, um die Datei zu parsen](#42-den-splitcsv-operator-verwenden-um-die-datei-zu-parsen)
+Mehr erfahren: [4.2. Den `splitCsv()`-Operator verwenden, um die Datei zu parsen](#42-use-the-splitcsv-operator-to-parse-the-file)
 </quiz>
 
 <quiz>
@@ -1446,7 +1511,7 @@ Was ist der Zweck des `map()`-Operators?
 - [x] Jedes Element in einem Channel zu transformieren
 - [ ] Elemente in einem Channel zu zählen
 
-Mehr erfahren: [4.3. Den `map()`-Operator verwenden, um die Begrüßungen zu extrahieren](#43-den-map-operator-verwenden-um-die-begrussungen-zu-extrahieren)
+Mehr erfahren: [4.3. Den `map()`-Operator verwenden, um die Begrüßungen zu extrahieren](#43-use-the-map-operator-to-extract-the-greetings)
 </quiz>
 
 <quiz>
@@ -1456,5 +1521,5 @@ Warum ist es wichtig, dynamische Ausgabedateinamen zu verwenden, wenn mehrere Ei
 - [x] Um zu verhindern, dass sich Ausgabedateien gegenseitig überschreiben
 - [ ] Um die Resume-Funktionalität zu aktivieren
 
-Mehr erfahren: [2.2. Sicherstellen, dass die Ausgabedateinamen eindeutig sind](#22-sicherstellen-dass-die-ausgabedateinamen-eindeutig-sind)
+Mehr erfahren: [2.2. Sicherstellen, dass die Ausgabedateinamen eindeutig sind](#22-ensure-the-output-file-names-will-be-unique)
 </quiz>

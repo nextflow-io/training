@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=fr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -23,7 +23,7 @@ Tout cela est très fastidieux et ennuyeux, donc nous allons vous montrer commen
 Un **conteneur** est une unité logicielle légère, autonome et exécutable créée à partir d'une **image** de conteneur qui inclut tout ce qui est nécessaire pour exécuter une application, y compris le code, les bibliothèques système et les paramètres.
 Comme vous pouvez l'imaginer, cela va être très utile pour rendre vos pipelines plus reproductibles.
 
-Notez que nous enseignerons ceci en utilisant [Docker](https://www.docker.com/get-started/), mais gardez à l'esprit que Nextflow prend en charge [plusieurs autres technologies de conteneurs](https://www.nextflow.io/docs/latest/container.html#) également.
+Notez que nous enseignerons ceci en utilisant [Docker](https://www.docker.com/get-started/), mais gardez à l'esprit que Nextflow prend en charge [plusieurs autres technologies de conteneurs](https://nextflow.io/docs/latest/container.html) également.
 
 ??? info "Comment commencer à partir de cette section"
 
@@ -72,15 +72,29 @@ nextflow run hello-containers.nf
 ??? success "Sortie de la commande"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872
+    Launching `hello-containers.nf` [nice_escher] revision: d5dfdc9872
 
-    executor > local (7)
-    [5a/ec1fa1] sayHello (2) [100%] 3 of 3 ✔
-    [30/32b5b8] convertToUpper (3) [100%] 3 of 3 ✔
-    [d3/be01bc] collectGreetings [100%] 1 of 1 ✔
+    executor >  local (7)
+    [5a/ec1fa1] sayHello (2)       | 3 of 3 ✔
+    [30/32b5b8] convertToUpper (3) | 3 of 3 ✔
+    [d3/be01bc] collectGreetings   | 1 of 1 ✔
 
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_containers/Hola-output.txt
+        - hello_containers/Bonjour-output.txt
+        - hello_containers/Hello-output.txt
+      uppercased:
+        - hello_containers/UPPER-Bonjour-output.txt
+        - hello_containers/UPPER-Hola-output.txt
+        - hello_containers/UPPER-Hello-output.txt
+      collected: hello_containers/COLLECTED-batch-output.txt
+      batch_report: hello_containers/batch-report.txt
     ```
 
 Comme précédemment, vous trouverez les fichiers de sortie dans le répertoire spécifié dans le bloc `output` (`results/hello_containers/`).
@@ -92,11 +106,11 @@ Comme précédemment, vous trouverez les fichiers de sortie dans le répertoire 
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Si cela a fonctionné pour vous, vous êtes prêt·e à apprendre comment utiliser les conteneurs.
@@ -115,7 +129,7 @@ Pour utiliser un conteneur, vous téléchargez généralement ou _tirez_ une ima
 
 La syntaxe générale est la suivante :
 
-```bash title="Syntaxe"
+```bash title="Syntax"
 docker pull '<container>'
 ```
 
@@ -125,7 +139,7 @@ La partie `'<container>'` est l'adresse URI de l'image de conteneur.
 
 À titre d'exemple, tirons une image de conteneur qui contient [cowpy](https://github.com/jeffbuttars/cowpy), une implémentation Python d'un outil appelé `cowsay` qui génère de l'art ASCII pour afficher des entrées de texte arbitraires de manière amusante.
 
-```txt title="Exemple"
+```txt title="Example"
  ________________________
 < Are we having fun yet? >
  ------------------------
@@ -187,8 +201,8 @@ C'est idéal pour exécuter des commandes ponctuelles.
 
 La syntaxe générale est la suivante :
 
-```bash title="Syntaxe"
-docker run --rm '<container>' [commande de l'outil]
+```bash title="Syntax"
+docker run --rm '<container>' [tool command]
 ```
 
 La partie `docker run --rm '<container>'` est l'instruction au système de conteneur pour démarrer une instance de conteneur à partir d'une image de conteneur et exécuter une commande à l'intérieur.
@@ -259,22 +273,22 @@ Maintenant que vous êtes à l'intérieur du conteneur, vous pouvez exécuter la
 Par exemple, la documentation de l'outil dit que nous pouvons changer le personnage (« cowacter ») avec `-c`.
 
 ```bash
-cowpy "Hello Containers" -c tux
+echo "Hello Containers" | cowpy -c tux
 ```
 
 ??? success "Sortie de la commande"
 
     ```console
-    __________________
+     __________________
     < Hello Containers >
-    ------------------
-      \
+     ------------------
+       \
         \
             .--.
-          |o_o |
-          |:_/ |
+           |o_o |
+           |:_/ |
           //   \ \
-        (|     | )
+         (|     | )
         /'\_   _/`\
         \___)=(___/
     ```
@@ -283,7 +297,7 @@ Maintenant, la sortie montre le pingouin Linux, Tux, au lieu de la vache par dé
 
 Parce que vous êtes à l'intérieur du conteneur, vous pouvez exécuter la commande `cowpy` autant de fois que vous le souhaitez, en variant les paramètres d'entrée, sans avoir à vous soucier des commandes Docker.
 
-!!! tip "Astuce"
+!!! Tip "Astuce"
 
     Utilisez le flag '-c' pour choisir un personnage différent, y compris :
     `beavis`, `cheese`, `daemon`, `dragonandcow`, `ghostbusters`, `kitty`, `moose`, `milk`, `stegosaurus`, `turkey`, `turtle`, `tux`
@@ -309,8 +323,8 @@ Comme noté précédemment, le conteneur est isolé du système hôte par défau
 
 Pour permettre au conteneur d'accéder au système de fichiers hôte, vous pouvez **monter** un **volume** depuis le système hôte dans le conteneur en utilisant la syntaxe suivante :
 
-```bash title="Syntaxe"
--v <chemin_extérieur>:<chemin_intérieur>
+```bash title="Syntax"
+-v <outside_path>:<inside_path>
 ```
 
 Dans notre cas, `<chemin_extérieur>` sera le répertoire de travail actuel, donc nous pouvons simplement utiliser un point (`.`), et `<chemin_intérieur>` est juste un alias que nous inventons ; appelons-le `/my_project` (le chemin intérieur doit être absolu).
@@ -356,7 +370,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
      ____________________
     / Hello,English,123  \
     | Bonjour,French,456 |
-    \ Holà,Spanish,789   /
+    \ Hola,Spanish,789   /
     --------------------
       \                                  ,+*^^*+___+++_
       \                           ,*^^^^              )
@@ -561,7 +575,7 @@ C'est techniquement optionnel mais c'est la pratique recommandée et c'est une o
     }
     ```
 
-Maintenant nous pouvons être paresseux et éviter de taper le paramètre character dans nos lignes de commande.
+Maintenant nous pouvons être paresseux·ses et éviter de taper le paramètre character dans nos lignes de commande.
 
 #### 2.2.4. Mettre à jour les sorties du workflow
 
@@ -667,22 +681,22 @@ Pensez-vous que ça va fonctionner ?
 Supprimons les sorties publiées précédentes pour avoir une page blanche, et exécutons le workflow avec le flag `-resume`.
 
 ```bash
-rm -r hello_containers/
+rm -r results/hello_containers/
 nextflow run hello-containers.nf -resume
 ```
 
 ??? failure "Sortie de la commande (éditée pour la clarté)"
 
     ```console hl_lines="10 13 20-21 26-27"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [lonely_woese] DSL2 - revision: abf1dccf7f
+    Launching `hello-containers.nf` [lonely_woese] revision: abf1dccf7f
 
     executor >  local (1)
-    [c9/f5c686] sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [ef/3135a8] convertToUpper (3) [100%] 3 of 3, cached: 3 ✔
-    [7f/f435e3] collectGreetings   [100%] 1 of 1, cached: 1 ✔
-    [9b/02e776] cowpy              [  0%] 0 of 1 ✘
+    [c9/f5c686] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔
+    [9b/02e776] cowpy              | 0 of 1 ✘
     ERROR ~ Error executing process > 'cowpy'
 
     Caused by:
@@ -706,9 +720,6 @@ nextflow run hello-containers.nf -resume
       /workspaces/training/hello-nextflow/work/9b/02e7761db848f82db3c3e59ff3a9b6
 
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-
-    -- Check '.nextflow.log' file for details
-    ERROR ~ Cannot access first() element from an empty List
 
     -- Check '.nextflow.log' file for details
     ```
@@ -811,15 +822,31 @@ nextflow run hello-containers.nf -resume
 ??? success "Sortie de la commande"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-containers.nf` [drunk_perlman] DSL2 - revision: abf1dccf7f
+    Launching `hello-containers.nf` [drunk_perlman] revision: abf1dccf7f
 
     executor >  local (1)
-    [c9/f5c686] sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [ef/3135a8] convertToUpper (3) [100%] 3 of 3, cached: 3 ✔
-    [7f/f435e3] collectGreetings   [100%] 1 of 1, cached: 1 ✔
-    [98/656c6c] cowpy              [100%] 1 of 1 ✔
+    [c9/f5c686] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔
+    [98/656c6c] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_containers/intermediates/Bonjour-output.txt
+        - hello_containers/intermediates/Hola-output.txt
+        - hello_containers/intermediates/Hello-output.txt
+      uppercased:
+        - hello_containers/intermediates/UPPER-Hola-output.txt
+        - hello_containers/intermediates/UPPER-Bonjour-output.txt
+        - hello_containers/intermediates/UPPER-Hello-output.txt
+      collected: hello_containers/intermediates/COLLECTED-batch-output.txt
+      batch_report: hello_containers/batch-report.txt
+      cowpy_art: hello_containers/cowpy-COLLECTED-batch-output.txt
     ```
 
 Cette fois, cela fonctionne effectivement !
@@ -834,10 +861,10 @@ Comme d'habitude, vous pouvez trouver les sorties du workflow dans le répertoir
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
@@ -847,7 +874,7 @@ La sortie finale d'art ASCII est dans le répertoire `results/hello_containers/`
 
     ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -1057,7 +1084,7 @@ Tout le travail difficile que nous avons dû faire manuellement dans la premièr
 
 ```txt
  _______________________
-< Hourra pour les robots...! >
+< Hurray for robots...! >
  -----------------------
                                    ,-----.
                                    |     |
@@ -1116,7 +1143,7 @@ Que fait le flag `-v` dans une commande `docker run` ?
 - [x] Monte un volume depuis le système hôte dans le conteneur
 - [ ] Spécifie la version du conteneur
 
-En savoir plus : [1.3.4. Monter des données dans le conteneur](#134-monter-des-donnees-dans-le-conteneur)
+En savoir plus : [1.3.4. Monter des données dans le conteneur](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1126,7 +1153,7 @@ Pourquoi avez-vous besoin de monter des volumes lors de l'utilisation de contene
 - [x] Parce que les conteneurs sont isolés du système de fichiers hôte par défaut
 - [ ] Pour activer le réseau
 
-En savoir plus : [1.3.4. Monter des données dans le conteneur](#134-monter-des-donnees-dans-le-conteneur)
+En savoir plus : [1.3.4. Monter des données dans le conteneur](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1136,7 +1163,7 @@ Comment spécifiez-vous un conteneur pour un processus Nextflow ?
 - [x] `container 'container-uri'`
 - [ ] `use 'container-uri'`
 
-En savoir plus : [2.3.1. Spécifier un conteneur pour cowpy](#231-specifier-un-conteneur-pour-cowpy)
+En savoir plus : [2.3.1. Spécifier un conteneur pour cowpy](#231-specify-a-container-for-cowpy)
 </quiz>
 
 <quiz>
@@ -1146,7 +1173,7 @@ Quel paramètre `nextflow.config` active Docker pour votre workflow ?
 - [ ] `#!groovy container.engine = 'docker'`
 - [ ] `#!groovy docker.activate = true`
 
-En savoir plus : [2.3.2. Activer l'utilisation de Docker via le fichier `nextflow.config`](#232-activer-lutilisation-de-docker-via-le-fichier-nextflowconfig)
+En savoir plus : [2.3.2. Activer l'utilisation de Docker via le fichier `nextflow.config`](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 
 <quiz>
@@ -1156,5 +1183,5 @@ Que gère automatiquement Nextflow lors de l'exécution d'un processus dans un c
 - [x] Exécuter le script du processus à l'intérieur du conteneur
 - [x] Nettoyer l'instance du conteneur après l'exécution
 
-En savoir plus : [2.3.4. Inspecter comment Nextflow a lancé la tâche conteneurisée](#234-inspecter-comment-nextflow-a-lance-la-tache-contenerisee)
+En savoir plus : [2.3.4. Inspecter comment Nextflow a lancé la tâche conteneurisée](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>

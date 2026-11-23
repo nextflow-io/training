@@ -7,11 +7,12 @@ index_type: course
 additional_information:
   technical_requirements: true
   learning_objectives:
-    - Llançar i gestionar l'execució de workflows de Nextflow
-    - Trobar i interpretar sortides (resultats) i fitxers de registre
-    - Reconèixer components bàsics de Nextflow en un workflow senzill de múltiples passos
-    - Configurar l'execució de pipelines per executar-se en plataformes de computació comunes, incloent HPC i núvol
-    - Resumir les millors pràctiques per a la reproducibilitat, portabilitat i reutilització de codi que fan que els pipelines siguin FAIR, incloent la modularitat del codi i els contenidors de programari
+    - Llançar i gestionar pipelines de Nextflow des de la línia de comandes
+    - Entendre com els canals i els operadors permeten workflows eficients amb múltiples entrades i múltiples passos
+    - Utilitzar contenidors per gestionar les dependències de programari i garantir la reproducibilitat
+    - Configurar l'execució de pipelines i les sortides
+    - Generar informes d'execució, inspeccionar l'historial d'execucions anteriors i netejar directoris de treball antics
+    - Executar pipelines directament des de repositoris remots com GitHub
   audience_prerequisites:
     - "**Audiència:** Aquest curs està dissenyat per a estudiants que són completament nous a Nextflow i volen executar pipelines existents."
     - "**Habilitats:** S'assumeix certa familiaritat amb la línia de comandes, conceptes bàsics de scripting i formats de fitxer comuns."
@@ -24,7 +25,7 @@ additional_information:
 
 **Nextflow Run és una introducció pràctica a l'execució de workflows d'anàlisi de dades reproduïbles i escalables.**
 
-Treballant amb exemples pràctics i exercicis guiats, aprendràs els fonaments de l'ús de Nextflow, incloent com executar pipelines, gestionar fitxers i dependències de programari, paral·lelitzar l'execució sense esforç, i executar workflows en diferents entorns de computació.
+Treballant amb una sèrie d'exercicis orientats a objectius, aprendràs els fonaments per llançar i gestionar pipelines de Nextflow, entendràs com els canals i els operadors permeten el processament paral·lel de múltiples entrades, i utilitzaràs contenidors per gestionar les dependències de programari.
 
 Obtindràs les habilitats i la confiança per començar a executar workflows amb Nextflow.
 
@@ -32,25 +33,25 @@ Obtindràs les habilitats i la confiança per començar a executar workflows amb
 
 ## Visió general del curs
 
-### Què faràs
-
 Aquest curs és pràctic, amb exercicis orientats a objectius estructurats per introduir informació gradualment.
 
-Executaràs diverses versions d'un pipeline de Nextflow que processa entrades de text.
-Començaràs amb una versió senzilla que consisteix en un sol pas, i eventualment progressaràs a una versió de múltiples passos que pren un fitxer CSV d'entrades de text tabulars, executa uns quants passos de transformació, i genera un únic fitxer de text que conté una imatge ASCII d'un personatge dient el text transformat.
+Executaràs diverses versions d'un pipeline de Nextflow que processa entrades de text, començant amb una versió senzilla d'un sol pas i progressant fins a una versió de múltiples passos que pren un fitxer CSV d'entrades, executa uns quants passos de transformació i genera un únic fitxer de text que conté art ASCII generat per una eina en contenidor.
 
 Aquest curs se centra en l'execució de pipelines (anomenat així per la comanda bàsica `nextflow run`).
 Si busques una introducció al desenvolupament de pipelines de Nextflow, consulta [Hello Nextflow](../hello_nextflow/index.md).
 
+!!! note "Nota"
+
+    Busques la versió anterior d'aquest curs? Ha estat substituïda per la versió d'aquesta pàgina, però encara es pot consultar a la [versió 3.6.1](https://training.nextflow.io/3.6.1/nextflow_run/) del lloc de formació.
+
 ### Pla de lliçons
 
-Hem dividit això en tres parts que se centraran cadascuna en aspectes específics de l'execució i gestió de pipelines escrits en Nextflow.
-
-| Capítol del curs                                         | Resum                                                                                                                                | Durada estimada |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| [Part 1: Operacions bàsiques d'execució](./01_basics.md) | Llançar i gestionar l'execució d'un workflow senzill                                                                                 | 30 minuts       |
-| [Part 2: Executar pipelines reals](./02_pipeline.md)     | Processar entrades complexes, executar workflows de múltiples passos, utilitzar contenidors i paral·lelitzar l'execució sense esforç | 60 minuts       |
-| [Part 3: Configuració d'execució](./03_config.md)        | Personalitzar el comportament del pipeline i optimitzar l'ús en diferents entorns computacionals                                     | 60 minuts       |
+| Capítol del curs                                                           | Resum                                                                                                               | Durada estimada |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------- |
+| [Part 1: Executar Nextflow](./01_run_nextflow.md)                          | Llançar i gestionar pipelines de Nextflow, i entendre la mecànica essencial dels workflows                          | 25 min          |
+| [Part 2: Configurar el pipeline](./02_configure_pipeline.md)               | Configurar l'execució del pipeline i les sortides mitjançant `nextflow.config`                                      | 20 min          |
+| [Part 3: Gestionar les execucions del workflow](./03_manage_executions.md) | Generar informes d'execució, inspeccionar l'historial d'execucions anteriors i netejar directoris de treball antics | 10 min          |
+| [Part 4: Executar pipelines remots](./04_remote_repositories.md)           | Executar un pipeline directament des de GitHub i fixar-lo a una revisió específica                                  | 10 min          |
 
 Al final d'aquest curs, estaràs ben preparat/da per abordar els següents passos en el teu viatge per executar workflows reproduïbles per a les teves necessitats de computació científica.
 

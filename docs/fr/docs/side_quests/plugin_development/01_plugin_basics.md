@@ -88,7 +88,7 @@ nextflow run hello.nf
 ```console title="Output"
 Output: Hello_aBcDeFgH
 Output: Bonjour_xYzWvUtS
-Output: Holà_qRsPdMnK
+Output: Hola_qRsPdMnK
 Output: Ciao_jLhGfEcB
 Output: Hallo_tNwOiAuR
 ```
@@ -194,7 +194,7 @@ nextflow run hello.nf
 Pipeline is starting! 🚀
 Output: Hello_yqvtclcc
 Output: Bonjour_vwwpyzcs
-Output: Holà_wrghmgab
+Output: Hola_wrghmgab
 Output: Ciao_noniajuy
 Output: Hallo_tvrtuxtp
 Pipeline complete! 👋
@@ -354,7 +354,7 @@ nextflow run hello.nf
 Pipeline is starting! 🚀
 Output: Hello_diozjdwm
 Output: Bonjour_speathmm
-Output: Holà_dllxnzap
+Output: Hola_dllxnzap
 Output: Ciao_wzueddzc
 Output: Hallo_hsxwrjbh
 Pipeline complete! 👋
@@ -375,7 +375,7 @@ Renommez la colonne obligatoire `greeting` en `message` :
 message,language
 Hello,English
 Bonjour,French
-Holà,Spanish
+Hola,Spanish
 Ciao,Italian
 Hallo,German
 ```
@@ -386,7 +386,7 @@ Exécutez le pipeline :
 nextflow run hello.nf
 ```
 
-```console title="Output"
+```console title="Output (partial)"
 ERROR ~ Validation of samplesheet failed!
 
 The following errors have been detected in greetings.csv:
@@ -396,6 +396,8 @@ The following errors have been detected in greetings.csv:
 -> Entry 3: Missing required field(s): greeting
 -> Entry 4: Missing required field(s): greeting
 -> Entry 5: Missing required field(s): greeting
+
+ -- Check script 'hello.nf' at line: 20 or see '.nextflow.log' file for more details
 ```
 
 Le pipeline refuse de s'exécuter car le schéma exige une colonne `greeting` et ne peut pas en trouver une.
@@ -406,7 +408,7 @@ Maintenant, restaurez la colonne obligatoire mais renommez la colonne optionnell
 greeting,lang
 Hello,English
 Bonjour,French
-Holà,Spanish
+Hola,Spanish
 Ciao,Italian
 Hallo,German
 ```
@@ -478,7 +480,7 @@ Restaurez `greetings.csv` à son état d'origine et supprimez le bloc `validatio
 greeting,language
 Hello,English
 Bonjour,French
-Holà,Spanish
+Hola,Spanish
 Ciao,Italian
 Hallo,German
 ```
@@ -511,7 +513,7 @@ Mettez à jour `nextflow.config` :
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -534,8 +536,10 @@ Le plugin produit plusieurs messages INFO et WARN pendant l'exécution.
 Ceux-ci sont normaux pour un petit exemple s'exécutant sur une machine locale :
 
 ```console title="Output (partial)"
-nf-co2footprint plugin  ~  version 1.2.0
+nf-co2footprint plugin  ~  version 1.3.0
+INFO - [nf-co2footprint] 🔕 Repeated task-specific messages (🔁) are only logged once in the console. Further occurrences are logged at DEBUG level, appearing only in the `.nextflow.log` file.
 WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.
+INFO - [nf-co2footprint] Electricity Maps API key is not set. To retrieve real-time carbon intensity values, please provide a key with the parameter `emApiKey`.
 INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.
 WARN - [nf-co2footprint] Executor 'null' not mapped.
 WARN - [nf-co2footprint] Fallback to: `machineType = null`, `pue = 1.0`. ...
@@ -550,7 +554,7 @@ Dans un environnement de production (par exemple, un cluster HPC ou le cloud), c
 À la fin, recherchez une ligne comme :
 
 ```console title="Output (partial)"
-🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.
+INFO - [nf-co2footprint] 🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.
 ```
 
 (Vos chiffres seront différents.)
@@ -559,33 +563,27 @@ Dans un environnement de production (par exemple, un cluster HPC ou le cloud), c
 
 Le plugin génère des fichiers de sortie dans votre répertoire de travail :
 
-```bash
-ls co2footprint_*
-```
+??? abstract "Contenu du répertoire"
 
-```console title="Output"
-co2footprint_report_<timestamp>.html
-co2footprint_summary_<timestamp>.txt
-co2footprint_trace_<timestamp>.txt
-```
+    ```console
+    co2footprint_report_<timestamp>.html
+    co2footprint_summary_<timestamp>.txt
+    co2footprint_trace_<timestamp>.txt
+    ```
 
-Examinez le résumé :
+??? abstract "Contenu du fichier"
 
-```bash
-cat co2footprint_summary_*.txt
-```
+    ```console title="co2footprint_summary_<timestamp>.txt"
+    Total CO₂e footprint measures of this workflow run (including cached tasks):
+      CO₂e emissions: 60.84 ug
+      Energy consumption: 126.76 uWh
+      CO₂e emissions (market): -
 
-```console title="Output"
-Total CO₂e footprint measures of this workflow run (including cached tasks):
-  CO₂e emissions: 60.84 ug
-  Energy consumption: 126.76 uWh
-  CO₂e emissions (market): -
-
-Which equals:
-  - 3.48E-7 km travelled by car
-  - It takes one tree 0.17s to sequester the equivalent amount of CO₂ from the atmosphere
-  - 1.22E-7 % of a flight from Paris to London
-```
+    Which equals:
+      - 3.48E-7 km travelled by car
+      - It takes one tree 0.17s to sequester the equivalent amount of CO₂ from the atmosphere
+      - 1.22E-7 % of a flight from Paris to London
+    ```
 
 (Vos chiffres seront différents.)
 
@@ -606,7 +604,7 @@ Ajoutez un bloc `co2footprint` à `nextflow.config` :
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
 
     co2footprint {
@@ -620,7 +618,7 @@ Ajoutez un bloc `co2footprint` à `nextflow.config` :
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -640,11 +638,6 @@ INFO - [nf-co2footprint] Using fallback carbon intensity from GB from CI table: 
 
 L'avertissement de zone a disparu.
 Le plugin utilise maintenant l'intensité carbone spécifique à la Grande-Bretagne (163,92 gCO₂eq/kWh) au lieu de la valeur de repli mondiale (480,0 gCO₂eq/kWh).
-
-!!! note "Note"
-
-    Vous pouvez également voir un message `WARN: Unrecognized config option 'co2footprint.location'`.
-    Il s'agit d'un message cosmétique qui peut être ignoré en toute sécurité ; le plugin lit toujours la valeur correctement.
 
 Dans la Partie 6, vous créerez une portée de configuration pour votre propre plugin.
 

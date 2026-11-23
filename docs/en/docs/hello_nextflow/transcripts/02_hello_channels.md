@@ -134,7 +134,7 @@ If you're interested in how to do this with best practices, there's a side quest
 
 Okay. Next we're gonna explore a little bit about how channels are structured and how they differ to other kinds of data structures in the coding language. And I'm gonna think a little bit about how I could potentially use an array, which might be a familiar concept if you've come from other languages.
 
-Can I use an array in a channel? Let's try it. I'm going to create an array, and I've copied this from the docs, _"greetings_array"_ and _"Hello", "Bonjour" \_and_ "Holà"_. And then I'm gonna put that here instead of my hardcoded strings. So I'm gonna say "channel.of" _"greetings_array",\_ passing this array into a channel. Let's try it.
+Can I use an array in a channel? Let's try it. I'm going to create an array, and I've copied this from the docs, _"greetings_array"_ and _"Hello", "Bonjour" \_and_ "Hola"_. And then I'm gonna put that here instead of my hardcoded strings. So I'm gonna say "channel.of" _"greetings_array",\_ passing this array into a channel. Let's try it.
 
 Bring up the terminal, and run the pipeline.
 
@@ -210,7 +210,7 @@ Okay, let's have a look at this, channel and see what it looks like. We can do _
 
 If I run it again, it will still fail, but it will show us what's inside this channel. It is not particularly exciting. It is that _path_ variable. So you can see it's just a string here because it's being printed to a terminal, but it is a _path_ object, which contains the information and metadata about this file.
 
-We don't wanna pass the metadata of the file to the input. We want to pass the contents of that file. If we look at the _greetings.csv_ file, you can see here that it's got these different variables here. _Hello, Bonjour, Holà_ again. And these are the things really we want to be passing to our process, not just the file itself as a single object.
+We don't wanna pass the metadata of the file to the input. We want to pass the contents of that file. If we look at the _greetings.csv_ file, you can see here that it's got these different variables here. _Hello, Bonjour, Hola_ again. And these are the things really we want to be passing to our process, not just the file itself as a single object.
 
 So we need to parse this CSV file. We need to unpack it, get at the contents of the CSV file, and then pass the contents within the channel to the process.
 
@@ -244,7 +244,7 @@ Arrays in Nextflow are zero based, so we're gonna say just the first element, wh
 
 And now, we can run the pipeline again and see if it does what we expect.
 
-Sure enough, after _splitCsv_ we've got our arrays, and then after the _map,_ we have our nice clean strings, just _"Hello", "Bonjour"_ and _"Holà"_. And the pipeline is now doing what we want it to. Fantastic.
+Sure enough, after _splitCsv_ we've got our arrays, and then after the _map,_ we have our nice clean strings, just _"Hello", "Bonjour"_ and _"Hola"_. And the pipeline is now doing what we want it to. Fantastic.
 
 So we can get rid of all these view commands now. We don't need them anymore.
 

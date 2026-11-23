@@ -171,7 +171,7 @@ Czytanie kodu produkcyjnych wtyczek to jeden z najlepszych sposobów na poznanie
 
 **Oficjalna dokumentacja:**
 
-- [Using plugins](https://www.nextflow.io/docs/latest/plugins/plugins.html): kompleksowy przewodnik po instalacji i konfiguracji wtyczek
+- [Using plugins](https://www.nextflow.io/docs/latest/plugins/using-plugins.html): kompleksowy przewodnik po instalacji i konfiguracji wtyczek
 - [Developing plugins](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html): szczegółowe źródło wiedzy o tworzeniu wtyczek
 - [Config scopes](https://nextflow.io/docs/latest/developer/config-scopes.html): tworzenie zakresów konfiguracji dla wtyczek
 

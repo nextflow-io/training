@@ -80,7 +80,7 @@ code molkart/nextflow.config
 
 Recherchez le bloc `profiles` :
 
-```groovy title="molkart/nextflow.config (extrait)"
+```groovy title="molkart/nextflow.config (excerpt)"
 profiles {
     docker {
         docker.enabled          = true
@@ -130,16 +130,17 @@ Décomposons ce que fait chaque drapeau :
 Comme nous utilisons `-resume`, Nextflow vérifiera si quelque chose a changé depuis la dernière exécution.
 Si les paramètres, les entrées et le code sont identiques, toutes les tâches seront récupérées du cache et le pipeline se terminera presque instantanément.
 
-```console title="Sortie (extrait)"
-executor >  local (12)
+```console title="Output (excerpt)"
+executor >  local (1)
+[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔
 ...
-[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔
-[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔
-...
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 1 of 1, cached: 1 ✔
+[ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
 -[nf-core/molkart] Pipeline completed successfully-
 ```
 
-Remarquez que tous les processus affichent `cached: 2` ou `cached: 1` - rien n'a été ré-exécuté !
+Remarquez l'annotation `cached: N` sur chaque processus — les tâches de prétraitement et de segmentation en cache n'ont pas été ré-exécutées.
 
 ### 2.4. Profils de test
 
@@ -151,7 +152,7 @@ Les pipelines nf-core incluront toujours au moins deux profils de test :
 
 Examinons de plus près le profil `test` dans molkart qui est inclus à l'aide de la directive `includeConfig` :
 
-```groovy title="molkart/nextflow.config (extrait)"
+```groovy title="molkart/nextflow.config (excerpt)"
 profiles {
   ...
     test      { includeConfig 'conf/test.config'      }
@@ -160,7 +161,7 @@ profiles {
 
 Cela signifie que chaque fois que nous exécutons le pipeline avec `-profile test`, Nextflow chargera la configuration depuis `conf/test.config`.
 
-```groovy title="molkart/conf/test.config (extrait)"
+```groovy title="molkart/conf/test.config (excerpt)"
 params {
     config_profile_name        = 'Test profile'
     config_profile_description = 'Minimal test dataset to check pipeline function'
@@ -175,8 +176,8 @@ params {
 
 process {
     resourceLimits = [
-        cpus: 4,
-        memory: '15.GB',
+        cpus: 1,
+        memory: '4.GB',
         time: '1.h'
     ]
 }
@@ -246,7 +247,7 @@ nextflow run ./molkart -profile local_dev --input data/samplesheet.csv --outdir 
 nextflow run ./molkart -profile hpc_cluster --input data/samplesheet.csv --outdir results
 ```
 
-!!! Note
+!!! Note "Note"
 
     Nous ne pouvons pas tester le profil HPC dans cet environnement de formation car nous n'avons pas accès à un planificateur Slurm.
     Mais cela montre comment vous le configureriez pour une utilisation réelle.
@@ -292,13 +293,13 @@ Pour plus de simplicité, les pipelines nf-core utilisent des [**étiquettes de 
 Chaque processus est étiqueté avec une étiquette comme `process_low`, `process_medium` ou `process_high` pour décrire respectivement des besoins en ressources de calcul faibles, moyens ou élevés.
 Ces étiquettes sont converties en demandes de ressources spécifiques dans l'un des fichiers de configuration situés dans le répertoire `conf/` du pipeline.
 
-```groovy title="molkart/conf/base.config (extrait)"
+```groovy title="molkart/conf/base.config (excerpt)"
 process {
     cpus   = { 1      * task.attempt }
     memory = { 6.GB   * task.attempt }
     time   = { 4.h    * task.attempt }
 
-    errorStrategy = { task.exitStatus in ((130..145) + 104) ? 'retry' : 'finish' }
+    errorStrategy = { task.exitStatus in ((130..145) + 104 + 175) ? 'retry' : 'finish' }
     maxRetries    = 1
     maxErrors     = '-1'
 
@@ -447,6 +448,6 @@ Félicitations pour avoir terminé le cours Nextflow pour la bio-imagerie !
 Prochaines étapes :
 
 - Remplissez le questionnaire du cours pour fournir des commentaires
-- Consultez [Hello Nextflow](../hello_nextflow/index.md) pour en savoir plus sur le développement de workflows
-- Explorez [Hello nf-core](../hello_nf-core/index.md) pour approfondir les outils nf-core
-- Parcourez d'autres cours dans les [collections de formation](../training_collections/index.md)
+- Consultez [Hello Nextflow](../../hello_nextflow/index.md) pour en savoir plus sur le développement de workflows
+- Explorez [Build with nf-core](../../nfcore_build/index.md) pour approfondir les outils nf-core
+- Explorez des sujets plus avancés dans les [Quêtes secondaires](../../side_quests/index.md)

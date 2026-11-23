@@ -4,6 +4,7 @@
 **/docs/help.md
 **/docs/envsetup/index.md
 **/docs/hello_nextflow/index.md
+**/docs/training_events.md
 
 # Ignore all files in side-quests/solutions
 side-quests/solutions/nf-core/**/*.js
@@ -18,3 +19,7 @@ hello-nf-core/solutions/core-hello-*/**
 
 # Ignore auto-generated license files in plugin solutions
 side-quests/plugin_development/**/COPYING
+
+# prettier's HTML formatter doesn't understand Jinja string literals and will
+# insert a real newline in the middle of a quoted string, corrupting it
+docs/en/overrides/partials/actions.html

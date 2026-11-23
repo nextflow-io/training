@@ -52,12 +52,18 @@ nextflow run hello-channels.nf --input 'Hello Channels!'
 ??? success "Saída do comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [wise_jennings] DSL2 - revision: b24f4902d6
+    Launching `hello-channels.nf` [wise_jennings] revision: b24f4902d6
 
     executor >  local (1)
-    [6f/824bc1] process > sayHello [100%] 1 of 1 ✔
+    [6f/824bc1] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_channels/output.txt
     ```
 
 Como anteriormente, você encontrará o arquivo de saída chamado `output.txt` no diretório `results/hello_channels` (como especificado no bloco `output` do script de fluxo de trabalho, mostrado acima).
@@ -95,7 +101,7 @@ Funcionalmente, isso será semelhante a como tínhamos configurado antes, mas em
 
 Esta é a linha de código que vamos usar:
 
-```console title="Sintaxe"
+```console title="Syntax"
 greeting_ch = channel.of('Hello Channels!')
 ```
 
@@ -196,12 +202,19 @@ nextflow run hello-channels.nf
 ??? success "Saída do comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [fabulous_crick] DSL2 - revision: 23e20f76e8
+    Launching `hello-channels.nf` [fabulous_crick] revision: 23e20f76e8
 
     executor >  local (1)
-    [c0/4f1872] process > sayHello (1) [100%] 1 of 1 ✔
+    [c0/4f1872] sayHello (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
     ```
 
 Se você fez ambas as edições corretamente, deve obter uma execução bem-sucedida.
@@ -229,7 +242,7 @@ Adicione esta pequena linha ao bloco workflow:
 
 === "Depois"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="6"
     workflow {
 
         main:
@@ -271,13 +284,20 @@ nextflow run hello-channels.nf
 ??? success "Saída do comando"
 
     ```console hl_lines="7"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [scruffy_shaw] DSL2 - revision: 2ede41e14a
+    Launching `hello-channels.nf` [scruffy_shaw] revision: 2ede41e14a
 
     executor >  local (1)
-    [ef/f7e40a] sayHello (1) [100%] 1 of 1 ✔
+    [ef/f7e40a] sayHello (1) | 1 of 1 ✔
     Hello Channels!
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
     ```
 
 Como você pode ver, isso exibe o conteúdo do canal no console.
@@ -302,7 +322,7 @@ Fluxos de trabalho normalmente executam em lotes de entradas que devem ser proce
 Convenientemente, a fábrica de canais `channel.of()` que estivemos usando está bastante feliz em aceitar mais de um valor, então não precisamos modificar isso de jeito nenhum.
 Podemos apenas carregar múltiplos valores no canal.
 
-Vamos fazê-los `'Hello'`, `'Bonjour'` e `'Holà'`.
+Vamos fazê-los `'Hello'`, `'Bonjour'` e `'Hola'`.
 
 #### 2.1.1. Adicione mais saudações
 
@@ -312,7 +332,7 @@ Antes do bloco workflow, faça a seguinte alteração de código:
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // cria um canal para entradas
-    greeting_ch = channel.of('Hello','Bonjour','Holà')
+    greeting_ch = channel.of('Hello','Bonjour','Hola')
                          .view()
     ```
 
@@ -337,15 +357,24 @@ nextflow run hello-channels.nf
 ??? success "Saída do comando"
 
     ```console hl_lines="6"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [amazing_crick] DSL2 - revision: 59a9a5888a
+    Launching `hello-channels.nf` [amazing_crick] revision: 59a9a5888a
 
     executor >  local (3)
-    [f4/c9962c] process > sayHello (1) [100%] 3 of 3 ✔
+    [f4/c9962c] sayHello (1) | 3 of 3 ✔
     Hello
     Bonjour
-    Holà
+    Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
+        - hello_channels/output.txt
+        - hello_channels/output.txt
     ```
 
 Certamente parece ter executado bem.
@@ -367,7 +396,7 @@ No entanto, ainda há apenas uma saída no diretório de resultados:
 ??? abstract "Conteúdo do arquivo"
 
     ```console title="results/hello_channels/output.txt"
-    Holà
+    Hola
     ```
 
 Você deve ver uma das três saudações lá, mas a que você obteve pode ser diferente do que é mostrado aqui.
@@ -420,14 +449,23 @@ nextflow run hello-channels.nf -ansi-log false
 ??? success "Saída do comando"
 
     ```console
-     N E X T F L O W  ~  version 25.10.2
-    Launching `hello-channels.nf` [desperate_monod] DSL2 - revision: 59a9a5888a
+    N E X T F L O W  ~  version 26.04.4
+    Launching `hello-channels.nf` [desperate_monod] - revision: 59a9a5888a
     Hello
     Bonjour
-    Holà
+    Hola
     [23/871c7e] Submitted process > sayHello (2)
     [7f/21e2c2] Submitted process > sayHello (1)
     [f4/ea10a6] Submitted process > sayHello (3)
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
+        - hello_channels/output.txt
+        - hello_channels/output.txt
     ```
 
 Desta vez vemos todas as três execuções de processo e seus subdiretórios de trabalho associados listados na saída.
@@ -493,7 +531,7 @@ De qualquer forma, agora que temos os subdiretórios de cada chamada de processo
     ```
 
     ```txt title="work/f4/ea10a680d5687596d3eaa3fcf69272/output.txt"
-    Holà
+    Hola
     ```
 
 Isso mostra que todos os três processos foram executados com sucesso (eba).
@@ -581,15 +619,24 @@ nextflow run hello-channels.nf
 ??? success "Saída do comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [sharp_minsky] DSL2 - revision: 16a291febe
+    Launching `hello-channels.nf` [sharp_minsky] revision: 16a291febe
 
     executor >  local (3)
-    [e8/33ee64] sayHello (2) [100%] 3 of 3 ✔
+    [e8/33ee64] sayHello (2) | 3 of 3 ✔
     Hello
     Bonjour
-    Holà
+    Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hola-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 Voltando à visualização de resumo, a saída é resumida em uma linha novamente.
@@ -601,11 +648,9 @@ Dê uma olhada no diretório `results` para ver se todas as saudações de saíd
     results/hello_channels/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     └── output.txt
     ```
-
-Sim! E cada uma tem o conteúdo esperado.
 
 ??? abstract "Conteúdo do arquivo"
 
@@ -617,8 +662,8 @@ Sim! E cada uma tem o conteúdo esperado.
     Hello
     ```
 
-    ```console title="Holà-output.txt"
-    Holà
+    ```console title="Hola-output.txt"
+    Hola
     ```
 
 Sucesso! Agora podemos adicionar quantas saudações quisermos sem nos preocupar com arquivos de saída sendo sobrescritos.
@@ -628,7 +673,7 @@ Sucesso! Agora podemos adicionar quantas saudações quisermos sem nos preocupar
     Na prática, nomear arquivos com base nos dados de entrada em si é quase sempre impraticável.
     A melhor maneira de gerar nomes de arquivo dinâmicos é passar metadados para um processo junto com os arquivos de entrada.
     Os metadados são normalmente fornecidos através de uma 'planilha de amostras' ou equivalentes.
-    Você aprenderá como fazer isso mais tarde no seu treinamento de Nextflow (veja [Missão secundária de metadados](../side_quests/metadata.md)).
+    Você aprenderá como fazer isso mais tarde no seu treinamento de Nextflow (veja [Missão secundária de metadados](../side_quests/metadata/index.md)).
 
 ### Conclusão
 
@@ -647,7 +692,7 @@ E se quisermos fornecer essas múltiplas entradas de uma maneira diferente?
 
 Por exemplo, imagine que configuramos uma variável de entrada contendo um array de elementos assim:
 
-`greetings_array = ['Hello','Bonjour','Holà']`
+`greetings_array = ['Hello','Bonjour','Hola']`
 
 Podemos carregar isso em nosso canal de saída e esperar que funcione?
 
@@ -673,9 +718,9 @@ Vamos pegar a variável `greetings_array` que acabamos de imaginar e torná-la r
 
         main:
         // declara um array de saudações de entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // cria um canal para entradas
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // emite uma saudação
         sayHello(greeting_ch)
@@ -692,7 +737,7 @@ Vamos pegar a variável `greetings_array` que acabamos de imaginar e torná-la r
 
         main:
         // cria um canal para entradas
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // emite uma saudação
         sayHello(greeting_ch)
@@ -706,7 +751,7 @@ Isso ainda não está funcional, apenas adicionamos uma declaração para o arra
 
 #### 3.1.2. Defina o array de saudações como entrada para a fábrica de canais
 
-Agora vamos substituir os valores `'Hello','Bonjour','Holà'` atualmente codificados na fábrica de canais pelo `greetings_array` que acabamos de criar.
+Agora vamos substituir os valores `'Hello','Bonjour','Hola'` atualmente codificados na fábrica de canais pelo `greetings_array` que acabamos de criar.
 
 No bloco workflow, faça a seguinte alteração:
 
@@ -717,7 +762,7 @@ No bloco workflow, faça a seguinte alteração:
 
         main:
         // declara um array de saudações de entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // cria um canal para entradas
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -736,9 +781,9 @@ No bloco workflow, faça a seguinte alteração:
 
         main:
         // declara um array de saudações de entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // cria um canal para entradas
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // emite uma saudação
         sayHello(greeting_ch)
@@ -761,22 +806,22 @@ nextflow run hello-channels.nf
 ??? failure "Saída do comando"
 
     ```console hl_lines="7 11 16"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [friendly_koch] DSL2 - revision: 97256837a7
+    Launching `hello-channels.nf` [friendly_koch] revision: 97256837a7
 
     executor >  local (1)
     [a8/1f6ead] sayHello (1) | 0 of 1
-    [Hello, Bonjour, Holà]
+    [Hello, Bonjour, Hola]
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
-      Missing output file(s) `[Hello, Bonjour, Holà]-output.txt` expected by process `sayHello (1)`
+      Missing output file(s) `[Hello, Bonjour, Hola]-output.txt` expected by process `sayHello (1)`
 
 
     Command executed:
 
-      echo '[Hello, Bonjour, Holà]' > '[Hello, Bonjour, Holà]-output.txt'
+      echo '[Hello, Bonjour, Hola]' > '[Hello, Bonjour, Hola]-output.txt'
 
     Command exit status:
       0
@@ -796,7 +841,7 @@ Oh não! Há um erro!
 
 Observe a saída de `view()` e as mensagens de erro.
 
-Parece que o Nextflow tentou executar uma única chamada de processo, usando `[Hello, Bonjour, Holà]` como um valor de string, em vez de usar as três strings no array como valores separados.
+Parece que o Nextflow tentou executar uma única chamada de processo, usando `[Hello, Bonjour, Hola]` como um valor de string, em vez de usar as três strings no array como valores separados.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
@@ -807,11 +852,11 @@ Como fazemos o Nextflow desempacotar o array e carregar as strings individuais n
 
 ### 3.2. Use um operador para transformar o conteúdo do canal
 
-É aqui que os [**operadores**](https://www.nextflow.io/docs/latest/reference/operator.html) entram em jogo.
+É aqui que os [**operadores**](https://nextflow.io/docs/latest/reference/operator.html) entram em jogo.
 Você já usou o operador `.view()`, que apenas observa o que está lá.
 Agora vamos olhar para operadores que nos permitem agir sobre o conteúdo de um canal.
 
-Se você examinar a [lista de operadores](https://www.nextflow.io/docs/latest/reference/operator.html) na documentação do Nextflow, encontrará [`flatten()`](https://www.nextflow.io/docs/latest/reference/operator.html#flatten), que faz exatamente o que precisamos: desempacotar o conteúdo de um array e emiti-los como itens individuais.
+Se você examinar a [lista de operadores](https://nextflow.io/docs/latest/reference/operator.html) na documentação do Nextflow, encontrará [`flatten()`](https://nextflow.io/docs/latest/reference/operator.html#flatten), que faz exatamente o que precisamos: desempacotar o conteúdo de um array e emiti-los como itens individuais.
 
 #### 3.2.1. Adicione o operador `flatten()`
 
@@ -826,7 +871,7 @@ No bloco workflow, faça a seguinte alteração de código:
 
         main:
         // declara um array de saudações de entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // cria um canal para entradas
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -846,7 +891,7 @@ No bloco workflow, faça a seguinte alteração de código:
 
         main:
         // declara um array de saudações de entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // cria um canal para entradas
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -880,7 +925,7 @@ No bloco workflow, faça a seguinte alteração de código:
 
         main:
         // declara um array de saudações de entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // cria um canal para entradas
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
@@ -901,7 +946,7 @@ No bloco workflow, faça a seguinte alteração de código:
 
         main:
         // declara um array de saudações de entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // cria um canal para entradas
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -914,7 +959,7 @@ No bloco workflow, faça a seguinte alteração de código:
     }
     ```
 
-Você vê que adicionamos uma segunda instrução `.view`, e para cada uma delas, substituímos os parênteses vazios (`()`) por chaves contendo algum código, como `{ greeting -> "Before flatten: $greeting" }`.
+Você vê que adicionamos uma segunda instrução `.view`, e para cada uma delas, substituímos os parênteses vazios (`()`) por chaves contendo algum código, como `#!groovy { greeting -> "Before flatten: $greeting" }`.
 
 Essas são chamadas _closures_. O código que elas contêm será executado para cada item no canal.
 Definimos uma variável temporária para o valor interno, aqui chamada `greeting` (mas poderia ser qualquer nome arbitrário), que é usada apenas dentro do escopo dessa closure.
@@ -941,16 +986,25 @@ nextflow run hello-channels.nf
 ??? success "Saída do comando"
 
     ```console hl_lines="7-10"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [sleepy_gutenberg] DSL2 - revision: 1db4f760ee
+    Launching `hello-channels.nf` [sleepy_gutenberg] revision: 1db4f760ee
 
     executor >  local (3)
-    [b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔
-    Before flatten: [Hello, Bonjour, Holà]
+    [b1/6a1e15] sayHello (2) | 3 of 3 ✔
+    Before flatten: [Hello, Bonjour, Hola]
     After flatten: Hello
     After flatten: Bonjour
-    After flatten: Holà
+    After flatten: Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hola-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 Desta vez funciona E nos dá a percepção adicional do que o conteúdo do canal parece antes e depois de executarmos o operador `flatten()`.
@@ -986,7 +1040,7 @@ Preparamos um arquivo CSV chamado `greetings.csv` que contém várias saudaçõe
 ```csv title="data/greetings.csv" linenums="1"
 Hello,English,123
 Bonjour,French,456
-Holà,Spanish,789
+Hola,Spanish,789
 ```
 
 Nossa próxima tarefa é adaptar nosso fluxo de trabalho para ler os valores deste arquivo.
@@ -1028,7 +1082,9 @@ Faça a seguinte edição na declaração do parâmetro:
     /*
      * Pipeline parameters
      */
-    input: String = 'Holà mundo!'
+    params {
+        input: String = 'Hola mundo!'
+    }
     ```
 
 Isso assume que o arquivo está localizado junto com o código do fluxo de trabalho.
@@ -1067,7 +1123,7 @@ No bloco workflow, faça a seguinte alteração de código:
 
         main:
         // declara um array de saudações de entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // cria um canal para entradas
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
@@ -1094,12 +1150,12 @@ nextflow run hello-channels.nf
 
 ??? failure "Saída do comando"
 
-    ```console hl_lines="5 6 9 14"
-     N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="5 6 9 15"
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5
+    Launching `hello-channels.nf` [peaceful_poisson] revision: a286c08ad5
 
-    [-        ] sayHello [  0%] 0 of 1
+    [-        ] sayHello | 0 of 1
     Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 
@@ -1134,11 +1190,11 @@ Então ele resolveu o caminho do arquivo corretamente, mas não analisou realmen
 
 Como fazemos o Nextflow abrir o arquivo e carregar seu conteúdo no canal?
 
-Parece que precisamos de outro [operador](https://www.nextflow.io/docs/latest/reference/operator.html)!
+Parece que precisamos de outro [operador](https://nextflow.io/docs/latest/reference/operator.html)!
 
 ### 4.2. Use o operador `splitCsv()` para analisar o arquivo
 
-Olhando através da lista de operadores novamente, encontramos [`splitCsv()`](https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv), que é projetado para analisar e dividir texto formatado em CSV.
+Olhando através da lista de operadores novamente, encontramos [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv), que é projetado para analisar e dividir texto formatado em CSV.
 
 #### 4.2.1. Aplique `splitCsv()` ao canal
 
@@ -1198,16 +1254,16 @@ nextflow run hello-channels.nf
 ??? failure "Saída do comando"
 
     ```console hl_lines="7-11 14 19"
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [insane_fermat] DSL2 - revision: 8e62fcbeb1
+    Launching `hello-channels.nf` [insane_fermat] revision: 8e62fcbeb1
 
     executor >  local (3)
-    [24/76da2f] sayHello (2) [  0%] 0 of 3 ✘
+    [24/76da2f] sayHello (2) | 0 of 3 ✘
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    After splitCsv: [Hola, Spanish, 789]
     ERROR ~ Error executing process > 'sayHello (2)'
 
     Caused by:
@@ -1248,12 +1304,12 @@ Em vez disso, usaremos outro operador chamado `map()` que é realmente útil e a
 
 ### 4.3. Use o operador `map()` para extrair as saudações
 
-O operador [`map()`](https://www.nextflow.io/docs/latest/reference/operator.html#map) é uma ferramenta muito útil que nos permite fazer todos os tipos de mapeamentos para o conteúdo de um canal.
+O operador [`map()`](https://nextflow.io/docs/latest/reference/operator.html#map) é uma ferramenta muito útil que nos permite fazer todos os tipos de mapeamentos para o conteúdo de um canal.
 
 Neste caso, vamos usá-lo para extrair aquele único elemento que queremos de cada linha em nosso arquivo de dados.
 Esta é a aparência da sintaxe:
 
-```groovy title="Sintaxe"
+```groovy title="Syntax"
 .map { row -> row[0] }
 ```
 
@@ -1318,19 +1374,28 @@ nextflow run hello-channels.nf
 ??? success "Saída do comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [focused_volhard] DSL2 - revision: de435e45be
+    Launching `hello-channels.nf` [focused_volhard] revision: de435e45be
 
     executor >  local (3)
-    [54/6eebe3] sayHello (3) [100%] 3 of 3 ✔
+    [54/6eebe3] sayHello (3) | 3 of 3 ✔
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    After splitCsv: [Hola, Spanish, 789]
     After map: Hello
     After map: Bonjour
-    After map: Holà
+    After map: Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Hola-output.txt
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 Desta vez deve executar sem erros.
@@ -1380,7 +1445,7 @@ O que é um canal no Nextflow?
 - [x] Uma estrutura tipo fila para passar dados entre processos
 - [ ] Uma configuração de definição
 
-Saiba mais: [1.1. Crie um canal de entrada](#11-crie-um-canal-de-entrada)
+Saiba mais: [1.1. Crie um canal de entrada](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1396,7 +1461,7 @@ channel.of('Hello', 'Bonjour', 'Hola')
 - [ ] Nada (canais não imprimem por padrão)
 - [ ] Um erro (sintaxe inválida)
 
-Saiba mais: [1.1. Crie um canal de entrada](#11-crie-um-canal-de-entrada)
+Saiba mais: [1.1. Crie um canal de entrada](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1406,7 +1471,7 @@ Quando um canal contém múltiplos valores, como o Nextflow lida com a execuçã
 - [ ] O processo executa apenas com o primeiro valor
 - [ ] O processo executa apenas com o último valor
 
-Saiba mais: [2. Modifique o fluxo de trabalho para executar em múltiplos valores de entrada](#2-modifique-o-fluxo-de-trabalho-para-executar-em-multiplos-valores-de-entrada)
+Saiba mais: [2. Modifique o fluxo de trabalho para executar em múltiplos valores de entrada](#2-modify-the-workflow-to-run-on-multiple-input-values)
 </quiz>
 
 <quiz>
@@ -1416,7 +1481,7 @@ O que o operador `flatten()` faz?
 - [x] Desempacota arrays em elementos individuais
 - [ ] Remove elementos duplicados
 
-Saiba mais: [3.2.1. Adicione o operador `flatten()`](#321-adicione-o-operador-flatten)
+Saiba mais: [3.2.1. Adicione o operador `flatten()`](#321-add-the-flatten-operator)
 </quiz>
 
 <quiz>
@@ -1426,7 +1491,7 @@ Qual é o propósito do operador `view()`?
 - [x] Para inspecionar e depurar o conteúdo do canal
 - [ ] Para salvar o conteúdo do canal em um arquivo
 
-Saiba mais: [1.4. Use `view()` para inspecionar o conteúdo do canal](#14-use-view-para-inspecionar-o-conteudo-do-canal)
+Saiba mais: [1.4. Use `view()` para inspecionar o conteúdo do canal](#14-use-view-to-inspect-the-channel-contents)
 </quiz>
 
 <quiz>
@@ -1436,7 +1501,7 @@ O que `splitCsv()` faz?
 - [x] Analisa um arquivo CSV em arrays representando cada linha
 - [ ] Mescla múltiplos arquivos CSV
 
-Saiba mais: [4.2. Use o operador `splitCsv()` para analisar o arquivo](#42-use-o-operador-splitcsv-para-analisar-o-arquivo)
+Saiba mais: [4.2. Use o operador `splitCsv()` para analisar o arquivo](#42-use-the-splitcsv-operator-to-parse-the-file)
 </quiz>
 
 <quiz>
@@ -1446,7 +1511,7 @@ Qual é o propósito do operador `map()`?
 - [x] Para transformar cada elemento em um canal
 - [ ] Para contar elementos em um canal
 
-Saiba mais: [4.3. Use o operador `map()` para extrair as saudações](#43-use-o-operador-map-para-extrair-as-saudacoes)
+Saiba mais: [4.3. Use o operador `map()` para extrair as saudações](#43-use-the-map-operator-to-extract-the-greetings)
 </quiz>
 
 <quiz>
@@ -1456,5 +1521,5 @@ Por que é importante usar nomes de arquivo de saída dinâmicos ao processar m�
 - [x] Para evitar que arquivos de saída se sobrescrevam
 - [ ] Para habilitar a funcionalidade de resume
 
-Saiba mais: [2.2. Garanta que os nomes dos arquivos de saída sejam únicos](#22-garanta-que-os-nomes-dos-arquivos-de-saida-sejam-unicos)
+Saiba mais: [2.2. Garanta que os nomes dos arquivos de saída sejam únicos](#22-ensure-the-output-file-names-will-be-unique)
 </quiz>

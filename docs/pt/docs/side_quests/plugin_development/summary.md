@@ -171,7 +171,7 @@ Ler o código de plugins em produção é uma das melhores formas de aprender pa
 
 **Documentação oficial:**
 
-- [Using plugins](https://www.nextflow.io/docs/latest/plugins/plugins.html): guia abrangente para instalar e configurar plugins
+- [Using plugins](https://www.nextflow.io/docs/latest/plugins/using-plugins.html): guia abrangente para instalar e configurar plugins
 - [Developing plugins](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html): referência detalhada para desenvolvimento de plugins
 - [Config scopes](https://nextflow.io/docs/latest/developer/config-scopes.html): criando escopos de configuração para plugins
 

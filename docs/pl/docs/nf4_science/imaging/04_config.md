@@ -80,7 +80,7 @@ code molkart/nextflow.config
 
 Wyszukaj blok `profiles`:
 
-```groovy title="molkart/nextflow.config (fragment)"
+```groovy title="molkart/nextflow.config (excerpt)"
 profiles {
     docker {
         docker.enabled          = true
@@ -130,16 +130,17 @@ Rozłóżmy to, co robi każda flaga:
 Ponieważ używamy `-resume`, Nextflow sprawdzi, czy coś się zmieniło od ostatniego uruchomienia.
 Jeśli parametry, wejścia i kod są takie same, wszystkie zadania będą pobrane z cache'u i pipeline zakończy się niemal natychmiast.
 
-```console title="Wyjście (fragment)"
-executor >  local (12)
+```console title="Output (excerpt)"
+executor >  local (1)
+[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔
 ...
-[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔
-[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔
-...
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 1 of 1, cached: 1 ✔
+[ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
 -[nf-core/molkart] Pipeline completed successfully-
 ```
 
-Zauważ, że wszystkie procesy pokazują `cached: 2` lub `cached: 1` - nic nie zostało ponownie wykonane!
+Zauważ adnotację `cached: N` przy każdym procesie - zadania przetwarzania wstępnego i segmentacji pobrane z cache'u nie zostały ponownie wykonane.
 
 ### 2.4. Profile testowe
 
@@ -151,7 +152,7 @@ Pipeline'y nf-core zawsze zawierają co najmniej dwa profile testowe:
 
 Przyjrzyjmy się bliżej profilowi `test` w molkart, który jest dołączany za pomocą dyrektywy `includeConfig`:
 
-```groovy title="molkart/nextflow.config (fragment)"
+```groovy title="molkart/nextflow.config (excerpt)"
 profiles {
   ...
     test      { includeConfig 'conf/test.config'      }
@@ -160,7 +161,7 @@ profiles {
 
 Oznacza to, że za każdym razem gdy uruchamiamy pipeline z `-profile test`, Nextflow wczyta konfigurację z `conf/test.config`.
 
-```groovy title="molkart/conf/test.config (fragment)"
+```groovy title="molkart/conf/test.config (excerpt)"
 params {
     config_profile_name        = 'Test profile'
     config_profile_description = 'Minimal test dataset to check pipeline function'
@@ -175,8 +176,8 @@ params {
 
 process {
     resourceLimits = [
-        cpus: 4,
-        memory: '15.GB',
+        cpus: 1,
+        memory: '4.GB',
         time: '1.h'
     ]
 }
@@ -246,7 +247,7 @@ nextflow run ./molkart -profile local_dev --input data/samplesheet.csv --outdir 
 nextflow run ./molkart -profile hpc_cluster --input data/samplesheet.csv --outdir results
 ```
 
-!!! note "Uwaga"
+!!! Note "Uwaga"
 
     Nie możemy przetestować profilu HPC w tym środowisku szkoleniowym, ponieważ nie mamy dostępu do schedulera Slurm.
     Ale to pokazuje, jak skonfigurowałbyś go do rzeczywistego użycia.
@@ -292,13 +293,13 @@ Dla uproszczenia, pipeline'y nf-core używają [**etykiet procesów**](https://w
 Każdy proces jest oznaczony etykietą taką jak `process_low`, `process_medium` lub `process_high` w celu opisania odpowiednio niskich, średnich lub wysokich wymagań zasobów obliczeniowych.
 Te etykiety są konwertowane na konkretne żądania zasobów w jednym z plików konfiguracyjnych znajdujących się w katalogu `conf/` pipeline'u.
 
-```groovy title="molkart/conf/base.config (fragment)"
+```groovy title="molkart/conf/base.config (excerpt)"
 process {
     cpus   = { 1      * task.attempt }
     memory = { 6.GB   * task.attempt }
     time   = { 4.h    * task.attempt }
 
-    errorStrategy = { task.exitStatus in ((130..145) + 104) ? 'retry' : 'finish' }
+    errorStrategy = { task.exitStatus in ((130..145) + 104 + 175) ? 'retry' : 'finish' }
     maxRetries    = 1
     maxErrors     = '-1'
 
@@ -344,9 +345,9 @@ Jeśli spróbujemy uruchomić ten pipeline z powyższym nadpisaniem, proces `CEL
 Spowoduje to niepowodzenie pipeline'u w naszym obecnym środowisku, ponieważ nie mamy dostępnej takiej ilości pamięci RAM.
 W następnej sekcji nauczymy się, jak zapobiegać tego typu awariom.
 
-!!! tip "Wskazówka"
+!!! Tip "Wskazówka"
 
-    Aby znaleźć nazwy procesów, sprawdź wyjście wykonania pipeline'u lub sprawdź `.nextflow.log`.
+    Aby znaleźć nazwy procesów, sprawdź wyjście wykonania pipeline'u lub plik `.nextflow.log`.
     Nazwy procesów mają wzór `WORKFLOW:SUBWORKFLOW:PROCESS`.
 
 ### Podsumowanie
@@ -409,7 +410,7 @@ profiles {
 }
 ```
 
-!!! warning "Ostrzeżenie"
+!!! Warning "Ostrzeżenie"
 
     Ustawienie limitów zasobów zbyt nisko może spowodować niepowodzenie procesów lub spowolnić ich działanie.
     Pipeline może potrzebować użyć mniej wymagających pamięciowo algorytmów lub przetwarzać dane w mniejszych fragmentach.
@@ -447,6 +448,6 @@ Gratulacje ukończenia kursu Nextflow for Bioimaging!
 Następne kroki:
 
 - Wypełnij ankietę kursu, aby przekazać informację zwrotną
-- Sprawdź [Hello Nextflow](../hello_nextflow/index.md), aby dowiedzieć się więcej o tworzeniu workflow'ów
-- Poznaj [Hello nf-core](../hello_nf-core/index.md), aby zgłębić narzędzia nf-core
-- Przeglądaj inne kursy w [kolekcjach szkoleniowych](../training_collections/index.md)
+- Sprawdź [Hello Nextflow](../../hello_nextflow/index.md), aby dowiedzieć się więcej o tworzeniu workflow'ów
+- Poznaj [Build with nf-core](../../nfcore_build/index.md), aby zgłębić narzędzia nf-core
+- Przeglądaj zaawansowane tematy w [Side Quests](../../side_quests/index.md)

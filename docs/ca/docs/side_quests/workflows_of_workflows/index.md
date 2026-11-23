@@ -2,9 +2,11 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Quan esteu desenvolupant un pipeline, sovint us trobeu creant seqüències similars de processos per a diferents tipus de dades o passos d'anàlisi. Podríeu acabar copiant i enganxant aquestes seqüències de processos, cosa que porta a codi duplicat difícil de mantenir; o podríeu crear un workflow massiu que sigui difícil d'entendre i modificar.
+Quan esteu desenvolupant un pipeline, sovint us trobeu creant seqüències similars de processos per a diferents tipus de dades o passos d'anàlisi.
+Podríeu acabar copiant i enganxant aquestes seqüències de processos, cosa que porta a codi duplicat difícil de mantenir; o podríeu crear un workflow massiu que sigui difícil d'entendre i modificar.
 
-Una de les característiques més potents de Nextflow és la seva capacitat per compondre pipelines complexos a partir de mòduls de workflow més petits i reutilitzables. Aquest enfocament modular fa que els pipelines siguin més fàcils de desenvolupar, provar i mantenir.
+Una de les característiques més potents de Nextflow és la seva capacitat per compondre pipelines complexos a partir de mòduls de workflow més petits i reutilitzables.
+Aquest enfocament modular fa que els pipelines siguin més fàcils de desenvolupar, provar i mantenir.
 
 ### Objectius d'aprenentatge
 
@@ -24,7 +26,7 @@ Aquestes habilitats us ajudaran a construir pipelines complexos mantenint una es
 
 Abans d'abordar aquesta missió secundària hauríeu de:
 
-- Haver completat el tutorial [Hello Nextflow](../hello_nextflow/README.md) o un curs equivalent per a principiants.
+- Haver completat el tutorial [Hello Nextflow](../../hello_nextflow/index.md) o un curs equivalent per a principiants.
 - Estar còmodes utilitzant conceptes i mecanismes bàsics de Nextflow (processos, canals, operadors, mòduls)
 
 ---
@@ -33,13 +35,13 @@ Abans d'abordar aquesta missió secundària hauríeu de:
 
 #### Obriu el codespace de formació
 
-Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../envsetup/index.md).
+Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 #### Moveu-vos al directori del projecte
 
-Movem-nos al directori on es troben els fitxers d'aquest tutorial.
+Moveu-vos al directori on es troben els fitxers d'aquest tutorial.
 
 ```bash
 cd side-quests/workflows_of_workflows
@@ -51,18 +53,26 @@ Podeu configurar VSCode perquè es centri en aquest directori:
 code .
 ```
 
+L'editor s'obre amb el directori del projecte en primer pla.
+
 #### Reviseu els materials
 
-Trobareu un directori `modules` que conté diverses definicions de processos que es basen en el que vau aprendre a 'Hello Nextflow':
+Trobareu un directori `modules` amb definicions de processos, un directori `workflows` amb dos scripts de workflow escrits prèviament, i un fitxer `main.nf` que anireu actualitzant progressivament:
 
 ```console title="Directory contents"
-modules/
-├── say_hello.nf             # Creates a greeting (from Hello Nextflow)
-├── say_hello_upper.nf       # Converts to uppercase (from Hello Nextflow)
-├── timestamp_greeting.nf    # Adds timestamps to greetings
-├── validate_name.nf         # Validates input names
-└── reverse_text.nf          # Reverses text content
+├── main.nf
+├── workflows/
+│   ├── greeting.nf              # Standalone greeting workflow (to be made composable)
+│   └── transform.nf             # Standalone transform workflow (to be made composable)
+└── modules/
+    ├── say_hello.nf             # Creates a greeting (from Hello Nextflow)
+    ├── say_hello_upper.nf       # Converts to uppercase (from Hello Nextflow)
+    ├── timestamp_greeting.nf    # Adds timestamps to greetings
+    ├── validate_name.nf         # Validates input names
+    └── reverse_text.nf          # Reverses text content
 ```
+
+El directori `modules/` conté les definicions individuals de processos, i el directori `workflows/` conté els dos scripts de workflow escrits prèviament amb els quals treballareu en aquesta missió secundària.
 
 #### Reviseu l'assignació
 
@@ -71,7 +81,16 @@ El vostre repte és assemblar aquests mòduls en dos workflows separats que desp
 - Un `GREETING_WORKFLOW` que valida noms, crea salutacions i afegeix marques de temps
 - Un `TRANSFORM_WORKFLOW` que converteix text a majúscules i l'inverteix
 
-<!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
+El pipeline acabat encadena els dos workflows en un únic flux de dades:
+
+1. **Validar**: comprovar que cada nom té el format correcte
+2. **Saludar**: generar una salutació per a cada nom vàlid
+3. **Marca de temps**: registrar quan s'ha creat cada salutació
+4. **Majúscules**: convertir la salutació amb marca de temps a majúscules
+5. **Invertir**: invertir el text en majúscules
+
+Els tres primers passos pertanyen a `GREETING_WORKFLOW`, i els dos últims pertanyen a `TRANSFORM_WORKFLOW`.
+Construir-los com a workflows separats i composables us permet desenvolupar i provar cada etapa de manera independent abans de connectar-los.
 
 #### Llista de verificació de preparació
 
@@ -86,38 +105,47 @@ Si podeu marcar totes les caselles, esteu a punt per començar.
 
 ---
 
-## 1. Creeu el Greeting Workflow
+## 1. Afegiu el greeting workflow al pipeline
 
-Comencem creant un workflow que validi noms i generi salutacions amb marca de temps.
+El greeting workflow valida noms i genera salutacions amb marca de temps.
 
-### 1.1. Creeu l'estructura del workflow
+### 1.1. Reviseu i executeu el greeting workflow
 
-```bash title="Create workflow directory and file"
-mkdir -p workflows
-touch workflows/greeting.nf
-```
-
-### 1.2. Afegiu el codi del primer (sub)workflow
-
-Afegiu aquest codi a `workflows/greeting.nf`:
+Obriu `workflows/greeting.nf` i examineu el codi:
 
 ```groovy title="workflows/greeting.nf" linenums="1"
+#!/usr/bin/env nextflow
+
 include { VALIDATE_NAME } from '../modules/validate_name'
 include { SAY_HELLO } from '../modules/say_hello'
 include { TIMESTAMP_GREETING } from '../modules/timestamp_greeting'
 
 workflow {
-
+    main:
     names_ch = channel.of('Alice', 'Bob', 'Charlie')
 
     // Encadena processos: valida -> crea salutació -> afegeix marca de temps
     validated_ch = VALIDATE_NAME(names_ch)
     greetings_ch = SAY_HELLO(validated_ch)
     timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
+
+    publish:
+    greetings = greetings_ch
+    timestamped = timestamped_ch
+}
+
+output {
+    greetings {
+    }
+    timestamped {
+    }
 }
 ```
 
-Aquest és un workflow complet, amb una estructura similar a les que vau veure al tutorial 'Hello Nextflow', que podem provar de manera independent. Provem-ho ara:
+Aquest és un workflow complet i autònom amb la mateixa estructura que vau veure al tutorial 'Hello Nextflow'.
+Té els noms d'entrada codificats, encadena tres processos i publica dues sortides.
+
+Executeu-lo per verificar que tot funciona:
 
 ```bash
 nextflow run workflows/greeting.nf
@@ -126,54 +154,151 @@ nextflow run workflows/greeting.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W  ~  version 24.10.0
-    Launching `workflows/greeting.nf` [peaceful_montalcini] DSL2 - revision: 90f61b7093
+    N E X T F L O W   ~  version 26.04.4
+    Launching `workflows/greeting.nf` [sharp_kirch] revision: 04c0a33f79
     executor >  local (9)
-    [51/4f980f] process > VALIDATE_NAME (validating Bob)                    [100%] 3 of 3 ✔
-    [2b/dd8dc2] process > SAY_HELLO (greeting Bob)                          [100%] 3 of 3 ✔
-    [8e/882565] process > TIMESTAMP_GREETING (adding timestamp to greeting) [100%] 3 of 3 ✔
+    [c5/9df3c8] VAL…TE_NAME (validating Alice) | 3 of 3 ✔
+    [e0/243874] SAY_HELLO (greeting Alice)     | 3 of 3 ✔
+    [c5/e40c8d] TIM…ing timestamp to greeting) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/workflows_of_workflows/results
+
+      greetings:
+        - Charlie-output.txt
+        - Bob-output.txt
+        - Alice-output.txt
+
+      timestamped:
+        - timestamped_Bob-output.txt
+        - timestamped_Charlie-output.txt
+        - timestamped_Alice-output.txt
     ```
 
-Això funciona com s'esperava, però per fer-lo composable hi ha algunes coses que hem de canviar.
+Per fer-lo composable amb altres workflows, cal canviar algunes coses.
 
-### 1.3. Feu el workflow composable
+### 1.2. Feu el workflow composable
 
-Els workflows composables tenen algunes diferències respecte als que vau veure al tutorial 'Hello Nextflow':
+Per fer un workflow composable, cal canviar tres coses:
+el workflow rep un nom, les entrades es mouen a un bloc `take:` i les sortides es mouen a un bloc `emit:`
+(substituint els blocs autònoms `publish:`/`output {}`, que pertanyen al entry workflow).
 
-- El bloc del workflow ha de tenir un nom
-- Les entrades es declaren utilitzant la paraula clau `take:`
-- El contingut del workflow es col·loca dins del bloc `main:`
-- Les sortides es declaren utilitzant la paraula clau `emit:`
+Les seccions següents cobreixen aquests canvis un per un.
 
-Actualitzem el greeting workflow perquè coincideixi amb aquesta estructura. Canvieu el codi pel següent:
+#### 1.2.1. Doneu nom al workflow
 
-<!-- TODO: switch to before/after tabs -->
+Doneu un nom al workflow perquè es pugui importar des d'un workflow pare.
 
-```groovy title="workflows/greeting.nf" linenums="1" hl_lines="6 7 9 15 16 17"
+=== "Després"
+
+    ```groovy title="workflows/greeting.nf" linenums="5" hl_lines="1"
+    workflow GREETING_WORKFLOW {
+    ```
+
+=== "Abans"
+
+    ```groovy title="workflows/greeting.nf" linenums="5" hl_lines="1"
+    workflow {
+    ```
+
+Amb un nom, el workflow es pot importar en altres scripts.
+
+#### 1.2.2. Declareu les entrades amb `take:`
+
+Substituïu la declaració del canal codificada per un bloc `take:` que declari quines entrades espera el workflow.
+El bloc `take:` va abans de `main:`, i s'elimina la línia `names_ch = channel.of(...)`.
+
+=== "Després"
+
+    ```groovy title="workflows/greeting.nf" linenums="5" hl_lines="2 3 5"
+    workflow GREETING_WORKFLOW {
+        take:
+        names_ch // Canal d'entrada amb noms
+
+        main:
+        // Encadena processos: valida -> crea salutació -> afegeix marca de temps
+        validated_ch = VALIDATE_NAME(names_ch)
+        greetings_ch = SAY_HELLO(validated_ch)
+        timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
+    ```
+
+=== "Abans"
+
+    ```groovy title="workflows/greeting.nf" linenums="5"
+    workflow GREETING_WORKFLOW {
+        main:
+        names_ch = channel.of('Alice', 'Bob', 'Charlie')
+
+        // Encadena processos: valida -> crea salutació -> afegeix marca de temps
+        validated_ch = VALIDATE_NAME(names_ch)
+        greetings_ch = SAY_HELLO(validated_ch)
+        timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
+    ```
+
+El bloc `take:` declara el canal només pel nom. El workflow pare defineix el que hi entra.
+
+#### 1.2.3. Declareu les sortides amb `emit:`
+
+Substituïu la secció `publish:` i elimineu el bloc `output {}`, reemplaçant-los per un bloc `emit:` que nomeni les sortides.
+
+=== "Després"
+
+    ```groovy title="workflows/greeting.nf" linenums="14" hl_lines="2 3 4"
+
+        emit:
+        greetings = greetings_ch // Salutacions originals
+        timestamped = timestamped_ch // Salutacions amb marca de temps
+    }
+    ```
+
+=== "Abans"
+
+    ```groovy title="workflows/greeting.nf" linenums="14"
+
+        publish:
+        greetings = greetings_ch
+        timestamped = timestamped_ch
+    }
+
+    output {
+        greetings {
+        }
+        timestamped {
+        }
+    }
+    ```
+
+El bloc `emit:` exposa sortides amb nom a les quals els workflows pare poden accedir mitjançant `GREETING_WORKFLOW.out.greetings` i `GREETING_WORKFLOW.out.timestamped`.
+
+#### 1.2.4. Verifiqueu el resultat i proveu-lo
+
+Després dels tres canvis, el fitxer complet hauria de tenir aquest aspecte:
+
+```groovy title="workflows/greeting.nf" linenums="1" hl_lines="7 8 9 11 17 18 19"
+#!/usr/bin/env nextflow
+
 include { VALIDATE_NAME } from '../modules/validate_name'
 include { SAY_HELLO } from '../modules/say_hello'
 include { TIMESTAMP_GREETING } from '../modules/timestamp_greeting'
 
 workflow GREETING_WORKFLOW {
     take:
-        names_ch        // Canal d'entrada amb noms
+    names_ch // Canal d'entrada amb noms
 
     main:
-        // Encadena processos: valida -> crea salutació -> afegeix marca de temps
-        validated_ch = VALIDATE_NAME(names_ch)
-        greetings_ch = SAY_HELLO(validated_ch)
-        timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
+    // Encadena processos: valida -> crea salutació -> afegeix marca de temps
+    validated_ch = VALIDATE_NAME(names_ch)
+    greetings_ch = SAY_HELLO(validated_ch)
+    timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
 
     emit:
-        greetings = greetings_ch      // Salutacions originals
-        timestamped = timestamped_ch  // Salutacions amb marca de temps
+    greetings = greetings_ch // Salutacions originals
+    timestamped = timestamped_ch // Salutacions amb marca de temps
 }
 ```
 
-Podeu veure que el workflow ara té un nom i té un bloc `take:` i `emit:`, i aquestes són les connexions que utilitzarem per compondre un workflow de nivell superior.
-El contingut del workflow també es col·loca dins del bloc `main:`. Noteu també que hem eliminat la declaració del canal d'entrada `names_ch`, ja que ara es passa com a argument al workflow.
-
-Provem el workflow de nou per veure si funciona com s'esperava:
+Ara proveu d'executar-lo directament:
 
 ```bash
 nextflow run workflows/greeting.nf
@@ -182,49 +307,87 @@ nextflow run workflows/greeting.nf
 ??? failure "Sortida de la comanda"
 
     ```console
-    N E X T F L O W  ~  version 24.10.0
-    Launching `workflows/greeting.nf` [high_brahmagupta] DSL2 - revision: 8f5857af25
+    N E X T F L O W   ~  version 26.04.4
+    Launching `workflows/greeting.nf` [intergalactic_leavitt] revision: 89ac88c6c2
     No entry workflow specified
     ```
 
-Això us informa d'un altre concepte nou, un 'entry workflow'. L'entry workflow és el workflow que s'invoca quan executeu un script de Nextflow. Per defecte, Nextflow utilitzarà un workflow sense nom com a entry workflow, quan estigui present, i això és el que heu estat fent fins ara, amb blocs de workflow que comencen així:
+Això introdueix un concepte clau: el **entry workflow**.
+Nextflow utilitza un bloc `workflow {}` sense nom com a punt d'entrada quan executeu un script directament.
+`GREETING_WORKFLOW` té nom, de manera que Nextflow no sap com executar-lo per si sol.
 
-```groovy title="hello.nf" linenums="1"
-workflow {
-```
+Això és intencionat. Els workflows composables estan dissenyats per ser cridats des d'un entry workflow, no per executar-se directament.
+La solució és un entry workflow a `main.nf` que importi i cridi `GREETING_WORKFLOW`.
 
-Però el nostre greeting workflow no té un workflow sense nom, sinó que tenim un workflow amb nom:
+### 1.3. Actualitzeu i proveu el workflow principal
 
-```groovy title="workflows/greeting.nf" linenums="1"
-workflow GREETING_WORKFLOW {
-```
+Ara actualitzeu el workflow principal per cridar el greeting workflow.
 
-Per això Nextflow va llançar un error i no va fer el que volíem.
+#### 1.3.1. Incloeu el greeting workflow i crideu-lo
 
-No hem afegit la sintaxi `take:`/`emit:` per poder cridar el workflow directament - ho hem fet per poder compondre'l amb altres workflows. La solució és crear un script principal amb un entry workflow sense nom que importi i cridi el nostre workflow amb nom.
+Afegiu la sentència `include`, actualitzeu el cos del workflow per cridar `GREETING_WORKFLOW` i substituïu el marcador de posició `channel.empty()` a `publish:`:
 
-### 1.4. Creeu i proveu el workflow principal
+=== "Després"
 
-Ara crearem un workflow principal que importi i utilitzi el workflow `greeting`.
+    ```groovy title="main.nf" linenums="1" hl_lines="3 9 10 13"
+    #!/usr/bin/env nextflow
 
-Creeu `main.nf`:
+    include { GREETING_WORKFLOW } from './workflows/greeting'
 
-```groovy title="main.nf" linenums="1"
-include { GREETING_WORKFLOW } from './workflows/greeting'
+    workflow {
+        main:
+        names = channel.of('Alice', 'Bob', 'Charlie')
 
-workflow {
-    names = channel.of('Alice', 'Bob', 'Charlie')
-    GREETING_WORKFLOW(names)
+        // Executa el greeting workflow
+        GREETING_WORKFLOW(names)
 
-    GREETING_WORKFLOW.out.greetings.view { "Original: $it" }
-    GREETING_WORKFLOW.out.timestamped.view { "Timestamped: $it" }
-}
+        publish:
+        greetings = GREETING_WORKFLOW.out.greetings
+    }
+    ```
 
-```
+=== "Abans"
 
-Noteu que l'entrada del workflow en aquest fitxer no té nom, i és perquè l'utilitzarem com a entry workflow.
+    ```groovy title="main.nf" linenums="1"
+    #!/usr/bin/env nextflow
 
-Executeu-lo i observeu la sortida:
+    workflow {
+        main:
+        names = channel.of('Alice', 'Bob', 'Charlie')
+
+        publish:
+        greetings = channel.empty()
+    }
+    ```
+
+El entry workflow es manté sense nom perquè Nextflow l'utilitzi com a punt d'entrada del pipeline.
+
+#### 1.3.2. Actualitzeu el bloc de sortida
+
+Afegiu una directiva `path` per dirigir les salutacions publicades a un subdirectori `greetings/`:
+
+=== "Després"
+
+    ```groovy title="main.nf" linenums="14" hl_lines="3"
+    output {
+        greetings {
+            path 'greetings'
+        }
+    }
+    ```
+
+=== "Abans"
+
+    ```groovy title="main.nf" linenums="14" hl_lines="2 3"
+    output {
+        greetings {
+        }
+    }
+    ```
+
+#### 1.3.3. Executeu el workflow
+
+Executeu el workflow per comprovar que funciona:
 
 ```bash
 nextflow run main.nf
@@ -233,21 +396,48 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W  ~  version 24.10.0
-    Launching `main.nf` [goofy_mayer] DSL2 - revision: 543f8742fe
+    N E X T F L O W   ~  version 26.04.4
+    Launching `main.nf` [agitated_jones] revision: 6b0e98dd05
     executor >  local (9)
-    [05/3cc752] process > GREETING_WORKFLOW:VALIDATE_NAME (validating Char... [100%] 3 of 3 ✔
-    [b1/b56ecf] process > GREETING_WORKFLOW:SAY_HELLO (greeting Charlie)      [100%] 3 of 3 ✔
-    [ea/342168] process > GREETING_WORKFLOW:TIMESTAMP_GREETING (adding tim... [100%] 3 of 3 ✔
-    Original: /workspaces/training/side_quests/workflows_of_workflows/work/bb/c8aff3df0ebc15a4d7d35f736db44c/Alice-output.txt
-    Original: /workspaces/training/side_quests/workflows_of_workflows/work/fb/fa877776e8a5d90b537b1bcd3b6f5b/Bob-output.txt
-    Original: /workspaces/training/side_quests/workflows_of_workflows/work/b1/b56ecf938fda8bcbec211847c8f0be/Charlie-output.txt
-    Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/06/877bc909f140bbf8223343450cea36/timestamped_Alice-output.txt
-    Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/aa/bd31b71cdb745b7c155ca7f8837b8a/timestamped_Bob-output.txt
-    Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/ea/342168d4ba04cc899a89c56cbfd9b0/timestamped_Charlie-output.txt
+    [00/5ac4ce] GRE…DATE_NAME (validating Bob) | 3 of 3 ✔
+    [7d/dde45c] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
+    [fd/a044cc] GRE…ing timestamp to greeting) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/workflows_of_workflows/results
+
+      greetings:
+        - greetings/Bob-output.txt
+        - greetings/Charlie-output.txt
+        - greetings/Alice-output.txt
     ```
 
-Funciona! Hem embolcallat el greeting workflow amb nom en un workflow principal amb un bloc `workflow` d'entrada sense nom. El workflow principal utilitza el workflow `GREETING_WORKFLOW` gairebé (no exactament) com un procés, i passa el canal `names` com a argument.
+??? abstract "Nou contingut afegit a `results/`"
+
+    ```console
+    results/
+    └── greetings
+        ├── Alice-output.txt
+        ├── Bob-output.txt
+        └── Charlie-output.txt
+    ```
+
+    Els sis fitxers de l'execució autònoma de la secció 1.1 (`Alice-output.txt`, `timestamped_Alice-output.txt`, etc.) encara es troben a `results/` al costat d'aquest nou subdirectori `greetings/`.
+    Això és esperat: res en aquesta lliçó els elimina, i la secció 2.1 els llegeix directament com a entrada.
+
+??? abstract "Contingut del fitxer"
+
+    ```console title="results/greetings/Alice-output.txt"
+    Hello, Alice!
+    ```
+
+Els fitxers de salutació es publiquen a `results/greetings/`.
+El workflow principal crida `GREETING_WORKFLOW` i connecta la seva sortida directament a la secció `publish:`.
+
+`GREETING_WORKFLOW.out.timestamped` no està connectat a `publish:` aquí.
+A partir de la secció 2, aquest canal es converteix en l'entrada de `TRANSFORM_WORKFLOW` en lloc d'una sortida publicada per si mateixa.
+Compareu-ho amb l'execució autònoma de la secció 1.1, on `timestamped` no tenia res més on alimentar-se, de manera que es publicava directament.
 
 ### Conclusió
 
@@ -265,71 +455,199 @@ Ara teniu un greeting workflow funcional que:
 - Valida cada nom
 - Crea una salutació per a cada nom vàlid
 - Afegeix marques de temps a les salutacions
-- Exposa tant les salutacions originals com les salutacions amb marca de temps com a sortides
+- Emet tant les salutacions originals com les salutacions amb marca de temps, tot i que en aquesta etapa només les salutacions originals es publiquen a `results/`
 
 Aquest enfocament modular us permet provar el greeting workflow de manera independent o utilitzar-lo com a component en pipelines més grans.
 
 ---
 
-## 2. Afegiu el Transform Workflow
+## 2. Afegiu el transform workflow al pipeline
 
-Ara creem un workflow que apliqui transformacions de text a les salutacions.
+El transform workflow aplica transformacions de text a les salutacions amb marca de temps.
 
-### 2.1. Creeu el fitxer del workflow
+### 2.1. Reviseu i executeu el workflow
 
-```bash
-touch workflows/transform.nf
-```
-
-### 2.2. Afegiu el codi del workflow
-
-Afegiu aquest codi a `workflows/transform.nf`:
+Obriu `workflows/transform.nf` i examineu el codi:
 
 ```groovy title="workflows/transform.nf" linenums="1"
+#!/usr/bin/env nextflow
+
+include { SAY_HELLO_UPPER } from '../modules/say_hello_upper'
+include { REVERSE_TEXT } from '../modules/reverse_text'
+
+workflow {
+    main:
+    input_ch = channel.fromPath('results/timestamped_*.txt')
+
+    // Aplica les transformacions en seqüència
+    upper_ch = SAY_HELLO_UPPER(input_ch)
+    reversed_ch = REVERSE_TEXT(upper_ch)
+
+    publish:
+    upper = upper_ch
+    reversed = reversed_ch
+}
+
+output {
+    upper {
+    }
+    reversed {
+    }
+}
+```
+
+Aquest workflow autònom llegeix els fitxers de salutació amb marca de temps del directori `results/` produït per `greeting.nf`, els converteix a majúscules i després inverteix el text.
+
+Executeu-lo per verificar que funciona amb els resultats del greeting de la secció 1.1:
+
+```bash
+nextflow run workflows/transform.nf
+```
+
+??? success "Sortida de la comanda"
+
+    ```console
+    N E X T F L O W   ~  version 26.04.4
+    Launching `workflows/transform.nf` [evil_meninsky] revision: 4e35790d32
+    executor >  local (6)
+    [7d/4ed7de] SAY…estamped_Alice-output.txt) | 3 of 3 ✔
+    [70/ddaafa] REV…imestamped_Bob-output.txt) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/workflows_of_workflows/results
+
+      upper:
+        - UPPER-timestamped_Bob-output.txt
+        - UPPER-timestamped_Charlie-output.txt
+        - UPPER-timestamped_Alice-output.txt
+
+      reversed:
+        - REVERSED-UPPER-timestamped_Charlie-output.txt
+        - REVERSED-UPPER-timestamped_Alice-output.txt
+        - REVERSED-UPPER-timestamped_Bob-output.txt
+    ```
+
+Per fer-lo composable amb `GREETING_WORKFLOW`, cal aplicar els mateixos tres canvis de la secció 1.2.
+
+### 2.2. Feu-lo composable
+
+Apliqueu els mateixos tres canvis que a la secció 1.2: doneu nom al workflow, substituïu l'entrada codificada per `take:`, i substituïu `publish:`/`output {}` per `emit:`.
+
+El fitxer acabat hauria de tenir aquest aspecte:
+
+```groovy title="workflows/transform.nf" linenums="1" hl_lines="6 7 8 10 15 16 17"
+#!/usr/bin/env nextflow
+
 include { SAY_HELLO_UPPER } from '../modules/say_hello_upper'
 include { REVERSE_TEXT } from '../modules/reverse_text'
 
 workflow TRANSFORM_WORKFLOW {
     take:
-        input_ch         // Canal d'entrada amb missatges
+    input_ch // Canal d'entrada amb missatges
 
     main:
-        // Aplica les transformacions en seqüència
-        upper_ch = SAY_HELLO_UPPER(input_ch)
-        reversed_ch = REVERSE_TEXT(upper_ch)
+    // Aplica les transformacions en seqüència
+    upper_ch = SAY_HELLO_UPPER(input_ch)
+    reversed_ch = REVERSE_TEXT(upper_ch)
 
     emit:
-        upper = upper_ch        // Salutacions en majúscules
-        reversed = reversed_ch  // Salutacions en majúscules invertides
+    upper = upper_ch // Salutacions en majúscules
+    reversed = reversed_ch // Salutacions en majúscules invertides
 }
 ```
 
-No repetirem l'explicació de la sintaxi composable aquí, però noteu que el workflow amb nom es torna a declarar amb un bloc `take:` i `emit:`, i el contingut del workflow es col·loca dins del bloc `main:`.
+El transform workflow ara és composable i està llest per ser importat al workflow principal.
 
-### 2.3. Actualitzeu el workflow principal
+### 2.3. Actualitzeu i proveu el workflow principal
 
-Actualitzeu `main.nf` per utilitzar ambdós workflows:
+Ara actualitzeu el workflow principal per cridar el transform workflow.
 
-```groovy title="main.nf" linenums="1"
-include { GREETING_WORKFLOW } from './workflows/greeting'
-include { TRANSFORM_WORKFLOW } from './workflows/transform'
+#### 2.3.1. Incloeu el transform workflow i crideu-lo
 
-workflow {
-    names = channel.of('Alice', 'Bob', 'Charlie')
+Afegiu la sentència include, una crida a `TRANSFORM_WORKFLOW` encadenada a les salutacions amb marca de temps, i les dues noves entrades a `publish:`:
 
-    // Executa el greeting workflow
-    GREETING_WORKFLOW(names)
+=== "Després"
 
-    // Executa el transform workflow
-    TRANSFORM_WORKFLOW(GREETING_WORKFLOW.out.timestamped)
+    ```groovy title="main.nf" linenums="1" hl_lines="4 13 14 18 19"
+    #!/usr/bin/env nextflow
 
-    // Mostra els resultats
-    TRANSFORM_WORKFLOW.out.upper.view { "Uppercase: $it" }
-    TRANSFORM_WORKFLOW.out.reversed.view { "Reversed: $it" }
-}
-```
+    include { GREETING_WORKFLOW } from './workflows/greeting'
+    include { TRANSFORM_WORKFLOW } from './workflows/transform'
 
-Executeu el pipeline complet:
+    workflow {
+        main:
+        names = channel.of('Alice', 'Bob', 'Charlie')
+
+        // Executa el greeting workflow
+        GREETING_WORKFLOW(names)
+
+        // Executa el transform workflow
+        TRANSFORM_WORKFLOW(GREETING_WORKFLOW.out.timestamped)
+
+        publish:
+        greetings = GREETING_WORKFLOW.out.greetings
+        upper = TRANSFORM_WORKFLOW.out.upper
+        reversed = TRANSFORM_WORKFLOW.out.reversed
+    }
+    ```
+
+=== "Abans"
+
+    ```groovy title="main.nf" linenums="1"
+    #!/usr/bin/env nextflow
+
+    include { GREETING_WORKFLOW } from './workflows/greeting'
+
+    workflow {
+        main:
+        names = channel.of('Alice', 'Bob', 'Charlie')
+
+        // Executa el greeting workflow
+        GREETING_WORKFLOW(names)
+
+        publish:
+        greetings = GREETING_WORKFLOW.out.greetings
+    }
+    ```
+
+Això executarà el transform workflow sobre les salutacions amb marca de temps.
+
+#### 2.3.2. Actualitzeu el bloc de sortida
+
+Afegiu les entrades `upper` i `reversed` al bloc `output {}`, cadascuna amb una directiva `path` per al seu subdirectori:
+
+=== "Després"
+
+    ```groovy title="main.nf" linenums="20" hl_lines="5 6 7 8 9 10"
+    output {
+        greetings {
+            path 'greetings'
+        }
+        upper {
+            path 'upper'
+        }
+        reversed {
+            path 'reversed'
+        }
+    }
+    ```
+
+=== "Abans"
+
+    ```groovy title="main.nf" linenums="20" hl_lines="2 3 4 5"
+    output {
+        greetings {
+            path 'greetings'
+        }
+    }
+    ```
+
+Això publicarà les sortides finals als directoris corresponents.
+
+#### 2.3.3. Executeu el pipeline complet
+
+Executeu el pipeline per comprovar que tot funciona:
 
 ```bash
 nextflow run main.nf
@@ -338,32 +656,63 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W  ~  version 24.10.0
-    Launching `main.nf` [sick_kimura] DSL2 - revision: 8dc45fc6a8
-    executor >  local (13)
+    N E X T F L O W   ~  version 26.04.4
+    Launching `main.nf` [special_magritte] revision: 2a0e54fecd
     executor >  local (15)
-    [83/1b51f4] process > GREETING_WORKFLOW:VALIDATE_NAME (validating Alice)  [100%] 3 of 3 ✔
-    [68/556150] process > GREETING_WORKFLOW:SAY_HELLO (greeting Alice)        [100%] 3 of 3 ✔
-    [de/511abd] process > GREETING_WORKFLOW:TIMESTAMP_GREETING (adding tim... [100%] 3 of 3 ✔
-    [cd/e6a7e0] process > TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (converting t... [100%] 3 of 3 ✔
-    [f0/74ba4a] process > TRANSFORM_WORKFLOW:REVERSE_TEXT (reversing UPPER... [100%] 3 of 3 ✔
-    Uppercase: /workspaces/training/side_quests/workflows_of_workflows/work/a0/d4f5df4d6344604498fa47a6084a11/UPPER-timestamped_Bob-output.txt
-    Uppercase: /workspaces/training/side_quests/workflows_of_workflows/work/69/b5e37f6c79c2fd38adb75d0eca8f87/UPPER-timestamped_Charlie-output.txt
-    Uppercase: /workspaces/training/side_quests/workflows_of_workflows/work/cd/e6a7e0b17e7d5a2f71bb8123cd53a7/UPPER-timestamped_Alice-output.txt
-    Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/7a/7a222f7957b35d1d121338566a24ac/REVERSED-UPPER-timestamped_Bob-output.txt
-    Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/46/8d19af62e33a5a6417c773496e0f90/REVERSED-UPPER-timestamped_Charlie-output.txt
-    Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef5c82f829d1c154d0f6/REVERSED-UPPER-timestamped_Alice-output.txt
+    [e7/e051a5] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
+    [ca/cf1b18] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
+    [e5/aa6be2] GRE…ing timestamp to greeting) | 3 of 3 ✔
+    [d2/7afc88] TRA…imestamped_Bob-output.txt) | 3 of 3 ✔
+    [5b/70f190] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/workflows_of_workflows/results
+
+      greetings:
+        - greetings/Bob-output.txt
+        - greetings/Charlie-output.txt
+        - greetings/Alice-output.txt
+
+      upper:
+        - upper/UPPER-timestamped_Charlie-output.txt
+        - upper/UPPER-timestamped_Bob-output.txt
+        - upper/UPPER-timestamped_Alice-output.txt
+
+      reversed:
+        - reversed/REVERSED-UPPER-timestamped_Charlie-output.txt
+        - reversed/REVERSED-UPPER-timestamped_Bob-output.txt
+        - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
     ```
 
-Si observeu un d'aquests fitxers invertits, veureu que és la versió en majúscules de la salutació invertida:
+??? abstract "Nou contingut afegit a `results/`"
 
-```bash
-cat /workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef5c82f829d1c154d0f6/REVERSED-UPPER-timestamped_Alice-output.txt
-```
+    ```console
+    results/
+    ├── greetings
+    │   ├── Alice-output.txt
+    │   ├── Bob-output.txt
+    │   └── Charlie-output.txt
+    ├── reversed
+    │   ├── REVERSED-UPPER-timestamped_Alice-output.txt
+    │   ├── REVERSED-UPPER-timestamped_Bob-output.txt
+    │   └── REVERSED-UPPER-timestamped_Charlie-output.txt
+    └── upper
+        ├── UPPER-timestamped_Alice-output.txt
+        ├── UPPER-timestamped_Bob-output.txt
+        └── UPPER-timestamped_Charlie-output.txt
+    ```
 
-```console title="Reversed file content"
-!ECILA ,OLLEH ]04:50:71 60-30-5202[
-```
+    L'arrel de `results/` també conté els fitxers restants de les execucions autònomes de les seccions 1.1 i 2.1 (`Alice-output.txt`, `timestamped_Alice-output.txt`, `UPPER-timestamped_Alice-output.txt`, etc.).
+    Això és esperat: aquesta lliçó mai no us indica que els elimineu.
+
+??? abstract "Contingut del fitxer"
+
+    ```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
+    !ECILA ,OLLEH ]54:84:81 31-90-6202[
+    ```
+
+El pipeline funciona de principi a fi: la salutació s'ha convertit a majúscules i s'ha invertit.
 
 ### Conclusió
 
@@ -387,9 +736,10 @@ Aquest enfocament modular ofereix diversos avantatges respecte als pipelines mon
 - Els canvis en un workflow no afecten necessàriament els altres si les interfícies es mantenen consistents
 - Els punts d'entrada es poden configurar per executar diferents parts del vostre pipeline segons sigui necessari
 
-_És important tenir en compte, però, que tot i que cridar workflows és una mica com cridar processos, en realitat no és el mateix. No podeu, per exemple, executar un workflow N vegades cridant-lo amb un canal de mida N - hauríeu de passar un canal de mida N al workflow i iterar internament._
+Cridar un workflow és similar a cridar un procés, però no és el mateix.
+No podeu executar un workflow N vegades passant-li un canal de mida N: passeu el canal una vegada i el workflow itera sobre ell internament.
 
-Aplicar aquestes tècniques en el vostre propi treball us permetrà construir pipelines de Nextflow més sofisticats que puguin gestionar tasques complexes de bioinformàtica mantenint-se mantenibles i escalables.
+Aplicar aquestes tècniques en el vostre propi treball us permetrà construir pipelines de Nextflow més sofisticats que puguin gestionar tasques complexes de processament de dades mantenint-se mantenibles i escalables.
 
 ### Patrons clau
 
@@ -398,21 +748,21 @@ Aplicar aquestes tècniques en el vostre propi treball us permetrà construir pi
     ```groovy
     workflow EXAMPLE_WORKFLOW {
         take:
-            // Els canals d'entrada es declaren aquí
-            input_ch
+        // Els canals d'entrada es declaren aquí
+        input_ch
 
         main:
-            // La lògica del workflow va aquí
-            // Aquí és on es criden els processos i es manipulen els canals
-            result_ch = SOME_PROCESS(input_ch)
+        // La lògica del workflow va aquí
+        // Aquí és on es criden els processos i es manipulen els canals
+        result_ch = SOME_PROCESS(input_ch)
 
         emit:
-            // Els canals de sortida es declaren aquí
-            output_ch = result_ch
+        // Els canals de sortida es declaren aquí
+        output_ch = result_ch
     }
     ```
 
-2.  **Importacions de workflow:** Hem construït dos mòduls de workflow independents i els hem importat en un pipeline principal amb sentències include.
+2.  **Importacions de workflow**: Hem construït dos mòduls de workflow independents i els hem importat en un pipeline principal amb sentències `include`.
 
     - Incloure un sol workflow
 
@@ -432,7 +782,8 @@ Aplicar aquestes tècniques en el vostre propi treball us permetrà construir pi
     include { WORKFLOW_A as WORKFLOW_A_ALIAS } from './path/to/workflow'
     ```
 
-3.  **Punts d'entrada**: Nextflow requereix un entry workflow sense nom per saber on iniciar l'execució. Aquest entry workflow crida els vostres workflows amb nom.
+3.  **Punts d'entrada**: Nextflow requereix un entry workflow sense nom per saber on iniciar l'execució.
+    Aquest entry workflow crida els vostres workflows amb nom.
 
     - Workflow sense nom (punt d'entrada)
 
@@ -451,9 +802,9 @@ Aplicar aquestes tècniques en el vostre propi treball us permetrà construir pi
     }
     ```
 
-4.  **Gestió del flux de dades:** Hem après com accedir a les sortides del workflow utilitzant la notació d'espai de noms (`WORKFLOW_NAME.out.channel_name`) i passar-les a altres workflows.
+4.  **Gestió del flux de dades**: Hem après com accedir a les sortides del workflow utilitzant la notació d'espai de noms (`WORKFLOW_NAME.out.channel_name`) i passar-les a altres workflows.
 
-    ```nextflow
+    ```groovy
     WORKFLOW_A(input_ch)
     WORKFLOW_B(WORKFLOW_A.out.some_channel)
     ```
@@ -468,4 +819,4 @@ Aplicar aquestes tècniques en el vostre propi treball us permetrà construir pi
 
 ## Què segueix?
 
-Torneu al [menú de missions secundàries](../) o feu clic al botó a la part inferior dreta de la pàgina per continuar amb el tema següent de la llista.
+Torneu al [menú de missions secundàries](../index.md) o feu clic al botó a la part inferior dreta de la pàgina per continuar amb el tema següent de la llista.

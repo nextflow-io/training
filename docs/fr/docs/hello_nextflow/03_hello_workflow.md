@@ -67,12 +67,21 @@ nextflow run hello-workflow.nf
 ??? success "Sortie de la commande"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [admiring_lamarr] DSL2 - revision: 4d4053520d
+    Launching `hello-workflow.nf` [admiring_lamarr] revision: 4d4053520d
 
     executor >  local (3)
-    [b1/5826b5] process > sayHello (2) [100%] 3 of 3 ✔
+    [b1/5826b5] sayHello (2) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
     ```
 
 Comme précédemment, vous trouverez les fichiers de sortie à l'emplacement spécifié dans le bloc `output`.
@@ -84,7 +93,7 @@ Pour ce chapitre, c'est sous `results/hello_workflow/`.
     results/hello_workflow
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    └── Holà-output.txt
+    └── Hola-output.txt
     ```
 
 Si cela a fonctionné pour vous, vous êtes prêt·e à apprendre comment assembler un workflow multi-étapes.
@@ -109,11 +118,11 @@ Pour ce faire, nous devons accomplir trois choses :
 
 Pour effectuer la conversion des messages de bienvenue en majuscules, nous allons utiliser un outil UNIX classique appelé `tr` pour « remplacement de texte », avec la syntaxe suivante :
 
-```bash title="Syntaxe"
+```bash title="Syntax"
 tr '[a-z]' '[A-Z]'
 ```
 
-C'est un one-liner de remplacement de texte très naïf qui ne tient pas compte des lettres accentuées, donc par exemple « Holà » deviendra « HOLà », mais il fera un travail suffisant pour démontrer les concepts Nextflow et c'est ce qui compte.
+C'est un one-liner de remplacement de texte très naïf qui ne tient pas compte des lettres accentuées, mais il fera un travail suffisant pour démontrer les concepts Nextflow et c'est ce qui compte.
 
 Pour le tester, nous pouvons exécuter la commande `echo 'Hello World'` et rediriger sa sortie vers la commande `tr` :
 
@@ -151,7 +160,7 @@ process convertToUpper {
 
     script:
     """
-    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat ${input_file} | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
     """
 }
 ```
@@ -311,13 +320,26 @@ nextflow run hello-workflow.nf -resume
 ??? success "Sortie de la commande"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [high_cantor] DSL2 - revision: d746983511
+    Launching `hello-workflow.nf` [high_cantor] revision: d746983511
 
     executor >  local (3)
-    [ab/816321] process > sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [e0/ecf81b] process > convertToUpper (3) [100%] 3 of 3 ✔
+    [ab/816321] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [e0/ecf81b] convertToUpper (3) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
+        - hello_workflow/Bonjour-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Hola-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Bonjour-output.txt
     ```
 
 Il y a maintenant une ligne supplémentaire dans la sortie de la console qui correspond au nouveau processus que nous venons d'ajouter.
@@ -330,10 +352,10 @@ Vous trouverez les sorties dans le répertoire `results/hello_workflow` comme d�
     results/hello_workflow/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 C'est pratique ! Mais cela vaut quand même la peine de jeter un œil à l'intérieur du répertoire de travail d'un des appels au deuxième processus.
@@ -342,8 +364,8 @@ C'est pratique ! Mais cela vaut quand même la peine de jeter un œil à l'inté
 
     ```console
     work/e0/ecf81b4cacc648b9b994218d5b29d7/
-    ├── Holà-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Holà-output.txt
-    └── UPPER-Holà-output.txt
+    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Hola-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Remarquez qu'il y a deux fichiers `*-output` : la sortie du premier processus ainsi que la sortie du deuxième.
@@ -391,8 +413,8 @@ Exécutez ce qui suit dans votre terminal :
 ```bash
 echo 'Hello' | tr '[a-z]' '[A-Z]' > UPPER-Hello-output.txt
 echo 'Bonjour' | tr '[a-z]' '[A-Z]' > UPPER-Bonjour-output.txt
-echo 'Holà' | tr '[a-z]' '[A-Z]' > UPPER-Holà-output.txt
-cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Holà-output.txt > COLLECTED-output.txt
+echo 'Hola' | tr '[a-z]' '[A-Z]' > UPPER-Hola-output.txt
+cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLLECTED-output.txt
 ```
 
 La sortie est un fichier texte appelé `COLLECTED-output.txt` qui contient les versions en majuscules des messages de bienvenue originaux.
@@ -402,7 +424,7 @@ La sortie est un fichier texte appelé `COLLECTED-output.txt` qui contient les v
     ```console title="COLLECTED-output.txt"
     HELLO
     BONJOUR
-    HOLà
+    HOLA
     ```
 
 C'est le résultat que nous voulons obtenir avec notre workflow.
@@ -500,7 +522,7 @@ En théorie, cela devrait gérer n'importe quel nombre arbitraire de fichiers d'
 
     Certains outils en ligne de commande nécessitent de fournir un argument (comme `-input`) pour chaque fichier d'entrée.
     Dans ce cas, nous devrions faire un peu de travail supplémentaire pour composer la commande.
-    Vous pouvez voir un exemple de ceci dans le cours de formation [Nextflow for Genomics](../../nf4_science/genomics/).
+    Vous pouvez voir un exemple de ceci dans le cours de formation [Nextflow for Genomics](../nf4_science/genomics/index.md).
 
 ### 2.3. Ajouter l'étape de collecte au workflow
 
@@ -536,7 +558,68 @@ Dans le bloc workflow, effectuez la modification de code suivante :
 
 Cela connecte la sortie de `convertToUpper()` à l'entrée de `collectGreetings()`.
 
-#### 2.3.2. Exécuter le workflow avec `-resume`
+#### 2.3.2. Mettre à jour la section `publish:`
+
+Dans le bloc `workflow`, effectuez la modification de code suivante :
+
+=== "Après"
+
+    ```groovy title="hello-workflow.nf" linenums="76" hl_lines="4"
+        publish:
+        first_output = sayHello.out
+        uppercased = convertToUpper.out
+        collected = collectGreetings.out
+    }
+    ```
+
+=== "Avant"
+
+    ```groovy title="hello-workflow.nf" linenums="76"
+        publish:
+        first_output = sayHello.out
+        uppercased = convertToUpper.out
+    }
+    ```
+
+#### 2.3.3. Mettre à jour le bloc `output`
+
+Dans le bloc `output`, effectuez la modification de code suivante :
+
+=== "Après"
+
+    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="10-13"
+    output {
+        first_output {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        uppercased {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        collected {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+    }
+    ```
+
+=== "Avant"
+
+    ```groovy title="hello-workflow.nf" linenums="82"
+    output {
+        first_output {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        uppercased {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+    }
+    ```
+
+#### 2.3.4. Exécuter le workflow avec `-resume`
 
 Essayons.
 
@@ -547,14 +630,31 @@ nextflow run hello-workflow.nf -resume
 ??? success "Sortie de la commande"
 
     ```console hl_lines="8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [mad_gilbert] DSL2 - revision: 6acfd5e28d
+    Launching `hello-workflow.nf` [mad_gilbert] revision: 6acfd5e28d
 
     executor >  local (3)
     [79/33b2f0] sayHello (2)         | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (3)   | 3 of 3, cached: 3 ✔
     [47/50fe4a] collectGreetings (1) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+      collected:
+        - hello_workflow/COLLECTED-output.txt
+        - hello_workflow/COLLECTED-output.txt
+        - hello_workflow/COLLECTED-output.txt
     ```
 
 Il s'exécute avec succès, y compris la troisième étape.
@@ -566,8 +666,8 @@ Maintenant, regardez le contenu du fichier de sortie final.
 
 ??? abstract "Contenu du fichier"
 
-    ```console title="results/COLLECTED-output.txt"
-    Holà
+    ```console title="results/hello_workflow/COLLECTED-output.txt"
+    HOLA
     ```
 
 Oh non. L'étape de collecte a été exécutée individuellement sur chaque message de bienvenue, ce qui N'EST PAS ce que nous voulions.
@@ -620,8 +720,8 @@ Incluons également quelques instructions `view()` pour visualiser les états av
         collectGreetings(convertToUpper.out.collect())
 
         // instructions view optionnelles
-        convertToUpper.out.view { contents -> "Avant collect : $contents" }
-        convertToUpper.out.collect().view { contents -> "Après collect : $contents" }
+        convertToUpper.out.view { contents -> "Before collect: $contents" }
+        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     }
     ```
 
@@ -646,17 +746,32 @@ nextflow run hello-workflow.nf -resume
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+    Launching `hello-workflow.nf` [soggy_franklin] revision: bc8e1b2726
 
+    executor >  local (1)
     [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1 ✔
-    Avant collect : /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
-    Avant collect : /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Avant collect : /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
-    Après collect : [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
+    Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
+    Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
+    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
+    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+      collected: hello_workflow/COLLECTED-output.txt
     ```
 
 Il s'exécute avec succès, bien que la sortie du journal puisse sembler un peu plus désordonnée que ceci (nous l'avons nettoyée pour la lisibilité).
@@ -664,8 +779,8 @@ Il s'exécute avec succès, bien que la sortie du journal puisse sembler un peu 
 Cette fois, la troisième étape n'a été appelée qu'une seule fois !
 En regardant la sortie des instructions `view()`, nous voyons ce qui suit :
 
-- Trois instructions `Avant collect :`, une pour chaque message de bienvenue : à ce stade, les chemins de fichiers sont des éléments individuels dans le canal.
-- Une seule instruction `Après collect :` : les trois chemins de fichiers sont maintenant empaquetés dans un seul élément.
+- Trois instructions `Before collect :`, une pour chaque message de bienvenue : à ce stade, les chemins de fichiers sont des éléments individuels dans le canal.
+- Une seule instruction `After collect :` : les trois chemins de fichiers sont maintenant empaquetés dans un seul élément.
 
 Nous pouvons résumer cela avec le diagramme suivant :
 
@@ -677,10 +792,10 @@ Enfin, vous pouvez regarder le contenu du fichier de sortie pour vous assurer qu
 
 ??? abstract "Contenu du fichier"
 
-    ```console title="results/COLLECTED-output.txt"
+    ```console title="results/hello_workflow/COLLECTED-output.txt"
     BONJOUR
     HELLO
-    HOLà
+    HOLA
     ```
 
 Cette fois, nous avons les trois messages de bienvenue dans le fichier de sortie final. Succès !
@@ -708,8 +823,8 @@ Avant de passer à la section suivante, nous vous recommandons de supprimer les 
         collectGreetings(convertToUpper.out.collect())
 
         // instructions view optionnelles
-        convertToUpper.out.view { contents -> "Avant collect : $contents" }
-        convertToUpper.out.collect().view { contents -> "Après collect : $contents" }
+        convertToUpper.out.view { contents -> "Before collect: $contents" }
+        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     ```
 
 C'est essentiellement l'opération inverse du point 2.4.2.
@@ -879,24 +994,38 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [confident_rutherford] DSL2 - revision: bc58af409c
+    Launching `hello-workflow.nf` [confident_rutherford] revision: bc58af409c
 
     executor >  local (1)
     [79/33b2f0] sayHello (2)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [b5/f19efe] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+      collected: hello_workflow/COLLECTED-trio-output.txt
     ```
 
 Il s'exécute avec succès et produit la sortie désirée :
 
 ??? abstract "Contenu du fichier"
 
-    ```console title="results/COLLECTED-trio-output.txt"
+    ```console title="results/hello_workflow/COLLECTED-trio-output.txt"
     HELLO
     BONJOUR
-    HOLà
+    HOLA
     ```
 
 Maintenant, tant que nous spécifions le paramètre de manière appropriée, les exécutions ultérieures sur d'autres lots d'entrées n'écraseront pas les résultats précédents.
@@ -946,7 +1075,7 @@ Dans le bloc du processus `collectGreetings`, effectuez les modifications de cod
         count_greetings = input_files.size()
         """
         cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-        echo 'Il y avait ${count_greetings} messages de bienvenue dans ce lot.' > '${batch_name}-report.txt'
+        echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
         """
     ```
 
@@ -1095,14 +1224,29 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "Sortie de la commande"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [ecstatic_wilson] DSL2 - revision: c80285f8c8
+    Launching `hello-workflow.nf` [ecstatic_wilson] revision: c80285f8c8
 
     executor >  local (1)
-    [c5/4c6ca9] sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [0e/6cbc59] convertToUpper (3) [100%] 3 of 3, cached: 3 ✔
-    [02/61ead2] collectGreetings   [100%] 1 of 1 ✔
+    [c5/4c6ca9] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [0e/6cbc59] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [02/61ead2] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+      collected: hello_workflow/COLLECTED-trio-output.txt
+      batch_report: hello_workflow/trio-report.txt
     ```
 
 Si vous regardez dans le répertoire `results/hello_workflow/`, vous trouverez le nouveau fichier de rapport, `trio-report.txt`.
@@ -1111,7 +1255,7 @@ Ouvrez-le pour vérifier que le workflow a correctement rapporté le nombre de m
 ??? abstract "Contenu du fichier"
 
     ```txt title="trio-report.txt"
-    Il y avait 3 messages de bienvenue dans ce lot.
+    There were 3 greetings in this batch.
     ```
 
 <figure class="excalidraw">
@@ -1143,7 +1287,7 @@ Comment accédez-vous à la sortie d'un processus dans le bloc workflow ?
 - [x] `processName.out`
 - [ ] `get(processName)`
 
-En savoir plus : [1.4. Passer la sortie du premier processus au deuxième processus](#14-passer-la-sortie-du-premier-processus-au-deuxieme-processus)
+En savoir plus : [1.4. Passer la sortie du premier processus au deuxième processus](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1153,7 +1297,7 @@ Qu'est-ce qui détermine l'ordre d'exécution des processus dans Nextflow ?
 - [x] Les dépendances de données entre les processus
 - [ ] Ordre aléatoire pour l'exécution parallèle
 
-En savoir plus : [1.4. Passer la sortie du premier processus au deuxième processus](#14-passer-la-sortie-du-premier-processus-au-deuxieme-processus)
+En savoir plus : [1.4. Passer la sortie du premier processus au deuxième processus](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1172,7 +1316,7 @@ workflow {
 - [ ] `mix()`
 - [ ] `join()`
 
-En savoir plus : [2.4. Utiliser un opérateur pour collecter les messages de bienvenue dans une seule entrée](#24-utiliser-un-operateur-pour-collecter-les-messages-de-bienvenue-dans-une-seule-entree)
+En savoir plus : [2.4. Utiliser un opérateur pour collecter les messages de bienvenue dans une seule entrée](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1182,7 +1326,7 @@ Quand devriez-vous utiliser l'opérateur `collect()` ?
 - [x] Quand un processus en aval a besoin de tous les éléments d'un processus en amont
 - [ ] Quand vous voulez diviser les données entre plusieurs processus
 
-En savoir plus : [2.4. Utiliser un opérateur pour collecter les messages de bienvenue dans une seule entrée](#24-utiliser-un-operateur-pour-collecter-les-messages-de-bienvenue-dans-une-seule-entree)
+En savoir plus : [2.4. Utiliser un opérateur pour collecter les messages de bienvenue dans une seule entrée](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1192,7 +1336,7 @@ Comment accédez-vous à une sortie nommée d'un processus ?
 - [x] `processName.out.outputName`
 - [ ] `output.processName.outputName`
 
-En savoir plus : [4.1.2. Émettre le fichier de rapport et nommer les sorties](#412-emettre-le-fichier-de-rapport-et-nommer-les-sorties)
+En savoir plus : [4.1.2. Émettre le fichier de rapport et nommer les sorties](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1202,7 +1346,7 @@ Quelle est la syntaxe correcte pour nommer une sortie dans un processus ?
 - [x] `emit: outputName`
 - [ ] `label: outputName`
 
-En savoir plus : [4.1.2. Émettre le fichier de rapport et nommer les sorties](#412-emettre-le-fichier-de-rapport-et-nommer-les-sorties)
+En savoir plus : [4.1.2. Émettre le fichier de rapport et nommer les sorties](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1212,5 +1356,5 @@ Lors de la fourniture de plusieurs entrées à un processus, qu'est-ce qui doit 
 - [x] L'ordre des entrées doit correspondre à l'ordre défini dans le bloc d'entrée
 - [ ] Seules deux entrées peuvent être fournies à la fois
 
-En savoir plus : [3. Passer des paramètres supplémentaires à un processus](#3-passer-des-parametres-supplementaires-a-un-processus)
+En savoir plus : [3. Passer des paramètres supplémentaires à un processus](#3-pass-additional-parameters-to-a-process)
 </quiz>

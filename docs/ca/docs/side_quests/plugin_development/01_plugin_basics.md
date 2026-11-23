@@ -88,7 +88,7 @@ nextflow run hello.nf
 ```console title="Output"
 Output: Hello_aBcDeFgH
 Output: Bonjour_xYzWvUtS
-Output: Holà_qRsPdMnK
+Output: Hola_qRsPdMnK
 Output: Ciao_jLhGfEcB
 Output: Hallo_tNwOiAuR
 ```
@@ -194,7 +194,7 @@ nextflow run hello.nf
 Pipeline is starting! 🚀
 Output: Hello_yqvtclcc
 Output: Bonjour_vwwpyzcs
-Output: Holà_wrghmgab
+Output: Hola_wrghmgab
 Output: Ciao_noniajuy
 Output: Hallo_tvrtuxtp
 Pipeline complete! 👋
@@ -354,7 +354,7 @@ nextflow run hello.nf
 Pipeline is starting! 🚀
 Output: Hello_diozjdwm
 Output: Bonjour_speathmm
-Output: Holà_dllxnzap
+Output: Hola_dllxnzap
 Output: Ciao_wzueddzc
 Output: Hallo_hsxwrjbh
 Pipeline complete! 👋
@@ -375,7 +375,7 @@ Canvieu el nom de la columna obligatòria `greeting` per `message`:
 message,language
 Hello,English
 Bonjour,French
-Holà,Spanish
+Hola,Spanish
 Ciao,Italian
 Hallo,German
 ```
@@ -386,7 +386,7 @@ Executeu el pipeline:
 nextflow run hello.nf
 ```
 
-```console title="Output"
+```console title="Output (partial)"
 ERROR ~ Validation of samplesheet failed!
 
 The following errors have been detected in greetings.csv:
@@ -396,6 +396,8 @@ The following errors have been detected in greetings.csv:
 -> Entry 3: Missing required field(s): greeting
 -> Entry 4: Missing required field(s): greeting
 -> Entry 5: Missing required field(s): greeting
+
+ -- Check script 'hello.nf' at line: 20 or see '.nextflow.log' file for more details
 ```
 
 El pipeline es nega a executar-se perquè l'esquema requereix una columna `greeting` i no en troba cap.
@@ -406,7 +408,7 @@ Ara restaureu la columna obligatòria però canvieu el nom de la columna opciona
 greeting,lang
 Hello,English
 Bonjour,French
-Holà,Spanish
+Hola,Spanish
 Ciao,Italian
 Hallo,German
 ```
@@ -478,7 +480,7 @@ Restaureu `greetings.csv` al seu estat original i elimineu el bloc `validation` 
 greeting,language
 Hello,English
 Bonjour,French
-Holà,Spanish
+Hola,Spanish
 Ciao,Italian
 Hallo,German
 ```
@@ -511,7 +513,7 @@ Actualitzeu `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -534,8 +536,10 @@ El plugin produeix diversos missatges INFO i WARN durant l'execució.
 Aquests són normals per a un exemple petit que s'executa en una màquina local:
 
 ```console title="Output (partial)"
-nf-co2footprint plugin  ~  version 1.2.0
+nf-co2footprint plugin  ~  version 1.3.0
+INFO - [nf-co2footprint] 🔕 Repeated task-specific messages (🔁) are only logged once in the console. Further occurrences are logged at DEBUG level, appearing only in the `.nextflow.log` file.
 WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.
+INFO - [nf-co2footprint] Electricity Maps API key is not set. To retrieve real-time carbon intensity values, please provide a key with the parameter `emApiKey`.
 INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.
 WARN - [nf-co2footprint] Executor 'null' not mapped.
 WARN - [nf-co2footprint] Fallback to: `machineType = null`, `pue = 1.0`. ...
@@ -550,7 +554,7 @@ En un entorn de producció (per exemple, un clúster HPC o al núvol), aquests v
 Al final, busqueu una línia com:
 
 ```console title="Output (partial)"
-🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.
+INFO - [nf-co2footprint] 🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.
 ```
 
 (Els vostres números seran diferents.)
@@ -559,33 +563,27 @@ Al final, busqueu una línia com:
 
 El plugin genera fitxers de sortida al vostre directori de treball:
 
-```bash
-ls co2footprint_*
-```
+??? abstract "Contingut del directori"
 
-```console title="Output"
-co2footprint_report_<timestamp>.html
-co2footprint_summary_<timestamp>.txt
-co2footprint_trace_<timestamp>.txt
-```
+    ```console
+    co2footprint_report_<timestamp>.html
+    co2footprint_summary_<timestamp>.txt
+    co2footprint_trace_<timestamp>.txt
+    ```
 
-Examineu el resum:
+??? abstract "Contingut del fitxer"
 
-```bash
-cat co2footprint_summary_*.txt
-```
+    ```console title="co2footprint_summary_<timestamp>.txt"
+    Total CO₂e footprint measures of this workflow run (including cached tasks):
+      CO₂e emissions: 60.84 ug
+      Energy consumption: 126.76 uWh
+      CO₂e emissions (market): -
 
-```console title="Output"
-Total CO₂e footprint measures of this workflow run (including cached tasks):
-  CO₂e emissions: 60.84 ug
-  Energy consumption: 126.76 uWh
-  CO₂e emissions (market): -
-
-Which equals:
-  - 3.48E-7 km travelled by car
-  - It takes one tree 0.17s to sequester the equivalent amount of CO₂ from the atmosphere
-  - 1.22E-7 % of a flight from Paris to London
-```
+    Which equals:
+      - 3.48E-7 km travelled by car
+      - It takes one tree 0.17s to sequester the equivalent amount of CO₂ from the atmosphere
+      - 1.22E-7 % of a flight from Paris to London
+    ```
 
 (Els vostres números seran diferents.)
 
@@ -606,7 +604,7 @@ Afegiu un bloc `co2footprint` a `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
 
     co2footprint {
@@ -620,7 +618,7 @@ Afegiu un bloc `co2footprint` a `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -640,11 +638,6 @@ INFO - [nf-co2footprint] Using fallback carbon intensity from GB from CI table: 
 
 L'avís de zona ha desaparegut.
 El plugin ara utilitza la intensitat de carboni específica de GB (163.92 gCO₂eq/kWh) en lloc del valor global de reserva (480.0 gCO₂eq/kWh).
-
-!!! note "Nota"
-
-    També podeu veure un missatge `WARN: Unrecognized config option 'co2footprint.location'`.
-    Això és cosmètic i es pot ignorar sense problemes; el plugin llegeix el valor correctament igualment.
 
 A la Part 6, creareu un àmbit de configuració per al vostre propi plugin.
 

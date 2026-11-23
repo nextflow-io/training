@@ -35,13 +35,12 @@ Nextflow dokümantasyon kılavuzu, bu bağımlılıkları yüklemek için [Ortam
 Aşağıda bağlantısı verilen makalelerde ayrıntılı olarak açıklandığı gibi Nextflow'un kendisini ve nf-core araçlarını yüklemeniz gerekecektir:
 
 - [Nextflow kurulumu](https://www.nextflow.io/docs/latest/install.html)
-- [nf-core araçları](https://nf-co.re/docs/nf-core-tools/installation)
+- [nf-core araçları](https://nf-co.re/docs/nf-core-tools/cli/installation)
 
 Nextflow için kendi kendine kurulum seçeneğini ve nf-core araçları için PyPI seçeneğini kullanmanızı öneririz.
 
 !!! warning "Sürüm uyumluluğu"
 
-    <!-- Any update to this content needs to be copied to the home page -->
     **Ocak 2026 itibarıyla, aksi belirtilmedikçe tüm Nextflow eğitim kurslarımız strict v2 syntax etkinleştirilmiş Nextflow sürüm 25.10.2 veya üstünü gerektirir.**
 
     Sürüm gereksinimleri ve strict v2 syntax hakkında daha fazla bilgi için lütfen [Nextflow sürümleri](../info/nxf_versions.md) rehberine bakın.

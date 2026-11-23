@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Toplu RNAseq verilerini işlemek ve analiz etmek için birden fazla geçerli yöntem bulunmaktadır.
-Bu kurs için, [Babraham Enstitüsü](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf)'nden Dr. Simon Andrews ve Laura Biggins tarafından [burada](https://www.babraham.ac.uk/) açıklanan yöntemi takip ediyoruz.
+Bu kurs için, [Babraham Enstitüsü](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf)'ndeki Dr. Simon Andrews ve Laura Biggins tarafından [burada](https://www.babraham.ac.uk/) açıklanan yöntemi takip ediyoruz.
 
 Amacımız, aşağıdaki işleme adımlarını uygulayan bir iş akışı geliştirmektir: toplu RNAseq örneğindeki okumalar üzerinde ilk kalite kontrolünü çalıştırmak, okumalardan adaptör dizilerini kırpmak, okumaları referans genoma hizalamak ve kapsamlı bir kalite kontrol (QC) raporu oluşturmak.
 
@@ -40,7 +40,7 @@ Bu araçlar GitHub Codespaces ortamında yüklü olmadığından, bunları Seqer
 
 !!! tip "İpucu"
 
-     `nf4-science/rnaseq` dizininde olduğunuzdan emin olun. `pwd` yazdığınızda gösterilen yolun son kısmı `rnaseq` olmalıdır.
+    `nf4-science/rnaseq` dizininde olduğunuzdan emin olun. `pwd` yazdığınızda gösterilen yolun son kısmı `rnaseq` olmalıdır.
 
 ---
 

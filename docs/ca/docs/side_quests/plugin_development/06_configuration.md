@@ -234,6 +234,54 @@ La factoria té accés a la sessió de Nextflow i a la seva configuració, de ma
 La factoria ara llegeix `greeting.enabled` de la configuració i retorna una llista buida si l'usuari l'ha definit com a `false`.
 Quan la llista és buida, no es crea cap observador, de manera que els hooks del cicle de vida del plugin s'ometen silenciosament.
 
+El test de la factoria de la Part 5 passa un `Mock(Session)` simple, que no té configuració, de manera que `navigate()` ara falla amb un `NullPointerException`.
+Actualitzeu `nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy` per donar al mock de la sessió una configuració, i afegiu un test per al cas desactivat:
+
+=== "Després"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="4-6 8 15-25"
+        def 'should create the observer instance' () {
+            given:
+            def factory = new GreetingFactory()
+            def session = Mock(Session) {
+                getConfig() >> [greeting: [enabled: true]]
+            }
+            when:
+            def result = factory.create(session)
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+
+        def 'should return empty list when disabled' () {
+            given:
+            def factory = new GreetingFactory()
+            def session = Mock(Session) {
+                getConfig() >> [greeting: [enabled: false]]
+            }
+            when:
+            def result = factory.create(session)
+            then:
+            result.isEmpty()
+        }
+    ```
+
+=== "Abans"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="5"
+        def 'should create the observer instance' () {
+            given:
+            def factory = new GreetingFactory()
+            when:
+            def result = factory.create(Mock(Session))
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+    ```
+
 ### 2.1. Construir i provar
 
 Reconstruïu i instal·leu el plugin:

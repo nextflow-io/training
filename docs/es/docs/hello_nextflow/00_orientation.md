@@ -85,7 +85,7 @@ Aquí generamos una tabla de contenidos hasta el segundo nivel:
 tree . -L 2
 ```
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console
     .

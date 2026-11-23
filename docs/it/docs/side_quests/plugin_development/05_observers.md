@@ -212,6 +212,28 @@ Modifichiamo `GreetingFactory.groovy` per aggiungere il nuovo observer:
     Abbiamo sostituito lo stile Java `List.<TraceObserver>of(...)` con il più semplice letterale di lista di Groovy `[...]`.
     Entrambi restituiscono una `Collection`, ma la sintassi Groovy è più leggibile quando si aggiungono più elementi.
 
+Il test unitario del template per la factory si aspetta esattamente un observer, quindi ora fallisce poiché la factory ne crea due.
+Aggiorniamo `nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy` per aspettarsi entrambi:
+
+=== "Dopo"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="17" hl_lines="2-4"
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+    ```
+
+=== "Prima"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="17" hl_lines="2-3"
+            then:
+            result.size() == 1
+            result.first() instanceof GreetingObserver
+        }
+    ```
+
 ### 2.3. Build, installazione e test
 
 ```bash
@@ -234,7 +256,7 @@ Dovresti vedere "✓ Task completed!" stampato cinque volte (una per ogni attivi
 Decorated: *** Hello ***
 ✓ Task completed!
 ✓ Task completed!
-Decorated: *** Holà ***
+Decorated: *** Hola ***
 ✓ Task completed!
 ...
 Pipeline complete! 👋
@@ -261,11 +283,12 @@ Quando l'intero flusso di lavoro termina, l'observer stampa il totale finale.
 
 Aggiorniamo `TaskCounterObserver.groovy` con le modifiche evidenziate:
 
-```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="14 18-19 22-24"
+```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="5 15 19-20 23-25"
 package training.plugin
 
 import groovy.transform.CompileStatic
 import nextflow.processor.TaskHandler
+import java.util.concurrent.atomic.AtomicInteger
 import nextflow.trace.TraceObserver
 import nextflow.trace.TraceRecord
 
@@ -275,23 +298,23 @@ import nextflow.trace.TraceRecord
 @CompileStatic
 class TaskCounterObserver implements TraceObserver {
 
-    private int taskCount = 0                // (1)!
+    private final AtomicInteger taskCount = new AtomicInteger()  // (1)!
 
     @Override
     void onProcessComplete(TaskHandler handler, TraceRecord trace) {
-        taskCount++                          // (2)!
-        println "📊 Tasks completed so far: ${taskCount}"
+        final count = taskCount.incrementAndGet()                 // (2)!
+        println "📊 Tasks completed so far: ${count}"
     }
 
     @Override
-    void onFlowComplete() {                  // (3)!
-        println "📈 Final task count: ${taskCount}"
+    void onFlowComplete() {                                       // (3)!
+        println "📈 Final task count: ${taskCount.get()}"
     }
 }
 ```
 
-1. `taskCount` è una variabile che appartiene all'oggetto observer. Mantiene il suo valore tra le chiamate ai metodi, così può accumulare un conteggio per l'intera esecuzione del flusso di lavoro. `private` significa che solo questa classe può accedervi.
-2. `taskCount++` aggiunge uno al contatore. Questa riga viene eseguita ogni volta che un'attività si completa, quindi il conteggio cresce man mano che il flusso di lavoro avanza.
+1. `taskCount` è una variabile che appartiene all'oggetto observer. Mantiene il suo valore tra le chiamate ai metodi, così può accumulare un conteggio per l'intera esecuzione del flusso di lavoro. `private` significa che solo questa classe può accedervi. Nextflow può segnalare il completamento di più attività contemporaneamente da thread diversi, quindi il contatore è un `AtomicInteger`, che rimane corretto in caso di aggiornamenti concorrenti dove un semplice `int` potrebbe perdere degli incrementi.
+2. `incrementAndGet()` aggiunge uno al contatore e restituisce il nuovo valore. Questa riga viene eseguita ogni volta che un'attività si completa, quindi il conteggio cresce man mano che il flusso di lavoro avanza.
 3. `onFlowComplete` è un secondo hook del ciclo di vita. Viene eseguito una volta quando il flusso di lavoro termina, rendendolo un buon posto per stampare un riepilogo.
 
 In sintesi:
@@ -310,12 +333,12 @@ nextflow run greet.nf -ansi-log false
 ??? example "Output"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
-    Launching `greet.nf` [pensive_engelbart] DSL2 - revision: 85fefd90d0
+    N E X T F L O W  ~  version 26.04.4
+    Launching `greet.nf` [pensive_engelbart] - revision: bef1bea9f0
     Pipeline is starting! 🚀
     Reversed: olleH
     Reversed: ruojnoB
-    Reversed: àloH
+    Reversed: aloH
     Reversed: oaiC
     Reversed: ollaH
     [be/bd8e72] Submitted process > SAY_HELLO (2)
@@ -326,7 +349,7 @@ nextflow run greet.nf -ansi-log false
     [85/a6b3ad] Submitted process > SAY_HELLO (4)
     📊 Tasks completed so far: 1
     📊 Tasks completed so far: 2
-    Decorated: *** Holà ***
+    Decorated: *** Hola ***
     📊 Tasks completed so far: 3
     Decorated: *** Ciao ***
     [3c/be6686] Submitted process > SAY_HELLO (5)
@@ -389,12 +412,13 @@ Prima di tutto, aggiorniamo `greet.nf` in modo che il processo `SAY_HELLO` pubbl
 
 Aggiungiamo un metodo `onFilePublish` e l'import necessario a `TaskCounterObserver.groovy`:
 
-```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="5 23-26"
+```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="5 24-27"
 package training.plugin
 
 import groovy.transform.CompileStatic
 import nextflow.processor.TaskHandler
 import java.nio.file.Path
+import java.util.concurrent.atomic.AtomicInteger
 import nextflow.trace.TraceObserver
 import nextflow.trace.TraceRecord
 
@@ -404,12 +428,12 @@ import nextflow.trace.TraceRecord
 @CompileStatic
 class TaskCounterObserver implements TraceObserver {
 
-    private int taskCount = 0
+    private final AtomicInteger taskCount = new AtomicInteger()
 
     @Override
     void onProcessComplete(TaskHandler handler, TraceRecord trace) {
-        taskCount++
-        println "📊 Tasks completed so far: ${taskCount}"
+        final count = taskCount.incrementAndGet()
+        println "📊 Tasks completed so far: ${count}"
     }
 
     @Override
@@ -419,7 +443,7 @@ class TaskCounterObserver implements TraceObserver {
 
     @Override
     void onFlowComplete() {
-        println "📈 Final task count: ${taskCount}"
+        println "📈 Final task count: ${taskCount.get()}"
     }
 }
 ```
