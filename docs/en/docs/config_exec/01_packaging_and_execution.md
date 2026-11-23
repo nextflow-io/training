@@ -77,25 +77,25 @@ nextflow run main.nf --batch conda
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [romantic_pike] revision: c3c85dec78
+    Launching `main.nf` [desperate_bartik] revision: c3c85dec78
 
     executor >  local (8)
-    [6d/d48030] sayHello (2)       | 3 of 3 ✔
-    [f5/7a9d76] convertToUpper (1) | 3 of 3 ✔
-    [1c/79b693] collectGreetings   | 1 of 1 ✔
+    [22/14dc55] sayHello (3)       | 3 of 3 ✔
+    [d7/df6549] convertToUpper (3) | 3 of 3 ✔
+    [04/c1a765] collectGreetings   | 1 of 1 ✔
     Creating env using conda: conda-forge::cowpy==1.1.5 [cache /workspaces/training/config-exec/work/conda/env-898314d566668b6587ad714ae06b8520]
-    [bb/64b67c] cowpy              | 1 of 1 ✔
+    [57/7b616e] cowpy              | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/config-exec/results
 
       first_output:
-        - full_pipeline/intermediates/Hola-output.txt
-        - full_pipeline/intermediates/Bonjour-output.txt
         - full_pipeline/intermediates/Hello-output.txt
+        - full_pipeline/intermediates/Bonjour-output.txt
+        - full_pipeline/intermediates/Hola-output.txt
 
       uppercased:
         - full_pipeline/intermediates/UPPER-Hello-output.txt
@@ -209,7 +209,7 @@ In [Nextflow Run, section 1.3](../nextflow_run/01_run_nextflow.md#13-explore-the
 That same directory also contains a file you didn't look at yet: `.command.run`.
 
 ```bash
-cat work/0a/0df4a1*/.command.run
+cat work/d7/df6549*/.command.run
 ```
 
 ??? success "Command output (excerpt)"
@@ -217,16 +217,15 @@ cat work/0a/0df4a1*/.command.run
     ```console
     #!/bin/bash
     ### ---
-    ### name: 'convertToUpper (3)'
-    ### container: 'null'
+    ### name: "convertToUpper (3)"
     ### outputs:
-    ### - 'UPPER-Bonjour-output.txt'
+    ### - "UPPER-Hola-output.txt"
     ### ...
     set -e
     set -u
     ...
     nxf_launch() {
-        /bin/bash -ue /workspaces/training/nextflow-run/work/0a/0df4a1028c2001758b1841cff92fc7/.command.sh
+        /bin/bash -ue /workspaces/training/config-exec/work/d7/df654907db6412fb770a0268013908/.command.sh
     }
     ...
     ```
