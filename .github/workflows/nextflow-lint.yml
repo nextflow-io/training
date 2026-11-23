@@ -18,7 +18,7 @@ jobs:
           persist-credentials: false
 
       - name: Install Nextflow
-        uses: nf-core/setup-nextflow@v3
+        uses: nf-core/setup-nextflow@893c28b667aedeba26e37f296d260ccc5bc4d914 # ratchet:nf-core/setup-nextflow@v3
 
       - name: Run Nextflow lint
         run: |
