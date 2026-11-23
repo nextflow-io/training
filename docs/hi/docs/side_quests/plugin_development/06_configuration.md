@@ -234,6 +234,54 @@ Factory के पास Nextflow session और उसकी configuration त�
 Factory अब config से `greeting.enabled` पढ़ती है और अगर user ने इसे `false` set किया है तो empty list return करती है।
 जब list empty होती है, कोई observers नहीं बनते, इसलिए plugin के lifecycle hooks चुपचाप skip हो जाते हैं।
 
+Part 5 का factory test एक bare `Mock(Session)` pass करता है, जिसमें कोई config नहीं है, इसलिए `navigate()` अब `NullPointerException` के साथ fail हो जाता है।
+`nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy` को update करो ताकि mock session को एक config मिले, और disabled case के लिए एक test जोड़ो:
+
+=== "बाद में"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="4-6 8 15-25"
+        def 'should create the observer instance' () {
+            given:
+            def factory = new GreetingFactory()
+            def session = Mock(Session) {
+                getConfig() >> [greeting: [enabled: true]]
+            }
+            when:
+            def result = factory.create(session)
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+
+        def 'should return empty list when disabled' () {
+            given:
+            def factory = new GreetingFactory()
+            def session = Mock(Session) {
+                getConfig() >> [greeting: [enabled: false]]
+            }
+            when:
+            def result = factory.create(session)
+            then:
+            result.isEmpty()
+        }
+    ```
+
+=== "पहले"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="5"
+        def 'should create the observer instance' () {
+            given:
+            def factory = new GreetingFactory()
+            when:
+            def result = factory.create(Mock(Session))
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+    ```
+
 ### 2.1. Build और test करो
 
 Plugin को rebuild और install करो:

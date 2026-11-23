@@ -120,7 +120,7 @@ Això mostra documentació sobre el mòdul, incloent les seves entrades, sortide
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 4.0.2 - https://nf-co.re
+        nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Reinstalling modules found in 'modules.json' but missing from
@@ -188,7 +188,7 @@ Això mostra documentació sobre el mòdul, incloent les seves entrades, sortide
 
 Aquesta és exactament la mateixa informació que podeu trobar al lloc web.
 
-Podeu ignorar el missatge `INFO Reinstalling modules found in 'modules.json' but missing from directory`; l'emet nf-core/tools 4.0.2 per a qualsevol mòdul que consulteu amb `info`, estigui o no instal·lat, i no té cap efecte ja que la comanda `info` no escriu cap fitxer.
+Podeu ignorar el missatge `INFO Reinstalling modules found in 'modules.json' but missing from directory`; l'emet nf-core/tools 4.1.0 per a qualsevol mòdul que consulteu amb `info`, estigui o no instal·lat, i no té cap efecte ja que la comanda `info` no instal·la res.
 
 ### 1.4. Instal·lar el mòdul find/concatenate
 
@@ -197,10 +197,9 @@ Ara que hem trobat el mòdul que volem, hem d'afegir-lo al codi font del nostre 
 La bona notícia és que el projecte nf-core inclou eines per facilitar aquesta part.
 Específicament, la comanda `nf-core modules install` permet automatitzar la recuperació del codi i fer-lo disponible al vostre projecte en un sol pas.
 
-Assegureu-vos que el vostre directori de treball actual és l'arrel del projecte de pipeline `core-hello` i executeu la comanda d'instal·lació:
+Assegureu-vos que el vostre directori de treball actual és l'arrel del projecte de pipeline `core-hello` (executeu `cd core-hello` si encara sou al directori `nfcore-build/`), i després executeu la comanda d'instal·lació:
 
 ```bash
-cd core-hello
 nf-core modules install find/concatenate
 ```
 
@@ -214,18 +213,18 @@ nf-core modules install find/concatenate
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
+    INFO     Reinstalling modules found in 'modules.json' but missing from
+             directory:
     INFO     Installing 'find/concatenate'
-    NotADirectoryError: [Errno 20] Not a directory:
-    'modules/local/cowpy.nf/meta.yml'
+    INFO     Use the following statement to include this module:
+
+     include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
     ```
 
 La comanda descarrega els fitxers del mòdul a `modules/nf-core/find/concatenate/` i actualitza `modules.json` per fer seguiment del mòdul instal·lat.
-Podeu ignorar el `NotADirectoryError` al final; es produeix perquè nf-core/tools 4.0.2 espera que cada mòdul local resideixi al seu propi directori (`modules/local/<nom>/main.nf`), mentre que `core-hello` encara utilitza mòduls locals d'un sol fitxer en aquesta etapa.
-No obstant això, el mòdul `find/concatenate` s'instal·la correctament i `modules.json` s'actualitza com s'espera.
-Convertirem `cowpy` a l'estructura de directoris a la Part 4.
 
 Comprovem que els fitxers del mòdul estan al seu lloc:
 
@@ -278,7 +277,7 @@ També podeu confirmar la instal·lació inspeccionant `modules.json`, que ara l
                     "nf-core": {
                         "utils_nextflow_pipeline": {
                             "branch": "master",
-                            "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                            "git_sha": "c2b22d85f30a706a3073387f30380704fcae013b",
                             "installed_by": [
                                 "subworkflows"
                             ]
@@ -292,7 +291,7 @@ També podeu confirmar la instal·lació inspeccionant `modules.json`, que ara l
                         },
                         "utils_nfschema_plugin": {
                             "branch": "master",
-                            "git_sha": "fdc08b8b1ae74f56686ce21f7ea11ad11990ce57",
+                            "git_sha": "a7b27fd25bfa8dcc07d299e88bd790585901a436",
                             "installed_by": [
                                 "subworkflows"
                             ]
@@ -323,7 +322,7 @@ nf-core modules list local
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Repository type: pipeline
@@ -342,9 +341,9 @@ Això mostra `find/concatenate` a la taula resultant juntament amb el seu reposi
 
 Substituïm la declaració `include` del mòdul `collectGreetings` per la de `FIND_CONCATENATE` a la secció d'importacions del workflow `workflows/hello.nf`.
 
-Com a recordatori, l'eina d'instal·lació de mòduls ens va proporcionar la declaració exacta a utilitzar:
+La declaració d'importació apunta al fitxer `main.nf` del mòdul sota `modules/nf-core/`:
 
-```groovy title="Import statement produced by install command"
+```groovy title="Import statement for the find/concatenate module"
 include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
 ```
 
@@ -427,23 +426,23 @@ Idealment això és quelcom que hauríeu de fer _abans_ fins i tot d'instal·lar
 
 !!! info "Info"
 
-    El procés FIND_CONCATENATE inclou una gestió força intel·ligent de diferents tipus de compressió, extensions de fitxer i altres aspectes que no són estrictament rellevants per al que intentem mostrar-vos aquí, així que ignorarem la major part i ens centrarem només en les parts que són importants.
+    El procés `FIND_CONCATENATE` inclou una gestió força intel·ligent de diferents tipus de compressió, extensions de fitxer i altres aspectes que no són estrictament rellevants per al que intentem mostrar-vos aquí, així que ignorarem la major part i ens centrarem només en les parts que són importants.
 
 ### 2.1. Comparar les interfícies dels dos mòduls
 
 Com a recordatori, així és com es veu la interfície del nostre mòdul `collectGreetings`:
 
-```groovy title="modules/local/collectGreetings.nf (excerpt)" linenums="1" hl_lines="6-7 10"
+```groovy title="modules/local/collectGreetings.nf (excerpt)" linenums="4" hl_lines="6-7 10"
 process collectGreetings {
 
     publishDir 'results', mode: 'copy'
 
     input:
-        path input_files
-        val batch_name
+    path input_files
+    val batch_name
 
     output:
-        path "COLLECTED-${batch_name}-output.txt" , emit: outfile
+    path "COLLECTED-${batch_name}-output.txt" , emit: outfile
 ```
 
 El mòdul `collectGreetings` pren dues entrades:
@@ -466,7 +465,7 @@ process FIND_CONCATENATE {
         : 'community.wave.seqera.io/library/findutils_pigz:c4dd5edc44402661'}"
 
     input:
-    tuple val(meta), path(files_in)
+    tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
     output:
     tuple val(meta), path("${prefix}"), emit: file_out
@@ -475,12 +474,13 @@ process FIND_CONCATENATE {
     tuple val("${task.process}"), val("coreutils"), eval("cat --version | sed '1!d; s/.* //'"), topic: versions, emit: versions_coreutils
 ```
 
-El mòdul FIND_CONCATENATE pren una sola entrada, però aquesta entrada és una tupla que conté dues coses:
+El mòdul `FIND_CONCATENATE` pren una sola entrada, però aquesta entrada és una tupla que conté dues coses:
 
 - `meta` és una estructura que conté metadades, anomenada metamap;
 - `files_in` conté un o més fitxers d'entrada a processar, equivalent a `input_files` de `collectGreetings`.
+  L'opció `arity: '1..*'` requereix com a mínim un fitxer, i `stageAs: 'to_concatenate/*'` col·loca els fitxers en un subdirectori `to_concatenate/` del directori de treball de la tasca.
 
-En completar-se, FIND_CONCATENATE lliura les seves sortides en dues parts:
+En completar-se, `FIND_CONCATENATE` lliura les seves sortides en dues parts:
 
 - Una tupla que conté el metamap i el fitxer de sortida concatenat, emès amb l'etiqueta `file_out`;
 - Tres tuples de versió (una per eina utilitzada) publicades al canal de tema `versions` per al seguiment de versions de programari.
@@ -494,14 +494,14 @@ Això pot semblar molt a tenir en compte només mirant el codi, així que aquí 
 </figure>
 
 Podeu veure que els dos mòduls tenen requisits d'entrada similars pel que fa al contingut (un conjunt de fitxers d'entrada més algunes metadades) però expectatives molt diferents sobre com s'empaqueta aquest contingut.
-Ignorant la sortida de versions per ara, la seva sortida principal també és equivalent (un fitxer concatenat), excepte que FIND_CONCATENATE també emet el metamap conjuntament amb el fitxer de sortida.
+Ignorant la sortida de versions per ara, la seva sortida principal també és equivalent (un fitxer concatenat), excepte que `FIND_CONCATENATE` també emet el metamap conjuntament amb el fitxer de sortida.
 
 Les diferències d'empaquetament seran força fàcils de gestionar, com veureu d'aquí a poc.
 No obstant això, per entendre la part del metamap, hem d'introduir-vos a algun context addicional.
 
 ### 2.2. Entendre els metamaps
 
-Acabem de dir-vos que el mòdul FIND_CONCATENATE espera un mapa de metadades com a part de la seva tupla d'entrada.
+Acabem de dir-vos que el mòdul `FIND_CONCATENATE` espera un mapa de metadades com a part de la seva tupla d'entrada.
 Prenguem-nos uns minuts per examinar més de prop què és això.
 
 El **mapa de metadades**, sovint anomenat **metamap** per abreujar, és un mapa d'estil Groovy que conté informació sobre unitats de dades.
@@ -525,7 +525,7 @@ Ara posem això en el context del procés `FIND_CONCATENATE`, que espera que els
 
 ```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="10" hl_lines="2 5"
 input:
-tuple val(meta), path(files_in)
+tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
 output:
 tuple val(meta), path("${prefix}"), emit: file_out
@@ -554,7 +554,7 @@ ch_input = [[[id: 'batch1', date: '25.10.01'], ['file1A.txt', 'file1B.txt']],
 Llavors el contingut del canal de sortida que surt seria així:
 
 ```groovy title="Example output channel contents"
-ch_input = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
+ch_output = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
             [[id: 'batch2', date: '25.10.26'], 'batch2.txt'],
             [[id: 'batch3', date: '25.11.14'], 'batch3.txt']]
 ```

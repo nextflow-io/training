@@ -1085,11 +1085,12 @@ workflow {
 }
 ```
 
-**1c.** `collect()` [operatörünü](https://www.nextflow.io/docs/latest/reference/operator.html#collect) kullanın:
+**1c.** `collect()` [operatörünü](https://www.nextflow.io/docs/latest/reference/operator.html#collect) kullanın.
+`collect()` bir liste yayınlar; bu nedenle tek öğeyi çıkarmak için `map` kullanın:
 
 ```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').collect()  // Value channel'a dönüştür
+    reference_ch = channel.of('baseline_reference').collect().map { refs -> refs[0] }  // Value channel'a dönüştür
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1222,9 +1223,44 @@ Demetlerden oluşan bir kanal ürettiğimizi görebilirsiniz: `['sample1', 'file
 
 #### Kodu düzeltin
 
-Bunu düzeltmek için, süreç her iki girdiyi de gerektiriyorsa süreci bir demet kabul edecek şekilde ayarlayabiliriz:
+Bunu düzeltmenin iki yolu vardır:
 
-=== "Seçenek 1: Süreçte demet kabul etme"
+1. Veriyi sürece uyacak şekilde yeniden şekillendirme
+2. Süreci veriye uyacak şekilde değiştirme
+
+=== "Seçenek 1: İlk öğeyi çıkarma"
+
+    === "Sonra"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        workflow {
+
+            // Kanal demet yayınlıyor, ancak süreç tek değer bekliyor
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch.map { sample_id, file -> sample_id })  // Düzeltildi: İlk öğe çıkarıldı
+        }
+        ```
+
+    === "Önce"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        workflow {
+
+            // Kanal demet yayınlıyor, ancak süreç tek değer bekliyor
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch)
+        }
+        ```
+
+=== "Seçenek 2: Süreçte demet kabul etme"
 
     === "Sonra"
 
@@ -1286,41 +1322,9 @@ Bunu düzeltmek için, süreç her iki girdiyi de gerektiriyorsa süreci bir dem
         }
         ```
 
-=== "Seçenek 2: İlk öğeyi çıkarma"
-
-    === "Sonra"
-
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
-        workflow {
-
-            // Kanal demet yayınlıyor, ancak süreç tek değer bekliyor
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch.map { it[0] })  // Düzeltildi: İlk öğe çıkarıldı
-        }
-        ```
-
-    === "Önce"
-
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
-        workflow {
-
-            // Kanal demet yayınlıyor, ancak süreç tek değer bekliyor
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch)
-        }
-        ```
-
 #### Pipeline'ı çalıştırın
 
-Çözümlerden birini seçin ve iş akışını yeniden çalıştırın (aşağıdaki çıktı Seçenek 1 kullanılarak elde edilmiştir):
+Çözümlerden birini seçin ve iş akışını yeniden çalıştırın (aşağıdaki çıktı Seçenek 2 kullanılarak elde edilmiştir):
 
 ```bash
 nextflow run bad_channel_shape.nf
@@ -1336,6 +1340,105 @@ nextflow run bad_channel_shape.nf
     executor >  local (3)
     [81/d0f3ea] PROCESS_FILES (1) | 3 of 3 ✔
     ```
+
+#### Daha ileri gitmek: kayıt türleri
+
+Seçenek 1 ve Seçenek 2 bu uyuşmazlığı giderir; ancak ikisi de bir sonrakini önlemez.
+Demet konuma dayalıdır; bu nedenle süreç yalnızca bir değerler listesi aldığını bilir.
+Bir kanal değerleri yanlış sırayla yayınlarsa ya da birini atlarsa hata daha sonra ortaya çıkar ve nedeni değil belirtiyi gösterir.
+
+Kayıt türleri, veriye tanımlanmış bir şekil vererek bu sorunu çözer.
+Bir kayıt, adlandırılmış ve türlendirilmiş alanlar tanımlar; bir süreç ise kabul ettiği kayıt türünü bildirir.
+Nextflow her değeri bu bildirime göre denetler.
+
+!!! note "Kayıt türleri yeni bir özelliktir"
+
+    Kayıt türleri Nextflow 26.04 sürümünde tanıtılmıştır ve `nextflow.enable.types` bayrağını gerektirir.
+    26.04 sürümünde Nextflow, statik türlemenin önizleme özelliği olduğuna dair bir uyarı yazdırır.
+    Gelecekteki bir eğitim kursu bunları ayrıntılı olarak ele alacaktır.
+
+Aynı iş akışının bir kayıt kullanılarak yazılmış hali aşağıdadır:
+
+```groovy title="bad_channel_shape.nf" hl_lines="3 5-8 12 15 19 27-29" linenums="1"
+#!/usr/bin/env nextflow
+
+nextflow.enable.types = true
+
+record Sample {
+    id: String
+    file_name: String
+}
+
+process PROCESS_FILES {
+    input:
+        sample: Sample  // Adlandırılmış alanlara sahip bir kayıt kabul et
+
+    output:
+        file("${sample.id}_output.txt")
+
+    script:
+    """
+    echo "Processing ${sample.id}" > ${sample.id}_output.txt
+    """
+}
+
+workflow {
+
+    // Kanal adlandırılmış alanlara sahip kayıtlar yayınlıyor
+    input_ch = channel.of(
+      record(id: 'sample1', file_name: 'file1.txt'),
+      record(id: 'sample2', file_name: 'file2.txt'),
+      record(id: 'sample3', file_name: 'file3.txt')
+    )
+    PROCESS_FILES(input_ch)
+}
+```
+
+Orijinalden yapılan değişiklikler şunlardır:
+
+- `nextflow.enable.types = true` türlendirilmiş sözdizimini etkinleştirir
+- `record Sample { ... }` her örneğin sahip olması gereken alanları bildirir
+- `sample: Sample` sürecin bir `Sample` kaydı kabul ettiğini bildirir
+- `record(id: ..., file_name: ...)` kanaldaki her kaydı oluşturur
+- `sample.id` bir alana konuma göre değil, adına göre erişir
+
+Bir kayıtta alan eksikse Nextflow hata mesajında alan adını belirtir.
+Bunu görmek için ikinci kayıttan `id` alanını kaldırın:
+
+```groovy title="bad_channel_shape.nf" hl_lines="3" linenums="26"
+    input_ch = channel.of(
+      record(id: 'sample1', file_name: 'file1.txt'),
+      record(file_name: 'file2.txt'),
+      record(id: 'sample3', file_name: 'file3.txt')
+    )
+```
+
+İş akışını çalıştırın:
+
+```bash
+nextflow run bad_channel_shape.nf
+```
+
+??? failure "Komut çıktısı"
+
+    ```console
+     N E X T F L O W   ~  version 26.10.0
+
+    Launching `bad_channel_shape.nf` [condescending_sammet] revision: 15c9f9aa87
+
+    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
+
+    Caused by:
+      [PROCESS_FILES (2)] input field `id` at index 0 cannot be null -- append `?` to the type annotation to mark it as nullable
+
+
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+     -- Check '.nextflow.log' file for details
+    ```
+
+Bu hata Nextflow 26.10 veya sonraki bir sürümü gerektirir.
+Nextflow 26.04'te görev, `id` değeri `null` olarak ayarlanmış şekilde çalışır ve `null_output.txt` dosyasını oluşturur.
 
 ### 2.4. Kanal Hata Ayıklama Teknikleri
 
@@ -1381,9 +1484,9 @@ workflow {
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
     )
-    .view { "Channel content: $it" }  // Hata ayıklama: Orijinal kanal içeriğini göster
-    .map { tuple -> tuple[0] }        // Dönüşüm: İlk öğeyi çıkar
-    .view { "After mapping: $it" }    // Hata ayıklama: Dönüştürülmüş kanal içeriğini göster
+    .view { item -> "Channel content: ${item}" }  // Hata ayıklama: Orijinal kanal içeriğini göster
+    .map { sample_id, file -> sample_id }         // Dönüşüm: İlk öğeyi çıkar
+    .view { item -> "After mapping: ${item}" } // Hata ayıklama: Dönüştürülmüş kanal içeriğini göster
 
     PROCESS_FILES(input_ch)
 }
@@ -2386,7 +2489,7 @@ Artık sistematik hata ayıklama yaklaşımını pratiğe dökme zamanı. `buggy
         ```
         **Düzeltme:** Yalnızca örnek kimliklerini iletin
         ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch.map{it[0]})
+        heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
         ```
 
         Artık `heavyProcess` çalışıyor; ancak zaman sınırına takılıyor. `local` yürütücüde mesaj, açık bir zaman aşımı yerine `process hasn't exited` (ve `WARN: Killing running tasks` uyarısı) şeklinde görünür; bu nedenle durdurulan görevi `time` yönergesine bağlayın:
@@ -2512,7 +2615,7 @@ Artık sistematik hata ayıklama yaklaşımını pratiğe dökme zamanı. `buggy
 
             processed_ch = processFiles(input_ch)
 
-            heavy_ch = heavyProcess(input_ch.map{it[0]})
+            heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
 
             file_ch = handleFiles(heavy_ch)
 
@@ -2591,7 +2694,7 @@ echo "\${bash_var}"          // Bash değişkeni (kaçırılmış)
 
 ```groovy
 // Kanal içeriğini incele
-my_channel.view { "Content: $it" }
+my_channel.view { item -> "Content: ${item}" }
 
 // Queue channel'ı value channel'a dönüştür (tükenmeyi önler)
 reference_ch = channel.value('ref.fa')

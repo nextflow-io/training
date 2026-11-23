@@ -1,0 +1,6 @@
+sample,fastq_1,fastq_2,strandedness
+WT_1,data/reads/WT_1_S1_L001_R1_001.fastq.gz,data/reads/WT_1_S1_L001_R2_001.fastq.gz,reverse
+WT_1,data/reads/WT_1_S1_L002_R1_001.fastq.gz,data/reads/WT_1_S1_L002_R2_001.fastq.gz,auto
+WT_2,data/reads/WT_2_S2_L001_R1_001.fastq.gz,data/reads/WT_2_S2_L001_R2_001.fastq.gz,auto
+KO_1,data/reads/KO_1_S3_L001_R1_001.fastq.gz,data/reads/KO_1_S3_L001_R2_001.fastq.gz,auto
+KO_2,data/reads/KO_2_S4_L001_R1_001.fastq.gz,data/reads/KO_2_S4_L001_R2_001.fastq.gz,auto

@@ -1085,11 +1085,12 @@ workflow {
 }
 ```
 
-**1c.** `collect()` [연산자](https://www.nextflow.io/docs/latest/reference/operator.html#collect) 사용:
+**1c.** `collect()` [연산자](https://www.nextflow.io/docs/latest/reference/operator.html#collect) 사용.
+`collect()`는 리스트를 내보내므로, `map`을 사용하여 단일 항목을 추출합니다:
 
 ```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').collect()  // value 채널로 변환
+    reference_ch = channel.of('baseline_reference').collect().map { refs -> refs[0] }  // value 채널로 변환
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1222,9 +1223,44 @@ workflow {
 
 #### 코드 수정
 
-프로세스가 두 입력을 모두 필요로 한다면, 프로세스가 튜플을 받도록 조정할 수 있습니다:
+이를 수정하는 방법은 두 가지입니다:
 
-=== "옵션 1: 프로세스에서 튜플 받기"
+1. 프로세스에 맞게 데이터를 재구성
+2. 데이터에 맞게 프로세스를 변경
+
+=== "옵션 1: 첫 번째 요소 추출"
+
+    === "후"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        workflow {
+
+            // 채널은 튜플을 내보내지만 프로세스는 단일 값을 기대
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch.map { sample_id, file -> sample_id })  // 수정: 첫 번째 요소 추출
+        }
+        ```
+
+    === "전"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        workflow {
+
+            // 채널은 튜플을 내보내지만 프로세스는 단일 값을 기대
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch)
+        }
+        ```
+
+=== "옵션 2: 프로세스에서 튜플 받기"
 
     === "후"
 
@@ -1286,41 +1322,9 @@ workflow {
         }
         ```
 
-=== "옵션 2: 첫 번째 요소 추출"
-
-    === "후"
-
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
-        workflow {
-
-            // 채널은 튜플을 내보내지만 프로세스는 단일 값을 기대
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch.map { it[0] })  // 수정: 첫 번째 요소 추출
-        }
-        ```
-
-    === "전"
-
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
-        workflow {
-
-            // 채널은 튜플을 내보내지만 프로세스는 단일 값을 기대
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch)
-        }
-        ```
-
 #### 파이프라인 실행
 
-해결책 중 하나를 선택하고 워크플로우를 다시 실행합니다 (아래 출력은 옵션 1을 사용):
+해결책 중 하나를 선택하고 워크플로우를 다시 실행합니다 (아래 출력은 옵션 2를 사용):
 
 ```bash
 nextflow run bad_channel_shape.nf
@@ -1336,6 +1340,105 @@ nextflow run bad_channel_shape.nf
     executor >  local (3)
     [81/d0f3ea] PROCESS_FILES (1) | 3 of 3 ✔
     ```
+
+#### 더 나아가기: 레코드 타입
+
+옵션 1과 2는 이 불일치를 해결하지만, 다음 불일치를 방지하지는 못합니다.
+튜플은 위치 기반이므로, 프로세스는 값의 목록을 받는다는 것만 알 수 있습니다.
+채널이 잘못된 순서로 값을 내보내거나 하나를 누락하면, 오류는 나중에 나타나며 원인이 아닌 증상을 가리킵니다.
+
+레코드 타입은 데이터에 선언된 형태를 부여하여 이 문제를 해결합니다.
+레코드는 이름이 지정된 타입 필드를 정의하고, 프로세스는 허용하는 레코드 타입을 선언합니다.
+Nextflow는 각 값을 해당 선언과 대조하여 검사합니다.
+
+!!! note "레코드 타입은 새로운 기능입니다"
+
+    레코드 타입은 Nextflow 26.04에서 도입되었으며 `nextflow.enable.types` 플래그가 필요합니다.
+    26.04에서 Nextflow는 정적 타이핑이 미리 보기 기능임을 알리는 경고를 출력합니다.
+    향후 교육 과정에서 이를 자세히 다룰 예정입니다.
+
+레코드를 사용하여 작성한 동일한 워크플로우는 다음과 같습니다:
+
+```groovy title="bad_channel_shape.nf" hl_lines="3 5-8 12 15 19 27-29" linenums="1"
+#!/usr/bin/env nextflow
+
+nextflow.enable.types = true
+
+record Sample {
+    id: String
+    file_name: String
+}
+
+process PROCESS_FILES {
+    input:
+        sample: Sample  // 이름이 지정된 필드를 가진 레코드 받기
+
+    output:
+        file("${sample.id}_output.txt")
+
+    script:
+    """
+    echo "Processing ${sample.id}" > ${sample.id}_output.txt
+    """
+}
+
+workflow {
+
+    // 채널은 이름이 지정된 필드를 가진 레코드를 내보냄
+    input_ch = channel.of(
+      record(id: 'sample1', file_name: 'file1.txt'),
+      record(id: 'sample2', file_name: 'file2.txt'),
+      record(id: 'sample3', file_name: 'file3.txt')
+    )
+    PROCESS_FILES(input_ch)
+}
+```
+
+원본과의 변경 사항은 다음과 같습니다:
+
+- `nextflow.enable.types = true`로 타입 구문을 활성화
+- `record Sample { ... }`로 각 샘플이 가져야 할 필드를 선언
+- `sample: Sample`로 프로세스가 `Sample` 레코드를 받음을 선언
+- `record(id: ..., file_name: ...)`으로 채널에서 각 레코드를 생성
+- `sample.id`로 위치가 아닌 이름으로 필드에 접근
+
+레코드에 필드가 누락된 경우, Nextflow는 오류에서 해당 필드 이름을 알려줍니다.
+이를 확인하려면 두 번째 레코드에서 `id`를 제거합니다:
+
+```groovy title="bad_channel_shape.nf" hl_lines="3" linenums="26"
+    input_ch = channel.of(
+      record(id: 'sample1', file_name: 'file1.txt'),
+      record(file_name: 'file2.txt'),
+      record(id: 'sample3', file_name: 'file3.txt')
+    )
+```
+
+워크플로우를 실행합니다:
+
+```bash
+nextflow run bad_channel_shape.nf
+```
+
+??? failure "명령 출력"
+
+    ```console
+     N E X T F L O W   ~  version 26.10.0
+
+    Launching `bad_channel_shape.nf` [condescending_sammet] revision: 15c9f9aa87
+
+    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
+
+    Caused by:
+      [PROCESS_FILES (2)] input field `id` at index 0 cannot be null -- append `?` to the type annotation to mark it as nullable
+
+
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+     -- Check '.nextflow.log' file for details
+    ```
+
+이 오류는 Nextflow 26.10 이상이 필요합니다.
+Nextflow 26.04에서는 `id`가 `null`로 설정된 상태로 작업이 실행되며 `null_output.txt`가 생성됩니다.
 
 ### 2.4. 채널 디버깅 기법
 
@@ -1381,9 +1484,9 @@ workflow {
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
     )
-    .view { "Channel content: $it" }  // 디버그: 원본 채널 내용 표시
-    .map { tuple -> tuple[0] }        // 변환: 첫 번째 요소 추출
-    .view { "After mapping: $it" }    // 디버그: 변환된 채널 내용 표시
+    .view { item -> "Channel content: ${item}" }  // 디버그: 원본 채널 내용 표시
+    .map { sample_id, file -> sample_id }         // 변환: 첫 번째 요소 추출
+    .view { item -> "After mapping: ${item}" }    // 디버그: 변환된 채널 내용 표시
 
     PROCESS_FILES(input_ch)
 }
@@ -2386,7 +2489,7 @@ nextflow run workflow.nf -profile debug
         ```
         **수정:** 샘플 ID만 전달
         ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch.map{it[0]})
+        heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
         ```
 
         이제 `heavyProcess`가 실행되지만 시간 제한에 걸립니다. `local` executor에서는 명시적인 타임아웃 메시지 대신 `process hasn't exited`(및 `WARN: Killing running tasks` 메시지)가 표시되므로, 종료된 작업을 해당 `time` 지시문과 연결합니다:
@@ -2512,7 +2615,7 @@ nextflow run workflow.nf -profile debug
 
             processed_ch = processFiles(input_ch)
 
-            heavy_ch = heavyProcess(input_ch.map{it[0]})
+            heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
 
             file_ch = handleFiles(heavy_ch)
 
@@ -2591,7 +2694,7 @@ echo "\${bash_var}"          // Bash 변수 (이스케이프됨)
 
 ```groovy
 // 채널 내용 검사
-my_channel.view { "Content: $it" }
+my_channel.view { item -> "Content: ${item}" }
 
 // queue 채널을 value 채널로 변환 (소진 방지)
 reference_ch = channel.value('ref.fa')

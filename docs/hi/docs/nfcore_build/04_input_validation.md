@@ -150,7 +150,7 @@ nf-core pipeline टेम्पलेट nf-schema के साथ पहल�
 - पैरामीटर सत्यापन `params.validate_params` द्वारा नियंत्रित किया जाता है
 - सत्यापन pipeline इनिशियलाइज़ेशन के दौरान `UTILS_NFSCHEMA_PLUGIN` subworkflow द्वारा किया जाता है
 
-भाग 3 और 4 में हमने `validate_params = false` सेट किया था ताकि pipeline किसी भी स्कीमा को कॉन्फ़िगर करने से पहले चल सके।
+भाग 1 में हमने `validate_params = false` सेट किया था ताकि pipeline किसी भी स्कीमा को कॉन्फ़िगर करने से पहले चल सके।
 अब जब हम सत्यापन जोड़ने के लिए तैयार हैं, तो पहला कदम इसे चालू करना है।
 
 `nextflow.config` खोलें और `validate_params` पैरामीटर खोजें (लगभग लाइन 37), और इसे `true` पर सेट करें:
@@ -171,11 +171,11 @@ nf-core pipeline टेम्पलेट nf-schema के साथ पहल�
 
 चूंकि हम पहले पैरामीटर सत्यापन पर काम करेंगे (यह खंड) और खंड 2 तक इनपुट डेटा स्कीमा कॉन्फ़िगर नहीं करेंगे, हमें अस्थायी रूप से nf-schema को `input` पैरामीटर की फ़ाइल सामग्री को सत्यापित करने से छोड़ने के लिए भी कहना होगा।
 
-`validation` ब्लॉक खोजें (लगभग लाइन 252) और इनपुट फ़ाइल सत्यापन को छोड़ने के लिए `ignoreParams` जोड़ें:
+`validation` ब्लॉक खोजें (लगभग लाइन 251) और इनपुट फ़ाइल सत्यापन को छोड़ने के लिए `ignoreParams` जोड़ें:
 
 === "बाद में"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="252"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="251"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -185,7 +185,7 @@ nf-core pipeline टेम्पलेट nf-schema के साथ पहल�
 
 === "पहले"
 
-    ```groovy title="nextflow.config" linenums="252"
+    ```groovy title="nextflow.config" linenums="251"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -264,6 +264,32 @@ grep -A 25 '"input_output_options"' nextflow_schema.json
 
 ### 1.3. batch पैरामीटर जोड़ें
 
+#### 1.3.1. `nextflow.config` में पैरामीटर घोषित करें
+
+अभी तक, `batch` केवल `conf/test.config` में सेट है।
+ऊपर दी गई सलाह के अनुसार, इसे `nextflow.config` के `params` ब्लॉक में, `input` के नीचे घोषित करें:
+
+=== "बाद में"
+
+    ```groovy title="nextflow.config" hl_lines="4" linenums="12"
+        // TODO nf-core: Specify your pipeline's command line flags
+        // Input options
+        input                      = null
+        batch                      = null
+    ```
+
+=== "पहले"
+
+    ```groovy title="nextflow.config" linenums="12"
+        // TODO nf-core: Specify your pipeline's command line flags
+        // Input options
+        input                      = null
+    ```
+
+डिफ़ॉल्ट `null` है, जैसे `input`, इसलिए उपयोगकर्ता को अभी भी `--batch` के साथ या `test` जैसे किसी profile के माध्यम से एक मान देना होगा।
+
+#### 1.3.2. स्कीमा में पैरामीटर जोड़ें
+
 जबकि स्कीमा एक JSON फ़ाइल है जिसे मैन्युअल रूप से संपादित किया जा सकता है, **मैन्युअल संपादन त्रुटि-प्रवण है और अनुशंसित नहीं है**।
 इसके बजाय, nf-core एक इंटरैक्टिव GUI टूल प्रदान करता है जो तुम्हारे लिए JSON Schema सिंटैक्स को संभालता है और तुम्हारे परिवर्तनों को सत्यापित करता है:
 
@@ -271,7 +297,7 @@ grep -A 25 '"input_output_options"' nextflow_schema.json
 nf-core pipelines schema build
 ```
 
-तुम्हें कुछ इस तरह दिखना चाहिए:
+यह टूल `nextflow.config` में पैरामीटर की तुलना स्कीमा से करता है और नया `batch` पैरामीटर खोजता है:
 
 ```console
                                           ,--./,-.
@@ -280,28 +306,33 @@ nf-core pipelines schema build
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)
-INFO     Writing schema with 17 params: 'nextflow_schema.json'
+✨ Found 'params.batch' in the pipeline config, but not in the schema. Add to pipeline schema? [y/n]:
+```
+
+`batch` को स्कीमा में जोड़ने के लिए `y` टाइप करें और Enter दबाएं:
+
+```console
+INFO     Writing schema with 18 params: 'nextflow_schema.json'
 🚀  Launch web builder for customisation and editing? [y/n]:
 ```
 
-`y` टाइप करें और Enter दबाएं ताकि इंटरैक्टिव वेब इंटरफ़ेस लॉन्च हो सके।
+टूल ने `batch` को `string` type के साथ जोड़ा है, लेकिन बिना किसी description के, और किसी भी पैरामीटर समूह के बाहर।
+इसे पूरा करने के लिए इंटरैक्टिव वेब इंटरफ़ेस लॉन्च करने हेतु `y` टाइप करें और Enter दबाएं।
 
 तुम्हारा ब्राउज़र Parameter schema builder दिखाते हुए खुलेगा:
 
 ![Schema builder इंटरफ़ेस](./img/schema_build.png)
 
-`batch` पैरामीटर जोड़ने के लिए:
+`batch` पैरामीटर को पूरा करने के लिए:
 
-1. शीर्ष पर **"Add parameter"** बटन पर क्लिक करें
-2. drag handle (⋮⋮) का उपयोग करके नए पैरामीटर को "Input/output options" समूह में, `input` पैरामीटर के नीचे ले जाएं
-3. पैरामीटर विवरण भरें:
-   - **ID**: `batch`
+1. drag handle (⋮⋮) का उपयोग करके `batch` को "Input/output options" समूह में, `input` पैरामीटर के नीचे ले जाएं
+2. पैरामीटर विवरण भरें:
    - **Description**: `Name for this batch of greetings`
-   - **Type**: `string`
+   - **Type**: `string` (पहले से सेट)
    - **Required**: चेकबॉक्स टिक करें
    - वैकल्पिक रूप से, icon picker से एक आइकन चुनें (जैसे, `fas fa-layer-group`)
 
@@ -326,7 +357,7 @@ schema builder से बाहर निकलने के लिए `Ctrl+C` 
 grep -A 25 '"input_output_options"' nextflow_schema.json
 ```
 
-```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="19-23"
+```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="6 19-23"
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -373,6 +404,8 @@ nextflow run . --outdir test-results -profile docker
     The following invalid input values have been detected:
 
     * Missing required parameter(s): input, batch
+
+     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 72 or see '.nextflow.log' file for more details
     ```
 
 बिल्कुल सही! सत्यापन pipeline चलने से पहले लापता आवश्यक पैरामीटर को पकड़ता है।
@@ -460,7 +493,7 @@ nf-core pipeline टेम्पलेट में एक डिफ़ॉल्
 
 === "बाद में"
 
-    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-25 27"
+    ```json title="assets/schema_input.json" linenums="1" hl_lines="5 10-25 27"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
@@ -494,7 +527,7 @@ nf-core pipeline टेम्पलेट में एक डिफ़ॉल्
 
 === "पहले"
 
-    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-29 31"
+    ```json title="assets/schema_input.json" linenums="1" hl_lines="5 10-29 31"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
@@ -615,10 +648,11 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 
 === "बाद में"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5"
         //
         // params.input के माध्यम से प्रदान की गई इनपुट फ़ाइल से channel बनाएं
         //
+
         ch_samplesheet = channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
             .map { line -> line[0] }
 
@@ -629,10 +663,11 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 
 === "पहले"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4 5"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5 6"
         //
         // params.input के माध्यम से प्रदान की गई इनपुट फ़ाइल से channel बनाएं
         //
+
         ch_samplesheet = channel.fromPath(params.input)
             .splitCsv()
             .map { line -> line[0] }
@@ -724,7 +759,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
 
 === "बाद में"
 
-    ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
+    ```csv title="assets/invalid_greetings.csv" hl_lines="1" linenums="1"
     message,language,score
     Hello,en,87
     Bonjour,fr,96
@@ -733,7 +768,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
 
 === "पहले"
 
-    ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
+    ```csv title="assets/invalid_greetings.csv" hl_lines="1" linenums="1"
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
@@ -745,7 +780,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
 इस अमान्य इनपुट के साथ pipeline चलाने का प्रयास करें:
 
 ```bash
-nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profile docker
+nextflow run . --input assets/invalid_greetings.csv --outdir test-results --batch my-batch -profile docker
 ```
 
 ??? failure "कमांड आउटपुट"
@@ -757,6 +792,7 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 
     Input/output options
       input              : assets/invalid_greetings.csv
+      batch              : my-batch
       outdir             : test-results
 
     Generic options
@@ -779,19 +815,18 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
      -- Check '.nextflow.log' file for details
     The following invalid input values have been detected:
 
-    * Missing required parameter(s): batch
     * --input (assets/invalid_greetings.csv): Validation of file failed:
         -> Entry 1: Missing required field(s): greeting
         -> Entry 2: Missing required field(s): greeting
         -> Entry 3: Missing required field(s): greeting
 
-     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
+     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 72 or see '.nextflow.log' file for more details
     ```
 
-बिल्कुल सही! सत्यापन ने त्रुटि को पकड़ लिया और एक स्पष्ट, सहायक त्रुटि संदेश प्रदान किया:
+बिल्कुल सही! सत्यापन ने त्रुटि को पकड़ लिया और एक स्पष्ट, सहायक त्रुटि संदेश प्रदान किया जो बताता है:
 
 - कौन सी फ़ाइल सत्यापन विफल हुई
-- कौन सी प्रविष्टि (पंक्ति 1, पहली डेटा पंक्ति) में समस्या है
+- कौन सी प्रविष्टियों में समस्या है (सभी तीन डेटा पंक्तियाँ, क्योंकि हेडर में अब `greeting` कॉलम नहीं है)
 - विशिष्ट समस्या क्या है (आवश्यक फ़ील्ड `greeting` लापता)
 
 स्कीमा सत्यापन यह सुनिश्चित करता है कि pipeline चलने से पहले इनपुट फ़ाइलों में सही संरचना हो, समय की बचत होती है और निष्पादन में बाद में भ्रमित करने वाली त्रुटियों को रोकता है।
@@ -808,6 +843,6 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 
 ### आगे क्या है?
 
-तुमने Build with nf-core प्रशिक्षण कोर्स के सभी पांच भाग पूरे कर लिए हैं!
+तुमने Build with nf-core प्रशिक्षण कोर्स के सभी चार भाग पूरे कर लिए हैं!
 
 तुमने क्या बनाया है और सीखा है, इस पर विचार करने के लिए [सारांश](next_steps.md) पर जारी रखो।

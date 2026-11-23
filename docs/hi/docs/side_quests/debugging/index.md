@@ -1085,11 +1085,12 @@ workflow {
 }
 ```
 
-**1c.** `collect()` [ऑपरेटर](https://www.nextflow.io/docs/latest/reference/operator.html#collect) का उपयोग करो:
+**1c.** `collect()` [ऑपरेटर](https://www.nextflow.io/docs/latest/reference/operator.html#collect) का उपयोग करो।
+`collect()` एक list emit करता है, इसलिए single आइटम निकालने के लिए `map` का उपयोग करो:
 
 ```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').collect()  // value channel में बदलो
+    reference_ch = channel.of('baseline_reference').collect().map { refs -> refs[0] }  // value channel में बदलो
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1222,9 +1223,44 @@ workflow {
 
 #### कोड ठीक करो
 
-इसे ठीक करने के लिए, अगर प्रोसेस को दोनों इनपुट की आवश्यकता है तो हम प्रोसेस को tuple स्वीकार करने के लिए समायोजित कर सकते हैं:
+इसे ठीक करने के दो तरीके हैं:
 
-=== "विकल्प 1: प्रोसेस में tuple स्वीकार करो"
+1. डेटा को प्रोसेस के अनुसार reshape करो
+2. प्रोसेस को डेटा के अनुसार बदलो
+
+=== "विकल्प 1: पहला तत्व निकालो"
+
+    === "बाद में"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        workflow {
+
+            // चैनल tuples emit करता है, लेकिन प्रोसेस single values की अपेक्षा करता है
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch.map { sample_id, file -> sample_id })  // ठीक किया: पहला तत्व निकालो
+        }
+        ```
+
+    === "पहले"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        workflow {
+
+            // चैनल tuples emit करता है, लेकिन प्रोसेस single values की अपेक्षा करता है
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch)
+        }
+        ```
+
+=== "विकल्प 2: प्रोसेस में tuple स्वीकार करो"
 
     === "बाद में"
 
@@ -1286,41 +1322,9 @@ workflow {
         }
         ```
 
-=== "विकल्प 2: पहला तत्व निकालो"
-
-    === "बाद में"
-
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
-        workflow {
-
-            // चैनल tuples emit करता है, लेकिन प्रोसेस single values की अपेक्षा करता है
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch.map { it[0] })  // ठीक किया: पहला तत्व निकालो
-        }
-        ```
-
-    === "पहले"
-
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
-        workflow {
-
-            // चैनल tuples emit करता है, लेकिन प्रोसेस single values की अपेक्षा करता है
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch)
-        }
-        ```
-
 #### पाइपलाइन चलाओ
 
-समाधानों में से एक चुनो और वर्कफ़्लो फिर से चलाओ (नीचे दिया गया आउटपुट विकल्प 1 का उपयोग करता है):
+समाधानों में से एक चुनो और वर्कफ़्लो फिर से चलाओ (नीचे दिया गया आउटपुट विकल्प 2 का उपयोग करता है):
 
 ```bash
 nextflow run bad_channel_shape.nf
@@ -1336,6 +1340,105 @@ nextflow run bad_channel_shape.nf
     executor >  local (3)
     [81/d0f3ea] PROCESS_FILES (1) | 3 of 3 ✔
     ```
+
+#### आगे जाना: record types
+
+विकल्प 1 और 2 इस बेमेल को ठीक करते हैं, लेकिन कोई भी अगले बेमेल को नहीं रोकता।
+एक tuple positional होता है, इसलिए प्रोसेस केवल यह जानता है कि उसे values की एक list मिल रही है।
+अगर कोई चैनल values को गलत क्रम में emit करता है, या किसी को छोड़ देता है, तो एरर बाद में दिखाई देती है और कारण की बजाय लक्षण की ओर इशारा करती है।
+
+Record types इसे डेटा को एक declared shape देकर संबोधित करते हैं।
+एक record named, typed fields परिभाषित करता है, और एक प्रोसेस उस record type को declare करता है जिसे वह स्वीकार करता है।
+Nextflow प्रत्येक value को उस declaration के विरुद्ध जांचता है।
+
+!!! note "Record types एक नई सुविधा हैं"
+
+    Record types को Nextflow 26.04 में पेश किया गया था और इसके लिए `nextflow.enable.types` flag की आवश्यकता है।
+    26.04 पर, Nextflow एक चेतावनी प्रिंट करता है कि static typing एक preview feature है।
+    एक भविष्य का प्रशिक्षण कोर्स इन्हें विस्तार से कवर करेगा।
+
+यहाँ वही वर्कफ़्लो record के साथ लिखा गया है:
+
+```groovy title="bad_channel_shape.nf" hl_lines="3 5-8 12 15 19 27-29" linenums="1"
+#!/usr/bin/env nextflow
+
+nextflow.enable.types = true
+
+record Sample {
+    id: String
+    file_name: String
+}
+
+process PROCESS_FILES {
+    input:
+        sample: Sample  // named fields वाला record स्वीकार करो
+
+    output:
+        file("${sample.id}_output.txt")
+
+    script:
+    """
+    echo "Processing ${sample.id}" > ${sample.id}_output.txt
+    """
+}
+
+workflow {
+
+    // चैनल named fields वाले records emit करता है
+    input_ch = channel.of(
+      record(id: 'sample1', file_name: 'file1.txt'),
+      record(id: 'sample2', file_name: 'file2.txt'),
+      record(id: 'sample3', file_name: 'file3.txt')
+    )
+    PROCESS_FILES(input_ch)
+}
+```
+
+मूल से बदलाव ये हैं:
+
+- `nextflow.enable.types = true` typed syntax को सक्षम करता है
+- `record Sample { ... }` उन fields को declare करता है जो प्रत्येक sample में होने चाहिए
+- `sample: Sample` declare करता है कि प्रोसेस एक `Sample` record स्वीकार करता है
+- `record(id: ..., file_name: ...)` चैनल में प्रत्येक record बनाता है
+- `sample.id` position की बजाय नाम से एक field तक पहुंचता है
+
+अगर किसी record में कोई field गायब है, तो Nextflow एरर में उस field का नाम बताता है।
+इसे देखने के लिए, दूसरे record से `id` हटाओ:
+
+```groovy title="bad_channel_shape.nf" hl_lines="3" linenums="26"
+    input_ch = channel.of(
+      record(id: 'sample1', file_name: 'file1.txt'),
+      record(file_name: 'file2.txt'),
+      record(id: 'sample3', file_name: 'file3.txt')
+    )
+```
+
+वर्कफ़्लो चलाओ:
+
+```bash
+nextflow run bad_channel_shape.nf
+```
+
+??? failure "कमांड आउटपुट"
+
+    ```console
+     N E X T F L O W   ~  version 26.10.0
+
+    Launching `bad_channel_shape.nf` [condescending_sammet] revision: 15c9f9aa87
+
+    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
+
+    Caused by:
+      [PROCESS_FILES (2)] input field `id` at index 0 cannot be null -- append `?` to the type annotation to mark it as nullable
+
+
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+     -- Check '.nextflow.log' file for details
+    ```
+
+इस एरर के लिए Nextflow 26.10 या बाद का संस्करण आवश्यक है।
+Nextflow 26.04 पर, कार्य `id` को `null` सेट करके चलता है और `null_output.txt` लिखता है।
 
 ### 2.4. चैनल डीबगिंग तकनीकें
 
@@ -1381,9 +1484,9 @@ workflow {
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
     )
-    .view { "Channel content: $it" }  // डीबग: मूल चैनल सामग्री दिखाओ
-    .map { tuple -> tuple[0] }        // रूपांतरण: पहला तत्व निकालो
-    .view { "After mapping: $it" }    // डीबग: रूपांतरित चैनल सामग्री दिखाओ
+    .view { item -> "Channel content: ${item}" }  // डीबग: मूल चैनल सामग्री दिखाओ
+    .map { sample_id, file -> sample_id }         // रूपांतरण: पहला तत्व निकालो
+    .view { item -> "After mapping: ${item}" } // डीबग: रूपांतरित चैनल सामग्री दिखाओ
 
     PROCESS_FILES(input_ch)
 }
@@ -2386,7 +2489,7 @@ nextflow run workflow.nf -profile debug
         ```
         **फिक्स:** केवल sample IDs पास करो
         ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch.map{it[0]})
+        heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
         ```
 
         अब `heavyProcess` चलता है, लेकिन अपनी time limit से टकराता है। `local` executor पर मैसेज `process hasn't exited` होता है (साथ में `WARN: Killing running tasks` मैसेज) न कि एक explicit timeout, इसलिए killed task को उसके `time` निर्देश से जोड़ो:
@@ -2512,7 +2615,7 @@ nextflow run workflow.nf -profile debug
 
             processed_ch = processFiles(input_ch)
 
-            heavy_ch = heavyProcess(input_ch.map{it[0]})
+            heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
 
             file_ch = handleFiles(heavy_ch)
 
@@ -2591,7 +2694,7 @@ echo "\${bash_var}"          // Bash वेरिएबल (escaped)
 
 ```groovy
 // चैनल सामग्री निरीक्षण करो
-my_channel.view { "Content: $it" }
+my_channel.view { item -> "Content: ${item}" }
 
 // queue को value channel में बदलो (exhaustion रोकता है)
 reference_ch = channel.value('ref.fa')
