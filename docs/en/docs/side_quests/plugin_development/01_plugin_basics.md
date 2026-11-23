@@ -84,11 +84,11 @@ nextflow run hello.nf
 ```
 
 ```console title="Output"
-Output: Hello_aBcDeFgH
-Output: Bonjour_xYzWvUtS
-Output: Hola_qRsPdMnK
-Output: Ciao_jLhGfEcB
-Output: Hallo_tNwOiAuR
+Output: Hallo_sPJDSb2b
+Output: Hello_a7wnCfdL
+Output: Ciao_jNi0Dsbc
+Output: Hola_JUKArMrN
+Output: Bonjour_PG2adXed
 ```
 
 Your output order and random strings will differ, and if you run the script again you'll get a different set of random greetings.
@@ -190,11 +190,11 @@ nextflow run hello.nf
 
 ```console title="Output"
 Pipeline is starting! 🚀
-Output: Hello_yqvtclcc
-Output: Bonjour_vwwpyzcs
-Output: Hola_wrghmgab
-Output: Ciao_noniajuy
-Output: Hallo_tvrtuxtp
+Output: Bonjour_qzwhxijd
+Output: Hallo_tpwomxch
+Output: Ciao_pzcldqcd
+Output: Hello_oabkxesj
+Output: Hola_vbpsnbxx
 Pipeline complete! 👋
 ```
 
@@ -350,11 +350,11 @@ nextflow run hello.nf
 
 ```console title="Output"
 Pipeline is starting! 🚀
-Output: Hello_diozjdwm
-Output: Bonjour_speathmm
-Output: Hola_dllxnzap
-Output: Ciao_wzueddzc
-Output: Hallo_hsxwrjbh
+Output: Hallo_vpzhnhkz
+Output: Bonjour_kuxdfsdj
+Output: Hola_jfkdbtiz
+Output: Hello_ufdshvzh
+Output: Ciao_qsmnlpjl
 Pipeline complete! 👋
 ```
 
@@ -387,7 +387,7 @@ nextflow run hello.nf
 ```console title="Output (partial)"
 ERROR ~ Validation of samplesheet failed!
 
-The following errors have been detected in greetings.csv:
+The following errors have been detected in /workspaces/training/side-quests/plugin_development/greetings.csv:
 
 -> Entry 1: Missing required field(s): greeting
 -> Entry 2: Missing required field(s): greeting
@@ -418,7 +418,7 @@ nextflow run hello.nf
 This time the pipeline runs, but prints a warning:
 
 ```console title="Output (partial)"
-WARN: Found the following unidentified headers in greetings.csv:
+WARN: Found the following unidentified headers in /workspaces/training/side-quests/plugin_development/greetings.csv:
 	- lang
 ```
 
@@ -464,7 +464,7 @@ nextflow run hello.nf
 ```
 
 ```console title="Output (partial)"
-Found the following unidentified headers in greetings.csv:
+Found the following unidentified headers in /workspaces/training/side-quests/plugin_development/greetings.csv:
 	- lang
  -- Check script 'hello.nf' at line: 20 or see '.nextflow.log' file for more details
 ```
@@ -538,9 +538,10 @@ nf-co2footprint plugin  ~  version 1.3.0
 INFO - [nf-co2footprint] 🔕 Repeated task-specific messages (🔁) are only logged once in the console. Further occurrences are logged at DEBUG level, appearing only in the `.nextflow.log` file.
 WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.
 INFO - [nf-co2footprint] Electricity Maps API key is not set. To retrieve real-time carbon intensity values, please provide a key with the parameter `emApiKey`.
+	💡 You can obtain a key for ElectricityMaps at https://portal.electricitymaps.com/auth/login.
 INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.
 WARN - [nf-co2footprint] Executor 'null' not mapped.
-WARN - [nf-co2footprint] Fallback to: `machineType = null`, `pue = 1.0`. ...
+WARN - [nf-co2footprint] Fallback to: `machineType = null`, `pue = 1.0`. To eliminate this warning you can set `machineType` in the config to one of [local, compute cluster, cloud].
 ...
 WARN - [nf-co2footprint] No CPU model detected. Using default CPU power draw value (11.41 W).
 WARN - [nf-co2footprint] 🔁 Requested memory is null for task 2. Using maximum consumed memory/`peak_rss` (0 GB) for CO₂e footprint computation.
@@ -552,7 +553,7 @@ In a production environment (e.g., an HPC cluster or cloud), these values would 
 At the end, look for a line like:
 
 ```console title="Output (partial)"
-INFO - [nf-co2footprint] 🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.
+INFO - [nf-co2footprint] 🌱 The workflow run used 14.62 uWh of electricity, resulting in the release of 7.02 ug of CO₂ equivalents into the atmosphere.
 ```
 
 (Your numbers will differ.)
@@ -573,14 +574,14 @@ The plugin generates output files in your working directory:
 
     ```console title="co2footprint_summary_<timestamp>.txt"
     Total CO₂e footprint measures of this workflow run (including cached tasks):
-      CO₂e emissions: 60.84 ug
-      Energy consumption: 126.76 uWh
+      CO₂e emissions: 20 mg
+      Energy consumption: 31.31 mWh
       CO₂e emissions (market): -
 
     Which equals:
-      - 3.48E-7 km travelled by car
-      - It takes one tree 0.17s to sequester the equivalent amount of CO₂ from the atmosphere
-      - 1.22E-7 % of a flight from Paris to London
+      - 8.59E-5 km travelled by car
+      - It takes one tree 43.12s to sequester the equivalent amount of CO₂ from the atmosphere
+      - 3.01E-5 % of a flight from Paris to London
     ```
 
 (Your numbers will differ.)

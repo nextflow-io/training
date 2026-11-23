@@ -211,9 +211,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [exotic_albattani] revision: c7ce88ee60
+    Launching `main.nf` [jolly_poitras] revision: c7ce88ee60
 
     [id:sampleA, character:squirrel, recording:/workspaces/training/side-quests/metadata/data/bonjour.txt]
     [id:sampleB, character:tux, recording:/workspaces/training/side-quests/metadata/data/guten_tag.txt]
@@ -270,9 +270,9 @@ For example, we could access the file ID with `id` or the txt file path with `re
     And here's what you can expect to see in the output:
 
     ```console title="Output"
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `examples/map_demo.nf` [cheesy_plateau] revision: fae5b8496e
+    Launching `examples/map_demo.nf` [confident_salas] revision: fae5b8496e
 
     map: [id:sampleA, character:squirrel]
     id: sampleA
@@ -319,9 +319,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [exotic_albattani] revision: 10a2598a59
+    Launching `main.nf` [lonely_golick] revision: 10a2598a59
 
     squirrel
     tux
@@ -494,25 +494,25 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [clever_dijkstra] revision: 2fb579b3bd
+    Launching `main.nf` [sad_lovelace] revision: 2fb579b3bd
 
     executor >  local (7)
-    [3a/f1c290] COWPY (7) | 7 of 7 ✔
+    [1f/19f501] COWPY (2) | 7 of 7 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/metadata/results
 
       cowpy_art:
+        - cowpy-hola.txt
+        - cowpy-ciao.txt
+        - cowpy-hallo.txt
+        - cowpy-salut.txt
+        - cowpy-hello.txt
         - cowpy-bonjour.txt
         - cowpy-guten_tag.txt
-        - cowpy-salut.txt
-        - cowpy-hola.txt
-        - cowpy-hello.txt
-        - cowpy-hallo.txt
-        - cowpy-ciao.txt
     ```
 
 As you can see, `COWPY` ran on each file using the correct character for each one.
@@ -678,25 +678,25 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [pedantic_lovelace] revision: 745a78a291
+    Launching `main.nf` [reverent_bernard] revision: 745a78a291
 
     executor >  local (7)
-    [5e/2a1b34] COWPY (7) | 7 of 7 ✔
+    [aa/d4f324] COWPY (4) | 7 of 7 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/metadata/results
 
       cowpy_art:
-        - cowpy-bonjour.txt
+        - cowpy-hallo.txt
         - cowpy-guten_tag.txt
+        - cowpy-bonjour.txt
         - cowpy-salut.txt
         - cowpy-hola.txt
-        - cowpy-hello.txt
-        - cowpy-hallo.txt
         - cowpy-ciao.txt
+        - cowpy-hello.txt
     ```
 
 The output is the same seven `cowpy-*.txt` files as before, now produced with a simpler call to `COWPY`.
@@ -807,9 +807,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console title="View meta map"
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [lethal_booth] revision: 50e03309d4
+    Launching `main.nf` [modest_ochoa] revision: 50e03309d4
 
     [[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/data/bonjour.txt]
     [[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/data/guten_tag.txt]
@@ -934,25 +934,25 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [wise_sammet] revision: f8f429c3df
+    Launching `main.nf` [curious_poisson] revision: f8f429c3df
 
     executor >  local (7)
-    [5d/dffd4e] COWPY (7) | 7 of 7 ✔
+    [06/3e38e9] COWPY (5) | 7 of 7 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/metadata/results
 
       cowpy_art:
-        - cowpy-bonjour.txt
-        - cowpy-guten_tag.txt
-        - cowpy-salut.txt
-        - cowpy-hola.txt
         - cowpy-hello.txt
+        - cowpy-guten_tag.txt
+        - cowpy-bonjour.txt
         - cowpy-hallo.txt
+        - cowpy-salut.txt
         - cowpy-ciao.txt
+        - cowpy-hola.txt
     ```
 
 The results directory now contains the ASCII art files.
@@ -1100,33 +1100,33 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [voluminous_mcnulty] revision: 1d1ec2b857
+    Launching `main.nf` [scruffy_khorana] revision: 1d1ec2b857
 
     executor >  local (7)
-    [c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
-    [58/d865ee] COWPY (7)             | 7 of 7, cached: 7 ✔
-    [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/work/f6/8544c23128c0ed7c4f11dbc729b167/ciao.txt, it]
-    [[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/work/91/a2a307e970fa3950ceeeee6aa3b34c/guten_tag.txt, de]
-    [[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/work/5e/ebac0d3e7a45a5e914d0bca827fc02/hello.txt, en]
-    [[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/work/08/7199b7ab1ca733267d76b8168e5f38/salut.txt, fr]
-    [[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/work/7d/890c6fa79c485b4a600eaa89af2140/hola.txt, es]
-    [[id:sampleC, character:sheep], /workspaces/training/side-quests/metadata/work/d9/b360d0cd38e53c710ec41ac3b74bc3/hallo.txt, de]
-    [[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/work/c9/34bfec04abaf808c2ef6c5cb8c8273/bonjour.txt, fr]
+    [e3/30f2da] IDENTIFY_LANGUAGE (7) | 7 of 7 ✔
+    [75/b14369] COWPY (1)             | 7 of 7, cached: 7 ✔
+    [[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/work/c7/e5f373cd898f483a310d957cc92942/hello.txt, en]
+    [[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/work/c1/640e5c78ff37c113872b157ac49369/guten_tag.txt, de]
+    [[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/work/b1/a7293df76016cdf03a77b5c6ebd4fa/hola.txt, es]
+    [[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/work/96/738c35bf4a86a588ead69784c349e0/salut.txt, fr]
+    [[id:sampleC, character:sheep], /workspaces/training/side-quests/metadata/work/49/d838649ff94ca7ae9872642ff28c5f/hallo.txt, de]
+    [[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/work/56/035485258504a1ae70524b8f93cbe8/bonjour.txt, fr]
+    [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/work/e3/30f2daf30e662922fb4c36ac4b5a96/ciao.txt, it]
 
     Outputs:
 
       /workspaces/training/side-quests/metadata/results
 
       cowpy_art:
+        - cowpy-bonjour.txt
+        - cowpy-hola.txt
+        - cowpy-hello.txt
+        - cowpy-ciao.txt
         - cowpy-salut.txt
         - cowpy-hallo.txt
-        - cowpy-bonjour.txt
-        - cowpy-hello.txt
-        - cowpy-hola.txt
         - cowpy-guten_tag.txt
-        - cowpy-ciao.txt
     ```
 
 We now have a language prediction for each file in the dataset.
@@ -1275,19 +1275,19 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [cheeky_fermat] revision: f55f2f98b9
+    Launching `main.nf` [serene_almeida] revision: f55f2f98b9
 
-    [d9/b360d0] IDENTIFY_LANGUAGE (3) | 7 of 7, cached: 7 ✔
-    [94/224450] COWPY (3)             | 7 of 7, cached: 7 ✔
-    [[id:sampleF, character:moose, lang:fr], /workspaces/training/side-quests/metadata/work/08/7199b7ab1ca733267d76b8168e5f38/salut.txt]
-    [[id:sampleC, character:sheep, lang:de], /workspaces/training/side-quests/metadata/work/d9/b360d0cd38e53c710ec41ac3b74bc3/hallo.txt]
-    [[id:sampleD, character:turkey, lang:en], /workspaces/training/side-quests/metadata/work/5e/ebac0d3e7a45a5e914d0bca827fc02/hello.txt]
-    [[id:sampleE, character:stegosaurus, lang:es], /workspaces/training/side-quests/metadata/work/7d/890c6fa79c485b4a600eaa89af2140/hola.txt]
-    [[id:sampleG, character:turtle, lang:it], /workspaces/training/side-quests/metadata/work/f6/8544c23128c0ed7c4f11dbc729b167/ciao.txt]
-    [[id:sampleA, character:squirrel, lang:fr], /workspaces/training/side-quests/metadata/work/c9/34bfec04abaf808c2ef6c5cb8c8273/bonjour.txt]
-    [[id:sampleB, character:tux, lang:de], /workspaces/training/side-quests/metadata/work/91/a2a307e970fa3950ceeeee6aa3b34c/guten_tag.txt]
+    [e3/30f2da] IDENTIFY_LANGUAGE (7) | 7 of 7, cached: 7 ✔
+    [06/3e38e9] COWPY (5)             | 7 of 7, cached: 7 ✔
+    [[id:sampleC, character:sheep, lang:de], /workspaces/training/side-quests/metadata/work/49/d838649ff94ca7ae9872642ff28c5f/hallo.txt]
+    [[id:sampleG, character:turtle, lang:it], /workspaces/training/side-quests/metadata/work/e3/30f2daf30e662922fb4c36ac4b5a96/ciao.txt]
+    [[id:sampleD, character:turkey, lang:en], /workspaces/training/side-quests/metadata/work/c7/e5f373cd898f483a310d957cc92942/hello.txt]
+    [[id:sampleE, character:stegosaurus, lang:es], /workspaces/training/side-quests/metadata/work/b1/a7293df76016cdf03a77b5c6ebd4fa/hola.txt]
+    [[id:sampleA, character:squirrel, lang:fr], /workspaces/training/side-quests/metadata/work/56/035485258504a1ae70524b8f93cbe8/bonjour.txt]
+    [[id:sampleB, character:tux, lang:de], /workspaces/training/side-quests/metadata/work/c1/640e5c78ff37c113872b157ac49369/guten_tag.txt]
+    [[id:sampleF, character:moose, lang:fr], /workspaces/training/side-quests/metadata/work/96/738c35bf4a86a588ead69784c349e0/salut.txt]
 
     Outputs:
 
@@ -1295,12 +1295,12 @@ nextflow run main.nf -resume
 
       cowpy_art:
         - cowpy-guten_tag.txt
-        - cowpy-hallo.txt
-        - cowpy-bonjour.txt
-        - cowpy-hello.txt
         - cowpy-hola.txt
         - cowpy-salut.txt
+        - cowpy-bonjour.txt
         - cowpy-ciao.txt
+        - cowpy-hallo.txt
+        - cowpy-hello.txt
     ```
 
 Yep, that checks out!
@@ -1404,19 +1404,19 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [wise_almeida] revision: 0f4b36d66d
+    Launching `main.nf` [gloomy_dubinsky] revision: 0f4b36d66d
 
-    [c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7, cached: 7 ✔
-    [e9/269aa0] COWPY (6)             | 7 of 7, cached: 7 ✔
-    [[id:sampleC, character:sheep, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/work/d9/b360d0cd38e53c710ec41ac3b74bc3/hallo.txt]
-    [[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/work/c9/34bfec04abaf808c2ef6c5cb8c8273/bonjour.txt]
-    [[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/training/side-quests/metadata/work/7d/890c6fa79c485b4a600eaa89af2140/hola.txt]
-    [[id:sampleD, character:turkey, lang:en, lang_group:germanic], /workspaces/training/side-quests/metadata/work/5e/ebac0d3e7a45a5e914d0bca827fc02/hello.txt]
-    [[id:sampleB, character:tux, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/work/91/a2a307e970fa3950ceeeee6aa3b34c/guten_tag.txt]
-    [[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/work/f6/8544c23128c0ed7c4f11dbc729b167/ciao.txt]
-    [[id:sampleF, character:moose, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/work/08/7199b7ab1ca733267d76b8168e5f38/salut.txt]
+    [49/d83864] IDENTIFY_LANGUAGE (3) | 7 of 7, cached: 7 ✔
+    [b2/2ea4f1] COWPY (6)             | 7 of 7, cached: 7 ✔
+    [[id:sampleF, character:moose, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/work/96/738c35bf4a86a588ead69784c349e0/salut.txt]
+    [[id:sampleC, character:sheep, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/work/49/d838649ff94ca7ae9872642ff28c5f/hallo.txt]
+    [[id:sampleB, character:tux, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/work/c1/640e5c78ff37c113872b157ac49369/guten_tag.txt]
+    [[id:sampleD, character:turkey, lang:en, lang_group:germanic], /workspaces/training/side-quests/metadata/work/c7/e5f373cd898f483a310d957cc92942/hello.txt]
+    [[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/training/side-quests/metadata/work/b1/a7293df76016cdf03a77b5c6ebd4fa/hola.txt]
+    [[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/work/56/035485258504a1ae70524b8f93cbe8/bonjour.txt]
+    [[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/work/e3/30f2daf30e662922fb4c36ac4b5a96/ciao.txt]
 
     Outputs:
 
@@ -1426,10 +1426,10 @@ nextflow run main.nf -resume
         - cowpy-ciao.txt
         - cowpy-salut.txt
         - cowpy-guten_tag.txt
-        - cowpy-hallo.txt
+        - cowpy-hello.txt
         - cowpy-bonjour.txt
         - cowpy-hola.txt
-        - cowpy-hello.txt
+        - cowpy-hallo.txt
     ```
 
 The meta map now carries four fields: `id`, `character`, `lang`, and `lang_group`.
@@ -1543,26 +1543,26 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [suspicious_crick] revision: 955602d59b
+    Launching `main.nf` [fabulous_gautier] revision: 955602d59b
 
     executor >  local (14)
-    [99/64c59d] IDENTIFY_LANGUAGE (6) | 7 of 7 ✔
-    [3c/0f1922] COWPY (7)             | 7 of 7 ✔
+    [22/67ea9e] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
+    [96/d232a2] COWPY (7)             | 7 of 7 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/metadata/results
 
       cowpy_art:
-        - [{id: sampleB, character: tux, lang: de, lang_group: germanic}, germanic/de-cowpy-guten_tag.txt]
-        - [{id: sampleG, character: turtle, lang: it, lang_group: romance}, romance/it-cowpy-ciao.txt]
+        - [{id: sampleF, character: moose, lang: fr, lang_group: romance}, romance/fr-cowpy-salut.txt]
         - [{id: sampleC, character: sheep, lang: de, lang_group: germanic}, germanic/de-cowpy-hallo.txt]
         - [{id: sampleE, character: stegosaurus, lang: es, lang_group: romance}, romance/es-cowpy-hola.txt]
-        - [{id: sampleA, character: squirrel, lang: fr, lang_group: romance}, romance/fr-cowpy-bonjour.txt]
+        - [{id: sampleG, character: turtle, lang: it, lang_group: romance}, romance/it-cowpy-ciao.txt]
+        - [{id: sampleB, character: tux, lang: de, lang_group: germanic}, germanic/de-cowpy-guten_tag.txt]
         - [{id: sampleD, character: turkey, lang: en, lang_group: germanic}, germanic/en-cowpy-hello.txt]
-        - [{id: sampleF, character: moose, lang: fr, lang_group: romance}, romance/fr-cowpy-salut.txt]
+        - [{id: sampleA, character: squirrel, lang: fr, lang_group: romance}, romance/fr-cowpy-bonjour.txt]
     ```
 
 The results directory is now organized by language family, with each file named after its detected language:
@@ -1621,18 +1621,18 @@ When Nextflow substitutes `#!groovy ${meta.character}` into the command, the `CO
 ??? failure "Command output"
 
     ```console hl_lines="7 12 17 29"
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [marvelous_hirsch] revision: 955602d59b
+    Launching `main.nf` [distraught_lorenz] revision: 955602d59b
 
     executor >  local (14)
-    [c1/c5dd4f] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
-    [d3/b7c415] COWPY (3)             | 5 of 7
-    WARN: Killing running tasks (1)
-    ERROR ~ Error executing process > 'COWPY (7)'
+    [b7/022eed] IDENTIFY_LANGUAGE (4) | 7 of 7 ✔
+    [d7/894860] COWPY (7)             | 2 of 7
+    WARN: Killing running tasks (4)
+    ERROR ~ Error executing process > 'COWPY (4)'
 
     Caused by:
-      Process `COWPY (7)` terminated with an error exit status (2)
+      Process `COWPY (4)` terminated with an error exit status (2)
 
 
     Command executed:
@@ -1652,12 +1652,12 @@ When Nextflow substitutes `#!groovy ${meta.character}` into the command, the `CO
       cowpy: error: argument -c/--cowacter: expected one argument
 
     Work dir:
-      /workspaces/training/side-quests/metadata/work/cc/dfe60ff2e14f0dd88488939eca57b8
+      /workspaces/training/side-quests/metadata/work/88/183be89d68fe95e5d14a9519ee8b2a
 
     Container:
       community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
 
-    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
      -- Check '.nextflow.log' file for details
     ```
@@ -1682,23 +1682,23 @@ When the process script evaluates `#!groovy ${meta.character}`, Nextflow literal
 ??? failure "Command output"
 
     ```console hl_lines="7 12 17"
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [jovial_bohr] revision: 955602d59b
+    Launching `main.nf` [tiny_pesquet] revision: 955602d59b
 
     executor >  local (14)
-    [61/91663a] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
-    [0e/99bfb0] COWPY (7)             | 0 of 7
-    WARN: Killing running tasks (5)
-    ERROR ~ Error executing process > 'COWPY (3)'
+    [24/807c75] IDENTIFY_LANGUAGE (6) | 7 of 7 ✔
+    [f8/aba4e0] COWPY (7)             | 0 of 7
+    WARN: Killing running tasks (6)
+    ERROR ~ Error executing process > 'COWPY (1)'
 
     Caused by:
-      Process `COWPY (3)` terminated with an error exit status (1)
+      Process `COWPY (1)` terminated with an error exit status (1)
 
 
     Command executed:
 
-      cat hola.txt | cowpy -c null > cowpy-hola.txt
+      cat guten_tag.txt | cowpy -c null > cowpy-guten_tag.txt
 
     Command exit status:
       1
@@ -1710,7 +1710,7 @@ When the process script evaluates `#!groovy ${meta.character}`, Nextflow literal
       Traceback (most recent call last):
         File "/opt/conda/bin/cowpy", line 10, in <module>
           sys.exit(main())
-                  ~~~~^^
+                   ~~~~^^
         File "/opt/conda/lib/python3.13/site-packages/cowpy/cow.py", line 1215, in main
           print(cow(eyes=args.eyes,
                 ~~~^^^^^^^^^^^^^^^^
@@ -1723,12 +1723,12 @@ When the process script evaluates `#!groovy ${meta.character}`, Nextflow literal
       TypeError: 'str' object is not callable
 
     Work dir:
-      /workspaces/training/side-quests/metadata/work/52/80c08666f6732690bce00f04993489
+      /workspaces/training/side-quests/metadata/work/df/ad49c88cff2deaee55333de8e9f268
 
     Container:
       community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
 
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 
      -- Check '.nextflow.log' file for details
     ```

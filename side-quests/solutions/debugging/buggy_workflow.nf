@@ -88,7 +88,7 @@ workflow {
 
     processed_ch = processFiles(input_ch)
 
-    heavy_ch = heavyProcess(input_ch.map { it[0] })
+    heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
     // Fixed: using the first element of the tuple as input
 
     // BUG: Incorrect channel usage

@@ -245,7 +245,7 @@ make install
 
     Deprecated Gradle features were used in this build...
 
-    BUILD SUCCESSFUL in 23s
+    BUILD SUCCESSFUL in 17s
     6 actionable tasks: 6 executed
     ```
 
@@ -297,16 +297,16 @@ The `-ansi-log false` flag disables the animated progress display so that all ou
 
 ```console title="Output"
 Pipeline is starting! 🚀
-[bc/f10449] Submitted process > SAY_HELLO (1)
-[9a/f7bcb2] Submitted process > SAY_HELLO (2)
-[6c/aff748] Submitted process > SAY_HELLO (3)
-[de/8937ef] Submitted process > SAY_HELLO (4)
-[98/c9a7d6] Submitted process > SAY_HELLO (5)
-Output: Bonjour
-Output: Hello
-Output: Hola
-Output: Ciao
+[70/5ab6b1] Submitted process > SAY_HELLO (5)
+[98/46032e] Submitted process > SAY_HELLO (2)
+[40/7b2f86] Submitted process > SAY_HELLO (1)
+[8d/8af4b0] Submitted process > SAY_HELLO (4)
 Output: Hallo
+Output: Bonjour
+[bc/9fd946] Submitted process > SAY_HELLO (3)
+Output: Hello
+Output: Ciao
+Output: Hola
 Pipeline complete! 👋
 ```
 
