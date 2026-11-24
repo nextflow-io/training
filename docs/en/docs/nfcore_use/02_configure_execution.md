@@ -179,6 +179,7 @@ The `SEQTK_TRIM` process no longer appears in the output.
     **Setting integer parameters on the command line**
 
     From Nextflow 26.04, numeric values supplied on the command line are typed as strings.
+    That's because nf-core pipelines don't yet declare their parameters in a typed `params {}` block, which is what converts command-line values to the declared type in current Nextflow versions.
     For an integer parameter such as `min_trimmed_reads` in `nf-core/rnaseq`, which you use in Part 4, passing `--min_trimmed_reads 1000` is evaluated as the **string** `"1000"`, which fails schema validation:
 
     ```console
