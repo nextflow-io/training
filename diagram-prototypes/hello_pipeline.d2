@@ -1,0 +1,54 @@
+direction: down
+
+classes: {
+    edge: {
+        style: {stroke: "#495057"}
+    }
+    process: {
+        style: {fill: "#ffec99"; stroke: "#1e1e1e"; border-radius: 12; font-size: 18; bold: true; shadow: true}
+    }
+    file: {
+        style: {fill: "#a5d8ff"; stroke: "#1e1e1e"; border-radius: 8; font-size: 16}
+    }
+    param: {
+        shape: text
+        style: {font-size: 16; font-color: "#495057"; italic: true}
+    }
+}
+
+input: "--input" {class: param}
+names: "names.csv\n\nMateo,es,squirrel\nRaphael,it,turtle\nCeline,fr,moose" {class: file}
+input -> names
+
+each: "for each name" {
+    style: {fill: "#f8f9fa"; stroke: "#adb5bd"; stroke-dash: 4; border-radius: 16; font-size: 15}
+    sayHello: sayHello {class: process}
+    hello: "Mateo.txt\n\nHello, Mateo!" {class: file}
+    translateGreeting: translateGreeting {class: process}
+    translated: "es-Mateo.txt\n\nHola, Mateo!" {class: file}
+    sayHello -> hello -> translateGreeting -> translated
+}
+
+names -> each.sayHello
+language: "--language es" {class: param}
+language -> each.translateGreeting
+
+collectGreetings: collectGreetings {class: process}
+each.translated -> collectGreetings: all names
+batch: "--batch batch" {class: param}
+batch -> collectGreetings
+language -> collectGreetings
+
+greetings: "batch-es-greetings.txt\n\nHola, Mateo!\nHola, Raphael!\nHola, Celine!" {class: file}
+report: "batch-es-report.txt\n\nNumber of greetings processed: 3" {class: file}
+collectGreetings -> greetings
+collectGreetings -> report
+
+cowpy: cowpy {class: process}
+character: "--character turkey" {class: param}
+greetings -> cowpy
+character -> cowpy
+art: "cowpy-batch-es-greetings.txt\n\nASCII-art turkey saying the greetings" {class: file}
+cowpy -> art
+
+(** -> **)[*].style.stroke: "#495057"

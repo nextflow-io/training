@@ -1,0 +1,28 @@
+flowchart TB
+    input(["--input"]):::param --> names["names.csv<br/><small>Mateo,es,squirrel<br/>Raphael,it,turtle<br/>Celine,fr,moose</small>"]:::file
+
+    subgraph each ["for each name"]
+        direction TB
+        sayHello("sayHello"):::process --> hello["Mateo.txt<br/><small>Hello, Mateo!</small>"]:::file
+        hello --> translateGreeting("translateGreeting"):::process
+        translateGreeting --> translated["es-Mateo.txt<br/><small>Hola, Mateo!</small>"]:::file
+    end
+
+    names --> sayHello
+    language(["--language es"]):::param --> translateGreeting
+
+    translated -- "all names" --> collectGreetings("collectGreetings"):::process
+    batch(["--batch batch"]):::param --> collectGreetings
+    language --> collectGreetings
+
+    collectGreetings --> greetings["batch-es-greetings.txt<br/><small>Hola, Mateo!<br/>Hola, Raphael!<br/>Hola, Celine!</small>"]:::file
+    collectGreetings --> report["batch-es-report.txt<br/><small>Number of greetings processed: 3</small>"]:::file
+
+    greetings --> cowpy("cowpy"):::process
+    character(["--character turkey"]):::param --> cowpy
+    cowpy --> art["cowpy-batch-es-greetings.txt<br/><small>ASCII-art turkey saying the greetings</small>"]:::file
+
+    classDef process fill:#ffec99,stroke:#1e1e1e,stroke-width:1.5px,color:#1e1e1e
+    classDef file fill:#a5d8ff,stroke:#1e1e1e,stroke-width:1.5px,color:#1e1e1e
+    classDef param fill:#ffffff,stroke:#868e96,stroke-dasharray:4 3,color:#1e1e1e
+    style each fill:#f8f9fa,stroke:#adb5bd,stroke-dasharray:6 4
