@@ -1,0 +1,365 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" style="background: transparent; background-color: transparent; color-scheme: light;" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="2111px" height="657px" viewBox="0 0 2111 657" content="&lt;mxfile&gt;&lt;diagram id=&quot;page-1&quot; name=&quot;Page-1&quot;&gt;7ZxLc+I4EIB/yx6omTmEkmUbzDEhk5nDpmprctiZo2ILUK2wvLIgZH/9Srb8ViZghIuEJFUEtR7G/XW3WrLIyJ2vd984Slb3LMJ0BEG0G7m3Iwih4/nyj5I855LJxM0FS06iXORUggfyH9ZCoKUbEuG00VAwRgVJmsKQxTEORUOGOGdPzWYLRptXTdBSXxFUgocQUdxp9jeJxEpLJ6DW/Dsmy1VxaVDUrFHRWgvSFYrYU03kfh25c86YyN+td3NMlfYKxeT97l6oLT8Zx7HYp0OM1lKTnU56nFQ8F/fM2SaOsOrljNwb9JgyuhH4mocaTyatShNZXBBK54wyno3gLsBitniU8lRw9g+u1QAYzGaorCl0Cse+GoXF4g6tCVXG8h3TLRYkRLpCXw4Gulwb1MHqV8pXYk2lCMi3Tysi8EOCQtUpZk/SPKU0v9ctohtcU8o4TLe6BnOBdzXFaFV+w2yNBX+WTVY12oFG+1SZRmm5u9JU8rJ2gMIakDbMZTlyhU6+0fR+Q/IqZgLvg1PekFDEKFnGUkLxQhXVnUrl0mstXpMoUj1uUqkzEi+1GnXpz6zTrbcvJGgV0j0SmI3gXJnvPP13QzhXYWaiRlXD/JChBynJnAj5IjZcyFup6qX6SCwF8wWXL2vGUtwPd9DFDZq43VkTt/SOo3EvuORt33Gh13LcmMXY5LMluZbPSokMuwJJ3XI9esgoRUlKHrOPpHTPcbjhKdniHzjNrwt62UAvYN7M6RCrYncxTotYYMFDQzkRdonVQA7kn/c4pqzlm6Drm97MB/60F5dwheTMS8cLztZ/ySnv85ea441UtAPjNKFEzNOtqW4th5Xvpqosp2v5eiUbLUXeQkn8GzDyb7NGt/3cFnaMwAV+wwbgtGkE7ux4GyDxvhZwmN8GoDvhTicRDAPjhOsEzjToOu9AE27fAGHH/w3zs+e3AvYJvJ/EoIu+MAe7iVb2cxrudufwYg7uQdHvUnTcVgz3mxR9GxANGfaFQywTrRNRbOXKdjDCD4zmfPo0EMup1SrEq1DlCb0SqlA2V/PPyynVQdPgg76QYxUJiZONUPsYeTrVC447OXS2c4GNXBdRathXsJHq7L1ECSYBnk2MS5QIpavygqogs1RpD8oApL6Ad/6rGNeQxpQyPYwftMkeDzYxZDE12FaDJ4yms5l5x8j3J1NoOYEtY/XhCFP0LC9E2edPWRj99MVWZurCV3zVAlFDSvNBtCKq85vBmDq+DaiGBOcDagU1X3kMxrTcSjh6Tn3vOU/CWYjTVGU9lbken/O8NjV60EJGylS29rG7c267O3776QtoLylt7O9I+IbUqDSJN/Mo7SSbA2OxE71wmtaWreXLCbZ5JDVDUnTpLPM586Qog3YqZIWlIRe6dJbZMuWUKF3vJG753tMfeYsn2fN5dQ60suuTbB4Nc+BlHyY5ztNMh0laSw1n2npYDT1LKC/oNEm2LBxBqRaQAfujn+N53bg4bdGa+S1axeG3I2kZEpbLdrxjU88+rudO7Liec5mup5EN53xuYMf5DBnmZTvfkWuFPr7n2VjFK5aX6Xs5seFczwd2XM+8IngV1ptYDcjboyR7UglBvjKwtiH6qjtNbCwI8FXtgDmOimP1v8lV2IaHulWta42jGqXQtn7yW1Psy+dUcVx8k8DpPpFw8wbX6ssByjgoSlMS5sI7om4vI4t3RPxUV8rCqir9qtXc7vSHyArPRSGWOqt1UsVf9bqqW1Yq+uU3LhBf4sYBlS5pjikSZNvU7XHUysNqhzIzHKI5B2BODRcYQ39PYg1eFb69iSVgMGLV9vOhyIon+meNrB8xeDgyvTE4CLNqu+RQZqbty/ODNpyfaUUOFBuddxwbB0P2QtpymtDYk1jSTSMvl9jAkbEnsrcRGQcMjMP5WXmq+l0GxulgzOCQkbEnsuJ82Vkj60dsevahsSeztxEah/MzrUj71GSx+gZ/Vlf7Rwju1/8B&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <g data-cell-id="0">
+            <g data-cell-id="1">
+                <g data-cell-id="names">
+                    <g transform="translate(0.5,0.5)">
+                        <rect x="151" y="4" width="210" height="80" rx="8" ry="8" fill="#f0f9fb" stroke="#02899a" stroke-width="2.5" pointer-events="all" style="fill: light-dark(rgb(240, 249, 251), rgb(18, 26, 28)); stroke: light-dark(rgb(2, 137, 154), rgb(50, 166, 180));"/>
+                    </g>
+                    <g>
+                        <g fill="#1e1e1e" font-family="Helvetica" text-anchor="middle" font-size="28px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                            <text x="256" y="57">
+                                names.csv
+                            </text>
+                        </g>
+                    </g>
+                </g>
+                <g data-cell-id="names-note">
+                    <g>
+                        <rect x="381" y="0" width="200" height="88" fill="none" stroke="none" pointer-events="all"/>
+                    </g>
+                    <g>
+                        <g fill="#1e1e1e" font-family="Helvetica" text-anchor="start" font-size="22px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                            <text x="385" y="28">
+                                Mateo,es,squirrel
+                            </text>
+                            <text x="385" y="54">
+                                Raphael,it,turtle
+                            </text>
+                            <text x="385" y="80">
+                                Celine,fr,moose
+                            </text>
+                        </g>
+                    </g>
+                </g>
+                <g data-cell-id="frame">
+                    <g>
+                        <rect x="1" y="164" width="1600" height="491" rx="12" ry="12" fill="none" stroke="#1e1e1e" stroke-width="2" pointer-events="all" style="stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                    </g>
+                    <g data-cell-id="code">
+                        <g>
+                            <rect x="271" y="203" width="305" height="82" fill="none" stroke="none" pointer-events="all"/>
+                        </g>
+                        <g>
+                            <g fill="#495057" font-family="Menlo" text-anchor="start" font-size="20px" style="fill: light-dark(rgb(73, 80, 87), rgb(164, 170, 176));">
+                                <text x="275" y="229">
+                                    channel.fromPath()
+                                </text>
+                                <text x="275" y="253">
+                                    .splitCsv()
+                                </text>
+                                <text x="275" y="277">
+                                    .map { row -&gt; row[0] }
+                                </text>
+                            </g>
+                        </g>
+                    </g>
+                    <g data-cell-id="in">
+                        <g transform="translate(0.5,0.5)">
+                            <rect x="31" y="344" width="450" height="80" rx="40" ry="40" fill="#76d2c8" stroke="#018178" stroke-width="2.5" pointer-events="all" style="fill: light-dark(rgb(118, 210, 200), rgb(13, 92, 84)); stroke: light-dark(rgb(1, 129, 120), rgb(64, 174, 166));"/>
+                        </g>
+                        <g data-cell-id="in0">
+                            <g transform="translate(0.5,0.5)">
+                                <rect x="46" y="359" width="130" height="50" rx="8" ry="8" fill="#ffffff" stroke="#018178" stroke-width="2.5" pointer-events="all" style="fill: light-dark(rgb(255, 255, 255), rgb(18, 18, 18)); stroke: light-dark(rgb(1, 129, 120), rgb(64, 174, 166));"/>
+                            </g>
+                            <g>
+                                <g fill="#1e1e1e" font-family="Helvetica" text-anchor="middle" font-size="22px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                                    <text x="111" y="394">
+                                        Celine
+                                    </text>
+                                </g>
+                            </g>
+                        </g>
+                        <g data-cell-id="in1">
+                            <g transform="translate(0.5,0.5)">
+                                <rect x="191" y="359" width="130" height="50" rx="8" ry="8" fill="#ffffff" stroke="#018178" stroke-width="2.5" pointer-events="all" style="fill: light-dark(rgb(255, 255, 255), rgb(18, 18, 18)); stroke: light-dark(rgb(1, 129, 120), rgb(64, 174, 166));"/>
+                            </g>
+                            <g>
+                                <g fill="#1e1e1e" font-family="Helvetica" text-anchor="middle" font-size="22px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                                    <text x="256" y="394">
+                                        Raphael
+                                    </text>
+                                </g>
+                            </g>
+                        </g>
+                        <g data-cell-id="in2">
+                            <g transform="translate(0.5,0.5)">
+                                <rect x="336" y="359" width="130" height="50" rx="8" ry="8" fill="#ffffff" stroke="#018178" stroke-width="2.5" pointer-events="all" style="fill: light-dark(rgb(255, 255, 255), rgb(18, 18, 18)); stroke: light-dark(rgb(1, 129, 120), rgb(64, 174, 166));"/>
+                            </g>
+                            <g>
+                                <g fill="#1e1e1e" font-family="Helvetica" text-anchor="middle" font-size="22px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                                    <text x="401" y="394">
+                                        Mateo
+                                    </text>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                    <g data-cell-id="in-cap">
+                        <g>
+                            <rect x="31" y="464" width="450" height="36" fill="none" stroke="none" pointer-events="all"/>
+                        </g>
+                        <g>
+                            <g fill="#1e1e1e" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="28px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                                <text x="256" y="495">
+                                    input channel
+                                </text>
+                            </g>
+                        </g>
+                    </g>
+                    <g data-cell-id="calls">
+                        <g>
+                            <rect x="581" y="194" width="380" height="380" rx="12" ry="12" fill="none" stroke="#868e96" stroke-width="2" stroke-dasharray="12 8" pointer-events="all" style="stroke: light-dark(rgb(134, 142, 150), rgb(110, 117, 124));"/>
+                        </g>
+                        <g data-cell-id="p0">
+                            <g transform="translate(0.5,0.5)">
+                                <rect x="611" y="224" width="320" height="80" rx="8" ry="8" fill="#2d799b" stroke="#055672" stroke-width="2.5" pointer-events="all" style="fill: light-dark(rgb(45, 121, 155), rgb(91, 156, 185)); stroke: light-dark(rgb(5, 86, 114), rgb(119, 189, 213));"/>
+                            </g>
+                            <g>
+                                <g fill="#ffffff" font-family="Helvetica" text-anchor="middle" font-size="28px" style="fill: light-dark(rgb(255, 255, 255), rgb(18, 18, 18));">
+                                    <text x="771" y="277">
+                                        sayHello('Mateo')
+                                    </text>
+                                </g>
+                            </g>
+                        </g>
+                        <g data-cell-id="p1">
+                            <g transform="translate(0.5,0.5)">
+                                <rect x="611" y="344" width="320" height="80" rx="8" ry="8" fill="#2d799b" stroke="#055672" stroke-width="2.5" pointer-events="all" style="fill: light-dark(rgb(45, 121, 155), rgb(91, 156, 185)); stroke: light-dark(rgb(5, 86, 114), rgb(119, 189, 213));"/>
+                            </g>
+                            <g>
+                                <g fill="#ffffff" font-family="Helvetica" text-anchor="middle" font-size="28px" style="fill: light-dark(rgb(255, 255, 255), rgb(18, 18, 18));">
+                                    <text x="771" y="397">
+                                        sayHello('Raphael')
+                                    </text>
+                                </g>
+                            </g>
+                        </g>
+                        <g data-cell-id="p2">
+                            <g transform="translate(0.5,0.5)">
+                                <rect x="611" y="464" width="320" height="80" rx="8" ry="8" fill="#2d799b" stroke="#055672" stroke-width="2.5" pointer-events="all" style="fill: light-dark(rgb(45, 121, 155), rgb(91, 156, 185)); stroke: light-dark(rgb(5, 86, 114), rgb(119, 189, 213));"/>
+                            </g>
+                            <g>
+                                <g fill="#ffffff" font-family="Helvetica" text-anchor="middle" font-size="28px" style="fill: light-dark(rgb(255, 255, 255), rgb(18, 18, 18));">
+                                    <text x="771" y="517">
+                                        sayHello('Celine')
+                                    </text>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                    <g data-cell-id="calls-cap">
+                        <g>
+                            <rect x="581" y="589" width="380" height="36" fill="none" stroke="none" pointer-events="all"/>
+                        </g>
+                        <g>
+                            <g fill="#1e1e1e" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="28px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                                <text x="771" y="620">
+                                    process calls
+                                </text>
+                            </g>
+                        </g>
+                    </g>
+                    <g data-cell-id="out">
+                        <g transform="translate(0.5,0.5)">
+                            <rect x="1061" y="344" width="510" height="80" rx="40" ry="40" fill="#76d2c8" stroke="#018178" stroke-width="2.5" pointer-events="all" style="fill: light-dark(rgb(118, 210, 200), rgb(13, 92, 84)); stroke: light-dark(rgb(1, 129, 120), rgb(64, 174, 166));"/>
+                        </g>
+                        <g data-cell-id="out0">
+                            <g transform="translate(0.5,0.5)">
+                                <rect x="1076" y="359" width="150" height="50" rx="8" ry="8" fill="#f0f9fb" stroke="#02899a" stroke-width="2.5" pointer-events="all" style="fill: light-dark(rgb(240, 249, 251), rgb(18, 26, 28)); stroke: light-dark(rgb(2, 137, 154), rgb(50, 166, 180));"/>
+                            </g>
+                            <g>
+                                <g fill="#1e1e1e" font-family="Helvetica" text-anchor="middle" font-size="22px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                                    <text x="1151" y="394">
+                                        Raphael.txt
+                                    </text>
+                                </g>
+                            </g>
+                        </g>
+                        <g data-cell-id="out1">
+                            <g transform="translate(0.5,0.5)">
+                                <rect x="1241" y="359" width="150" height="50" rx="8" ry="8" fill="#f0f9fb" stroke="#02899a" stroke-width="2.5" pointer-events="all" style="fill: light-dark(rgb(240, 249, 251), rgb(18, 26, 28)); stroke: light-dark(rgb(2, 137, 154), rgb(50, 166, 180));"/>
+                            </g>
+                            <g>
+                                <g fill="#1e1e1e" font-family="Helvetica" text-anchor="middle" font-size="22px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                                    <text x="1316" y="394">
+                                        Celine.txt
+                                    </text>
+                                </g>
+                            </g>
+                        </g>
+                        <g data-cell-id="out2">
+                            <g transform="translate(0.5,0.5)">
+                                <rect x="1406" y="359" width="150" height="50" rx="8" ry="8" fill="#f0f9fb" stroke="#02899a" stroke-width="2.5" pointer-events="all" style="fill: light-dark(rgb(240, 249, 251), rgb(18, 26, 28)); stroke: light-dark(rgb(2, 137, 154), rgb(50, 166, 180));"/>
+                            </g>
+                            <g>
+                                <g fill="#1e1e1e" font-family="Helvetica" text-anchor="middle" font-size="22px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                                    <text x="1481" y="394">
+                                        Mateo.txt
+                                    </text>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                    <g data-cell-id="out-cap">
+                        <g>
+                            <rect x="1061" y="464" width="510" height="36" fill="none" stroke="none" pointer-events="all"/>
+                        </g>
+                        <g>
+                            <g fill="#1e1e1e" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="28px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                                <text x="1316" y="495">
+                                    output channel
+                                </text>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g data-cell-id="pub0">
+                    <g transform="translate(0.5,0.5)">
+                        <rect x="1701" y="224" width="220" height="80" rx="8" ry="8" fill="#f0f9fb" stroke="#02899a" stroke-width="2.5" pointer-events="all" style="fill: light-dark(rgb(240, 249, 251), rgb(18, 26, 28)); stroke: light-dark(rgb(2, 137, 154), rgb(50, 166, 180));"/>
+                    </g>
+                    <g>
+                        <g fill="#1e1e1e" font-family="Helvetica" text-anchor="middle" font-size="28px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                            <text x="1811" y="277">
+                                Mateo.txt
+                            </text>
+                        </g>
+                    </g>
+                </g>
+                <g data-cell-id="pub0-note">
+                    <g>
+                        <rect x="1941" y="247" width="170" height="34" fill="none" stroke="none" pointer-events="all"/>
+                    </g>
+                    <g>
+                        <g fill="#1e1e1e" font-family="Helvetica" text-anchor="start" font-size="22px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                            <text x="1945" y="274">
+                                Hello, Mateo!
+                            </text>
+                        </g>
+                    </g>
+                </g>
+                <g data-cell-id="pub1">
+                    <g transform="translate(0.5,0.5)">
+                        <rect x="1701" y="344" width="220" height="80" rx="8" ry="8" fill="#f0f9fb" stroke="#02899a" stroke-width="2.5" pointer-events="all" style="fill: light-dark(rgb(240, 249, 251), rgb(18, 26, 28)); stroke: light-dark(rgb(2, 137, 154), rgb(50, 166, 180));"/>
+                    </g>
+                    <g>
+                        <g fill="#1e1e1e" font-family="Helvetica" text-anchor="middle" font-size="28px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                            <text x="1811" y="397">
+                                Raphael.txt
+                            </text>
+                        </g>
+                    </g>
+                </g>
+                <g data-cell-id="pub1-note">
+                    <g>
+                        <rect x="1941" y="367" width="170" height="34" fill="none" stroke="none" pointer-events="all"/>
+                    </g>
+                    <g>
+                        <g fill="#1e1e1e" font-family="Helvetica" text-anchor="start" font-size="22px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                            <text x="1945" y="394">
+                                Hello, Raphael!
+                            </text>
+                        </g>
+                    </g>
+                </g>
+                <g data-cell-id="pub2">
+                    <g transform="translate(0.5,0.5)">
+                        <rect x="1701" y="464" width="220" height="80" rx="8" ry="8" fill="#f0f9fb" stroke="#02899a" stroke-width="2.5" pointer-events="all" style="fill: light-dark(rgb(240, 249, 251), rgb(18, 26, 28)); stroke: light-dark(rgb(2, 137, 154), rgb(50, 166, 180));"/>
+                    </g>
+                    <g>
+                        <g fill="#1e1e1e" font-family="Helvetica" text-anchor="middle" font-size="28px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                            <text x="1811" y="517">
+                                Celine.txt
+                            </text>
+                        </g>
+                    </g>
+                </g>
+                <g data-cell-id="pub2-note">
+                    <g>
+                        <rect x="1941" y="487" width="170" height="34" fill="none" stroke="none" pointer-events="all"/>
+                    </g>
+                    <g>
+                        <g fill="#1e1e1e" font-family="Helvetica" text-anchor="start" font-size="22px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                            <text x="1945" y="514">
+                                Hello, Celine!
+                            </text>
+                        </g>
+                    </g>
+                </g>
+                <g data-cell-id="pub-cap">
+                    <g>
+                        <rect x="1701" y="584" width="220" height="36" fill="none" stroke="none" pointer-events="all"/>
+                    </g>
+                    <g>
+                        <g fill="#1e1e1e" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="28px" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));">
+                            <text x="1811" y="615">
+                                published outputs
+                            </text>
+                        </g>
+                    </g>
+                </g>
+                <g data-cell-id="e-names">
+                    <g transform="translate(0.5,0.5)">
+                        <path d="M 256 84 L 256 329.4" fill="none" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke" style="stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                        <path d="M 256 340.65 L 248.5 325.65 L 256 329.4 L 263.5 325.65 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="all" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211)); stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                    </g>
+                </g>
+                <g data-cell-id="e-in0">
+                    <g transform="translate(0.5,0.5)">
+                        <path d="M 481 364 L 599.42 272.9" fill="none" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke" style="stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                        <path d="M 608.34 266.04 L 601.03 281.14 L 599.42 272.9 L 591.88 269.25 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="all" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211)); stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                    </g>
+                </g>
+                <g data-cell-id="e-out0">
+                    <g transform="translate(0.5,0.5)">
+                        <path d="M 931 264 L 1049.42 355.1" fill="none" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke" style="stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                        <path d="M 1058.34 361.96 L 1041.88 358.75 L 1049.42 355.1 L 1051.03 346.86 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="all" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211)); stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                    </g>
+                </g>
+                <g data-cell-id="e-pub0">
+                    <g transform="translate(0.5,0.5)">
+                        <path d="M 1571 364 L 1689.42 272.9" fill="none" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke" style="stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                        <path d="M 1698.34 266.04 L 1691.03 281.14 L 1689.42 272.9 L 1681.88 269.25 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="all" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211)); stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                    </g>
+                </g>
+                <g data-cell-id="e-in1">
+                    <g transform="translate(0.5,0.5)">
+                        <path d="M 481 384 L 596.4 384" fill="none" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke" style="stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                        <path d="M 607.65 384 L 592.65 391.5 L 596.4 384 L 592.65 376.5 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="all" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211)); stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                    </g>
+                </g>
+                <g data-cell-id="e-out1">
+                    <g transform="translate(0.5,0.5)">
+                        <path d="M 931 384 L 1046.4 384" fill="none" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke" style="stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                        <path d="M 1057.65 384 L 1042.65 391.5 L 1046.4 384 L 1042.65 376.5 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="all" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211)); stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                    </g>
+                </g>
+                <g data-cell-id="e-pub1">
+                    <g transform="translate(0.5,0.5)">
+                        <path d="M 1571 384 L 1686.4 384" fill="none" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke" style="stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                        <path d="M 1697.65 384 L 1682.65 391.5 L 1686.4 384 L 1682.65 376.5 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="all" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211)); stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                    </g>
+                </g>
+                <g data-cell-id="e-in2">
+                    <g transform="translate(0.5,0.5)">
+                        <path d="M 481 404 L 599.42 495.1" fill="none" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke" style="stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                        <path d="M 608.34 501.96 L 591.88 498.75 L 599.42 495.1 L 601.03 486.86 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="all" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211)); stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                    </g>
+                </g>
+                <g data-cell-id="e-out2">
+                    <g transform="translate(0.5,0.5)">
+                        <path d="M 931 504 L 1049.42 412.9" fill="none" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke" style="stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                        <path d="M 1058.34 406.04 L 1051.03 421.14 L 1049.42 412.9 L 1041.88 409.25 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="all" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211)); stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                    </g>
+                </g>
+                <g data-cell-id="e-pub2">
+                    <g transform="translate(0.5,0.5)">
+                        <path d="M 1571 404 L 1689.42 495.1" fill="none" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke" style="stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                        <path d="M 1698.34 501.96 L 1681.88 498.75 L 1689.42 495.1 L 1691.03 486.86 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="3" stroke-miterlimit="10" pointer-events="all" style="fill: light-dark(rgb(30, 30, 30), rgb(211, 211, 211)); stroke: light-dark(rgb(30, 30, 30), rgb(211, 211, 211));"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

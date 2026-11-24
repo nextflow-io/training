@@ -48,8 +48,8 @@ This diagram summarizes the current operation of the workflow.
 It should look familiar, except now we're explicitly showing that the outputs of the process are packaged in a channel, just like the inputs were.
 We're going to put that output channel to good use in a minute.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-workflow-channels.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-workflow-channels.drawio.svg"
 </figure>
 
 Just to make sure everything is working, run the script once before making any changes:
