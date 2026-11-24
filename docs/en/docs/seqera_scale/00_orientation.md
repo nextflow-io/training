@@ -11,7 +11,8 @@ You will need to keep these instructions open in parallel to work through the co
 
 ### Environment basics
 
-This training environment contains all the software, code and data necessary to work through the training course, so you don't need to install anything yourself.
+This training environment contains the code, data and most of the software needed for the course.
+The one exception is the Seqera Platform CLI (`tw`), which you will install in [Part 2](02_launch_from_cli.md).
 
 The codespace is set up with a VSCode interface, which includes a filesystem explorer, a code editor and a terminal shell.
 All instructions given during the course (e.g. 'open the file', 'edit the code' or 'run this command') refer to those three parts of the VSCode interface unless otherwise specified.

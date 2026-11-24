@@ -879,7 +879,7 @@ Certifique-se de abrir o arquivo de saída para verificar se você agora tem a n
     Bonjour le monde!
     ```
 
-Voilà!
+Et voilà!
 
 Note como a nova execução sobrescreveu o arquivo de saída publicado no diretório `results`.
 No entanto, os resultados das execuções anteriores ainda estão preservados nos diretórios de tarefa em `work`.
@@ -889,7 +889,7 @@ No entanto, os resultados das execuções anteriores ainda estão preservados no
     Você pode distinguir facilmente parâmetros em nível de Nextflow de parâmetros em nível de pipeline.
 
     - Parâmetros que se aplicam a um pipeline sempre levam um hífen duplo (`--`).
-    - Parâmetros que modificam uma configuração do Nextflow, _por exemplo_ o recurso `-resume` que usamos anteriormente, levam um hífen simples (`-`).
+    - Parâmetros que modificam uma configuração do Nextflow, _por exemplo_ o recurso `-o` mencionado anteriormente, levam um hífen simples (`-`).
 
 ### 3.4. Use valores padrão para parâmetros de linha de comando
 

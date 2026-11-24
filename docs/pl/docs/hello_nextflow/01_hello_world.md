@@ -879,7 +879,7 @@ Koniecznie otwórz plik wyjściowy, aby sprawdzić, czy masz teraz nową wersję
     Bonjour le monde!
     ```
 
-Voilà!
+Et voilà!
 
 Zauważ, że nowe wykonanie nadpisało plik wyjściowy opublikowany w katalogu `results`.
 Jednak wyniki poprzednich uruchomień są nadal zachowane w katalogach zadań w `work`.
@@ -889,7 +889,7 @@ Jednak wyniki poprzednich uruchomień są nadal zachowane w katalogach zadań w 
     Możesz łatwo odróżnić parametry na poziomie Nextflow'a od parametrów na poziomie pipeline'u.
 
     - Parametry, które mają zastosowanie do pipeline'u, zawsze mają podwójny myślnik (`--`).
-    - Parametry, które modyfikują ustawienie Nextflow'a, _np._ funkcja `-resume`, której użyliśmy wcześniej, mają pojedynczy myślnik (`-`).
+    - Parametry, które modyfikują ustawienie Nextflow'a, _np._ opcja `-o`, o której wspomnieliśmy wcześniej, mają pojedynczy myślnik (`-`).
 
 ### 3.4. Użyj wartości domyślnych dla parametrów wiersza poleceń
 

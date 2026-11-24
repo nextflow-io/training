@@ -23,9 +23,9 @@ If you're not familiar with the Hello pipeline or you could use a reminder, see 
 The nf-core project enforces strong guidelines for how pipelines are structured, and for how the code is organized, configured and documented.
 
 Before we tackle our pipeline creation project, we need to understand that structure and organization.
-So let's have a look at how the pipeline code is organized in the `nf-core/demo` repository, using the `pipelines` symlink you created during [Getting started](00_orientation.md).
+So let's have a look at how the pipeline code is organized in the `nf-core/demo` repository, using the copy in `pipelines/nf-core/demo` that you cloned during [Getting started](00_orientation.md).
 
-As a reminder, you can either use `tree` or use the file explorer to find and open the `nf-core/demo` directory.
+As a reminder, you can either use `tree` or use the file explorer to find and open the `pipelines/nf-core/demo` directory.
 
 ```bash
 tree -L 1 pipelines/nf-core/demo
@@ -127,6 +127,11 @@ tree -L 3 pipelines/nf-core/demo/modules
 
     ```console
     pipelines/nf-core/demo/modules
+    ├── local
+    │   └── cowpy
+    │       ├── environment.yml
+    │       ├── main.nf
+    │       └── meta.yaml
     └── nf-core
         ├── fastqc
         │   ├── environment.yml
@@ -141,11 +146,11 @@ tree -L 3 pipelines/nf-core/demo/modules
         └── seqtk
             └── trim
 
-    7 directories, 6 files
+    9 directories, 9 files
     ```
 
 Here you see that the `fastqc` and `multiqc` modules sit at the top level within the `nf-core` modules, whereas the `trim` module sits under the toolkit that it belongs to, `seqtk`.
-In this case there are no `local` modules.
+The `cowpy` module under `local` is a local module, written specifically for this pipeline rather than installed from the nf-core modules repository.
 
 The module code file describing the process is always called `main.nf`, and is accompanied by tests and `.yml` files which we'll ignore for now.
 
@@ -260,17 +265,16 @@ Once the TUI closes, you should see the following console output.
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 4.0.2 - https://nf-co.re
+        nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Launching interactive nf-core pipeline creation tool.
     ```
 
-Once the TUI has finished, the tool reports that it created the pipeline, generated its container configuration, and initialized a local git repository for the new pipeline:
+Once the TUI has finished, the tool reports that it created the pipeline and initialized a local git repository for the new pipeline:
 
 ```console
 INFO     Creating new pipeline: 'hello'
-INFO     Generated container configs for the pipeline successfully.
 INFO     Initialising local pipeline git repository
 INFO     Pipeline created: ./core-hello
 ```
@@ -358,9 +362,9 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `./core-hello/main.nf` [cheesy_avogadro] revision: d6bbba9521
+    Launching `./core-hello/main.nf` [hungry_euclid] revision: d6bbba9521
 
     WARN: Unrecognized config option 'validation.defaultIgnoreParams'
     WARN: Unrecognized config option 'validation.monochromeLogs'
@@ -373,10 +377,10 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
       config_profile_description: Minimal test dataset to check pipeline function
 
     Generic options
-      trace_report_suffix       : 2026-06-23_16-56-58
+      trace_report_suffix       : 2026-11-23_22-43-13
 
     Core Nextflow options
-      runName                   : cheesy_avogadro
+      runName                   : hungry_euclid
       containerEngine           : docker
       launchDir                 : /workspaces/training/nfcore-build
       workDir                   : /workspaces/training/nfcore-build/work
@@ -393,6 +397,27 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 The `WARN: Unrecognized config option 'validation.*'` lines come from the version of the nf-schema plugin pinned in the freshly created template.
 They are harmless and do not affect the run.
 
+The rest of this course uses nf-schema 2.7.2, which does not produce these warnings.
+Open `core-hello/nextflow.config` and update the plugin version in the `plugins` block:
+
+=== "After"
+
+    ```groovy title="core-hello/nextflow.config" linenums="246" hl_lines="3"
+    // Nextflow plugins
+    plugins {
+        id 'nf-schema@2.7.2' // Validation of pipeline parameters and creation of an input channel from a sample sheet
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/nextflow.config" linenums="246" hl_lines="3"
+    // Nextflow plugins
+    plugins {
+        id 'nf-schema@2.5.1' // Validation of pipeline parameters and creation of an input channel from a sample sheet
+    }
+    ```
+
 This shows you that all the basic wiring is in place.
 So where are the outputs? Are there any?
 
@@ -407,12 +432,12 @@ tree core-hello-results
     ```console
     core-hello-results
     └── pipeline_info
-        ├── execution_report_2026-06-23_16-56-58.html
-        ├── execution_timeline_2026-06-23_16-56-58.html
-        ├── execution_trace_2026-06-23_16-56-58.txt
+        ├── execution_report_2026-11-23_22-43-13.html
+        ├── execution_timeline_2026-11-23_22-43-13.html
+        ├── execution_trace_2026-11-23_22-43-13.txt
         ├── hello_software_versions.yml
-        ├── params_2026-06-23_16-57-00.json
-        └── pipeline_dag_2026-06-23_16-56-58.html
+        ├── params_2026-11-23_22-43-14.json
+        └── pipeline_dag_2026-11-23_22-43-13.html
 
     1 directory, 6 files
     ```
@@ -584,15 +609,15 @@ nextflow run original-hello/hello.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `original-hello/hello.nf` [sharp_dijkstra] revision: 319b99ee58
+    Launching `original-hello/hello.nf` [condescending_brahmagupta] revision: 319b99ee58
 
     executor >  local (8)
-    [23/4eb61e] sayHello (3)       | 3 of 3 ✔
-    [c8/81a076] convertToUpper (1) | 3 of 3 ✔
-    [90/ea197e] collectGreetings   | 1 of 1 ✔
-    [da/3df79a] cowpy              | 1 of 1 ✔
+    [14/f12669] sayHello (2)       | 3 of 3 ✔
+    [46/50c534] convertToUpper (3) | 3 of 3 ✔
+    [78/943809] collectGreetings   | 1 of 1 ✔
+    [40/cf2f85] cowpy              | 1 of 1 ✔
     ```
 
 If that works for you, you're ready to start hacking.
@@ -744,7 +769,7 @@ Next, add a `main` statement before the rest of the operations called in the bod
 
 === "Before"
 
-    ```groovy title="original-hello/hello.nf" linenums="21"
+    ```groovy title="original-hello/hello.nf" linenums="22"
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -764,7 +789,7 @@ This basically says 'this is what this workflow _does_'.
 
 Finally, add an `emit` statement declaring what are the final outputs of the workflow.
 
-```groovy title="original-hello/hello.nf" linenums="35"
+```groovy title="original-hello/hello.nf" linenums="36"
     emit:
     cowpy_hellos = cowpy.out
 ```
@@ -887,16 +912,16 @@ If you made all the changes correctly, this should run to completion.
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `original-hello/main.nf` [irreverent_cajal] revision: 619249b1d7
+    Launching `./original-hello/main.nf` [modest_sinoussi] revision: 619249b1d7
 
     executor >  local (8)
-    [50/b02a90] HELLO:sayHello (1)       | 3 of 3 ✔
-    [c0/3c336a] HELLO:convertToUpper (2) | 3 of 3 ✔
-    [5c/47bb4f] HELLO:collectGreetings   | 1 of 1 ✔
-    [07/bfc706] HELLO:cowpy              | 1 of 1 ✔
-    Output: /workspaces/training/nfcore-build/work/07/bfc7061fa521e86f4e1954191ab4c4/cowpy-COLLECTED-test-batch-output.txt
+    [5f/4bdfc0] HELLO:sayHello (3)       | 3 of 3 ✔
+    [bd/5ac37a] HELLO:convertToUpper (3) | 3 of 3 ✔
+    [67/d32e99] HELLO:collectGreetings   | 1 of 1 ✔
+    [24/3d27e8] HELLO:cowpy              | 1 of 1 ✔
+    Output: /workspaces/training/nfcore-build/work/24/3d27e816a20e7304125692d609178c/cowpy-COLLECTED-test-batch-output.txt
     ```
 
 This means we've successfully upgraded our `HELLO` workflow to be composable.
@@ -913,7 +938,7 @@ Learn how to graft a basic composable workflow onto the nf-core scaffold.
 
 ## 4. Fit the updated workflow logic into the placeholder workflow
 
-Now that we've verified our composable workflow works correctly, let's return to the nf-core pipeline scaffold we created in section 1.
+Now that we've verified our composable workflow works correctly, let's return to the nf-core pipeline scaffold we created in section 2.
 We want to integrate the composable workflow we just developed into the nf-core template structure, so the end result should look something like this.
 
 <figure class="excalidraw">
@@ -922,7 +947,7 @@ We want to integrate the composable workflow we just developed into the nf-core 
 
 So how do we make that happen? Let's have a look at the current content of the `HELLO` workflow in `core-hello/workflows/hello.nf` (the nf-core scaffold).
 
-```groovy title="core-hello/workflows/hello.nf" linenums="1"
+```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 21 53"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -987,10 +1012,10 @@ workflow HELLO {
 ```
 
 The highlighted lines define the composable workflow structure: `workflow HELLO {`, `take:`, `main:`, and `emit:`.
-The large block between lines 17–34 is more substantial: it handles software version capture using topic channels, a mechanism nf-core is rolling out across all pipelines in 2026.
+The large block between lines 25–52 is more substantial: it handles software version capture using topic channels, a mechanism nf-core is rolling out across all pipelines in 2026.
 We'll explain it in Part 3; for now, treat it as boilerplate that you can leave untouched.
 
-We need to add the relevant code from the composable version of the original workflow that we developed in section 2.
+We need to add the relevant code from the composable version of the original workflow that we developed in section 3.
 
 We're going to tackle this in the following stages:
 
@@ -1039,7 +1064,7 @@ Now let's set up the module import statements.
 
 These were the import statements in the `original-hello/hello.nf` workflow:
 
-```groovy title="original-hello/hello.nf" linenums="9"
+```groovy title="original-hello/hello.nf" linenums="10"
 // Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -1087,7 +1112,7 @@ Two more interesting observations here:
 The nf-core project has a lot of prebuilt functionality around the concept of the samplesheet, which is typically a CSV file containing columnar data.
 Since that is essentially what our `greetings.csv` file is, we'll keep the current `take` declaration as is, and simply update the name of the input channel in the next step.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="17"
+```groovy title="core-hello/workflows/hello.nf" linenums="21"
     take:
     ch_samplesheet // channel: samplesheet read in from --input
     outdir
@@ -1125,7 +1150,7 @@ This ordering makes sense because in a real pipeline, the processes would emit v
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="15" hl_lines="11-21"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="19" hl_lines="11-21"
     workflow HELLO {
 
         take:
@@ -1183,7 +1208,7 @@ This ordering makes sense because in a real pipeline, the processes would emit v
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="15"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="19"
     workflow HELLO {
 
         take:
@@ -1231,14 +1256,14 @@ This looks great, but we still need to update the name of the channel we're pass
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="25"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
         // emit a greeting (updated to use the nf-core convention for samplesheets)
         sayHello(ch_samplesheet)
     ```
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="25"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
         // emit a greeting
         sayHello(greeting_ch)
     ```
@@ -1251,7 +1276,7 @@ Finally, we need to update the `emit` block to include the declaration of the wo
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="71" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="69" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
@@ -1259,7 +1284,7 @@ Finally, we need to update the `emit` block to include the declaration of the wo
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="71"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="69"
         emit:
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
@@ -1396,13 +1421,13 @@ A bit of poking around reveals that the input handling is done by the `PIPELINE_
 
 If we open up that file and scroll down, we come to this chunk of code:
 
-```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76"
+```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84"
     //
     // Create channel from input file provided through params.input
     //
 
     channel
-        .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
         .map {
             meta, fastq_1, fastq_2 ->
                 if (!fastq_2) {
@@ -1461,7 +1486,7 @@ So we just need to plug that into the initialisation workflow, with minor change
 
 === "After"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-7"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5-7"
         //
         // Create channel from input file provided through params.input
         //
@@ -1477,13 +1502,13 @@ So we just need to plug that into the initialisation workflow, with minor change
 
 === "Before"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-23"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5-23"
         //
         // Create channel from input file provided through params.input
         //
 
         channel
-            .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+            .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
             .map {
                 meta, fastq_1, fastq_2 ->
                     if (!fastq_2) {
@@ -1653,9 +1678,10 @@ If you've done all of the modifications correctly, it should run to completion.
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `core-hello/main.nf` [voluminous_caravaggio] revision: d6bbba9521
+    Downloading plugin nf-schema@2.7.2
+    Launching `core-hello/main.nf` [insane_payne] revision: d6bbba9521
 
     Input/output options
       input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
@@ -1667,10 +1693,10 @@ If you've done all of the modifications correctly, it should run to completion.
 
     Generic options
       validate_params           : false
-      trace_report_suffix       : 2026-06-23_16-58-45
+      trace_report_suffix       : 2026-11-23_22-44-19
 
     Core Nextflow options
-      runName                   : voluminous_caravaggio
+      runName                   : insane_payne
       containerEngine           : docker
       launchDir                 : /workspaces/training/nfcore-build
       workDir                   : /workspaces/training/nfcore-build/work
@@ -1682,10 +1708,10 @@ If you've done all of the modifications correctly, it should run to completion.
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
     executor >  local (8)
-    [30/fc3bdb] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
-    [55/58b611] CORE_HELLO:HELLO:convertToUpper (1) | 3 of 3 ✔
-    [12/83c0bc] CORE_HELLO:HELLO:collectGreetings   | 1 of 1 ✔
-    [18/4894fd] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
+    [c2/7610da] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
+    [b2/a83863] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [a2/7fcc1b] CORE_HELLO:HELLO:collectGreetings   | 1 of 1 ✔
+    [fe/9d5c40] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -1707,19 +1733,19 @@ tree core-hello-results
     ```console
     core-hello-results
     └── pipeline_info
-        ├── execution_report_2026-06-23_16-56-58.html
-        ├── execution_report_2026-06-23_16-58-45.html
-        ├── execution_timeline_2026-06-23_16-56-58.html
-        ├── execution_timeline_2026-06-23_16-58-45.html
-        ├── execution_trace_2026-06-23_16-56-58.txt
-        ├── execution_trace_2026-06-23_16-58-45.txt
+        ├── execution_report_2026-11-23_22-43-13.html
+        ├── execution_report_2026-11-23_22-44-19.html
+        ├── execution_timeline_2026-11-23_22-43-13.html
+        ├── execution_timeline_2026-11-23_22-44-19.html
+        ├── execution_trace_2026-11-23_22-43-13.txt
+        ├── execution_trace_2026-11-23_22-44-19.txt
         ├── hello_software_versions.yml
-        ├── params_2026-06-23_16-57-00.json
-        ├── params_2026-06-23_16-58-47.json
-        ├── pipeline_dag_2026-06-23_16-56-58.html
-        └── pipeline_dag_2026-06-23_16-58-45.html
+        ├── params_2026-11-23_22-43-14.json
+        ├── params_2026-11-23_22-44-22.json
+        ├── pipeline_dag_2026-11-23_22-43-13.html
+        └── pipeline_dag_2026-11-23_22-44-19.html
 
-    1 directory, 12 files
+    1 directory, 11 files
     ```
 
 You see we got another set of execution reports in addition to the ones we got from the first run, when the workflow was still just a placeholder.

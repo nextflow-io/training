@@ -159,7 +159,7 @@ Podeu veure el codi complet del workflow a continuació.
 
         script:
         """
-        cat '$input_file' | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
+        cat $input_file | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
         """
     }
 

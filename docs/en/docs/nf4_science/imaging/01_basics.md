@@ -18,12 +18,12 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 Your console output should look something like this:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 26.04.4
+ N E X T F L O W   ~  version 26.10.7
 
-Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d
+Launching `hello-world.nf` [lonely_volhard] revision: 0fb8dbb23d
 
 executor >  local (1)
-[71/8143bd] sayHello | 1 of 1 ✔
+[c3/c8441e] sayHello | 1 of 1 ✔
 ```
 
 Congratulations, you just ran your first Nextflow workflow!
@@ -31,7 +31,7 @@ Congratulations, you just ran your first Nextflow workflow!
 The most important output here is the last line (line 6):
 
 ```console title="Output" linenums="6"
-[71/8143bd] sayHello | 1 of 1 ✔
+[c3/c8441e] sayHello | 1 of 1 ✔
 ```
 
 This tells us that the `sayHello` process was successfully executed once (`1 of 1 ✔`).
@@ -82,19 +82,19 @@ That may sound confusing, so let's see what that looks like in practice.
 Going back to the console output for the workflow we ran earlier, we had this line:
 
 ```console title="Excerpt of command output" linenums="6"
-[71/8143bd] sayHello | 1 of 1 ✔
+[c3/c8441e] sayHello | 1 of 1 ✔
 ```
 
-See how the line starts with `[71/8143bd]`?
+See how the line starts with `[c3/c8441e]`?
 That is a truncated form of the task directory path for that one process call, and tells you where to find the output of the `sayHello` process call within the `work/` directory path.
 
-You can find the full path by typing the following command (replacing `71/8143bd` with what you see in your own terminal) and pressing the tab key to autocomplete the path or adding an asterisk:
+You can find the full path by typing the following command (replacing `c3/c8441e` with what you see in your own terminal) and pressing the tab key to autocomplete the path or adding an asterisk:
 
 ```bash
-tree work/71/8143bd*
+tree work/c3/c8441e*
 ```
 
-This should yield the full path directory path: `work/71/8143bd5ed3420e23c5f0dc1a05056d`
+This should yield the full path directory path: `work/c3/c8441ebe03d23654a2cda2ac6b297c`
 
 Let's take a look at what's in there.
 
@@ -114,8 +114,8 @@ The exact subdirectory names will be different on your system.
 
 ```console title="work/"
 work
-└── 71
-    └── 8143bd5ed3420e23c5f0dc1a05056d
+└── c3
+    └── c8441ebe03d23654a2cda2ac6b297c
         ├── .command.begin
         ├── .command.err
         ├── .command.log
@@ -134,7 +134,7 @@ If you open it, you will find the `Hello World!` greeting again.
 <details>
   <summary>File contents of output.txt</summary>
 
-```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" linenums="1"
+```console title="work/c3/c8441ebe03d23654a2cda2ac6b297c/output.txt" linenums="1"
 Hello World!
 ```
 
@@ -157,7 +157,7 @@ The `.command.sh` file is especially useful because it shows you the main comman
 <details>
   <summary>File contents</summary>
 
-```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" linenums="1"
+```console title="work/c3/c8441ebe03d23654a2cda2ac6b297c/.command.sh" linenums="1"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
@@ -354,11 +354,11 @@ nextflow run hello-world.nf --greeting 'Hello World!' -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
+    Launching `hello-world.nf` [insane_spence] revision: 0fb8dbb23d
 
-    [71/8143bd] sayHello | 1 of 1, cached: 1 ✔
+    [c3/c8441e] sayHello | 1 of 1, cached: 1 ✔
     ```
 
 Look for the `cached:` bit that has been added in the process status line, which means that Nextflow has recognized that it has already done this work and simply reused the result from the previous successful run.

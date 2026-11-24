@@ -889,7 +889,7 @@ Die Ergebnisse der vorherigen Läufe sind jedoch immer noch in den Task-Verzeich
     Du kannst Nextflow-Level-Parameter leicht von Pipeline-Level-Parametern unterscheiden.
 
     - Parameter, die für eine Pipeline gelten, nehmen immer einen doppelten Bindestrich (`--`).
-    - Parameter, die eine Nextflow-Einstellung ändern, _z.B._ die `-resume`-Funktion, die wir zuvor verwendet haben, nehmen einen einfachen Bindestrich (`-`).
+    - Parameter, die eine Nextflow-Einstellung ändern, _z.B._ die `-o`-Funktion, die wir zuvor erwähnt haben, nehmen einen einfachen Bindestrich (`-`).
 
 ### 3.4. Standardwerte für Kommandozeilenparameter verwenden
 

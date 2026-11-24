@@ -36,7 +36,7 @@ Bu bölümde, `core-hello` iş hattınızdaki yerel `cowpy` modülüne nf-core k
 Mevcut `cowpy` süreç modülünün kodu şu şekildedir:
 
 ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1"
-// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+// cowpy ile ASCII sanat oluştur (https://github.com/jeffbuttars/cowpy)
 process cowpy {
 
     publishDir 'results', mode: 'copy'
@@ -45,11 +45,11 @@ process cowpy {
     conda 'conda-forge::cowpy==1.1.5'
 
     input:
-    path input_file
-    val character
+        path input_file
+        val character
 
     output:
-    path "cowpy-${input_file}"
+        path "cowpy-${input_file}"
 
     script:
     """
@@ -95,14 +95,14 @@ Başlayalım!
 === "Sonra"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2"
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // cowpy ile ASCII sanat oluştur (https://github.com/jeffbuttars/cowpy)
     process COWPY {
     ```
 
 === "Önce"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2"
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // cowpy ile ASCII sanat oluştur (https://github.com/jeffbuttars/cowpy)
     process cowpy {
     ```
 
@@ -116,7 +116,7 @@ Süreç adları büyük/küçük harfe duyarlıdır. Süreç adını değiştird
 
 === "Sonra"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -126,13 +126,13 @@ Süreç adları büyük/küçük harfe duyarlıdır. Süreç adını değiştird
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy.nf'
     include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
     ```
 
 === "Önce"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -142,8 +142,8 @@ Süreç adları büyük/küçük harfe duyarlıdır. Süreç adını değiştird
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { cowpy                  } from '../modules/local/cowpy.nf'
     include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
     ```
 
 Süreç çağrılarını güncellemek zorunda kalmamak için import ifadesinde bir alias kullanabilirdik; ancak bu, büyük harfe çevirme kuralını benimsemenin amacını biraz bozardı.
@@ -154,7 +154,7 @@ Süreç çağrılarını güncellemek zorunda kalmamak için import ifadesinde b
 
 === "Sonra"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="5 36"
     // demetin içinden dosyayı çıkar, cowpy henüz metadata kullanmıyor
     ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
@@ -181,24 +181,22 @@ Süreç çağrılarını güncellemek zorunda kalmamak için import ifadesinde b
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
-
-
+        )
     emit:
     cowpy_hellos   = COWPY.out
-    versions       = ch_versions
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 === "Önce"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="5 36"
     // demetin içinden dosyayı çıkar, cowpy henüz metadata kullanmıyor
     ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
@@ -225,19 +223,17 @@ Süreç çağrılarını güncellemek zorunda kalmamak için import ifadesinde b
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
-
-
+        )
     emit:
     cowpy_hellos   = cowpy.out
-    versions       = ch_versions
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 **Her iki** değişikliği de yaptığınızdan emin olun; aksi takdirde çalıştırdığınızda hata alırsınız.
@@ -349,14 +345,14 @@ Artık `FIND_CONCATENATE` çıktısı ve `COWPY` girdisi aynı "şekle" sahip; y
 
 === "Sonra"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
         // cowpy ile selamlamaların ASCII sanatını oluştur
         COWPY(FIND_CONCATENATE.out.file_out, params.character)
     ```
 
 === "Önce"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="1-2 5"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="1-2 5"
         // demetin içinden dosyayı çıkar, cowpy henüz metadata kullanmıyor
         ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
@@ -374,18 +370,18 @@ Sonuç olarak, artık `ch_for_cowpy` kanalını oluşturmamıza gerek yok; bu ne
 
 === "Sonra"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="60" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="75" hl_lines="2"
         emit:
         cowpy_hellos   = COWPY.out.cowpy_output
-        versions       = ch_versions
+        versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 === "Önce"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="60" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="75" hl_lines="2"
         emit:
         cowpy_hellos   = COWPY.out
-        versions       = ch_versions
+        versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 Bu teknik olarak zorunlu değil; ancak mümkün olduğunda adlandırılmış çıktılara başvurmak iyi bir uygulamadır.
@@ -405,7 +401,6 @@ nextflow run . --outdir core-hello-results -profile test,docker
 
     Launching `./main.nf` [modest_saha] revision: d6bbba9521
 
-    Downloading plugin nf-schema@2.7.2
     Input/output options
       input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
       outdir                    : core-hello-results
@@ -471,8 +466,8 @@ Hadi yapalım.
 
 === "Sonra"
 
-    ```groovy title="modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
+    // cowpy ile ASCII sanat oluştur (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         publishDir 'results', mode: 'copy'
@@ -497,7 +492,7 @@ Hadi yapalım.
 === "Önce"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="11 18"
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // cowpy ile ASCII sanat oluştur (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         publishDir 'results', mode: 'copy'
@@ -601,14 +596,14 @@ Umarım bir iş hattındaki tüm modüllerin `ext.args` değerlerinin bu dosyada
 
 === "Sonra"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
         // cowpy ile selamlamaların ASCII sanatını oluştur
         COWPY(FIND_CONCATENATE.out.file_out)
     ```
 
 === "Önce"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
         // cowpy ile selamlamaların ASCII sanatını oluştur
         COWPY(FIND_CONCATENATE.out.file_out, params.character)
     ```
@@ -759,7 +754,7 @@ Bunları yaptıktan sonra, her şeyin daha önce olduğu gibi çalıştığını
 
 === "Sonra"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2 6 8"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="12" hl_lines="2 6 8"
         output:
             tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
 
@@ -774,7 +769,7 @@ Bunları yaptıktan sonra, her şeyin daha önce olduğu gibi çalıştığını
 
 === "Önce"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2 7"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="12" hl_lines="2 7"
         output:
             tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
 
@@ -951,7 +946,7 @@ Hadi bunu yapalım.
 === "Sonra"
 
     ```groovy title="core-hello/modules/local/cowpy.nf (excerpt)" linenums="1"
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // cowpy ile ASCII sanat oluştur (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -961,7 +956,7 @@ Hadi bunu yapalım.
 === "Önce"
 
     ```groovy title="core-hello/modules/local/cowpy.nf (excerpt)" linenums="1" hl_lines="4"
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // cowpy ile ASCII sanat oluştur (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         publishDir 'results', mode: 'copy'
@@ -1143,17 +1138,17 @@ Modüller, `topic:` anahtar kelimesini kullanarak sürümlerini doğrudan output
 
 === "Sonra"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="13" hl_lines="3"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="10" hl_lines="3"
         output:
-        tuple val(meta), path("${prefix}.txt")                                    , emit: cowpy_output
-        tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions , emit: versions_cowpy
+            tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
+            tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions, emit: versions_cowpy
     ```
 
 === "Önce"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="13"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="10"
         output:
-        tuple val(meta), path("${prefix}.txt")  , emit: cowpy_output
+            tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
     ```
 
 Yeni satır, `"versions"` topic kanalına bir `[process_name, tool_name, version]` demeti yayınlar.
@@ -1236,8 +1231,11 @@ Artık nf-core modül desenlerini manuel olarak uygulayarak öğrendiniz; şimdi
 Bu komutu çalıştırarak minimal bir şablonla `COWPY` modülünün yeni bir versiyonunu oluşturalım:
 
 ```bash
-nf-core modules create --empty-template COWPY
+nf-core modules create --empty-template cowpy
 ```
+
+Araç adı küçük harfle girilmelidir.
+Araç, oluşturulan kodda bunu büyük harfli süreç adı `COWPY`'ye dönüştürür.
 
 `--empty-template` bayrağı, ekstra kod olmadan temiz bir başlangıç şablonu oluşturur ve temel yapıyı görmeyi kolaylaştırır.
 
@@ -1246,6 +1244,8 @@ Metadata'yı önceden doldurmak için Bioconda ve bio.tools gibi paket depoları
 
 Birkaç yapılandırma seçeneği için sorulacaksınız:
 
+- **Bioconda paket adı**: Araç, Bioconda'da `cowpy` paketini bulamaz ve farklı bir paket adı girmek isteyip istemediğinizi sorar.
+  `n` yanıtını verin; paket bilgilerini manuel olarak dolduracağız.
 - **Yazar bilgisi**: Atıf için GitHub kullanıcı adınız
 - **Kaynak etiketi**: Önceden tanımlanmış bir hesaplama gereksinimleri seti.
   nf-core projesi, hafif araçlar için `process_single` ve zorlu olanlar için `process_high` gibi standart etiketler sağlar.
@@ -1282,7 +1282,9 @@ Her dosya belirli bir amaca hizmet eder:
 
 Oluşturulan `main.nf`, az önce öğrendiğiniz tüm desenleri ve bazı ek özellikleri içerir:
 
-```groovy title="modules/local/cowpy/main.nf" hl_lines="11 21 22"
+```groovy title="modules/local/cowpy/main.nf" linenums="1" hl_lines="12 23 24"
+
+
 process COWPY {
     tag "$meta.id"
     label 'process_single'
@@ -1292,11 +1294,11 @@ process COWPY {
         'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
         'quay.io/biocontainers/YOUR-TOOL-HERE' }"
 
-    input:
-    tuple val(meta), path(input)        // Desen 1: Metadata demetleri ✓
+    input:tuple val(meta), path(input)        // Desen 1: Metadata demetleri ✓
 
     output:
     tuple val(meta), path("*"), emit: output
+
     tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions, emit: versions_cowpy
 
     when:
@@ -1307,6 +1309,7 @@ process COWPY {
     def prefix = task.ext.prefix ?: "${meta.id}"  // Desen 3: ext.prefix ✓
 
     """
+
     """
 
     stub:
@@ -1315,9 +1318,13 @@ process COWPY {
 
     """
     echo $args
+
     """
 }
 ```
+
+Oluşturulan dosya iki boş satırla başlar ve şablon, girdi bildirimini `input:` ile aynı satıra yerleştirir.
+Bölüm 2.3.1'de girdileri ve çıktıları güncellerken girdi bildirimini kendi satırına taşıyacağız.
 
 Yukarıda manuel olarak uyguladığınız tüm desenlerin zaten mevcut olduğuna dikkat edin!
 
@@ -1431,7 +1438,7 @@ Girdi ve çıktı bloklarını güncelleyin:
 
 === "Sonra"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="10" hl_lines="1-2 5-6"
     input:
     tuple val(meta), path(input_file)
 
@@ -1442,17 +1449,18 @@ Girdi ve çıktı bloklarını güncelleyin:
 
 === "Önce"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5 6"
-    input:
-    tuple val(meta), path(input)
+    ```groovy title="modules/local/cowpy/main.nf" linenums="10" hl_lines="1 4-6"
+    input:tuple val(meta), path(input)
 
     output:
     tuple val(meta), path("*"), emit: output
-    tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions    , emit: versions_cowpy
+
+    tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions, emit: versions_cowpy
     ```
 
 Bu şunları belirtir:
 
+- `input:` satırının altında kendi satırında girdi bildirimi
 - Girdi dosyası parametre adı (genel `input` yerine `input_file`)
 - Yapılandırılabilir önek desenini kullanan çıktı dosya adı (joker `*` yerine `#!groovy ${prefix}.txt`)
 - Açıklayıcı bir emit adı (genel `output` yerine `cowpy_output`)
@@ -1469,7 +1477,7 @@ Daha önce manuel olarak yazdığımız modüle dayanarak, aşağıdaki düzenle
 
 === "Sonra"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="20" hl_lines="3 6"
     script:
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
@@ -1482,12 +1490,13 @@ Daha önce manuel olarak yazdığımız modüle dayanarak, aşağıdaki düzenle
 
 === "Önce"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="3"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="20" hl_lines="3"
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
+
     """
     ```
 
@@ -1508,7 +1517,7 @@ Bu gizemli görünüyorsa çok endişelenmeyin; bunu bütünlük açısından da
 
 === "Sonra"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="29" hl_lines="3 6"
     stub:
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
@@ -1521,13 +1530,14 @@ Bu gizemli görünüyorsa çok endişelenmeyin; bunu bütünlük açısından da
 
 === "Önce"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="29" hl_lines="3 6"
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
     echo $args
+
     """
     ```
 
@@ -1547,7 +1557,7 @@ Ortam kurulumunu (bölüm 2.2), girdiler/çıktılar (bölüm 2.3.1), script blo
 
 === "Sonra"
 
-    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -1557,13 +1567,13 @@ Ortam kurulumunu (bölüm 2.2), girdiler/çıktılar (bölüm 2.3.1), script blo
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy/main.nf'
     include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+    include { COWPY                  } from '../modules/local/cowpy/main.nf'
     ```
 
 === "Önce"
 
-    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -1573,8 +1583,8 @@ Ortam kurulumunu (bölüm 2.2), girdiler/çıktılar (bölüm 2.3.1), script blo
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy.nf'
     include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
     ```
 
 Test etmek için iş hattını çalıştıralım.

@@ -159,7 +159,7 @@ Você pode ver o código completo do fluxo de trabalho abaixo.
 
         script:
         """
-        cat '$input_file' | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
+        cat $input_file | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
         """
     }
 

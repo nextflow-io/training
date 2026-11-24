@@ -274,7 +274,7 @@ Copiate l'intera definizione del processo dal file del workflow al file del modu
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Usa uno strumento di sostituzione testo per convertire il saluto in maiuscolo
  */
 process convertToUpper {
 
@@ -286,7 +286,7 @@ process convertToUpper {
 
     script:
     """
-    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat ${input_file} | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
     """
 }
 ```

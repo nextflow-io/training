@@ -33,7 +33,7 @@ Here's what it shows for `cowpy` with the current defaults (1 CPU, 1 GB memory):
 
 | Metric           | Value  |
 | ---------------- | ------ |
-| CPU usage        | 116%   |
+| CPU usage        | 118%   |
 | Peak memory used | 6.4 MB |
 | Allocated memory | 1 GB   |
 
@@ -85,15 +85,15 @@ nextflow run main.nf -with-report report-config-2.html
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [voluminous_venter] revision: c3c85dec78
+    Launching `main.nf` [sick_picasso] revision: c3c85dec78
 
     executor >  local (8)
-    [a1/0e96d4] sayHello (1)       | 3 of 3 ✔
-    [a3/7173a3] convertToUpper (2) | 3 of 3 ✔
-    [4f/a8ae3d] collectGreetings   | 1 of 1 ✔
-    [91/3724f8] cowpy              | 1 of 1 ✔
+    [98/ab0d97] sayHello (3)       | 3 of 3 ✔
+    [6c/6bbe80] convertToUpper (3) | 3 of 3 ✔
+    [53/6f6d9f] collectGreetings   | 1 of 1 ✔
+    [46/744f8e] cowpy              | 1 of 1 ✔
 
     Outputs:
 
@@ -106,8 +106,8 @@ nextflow run main.nf -with-report report-config-2.html
 
       uppercased:
         - full_pipeline/intermediates/UPPER-Bonjour-output.txt
-        - full_pipeline/intermediates/UPPER-Hello-output.txt
         - full_pipeline/intermediates/UPPER-Hola-output.txt
+        - full_pipeline/intermediates/UPPER-Hello-output.txt
 
       collected: full_pipeline/intermediates/COLLECTED-batch-output.txt
 
@@ -121,7 +121,7 @@ Comparing the two reports for `cowpy`:
 | Metric           | Before (1 CPU, 1 GB) | After (2 CPUs, 2 GB) |
 | ---------------- | -------------------- | -------------------- |
 | Peak memory used | 6.4 MB               | 6.4 MB               |
-| CPU usage        | 116%                 | 118%                 |
+| CPU usage        | 118%                 | 120%                 |
 
 Doubling the allocation didn't change actual usage at all, which tells you the original 1 GB / 1 CPU was already generous for this toy workload.
 On a real pipeline processing non-trivial data, you'd expect the numbers themselves to differ meaningfully between processes, which is exactly why you profile before deciding what to allocate, rather than guessing.
@@ -209,23 +209,25 @@ nextflow run main.nf
 ??? failure "Command output (abridged)"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [desperate_brazil] revision: c3c85dec78
+    Launching `main.nf` [wise_curry] revision: c3c85dec78
 
     executor >  local (10)
-    [67/fe1f49] sayHello (1)       | 3 of 3 ✔
-    [8a/f13335] convertToUpper (1) | 3 of 3 ✔
-    [39/1b24ed] collectGreetings   | 1 of 1 ✔
-    [7a/d5eb6f] cowpy              | 0 of 1, retries: 2 ✘
-    [9d/b79eb3] NOTE: Process `cowpy` terminated with an error exit status (137) -- Execution is retried (1)
-    [6d/1d9d84] NOTE: Process `cowpy` terminated with an error exit status (137) -- Execution is retried (2)
+    [d2/6327d6] sayHello (1)       | 3 of 3 ✔
+    [0c/263568] convertToUpper (2) | 3 of 3 ✔
+    [d5/df6c2f] collectGreetings   | 1 of 1 ✔
+    [c7/a65817] cowpy              | 0 of 1, retries: 2 ✘
+    [2c/59981a] NOTE: Process `cowpy` terminated with an error exit status (137) -- Execution is retried (1)
+    [a0/43c57e] NOTE: Process `cowpy` terminated with an error exit status (137) -- Execution is retried (2)
     ERROR ~ Error executing process > 'cowpy'
 
     Caused by:
       Process `cowpy` terminated with an error exit status (137)
 
+
     Command executed:
+
       cat COLLECTED-batch-output.txt | cowpy -c "turkey" > cowpy-COLLECTED-batch-output.txt
 
     Command exit status:
@@ -234,15 +236,15 @@ nextflow run main.nf
     Command output:
       (empty)
 
-    Command error:
-      /usr/local/bin/_activate_current_env.sh: line 35:    14 Killed                  micromamba activate "${ENV_NAME:-base}"
-
     Work dir:
-      /workspaces/training/config-exec/work/7a/d5eb6feeac0eed18d95d3da7a7aeb4
+      /workspaces/training/config-exec/work/c7/a65817b1f8686a9da5d1b72adce1ff
 
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+    Container:
+      community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
 
-    -- Check '.nextflow.log' file for details
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+     -- Check '.nextflow.log' file for details
     ```
 
 Exit code 137 is the standard signal for an out-of-memory kill: the container didn't have enough memory to run `cowpy` at all.
@@ -293,29 +295,29 @@ nextflow run main.nf
 ??? success "Command output (abridged)"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [grave_joliot] revision: c3c85dec78
+    Launching `main.nf` [chaotic_picasso] revision: c3c85dec78
 
     executor >  local (9)
-    [0f/211b8a] sayHello (2)       | 3 of 3 ✔
-    [26/301ea2] convertToUpper (3) | 3 of 3 ✔
-    [22/5a895b] collectGreetings   | 1 of 1 ✔
-    [e1/beee86] cowpy              | 1 of 1, retries: 1 ✔
-    [b6/7aed6a] NOTE: Process `cowpy` terminated with an error exit status (137) -- Execution is retried (1)
+    [a1/fc615b] sayHello (2)       | 3 of 3 ✔
+    [43/705dba] convertToUpper (3) | 3 of 3 ✔
+    [65/c0ccdc] collectGreetings   | 1 of 1 ✔
+    [68/5eebb0] cowpy              | 1 of 1, retries: 1 ✔
+    [57/8dee7b] NOTE: Process `cowpy` terminated with an error exit status (137) -- Execution is retried (1)
 
     Outputs:
 
       /workspaces/training/config-exec/results
 
       first_output:
-        - full_pipeline/intermediates/Hola-output.txt
         - full_pipeline/intermediates/Hello-output.txt
+        - full_pipeline/intermediates/Hola-output.txt
         - full_pipeline/intermediates/Bonjour-output.txt
 
       uppercased:
-        - full_pipeline/intermediates/UPPER-Hola-output.txt
         - full_pipeline/intermediates/UPPER-Hello-output.txt
+        - full_pipeline/intermediates/UPPER-Hola-output.txt
         - full_pipeline/intermediates/UPPER-Bonjour-output.txt
 
       collected: full_pipeline/intermediates/COLLECTED-batch-output.txt

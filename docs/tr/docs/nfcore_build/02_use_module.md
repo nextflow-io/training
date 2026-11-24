@@ -120,7 +120,7 @@ Bu, modül hakkında girdileri, çıktıları ve temel kullanım bilgileri dahil
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 4.0.2 - https://nf-co.re
+        nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Reinstalling modules found in 'modules.json' but missing from
@@ -188,7 +188,7 @@ Bu, modül hakkında girdileri, çıktıları ve temel kullanım bilgileri dahil
 
 Bu, web sitesinde bulabileceğiniz bilgilerin tamamen aynısıdır.
 
-`INFO Reinstalling modules found in 'modules.json' but missing from directory` mesajını görmezden gelebilirsiniz; bu mesaj, nf-core/tools 4.0.2 tarafından `info` ile sorguladığınız her modül için, kurulu olup olmadığından bağımsız olarak yayınlanır ve `info` komutu herhangi bir dosya yazmadığından hiçbir etkisi yoktur.
+`INFO Reinstalling modules found in 'modules.json' but missing from directory` mesajını görmezden gelebilirsiniz; bu mesaj, nf-core/tools 4.1.0 tarafından `info` ile sorguladığınız her modül için, kurulu olup olmadığından bağımsız olarak yayınlanır ve `info` komutu herhangi bir dosya yazmadığından hiçbir etkisi yoktur.
 
 ### 1.4. find/concatenate modülünü kurma
 
@@ -197,10 +197,9 @@ Artık istediğimiz modülü bulduğumuza göre, onu pipeline'ımızın kaynak k
 İyi haber şu ki nf-core projesi bunu kolaylaştıran bazı araçlar içeriyor.
 Özellikle, `nf-core modules install` komutu, kodu almayı ve projenizde kullanılabilir hale getirmeyi tek adımda otomatikleştirmeyi mümkün kılar.
 
-Geçerli çalışma dizininizin `core-hello` pipeline projesinin kök dizini olduğundan emin olun ve ardından kurulum komutunu çalıştırın:
+Geçerli çalışma dizininizin `core-hello` pipeline projesinin kök dizini olduğundan emin olun (hâlâ `nfcore-build/` dizinindeyseniz `cd core-hello` komutunu çalıştırın) ve ardından kurulum komutunu çalıştırın:
 
 ```bash
-cd core-hello
 nf-core modules install find/concatenate
 ```
 
@@ -214,18 +213,18 @@ nf-core modules install find/concatenate
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
+    INFO     Reinstalling modules found in 'modules.json' but missing from
+             directory:
     INFO     Installing 'find/concatenate'
-    NotADirectoryError: [Errno 20] Not a directory:
-    'modules/local/cowpy.nf/meta.yml'
+    INFO     Use the following statement to include this module:
+
+     include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
     ```
 
 Komut, modül dosyalarını `modules/nf-core/find/concatenate/` dizinine indirir ve kurulu modülü izlemek için `modules.json` dosyasını günceller.
-Sondaki `NotADirectoryError` hatasını görmezden gelebilirsiniz; bu hata, nf-core/tools 4.0.2'nin her yerel modülün kendi dizininde (`modules/local/<name>/main.nf`) bulunmasını beklemesinden kaynaklanır; oysa `core-hello` bu aşamada hâlâ tek dosyalı yerel modüller kullanmaktadır.
-Bununla birlikte, `find/concatenate` modülü doğru şekilde kurulur ve `modules.json` beklendiği gibi güncellenir.
-`cowpy`'yi dizin düzenine Bölüm 4'te dönüştüreceğiz.
 
 Modül dosyalarının yerinde olduğunu kontrol edelim:
 
@@ -278,7 +277,7 @@ Kurulumu, artık nf-core/modules deposu altında `find/concatenate`'i listeleyen
                     "nf-core": {
                         "utils_nextflow_pipeline": {
                             "branch": "master",
-                            "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                            "git_sha": "c2b22d85f30a706a3073387f30380704fcae013b",
                             "installed_by": [
                                 "subworkflows"
                             ]
@@ -292,7 +291,7 @@ Kurulumu, artık nf-core/modules deposu altında `find/concatenate`'i listeleyen
                         },
                         "utils_nfschema_plugin": {
                             "branch": "master",
-                            "git_sha": "fdc08b8b1ae74f56686ce21f7ea11ad11990ce57",
+                            "git_sha": "a7b27fd25bfa8dcc07d299e88bd790585901a436",
                             "installed_by": [
                                 "subworkflows"
                             ]
@@ -323,7 +322,7 @@ nf-core modules list local
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Repository type: pipeline
@@ -342,9 +341,9 @@ Bu tablo, `find/concatenate` modülünü deposu, sürüm SHA'sı, mesajı ve tar
 
 `workflows/hello.nf` workflow'unun içe aktarma bölümünde `collectGreetings` modülü için olan `include` ifadesini `FIND_CONCATENATE` için olan ifade ile değiştirelim.
 
-Hatırlatma olarak, modül kurulum aracı bize kullanacağımız tam ifadeyi verdi:
+İçe aktarma ifadesi, modülün `modules/nf-core/` altındaki `main.nf` dosyasına işaret eder:
 
-```groovy title="Kurulum komutu tarafından üretilen içe aktarma ifadesi"
+```groovy title="find/concatenate modülü için içe aktarma ifadesi"
 include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
 ```
 
@@ -433,17 +432,17 @@ Bu, yeni modülü doğrudan yerine geçecek bir modül olarak kullanıp kullanam
 
 Hatırlatma olarak, `collectGreetings` modülümüzün arayüzü şöyle görünüyor:
 
-```groovy title="modules/local/collectGreetings.nf (excerpt)" linenums="1" hl_lines="6-7 10"
+```groovy title="modules/local/collectGreetings.nf (excerpt)" linenums="4" hl_lines="6-7 10"
 process collectGreetings {
 
     publishDir 'results', mode: 'copy'
 
     input:
-        path input_files
-        val batch_name
+    path input_files
+    val batch_name
 
     output:
-        path "COLLECTED-${batch_name}-output.txt" , emit: outfile
+    path "COLLECTED-${batch_name}-output.txt" , emit: outfile
 ```
 
 `collectGreetings` modülü iki girdi alır:
@@ -466,7 +465,7 @@ process FIND_CONCATENATE {
         : 'community.wave.seqera.io/library/findutils_pigz:c4dd5edc44402661'}"
 
     input:
-    tuple val(meta), path(files_in)
+    tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
     output:
     tuple val(meta), path("${prefix}"), emit: file_out
@@ -479,6 +478,7 @@ FIND_CONCATENATE modülü tek bir girdi alır; ancak bu girdi iki şey içeren b
 
 - `meta`, metamap adı verilen metadata içeren bir yapıdır;
 - `files_in`, `collectGreetings`'in `input_files`'ına eşdeğer olan, işlenecek bir veya daha fazla girdi dosyası içerir.
+  `arity: '1..*'` seçeneği en az bir dosya gerektirirken, `stageAs: 'to_concatenate/*'` dosyaları görevin work directory'si içindeki `to_concatenate/` alt dizinine yerleştirir.
 
 Tamamlandığında, FIND_CONCATENATE çıktılarını iki kısımda sunar:
 
@@ -525,7 +525,7 @@ Veya metadata'nın batch seviyesinde eklendiği bir durumda:
 
 ```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="10" hl_lines="2 5"
 input:
-tuple val(meta), path(files_in)
+tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
 output:
 tuple val(meta), path("${prefix}"), emit: file_out
@@ -541,7 +541,7 @@ Size `FIND_CONCATENATE` tarafından çıktılanan dosyanın metadata'nın bir pa
 prefix = task.ext.prefix ?: "${meta.id}${file_extensions[0]}"
 ```
 
-Bu kabaca şu anlama gelir: eğer harici görev parametre sistemi (`task.ext`) aracılığıyla bir `prefix` sağlanırsa, çıktı dosyasını adlandırmak için onu kullan; aksi takdirde metamap'teki `id` alanına karşılık gelen `${meta.id}` kullanarak bir tane oluştur.
+Bu kabaca şu anlama gelir: eğer harici görev parametre sistemi (`task.ext`) aracılığıyla bir `prefix` sağlanırsa, çıktı dosyasını adlandırmak için onu kullan; aksi takdirde metamap'teki `id` alanına karşılık gelen `#!groovy ${meta.id}` kullanarak bir tane oluştur.
 
 Bu modüle gelen girdi kanalının şöyle içeriklerle geldiğini hayal edebilirsiniz:
 
@@ -554,7 +554,7 @@ ch_input = [[[id: 'batch1', date: '25.10.01'], ['file1A.txt', 'file1B.txt']],
 Ardından çıkan çıktı kanalı içeriği şöyle çıkar:
 
 ```groovy title="Örnek çıktı kanalı içerikleri"
-ch_input = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
+ch_output = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
             [[id: 'batch2', date: '25.10.26'], 'batch2.txt'],
             [[id: 'batch3', date: '25.11.14'], 'batch3.txt']]
 ```
