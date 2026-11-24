@@ -264,7 +264,7 @@ You can also confirm the installation by inspecting `modules.json`, which now li
                     "nf-core": {
                         "find/concatenate": {
                             "branch": "master",
-                            "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                            "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",
                             "installed_by": [
                                 "modules"
                             ]
@@ -302,6 +302,7 @@ You can also confirm the installation by inspecting `modules.json`, which now li
     ```
 
 This confirms that the `find/concatenate` module is now part of your project's source code.
+Your `git_sha` may differ: nf-core updates modules over time, and the install command fetches the latest version.
 However, to actually use the new module, we need to import it into our pipeline.
 
 Finally, you can also use the `nf-core modules list local` command to check what modules are currently tracked in your pipeline.
@@ -329,11 +330,12 @@ nf-core modules list local
     ┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
     ┃ Module Name      ┃ Repository      ┃ Version SHA ┃ Message                                                                       ┃ Date       ┃
     ┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-    │ find/concatenate │ nf-core/modules │ 6d46786     │ Support for apptainer as well as singularity for .sif in `container` (#11260) │ 2026-04-23 │
+    │ find/concatenate │ nf-core/modules │ 7b3452a     │ Add license header text to all modules and subworkflow main.nf files (#13448) │ 2026-10-27 │
     └──────────────────┴─────────────────┴─────────────┴───────────────────────────────────────────────────────────────────────────────┴────────────┘
     ```
 
 This shows `find/concatenate` in the resulting table alongside its repository, version SHA, message, and date.
+As with `modules.json`, your version SHA, message and date may differ.
 
 ### 1.5. Update the module imports
 
@@ -452,7 +454,7 @@ Upon completion, `collectGreetings` outputs a single file path, emitted with the
 
 In comparison, the `find/concatenate` module's interface is more complex:
 
-```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="1" hl_lines="11 14"
+```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="4" hl_lines="11 14"
 process FIND_CONCATENATE {
     tag "${meta.id}"
     label 'process_low'
@@ -521,7 +523,7 @@ Or in a case where the metadata is attached at the batch level:
 
 Now let's put this in the context of the `FIND_CONCATENATE` process, which expects the input files to be packaged into a tuple with a metamap, and outputs the metamap as part of the output tuple as well.
 
-```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="10" hl_lines="2 5"
+```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="13" hl_lines="2 5"
 input:
 tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
@@ -535,7 +537,7 @@ Subsequent processes can then readily access that metadata too.
 Remember how we told you that the file output by `FIND_CONCATENATE` will be named based on an identifier that is part of the metadata?
 This is the relevant code:
 
-```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="37"
+```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="40"
 prefix = task.ext.prefix ?: "${meta.id}${file_extensions[0]}"
 ```
 
