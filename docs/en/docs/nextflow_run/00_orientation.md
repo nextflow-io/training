@@ -63,27 +63,30 @@ tree . -L 2
 
     ```console
     .
-    ├── 1-hello.nf
-    ├── 2-inputs.nf
+    ├── custom.config
     ├── data
-    │   ├── greetings-extended.csv
-    │   └── greetings.csv
+    │   ├── greetings.csv
+    │   └── single-greeting.csv
     ├── main.nf
     ├── modules
     │   ├── collectGreetings.nf
     │   ├── convertToUpper.nf
     │   ├── cowpy.nf
     │   └── sayHello.nf
-    └── nextflow.config
+    ├── nextflow.config
+    ├── test-params.json
+    └── test-params.yaml
     ```
 
-The **`.nf` files** are workflow scripts of increasing complexity, used in that order through the course.
+The **`main.nf`** file is the workflow script for the pipeline used throughout the course.
 
-The **`data/`** directory contains the CSV input files we'll use starting in section 2.
+The **`data/`** directory contains the CSV input files used by `main.nf`.
 
 The **`modules/`** directory contains the process definitions used by `main.nf`.
 
-The **`nextflow.config`** file is a configuration file that sets minimal environment properties. You can ignore it for now; we'll go over it in section 4.
+The **`nextflow.config`** file is a configuration file that sets minimal environment properties. You can ignore it for now; we'll go over it in Part 2.
+
+The **`custom.config`**, **`test-params.yaml`** and **`test-params.json`** files are used in Part 2.
 
 ## Readiness checklist
 

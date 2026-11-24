@@ -23,21 +23,21 @@ nextflow run nextflow-io/hello
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
     Pulling nextflow-io/hello ...
      downloaded from https://github.com/nextflow-io/hello.git
-    Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] revision: 3c2cdc9823 [master]
+    Launching `https://github.com/nextflow-io/hello` [nostalgic_leibniz] revision: 3c2cdc9823 [master]
 
     executor >  local (4)
-    [ba/08236d] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
-    Hello world!
+    [ed/f8a3ca] sayHello (3) | 4 of 4 ✔
+    Hola world!
 
     Bonjour world!
 
-    Hola world!
+    Ciao world!
+
+    Hello world!
     ```
 
 ### 1.2. Find where the pipeline is cached
@@ -63,6 +63,7 @@ nextflow info nextflow-io/hello
      > master (default)
        mybranch
        testing
+       toy
        v1.1 [t]
        v1.2 [t]
        v1.3 [t]
@@ -108,17 +109,17 @@ nextflow run nextflow-io/hello -r v1.3
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
     Pulling nextflow-io/hello:v1.3 ...
      downloaded from https://github.com/nextflow-io/hello.git
-    Launching `https://github.com/nextflow-io/hello` [sick_carson] revision: 2ce0b0e294 [v1.3]
+    Launching `https://github.com/nextflow-io/hello` [adoring_engelbart] revision: 2ce0b0e294 [v1.3]
 
     executor >  local (4)
-    [61/e11f77] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
+    [da/fd904e] sayHello (4) | 4 of 4 ✔
     Bonjour world!
+
+    Ciao world!
 
     Hello world!
 
@@ -141,17 +142,17 @@ nextflow run nextflow-io/hello
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `https://github.com/nextflow-io/hello` [hungry_maxwell] revision: 3c2cdc9823 [master]
+    Launching `https://github.com/nextflow-io/hello` [stupefied_edison] revision: 3c2cdc9823 [master]
 
     executor >  local (4)
-    [ba/08236d] sayHello (4) | 4 of 4 ✔
-    Ciao world!
-
+    [24/3d731f] sayHello (4) | 4 of 4 ✔
     Hello world!
 
     Bonjour world!
+
+    Ciao world!
 
     Hola world!
     ```

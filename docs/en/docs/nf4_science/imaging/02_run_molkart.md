@@ -199,7 +199,7 @@ This time, Nextflow will:
     - Containers ensure reproducibility - the exact same software versions run everywhere
     - You don't need to manually install dozens of tools and their dependencies
 
-    For more details about containers in Nextflow, see [Hello Containers](../../hello_nextflow/05_hello_containers.md) from the Hello Nextflow training.
+    For more details about containers in Nextflow, see [Hello Containers](../../hello_nextflow/04_hello_containers.md) from the Hello Nextflow training.
 
 ### 2.3. Monitor execution
 

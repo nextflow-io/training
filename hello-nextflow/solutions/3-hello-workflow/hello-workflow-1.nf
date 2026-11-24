@@ -1,36 +1,46 @@
 #!/usr/bin/env nextflow
 
 /*
- * Use echo to print 'Hello World!' to a file
+ * Use echo to print a greeting to a file
  */
 process sayHello {
 
+    tag "${name}"
+
     input:
-    val greeting
+    val name
 
     output:
-    path "${greeting}-output.txt"
+    path "${name}.txt"
 
     script:
     """
-    echo '${greeting}' > '${greeting}-output.txt'
+    echo 'Hello, ${name}!' > '${name}.txt'
     """
 }
 
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Use Python to translate the greeting into Spanish
  */
-process convertToUpper {
+process translateGreeting {
+
+    tag "${input_file}"
 
     input:
     path input_file
 
     output:
-    path "UPPER-${input_file}"
+    path "es-${input_file}"
 
     script:
     """
-    cat ${input_file} | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
+    #!/usr/bin/env python3
+
+    with open('${input_file}') as greeting_file:
+        greeting = greeting_file.read()
+
+    with open('es-${input_file}', 'w') as translated_file:
+        translated_file.write(greeting.replace('Hello', 'Hola'))
     """
 }
 
@@ -38,33 +48,33 @@ process convertToUpper {
  * Pipeline parameters
  */
 params {
-    input: Path = 'data/greetings.csv'
+    input: Path = 'data/names.csv'
 }
 
 workflow {
 
     main:
     // create a channel for inputs from a CSV file
-    greeting_ch = channel.fromPath(params.input)
+    name_ch = channel.fromPath(params.input)
                         .splitCsv()
-                        .map { line -> line[0] }
+                        .map { row -> row[0] }
     // emit a greeting
-    sayHello(greeting_ch)
-    // convert the greeting to uppercase
-    convertToUpper(sayHello.out)
+    greetings_ch = sayHello(name_ch)
+    // translate the greeting
+    translated_ch = translateGreeting(greetings_ch)
 
     publish:
-    first_output = sayHello.out
-    uppercased = convertToUpper.out
+    greetings = greetings_ch
+    translated = translated_ch
 }
 
 output {
-    first_output {
-        path 'hello_workflow'
+    greetings {
+        path 'hello'
         mode 'copy'
     }
-    uppercased {
-        path 'hello_workflow'
+    translated {
+        path 'hello'
         mode 'copy'
     }
 }

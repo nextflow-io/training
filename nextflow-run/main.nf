@@ -20,7 +20,7 @@ workflow {
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
-                        .map { line -> line[0] }
+                        .map { row -> row[0] }
     sayHello(greeting_ch)
     convertToUpper(sayHello.out)
     collectGreetings(convertToUpper.out.collect(), params.batch)
