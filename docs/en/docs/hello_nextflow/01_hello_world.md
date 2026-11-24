@@ -887,7 +887,7 @@ However, the results of the previous runs are still preserved in the task direct
     You can readily distinguish Nextflow-level parameters from pipeline-level parameters.
 
     - Parameters that apply to a pipeline always take a double hyphen (`--`).
-    - Parameters that modify a Nextflow setting, _e.g._ the `-resume` feature we used earlier, take a single hyphen (`-`).
+    - Parameters that modify a Nextflow setting, _e.g._ the `-o` feature we mentioned earlier, takes a single hyphen (`-`).
 
 ### 3.4. Use default values for command line parameters
 

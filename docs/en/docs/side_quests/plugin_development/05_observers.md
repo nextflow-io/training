@@ -147,7 +147,7 @@ Take a look at it:
 cat nf-greeting/src/main/groovy/training/plugin/GreetingFactory.groovy
 ```
 
-```groovy title="Output" hl_lines="25 27-29"
+```groovy title="Output" hl_lines="29 31-33"
 /*
  * Copyright 2025, Seqera Labs
  *
@@ -171,6 +171,10 @@ import nextflow.Session
 import nextflow.trace.TraceObserver
 import nextflow.trace.TraceObserverFactory
 
+/**
+ * Implements a factory object required to create
+ * the {@link GreetingObserver} instance.
+ */
 @CompileStatic
 class GreetingFactory implements TraceObserverFactory {
 
@@ -210,6 +214,28 @@ Edit `GreetingFactory.groovy` to add the new observer:
     We've replaced the Java-style `List.<TraceObserver>of(...)` with Groovy's simpler list literal `[...]`.
     Both return a `Collection`, but the Groovy syntax is more readable when adding multiple items.
 
+The template's unit test for the factory expects exactly one observer, so it fails now that the factory creates two.
+Update `nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy` to expect both:
+
+=== "After"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="17" hl_lines="2-4"
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+    ```
+
+=== "Before"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="17" hl_lines="2-3"
+            then:
+            result.size() == 1
+            result.first() instanceof GreetingObserver
+        }
+    ```
+
 ### 2.3. Build, install, and test
 
 ```bash
@@ -228,11 +254,12 @@ You should see "✓ Task completed!" printed five times (once per task), interle
 
 ```console title="Output (partial)"
 ...
-[9b/df7630] Submitted process > SAY_HELLO (4)
-Decorated: *** Hello ***
+[2f/8687bb] Submitted process > SAY_HELLO (3)
 ✓ Task completed!
+Decorated: *** Bonjour ***
+[90/742702] Submitted process > SAY_HELLO (5)
 ✓ Task completed!
-Decorated: *** Hola ***
+Decorated: *** Ciao ***
 ✓ Task completed!
 ...
 Pipeline complete! 👋
@@ -259,11 +286,12 @@ When the entire workflow finishes, the observer prints the final total.
 
 Update `TaskCounterObserver.groovy` with the highlighted changes:
 
-```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="14 18-19 22-24"
+```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="5 15 19-20 23-25"
 package training.plugin
 
 import groovy.transform.CompileStatic
 import nextflow.processor.TaskHandler
+import java.util.concurrent.atomic.AtomicInteger
 import nextflow.trace.TraceObserver
 import nextflow.trace.TraceRecord
 
@@ -273,23 +301,23 @@ import nextflow.trace.TraceRecord
 @CompileStatic
 class TaskCounterObserver implements TraceObserver {
 
-    private int taskCount = 0                // (1)!
+    private final AtomicInteger taskCount = new AtomicInteger()  // (1)!
 
     @Override
     void onProcessComplete(TaskHandler handler, TraceRecord trace) {
-        taskCount++                          // (2)!
-        println "📊 Tasks completed so far: ${taskCount}"
+        final count = taskCount.incrementAndGet()                 // (2)!
+        println "📊 Tasks completed so far: ${count}"
     }
 
     @Override
-    void onFlowComplete() {                  // (3)!
-        println "📈 Final task count: ${taskCount}"
+    void onFlowComplete() {                                       // (3)!
+        println "📈 Final task count: ${taskCount.get()}"
     }
 }
 ```
 
-1. `taskCount` is a variable that belongs to the observer object. It keeps its value between method calls, so it can accumulate a count across the whole workflow run. `private` means only this class can access it.
-2. `taskCount++` adds one to the counter. This line runs every time a task completes, so the count grows as the workflow progresses.
+1. `taskCount` is a variable that belongs to the observer object. It keeps its value between method calls, so it can accumulate a count across the whole workflow run. `private` means only this class can access it. Nextflow can report several task completions at the same time from different threads, so the counter is an `AtomicInteger`, which stays correct under concurrent updates where a plain `int` can lose increments.
+2. `incrementAndGet()` adds one to the counter and returns the new value. This line runs every time a task completes, so the count grows as the workflow progresses.
 3. `onFlowComplete` is a second lifecycle hook. It runs once when the workflow finishes, making it a good place to print a summary.
 
 In summary:
@@ -308,29 +336,29 @@ nextflow run greet.nf -ansi-log false
 ??? example "Output"
 
     ```console
-    N E X T F L O W  ~  version 26.04.4
-    Launching `greet.nf` [pensive_engelbart] - revision: bef1bea9f0
+    N E X T F L O W  ~  version 26.10.7
+    Launching `greet.nf` [suspicious_gilbert] - revision: bef1bea9f0
     Pipeline is starting! 🚀
     Reversed: olleH
     Reversed: ruojnoB
     Reversed: aloH
     Reversed: oaiC
     Reversed: ollaH
-    [be/bd8e72] Submitted process > SAY_HELLO (2)
-    [5b/d24c2b] Submitted process > SAY_HELLO (1)
-    [14/1f9dbe] Submitted process > SAY_HELLO (3)
-    Decorated: *** Bonjour ***
+    [4f/af5498] Submitted process > SAY_HELLO (1)
+    [7b/bdad9f] Submitted process > SAY_HELLO (5)
+    [01/79859f] Submitted process > SAY_HELLO (4)
+    [0b/7872eb] Submitted process > SAY_HELLO (3)
+    [f7/0f23a3] Submitted process > SAY_HELLO (2)
+    Decorated: *** Hallo ***
     Decorated: *** Hello ***
-    [85/a6b3ad] Submitted process > SAY_HELLO (4)
     📊 Tasks completed so far: 1
     📊 Tasks completed so far: 2
-    Decorated: *** Hola ***
     📊 Tasks completed so far: 3
     Decorated: *** Ciao ***
-    [3c/be6686] Submitted process > SAY_HELLO (5)
+    Decorated: *** Hola ***
     📊 Tasks completed so far: 4
-    Decorated: *** Hallo ***
     📊 Tasks completed so far: 5
+    Decorated: *** Bonjour ***
     Pipeline complete! 👋
     📈 Final task count: 5
     ```
@@ -387,12 +415,13 @@ First, update `greet.nf` so the `SAY_HELLO` process publishes its output files:
 
 Add an `onFilePublish` method and the required import to `TaskCounterObserver.groovy`:
 
-```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="5 23-26"
+```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="5 24-27"
 package training.plugin
 
 import groovy.transform.CompileStatic
 import nextflow.processor.TaskHandler
 import java.nio.file.Path
+import java.util.concurrent.atomic.AtomicInteger
 import nextflow.trace.TraceObserver
 import nextflow.trace.TraceRecord
 
@@ -402,12 +431,12 @@ import nextflow.trace.TraceRecord
 @CompileStatic
 class TaskCounterObserver implements TraceObserver {
 
-    private int taskCount = 0
+    private final AtomicInteger taskCount = new AtomicInteger()
 
     @Override
     void onProcessComplete(TaskHandler handler, TraceRecord trace) {
-        taskCount++
-        println "📊 Tasks completed so far: ${taskCount}"
+        final count = taskCount.incrementAndGet()
+        println "📊 Tasks completed so far: ${count}"
     }
 
     @Override
@@ -417,7 +446,7 @@ class TaskCounterObserver implements TraceObserver {
 
     @Override
     void onFlowComplete() {
-        println "📈 Final task count: ${taskCount}"
+        println "📈 Final task count: ${taskCount.get()}"
     }
 }
 ```
@@ -433,13 +462,13 @@ You should see "Published:" messages for each output file alongside the task cou
 
 ```console title="Output (partial)"
 ...
+📁 Published: greeting.txt
+📁 Published: greeting.txt
 📊 Tasks completed so far: 1
-📁 Published: greeting.txt
 📊 Tasks completed so far: 2
-📁 Published: greeting.txt
 ...
-📈 Final task count: 5
 Pipeline complete! 👋
+📈 Final task count: 5
 ```
 
 The `onFilePublish` method fires each time Nextflow publishes a file to the `results` directory.

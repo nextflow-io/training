@@ -212,8 +212,8 @@ make test
 ??? example "Test output"
 
     ```console
-    BUILD SUCCESSFUL in 5s
-    7 actionable tasks: 7 executed
+    BUILD SUCCESSFUL in 7s
+    7 actionable tasks: 4 executed, 3 up-to-date
     ```
 
     **Where are the test results?** Gradle hides detailed output when all tests pass.

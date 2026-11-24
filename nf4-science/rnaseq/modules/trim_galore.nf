@@ -1,5 +1,3 @@
-#!/usr/bin/env nextflow
-
 /*
  * Trim adapters and run post-trimming QC
  */

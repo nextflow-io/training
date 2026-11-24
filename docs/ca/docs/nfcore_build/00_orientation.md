@@ -25,7 +25,7 @@ Si esteu treballant en aquest curs pel vostre compte, familiaritzeu-vos amb els 
 Aquesta formació funciona amb **Nextflow 25.10.2** o posterior **amb l'analitzador de sintaxi v2**, que és el valor per defecte a partir de Nextflow 26.04.
 Al nostre entorn de formació no cal fer res: s'executa Nextflow 26.04.4 amb l'analitzador v2. Si utilitzeu un entorn local o personalitzat, consulteu les [notes de versió](../info/nxf_versions.md).
 
-La formació també requereix **nf-core tools 4.0.2**.
+La formació també requereix **nf-core tools 4.1.0**.
 Si utilitzeu una versió diferent de les eines nf-core, podeu tenir dificultats per seguir el curs.
 
 Podeu comprovar quina versió està instal·lada al vostre entorn utilitzant la comanda `nf-core --version`.
@@ -104,14 +104,11 @@ Utilitzem seccions desplegables com aquesta per incloure la sortida esperada de 
 ### Configurar la referència del pipeline
 
 La Part 1 d'aquest curs fa referència al codi font del pipeline `nf-core/demo` com a referència.
-Recupereu-lo i creeu un accés directe per navegar-hi fàcilment:
+Cloneu-lo en un directori local per poder navegar-hi fàcilment:
 
 ```bash
-nextflow pull nf-core/demo
-ln -s $NXF_HOME/assets pipelines
+nextflow clone nf-core/demo pipelines/nf-core/demo
 ```
-
-Si ja heu completat el curs [Use nf-core](../nfcore_use/index.md), `nf-core/demo` ja està emmagatzemat en memòria cau localment, però l'enllaç simbòlic anterior s'ha de crear de nou en aquest directori.
 
 ## Llista de verificació de preparació
 
@@ -119,7 +116,7 @@ Creieu que esteu preparats per començar?
 
 - [ ] Entenc l'objectiu d'aquest curs i els seus prerequisits
 - [ ] El meu entorn està en funcionament
-- [ ] Estic utilitzant nf-core tools 4.0.2 (comproveu-ho amb `nf-core --version`)
+- [ ] Estic utilitzant nf-core tools 4.1.0 (comproveu-ho amb `nf-core --version`)
 - [ ] He establert el meu directori de treball adequadament
 
 Si podeu marcar totes les caselles, esteu a punt per començar.

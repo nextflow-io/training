@@ -23,15 +23,10 @@ If you are working through this course by yourself, please acquaint yourself wit
 This training works with Nextflow 25.10.2 or later **with the v2 syntax parser**, which is the default from Nextflow 26.04 onward.
 In our training environment you don't need to do anything: it runs Nextflow 26.04.4 with the v2 parser. If you are using a local or custom environment, see the [version notes](../info/nxf_versions.md).
 
-!!! warning "nf-core/demo requires Nextflow 25.10.4 or later"
+!!! warning "The pipelines in this course require Nextflow 25.10.4 or later"
 
-    The `nf-core/demo` pipeline used in Part 1 enforces its own minimum Nextflow version (`>=25.10.4`), which is stricter than the general training floor of 25.10.2.
+    The `nf-core/demo`, `nf-core/rnaseq` and `nf-core/fetchngs` pipelines used in this course enforce their own minimum Nextflow version (`>=25.10.4`), which is stricter than the general training floor of 25.10.2.
     Our training environment already satisfies this; if you are using a local or custom environment, make sure you are on Nextflow 25.10.4 or later.
-
-This training additionally requires **nf-core tools 4.0.2**.
-If you use a different version of nf-core tooling, you may have difficulty following along.
-
-You can check what version is installed in your environment using the command `nf-core --version`.
 
 !!! warning "v2 parser compatibility"
 
@@ -53,13 +48,11 @@ Change directory now by running this command in the terminal:
 cd nfcore-use/
 ```
 
-!!! tip
+If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the GitHub Codespaces training environment:
 
-    If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
-
-    ```bash
-    cd /workspaces/training/nfcore-use
-    ```
+```bash
+cd /workspaces/training/nfcore-use
+```
 
 Next, explore the contents of this directory.
 
@@ -76,16 +69,41 @@ tree .
 
     ```console
     .
+    ├── broken_samplesheet_1.csv
+    ├── broken_samplesheet_2.csv
     ├── custom.config
+    ├── data
+    │   ├── reads
+    │   │   ├── KO_1_S3_L001_R1_001.fastq.gz
+    │   │   ├── KO_1_S3_L001_R2_001.fastq.gz
+    │   │   ├── KO_2_S4_L001_R1_001.fastq.gz
+    │   │   ├── KO_2_S4_L001_R2_001.fastq.gz
+    │   │   ├── WT_1_S1_L001_R1_001.fastq.gz
+    │   │   ├── WT_1_S1_L001_R2_001.fastq.gz
+    │   │   ├── WT_1_S1_L002_R1_001.fastq.gz
+    │   │   ├── WT_1_S1_L002_R2_001.fastq.gz
+    │   │   ├── WT_2_S2_L001_R1_001.fastq.gz
+    │   │   └── WT_2_S2_L001_R2_001.fastq.gz
+    │   └── sra_ids.csv
+    ├── INSTRUCTORS.md
     ├── laptop.config
     ├── malformed_samplesheet.csv
-    └── my_params.yml
+    ├── my_params.yml
+    └── solutions
+        ├── samplesheet.csv
+        └── tuned.config
+
+    3 directories, 20 files
     ```
 
-- **The `laptop.config` file** is a configuration file we'll use in section 4 to cap resource usage when running a production-scale pipeline locally.
+- **The `laptop.config` file** is a configuration file we'll use in Parts 3 and 5 to cap resource usage when running a production-scale pipeline locally.
   You can ignore it until then.
 - **The `my_params.yml`, `malformed_samplesheet.csv`, and `custom.config` files** are used in Part 2, to demonstrate setting parameters from a file, input validation, and process-level configuration overrides.
   You can ignore them until then too.
+- **The `data/reads/` directory** contains FASTQ files for a small RNA-seq experiment, and **the `data/sra_ids.csv` file** lists public sequencing runs; both are used in Part 5 to prepare samplesheets.
+- **The `broken_samplesheet_1.csv` and `broken_samplesheet_2.csv` files** contain errors to diagnose and fix in Part 5.
+- **The `solutions/` directory** contains the completed samplesheet from Part 5 and the tuned configuration file from Part 6.
+- **The `INSTRUCTORS.md` file** contains notes for instructors running the course live; you can ignore it.
 
 ## Readiness checklist
 
@@ -93,7 +111,6 @@ Think you're ready to dive in?
 
 - [ ] I understand the goal of this course and its prerequisites
 - [ ] My environment is up and running
-- [ ] I'm using nf-core tools 4.0.2 (check with `nf-core --version`)
 - [ ] I've set my working directory appropriately
 
 If you can check all the boxes, you're good to go.

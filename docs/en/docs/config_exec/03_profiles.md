@@ -74,29 +74,29 @@ nextflow run main.nf -profile my_laptop
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [nice_kimura] revision: c3c85dec78
+    Launching `main.nf` [crazy_bernard] revision: c3c85dec78
 
     executor >  local (8)
-    [df/b86b2f] sayHello (2)       | 3 of 3 ✔
-    [b2/e2cb9c] convertToUpper (3) | 3 of 3 ✔
-    [af/2ecff7] collectGreetings   | 1 of 1 ✔
-    [c6/713c96] cowpy              | 1 of 1 ✔
+    [7a/e3e084] sayHello (2)       | 3 of 3 ✔
+    [82/0105e9] convertToUpper (2) | 3 of 3 ✔
+    [5c/5dc723] collectGreetings   | 1 of 1 ✔
+    [fb/510120] cowpy              | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/config-exec/results
 
       first_output:
+        - full_pipeline/intermediates/Hola-output.txt
         - full_pipeline/intermediates/Bonjour-output.txt
         - full_pipeline/intermediates/Hello-output.txt
-        - full_pipeline/intermediates/Hola-output.txt
 
       uppercased:
-        - full_pipeline/intermediates/UPPER-Bonjour-output.txt
         - full_pipeline/intermediates/UPPER-Hello-output.txt
         - full_pipeline/intermediates/UPPER-Hola-output.txt
+        - full_pipeline/intermediates/UPPER-Bonjour-output.txt
 
       collected: full_pipeline/intermediates/COLLECTED-batch-output.txt
 
@@ -125,15 +125,15 @@ nextflow run main.nf -profile my_laptop,test
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [romantic_volhard] revision: c3c85dec78
+    Launching `main.nf` [nauseous_yalow] revision: c3c85dec78
 
     executor >  local (8)
-    [22/81de4f] sayHello (3)       | 3 of 3 ✔
-    [93/e16b04] convertToUpper (1) | 3 of 3 ✔
-    [ca/3e6a91] collectGreetings   | 1 of 1 ✔
-    [16/0cc7e3] cowpy              | 1 of 1 ✔
+    [75/ab69ce] sayHello (2)       | 3 of 3 ✔
+    [13/648eeb] convertToUpper (3) | 3 of 3 ✔
+    [10/00d278] collectGreetings   | 1 of 1 ✔
+    [7b/aa7b1d] cowpy              | 1 of 1 ✔
 
     Outputs:
 
@@ -146,8 +146,8 @@ nextflow run main.nf -profile my_laptop,test
 
       uppercased:
         - full_pipeline/intermediates/UPPER-Hello-output.txt
-        - full_pipeline/intermediates/UPPER-Bonjour-output.txt
         - full_pipeline/intermediates/UPPER-Hola-output.txt
+        - full_pipeline/intermediates/UPPER-Bonjour-output.txt
 
       collected: full_pipeline/intermediates/COLLECTED-test-output.txt
 

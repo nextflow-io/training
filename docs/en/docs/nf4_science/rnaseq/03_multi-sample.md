@@ -161,74 +161,74 @@ nextflow run rnaseq.nf -profile test
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `rnaseq.nf` [scruffy_wescoff] revision: 10f8b6f49d
+    Launching `rnaseq.nf` [shrivelled_lavoisier] revision: 10f8b6f49d
 
     executor >  local (18)
-    [30/659733] FASTQC (4)       | 6 of 6 ✔
-    [71/0eda42] TRIM_GALORE (1)  | 6 of 6 ✔
-    [7e/54ae09] HISAT2_ALIGN (6) | 6 of 6 ✔
+    [37/fecba4] FASTQC (3)       | 6 of 6 ✔
+    [28/1fe568] TRIM_GALORE (3)  | 6 of 6 ✔
+    [28/ef8b42] HISAT2_ALIGN (4) | 6 of 6 ✔
 
     Outputs:
 
       /workspaces/training/nf4-science/rnaseq/results
 
       fastqc_zip:
-        - fastqc/ENCSR000COQ1_1_fastqc.zip
         - fastqc/ENCSR000COQ2_1_fastqc.zip
-        - fastqc/ENCSR000COR1_1_fastqc.zip
+        - fastqc/ENCSR000COQ1_1_fastqc.zip
+        - fastqc/ENCSR000CPO2_1_fastqc.zip
         - fastqc/ENCSR000COR2_1_fastqc.zip
         - fastqc/ENCSR000CPO1_1_fastqc.zip
-        - fastqc/ENCSR000CPO2_1_fastqc.zip
+        - fastqc/ENCSR000COR1_1_fastqc.zip
 
       fastqc_html:
-        - fastqc/ENCSR000COQ1_1_fastqc.html
         - fastqc/ENCSR000COQ2_1_fastqc.html
-        - fastqc/ENCSR000COR1_1_fastqc.html
+        - fastqc/ENCSR000COQ1_1_fastqc.html
+        - fastqc/ENCSR000CPO2_1_fastqc.html
         - fastqc/ENCSR000COR2_1_fastqc.html
         - fastqc/ENCSR000CPO1_1_fastqc.html
-        - fastqc/ENCSR000CPO2_1_fastqc.html
+        - fastqc/ENCSR000COR1_1_fastqc.html
 
       trimmed_reads:
         - trimming/ENCSR000COQ1_1_trimmed.fq.gz
-        - trimming/ENCSR000COQ2_1_trimmed.fq.gz
-        - trimming/ENCSR000COR1_1_trimmed.fq.gz
-        - trimming/ENCSR000COR2_1_trimmed.fq.gz
-        - trimming/ENCSR000CPO1_1_trimmed.fq.gz
         - trimming/ENCSR000CPO2_1_trimmed.fq.gz
+        - trimming/ENCSR000COQ2_1_trimmed.fq.gz
+        - trimming/ENCSR000CPO1_1_trimmed.fq.gz
+        - trimming/ENCSR000COR2_1_trimmed.fq.gz
+        - trimming/ENCSR000COR1_1_trimmed.fq.gz
 
       trimming_reports:
         - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt
         - trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt
 
       trimming_fastqc:
         - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000COQ2_1_trimmed_fastqc.html, trimming/ENCSR000COQ2_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000COR1_1_trimmed_fastqc.html, trimming/ENCSR000COR1_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000COR2_1_trimmed_fastqc.html, trimming/ENCSR000COR2_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000CPO1_1_trimmed_fastqc.html, trimming/ENCSR000CPO1_1_trimmed_fastqc.zip]
         - [trimming/ENCSR000CPO2_1_trimmed_fastqc.html, trimming/ENCSR000CPO2_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000COQ2_1_trimmed_fastqc.html, trimming/ENCSR000COQ2_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000CPO1_1_trimmed_fastqc.html, trimming/ENCSR000CPO1_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000COR2_1_trimmed_fastqc.html, trimming/ENCSR000COR2_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000COR1_1_trimmed_fastqc.html, trimming/ENCSR000COR1_1_trimmed_fastqc.zip]
 
       bam:
         - align/ENCSR000COQ1_1_trimmed.bam
         - align/ENCSR000COQ2_1_trimmed.bam
-        - align/ENCSR000COR1_1_trimmed.bam
-        - align/ENCSR000COR2_1_trimmed.bam
-        - align/ENCSR000CPO1_1_trimmed.bam
         - align/ENCSR000CPO2_1_trimmed.bam
+        - align/ENCSR000COR2_1_trimmed.bam
+        - align/ENCSR000COR1_1_trimmed.bam
+        - align/ENCSR000CPO1_1_trimmed.bam
 
       align_log:
         - align/ENCSR000COQ1_1_trimmed.hisat2.log
         - align/ENCSR000COQ2_1_trimmed.hisat2.log
-        - align/ENCSR000COR1_1_trimmed.hisat2.log
-        - align/ENCSR000COR2_1_trimmed.hisat2.log
-        - align/ENCSR000CPO1_1_trimmed.hisat2.log
         - align/ENCSR000CPO2_1_trimmed.hisat2.log
+        - align/ENCSR000COR2_1_trimmed.hisat2.log
+        - align/ENCSR000COR1_1_trimmed.hisat2.log
+        - align/ENCSR000CPO1_1_trimmed.hisat2.log
     ```
 
 This time each step gets run 6 times, once for each sample in the CSV file.
@@ -387,8 +387,6 @@ Go ahead and fill in the process definition by yourself using the information pr
 === "Before"
 
     ```groovy title="modules/multiqc.nf" linenums="1"
-    #!/usr/bin/env nextflow
-
     /*
      * Aggregate QC reports with MultiQC
      */
@@ -409,9 +407,7 @@ Go ahead and fill in the process definition by yourself using the information pr
 
 === "After"
 
-    ```groovy title="modules/multiqc.nf" linenums="1" hl_lines="8 11 12 15 16 20"
-    #!/usr/bin/env nextflow
-
+    ```groovy title="modules/multiqc.nf" linenums="1" hl_lines="6 9 10 13 14 18"
     /*
      * Aggregate QC reports with MultiQC
      */
@@ -567,75 +563,75 @@ nextflow run rnaseq.nf -profile test -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `rnaseq.nf` [focused_moriondo] revision: 481681975c
+    Launching `rnaseq.nf` [fabulous_noyce] revision: 481681975c
 
     executor >  local (1)
-    [5e/600a76] FASTQC (6)       | 6 of 6, cached: 6 ✔
-    [ad/f92df3] TRIM_GALORE (3)  | 6 of 6, cached: 6 ✔
-    [85/008c39] HISAT2_ALIGN (4) | 6 of 6, cached: 6 ✔
-    [2b/6fa3ea] MULTIQC          | 1 of 1 ✔
+    [02/b1646a] FASTQC (1)       | 6 of 6, cached: 6 ✔
+    [28/1fe568] TRIM_GALORE (3)  | 6 of 6, cached: 6 ✔
+    [eb/6593d3] HISAT2_ALIGN (3) | 6 of 6, cached: 6 ✔
+    [55/c0313c] MULTIQC          | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/nf4-science/rnaseq/results
 
       fastqc_zip:
+        - fastqc/ENCSR000CPO2_1_fastqc.zip
         - fastqc/ENCSR000COQ1_1_fastqc.zip
         - fastqc/ENCSR000COQ2_1_fastqc.zip
         - fastqc/ENCSR000COR1_1_fastqc.zip
-        - fastqc/ENCSR000COR2_1_fastqc.zip
         - fastqc/ENCSR000CPO1_1_fastqc.zip
-        - fastqc/ENCSR000CPO2_1_fastqc.zip
+        - fastqc/ENCSR000COR2_1_fastqc.zip
 
       fastqc_html:
+        - fastqc/ENCSR000CPO2_1_fastqc.html
         - fastqc/ENCSR000COQ1_1_fastqc.html
         - fastqc/ENCSR000COQ2_1_fastqc.html
         - fastqc/ENCSR000COR1_1_fastqc.html
-        - fastqc/ENCSR000COR2_1_fastqc.html
         - fastqc/ENCSR000CPO1_1_fastqc.html
-        - fastqc/ENCSR000CPO2_1_fastqc.html
+        - fastqc/ENCSR000COR2_1_fastqc.html
 
       trimmed_reads:
-        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
-        - trimming/ENCSR000COQ2_1_trimmed.fq.gz
+        - trimming/ENCSR000CPO2_1_trimmed.fq.gz
         - trimming/ENCSR000COR1_1_trimmed.fq.gz
         - trimming/ENCSR000COR2_1_trimmed.fq.gz
         - trimming/ENCSR000CPO1_1_trimmed.fq.gz
-        - trimming/ENCSR000CPO2_1_trimmed.fq.gz
+        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+        - trimming/ENCSR000COQ2_1_trimmed.fq.gz
 
       trimming_reports:
-        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt
         - trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt
         - trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt
         - trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt
-        - trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt
 
       trimming_fastqc:
-        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000COQ2_1_trimmed_fastqc.html, trimming/ENCSR000COQ2_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000CPO2_1_trimmed_fastqc.html, trimming/ENCSR000CPO2_1_trimmed_fastqc.zip]
         - [trimming/ENCSR000COR1_1_trimmed_fastqc.html, trimming/ENCSR000COR1_1_trimmed_fastqc.zip]
         - [trimming/ENCSR000COR2_1_trimmed_fastqc.html, trimming/ENCSR000COR2_1_trimmed_fastqc.zip]
         - [trimming/ENCSR000CPO1_1_trimmed_fastqc.html, trimming/ENCSR000CPO1_1_trimmed_fastqc.zip]
-        - [trimming/ENCSR000CPO2_1_trimmed_fastqc.html, trimming/ENCSR000CPO2_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000COQ2_1_trimmed_fastqc.html, trimming/ENCSR000COQ2_1_trimmed_fastqc.zip]
 
       bam:
+        - align/ENCSR000CPO2_1_trimmed.bam
+        - align/ENCSR000CPO1_1_trimmed.bam
         - align/ENCSR000COQ1_1_trimmed.bam
         - align/ENCSR000COQ2_1_trimmed.bam
-        - align/ENCSR000COR1_1_trimmed.bam
         - align/ENCSR000COR2_1_trimmed.bam
-        - align/ENCSR000CPO1_1_trimmed.bam
-        - align/ENCSR000CPO2_1_trimmed.bam
+        - align/ENCSR000COR1_1_trimmed.bam
 
       align_log:
+        - align/ENCSR000CPO2_1_trimmed.hisat2.log
+        - align/ENCSR000CPO1_1_trimmed.hisat2.log
         - align/ENCSR000COQ1_1_trimmed.hisat2.log
         - align/ENCSR000COQ2_1_trimmed.hisat2.log
-        - align/ENCSR000COR1_1_trimmed.hisat2.log
         - align/ENCSR000COR2_1_trimmed.hisat2.log
-        - align/ENCSR000CPO1_1_trimmed.hisat2.log
-        - align/ENCSR000CPO2_1_trimmed.hisat2.log
+        - align/ENCSR000COR1_1_trimmed.hisat2.log
 
       multiqc_report: multiqc/all_single-end.html
 
@@ -806,7 +802,7 @@ The only change needed is in the output block: since we now get two FastQC repor
 
 === "After"
 
-    ```groovy title="modules/fastqc_pe.nf" linenums="10" hl_lines="2 3"
+    ```groovy title="modules/fastqc_pe.nf" linenums="8" hl_lines="2 3"
         output:
         path "*_fastqc.zip", emit: zip
         path "*_fastqc.html", emit: html
@@ -814,7 +810,7 @@ The only change needed is in the output block: since we now get two FastQC repor
 
 === "Before"
 
-    ```groovy title="modules/fastqc_pe.nf" linenums="10"
+    ```groovy title="modules/fastqc_pe.nf" linenums="8"
         output:
         path "${reads.simpleName}_fastqc.zip", emit: zip
         path "${reads.simpleName}_fastqc.html", emit: html
@@ -854,7 +850,7 @@ This module needs more substantial changes:
 
 === "After"
 
-    ```groovy title="modules/trim_galore_pe.nf" linenums="8" hl_lines="2 5 7 8 12"
+    ```groovy title="modules/trim_galore_pe.nf" linenums="5" hl_lines="2 5 7 8 12"
         input:
         tuple path(read1), path(read2)
 
@@ -872,7 +868,7 @@ This module needs more substantial changes:
 
 === "Before"
 
-    ```groovy title="modules/trim_galore_pe.nf" linenums="8"
+    ```groovy title="modules/trim_galore_pe.nf" linenums="5"
         input:
         path reads
 
@@ -919,7 +915,7 @@ This module needs similar changes:
 
 === "After"
 
-    ```groovy title="modules/hisat2_align_pe.nf" linenums="8" hl_lines="2 6 7 12 13 14"
+    ```groovy title="modules/hisat2_align_pe.nf" linenums="5" hl_lines="2 6 7 12 13 14"
         input:
         tuple path(read1), path(read2)
         path index_zip
@@ -939,7 +935,7 @@ This module needs similar changes:
 
 === "Before"
 
-    ```groovy title="modules/hisat2_align_pe.nf" linenums="8"
+    ```groovy title="modules/hisat2_align_pe.nf" linenums="5"
         input:
         path reads
         path index_zip
@@ -1090,83 +1086,83 @@ nextflow run rnaseq_pe.nf -profile test_pe
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `rnaseq_pe.nf` [irreverent_goodall] revision: 4857270963
+    Launching `rnaseq_pe.nf` [big_legentil] revision: 4857270963
 
     executor >  local (19)
-    [b2/6eeec6] FASTQC (3)       | 6 of 6 ✔
-    [fc/cf8740] TRIM_GALORE (5)  | 6 of 6 ✔
-    [4d/d86bd7] HISAT2_ALIGN (6) | 6 of 6 ✔
-    [34/51347d] MULTIQC          | 1 of 1 ✔
+    [06/0d1941] FASTQC (6)       | 6 of 6 ✔
+    [00/e81285] TRIM_GALORE (1)  | 6 of 6 ✔
+    [9a/24da7e] HISAT2_ALIGN (6) | 6 of 6 ✔
+    [4f/936170] MULTIQC          | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/nf4-science/rnaseq/results
 
       fastqc_zip:
-        - [fastqc/ENCSR000COQ1_1_fastqc.zip, fastqc/ENCSR000COQ1_2_fastqc.zip]
         - [fastqc/ENCSR000COQ2_1_fastqc.zip, fastqc/ENCSR000COQ2_2_fastqc.zip]
-        - [fastqc/ENCSR000COR1_1_fastqc.zip, fastqc/ENCSR000COR1_2_fastqc.zip]
         - [fastqc/ENCSR000COR2_1_fastqc.zip, fastqc/ENCSR000COR2_2_fastqc.zip]
         - [fastqc/ENCSR000CPO1_1_fastqc.zip, fastqc/ENCSR000CPO1_2_fastqc.zip]
+        - [fastqc/ENCSR000COR1_1_fastqc.zip, fastqc/ENCSR000COR1_2_fastqc.zip]
+        - [fastqc/ENCSR000COQ1_1_fastqc.zip, fastqc/ENCSR000COQ1_2_fastqc.zip]
         - [fastqc/ENCSR000CPO2_1_fastqc.zip, fastqc/ENCSR000CPO2_2_fastqc.zip]
 
       fastqc_html:
-        - [fastqc/ENCSR000COQ1_1_fastqc.html, fastqc/ENCSR000COQ1_2_fastqc.html]
         - [fastqc/ENCSR000COQ2_1_fastqc.html, fastqc/ENCSR000COQ2_2_fastqc.html]
-        - [fastqc/ENCSR000COR1_1_fastqc.html, fastqc/ENCSR000COR1_2_fastqc.html]
         - [fastqc/ENCSR000COR2_1_fastqc.html, fastqc/ENCSR000COR2_2_fastqc.html]
         - [fastqc/ENCSR000CPO1_1_fastqc.html, fastqc/ENCSR000CPO1_2_fastqc.html]
+        - [fastqc/ENCSR000COR1_1_fastqc.html, fastqc/ENCSR000COR1_2_fastqc.html]
+        - [fastqc/ENCSR000COQ1_1_fastqc.html, fastqc/ENCSR000COQ1_2_fastqc.html]
         - [fastqc/ENCSR000CPO2_1_fastqc.html, fastqc/ENCSR000CPO2_2_fastqc.html]
 
       trimmed_reads:
-        - [trimming/ENCSR000COQ1_1_val_1.fq.gz, trimming/ENCSR000COQ1_2_val_2.fq.gz]
-        - [trimming/ENCSR000COQ2_1_val_1.fq.gz, trimming/ENCSR000COQ2_2_val_2.fq.gz]
-        - [trimming/ENCSR000COR1_1_val_1.fq.gz, trimming/ENCSR000COR1_2_val_2.fq.gz]
         - [trimming/ENCSR000COR2_1_val_1.fq.gz, trimming/ENCSR000COR2_2_val_2.fq.gz]
-        - [trimming/ENCSR000CPO1_1_val_1.fq.gz, trimming/ENCSR000CPO1_2_val_2.fq.gz]
         - [trimming/ENCSR000CPO2_1_val_1.fq.gz, trimming/ENCSR000CPO2_2_val_2.fq.gz]
+        - [trimming/ENCSR000CPO1_1_val_1.fq.gz, trimming/ENCSR000CPO1_2_val_2.fq.gz]
+        - [trimming/ENCSR000COR1_1_val_1.fq.gz, trimming/ENCSR000COR1_2_val_2.fq.gz]
+        - [trimming/ENCSR000COQ2_1_val_1.fq.gz, trimming/ENCSR000COQ2_2_val_2.fq.gz]
+        - [trimming/ENCSR000COQ1_1_val_1.fq.gz, trimming/ENCSR000COQ1_2_val_2.fq.gz]
 
       trimming_reports:
-        - [trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COQ1_2.fastq.gz_trimming_report.txt]
-        - [trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COQ2_2.fastq.gz_trimming_report.txt]
-        - [trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COR1_2.fastq.gz_trimming_report.txt]
         - [trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COR2_2.fastq.gz_trimming_report.txt]
-        - [trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000CPO1_2.fastq.gz_trimming_report.txt]
         - [trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000CPO2_2.fastq.gz_trimming_report.txt]
+        - [trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000CPO1_2.fastq.gz_trimming_report.txt]
+        - [trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COR1_2.fastq.gz_trimming_report.txt]
+        - [trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COQ2_2.fastq.gz_trimming_report.txt]
+        - [trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COQ1_2.fastq.gz_trimming_report.txt]
 
       trimming_fastqc_1:
-        - [trimming/ENCSR000COQ1_1_val_1_fastqc.html, trimming/ENCSR000COQ1_1_val_1_fastqc.zip]
-        - [trimming/ENCSR000COQ2_1_val_1_fastqc.html, trimming/ENCSR000COQ2_1_val_1_fastqc.zip]
-        - [trimming/ENCSR000COR1_1_val_1_fastqc.html, trimming/ENCSR000COR1_1_val_1_fastqc.zip]
         - [trimming/ENCSR000COR2_1_val_1_fastqc.html, trimming/ENCSR000COR2_1_val_1_fastqc.zip]
-        - [trimming/ENCSR000CPO1_1_val_1_fastqc.html, trimming/ENCSR000CPO1_1_val_1_fastqc.zip]
         - [trimming/ENCSR000CPO2_1_val_1_fastqc.html, trimming/ENCSR000CPO2_1_val_1_fastqc.zip]
+        - [trimming/ENCSR000CPO1_1_val_1_fastqc.html, trimming/ENCSR000CPO1_1_val_1_fastqc.zip]
+        - [trimming/ENCSR000COR1_1_val_1_fastqc.html, trimming/ENCSR000COR1_1_val_1_fastqc.zip]
+        - [trimming/ENCSR000COQ2_1_val_1_fastqc.html, trimming/ENCSR000COQ2_1_val_1_fastqc.zip]
+        - [trimming/ENCSR000COQ1_1_val_1_fastqc.html, trimming/ENCSR000COQ1_1_val_1_fastqc.zip]
 
       trimming_fastqc_2:
-        - [trimming/ENCSR000COQ1_2_val_2_fastqc.html, trimming/ENCSR000COQ1_2_val_2_fastqc.zip]
-        - [trimming/ENCSR000COQ2_2_val_2_fastqc.html, trimming/ENCSR000COQ2_2_val_2_fastqc.zip]
-        - [trimming/ENCSR000COR1_2_val_2_fastqc.html, trimming/ENCSR000COR1_2_val_2_fastqc.zip]
         - [trimming/ENCSR000COR2_2_val_2_fastqc.html, trimming/ENCSR000COR2_2_val_2_fastqc.zip]
-        - [trimming/ENCSR000CPO1_2_val_2_fastqc.html, trimming/ENCSR000CPO1_2_val_2_fastqc.zip]
         - [trimming/ENCSR000CPO2_2_val_2_fastqc.html, trimming/ENCSR000CPO2_2_val_2_fastqc.zip]
+        - [trimming/ENCSR000CPO1_2_val_2_fastqc.html, trimming/ENCSR000CPO1_2_val_2_fastqc.zip]
+        - [trimming/ENCSR000COR1_2_val_2_fastqc.html, trimming/ENCSR000COR1_2_val_2_fastqc.zip]
+        - [trimming/ENCSR000COQ2_2_val_2_fastqc.html, trimming/ENCSR000COQ2_2_val_2_fastqc.zip]
+        - [trimming/ENCSR000COQ1_2_val_2_fastqc.html, trimming/ENCSR000COQ1_2_val_2_fastqc.zip]
 
       bam:
-        - align/ENCSR000COQ1_1_val_1.bam
-        - align/ENCSR000COQ2_1_val_1.bam
-        - align/ENCSR000COR1_1_val_1.bam
         - align/ENCSR000COR2_1_val_1.bam
+        - align/ENCSR000COR1_1_val_1.bam
         - align/ENCSR000CPO1_1_val_1.bam
         - align/ENCSR000CPO2_1_val_1.bam
+        - align/ENCSR000COQ2_1_val_1.bam
+        - align/ENCSR000COQ1_1_val_1.bam
 
       align_log:
-        - align/ENCSR000COQ1_1_val_1.hisat2.log
-        - align/ENCSR000COQ2_1_val_1.hisat2.log
-        - align/ENCSR000COR1_1_val_1.hisat2.log
         - align/ENCSR000COR2_1_val_1.hisat2.log
+        - align/ENCSR000COR1_1_val_1.hisat2.log
         - align/ENCSR000CPO1_1_val_1.hisat2.log
         - align/ENCSR000CPO2_1_val_1.hisat2.log
+        - align/ENCSR000COQ2_1_val_1.hisat2.log
+        - align/ENCSR000COQ1_1_val_1.hisat2.log
 
       multiqc_report: multiqc/all_paired-end.html
 

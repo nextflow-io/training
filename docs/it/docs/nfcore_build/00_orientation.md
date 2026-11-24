@@ -25,7 +25,7 @@ Se state seguendo questo corso autonomamente, vi preghiamo di familiarizzare con
 Questa formazione funziona con Nextflow 25.10.2 o successivo **con il parser di sintassi v2**, che è quello predefinito a partire da Nextflow 26.04.
 Nel nostro ambiente di formazione non dovete fare nulla: esegue Nextflow 26.04.4 con il parser v2. Se state utilizzando un ambiente locale o personalizzato, consultate le [note sulla versione](../info/nxf_versions.md).
 
-Questa formazione richiede inoltre **nf-core tools 4.0.2**.
+Questa formazione richiede inoltre **nf-core tools 4.1.0**.
 Se utilizzate una versione diversa degli strumenti nf-core, potreste avere difficoltà a seguire.
 
 Potete verificare quale versione è installata nel vostro ambiente utilizzando il comando `nf-core --version`.
@@ -104,14 +104,11 @@ Utilizziamo sezioni espandibili come questa per includere l'output previsto dei 
 ### Configurare il riferimento alla pipeline
 
 La Parte 1 di questo corso fa riferimento al codice sorgente della pipeline `nf-core/demo` come riferimento.
-Recuperatela e create un collegamento simbolico per sfogliarla facilmente:
+Clonate la pipeline in una directory locale in modo da poterla sfogliare facilmente:
 
 ```bash
-nextflow pull nf-core/demo
-ln -s $NXF_HOME/assets pipelines
+nextflow clone nf-core/demo pipelines/nf-core/demo
 ```
-
-Se avete già completato il corso [Use nf-core](../nfcore_use/index.md), `nf-core/demo` è già memorizzata nella cache locale, ma il collegamento simbolico sopra indicato deve comunque essere creato nella directory corrente.
 
 ## Lista di controllo della preparazione
 
@@ -119,7 +116,7 @@ Pensate di essere pronti per iniziare?
 
 - [ ] Comprendo l'obiettivo di questo corso e i suoi prerequisiti
 - [ ] Il mio ambiente è attivo e funzionante
-- [ ] Sto utilizzando nf-core tools 4.0.2 (verificate con `nf-core --version`)
+- [ ] Sto utilizzando nf-core tools 4.1.0 (verificate con `nf-core --version`)
 - [ ] Ho impostato la mia directory di lavoro in modo appropriato
 
 Se potete spuntare tutte le caselle, siete pronti per iniziare.

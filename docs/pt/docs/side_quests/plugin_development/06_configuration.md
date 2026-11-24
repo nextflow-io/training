@@ -234,6 +234,54 @@ A factory tem acesso à sessão do Nextflow e à sua configuração, portanto é
 A factory agora lê `greeting.enabled` da configuração e retorna uma lista vazia se o usuário definiu como `false`.
 Quando a lista está vazia, nenhum observer é criado, então os hooks de ciclo de vida do plugin são silenciosamente ignorados.
 
+O teste da factory da Parte 5 passa um `Mock(Session)` simples, que não tem configuração, então `navigate()` agora falha com um `NullPointerException`.
+Atualize `nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy` para fornecer ao mock de sessão uma configuração, e adicione um teste para o caso desativado:
+
+=== "Depois"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="4-6 8 15-25"
+        def 'should create the observer instance' () {
+            given:
+            def factory = new GreetingFactory()
+            def session = Mock(Session) {
+                getConfig() >> [greeting: [enabled: true]]
+            }
+            when:
+            def result = factory.create(session)
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+
+        def 'should return empty list when disabled' () {
+            given:
+            def factory = new GreetingFactory()
+            def session = Mock(Session) {
+                getConfig() >> [greeting: [enabled: false]]
+            }
+            when:
+            def result = factory.create(session)
+            then:
+            result.isEmpty()
+        }
+    ```
+
+=== "Antes"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="5"
+        def 'should create the observer instance' () {
+            given:
+            def factory = new GreetingFactory()
+            when:
+            def result = factory.create(Mock(Session))
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+    ```
+
 ### 2.1. Compilar e testar
 
 Recompile e instale o plugin:

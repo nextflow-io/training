@@ -889,7 +889,7 @@ Note करो कि new execution ने `results` directory में publish
     तुम Nextflow-level parameters को pipeline-level parameters से readily distinguish कर सकते हो।
 
     - Pipeline पर apply होने वाले Parameters हमेशा double hyphen (`--`) लेते हैं।
-    - Nextflow setting को modify करने वाले Parameters, _जैसे_ `-resume` feature जो हमने पहले use किया, single hyphen (`-`) लेते हैं।
+    - Nextflow setting को modify करने वाले Parameters, _जैसे_ `-o` feature जो हमने पहले mention किया, single hyphen (`-`) लेते हैं।
 
 ### 3.4. Command line parameters के लिए default values use करें
 

@@ -120,7 +120,7 @@ To wyświetla dokumentację modułu, w tym jego wejścia, wyjścia i podstawowe 
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 4.0.2 - https://nf-co.re
+        nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Reinstalling modules found in 'modules.json' but missing from
@@ -188,7 +188,7 @@ To wyświetla dokumentację modułu, w tym jego wejścia, wyjścia i podstawowe 
 
 To są dokładnie te same informacje, które możesz znaleźć na stronie internetowej.
 
-Możesz zignorować komunikat `INFO Reinstalling modules found in 'modules.json' but missing from directory`; jest on emitowany przez nf-core/tools 4.0.2 dla każdego modułu odpytywanego poleceniem `info`, niezależnie od tego, czy jest faktycznie zainstalowany, i nie ma żadnego efektu, ponieważ polecenie `info` nie zapisuje żadnych plików.
+Możesz zignorować komunikat `INFO Reinstalling modules found in 'modules.json' but missing from directory`; jest on emitowany przez nf-core/tools 4.1.0 dla każdego modułu odpytywanego poleceniem `info`, niezależnie od tego, czy jest faktycznie zainstalowany, i nie ma żadnego efektu, ponieważ polecenie `info` nie instaluje niczego.
 
 ### 1.4. Instalacja modułu find/concatenate
 
@@ -197,10 +197,9 @@ Teraz, gdy znaleźliśmy moduł, którego chcemy, musimy dodać go do kodu źró
 Dobra wiadomość jest taka, że projekt nf-core zawiera narzędzia, które ułatwiają tę część.
 Konkretnie, polecenie `nf-core modules install` umożliwia zautomatyzowanie pobierania kodu i udostępnienia go projektowi w jednym kroku.
 
-Upewnij się, że Twój bieżący katalog roboczy to katalog główny projektu pipeline `core-hello`, a następnie uruchom polecenie instalacji:
+Upewnij się, że Twój bieżący katalog roboczy to katalog główny projektu pipeline `core-hello` (uruchom `cd core-hello`, jeśli nadal jesteś w katalogu `nfcore-build/`), a następnie uruchom polecenie instalacji:
 
 ```bash
-cd core-hello
 nf-core modules install find/concatenate
 ```
 
@@ -214,18 +213,18 @@ nf-core modules install find/concatenate
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
+    INFO     Reinstalling modules found in 'modules.json' but missing from
+             directory:
     INFO     Installing 'find/concatenate'
-    NotADirectoryError: [Errno 20] Not a directory:
-    'modules/local/cowpy.nf/meta.yml'
+    INFO     Use the following statement to include this module:
+
+     include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
     ```
 
 Polecenie pobiera pliki modułu do `modules/nf-core/find/concatenate/` i aktualizuje `modules.json`, aby śledzić zainstalowany moduł.
-Możesz zignorować błąd `NotADirectoryError` na końcu; pojawia się on, ponieważ nf-core/tools 4.0.2 oczekuje, że każdy moduł lokalny będzie znajdował się we własnym katalogu (`modules/local/<name>/main.nf`), podczas gdy `core-hello` na tym etapie nadal używa modułów lokalnych w postaci pojedynczych plików.
-Moduł `find/concatenate` jest jednak zainstalowany poprawnie, a `modules.json` jest aktualizowany zgodnie z oczekiwaniami.
-Przekonwertujemy `cowpy` do układu katalogowego w Części 4.
 
 Sprawdźmy, czy pliki modułu są na miejscu:
 
@@ -278,7 +277,7 @@ Możesz również potwierdzić instalację, sprawdzając plik `modules.json`, kt
                     "nf-core": {
                         "utils_nextflow_pipeline": {
                             "branch": "master",
-                            "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                            "git_sha": "c2b22d85f30a706a3073387f30380704fcae013b",
                             "installed_by": [
                                 "subworkflows"
                             ]
@@ -292,7 +291,7 @@ Możesz również potwierdzić instalację, sprawdzając plik `modules.json`, kt
                         },
                         "utils_nfschema_plugin": {
                             "branch": "master",
-                            "git_sha": "fdc08b8b1ae74f56686ce21f7ea11ad11990ce57",
+                            "git_sha": "a7b27fd25bfa8dcc07d299e88bd790585901a436",
                             "installed_by": [
                                 "subworkflows"
                             ]
@@ -323,7 +322,7 @@ nf-core modules list local
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Repository type: pipeline
@@ -342,9 +341,9 @@ W wynikowej tabeli widać `find/concatenate` wraz z repozytorium, wersją SHA, k
 
 Zastąpmy instrukcję `include` dla modułu `collectGreetings` instrukcją dla `FIND_CONCATENATE` w sekcji importów pliku workflow `workflows/hello.nf`.
 
-Przypominając, narzędzie instalacji modułu podało nam dokładną instrukcję do użycia:
+Instrukcja importu wskazuje na plik `main.nf` modułu w katalogu `modules/nf-core/`:
 
-```groovy title="Instrukcja importu wygenerowana przez polecenie instalacji"
+```groovy title="Instrukcja importu modułu find/concatenate"
 include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
 ```
 
@@ -433,17 +432,17 @@ Najlepiej byłoby zrobić to _przed_ zainstalowaniem modułu, ale hej, lepiej p�
 
 Przypominając, tak wygląda interfejs naszego modułu `collectGreetings`:
 
-```groovy title="modules/local/collectGreetings.nf (fragment)" linenums="1" hl_lines="6-7 10"
+```groovy title="modules/local/collectGreetings.nf (fragment)" linenums="4" hl_lines="6-7 10"
 process collectGreetings {
 
     publishDir 'results', mode: 'copy'
 
     input:
-        path input_files
-        val batch_name
+    path input_files
+    val batch_name
 
     output:
-        path "COLLECTED-${batch_name}-output.txt" , emit: outfile
+    path "COLLECTED-${batch_name}-output.txt" , emit: outfile
 ```
 
 Moduł `collectGreetings` przyjmuje dwa wejścia:
@@ -466,7 +465,7 @@ process FIND_CONCATENATE {
         : 'community.wave.seqera.io/library/findutils_pigz:c4dd5edc44402661'}"
 
     input:
-    tuple val(meta), path(files_in)
+    tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
     output:
     tuple val(meta), path("${prefix}"), emit: file_out
@@ -479,10 +478,11 @@ Moduł FIND_CONCATENATE przyjmuje pojedyncze wejście, ale jest to krotka skład
 
 - `meta` to struktura przechowująca metadane, nazywana metamapą;
 - `files_in` to jeden lub więcej plików do przetworzenia, równoważne `input_files` z `collectGreetings`.
+  Opcja `arity: '1..*'` wymaga co najmniej jednego pliku, a `stageAs: 'to_concatenate/*'` umieszcza pliki w podkatalogu `to_concatenate/` katalogu roboczego zadania.
 
 Po zakończeniu FIND_CONCATENATE dostarcza swoje wyjścia w dwóch częściach:
 
-- Kolejna krotka zawierająca metamapę i połączony plik wyjściowy, emitowana z tagiem `file_out`;
+- Krotka zawierająca metamapę i połączony plik wyjściowy, emitowana z tagiem `file_out`;
 - Trzy krotki wersji (po jednej na każde użyte narzędzie) publikowane do kanału tematu `versions` na potrzeby śledzenia wersji oprogramowania.
 
 Zauważ również, że domyślnie plik wyjściowy będzie nazwany na podstawie identyfikatora będącego częścią metadanych (kod nie pokazany tutaj).
@@ -501,7 +501,7 @@ Jednak aby zrozumieć część z metamapą, musimy przedstawić Ci dodatkowy kon
 
 ### 2.2. Zrozumienie metamap
 
-Właśnie powiedzieliśmy, że moduł FIND_CONCATENATE oczekuje mapy metadanych jako części Swojej krotki wejściowej.
+Właśnie powiedzieliśmy, że moduł FIND_CONCATENATE oczekuje mapy metadanych jako części swojej krotki wejściowej.
 Poświęćmy kilka minut na bliższe przyjrzenie się temu, czym to jest.
 
 **Mapa metadanych**, często nazywana w skrócie **metamapą**, to mapa w stylu Groovy zawierająca informacje o jednostkach danych.
@@ -525,7 +525,7 @@ Teraz umieśćmy to w kontekście procesu `FIND_CONCATENATE`, który oczekuje, �
 
 ```groovy title="modules/nf-core/find/concatenate/main.nf (fragment)" linenums="10" hl_lines="2 5"
 input:
-tuple val(meta), path(files_in)
+tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
 output:
 tuple val(meta), path("${prefix}"), emit: file_out
@@ -541,7 +541,7 @@ To jest odpowiedni kod:
 prefix = task.ext.prefix ?: "${meta.id}${file_extensions[0]}"
 ```
 
-Oznacza to mniej więcej następująco: jeśli `prefix` jest dostarczony przez system parametrów zewnętrznych zadania (`task.ext`), użyj tego do nazwania pliku wyjściowego; w przeciwnym razie utwórz go używając `${meta.id}`, który odpowiada polu `id` w metamapie.
+Oznacza to mniej więcej następująco: jeśli `prefix` jest dostarczony przez system parametrów zewnętrznych zadania (`task.ext`), użyj tego do nazwania pliku wyjściowego; w przeciwnym razie utwórz go używając `#!groovy ${meta.id}`, który odpowiada polu `id` w metamapie.
 
 Możesz sobie wyobrazić kanał wejściowy wchodzący do tego modułu z zawartością taką jak ta:
 
@@ -554,7 +554,7 @@ ch_input = [[[id: 'batch1', date: '25.10.01'], ['file1A.txt', 'file1B.txt']],
 Następnie zawartość kanału wyjściowego wychodzącego wyglądałaby tak:
 
 ```groovy title="Przykład zawartości kanału wyjściowego"
-ch_input = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
+ch_output = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
             [[id: 'batch2', date: '25.10.26'], 'batch2.txt'],
             [[id: 'batch3', date: '25.11.14'], 'batch3.txt']]
 ```

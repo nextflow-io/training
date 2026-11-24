@@ -889,7 +889,7 @@ No obstant això, els resultats de les execucions anteriors encara es conserven 
     Podeu distingir fàcilment els paràmetres a nivell de Nextflow dels paràmetres a nivell de pipeline.
 
     - Els paràmetres que s'apliquen a un pipeline sempre porten un guió doble (`--`).
-    - Els paràmetres que modifiquen una configuració de Nextflow, _p. ex._ la funció `-resume` que vam utilitzar anteriorment, porten un guió simple (`-`).
+    - Els paràmetres que modifiquen una configuració de Nextflow, _p. ex._ la funció `-o` que vam esmentar anteriorment, porten un guió simple (`-`).
 
 ### 3.4. Utilitzeu valors per defecte per als paràmetres de línia de comandes
 

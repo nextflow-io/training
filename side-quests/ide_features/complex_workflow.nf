@@ -86,7 +86,7 @@ workflow {
     // Output summary
     RNASEQ_PIPELINE.out.counts
         .collectFile(name: 'expression_matrix.txt', sort: true)
-        .view { "Expression matrix created: ${it}" }
+        .view { matrix -> "Expression matrix created: ${matrix}" }
 
     publish:
     fastqc = RNASEQ_PIPELINE.out.fastqc

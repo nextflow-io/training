@@ -150,7 +150,7 @@ La plantilla de pipeline nf-core ve amb nf-schema ja instal·lat i configurat:
 - La validació de paràmetres es controla mitjançant `params.validate_params`
 - La validació es realitza pel subworkflow `UTILS_NFSCHEMA_PLUGIN` durant la inicialització del pipeline
 
-A les Parts 3 i 4 vam establir `validate_params = false` perquè el pipeline pogués executar-se abans de configurar cap esquema.
+A la Part 1 vam establir `validate_params = false` perquè el pipeline pogués executar-se abans de configurar cap esquema.
 Ara que estem preparats per afegir validació, el primer pas és activar-la.
 
 Obriu `nextflow.config` i trobeu el paràmetre `validate_params` (al voltant de la línia 37), i establiu-lo a `true`:
@@ -171,11 +171,11 @@ El comportament de validació en si es controla mitjançant l'àmbit `validation
 
 Com que treballarem primer en la validació de paràmetres (aquesta secció) i no configurarem l'esquema de dades d'entrada fins a la secció 2, també necessitem dir temporalment a nf-schema que ometi la validació dels continguts del fitxer del paràmetre `input`.
 
-Trobeu el bloc `validation` (al voltant de la línia 252) i afegiu `ignoreParams` per ometre la validació de fitxers d'entrada:
+Trobeu el bloc `validation` (al voltant de la línia 251) i afegiu `ignoreParams` per ometre la validació de fitxers d'entrada:
 
 === "Després"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="252"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="251"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -185,7 +185,7 @@ Trobeu el bloc `validation` (al voltant de la línia 252) i afegiu `ignoreParams
 
 === "Abans"
 
-    ```groovy title="nextflow.config" linenums="252"
+    ```groovy title="nextflow.config" linenums="251"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -264,6 +264,32 @@ L'afegirem a la següent secció.
 
 ### 1.3. Afegir el paràmetre batch
 
+#### 1.3.1. Declarar el paràmetre a `nextflow.config`
+
+Fins ara, `batch` només s'estableix a `conf/test.config`.
+Seguint el consell anterior, declareu-lo al bloc `params` de `nextflow.config`, sota `input`:
+
+=== "Després"
+
+    ```groovy title="nextflow.config" hl_lines="4" linenums="12"
+        // TODO nf-core: Specify your pipeline's command line flags
+        // Input options
+        input                      = null
+        batch                      = null
+    ```
+
+=== "Abans"
+
+    ```groovy title="nextflow.config" linenums="12"
+        // TODO nf-core: Specify your pipeline's command line flags
+        // Input options
+        input                      = null
+    ```
+
+El valor per defecte és `null`, com `input`, de manera que l'usuari encara ha de proporcionar un valor amb `--batch` o mitjançant un perfil com `test`.
+
+#### 1.3.2. Afegir el paràmetre a l'esquema
+
 Tot i que l'esquema és un fitxer JSON que es pot editar manualment, **l'edició manual és propensa a errors i no es recomana**.
 En canvi, nf-core proporciona una eina GUI interactiva que gestiona la sintaxi JSON Schema per vosaltres i valida els vostres canvis:
 
@@ -271,7 +297,7 @@ En canvi, nf-core proporciona una eina GUI interactiva que gestiona la sintaxi J
 nf-core pipelines schema build
 ```
 
-Hauríeu de veure alguna cosa així:
+L'eina compara els paràmetres de `nextflow.config` amb l'esquema i troba el nou paràmetre `batch`:
 
 ```console
                                           ,--./,-.
@@ -280,28 +306,33 @@ Hauríeu de veure alguna cosa així:
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)
-INFO     Writing schema with 17 params: 'nextflow_schema.json'
+✨ Found 'params.batch' in the pipeline config, but not in the schema. Add to pipeline schema? [y/n]:
+```
+
+Escriviu `y` i premeu Enter per afegir `batch` a l'esquema:
+
+```console
+INFO     Writing schema with 18 params: 'nextflow_schema.json'
 🚀  Launch web builder for customisation and editing? [y/n]:
 ```
 
-Escriviu `y` i premeu Enter per llançar la interfície web interactiva.
+L'eina ha afegit `batch` amb el tipus `string`, però sense descripció i fora de qualsevol grup de paràmetres.
+Escriviu `y` i premeu Enter per llançar la interfície web interactiva per completar-ho.
 
 El vostre navegador s'obrirà mostrant el constructor d'esquema de paràmetres:
 
 ![Interfície del constructor d'esquema](./img/schema_build.png)
 
-Per afegir el paràmetre `batch`:
+Per completar el paràmetre `batch`:
 
-1. Feu clic al botó **"Add parameter"** a la part superior
-2. Utilitzeu l'ansa d'arrossegament (⋮⋮) per moure el nou paràmetre cap amunt al grup "Input/output options", sota el paràmetre `input`
-3. Ompliu els detalls del paràmetre:
-   - **ID**: `batch`
+1. Utilitzeu l'ansa d'arrossegament (⋮⋮) per moure `batch` al grup "Input/output options", sota el paràmetre `input`
+2. Ompliu els detalls del paràmetre:
    - **Description**: `Name for this batch of greetings`
-   - **Type**: `string`
+   - **Type**: `string` (ja establert)
    - **Required**: marqueu la casella
    - Opcionalment, seleccioneu una icona del selector d'icones (p. ex., `fas fa-layer-group`)
 
@@ -326,7 +357,7 @@ L'eina ara ha actualitzat el vostre fitxer `nextflow_schema.json` amb el nou par
 grep -A 25 '"input_output_options"' nextflow_schema.json
 ```
 
-```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="19-23"
+```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="6 19-23"
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -373,6 +404,8 @@ nextflow run . --outdir test-results -profile docker
     The following invalid input values have been detected:
 
     * Missing required parameter(s): input, batch
+
+     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 72 or see '.nextflow.log' file for more details
     ```
 
 Perfecte! La validació detecta el paràmetre requerit que falta abans que s'executi el pipeline.
@@ -460,7 +493,7 @@ Obriu `assets/schema_input.json` i reemplaceu les seccions `properties` i `requi
 
 === "Després"
 
-    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-25 27"
+    ```json title="assets/schema_input.json" linenums="1" hl_lines="5 10-25 27"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
@@ -494,7 +527,7 @@ Obriu `assets/schema_input.json` i reemplaceu les seccions `properties` i `requi
 
 === "Abans"
 
-    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-29 31"
+    ```json title="assets/schema_input.json" linenums="1" hl_lines="5 10-29 31"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
@@ -615,10 +648,11 @@ Ara actualitzeu el codi de creació del canal:
 
 === "Després"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5"
         //
         // Create channel from input file provided through params.input
         //
+
         ch_samplesheet = channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
             .map { line -> line[0] }
 
@@ -629,10 +663,11 @@ Ara actualitzeu el codi de creació del canal:
 
 === "Abans"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4 5"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5 6"
         //
         // Create channel from input file provided through params.input
         //
+
         ch_samplesheet = channel.fromPath(params.input)
             .splitCsv()
             .map { line -> line[0] }
@@ -724,7 +759,7 @@ Ara obriu el fitxer i canvieu el nom de la primera columna, a la línia de capç
 
 === "Després"
 
-    ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
+    ```csv title="assets/invalid_greetings.csv" hl_lines="1" linenums="1"
     message,language,score
     Hello,en,87
     Bonjour,fr,96
@@ -733,7 +768,7 @@ Ara obriu el fitxer i canvieu el nom de la primera columna, a la línia de capç
 
 === "Abans"
 
-    ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
+    ```csv title="assets/invalid_greetings.csv" hl_lines="1" linenums="1"
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
@@ -745,7 +780,7 @@ Això no coincideix amb el nostre esquema, així que la validació hauria de lla
 Proveu d'executar el pipeline amb aquesta entrada no vàlida:
 
 ```bash
-nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profile docker
+nextflow run . --input assets/invalid_greetings.csv --outdir test-results --batch my-batch -profile docker
 ```
 
 ??? failure "Sortida de la comanda"
@@ -757,6 +792,7 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 
     Input/output options
       input              : assets/invalid_greetings.csv
+      batch              : my-batch
       outdir             : test-results
 
     Generic options
@@ -779,19 +815,18 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
      -- Check '.nextflow.log' file for details
     The following invalid input values have been detected:
 
-    * Missing required parameter(s): batch
     * --input (assets/invalid_greetings.csv): Validation of file failed:
         -> Entry 1: Missing required field(s): greeting
         -> Entry 2: Missing required field(s): greeting
         -> Entry 3: Missing required field(s): greeting
 
-     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
+     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 72 or see '.nextflow.log' file for more details
     ```
 
 Perfecte! La validació va detectar l'error i va proporcionar un missatge d'error clar i útil que assenyala:
 
 - Quin fitxer va fallar la validació
-- Quina entrada (fila 1, la primera fila de dades) té el problema
+- Quines entrades tenen el problema (les tres files de dades, ja que la capçalera ja no conté una columna `greeting`)
 - Quin és el problema específic (falta el camp requerit `greeting`)
 
 La validació de l'esquema assegura que els fitxers d'entrada tenen l'estructura correcta abans que s'executi el pipeline, estalviant temps i evitant errors confusos més tard a l'execució.
@@ -808,6 +843,6 @@ Heu implementat i provat tant la validació de paràmetres com la validació de 
 
 ### Què segueix?
 
-Heu completat les cinc parts del curs de formació Build with nf-core!
+Heu completat les quatre parts del curs de formació Build with nf-core!
 
 Continueu al [Resum](next_steps.md) per reflexionar sobre el que heu construït i après.

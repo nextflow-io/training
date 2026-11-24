@@ -817,7 +817,7 @@ Ancak, iş akışımızla gerçek iş yaptığımızda, girdilerini komut satır
 --8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
 </figure>
 
-Neyse ki, Nextflow'un [yerleşik](https://nextflow.io/docs/latest/config.html#params) iş akışı parametre sistemi `params` vardır ve bu, CLI parametrelerini bildirmeyi ve kullanmayı kolaylaştırır.
+Neyse ki, Nextflow'un [`params`](https://nextflow.io/docs/latest/config.html#params) adlı yerleşik iş akışı parametre sistemi vardır ve bu, CLI parametrelerini bildirmeyi ve kullanmayı kolaylaştırır.
 
 Genel söz dizimi, komut satırında bir `--<parametre_adı>` parametresi beklemek için `params.<parametre_adı>` bildirmektir.
 
@@ -879,7 +879,7 @@ Artık selamlamanın yeni sürümüne sahip olduğunuzdan emin olmak için çık
     Bonjour le monde!
     ```
 
-Voilà!
+Et voilà!
 
 Yeni yürütmenin `results` dizinine yayınlanan çıktı dosyasını nasıl üzerine yazdığına dikkat edin.
 Ancak, önceki çalıştırmaların sonuçları `work` altındaki görev dizinlerinde hâlâ korunmaktadır.
@@ -889,7 +889,7 @@ Ancak, önceki çalıştırmaların sonuçları `work` altındaki görev dizinle
     Nextflow düzeyindeki parametreleri iş akışı düzeyindeki parametrelerden kolayca ayırt edebilirsiniz.
 
     - Bir iş akışına uygulanan parametreler her zaman çift tire (`--`) alır.
-    - Bir Nextflow ayarını değiştiren parametreler, örneğin daha önce kullandığımız `-resume` özelliği, tek tire (`-`) alır.
+    - Bir Nextflow ayarını değiştiren parametreler, örneğin daha önce bahsettiğimiz `-o` özelliği, tek tire (`-`) alır.
 
 ### 3.4. Komut satırı parametreleri için varsayılan değerler kullanın
 

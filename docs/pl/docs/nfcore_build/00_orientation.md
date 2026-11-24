@@ -25,7 +25,7 @@ Jeśli przechodzisz przez ten kurs samodzielnie, zapoznaj się z [podstawami śr
 To szkolenie działa z Nextflow'em 25.10.2 lub nowszym **z parserem składni v2**, który jest domyślny od Nextflow'a 26.04 wzwyż.
 W naszym środowisku szkoleniowym nie musisz nic robić: działa ono z Nextflow'em 26.04.4 i parserem v2. Jeśli korzystasz ze środowiska lokalnego lub niestandardowego, zapoznaj się z [uwagami dotyczącymi wersji](../info/nxf_versions.md).
 
-Szkolenie wymaga dodatkowo **nf-core tools 4.0.2**.
+Szkolenie wymaga dodatkowo **nf-core tools 4.1.0**.
 Jeśli używasz innej wersji narzędzi nf-core, możesz mieć trudności ze śledzeniem kursu.
 
 Możesz sprawdzić, jaka wersja jest zainstalowana w Twoim środowisku, używając polecenia `nf-core --version`.
@@ -104,14 +104,11 @@ Używamy takich zwijanych sekcji, aby w zwięzły sposób uwzględnić oczekiwan
 ### Skonfiguruj referencję pipeline'u
 
 Część 1 tego kursu odwołuje się do kodu źródłowego pipeline'u `nf-core/demo` w celach referencyjnych.
-Pobierz go i utwórz skrót, aby łatwo go przeglądać:
+Sklonuj go do lokalnego katalogu, aby łatwo go przeglądać:
 
 ```bash
-nextflow pull nf-core/demo
-ln -s $NXF_HOME/assets pipelines
+nextflow clone nf-core/demo pipelines/nf-core/demo
 ```
-
-Jeśli ukończyłeś/ukończyłaś już kurs [Use nf-core](../nfcore_use/index.md), `nf-core/demo` jest już zapisany w lokalnej pamięci podręcznej, ale dowiązanie symboliczne powyżej nadal musi zostać utworzone od nowa w tym katalogu.
 
 ## Lista kontrolna gotowości
 
@@ -119,7 +116,7 @@ Myślisz, że jesteś gotowy/gotowa do rozpoczęcia?
 
 - [ ] Rozumiem cel tego kursu i jego wymagania wstępne
 - [ ] Moje środowisko jest uruchomione i działa
-- [ ] Używam nf-core tools 4.0.2 (sprawdź poleceniem `nf-core --version`)
+- [ ] Używam nf-core tools 4.1.0 (sprawdź poleceniem `nf-core --version`)
 - [ ] Ustawiłem/ustawiłam odpowiednio mój katalog roboczy
 
 Jeśli możesz zaznaczyć wszystkie pola, możesz zaczynać.

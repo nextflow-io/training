@@ -1,5 +1,3 @@
-#!/usr/bin/env nextflow
-
 /*
  * Align reads to a reference genome
  */

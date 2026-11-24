@@ -234,6 +234,54 @@ Fabryka ma dostęp do sesji Nextflow i jej konfiguracji, więc to właściwe mie
 Fabryka odczytuje teraz `greeting.enabled` z konfiguracji i zwraca pustą listę, jeśli użytkownik ustawił tę wartość na `false`.
 Gdy lista jest pusta, żadne obserwatory nie są tworzone, a hooki cyklu życia pluginu są po cichu pomijane.
 
+Test fabryki z części 5. przekazuje gołe `Mock(Session)`, które nie ma konfiguracji, więc `navigate()` zgłasza teraz wyjątek `NullPointerException`.
+Zaktualizuj plik `nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy`, aby przekazać sesji mock konfigurację, i dodaj test dla przypadku wyłączonego pluginu:
+
+=== "Po"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="4-6 8 15-25"
+        def 'should create the observer instance' () {
+            given:
+            def factory = new GreetingFactory()
+            def session = Mock(Session) {
+                getConfig() >> [greeting: [enabled: true]]
+            }
+            when:
+            def result = factory.create(session)
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+
+        def 'should return empty list when disabled' () {
+            given:
+            def factory = new GreetingFactory()
+            def session = Mock(Session) {
+                getConfig() >> [greeting: [enabled: false]]
+            }
+            when:
+            def result = factory.create(session)
+            then:
+            result.isEmpty()
+        }
+    ```
+
+=== "Przed"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="5"
+        def 'should create the observer instance' () {
+            given:
+            def factory = new GreetingFactory()
+            when:
+            def result = factory.create(Mock(Session))
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+    ```
+
 ### 2.1. Budowanie i testowanie
 
 Przebuduj i zainstaluj plugin:
@@ -248,7 +296,7 @@ Uruchom pipeline, aby potwierdzić, że wszystko nadal działa:
 nextflow run greet.nf -ansi-log false
 ```
 
-??? exercise "Ćwiczenie"
+??? exercise "Wyłączenie pluginu w całości"
 
     Spróbuj ustawić `greeting.enabled = false` w `nextflow.config` i uruchom pipeline ponownie.
     Co zmienia się w wyjściu?
