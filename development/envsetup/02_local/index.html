@@ -2557,6 +2557,18 @@ Our training courses have a few additional requirements.</p>
 </ul>
 <p>The VSCode application is technically optional but we strongly recommend that you use it for working through the courses as well as for your Nextflow development work in general.</p>
 <p>The Nextflow documentation manual provides instructions for installing these dependencies under <a href="https://www.nextflow.io/docs/latest/developer-env.html">Environment setup</a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Run containers as your own user</p>
+<p>By default, a Docker container runs as the user it was built with, which is often <code>root</code>.
+On Linux, any files it writes are then owned by <code>root</code>, and you may not be able to modify or delete them without <code>sudo</code>.</p>
+<p>To avoid this, run containers with your own user and group IDs by adding <code>-u $(id -u):$(id -g)</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>:<span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span>&lt;image&gt;
+</code></pre></div>
+<p>To do the same for the containers Nextflow runs, add this to your Nextflow configuration (for example <code>~/.nextflow/config</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">docker</span><span class="o">.</span><span class="na">runOptions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'-u $(id -u):$(id -g)'</span>
+</code></pre></div>
+<p>The training environment provided through GitHub Codespaces and devcontainers doesn't need this.</p>
+</div>
 <h2 id="nextflow-and-nf-core-tools">Nextflow and nf-core tools<a class="headerlink" href="#nextflow-and-nf-core-tools" title="Permanent link">&para;</a></h2>
 <p>You will need to install Nextflow itself, plus the nf-core tools, as detailed in the articles linked below:</p>
 <ul>
@@ -2572,7 +2584,7 @@ Our training courses have a few additional requirements.</p>
 </div>
 <h2 id="training-materials">Training materials<a class="headerlink" href="#training-materials" title="Permanent link">&para;</a></h2>
 <p>The easiest way to download the training materials is to clone the entire repository using this command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nextflow-io/training.git
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nextflow-io/training.git
 </code></pre></div>
 <p>Each course has its own directory.
 To work through a course, open a terminal window (ideally, from inside the VSCode application) and <code>cd</code> into the relevant directory.</p>
