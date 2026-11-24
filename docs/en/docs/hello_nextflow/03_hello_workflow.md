@@ -101,8 +101,8 @@ If that worked for you, you're ready to learn how to assemble a multi-step workf
 We're going to add a step that translates each greeting into another language, for example from `Hello, Mateo!` to `Hola, Mateo!`.
 This step is a small Python script, which shows that a process can run code in other languages than the shell.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.drawio.svg"
 </figure>
 
 We'll build it in three steps:
