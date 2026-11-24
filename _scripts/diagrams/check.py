@@ -34,7 +34,8 @@ def role_of(d, v):
     st = d.style(v)
     if "text" in st:
         if st.get("align", "center") == "center":
-            return "caption"
+            # captions are bold; centred plain text is a note (e.g. above an item in a channel)
+            return "caption" if int(st.get("fontStyle", 0)) & 1 else "note"
         if st.get("fontFamily") == S.CODE_FONT:
             return "param" if any(e.get("source") == v.get("id") for e in d.edges()) else "code"
         return "note"
@@ -211,6 +212,14 @@ def check(path):
         above = [cid for cid, b in boxes.items() if roles[cid] in ("process", "file", "channel", "group")
                  and b[1] + b[3] <= y + TOL and b[0] < x + w / 2 < b[0] + b[2]]
         if not above:
+            # caption above its shape (top of a captioned stack): same gap, mirrored
+            below = [cid for cid, b in boxes.items() if roles[cid] in ("process", "file", "channel")
+                     and b[1] >= y + h - TOL and b[0] < x + w / 2 < b[0] + b[2]]
+            if below:
+                cid = min(below, key=lambda c: boxes[c][1])
+                gap = boxes[cid][1] - (y + h)
+                if abs(gap - S.CAPTION_GAP) > TOL:
+                    r.warn(f"caption {name(d, v)}: {gap:g} px above {name(d, cells[cid])} (want {S.CAPTION_GAP})")
             continue
         cid = max(above, key=lambda c: boxes[c][1] + boxes[c][3])
         gap = y - (boxes[cid][1] + boxes[cid][3])

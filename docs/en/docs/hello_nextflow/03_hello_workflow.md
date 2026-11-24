@@ -1324,8 +1324,8 @@ You assign the result to a name as before, here `collected_out`, and read each c
 The `_out` suffix signals that `collected_out` holds several outputs rather than a single channel.
 Existing pipelines often write `collectGreetings.out.outfile` and `collectGreetings.out.report` instead, which refer to the same channels.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-report.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-report.drawio.svg"
 </figure>
 
 We need to update the workflow outputs accordingly.

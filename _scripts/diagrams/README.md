@@ -61,7 +61,7 @@ box outlines 2.5; frames 2.
 - Arrows between level boxes leave and land at the middle of the facing sides.
 - Fan-outs: targets stacked 40 px apart, the stack centred on the source; arrows leave at evenly spaced points (0.25 / 0.5 / 0.75, or 0.3 / 0.7) and land at each target's centre.
 - Several arrows into one side of a box land at evenly spaced points.
-- Notes sit 20 px right of their box, centred on it. Captions (36 px high) sit 40 px under the box or channel they describe, or 15 px under a dashed group's outline (the group's own padding supplies the rest).
+- Notes sit 20 px right of their box, centred on it. Captions (36 px high) sit 40 px under the box or channel they describe (in a captioned stack of two, the top caption goes 40 px above its shape instead, so no caption sits between them), or 15 px under a dashed group's outline (the group's own padding supplies the rest).
 - Show channels explicitly (teal pill with its items) only where the text is about how steps are connected; elsewhere a file box such as `*.txt` stands for the channel. When a process's input channel is shown explicitly, show its output channel explicitly too.
 - A diagram of a single process definition is drawn from the process's point of view: label its value inputs with the input names (`batch_name`, `language`), not parameters, and caption channels with plain words ("translated greetings") in the caption font, 25 px under the channel instead of 40. Don't name code the text hasn't introduced yet (no `.collect()` before section 2.4).
 - Use example values everywhere (`--batch trio`, `trio-es-greetings.txt`), never placeholders such as `${batch_name}`.
