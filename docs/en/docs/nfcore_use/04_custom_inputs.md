@@ -215,7 +215,7 @@ The `test` profile provides the reference files, and `--input` replaces its samp
 
     ```console
     ...
-    -[nf-core/rnaseq] Pipeline completed successfully-
+    -[nf-core/rnaseq] Pipeline completed successfully -
     ```
 
 The pipeline reports success without running any tasks, which means your samplesheet passed validation.
@@ -264,6 +264,7 @@ It finishes in about a minute, then prints a warning:
 ```console title="Command output (excerpt)"
 WARN: =============================================================================
   Please double-check the samplesheet that has been auto-created by the pipeline.
+
   Public databases don't reliably hold information such as strandedness
   information, controls etc
 
@@ -318,7 +319,10 @@ nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --input fetchngs-resu
 ```
 
 ```console title="Command output (excerpt)"
-WARN: Found the following unidentified headers in fetchngs-results/samplesheet/samplesheet.csv: - run_accession - experiment_accession - ...
+WARN: Found the following unidentified headers in /workspaces/training/nfcore-use/fetchngs-results/samplesheet/samplesheet.csv:
+        - run_accession
+        - experiment_accession
+        ...
 ```
 
 The pipeline passes validation, with a warning listing the columns it does not use.
@@ -447,7 +451,7 @@ nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --input broken_sample
 ```
 
 ```console title="Command output (excerpt)"
--[nf-core/rnaseq] Pipeline completed successfully-
+-[nf-core/rnaseq] Pipeline completed successfully -
 ```
 
 Every row is individually valid, so the samplesheet passes schema validation.
@@ -463,7 +467,8 @@ nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --input broken_sample
 ```
 
 ```console title="Command output (excerpt)"
-ERROR ~ Please check input samplesheet -> Multiple runs of a sample must have the same strandedness!: WT_1
+Please check input samplesheet -> Multiple runs of a sample must have the same strandedness!: WT_1
+ERROR ~ Pipeline failed. Please refer to troubleshooting docs for common issues: https://nf-co.re/docs/running/troubleshooting
 ```
 
 The pipeline stops shortly after launch, before any task starts.
@@ -537,7 +542,7 @@ The `test` profile still provides the reference files, while `--input` replaces 
 
     ```console
     ...
-    -[nf-core/rnaseq] Pipeline completed successfully-
+    -[nf-core/rnaseq] Pipeline completed successfully -
     ```
 
 ### 6.3. Examine the results

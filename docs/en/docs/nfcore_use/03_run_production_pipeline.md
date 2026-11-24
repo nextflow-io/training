@@ -27,7 +27,7 @@ nextflow pull nf-core/rnaseq -r 3.27.0
 ??? success "Command output"
 
     ```console
-    Checking nf-core/rnaseq ...
+    Checking nf-core/rnaseq:3.27.0 ...
      downloaded from https://github.com/nf-core/rnaseq.git - revision: a1fcdddd3b [3.27.0]
     ```
 
@@ -51,9 +51,9 @@ nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --outdir rnaseq-resul
 ??? failure "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `https://github.com/nf-core/rnaseq` [suspicious_dijkstra] revision: a1fcdddd3b [3.27.0]
+    Launching `https://github.com/nf-core/rnaseq` [exotic_descartes] revision: a1fcdddd3b [3.27.0]
 
     ------------------------------------------------------
                                             ,--./,-.
@@ -64,15 +64,19 @@ nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --outdir rnaseq-resul
       nf-core/rnaseq 3.27.0
     ------------------------------------------------------
     ...
-    [-        ] NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT  -
-    Plus 47 more processes waiting for tasks…
-
+    [be/dab33f] NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT (WT_REP2)  | 0 of 3
+    ...
+    Plus 31 more processes waiting for tasks…
     Execution cancelled -- Finishing pending tasks before exit
     -[nf-core/rnaseq] Pipeline completed with errors-
+    WARN: The operator `first` is useless when applied to a value channel which returns a single value by definition
+    WARN: The operator `first` is useless when applied to a value channel which returns a single value by definition
+    WARN: The operator `first` is useless when applied to a value channel which returns a single value by definition
+    WARN: The operator `first` is useless when applied to a value channel which returns a single value by definition
     ERROR ~ Error executing process > 'NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT (WT_REP2)'
 
     Caused by:
-      Process requirement exceeds available memory -- req: 12 GB; avail: 7.8 GB
+      Task requirement exceeds available memory -- req: 12 GB; avail: 7.8 GB
 
 
     Command executed:
@@ -88,12 +92,12 @@ nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --outdir rnaseq-resul
       (empty)
 
     Work dir:
-      /workspaces/training/nfcore-use/work/xx/xxxxxxxxxxxxxxxxxxxxxx
+      /workspaces/training/nfcore-use/work/be/dab33f8ccc82a4aa1ae0f9c76f5cf2
 
     Container:
       quay.io/biocontainers/fq:0.12.0--h9ee0642_0
 
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 
      -- Check '.nextflow.log' file for details
     ERROR ~ Pipeline failed. Please refer to troubleshooting docs for common issues: https://nf-co.re/docs/running/troubleshooting
@@ -102,7 +106,7 @@ nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --outdir rnaseq-resul
 The key line in that error is:
 
 ```console
-Process requirement exceeds available memory -- req: 12 GB; avail: 7.8 GB
+Task requirement exceeds available memory -- req: 12 GB; avail: 7.8 GB
 ```
 
 The default Codespaces machine has 8 GB of RAM.
@@ -157,9 +161,9 @@ nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker -c laptop.config --ou
 ??? success "Command output (pipeline launching)"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `https://github.com/nf-core/rnaseq` [romantic_faraday] revision: a1fcdddd3b [3.27.0]
+    Launching `https://github.com/nf-core/rnaseq` [distraught_poisson] revision: a1fcdddd3b [3.27.0]
 
     ------------------------------------------------------
                                             ,--./,-.
@@ -170,9 +174,9 @@ nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker -c laptop.config --ou
       nf-core/rnaseq 3.27.0
     ------------------------------------------------------
     ...
-    executor >  local (7)
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT (RAP1_IAA_30M_REP1)                                 | 3 of 5
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:FASTQC (RAP1_IAA_30M_REP1) | 2 of 5
+    executor >  local (13)
+    [21/1d2307] NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT (WT_REP2)                                           | 3 of 5
+    [54/e083f6] NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:FASTQC (RAP1_IAA_30M_REP1) | 1 of 3
     ...
     ```
 
@@ -207,6 +211,7 @@ Press ++ctrl+c++ once in the terminal where the pipeline is running.
 
     ```console
     ^C-[nf-core/rnaseq] Pipeline completed with errors-
+    WARN: Killing running tasks (1)
     ERROR ~ Pipeline failed. Please refer to troubleshooting docs for common issues: https://nf-co.re/docs/running/troubleshooting
 
      -- Check '.nextflow.log' file for details

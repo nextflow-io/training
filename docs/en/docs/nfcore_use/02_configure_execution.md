@@ -34,9 +34,9 @@ nextflow run nf-core/demo --help
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `https://github.com/nf-core/demo` [adoring_meucci] revision: 32893afef8 [master]
+    Launching `https://github.com/nf-core/demo` [grave_morse] revision: 671a0726cb [master]
 
 
     ------------------------------------------------------
@@ -114,9 +114,9 @@ nextflow run nf-core/demo -profile test,docker --outdir demo-results-notrim -par
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `https://github.com/nf-core/demo` [focused_heisenberg] revision: 32893afef8 [master]
+    Launching `https://github.com/nf-core/demo` [distraught_pesquet] revision: 671a0726cb [master]
 
 
     ------------------------------------------------------
@@ -140,18 +140,18 @@ nextflow run nf-core/demo -profile test,docker --outdir demo-results-notrim -par
       config_profile_description: Minimal test dataset to check pipeline function
 
     Generic options
-      trace_report_suffix       : 2026-07-03_22-08-47
+      trace_report_suffix       : 2026-11-23_23-35-58
 
     Core Nextflow options
       revision                  : master
-      runName                   : focused_heisenberg
+      runName                   : distraught_pesquet
       containerEngine           : docker
       launchDir                 : /workspaces/training/nfcore-use
       workDir                   : /workspaces/training/nfcore-use/work
-      projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
+      projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/671a0726cb489b22636d90b7c7352baed473790d
       userName                  : root
       profile                   : test,docker
-      configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
+      configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/671a0726cb489b22636d90b7c7352baed473790d/nextflow.config
 
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
@@ -166,9 +166,9 @@ nextflow run nf-core/demo -profile test,docker --outdir demo-results-notrim -par
         https://github.com/nf-core/demo/blob/master/CITATIONS.md
 
     executor >  local (5)
-    [7a/f3599e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) | 3 of 3 ✔
-    [b0/2f0bdc] NFCORE_DEMO:DEMO:COWPY               | 1 of 1 ✔
-    [c3/3c2278] NFCORE_DEMO:DEMO:MULTIQC (demo)      | 1 of 1 ✔
+    [81/6c1160] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE) | 3 of 3 ✔
+    [c6/003aa1] NFCORE_DEMO:DEMO:COWPY               | 1 of 1 ✔
+    [d4/5585d8] NFCORE_DEMO:DEMO:MULTIQC (demo)      | 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
@@ -176,26 +176,26 @@ The `SEQTK_TRIM` process no longer appears in the output.
 
 !!! warning "Important limitations about parameter inputs"
 
-    **Setting boolean parameters on the command line**
+    **Setting integer parameters on the command line**
 
-    With the v2 syntax parser, which is the default from Nextflow 26.04, all values supplied on the command line are typed as strings.
-    For a boolean parameter like `skip_trim`, passing it as a bare flag (`--skip_trim`) or as `--skip_trim true` is evaluated as the **string** `"true"`, which fails schema validation:
+    With the v2 syntax parser, which is the default from Nextflow 26.04, numeric values supplied on the command line are typed as strings.
+    For an integer parameter such as `min_trimmed_reads` in `nf-core/rnaseq`, which you use in Part 4, passing `--min_trimmed_reads 1000` is evaluated as the **string** `"1000"`, which fails schema validation:
 
     ```console
-    * --skip_trim (true): Value is [string] but should be [boolean]
+    * --min_trimmed_reads (1000): Value is [string] but should be [integer]
     ```
 
-    To set a boolean parameter to a genuine `true`/`false` value, use a `-params-file` as shown above, or set it in a config file.
-    Integer parameters are affected in the same way, so set them in a params file too.
-    String and file-path parameters can still be set directly on the command line.
-    This course uses this pattern throughout for boolean and integer parameters.
+    To set an integer parameter, use a `-params-file` as shown above, or set it in a config file.
+    Boolean parameters like `skip_trim` can be set on the command line, either as a bare flag (`--skip_trim`) or as `--skip_trim true`, since the values `true` and `false` are typed as booleans.
+    String and file-path parameters can also be set directly on the command line.
+    This course uses this pattern throughout for integer parameters.
 
     **Using custom configuration files**
 
     Although it is technically possible to set pipeline parameters in a custom configuration file passed with `-c`, this may not override defaults already set in the pipeline's own `nextflow.config`, depending on Nextflow's configuration precedence rules.
     Using `--param_name` on the command line or `-params-file` is more reliable, as these always take precedence.
 
-    As a rule of thumb: If it appears in the `--help` output, set it via a params file (or on the command line for string and path values) rather than a config file.
+    As a rule of thumb: If it appears in the `--help` output, set it via a params file (or on the command line for string, path and boolean values) rather than a config file.
 
 ### 1.3. Parameter validation
 
@@ -243,11 +243,11 @@ The following invalid input values have been detected:
 
 * --skip_trim (yes): Value is [string] but should be [boolean]
 
- -- Check script '/workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
+ -- Check script '/workspaces/.nextflow/assets/.repos/nf-core/demo/clones/671a0726cb489b22636d90b7c7352baed473790d/subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
 ```
 
 The pipeline stops before any processes run, saving you from a failed or incorrect execution.
-As noted in [1.2](#12-set-parameter-values), boolean parameters should be set to a genuine `true`/`false` value in a params file rather than passed on the command line, since command-line values are typed as strings.
+As noted in [1.2](#12-set-parameter-values), only the values `true` and `false` are typed as booleans on the command line; any other value, such as `yes`, is treated as a string.
 
 ### 1.4. Input validation
 
@@ -327,7 +327,7 @@ The following invalid input values have been detected:
     -> Entry 1: Error for field 'fastq_2' (/not/a/real/file.fastq.gz): the file or directory '/not/a/real/file.fastq.gz' does not exist (FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz')
     -> Entry 1: Missing required field(s): fastq_1
 
- -- Check script '/workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
+ -- Check script '/workspaces/.nextflow/assets/.repos/nf-core/demo/clones/671a0726cb489b22636d90b7c7352baed473790d/subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
 ```
 
 As you can see, the pipeline fails immediately and reports **all** validation errors at once.
@@ -429,33 +429,33 @@ nextflow run nf-core/demo -profile test,docker --outdir demo-results-custom -c c
 
     ```console
     executor >  local (8)
-    [95/b32876] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE)     | 3 of 3 ✔
-    [17/428668] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) | 3 of 3 ✔
-    [cf/85991a] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
-    [3c/94a7a0] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
+    [90/9e00c8] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
+    [34/b85e98] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE2_PE) | 3 of 3 ✔
+    [1b/fb2268] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
+    [d8/7b7207] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
 The `-c` flag adds your config on top of the pipeline's built-in configuration.
 
-To verify the `ext.args` override took effect, find the `SEQTK_TRIM` work directory hash from the run output (e.g. `[17/428668]`) and check the `.command.sh` file inside it.
-The directory name continues past the six characters shown, so use a wildcard, and replace `17/428668` with the hash from your own output:
+To verify the `ext.args` override took effect, find the `SEQTK_TRIM` work directory hash from the run output (e.g. `[34/b85e98]`) and check the `.command.sh` file inside it.
+The directory name continues past the six characters shown, so use a wildcard, and replace `34/b85e98` with the hash from your own output:
 
 ```bash
-cat work/17/428668*/.command.sh
+cat work/34/b85e98*/.command.sh
 ```
 
 ??? success "Command output"
 
     ```console
     #!/usr/bin/env bash -e -u -o pipefail
-    printf "%s\n" sample1_R1.fastq.gz sample1_R2.fastq.gz | while read f;
+    printf "%s\n" sample2_R1.fastq.gz sample2_R2.fastq.gz | while read f;
     do
         seqtk \
             trimfq \
             -b 5 \
             $f \
-            | gzip --no-name > SAMPLE1_PE_$(basename $f)
+            | gzip --no-name > SAMPLE2_PE_$(basename $f)
     done
     ...
     ```

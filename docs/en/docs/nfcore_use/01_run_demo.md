@@ -81,7 +81,7 @@ nextflow pull nf-core/demo
 
     ```console
     Checking nf-core/demo ...
-     downloaded from https://github.com/nf-core/demo.git - revision: 32893afef8 [master]
+     downloaded from https://github.com/nf-core/demo.git - revision: 671a0726cb [master]
     ```
 
 Nextflow does a `pull` of the pipeline code, meaning it downloads the full repository to your local drive.
@@ -128,6 +128,8 @@ nextflow info nf-core/demo
        TEMPLATE
        bumper
        dev
+       feat/aws-full-snapshot
+       feat/migration_nf-schema-3.0.0
        fix-nxfversion
        manually-merge-3_0_2
      > master (default)
@@ -147,12 +149,16 @@ nextflow info nf-core/demo
        nf-core-template-merge-4.0.3
        nf-core-template-merge-4.1.0
        nf-core-template-merge-4.1.0-2
-       patch
+       nf-core-template-merge-4.2.0
+       nf-core-template-merge-4.2.1
+       nf-core-template-merge-4.2.2
+       nf-core-template-merge-4.2.2-2
+       nf-migrate-template-4.0.3
        1.0.0 [t]
        1.0.1 [t]
        1.0.2 [t]
        1.1.0 [t]
-     > 1.2.0 [t]
+       1.2.0 [t]
     ```
 
 The full path may differ on your system if you're not using our training environment.
@@ -340,10 +346,10 @@ nextflow run nf-core/demo -profile test,docker --outdir demo-results
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
     Downloading plugin nf-schema@2.7.2
-    Launching `https://github.com/nf-core/demo` [cranky_curry] revision: 32893afef8 [master]
+    Launching `https://github.com/nf-core/demo` [zen_roentgen] revision: 671a0726cb [master]
 
 
     ------------------------------------------------------
@@ -364,18 +370,18 @@ nextflow run nf-core/demo -profile test,docker --outdir demo-results
       config_profile_description: Minimal test dataset to check pipeline function
 
     Generic options
-      trace_report_suffix       : 2026-07-03_21-31-35
+      trace_report_suffix       : 2026-11-23_23-34-41
 
     Core Nextflow options
       revision                  : master
-      runName                   : cranky_curry
+      runName                   : zen_roentgen
       containerEngine           : docker
       launchDir                 : /workspaces/training/nfcore-use
       workDir                   : /workspaces/training/nfcore-use/work
-      projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
+      projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/671a0726cb489b22636d90b7c7352baed473790d
       userName                  : root
       profile                   : test,docker
-      configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
+      configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/671a0726cb489b22636d90b7c7352baed473790d/nextflow.config
 
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
@@ -390,10 +396,10 @@ nextflow run nf-core/demo -profile test,docker --outdir demo-results
         https://github.com/nf-core/demo/blob/master/CITATIONS.md
 
     executor >  local (8)
-    [ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-    [b7/cb6812] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-    [ff/6ebd98] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
-    [09/bbd1b4] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
+    [5e/f15164] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE)     | 3 of 3 ✔
+    [e6/8524bf] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
+    [3a/136223] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
+    [07/515375] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
@@ -414,7 +420,7 @@ Your output will show different timestamps, execution names, revision hashes, an
 Notice the line near the top of the output:
 
 ```console
-Launching `https://github.com/nf-core/demo` [cranky_curry] revision: 32893afef8 [master]
+Launching `https://github.com/nf-core/demo` [zen_roentgen] revision: 671a0726cb [master]
 ```
 
 This tells you which revision of the pipeline was used.
@@ -433,10 +439,10 @@ Moving on to the execution output, let's have a look at the lines that tell us w
 
 ```console
 executor >  local (8)
-[ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-[b7/cb6812] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-[ff/6ebd98] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
-[09/bbd1b4] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
+[5e/f15164] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE)     | 3 of 3 ✔
+[e6/8524bf] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
+[3a/136223] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
+[07/515375] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
 -[nf-core/demo] Pipeline completed successfully-
 ```
 
@@ -472,12 +478,12 @@ tree -L 2 demo-results
     │   ├── multiqc_data
     │   └── multiqc_report.html
     └── pipeline_info
-        ├── execution_report_2026-07-03_21-31-35.html
-        ├── execution_timeline_2026-07-03_21-31-35.html
-        ├── execution_trace_2026-07-03_21-31-35.txt
+        ├── execution_report_2026-11-23_23-34-41.html
+        ├── execution_timeline_2026-11-23_23-34-41.html
+        ├── execution_trace_2026-11-23_23-34-41.txt
         ├── nf_core_demo_software_mqc_versions.yml
-        ├── params_2026-07-03_21-31-43.json
-        └── pipeline_dag_2026-07-03_21-31-35.html
+        ├── params_2026-11-23_23-34-44.json
+        └── pipeline_dag_2026-11-23_23-34-41.html
 
     12 directories, 8 files
     ```
