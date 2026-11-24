@@ -1,19 +1,19 @@
 #!/usr/bin/env nextflow
 
 /*
- * Use echo to print 'Hello World!' to a file
+ * Use echo to print a greeting to a file
  */
 process sayHello {
 
     input:
-    val greeting
+    val name
 
     output:
     path 'output.txt'
 
     script:
     """
-    echo '${greeting}' > output.txt
+    echo 'Hello, ${name}!' > output.txt
     """
 }
 
@@ -21,25 +21,25 @@ process sayHello {
  * Pipeline parameters
  */
 params {
-    input: String = 'Hola mundo!'
+    name: String = 'Friend'
 }
 
 workflow {
 
     main:
     // create a channel for inputs
-    greeting_ch = channel.of('Hello Channels!')
+    name_ch = channel.of('Ziggy')
                         .view()
     // emit a greeting
-    sayHello(greeting_ch)
+    greetings_ch = sayHello(name_ch)
 
     publish:
-    first_output = sayHello.out
+    greetings = greetings_ch
 }
 
 output {
-    first_output {
-        path 'hello_channels'
+    greetings {
+        path 'hello'
         mode 'copy'
     }
 }

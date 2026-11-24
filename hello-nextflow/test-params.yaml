@@ -1,3 +1,0 @@
-input: "data/greetings.csv"
-batch: "yaml"
-character: "stegosaurus"

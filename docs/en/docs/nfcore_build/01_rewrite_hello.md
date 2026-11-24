@@ -60,7 +60,7 @@ For now we are going to focus specifically on the pipeline code components (`mai
 
 ### 1.1. Modular structure of nf-core workflows
 
-The standard nf-core pipeline code organization follows a modular structure that is designed to maximize code reuse, as introduced in [Hello Modules](../hello_nextflow/04_hello_modules.md), Part 4 of the [Hello Nextflow](../hello_nextflow/index.md) course, although in true nf-core fashion, this is implemented with a bit of additional complexity.
+The standard nf-core pipeline code organization follows a modular structure that is designed to maximize code reuse, as introduced in [Hello Modules](../hello_nextflow/05_hello_modules.md), Part 5 of the [Hello Nextflow](../hello_nextflow/index.md) course, although in true nf-core fashion, this is implemented with a bit of additional complexity.
 Specifically, nf-core pipelines make abundant use of subworkflows, i.e. workflow scripts that are imported by a parent workflow.
 
 That may sound a bit abstract, so let's take a look how this is used in practice in the `nf-core/demo` pipeline.
@@ -111,7 +111,7 @@ The `demo.nf` workflow calls on **modules** located under `modules/`, which we'l
 
 ### 1.4. The modules
 
-The modules are where the process code lives, as described in [Part 4 of the Hello Nextflow training course](../hello_nextflow/04_hello_modules.md).
+The modules are where the process code lives, as described in [Part 5 of the Hello Nextflow training course](../hello_nextflow/05_hello_modules.md).
 
 In the nf-core project, modules are organized using a multi-level nested structure that reflect both their origin and their contents.
 At the top level, modules are differentiated as either `nf-core` or `local` (not part of the nf-core project), and then further placed into a directory named after the tool(s) they wrap.

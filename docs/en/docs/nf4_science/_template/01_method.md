@@ -24,7 +24,7 @@ We provide the following data and related resources:
 
 The main tools involved are [{TOOL_A}]({TOOL_A_URL}) and [{TOOL_B}]({TOOL_B_URL}).
 
-These tools are not installed in the GitHub Codespaces environment, so we'll use them via containers (see [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
+These tools are not installed in the GitHub Codespaces environment, so we'll use them via containers (see [Hello Containers](../../hello_nextflow/04_hello_containers.md)).
 
 !!! note
 

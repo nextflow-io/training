@@ -35,7 +35,7 @@ Run solution files and verify documentation matches actual outputs. Use when:
 
 ## Starter Files
 
-Starter files (e.g., `hello-nextflow/hello-config.nf`) represent the **end state of the previous chapter**. They are the starting point for learners beginning a new lesson.
+Starter files (e.g., `hello-nextflow/hello-containers.nf`) represent the **end state of the previous chapter**. They are the starting point for learners beginning a new lesson.
 
 ### When to Edit Starter Files
 
