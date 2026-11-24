@@ -8,7 +8,6 @@ GRID = 10
 
 # ---------------------------------------------------------------- colours
 INK = "#1e1e1e"  # all lines and default text
-PARAM_TEXT = "#495057"  # parameter labels and code snippets
 
 # role: (fill, stroke, text)
 ROLES = {
@@ -90,7 +89,8 @@ def _s(**kv):
 BASE_TEXT = _s(html=0, whiteSpace="nowrap")
 
 
-def vertex_style(role, size=None):
+def vertex_style(role, size=None, code=False):
+    """code=True: a caption that names a code object (sayHello.out) is set in the code font."""
     """draw.io style string for a vertex of the given role."""
     if role in ROLES:
         fill, stroke, text = ROLES[role]
@@ -113,13 +113,14 @@ def vertex_style(role, size=None):
                             fontFamily=LABEL_FONT, fontSize=size or SIZE_NOTE, fontColor=INK) + BASE_TEXT
     if role == "caption":
         return "text;" + _s(align="center", verticalAlign="middle", fontFamily=LABEL_FONT,
-                            fontSize=size or SIZE_CAPTION, fontStyle=1, fontColor=INK) + BASE_TEXT
+                            fontSize=size or SIZE_CAPTION, fontStyle=1, fontColor=INK).replace(
+                                f"fontFamily={LABEL_FONT}", f"fontFamily={CODE_FONT if code else LABEL_FONT}") + BASE_TEXT
     if role == "param":
         return "text;" + _s(align="left", verticalAlign="middle", spacing=0, spacingLeft=TEXT_SPACING_LEFT,
-                            fontFamily=CODE_FONT, fontSize=size or SIZE_PARAM, fontColor=PARAM_TEXT) + BASE_TEXT
+                            fontFamily=CODE_FONT, fontSize=size or SIZE_PARAM, fontColor=INK) + BASE_TEXT
     if role == "code":
         return "text;" + _s(align="left", verticalAlign="middle", spacing=0, spacingLeft=TEXT_SPACING_LEFT,
-                            fontFamily=CODE_FONT, fontSize=size or SIZE_CODE, fontColor=PARAM_TEXT) + BASE_TEXT
+                            fontFamily=CODE_FONT, fontSize=size or SIZE_CODE, fontColor=INK) + BASE_TEXT
     raise ValueError(role)
 
 

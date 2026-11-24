@@ -31,19 +31,19 @@ After a script edits a file, close and reopen its editor tab before saving, or t
 
 **Colours** (fill / outline / text):
 
-| Role                      | Fill      | Outline   | Text      |
-| ------------------------- | --------- | --------- | --------- |
-| Process                   | `#2d799b` | `#055672` | white     |
-| File                      | `#f0f9fb` | `#02899a` | `#1e1e1e` |
-| Channel                   | `#76d2c8` | `#018178` | `#1e1e1e` |
-| Value inside a channel    | white     | `#018178` | `#1e1e1e` |
-| Lines, notes, captions    |           | `#1e1e1e` |           |
-| Parameter labels and code |           |           | `#495057` |
+| Role                   | Fill      | Outline   | Text      |
+| ---------------------- | --------- | --------- | --------- |
+| Process                | `#2d799b` | `#055672` | white     |
+| File                   | `#f0f9fb` | `#02899a` | `#1e1e1e` |
+| Channel                | `#76d2c8` | `#018178` | `#1e1e1e` |
+| Value inside a channel | white     | `#018178` | `#1e1e1e` |
+| Lines, notes, captions |           | `#1e1e1e` |           |
+| Parameter labels, code |           |           | `#1e1e1e` |
 
 The palette stays distinct under protanopia, deuteranopia and tritanopia, and keeps its hues under the site's dark-mode filter.
 
 **Text**: plain SVG text only (`html=0`, no `whiteSpace=wrap`; break lines explicitly).
-Helvetica for labels (boxes 28 px, items in channels 22, notes 22, captions 28 bold in sentence case); Menlo for parameters (26) and code (20).
+Helvetica for labels (boxes 28 px, items in channels 22, notes 22, captions 28 bold in sentence case; a caption naming a code object, such as `sayHello.out`, is Menlo bold); Menlo for parameters (26) and code (20).
 No handwritten fonts.
 
 **Lines** (diagrams are shown at under half size, so they are drawn heavy):

@@ -105,6 +105,9 @@ This step is a small Python script, which shows that a process can run code in o
 --8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.drawio.svg"
 </figure>
 
+From here on, diagrams show channels explicitly only where the text is about how steps are connected.
+Elsewhere, a file box such as `*.txt` stands for the channel of files that one step passes to the next.
+
 We'll build it in three steps:
 
 1. Test the translation code in the terminal.
@@ -194,8 +197,8 @@ Conveniently, Nextflow automatically packages the output of a process into a cha
 The workflow already assigns the output channel of `sayHello()` to `greetings_ch`, so we can plug `greetings_ch` straight into the call to `translateGreeting()`.
 The call to `translateGreeting()` returns a channel in turn, which we assign to `translated_ch`.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-connector.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-connector.drawio.svg"
 </figure>
 
 In the workflow block, make the following code change:

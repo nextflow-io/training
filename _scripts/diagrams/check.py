@@ -33,9 +33,11 @@ class Report:
 def role_of(d, v):
     st = d.style(v)
     if "text" in st:
+        if st.get("align", "center") == "center":
+            return "caption"
         if st.get("fontFamily") == S.CODE_FONT:
             return "param" if any(e.get("source") == v.get("id") for e in d.edges()) else "code"
-        return "caption" if st.get("align", "center") == "center" else "note"
+        return "note"
     if st.get("container") == "1" and st.get("fillColor", "none") == "none":
         return "group" if st.get("dashed") == "1" else "frame"
     fill = st.get("fillColor", "").lower()
