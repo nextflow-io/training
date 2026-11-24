@@ -952,8 +952,8 @@ Now have a look at the contents of the final output file.
 
 Oh no. The collection step was run individually on each greeting, which is NOT what we wanted.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-no-operator.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-no-operator.drawio.svg"
 </figure>
 
 We need to do something to tell Nextflow explicitly that we want that third step to run on all the elements in the channel output by `translateGreeting()`.
@@ -1063,8 +1063,8 @@ Looking at the output of the `view()` statements, we see the following:
 
 We can summarize that with the following diagram:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-WITH-operator.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-WITH-operator.drawio.svg"
 </figure>
 
 Finally, you can have a look at the contents of the output file to satisfy yourself that everything worked correctly.

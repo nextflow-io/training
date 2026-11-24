@@ -37,6 +37,7 @@ SIZE_NOTE = 22  # sample file contents next to a box
 SIZE_CAPTION = 28  # captions under groups ("input channel"), bold, sentence case
 CAPTION_H = 36
 CAPTION_GAP = 40  # caption below the box or channel it describes
+CAPTION_GAP_PROCESS = 25  # same, in a diagram of a single process definition (tighter, compact view)
 CAPTION_GAP_GROUP = 15  # caption below a dashed group outline (the group padding already adds space)
 SIZE_PARAM = 26  # parameter labels (--batch trio), Menlo
 SIZE_CODE = 20  # code snippets, Menlo

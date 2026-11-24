@@ -215,6 +215,8 @@ def check(path):
         cid = max(above, key=lambda c: boxes[c][1] + boxes[c][3])
         gap = y - (boxes[cid][1] + boxes[cid][3])
         want = S.CAPTION_GAP_GROUP if roles[cid] == "group" else S.CAPTION_GAP
+        if roles[cid] != "group" and abs(gap - S.CAPTION_GAP_PROCESS) <= TOL:
+            continue  # single-process view
         if abs(gap - want) > TOL:
             r.warn(f"caption {name(d, v)}: {gap:g} px under {name(d, cells[cid])} (want {want})")
 

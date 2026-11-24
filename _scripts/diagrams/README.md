@@ -63,6 +63,7 @@ box outlines 2.5; frames 2.
 - Several arrows into one side of a box land at evenly spaced points.
 - Notes sit 20 px right of their box, centred on it. Captions (36 px high) sit 40 px under the box or channel they describe, or 15 px under a dashed group's outline (the group's own padding supplies the rest).
 - Show channels explicitly (teal pill with its items) only where the text is about how steps are connected; elsewhere a file box such as `*.txt` stands for the channel. When a process's input channel is shown explicitly, show its output channel explicitly too.
+- A diagram of a single process definition is drawn from the process's point of view: label its value inputs with the input names (`batch_name`, `language`), not parameters, and caption channels with plain words ("translated greetings") in the caption font, 25 px under the channel instead of 40. Don't name code the text hasn't introduced yet (no `.collect()` before section 2.4).
 - Use example values everywhere (`--batch trio`, `trio-es-greetings.txt`), never placeholders such as `${batch_name}`.
 - Name channels as the workflow code does (`greetings_ch`, `translated_ch.collect()`), not `process.out`.
 - A step fed by a captioned channel sits on the next row, reached by a bent arrow from the channel's right side down into the step's top centre (the staircase), so the arrow doesn't cross the caption.
