@@ -92,11 +92,18 @@ def check(path):
         w, h = boxes[v.get("id")][2:]
         on = lambda a: abs(a / S.GRID - round(a / S.GRID)) < 0.01
         # left/top edge on the grid, or the centre (boxes centred under/beside another box)
-        if role != "item" and not ((on(x) or on(x + w / 2)) and (on(y) or on(y + h / 2))):
+        inside_channel = any(roles.get(a) == "channel" for a in _ancestors(cells, v.get("id")))
+        if role != "item" and not inside_channel and not ((on(x) or on(x + w / 2)) and (on(y) or on(y + h / 2))):
             r.error(f"{n}: position ({x:g}, {y:g}) is off the {S.GRID} px grid (edge or centre)")
-        if role in ("process", "file") and roles.get(v.get("parent")) != "channel" and boxes[v.get("id")][3] != S.BOX_H:
+        in_channel = False
+        p = v.get("parent")
+        while p in roles:
+            in_channel |= roles[p] == "channel"
+            p = cells[p].get("parent")
+        has_kids = any(c.get("parent") == v.get("id") for c in d.vertices())
+        if role in ("process", "file") and not in_channel and boxes[v.get("id")][3] != S.BOX_H:
             r.warn(f"{n}: height {boxes[v.get('id')][3]:g} (boxes are {S.BOX_H} high)")
-        if role in ("item", "file") and roles.get(v.get("parent")) == "channel" and boxes[v.get("id")][3] != S.ITEM_H:
+        if role in ("item", "file") and in_channel and not has_kids and boxes[v.get("id")][3] != S.ITEM_H:
             r.warn(f"{n}: height {boxes[v.get('id')][3]:g} (items in a channel are {S.ITEM_H} high)")
     for v in d.vertices():
         if roles[v.get("id")] == "param":
@@ -189,6 +196,7 @@ def check(path):
             continue
         x, y, w, h = boxes[v.get("id")]
         near = [cid for cid, b in boxes.items() if is_box(cid) and 0 <= x - (b[0] + b[2]) <= 60
+                and not any(roles.get(a) == "channel" for a in _ancestors(cells, cid))
                 and b[1] < y + h / 2 < b[1] + b[3]]
         for cid in near:
             b = boxes[cid]
@@ -252,6 +260,14 @@ def check(path):
         if any(abs(p - S.FRAME_PAD) > TOL for p in pads):
             r.warn(f"frame padding left/top/right/bottom {[round(p) for p in pads]} (want {S.FRAME_PAD})")
     return r
+
+
+def _ancestors(cells, cid):
+    out = []
+    while cid in cells and cells[cid].get("vertex") == "1":
+        cid = cells[cid].get("parent")
+        out.append(cid)
+    return out
 
 
 def _inside(boxes, cid, fid):

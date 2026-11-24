@@ -762,8 +762,8 @@ This process has three inputs:
 `batch_name` and `language` are plain values, so they use the `val` qualifier, like the `language` input of `translateGreeting` in section 1.3.
 The process runs only once per run, but tagging it with the batch name makes runs of different batches easy to tell apart.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.drawio.svg"
 </figure>
 
 The script needs to handle an arbitrary number of input files, so we can't write the command up front.
@@ -782,8 +782,8 @@ Fortunately, Nextflow is quite happy to do that for us if we simply write `cat $
 Now we need a `batch` parameter, and a call to the collection process on the output of the translation step.
 That output is also a channel, `translated_ch`.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-connector.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-connector.drawio.svg"
 </figure>
 
 #### 2.3.1. Add a `batch` parameter

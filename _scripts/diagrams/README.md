@@ -62,4 +62,9 @@ box outlines 2.5; frames 2.
 - Fan-outs: targets stacked 40 px apart, the stack centred on the source; arrows leave at evenly spaced points (0.25 / 0.5 / 0.75, or 0.3 / 0.7) and land at each target's centre.
 - Several arrows into one side of a box land at evenly spaced points.
 - Notes sit 20 px right of their box, centred on it. Captions (36 px high) sit 40 px under the box or channel they describe, or 15 px under a dashed group's outline (the group's own padding supplies the rest).
+- Show channels explicitly (teal pill with its items) only where the text is about how steps are connected; elsewhere a file box such as `*.txt` stands for the channel. When a process's input channel is shown explicitly, show its output channel explicitly too.
+- Use example values everywhere (`--batch trio`, `trio-es-greetings.txt`), never placeholders such as `${batch_name}`.
+- Name channels as the workflow code does (`greetings_ch`, `translated_ch.collect()`), not `process.out`.
+- A step fed by a captioned channel sits on the next row, reached by a bent arrow from the channel's right side down into the step's top centre (the staircase), so the arrow doesn't cross the caption.
+- Two parameters entering one side of a box land at 0.25 and 0.75, both arrows straight and each label level with its entry.
 - Parameter labels sit level with the point where their arrow lands, and end one monospace space before the arrow starts. A parameter that feeds several steps uses one trunk that branches.
