@@ -45,7 +45,6 @@ It is based on the common patterns found in the Genomics and RNAseq courses.
     - nf4_science/{your_domain}/01_method.md
     - nf4_science/{your_domain}/02_single_sample.md
     - nf4_science/{your_domain}/03_multi_sample.md
-    - nf4_science/{your_domain}/survey.md
     - nf4_science/{your_domain}/next_steps.md
 ```
 

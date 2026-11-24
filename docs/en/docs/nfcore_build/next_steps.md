@@ -32,6 +32,13 @@ Through this hands-on course, you've learned to:
 
 You're now equipped with the foundational knowledge to build production-ready nf-core pipelines that follow community best practices.
 
+## Feedback survey
+
+Before you move on, please take a minute or two to complete this short survey.
+Your feedback helps us improve our training materials for everyone.
+
+<div data-tf-live="01M2DNYZMKW99BW976FP5VX5CJ"></div><script src="//embed.typeform.com/next/embed.js"></script>
+
 ## Next steps to build your skills
 
 Here are our top 3 suggestions for what to do next:
@@ -41,9 +48,3 @@ Here are our top 3 suggestions for what to do next:
 - Get involved by [joining the nf-core community](https://nf-co.re/join).
 
 Finally, we recommend you have a look at [**Seqera Platform**](https://seqera.io/), a cloud-based platform developed by the creators of Nextflow that makes it even easier to launch and manage your workflows, as well as manage your data and run analyses interactively in any environment.
-
-## Feedback survey
-
-Before you move on, please take a minute to complete the course survey! Your feedback helps us improve our training materials for everyone.
-
-[Take the survey :material-arrow-right:](survey.md){ .md-button .md-button--primary }
