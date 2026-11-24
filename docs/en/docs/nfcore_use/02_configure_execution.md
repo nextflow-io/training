@@ -178,7 +178,7 @@ The `SEQTK_TRIM` process no longer appears in the output.
 
     **Setting integer parameters on the command line**
 
-    With the v2 syntax parser, which is the default from Nextflow 26.04, numeric values supplied on the command line are typed as strings.
+    From Nextflow 26.04, numeric values supplied on the command line are typed as strings.
     For an integer parameter such as `min_trimmed_reads` in `nf-core/rnaseq`, which you use in Part 4, passing `--min_trimmed_reads 1000` is evaluated as the **string** `"1000"`, which fails schema validation:
 
     ```console
@@ -186,8 +186,7 @@ The `SEQTK_TRIM` process no longer appears in the output.
     ```
 
     To set an integer parameter, use a `-params-file` as shown above, or set it in a config file.
-    Boolean parameters like `skip_trim` can be set on the command line, either as a bare flag (`--skip_trim`) or as `--skip_trim true`, since the values `true` and `false` are typed as booleans.
-    This applies from Nextflow 26.10 onward: on earlier versions, boolean values on the command line are also typed as strings and fail validation, so set them in a params file instead.
+    Boolean parameters like `skip_trim` can be set on the command line, either as a bare flag (`--skip_trim`) or as `--skip_trim true`: schema validation accepts the values `true` and `false` for boolean parameters.
     String and file-path parameters can also be set directly on the command line.
     This course uses this pattern throughout for integer parameters.
 
@@ -248,7 +247,7 @@ The following invalid input values have been detected:
 ```
 
 The pipeline stops before any processes run, saving you from a failed or incorrect execution.
-As noted in [1.2](#12-set-parameter-values), only the values `true` and `false` are typed as booleans on the command line; any other value, such as `yes`, is treated as a string.
+As noted in [1.2](#12-set-parameter-values), only the values `true` and `false` are accepted for boolean parameters on the command line; any other value, such as `yes`, fails validation.
 
 ### 1.4. Input validation
 
