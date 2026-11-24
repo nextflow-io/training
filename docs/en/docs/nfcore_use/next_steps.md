@@ -9,8 +9,9 @@ Congratulations on completing the Use nf-core training course! 🎉
 You started by finding and retrieving the `nf-core/demo` pipeline, then learned to run it using its test profile and examine its outputs.
 Next, you configured its execution through pipeline parameters and configuration files, and saw how nf-core pipelines validate parameters and input data.
 Then you applied those same skills to `nf-core/rnaseq`, a production-scale pipeline: you pinned it to a specific release, overrode its default resource allocations to fit a small machine, and cancelled a run.
-You chose a pipeline for a scientific question by evaluating its documentation and a completed run, prepared samplesheets for your own data and for public data, and diagnosed and fixed samplesheet errors.
-Finally, you ran the pipeline on a bigger machine and used its execution report to tune resource allocations.
+You then ran it on a bigger machine and used its execution report to tune resource allocations.
+You prepared samplesheets for your own data and for public data, diagnosed and fixed samplesheet errors, and ran the pipeline on your own samplesheet.
+Finally, you chose a pipeline for a scientific question by evaluating its documentation and a completed run.
 
 ### What you learned
 
@@ -38,12 +39,13 @@ Through this hands-on course, you've learned how to:
 - Customize resource allocation and tool arguments through configuration files
 - Pull and run a production-scale pipeline pinned to a specific release with `-r`, and override its default resource allocations by label and by process name
 - Cancel a run cleanly with ++ctrl+c++ (or `kill` for a background run)
-- Find and evaluate pipelines for a specific scientific question
+- Run a pipeline with more compute resources by changing the machine type
+- Tune resource allocations based on the execution report
 - Write a samplesheet for your own data, including samples sequenced on multiple lanes
 - Generate a samplesheet for public data with `nf-core/fetchngs`
 - Diagnose and fix input validation errors
-- Run a pipeline with more compute resources by changing the machine type
-- Tune resource allocations based on the execution report
+- Run a pipeline on your own samplesheet
+- Find and evaluate pipelines for a specific scientific question
 
 You're now equipped with the foundational knowledge to start running nf-core pipelines for your own analyses.
 
