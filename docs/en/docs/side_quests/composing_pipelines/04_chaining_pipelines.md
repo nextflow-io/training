@@ -1,5 +1,3 @@
-<!-- TODO(26.10): recapture console output on 26.10 release -->
-
 # Part 4: Chaining Pipelines
 
 At the end of Part 3, you had two pipelines that each run on their own.
@@ -123,13 +121,13 @@ nextflow -C pipelines/report/nextflow.config run ./pipelines/report --input gree
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `./pipelines/report/main.nf` [soggy_shirley] revision: 57103de971
+    Launching `./pipelines/report/main.nf` [prickly_franklin] revision: 57103de971
 
     executor >  local (4)
-    [ad/dc59a5] COUNT_TEXT (Charlie) | 3 of 3 ✔
-    [d2/3fb0ff] SUMMARIZE            | 1 of 1 ✔
+    [0d/df42e7] COUNT_TEXT (Alice) | 3 of 3 ✔
+    [36/b96a0d] SUMMARIZE          | 1 of 1 ✔
 
     Outputs:
 
@@ -187,44 +185,44 @@ nextflow -C pipelines/greetings/nextflow.config run ./pipelines/greetings --name
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `./pipelines/greetings/main.nf` [adoring_ochoa] revision: 7c8686ea3f
+    Launching `./pipelines/greetings/main.nf` [clever_goldstine] revision: 7c8686ea3f
 
     executor >  local (20)
-    [25/b4e134] GRE…TE_NAME (validating Alice) | 4 of 4 ✔
-    [87/0c17f7] GRE…SAY_HELLO (greeting Alice) | 4 of 4 ✔
-    [92/2765b3] GRE…ing timestamp to greeting) | 4 of 4 ✔
-    [bc/f7e731] TRA…estamped_Diana-output.txt) | 4 of 4 ✔
-    [49/46c487] TRA…estamped_Diana-output.txt) | 4 of 4 ✔
+    [9f/70cac5] GRE…TE_NAME (validating Alice) | 4 of 4 ✔
+    [e0/c99f9a] GRE…SAY_HELLO (greeting Alice) | 4 of 4 ✔
+    [58/9fce4c] GRE…ing timestamp to greeting) | 4 of 4 ✔
+    [0d/5c0422] TRA…estamped_Alice-output.txt) | 4 of 4 ✔
+    [2a/fc701d] TRA…estamped_Alice-output.txt) | 4 of 4 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/composing_pipelines/results_greetings
 
       greetings:
+        - {name: Diana, file: greetings/Diana-output.txt}
         - {name: Bob, file: greetings/Bob-output.txt}
         - {name: Charlie, file: greetings/Charlie-output.txt}
-        - {name: Diana, file: greetings/Diana-output.txt}
         - {name: Alice, file: greetings/Alice-output.txt}
 
       timestamped:
-        - {name: Charlie, file: timestamped/timestamped_Charlie-output.txt}
-        - {name: Alice, file: timestamped/timestamped_Alice-output.txt}
         - {name: Bob, file: timestamped/timestamped_Bob-output.txt}
         - {name: Diana, file: timestamped/timestamped_Diana-output.txt}
+        - {name: Charlie, file: timestamped/timestamped_Charlie-output.txt}
+        - {name: Alice, file: timestamped/timestamped_Alice-output.txt}
 
       upper:
-        - {name: Alice, file: upper/UPPER-timestamped_Alice-output.txt}
-        - {name: Charlie, file: upper/UPPER-timestamped_Charlie-output.txt}
         - {name: Bob, file: upper/UPPER-timestamped_Bob-output.txt}
         - {name: Diana, file: upper/UPPER-timestamped_Diana-output.txt}
+        - {name: Charlie, file: upper/UPPER-timestamped_Charlie-output.txt}
+        - {name: Alice, file: upper/UPPER-timestamped_Alice-output.txt}
 
       reversed:
-        - {name: Alice, file: reversed/REVERSED-UPPER-timestamped_Alice-output.txt}
-        - {name: Charlie, file: reversed/REVERSED-UPPER-timestamped_Charlie-output.txt}
         - {name: Bob, file: reversed/REVERSED-UPPER-timestamped_Bob-output.txt}
         - {name: Diana, file: reversed/REVERSED-UPPER-timestamped_Diana-output.txt}
+        - {name: Charlie, file: reversed/REVERSED-UPPER-timestamped_Charlie-output.txt}
+        - {name: Alice, file: reversed/REVERSED-UPPER-timestamped_Alice-output.txt}
     ```
 
 All 20 tasks ran, not just Diana's five.
@@ -241,13 +239,13 @@ nextflow -C pipelines/report/nextflow.config run ./pipelines/report --input gree
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `./pipelines/report/main.nf` [insane_curry] revision: 57103de971
+    Launching `./pipelines/report/main.nf` [mighty_monod] revision: 57103de971
 
     executor >  local (4)
-    [d3/8a28bb] COUNT_TEXT (Charlie) | 3 of 3 ✔
-    [7b/ba1112] SUMMARIZE            | 1 of 1 ✔
+    [47/bd9e0e] COUNT_TEXT (Charlie) | 3 of 3 ✔
+    [a4/13284e] SUMMARIZE            | 1 of 1 ✔
 
     Outputs:
 
@@ -419,18 +417,18 @@ nextflow run main.nf --names data/names.csv
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [curious_easley] revision: d3220442cd
+    Launching `main.nf` [ridiculous_albattani] revision: d3220442cd
 
     executor >  local (19)
-    [bd/4e703e] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
-    [3c/8b6b53] GRE…W:SAY_HELLO (greeting Bob) | 3 of 3 ✔
-    [2d/cfb439] GRE…ing timestamp to greeting) | 3 of 3 ✔
-    [26/ec242e] GRE…estamped_Alice-output.txt) | 3 of 3 ✔
-    [e2/26ecf7] GRE…estamped_Alice-output.txt) | 3 of 3 ✔
-    [02/637ce5] REPORT:COUNT_TEXT (Alice)      | 3 of 3 ✔
-    [bb/cc8fb4] REPORT:SUMMARIZE               | 1 of 1 ✔
+    [c6/8f62b0] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
+    [19/95c115] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
+    [d2/e0929f] GRE…ing timestamp to greeting) | 3 of 3 ✔
+    [9b/b31736] GRE…tamped_Charlie-output.txt) | 3 of 3 ✔
+    [82/5b4245] GRE…tamped_Charlie-output.txt) | 3 of 3 ✔
+    [6b/80283b] REPORT:COUNT_TEXT (Charlie)    | 3 of 3 ✔
+    [34/526652] REPORT:SUMMARIZE               | 1 of 1 ✔
 
     Outputs:
 
@@ -438,13 +436,13 @@ nextflow run main.nf --names data/names.csv
 
       timestamped:
         - {name: Bob, file: timestamped/timestamped_Bob-output.txt}
-        - {name: Charlie, file: timestamped/timestamped_Charlie-output.txt}
         - {name: Alice, file: timestamped/timestamped_Alice-output.txt}
+        - {name: Charlie, file: timestamped/timestamped_Charlie-output.txt}
 
       reversed:
         - {name: Bob, file: reversed/REVERSED-UPPER-timestamped_Bob-output.txt}
-        - {name: Charlie, file: reversed/REVERSED-UPPER-timestamped_Charlie-output.txt}
         - {name: Alice, file: reversed/REVERSED-UPPER-timestamped_Alice-output.txt}
+        - {name: Charlie, file: reversed/REVERSED-UPPER-timestamped_Charlie-output.txt}
 
       summary: report/report.txt
 
@@ -508,33 +506,33 @@ nextflow run main.nf --names data/more_names.csv -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [chaotic_venter] revision: d3220442cd
+    Launching `main.nf` [hopeful_kirch] revision: d3220442cd
 
     executor >  local (7)
-    [b1/f58667] GRE…TE_NAME (validating Diana) | 4 of 4, cached: 3 ✔
-    [c4/1fbe04] GRE…SAY_HELLO (greeting Diana) | 4 of 4, cached: 3 ✔
-    [76/d5b86b] GRE…ing timestamp to greeting) | 4 of 4, cached: 3 ✔
-    [9c/446012] GRE…estamped_Diana-output.txt) | 4 of 4, cached: 3 ✔
-    [a5/2ba01e] GRE…estamped_Diana-output.txt) | 4 of 4, cached: 3 ✔
-    [47/1d53d9] REPORT:COUNT_TEXT (Diana)      | 4 of 4, cached: 3 ✔
-    [14/60b114] REPORT:SUMMARIZE               | 1 of 1 ✔
+    [99/c8f60c] GRE…TE_NAME (validating Diana) | 4 of 4, cached: 3 ✔
+    [02/26b799] GRE…SAY_HELLO (greeting Diana) | 4 of 4, cached: 3 ✔
+    [75/464560] GRE…ing timestamp to greeting) | 4 of 4, cached: 3 ✔
+    [7d/e179aa] GRE…estamped_Diana-output.txt) | 4 of 4, cached: 3 ✔
+    [6d/ad01c8] GRE…estamped_Diana-output.txt) | 4 of 4, cached: 3 ✔
+    [af/5fb191] REPORT:COUNT_TEXT (Diana)      | 4 of 4, cached: 3 ✔
+    [bd/25a1c5] REPORT:SUMMARIZE               | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/composing_pipelines/results
 
       timestamped:
+        - {name: Alice, file: timestamped/timestamped_Alice-output.txt}
         - {name: Charlie, file: timestamped/timestamped_Charlie-output.txt}
         - {name: Bob, file: timestamped/timestamped_Bob-output.txt}
-        - {name: Alice, file: timestamped/timestamped_Alice-output.txt}
         - {name: Diana, file: timestamped/timestamped_Diana-output.txt}
 
       reversed:
         - {name: Alice, file: reversed/REVERSED-UPPER-timestamped_Alice-output.txt}
-        - {name: Bob, file: reversed/REVERSED-UPPER-timestamped_Bob-output.txt}
         - {name: Charlie, file: reversed/REVERSED-UPPER-timestamped_Charlie-output.txt}
+        - {name: Bob, file: reversed/REVERSED-UPPER-timestamped_Bob-output.txt}
         - {name: Diana, file: reversed/REVERSED-UPPER-timestamped_Diana-output.txt}
 
       summary: report/report.txt

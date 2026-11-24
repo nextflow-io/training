@@ -1,5 +1,3 @@
-<!-- TODO(26.10): recapture console output on 26.10 release -->
-
 # Part 2: Typed Interfaces
 
 At the end of Part 1, your greetings pipeline was built from two named workflows, and one line in `main.nf` connected them:
@@ -149,20 +147,22 @@ nextflow run main.nf
 ??? failure "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [dreamy_watson] revision: 2a0e54fecd
+    Launching `main.nf` [naughty_poincare] revision: 2a0e54fecd
 
     executor >  local (9)
-    [9c/e184da] GRE…_NAME (validating Charlie) | 3 of 3 ✔
-    [e8/11cb47] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
-    [a6/a39cfa] GRE…ing timestamp to greeting) | 3 of 3 ✔
+    [d0/f70c59] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
+    [15/30d2e5] GRE…Y_HELLO (greeting Charlie) | 3 of 3 ✔
+    [9e/2c6b70] GRE…ing timestamp to greeting) | 3 of 3 ✔
     [-        ] TRA…M_WORKFLOW:SAY_HELLO_UPPER -
     [-        ] TRA…FORM_WORKFLOW:REVERSE_TEXT -
-    ERROR ~ Error executing process > 'TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (3)'
+    ERROR ~ Error executing process > 'TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (2)'
 
     Caused by:
-      Not a valid path value type: nextflow.util.RecordMap ([name:Charlie, file:/workspaces/training/side-quests/composing_pipelines/work/a6/a39cfa47ca144245fff4bb91f06925/timestamped_Charlie-output.txt])
+      Not a valid path value type: nextflow.util.RecordMap ([name:Alice, file:/workspaces/training/side-quests/composing_pipelines/work/0e/fda224886db636612885ae69278c0b/timestamped_Alice-output.txt])
+
+
 
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 
@@ -393,40 +393,40 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [pensive_bose] revision: 936591edc4
+    Launching `main.nf` [friendly_ampere] revision: 936591edc4
 
     executor >  local (15)
-    [0e/8caee4] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
-    [39/76fc5c] GRE…W:SAY_HELLO (greeting Bob) | 3 of 3 ✔
-    [92/8e2aa9] GRE…ing timestamp to greeting) | 3 of 3 ✔
-    [3a/8b3930] TRA…imestamped_Bob-output.txt) | 3 of 3 ✔
-    [64/32f6ed] TRA…imestamped_Bob-output.txt) | 3 of 3 ✔
+    [56/5a9e97] GRE…DATE_NAME (validating Bob) | 3 of 3 ✔
+    [2e/68ef06] GRE…W:SAY_HELLO (greeting Bob) | 3 of 3 ✔
+    [e0/8b98e3] GRE…ing timestamp to greeting) | 3 of 3 ✔
+    [a2/d1b68a] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
+    [d1/b78d10] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/composing_pipelines/results
 
       greetings:
-        - {name: Bob, file: greetings/Bob-output.txt}
-        - {name: Alice, file: greetings/Alice-output.txt}
         - {name: Charlie, file: greetings/Charlie-output.txt}
+        - {name: Alice, file: greetings/Alice-output.txt}
+        - {name: Bob, file: greetings/Bob-output.txt}
 
       timestamped:
         - {name: Charlie, file: timestamped/timestamped_Charlie-output.txt}
-        - {name: Alice, file: timestamped/timestamped_Alice-output.txt}
         - {name: Bob, file: timestamped/timestamped_Bob-output.txt}
+        - {name: Alice, file: timestamped/timestamped_Alice-output.txt}
 
       upper:
         - {name: Charlie, file: upper/UPPER-timestamped_Charlie-output.txt}
-        - {name: Alice, file: upper/UPPER-timestamped_Alice-output.txt}
         - {name: Bob, file: upper/UPPER-timestamped_Bob-output.txt}
+        - {name: Alice, file: upper/UPPER-timestamped_Alice-output.txt}
 
       reversed:
         - {name: Charlie, file: reversed/REVERSED-UPPER-timestamped_Charlie-output.txt}
-        - {name: Alice, file: reversed/REVERSED-UPPER-timestamped_Alice-output.txt}
         - {name: Bob, file: reversed/REVERSED-UPPER-timestamped_Bob-output.txt}
+        - {name: Alice, file: reversed/REVERSED-UPPER-timestamped_Alice-output.txt}
     ```
 
 The published outputs are now records rather than bare files.

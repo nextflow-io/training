@@ -1,5 +1,3 @@
-<!-- TODO(26.10): recapture console output on 26.10 release -->
-
 # Part 1: Workflows of Workflows
 
 You maintain a small greetings pipeline with two stages: one creates timestamped greetings for a list of names, and the other turns those greetings into uppercase and reversed versions.
@@ -144,28 +142,28 @@ nextflow run workflows/greeting.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `workflows/greeting.nf` [kickass_maxwell] revision: 04c0a33f79
+    Launching `workflows/greeting.nf` [exotic_almeida] revision: 04c0a33f79
 
     executor >  local (9)
-    [c3/97e273] VALIDATE_NAME (validating Bob) | 3 of 3 ✔
-    [86/7b5f97] SAY_HELLO (greeting Bob)       | 3 of 3 ✔
-    [18/eefc42] TIM…ing timestamp to greeting) | 3 of 3 ✔
+    [b8/a3ffb0] VAL…_NAME (validating Charlie) | 3 of 3 ✔
+    [69/b5afe0] SAY_HELLO (greeting Charlie)   | 3 of 3 ✔
+    [51/df8d2b] TIM…ing timestamp to greeting) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/composing_pipelines/results
 
       greetings:
+        - Bob-output.txt
         - Alice-output.txt
         - Charlie-output.txt
-        - Bob-output.txt
 
       timestamped:
-        - timestamped_Alice-output.txt
         - timestamped_Bob-output.txt
         - timestamped_Charlie-output.txt
+        - timestamped_Alice-output.txt
     ```
 
 To make it composable with other workflows, a few things need to change.
@@ -299,11 +297,11 @@ nextflow run workflows/greeting.nf
 ??? failure "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `workflows/greeting.nf` [curious_poisson] revision: 89ac88c6c2
+    Launching `workflows/greeting.nf` [furious_meucci] revision: 89ac88c6c2
 
-    No entry workflow specified -- script must define an entry workflow, a single process or named workflow, or be a code snippet
+    No entry workflow specified -- script must define an entry workflow, a single process, agent, or named workflow, or be a code snippet
     ```
 
 This introduces a key concept: the **entry workflow**.
@@ -391,14 +389,14 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [gloomy_legentil] revision: 6b0e98dd05
+    Launching `main.nf` [high_gutenberg] revision: 6b0e98dd05
 
     executor >  local (9)
-    [db/3e1397] GRE…_NAME (validating Charlie) | 3 of 3 ✔
-    [be/2fc96a] GRE…W:SAY_HELLO (greeting Bob) | 3 of 3 ✔
-    [ae/711cf6] GRE…ing timestamp to greeting) | 3 of 3 ✔
+    [a6/57ca96] GRE…_NAME (validating Charlie) | 3 of 3 ✔
+    [38/578eff] GRE…Y_HELLO (greeting Charlie) | 3 of 3 ✔
+    [82/16b3ff] GRE…ing timestamp to greeting) | 3 of 3 ✔
 
     Outputs:
 
@@ -406,8 +404,8 @@ nextflow run main.nf
 
       greetings:
         - greetings/Alice-output.txt
-        - greetings/Charlie-output.txt
         - greetings/Bob-output.txt
+        - greetings/Charlie-output.txt
     ```
 
 ??? abstract "New content added under `results/`"
@@ -499,27 +497,27 @@ nextflow run workflows/transform.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `workflows/transform.nf` [sick_snyder] revision: 4e35790d32
+    Launching `workflows/transform.nf` [jovial_rosalind] revision: 4e35790d32
 
     executor >  local (6)
-    [c8/123b29] SAY…imestamped_Bob-output.txt) | 3 of 3 ✔
-    [74/8da573] REV…estamped_Alice-output.txt) | 3 of 3 ✔
+    [f5/967b70] SAY…tamped_Charlie-output.txt) | 3 of 3 ✔
+    [23/a9d247] REV…tamped_Charlie-output.txt) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/composing_pipelines/results
 
       upper:
-        - UPPER-timestamped_Charlie-output.txt
-        - UPPER-timestamped_Bob-output.txt
         - UPPER-timestamped_Alice-output.txt
+        - UPPER-timestamped_Bob-output.txt
+        - UPPER-timestamped_Charlie-output.txt
 
       reversed:
-        - REVERSED-UPPER-timestamped_Charlie-output.txt
-        - REVERSED-UPPER-timestamped_Bob-output.txt
         - REVERSED-UPPER-timestamped_Alice-output.txt
+        - REVERSED-UPPER-timestamped_Bob-output.txt
+        - REVERSED-UPPER-timestamped_Charlie-output.txt
     ```
 
 It works because the files from section 1.1 are still in `results/`.
@@ -654,35 +652,35 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [loquacious_stallman] revision: 2a0e54fecd
+    Launching `main.nf` [compassionate_faggin] revision: 2a0e54fecd
 
     executor >  local (15)
-    [54/4d7e12] GRE…_NAME (validating Charlie) | 3 of 3 ✔
-    [21/d16068] GRE…W:SAY_HELLO (greeting Bob) | 3 of 3 ✔
-    [a3/4b46ff] GRE…ing timestamp to greeting) | 3 of 3 ✔
-    [0a/9af50d] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
-    [73/992c26] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
+    [3a/fa5d90] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
+    [6d/818558] GRE…Y_HELLO (greeting Charlie) | 3 of 3 ✔
+    [e2/b483d8] GRE…ing timestamp to greeting) | 3 of 3 ✔
+    [f7/2bb6ce] TRA…imestamped_Bob-output.txt) | 3 of 3 ✔
+    [be/0063e7] TRA…imestamped_Bob-output.txt) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/composing_pipelines/results
 
       greetings:
-        - greetings/Charlie-output.txt
-        - greetings/Alice-output.txt
         - greetings/Bob-output.txt
+        - greetings/Alice-output.txt
+        - greetings/Charlie-output.txt
 
       upper:
-        - upper/UPPER-timestamped_Bob-output.txt
         - upper/UPPER-timestamped_Charlie-output.txt
         - upper/UPPER-timestamped_Alice-output.txt
+        - upper/UPPER-timestamped_Bob-output.txt
 
       reversed:
-        - reversed/REVERSED-UPPER-timestamped_Bob-output.txt
         - reversed/REVERSED-UPPER-timestamped_Charlie-output.txt
         - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
+        - reversed/REVERSED-UPPER-timestamped_Bob-output.txt
     ```
 
 ??? abstract "New content added under `results/`"
@@ -709,7 +707,7 @@ nextflow run main.nf
 ??? abstract "File contents"
 
     ```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
-    !ECILA ,OLLEH ]43:21:71 50-01-6202[
+    !ECILA ,OLLEH ]22:32:10 42-11-6202[
     ```
 
 The pipeline is working end-to-end: the greeting has been uppercased and reversed.

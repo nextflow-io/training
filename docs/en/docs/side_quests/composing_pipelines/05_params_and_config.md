@@ -1,5 +1,3 @@
-<!-- TODO(26.10): recapture console output on 26.10 release -->
-
 # Part 5: Parameters and Configuration
 
 At the end of Part 4, one command ran both pipelines: the greetings went straight from the greetings pipeline into the report pipeline, in a single run with a single `-resume`.
@@ -117,9 +115,9 @@ nextflow run main.nf -resume
 ??? failure "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [loquacious_avogadro] revision: b973113816
+    Launching `main.nf` [special_bartik] revision: b973113816
 
     Parameter `names` of pipeline `GREETINGS` is required but no value was provided
 
@@ -141,32 +139,32 @@ nextflow run main.nf -resume --greetings.names data/names.csv --report.metric wo
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [furious_fermi] revision: b973113816
+    Launching `main.nf` [grave_picasso] revision: b973113816
 
     executor >  local (4)
-    [bd/4e703e] GRE…TE_NAME (validating Alice) | 3 of 3, cached: 3 ✔
-    [3c/8b6b53] GRE…W:SAY_HELLO (greeting Bob) | 3 of 3, cached: 3 ✔
-    [2d/cfb439] GRE…ing timestamp to greeting) | 3 of 3, cached: 3 ✔
-    [48/210fff] GRE…tamped_Charlie-output.txt) | 3 of 3, cached: 3 ✔
-    [3a/2d138c] GRE…tamped_Charlie-output.txt) | 3 of 3, cached: 3 ✔
-    [69/b00198] REPORT:COUNT_TEXT (Charlie)    | 3 of 3 ✔
-    [1b/e17976] REPORT:SUMMARIZE               | 1 of 1 ✔
+    [93/581f45] GRE…_NAME (validating Charlie) | 3 of 3, cached: 3 ✔
+    [6e/f636e5] GRE…Y_HELLO (greeting Charlie) | 3 of 3, cached: 3 ✔
+    [d2/e0929f] GRE…ing timestamp to greeting) | 3 of 3, cached: 3 ✔
+    [9b/b31736] GRE…tamped_Charlie-output.txt) | 3 of 3, cached: 3 ✔
+    [82/5b4245] GRE…tamped_Charlie-output.txt) | 3 of 3, cached: 3 ✔
+    [c8/49c4bf] REPORT:COUNT_TEXT (Alice)      | 3 of 3 ✔
+    [08/c81eb1] REPORT:SUMMARIZE               | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/composing_pipelines/results
 
       timestamped:
-        - {name: Bob, file: timestamped/timestamped_Bob-output.txt}
         - {name: Alice, file: timestamped/timestamped_Alice-output.txt}
+        - {name: Bob, file: timestamped/timestamped_Bob-output.txt}
         - {name: Charlie, file: timestamped/timestamped_Charlie-output.txt}
 
       reversed:
+        - {name: Alice, file: reversed/REVERSED-UPPER-timestamped_Alice-output.txt}
         - {name: Bob, file: reversed/REVERSED-UPPER-timestamped_Bob-output.txt}
         - {name: Charlie, file: reversed/REVERSED-UPPER-timestamped_Charlie-output.txt}
-        - {name: Alice, file: reversed/REVERSED-UPPER-timestamped_Alice-output.txt}
 
       summary: report/report.txt
 
@@ -246,17 +244,17 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [big_faggin] revision: b973113816
+    Launching `main.nf` [boring_albattani] revision: b973113816
 
-    [bd/4e703e] GRE…TE_NAME (validating Alice) | 3 of 3, cached: 3 ✔
-    [e3/4a2cdb] GRE…SAY_HELLO (greeting Alice) | 3 of 3, cached: 3 ✔
-    [2d/cfb439] GRE…ing timestamp to greeting) | 3 of 3, cached: 3 ✔
-    [48/210fff] GRE…tamped_Charlie-output.txt) | 3 of 3, cached: 3 ✔
-    [48/5400c9] GRE…imestamped_Bob-output.txt) | 3 of 3, cached: 3 ✔
-    [48/5c389b] REPORT:COUNT_TEXT (Charlie)    | 3 of 3, cached: 3 ✔
-    [bb/cc8fb4] REPORT:SUMMARIZE               | 1 of 1, cached: 1 ✔
+    [c6/8f62b0] GRE…TE_NAME (validating Alice) | 3 of 3, cached: 3 ✔
+    [0a/a155dd] GRE…W:SAY_HELLO (greeting Bob) | 3 of 3, cached: 3 ✔
+    [b3/24f305] GRE…ing timestamp to greeting) | 3 of 3, cached: 3 ✔
+    [e0/f74d79] GRE…imestamped_Bob-output.txt) | 3 of 3, cached: 3 ✔
+    [e2/69e353] GRE…imestamped_Bob-output.txt) | 3 of 3, cached: 3 ✔
+    [76/bbe6e6] REPORT:COUNT_TEXT (Bob)        | 3 of 3, cached: 3 ✔
+    [34/526652] REPORT:SUMMARIZE               | 1 of 1, cached: 1 ✔
 
     Outputs:
 
@@ -334,17 +332,17 @@ nextflow run main.nf -resume --report.input one_sample.csv
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [pensive_plateau] revision: b973113816
+    Launching `main.nf` [marvelous_lamarr] revision: b973113816
 
-    [a0/748675] GRE…DATE_NAME (validating Bob) | 3 of 3, cached: 3 ✔
-    [3c/8b6b53] GRE…W:SAY_HELLO (greeting Bob) | 3 of 3, cached: 3 ✔
-    [2d/cfb439] GRE…ing timestamp to greeting) | 3 of 3, cached: 3 ✔
-    [5b/0b7665] GRE…imestamped_Bob-output.txt) | 3 of 3, cached: 3 ✔
-    [3a/2d138c] GRE…tamped_Charlie-output.txt) | 3 of 3, cached: 3 ✔
-    [02/637ce5] REPORT:COUNT_TEXT (Alice)      | 3 of 3, cached: 3 ✔
-    [bb/cc8fb4] REPORT:SUMMARIZE               | 1 of 1, cached: 1 ✔
+    [c6/8f62b0] GRE…TE_NAME (validating Alice) | 3 of 3, cached: 3 ✔
+    [6e/f636e5] GRE…Y_HELLO (greeting Charlie) | 3 of 3, cached: 3 ✔
+    [b3/24f305] GRE…ing timestamp to greeting) | 3 of 3, cached: 3 ✔
+    [a6/347acb] GRE…estamped_Alice-output.txt) | 3 of 3, cached: 3 ✔
+    [be/70f086] GRE…estamped_Alice-output.txt) | 3 of 3, cached: 3 ✔
+    [76/bbe6e6] REPORT:COUNT_TEXT (Bob)        | 3 of 3, cached: 3 ✔
+    [34/526652] REPORT:SUMMARIZE               | 1 of 1, cached: 1 ✔
 
     Outputs:
 
@@ -406,9 +404,9 @@ nextflow log last -f name,cpus,memory | grep REPORT
 ??? success "Command output"
 
     ```console
-    REPORT:COUNT_TEXT (Bob)	1	-
-    REPORT:COUNT_TEXT (Charlie)	1	-
     REPORT:COUNT_TEXT (Alice)	1	-
+    REPORT:COUNT_TEXT (Charlie)	1	-
+    REPORT:COUNT_TEXT (Bob)	1	-
     REPORT:SUMMARIZE	1	-
     ```
 
@@ -534,18 +532,18 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [ridiculous_descartes] revision: b973113816
+    Launching `main.nf` [distracted_dalembert] revision: b973113816
 
     executor >  local (19)
-    [0c/cc5ab4] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
-    [49/8fd953] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
-    [65/cd1bb4] GRE…ing timestamp to greeting) | 3 of 3 ✔
-    [e9/e29598] GRE…imestamped_Bob-output.txt) | 3 of 3 ✔
-    [3a/dd7b4d] GRE…imestamped_Bob-output.txt) | 3 of 3 ✔
-    [aa/f1bff1] REPORT:COUNT_TEXT (Bob)        | 3 of 3 ✔
-    [ed/2ef2ee] REPORT:SUMMARIZE               | 1 of 1 ✔
+    [af/9b7d53] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
+    [4a/afaa92] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
+    [95/bac194] GRE…ing timestamp to greeting) | 3 of 3 ✔
+    [b3/61282e] GRE…tamped_Charlie-output.txt) | 3 of 3 ✔
+    [fb/ad8f81] GRE…tamped_Charlie-output.txt) | 3 of 3 ✔
+    [ba/75c3d1] REPORT:COUNT_TEXT (Charlie)    | 3 of 3 ✔
+    [25/bce9a2] REPORT:SUMMARIZE               | 1 of 1 ✔
 
     Outputs:
 
@@ -565,24 +563,24 @@ nextflow log last -f name,cpus,memory
 ??? success "Command output"
 
     ```console
-    GREETINGS:GREETING_WORKFLOW:VALIDATE_NAME (validating Bob)	1	-
     GREETINGS:GREETING_WORKFLOW:VALIDATE_NAME (validating Charlie)	1	-
+    GREETINGS:GREETING_WORKFLOW:VALIDATE_NAME (validating Bob)	1	-
     GREETINGS:GREETING_WORKFLOW:VALIDATE_NAME (validating Alice)	1	-
-    GREETINGS:GREETING_WORKFLOW:SAY_HELLO (greeting Bob)	1	-
     GREETINGS:GREETING_WORKFLOW:SAY_HELLO (greeting Charlie)	1	-
+    GREETINGS:GREETING_WORKFLOW:SAY_HELLO (greeting Bob)	1	-
     GREETINGS:GREETING_WORKFLOW:SAY_HELLO (greeting Alice)	1	-
     GREETINGS:GREETING_WORKFLOW:TIMESTAMP_GREETING (adding timestamp to greeting)	1	-
     GREETINGS:GREETING_WORKFLOW:TIMESTAMP_GREETING (adding timestamp to greeting)	1	-
     GREETINGS:GREETING_WORKFLOW:TIMESTAMP_GREETING (adding timestamp to greeting)	1	-
+    GREETINGS:TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (converting timestamped_Bob-output.txt)	1	-
     GREETINGS:TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (converting timestamped_Alice-output.txt)	1	-
     GREETINGS:TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (converting timestamped_Charlie-output.txt)	1	-
-    GREETINGS:TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (converting timestamped_Bob-output.txt)	1	-
+    GREETINGS:TRANSFORM_WORKFLOW:REVERSE_TEXT (reversing UPPER-timestamped_Bob-output.txt)	1	-
     GREETINGS:TRANSFORM_WORKFLOW:REVERSE_TEXT (reversing UPPER-timestamped_Alice-output.txt)	1	-
     GREETINGS:TRANSFORM_WORKFLOW:REVERSE_TEXT (reversing UPPER-timestamped_Charlie-output.txt)	1	-
-    GREETINGS:TRANSFORM_WORKFLOW:REVERSE_TEXT (reversing UPPER-timestamped_Bob-output.txt)	1	-
+    REPORT:COUNT_TEXT (Bob)	1	1 GB
     REPORT:COUNT_TEXT (Alice)	1	1 GB
     REPORT:COUNT_TEXT (Charlie)	1	1 GB
-    REPORT:COUNT_TEXT (Bob)	1	1 GB
     REPORT:SUMMARIZE	2	1 GB
     ```
 

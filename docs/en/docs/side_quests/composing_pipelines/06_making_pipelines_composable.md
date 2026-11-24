@@ -1,5 +1,3 @@
-<!-- TODO(26.10): recapture console output on 26.10 release -->
-
 # Part 6: Making Pipelines Composable
 
 At the end of Part 5, you could set every parameter of both pipelines, from the command line or from config, and you'd brought the report pipeline's process configuration into the composed run.
@@ -92,11 +90,11 @@ nextflow lint pipelines/report
 
     ```console
     Linting Nextflow code..
-    Linting: pipelines/report/conf/modules.config
     Linting: pipelines/report/types.nf
-    Linting: pipelines/report/modules/count_text.nf
-    Linting: pipelines/report/modules/summarize.nf
     Linting: pipelines/report/nextflow.config
+    Linting: pipelines/report/modules/summarize.nf
+    Linting: pipelines/report/modules/count_text.nf
+    Linting: pipelines/report/conf/modules.config
     Linting: pipelines/report/main.nf
     Warn  pipelines/report/modules/summarize.nf:15:14: The use of `projectDir` in a process is discouraged -- input files should be provided as process inputs
     │  15 |     banner=${projectDir}/assets/banner.txt
@@ -263,20 +261,20 @@ nextflow lint main.nf pipelines
     Linting Nextflow code..
     Linting: main.nf
     Linting: pipelines/greetings/types.nf
-    Linting: pipelines/greetings/modules/reverse_text.nf
-    Linting: pipelines/greetings/modules/validate_name.nf
+    Linting: pipelines/greetings/workflows/greeting.nf
+    Linting: pipelines/greetings/workflows/transform.nf
+    Linting: pipelines/greetings/nextflow.config
+    Linting: pipelines/greetings/modules/say_hello_upper.nf
     Linting: pipelines/greetings/modules/say_hello.nf
     Linting: pipelines/greetings/modules/timestamp_greeting.nf
-    Linting: pipelines/greetings/modules/say_hello_upper.nf
-    Linting: pipelines/greetings/nextflow.config
-    Linting: pipelines/greetings/workflows/transform.nf
-    Linting: pipelines/greetings/workflows/greeting.nf
+    Linting: pipelines/greetings/modules/reverse_text.nf
+    Linting: pipelines/greetings/modules/validate_name.nf
     Linting: pipelines/greetings/main.nf
-    Linting: pipelines/report/conf/modules.config
     Linting: pipelines/report/types.nf
-    Linting: pipelines/report/modules/count_text.nf
-    Linting: pipelines/report/modules/summarize.nf
     Linting: pipelines/report/nextflow.config
+    Linting: pipelines/report/modules/summarize.nf
+    Linting: pipelines/report/modules/count_text.nf
+    Linting: pipelines/report/conf/modules.config
     Linting: pipelines/report/main.nf
     Nextflow linting complete!
      ✅ 17 files had no errors
@@ -308,18 +306,18 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [nasty_hilbert] revision: b973113816
+    Launching `main.nf` [distraught_noether] revision: b973113816
 
     executor >  local (1)
-    [29/4af209] GRE…_NAME (validating Charlie) | 3 of 3, cached: 3 ✔
-    [1d/9d5962] GRE…Y_HELLO (greeting Charlie) | 3 of 3, cached: 3 ✔
-    [38/ce3c7d] GRE…ing timestamp to greeting) | 3 of 3, cached: 3 ✔
-    [e9/e29598] GRE…imestamped_Bob-output.txt) | 3 of 3, cached: 3 ✔
-    [ef/66132d] GRE…tamped_Charlie-output.txt) | 3 of 3, cached: 3 ✔
-    [aa/f1bff1] REPORT:COUNT_TEXT (Bob)        | 3 of 3, cached: 3 ✔
-    [98/920867] REPORT:SUMMARIZE               | 1 of 1 ✔
+    [17/fa9e5a] GRE…_NAME (validating Charlie) | 3 of 3, cached: 3 ✔
+    [ca/4df807] GRE…Y_HELLO (greeting Charlie) | 3 of 3, cached: 3 ✔
+    [12/ec3e31] GRE…ing timestamp to greeting) | 3 of 3, cached: 3 ✔
+    [a3/ea73b5] GRE…estamped_Alice-output.txt) | 3 of 3, cached: 3 ✔
+    [aa/34e5cf] GRE…estamped_Alice-output.txt) | 3 of 3, cached: 3 ✔
+    [ba/75c3d1] REPORT:COUNT_TEXT (Charlie)    | 3 of 3, cached: 3 ✔
+    [84/bb185e] REPORT:SUMMARIZE               | 1 of 1 ✔
 
     Outputs:
 
@@ -363,13 +361,13 @@ nextflow -C pipelines/report/nextflow.config run ./pipelines/report --input gree
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `./pipelines/report/main.nf` [nostalgic_meitner] revision: eb8e2580c6
+    Launching `./pipelines/report/main.nf` [curious_crick] revision: eb8e2580c6
 
     executor >  local (4)
-    [37/2bc8ea] COUNT_TEXT (Alice) | 3 of 3 ✔
-    [fa/cca921] SUMMARIZE          | 1 of 1 ✔
+    [cd/baad14] COUNT_TEXT (Bob) | 3 of 3 ✔
+    [51/90a7f3] SUMMARIZE        | 1 of 1 ✔
 
     Outputs:
 

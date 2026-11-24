@@ -1,5 +1,3 @@
-<!-- TODO(26.10): recapture console output on 26.10 release -->
-
 # Part 3: Pipelines as Workflows
 
 At the end of Part 2, your greetings pipeline was a complete, typed unit.
@@ -268,14 +266,14 @@ nextflow lint pipelines/greetings
     ```console
     Linting Nextflow code..
     Linting: pipelines/greetings/types.nf
-    Linting: pipelines/greetings/modules/reverse_text.nf
-    Linting: pipelines/greetings/modules/validate_name.nf
+    Linting: pipelines/greetings/workflows/greeting.nf
+    Linting: pipelines/greetings/workflows/transform.nf
+    Linting: pipelines/greetings/nextflow.config
+    Linting: pipelines/greetings/modules/say_hello_upper.nf
     Linting: pipelines/greetings/modules/say_hello.nf
     Linting: pipelines/greetings/modules/timestamp_greeting.nf
-    Linting: pipelines/greetings/modules/say_hello_upper.nf
-    Linting: pipelines/greetings/nextflow.config
-    Linting: pipelines/greetings/workflows/transform.nf
-    Linting: pipelines/greetings/workflows/greeting.nf
+    Linting: pipelines/greetings/modules/reverse_text.nf
+    Linting: pipelines/greetings/modules/validate_name.nf
     Linting: pipelines/greetings/main.nf
     Nextflow linting complete!
      ✅ 10 files had no errors
@@ -293,40 +291,40 @@ nextflow -C pipelines/greetings/nextflow.config run ./pipelines/greetings --name
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `./pipelines/greetings/main.nf` [kickass_curie] revision: 7c8686ea3f
+    Launching `./pipelines/greetings/main.nf` [boring_knuth] revision: 7c8686ea3f
 
     executor >  local (15)
-    [c0/b81049] GRE…DATE_NAME (validating Bob) | 3 of 3 ✔
-    [3e/935045] GRE…Y_HELLO (greeting Charlie) | 3 of 3 ✔
-    [80/f65bcc] GRE…ing timestamp to greeting) | 3 of 3 ✔
-    [71/0d1c3d] TRA…tamped_Charlie-output.txt) | 3 of 3 ✔
-    [da/c4773b] TRA…tamped_Charlie-output.txt) | 3 of 3 ✔
+    [13/7d07e6] GRE…DATE_NAME (validating Bob) | 3 of 3 ✔
+    [b1/457792] GRE…W:SAY_HELLO (greeting Bob) | 3 of 3 ✔
+    [86/39a4f2] GRE…ing timestamp to greeting) | 3 of 3 ✔
+    [e4/1cdadb] TRA…imestamped_Bob-output.txt) | 3 of 3 ✔
+    [b3/7e9eba] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/composing_pipelines/results_greetings
 
       greetings:
-        - {name: Bob, file: greetings/Bob-output.txt}
-        - {name: Charlie, file: greetings/Charlie-output.txt}
         - {name: Alice, file: greetings/Alice-output.txt}
+        - {name: Charlie, file: greetings/Charlie-output.txt}
+        - {name: Bob, file: greetings/Bob-output.txt}
 
       timestamped:
+        - {name: Charlie, file: timestamped/timestamped_Charlie-output.txt}
         - {name: Bob, file: timestamped/timestamped_Bob-output.txt}
         - {name: Alice, file: timestamped/timestamped_Alice-output.txt}
-        - {name: Charlie, file: timestamped/timestamped_Charlie-output.txt}
 
       upper:
-        - {name: Bob, file: upper/UPPER-timestamped_Bob-output.txt}
-        - {name: Alice, file: upper/UPPER-timestamped_Alice-output.txt}
         - {name: Charlie, file: upper/UPPER-timestamped_Charlie-output.txt}
+        - {name: Alice, file: upper/UPPER-timestamped_Alice-output.txt}
+        - {name: Bob, file: upper/UPPER-timestamped_Bob-output.txt}
 
       reversed:
+        - {name: Charlie, file: reversed/REVERSED-UPPER-timestamped_Charlie-output.txt}
         - {name: Bob, file: reversed/REVERSED-UPPER-timestamped_Bob-output.txt}
         - {name: Alice, file: reversed/REVERSED-UPPER-timestamped_Alice-output.txt}
-        - {name: Charlie, file: reversed/REVERSED-UPPER-timestamped_Charlie-output.txt}
     ```
 
 Nextflow loaded `data/names.csv` into a channel of `Person` records, and the pipeline produced the same greetings as before.
@@ -425,30 +423,30 @@ nextflow run main.nf --names data/names.csv
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [marvelous_mandelbrot] revision: e0f2fe97d8
+    Launching `main.nf` [amazing_pike] revision: e0f2fe97d8
 
     executor >  local (15)
-    [b6/ea7c5d] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
-    [76/68c242] GRE…Y_HELLO (greeting Charlie) | 3 of 3 ✔
-    [67/c2ad32] GRE…ing timestamp to greeting) | 3 of 3 ✔
-    [28/bccb7e] GRE…estamped_Alice-output.txt) | 3 of 3 ✔
-    [90/d2b0e0] GRE…estamped_Alice-output.txt) | 3 of 3 ✔
+    [68/f9c96f] GRE…_NAME (validating Charlie) | 3 of 3 ✔
+    [8e/e9a77a] GRE…W:SAY_HELLO (greeting Bob) | 3 of 3 ✔
+    [94/6c8c97] GRE…ing timestamp to greeting) | 3 of 3 ✔
+    [3a/b26c9e] GRE…imestamped_Bob-output.txt) | 3 of 3 ✔
+    [ae/4dbf94] GRE…imestamped_Bob-output.txt) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/composing_pipelines/results
 
       timestamped:
-        - {name: Bob, file: timestamped/timestamped_Bob-output.txt}
         - {name: Charlie, file: timestamped/timestamped_Charlie-output.txt}
         - {name: Alice, file: timestamped/timestamped_Alice-output.txt}
+        - {name: Bob, file: timestamped/timestamped_Bob-output.txt}
 
       reversed:
-        - {name: Bob, file: reversed/REVERSED-UPPER-timestamped_Bob-output.txt}
         - {name: Charlie, file: reversed/REVERSED-UPPER-timestamped_Charlie-output.txt}
         - {name: Alice, file: reversed/REVERSED-UPPER-timestamped_Alice-output.txt}
+        - {name: Bob, file: reversed/REVERSED-UPPER-timestamped_Bob-output.txt}
     ```
 
 The same 15 tasks ran, but the console truncates their names.
@@ -461,21 +459,21 @@ nextflow log last -f name
 ??? success "Command output"
 
     ```console
-    GREETINGS:GREETING_WORKFLOW:VALIDATE_NAME (validating Bob)
     GREETINGS:GREETING_WORKFLOW:VALIDATE_NAME (validating Alice)
+    GREETINGS:GREETING_WORKFLOW:VALIDATE_NAME (validating Bob)
     GREETINGS:GREETING_WORKFLOW:VALIDATE_NAME (validating Charlie)
-    GREETINGS:GREETING_WORKFLOW:SAY_HELLO (greeting Charlie)
     GREETINGS:GREETING_WORKFLOW:SAY_HELLO (greeting Alice)
+    GREETINGS:GREETING_WORKFLOW:SAY_HELLO (greeting Charlie)
     GREETINGS:GREETING_WORKFLOW:SAY_HELLO (greeting Bob)
     GREETINGS:GREETING_WORKFLOW:TIMESTAMP_GREETING (adding timestamp to greeting)
     GREETINGS:GREETING_WORKFLOW:TIMESTAMP_GREETING (adding timestamp to greeting)
     GREETINGS:GREETING_WORKFLOW:TIMESTAMP_GREETING (adding timestamp to greeting)
-    GREETINGS:TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (converting timestamped_Bob-output.txt)
     GREETINGS:TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (converting timestamped_Charlie-output.txt)
     GREETINGS:TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (converting timestamped_Alice-output.txt)
-    GREETINGS:TRANSFORM_WORKFLOW:REVERSE_TEXT (reversing UPPER-timestamped_Bob-output.txt)
+    GREETINGS:TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (converting timestamped_Bob-output.txt)
     GREETINGS:TRANSFORM_WORKFLOW:REVERSE_TEXT (reversing UPPER-timestamped_Charlie-output.txt)
     GREETINGS:TRANSFORM_WORKFLOW:REVERSE_TEXT (reversing UPPER-timestamped_Alice-output.txt)
+    GREETINGS:TRANSFORM_WORKFLOW:REVERSE_TEXT (reversing UPPER-timestamped_Bob-output.txt)
     ```
 
 Each name now shows all three levels of composition: the pipeline (`GREETINGS`), the workflow (`GREETING_WORKFLOW`) and the process (`VALIDATE_NAME`).
