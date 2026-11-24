@@ -1,0 +1,75 @@
+...@_classes.d2
+grid-rows: 4
+grid-columns: 2
+horizontal-gap: 60
+vertical-gap: 50
+
+nc: "" {
+    class: bare
+    names: "names.csv\n\nMateo,es,squirrel\nRaphael,it,turtle\nCeline,fr,moose" {class: file}
+}
+b1 {class: blank}
+
+wf: "" {
+    class: frame
+    grid-rows: 2
+    grid-columns: 3
+    grid-gap: 40
+    shc: "" {
+    class: bare
+    sh: sayHello {class: process}
+    }
+    txtc: "" {
+    class: bare
+    txt: "*.txt" {class: file}
+    }
+    x1 {class: blank}
+    x2 {class: blank}
+    tg: translateGreeting {class: process}
+    es: "es-*" {class: file}
+    shc.sh -> txtc.txt
+    txtc.txt -> tg
+    tg -> es
+}
+b2 {class: blank}
+
+lc: "" {
+    class: bare
+    grid-rows: 1
+    grid-columns: 2
+    language: "--language es" {class: param}
+    x3 {class: blank; width: 400}
+}
+b3 {class: blank}
+
+bc: "" {
+    class: bare
+    grid-rows: 1
+    grid-columns: 2
+    horizontal-gap: 40
+    batchc: "" {
+    class: bare
+    batch: "--batch trio" {class: param}
+    }
+    cgc: "" {
+    class: bare
+    cg: collectGreetings {class: process}
+    }
+}
+outs: "" {
+    class: bare
+    grid-rows: 2
+    grid-columns: 1
+    grid-gap: 30
+    rep: "trio-es-report.txt\n\nNumber of greetings\nprocessed: 3" {class: file}
+    gr: "trio-es-greetings.txt\n\nHola, Mateo!\nHola, Raphael!\nHola, Celine!" {class: file}
+}
+
+nc.names -> wf
+lc.language -> wf
+wf -> bc.cgc.cg
+bc.batchc.batch -> bc.cgc.cg
+bc.cgc.cg -> outs.rep
+bc.cgc.cg -> outs.gr
+
+(** -> **)[*].style.stroke: "#495057"

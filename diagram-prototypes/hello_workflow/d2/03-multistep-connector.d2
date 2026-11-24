@@ -1,0 +1,49 @@
+...@_classes.d2
+grid-rows: 2
+grid-columns: 1
+vertical-gap: 60
+
+nc: "" {
+    class: bare
+    names: "names.csv\n\nMateo,es,squirrel\nRaphael,it,turtle\nCeline,fr,moose" {class: file}
+}
+
+wf: "" {
+    class: frame
+    grid-rows: 2
+    grid-columns: 3
+    horizontal-gap: 50
+    vertical-gap: 70
+    shc: "" {
+    class: bare
+    grid-rows: 1
+    grid-columns: 2
+    grid-gap: 0
+    stub {class: stub}
+    sh: sayHello {class: process}
+    }
+    so: "sayHello.out" {
+    class: channel
+    label.near: outside-bottom-center
+    grid-rows: 1
+    grid-columns: 3
+    grid-gap: 12
+    a: "Raphael.txt" {class: file}
+    b: "Celine.txt" {class: file}
+    c: "Mateo.txt" {class: file}
+    }
+    x1 {class: blank}
+    x2 {class: blank}
+    tgc: "" {
+    class: bare
+    tg: translateGreeting {class: process}
+    }
+    es: "es-*" {class: file}
+    shc.sh -> so
+    so -> tgc.tg
+    tgc.tg -> es
+}
+
+nc.names -> wf.shc.stub
+
+(** -> **)[*].style.stroke: "#495057"

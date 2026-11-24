@@ -1,0 +1,64 @@
+...@_classes.d2
+grid-rows: 3
+grid-columns: 2
+horizontal-gap: 80
+vertical-gap: 60
+
+nc: "" {
+    class: bare
+    names: "names.csv\n\nMateo,es,squirrel\nRaphael,it,turtle\nCeline,fr,moose" {class: file}
+}
+b1 {class: blank}
+
+wf: "" {
+    class: frame
+    grid-rows: 2
+    grid-columns: 3
+    grid-gap: 40
+    shc: "" {
+    class: bare
+    sh: sayHello {class: process}
+    }
+    txtc: "" {
+    class: bare
+    txt: "*.txt" {class: file}
+    }
+    x1 {class: blank}
+    x2 {class: blank}
+    tg: translateGreeting {class: process}
+    es: "es-*" {class: file}
+    shc.sh -> txtc.txt
+    txtc.txt -> tg
+    tg -> es
+}
+
+pub: "" {
+    class: group
+    grid-rows: 3
+    grid-columns: 1
+    grid-gap: 20
+    p1: "es-Mateo.txt\n\nHola, Mateo!" {class: file}
+    p2: "es-Raphael.txt\n\nHola, Raphael!" {class: file}
+    p3: "es-Celine.txt\n\nHola, Celine!" {class: file}
+}
+
+cgc: "" {
+    class: bare
+    grid-rows: 1
+    grid-columns: 2
+    x3 {class: blank; width: 300}
+    cg: collectGreetings {class: process}
+}
+outc: "" {
+    class: bare
+    out: "batch-es-greetings.txt\n\nHola, Mateo!\nHola, Raphael!\nHola, Celine!" {class: file}
+}
+
+nc.names -> wf
+wf -> pub.p1
+wf -> pub.p2
+wf -> pub.p3
+wf -> cgc.cg
+cgc.cg -> outc.out
+
+(** -> **)[*].style.stroke: "#495057"

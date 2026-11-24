@@ -1,0 +1,38 @@
+...@_classes.d2
+direction: right
+
+coll: "translateGreeting.out.collect()" {
+    class: channel
+    label.near: outside-bottom-center
+    inner: "" {
+    class: frame
+    grid-rows: 1
+    grid-columns: 3
+    grid-gap: 12
+    a: "es-Raphael.txt" {class: file}
+    b: "es-Celine.txt" {class: file}
+    c: "es-Mateo.txt" {class: file}
+    }
+}
+
+batch: "--batch" {class: param}
+language: "--language" {class: param}
+cg: collectGreetings {class: process}
+outfile: "collectGreetings.out.outfile" {
+    class: channel
+    label.near: outside-top-center
+    f: "\${batch_name}-\${language}-greetings.txt\n\nHola, Mateo!\nHola, Raphael!\nHola, Celine!" {class: file}
+}
+report: "collectGreetings.out.report" {
+    class: channel
+    label.near: outside-bottom-center
+    f: "\${batch_name}-\${language}-report.txt\n\nNumber of greetings\nprocessed: \${count_greetings}" {class: file}
+}
+
+coll -> cg
+batch -> cg
+language -> cg
+cg -> outfile
+cg -> report
+
+(** -> **)[*].style.stroke: "#495057"

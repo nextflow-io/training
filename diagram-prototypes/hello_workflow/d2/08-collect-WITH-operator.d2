@@ -1,0 +1,56 @@
+...@_classes.d2
+
+frame: "WITH THE collect() OPERATOR" {
+    style: {fill: "#ffffff"; stroke: "#1e1e1e"; stroke-dash: 3; border-radius: 16; font-size: 20; font-color: "#1971c2"; underline: true}
+    label.near: outside-top-left
+    grid-rows: 2
+    grid-columns: 3
+    horizontal-gap: 80
+    vertical-gap: 90
+    toc: "" {
+    class: bare
+    to: "translateGreeting.out" {
+    class: channel
+    label.near: outside-bottom-center
+    grid-rows: 1
+    grid-columns: 3
+    grid-gap: 12
+    a: "es-Raphael.txt" {class: file}
+    b: "es-Celine.txt" {class: file}
+    c: "es-Mateo.txt" {class: file}
+    }
+    }
+    x1 {class: blank}
+    x2 {class: blank}
+    collc: "" {
+    class: bare
+    coll: "" {
+    class: channel
+    label.near: outside-bottom-center
+    inner: "" {
+        class: frame
+        grid-rows: 1
+        grid-columns: 3
+        grid-gap: 12
+        a: "es-Raphael.txt" {class: file}
+        b: "es-Celine.txt" {class: file}
+        c: "es-Mateo.txt" {class: file}
+    }
+    }
+    }
+    cgc: "single process call" {
+    class: bare
+    label.near: outside-bottom-center
+    cg: "collectGreetings( ... )" {class: process}
+    }
+    outc: "single output" {
+    class: bare
+    label.near: outside-bottom-center
+    out: "batch-es-greetings.txt\n\nHola, Mateo!\nHola, Raphael!\nHola, Celine!" {class: file}
+    }
+    toc.to -> collc.coll: ".collect()"
+    collc.coll -> cgc.cg
+    cgc.cg -> outc.out
+}
+
+(** -> **)[*].style.stroke: "#495057"

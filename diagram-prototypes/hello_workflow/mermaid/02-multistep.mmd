@@ -1,0 +1,37 @@
+%%{init: {"flowchart": {"wrappingWidth": 400, "curve": "basis", "rankSpacing": 40, "nodeSpacing": 30}}}%%
+flowchart LR
+    subgraph left [" "]
+        direction TB
+        names["names.csv<br/><small>Mateo,es,squirrel<br/>Raphael,it,turtle<br/>Celine,fr,moose</small>"]:::file
+        subgraph wf [" "]
+            direction TB
+            subgraph r1 [" "]
+                direction LR
+                sh("sayHello"):::process --> txt["*.txt"]:::file ~~~ g1["translateGreeting"]:::ghost
+            end
+            subgraph r2 [" "]
+                direction LR
+                g2["sayHello"]:::ghost ~~~ tg("translateGreeting"):::process --> es["es-*"]:::file
+            end
+            r1 --> r2
+        end
+        names --> wf
+    end
+
+    subgraph pub [" "]
+        direction TB
+        p1["es-Mateo.txt<br/><small>Hola, Mateo!</small>"]:::file
+        p2["es-Raphael.txt<br/><small>Hola, Raphael!</small>"]:::file
+        p3["es-Celine.txt<br/><small>Hola, Celine!</small>"]:::file
+    end
+
+    left --> p1 & p2 & p3
+
+    classDef process fill:#ffec99,stroke:#1e1e1e,stroke-width:1.5px,color:#1e1e1e
+    classDef file fill:#a5d8ff,stroke:#1e1e1e,stroke-width:1.5px,color:#1e1e1e
+    classDef ghost fill:none,stroke:none,color:transparent
+    style left fill:none,stroke:none
+    style wf fill:#ffffff,stroke:#1e1e1e,stroke-width:1.5px
+    style r1 fill:none,stroke:none
+    style r2 fill:none,stroke:none
+    style pub fill:#f8f9fa,stroke:#adb5bd,stroke-dasharray:6 4

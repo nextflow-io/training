@@ -1,0 +1,35 @@
+%%{init: {"flowchart": {"wrappingWidth": 400, "curve": "basis", "rankSpacing": 40, "nodeSpacing": 30}}}%%
+flowchart LR
+    subgraph frame ["WITHOUT&nbsp;ANY&nbsp;OPERATOR"]
+        direction LR
+        subgraph to ["translateGreeting.out"]
+            direction LR
+            t1["es-Raphael.txt"]:::file ~~~ t2["es-Celine.txt"]:::file ~~~ t3["es-Mateo.txt"]:::file
+        end
+        subgraph calls ["separate process calls"]
+            direction TB
+            c1("collectGreetings( ... )"):::process
+            c2("collectGreetings( ... )"):::process
+            c3("collectGreetings( ... )"):::process
+        end
+        subgraph outs ["separate outputs"]
+            direction TB
+            o1["batch-es-greetings.txt<br/><small>Hola, Mateo!</small>"]:::file
+            o2["batch-es-greetings.txt<br/><small>Hola, Raphael!</small>"]:::file
+            o3["batch-es-greetings.txt<br/><small>Hola, Celine!</small>"]:::file
+        end
+        to --> c1 & c2 & c3
+        c1 --> o1
+        c2 --> o2
+        c3 --> o3
+    end
+
+    classDef process fill:#ffec99,stroke:#1e1e1e,stroke-width:1.5px,color:#1e1e1e
+    classDef file fill:#a5d8ff,stroke:#1e1e1e,stroke-width:1.5px,color:#1e1e1e
+    classDef param fill:#ffffff,stroke:#868e96,stroke-dasharray:4 3,color:#1e1e1e
+    classDef ghost fill:none,stroke:none,color:transparent
+    classDef stub fill:#b2f2bb,stroke:#1e1e1e,stroke-width:1.5px
+    style frame fill:#ffffff,stroke:#1e1e1e,stroke-dasharray:3 3,color:#e03131
+    style to fill:#b2f2bb,stroke:#1e1e1e
+    style calls fill:#f8f9fa,stroke:#adb5bd,stroke-dasharray:6 4
+    style outs fill:none,stroke:none

@@ -1,0 +1,28 @@
+...@_classes.d2
+direction: right
+
+coll: "translateGreeting.out.collect()" {
+    class: channel
+    label.near: outside-bottom-center
+    inner: "" {
+    class: frame
+    grid-rows: 1
+    grid-columns: 3
+    grid-gap: 12
+    a: "es-Raphael.txt" {class: file}
+    b: "es-Celine.txt" {class: file}
+    c: "es-Mateo.txt" {class: file}
+    }
+}
+
+batch: "--batch" {class: param}
+language: "--language" {class: param}
+cg: collectGreetings {class: process}
+out: "\${batch_name}-\${language}-greetings.txt\n\nHola, Mateo!\nHola, Raphael!\nHola, Celine!" {class: file}
+
+coll -> cg
+batch -> cg
+language -> cg
+cg -> out
+
+(** -> **)[*].style.stroke: "#495057"

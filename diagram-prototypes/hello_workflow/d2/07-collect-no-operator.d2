@@ -1,0 +1,40 @@
+...@_classes.d2
+direction: right
+
+frame: "WITHOUT ANY OPERATOR" {
+    style: {fill: "#ffffff"; stroke: "#1e1e1e"; stroke-dash: 3; border-radius: 16; font-size: 20; font-color: "#e03131"; underline: true}
+    label.near: outside-top-left
+    direction: right
+    to: "translateGreeting.out" {
+    class: channel
+    label.near: outside-bottom-center
+    grid-rows: 1
+    grid-columns: 3
+    grid-gap: 12
+    a: "es-Raphael.txt" {class: file}
+    b: "es-Celine.txt" {class: file}
+    c: "es-Mateo.txt" {class: file}
+    }
+    calls: "separate process calls" {
+    class: group
+    label.near: outside-bottom-center
+    c1: "collectGreetings( ... )" {class: process}
+    c2: "collectGreetings( ... )" {class: process}
+    c3: "collectGreetings( ... )" {class: process}
+    }
+    outs: "separate outputs" {
+    class: bare
+    label.near: outside-bottom-center
+    o1: "batch-es-greetings.txt\n\nHola, Mateo!" {class: file}
+    o2: "batch-es-greetings.txt\n\nHola, Raphael!" {class: file}
+    o3: "batch-es-greetings.txt\n\nHola, Celine!" {class: file}
+    }
+    to -> calls.c1
+    to -> calls.c2
+    to -> calls.c3
+    calls.c1 -> outs.o1
+    calls.c2 -> outs.o2
+    calls.c3 -> outs.o3
+}
+
+(** -> **)[*].style.stroke: "#495057"

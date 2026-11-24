@@ -1,0 +1,41 @@
+%%{init: {"flowchart": {"wrappingWidth": 400, "curve": "basis", "rankSpacing": 40, "nodeSpacing": 30}}}%%
+flowchart LR
+    subgraph frame ["WITH&nbsp;THE&nbsp;collect()&nbsp;OPERATOR"]
+        direction LR
+        subgraph col [" "]
+            direction TB
+            subgraph to ["translateGreeting.out"]
+                direction LR
+                t1["es-Raphael.txt"]:::file ~~~ t2["es-Celine.txt"]:::file ~~~ t3["es-Mateo.txt"]:::file
+            end
+            subgraph coll [" "]
+                direction LR
+                subgraph inner [" "]
+                    direction LR
+                    f1["es-Raphael.txt"]:::file ~~~ f2["es-Celine.txt"]:::file ~~~ f3["es-Mateo.txt"]:::file
+                end
+            end
+            to -- ".collect()" --> coll
+        end
+        subgraph single ["single process call"]
+            cg("collectGreetings( ... )"):::process
+        end
+        subgraph sout ["single output"]
+            out["batch-es-greetings.txt<br/><small>Hola, Mateo!<br/>Hola, Raphael!<br/>Hola, Celine!</small>"]:::file
+        end
+        col --> single
+        single --> sout
+    end
+
+    classDef process fill:#ffec99,stroke:#1e1e1e,stroke-width:1.5px,color:#1e1e1e
+    classDef file fill:#a5d8ff,stroke:#1e1e1e,stroke-width:1.5px,color:#1e1e1e
+    classDef param fill:#ffffff,stroke:#868e96,stroke-dasharray:4 3,color:#1e1e1e
+    classDef ghost fill:none,stroke:none,color:transparent
+    classDef stub fill:#b2f2bb,stroke:#1e1e1e,stroke-width:1.5px
+    style frame fill:#ffffff,stroke:#1e1e1e,stroke-dasharray:3 3,color:#1971c2
+    style col fill:none,stroke:none
+    style to fill:#b2f2bb,stroke:#1e1e1e
+    style coll fill:#b2f2bb,stroke:#1e1e1e
+    style inner fill:#ffffff,stroke:#1e1e1e
+    style single fill:none,stroke:none
+    style sout fill:none,stroke:none

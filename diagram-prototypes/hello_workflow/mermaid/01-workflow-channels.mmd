@@ -1,0 +1,48 @@
+%%{init: {"flowchart": {"wrappingWidth": 400, "curve": "basis"}}}%%
+flowchart LR
+
+    subgraph wf [" "]
+        direction LR
+        code["channel.fromPath()<br/>&nbsp;&nbsp;.splitCsv()<br/>&nbsp;&nbsp;.map { row -> row[0] }"]:::code
+        subgraph inch ["input channel"]
+            direction LR
+            v1["Celine"]:::value ~~~ v2["Raphael"]:::value ~~~ v3["Mateo"]:::value
+        end
+        subgraph calls ["process calls"]
+            direction TB
+            sh1("sayHello('Mateo')"):::process
+            sh2("sayHello('Raphael')"):::process
+            sh3("sayHello('Celine')"):::process
+        end
+        subgraph outch ["output channel"]
+            direction LR
+            o1["Raphael.txt"]:::file ~~~ o2["Celine.txt"]:::file ~~~ o3["Mateo.txt"]:::file
+        end
+        code ~~~ inch
+    end
+
+    names["names.csv<br/><small>Mateo,es,squirrel<br/>Raphael,it,turtle<br/>Celine,fr,moose</small>"]:::file
+    names ~~~ code
+
+    subgraph pub ["published outputs"]
+        direction TB
+        p1["Mateo.txt<br/><small>Hello, Mateo!</small>"]:::file
+        p2["Raphael.txt<br/><small>Hello, Raphael!</small>"]:::file
+        p3["Celine.txt<br/><small>Hello, Celine!</small>"]:::file
+    end
+
+    names --> inch
+
+    inch --> sh1 & sh2 & sh3
+    sh1 & sh2 & sh3 --> outch
+    outch --> p1 & p2 & p3
+
+    classDef process fill:#ffec99,stroke:#1e1e1e,stroke-width:1.5px,color:#1e1e1e
+    classDef file fill:#a5d8ff,stroke:#1e1e1e,stroke-width:1.5px,color:#1e1e1e
+    classDef value fill:#ffffff,stroke:#1e1e1e,stroke-width:1px,color:#1e1e1e
+    classDef code fill:none,stroke:none,color:#1e1e1e,font-family:monospace,text-align:left
+    style wf fill:#ffffff,stroke:#1e1e1e,stroke-width:1.5px
+    style inch fill:#b2f2bb,stroke:#1e1e1e
+    style outch fill:#b2f2bb,stroke:#1e1e1e
+    style calls fill:#f8f9fa,stroke:#adb5bd,stroke-dasharray:6 4
+    style pub fill:#ffffff,stroke:none

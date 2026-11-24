@@ -1,0 +1,35 @@
+%%{init: {"flowchart": {"wrappingWidth": 400, "curve": "basis", "rankSpacing": 40, "nodeSpacing": 30}}}%%
+flowchart TB
+    names["names.csv<br/><small>Mateo,es,squirrel<br/>Raphael,it,turtle<br/>Celine,fr,moose</small>"]:::file
+    subgraph wf [" "]
+        direction TB
+        subgraph r1 [" "]
+            direction LR
+            sh("sayHello"):::process --> txt["*.txt"]:::file ~~~ g1["translateGreeting"]:::ghost
+        end
+        subgraph r2 [" "]
+            direction LR
+            g2["sayHello"]:::ghost ~~~ tg("translateGreeting"):::process --> es["es-*"]:::file
+        end
+        r1 --> r2
+    end
+    language(["--language es"]):::param
+    subgraph r3 [" "]
+        direction LR
+        batch(["--batch trio"]):::param --> cg("collectGreetings"):::process
+        cg --> rep["trio-es-report.txt<br/><small>Number of greetings<br/>processed: 3</small>"]:::file
+        cg --> gr["trio-es-greetings.txt<br/><small>Hola, Mateo!<br/>Hola, Raphael!<br/>Hola, Celine!</small>"]:::file
+    end
+    names --> wf
+    language --> wf
+    wf --> r3
+
+    classDef process fill:#ffec99,stroke:#1e1e1e,stroke-width:1.5px,color:#1e1e1e
+    classDef file fill:#a5d8ff,stroke:#1e1e1e,stroke-width:1.5px,color:#1e1e1e
+    classDef param fill:#ffffff,stroke:#868e96,stroke-dasharray:4 3,color:#1e1e1e
+    classDef ghost fill:none,stroke:none,color:transparent
+    classDef stub fill:#b2f2bb,stroke:#1e1e1e,stroke-width:1.5px
+    style wf fill:#ffffff,stroke:#1e1e1e,stroke-width:1.5px
+    style r1 fill:none,stroke:none
+    style r2 fill:none,stroke:none
+    style r3 fill:none,stroke:none

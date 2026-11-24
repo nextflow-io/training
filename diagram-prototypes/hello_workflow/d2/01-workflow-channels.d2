@@ -1,0 +1,58 @@
+...@_classes.d2
+direction: right
+
+names: "names.csv\n\nMateo,es,squirrel\nRaphael,it,turtle\nCeline,fr,moose" {class: file}
+
+wf: "" {
+    class: frame
+    direction: right
+    code: "channel.fromPath()\n  .splitCsv()\n  .map { row -> row[0] }" {class: note; style.font: mono}
+    inch: "input channel" {
+    class: channel
+    label.near: outside-bottom-center
+    grid-rows: 1
+    grid-gap: 12
+    v1: Celine {class: value}
+    v2: Raphael {class: value}
+    v3: Mateo {class: value}
+    }
+    calls: "process calls" {
+    class: group
+    label.near: outside-bottom-center
+    direction: down
+    sh1: "sayHello('Mateo')" {class: process}
+    sh2: "sayHello('Raphael')" {class: process}
+    sh3: "sayHello('Celine')" {class: process}
+    }
+    outch: "output channel" {
+    class: channel
+    label.near: outside-bottom-center
+    grid-rows: 1
+    grid-gap: 12
+    o1: Raphael.txt {class: file}
+    o2: Celine.txt {class: file}
+    o3: Mateo.txt {class: file}
+    }
+    inch -> calls.sh1
+    inch -> calls.sh2
+    inch -> calls.sh3
+    calls.sh1 -> outch
+    calls.sh2 -> outch
+    calls.sh3 -> outch
+}
+
+pub: "published outputs" {
+    style: {fill: transparent; stroke: transparent; font-size: 15}
+    label.near: outside-bottom-center
+    direction: down
+    p1: "Mateo.txt\n\nHello, Mateo!" {class: file}
+    p2: "Raphael.txt\n\nHello, Raphael!" {class: file}
+    p3: "Celine.txt\n\nHello, Celine!" {class: file}
+}
+
+names -> wf.inch
+wf.outch -> pub.p1
+wf.outch -> pub.p2
+wf.outch -> pub.p3
+
+(** -> **)[*].style.stroke: "#495057"
