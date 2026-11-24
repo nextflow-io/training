@@ -693,8 +693,8 @@ When we use a process to apply a transformation to each of the elements in a cha
 To demonstrate, we'll add a new step to our pipeline that collects all the translated greetings produced by the `translateGreeting` process and writes them out to a single file.
 We'll also name that file after a batch name provided as a parameter and after the language, so that the results of different batches of inputs, and of different languages, don't overwrite each other.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.drawio.svg"
 </figure>
 
 Not to spoil the surprise, but this is going to involve a very useful operator.
@@ -1206,8 +1206,8 @@ You know how to collect outputs from a batch of process calls and feed them into
 
 To recap, this is what you've built so far:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect.drawio.svg"
 </figure>
 
 ### What's next?
