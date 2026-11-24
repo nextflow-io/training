@@ -28,6 +28,25 @@ The VSCode application is technically optional but we strongly recommend that yo
 
 The Nextflow documentation manual provides instructions for installing these dependencies under [Environment setup](https://www.nextflow.io/docs/latest/developer-env.html).
 
+!!! tip "Run containers as your own user"
+
+    By default, a Docker container runs as the user it was built with, which is often `root`.
+    On Linux, any files it writes are then owned by `root`, and you may not be able to modify or delete them without `sudo`.
+
+    To avoid this, run containers with your own user and group IDs by adding `-u $(id -u):$(id -g)`:
+
+    ```bash
+    docker run --rm -it -u $(id -u):$(id -g) <image>
+    ```
+
+    To do the same for the containers Nextflow runs, add this to your Nextflow configuration (for example `~/.nextflow/config`):
+
+    ```groovy
+    docker.runOptions = '-u $(id -u):$(id -g)'
+    ```
+
+    The training environment provided through GitHub Codespaces and devcontainers doesn't need this.
+
 ## Nextflow and nf-core tools
 
 You will need to install Nextflow itself, plus the nf-core tools, as detailed in the articles linked below:
