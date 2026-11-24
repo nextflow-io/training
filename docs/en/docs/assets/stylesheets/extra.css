@@ -69,7 +69,8 @@
 
 /* Dark mode figures */
 body[data-md-color-scheme="slate"] figure img,
-body[data-md-color-scheme="slate"] .excalidraw svg {
+body[data-md-color-scheme="slate"] .excalidraw svg,
+body[data-md-color-scheme="slate"] .drawio svg {
   filter: invert(100%) hue-rotate(180deg);
 }
 .excalidraw svg rect {

@@ -1458,8 +1458,8 @@ Open it to verify that the workflow correctly reported the count of greetings th
     Number of greetings processed: 3
     ```
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-4-way.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-4-way.drawio.svg"
 </figure>
 
 Feel free to try the workflow on more names, for example with the `data/names-extended.csv` file, which adds two names to the original three.
