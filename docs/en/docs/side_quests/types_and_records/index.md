@@ -1,5 +1,3 @@
-<!-- TODO(26.10): recapture console output on 26.10 release -->
-
 # Types and Records
 
 When you're developing a pipeline, most of the data flowing through your channels has no declared shape.
@@ -201,14 +199,14 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [high_becquerel] revision: 6d1746eb92
+    Launching `main.nf` [drunk_sammet] revision: 6d1746eb92
 
     executor >  local (9)
-    [20/8b3387] SAY_HELLO (dieter) | 4 of 4 ✔
-    [0d/e1cc86] SHOUT (bruno)      | 4 of 4 ✔
-    [46/69d139] COLLECT_GREETINGS  | 1 of 1 ✔
+    [16/925f86] SAY_HELLO (dieter) | 4 of 4 ✔
+    [43/61867a] SHOUT (dieter)     | 4 of 4 ✔
+    [c7/b7a415] COLLECT_GREETINGS  | 1 of 1 ✔
 
     Outputs:
 
@@ -216,15 +214,15 @@ nextflow run main.nf
 
       greetings:
         - [{id: bruno, name: Bruno, greeting: Bonjour}, greetings/bruno.txt]
+        - [{id: chiara, name: Chiara, greeting: Ciao}, greetings/chiara.txt]
         - [{id: alice, name: Alice, greeting: Hello}, greetings/alice.txt]
         - [{id: dieter, name: Dieter, greeting: Hallo}, greetings/dieter.txt]
-        - [{id: chiara, name: Chiara, greeting: Ciao}, greetings/chiara.txt]
 
       shouted:
-        - [{id: dieter, name: Dieter, greeting: Hallo}, shouted/dieter-shouted.txt]
-        - [{id: alice, name: Alice, greeting: Hello}, shouted/alice-shouted.txt]
         - [{id: chiara, name: Chiara, greeting: Ciao}, shouted/chiara-shouted.txt]
         - [{id: bruno, name: Bruno, greeting: Bonjour}, shouted/bruno-shouted.txt]
+        - [{id: alice, name: Alice, greeting: Hello}, shouted/alice-shouted.txt]
+        - [{id: dieter, name: Dieter, greeting: Hallo}, shouted/dieter-shouted.txt]
 
       collected: COLLECTED-batch.txt
     ```
@@ -264,30 +262,30 @@ nextflow run main.nf --input data/people_v2.csv -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [reverent_salas] revision: 6d1746eb92
+    Launching `main.nf` [shrivelled_bassi] revision: 6d1746eb92
 
     executor >  local (9)
-    [c1/30afc6] SAY_HELLO (chiara) | 4 of 4 ✔
-    [f3/eeeb9c] SHOUT (chiara)     | 4 of 4 ✔
-    [e9/375412] COLLECT_GREETINGS  | 1 of 1 ✔
+    [22/a6f716] SAY_HELLO (chiara) | 4 of 4 ✔
+    [bd/157ac6] SHOUT (dieter)     | 4 of 4 ✔
+    [bc/cdbeb1] COLLECT_GREETINGS  | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/types_and_records/results
 
       greetings:
+        - [{id: alice, name: Alice, greeting: null}, greetings/alice.txt]
+        - [{id: bruno, name: Bruno, greeting: null}, greetings/bruno.txt]
         - [{id: chiara, name: Chiara, greeting: null}, greetings/chiara.txt]
         - [{id: dieter, name: Dieter, greeting: null}, greetings/dieter.txt]
-        - [{id: bruno, name: Bruno, greeting: null}, greetings/bruno.txt]
-        - [{id: alice, name: Alice, greeting: null}, greetings/alice.txt]
 
       shouted:
-        - [{id: bruno, name: Bruno, greeting: null}, shouted/bruno-shouted.txt]
-        - [{id: dieter, name: Dieter, greeting: null}, shouted/dieter-shouted.txt]
         - [{id: alice, name: Alice, greeting: null}, shouted/alice-shouted.txt]
         - [{id: chiara, name: Chiara, greeting: null}, shouted/chiara-shouted.txt]
+        - [{id: bruno, name: Bruno, greeting: null}, shouted/bruno-shouted.txt]
+        - [{id: dieter, name: Dieter, greeting: null}, shouted/dieter-shouted.txt]
 
       collected: COLLECTED-batch.txt
     ```
@@ -363,13 +361,14 @@ nextflow run main.nf -resume
 ??? failure "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [elated_almeida] revision: 6d1746eb92
+    Launching `main.nf` [festering_poincare] revision: 6d1746eb92
 
     Error modules/collect_greetings.nf:9:5: Invalid input declaration in typed process
     │   9 |     path input_files
     ╰     |     ^^^^^^^^^^^^^^^^
+
 
     ERROR ~ Script compilation failed
 
@@ -435,30 +434,30 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [compassionate_hoover] revision: 6d1746eb92
+    Launching `main.nf` [adoring_carson] revision: 6d1746eb92
 
     executor >  local (1)
-    [dc/0c7e7d] SAY_HELLO (alice) | 4 of 4, cached: 4 ✔
-    [5b/ed0d3a] SHOUT (alice)     | 4 of 4, cached: 4 ✔
-    [72/6ff8b9] COLLECT_GREETINGS | 1 of 1 ✔
+    [dd/999a23] SAY_HELLO (bruno) | 4 of 4, cached: 4 ✔
+    [aa/58dbbf] SHOUT (bruno)     | 4 of 4, cached: 4 ✔
+    [46/8a74c7] COLLECT_GREETINGS | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/types_and_records/results
 
       greetings:
+        - [{id: bruno, name: Bruno, greeting: Bonjour}, greetings/bruno.txt]
         - [{id: alice, name: Alice, greeting: Hello}, greetings/alice.txt]
         - [{id: chiara, name: Chiara, greeting: Ciao}, greetings/chiara.txt]
         - [{id: dieter, name: Dieter, greeting: Hallo}, greetings/dieter.txt]
-        - [{id: bruno, name: Bruno, greeting: Bonjour}, greetings/bruno.txt]
 
       shouted:
-        - [{id: dieter, name: Dieter, greeting: Hallo}, shouted/dieter-shouted.txt]
-        - [{id: alice, name: Alice, greeting: Hello}, shouted/alice-shouted.txt]
         - [{id: chiara, name: Chiara, greeting: Ciao}, shouted/chiara-shouted.txt]
+        - [{id: dieter, name: Dieter, greeting: Hallo}, shouted/dieter-shouted.txt]
         - [{id: bruno, name: Bruno, greeting: Bonjour}, shouted/bruno-shouted.txt]
+        - [{id: alice, name: Alice, greeting: Hello}, shouted/alice-shouted.txt]
 
       collected: COLLECTED-batch.txt
     ```
@@ -597,15 +596,14 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [dreamy_shockley] revision: 7564fcec8f
+    Launching `main.nf` [hopeful_shannon] revision: 7564fcec8f
 
     WARN: Type checking found 1 error(s) -- run `nextflow lint` to inspect them
-
-    [40/395cbd] SAY_HELLO (chiara) | 4 of 4, cached: 4 ✔
-    [5b/ed0d3a] SHOUT (alice)      | 4 of 4, cached: 4 ✔
-    [72/6ff8b9] COLLECT_GREETINGS  | 1 of 1, cached: 1 ✔
+    [b2/106053] SAY_HELLO (alice) | 4 of 4, cached: 4 ✔
+    [aa/58dbbf] SHOUT (bruno)     | 4 of 4, cached: 4 ✔
+    [46/8a74c7] COLLECT_GREETINGS | 1 of 1, cached: 1 ✔
 
     Outputs:
 
@@ -613,15 +611,15 @@ nextflow run main.nf -resume
 
       greetings:
         - [{id: chiara, name: Chiara, greeting: Ciao}, greetings/chiara.txt]
-        - [{id: bruno, name: Bruno, greeting: Bonjour}, greetings/bruno.txt]
         - [{id: alice, name: Alice, greeting: Hello}, greetings/alice.txt]
+        - [{id: bruno, name: Bruno, greeting: Bonjour}, greetings/bruno.txt]
         - [{id: dieter, name: Dieter, greeting: Hallo}, greetings/dieter.txt]
 
       shouted:
-        - [{id: dieter, name: Dieter, greeting: Hallo}, shouted/dieter-shouted.txt]
-        - [{id: alice, name: Alice, greeting: Hello}, shouted/alice-shouted.txt]
-        - [{id: bruno, name: Bruno, greeting: Bonjour}, shouted/bruno-shouted.txt]
         - [{id: chiara, name: Chiara, greeting: Ciao}, shouted/chiara-shouted.txt]
+        - [{id: dieter, name: Dieter, greeting: Hallo}, shouted/dieter-shouted.txt]
+        - [{id: bruno, name: Bruno, greeting: Bonjour}, shouted/bruno-shouted.txt]
+        - [{id: alice, name: Alice, greeting: Hello}, shouted/alice-shouted.txt]
 
       collected: COLLECTED-batch.txt
     ```
@@ -658,12 +656,11 @@ nextflow run main.nf --input data/people_v2.csv -resume
 ??? failure "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [sharp_booth] revision: 7564fcec8f
+    Launching `main.nf` [hungry_austin] revision: 7564fcec8f
 
     WARN: Type checking found 1 error(s) -- run `nextflow lint` to inspect them
-
     Invalid record in samplesheet 'data/people_v2.csv' for parameter `input` -- Input record [id:alice, name:Alice, salutation:Hello] is missing field 'greeting' required by record type 'Person'
     ```
 
@@ -701,31 +698,30 @@ nextflow run main.nf --input data/people_v2.csv -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [peaceful_venter] revision: 7564fcec8f
+    Launching `main.nf` [silly_leibniz] revision: 7564fcec8f
 
     WARN: Type checking found 1 error(s) -- run `nextflow lint` to inspect them
-
-    [40/395cbd] SAY_HELLO (chiara) | 4 of 4, cached: 4 ✔
-    [5b/ed0d3a] SHOUT (alice)      | 4 of 4, cached: 4 ✔
-    [72/6ff8b9] COLLECT_GREETINGS  | 1 of 1, cached: 1 ✔
+    [16/925f86] SAY_HELLO (dieter) | 4 of 4, cached: 4 ✔
+    [5a/3614e5] SHOUT (chiara)     | 4 of 4, cached: 4 ✔
+    [46/8a74c7] COLLECT_GREETINGS  | 1 of 1, cached: 1 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/types_and_records/results
 
       greetings:
-        - [{id: bruno, name: Bruno, greeting: Bonjour}, greetings/bruno.txt]
-        - [{id: alice, name: Alice, greeting: Hello}, greetings/alice.txt]
-        - [{id: dieter, name: Dieter, greeting: Hallo}, greetings/dieter.txt]
         - [{id: chiara, name: Chiara, greeting: Ciao}, greetings/chiara.txt]
+        - [{id: dieter, name: Dieter, greeting: Hallo}, greetings/dieter.txt]
+        - [{id: alice, name: Alice, greeting: Hello}, greetings/alice.txt]
+        - [{id: bruno, name: Bruno, greeting: Bonjour}, greetings/bruno.txt]
 
       shouted:
         - [{id: bruno, name: Bruno, greeting: Bonjour}, shouted/bruno-shouted.txt]
         - [{id: alice, name: Alice, greeting: Hello}, shouted/alice-shouted.txt]
-        - [{id: chiara, name: Chiara, greeting: Ciao}, shouted/chiara-shouted.txt]
         - [{id: dieter, name: Dieter, greeting: Hallo}, shouted/dieter-shouted.txt]
+        - [{id: chiara, name: Chiara, greeting: Ciao}, shouted/chiara-shouted.txt]
 
       collected: COLLECTED-batch.txt
     ```
@@ -896,14 +892,14 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [intergalactic_ride] revision: 303038e3ad
+    Launching `main.nf` [dreamy_kimura] revision: 303038e3ad
 
     executor >  local (9)
-    [75/49abcf] SAY_HELLO (chiara) | 4 of 4 ✔
-    [ce/cd2082] SHOUT (alice)      | 4 of 4 ✔
-    [30/f5d6d9] COLLECT_GREETINGS  | 1 of 1 ✔
+    [bb/907695] SAY_HELLO (alice) | 4 of 4 ✔
+    [74/a5980b] SHOUT (alice)     | 4 of 4 ✔
+    [58/41d237] COLLECT_GREETINGS | 1 of 1 ✔
 
     Outputs:
 
@@ -917,8 +913,8 @@ nextflow run main.nf -resume
 
       shouted:
         - {id: chiara, shouted: shouted/chiara-shouted.txt}
-        - {id: bruno, shouted: shouted/bruno-shouted.txt}
         - {id: dieter, shouted: shouted/dieter-shouted.txt}
+        - {id: bruno, shouted: shouted/bruno-shouted.txt}
         - {id: alice, shouted: shouted/alice-shouted.txt}
 
       collected: COLLECTED-batch.txt
@@ -1091,30 +1087,30 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [cranky_cuvier] revision: f00616cc96
+    Launching `main.nf` [spontaneous_waddington] revision: f00616cc96
 
     executor >  local (9)
-    [dd/c5939f] GREET:SAY_HELLO (dieter) | 4 of 4 ✔
-    [e4/0295eb] GREET:SHOUT (alice)      | 4 of 4 ✔
-    [60/860f5e] COLLECT_GREETINGS        | 1 of 1 ✔
+    [e4/430ef5] GREET:SAY_HELLO (bruno)  | 4 of 4 ✔
+    [9a/7887fd] GREET:SHOUT (bruno)      | 4 of 4 ✔
+    [83/47caa4] COLLECT_GREETINGS        | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/types_and_records/results
 
       greetings:
+        - {name: Dieter, id: dieter, greeting: Hallo, greeting_file: greetings/dieter.txt}
         - {name: Alice, id: alice, greeting: Hello, greeting_file: greetings/alice.txt}
         - {name: Chiara, id: chiara, greeting: Ciao, greeting_file: greetings/chiara.txt}
         - {name: Bruno, id: bruno, greeting: Bonjour, greeting_file: greetings/bruno.txt}
-        - {name: Dieter, id: dieter, greeting: Hallo, greeting_file: greetings/dieter.txt}
 
       shouted:
-        - {id: bruno, shouted: shouted/bruno-shouted.txt}
-        - {id: chiara, shouted: shouted/chiara-shouted.txt}
         - {id: dieter, shouted: shouted/dieter-shouted.txt}
+        - {id: chiara, shouted: shouted/chiara-shouted.txt}
         - {id: alice, shouted: shouted/alice-shouted.txt}
+        - {id: bruno, shouted: shouted/bruno-shouted.txt}
 
       collected: COLLECTED-batch.txt
     ```
@@ -1220,30 +1216,30 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.09.1-edge
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [desperate_cantor] revision: 9f57d677f2
+    Launching `main.nf` [sick_kowalevski] revision: 9f57d677f2
 
     executor >  local (1)
-    [59/919495] GREET:SAY_HELLO (alice) | 4 of 4, cached: 4 ✔
-    [8c/19b40a] GREET:SHOUT (dieter)    | 4 of 4, cached: 4 ✔
-    [d4/0d1ca4] GREET:COLLECT_GREETINGS | 1 of 1 ✔
+    [84/d30449] GREET:SAY_HELLO (dieter) | 4 of 4, cached: 4 ✔
+    [66/13c5da] GREET:SHOUT (alice)      | 4 of 4, cached: 4 ✔
+    [48/3007b8] GREET:COLLECT_GREETINGS  | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/types_and_records/results
 
       greetings:
-        - {name: Bruno, id: bruno, greeting: Bonjour, greeting_file: greetings/bruno.txt}
         - {name: Chiara, id: chiara, greeting: Ciao, greeting_file: greetings/chiara.txt}
-        - {name: Dieter, id: dieter, greeting: Hallo, greeting_file: greetings/dieter.txt}
         - {name: Alice, id: alice, greeting: Hello, greeting_file: greetings/alice.txt}
+        - {name: Bruno, id: bruno, greeting: Bonjour, greeting_file: greetings/bruno.txt}
+        - {name: Dieter, id: dieter, greeting: Hallo, greeting_file: greetings/dieter.txt}
 
       shouted:
+        - {id: bruno, shouted: shouted/bruno-shouted.txt}
         - {id: chiara, shouted: shouted/chiara-shouted.txt}
         - {id: dieter, shouted: shouted/dieter-shouted.txt}
         - {id: alice, shouted: shouted/alice-shouted.txt}
-        - {id: bruno, shouted: shouted/bruno-shouted.txt}
 
       collected: COLLECTED-batch.txt
     ```
@@ -1259,9 +1255,9 @@ cat results/COLLECTED-batch.txt
 
     ```console
     CIAO, CHIARA!
-    BONJOUR, BRUNO!
     HALLO, DIETER!
     HELLO, ALICE!
+    BONJOUR, BRUNO!
     ```
 
 The order of the lines may differ in your run, since the greetings are collected in whatever order the `SHOUT` tasks finish.
@@ -1314,10 +1310,10 @@ nextflow lint .
     ```console
     Linting Nextflow code..
     Linting: types.nf
-    Linting: modules/shout.nf
-    Linting: modules/say_hello.nf
-    Linting: modules/collect_greetings.nf
     Linting: nextflow.config
+    Linting: modules/say_hello.nf
+    Linting: modules/shout.nf
+    Linting: modules/collect_greetings.nf
     Linting: main.nf
     Error modules/say_hello.nf:19:13: Unrecognized property `greting` for type Person
     │  19 |     echo '${person.greting}, ${person.name}!' > ${person.id}.txt
@@ -1371,10 +1367,10 @@ nextflow lint .
     ```console
     Linting Nextflow code..
     Linting: types.nf
-    Linting: modules/shout.nf
-    Linting: modules/say_hello.nf
-    Linting: modules/collect_greetings.nf
     Linting: nextflow.config
+    Linting: modules/say_hello.nf
+    Linting: modules/shout.nf
+    Linting: modules/collect_greetings.nf
     Linting: main.nf
     Error main.nf:33:17: Argument with type Channel<String> is not compatible with parameter of type Channel<Person>
     │  33 |     res = GREET(channel.of('Alice', 'Bruno'), channel.value(params.bat
@@ -1412,10 +1408,10 @@ nextflow lint .
     ```console
     Linting Nextflow code..
     Linting: types.nf
-    Linting: modules/shout.nf
-    Linting: modules/say_hello.nf
-    Linting: modules/collect_greetings.nf
     Linting: nextflow.config
+    Linting: modules/say_hello.nf
+    Linting: modules/shout.nf
+    Linting: modules/collect_greetings.nf
     Linting: main.nf
     Nextflow linting complete!
      ✅ 6 files had no errors
