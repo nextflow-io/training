@@ -187,6 +187,7 @@ The `SEQTK_TRIM` process no longer appears in the output.
 
     To set an integer parameter, use a `-params-file` as shown above, or set it in a config file.
     Boolean parameters like `skip_trim` can be set on the command line, either as a bare flag (`--skip_trim`) or as `--skip_trim true`, since the values `true` and `false` are typed as booleans.
+    This applies from Nextflow 26.10 onward: on earlier versions, boolean values on the command line are also typed as strings and fail validation, so set them in a params file instead.
     String and file-path parameters can also be set directly on the command line.
     This course uses this pattern throughout for integer parameters.
 
