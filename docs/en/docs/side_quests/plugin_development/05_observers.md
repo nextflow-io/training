@@ -147,7 +147,7 @@ Take a look at it:
 cat nf-greeting/src/main/groovy/training/plugin/GreetingFactory.groovy
 ```
 
-```groovy title="Output" hl_lines="25 27-29"
+```groovy title="Output" hl_lines="29 31-33"
 /*
  * Copyright 2025, Seqera Labs
  *
@@ -171,6 +171,10 @@ import nextflow.Session
 import nextflow.trace.TraceObserver
 import nextflow.trace.TraceObserverFactory
 
+/**
+ * Implements a factory object required to create
+ * the {@link GreetingObserver} instance.
+ */
 @CompileStatic
 class GreetingFactory implements TraceObserverFactory {
 
@@ -250,11 +254,12 @@ You should see "✓ Task completed!" printed five times (once per task), interle
 
 ```console title="Output (partial)"
 ...
-[9b/df7630] Submitted process > SAY_HELLO (4)
-Decorated: *** Hello ***
+[2f/8687bb] Submitted process > SAY_HELLO (3)
 ✓ Task completed!
+Decorated: *** Bonjour ***
+[90/742702] Submitted process > SAY_HELLO (5)
 ✓ Task completed!
-Decorated: *** Hola ***
+Decorated: *** Ciao ***
 ✓ Task completed!
 ...
 Pipeline complete! 👋
@@ -331,29 +336,29 @@ nextflow run greet.nf -ansi-log false
 ??? example "Output"
 
     ```console
-    N E X T F L O W  ~  version 26.04.4
-    Launching `greet.nf` [pensive_engelbart] - revision: bef1bea9f0
+    N E X T F L O W  ~  version 26.10.7
+    Launching `greet.nf` [suspicious_gilbert] - revision: bef1bea9f0
     Pipeline is starting! 🚀
     Reversed: olleH
     Reversed: ruojnoB
     Reversed: aloH
     Reversed: oaiC
     Reversed: ollaH
-    [be/bd8e72] Submitted process > SAY_HELLO (2)
-    [5b/d24c2b] Submitted process > SAY_HELLO (1)
-    [14/1f9dbe] Submitted process > SAY_HELLO (3)
-    Decorated: *** Bonjour ***
+    [4f/af5498] Submitted process > SAY_HELLO (1)
+    [7b/bdad9f] Submitted process > SAY_HELLO (5)
+    [01/79859f] Submitted process > SAY_HELLO (4)
+    [0b/7872eb] Submitted process > SAY_HELLO (3)
+    [f7/0f23a3] Submitted process > SAY_HELLO (2)
+    Decorated: *** Hallo ***
     Decorated: *** Hello ***
-    [85/a6b3ad] Submitted process > SAY_HELLO (4)
     📊 Tasks completed so far: 1
     📊 Tasks completed so far: 2
-    Decorated: *** Hola ***
     📊 Tasks completed so far: 3
     Decorated: *** Ciao ***
-    [3c/be6686] Submitted process > SAY_HELLO (5)
+    Decorated: *** Hola ***
     📊 Tasks completed so far: 4
-    Decorated: *** Hallo ***
     📊 Tasks completed so far: 5
+    Decorated: *** Bonjour ***
     Pipeline complete! 👋
     📈 Final task count: 5
     ```
@@ -457,13 +462,13 @@ You should see "Published:" messages for each output file alongside the task cou
 
 ```console title="Output (partial)"
 ...
+📁 Published: greeting.txt
+📁 Published: greeting.txt
 📊 Tasks completed so far: 1
-📁 Published: greeting.txt
 📊 Tasks completed so far: 2
-📁 Published: greeting.txt
 ...
-📈 Final task count: 5
 Pipeline complete! 👋
+📈 Final task count: 5
 ```
 
 The `onFilePublish` method fires each time Nextflow publishes a file to the `results` directory.

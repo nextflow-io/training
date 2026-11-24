@@ -176,9 +176,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [wise_venter] revision: 9211c186b2
+    Launching `main.nf` [pensive_cantor] revision: 9211c186b2
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
@@ -232,9 +232,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [high_knuth] revision: bc0db74ccc
+    Launching `main.nf` [festering_sanger] revision: bc0db74ccc
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
@@ -295,9 +295,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [shrivelled_rubens] revision: 636aae17ff
+    Launching `main.nf` [magical_jang] revision: 83aa47f3ad
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
@@ -338,17 +338,17 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [elated_jepsen] revision: c96ba8f734
+    Launching `main.nf` [kickass_hodgkin] revision: b36ad08dc1
 
     Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-    Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-    Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
     Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
     Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
     Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
     Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
@@ -391,17 +391,17 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [exotic_bassi] revision: c96ba8f734
+    Launching `main.nf` [angry_goldberg] revision: b36ad08dc1
 
     Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
     Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
     Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
     ```
 
@@ -446,17 +446,17 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [compassionate_monod] revision: 3132715893
+    Launching `main.nf` [determined_cantor] revision: 752df62831
 
+    Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     Normal sample: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+    Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
     Normal sample: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+    Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
     Normal sample: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
     Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-    Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
     Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
@@ -504,9 +504,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [desperate_shaw] revision: 5508db4b8b
+    Launching `main.nf` [fabulous_brown] revision: 099da5eb1d
 
     [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -570,9 +570,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [lonely_solvay] revision: 3c97c335d2
+    Launching `main.nf` [cheeky_keller] revision: 9cbe502dbb
 
     [[patientA, 1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [[patientA, 2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -619,9 +619,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [scruffy_swanson] revision: a8478c9d0a
+    Launching `main.nf` [elated_jepsen] revision: 036f6b9b99
 
     [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -706,9 +706,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [admiring_turing] revision: 06c4cbbb2e
+    Launching `main.nf` [cranky_bernard] revision: cb35edb95b
 
     [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
@@ -770,9 +770,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [scruffy_tuckerman] revision: 791ad3c1fb
+    Launching `main.nf` [exotic_brazil] revision: 359b44869c
 
     [[id:patientA, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
@@ -811,9 +811,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [intergalactic_lagrange] revision: 8c8750a19d
+    Launching `main.nf` [nasty_babbage] revision: 0ed747b492
 
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
@@ -889,9 +889,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [lethal_northcutt] revision: 09667ddd59
+    Launching `main.nf` [astonishing_shirley] revision: 66696c6ae7
 
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr1]
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr2]
@@ -971,9 +971,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [hungry_engelbart] revision: 45db6a7dd7
+    Launching `main.nf` [happy_kilby] revision: 8dc201a27e
 
     [[id:patientA, repeat:1, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, repeat:1, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
@@ -1072,9 +1072,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [stupefied_kirch] revision: c5bd1a7c31
+    Launching `main.nf` [stoic_murdock] revision: 1af1c00c91
 
     [[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
@@ -1136,9 +1136,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [soggy_borg] revision: cc057d5f49
+    Launching `main.nf` [silly_nightingale] revision: fdcc03bf0e
 
     [[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
     [[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]

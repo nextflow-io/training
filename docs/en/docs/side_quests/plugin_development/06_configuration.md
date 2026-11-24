@@ -95,12 +95,13 @@ The build fails:
 
 ```console
 > Task :compileGroovy FAILED
-GreetingExtension.groovy: 30: [Static type checking] - The variable [prefix] is undeclared.
+startup failed:
+/workspaces/training/side-quests/plugin_development/nf-greeting/src/main/groovy/training/plugin/GreetingExtension.groovy: 30: [Static type checking] - The variable [prefix] is undeclared.
  @ line 30, column 9.
            prefix = session.config.navigate('greeting.prefix', '***') as String
            ^
 
-GreetingExtension.groovy: 31: [Static type checking] - The variable [suffix] is undeclared.
+/workspaces/training/side-quests/plugin_development/nf-greeting/src/main/groovy/training/plugin/GreetingExtension.groovy: 31: [Static type checking] - The variable [suffix] is undeclared.
 ```
 
 In Groovy (and Java), you must _declare_ a variable before using it.
@@ -182,8 +183,8 @@ nextflow run greet.nf -ansi-log false
 ```
 
 ```console title="Output (partial)"
-Decorated: >>> Hello <<<
-Decorated: >>> Bonjour <<<
+Decorated: >>> Hola <<<
+Decorated: >>> Hallo <<<
 ...
 ```
 
@@ -380,6 +381,7 @@ import nextflow.script.dsl.Description
  *     }
  */
 @ScopeName('greeting')                       // (1)!
+@Description('Options for the nf-greeting plugin')
 class GreetingConfig implements ConfigScope { // (2)!
 
     GreetingConfig() {}
@@ -414,7 +416,7 @@ Key points:
 - **`@ScopeName('greeting')`**: Maps to the `greeting { }` block in config
 - **`implements ConfigScope`**: Required interface for config classes
 - **`@ConfigOption`**: Each field becomes a configuration option
-- **`@Description`**: Documents each option for language server support (imported from `nextflow.script.dsl`)
+- **`@Description`**: Documents the scope and each option for language server support (imported from `nextflow.script.dsl`). The class-level `@Description` is required: without it, the build fails when it generates the plugin's config spec.
 - **Constructors**: Both no-arg and Map constructors are needed
 
 ### 3.2. Register the config class

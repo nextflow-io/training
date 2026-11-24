@@ -17,6 +17,7 @@ import nextflow.script.dsl.Description
  *     }
  */
 @ScopeName('greeting')
+@Description('Options for the nf-greeting plugin')
 class GreetingConfig implements ConfigScope {
 
     GreetingConfig() {}

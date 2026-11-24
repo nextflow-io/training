@@ -194,27 +194,27 @@ nextflow run main.nf
 ```
 
 ```console title="Result of running the workflow"
- N E X T F L O W   ~  version 26.04.4
+ N E X T F L O W   ~  version 26.10.7
 
-Launching `main.nf` [trusting_mendel] revision: 405c90f891
+Launching `main.nf` [high_kalam] revision: 59c6cf6661
 
 executor >  local (6)
-[6c/d7ae4e] sayHello (3)       | 3 of 3 ✔
-[72/5fa770] convertToUpper (2) | 3 of 3 ✔
+[34/72d36a] sayHello (3)       | 3 of 3 ✔
+[34/c043cb] convertToUpper (3) | 3 of 3 ✔
 
 Outputs:
 
   /workspaces/training/side-quests/nf-test/results
 
   greetings:
-    - Hola-output.txt
     - Hello-output.txt
     - Bonjour-output.txt
+    - Hola-output.txt
 
   upper_greetings:
-    - UPPER-Hola-output.txt
-    - UPPER-Bonjour-output.txt
     - UPPER-Hello-output.txt
+    - UPPER-Bonjour-output.txt
+    - UPPER-Hola-output.txt
 ```
 
 CONGRATULATIONS! You just ran a test!
@@ -374,7 +374,7 @@ Please cite: https://doi.org/10.1093/gigascience/giaf130
 
 Test Workflow main.nf
 
-  Test [693ba951] 'Should run without failures' FAILED (4.652s)
+  Test [693ba951] 'Should run without failures' FAILED (2.515s)
 
   Assertion failed:
 
@@ -384,12 +384,13 @@ Test Workflow main.nf
 
   Nextflow stdout:
 
+  Nextflow stderr:
+
   ERROR ~ No such file or directory: /workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/greetings.csv
 
    -- Check '/workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/meta/nextflow.log' file for details
-  Nextflow stderr:
 
-FAILURE: Executed 1 tests in 4.679s (1 failed)
+FAILURE: Executed 1 tests in 2.529s (1 failed)
 ```
 
 The test fails! What happened?
@@ -463,10 +464,10 @@ Please cite: https://doi.org/10.1093/gigascience/giaf130
 
 Test Workflow main.nf
 
-  Test [693ba951] 'Should run without failures' PASSED (2.879s)
+  Test [693ba951] 'Should run without failures' PASSED (2.344s)
 
 
-SUCCESS: Executed 1 tests in 2.883s
+SUCCESS: Executed 1 tests in 2.352s
 ```
 
 Success! The pipeline runs successfully and the test passes. Run it as many times as you like and you will always get the same result!
@@ -489,14 +490,14 @@ Please cite: https://doi.org/10.1093/gigascience/giaf130
 Test Workflow main.nf
 
   Test [693ba951] 'Should run without failures'
-    > N E X T F L O W  ~  version 26.04.4
-    > Launching `/workspaces/training/side-quests/nf-test/main.nf` [maniac_mcclintock] - revision: 405c90f891
-    > [fc/6965c3] Submitted process > sayHello (1)
-    > [14/640c84] Submitted process > sayHello (2)
-    > [d6/3594c9] Submitted process > sayHello (3)
-    > [d7/f14d58] Submitted process > convertToUpper (1)
-    > [76/cb9122] Submitted process > convertToUpper (2)
-    > [d1/92b304] Submitted process > convertToUpper (3)
+    > N E X T F L O W  ~  version 26.10.7
+    > Launching `/workspaces/training/side-quests/nf-test/main.nf` [agitated_leavitt] - revision: 59c6cf6661
+    > [5b/2eaaad] Submitted process > sayHello (1)
+    > [20/8975c2] Submitted process > sayHello (2)
+    > [ee/e77f9c] Submitted process > sayHello (3)
+    > [bb/deb1f2] Submitted process > convertToUpper (3)
+    > [33/67c91a] Submitted process > convertToUpper (1)
+    > [84/c2ac63] Submitted process > convertToUpper (2)
     >
     > Outputs:
     >
@@ -504,17 +505,17 @@ Test Workflow main.nf
     >
     >   greetings:
     >     - Bonjour-output.txt
-    >     - Hello-output.txt
     >     - Hola-output.txt
+    >     - Hello-output.txt
     >
     >   upper_greetings:
+    >     - UPPER-Hello-output.txt
     >     - UPPER-Bonjour-output.txt
     >     - UPPER-Hola-output.txt
-    >     - UPPER-Hello-output.txt
-    PASSED (5.206s)
+    PASSED (2.927s)
 
 
-SUCCESS: Executed 1 tests in 5.239s
+SUCCESS: Executed 1 tests in 2.963s
 ```
 
 ### 1.3. Add assertions
@@ -577,10 +578,10 @@ Please cite: https://doi.org/10.1093/gigascience/giaf130
 
 Test Workflow main.nf
 
-  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (2.876s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (2.404s)
 
 
-SUCCESS: Executed 1 tests in 2.879s
+SUCCESS: Executed 1 tests in 2.408s
 ```
 
 Success! The pipeline runs successfully and the test passes. Now we have began to test the details of the pipeline, as well as the overall status.
@@ -663,11 +664,11 @@ Please cite: https://doi.org/10.1093/gigascience/giaf130
 
 Test Workflow main.nf
 
-  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (3.055s)
-  Test [44ba6e13] 'Should produce correct output files' PASSED (2.941s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (2.483s)
+  Test [44ba6e13] 'Should produce correct output files' PASSED (2.546s)
 
 
-SUCCESS: Executed 2 tests in 6.004s
+SUCCESS: Executed 2 tests in 5.062s
 ```
 
 Success! The tests pass because the pipeline completed successfully, the correct number of processes ran and the output files were created. This should also show you how useful it is to provide those informative names for your tests.
@@ -763,7 +764,7 @@ Please cite: https://doi.org/10.1093/gigascience/giaf130
 
 Test Process sayHello
 
-  Test [1eaad118] 'Should run without failures' FAILED (4.876s)
+  Test [1eaad118] 'Should run without failures' FAILED (2.037s)
 
   Assertion failed:
 
@@ -774,12 +775,13 @@ Test Process sayHello
 
   Nextflow stdout:
 
+  Nextflow stderr:
+
   Process `sayHello` declares 1 input but was called with 0 arguments
 
    -- Check script '/workspaces/training/side-quests/nf-test/.nf-test-1eaad118145a1fd798cb07e7dd75d087.nf' at line: 30 or see '/workspaces/training/side-quests/nf-test/.nf-test/tests/1eaad118145a1fd798cb07e7dd75d087/meta/nextflow.log' file for more details
-  Nextflow stderr:
 
-FAILURE: Executed 1 tests in 4.884s (1 failed)
+FAILURE: Executed 1 tests in 2.042s (1 failed)
 ```
 
 The test fails because the `sayHello` process declares 1 input but was called with 0 arguments. Let's fix that by adding an input to the process. Remember from [Hello Workflow](../../hello_nextflow/03_hello_workflow.md) (and the warmup section above) that our `sayHello` process takes a single value input, which we will need to provide. We should also fix the test name to better reflect what we're testing.
@@ -848,7 +850,7 @@ Please cite: https://doi.org/10.1093/gigascience/giaf130
 
 Test Process sayHello
 
-  Test [d6837883] 'Should run without failures and produce correct output' PASSED (2.729s)
+  Test [d6837883] 'Should run without failures and produce correct output' PASSED (2.393s)
   Snapshots:
     1 created [Should run without failures and produce correct output]
 
@@ -856,7 +858,7 @@ Test Process sayHello
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 2.733s
+SUCCESS: Executed 1 tests in 2.399s
 ```
 
 Success! The test passes because the `sayHello` process ran successfully and the output was created.
@@ -907,10 +909,10 @@ Please cite: https://doi.org/10.1093/gigascience/giaf130
 
 Test Process sayHello
 
-  Test [d6837883] 'Should run without failures and produce correct output' PASSED (3.092s)
+  Test [d6837883] 'Should run without failures and produce correct output' PASSED (2.299s)
 
 
-SUCCESS: Executed 1 tests in 3.097s
+SUCCESS: Executed 1 tests in 2.31s
 ```
 
 Success! The test passes because the `sayHello` process ran successfully and the output matched the snapshot.
@@ -1001,10 +1003,10 @@ Please cite: https://doi.org/10.1093/gigascience/giaf130
 
 Test Process sayHello
 
-  Test [c1d07f15] 'Should run without failures and contain expected greeting' PASSED (2.459s)
+  Test [c1d07f15] 'Should run without failures and contain expected greeting' PASSED (2.274s)
 
 
-SUCCESS: Executed 1 tests in 2.461s
+SUCCESS: Executed 1 tests in 2.277s
 ```
 
 ### 2.4. Test the `convertToUpper` process
@@ -1121,7 +1123,7 @@ Please cite: https://doi.org/10.1093/gigascience/giaf130
 
 Test Process convertToUpper
 
-  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (3.472s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (2.351s)
   Snapshots:
     1 created [Should run without failures and produce correct output]
 
@@ -1129,7 +1131,7 @@ Test Process convertToUpper
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 3.478s
+SUCCESS: Executed 1 tests in 2.356s
 ```
 
 Note, we have created a snapshot file for the `convertToUpper` process at `tests/main.converttoupper.nf.test.snap`. If we run the test again, we should see the nf-test passes again.
@@ -1149,10 +1151,10 @@ Please cite: https://doi.org/10.1093/gigascience/giaf130
 
 Test Process convertToUpper
 
-  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (2.387s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (2.326s)
 
 
-SUCCESS: Executed 1 tests in 2.39s
+SUCCESS: Executed 1 tests in 2.336s
 ```
 
 ### Takeaway
@@ -1192,19 +1194,19 @@ Please cite: https://doi.org/10.1093/gigascience/giaf130
 
 Test Process convertToUpper
 
-  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (3.472s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (2.323s)
 
 Test Workflow main.nf
 
-  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (3.156s)
-  Test [44ba6e13] 'Should produce correct output files' PASSED (3.124s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (2.297s)
+  Test [44ba6e13] 'Should produce correct output files' PASSED (2.269s)
 
 Test Process sayHello
 
-  Test [c1d07f15] 'Should run without failures and contain expected greeting' PASSED (5.782s)
+  Test [c1d07f15] 'Should run without failures and contain expected greeting' PASSED (2.49s)
 
 
-SUCCESS: Executed 4 tests in 15.746s
+SUCCESS: Executed 4 tests in 9.451s
 ```
 
 Check that out! We ran 4 tests, 1 for each process and 2 for the whole pipeline with a single command. Imagine how powerful this is on a large codebase!

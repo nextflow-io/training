@@ -264,7 +264,7 @@ You can also confirm the installation by inspecting `modules.json`, which now li
                     "nf-core": {
                         "find/concatenate": {
                             "branch": "master",
-                            "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                            "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",
                             "installed_by": [
                                 "modules"
                             ]
@@ -302,6 +302,7 @@ You can also confirm the installation by inspecting `modules.json`, which now li
     ```
 
 This confirms that the `find/concatenate` module is now part of your project's source code.
+Your `git_sha` may differ: nf-core updates modules over time, and the install command fetches the latest version.
 However, to actually use the new module, we need to import it into our pipeline.
 
 Finally, you can also use the `nf-core modules list local` command to check what modules are currently tracked in your pipeline.
@@ -329,11 +330,12 @@ nf-core modules list local
     ┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
     ┃ Module Name      ┃ Repository      ┃ Version SHA ┃ Message                                                                       ┃ Date       ┃
     ┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-    │ find/concatenate │ nf-core/modules │ 6d46786     │ Support for apptainer as well as singularity for .sif in `container` (#11260) │ 2026-04-23 │
+    │ find/concatenate │ nf-core/modules │ 7b3452a     │ Add license header text to all modules and subworkflow main.nf files (#13448) │ 2026-10-27 │
     └──────────────────┴─────────────────┴─────────────┴───────────────────────────────────────────────────────────────────────────────┴────────────┘
     ```
 
 This shows `find/concatenate` in the resulting table alongside its repository, version SHA, message, and date.
+As with `modules.json`, your version SHA, message and date may differ.
 
 ### 1.5. Update the module imports
 
@@ -452,7 +454,7 @@ Upon completion, `collectGreetings` outputs a single file path, emitted with the
 
 In comparison, the `find/concatenate` module's interface is more complex:
 
-```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="1" hl_lines="11 14"
+```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="4" hl_lines="11 14"
 process FIND_CONCATENATE {
     tag "${meta.id}"
     label 'process_low'
@@ -521,7 +523,7 @@ Or in a case where the metadata is attached at the batch level:
 
 Now let's put this in the context of the `FIND_CONCATENATE` process, which expects the input files to be packaged into a tuple with a metamap, and outputs the metamap as part of the output tuple as well.
 
-```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="10" hl_lines="2 5"
+```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="13" hl_lines="2 5"
 input:
 tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
@@ -535,7 +537,7 @@ Subsequent processes can then readily access that metadata too.
 Remember how we told you that the file output by `FIND_CONCATENATE` will be named based on an identifier that is part of the metadata?
 This is the relevant code:
 
-```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="37"
+```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="40"
 prefix = task.ext.prefix ?: "${meta.id}${file_extensions[0]}"
 ```
 
@@ -820,9 +822,9 @@ This should run reasonably quickly.
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `./main.nf` [cheesy_bhabha] revision: d6bbba9521
+    Launching `./main.nf` [romantic_turing] revision: d6bbba9521
 
     Input/output options
       input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
@@ -834,10 +836,10 @@ This should run reasonably quickly.
 
     Generic options
       validate_params           : false
-      trace_report_suffix       : 2026-06-23_16-55-02
+      trace_report_suffix       : 2026-11-23_22-45-15
 
     Core Nextflow options
-      runName                   : cheesy_bhabha
+      runName                   : romantic_turing
       containerEngine           : docker
       launchDir                 : /workspaces/training/nfcore-build/core-hello
       workDir                   : /workspaces/training/nfcore-build/core-hello/work
@@ -849,10 +851,10 @@ This should run reasonably quickly.
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
     executor >  local (8)
-    [bf/aa86d7] CORE_HELLO:HELLO:sayHello (3)            | 3 of 3 ✔
-    [0a/df448e] CORE_HELLO:HELLO:convertToUpper (3)      | 3 of 3 ✔
-    [82/ded72f] CORE_HELLO:HELLO:FIND_CONCATENATE (test) | 1 of 1 ✔
-    [9d/0130bf] CORE_HELLO:HELLO:cowpy                   | 1 of 1 ✔
+    [36/dbe3ed] CORE_HELLO:HELLO:sayHello (2)            | 3 of 3 ✔
+    [ad/d30403] CORE_HELLO:HELLO:convertToUpper (3)      | 3 of 3 ✔
+    [f0/554e34] CORE_HELLO:HELLO:FIND_CONCATENATE (test) | 1 of 1 ✔
+    [7b/0ce1e6] CORE_HELLO:HELLO:cowpy                   | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 

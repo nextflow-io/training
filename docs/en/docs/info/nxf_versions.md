@@ -11,7 +11,7 @@ hide:
 As of version 3.0 of the training portal, all our training courses are compatible with Nextflow version 25.10.2 or later unless otherwise specified on the course index page.
 (This does not include deprecated or otherwise archived materials which may not have a version notice).
 
-The version of Nextflow currently loaded by default in our training environment is **Nextflow 26.04.4**.
+The version of Nextflow currently loaded by default in our training environment is **Nextflow 26.10.7**.
 
 Because the courses now use typed inputs at the workflow level as well as workflow-level output directives, they require the use of the V2 syntax parser, **unless otherwise specified**.
 The V2 parser is the default from Nextflow 26.04 onward, so on the version we load you don't need to enable it manually.

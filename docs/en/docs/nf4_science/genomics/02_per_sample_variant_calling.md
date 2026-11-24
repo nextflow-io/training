@@ -164,7 +164,7 @@ There are multiple options for providing a default value; here we use a test pro
 #### 1.1.2. Create a test profile with a default value in `nextflow.config`
 
 A test profile provides convenient default values for trying out a workflow without specifying inputs on the command line.
-This is a common convention in the Nextflow ecosystem (see [Hello Config](../../hello_nextflow/06_hello_config.md) for more detail).
+This is a common convention in the Nextflow ecosystem (see [Use profiles to switch configurations](../../config_exec/03_profiles.md) in Configure Execution for more detail).
 
 Add a `profiles` block to `nextflow.config` with a `test` profile that sets the `input` parameter to one of the test BAM files.
 
@@ -392,12 +392,12 @@ nextflow run genomics.nf -profile test
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `genomics.nf` [elegant_ochoa] revision: fd242ec7cf
+    Launching `genomics.nf` [adoring_volhard] revision: fd242ec7cf
 
     executor >  local (1)
-    [ad/b2c9bf] SAMTOOLS_INDEX (1) | 1 of 1 ✔
+    [d4/a2f583] SAMTOOLS_INDEX (1) | 1 of 1 ✔
 
     Outputs:
 
@@ -412,7 +412,7 @@ You can check that the index file has been generated correctly by looking in the
 ??? abstract "Work directory contents"
 
     ```console
-    work/ad/b2c9bf4af404ef7cf63e0aa3887f65
+    work/d4/a2f5834126674f25536a6c45a2fd6c
     ├── reads_mother.bam -> /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
     └── reads_mother.bam.bai
     ```
@@ -762,13 +762,13 @@ nextflow run genomics.nf -profile test -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `genomics.nf` [amazing_stonebraker] revision: 3dc6f69336
+    Launching `genomics.nf` [berserk_roentgen] revision: 3dc6f69336
 
     executor >  local (1)
-    [ad/b2c9bf] SAMTOOLS_INDEX (1)       | 1 of 1, cached: 1 ✔
-    [12/2f009f] GATK_HAPLOTYPECALLER (1) | 1 of 1 ✔
+    [d4/a2f583] SAMTOOLS_INDEX (1)       | 1 of 1, cached: 1 ✔
+    [1a/9ccd7d] GATK_HAPLOTYPECALLER (1) | 1 of 1 ✔
 
     Outputs:
 
@@ -898,13 +898,13 @@ Funny thing: this _might work_, OR it _might fail_. For example, here's a run th
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `genomics.nf` [pensive_noyce] revision: 6c424c0674
+    Launching `genomics.nf` [jovial_hypatia] revision: 61f5c8e26e
 
-    executor >  local (6)
-    [f9/ccfefd] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
-    [dc/b63c4b] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+    executor >  local (2)
+    [26/72e33a] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
+    [fb/204bd3] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 1 ✔
 
     Outputs:
 
@@ -916,14 +916,14 @@ Funny thing: this _might work_, OR it _might fail_. For example, here's a run th
         - bam/reads_son.bam.bai
 
       vcf:
-        - vcf/reads_son.bam.vcf
         - vcf/reads_mother.bam.vcf
         - vcf/reads_father.bam.vcf
+        - vcf/reads_son.bam.vcf
 
       vcf_idx:
-        - vcf/reads_son.bam.vcf.idx
         - vcf/reads_mother.bam.vcf.idx
         - vcf/reads_father.bam.vcf.idx
+        - vcf/reads_son.bam.vcf.idx
     ```
 
 If your workflow run succeeded, run it again until you get an error like this:
@@ -931,21 +931,21 @@ If your workflow run succeeded, run it again until you get an error like this:
 ??? failure "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `genomics.nf` [wise_cray] revision: 6c424c0674
+    Launching `genomics.nf` [romantic_solvay] revision: 61f5c8e26e
 
-    executor >  local (4)
-    [3e/565553] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 1 ✔
-    [fb/7d64e0] GATK_HAPLOTYPECALLER (2) | 1 of 3, cached: 1 ✘
-    ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (3)'
+    executor >  local (2)
+    [2e/58e18c] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 3 ✔
+    [e3/f3b7a6] GATK_HAPLOTYPECALLER (3) | 1 of 3, cached: 1 ✘
+    ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (2)'
 
     Caused by:
-      Process `GATK_HAPLOTYPECALLER (3)` terminated with an error exit status (2)
+      Process `GATK_HAPLOTYPECALLER (2)` terminated with an error exit status (2)
 
     Command executed:
 
-      gatk HaplotypeCaller         -R ref.fasta         -I reads_son.bam         -O reads_son.bam.vcf         -L intervals.bed
+      gatk HaplotypeCaller         -R ref.fasta         -I reads_father.bam         -O reads_father.bam.vcf         -L intervals.bed
 
     Command exit status:
       2
@@ -975,18 +975,18 @@ Take a look inside the work directory for the failed `GATK_HAPLOTYPECALLER` proc
 ??? abstract "Directory contents"
 
     ```console
-    work/3f/e775e3104e279ca5f292bf7b652f3e
+    work/e0/d0ce6c57ca6f2aac22e9f1873055d5
     ├── intervals.bed -> /workspaces/training/nf4-science/genomics/data/ref/intervals.bed
-    ├── reads_father.bam.bai -> /workspaces/training/nf4-science/genomics/work/3e/565553bc8010ce09098c9444851c21/reads_father.bam.bai
-    ├── reads_son.bam -> /workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
-    ├── reads_son.bam.vcf
-    ├── reads_son.bam.vcf.idx
+    ├── reads_father.bam -> /workspaces/training/nf4-science/genomics/data/bam/reads_father.bam
+    ├── reads_father.bam.vcf
+    ├── reads_father.bam.vcf.idx
+    ├── reads_son.bam.bai -> /workspaces/training/nf4-science/genomics/work/2e/58e18c86120ee5b6d435f811098b46/reads_son.bam.bai
     ├── ref.dict -> /workspaces/training/nf4-science/genomics/data/ref/ref.dict
     ├── ref.fasta -> /workspaces/training/nf4-science/genomics/data/ref/ref.fasta
     └── ref.fasta.fai -> /workspaces/training/nf4-science/genomics/data/ref/ref.fasta.fai
     ```
 
-Pay particular attention to the names of the BAM file and the BAM index that are listed in this directory: `reads_son.bam` and `reads_father.bam.bai`.
+Pay particular attention to the names of the BAM file and the BAM index that are listed in this directory: `reads_father.bam` and `reads_son.bam.bai`.
 
 What the heck? Nextflow has staged an index file in this process call's work directory, but it's the wrong one. How could this have happened?
 
@@ -1028,9 +1028,9 @@ Once again, this may succeed or fail. Here's what the output of the two `.view()
 /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
 /workspaces/training/nf4-science/genomics/data/bam/reads_father.bam
 /workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
-/workspaces/training/nf4-science/genomics/work/4d/8e12c356480c490e6e59c85e2abaa8/reads_son.bam.bai
-/workspaces/training/nf4-science/genomics/work/d6/fd0227cfd683b47126429029ecad65/reads_father.bam.bai
-/workspaces/training/nf4-science/genomics/work/74/9ed94e4fbe4566ea61082e2f2df55a/reads_mother.bam.bai
+/workspaces/training/nf4-science/genomics/work/74/9bf0c635a810ddf22de2922a41efc1/reads_son.bam.bai
+/workspaces/training/nf4-science/genomics/work/39/79feb107c614309c2e433f7d2056e8/reads_mother.bam.bai
+/workspaces/training/nf4-science/genomics/work/74/97cacd293ffc6009f0b848e804c8e0/reads_father.bam.bai
 ```
 
 The first three lines correspond to the input channel and the second, to the output channel.
@@ -1190,22 +1190,22 @@ This time (and every time) everything should run correctly:
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `genomics.nf` [furious_hirsch] revision: 4f0b37c75a
+    Launching `genomics.nf` [awesome_boltzmann] revision: 315406da5c
 
     executor >  local (6)
-    [39/6efc23] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
-    [de/b3744f] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+    [77/81a1f2] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
+    [88/31621a] GATK_HAPLOTYPECALLER (1) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/nf4-science/genomics/results
 
       indexed_bam:
-        - [bam/reads_son.bam, bam/reads_son.bam.bai]
         - [bam/reads_father.bam, bam/reads_father.bam.bai]
         - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
+        - [bam/reads_son.bam, bam/reads_son.bam.bai]
 
       vcf:
         - vcf/reads_mother.bam.vcf
@@ -1372,13 +1372,13 @@ nextflow run genomics.nf -profile test
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `genomics.nf` [spontaneous_descartes] revision: aa5d4a64f3
+    Launching `genomics.nf` [sick_lalande] revision: aa5d4a64f3
 
     executor >  local (6)
-    [f4/553469] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
-    [89/83e197] GATK_HAPLOTYPECALLER (1) | 3 of 3 ✔
+    [fa/078b69] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
+    [2f/985f91] GATK_HAPLOTYPECALLER (1) | 3 of 3 ✔
 
     Outputs:
 
@@ -1390,13 +1390,13 @@ nextflow run genomics.nf -profile test
         - [bam/reads_son.bam, bam/reads_son.bam.bai]
 
       vcf:
-        - vcf/reads_son.bam.vcf
         - vcf/reads_mother.bam.vcf
+        - vcf/reads_son.bam.vcf
         - vcf/reads_father.bam.vcf
 
       vcf_idx:
-        - vcf/reads_son.bam.vcf.idx
         - vcf/reads_mother.bam.vcf.idx
+        - vcf/reads_son.bam.vcf.idx
         - vcf/reads_father.bam.vcf.idx
     ```
 

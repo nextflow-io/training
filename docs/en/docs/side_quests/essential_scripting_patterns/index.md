@@ -133,9 +133,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [exotic_salas] revision: d915f0414b
+    Launching `main.nf` [evil_jennings] revision: d915f0414b
 
     [sample_id:SAMPLE_001, organism:human, tissue_type:liver, sequencing_depth:30000000, file_path:data/sequences/SAMPLE_001_S1_L001_R1_001.fastq, quality_score:38.5]
     [sample_id:SAMPLE_002, organism:mouse, tissue_type:brain, sequencing_depth:25000000, file_path:data/sequences/SAMPLE_002_S2_L001_R1_001.fastq, quality_score:35.2]
@@ -368,15 +368,15 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [focused_goldwasser] revision: d9c7a39dec
+    Launching `main.nf` [sharp_wilson] revision: d9c7a39dec
 
     ID fields only: [id:sample_001, organism:human, tissue:liver]
-    [id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
     ID fields only: [id:sample_002, organism:mouse, tissue:brain]
-    [id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
     ID fields only: [id:sample_003, organism:human, tissue:kidney]
+    [id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
+    [id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
     [id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
 
     Outputs:
@@ -503,9 +503,9 @@ nextflow run collect.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `collect.nf` [friendly_jones] revision: 5b2b07e824
+    Launching `collect.nf` [stupefied_leibniz] revision: 5b2b07e824
 
     Individual channel item: sample_001
     Individual channel item: sample_002
@@ -561,9 +561,9 @@ nextflow run collect.nf
 ??? success "Command output"
 
     ```console hl_lines="5"
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `collect.nf` [lethal_caravaggio] revision: 48f3dcbb7b
+    Launching `collect.nf` [extravagant_spence] revision: 48f3dcbb7b
 
     List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
     Individual channel item: sample_001
@@ -632,9 +632,9 @@ nextflow run collect.nf
 ??? success "Command output"
 
     ```console hl_lines="6"
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `collect.nf` [adoring_visvesvaraya] revision: 915ce68e4d
+    Launching `collect.nf` [nice_mestorf] revision: 915ce68e4d
 
     List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
     Spread operator result: [s1, s2, s3]
@@ -761,9 +761,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [nasty_brazil] revision: 723ff4e5e6
+    Launching `main.nf` [pensive_gates] revision: 723ff4e5e6
 
     [[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
     [[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
@@ -912,21 +912,21 @@ nextflow run main.nf
 ??? failure "Command output"
 
     ```console
-    ERROR ~ Error executing process > 'FASTP (2)'
+    ERROR ~ Error executing process > 'FASTP (1)'
 
     Caused by:
-      Process `FASTP (2)` terminated with an error exit status (255)
+      Process `FASTP (1)` terminated with an error exit status (255)
 
 
     Command executed:
 
       fastp \
-          --in1 SAMPLE_002_S2_L001_R1_001.fastq \
+          --in1 SAMPLE_001_S1_L001_R1_001.fastq \
           --in2 null \
-          --out1 sample_002_trimmed_R1.fastq.gz \
-          --out2 sample_002_trimmed_R2.fastq.gz \
-          --json sample_002.fastp.json \
-          --html sample_002.fastp.html \
+          --out1 sample_001_trimmed_R1.fastq.gz \
+          --out2 sample_001_trimmed_R2.fastq.gz \
+          --json sample_001.fastp.json \
+          --html sample_001.fastp.html \
           --thread 1
 
     Command exit status:
@@ -939,12 +939,12 @@ nextflow run main.nf
       ERROR: Failed to open file: null
 
     Work dir:
-      /workspaces/training/side-quests/essential_scripting_patterns/work/8b/5b15c8cf35259a87db0137312d6d06
+      /workspaces/training/side-quests/essential_scripting_patterns/work/02/63965a1af0f819a3fb3453c2f60b92
 
     Container:
       community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690
 
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
 
      -- Check '.nextflow.log' file for details
     ```
@@ -1010,12 +1010,12 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [distracted_bohr] revision: b9b1c249c1
+    Launching `main.nf` [berserk_boyd] revision: b9b1c249c1
 
     executor >  local (3)
-    [d9/542a41] FASTP (1) | 3 of 3 ✔
+    [9e/f15703] FASTP (1) | 3 of 3 ✔
 
     Outputs:
 
@@ -1027,7 +1027,7 @@ nextflow run main.nf
 Looks good! If we check the actual commands that were run (customise for your task hash):
 
 ```console title="Check commands executed"
-cat work/d9/542a41xxxxxxxxxxxxxxxxxxxxxxxxxx/.command.sh
+cat work/9e/f15703xxxxxxxxxxxxxxxxxxxxxxxxxx/.command.sh
 ```
 
 We can see that Nextflow correctly picked the right command for single-end reads:
@@ -1035,10 +1035,10 @@ We can see that Nextflow correctly picked the right command for single-end reads
 ```bash title=".command.sh"
 #!/bin/bash -ue
 fastp \
-    --in1 SAMPLE_003_S3_L001_R1_001.fastq \
-    --out1 sample_003_trimmed.fastq.gz \
-    --json sample_003.fastp.json \
-    --html sample_003.fastp.html \
+    --in1 SAMPLE_001_S1_L001_R1_001.fastq \
+    --out1 sample_001_trimmed.fastq.gz \
+    --json sample_001.fastp.json \
+    --html sample_001.fastp.html \
     --thread 1
 ```
 
@@ -1183,13 +1183,13 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [festering_payne] revision: 3690c7806d
+    Launching `main.nf` [irreverent_meitner] revision: 3690c7806d
 
     executor >  local (6)
-    [d5/67a3aa] FASTP (3)           | 3 of 3 ✔
-    [11/982b68] GENERATE_REPORT (1) | 3 of 3 ✔
+    [7b/19b4e4] FASTP (3)           | 3 of 3 ✔
+    [bf/ebce4b] GENERATE_REPORT (1) | 3 of 3 ✔
 
     Outputs:
 
@@ -1197,8 +1197,8 @@ nextflow run main.nf
 
       reports:
         - reports/sample_003_report.txt
-        - reports/sample_001_report.txt
         - reports/sample_002_report.txt
+        - reports/sample_001_report.txt
     ```
 
 But what if we want to add information about when and where the processing occurred? Let's modify the process to use **shell** variables and a bit of command substitution to include the current user, hostname, and date in the report:
@@ -1226,18 +1226,19 @@ But what if we want to add information about when and where the processing occur
         """
     ```
 
-If you run this, you'll notice an error - Nextflow tries to interpret `#!groovy ${USER}` as a Nextflow variable that doesn't exist.
+If you run this, you'll notice an error - Nextflow tries to interpret the `$` in `$(hostname)` itself, and an unescaped command substitution is not valid syntax.
+`#!groovy ${USER}` has the same problem: Nextflow treats it as a Nextflow variable that doesn't exist.
 
 ??? failure "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [furious_euclid] revision: 3690c7806d
+    Launching `main.nf` [hungry_ardinghelli] revision: 3690c7806d
 
-    Error modules/generate_report.nf:13:27: `USER` is not defined
-    │  13 |     echo "Processed by: ${USER}" >> ${meta.id}_report.txt
-    ╰     |                           ^^^^
+    Error modules/generate_report.nf:14:21: Unexpected character: '$'
+    │  14 |     echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
+    ╰     |                     ^
 
 
     ERROR ~ Script compilation failed
@@ -1416,22 +1417,22 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [peaceful_plateau] revision: 918c15451f
+    Launching `main.nf` [amazing_sanger] revision: 918c15451f
 
     executor >  local (6)
-    [a5/f542b1] FASTP (2)           | 3 of 3 ✔
-    [22/a94ad7] GENERATE_REPORT (2) | 3 of 3 ✔
+    [f6/59cfdd] FASTP (1)           | 3 of 3 ✔
+    [b7/2ac2e3] GENERATE_REPORT (3) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/essential_scripting_patterns/results
 
       reports:
+        - reports/sample_002_report.txt
         - reports/sample_001_report.txt
         - reports/sample_003_report.txt
-        - reports/sample_002_report.txt
     ```
 
 The output should show both processes completing successfully. The workflow is now much cleaner and easier to maintain, with all the complex metadata processing logic encapsulated in the `separateMetadata` function.
@@ -1495,35 +1496,35 @@ nextflow run main.nf -ansi-log false
 ??? success "Command output"
 
     ```console
-    N E X T F L O W  ~  version 26.04.4
-    Launching `main.nf` [naughty_kay] - revision: 918c15451f
-    [1e/d9a972] Submitted process > GENERATE_REPORT (2)
-    [ef/820ed7] Submitted process > GENERATE_REPORT (3)
-    [f6/ab4b70] Submitted process > FASTP (1)
-    [5b/748d5a] Submitted process > GENERATE_REPORT (1)
-    [7b/d99953] Submitted process > FASTP (3)
-    [37/291870] Submitted process > FASTP (2)
+    N E X T F L O W  ~  version 26.10.7
+    Launching `main.nf` [sick_bassi] - revision: 918c15451f
+    [e9/005290] Submitted process > GENERATE_REPORT (3)
+    [11/a87bba] Submitted process > FASTP (3)
+    [a7/2f4124] Submitted process > GENERATE_REPORT (1)
+    [2d/3324aa] Submitted process > GENERATE_REPORT (2)
+    [de/e1f1e9] Submitted process > FASTP (2)
+    [8a/4dea61] Submitted process > FASTP (1)
 
     Outputs:
 
       /workspaces/training/side-quests/essential_scripting_patterns/results
 
       reports:
-        - reports/sample_002_report.txt
         - reports/sample_003_report.txt
         - reports/sample_001_report.txt
+        - reports/sample_002_report.txt
     ```
 
 You can check the exact `docker` command that was run to see the CPU allocation for any given task:
 
 ```console title="Check docker command"
-cat work/7b/d999535cfcdfb6865b4e63cddc3987/.command.run | grep "docker run"
+cat work/11/a87bba8e7ab6a609e914cda0ae4df5/.command.run | grep "docker run"
 ```
 
 You should see something like:
 
 ```bash title="docker command"
-    docker run -i --cpu-shares 2048 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/7b/d999535cfcdfb6865b4e63cddc3987/.command.sh
+    docker run -i --cpu-shares 2048 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/11/a87bba8e7ab6a609e914cda0ae4df5/.command.sh
 ```
 
 In this example we've chosen an example that requested 2 CPUs (`--cpu-shares 2048`), because it was a high-depth sample, but you should see different CPU allocations depending on the sample depth. Try this for the other tasks as well.
@@ -1872,9 +1873,9 @@ nextflow run main.nf
 ??? failure "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [fervent_bassi] revision: c5d3df5c06
+    Launching `main.nf` [shrivelled_easley] revision: c5d3df5c06
 
     ERROR ~ Cannot invoke method toUpperCase() on null object
 
@@ -2097,9 +2098,9 @@ nextflow run main.nf
 ??? failure "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [golden_lamarck] revision: 0d323c9cad
+    Launching `main.nf` [golden_bhaskara] revision: 0d323c9cad
 
     WARN: Access to undefined parameter `input` -- Initialise it to a default value eg. `params.input = some_value`
     Input CSV file path not provided. Please specify --input <file.csv>
@@ -2116,9 +2117,9 @@ nextflow run main.nf --input ./data/nonexistent.csv
 ??? failure "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.10.7
 
-    Launching `main.nf` [admiring_avogadro] revision: 0d323c9cad
+    Launching `main.nf` [clever_bernard] revision: 0d323c9cad
 
     Input CSV file not found: ./data/nonexistent.csv
     ```
