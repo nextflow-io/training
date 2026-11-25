@@ -151,16 +151,23 @@ If you need more customisation, edit `docs/en/overrides/main.html`
 
 ## Figures & diagrams
 
-Graphics should be drawn using [Excalidraw](https://excalidraw.com/).
-Please use the [VSCode extension](https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor) and give files a `.excalidraw.svg` filename suffix.
-Files will continue to be editable by others using this method.
+Diagrams are draw.io files with a `.drawio.svg` suffix: ordinary SVG images that also carry the editable draw.io model.
+Edit them in VS Code with the [Draw.io Integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) extension, or at [diagrams.net](https://app.diagrams.net).
 
-Excalidraw SVGs should be embedded as follows:
+All diagrams follow a shared house style (colours, fonts, line weights, spacing, and where diagrams go in a lesson).
+The style, the rules and the helper scripts are in [`_scripts/diagrams/`](_scripts/diagrams/README.md).
+Check a diagram before committing it:
+
+```bash
+python3 _scripts/diagrams/check.py docs/en/docs/<course>/img/
+```
+
+Diagrams should be embedded as follows:
 
 <!-- prettier-ignore-start -->
 ```html
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.excalidraw.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.drawio.svg"
 </figure>
 ```
 <!-- prettier-ignore-end -->
