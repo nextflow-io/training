@@ -140,13 +140,13 @@ That's what we're going to do in our workflow, for every greeting.
 We start with a version that always translates into Spanish, and connect it to the first process.
 We won't add the language parameter yet; that comes in section 1.3.
 
-#### 1.2.1. Define the process
-
 The process will take each greeting file and produce a translated file:
 
 <figure class="drawio">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-translate-process.drawio.svg"
 </figure>
+
+#### 1.2.1. Define the process
 
 Add the following process definition to the workflow script, right under the `sayHello` process:
 
@@ -386,17 +386,15 @@ This is one of the reasons Nextflow channels are so powerful: they take care of 
 ### 1.3. Make the language an input of the process
 
 Our translation step always translates into Spanish.
-To make it translate into other languages, we'll give the process a second input, `language`, set by a pipeline parameter.
-
-#### 1.3.1. Add the `language` input and a dictionary of translations
-
-Good news: we can declare as many inputs as we want in the process definition.
-
-The process will take the language as a second input:
+To make it translate into other languages, we'll give the process a second input, `language`, set by a pipeline parameter:
 
 <figure class="drawio">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-translate-language-process.drawio.svg"
 </figure>
+
+#### 1.3.1. Add the `language` input and a dictionary of translations
+
+Good news: we can declare as many inputs as we want in the process definition.
 
 In the `translateGreeting` process definition, make the following code changes:
 
@@ -544,50 +542,9 @@ Notice that the two inputs are different kinds of things.
 Nextflow calls the process once per file in the channel, and reuses the single value for every call.
 So each of the three greetings gets translated into the same language.
 
-??? note "What if the language comes from a channel?"
-
-    The value is reused only because `params.language` is a plain value.
-    If you put it in a channel instead, for example with `channel.of('es')`, it is consumed by the first call: the process runs only once, on the first greeting.
-    Nextflow pairs up the elements of channel inputs one by one, and stops when one of the channels runs out.
-
 #### 1.3.4. Run the workflow
 
-Run the workflow again with `-resume`:
-
-```bash
-nextflow run hello-workflow.nf -resume
-```
-
-??? success "Command output"
-
-    ```console
-     N E X T F L O W   ~  version 26.10.7
-
-    Launching `hello-workflow.nf` [hopeful_mandelbrot] revision: 51cc879712
-
-    executor >  local (3)
-    [ca/b33d6f] sayHello (Celine)                 | 3 of 3, cached: 3 ✔
-    [54/9b3150] translateGreeting (es-Celine.txt) | 3 of 3 ✔
-
-    Outputs:
-
-      /workspaces/training/hello-nextflow/results
-
-      greetings:
-        - hello/Raphael.txt
-        - hello/Mateo.txt
-        - hello/Celine.txt
-
-      translated:
-        - hello/es-Mateo.txt
-        - hello/es-Raphael.txt
-        - hello/es-Celine.txt
-    ```
-
-The results are the same as before, since the default language is Spanish.
-However, the `translateGreeting` tasks ran again instead of being retrieved from the cache, because we changed the code of the process.
-
-Now try another language:
+Run the workflow with `-resume`, this time setting the language to French:
 
 ```bash
 nextflow run hello-workflow.nf -resume --language fr
@@ -619,13 +576,15 @@ nextflow run hello-workflow.nf -resume --language fr
         - hello/fr-Celine.txt
     ```
 
-The `sayHello` tasks were cached, and the `translateGreeting` tasks ran again with the new input.
+The `sayHello` tasks were cached, and the `translateGreeting` tasks ran again, both because we changed the code of the process and because its language input is now `fr`.
 
 ??? abstract "File contents"
 
     ```console title="results/hello/fr-Mateo.txt"
     Bonjour, Mateo!
     ```
+
+Without `--language`, the workflow uses the default, Spanish.
 
 Finally, try a language code that is not in the dictionary, such as `de` for German:
 
@@ -938,9 +897,9 @@ nextflow run hello-workflow.nf -resume
 
     Launching `hello-workflow.nf` [kickass_sanger] revision: 8d4f16d465
 
-    executor >  local (3)
+    executor >  local (6)
     [c8/1d9afc] sayHello (Mateo)                   | 3 of 3, cached: 3 ✔
-    [3a/f97a23] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
+    [3a/f97a23] translateGreeting (es-Raphael.txt) | 3 of 3 ✔
     [d9/0afd55] collectGreetings (batch)           | 3 of 3 ✔
 
     Outputs:
@@ -964,6 +923,7 @@ nextflow run hello-workflow.nf -resume
     ```
 
 It runs successfully, including the third step.
+The `translateGreeting` tasks ran again because the last run used French, and without `--language` the workflow uses the default, Spanish.
 
 However, look at the number of calls for `collectGreetings()` on the last line.
 We were only expecting one, but there are three.

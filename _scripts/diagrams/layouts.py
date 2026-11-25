@@ -64,7 +64,7 @@ def _input(d, files, x, y):
 
 def process_view(process, inputs, outputs, values=(), process_w=None):
     """inputs: [(file name, contents)] received as one input; outputs: [(file name, contents)];
-    values: input names."""
+    values: input names, or (input name, example value) to show a value under a single label."""
     d = Diagram()
     pw = process_w or _box_w(process, S.SIZE_BOX)
     x0, y0 = 40, 40
@@ -81,11 +81,15 @@ def process_view(process, inputs, outputs, values=(), process_w=None):
         d.add_edge("e-in", "in", "proc", S.edge_style(orthogonal=True), exit=(1, 0.5), entry=(0.5, 0),
                    points=[(px + pw / 2, y0 + ih / 2)])
         fracs = {1: [0.5], 2: [0.25, 0.75], 3: [0.2, 0.5, 0.8]}[len(values)]
-        lx = px - S.GAP_H - max(S.param_label_width(v) for v in values)
-        for i, (v, f) in enumerate(zip(values, fracs)):
+        values = [v if isinstance(v, tuple) else (v, "") for v in values]
+        lx = px - S.GAP_H - max(S.param_label_width(v) for v, _ in values)
+        for i, ((v, example), f) in enumerate(zip(values, fracs)):
             y = py + f * S.BOX_H
-            d.add_vertex(f"val{i}", v, S.vertex_style("param"), lx, y - 19, S.param_label_width(v), 38)
+            w = S.param_label_width(v)
+            d.add_vertex(f"val{i}", v, S.vertex_style("param"), lx, y - 19, w, 38)
             d.add_edge(f"e-val{i}", f"val{i}", "proc", S.edge_style("param"), exit=(1, 0.5), entry=(0, f))
+            if example:  # an example value, under its label like file contents (single value only)
+                _contents(d, f"val{i}-example", example, lx, w - S.MENLO_ADVANCE * S.SIZE_PARAM, y + 19 - 14)
     else:
         iw, ih = _input(d, inputs, x0, y0)
         px, py = x0 + iw + S.GAP_H, y0
