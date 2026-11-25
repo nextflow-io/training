@@ -199,7 +199,17 @@ class Diagram:
         for v in sorted(vs, key=depth):
             st = self.style(v)
             x, y, w, h = self.box(v)
-            if "text" not in st:
+            op = f' opacity="{float(st["opacity"]) / 100:g}"' if "opacity" in st else ""
+            if op:
+                o.append(f"<g{op}>")
+            if st.get("shape") == "partialRectangle":
+                sides = {"top": ((x, y), (x + w, y)), "bottom": ((x, y + h), (x + w, y + h)),
+                         "left": ((x, y), (x, y + h)), "right": ((x + w, y), (x + w, y + h))}
+                for side, ((ax, ay), (bx, by)) in sides.items():
+                    if st.get(side, "1") != "0":
+                        o.append(f'<line x1="{num(ax)}" y1="{num(ay)}" x2="{num(bx)}" y2="{num(by)}" '
+                                 f'stroke="{st.get("strokeColor", INK)}" stroke-width="{st.get("strokeWidth", 1)}"/>')
+            elif "text" not in st:
                 fill = st.get("fillColor", "none")
                 stroke = st.get("strokeColor", INK)
                 r = float(st.get("arcSize", 16)) / 2 if st.get("absoluteArcSize") == "1" else min(w, h) * 0.1
@@ -209,6 +219,8 @@ class Diagram:
                          f'fill="{fill}" stroke="{stroke}" stroke-width="{st.get("strokeWidth", 1)}"{dash}/>')
             lines = (v.get("value") or "").split("\n")
             if not lines[0]:
+                if op:
+                    o.append("</g>")
                 continue
             fs = float(st.get("fontSize", 12))
             fam = st.get("fontFamily", LABEL_FONT)
@@ -224,6 +236,8 @@ class Diagram:
                          f'fill="{st.get("fontColor", INK)}" text-anchor="{anchor}" dominant-baseline="central" '
                          f'{"font-weight=\"bold\" " if int(st.get("fontStyle", 0)) & 1 else ""}'
                          f'xml:space="preserve">{html.escape(line)}</text>')
+            if op:
+                o.append("</g>")
         for e in self.edges():
             st = self.style(e)
             p = self.endpoints(e)
@@ -249,6 +263,8 @@ class Diagram:
             dash = f' stroke-dasharray="{" ".join(num(float(n) * sw) for n in st.get("dashPattern", "3 3").split())}"' \
                 if st.get("dashed") == "1" else ""
             stroke = st.get("strokeColor", INK)
+            op = f' opacity="{float(st["opacity"]) / 100:g}"' if "opacity" in st else ""
+            o.append(f"<g{op}>")
             o.append(f'<path d="{d}" fill="none" stroke="{stroke}" stroke-width="{num(sw)}"{dash}/>')
             nx, ny = -uy, ux
             hw = L * 0.42
@@ -262,6 +278,7 @@ class Diagram:
             else:
                 o.append(f'<path d="M{num(a[0])} {num(a[1])} L{num(bx)} {num(by)} L{num(b[0])} {num(b[1])}" '
                          f'fill="none" stroke="{stroke}" stroke-width="{num(sw)}" stroke-linejoin="round"/>')
+            o.append("</g>")
         return minx, miny, W, H, "\n".join(o)
 
     def save(self, path=None):

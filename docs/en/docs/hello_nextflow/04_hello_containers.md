@@ -25,8 +25,8 @@ Note that we'll be teaching this using [Docker](https://www.docker.com/get-start
 
 Here is where this part fits in the course:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-course-map-part4.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-course-map-part4.drawio.svg"
 </figure>
 
 ??? info "How to begin from this section"

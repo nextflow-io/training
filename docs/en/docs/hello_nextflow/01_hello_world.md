@@ -12,8 +12,8 @@
 
 In this course, you write the Hello pipeline from [Nextflow Run](../nextflow_run/index.md) one piece at a time, and each part adds a piece:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-course-map-part1.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-course-map-part1.drawio.svg"
 </figure>
 
 In this first part, you write the first step of the pipeline, `sayHello`.

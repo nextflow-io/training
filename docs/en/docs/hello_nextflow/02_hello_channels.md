@@ -23,8 +23,8 @@ You will also learn to use [**operators**](https://nextflow.io/docs/latest/refer
 
 Here is where this part fits in the course:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-course-map-part2.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-course-map-part2.drawio.svg"
 </figure>
 
 ??? info "How to begin from this section"

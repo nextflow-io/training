@@ -80,3 +80,4 @@ box outlines 2.5; frames 2.
 - A part's warmup shows the starting workflow, with the values the warmup run uses.
 - A step that fails gets a dark red (`#c92a2a`) bold "X" with the word "fails" on its outgoing arrow, and the output it doesn't produce is drawn dashed (or an empty dashed channel captioned "no output"). The marker always pairs colour with text.
 - Operator chains (`.flatten()`, `.splitCsv()`, `.map {}`) stack channels vertically, centred, with the operator code beside each arrow.
+- Course maps (`*course-map*`) are a compact overview of a whole course: smaller labels (22 px), 50 px gaps, open brackets (`bracket-below` / `bracket-above` styles) grouping each part's steps under its title and subtitle. In a part's own map, everything outside that part is faded to 25% opacity and "← you are here" follows the part's title. The checker relaxes gap and caption spacing for these files.

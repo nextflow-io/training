@@ -60,6 +60,8 @@ GROUP_STROKE = "#868e96"
 BOX_H = 80  # process and file boxes
 ITEM_H = 50  # items inside a channel
 GAP_H = 130  # horizontal gap for an arrow between two boxes
+GAP_MAP = 50  # course maps (hello-course-map*): a compact overview, so boxes sit closer
+FADED = 25  # opacity (%) of the parts of a course map that are not the current part
 GAP_V = 70  # vertical gap for an arrow between two boxes
 GAP_FRAME = 80  # gap for an arrow into or out of a frame...
 GAP_FRAME_PARAM = 100  # ...when a parameter label or trunk sits in that gap
@@ -123,6 +125,9 @@ def vertex_style(role, size=None, code=False):
     if role == "code":
         return "text;" + _s(align="left", verticalAlign="middle", spacing=0, spacingLeft=TEXT_SPACING_LEFT,
                             fontFamily=CODE_FONT, fontSize=size or SIZE_CODE, fontColor=INK) + BASE_TEXT
+    if role in ("bracket-below", "bracket-above"):  # groups the steps of a course part (open towards the boxes)
+        open_side = "top" if role == "bracket-below" else "bottom"
+        return f"shape=partialRectangle;{open_side}=0;fillColor=none;strokeColor={INK};strokeWidth={W_FRAME};" + BASE_TEXT
     raise ValueError(role)
 
 

@@ -29,8 +29,8 @@ To demonstrate, we will continue building on the Hello World example from Parts 
 
 Here is where this part fits in the course:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-course-map-part3.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-course-map-part3.drawio.svg"
 </figure>
 
 ??? info "How to begin from this section"

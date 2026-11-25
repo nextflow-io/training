@@ -32,6 +32,8 @@ class Report:
 
 def role_of(d, v):
     st = d.style(v)
+    if st.get("shape") == "partialRectangle":
+        return "bracket"
     if "text" in st:
         if st.get("align", "center") == "center":
             # captions are bold; centred plain text is a note (e.g. above an item in a channel)
@@ -79,6 +81,8 @@ def check(path):
                 r.error(f"{n}: wrapped label (whiteSpace=wrap makes an HTML label; use explicit line breaks)")
             if st.get("fontFamily", S.LABEL_FONT) not in S.ALLOWED_FONTS:
                 r.error(f"{n}: font {st.get('fontFamily')} (use {S.LABEL_FONT} or {S.CODE_FONT})")
+        if role == "bracket":
+            continue
         if role == "unknown":
             r.error(f"{n}: fill {st.get('fillColor')} is not a palette colour")
             continue
@@ -168,8 +172,9 @@ def check(path):
         if straight and st.get("exitX") == "1" and st.get("entryX") == "0" and is_box(s) and is_box(t):
             sb, tb = boxes[s], boxes[t]
             gap = tb[0] - (sb[0] + sb[2])
-            if abs(gap - S.GAP_H) > TOL:
-                r.warn(f"{label}: horizontal gap {gap:g} (want {S.GAP_H})")
+            want_h = S.GAP_MAP if "course-map" in os.path.basename(path) else S.GAP_H
+            if abs(gap - want_h) > TOL:
+                r.warn(f"{label}: horizontal gap {gap:g} (want {want_h})")
             if abs((sb[1] + sb[3] / 2) - (tb[1] + tb[3] / 2)) < TOL and (st.get("exitY") != "0.5" or st.get("entryY") != "0.5"):
                 r.error(f"{label}: level boxes, so the arrow must leave and land at the centre (exitY/entryY 0.5)")
             fanout.setdefault(s, []).append(t)
@@ -204,8 +209,9 @@ def check(path):
             if abs(x - (b[0] + b[2] + S.NOTE_GAP)) > TOL or abs((y + h / 2) - (b[1] + b[3] / 2)) > TOL:
                 r.warn(f"note {name(d, v)}: should sit {S.NOTE_GAP} px right of {name(d, cells[cid])}, centred on it")
 
-    # captions: CAPTION_GAP under the box/channel above them (CAPTION_GAP_GROUP under a dashed group)
-    for v in d.vertices():
+    # captions: CAPTION_GAP under the box/channel above them (CAPTION_GAP_GROUP under a dashed group);
+    # course maps stack part titles over subtitles and brackets, so they're exempt
+    for v in ([] if "course-map" in os.path.basename(path) else d.vertices()):
         if roles[v.get("id")] != "caption":
             continue
         x, y, w, h = boxes[v.get("id")]
