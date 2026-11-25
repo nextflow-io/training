@@ -39,7 +39,7 @@ Follow these steps:
 
 5. Remind the user to:
    - Create any associated Nextflow example scripts in the root-level directory
-   - Add Excalidraw diagrams if needed
+   - Add draw.io diagrams (`.drawio.svg`) if needed, following `_scripts/diagrams/README.md`
    - Test all examples thoroughly
    - Run validation tools before committing
    - Preview the site locally
