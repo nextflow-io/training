@@ -93,13 +93,13 @@ def check(path):
         w, h = boxes[v.get("id")][2:]
         on = lambda a: abs(a / S.GRID - round(a / S.GRID)) < 0.01
         # left/top edge on the grid, or the centre (boxes centred under/beside another box)
-        inside_channel = any(roles.get(a) == "channel" for a in _ancestors(cells, v.get("id")))
+        inside_channel = any(roles.get(a) in ("channel", "item") for a in _ancestors(cells, v.get("id")))
         if role != "item" and not inside_channel and not ((on(x) or on(x + w / 2)) and (on(y) or on(y + h / 2))):
             r.error(f"{n}: position ({x:g}, {y:g}) is off the {S.GRID} px grid (edge or centre)")
         in_channel = False
         p = v.get("parent")
         while p in roles:
-            in_channel |= roles[p] == "channel"
+            in_channel |= roles[p] in ("channel", "item")
             p = cells[p].get("parent")
         has_kids = any(c.get("parent") == v.get("id") for c in d.vertices())
         if role in ("process", "file") and not in_channel and boxes[v.get("id")][3] != S.BOX_H:
@@ -197,7 +197,7 @@ def check(path):
             continue
         x, y, w, h = boxes[v.get("id")]
         near = [cid for cid, b in boxes.items() if is_box(cid) and 0 <= x - (b[0] + b[2]) <= 60
-                and not any(roles.get(a) == "channel" for a in _ancestors(cells, cid))
+                and not any(roles.get(a) in ("channel", "item") for a in _ancestors(cells, cid))
                 and b[1] < y + h / 2 < b[1] + b[3]]
         for cid in near:
             b = boxes[cid]

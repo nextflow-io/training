@@ -105,14 +105,14 @@ This step is a small Python script, which shows that a process can run code in o
 --8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.drawio.svg"
 </figure>
 
-From here on, diagrams show channels explicitly only where the text is about how steps are connected.
-Elsewhere, a file box such as `*.txt` stands for the channel of files that one step passes to the next.
-
 We'll build it in three steps:
 
 1. Test the translation code in the terminal.
 2. Wrap it in a process that translates into Spanish, and connect it to the output of `sayHello`.
 3. Make the language an input of the process, set by a parameter.
+
+_From here on, diagrams show channels explicitly only where the text is about how steps are connected.
+Elsewhere, a file box such as `*.txt` stands for the channel of files that one step passes to the next._
 
 ### 1.1. Test the translation code in the terminal
 
@@ -138,9 +138,15 @@ That's what we're going to do in our workflow, for every greeting.
 ### 1.2. Write the translation step as a Nextflow process
 
 We start with a version that always translates into Spanish, and connect it to the first process.
-We won't add a language parameter yet; that comes in section 1.3.
+We won't add the language parameter yet; that comes in section 1.3.
 
 #### 1.2.1. Define the process
+
+The process will take each greeting file and produce a translated file:
+
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-translate-process.drawio.svg"
+</figure>
 
 Add the following process definition to the workflow script, right under the `sayHello` process:
 
@@ -171,29 +177,27 @@ process translateGreeting {
 }
 ```
 
-The process takes each greeting file and produces a translated file:
+The process definition is very similar to what we used for `sayHello`, with two differences.
 
-<figure class="drawio">
---8<-- "docs/en/docs/hello_nextflow/img/hello-translate-process.drawio.svg"
-</figure>
+First, the **input** is a file, so it uses the `path` qualifier, and we compose the output filename from the input filename, similarly to what we did for the output of the first process.
+We use the file name in the `tag` directive (introduced in Part 2) to label each task with the name of the file it translates.
 
-The structure is the same as for `sayHello`, with two differences.
-The `tag` directive, introduced in Part 2, labels each task with the name of the file it translates.
-
-First, the input is a file, so it uses the `path` qualifier, and we compose the output filename from the input filename, similarly to what we did for the output of the first process.
-
-Second, the script is written in Python.
-The first line of the script, `#!/usr/bin/env python3`, is called a shebang: it tells the system which program should run the script.
-Without it, Nextflow runs the script with the shell, as it did for `sayHello`.
-With it, you can write the script of a process in any language that is available in the environment, such as Python, R or Perl.
+Second, the **script** is written in Python.
+The first line of the script, `#!/usr/bin/env python3`, is called a shebang: it tells the system which program should run the script, instead of using the default setting (bash) as it did for `sayHello`.
 
 The `${input_file}` placeholders work the same way as in a shell script: Nextflow replaces them with the actual file name before running the script.
 Python never sees the placeholders, only the values.
 
-??? tip "Longer scripts"
+??? tip "Working with scripts"
 
-    Writing the code inline is convenient for a few lines.
-    For a longer script, you can save it as a file in a directory named `bin/` next to your workflow script, make it executable, and call it by name in the `script` block.
+    **Which languages can I use?**
+    Any scripting language, such as Python, R or Perl, as long as it's available in the environment.
+    Here Python is installed on our local machine; Part 5 covers how to supply software that isn't installed locally.
+
+    **How long can my script be?**
+    There's no hard limit.
+    Inline code is convenient for a few lines, but longer scripts are easier to maintain and test as separate files.
+    For those, save the script in a directory named `bin/` next to your workflow script, make it executable, and call it by name in the `script` block.
     Nextflow adds the `bin/` directory to the `PATH` of every task automatically.
 
 #### 1.2.2. Pass the output of the first process to the new process
@@ -388,6 +392,12 @@ To make it translate into other languages, we'll give the process a second input
 
 Good news: we can declare as many inputs as we want in the process definition.
 
+The process will take the language as a second input:
+
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-translate-language-process.drawio.svg"
+</figure>
+
 In the `translateGreeting` process definition, make the following code changes:
 
 === "After"
@@ -469,6 +479,7 @@ The script now looks up the word for hello in a Python dictionary called `transl
 The keys are two-letter language codes, such as `es` for Spanish and `ja` for Japanese.
 Nextflow fills in `${language}` before Python runs, so for Spanish, Python sees `translations['es']`.
 If the code is not in the dictionary, the script exits with an error message (`sys.exit`) instead of a Python traceback.
+
 The output file name also starts with the language code, so the outputs of different languages don't overwrite each other.
 The tag now includes the language code too, matching the output file name; the language alone would give all the tasks of a run the same tag.
 
@@ -739,6 +750,12 @@ That is the result we want to achieve with our workflow.
 
 ### 2.2. Create a new process to do the collection step
 
+The process will take all the translated files, plus a batch name and a language, and write the greetings into a single file:
+
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.drawio.svg"
+</figure>
+
 Add the following process definition to the workflow script, right under the `translateGreeting` process:
 
 ```groovy title="hello-workflow.nf" linenums="62"
@@ -774,10 +791,6 @@ This process has three inputs:
 
 `batch_name` and `language` are plain values, so they use the `val` qualifier, like the `language` input of `translateGreeting` in section 1.3.
 The process runs only once per run, but tagging it with the batch name makes runs of different batches easy to tell apart.
-
-<figure class="drawio">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.drawio.svg"
-</figure>
 
 The script needs to handle an arbitrary number of input files, so we can't write the command up front.
 In other words, if `input_files` contains `[file1.txt, file2.txt, file3.txt]`, we need Nextflow to turn that into `cat file1.txt file2.txt file3.txt`.
@@ -1248,6 +1261,12 @@ For demonstration purposes, let's say we want to count the number of greetings t
 ### 3.1. Modify the process to count and output the number of greetings
 
 This will require two key changes to the process definition: we need a way to count the greetings and write a report file, then we need to add that report file to the `output` block of the process.
+
+The process will produce the report as a second output:
+
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-report-process.drawio.svg"
+</figure>
 
 #### 3.1.1. Count the number of greetings collected
 
