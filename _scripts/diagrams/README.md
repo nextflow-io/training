@@ -10,6 +10,7 @@ The scripts here need only Python 3 (no extra packages).
 | ------------------------- | ---------------------------------------------------------------------------------------------- |
 | `check.py`                | Check diagrams against the house style. Errors fail; spacing issues are warnings (`--strict`). |
 | `excalidraw_to_drawio.py` | Turn an old Excalidraw SVG export into a styled `.drawio.svg` starting point.                  |
+| `layouts.py`              | Standard layouts, such as `process_view()` for a process definition.                           |
 | `house_style.py`          | Every colour, font, line weight and spacing value. Change the style here.                      |
 | `drawio.py`               | Read, edit, render and write `.drawio.svg` files from Python.                                  |
 
@@ -69,3 +70,10 @@ box outlines 2.5; frames 2.
 - A step fed by a captioned channel sits on the next row, reached by a bent arrow from the channel's right side down into the step's top centre (the staircase), so the arrow doesn't cross the caption.
 - Two parameters entering one side of a box land at 0.25 and 0.75, both arrows straight and each label level with its entry.
 - Parameter labels sit level with the point where their arrow lands, and end one monospace space before the arrow starts. A parameter that feeds several steps uses one trunk that branches.
+
+## Where diagrams go in a lesson
+
+- The diagram that opens a section shows the first working version the section builds, not its end state.
+  If the section then extends it, the section's Takeaway shows the finished state ("To recap, this is what you've built so far:").
+- Wherever the text defines a new process, show a process view (`layouts.process_view()`): the process on its own, its input channel arriving from the top (staircase), value inputs from the left labelled with their input names, its output channel(s) on the right, plain-word captions 25 px from the channels.
+- A diagram never shows code or features the text hasn't introduced yet.

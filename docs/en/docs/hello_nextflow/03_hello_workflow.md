@@ -138,6 +138,7 @@ That's what we're going to do in our workflow, for every greeting.
 ### 1.2. Write the translation step as a Nextflow process
 
 We start with a version that always translates into Spanish, and connect it to the first process.
+We won't add a language parameter yet; that comes in section 1.3.
 
 #### 1.2.1. Define the process
 
@@ -169,6 +170,12 @@ process translateGreeting {
     """
 }
 ```
+
+The process takes each greeting file and produces a translated file:
+
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-translate-process.drawio.svg"
+</figure>
 
 The structure is the same as for `sayHello`, with two differences.
 The `tag` directive, introduced in Part 2, labels each task with the name of the file it translates.
@@ -679,6 +686,12 @@ Nextflow also saves it in the `.command.err` file of the task directory listed u
 ### Takeaway
 
 You know how to chain processes together by providing the output of one step as input to the next step, how to write the script of a process in another language, and how to pass more than one input to a process.
+
+To recap, this is what you've built so far:
+
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-language.drawio.svg"
+</figure>
 
 ### What's next?
 
