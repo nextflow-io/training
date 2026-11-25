@@ -74,6 +74,6 @@ box outlines 2.5; frames 2.
 ## Where diagrams go in a lesson
 
 - The diagram that opens a section shows the first working version the section builds, not its end state.
-  If the section then extends it, the section's Takeaway shows the finished state ("To recap, this is what you've built so far:").
+  If the section then extends it, show the finished state just before the heading of the step with the section's final run, with the example values that run uses ("The workflow now looks like this:").
 - Wherever the text defines a process or changes its inputs or outputs, show a process view (`layouts.process_view()`): one call of the process on its own, with plain file boxes for its input and output (no channels; the workflow diagrams show those) and example file names. Several files received as one input sit in one white group box. Value inputs enter from the left, labelled with their input names; when there are any, the file input moves to the row above and arrives from the top (staircase). File contents sit centred under each file box in the note style (above the top box of a stack of two outputs). Place it before the code, as "what we're about to build": at the start of the section that defines or changes the process (its intro, before the first numbered step), with a lead-in such as "The process will take ...:".
 - A diagram never shows code or features the text hasn't introduced yet.

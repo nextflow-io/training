@@ -23,9 +23,9 @@ This will teach you the Nextflow way of achieving the following:
 
 To demonstrate, we will continue building on the Hello World example from Parts 1 and 2, and make the following changes to our workflow:
 
-1. Add a second step, written in Python, that translates each greeting into another language.
-2. Add a third step that collects all the translated greetings and writes them into a single file named after the batch and the language.
-3. Make the collection step also report a simple statistic about what was processed.
+1. Add a translation step, written in Python, that translates each greeting into another language.
+2. Add a collection step that gathers all the translated greetings into a single file named after the batch and the language.
+3. Add a report output to the collection step, with a simple statistic about what was processed.
 
 Here is where this part fits in the course:
 
@@ -96,7 +96,7 @@ If that worked for you, you're ready to learn how to assemble a multi-step workf
 
 ---
 
-## 1. Add a translation step to the workflow
+## 1. Add a translation step
 
 We're going to add a step that translates each greeting into another language, for example from `Hello, Mateo!` to `Hola, Mateo!`.
 This step is a small Python script, which shows that a process can run code in other languages than the shell.
@@ -105,16 +105,17 @@ This step is a small Python script, which shows that a process can run code in o
 --8<-- "docs/en/docs/hello_nextflow/img/hello-multistep.drawio.svg"
 </figure>
 
-We'll build it in three steps:
+We'll build it in four steps:
 
 1. Test the translation code in the terminal.
-2. Wrap it in a process that translates into Spanish, and connect it to the output of `sayHello`.
-3. Make the language an input of the process, set by a parameter.
+2. Wrap it in a process that translates into Spanish.
+3. Connect the process to the output of `sayHello`, and publish its outputs.
+4. Make the language an input of the process, set by a parameter.
 
 _From here on, diagrams show channels explicitly only where the text is about how steps are connected.
 Elsewhere, a file box such as `*.txt` stands for the channel of files that one step passes to the next._
 
-### 1.1. Test the translation code in the terminal
+### 1.1. Test the translation command in the terminal
 
 The translation is a simple text replacement: read the greeting, replace `Hello` with the word for hello in the target language, and write the result to a new file.
 
@@ -135,18 +136,16 @@ The output is a text file called `es-Mateo.txt` that contains the translated gre
 
 That's what we're going to do in our workflow, for every greeting.
 
-### 1.2. Write the translation step as a Nextflow process
+### 1.2. Write the translation process
 
-We start with a version that always translates into Spanish, and connect it to the first process.
-We won't add the language parameter yet; that comes in section 1.3.
+We start with a version that always translates into Spanish.
+We won't add the language parameter yet; that comes in section 1.4.
 
 The process will take each greeting file and produce a translated file:
 
 <figure class="drawio">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-translate-process.drawio.svg"
 </figure>
-
-#### 1.2.1. Define the process
 
 Add the following process definition to the workflow script, right under the `sayHello` process:
 
@@ -200,7 +199,11 @@ Python never sees the placeholders, only the values.
     For those, save the script in a directory named `bin/` next to your workflow script, make it executable, and call it by name in the `script` block.
     Nextflow adds the `bin/` directory to the `PATH` of every task automatically.
 
-#### 1.2.2. Pass the output of the first process to the new process
+### 1.3. Connect the translation step to the workflow
+
+Next, connect the new process to the output of `sayHello`, publish its outputs, and run the workflow.
+
+#### 1.3.1. Connect the process calls
 
 Now we need to call the new process in the workflow block, and make the output of the `sayHello()` process flow into it.
 
@@ -254,7 +257,7 @@ In the workflow block, make the following code change:
 
 For a simple case like this (one output to one input), that's all we need to do to connect two processes!
 
-#### 1.2.3. Set up the workflow output publishing
+#### 1.3.2. Publish the outputs
 
 Finally, update the workflow outputs to publish the results from the second process too.
 
@@ -308,7 +311,7 @@ Then, in the `output` block, make the following code change:
 Each output has its own entry, so you can set a different path for each one.
 For now they all go to the same `hello` subdirectory; in section 2.5, you'll organize them by batch.
 
-#### 1.2.4. Run the workflow with `-resume`
+#### 1.3.3. Run the workflow
 
 Run the workflow with the `-resume` flag, which reuses the results of steps that already ran successfully ([Part 1 of Nextflow Run](../nextflow_run/01_run_nextflow.md) covers it in detail):
 
@@ -383,7 +386,7 @@ with open('es-Mateo.txt', 'w') as translated_file:
 All we did was connect the output of `sayHello` to the input of `translateGreeting`, and Nextflow handled the individual files and passed them between the two steps for us.
 This is one of the reasons Nextflow channels are so powerful: they take care of the busywork involved in connecting workflow steps together.
 
-### 1.3. Make the language an input of the process
+### 1.4. Add a language input
 
 Our translation step always translates into Spanish.
 To make it translate into other languages, we'll give the process a second input, `language`, set by a pipeline parameter:
@@ -392,7 +395,7 @@ To make it translate into other languages, we'll give the process a second input
 --8<-- "docs/en/docs/hello_nextflow/img/hello-translate-language-process.drawio.svg"
 </figure>
 
-#### 1.3.1. Add the `language` input and a dictionary of translations
+#### 1.4.1. Add the `language` input and a dictionary of translations
 
 Good news: we can declare as many inputs as we want in the process definition.
 
@@ -481,7 +484,7 @@ If the code is not in the dictionary, the script exits with an error message (`s
 The output file name also starts with the language code, so the outputs of different languages don't overwrite each other.
 The tag now includes the language code too, matching the output file name; the language alone would give all the tasks of a run the same tag.
 
-#### 1.3.2. Add a `language` parameter
+#### 1.4.2. Add a `language` parameter
 
 You already know how to use the `params` system to declare CLI parameters.
 Declare a `language` parameter, with Spanish (`es`) as the default value.
@@ -511,7 +514,7 @@ In the pipeline parameters section, make the following code change:
     }
     ```
 
-#### 1.3.3. Pass the language to the process
+#### 1.4.3. Pass the language to the process
 
 To provide the value of the parameter to the process, add it to the process call.
 
@@ -542,7 +545,13 @@ Notice that the two inputs are different kinds of things.
 Nextflow calls the process once per file in the channel, and reuses the single value for every call.
 So each of the three greetings gets translated into the same language.
 
-#### 1.3.4. Run the workflow
+The workflow now looks like this:
+
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-language.drawio.svg"
+</figure>
+
+#### 1.4.4. Run the workflow in another language
 
 Run the workflow with `-resume`, this time setting the language to French:
 
@@ -657,19 +666,13 @@ Nextflow also saves it in the `.command.err` file of the task directory listed u
 
 You know how to chain processes together by providing the output of one step as input to the next step, how to write the script of a process in another language, and how to pass more than one input to a process.
 
-To recap, this is what you've built so far:
-
-<figure class="drawio">
---8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-language.drawio.svg"
-</figure>
-
 ### What's next?
 
 Learn how to collect outputs from batched process calls and feed them into a single process.
 
 ---
 
-## 2. Add a third step to collect all the greetings
+## 2. Add a collection step
 
 When we use a process to apply a transformation to each of the elements in a channel, like we're doing here to the multiple greetings, we sometimes want to collect elements from the output channel of that process, and feed them into another process that performs some kind of analysis or summation.
 
@@ -682,17 +685,17 @@ We'll also name that file after a batch name provided as a parameter and after t
 
 Not to spoil the surprise, but this is going to involve a very useful operator.
 
-### 2.1. Define the collection command and test it in the terminal
+### 2.1. Test the collection command in the terminal
 
 The collection step we want to add to our workflow will use the `cat` command to concatenate multiple translated greetings into a single file.
 
 Run the following in your terminal to verify that it works as expected:
 
 ```bash
-echo 'Hola, Mateo!' > es-Mateo.txt
-echo 'Hola, Raphael!' > es-Raphael.txt
-echo 'Hola, Celine!' > es-Celine.txt
-cat es-Mateo.txt es-Raphael.txt es-Celine.txt > greetings.txt
+echo 'Bonjour, Mateo!' > fr-Mateo.txt
+echo 'Bonjour, Raphael!' > fr-Raphael.txt
+echo 'Bonjour, Celine!' > fr-Celine.txt
+cat fr-Mateo.txt fr-Raphael.txt fr-Celine.txt > greetings.txt
 ```
 
 The output is a text file called `greetings.txt` that contains all three greetings.
@@ -700,14 +703,14 @@ The output is a text file called `greetings.txt` that contains all three greetin
 ??? abstract "File contents"
 
     ```console title="greetings.txt"
-    Hola, Mateo!
-    Hola, Raphael!
-    Hola, Celine!
+    Bonjour, Mateo!
+    Bonjour, Raphael!
+    Bonjour, Celine!
     ```
 
 That is the result we want to achieve with our workflow.
 
-### 2.2. Create a new process to do the collection step
+### 2.2. Write the collection process
 
 The process will take all the translated files, plus a batch name and a language, and write the greetings into a single file:
 
@@ -748,7 +751,7 @@ This process has three inputs:
 - `language` is the language of the greetings, which we also use in the output file name.
   A batch names a group of samples, which you may translate into several languages; including the language in the file name keeps the results of different languages apart.
 
-`batch_name` and `language` are plain values, so they use the `val` qualifier, like the `language` input of `translateGreeting` in section 1.3.
+`batch_name` and `language` are plain values, so they use the `val` qualifier, like the `language` input of `translateGreeting` in section 1.4.
 The process runs only once per run, but tagging it with the batch name makes runs of different batches easy to tell apart.
 
 The script needs to handle an arbitrary number of input files, so we can't write the command up front.
@@ -762,13 +765,13 @@ Fortunately, Nextflow is quite happy to do that for us if we simply write `cat $
     In that case, we would have to do a little bit of extra work to compose the command.
     You can see an example of this in the [Nextflow for Genomics](../nf4_science/genomics/index.md) training course.
 
-### 2.3. Add the collection step to the workflow
+### 2.3. Connect the collection step to the workflow
 
 Now we need a `batch` parameter, and a call to the collection process on the output of the translation step.
 That output is also a channel, `translated_ch`.
 
 <figure class="drawio">
---8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-connector.drawio.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-connector.drawio.svg"
 </figure>
 
 #### 2.3.1. Add a `batch` parameter
@@ -823,7 +826,7 @@ In the workflow block, make the following code change:
 This connects the output of `translateGreeting()` to the first input of `collectGreetings()`, and passes the batch name and the language as the second and third inputs.
 The language comes from the same `params.language` parameter as for `translateGreeting()`, so the collected file is named after the language the greetings were translated into.
 
-#### 2.3.3. Update the workflow outputs
+#### 2.3.3. Publish the outputs
 
 In the `publish:` section of the `workflow` block, make the following code change:
 
@@ -882,12 +885,12 @@ Then, in the `output` block, make the following code change:
     }
     ```
 
-#### 2.3.4. Run the workflow with `-resume`
+#### 2.3.4. Run the workflow
 
 Let's try it.
 
 ```bash
-nextflow run hello-workflow.nf -resume
+nextflow run hello-workflow.nf -resume --language fr
 ```
 
 ??? success "Command output"
@@ -897,9 +900,9 @@ nextflow run hello-workflow.nf -resume
 
     Launching `hello-workflow.nf` [kickass_sanger] revision: 8d4f16d465
 
-    executor >  local (6)
+    executor >  local (3)
     [c8/1d9afc] sayHello (Mateo)                   | 3 of 3, cached: 3 ✔
-    [3a/f97a23] translateGreeting (es-Raphael.txt) | 3 of 3 ✔
+    [3a/f97a23] translateGreeting (fr-Raphael.txt) | 3 of 3, cached: 3 ✔
     [d9/0afd55] collectGreetings (batch)           | 3 of 3 ✔
 
     Outputs:
@@ -912,18 +915,17 @@ nextflow run hello-workflow.nf -resume
         - hello/Mateo.txt
 
       translated:
-        - hello/es-Celine.txt
-        - hello/es-Raphael.txt
-        - hello/es-Mateo.txt
+        - hello/fr-Celine.txt
+        - hello/fr-Raphael.txt
+        - hello/fr-Mateo.txt
 
       collected:
-        - hello/batch-es-greetings.txt
-        - hello/batch-es-greetings.txt
-        - hello/batch-es-greetings.txt
+        - hello/batch-fr-greetings.txt
+        - hello/batch-fr-greetings.txt
+        - hello/batch-fr-greetings.txt
     ```
 
 It runs successfully, including the third step.
-The `translateGreeting` tasks ran again because the last run used French, and without `--language` the workflow uses the default, Spanish.
 
 However, look at the number of calls for `collectGreetings()` on the last line.
 We were only expecting one, but there are three.
@@ -932,8 +934,8 @@ Now have a look at the contents of the final output file.
 
 ??? abstract "File contents"
 
-    ```console title="results/hello/batch-es-greetings.txt"
-    Hola, Mateo!
+    ```console title="results/hello/batch-fr-greetings.txt"
+    Bonjour, Mateo!
     ```
 
 Oh no. The collection step was run individually on each greeting, which is NOT what we wanted.
@@ -944,7 +946,7 @@ Oh no. The collection step was run individually on each greeting, which is NOT w
 
 We need to do something to tell Nextflow explicitly that we want that third step to run on all the elements in the channel output by `translateGreeting()`.
 
-### 2.4. Use an operator to collect the greetings into a single input
+### 2.4. Collect the greetings into a single input
 
 Yes, once again the answer to our problem is an operator.
 
@@ -998,12 +1000,12 @@ Let's also include a couple of `view()` statements to visualize the before and a
 The `view()` statements can go anywhere you want; we put them right after the call for readability.
 As in Part 2, the closure variables are named after what the channel contains: one file path per element before `collect()`, and a list of all the file paths after it.
 
-#### 2.4.3. Run the workflow again with `-resume`
+#### 2.4.3. Run the workflow
 
 Let's try it:
 
 ```bash
-nextflow run hello-workflow.nf -resume
+nextflow run hello-workflow.nf -resume --language fr
 ```
 
 ??? success "Command output"
@@ -1015,12 +1017,12 @@ nextflow run hello-workflow.nf -resume
 
     executor >  local (1)
     [c8/1d9afc] sayHello (Mateo)                  | 3 of 3, cached: 3 ✔
-    [54/9b3150] translateGreeting (es-Celine.txt) | 3 of 3, cached: 3 ✔
+    [54/9b3150] translateGreeting (fr-Celine.txt) | 3 of 3, cached: 3 ✔
     [e2/56b5b1] collectGreetings (batch)          | 1 of 1 ✔
-    Before collect: /workspaces/training/hello-nextflow/work/a5/e7cd27b0e21c0f3f36831222d7de68/es-Mateo.txt
-    Before collect: /workspaces/training/hello-nextflow/work/3a/f97a23653270f6a94ab11d07cf8b46/es-Raphael.txt
-    Before collect: /workspaces/training/hello-nextflow/work/54/9b3150fc0eec1f7954d6da98da6300/es-Celine.txt
-    After collect: [/workspaces/training/hello-nextflow/work/a5/e7cd27b0e21c0f3f36831222d7de68/es-Mateo.txt, /workspaces/training/hello-nextflow/work/3a/f97a23653270f6a94ab11d07cf8b46/es-Raphael.txt, /workspaces/training/hello-nextflow/work/54/9b3150fc0eec1f7954d6da98da6300/es-Celine.txt]
+    Before collect: /workspaces/training/hello-nextflow/work/a5/e7cd27b0e21c0f3f36831222d7de68/fr-Mateo.txt
+    Before collect: /workspaces/training/hello-nextflow/work/3a/f97a23653270f6a94ab11d07cf8b46/fr-Raphael.txt
+    Before collect: /workspaces/training/hello-nextflow/work/54/9b3150fc0eec1f7954d6da98da6300/fr-Celine.txt
+    After collect: [/workspaces/training/hello-nextflow/work/a5/e7cd27b0e21c0f3f36831222d7de68/fr-Mateo.txt, /workspaces/training/hello-nextflow/work/3a/f97a23653270f6a94ab11d07cf8b46/fr-Raphael.txt, /workspaces/training/hello-nextflow/work/54/9b3150fc0eec1f7954d6da98da6300/fr-Celine.txt]
 
     Outputs:
 
@@ -1032,11 +1034,11 @@ nextflow run hello-workflow.nf -resume
         - hello/Raphael.txt
 
       translated:
-        - hello/es-Mateo.txt
-        - hello/es-Raphael.txt
-        - hello/es-Celine.txt
+        - hello/fr-Mateo.txt
+        - hello/fr-Raphael.txt
+        - hello/fr-Celine.txt
 
-      collected: hello/batch-es-greetings.txt
+      collected: hello/batch-fr-greetings.txt
     ```
 
 It runs successfully, although the log output may look a little messier than this (we cleaned it up for readability).
@@ -1057,10 +1059,10 @@ Finally, you can have a look at the contents of the output file to satisfy yours
 
 ??? abstract "File contents"
 
-    ```console title="results/hello/batch-es-greetings.txt"
-    Hola, Mateo!
-    Hola, Raphael!
-    Hola, Celine!
+    ```console title="results/hello/batch-fr-greetings.txt"
+    Bonjour, Mateo!
+    Bonjour, Raphael!
+    Bonjour, Celine!
     ```
 
 This time we have all three greetings in the final output file. Success!
@@ -1094,7 +1096,7 @@ Before you move on to the next section, we recommend you delete the `view()` sta
 
 This is basically the reverse operation from point 2.4.2.
 
-### 2.5. Use the batch name to organize the outputs
+### 2.5. Organize the outputs by batch
 
 The `batch` parameter is also a good way to keep the published results of different batches apart.
 Each output's `path` can include parameter values, so you can publish each batch to its own subdirectory, and group the intermediate files in a subdirectory of their own.
@@ -1146,12 +1148,18 @@ The double quotes are required for Nextflow to insert the parameter value into t
 This is how a pipeline author decides how the results are organized.
 The person running the pipeline can change the location of the output directory, as [Part 2 of Nextflow Run](../nextflow_run/02_configure_pipeline.md) shows, but not the organization within it, except through parameters like `batch` that the author builds into the paths.
 
+The workflow now looks like this:
+
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-collect-trio.drawio.svg"
+</figure>
+
 #### 2.5.2. Run the workflow with a batch name
 
 Run the workflow with a batch name on the command line:
 
 ```bash
-nextflow run hello-workflow.nf -resume --batch trio
+nextflow run hello-workflow.nf -resume --language fr --batch trio
 ```
 
 ??? success "Command output"
@@ -1163,7 +1171,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 
     executor >  local (1)
     [c8/1d9afc] sayHello (Mateo)                  | 3 of 3, cached: 3 ✔
-    [54/9b3150] translateGreeting (es-Celine.txt) | 3 of 3, cached: 3 ✔
+    [54/9b3150] translateGreeting (fr-Celine.txt) | 3 of 3, cached: 3 ✔
     [f3/63fec2] collectGreetings (trio)           | 1 of 1 ✔
 
     Outputs:
@@ -1176,11 +1184,11 @@ nextflow run hello-workflow.nf -resume --batch trio
         - trio/intermediates/Celine.txt
 
       translated:
-        - trio/intermediates/es-Mateo.txt
-        - trio/intermediates/es-Raphael.txt
-        - trio/intermediates/es-Celine.txt
+        - trio/intermediates/fr-Mateo.txt
+        - trio/intermediates/fr-Raphael.txt
+        - trio/intermediates/fr-Celine.txt
 
-      collected: trio/intermediates/trio-es-greetings.txt
+      collected: trio/intermediates/trio-fr-greetings.txt
     ```
 
 The collection step ran again, since its batch name input changed, and all the outputs of this batch are now under `results/trio/`.
@@ -1190,19 +1198,13 @@ As long as you specify a different batch name, subsequent runs on other batches 
 
 You know how to collect outputs from a batch of process calls and feed them into a joint analysis or summation step, and how to use a parameter to organize the published outputs.
 
-To recap, this is what you've built so far:
-
-<figure class="drawio">
---8<-- "docs/en/docs/hello_nextflow/img/hello-collect.drawio.svg"
-</figure>
-
 ### What's next?
 
 Learn how to emit multiple outputs and handle them conveniently.
 
 ---
 
-## 3. Add an output to the collector step
+## 3. Add a report output
 
 So far we've been using processes that only produced one output each.
 We assigned the output of each call to a channel name, which we used both in the context of passing an output to the next process (e.g. `translateGreeting(greetings_ch, params.language)`) and in the context of the `publish:` section (e.g. `greetings = greetings_ch`).
@@ -1218,7 +1220,7 @@ We can either choose to give those output channels names, which makes it easy to
 
 For demonstration purposes, let's say we want to count the number of greetings that are being collected for a given batch of inputs and report it in a file.
 
-### 3.1. Modify the process to count and output the number of greetings
+### 3.1. Update the collection process
 
 This will require two key changes to the process definition: we need a way to count the greetings and write a report file, then we need to add that report file to the `output` block of the process.
 
@@ -1305,7 +1307,7 @@ But as the saying goes, why not both?
 
     We prefer naming outputs because otherwise, it's too easy to grab the wrong index by error, especially when the process produces a lot of outputs.
 
-### 3.2. Update the workflow outputs
+### 3.2. Publish the report
 
 Now that the `collectGreetings` process has two outputs, calling it returns two channels instead of one.
 You assign the result to a name as before, here `collected_out`, and read each channel by its `emit:` name:
@@ -1410,7 +1412,7 @@ We just need to add the new output, which we publish at the top level of the bat
 Run the workflow with the same batch name as before:
 
 ```bash
-nextflow run hello-workflow.nf -resume --batch trio
+nextflow run hello-workflow.nf -resume --language fr --batch trio
 ```
 
 ??? success "Command output"
@@ -1422,7 +1424,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 
     executor >  local (1)
     [c8/1d9afc] sayHello (Mateo)                   | 3 of 3, cached: 3 ✔
-    [3a/f97a23] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
+    [3a/f97a23] translateGreeting (fr-Raphael.txt) | 3 of 3, cached: 3 ✔
     [50/966f92] collectGreetings (trio)            | 1 of 1 ✔
 
     Outputs:
@@ -1435,21 +1437,21 @@ nextflow run hello-workflow.nf -resume --batch trio
         - trio/intermediates/Celine.txt
 
       translated:
-        - trio/intermediates/es-Mateo.txt
-        - trio/intermediates/es-Celine.txt
-        - trio/intermediates/es-Raphael.txt
+        - trio/intermediates/fr-Mateo.txt
+        - trio/intermediates/fr-Celine.txt
+        - trio/intermediates/fr-Raphael.txt
 
-      collected: trio/intermediates/trio-es-greetings.txt
+      collected: trio/intermediates/trio-fr-greetings.txt
 
-      batch_report: trio/trio-es-report.txt
+      batch_report: trio/trio-fr-report.txt
     ```
 
-If you look in the `results/trio/` directory, you'll find the new report file, `trio-es-report.txt`.
+If you look in the `results/trio/` directory, you'll find the new report file, `trio-fr-report.txt`.
 Open it to verify that the workflow correctly reported the count of greetings that were processed.
 
 ??? abstract "File contents"
 
-    ```txt title="trio-es-report.txt"
+    ```txt title="trio-fr-report.txt"
     Number of greetings processed: 3
     ```
 
@@ -1514,12 +1516,12 @@ Run the workflow with `--batch trio -resume` and check `results/trio/`.
     Run the workflow:
 
     ```bash
-    nextflow run hello-workflow.nf --batch trio -resume
+    nextflow run hello-workflow.nf --language fr --batch trio -resume
     ```
 
     ```console title="Output (excerpt)"
     [c8/1d9afc] sayHello (Mateo)                   | 3 of 3, cached: 3 ✔
-    [3a/f97a23] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
+    [3a/f97a23] translateGreeting (fr-Raphael.txt) | 3 of 3, cached: 3 ✔
     [50/966f92] collectGreetings (trio)            | 1 of 1, cached: 1 ✔
 
     Outputs:
@@ -1532,13 +1534,13 @@ Run the workflow with `--batch trio -resume` and check `results/trio/`.
         - trio/intermediates/Mateo.txt
 
       translated:
-        - trio/translations/es-Mateo.txt
-        - trio/translations/es-Celine.txt
-        - trio/translations/es-Raphael.txt
+        - trio/translations/fr-Mateo.txt
+        - trio/translations/fr-Celine.txt
+        - trio/translations/fr-Raphael.txt
 
-      collected: trio/intermediates/trio-es-greetings.txt
+      collected: trio/intermediates/trio-fr-greetings.txt
 
-      batch_report: trio/trio-es-report.txt
+      batch_report: trio/trio-fr-report.txt
     ```
 
     Every task was cached, yet the translated files were published to the new location: Nextflow publishes the outputs of cached tasks too.
@@ -1557,7 +1559,7 @@ Then, before running each of the following commands, predict which steps will ru
 
 ??? tip "Hint"
 
-    Before your change, the run fails the same way as the `--language de` example in section 1.3.4.
+    Before your change, the run fails the same way as the `--language de` example in section 1.4.4.
     To predict what reruns, ask for each step whether its inputs or its code changed since a previous run.
 
 ??? solution
@@ -1678,25 +1680,25 @@ Run it with `--batch trio -resume`.
     Run the workflow:
 
     ```bash
-    nextflow run hello-workflow.nf --batch trio -resume
+    nextflow run hello-workflow.nf --language fr --batch trio -resume
     ```
 
     ```console title="Output (excerpt)"
     [c8/1d9afc] sayHello (Mateo)                   | 3 of 3, cached: 3 ✔
-    [3a/f97a23] translateGreeting (es-Raphael.txt) | 3 of 3, cached: 3 ✔
+    [3a/f97a23] translateGreeting (fr-Raphael.txt) | 3 of 3, cached: 3 ✔
     [50/966f92] collectGreetings (trio)            | 1 of 1, cached: 1 ✔
     [21/ee476b] collectBilingual (trio)            | 1 of 1 ✔
     ```
 
     Only the new step runs; everything upstream is cached.
 
-    ```console title="results/trio/trio-es-bilingual.txt"
+    ```console title="results/trio/trio-fr-bilingual.txt"
     Hello, Raphael!
     Hello, Mateo!
     Hello, Celine!
-    Hola, Mateo!
-    Hola, Celine!
-    Hola, Raphael!
+    Bonjour, Mateo!
+    Bonjour, Celine!
+    Bonjour, Raphael!
     ```
 
 ---
@@ -1710,7 +1712,7 @@ In the workflow block, which line makes the output of `sayHello(name_ch)` availa
 - [ ] `sayHello(name_ch).output = greetings_ch`
 - [ ] `greetings_ch << sayHello(name_ch)`
 
-Learn more: [1.2.2. Pass the output of the first process to the new process](#122-pass-the-output-of-the-first-process-to-the-new-process)
+Learn more: [1.3.1. Connect the process calls](#131-connect-the-process-calls)
 </quiz>
 
 <quiz>
@@ -1720,7 +1722,7 @@ Why does the task directory of a `translateGreeting` call also contain the greet
 - [ ] Both processes ran in the same task directory
 - [x] Nextflow staged it there as an input, as a symbolic link to the original file
 
-Learn more: [1.2.4. Run the workflow with `-resume`](#124-run-the-workflow-with-resume)
+Learn more: [1.3.3. Run the workflow](#133-run-the-workflow)
 </quiz>
 
 <quiz>
@@ -1730,7 +1732,7 @@ What does the line `#!/usr/bin/env python3` at the start of a process script do?
 - [ ] It is a comment that Nextflow ignores
 - [ ] It installs Python in the task environment
 
-Learn more: [1.2.1. Define the process](#121-define-the-process)
+Learn more: [1.2. Write the translation process](#12-write-the-translation-process)
 </quiz>
 
 <quiz>
@@ -1740,7 +1742,7 @@ A process is called with `translateGreeting(greetings_ch, params.language)`, whe
 - [ ] Once per language
 - [ ] Once, on all three files
 
-Learn more: [1.3.3. Pass the language to the process](#133-pass-the-language-to-the-process)
+Learn more: [1.4.3. Pass the language to the process](#143-pass-the-language-to-the-process)
 </quiz>
 
 <quiz>
@@ -1750,7 +1752,7 @@ When providing multiple inputs to a process, what must be true?
 - [ ] Inputs must be provided in alphabetical order
 - [x] The order of inputs must match the order defined in the input block
 
-Learn more: [1.3.3. Pass the language to the process](#133-pass-the-language-to-the-process)
+Learn more: [1.4.3. Pass the language to the process](#143-pass-the-language-to-the-process)
 </quiz>
 
 <quiz>
@@ -1769,7 +1771,7 @@ workflow {
 - [x] `collect()`
 - [ ] `mix()`
 
-Learn more: [2.4. Use an operator to collect the greetings into a single input](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
+Learn more: [2.4. Collect the greetings into a single input](#24-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1779,7 +1781,7 @@ When should you use the `collect()` operator?
 - [ ] When you want to split data across multiple processes
 - [ ] When you want to process items in parallel
 
-Learn more: [2.4. Use an operator to collect the greetings into a single input](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
+Learn more: [2.4. Collect the greetings into a single input](#24-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1789,7 +1791,7 @@ A process with named outputs is called as `collected_out = collectGreetings(...)
 - [x] `collected_out.report`
 - [ ] `collectGreetings.report`
 
-Learn more: [3.2. Update the workflow outputs](#32-update-the-workflow-outputs)
+Learn more: [3.2. Publish the report](#32-publish-the-report)
 </quiz>
 
 <quiz>
