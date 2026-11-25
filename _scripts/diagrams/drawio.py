@@ -172,7 +172,7 @@ class Diagram:
         st = parse_style(style)
         for k, v in (("exit", exit), ("entry", entry)):
             if v is not None:
-                st.update({f"{k}X": num(v[0]), f"{k}Y": num(v[1]), f"{k}Dx": 0, f"{k}Dy": 0})
+                st.update({f"{k}X": f"{v[0]:.5g}", f"{k}Y": f"{v[1]:.5g}", f"{k}Dx": 0, f"{k}Dy": 0})
         c = ET.SubElement(self.root, "mxCell", id=cid, style=format_style(st), edge="1", parent=parent,
                           source=source, target=target)
         g = ET.SubElement(c, "mxGeometry", relative="1", **{"as": "geometry"})

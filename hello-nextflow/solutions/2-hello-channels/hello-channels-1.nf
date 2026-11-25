@@ -28,7 +28,7 @@ workflow {
 
     main:
     // create a channel for inputs
-    name_ch = channel.of('Ziggy')
+    name_ch = channel.of('Universe')
                         .view()
     // emit a greeting
     greetings_ch = sayHello(name_ch)
