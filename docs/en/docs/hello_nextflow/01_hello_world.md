@@ -77,6 +77,7 @@ The first block of code describes a **process**.
 
 The process definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly braces.
 The process body must contain a script block which specifies the command to run, which can be anything you would be able to run in a command line terminal.
+When you write your own processes, it's a good habit to get the command working in the terminal first, on a small input, before putting it in the `script` block.
 
 ```groovy title="hello-world.nf" linenums="3"
 /*
