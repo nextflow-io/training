@@ -215,11 +215,11 @@ def check(path):
         if roles[v.get("id")] != "caption":
             continue
         x, y, w, h = boxes[v.get("id")]
-        above = [cid for cid, b in boxes.items() if roles[cid] in ("process", "file", "channel", "group", "frame")
+        above = [cid for cid, b in boxes.items() if roles[cid] in ("process", "file", "channel", "group", "frame", "item")
                  and b[1] + b[3] <= y + TOL and b[0] < x + w / 2 < b[0] + b[2]]
         if not above:
             # caption above its shape (top of a captioned stack): same gap, mirrored
-            below = [cid for cid, b in boxes.items() if roles[cid] in ("process", "file", "channel", "group", "frame")
+            below = [cid for cid, b in boxes.items() if roles[cid] in ("process", "file", "channel", "group", "frame", "item")
                      and b[1] >= y + h - TOL and b[0] < x + w / 2 < b[0] + b[2]]
             if below:
                 cid = min(below, key=lambda c: boxes[c][1])

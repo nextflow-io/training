@@ -289,8 +289,8 @@ Alright, this works! Now let's move on to making more substantial changes.
 
 In the current version of the `core-hello` pipeline, we're extracting the file from `FIND_CONCATENATE`'s output tuple to pass to `COWPY`, as shown in the top half of the diagram below.
 
-<figure class="excalidraw">
-    --8<-- "docs/en/docs/nfcore_build/img/cowpy-inputs.svg"
+<figure class="drawio">
+    --8<-- "docs/en/docs/nfcore_build/img/cowpy-inputs.drawio.svg"
 </figure>
 
 It would be better to have `COWPY` accept metadata tuples directly, allowing metadata to flow on through the workflow, as shown in the bottom half of the diagram.

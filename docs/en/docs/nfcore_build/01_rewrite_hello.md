@@ -69,8 +69,8 @@ If you look inside the `main.nf` file, you'll see it imports a workflow called `
 
 Here is what the relationships between the relevant code components look like:
 
-<figure class="excalidraw">
-    --8<-- "docs/en/docs/nfcore_build/img/nf-core_demo_code_organization.svg"
+<figure class="drawio">
+    --8<-- "docs/en/docs/nfcore_build/img/nf-core_demo_code_organization.drawio.svg"
 </figure>
 
 The unnamed workflow in `main.nf` is called an _entrypoint_ script. It acts as a wrapper for two kinds of nested workflows: the `DEMO` workflow containing the actual analysis logic, located in `workflows/demo.nf`, and a set of housekeeping workflows located under `subworkflows/`.
@@ -456,8 +456,8 @@ That is the direct equivalent to the `DEMO` workflow, though at the moment it's 
 
 And accordingly, this is what the overall structure of the pipeline scaffold looks like:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nfcore_build/img/core-hello-initial.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nfcore_build/img/core-hello-initial.drawio.svg"
 </figure>
 
 This should remind you of the `nf-core/demo` pipeline structure!
@@ -573,8 +573,8 @@ In order to map clearly what parts of the original workflow should go where in t
 
 This is what we are trying to build right now:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nfcore_build/img/composable-hello.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nfcore_build/img/composable-hello.drawio.svg"
 </figure>
 
 Effectively, we want to mimic the modular structure of the nf-core scaffold, but with less complexity to start with.
@@ -941,8 +941,8 @@ Learn how to graft a basic composable workflow onto the nf-core scaffold.
 Now that we've verified our composable workflow works correctly, let's return to the nf-core pipeline scaffold we created in section 2.
 We want to integrate the composable workflow we just developed into the nf-core template structure, so the end result should look something like this.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nfcore_build/img/core-hello.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nfcore_build/img/core-hello.drawio.svg"
 </figure>
 
 So how do we make that happen? Let's have a look at the current content of the `HELLO` workflow in `core-hello/workflows/hello.nf` (the nf-core scaffold).
@@ -1411,8 +1411,8 @@ What matters here is that there are two workflows defined:
 
 Here is a diagram of how they relate to each other:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nfcore_build/img/hello-nested-workflows.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nfcore_build/img/hello-nested-workflows.drawio.svg"
 </figure>
 
 Importantly, we cannot find any code constructing an input channel at this level, only references to a samplesheet provided via the `--input` parameter.
