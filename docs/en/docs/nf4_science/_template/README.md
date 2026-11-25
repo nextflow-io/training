@@ -118,7 +118,7 @@ docs/en/docs/nf4_science/{domain}/
 ├── 03_multi_sample.md          # Multi-sample aggregation
 ├── survey.md                   # Typeform feedback survey
 ├── next_steps.md               # Course summary and suggestions
-└── img/                        # Diagrams (.excalidraw.svg, .png)
+└── img/                        # Diagrams (.drawio.svg, see _scripts/diagrams/README.md; .png)
 
 nf4-science/{domain}/
 ├── {domain}.nf                 # Skeleton workflow file

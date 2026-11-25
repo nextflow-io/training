@@ -15,8 +15,8 @@ In this part of the course, we're going to develop a workflow that does the foll
 2. Trim adapters and run post-trimming QC (Trim Galore)
 3. Align trimmed reads to a reference genome (HISAT2)
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-wf-02.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-wf-02.drawio.svg"
 </figure>
 
 This automates the steps from the first section of [Part 1: Method overview](./01_method.md#1-single-sample-processing), where you ran these commands manually in their containers.

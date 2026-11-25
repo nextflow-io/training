@@ -42,8 +42,8 @@ These are the commands we'll wrap into a Nextflow workflow in Part 2 of this cou
 1. {STEP_1_SUMMARY}
 2. {STEP_2_SUMMARY}
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/{DOMAIN_DIR}/img/{DIAGRAM_1}.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nf4_science/{DOMAIN_DIR}/img/{DIAGRAM_1}.drawio.svg"
 </figure>
 
 We start by testing the commands on just one sample.
@@ -161,8 +161,8 @@ These are the commands we'll wrap into a Nextflow workflow in Part 3 of this cou
 1. {AGGREGATION_STEP_1_SUMMARY}
 2. {AGGREGATION_STEP_2_SUMMARY}
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/{DOMAIN_DIR}/img/{DIAGRAM_2}.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nf4_science/{DOMAIN_DIR}/img/{DIAGRAM_2}.drawio.svg"
 </figure>
 
 ### 2.1. {AGGREGATION_STEP_TITLE}

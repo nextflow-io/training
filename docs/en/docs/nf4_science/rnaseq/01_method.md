@@ -5,8 +5,8 @@ For this course, we are following the method described [here](https://www.bioinf
 
 Our goal is to develop a workflow that implements the following processing steps: run initial quality control on reads in a bulk RNAseq sample, trim adapter sequences from the reads, align the reads to a reference genome, and produce a comprehensive quality control (QC) report.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-method-03.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-method-03.drawio.svg"
 </figure>
 
 - **FASTQC:** Perform QC on the read data before trimming using FastQC
@@ -51,8 +51,8 @@ These are the commands we'll wrap into a Nextflow workflow in Part 2 of this cou
 2. Trim adapter sequences and run post-trimming QC using Trim Galore
 3. Align the trimmed reads to the reference genome using HISAT2
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-method-02.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-method-02.drawio.svg"
 </figure>
 
 We start by testing these commands on just one sample.
@@ -780,8 +780,8 @@ These are the commands we'll wrap into a Nextflow workflow in Part 3 of this cou
 2. Run alignment on additional samples using HISAT2
 3. Aggregate all QC reports into a comprehensive report using MultiQC
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-method-03.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-method-03.drawio.svg"
 </figure>
 
 ### 2.1. QC and trim additional samples

@@ -34,8 +34,8 @@ In this part of the course, we're going to extend the workflow to do the followi
 2. Run per-sample QC, trimming, and alignment on all samples in parallel
 3. Aggregate all QC reports into a comprehensive MultiQC report
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-wf-03.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-wf-03.drawio.svg"
 </figure>
 
 This automates the steps from the second section of [Part 1: Method overview](./01_method.md#2-multi-sample-qc-aggregation), where you ran these commands manually in their containers.

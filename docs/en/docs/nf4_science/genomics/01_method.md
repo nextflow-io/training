@@ -47,8 +47,8 @@ These are the commands we'll wrap into a Nextflow workflow in Part 2 of this cou
 1. Generate an index file for a BAM input file using [Samtools](https://www.htslib.org/)
 2. Run the GATK HaplotypeCaller on the indexed BAM file to generate per-sample variant calls in VCF (Variant Call Format)
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.drawio.svg"
 </figure>
 
 We start by testing the two commands on just one sample.
@@ -428,8 +428,8 @@ These are the commands we'll wrap into a Nextflow workflow in Part 3 of this cou
 3. Collect all the GVCFs and combine them into a GenomicsDB data store
 4. Run joint genotyping on the combined GVCF data store to produce a cohort-level VCF
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.drawio.svg"
 </figure>
 
 We now need to test all of these commands, starting with indexing all three BAM files.

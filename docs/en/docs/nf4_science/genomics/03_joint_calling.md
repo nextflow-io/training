@@ -32,8 +32,8 @@ In this part of the course, we're going to extend the workflow to do the followi
 3. Collect all the GVCFs and combine them into a GenomicsDB data store
 4. Run joint genotyping on the combined GVCF data store to produce a cohort-level VCF
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.drawio.svg"
 </figure>
 
 This implements the method described in [Part 1: Method Overview](./01_method.md) (second section covering the multi-sample use case) and part builds directly on the workflow produced by [Part 2: Per-sample variant calling](./02_per_sample_variant_calling.md).

@@ -10,8 +10,8 @@ In this part of the course, we're going to develop a workflow that does the foll
 1. Generate an index file for each BAM input file using [Samtools](https://www.htslib.org/)
 2. Run the GATK HaplotypeCaller on each BAM input file to generate per-sample variant calls in VCF (Variant Call Format)
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.drawio.svg"
 </figure>
 
 This automates the steps from the first section of [Part 1: Method overview](./01_method.md#1-per-sample-variant-calling), where you ran these commands manually in their containers.

@@ -7,8 +7,8 @@ Now we're going to extend it to implement multi-sample {AGGREGATION_METHOD}, as 
 
 In this part of the course, we're going to extend the workflow to do the following:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/{DOMAIN_DIR}/img/{DIAGRAM_2}.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nf4_science/{DOMAIN_DIR}/img/{DIAGRAM_2}.drawio.svg"
 </figure>
 
 1. {PER_SAMPLE_STEP_1}

@@ -10,8 +10,8 @@ In this part of the course, we're going to develop a workflow that does the foll
 1. {PROCESS_1_DESCRIPTION}
 2. {PROCESS_2_DESCRIPTION}
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/{DOMAIN_DIR}/img/{DIAGRAM_1}.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/nf4_science/{DOMAIN_DIR}/img/{DIAGRAM_1}.drawio.svg"
 </figure>
 
 This replicates the steps from Part 1, where you ran these commands manually in their containers.
