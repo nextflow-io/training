@@ -97,8 +97,8 @@ process sayHello {
 
 Here we have a **process** called `sayHello` that writes its **output** to a file named `output.txt`.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_world.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-world-process.drawio.svg"
 </figure>
 
 This is a very minimal process definition that just contains an `output` definition and the `script` to execute.
@@ -467,6 +467,12 @@ Let's make these changes one at a time.
 
 We need to edit the process definition to (1) accept an input variable and (2) use that variable in the command line.
 
+The process will take a name as input and use it in the greeting:
+
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-world-input-process.drawio.svg"
+</figure>
+
 #### 3.1.1. Add an input block to the process definition
 
 First, let's adapt the process definition to accept an input called `name`.
@@ -540,16 +546,16 @@ Now that the `sayHello()` process is ready to accept a variable input, we need a
 We could simply hardcode an input directly by making the process call `sayHello('World')`.
 However, when we're doing real work with our workflow, we're going to want to be able to control its inputs from the command line, so we can do something like this:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-world-param.drawio.svg"
 </figure>
 
 Fortunately, Nextflow has a built-in workflow parameter system called [`params`](https://nextflow.io/docs/latest/config.html#params) that makes it easy to declare and use CLI parameters.
 
 The general syntax is to declare `params.<parameter_name>` to tell Nextflow to expect a `--<parameter_name>` parameter on the command line.
 
-Here, we want to create a parameter called `--name`, so we need to declare `params.name` somewhere in the workflow.
-In principle we can write it anywhere; but since we're going to want to give it to the `sayHello()` process call, we can plug it in there directly by writing `sayHello(params.name)`.
+Here, we want to create a parameter called `--who`, so we need to declare `params.who` somewhere in the workflow.
+In principle we can write it anywhere; but since we're going to want to give it to the `sayHello()` process call, we can plug it in there directly by writing `sayHello(params.who)`.
 
 In the workflow block, make the following code change:
 
@@ -557,7 +563,7 @@ In the workflow block, make the following code change:
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
         // emit a greeting
-        greeting = sayHello(params.name)
+        greeting = sayHello(params.who)
     ```
 
 === "Before"
@@ -567,7 +573,8 @@ In the workflow block, make the following code change:
         greeting = sayHello()
     ```
 
-This tells Nextflow to run the `sayHello` process on the value provided through the `--name` parameter.
+This tells Nextflow to run the `sayHello` process on the value provided through the `--who` parameter.
+The parameter doesn't need the same name as the process input: `params.who` is passed to the process's `name` input.
 
 In effect, we've accomplished steps (2) and (3) outlined at the start of the section in a single go.
 
@@ -576,7 +583,7 @@ In effect, we've accomplished steps (2) and (3) outlined at the start of the sec
 Let's run it!
 
 ```bash
-nextflow run hello-world.nf --name 'Mateo'
+nextflow run hello-world.nf --who 'Mateo'
 ```
 
 ??? success "Command output"
@@ -614,7 +621,7 @@ Ok, that was convenient, but in many cases, it makes sense to supply a default v
 
 #### 3.4.1. Set a default value for the CLI parameter
 
-Let's give the `name` parameter a default value by declaring it before the workflow definition.
+Let's give the `who` parameter a default value by declaring it before the workflow definition.
 
 In the workflow script, make the following code change:
 
@@ -627,7 +634,7 @@ In the workflow script, make the following code change:
      * Pipeline parameters
      */
     params {
-        name: String = 'Friend'
+        who: String = 'Friend'
     }
 
     workflow {
@@ -686,7 +693,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/hello-world.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 11.
-          name: String = 'Friend'
+          who: String = 'Friend'
                  ^
 
     1 error
@@ -714,7 +721,7 @@ The output will be in the same place as previously, but the contents should be u
     Hello, Friend!
     ```
 
-Nextflow used the default value of the `name` parameter to create the output.
+Nextflow used the default value of the `who` parameter to create the output.
 
 #### 3.4.3. Override the default value
 
@@ -723,7 +730,7 @@ If you provide the parameter on the command line, the CLI value will override th
 Try it out:
 
 ```bash
-nextflow run hello-world.nf --name 'Celine'
+nextflow run hello-world.nf --who 'Celine'
 ```
 
 ??? success "Command output"
@@ -914,7 +921,7 @@ Learn more: [3.1.2. Edit the process command to use the input variable](#312-edi
 </quiz>
 
 <quiz>
-In `#!groovy params { name: String = 'Friend' }`, what happens when you run the workflow with `--name 'Celine'`?
+In `#!groovy params { who: String = 'Friend' }`, what happens when you run the workflow with `--who 'Celine'`?
 - [x] The command-line value overrides the default
 - [ ] Both values are passed to the process
 - [ ] The workflow fails because the parameter already has a value

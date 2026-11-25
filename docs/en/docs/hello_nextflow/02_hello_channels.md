@@ -10,7 +10,7 @@
 :green_book: The video transcript is available [here](./transcripts/02_hello_channels.md).
 ///
 
-In Part 1 of this course (Hello World), we showed you how to provide a variable input to a process by providing the input in the process call directly: `sayHello(params.name)`.
+In Part 1 of this course (Hello World), we showed you how to provide a variable input to a process by providing the input in the process call directly: `sayHello(params.who)`.
 That was a deliberately simplified approach.
 In practice, that approach has major limitations; namely that it only works for very simple cases where we only want to run the process once, on a single value.
 In most realistic workflow use cases, we want to process multiple values (experimental data for multiple samples, for example), so we need a more sophisticated way to handle inputs.
@@ -41,7 +41,7 @@ It is equivalent to the script produced by working through Part 1 of this traini
 Just to make sure everything is working, run the script once before making any changes:
 
 ```bash
-nextflow run hello-channels.nf --name 'Channels'
+nextflow run hello-channels.nf --who 'Channels'
 ```
 
 ??? success "Command output"
@@ -119,7 +119,7 @@ In the workflow block, add the channel factory code:
         // create a channel for inputs
         name_ch = channel.of('Ziggy')
         // emit a greeting
-        greeting = sayHello(params.name)
+        greeting = sayHello(params.who)
 
         publish:
         greetings = greeting
@@ -133,7 +133,7 @@ In the workflow block, add the channel factory code:
 
         main:
         // emit a greeting
-        greeting = sayHello(params.name)
+        greeting = sayHello(params.who)
 
         publish:
         greetings = greeting
@@ -173,7 +173,7 @@ In the workflow block, make the following code change:
         // create a channel for inputs
         name_ch = channel.of('Ziggy')
         // emit a greeting
-        greeting = sayHello(params.name)
+        greeting = sayHello(params.who)
 
         publish:
         greetings = greeting
@@ -1146,13 +1146,13 @@ Let's see how we can make that happen.
 
 To get started, we're going to need to make two key changes to the script:
 
-- Replace the `name` parameter with an `input` parameter that points to the CSV file
+- Replace the `who` parameter with an `input` parameter that points to the CSV file
 - Switch the channel factory to one designed to handle a file
 
-#### 4.1.1. Replace the `name` parameter with an `input` parameter
+#### 4.1.1. Replace the `who` parameter with an `input` parameter
 
-In Part 1, we set up a `name` parameter to provide a single name on the command line.
-The names now come from a file, so instead of reusing `name` for something different, we replace it with a new parameter called `input`, of type `Path`, which points to the CSV file.
+In Part 1, we set up a `who` parameter to provide a single name on the command line.
+The names now come from a file, so instead of reusing `who` for something different, we replace it with a new parameter called `input`, of type `Path`, which points to the CSV file.
 That way, each parameter's name keeps describing what it holds.
 
 Make the following edit to the parameter declaration:
@@ -1175,7 +1175,7 @@ Make the following edit to the parameter declaration:
      * Pipeline parameters
      */
     params {
-        name: String = 'Friend'
+        who: String = 'Friend'
     }
     ```
 

@@ -68,7 +68,22 @@ def process_view(process, inputs, outputs, values=(), process_w=None):
     d = Diagram()
     pw = process_w or _box_w(process, S.SIZE_BOX)
     x0, y0 = 40, 40
-    if values:
+    if not inputs:
+        # no file input: the process on the first row, value inputs (if any) from the left
+        vals = [v if isinstance(v, tuple) else (v, "") for v in values]
+        lw = max([S.param_label_width(v) for v, _ in vals] or [0])
+        px = -(-(x0 + lw + S.GAP_H) // 10) * 10 if vals else x0
+        py = y0
+        d.add_vertex("proc", process, S.vertex_style("process"), px, py, pw, S.BOX_H)
+        fracs = {0: [], 1: [0.5], 2: [0.25, 0.75], 3: [0.2, 0.5, 0.8]}[len(vals)]
+        for i, ((v, example), f) in enumerate(zip(vals, fracs)):
+            y = py + f * S.BOX_H
+            w = S.param_label_width(v)
+            d.add_vertex(f"val{i}", v, S.vertex_style("param"), px - S.GAP_H - w, y - 19, w, 38)
+            d.add_edge(f"e-val{i}", f"val{i}", "proc", S.edge_style("param"), exit=(1, 0.5), entry=(0, f))
+            if example:
+                _contents(d, f"val{i}-example", example, px - S.GAP_H - w, w - S.MENLO_ADVANCE * S.SIZE_PARAM, y + 19 - 14)
+    elif values:
         iw, ih = _input(d, inputs, x0, y0)
         px = -(-(x0 + iw + 30) // 10) * 10
         # the process sits just low enough for its value labels to clear the input's contents

@@ -23,7 +23,7 @@ process sayHello {
  * Pipeline parameters
  */
 params {
-    name: String = 'Friend'
+    who: String = 'Friend'
 }
 
 workflow {
