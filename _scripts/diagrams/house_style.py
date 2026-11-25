@@ -8,6 +8,7 @@ GRID = 10
 
 # ---------------------------------------------------------------- colours
 INK = "#1e1e1e"  # all lines and default text
+FAIL = "#c92a2a"  # the "X" and "fails" marker on a step that fails (never the only signal)
 
 # role: (fill, stroke, text)
 ROLES = {
