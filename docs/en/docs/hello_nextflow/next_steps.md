@@ -25,8 +25,8 @@ Over the course of five parts, you transformed that basic workflow into a modula
 - The results are published to a directory called `results/`.
 - The final output of the pipeline is a plain text file containing ASCII art of a character saying the translated greetings.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-complete.drawio.svg"
 </figure>
 
 1. **`sayHello`:** Writes a greeting for each name to its own output file (_e.g._ "Hello, Mateo!" in "Mateo.txt")
