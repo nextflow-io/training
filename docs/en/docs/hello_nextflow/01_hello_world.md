@@ -583,7 +583,7 @@ In effect, we've accomplished steps (2) and (3) outlined at the start of the sec
 Let's run it!
 
 ```bash
-nextflow run hello-world.nf --who 'Mateo'
+nextflow run hello-world.nf --who 'Earthlings'
 ```
 
 ??? success "Command output"
@@ -610,7 +610,7 @@ Be sure to open up the output file to check that the greeting now includes the n
 ??? abstract "File contents"
 
     ```console title="results/hello/output.txt"
-    Hello, Mateo!
+    Hello, Earthlings!
     ```
 
 Note how the new execution has overwritten the output file published to the `results/hello/` directory.
@@ -730,7 +730,7 @@ If you provide the parameter on the command line, the CLI value will override th
 Try it out:
 
 ```bash
-nextflow run hello-world.nf --who 'Celine'
+nextflow run hello-world.nf --who 'Everyone'
 ```
 
 ??? success "Command output"
@@ -755,7 +755,7 @@ Once again, you should find the corresponding updated output in your results dir
 ??? abstract "File contents"
 
     ```console title="results/hello/output.txt"
-    Hello, Celine!
+    Hello, Everyone!
     ```
 
 !!! note
@@ -921,7 +921,7 @@ Learn more: [3.1.2. Edit the process command to use the input variable](#312-edi
 </quiz>
 
 <quiz>
-In `#!groovy params { who: String = 'Friend' }`, what happens when you run the workflow with `--who 'Celine'`?
+In `#!groovy params { who: String = 'Friend' }`, what happens when you run the workflow with `--who 'Everyone'`?
 - [x] The command-line value overrides the default
 - [ ] Both values are passed to the process
 - [ ] The workflow fails because the parameter already has a value
