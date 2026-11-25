@@ -1168,6 +1168,90 @@ In this section, you've learned:
 - **Handling grouped data structures**: How to work with the nested structure created by `groupTuple`
 - **Technical replicate handling**: How to group samples that share the same experimental conditions
 
+## Bonus exercise
+
+This optional exercise lets you practice what you learned in this side quest.
+It can be solved with what the side quest covered; open the hint if you get stuck.
+The solution is also in `solutions/splitting_and_grouping/bonus/`.
+
+### Exercise: Build the grouping key in one step
+
+In sections 4.2 and 5, you built the grouping key in two `map` steps: the first adds the interval to the key, and the second keeps only the `id` and `interval` fields.
+Starting from `main.nf` as you left it at the end of section 5, replace these two steps with a single `map` that produces the same output.
+
+??? tip "Hint"
+
+    Inside one `map`, you can take the `subMap` of the key first, and then add the interval to it with map addition (`+`), as you did in section 4.2.
+
+??? solution
+
+    Build the key with a single `map` straight after `combine`:
+
+    === "After"
+
+        ```groovy title="main.nf" linenums="20" hl_lines="1 5"
+            ch_grouped_samples = ch_joined_samples
+                .combine(ch_intervals)
+                .map { grouping_key, normal, tumor, interval ->
+                    [
+                        grouping_key.subMap('id') + [interval: interval],
+                        normal,
+                        tumor
+                    ]
+                }
+                .groupTuple()
+                .view()
+        ```
+
+    === "Before"
+
+        ```groovy title="main.nf" linenums="20"
+            ch_combined_samples = ch_joined_samples
+                .combine(ch_intervals)
+                .map { grouping_key, normal, tumor, interval ->
+                    [
+                        grouping_key + [interval: interval],
+                        normal,
+                        tumor
+                    ]
+                }
+
+            ch_grouped_samples = ch_combined_samples
+                .map { grouping_key, normal, tumor ->
+                    [
+                        grouping_key.subMap('id', 'interval'),
+                        normal,
+                        tumor
+                    ]
+                  }
+                  .groupTuple()
+                  .view()
+        ```
+
+    Run the workflow:
+
+    ```bash
+    nextflow run main.nf
+    ```
+
+    The output is the same as at the end of section 5:
+
+    ```console
+     N E X T F L O W   ~  version 26.10.7
+
+    Launching `main.nf` [silly_wozniak] revision: dc41533b0d
+
+    [[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+    [[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+    [[id:patientA, interval:chr3], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+    [[id:patientB, interval:chr1], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+    [[id:patientB, interval:chr2], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+    [[id:patientB, interval:chr3], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+    [[id:patientC, interval:chr1], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+    [[id:patientC, interval:chr2], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+    [[id:patientC, interval:chr3], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+    ```
+
 ---
 
 ## Summary
@@ -1266,5 +1350,7 @@ Mastering these channel operations will enable you to build flexible, scalable p
 ---
 
 ## What's next?
+
+To go further, try the [Splitting and Grouping challenges](splitting_and_grouping_challenges.md), which extend this workflow with a Nextflow feature this side quest doesn't cover.
 
 Return to the [menu of Side Quests](../index.md) or click the button in the bottom right of the page to move on to the next topic in the list.
