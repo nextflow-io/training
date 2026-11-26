@@ -32,8 +32,8 @@ class Report:
 
 def role_of(d, v):
     st = d.style(v)
-    if st.get("shape") == "partialRectangle":
-        return "bracket"
+    if st.get("shape") in ("partialRectangle", "singleArrow"):
+        return "bracket"  # decorations: brackets and "turns into" arrows
     if "text" in st:
         if st.get("align", "center") == "center":
             # captions are bold; centred plain text is a note (e.g. above an item in a channel)
@@ -106,9 +106,10 @@ def check(path):
             in_channel |= roles[p] in ("channel", "item")
             p = cells[p].get("parent")
         has_kids = any(c.get("parent") == v.get("id") for c in d.vertices())
-        if role in ("process", "file") and not in_channel and boxes[v.get("id")][3] != S.BOX_H:
+        if role in ("process", "file") and not in_channel and not has_kids and boxes[v.get("id")][3] != S.BOX_H:
             r.warn(f"{n}: height {boxes[v.get('id')][3]:g} (boxes are {S.BOX_H} high)")
-        if role in ("item", "file") and in_channel and not has_kids and boxes[v.get("id")][3] != S.ITEM_H:
+        rows = (boxes[v.get("id")][3] + S.ITEM_GAP) / (S.ITEM_H + S.ITEM_GAP)  # an item may span whole rows
+        if role in ("item", "file") and in_channel and not has_kids and abs(rows - round(rows)) > 0.01:
             r.warn(f"{n}: height {boxes[v.get('id')][3]:g} (items in a channel are {S.ITEM_H} high)")
     for v in d.vertices():
         if roles[v.get("id")] == "param":
@@ -202,6 +203,7 @@ def check(path):
             continue
         x, y, w, h = boxes[v.get("id")]
         near = [cid for cid, b in boxes.items() if is_box(cid) and 0 <= x - (b[0] + b[2]) <= 60
+                and not any(c.get("parent") == cid for c in d.vertices())
                 and not any(roles.get(a) in ("channel", "item") for a in _ancestors(cells, cid))
                 and b[1] < y + h / 2 < b[1] + b[3]]
         for cid in near:

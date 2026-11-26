@@ -209,6 +209,12 @@ class Diagram:
                     if st.get(side, "1") != "0":
                         o.append(f'<line x1="{num(ax)}" y1="{num(ay)}" x2="{num(bx)}" y2="{num(by)}" '
                                  f'stroke="{st.get("strokeColor", INK)}" stroke-width="{st.get("strokeWidth", 1)}"/>')
+            elif st.get("shape") == "singleArrow":
+                aw, asz = float(st.get("arrowWidth", 0.3)), float(st.get("arrowSize", 0.2))
+                cy, half, hx = y + h / 2, aw * h / 2, x + w - asz * w
+                pts = [(x, cy - half), (hx, cy - half), (hx, y), (x + w, cy), (hx, y + h), (hx, cy + half), (x, cy + half)]
+                o.append('<path d="M' + " L".join(f"{num(a)} {num(b)}" for a, b in pts) + f' Z" fill="{st.get("fillColor", "none")}" '
+                         f'stroke="{st.get("strokeColor", INK)}" stroke-width="{st.get("strokeWidth", 1)}" stroke-linejoin="round"/>')
             elif "text" not in st:
                 fill = st.get("fillColor", "none")
                 stroke = st.get("strokeColor", INK)
