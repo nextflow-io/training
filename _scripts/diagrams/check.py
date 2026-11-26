@@ -204,7 +204,7 @@ def check(path):
         x, y, w, h = boxes[v.get("id")]
         near = [cid for cid, b in boxes.items() if is_box(cid) and 0 <= x - (b[0] + b[2]) <= 60
                 and not any(c.get("parent") == cid for c in d.vertices())
-                and not any(roles.get(a) in ("channel", "item") for a in _ancestors(cells, cid))
+                and not any(roles.get(a) in ("channel", "item", "file", "process") for a in _ancestors(cells, cid))
                 and b[1] < y + h / 2 < b[1] + b[3]]
         for cid in near:
             b = boxes[cid]

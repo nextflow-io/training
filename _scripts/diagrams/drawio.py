@@ -233,6 +233,8 @@ class Diagram:
             fam_css = "Menlo, Consolas, monospace" if fam == "Menlo" else f"{fam}, Arial, sans-serif"
             lh = fs * 1.2
             y0 = y + h / 2 - lh * (len(lines) - 1) / 2
+            if st.get("verticalAlign") == "top":  # e.g. a file name as the header of a container
+                y0 = y + float(st.get("spacingTop", 10)) + lh / 2
             if st.get("align") == "left":
                 anchor, tx = "start", x + float(st.get("spacingLeft", TEXT_SPACING_LEFT))
             else:
