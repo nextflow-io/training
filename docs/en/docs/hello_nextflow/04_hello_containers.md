@@ -25,8 +25,8 @@ Note that we'll be teaching this using [Docker](https://www.docker.com/get-start
 
 Here is where this part fits in the course:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-course-map-part4.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-course-map-part4.drawio.svg"
 </figure>
 
 ??? info "How to begin from this section"
@@ -39,6 +39,11 @@ Here is where this part fits in the course:
 
 We're going to use the workflow script `hello-containers.nf` as a starting point.
 It is equivalent to the script produced by working through Part 3 of this training course.
+Run without parameters, it uses the default batch name and language:
+
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-containers-warmup.drawio.svg"
+</figure>
 
 Just to make sure everything is working, run the script once before making any changes:
 
@@ -407,13 +412,18 @@ This means that you can use any container image you like to run your processes, 
 
 To demonstrate this, we are going to add a `cowpy` step to the pipeline we've been developing, after the `collectGreetings` step.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.drawio.svg"
 </figure>
 
 ### 2.1. Add a `cowpy` process to the workflow script
 
 We can model our `cowpy` process on the other processes we've written previously.
+The process will take the collected greetings and a character, and write the greetings as ASCII art to a new file:
+
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-cowpy-process.drawio.svg"
+</figure>
 
 Add the following process definition to the workflow script, right under the `collectGreetings` process:
 
@@ -1100,8 +1110,8 @@ You know how to use containers in Nextflow to run processes, and how to declare 
 
 The pipeline is now complete, with all four steps:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-complete.drawio.svg"
 </figure>
 
 ### What's next?

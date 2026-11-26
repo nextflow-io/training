@@ -10,7 +10,7 @@
 :green_book: The video transcript is available [here](./transcripts/02_hello_channels.md).
 ///
 
-In Part 1 of this course (Hello World), we showed you how to provide a variable input to a process by providing the input in the process call directly: `sayHello(params.name)`.
+In Part 1 of this course (Hello World), we showed you how to provide a variable input to a process by providing the input in the process call directly: `sayHello(params.who)`.
 That was a deliberately simplified approach.
 In practice, that approach has major limitations; namely that it only works for very simple cases where we only want to run the process once, on a single value.
 In most realistic workflow use cases, we want to process multiple values (experimental data for multiple samples, for example), so we need a more sophisticated way to handle inputs.
@@ -23,8 +23,8 @@ You will also learn to use [**operators**](https://nextflow.io/docs/latest/refer
 
 Here is where this part fits in the course:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-course-map-part2.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-course-map-part2.drawio.svg"
 </figure>
 
 ??? info "How to begin from this section"
@@ -37,11 +37,16 @@ Here is where this part fits in the course:
 
 We're going to use the workflow script `hello-channels.nf` as a starting point.
 It is equivalent to the script produced by working through Part 1 of this training course.
+It passes the value of the `--who` parameter to the `sayHello` process, which writes the greeting to `output.txt`:
+
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-warmup.drawio.svg"
+</figure>
 
 Just to make sure everything is working, run the script once before making any changes:
 
 ```bash
-nextflow run hello-channels.nf --name 'Channels'
+nextflow run hello-channels.nf --who 'Channels'
 ```
 
 ??? success "Command output"
@@ -95,13 +100,13 @@ Functionally this will be similar to how we had it set up before, but instead of
 This is the line of code we're going to use:
 
 ```console title="Syntax"
-name_ch = channel.of('Ziggy')
+name_ch = channel.of('Universe')
 ```
 
-This creates a channel called `name_ch` using the `channel.of()` channel factory, which sets up a simple queue channel, and loads the string `'Ziggy'` to use as the name value.
+This creates a channel called `name_ch` using the `channel.of()` channel factory, which sets up a simple queue channel, and loads the string `'Universe'` to use as the name value.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.drawio.svg"
 </figure>
 
 !!! note
@@ -117,9 +122,9 @@ In the workflow block, add the channel factory code:
 
         main:
         // create a channel for inputs
-        name_ch = channel.of('Ziggy')
+        name_ch = channel.of('Universe')
         // emit a greeting
-        greeting = sayHello(params.name)
+        greeting = sayHello(params.who)
 
         publish:
         greetings = greeting
@@ -133,7 +138,7 @@ In the workflow block, add the channel factory code:
 
         main:
         // emit a greeting
-        greeting = sayHello(params.name)
+        greeting = sayHello(params.who)
 
         publish:
         greetings = greeting
@@ -155,7 +160,7 @@ In the workflow block, make the following code change:
 
         main:
         // create a channel for inputs
-        name_ch = channel.of('Ziggy')
+        name_ch = channel.of('Universe')
         // emit a greeting
         greetings_ch = sayHello(name_ch)
 
@@ -171,9 +176,9 @@ In the workflow block, make the following code change:
 
         main:
         // create a channel for inputs
-        name_ch = channel.of('Ziggy')
+        name_ch = channel.of('Universe')
         // emit a greeting
-        greeting = sayHello(params.name)
+        greeting = sayHello(params.who)
 
         publish:
         greetings = greeting
@@ -183,7 +188,7 @@ In the workflow block, make the following code change:
 This tells Nextflow to run the `sayHello` process on the contents of the `name_ch` channel.
 The output of a process is a channel too, so the result is renamed `greetings_ch`, with the same `_ch` suffix as `name_ch`.
 
-Now our workflow is properly functional; it is the explicit equivalent of writing `sayHello('Ziggy')`.
+Now our workflow is properly functional; it is the explicit equivalent of writing `sayHello('Universe')`.
 
 ### 1.3. Run the workflow
 
@@ -217,7 +222,7 @@ You can check the results directory to see the greeting for the name we loaded i
 ??? abstract "File contents"
 
     ```console title="results/hello/output.txt"
-    Hello, Ziggy!
+    Hello, Universe!
     ```
 
 So we've increased the flexibility of our workflow while keeping the same kind of result.
@@ -241,7 +246,7 @@ Add this tiny line to the workflow block:
 
         main:
         // create a channel for inputs
-        name_ch = channel.of('Ziggy')
+        name_ch = channel.of('Universe')
                             .view()
         // emit a greeting
         greetings_ch = sayHello(name_ch)
@@ -258,7 +263,7 @@ Add this tiny line to the workflow block:
 
         main:
         // create a channel for inputs
-        name_ch = channel.of('Ziggy')
+        name_ch = channel.of('Universe')
         // emit a greeting
         greetings_ch = sayHello(name_ch)
 
@@ -284,7 +289,7 @@ nextflow run hello-channels.nf
 
     executor >  local (1)
     [4b/ed246a] sayHello (1) | 1 of 1 ✔
-    Ziggy
+    Universe
 
     Outputs:
 
@@ -334,7 +339,7 @@ In the workflow block, make the following code change:
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
         // create a channel for inputs
-        name_ch = channel.of('Ziggy')
+        name_ch = channel.of('Universe')
                             .view()
     ```
 
@@ -394,11 +399,11 @@ However, there is still only one output in the results directory:
 You should see the greeting for one of the three names in there, though the one you got might be different from what is shown here.
 Can you think of why that might be?
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.drawio.svg"
 </figure>
 
-_In the diagram, the channel is represented in green, and the order of elements is represented like marbles in a pipe: the first one loaded is on the right, then the second one in the middle, then the third is on the left._
+_In the diagram, the channel is represented in teal, and the order of elements is represented like marbles in a pipe: the first one loaded is on the right, then the second one in the middle, then the third is on the left._
 
 Looking back at the execution monitor, it gave us only one subdirectory path (`eb/e93014`).
 Let's have a look in there.
@@ -532,8 +537,8 @@ That being said, we still have the problem that there is only one output file in
 
 You may recall that we hardcoded the output file name for the `sayHello` process, so all three calls produced a file called `output.txt`.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-channels-task-dirs.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-task-dirs.drawio.svg"
 </figure>
 
 As long as the output files stay in the work subdirectories, isolated from the other processes, that is okay.
@@ -548,8 +553,8 @@ So how do we make the file names unique?
 A common way to do that is to use some unique piece of metadata from the inputs (received from the input channel) as part of the output file name.
 Here, for convenience, we'll just use the name itself since it's just a short string, and prepend it to the base output filename.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi-unique.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi-unique.drawio.svg"
 </figure>
 
 #### 2.2.1. Construct a dynamic output file name
@@ -782,8 +787,8 @@ For example, imagine we set up an input variable containing an array of elements
 
 Can we load that into our output channel and expect it to work?
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-array.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-array.drawio.svg"
 </figure>
 
 Let's find out.
@@ -930,8 +935,8 @@ Look at the output of `view()` and the error messages.
 It looks like Nextflow tried to run a single process call, using `[Mateo, Raphael, Celine]` as a single string value, instead of using the three strings in the array as separate values.
 The task's tag in the error message, `sayHello ([Mateo, Raphael, Celine])`, shows the same thing.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.drawio.svg"
 </figure>
 
 So it's the 'packaging' that is causing the problem.
@@ -993,8 +998,8 @@ In the workflow block, make the following code change:
 Here we added the operator on the next line for readability, but you can add operators on the same line as the channel factory if you prefer, like this:
 `name_ch = channel.of(names_array).view().flatten()`
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-success.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-success.drawio.svg"
 </figure>
 
 #### 3.2.2. Refine the `view()` statement(s)
@@ -1136,8 +1141,8 @@ The other two columns aren't used in the main course; they're there for bonus ex
 
 Our next task is to adapt our workflow to read in the values from this file.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-csv.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-csv.drawio.svg"
 </figure>
 
 Let's see how we can make that happen.
@@ -1146,13 +1151,13 @@ Let's see how we can make that happen.
 
 To get started, we're going to need to make two key changes to the script:
 
-- Replace the `name` parameter with an `input` parameter that points to the CSV file
+- Replace the `who` parameter with an `input` parameter that points to the CSV file
 - Switch the channel factory to one designed to handle a file
 
-#### 4.1.1. Replace the `name` parameter with an `input` parameter
+#### 4.1.1. Replace the `who` parameter with an `input` parameter
 
-In Part 1, we set up a `name` parameter to provide a single name on the command line.
-The names now come from a file, so instead of reusing `name` for something different, we replace it with a new parameter called `input`, of type `Path`, which points to the CSV file.
+In Part 1, we set up a `who` parameter to provide a single name on the command line.
+The names now come from a file, so instead of reusing `who` for something different, we replace it with a new parameter called `input`, of type `Path`, which points to the CSV file.
 That way, each parameter's name keeps describing what it holds.
 
 Make the following edit to the parameter declaration:
@@ -1175,7 +1180,7 @@ Make the following edit to the parameter declaration:
      * Pipeline parameters
      */
     params {
-        name: String = 'Friend'
+        who: String = 'Friend'
     }
     ```
 
@@ -1383,8 +1388,8 @@ nextflow run hello-channels.nf
 Interestingly, this fails too, but with a different error.
 This time Nextflow has parsed the contents of the file (yay!) but it has loaded each row as an array, and each array is an element in the channel.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-fail.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-fail.drawio.svg"
 </figure>
 
 We need to tell it to only take the first column in each row, which holds the name.
@@ -1500,8 +1505,8 @@ Looking at the output of the `view()` statements, you see the following:
 
 _Note that the lines may appear in a different order in your output._
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-and-map.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-and-map.drawio.svg"
 </figure>
 
 You can also look at the output files to verify that each name was correctly extracted and processed through the workflow.
@@ -1516,8 +1521,8 @@ You know how to use the `.fromPath()` channel constructor and the operators `spl
 More generally, you have a basic understanding of how Nextflow uses **channels** to manage inputs to processes and **operators** to transform their contents.
 You've also seen how channels handle parallel execution implicitly.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-channels-parallel.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-workflow-channels.drawio.svg"
 </figure>
 
 ### What's next?

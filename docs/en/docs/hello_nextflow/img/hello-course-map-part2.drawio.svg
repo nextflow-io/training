@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1570px" height="308px" viewBox="-30 28 1570 308" content="&lt;mxfile host=&quot;drawio&quot;&gt;&lt;diagram id=&quot;page-1&quot; name=&quot;Page-1&quot;&gt;&lt;mxGraphModel grid=&quot;1&quot; gridSize=&quot;10&quot; guides=&quot;1&quot; tooltips=&quot;1&quot; connect=&quot;1&quot; arrows=&quot;1&quot; fold=&quot;1&quot; page=&quot;0&quot; pageScale=&quot;1&quot; pageWidth=&quot;1600&quot; pageHeight=&quot;1000&quot; math=&quot;0&quot; shadow=&quot;0&quot;&gt;&lt;root&gt;&lt;mxCell id=&quot;0&quot; /&gt;&lt;mxCell id=&quot;1&quot; parent=&quot;0&quot; /&gt;&lt;mxCell id=&quot;csv&quot; value=&quot;names.csv&quot; style=&quot;rounded=1;absoluteArcSize=1;arcSize=16;fillColor=#f0f9fb;strokeColor=#02899a;strokeWidth=2.5;fontFamily=Helvetica;fontSize=22;fontColor=#1e1e1e;html=0;whiteSpace=nowrap;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;40&quot; y=&quot;140&quot; width=&quot;160&quot; height=&quot;80&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;say&quot; value=&quot;sayHello&quot; style=&quot;rounded=1;absoluteArcSize=1;arcSize=16;fillColor=#2d799b;strokeColor=#055672;strokeWidth=2.5;fontFamily=Helvetica;fontSize=22;fontColor=#ffffff;html=0;whiteSpace=nowrap;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;250&quot; y=&quot;140&quot; width=&quot;160&quot; height=&quot;80&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;tr&quot; value=&quot;translateGreeting&quot; style=&quot;rounded=1;absoluteArcSize=1;arcSize=16;fillColor=#2d799b;strokeColor=#055672;strokeWidth=2.5;fontFamily=Helvetica;fontSize=22;fontColor=#ffffff;html=0;whiteSpace=nowrap;opacity=25;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;460&quot; y=&quot;140&quot; width=&quot;250&quot; height=&quot;80&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;col&quot; value=&quot;collectGreetings&quot; style=&quot;rounded=1;absoluteArcSize=1;arcSize=16;fillColor=#2d799b;strokeColor=#055672;strokeWidth=2.5;fontFamily=Helvetica;fontSize=22;fontColor=#ffffff;html=0;whiteSpace=nowrap;opacity=25;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;760&quot; y=&quot;140&quot; width=&quot;240&quot; height=&quot;80&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;cow&quot; value=&quot;cowpy&quot; style=&quot;rounded=1;absoluteArcSize=1;arcSize=16;fillColor=#2d799b;strokeColor=#055672;strokeWidth=2.5;fontFamily=Helvetica;fontSize=22;fontColor=#ffffff;html=0;whiteSpace=nowrap;opacity=25;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;1050&quot; y=&quot;140&quot; width=&quot;130&quot; height=&quot;80&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;art&quot; value=&quot;cowpy-batch-es-&amp;#10;greetings.txt&quot; style=&quot;rounded=1;absoluteArcSize=1;arcSize=16;fillColor=#f0f9fb;strokeColor=#02899a;strokeWidth=2.5;fontFamily=Helvetica;fontSize=22;fontColor=#1e1e1e;html=0;whiteSpace=nowrap;opacity=25;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;1230&quot; y=&quot;140&quot; width=&quot;240&quot; height=&quot;80&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;csv-say&quot; style=&quot;edgeStyle=none;html=0;strokeColor=#1e1e1e;endSize=12;strokeWidth=3;endArrow=classic;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;csv&quot; target=&quot;say&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;say-tr&quot; style=&quot;edgeStyle=none;html=0;strokeColor=#1e1e1e;endSize=12;strokeWidth=3;endArrow=classic;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;opacity=25;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;say&quot; target=&quot;tr&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;tr-col&quot; style=&quot;edgeStyle=none;html=0;strokeColor=#1e1e1e;endSize=12;strokeWidth=3;endArrow=classic;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;opacity=25;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;tr&quot; target=&quot;col&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;col-cow&quot; style=&quot;edgeStyle=none;html=0;strokeColor=#1e1e1e;endSize=12;strokeWidth=3;endArrow=classic;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;opacity=25;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;col&quot; target=&quot;cow&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;cow-art&quot; style=&quot;edgeStyle=none;html=0;strokeColor=#1e1e1e;endSize=12;strokeWidth=3;endArrow=classic;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;opacity=25;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;cow&quot; target=&quot;art&quot;&gt;&lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;b1&quot; value=&quot;&quot; style=&quot;shape=partialRectangle;bottom=0;fillColor=none;strokeColor=#1e1e1e;strokeWidth=2;html=0;whiteSpace=nowrap;opacity=25;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;250&quot; y=&quot;114&quot; width=&quot;160&quot; height=&quot;14&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;s1&quot; value=&quot;greet one name&quot; style=&quot;text;align=center;verticalAlign=middle;spacing=0;spacingLeft=4;fontFamily=Helvetica;fontSize=20;fontColor=#1e1e1e;html=0;whiteSpace=nowrap;opacity=25;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;190&quot; y=&quot;74&quot; width=&quot;280&quot; height=&quot;30&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;t1&quot; value=&quot;Part 1: Hello World&quot; style=&quot;text;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=24;fontStyle=1;fontColor=#1e1e1e;html=0;whiteSpace=nowrap;opacity=25;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;190&quot; y=&quot;38&quot; width=&quot;280&quot; height=&quot;36&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;b2&quot; value=&quot;&quot; style=&quot;shape=partialRectangle;top=0;fillColor=none;strokeColor=#1e1e1e;strokeWidth=2;html=0;whiteSpace=nowrap;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;40&quot; y=&quot;232&quot; width=&quot;370&quot; height=&quot;14&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;s2&quot; value=&quot;read names.csv, in parallel&quot; style=&quot;text;align=center;verticalAlign=middle;spacing=0;spacingLeft=4;fontFamily=Helvetica;fontSize=20;fontColor=#1e1e1e;html=0;whiteSpace=nowrap;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;-20&quot; y=&quot;296&quot; width=&quot;490&quot; height=&quot;30&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;t2&quot; value=&quot;Part 2: Hello Channels&quot; style=&quot;text;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=24;fontStyle=1;fontColor=#1e1e1e;html=0;whiteSpace=nowrap;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;-20&quot; y=&quot;260&quot; width=&quot;490&quot; height=&quot;36&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;here&quot; value=&quot;← you are here&quot; style=&quot;text;align=left;verticalAlign=middle;spacing=0;spacingLeft=4;fontFamily=Helvetica;fontSize=20;fontColor=#1e1e1e;html=0;whiteSpace=nowrap;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;386.2&quot; y=&quot;263&quot; width=&quot;170&quot; height=&quot;30&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;b3&quot; value=&quot;&quot; style=&quot;shape=partialRectangle;top=0;fillColor=none;strokeColor=#1e1e1e;strokeWidth=2;html=0;whiteSpace=nowrap;opacity=25;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;460&quot; y=&quot;232&quot; width=&quot;540&quot; height=&quot;14&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;s3&quot; value=&quot;translate, then collect&quot; style=&quot;text;align=center;verticalAlign=middle;spacing=0;spacingLeft=4;fontFamily=Helvetica;fontSize=20;fontColor=#1e1e1e;html=0;whiteSpace=nowrap;opacity=25;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;400&quot; y=&quot;296&quot; width=&quot;660&quot; height=&quot;30&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;t3&quot; value=&quot;Part 3: Hello Workflow&quot; style=&quot;text;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=24;fontStyle=1;fontColor=#1e1e1e;html=0;whiteSpace=nowrap;opacity=25;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;400&quot; y=&quot;260&quot; width=&quot;660&quot; height=&quot;36&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;b4&quot; value=&quot;&quot; style=&quot;shape=partialRectangle;top=0;fillColor=none;strokeColor=#1e1e1e;strokeWidth=2;html=0;whiteSpace=nowrap;opacity=25;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;1050&quot; y=&quot;232&quot; width=&quot;420&quot; height=&quot;14&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;s4&quot; value=&quot;cowpy in a container&quot; style=&quot;text;align=center;verticalAlign=middle;spacing=0;spacingLeft=4;fontFamily=Helvetica;fontSize=20;fontColor=#1e1e1e;html=0;whiteSpace=nowrap;opacity=25;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;990&quot; y=&quot;296&quot; width=&quot;540&quot; height=&quot;30&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;mxCell id=&quot;t4&quot; value=&quot;Part 4: Hello Containers&quot; style=&quot;text;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=24;fontStyle=1;fontColor=#1e1e1e;html=0;whiteSpace=nowrap;opacity=25;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;990&quot; y=&quot;260&quot; width=&quot;540&quot; height=&quot;36&quot; as=&quot;geometry&quot; /&gt;&lt;/mxCell&gt;&lt;/root&gt;&lt;/mxGraphModel&gt;&lt;/diagram&gt;&lt;/mxfile&gt;">
+<g>
+<rect x="-30" y="28" width="1570" height="308" fill="#ffffff"/>
+<rect x="40" y="140" width="160" height="80" rx="8" fill="#f0f9fb" stroke="#02899a" stroke-width="2.5"/>
+<text x="120" y="180" font-family="Helvetica, Arial, sans-serif" font-size="22px" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve">names.csv</text>
+<rect x="250" y="140" width="160" height="80" rx="8" fill="#2d799b" stroke="#055672" stroke-width="2.5"/>
+<text x="330" y="180" font-family="Helvetica, Arial, sans-serif" font-size="22px" fill="#ffffff" text-anchor="middle" dominant-baseline="central" xml:space="preserve">sayHello</text>
+<g opacity="0.25">
+<rect x="460" y="140" width="250" height="80" rx="8" fill="#2d799b" stroke="#055672" stroke-width="2.5"/>
+<text x="585" y="180" font-family="Helvetica, Arial, sans-serif" font-size="22px" fill="#ffffff" text-anchor="middle" dominant-baseline="central" xml:space="preserve">translateGreeting</text>
+</g>
+<g opacity="0.25">
+<rect x="760" y="140" width="240" height="80" rx="8" fill="#2d799b" stroke="#055672" stroke-width="2.5"/>
+<text x="880" y="180" font-family="Helvetica, Arial, sans-serif" font-size="22px" fill="#ffffff" text-anchor="middle" dominant-baseline="central" xml:space="preserve">collectGreetings</text>
+</g>
+<g opacity="0.25">
+<rect x="1050" y="140" width="130" height="80" rx="8" fill="#2d799b" stroke="#055672" stroke-width="2.5"/>
+<text x="1115" y="180" font-family="Helvetica, Arial, sans-serif" font-size="22px" fill="#ffffff" text-anchor="middle" dominant-baseline="central" xml:space="preserve">cowpy</text>
+</g>
+<g opacity="0.25">
+<rect x="1230" y="140" width="240" height="80" rx="8" fill="#f0f9fb" stroke="#02899a" stroke-width="2.5"/>
+<text x="1350" y="166.8" font-family="Helvetica, Arial, sans-serif" font-size="22px" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve">cowpy-batch-es-</text>
+<text x="1350" y="193.2" font-family="Helvetica, Arial, sans-serif" font-size="22px" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve">greetings.txt</text>
+</g>
+<g opacity="0.25">
+<line x1="250" y1="114" x2="410" y2="114" stroke="#1e1e1e" stroke-width="2"/>
+<line x1="250" y1="114" x2="250" y2="128" stroke="#1e1e1e" stroke-width="2"/>
+<line x1="410" y1="114" x2="410" y2="128" stroke="#1e1e1e" stroke-width="2"/>
+</g>
+<g opacity="0.25">
+<text x="330" y="89" font-family="Helvetica, Arial, sans-serif" font-size="20px" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve">greet one name</text>
+</g>
+<g opacity="0.25">
+<text x="330" y="56" font-family="Helvetica, Arial, sans-serif" font-size="24px" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" font-weight="bold" xml:space="preserve">Part 1: Hello World</text>
+</g>
+<line x1="40" y1="246" x2="410" y2="246" stroke="#1e1e1e" stroke-width="2"/>
+<line x1="40" y1="232" x2="40" y2="246" stroke="#1e1e1e" stroke-width="2"/>
+<line x1="410" y1="232" x2="410" y2="246" stroke="#1e1e1e" stroke-width="2"/>
+<text x="225" y="311" font-family="Helvetica, Arial, sans-serif" font-size="20px" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve">read names.csv, in parallel</text>
+<text x="225" y="278" font-family="Helvetica, Arial, sans-serif" font-size="24px" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" font-weight="bold" xml:space="preserve">Part 2: Hello Channels</text>
+<text x="390.2" y="278" font-family="Helvetica, Arial, sans-serif" font-size="20px" fill="#1e1e1e" text-anchor="start" dominant-baseline="central" xml:space="preserve">← you are here</text>
+<g opacity="0.25">
+<line x1="460" y1="246" x2="1000" y2="246" stroke="#1e1e1e" stroke-width="2"/>
+<line x1="460" y1="232" x2="460" y2="246" stroke="#1e1e1e" stroke-width="2"/>
+<line x1="1000" y1="232" x2="1000" y2="246" stroke="#1e1e1e" stroke-width="2"/>
+</g>
+<g opacity="0.25">
+<text x="730" y="311" font-family="Helvetica, Arial, sans-serif" font-size="20px" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve">translate, then collect</text>
+</g>
+<g opacity="0.25">
+<text x="730" y="278" font-family="Helvetica, Arial, sans-serif" font-size="24px" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" font-weight="bold" xml:space="preserve">Part 3: Hello Workflow</text>
+</g>
+<g opacity="0.25">
+<line x1="1050" y1="246" x2="1470" y2="246" stroke="#1e1e1e" stroke-width="2"/>
+<line x1="1050" y1="232" x2="1050" y2="246" stroke="#1e1e1e" stroke-width="2"/>
+<line x1="1470" y1="232" x2="1470" y2="246" stroke="#1e1e1e" stroke-width="2"/>
+</g>
+<g opacity="0.25">
+<text x="1260" y="311" font-family="Helvetica, Arial, sans-serif" font-size="20px" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" xml:space="preserve">cowpy in a container</text>
+</g>
+<g opacity="0.25">
+<text x="1260" y="278" font-family="Helvetica, Arial, sans-serif" font-size="24px" fill="#1e1e1e" text-anchor="middle" dominant-baseline="central" font-weight="bold" xml:space="preserve">Part 4: Hello Containers</text>
+</g>
+<g>
+<path d="M200 180 L237.85 180" fill="none" stroke="#1e1e1e" stroke-width="3"/>
+<path d="M250 180 L233.8 186.8 L237.85 180 L233.8 173.2 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g opacity="0.25">
+<path d="M410 180 L447.85 180" fill="none" stroke="#1e1e1e" stroke-width="3"/>
+<path d="M460 180 L443.8 186.8 L447.85 180 L443.8 173.2 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g opacity="0.25">
+<path d="M710 180 L747.85 180" fill="none" stroke="#1e1e1e" stroke-width="3"/>
+<path d="M760 180 L743.8 186.8 L747.85 180 L743.8 173.2 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g opacity="0.25">
+<path d="M1000 180 L1037.85 180" fill="none" stroke="#1e1e1e" stroke-width="3"/>
+<path d="M1050 180 L1033.8 186.8 L1037.85 180 L1033.8 173.2 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g opacity="0.25">
+<path d="M1180 180 L1217.85 180" fill="none" stroke="#1e1e1e" stroke-width="3"/>
+<path d="M1230 180 L1213.8 186.8 L1217.85 180 L1213.8 173.2 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</g>
+</svg>

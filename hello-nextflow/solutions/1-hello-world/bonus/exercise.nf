@@ -21,14 +21,14 @@ process sayHello {
  * Pipeline parameters
  */
 params {
-    name: String = 'Friend'
+    who: String = 'Friend'
 }
 
 workflow {
 
     main:
     // emit a greeting
-    greeting = sayHello(params.name)
+    greeting = sayHello(params.who)
 
     publish:
     greetings = greeting

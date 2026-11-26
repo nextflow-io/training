@@ -1,0 +1,84 @@
+# Course diagrams
+
+Course diagrams are `.drawio.svg` files: ordinary SVG images that also carry the editable draw.io model.
+They are inlined into lesson pages with `<figure class="drawio">` and a `--8<--` snippet.
+Edit them in VS Code with the [Draw.io Integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) extension, or at [diagrams.net](https://app.diagrams.net).
+
+The scripts here need only Python 3 (no extra packages).
+
+| Script                    | Purpose                                                                                        |
+| ------------------------- | ---------------------------------------------------------------------------------------------- |
+| `check.py`                | Check diagrams against the house style. Errors fail; spacing issues are warnings (`--strict`). |
+| `excalidraw_to_drawio.py` | Turn an old Excalidraw SVG export into a styled `.drawio.svg` starting point.                  |
+| `layouts.py`              | Standard layouts, such as `process_view()` for a process definition.                           |
+| `house_style.py`          | Every colour, font, line weight and spacing value. Change the style here.                      |
+| `drawio.py`               | Read, edit, render and write `.drawio.svg` files from Python.                                  |
+
+```bash
+python3 _scripts/diagrams/check.py docs/en/docs/hello_nextflow/img/
+python3 _scripts/diagrams/excalidraw_to_drawio.py old.svg new.drawio.svg
+```
+
+## Workflow
+
+1. Generate a starting file (convert an old export, or build one with `drawio.py`).
+2. Open it in VS Code and adjust the layout by hand.
+3. Run `check.py` and fix what it reports.
+4. Save once in the editor so draw.io redraws the image. Files written by `drawio.py` are already redrawn by its own renderer.
+
+After a script edits a file, close and reopen its editor tab before saving, or the editor overwrites the change with the copy it has open.
+
+## House style
+
+**Colours** (fill / outline / text):
+
+| Role                   | Fill      | Outline   | Text      |
+| ---------------------- | --------- | --------- | --------- |
+| Process                | `#2d799b` | `#055672` | white     |
+| File                   | `#f0f9fb` | `#02899a` | `#1e1e1e` |
+| Channel                | `#76d2c8` | `#018178` | `#1e1e1e` |
+| Value inside a channel | white     | `#018178` | `#1e1e1e` |
+| Lines, notes, captions |           | `#1e1e1e` |           |
+| Parameter labels, code |           |           | `#1e1e1e` |
+
+The palette stays distinct under protanopia, deuteranopia and tritanopia, and keeps its hues under the site's dark-mode filter.
+
+**Text**: plain SVG text only (`html=0`, no `whiteSpace=wrap`; break lines explicitly).
+Helvetica for labels (boxes 28 px, items in channels 22, notes 22, captions 28 bold in sentence case; a caption naming a code object, such as `sayHello.out`, is Menlo bold); Menlo for parameters (26) and code (20).
+No handwritten fonts.
+
+**Lines** (diagrams are shown at under half size, so they are drawn heavy):
+data arrows 3 px with filled arrowheads (size 12);
+parameter arrows 2.5 px, black, dashed `4 2`, open arrowheads;
+box outlines 2.5; frames 2.
+
+**Layout** (10 px grid; a box's edge or centre sits on it):
+
+- Boxes are 80 px high; items inside a channel 50.
+- Gaps between boxes joined by an arrow: 130 px horizontally, 70 vertically.
+- Arrow into or out of a frame: 80 px gap, or 100 when a parameter label sits in that gap.
+- Frames have 30 px padding on every side.
+- Vertical arrows are exactly vertical, leaving and landing at the centre of both boxes. Fix misalignment by moving the downstream box, not the arrow's anchor.
+- Arrows between level boxes leave and land at the middle of the facing sides.
+- Fan-outs: targets stacked 40 px apart, the stack centred on the source; arrows leave at evenly spaced points (0.25 / 0.5 / 0.75, or 0.3 / 0.7) and land at each target's centre.
+- Several arrows into one side of a box land at evenly spaced points.
+- Notes sit 20 px right of their box, centred on it. Captions (36 px high) sit 40 px under the box or channel they describe (in a captioned stack of two, the top caption goes 40 px above its shape instead, so no caption sits between them), or 15 px under a dashed group's outline (the group's own padding supplies the rest).
+- Show channels explicitly (teal pill with its items) only where the text is about how steps are connected; elsewhere a file box such as `*.txt` stands for the channel. When a process's input channel is shown explicitly, show its output channel explicitly too.
+- A diagram of a single process definition is drawn from the process's point of view: label its value inputs with the input names (`batch_name`, `language`), not parameters, and caption channels with plain words ("translated greetings") in the caption font, 25 px under the channel instead of 40. Don't name code the text hasn't introduced yet (no `.collect()` before section 2.4).
+- Use example values everywhere (`--batch trio`, `trio-es-greetings.txt`), never placeholders such as `${batch_name}`.
+- Name channels as the workflow code does (`greetings_ch`, `translated_ch.collect()`), not `process.out`.
+- A step fed by a captioned channel sits on the next row, reached by a bent arrow from the channel's right side down into the step's top centre (the staircase), so the arrow doesn't cross the caption.
+- Two parameters entering one side of a box land at 0.25 and 0.75, both arrows straight and each label level with its entry.
+- Parameter labels sit level with the point where their arrow lands, and end one monospace space before the arrow starts. A parameter that feeds several steps uses one trunk that branches.
+
+## Where diagrams go in a lesson
+
+- The diagram that opens a section shows the first working version the section builds, not its end state.
+  If the section then extends it, show the finished state just before the heading of the step with the section's final run, with the example values that run uses ("The workflow now looks like this:").
+- Wherever the text defines a process or changes its inputs or outputs, show a process view (`layouts.process_view()`): one call of the process on its own, with plain file boxes for its input and output (no channels; the workflow diagrams show those) and example file names. Several files received as one input sit in one white group box. Value inputs enter from the left, labelled with their input names; when there are any, the file input moves to the row above and arrives from the top (staircase). File contents sit centred under each file box in the note style (above the top box of a stack of two outputs). Place it before the code, as "what we're about to build": at the start of the section that defines or changes the process (its intro, before the first numbered step), with a lead-in such as "The process will take ...:".
+- A diagram never shows code or features the text hasn't introduced yet.
+- A part's warmup shows the starting workflow, with the values the warmup run uses.
+- A step that fails gets a dark red (`#c92a2a`) bold "X" with the word "fails" on its outgoing arrow, and the output it doesn't produce is drawn dashed (or an empty dashed channel captioned "no output"). The marker always pairs colour with text.
+- Operator chains (`.flatten()`, `.splitCsv()`, `.map {}`) stack channels vertically, centred, with the operator code beside each arrow.
+- Course maps (`*course-map*`) are a compact overview of a whole course: smaller labels (22 px), 50 px gaps, open brackets (`bracket-below` / `bracket-above` styles) grouping each part's steps under its title and subtitle. In a part's own map, everything outside that part is faded to 25% opacity and "← you are here" follows the part's title. The checker relaxes gap and caption spacing for these files.
+- A code reorganization ("this turns into that") uses a wide hollow arrow (`transform` style), never a data-flow arrow, and shows the pieces on each side on matching rows so the mapping reads without extra arrows (see `hello-course-code`).

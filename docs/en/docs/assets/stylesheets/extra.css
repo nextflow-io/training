@@ -49,6 +49,10 @@
   font-weight: 600;
   letter-spacing: 0;
 }
+/* More space before sub-step headings (1.2.2.) so each step reads as its own block */
+.md-typeset h4 {
+  margin-top: 2.5em;
+}
 @media (min-width: 768px) {
   .md-typeset h1 {
     font-family: "Degular", sans-serif;
@@ -69,7 +73,8 @@
 
 /* Dark mode figures */
 body[data-md-color-scheme="slate"] figure img,
-body[data-md-color-scheme="slate"] .excalidraw svg {
+body[data-md-color-scheme="slate"] .excalidraw svg,
+body[data-md-color-scheme="slate"] .drawio svg {
   filter: invert(100%) hue-rotate(180deg);
 }
 .excalidraw svg rect {

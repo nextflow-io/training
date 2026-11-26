@@ -24,8 +24,8 @@ This will make our code more shareable, flexible and maintainable.
 
 This part reorganizes the code of the pipeline you built in Parts 1 to 4, without changing what it does:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello-course-code.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-modules-intro.drawio.svg"
 </figure>
 
 ??? info "How to begin from this section"
@@ -262,8 +262,8 @@ You see we've filled in the process name, `sayHello`, and the path to the file c
 
 Once all four processes are in modules, the workflow file will include each module file this way:
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/modules.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/modules.drawio.svg"
 </figure>
 
 #### 1.3.4. Run the workflow
@@ -880,6 +880,12 @@ The `cowpy` task runs again because its software environment changed.
 The other processes don't declare any software, so their tasks are retrieved from the cache.
 
 When you run the workflow without the `conda` profile, it uses Docker again.
+
+To recap, this is where each part of the original script ended up:
+
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-modules-recap.drawio.svg"
+</figure>
 
 ### Takeaway
 

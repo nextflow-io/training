@@ -12,8 +12,8 @@ To learn how this pipeline is written, see [Hello Nextflow](../hello_nextflow/in
 
 The workflow `main.nf` takes greetings listed in a CSV file and runs them through four steps.
 
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-complete.drawio.svg"
 </figure>
 
 `sayHello` writes each greeting to a file, `convertToUpper` converts the text to uppercase, `collectGreetings` merges all results into one file, and `cowpy` generates ASCII art from the merged output using a containerized tool.
