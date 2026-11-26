@@ -125,6 +125,8 @@ def vertex_style(role, size=None, code=False):
     if role == "code":
         return "text;" + _s(align="left", verticalAlign="middle", spacing=0, spacingLeft=TEXT_SPACING_LEFT,
                             fontFamily=CODE_FONT, fontSize=size or SIZE_CODE, fontColor=INK) + BASE_TEXT
+    if role == "transform":  # a wide hollow arrow for "turns into" (not a data-flow arrow)
+        return f"shape=singleArrow;arrowWidth=0.5;arrowSize=0.35;fillColor=none;strokeColor={INK};strokeWidth={W_FRAME};" + BASE_TEXT
     if role in ("bracket-below", "bracket-above"):  # groups the steps of a course part (open towards the boxes)
         open_side = "top" if role == "bracket-below" else "bottom"
         return f"shape=partialRectangle;{open_side}=0;fillColor=none;strokeColor={INK};strokeWidth={W_FRAME};" + BASE_TEXT
