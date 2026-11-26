@@ -22,7 +22,11 @@ Now we're going to give the project the standard layout of a Nextflow pipeline: 
 
 This will make our code more shareable, flexible and maintainable.
 
-This part reorganizes the code of the pipeline you built in Parts 1 to 4, without changing what it does.
+This part reorganizes the code of the pipeline you built in Parts 1 to 4, without changing what it does:
+
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-modules-intro.drawio.svg"
+</figure>
 
 ??? info "How to begin from this section"
 
@@ -877,6 +881,12 @@ The other processes don't declare any software, so their tasks are retrieved fro
 
 When you run the workflow without the `conda` profile, it uses Docker again.
 
+To recap, this is where each part of the original script ended up:
+
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-modules-recap.drawio.svg"
+</figure>
+
 ### Takeaway
 
 You know how to separate the parameter declarations in the workflow script from their values in the configuration.
@@ -885,12 +895,6 @@ You also know how to add a profile that switches the pipeline from Docker to Con
 
 Your project now has the standard layout of a Nextflow pipeline, the same as the finished Hello pipeline in [Nextflow Run](../nextflow_run/index.md): `main.nf` holds the entry workflow, `modules/` holds one module file per process, and `nextflow.config` holds the default parameter values and the `test` and `conda` profiles.
 Anyone who knows how a Nextflow pipeline is organized can find their way around it.
-
-To recap, this is where each part of the original script ended up:
-
-<figure class="drawio">
---8<-- "docs/en/docs/hello_nextflow/img/hello-modules-recap.drawio.svg"
-</figure>
 
 ### What's next?
 
