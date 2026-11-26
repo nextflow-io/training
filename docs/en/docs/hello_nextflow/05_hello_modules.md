@@ -25,7 +25,7 @@ This will make our code more shareable, flexible and maintainable.
 This part reorganizes the code of the pipeline you built in Parts 1 to 4, without changing what it does:
 
 <figure class="drawio">
---8<-- "docs/en/docs/hello_nextflow/img/hello-course-code.drawio.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-modules-intro.drawio.svg"
 </figure>
 
 ??? info "How to begin from this section"
@@ -880,6 +880,12 @@ The `cowpy` task runs again because its software environment changed.
 The other processes don't declare any software, so their tasks are retrieved from the cache.
 
 When you run the workflow without the `conda` profile, it uses Docker again.
+
+To recap, this is where each part of the original script ended up:
+
+<figure class="drawio">
+--8<-- "docs/en/docs/hello_nextflow/img/hello-modules-recap.drawio.svg"
+</figure>
 
 ### Takeaway
 
