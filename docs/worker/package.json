@@ -9,9 +9,9 @@
     "deploy": "wrangler deploy -c ../wrangler.jsonc"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "5.20261103.1",
+    "@cloudflare/workers-types": "5.20261127.1",
     "typescript": "7.0.2",
-    "vitest": "5.1.0",
-    "wrangler": "4.157.0"
+    "vitest": "5.1.2",
+    "wrangler": "4.168.0"
   }
 }
