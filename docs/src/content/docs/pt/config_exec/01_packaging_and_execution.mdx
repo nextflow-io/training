@@ -122,13 +122,12 @@ Agora volte para Docker para o restante deste curso.
 docker.enabled = true
 ```
 
-<details class="tip">
-<summary>Misturando Docker e Conda</summary>
+:::tip[Misturando Docker e Conda]{collapsed}
 
 Como essas configurações têm escopo por processo, você pode misturá-las: alguns processos usam Docker, outros usam Conda, dependendo do que está disponível para cada ferramenta.
 Se tanto uma diretiva `container` (no código do pipeline) quanto uma diretiva `conda` (aqui, via configuração) estiverem definidas para o mesmo processo e ambos os sistemas de empacotamento estiverem habilitados, o Nextflow prioriza os contêineres.
 
-</details>
+:::
 
 ### Conclusão
 
@@ -176,8 +175,7 @@ O ambiente de treinamento não está conectado a um cluster HPC, então isso nã
 A maioria das plataformas HPC exige que os envios de jobs especifiquem requisições de recursos, como CPUs, memória e nome da fila, usando sua própria sintaxe.
 A mesma requisição de 8 CPUs e 4 GB de RAM em uma fila chamada `my-science-work` parece completamente diferente dependendo do agendador.
 
-<details class="abstract">
-<summary>Exemplos</summary>
+:::abstract[Exemplos]{collapsed}
 
 ```bash title="Config for SLURM / submit using sbatch"
 #SBATCH -o /path/to/my/task/directory/my-task-1.log
@@ -205,7 +203,7 @@ A mesma requisição de 8 CPUs e 4 GB de RAM em uma fila chamada `my-science-wor
 #$ -l h_rss=4096M,mem_free=4096M
 ```
 
-</details>
+:::
 
 O Nextflow abstrai tudo isso: você especifica propriedades padronizadas como `cpus`, `memory` e `queue` uma vez (veja as [diretivas de processo](https://nextflow.io/docs/latest/reference/process.html#process-directives) para a lista completa), e o Nextflow as traduz para os scripts específicos de cada backend em tempo de execução.
 

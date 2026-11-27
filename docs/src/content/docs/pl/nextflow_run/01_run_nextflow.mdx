@@ -82,8 +82,7 @@ Plik `.command.sh` jest szczególnie przydatny podczas debugowania — pokazuje 
 
 Rozumienie kodu nie jest konieczne, jeśli chcesz tylko uruchamiać pipeline'y, ale jeśli jesteś ciekaw/ciekawa, warto rzucić okiem.
 
-<details class="optional">
-<summary>Kliknij, aby zapoznać się z kodem związanym z tym ćwiczeniem</summary>
+::::optional[Kliknij, aby zapoznać się z kodem związanym z tym ćwiczeniem]{collapsed}
 
 Otwórzmy `1-hello.nf` i przyjrzyjmy się jego głównym komponentom.
 
@@ -212,7 +211,7 @@ output {
 
 Każdy nazwany wpis odpowiada etykiecie `publish:` w workflow'ie i mapuje ją na podkatalog w `results/`.
 
-</details>
+::::
 
 ### Podsumowanie
 
@@ -361,8 +360,7 @@ Możliwość `-resume` jest szczególnie cenna w długich pipeline'ach, gdzie od
 
 Rozumienie kodu nie jest konieczne, jeśli chcesz tylko uruchamiać pipeline'y, ale jeśli jesteś ciekaw/ciekawa, warto rzucić okiem.
 
-<details class="optional">
-<summary>Kliknij, aby zapoznać się z kodem związanym z tym ćwiczeniem</summary>
+:::optional[Kliknij, aby zapoznać się z kodem związanym z tym ćwiczeniem]{collapsed}
 
 Kluczowa zmiana w `2-inputs.nf` znajduje się w sekcji `main:` workflow'u:
 
@@ -385,7 +383,7 @@ To, co tu widzisz, nazywa się **kanałem**: konstruktem kolejki, który obsług
 Wynikiem jest kanał zawierający `Hello`, `Bonjour` i `Hola`.
 Po przekazaniu do `sayHello(greeting_ch)` Nextflow automatycznie wywołuje proces raz dla każdego elementu, uruchamiając je równolegle, gdy pozwalają na to zasoby.
 
-</details>
+:::
 
 ### Podsumowanie
 
@@ -421,8 +419,7 @@ nextflow run main.nf --input data/greetings.csv
 
 Parametr `character` domyślnie przyjmuje wartość `turkey` w `nextflow.config`, więc ASCII art przedstawia indyka, chyba że go nadpiszesz (spróbuj dodać `--character tux`).
 
-<details class="success">
-<summary>Wyjście polecenia</summary>
+:::success[Wyjście polecenia]{collapsed}
 
 ```console {6,7,8,9}
 N E X T F L O W   ~  version 26.04.4
@@ -456,7 +453,7 @@ Outputs:
   cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
 ```
 
-</details>
+:::
 
 Uruchomiono cztery procesy, ale nie tę samą liczbę razy.
 `sayHello` i `convertToUpper` uruchomiły się po razie dla każdego wejścia (3 of 3): każde powitanie musi zostać zapisane i zamienione na wielkie litery osobno.
@@ -488,8 +485,7 @@ Katalog najwyższego poziomu nosi nazwę parametru `batch`, który domyślnie pr
 
 Sprawdź plik `cowpy-COLLECTED-batch-output.txt`, aby zobaczyć plik z ASCII art.
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="results/batch/cowpy-COLLECTED-batch-output.txt"
  _________
@@ -520,7 +516,7 @@ Sprawdź plik `cowpy-COLLECTED-batch-output.txt`, aby zobaczyć plik z ASCII art
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 Podobnie jak w sekcji [2.1](#21-uruchomienie-workflowu), każde z tych 8 wykonań zadań — we wszystkich czterech procesach — otrzymuje własny katalog w `work/`, całkowicie odizolowany od pozostałych.
 `collectGreetings` dobrze ilustruje, dlaczego to ma znaczenie: zależy od wyników wszystkich trzech zadań `convertToUpper`, które znajdują się w trzech różnych katalogach zadań. Dlatego Nextflow tworzy dowiązania symboliczne do tych plików wewnątrz własnego katalogu `collectGreetings`, zamiast odczytywać je bezpośrednio z katalogów zadań poprzedzających:
@@ -547,8 +543,7 @@ Nextflow obsługuje również Conda jako alternatywę dla kontenerów; zapoznaj 
 
 Rozumienie kodu nie jest konieczne, jeśli chcesz tylko uruchamiać pipeline'y, ale jeśli jesteś ciekaw/ciekawa, warto rzucić okiem.
 
-<details class="optional">
-<summary>Kliknij, aby zapoznać się z kodem związanym z tym ćwiczeniem</summary>
+:::optional[Kliknij, aby zapoznać się z kodem związanym z tym ćwiczeniem]{collapsed}
 
 ### Jak dane przepływają z jednego kroku do następnego
 
@@ -619,7 +614,7 @@ docker.enabled = true
 
 Ta jedna linia włącza Docker dla każdego procesu w pipeline'ie, który ma określony kontener.
 
-</details>
+:::
 
 ### Podsumowanie
 

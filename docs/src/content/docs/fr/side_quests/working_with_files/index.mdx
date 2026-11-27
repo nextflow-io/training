@@ -63,8 +63,7 @@ L'éditeur s'ouvre avec le répertoire du projet en focus.
 
 Vous trouverez un fichier workflow simple appelé `main.nf`, un répertoire `modules` contenant deux fichiers de modules, et un répertoire `data` contenant quelques exemples de fichiers de données.
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 .
@@ -91,7 +90,7 @@ Vous trouverez un fichier workflow simple appelé `main.nf`, un répertoire `mod
     └── count_lines.nf
 ```
 
-</details>
+:::
 
 Ce répertoire contient des données de séquençage paired-end provenant de trois patient·es (A, B, C).
 
@@ -155,13 +154,12 @@ output {
 
 Il s'agit d'un mini-workflow (sans aucun processus) qui fait référence à un seul chemin de fichier dans son workflow, puis l'affiche dans la console, accompagné de sa classe.
 
-<details class="info">
-<summary>Qu'est-ce que `.class` ?</summary>
+:::info[Qu'est-ce que `.class` ?]{collapsed}
 
 Dans Nextflow, `.class` nous indique le type d'objet avec lequel nous travaillons. C'est comme demander « de quel type est cet objet ? » pour savoir s'il s'agit d'une chaîne, d'un nombre, d'un fichier ou d'autre chose.
 Cela nous aidera à illustrer la différence entre une chaîne simple et un objet Path dans les sections suivantes.
 
-</details>
+:::
 
 Exécutons le workflow :
 
@@ -352,15 +350,14 @@ process COUNT_LINES {
 
 Comme vous pouvez le voir, il s'agit d'un petit script assez simple qui décompresse le fichier et compte le nombre de lignes qu'il contient.
 
-<details class="info">
-<summary>Que fait `debug true` ?</summary>
+:::info[Que fait `debug true` ?]{collapsed}
 
 La directive `debug true` dans la définition du processus amène Nextflow à afficher la sortie de votre script (comme le nombre de lignes « 40 ») directement dans le journal d'exécution.
 Sans cela, vous ne verriez que le statut d'exécution du processus, mais pas la sortie réelle de votre script.
 
 Pour plus d'informations sur le débogage des processus Nextflow, consultez la quête secondaire [Débogage des workflows Nextflow](../debugging/index.mdx).
 
-</details>
+:::
 
 Une fois le module importé et son code examiné, nous pouvons appeler le processus depuis le workflow.
 
@@ -737,8 +734,7 @@ Ce fichier mis en place peut ensuite être traité comme un fichier local et li�
 
 Vous pouvez vérifier que cela s'est produit en examinant le contenu du répertoire de travail situé à la valeur de hachage du processus.
 
-<details class="abstract">
-<summary>Contenu du répertoire de travail</summary>
+:::abstract[Contenu du répertoire de travail]{collapsed}
 
 Si le hachage du processus était `07/246c2a`, vous pourriez explorer le répertoire de travail :
 
@@ -754,7 +750,7 @@ lrwxr-xr-x  1 user  staff    89 Jan 28 10:00 patientA_rep1_normal_R1_001.fastq.g
 
 Le lien symbolique pointe vers une copie mise en place du fichier distant que Nextflow a téléchargé automatiquement.
 
-</details>
+:::
 
 Notez que pour les fichiers plus volumineux, l'étape de téléchargement prendra plus de temps par rapport à l'exécution sur des fichiers locaux.
 Cependant, Nextflow vérifie s'il dispose déjà d'une copie mise en place pour éviter les téléchargements inutiles.
@@ -1833,8 +1829,7 @@ Outputs:
 
 Les sorties sont publiées dans un répertoire `results`, alors jetez un œil là-dedans.
 
-<details class="abstract">
-<summary>Contenu du répertoire et du fichier</summary>
+:::abstract[Contenu du répertoire et du fichier]{collapsed}
 
 ```console
 results
@@ -1852,7 +1847,7 @@ Read 1 size: 10 reads
 Read 2 size: 10 reads
 ```
 
-</details>
+:::
 
 Le processus a pris nos entrées et créé un nouveau fichier contenant les métadonnées du patient, comme prévu.
 Splendide !
@@ -1911,8 +1906,7 @@ Outputs:
 
 Le répertoire de résultats devrait maintenant contenir des résultats pour toutes les données disponibles.
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 results
@@ -1924,7 +1918,7 @@ results
     └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 Succès ! Nous avons analysé tous les patient·es en une seule fois ! N'est-ce pas ?
 
@@ -1986,8 +1980,7 @@ Outputs:
 
 Vérifiez maintenant le répertoire de résultats :
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 results/
@@ -2017,7 +2010,7 @@ results/
             └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 Et voilà, toutes nos métadonnées, soigneusement organisées. C'est un succès !
 

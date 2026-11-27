@@ -37,7 +37,7 @@ Follow these steps:
    - `title:` and `description:` frontmatter, no H1
    - Proper heading numbering with trailing periods
    - Takeaway and What's next? sections
-   - Appropriate use of asides and `<details>` collapsibles
+   - Appropriate use of asides and collapsibles (`:::type[Title]{collapsed}`)
    - Code examples with proper formatting
 
 4. Write `index.mdx` with the index page template (full spec in CONTRIBUTING.md):

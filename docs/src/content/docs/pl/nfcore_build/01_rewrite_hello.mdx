@@ -36,8 +36,7 @@ Dla przypomnienia: możesz użyć polecenia `tree` lub eksploratora plików, aby
 tree -L 1 pipelines/nf-core/demo
 ```
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 pipelines/nf-core/demo
@@ -62,7 +61,7 @@ pipelines/nf-core/demo
 └── workflows
 ```
 
-</details>
+:::
 
 Na razie skupimy się konkretnie na komponentach kodu pipeline'u (`main.nf`, `workflows`, `subworkflows`, `modules`) i ich wzajemnych relacjach.
 
@@ -129,8 +128,7 @@ Możesz zobaczyć to zastosowane w praktyce w modułach pipeline'u `nf-core/demo
 tree -L 3 pipelines/nf-core/demo/modules
 ```
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 pipelines/nf-core/demo/modules
@@ -156,7 +154,7 @@ pipelines/nf-core/demo/modules
 9 directories, 9 files
 ```
 
-</details>
+:::
 
 Widać tutaj, że moduły `fastqc` i `multiqc` znajdują się na najwyższym poziomie w modułach `nf-core`, natomiast moduł `trim` jest umieszczony pod zestawem narzędzi, do którego należy — `seqtk`.
 Moduł `cowpy` w katalogu `local` jest modułem lokalnym, napisanym specjalnie dla tego pipeline'u, a nie zainstalowanym z repozytorium modułów nf-core.
@@ -174,8 +172,7 @@ Podobnie jak moduły, subworkflow'y są podzielone na katalogi `local` i `nf-cor
 tree -L 3 pipelines/nf-core/demo/subworkflows
 ```
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 pipelines/nf-core/demo/subworkflows
@@ -199,7 +196,7 @@ pipelines/nf-core/demo/subworkflows
 9 directories, 7 files
 ```
 
-</details>
+:::
 
 Jak wspomniano powyżej, pipeline `nf-core/demo` nie zawiera żadnych subworkflow'ów specyficznych dla analizy, więc wszystkie widoczne tutaj subworkflow'y są tzw. workflow'ami 'porządkowymi' lub 'narzędziowymi', co sygnalizuje przedrostek `utils_` w ich nazwach.
 To właśnie te subworkflow'y generują efektowny nagłówek nf-core w wyjściu konsoli, wśród innych funkcji pomocniczych.
@@ -268,8 +265,7 @@ Ten TUI poprosi Cię o podanie podstawowych informacji o pipeline'ie i pozwoli w
 
 Po zamknięciu TUI powinieneś zobaczyć następujące wyjście konsoli.
 
-<details class="success">
-<summary>Wyjście polecenia</summary>
+:::success[Wyjście polecenia]{collapsed}
 
 ```console
                                           ,--./,-.
@@ -284,7 +280,7 @@ Po zamknięciu TUI powinieneś zobaczyć następujące wyjście konsoli.
 INFO     Launching interactive nf-core pipeline creation tool.
 ```
 
-</details>
+:::
 
 Po zakończeniu działania TUI narzędzie informuje, że utworzyło pipeline i zainicjalizowało lokalne repozytorium git dla nowego pipeline'u:
 
@@ -302,8 +298,7 @@ Wyświetl zawartość nowego katalogu, aby zobaczyć, ile pracy zaoszczędziłe�
 tree core-hello
 ```
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 core-hello
@@ -362,7 +357,7 @@ core-hello
 14 directories, 37 files
 ```
 
-</details>
+:::
 
 To dużo plików!
 Nie martw się, jeśli czujesz się trochę zagubiony; omówimy ważne części wkrótce, a następnie krok po kroku przez resztę kursu.
@@ -441,8 +436,7 @@ W rzeczywistości został utworzony nowy katalog wyników o nazwie `core-hello-r
 tree core-hello-results
 ```
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 core-hello-results
@@ -457,7 +451,7 @@ core-hello-results
 1 directory, 6 files
 ```
 
-</details>
+:::
 
 Możesz zajrzeć do raportów, aby zobaczyć, co zostało uruchomione, a odpowiedzią jest: nic w ogóle!
 
@@ -557,15 +551,14 @@ W porównaniu do podstawowego workflow'u Nextflow'a, takiego jak ten opracowany 
 
 Są to opcjonalne funkcje Nextflow'a, które sprawiają, że workflow jest **kompozycyjny**, co oznacza, że może być wywoływany z innego workflow'u.
 
-<details class="note">
-<summary>Blok `channel.topic`</summary>
+:::note[Blok `channel.topic`]{collapsed}
 
 Być może zauważyłeś blok `def topic_versions = channel.topic("versions")` zaczynający się od linii 28.
 Jest to standardowy kod porządkowy, który automatycznie zbiera informacje o wersjach oprogramowania ze wszystkich modułów.
 nf-core wdraża ten mechanizm we wszystkich pipeline'ach w 2026 roku, więc znajdziesz go we wszystkich nowych pipeline'ach.
 Część 3 tego kursu szczegółowo wyjaśnia, jak działa.
 
-</details>
+:::
 
 Będziemy musieli podłączyć odpowiednią logikę z naszego workflow'u do tej struktury.
 
@@ -600,8 +593,7 @@ Dostarczamy Ci czystą, w pełni funkcjonalną kopię ukończonego workflow'u He
 tree original-hello/
 ```
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 original-hello/
@@ -616,7 +608,7 @@ original-hello/
 1 directory, 6 files
 ```
 
-</details>
+:::
 
 Możesz go uruchomić, aby upewnić się, że działa:
 
@@ -923,8 +915,7 @@ Gdybyśmy nazwali workflow punktu wejścia `something_else.nf`, musielibyśmy wy
 
 Jeśli wykonałeś wszystkie zmiany poprawnie, powinno to uruchomić się do końca.
 
-<details class="success">
-<summary>Wyjście polecenia</summary>
+:::success[Wyjście polecenia]{collapsed}
 
 ```console
 N E X T F L O W   ~  version 26.04.4
@@ -939,7 +930,7 @@ executor >  local (8)
 Output: /workspaces/training/nfcore-build/work/07/bfc7061fa521e86f4e1954191ab4c4/cowpy-COLLECTED-test-batch-output.txt
 ```
 
-</details>
+:::
 
 To oznacza, że pomyślnie zaktualizowaliśmy nasz workflow `HELLO`, aby był kompozycyjny.
 
@@ -1062,8 +1053,7 @@ Powinieneś teraz zobaczyć katalog modułów wymieniony pod `core-hello/`.
 tree core-hello/modules
 ```
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 core-hello/modules
@@ -1076,7 +1066,7 @@ core-hello/modules
 1 directory, 4 files
 ```
 
-</details>
+:::
 
 Teraz skonfigurujmy instrukcje importu modułów.
 
@@ -1691,8 +1681,7 @@ nextflow run core-hello --outdir core-hello-results -profile test,docker
 
 Jeśli wykonałeś wszystkie modyfikacje poprawnie, powinno to uruchomić się do końca.
 
-<details class="success">
-<summary>Wyjście polecenia</summary>
+:::success[Wyjście polecenia]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -1732,7 +1721,7 @@ executor >  local (8)
 -[core/hello] Pipeline completed successfully-
 ```
 
-</details>
+:::
 
 Jak widać, wygenerowało to typowe podsumowanie nf-core na początku dzięki subworkflow'owi inicjalizacji, a linie dla każdego modułu teraz pokazują pełne nazwy `PIPELINE:WORKFLOW:moduł`.
 
@@ -1747,8 +1736,7 @@ Jak możesz sobie przypomnieć z wcześniejszych sekcji, nasze pierwsze uruchomi
 tree core-hello-results
 ```
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 core-hello-results
@@ -1768,7 +1756,7 @@ core-hello-results
 1 directory, 11 files
 ```
 
-</details>
+:::
 
 Widzisz, że otrzymaliśmy kolejny zestaw raportów wykonania oprócz tych z pierwszego uruchomienia, gdy workflow był jeszcze tylko zastępczy.
 Tym razem widać wszystkie zadania, które zostały uruchomione zgodnie z oczekiwaniami.
@@ -1788,8 +1776,7 @@ Oto co się stało: nie zmieniliśmy niczego w samych modułach, więc wyniki ob
 tree results
 ```
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 results
@@ -1807,7 +1794,7 @@ results
 0 directories, 10 files
 ```
 
-</details>
+:::
 
 Aha, są tutaj, pomieszane z wynikami wcześniejszych uruchomień oryginalnego pipeline'u Hello.
 

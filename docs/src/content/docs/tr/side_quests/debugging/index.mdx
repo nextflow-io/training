@@ -57,8 +57,7 @@ code .
 
 Alıştırma için kullanacağımız çeşitli hata türleri içeren örnek iş akışları bulacaksınız:
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 .
@@ -87,7 +86,7 @@ Alıştırma için kullanacağımız çeşitli hata türleri içeren örnek iş 
 └── no_such_var.nf
 ```
 
-</details>
+:::
 
 Bu dosyalar, gerçek dünya geliştirme sürecinde karşılaşacağınız yaygın hata ayıklama senaryolarını temsil etmektedir.
 
@@ -2287,8 +2286,7 @@ nextflow run buggy_workflow.nf -stub-run
 nextflow run buggy_workflow.nf -resume
 ```
 
-<details class="solution">
-<summary>Çözüm</summary>
+:::solution[Çözüm]{collapsed}
 
 `buggy_workflow.nf` dosyası, tüm önemli hata ayıklama kategorilerini kapsayan 10 farklı hata içermektedir. Her hatanın ve nasıl düzeltileceğinin, Nextflow 26.04'te gerçekte karşılaşılan sıraya göre sistematik bir dökümü aşağıda verilmiştir. Derleyici iş akışını iki geçişte çözümler: önce sözdizimini ayrıştırır, ardından her değişkenin tanımlı olduğunu statik olarak kontrol eder. Bu nedenle önce sözdizimi hatalarını temizlersiniz, ardından bir grup tanımsız değişken hatası gelir; iş akışı hiç çalışmadan önce bunların hepsi giderilmelidir.
 
@@ -2533,7 +2531,7 @@ output {
 }
 ```
 
-</details>
+:::
 :::
 
 **Kapsanan Hata Kategorileri:**

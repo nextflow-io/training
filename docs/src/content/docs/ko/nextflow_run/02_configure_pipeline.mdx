@@ -16,8 +16,7 @@ Nextflow는 작업 디렉토리에서 `nextflow.config`를 자동으로 인식�
 
 제공된 설정 파일은 소프트웨어 패키징, 프로세스 설정, 파이프라인 매개변수, 실행 프로파일의 네 가지 영역을 다룹니다.
 
-<details class="full-code">
-<summary>nextflow.config</summary>
+:::full-code[nextflow.config]{collapsed}
 
 ```nextflow title="nextflow.config" showLineNumbers
 /*
@@ -58,7 +57,7 @@ profiles {
 }
 ```
 
-</details>
+:::
 
 각 항목을 살펴본 후, 프로파일을 실제로 사용하여 파이프라인을 실행합니다.
 
@@ -324,8 +323,7 @@ Outputs:
   cowpy_art: yaml/cowpy-COLLECTED-yaml-output.txt
 ```
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="results/yaml/cowpy-COLLECTED-yaml-output.txt"
  _________
@@ -349,7 +347,7 @@ Outputs:
                     |_____|        |_____|         ~ - . _ _ _ _ _>
 ```
 
-</details>
+:::
 
 매개변수 파일은 파이프라인에 매개변수가 많을 때 특히 유용합니다. 워크플로우 스크립트를 변경하거나 긴 명령줄을 입력하지 않고도 모든 매개변수를 한 번에 제공할 수 있으며, 결과물과 함께 배포하기도 쉽습니다.
 
@@ -407,8 +405,7 @@ Outputs:
   cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
 ```
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console
 outputs/batch
@@ -424,7 +421,7 @@ outputs/batch
     └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 출력이 기본값인 `results/batch/` 대신 `outputs/batch/` 아래에 저장됩니다.
 `batch/`와 `intermediates/` 같은 하위 디렉토리 구조는 파이프라인 코드가 결정하며, `-output-dir`은 해당 구조가 시작되는 위치만 제어합니다.

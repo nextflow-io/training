@@ -7,8 +7,7 @@ description: Na quarta parte do curso de treinamento Build with nf-core, mostram
 
 Na quarta parte do curso de treinamento Build with nf-core, mostramos como usar o plugin nf-schema para validar entradas e parâmetros do pipeline.
 
-<details class="info">
-<summary>Como começar a partir desta seção</summary>
+:::info[Como começar a partir desta seção]{collapsed}
 
 Esta seção assume que você completou a [Parte 3: Criar um módulo nf-core](./03_make_module.mdx) e atualizou o módulo de processo `COWPY` para os padrões nf-core em seu pipeline.
 
@@ -27,7 +26,7 @@ Você pode testar se ele executa com sucesso executando o seguinte comando:
 nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
-</details>
+:::
 
 ---
 
@@ -78,8 +77,7 @@ O nf-schema fornece várias funções principais:
 
 O nf-schema é o sucessor do plugin nf-validation descontinuado e usa o padrão [JSON Schema Draft 2020-12](https://json-schema.org/) para validação.
 
-<details class="info">
-<summary>O que são plugins Nextflow?</summary>
+:::info[O que são plugins Nextflow?]{collapsed}
 
 Plugins são extensões que adicionam novas funcionalidades à própria linguagem Nextflow. Eles são instalados via um bloco `plugins{}` em `nextflow.config` e podem fornecer:
 
@@ -97,7 +95,7 @@ plugins {
 
 Uma vez instalado, você pode importar funções de plugins usando a sintaxe `include { functionName } from 'plugin/plugin-name'`.
 
-</details>
+:::
 
 ### 0.3. Dois arquivos de schema para dois tipos de validação
 
@@ -257,15 +255,14 @@ Cada entrada descrita aqui tem as seguintes propriedades principais que podem se
 Se você tem olhar afiado, pode perceber que o parâmetro de entrada `batch` que temos usado ainda não está definido no schema.
 Vamos adicioná-lo na próxima seção.
 
-<details class="info">
-<summary>De onde vêm os parâmetros do schema?</summary>
+:::info[De onde vêm os parâmetros do schema?]{collapsed}
 
 A validação do schema usa `nextflow.config` como base para definições de parâmetros.
 Parâmetros declarados em outros lugares nos seus scripts de fluxo de trabalho (como em `main.nf` ou arquivos de módulo) **não** são automaticamente capturados pelo validador de schema.
 
 Isso significa que você deve sempre declarar seus parâmetros de pipeline em `nextflow.config`, e então definir suas regras de validação em `nextflow_schema.json`.
 
-</details>
+:::
 
 ### 1.3. Adicionar o parâmetro batch
 

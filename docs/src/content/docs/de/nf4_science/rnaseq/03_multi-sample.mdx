@@ -9,8 +9,7 @@ Zuvor hast du eine Pipeline zur Variantenerkennung pro Probe erstellt, die die D
 In diesem Teil des Kurses werden wir unseren einfachen Workflow auf die nächste Stufe heben, indem wir ihn in ein leistungsstarkes Batch-Automatisierungswerkzeug verwandeln, das eine beliebige Anzahl von Proben verarbeiten kann.
 Und dabei werden wir ihn auch auf Paired-End-Daten umstellen, die in neueren Studien häufiger vorkommen.
 
-<details class="info">
-<summary>Wie du von diesem Abschnitt aus beginnst</summary>
+:::info[Wie du von diesem Abschnitt aus beginnst]{collapsed}
 
 Dieser Abschnitt des Kurses setzt voraus, dass du [Teil 1: Methodenübersicht](./01_method.mdx), [Teil 2: Einzelproben-Implementierung](./02_single-sample.mdx) abgeschlossen hast und eine funktionierende `rnaseq.nf`-Pipeline mit ausgefüllten Moduldateien besitzt.
 
@@ -32,7 +31,7 @@ Du kannst testen, ob er erfolgreich läuft:
 nextflow run rnaseq.nf -profile test
 ```
 
-</details>
+:::
 
 ## Aufgabe
 
@@ -648,8 +647,7 @@ Du findest die MultiQC-Ausgaben im Ergebnisverzeichnis.
 tree -L 2 -l results/multiqc
 ```
 
-<details class="abstract">
-<summary>Verzeichnisinhalt</summary>
+:::abstract[Verzeichnisinhalt]{collapsed}
 
 ```console
 results/multiqc
@@ -684,7 +682,7 @@ results/multiqc
     └── multiqc_sources.txt
 ```
 
-</details>
+:::
 
 Die letzte Datei `all_single-end.html` ist der vollständige aggregierte Bericht, praktisch in eine einfach zu durchsuchende HTML-Datei verpackt.
 

@@ -403,8 +403,7 @@ Outputs:
     - greetings/Alice-output.txt
 ```
 
-<details class="abstract">
-<summary>New content added under `results/`</summary>
+:::abstract[New content added under `results/`]{collapsed}
 
 ```console
 results/
@@ -417,16 +416,15 @@ results/
 The six files from the standalone run in section 1.1 (`Alice-output.txt`, `timestamped_Alice-output.txt`, and so on) are still sitting in `results/` alongside this new `greetings/` subdirectory.
 That's expected: nothing in this lesson deletes them, and section 2.1 reads them directly as its input.
 
-</details>
+:::
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="results/greetings/Alice-output.txt"
 Hello, Alice!
 ```
 
-</details>
+:::
 
 The greeting files are published to `results/greetings/`.
 The main workflow calls `GREETING_WORKFLOW` and wires its output directly to the `publish:` section.
@@ -673,8 +671,7 @@ Outputs:
     - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
 ```
 
-<details class="abstract">
-<summary>New content added under `results/`</summary>
+:::abstract[New content added under `results/`]{collapsed}
 
 ```console
 results/
@@ -695,16 +692,15 @@ results/
 The `results/` root also still holds the leftover files from the standalone runs in sections 1.1 and 2.1 (`Alice-output.txt`, `timestamped_Alice-output.txt`, `UPPER-timestamped_Alice-output.txt`, and so on).
 That's expected: this lesson never instructs you to clean them out.
 
-</details>
+:::
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
 !ECILA ,OLLEH ]54:84:81 31-90-6202[
 ```
 
-</details>
+:::
 
 The pipeline is working end-to-end: the greeting has been uppercased and reversed.
 

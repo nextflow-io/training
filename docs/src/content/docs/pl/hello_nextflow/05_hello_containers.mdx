@@ -31,8 +31,7 @@ Jak można się domyślić, będzie to bardzo pomocne w zwiększeniu powtarzalno
 
 Zauważ, że będziemy tego uczyć używając narzędzia [Docker](https://www.docker.com/get-started/), ale pamiętaj, że Nextflow obsługuje również [kilka innych technologii kontenerowych](https://nextflow.io/docs/latest/container.html).
 
-<details class="info">
-<summary>Jak zacząć od tej sekcji</summary>
+:::info[Jak zacząć od tej sekcji]{collapsed}
 
 Ta sekcja kursu zakłada, że ukończyłeś Części 1-4 kursu [Hello Nextflow](./index.mdx) i masz kompletny działający pipeline.
 
@@ -42,7 +41,7 @@ Jeśli zaczynasz kurs od tego miejsca, musisz skopiować katalog `modules` z roz
 cp -r solutions/4-hello-modules/modules .
 ```
 
-</details>
+:::
 
 ---
 
@@ -104,8 +103,7 @@ Outputs:
 
 Jak poprzednio, pliki wyjściowe znajdziesz w katalogu określonym w bloku `output` (`results/hello_containers/`).
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 results/hello_containers/
@@ -119,7 +117,7 @@ results/hello_containers/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Jeśli to zadziałało, jesteś gotowy do nauki używania kontenerów.
 
@@ -253,14 +251,13 @@ Możesz to sprawdzić, uruchamiając `ls /`, aby wylistować zawartość katalog
 ls /
 ```
 
-<details class="abstract">
-<summary>Wyjście polecenia</summary>
+:::abstract[Wyjście polecenia]{collapsed}
 
 ```console
 bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 ```
 
-</details>
+:::
 
 Używamy tutaj `ls` zamiast `tree`, ponieważ narzędzie `tree` nie jest dostępne w tym kontenerze.
 Widać, że system plików wewnątrz kontenera różni się od systemu plików na Twoim systemie hosta.
@@ -832,8 +829,7 @@ Outputs:
 Tym razem rzeczywiście działa!
 Jak zwykle wyjścia workflow'a znajdziesz w odpowiednim katalogu results, choć tym razem są nieco lepiej zorganizowane, z tylko raportem i końcowym wyjściem na najwyższym poziomie, a wszystkie pliki pośrednie schowane w podkatalogu.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 results/hello_containers/
@@ -849,12 +845,11 @@ results/hello_containers/
 └── batch-report.txt
 ```
 
-</details>
+:::
 
 Końcowa grafika ASCII znajduje się w katalogu `results/hello_containers/`, pod nazwą `cowpy-COLLECTED-batch-output.txt`.
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
 _________
@@ -885,7 +880,7 @@ _________
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 I oto jest, nasz piękny indyk wypowiadający pozdrowienia zgodnie z oczekiwaniami.
 
@@ -899,8 +894,7 @@ Odpowiada to następującej skróconej ścieżce katalogu: `work/98/656c6c`.
 
 W tym katalogu znajdziesz plik `.command.run`, który zawiera wszystkie polecenia, które Nextflow uruchomił w Twoim imieniu podczas wykonywania pipeline'u.
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="work/98/656c6c90cce1667c094d880f4b6dcc/.command.run"
 #!/bin/bash
@@ -1056,7 +1050,7 @@ $NXF_ENTRY
 
 ```
 
-</details>
+:::
 
 Jeśli wyszukasz `nxf_launch` w tym pliku, powinieneś zobaczyć coś takiego:
 

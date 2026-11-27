@@ -8,8 +8,7 @@ description: Daha önce, her örneğin verisini bağımsız olarak işleyen örn
 Daha önce, her örneğin verisini bağımsız olarak işleyen örnek başına varyant çağrı boru hattı oluşturdunuz.
 Şimdi bunu genişleterek [Bölüm 1](01_method.mdx)'de açıklanan ortak varyant çağrısını uygulayacağız (çok örnekli kullanım durumu).
 
-<details class="info">
-<summary>Bu bölümden nasıl başlanır</summary>
+:::info[Bu bölümden nasıl başlanır]{collapsed}
 
 Kursun bu bölümü, [Bölüm 1: Yönteme Genel Bakış](./01_method.mdx), [Bölüm 2: Örnek başına varyant çağrısı](./02_per_sample_variant_calling.mdx)'nı tamamladığınızı ve çalışan bir `genomics.nf` boru hattınız olduğunu varsayar.
 
@@ -29,7 +28,7 @@ Aşağıdaki komutu çalıştırarak başarıyla çalıştığını test edebili
 nextflow run genomics.nf -profile test
 ```
 
-</details>
+:::
 
 ## Görev
 
@@ -237,8 +236,7 @@ Outputs:
 
 Nextflow çıktısı öncekiyle aynı görünüyor, ancak `.g.vcf` dosyaları ve dizin dosyaları artık alt dizinlerde düzenlenmiş durumda.
 
-<details class="abstract">
-<summary>Dizin içeriği (sembolik bağlantılar kısaltılmış)</summary>
+:::abstract[Dizin içeriği (sembolik bağlantılar kısaltılmış)]{collapsed}
 
 ```console
 results/
@@ -258,7 +256,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 GVCF dosyalarından birini açıp içinde gezinirseniz, GATK HaplotypeCaller'ın istendiği gibi GVCF dosyaları ürettiğini doğrulayabilirsiniz.
 
@@ -703,8 +701,7 @@ Outputs:
 İlk iki adım önceki çalıştırmadan önbelleğe alınmış ve yeni `GATK_JOINTGENOTYPING` adımı üç örnekten toplanan girdiler üzerinde bir kez çalışıyor.
 Nihai çıktı dosyası, `family_trio.joint.vcf` (ve dizini), sonuçlar dizinindedir.
 
-<details class="abstract">
-<summary>Dizin içeriği (sembolik bağlantılar kısaltılmış)</summary>
+:::abstract[Dizin içeriği (sembolik bağlantılar kısaltılmış)]{collapsed}
 
 ```console
 results/
@@ -726,7 +723,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Ortak VCF dosyasını açarsanız, iş akışının beklenen varyant çağrılarını ürettiğini doğrulayabilirsiniz.
 

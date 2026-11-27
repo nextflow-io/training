@@ -20,13 +20,12 @@ Nextflow YouTube 채널에서 [전체 재생 목록](https://youtube.com/playlis
 
 Hello Nextflow 교육 과정의 첫 번째 파트에서는 매우 기본적인 도메인에 구애받지 않는 Hello World 예제로 주제에 쉽게 접근합니다. 이 예제를 단계적으로 구축하여 기본 Nextflow 로직과 구성 요소의 사용법을 시연합니다.
 
-<details class="info">
-<summary>Hello World 예제란 무엇인가요?</summary>
+:::info[Hello World 예제란 무엇인가요?]{collapsed}
 
 "Hello World!"는 프로그래밍 언어 또는 소프트웨어 프레임워크의 기본 구문과 구조를 보여주기 위한 최소한의 예제입니다.
 이 예제는 일반적으로 콘솔이나 터미널과 같은 출력 장치에 "Hello, World!"라는 문구를 출력하거나 파일에 쓰는 것으로 구성됩니다.
 
-</details>
+:::
 
 ---
 
@@ -65,14 +64,13 @@ echo 'Hello World!' > output.txt
 'Hello World' 텍스트는 이제 지정한 출력 파일인 `output.txt`에 있어야 합니다.
 파일 탐색기에서 열거나 예를 들어 `cat` 유틸리티를 사용하여 명령줄에서 열 수 있습니다.
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 이것이 첫 번째 Nextflow 워크플로우로 복제하려는 것입니다.
 
@@ -97,8 +95,7 @@ Nextflow 워크플로우로 작성하면 어떻게 보이는지 알아보세요.
 
 `hello-world.nf` 스크립트는 현재 디렉토리인 `hello-nextflow`에 있습니다. 편집기 창에서 여십시오.
 
-<details class="full-code">
-<summary>전체 코드 파일</summary>
+:::full-code[전체 코드 파일]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
@@ -125,7 +122,7 @@ workflow {
 }
 ```
 
-</details>
+:::
 
 Nextflow 워크플로우 스크립트는 일반적으로 하나 이상의 [**process**](https://nextflow.io/docs/latest/process.html) 정의와 [**workflow**](https://nextflow.io/docs/latest/workflow.html) 자체, 그리고 나중에 소개할 몇 가지 선택적 블록(여기에는 없음)을 포함합니다.
 
@@ -247,8 +244,7 @@ executor >  local (1)
 
 그 안에 무엇이 있는지 살펴보겠습니다.
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console
 work
@@ -264,10 +260,9 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
-<details class="question">
-<summary>같은 것이 보이지 않나요?</summary>
+:::question[같은 것이 보이지 않나요?]{collapsed}
 
 정확한 하위 디렉토리 이름은 시스템에서 다를 것입니다.
 
@@ -278,19 +273,18 @@ VSCode 파일 탐색기에서 작업 하위 디렉토리의 내용을 탐색하�
 tree -a work
 ```
 
-</details>
+:::
 
 먼저 워크플로우의 실제 출력, 즉 `sayHello` 프로세스에서 생성된 `output.txt` 파일을 살펴보고 싶을 것입니다.
 열어보면 `Hello World!` 인사말이 있으며, 이것이 최소한의 워크플로우의 목적이었습니다.
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="output.txt"
 Hello World!
 ```
 
-</details>
+:::
 
 작동했습니다!
 
@@ -308,15 +302,14 @@ Hello World!
 
 `.command.sh` 파일은 모든 북키핑 및 작업/환경 설정을 포함하지 않고 Nextflow가 실행한 메인 명령을 알려주므로 특히 유용합니다.
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title=".command.sh"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
-</details>
+:::
 
 이것은 이전에 수동으로 실행한 것과 일치합니다.
 
@@ -327,8 +320,7 @@ echo 'Hello World!' > output.txt
 
 워크플로우를 몇 번 다시 실행한 다음 `work/` 아래의 작업 디렉토리를 살펴보십시오.
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console
 work
@@ -383,7 +375,7 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
 각 실행에 대해 완전한 출력 및 로그 파일 세트가 있는 새 하위 디렉토리가 생성된 것을 볼 수 있습니다.
 이것은 동일한 워크플로우를 여러 번 실행해도 이전 실행의 결과를 덮어쓰지 않는다는 것을 보여줍니다.
@@ -514,8 +506,7 @@ Outputs:
 
 파일 탐색기를 확인하십시오: 이번에는 Nextflow가 `results/`라는 새 디렉토리도 생성했습니다.
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console {10-11,22}
 .
@@ -542,7 +533,7 @@ Outputs:
     └── 9f
 ```
 
-</details>
+:::
 
 `results` 디렉토리 안에는 방금 실행한 명령에 의해 작업 디렉토리에 생성된 `output.txt`에 대한 심볼릭 링크가 있습니다.
 
@@ -605,8 +596,7 @@ Outputs:
 
 이번에는 결과가 지정된 하위 디렉토리 아래에 기록됩니다.
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console {2-3}
 results/
@@ -615,7 +605,7 @@ results/
 └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
 ```
 
-</details>
+:::
 
 이전 실행의 결과도 여전히 있습니다.
 
@@ -687,8 +677,7 @@ Outputs:
 
 이번에는 결과를 보면 파일이 심볼릭 링크가 아닌 적절한 복사본입니다.
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console {3}
 results/
@@ -697,7 +686,7 @@ results/
 └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
 ```
 
-</details>
+:::
 
 이것도 개별 출력 수준에서 설정되므로 세분화된 방식으로 게시 모드를 설정할 수 있습니다.
 나중에 다단계 파이프라인으로 이동할 때 특히 유용할 것입니다. 예를 들어 최종 출력만 복사하고 중간 출력은 심볼릭 링크로 둘 수 있습니다.
@@ -876,14 +865,13 @@ Outputs:
 
 출력 파일을 열어 이제 새 버전의 인사말이 있는지 확인하십시오.
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Bonjour le monde!
 ```
 
-</details>
+:::
 
 Et voilà!
 
@@ -946,8 +934,7 @@ Outputs:
   first_output: hello_world/output.txt
 ```
 
-<details class="question">
-<summary>작동하지 않았다면</summary>
+:::question[작동하지 않았다면]{collapsed}
 
 다음과 같은 오류가 발생했다면:
 
@@ -976,18 +963,17 @@ v2 분석기는 Nextflow 26.04부터 기본값으로 설정되어 있으므로 �
 export NXF_SYNTAX_PARSER=v2
 ```
 
-</details>
+:::
 
 출력은 이전과 같은 위치에 있지만 내용은 새 텍스트로 업데이트되어야 합니다.
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Hola mundo!
 ```
 
-</details>
+:::
 
 Nextflow는 인사말 매개변수의 기본값을 사용하여 출력을 생성했습니다.
 
@@ -1016,14 +1002,13 @@ Outputs:
 
 다시 한번 results 디렉토리에서 해당하는 업데이트된 출력을 찾을 수 있습니다.
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Konnichiwa!
 ```
 
-</details>
+:::
 
 :::note[참고]
 Nextflow에서는 매개변수 값을 지정할 수 있는 여러 곳이 있습니다.
@@ -1097,8 +1082,7 @@ Nextflow는 문자 그대로 이전 실행을 가리키며 "이미 저기서 했
 
 nextflow 워크플로우를 시작할 때마다 현재 작업 디렉토리의 `.nextflow`라는 숨겨진 디렉토리 아래의 `history`라는 로그 파일에 줄이 기록됩니다.
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```txt title=".nextflow/history" showLineNumbers
 2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'
@@ -1108,7 +1092,7 @@ nextflow 워크플로우를 시작할 때마다 현재 작업 디렉토리의 `.
 2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
 ```
 
-</details>
+:::
 
 이 파일은 현재 작업 디렉토리 내에서 시작된 모든 Nextflow 실행의 타임스탬프, 실행 이름, 상태, 리비전 ID, 세션 ID 및 전체 명령줄을 제공합니다.
 

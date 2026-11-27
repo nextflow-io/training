@@ -69,8 +69,7 @@ L'editor s'obre amb el directori del projecte en focus.
 
 Trobareu un fitxer de workflow principal i un directori `data` que conté un full de dades i uns quants fitxers de dades.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 .
@@ -87,7 +86,7 @@ Trobareu un fitxer de workflow principal i un directori `data` que conté un ful
 └── nextflow.config
 ```
 
-</details>
+:::
 
 El workflow del fitxer `main.nf` és un esquelet que anireu ampliant gradualment fins a convertir-lo en un workflow completament funcional.
 
@@ -112,8 +111,7 @@ Cada fitxer de dades conté text de salutació en un dels cinc idiomes (fr: fran
 
 Utilitzarem una eina anomenada [`COWPY`](https://github.com/jeffbuttars/cowpy) per generar art ASCII de cada personatge dient la seva salutació gravada.
 
-<details class="info">
-<summary>Què fa `COWPY`?</summary>
+:::info[Què fa `COWPY`?]{collapsed}
 
 `COWPY` és una eina de línia de comandes que genera art ASCII per mostrar entrades de text arbitràries d'una manera divertida.
 És una implementació en Python de l'eina clàssica [cowsay](https://en.wikipedia.org/wiki/Cowsay) de Tony Monroe.
@@ -154,7 +152,7 @@ __________________
     \___)=(___/
 ```
 
-</details>
+:::
 
 A més, utilitzarem una eina d'anàlisi de llenguatge anomenada `langid` per identificar en quin idioma parla cada personatge i organitzar les sortides del pipeline en conseqüència.
 
@@ -248,8 +246,7 @@ Cada entrada del mapa correspon a una columna del nostre full de dades:
 Això facilita l'accés a camps específics de cada fila.
 Per exemple, podríem accedir a l'identificador del fitxer amb `id` o a la ruta del fitxer txt amb `recording`.
 
-<details class="info">
-<summary>(Opcional) Més informació sobre els mapes de Groovy</summary>
+:::info[(Opcional) Més informació sobre els mapes de Groovy]{collapsed}
 
 En Groovy, el llenguatge de programació sobre el qual es construeix Nextflow, un mapa és una estructura de dades de clau-valor similar als diccionaris en Python, els objectes en JavaScript o els hashes en Ruby.
 
@@ -287,7 +284,7 @@ id: sampleA
 character: squirrel
 ```
 
-</details>
+:::
 
 ### 1.2. Seleccionar un camp específic amb `map`
 
@@ -519,8 +516,7 @@ Outputs:
 
 Com podeu veure, `COWPY` s'ha executat sobre cada fitxer utilitzant el personatge correcte per a cadascun.
 
-<details class="abstract">
-<summary>Contingut del directori de resultats</summary>
+:::abstract[Contingut del directori de resultats]{collapsed}
 
 ```console
 results/
@@ -533,10 +529,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>Contingut de results/cowpy-guten_tag.txt</summary>
+:::example[Contingut de results/cowpy-guten_tag.txt]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -555,7 +550,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 Aquest enfocament funciona, però té una limitació: hem hagut de dividir el canal en dos sub-canals separats.
 Si volguéssim passar més camps al procés, hauríem de dividir-los en més sub-canals.
@@ -705,8 +700,7 @@ Outputs:
 
 La sortida és els mateixos set fitxers `cowpy-*.txt` que abans, ara produïts amb una crida més senzilla a `COWPY`.
 
-<details class="abstract">
-<summary>Contingut del directori de resultats</summary>
+:::abstract[Contingut del directori de resultats]{collapsed}
 
 ```console
 results/
@@ -719,10 +713,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>Contingut de results/cowpy-guten_tag.txt</summary>
+:::example[Contingut de results/cowpy-guten_tag.txt]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -741,7 +734,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 Això és una lleugera millora respecte a l'enfocament amb `multiMap`.
 Però encara hem hagut de desempaquetar el mapa de Groovy original per crear la tupla d'entrada, i hi ha un acoblament estret entre el procés i el full de dades: la definició d'entrada de `COWPY` ara fa referència directament als noms de columna `id`, `character` i `recording`.
@@ -959,8 +952,7 @@ Outputs:
 
 El directori de resultats ara conté els fitxers d'art ASCII.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 results/
@@ -973,10 +965,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>Contingut de results/cowpy-guten_tag.txt</summary>
+:::example[Contingut de results/cowpy-guten_tag.txt]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -995,7 +986,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 El procés ara rep totes les metadades com un paquet a través de `meta`, utilitza el que necessita (`meta.character`) i ignora la resta.
 
@@ -1181,8 +1172,7 @@ Aquest codi essencialment crea un mapa temporal amb un sol parell clau-valor que
 
 Per a una explicació més detallada, consulteu el quadre a continuació.
 
-<details class="info">
-<summary>Creació del nou meta map utilitzant l'operador `+`</summary>
+:::info[Creació del nou meta map utilitzant l'operador `+`]{collapsed}
 
 **Primer, heu de saber que podem fusionar el contingut de dos mapes utilitzant l'operador Groovy `+`.**
 
@@ -1269,7 +1259,7 @@ Això hauria de deixar més clar que simplement estem deixant el `file` al seu l
 
 **I això ens porta de nou a l'estructura de canal `tuple val(meta), path(file)`!**
 
-</details>
+:::
 
 #### 2.2.2. Executeu el workflow
 
@@ -1613,8 +1603,7 @@ sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 La clau `character` es crea per a totes les entrades quan s'analitza el full de dades, però `meta.character` per a `sampleA` serà una cadena buida.
 Quan Nextflow substitueix `${meta.character}{:nextflow}` a la comanda, l'eina `COWPY` rep un argument buit per a `-c` i falla:
 
-<details class="failure">
-<summary>Sortida de la comanda</summary>
+:::failure[Sortida de la comanda]{collapsed}
 
 ```console {7,12,17,29}
  N E X T F L O W   ~  version 26.04.4
@@ -1658,7 +1647,7 @@ Tip: you can try to figure out what's wrong by changing to the process work dir 
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 El missatge d'error (`expected one argument`) apunta a l'indicador `-c` buit.
 Comprovar el fitxer `.command.sh` al directori de treball confirma que la comanda s'ha executat amb un valor buit.
@@ -1677,8 +1666,7 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 L'operació `map` escriu explícitament `character: row.character{:nextflow}`, de manera que la clau `character` es crea igualment al meta map, però accedir a una columna que no existeix a la fila analitzada retorna `null`, de manera que el seu valor passa a ser `null`.
 Quan el script del procés avalua `${meta.character}{:nextflow}`, Nextflow literalment substitueix la cadena `null` a la comanda:
 
-<details class="failure">
-<summary>Sortida de la comanda</summary>
+:::failure[Sortida de la comanda]{collapsed}
 
 ```console {7,12,17}
  N E X T F L O W   ~  version 26.04.4
@@ -1732,7 +1720,7 @@ Tip: you can replicate the issue by changing to the process work dir and enterin
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 El `cowpy -c null` a la comanda executada és la pista de diagnòstic.
 

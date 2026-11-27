@@ -69,8 +69,7 @@ code .
 
 메인 워크플로우 파일과 데이터시트 및 몇 가지 데이터 파일이 포함된 `data` 디렉토리가 있습니다.
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console
 .
@@ -87,7 +86,7 @@ code .
 └── nextflow.config
 ```
 
-</details>
+:::
 
 `main.nf` 파일의 워크플로우는 단계적으로 완전한 기능을 갖춘 워크플로우로 확장할 스텁입니다.
 
@@ -112,8 +111,7 @@ sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
 
 [`COWPY`](https://github.com/jeffbuttars/cowpy)라는 도구를 사용하여 각 캐릭터가 녹음된 인사말을 말하는 ASCII 아트를 생성합니다.
 
-<details class="info">
-<summary>`COWPY`는 무엇을 하나요?</summary>
+:::info[`COWPY`는 무엇을 하나요?]{collapsed}
 
 `COWPY`는 임의의 텍스트 입력을 재미있는 방식으로 표시하는 ASCII 아트를 생성하는 명령줄 도구입니다.
 Tony Monroe의 클래식 [cowsay](https://en.wikipedia.org/wiki/Cowsay) 도구의 Python 구현입니다.
@@ -154,7 +152,7 @@ __________________
     \___)=(___/
 ```
 
-</details>
+:::
 
 또한 `langid`라는 언어 분석 도구를 사용하여 각 캐릭터가 사용하는 언어를 식별하고, 그에 따라 파이프라인의 출력을 구성합니다.
 
@@ -248,8 +246,7 @@ Outputs:
 이를 통해 각 행의 특정 필드에 쉽게 접근할 수 있습니다.
 예를 들어, `id`로 파일 ID에 접근하거나 `recording`으로 txt 파일 경로에 접근할 수 있습니다.
 
-<details class="info">
-<summary>(선택 사항) Groovy 맵에 대한 추가 정보</summary>
+:::info[(선택 사항) Groovy 맵에 대한 추가 정보]{collapsed}
 
 Nextflow가 기반으로 하는 프로그래밍 언어인 Groovy에서 맵은 Python의 딕셔너리, JavaScript의 객체, Ruby의 해시와 유사한 키-값 데이터 구조입니다.
 
@@ -287,7 +284,7 @@ id: sampleA
 character: squirrel
 ```
 
-</details>
+:::
 
 ### 1.2. `map`으로 특정 필드 선택
 
@@ -519,8 +516,7 @@ Outputs:
 
 `COWPY`가 각 파일에 대해 올바른 캐릭터를 사용하여 실행된 것을 확인할 수 있습니다.
 
-<details class="abstract">
-<summary>결과 디렉토리 내용</summary>
+:::abstract[결과 디렉토리 내용]{collapsed}
 
 ```console
 results/
@@ -533,10 +529,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>results/cowpy-guten_tag.txt 내용</summary>
+:::example[results/cowpy-guten_tag.txt 내용]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -555,7 +550,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 이 방식은 작동하지만 한 가지 제한이 있습니다. 채널을 두 개의 별도 서브 채널로 분리해야 했습니다.
 프로세스에 더 많은 필드를 전달하려면 더 많은 서브 채널로 분리해야 하며, 이는 번거롭고 복잡해질 수 있습니다.
@@ -704,8 +699,7 @@ Outputs:
 
 이전과 동일한 7개의 `cowpy-*.txt` 파일이 출력되며, 이제 더 간단한 `COWPY` 실행으로 생성됩니다.
 
-<details class="abstract">
-<summary>결과 디렉토리 내용</summary>
+:::abstract[결과 디렉토리 내용]{collapsed}
 
 ```console
 results/
@@ -718,10 +712,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>results/cowpy-guten_tag.txt 내용</summary>
+:::example[results/cowpy-guten_tag.txt 내용]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -740,7 +733,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 `multiMap` 방식보다 약간 개선되었습니다.
 그러나 입력 튜플을 생성하기 위해 원래의 Groovy 맵을 언패킹해야 했으며, 프로세스와 데이터시트 간의 결합이 여전히 강합니다. `COWPY` 입력 정의가 열 이름 `id`, `character`, `recording`을 직접 참조합니다.
@@ -958,8 +951,7 @@ Outputs:
 
 results 디렉토리에 ASCII 아트 파일이 생성되었습니다.
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console
 results/
@@ -972,10 +964,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>results/cowpy-guten_tag.txt 내용</summary>
+:::example[results/cowpy-guten_tag.txt 내용]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -994,7 +985,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 프로세스는 이제 `meta`를 통해 모든 메타데이터를 묶음으로 받고, 필요한 것(`meta.character`)을 사용하며, 나머지는 무시합니다.
 
@@ -1180,8 +1171,7 @@ Groovy `+` 연산자를 사용하여 원래 메타 맵을 대체하는 새로운
 
 더 자세한 설명은 아래 박스를 참조하세요.
 
-<details class="info">
-<summary>`+` 연산자를 사용한 새 메타 맵 생성</summary>
+:::info[`+` 연산자를 사용한 새 메타 맵 생성]{collapsed}
 
 **먼저, Groovy 연산자 `+`를 사용하여 두 맵의 내용을 병합할 수 있다는 것을 알아야 합니다.**
 
@@ -1268,7 +1258,7 @@ new_map = map1 + [lang: lang_id]
 
 **이것이 바로 `tuple val(meta), path(file)` 채널 구조로 돌아오는 것입니다!**
 
-</details>
+:::
 
 #### 2.2.2. 워크플로우 실행
 
@@ -1612,8 +1602,7 @@ sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 데이터시트를 파싱할 때 모든 항목에 대해 `character` 키가 생성되지만, `sampleA`의 `meta.character`는 빈 문자열이 됩니다.
 Nextflow가 명령에 `${meta.character}{:nextflow}`를 대입할 때 `COWPY` 도구는 `-c`에 빈 인자를 받아 오류를 발생시킵니다.
 
-<details class="failure">
-<summary>명령 출력</summary>
+:::failure[명령 출력]{collapsed}
 
 ```console {7,12,17,29}
  N E X T F L O W   ~  version 26.04.4
@@ -1657,7 +1646,7 @@ Tip: you can try to figure out what's wrong by changing to the process work dir 
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 오류 메시지(`expected one argument`)는 빈 `-c` 플래그를 가리킵니다.
 작업 디렉토리의 `.command.sh` 파일을 확인하면 명령이 빈 값으로 실행되었음을 확인할 수 있습니다.
@@ -1676,8 +1665,7 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 `map` 연산은 `character: row.character{:nextflow}`를 명시적으로 작성하므로, 메타 맵에 `character` 키는 생성되지만, 파싱된 행에 존재하지 않는 열에 접근하면 `null`이 반환되어 값이 `null`이 됩니다.
 프로세스 스크립트가 `${meta.character}{:nextflow}`를 평가할 때 Nextflow는 명령에 문자열 `null`을 그대로 대입합니다.
 
-<details class="failure">
-<summary>명령 출력</summary>
+:::failure[명령 출력]{collapsed}
 
 ```console {7,12,17}
  N E X T F L O W   ~  version 26.04.4
@@ -1731,7 +1719,7 @@ Tip: you can replicate the issue by changing to the process work dir and enterin
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 실행된 명령의 `cowpy -c null`이 진단 단서입니다.
 

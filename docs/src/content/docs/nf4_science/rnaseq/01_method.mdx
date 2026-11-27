@@ -109,8 +109,7 @@ Verify that you can see the sequence data files under `/data/reads`:
 ls /data/reads
 ```
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 ENCSR000COQ1_1.fastq.gz  ENCSR000COQ2_2.fastq.gz  ENCSR000COR2_1.fastq.gz  ENCSR000CPO1_2.fastq.gz
@@ -118,7 +117,7 @@ ENCSR000COQ1_2.fastq.gz  ENCSR000COR1_1.fastq.gz  ENCSR000COR2_2.fastq.gz  ENCSR
 ENCSR000COQ2_1.fastq.gz  ENCSR000COR1_2.fastq.gz  ENCSR000CPO1_1.fastq.gz  ENCSR000CPO2_2.fastq.gz
 ```
 
-</details>
+:::
 
 With that, you are ready to try your first command.
 
@@ -163,14 +162,13 @@ You can find the output files in the same directory as the original data:
 ls /data/reads/ENCSR000COQ1_1_fastqc*
 ```
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 /data/reads/ENCSR000COQ1_1_fastqc.html  /data/reads/ENCSR000COQ1_1_fastqc.zip
 ```
 
-</details>
+:::
 
 You should see an HTML report and a ZIP archive containing the QC metrics.
 That completes the testing of the first step.
@@ -319,15 +317,14 @@ You can find the output files in the working directory:
 ls ENCSR000COQ1_1*
 ```
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.html
 ENCSR000COQ1_1_trimmed.fq.gz                 ENCSR000COQ1_1_trimmed_fastqc.zip
 ```
 
-</details>
+:::
 
 This includes the trimmed reads, trimming report and post-trimming QC files.
 
@@ -340,8 +337,7 @@ mkdir /data/trimmed
 mv ENCSR000COQ1_1* /data/trimmed
 ```
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 /data/trimmed
@@ -351,7 +347,7 @@ mv ENCSR000COQ1_1* /data/trimmed
 └── ENCSR000COQ1_1_trimmed_fastqc.zip
 ```
 
-</details>
+:::
 
 The files are now accessible in your normal filesystem.
 
@@ -655,15 +651,14 @@ This creates multiple genome index files, which you can find in the working dire
 ls genome_index.*
 ```
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 genome_index.1.ht2  genome_index.3.ht2  genome_index.5.ht2  genome_index.7.ht2
 genome_index.2.ht2  genome_index.4.ht2  genome_index.6.ht2  genome_index.8.ht2
 ```
 
-</details>
+:::
 
 We'll need these files later, and generating them is not typically something we want to do as part of a workflow, so we're going to generate a gzipped tarball containing the genome index files that we can easily pass around as needed.
 
@@ -711,14 +706,13 @@ Once again you can find the output files in the working directory:
 ls ENCSR000COQ1_1*
 ```
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console title="Output"
 ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
 ```
 
-</details>
+:::
 
 The alignment produced a BAM file and a log file with alignment statistics.
 
@@ -807,8 +801,7 @@ Move the Trim Galore output files to the same directory we used in section 1.
 mv ENCSR000COQ2_1* ENCSR000COR1_1* /data/trimmed
 ```
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 /data/trimmed
@@ -826,7 +819,7 @@ mv ENCSR000COQ2_1* ENCSR000COR1_1* /data/trimmed
 └── ENCSR000COR1_1_trimmed_fastqc.zip
 ```
 
-</details>
+:::
 
 The files are now accessible in your normal filesystem.
 
@@ -905,8 +898,7 @@ Move the alignment output files to the same directory we used in section 1.
 mv ENCSR000COQ2_1* ENCSR000COR1_1* /data/aligned
 ```
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 /data/aligned
@@ -918,7 +910,7 @@ mv ENCSR000COQ2_1* ENCSR000COR1_1* /data/aligned
 └── ENCSR000COR1_1_trimmed.hisat2.log
 ```
 
-</details>
+:::
 
 The files are now accessible in your normal filesystem.
 
@@ -1006,8 +998,7 @@ The output files are in the working directory:
 ls all_samples_QC*
 ```
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 all_samples_QC.html
@@ -1031,7 +1022,7 @@ hisat2_se_plot.txt
 llms-full.txt
 ```
 
-</details>
+:::
 
 The main output is the `all_samples_QC.html` report, accompanied by a data directory containing the underlying metrics.
 

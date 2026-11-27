@@ -131,8 +131,7 @@ samtools index /data/bam/reads_mother.bam
 
 कमांड टर्मिनल में कोई आउटपुट उत्पन्न नहीं करती है, लेकिन तुम्हें अब मूल BAM इनपुट फ़ाइल के समान डायरेक्टरी में `reads_mother.bam.bai` नामक एक फ़ाइल दिखनी चाहिए।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 data/bam/
@@ -142,7 +141,7 @@ data/bam/
 └── reads_son.bam
 ```
 
-</details>
+:::
 
 यह पहले चरण के परीक्षण को पूरा करता है।
 
@@ -280,22 +279,20 @@ Runtime.totalMemory()=203423744 # [!code highlight]
 
 आउटपुट फ़ाइलें, `reads_mother.vcf` और इसकी इंडेक्स फ़ाइल, `reads_mother.vcf.idx`, कंटेनर में तुम्हारी कार्यशील डायरेक्टरी के अंदर बनाई गई हैं।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 conda.yml  hsperfdata_root  reads_mother.vcf  reads_mother.vcf.idx
 ```
 
-</details>
+:::
 
 VCF फ़ाइल में वेरिएंट कॉल होते हैं, जैसा कि हम एक मिनट में देखेंगे, और इंडेक्स फ़ाइल का वही कार्य है जो BAM इंडेक्स फ़ाइल का है, टूल्स को संपूर्ण फ़ाइल लोड किए बिना डेटा के सबसेट को खोजने और पुनः प्राप्त करने की अनुमति देना।
 
 चूंकि VCF एक टेक्स्ट फॉर्मेट है और यह एक छोटी परीक्षण फ़ाइल है, तुम इसे खोलने और सामग्री देखने के लिए `cat reads_mother.vcf` चला सकते हो।
 अगर तुम फ़ाइल की शुरुआत तक स्क्रॉल करते हो, तो तुम्हें मेटाडेटा की कई लाइनों से बना एक हेडर मिलेगा, उसके बाद वेरिएंट कॉल की एक सूची होगी, प्रति लाइन एक।
 
-<details class="abstract">
-<summary>फ़ाइल की सामग्री (संक्षिप्त)</summary>
+:::abstract[फ़ाइल की सामग्री (संक्षिप्त)]{collapsed}
 
 ```console {26} title="reads_mother.vcf" showLineNumbers
 ##fileformat=VCFv4.2
@@ -339,7 +336,7 @@ VCF फ़ाइल में वेरिएंट कॉल होते ह�
 20_10037292_10066351    14156   .       T       C       183.64  .       AC=1;AF=0.500;AN=2;BaseQRankSum=0.703;DP=20;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=9.18;ReadPosRankSum=-0.193;SOR=1.034        GT:AD:DP:GQ:PL  0/1:12,8:20:99:191,0,319
 ```
 
-</details>
+:::
 
 ऊपर दिए गए उदाहरण आउटपुट में, हमने अंतिम हेडर लाइन को हाइलाइट किया है, जो उसके बाद आने वाले टेबुलर डेटा के लिए कॉलम के नाम देती है।
 डेटा की प्रत्येक लाइन नमूने के सीक्वेंसिंग डेटा में पहचाने गए संभावित वेरिएंट का वर्णन करती है। VCF फॉर्मेट की व्याख्या करने के लिए मार्गदर्शन के लिए, [यह उपयोगी लेख](https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/variant-identification-and-analysis/understanding-vcf-format/) देखें।
@@ -354,8 +351,7 @@ mkdir /data/vcf
 mv reads_mother.vcf* /data/vcf
 ```
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console {5,13-15}
 data/
@@ -375,7 +371,7 @@ data/
     └── reads_mother.vcf.idx
 ```
 
-</details>
+:::
 
 एक बार यह हो जाने के बाद, सभी फ़ाइलें अब तुम्हारी सामान्य फ़ाइलसिस्टम में सुलभ हैं।
 
@@ -454,8 +450,7 @@ samtools index /data/bam/reads_father.bam
 samtools index /data/bam/reads_son.bam
 ```
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 data/bam/
@@ -467,7 +462,7 @@ data/bam/
 └── reads_son.bam.bai
 ```
 
-</details>
+:::
 
 यह संबंधित BAM फ़ाइलों के समान डायरेक्टरी में इंडेक्स फ़ाइलें उत्पन्न करना चाहिए।
 
@@ -573,19 +568,17 @@ Runtime.totalMemory()=257949696 # [!code highlight]
 
 यह कंटेनर में वर्तमान कार्यशील डायरेक्टरी में GVCF आउटपुट फ़ाइल `reads_mother.g.vcf` बनाता है, साथ ही इसकी इंडेक्स फ़ाइल, `reads_mother.g.vcf.idx`।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 conda.yml  hsperfdata_root  reads_mother.g.vcf  reads_mother.g.vcf.idx
 ```
 
-</details>
+:::
 
 अगर तुम फ़ाइल की सामग्री की पहली 200 लाइनें देखने के लिए `head -200 reads_mother.g.vcf` चलाते हो, तो तुम देखोगे कि यह सेक्शन 1 में जेनरेट किए गए समकक्ष VCF की तुलना में बहुत लंबा है, और अधिकांश लाइनें VCF में देखी गई चीज़ों से काफी अलग दिखती हैं।
 
-<details class="abstract">
-<summary>फ़ाइल की सामग्री (संक्षिप्त)</summary>
+:::abstract[फ़ाइल की सामग्री (संक्षिप्त)]{collapsed}
 
 ```console {92,175,191,195} title="reads_mother.g.vcf" showLineNumbers
 ##fileformat=VCFv4.2
@@ -790,7 +783,7 @@ conda.yml  hsperfdata_root  reads_mother.g.vcf  reads_mother.g.vcf.idx
 20_10037292_10066351	3537	.	A	<NON_REF>	.	.	END=3546	GT:DP:GQ:MIN_DP:PL	0/0:29:72:26:0,72,1080
 ```
 
-</details>
+:::
 
 हमने एक बार फिर अंतिम हेडर लाइन को हाइलाइट किया है, साथ ही फ़ाइल में पहले तीन 'उचित' वेरिएंट कॉल को भी।
 
@@ -944,15 +937,14 @@ Runtime.totalMemory()=226492416
 
 एक बार यह पूरा हो जाने के बाद, तुम्हारे पास अपनी वर्तमान डायरेक्टरी में `.g.vcf` में समाप्त होने वाली तीन फ़ाइलें (प्रति नमूना एक) और उनकी संबंधित इंडेक्स फ़ाइलें `.g.vcf.idx` में समाप्त होनी चाहिए।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 conda.yml        reads_father.g.vcf      reads_mother.g.vcf      reads_son.g.vcf
 hsperfdata_root  reads_father.g.vcf.idx  reads_mother.g.vcf.idx  reads_son.g.vcf.idx
 ```
 
-</details>
+:::
 
 इस बिंदु पर, हमने अपने प्रत्येक इनपुट नमूने के लिए GVCF मोड में वेरिएंट कॉल किए हैं।
 अब संयुक्त कॉलिंग पर आगे बढ़ने का समय है।
@@ -1082,8 +1074,7 @@ Runtime.totalMemory()=203423744 # [!code highlight]
 यह कंटेनर में वर्तमान कार्यशील डायरेक्टरी में VCF आउटपुट फ़ाइल `family_trio.vcf` बनाता है, साथ ही इसकी इंडेक्स, `family_trio.vcf.idx`।
 यह एक और उचित रूप से छोटी फ़ाइल है, इसलिए तुम फ़ाइल की सामग्री देखने के लिए `cat family_trio.vcf` चला सकते हो, और पहली कुछ वेरिएंट लाइनों को खोजने के लिए नीचे स्क्रॉल कर सकते हो।
 
-<details class="abstract">
-<summary>फ़ाइल की सामग्री (संक्षिप्त)</summary>
+:::abstract[फ़ाइल की सामग्री (संक्षिप्त)]{collapsed}
 
 ```console {39} title="family_trio.vcf" showLineNumbers
 ##fileformat=VCFv4.2
@@ -1146,7 +1137,7 @@ Runtime.totalMemory()=203423744 # [!code highlight]
 20_10037292_10066351    14403   .       G       A       144.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=2.63;DP=116;ExcessHet=0.0000;FS=1.435;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=3.52;ReadPosRankSum=0.252;SOR=0.802  GT:AD:DP:GQ:PL  0/1:32,9:41:99:153,0,821        0/0:37,0:37:99:0,109,1169       0/0:37,0:37:99:0,99,1113
 ```
 
-</details>
+:::
 
 हमने एक बार फिर अंतिम हेडर लाइन को हाइलाइट किया है, जो वेरिएंट कॉल डेटा की शुरुआत को चिह्नित करती है।
 
@@ -1167,8 +1158,7 @@ Runtime.totalMemory()=203423744 # [!code highlight]
 mv *.vcf* /data/vcf
 ```
 
-<details class="abstract">
-<summary>डायरेक्टरी की सामग्री</summary>
+:::abstract[डायरेक्टरी की सामग्री]{collapsed}
 
 ```console {14-19,22-23}
 data
@@ -1198,7 +1188,7 @@ data
     └── reads_son.g.vcf.idx
 ```
 
-</details>
+:::
 
 एक बार यह हो जाने के बाद, सभी फ़ाइलें अब तुम्हारी सामान्य फ़ाइलसिस्टम में सुलभ हैं।
 

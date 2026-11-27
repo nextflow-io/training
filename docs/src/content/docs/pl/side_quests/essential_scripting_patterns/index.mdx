@@ -1185,8 +1185,7 @@ Ale co, jeśli chcemy dodać informacje o tym, kiedy i gdzie odbyło się przetw
 
 Jeśli to uruchomisz, zauważysz błąd — Nextflow próbuje zinterpretować `${USER}{:nextflow}` jako zmienną Nextflow, która nie istnieje.
 
-<details class="failure">
-<summary>Wyjście polecenia</summary>
+:::failure[Wyjście polecenia]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -1203,7 +1202,7 @@ ERROR ~ Script compilation failed
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 Musimy to escapować, aby Bash mógł to obsłużyć.
 

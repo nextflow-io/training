@@ -258,8 +258,7 @@ Pipeline'ı çalıştırın:
 nextflow run greet.nf
 ```
 
-<details class="example">
-<summary>Çıktı</summary>
+:::example[Çıktı]{collapsed}
 
 ```console
 N E X T F L O W   ~  version 26.04.4
@@ -282,7 +281,7 @@ Output: Hallo
 Pipeline complete! 👋
 ```
 
-</details>
+:::
 
 İlk özel eklenti fonksiyonunuz gerçek bir iş akışında çalışıyor.
 Bölüm 1'de nf-hello ve nf-schema ile kullandığınız `include { ... } from 'plugin/...'` kalıbı, kendi eklentinizle de aynı şekilde çalışır.
@@ -433,8 +432,7 @@ workflow {
 nextflow run greet.nf
 ```
 
-<details class="example">
-<summary>Çıktı</summary>
+:::example[Çıktı]{collapsed}
 
 ```console
 N E X T F L O W   ~  version 26.04.4
@@ -457,7 +455,7 @@ Decorated: *** Hallo ***
 Pipeline complete! 👋
 ```
 
-</details>
+:::
 
 Eklenti fonksiyonları hem süreç betiklerinde (`SAY_HELLO` içindeki `decorateGreeting` gibi) hem de iş akışı operasyonlarında (`map` içindeki `reverseGreeting` gibi) çalışır.
 

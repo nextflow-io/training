@@ -12,8 +12,7 @@ En lloc d'escriure cada procés des de zero, podeu instal·lar i utilitzar mòdu
 
 Per demostrar com funciona això, substituirem el mòdul personalitzat `collectGreetings` pel mòdul `find/concatenate` de nf-core/modules al pipeline `core-hello`.
 
-<details class="info">
-<summary>Com començar des d'aquesta secció</summary>
+:::info[Com començar des d'aquesta secció]{collapsed}
 
 Aquesta secció del curs assumeix que heu completat la [Part 1: Reescriure Hello per a nf-core](./01_rewrite_hello.mdx) i teniu un pipeline `core-hello` funcional.
 
@@ -32,7 +31,7 @@ Podeu comprovar que s'executa correctament executant la comanda següent:
 nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
-</details>
+:::
 
 ---
 
@@ -108,8 +107,7 @@ nf-core modules info find/concatenate
 
 Això mostra documentació sobre el mòdul, incloent les seves entrades, sortides i informació bàsica d'ús.
 
-<details class="success">
-<summary>Sortida de la comanda</summary>
+:::success[Sortida de la comanda]{collapsed}
 
 ```console
 
@@ -185,7 +183,7 @@ INFO     Reinstalling modules found in 'modules.json' but missing from
 
 ```
 
-</details>
+:::
 
 Aquesta és exactament la mateixa informació que podeu trobar al lloc web.
 
@@ -228,8 +226,7 @@ Comprovem que els fitxers del mòdul estan al seu lloc:
 tree -L 4 modules
 ```
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 modules
@@ -249,12 +246,11 @@ modules
 5 directories, 7 files
 ```
 
-</details>
+:::
 
 També podeu confirmar la instal·lació inspeccionant `modules.json`, que ara llista `find/concatenate` sota el repositori nf-core/modules.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```json title="modules.json"
 {
@@ -303,7 +299,7 @@ També podeu confirmar la instal·lació inspeccionant `modules.json`, que ara l
 }
 ```
 
-</details>
+:::
 
 Això confirma que el mòdul `find/concatenate` ara forma part del codi font del vostre projecte.
 No obstant això, per utilitzar realment el nou mòdul, hem d'importar-lo al nostre pipeline.
@@ -814,8 +810,7 @@ nextflow run . --outdir core-hello-results -profile test,docker
 
 Això hauria d'executar-se raonablement ràpid.
 
-<details class="success">
-<summary>Sortida de la comanda</summary>
+:::success[Sortida de la comanda]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -854,7 +849,7 @@ executor >  local (8)
 -[core/hello] Pipeline completed successfully-
 ```
 
-</details>
+:::
 
 Observeu que `FIND_CONCATENATE` ara apareix a la llista d'execució de processos en lloc de `collectGreetings`.
 

@@ -113,8 +113,7 @@ L'approccio migliore è sovrascrivere le risorse predefinite in un file di confi
 
 Vi forniamo un file di configurazione personalizzato che sovrascrive le risorse predefinite basate sulle etichette.
 
-<details class="full-code">
-<summary>laptop.config</summary>
+:::full-code[laptop.config]{collapsed}
 
 ```nextflow title="laptop.config"
 process {
@@ -136,7 +135,7 @@ process {
 }
 ```
 
-</details>
+:::
 
 La [Parte 2](./02_configure_execution.mdx) ha introdotto `withName:` per selezionare un singolo processo per nome.
 Qui usiamo `withLabel:` per selezionare tutti i processi che condividono un'etichetta contemporaneamente.

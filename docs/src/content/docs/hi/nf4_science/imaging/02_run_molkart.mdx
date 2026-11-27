@@ -108,8 +108,7 @@ nextflow run ./molkart -params-file params.yaml
 
 कुछ क्षणों के बाद, आपको इस तरह की एक एरर दिखेगी:
 
-<details class="failure">
-<summary>कमांड आउटपुट</summary>
+:::failure[कमांड आउटपुट]{collapsed}
 
 ```console
 ERROR ~ Error executing process > 'NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)'
@@ -130,7 +129,7 @@ Command error:
   .command.sh: line 3: duplicate_finder.py: command not found
 ```
 
-</details>
+:::
 
 **यहां क्या हो रहा है?**
 
@@ -213,8 +212,7 @@ Nextflow में कंटेनरों के बारे में अध
 
 जैसे-जैसे पाइपलाइन चलती है, आपको इस तरह का आउटपुट दिखेगा:
 
-<details class="success">
-<summary>कमांड आउटपुट</summary>
+:::success[कमांड आउटपुट]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -291,7 +289,7 @@ CPU hours   : (a few seconds)
 Succeeded   : 22
 ```
 
-</details>
+:::
 
 ध्यान दें कि यह आउटपुट हमारे Hello World उदाहरण से अधिक विस्तृत है क्योंकि पाइपलाइन द्वारा अपनाई गई nf-core परंपराओं के कारण:
 

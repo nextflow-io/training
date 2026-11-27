@@ -254,8 +254,7 @@ Wir gehen auch darauf in [Abschnitt zur Eingabe-Validierung](../nfcore_build/04_
 Die `nf-core/demo` Pipeline erwartet eine CSV-Datei mit den Spalten `sample`, `fastq_1` und `fastq_2`.
 Dies ist in einer Schema-Datei (`assets/schema_input.json`) definiert, die die erwartete Struktur, Spaltentypen und Einschränkungen festlegt.
 
-<details class="abstract">
-<summary>Schema-Datei für Eingaben</summary>
+:::abstract[Schema-Datei für Eingaben]{collapsed}
 
 ```json title="assets/schema_input.json"
 {
@@ -293,7 +292,7 @@ Dies ist in einer Schema-Datei (`assets/schema_input.json`) definiert, die die e
 }
 ```
 
-</details>
+:::
 
 Das Schema legt fest, dass `sample` und `fastq_1` erforderlich sind, während `fastq_2` optional ist (unterstützt sowohl Paired-End- als auch Single-End-Daten).
 Dateipfade werden auf Existenz und Erweiterungsmuster geprüft.

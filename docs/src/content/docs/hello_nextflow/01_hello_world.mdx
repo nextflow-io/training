@@ -19,13 +19,12 @@ See [the whole playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr2
 
 In this first part of the Hello Nextflow training course, we ease into the topic with a very basic domain-agnostic Hello World example, which we'll progressively build up to demonstrate the usage of foundational Nextflow logic and components.
 
-<details class="info">
-<summary>What is a Hello World example?</summary>
+:::info[What is a Hello World example?]{collapsed}
 
 A "Hello World!" is a minimalist example that is meant to demonstrate the basic syntax and structure of a programming language or software framework.
 The example typically consists of printing the phrase "Hello, World!" to the output device, such as the console or terminal, or writing it to a file.
 
-</details>
+:::
 
 ---
 
@@ -64,14 +63,13 @@ This does not output anything to the terminal.
 The text 'Hello World' should now be in the output file we specified, named `output.txt`.
 You can open it in the file explorer or from the command line using the `cat` utility, for example.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 This is what we're going to try to replicate with our very first Nextflow workflow.
 
@@ -96,8 +94,7 @@ Then we'll run it and look for its outputs.
 
 You'll find the `hello-world.nf` script in your current directory, which should be `hello-nextflow`. Open it in the editor pane.
 
-<details class="full-code">
-<summary>Full code file</summary>
+:::full-code[Full code file]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
@@ -124,7 +121,7 @@ workflow {
 }
 ```
 
-</details>
+:::
 
 A Nextflow workflow script typically includes one or more [**process**](https://nextflow.io/docs/latest/process.html) definitions and the [**workflow**](https://nextflow.io/docs/latest/workflow.html) itself, plus a few optional blocks (not present here) which we'll introduce later on.
 
@@ -246,8 +243,7 @@ Looking at what we got for the run shown above, the console log line for the say
 
 Let's take a look at what's in there.
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 work
@@ -263,10 +259,9 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
-<details class="question">
-<summary>Don't see the same thing?</summary>
+:::question[Don't see the same thing?]{collapsed}
 
 The exact subdirectory names will be different on your system.
 
@@ -277,19 +272,18 @@ However, the log files are set to be invisible in the terminal, so if you want t
 tree -a work
 ```
 
-</details>
+:::
 
 The first thing you want to look at is the actual output of the workflow, i.e. the `output.txt` file produced by the the `sayHello` process.
 Open it and you will find the `Hello World!` greeting, which was the point of our minimalist workflow.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="output.txt"
 Hello World!
 ```
 
-</details>
+:::
 
 It worked!
 
@@ -307,15 +301,14 @@ That being said, let's also look at the other files in that directory. Those are
 
 The `.command.sh` file is especially useful because it tells you the main command Nextflow executed, not including all the bookkeeping and task/environment setup.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title=".command.sh"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
-</details>
+:::
 
 This matches what we ran earlier manually.
 
@@ -326,8 +319,7 @@ That makes it especially valuable to be able to see exactly how Nextflow interpr
 
 Try re-running the workflow a few times, then look at the task directories under `work/`.
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 work
@@ -382,7 +374,7 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
 You see that a new subdirectory with a complete set of output and log files has been created for each run.
 This shows you that running the same workflow several times will not overwrite the results of previous runs.
@@ -513,8 +505,7 @@ The terminal output now ends with an `Outputs:` summary listing the published ou
 
 Check your file explorer: this time, Nextflow has also created a new directory called `results/`.
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console {10-11,22}
 .
@@ -541,7 +532,7 @@ Check your file explorer: this time, Nextflow has also created a new directory c
     └── 9f
 ```
 
-</details>
+:::
 
 Inside the `results` directory, we find a symbolic link to the `output.txt` produced in the work directory by the command we just ran.
 
@@ -604,8 +595,7 @@ Outputs:
 
 This time the result gets written under the specified subdirectory.
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console {2-3}
 results/
@@ -614,7 +604,7 @@ results/
 └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
 ```
 
-</details>
+:::
 
 You see the result from the previous execution is still there.
 
@@ -686,8 +676,7 @@ Outputs:
 
 This time, if you look at the results, the file is a proper copy instead of just a symlink.
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console {3}
 results/
@@ -696,7 +685,7 @@ results/
 └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
 ```
 
-</details>
+:::
 
 Since this too is set at the level of the individual output, it allows you to set the publish mode in a granular way.
 This will come in especially handy later when we move on to multi-step pipelines, where you might want to only copy final outputs and leave intermediate outputs as symlinks, for example.
@@ -875,14 +864,13 @@ If you made all these edits correctly, you should get another successful executi
 
 Be sure to open up the output file to check that you now have the new version of the greeting.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Bonjour le monde!
 ```
 
-</details>
+:::
 
 Et voilà!
 
@@ -945,8 +933,7 @@ Outputs:
   first_output: hello_world/output.txt
 ```
 
-<details class="question">
-<summary>If it didn't work</summary>
+:::question[If it didn't work]{collapsed}
 
 If that failed with an error that looks like this:
 
@@ -975,18 +962,17 @@ On a version before 26.04 you need to enable the v2 language parser:
 export NXF_SYNTAX_PARSER=v2
 ```
 
-</details>
+:::
 
 The output will be in the same place as previously, but the contents should be updated with the new text.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Hola mundo!
 ```
 
-</details>
+:::
 
 Nextflow used the default value of the greeting parameter to create the output.
 
@@ -1015,14 +1001,13 @@ Outputs:
 
 Once again, you should find the corresponding updated output in your results directory.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Konnichiwa!
 ```
 
-</details>
+:::
 
 :::note
 In Nextflow, there are multiple places where you can specify values for parameters.
@@ -1096,8 +1081,7 @@ Here's how to do that.
 
 Whenever you launch a nextflow workflow, a line gets written to a log file called `history`, under a hidden directory called `.nextflow` in the current working directory.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```txt title=".nextflow/history" showLineNumbers
 2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'
@@ -1107,7 +1091,7 @@ Whenever you launch a nextflow workflow, a line gets written to a log file calle
 2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
 ```
 
-</details>
+:::
 
 This file gives you the timestamp, run name, status, revision ID, session ID and full command line for every Nextflow run that has been launched from within the current working directory.
 

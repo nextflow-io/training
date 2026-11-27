@@ -19,7 +19,7 @@ Use this checklist when reviewing a specific lesson file.
 - [ ] Command output sits in the `bash` block after `# [!output]`, with key lines marked `# [!code highlight]`
 - [ ] File paths use proper markdown formatting
 - [ ] Before/After comparisons use `<CodeWalkthrough>` with `step="Before"` and `step="After"`
-- [ ] Asides (`:::note`, `:::tip`, `:::caution`) and `<details>` collapsibles properly formatted, with blank lines around the body
+- [ ] Asides and collapsibles (`:::note`, `:::exercise[Title]{collapsed}`) properly formatted; outer blocks have more colons than inner ones
 - [ ] Each sentence on new line (for clean diffs)
 
 ## Content Accuracy

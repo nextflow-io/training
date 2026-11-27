@@ -63,8 +63,7 @@ Der Editor öffnet sich mit dem Projektverzeichnis im Fokus.
 
 Du findest eine einfache Workflow-Datei namens `main.nf`, ein `modules`-Verzeichnis mit zwei Moduldateien und ein `data`-Verzeichnis mit einigen Beispieldatendateien.
 
-<details class="abstract">
-<summary>Verzeichnisinhalt</summary>
+:::abstract[Verzeichnisinhalt]{collapsed}
 
 ```console
 .
@@ -91,7 +90,7 @@ Du findest eine einfache Workflow-Datei namens `main.nf`, ein `modules`-Verzeich
     └── count_lines.nf
 ```
 
-</details>
+:::
 
 Dieses Verzeichnis enthält Paired-End-Sequenzierungsdaten von drei Patient\*innen (A, B, C).
 
@@ -155,13 +154,12 @@ output {
 
 Dies ist ein Mini-Workflow (ohne Prozesse), der auf einen einzelnen Dateipfad verweist, ihn dann zusammen mit seiner Klasse auf der Konsole ausgibt.
 
-<details class="info">
-<summary>Was ist `.class`?</summary>
+:::info[Was ist `.class`?]{collapsed}
 
 In Nextflow sagt uns `.class`, mit welchem Objekttyp wir arbeiten. Es ist wie die Frage „Was für ein Ding ist das?" – um herauszufinden, ob es ein String, eine Zahl, eine Datei oder etwas anderes ist.
 Das hilft uns, den Unterschied zwischen einem einfachen String und einem Path-Objekt in den nächsten Abschnitten zu veranschaulichen.
 
-</details>
+:::
 
 Führen wir den Workflow aus:
 
@@ -352,15 +350,14 @@ process COUNT_LINES {
 
 Wie du siehst, ist es ein recht einfaches Skript, das die Datei entpackt und zählt, wie viele Zeilen sie enthält.
 
-<details class="info">
-<summary>Was macht `debug true`?</summary>
+:::info[Was macht `debug true`?]{collapsed}
 
 Die `debug true`-Direktive in der Prozessdefinition bewirkt, dass Nextflow die Ausgabe deines Skripts (wie die Zeilenanzahl „40") direkt im Ausführungsprotokoll ausgibt.
 Ohne diese Direktive würdest du nur den Prozessausführungsstatus sehen, aber nicht die tatsächliche Ausgabe deines Skripts.
 
 Weitere Informationen zum Debuggen von Nextflow-Prozessen findest du in der Side Quest [Debugging Nextflow Workflows](../debugging/index.mdx).
 
-</details>
+:::
 
 Nachdem das Modul importiert und sein Code untersucht wurde, können wir den Prozess aus dem Workflow aufrufen.
 
@@ -735,8 +732,7 @@ Diese gestagede Datei kann dann als lokale Datei behandelt und per Symlink in da
 
 Du kannst überprüfen, ob das passiert ist, indem du dir den Inhalt des work directory ansiehst, das sich am Hash-Wert des Prozesses befindet.
 
-<details class="abstract">
-<summary>Work-Verzeichnis Inhalt</summary>
+:::abstract[Work-Verzeichnis Inhalt]{collapsed}
 
 Wenn der Prozess-Hash `07/246c2a` war, könntest du das work directory erkunden:
 
@@ -752,7 +748,7 @@ lrwxr-xr-x  1 user  staff    89 Jan 28 10:00 patientA_rep1_normal_R1_001.fastq.g
 
 Der Symlink verweist auf eine gestagede Kopie der entfernten Datei, die Nextflow automatisch heruntergeladen hat.
 
-</details>
+:::
 
 Beachte, dass der Download-Schritt bei größeren Dateien im Vergleich zur Ausführung mit lokalen Dateien etwas mehr Zeit in Anspruch nimmt.
 Nextflow prüft jedoch, ob bereits eine gestagede Kopie vorhanden ist, um unnötige Downloads zu vermeiden.
@@ -1831,8 +1827,7 @@ Outputs:
 
 Die Ausgaben werden in ein `results`-Verzeichnis veröffentlicht, also schau dort nach.
 
-<details class="abstract">
-<summary>Verzeichnis- und Dateiinhalte</summary>
+:::abstract[Verzeichnis- und Dateiinhalte]{collapsed}
 
 ```console
 results
@@ -1850,7 +1845,7 @@ Read 1 size: 10 reads
 Read 2 size: 10 reads
 ```
 
-</details>
+:::
 
 Der Prozess hat unsere Eingaben entgegengenommen und eine neue Datei mit den Patientenmetadaten erstellt, wie vorgesehen.
 Ausgezeichnet!
@@ -1909,8 +1904,7 @@ Outputs:
 
 Das `results`-Verzeichnis sollte jetzt Ergebnisse für alle verfügbaren Daten enthalten.
 
-<details class="abstract">
-<summary>Verzeichnisinhalt</summary>
+:::abstract[Verzeichnisinhalt]{collapsed}
 
 ```console
 results
@@ -1922,7 +1916,7 @@ results
     └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 Erfolg! Wir haben alle Patient\*innen auf einmal analysiert! Oder?
 
@@ -1984,8 +1978,7 @@ Outputs:
 
 Überprüfe jetzt das `results`-Verzeichnis:
 
-<details class="abstract">
-<summary>Verzeichnisinhalt</summary>
+:::abstract[Verzeichnisinhalt]{collapsed}
 
 ```console
 results/
@@ -2015,7 +2008,7 @@ results/
             └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 Und da ist es – alle unsere Metadaten, ordentlich organisiert. Das ist Erfolg!
 

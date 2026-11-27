@@ -260,13 +260,12 @@ Pipeline complete! 👋
 L'observateur fonctionne.
 Chaque fois qu'une tâche se termine, Nextflow appelle `onProcessComplete`, et notre implémentation affiche un message.
 
-<details class="exercise">
-<summary>Personnaliser le message</summary>
+:::exercise[Personnaliser le message]{collapsed}
 
 Essayez de modifier le message dans `onProcessComplete` avec quelque chose de votre choix, recompilez et relancez.
 Cela confirme que le cycle complet modification-compilation-exécution fonctionne pour les observateurs.
 
-</details>
+:::
 
 ### 2.4. Ajouter la logique de comptage
 
@@ -324,8 +323,7 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-<details class="example">
-<summary>Sortie</summary>
+:::example[Sortie]{collapsed}
 
 ```console
 N E X T F L O W  ~  version 26.04.4
@@ -357,7 +355,7 @@ Pipeline complete! 👋
 
 Les messages du compteur sont entremêlés avec les soumissions de tâches car les observateurs s'exécutent au fur et à mesure que les tâches se terminent.
 
-</details>
+:::
 
 ---
 

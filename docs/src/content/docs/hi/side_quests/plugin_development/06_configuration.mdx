@@ -299,14 +299,12 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-<details class="exercise">
-<summary>Plugin को पूरी तरह disable करो</summary>
+::::exercise[Plugin को पूरी तरह disable करो]{collapsed}
 
 `nextflow.config` में `greeting.enabled = false` set करने की कोशिश करो और pipeline फिर से चलाओ।
 आउटपुट में क्या बदलता है?
 
-<details class="solution">
-<summary>समाधान</summary>
+:::solution[समाधान]{collapsed}
 
 ```nextflow {8} title="nextflow.config"
 // Plugin development exercises के लिए कॉन्फ़िगरेशन
@@ -325,9 +323,9 @@ Pipeline खुद अभी भी चलती है, लेकिन को�
 
 जारी रखने से पहले `enabled` को `true` पर वापस set करना याद रखो (या line हटा दो)।
 
-</details>
+:::
 
-</details>
+::::
 
 ---
 

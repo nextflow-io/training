@@ -57,8 +57,7 @@ code .
 
 Du findest eine Reihe von Beispiel-Workflows mit verschiedenen Arten von Bugs, die wir zum Üben verwenden:
 
-<details class="abstract">
-<summary>Verzeichnisinhalt</summary>
+:::abstract[Verzeichnisinhalt]{collapsed}
 
 ```console
 .
@@ -87,7 +86,7 @@ Du findest eine Reihe von Beispiel-Workflows mit verschiedenen Arten von Bugs, d
 └── no_such_var.nf
 ```
 
-</details>
+:::
 
 Diese Dateien repräsentieren häufige Debugging-Szenarien, denen du in der realen Entwicklung begegnen wirst.
 
@@ -2287,8 +2286,7 @@ nextflow run buggy_workflow.nf -stub-run
 nextflow run buggy_workflow.nf -resume
 ```
 
-<details class="solution">
-<summary>Lösung</summary>
+:::solution[Lösung]{collapsed}
 
 Der `buggy_workflow.nf` enthält 10 verschiedene Fehler, die alle wichtigen Debugging-Kategorien abdecken. Hier ist eine systematische Aufschlüsselung jedes Fehlers und wie man ihn behebt – in der Reihenfolge, in der sie unter Nextflow 26.04 auftreten. Der Compiler verarbeitet den Workflow in zwei Durchläufen: Zuerst parst er die Syntax, dann prüft er statisch, ob alle Variablen definiert sind. Du behebst also zuerst die Syntaxfehler, dann eine Reihe von Fehlern wegen undefinierter Variablen, bevor der Workflow überhaupt ausgeführt wird und die Laufzeitfehler beginnen.
 
@@ -2533,7 +2531,7 @@ output {
 }
 ```
 
-</details>
+:::
 :::
 
 **Abgedeckte Fehlerkategorien:**

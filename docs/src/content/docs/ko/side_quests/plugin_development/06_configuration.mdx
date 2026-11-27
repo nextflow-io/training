@@ -299,14 +299,12 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-<details class="exercise">
-<summary>플러그인 전체 비활성화</summary>
+::::exercise[플러그인 전체 비활성화]{collapsed}
 
 `nextflow.config`에서 `greeting.enabled = false`를 설정하고 파이프라인을 다시 실행해 보세요.
 출력에서 무엇이 달라지나요?
 
-<details class="solution">
-<summary>해결책</summary>
+:::solution[해결책]{collapsed}
 
 ```nextflow {8} title="nextflow.config"
 // 플러그인 개발 실습을 위한 설정
@@ -325,9 +323,9 @@ greeting {
 
 계속하기 전에 `enabled`를 `true`로 다시 설정하거나 해당 줄을 제거하는 것을 잊지 마세요.
 
-</details>
+:::
 
-</details>
+::::
 
 ---
 

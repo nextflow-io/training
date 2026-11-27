@@ -12,8 +12,7 @@ nf-core के साथ काम करने के महान लाभो
 
 यह कैसे काम करता है यह दिखाने के लिए, हम `core-hello` pipeline में nf-core/modules से `find/concatenate` मॉड्यूल के साथ कस्टम `collectGreetings` मॉड्यूल को बदलेंगे।
 
-<details class="info">
-<summary>इस खंड से कैसे शुरू करें</summary>
+:::info[इस खंड से कैसे शुरू करें]{collapsed}
 
 पाठ्यक्रम का यह सेक्शन मानता है कि आपने [भाग 1: nf-core के लिए Hello को फिर से लिखें](./01_rewrite_hello.mdx) पूरा कर लिया है और आपके पास एक कार्यशील `core-hello` pipeline है।
 
@@ -32,7 +31,7 @@ cd core-hello
 nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
-</details>
+:::
 
 ---
 
@@ -108,8 +107,7 @@ nf-core modules info find/concatenate
 
 यह मॉड्यूल के बारे में दस्तावेज़ प्रदर्शित करता है, जिसमें इसके inputs, outputs, और बुनियादी उपयोग जानकारी शामिल है।
 
-<details class="success">
-<summary>कमांड आउटपुट</summary>
+:::success[कमांड आउटपुट]{collapsed}
 
 ```console
 
@@ -185,7 +183,7 @@ INFO     Reinstalling modules found in 'modules.json' but missing from
 
 ```
 
-</details>
+:::
 
 यह वही जानकारी है जो आप वेबसाइट पर पा सकते हैं।
 
@@ -228,8 +226,7 @@ INFO     Use the following statement to include this module:
 tree -L 4 modules
 ```
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 modules
@@ -249,12 +246,11 @@ modules
 5 directories, 7 files
 ```
 
-</details>
+:::
 
 आप `modules.json` की जांच करके भी इंस्टॉलेशन की पुष्टि कर सकते हैं, जो अब nf-core/modules रिपॉजिटरी के अंतर्गत `find/concatenate` को सूचीबद्ध करता है।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```json title="modules.json"
 {
@@ -303,7 +299,7 @@ modules
 }
 ```
 
-</details>
+:::
 
 यह पुष्टि करता है कि `find/concatenate` मॉड्यूल अब आपके प्रोजेक्ट के source code का हिस्सा है।
 हालाँकि, वास्तव में नए मॉड्यूल का उपयोग करने के लिए, हमें इसे अपनी pipeline में import करना होगा।
@@ -814,8 +810,7 @@ nextflow run . --outdir core-hello-results -profile test,docker
 
 यह यथोचित रूप से जल्दी चलना चाहिए।
 
-<details class="success">
-<summary>कमांड आउटपुट</summary>
+:::success[कमांड आउटपुट]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -854,7 +849,7 @@ executor >  local (8)
 -[core/hello] Pipeline completed successfully-
 ```
 
-</details>
+:::
 
 ध्यान दें कि `collectGreetings` के बजाय अब process execution list में `FIND_CONCATENATE` दिखाई देता है।
 

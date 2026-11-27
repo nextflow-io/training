@@ -82,8 +82,7 @@ Die Datei `.command.sh` ist beim Debuggen besonders nützlich — sie zeigt gena
 
 Das Verstehen des Codes ist nicht unbedingt notwendig, wenn du nur Pipelines ausführen möchtest. Wenn du neugierig bist, lohnt sich aber ein Blick.
 
-<details class="optional">
-<summary>Klicke hier, um den Code zu dieser Übung zu erkunden</summary>
+::::optional[Klicke hier, um den Code zu dieser Übung zu erkunden]{collapsed}
 
 Öffnen wir `1-hello.nf` und schauen uns die wichtigsten Bestandteile an.
 
@@ -212,7 +211,7 @@ output {
 
 Jeder benannte Eintrag entspricht einem `publish:`-Label im Workflow und ordnet ihn einem Unterverzeichnis unter `results/` zu.
 
-</details>
+::::
 
 ### Fazit
 
@@ -361,8 +360,7 @@ Die `-resume`-Funktion ist besonders wertvoll bei langen Pipelines, wo die Wiede
 
 Das Verstehen des Codes ist nicht unbedingt notwendig, wenn du nur Pipelines ausführen möchtest. Wenn du neugierig bist, lohnt sich aber ein Blick.
 
-<details class="optional">
-<summary>Klicke hier, um den Code zu dieser Übung zu erkunden</summary>
+:::optional[Klicke hier, um den Code zu dieser Übung zu erkunden]{collapsed}
 
 Die wichtigste Änderung in `2-inputs.nf` befindet sich im `main:`-Abschnitt des Workflows:
 
@@ -385,7 +383,7 @@ Was du hier siehst, nennt sich **channel**: ein Warteschlangen-Konstrukt, das Ei
 Das Ergebnis ist ein Kanal, der `Hello`, `Bonjour` und `Hola` enthält.
 Wenn er an `sayHello(greeting_ch)` übergeben wird, ruft Nextflow den Prozess automatisch einmal pro Element auf und führt sie parallel aus, wenn Ressourcen verfügbar sind.
 
-</details>
+:::
 
 ### Fazit
 
@@ -421,8 +419,7 @@ nextflow run main.nf --input data/greetings.csv
 
 Der `character`-Parameter ist in `nextflow.config` standardmäßig auf `turkey` gesetzt, sodass die ASCII-Art einen Truthahn verwendet, sofern du ihn nicht überschreibst (versuche `--character tux` hinzuzufügen).
 
-<details class="success">
-<summary>Befehlsausgabe</summary>
+:::success[Befehlsausgabe]{collapsed}
 
 ```console {6,7,8,9}
 N E X T F L O W   ~  version 26.04.4
@@ -456,7 +453,7 @@ Outputs:
   cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
 ```
 
-</details>
+:::
 
 Vier Prozesse wurden ausgeführt, aber nicht gleich oft.
 `sayHello` und `convertToUpper` liefen jeweils einmal pro Eingabe (3 of 3): Jede Begrüßung muss einzeln geschrieben und in Großbuchstaben umgewandelt werden.
@@ -488,8 +485,7 @@ Das oberste Verzeichnis ist nach dem `batch`-Parameter benannt, der standardmä�
 
 Schau dir `cowpy-COLLECTED-batch-output.txt` für die ASCII-Art-Datei an.
 
-<details class="abstract">
-<summary>Dateiinhalt</summary>
+:::abstract[Dateiinhalt]{collapsed}
 
 ```console title="results/batch/cowpy-COLLECTED-batch-output.txt"
  _________
@@ -520,7 +516,7 @@ Schau dir `cowpy-COLLECTED-batch-output.txt` für die ASCII-Art-Datei an.
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 Genau wie in [2.1](#21-den-workflow-ausführen) bekommt jede dieser 8 Aufgabenausführungen über alle vier Prozesse hinweg ihr eigenes Verzeichnis unter `work/`, vollständig von den anderen isoliert.
 `collectGreetings` veranschaulicht gut, warum das wichtig ist: Es hängt von den Ausgaben aller drei `convertToUpper`-Aufgaben ab, die in drei verschiedenen Aufgabenverzeichnissen liegen. Daher legt Nextflow Symlinks zu diesen Dateien im eigenen Verzeichnis von `collectGreetings` an, anstatt direkt aus den Verzeichnissen der vorgelagerten Aufgaben zu lesen:
@@ -547,8 +543,7 @@ Nextflow unterstützt auch Conda als Alternative zu Containern. Wie du zwischen 
 
 Das Verstehen des Codes ist nicht unbedingt notwendig, wenn du nur Pipelines ausführen möchtest. Wenn du neugierig bist, lohnt sich aber ein Blick.
 
-<details class="optional">
-<summary>Klicke hier, um den Code zu dieser Übung zu erkunden</summary>
+:::optional[Klicke hier, um den Code zu dieser Übung zu erkunden]{collapsed}
 
 ### Wie Daten von einem Schritt zum nächsten fließen
 
@@ -619,7 +614,7 @@ docker.enabled = true
 
 Diese einzelne Zeile aktiviert Docker für jeden Prozess in der Pipeline, der einen Container angegeben hat.
 
-</details>
+:::
 
 ### Fazit
 

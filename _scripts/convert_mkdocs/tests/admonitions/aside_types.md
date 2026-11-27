@@ -8,11 +8,11 @@
 
 !!! warning "Machine size"
 
-    Warning becomes caution.
+    Warning keeps its type.
 
 !!! info
 
-    Info becomes note.
+    Info keeps its type.
 
 !!!note "Important notes"
 
@@ -20,11 +20,11 @@
 
 !!! example "Scenario"
 
-    Example becomes note.
+    Example keeps its type.
 
 !!! exercise
 
-    An untitled custom type keeps its MkDocs title.
+    An untitled custom type takes its default title from the site.
 
 !!! danger
 

@@ -122,13 +122,12 @@ Wechsle jetzt für den Rest dieses Kurses zurück zu Docker.
 docker.enabled = true
 ```
 
-<details class="tip">
-<summary>Docker und Conda kombinieren</summary>
+:::tip[Docker und Conda kombinieren]{collapsed}
 
 Da diese Einstellungen pro Prozess gelten, kannst du sie kombinieren: Manche Prozesse verwenden Docker, andere Conda, je nachdem, was für das jeweilige Tool verfügbar ist.
 Wenn sowohl eine `container`-Direktive (im Pipeline-Code) als auch eine `conda`-Direktive (hier, aus der Konfiguration) für denselben Prozess gesetzt sind und beide Paketierungssysteme aktiviert sind, priorisiert Nextflow Container.
 
-</details>
+:::
 
 ### Fazit
 
@@ -176,8 +175,7 @@ Die Trainingsumgebung ist nicht mit einem HPC-Cluster verbunden, daher kannst du
 Die meisten HPC-Plattformen erfordern, dass Job-Einreichungen Ressourcenanforderungen angeben – wie CPUs, Arbeitsspeicher und einen Queue-Namen – in ihrer eigenen Syntax.
 Dieselbe Anforderung für 8 CPUs und 4 GB RAM auf einer Queue namens `my-science-work` sieht je nach Scheduler völlig unterschiedlich aus.
 
-<details class="abstract">
-<summary>Beispiele</summary>
+:::abstract[Beispiele]{collapsed}
 
 ```bash title="Config for SLURM / submit using sbatch"
 #SBATCH -o /path/to/my/task/directory/my-task-1.log
@@ -205,7 +203,7 @@ Dieselbe Anforderung für 8 CPUs und 4 GB RAM auf einer Queue namens `my-science
 #$ -l h_rss=4096M,mem_free=4096M
 ```
 
-</details>
+:::
 
 Nextflow abstrahiert das alles: Du gibst standardisierte Eigenschaften wie `cpus`, `memory` und `queue` einmal an (siehe [Prozess-Direktiven](https://nextflow.io/docs/latest/reference/process.html#process-directives) für die vollständige Liste), und Nextflow übersetzt sie zur Laufzeit in die passenden Backend-spezifischen Skripte.
 

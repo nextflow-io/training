@@ -113,8 +113,7 @@ El millor enfocament és sobreescriure els valors de recursos per defecte en un 
 
 Us proporcionem un fitxer de configuració personalitzat que sobreescriu els valors de recursos per defecte basats en etiquetes.
 
-<details class="full-code">
-<summary>laptop.config</summary>
+:::full-code[laptop.config]{collapsed}
 
 ```nextflow title="laptop.config"
 process {
@@ -136,7 +135,7 @@ process {
 }
 ```
 
-</details>
+:::
 
 La [Part 2](./02_configure_execution.mdx) va introduir `withName:` per apuntar a un únic procés pel seu nom.
 Aquí utilitzem `withLabel:` per apuntar a tots els processos que comparteixen una etiqueta alhora.

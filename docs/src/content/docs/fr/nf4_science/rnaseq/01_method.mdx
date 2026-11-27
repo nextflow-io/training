@@ -110,8 +110,7 @@ Vérifiez que vous pouvez voir les fichiers de données de séquençage sous `/d
 ls /data/reads
 ```
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 ENCSR000COQ1_1.fastq.gz  ENCSR000COQ2_2.fastq.gz  ENCSR000COR2_1.fastq.gz  ENCSR000CPO1_2.fastq.gz
@@ -119,7 +118,7 @@ ENCSR000COQ1_2.fastq.gz  ENCSR000COR1_1.fastq.gz  ENCSR000COR2_2.fastq.gz  ENCSR
 ENCSR000COQ2_1.fastq.gz  ENCSR000COR1_2.fastq.gz  ENCSR000CPO1_1.fastq.gz  ENCSR000CPO2_2.fastq.gz
 ```
 
-</details>
+:::
 
 Avec cela, vous êtes prêt·e à essayer votre première commande.
 
@@ -164,14 +163,13 @@ Vous pouvez trouver les fichiers de sortie dans le même répertoire que les don
 ls /data/reads/ENCSR000COQ1_1_fastqc*
 ```
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 /data/reads/ENCSR000COQ1_1_fastqc.html  /data/reads/ENCSR000COQ1_1_fastqc.zip
 ```
 
-</details>
+:::
 
 Vous devriez voir un rapport HTML et une archive ZIP contenant les métriques QC.
 Cela complète le test de la première étape.
@@ -320,15 +318,14 @@ Vous pouvez trouver les fichiers de sortie dans le répertoire de travail :
 ls ENCSR000COQ1_1*
 ```
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.html
 ENCSR000COQ1_1_trimmed.fq.gz                 ENCSR000COQ1_1_trimmed_fastqc.zip
 ```
 
-</details>
+:::
 
 Cela inclut les lectures coupées, le rapport de coupe et les fichiers QC après coupe.
 
@@ -341,8 +338,7 @@ mkdir /data/trimmed
 mv ENCSR000COQ1_1* /data/trimmed
 ```
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 /data/trimmed
@@ -352,7 +348,7 @@ mv ENCSR000COQ1_1* /data/trimmed
 └── ENCSR000COQ1_1_trimmed_fastqc.zip
 ```
 
-</details>
+:::
 
 Les fichiers sont maintenant accessibles dans votre système de fichiers normal.
 
@@ -656,15 +652,14 @@ Cela crée plusieurs fichiers d'index du génome, que vous pouvez trouver dans l
 ls genome_index.*
 ```
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 genome_index.1.ht2  genome_index.3.ht2  genome_index.5.ht2  genome_index.7.ht2
 genome_index.2.ht2  genome_index.4.ht2  genome_index.6.ht2  genome_index.8.ht2
 ```
 
-</details>
+:::
 
 Nous aurons besoin de ces fichiers plus tard, et générer ces fichiers n'est généralement pas quelque chose que nous voulons faire dans le cadre d'un workflow, nous allons donc générer une archive tar compressée contenant les fichiers d'index du génome que nous pouvons facilement transmettre selon les besoins.
 
@@ -712,14 +707,13 @@ Une fois de plus, vous pouvez trouver les fichiers de sortie dans le répertoire
 ls ENCSR000COQ1_1*
 ```
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console title="Output"
 ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
 ```
 
-</details>
+:::
 
 L'alignement a produit un fichier BAM et un fichier journal avec les statistiques d'alignement.
 
@@ -808,8 +802,7 @@ Déplacez les fichiers de sortie de Trim Galore vers le même répertoire que no
 mv ENCSR000COQ2_1* ENCSR000COR1_1* /data/trimmed
 ```
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 /data/trimmed
@@ -827,7 +820,7 @@ mv ENCSR000COQ2_1* ENCSR000COR1_1* /data/trimmed
 └── ENCSR000COR1_1_trimmed_fastqc.zip
 ```
 
-</details>
+:::
 
 Les fichiers sont maintenant accessibles dans votre système de fichiers normal.
 
@@ -906,8 +899,7 @@ Déplacez les fichiers de sortie d'alignement vers le même répertoire que nous
 mv ENCSR000COQ2_1* ENCSR000COR1_1* /data/aligned
 ```
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 /data/aligned
@@ -919,7 +911,7 @@ mv ENCSR000COQ2_1* ENCSR000COR1_1* /data/aligned
 └── ENCSR000COR1_1_trimmed.hisat2.log
 ```
 
-</details>
+:::
 
 Les fichiers sont maintenant accessibles dans votre système de fichiers normal.
 
@@ -1007,8 +999,7 @@ Les fichiers de sortie sont dans le répertoire de travail :
 ls all_samples_QC*
 ```
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 all_samples_QC.html
@@ -1032,7 +1023,7 @@ hisat2_se_plot.txt
 llms-full.txt
 ```
 
-</details>
+:::
 
 La sortie principale est le rapport `all_samples_QC.html`, accompagné d'un répertoire de données contenant les métriques sous-jacentes.
 

@@ -122,13 +122,12 @@ Ara torneu a Docker per a la resta d'aquest curs.
 docker.enabled = true
 ```
 
-<details class="tip">
-<summary>Combinar Docker i Conda</summary>
+:::tip[Combinar Docker i Conda]{collapsed}
 
 Com que aquests paràmetres estan delimitats per procés, podeu combinar-los: alguns processos utilitzen Docker, d'altres utilitzen Conda, depenent del que estigui disponible per a cada eina.
 Si tant una directiva `container` (al codi del pipeline) com una directiva `conda` (aquí, des de la configuració) estan definides per al mateix procés i tots dos sistemes d'empaquetament estan activats, Nextflow prioritza els contenidors.
 
-</details>
+:::
 
 ### Conclusió
 
@@ -176,8 +175,7 @@ L'entorn de formació no està connectat a un clúster HPC, de manera que això 
 La majoria de plataformes HPC requereixen que les trameses de tasques especifiquin sol·licituds de recursos, com ara CPU, memòria i un nom de cua, utilitzant la seva pròpia sintaxi.
 La mateixa sol·licitud de 8 CPU i 4 GB de RAM en una cua anomenada `my-science-work` té un aspecte completament diferent depenent del planificador.
 
-<details class="abstract">
-<summary>Exemples</summary>
+:::abstract[Exemples]{collapsed}
 
 ```bash title="Config for SLURM / submit using sbatch"
 #SBATCH -o /path/to/my/task/directory/my-task-1.log
@@ -205,7 +203,7 @@ La mateixa sol·licitud de 8 CPU i 4 GB de RAM en una cua anomenada `my-science-
 #$ -l h_rss=4096M,mem_free=4096M
 ```
 
-</details>
+:::
 
 Nextflow abstreu tot això: especifiqueu propietats estandarditzades com ara `cpus`, `memory` i `queue` una sola vegada (vegeu les [directives de procés](https://nextflow.io/docs/latest/reference/process.html#process-directives) per a la llista completa), i Nextflow les tradueix als scripts específics del backend corresponent en temps d'execució.
 

@@ -8,8 +8,7 @@ description: Zuvor hast du eine Pipeline für die Variantenanalyse pro Probe ers
 Zuvor hast du eine Pipeline für die Variantenanalyse pro Probe erstellt, die die Daten jeder Probe unabhängig verarbeitet hat.
 Jetzt erweitern wir sie, um Joint Variant Calling zu implementieren, wie in [Teil 1](01_method.mdx) beschrieben (Multi-Sample-Anwendungsfall).
 
-<details class="info">
-<summary>Wie du von diesem Abschnitt aus beginnst</summary>
+:::info[Wie du von diesem Abschnitt aus beginnst]{collapsed}
 
 Dieser Abschnitt des Kurses setzt voraus, dass du [Teil 1: Methodenübersicht](./01_method.mdx), [Teil 2: Variantenanalyse pro Probe](./02_per_sample_variant_calling.mdx) abgeschlossen hast und eine funktionierende `genomics.nf`-Pipeline besitzt.
 
@@ -29,7 +28,7 @@ Du kannst testen, ob er erfolgreich läuft, indem du folgenden Befehl ausführst
 nextflow run genomics.nf -profile test
 ```
 
-</details>
+:::
 
 ## Aufgabe
 
@@ -237,8 +236,7 @@ Outputs:
 
 Die Nextflow-Ausgabe sieht genauso aus wie zuvor, aber die `.g.vcf`-Dateien und ihre Indexdateien sind jetzt in Unterverzeichnissen organisiert.
 
-<details class="abstract">
-<summary>Verzeichnisinhalt (Symlinks gekürzt)</summary>
+:::abstract[Verzeichnisinhalt (Symlinks gekürzt)]{collapsed}
 
 ```console
 results/
@@ -258,7 +256,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Wenn du eine der GVCF-Dateien öffnest und durchscrollst, kannst du überprüfen, dass GATK HaplotypeCaller wie gewünscht GVCF-Dateien erzeugt hat.
 
@@ -703,8 +701,7 @@ Outputs:
 Die ersten beiden Schritte sind aus dem vorherigen Lauf gecacht, und der neue `GATK_JOINTGENOTYPING`-Schritt läuft einmal auf den gesammelten Eingaben aller drei Proben.
 Die finale Ausgabedatei, `family_trio.joint.vcf` (und ihr Index), befinden sich im Ergebnisverzeichnis.
 
-<details class="abstract">
-<summary>Verzeichnisinhalt (Symlinks gekürzt)</summary>
+:::abstract[Verzeichnisinhalt (Symlinks gekürzt)]{collapsed}
 
 ```console
 results/
@@ -726,7 +723,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Wenn du die Joint-VCF-Datei öffnest, kannst du überprüfen, dass der Workflow die erwarteten Variantenaufrufe erzeugt hat.
 

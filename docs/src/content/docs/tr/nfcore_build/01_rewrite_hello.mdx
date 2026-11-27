@@ -36,8 +36,7 @@ Hatırlatma olarak, `pipelines/nf-core/demo` dizinini bulmak ve açmak için `tr
 tree -L 1 pipelines/nf-core/demo
 ```
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 pipelines/nf-core/demo
@@ -62,7 +61,7 @@ pipelines/nf-core/demo
 └── workflows
 ```
 
-</details>
+:::
 
 Şimdilik özellikle pipeline kod bileşenlerine (`main.nf`, `workflows`, `subworkflows`, `modules`) ve bunların birbirleriyle nasıl ilişkili olduğuna odaklanacağız.
 
@@ -129,8 +128,7 @@ Bunu `nf-core/demo` pipeline modüllerine uygulanmış halde görebilirsiniz:
 tree -L 3 pipelines/nf-core/demo/modules
 ```
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 pipelines/nf-core/demo/modules
@@ -156,7 +154,7 @@ pipelines/nf-core/demo/modules
 9 directories, 9 files
 ```
 
-</details>
+:::
 
 Burada `fastqc` ve `multiqc` modüllerinin `nf-core` modülleri içinde en üst düzeyde yer aldığını, `trim` modülünün ise ait olduğu araç takımı olan `seqtk` altında bulunduğunu görüyorsunuz.
 `local` altındaki `cowpy` modülü, nf-core modülleri repository'sinden yüklenmek yerine bu pipeline için özel olarak yazılmış yerel bir modüldür.
@@ -174,8 +172,7 @@ Modüller gibi, subworkflow'lar da `local` ve `nf-core` dizinlerine ayrılır ve
 tree -L 3 pipelines/nf-core/demo/subworkflows
 ```
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 pipelines/nf-core/demo/subworkflows
@@ -199,7 +196,7 @@ pipelines/nf-core/demo/subworkflows
 9 directories, 7 files
 ```
 
-</details>
+:::
 
 Yukarıda belirtildiği gibi, `nf-core/demo` pipeline'ı analize özgü herhangi bir subworkflow içermez; bu nedenle burada gördüğümüz tüm subworkflow'lar, adlarındaki `utils_` önekiyle belirtilen 'yardımcı' veya 'araç' iş akışlarıdır.
 Bu subworkflow'lar, diğer yardımcı işlevlerin yanı sıra konsol çıktısındaki şık nf-core başlığını üreten yapılardır.
@@ -268,8 +265,7 @@ Bu TUI, pipeline'ınız hakkında temel bilgiler sağlamanızı isteyecek ve pip
 
 TUI kapandığında, aşağıdaki konsol çıktısını görmelisiniz.
 
-<details class="success">
-<summary>Komut çıktısı</summary>
+:::success[Komut çıktısı]{collapsed}
 
 ```console
                                           ,--./,-.
@@ -284,7 +280,7 @@ TUI kapandığında, aşağıdaki konsol çıktısını görmelisiniz.
 INFO     Launching interactive nf-core pipeline creation tool.
 ```
 
-</details>
+:::
 
 TUI tamamlandığında, araç pipeline'ın oluşturulduğunu ve yeni pipeline için yerel bir git repository'sinin başlatıldığını bildirir:
 
@@ -302,8 +298,7 @@ Artık `core-hello` adında yeni bir dizin görmelisiniz.
 tree core-hello
 ```
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 core-hello
@@ -362,7 +357,7 @@ core-hello
 14 directories, 37 files
 ```
 
-</details>
+:::
 
 Bu çok fazla dosya!
 Biraz kaybolmuş hissediyorsanız endişelenmeyin; önemli kısımları kısa süre içinde ve ardından kursun geri kalanında adım adım birlikte inceleyeceğiz.
@@ -441,8 +436,7 @@ Aslında, standart yürütme raporlarını içeren `core-hello-results` adında 
 tree core-hello-results
 ```
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 core-hello-results
@@ -457,7 +451,7 @@ core-hello-results
 1 directory, 6 files
 ```
 
-</details>
+:::
 
 Ne çalıştırıldığını görmek için raporlara bir göz atabilirsiniz; cevap şu: hiçbir şey!
 
@@ -557,15 +551,14 @@ workflow HELLO {
 
 Bunlar, iş akışını **birleştirilebilir** yapan Nextflow'un isteğe bağlı özellikleridir; yani başka bir iş akışı içinden çağrılabilir.
 
-<details class="note">
-<summary>`channel.topic` bloğu</summary>
+:::note[`channel.topic` bloğu]{collapsed}
 
 28. satırdan başlayan `def topic_versions = channel.topic("versions")` bloğunu fark etmiş olabilirsiniz.
 Bu, tüm modüllerden yazılım sürümü bilgilerini otomatik olarak toplayan standart bir temizlik kodudur.
 nf-core bu mekanizmayı 2026 yılında tüm pipeline'lara yaygınlaştırmaktadır; dolayısıyla ilerleyen süreçte tüm yeni pipeline'larda bunu göreceksiniz.
 Bu kursun 3. Bölümü nasıl çalıştığını ayrıntılı olarak açıklamaktadır.
 
-</details>
+:::
 
 İlgilendiğimiz iş akışından ilgili mantığı bu yapıya eklememiz gerekecek.
 
@@ -600,8 +593,7 @@ Size, tamamlanmış Hello Nextflow iş akışının temiz, tamamen işlevsel bir
 tree original-hello/
 ```
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 original-hello/
@@ -616,7 +608,7 @@ original-hello/
 1 directory, 6 files
 ```
 
-</details>
+:::
 
 Çalıştığından emin olmak için çekinmeden çalıştırın:
 
@@ -923,8 +915,7 @@ Giriş noktası iş akışını `something_else.nf` olarak adlandırsaydık, `ne
 
 Tüm değişiklikleri doğru yaptıysanız, bu tamamlanana kadar çalışmalıdır.
 
-<details class="success">
-<summary>Komut çıktısı</summary>
+:::success[Komut çıktısı]{collapsed}
 
 ```console
 N E X T F L O W   ~  version 26.04.4
@@ -939,7 +930,7 @@ executor >  local (8)
 Output: /workspaces/training/nfcore-build/work/07/bfc7061fa521e86f4e1954191ab4c4/cowpy-COLLECTED-test-batch-output.txt
 ```
 
-</details>
+:::
 
 Bu, `HELLO` iş akışımızı başarıyla birleştirilebilir hale getirdiğimiz anlamına gelir.
 
@@ -1062,8 +1053,7 @@ cp original-hello/modules/* core-hello/modules/local/.
 tree core-hello/modules
 ```
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 core-hello/modules
@@ -1076,7 +1066,7 @@ core-hello/modules
 1 directory, 4 files
 ```
 
-</details>
+:::
 
 Şimdi modül import ifadelerini kuralım.
 
@@ -1691,8 +1681,7 @@ nextflow run core-hello --outdir core-hello-results -profile test,docker
 
 Tüm değişiklikleri doğru yaptıysanız, tamamlanana kadar çalışmalıdır.
 
-<details class="success">
-<summary>Komut çıktısı</summary>
+:::success[Komut çıktısı]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -1732,7 +1721,7 @@ executor >  local (8)
 -[core/hello] Pipeline completed successfully-
 ```
 
-</details>
+:::
 
 Gördüğünüz gibi, başlatma alt iş akışı sayesinde başlangıçta tipik nf-core özeti üretildi ve her modül için satırlar artık tam `PIPELINE:WORKFLOW:modül` adlarını gösteriyor.
 
@@ -1747,8 +1736,7 @@ Daha önce hatırlayabileceğiniz gibi, yeni oluşturulan iş akışının ilk �
 tree core-hello-results
 ```
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 core-hello-results
@@ -1768,7 +1756,7 @@ core-hello-results
 1 directory, 11 files
 ```
 
-</details>
+:::
 
 İş akışı henüz yalnızca bir yer tutucu iken ilk çalıştırmada elde ettiklerimize ek olarak başka bir yürütme raporu seti aldığımızı görebilirsiniz.
 Bu sefer beklendiği gibi çalıştırılan tüm görevleri görüyorsunuz.
@@ -1788,8 +1776,7 @@ Bu harika, ama gerçek pipeline sonuçlarımız orada değil!
 tree results
 ```
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 results
@@ -1807,7 +1794,7 @@ results
 0 directories, 10 files
 ```
 
-</details>
+:::
 
 Ah, işte buradalar; orijinal Hello pipeline'ının önceki çalıştırmalarının çıktılarıyla karışmış halde.
 

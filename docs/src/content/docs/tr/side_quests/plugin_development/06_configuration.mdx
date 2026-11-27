@@ -299,14 +299,12 @@ Her şeyin hâlâ çalıştığını doğrulamak için pipeline'ı çalıştır�
 nextflow run greet.nf -ansi-log false
 ```
 
-<details class="exercise">
-<summary>Eklentiyi tamamen devre dışı bırakma</summary>
+::::exercise[Eklentiyi tamamen devre dışı bırakma]{collapsed}
 
 `nextflow.config` dosyasında `greeting.enabled = false` ayarını yapıp pipeline'ı tekrar çalıştırmayı deneyin.
 Çıktıda ne değişiyor?
 
-<details class="solution">
-<summary>Çözüm</summary>
+:::solution[Çözüm]{collapsed}
 
 ```nextflow {8} title="nextflow.config"
 // Eklenti geliştirme alıştırmaları için yapılandırma
@@ -325,9 +323,9 @@ Pipeline'ın kendisi çalışmaya devam eder, ancak hiçbir gözlemci etkin değ
 
 Devam etmeden önce `enabled` değerini `true` olarak ayarlamayı (veya satırı kaldırmayı) unutmayın.
 
-</details>
+:::
 
-</details>
+::::
 
 ---
 

@@ -113,8 +113,7 @@ Lepszym podejściem jest nadpisanie domyślnych zasobów w niestandardowym pliku
 
 Udostępniamy Ci niestandardowy plik konfiguracyjny, który nadpisuje domyślne zasoby przypisane do etykiet.
 
-<details class="full-code">
-<summary>laptop.config</summary>
+:::full-code[laptop.config]{collapsed}
 
 ```nextflow title="laptop.config"
 process {
@@ -136,7 +135,7 @@ process {
 }
 ```
 
-</details>
+:::
 
 W [Części 2](./02_configure_execution.mdx) poznałeś `withName:`, które pozwala wskazać pojedynczy proces po nazwie.
 Tutaj używamy `withLabel:`, aby jednocześnie objąć wszystkie procesy współdzielące daną etykietę.

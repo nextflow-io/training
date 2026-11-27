@@ -404,8 +404,7 @@ Outputs:
     - greetings/Alice-output.txt
 ```
 
-<details class="abstract">
-<summary>Nou contingut afegit a `results/`</summary>
+:::abstract[Nou contingut afegit a `results/`]{collapsed}
 
 ```console
 results/
@@ -418,16 +417,15 @@ results/
 Els sis fitxers de l'execució autònoma de la secció 1.1 (`Alice-output.txt`, `timestamped_Alice-output.txt`, etc.) encara es troben a `results/` al costat d'aquest nou subdirectori `greetings/`.
 Això és esperat: res en aquesta lliçó els elimina, i la secció 2.1 els llegeix directament com a entrada.
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="results/greetings/Alice-output.txt"
 Hello, Alice!
 ```
 
-</details>
+:::
 
 Els fitxers de salutació es publiquen a `results/greetings/`.
 El workflow principal crida `GREETING_WORKFLOW` i connecta la seva sortida directament a la secció `publish:`.
@@ -674,8 +672,7 @@ Outputs:
     - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
 ```
 
-<details class="abstract">
-<summary>Nou contingut afegit a `results/`</summary>
+:::abstract[Nou contingut afegit a `results/`]{collapsed}
 
 ```console
 results/
@@ -696,16 +693,15 @@ results/
 L'arrel de `results/` també conté els fitxers restants de les execucions autònomes de les seccions 1.1 i 2.1 (`Alice-output.txt`, `timestamped_Alice-output.txt`, `UPPER-timestamped_Alice-output.txt`, etc.).
 Això és esperat: aquesta lliçó mai no us indica que els elimineu.
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
 !ECILA ,OLLEH ]54:84:81 31-90-6202[
 ```
 
-</details>
+:::
 
 El pipeline funciona de principi a fi: la salutació s'ha convertit a majúscules i s'ha invertit.
 

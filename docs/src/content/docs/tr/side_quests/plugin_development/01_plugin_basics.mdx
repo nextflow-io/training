@@ -222,15 +222,14 @@ Beklenen sütunları ve türleri tanımlayan bir JSON şeması kullanarak CSV/TS
 Pipeline şu anda `greetings.csv` dosyasını `splitCsv` ve manuel bir `map` kullanarak okumaktadır; ancak nf-schema bunu doğrulanmış, şema tabanlı ayrıştırmayla değiştirebilir.
 Alıştırma dizininde bir JSON şema dosyası (`greetings_schema.json`) zaten sağlanmıştır.
 
-<details class="info">
-<summary>Şema nedir?</summary>
+:::info[Şema nedir?]{collapsed}
 
 Şema, geçerli verinin nasıl göründüğünün biçimsel bir tanımıdır.
 Hangi sütunların beklendiğini, her değerin hangi türde olması gerektiğini (string, number vb.) ve hangi alanların zorunlu olduğunu tanımlar.
 
 Bunu bir sözleşme olarak düşünebilirsiniz: girdi verisi şemayla eşleşmezse, araç sorunu pipeline'da ilerleyen aşamalarda kafa karıştırıcı hatalara yol açmak yerine erken aşamada yakalayabilir.
 
-</details>
+:::
 
 #### 2.2.1. Şemayı inceleme
 
@@ -569,8 +568,7 @@ INFO - [nf-co2footprint] 🌱 The workflow run used 126.76 uWh of electricity, r
 
 Eklenti, çalışma dizininizde çıktı dosyaları oluşturur:
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 co2footprint_report_<timestamp>.html
@@ -578,10 +576,9 @@ co2footprint_summary_<timestamp>.txt
 co2footprint_trace_<timestamp>.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="co2footprint_summary_<timestamp>.txt"
 Total CO₂e footprint measures of this workflow run (including cached tasks):
@@ -595,7 +592,7 @@ Which equals:
   - 1.22E-7 % of a flight from Paris to London
 ```
 
-</details>
+:::
 
 (Sayılarınız farklı olacaktır.)
 

@@ -260,13 +260,12 @@ Pipeline complete! 👋
 L'observer funziona.
 Ogni volta che un'attività termina, Nextflow chiama `onProcessComplete` e la nostra implementazione stampa un messaggio.
 
-<details class="exercise">
-<summary>Personalizza il messaggio</summary>
+:::exercise[Personalizza il messaggio]{collapsed}
 
 Prova a cambiare il messaggio in `onProcessComplete` con qualcosa di tuo, ricompila ed esegui di nuovo.
 Questo conferma che il ciclo completo modifica-build-esecuzione funziona per gli observer.
 
-</details>
+:::
 
 ### 2.4. Aggiungere la logica di conteggio
 
@@ -324,8 +323,7 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-<details class="example">
-<summary>Output</summary>
+:::example[Output]{collapsed}
 
 ```console
 N E X T F L O W  ~  version 26.04.4
@@ -357,7 +355,7 @@ Pipeline complete! 👋
 
 I messaggi del contatore sono intercalati con le sottomissioni delle attività perché gli observer vengono eseguiti al completamento delle attività.
 
-</details>
+:::
 
 ---
 

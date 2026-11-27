@@ -254,8 +254,7 @@ Bunu da [girdi doğrulama bölümünde](../nfcore_build/04_input_validation.mdx)
 `nf-core/demo` pipeline'ı, `sample`, `fastq_1` ve `fastq_2` sütunlarına sahip bir CSV dosyası bekler.
 Bu, beklenen yapıyı, sütun türlerini ve kısıtlamaları belirten bir şema dosyasında (`assets/schema_input.json`) tanımlanmıştır.
 
-<details class="abstract">
-<summary>Girdiler için şema dosyası</summary>
+:::abstract[Girdiler için şema dosyası]{collapsed}
 
 ```json title="assets/schema_input.json"
 {
@@ -293,7 +292,7 @@ Bu, beklenen yapıyı, sütun türlerini ve kısıtlamaları belirten bir şema 
 }
 ```
 
-</details>
+:::
 
 Şema, `sample` ve `fastq_1`'in zorunlu olduğunu, `fastq_2`'nin ise isteğe bağlı olduğunu belirtir (hem çift uçlu hem de tek uçlu veriyi destekler).
 Dosya yolları, varlık ve uzantı kalıbı açısından doğrulanır.

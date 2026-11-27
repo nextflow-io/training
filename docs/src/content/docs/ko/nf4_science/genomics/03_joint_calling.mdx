@@ -8,8 +8,7 @@ description: 이전에는 각 샘플의 데이터를 독립적으로 처리하�
 이전에는 각 샘플의 데이터를 독립적으로 처리하는 샘플별 변이 호출 파이프라인을 구축했습니다.
 이제 [파트 1](01_method.mdx)(다중 샘플 사용 사례)에서 설명한 대로 조인트 변이 호출을 구현하도록 파이프라인을 확장하겠습니다.
 
-<details class="info">
-<summary>이 섹션을 시작하는 방법</summary>
+:::info[이 섹션을 시작하는 방법]{collapsed}
 
 이 과정의 이 섹션은 [파트 1: 방법 개요](./01_method.mdx), [파트 2: 샘플별 변이 호출](./02_per_sample_variant_calling.mdx)을 완료하고 작동하는 `genomics.nf` 파이프라인이 있다고 가정합니다.
 
@@ -29,7 +28,7 @@ cp solutions/part2/modules/* modules/
 nextflow run genomics.nf -profile test
 ```
 
-</details>
+:::
 
 ## 과제
 
@@ -237,8 +236,7 @@ Outputs:
 
 Nextflow 출력은 이전과 동일하게 보이지만, `.g.vcf` 파일과 해당 인덱스 파일이 이제 하위 디렉토리로 구성되어 있습니다.
 
-<details class="abstract">
-<summary>디렉토리 내용 (심볼릭 링크 축약됨)</summary>
+:::abstract[디렉토리 내용 (심볼릭 링크 축약됨)]{collapsed}
 
 ```console
 results/
@@ -258,7 +256,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 GVCF 파일 중 하나를 열어 스크롤하면 GATK HaplotypeCaller가 요청한 대로 GVCF 파일을 생성했는지 확인할 수 있습니다.
 
@@ -703,8 +701,7 @@ Outputs:
 처음 두 단계는 이전 실행에서 캐시되었으며, 새로운 `GATK_JOINTGENOTYPING` 단계는 세 샘플 모두의 수집된 입력에 대해 한 번 실행됩니다.
 최종 출력 파일인 `family_trio.joint.vcf`(및 해당 인덱스)는 결과 디렉토리에 있습니다.
 
-<details class="abstract">
-<summary>디렉토리 내용 (심볼릭 링크 축약됨)</summary>
+:::abstract[디렉토리 내용 (심볼릭 링크 축약됨)]{collapsed}
 
 ```console
 results/
@@ -726,7 +723,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 조인트 VCF 파일을 열면 워크플로우가 예상된 변이 호출을 생성했는지 확인할 수 있습니다.
 

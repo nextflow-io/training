@@ -404,8 +404,7 @@ Outputs:
     - greetings/Alice-output.txt
 ```
 
-<details class="abstract">
-<summary>Nuevo contenido agregado en `results/`</summary>
+:::abstract[Nuevo contenido agregado en `results/`]{collapsed}
 
 ```console
 results/
@@ -418,16 +417,15 @@ results/
 Los seis archivos de la ejecución autónoma en la sección 1.1 (`Alice-output.txt`, `timestamped_Alice-output.txt`, etc.) siguen estando en `results/` junto a este nuevo subdirectorio `greetings/`.
 Esto es esperado: nada en esta lección los elimina, y la sección 2.1 los lee directamente como entrada.
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contenido del archivo</summary>
+:::abstract[Contenido del archivo]{collapsed}
 
 ```console title="results/greetings/Alice-output.txt"
 Hello, Alice!
 ```
 
-</details>
+:::
 
 Los archivos de saludo se publican en `results/greetings/`.
 El workflow principal llama a `GREETING_WORKFLOW` y conecta su salida directamente a la sección `publish:`.
@@ -674,8 +672,7 @@ Outputs:
     - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
 ```
 
-<details class="abstract">
-<summary>Nuevo contenido agregado en `results/`</summary>
+:::abstract[Nuevo contenido agregado en `results/`]{collapsed}
 
 ```console
 results/
@@ -696,16 +693,15 @@ results/
 La raíz de `results/` también sigue conteniendo los archivos sobrantes de las ejecuciones autónomas en las secciones 1.1 y 2.1 (`Alice-output.txt`, `timestamped_Alice-output.txt`, `UPPER-timestamped_Alice-output.txt`, etc.).
 Esto es esperado: esta lección nunca indica que debes eliminarlos.
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contenido del archivo</summary>
+:::abstract[Contenido del archivo]{collapsed}
 
 ```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
 !ECILA ,OLLEH ]54:84:81 31-90-6202[
 ```
 
-</details>
+:::
 
 El pipeline funciona de extremo a extremo: el saludo ha sido convertido a mayúsculas e invertido.
 

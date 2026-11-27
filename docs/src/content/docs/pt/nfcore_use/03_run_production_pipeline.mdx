@@ -113,8 +113,7 @@ A abordagem mais adequada é substituir os padrões de recursos em um arquivo de
 
 Fornecemos um arquivo de configuração personalizado que substitui os padrões de recursos baseados em rótulos.
 
-<details class="full-code">
-<summary>laptop.config</summary>
+:::full-code[laptop.config]{collapsed}
 
 ```nextflow title="laptop.config"
 process {
@@ -136,7 +135,7 @@ process {
 }
 ```
 
-</details>
+:::
 
 A [Parte 2](./02_configure_execution.mdx) apresentou `withName:` para direcionar um único processo pelo nome.
 Aqui usamos `withLabel:` para direcionar todos os processos que compartilham um rótulo de uma só vez.

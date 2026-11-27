@@ -102,8 +102,7 @@ Per a una descripció detallada dels fitxers, consulteu l'[escalfament de Hello 
 
 El workflow que provarem és un subconjunt del Hello workflow construït a [Hello Workflow](../../hello_nextflow/03_hello_workflow.mdx).
 
-<details class="example">
-<summary>Què fa el workflow Hello Nextflow?</summary>
+:::example[Què fa el workflow Hello Nextflow?]{collapsed}
 
 Si no heu fet la formació [Hello Nextflow](../../hello_nextflow/index.mdx), aquí teniu una visió general ràpida del que fa aquest workflow senzill.
 
@@ -120,13 +119,12 @@ Els resultats es publiquen en un directori anomenat `results/`, i la sortida fin
 
 En aquesta missió secundària, utilitzem una forma intermèdia del Hello workflow que només conté els dos primers processos. {/* TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 */}
 
-</details>
+:::
 
 El subconjunt amb el qual treballarem està compost de dos processos: `sayHello` i `convertToUpper`.
 Podeu veure el codi complet del workflow a continuació.
 
-<details class="example">
-<summary>Codi del workflow</summary>
+:::example[Codi del workflow]{collapsed}
 
 ```nextflow title="main.nf"
 #!/usr/bin/env nextflow
@@ -194,7 +192,7 @@ output {
 }
 ```
 
-</details>
+:::
 
 #### Executeu el workflow
 

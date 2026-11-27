@@ -82,8 +82,7 @@ ls work/6d/740edd*
 
 Yalnızca pipeline çalıştırmak istiyorsanız kodu anlamak zorunlu değildir; ancak merak ediyorsanız incelemeye değer.
 
-<details class="optional">
-<summary>Bu alıştırmayla ilişkili kodu keşfetmek için tıklayın</summary>
+::::optional[Bu alıştırmayla ilişkili kodu keşfetmek için tıklayın]{collapsed}
 
 `1-hello.nf` dosyasını açalım ve ana bileşenlerine bakalım.
 
@@ -212,7 +211,7 @@ output {
 
 Her adlandırılmış giriş, iş akışındaki bir `publish:` etiketine karşılık gelir ve onu `results/` altındaki bir alt dizine eşler.
 
-</details>
+::::
 
 ### Özetle
 
@@ -361,8 +360,7 @@ Bu özellik, çok adımlı bir pipeline'da zaten başarıyla çalıştırılmı�
 
 Yalnızca pipeline çalıştırmak istiyorsanız kodu anlamak zorunlu değildir; ancak merak ediyorsanız incelemeye değer.
 
-<details class="optional">
-<summary>Bu alıştırmayla ilişkili kodu keşfetmek için tıklayın</summary>
+:::optional[Bu alıştırmayla ilişkili kodu keşfetmek için tıklayın]{collapsed}
 
 `2-inputs.nf` dosyasındaki temel değişiklik, iş akışının `main:` bölümündedir:
 
@@ -385,7 +383,7 @@ Burada gördüğünüz şeye **kanal** denir: işlemleri paralelleştirmeyi kola
 Sonuç, `Hello`, `Bonjour` ve `Hola` değerlerini içeren bir kanaldır.
 `sayHello(greeting_ch)`'ye geçirildiğinde, Nextflow her öğe için süreci otomatik olarak bir kez çağırır ve kaynaklar elverdiğinde bunları paralel olarak çalıştırır.
 
-</details>
+:::
 
 ### Özetle
 
@@ -421,8 +419,7 @@ nextflow run main.nf --input data/greetings.csv
 
 `character` parametresi `nextflow.config` dosyasında varsayılan olarak `turkey` değerine ayarlanmıştır; bu nedenle siz geçersiz kılmadıkça ASCII sanatı bir hindi kullanır (deneyin: `--character tux` ekleyin).
 
-<details class="success">
-<summary>Komut çıktısı</summary>
+:::success[Komut çıktısı]{collapsed}
 
 ```console {6,7,8,9}
 N E X T F L O W   ~  version 26.04.4
@@ -456,7 +453,7 @@ Outputs:
   cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
 ```
 
-</details>
+:::
 
 Dört süreç çalıştı; ancak hepsi aynı sayıda değil.
 `sayHello` ve `convertToUpper` her girdi için bir kez çalıştı (3 of 3): her selamlama ayrı ayrı yazılıp büyük harfe dönüştürülmesi gerekir.
@@ -488,8 +485,7 @@ results
 
 ASCII sanat dosyası için `cowpy-COLLECTED-batch-output.txt` dosyasını kontrol edin.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/batch/cowpy-COLLECTED-batch-output.txt"
  _________
@@ -520,7 +516,7 @@ ASCII sanat dosyası için `cowpy-COLLECTED-batch-output.txt` dosyasını kontro
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 [2.1](#21-i̇ş-akışını-çalıştırma) bölümünde olduğu gibi, dört süreçteki bu 8 görev yürütmesinin her biri `work/` altında kendi dizinini alır ve diğerlerinden tamamen yalıtılmış olur.
 `collectGreetings`, bunun neden önemli olduğunun iyi bir örneğidir: üç farklı görev dizininde bulunan `convertToUpper` görevlerinin üçünün de çıktılarına bağlıdır; bu nedenle Nextflow, `collectGreetings`'in yukarı akış görevlerinin dizinlerinden doğrudan okuması yerine, bu dosyalara sembolik bağlantıları `collectGreetings`'in kendi dizinine yerleştirir:
@@ -547,8 +543,7 @@ Nextflow, konteynerler için alternatif olarak Conda'yı da destekler; araların
 
 Yalnızca pipeline çalıştırmak istiyorsanız kodu anlamak zorunlu değildir; ancak merak ediyorsanız incelemeye değer.
 
-<details class="optional">
-<summary>Bu alıştırmayla ilişkili kodu keşfetmek için tıklayın</summary>
+:::optional[Bu alıştırmayla ilişkili kodu keşfetmek için tıklayın]{collapsed}
 
 ### Verinin bir adımdan diğerine nasıl aktığı
 
@@ -619,7 +614,7 @@ docker.enabled = true
 
 Bu tek satır, pipeline'daki konteyner belirtilmiş herhangi bir süreç için Docker'ı etkinleştirir.
 
-</details>
+:::
 
 ### Özetle
 

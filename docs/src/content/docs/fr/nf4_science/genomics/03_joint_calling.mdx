@@ -8,8 +8,7 @@ description: Précédemment, vous avez construit un pipeline de variant calling 
 Précédemment, vous avez construit un pipeline de variant calling par échantillon qui traitait les données de chaque échantillon de manière indépendante.
 Nous allons maintenant l'étendre pour implémenter le variant calling joint, comme décrit dans la [Partie 1](01_method.mdx) (cas d'usage multi-échantillons).
 
-<details class="info">
-<summary>Comment commencer à partir de cette section</summary>
+:::info[Comment commencer à partir de cette section]{collapsed}
 
 Cette section du cours suppose que vous avez terminé la [Partie 1 : Aperçu de la méthode](./01_method.mdx), la [Partie 2 : Variant calling par échantillon](./02_per_sample_variant_calling.mdx) et que vous disposez d'un pipeline `genomics.nf` fonctionnel.
 
@@ -29,7 +28,7 @@ Vous pouvez tester qu'il s'exécute avec succès en lançant la commande suivant
 nextflow run genomics.nf -profile test
 ```
 
-</details>
+:::
 
 ## Exercice
 
@@ -237,8 +236,7 @@ Outputs:
 
 La sortie Nextflow semble identique à celle d'avant, mais les fichiers `.g.vcf` et leurs fichiers d'index sont maintenant organisés dans des sous-répertoires.
 
-<details class="abstract">
-<summary>Contenu du répertoire (liens symboliques raccourcis)</summary>
+:::abstract[Contenu du répertoire (liens symboliques raccourcis)]{collapsed}
 
 ```console
 results/
@@ -258,7 +256,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Si vous ouvrez l'un des fichiers GVCF et que vous le parcourez, vous pouvez vérifier que GATK HaplotypeCaller a produit des fichiers GVCF comme demandé.
 
@@ -703,8 +701,7 @@ Outputs:
 Les deux premières étapes sont mises en cache depuis l'exécution précédente, et la nouvelle étape `GATK_JOINTGENOTYPING` s'exécute une fois sur les entrées collectées des trois échantillons.
 Le fichier de sortie final, `family_trio.joint.vcf` (et son index), se trouve dans le répertoire de résultats.
 
-<details class="abstract">
-<summary>Contenu du répertoire (liens symboliques raccourcis)</summary>
+:::abstract[Contenu du répertoire (liens symboliques raccourcis)]{collapsed}
 
 ```console
 results/
@@ -726,7 +723,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Si vous ouvrez le fichier VCF joint, vous pouvez vérifier que le workflow a produit les appels de variants attendus.
 

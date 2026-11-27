@@ -53,14 +53,13 @@ results
 
 Open the file; the contents should match the greeting you specified on the command line.
 
-<details>
-  <summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="results/output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 That's great, our workflow did what it was supposed to do!
 
@@ -112,8 +111,7 @@ tree -a work
 
 The exact subdirectory names will be different on your system.
 
-<details>
-  <summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console title="work/"
 work
@@ -129,19 +127,18 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
 You should immediately recognize the `output.txt` file, which is in fact the original output of the `sayHello` process that got published to the `results` directory.
 If you open it, you will find the `Hello World!` greeting again.
 
-<details>
-  <summary>File contents of output.txt</summary>
+:::abstract[File contents of output.txt]{collapsed}
 
 ```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 So what about all those other files?
 
@@ -157,15 +154,14 @@ These are the helper and log files that Nextflow wrote as part of the task execu
 
 The `.command.sh` file is especially useful because it shows you the main command Nextflow executed not including all the bookkeeping and task/environment setup.
 
-<details>
-  <summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" showLineNumbers
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
-</details>
+:::
 
 :::tip
 When something goes wrong and you need to troubleshoot what happened, it can be useful to look at the `command.sh` script to check exactly what command Nextflow composed based on the workflow instructions, variable interpolation and so on.
@@ -198,8 +194,7 @@ _The goal here is not to memorize the syntax of Nextflow code, but to form some 
 
 Let's open the `hello-world.nf` script in the editor pane.
 
-<details>
-  <summary>Code</summary>
+:::abstract[Code]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
@@ -230,7 +225,7 @@ workflow {
 }
 ```
 
-</details>
+:::
 
 A Nextflow script involves two main types of core components: one or more **processes**, and the **workflow** itself.
 Each **process** describes what operation(s) the corresponding step in the pipeline should accomplish, while the **workflow** describes the dataflow logic that connects the various steps.
@@ -245,8 +240,7 @@ The process body must contain a script block which specifies the command to run,
 
 Here we have a **process** called `sayHello` that takes an **input** variable called `greeting` and writes its **output** to a file named `output.txt`.
 
-<details>
-  <summary>Code</summary>
+:::abstract[Code]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers startLineNumber=3
 /*
@@ -269,7 +263,7 @@ process sayHello {
 }
 ```
 
-</details>
+:::
 
 This is a very minimal process definition that just contains an `input` definition, an `output` definition and the `script` to execute.
 

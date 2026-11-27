@@ -404,8 +404,7 @@ Outputs:
     - greetings/Alice-output.txt
 ```
 
-<details class="abstract">
-<summary>`results/` 아래에 추가된 새 내용</summary>
+:::abstract[`results/` 아래에 추가된 새 내용]{collapsed}
 
 ```console
 results/
@@ -418,16 +417,15 @@ results/
 1.1 섹션의 단독 실행에서 생성된 여섯 개의 파일(`Alice-output.txt`, `timestamped_Alice-output.txt` 등)이 이 새로운 `greetings/` 하위 디렉토리와 함께 `results/`에 그대로 남아 있습니다.
 이는 정상적인 동작입니다. 이 단원에서는 해당 파일들을 삭제하지 않으며, 2.1 섹션에서 해당 파일들을 직접 입력으로 읽습니다.
 
-</details>
+:::
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="results/greetings/Alice-output.txt"
 Hello, Alice!
 ```
 
-</details>
+:::
 
 인사말 파일이 `results/greetings/`에 게시됩니다.
 메인 워크플로우는 `GREETING_WORKFLOW`를 호출하고 그 출력을 `publish:` 섹션에 직접 연결합니다.
@@ -674,8 +672,7 @@ Outputs:
     - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
 ```
 
-<details class="abstract">
-<summary>`results/` 아래에 추가된 새 내용</summary>
+:::abstract[`results/` 아래에 추가된 새 내용]{collapsed}
 
 ```console
 results/
@@ -696,16 +693,15 @@ results/
 `results/` 루트에는 1.1 및 2.1 섹션의 단독 실행에서 남은 파일들(`Alice-output.txt`, `timestamped_Alice-output.txt`, `UPPER-timestamped_Alice-output.txt` 등)도 그대로 남아 있습니다.
 이는 정상적인 동작입니다. 이 단원에서는 해당 파일들을 삭제하도록 안내하지 않습니다.
 
-</details>
+:::
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
 !ECILA ,OLLEH ]54:84:81 31-90-6202[
 ```
 
-</details>
+:::
 
 파이프라인이 처음부터 끝까지 정상적으로 작동합니다: 인사말이 대문자로 변환되고 뒤집혔습니다.
 

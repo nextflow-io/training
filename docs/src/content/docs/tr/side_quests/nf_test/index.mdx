@@ -102,8 +102,7 @@ Dosyaların ayrıntılı açıklaması için [Hello Nextflow'daki ısınma böl�
 
 Test edeceğimiz iş akışı, [Hello Workflow](../../hello_nextflow/03_hello_workflow.mdx) bölümünde oluşturulan Hello iş akışının bir alt kümesidir.
 
-<details class="example">
-<summary>Hello Nextflow iş akışı ne yapar?</summary>
+:::example[Hello Nextflow iş akışı ne yapar?]{collapsed}
 
 [Hello Nextflow](../../hello_nextflow/index.mdx) eğitimini yapmadıysanız, bu basit iş akışının ne yaptığına dair kısa bir genel bakış:
 
@@ -120,13 +119,12 @@ Sonuçlar `results/` adlı bir dizine yayımlanır ve pipeline'ın nihai çıkt�
 
 Bu yan görevde, yalnızca ilk iki süreci içeren Hello iş akışının ara bir formunu kullanıyoruz. {/* TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 */}
 
-</details>
+:::
 
 Üzerinde çalışacağımız alt küme iki süreçten oluşmaktadır: `sayHello` ve `convertToUpper`.
 Tam iş akışı kodunu aşağıda görebilirsiniz.
 
-<details class="example">
-<summary>İş akışı kodu</summary>
+:::example[İş akışı kodu]{collapsed}
 
 ```nextflow title="main.nf"
 #!/usr/bin/env nextflow
@@ -194,7 +192,7 @@ output {
 }
 ```
 
-</details>
+:::
 
 #### İş akışını çalıştırın
 

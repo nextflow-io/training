@@ -258,8 +258,7 @@ Pipeline चलाओ:
 nextflow run greet.nf
 ```
 
-<details class="example">
-<summary>आउटपुट</summary>
+:::example[आउटपुट]{collapsed}
 
 ```console
 N E X T F L O W   ~  version 26.04.4
@@ -282,7 +281,7 @@ Output: Hallo
 Pipeline complete! 👋
 ```
 
-</details>
+:::
 
 तुम्हारा पहला कस्टम plugin फ़ंक्शन एक असली वर्कफ़्लो में काम कर रहा है।
 वही `include { ... } from 'plugin/...'` pattern जो तुमने Part 1 में nf-hello और nf-schema के साथ उपयोग किया था, तुम्हारे अपने plugin के साथ भी काम करता है।
@@ -433,8 +432,7 @@ workflow {
 nextflow run greet.nf
 ```
 
-<details class="example">
-<summary>आउटपुट</summary>
+:::example[आउटपुट]{collapsed}
 
 ```console
 N E X T F L O W   ~  version 26.04.4
@@ -457,7 +455,7 @@ Decorated: *** Hallo ***
 Pipeline complete! 👋
 ```
 
-</details>
+:::
 
 Plugin फ़ंक्शन process scripts (जैसे `SAY_HELLO` के अंदर `decorateGreeting`) और वर्कफ़्लो operations (जैसे `map` में `reverseGreeting`) दोनों में काम करते हैं।
 

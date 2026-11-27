@@ -113,8 +113,7 @@ La meilleure approche consiste à remplacer les valeurs de ressources par défau
 
 Nous vous fournissons un fichier de configuration personnalisé qui remplace les valeurs de ressources par défaut basées sur les labels.
 
-<details class="full-code">
-<summary>laptop.config</summary>
+:::full-code[laptop.config]{collapsed}
 
 ```nextflow title="laptop.config"
 process {
@@ -136,7 +135,7 @@ process {
 }
 ```
 
-</details>
+:::
 
 La [Partie 2](./02_configure_execution.mdx) a présenté `withName:` pour cibler un seul processus par son nom.
 Ici, nous utilisons `withLabel:` pour cibler en une seule fois tous les processus qui partagent un label.

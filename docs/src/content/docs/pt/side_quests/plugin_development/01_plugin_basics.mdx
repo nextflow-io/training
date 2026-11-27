@@ -222,15 +222,14 @@ Ele fornece `samplesheetToList`, uma função que analisa arquivos CSV/TSV usand
 O pipeline atualmente lê `greetings.csv` usando `splitCsv` e um `map` manual, mas o nf-schema pode substituir isso por uma análise validada e orientada por schema.
 Um arquivo JSON schema (`greetings_schema.json`) já está disponível no diretório do exercício.
 
-<details class="info">
-<summary>O que é um schema?</summary>
+:::info[O que é um schema?]{collapsed}
 
 Um schema é uma descrição formal de como dados válidos devem ser.
 Ele define coisas como quais colunas são esperadas, qual tipo cada valor deve ter (string, número, etc.) e quais campos são obrigatórios.
 
 Pense nele como um contrato: se os dados de entrada não corresponderem ao schema, a ferramenta pode detectar o problema cedo, em vez de deixá-lo causar erros confusos mais adiante no pipeline.
 
-</details>
+:::
 
 #### 2.2.1. Ver o schema
 
@@ -569,8 +568,7 @@ INFO - [nf-co2footprint] 🌱 The workflow run used 126.76 uWh of electricity, r
 
 O plugin gera arquivos de saída no seu diretório de trabalho:
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console
 co2footprint_report_<timestamp>.html
@@ -578,10 +576,9 @@ co2footprint_summary_<timestamp>.txt
 co2footprint_trace_<timestamp>.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Conteúdo do arquivo</summary>
+:::abstract[Conteúdo do arquivo]{collapsed}
 
 ```console title="co2footprint_summary_<timestamp>.txt"
 Total CO₂e footprint measures of this workflow run (including cached tasks):
@@ -595,7 +592,7 @@ Which equals:
   - 1.22E-7 % of a flight from Paris to London
 ```
 
-</details>
+:::
 
 (Seus números serão diferentes.)
 

@@ -113,8 +113,7 @@ Daha iyi bir yaklaşım, özel bir yapılandırma dosyasıyla varsayılan kaynak
 
 Etiket tabanlı kaynak varsayılanlarını geçersiz kılan özel bir yapılandırma dosyası sağlıyoruz.
 
-<details class="full-code">
-<summary>laptop.config</summary>
+:::full-code[laptop.config]{collapsed}
 
 ```nextflow title="laptop.config"
 process {
@@ -136,7 +135,7 @@ process {
 }
 ```
 
-</details>
+:::
 
 [Bölüm 2](./02_configure_execution.mdx)'de tek bir süreci ada göre hedeflemek için `withName:` kullanımı tanıtılmıştı.
 Burada ise aynı etiketi paylaşan tüm süreçleri aynı anda hedeflemek için `withLabel:` kullanıyoruz.

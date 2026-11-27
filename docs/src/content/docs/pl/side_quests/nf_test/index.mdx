@@ -102,8 +102,7 @@ Szczegółowy opis plików znajdziesz w [rozgrzewce z Hello Nextflow](../../hell
 
 Workflow, który będziemy testować, jest podzbiorem workflow'u Hello zbudowanego w [Hello Workflow](../../hello_nextflow/03_hello_workflow.mdx).
 
-<details class="example">
-<summary>Co robi workflow Hello Nextflow?</summary>
+:::example[Co robi workflow Hello Nextflow?]{collapsed}
 
 Jeśli nie przechodziłeś szkolenia [Hello Nextflow](../../hello_nextflow/index.mdx), oto krótki przegląd tego, co robi ten prosty workflow.
 
@@ -120,13 +119,12 @@ Wyniki są publikowane w katalogu `results/`, a końcowe wyjście pipeline'u (pr
 
 W tym zadaniu dodatkowym używamy pośredniej formy workflow'u Hello, która zawiera tylko dwa pierwsze procesy. {/* TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 */}
 
-</details>
+:::
 
 Podzbiór, z którym będziemy pracować, składa się z dwóch procesów: `sayHello` i `convertToUpper`.
 Pełny kod workflow'u możesz zobaczyć poniżej.
 
-<details class="example">
-<summary>Kod workflow'u</summary>
+:::example[Kod workflow'u]{collapsed}
 
 ```nextflow title="main.nf"
 #!/usr/bin/env nextflow
@@ -194,7 +192,7 @@ output {
 }
 ```
 
-</details>
+:::
 
 #### Uruchom workflow
 

@@ -205,8 +205,7 @@ class GreetingExtensionTest extends Specification {
 make test
 ```
 
-<details class="example">
-<summary>टेस्ट आउटपुट</summary>
+:::example[टेस्ट आउटपुट]{collapsed}
 
 ```console
 BUILD SUCCESSFUL in 5s
@@ -217,17 +216,15 @@ BUILD SUCCESSFUL in 5s
 "BUILD SUCCESSFUL" का मतलब है कि सब कुछ काम किया।
 अगर कोई टेस्ट विफल होता है, तो तुम्हें विस्तृत error messages दिखेंगे।
 
-</details>
+:::
 
-<details class="exercise">
-<summary>एक edge case टेस्ट जोड़ो</summary>
+::::exercise[एक edge case टेस्ट जोड़ो]{collapsed}
 
 एक टेस्ट जोड़ो जो जाँचे कि `reverseGreeting` एक खाली string को कैसे संभालता है।
 `reverseGreeting('')` क्या लौटाना चाहिए?
 टेस्ट जोड़ो, `make test` चलाओ, और सत्यापित करो कि यह पास होता है।
 
-<details class="solution">
-<summary>समाधान</summary>
+:::solution[समाधान]{collapsed}
 
 `GreetingExtensionTest.groovy` में यह टेस्ट method जोड़ो:
 
@@ -243,9 +240,9 @@ def 'should handle empty string'() {
 
 एक खाली string को उलटने पर भी खाली string ही मिलती है।
 
-</details>
+:::
 
-</details>
+::::
 
 ---
 

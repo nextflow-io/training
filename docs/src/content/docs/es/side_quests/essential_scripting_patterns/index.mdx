@@ -1189,8 +1189,7 @@ Outputs:
 
 Si ejecuta esto, notará un error -- Nextflow intenta interpretar `${USER}{:nextflow}` como una variable de Nextflow que no existe.
 
-<details class="failure">
-<summary>Salida del comando</summary>
+:::failure[Salida del comando]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -1207,7 +1206,7 @@ ERROR ~ Script compilation failed
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 Necesitamos escaparla para que Bash pueda manejarla en su lugar.
 

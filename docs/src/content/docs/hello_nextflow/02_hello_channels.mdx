@@ -28,12 +28,11 @@ Channels are queues designed to handle inputs efficiently and shuttle them from 
 In this part of the course, you will learn how to use a channel to handle multiple inputs from a variety of different sources.
 You will also learn to use [**operators**](https://nextflow.io/docs/latest/reference/operator.html) to transform channel contents as needed.
 
-<details class="info">
-<summary>How to begin from this section</summary>
+:::info[How to begin from this section]{collapsed}
 
 This section of the course assumes you have completed Part 1 of the [Hello Nextflow](./index.mdx) course, but if you are comfortable with the basics covered in that section, you can start from here without doing anything special.
 
-</details>
+:::
 
 ---
 
@@ -72,8 +71,7 @@ Outputs:
 
 As previously, you will find the output file named `output.txt` in the `results/hello_channels` directory (as specified in the `output` block of the workflow script, shown above).
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console {2-3} title="results/hello_channels"
 results
@@ -84,16 +82,15 @@ results
 └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hello Channels!
 ```
 
-</details>
+:::
 
 If that worked for you, you're ready to learn about channels.
 
@@ -224,14 +221,13 @@ Outputs:
 If you made both edits correctly, you should get a successful execution.
 You can check the results directory to satisfy yourself that the outcome is still the same as previously.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hello Channels!
 ```
 
-</details>
+:::
 
 So we've increased the flexibility of our workflow while achieving the same end result.
 This may seem like we're writing more code for no tangible benefit, but the value will become clear as soon as we start handling more inputs.
@@ -381,8 +377,7 @@ The execution monitor shows that `3 of 3` calls were made for the `sayHello` pro
 
 However, there is still only one output in the results directory:
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console {3} title="results/hello_channels"
 results
@@ -393,16 +388,15 @@ results
 └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hola
 ```
 
-</details>
+:::
 
 You should see one of the three greetings in there, though the one you got might be different from what is shown here.
 Can you think of why that might be?
@@ -414,8 +408,7 @@ _In the diagram, the channel is represented in green, and the order of elements 
 Looking back at the execution monitor, it gave us only one subdirectory path (`f4/c9962c`).
 Let's have a look in there.
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console {9}
 work/f4/c9962ce91ef87480babcb86b2b9042/
@@ -429,16 +422,15 @@ work/f4/c9962ce91ef87480babcb86b2b9042/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="work/f4/c9962ce91ef87480babcb86b2b9042/output.txt"
 Hello
 ```
 
-</details>
+:::
 
 That's not even the same greeting we got in the results directory! What's going on?
 
@@ -487,8 +479,7 @@ In this expanded mode, it only reports that they were submitted.
 
 Anyway, now that we have the subdirectories of each process call, we can look for the their logs and outputs.
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 work/23/871c7ec3642a898ecd5e6090d21300/
@@ -526,10 +517,9 @@ work/f4/ea10a680d5687596d3eaa3fcf69272/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```txt title="work/23/871c7ec3642a898ecd5e6090d21300/output.txt"
 Bonjour
@@ -543,7 +533,7 @@ Hello
 Hola
 ```
 
-</details>
+:::
 
 This shows that all three processes ran successfully (yay).
 
@@ -645,8 +635,7 @@ Outputs:
 Reverting back to the summary view, the output is summarized on one line again.
 Have a look at the `results` directory to see if all the output greetings are there.
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 results/hello_channels/
@@ -656,10 +645,9 @@ results/hello_channels/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="Bonjour-output.txt"
 Bonjour
@@ -673,7 +661,7 @@ Hello
 Hola
 ```
 
-</details>
+:::
 
 Success! Now we can add as many greetings as we like without worrying about output files being overwritten.
 

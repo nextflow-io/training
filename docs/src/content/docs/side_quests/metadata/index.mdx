@@ -68,8 +68,7 @@ The editor opens with the project directory in focus.
 
 You'll find a main workflow file and a `data` directory containing a datasheet and a handful of data files.
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 .
@@ -86,7 +85,7 @@ You'll find a main workflow file and a `data` directory containing a datasheet a
 └── nextflow.config
 ```
 
-</details>
+:::
 
 The workflow in the `main.nf` file is a stub that you will gradually expand into a fully functioning workflow.
 
@@ -111,8 +110,7 @@ Each data file contains some greeting text in one of five languages (fr: French,
 
 We're going to use a tool called [`COWPY`](https://github.com/jeffbuttars/cowpy) to generate ASCII art of each character speaking its recorded greeting.
 
-<details class="info">
-<summary>What does `COWPY` do?</summary>
+:::info[What does `COWPY` do?]{collapsed}
 
 `COWPY` is a command-line tool that generates ASCII art to display arbitrary text inputs in a fun way.
 It is a Python implementation of the classic [cowsay](https://en.wikipedia.org/wiki/Cowsay) tool by Tony Monroe.
@@ -153,7 +151,7 @@ __________________
     \___)=(___/
 ```
 
-</details>
+:::
 
 In addition, we'll use a language analysis tool called `langid` to identify what language each character speaks and organize the outputs of the pipeline accordingly.
 
@@ -247,8 +245,7 @@ Each map entry corresponds to a column in our datasheet:
 This makes it easy to access specific fields from each row.
 For example, we could access the file ID with `id` or the txt file path with `recording`.
 
-<details class="info">
-<summary>(Optional) More about Groovy maps</summary>
+:::info[(Optional) More about Groovy maps]{collapsed}
 
 In Groovy, the programming language that Nextflow is built on, a map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby.
 
@@ -286,7 +283,7 @@ id: sampleA
 character: squirrel
 ```
 
-</details>
+:::
 
 ### 1.2. Pick out a specific field with `map`
 
@@ -518,8 +515,7 @@ Outputs:
 
 As you can see, `COWPY` ran on each file using the correct character for each one.
 
-<details class="abstract">
-<summary>Results directory contents</summary>
+:::abstract[Results directory contents]{collapsed}
 
 ```console
 results/
@@ -532,10 +528,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>Content of results/cowpy-guten_tag.txt</summary>
+:::example[Content of results/cowpy-guten_tag.txt]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -554,7 +549,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 This approach works, but has a limitation: we had to split the channel into two separate sub-channels.
 If we wanted to pass more fields to the process, we'd need to split them out into more sub-channels.
@@ -704,8 +699,7 @@ Outputs:
 
 The output is the same seven `cowpy-*.txt` files as before, now produced with a simpler call to `COWPY`.
 
-<details class="abstract">
-<summary>Results directory contents</summary>
+:::abstract[Results directory contents]{collapsed}
 
 ```console
 results/
@@ -718,10 +712,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>Content of results/cowpy-guten_tag.txt</summary>
+:::example[Content of results/cowpy-guten_tag.txt]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -740,7 +733,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 This is a slight improvement over the `multiMap` approach.
 But we still had to unpack the original Groovy map to create the input tuple, and there's a tight coupling between the process and the datasheet: the `COWPY` input definition now references the column names `id`, `character`, and `recording` directly.
@@ -958,8 +951,7 @@ Outputs:
 
 The results directory now contains the ASCII art files.
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 results/
@@ -972,10 +964,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>Content of results/cowpy-guten_tag.txt</summary>
+:::example[Content of results/cowpy-guten_tag.txt]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -994,7 +985,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 The process now receives all metadata as a bundle via `meta`, uses what it needs (`meta.character`), and ignores the rest.
 
@@ -1180,8 +1171,7 @@ That code essentially creates a temporary map with a single key-value pair conta
 
 For a more detailed explanation, see the box below.
 
-<details class="info">
-<summary>Creation of the new meta map using the `+` operator</summary>
+:::info[Creation of the new meta map using the `+` operator]{collapsed}
 
 **First, you need to know that we can merge the contents of two maps using the Groovy operator `+`.**
 
@@ -1268,7 +1258,7 @@ This should make it more clear that we're simply leaving the `file` in its origi
 
 **And this brings us back to the `tuple val(meta), path(file)` channel structure!**
 
-</details>
+:::
 
 #### 2.2.2. Run the workflow
 
@@ -1612,8 +1602,7 @@ sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 The `character` key is created for all entries when the datasheet is parsed, but `meta.character` for `sampleA` will be an empty string.
 When Nextflow substitutes `${meta.character}{:nextflow}` into the command, the `COWPY` tool receives an empty argument for `-c` and fails:
 
-<details class="failure">
-<summary>Command output</summary>
+:::failure[Command output]{collapsed}
 
 ```console {7,12,17,29}
  N E X T F L O W   ~  version 26.04.4
@@ -1657,7 +1646,7 @@ Tip: you can try to figure out what's wrong by changing to the process work dir 
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 The error message (`expected one argument`) points to the empty `-c` flag.
 Checking the work directory's `.command.sh` file confirms the command was run with an empty value.
@@ -1676,8 +1665,7 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 Our `map` operation explicitly writes `character: row.character{:nextflow}`, so the `character` key is still created in the meta map, but accessing a column that doesn't exist on the parsed row returns `null`, so its value becomes `null`.
 When the process script evaluates `${meta.character}{:nextflow}`, Nextflow literally substitutes the string `null` into the command:
 
-<details class="failure">
-<summary>Command output</summary>
+:::failure[Command output]{collapsed}
 
 ```console {7,12,17}
  N E X T F L O W   ~  version 26.04.4
@@ -1731,7 +1719,7 @@ Tip: you can replicate the issue by changing to the process work dir and enterin
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 The `cowpy -c null` in the executed command is the diagnostic clue.
 

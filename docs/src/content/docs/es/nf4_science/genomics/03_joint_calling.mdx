@@ -8,8 +8,7 @@ description: Anteriormente, construiste un pipeline de llamado de variantes por 
 Anteriormente, construiste un pipeline de llamado de variantes por muestra que procesaba los datos de cada muestra de forma independiente.
 Ahora vamos a extenderlo para implementar el llamado de variantes conjunto, como se describe en la [Parte 1](01_method.mdx) (caso de uso multi-muestra).
 
-<details class="info">
-<summary>Cómo comenzar desde esta sección</summary>
+:::info[Cómo comenzar desde esta sección]{collapsed}
 
 Esta sección del curso asume que has completado la [Parte 1: Descripción del método](./01_method.mdx), la [Parte 2: Llamado de variantes por muestra](./02_per_sample_variant_calling.mdx) y tienes un pipeline `genomics.nf` funcional.
 
@@ -29,7 +28,7 @@ Puedes probar que se ejecuta exitosamente ejecutando el siguiente comando:
 nextflow run genomics.nf -profile test
 ```
 
-</details>
+:::
 
 ## Asignación
 
@@ -237,8 +236,7 @@ Outputs:
 
 La salida de Nextflow se ve igual que antes, pero los archivos `.g.vcf` y sus archivos de índice ahora están organizados en subdirectorios.
 
-<details class="abstract">
-<summary>Contenido del directorio (enlaces simbólicos acortados)</summary>
+:::abstract[Contenido del directorio (enlaces simbólicos acortados)]{collapsed}
 
 ```console
 results/
@@ -258,7 +256,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Si abres uno de los archivos GVCF y lo revisas, puedes verificar que GATK HaplotypeCaller produjo archivos GVCF como se solicitó.
 
@@ -703,8 +701,7 @@ Outputs:
 Los primeros dos pasos están en caché de la ejecución anterior, y el nuevo paso `GATK_JOINTGENOTYPING` se ejecuta una vez en las entradas recolectadas de las tres muestras.
 El archivo de salida final, `family_trio.joint.vcf` (y su índice), están en el directorio de resultados.
 
-<details class="abstract">
-<summary>Contenido del directorio (enlaces simbólicos acortados)</summary>
+:::abstract[Contenido del directorio (enlaces simbólicos acortados)]{collapsed}
 
 ```console
 results/
@@ -726,7 +723,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Si abres el archivo VCF conjunto, puedes verificar que el workflow produjo los llamados de variantes esperados.
 

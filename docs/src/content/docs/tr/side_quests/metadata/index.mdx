@@ -69,8 +69,7 @@ Editör, proje dizinine odaklanmış şekilde açılır.
 
 Bir ana iş akışı dosyası ve bir veri sayfası ile birkaç veri dosyası içeren bir `data` dizini bulacaksınız.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 .
@@ -87,7 +86,7 @@ Bir ana iş akışı dosyası ve bir veri sayfası ile birkaç veri dosyası iç
 └── nextflow.config
 ```
 
-</details>
+:::
 
 `main.nf` dosyasındaki iş akışı, kademeli olarak tam işlevli bir iş akışına dönüştüreceğiniz bir taslaktır.
 
@@ -112,8 +111,7 @@ Her veri dosyası, beş dilden birinde selamlama metni içerir (fr: Fransızca, 
 
 Her karakterin kayıt dosyasındaki selamlamayı söylediği ASCII sanatını oluşturmak için [`COWPY`](https://github.com/jeffbuttars/cowpy) adlı bir araç kullanacağız.
 
-<details class="info">
-<summary>`COWPY` ne yapar?</summary>
+:::info[`COWPY` ne yapar?]{collapsed}
 
 `COWPY`, rastgele metin girdilerini eğlenceli bir şekilde görüntülemek için ASCII sanatı üreten bir komut satırı aracıdır.
 Tony Monroe'nun klasik [cowsay](https://en.wikipedia.org/wiki/Cowsay) aracının Python uygulamasıdır.
@@ -154,7 +152,7 @@ __________________
     \___)=(___/
 ```
 
-</details>
+:::
 
 Bunun yanı sıra, her karakterin hangi dili konuştuğunu belirlemek ve pipeline çıktılarını buna göre düzenlemek için `langid` adlı bir dil analizi aracı kullanacağız.
 
@@ -248,8 +246,7 @@ Her map girişi, veri sayfamızdaki bir sütuna karşılık gelir:
 Bu, her satırdan belirli alanlara erişmeyi kolaylaştırır.
 Örneğin, dosya kimliğine `id` ile veya txt dosya yoluna `recording` ile erişebiliriz.
 
-<details class="info">
-<summary>(İsteğe bağlı) Groovy map'leri hakkında daha fazla bilgi</summary>
+:::info[(İsteğe bağlı) Groovy map'leri hakkında daha fazla bilgi]{collapsed}
 
 Nextflow'un üzerine inşa edildiği programlama dili olan Groovy'de, map; Python'daki sözlükler, JavaScript'teki nesneler veya Ruby'deki hash'ler gibi bir anahtar-değer veri yapısıdır.
 
@@ -287,7 +284,7 @@ id: sampleA
 character: squirrel
 ```
 
-</details>
+:::
 
 ### 1.2. `map` ile belirli bir alanı seçme
 
@@ -519,8 +516,7 @@ Outputs:
 
 Gördüğünüz gibi, `COWPY` her dosya için doğru karakteri kullanarak çalıştı.
 
-<details class="abstract">
-<summary>Sonuçlar dizini içeriği</summary>
+:::abstract[Sonuçlar dizini içeriği]{collapsed}
 
 ```console
 results/
@@ -533,10 +529,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>results/cowpy-guten_tag.txt dosyasının içeriği</summary>
+:::example[results/cowpy-guten_tag.txt dosyasının içeriği]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -555,7 +550,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 Bu yaklaşım işe yarıyor; ancak bir sınırlaması var: kanalı iki ayrı alt kanala bölmek zorunda kaldık.
 Sürece daha fazla alan geçirmek isteseydik, bunları daha fazla alt kanala bölmemiz gerekirdi.
@@ -705,8 +700,7 @@ Outputs:
 
 Çıktı, öncekiyle aynı yedi `cowpy-*.txt` dosyasıdır; artık `COWPY`'ye daha basit bir çağrıyla üretilmektedir.
 
-<details class="abstract">
-<summary>Sonuçlar dizini içeriği</summary>
+:::abstract[Sonuçlar dizini içeriği]{collapsed}
 
 ```console
 results/
@@ -719,10 +713,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>results/cowpy-guten_tag.txt dosyasının içeriği</summary>
+:::example[results/cowpy-guten_tag.txt dosyasının içeriği]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -741,7 +734,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 Bu, `multiMap` yaklaşımına göre küçük bir iyileştirmedir.
 Ancak girdi demetini oluşturmak için orijinal Groovy map'ini hâlâ açmak zorunda kaldık; üstelik süreç ile veri sayfası arasında sıkı bir bağlantı var: `COWPY` girdi tanımı artık `id`, `character` ve `recording` sütun adlarına doğrudan başvuruyor.
@@ -959,8 +952,7 @@ Outputs:
 
 Sonuçlar dizini artık ASCII sanatı dosyalarını içeriyor.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 results/
@@ -973,10 +965,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>results/cowpy-guten_tag.txt dosyasının içeriği</summary>
+:::example[results/cowpy-guten_tag.txt dosyasının içeriği]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -995,7 +986,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 Süreç artık tüm metadata'yı `meta` aracılığıyla bir paket olarak alıyor, ihtiyaç duyduğunu (`meta.character`) kullanıyor ve geri kalanını yok sayıyor.
 
@@ -1181,8 +1172,7 @@ Bu kod, dil kodunu içeren tek anahtar-değer çiftinden oluşan geçici bir map
 
 Daha ayrıntılı bir açıklama için aşağıdaki kutuya bakın.
 
-<details class="info">
-<summary>`+` operatörü kullanılarak yeni meta map'in oluşturulması</summary>
+:::info[`+` operatörü kullanılarak yeni meta map'in oluşturulması]{collapsed}
 
 **Öncelikle, iki map'in içeriğini Groovy `+` operatörünü kullanarak birleştirebileceğimizi bilmeniz gerekiyor.**
 
@@ -1269,7 +1259,7 @@ Bu, `file`'ı demetteki ikinci konumunda bıraktığımızı daha net göstermel
 
 **Ve bu bizi `tuple val(meta), path(file)` kanal yapısına geri getiriyor!**
 
-</details>
+:::
 
 #### 2.2.2. İş akışını çalıştırın
 
@@ -1613,8 +1603,7 @@ sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 Veri sayfası ayrıştırıldığında tüm girişler için `character` anahtarı oluşturulur; ancak `sampleA` için `meta.character` boş bir dize olacaktır.
 Nextflow `${meta.character}{:nextflow}` ifadesini komuta yerleştirdiğinde, `COWPY` aracı `-c` için boş bir argüman alır ve hata verir:
 
-<details class="failure">
-<summary>Komut çıktısı</summary>
+:::failure[Komut çıktısı]{collapsed}
 
 ```console {7,12,17,29}
  N E X T F L O W   ~  version 26.04.4
@@ -1658,7 +1647,7 @@ Tip: you can try to figure out what's wrong by changing to the process work dir 
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 Hata mesajı (`expected one argument`), boş `-c` bayrağına işaret ediyor.
 Work dizinindeki `.command.sh` dosyasını incelemek, komutun boş bir değerle çalıştırıldığını doğrular.
@@ -1677,8 +1666,7 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 `map` işlemi `character: row.character{:nextflow}` ifadesini açıkça yazar; dolayısıyla `character` anahtarı meta map'te yine de oluşturulur. Ancak ayrıştırılan satırda bulunmayan bir sütuna erişmek `null` döndürür ve bu nedenle değeri `null` olur.
 Süreç betiği `${meta.character}{:nextflow}` ifadesini değerlendirdiğinde, Nextflow komuta tam anlamıyla `null` dizesini yerleştirir:
 
-<details class="failure">
-<summary>Komut çıktısı</summary>
+:::failure[Komut çıktısı]{collapsed}
 
 ```console {7,12,17}
  N E X T F L O W   ~  version 26.04.4
@@ -1732,7 +1720,7 @@ Tip: you can replicate the issue by changing to the process work dir and enterin
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 Çalıştırılan komuttaki `cowpy -c null` ifadesi, tanısal ipucudur.
 

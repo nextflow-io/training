@@ -126,8 +126,7 @@ Seja desenvolvendo um pipeline ou executando-o em produção, em algum momento v
 
 Toda vez que você inicia um fluxo de trabalho Nextflow, uma linha é gravada em um arquivo de log chamado `history`, dentro de um diretório oculto chamado `.nextflow` no diretório de trabalho atual.
 
-<details class="abstract">
-<summary>Conteúdo do arquivo</summary>
+:::abstract[Conteúdo do arquivo]{collapsed}
 
 ```txt title=".nextflow/history" showLineNumbers
 2026-09-13 01:47:58	2.8s	determined_ramanujan	OK	ce74f81996b8ce999853fdbb25ba7969	03078950-5011-414f-992b-8fe1bd219ac2	nextflow run main.nf --input data/greetings.csv --character turkey
@@ -136,7 +135,7 @@ Toda vez que você inicia um fluxo de trabalho Nextflow, uma linha é gravada em
 2026-09-13 01:48:14	1.5s	deadly_lamport	OK	ce74f81996b8ce999853fdbb25ba7969	517ccc29-9db7-4d8d-8ea0-c8db6e9ac653	nextflow run main.nf --input data/greetings.csv --character stegosaurus -resume
 ```
 
-</details>
+:::
 
 Cada linha fornece o timestamp, duração, nome da execução, status, ID de revisão, ID de sessão e linha de comando completa de uma execução iniciada neste diretório.
 

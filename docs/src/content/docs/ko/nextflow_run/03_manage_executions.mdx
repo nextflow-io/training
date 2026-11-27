@@ -126,8 +126,7 @@ Nextflow는 타임라인을 `timeline-<timestamp>.html`이라는 이름의 파�
 
 Nextflow 워크플로우를 실행할 때마다 현재 작업 디렉토리의 `.nextflow`라는 숨김 디렉토리 아래에 있는 `history`라는 로그 파일에 한 줄씩 기록됩니다.
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```txt title=".nextflow/history" showLineNumbers
 2026-09-13 01:47:58	2.8s	determined_ramanujan	OK	ce74f81996b8ce999853fdbb25ba7969	03078950-5011-414f-992b-8fe1bd219ac2	nextflow run main.nf --input data/greetings.csv --character turkey
@@ -136,7 +135,7 @@ Nextflow 워크플로우를 실행할 때마다 현재 작업 디렉토리의 `.
 2026-09-13 01:48:14	1.5s	deadly_lamport	OK	ce74f81996b8ce999853fdbb25ba7969	517ccc29-9db7-4d8d-8ea0-c8db6e9ac653	nextflow run main.nf --input data/greetings.csv --character stegosaurus -resume
 ```
 
-</details>
+:::
 
 각 줄에는 타임스탬프, 실행 시간, 실행 이름, 상태, 리비전 ID, 세션 ID, 그리고 해당 디렉토리에서 실행된 전체 명령이 포함됩니다.
 

@@ -8,8 +8,7 @@ description: Anteriorment, vau construir un pipeline de crida de variants per mo
 Anteriorment, vau construir un pipeline de crida de variants per mostra que processava les dades de cada mostra de manera independent.
 Ara l'ampliarem per implementar la crida conjunta de variants, tal com es descriu a la [Part 1](01_method.mdx) (cas d'ús multi-mostra).
 
-<details class="info">
-<summary>Com començar des d'aquesta secció</summary>
+:::info[Com començar des d'aquesta secció]{collapsed}
 
 Aquesta secció del curs assumeix que heu completat la [Part 1: Visió general del mètode](./01_method.mdx), la [Part 2: Crida de variants per mostra](./02_per_sample_variant_calling.mdx) i teniu un pipeline `genomics.nf` funcional.
 
@@ -29,7 +28,7 @@ Podeu comprovar que s'executa correctament executant la comanda següent:
 nextflow run genomics.nf -profile test
 ```
 
-</details>
+:::
 
 ## Assignació
 
@@ -237,8 +236,7 @@ Outputs:
 
 La sortida de Nextflow sembla la mateixa que abans, però els fitxers `.g.vcf` i els seus fitxers d'índex ara estan organitzats en subdirectoris.
 
-<details class="abstract">
-<summary>Contingut del directori (enllaços simbòlics escurçats)</summary>
+:::abstract[Contingut del directori (enllaços simbòlics escurçats)]{collapsed}
 
 ```console
 results/
@@ -258,7 +256,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Si obriu un dels fitxers GVCF i el desplaceu, podeu verificar que GATK HaplotypeCaller ha produït fitxers GVCF tal com es va sol·licitar.
 
@@ -703,8 +701,7 @@ Outputs:
 Els dos primers passos estan en memòria cau de l'execució anterior, i el nou pas `GATK_JOINTGENOTYPING` s'executa una vegada sobre les entrades recollides de totes tres mostres.
 El fitxer de sortida final, `family_trio.joint.vcf` (i el seu índex), estan al directori de resultats.
 
-<details class="abstract">
-<summary>Contingut del directori (enllaços simbòlics escurçats)</summary>
+:::abstract[Contingut del directori (enllaços simbòlics escurçats)]{collapsed}
 
 ```console
 results/
@@ -726,7 +723,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Si obriu el fitxer VCF conjunt, podeu verificar que el workflow ha produït les crides de variants esperades.
 

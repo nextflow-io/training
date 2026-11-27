@@ -31,8 +31,7 @@ Nextflow YouTube 채널에서 [전체 재생목록](https://youtube.com/playlist
 
 여기서는 [Docker](https://www.docker.com/get-started/)를 사용하여 이를 다루지만, Nextflow가 [여러 다른 컨테이너 기술](https://nextflow.io/docs/latest/container.html)도 지원한다는 점을 유의하십시오.
 
-<details class="info">
-<summary>이 섹션을 시작하는 방법</summary>
+:::info[이 섹션을 시작하는 방법]{collapsed}
 
 이 섹션은 [Hello Nextflow](./index.mdx) 과정의 파트 1-4를 완료하고 완전히 작동하는 파이프라인이 있다고 가정합니다.
 
@@ -42,7 +41,7 @@ Nextflow YouTube 채널에서 [전체 재생목록](https://youtube.com/playlist
 cp -r solutions/4-hello-modules/modules .
 ```
 
-</details>
+:::
 
 ---
 
@@ -104,8 +103,7 @@ Outputs:
 
 이전과 마찬가지로 `output` 블록에 지정된 디렉토리(`results/hello_containers/`)에서 출력 파일을 찾을 수 있습니다.
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console
 results/hello_containers/
@@ -119,7 +117,7 @@ results/hello_containers/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 이것이 정상적으로 작동했다면 컨테이너를 사용하는 방법을 배울 준비가 되었습니다.
 
@@ -253,14 +251,13 @@ docker run --rm -it 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a
 ls /
 ```
 
-<details class="abstract">
-<summary>명령 출력</summary>
+:::abstract[명령 출력]{collapsed}
 
 ```console
 bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 ```
 
-</details>
+:::
 
 `tree` 유틸리티가 이 컨테이너에서 사용할 수 없기 때문에 여기서 `tree` 대신 `ls`를 사용합니다.
 컨테이너 내부의 파일 시스템이 호스트 시스템의 파일 시스템과 다르다는 것을 알 수 있습니다.
@@ -832,8 +829,7 @@ Outputs:
 이번에는 정말로 작동합니다!
 평소와 같이 해당 results 디렉토리에서 워크플로우 출력을 찾을 수 있지만, 이번에는 보고서와 최종 출력만 최상위 수준에 있고 모든 중간 파일은 하위 디렉토리로 이동되어 약간 더 깔끔하게 정리되어 있습니다.
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console
 results/hello_containers/
@@ -849,12 +845,11 @@ results/hello_containers/
 └── batch-report.txt
 ```
 
-</details>
+:::
 
 최종 ASCII 아트 출력은 `results/hello_containers/` 디렉토리에 `cowpy-COLLECTED-batch-output.txt`라는 이름으로 있습니다.
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
 _________
@@ -885,7 +880,7 @@ _________
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 우리의 아름다운 칠면조가 원하는 대로 인사말을 말하고 있습니다.
 
@@ -899,8 +894,7 @@ _________
 
 해당 디렉토리에서 파이프라인을 실행하는 과정에서 Nextflow가 대신 실행한 모든 명령이 포함된 `.command.run` 파일을 찾을 수 있습니다.
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="work/98/656c6c90cce1667c094d880f4b6dcc/.command.run"
 #!/bin/bash
@@ -1056,7 +1050,7 @@ $NXF_ENTRY
 
 ```
 
-</details>
+:::
 
 이 파일에서 `nxf_launch`를 검색하면 다음과 같은 것을 볼 수 있습니다:
 

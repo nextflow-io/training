@@ -55,14 +55,13 @@ results
 
 Otwórz plik; jego zawartość powinna odpowiadać powitaniu, które podałeś w wierszu poleceń.
 
-<details>
-  <summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="results/output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 Świetnie, nasz workflow zrobił to, co powinien!
 
@@ -114,8 +113,7 @@ tree -a work
 
 Dokładne nazwy podkatalogów będą różne w Twoim systemie.
 
-<details>
-  <summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console title="work/"
 work
@@ -131,19 +129,18 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
 Powinieneś od razu rozpoznać plik `output.txt`, który jest w rzeczywistości oryginalnym wyjściem procesu `sayHello`, opublikowanym w katalogu `results`.
 Jeśli go otworzysz, znajdziesz ponownie powitanie `Hello World!`.
 
-<details>
-  <summary>Zawartość pliku output.txt</summary>
+:::abstract[Zawartość pliku output.txt]{collapsed}
 
 ```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 Co więc z tymi wszystkimi innymi plikami?
 
@@ -159,15 +156,14 @@ To są pliki pomocnicze i logi, które Nextflow zapisał jako część wykonania
 
 Plik `.command.sh` jest szczególnie przydatny, ponieważ pokazuje główne polecenie wykonane przez Nextflow'a, nie włączając całej księgowości i konfiguracji zadania/środowiska.
 
-<details>
-  <summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" showLineNumbers
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
-</details>
+:::
 
 :::tip[Wskazówka]
 Gdy coś pójdzie nie tak i musisz rozwiązać problem, może być przydatne sprawdzenie skryptu `command.sh`, aby zweryfikować dokładnie, jakie polecenie Nextflow skomponował na podstawie instrukcji workflow'u, interpolacji zmiennych i tak dalej.
@@ -200,8 +196,7 @@ _Celem tutaj nie jest zapamiętanie składni kodu Nextflow, ale zbudowanie podst
 
 Otwórzmy skrypt `hello-world.nf` w panelu edytora.
 
-<details>
-  <summary>Kod</summary>
+:::abstract[Kod]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
@@ -232,7 +227,7 @@ workflow {
 }
 ```
 
-</details>
+:::
 
 Skrypt Nextflow obejmuje dwa główne typy podstawowych komponentów: jeden lub więcej **procesów** oraz sam **workflow**.
 Każdy **proces** opisuje, jakie operacje powinien wykonać odpowiedni krok w pipeline'ie, natomiast **workflow** opisuje logikę przepływu danych łączącą poszczególne kroki.
@@ -247,8 +242,7 @@ Treść procesu musi zawierać blok skryptu, który określa polecenie do urucho
 
 Tutaj mamy **proces** o nazwie `sayHello`, który przyjmuje zmienną **wejściową** o nazwie `greeting` i zapisuje Swoje **wyjście** do pliku o nazwie `output.txt`.
 
-<details>
-  <summary>Kod</summary>
+:::abstract[Kod]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers startLineNumber=3
 /*
@@ -271,7 +265,7 @@ process sayHello {
 }
 ```
 
-</details>
+:::
 
 To bardzo minimalna definicja procesu, która zawiera tylko definicję `input`, definicję `output` oraz `script` do wykonania.
 

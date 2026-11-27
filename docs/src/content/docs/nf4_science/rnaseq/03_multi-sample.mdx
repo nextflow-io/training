@@ -8,8 +8,7 @@ Previously, you built a per-sample variant calling pipeline that processed each 
 In this part of the course, we're going to take our simple workflow to the next level by turning it into a powerful batch automation tool to handle arbitrary numbers of samples.
 And while we're at it, we're also going to update it to expect paired-end data, which is more common in newer studies.
 
-<details class="info">
-<summary>How to begin from this section</summary>
+:::info[How to begin from this section]{collapsed}
 
 This section of the course assumes you have completed [Part 1: Method Overview](./01_method.mdx), [Part 2: Single-sample implementation](./02_single-sample.mdx) and have a working `rnaseq.nf` pipeline with filled-in module files.
 
@@ -31,7 +30,7 @@ You can test that it runs successfully:
 nextflow run rnaseq.nf -profile test
 ```
 
-</details>
+:::
 
 ## Assignment
 
@@ -647,8 +646,7 @@ You can find the MultiQC outputs in the results directory.
 tree -L 2 -l results/multiqc
 ```
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 results/multiqc
@@ -683,7 +681,7 @@ results/multiqc
     └── multiqc_sources.txt
 ```
 
-</details>
+:::
 
 That last `all_single-end.html` file is the full aggregated report, conveniently packaged into one easy to browse HTML file.
 

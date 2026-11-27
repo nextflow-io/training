@@ -82,8 +82,7 @@ Le fichier `.command.sh` est particulièrement utile lors du débogage — il mo
 
 Comprendre le code n'est pas indispensable si vous souhaitez simplement exécuter des pipelines, mais si vous êtes curieux·se, cela vaut la peine d'y jeter un œil.
 
-<details class="optional">
-<summary>Cliquez pour explorer le code associé à cet exercice</summary>
+::::optional[Cliquez pour explorer le code associé à cet exercice]{collapsed}
 
 Ouvrons `1-hello.nf` et examinons ses principaux composants.
 
@@ -212,7 +211,7 @@ output {
 
 Chaque entrée nommée correspond à un label `publish:` dans le workflow et le fait correspondre à un sous-répertoire sous `results/`.
 
-</details>
+::::
 
 ### À retenir
 
@@ -361,8 +360,7 @@ La fonctionnalité `-resume` est particulièrement précieuse dans les longs pip
 
 Comprendre le code n'est pas indispensable si vous souhaitez simplement exécuter des pipelines, mais si vous êtes curieux·se, cela vaut la peine d'y jeter un œil.
 
-<details class="optional">
-<summary>Cliquez pour explorer le code associé à cet exercice</summary>
+:::optional[Cliquez pour explorer le code associé à cet exercice]{collapsed}
 
 Le changement clé dans `2-inputs.nf` se trouve dans la section `main:` du workflow :
 
@@ -385,7 +383,7 @@ Ce que vous voyez ici s'appelle un **canal** : une structure de file d'attente q
 Le résultat est un canal contenant `Hello`, `Bonjour` et `Hola`.
 Lorsqu'il est passé à `sayHello(greeting_ch)`, Nextflow appelle automatiquement le processus une fois par élément, en les exécutant en parallèle lorsque les ressources le permettent.
 
-</details>
+:::
 
 ### À retenir
 
@@ -421,8 +419,7 @@ nextflow run main.nf --input data/greetings.csv
 
 Le paramètre `character` est défini par défaut à `turkey` dans `nextflow.config`, donc l'art ASCII utilise une dinde sauf si vous le remplacez (essayez d'ajouter `--character tux`).
 
-<details class="success">
-<summary>Sortie de la commande</summary>
+:::success[Sortie de la commande]{collapsed}
 
 ```console {6,7,8,9}
 N E X T F L O W   ~  version 26.04.4
@@ -456,7 +453,7 @@ Outputs:
   cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
 ```
 
-</details>
+:::
 
 Quatre processus se sont exécutés, mais pas le même nombre de fois.
 `sayHello` et `convertToUpper` se sont chacun exécutés une fois par entrée (3 of 3) : chaque message de bienvenue doit être écrit et converti en majuscules individuellement.
@@ -488,8 +485,7 @@ Le répertoire de premier niveau est nommé d'après le paramètre `batch`, dont
 
 Consultez `cowpy-COLLECTED-batch-output.txt` pour le fichier d'art ASCII.
 
-<details class="abstract">
-<summary>Contenu du fichier</summary>
+:::abstract[Contenu du fichier]{collapsed}
 
 ```console title="results/batch/cowpy-COLLECTED-batch-output.txt"
  _________
@@ -520,7 +516,7 @@ Consultez `cowpy-COLLECTED-batch-output.txt` pour le fichier d'art ASCII.
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 Tout comme dans la section [2.1](#21-exécuter-le-workflow), chacune de ces 8 exécutions de tâches, réparties sur les quatre processus, dispose de son propre répertoire sous `work/`, complètement isolé des autres.
 `collectGreetings` illustre bien pourquoi cela est important : il dépend des sorties des trois tâches `convertToUpper`, qui résident dans trois répertoires de tâches différents. Nextflow crée donc des liens symboliques vers ces fichiers dans le propre répertoire de `collectGreetings`, plutôt que de lui faire lire directement depuis les répertoires de ses tâches en amont :
@@ -547,8 +543,7 @@ Nextflow prend également en charge Conda comme alternative aux conteneurs ; con
 
 Comprendre le code n'est pas indispensable si vous souhaitez simplement exécuter des pipelines, mais si vous êtes curieux·se, cela vaut la peine d'y jeter un œil.
 
-<details class="optional">
-<summary>Cliquez pour explorer le code associé à cet exercice</summary>
+:::optional[Cliquez pour explorer le code associé à cet exercice]{collapsed}
 
 ### Comment les données circulent d'une étape à l'autre
 
@@ -619,7 +614,7 @@ docker.enabled = true
 
 Cette seule ligne active Docker pour tout processus du pipeline qui dispose d'un conteneur spécifié.
 
-</details>
+:::
 
 ### À retenir
 

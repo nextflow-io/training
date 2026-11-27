@@ -402,8 +402,7 @@ Outputs:
     - greetings/Alice-output.txt
 ```
 
-<details class="abstract">
-<summary>`results/` dizinine eklenen yeni içerik</summary>
+:::abstract[`results/` dizinine eklenen yeni içerik]{collapsed}
 
 ```console
 results/
@@ -416,16 +415,15 @@ results/
 1.1. bölümündeki bağımsız çalıştırmadan gelen altı dosya (`Alice-output.txt`, `timestamped_Alice-output.txt` vb.) bu yeni `greetings/` alt dizininin yanında `results/` içinde durmaya devam etmektedir.
 Bu beklenen bir durumdur: bu derste hiçbir şey onları silmez ve 2.1. bölümü bunları doğrudan girdi olarak okur.
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/greetings/Alice-output.txt"
 Hello, Alice!
 ```
 
-</details>
+:::
 
 Selamlama dosyaları `results/greetings/` dizinine yayımlanır. Ana iş akışı `GREETING_WORKFLOW`'u çağırır ve çıktısını doğrudan `publish:` bölümüne bağlar.
 
@@ -670,8 +668,7 @@ Outputs:
     - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
 ```
 
-<details class="abstract">
-<summary>`results/` dizinine eklenen yeni içerik</summary>
+:::abstract[`results/` dizinine eklenen yeni içerik]{collapsed}
 
 ```console
 results/
@@ -692,16 +689,15 @@ results/
 `results/` kök dizini aynı zamanda 1.1. ve 2.1. bölümlerindeki bağımsız çalıştırmalardan kalan dosyaları (`Alice-output.txt`, `timestamped_Alice-output.txt`, `UPPER-timestamped_Alice-output.txt` vb.) içermeye devam etmektedir.
 Bu beklenen bir durumdur: bu ders hiçbir zaman bunları temizlemenizi istemez.
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
 !ECILA ,OLLEH ]54:84:81 31-90-6202[
 ```
 
-</details>
+:::
 
 Pipeline uçtan uca çalışıyor: selamlama büyük harfe dönüştürülmüş ve tersine çevrilmiştir.
 

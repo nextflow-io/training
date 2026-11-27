@@ -102,8 +102,7 @@ code .
 
 테스트할 워크플로우는 [Hello Workflow](../../hello_nextflow/03_hello_workflow.mdx)에서 구축한 Hello 워크플로우의 일부입니다.
 
-<details class="example">
-<summary>Hello Nextflow 워크플로우는 무엇을 하나요?</summary>
+:::example[Hello Nextflow 워크플로우는 무엇을 하나요?]{collapsed}
 
 [Hello Nextflow](../../hello_nextflow/index.mdx) 교육을 수행하지 않은 경우, 이 간단한 워크플로우가 무엇을 하는지 간략히 설명합니다.
 
@@ -120,13 +119,12 @@ code .
 
 이 사이드 퀘스트에서는 처음 두 process만 포함하는 Hello 워크플로우의 중간 형태를 사용합니다. {/* TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 */}
 
-</details>
+:::
 
 작업할 부분은 `sayHello`와 `convertToUpper` 두 process로 구성됩니다.
 전체 워크플로우 코드는 아래에서 확인할 수 있습니다.
 
-<details class="example">
-<summary>워크플로우 코드</summary>
+:::example[워크플로우 코드]{collapsed}
 
 ```nextflow title="main.nf"
 #!/usr/bin/env nextflow
@@ -194,7 +192,7 @@ output {
 }
 ```
 
-</details>
+:::
 
 #### 워크플로우 실행
 

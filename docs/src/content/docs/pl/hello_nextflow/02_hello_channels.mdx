@@ -29,12 +29,11 @@ Do tego służą [**kanały**](https://nextflow.io/docs/latest/channel.html) Nex
 W tej części kursu nauczysz się, jak używać kanału do obsługi wielu wejść z różnych źródeł.
 Nauczysz się również używać [**operatorów**](https://nextflow.io/docs/latest/reference/operator.html) do transformowania zawartości kanałów w razie potrzeby.
 
-<details class="info">
-<summary>Jak zacząć od tej sekcji</summary>
+:::info[Jak zacząć od tej sekcji]{collapsed}
 
 Ta sekcja kursu zakłada, że ukończyłeś Część 1 kursu [Hello Nextflow](./index.mdx), ale jeśli czujesz się komfortowo z podstawami omówionymi w tamtej sekcji, możesz zacząć od tego miejsca bez robienia czegokolwiek specjalnego.
 
-</details>
+:::
 
 ---
 
@@ -73,8 +72,7 @@ Outputs:
 
 Jak poprzednio, plik wyjściowy o nazwie `output.txt` znajdziesz w katalogu `results/hello_channels` (jak określono w bloku `output` skryptu workflow'u, pokazanym powyżej).
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console {2-3} title="results/hello_channels"
 results
@@ -85,16 +83,15 @@ results
 └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hello Channels!
 ```
 
-</details>
+:::
 
 Jeśli to zadziałało, jesteś gotowy do nauki o kanałach.
 
@@ -225,14 +222,13 @@ Outputs:
 Jeśli wprowadziłeś obie edycje poprawnie, powinieneś uzyskać pomyślne wykonanie.
 Możesz sprawdzić katalog wyników, aby upewnić się, że wynik jest nadal taki sam jak poprzednio.
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hello Channels!
 ```
 
-</details>
+:::
 
 Zwiększyliśmy więc elastyczność workflow'u, osiągając ten sam końcowy wynik.
 Może się wydawać, że piszemy więcej kodu bez wymiernej korzyści, ale wartość stanie się jasna, gdy tylko zaczniemy obsługiwać więcej wejść.
@@ -382,8 +378,7 @@ Monitor wykonywania pokazuje, że `3 of 3` wywołania zostały wykonane dla proc
 
 Jednak w katalogu wyników nadal jest tylko jedno wyjście:
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console {3} title="results/hello_channels"
 results
@@ -394,16 +389,15 @@ results
 └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hola
 ```
 
-</details>
+:::
 
 Powinieneś zobaczyć tam jedno z trzech pozdrowień, choć to, które otrzymałeś, może różnić się od pokazanego tutaj.
 Czy potrafisz pomyśleć, dlaczego tak może być?
@@ -415,8 +409,7 @@ _Na diagramie kanał jest reprezentowany na zielono, a kolejność elementów je
 Patrząc wstecz na monitor wykonywania, dał nam tylko jedną ścieżkę podkatalogu (`f4/c9962c`).
 Zajrzyjmy tam.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console {9}
 work/f4/c9962ce91ef87480babcb86b2b9042/
@@ -430,16 +423,15 @@ work/f4/c9962ce91ef87480babcb86b2b9042/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="work/f4/c9962ce91ef87480babcb86b2b9042/output.txt"
 Hello
 ```
 
-</details>
+:::
 
 To nawet nie jest to samo pozdrowienie, które mamy w katalogu wyników! Co się dzieje?
 
@@ -488,8 +480,7 @@ W tym rozwiniętym trybie raportuje tylko, że zostały przesłane.
 
 W każdym razie, teraz gdy mamy podkatalogi każdego wywołania procesu, możemy szukać ich logów i wyjść.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 work/23/871c7ec3642a898ecd5e6090d21300/
@@ -527,10 +518,9 @@ work/f4/ea10a680d5687596d3eaa3fcf69272/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```txt title="work/23/871c7ec3642a898ecd5e6090d21300/output.txt"
 Bonjour
@@ -544,7 +534,7 @@ Hello
 Hola
 ```
 
-</details>
+:::
 
 To pokazuje, że wszystkie trzy procesy uruchomiły się pomyślnie (juhu).
 
@@ -646,8 +636,7 @@ Outputs:
 Wracając do widoku podsumowania, wyjście jest ponownie podsumowane w jednej linii.
 Spójrz na katalog `results`, aby zobaczyć, czy wszystkie wyjściowe pozdrowienia tam są.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 results/hello_channels/
@@ -657,10 +646,9 @@ results/hello_channels/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="Bonjour-output.txt"
 Bonjour
@@ -674,7 +662,7 @@ Hello
 Hola
 ```
 
-</details>
+:::
 
 Sukces! Teraz możemy dodawać tyle pozdrowień, ile chcemy, bez martwienia się o nadpisywanie plików wyjściowych.
 

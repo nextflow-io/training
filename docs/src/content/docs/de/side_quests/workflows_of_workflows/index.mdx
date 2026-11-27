@@ -404,8 +404,7 @@ Outputs:
     - greetings/Alice-output.txt
 ```
 
-<details class="abstract">
-<summary>Neuer Inhalt unter `results/`</summary>
+:::abstract[Neuer Inhalt unter `results/`]{collapsed}
 
 ```console
 results/
@@ -418,16 +417,15 @@ results/
 Die sechs Dateien aus dem eigenständigen Lauf in Abschnitt 1.1 (`Alice-output.txt`, `timestamped_Alice-output.txt` usw.) liegen weiterhin in `results/` neben dem neuen `greetings/`-Unterverzeichnis.
 Das ist zu erwarten: In dieser Lektion werden sie nicht gelöscht, und Abschnitt 2.1 liest sie direkt als Eingabe.
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Dateiinhalt</summary>
+:::abstract[Dateiinhalt]{collapsed}
 
 ```console title="results/greetings/Alice-output.txt"
 Hello, Alice!
 ```
 
-</details>
+:::
 
 Die Begrüßungsdateien werden in `results/greetings/` veröffentlicht.
 Der Haupt-Workflow ruft `GREETING_WORKFLOW` auf und leitet seine Ausgabe direkt an den `publish:`-Abschnitt weiter.
@@ -674,8 +672,7 @@ Outputs:
     - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
 ```
 
-<details class="abstract">
-<summary>Neuer Inhalt unter `results/`</summary>
+:::abstract[Neuer Inhalt unter `results/`]{collapsed}
 
 ```console
 results/
@@ -696,16 +693,15 @@ results/
 Im Stammverzeichnis von `results/` liegen außerdem noch die übrig gebliebenen Dateien aus den eigenständigen Läufen in den Abschnitten 1.1 und 2.1 (`Alice-output.txt`, `timestamped_Alice-output.txt`, `UPPER-timestamped_Alice-output.txt` usw.).
 Das ist zu erwarten: In dieser Lektion wird nicht angewiesen, sie zu löschen.
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Dateiinhalt</summary>
+:::abstract[Dateiinhalt]{collapsed}
 
 ```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
 !ECILA ,OLLEH ]54:84:81 31-90-6202[
 ```
 
-</details>
+:::
 
 Die Pipeline funktioniert von Anfang bis Ende: Die Begrüßung wurde in Großbuchstaben umgewandelt und umgekehrt.
 

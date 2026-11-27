@@ -102,34 +102,30 @@ Try several keywords, since a pipeline's name does not always reflect everything
 Shortlist up to two candidates.
 If you haven't found a candidate after about five minutes, open the hint for your scenario.
 
-<details class="tip">
-<summary>Hint: Structural variants in an unsolved rare disease trio</summary>
+:::tip[Hint: Structural variants in an unsolved rare disease trio]{collapsed}
 
 Compare [nf-core/raredisease](https://nf-co.re/raredisease) and [nf-core/longraredisease](https://nf-co.re/longraredisease).
 Both address rare disease; which one fits your data?
 
-</details>
+:::
 
-<details class="tip">
-<summary>Hint: Differential expression in bulk RNA-seq</summary>
+:::tip[Hint: Differential expression in bulk RNA-seq]{collapsed}
 
 Look at [nf-core/rnaseq](https://nf-co.re/rnaseq) and [nf-core/differentialabundance](https://nf-co.re/differentialabundance).
 
-</details>
+:::
 
-<details class="tip">
-<summary>Hint: Single-cell RNA-seq of immune cells</summary>
+:::tip[Hint: Single-cell RNA-seq of immune cells]{collapsed}
 
 Look at [nf-core/scrnaseq](https://nf-co.re/scrnaseq).
 
-</details>
+:::
 
-<details class="tip">
-<summary>Hint: DNA methylation at imprinted loci</summary>
+:::tip[Hint: DNA methylation at imprinted loci]{collapsed}
 
 Look at [nf-core/methylseq](https://nf-co.re/methylseq).
 
-</details>
+:::
 
 ### 2.2. Check the pipeline status
 
@@ -167,14 +163,13 @@ The results are organized in the same way as when you run the pipeline yourself:
 Some pipelines run several test configurations and organize their results in one subdirectory per configuration, for example per aligner in `nf-core/scrnaseq`.
 For some releases, only the `pipeline_info/` directory is published; in that case, select an earlier release from the version menu, or rely on the output documentation.
 
-<details class="tip">
-<summary>Viewing runs on Seqera Platform</summary>
+:::tip[Viewing runs on Seqera Platform]{collapsed}
 
 The Community Showcase workspace on [Seqera Platform](https://cloud.seqera.io) contains completed runs of several nf-core pipelines, including `nf-core/rnaseq` and `nf-core/scrnaseq`.
 A run page shows the parameters, the status and resource usage of every task, and the reports the pipeline produced.
 Viewing it requires a free Seqera account; see [Scale with Seqera](../seqera_scale/index.mdx).
 
-</details>
+:::
 
 ### 3.2. Inputs
 
@@ -235,8 +230,7 @@ If you're working in a group, choose one person to present the card in one minut
 Compare your conclusions with the worked answer for your scenario.
 There is room for judgment, so a different answer with good reasons is not necessarily wrong.
 
-<details class="solution">
-<summary>Structural variants in an unsolved rare disease trio</summary>
+:::solution[Structural variants in an unsolved rare disease trio]{collapsed}
 
 **Pipeline chosen**: `nf-core/longraredisease`.
 
@@ -255,10 +249,9 @@ The published test results cover one chromosome of a single sample, and do not i
 **Compute concern**: the published execution report comes from that small test, so it greatly understates the resources a trio of whole genomes requires.
 Plan for read alignment and variant calling on whole genomes to dominate the run.
 
-</details>
+:::
 
-<details class="solution">
-<summary>Differential expression in bulk RNA-seq</summary>
+:::solution[Differential expression in bulk RNA-seq]{collapsed}
 
 **Pipelines chosen**: `nf-core/rnaseq` followed by `nf-core/differentialabundance`.
 
@@ -273,10 +266,9 @@ The DESeq2 step it runs is a QC step (sample PCA and clustering), not a differen
 
 **Compute concern**: alignment and quantification dominate the run time and memory; differential analysis on a count matrix is light.
 
-</details>
+:::
 
-<details class="solution">
-<summary>Single-cell RNA-seq of immune cells</summary>
+:::solution[Single-cell RNA-seq of immune cells]{collapsed}
 
 **Pipeline chosen**: `nf-core/scrnaseq`, with a caveat.
 
@@ -290,10 +282,9 @@ Until then, the group would do the downstream analysis interactively, for exampl
 
 **Compute concern**: index building and alignment are memory-intensive for the human genome.
 
-</details>
+:::
 
-<details class="solution">
-<summary>DNA methylation at imprinted loci</summary>
+:::solution[DNA methylation at imprinted loci]{collapsed}
 
 **Pipeline chosen**: `nf-core/methylseq`.
 
@@ -307,7 +298,7 @@ The scenario only asks for methylation levels per sample, so this is sufficient 
 
 **Compute concern**: aligning whole-genome bisulfite data is slow and memory-intensive; the alignment step dominates the run.
 
-</details>
+:::
 
 ### Takeaway {#takeaway_3}
 

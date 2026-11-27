@@ -205,8 +205,7 @@ class GreetingExtensionTest extends Specification {
 make test
 ```
 
-<details class="example">
-<summary>Test çıktısı</summary>
+:::example[Test çıktısı]{collapsed}
 
 ```console
 BUILD SUCCESSFUL in 5s
@@ -217,17 +216,15 @@ BUILD SUCCESSFUL in 5s
 "BUILD SUCCESSFUL" mesajı her şeyin çalıştığı anlamına gelir.
 Herhangi bir test başarısız olursa ayrıntılı hata mesajları göreceksiniz.
 
-</details>
+:::
 
-<details class="exercise">
-<summary>Sınır durumu testi ekleyin</summary>
+::::exercise[Sınır durumu testi ekleyin]{collapsed}
 
 `reverseGreeting`'in boş bir dizeyi işleyip işlemediğini kontrol eden bir test ekleyin.
 `reverseGreeting('')` ne döndürmelidir?
 Testi ekleyin, `make test` komutunu çalıştırın ve testin geçtiğini doğrulayın.
 
-<details class="solution">
-<summary>Çözüm</summary>
+:::solution[Çözüm]{collapsed}
 
 `GreetingExtensionTest.groovy` dosyasına şu test metodunu ekleyin:
 
@@ -243,9 +240,9 @@ def 'should handle empty string'() {
 
 Boş bir dize tersine çevrildiğinde yine boş bir dize olur.
 
-</details>
+:::
 
-</details>
+::::
 
 ---
 

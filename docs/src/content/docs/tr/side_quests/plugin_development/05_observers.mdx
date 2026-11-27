@@ -260,13 +260,12 @@ Pipeline complete! 👋
 Observer çalışıyor.
 Bir görev her tamamlandığında, Nextflow `onProcessComplete`'i çağırır ve bizim uygulamamız bir mesaj yazdırır.
 
-<details class="exercise">
-<summary>Mesajı özelleştirin</summary>
+:::exercise[Mesajı özelleştirin]{collapsed}
 
 `onProcessComplete` içindeki mesajı kendi seçtiğiniz bir şeyle değiştirmeyi deneyin, yeniden derleyin ve çalıştırın.
 Bu, observer'lar için tam düzenleme-derleme-çalıştırma döngüsünün çalıştığını doğrular.
 
-</details>
+:::
 
 ### 2.4. Sayma mantığı ekleme
 
@@ -324,8 +323,7 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-<details class="example">
-<summary>Çıktı</summary>
+:::example[Çıktı]{collapsed}
 
 ```console
 N E X T F L O W  ~  version 26.04.4
@@ -357,7 +355,7 @@ Pipeline complete! 👋
 
 Sayaç mesajları, görev gönderimleriyle iç içe geçmiştir; çünkü observer'lar görevler tamamlandıkça çalışır.
 
-</details>
+:::
 
 ---
 

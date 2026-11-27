@@ -27,8 +27,7 @@ Nextflow YouTube channel पर [पूरी playlist](https://youtube.com/play
 हम Nextflow configuration के essential components जैसे process directives, executors, profiles, और parameter files को cover करेंगे।
 इन configuration options को effectively utilize करना सीखकर, तुम अपनी pipelines की flexibility, scalability, और performance enhance कर सकते हो।
 
-<details class="info">
-<summary>इस खंड से कैसे शुरू करें</summary>
+:::info[इस खंड से कैसे शुरू करें]{collapsed}
 
 Course का यह section मानता है कि तुमने [Hello Nextflow](./index.mdx) course के Parts 1-5 complete कर लिए हैं और एक complete working pipeline है।
 
@@ -43,7 +42,7 @@ cp solutions/5-hello-containers/nextflow.config .
 
 यदि तुम Hello pipeline से familiar नहीं हो या तुम्हें reminder चाहिए, तो [यह info page](../info/hello_pipeline.mdx) देखो।
 
-</details>
+:::
 
 ---
 
@@ -111,8 +110,7 @@ Outputs:
 
 पहले की तरह, तुम output files को `output` block में specified directory (`results/hello_config/`) में पाओगे।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 results/hello_config/
@@ -128,12 +126,11 @@ results/hello_config/
 └── batch-report.txt
 ```
 
-</details>
+:::
 
 Final ASCII art output `results/hello_config/` directory में है, `cowpy-COLLECTED-batch-output.txt` name के under।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
 _________
@@ -164,7 +161,7 @@ _________
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 यदि यह तुम्हारे लिए काम किया, तो तुम अपनी pipelines configure करना सीखने के लिए ready हो।
 
@@ -291,8 +288,7 @@ Outputs:
 
 Final ASCII art output `results/hello_config/` directory में है, `cowpy-COLLECTED-batch-output.txt` name के under, पहले जैसा ही।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
 _________
@@ -323,7 +319,7 @@ _________
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 Functionally, इस move ने कुछ भी change नहीं किया, लेकिन conceptually यह थोड़ा cleaner है कि default values configuration file में set हों।
 
@@ -404,8 +400,7 @@ Outputs:
 
 Final output file में greetings कहता हुआ tux character होना चाहिए।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="tux-run/results/hello_config/cowpy-COLLECTED-experiment-output.txt"
 _________
@@ -425,7 +420,7 @@ _________
 
 ```
 
-</details>
+:::
 
 बस इतना ही; अब तुम्हारे पास अपने 'normal' configuration को modify किए बिना experimenting के लिए space है।
 
@@ -501,8 +496,7 @@ Outputs:
 
 Final output file में greetings कहता हुआ stegosaurus character होना चाहिए।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/hello_config/cowpy-COLLECTED-yaml-output.txt"
 _________
@@ -526,7 +520,7 @@ _________
                     |_____|        |_____|         ~ - . _ _ _ _ _>
 ```
 
-</details>
+:::
 
 Parameter file use करना overkill लग सकता है जब तुम्हारे पास specify करने के लिए only कुछ parameters हों, लेकिन कुछ pipelines दर्जनों parameters expect करती हैं।
 उन cases में, parameter file use करना हमें massive command lines type किए बिना और workflow script modify किए बिना runtime पर parameter values provide करने allow करेगा।
@@ -597,8 +591,7 @@ Outputs:
 
 यह outputs को `results/` के बजाय `custom-outdir-cli/` में publish करता है:
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 custom-outdir-cli/
@@ -615,7 +608,7 @@ custom-outdir-cli/
         └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Notice करो कि हमारे पास अभी भी output block में `path` declarations से `hello_config` subdirectory है।
 चलो इसे clean up करते हैं।
@@ -689,8 +682,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli-2/
 
 अब outputs बिना `hello_config` subdirectory के directly `custom-outdir-cli-2/` के under publish होते हैं:
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 custom-outdir-cli-2/
@@ -706,7 +698,7 @@ custom-outdir-cli-2/
     └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 :::tip[सुझाव]
 `-output-dir` option _where_ outputs जाते हैं यह control करने के लिए use होता है, जबकि output block में `path` directive _subdirectory structure_ control करता है।
@@ -947,8 +939,7 @@ Outputs:
 
 यह outputs को `custom-outdir-config-2/rep2/` में publish करता है, specified base path _और_ batch name subdirectory _और_ process द्वारा grouped results के साथ:
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 custom-outdir-config-2
@@ -970,7 +961,7 @@ custom-outdir-config-2
             └── Hola-output.txt
 ```
 
-</details>
+:::
 
 ### 2.3. Workflow level पर publish mode set करें
 
@@ -1092,8 +1083,7 @@ Outputs:
 
 यह outputs को `config-output-mode/` में publish करता है, और वे सभी अभी भी proper copies हैं, symlinks नहीं।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 config-output-mode
@@ -1115,7 +1105,7 @@ config-output-mode
             └── Hola-output.txt
 ```
 
-</details>
+:::
 
 Main reason जिससे तुम अभी भी per-output way mode set करना चाह सकते हो वह है यदि तुम same workflow के अंदर mix और match करना चाहते हो, _i.e._ कुछ outputs copied हों और कुछ symlinked हों।
 
@@ -1251,8 +1241,7 @@ Behind the scenes, Nextflow ने Conda packages retrieve किए और envi
 
 इसका मतलब है कि हम Conda environments के साथ run करने के लिए सब set हैं यदि जरूरत हो।
 
-<details class="info">
-<summary>Docker और Conda mix और match करना</summary>
+:::info[Docker और Conda mix और match करना]{collapsed}
 
 चूंकि ये directives per process assign किए जाते हैं, 'mix और match' करना possible है, _i.e._ अपने workflow में कुछ processes को Docker के साथ और अन्य को Conda के साथ run करने के लिए configure करना, example के लिए, यदि तुम जो compute infrastructure use कर रहे हो वह दोनों support करता है।
 उस case में, तुम अपनी configuration file में Docker और Conda दोनों enable करोगे।
@@ -1260,7 +1249,7 @@ Behind the scenes, Nextflow ने Conda packages retrieve किए और envi
 
 और जैसा पहले noted है, Nextflow कई अन्य software packaging और container technologies support करता है, तो तुम सिर्फ उन दो तक limited नहीं हो।
 
-</details>
+:::
 
 ### सारांश
 
@@ -1312,8 +1301,7 @@ Most high-performance computing platforms allow (और sometimes require) क�
 
 Unfortunately, इनमें से प्रत्येक system different technologies, syntaxes और configurations use करता है यह define करने के लिए कि job कैसे define और relevant scheduler को submit किया जाना चाहिए।
 
-<details class="abstract">
-<summary>उदाहरण</summary>
+:::abstract[उदाहरण]{collapsed}
 
 Example के लिए, same job जिसे 8 CPUs और 4GB RAM require होता है "my-science-work" queue पर execute होने के लिए backend के depending following different ways में express किया जाना चाहिए।
 
@@ -1343,7 +1331,7 @@ Example के लिए, same job जिसे 8 CPUs और 4GB RAM require �
 #$ -l h_rss=4096M,mem_free=4096M
 ```
 
-</details>
+:::
 
 Fortunately, Nextflow यह सब simplify करता है।
 यह एक standardized syntax provide करता है ताकि तुम relevant properties जैसे [`cpus`](https://nextflow.io/docs/latest/reference/process.html#cpus), [`memory`](https://nextflow.io/docs/latest/reference/process.html#memory) और [`queue`](https://nextflow.io/docs/latest/reference/process.html#queue) (अन्य properties के लिए [process directives](https://nextflow.io/docs/latest/reference/process.html#process-directives) देखें) सिर्फ एक बार specify कर सको।
@@ -1523,14 +1511,13 @@ Nextflow इन values को उस executor के depending appropriate instr
 हम इसे run नहीं करने वाले, चूंकि training environment में हमारे पास relevant infrastructure तक access नहीं है।
 हालाँकि, यदि तुम इन limits से exceed होने वाले resource allocations के साथ workflow run करने की try करो, फिर `.command.run` script file में `sbatch` command देखो, तुम देखोगे कि requests जो actually executor को भेजे जाते हैं `resourceLimits` द्वारा specified values पर capped हैं।
 
-<details class="info">
-<summary>Institutional reference configurations</summary>
+:::info[Institutional reference configurations]{collapsed}
 
 nf-core project ने दुनिया भर के various institutions द्वारा shared [collection of configuration files](https://nf-co.re/configs/) compile की है, wide range of HPC और cloud executors को cover करते हुए।
 
 वे shared configs valuable हैं both उन लोगों के लिए जो वहाँ काम करते हैं और therefore अपनी institution की configuration को out of the box just utilize कर सकते हैं, और एक model के रूप में उन लोगों के लिए जो अपने खुद के infrastructure के लिए configuration develop करना देख रहे हैं।
 
-</details>
+:::
 
 ### सारांश
 
@@ -1751,8 +1738,7 @@ Outputs:
 
 यह Docker use करेगा जहाँ possible हो और `custom-outdir-config/test` के under outputs produce करेगा, और इस बार character comedic duo `dragonandcow` है।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt"
  _________
@@ -1778,7 +1764,7 @@ Outputs:
   //    \\               ///-._ _ _ _ _ _ _{^ - - - - ~
 ```
 
-</details>
+:::
 
 इसका मतलब है कि जब तक हम workflow code के साथ कोई test data files distribute करते हैं, कोई भी quickly workflow को try out कर सकता है बिना अपने inputs command line या parameter file के through supply किए।
 

@@ -63,8 +63,7 @@ Düzenleyici, proje dizinine odaklanmış şekilde açılır.
 
 `main.nf` adlı basit bir iş akışı dosyası, iki modül dosyası içeren bir `modules` dizini ve bazı örnek veri dosyaları içeren bir `data` dizini bulacaksınız.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 .
@@ -91,7 +90,7 @@ Düzenleyici, proje dizinine odaklanmış şekilde açılır.
     └── count_lines.nf
 ```
 
-</details>
+:::
 
 Bu dizin, üç hastaya (A, B, C) ait çift uçlu dizileme verilerini içermektedir.
 
@@ -155,13 +154,12 @@ output {
 
 Bu, iş akışında tek bir dosya yoluna başvuran (herhangi bir süreç içermeyen) küçük bir iş akışıdır; dosyayı sınıfıyla birlikte konsola yazdırır.
 
-<details class="info">
-<summary>`.class` nedir?</summary>
+:::info[`.class` nedir?]{collapsed}
 
 Nextflow'da `.class`, üzerinde çalıştığımız nesnenin türünü bize söyler. "Bu ne tür bir şey?" diye sormak gibidir; bir dize mi, sayı mı, dosya mı yoksa başka bir şey mi olduğunu öğrenmemizi sağlar.
 Bu, sonraki bölümlerde düz bir dize ile Path nesnesi arasındaki farkı göstermemize yardımcı olacaktır.
 
-</details>
+:::
 
 İş akışını çalıştıralım:
 
@@ -352,15 +350,14 @@ process COUNT_LINES {
 
 Gördüğünüz gibi, dosyayı açıp içindeki satır sayısını sayan oldukça basit bir betiktir.
 
-<details class="info">
-<summary>`debug true` ne işe yarar?</summary>
+:::info[`debug true` ne işe yarar?]{collapsed}
 
 Süreç tanımındaki `debug true` yönergesi, Nextflow'un betiğinizden gelen çıktıyı (satır sayısı "40" gibi) doğrudan yürütme günlüğüne yazdırmasını sağlar.
 Bu olmadan yalnızca süreç yürütme durumunu görürsünüz; betiğinizden gelen gerçek çıktıyı göremezsiniz.
 
 Nextflow süreçlerinde hata ayıklama hakkında daha fazla bilgi için [Nextflow İş Akışlarında Hata Ayıklama](../debugging/index.mdx) yan görevine bakın.
 
-</details>
+:::
 
 Modül içe aktarıldı ve kodu incelendi; artık süreci iş akışından çağırabiliriz.
 
@@ -735,8 +732,7 @@ Bu hazırlanmış dosya daha sonra yerel bir dosya olarak ele alınabilir ve ilg
 
 Bunu, sürecin karma değerinde bulunan çalışma dizininin içeriğine bakarak doğrulayabilirsiniz.
 
-<details class="abstract">
-<summary>Çalışma dizini içeriği</summary>
+:::abstract[Çalışma dizini içeriği]{collapsed}
 
 Süreç karması `07/246c2a` ise çalışma dizinini şu şekilde inceleyebilirsiniz:
 
@@ -752,7 +748,7 @@ lrwxr-xr-x  1 user  staff    89 Jan 28 10:00 patientA_rep1_normal_R1_001.fastq.g
 
 Sembolik bağlantı, Nextflow'un otomatik olarak indirdiği uzak dosyanın hazırlanmış bir kopyasına işaret etmektedir.
 
-</details>
+:::
 
 Daha büyük dosyalar için indirme adımı, yerel dosyalar üzerinde çalışmaya kıyasla ek süre alacaktır.
 Ancak Nextflow, gereksiz indirmeleri önlemek için hazırlanmış bir kopyasının zaten mevcut olup olmadığını kontrol eder.
@@ -1831,8 +1827,7 @@ Outputs:
 
 Çıktılar bir `results` dizinine yayımlanmaktadır; bu nedenle oraya bir göz atın.
 
-<details class="abstract">
-<summary>Dizin ve dosya içeriği</summary>
+:::abstract[Dizin ve dosya içeriği]{collapsed}
 
 ```console
 results
@@ -1850,7 +1845,7 @@ Read 1 size: 10 reads
 Read 2 size: 10 reads
 ```
 
-</details>
+:::
 
 Süreç girdilerimizi alarak tasarlandığı gibi hasta üst verisini içeren yeni bir dosya oluşturdu.
 Mükemmel!
@@ -1909,8 +1904,7 @@ Outputs:
 
 Sonuçlar dizini artık mevcut tüm veriler için sonuçlar içermelidir.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 results
@@ -1922,7 +1916,7 @@ results
     └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 Başarı! Tüm hastaları tek seferde analiz ettik! Değil mi?
 
@@ -1984,8 +1978,7 @@ Outputs:
 
 Şimdi results dizinini kontrol edin:
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 results/
@@ -2015,7 +2008,7 @@ results/
             └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 İşte bu: tüm üst verilerimiz düzgün biçimde organize edilmiş. Başarı!
 

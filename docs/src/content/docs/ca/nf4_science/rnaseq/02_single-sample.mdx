@@ -26,8 +26,7 @@ Això automatitza els passos de la primera secció de la [Part 1: Visió general
 
 Com a punt de partida, us proporcionem un fitxer de workflow, `rnaseq.nf`, que esbossa les parts principals del workflow, així com quatre fitxers de mòdul al directori `modules/` (`fastqc.nf`, `trim_galore.nf`, `hisat2_align.nf` i `multiqc.nf`) que esbossen l'estructura de cada procés.
 
-<details class="full-code">
-<summary>Fitxers d'estructura</summary>
+:::full-code[Fitxers d'estructura]{collapsed}
 
 ```nextflow title="rnaseq.nf"
 #!/usr/bin/env nextflow
@@ -140,7 +139,7 @@ process MULTIQC {
 }
 ```
 
-</details>
+:::
 
 Aquests fitxers no són funcionals; el seu propòsit és només servir com a estructures perquè les ompliu amb les parts interessants del codi.
 

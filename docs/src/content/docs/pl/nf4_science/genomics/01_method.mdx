@@ -131,8 +131,7 @@ samtools index /data/bam/reads_mother.bam
 
 Polecenie nie produkuje żadnego wyjścia w terminalu, ale powinieneś teraz zobaczyć plik o nazwie `reads_mother.bam.bai` w tym samym katalogu co oryginalny plik wejściowy BAM.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 data/bam/
@@ -142,7 +141,7 @@ data/bam/
 └── reads_son.bam
 ```
 
-</details>
+:::
 
 To kończy testowanie pierwszego kroku.
 
@@ -280,22 +279,20 @@ Wyjście logowania jest bardzo szczegółowe, więc podświetliliśmy najważnie
 
 Pliki wyjściowe, `reads_mother.vcf` i jego plik indeksu, `reads_mother.vcf.idx`, są tworzone wewnątrz Twojego katalogu roboczego w kontenerze.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 conda.yml  hsperfdata_root  reads_mother.vcf  reads_mother.vcf.idx
 ```
 
-</details>
+:::
 
 Plik VCF zawiera wykrycia wariantów, jak zobaczymy za chwilę, a plik indeksu ma taką samą funkcję jak plik indeksu BAM, aby umożliwić narzędziom wyszukiwanie i pobieranie podzbiorów danych bez ładowania całego pliku.
 
 Ponieważ VCF jest formatem tekstowym, a ten jest małym plikiem testowym, możesz uruchomić `cat reads_mother.vcf`, aby go otworzyć i zobaczyć zawartość.
 Jeśli przewiniesz z powrotem do początku pliku, znajdziesz nagłówek składający się z wielu linii metadanych, po których następuje lista wykrytych wariantów, jeden na linię.
 
-<details class="abstract">
-<summary>Zawartość pliku (skrócona)</summary>
+:::abstract[Zawartość pliku (skrócona)]{collapsed}
 
 ```console {26} title="reads_mother.vcf" showLineNumbers
 ##fileformat=VCFv4.2
@@ -339,7 +336,7 @@ Jeśli przewiniesz z powrotem do początku pliku, znajdziesz nagłówek składaj
 20_10037292_10066351    14156   .       T       C       183.64  .       AC=1;AF=0.500;AN=2;BaseQRankSum=0.703;DP=20;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=9.18;ReadPosRankSum=-0.193;SOR=1.034        GT:AD:DP:GQ:PL  0/1:12,8:20:99:191,0,319
 ```
 
-</details>
+:::
 
 W powyższym przykładzie wyjścia podświetliliśmy ostatnią linię nagłówka, która podaje nazwy kolumn dla danych tabelarycznych, które następują.
 Każda linia danych opisuje możliwy wariant zidentyfikowany w danych sekwencjonowania próbki. Aby uzyskać wskazówki dotyczące interpretacji formatu VCF, zobacz [ten pomocny artykuł](https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/variant-identification-and-analysis/understanding-vcf-format/).
@@ -354,8 +351,7 @@ mkdir /data/vcf
 mv reads_mother.vcf* /data/vcf
 ```
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console {5,13-15}
 data/
@@ -375,7 +371,7 @@ data/
     └── reads_mother.vcf.idx
 ```
 
-</details>
+:::
 
 Po zakończeniu wszystkie pliki są teraz dostępne w Twoim normalnym systemie plików.
 
@@ -452,8 +448,7 @@ samtools index /data/bam/reads_father.bam
 samtools index /data/bam/reads_son.bam
 ```
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 data/bam/
@@ -465,7 +460,7 @@ data/bam/
 └── reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Powinno to wytworzyć pliki indeksów w tym samym katalogu co odpowiadające im pliki BAM.
 
@@ -571,19 +566,17 @@ Runtime.totalMemory()=257949696 # [!code highlight]
 
 To tworzy plik wyjściowy GVCF `reads_mother.g.vcf` w bieżącym katalogu roboczym w kontenerze, a także jego plik indeksu, `reads_mother.g.vcf.idx`.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 conda.yml  hsperfdata_root  reads_mother.g.vcf  reads_mother.g.vcf.idx
 ```
 
-</details>
+:::
 
 Jeśli uruchomisz `head -200 reads_mother.g.vcf`, aby wyświetlić pierwsze 200 linii zawartości pliku, zobaczysz, że jest znacznie dłuższy niż równoważny VCF, który wygenerowaliśmy w pierwszej sekcji, a większość linii wygląda zupełnie inaczej niż to, co widzieliśmy w VCF.
 
-<details class="abstract">
-<summary>Zawartość pliku (skrócona)</summary>
+:::abstract[Zawartość pliku (skrócona)]{collapsed}
 
 ```console {92,175,191,195} title="reads_mother.g.vcf" showLineNumbers
 ##fileformat=VCFv4.2
@@ -788,7 +781,7 @@ Jeśli uruchomisz `head -200 reads_mother.g.vcf`, aby wyświetlić pierwsze 200 
 20_10037292_10066351	3537	.	A	<NON_REF>	.	.	END=3546	GT:DP:GQ:MIN_DP:PL	0/0:29:72:26:0,72,1080
 ```
 
-</details>
+:::
 
 Ponownie podświetliliśmy ostatnią linię nagłówka, a także pierwsze trzy 'właściwe' wykrycia wariantów w pliku.
 
@@ -942,15 +935,14 @@ Runtime.totalMemory()=226492416
 
 Po zakończeniu powinieneś mieć trzy pliki kończące się na `.g.vcf` w swoim bieżącym katalogu (jeden na próbkę) oraz ich odpowiednie pliki indeksów kończące się na `.g.vcf.idx`.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 conda.yml        reads_father.g.vcf      reads_mother.g.vcf      reads_son.g.vcf
 hsperfdata_root  reads_father.g.vcf.idx  reads_mother.g.vcf.idx  reads_son.g.vcf.idx
 ```
 
-</details>
+:::
 
 W tym momencie wykryliśmy warianty w trybie GVCF dla każdej z naszych próbek wejściowych.
 Czas przejść do wspólnego wykrywania.
@@ -1080,8 +1072,7 @@ Runtime.totalMemory()=203423744 # [!code highlight]
 To tworzy plik wyjściowy VCF `family_trio.vcf` w bieżącym katalogu roboczym w kontenerze, a także jego indeks, `family_trio.vcf.idx`.
 To kolejny rozsądnie mały plik, więc możesz uruchomić `cat family_trio.vcf`, aby wyświetlić zawartość pliku i przewinąć w dół, aby znaleźć pierwsze kilka linii wariantów.
 
-<details class="abstract">
-<summary>Zawartość pliku (skrócona)</summary>
+:::abstract[Zawartość pliku (skrócona)]{collapsed}
 
 ```console {39} title="family_trio.vcf" showLineNumbers
 ##fileformat=VCFv4.2
@@ -1144,7 +1135,7 @@ To kolejny rozsądnie mały plik, więc możesz uruchomić `cat family_trio.vcf`
 20_10037292_10066351    14403   .       G       A       144.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=2.63;DP=116;ExcessHet=0.0000;FS=1.435;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=3.52;ReadPosRankSum=0.252;SOR=0.802  GT:AD:DP:GQ:PL  0/1:32,9:41:99:153,0,821        0/0:37,0:37:99:0,109,1169       0/0:37,0:37:99:0,99,1113
 ```
 
-</details>
+:::
 
 Ponownie podświetliliśmy ostatnią linię nagłówka, która oznacza początek danych wykryć wariantów.
 
@@ -1165,8 +1156,7 @@ W ten sposób będziemy mieć coś do porównania, gdy zbudujemy nasz workflow d
 mv *.vcf* /data/vcf
 ```
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console {14-19,22-23}
 data
@@ -1196,7 +1186,7 @@ data
     └── reads_son.g.vcf.idx
 ```
 
-</details>
+:::
 
 Po zakończeniu wszystkie pliki są teraz dostępne w Twoim normalnym systemie plików.
 

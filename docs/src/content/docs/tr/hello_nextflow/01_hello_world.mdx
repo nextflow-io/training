@@ -20,13 +20,12 @@ Nextflow YouTube kanalında [tüm oynatma listesine](https://youtube.com/playlis
 
 Hello Nextflow eğitim kursunun bu ilk bölümünde, temel Nextflow mantığını ve bileşenlerini göstermek için kademeli olarak oluşturacağımız çok basit, alana bağımlı olmayan bir Hello World örneğiyle konuya giriyoruz.
 
-<details class="info">
-<summary>Hello World örneği nedir?</summary>
+:::info[Hello World örneği nedir?]{collapsed}
 
 "Hello World!", bir programlama dilinin veya yazılım çerçevesinin temel söz dizimini ve yapısını göstermek için tasarlanmış minimalist bir örnektir.
 Örnek genellikle "Hello, World!" ifadesini konsol veya terminal gibi çıktı cihazına yazdırmaktan veya bir dosyaya yazmaktan oluşur.
 
-</details>
+:::
 
 ---
 
@@ -65,14 +64,13 @@ Bu, terminale hiçbir şey çıktı vermez.
 'Hello World' metni artık belirttiğimiz `output.txt` adlı çıktı dosyasında olmalıdır.
 Dosya gezgininde veya örneğin `cat` yardımcı programını kullanarak komut satırından açabilirsiniz.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 İşte ilk Nextflow iş akışımızla çoğaltmaya çalışacağımız şey bu.
 
@@ -97,8 +95,7 @@ Sonra çalıştırıp çıktılarını arayacağız.
 
 `hello-world.nf` betiğini mevcut dizininizde bulacaksınız; bu dizin `hello-nextflow` olmalıdır. Düzenleyici bölmesinde açın.
 
-<details class="full-code">
-<summary>Tam kod dosyası</summary>
+:::full-code[Tam kod dosyası]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
@@ -125,7 +122,7 @@ workflow {
 }
 ```
 
-</details>
+:::
 
 Bir Nextflow iş akışı betiği genellikle bir veya daha fazla [**process**](https://nextflow.io/docs/latest/process.html) tanımı ve [**workflow**](https://nextflow.io/docs/latest/workflow.html)'un kendisini, ayrıca daha sonra tanıtacağımız birkaç isteğe bağlı blok (burada mevcut değil) içerir.
 
@@ -247,8 +244,7 @@ Yukarıda gösterilen çalıştırma için elde ettiğimize bakıldığında, sa
 
 Orada ne olduğuna bir bakalım.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 work
@@ -264,10 +260,9 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
-<details class="question">
-<summary>Aynı şeyi görmüyor musunuz?</summary>
+:::question[Aynı şeyi görmüyor musunuz?]{collapsed}
 
 Tam alt dizin adları sisteminizde farklı olacaktır.
 
@@ -278,19 +273,18 @@ Ancak günlük dosyaları terminalde görünmez olarak ayarlanmıştır, bu nede
 tree -a work
 ```
 
-</details>
+:::
 
 Bakmak istediğiniz ilk şey, iş akışının gerçek çıktısı, yani `sayHello` süreci tarafından üretilen `output.txt` dosyasıdır.
 Açın ve `Hello World!` selamlamasını bulacaksınız; minimalist iş akışımızın amacı da buydu.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="output.txt"
 Hello World!
 ```
 
-</details>
+:::
 
 İşe yaradı!
 
@@ -308,15 +302,14 @@ Bununla birlikte, o dizindeki diğer dosyalara da bakalım. Bunlar, görev yür�
 
 `.command.sh` dosyası özellikle kullanışlıdır çünkü tüm defter tutma ve görev/ortam kurulumu dahil olmaksızın Nextflow'un yürüttüğü ana komutu gösterir.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title=".command.sh"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
-</details>
+:::
 
 Bu, daha önce manuel olarak çalıştırdığımız şeyle eşleşir.
 
@@ -327,8 +320,7 @@ Bu, başarısız bir çalıştırmayı sorun giderirken Nextflow'un kodu nasıl 
 
 İş akışını birkaç kez daha çalıştırmayı deneyin, ardından `work/` altındaki görev dizinlerine bakın.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 work
@@ -383,7 +375,7 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
 Her çalıştırma için eksiksiz çıktı ve günlük dosyaları içeren yeni bir alt dizin oluşturulduğunu görüyorsunuz.
 Bu, aynı iş akışını birkaç kez çalıştırmanın önceki çalıştırmaların sonuçlarını üzerine yazmayacağını gösterir.
@@ -514,8 +506,7 @@ Terminal çıktısı artık yayınlanan çıktıları ve yazıldıkları dizini 
 
 Dosya gezgininizi kontrol edin: bu sefer Nextflow `results/` adında yeni bir dizin de oluşturdu.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console {10-11,22}
 .
@@ -542,7 +533,7 @@ Dosya gezgininizi kontrol edin: bu sefer Nextflow `results/` adında yeni bir di
     └── 9f
 ```
 
-</details>
+:::
 
 `results` dizininin içinde, az önce çalıştırdığımız komut tarafından work dizininde üretilen `output.txt`'ye sembolik bir bağlantı buluyoruz.
 
@@ -605,8 +596,7 @@ Outputs:
 
 Bu sefer sonuç belirtilen alt dizine yazılır.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console {2-3}
 results/
@@ -615,7 +605,7 @@ results/
 └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
 ```
 
-</details>
+:::
 
 Önceki yürütmenin sonucunun hâlâ orada olduğunu görüyorsunuz.
 
@@ -687,8 +677,7 @@ Outputs:
 
 Bu sefer, sonuçlara bakarsanız, dosya yalnızca bir sembolik bağlantı yerine düzgün bir kopyadır.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console {3}
 results/
@@ -697,7 +686,7 @@ results/
 └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
 ```
 
-</details>
+:::
 
 Bu da bireysel çıktı seviyesinde ayarlandığından, yayınlama modunu ayrıntılı bir şekilde ayarlamanıza olanak tanır.
 Bu, daha sonra çok adımlı iş akışlarına geçtiğimizde özellikle işe yarayacaktır; örneğin yalnızca son çıktıları kopyalamak ve ara çıktıları sembolik bağlantı olarak bırakmak isteyebilirsiniz.
@@ -876,14 +865,13 @@ Tüm bu düzenlemeleri doğru yaptıysanız, başka bir başarılı yürütme el
 
 Artık selamlamanın yeni sürümüne sahip olduğunuzdan emin olmak için çıktı dosyasını açtığınızdan emin olun.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Bonjour le monde!
 ```
 
-</details>
+:::
 
 Et voilà!
 
@@ -946,8 +934,7 @@ Outputs:
   first_output: hello_world/output.txt
 ```
 
-<details class="question">
-<summary>İşe yaramadıysa</summary>
+:::question[İşe yaramadıysa]{collapsed}
 
 Eğer şuna benzer bir hatayla başarısız olduysa:
 
@@ -976,18 +963,17 @@ v2 ayrıştırıcısı Nextflow 26.04 ve sonrasında varsayılan olarak gelir; b
 export NXF_SYNTAX_PARSER=v2
 ```
 
-</details>
+:::
 
 Çıktı daha önce olduğu gibi aynı yerde olacak, ancak içerikler yeni metinle güncellenmiş olmalıdır.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Hola mundo!
 ```
 
-</details>
+:::
 
 Nextflow, çıktıyı oluşturmak için selamlama parametresinin varsayılan değerini kullandı.
 
@@ -1016,14 +1002,13 @@ Outputs:
 
 Bir kez daha, sonuçlar dizininizde karşılık gelen güncellenmiş çıktıyı bulmalısınız.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Konnichiwa!
 ```
 
-</details>
+:::
 
 :::note[Not]
 Nextflow'ta, parametreler için değerleri belirleyebileceğiniz birden fazla yer vardır.
@@ -1097,8 +1082,7 @@ Nextflow kelimenin tam anlamıyla sizi önceki yürütmeye yönlendiriyor ve "Bu
 
 Bir Nextflow iş akışı başlattığınızda, mevcut çalışma dizininde `.nextflow` adlı gizli bir dizin altında `history` adlı bir günlük dosyasına bir satır yazılır.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```txt title=".nextflow/history" showLineNumbers
 2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'
@@ -1108,7 +1092,7 @@ Bir Nextflow iş akışı başlattığınızda, mevcut çalışma dizininde `.ne
 2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
 ```
 
-</details>
+:::
 
 Bu dosya, mevcut çalışma dizininden başlatılan her Nextflow çalıştırması için zaman damgası, çalıştırma adı, durum, revizyon kimliği, oturum kimliği ve tam komut satırını verir.
 

@@ -9,8 +9,7 @@ Précédemment, vous avez construit un pipeline d'appel de variants par échanti
 Dans cette partie du cours, nous allons faire passer notre simple workflow au niveau supérieur en le transformant en un puissant outil d'automatisation par lots capable de traiter un nombre arbitraire d'échantillons.
 Et pendant que nous y sommes, nous allons également le modifier pour qu'il accepte des données en lecture appariée, ce qui est plus courant dans les études récentes.
 
-<details class="info">
-<summary>Comment commencer à partir de cette section</summary>
+:::info[Comment commencer à partir de cette section]{collapsed}
 
 Cette section du cours suppose que vous avez terminé la [Partie 1 : Vue d'ensemble de la méthode](./01_method.mdx), la [Partie 2 : Implémentation mono-échantillon](./02_single-sample.mdx) et que vous disposez d'un pipeline `rnaseq.nf` fonctionnel avec des fichiers de modules complétés.
 
@@ -32,7 +31,7 @@ Vous pouvez tester qu'il s'exécute avec succès :
 nextflow run rnaseq.nf -profile test
 ```
 
-</details>
+:::
 
 ## Objectif
 
@@ -648,8 +647,7 @@ Vous pouvez trouver les sorties MultiQC dans le répertoire des résultats.
 tree -L 2 -l results/multiqc
 ```
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 results/multiqc
@@ -684,7 +682,7 @@ results/multiqc
     └── multiqc_sources.txt
 ```
 
-</details>
+:::
 
 Ce dernier fichier `all_single-end.html` est le rapport agrégé complet, commodément emballé dans un seul fichier HTML facile à consulter.
 

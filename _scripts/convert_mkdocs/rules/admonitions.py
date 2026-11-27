@@ -1,4 +1,4 @@
-"""A2. `!!!` admonitions become aside directives; `???` collapsibles become <details>.
+"""A2. `!!!` admonitions become `:::type[Title]` directives; `???` collapsibles add `{collapsed}` (`???+`: `{open}`).
 
 Headers are parsed as Python-Markdown and pymdownx do: optional space after the
 marker, lower-cased classes (type first, then modifiers such as `inline end`),
@@ -16,7 +16,12 @@ HEADER = re.compile(
 ATTR = re.compile(r'([\w-]+)="([^"]*)"')
 DIRECTIVE = re.compile(r"^\s*(:{3,})")
 
-# An untitled admonition of these types takes Starlight's (translated) default title.
+# Types docs/src/markdown/admonitions.mjs renders; keep the two lists in step. Others become notes.
+TYPES = {
+    "note", "abstract", "info", "tip", "success", "question", "warning", "caution", "failure", "danger", "bug",
+    "example", "quote", "exercise", "solution", "full-code", "optional", "courses", "catalog",
+}
+# An untitled aside (`!!! tip ""`) keeps Starlight's aside markup in one of its four variants.
 VARIANT = {"note": "note", "info": "note", "tip": "tip", "warning": "caution", "danger": "danger"}
 
 
@@ -33,21 +38,20 @@ def convert(c, page) -> list[str]:
             body[f.start] += " {" + ",".join(value.split()) + "}"
         page.warn(f"{key}=\"{value}\" on admonition header " + ("moved to its code block" if f else "dropped"))
 
-    if c.match["mark"].startswith("?"):
-        opener = f'<details class="{" ".join(classes)}"' + (" open" if c.match["mark"].endswith("+") else "") + ">"
-        summary = kind.capitalize() if title is None else title
-        return [opener, f"<summary>{summary}</summary>", "", *body, "", "</details>"]
-
-    variant = VARIANT.get(kind, "note")
-    if title == "":
+    collapsible = c.match["mark"].startswith("?")
+    if title == "" and not collapsible:
         # A directive always renders a title, so use Starlight's aside markup without one.
-        cls = " ".join(["starlight-aside", f"starlight-aside--{variant}", *classes[1:]])
+        cls = " ".join(["starlight-aside", f"starlight-aside--{VARIANT.get(kind, 'note')}", *classes[1:]])
         return [f'<div class="{cls}">', "", *body, "", "</div>"]
-    if title is None and kind not in VARIANT:
-        title = kind.capitalize()
+    if kind not in TYPES:
+        kind, title = "note", title or kind.capitalize()
+    attrs = []
+    if collapsible:
+        attrs = ["open" if c.match["mark"].endswith("+") else "collapsed", *(f".{x}" for x in classes[1:])]
     # An outer directive needs more colons than any directive inside it.
     colons = ":" * max([3] + [len(m[1]) + 1 for l in body if (m := DIRECTIVE.match(l))])
-    return [f"{colons}{variant}" + (f"[{title}]" if title else ""), *body, colons]
+    opener = f"{colons}{kind}" + (f"[{title}]" if title else "") + (f"{{{' '.join(attrs)}}}" if attrs else "")
+    return [opener, *body, colons]
 
 
 def apply(page) -> None:

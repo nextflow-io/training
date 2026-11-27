@@ -222,15 +222,14 @@ Nextflow plugins को पहली बार उपयोग होने प�
 पाइपलाइन वर्तमान में `splitCsv` और एक manual `map` का उपयोग करके `greetings.csv` पढ़ती है, लेकिन nf-schema इसे validated, schema-driven parsing से बदल सकता है।
 एक JSON schema फ़ाइल (`greetings_schema.json`) अभ्यास डायरेक्टरी में पहले से प्रदान की गई है।
 
-<details class="info">
-<summary>Schema क्या है?</summary>
+:::info[Schema क्या है?]{collapsed}
 
 Schema valid data कैसी दिखती है इसका एक औपचारिक विवरण है।
 यह परिभाषित करता है कि कौन से columns अपेक्षित हैं, प्रत्येक मान का प्रकार क्या होना चाहिए (string, number, आदि), और कौन से fields आवश्यक हैं।
 
 इसे एक अनुबंध के रूप में सोचो: यदि इनपुट डेटा schema से मेल नहीं खाता, तो tool पाइपलाइन में बाद में भ्रामक errors का कारण बनने देने के बजाय समस्या को जल्दी पकड़ सकता है।
 
-</details>
+:::
 
 #### 2.2.1. Schema देखो
 
@@ -569,8 +568,7 @@ INFO - [nf-co2footprint] 🌱 The workflow run used 126.76 uWh of electricity, r
 
 Plugin तुम्हारी working directory में आउटपुट फ़ाइलें उत्पन्न करता है:
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 co2footprint_report_<timestamp>.html
@@ -578,10 +576,9 @@ co2footprint_summary_<timestamp>.txt
 co2footprint_trace_<timestamp>.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="co2footprint_summary_<timestamp>.txt"
 Total CO₂e footprint measures of this workflow run (including cached tasks):
@@ -595,7 +592,7 @@ Which equals:
   - 1.22E-7 % of a flight from Paris to London
 ```
 
-</details>
+:::
 
 (तुम्हारे numbers अलग होंगे।)
 

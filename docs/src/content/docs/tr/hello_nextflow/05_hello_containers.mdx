@@ -31,8 +31,7 @@ Tahmin edebileceğiniz gibi, bu pipeline'larınızı daha tekrarlanabilir hale g
 
 Bunu [Docker](https://www.docker.com/get-started/) kullanarak öğreteceğimizi, ancak Nextflow'un [diğer birçok konteyner teknolojisini](https://nextflow.io/docs/latest/container.html) de desteklediğini unutmayın.
 
-<details class="info">
-<summary>Bu bölümden nasıl başlanır</summary>
+:::info[Bu bölümden nasıl başlanır]{collapsed}
 
 Bu kursun bu bölümü, [Hello Nextflow](./index.mdx) kursunun 1-4. Bölümlerini tamamladığınızı ve eksiksiz çalışan bir pipeline'ınız olduğunu varsayar.
 
@@ -42,7 +41,7 @@ Kursa bu noktadan başlıyorsanız, `modules` dizinini çözümlerden kopyalaman
 cp -r solutions/4-hello-modules/modules .
 ```
 
-</details>
+:::
 
 ---
 
@@ -104,8 +103,7 @@ Outputs:
 
 Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen dizinde bulacaksınız (`results/hello_containers/`).
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 results/hello_containers/
@@ -119,7 +117,7 @@ results/hello_containers/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Bu sizin için çalıştıysa, konteynerleri nasıl kullanacağınızı öğrenmeye hazırsınız.
 
@@ -253,14 +251,13 @@ Bunu doğrulamak için dosya sisteminin kökünden dizin içeriklerini listeleme
 ls /
 ```
 
-<details class="abstract">
-<summary>Komut çıktısı</summary>
+:::abstract[Komut çıktısı]{collapsed}
 
 ```console
 bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 ```
 
-</details>
+:::
 
 `tree` yardımcı programı bu konteynerde mevcut olmadığı için burada `ls` kullanıyoruz.
 Konteyner içindeki dosya sisteminin ana sisteminizden farklı olduğunu görebilirsiniz.
@@ -832,8 +829,7 @@ Outputs:
 Bu sefer gerçekten çalışıyor!
 Her zamanki gibi iş akışı çıktılarını ilgili sonuçlar dizininde bulabilirsiniz; ancak bu sefer biraz daha düzgün organize edilmiş: yalnızca rapor ve son çıktı üst düzeyde, tüm ara dosyalar bir alt dizine taşınmış.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 results/hello_containers/
@@ -849,12 +845,11 @@ results/hello_containers/
 └── batch-report.txt
 ```
 
-</details>
+:::
 
 Son ASCII sanat çıktısı `results/hello_containers/` dizininde, `cowpy-COLLECTED-batch-output.txt` adı altında.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
 _________
@@ -885,7 +880,7 @@ _________
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 İşte orada, istenildiği gibi selamlamaları söyleyen güzel hindimiz.
 
@@ -899,8 +894,7 @@ Bu, şu kısaltılmış dizin yoluna karşılık gelir: `work/98/656c6c`.
 
 Bu dizinde, Nextflow'un pipeline'ı yürütme sürecinde sizin adınıza çalıştırdığı tüm komutları içeren `.command.run` dosyasını bulacaksınız.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="work/98/656c6c90cce1667c094d880f4b6dcc/.command.run"
 #!/bin/bash
@@ -1056,7 +1050,7 @@ $NXF_ENTRY
 
 ```
 
-</details>
+:::
 
 Bu dosyada `nxf_launch`'ı ararsanız, şöyle bir şey görmelisiniz:
 

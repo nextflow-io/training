@@ -104,7 +104,7 @@ process EXAMPLE {
 
    - Command output inside the `bash` block, after `# [!output]`. Mark key output lines with `# [!code highlight]` at the end of the line; start error output with `# [!output stderr]`
    - Asides: `:::note`, `:::tip`, `:::caution`, `:::danger` (optional `[Title]`), closed by `:::`
-   - Exercises and collapsible content: `<details class="exercise">` (see `/add-exercise`)
+   - Exercises and collapsible content: `:::exercise[Title]{collapsed}` (see `/add-exercise`)
    - Links to other pages as relative `.mdx` links, e.g. `[Part 1](01_hello_world.mdx#11-examine-the-code)`
    - Clear explanations for beginners
    - No import lines: components are auto-imported

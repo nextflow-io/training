@@ -69,8 +69,7 @@ Edytor otworzy się z widokiem na katalog projektu.
 
 Znajdziesz tu główny plik workflow'u oraz katalog `data` zawierający arkusz danych i kilka plików z danymi.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 .
@@ -87,7 +86,7 @@ Znajdziesz tu główny plik workflow'u oraz katalog `data` zawierający arkusz d
 └── nextflow.config
 ```
 
-</details>
+:::
 
 Workflow w pliku `main.nf` to szkielet, który będziesz stopniowo rozbudowywać w pełni działający workflow.
 
@@ -112,8 +111,7 @@ Każdy plik z danymi zawiera tekst pozdrowienia w jednym z pięciu języków (fr
 
 Użyjemy narzędzia o nazwie [`COWPY`](https://github.com/jeffbuttars/cowpy) do generowania ASCII art każdej postaci wypowiadającej nagrane pozdrowienie.
 
-<details class="info">
-<summary>Co robi `COWPY`?</summary>
+:::info[Co robi `COWPY`?]{collapsed}
 
 `COWPY` to narzędzie wiersza poleceń generujące ASCII art do wyświetlania dowolnych tekstów w zabawny sposób.
 Jest to implementacja w Pythonie klasycznego narzędzia [cowsay](https://en.wikipedia.org/wiki/Cowsay) autorstwa Tony'ego Monroe'a.
@@ -154,7 +152,7 @@ __________________
     \___)=(___/
 ```
 
-</details>
+:::
 
 Dodatkowo użyjemy narzędzia do analizy języka o nazwie `langid`, aby zidentyfikować język każdej postaci i odpowiednio zorganizować wyniki pipeline'u.
 
@@ -248,8 +246,7 @@ Każdy wpis mapy odpowiada kolumnie w naszym arkuszu danych:
 Dzięki temu łatwo jest uzyskać dostęp do konkretnych pól każdego wiersza.
 Na przykład możemy uzyskać dostęp do identyfikatora pliku przez `id` lub do ścieżki pliku txt przez `recording`.
 
-<details class="info">
-<summary>(Opcjonalnie) Więcej o mapach Groovy</summary>
+:::info[(Opcjonalnie) Więcej o mapach Groovy]{collapsed}
 
 W Groovy, języku programowania, na którym zbudowany jest Nextflow, mapa to struktura danych klucz-wartość podobna do słowników w Pythonie, obiektów w JavaScript czy haszy w Ruby.
 
@@ -287,7 +284,7 @@ id: sampleA
 character: squirrel
 ```
 
-</details>
+:::
 
 ### 1.2. Wybierz konkretne pole za pomocą `map`
 
@@ -519,8 +516,7 @@ Outputs:
 
 Jak widać, `COWPY` uruchomił się dla każdego pliku, używając właściwej postaci.
 
-<details class="abstract">
-<summary>Zawartość katalogu wyników</summary>
+:::abstract[Zawartość katalogu wyników]{collapsed}
 
 ```console
 results/
@@ -533,10 +529,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>Zawartość pliku results/cowpy-guten_tag.txt</summary>
+:::example[Zawartość pliku results/cowpy-guten_tag.txt]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -555,7 +550,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 To podejście działa, ale ma pewne ograniczenie: musieliśmy podzielić kanał na dwa oddzielne podkanały.
 Gdybyśmy chcieli przekazać więcej pól do procesu, musielibyśmy wyodrębniać kolejne podkanały — co mogłoby stać się uciążliwe i nieczytelne.
@@ -704,8 +699,7 @@ Outputs:
 
 Wynikiem jest te same siedem plików `cowpy-*.txt` co poprzednio, teraz produkowanych przy prostszym wywołaniu `COWPY`.
 
-<details class="abstract">
-<summary>Zawartość katalogu wyników</summary>
+:::abstract[Zawartość katalogu wyników]{collapsed}
 
 ```console
 results/
@@ -718,10 +712,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>Zawartość pliku results/cowpy-guten_tag.txt</summary>
+:::example[Zawartość pliku results/cowpy-guten_tag.txt]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -740,7 +733,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 To nieznaczna poprawa w stosunku do podejścia z `multiMap`.
 Nadal jednak musieliśmy rozpakować oryginalną mapę Groovy, aby utworzyć krotkę wejściową, a między procesem a arkuszem danych istnieje ścisłe powiązanie: definicja wejścia `COWPY` bezpośrednio odwołuje się do nazw kolumn `id`, `character` i `recording`.
@@ -958,8 +951,7 @@ Outputs:
 
 Katalog wyników zawiera teraz pliki z ASCII art.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 results/
@@ -972,10 +964,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>Zawartość pliku results/cowpy-guten_tag.txt</summary>
+:::example[Zawartość pliku results/cowpy-guten_tag.txt]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -994,7 +985,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 Proces otrzymuje teraz wszystkie metadane jako pakiet przez `meta`, używa tego, czego potrzebuje (`meta.character`), i ignoruje resztę.
 
@@ -1180,8 +1171,7 @@ Ten kod tworzy tymczasową mapę z jedną parą klucz-wartość zawierającą ko
 
 Szczegółowe wyjaśnienie znajdziesz w poniższym polu.
 
-<details class="info">
-<summary>Tworzenie nowej mapy meta za pomocą operatora `+`</summary>
+:::info[Tworzenie nowej mapy meta za pomocą operatora `+`]{collapsed}
 
 **Po pierwsze, musisz wiedzieć, że możemy scalić zawartość dwóch map za pomocą operatora Groovy `+`.**
 
@@ -1268,7 +1258,7 @@ Powinno to wyjaśnić, że po prostu zostawiamy `file` na jego oryginalnym miejs
 
 **I to prowadzi nas z powrotem do struktury kanału `tuple val(meta), path(file)`!**
 
-</details>
+:::
 
 #### 2.2.2. Uruchom workflow
 
@@ -1612,8 +1602,7 @@ sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 Klucz `character` jest tworzony dla wszystkich wpisów podczas parsowania arkusza danych, ale `meta.character` dla `sampleA` będzie pustym stringiem.
 Gdy Nextflow podstawia `${meta.character}{:nextflow}` do polecenia, narzędzie `COWPY` otrzymuje pusty argument dla `-c` i zgłasza błąd:
 
-<details class="failure">
-<summary>Wyjście polecenia</summary>
+:::failure[Wyjście polecenia]{collapsed}
 
 ```console {7,12,17,29}
  N E X T F L O W   ~  version 26.04.4
@@ -1657,7 +1646,7 @@ Tip: you can try to figure out what's wrong by changing to the process work dir 
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 Komunikat błędu (`expected one argument`) wskazuje na pusty argument `-c`.
 Sprawdzenie pliku `.command.sh` w katalogu roboczym potwierdza, że polecenie zostało uruchomione z pustą wartością.
@@ -1676,8 +1665,7 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 Operacja `map` jawnie zapisuje `character: row.character{:nextflow}`, więc klucz `character` nadal jest tworzony w mapie meta, jednak odwołanie do kolumny nieistniejącej w sparsowanym wierszu zwraca `null` — jego wartość staje się zatem `null`.
 Gdy skrypt procesu oblicza `${meta.character}{:nextflow}`, Nextflow dosłownie podstawia string `null` do polecenia:
 
-<details class="failure">
-<summary>Wyjście polecenia</summary>
+:::failure[Wyjście polecenia]{collapsed}
 
 ```console {7,12,17}
  N E X T F L O W   ~  version 26.04.4
@@ -1731,7 +1719,7 @@ Tip: you can replicate the issue by changing to the process work dir and enterin
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 Wskazówką diagnostyczną jest `cowpy -c null` w wykonanym poleceniu.
 

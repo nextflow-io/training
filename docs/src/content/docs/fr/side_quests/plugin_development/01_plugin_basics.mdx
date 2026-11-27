@@ -222,15 +222,14 @@ Il fournit `samplesheetToList`, une fonction qui analyse les fichiers CSV/TSV en
 Le pipeline lit actuellement `greetings.csv` en utilisant `splitCsv` et un `map` manuel, mais nf-schema peut remplacer cela par une analyse validée et pilotée par schéma.
 Un fichier de schéma JSON (`greetings_schema.json`) est déjà fourni dans le répertoire de l'exercice.
 
-<details class="info">
-<summary>Qu'est-ce qu'un schéma ?</summary>
+:::info[Qu'est-ce qu'un schéma ?]{collapsed}
 
 Un schéma est une description formelle de ce à quoi ressemblent des données valides.
 Il définit des éléments tels que les colonnes attendues, le type de chaque valeur (chaîne de caractères, nombre, etc.) et les champs obligatoires.
 
 Considérez-le comme un contrat : si les données d'entrée ne correspondent pas au schéma, l'outil peut détecter le problème tôt plutôt que de laisser celui-ci provoquer des erreurs confuses plus tard dans le pipeline.
 
-</details>
+:::
 
 #### 2.2.1. Examiner le schéma
 
@@ -569,8 +568,7 @@ INFO - [nf-co2footprint] 🌱 The workflow run used 126.76 uWh of electricity, r
 
 Le plugin génère des fichiers de sortie dans votre répertoire de travail :
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 co2footprint_report_<timestamp>.html
@@ -578,10 +576,9 @@ co2footprint_summary_<timestamp>.txt
 co2footprint_trace_<timestamp>.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contenu du fichier</summary>
+:::abstract[Contenu du fichier]{collapsed}
 
 ```console title="co2footprint_summary_<timestamp>.txt"
 Total CO₂e footprint measures of this workflow run (including cached tasks):
@@ -595,7 +592,7 @@ Which equals:
   - 1.22E-7 % of a flight from Paris to London
 ```
 
-</details>
+:::
 
 (Vos chiffres seront différents.)
 

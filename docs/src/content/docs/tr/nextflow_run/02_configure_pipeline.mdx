@@ -16,8 +16,7 @@ Nextflow, `nextflow.config` dosyasını çalışma dizininden otomatik olarak al
 
 Dört alanı kapsayan bir yapılandırma dosyası sağlıyoruz: yazılım paketleme, süreç ayarları, pipeline parametreleri ve yürütme profilleri.
 
-<details class="full-code">
-<summary>nextflow.config</summary>
+:::full-code[nextflow.config]{collapsed}
 
 ```nextflow title="nextflow.config" showLineNumbers
 /*
@@ -58,7 +57,7 @@ profiles {
 }
 ```
 
-</details>
+:::
 
 Her birini tek tek inceleyelim, ardından pipeline'ı bir profille çalıştırarak profilleri pratikte kullanalım.
 
@@ -324,8 +323,7 @@ Outputs:
   cowpy_art: yaml/cowpy-COLLECTED-yaml-output.txt
 ```
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/yaml/cowpy-COLLECTED-yaml-output.txt"
  _________
@@ -349,7 +347,7 @@ Outputs:
                     |_____|        |_____|         ~ - . _ _ _ _ _>
 ```
 
-</details>
+:::
 
 Bir pipeline'ın birden fazla parametresi olduğunda parametre dosyası özellikle değerlidir: iş akışı betiğinde herhangi bir değişiklik yapmadan veya uzun bir komut satırı oluşturmadan tümünü tek seferde sağlamanıza olanak tanır ve sonuçlarınızla birlikte dağıtmak da kolaydır.
 
@@ -407,8 +405,7 @@ Outputs:
   cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
 ```
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 outputs/batch
@@ -424,7 +421,7 @@ outputs/batch
     └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Çıktılar artık yerleşik `results/batch/` varsayılanı yerine `outputs/batch/` altına yerleşir.
 Pipeline'ın kendi kodu, `batch/` ve `intermediates/` alt dizinleri gibi bu temel dizin içindeki yapıyı belirlemeye devam eder; `-output-dir` yalnızca bu yapının nerede başlayacağını kontrol eder.

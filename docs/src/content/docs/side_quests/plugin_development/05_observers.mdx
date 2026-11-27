@@ -258,13 +258,12 @@ Pipeline complete! 👋
 The observer is working.
 Each time a task finishes, Nextflow calls `onProcessComplete`, and our implementation prints a message.
 
-<details class="exercise">
-<summary>Customize the message</summary>
+:::exercise[Customize the message]{collapsed}
 
 Try changing the message in `onProcessComplete` to something of your own, rebuild, and rerun.
 This confirms the full edit-build-run cycle works for observers.
 
-</details>
+:::
 
 ### 2.4. Add counting logic
 
@@ -322,8 +321,7 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-<details class="example">
-<summary>Output</summary>
+:::example[Output]{collapsed}
 
 ```console
 N E X T F L O W  ~  version 26.04.4
@@ -355,7 +353,7 @@ Pipeline complete! 👋
 
 The counter messages are interleaved with task submissions because observers run as tasks complete.
 
-</details>
+:::
 
 ---
 

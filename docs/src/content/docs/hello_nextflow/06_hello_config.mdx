@@ -26,8 +26,7 @@ In this part of the course, we are going to show you the simplest and most commo
 We'll go over essential components of Nextflow configuration such as process directives, executors, profiles, and parameter files.
 By learning to utilize these configuration options effectively, you can enhance the flexibility, scalability, and performance of your pipelines.
 
-<details class="info">
-<summary>How to begin from this section</summary>
+:::info[How to begin from this section]{collapsed}
 
 This section of the course assumes you have completed Parts 1-5 of the [Hello Nextflow](./index.mdx) course and have a complete working pipeline.
 
@@ -42,7 +41,7 @@ The `nextflow.config` file contains the line `docker.enabled = true` which enabl
 
 If you're not familiar with the Hello pipeline or you could use a reminder, see [this info page](../info/hello_pipeline.mdx).
 
-</details>
+:::
 
 ---
 
@@ -110,8 +109,7 @@ Outputs:
 
 As previously, you will find the output files in the directory specified in the `output` block (`results/hello_config/`).
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 results/hello_config/
@@ -127,12 +125,11 @@ results/hello_config/
 └── batch-report.txt
 ```
 
-</details>
+:::
 
 The final ASCII art output is in the `results/hello_config/` directory, under the name `cowpy-COLLECTED-batch-output.txt`.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
 _________
@@ -163,7 +160,7 @@ _________
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 If that worked for you, you're ready to learn how to configure your pipelines.
 
@@ -290,8 +287,7 @@ This still produces the same output as previously.
 
 The final ASCII art output is in the `results/hello_config/` directory, under the name `cowpy-COLLECTED-batch-output.txt`, same as before.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
 _________
@@ -322,7 +318,7 @@ _________
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 Functionally, this move has changed nothing, but conceptually it's a little cleaner to have the default values set in the configuration file.
 
@@ -403,8 +399,7 @@ In this run, Nextflow combines the `nextflow.config` in our current directory wi
 
 The final output file should contain the tux character saying the greetings.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="tux-run/results/hello_config/cowpy-COLLECTED-experiment-output.txt"
 _________
@@ -424,7 +419,7 @@ _________
 
 ```
 
-</details>
+:::
 
 That's it; now you have a space for experimenting without modifying your 'normal' configuration.
 
@@ -500,8 +495,7 @@ Outputs:
 
 The final output file should contain the stegosaurus character saying the greetings.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="results/hello_config/cowpy-COLLECTED-yaml-output.txt"
 _________
@@ -525,7 +519,7 @@ _________
                     |_____|        |_____|         ~ - . _ _ _ _ _>
 ```
 
-</details>
+:::
 
 Using a parameter file may seem like overkill when you only have a few parameters to specify, but some pipelines expect dozens of parameters.
 In those cases, using a parameter file will allow us to provide parameter values at runtime without having to type massive command lines and without modifying the workflow script.
@@ -596,8 +590,7 @@ Outputs:
 
 This publishes outputs to `custom-outdir-cli/` instead of `results/`:
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 custom-outdir-cli/
@@ -614,7 +607,7 @@ custom-outdir-cli/
         └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Notice we still have the `hello_config` subdirectory from the `path` declarations in the output block.
 Let's clean that up.
@@ -688,8 +681,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli-2/
 
 Now the outputs are published directly under `custom-outdir-cli-2/`, without the `hello_config` subdirectory:
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 custom-outdir-cli-2/
@@ -705,7 +697,7 @@ custom-outdir-cli-2/
     └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 :::tip
 The `-output-dir` option is used to control _where_ outputs go, whereas the `path` directive in the output block controls the _subdirectory structure_.
@@ -946,8 +938,7 @@ Outputs:
 
 This publishes outputs to `custom-outdir-config-2/rep2/`, with the specified base path _and_ the batch name subdirectory _and_ results grouped by process:
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 custom-outdir-config-2
@@ -969,7 +960,7 @@ custom-outdir-config-2
             └── Hola-output.txt
 ```
 
-</details>
+:::
 
 ### 2.3. Set the publish mode at the workflow level
 
@@ -1091,8 +1082,7 @@ Outputs:
 
 This publishes outputs to `config-output-mode/`, and they are still all proper copies, not symlinks.
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 config-output-mode
@@ -1114,7 +1104,7 @@ config-output-mode
             └── Hola-output.txt
 ```
 
-</details>
+:::
 
 The main reason you might still want to use the per-output way of setting mode is if you want to mix and match within the same workflow, _i.e._ have some outputs be copied and some be symlinked.
 
@@ -1250,8 +1240,7 @@ From our standpoint, it looks like it works exactly the same as running with Doc
 
 This means we're all set to run with Conda environments if needed.
 
-<details class="info">
-<summary>Mixing and matching Docker and Conda</summary>
+:::info[Mixing and matching Docker and Conda]{collapsed}
 
 Since these directives are assigned per process, it is possible 'mix and match', _i.e._ configure some of the processes in your workflow to run with Docker and others with Conda, for example, if the compute infrastructure you are using supports both.
 In that case, you would enable both Docker and Conda in your configuration file.
@@ -1259,7 +1248,7 @@ If both are available for a given process, Nextflow will prioritize containers.
 
 And as noted earlier, Nextflow supports multiple other software packaging and container technologies, so you are not limited to just those two.
 
-</details>
+:::
 
 ### Takeaway {#takeaway_2}
 
@@ -1311,8 +1300,7 @@ Most high-performance computing platforms allow (and sometimes require) that you
 
 Unfortunately, each of these systems uses different technologies, syntaxes and configurations for defining how a job should be defined and submitted to the relevant scheduler.
 
-<details class="abstract">
-<summary>Examples</summary>
+:::abstract[Examples]{collapsed}
 
 For example, the same job requiring 8 CPUs and 4GB of RAM to be executed on the queue "my-science-work" needs to be expressed in different following ways depending on the backend.
 
@@ -1342,7 +1330,7 @@ For example, the same job requiring 8 CPUs and 4GB of RAM to be executed on the 
 #$ -l h_rss=4096M,mem_free=4096M
 ```
 
-</details>
+:::
 
 Fortunately, Nextflow simplifies all of this.
 It provides a standardized syntax so that you can specify the relevant properties such as [`cpus`](https://nextflow.io/docs/latest/reference/process.html#cpus), [`memory`](https://nextflow.io/docs/latest/reference/process.html#memory) and [`queue`](https://nextflow.io/docs/latest/reference/process.html#queue) (see [process directives](https://nextflow.io/docs/latest/reference/process.html#process-directives) for other properties) just once.
@@ -1522,14 +1510,13 @@ Nextflow will translate these values into the appropriate instructions depending
 We're not going to run this, since we don't have access to relevant infrastructure in the training environment.
 However, if you were to try running the workflow with resource allocations that exceed these limits, then look up the `sbatch` command in the `.command.run` script file, you would see that the requests that actually get sent to the executor are capped at the values specified by `resourceLimits`.
 
-<details class="info">
-<summary>Institutional reference configurations</summary>
+:::info[Institutional reference configurations]{collapsed}
 
 The nf-core project has compiled a [collection of configuration files](https://nf-co.re/configs/) shared by various institutions around the world, covering a wide range of HPC and cloud executors.
 
 Those shared configs are valuable both for people who work there and can therefore just utilize their institution's configuration out of the box, and as a model for people who are looking to develop a configuration for their own infrastructure.
 
-</details>
+:::
 
 ### Takeaway {#takeaway_4}
 
@@ -1750,8 +1737,7 @@ Outputs:
 
 This will use Docker where possible and produce outputs under `custom-outdir-config/test`, and this time the character is the comedic duo `dragonandcow`.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt"
  _________
@@ -1777,7 +1763,7 @@ This will use Docker where possible and produce outputs under `custom-outdir-con
   //    \\               ///-._ _ _ _ _ _ _{^ - - - - ~
 ```
 
-</details>
+:::
 
 This means that as long as we distribute any test data files with the workflow code, anyone can quickly try out the workflow without having to supply their own inputs via the command line or a parameter file.
 

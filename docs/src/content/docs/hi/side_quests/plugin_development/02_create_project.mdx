@@ -219,8 +219,7 @@ make install
 
 `make install` plugin code को compile करता है और इसे तुम्हारी local Nextflow plugin डायरेक्टरी (`$NXF_HOME/plugins/`) में copy करता है, जिससे यह उपयोग के लिए उपलब्ध हो जाता है।
 
-<details class="example">
-<summary>Build आउटपुट</summary>
+:::example[Build आउटपुट]{collapsed}
 
 पहली बार जब तुम यह चलाते हो, Gradle खुद को download करेगा (इसमें एक मिनट लग सकता है):
 
@@ -243,7 +242,7 @@ BUILD SUCCESSFUL in 23s
 - **"Deprecated Gradle features..."**: यह चेतावनी plugin template से आती है, तुम्हारे code से नहीं। इसे ignore करना safe है।
 - **"BUILD SUCCESSFUL"**: यही मायने रखता है। तुम्हारा plugin बिना errors के compile हुआ।
 
-</details>
+:::
 
 Pipeline डायरेक्टरी में वापस जाओ:
 

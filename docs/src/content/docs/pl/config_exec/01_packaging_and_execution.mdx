@@ -122,13 +122,12 @@ Teraz wróć do Docker'a na potrzeby pozostałej części kursu.
 docker.enabled = true
 ```
 
-<details class="tip">
-<summary>Mieszanie Docker'a i Condy</summary>
+:::tip[Mieszanie Docker'a i Condy]{collapsed}
 
 Ponieważ te ustawienia mają zakres per proces, można je mieszać: część procesów używa Docker'a, inne Condy — w zależności od tego, co jest dostępne dla danego narzędzia.
 Jeśli dla tego samego procesu ustawiona jest zarówno dyrektywa `container` (w kodzie pipeline'u), jak i dyrektywa `conda` (tutaj, z konfiguracji), a oba systemy pakowania są włączone, Nextflow priorytetyzuje kontenery.
 
-</details>
+:::
 
 ### Podsumowanie
 
@@ -176,8 +175,7 @@ process {
 Większość platform HPC wymaga, żeby zgłoszenia zadań określały zapotrzebowanie na zasoby — takie jak procesory, pamięć i nazwa kolejki — używając własnej składni.
 To samo zapotrzebowanie na 8 procesorów i 4 GB RAM w kolejce o nazwie `my-science-work` wygląda zupełnie inaczej w zależności od schedulera.
 
-<details class="abstract">
-<summary>Przykłady</summary>
+:::abstract[Przykłady]{collapsed}
 
 ```bash title="Config for SLURM / submit using sbatch"
 #SBATCH -o /path/to/my/task/directory/my-task-1.log
@@ -205,7 +203,7 @@ To samo zapotrzebowanie na 8 procesorów i 4 GB RAM w kolejce o nazwie `my-scien
 #$ -l h_rss=4096M,mem_free=4096M
 ```
 
-</details>
+:::
 
 Nextflow abstrahuje to wszystko: raz określasz standardowe właściwości, takie jak `cpus`, `memory` i `queue` (pełna lista w dokumentacji [dyrektyw procesu](https://nextflow.io/docs/latest/reference/process.html#process-directives)), a Nextflow tłumaczy je na odpowiednie skrypty specyficzne dla danego backendu w czasie wykonania.
 

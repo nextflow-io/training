@@ -57,8 +57,7 @@ code .
 
 तुम्हें विभिन्न प्रकार के बग्स वाले उदाहरण वर्कफ़्लो का एक सेट मिलेगा जिनका उपयोग हम अभ्यास के लिए करेंगे:
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 .
@@ -87,7 +86,7 @@ code .
 └── no_such_var.nf
 ```
 
-</details>
+:::
 
 ये फ़ाइलें वास्तविक दुनिया के विकास में आने वाले सामान्य डीबगिंग परिदृश्यों को दर्शाती हैं।
 
@@ -2287,8 +2286,7 @@ nextflow run buggy_workflow.nf -stub-run
 nextflow run buggy_workflow.nf -resume
 ```
 
-<details class="solution">
-<summary>समाधान</summary>
+:::solution[समाधान]{collapsed}
 
 `buggy_workflow.nf` में 10 अलग-अलग एरर हैं जो सभी प्रमुख डीबगिंग श्रेणियों को कवर करती हैं। यहाँ प्रत्येक एरर और उसे कैसे ठीक करें का व्यवस्थित विवरण है, उस क्रम में जिसमें तुम उन्हें Nextflow 26.04 पर वास्तव में सामना करते हो। compiler वर्कफ़्लो को दो passes में resolve करता है: पहले यह सिंटैक्स parse करता है, फिर यह statically जांचता है कि हर वेरिएबल defined है। इसलिए तुम पहले सिंटैक्स एरर साफ करते हो, फिर undefined-variable एरर का एक batch, इससे पहले कि वर्कफ़्लो बिल्कुल चले और runtime एरर शुरू हों।
 
@@ -2533,7 +2531,7 @@ output {
 }
 ```
 
-</details>
+:::
 :::
 
 **कवर की गई एरर श्रेणियां:**

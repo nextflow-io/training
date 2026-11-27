@@ -126,8 +126,7 @@ Nextflow timeline को `timeline-<timestamp>.html` नाम की फ़ा�
 
 हर बार जब तुम Nextflow वर्कफ़्लो launch करते हो, तो current working डायरेक्टरी में `.nextflow` नाम की एक hidden डायरेक्टरी के अंदर `history` नाम की एक log फ़ाइल में एक लाइन लिखी जाती है।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```txt title=".nextflow/history" showLineNumbers
 2026-09-13 01:47:58	2.8s	determined_ramanujan	OK	ce74f81996b8ce999853fdbb25ba7969	03078950-5011-414f-992b-8fe1bd219ac2	nextflow run main.nf --input data/greetings.csv --character turkey
@@ -136,7 +135,7 @@ Nextflow timeline को `timeline-<timestamp>.html` नाम की फ़ा�
 2026-09-13 01:48:14	1.5s	deadly_lamport	OK	ce74f81996b8ce999853fdbb25ba7969	517ccc29-9db7-4d8d-8ea0-c8db6e9ac653	nextflow run main.nf --input data/greetings.csv --character stegosaurus -resume
 ```
 
-</details>
+:::
 
 हर लाइन तुम्हें इस डायरेक्टरी से launch किए गए run का timestamp, duration, run name, status, revision ID, session ID, और पूरी कमांड लाइन देती है।
 

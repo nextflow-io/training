@@ -122,13 +122,12 @@ Outputs:
 docker.enabled = true
 ```
 
-<details class="tip">
-<summary>Docker और Conda को मिलाना</summary>
+:::tip[Docker और Conda को मिलाना]{collapsed}
 
 क्योंकि ये settings प्रति process scoped हैं, तुम इन्हें मिला सकते हो: कुछ processes Docker उपयोग करती हैं, अन्य Conda, इस पर निर्भर करते हुए कि प्रत्येक tool के लिए क्या उपलब्ध है।
 अगर एक ही process के लिए `container` निर्देश (पाइपलाइन कोड में) और `conda` निर्देश (यहाँ, config से) दोनों सेट हों और दोनों packaging systems enabled हों, तो Nextflow containers को प्राथमिकता देता है।
 
-</details>
+:::
 
 ### सारांश
 
@@ -176,8 +175,7 @@ Training वातावरण किसी HPC cluster से connected नह�
 अधिकांश HPC platforms को job submissions में resource requests निर्दिष्ट करने की आवश्यकता होती है, जैसे CPUs, memory, और queue का नाम, अपनी खुद की syntax का उपयोग करके।
 `my-science-work` नामक queue पर 8 CPUs और 4 GB RAM के लिए वही request scheduler के आधार पर बिल्कुल अलग दिखती है।
 
-<details class="abstract">
-<summary>उदाहरण</summary>
+:::abstract[उदाहरण]{collapsed}
 
 ```bash title="Config for SLURM / submit using sbatch"
 #SBATCH -o /path/to/my/task/directory/my-task-1.log
@@ -205,7 +203,7 @@ Training वातावरण किसी HPC cluster से connected नह�
 #$ -l h_rss=4096M,mem_free=4096M
 ```
 
-</details>
+:::
 
 Nextflow यह सब abstract कर देता है: तुम एक बार standardized properties जैसे `cpus`, `memory`, और `queue` निर्दिष्ट करते हो (पूरी सूची के लिए [process directives](https://nextflow.io/docs/latest/reference/process.html#process-directives) देखो), और Nextflow उन्हें runtime पर उचित backend-specific scripts में translate करता है।
 

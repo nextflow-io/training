@@ -195,3 +195,11 @@ def test_fix_frontmatter_strips_unclosed_stray_dashes():
     result = fix_frontmatter(translation, source, "fr")
     assert not result.lstrip().startswith("---")
     assert result.lstrip().startswith("# Resume du cours")
+
+
+def test_fix_directives_keeps_collapsible_attributes():
+    from translate.postprocess import fix_directives
+
+    source = [":::solution[Solution]{collapsed}", "Answer.", ":::"]
+    trans = [":::solution[Lösung]", "Antwort.", ":::"]
+    assert fix_directives(trans, source) == [":::solution[Lösung]{collapsed}", "Antwort.", ":::"]

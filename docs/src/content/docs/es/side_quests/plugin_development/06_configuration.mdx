@@ -299,14 +299,12 @@ Ejecute el pipeline para confirmar que todo sigue funcionando:
 nextflow run greet.nf -ansi-log false
 ```
 
-<details class="exercise">
-<summary>Deshabilitar el plugin completamente</summary>
+::::exercise[Deshabilitar el plugin completamente]{collapsed}
 
 Intente establecer `greeting.enabled = false` en `nextflow.config` y ejecute el pipeline nuevamente.
 ¿Qué cambia en la salida?
 
-<details class="solution">
-<summary>Solución</summary>
+:::solution[Solución]{collapsed}
 
 ```nextflow {8} title="nextflow.config"
 // Configuración para los ejercicios de desarrollo de plugins
@@ -325,9 +323,9 @@ El pipeline en sí sigue ejecutándose, pero no hay observers activos.
 
 Recuerde volver a establecer `enabled` en `true` (o eliminar la línea) antes de continuar.
 
-</details>
+:::
 
-</details>
+::::
 
 ---
 

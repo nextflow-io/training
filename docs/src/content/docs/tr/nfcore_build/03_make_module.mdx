@@ -11,8 +11,7 @@ nf-core projesi, Bölüm 1'de iş akışı için kullandığımıza benzer şeki
 Ancak öğretim amaçları için, manuel olarak başlayacağız: `core-hello` iş hattınızdaki yerel `cowpy` modülünü adım adım nf-core tarzı bir modüle dönüştüreceğiz.
 Bundan sonra, gelecekte daha verimli çalışmak için şablon tabanlı modül oluşturma yöntemini size göstereceğiz.
 
-<details class="info">
-<summary>Bu bölümden nasıl başlanır</summary>
+:::info[Bu bölümden nasıl başlanır]{collapsed}
 
 Bu bölüm, [Bölüm 2: Bir nf-core modülü kullanma](./02_use_module.mdx) kısmını tamamladığınızı ve `FIND_CONCATENATE` modülünü iş hattınıza entegre ettiğinizi varsayar.
 
@@ -31,7 +30,7 @@ Başarıyla çalıştığını test etmek için aşağıdaki komutu çalıştır
 nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
-</details>
+:::
 
 ---
 
@@ -683,8 +682,7 @@ cat work/38/eb29ea*/cowpy-test.txt
 
 `kosh` karakteriyle gösterilen ASCII sanatını görmelisiniz; bu, `ext.args` yapılandırmasının çalıştığını doğrular!
 
-<details class="info">
-<summary>(Opsiyonel) Komut dosyasını inceleyin</summary>
+:::info[(Opsiyonel) Komut dosyasını inceleyin]{collapsed}
 
 Yapılandırmanın tam olarak nasıl uygulandığını görmek istiyorsanız, `.command.sh` dosyasını inceleyebilirsiniz:
 
@@ -702,7 +700,7 @@ cat test.txt | cowpy -c kosh > cowpy-test.txt
 
 Bu, `.command.sh` dosyasının `ext.args` yapılandırmasına göre doğru şekilde oluşturulduğunu gösterir.
 
-</details>
+:::
 
 Burada ne başardığımızı düşünmek için bir dakikanızı ayırın.
 Bu yaklaşım, modül arayüzünü temel verilere (dosyalar, metadata ve zorunlu örnek başına parametreler) odaklı tutarken, aracın davranışını kontrol eden seçenekler ayrı olarak yapılandırma yoluyla ele alınır.
@@ -868,8 +866,7 @@ executor >  local (8)
 Sonuçlar dizinindeki çıktıya bir göz atın.
 Varsayılan batch adına göre, cowpy çıktı dosyasını daha önce olduğu gibi aynı adlandırmayla görmelisiniz: `cowpy-test.txt`.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console {3}
 results
@@ -882,7 +879,7 @@ results
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Modül veya iş akışı kodunda herhangi bir değişiklik yapmak zorunda kalmadan adlandırma desenini değiştirebileceğinizi kendinize kanıtlamak için `conf/modules.config` dosyasındaki `ext.prefix` yapılandırmasını değiştirmekten çekinmeyin.
 
@@ -1004,8 +1001,7 @@ executor >  local (8)
 Mevcut çalışma dizininize bir göz atın.
 Şimdi `core-hello-results` ayrıca `COWPY` modülünün çıktılarını da içeriyor.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console {4-5}
 core-hello-results/
@@ -1037,7 +1033,7 @@ core-hello-results/
     └── pipeline_dag_2025-12-27_06-35-56.html
 ```
 
-</details>
+:::
 
 Nextflow'un iş akışı ve modül adlarına göre bu dizin hiyerarşisini oluşturduğunu görebilirsiniz.
 
@@ -1243,8 +1239,7 @@ Araç, paket bilgisi bulma ve yapıyı kurma karmaşıklığını üstlenir; bö
 
 Araç, `modules/local/` içinde (veya nf-core/modules deposundaysanız `modules/nf-core/` içinde) eksiksiz bir modül yapısı oluşturur:
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 modules/local/cowpy
@@ -1255,7 +1250,7 @@ modules/local/cowpy
     └── main.nf.test
 ```
 
-</details>
+:::
 
 Her dosya belirli bir amaca hizmet eder:
 

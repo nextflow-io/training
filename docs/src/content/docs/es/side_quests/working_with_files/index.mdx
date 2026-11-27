@@ -63,8 +63,7 @@ El editor se abre con el directorio del proyecto en foco.
 
 Encontrará un archivo de workflow simple llamado `main.nf`, un directorio `modules` que contiene dos archivos de módulo, y un directorio `data` que contiene algunos archivos de datos de ejemplo.
 
-<details class="abstract">
-<summary>Contenido del directorio</summary>
+:::abstract[Contenido del directorio]{collapsed}
 
 ```console
 .
@@ -91,7 +90,7 @@ Encontrará un archivo de workflow simple llamado `main.nf`, un directorio `modu
     └── count_lines.nf
 ```
 
-</details>
+:::
 
 Este directorio contiene datos de secuenciación de extremos pareados de tres pacientes (A, B, C).
 
@@ -155,13 +154,12 @@ output {
 
 Este es un mini-workflow (sin ningún proceso) que hace referencia a una única ruta de archivo en su workflow, luego la imprime en la consola junto con su clase.
 
-<details class="info">
-<summary>¿Qué es `.class`?</summary>
+:::info[¿Qué es `.class`?]{collapsed}
 
 En Nextflow, `.class` nos indica con qué tipo de objeto estamos trabajando. Es como preguntar "¿qué tipo de cosa es esto?" para saber si es una cadena, un número, un archivo u otra cosa.
 Esto nos ayudará a ilustrar la diferencia entre una cadena simple y un objeto Path en las siguientes secciones.
 
-</details>
+:::
 
 Ejecutemos el workflow:
 
@@ -352,15 +350,14 @@ process COUNT_LINES {
 
 Como puede ver, es un script bastante sencillo que descomprime el archivo y cuenta cuántas líneas contiene.
 
-<details class="info">
-<summary>¿Qué hace `debug true`?</summary>
+:::info[¿Qué hace `debug true`?]{collapsed}
 
 La directiva `debug true` en la definición del proceso hace que Nextflow imprima la salida de su script (como el conteo de líneas "40") directamente en el registro de ejecución.
 Sin esto, solo vería el estado de ejecución del proceso pero no la salida real de su script.
 
 Para más información sobre la depuración de procesos de Nextflow, consulte la misión secundaria [Debugging Nextflow Workflows](../debugging/index.mdx).
 
-</details>
+:::
 
 Con el módulo importado y su código examinado, podemos llamar al proceso desde el workflow.
 
@@ -737,8 +734,7 @@ Ese archivo preparado puede tratarse como un archivo local y vincularse simbóli
 
 Puede verificar que eso ocurrió aquí mirando el contenido del directorio de trabajo ubicado en el valor hash del proceso.
 
-<details class="abstract">
-<summary>Contenido del directorio work</summary>
+:::abstract[Contenido del directorio work]{collapsed}
 
 Si el hash del proceso fue `07/246c2a`, podría explorar el directorio de trabajo:
 
@@ -754,7 +750,7 @@ lrwxr-xr-x  1 user  staff    89 Jan 28 10:00 patientA_rep1_normal_R1_001.fastq.g
 
 El enlace simbólico apunta a una copia preparada del archivo remoto que Nextflow descargó automáticamente.
 
-</details>
+:::
 
 Tenga en cuenta que para archivos más grandes, el paso de descarga tomará tiempo adicional en comparación con la ejecución sobre archivos locales.
 Sin embargo, Nextflow verifica si ya tiene una copia preparada para evitar descargas innecesarias.
@@ -1833,8 +1829,7 @@ Outputs:
 
 Las salidas se publican en un directorio `results`, así que eche un vistazo allí.
 
-<details class="abstract">
-<summary>Contenido de directorio y archivo</summary>
+:::abstract[Contenido de directorio y archivo]{collapsed}
 
 ```console
 results
@@ -1852,7 +1847,7 @@ Read 1 size: 10 reads
 Read 2 size: 10 reads
 ```
 
-</details>
+:::
 
 El proceso tomó nuestras entradas y creó un nuevo archivo que contiene los metadatos del paciente, tal como fue diseñado.
 ¡Espléndido!
@@ -1911,8 +1906,7 @@ Outputs:
 
 El directorio de resultados ahora debería contener resultados para todos los datos disponibles.
 
-<details class="abstract">
-<summary>Contenido del directorio</summary>
+:::abstract[Contenido del directorio]{collapsed}
 
 ```console
 results
@@ -1924,7 +1918,7 @@ results
     └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 ¡Éxito! ¡Hemos analizado a todos los pacientes de una sola vez! ¿Verdad?
 
@@ -1986,8 +1980,7 @@ Outputs:
 
 Revise el directorio de resultados ahora:
 
-<details class="abstract">
-<summary>Contenido del directorio</summary>
+:::abstract[Contenido del directorio]{collapsed}
 
 ```console
 results/
@@ -2017,7 +2010,7 @@ results/
             └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 Y ahí está, todos nuestros metadatos, perfectamente organizados. ¡Eso es un éxito!
 

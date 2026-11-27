@@ -63,8 +63,7 @@ L'editor s'obre amb el directori del projecte en focus.
 
 Trobareu un fitxer de workflow senzill anomenat `main.nf`, un directori `modules` que conté dos fitxers de mòdul, i un directori `data` que conté alguns fitxers de dades d'exemple.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 .
@@ -91,7 +90,7 @@ Trobareu un fitxer de workflow senzill anomenat `main.nf`, un directori `modules
     └── count_lines.nf
 ```
 
-</details>
+:::
 
 Aquest directori conté dades de seqüenciació paired-end de tres pacients (A, B, C).
 
@@ -155,13 +154,12 @@ output {
 
 Aquest és un mini-workflow (sense cap procés) que fa referència a una única ruta de fitxer en el seu workflow, i després l'imprimeix a la consola, juntament amb la seva classe.
 
-<details class="info">
-<summary>Què és `.class`?</summary>
+:::info[Què és `.class`?]{collapsed}
 
 A Nextflow, `.class` ens indica quin tipus d'objecte estem treballant. És com preguntar "quin tipus de cosa és aquesta?" per esbrinar si és una cadena, un número, un fitxer o alguna altra cosa.
 Això ens ajudarà a il·lustrar la diferència entre una cadena simple i un objecte Path a les seccions següents.
 
-</details>
+:::
 
 Executem el workflow:
 
@@ -352,15 +350,14 @@ process COUNT_LINES {
 
 Com podeu veure, és un script bastant senzill que descomprimeix el fitxer i compta quantes línies conté.
 
-<details class="info">
-<summary>Què fa `debug true`?</summary>
+:::info[Què fa `debug true`?]{collapsed}
 
 La directiva `debug true` en la definició del procés fa que Nextflow imprimeixi la sortida del vostre script (com el recompte de línies "40") directament al registre d'execució.
 Sense això, només veuríeu l'estat d'execució del procés però no la sortida real del vostre script.
 
 Per obtenir més informació sobre la depuració de processos Nextflow, consulteu la missió secundària [Debugging Nextflow Workflows](../debugging/index.mdx).
 
-</details>
+:::
 
 Amb el mòdul importat i el seu codi examinat, podem cridar el procés des del workflow.
 
@@ -735,8 +732,7 @@ Aquest fitxer preparat es pot tractar com un fitxer local i es pot enllaçar sim
 
 Podeu verificar que això ha passat aquí mirant el contingut del directori de treball ubicat al valor hash del procés.
 
-<details class="abstract">
-<summary>Contingut del directori work</summary>
+:::abstract[Contingut del directori work]{collapsed}
 
 Si el hash del procés era `07/246c2a`, podríeu explorar el directori de treball:
 
@@ -752,7 +748,7 @@ lrwxr-xr-x  1 user  staff    89 Jan 28 10:00 patientA_rep1_normal_R1_001.fastq.g
 
 L'enllaç simbòlic apunta a una còpia preparada del fitxer remot que Nextflow ha descarregat automàticament.
 
-</details>
+:::
 
 Tingueu en compte que per a fitxers més grans, el pas de descàrrega trigarà un temps addicional en comparació amb l'execució sobre fitxers locals.
 No obstant això, Nextflow comprova si ja té una còpia preparada per evitar descàrregues innecessàries.
@@ -1831,8 +1827,7 @@ Outputs:
 
 Les sortides es publiquen a un directori `results`, així que feu una ullada allà.
 
-<details class="abstract">
-<summary>Contingut de directori i fitxer</summary>
+:::abstract[Contingut de directori i fitxer]{collapsed}
 
 ```console
 results
@@ -1850,7 +1845,7 @@ Read 1 size: 10 reads
 Read 2 size: 10 reads
 ```
 
-</details>
+:::
 
 El procés ha pres les nostres entrades i ha creat un nou fitxer que conté les metadades del pacient, tal com estava dissenyat.
 Excel·lent!
@@ -1909,8 +1904,7 @@ Outputs:
 
 El directori de resultats ara hauria de contenir resultats per a totes les dades disponibles.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 results
@@ -1922,7 +1916,7 @@ results
     └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 Èxit! Hem analitzat tots els pacients d'una sola vegada! Oi?
 
@@ -1984,8 +1978,7 @@ Outputs:
 
 Comproveu el directori de resultats ara:
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 results/
@@ -2015,7 +2008,7 @@ results/
             └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 I aquí ho teniu, totes les nostres metadades, ben organitzades. Això és un èxit!
 

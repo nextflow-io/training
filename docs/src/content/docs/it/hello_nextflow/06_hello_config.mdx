@@ -27,8 +27,7 @@ In questa parte del corso, vi mostreremo il meccanismo di configurazione più se
 Esamineremo i componenti essenziali della configurazione di Nextflow come le direttive dei processi, gli executor, i profili e i file di parametri.
 Imparando a utilizzare efficacemente queste opzioni di configurazione, potete migliorare la flessibilità, la scalabilità e le prestazioni delle vostre pipeline.
 
-<details class="info">
-<summary>Come iniziare da questa sezione</summary>
+:::info[Come iniziare da questa sezione]{collapsed}
 
 Questa sezione del corso presuppone che abbiate completato le Parti 1-5 del corso [Hello Nextflow](./index.mdx) e abbiate una pipeline funzionante completa.
 
@@ -43,7 +42,7 @@ Il file `nextflow.config` contiene la riga `docker.enabled = true` che abilita l
 
 Se non avete familiarità con la pipeline Hello o avete bisogno di un promemoria, vedete [questa pagina informativa](../info/hello_pipeline.mdx).
 
-</details>
+:::
 
 ---
 
@@ -111,8 +110,7 @@ Outputs:
 
 Come in precedenza, troverete i file di output nella directory specificata nel blocco `output` (`results/hello_config/`).
 
-<details class="abstract">
-<summary>Contenuto della directory</summary>
+:::abstract[Contenuto della directory]{collapsed}
 
 ```console
 results/hello_config/
@@ -128,12 +126,11 @@ results/hello_config/
 └── batch-report.txt
 ```
 
-</details>
+:::
 
 L'output ASCII art finale è nella directory `results/hello_config/`, sotto il nome `cowpy-COLLECTED-batch-output.txt`.
 
-<details class="abstract">
-<summary>Contenuto del file</summary>
+:::abstract[Contenuto del file]{collapsed}
 
 ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
 _________
@@ -164,7 +161,7 @@ _________
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 Se tutto ha funzionato, siete pronti a imparare come configurare le vostre pipeline.
 
@@ -291,8 +288,7 @@ Questo produce ancora lo stesso output di prima.
 
 L'output ASCII art finale è nella directory `results/hello_config/`, sotto il nome `cowpy-COLLECTED-batch-output.txt`, come prima.
 
-<details class="abstract">
-<summary>Contenuto del file</summary>
+:::abstract[Contenuto del file]{collapsed}
 
 ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
 _________
@@ -323,7 +319,7 @@ _________
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 Funzionalmente, questo spostamento non ha cambiato nulla, ma concettualmente è un po' più pulito avere i valori predefiniti impostati nel file di configurazione.
 
@@ -404,8 +400,7 @@ In questa esecuzione, Nextflow combina il `nextflow.config` nella nostra directo
 
 Il file di output finale dovrebbe contenere il personaggio tux che dice i saluti.
 
-<details class="abstract">
-<summary>Contenuto del file</summary>
+:::abstract[Contenuto del file]{collapsed}
 
 ```console title="tux-run/results/hello_config/cowpy-COLLECTED-experiment-output.txt"
 _________
@@ -425,7 +420,7 @@ _________
 
 ```
 
-</details>
+:::
 
 Ecco fatto; ora avete uno spazio per sperimentare senza modificare la vostra configurazione 'normale'.
 
@@ -501,8 +496,7 @@ Outputs:
 
 Il file di output finale dovrebbe contenere il personaggio stegosaurus che dice i saluti.
 
-<details class="abstract">
-<summary>Contenuto del file</summary>
+:::abstract[Contenuto del file]{collapsed}
 
 ```console title="results/hello_config/cowpy-COLLECTED-yaml-output.txt"
 _________
@@ -526,7 +520,7 @@ _________
                     |_____|        |_____|         ~ - . _ _ _ _ _>
 ```
 
-</details>
+:::
 
 Usare un file di parametri può sembrare eccessivo quando si hanno solo pochi parametri da specificare, ma alcune pipeline si aspettano decine di parametri.
 In quei casi, usare un file di parametri ci permetterà di fornire valori di parametri a runtime senza dover digitare righe di comando massive e senza modificare lo script del workflow.
@@ -597,8 +591,7 @@ Outputs:
 
 Questo pubblica gli output in `custom-outdir-cli/` invece di `results/`:
 
-<details class="abstract">
-<summary>Contenuto della directory</summary>
+:::abstract[Contenuto della directory]{collapsed}
 
 ```console
 custom-outdir-cli/
@@ -615,7 +608,7 @@ custom-outdir-cli/
         └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Notate che abbiamo ancora la sottodirectory `hello_config` dalle dichiarazioni `path` nel blocco output.
 Puliamo questo.
@@ -689,8 +682,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli-2/
 
 Ora gli output sono pubblicati direttamente sotto `custom-outdir-cli-2/`, senza la sottodirectory `hello_config`:
 
-<details class="abstract">
-<summary>Contenuto della directory</summary>
+:::abstract[Contenuto della directory]{collapsed}
 
 ```console
 custom-outdir-cli-2/
@@ -706,7 +698,7 @@ custom-outdir-cli-2/
     └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 :::tip[Suggerimento]
 L'opzione `-output-dir` è usata per controllare _dove_ vanno gli output, mentre la direttiva `path` nel blocco output controlla la _struttura delle sottodirectory_.
@@ -947,8 +939,7 @@ Outputs:
 
 Questo pubblica gli output in `custom-outdir-config-2/rep2/`, con il percorso base specificato _e_ la sottodirectory del nome del batch _e_ i risultati raggruppati per processo:
 
-<details class="abstract">
-<summary>Contenuto della directory</summary>
+:::abstract[Contenuto della directory]{collapsed}
 
 ```console
 custom-outdir-config-2
@@ -970,7 +961,7 @@ custom-outdir-config-2
             └── Hola-output.txt
 ```
 
-</details>
+:::
 
 ### 2.3. Impostare la modalità di pubblicazione a livello di workflow
 
@@ -1092,8 +1083,7 @@ Outputs:
 
 Questo pubblica gli output in `config-output-mode/`, e sono ancora tutte copie appropriate, non symlink.
 
-<details class="abstract">
-<summary>Contenuto della directory</summary>
+:::abstract[Contenuto della directory]{collapsed}
 
 ```console
 config-output-mode
@@ -1115,7 +1105,7 @@ config-output-mode
             └── Hola-output.txt
 ```
 
-</details>
+:::
 
 Il motivo principale per cui potreste ancora voler usare il modo per-output di impostare la modalità è se volete mescolare all'interno dello stesso workflow, _cioè_ avere alcuni output copiati e alcuni come symlink.
 
@@ -1251,8 +1241,7 @@ Dal nostro punto di vista, sembra che funzioni esattamente come l'esecuzione con
 
 Questo significa che siamo pronti a eseguire con ambienti Conda se necessario.
 
-<details class="info">
-<summary>Mescolare Docker e Conda</summary>
+:::info[Mescolare Docker e Conda]{collapsed}
 
 Dato che queste direttive sono assegnate per processo, è possibile 'mescolare', _cioè_ configurare alcuni dei processi nel vostro workflow per essere eseguiti con Docker e altri con Conda, per esempio, se l'infrastruttura di calcolo che state usando supporta entrambi.
 In quel caso, abilitereste sia Docker che Conda nel vostro file di configurazione.
@@ -1260,7 +1249,7 @@ Se entrambi sono disponibili per un dato processo, Nextflow darà priorità ai c
 
 E come notato in precedenza, Nextflow supporta diverse altre tecnologie di packaging software e container, quindi non è limitato a quelle due.
 
-</details>
+:::
 
 ### Takeaway
 
@@ -1312,8 +1301,7 @@ La maggior parte delle piattaforme di calcolo ad alte prestazioni permette (e a 
 
 Sfortunatamente, ciascuno di questi sistemi usa tecnologie, sintassi e configurazioni diverse per definire come un lavoro dovrebbe essere definito e inviato allo scheduler rilevante.
 
-<details class="abstract">
-<summary>Esempi</summary>
+:::abstract[Esempi]{collapsed}
 
 Per esempio, lo stesso lavoro che richiede 8 CPU e 4GB di RAM per essere eseguito sulla coda "my-science-work" deve essere espresso in modi diversi a seconda del backend.
 
@@ -1343,7 +1331,7 @@ Per esempio, lo stesso lavoro che richiede 8 CPU e 4GB di RAM per essere eseguit
 #$ -l h_rss=4096M,mem_free=4096M
 ```
 
-</details>
+:::
 
 Fortunatamente, Nextflow semplifica tutto questo.
 Fornisce una sintassi standardizzata in modo che possiate specificare le proprietà rilevanti come [`cpus`](https://nextflow.io/docs/latest/reference/process.html#cpus), [`memory`](https://nextflow.io/docs/latest/reference/process.html#memory) e [`queue`](https://nextflow.io/docs/latest/reference/process.html#queue) (vedete le [direttive di processo](https://nextflow.io/docs/latest/reference/process.html#process-directives) per altre proprietà) una sola volta.
@@ -1523,14 +1511,13 @@ Nextflow tradurrà questi valori nelle istruzioni appropriate a seconda dell'exe
 Non eseguiremo questo, dato che non abbiamo accesso all'infrastruttura rilevante nell'ambiente di formazione.
 Tuttavia, se provaste a eseguire il workflow con allocazioni di risorse che superano questi limiti, poi cercaste il comando `sbatch` nel file di script `.command.run`, vedreste che le richieste che effettivamente vengono inviate all'executor sono limitate ai valori specificati da `resourceLimits`.
 
-<details class="info">
-<summary>Configurazioni di riferimento istituzionali</summary>
+:::info[Configurazioni di riferimento istituzionali]{collapsed}
 
 Il progetto nf-core ha compilato una [collezione di file di configurazione](https://nf-co.re/configs/) condivisi da varie istituzioni in tutto il mondo, che coprono una vasta gamma di executor HPC e cloud.
 
 Quelle configurazioni condivise sono preziose sia per le persone che lavorano lì e possono quindi semplicemente utilizzare la configurazione della loro istituzione pronta all'uso, sia come modello per le persone che stanno cercando di sviluppare una configurazione per la propria infrastruttura.
 
-</details>
+:::
 
 ### Takeaway
 
@@ -1751,8 +1738,7 @@ Outputs:
 
 Questo userà Docker dove possibile e produrrà output sotto `custom-outdir-config/test`, e questa volta il personaggio è il duo comico `dragonandcow`.
 
-<details class="abstract">
-<summary>Contenuto del file</summary>
+:::abstract[Contenuto del file]{collapsed}
 
 ```console title="custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt"
  _________
@@ -1778,7 +1764,7 @@ Questo userà Docker dove possibile e produrrà output sotto `custom-outdir-conf
   //    \\               ///-._ _ _ _ _ _ _{^ - - - - ~
 ```
 
-</details>
+:::
 
 Questo significa che finché distribuiamo qualsiasi file di dati di test con il codice del workflow, chiunque può provare rapidamente il workflow senza dover fornire i propri input tramite la riga di comando o un file di parametri.
 

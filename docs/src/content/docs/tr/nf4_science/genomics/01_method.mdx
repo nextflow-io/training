@@ -131,8 +131,7 @@ samtools index /data/bam/reads_mother.bam
 
 Komut terminalde herhangi bir çıktı üretmez; ancak artık orijinal BAM girdi dosyasıyla aynı dizinde `reads_mother.bam.bai` adlı bir dosya görmeniz gerekir.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 data/bam/
@@ -142,7 +141,7 @@ data/bam/
 └── reads_son.bam
 ```
 
-</details>
+:::
 
 Bu, ilk adımın testini tamamlar.
 
@@ -280,22 +279,20 @@ Günlük çıktısı oldukça ayrıntılıdır; bu nedenle yukarıdaki örnekte 
 
 Çıktı dosyaları olan `reads_mother.vcf` ve indeks dosyası `reads_mother.vcf.idx`, konteynerdeki çalışma dizininizde oluşturulur.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 conda.yml  hsperfdata_root  reads_mother.vcf  reads_mother.vcf.idx
 ```
 
-</details>
+:::
 
 VCF dosyası varyant çağrılarını içerir; bunu birazdan göreceğiz. İndeks dosyası ise BAM indeks dosyasıyla aynı işlevi görür: araçların tüm dosyayı yüklemeden verinin alt kümelerini aramasına ve almasına olanak tanır.
 
 VCF metin tabanlı bir format olduğundan ve bu dosya küçük bir test dosyası olduğundan, içeriğini açıp görüntülemek için `cat reads_mother.vcf` komutunu çalıştırabilirsiniz.
 Dosyanın başına kadar geri dönerseniz, pek çok meta veri satırından oluşan bir başlık ve ardından her biri bir satırda yer alan varyant çağrılarının listesini bulacaksınız.
 
-<details class="abstract">
-<summary>Dosya içeriği (kısaltılmış)</summary>
+:::abstract[Dosya içeriği (kısaltılmış)]{collapsed}
 
 ```console {26} title="reads_mother.vcf" showLineNumbers
 ##fileformat=VCFv4.2
@@ -339,7 +336,7 @@ Dosyanın başına kadar geri dönerseniz, pek çok meta veri satırından oluş
 20_10037292_10066351    14156   .       T       C       183.64  .       AC=1;AF=0.500;AN=2;BaseQRankSum=0.703;DP=20;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=9.18;ReadPosRankSum=-0.193;SOR=1.034        GT:AD:DP:GQ:PL  0/1:12,8:20:99:191,0,319
 ```
 
-</details>
+:::
 
 Yukarıdaki örnek çıktıda, ardından gelen tablo verilerinin sütun adlarını veren son başlık satırını vurguladık.
 Her veri satırı, örneğin dizileme verilerinde tespit edilen olası bir varyantı tanımlar. VCF formatını yorumlamaya ilişkin rehberlik için [bu faydalı makaleye](https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/variant-identification-and-analysis/understanding-vcf-format/) bakabilirsiniz.
@@ -354,8 +351,7 @@ mkdir /data/vcf
 mv reads_mother.vcf* /data/vcf
 ```
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console {5,13-15}
 data/
@@ -375,7 +371,7 @@ data/
     └── reads_mother.vcf.idx
 ```
 
-</details>
+:::
 
 Bu işlem tamamlandığında tüm dosyalar normal dosya sisteminizde erişilebilir hale gelir.
 
@@ -452,8 +448,7 @@ samtools index /data/bam/reads_father.bam
 samtools index /data/bam/reads_son.bam
 ```
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 data/bam/
@@ -465,7 +460,7 @@ data/bam/
 └── reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Bu işlem, indeks dosyalarını ilgili BAM dosyalarıyla aynı dizinde oluşturmalıdır.
 
@@ -571,19 +566,17 @@ Runtime.totalMemory()=257949696 # [!code highlight]
 
 Bu işlem, konteynerdeki geçerli çalışma dizininde `reads_mother.g.vcf` GVCF çıktı dosyasını ve indeks dosyası olan `reads_mother.g.vcf.idx`'i oluşturur.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 conda.yml  hsperfdata_root  reads_mother.g.vcf  reads_mother.g.vcf.idx
 ```
 
-</details>
+:::
 
 Dosya içeriğinin ilk 200 satırını görüntülemek için `head -200 reads_mother.g.vcf` komutunu çalıştırırsanız, dosyanın ilk bölümde oluşturduğumuz eşdeğer VCF'den çok daha uzun olduğunu ve satırların büyük bölümünün VCF'de gördüklerimizden oldukça farklı göründüğünü fark edeceksiniz.
 
-<details class="abstract">
-<summary>Dosya içeriği (kısaltılmış)</summary>
+:::abstract[Dosya içeriği (kısaltılmış)]{collapsed}
 
 ```console {92,175,191,195} title="reads_mother.g.vcf" showLineNumbers
 ##fileformat=VCFv4.2
@@ -788,7 +781,7 @@ Dosya içeriğinin ilk 200 satırını görüntülemek için `head -200 reads_mo
 20_10037292_10066351	3537	.	A	<NON_REF>	.	.	END=3546	GT:DP:GQ:MIN_DP:PL	0/0:29:72:26:0,72,1080
 ```
 
-</details>
+:::
 
 Son başlık satırını ve dosyadaki ilk üç 'gerçek' varyant çağrısını bir kez daha vurguladık.
 
@@ -942,15 +935,14 @@ Runtime.totalMemory()=226492416
 
 Bu işlem tamamlandığında, geçerli dizininizde `.g.vcf` ile biten üç dosya (her örnek için bir tane) ve `.g.vcf.idx` ile biten ilgili indeks dosyaları bulunmalıdır.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 conda.yml        reads_father.g.vcf      reads_mother.g.vcf      reads_son.g.vcf
 hsperfdata_root  reads_father.g.vcf.idx  reads_mother.g.vcf.idx  reads_son.g.vcf.idx
 ```
 
-</details>
+:::
 
 Bu noktada, girdi örneklerimizin her biri için GVCF modunda varyant çağrısı yaptık.
 Artık ortak çağırmaya geçme zamanı.
@@ -1080,8 +1072,7 @@ Runtime.totalMemory()=203423744 # [!code highlight]
 Bu işlem, konteynerdeki geçerli çalışma dizininde `family_trio.vcf` VCF çıktı dosyasını ve indeksi olan `family_trio.vcf.idx`'i oluşturur.
 Bu da makul ölçüde küçük bir dosyadır; dolayısıyla dosya içeriğini görüntülemek için `cat family_trio.vcf` komutunu çalıştırabilir ve ilk birkaç varyant satırını bulmak için aşağı kaydırabilirsiniz.
 
-<details class="abstract">
-<summary>Dosya içeriği (kısaltılmış)</summary>
+:::abstract[Dosya içeriği (kısaltılmış)]{collapsed}
 
 ```console {39} title="family_trio.vcf" showLineNumbers
 ##fileformat=VCFv4.2
@@ -1144,7 +1135,7 @@ Bu da makul ölçüde küçük bir dosyadır; dolayısıyla dosya içeriğini g�
 20_10037292_10066351    14403   .       G       A       144.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=2.63;DP=116;ExcessHet=0.0000;FS=1.435;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=3.52;ReadPosRankSum=0.252;SOR=0.802  GT:AD:DP:GQ:PL  0/1:32,9:41:99:153,0,821        0/0:37,0:37:99:0,109,1169       0/0:37,0:37:99:0,99,1113
 ```
 
-</details>
+:::
 
 Varyant çağrısı verilerinin başlangıcını işaretleyen son başlık satırını bir kez daha vurguladık.
 
@@ -1165,8 +1156,7 @@ Bu sayede tüm bu çalışmayı otomatikleştirmek için iş akışımızı olu�
 mv *.vcf* /data/vcf
 ```
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console {14-19,22-23}
 data
@@ -1196,7 +1186,7 @@ data
     └── reads_son.g.vcf.idx
 ```
 
-</details>
+:::
 
 Bu işlem tamamlandığında tüm dosyalar normal dosya sisteminizde erişilebilir hale gelir.
 

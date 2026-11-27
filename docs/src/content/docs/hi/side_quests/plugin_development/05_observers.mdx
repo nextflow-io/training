@@ -260,13 +260,12 @@ Pipeline complete! 👋
 observer काम कर रहा है।
 हर बार जब कोई कार्य समाप्त होता है, Nextflow `onProcessComplete` को call करता है, और हमारी implementation एक संदेश print करती है।
 
-<details class="exercise">
-<summary>संदेश को customize करो</summary>
+:::exercise[संदेश को customize करो]{collapsed}
 
 `onProcessComplete` में संदेश को अपनी पसंद के किसी संदेश से बदलने की कोशिश करो, rebuild करो, और फिर से चलाओ।
 यह पुष्टि करता है कि observers के लिए पूरा edit-build-run cycle काम करता है।
 
-</details>
+:::
 
 ### 2.4. गिनती का logic जोड़ना
 
@@ -324,8 +323,7 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-<details class="example">
-<summary>आउटपुट</summary>
+:::example[आउटपुट]{collapsed}
 
 ```console
 N E X T F L O W  ~  version 26.04.4
@@ -357,7 +355,7 @@ Pipeline complete! 👋
 
 Counter संदेश कार्य submissions के साथ मिले हुए हैं क्योंकि observers कार्य पूरे होने पर चलते हैं।
 
-</details>
+:::
 
 ---
 

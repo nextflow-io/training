@@ -29,12 +29,11 @@ Channels sind Warteschlangen, die entwickelt wurden, um Eingaben effizient zu ha
 In diesem Teil des Kurses lernst du, wie du einen Channel verwendest, um mehrere Eingaben aus verschiedenen Quellen zu handhaben.
 Du lernst auch, [**Operatoren**](https://nextflow.io/docs/latest/reference/operator.html) zu verwenden, um Channel-Inhalte nach Bedarf zu transformieren.
 
-<details class="info">
-<summary>Wie du von diesem Abschnitt aus beginnst</summary>
+:::info[Wie du von diesem Abschnitt aus beginnst]{collapsed}
 
 Dieser Abschnitt des Kurses setzt voraus, dass du Teil 1 des [Hello Nextflow](./index.mdx)-Kurses abgeschlossen hast, aber wenn du mit den dort behandelten Grundlagen vertraut bist, kannst du von hier aus starten, ohne etwas Besonderes tun zu müssen.
 
-</details>
+:::
 
 ---
 
@@ -73,8 +72,7 @@ Outputs:
 
 Wie zuvor findest du die Ausgabedatei `output.txt` im Verzeichnis `results/hello_channels` (wie im `output`-Block des Workflow-Skripts oben angegeben).
 
-<details class="abstract">
-<summary>Verzeichnisinhalt</summary>
+:::abstract[Verzeichnisinhalt]{collapsed}
 
 ```console {2-3} title="results/hello_channels"
 results
@@ -85,16 +83,15 @@ results
 └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Dateiinhalt</summary>
+:::abstract[Dateiinhalt]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hello Channels!
 ```
 
-</details>
+:::
 
 Wenn das bei dir funktioniert hat, bist du bereit, etwas über Channels zu lernen.
 
@@ -225,14 +222,13 @@ Outputs:
 Wenn du beide Änderungen korrekt vorgenommen hast, solltest du eine erfolgreiche Ausführung erhalten.
 Du kannst das Ergebnisverzeichnis überprüfen, um dich zu vergewissern, dass das Ergebnis noch dasselbe ist wie zuvor.
 
-<details class="abstract">
-<summary>Dateiinhalt</summary>
+:::abstract[Dateiinhalt]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hello Channels!
 ```
 
-</details>
+:::
 
 Wir haben also die Flexibilität unseres Workflows erhöht, während wir dasselbe Endergebnis erzielen.
 Das mag so erscheinen, als würden wir mehr Code für keinen greifbaren Nutzen schreiben, aber der Wert wird deutlich, sobald wir anfangen, mehr Eingaben zu handhaben.
@@ -382,8 +378,7 @@ Der Ausführungsmonitor zeigt, dass `3 von 3` Aufrufe für den `sayHello`-Prozes
 
 Allerdings gibt es im Ergebnisverzeichnis immer noch nur eine Ausgabe:
 
-<details class="abstract">
-<summary>Verzeichnisinhalt</summary>
+:::abstract[Verzeichnisinhalt]{collapsed}
 
 ```console {3} title="results/hello_channels"
 results
@@ -394,16 +389,15 @@ results
 └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Dateiinhalt</summary>
+:::abstract[Dateiinhalt]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hola
 ```
 
-</details>
+:::
 
 Du solltest eine der drei Begrüßungen darin sehen, aber die, die du bekommen hast, könnte anders sein als hier gezeigt.
 Kannst du dir vorstellen, warum das so sein könnte?
@@ -415,8 +409,7 @@ _Im Diagramm wird der Channel in Grün dargestellt, und die Reihenfolge der Elem
 Wenn wir zurück auf den Ausführungsmonitor schauen, hat er uns nur einen Unterverzeichnispfad gegeben (`f4/c9962c`).
 Lass uns dort hineinschauen.
 
-<details class="abstract">
-<summary>Verzeichnisinhalt</summary>
+:::abstract[Verzeichnisinhalt]{collapsed}
 
 ```console {9}
 work/f4/c9962ce91ef87480babcb86b2b9042/
@@ -430,16 +423,15 @@ work/f4/c9962ce91ef87480babcb86b2b9042/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Dateiinhalt</summary>
+:::abstract[Dateiinhalt]{collapsed}
 
 ```console title="work/f4/c9962ce91ef87480babcb86b2b9042/output.txt"
 Hello
 ```
 
-</details>
+:::
 
 Das ist nicht einmal dieselbe Begrüßung, die wir im Ergebnisverzeichnis bekommen haben! Was geht hier vor?
 
@@ -488,8 +480,7 @@ In diesem erweiterten Modus wird nur gemeldet, dass sie eingereicht wurden.
 
 Wie auch immer, jetzt da wir die Unterverzeichnisse jedes Prozess-Aufrufs haben, können wir nach ihren Logs und Ausgaben suchen.
 
-<details class="abstract">
-<summary>Verzeichnisinhalt</summary>
+:::abstract[Verzeichnisinhalt]{collapsed}
 
 ```console
 work/23/871c7ec3642a898ecd5e6090d21300/
@@ -527,10 +518,9 @@ work/f4/ea10a680d5687596d3eaa3fcf69272/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Dateiinhalt</summary>
+:::abstract[Dateiinhalt]{collapsed}
 
 ```txt title="work/23/871c7ec3642a898ecd5e6090d21300/output.txt"
 Bonjour
@@ -544,7 +534,7 @@ Hello
 Hola
 ```
 
-</details>
+:::
 
 Dies zeigt, dass alle drei Prozesse erfolgreich ausgeführt wurden (juhu).
 
@@ -646,8 +636,7 @@ Outputs:
 Zurück in der Zusammenfassungsansicht wird die Ausgabe wieder auf einer Zeile zusammengefasst.
 Schau in das `results`-Verzeichnis, um zu sehen, ob alle Ausgabebegrüßungen da sind.
 
-<details class="abstract">
-<summary>Verzeichnisinhalt</summary>
+:::abstract[Verzeichnisinhalt]{collapsed}
 
 ```console
 results/hello_channels/
@@ -657,10 +646,9 @@ results/hello_channels/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Dateiinhalt</summary>
+:::abstract[Dateiinhalt]{collapsed}
 
 ```console title="Bonjour-output.txt"
 Bonjour
@@ -674,7 +662,7 @@ Hello
 Hola
 ```
 
-</details>
+:::
 
 Erfolg! Jetzt können wir so viele Begrüßungen hinzufügen, wie wir möchten, ohne uns Sorgen zu machen, dass Ausgabedateien überschrieben werden.
 

@@ -31,8 +31,7 @@ Com us podeu imaginar, això serà molt útil per fer els vostres pipelines més
 
 Tingueu en compte que ensenyarem això utilitzant [Docker](https://www.docker.com/get-started/), però recordeu que Nextflow també suporta [diverses altres tecnologies de contenidors](https://nextflow.io/docs/latest/container.html).
 
-<details class="info">
-<summary>Com començar des d'aquesta secció</summary>
+:::info[Com començar des d'aquesta secció]{collapsed}
 
 Aquesta secció del curs assumeix que heu completat les Parts 1-4 del curs [Hello Nextflow](./index.mdx) i teniu un pipeline complet i funcional.
 
@@ -42,7 +41,7 @@ Si esteu començant el curs des d'aquest punt, haureu de copiar el directori `mo
 cp -r solutions/4-hello-modules/modules .
 ```
 
-</details>
+:::
 
 ---
 
@@ -104,8 +103,7 @@ Outputs:
 
 Com abans, trobareu els fitxers de sortida al directori especificat al bloc `output` (`results/hello_containers/`).
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 results/hello_containers/
@@ -119,7 +117,7 @@ results/hello_containers/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Si això us ha funcionat, esteu preparats per aprendre a utilitzar contenidors.
 
@@ -253,14 +251,13 @@ Podeu verificar-ho executant `ls /` per llistar el contingut del directori des d
 ls /
 ```
 
-<details class="abstract">
-<summary>Sortida de la comanda</summary>
+:::abstract[Sortida de la comanda]{collapsed}
 
 ```console
 bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 ```
 
-</details>
+:::
 
 Utilitzem `ls` aquí en lloc de `tree` perquè la utilitat `tree` no està disponible en aquest contenidor.
 Podeu veure que el sistema de fitxers dins del contenidor és diferent del sistema de fitxers del vostre sistema amfitrió.
@@ -832,8 +829,7 @@ Outputs:
 Aquesta vegada sí que funciona!
 Com sempre, podeu trobar les sortides del workflow al directori de resultats corresponent, encara que aquesta vegada estan una mica més ordenades, amb només l'informe i la sortida final al nivell superior, i tots els fitxers intermedis apartats en un subdirectori.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 results/hello_containers/
@@ -849,12 +845,11 @@ results/hello_containers/
 └── batch-report.txt
 ```
 
-</details>
+:::
 
 La sortida d'art ASCII final està al directori `results/hello_containers/`, amb el nom `cowpy-COLLECTED-batch-output.txt`.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
 _________
@@ -885,7 +880,7 @@ _________
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 I aquí està, el nostre bonic gall dindi dient les salutacions com desitjàvem.
 
@@ -899,8 +894,7 @@ Això correspon al següent camí de directori truncat: `work/98/656c6c`.
 
 En aquest directori, trobareu el fitxer `.command.run` que conté totes les comandes que Nextflow va executar en nom vostre durant l'execució del pipeline.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="work/98/656c6c90cce1667c094d880f4b6dcc/.command.run"
 #!/bin/bash
@@ -1056,7 +1050,7 @@ $NXF_ENTRY
 
 ```
 
-</details>
+:::
 
 Si cerqueu `nxf_launch` en aquest fitxer, hauríeu de veure alguna cosa així:
 

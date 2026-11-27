@@ -21,8 +21,7 @@ description: 파트 1에서는 Samtools와 GATK 명령을 각각의 컨테이너
 
 시작점으로, 워크플로우의 주요 부분을 개요로 제시하는 워크플로우 파일 `genomics.nf`와 각 프로세스의 구조를 개요로 제시하는 두 개의 모듈 파일 `samtools_index.nf` 및 `gatk_haplotypecaller.nf`를 제공합니다.
 
-<details class="full-code">
-<summary>뼈대 파일</summary>
+:::full-code[뼈대 파일]{collapsed}
 
 ```nextflow title="genomics.nf"
 #!/usr/bin/env nextflow
@@ -93,7 +92,7 @@ process GATK_HAPLOTYPECALLER {
 }
 ```
 
-</details>
+:::
 
 이 파일들은 기능적이지 않으며, 코드의 중요한 부분을 채워 넣을 수 있는 뼈대 역할만 합니다.
 
@@ -419,8 +418,7 @@ Outputs:
 
 작업 디렉토리 또는 결과 디렉토리를 확인하여 인덱스 파일이 올바르게 생성되었는지 확인할 수 있습니다.
 
-<details class="abstract">
-<summary>작업 디렉토리 내용</summary>
+:::abstract[작업 디렉토리 내용]{collapsed}
 
 ```console
 work/ad/b2c9bf4af404ef7cf63e0aa3887f65
@@ -428,10 +426,9 @@ work/ad/b2c9bf4af404ef7cf63e0aa3887f65
 └── reads_mother.bam.bai
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>결과 디렉토리 내용</summary>
+:::abstract[결과 디렉토리 내용]{collapsed}
 
 ```console
 results/
@@ -439,7 +436,7 @@ results/
     └── reads_mother.bam.bai -> ...
 ```
 
-</details>
+:::
 
 여기 있습니다!
 
@@ -806,8 +803,7 @@ Outputs:
 
 결과 디렉토리에서 출력 파일을 찾을 수 있습니다(작업 디렉토리에 대한 심볼릭 링크로).
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console
 results/
@@ -818,12 +814,11 @@ results/
     └── reads_mother.bam.vcf.idx -> ...
 ```
 
-</details>
+:::
 
 VCF 파일을 열면 컨테이너에서 GATK 명령을 직접 실행하여 생성한 파일과 동일한 내용을 볼 수 있습니다.
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="reads_mother.bam.vcf" showLineNumbers startLineNumber=26
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
@@ -832,7 +827,7 @@ VCF 파일을 열면 컨테이너에서 GATK 명령을 직접 실행하여 생�
 20_10037292_10066351	3529	.	T	A	155.64	.	AC=1;AF=0.500;AN=2;BaseQRankSum=-0.544;DP=21;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=7.78;ReadPosRankSum=-1.158;SOR=1.034	GT:AD:DP:GQ:PL	0/1:12,8:20:99:163,0,328
 ```
 
-</details>
+:::
 
 이것이 연구의 각 샘플에 대해 생성하고자 하는 출력입니다.
 
@@ -916,8 +911,7 @@ nextflow run genomics.nf -profile test -resume
 
 재미있는 점: 이것은 _작동할 수도_ 있고, _실패할 수도_ 있습니다. 예를 들어, 다음은 성공한 실행입니다:
 
-<details class="success">
-<summary>명령 출력</summary>
+:::success[명령 출력]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -948,12 +942,11 @@ Outputs:
     - vcf/reads_father.bam.vcf.idx
 ```
 
-</details>
+:::
 
 워크플로우 실행이 성공했다면 다음과 같은 오류가 발생할 때까지 다시 실행하세요:
 
-<details class="failure">
-<summary>명령 출력</summary>
+:::failure[명령 출력]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -981,7 +974,7 @@ Command error:
   ...
 ```
 
-</details>
+:::
 
 GATK 명령 오류 출력을 보면 다음과 같은 줄이 있을 것입니다:
 
@@ -999,8 +992,7 @@ A USER ERROR has occurred: Traversal by intervals was requested but some input f
 
 콘솔 출력에 나열된 실패한 `GATK_HAPLOTYPECALLER` process 실행의 작업 디렉토리 내부를 살펴보세요.
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console
 work/3f/e775e3104e279ca5f292bf7b652f3e
@@ -1014,7 +1006,7 @@ work/3f/e775e3104e279ca5f292bf7b652f3e
 └── ref.fasta.fai -> /workspaces/training/nf4-science/genomics/data/ref/ref.fasta.fai
 ```
 
-</details>
+:::
 
 이 디렉토리에 나열된 BAM 파일과 BAM 인덱스의 이름에 특히 주의하세요: `reads_son.bam`과 `reads_father.bam.bai`.
 
@@ -1217,8 +1209,7 @@ nextflow run genomics.nf -profile test
 
 이번에는(그리고 매번) 모든 것이 올바르게 실행되어야 합니다:
 
-<details class="success">
-<summary>명령 출력</summary>
+:::success[명령 출력]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -1249,12 +1240,11 @@ Outputs:
     - vcf/reads_father.bam.vcf.idx
 ```
 
-</details>
+:::
 
 결과 디렉토리에는 이제 각 샘플에 대한 BAM 및 BAI 파일(튜플에서)과 VCF 출력이 모두 포함됩니다:
 
-<details class="abstract">
-<summary>결과 디렉토리 내용</summary>
+:::abstract[결과 디렉토리 내용]{collapsed}
 
 ```console
 results/
@@ -1274,7 +1264,7 @@ results/
     └── reads_son.bam.vcf.idx -> ...
 ```
 
-</details>
+:::
 
 관련 파일을 튜플로 묶음으로써 올바른 파일이 항상 워크플로우를 통해 함께 이동하도록 보장했습니다.
 이제 워크플로우는 임의의 수의 샘플을 안정적으로 처리하지만, 설정에서 개별적으로 나열하는 것은 확장성이 좋지 않습니다.

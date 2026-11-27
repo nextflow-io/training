@@ -11,8 +11,7 @@ O projeto nf-core fornece um comando (`nf-core modules create`) que gera templat
 No entanto, para fins didáticos, vamos começar fazendo manualmente: transformar o módulo local `cowpy` em seu pipeline `core-hello` em um módulo no estilo nf-core passo a passo.
 Depois disso, mostraremos como usar a criação de módulos baseada em template para trabalhar de forma mais eficiente no futuro.
 
-<details class="info">
-<summary>Como começar a partir desta seção</summary>
+:::info[Como começar a partir desta seção]{collapsed}
 
 Esta seção pressupõe que você completou a [Parte 2: Usar um módulo nf-core](./02_use_module.mdx) e integrou o módulo `FIND_CONCATENATE` ao seu pipeline.
 
@@ -31,7 +30,7 @@ Você pode testar que ele executa com sucesso executando o seguinte comando:
 nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
-</details>
+:::
 
 ---
 
@@ -683,8 +682,7 @@ cat work/38/eb29ea*/cowpy-test.txt
 
 Você deve ver a arte ASCII exibida com o personagem `kosh`, confirmando que a configuração `ext.args` funcionou!
 
-<details class="info">
-<summary>(Opcional) Inspecionar o arquivo de comando</summary>
+:::info[(Opcional) Inspecionar o arquivo de comando]{collapsed}
 
 Se você quiser ver exatamente como a configuração foi aplicada, pode inspecionar o arquivo `.command.sh`:
 
@@ -702,7 +700,7 @@ cat test.txt | cowpy -c kosh > cowpy-test.txt
 
 Isso mostra que o arquivo `.command.sh` foi gerado corretamente com base na configuração `ext.args`.
 
-</details>
+:::
 
 Reserve um momento para pensar sobre o que alcançamos aqui.
 Esta abordagem mantém a interface do módulo focada em dados essenciais (arquivos, metadata e quaisquer parâmetros obrigatórios por amostra), enquanto opções que controlam o comportamento da ferramenta são tratadas separadamente através da configuração.
@@ -868,8 +866,7 @@ executor >  local (8)
 Dê uma olhada na saída no diretório de resultados.
 Você deve ver o arquivo de saída do cowpy com a mesma nomeação de antes: `cowpy-test.txt`, baseado no nome de lote padrão.
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console {3}
 results
@@ -882,7 +879,7 @@ results
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Sinta-se à vontade para alterar a configuração `ext.prefix` em `conf/modules.config` para satisfazer-se de que você pode alterar o padrão de nomeação sem ter que fazer nenhuma mudança no código do módulo ou do fluxo de trabalho.
 
@@ -1004,8 +1001,7 @@ executor >  local (8)
 Dê uma olhada no seu diretório de trabalho atual.
 Agora o `core-hello-results` também contém as saídas do módulo `COWPY`.
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console {4-5}
 core-hello-results/
@@ -1037,7 +1033,7 @@ core-hello-results/
     └── pipeline_dag_2025-12-27_06-35-56.html
 ```
 
-</details>
+:::
 
 Você pode ver que o Nextflow criou essa hierarquia de diretórios baseada nos nomes do fluxo de trabalho e do módulo.
 
@@ -1243,8 +1239,7 @@ A ferramenta lida com a complexidade de encontrar informações de pacotes e con
 
 A ferramenta cria uma estrutura completa de módulo em `modules/local/` (ou `modules/nf-core/` se você estiver no repositório nf-core/modules):
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console
 modules/local/cowpy
@@ -1255,7 +1250,7 @@ modules/local/cowpy
     └── main.nf.test
 ```
 
-</details>
+:::
 
 Cada arquivo serve um propósito específico:
 

@@ -9,8 +9,7 @@ Daha önce, her örneğin verilerini bağımsız olarak işleyen örnek başına
 Kursun bu bölümünde, basit iş akışımızı bir üst seviyeye taşıyarak keyfi sayıda örneği işleyebilen güçlü bir toplu otomasyon aracına dönüştüreceğiz.
 Bunu yaparken, aynı zamanda yeni çalışmalarda daha yaygın olan paired-end verileri kabul edecek şekilde de güncelleyeceğiz.
 
-<details class="info">
-<summary>Bu bölümden nasıl başlanır</summary>
+:::info[Bu bölümden nasıl başlanır]{collapsed}
 
 Kursun bu bölümü, [Bölüm 1: Yönteme Genel Bakış](./01_method.mdx) ve [Bölüm 2: Tek-örnekli uygulama](./02_single-sample.mdx) bölümlerini tamamladığınızı ve doldurulmuş modül dosyalarına sahip çalışan bir `rnaseq.nf` pipeline'ınız olduğunu varsayar.
 
@@ -32,7 +31,7 @@ Başarıyla çalıştığını test edebilirsiniz:
 nextflow run rnaseq.nf -profile test
 ```
 
-</details>
+:::
 
 ## Görev
 
@@ -648,8 +647,7 @@ MultiQC çıktılarını sonuçlar dizininde bulabilirsiniz.
 tree -L 2 -l results/multiqc
 ```
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 results/multiqc
@@ -684,7 +682,7 @@ results/multiqc
     └── multiqc_sources.txt
 ```
 
-</details>
+:::
 
 Son `all_single-end.html` dosyası, göz atmayı kolaylaştıran tek bir HTML dosyasında pratik bir şekilde paketlenmiş tam toplu rapordur.
 

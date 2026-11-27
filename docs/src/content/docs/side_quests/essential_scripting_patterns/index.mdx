@@ -1184,8 +1184,7 @@ But what if we want to add information about when and where the processing occur
 
 If you run this, you'll notice an error - Nextflow tries to interpret `${USER}{:nextflow}` as a Nextflow variable that doesn't exist.
 
-<details class="failure">
-<summary>Command output</summary>
+:::failure[Command output]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -1202,7 +1201,7 @@ ERROR ~ Script compilation failed
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 We need to escape it so Bash can handle it instead.
 

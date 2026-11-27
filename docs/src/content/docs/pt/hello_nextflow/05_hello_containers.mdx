@@ -31,8 +31,7 @@ Como você pode imaginar, isso será muito útil para tornar seus pipelines mais
 
 Note que ensinaremos isso usando [Docker](https://www.docker.com/get-started/), mas tenha em mente que o Nextflow suporta [várias outras tecnologias de contêiner](https://nextflow.io/docs/latest/container.html) também.
 
-<details class="info">
-<summary>Como começar a partir desta seção</summary>
+:::info[Como começar a partir desta seção]{collapsed}
 
 Esta seção do curso assume que você completou as Partes 1-4 do curso [Hello Nextflow](./index.mdx) e tem um pipeline completo e funcional.
 
@@ -42,7 +41,7 @@ Se você está começando o curso a partir deste ponto, precisará copiar o dire
 cp -r solutions/4-hello-modules/modules .
 ```
 
-</details>
+:::
 
 ---
 
@@ -104,8 +103,7 @@ Outputs:
 
 Como anteriormente, você encontrará os arquivos de saída no diretório especificado no bloco `output` (`results/hello_containers/`).
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console
 results/hello_containers/
@@ -119,7 +117,7 @@ results/hello_containers/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Se isso funcionou para você, você está pronto para aprender como usar contêineres.
 
@@ -253,14 +251,13 @@ Você pode verificar isso executando `ls /` para listar o conteúdo do diretóri
 ls /
 ```
 
-<details class="abstract">
-<summary>Saída do comando</summary>
+:::abstract[Saída do comando]{collapsed}
 
 ```console
 bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 ```
 
-</details>
+:::
 
 Usamos `ls` aqui em vez de `tree` porque o utilitário `tree` não está disponível neste contêiner.
 Você pode ver que o sistema de arquivos dentro do contêiner é diferente do sistema de arquivos no seu sistema host.
@@ -832,8 +829,7 @@ Outputs:
 Desta vez realmente funciona!
 Como de costume, você pode encontrar as saídas do fluxo de trabalho no diretório de resultados correspondente, embora desta vez elas estejam um pouco mais organizadas, com apenas o relatório e a saída final no nível superior, e todos os arquivos intermediários empurrados para fora do caminho em um subdiretório.
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console
 results/hello_containers/
@@ -849,12 +845,11 @@ results/hello_containers/
 └── batch-report.txt
 ```
 
-</details>
+:::
 
 A saída final de arte ASCII está no diretório `results/hello_containers/`, sob o nome `cowpy-COLLECTED-batch-output.txt`.
 
-<details class="abstract">
-<summary>Conteúdo do arquivo</summary>
+:::abstract[Conteúdo do arquivo]{collapsed}
 
 ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
 _________
@@ -885,7 +880,7 @@ _________
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 E aí está, nosso lindo peru dizendo as saudações como desejado.
 
@@ -899,8 +894,7 @@ Isso corresponde ao seguinte caminho de diretório truncado: `work/98/656c6c`.
 
 Nesse diretório, você encontrará o arquivo `.command.run` que contém todos os comandos que o Nextflow executou em seu nome no curso da execução do pipeline.
 
-<details class="abstract">
-<summary>Conteúdo do arquivo</summary>
+:::abstract[Conteúdo do arquivo]{collapsed}
 
 ```console title="work/98/656c6c90cce1667c094d880f4b6dcc/.command.run"
 #!/bin/bash
@@ -1056,7 +1050,7 @@ $NXF_ENTRY
 
 ```
 
-</details>
+:::
 
 Se você procurar por `nxf_launch` neste arquivo, você deve ver algo assim:
 

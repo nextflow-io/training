@@ -62,7 +62,7 @@ Translations sit at the same relative paths under `<pages>/<lang>/` (ca de es fr
 - Heading numbering: `## 1.`, `### 1.1.` with trailing periods
 - One sentence per line
 - Code blocks: ` ```nextflow ` for Nextflow, with `title="..."`, `showLineNumbers`, `startLineNumber=N` and `{3,5-7}` highlights where appropriate
-- Asides `:::note` / `:::tip` / `:::caution` / `:::danger` ... `:::`; collapsibles `<details class="TYPE">` + `<summary>`, with blank lines around the body
+- Asides `:::note` / `:::tip` / `:::caution` / `:::danger` ... `:::`, plus MkDocs types (`:::exercise`, `:::solution`, `:::abstract`, ...); add `{collapsed}` or `{open}` after the title to make one collapsible
 - Before/After: `<CodeWalkthrough>` with `step="Before"` and `step="After"` blocks
 - Command output: inside the `bash` block, after a `# [!output]` line
 - Components are auto-imported: no import lines except `?raw` code includes

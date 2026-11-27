@@ -308,27 +308,22 @@ Text.
 The types are `note`, `tip`, `caution` and `danger`.
 To nest asides, give the outer one more colons (`::::note` around a `:::tip`).
 
-Collapsible blocks use HTML `<details>` with a class that sets the colour and icon.
-Leave a blank line after `<summary>` and before `</details>`, so the body renders as Markdown:
+Besides those four, admonitions come in the MkDocs Material types: `abstract`, `info`, `success`, `question`, `warning`, `failure`, `bug`, `example`, `quote`, `exercise`, `solution`, `full-code`, `optional`, `courses` and `catalog`.
+Each has its own colour and icon. Without a title in brackets, the type name is the title.
+
+Add `{collapsed}` after the title to make any admonition collapsible and closed, like MkDocs' `???`, or `{open}` to make it collapsible but open, like `???+`:
 
 ```mdx
-<details class="exercise">
-<summary>Add a second greeting</summary>
-
+::::exercise[Add a second greeting]{collapsed}
 Instructions.
 
-<details class="solution">
-<summary>Solution</summary>
-
+:::solution[Solution]{collapsed}
 Answer.
-
-</details>
-
-</details>
+:::
+::::
 ```
 
-Add `open` (`<details class="tip" open>`) to show the content without a click.
-The available classes are `exercise`, `solution`, `abstract`, `example`, `info`, `note`, `tip`, `warning`, `success`, `failure`, `question`, `full-code`, `optional`, `courses` and `catalog`.
+As with asides, the outer block needs more colons than the one inside it.
 
 ### Code blocks
 

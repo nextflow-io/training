@@ -260,13 +260,12 @@ Pipeline complete! 👋
 El observador está funcionando.
 Cada vez que una tarea finaliza, Nextflow llama a `onProcessComplete`, y nuestra implementación imprime un mensaje.
 
-<details class="exercise">
-<summary>Personalizar el mensaje</summary>
+:::exercise[Personalizar el mensaje]{collapsed}
 
 Intente cambiar el mensaje en `onProcessComplete` por uno propio, recompile y vuelva a ejecutar.
 Esto confirma que el ciclo completo de edición-compilación-ejecución funciona para los observadores.
 
-</details>
+:::
 
 ### 2.4. Agregar lógica de conteo
 
@@ -324,8 +323,7 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-<details class="example">
-<summary>Salida</summary>
+:::example[Salida]{collapsed}
 
 ```console
 N E X T F L O W  ~  version 26.04.4
@@ -357,7 +355,7 @@ Pipeline complete! 👋
 
 Los mensajes del contador están intercalados con los envíos de tareas porque los observadores se ejecutan a medida que las tareas se completan.
 
-</details>
+:::
 
 ---
 

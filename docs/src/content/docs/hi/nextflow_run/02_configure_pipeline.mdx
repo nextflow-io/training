@@ -16,8 +16,7 @@ Nextflow स्वचालित रूप से working directory से `nex
 
 हम तुम्हें एक कॉन्फ़िगरेशन फ़ाइल देते हैं जो चार क्षेत्रों को कवर करती है: सॉफ़्टवेयर पैकेजिंग, प्रोसेस सेटिंग्स, पाइपलाइन पैरामीटर, और execution प्रोफ़ाइल।
 
-<details class="full-code">
-<summary>nextflow.config</summary>
+:::full-code[nextflow.config]{collapsed}
 
 ```nextflow title="nextflow.config" showLineNumbers
 /*
@@ -58,7 +57,7 @@ profiles {
 }
 ```
 
-</details>
+:::
 
 आओ हर एक को देखें, फिर प्रोफ़ाइल को उपयोग में लाएं और पाइपलाइन को उसके साथ चलाएं।
 
@@ -324,8 +323,7 @@ Outputs:
   cowpy_art: yaml/cowpy-COLLECTED-yaml-output.txt
 ```
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/yaml/cowpy-COLLECTED-yaml-output.txt"
  _________
@@ -349,7 +347,7 @@ Outputs:
                     |_____|        |_____|         ~ - . _ _ _ _ _>
 ```
 
-</details>
+:::
 
 एक पैरामीटर फ़ाइल विशेष रूप से तब मूल्यवान होती है जब पाइपलाइन में कुछ से ज़्यादा पैरामीटर हों: यह तुम्हें उन सभी को एक साथ देने देती है, बिना किसी लंबे-चौड़े command line या workflow स्क्रिप्ट में किसी बदलाव के, और इसे अपने परिणामों के साथ वितरित करना आसान है।
 
@@ -407,8 +405,7 @@ Outputs:
   cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
 ```
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 outputs/batch
@@ -424,7 +421,7 @@ outputs/batch
     └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 आउटपुट अब बिल्ट-इन `results/batch/` डिफ़ॉल्ट की जगह `outputs/batch/` के अंतर्गत आते हैं।
 पाइपलाइन का अपना कोड अभी भी उस बेस डायरेक्टरी के भीतर की संरचना तय करता है, जैसे `batch/` और `intermediates/` सबडायरेक्टरी; `-output-dir` केवल यह नियंत्रित करता है कि वह संरचना कहाँ से शुरू होती है।

@@ -122,13 +122,12 @@ Repassez maintenant à Docker pour le reste de ce cours.
 docker.enabled = true
 ```
 
-<details class="tip">
-<summary>Mélanger Docker et Conda</summary>
+:::tip[Mélanger Docker et Conda]{collapsed}
 
 Ces paramètres étant limités par processus, vous pouvez les combiner : certains processus utilisent Docker, d'autres utilisent Conda, selon ce qui est disponible pour chaque outil.
 Si une directive `container` (dans le code du pipeline) et une directive `conda` (ici, depuis la configuration) sont toutes deux définies pour le même processus et que les deux systèmes d'empaquetage sont activés, Nextflow donne la priorité aux conteneurs.
 
-</details>
+:::
 
 ### À retenir
 
@@ -176,8 +175,7 @@ L'environnement de formation n'est pas connecté à un cluster HPC, donc vous ne
 La plupart des plateformes HPC exigent que les soumissions de jobs spécifient des demandes de ressources, telles que les CPU, la mémoire et le nom de la file d'attente, en utilisant leur propre syntaxe.
 La même demande de 8 CPU et 4 Go de RAM sur une file d'attente appelée `my-science-work` est complètement différente selon l'ordonnanceur.
 
-<details class="abstract">
-<summary>Exemples</summary>
+:::abstract[Exemples]{collapsed}
 
 ```bash title="Config for SLURM / submit using sbatch"
 #SBATCH -o /path/to/my/task/directory/my-task-1.log
@@ -205,7 +203,7 @@ La même demande de 8 CPU et 4 Go de RAM sur une file d'attente appelée `my-sci
 #$ -l h_rss=4096M,mem_free=4096M
 ```
 
-</details>
+:::
 
 Nextflow abstrait tout cela : vous spécifiez des propriétés standardisées telles que `cpus`, `memory` et `queue` une seule fois (voir les [directives de processus](https://nextflow.io/docs/latest/reference/process.html#process-directives) pour la liste complète), et Nextflow les traduit en scripts spécifiques au backend approprié au moment de l'exécution.
 

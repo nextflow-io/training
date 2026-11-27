@@ -9,8 +9,7 @@ In precedenza, avete costruito una pipeline di variant calling per campione sing
 In questa parte del corso, porteremo il nostro semplice workflow al livello successivo trasformandolo in un potente strumento di automazione batch per gestire un numero arbitrario di campioni.
 E mentre ci siamo, lo aggiorneremo anche per accettare dati paired-end, che sono più comuni negli studi più recenti.
 
-<details class="info">
-<summary>Come iniziare da questa sezione</summary>
+:::info[Come iniziare da questa sezione]{collapsed}
 
 Questa sezione del corso presuppone che abbiate completato la [Parte 1: Panoramica del metodo](./01_method.mdx), la [Parte 2: Implementazione con campione singolo](./02_single-sample.mdx) e che abbiate una pipeline `rnaseq.nf` funzionante con i file dei moduli compilati.
 
@@ -32,7 +31,7 @@ Potete verificare che funzioni correttamente:
 nextflow run rnaseq.nf -profile test
 ```
 
-</details>
+:::
 
 ## Compito
 
@@ -648,8 +647,7 @@ Potete trovare gli output MultiQC nella directory dei risultati.
 tree -L 2 -l results/multiqc
 ```
 
-<details class="abstract">
-<summary>Contenuto della directory</summary>
+:::abstract[Contenuto della directory]{collapsed}
 
 ```console
 results/multiqc
@@ -684,7 +682,7 @@ results/multiqc
     └── multiqc_sources.txt
 ```
 
-</details>
+:::
 
 Quell'ultimo file `all_single-end.html` è il report aggregato completo, comodamente confezionato in un unico file HTML facile da consultare.
 

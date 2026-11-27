@@ -1185,8 +1185,7 @@ Peki işlemenin ne zaman ve nerede gerçekleştiğine dair bilgi eklemek isterse
 
 Bunu çalıştırırsanız bir hata fark edeceksiniz; Nextflow, `${USER}{:nextflow}`'ı mevcut olmayan bir Nextflow değişkeni olarak yorumlamaya çalışır.
 
-<details class="failure">
-<summary>Komut çıktısı</summary>
+:::failure[Komut çıktısı]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -1203,7 +1202,7 @@ ERROR ~ Script compilation failed
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 Bash'in bunu işleyebilmesi için kaçış karakteri eklememiz gerekiyor.
 

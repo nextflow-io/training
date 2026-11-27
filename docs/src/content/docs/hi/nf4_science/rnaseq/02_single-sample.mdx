@@ -26,8 +26,7 @@ description: कोर्स के इस भाग में, हम सबस
 
 शुरुआती बिंदु के रूप में, हम तुम्हें एक workflow फ़ाइल, `rnaseq.nf`, प्रदान करते हैं, जो workflow के मुख्य भागों की रूपरेखा देती है, साथ ही `modules/` डायरेक्टरी में चार मॉड्यूल फ़ाइलें (`fastqc.nf`, `trim_galore.nf`, `hisat2_align.nf`, और `multiqc.nf`) जो प्रत्येक process की संरचना की रूपरेखा देती हैं।
 
-<details class="full-code">
-<summary>Scaffold फ़ाइलें</summary>
+:::full-code[Scaffold फ़ाइलें]{collapsed}
 
 ```nextflow title="rnaseq.nf"
 #!/usr/bin/env nextflow
@@ -140,7 +139,7 @@ process MULTIQC {
 }
 ```
 
-</details>
+:::
 
 ये फ़ाइलें functional नहीं हैं; इनका उद्देश्य सिर्फ scaffolds के रूप में काम करना है जिन्हें तुम code के interesting भागों से भर सकते हो।
 

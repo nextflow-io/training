@@ -1185,8 +1185,7 @@ Mas e se quisermos adicionar informações sobre quando e onde o processamento o
 
 Se você executar isso, notará um erro — o Nextflow tenta interpretar `${USER}{:nextflow}` como uma variável Nextflow que não existe.
 
-<details class="failure">
-<summary>Saída do comando</summary>
+:::failure[Saída do comando]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -1203,7 +1202,7 @@ ERROR ~ Script compilation failed
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 Precisamos escapá-la para que o Bash possa tratá-la.
 

@@ -11,8 +11,7 @@ nf-core प्रोजेक्ट एक कमांड (`nf-core modules cre
 हालाँकि, शिक्षण उद्देश्यों के लिए, हम मैन्युअल रूप से शुरू करने जा रहे हैं: आपके `core-hello` पाइपलाइन में स्थानीय `cowpy` मॉड्यूल को चरण-दर-चरण nf-core-शैली के मॉड्यूल में बदलना।
 इसके बाद, हम आपको दिखाएंगे कि भविष्य में अधिक कुशलता से काम करने के लिए टेम्पलेट-आधारित मॉड्यूल निर्माण का उपयोग कैसे करें।
 
-<details class="info">
-<summary>इस खंड से कैसे शुरू करें</summary>
+:::info[इस खंड से कैसे शुरू करें]{collapsed}
 
 यह सेक्शन मानता है कि आपने [भाग 2: nf-core मॉड्यूल का उपयोग करें](./02_use_module.mdx) पूरा कर लिया है और अपनी पाइपलाइन में `FIND_CONCATENATE` मॉड्यूल को एकीकृत कर लिया है।
 
@@ -31,7 +30,7 @@ cd core-hello
 nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
-</details>
+:::
 
 ---
 
@@ -683,8 +682,7 @@ cat work/38/eb29ea*/cowpy-test.txt
 
 आपको `kosh` कैरेक्टर के साथ ASCII art प्रदर्शित दिखनी चाहिए, जो पुष्टि करती है कि `ext.args` कॉन्फ़िगरेशन ने काम किया!
 
-<details class="info">
-<summary>(वैकल्पिक) कमांड फ़ाइल का निरीक्षण करें</summary>
+:::info[(वैकल्पिक) कमांड फ़ाइल का निरीक्षण करें]{collapsed}
 
 यदि आप यह देखना चाहते हैं कि कॉन्फ़िगरेशन को वास्तव में कैसे लागू किया गया था, तो आप `.command.sh` फ़ाइल का निरीक्षण कर सकते हैं:
 
@@ -702,7 +700,7 @@ cat test.txt | cowpy -c kosh > cowpy-test.txt
 
 यह दर्शाता है कि `.command.sh` फ़ाइल `ext.args` कॉन्फ़िगरेशन के आधार पर सही ढंग से जेनरेट की गई थी।
 
-</details>
+:::
 
 सोचने के लिए एक क्षण लें कि हमने यहाँ क्या हासिल किया।
 यह दृष्टिकोण मॉड्यूल इंटरफ़ेस को आवश्यक डेटा (फ़ाइलें, मेटाडेटा, और कोई भी अनिवार्य प्रति-नमूना पैरामीटर) पर केंद्रित रखता है, जबकि टूल के व्यवहार को नियंत्रित करने वाले विकल्पों को कॉन्फ़िगरेशन के माध्यम से अलग से संभाला जाता है।
@@ -868,8 +866,7 @@ executor >  local (8)
 results डायरेक्टरी में आउटपुट पर नज़र डालें।
 आपको cowpy आउटपुट फ़ाइल पहले जैसी नामकरण के साथ दिखनी चाहिए: `cowpy-test.txt`, डिफ़ॉल्ट बैच नाम पर आधारित।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console {3}
 results
@@ -882,7 +879,7 @@ results
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 `conf/modules.config` में `ext.prefix` configuration को बदलकर संतुष्ट होने के लिए स्वतंत्र महसूस करें कि आप module या workflow code में कोई बदलाव किए बिना naming pattern बदल सकते हैं।
 
@@ -1004,8 +1001,7 @@ executor >  local (8)
 अपनी वर्तमान working directory पर नज़र डालें।
 अब `core-hello-results` में `COWPY` module के outputs भी शामिल हैं।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console {4-5}
 core-hello-results/
@@ -1037,7 +1033,7 @@ core-hello-results/
     └── pipeline_dag_2025-12-27_06-35-56.html
 ```
 
-</details>
+:::
 
 आप देख सकते हैं कि Nextflow ने workflow और module के नामों के आधार पर directories की यह hierarchy बनाई।
 
@@ -1243,8 +1239,7 @@ Tool package information खोजने और structure सेट करने
 
 Tool `modules/local/` में (या `modules/nf-core/` में यदि तुम nf-core/modules repository में हो) एक complete module structure बनाता है:
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 modules/local/cowpy
@@ -1255,7 +1250,7 @@ modules/local/cowpy
     └── main.nf.test
 ```
 
-</details>
+:::
 
 प्रत्येक file एक विशिष्ट उद्देश्य पूरा करती है:
 

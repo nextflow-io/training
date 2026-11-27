@@ -20,13 +20,12 @@ Nextflow YouTube channel पर [पूरी playlist](https://youtube.com/play
 
 Hello Nextflow training course के इस पहले भाग में, हम एक बहुत ही बुनियादी domain-agnostic Hello World उदाहरण के साथ topic में आसानी से प्रवेश करते हैं, जिसे हम foundational Nextflow logic और components के उपयोग को demonstrate करने के लिए progressively build up करेंगे।
 
-<details class="info">
-<summary>Hello World उदाहरण क्या है?</summary>
+:::info[Hello World उदाहरण क्या है?]{collapsed}
 
 एक "Hello World!" एक minimalist उदाहरण है जो programming language या software framework की basic syntax और structure को demonstrate करने के लिए है।
 उदाहरण में आमतौर पर output device, जैसे console या terminal, पर "Hello, World!" phrase print करना, या इसे एक file में लिखना शामिल है।
 
-</details>
+:::
 
 ---
 
@@ -65,14 +64,13 @@ echo 'Hello World!' > output.txt
 'Hello World' text अब उस output file में होना चाहिए जो हमने specify की थी, जिसका नाम `output.txt` है।
 तुम इसे file explorer में या command line से `cat` utility का उपयोग करके खोल सकते हो, उदाहरण के लिए।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 यही वह है जिसे हम अपने पहले Nextflow workflow के साथ replicate करने की कोशिश करेंगे।
 
@@ -97,8 +95,7 @@ Hello World!
 
 तुम `hello-world.nf` script अपनी current directory में पाओगे, जो `hello-nextflow` होनी चाहिए। इसे editor pane में खोलो।
 
-<details class="full-code">
-<summary>पूर्ण कोड फ़ाइल</summary>
+:::full-code[पूर्ण कोड फ़ाइल]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
@@ -125,7 +122,7 @@ workflow {
 }
 ```
 
-</details>
+:::
 
 एक Nextflow workflow script में आमतौर पर एक या अधिक [**process**](https://nextflow.io/docs/latest/process.html) definitions और [**workflow**](https://nextflow.io/docs/latest/workflow.html) itself शामिल होते हैं, साथ ही कुछ optional blocks (यहाँ मौजूद नहीं) जिन्हें हम बाद में introduce करेंगे।
 
@@ -247,8 +244,7 @@ executor >  local (1)
 
 चलो देखते हैं कि वहाँ क्या है।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 work
@@ -264,10 +260,9 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
-<details class="question">
-<summary>वही चीज़ नहीं दिख रही?</summary>
+:::question[वही चीज़ नहीं दिख रही?]{collapsed}
 
 तुम्हारे system पर exact subdirectory names अलग होंगे।
 
@@ -278,19 +273,18 @@ work
 tree -a work
 ```
 
-</details>
+:::
 
 पहली चीज़ जो तुम देखना चाहते हो वह है workflow का actual output, यानी `sayHello` process द्वारा produce की गई `output.txt` file।
 इसे खोलो और तुम `Hello World!` greeting पाओगे, जो हमारे minimalist workflow का point था।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="output.txt"
 Hello World!
 ```
 
-</details>
+:::
 
 यह काम किया!
 
@@ -308,15 +302,14 @@ Hello World!
 
 `.command.sh` file विशेष रूप से useful है क्योंकि यह तुम्हें बताती है कि Nextflow ने main command क्या execute की, सभी bookkeeping और task/environment setup को शामिल नहीं करते हुए।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title=".command.sh"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
-</details>
+:::
 
 यह उससे match करता है जो हमने पहले manually चलाया था।
 
@@ -327,8 +320,7 @@ echo 'Hello World!' > output.txt
 
 Workflow को कुछ बार फिर से चलाने का try करो, फिर `work/` के तहत task directories देखो।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 work
@@ -383,7 +375,7 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
 तुम देखोगे कि प्रत्येक run के लिए output और log files के complete set के साथ एक new subdirectory बनाई गई है।
 यह तुम्हें दिखाता है कि same workflow को कई बार चलाने से previous runs के results overwrite नहीं होंगे।
@@ -514,8 +506,7 @@ Terminal output अब एक `Outputs:` summary के साथ समाप�
 
 अपना file explorer check करो: इस बार, Nextflow ने `results/` नामक एक new directory भी बनाई है।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console {10-11,22}
 .
@@ -542,7 +533,7 @@ Terminal output अब एक `Outputs:` summary के साथ समाप�
     └── 9f
 ```
 
-</details>
+:::
 
 `results` directory के अंदर, हमें work directory में command द्वारा produce की गई `output.txt` का एक symbolic link मिलता है जो हमने अभी चलाई।
 
@@ -605,8 +596,7 @@ Outputs:
 
 इस बार result specified subdirectory के तहत लिखा जाता है।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console {2-3}
 results/
@@ -615,7 +605,7 @@ results/
 └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
 ```
 
-</details>
+:::
 
 तुम देखोगे कि previous execution का result अभी भी वहाँ है।
 
@@ -687,8 +677,7 @@ Outputs:
 
 इस बार, यदि तुम results देखो, तो file एक proper copy है बजाय सिर्फ एक symlink के।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console {3}
 results/
@@ -697,7 +686,7 @@ results/
 └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
 ```
 
-</details>
+:::
 
 चूंकि यह भी individual output के level पर set है, यह तुम्हें publish mode को एक granular way में set करने की अनुमति देता है।
 यह विशेष रूप से बाद में handy होगा जब हम multi-step pipelines पर move करेंगे, जहाँ तुम शायद केवल final outputs को copy करना और intermediate outputs को symlinks के रूप में छोड़ना चाहो, उदाहरण के लिए।
@@ -876,14 +865,13 @@ Outputs:
 
 यह check करने के लिए output file खोलना sure करो कि तुम्हारे पास अब greeting का new version है।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Bonjour le monde!
 ```
 
-</details>
+:::
 
 Et voilà!
 
@@ -946,8 +934,7 @@ Outputs:
   first_output: hello_world/output.txt
 ```
 
-<details class="question">
-<summary>यदि यह काम नहीं किया</summary>
+:::question[यदि यह काम नहीं किया]{collapsed}
 
 यदि वह इस तरह की error के साथ fail हुआ:
 
@@ -976,18 +963,17 @@ v2 parser Nextflow 26.04 से default है, इसलिए तुम यह
 export NXF_SYNTAX_PARSER=v2
 ```
 
-</details>
+:::
 
 Output पहले जैसी same place में होगा, लेकिन contents new text के साथ updated होनी चाहिए।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Hola mundo!
 ```
 
-</details>
+:::
 
 Nextflow ने output बनाने के लिए greeting parameter की default value use की।
 
@@ -1016,14 +1002,13 @@ Outputs:
 
 एक बार फिर, तुम्हें अपनी results directory में corresponding updated output मिलनी चाहिए।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Konnichiwa!
 ```
 
-</details>
+:::
 
 :::note[नोट]
 Nextflow में, ऐसी कई places हैं जहाँ तुम parameters के लिए values specify कर सकते हो।
@@ -1097,8 +1082,7 @@ Nextflow literally तुम्हें previous execution की ओर point 
 
 जब भी तुम nextflow workflow launch करते हो, current working directory में `.nextflow` नामक एक hidden directory के तहत `history` नामक एक log file में एक line लिखी जाती है।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```txt title=".nextflow/history" showLineNumbers
 2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'
@@ -1108,7 +1092,7 @@ Nextflow literally तुम्हें previous execution की ओर point 
 2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
 ```
 
-</details>
+:::
 
 यह file तुम्हें current working directory के भीतर से launch की गई हर Nextflow run के लिए timestamp, run name, status, revision ID, session ID और full command line देती है।
 

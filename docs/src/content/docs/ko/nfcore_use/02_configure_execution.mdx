@@ -254,8 +254,7 @@ The following invalid input values have been detected:
 `nf-core/demo` 파이프라인은 `sample`, `fastq_1`, `fastq_2` 열을 가진 CSV 파일을 기대합니다.
 이는 예상 구조, 열 타입, 제약 조건을 지정하는 스키마 파일(`assets/schema_input.json`)에 정의되어 있습니다.
 
-<details class="abstract">
-<summary>입력에 대한 스키마 파일</summary>
+:::abstract[입력에 대한 스키마 파일]{collapsed}
 
 ```json title="assets/schema_input.json"
 {
@@ -293,7 +292,7 @@ The following invalid input values have been detected:
 }
 ```
 
-</details>
+:::
 
 스키마는 `sample`과 `fastq_1`이 필수이며, `fastq_2`는 선택 사항(페어드 엔드 및 단일 엔드 데이터 모두 지원)임을 지정합니다.
 파일 경로는 존재 여부와 확장자 패턴에 대해 유효성이 검사됩니다.

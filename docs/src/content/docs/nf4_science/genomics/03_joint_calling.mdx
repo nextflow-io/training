@@ -7,8 +7,7 @@ duration: 45
 Previously, you built a per-sample variant calling pipeline that processed each sample's data independently.
 Now we're going to extend it to implement joint variant calling, as described in [Part 1](01_method.mdx) (multi-sample use case).
 
-<details class="info">
-<summary>How to begin from this section</summary>
+:::info[How to begin from this section]{collapsed}
 
 This section of the course assumes you have completed [Part 1: Method Overview](./01_method.mdx), [Part 2: Per-sample variant calling](./02_per_sample_variant_calling.mdx) and have a working `genomics.nf` pipeline.
 
@@ -28,7 +27,7 @@ You can test that it runs successfully by running the following command:
 nextflow run genomics.nf -profile test
 ```
 
-</details>
+:::
 
 ## Assignment
 
@@ -236,8 +235,7 @@ Outputs:
 
 The Nextflow output looks the same as before, but the `.g.vcf` files and their index files are now organized in subdirectories.
 
-<details class="abstract">
-<summary>Directory contents (symlinks shortened)</summary>
+:::abstract[Directory contents (symlinks shortened)]{collapsed}
 
 ```console
 results/
@@ -257,7 +255,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 If you open one of the GVCF files and scroll through it, you can verify that GATK HaplotypeCaller produced GVCF files as requested.
 
@@ -702,8 +700,7 @@ Outputs:
 The first two steps are cached from the previous run, and the new `GATK_JOINTGENOTYPING` step runs once on the collected inputs from all three samples.
 The final output file, `family_trio.joint.vcf` (and its index), are in the results directory.
 
-<details class="abstract">
-<summary>Directory contents (symlinks shortened)</summary>
+:::abstract[Directory contents (symlinks shortened)]{collapsed}
 
 ```console
 results/
@@ -725,7 +722,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 If you open the joint VCF file, you can verify that the workflow produced the expected variant calls.
 

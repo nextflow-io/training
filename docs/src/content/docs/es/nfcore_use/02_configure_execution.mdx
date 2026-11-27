@@ -254,8 +254,7 @@ También cubrimos esto con más detalle en la [sección de validación de entrad
 El pipeline `nf-core/demo` espera un archivo CSV con las columnas `sample`, `fastq_1` y `fastq_2`.
 Esto está definido en un archivo de esquema (`assets/schema_input.json`) que especifica la estructura esperada, los tipos de columnas y las restricciones.
 
-<details class="abstract">
-<summary>Archivo de esquema para entradas</summary>
+:::abstract[Archivo de esquema para entradas]{collapsed}
 
 ```json title="assets/schema_input.json"
 {
@@ -293,7 +292,7 @@ Esto está definido en un archivo de esquema (`assets/schema_input.json`) que es
 }
 ```
 
-</details>
+:::
 
 El esquema especifica que `sample` y `fastq_1` son obligatorios, mientras que `fastq_2` es opcional (admitiendo datos tanto de extremos pareados como de extremo único).
 Las rutas de archivo se validan en cuanto a su existencia y patrón de extensión.

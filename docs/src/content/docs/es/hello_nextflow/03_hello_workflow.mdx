@@ -36,12 +36,11 @@ Esta vez, vamos a hacer los siguientes cambios a nuestro workflow para reflejar 
 3. Agregar un parámetro para nombrar el archivo de salida final y pasarlo como entrada secundaria al paso de recopilación.
 4. Hacer que el paso de recopilación también reporte una estadística simple sobre lo que fue procesado.
 
-<details class="info">
-<summary>Cómo comenzar desde esta sección</summary>
+:::info[Cómo comenzar desde esta sección]{collapsed}
 
 Esta sección del curso asume que ha completado las Partes 1-2 del curso [Hello Nextflow](./index.mdx), pero si se siente cómodo con los conceptos básicos cubiertos en esas secciones, puede comenzar desde aquí sin hacer nada especial.
 
-</details>
+:::
 
 ---
 
@@ -90,8 +89,7 @@ Outputs:
 Como anteriormente, encontrará los archivos de salida en la ubicación especificada en el bloque `output`.
 Para este capítulo, está bajo `results/hello_workflow/`.
 
-<details class="abstract">
-<summary>Contenido del directorio</summary>
+:::abstract[Contenido del directorio]{collapsed}
 
 ```console
 results/hello_workflow
@@ -100,7 +98,7 @@ results/hello_workflow
 └── Hola-output.txt
 ```
 
-</details>
+:::
 
 Si eso funcionó para usted, está listo para aprender cómo ensamblar un workflow de múltiples pasos.
 
@@ -136,14 +134,13 @@ echo 'Hello World' | tr '[a-z]' '[A-Z]' > UPPER-output.txt
 
 La salida es un archivo de texto llamado `UPPER-output.txt` que contiene la versión en mayúsculas de la cadena `Hello World`.
 
-<details class="abstract">
-<summary>Contenido del archivo</summary>
+:::abstract[Contenido del archivo]{collapsed}
 
 ```console title="UPPER-output.txt"
 HELLO WORLD
 ```
 
-</details>
+:::
 
 Eso es básicamente lo que vamos a intentar hacer con nuestro workflow.
 
@@ -347,8 +344,7 @@ Ahora hay una línea extra en la salida de la consola que corresponde al nuevo p
 
 Encontrará las salidas en el directorio `results/hello_workflow` como se establece en el bloque `output`.
 
-<details class="abstract">
-<summary>Contenido del directorio</summary>
+:::abstract[Contenido del directorio]{collapsed}
 
 ```console
 results/hello_workflow/
@@ -360,12 +356,11 @@ results/hello_workflow/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 ¡Eso es conveniente! Pero aún vale la pena echar un vistazo dentro del directorio de trabajo de una de las llamadas al segundo proceso.
 
-<details class="abstract">
-<summary>Contenido del directorio</summary>
+:::abstract[Contenido del directorio]{collapsed}
 
 ```console
 work/e0/ecf81b4cacc648b9b994218d5b29d7/
@@ -373,7 +368,7 @@ work/e0/ecf81b4cacc648b9b994218d5b29d7/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Note que hay dos archivos `*-output`: la salida del primer proceso así como la salida del segundo.
 
@@ -424,8 +419,7 @@ cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLL
 
 La salida es un archivo de texto llamado `COLLECTED-output.txt` que contiene las versiones en mayúsculas de los saludos originales.
 
-<details class="abstract">
-<summary>Contenido del archivo</summary>
+:::abstract[Contenido del archivo]{collapsed}
 
 ```console title="COLLECTED-output.txt"
 HELLO
@@ -433,7 +427,7 @@ BONJOUR
 HOLA
 ```
 
-</details>
+:::
 
 Ese es el resultado que queremos lograr con nuestro workflow.
 
@@ -666,14 +660,13 @@ Solo esperábamos una, pero hay tres.
 
 Ahora eche un vistazo al contenido del archivo de salida final.
 
-<details class="abstract">
-<summary>Contenido del archivo</summary>
+:::abstract[Contenido del archivo]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-output.txt"
 HOLA
 ```
 
-</details>
+:::
 
 Oh no. El paso de recopilación se ejecutó individualmente en cada saludo, lo cual NO es lo que queríamos.
 
@@ -787,8 +780,7 @@ Podemos resumir eso con el siguiente diagrama:
 
 Finalmente, puede echar un vistazo al contenido del archivo de salida para satisfacerse de que todo funcionó correctamente.
 
-<details class="abstract">
-<summary>Contenido del archivo</summary>
+:::abstract[Contenido del archivo]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-output.txt"
 BONJOUR
@@ -796,7 +788,7 @@ HELLO
 HOLA
 ```
 
-</details>
+:::
 
 Esta vez tenemos los tres saludos en el archivo de salida final. ¡Éxito!
 
@@ -1012,8 +1004,7 @@ Outputs:
 
 Se ejecuta exitosamente y produce la salida deseada:
 
-<details class="abstract">
-<summary>Contenido del archivo</summary>
+:::abstract[Contenido del archivo]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-trio-output.txt"
 HELLO
@@ -1021,7 +1012,7 @@ BONJOUR
 HOLA
 ```
 
-</details>
+:::
 
 Ahora, mientras especifiquemos el parámetro apropiadamente, las ejecuciones subsiguientes en otros lotes de entradas no sobrescribirán los resultados anteriores.
 
@@ -1241,14 +1232,13 @@ Outputs:
 Si mira en el directorio `results/hello_workflow/`, encontrará el nuevo archivo de reporte, `trio-report.txt`.
 Ábralo para verificar que el workflow reportó correctamente el conteo de saludos que fueron procesados.
 
-<details class="abstract">
-<summary>Contenido del archivo</summary>
+:::abstract[Contenido del archivo]{collapsed}
 
 ```txt title="trio-report.txt"
 There were 3 greetings in this batch.
 ```
 
-</details>
+:::
 
 ![](../../hello_nextflow/img/hello-collect-4-way.excalidraw.svg)
 

@@ -126,8 +126,7 @@ Egal ob du eine Pipeline entwickelst oder produktiv betreibst – irgendwann mus
 
 Jedes Mal, wenn du einen Nextflow-Workflow startest, wird eine Zeile in eine Log-Datei namens `history` geschrieben, die sich in einem versteckten Verzeichnis namens `.nextflow` im aktuellen Arbeitsverzeichnis befindet.
 
-<details class="abstract">
-<summary>Dateiinhalt</summary>
+:::abstract[Dateiinhalt]{collapsed}
 
 ```txt title=".nextflow/history" showLineNumbers
 2026-09-13 01:47:58	2.8s	determined_ramanujan	OK	ce74f81996b8ce999853fdbb25ba7969	03078950-5011-414f-992b-8fe1bd219ac2	nextflow run main.nf --input data/greetings.csv --character turkey
@@ -136,7 +135,7 @@ Jedes Mal, wenn du einen Nextflow-Workflow startest, wird eine Zeile in eine Log
 2026-09-13 01:48:14	1.5s	deadly_lamport	OK	ce74f81996b8ce999853fdbb25ba7969	517ccc29-9db7-4d8d-8ea0-c8db6e9ac653	nextflow run main.nf --input data/greetings.csv --character stegosaurus -resume
 ```
 
-</details>
+:::
 
 Jede Zeile enthält Zeitstempel, Dauer, Run-Name, Status, Revisions-ID, Session-ID und die vollständige Befehlszeile einer Ausführung, die aus diesem Verzeichnis gestartet wurde.
 

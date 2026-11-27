@@ -57,8 +57,7 @@ code .
 
 Troverete un insieme di workflow di esempio con vari tipi di bug che utilizzeremo per la pratica:
 
-<details class="abstract">
-<summary>Contenuto della directory</summary>
+:::abstract[Contenuto della directory]{collapsed}
 
 ```console
 .
@@ -87,7 +86,7 @@ Troverete un insieme di workflow di esempio con vari tipi di bug che utilizzerem
 └── no_such_var.nf
 ```
 
-</details>
+:::
 
 Questi file rappresentano scenari di debug comuni che incontrerete nello sviluppo reale.
 
@@ -2287,8 +2286,7 @@ nextflow run buggy_workflow.nf -stub-run
 nextflow run buggy_workflow.nf -resume
 ```
 
-<details class="solution">
-<summary>Soluzione</summary>
+:::solution[Soluzione]{collapsed}
 
 Il `buggy_workflow.nf` contiene 10 errori distinti che coprono tutte le principali categorie di debug. Ecco una suddivisione sistematica di ogni errore e come correggerlo, nell'ordine in cui li si incontra effettivamente su Nextflow 26.04. Il compilatore risolve il workflow in due passaggi: prima analizza la sintassi, poi verifica staticamente che ogni variabile sia definita. Quindi si eliminano prima gli errori di sintassi, poi un gruppo di errori di variabili non definite, prima che il workflow venga eseguito e inizino gli errori a runtime.
 
@@ -2533,7 +2531,7 @@ output {
 }
 ```
 
-</details>
+:::
 :::
 
 **Categorie di errori trattate:**

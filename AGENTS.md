@@ -86,7 +86,7 @@ uv run ./preview_release.py --version 4.0
 - **One sentence per line**: For cleaner git diffs
 - **Takeaway sections**: Each major section ends with "### Takeaway" and "### What's next?"
 - **Asides**: `:::note`, `:::tip`, `:::caution`, `:::danger`, optional title in brackets (`:::tip[Faster runs]`), closed by `:::`. Nest by giving the outer aside more colons (`::::note` around `:::tip`)
-- **Collapsibles** (exercises, solutions, file contents): `<details class="TYPE">` (add `open` to start expanded), `<summary>Title</summary>`, a blank line, the body, a blank line, `</details>`. Types: `exercise`, `solution`, `abstract`, `example`, `info`, `note`, `tip`, `warning`, `success`, `failure`, `question`, `full-code`, `optional`, `courses`, `catalog`
+- **Admonition types and collapsibles**: the same `:::` syntax takes the extra MkDocs Material types `abstract`, `info`, `success`, `question`, `warning`, `failure`, `bug`, `example`, `quote`, `exercise`, `solution`, `full-code`, `optional`, `courses`, `catalog` (`:::exercise[Title]`). Add `{collapsed}` to make it collapsible and closed (MkDocs `???`), or `{open}` for collapsible and open (`???+`): `:::solution[Solution]{collapsed}`. Any type can be collapsible. Rendered by `docs/src/markdown/admonitions.mjs`
 
 ### Code blocks
 

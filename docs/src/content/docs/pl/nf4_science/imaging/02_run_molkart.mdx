@@ -108,8 +108,7 @@ Celowo uruchamiamy to bez kontenerów, aby pokazać dlaczego są potrzebne.
 
 Po kilku chwilach zobaczysz błąd taki jak ten:
 
-<details class="failure">
-<summary>Wyjście polecenia</summary>
+:::failure[Wyjście polecenia]{collapsed}
 
 ```console
 ERROR ~ Error executing process > 'NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)'
@@ -130,7 +129,7 @@ Command error:
   .command.sh: line 3: duplicate_finder.py: command not found
 ```
 
-</details>
+:::
 
 **Co się dzieje?**
 
@@ -213,8 +212,7 @@ Aby uzyskać więcej szczegółów o kontenerach w Nextflow'ie, zobacz [Hello Co
 
 Podczas działania pipeline'u zobaczysz wyjście podobne do tego:
 
-<details class="success">
-<summary>Wyjście polecenia</summary>
+:::success[Wyjście polecenia]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -291,7 +289,7 @@ CPU hours   : (a few seconds)
 Succeeded   : 22
 ```
 
-</details>
+:::
 
 Zauważ, jak to wyjście jest bardziej szczegółowe niż nasz przykład Hello World dzięki konwencjom nf-core, których przestrzega pipeline:
 

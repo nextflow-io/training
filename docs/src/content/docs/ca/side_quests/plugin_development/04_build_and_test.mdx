@@ -205,8 +205,7 @@ class GreetingExtensionTest extends Specification {
 make test
 ```
 
-<details class="example">
-<summary>Sortida de les proves</summary>
+:::example[Sortida de les proves]{collapsed}
 
 ```console
 BUILD SUCCESSFUL in 5s
@@ -217,17 +216,15 @@ BUILD SUCCESSFUL in 5s
 "BUILD SUCCESSFUL" significa que tot ha funcionat.
 Si alguna prova falla, veureu missatges d'error detallats.
 
-</details>
+:::
 
-<details class="exercise">
-<summary>Afegiu una prova de cas límit</summary>
+::::exercise[Afegiu una prova de cas límit]{collapsed}
 
 Afegiu una prova que comprovi que `reverseGreeting` gestiona una cadena buida.
 Què hauria de retornar `reverseGreeting('')`?
 Afegiu la prova, executeu `make test` i verifiqueu que passa.
 
-<details class="solution">
-<summary>Solució</summary>
+:::solution[Solució]{collapsed}
 
 Afegiu aquest mètode de prova a `GreetingExtensionTest.groovy`:
 
@@ -243,9 +240,9 @@ def 'should handle empty string'() {
 
 Una cadena buida invertida continua sent una cadena buida.
 
-</details>
+:::
 
-</details>
+::::
 
 ---
 

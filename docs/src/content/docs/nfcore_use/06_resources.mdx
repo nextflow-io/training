@@ -89,12 +89,11 @@ Setting up those environments, however, adds significant complexity.
 
 The Seqera platform (developed by the creators of Nextflow) provides a web-based interface for launching Nextflow pipelines on HPC or cloud infrastructure (either your own or one managed for you), with compute and data management capabilities that streamline the process of running pipelines at scale.
 
-<details class="tip">
-<summary>Seqera academic program</summary>
+:::tip[Seqera academic program]{collapsed}
 
 Academic researchers can access Seqera Platform free of charge through the [Seqera academic program](https://seqera.io/academic-program/).
 
-</details>
+:::
 
 ### Takeaway
 
@@ -276,24 +275,22 @@ At most 6 tasks ran at once instead of 4, and the memory reserved at any one tim
 The time saved is modest here because the test dataset is tiny: most tasks finish within seconds, so starting them sooner gains little.
 On real data, where individual tasks run for minutes or hours, running more of them in parallel makes a much larger difference.
 
-<details class="tip">
-<summary>Applying this to a real analysis</summary>
+:::tip[Applying this to a real analysis]{collapsed}
 
 The test dataset is tiny, so its resource usage does not represent a real analysis.
 For real data, run the pipeline on one or two representative samples first, read the execution report, then tune the configuration before launching the full dataset.
 Memory needs often scale with input size and reference genome size, so keep generous headroom.
 
-</details>
+:::
 
-<details class="exercise">
-<summary>Apply it to the pipeline you chose in Part 4</summary>
+:::exercise[Apply it to the pipeline you chose in Part 4]{collapsed}
 
 Return to the published results of the pipeline you chose in [Part 4](./04_choose_pipeline.mdx) and open the execution report in `pipeline_info/`.
 Identify the processes with the highest memory usage, and compare that usage with the memory requested by their labels in the pipeline's `conf/base.config` file.
 
 Which processes would you right-size for your dataset, and in which direction?
 
-</details>
+:::
 
 ### Takeaway {#takeaway_2}
 

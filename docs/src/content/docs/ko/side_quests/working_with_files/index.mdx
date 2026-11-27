@@ -63,8 +63,7 @@ code .
 
 `main.nf`라는 간단한 워크플로우 파일, 두 개의 모듈 파일이 있는 `modules` 디렉토리, 그리고 예제 데이터 파일이 있는 `data` 디렉토리를 확인할 수 있습니다.
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console
 .
@@ -91,7 +90,7 @@ code .
     └── count_lines.nf
 ```
 
-</details>
+:::
 
 이 디렉토리에는 세 명의 환자(A, B, C)로부터 얻은 페어드 엔드 시퀀싱 데이터가 포함되어 있습니다.
 
@@ -155,13 +154,12 @@ output {
 
 이것은 워크플로우에서 단일 파일 경로를 참조한 다음, 해당 클래스와 함께 콘솔에 출력하는 간단한 미니 워크플로우(프로세스 없음)입니다.
 
-<details class="info">
-<summary>`.class`란 무엇인가요?</summary>
+:::info[`.class`란 무엇인가요?]{collapsed}
 
 Nextflow에서 `.class`는 우리가 다루고 있는 객체의 유형을 알려줍니다. "이것은 어떤 종류의 것인가?"라고 묻는 것과 같습니다. 문자열인지, 숫자인지, 파일인지, 아니면 다른 무언가인지 확인할 수 있습니다.
 이를 통해 다음 섹션에서 일반 문자열과 Path 객체의 차이를 설명할 것입니다.
 
-</details>
+:::
 
 워크플로우를 실행합니다:
 
@@ -352,15 +350,14 @@ process COUNT_LINES {
 
 보시다시피, 파일의 압축을 풀고 줄 수를 세는 간단한 스크립트입니다.
 
-<details class="info">
-<summary>`debug true`는 무엇을 하나요?</summary>
+:::info[`debug true`는 무엇을 하나요?]{collapsed}
 
 프로세스 정의의 `debug true` 지시문은 Nextflow가 스크립트의 출력(예: 줄 수 "40")을 실행 로그에 직접 출력하도록 합니다.
 이 지시문이 없으면 프로세스 실행 상태만 볼 수 있고 스크립트의 실제 출력은 볼 수 없습니다.
 
 Nextflow 프로세스 디버깅에 대한 자세한 내용은 [Nextflow 워크플로우 디버깅](../debugging/index.mdx) 사이드 퀘스트를 참조하세요.
 
-</details>
+:::
 
 모듈을 가져오고 코드를 검토했으므로, 이제 워크플로우에서 프로세스를 실행할 수 있습니다.
 
@@ -735,8 +732,7 @@ Outputs:
 
 프로세스의 해시 값에 위치한 work directory의 내용을 확인하여 이를 검증할 수 있습니다.
 
-<details class="abstract">
-<summary>작업 디렉토리 내용</summary>
+:::abstract[작업 디렉토리 내용]{collapsed}
 
 프로세스 해시가 `07/246c2a`인 경우 work directory를 탐색할 수 있습니다:
 
@@ -752,7 +748,7 @@ lrwxr-xr-x  1 user  staff    89 Jan 28 10:00 patientA_rep1_normal_R1_001.fastq.g
 
 심볼릭 링크는 Nextflow가 자동으로 다운로드한 원격 파일의 스테이징된 복사본을 가리킵니다.
 
-</details>
+:::
 
 대용량 파일의 경우 로컬 파일 실행에 비해 다운로드 단계에 추가 시간이 소요됩니다.
 그러나 Nextflow는 불필요한 다운로드를 방지하기 위해 이미 스테이징된 복사본이 있는지 확인합니다.
@@ -1831,8 +1827,7 @@ Outputs:
 
 출력이 `results` 디렉토리에 게시되므로 확인해 봅니다.
 
-<details class="abstract">
-<summary>디렉토리 및 파일 내용</summary>
+:::abstract[디렉토리 및 파일 내용]{collapsed}
 
 ```console
 results
@@ -1850,7 +1845,7 @@ Read 1 size: 10 reads
 Read 2 size: 10 reads
 ```
 
-</details>
+:::
 
 프로세스가 입력을 받아 설계된 대로 환자 메타데이터를 포함하는 새 파일을 생성했습니다.
 훌륭합니다!
@@ -1909,8 +1904,7 @@ Outputs:
 
 이제 results 디렉토리에 사용 가능한 모든 데이터에 대한 결과가 포함되어야 합니다.
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console
 results
@@ -1922,7 +1916,7 @@ results
     └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 성공! 모든 환자를 한 번에 분석했습니다! 맞죠?
 
@@ -1984,8 +1978,7 @@ Outputs:
 
 이제 results 디렉토리를 확인합니다:
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console
 results/
@@ -2015,7 +2008,7 @@ results/
             └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 모든 메타데이터가 깔끔하게 구성되었습니다. 성공입니다!
 

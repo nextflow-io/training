@@ -222,15 +222,14 @@ Proporciona `samplesheetToList`, una funció que analitza fitxers CSV/TSV mitjan
 El pipeline llegeix actualment `greetings.csv` amb `splitCsv` i un `map` manual, però nf-schema pot substituir-ho per una anàlisi validada i basada en esquemes.
 Ja hi ha un fitxer d'esquema JSON (`greetings_schema.json`) al directori de l'exercici.
 
-<details class="info">
-<summary>Què és un esquema?</summary>
+:::info[Què és un esquema?]{collapsed}
 
 Un esquema és una descripció formal de com han de ser les dades vàlides.
 Defineix coses com quines columnes s'esperen, quin tipus ha de tenir cada valor (cadena de text, número, etc.) i quins camps són obligatoris.
 
 Penseu-hi com un contracte: si les dades d'entrada no coincideixen amb l'esquema, l'eina pot detectar el problema aviat en lloc de deixar que causi errors confusos més endavant al pipeline.
 
-</details>
+:::
 
 #### 2.2.1. Examinar l'esquema
 
@@ -569,8 +568,7 @@ INFO - [nf-co2footprint] 🌱 The workflow run used 126.76 uWh of electricity, r
 
 El plugin genera fitxers de sortida al vostre directori de treball:
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 co2footprint_report_<timestamp>.html
@@ -578,10 +576,9 @@ co2footprint_summary_<timestamp>.txt
 co2footprint_trace_<timestamp>.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="co2footprint_summary_<timestamp>.txt"
 Total CO₂e footprint measures of this workflow run (including cached tasks):
@@ -595,7 +592,7 @@ Which equals:
   - 1.22E-7 % of a flight from Paris to London
 ```
 
-</details>
+:::
 
 (Els vostres números seran diferents.)
 

@@ -123,12 +123,11 @@ Later in the course, in Part 6, you do a full run on a bigger machine.
 
 We provide you with a custom config file that overrides the resource defaults to fit within the default Codespaces machine (2 CPUs, about 8 GB of memory).
 
-<details class="full-code">
-<summary>laptop.config</summary>
+:::full-code[laptop.config]{collapsed}
 
 <Code code={nfcore_use_laptop_config} lang="nextflow" title="laptop.config" meta="{21-23}" />
 
-</details>
+:::
 
 [Part 2](./02_configure_execution.mdx) introduced `withName:` to target a single process by name.
 Here we mostly use `withLabel:` to target all processes that share a label at once.
@@ -175,8 +174,7 @@ On the default Codespaces machine, this minimal test dataset takes about 20 minu
 
 Watch it for a minute or two, then move on to the next step.
 
-<details class="warning">
-<summary>Disk space on the default machine</summary>
+:::warning[Disk space on the default machine]{collapsed}
 
 If you let this run go to completion on the default 2-core machine, it may fail near the end with a `no space left on device` error.
 The pipeline uses a separate container image for each tool, and together they take up most of the 32 GB disk of the default machine.
@@ -191,7 +189,7 @@ docker image prune -a
 Answer `y` when asked to confirm.
 Images that are needed again are downloaded on the next run.
 
-</details>
+:::
 
 ### 1.4. Cancel the run
 
@@ -200,8 +198,7 @@ Stopping a run is something you will do regularly, for example when you notice a
 
 Press <kbd>Ctrl</kbd>+<kbd>C</kbd> once in the terminal where the pipeline is running.
 
-<details class="failure">
-<summary>Command output</summary>
+:::failure[Command output]{collapsed}
 
 ```console
 ^C-[nf-core/rnaseq] Pipeline completed with errors-
@@ -210,7 +207,7 @@ ERROR ~ Pipeline failed. Please refer to troubleshooting docs for common issues:
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 Nextflow stops submitting new tasks, terminates the tasks that are running, and exits within a few seconds.
 The `Pipeline failed` message is printed by nf-core pipelines whenever a run does not complete, including when you stop it yourself, so it is expected here.
@@ -220,8 +217,7 @@ Pressing it again forces Nextflow to exit immediately, which on a cluster or in 
 
 The tasks that completed before you cancelled the run are cached, so you can pick up where you left off with `-resume`.
 
-<details class="tip">
-<summary>Stopping a run launched in the background</summary>
+:::tip[Stopping a run launched in the background]{collapsed}
 
 For long runs, you can launch Nextflow in the background with the `-bg` option, so that it keeps running after you close the terminal:
 
@@ -239,16 +235,15 @@ kill $(cat .nextflow.pid)
 Nextflow shuts down the same way as with <kbd>Ctrl</kbd>+<kbd>C</kbd>, terminating the running tasks before it exits.
 The output goes to `.nextflow.log`, where you can see `Killing running tasks` followed by the same `Pipeline failed` message.
 
-</details>
+:::
 
-<details class="tip">
-<summary>Managing runs with Seqera Platform</summary>
+:::tip[Managing runs with Seqera Platform]{collapsed}
 
 Keeping track of runs from the terminal gets harder as you run more pipelines, especially in the background or on remote infrastructure.
 [Seqera Platform](https://seqera.io/platform/) provides a web interface to launch Nextflow pipelines, follow their progress task by task, and cancel or resume runs, on your own HPC or cloud infrastructure.
 See the [Scale with Seqera](../seqera_scale/index.mdx) course to get started.
 
-</details>
+:::
 
 ### Takeaway
 

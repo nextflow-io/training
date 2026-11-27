@@ -131,8 +131,7 @@ samtools index /data/bam/reads_mother.bam
 
 O comando não produz nenhuma saída no terminal, mas você deve agora ver um arquivo chamado `reads_mother.bam.bai` no mesmo diretório que o arquivo de entrada BAM original.
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console
 data/bam/
@@ -142,7 +141,7 @@ data/bam/
 └── reads_son.bam
 ```
 
-</details>
+:::
 
 Isso completa o teste da primeira etapa.
 
@@ -280,22 +279,20 @@ A saída de log é muito verbosa, então destacamos as linhas mais relevantes no
 
 Os arquivos de saída, `reads_mother.vcf` e seu arquivo de índice, `reads_mother.vcf.idx`, são criados dentro do seu diretório de trabalho no contêiner.
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console
 conda.yml  hsperfdata_root  reads_mother.vcf  reads_mother.vcf.idx
 ```
 
-</details>
+:::
 
 O arquivo VCF contém as chamadas de variantes, como veremos em um minuto, e o arquivo de índice tem a mesma função que o arquivo de índice BAM, permitir que ferramentas busquem e recuperem subconjuntos de dados sem carregar o arquivo inteiro.
 
 Como VCF é um formato de texto e este é um arquivo de teste pequeno, você pode executar `cat reads_mother.vcf` para abri-lo e visualizar seu conteúdo.
 Se você rolar de volta até o início do arquivo, encontrará um cabeçalho composto de muitas linhas de metadados, seguido por uma lista de chamadas de variantes, uma por linha.
 
-<details class="abstract">
-<summary>Conteúdo do arquivo (resumido)</summary>
+:::abstract[Conteúdo do arquivo (resumido)]{collapsed}
 
 ```console {26} title="reads_mother.vcf" showLineNumbers
 ##fileformat=VCFv4.2
@@ -339,7 +336,7 @@ Se você rolar de volta até o início do arquivo, encontrará um cabeçalho com
 20_10037292_10066351    14156   .       T       C       183.64  .       AC=1;AF=0.500;AN=2;BaseQRankSum=0.703;DP=20;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=9.18;ReadPosRankSum=-0.193;SOR=1.034        GT:AD:DP:GQ:PL  0/1:12,8:20:99:191,0,319
 ```
 
-</details>
+:::
 
 No exemplo de saída acima, destacamos a última linha do cabeçalho, que fornece os nomes das colunas para os dados tabulares que seguem.
 Cada linha de dados descreve uma possível variante identificada nos dados de sequenciamento da amostra. Para orientação sobre como interpretar o formato VCF, veja [este artigo útil](https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/variant-identification-and-analysis/understanding-vcf-format/).
@@ -354,8 +351,7 @@ mkdir /data/vcf
 mv reads_mother.vcf* /data/vcf
 ```
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console {5,13-15}
 data/
@@ -375,7 +371,7 @@ data/
     └── reads_mother.vcf.idx
 ```
 
-</details>
+:::
 
 Uma vez feito isso, todos os arquivos estão agora acessíveis no seu sistema de arquivos normal.
 
@@ -452,8 +448,7 @@ samtools index /data/bam/reads_father.bam
 samtools index /data/bam/reads_son.bam
 ```
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console
 data/bam/
@@ -465,7 +460,7 @@ data/bam/
 └── reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Isso deve produzir os arquivos de índice no mesmo diretório que os arquivos BAM correspondentes.
 
@@ -571,19 +566,17 @@ Runtime.totalMemory()=257949696 # [!code highlight]
 
 Isso cria o arquivo de saída GVCF `reads_mother.g.vcf` no diretório de trabalho atual no contêiner, assim como seu arquivo de índice, `reads_mother.g.vcf.idx`.
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console
 conda.yml  hsperfdata_root  reads_mother.g.vcf  reads_mother.g.vcf.idx
 ```
 
-</details>
+:::
 
 Se você executar `head -200 reads_mother.g.vcf` para visualizar as primeiras 200 linhas do conteúdo do arquivo, verá que é muito mais longo que o VCF equivalente que geramos na primeira seção, e a maioria das linhas parece bem diferente do que vimos no VCF.
 
-<details class="abstract">
-<summary>Conteúdo do arquivo (resumido)</summary>
+:::abstract[Conteúdo do arquivo (resumido)]{collapsed}
 
 ```console {92,175,191,195} title="reads_mother.g.vcf" showLineNumbers
 ##fileformat=VCFv4.2
@@ -788,7 +781,7 @@ Se você executar `head -200 reads_mother.g.vcf` para visualizar as primeiras 20
 20_10037292_10066351	3537	.	A	<NON_REF>	.	.	END=3546	GT:DP:GQ:MIN_DP:PL	0/0:29:72:26:0,72,1080
 ```
 
-</details>
+:::
 
 Destacamos mais uma vez a última linha do cabeçalho, assim como as três primeiras chamadas de variantes 'propriamente ditas' no arquivo.
 
@@ -942,15 +935,14 @@ Runtime.totalMemory()=226492416
 
 Uma vez concluído, você deve ter três arquivos terminando em `.g.vcf` no seu diretório atual (um por amostra) e seus respectivos arquivos de índice terminando em `.g.vcf.idx`.
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console
 conda.yml        reads_father.g.vcf      reads_mother.g.vcf      reads_son.g.vcf
 hsperfdata_root  reads_father.g.vcf.idx  reads_mother.g.vcf.idx  reads_son.g.vcf.idx
 ```
 
-</details>
+:::
 
 Neste ponto, chamamos variantes em modo GVCF para cada uma de nossas amostras de entrada.
 É hora de seguir para a chamada conjunta.
@@ -1080,8 +1072,7 @@ Runtime.totalMemory()=203423744 # [!code highlight]
 Isso cria o arquivo de saída VCF `family_trio.vcf` no diretório de trabalho atual no contêiner, assim como seu índice, `family_trio.vcf.idx`.
 É outro arquivo razoavelmente pequeno, então você pode executar `cat family_trio.vcf` para visualizar o conteúdo do arquivo, e rolar para baixo para encontrar as primeiras linhas de variantes.
 
-<details class="abstract">
-<summary>Conteúdo do arquivo (resumido)</summary>
+:::abstract[Conteúdo do arquivo (resumido)]{collapsed}
 
 ```console {39} title="family_trio.vcf" showLineNumbers
 ##fileformat=VCFv4.2
@@ -1144,7 +1135,7 @@ Isso cria o arquivo de saída VCF `family_trio.vcf` no diretório de trabalho at
 20_10037292_10066351    14403   .       G       A       144.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=2.63;DP=116;ExcessHet=0.0000;FS=1.435;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=3.52;ReadPosRankSum=0.252;SOR=0.802  GT:AD:DP:GQ:PL  0/1:32,9:41:99:153,0,821        0/0:37,0:37:99:0,109,1169       0/0:37,0:37:99:0,99,1113
 ```
 
-</details>
+:::
 
 Destacamos mais uma vez a última linha do cabeçalho, que marca o início dos dados de chamada de variantes.
 
@@ -1165,8 +1156,7 @@ Dessa forma, teremos algo para comparar quando construirmos nosso fluxo de traba
 mv *.vcf* /data/vcf
 ```
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console {14-19,22-23}
 data
@@ -1196,7 +1186,7 @@ data
     └── reads_son.g.vcf.idx
 ```
 
-</details>
+:::
 
 Uma vez feito isso, todos os arquivos estão agora acessíveis no seu sistema de arquivos normal.
 

@@ -62,8 +62,7 @@ The editor opens with the project directory in focus.
 
 You'll find a simple workflow file called `main.nf`, a `modules` directory containing two module files, and a `data` directory containing some example data files.
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 .
@@ -90,7 +89,7 @@ You'll find a simple workflow file called `main.nf`, a `modules` directory conta
     └── count_lines.nf
 ```
 
-</details>
+:::
 
 This directory contains paired-end sequencing data from three patients (A, B, C).
 
@@ -154,13 +153,12 @@ output {
 
 This is a mini-workflow (without any processes) that refers to a single file path in its workflow, then prints it to the console, along with its class.
 
-<details class="info">
-<summary>What is `.class`?</summary>
+:::info[What is `.class`?]{collapsed}
 
 In Nextflow, `.class` tells us what type of object we're working with. It's like asking "what kind of thing is this?" to find out whether it's a string, a number, a file, or something else.
 This will help us illustrate the difference between a plain string and a Path object in the next sections.
 
-</details>
+:::
 
 Let's run the workflow:
 
@@ -351,15 +349,14 @@ process COUNT_LINES {
 
 As you can see, it's a fairly straightforward little script that unzips the file and counts how many lines it contains.
 
-<details class="info">
-<summary>What does `debug true` do?</summary>
+:::info[What does `debug true` do?]{collapsed}
 
 The `debug true` directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log.
 Without this, you would only see the process execution status but not the actual output from your script.
 
 For more information on debugging Nextflow processes, see the [Debugging Nextflow Workflows](../debugging/index.mdx) side quest.
 
-</details>
+:::
 
 With the module imported and its code examined, we can call the process from the workflow.
 
@@ -734,8 +731,7 @@ That staged file can then be treated as a local file and symlinked into the rele
 
 You can verify that that happened here by looking at the contents of the working directory located at the hash value of the process.
 
-<details class="abstract">
-<summary>Work directory contents</summary>
+:::abstract[Work directory contents]{collapsed}
 
 If the process hash was `07/246c2a`, you could explore the work directory:
 
@@ -751,7 +747,7 @@ lrwxr-xr-x  1 user  staff    89 Jan 28 10:00 patientA_rep1_normal_R1_001.fastq.g
 
 The symlink points to a staged copy of the remote file that Nextflow downloaded automatically.
 
-</details>
+:::
 
 Note that for larger files, the downloading step will take some extra time compared to running on local files.
 However, Nextflow checks whether it already has a staged copy to avoid unnecessary downloads.
@@ -1830,8 +1826,7 @@ Outputs:
 
 The outputs are published to a `results` directory, so have a look in there.
 
-<details class="abstract">
-<summary>Directory and file contents</summary>
+:::abstract[Directory and file contents]{collapsed}
 
 ```console
 results
@@ -1849,7 +1844,7 @@ Read 1 size: 10 reads
 Read 2 size: 10 reads
 ```
 
-</details>
+:::
 
 The process took our inputs and created a new file containing the patient metadata, as designed.
 Splendid!
@@ -1908,8 +1903,7 @@ Outputs:
 
 The results directory should now contain results for all the available data.
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 results
@@ -1921,7 +1915,7 @@ results
     └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 Success! We have analyzed all the patients in one go! Right?
 
@@ -1983,8 +1977,7 @@ Outputs:
 
 Check the results directory now:
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 results/
@@ -2014,7 +2007,7 @@ results/
             └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 And there it is, all our metadata, neatly organized. That's success!
 

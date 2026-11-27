@@ -1187,8 +1187,7 @@ Però, i si volem afegir informació sobre quan i on s'ha produït el processame
 
 Si executeu això, notareu un error -- Nextflow intenta interpretar `${USER}{:nextflow}` com una variable de Nextflow que no existeix.
 
-<details class="failure">
-<summary>Sortida de la comanda</summary>
+:::failure[Sortida de la comanda]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -1205,7 +1204,7 @@ ERROR ~ Script compilation failed
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 Cal escapar-la perquè Bash la pugui gestionar.
 

@@ -63,8 +63,7 @@ Edytor otwiera się z katalogiem projektu w centrum uwagi.
 
 Znajdziesz tu prosty plik workflow'u o nazwie `main.nf`, katalog `modules` zawierający dwa pliki modułów oraz katalog `data` z przykładowymi plikami danych.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 .
@@ -91,7 +90,7 @@ Znajdziesz tu prosty plik workflow'u o nazwie `main.nf`, katalog `modules` zawie
     └── count_lines.nf
 ```
 
-</details>
+:::
 
 Ten katalog zawiera dane sekwencjonowania paired-end od trzech pacjentów (A, B, C).
 
@@ -155,13 +154,12 @@ output {
 
 To mini-workflow (bez żadnych procesów), który odwołuje się do ścieżki pojedynczego pliku, a następnie wypisuje ją na konsolę wraz z jej klasą.
 
-<details class="info">
-<summary>Czym jest `.class`?</summary>
+:::info[Czym jest `.class`?]{collapsed}
 
 W Nextflow'ie `.class` mówi nam, z jakim typem obiektu mamy do czynienia. To jak pytanie „czym to jest?" — żeby sprawdzić, czy to ciąg znaków, liczba, plik czy coś innego.
 Pomoże nam to zilustrować różnicę między zwykłym ciągiem znaków a obiektem Path w kolejnych sekcjach.
 
-</details>
+:::
 
 Uruchommy workflow:
 
@@ -352,15 +350,14 @@ process COUNT_LINES {
 
 Jak widać, to dość prosty skrypt, który rozpakowuje plik i liczy, ile wierszy zawiera.
 
-<details class="info">
-<summary>Co robi `debug true`?</summary>
+:::info[Co robi `debug true`?]{collapsed}
 
 Dyrektywa `debug true` w definicji procesu powoduje, że Nextflow wypisuje wyjście ze skryptu (np. liczbę wierszy „40") bezpośrednio w dzienniku wykonania.
 Bez niej widziałbyś tylko status wykonania procesu, ale nie rzeczywiste wyjście ze skryptu.
 
 Więcej informacji na temat debugowania procesów Nextflow'a znajdziesz w side queście [Debugging Nextflow Workflows](../debugging/index.mdx).
 
-</details>
+:::
 
 Po zaimportowaniu modułu i przejrzeniu jego kodu możemy wywołać proces z poziomu workflow'u.
 
@@ -735,8 +732,7 @@ Ten umieszczony plik może być następnie traktowany jako plik lokalny i dowią
 
 Możesz to zweryfikować, przeglądając zawartość katalogu roboczego znajdującego się pod wartością skrótu procesu.
 
-<details class="abstract">
-<summary>Zawartość katalogu roboczego</summary>
+:::abstract[Zawartość katalogu roboczego]{collapsed}
 
 Jeśli skrót procesu to `07/246c2a`, możesz przejrzeć katalog roboczy:
 
@@ -752,7 +748,7 @@ lrwxr-xr-x  1 user  staff    89 Jan 28 10:00 patientA_rep1_normal_R1_001.fastq.g
 
 Dowiązanie symboliczne wskazuje na umieszczoną kopię pliku zdalnego, którą Nextflow pobrał automatycznie.
 
-</details>
+:::
 
 Pamiętaj, że w przypadku większych plików krok pobierania zajmie więcej czasu niż uruchamianie na plikach lokalnych.
 Nextflow sprawdza jednak, czy ma już umieszczoną kopię, aby uniknąć niepotrzebnych pobrań.
@@ -1831,8 +1827,7 @@ Outputs:
 
 Wyjścia są publikowane w katalogu `results`, więc zajrzyj tam.
 
-<details class="abstract">
-<summary>Zawartość katalogu i pliku</summary>
+:::abstract[Zawartość katalogu i pliku]{collapsed}
 
 ```console
 results
@@ -1850,7 +1845,7 @@ Read 1 size: 10 reads
 Read 2 size: 10 reads
 ```
 
-</details>
+:::
 
 Proces przyjął nasze wejścia i zgodnie z zamierzeniem utworzył nowy plik zawierający metadane pacjenta.
 Znakomicie!
@@ -1909,8 +1904,7 @@ Outputs:
 
 Katalog wyników powinien teraz zawierać wyniki dla wszystkich dostępnych danych.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 results
@@ -1922,7 +1916,7 @@ results
     └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 Sukces! Przeanalizowaliśmy wszystkich pacjentów za jednym razem! Prawda?
 
@@ -1984,8 +1978,7 @@ Outputs:
 
 Sprawdź teraz katalog wyników:
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 results/
@@ -2015,7 +2008,7 @@ results/
             └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 I mamy to — wszystkie nasze metadane, starannie zorganizowane. To sukces!
 

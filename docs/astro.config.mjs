@@ -11,7 +11,9 @@ import starlightPageActions from 'starlight-page-actions';
 import starlightQuiz from 'starlight-quiz';
 import fallbackMarkdown from './src/integrations/fallback-markdown.mjs';
 import { locales } from './src/locales.mjs';
+import { admonitions } from './src/markdown/admonitions.mjs';
 import links from './src/markdown/links.mjs';
+import { takeaways } from './src/markdown/takeaways.mjs';
 import { redirects } from './src/redirects.mjs';
 import { sidebar } from './src/sidebar.mjs';
 
@@ -29,7 +31,12 @@ export default defineConfig({
   trailingSlash: 'always',
   redirects,
   markdown: {
-    processor: satteri({ features: { headingAttributes: true }, hastPlugins: [links({ base })] }),
+    processor: satteri({
+      features: { headingAttributes: true },
+      // Runs before Starlight's aside plugin, which is appended after it.
+      mdastPlugins: [admonitions()],
+      hastPlugins: [links({ base }), takeaways()],
+    }),
   },
   integrations: [
     starlight({

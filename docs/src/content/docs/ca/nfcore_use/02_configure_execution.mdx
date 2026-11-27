@@ -254,8 +254,7 @@ També ho tractem amb més detall a la [secció de validació d'entrades](../nfc
 El pipeline `nf-core/demo` espera un fitxer CSV amb les columnes `sample`, `fastq_1` i `fastq_2`.
 Això es defineix en un fitxer d'esquema (`assets/schema_input.json`) que especifica l'estructura esperada, els tipus de columnes i les restriccions.
 
-<details class="abstract">
-<summary>Fitxer d'esquema per a les entrades</summary>
+:::abstract[Fitxer d'esquema per a les entrades]{collapsed}
 
 ```json title="assets/schema_input.json"
 {
@@ -293,7 +292,7 @@ Això es defineix en un fitxer d'esquema (`assets/schema_input.json`) que especi
 }
 ```
 
-</details>
+:::
 
 L'esquema especifica que `sample` i `fastq_1` són obligatoris, mentre que `fastq_2` és opcional (admetent dades tant de parells com de lectura única).
 Les rutes de fitxer es validen per a l'existència i el patró d'extensió.

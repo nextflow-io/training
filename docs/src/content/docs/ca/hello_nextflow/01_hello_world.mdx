@@ -20,13 +20,12 @@ Consulteu [la llista de reproducció completa](https://youtube.com/playlist?list
 
 En aquesta primera part del curs de formació Hello Nextflow, comencem amb un exemple molt bàsic de Hello World independent del domini, que anirem construint progressivament per demostrar l'ús de la lògica i els components fonamentals de Nextflow.
 
-<details class="info">
-<summary>Què és un exemple Hello World?</summary>
+:::info[Què és un exemple Hello World?]{collapsed}
 
 Un "Hello World!" és un exemple minimalista que pretén demostrar la sintaxi i l'estructura bàsiques d'un llenguatge de programació o marc de programari.
 L'exemple normalment consisteix a imprimir la frase "Hello, World!" al dispositiu de sortida, com ara la consola o el terminal, o escriure-la en un fitxer.
 
-</details>
+:::
 
 ---
 
@@ -65,14 +64,13 @@ Això no mostra res al terminal.
 El text 'Hello World' ara hauria d'estar al fitxer de sortida que hem especificat, anomenat `output.txt`.
 Podeu obrir-lo a l'explorador de fitxers o des de la línia de comandes utilitzant la utilitat `cat`, per exemple.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 Això és el que intentarem replicar amb el nostre primer workflow de Nextflow.
 
@@ -97,8 +95,7 @@ Després l'executarem i buscarem les seves sortides.
 
 Trobareu l'script `hello-world.nf` al vostre directori actual, que hauria de ser `hello-nextflow`. Obriu-lo al panell de l'editor.
 
-<details class="full-code">
-<summary>Fitxer de codi complet</summary>
+:::full-code[Fitxer de codi complet]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
@@ -125,7 +122,7 @@ workflow {
 }
 ```
 
-</details>
+:::
 
 Un script de workflow de Nextflow normalment inclou una o més definicions de [**process**](https://nextflow.io/docs/latest/process.html) i el [**workflow**](https://nextflow.io/docs/latest/workflow.html) en si, més alguns blocs opcionals (no presents aquí) que introduirem més endavant.
 
@@ -247,8 +244,7 @@ Mirant el que hem obtingut per a l'execució mostrada anteriorment, la línia de
 
 Vegem què hi ha allà.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 work
@@ -264,10 +260,9 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
-<details class="question">
-<summary>No veieu el mateix?</summary>
+:::question[No veieu el mateix?]{collapsed}
 
 Els noms exactes dels subdirectoris seran diferents al vostre sistema.
 
@@ -278,19 +273,18 @@ No obstant això, els fitxers de registre estan configurats per ser invisibles a
 tree -a work
 ```
 
-</details>
+:::
 
 El primer que voleu mirar és la sortida real del workflow, és a dir, el fitxer `output.txt` produït pel procés `sayHello`.
 Obriu-lo i trobareu la salutació `Hello World!`, que era l'objectiu del nostre workflow minimalista.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="output.txt"
 Hello World!
 ```
 
-</details>
+:::
 
 Ha funcionat!
 
@@ -308,15 +302,14 @@ Dit això, mirem també els altres fitxers d'aquest directori. Aquests són fitx
 
 El fitxer `.command.sh` és especialment útil perquè us indica la comanda principal que Nextflow va executar, sense incloure tota la comptabilitat i la configuració de tasques/entorn.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title=".command.sh"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
-</details>
+:::
 
 Això coincideix amb el que vam executar abans manualment.
 
@@ -327,8 +320,7 @@ Això fa especialment valuós poder veure exactament com Nextflow va interpretar
 
 Proveu de tornar a executar el workflow unes quantes vegades, després mireu els directoris de tasques sota `work/`.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 work
@@ -383,7 +375,7 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
 Veieu que s'ha creat un nou subdirectori amb un conjunt complet de fitxers de sortida i registre per a cada execució.
 Això us mostra que executar el mateix workflow diverses vegades no sobreescriurà els resultats d'execucions anteriors.
@@ -514,8 +506,7 @@ La sortida del terminal ara acaba amb un resum `Outputs:` que llista les sortide
 
 Comproveu el vostre explorador de fitxers: aquesta vegada, Nextflow també ha creat un nou directori anomenat `results/`.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console {10-11,22}
 .
@@ -542,7 +533,7 @@ Comproveu el vostre explorador de fitxers: aquesta vegada, Nextflow també ha cr
     └── 9f
 ```
 
-</details>
+:::
 
 Dins del directori `results`, trobem un enllaç simbòlic a l'`output.txt` produït al directori work per la comanda que acabem d'executar.
 
@@ -605,8 +596,7 @@ Outputs:
 
 Aquesta vegada el resultat s'escriu sota el subdirectori especificat.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console {2-3}
 results/
@@ -615,7 +605,7 @@ results/
 └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
 ```
 
-</details>
+:::
 
 Veieu que el resultat de l'execució anterior encara hi és.
 
@@ -687,8 +677,7 @@ Outputs:
 
 Aquesta vegada, si mireu els resultats, el fitxer és una còpia adequada en lloc de només un enllaç simbòlic.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console {3}
 results/
@@ -697,7 +686,7 @@ results/
 └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
 ```
 
-</details>
+:::
 
 Com que això també s'estableix al nivell de la sortida individual, us permet establir el mode de publicació de manera granular.
 Això serà especialment útil més endavant quan passem a pipelines de múltiples passos, on potser voleu copiar només les sortides finals i deixar les sortides intermèdies com a enllaços simbòlics, per exemple.
@@ -876,14 +865,13 @@ Si heu fet totes aquestes edicions correctament, hauríeu d'obtenir una altra ex
 
 Assegureu-vos d'obrir el fitxer de sortida per comprovar que ara teniu la nova versió de la salutació.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Bonjour le monde!
 ```
 
-</details>
+:::
 
 Et voilà!
 
@@ -946,8 +934,7 @@ Outputs:
   first_output: hello_world/output.txt
 ```
 
-<details class="question">
-<summary>Si no ha funcionat</summary>
+:::question[Si no ha funcionat]{collapsed}
 
 Si això ha fallat amb un error que s'assembla a això:
 
@@ -976,18 +963,17 @@ En una versió anterior a la 26.04 heu d'habilitar l'analitzador de llenguatge v
 export NXF_SYNTAX_PARSER=v2
 ```
 
-</details>
+:::
 
 La sortida estarà al mateix lloc que anteriorment, però el contingut hauria d'estar actualitzat amb el nou text.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Hola mundo!
 ```
 
-</details>
+:::
 
 Nextflow va utilitzar el valor per defecte del paràmetre de salutació per crear la sortida.
 
@@ -1016,14 +1002,13 @@ Outputs:
 
 Una vegada més, hauríeu de trobar la sortida actualitzada corresponent al vostre directori de resultats.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Konnichiwa!
 ```
 
-</details>
+:::
 
 :::note[Nota]
 A Nextflow, hi ha múltiples llocs on podeu especificar valors per als paràmetres.
@@ -1097,8 +1082,7 @@ Així és com fer-ho.
 
 Cada vegada que llanceu un workflow de nextflow, s'escriu una línia a un fitxer de registre anomenat `history`, sota un directori ocult anomenat `.nextflow` al directori de treball actual.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```txt title=".nextflow/history" showLineNumbers
 2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'
@@ -1108,7 +1092,7 @@ Cada vegada que llanceu un workflow de nextflow, s'escriu una línia a un fitxer
 2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
 ```
 
-</details>
+:::
 
 Aquest fitxer us proporciona la marca de temps, el nom d'execució, l'estat, l'ID de revisió, l'ID de sessió i la línia de comandes completa per a cada execució de Nextflow que s'ha llançat des del directori de treball actual.
 

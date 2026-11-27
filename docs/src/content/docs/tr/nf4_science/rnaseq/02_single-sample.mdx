@@ -26,8 +26,7 @@ Bu, [Bölüm 1: Yönteme genel bakış](./01_method.mdx#1-tek-örnekli-işleme) 
 
 Başlangıç noktası olarak, size iş akışının ana bölümlerini özetleyen bir iş akışı dosyası olan `rnaseq.nf` ve `modules/` dizininde her sürecin yapısını özetleyen dört modül dosyası (`fastqc.nf`, `trim_galore.nf`, `hisat2_align.nf` ve `multiqc.nf`) sağlıyoruz.
 
-<details class="full-code">
-<summary>İskelet dosyaları</summary>
+:::full-code[İskelet dosyaları]{collapsed}
 
 ```nextflow title="rnaseq.nf"
 #!/usr/bin/env nextflow
@@ -140,7 +139,7 @@ process MULTIQC {
 }
 ```
 
-</details>
+:::
 
 Bu dosyalar işlevsel değildir; amaçları yalnızca kodun ilginç kısımlarını doldurmanız için iskelet görevi görmektir.
 

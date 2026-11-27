@@ -35,12 +35,11 @@ This time, we're going to make the following changes to our workflow to better r
 3. Add a parameter to name the final output file and pass that as a secondary input to the collection step.
 4. Make the collection step also report a simple statistic about what was processed.
 
-<details class="info">
-<summary>How to begin from this section</summary>
+:::info[How to begin from this section]{collapsed}
 
 This section of the course assumes you have completed Parts 1-2 of the [Hello Nextflow](./index.mdx) course, but if you are comfortable with the basics covered in those sections, you can start from here without doing anything special.
 
-</details>
+:::
 
 ---
 
@@ -89,8 +88,7 @@ Outputs:
 As previously, you will find the output files in the location specified in the `output` block.
 For this chapter, it's under `results/hello_workflow/`.
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 results/hello_workflow
@@ -99,7 +97,7 @@ results/hello_workflow
 └── Hola-output.txt
 ```
 
-</details>
+:::
 
 If that worked for you, you're ready to learn how to assemble a multi-step workflow.
 
@@ -135,14 +133,13 @@ echo 'Hello World' | tr '[a-z]' '[A-Z]' > UPPER-output.txt
 
 The output is a text file called `UPPER-output.txt` that contains the uppercase version of the `Hello World` string.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="UPPER-output.txt"
 HELLO WORLD
 ```
 
-</details>
+:::
 
 That's basically what we're going to try to do with our workflow.
 
@@ -346,8 +343,7 @@ There is now an extra line in the console output that corresponds to the new pro
 
 You'll find the outputs in the `results/hello_workflow` directory as set in the `output` block.
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 results/hello_workflow/
@@ -359,12 +355,11 @@ results/hello_workflow/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 That's convenient! But it's still worth taking a look inside the work directory of one of the calls to the second process.
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 work/e0/ecf81b4cacc648b9b994218d5b29d7/
@@ -372,7 +367,7 @@ work/e0/ecf81b4cacc648b9b994218d5b29d7/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Notice there are two `*-output` files: the output of the first process as well as the output of the second.
 
@@ -423,8 +418,7 @@ cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLL
 
 The output is a text file called `COLLECTED-output.txt` that contains the uppercase versions of the original greetings.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="COLLECTED-output.txt"
 HELLO
@@ -432,7 +426,7 @@ BONJOUR
 HOLA
 ```
 
-</details>
+:::
 
 That is the result we want to achieve with our workflow.
 
@@ -665,14 +659,13 @@ We were only expecting one, but there are three.
 
 Now have a look at the contents of the final output file.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-output.txt"
 HOLA
 ```
 
-</details>
+:::
 
 Oh no. The collection step was run individually on each greeting, which is NOT what we wanted.
 
@@ -786,8 +779,7 @@ We can summarize that with the following diagram:
 
 Finally, you can have a look at the contents of the output file to satisfy yourself that everything worked correctly.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-output.txt"
 BONJOUR
@@ -795,7 +787,7 @@ HELLO
 HOLA
 ```
 
-</details>
+:::
 
 This time we have all three greetings in the final output file. Success!
 
@@ -1011,8 +1003,7 @@ Outputs:
 
 It runs successfully and produces the desired output:
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-trio-output.txt"
 HELLO
@@ -1020,7 +1011,7 @@ BONJOUR
 HOLA
 ```
 
-</details>
+:::
 
 Now, as long as we specify the parameter appropriately, subsequent runs on other batches of inputs won't clobber previous results.
 
@@ -1240,14 +1231,13 @@ Outputs:
 If you look in the `results/hello_workflow/` directory, you'll find the new report file, `trio-report.txt`.
 Open it to verify that the workflow correctly reported the count of greetings that were processed.
 
-<details class="abstract">
-<summary>File contents</summary>
+:::abstract[File contents]{collapsed}
 
 ```txt title="trio-report.txt"
 There were 3 greetings in this batch.
 ```
 
-</details>
+:::
 
 ![](./img/hello-collect-4-way.excalidraw.svg)
 

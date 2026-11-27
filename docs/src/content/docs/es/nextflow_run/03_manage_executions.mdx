@@ -126,8 +126,7 @@ Ya sea que esté desarrollando un pipeline o ejecutándolo en producción, en al
 
 Cada vez que lanza un workflow de Nextflow, se escribe una línea en un archivo de registro llamado `history`, dentro de un directorio oculto llamado `.nextflow` en el directorio de trabajo actual.
 
-<details class="abstract">
-<summary>Contenido del archivo</summary>
+:::abstract[Contenido del archivo]{collapsed}
 
 ```txt title=".nextflow/history" showLineNumbers
 2026-09-13 01:47:58	2.8s	determined_ramanujan	OK	ce74f81996b8ce999853fdbb25ba7969	03078950-5011-414f-992b-8fe1bd219ac2	nextflow run main.nf --input data/greetings.csv --character turkey
@@ -136,7 +135,7 @@ Cada vez que lanza un workflow de Nextflow, se escribe una línea en un archivo 
 2026-09-13 01:48:14	1.5s	deadly_lamport	OK	ce74f81996b8ce999853fdbb25ba7969	517ccc29-9db7-4d8d-8ea0-c8db6e9ac653	nextflow run main.nf --input data/greetings.csv --character stegosaurus -resume
 ```
 
-</details>
+:::
 
 Cada línea le proporciona la marca de tiempo, la duración, el nombre de la ejecución, el estado, el ID de revisión, el ID de sesión y la línea de comando completa de una ejecución lanzada desde este directorio.
 

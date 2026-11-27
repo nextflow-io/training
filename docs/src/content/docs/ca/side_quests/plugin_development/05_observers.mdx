@@ -260,13 +260,12 @@ Pipeline complete! 👋
 L'observer funciona.
 Cada vegada que una tasca finalitza, Nextflow crida `onProcessComplete`, i la nostra implementació imprimeix un missatge.
 
-<details class="exercise">
-<summary>Personalitzeu el missatge</summary>
+:::exercise[Personalitzeu el missatge]{collapsed}
 
 Proveu de canviar el missatge a `onProcessComplete` per alguna cosa pròpia, reconstruïu i torneu a executar.
 Això confirma que el cicle complet d'edició-construcció-execució funciona per als observers.
 
-</details>
+:::
 
 ### 2.4. Afegir lògica de comptatge
 
@@ -324,8 +323,7 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-<details class="example">
-<summary>Sortida</summary>
+:::example[Sortida]{collapsed}
 
 ```console
 N E X T F L O W  ~  version 26.04.4
@@ -357,7 +355,7 @@ Pipeline complete! 👋
 
 Els missatges del comptador s'intercalen amb les submissions de tasques perquè els observers s'executen a mesura que les tasques es completen.
 
-</details>
+:::
 
 ---
 

@@ -29,12 +29,11 @@ Canais são filas projetadas para lidar com entradas eficientemente e transport�
 Nesta parte do curso, você aprenderá como usar um canal para lidar com múltiplas entradas de uma variedade de fontes diferentes.
 Você também aprenderá a usar [**operadores**](https://nextflow.io/docs/latest/reference/operator.html) para transformar o conteúdo dos canais conforme necessário.
 
-<details class="info">
-<summary>Como começar a partir desta seção</summary>
+:::info[Como começar a partir desta seção]{collapsed}
 
 Esta seção do curso pressupõe que você completou a Parte 1 do curso [Hello Nextflow](./index.mdx), mas se você está confortável com os conceitos básicos cobertos naquela seção, pode começar a partir daqui sem fazer nada especial.
 
-</details>
+:::
 
 ---
 
@@ -73,8 +72,7 @@ Outputs:
 
 Como anteriormente, você encontrará o arquivo de saída chamado `output.txt` no diretório `results/hello_channels` (como especificado no bloco `output` do script de fluxo de trabalho, mostrado acima).
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console {2-3} title="results/hello_channels"
 results
@@ -85,16 +83,15 @@ results
 └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Conteúdo do arquivo</summary>
+:::abstract[Conteúdo do arquivo]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hello Channels!
 ```
 
-</details>
+:::
 
 Se isso funcionou para você, está pronto para aprender sobre canais.
 
@@ -225,14 +222,13 @@ Outputs:
 Se você fez ambas as edições corretamente, deve obter uma execução bem-sucedida.
 Você pode verificar o diretório de resultados para se certificar de que o resultado ainda é o mesmo de antes.
 
-<details class="abstract">
-<summary>Conteúdo do arquivo</summary>
+:::abstract[Conteúdo do arquivo]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hello Channels!
 ```
 
-</details>
+:::
 
 Então aumentamos a flexibilidade do nosso fluxo de trabalho ao mesmo tempo que alcançamos o mesmo resultado final.
 Isso pode parecer que estamos escrevendo mais código sem benefício tangível, mas o valor ficará claro assim que começarmos a lidar com mais entradas.
@@ -382,8 +378,7 @@ O monitor de execução mostra que `3 of 3` chamadas foram feitas para o process
 
 No entanto, ainda há apenas uma saída no diretório de resultados:
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console {3} title="results/hello_channels"
 results
@@ -394,16 +389,15 @@ results
 └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Conteúdo do arquivo</summary>
+:::abstract[Conteúdo do arquivo]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hola
 ```
 
-</details>
+:::
 
 Você deve ver uma das três saudações lá, mas a que você obteve pode ser diferente do que é mostrado aqui.
 Consegue pensar por que isso pode ser?
@@ -415,8 +409,7 @@ _No diagrama, o canal é representado em verde, e a ordem dos elementos é repre
 Olhando de volta para o monitor de execução, ele nos deu apenas um caminho de subdiretório (`f4/c9962c`).
 Vamos dar uma olhada lá.
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console {9}
 work/f4/c9962ce91ef87480babcb86b2b9042/
@@ -430,16 +423,15 @@ work/f4/c9962ce91ef87480babcb86b2b9042/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Conteúdo do arquivo</summary>
+:::abstract[Conteúdo do arquivo]{collapsed}
 
 ```console title="work/f4/c9962ce91ef87480babcb86b2b9042/output.txt"
 Hello
 ```
 
-</details>
+:::
 
 Essa nem é a mesma saudação que obtivemos no diretório de resultados! O que está acontecendo?
 
@@ -488,8 +480,7 @@ Neste modo expandido, ele apenas relata que foram submetidas.
 
 De qualquer forma, agora que temos os subdiretórios de cada chamada de processo, podemos procurar seus logs e saídas.
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console
 work/23/871c7ec3642a898ecd5e6090d21300/
@@ -527,10 +518,9 @@ work/f4/ea10a680d5687596d3eaa3fcf69272/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Conteúdo do arquivo</summary>
+:::abstract[Conteúdo do arquivo]{collapsed}
 
 ```txt title="work/23/871c7ec3642a898ecd5e6090d21300/output.txt"
 Bonjour
@@ -544,7 +534,7 @@ Hello
 Hola
 ```
 
-</details>
+:::
 
 Isso mostra que todos os três processos foram executados com sucesso (eba).
 
@@ -646,8 +636,7 @@ Outputs:
 Voltando à visualização de resumo, a saída é resumida em uma linha novamente.
 Dê uma olhada no diretório `results` para ver se todas as saudações de saída estão lá.
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console
 results/hello_channels/
@@ -657,10 +646,9 @@ results/hello_channels/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Conteúdo do arquivo</summary>
+:::abstract[Conteúdo do arquivo]{collapsed}
 
 ```console title="Bonjour-output.txt"
 Bonjour
@@ -674,7 +662,7 @@ Hello
 Hola
 ```
 
-</details>
+:::
 
 Sucesso! Agora podemos adicionar quantas saudações quisermos sem nos preocupar com arquivos de saída sendo sobrescritos.
 

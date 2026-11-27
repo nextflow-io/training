@@ -108,8 +108,7 @@ nextflow run ./molkart -params-file params.yaml
 
 잠시 후 다음과 같은 오류가 표시됩니다:
 
-<details class="failure">
-<summary>명령 출력</summary>
+:::failure[명령 출력]{collapsed}
 
 ```console
 ERROR ~ Error executing process > 'NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)'
@@ -130,7 +129,7 @@ Command error:
   .command.sh: line 3: duplicate_finder.py: command not found
 ```
 
-</details>
+:::
 
 **무슨 일이 일어나고 있나요?**
 
@@ -213,8 +212,7 @@ Nextflow의 컨테이너에 대한 자세한 내용은 Hello Nextflow 교육의 
 
 파이프라인이 실행되는 동안 다음과 유사한 출력이 표시됩니다:
 
-<details class="success">
-<summary>명령 출력</summary>
+:::success[명령 출력]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -291,7 +289,7 @@ CPU hours   : (a few seconds)
 Succeeded   : 22
 ```
 
-</details>
+:::
 
 파이프라인이 따르는 nf-core 규칙 때문에 이 출력이 Hello World 예제보다 더 상세하다는 것을 알 수 있습니다:
 

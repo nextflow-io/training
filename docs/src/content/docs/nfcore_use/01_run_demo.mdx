@@ -175,8 +175,7 @@ You can either use `tree` or use the file explorer to find and open the `nf-core
 tree -L 1 pipelines/nf-core/demo
 ```
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 pipelines/nf-core/demo
@@ -203,7 +202,7 @@ pipelines/nf-core/demo
 7 directories, 12 files
 ```
 
-</details>
+:::
 
 As you can see, there's a lot going on in there, most of which you don't need to worry about.
 
@@ -219,13 +218,12 @@ For the rest, we can distinguish three functional groups of code files:
 
 We won't go over the pipeline code components in this part of the course, but we will touch on elements of configuration and validation that are likely to be relevant to you as an end user of nf-core pipelines.
 
-<details class="tip">
-<summary>Browsing source code on GitHub</summary>
+:::tip[Browsing source code on GitHub]{collapsed}
 
 You can also browse any nf-core pipeline's source code on GitHub, e.g. [github.com/nf-core/demo](https://github.com/nf-core/demo).
 Every nf-core pipeline follows the same directory layout, so once you know the structure, you can find configuration files, modules, and workflows for any pipeline the same way.
 
-</details>
+:::
 
 For now, on to running the pipeline!
 
@@ -245,13 +243,12 @@ Conveniently, every nf-core pipeline comes with a test profile.
 This is a minimal set of configuration settings for the pipeline to run using a small test dataset hosted in the [nf-core/test-datasets](https://github.com/nf-core/test-datasets) repository.
 It's a great way to quickly try out a pipeline at small scale.
 
-<details class="tip">
-<summary>Configuration profiles</summary>
+:::tip[Configuration profiles]{collapsed}
 
 Nextflow's configuration profile system allows you to easily switch between different container engines or execution environments.
 For more details, see [Nextflow Run Part 2: Configure the pipeline](../nextflow_run/02_configure_pipeline.mdx#14-profiles).
 
-</details>
+:::
 
 ### 2.1. Examine the test profile
 
@@ -444,8 +441,7 @@ Finally, let's have a look at the `demo-results` directory produced by the pipel
 tree -L 2 demo-results
 ```
 
-<details class="abstract">
-<summary>Directory contents</summary>
+:::abstract[Directory contents]{collapsed}
 
 ```console
 demo-results
@@ -473,7 +469,7 @@ demo-results
 12 directories, 8 files
 ```
 
-</details>
+:::
 
 That might seem like a lot.
 To learn more about the `nf-core/demo` pipeline's outputs, check out its [documentation page](https://nf-co.re/demo/1.2.0/docs/output/).

@@ -54,7 +54,7 @@ TAG_RE = re.compile(
     r"<(?P<close>/?)(?P<name>[A-Za-z][\w.-]*)(?P<attrs>(?:[^<>\"'{}]|\"[^\"]*\"|'[^']*'|\{[^{}]*\})*?)(?P<self>/?)>"
 )
 ATTR_RE = re.compile(r'([\w-]+)="([^"]*)"')
-DIRECTIVE_RE = re.compile(r"^(\s*)(:{3,})([\w-]*)(?:\[(.*)\])?\s*$")
+DIRECTIVE_RE = re.compile(r"^(\s*)(:{3,})([\w-]*)(?:\[(.*)\])?(\{[^}]*\})?\s*$")
 SUMMARY_RE = re.compile(r"<summary>(.*?)</summary>")
 IMPORT_RE = re.compile(r"^import (?P<name>\w+) from '(?P<path>[^']+)';\s*$")
 FENCE_LABEL_RE = re.compile(r'\b(step|label)="([^"]*)"')
@@ -351,7 +351,7 @@ def fix_tags(trans: list[str], source: list[str], tab_labels: dict | None = None
 
 
 def fix_directives(trans: list[str], source: list[str], titles: dict | None = None) -> list[str]:
-    """Restore ``:::`` aside names and nesting from source; glossary titles win."""
+    """Restore ``:::`` aside names, nesting and ``{collapsed}``-style attributes from source; glossary titles win."""
     src = extract_directives(source)
     tr = extract_directives(trans)
     if len(src) != len(tr):
@@ -360,9 +360,9 @@ def fix_directives(trans: list[str], source: list[str], titles: dict | None = No
     titles = titles or {}
     result = trans.copy()
     for (_, sm), (ti, tm) in zip(src, tr):
-        indent, colons, name, en_title = sm.groups()
+        indent, colons, name, en_title, attrs = sm.groups()
         title = titles.get(en_title) or tm.group(4) or en_title
-        result[ti] = f"{indent}{colons}{name}" + (f"[{title}]" if name and title else "")
+        result[ti] = f"{indent}{colons}{name}" + (f"[{title}]" if name and title else "") + (attrs or "")
     return result
 
 

@@ -219,8 +219,7 @@ make install
 
 `make install` kompiliert den Plugin-Code und kopiert ihn in dein lokales Nextflow-Plugin-Verzeichnis (`$NXF_HOME/plugins/`), sodass er verwendet werden kann.
 
-<details class="example">
-<summary>Build-Ausgabe</summary>
+:::example[Build-Ausgabe]{collapsed}
 
 Beim ersten Ausführen lädt Gradle sich selbst herunter (das kann eine Minute dauern):
 
@@ -243,7 +242,7 @@ BUILD SUCCESSFUL in 23s
 - **"Deprecated Gradle features..."**: Diese Warnung kommt vom Plugin-Template, nicht von deinem Code. Sie kann ignoriert werden.
 - **"BUILD SUCCESSFUL"**: Das ist das Entscheidende. Dein Plugin wurde fehlerfrei kompiliert.
 
-</details>
+:::
 
 Wechsle zurück in das Pipeline-Verzeichnis:
 

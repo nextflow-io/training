@@ -7,8 +7,7 @@ description: W tej czwartej części kursu szkoleniowego Build with nf-core poka
 
 W tej czwartej części kursu szkoleniowego Build with nf-core pokażemy Ci, jak używać wtyczki nf-schema do walidacji danych wejściowych i parametrów pipeline'u.
 
-<details class="info">
-<summary>Jak zacząć od tej sekcji</summary>
+:::info[Jak zacząć od tej sekcji]{collapsed}
 
 Ta sekcja zakłada, że ukończyłeś [Część 3: Tworzenie modułu nf-core](./03_make_module.mdx) i zaktualizowałeś moduł procesu `COWPY` do standardów nf-core w Swoim pipeline'ie.
 
@@ -27,7 +26,7 @@ Możesz przetestować, czy działa poprawnie, uruchamiając następujące polece
 nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
-</details>
+:::
 
 ---
 
@@ -78,8 +77,7 @@ nf-schema zapewnia kilka kluczowych funkcji:
 
 nf-schema jest następcą przestarzałej wtyczki nf-validation i używa standardu [JSON Schema Draft 2020-12](https://json-schema.org/) do walidacji.
 
-<details class="info">
-<summary>Czym są wtyczki Nextflow'a?</summary>
+:::info[Czym są wtyczki Nextflow'a?]{collapsed}
 
 Wtyczki to rozszerzenia, które dodają nowe funkcjonalności do samego języka Nextflow'a. Są instalowane przez blok `plugins{}` w `nextflow.config` i mogą zapewniać:
 
@@ -97,7 +95,7 @@ plugins {
 
 Po zainstalowaniu możesz importować funkcje z wtyczek używając składni `include { functionName } from 'plugin/plugin-name'`.
 
-</details>
+:::
 
 ### 0.3. Dwa pliki schematu dla dwóch typów walidacji
 
@@ -257,15 +255,14 @@ Każde wejście opisane tutaj ma następujące kluczowe właściwości, które m
 Jeśli masz bystre oko, możesz zauważyć, że parametr wejściowy `batch`, którego używaliśmy, nie jest jeszcze zdefiniowany w schemacie.
 Dodamy go w następnej sekcji.
 
-<details class="info">
-<summary>Skąd pochodzą parametry schematu?</summary>
+:::info[Skąd pochodzą parametry schematu?]{collapsed}
 
 Walidacja schematu używa `nextflow.config` jako bazy dla definicji parametrów.
 Parametry zadeklarowane gdzie indziej w skryptach workflow'u (jak w `main.nf` lub plikach modułów) **nie** są automatycznie przechwytywane przez walidator schematu.
 
 To oznacza, że zawsze powinieneś deklarować parametry pipeline'u w `nextflow.config`, a następnie definiować ich reguły walidacji w `nextflow_schema.json`.
 
-</details>
+:::
 
 ### 1.3. Dodaj parametr batch
 

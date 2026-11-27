@@ -82,8 +82,7 @@ Il file `.command.sh` è particolarmente utile durante il debug — mostra esatt
 
 Capire il codice non è essenziale se volete solo eseguire pipeline, ma se siete curiosi, vale la pena darci un'occhiata.
 
-<details class="optional">
-<summary>Cliccate per esplorare il codice associato a questo esercizio</summary>
+::::optional[Cliccate per esplorare il codice associato a questo esercizio]{collapsed}
 
 Apriamo `1-hello.nf` e osserviamo i suoi componenti principali.
 
@@ -212,7 +211,7 @@ output {
 
 Ogni voce con nome corrisponde a un'etichetta `publish:` nel flusso di lavoro e la mappa a una sottodirectory sotto `results/`.
 
-</details>
+::::
 
 ### Takeaway
 
@@ -361,8 +360,7 @@ La funzionalità `-resume` è particolarmente preziosa nelle pipeline lunghe, do
 
 Capire il codice non è essenziale se volete solo eseguire pipeline, ma se siete curiosi, vale la pena darci un'occhiata.
 
-<details class="optional">
-<summary>Cliccate per esplorare il codice associato a questo esercizio</summary>
+:::optional[Cliccate per esplorare il codice associato a questo esercizio]{collapsed}
 
 La modifica chiave in `2-inputs.nf` si trova nella sezione `main:` del flusso di lavoro:
 
@@ -385,7 +383,7 @@ Quello che vedete qui si chiama **canale**: un costrutto a coda che gestisce i d
 Il risultato è un canale contenente `Hello`, `Bonjour` e `Hola`.
 Quando viene passato a `sayHello(greeting_ch)`, Nextflow chiama automaticamente il processo una volta per ogni elemento, eseguendoli in parallelo quando le risorse lo consentono.
 
-</details>
+:::
 
 ### Takeaway
 
@@ -421,8 +419,7 @@ nextflow run main.nf --input data/greetings.csv
 
 Il parametro `character` ha come valore predefinito `turkey` in `nextflow.config`, quindi l'ASCII art usa un tacchino a meno che non lo sovrascriviate (provate ad aggiungere `--character tux`).
 
-<details class="success">
-<summary>Output del comando</summary>
+:::success[Output del comando]{collapsed}
 
 ```console {6,7,8,9}
 N E X T F L O W   ~  version 26.04.4
@@ -456,7 +453,7 @@ Outputs:
   cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
 ```
 
-</details>
+:::
 
 Quattro processi sono stati eseguiti, ma non lo stesso numero di volte.
 `sayHello` e `convertToUpper` sono stati eseguiti ciascuno una volta per input (3 of 3): ogni saluto deve essere scritto e convertito in maiuscolo singolarmente.
@@ -488,8 +485,7 @@ La directory di primo livello prende il nome dal parametro `batch`, che ha come 
 
 Controllate `cowpy-COLLECTED-batch-output.txt` per il file di ASCII art.
 
-<details class="abstract">
-<summary>Contenuto del file</summary>
+:::abstract[Contenuto del file]{collapsed}
 
 ```console title="results/batch/cowpy-COLLECTED-batch-output.txt"
  _________
@@ -520,7 +516,7 @@ Controllate `cowpy-COLLECTED-batch-output.txt` per il file di ASCII art.
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 Proprio come nella sezione [2.1](#21-eseguire-il-flusso-di-lavoro), ognuna di queste 8 esecuzioni di attività, su tutti e quattro i processi, ottiene la propria directory sotto `work/`, completamente isolata dalle altre.
 `collectGreetings` è un buon esempio di perché questo è importante: dipende dagli output di tutte e tre le attività `convertToUpper`, che risiedono in tre directory di attività diverse, quindi Nextflow crea symlink a quei file all'interno della propria directory di `collectGreetings` invece di fargli leggere direttamente dalle directory delle attività a monte:
@@ -547,8 +543,7 @@ Nextflow supporta anche Conda come alternativa ai container; consultate la [Part
 
 Capire il codice non è essenziale se volete solo eseguire pipeline, ma se siete curiosi, vale la pena darci un'occhiata.
 
-<details class="optional">
-<summary>Cliccate per esplorare il codice associato a questo esercizio</summary>
+:::optional[Cliccate per esplorare il codice associato a questo esercizio]{collapsed}
 
 ### Come i dati scorrono da uno step al successivo
 
@@ -619,7 +614,7 @@ docker.enabled = true
 
 Questa singola riga abilita Docker per qualsiasi processo nella pipeline che abbia un container specificato.
 
-</details>
+:::
 
 ### Takeaway
 

@@ -126,8 +126,7 @@ Geçmiş çalıştırmaların geçmişini nasıl inceleyeceğinizi öğrenin.
 
 Bir Nextflow iş akışını her başlattığınızda, geçerli çalışma dizinindeki `.nextflow` adlı gizli bir dizin altında bulunan `history` adlı bir günlük dosyasına bir satır yazılır.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```txt title=".nextflow/history" showLineNumbers
 2026-09-13 01:47:58	2.8s	determined_ramanujan	OK	ce74f81996b8ce999853fdbb25ba7969	03078950-5011-414f-992b-8fe1bd219ac2	nextflow run main.nf --input data/greetings.csv --character turkey
@@ -136,7 +135,7 @@ Bir Nextflow iş akışını her başlattığınızda, geçerli çalışma dizin
 2026-09-13 01:48:14	1.5s	deadly_lamport	OK	ce74f81996b8ce999853fdbb25ba7969	517ccc29-9db7-4d8d-8ea0-c8db6e9ac653	nextflow run main.nf --input data/greetings.csv --character stegosaurus -resume
 ```
 
-</details>
+:::
 
 Her satır, bu dizinden başlatılan bir çalıştırmanın zaman damgasını, süresini, çalıştırma adını, durumunu, revizyon kimliğini, oturum kimliğini ve tam komut satırını gösterir.
 

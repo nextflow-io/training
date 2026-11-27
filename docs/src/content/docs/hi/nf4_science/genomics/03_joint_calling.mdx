@@ -8,8 +8,7 @@ description: पहले, तुमने प्रति-नमूना व�
 पहले, तुमने प्रति-नमूना वेरिएंट कॉलिंग पाइपलाइन बनाई जो प्रत्येक नमूने के डेटा को स्वतंत्र रूप से प्रोसेस करती थी।
 अब हम इसे विस्तारित करके संयुक्त वेरिएंट कॉलिंग लागू करने जा रहे हैं, जैसा कि [भाग 1](01_method.mdx) में बताया गया है (मल्टी-सैंपल उपयोग केस)।
 
-<details class="info">
-<summary>इस खंड से कैसे शुरू करें</summary>
+:::info[इस खंड से कैसे शुरू करें]{collapsed}
 
 कोर्स का यह सेक्शन मानता है कि तुमने [भाग 1: विधि अवलोकन](./01_method.mdx), [भाग 2: प्रति-नमूना वेरिएंट कॉलिंग](./02_per_sample_variant_calling.mdx) पूरा कर लिया है और तुम्हारे पास एक कार्यशील `genomics.nf` पाइपलाइन है।
 
@@ -29,7 +28,7 @@ cp solutions/part2/modules/* modules/
 nextflow run genomics.nf -profile test
 ```
 
-</details>
+:::
 
 ## असाइनमेंट
 
@@ -237,8 +236,7 @@ Outputs:
 
 Nextflow आउटपुट पहले जैसा ही दिखता है, लेकिन `.g.vcf` फ़ाइलें और उनकी इंडेक्स फ़ाइलें अब सबडायरेक्टरी में व्यवस्थित हैं।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री (symlinks छोटे किए गए)</summary>
+:::abstract[डायरेक्टरी सामग्री (symlinks छोटे किए गए)]{collapsed}
 
 ```console
 results/
@@ -258,7 +256,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 यदि तुम GVCF फ़ाइलों में से एक को खोलते हो और इसे स्क्रॉल करते हो, तो तुम सत्यापित कर सकते हो कि GATK HaplotypeCaller ने अनुरोध के अनुसार GVCF फ़ाइलें उत्पन्न कीं।
 
@@ -703,8 +701,7 @@ Outputs:
 पहले दो चरण पिछले रन से cached हैं, और नया `GATK_JOINTGENOTYPING` चरण सभी तीन नमूनों से एकत्रित इनपुट पर एक बार चलता है।
 अंतिम आउटपुट फ़ाइल, `family_trio.joint.vcf` (और उसका इंडेक्स), results डायरेक्टरी में है।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री (symlinks छोटे किए गए)</summary>
+:::abstract[डायरेक्टरी सामग्री (symlinks छोटे किए गए)]{collapsed}
 
 ```console
 results/
@@ -726,7 +723,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 यदि तुम संयुक्त VCF फ़ाइल खोलते हो, तो तुम सत्यापित कर सकते हो कि वर्कफ़्लो ने अपेक्षित वेरिएंट कॉल्स उत्पन्न कीं।
 

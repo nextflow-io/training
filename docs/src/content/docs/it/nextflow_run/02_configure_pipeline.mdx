@@ -16,8 +16,7 @@ Nextflow rileva automaticamente `nextflow.config` dalla directory di lavoro e ap
 
 Vi forniamo un file di configurazione che copre quattro aree: packaging del software, impostazioni dei processi, parametri della pipeline e profili di esecuzione.
 
-<details class="full-code">
-<summary>nextflow.config</summary>
+:::full-code[nextflow.config]{collapsed}
 
 ```nextflow title="nextflow.config" showLineNumbers
 /*
@@ -58,7 +57,7 @@ profiles {
 }
 ```
 
-</details>
+:::
 
 Esaminiamo ciascuna sezione, poi mettiamo i profili in pratica eseguendo la pipeline con uno di essi.
 
@@ -324,8 +323,7 @@ Outputs:
   cowpy_art: yaml/cowpy-COLLECTED-yaml-output.txt
 ```
 
-<details class="abstract">
-<summary>Contenuto del file</summary>
+:::abstract[Contenuto del file]{collapsed}
 
 ```console title="results/yaml/cowpy-COLLECTED-yaml-output.txt"
  _________
@@ -349,7 +347,7 @@ Outputs:
                     |_____|        |_____|         ~ - . _ _ _ _ _>
 ```
 
-</details>
+:::
 
 Un file di parametri è particolarmente utile quando una pipeline ha più di una manciata di parametri: vi permette di fornirli tutti in una volta, senza una riga di comando lunghissima o alcuna modifica allo script del flusso di lavoro, ed è facile da distribuire insieme ai vostri risultati.
 
@@ -407,8 +405,7 @@ Outputs:
   cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
 ```
 
-<details class="abstract">
-<summary>Contenuto della directory</summary>
+:::abstract[Contenuto della directory]{collapsed}
 
 ```console
 outputs/batch
@@ -424,7 +421,7 @@ outputs/batch
     └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Gli output ora finiscono sotto `outputs/batch/` invece del valore predefinito `results/batch/`.
 Il codice della pipeline decide ancora la struttura all'interno di quella directory di base, come le sottodirectory `batch/` e `intermediates/`; `-output-dir` controlla solo dove inizia quella struttura.

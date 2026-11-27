@@ -31,8 +31,7 @@ Typically, तुम्हें इन tools को install करना हो
 
 Note करो कि हम यह [Docker](https://www.docker.com/get-started/) का उपयोग करके teach करेंगे, लेकिन ध्यान रखो कि Nextflow [कई अन्य container technologies](https://nextflow.io/docs/latest/container.html) को भी support करता है।
 
-<details class="info">
-<summary>इस खंड से कैसे शुरू करें</summary>
+:::info[इस खंड से कैसे शुरू करें]{collapsed}
 
 Course का यह section मानता है कि तुमने [Hello Nextflow](./index.mdx) course के Parts 1-4 complete कर लिए हैं और एक complete working pipeline है।
 
@@ -42,7 +41,7 @@ Course का यह section मानता है कि तुमने [Hell
 cp -r solutions/4-hello-modules/modules .
 ```
 
-</details>
+:::
 
 ---
 
@@ -104,8 +103,7 @@ Outputs:
 
 पहले की तरह, तुम्हें output files `output` block में specified directory (`results/hello_containers/`) में मिलेंगी।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 results/hello_containers/
@@ -119,7 +117,7 @@ results/hello_containers/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 यदि यह तुम्हारे लिए काम किया, तो तुम containers use करना सीखने के लिए ready हो।
 
@@ -253,14 +251,13 @@ Notice करो कि तुम्हारा prompt `(base) root@b645838b331
 ls /
 ```
 
-<details class="abstract">
-<summary>कमांड आउटपुट</summary>
+:::abstract[कमांड आउटपुट]{collapsed}
 
 ```console
 bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 ```
 
-</details>
+:::
 
 हम यहाँ `tree` के बजाय `ls` use करते हैं क्योंकि `tree` utility इस container में available नहीं है।
 तुम देख सकते हो कि container के अंदर की filesystem तुम्हारे host system की filesystem से different है।
@@ -832,8 +829,7 @@ Outputs:
 इस बार यह indeed काम करता है!
 Usual की तरह तुम corresponding results directory में workflow outputs पा सकते हो, हालाँकि इस बार वे थोड़ी अधिक neatly organized हैं, केवल report और final output top level पर, और सभी intermediate files एक subdirectory में out of the way shove किए गए।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 results/hello_containers/
@@ -849,12 +845,11 @@ results/hello_containers/
 └── batch-report.txt
 ```
 
-</details>
+:::
 
 Final ASCII art output `results/hello_containers/` directory में है, `cowpy-COLLECTED-batch-output.txt` नाम के under।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
 _________
@@ -885,7 +880,7 @@ _________
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 और वो है, हमारा beautiful turkey desired रूप में greetings कह रहा है।
 
@@ -899,8 +894,7 @@ _________
 
 उस directory में, तुम्हें `.command.run` file मिलेगी जिसमें सभी commands हैं जो Nextflow ने pipeline execute करने के course में तुम्हारी behalf पर run कीं।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="work/98/656c6c90cce1667c094d880f4b6dcc/.command.run"
 #!/bin/bash
@@ -1056,7 +1050,7 @@ $NXF_ENTRY
 
 ```
 
-</details>
+:::
 
 यदि तुम इस file में `nxf_launch` search करो, तुम्हें इस तरह कुछ दिखना चाहिए:
 

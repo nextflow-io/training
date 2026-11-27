@@ -57,8 +57,7 @@ code .
 
 Trobareu un conjunt de workflows d'exemple amb diversos tipus d'errors que farem servir per practicar:
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 .
@@ -87,7 +86,7 @@ Trobareu un conjunt de workflows d'exemple amb diversos tipus d'errors que farem
 └── no_such_var.nf
 ```
 
-</details>
+:::
 
 Aquests fitxers representen escenaris de depuració habituals que trobareu en el desenvolupament real.
 
@@ -2287,8 +2286,7 @@ nextflow run buggy_workflow.nf -stub-run
 nextflow run buggy_workflow.nf -resume
 ```
 
-<details class="solution">
-<summary>Solució</summary>
+:::solution[Solució]{collapsed}
 
 El `buggy_workflow.nf` conté 10 errors diferents que cobreixen totes les categories principals de depuració. Aquí teniu un desglossament sistemàtic de cada error i com corregir-lo, en l'ordre en què els trobareu realment a Nextflow 26.04. El compilador resol el workflow en dues passades: primer analitza la sintaxi, i després comprova estàticament que totes les variables estiguin definides. Així doncs, primer resoleu els errors de sintaxi, després un conjunt d'errors de variables no definides, i finalment comencen els errors en temps d'execució.
 
@@ -2533,7 +2531,7 @@ output {
 }
 ```
 
-</details>
+:::
 :::
 
 **Categories d'errors cobertes:**

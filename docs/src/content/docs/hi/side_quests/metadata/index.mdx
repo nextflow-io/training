@@ -69,8 +69,7 @@ Editor प्रोजेक्ट डायरेक्टरी पर फ़�
 
 तुम्हें एक main workflow फ़ाइल और एक `data` डायरेक्टरी मिलेगी जिसमें एक datasheet और कुछ डेटा फ़ाइलें हैं।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 .
@@ -87,7 +86,7 @@ Editor प्रोजेक्ट डायरेक्टरी पर फ़�
 └── nextflow.config
 ```
 
-</details>
+:::
 
 `main.nf` फ़ाइल में वर्कफ़्लो एक stub है जिसे तुम धीरे-धीरे एक पूरी तरह से काम करने वाले वर्कफ़्लो में विस्तारित करोगे।
 
@@ -112,8 +111,7 @@ sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
 
 हम [`COWPY`](https://github.com/jeffbuttars/cowpy) नामक एक टूल का उपयोग करेंगे ताकि प्रत्येक character की ASCII art बनाई जा सके और उसे अपना recorded अभिवादन बोलते हुए दिखाया जा सके।
 
-<details class="info">
-<summary>`COWPY` क्या करता है?</summary>
+:::info[`COWPY` क्या करता है?]{collapsed}
 
 `COWPY` एक command-line टूल है जो arbitrary text inputs को मज़ेदार तरीके से प्रदर्शित करने के लिए ASCII art generate करता है।
 यह Tony Monroe के classic [cowsay](https://en.wikipedia.org/wiki/Cowsay) टूल का Python implementation है।
@@ -154,7 +152,7 @@ __________________
     \___)=(___/
 ```
 
-</details>
+:::
 
 इसके अलावा, हम `langid` नामक एक भाषा विश्लेषण टूल का उपयोग करेंगे ताकि पहचाना जा सके कि प्रत्येक character कौन सी भाषा बोलता है और पाइपलाइन के आउटपुट को उसी के अनुसार व्यवस्थित किया जा सके।
 
@@ -248,8 +246,7 @@ Outputs:
 यह बहुत अच्छा है! इससे प्रत्येक पंक्ति से विशिष्ट फ़ील्ड तक पहुँचना आसान हो जाता है।
 उदाहरण के लिए, हम `id` से फ़ाइल ID और `recording` से txt फ़ाइल पाथ तक पहुँच सकते हैं।
 
-<details class="info">
-<summary>(वैकल्पिक) Groovy maps के बारे में अधिक जानकारी</summary>
+:::info[(वैकल्पिक) Groovy maps के बारे में अधिक जानकारी]{collapsed}
 
 Groovy में, जो प्रोग्रामिंग भाषा Nextflow पर आधारित है, एक map एक key-value डेटा संरचना है जो Python में dictionaries, JavaScript में objects, या Ruby में hashes के समान है।
 
@@ -287,7 +284,7 @@ id: sampleA
 character: squirrel
 ```
 
-</details>
+:::
 
 ### 1.2. `map` से एक विशिष्ट फ़ील्ड चुनना
 
@@ -519,8 +516,7 @@ Outputs:
 
 जैसा कि तुम देख सकते हो, `COWPY` प्रत्येक फ़ाइल पर सही character का उपयोग करके चला।
 
-<details class="abstract">
-<summary>Results डायरेक्टरी सामग्री</summary>
+:::abstract[Results डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 results/
@@ -533,10 +529,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>results/cowpy-guten_tag.txt की सामग्री</summary>
+:::example[results/cowpy-guten_tag.txt की सामग्री]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -555,7 +550,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 यह approach काम करती है, लेकिन इसकी एक सीमा है: हमें channel को दो अलग sub-channels में split करना पड़ा।
 अगर हम प्रोसेस को और अधिक fields pass करना चाहते, तो हमें उन्हें और अधिक sub-channels में split करना पड़ता।
@@ -705,8 +700,7 @@ Outputs:
 
 आउटपुट पहले जैसी ही सात `cowpy-*.txt` फ़ाइलें हैं, अब `COWPY` को एक सरल call के साथ produce की गई।
 
-<details class="abstract">
-<summary>Results डायरेक्टरी सामग्री</summary>
+:::abstract[Results डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 results/
@@ -719,10 +713,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>results/cowpy-guten_tag.txt की सामग्री</summary>
+:::example[results/cowpy-guten_tag.txt की सामग्री]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -741,7 +734,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 यह `multiMap` approach की तुलना में थोड़ा बेहतर है।
 लेकिन हमें अभी भी input tuple बनाने के लिए original Groovy map को unpack करना पड़ा, और प्रोसेस और datasheet के बीच एक tight coupling है: `COWPY` की input definition अब column names `id`, `character`, और `recording` को directly reference करती है।
@@ -959,8 +952,7 @@ Outputs:
 
 Results डायरेक्टरी में अब ASCII art फ़ाइलें हैं।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 results/
@@ -973,10 +965,9 @@ results/
 └── cowpy-salut.txt
 ```
 
-</details>
+:::
 
-<details class="example">
-<summary>results/cowpy-guten_tag.txt की सामग्री</summary>
+:::example[results/cowpy-guten_tag.txt की सामग्री]{collapsed}
 
 ```console
 $ cat results/cowpy-guten_tag.txt
@@ -995,7 +986,7 @@ $ cat results/cowpy-guten_tag.txt
     \___)=(___/
 ```
 
-</details>
+:::
 
 प्रोसेस अब `meta` के ज़रिए सभी मेटाडेटा को एक bundle के रूप में receive करती है, जो चाहिए उसका उपयोग करती है (`meta.character`), और बाकी को ignore करती है।
 
@@ -1181,8 +1172,7 @@ Language prediction स्वयं फ़ाइल में मौजूद �
 
 अधिक विस्तृत स्पष्टीकरण के लिए, नीचे दिया गया box देखो।
 
-<details class="info">
-<summary>`+` ऑपरेटर का उपयोग करके नया meta map बनाना</summary>
+:::info[`+` ऑपरेटर का उपयोग करके नया meta map बनाना]{collapsed}
 
 **पहले, तुम्हें यह जानना होगा कि हम Groovy ऑपरेटर `+` का उपयोग करके दो maps की सामग्री को merge कर सकते हैं।**
 
@@ -1269,7 +1259,7 @@ new_map = map1 + [lang: lang_id]
 
 **और यह हमें वापस `tuple val(meta), path(file)` चैनल संरचना पर लाता है!**
 
-</details>
+:::
 
 #### 2.2.2. वर्कफ़्लो चलाओ
 
@@ -1613,8 +1603,7 @@ sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 Datasheet parse होने पर सभी entries के लिए `character` key बनाई जाती है, लेकिन `sampleA` के लिए `meta.character` एक empty string होगी।
 जब Nextflow command में `${meta.character}{:nextflow}` substitute करता है, तो `COWPY` टूल को `-c` के लिए एक empty argument मिलता है और वह fail हो जाता है:
 
-<details class="failure">
-<summary>कमांड आउटपुट</summary>
+:::failure[कमांड आउटपुट]{collapsed}
 
 ```console {7,12,17,29}
  N E X T F L O W   ~  version 26.04.4
@@ -1658,7 +1647,7 @@ Tip: you can try to figure out what's wrong by changing to the process work dir 
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 Error message (`expected one argument`) empty `-c` flag की ओर इशारा करता है।
 Work directory की `.command.sh` फ़ाइल जाँचने से confirm होता है कि command empty value के साथ चली।
@@ -1677,8 +1666,7 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 हमारा `map` operation explicitly `character: row.character{:nextflow}` लिखता है, इसलिए meta map में `character` key फिर भी बनाई जाती है, लेकिन parsed row पर मौजूद न होने वाले column को access करने पर `null` return होता है, तो उसकी value `null` हो जाती है।
 जब process script `${meta.character}{:nextflow}` evaluate करती है, तो Nextflow literally string `null` को command में substitute कर देता है:
 
-<details class="failure">
-<summary>कमांड आउटपुट</summary>
+:::failure[कमांड आउटपुट]{collapsed}
 
 ```console {7,12,17}
  N E X T F L O W   ~  version 26.04.4
@@ -1732,7 +1720,7 @@ Tip: you can replicate the issue by changing to the process work dir and enterin
  -- Check '.nextflow.log' file for details
 ```
 
-</details>
+:::
 
 Executed command में `cowpy -c null` diagnostic clue है।
 

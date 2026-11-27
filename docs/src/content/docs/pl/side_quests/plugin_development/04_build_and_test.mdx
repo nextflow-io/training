@@ -205,8 +205,7 @@ class GreetingExtensionTest extends Specification {
 make test
 ```
 
-<details class="example">
-<summary>Wynik testów</summary>
+:::example[Wynik testów]{collapsed}
 
 ```console
 BUILD SUCCESSFUL in 5s
@@ -217,17 +216,15 @@ BUILD SUCCESSFUL in 5s
 „BUILD SUCCESSFUL" oznacza, że wszystko zadziałało.
 Jeśli jakiś test nie przejdzie, zobaczysz szczegółowe komunikaty o błędach.
 
-</details>
+:::
 
-<details class="exercise">
-<summary>Dodaj test przypadku brzegowego</summary>
+::::exercise[Dodaj test przypadku brzegowego]{collapsed}
 
 Dodaj test sprawdzający, czy `reverseGreeting` obsługuje pusty string.
 Co powinno zwrócić `reverseGreeting('')`?
 Dodaj test, uruchom `make test` i sprawdź, czy przechodzi.
 
-<details class="solution">
-<summary>Rozwiązanie</summary>
+:::solution[Rozwiązanie]{collapsed}
 
 Dodaj tę metodę testową do `GreetingExtensionTest.groovy`:
 
@@ -243,9 +240,9 @@ def 'should handle empty string'() {
 
 Odwrócony pusty string to nadal pusty string.
 
-</details>
+:::
 
-</details>
+::::
 
 ---
 

@@ -8,8 +8,7 @@ description: Wcześniej zbudowałeś pipeline wywoływania wariantów dla pojedy
 Wcześniej zbudowałeś pipeline wywoływania wariantów dla pojedynczych próbek, który przetwarzał dane każdej próbki niezależnie.
 Teraz rozszerzymy go, aby zaimplementować wspólne wywoływanie wariantów, jak opisano w [Części 1](01_method.mdx) (przypadek użycia dla wielu próbek).
 
-<details class="info">
-<summary>Jak zacząć od tej sekcji</summary>
+:::info[Jak zacząć od tej sekcji]{collapsed}
 
 Ta sekcja kursu zakłada, że ukończyłeś [Część 1: Przegląd metody](./01_method.mdx), [Część 2: Wywoływanie wariantów dla pojedynczych próbek](./02_per_sample_variant_calling.mdx) i masz działający pipeline `genomics.nf`.
 
@@ -29,7 +28,7 @@ Możesz sprawdzić, czy działa poprawnie, uruchamiając następujące polecenie
 nextflow run genomics.nf -profile test
 ```
 
-</details>
+:::
 
 ## Zadanie
 
@@ -237,8 +236,7 @@ Outputs:
 
 Wyjście Nextflow'a wygląda tak samo jak wcześniej, ale pliki `.g.vcf` i ich pliki indeksów są teraz zorganizowane w podkatalogach.
 
-<details class="abstract">
-<summary>Zawartość katalogu (skrócone dowiązania symboliczne)</summary>
+:::abstract[Zawartość katalogu (skrócone dowiązania symboliczne)]{collapsed}
 
 ```console
 results/
@@ -258,7 +256,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Jeśli otworzysz jeden z plików GVCF i przewiniesz go, możesz zweryfikować, że GATK HaplotypeCaller wygenerował pliki GVCF zgodnie z żądaniem.
 
@@ -703,8 +701,7 @@ Outputs:
 Pierwsze dwa kroki są zbuforowane z poprzedniego uruchomienia, a nowy krok `GATK_JOINTGENOTYPING` uruchamia się raz na zebranych wejściach ze wszystkich trzech próbek.
 Końcowy plik wyjściowy, `family_trio.joint.vcf` (i jego indeks), znajduje się w katalogu wyników.
 
-<details class="abstract">
-<summary>Zawartość katalogu (skrócone dowiązania symboliczne)</summary>
+:::abstract[Zawartość katalogu (skrócone dowiązania symboliczne)]{collapsed}
 
 ```console
 results/
@@ -726,7 +723,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Jeśli otworzysz wspólny plik VCF, możesz zweryfikować, że workflow wygenerował oczekiwane wywołania wariantów.
 

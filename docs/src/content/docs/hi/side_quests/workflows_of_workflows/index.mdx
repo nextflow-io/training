@@ -404,8 +404,7 @@ Outputs:
     - greetings/Alice-output.txt
 ```
 
-<details class="abstract">
-<summary>`results/` के अंतर्गत नई सामग्री जोड़ी गई</summary>
+:::abstract[`results/` के अंतर्गत नई सामग्री जोड़ी गई]{collapsed}
 
 ```console
 results/
@@ -418,16 +417,15 @@ results/
 सेक्शन 1.1 के standalone रन की छह फ़ाइलें (`Alice-output.txt`, `timestamped_Alice-output.txt`, आदि) अभी भी इस नई `greetings/` सबडायरेक्टरी के साथ `results/` में मौजूद हैं।
 यह अपेक्षित है: इस पाठ में कुछ भी उन्हें नहीं हटाता, और सेक्शन 2.1 उन्हें सीधे अपने इनपुट के रूप में पढ़ता है।
 
-</details>
+:::
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/greetings/Alice-output.txt"
 Hello, Alice!
 ```
 
-</details>
+:::
 
 Greeting फ़ाइलें `results/greetings/` में publish होती हैं।
 मुख्य वर्कफ़्लो `GREETING_WORKFLOW` को कॉल करता है और इसके आउटपुट को सीधे `publish:` सेक्शन से जोड़ता है।
@@ -674,8 +672,7 @@ Outputs:
     - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
 ```
 
-<details class="abstract">
-<summary>`results/` के अंतर्गत नई सामग्री जोड़ी गई</summary>
+:::abstract[`results/` के अंतर्गत नई सामग्री जोड़ी गई]{collapsed}
 
 ```console
 results/
@@ -696,16 +693,15 @@ results/
 `results/` रूट में सेक्शन 1.1 और 2.1 के standalone रन की बची हुई फ़ाइलें (`Alice-output.txt`, `timestamped_Alice-output.txt`, `UPPER-timestamped_Alice-output.txt`, आदि) भी अभी भी मौजूद हैं।
 यह अपेक्षित है: इस पाठ में कहीं भी उन्हें हटाने का निर्देश नहीं दिया गया है।
 
-</details>
+:::
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
 !ECILA ,OLLEH ]54:84:81 31-90-6202[
 ```
 
-</details>
+:::
 
 पाइपलाइन end-to-end काम कर रही है: अभिवादन को अपरकेस किया गया है और उलटा किया गया है।
 

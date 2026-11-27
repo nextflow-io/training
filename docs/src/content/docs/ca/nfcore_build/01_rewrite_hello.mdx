@@ -36,8 +36,7 @@ Com a recordatori, podeu utilitzar `tree` o l'explorador de fitxers per trobar i
 tree -L 1 pipelines/nf-core/demo
 ```
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 pipelines/nf-core/demo
@@ -62,7 +61,7 @@ pipelines/nf-core/demo
 └── workflows
 ```
 
-</details>
+:::
 
 De moment ens centrarem específicament en els components del codi del pipeline (`main.nf`, `workflows`, `subworkflows`, `modules`) i com es relacionen entre ells.
 
@@ -129,8 +128,7 @@ Podeu veure això aplicat a la pràctica als mòduls del pipeline `nf-core/demo`
 tree -L 3 pipelines/nf-core/demo/modules
 ```
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 pipelines/nf-core/demo/modules
@@ -156,7 +154,7 @@ pipelines/nf-core/demo/modules
 9 directories, 9 files
 ```
 
-</details>
+:::
 
 Aquí veieu que els mòduls `fastqc` i `multiqc` es troben al nivell superior dins dels mòduls `nf-core`, mentre que el mòdul `trim` es troba sota el toolkit al qual pertany, `seqtk`.
 El mòdul `cowpy` sota `local` és un mòdul local, escrit específicament per a aquest pipeline en lloc d'instal·lat des del repositori de mòduls nf-core.
@@ -174,8 +172,7 @@ Com els mòduls, els subworkflows es diferencien en directoris `local` i `nf-cor
 tree -L 3 pipelines/nf-core/demo/subworkflows
 ```
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 pipelines/nf-core/demo/subworkflows
@@ -199,7 +196,7 @@ pipelines/nf-core/demo/subworkflows
 9 directories, 7 files
 ```
 
-</details>
+:::
 
 Com s'ha indicat anteriorment, el pipeline `nf-core/demo` no inclou cap subworkflow específic d'anàlisi, de manera que tots els subworkflows que veiem aquí són els anomenats workflows de 'manteniment' o 'utilitat', tal com indica el prefix `utils_` als seus noms.
 Aquests subworkflows són els que produeixen la capçalera nf-core elegant a la sortida de la consola, entre altres funcions accessòries.
@@ -268,8 +265,7 @@ Aquesta TUI us demanarà que proporcioneu informació bàsica sobre el vostre pi
 
 Un cop es tanqui la TUI, hauríeu de veure la següent sortida a la consola.
 
-<details class="success">
-<summary>Sortida de la comanda</summary>
+:::success[Sortida de la comanda]{collapsed}
 
 ```console
                                           ,--./,-.
@@ -284,7 +280,7 @@ Un cop es tanqui la TUI, hauríeu de veure la següent sortida a la consola.
 INFO     Launching interactive nf-core pipeline creation tool.
 ```
 
-</details>
+:::
 
 Un cop la TUI hagi acabat, l'eina informa que ha creat el pipeline i ha inicialitzat un repositori git local per al nou pipeline:
 
@@ -302,8 +298,7 @@ Visualitzeu el contingut del nou directori per veure quanta feina us heu estalvi
 tree core-hello
 ```
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 core-hello
@@ -362,7 +357,7 @@ core-hello
 14 directories, 37 files
 ```
 
-</details>
+:::
 
 Són molts fitxers!
 No us preocupeu si us sentiu una mica perduts; recorrerem les parts importants aviat, i després pas a pas durant la resta del curs.
@@ -441,8 +436,7 @@ De fet, es va crear un nou directori de resultats anomenat `core-hello-results` 
 tree core-hello-results
 ```
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 core-hello-results
@@ -457,7 +451,7 @@ core-hello-results
 1 directory, 6 files
 ```
 
-</details>
+:::
 
 Podeu donar una ullada als informes per veure què s'ha executat, i la resposta és: res en absolut!
 
@@ -558,15 +552,14 @@ En comparació amb un workflow bàsic de Nextflow com el desenvolupat a [Hello N
 
 Aquestes són funcionalitats opcionals de Nextflow que fan que el workflow sigui **composable**, és a dir, que es pot cridar des de dins d'un altre workflow.
 
-<details class="note">
-<summary>El bloc `channel.topic`</summary>
+:::note[El bloc `channel.topic`]{collapsed}
 
 Potser haureu notat el bloc `def topic_versions = channel.topic("versions")` que comença a la línia 28.
 Aquest és codi de manteniment estàndard que recull informació de versions de programari de tots els mòduls automàticament.
 nf-core està desplegant aquest mecanisme a tots els pipelines el 2026, de manera que el veureu a tots els nous pipelines d'ara endavant.
 La Part 3 d'aquest curs explica com funciona en detall.
 
-</details>
+:::
 
 Necessitarem connectar la lògica rellevant del nostre workflow d'interès a aquesta estructura.
 
@@ -601,8 +594,7 @@ Us proporcionem una còpia neta i totalment funcional del workflow Hello Nextflo
 tree original-hello/
 ```
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 original-hello/
@@ -617,7 +609,7 @@ original-hello/
 1 directory, 6 files
 ```
 
-</details>
+:::
 
 Sentiu-vos lliures d'executar-lo per assegurar-vos que funciona:
 
@@ -924,8 +916,7 @@ Si haguéssim anomenat el workflow entrypoint `something_else.nf`, hauríem hagu
 
 Si heu fet tots els canvis correctament, això hauria de completar-se.
 
-<details class="success">
-<summary>Sortida de la comanda</summary>
+:::success[Sortida de la comanda]{collapsed}
 
 ```console
 N E X T F L O W   ~  version 26.04.4
@@ -940,7 +931,7 @@ executor >  local (8)
 Output: /workspaces/training/nfcore-build/work/07/bfc7061fa521e86f4e1954191ab4c4/cowpy-COLLECTED-test-batch-output.txt
 ```
 
-</details>
+:::
 
 Això significa que hem actualitzat amb èxit el nostre workflow `HELLO` per ser composable.
 
@@ -1063,8 +1054,7 @@ Ara hauríeu de veure el directori de mòduls llistat sota `core-hello/`.
 tree core-hello/modules
 ```
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 core-hello/modules
@@ -1077,7 +1067,7 @@ core-hello/modules
 1 directory, 4 files
 ```
 
-</details>
+:::
 
 Ara configurem les declaracions d'importació de mòduls.
 
@@ -1692,8 +1682,7 @@ nextflow run core-hello --outdir core-hello-results -profile test,docker
 
 Si heu fet totes les modificacions correctament, hauria de completar-se.
 
-<details class="success">
-<summary>Sortida de la comanda</summary>
+:::success[Sortida de la comanda]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -1733,7 +1722,7 @@ executor >  local (8)
 -[core/hello] Pipeline completed successfully-
 ```
 
-</details>
+:::
 
 Com podeu veure, això va produir el resum típic d'nf-core a l'inici gràcies al subworkflow d'inicialització, i les línies per a cada mòdul ara mostren els noms complets `PIPELINE:WORKFLOW:module`.
 
@@ -1748,8 +1737,7 @@ Com potser recordeu d'abans, la nostra primera execució del workflow recentment
 tree core-hello-results
 ```
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 core-hello-results
@@ -1769,7 +1757,7 @@ core-hello-results
 1 directory, 11 files
 ```
 
-</details>
+:::
 
 Veieu que vam obtenir un altre conjunt d'informes d'execució a més dels que vam obtenir de la primera execució, quan el workflow encara era només un marcador de posició.
 Aquesta vegada veieu totes les tasques que es van executar com s'esperava.
@@ -1789,8 +1777,7 @@ Això és el que va passar: no vam canviar res als mòduls en si, així que les 
 tree results
 ```
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 results
@@ -1808,7 +1795,7 @@ results
 0 directories, 10 files
 ```
 
-</details>
+:::
 
 Ah, aquí estan, barrejats amb les sortides d'execucions anteriors del pipeline Hello original.
 

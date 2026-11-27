@@ -260,13 +260,12 @@ Pipeline complete! 👋
 Obserwator działa.
 Za każdym razem, gdy zadanie się kończy, Nextflow wywołuje `onProcessComplete`, a nasza implementacja wyświetla komunikat.
 
-<details class="exercise">
-<summary>Dostosuj komunikat</summary>
+:::exercise[Dostosuj komunikat]{collapsed}
 
 Spróbuj zmienić komunikat w `onProcessComplete` na własny, przebuduj i uruchom ponownie.
 Potwierdza to, że pełny cykl edycja–budowanie–uruchomienie działa dla obserwatorów.
 
-</details>
+:::
 
 ### 2.4. Dodanie logiki zliczania
 
@@ -324,8 +323,7 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-<details class="example">
-<summary>Przykład</summary>
+:::example[Przykład]{collapsed}
 
 ```console
 N E X T F L O W  ~  version 26.04.4
@@ -357,7 +355,7 @@ Pipeline complete! 👋
 
 Komunikaty licznika przeplatają się z przesyłaniem zadań, ponieważ obserwatory uruchamiają się w miarę kończenia zadań.
 
-</details>
+:::
 
 ---
 

@@ -16,8 +16,7 @@ Nextflow recull automàticament `nextflow.config` del directori de treball i apl
 
 Us proporcionem un fitxer de configuració que cobreix quatre àrees: empaquetament de programari, configuració de processos, paràmetres del pipeline i perfils d'execució.
 
-<details class="full-code">
-<summary>nextflow.config</summary>
+:::full-code[nextflow.config]{collapsed}
 
 ```nextflow title="nextflow.config" showLineNumbers
 /*
@@ -58,7 +57,7 @@ profiles {
 }
 ```
 
-</details>
+:::
 
 Repassem cadascun d'ells i, a continuació, posem els perfils en pràctica executant el pipeline amb un d'ells.
 
@@ -324,8 +323,7 @@ Outputs:
   cowpy_art: yaml/cowpy-COLLECTED-yaml-output.txt
 ```
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="results/yaml/cowpy-COLLECTED-yaml-output.txt"
  _________
@@ -349,7 +347,7 @@ Outputs:
                     |_____|        |_____|         ~ - . _ _ _ _ _>
 ```
 
-</details>
+:::
 
 Un fitxer de paràmetres és especialment valuós quan un pipeline té més d'uns quants paràmetres: us permet subministrar-los tots alhora, sense una línia de comandes extensa ni cap canvi a l'script del workflow, i és fàcil de distribuir juntament amb els vostres resultats.
 
@@ -407,8 +405,7 @@ Outputs:
   cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
 ```
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 outputs/batch
@@ -424,7 +421,7 @@ outputs/batch
     └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Les sortides ara es troben sota `outputs/batch/` en lloc del valor per defecte integrat `results/batch/`.
 El codi propi del pipeline continua decidint l'estructura dins d'aquest directori base, com ara els subdirectoris `batch/` i `intermediates/`; `-output-dir` només controla on comença aquesta estructura.

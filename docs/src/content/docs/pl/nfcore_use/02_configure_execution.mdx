@@ -254,8 +254,7 @@ Omawiamy to również szczegółowo w [sekcji dotyczącej walidacji danych wejś
 Pipeline `nf-core/demo` oczekuje pliku CSV z kolumnami `sample`, `fastq_1` i `fastq_2`.
 Jest to zdefiniowane w pliku schematu (`assets/schema_input.json`), który określa oczekiwaną strukturę, typy kolumn i ograniczenia.
 
-<details class="abstract">
-<summary>Plik schematu dla danych wejściowych</summary>
+:::abstract[Plik schematu dla danych wejściowych]{collapsed}
 
 ```json title="assets/schema_input.json"
 {
@@ -293,7 +292,7 @@ Jest to zdefiniowane w pliku schematu (`assets/schema_input.json`), który okre�
 }
 ```
 
-</details>
+:::
 
 Schemat określa, że `sample` i `fastq_1` są wymagane, podczas gdy `fastq_2` jest opcjonalne (obsługując zarówno dane paired-end, jak i single-end).
 Ścieżki do plików są walidowane pod kątem istnienia i wzorca rozszerzenia.

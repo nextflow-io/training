@@ -26,8 +26,7 @@ description: 이 과정의 이 부분에서는 파트 1에서 실행한 모든 �
 
 시작점으로 워크플로우의 주요 부분을 요약한 워크플로우 파일 `rnaseq.nf`와 `modules/` 디렉토리에 각 프로세스의 구조를 요약한 네 개의 모듈 파일(`fastqc.nf`, `trim_galore.nf`, `hisat2_align.nf`, `multiqc.nf`)을 제공합니다.
 
-<details class="full-code">
-<summary>스캐폴드 파일</summary>
+:::full-code[스캐폴드 파일]{collapsed}
 
 ```nextflow title="rnaseq.nf"
 #!/usr/bin/env nextflow
@@ -140,7 +139,7 @@ process MULTIQC {
 }
 ```
 
-</details>
+:::
 
 이 파일들은 기능적이지 않으며, 코드의 중요한 부분을 채워 넣을 수 있는 스캐폴드 역할만 합니다.
 

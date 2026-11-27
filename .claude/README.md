@@ -65,7 +65,7 @@ Creates a new lesson page within an existing module with:
 
 Adds an exercise with solution to an existing lesson:
 
-- Uses `<details class="exercise">` and `<details class="solution">` blocks
+- Uses `:::exercise[Title]{collapsed}` and `:::solution[Solution]{collapsed}` blocks
 - Creates corresponding solution files if needed
 - Proper formatting and structure
 
@@ -146,7 +146,7 @@ Reference for every code block feature on the site. Vendored unchanged from the 
 - Each sentence on new line (cleaner git diffs)
 - Numbered headings with trailing periods: `## 1. Section`, `### 1.1. Subsection`
 - Takeaway and What's next? sections at end of major sections
-- Asides `:::note`, `:::tip`, `:::caution`; collapsibles `<details class="exercise">`, `<details class="solution">`
+- Asides `:::note`, `:::tip`, `:::caution`; collapsibles `:::exercise[Title]{collapsed}`, `:::solution[Solution]{collapsed}`
 
 ### Nextflow Scripts
 

@@ -221,15 +221,14 @@ Nextflow는 플러그인을 처음 사용할 때 자동으로 다운로드하므
 파이프라인은 현재 `splitCsv`와 수동 `map`을 사용하여 `greetings.csv`를 읽고 있지만, nf-schema를 사용하면 검증된 스키마 기반 파싱으로 대체할 수 있습니다.
 JSON 스키마 파일(`greetings_schema.json`)은 실습 디렉토리에 이미 제공되어 있습니다.
 
-<details class="info">
-<summary>스키마란 무엇인가요?</summary>
+:::info[스키마란 무엇인가요?]{collapsed}
 
 스키마는 유효한 데이터의 형태를 공식적으로 정의한 것입니다.
 어떤 열이 필요한지, 각 값의 유형(문자열, 숫자 등)은 무엇인지, 어떤 필드가 필수인지 등을 정의합니다.
 
 일종의 계약으로 생각할 수 있습니다. 입력 데이터가 스키마와 일치하지 않으면, 파이프라인 후반부에서 혼란스러운 오류가 발생하기 전에 도구가 문제를 조기에 감지할 수 있습니다.
 
-</details>
+:::
 
 #### 2.2.1. 스키마 확인
 
@@ -568,8 +567,7 @@ INFO - [nf-co2footprint] 🌱 The workflow run used 126.76 uWh of electricity, r
 
 플러그인은 작업 디렉토리에 출력 파일을 생성합니다:
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console
 co2footprint_report_<timestamp>.html
@@ -577,10 +575,9 @@ co2footprint_summary_<timestamp>.txt
 co2footprint_trace_<timestamp>.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="co2footprint_summary_<timestamp>.txt"
 Total CO₂e footprint measures of this workflow run (including cached tasks):
@@ -594,7 +591,7 @@ Which equals:
   - 1.22E-7 % of a flight from Paris to London
 ```
 
-</details>
+:::
 
 (수치는 다를 수 있습니다.)
 

@@ -36,12 +36,11 @@ Bu sefer, insanların gerçek iş akışlarını nasıl oluşturduğunu daha iyi
 3. Son çıktı dosyasını adlandırmak için bir parametre eklemek ve bunu toplama adımına ikincil bir girdi olarak iletmek.
 4. Toplama adımının ayrıca işlenenler hakkında basit bir istatistik raporlamasını sağlamak.
 
-<details class="info">
-<summary>Bu bölümden nasıl başlanır</summary>
+:::info[Bu bölümden nasıl başlanır]{collapsed}
 
 Bu kursun bu bölümü, [Hello Nextflow](./index.mdx) kursunun 1-2. Bölümlerini tamamladığınızı varsayar, ancak o bölümlerde ele alınan temel konulara hakimseniz, özel bir şey yapmadan buradan başlayabilirsiniz.
 
-</details>
+:::
 
 ---
 
@@ -90,8 +89,7 @@ Outputs:
 Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen konumda bulacaksınız.
 Bu bölüm için, `results/hello_workflow/` altında.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 results/hello_workflow
@@ -100,7 +98,7 @@ results/hello_workflow
 └── Hola-output.txt
 ```
 
-</details>
+:::
 
 Bu sizin için çalıştıysa, çok adımlı bir iş akışı oluşturmayı öğrenmeye hazırsınız.
 
@@ -136,14 +134,13 @@ echo 'Hello World' | tr '[a-z]' '[A-Z]' > UPPER-output.txt
 
 Çıktı, `Hello World` dizesinin büyük harf versiyonunu içeren `UPPER-output.txt` adlı bir metin dosyasıdır.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="UPPER-output.txt"
 HELLO WORLD
 ```
 
-</details>
+:::
 
 Temel olarak iş akışımızla yapmaya çalışacağımız şey budur.
 
@@ -347,8 +344,7 @@ Konsol çıktısında, az önce eklediğimiz yeni sürece karşılık gelen fazl
 
 Çıktıları `output` bloğunda ayarlandığı gibi `results/hello_workflow` dizininde bulacaksınız.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 results/hello_workflow/
@@ -360,12 +356,11 @@ results/hello_workflow/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Bu kullanışlı! Ancak yine de ikinci sürece yapılan çağrılardan birinin work dizinine bakmaya değer.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 work/e0/ecf81b4cacc648b9b994218d5b29d7/
@@ -373,7 +368,7 @@ work/e0/ecf81b4cacc648b9b994218d5b29d7/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 İki `*-output` dosyası olduğunu fark edin: ilk sürecin çıktısı ve ikincinin çıktısı.
 
@@ -424,8 +419,7 @@ cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLL
 
 Çıktı, orijinal selamlamaların büyük harf versiyonlarını içeren `COLLECTED-output.txt` adlı bir metin dosyasıdır.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="COLLECTED-output.txt"
 HELLO
@@ -433,7 +427,7 @@ BONJOUR
 HOLA
 ```
 
-</details>
+:::
 
 İş akışımızla elde etmek istediğimiz sonuç budur.
 
@@ -666,14 +660,13 @@ Yalnızca bir tane bekliyorduk, ama üç tane var.
 
 Şimdi son çıktı dosyasının içeriğine bakın.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-output.txt"
 HOLA
 ```
 
-</details>
+:::
 
 Hay aksi. Toplama adımı her selamlama için ayrı ayrı çalıştırıldı, bu istediğimiz şey DEĞİLDİ.
 
@@ -787,8 +780,7 @@ Bunu şu diyagramla özetleyebiliriz:
 
 Son olarak, her şeyin doğru çalıştığından emin olmak için çıktı dosyasının içeriğine bakabilirsiniz.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-output.txt"
 BONJOUR
@@ -796,7 +788,7 @@ HELLO
 HOLA
 ```
 
-</details>
+:::
 
 Bu sefer son çıktı dosyasında üç selamlamamızın hepsi var. Başarılı!
 
@@ -1012,8 +1004,7 @@ Outputs:
 
 Başarıyla çalışıyor ve istenen çıktıyı üretiyor:
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-trio-output.txt"
 HELLO
@@ -1021,7 +1012,7 @@ BONJOUR
 HOLA
 ```
 
-</details>
+:::
 
 Artık parametreyi uygun şekilde belirttiğimiz sürece, diğer girdi grupları üzerindeki sonraki çalıştırmalar önceki sonuçları bozmayacak.
 
@@ -1243,14 +1234,13 @@ Outputs:
 `results/hello_workflow/` dizinine bakarsanız, yeni rapor dosyasını, `trio-report.txt`'yi bulacaksınız.
 İş akışının işlenen selamlama sayısını doğru bir şekilde raporladığını doğrulamak için açın.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```txt title="trio-report.txt"
 There were 3 greetings in this batch.
 ```
 
-</details>
+:::
 
 ![](../../hello_nextflow/img/hello-collect-4-way.excalidraw.svg)
 

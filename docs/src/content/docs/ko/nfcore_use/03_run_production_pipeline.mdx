@@ -113,8 +113,7 @@ withLabel:process_low {
 
 레이블 기반 리소스 기본값을 재정의하는 사용자 정의 설정 파일을 제공합니다.
 
-<details class="full-code">
-<summary>laptop.config</summary>
+:::full-code[laptop.config]{collapsed}
 
 ```nextflow title="laptop.config"
 process {
@@ -136,7 +135,7 @@ process {
 }
 ```
 
-</details>
+:::
 
 [파트 2](./02_configure_execution.mdx)에서는 `withName:`을 사용하여 단일 프로세스를 이름으로 지정하는 방법을 다뤘습니다.
 여기서는 `withLabel:`을 사용하여 동일한 레이블을 공유하는 모든 프로세스를 한 번에 지정합니다.

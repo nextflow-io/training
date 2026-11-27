@@ -88,13 +88,12 @@ As you can see, the output groups parameters into categories (Input/output optio
 This categorization is determined by a schema file, which is covered further below.
 In plain Nextflow pipelines, `--help` only works if the developer implemented it manually.
 
-<details class="tip">
-<summary>Hidden parameters</summary>
+:::tip[Hidden parameters]{collapsed}
 
 Use `--help --show_hidden` to see additional parameters that are hidden by default, such as `--publish_dir_mode` or `--monochrome_logs`.
 The help message suggests `--showHidden`, but that spelling does not work; use `--show_hidden`.
 
-</details>
+:::
 
 ### 1.2. Set parameter values
 
@@ -260,8 +259,7 @@ You can see it in action by giving the demo pipeline an invalid input sampleshee
 The `nf-core/demo` pipeline expects a CSV file with columns `sample`, `fastq_1`, and `fastq_2`.
 This is defined in a schema file (`assets/schema_input.json`) that specifies the expected structure, column types, and constraints.
 
-<details class="abstract">
-<summary>Schema file for inputs</summary>
+:::abstract[Schema file for inputs]{collapsed}
 
 ```json title="assets/schema_input.json"
 {
@@ -299,7 +297,7 @@ This is defined in a schema file (`assets/schema_input.json`) that specifies the
 }
 ```
 
-</details>
+:::
 
 The schema specifies that `sample` and `fastq_1` are required, while `fastq_2` is optional (supporting both paired-end and single-end data).
 File paths are validated for existence and extension pattern.

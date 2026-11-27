@@ -102,8 +102,7 @@ Per una descrizione dettagliata dei file, consultate il [riscaldamento di Hello 
 
 Il flusso di lavoro che testeremo è un sottoinsieme del flusso di lavoro Hello costruito in [Hello Workflow](../../hello_nextflow/03_hello_workflow.mdx).
 
-<details class="example">
-<summary>Cosa fa il flusso di lavoro Hello Nextflow?</summary>
+:::example[Cosa fa il flusso di lavoro Hello Nextflow?]{collapsed}
 
 Se non avete seguito la formazione [Hello Nextflow](../../hello_nextflow/index.mdx), ecco una rapida panoramica di ciò che fa questo semplice flusso di lavoro.
 
@@ -120,13 +119,12 @@ I risultati vengono pubblicati in una directory chiamata `results/`, e l'output 
 
 In questa side quest, utilizziamo una forma intermedia del flusso di lavoro Hello che contiene solo i primi due processi. {/* TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 */}
 
-</details>
+:::
 
 Il sottoinsieme con cui lavoreremo è composto da due processi: `sayHello` e `convertToUpper`.
 Potete vedere il codice completo del flusso di lavoro qui sotto.
 
-<details class="example">
-<summary>Codice del workflow</summary>
+:::example[Codice del workflow]{collapsed}
 
 ```nextflow title="main.nf"
 #!/usr/bin/env nextflow
@@ -194,7 +192,7 @@ output {
 }
 ```
 
-</details>
+:::
 
 #### Eseguite il flusso di lavoro
 

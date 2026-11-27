@@ -254,8 +254,7 @@ The following invalid input values have been detected:
 `nf-core/demo` पाइपलाइन `sample`, `fastq_1`, और `fastq_2` कॉलम वाली एक CSV फ़ाइल की अपेक्षा करती है।
 यह एक schema फ़ाइल (`assets/schema_input.json`) में परिभाषित है जो अपेक्षित संरचना, कॉलम प्रकार और बाधाओं को निर्दिष्ट करती है।
 
-<details class="abstract">
-<summary>इनपुट के लिए Schema फ़ाइल</summary>
+:::abstract[इनपुट के लिए Schema फ़ाइल]{collapsed}
 
 ```json title="assets/schema_input.json"
 {
@@ -293,7 +292,7 @@ The following invalid input values have been detected:
 }
 ```
 
-</details>
+:::
 
 Schema निर्दिष्ट करता है कि `sample` और `fastq_1` आवश्यक हैं, जबकि `fastq_2` वैकल्पिक है (paired-end और single-end दोनों डेटा को सपोर्ट करता है)।
 फ़ाइल पथों को अस्तित्व और extension pattern के लिए वैलिडेट किया जाता है।

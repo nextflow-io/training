@@ -55,14 +55,13 @@ results
 
 Obriu el fitxer; el contingut hauria de coincidir amb la salutació que heu especificat a la línia de comandes.
 
-<details>
-  <summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="results/output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 Això és genial, el nostre workflow ha fet el que havia de fer!
 
@@ -114,8 +113,7 @@ tree -a work
 
 Els noms exactes dels subdirectoris seran diferents al vostre sistema.
 
-<details>
-  <summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console title="work/"
 work
@@ -131,19 +129,18 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
 Hauríeu de reconèixer immediatament el fitxer `output.txt`, que de fet és la sortida original del procés `sayHello` que s'ha publicat al directori `results`.
 Si l'obriu, trobareu la salutació `Hello World!` de nou.
 
-<details>
-  <summary>Contingut del fitxer output.txt</summary>
+:::abstract[Contingut del fitxer output.txt]{collapsed}
 
 ```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 Així que, què passa amb tots aquests altres fitxers?
 
@@ -159,15 +156,14 @@ Aquests són els fitxers auxiliars i de registre que Nextflow ha escrit com a pa
 
 El fitxer `.command.sh` és especialment útil perquè us mostra la comanda principal que Nextflow ha executat sense incloure tota la comptabilitat i la configuració de tasca/entorn.
 
-<details>
-  <summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" showLineNumbers
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
-</details>
+:::
 
 :::tip[Consell]
 Quan alguna cosa va malament i necessiteu solucionar problemes sobre què ha passat, pot ser útil mirar l'script `command.sh` per comprovar exactament quina comanda ha compost Nextflow basant-se en les instruccions del workflow, la interpolació de variables, etc.
@@ -200,8 +196,7 @@ _L'objectiu aquí no és memoritzar la sintaxi del codi de Nextflow, sinó forma
 
 Obrim l'script `hello-world.nf` al panell de l'editor.
 
-<details>
-  <summary>Codi</summary>
+:::abstract[Codi]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
@@ -232,7 +227,7 @@ workflow {
 }
 ```
 
-</details>
+:::
 
 Un script de Nextflow implica dos tipus principals de components bàsics: un o més **processos**, i el **workflow** en si mateix.
 Cada **procés** descriu quines operacions ha d'acomplir el pas corresponent del pipeline, mentre que el **workflow** descriu la lògica de flux de dades que connecta els diversos passos.
@@ -247,8 +242,7 @@ El cos del procés ha de contenir un bloc de script que especifica la comanda a 
 
 Aquí tenim un **procés** anomenat `sayHello` que pren una variable d'**entrada** anomenada `greeting` i escriu la seva **sortida** a un fitxer anomenat `output.txt`.
 
-<details>
-  <summary>Codi</summary>
+:::abstract[Codi]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers startLineNumber=3
 /*
@@ -271,7 +265,7 @@ process sayHello {
 }
 ```
 
-</details>
+:::
 
 Aquesta és una definició de procés molt mínima que només conté una definició d'`input`, una definició d'`output` i l'`script` a executar.
 

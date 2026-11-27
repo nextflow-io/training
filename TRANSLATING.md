@@ -162,7 +162,7 @@ A translation must keep the MDX structure intact, or the site build fails.
 | Code includes            | `import x from '...?raw';` after the frontmatter, `<Code code={x} />` | Keep the `<Code>` tag; the import path is one `../` deeper                             |
 | Images                   | `![Alt](./img/x.excalidraw.svg)`                                      | Translate the alt text; the path points into the English tree (images are not copied)  |
 | Asides                   | `:::tip[Title]` ... `:::`                                             | Translate the title and body; keep the markers                                         |
-| Collapsibles             | `<details class="exercise">`, `<summary>Title</summary>`              | Translate the summary and body; keep the tags and class                                |
+| Collapsibles             | `:::solution[Title]{collapsed}` ... `:::`                             | Translate the title and body; keep the type and the `{collapsed}` or `{open}`          |
 | Components               | `<CodeWalkthrough>`, `<Quiz id="...">`, `<LinkButton href="...">`     | Keep tags and attributes; translate text between the tags                              |
 | Code blocks              | ` ```nextflow {2} title="main.nf" `                                   | Keep the code and the fence meta; translate code comments                              |
 | Command output           | `# [!output]` and the lines after it, inside a `bash` block           | Keep unchanged                                                                         |
@@ -256,7 +256,7 @@ When reviewing a translation PR, follow these guidelines:
 
    - Does the PR's docs build pass? A broken MDX tag, brace or frontmatter key fails it
    - Are code blocks intact, including their fence meta and `# [!output]` sections?
-   - Are asides (`:::note`), collapsibles (`<details>`) and components correctly structured?
+   - Are asides and collapsibles (`:::note`, `:::solution[…]{collapsed}`) and components correctly structured?
    - Are heading anchors preserved (`{#anchor-name}`)?
    - Are links working (targets unchanged, only link text translated)? The links validator checks this in the build
 

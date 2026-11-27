@@ -55,14 +55,13 @@ results
 
 파일을 열어보십시오. 내용은 명령줄에서 지정한 인사말과 일치해야 합니다.
 
-<details>
-  <summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="results/output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 훌륭합니다. 워크플로우가 의도한 대로 작동했습니다!
 
@@ -114,8 +113,7 @@ tree -a work
 
 시스템에서는 정확한 하위 디렉토리 이름이 다를 것입니다.
 
-<details>
-  <summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console title="work/"
 work
@@ -131,19 +129,18 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
 `output.txt` 파일을 바로 확인할 수 있을 것입니다. 이것은 실제로 `results` 디렉토리에 게시된 `sayHello` process의 원본 출력입니다.
 파일을 열면 다시 `Hello World!` 인사말을 찾을 수 있습니다.
 
-<details>
-  <summary>output.txt의 파일 내용</summary>
+:::abstract[output.txt의 파일 내용]{collapsed}
 
 ```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 그렇다면 다른 모든 파일은 무엇일까요?
 
@@ -159,15 +156,14 @@ Hello World!
 
 `.command.sh` 파일은 Nextflow가 모든 장부 처리와 task/환경 설정을 제외하고 실제로 실행한 주요 명령을 보여주기 때문에 특히 유용합니다.
 
-<details>
-  <summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" showLineNumbers
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
-</details>
+:::
 
 :::tip[팁]
 문제가 발생하여 무엇이 잘못되었는지 문제를 해결해야 할 때, `command.sh` 스크립트를 살펴보면 워크플로우 지시사항, 변수 보간 등을 기반으로 Nextflow가 구성한 정확한 명령을 확인하는 데 유용합니다.
@@ -200,8 +196,7 @@ _여기서의 목표는 Nextflow 코드의 구문을 암기하는 것이 아니�
 
 편집기 창에서 `hello-world.nf` 스크립트를 열어보겠습니다.
 
-<details>
-  <summary>코드</summary>
+:::abstract[코드]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
@@ -232,7 +227,7 @@ workflow {
 }
 ```
 
-</details>
+:::
 
 Nextflow 스크립트는 두 가지 주요 핵심 구성 요소를 포함합니다: 하나 이상의 **process**와 **workflow** 자체입니다.
 각 **process**는 파이프라인의 해당 단계가 수행해야 할 작업을 설명하며, **workflow**는 다양한 단계를 연결하는 데이터 흐름 논리를 설명합니다.
@@ -247,8 +242,7 @@ process 본문에는 실행할 명령을 지정하는 script 블록이 포함되
 
 여기에는 `greeting`이라는 **input** 변수를 받아 `output.txt`라는 파일에 **output**을 작성하는 `sayHello`라는 **process**가 있습니다.
 
-<details>
-  <summary>코드</summary>
+:::abstract[코드]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers startLineNumber=3
 /*
@@ -271,7 +265,7 @@ process sayHello {
 }
 ```
 
-</details>
+:::
 
 이것은 `input` 정의, `output` 정의 및 실행할 `script`만 포함하는 매우 최소한의 process 정의입니다.
 

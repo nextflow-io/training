@@ -55,14 +55,13 @@ results
 
 फ़ाइल खोलो; सामग्री तुम्हारे द्वारा command line पर दी गई greeting से मेल खानी चाहिए।
 
-<details>
-  <summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 यह बढ़िया है, हमारी workflow ने वह किया जो उसे करना था!
 
@@ -114,8 +113,7 @@ tree -a work
 
 तुम्हारे सिस्टम पर सटीक subdirectory नाम अलग होंगे।
 
-<details>
-  <summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console title="work/"
 work
@@ -131,19 +129,18 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
 तुम्हें तुरंत `output.txt` फ़ाइल पहचाननी चाहिए, जो वास्तव में `sayHello` process का मूल आउटपुट है जो `results` डायरेक्टरी में published हुआ।
 यदि तुम इसे खोलते हो, तो तुम्हें फिर से `Hello World!` greeting मिलेगी।
 
-<details>
-  <summary>output.txt की फ़ाइल सामग्री</summary>
+:::abstract[output.txt की फ़ाइल सामग्री]{collapsed}
 
 ```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 तो उन अन्य सभी फ़ाइलों का क्या?
 
@@ -159,15 +156,14 @@ Hello World!
 
 `.command.sh` फ़ाइल विशेष रूप से उपयोगी है क्योंकि यह तुम्हें मुख्य कमांड दिखाती है जो Nextflow ने execute किया, सभी bookkeeping और task/environment setup को शामिल नहीं करते हुए।
 
-<details>
-  <summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" showLineNumbers
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
-</details>
+:::
 
 :::tip[सुझाव]
 जब कुछ गलत हो जाता है और तुम्हें troubleshoot करने की आवश्यकता होती है कि क्या हुआ, तो यह देखने के लिए `command.sh` स्क्रिप्ट को देखना उपयोगी हो सकता है कि Nextflow ने workflow instructions, variable interpolation आदि के आधार पर बिल्कुल कौन सी कमांड बनाई।
@@ -200,8 +196,7 @@ _यहाँ लक्ष्य Nextflow कोड की syntax को या�
 
 चलिए editor pane में `hello-world.nf` स्क्रिप्ट खोलते हैं।
 
-<details>
-  <summary>कोड</summary>
+:::abstract[कोड]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
@@ -232,7 +227,7 @@ workflow {
 }
 ```
 
-</details>
+:::
 
 एक Nextflow स्क्रिप्ट में दो मुख्य प्रकार के core घटक शामिल होते हैं: एक या अधिक **processes**, और **workflow** स्वयं।
 प्रत्येक **process** वर्णन करता है कि pipeline में संबंधित step को क्या operation(s) पूरा करना चाहिए, जबकि **workflow** dataflow logic का वर्णन करता है जो विभिन्न steps को जोड़ता है।
@@ -247,8 +242,7 @@ Process body में एक script block होना चाहिए जो �
 
 यहाँ हमारे पास `sayHello` नाम का एक **process** है जो `greeting` नामक एक **input** variable लेता है और अपने **output** को `output.txt` नामक फ़ाइल में लिखता है।
 
-<details>
-  <summary>कोड</summary>
+:::abstract[कोड]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers startLineNumber=3
 /*
@@ -271,7 +265,7 @@ process sayHello {
 }
 ```
 
-</details>
+:::
 
 यह एक बहुत ही minimal process परिभाषा है जिसमें केवल एक `input` परिभाषा, एक `output` परिभाषा और execute करने के लिए `script` है।
 

@@ -29,12 +29,11 @@ Channels ऐसी queues हैं जो inputs को efficiently handle क�
 इस course के इस भाग में, तुम सीखोगे कि विभिन्न स्रोतों से multiple inputs handle करने के लिए channel कैसे use करें।
 तुम channel contents को आवश्यकतानुसार transform करने के लिए [**operators**](https://nextflow.io/docs/latest/reference/operator.html) use करना भी सीखोगे।
 
-<details class="info">
-<summary>इस खंड से कैसे शुरू करें</summary>
+:::info[इस खंड से कैसे शुरू करें]{collapsed}
 
 Course का यह section मानता है कि तुमने [Hello Nextflow](./index.mdx) course का Part 1 complete कर लिया है, लेकिन यदि तुम उस section में covered basics से comfortable हो, तो तुम बिना कुछ special किए यहाँ से शुरू कर सकते हो।
 
-</details>
+:::
 
 ---
 
@@ -73,8 +72,7 @@ Outputs:
 
 पहले की तरह, तुम `results/hello_channels` directory में `output.txt` नामक output file पाओगे (जैसा कि workflow script के `output` block में specify किया गया है, ऊपर दिखाया गया है)।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console {2-3} title="results/hello_channels"
 results
@@ -85,16 +83,15 @@ results
 └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hello Channels!
 ```
 
-</details>
+:::
 
 यदि यह तुम्हारे लिए काम किया, तो तुम channels के बारे में सीखने के लिए ready हो।
 
@@ -225,14 +222,13 @@ Outputs:
 यदि तुमने दोनों edits correctly किए, तो तुम्हें एक successful execution मिलनी चाहिए।
 तुम results directory check कर सकते हो यह satisfy करने के लिए कि outcome अभी भी पहले जैसा ही है।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hello Channels!
 ```
 
-</details>
+:::
 
 तो हमने same end result achieve करते हुए अपने workflow की flexibility बढ़ा दी है।
 यह ऐसा लग सकता है कि हम बिना किसी tangible benefit के more code लिख रहे हैं, लेकिन जैसे ही हम more inputs handle करना शुरू करेंगे value clear हो जाएगी।
@@ -382,8 +378,7 @@ Execution monitor दिखाता है कि `sayHello` process के ल
 
 हालाँकि, results directory में अभी भी केवल एक output है:
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console {3} title="results/hello_channels"
 results
@@ -394,16 +389,15 @@ results
 └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hola
 ```
 
-</details>
+:::
 
 तुम्हें वहाँ तीन greetings में से एक दिखनी चाहिए, लेकिन जो तुम्हें मिली वह यहाँ दिखाई गई से different हो सकती है।
 क्या तुम सोच सकते हो कि ऐसा क्यों हो सकता है?
@@ -415,8 +409,7 @@ _Diagram में, channel को green में represent किया गय
 Execution monitor को वापस देखते हुए, इसने हमें केवल एक subdirectory path (`f4/c9962c`) दी।
 चलो वहाँ देखते हैं।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console {9}
 work/f4/c9962ce91ef87480babcb86b2b9042/
@@ -430,16 +423,15 @@ work/f4/c9962ce91ef87480babcb86b2b9042/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="work/f4/c9962ce91ef87480babcb86b2b9042/output.txt"
 Hello
 ```
 
-</details>
+:::
 
 यह तो वह greeting भी नहीं है जो हमें results directory में मिली! क्या हो रहा है?
 
@@ -488,8 +480,7 @@ Condensed mode में, Nextflow report करता है कि calls succe
 
 Anyway, अब जबकि हमारे पास प्रत्येक process call की subdirectories हैं, हम उनके logs और outputs खोज सकते हैं।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 work/23/871c7ec3642a898ecd5e6090d21300/
@@ -527,10 +518,9 @@ work/f4/ea10a680d5687596d3eaa3fcf69272/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```txt title="work/23/871c7ec3642a898ecd5e6090d21300/output.txt"
 Bonjour
@@ -544,7 +534,7 @@ Hello
 Hola
 ```
 
-</details>
+:::
 
 यह दिखाता है कि तीनों processes successfully run हुईं (yay)।
 
@@ -646,8 +636,7 @@ Outputs:
 Summary view पर वापस आते हुए, output फिर से एक line पर summarize हो गया है।
 यह देखने के लिए `results` directory पर नज़र डालो कि क्या सभी output greetings वहाँ हैं।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 results/hello_channels/
@@ -657,10 +646,9 @@ results/hello_channels/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="Bonjour-output.txt"
 Bonjour
@@ -674,7 +662,7 @@ Hello
 Hola
 ```
 
-</details>
+:::
 
 Success! अब हम जितनी चाहें उतनी greetings add कर सकते हैं बिना output files के overwrite होने की चिंता किए।
 

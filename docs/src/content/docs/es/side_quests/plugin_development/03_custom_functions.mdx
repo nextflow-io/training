@@ -258,8 +258,7 @@ Ejecute el pipeline:
 nextflow run greet.nf
 ```
 
-<details class="example">
-<summary>Output</summary>
+:::example[Output]{collapsed}
 
 ```console
 N E X T F L O W   ~  version 26.04.4
@@ -282,7 +281,7 @@ Output: Hallo
 Pipeline complete! 👋
 ```
 
-</details>
+:::
 
 Su primera función de plugin personalizada está funcionando en un workflow real.
 El mismo patrón `include { ... } from 'plugin/...'` que usó con nf-hello y nf-schema en la Parte 1 funciona con su propio plugin.
@@ -433,8 +432,7 @@ workflow {
 nextflow run greet.nf
 ```
 
-<details class="example">
-<summary>Output</summary>
+:::example[Output]{collapsed}
 
 ```console
 N E X T F L O W   ~  version 26.04.4
@@ -457,7 +455,7 @@ Decorated: *** Hallo ***
 Pipeline complete! 👋
 ```
 
-</details>
+:::
 
 Las funciones del plugin funcionan tanto en scripts de procesos (como `decorateGreeting` dentro de `SAY_HELLO`) como en operaciones de workflow (como `reverseGreeting` en un `map`).
 

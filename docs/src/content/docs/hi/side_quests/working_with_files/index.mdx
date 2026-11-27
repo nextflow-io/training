@@ -63,8 +63,7 @@ code .
 
 तुम्हें `main.nf` नामक एक सरल वर्कफ़्लो फ़ाइल, दो module फ़ाइलें वाली एक `modules` डायरेक्टरी, और कुछ उदाहरण डेटा फ़ाइलें वाली एक `data` डायरेक्टरी मिलेगी।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 .
@@ -91,7 +90,7 @@ code .
     └── count_lines.nf
 ```
 
-</details>
+:::
 
 इस डायरेक्टरी में तीन मरीज़ों (A, B, C) के paired-end sequencing डेटा हैं।
 
@@ -155,13 +154,12 @@ output {
 
 यह एक mini-workflow है (बिना किसी process के) जो अपने workflow में एक single फ़ाइल पाथ को refer करता है, फिर उसे console पर उसके class के साथ print करता है।
 
-<details class="info">
-<summary>`.class` क्या है?</summary>
+:::info[`.class` क्या है?]{collapsed}
 
 Nextflow में, `.class` हमें बताता है कि हम किस प्रकार के object के साथ काम कर रहे हैं। यह पूछने जैसा है "यह किस तरह की चीज़ है?" यह जानने के लिए कि यह एक string है, एक number है, एक फ़ाइल है, या कुछ और।
 यह हमें अगले sections में एक plain string और एक Path object के बीच का अंतर दिखाने में मदद करेगा।
 
-</details>
+:::
 
 चलो वर्कफ़्लो चलाते हैं:
 
@@ -352,15 +350,14 @@ process COUNT_LINES {
 
 जैसा तुम देख सकते हो, यह एक काफी सीधा-सादा script है जो फ़ाइल को unzip करता है और उसमें कितनी lines हैं यह गिनता है।
 
-<details class="info">
-<summary>`debug true` क्या करता है?</summary>
+:::info[`debug true` क्या करता है?]{collapsed}
 
 process definition में `debug true` directive Nextflow को तुम्हारे script के आउटपुट (जैसे line count "40") को सीधे execution log में print करने का कारण बनता है।
 इसके बिना, तुम केवल process execution status देखोगे लेकिन तुम्हारे script का actual आउटपुट नहीं।
 
 Nextflow processes को debug करने के बारे में अधिक जानकारी के लिए, [Debugging Nextflow Workflows](../debugging/index.mdx) side quest देखो।
 
-</details>
+:::
 
 Module import होने और उसका code जाँचने के बाद, हम workflow से process को call कर सकते हैं।
 
@@ -735,8 +732,7 @@ Console आउटपुट में एक अंतर यह है कि pa
 
 तुम verify कर सकते हो कि process के hash value पर स्थित working directory की सामग्री देखकर ऐसा हुआ।
 
-<details class="abstract">
-<summary>Work डायरेक्टरी सामग्री</summary>
+:::abstract[Work डायरेक्टरी सामग्री]{collapsed}
 
 अगर process hash `07/246c2a` था, तो तुम work directory explore कर सकते हो:
 
@@ -752,7 +748,7 @@ lrwxr-xr-x  1 user  staff    89 Jan 28 10:00 patientA_rep1_normal_R1_001.fastq.g
 
 Symlink उस remote फ़ाइल की staged copy की ओर point करता है जिसे Nextflow ने automatically download किया।
 
-</details>
+:::
 
 ध्यान दो कि बड़ी फ़ाइलों के लिए, downloading step local फ़ाइलों पर चलाने की तुलना में कुछ extra समय लेगी।
 हालाँकि, Nextflow जाँचता है कि क्या उसके पास पहले से एक staged copy है ताकि अनावश्यक downloads से बचा जा सके।
@@ -1831,8 +1827,7 @@ Outputs:
 
 आउटपुट एक `results` directory में publish होते हैं, इसलिए वहाँ देखो।
 
-<details class="abstract">
-<summary>डायरेक्टरी और फ़ाइल सामग्री</summary>
+:::abstract[डायरेक्टरी और फ़ाइल सामग्री]{collapsed}
 
 ```console
 results
@@ -1850,7 +1845,7 @@ Read 1 size: 10 reads
 Read 2 size: 10 reads
 ```
 
-</details>
+:::
 
 Process ने हमारे inputs लिए और designed के अनुसार patient metadata वाली एक नई फ़ाइल बनाई।
 शानदार!
@@ -1909,8 +1904,7 @@ Outputs:
 
 Results directory में अब सभी available data के results होने चाहिए।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 results
@@ -1922,7 +1916,7 @@ results
     └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 सफलता! हमने एक ही बार में सभी patients का analysis किया! है ना?
 
@@ -1984,8 +1978,7 @@ Outputs:
 
 अब results directory जाँचो:
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 results/
@@ -2015,7 +2008,7 @@ results/
             └── patientC_stats.txt
 ```
 
-</details>
+:::
 
 और यह रहा, हमारा सारा मेटाडेटा, neatly organized। यह सफलता है!
 

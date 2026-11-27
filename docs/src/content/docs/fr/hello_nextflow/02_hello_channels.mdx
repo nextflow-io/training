@@ -29,12 +29,11 @@ Les **canaux** sont des files d'attente conçues pour gérer les entrées effica
 Dans cette partie du cours, vous apprendrez à utiliser un **canal** pour gérer plusieurs entrées provenant de diverses sources différentes.
 Vous apprendrez également à utiliser des [**opérateurs**](https://nextflow.io/docs/latest/reference/operator.html) pour transformer le contenu des canaux selon les besoins.
 
-<details class="info">
-<summary>Comment commencer à partir de cette section</summary>
+:::info[Comment commencer à partir de cette section]{collapsed}
 
 Cette section du cours suppose que vous avez terminé la Partie 1 du cours [Hello Nextflow](./index.mdx), mais si vous êtes à l'aise avec les bases couvertes dans cette section, vous pouvez commencer ici sans rien faire de spécial.
 
-</details>
+:::
 
 ---
 
@@ -73,8 +72,7 @@ Outputs:
 
 Comme précédemment, vous trouverez le fichier de sortie nommé `output.txt` dans le répertoire `results/hello_channels` (comme spécifié dans le bloc `output` du script de workflow, montré ci-dessus).
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console {2-3} title="results/hello_channels"
 results
@@ -85,16 +83,15 @@ results
 └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contenu du fichier</summary>
+:::abstract[Contenu du fichier]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hello Channels!
 ```
 
-</details>
+:::
 
 Si cela a fonctionné pour vous, vous êtes prêt·e à apprendre les canaux.
 
@@ -225,14 +222,13 @@ Outputs:
 Si vous avez fait les deux modifications correctement, vous devriez obtenir une exécution réussie.
 Vous pouvez vérifier le répertoire des résultats pour vous assurer que le résultat est toujours le même qu'avant.
 
-<details class="abstract">
-<summary>Contenu du fichier</summary>
+:::abstract[Contenu du fichier]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hello Channels!
 ```
 
-</details>
+:::
 
 Nous avons donc augmenté la flexibilité de notre workflow tout en obtenant le même résultat final.
 Cela peut sembler que nous écrivons plus de code sans bénéfice tangible, mais la valeur deviendra claire dès que nous commencerons à gérer plus d'entrées.
@@ -382,8 +378,7 @@ Le moniteur d'exécution montre que `3 of 3` appels ont été effectués pour le
 
 Cependant, il n'y a toujours qu'une seule sortie dans le répertoire des résultats :
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console {3} title="results/hello_channels"
 results
@@ -394,16 +389,15 @@ results
 └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contenu du fichier</summary>
+:::abstract[Contenu du fichier]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hola
 ```
 
-</details>
+:::
 
 Vous devriez voir l'une des trois salutations dedans, bien que celle que vous avez obtenue pourrait être différente de ce qui est montré ici.
 Pouvez-vous deviner pourquoi ?
@@ -415,8 +409,7 @@ _Dans le diagramme, le canal est représenté en vert, et l'ordre des éléments
 En regardant le moniteur d'exécution, il nous a donné seulement un chemin de sous-répertoire (`f4/c9962c`).
 Jetons un coup d'œil dedans.
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console {9}
 work/f4/c9962ce91ef87480babcb86b2b9042/
@@ -430,16 +423,15 @@ work/f4/c9962ce91ef87480babcb86b2b9042/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contenu du fichier</summary>
+:::abstract[Contenu du fichier]{collapsed}
 
 ```console title="work/f4/c9962ce91ef87480babcb86b2b9042/output.txt"
 Hello
 ```
 
-</details>
+:::
 
 Ce n'est même pas la même salutation que nous avons obtenue dans le répertoire des résultats ! Que se passe-t-il ?
 
@@ -488,8 +480,7 @@ Dans ce mode étendu, il rapporte seulement qu'ils ont été soumis.
 
 De toute façon, maintenant que nous avons les sous-répertoires de chaque appel de processus, nous pouvons chercher leurs logs et sorties.
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 work/23/871c7ec3642a898ecd5e6090d21300/
@@ -527,10 +518,9 @@ work/f4/ea10a680d5687596d3eaa3fcf69272/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contenu du fichier</summary>
+:::abstract[Contenu du fichier]{collapsed}
 
 ```txt title="work/23/871c7ec3642a898ecd5e6090d21300/output.txt"
 Bonjour
@@ -544,7 +534,7 @@ Hello
 Hola
 ```
 
-</details>
+:::
 
 Cela montre que les trois processus se sont exécutés avec succès (youpi).
 
@@ -646,8 +636,7 @@ Outputs:
 En revenant à la vue résumée, la sortie est à nouveau résumée sur une ligne.
 Jetez un œil au répertoire `results` pour voir si toutes les salutations de sortie y sont.
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 results/hello_channels/
@@ -657,10 +646,9 @@ results/hello_channels/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contenu du fichier</summary>
+:::abstract[Contenu du fichier]{collapsed}
 
 ```console title="Bonjour-output.txt"
 Bonjour
@@ -674,7 +662,7 @@ Hello
 Hola
 ```
 
-</details>
+:::
 
 Succès ! Maintenant nous pouvons ajouter autant de salutations que nous voulons sans nous soucier de l'écrasement des fichiers de sortie.
 

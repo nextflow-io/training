@@ -205,8 +205,7 @@ class GreetingExtensionTest extends Specification {
 make test
 ```
 
-<details class="example">
-<summary>Sortie des tests</summary>
+:::example[Sortie des tests]{collapsed}
 
 ```console
 BUILD SUCCESSFUL in 5s
@@ -217,17 +216,15 @@ BUILD SUCCESSFUL in 5s
 "BUILD SUCCESSFUL" signifie que tout a fonctionné.
 Si un test échoue, vous verrez des messages d'erreur détaillés.
 
-</details>
+:::
 
-<details class="exercise">
-<summary>Ajouter un test de cas limite</summary>
+::::exercise[Ajouter un test de cas limite]{collapsed}
 
 Ajoutez un test qui vérifie que `reverseGreeting` gère une chaîne vide.
 Que doit retourner `reverseGreeting('')` ?
 Ajoutez le test, exécutez `make test` et vérifiez qu'il réussit.
 
-<details class="solution">
-<summary>Solution</summary>
+:::solution[Solution]{collapsed}
 
 Ajoutez cette méthode de test à `GreetingExtensionTest.groovy` :
 
@@ -243,9 +240,9 @@ def 'should handle empty string'() {
 
 Une chaîne vide inversée est toujours une chaîne vide.
 
-</details>
+:::
 
-</details>
+::::
 
 ---
 

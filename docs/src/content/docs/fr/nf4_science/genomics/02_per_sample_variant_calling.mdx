@@ -21,8 +21,7 @@ Cela automatise les étapes de la première section de la [Partie 1 : Vue d'ense
 
 Comme point de départ, nous vous fournissons un fichier de workflow, `genomics.nf`, qui décrit les principales parties du workflow, ainsi que deux fichiers de modules, `samtools_index.nf` et `gatk_haplotypecaller.nf`, qui décrivent la structure de chaque processus.
 
-<details class="full-code">
-<summary>Fichiers squelettes</summary>
+:::full-code[Fichiers squelettes]{collapsed}
 
 ```nextflow title="genomics.nf"
 #!/usr/bin/env nextflow
@@ -93,7 +92,7 @@ process GATK_HAPLOTYPECALLER {
 }
 ```
 
-</details>
+:::
 
 Ces fichiers ne sont pas fonctionnels ; leur objectif est simplement de servir de squelettes que vous compléterez avec les parties intéressantes du code.
 
@@ -419,8 +418,7 @@ Outputs:
 
 Vous pouvez vérifier que le fichier d'index a été généré correctement en regardant dans le répertoire de travail ou dans le répertoire de résultats.
 
-<details class="abstract">
-<summary>Contenu du répertoire de travail</summary>
+:::abstract[Contenu du répertoire de travail]{collapsed}
 
 ```console
 work/ad/b2c9bf4af404ef7cf63e0aa3887f65
@@ -428,10 +426,9 @@ work/ad/b2c9bf4af404ef7cf63e0aa3887f65
 └── reads_mother.bam.bai
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contenu du répertoire de résultats</summary>
+:::abstract[Contenu du répertoire de résultats]{collapsed}
 
 ```console
 results/
@@ -439,7 +436,7 @@ results/
     └── reads_mother.bam.bai -> ...
 ```
 
-</details>
+:::
 
 Le voilà !
 
@@ -806,8 +803,7 @@ Le premier processus a été ignoré grâce au cache, comme prévu, alors que le
 
 Vous trouverez les fichiers de sortie dans le répertoire de résultats (sous forme de liens symboliques vers le répertoire de travail).
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 results/
@@ -818,12 +814,11 @@ results/
     └── reads_mother.bam.vcf.idx -> ...
 ```
 
-</details>
+:::
 
 Si vous ouvrez le fichier VCF, vous devriez voir le même contenu que dans le fichier que vous avez généré en exécutant la commande GATK directement dans le conteneur.
 
-<details class="abstract">
-<summary>Contenu du fichier</summary>
+:::abstract[Contenu du fichier]{collapsed}
 
 ```console title="reads_mother.bam.vcf" showLineNumbers startLineNumber=26
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
@@ -832,7 +827,7 @@ Si vous ouvrez le fichier VCF, vous devriez voir le même contenu que dans le fi
 20_10037292_10066351	3529	.	T	A	155.64	.	AC=1;AF=0.500;AN=2;BaseQRankSum=-0.544;DP=21;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=7.78;ReadPosRankSum=-1.158;SOR=1.034	GT:AD:DP:GQ:PL	0/1:12,8:20:99:163,0,328
 ```
 
-</details>
+:::
 
 C'est la sortie qui nous intéresse de générer pour chaque échantillon dans notre étude.
 
@@ -916,8 +911,7 @@ nextflow run genomics.nf -profile test -resume
 
 Chose amusante : cela _pourrait fonctionner_, OU cela _pourrait échouer_. Par exemple, voici une exécution qui a réussi :
 
-<details class="success">
-<summary>Sortie de la commande</summary>
+:::success[Sortie de la commande]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -948,12 +942,11 @@ Outputs:
     - vcf/reads_father.bam.vcf.idx
 ```
 
-</details>
+:::
 
 Si votre exécution de workflow a réussi, exécutez-la à nouveau jusqu'à obtenir une erreur comme celle-ci :
 
-<details class="failure">
-<summary>Sortie de la commande</summary>
+:::failure[Sortie de la commande]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -981,7 +974,7 @@ Command error:
   ...
 ```
 
-</details>
+:::
 
 Si vous regardez la sortie d'erreur de la commande GATK, il y aura une ligne comme celle-ci :
 
@@ -999,8 +992,7 @@ Nous allons inspecter les répertoires de travail et utiliser l'opérateur `view
 
 Jetez un œil à l'intérieur du répertoire de travail pour l'appel de processus `GATK_HAPLOTYPECALLER` échoué listé dans la sortie console.
 
-<details class="abstract">
-<summary>Contenu du répertoire</summary>
+:::abstract[Contenu du répertoire]{collapsed}
 
 ```console
 work/3f/e775e3104e279ca5f292bf7b652f3e
@@ -1014,7 +1006,7 @@ work/3f/e775e3104e279ca5f292bf7b652f3e
 └── ref.fasta.fai -> /workspaces/training/nf4-science/genomics/data/ref/ref.fasta.fai
 ```
 
-</details>
+:::
 
 Portez une attention particulière aux noms du fichier BAM et de l'index BAM qui sont listés dans ce répertoire : `reads_son.bam` et `reads_father.bam.bai`.
 
@@ -1217,8 +1209,7 @@ nextflow run genomics.nf -profile test
 
 Cette fois (et à chaque fois) tout devrait s'exécuter correctement :
 
-<details class="success">
-<summary>Sortie de la commande</summary>
+:::success[Sortie de la commande]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -1249,12 +1240,11 @@ Outputs:
     - vcf/reads_father.bam.vcf.idx
 ```
 
-</details>
+:::
 
 Le répertoire de résultats contient maintenant à la fois les fichiers BAM et BAI pour chaque échantillon (du tuple), ainsi que les sorties VCF :
 
-<details class="abstract">
-<summary>Contenu du répertoire de résultats</summary>
+:::abstract[Contenu du répertoire de résultats]{collapsed}
 
 ```console
 results/
@@ -1274,7 +1264,7 @@ results/
     └── reads_son.bam.vcf.idx -> ...
 ```
 
-</details>
+:::
 
 En regroupant les fichiers associés dans des tuples, nous avons assuré que les bons fichiers voyagent toujours ensemble à travers le workflow.
 Le workflow traite maintenant n'importe quel nombre d'échantillons de manière fiable, mais les lister individuellement dans la configuration n'est pas très évolutif.

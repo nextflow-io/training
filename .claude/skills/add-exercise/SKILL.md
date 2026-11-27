@@ -17,13 +17,11 @@ Follow these steps:
 
 2. Read the lesson file to understand context
 
-3. Create the exercise as a collapsible `<details class="exercise">` block, with the solution nested inside it as `<details class="solution">`.
-   Leave a blank line after each `<summary>` line and before each `</details>`, or the body does not render as Markdown:
+3. Create the exercise as a collapsible `:::exercise` block, with the solution nested inside it as `:::solution`.
+   The outer block needs more colons than anything inside it:
 
    ````mdx
-   <details class="exercise">
-   <summary>Exercise: [Title]</summary>
-
+   ::::exercise[Exercise: Short title]{collapsed}
    Brief description of what to do.
 
    1. First step
@@ -34,9 +32,7 @@ Follow these steps:
    Helpful hint if needed
    :::
 
-   <details class="solution">
-   <summary>Solution</summary>
-
+   :::solution[Solution]{collapsed}
    Explanation of the solution approach.
 
    ```nextflow title="filename.nf" showLineNumbers
@@ -48,13 +44,12 @@ Follow these steps:
    # [!output]
    [expected output]
    ```
-
-   </details>
-
-   </details>
+   :::
+   ::::
    ````
 
-   Add `open` (`<details class="exercise" open>`) only if the exercise should show without a click.
+   Use `{open}` instead of `{collapsed}` only if the exercise should show without a click.
+   Avoid unbalanced square brackets in the title: they end it early.
 
 4. If the exercise requires a solution file:
 

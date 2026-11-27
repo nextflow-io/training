@@ -36,12 +36,11 @@ Aquesta vegada, farem els següents canvis al nostre workflow per reflectir mill
 3. Afegir un paràmetre per nomenar el fitxer de sortida final i passar-lo com a entrada secundària al pas de recollida.
 4. Fer que el pas de recollida també informi d'una estadística simple sobre el que s'ha processat.
 
-<details class="info">
-<summary>Com començar des d'aquesta secció</summary>
+:::info[Com començar des d'aquesta secció]{collapsed}
 
 Aquesta secció del curs assumeix que heu completat les Parts 1-2 del curs [Hello Nextflow](./index.mdx), però si us sentiu còmodes amb els conceptes bàsics coberts en aquestes seccions, podeu començar des d'aquí sense fer res especial.
 
-</details>
+:::
 
 ---
 
@@ -90,8 +89,7 @@ Outputs:
 Com abans, trobareu els fitxers de sortida a la ubicació especificada al bloc `output`.
 Per a aquest capítol, és sota `results/hello_workflow/`.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 results/hello_workflow
@@ -100,7 +98,7 @@ results/hello_workflow
 └── Hola-output.txt
 ```
 
-</details>
+:::
 
 Si això us ha funcionat, esteu preparats per aprendre com muntar un workflow de múltiples passos.
 
@@ -136,14 +134,13 @@ echo 'Hello World' | tr '[a-z]' '[A-Z]' > UPPER-output.txt
 
 La sortida és un fitxer de text anomenat `UPPER-output.txt` que conté la versió en majúscules de la cadena `Hello World`.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="UPPER-output.txt"
 HELLO WORLD
 ```
 
-</details>
+:::
 
 Això és bàsicament el que intentarem fer amb el nostre workflow.
 
@@ -347,8 +344,7 @@ Ara hi ha una línia extra a la sortida de la consola que correspon al nou proc�
 
 Trobareu les sortides al directori `results/hello_workflow` tal com s'ha establert al bloc `output`.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 results/hello_workflow/
@@ -360,12 +356,11 @@ results/hello_workflow/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Això és convenient! Però encara val la pena donar una ullada dins del directori de treball d'una de les crides al segon procés.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 work/e0/ecf81b4cacc648b9b994218d5b29d7/
@@ -373,7 +368,7 @@ work/e0/ecf81b4cacc648b9b994218d5b29d7/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Observeu que hi ha dos fitxers `*-output`: la sortida del primer procés així com la sortida del segon.
 
@@ -424,8 +419,7 @@ cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLL
 
 La sortida és un fitxer de text anomenat `COLLECTED-output.txt` que conté les versions en majúscules de les salutacions originals.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="COLLECTED-output.txt"
 HELLO
@@ -433,7 +427,7 @@ BONJOUR
 HOLA
 ```
 
-</details>
+:::
 
 Aquest és el resultat que volem aconseguir amb el nostre workflow.
 
@@ -666,14 +660,13 @@ Només esperàvem una, però n'hi ha tres.
 
 Ara doneu una ullada al contingut del fitxer de sortida final.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-output.txt"
 HOLA
 ```
 
-</details>
+:::
 
 Oh no. El pas de recollida es va executar individualment en cada salutació, que NO és el que volíem.
 
@@ -787,8 +780,7 @@ Podem resumir això amb el següent diagrama:
 
 Finalment, podeu donar una ullada al contingut del fitxer de sortida per satisfer-vos que tot ha funcionat correctament.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-output.txt"
 BONJOUR
@@ -796,7 +788,7 @@ HELLO
 HOLA
 ```
 
-</details>
+:::
 
 Aquesta vegada tenim les tres salutacions al fitxer de sortida final. Èxit!
 
@@ -1012,8 +1004,7 @@ Outputs:
 
 S'executa amb èxit i produeix la sortida desitjada:
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-trio-output.txt"
 HELLO
@@ -1021,7 +1012,7 @@ BONJOUR
 HOLA
 ```
 
-</details>
+:::
 
 Ara, sempre que especifiquem el paràmetre adequadament, execucions posteriors sobre altres lots d'entrades no sobreescriuran resultats anteriors.
 
@@ -1241,14 +1232,13 @@ Outputs:
 Si mireu al directori `results/hello_workflow/`, trobareu el nou fitxer d'informe, `trio-report.txt`.
 Obriu-lo per verificar que el workflow va informar correctament del recompte de salutacions que es van processar.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```txt title="trio-report.txt"
 There were 3 greetings in this batch.
 ```
 
-</details>
+:::
 
 ![](../../hello_nextflow/img/hello-collect-4-way.excalidraw.svg)
 

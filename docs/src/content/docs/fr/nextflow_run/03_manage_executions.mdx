@@ -126,8 +126,7 @@ Que vous développiez un pipeline ou que vous l'exécutiez en production, vous a
 
 Chaque fois que vous lancez un workflow Nextflow, une ligne est écrite dans un fichier journal appelé `history`, dans un répertoire caché appelé `.nextflow` dans le répertoire de travail courant.
 
-<details class="abstract">
-<summary>Contenu du fichier</summary>
+:::abstract[Contenu du fichier]{collapsed}
 
 ```txt title=".nextflow/history" showLineNumbers
 2026-09-13 01:47:58	2.8s	determined_ramanujan	OK	ce74f81996b8ce999853fdbb25ba7969	03078950-5011-414f-992b-8fe1bd219ac2	nextflow run main.nf --input data/greetings.csv --character turkey
@@ -136,7 +135,7 @@ Chaque fois que vous lancez un workflow Nextflow, une ligne est écrite dans un 
 2026-09-13 01:48:14	1.5s	deadly_lamport	OK	ce74f81996b8ce999853fdbb25ba7969	517ccc29-9db7-4d8d-8ea0-c8db6e9ac653	nextflow run main.nf --input data/greetings.csv --character stegosaurus -resume
 ```
 
-</details>
+:::
 
 Chaque ligne vous donne l'horodatage, la durée, le nom de l'exécution, le statut, l'ID de révision, l'ID de session et la ligne de commande complète d'une exécution lancée depuis ce répertoire.
 

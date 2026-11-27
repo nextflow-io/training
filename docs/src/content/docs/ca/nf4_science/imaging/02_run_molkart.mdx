@@ -108,8 +108,7 @@ Estem executant això deliberadament sense contenidors per demostrar per què s�
 
 Després d'uns moments, veureu un error com aquest:
 
-<details class="failure">
-<summary>Sortida de la comanda</summary>
+:::failure[Sortida de la comanda]{collapsed}
 
 ```console
 ERROR ~ Error executing process > 'NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)'
@@ -130,7 +129,7 @@ Command error:
   .command.sh: line 3: duplicate_finder.py: command not found
 ```
 
-</details>
+:::
 
 **Què està passant aquí?**
 
@@ -213,8 +212,7 @@ Per a més detalls sobre contenidors a Nextflow, consulteu [Hello Containers](..
 
 Mentre s'executa el pipeline, veureu una sortida similar a aquesta:
 
-<details class="success">
-<summary>Sortida de la comanda</summary>
+:::success[Sortida de la comanda]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -291,7 +289,7 @@ CPU hours   : (a few seconds)
 Succeeded   : 22
 ```
 
-</details>
+:::
 
 Observeu com aquesta sortida és més detallada que el nostre exemple Hello World a causa de les convencions nf-core que segueix el pipeline:
 

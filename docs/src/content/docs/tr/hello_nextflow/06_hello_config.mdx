@@ -27,8 +27,7 @@ Kursun bu bölümünde, size en basit ve en yaygın yapılandırma dosyası meka
 Süreç yönergeleri, yürütücüler, profiller ve parametre dosyaları gibi Nextflow yapılandırmasının temel bileşenlerini ele alacağız.
 Bu yapılandırma seçeneklerini etkili bir şekilde kullanmayı öğrenerek, pipeline'larınızın esnekliğini, ölçeklenebilirliğini ve performansını artırabilirsiniz.
 
-<details class="info">
-<summary>Bu bölümden nasıl başlanır</summary>
+:::info[Bu bölümden nasıl başlanır]{collapsed}
 
 Kursun bu bölümü, [Hello Nextflow](./index.mdx) kursunun 1-5. Bölümlerini tamamladığınızı ve eksiksiz çalışan bir pipeline'a sahip olduğunuzu varsayar.
 
@@ -43,7 +42,7 @@ cp solutions/5-hello-containers/nextflow.config .
 
 Hello pipeline'ına aşina değilseniz veya hatırlatmaya ihtiyacınız varsa, [bu bilgi sayfasına](../info/hello_pipeline.mdx) bakın.
 
-</details>
+:::
 
 ---
 
@@ -111,8 +110,7 @@ Outputs:
 
 Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen dizinde (`results/hello_config/`) bulacaksınız.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 results/hello_config/
@@ -128,12 +126,11 @@ results/hello_config/
 └── batch-report.txt
 ```
 
-</details>
+:::
 
 Son ASCII sanat çıktısı, `results/hello_config/` dizininde `cowpy-COLLECTED-batch-output.txt` adı altındadır.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
 _________
@@ -164,7 +161,7 @@ _________
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 Bu sizin için çalıştıysa, pipeline'larınızı nasıl yapılandıracağınızı öğrenmeye hazırsınız.
 
@@ -291,8 +288,7 @@ Bu hala daha önce olduğu gibi aynı çıktıyı üretir.
 
 Son ASCII sanat çıktısı, daha önce olduğu gibi `results/hello_config/` dizininde `cowpy-COLLECTED-batch-output.txt` adı altındadır.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
 _________
@@ -323,7 +319,7 @@ _________
                       ^^^ ^^ ^^^ ^
 ```
 
-</details>
+:::
 
 İşlevsel olarak, bu taşıma hiçbir şeyi değiştirmedi, ancak kavramsal olarak varsayılan değerlerin yapılandırma dosyasında ayarlanması biraz daha temiz.
 
@@ -404,8 +400,7 @@ Bu çalıştırmada, Nextflow mevcut dizinimizdeki `nextflow.config` dosyasını
 
 Son çıktı dosyası, selamlamaları söyleyen tux karakterini içermelidir.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="tux-run/results/hello_config/cowpy-COLLECTED-experiment-output.txt"
 _________
@@ -425,7 +420,7 @@ _________
 
 ```
 
-</details>
+:::
 
 İşte bu kadar; artık 'normal' yapılandırmanızı değiştirmeden deney yapmak için bir alanınız var.
 
@@ -501,8 +496,7 @@ Outputs:
 
 Son çıktı dosyası, selamlamaları söyleyen stegosaurus karakterini içermelidir.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/hello_config/cowpy-COLLECTED-yaml-output.txt"
 _________
@@ -526,7 +520,7 @@ _________
                     |_____|        |_____|         ~ - . _ _ _ _ _>
 ```
 
-</details>
+:::
 
 Yalnızca birkaç parametre belirtmeniz gerektiğinde bir parametre dosyası kullanmak aşırıya kaçmış gibi görünebilir, ancak bazı pipeline'lar düzinelerce parametre bekler.
 Bu durumlarda, bir parametre dosyası kullanmak, çalışma zamanında devasa komut satırları yazmak ve iş akışı betiğini değiştirmek zorunda kalmadan parametre değerleri sağlamamıza olanak tanır.
@@ -597,8 +591,7 @@ Outputs:
 
 Bu, çıktıları `results/` yerine `custom-outdir-cli/` dizinine yayınlar:
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 custom-outdir-cli/
@@ -615,7 +608,7 @@ custom-outdir-cli/
         └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Çıktı bloğundaki `path` bildirimlerinden hala `hello_config` alt dizinine sahip olduğumuza dikkat edin.
 Bunu temizleyelim.
@@ -689,8 +682,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli-2/
 
 Artık çıktılar `hello_config` alt dizini olmadan doğrudan `custom-outdir-cli-2/` altında yayınlanıyor:
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 custom-outdir-cli-2/
@@ -706,7 +698,7 @@ custom-outdir-cli-2/
     └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 :::tip[İpucu]
 `-output-dir` seçeneği çıktıların _nereye_ gideceğini kontrol etmek için kullanılırken, çıktı bloğundaki `path` yönergesi _alt dizin yapısını_ kontrol eder.
@@ -947,8 +939,7 @@ Outputs:
 
 Bu, çıktıları belirtilen temel yol _ve_ batch adı alt dizini _ve_ sürece göre gruplandırılmış sonuçlarla `custom-outdir-config-2/rep2/` dizinine yayınlar:
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 custom-outdir-config-2
@@ -970,7 +961,7 @@ custom-outdir-config-2
             └── Hola-output.txt
 ```
 
-</details>
+:::
 
 ### 2.3. Yayınlama modunu iş akışı düzeyinde ayarlayın
 
@@ -1092,8 +1083,7 @@ Outputs:
 
 Bu, çıktıları `config-output-mode/` dizinine yayınlar ve hepsi hala sembolik bağlantılar değil, uygun kopyalardır.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 config-output-mode
@@ -1115,7 +1105,7 @@ config-output-mode
             └── Hola-output.txt
 ```
 
-</details>
+:::
 
 Çıktı başına mod ayarlama yöntemini kullanmak isteyebileceğiniz ana neden, aynı iş akışı içinde karıştırmak ve eşleştirmek istemenizdir; _yani_ bazı çıktıların kopyalanmasını ve bazılarının sembolik bağlantı olmasını sağlamak.
 
@@ -1251,8 +1241,7 @@ Bizim açımızdan, arka planda mekanikler biraz farklı olsa da Docker ile çal
 
 Bu, gerekirse Conda ortamlarıyla çalıştırmaya hazır olduğumuz anlamına gelir.
 
-<details class="info">
-<summary>Docker ve Conda'yı karıştırma ve eşleştirme</summary>
+:::info[Docker ve Conda'yı karıştırma ve eşleştirme]{collapsed}
 
 Bu yönergeler süreç başına atandığından, örneğin kullandığınız bilgi işlem altyapısı her ikisini de destekliyorsa, iş akışınızdaki bazı süreçleri Docker ile ve diğerlerini Conda ile çalıştıracak şekilde yapılandırmak, yani 'karıştırmak ve eşleştirmek' mümkündür.
 Bu durumda, yapılandırma dosyanızda hem Docker'ı hem de Conda'yı etkinleştirirsiniz.
@@ -1260,7 +1249,7 @@ Belirli bir süreç için her ikisi de mevcutsa, Nextflow konteynerlere öncelik
 
 Ve daha önce belirtildiği gibi, Nextflow birden fazla başka yazılım paketleme ve konteyner teknolojisini destekler; bu nedenle sadece bu ikisiyle sınırlı değilsiniz.
 
-</details>
+:::
 
 ### Özetle
 
@@ -1312,8 +1301,7 @@ Eğitim ortamı bir HPC'ye bağlanacak şekilde kurulmadığı için bunu gerçe
 
 Ne yazık ki, bu sistemlerin her biri bir işin nasıl tanımlanması ve ilgili zamanlayıcıya gönderilmesi gerektiğini tanımlamak için farklı teknolojiler, sözdizimi ve yapılandırmalar kullanır.
 
-<details class="abstract">
-<summary>Örnekler</summary>
+:::abstract[Örnekler]{collapsed}
 
 Örneğin, "my-science-work" kuyruğunda yürütülmek üzere 8 CPU ve 4GB RAM gerektiren aynı işin arka uca bağlı olarak aşağıdaki farklı şekillerde ifade edilmesi gerekir.
 
@@ -1343,7 +1331,7 @@ Ne yazık ki, bu sistemlerin her biri bir işin nasıl tanımlanması ve ilgili 
 #$ -l h_rss=4096M,mem_free=4096M
 ```
 
-</details>
+:::
 
 Neyse ki, Nextflow tüm bunları basitleştirir.
 [`cpus`](https://nextflow.io/docs/latest/reference/process.html#cpus), [`memory`](https://nextflow.io/docs/latest/reference/process.html#memory) ve [`queue`](https://nextflow.io/docs/latest/reference/process.html#queue) gibi ilgili özellikleri belirtebilmeniz için standartlaştırılmış bir sözdizimi sağlar (diğer özellikler için [süreç yönergelerine](https://nextflow.io/docs/latest/reference/process.html#process-directives) bakın); bunu yalnızca bir kez yapmanız yeterlidir.
@@ -1523,14 +1511,13 @@ Nextflow bu değerleri, belirttiğiniz yürütücüye bağlı olarak uygun talim
 Eğitim ortamında ilgili altyapıya erişimimiz olmadığı için bunu çalıştırmayacağız.
 Ancak, bu sınırları aşan kaynak tahsisleriyle iş akışını çalıştırmayı denerseniz, ardından `.command.run` betik dosyasındaki `sbatch` komutuna bakarsanız, yürütücüye gerçekten gönderilen isteklerin `resourceLimits` tarafından belirtilen değerlerle sınırlandırıldığını görürsünüz.
 
-<details class="info">
-<summary>Kurumsal referans yapılandırmaları</summary>
+:::info[Kurumsal referans yapılandırmaları]{collapsed}
 
 nf-core projesi, dünya çapındaki çeşitli kurumlar tarafından paylaşılan, çok çeşitli HPC ve bulut yürütücülerini kapsayan bir [yapılandırma dosyaları koleksiyonu](https://nf-co.re/configs/) derlemiştir.
 
 Bu paylaşılan yapılandırmalar hem orada çalışan ve dolayısıyla kurumlarının yapılandırmasını kutudan çıkar çıkmaz kullanabilen insanlar hem de kendi altyapıları için bir yapılandırma geliştirmek isteyen insanlar için bir model olarak değerlidir.
 
-</details>
+:::
 
 ### Özetle
 
@@ -1751,8 +1738,7 @@ Outputs:
 
 Bu, mümkün olduğunda Docker kullanacak ve çıktıları `custom-outdir-config/test` altında üretecek; bu sefer karakter komedi ikilisi `dragonandcow`.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt"
  _________
@@ -1778,7 +1764,7 @@ Bu, mümkün olduğunda Docker kullanacak ve çıktıları `custom-outdir-config
   //    \\               ///-._ _ _ _ _ _ _{^ - - - - ~
 ```
 
-</details>
+:::
 
 Bu, iş akışı koduyla herhangi bir test veri dosyası dağıttığımız sürece, herkesin komut satırı veya bir parametre dosyası aracılığıyla kendi girdilerini sağlamak zorunda kalmadan iş akışını hızlı bir şekilde deneyebileceği anlamına gelir.
 

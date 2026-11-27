@@ -11,8 +11,7 @@ El projecte nf-core proporciona una comanda (`nf-core modules create`) que gener
 No obstant això, amb finalitats didàctiques, començarem fent-ho manualment: transformant el mòdul local `cowpy` del teu pipeline `core-hello` en un mòdul d'estil nf-core pas a pas.
 Després d'això, et mostrarem com utilitzar la creació de mòduls basada en plantilles per treballar de manera més eficient en el futur.
 
-<details class="info">
-<summary>Com començar des d'aquesta secció</summary>
+:::info[Com començar des d'aquesta secció]{collapsed}
 
 Aquesta secció assumeix que has completat la [Part 2: Utilitzar un mòdul nf-core](./02_use_module.mdx) i has integrat el mòdul `FIND_CONCATENATE` al teu pipeline.
 
@@ -31,7 +30,7 @@ Pots comprovar que s'executa correctament executant la següent comanda:
 nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
-</details>
+:::
 
 ---
 
@@ -683,8 +682,7 @@ cat work/38/eb29ea*/cowpy-test.txt
 
 Hauries de veure l'art ASCII mostrat amb el caràcter `kosh`, confirmant que la configuració `ext.args` ha funcionat!
 
-<details class="info">
-<summary>(Opcional) Inspeccionar el fitxer de comandes</summary>
+:::info[(Opcional) Inspeccionar el fitxer de comandes]{collapsed}
 
 Si vols veure exactament com s'ha aplicat la configuració, pots inspeccionar el fitxer `.command.sh`:
 
@@ -702,7 +700,7 @@ cat test.txt | cowpy -c kosh > cowpy-test.txt
 
 Això mostra que el fitxer `.command.sh` s'ha generat correctament basant-se en la configuració `ext.args`.
 
-</details>
+:::
 
 Pren-te un moment per pensar sobre el que hem aconseguit aquí.
 Aquest enfocament manté la interfície del mòdul centrada en dades essencials (fitxers, metadades i qualsevol paràmetre obligatori per mostra), mentre que les opcions que controlen el comportament de l'eina es gestionen per separat mitjançant configuració.
@@ -868,8 +866,7 @@ executor >  local (8)
 Mira la sortida al directori de resultats.
 Hauries de veure el fitxer de sortida de cowpy amb el mateix nomenament que abans: `cowpy-test.txt`, basat en el nom de lot per defecte.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console {3}
 results
@@ -882,7 +879,7 @@ results
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 Sent lliure de canviar la configuració `ext.prefix` a `conf/modules.config` per satisfer-te que pots canviar el patró de nomenament sense haver de fer cap canvi al codi del mòdul o del workflow.
 
@@ -1004,8 +1001,7 @@ executor >  local (8)
 Mira el teu directori de treball actual.
 Ara el `core-hello-results` també conté les sortides del mòdul `COWPY`.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console {4-5}
 core-hello-results/
@@ -1037,7 +1033,7 @@ core-hello-results/
     └── pipeline_dag_2025-12-27_06-35-56.html
 ```
 
-</details>
+:::
 
 Pots veure que Nextflow ha creat aquesta jerarquia de directoris basant-se en els noms del workflow i del mòdul.
 
@@ -1243,8 +1239,7 @@ L'eina gestiona la complexitat de trobar informació de paquets i configurar l'e
 
 L'eina crea una estructura de mòdul completa a `modules/local/` (o `modules/nf-core/` si estàs al repositori nf-core/modules):
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 modules/local/cowpy
@@ -1255,7 +1250,7 @@ modules/local/cowpy
     └── main.nf.test
 ```
 
-</details>
+:::
 
 Cada fitxer té un propòsit específic:
 

@@ -222,15 +222,14 @@ Proporciona `samplesheetToList`, una función que analiza archivos CSV/TSV usand
 El pipeline actualmente lee `greetings.csv` usando `splitCsv` y un `map` manual, pero nf-schema puede reemplazar esto con un análisis validado basado en esquemas.
 Ya se proporciona un archivo de esquema JSON (`greetings_schema.json`) en el directorio del ejercicio.
 
-<details class="info">
-<summary>¿Qué es un esquema?</summary>
+:::info[¿Qué es un esquema?]{collapsed}
 
 Un esquema es una descripción formal de cómo deben verse los datos válidos.
 Define cosas como qué columnas se esperan, qué tipo debe tener cada valor (string, número, etc.) y qué campos son obligatorios.
 
 Piénselo como un contrato: si los datos de entrada no coinciden con el esquema, la herramienta puede detectar el problema de forma temprana en lugar de dejar que cause errores confusos más adelante en el pipeline.
 
-</details>
+:::
 
 #### 2.2.1. Examinar el esquema
 
@@ -569,8 +568,7 @@ INFO - [nf-co2footprint] 🌱 The workflow run used 126.76 uWh of electricity, r
 
 El plugin genera archivos de salida en su directorio de trabajo:
 
-<details class="abstract">
-<summary>Contenido del directorio</summary>
+:::abstract[Contenido del directorio]{collapsed}
 
 ```console
 co2footprint_report_<timestamp>.html
@@ -578,10 +576,9 @@ co2footprint_summary_<timestamp>.txt
 co2footprint_trace_<timestamp>.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contenido del archivo</summary>
+:::abstract[Contenido del archivo]{collapsed}
 
 ```console title="co2footprint_summary_<timestamp>.txt"
 Total CO₂e footprint measures of this workflow run (including cached tasks):
@@ -595,7 +592,7 @@ Which equals:
   - 1.22E-7 % of a flight from Paris to London
 ```
 
-</details>
+:::
 
 (Sus números serán diferentes.)
 

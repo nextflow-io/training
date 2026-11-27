@@ -203,8 +203,7 @@ class GreetingExtensionTest extends Specification {
 make test
 ```
 
-<details class="example">
-<summary>Test output</summary>
+:::example[Test output]{collapsed}
 
 ```console
 BUILD SUCCESSFUL in 5s
@@ -215,17 +214,15 @@ BUILD SUCCESSFUL in 5s
 "BUILD SUCCESSFUL" means everything worked.
 If any test fails, you'll see detailed error messages.
 
-</details>
+:::
 
-<details class="exercise">
-<summary>Add an edge case test</summary>
+::::exercise[Add an edge case test]{collapsed}
 
 Add a test that checks `reverseGreeting` handles an empty string.
 What should `reverseGreeting('')` return?
 Add the test, run `make test`, and verify it passes.
 
-<details class="solution">
-<summary>Solution</summary>
+:::solution[Solution]{collapsed}
 
 Add this test method to `GreetingExtensionTest.groovy`:
 
@@ -241,9 +238,9 @@ def 'should handle empty string'() {
 
 An empty string reversed is still an empty string.
 
-</details>
+:::
 
-</details>
+::::
 
 ---
 

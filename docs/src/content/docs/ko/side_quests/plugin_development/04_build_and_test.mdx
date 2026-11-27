@@ -205,8 +205,7 @@ class GreetingExtensionTest extends Specification {
 make test
 ```
 
-<details class="example">
-<summary>테스트 출력</summary>
+:::example[테스트 출력]{collapsed}
 
 ```console
 BUILD SUCCESSFUL in 5s
@@ -217,17 +216,15 @@ BUILD SUCCESSFUL in 5s
 "BUILD SUCCESSFUL"은 모든 것이 정상적으로 작동했다는 의미입니다.
 테스트가 실패하면 상세한 오류 메시지가 표시됩니다.
 
-</details>
+:::
 
-<details class="exercise">
-<summary>엣지 케이스 테스트 추가</summary>
+::::exercise[엣지 케이스 테스트 추가]{collapsed}
 
 `reverseGreeting`이 빈 문자열을 처리하는지 확인하는 테스트를 추가합니다.
 `reverseGreeting('')`은 무엇을 반환해야 할까요?
 테스트를 추가하고 `make test`를 실행하여 통과하는지 확인합니다.
 
-<details class="solution">
-<summary>해결책</summary>
+:::solution[해결책]{collapsed}
 
 `GreetingExtensionTest.groovy`에 다음 테스트 메서드를 추가합니다:
 
@@ -243,9 +240,9 @@ def 'should handle empty string'() {
 
 빈 문자열을 뒤집어도 빈 문자열입니다.
 
-</details>
+:::
 
-</details>
+::::
 
 ---
 

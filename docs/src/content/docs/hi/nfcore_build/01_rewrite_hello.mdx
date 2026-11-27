@@ -36,8 +36,7 @@ Pipeline निर्माण project शुरू करने से पह�
 tree -L 1 pipelines/nf-core/demo
 ```
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 pipelines/nf-core/demo
@@ -62,7 +61,7 @@ pipelines/nf-core/demo
 └── workflows
 ```
 
-</details>
+:::
 
 अभी के लिए हम विशेष रूप से pipeline code components (`main.nf`, `workflows`, `subworkflows`, `modules`) और वे एक दूसरे से कैसे संबंधित हैं, इस पर ध्यान केंद्रित करेंगे।
 
@@ -129,8 +128,7 @@ Top level पर, modules को `nf-core` या `local` (nf-core project क�
 tree -L 3 pipelines/nf-core/demo/modules
 ```
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 pipelines/nf-core/demo/modules
@@ -156,7 +154,7 @@ pipelines/nf-core/demo/modules
 9 directories, 9 files
 ```
 
-</details>
+:::
 
 यहाँ तुम देख सकते हो कि `fastqc` और `multiqc` modules `nf-core` modules के भीतर top level पर हैं, जबकि `trim` module उस toolkit के तहत है जिससे वह संबंधित है, `seqtk`।
 `local` के तहत `cowpy` module एक local module है, जो इस pipeline के लिए विशेष रूप से लिखा गया है न कि nf-core modules repository से install किया गया है।
@@ -174,8 +172,7 @@ Modules की तरह, subworkflows को `local` और `nf-core` डाय
 tree -L 3 pipelines/nf-core/demo/subworkflows
 ```
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 pipelines/nf-core/demo/subworkflows
@@ -199,7 +196,7 @@ pipelines/nf-core/demo/subworkflows
 9 directories, 7 files
 ```
 
-</details>
+:::
 
 जैसा कि ऊपर उल्लेख किया गया है, `nf-core/demo` pipeline में कोई analysis-specific subworkflows नहीं हैं, इसलिए यहाँ दिखाई देने वाले सभी subworkflows तथाकथित 'housekeeping' या 'utility' workflows हैं, जैसा कि उनके नामों में `utils_` prefix से पता चलता है।
 ये subworkflows console output में fancy nf-core header produce करते हैं, अन्य accessory functions के साथ।
@@ -268,8 +265,7 @@ nf-core pipelines create
 
 एक बार TUI बंद हो जाने के बाद, तुम्हें निम्नलिखित console output दिखाई देना चाहिए।
 
-<details class="success">
-<summary>कमांड आउटपुट</summary>
+:::success[कमांड आउटपुट]{collapsed}
 
 ```console
                                           ,--./,-.
@@ -284,7 +280,7 @@ nf-core pipelines create
 INFO     Launching interactive nf-core pipeline creation tool.
 ```
 
-</details>
+:::
 
 एक बार TUI समाप्त हो जाने के बाद, tool रिपोर्ट करता है कि उसने pipeline बनाई और नई pipeline के लिए एक local git repository initialize की:
 
@@ -302,8 +298,7 @@ INFO     Pipeline created: ./core-hello
 tree core-hello
 ```
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 core-hello
@@ -362,7 +357,7 @@ core-hello
 14 directories, 37 files
 ```
 
-</details>
+:::
 
 यह बहुत सारी फ़ाइलें हैं!
 चिंता मत करो यदि तुम थोड़ा खोया हुआ महसूस कर रहे हो; हम जल्द ही महत्वपूर्ण भागों के माध्यम से चलेंगे, और फिर course के बाकी हिस्से में step by step।
@@ -441,8 +436,7 @@ plugins {
 tree core-hello-results
 ```
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 core-hello-results
@@ -457,7 +451,7 @@ core-hello-results
 1 directory, 6 files
 ```
 
-</details>
+:::
 
 तुम reports देख सकते हो कि क्या चलाया गया था, और जवाब है: बिल्कुल कुछ भी नहीं!
 
@@ -558,15 +552,14 @@ workflow HELLO {
 
 ये Nextflow की वैकल्पिक विशेषताएं हैं जो workflow को **composable** बनाती हैं, जिसका अर्थ है कि इसे किसी अन्य workflow के भीतर से बुलाया जा सकता है।
 
-<details class="note">
-<summary>`channel.topic` block</summary>
+:::note[`channel.topic` block]{collapsed}
 
 तुमने शायद line 28 से शुरू होने वाला `def topic_versions = channel.topic("versions")` block देखा होगा।
 यह boilerplate housekeeping कोड है जो सभी modules से software version की जानकारी स्वचालित रूप से collect करता है।
 nf-core 2026 में सभी pipelines में इस mechanism को लागू कर रहा है, इसलिए तुम इसे आगे आने वाले सभी नए pipelines में देखोगे।
 इस course का भाग 3 विस्तार से बताता है कि यह कैसे काम करता है।
 
-</details>
+:::
 
 हमें अपनी रुचि की workflow से प्रासंगिक logic को उस structure में plug करने की आवश्यकता है।
 
@@ -601,8 +594,7 @@ nf-core 2026 में सभी pipelines में इस mechanism को ल
 tree original-hello/
 ```
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 original-hello/
@@ -617,7 +609,7 @@ original-hello/
 1 directory, 6 files
 ```
 
-</details>
+:::
 
 अपने आप को संतुष्ट करने के लिए कि यह काम करता है, इसे चलाने के लिए स्वतंत्र महसूस करो:
 
@@ -924,8 +916,7 @@ nextflow run ./original-hello
 
 यदि तुमने सभी बदलाव सही तरीके से किए हैं, तो यह पूरा होने तक चलना चाहिए।
 
-<details class="success">
-<summary>कमांड आउटपुट</summary>
+:::success[कमांड आउटपुट]{collapsed}
 
 ```console
 N E X T F L O W   ~  version 26.04.4
@@ -940,7 +931,7 @@ executor >  local (8)
 Output: /workspaces/training/nfcore-build/work/07/bfc7061fa521e86f4e1954191ab4c4/cowpy-COLLECTED-test-batch-output.txt
 ```
 
-</details>
+:::
 
 इसका मतलब है कि हमने सफलतापूर्वक अपने `HELLO` workflow को composable बनाने के लिए upgrade किया है।
 
@@ -1063,8 +1054,7 @@ cp original-hello/modules/* core-hello/modules/local/.
 tree core-hello/modules
 ```
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 core-hello/modules
@@ -1077,7 +1067,7 @@ core-hello/modules
 1 directory, 4 files
 ```
 
-</details>
+:::
 
 अब आइए module import statements सेट अप करें।
 
@@ -1692,8 +1682,7 @@ nextflow run core-hello --outdir core-hello-results -profile test,docker
 
 यदि तुमने सभी modifications सही तरीके से किए हैं, तो यह पूरा होने तक चलना चाहिए।
 
-<details class="success">
-<summary>कमांड आउटपुट</summary>
+:::success[कमांड आउटपुट]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -1733,7 +1722,7 @@ executor >  local (8)
 -[core/hello] Pipeline completed successfully-
 ```
 
-</details>
+:::
 
 जैसा कि तुम देख सकते हो, initialisation subworkflow की बदौलत शुरुआत में typical nf-core summary produce हुआ, और प्रत्येक module के लिए lines अब पूर्ण `PIPELINE:WORKFLOW:module` नाम दिखाती हैं।
 
@@ -1748,8 +1737,7 @@ executor >  local (8)
 tree core-hello-results
 ```
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 core-hello-results
@@ -1769,7 +1757,7 @@ core-hello-results
 1 directory, 11 files
 ```
 
-</details>
+:::
 
 तुम देख सकते हो कि पहले run से मिले reports के अलावा हमें execution reports का एक और set मिला, जब workflow अभी भी सिर्फ एक placeholder था।
 इस बार तुम अपेक्षानुसार चलाए गए सभी tasks देखते हो।
@@ -1789,8 +1777,7 @@ core-hello-results
 tree results
 ```
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 results
@@ -1808,7 +1795,7 @@ results
 0 directories, 10 files
 ```
 
-</details>
+:::
 
 आह, वे वहाँ हैं, original Hello pipeline के पहले के runs के outputs के साथ मिश्रित।
 

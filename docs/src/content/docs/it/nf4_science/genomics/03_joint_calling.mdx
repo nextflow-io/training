@@ -8,8 +8,7 @@ description: In precedenza, avete costruito una pipeline di variant calling per-
 In precedenza, avete costruito una pipeline di variant calling per-campione che processava i dati di ciascun campione in modo indipendente.
 Ora la estenderemo per implementare il joint variant calling, come descritto nella [Parte 1](01_method.mdx) (caso d'uso multi-campione).
 
-<details class="info">
-<summary>Come iniziare da questa sezione</summary>
+:::info[Come iniziare da questa sezione]{collapsed}
 
 Questa sezione del corso presuppone che abbiate completato la [Parte 1: Panoramica del metodo](./01_method.mdx), la [Parte 2: Variant calling per-campione](./02_per_sample_variant_calling.mdx) e che abbiate una pipeline `genomics.nf` funzionante.
 
@@ -29,7 +28,7 @@ Potete verificare che funzioni correttamente eseguendo il seguente comando:
 nextflow run genomics.nf -profile test
 ```
 
-</details>
+:::
 
 ## Compito
 
@@ -237,8 +236,7 @@ Outputs:
 
 L'output di Nextflow appare uguale a prima, ma i file `.g.vcf` e i loro file indice sono ora organizzati in sottodirectory.
 
-<details class="abstract">
-<summary>Contenuto della directory (symlink abbreviati)</summary>
+:::abstract[Contenuto della directory (symlink abbreviati)]{collapsed}
 
 ```console
 results/
@@ -258,7 +256,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Se aprite uno dei file GVCF e scorrete attraverso di esso, potete verificare che GATK HaplotypeCaller abbia prodotto file GVCF come richiesto.
 
@@ -703,8 +701,7 @@ Outputs:
 I primi due passaggi sono in cache dall'esecuzione precedente, e il nuovo passaggio `GATK_JOINTGENOTYPING` viene eseguito una volta sugli input raccolti da tutti e tre i campioni.
 Il file di output finale, `family_trio.joint.vcf` (e il suo indice), sono nella directory results.
 
-<details class="abstract">
-<summary>Contenuto della directory (symlink abbreviati)</summary>
+:::abstract[Contenuto della directory (symlink abbreviati)]{collapsed}
 
 ```console
 results/
@@ -726,7 +723,7 @@ results/
     └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Se aprite il file VCF joint, potete verificare che il flusso di lavoro abbia prodotto le chiamate di varianti attese.
 

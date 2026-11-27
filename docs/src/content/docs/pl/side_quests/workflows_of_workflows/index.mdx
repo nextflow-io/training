@@ -404,8 +404,7 @@ Outputs:
     - greetings/Alice-output.txt
 ```
 
-<details class="abstract">
-<summary>Nowa zawartość dodana do `results/`</summary>
+:::abstract[Nowa zawartość dodana do `results/`]{collapsed}
 
 ```console
 results/
@@ -418,16 +417,15 @@ results/
 Sześć plików z samodzielnego uruchomienia w sekcji 1.1 (`Alice-output.txt`, `timestamped_Alice-output.txt` itd.) nadal znajduje się w `results/` obok nowego podkatalogu `greetings/`.
 Jest to oczekiwane: nic w tej lekcji ich nie usuwa, a sekcja 2.1 odczytuje je bezpośrednio jako wejście.
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="results/greetings/Alice-output.txt"
 Hello, Alice!
 ```
 
-</details>
+:::
 
 Pliki z powitaniami są publikowane do `results/greetings/`.
 Główny workflow wywołuje `GREETING_WORKFLOW` i przekazuje jego wyjście bezpośrednio do sekcji `publish:`.
@@ -674,8 +672,7 @@ Outputs:
     - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
 ```
 
-<details class="abstract">
-<summary>Nowa zawartość dodana do `results/`</summary>
+:::abstract[Nowa zawartość dodana do `results/`]{collapsed}
 
 ```console
 results/
@@ -696,16 +693,15 @@ results/
 W katalogu głównym `results/` nadal znajdują się też pozostałości po samodzielnych uruchomieniach z sekcji 1.1 i 2.1 (`Alice-output.txt`, `timestamped_Alice-output.txt`, `UPPER-timestamped_Alice-output.txt` itd.).
 Jest to oczekiwane: ta lekcja nigdzie nie instruuje Cię, aby je usunąć.
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
 !ECILA ,OLLEH ]54:84:81 31-90-6202[
 ```
 
-</details>
+:::
 
 Pipeline działa od początku do końca: powitanie zostało zamienione na wielkie litery i odwrócone.
 

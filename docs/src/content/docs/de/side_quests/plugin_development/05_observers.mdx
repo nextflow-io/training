@@ -260,13 +260,12 @@ Pipeline complete! 👋
 Der Observer funktioniert.
 Jedes Mal, wenn eine Aufgabe abgeschlossen wird, ruft Nextflow `onProcessComplete` auf, und unsere Implementierung gibt eine Meldung aus.
 
-<details class="exercise">
-<summary>Die Meldung anpassen</summary>
+:::exercise[Die Meldung anpassen]{collapsed}
 
 Ändere die Meldung in `onProcessComplete` nach deinen Wünschen, baue neu und führe die Pipeline erneut aus.
 Das bestätigt, dass der vollständige Bearbeiten-Bauen-Ausführen-Zyklus für Observers funktioniert.
 
-</details>
+:::
 
 ### 2.4. Zähllogik hinzufügen
 
@@ -324,8 +323,7 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-<details class="example">
-<summary>Ausgabe</summary>
+:::example[Ausgabe]{collapsed}
 
 ```console
 N E X T F L O W  ~  version 26.04.4
@@ -357,7 +355,7 @@ Pipeline complete! 👋
 
 Die Zählermeldungen sind mit den Aufgaben-Einreichungen vermischt, weil Observers ausgeführt werden, wenn Aufgaben abgeschlossen werden.
 
-</details>
+:::
 
 ---
 

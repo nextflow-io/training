@@ -221,15 +221,14 @@ Udostępnia funkcję `samplesheetToList`, która parsuje pliki CSV/TSV przy uży
 Pipeline aktualnie odczytuje `greetings.csv` przy użyciu `splitCsv` i ręcznego `map`, ale nf-schema może zastąpić to walidowanym parsowaniem opartym na schemacie.
 Plik schematu JSON (`greetings_schema.json`) jest już dostępny w katalogu ćwiczenia.
 
-<details class="info">
-<summary>Czym jest schemat?</summary>
+:::info[Czym jest schemat?]{collapsed}
 
 Schemat to formalna definicja tego, jak powinny wyglądać poprawne dane.
 Określa takie rzeczy jak oczekiwane kolumny, typ każdej wartości (string, liczba itp.) oraz które pola są wymagane.
 
 Można go traktować jak kontrakt: jeśli dane wejściowe nie pasują do schematu, narzędzie może wykryć problem wcześnie, zamiast pozwolić mu powodować mylące błędy w dalszej części pipeline'u.
 
-</details>
+:::
 
 #### 2.2.1. Przyjrzyj się schematowi
 
@@ -568,8 +567,7 @@ INFO - [nf-co2footprint] 🌱 The workflow run used 126.76 uWh of electricity, r
 
 Wtyczka generuje pliki wyjściowe w Twoim katalogu roboczym:
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 co2footprint_report_<timestamp>.html
@@ -577,10 +575,9 @@ co2footprint_summary_<timestamp>.txt
 co2footprint_trace_<timestamp>.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="co2footprint_summary_<timestamp>.txt"
 Total CO₂e footprint measures of this workflow run (including cached tasks):
@@ -594,7 +591,7 @@ Which equals:
   - 1.22E-7 % of a flight from Paris to London
 ```
 
-</details>
+:::
 
 (Twoje liczby będą inne.)
 

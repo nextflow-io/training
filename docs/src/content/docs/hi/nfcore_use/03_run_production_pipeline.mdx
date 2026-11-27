@@ -113,8 +113,7 @@ withLabel:process_low {
 
 हम तुम्हें एक custom config फ़ाइल प्रदान करते हैं जो label-based resource defaults को override करती है।
 
-<details class="full-code">
-<summary>laptop.config</summary>
+:::full-code[laptop.config]{collapsed}
 
 ```nextflow title="laptop.config"
 process {
@@ -136,7 +135,7 @@ process {
 }
 ```
 
-</details>
+:::
 
 [भाग 2](./02_configure_execution.mdx) ने `withName:` को एक प्रोसेस को नाम से target करने के लिए पेश किया था।
 यहाँ हम `withLabel:` का उपयोग करते हैं ताकि एक साथ उन सभी प्रोसेस को target किया जा सके जो एक label साझा करते हैं।

@@ -57,8 +57,7 @@ code .
 
 Encontrarás un conjunto de workflows de ejemplo con varios tipos de errores que usaremos para practicar:
 
-<details class="abstract">
-<summary>Contenido del directorio</summary>
+:::abstract[Contenido del directorio]{collapsed}
 
 ```console
 .
@@ -87,7 +86,7 @@ Encontrarás un conjunto de workflows de ejemplo con varios tipos de errores que
 └── no_such_var.nf
 ```
 
-</details>
+:::
 
 Estos archivos representan escenarios de depuración comunes que encontrarás en el desarrollo del mundo real.
 
@@ -2287,8 +2286,7 @@ nextflow run buggy_workflow.nf -stub-run
 nextflow run buggy_workflow.nf -resume
 ```
 
-<details class="solution">
-<summary>Solución</summary>
+:::solution[Solución]{collapsed}
 
 El `buggy_workflow.nf` contiene 10 errores distintos que cubren todas las categorías principales de depuración. Aquí hay un desglose sistemático de cada error y cómo corregirlo, en el orden en que realmente los encuentras en Nextflow 26.04. El compilador resuelve el workflow en dos pasadas: primero analiza la sintaxis, luego verifica estáticamente que cada variable esté definida. Por lo tanto, primero se corrigen los errores de sintaxis, luego un conjunto de errores de variables no definidas, antes de que el workflow se ejecute y comiencen los errores en tiempo de ejecución.
 
@@ -2533,7 +2531,7 @@ output {
 }
 ```
 
-</details>
+:::
 :::
 
 **Categorías de errores cubiertas:**

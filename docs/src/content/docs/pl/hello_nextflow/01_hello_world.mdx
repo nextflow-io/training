@@ -20,13 +20,12 @@ Zobacz [całą playlistę](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuz
 
 W tej pierwszej części kursu Hello Nextflow łagodnie wprowadzamy temat prostym, niezależnym od dziedziny przykładem Hello World, który będziemy stopniowo rozbudowywać, aby zademonstrować użycie podstawowych elementów logiki i komponentów Nextflow'a.
 
-<details class="info">
-<summary>Czym jest przykład Hello World?</summary>
+:::info[Czym jest przykład Hello World?]{collapsed}
 
 "Hello World!" to minimalistyczny przykład, który ma na celu zademonstrowanie podstawowej składni i struktury języka programowania lub frameworka oprogramowania.
 Przykład zazwyczaj polega na wypisaniu frazy "Hello, World!" na urządzeniu wyjściowym, takim jak konsola lub terminal, lub zapisaniu jej do pliku.
 
-</details>
+:::
 
 ---
 
@@ -65,14 +64,13 @@ To nie wyświetla niczego w terminalu.
 Tekst 'Hello World' powinien teraz znajdować się w pliku wyjściowym, który określiliśmy, o nazwie `output.txt`.
 Możesz go otworzyć w eksploratorze plików lub z wiersza poleceń używając na przykład narzędzia `cat`.
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 To jest to, co spróbujemy odtworzyć w naszym pierwszym workflow'ie Nextflow'a.
 
@@ -97,8 +95,7 @@ Następnie uruchomimy go i poszukamy jego wyjść.
 
 Skrypt `hello-world.nf` znajdziesz w Swoim bieżącym katalogu, którym powinien być `hello-nextflow`. Otwórz go w panelu edytora.
 
-<details class="full-code">
-<summary>Pełny plik kodu</summary>
+:::full-code[Pełny plik kodu]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
@@ -125,7 +122,7 @@ workflow {
 }
 ```
 
-</details>
+:::
 
 Skrypt workflow'u Nextflow'a zazwyczaj zawiera jedną lub więcej definicji [**process**](https://nextflow.io/docs/latest/process.html) oraz sam [**workflow**](https://nextflow.io/docs/latest/workflow.html), plus kilka opcjonalnych bloków (nieobecnych tutaj), które wprowadzimy później.
 
@@ -247,8 +244,7 @@ Patrząc na to, co otrzymaliśmy dla uruchomienia pokazanego powyżej, linia dzi
 
 Zobaczmy, co tam jest.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 work
@@ -264,10 +260,9 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
-<details class="question">
-<summary>Nie widzisz tego samego?</summary>
+:::question[Nie widzisz tego samego?]{collapsed}
 
 Dokładne nazwy podkatalogów będą różne w Twoim systemie.
 
@@ -278,19 +273,18 @@ Jednak pliki dziennika są ustawione jako niewidoczne w terminalu, więc jeśli 
 tree -a work
 ```
 
-</details>
+:::
 
 Pierwszą rzeczą, na którą chcesz spojrzeć, jest faktyczne wyjście workflow'u, czyli plik `output.txt` utworzony przez proces `sayHello`.
 Otwórz go, a znajdziesz pozdrowienie `Hello World!`, które było celem naszego minimalistycznego workflow'u.
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="output.txt"
 Hello World!
 ```
 
-</details>
+:::
 
 Zadziałało!
 
@@ -308,15 +302,14 @@ To powiedziawszy, przyjrzyjmy się również innym plikom w tym katalogu. To są
 
 Plik `.command.sh` jest szczególnie przydatny, ponieważ mówi Ci główne polecenie, które Nextflow wykonał, nie włączając w to całej księgowości i konfiguracji zadania/środowiska.
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title=".command.sh"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
-</details>
+:::
 
 To pasuje do tego, co wcześniej uruchomiliśmy ręcznie.
 
@@ -327,8 +320,7 @@ To sprawia, że szczególnie cenne jest móc zobaczyć dokładnie, jak Nextflow 
 
 Spróbuj uruchomić workflow jeszcze kilka razy, a następnie spójrz na katalogi zadań w `work/`.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console
 work
@@ -383,7 +375,7 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
 Widzisz, że dla każdego uruchomienia został utworzony nowy podkatalog z kompletnym zestawem plików wyjściowych i dziennika.
 To pokazuje, że uruchomienie tego samego workflow'u kilka razy nie nadpisze wyników poprzednich uruchomień.
@@ -514,8 +506,7 @@ Wyjście terminala kończy się teraz podsumowaniem `Outputs:`, które wymienia 
 
 Sprawdź eksplorator plików: tym razem Nextflow utworzył również nowy katalog o nazwie `results/`.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console {10-11,22}
 .
@@ -542,7 +533,7 @@ Sprawdź eksplorator plików: tym razem Nextflow utworzył również nowy katalo
     └── 9f
 ```
 
-</details>
+:::
 
 Wewnątrz katalogu `results` znajdziemy dowiązanie symboliczne do pliku `output.txt` utworzonego w katalogu work przez polecenie, które właśnie uruchomiliśmy.
 
@@ -605,8 +596,7 @@ Outputs:
 
 Tym razem wynik jest zapisywany w określonym podkatalogu.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console {2-3}
 results/
@@ -615,7 +605,7 @@ results/
 └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
 ```
 
-</details>
+:::
 
 Widzisz, że wynik z poprzedniego wykonania nadal tam jest.
 
@@ -687,8 +677,7 @@ Outputs:
 
 Tym razem, jeśli spojrzysz na wyniki, plik jest właściwą kopią, a nie tylko dowiązaniem symbolicznym.
 
-<details class="abstract">
-<summary>Zawartość katalogu</summary>
+:::abstract[Zawartość katalogu]{collapsed}
 
 ```console {3}
 results/
@@ -697,7 +686,7 @@ results/
 └── output.txt -> /workspaces/training/hello-nextflow/work/65/f56f2cd75df1352e106fcdd084b97b/output.txt
 ```
 
-</details>
+:::
 
 Ponieważ to również jest ustawiane na poziomie pojedynczego wyjścia, pozwala to ustawić tryb publikowania w sposób szczegółowy.
 To będzie szczególnie przydatne później, gdy przejdziemy do wieloetapowych pipeline'ów, gdzie możesz chcieć kopiować tylko końcowe wyjścia i zostawiać pośrednie wyjścia jako dowiązania symboliczne, na przykład.
@@ -876,14 +865,13 @@ Jeśli wprowadzono wszystkie te edycje poprawnie, powinieneś uzyskać kolejne p
 
 Koniecznie otwórz plik wyjściowy, aby sprawdzić, czy masz teraz nową wersję pozdrowienia.
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Bonjour le monde!
 ```
 
-</details>
+:::
 
 Et voilà!
 
@@ -946,8 +934,7 @@ Outputs:
   first_output: hello_world/output.txt
 ```
 
-<details class="question">
-<summary>Jeśli nie zadziałało</summary>
+:::question[Jeśli nie zadziałało]{collapsed}
 
 Jeśli to nie powiodło się z błędem, który wygląda tak:
 
@@ -976,18 +963,17 @@ Na wersji starszej niż 26.04 musisz włączyć parser języka v2:
 export NXF_SYNTAX_PARSER=v2
 ```
 
-</details>
+:::
 
 Wyjście będzie w tym samym miejscu co poprzednio, ale zawartość powinna być zaktualizowana o nowy tekst.
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Hola mundo!
 ```
 
-</details>
+:::
 
 Nextflow użył domyślnej wartości parametru greeting do utworzenia wyjścia.
 
@@ -1016,14 +1002,13 @@ Outputs:
 
 Po raz kolejny powinieneś znaleźć odpowiednie zaktualizowane wyjście w Swoim katalogu wyników.
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```console title="results/hello_world/output.txt"
 Konnichiwa!
 ```
 
-</details>
+:::
 
 :::note[Uwaga]
 W Nextflow'ie istnieje wiele miejsc, gdzie możesz określić wartości dla parametrów.
@@ -1097,8 +1082,7 @@ Oto jak to zrobić.
 
 Za każdym razem, gdy uruchamiasz workflow Nextflow'a, linia jest zapisywana do pliku dziennika o nazwie `history`, w ukrytym katalogu o nazwie `.nextflow` w bieżącym katalogu roboczym.
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```txt title=".nextflow/history" showLineNumbers
 2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'
@@ -1108,7 +1092,7 @@ Za każdym razem, gdy uruchamiasz workflow Nextflow'a, linia jest zapisywana do 
 2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
 ```
 
-</details>
+:::
 
 Ten plik zawiera znacznik czasu, nazwę uruchomienia, status, ID rewizji, ID sesji i pełny wiersz poleceń dla każdego uruchomienia Nextflow'a, które zostało uruchomione z bieżącego katalogu roboczego.
 

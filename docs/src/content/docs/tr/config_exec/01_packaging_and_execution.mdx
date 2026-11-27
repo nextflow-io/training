@@ -122,13 +122,12 @@ Yeni bir Conda ortamı oluşturmak, ilk seferinde bir konteyner çekmekten biraz
 docker.enabled = true
 ```
 
-<details class="tip">
-<summary>Docker ve Conda'yı Birlikte Kullanma</summary>
+:::tip[Docker ve Conda'yı Birlikte Kullanma]{collapsed}
 
 Bu ayarlar süreç bazında kapsamlandırıldığından, Docker ve Conda'yı karıştırabilirsiniz: bazı süreçler Docker, diğerleri Conda kullanır; bu tercih her araç için neyin mevcut olduğuna bağlıdır.
 Aynı süreç için hem `container` yönergesi (pipeline kodunda) hem de `conda` yönergesi (burada, yapılandırmadan) ayarlanmışsa ve her iki paketleme sistemi de etkinleştirilmişse, Nextflow konteynerlere öncelik verir.
 
-</details>
+:::
 
 ### Özetle
 
@@ -176,8 +175,7 @@ Eğitim ortamı bir HPC kümesine bağlı değildir; dolayısıyla bunu burada �
 Çoğu HPC platformu, iş gönderimlerinde CPU, bellek ve kuyruk adı gibi kaynak taleplerinin kendi sözdizimiyle belirtilmesini gerektirir.
 `my-science-work` adlı bir kuyrukta 8 CPU ve 4 GB RAM için yapılan aynı talep, zamanlayıcıya göre tamamen farklı görünür.
 
-<details class="abstract">
-<summary>Örnekler</summary>
+:::abstract[Örnekler]{collapsed}
 
 ```bash title="Config for SLURM / submit using sbatch"
 #SBATCH -o /path/to/my/task/directory/my-task-1.log
@@ -205,7 +203,7 @@ Eğitim ortamı bir HPC kümesine bağlı değildir; dolayısıyla bunu burada �
 #$ -l h_rss=4096M,mem_free=4096M
 ```
 
-</details>
+:::
 
 Nextflow tüm bunları soyutlar: `cpus`, `memory` ve `queue` gibi standartlaştırılmış özellikleri bir kez belirtirsiniz (tam liste için [süreç yönergelerine](https://nextflow.io/docs/latest/reference/process.html#process-directives) bakın); Nextflow bunları çalışma zamanında uygun arka uca özgü betiklere dönüştürür.
 

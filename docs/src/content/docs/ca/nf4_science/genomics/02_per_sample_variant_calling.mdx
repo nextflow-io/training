@@ -21,8 +21,7 @@ Això automatitza els passos de la primera secció de [Part 1: Visió general de
 
 Com a punt de partida, us proporcionem un fitxer de workflow, `genomics.nf`, que esbossa les parts principals del workflow, així com dos fitxers de mòdul, `samtools_index.nf` i `gatk_haplotypecaller.nf`, que esbossen l'estructura de cada procés.
 
-<details class="full-code">
-<summary>Fitxers base</summary>
+:::full-code[Fitxers base]{collapsed}
 
 ```nextflow title="genomics.nf"
 #!/usr/bin/env nextflow
@@ -93,7 +92,7 @@ process GATK_HAPLOTYPECALLER {
 }
 ```
 
-</details>
+:::
 
 Aquests fitxers no són funcionals; el seu propòsit és només servir com a base perquè ompliu les parts interessants del codi.
 
@@ -419,8 +418,7 @@ Outputs:
 
 Podeu comprovar que el fitxer d'índex s'ha generat correctament mirant al directori de treball o al directori de resultats.
 
-<details class="abstract">
-<summary>Contingut del directori work</summary>
+:::abstract[Contingut del directori work]{collapsed}
 
 ```console
 work/ad/b2c9bf4af404ef7cf63e0aa3887f65
@@ -428,10 +426,9 @@ work/ad/b2c9bf4af404ef7cf63e0aa3887f65
 └── reads_mother.bam.bai
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contingut del directori de resultats</summary>
+:::abstract[Contingut del directori de resultats]{collapsed}
 
 ```console
 results/
@@ -439,7 +436,7 @@ results/
     └── reads_mother.bam.bai -> ...
 ```
 
-</details>
+:::
 
 Aquí està!
 
@@ -806,8 +803,7 @@ El primer procés es va ometre gràcies a la memòria cau, com s'esperava, mentr
 
 Trobareu els fitxers de sortida al directori de resultats (com a enllaços simbòlics al directori de treball).
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 results/
@@ -818,12 +814,11 @@ results/
     └── reads_mother.bam.vcf.idx -> ...
 ```
 
-</details>
+:::
 
 Si obriu el fitxer VCF, hauríeu de veure el mateix contingut que al fitxer que vau generar executant la comanda GATK directament al contenidor.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="reads_mother.bam.vcf" showLineNumbers startLineNumber=26
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
@@ -832,7 +827,7 @@ Si obriu el fitxer VCF, hauríeu de veure el mateix contingut que al fitxer que 
 20_10037292_10066351	3529	.	T	A	155.64	.	AC=1;AF=0.500;AN=2;BaseQRankSum=-0.544;DP=21;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=7.78;ReadPosRankSum=-1.158;SOR=1.034	GT:AD:DP:GQ:PL	0/1:12,8:20:99:163,0,328
 ```
 
-</details>
+:::
 
 Aquesta és la sortida que ens interessa generar per a cada mostra del nostre estudi.
 
@@ -916,8 +911,7 @@ nextflow run genomics.nf -profile test -resume
 
 Cosa curiosa: això _pot funcionar_, O _pot fallar_. Per exemple, aquí hi ha una execució que va tenir èxit:
 
-<details class="success">
-<summary>Sortida de la comanda</summary>
+:::success[Sortida de la comanda]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -948,12 +942,11 @@ Outputs:
     - vcf/reads_father.bam.vcf.idx
 ```
 
-</details>
+:::
 
 Si la vostra execució del workflow va tenir èxit, executeu-la de nou fins que obtingueu un error com aquest:
 
-<details class="failure">
-<summary>Sortida de la comanda</summary>
+:::failure[Sortida de la comanda]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -981,7 +974,7 @@ Command error:
   ...
 ```
 
-</details>
+:::
 
 Si mireu la sortida d'error de la comanda GATK, hi haurà una línia com aquesta:
 
@@ -999,8 +992,7 @@ Inspeccionarem els directoris de treball i utilitzarem l'operador `view()` per e
 
 Doneu una ullada dins del directori de treball per a la crida del procés `GATK_HAPLOTYPECALLER` fallida llistada a la sortida de la consola.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 work/3f/e775e3104e279ca5f292bf7b652f3e
@@ -1014,7 +1006,7 @@ work/3f/e775e3104e279ca5f292bf7b652f3e
 └── ref.fasta.fai -> /workspaces/training/nf4-science/genomics/data/ref/ref.fasta.fai
 ```
 
-</details>
+:::
 
 Presteu especial atenció als noms del fitxer BAM i l'índex BAM que estan llistats en aquest directori: `reads_son.bam` i `reads_father.bam.bai`.
 
@@ -1217,8 +1209,7 @@ nextflow run genomics.nf -profile test
 
 Aquesta vegada (i cada vegada) tot hauria de funcionar correctament:
 
-<details class="success">
-<summary>Sortida de la comanda</summary>
+:::success[Sortida de la comanda]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -1249,12 +1240,11 @@ Outputs:
     - vcf/reads_father.bam.vcf.idx
 ```
 
-</details>
+:::
 
 El directori de resultats ara conté tant fitxers BAM com BAI per a cada mostra (de la tupla), juntament amb les sortides VCF:
 
-<details class="abstract">
-<summary>Contingut del directori de resultats</summary>
+:::abstract[Contingut del directori de resultats]{collapsed}
 
 ```console
 results/
@@ -1274,7 +1264,7 @@ results/
     └── reads_son.bam.vcf.idx -> ...
 ```
 
-</details>
+:::
 
 Agrupant fitxers associats en tuples, vam assegurar que els fitxers correctes sempre viatgen junts pel workflow.
 El workflow ara processa qualsevol nombre de mostres de manera fiable, però llistar-les individualment a la configuració no és molt escalable.

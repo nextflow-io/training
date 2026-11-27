@@ -36,12 +36,11 @@ Nextflow YouTube 채널에서 [전체 재생목록](https://youtube.com/playlist
 3. 최종 출력 파일의 이름을 지정하는 매개변수를 추가하고 이를 수집 단계에 보조 입력으로 전달
 4. 수집 단계에서 처리된 내용에 대한 간단한 통계도 보고하도록 설정
 
-<details class="info">
-<summary>이 섹션을 시작하는 방법</summary>
+:::info[이 섹션을 시작하는 방법]{collapsed}
 
 이 섹션은 [Hello Nextflow](./index.mdx) 과정의 파트 1-2를 완료했다고 가정하지만, 해당 섹션에서 다룬 기본 사항에 익숙하다면 특별한 준비 없이 여기서 시작할 수 있습니다.
 
-</details>
+:::
 
 ---
 
@@ -90,8 +89,7 @@ Outputs:
 이전과 마찬가지로 `output` 블록에 지정된 위치에서 출력 파일을 찾을 수 있습니다.
 이 장에서는 `results/hello_workflow/` 아래에 있습니다.
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console
 results/hello_workflow
@@ -100,7 +98,7 @@ results/hello_workflow
 └── Hola-output.txt
 ```
 
-</details>
+:::
 
 이것이 정상적으로 작동했다면 다단계 워크플로우를 구성하는 방법을 학습할 준비가 되었습니다.
 
@@ -136,14 +134,13 @@ echo 'Hello World' | tr '[a-z]' '[A-Z]' > UPPER-output.txt
 
 출력은 `Hello World` 문자열의 대문자 버전이 포함된 `UPPER-output.txt`라는 텍스트 파일입니다.
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="UPPER-output.txt"
 HELLO WORLD
 ```
 
-</details>
+:::
 
 이것이 기본적으로 워크플로우로 수행하려는 것입니다.
 
@@ -347,8 +344,7 @@ Outputs:
 
 `output` 블록에 설정된 대로 `results/hello_workflow` 디렉토리에서 출력을 찾을 수 있습니다.
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console
 results/hello_workflow/
@@ -360,12 +356,11 @@ results/hello_workflow/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 편리합니다! 하지만 두 번째 프로세스 호출 중 하나의 work 디렉토리를 살펴볼 가치가 있습니다.
 
-<details class="abstract">
-<summary>디렉토리 내용</summary>
+:::abstract[디렉토리 내용]{collapsed}
 
 ```console
 work/e0/ecf81b4cacc648b9b994218d5b29d7/
@@ -373,7 +368,7 @@ work/e0/ecf81b4cacc648b9b994218d5b29d7/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 두 개의 `*-output` 파일이 있습니다: 첫 번째 프로세스의 출력과 두 번째의 출력입니다.
 
@@ -424,8 +419,7 @@ cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLL
 
 출력은 원래 인사말의 대문자 버전이 포함된 `COLLECTED-output.txt`라는 텍스트 파일입니다.
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="COLLECTED-output.txt"
 HELLO
@@ -433,7 +427,7 @@ BONJOUR
 HOLA
 ```
 
-</details>
+:::
 
 이것이 워크플로우로 달성하려는 결과입니다.
 
@@ -666,14 +660,13 @@ Outputs:
 
 이제 최종 출력 파일의 내용을 살펴보십시오.
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-output.txt"
 HOLA
 ```
 
-</details>
+:::
 
 이런. 수집 단계가 각 인사말에 대해 개별적으로 실행되었으며, 이것은 우리가 원했던 것이 아닙니다.
 
@@ -787,8 +780,7 @@ Outputs:
 
 마지막으로, 출력 파일의 내용을 살펴보고 모든 것이 올바르게 작동했는지 확인합니다.
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-output.txt"
 BONJOUR
@@ -796,7 +788,7 @@ HELLO
 HOLA
 ```
 
-</details>
+:::
 
 이번에는 최종 출력 파일에 세 개의 인사말이 모두 있습니다. 성공입니다!
 
@@ -1012,8 +1004,7 @@ Outputs:
 
 성공적으로 실행되고 원하는 출력을 생성합니다:
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-trio-output.txt"
 HELLO
@@ -1021,7 +1012,7 @@ BONJOUR
 HOLA
 ```
 
-</details>
+:::
 
 이제 매개변수를 적절하게 지정하는 한 다른 입력 배치에 대한 후속 실행은 이전 결과를 덮어쓰지 않습니다.
 
@@ -1241,14 +1232,13 @@ Outputs:
 `results/hello_workflow/` 디렉토리를 보면 새 보고 파일인 `trio-report.txt`를 찾을 수 있습니다.
 열어서 워크플로우가 처리된 인사말 수를 올바르게 보고했는지 확인하십시오.
 
-<details class="abstract">
-<summary>파일 내용</summary>
+:::abstract[파일 내용]{collapsed}
 
 ```txt title="trio-report.txt"
 There were 3 greetings in this batch.
 ```
 
-</details>
+:::
 
 ![](../../hello_nextflow/img/hello-collect-4-way.excalidraw.svg)
 

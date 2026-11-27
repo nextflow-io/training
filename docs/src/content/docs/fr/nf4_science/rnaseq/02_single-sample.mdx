@@ -26,8 +26,7 @@ Cela automatise les étapes de la première section de la [Partie 1 : Aperçu de
 
 Comme point de départ, nous vous fournissons un fichier de workflow, `rnaseq.nf`, qui décrit les parties principales du workflow, ainsi que quatre fichiers de modules dans le répertoire `modules/` (`fastqc.nf`, `trim_galore.nf`, `hisat2_align.nf`, et `multiqc.nf`) qui décrivent la structure de chaque processus.
 
-<details class="full-code">
-<summary>Fichiers squelettes</summary>
+:::full-code[Fichiers squelettes]{collapsed}
 
 ```nextflow title="rnaseq.nf"
 #!/usr/bin/env nextflow
@@ -140,7 +139,7 @@ process MULTIQC {
 }
 ```
 
-</details>
+:::
 
 Ces fichiers ne sont pas fonctionnels ; leur but est simplement de servir de squelettes que vous remplirez avec les parties intéressantes du code.
 

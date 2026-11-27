@@ -29,12 +29,11 @@ Els canals són cues dissenyades per gestionar entrades de manera eficient i tra
 En aquesta part del curs, aprendreu com utilitzar un canal per gestionar múltiples entrades de diverses fonts diferents.
 També aprendreu a utilitzar [**operadors**](https://nextflow.io/docs/latest/reference/operator.html) per transformar el contingut dels canals segons sigui necessari.
 
-<details class="info">
-<summary>Com començar des d'aquesta secció</summary>
+:::info[Com començar des d'aquesta secció]{collapsed}
 
 Aquesta secció del curs assumeix que heu completat la Part 1 del curs [Hello Nextflow](./index.mdx), però si us sentiu còmodes amb els conceptes bàsics tractats en aquella secció, podeu començar des d'aquí sense fer res especial.
 
-</details>
+:::
 
 ---
 
@@ -73,8 +72,7 @@ Outputs:
 
 Com abans, trobareu el fitxer de sortida anomenat `output.txt` al directori `results/hello_channels` (tal com s'especifica al bloc `output` de l'script de workflow, mostrat més amunt).
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console {2-3} title="results/hello_channels"
 results
@@ -85,16 +83,15 @@ results
 └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hello Channels!
 ```
 
-</details>
+:::
 
 Si això us ha funcionat, esteu preparats per aprendre sobre els canals.
 
@@ -225,14 +222,13 @@ Outputs:
 Si heu fet les dues edicions correctament, hauríeu d'obtenir una execució exitosa.
 Podeu comprovar el directori de resultats per assegurar-vos que el resultat és encara el mateix que abans.
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hello Channels!
 ```
 
-</details>
+:::
 
 Així que hem augmentat la flexibilitat del nostre workflow mentre aconseguim el mateix resultat final.
 Això pot semblar que estem escrivint més codi sense cap benefici tangible, però el valor quedarà clar tan aviat com comencem a gestionar més entrades.
@@ -382,8 +378,7 @@ El monitor d'execució mostra que es van fer `3 de 3` crides al procés `sayHell
 
 No obstant això, encara només hi ha una sortida al directori de resultats:
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console {3} title="results/hello_channels"
 results
@@ -394,16 +389,15 @@ results
 └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hola
 ```
 
-</details>
+:::
 
 Hauríeu de veure una de les tres salutacions allà, encara que la que heu obtingut pot ser diferent del que es mostra aquí.
 Podeu pensar per què podria ser això?
@@ -415,8 +409,7 @@ _Al diagrama, el canal es representa en verd, i l'ordre dels elements es represe
 Mirant enrere al monitor d'execució, només ens va donar un camí de subdirectori (`f4/c9962c`).
 Donem-hi una ullada.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console {9}
 work/f4/c9962ce91ef87480babcb86b2b9042/
@@ -430,16 +423,15 @@ work/f4/c9962ce91ef87480babcb86b2b9042/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="work/f4/c9962ce91ef87480babcb86b2b9042/output.txt"
 Hello
 ```
 
-</details>
+:::
 
 Aquesta ni tan sols és la mateixa salutació que vam obtenir al directori de resultats! Què està passant?
 
@@ -488,8 +480,7 @@ En aquest mode expandit, només informa que es van enviar.
 
 De totes maneres, ara que tenim els subdirectoris de cada crida de procés, podem buscar els seus registres i sortides.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 work/23/871c7ec3642a898ecd5e6090d21300/
@@ -527,10 +518,9 @@ work/f4/ea10a680d5687596d3eaa3fcf69272/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```txt title="work/23/871c7ec3642a898ecd5e6090d21300/output.txt"
 Bonjour
@@ -544,7 +534,7 @@ Hello
 Hola
 ```
 
-</details>
+:::
 
 Això mostra que els tres processos s'han executat amb èxit (visca).
 
@@ -646,8 +636,7 @@ Outputs:
 Tornant a la vista de resum, la sortida es resumeix en una línia de nou.
 Doneu una ullada al directori `results` per veure si totes les salutacions de sortida hi són.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 results/hello_channels/
@@ -657,10 +646,9 @@ results/hello_channels/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Contingut del fitxer</summary>
+:::abstract[Contingut del fitxer]{collapsed}
 
 ```console title="Bonjour-output.txt"
 Bonjour
@@ -674,7 +662,7 @@ Hello
 Hola
 ```
 
-</details>
+:::
 
 Èxit! Ara podem afegir tantes salutacions com vulguem sense preocupar-nos que els fitxers de sortida siguin sobreescrits.
 

@@ -9,8 +9,7 @@ Anteriorment, heu construït un pipeline de detecció de variants per mostra que
 En aquesta part del curs, portarem el nostre workflow senzill al següent nivell convertint-lo en una potent eina d'automatització per lots capaç de gestionar un nombre arbitrari de mostres.
 I mentre hi som, també l'actualitzarem perquè esperi dades paired-end, que són més comunes en estudis recents.
 
-<details class="info">
-<summary>Com començar des d'aquesta secció</summary>
+:::info[Com començar des d'aquesta secció]{collapsed}
 
 Aquesta secció del curs assumeix que heu completat la [Part 1: Visió general del mètode](./01_method.mdx), la [Part 2: Implementació d'una sola mostra](./02_single-sample.mdx) i teniu un pipeline `rnaseq.nf` funcional amb els fitxers de mòdul completats.
 
@@ -32,7 +31,7 @@ Podeu comprovar que s'executa correctament:
 nextflow run rnaseq.nf -profile test
 ```
 
-</details>
+:::
 
 ## Assignació
 
@@ -648,8 +647,7 @@ Podeu trobar les sortides de MultiQC al directori de resultats.
 tree -L 2 -l results/multiqc
 ```
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 results/multiqc
@@ -684,7 +682,7 @@ results/multiqc
     └── multiqc_sources.txt
 ```
 
-</details>
+:::
 
 Aquest últim fitxer `all_single-end.html` és l'informe agregat complet, convenientment empaquetat en un fitxer HTML fàcil de navegar.
 

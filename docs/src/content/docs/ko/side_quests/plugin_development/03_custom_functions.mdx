@@ -258,8 +258,7 @@ workflow {
 nextflow run greet.nf
 ```
 
-<details class="example">
-<summary>출력</summary>
+:::example[출력]{collapsed}
 
 ```console
 N E X T F L O W   ~  version 26.04.4
@@ -282,7 +281,7 @@ Output: Hallo
 Pipeline complete! 👋
 ```
 
-</details>
+:::
 
 첫 번째 사용자 정의 플러그인 함수가 실제 워크플로우에서 동작하고 있습니다.
 파트 1에서 nf-hello 및 nf-schema와 함께 사용했던 `include { ... } from 'plugin/...'` 패턴이 직접 만든 플러그인에서도 동일하게 작동합니다.
@@ -433,8 +432,7 @@ workflow {
 nextflow run greet.nf
 ```
 
-<details class="example">
-<summary>출력</summary>
+:::example[출력]{collapsed}
 
 ```console
 N E X T F L O W   ~  version 26.04.4
@@ -457,7 +455,7 @@ Decorated: *** Hallo ***
 Pipeline complete! 👋
 ```
 
-</details>
+:::
 
 플러그인 함수는 process 스크립트(`SAY_HELLO` 내부의 `decorateGreeting`)와 워크플로우 연산(`map` 내부의 `reverseGreeting`) 모두에서 동작합니다.
 

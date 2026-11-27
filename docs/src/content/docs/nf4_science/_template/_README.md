@@ -117,7 +117,7 @@ The template follows a three-part arc:
 
 - Use **`<CodeWalkthrough>`** with a `step="Before"` and a `step="After"` code block to show code changes, with `{...}` line highlights on the changed lines
 - Put expected command output in the command's `bash` block, after a `# [!output]` line
-- Use `<details class="abstract">` with `<summary>Directory contents</summary>` for collapsible directory trees
+- Use `:::abstract[Directory contents]{collapsed}` for collapsible directory trees
 - End each major section with **Takeaway** and **What's next?** subsections
 - Use `---` horizontal rules to separate major numbered sections
 - Provide skeleton files (workflow + modules) for learners to fill in

@@ -131,8 +131,7 @@ samtools index /data/bam/reads_mother.bam
 
 La comanda no produeix cap sortida al terminal, però ara hauríeu de veure un fitxer anomenat `reads_mother.bam.bai` al mateix directori que el fitxer d'entrada BAM original.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 data/bam/
@@ -142,7 +141,7 @@ data/bam/
 └── reads_son.bam
 ```
 
-</details>
+:::
 
 Això completa la prova del primer pas.
 
@@ -280,22 +279,20 @@ La sortida del registre és molt detallada, de manera que hem destacat les líni
 
 Els fitxers de sortida, `reads_mother.vcf` i el seu fitxer d'índex, `reads_mother.vcf.idx`, es creen dins del vostre directori de treball al contenidor.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 conda.yml  hsperfdata_root  reads_mother.vcf  reads_mother.vcf.idx
 ```
 
-</details>
+:::
 
 El fitxer VCF conté les identificacions de variants, com veurem d'aquí a un moment, i el fitxer d'índex té la mateixa funció que el fitxer d'índex BAM, per permetre a les eines cercar i recuperar subconjunts de dades sense carregar tot el fitxer.
 
 Com que VCF és un format de text i aquest és un fitxer de prova petit, podeu executar `cat reads_mother.vcf` per obrir-lo i veure el seu contingut.
 Si desplaceu cap amunt fins al principi del fitxer, trobareu una capçalera composta de moltes línies de metadades, seguida d'una llista d'identificacions de variants, una per línia.
 
-<details class="abstract">
-<summary>Contingut del fitxer (abreujat)</summary>
+:::abstract[Contingut del fitxer (abreujat)]{collapsed}
 
 ```console {26} title="reads_mother.vcf" showLineNumbers
 ##fileformat=VCFv4.2
@@ -339,7 +336,7 @@ Si desplaceu cap amunt fins al principi del fitxer, trobareu una capçalera comp
 20_10037292_10066351    14156   .       T       C       183.64  .       AC=1;AF=0.500;AN=2;BaseQRankSum=0.703;DP=20;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=9.18;ReadPosRankSum=-0.193;SOR=1.034        GT:AD:DP:GQ:PL  0/1:12,8:20:99:191,0,319
 ```
 
-</details>
+:::
 
 A l'exemple de sortida anterior, hem destacat l'última línia de capçalera, que dona els noms de les columnes per a les dades tabulars que segueixen.
 Cada línia de dades descriu una possible variant identificada en les dades de seqüenciació de la mostra. Per obtenir orientació sobre la interpretació del format VCF, vegeu [aquest article útil](https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/variant-identification-and-analysis/understanding-vcf-format/).
@@ -354,8 +351,7 @@ mkdir /data/vcf
 mv reads_mother.vcf* /data/vcf
 ```
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console {5,13-15}
 data/
@@ -375,7 +371,7 @@ data/
     └── reads_mother.vcf.idx
 ```
 
-</details>
+:::
 
 Un cop fet, tots els fitxers ja són accessibles al vostre sistema de fitxers normal.
 
@@ -452,8 +448,7 @@ samtools index /data/bam/reads_father.bam
 samtools index /data/bam/reads_son.bam
 ```
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 data/bam/
@@ -465,7 +460,7 @@ data/bam/
 └── reads_son.bam.bai
 ```
 
-</details>
+:::
 
 Això hauria de produir els fitxers d'índex al mateix directori que els fitxers BAM corresponents.
 
@@ -571,19 +566,17 @@ Runtime.totalMemory()=257949696 # [!code highlight]
 
 Això crea el fitxer de sortida GVCF `reads_mother.g.vcf` al directori de treball actual del contenidor, així com el seu fitxer d'índex, `reads_mother.g.vcf.idx`.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 conda.yml  hsperfdata_root  reads_mother.g.vcf  reads_mother.g.vcf.idx
 ```
 
-</details>
+:::
 
 Si executeu `head -200 reads_mother.g.vcf` per veure les primeres 200 línies del contingut del fitxer, veureu que és molt més llarg que el VCF equivalent que vam generar a la primera secció, i la majoria de les línies semblen força diferents del que vam veure al VCF.
 
-<details class="abstract">
-<summary>Contingut del fitxer (abreujat)</summary>
+:::abstract[Contingut del fitxer (abreujat)]{collapsed}
 
 ```console {92,175,191,195} title="reads_mother.g.vcf" showLineNumbers
 ##fileformat=VCFv4.2
@@ -788,7 +781,7 @@ Si executeu `head -200 reads_mother.g.vcf` per veure les primeres 200 línies de
 20_10037292_10066351	3537	.	A	<NON_REF>	.	.	END=3546	GT:DP:GQ:MIN_DP:PL	0/0:29:72:26:0,72,1080
 ```
 
-</details>
+:::
 
 Hem tornat a destacar l'última línia de capçalera, així com les tres primeres identificacions de variants "pròpies" del fitxer.
 
@@ -942,15 +935,14 @@ Runtime.totalMemory()=226492416
 
 Un cop completat, hauríeu de tenir tres fitxers acabats en `.g.vcf` al vostre directori actual (un per mostra) i els seus respectius fitxers d'índex acabats en `.g.vcf.idx`.
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console
 conda.yml        reads_father.g.vcf      reads_mother.g.vcf      reads_son.g.vcf
 hsperfdata_root  reads_father.g.vcf.idx  reads_mother.g.vcf.idx  reads_son.g.vcf.idx
 ```
 
-</details>
+:::
 
 En aquest punt, hem identificat variants en mode GVCF per a cadascuna de les nostres mostres d'entrada.
 És hora de passar al genotipatge conjunt.
@@ -1080,8 +1072,7 @@ Runtime.totalMemory()=203423744 # [!code highlight]
 Això crea el fitxer de sortida VCF `family_trio.vcf` al directori de treball actual del contenidor, així com el seu índex, `family_trio.vcf.idx`.
 És un fitxer raonablement petit, de manera que podeu executar `cat family_trio.vcf` per veure el contingut del fitxer i desplaçar-vos cap avall per trobar les primeres línies de variants.
 
-<details class="abstract">
-<summary>Contingut del fitxer (abreujat)</summary>
+:::abstract[Contingut del fitxer (abreujat)]{collapsed}
 
 ```console {39} title="family_trio.vcf" showLineNumbers
 ##fileformat=VCFv4.2
@@ -1144,7 +1135,7 @@ Això crea el fitxer de sortida VCF `family_trio.vcf` al directori de treball ac
 20_10037292_10066351    14403   .       G       A       144.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=2.63;DP=116;ExcessHet=0.0000;FS=1.435;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=3.52;ReadPosRankSum=0.252;SOR=0.802  GT:AD:DP:GQ:PL  0/1:32,9:41:99:153,0,821        0/0:37,0:37:99:0,109,1169       0/0:37,0:37:99:0,99,1113
 ```
 
-</details>
+:::
 
 Hem tornat a destacar l'última línia de capçalera, que marca l'inici de les dades d'identificació de variants.
 
@@ -1165,8 +1156,7 @@ D'aquesta manera, tindrem alguna cosa amb la qual comparar quan construïm el no
 mv *.vcf* /data/vcf
 ```
 
-<details class="abstract">
-<summary>Contingut del directori</summary>
+:::abstract[Contingut del directori]{collapsed}
 
 ```console {14-19,22-23}
 data
@@ -1196,7 +1186,7 @@ data
     └── reads_son.g.vcf.idx
 ```
 
-</details>
+:::
 
 Un cop fet, tots els fitxers ja són accessibles al vostre sistema de fitxers normal.
 

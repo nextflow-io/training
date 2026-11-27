@@ -29,12 +29,11 @@ Kanallar, girdileri verimli bir şekilde işlemek ve çok adımlı iş akışlar
 Bu kursun bu bölümünde, çeşitli farklı kaynaklardan gelen birden fazla girdiyi işlemek için bir kanalı nasıl kullanacağınızı öğreneceksiniz.
 Ayrıca kanal içeriklerini gerektiği gibi dönüştürmek için [**operatörleri**](https://nextflow.io/docs/latest/reference/operator.html) nasıl kullanacağınızı da öğreneceksiniz.
 
-<details class="info">
-<summary>Bu bölümden nasıl başlanır</summary>
+:::info[Bu bölümden nasıl başlanır]{collapsed}
 
 Bu kursun bu bölümü, [Hello Nextflow](./index.mdx) kursunun 1. Bölümünü tamamladığınızı varsayar, ancak o bölümde ele alınan temel konulara hakimseniz, özel bir şey yapmadan buradan başlayabilirsiniz.
 
-</details>
+:::
 
 ---
 
@@ -73,8 +72,7 @@ Outputs:
 
 Daha önce olduğu gibi, çıktı dosyasını `output.txt` adıyla `results/hello_channels` dizininde bulacaksınız (yukarıda gösterilen iş akışı betiğinin `output` bloğunda belirtildiği gibi).
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console {2-3} title="results/hello_channels"
 results
@@ -85,16 +83,15 @@ results
 └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hello Channels!
 ```
 
-</details>
+:::
 
 Bu sizin için çalıştıysa, kanallar hakkında öğrenmeye hazırsınız.
 
@@ -225,14 +222,13 @@ Outputs:
 Her iki düzenlemeyi de doğru yaptıysanız, başarılı bir yürütme elde etmelisiniz.
 Sonucun hâlâ daha önce olduğu gibi olduğundan emin olmak için results dizinini kontrol edebilirsiniz.
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hello Channels!
 ```
 
-</details>
+:::
 
 Böylece aynı sonuca ulaşırken iş akışımızın esnekliğini artırdık.
 Bu, somut bir fayda olmadan daha fazla kod yazmak gibi görünebilir, ancak daha fazla girdiyi işlemeye başladığımızda değeri netleşecek.
@@ -382,8 +378,7 @@ Yürütme monitörü `sayHello` süreci için `3 of 3` çağrı yapıldığını
 
 Ancak, results dizininde hâlâ yalnızca bir çıktı var:
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console {3} title="results/hello_channels"
 results
@@ -394,16 +389,15 @@ results
 └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="results/hello_channels/output.txt"
 Hola
 ```
 
-</details>
+:::
 
 Orada üç selamlamadan birini görmelisiniz, ancak aldığınız burada gösterilenden farklı olabilir.
 Bunun neden olabileceğini düşünebilir misiniz?
@@ -415,8 +409,7 @@ _Diyagramda, kanal yeşil renkte temsil edilmektedir ve öğelerin sırası bir 
 Yürütme monitörüne geri baktığımızda, bize yalnızca bir alt dizin yolu verdi (`f4/c9962c`).
 Hadi oraya bir göz atalım.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console {9}
 work/f4/c9962ce91ef87480babcb86b2b9042/
@@ -430,16 +423,15 @@ work/f4/c9962ce91ef87480babcb86b2b9042/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="work/f4/c9962ce91ef87480babcb86b2b9042/output.txt"
 Hello
 ```
 
-</details>
+:::
 
 Bu results dizininde aldığımız selamlama bile değil! Neler oluyor?
 
@@ -488,8 +480,7 @@ Bu genişletilmiş modda, yalnızca gönderildiklerini raporlar.
 
 Her neyse, artık her süreç çağrısının alt dizinlerine sahip olduğumuza göre, loglarına ve çıktılarına bakabiliriz.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 work/23/871c7ec3642a898ecd5e6090d21300/
@@ -527,10 +518,9 @@ work/f4/ea10a680d5687596d3eaa3fcf69272/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```txt title="work/23/871c7ec3642a898ecd5e6090d21300/output.txt"
 Bonjour
@@ -544,7 +534,7 @@ Hello
 Hola
 ```
 
-</details>
+:::
 
 Bu, üç sürecin de başarıyla çalıştığını gösteriyor (yaşasın).
 
@@ -646,8 +636,7 @@ Outputs:
 Özet görünümüne geri döndüğümüzde, çıktı tekrar bir satırda özetleniyor.
 Tüm çıktı selamlamalarının orada olup olmadığını görmek için `results` dizinine bakın.
 
-<details class="abstract">
-<summary>Dizin içeriği</summary>
+:::abstract[Dizin içeriği]{collapsed}
 
 ```console
 results/hello_channels/
@@ -657,10 +646,9 @@ results/hello_channels/
 └── output.txt
 ```
 
-</details>
+:::
 
-<details class="abstract">
-<summary>Dosya içeriği</summary>
+:::abstract[Dosya içeriği]{collapsed}
 
 ```console title="Bonjour-output.txt"
 Bonjour
@@ -674,7 +662,7 @@ Hello
 Hola
 ```
 
-</details>
+:::
 
 Başarılı! Artık çıktı dosyalarının üzerine yazılması konusunda endişelenmeden istediğimiz kadar selamlama ekleyebiliriz.
 

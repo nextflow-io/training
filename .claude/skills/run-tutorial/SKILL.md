@@ -416,10 +416,10 @@ Container name, Nextflow version, working directory
 
 ### Exercises
 
-When encountering `<details class="exercise">` blocks:
+When encountering `:::exercise` blocks:
 
 1. Attempt the exercise based on instructions given
-2. Check against the `<details class="solution">` block (often nested inside the exercise)
+2. Check against the `:::solution` block (often nested inside the exercise)
 3. Report if instructions are unclear or incomplete
 
 ### Branching/Optional Steps

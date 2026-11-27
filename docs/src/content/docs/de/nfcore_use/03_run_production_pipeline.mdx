@@ -113,8 +113,7 @@ Der bessere Ansatz ist, die Standard-Ressourcen in einer eigenen Konfigurationsd
 
 Wir stellen dir eine eigene Konfigurationsdatei zur Verfügung, die die label-basierten Ressourcen-Standardwerte überschreibt.
 
-<details class="full-code">
-<summary>laptop.config</summary>
+:::full-code[laptop.config]{collapsed}
 
 ```nextflow title="laptop.config"
 process {
@@ -136,7 +135,7 @@ process {
 }
 ```
 
-</details>
+:::
 
 In [Teil 2](./02_configure_execution.mdx) haben wir `withName:` verwendet, um einen einzelnen Prozess nach Name anzusprechen.
 Hier verwenden wir `withLabel:`, um alle Prozesse mit einem bestimmten Label auf einmal anzusprechen.

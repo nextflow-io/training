@@ -113,8 +113,7 @@ El mejor enfoque es sobrescribir los valores predeterminados de recursos en un a
 
 Le proporcionamos un archivo de configuración personalizado que sobrescribe los valores predeterminados de recursos basados en etiquetas.
 
-<details class="full-code">
-<summary>laptop.config</summary>
+:::full-code[laptop.config]{collapsed}
 
 ```nextflow title="laptop.config"
 process {
@@ -136,7 +135,7 @@ process {
 }
 ```
 
-</details>
+:::
 
 La [Parte 2](./02_configure_execution.mdx) introdujo `withName:` para apuntar a un único proceso por nombre.
 Aquí usamos `withLabel:` para apuntar a todos los procesos que comparten una etiqueta a la vez.

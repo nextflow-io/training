@@ -2,7 +2,7 @@
 becomes one block with scripted output: the command, then `# [!output]` and the output lines.
 
 The box is matched by structure, not by its title, because the title is translated.
-Boxes that do not fit stay as they are and become <details> in the admonitions rule:
+Boxes that do not fit stay as they are and become collapsible directives in the admonitions rule:
 a box not right after a shell block, a box with no or several code blocks, and `???+`,
 which asks for the output to show without a click.
 """
@@ -69,7 +69,7 @@ def apply(page) -> None:
         box = containers(lines[j:], OUTPUT_BOX)[0]
         found = fences(box.body)
         if len(found) != 1:
-            page.warn(f"output box at line {j + 1} holds {len(found)} code blocks; left as <details>")
+            page.warn(f"output box at line {j + 1} holds {len(found)} code blocks; left as a collapsible")
             continue
         of = found[0]
         raw = dedent(box.body[of.start + 1 : of.end], of.indent)

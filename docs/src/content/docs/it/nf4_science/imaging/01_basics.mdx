@@ -55,14 +55,13 @@ results
 
 Aprite il file; il contenuto dovrebbe corrispondere al saluto che avete specificato dalla riga di comando.
 
-<details>
-  <summary>Contenuto del file</summary>
+:::abstract[Contenuto del file]{collapsed}
 
 ```console title="results/output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 È ottimo, il nostro workflow ha fatto ciò che doveva fare!
 
@@ -114,8 +113,7 @@ tree -a work
 
 I nomi esatti delle sottodirectory saranno diversi sul vostro sistema.
 
-<details>
-  <summary>Contenuto della directory</summary>
+:::abstract[Contenuto della directory]{collapsed}
 
 ```console title="work/"
 work
@@ -131,19 +129,18 @@ work
         └── output.txt
 ```
 
-</details>
+:::
 
 Dovreste riconoscere immediatamente il file `output.txt`, che è infatti l'output originale del processo `sayHello` che è stato pubblicato nella directory `results`.
 Se lo aprite, troverete di nuovo il saluto `Hello World!`.
 
-<details>
-  <summary>Contenuto del file output.txt</summary>
+:::abstract[Contenuto del file output.txt]{collapsed}
 
 ```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" showLineNumbers
 Hello World!
 ```
 
-</details>
+:::
 
 E quindi tutti quegli altri file?
 
@@ -159,15 +156,14 @@ Questi sono i file helper e di log che Nextflow ha scritto come parte dell'esecu
 
 Il file `.command.sh` è particolarmente utile perché mostra il comando principale che Nextflow ha eseguito senza includere tutta la gestione contabile e la configurazione dell'attività/ambiente.
 
-<details>
-  <summary>Contenuto del file</summary>
+:::abstract[Contenuto del file]{collapsed}
 
 ```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" showLineNumbers
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 ```
 
-</details>
+:::
 
 :::tip[Suggerimento]
 Quando qualcosa va storto e dovete risolvere il problema, può essere utile guardare lo script `command.sh` per verificare esattamente quale comando Nextflow ha composto in base alle istruzioni del workflow, all'interpolazione delle variabili e così via.
@@ -200,8 +196,7 @@ _L'obiettivo qui non è memorizzare la sintassi del codice Nextflow, ma formare 
 
 Apriamo lo script `hello-world.nf` nel pannello dell'editor.
 
-<details>
-  <summary>Codice</summary>
+:::abstract[Codice]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers
 #!/usr/bin/env nextflow
@@ -232,7 +227,7 @@ workflow {
 }
 ```
 
-</details>
+:::
 
 Uno script Nextflow coinvolge due tipi principali di componenti fondamentali: uno o più **processi**, e il **workflow** stesso.
 Ogni **processo** descrive quale operazione/i deve compiere il passaggio corrispondente nella pipeline, mentre il **workflow** descrive la logica del flusso di dati che collega i vari passaggi.
@@ -247,8 +242,7 @@ Il corpo del processo deve contenere un blocco script che specifica il comando d
 
 Qui abbiamo un **processo** chiamato `sayHello` che accetta una variabile di **input** chiamata `greeting` e scrive il suo **output** in un file denominato `output.txt`.
 
-<details>
-  <summary>Codice</summary>
+:::abstract[Codice]{collapsed}
 
 ```nextflow title="hello-world.nf" showLineNumbers startLineNumber=3
 /*
@@ -271,7 +265,7 @@ process sayHello {
 }
 ```
 
-</details>
+:::
 
 Questa è una definizione di processo molto minimale che contiene solo una definizione `input`, una definizione `output` e lo `script` da eseguire.
 

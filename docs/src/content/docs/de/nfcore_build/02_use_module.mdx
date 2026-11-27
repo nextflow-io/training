@@ -12,8 +12,7 @@ Anstatt jeden Prozess von Grund auf neu zu schreiben, kannst du von der Communit
 
 Um zu demonstrieren, wie das funktioniert, werden wir das eigene `collectGreetings`-Modul durch das `find/concatenate`-Modul aus nf-core/modules in der `core-hello`-Pipeline ersetzen.
 
-<details class="info">
-<summary>Wie du von diesem Abschnitt aus beginnst</summary>
+:::info[Wie du von diesem Abschnitt aus beginnst]{collapsed}
 
 Dieser Abschnitt des Kurses setzt voraus, dass du [Teil 1: Hello für nf-core umschreiben](./01_rewrite_hello.mdx) abgeschlossen hast und eine funktionierende `core-hello`-Pipeline besitzt.
 
@@ -32,7 +31,7 @@ Du kannst testen, ob sie erfolgreich läuft, indem du folgenden Befehl ausführs
 nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
-</details>
+:::
 
 ---
 
@@ -108,8 +107,7 @@ nf-core modules info find/concatenate
 
 Dies zeigt die Dokumentation über das Modul an, einschließlich seiner Eingaben, Ausgaben und grundlegender Nutzungsinformationen.
 
-<details class="success">
-<summary>Befehlsausgabe</summary>
+:::success[Befehlsausgabe]{collapsed}
 
 ```console
 
@@ -185,7 +183,7 @@ INFO     Reinstalling modules found in 'modules.json' but missing from
 
 ```
 
-</details>
+:::
 
 Das ist genau die gleiche Information, die du auch auf der Website findest.
 
@@ -228,8 +226,7 @@ Lass uns überprüfen, ob die Moduldateien vorhanden sind:
 tree -L 4 modules
 ```
 
-<details class="abstract">
-<summary>Verzeichnisinhalt</summary>
+:::abstract[Verzeichnisinhalt]{collapsed}
 
 ```console
 modules
@@ -249,12 +246,11 @@ modules
 5 directories, 7 files
 ```
 
-</details>
+:::
 
 Du kannst die Installation auch bestätigen, indem du `modules.json` überprüfst, das nun `find/concatenate` unter dem nf-core/modules Repository auflistet.
 
-<details class="abstract">
-<summary>Dateiinhalt</summary>
+:::abstract[Dateiinhalt]{collapsed}
 
 ```json title="modules.json"
 {
@@ -303,7 +299,7 @@ Du kannst die Installation auch bestätigen, indem du `modules.json` überprüfs
 }
 ```
 
-</details>
+:::
 
 Dies bestätigt, dass das `find/concatenate`-Modul nun Teil des Quellcodes deines Projekts ist.
 Um das neue Modul jedoch tatsächlich zu verwenden, müssen wir es in unsere Pipeline importieren.
@@ -814,8 +810,7 @@ nextflow run . --outdir core-hello-results -profile test,docker
 
 Dies sollte relativ schnell laufen.
 
-<details class="success">
-<summary>Befehlsausgabe</summary>
+:::success[Befehlsausgabe]{collapsed}
 
 ```console
  N E X T F L O W   ~  version 26.04.4
@@ -854,7 +849,7 @@ executor >  local (8)
 -[core/hello] Pipeline completed successfully-
 ```
 
-</details>
+:::
 
 Beachte, dass `FIND_CONCATENATE` jetzt in der Liste der Prozessausführungen anstelle von `collectGreetings` erscheint.
 

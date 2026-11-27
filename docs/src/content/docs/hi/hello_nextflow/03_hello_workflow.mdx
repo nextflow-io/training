@@ -36,12 +36,11 @@ description: अधिकांश वास्तविक दुनिया �
 3. अंतिम output फ़ाइल को नाम देने के लिए एक पैरामीटर जोड़ें और उसे collection स्टेप में secondary input के रूप में पास करें।
 4. Collection स्टेप को यह भी रिपोर्ट करवाएं कि क्या प्रोसेस किया गया, इसके बारे में एक सरल आंकड़ा।
 
-<details class="info">
-<summary>इस खंड से कैसे शुरू करें</summary>
+:::info[इस खंड से कैसे शुरू करें]{collapsed}
 
 कोर्स का यह सेक्शन मानता है कि तुमने [Hello Nextflow](./index.mdx) कोर्स के भाग 1-2 पूरे कर लिए हैं, लेकिन अगर तुम उन सेक्शन में कवर की गई बेसिक्स के साथ सहज हो, तो तुम यहाँ से बिना कुछ विशेष किए शुरू कर सकते हो।
 
-</details>
+:::
 
 ---
 
@@ -90,8 +89,7 @@ Outputs:
 पहले की तरह, तुम्हें output फ़ाइलें `output` ब्लॉक में निर्दिष्ट स्थान पर मिलेंगी।
 इस अध्याय के लिए, यह `results/hello_workflow/` के अंदर है।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 results/hello_workflow
@@ -100,7 +98,7 @@ results/hello_workflow
 └── Hola-output.txt
 ```
 
-</details>
+:::
 
 अगर यह तुम्हारे लिए काम कर गया, तो तुम multi-step workflow को असेंबल करना सीखने के लिए तैयार हो।
 
@@ -136,14 +134,13 @@ echo 'Hello World' | tr '[a-z]' '[A-Z]' > UPPER-output.txt
 
 Output एक टेक्स्ट फ़ाइल है जिसे `UPPER-output.txt` कहा जाता है जिसमें `Hello World` स्ट्रिंग का uppercase संस्करण होता है।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="UPPER-output.txt"
 HELLO WORLD
 ```
 
-</details>
+:::
 
 मूल रूप से यही हम अपने workflow के साथ करने की कोशिश करने जा रहे हैं।
 
@@ -347,8 +344,7 @@ Console output में अब एक अतिरिक्त लाइन ह
 
 तुम्हें outputs `results/hello_workflow` डायरेक्टरी में मिलेंगे जैसा कि `output` ब्लॉक में सेट किया गया है।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 results/hello_workflow/
@@ -360,12 +356,11 @@ results/hello_workflow/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 यह सुविधाजनक है! लेकिन दूसरे process की calls में से एक की work डायरेक्टरी के अंदर देखना अभी भी उचित है।
 
-<details class="abstract">
-<summary>डायरेक्टरी सामग्री</summary>
+:::abstract[डायरेक्टरी सामग्री]{collapsed}
 
 ```console
 work/e0/ecf81b4cacc648b9b994218d5b29d7/
@@ -373,7 +368,7 @@ work/e0/ecf81b4cacc648b9b994218d5b29d7/
 └── UPPER-Hola-output.txt
 ```
 
-</details>
+:::
 
 ध्यान दें कि दो `*-output` फ़ाइलें हैं: पहले process का output साथ ही दूसरे का output।
 
@@ -424,8 +419,7 @@ cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLL
 
 Output एक टेक्स्ट फ़ाइल है जिसे `COLLECTED-output.txt` कहा जाता है जिसमें मूल greetings के uppercase संस्करण होते हैं।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="COLLECTED-output.txt"
 HELLO
@@ -433,7 +427,7 @@ BONJOUR
 HOLA
 ```
 
-</details>
+:::
 
 यही वह परिणाम है जिसे हम अपने workflow के साथ प्राप्त करना चाहते हैं।
 
@@ -666,14 +660,13 @@ Outputs:
 
 अब अंतिम output फ़ाइल की सामग्री पर एक नज़र डालो।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-output.txt"
 HOLA
 ```
 
-</details>
+:::
 
 ओह नहीं। Collection स्टेप प्रत्येक greeting पर व्यक्तिगत रूप से चलाया गया, जो हम नहीं चाहते थे।
 
@@ -787,8 +780,7 @@ Outputs:
 
 अंत में, तुम output फ़ाइल की सामग्री पर एक नज़र डाल सकते हो यह संतुष्ट करने के लिए कि सब कुछ सही तरीके से काम किया।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-output.txt"
 BONJOUR
@@ -796,7 +788,7 @@ HELLO
 HOLA
 ```
 
-</details>
+:::
 
 इस बार हमारे पास अंतिम output फ़ाइल में सभी तीन greetings हैं। सफलता!
 
@@ -1012,8 +1004,7 @@ Outputs:
 
 यह सफलतापूर्वक चलता है और वांछित output उत्पन्न करता है:
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```console title="results/hello_workflow/COLLECTED-trio-output.txt"
 HELLO
@@ -1021,7 +1012,7 @@ BONJOUR
 HOLA
 ```
 
-</details>
+:::
 
 अब, जब तक हम पैरामीटर को उचित रूप से निर्दिष्ट करते हैं, inputs के अन्य batches पर बाद के runs पिछले परिणामों को clobber नहीं करेंगे।
 
@@ -1241,14 +1232,13 @@ Outputs:
 अगर तुम `results/hello_workflow/` डायरेक्टरी में देखते हो, तो तुम्हें नई report फ़ाइल मिलेगी, `trio-report.txt`।
 यह सत्यापित करने के लिए इसे खोलो कि workflow ने सही तरीके से greetings की गिनती की रिपोर्ट की जो process की गई थी।
 
-<details class="abstract">
-<summary>फ़ाइल सामग्री</summary>
+:::abstract[फ़ाइल सामग्री]{collapsed}
 
 ```txt title="trio-report.txt"
 There were 3 greetings in this batch.
 ```
 
-</details>
+:::
 
 ![](../../hello_nextflow/img/hello-collect-4-way.excalidraw.svg)
 

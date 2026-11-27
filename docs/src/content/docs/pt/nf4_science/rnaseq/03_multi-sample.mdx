@@ -9,8 +9,7 @@ Anteriormente, você construiu um pipeline de chamada de variantes por amostra q
 Nesta parte do curso, vamos levar nosso fluxo de trabalho simples ao próximo nível, transformando-o em uma poderosa ferramenta de automação em lote para lidar com números arbitrários de amostras.
 E enquanto fazemos isso, também vamos atualizá-lo para esperar dados paired-end, que são mais comuns em estudos mais recentes.
 
-<details class="info">
-<summary>Como começar a partir desta seção</summary>
+:::info[Como começar a partir desta seção]{collapsed}
 
 Esta seção do curso assume que você completou a [Parte 1: Visão Geral do Método](./01_method.mdx), [Parte 2: Implementação de amostra única](./02_single-sample.mdx) e tem um pipeline `rnaseq.nf` funcional com arquivos de módulo preenchidos.
 
@@ -32,7 +31,7 @@ Você pode testar se ele executa com sucesso:
 nextflow run rnaseq.nf -profile test
 ```
 
-</details>
+:::
 
 ## Tarefa
 
@@ -648,8 +647,7 @@ Você pode encontrar as saídas do MultiQC no diretório de resultados.
 tree -L 2 -l results/multiqc
 ```
 
-<details class="abstract">
-<summary>Conteúdo do diretório</summary>
+:::abstract[Conteúdo do diretório]{collapsed}
 
 ```console
 results/multiqc
@@ -684,7 +682,7 @@ results/multiqc
     └── multiqc_sources.txt
 ```
 
-</details>
+:::
 
 Esse último arquivo `all_single-end.html` é o relatório agregado completo, convenientemente empacotado em um arquivo HTML fácil de navegar.
 

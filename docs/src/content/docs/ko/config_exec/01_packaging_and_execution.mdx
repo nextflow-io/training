@@ -122,13 +122,12 @@ Outputs:
 docker.enabled = true
 ```
 
-<details class="tip">
-<summary>Docker와 Conda 혼합 사용</summary>
+:::tip[Docker와 Conda 혼합 사용]{collapsed}
 
 이 설정들은 process별로 범위가 지정되므로 혼합하여 사용할 수 있습니다. 각 도구에 사용 가능한 것에 따라 일부 process는 Docker를, 다른 process는 Conda를 사용할 수 있습니다.
 동일한 process에 대해 `container` 지시문(파이프라인 코드에서)과 `conda` 지시문(설정에서) 모두 설정되어 있고 두 패키징 시스템이 모두 활성화된 경우, Nextflow는 컨테이너를 우선시합니다.
 
-</details>
+:::
 
 ### 핵심 정리
 
@@ -176,8 +175,7 @@ process {
 대부분의 HPC 플랫폼은 작업 제출 시 CPU, 메모리, 큐 이름 등의 리소스 요청을 각자의 문법으로 지정해야 합니다.
 `my-science-work`라는 큐에서 8개의 CPU와 4GB RAM을 요청하는 동일한 내용이 스케줄러에 따라 완전히 다르게 표현됩니다.
 
-<details class="abstract">
-<summary>예제</summary>
+:::abstract[예제]{collapsed}
 
 ```bash title="Config for SLURM / submit using sbatch"
 #SBATCH -o /path/to/my/task/directory/my-task-1.log
@@ -205,7 +203,7 @@ process {
 #$ -l h_rss=4096M,mem_free=4096M
 ```
 
-</details>
+:::
 
 Nextflow는 이 모든 것을 추상화합니다. `cpus`, `memory`, `queue`와 같은 표준화된 속성을 한 번만 지정하면([process 지시문](https://nextflow.io/docs/latest/reference/process.html#process-directives)에서 전체 목록 확인 가능), Nextflow가 런타임에 이를 적절한 백엔드별 스크립트로 변환합니다.
 

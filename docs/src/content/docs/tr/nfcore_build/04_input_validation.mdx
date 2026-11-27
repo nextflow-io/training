@@ -7,8 +7,7 @@ description: Bu Build with nf-core eğitim kursunun dördüncü bölümünde, pi
 
 Bu Build with nf-core eğitim kursunun dördüncü bölümünde, pipeline girdi ve parametrelerini doğrulamak için nf-schema eklentisinin nasıl kullanılacağını gösteriyoruz.
 
-<details class="info">
-<summary>Bu bölümden nasıl başlanır</summary>
+:::info[Bu bölümden nasıl başlanır]{collapsed}
 
 Bu bölüm, [Bölüm 3: Bir nf-core modülü oluşturma](./03_make_module.mdx) kısmını tamamladığınızı ve `COWPY` süreç modülünü pipeline'ınızda nf-core standartlarına göre güncellediğinizi varsayar.
 
@@ -27,7 +26,7 @@ Başarılı bir şekilde çalıştığını aşağıdaki komutu çalıştırarak
 nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
-</details>
+:::
 
 ---
 
@@ -78,8 +77,7 @@ nf-schema birkaç temel işlev sağlar:
 
 nf-schema, kullanımdan kaldırılmış nf-validation eklentisinin halefidir ve doğrulama için standart [JSON Schema Draft 2020-12](https://json-schema.org/) kullanır.
 
-<details class="info">
-<summary>Nextflow eklentileri nedir?</summary>
+:::info[Nextflow eklentileri nedir?]{collapsed}
 
 Eklentiler, Nextflow dilinin kendisine yeni işlevsellik ekleyen uzantılardır. `nextflow.config` içindeki bir `plugins{}` bloğu aracılığıyla kurulurlar ve şunları sağlayabilirler:
 
@@ -97,7 +95,7 @@ plugins {
 
 Kurulduktan sonra, `include { functionName } from 'plugin/plugin-name'` sözdizimini kullanarak eklentilerden fonksiyonları içe aktarabilirsiniz.
 
-</details>
+:::
 
 ### 0.3. İki tür doğrulama için iki şema dosyası
 
@@ -257,15 +255,14 @@ Burada açıklanan her girdinin doğrulanabilecek aşağıdaki temel özellikler
 Keskin bir gözünüz varsa, kullandığımız `batch` girdi parametresinin şemada henüz tanımlanmadığını fark edebilirsiniz.
 Bunu bir sonraki bölümde ekleyeceğiz.
 
-<details class="info">
-<summary>Şema parametreleri nereden geliyor?</summary>
+:::info[Şema parametreleri nereden geliyor?]{collapsed}
 
 Şema doğrulaması, parametre tanımları için temel olarak `nextflow.config` kullanır.
 Workflow betiklerinizin başka yerlerinde (`main.nf` veya modül dosyalarında olduğu gibi) bildirilen parametreler şema doğrulayıcısı tarafından **otomatik olarak** alınmaz.
 
 Bu, pipeline parametrelerinizi her zaman `nextflow.config` içinde bildirmeniz ve ardından doğrulama kurallarını `nextflow_schema.json` içinde tanımlamanız gerektiği anlamına gelir.
 
-</details>
+:::
 
 ### 1.3. Batch parametresini ekleyin
 

@@ -126,8 +126,7 @@ Niezależnie od tego, czy rozwijasz pipeline, czy uruchamiasz go produkcyjnie, w
 
 Za każdym razem, gdy uruchamiasz workflow Nextflow'a, do pliku dziennika o nazwie `history` — znajdującego się w ukrytym katalogu `.nextflow` w bieżącym katalogu roboczym — dopisywana jest nowa linia.
 
-<details class="abstract">
-<summary>Zawartość pliku</summary>
+:::abstract[Zawartość pliku]{collapsed}
 
 ```txt title=".nextflow/history" showLineNumbers
 2026-09-13 01:47:58	2.8s	determined_ramanujan	OK	ce74f81996b8ce999853fdbb25ba7969	03078950-5011-414f-992b-8fe1bd219ac2	nextflow run main.nf --input data/greetings.csv --character turkey
@@ -136,7 +135,7 @@ Za każdym razem, gdy uruchamiasz workflow Nextflow'a, do pliku dziennika o nazw
 2026-09-13 01:48:14	1.5s	deadly_lamport	OK	ce74f81996b8ce999853fdbb25ba7969	517ccc29-9db7-4d8d-8ea0-c8db6e9ac653	nextflow run main.nf --input data/greetings.csv --character stegosaurus -resume
 ```
 
-</details>
+:::
 
 Każda linia zawiera znacznik czasu, czas trwania, nazwę uruchomienia, status, identyfikator rewizji, identyfikator sesji oraz pełne polecenie użyte do uruchomienia z tego katalogu.
 
