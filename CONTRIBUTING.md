@@ -51,6 +51,17 @@ Open <http://localhost:4321/> in your web browser.
 Pages reload when you save changes in your editor.
 To work faster on English pages, run `TRANSLATIONS=false npm run dev`: it leaves out the 10 translations.
 
+The "Log in with Seqera" buttons are hidden unless `PUBLIC_LOGIN=true`, because login runs in the Router Worker (`docs/worker/`).
+To work on login or synced progress, run the Worker in a second terminal.
+It signs you in as a dev user rather than through Seqera Platform, and it keeps progress in a local database:
+
+```bash
+cd docs/worker
+npm ci
+npm run dev                        # terminal 1: the Worker on port 8790
+cd .. && PUBLIC_LOGIN=true npm run dev   # terminal 2: astro dev, sending /api to the Worker
+```
+
 To check a change the way CI does, run a full build.
 It builds every language and runs the links validator, so it takes about 80 seconds and 6 GB of RAM:
 

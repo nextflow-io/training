@@ -1,4 +1,6 @@
-export interface Env {
+import { api, type ApiEnv } from './api';
+
+export interface Env extends ApiEnv {
   BUCKET: R2Bucket;
 }
 
@@ -49,10 +51,11 @@ const TYPES: Record<string, string> = {
 
 export default {
   async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    if (url.pathname.startsWith('/api/')) return api(request, env);
     if (request.method !== 'GET' && request.method !== 'HEAD') {
       return new Response('Method Not Allowed', { status: 405, headers: { Allow: 'GET, HEAD' } });
     }
-    const url = new URL(request.url);
     const key = new Request(url);
     let response = await caches.default.match(key);
     if (!response) {

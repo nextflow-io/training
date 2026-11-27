@@ -40,6 +40,8 @@ jobs:
       cancel-in-progress: ${{ github.event_name == 'pull_request' }}
     env:
       BASE: ${{ inputs.base || '/latest/' }}
+      # Seqera login needs the Router Worker's /api, which PR previews don't have.
+      PUBLIC_LOGIN: ${{ github.event_name != 'pull_request' }}
     steps:
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

@@ -5,7 +5,7 @@
   "scripts": {
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "dev": "wrangler dev -c ../wrangler.jsonc --persist-to .wrangler/state",
+    "dev": "wrangler d1 migrations apply DB --local -c ../wrangler.jsonc --persist-to .wrangler/state && wrangler dev -c ../wrangler.jsonc --persist-to .wrangler/state --port 8790 --var OIDC_ISSUER:",
     "deploy": "wrangler deploy -c ../wrangler.jsonc"
   },
   "devDependencies": {
@@ -13,5 +13,8 @@
     "typescript": "7.0.2",
     "vitest": "5.1.2",
     "wrangler": "4.168.0"
+  },
+  "dependencies": {
+    "jose": "6.2.18"
   }
 }

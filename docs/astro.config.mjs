@@ -30,6 +30,8 @@ export default defineConfig({
   base,
   trailingSlash: 'always',
   redirects,
+  // Login needs the Router Worker's /api: run `npm run dev` in worker/ alongside.
+  vite: process.env.PUBLIC_LOGIN === 'true' ? { server: { proxy: { '/api': 'http://localhost:8790' } } } : {},
   markdown: {
     processor: satteri({
       features: { headingAttributes: true },

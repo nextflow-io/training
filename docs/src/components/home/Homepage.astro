@@ -195,8 +195,7 @@ const allCoursesHref = `${prefix}courses/`;
       <p class="saved" data-ref="saved" hidden>
         <Fragment set:html={icon('check', 16, 2.5)} />
         <span data-ref="saved-text">{t('nf.home.savedLocal')}</span>
-        {/* TODO(redesign): real Seqera login. Until then this turns on the logged-in preview. */}
-        <a class="nf-text-btn" data-ref="login" href="?mycourses=loggedin">
+        <a class="nf-text-btn" data-ref="login" href="/api/auth/login" hidden>
           {t('nf.home.login')}
         </a>
         <button type="button" class="nf-text-btn" data-ref="reset">
@@ -314,7 +313,7 @@ const allCoursesHref = `${prefix}courses/`;
 
 <script>
   import { icon } from '../../icons.mjs';
-  import { formatMinutes, myCourses, type Goal } from '../../scripts/my-courses';
+  import { formatMinutes, loginEnabled, loginHref, myCourses, type Goal } from '../../scripts/my-courses';
   import { announce, esc, ring, strings } from '../../scripts/ui';
 
   const GOALS: Goal[] = ['run', 'write', 'custom'];
@@ -517,7 +516,8 @@ const allCoursesHref = `${prefix}courses/`;
       const anyProgress = store.items.some((i) => store.done(i.id) > 0);
       this.ref('saved').hidden = !(n || anyProgress);
       this.ref('saved-text').textContent = t(store.user ? 'savedAccount' : 'savedLocal');
-      this.ref('login').hidden = !!store.user;
+      this.ref('login').hidden = !!store.user || !loginEnabled;
+      this.ref('login').setAttribute('href', loginHref());
     }
   }
   customElements.define('nf-homepage', Homepage);

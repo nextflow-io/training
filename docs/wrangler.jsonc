@@ -8,4 +8,17 @@
   "workers_dev": true,
   "preview_urls": false,
   "r2_buckets": [{ "binding": "BUCKET", "bucket_name": "nextflow-training-docs" }],
+  // My courses progress for logged-in learners. Schema in worker/migrations/.
+  // TODO(redesign): the real database_id, once the database exists.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "nextflow-training",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "worker/migrations",
+    },
+  ],
+  // Seqera login, with Seqera Platform as the OIDC provider. OIDC_CLIENT_SECRET and AUTH_SECRET are Worker secrets.
+  // `npm run dev` in worker/ blanks the issuer, so local dev signs in a dev user instead.
+  "vars": { "OIDC_ISSUER": "https://cloud.seqera.io/api", "OIDC_CLIENT_ID": "nextflow_training" },
 }

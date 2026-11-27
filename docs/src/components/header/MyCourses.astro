@@ -28,7 +28,7 @@ const t = uiStrings(Astro.locals.t.all(), 'nf.mc.');
 
 <script>
   import { icon } from '../../icons.mjs';
-  import { myCourses, type Change } from '../../scripts/my-courses';
+  import { loginEnabled, loginHref, myCourses, type Change } from '../../scripts/my-courses';
   import { announce, courseRing, esc, reducedMotion, ring, strings } from '../../scripts/ui';
 
   class MyCoursesMenu extends HTMLElement {
@@ -167,8 +167,8 @@ const t = uiStrings(Astro.locals.t.all(), 'nf.mc.');
         user ? t('buttonLabelUser', { name: user.name, n, p: pct }) : t('buttonLabel', { n }),
       );
 
-      // TODO(redesign): real Seqera login. Until then this turns on the logged-in preview.
-      const login = (label: string) => `<a class="nf-btn mc-login" href="?mycourses=loggedin">${esc(label)}</a>`;
+      const login = (label: string) =>
+        loginEnabled ? `<a class="nf-btn mc-login" href="${esc(loginHref())}">${esc(label)}</a>` : '';
       const head = user
         ? `<div class="mc-head"><span class="mc-avatar mc-avatar-lg">${esc(user.initials)}</span><div class="mc-head-text"><span class="mc-title">${esc(user.name)}</span><span class="mc-sub">${esc(user.email)}</span></div></div>` +
           `<p class="mc-sync">${icon('cloudCheck', 16)}${esc(t('synced'))}</p>`
@@ -176,7 +176,9 @@ const t = uiStrings(Astro.locals.t.all(), 'nf.mc.');
           // The "browser only" warning only matters once there is something to lose.
           (store.items.some((i) => store.has(i.id) || store.done(i.id) > 0)
             ? `<div class="mc-warn"><p>${icon('warn', 16)}<span>${esc(t('warn'))}</span></p>${login(t('login'))}</div>`
-            : `<div class="mc-login-only">${login(t('loginPlain'))}</div>`);
+            : loginEnabled
+              ? `<div class="mc-login-only">${login(t('loginPlain'))}</div>`
+              : '');
 
       const cap = n
         ? `<div class="mc-cap"><span>${esc(n === 1 ? t('itemsOne') : t('items', { n }))}</span><span>${esc(t('percentDone', { p: pct }))}</span></div>`
