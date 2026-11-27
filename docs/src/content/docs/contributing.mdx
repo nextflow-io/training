@@ -1,0 +1,237 @@
+---
+title: Contributing
+description: How to write training pages, with live examples of admonitions, collapsible blocks and Takeaway sections.
+---
+
+Training pages are MDX files in `docs/src/content/docs/`, one per page.
+This page shows the syntax for the boxes and sections that the training material uses most, each with its source and how it renders.
+For setting up a local preview, adding pages and the full list of conventions, see [CONTRIBUTING.md](https://github.com/nextflow-io/training/blob/master/CONTRIBUTING.md) in the repository.
+
+A few rules apply to every page:
+
+- Write one sentence per line, so that changes are easy to review.
+- Give each page a `title` and a one-sentence `description` in its frontmatter, and no H1 heading in the body.
+- Edit only the English pages. The other languages are translated from them automatically.
+
+## Admonitions
+
+An admonition is a box that sets text apart from the rest of the page.
+Open it with three colons and a type, and close it with three colons:
+
+```md
+:::tip
+Run `nextflow run` with `-resume` to skip tasks that already completed.
+:::
+```
+
+:::tip
+Run `nextflow run` with `-resume` to skip tasks that already completed.
+:::
+
+### Titles
+
+Without a title, the box takes the name of its type.
+Add a title in square brackets after the type:
+
+```md
+:::note[Before you start]
+Make sure Docker is running.
+:::
+```
+
+:::note[Before you start]
+Make sure Docker is running.
+:::
+
+The title is plain Markdown, so it can hold inline code or emphasis.
+Avoid unbalanced square brackets in a title: they end it early.
+
+### Types
+
+Choose the type by what the box is for.
+The four main types are `note`, `tip`, `caution` and `danger`:
+
+:::note
+Background information that is useful but not essential.
+:::
+
+:::tip
+A shortcut or a better way to do something.
+:::
+
+:::caution
+Something that can go wrong, and how to avoid it.
+:::
+
+:::danger
+Something that can lose data or break a setup.
+:::
+
+These types are also available, mostly for exercises, solutions and command output:
+
+| Type        | Use it for                                          |
+| ----------- | --------------------------------------------------- |
+| `abstract`  | Directory listings and file contents                |
+| `info`      | Extra detail, often collapsed                       |
+| `success`   | Command output that shows things worked             |
+| `failure`   | Error output, or what a mistake looks like          |
+| `question`  | "Don't see the same thing?" and other self-checks   |
+| `warning`   | Same as `caution`                                   |
+| `bug`       | Known bugs and workarounds                          |
+| `example`   | A worked example                                    |
+| `quote`     | A quotation                                         |
+| `exercise`  | An exercise for the learner                         |
+| `solution`  | The solution to an exercise                         |
+| `full-code` | The complete code at a checkpoint                   |
+| `optional`  | Optional reading                                    |
+| `courses`   | Links to courses                                    |
+| `catalog`   | Lists of resources                                  |
+
+:::abstract
+Directory listings and file contents.
+:::
+
+:::info
+Extra detail.
+:::
+
+:::success
+Command output that shows things worked.
+:::
+
+:::failure
+Error output.
+:::
+
+:::question
+A self-check for the learner.
+:::
+
+:::warning
+The same as `caution`.
+:::
+
+:::bug
+A known bug and its workaround.
+:::
+
+:::example
+A worked example.
+:::
+
+:::quote
+A quotation.
+:::
+
+:::exercise
+An exercise for the learner.
+:::
+
+:::solution
+The solution to an exercise.
+:::
+
+:::full-code
+The complete code at a checkpoint.
+:::
+
+:::optional
+Optional reading.
+:::
+
+:::courses
+Links to courses.
+:::
+
+:::catalog
+Lists of resources.
+:::
+
+## Collapsible blocks
+
+Add `{collapsed}` after the title to make any admonition collapsible and closed.
+Readers click the title to open it:
+
+```md
+:::abstract[Directory contents]{collapsed}
+    results/
+    └── output.txt
+:::
+```
+
+:::abstract[Directory contents]{collapsed}
+    results/
+    └── output.txt
+:::
+
+Use `{open}` instead for a block that starts open but can be closed:
+
+```md
+:::success[Command output]{open}
+The pipeline completed successfully.
+:::
+```
+
+:::success[Command output]{open}
+The pipeline completed successfully.
+:::
+
+Without either, the block is a static box that is always open.
+These replace the `???` and `???+` blocks of the old MkDocs site, and the HTML `<details>` blocks of earlier versions of this site.
+
+## Nesting
+
+An admonition can hold code blocks, lists and other admonitions.
+To nest one inside another, give the outer one more colons than the inner one.
+This is how an exercise holds its solution:
+
+````md
+::::exercise[Add a second greeting]{collapsed}
+Change the workflow so that it also says "Bonjour".
+
+:::solution[Solution]{collapsed}
+```nextflow
+greeting_ch = channel.of('Hello', 'Bonjour')
+```
+:::
+::::
+````
+
+::::exercise[Add a second greeting]{collapsed}
+Change the workflow so that it also says "Bonjour".
+
+:::solution[Solution]{collapsed}
+```nextflow
+greeting_ch = channel.of('Hello', 'Bonjour')
+```
+:::
+::::
+
+## Takeaway sections
+
+Each major section of a lesson ends with a "Takeaway" heading and a "What's next?" heading.
+The Takeaway heading and everything after it, up to the next heading or `---`, get a green band across the page.
+It needs nothing special in the source: write a normal heading with the text "Takeaway".
+
+```md
+### Takeaway
+
+You know how to run a pipeline and find its outputs.
+
+### What's next?
+
+Learn how to configure the pipeline.
+```
+
+### Takeaway
+
+You know how to run a pipeline and find its outputs.
+
+### What's next?
+
+Learn how to configure the pipeline.
+
+## More syntax
+
+- Code blocks, line highlighting, command output and code walkthroughs: see the "Code blocks" section of [CONTRIBUTING.md](https://github.com/nextflow-io/training/blob/master/CONTRIBUTING.md) and the [starlight-codeblocks documentation](https://ewels.github.io/starlight-codeblocks/).
+- Tabs, cards, buttons and quizzes: see the "Components" section of CONTRIBUTING.md.

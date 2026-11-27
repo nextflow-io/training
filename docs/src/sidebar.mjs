@@ -523,7 +523,8 @@ export const sidebar = [
       "info/nxf_versions",
       "info/hello_pipeline",
       "help",
-      "training_events"
+      "training_events",
+      "contributing"
     ]
   }
 ];

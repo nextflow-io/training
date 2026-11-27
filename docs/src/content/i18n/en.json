@@ -182,5 +182,6 @@
   "nf.all.sections": "Show one section",
   "nf.consent.short": "We use cookies to see how the site is used. <a href=\"https://seqera.io/privacy-policy/#cookies\" target=\"_blank\" rel=\"noopener\">More about cookies</a>",
   "nf.home.events.weeksLabel": "EVERY QUARTER",
-  "nf.home.events.weeksDesc": "A free week of tutorials, live office hours and forum support. See upcoming dates."
+  "nf.home.events.weeksDesc": "A free week of tutorials, live office hours and forum support. See upcoming dates.",
+  "nf.sb.contributing": "Contributing"
 }

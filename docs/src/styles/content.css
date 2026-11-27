@@ -71,7 +71,7 @@ h1#_top {
   background: linear-gradient(var(--sl-color-bg), var(--sl-color-bg)) 0 0 / var(--sl-sidebar-width) 100% no-repeat;
 }
 /* starlight-quiz's progress block sits straight under the table of contents. */
-.right-sidebar .sl-quiz-progress--toc {
+.right-sidebar .sl-quiz-progress--toc:not([hidden]) {
   display: block;
   margin-top: 24px;
 }
