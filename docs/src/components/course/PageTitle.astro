@@ -1,0 +1,64 @@
+---
+import PlainTitle from '@astrojs/starlight/components/PageTitle.astro';
+import { getCollection } from 'astro:content';
+import Default from 'starlight-page-actions/overrides/PageTitle.astro';
+import { formatMinutes, pageContext } from '../../catalog';
+import { icon } from '../../icons.mjs';
+import CourseHeader from './CourseHeader.astro';
+
+const t = Astro.locals.t;
+const ctx = await pageContext(Astro.locals.starlightRoute);
+const part = ctx.course?.parts[ctx.partIndex];
+// Pages built in src/pages (All courses) have no Markdown version, so no Copy Markdown or Open.
+const ids = new Set((await getCollection('docs')).map((e) => e.id));
+const isContent = ids.has(Astro.locals.starlightRoute.entry.id);
+---
+
+{ctx.role === 'overview' && ctx.course ? (
+  <CourseHeader course={ctx.course} />
+) : (
+  <>
+    {isContent ? <Default /> : <PlainTitle />}
+    {part && (
+      <p class="lesson-meta">
+        <span class="part">{t('nf.course.partOf', { n: ctx.partIndex + 1, total: ctx.course!.parts.length })}</span>
+        {part.minutes && (
+          <span class="time">
+            <Fragment set:html={icon('clock', 14)} />
+            {formatMinutes(part.minutes)}
+          </span>
+        )}
+      </p>
+    )}
+  </>
+)}
+
+<style>
+  .lesson-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    order: 1;
+    margin: 14px 0 0;
+    font-size: 14px;
+  }
+  .part {
+    color: var(--nf-link);
+    font-family: var(--nf-font-mono);
+    font-weight: 700;
+  }
+  .time {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--nf-muted);
+  }
+  /* Keep the line straight under the title, above the page actions that narrow screens show there. */
+  :global(.sl-container:has(> .lesson-meta)) {
+    display: flex;
+    flex-direction: column;
+  }
+  :global(.sl-container:has(> .lesson-meta) > :not(h1, .lesson-meta)) {
+    order: 2;
+  }
+</style>

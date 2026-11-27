@@ -46,7 +46,7 @@ export default defineConfig({
       social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/nextflow-io/training' }],
       editLink: { baseUrl: 'https://github.com/nextflow-io/training/edit/master/docs/' },
       routeMiddleware: './src/routeData.ts',
-      customCss: ['./src/styles/theme.css', './src/styles/custom.css'],
+      customCss: ['./src/styles/theme.css', './src/styles/custom.css', './src/styles/content.css'],
       components: {
         Head: './src/components/Head.astro',
         Banner: './src/components/Banner.astro',
@@ -56,6 +56,8 @@ export default defineConfig({
         MarkdownContent: './src/components/home/MarkdownContent.astro',
         SiteTitle: './src/components/header/SiteTitle.astro',
         PageSidebar: './src/components/TocResources.astro',
+        PageTitle: './src/components/course/PageTitle.astro',
+        Sidebar: './src/components/sidebar/Sidebar.astro',
         Footer: './src/components/Consent.astro',
       },
       plugins: [
@@ -71,7 +73,7 @@ export default defineConfig({
         starlightQuiz({ progressPosition: 'bottom' }),
         starlightLlmsTxt(),
         // No baseUrl: page actions then leave llms.txt to starlight-llms-txt.
-        starlightPageActions(),
+        starlightPageActions({ position: 'table-of-contents' }),
         // Translated pages link to English fallback pages on purpose.
         starlightLinksValidator({
           // nf4_science/_template links to `{TOOL_A_URL}`-style placeholders on purpose.

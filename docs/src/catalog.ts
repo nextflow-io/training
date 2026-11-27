@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import { courses as courseConfig, groups, sideQuests as sqConfig } from './courses.mjs';
 import { sidebar } from './sidebar.mjs';
 
-export type Part = { slug: string; title: string; minutes?: number };
+export type Part = { slug: string; title: string; pageTitle: string; description?: string; minutes?: number };
 export type Course = {
   id: string;
   title: string;
@@ -12,9 +12,11 @@ export type Course = {
   icon: string;
   blurb: string;
   level?: string;
+  buildsOn: string[];
   next: string[];
   start?: string;
   summary?: string;
+  survey?: string;
   parts: Part[];
   minutes: number;
   /** Some parts have no `duration`, so `minutes` is a lower bound. */
@@ -74,7 +76,13 @@ async function build() {
     if (!entry) throw new Error(`courses.mjs: no page for "${slug}"`);
     return entry.data as { title: string; description?: string; duration?: number };
   };
-  const part = (slug: string): Part => ({ slug, title: shortTitle(page(slug).title), minutes: page(slug).duration });
+  const part = (slug: string): Part => ({
+    slug,
+    title: shortTitle(page(slug).title),
+    pageTitle: page(slug).title,
+    description: page(slug).description,
+    minutes: page(slug).duration,
+  });
 
   const courses: Course[] = courseConfig.map((c) => {
     const group = findGroup(sidebar, c.id);
@@ -85,10 +93,12 @@ async function build() {
       ...c,
       group: c.group as Course['group'],
       next: c.next ?? [],
+      buildsOn: c.buildsOn ?? [],
       title: group.label ?? page(c.id).title,
       description: page(c.id).description ?? '',
       start: slugs.find((s) => /^0+_|^orientation$/.test(leaf(s))),
       summary: slugs.find((s) => leaf(s) === 'next_steps'),
+      survey: slugs.find((s) => leaf(s) === 'survey'),
       parts,
       minutes: parts.reduce((n, p) => n + (p.minutes ?? 0), 0),
       partial: parts.some((p) => !p.minutes),
@@ -143,3 +153,39 @@ export async function clientItems(): Promise<ClientItem[]> {
 }
 
 export { formatMinutes } from './scripts/my-courses';
+
+/** Where a page sits in the catalogue: its course and role, plus URL helpers for its language. */
+export async function pageContext(route: { id: string; locale?: string | undefined }) {
+  const { courses, sideQuests } = await getCatalog();
+  const slug = route.locale ? route.id.replace(new RegExp(`^${route.locale}/?`), '') : route.id;
+  const prefix = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${route.locale ? `${route.locale}/` : ''}`;
+  const within = (id: string) => slug === id || slug.startsWith(`${id}/`);
+  const course = [...courses].sort((a, b) => b.id.length - a.id.length).find((c) => within(c.id));
+  const partIndex = course ? course.parts.findIndex((p) => p.slug === slug) : -1;
+  const quest = course ? undefined : sideQuests.groups.flatMap((g) => g.quests).find((q) => within(q.slug));
+  const role = !course
+    ? undefined
+    : slug === course.id
+      ? 'overview'
+      : slug === course.start
+        ? 'start'
+        : slug === course.summary
+          ? 'summary'
+          : partIndex >= 0
+            ? 'part'
+            : 'other';
+  return {
+    slug,
+    prefix,
+    href: (s: string) => `${prefix}${s}/`,
+    within,
+    courses,
+    sideQuests,
+    course,
+    role,
+    partIndex,
+    inSideQuests: !course && within(sideQuests.id),
+    quest,
+    questPart: quest?.parts.find((p) => p.slug === slug),
+  };
+}

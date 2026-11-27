@@ -1,6 +1,10 @@
 ---
 import Default from '@astrojs/starlight/components/Head.astro';
 import { getCollection } from 'astro:content';
+import degularMedium from '../fonts/Degular-Medium.woff2?url';
+import degularSemibold from '../fonts/Degular-Semibold.woff2?url';
+import inter from '../fonts/Inter-latin.woff2?url';
+import robotoMono from '../fonts/RobotoMono-latin.woff2?url';
 
 const ids = new Set((await getCollection('docs')).map((entry) => entry.id));
 // A fallback page renders the English entry, so it takes that entry's card and Markdown.
@@ -14,6 +18,10 @@ const image = url(`og/${page ?? 'index'}.png`);
 <Default>
   <slot />
 </Default>
+{/* Fetch the fonts every page uses before CSS asks for them, so text doesn't redraw in a new font. */}
+{[inter, robotoMono, degularMedium, degularSemibold].map((href) => (
+  <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />
+))}
 <meta property="og:image" content={image} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />

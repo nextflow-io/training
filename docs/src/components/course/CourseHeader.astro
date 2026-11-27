@@ -1,0 +1,144 @@
+---
+import { formatMinutes, type Course } from '../../catalog';
+import { nextflowVersion } from '../../courses.mjs';
+import { icon } from '../../icons.mjs';
+
+interface Props {
+  course: Course;
+}
+const { course } = Astro.props;
+const t = Astro.locals.t;
+const { entry, locale } = Astro.locals.starlightRoute;
+const prefix = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${locale ? `${locale}/` : ''}`;
+const start = course.start ?? course.parts[0]?.slug ?? course.id;
+const chips = [
+  ['layers', t('nf.course.parts', { n: course.parts.length })],
+  !course.partial && ['clock', t('nf.course.about', { time: formatMinutes(course.minutes) })],
+  course.level && ['flag', course.level],
+  ['terminal', t('nf.course.nextflow', { version: nextflowVersion })],
+].filter(Boolean) as [string, string][];
+---
+
+<header class="course-header">
+  <h1 id="_top">{entry.data.title}</h1>
+  {entry.data.description && <p class="lede">{entry.data.description}</p>}
+  <ul class="chips">
+    {chips.map(([name, text]) => (
+      <li>
+        <Fragment set:html={icon(name, 14)} />
+        {text}
+      </li>
+    ))}
+  </ul>
+  <div class="actions">
+    <a class="nf-btn" href={`${prefix}${start}/`}>
+      {t('nf.course.start')}
+      <Fragment set:html={icon('arrowRight', 18)} />
+    </a>
+    <nf-add-course
+      data-id={course.id}
+      data-added={t('nf.course.added')}
+      data-add={t('nf.course.add')}
+      data-say-added={t('nf.mc.added', { title: course.title })}
+      data-say-removed={t('nf.mc.removed', { title: course.title })}
+    >
+      <button type="button" class="nf-btn-2" aria-pressed="false">
+        <Fragment set:html={icon('plus', 16, 2.5, 'plus')} />
+        <Fragment set:html={icon('check', 16, 2.5, 'tick')} />
+        <span>{t('nf.course.add')}</span>
+      </button>
+    </nf-add-course>
+  </div>
+</header>
+
+<script>
+  import { myCourses } from '../../scripts/my-courses';
+  import { announce } from '../../scripts/ui';
+
+  class AddCourse extends HTMLElement {
+    connectedCallback() {
+      const store = myCourses();
+      const id = this.dataset.id!;
+      const btn = this.querySelector('button')!;
+      const render = () => {
+        const on = store.has(id);
+        btn.setAttribute('aria-pressed', String(on));
+        btn.querySelector('span')!.textContent = on ? this.dataset.added! : this.dataset.add!;
+      };
+      render();
+      store.subscribe(render);
+      btn.addEventListener('click', () => {
+        store.toggle(id);
+        announce((store.has(id) ? this.dataset.sayAdded : this.dataset.sayRemoved)!);
+      });
+    }
+  }
+  customElements.define('nf-add-course', AddCourse);
+</script>
+
+<style>
+  .course-header {
+    margin-bottom: 8px;
+  }
+  h1 {
+    margin: 1rem 0 0;
+    font-family: var(--nf-font-display);
+    font-size: var(--sl-text-h1);
+    font-weight: 600;
+    line-height: 1.05;
+    color: var(--nf-ink);
+  }
+  .lede {
+    max-width: 640px;
+    margin: 18px 0 0;
+    font-size: 19px;
+    line-height: 1.55;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .chips li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 4px 10px;
+    border: 1px solid var(--nf-line-2);
+    border-radius: 999px;
+    font-size: 13px;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .actions .nf-btn,
+  .actions .nf-btn:hover {
+    color: var(--nf-on-mint);
+  }
+  .actions .nf-btn-2 {
+    min-height: 48px;
+    padding: 10px 18px;
+    font: inherit;
+    font-weight: 500;
+  }
+  .actions :global(.tick),
+  .actions [aria-pressed='true'] :global(.plus) {
+    display: none;
+  }
+  .actions [aria-pressed='true'] :global(.tick) {
+    display: block;
+    color: var(--nf-link);
+  }
+  .actions [aria-pressed='true'] {
+    border-color: var(--nf-green);
+    background: var(--nf-on-bg);
+    color: var(--nf-on-ink);
+  }
+</style>

@@ -1,5 +1,7 @@
 ---
+import { uiStrings } from '../../strings';
 import config from 'virtual:starlight/user-config';
+import announcement from '../../announcement.json';
 import seqeraLogo from '../../assets/seqera-logo-light.svg';
 import nextflowLogo from '../../assets/nextflow-logo-white.png';
 import { formatMinutes, getCatalog } from '../../catalog';
@@ -21,15 +23,13 @@ const goalTabs = [
   { id: 'write', icon: 'code' },
   { id: 'custom', icon: 'sliders' },
 ] as const;
-const strings = Object.fromEntries(
-  Object.entries(t.all())
-    .filter(([k]) => k.startsWith('nf.home.'))
-    .map(([k, v]) => [k.slice(8), v]),
-);
+const strings = uiStrings(Astro.locals.t.all(), 'nf.home.');
+// Same rule as the announcement banner. A static build keeps the card, so the inline script below also
+// swaps it once `hide_after` passes.
+const showEvent = announcement.active && Date.now() < Date.parse(announcement.hide_after);
+const eventTitle = announcement.text.replace(/:\s*$/, '');
 const editHref = config.editLink.baseUrl ? `${config.editLink.baseUrl}src/content/docs/index.mdx` : undefined;
-// TODO(redesign): All courses and Course map pages don't exist yet.
-const allCoursesHref = '#';
-const courseMapHref = '#';
+const allCoursesHref = `${prefix}courses/`;
 ---
 
 {/* Show the learner's last tab before the route card paints, so it doesn't jump. */}
@@ -51,10 +51,6 @@ const courseMapHref = '#';
         <a href={allCoursesHref} class="nf-btn-2">
           <Fragment set:html={icon('list')} />
           {t('nf.home.allCourses')}
-        </a>
-        <a href={courseMapHref} class="nf-btn-2">
-          <Fragment set:html={icon('map')} />
-          {t('nf.home.courseMap')}
         </a>
       </div>
     </section>
@@ -122,22 +118,25 @@ const courseMapHref = '#';
               const c = byId.get(id)!;
               return (
                 <li>
-                  <button type="button" class="stop" data-id={id} aria-pressed="false">
-                    <span class="stop-row">
+                  <div class="stop" data-stop={id}>
+                    <span class="stop-row" aria-hidden="true">
                       <span class="num">{i + 1}</span>
-                      {i < list.length - 1 && <span class="line" aria-hidden="true" />}
+                      {i < list.length - 1 && <span class="line" />}
                     </span>
-                    <span class="stop-title">{c.title}</span>
-                    <span class="stop-desc">{c.blurb}</span>
+                    <a class="stop-link" href={href(id)}>
+                      <span class="stop-title">{c.title}</span>
+                      <span class="stop-desc">{c.blurb}</span>
+                    </a>
                     <span class="nf-meta">{meta(c)}</span>
                     <span class="stop-slot" hidden />
-                    <span class="toggle" aria-hidden="true">
+                    <button type="button" class="toggle" data-id={id} aria-pressed="false">
                       <Fragment set:html={icon('check', 16, 2.5, 'tick')} />
                       <Fragment set:html={icon('plus', 16, 2.5, 'plus')} />
                       <span class="on-label">{t('nf.home.inMyCourses')}</span>
                       <span class="off-label">{t('nf.home.add')}</span>
-                    </span>
-                  </button>
+                      <span class="nf-sr-only">: {c.title}</span>
+                    </button>
+                  </div>
                 </li>
               );
             })}
@@ -238,15 +237,31 @@ const courseMapHref = '#';
         </a>
       </div>
       <div class="band-cards">
-        {/* TODO(redesign): the next event's name and dates need a data source. */}
-        <a href={href('training_events')} class="band-card">
+        {/* The banner's announcement.json, while it is live; otherwise a general Training Weeks card. */}
+        {showEvent && (
+          <a href={announcement.url} class="band-card" id="nf-next-event">
+            <span class="band-icon" aria-hidden="true" set:html={icon('calendar', 24)} />
+            <span>
+              <span class="band-label">{t('nf.home.events.nextLabel')}</span>
+              <span class="band-title">{eventTitle}</span>
+              <span class="band-desc">{announcement.text_bold}</span>
+            </span>
+          </a>
+        )}
+        <a href={href('training_events')} class="band-card" id="nf-training-weeks" hidden={showEvent}>
           <span class="band-icon" aria-hidden="true" set:html={icon('calendar', 24)} />
           <span>
-            <span class="band-label">{t('nf.home.events.nextLabel')}</span>
+            <span class="band-label">{t('nf.home.events.weeksLabel')}</span>
             <span class="band-title">{t('nf.home.events.nextTitle')}</span>
-            <span class="band-desc">{t('nf.home.events.nextDates')}</span>
+            <span class="band-desc">{t('nf.home.events.weeksDesc')}</span>
           </span>
         </a>
+        {showEvent && <script is:inline define:vars={{ hideAfter: announcement.hide_after }}>
+          if (Date.now() >= Date.parse(hideAfter)) {
+            document.getElementById('nf-next-event').remove();
+            document.getElementById('nf-training-weeks').hidden = false;
+          }
+        </script>}
         <a href={`${href('training_events')}#information-for-trainers`} class="band-card">
           <span class="band-icon" aria-hidden="true" set:html={icon('users', 24)} />
           <span>
@@ -281,14 +296,15 @@ const courseMapHref = '#';
         <img src={nextflowLogo.src} alt="Nextflow" height="22" width="135" />
         <span>
           {t('nf.footer.supportedBy')}
-          <img src={seqeraLogo.src} alt="Seqera" height="16" width="47" />
+          <a href="https://seqera.io" class="foot-seqera">
+            <img src={seqeraLogo.src} alt="Seqera" height="26" width="77" />
+          </a>
         </span>
       </div>
       <nav aria-label="Footer">
         <a href={allCoursesHref}>{t('nf.home.allCourses')}</a>
-        <a href={courseMapHref}>{t('nf.home.courseMap')}</a>
         <a href="https://community.seqera.io">{t('nf.footer.forum')}</a>
-        <a href="https://nextflow.io/docs/latest/">{t('nf.footer.docs')}</a>
+        <a href="https://docs.seqera.io/nextflow">{t('nf.footer.docs')}</a>
         {editHref && <a href={editHref}>{t('nf.footer.edit')}</a>}
       </nav>
     </div>
@@ -362,7 +378,7 @@ const courseMapHref = '#';
       const tabIds =
         goal === 'custom'
           ? store.items.filter((i) => !i.sq).map((i) => i.id)
-          : [...this.querySelectorAll<HTMLElement>(`[data-goal-only="${goal}"] .stop`)].map((s) => s.dataset.id!);
+          : [...this.querySelectorAll<HTMLElement>(`[data-goal-only="${goal}"] .stop`)].map((s) => s.dataset.stop!);
       const visible = [...tabIds, ...store.items.filter((i) => i.sq).map((i) => i.id)];
       const mine = store.items.map((i) => i.id).filter((id) => visible.includes(id) && store.has(id));
       let mins = 0;
@@ -422,8 +438,7 @@ const courseMapHref = '#';
       const cta = this.ref('cta') as HTMLAnchorElement;
       if (s.any) {
         cta.removeAttribute('aria-disabled');
-        // TODO(redesign): "Browse more courses" should go to the All courses page.
-        cta.href = s.next ? this.nextHref(s.next) : '#goals';
+        cta.href = s.next ? this.nextHref(s.next) : `${this.dataset.prefix}courses/`;
         const title = s.next ? store.get(s.next)!.title : '';
         this.ref('cta-text').textContent = !s.next
           ? t('browseMore')
@@ -441,26 +456,26 @@ const courseMapHref = '#';
       this.querySelectorAll<HTMLElement>('.stops').forEach((list) => {
         const stops = [...list.querySelectorAll<HTMLElement>('.stop')];
         const pill = (id: string) => (store.has(id) && store.fraction(id) >= 1 ? '' : this.statusPill(id));
-        const anyPill = stops.some((s) => pill(s.dataset.id!));
+        const anyPill = stops.some((s) => pill(s.dataset.stop!));
         stops.forEach((stop, i) => {
-          const id = stop.dataset.id!;
+          const id = stop.dataset.stop!;
           const on = store.has(id);
           const done = store.fraction(id) >= 1;
           stop.classList.toggle('on', on);
-          stop.setAttribute('aria-pressed', String(on));
+          stop.querySelector('.toggle')!.setAttribute('aria-pressed', String(on));
           const num = stop.querySelector('.num')!;
           num.classList.toggle('is-done', done);
           num.innerHTML = done ? icon('check', 14, 3) : String(i + 1);
           stop
             .querySelector('.line')
-            ?.classList.toggle('solid', on && !!stops[i + 1] && store.has(stops[i + 1].dataset.id!));
+            ?.classList.toggle('solid', on && !!stops[i + 1] && store.has(stops[i + 1].dataset.stop!));
           const slot = stop.querySelector<HTMLElement>('.stop-slot')!;
           slot.hidden = !anyPill;
           slot.innerHTML = pill(id);
           stop.querySelector('.toggle')!.classList.toggle('is-done', done);
           stop.querySelector('.on-label')!.textContent = t(done ? 'completed' : 'inMyCourses');
         });
-        const shown = stops.map((s) => s.dataset.id!);
+        const shown = stops.map((s) => s.dataset.stop!);
         const others = store
           .basket()
           .filter((id) => !shown.includes(id) && !store.get(id)!.sq)
@@ -762,9 +777,7 @@ const courseMapHref = '#';
     padding: 14px 16px 18px;
     border: 2px dotted transparent;
     border-radius: var(--nf-radius-md);
-    background: none;
     text-align: left;
-    cursor: pointer;
     transition: border-color 0.15s;
   }
   .stop:hover {
@@ -813,6 +826,19 @@ const courseMapHref = '#';
   .line:global(.solid) {
     border-top: 2px solid var(--nf-mint);
   }
+  .home .stop-link {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    color: inherit;
+    text-decoration: none;
+  }
+  .stop-link:hover .stop-title {
+    color: var(--nf-link);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
   .stop-title {
     display: block;
     margin-top: 16px;
@@ -840,7 +866,7 @@ const courseMapHref = '#';
     display: block;
     height: 36px;
   }
-  .toggle {
+  .stop .toggle {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -852,6 +878,7 @@ const courseMapHref = '#';
     background: var(--nf-surface);
     font-size: 14px;
     font-weight: 600;
+    cursor: pointer;
   }
   .stop:hover .toggle {
     border-color: var(--nf-link);
@@ -1347,9 +1374,13 @@ const courseMapHref = '#';
     font-size: 13px;
   }
   .foot-brand span img {
+    display: block;
     width: auto;
-    height: 16px;
-    opacity: 0.8;
+    height: 26px;
+    opacity: 0.9;
+  }
+  .foot-seqera:hover img {
+    opacity: 1;
   }
   .site-foot nav {
     display: flex;
@@ -1359,6 +1390,7 @@ const courseMapHref = '#';
   }
   .home .site-foot nav a {
     color: #fff;
+    text-decoration: none;
   }
   .home .site-foot nav a:hover {
     color: #86e0ce;
@@ -1415,6 +1447,29 @@ const courseMapHref = '#';
     .line {
       display: none;
     }
+    /* The number sits in its own column, level with the course title. */
+    .stop {
+      display: grid;
+      grid-template-columns: 40px minmax(0, 1fr);
+      column-gap: 14px;
+      align-items: start;
+    }
+    .stop > * {
+      grid-column: 2;
+      justify-self: start;
+    }
+    .stop > .stop-row {
+      grid-column: 1;
+      grid-row: 1 / span 4;
+      align-self: start;
+    }
+    /* One stop per row, so there is no row of pills to line up with. */
+    .stop-slot:empty {
+      display: none;
+    }
+    .stop-title {
+      margin-top: 6px;
+    }
     .section {
       padding: 64px 16px 72px;
     }
@@ -1444,6 +1499,15 @@ const courseMapHref = '#';
   }
   html[data-has-hero] main {
     padding: 0;
+  }
+  /* The sidebar is only the phone menu here. */
+  @media (min-width: 50rem) {
+    html[data-has-hero][data-has-sidebar] {
+      --sl-content-inline-start: 0rem;
+    }
+    html[data-has-hero] .page > .sidebar {
+      display: none;
+    }
   }
   html[data-has-hero] .site-footer,
   html[data-has-hero] .content-panel footer:not(.site-foot) {

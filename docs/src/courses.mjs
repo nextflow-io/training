@@ -4,7 +4,7 @@
 //
 // To add a course: add its pages to sidebar.mjs, then add an entry here.
 // `id` is the course folder (its overview page's slug). The order here is the order learners see.
-// `icon` is a name from src/icons.mjs.
+// `icon` is a name from src/icons.mjs. `buildsOn` lists the courses to take first (empty: a good first course).
 
 export const groups = {
   run: 'Run pipelines',
@@ -15,6 +15,7 @@ export const groups = {
 export const courses = [
   {
     id: 'nextflow_run',
+    buildsOn: [],
     group: 'run',
     icon: 'play',
     blurb: 'Launch pipelines, find outputs, use containers.',
@@ -23,6 +24,7 @@ export const courses = [
   },
   {
     id: 'hello_nextflow',
+    buildsOn: [],
     group: 'write',
     icon: 'code',
     blurb: 'Processes, channels, modules, containers and config.',
@@ -31,6 +33,7 @@ export const courses = [
   },
   {
     id: 'config_exec',
+    buildsOn: ['nextflow_run'],
     group: 'run',
     icon: 'settings',
     blurb: 'Resources, retries and execution profiles.',
@@ -39,6 +42,7 @@ export const courses = [
   },
   {
     id: 'nfcore_use',
+    buildsOn: ['nextflow_run'],
     group: 'run',
     icon: 'package',
     blurb: 'Find, run and configure community pipelines.',
@@ -47,6 +51,7 @@ export const courses = [
   },
   {
     id: 'nfcore_build',
+    buildsOn: ['hello_nextflow', 'nfcore_use'],
     group: 'write',
     icon: 'hammer',
     blurb: 'Template, modules and input validation.',
@@ -55,6 +60,7 @@ export const courses = [
   },
   {
     id: 'seqera_scale',
+    buildsOn: ['nextflow_run', 'nfcore_use'],
     group: 'run',
     icon: 'cloud',
     blurb: 'Launch and monitor runs in Seqera Platform.',
@@ -63,6 +69,7 @@ export const courses = [
   },
   {
     id: 'nf4_science/genomics',
+    buildsOn: ['hello_nextflow'],
     group: 'science',
     icon: 'dna',
     blurb: 'Develop a variant calling pipeline, from per-sample calls to joint calling on a cohort.',
@@ -71,6 +78,7 @@ export const courses = [
   },
   {
     id: 'nf4_science/rnaseq',
+    buildsOn: ['hello_nextflow'],
     group: 'science',
     icon: 'chart',
     blurb: 'Develop a bulk RNAseq processing pipeline, from a single sample to multi-sample paired-end data.',
@@ -79,6 +87,7 @@ export const courses = [
   },
   {
     id: 'nf4_science/imaging',
+    buildsOn: [],
     group: 'science',
     icon: 'image',
     blurb: 'Run and configure imaging pipelines, using nf-core/molkart as the worked example.',

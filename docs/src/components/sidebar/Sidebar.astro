@@ -1,0 +1,551 @@
+---
+import { uiStrings } from '../../strings';
+import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+import { formatMinutes, getCatalog, type Course, type Quest } from '../../catalog';
+import { icon } from '../../icons.mjs';
+import CoursePicker from './CoursePicker.astro';
+
+type Step = {
+  kind: 'overview' | 'start' | 'part' | 'summary';
+  slug: string;
+  title: string;
+  sub?: string;
+  num?: number;
+  /** My courses item and part this step tracks. Quests track the whole item. */
+  item?: string;
+  part?: string;
+  children?: Step[];
+};
+
+const t = Astro.locals.t;
+const route = Astro.locals.starlightRoute;
+const locale = route.locale;
+const slug = locale ? route.id.replace(new RegExp(`^${locale}/?`), '') : route.id;
+const prefix = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${locale ? `${locale}/` : ''}`;
+const href = (s: string) => `${prefix}${s}/`;
+const { courses, sideQuests } = await getCatalog();
+
+const within = (id: string) => slug === id || slug.startsWith(`${id}/`);
+const course = [...courses].sort((a, b) => b.id.length - a.id.length).find((c) => within(c.id));
+const inSideQuests = !course && within(sideQuests.id);
+
+const fixed = (kind: 'overview' | 'start' | 'summary', s: string): Step => ({
+  kind,
+  slug: s,
+  title: t(kind === 'overview' ? 'nf.sb.overview' : kind === 'start' ? 'nf.sb.gettingStarted' : 'nf.sb.summary'),
+  sub: kind === 'start' ? t('nf.sb.setUp') : undefined,
+});
+
+let steps: Step[] = [];
+let groupLabels: (string | undefined)[] = [];
+let units: [string, string, number][] = [];
+let current: { title: string; icon: string } | undefined;
+
+if (course) {
+  current = course;
+  steps = [
+    fixed('overview', course.id),
+    ...(course.start ? [fixed('start', course.start)] : []),
+    ...course.parts.map((p, i) => ({
+      kind: 'part' as const,
+      slug: p.slug,
+      title: p.title,
+      num: i + 1,
+      sub: [t('nf.sb.part', { n: i + 1 }), p.minutes && formatMinutes(p.minutes)].filter(Boolean).join(' · '),
+      item: course.id,
+      part: p.slug,
+    })),
+    ...(course.summary ? [fixed('summary', course.summary)] : []),
+  ];
+  units = course.parts.map((p) => [course.id, p.slug, p.minutes ?? 0]);
+} else if (inSideQuests) {
+  current = sideQuests;
+  const questStep = (q: Quest): Step => ({
+    kind: 'part',
+    slug: q.slug,
+    title: q.title,
+    sub: q.minutes ? formatMinutes(q.minutes) : undefined,
+    item: q.slug,
+    children:
+      q.parts.length > 1 && within(q.slug)
+        ? q.parts.map((p, i) => ({
+            kind: 'part' as const,
+            slug: p.slug,
+            title: p.title,
+            sub: t('nf.sb.part', { n: i + 1 }),
+            num: i + 1,
+            item: q.slug,
+            part: p.slug,
+          }))
+        : undefined,
+  });
+  const head = [fixed('overview', sideQuests.id), ...(sideQuests.start ? [fixed('start', sideQuests.start)] : [])];
+  steps = [...head];
+  groupLabels = head.map(() => undefined);
+  for (const g of sideQuests.groups) {
+    g.quests.forEach((q, i) => {
+      steps.push(questStep(q));
+      groupLabels.push(i === 0 ? g.label : undefined);
+    });
+  }
+  // A quest counts once, when all its parts are done.
+  units = sideQuests.groups.flatMap((g) => g.quests.map((q): [string, string, number] => [q.slug, '', q.minutes ?? 0]));
+}
+
+// The step for this page: an exact match, or the step whose pages contain it.
+const all = steps.flatMap((s) => [s, ...(s.children ?? [])]);
+const currentSlug = (all.find((s) => s.slug === slug) ?? all.filter((s) => within(s.slug)).at(-1))?.slug;
+
+const setup = [
+  ['nf.sb.env', 'envsetup'],
+  ['nf.sb.versions', 'info/nxf_versions'],
+  ['nf.sb.help', 'help'],
+  ['nf.sb.events', 'training_events'],
+];
+const inSetup = setup.some(([, s]) => within(s));
+const stepIcon = { overview: 'bookmark', start: 'terminal', summary: 'flag' } as const;
+const strings = uiStrings(Astro.locals.t.all(), 'nf.sb.');
+const totalMinutes = units.reduce((n, [, , m]) => n + m, 0);
+const timed = !course?.partial && totalMinutes > 0;
+// What the picker says before any progress: "4 parts · about 1 h".
+const meta = units.length
+  ? [
+      t(course ? 'nf.sb.parts' : 'nf.sb.topics', { n: units.length }),
+      timed && t('nf.sb.about', { time: formatMinutes(totalMinutes) }),
+    ]
+      .filter(Boolean)
+      .join(' · ')
+  : undefined;
+const allCoursesHref = `${prefix}courses/`;
+---
+
+<nf-course-nav
+  class="nav"
+  data-t={JSON.stringify(strings)}
+  data-units={JSON.stringify(units)}
+  data-timed={String(timed)}
+  data-meta={meta}
+>
+  <CoursePicker current={current} currentId={course?.id ?? (inSideQuests ? sideQuests.id : undefined)} meta={meta} />
+
+  {steps.length > 0 && (
+    <>
+      <ol class="steps" aria-label={t('nf.sb.steps')}>
+        {steps.map((s, i) => (
+          <>
+            {groupLabels[i] && <li class="group-label">{groupLabels[i]}</li>}
+            <li class:list={['step', { 'is-current': s.slug === currentSlug }]} data-item={s.item} data-part={s.part}>
+              <a href={href(s.slug)} aria-current={s.slug === currentSlug ? 'page' : undefined}>
+                <span class="dot" aria-hidden="true">
+                  {s.kind === 'part' ? (
+                    <>
+                      <span class="num">{s.num}</span>
+                      <Fragment set:html={icon('check', 14, 3, 'done-mark')} />
+                    </>
+                  ) : (
+                    <Fragment set:html={icon(stepIcon[s.kind], 14)} />
+                  )}
+                </span>
+                <span class="label">
+                  <span class="title">{s.title}</span>
+                  {/* An empty line keeps every step the same height. */}
+                  <span class="sub">{s.sub ?? '\u00a0'}</span>
+                </span>
+              </a>
+              {s.children && (
+                <ol class="steps sub-steps">
+                  {s.children.map((c) => (
+                    <li
+                      class:list={['step', { 'is-current': c.slug === currentSlug }]}
+                      data-item={c.item}
+                      data-part={c.part}
+                    >
+                      <a href={href(c.slug)} aria-current={c.slug === currentSlug ? 'page' : undefined}>
+                        <span class="dot" aria-hidden="true">
+                          <span class="num">{c.num}</span>
+                          <Fragment set:html={icon('check', 12, 3, 'done-mark')} />
+                        </span>
+                        <span class="label">
+                          <span class="title">{c.title}</span>
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </li>
+          </>
+        ))}
+      </ol>
+    </>
+  )}
+
+  <div class="bottom">
+    {/* Phones: the header has no room for these, so the menu carries them. */}
+    <div class="phone-extras">
+      <a href="https://github.com/nextflow-io/training">
+        <Fragment set:html={icon('github', 18)} />
+        GitHub
+      </a>
+      <a href="https://community.seqera.io">
+        <Fragment set:html={icon('forum', 18)} />
+        {t('nf.footer.forum')}
+      </a>
+      <div class="prefs">
+        <ThemeSelect />
+        <LanguageSelect />
+      </div>
+    </div>
+    <a href={allCoursesHref} aria-current={slug === 'courses' ? 'page' : undefined}>
+      <Fragment set:html={icon('list')} />
+      {t('nf.home.allCourses')}
+    </a>
+    <details open={inSetup || !current}>
+      <summary>
+        <Fragment set:html={icon('help')} />
+        {t('nf.sb.setupHelp')}
+        <Fragment set:html={icon('chevronRight', 14, 2, 'chev')} />
+      </summary>
+      <ul>
+        {setup.map(([key, s]) => (
+          <li>
+            <a href={href(s)} aria-current={within(s) ? 'page' : undefined}>
+              {t(key)}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </details>
+  </div>
+</nf-course-nav>
+
+<script>
+  import { formatMinutes, myCourses } from '../../scripts/my-courses';
+  import { strings } from '../../scripts/ui';
+
+  class CourseNav extends HTMLElement {
+    store = myCourses();
+    t = strings(this);
+
+    connectedCallback() {
+      this.render();
+      this.store.subscribe(() => this.render());
+    }
+
+    render() {
+      const { store, t } = this;
+      const isDone = (el: HTMLElement) =>
+        el.dataset.part
+          ? store.isPartDone(el.dataset.item!, el.dataset.part)
+          : !!el.dataset.item && store.fraction(el.dataset.item) >= 1;
+      for (const list of this.querySelectorAll<HTMLElement>('.steps')) {
+        const steps = [...list.children].filter((el) => el.classList.contains('step')) as HTMLElement[];
+        steps.forEach((li, i) => {
+          const done = isDone(li);
+          li.classList.toggle('is-done', done);
+          // The line into a step is green when it runs from a done step to a done or current one.
+          const prev = steps[i - 1];
+          li.classList.toggle(
+            'in-on',
+            !!prev && prev.classList.contains('is-done') && (done || li.classList.contains('is-current')),
+          );
+        });
+      }
+
+      const units: [string, string, number][] = JSON.parse(this.dataset.units || '[]');
+      const text = this.querySelector<HTMLElement>('.picker-btn .meta');
+      const fill = this.querySelector<HTMLElement>('.picker-btn .bar > span');
+      if (!text || !fill || !units.length) return;
+      const isUnitDone = ([item, part]: [string, string, number]) =>
+        part ? store.isPartDone(item, part) : store.fraction(item) >= 1;
+      const done = units.filter(isUnitDone).length;
+      const left = units.filter((u) => !isUnitDone(u)).reduce((n, [, , m]) => n + m, 0);
+      fill.style.width = `${(100 * done) / units.length}%`;
+      text.textContent = !done
+        ? this.dataset.meta!
+        : done === units.length
+          ? t('allDone')
+          : [
+              t('progress', { d: done, n: units.length }),
+              this.dataset.timed === 'true' && left && t('left', { time: formatMinutes(left) }),
+            ]
+              .filter(Boolean)
+              .join(' · ');
+    }
+  }
+  customElements.define('nf-course-nav', CourseNav);
+</script>
+
+<style>
+  .nav {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    color: var(--nf-ink);
+    font-size: 15px;
+    line-height: 1.35;
+  }
+  .nav a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .nav > .steps {
+    margin-top: 16px;
+  }
+  .step {
+    position: relative;
+    margin: 0;
+  }
+  /* Connectors: each step draws the line into its circle (::before) and out of it (::after). */
+  .step::before,
+  .step::after,
+  .group-label::before {
+    content: '';
+    position: absolute;
+    left: 17px;
+    border-left: 2px solid var(--nf-line);
+  }
+  .step::before {
+    top: 0;
+    height: 20px;
+  }
+  .step::after {
+    top: 20px;
+    bottom: 0;
+  }
+  .steps > .step:first-child::before,
+  .steps > .step:last-child::after {
+    display: none;
+  }
+  /* Starts above the label's margin and rule, so the line between steps doesn't break. */
+  .group-label::before {
+    top: -13px;
+    bottom: 0;
+    left: calc(17px + var(--sl-sidebar-pad-x));
+  }
+  .step:global(.in-on)::before,
+  .step:has(+ :global(.step.in-on))::after,
+  .step:has(+ .group-label + :global(.step.in-on))::after,
+  .group-label:has(+ :global(.step.in-on))::before {
+    border-color: var(--nf-green);
+  }
+  .step > a {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 6px 4px;
+    border-radius: var(--nf-radius-md);
+  }
+  .step > a:hover .title {
+    color: var(--nf-link);
+  }
+  .dot {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1.5px solid var(--nf-line-3);
+    border-radius: 50%;
+    background: var(--nf-bg);
+    color: var(--nf-muted);
+    font-family: var(--nf-font-mono);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .dot :global(.done-mark) {
+    display: none;
+  }
+  .step:global(.is-done) > a > .dot {
+    border-color: var(--nf-green);
+    background: var(--nf-green);
+    color: var(--nf-on-mint);
+  }
+  .step:global(.is-done) > a > .dot .num {
+    display: none;
+  }
+  .step:global(.is-done) > a > .dot :global(.done-mark) {
+    display: block;
+  }
+  .step.is-current > a > .dot {
+    border: 2px solid var(--nf-green);
+    background: var(--nf-mint-soft);
+    box-shadow: 0 0 0 4px var(--nf-on-bg);
+    color: var(--nf-deep);
+  }
+  .label {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding-top: 4px;
+  }
+  .title {
+    font-size: 15px;
+  }
+  .is-current > a .title {
+    color: var(--nf-deep);
+    font-weight: 600;
+  }
+  .sub {
+    margin-top: 2px;
+    color: var(--nf-muted);
+    font-size: 12px;
+  }
+  .group-label {
+    position: relative;
+    /* Out to the sidebar's edges; the padding and line offset make up for it. */
+    margin: 12px calc(-1 * var(--sl-sidebar-pad-x)) 0;
+    padding: 12px 4px 4px calc(44px + var(--sl-sidebar-pad-x));
+    border-top: 1px solid var(--nf-line);
+    color: var(--nf-muted);
+    font-family: var(--nf-font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .sub-steps {
+    margin: 0 0 4px 30px;
+  }
+  .sub-steps .dot {
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+  }
+  .sub-steps .step::before,
+  .sub-steps .step::after {
+    left: 14px;
+  }
+  .sub-steps .step::before {
+    height: 17px;
+  }
+  .sub-steps .step::after {
+    top: 17px;
+  }
+  .sub-steps .title {
+    font-size: 14px;
+  }
+  .sub-steps .label {
+    padding-top: 1px;
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    padding: 12px 0 16px;
+    border-top: 1px solid var(--nf-line);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .nav > .steps {
+    margin-bottom: 24px;
+  }
+  .phone-extras {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--nf-line);
+  }
+  @media (min-width: 50rem) {
+    .phone-extras {
+      display: none;
+    }
+  }
+  .phone-extras > a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 38px;
+    padding: 0 10px;
+  }
+  .prefs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .prefs :global(label:has(> select)) {
+    height: 40px;
+    padding-inline: 12px;
+    border: 1px solid var(--nf-line);
+    border-radius: var(--nf-radius-sm);
+    background: var(--nf-surface);
+    color: var(--nf-ink);
+    --sl-label-icon-size: 16px;
+    --sl-caret-size: 14px;
+  }
+  .prefs :global(label:has(> select) .label-icon) {
+    inset-inline-start: 12px;
+  }
+  .prefs :global(label:has(> select) .caret) {
+    inset-inline-end: 12px;
+  }
+  .prefs :global(label:has(> select) select) {
+    width: auto;
+    min-width: 6em;
+    height: 100%;
+    margin-inline: -12px;
+    padding-block: 0;
+    padding-inline: 36px 32px;
+    font-size: 14px;
+    field-sizing: content;
+  }
+  .bottom > a,
+  .bottom summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 38px;
+    padding: 0 10px;
+    border-radius: var(--nf-radius-sm);
+    cursor: pointer;
+  }
+  .bottom > a:hover,
+  .bottom summary:hover {
+    background: var(--nf-soft);
+  }
+  .bottom > a[aria-current='page'] {
+    color: var(--nf-link);
+  }
+  .bottom summary {
+    list-style: none;
+  }
+  .bottom summary::-webkit-details-marker {
+    display: none;
+  }
+  .bottom :global(.chev) {
+    margin-left: auto;
+    color: var(--nf-muted);
+    transition: transform 0.15s;
+  }
+  .bottom details[open] :global(.chev) {
+    transform: rotate(90deg);
+  }
+  .bottom ul {
+    margin: 2px 0 0 36px;
+    padding: 0;
+    list-style: none;
+    font-weight: 400;
+  }
+  .bottom li a {
+    display: block;
+    padding: 6px 0;
+    color: var(--nf-muted);
+  }
+  .bottom li a:hover,
+  .bottom li a[aria-current='page'] {
+    color: var(--nf-link);
+  }
+</style>

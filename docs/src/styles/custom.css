@@ -38,8 +38,7 @@
 }
 /* Type */
 
-h1,
-.sl-markdown-content :is(h2, h3) {
+h1 {
   font-family: var(--nf-font-display);
 }
 

@@ -1,0 +1,136 @@
+---
+// Progress controls at the end of a page: "Mark as complete" on a lesson part, "Mark course as
+// finished" on a course summary. Going on with the Next card also marks the part done.
+import { icon } from '../../icons.mjs';
+
+interface Props {
+  item: string;
+  /** Parts this control marks. One for a lesson, all of them for "course finished". */
+  parts: string[];
+  title: string;
+  whole?: boolean;
+}
+const { item, parts, title, whole = false } = Astro.props;
+const t = Astro.locals.t;
+const strings = {
+  prompt: t(whole ? 'nf.course.finishedPrompt' : 'nf.course.finished'),
+  mark: t(whole ? 'nf.course.markCourse' : 'nf.course.markComplete'),
+  done: t(whole ? 'nf.course.courseFinished' : 'nf.course.completed'),
+  doneNote: whole ? t('nf.course.courseFinishedNote', { n: parts.length }) : '',
+  undo: t('nf.course.undo'),
+  sayDone: t(whole ? 'nf.course.announceCourse' : 'nf.course.announceDone', { title }),
+  sayUndone: t('nf.course.announceUndone', { title }),
+};
+---
+
+<nf-progress
+  class="nf-progress not-content"
+  data-item={item}
+  data-parts={JSON.stringify(parts)}
+  data-whole={String(whole)}
+  data-t={JSON.stringify(strings)}
+>
+  <span class="state-icon" aria-hidden="true" set:html={icon('check', 16, 3)} />
+  <span class="text">{strings.prompt}</span>
+  <button type="button" class="nf-btn-2 mark">
+    {strings.mark}
+  </button>
+  <button type="button" class="nf-text-btn undo" hidden>
+    {strings.undo}
+  </button>
+</nf-progress>
+
+<script>
+  import { myCourses } from '../../scripts/my-courses';
+  import { announce } from '../../scripts/ui';
+
+  class ProgressControl extends HTMLElement {
+    connectedCallback() {
+      const store = myCourses();
+      const item = this.dataset.item!;
+      const parts: string[] = JSON.parse(this.dataset.parts!);
+      const s = JSON.parse(this.dataset.t!);
+      const mark = this.querySelector<HTMLButtonElement>('.mark')!;
+      const undo = this.querySelector<HTMLButtonElement>('.undo')!;
+      const text = this.querySelector('.text')!;
+      const isDone = () => parts.every((p) => store.isPartDone(item, p));
+      const render = () => {
+        const done = isDone();
+        this.classList.toggle('is-done', done);
+        text.textContent = done ? (this.dataset.whole === 'true' ? `${s.done}. ${s.doneNote}` : s.done) : s.prompt;
+        mark.hidden = done;
+        undo.hidden = !done || this.dataset.whole === 'true';
+      };
+      render();
+      store.subscribe(render);
+      mark.addEventListener('click', () => {
+        store.setParts(item, parts, true);
+        announce(s.sayDone);
+        undo.hidden ? this.focus() : undo.focus();
+      });
+      undo.addEventListener('click', () => {
+        store.setParts(item, parts, false);
+        announce(s.sayUndone);
+        mark.focus();
+      });
+      // Going on to the next page counts as finishing this one.
+      if (this.dataset.whole !== 'true') {
+        document.querySelector('.pagination-links a[rel="next"]')?.addEventListener('click', () => {
+          if (!isDone()) store.setParts(item, parts, true);
+        });
+      }
+    }
+  }
+  customElements.define('nf-progress', ProgressControl);
+</script>
+
+<style>
+  .nf-progress {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    margin-top: 48px;
+    padding: 14px 18px;
+    border: 1px solid var(--nf-card-border);
+    border-radius: var(--nf-radius-md);
+    background: var(--nf-soft);
+    font-size: 15px;
+  }
+  .nf-progress:focus {
+    outline: none;
+  }
+  .state-icon {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--nf-line-3);
+    border-radius: 50%;
+    color: transparent;
+  }
+  .nf-progress:global(.is-done) .state-icon {
+    border-color: var(--nf-green);
+    background: var(--nf-green);
+    color: var(--nf-on-mint);
+  }
+  .nf-progress:global(.is-done) {
+    border-color: var(--nf-green);
+    background: var(--nf-on-bg);
+    color: var(--nf-on-ink);
+  }
+  .text {
+    flex: 1;
+    min-width: 12em;
+  }
+  .mark {
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  [hidden] {
+    display: none !important;
+  }
+</style>

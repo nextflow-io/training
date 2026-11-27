@@ -1,0 +1,391 @@
+---
+import { getCatalog } from '../../catalog';
+import { groups } from '../../courses.mjs';
+import { icon } from '../../icons.mjs';
+
+interface Props {
+  current?: { title: string; icon: string };
+  currentId?: string;
+  /** Parts and time; the sidebar swaps in progress once there is some. */
+  meta?: string;
+}
+const { current, currentId, meta } = Astro.props;
+const t = Astro.locals.t;
+const { locale } = Astro.locals.starlightRoute;
+const prefix = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${locale ? `${locale}/` : ''}`;
+const { courses, sideQuests } = await getCatalog();
+const quests = sideQuests.groups.flatMap((g) => g.quests.map((q) => q.slug));
+
+type Row = { id: string; title: string; icon: string; meta: string; mine: string[] };
+const rows = (group: keyof typeof groups): Row[] => [
+  ...courses
+    .filter((c) => c.group === group)
+    .map((c) => ({
+      id: c.id,
+      title: c.title,
+      icon: c.icon,
+      meta: t('nf.sb.parts', { n: c.parts.length }),
+      mine: [c.id],
+    })),
+  ...(sideQuests.group === group
+    ? [
+        {
+          id: sideQuests.id,
+          title: sideQuests.title,
+          icon: sideQuests.icon,
+          meta: t('nf.sb.topics', { n: quests.length }),
+          mine: quests,
+        },
+      ]
+    : []),
+];
+const allCoursesHref = `${prefix}courses/`;
+---
+
+<nf-course-picker class="picker">
+  <button type="button" class="picker-btn" aria-expanded="false" popovertarget="course-picker-panel">
+    <span class="tile" aria-hidden="true" set:html={icon(current?.icon ?? 'cap', 18)} />
+    <span class="picker-text">
+      <span class="cap">{t('nf.sb.course')}</span>
+      <span class="name">{current?.title ?? t('nf.sb.chooseCourse')}</span>
+      {meta && <span class="meta">{meta}</span>}
+    </span>
+    <Fragment set:html={icon('chevronsUpDown', 16, 2, 'updown')} />
+    {meta && (
+      <span class="bar" aria-hidden="true">
+        <span />
+      </span>
+    )}
+  </button>
+  <div class="panel" id="course-picker-panel" popover>
+    <label class="filter">
+      <Fragment set:html={icon('search', 16)} />
+      <input type="search" placeholder={t('nf.sb.filter')} aria-label={t('nf.sb.filter')} autocomplete="off" />
+    </label>
+    <div class="groups">
+      {(Object.keys(groups) as (keyof typeof groups)[]).map((g) => (
+        <section class="group" aria-labelledby={`picker-${g}`}>
+          <p class="group-label" id={`picker-${g}`}>
+            {groups[g]}
+          </p>
+          <ul>
+            {rows(g).map((r) => (
+              <li>
+                <a
+                  href={`${prefix}${r.id}/`}
+                  class:list={['row', { 'is-current': r.id === currentId }]}
+                  aria-current={r.id === currentId ? 'true' : undefined}
+                  data-mine={JSON.stringify(r.mine)}
+                  data-search={r.title.toLowerCase()}
+                >
+                  <span class="tile" aria-hidden="true" set:html={icon(r.icon, 16)} />
+                  <span class="row-text">
+                    <span class="row-title">{r.title}</span>
+                    <span class="row-meta">{r.meta}</span>
+                  </span>
+                  <span class="mine" hidden />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+      <p class="none" hidden>
+        {t('nf.sb.noMatch')}
+      </p>
+    </div>
+    <div class="foot">
+      <a href={allCoursesHref}>
+        <Fragment set:html={icon('list', 16)} />
+        {t('nf.home.allCourses')}
+      </a>
+    </div>
+  </div>
+</nf-course-picker>
+
+<script>
+  import { myCourses } from '../../scripts/my-courses';
+  import { esc, ring } from '../../scripts/ui';
+
+  class CoursePicker extends HTMLElement {
+    btn = this.querySelector<HTMLButtonElement>('.picker-btn')!;
+    panel = this.querySelector<HTMLElement>('.panel')!;
+    input = this.querySelector<HTMLInputElement>('input')!;
+    store = myCourses();
+    mineLabel = '';
+
+    connectedCallback() {
+      this.mineLabel = this.closest<HTMLElement>('[data-t]')
+        ? JSON.parse(this.closest<HTMLElement>('[data-t]')!.dataset.t!).mine
+        : 'Mine';
+      this.renderMine();
+      this.store.subscribe(() => this.renderMine());
+      this.input.addEventListener('input', () => this.filter());
+      this.addEventListener('keydown', (e) => this.onKey(e));
+      // The panel is a popover, so it sits above the sidebar's scroll box instead of being clipped by it.
+      this.panel.addEventListener('toggle', (e) => {
+        const open = (e as ToggleEvent).newState === 'open';
+        this.btn.setAttribute('aria-expanded', String(open));
+        if (!open) return;
+        const r = this.btn.getBoundingClientRect();
+        this.panel.style.top = `${r.bottom + 4}px`;
+        this.panel.style.left = `${Math.max(12, r.left)}px`;
+        this.input.focus();
+      });
+      addEventListener('resize', () => this.panel.hidePopover());
+    }
+
+    rows() {
+      return [...this.querySelectorAll<HTMLAnchorElement>('.row')].filter((r) => !r.closest('li')!.hidden);
+    }
+
+    onKey(e: KeyboardEvent) {
+      if (!this.panel.matches(':popover-open')) return;
+      if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+      e.preventDefault();
+      const rows = this.rows();
+      const i = rows.indexOf(document.activeElement as HTMLAnchorElement);
+      const next = e.key === 'ArrowDown' ? i + 1 : i - 1;
+      if (next < 0) this.input.focus();
+      else rows[Math.min(next, rows.length - 1)]?.focus();
+    }
+
+    filter() {
+      const q = this.input.value.trim().toLowerCase();
+      for (const group of this.querySelectorAll<HTMLElement>('.group')) {
+        let any = false;
+        for (const row of group.querySelectorAll<HTMLElement>('.row')) {
+          const show = !q || row.dataset.search!.includes(q);
+          row.closest('li')!.hidden = !show;
+          any ||= show;
+        }
+        group.hidden = !any;
+      }
+      this.querySelector<HTMLElement>('.none')!.hidden = this.rows().length > 0;
+    }
+
+    renderMine() {
+      for (const row of this.querySelectorAll<HTMLElement>('.row')) {
+        const ids: string[] = JSON.parse(row.dataset.mine!).filter((id: string) => this.store.has(id));
+        const mine = row.querySelector<HTMLElement>('.mine')!;
+        mine.hidden = !ids.length;
+        if (mine.hidden) continue;
+        const f = ids.reduce((n, id) => n + this.store.fraction(id), 0) / ids.length;
+        mine.innerHTML = `${ring(f, 18, 2.5)}<span class="nf-sr-only">${esc(this.mineLabel)}</span>`;
+      }
+    }
+  }
+  customElements.define('nf-course-picker', CoursePicker);
+</script>
+
+<style>
+  .picker {
+    position: relative;
+    display: block;
+  }
+  .picker-btn {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--nf-line-2);
+    border-radius: var(--nf-radius-md);
+    background: var(--nf-surface);
+    color: var(--nf-ink);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .picker-btn:hover,
+  .picker-btn[aria-expanded='true'] {
+    border-color: var(--nf-green);
+  }
+  .picker-btn[aria-expanded='true'] {
+    background: var(--nf-mint-soft);
+  }
+  .tile {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--nf-radius-lg);
+    background: var(--nf-mint);
+    color: var(--nf-on-mint);
+  }
+  .picker-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .cap {
+    color: var(--nf-muted);
+    font-family: var(--nf-font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .name {
+    overflow: hidden;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .meta {
+    overflow: hidden;
+    color: var(--nf-muted);
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .bar {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: var(--nf-line);
+  }
+  .bar > span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: var(--nf-green);
+    transition: width 0.3s;
+  }
+  .picker-btn :global(.updown) {
+    flex: none;
+    color: var(--nf-muted);
+  }
+
+  .panel {
+    position: fixed;
+    inset: auto;
+    margin: 0;
+    width: 370px;
+    max-width: calc(100vw - 24px);
+    padding: 10px;
+    border: 1px solid var(--nf-card-border);
+    border-radius: var(--nf-radius-lg);
+    background: var(--nf-surface);
+    box-shadow: var(--nf-shadow-pop);
+  }
+  .panel [hidden] {
+    display: none;
+  }
+  .filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--nf-line-2);
+    border-radius: var(--nf-radius-sm);
+    color: var(--nf-muted);
+  }
+  .filter:focus-within {
+    border-color: var(--nf-green);
+  }
+  .filter input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: none;
+    color: var(--nf-ink);
+    font: inherit;
+    font-size: 15px;
+    outline: none;
+  }
+  .groups {
+    max-height: calc(100vh - 280px);
+    overflow: auto;
+  }
+  .group-label {
+    margin: 14px 0 6px 0;
+    padding: 0 10px;
+    color: var(--nf-muted);
+    font-family: var(--nf-font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .group ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 10px;
+    border-radius: var(--nf-radius-md);
+    color: var(--nf-ink);
+    text-decoration: none;
+  }
+  .row:hover,
+  .row:focus-visible {
+    background: var(--nf-soft);
+  }
+  .row.is-current {
+    background: var(--nf-mint-soft);
+  }
+  .row .tile {
+    width: 32px;
+    height: 32px;
+    background: var(--nf-icon-tile);
+    color: var(--nf-link);
+  }
+  .row-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .row-title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .row-meta {
+    color: var(--nf-muted);
+    font-size: 13px;
+  }
+  .mine {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--nf-muted);
+    font-size: 13px;
+  }
+  .none {
+    margin: 12px 10px;
+    color: var(--nf-muted);
+    font-size: 14px;
+  }
+  .foot {
+    display: flex;
+    gap: 20px;
+    margin-top: 8px;
+    padding: 10px 10px 2px;
+    border-top: 1px solid var(--nf-line);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .foot a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--nf-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

@@ -1,12 +1,13 @@
 ---
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { markdownToHtml } from 'satteri';
+import { icon } from '../icons.mjs';
 
 interface Props {
   frontmatter?: Record<string, any>;
 }
 
-const { index_type, additional_information: info = {} } = Astro.props.frontmatter ?? {};
+const { additional_information: info = {} } = Astro.props.frontmatter ?? {};
 const { t } = Astro.locals;
 const locale = Astro.currentLocale;
 
@@ -25,102 +26,124 @@ const localizeLinks = {
   },
 };
 const md = (text: string) => markdownToHtml(text, { hastPlugins: [localizeLinks] }).html;
-const list = (items: string[]) => md(items.map((i) => `- ${i}`).join('\n'));
 
-// GitHub Octicons, as on the MkDocs site.
-const icons = {
-  green:
-    'M0 2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 14.25 15H1.75A1.75 1.75 0 0 1 0 13.25Zm1.75-.25a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V2.75a.25.25 0 0 0-.25-.25ZM7.25 8a.75.75 0 0 1-.22.53l-2.25 2.25a.749.749 0 0 1-1.275-.326.75.75 0 0 1 .215-.734L5.44 8 3.72 6.28a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l2.25 2.25c.141.14.22.331.22.53m1.5 1.5h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1 0-1.5',
-  blue: 'M7.693 1.066a.75.75 0 0 1 .614 0l7.25 3.25a.75.75 0 0 1 0 1.368L13 6.831v2.794c0 1.024-.81 1.749-1.66 2.173-.893.447-2.075.702-3.34.702q-.417 0-.816-.036a.75.75 0 0 1 .133-1.494Q7.649 11 8 11c1.082 0 2.025-.221 2.67-.543.69-.345.83-.682.83-.832V7.503L8.307 8.934a.75.75 0 0 1-.614 0L4 7.28v1.663c.296.105.575.275.812.512.438.438.688 1.059.688 1.796v3a.75.75 0 0 1-.75.75h-3a.75.75 0 0 1-.75-.75v-3c0-.737.25-1.358.688-1.796.237-.237.516-.407.812-.512V6.606L.443 5.684a.75.75 0 0 1 0-1.368ZM2.583 5 8 7.428 13.416 5 8 2.572ZM2.5 11.25v2.25H4v-2.25c0-.388-.125-.611-.25-.735a.7.7 0 0 0-.5-.203.7.7 0 0 0-.5.203c-.125.124-.25.347-.25.735',
-  purple:
-    'M2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.51 5.51 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4 4 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.5 5.5 0 0 1 3.102 8.05 3.5 3.5 0 0 1 2 5.5M11 4a3.001 3.001 0 0 1 2.22 5.018 5 5 0 0 1 2.56 3.012.749.749 0 0 1-.885.954.75.75 0 0 1-.549-.514 3.51 3.51 0 0 0-2.522-2.372.75.75 0 0 1-.574-.73v-.352a.75.75 0 0 1 .416-.672A1.5 1.5 0 0 0 11 5.5.75.75 0 0 1 11 4m-5.5-.5a2 2 0 1 0-.001 3.999A2 2 0 0 0 5.5 3.5',
-  red: 'M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25Zm1.75-.25a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25ZM6 10.559V5.442a.25.25 0 0 1 .379-.215l4.264 2.559a.25.25 0 0 1 0 .428l-4.264 2.559A.25.25 0 0 1 6 10.559',
-};
-
+// `**Audience:** text` items describe who the course is for; the rest (skills, prerequisites) what you need.
+const forWho = /^\*\*(Audience|Domain)/i;
+const stripLabel = (s: string) => s.replace(/^\*\*[^*]+:\*\*\s*/, '');
+const prereqs: string[] = info.audience_prerequisites ?? [];
+const who = prereqs.filter((p) => forWho.test(p)).map(stripLabel);
 const tech = info.technical_requirements;
+const need = [
+  ...prereqs.filter((p) => !forWho.test(p)).map(stripLabel),
+  ...(tech ? [tech === true ? t('courseInfo.defaultTechnicalRequirements') : tech] : []),
+];
 const playlist = info.videos_playlist;
-const sections = [
-  tech && {
-    label: t('courseInfo.technicalRequirements'),
-    color: 'green',
-    html: md(tech === true ? t('courseInfo.defaultTechnicalRequirements') : tech),
-  },
-  info.learning_objectives?.length && {
-    label: t('courseInfo.learningObjectives'),
-    color: 'blue',
-    html: list(info.learning_objectives),
-  },
-  info.audience_prerequisites?.length && {
-    label: t('courseInfo.audiencePrerequisites'),
-    color: 'purple',
-    html: list(info.audience_prerequisites),
-  },
-  (playlist || info.videos) && {
-    label: t('courseInfo.courseVideos'),
-    color: 'red',
-    html: md(
-      playlist ? `${t('courseInfo.defaultVideos')}\n\n[${t('courseInfo.viewPlaylist')}](${playlist})` : info.videos,
-    ),
-  },
-].filter(Boolean) as { label: string; color: keyof typeof icons; html: string }[];
+const videos = playlist
+  ? `${t('courseInfo.defaultVideos')} [${t('courseInfo.viewPlaylist')}](${playlist})`
+  : info.videos;
+const objectives: string[] = info.learning_objectives ?? [];
+const para = (items: string[]) => md(items.join('\n\n'));
 ---
 
-{(index_type || sections.length > 0) && (
-  <section class="course-info">
-    <div class="header">
-      <h2>{t('courseInfo.additionalInformation')}</h2>
-      {index_type && <span class="badge">{index_type}</span>}
+{objectives.length > 0 && (
+  <section class="nf-course-info not-content">
+    <h2 id="what-youll-learn">{t('nf.course.learn')}</h2>
+    <ul class="learn">
+      {objectives.map((o) => (
+        <li>
+          <Fragment set:html={icon('check', 18, 2.5)} />
+          <span set:html={markdownToHtml(o).html.replace(/^<p>|<\/p>\s*$/g, '')} />
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+{(who.length > 0 || need.length > 0) && (
+  <section class="nf-course-info not-content">
+    <h2 id="before-you-start">{t('nf.course.before')}</h2>
+    <div class="cards">
+      {who.length > 0 && (
+        <div class="card">
+          <h3>{t('nf.course.whoFor')}</h3>
+          <div set:html={para(who)} />
+        </div>
+      )}
+      {need.length > 0 && (
+        <div class="card">
+          <h3>{t('nf.course.youNeed')}</h3>
+          <div set:html={para(need)} />
+        </div>
+      )}
     </div>
-    {sections.map(({ label, color, html }) => (
-      <details style={`--accent: var(--sl-color-${color}); --accent-high: var(--sl-color-${color}-high)`}>
-        <summary>
-          <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16">
-            <path d={icons[color]} />
-          </svg>
-          {label}
-        </summary>
-        <div set:html={html} />
-      </details>
-    ))}
+    {videos && <div class="videos" set:html={md(videos)} />}
   </section>
 )}
 
 <style>
-  .course-info {
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: 0.5rem;
-    padding: 1rem 1.25rem 1.25rem;
+  .nf-course-info {
+    margin-top: 48px;
   }
-  .header {
+  h2 {
+    margin: 0 0 16px;
+    font-family: var(--nf-font-display);
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--nf-ink);
+  }
+  .learn {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 10px 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .learn li {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
+    gap: 10px;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
   }
-  .header h2 {
-    font-size: var(--sl-text-lg);
+  .learn :global(svg) {
+    flex: none;
+    margin-top: 2px;
+    color: var(--nf-link);
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 14px;
+  }
+  .card {
+    padding: 18px 20px;
+    border: 1px solid var(--nf-card-border);
+    border-radius: var(--nf-radius-md);
+    color: var(--nf-muted);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .card h3 {
+    margin: 0 0 6px;
+    color: var(--nf-ink);
+    font-family: var(--nf-font-body);
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .card :global(p) {
+    margin: 0 0 8px;
+  }
+  .card :global(p:last-child) {
     margin: 0;
   }
-  .badge {
-    background: var(--sl-color-accent-low);
-    border: 1px solid var(--sl-color-accent);
-    border-radius: 0.25rem;
-    color: var(--sl-color-accent-high);
-    font-size: var(--sl-text-xs);
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    padding: 0.125rem 0.5rem;
-    text-transform: uppercase;
+  .card :global(a),
+  .videos :global(a) {
+    color: var(--nf-link);
   }
-  details {
-    --sl-details-border-color: var(--accent);
-  }
-  summary svg {
-    display: inline;
-    color: var(--accent-high);
-    fill: currentColor;
-    margin-inline-end: 0.375rem;
-    vertical-align: -0.125em;
+  .videos {
+    margin-top: 14px;
+    color: var(--nf-muted);
+    font-size: 14px;
   }
 </style>

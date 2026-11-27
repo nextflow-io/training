@@ -1,24 +1,24 @@
 ---
+import { uiStrings } from '../../strings';
 import { clientItems } from '../../catalog';
 import { icon } from '../../icons.mjs';
 
 const { locale } = Astro.locals.starlightRoute;
 const prefix = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${locale ? `${locale}/` : ''}`;
 const items = (await clientItems()).map((i) => ({ ...i, href: `${prefix}${i.id}/` }));
-const t = Object.fromEntries(
-  Object.entries(Astro.locals.t.all())
-    .filter(([k]) => k.startsWith('nf.mc.'))
-    .map(([k, v]) => [k.slice(6), v]),
-);
+const t = uiStrings(Astro.locals.t.all(), 'nf.mc.');
 ---
 
 <script type="application/json" id="nf-catalog" set:html={JSON.stringify(items)} />
 <nf-my-courses class="mc" data-t={JSON.stringify(t)} data-home={prefix}>
   <button type="button" class="mc-btn" aria-expanded="false" aria-controls="mc-panel" aria-label={t.label}>
-    <span class="mc-btn-body">
-      <Fragment set:html={icon('cap', 20)} />
-      <span class="mc-label">{t.label}</span>
+    <span class="mc-avatar-wrap">
+      <svg class="nf-ring" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+        <circle cx="17" cy="17" r="15.5" fill="none" stroke="var(--nf-line)" stroke-width="3"></circle>
+      </svg>
+      <span class="mc-icon" set:html={icon('cap', 16)} />
     </span>
+    <span class="mc-label">{t.label}</span>
     <Fragment set:html={icon('chevronDown', 14, 2, 'mc-chev')} />
   </button>
   <div class="mc-panel" id="mc-panel" role="region" aria-label={t.label} hidden></div>
@@ -82,8 +82,12 @@ const t = Object.fromEntries(
         (acts[Math.min(rowIndex, acts.length - 1)] ?? this.btn).focus();
       }
       if (c.type === 'add' && c.id) {
-        this.bump();
-        this.showToast(c.id);
+        const id = c.id;
+        // After every listener has run: a follow-up change (marking a part done) re-renders the button.
+        queueMicrotask(() => {
+          this.bump();
+          this.showToast(id);
+        });
       }
     }
 
@@ -117,7 +121,7 @@ const t = Object.fromEntries(
     }
 
     bump() {
-      const el = this.btn.querySelector('.mc-badge, .mc-avatar-wrap');
+      const el = this.btn.querySelector('.mc-avatar-wrap');
       if (!el || reducedMotion()) return;
       el.classList.remove('bump');
       void (el as HTMLElement).offsetWidth;
@@ -153,25 +157,26 @@ const t = Object.fromEntries(
       const pct = Math.round(f * 100);
       const chev = icon('chevronDown', 14, 2, 'mc-chev');
 
-      if (user) {
-        this.btn.className = 'mc-btn is-user';
-        this.btn.innerHTML = `<span class="mc-avatar-wrap">${ring(f, 40, 3)}<span class="mc-avatar">${esc(user.initials)}</span></span>${chev}`;
-        this.btn.setAttribute('aria-label', t('buttonLabelUser', { name: user.name, n, p: pct }));
-      } else {
-        this.btn.className = 'mc-btn';
-        this.btn.innerHTML =
-          `<span class="mc-btn-body">${icon('cap', 20)}<span class="mc-label">${esc(t('label'))}</span>` +
-          (n ? `<span class="mc-badge">${n}</span>` : '') +
-          `</span>${chev}`;
-        this.btn.setAttribute('aria-label', t('buttonLabel', { n }));
-      }
+      // The overall progress ring goes round the avatar when logged in, the cap icon when not.
+      const mark = user
+        ? `<span class="mc-avatar">${esc(user.initials)}</span>`
+        : `<span class="mc-icon">${icon('cap', 16)}</span>`;
+      this.btn.innerHTML = `<span class="mc-avatar-wrap">${ring(f, 34, 3)}${mark}</span><span class="mc-label">${esc(t('label'))}</span>${chev}`;
+      this.btn.setAttribute(
+        'aria-label',
+        user ? t('buttonLabelUser', { name: user.name, n, p: pct }) : t('buttonLabel', { n }),
+      );
 
+      // TODO(redesign): real Seqera login. Until then this turns on the logged-in preview.
+      const login = (label: string) => `<a class="nf-btn mc-login" href="?mycourses=loggedin">${esc(label)}</a>`;
       const head = user
         ? `<div class="mc-head"><span class="mc-avatar mc-avatar-lg">${esc(user.initials)}</span><div class="mc-head-text"><span class="mc-title">${esc(user.name)}</span><span class="mc-sub">${esc(user.email)}</span></div></div>` +
           `<p class="mc-sync">${icon('cloudCheck', 16)}${esc(t('synced'))}</p>`
         : `<div class="mc-head"><div class="mc-head-text"><span class="mc-title">${esc(t('label'))}</span><span class="mc-sub">${esc(t('subtitle'))}</span></div></div>` +
-          // TODO(redesign): real Seqera login. Until then this turns on the logged-in preview.
-          `<div class="mc-warn"><p>${icon('warn', 16)}<span>${esc(t('warn'))}</span></p><a class="nf-btn mc-login" href="?mycourses=loggedin">${esc(t('login'))}</a></div>`;
+          // The "browser only" warning only matters once there is something to lose.
+          (store.items.some((i) => store.has(i.id) || store.done(i.id) > 0)
+            ? `<div class="mc-warn"><p>${icon('warn', 16)}<span>${esc(t('warn'))}</span></p>${login(t('login'))}</div>`
+            : `<div class="mc-login-only">${login(t('loginPlain'))}</div>`);
 
       const cap = n
         ? `<div class="mc-cap"><span>${esc(n === 1 ? t('itemsOne') : t('items', { n }))}</span><span>${esc(t('percentDone', { p: pct }))}</span></div>`
@@ -230,7 +235,7 @@ const t = Object.fromEntries(
     align-items: center;
     gap: 8px;
     height: 44px;
-    padding: 0 10px 0 12px;
+    padding: 0 10px 0 4px;
     border: 1px solid var(--nf-line);
     border-radius: var(--nf-radius-sm);
     background: var(--nf-surface);
@@ -240,25 +245,15 @@ const t = Object.fromEntries(
     font-weight: 600;
     cursor: pointer;
   }
-  .mc-btn-body {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
   .mc-btn:hover {
     border-color: var(--nf-link);
-  }
-  .mc-btn.is-user {
-    padding: 0 8px 0 2px;
-    border-color: transparent;
-    background: transparent;
-  }
-  .mc-btn.is-user:hover {
-    border-color: var(--nf-line);
   }
   .mc-chev {
     color: var(--nf-muted);
     transition: transform 0.15s;
+  }
+  .mc-btn:hover .mc-chev {
+    transform: translateY(2px);
   }
   .mc-btn[aria-expanded='true'] .mc-chev {
     transform: rotate(180deg);
@@ -280,8 +275,16 @@ const t = Object.fromEntries(
   .mc-avatar-wrap {
     position: relative;
     display: inline-flex;
-    width: 40px;
-    height: 40px;
+    flex: none;
+    width: 34px;
+    height: 34px;
+  }
+  .mc-icon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .mc-avatar-wrap .nf-ring {
     position: absolute;
@@ -291,13 +294,13 @@ const t = Object.fromEntries(
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
-    margin: 5px;
+    width: 26px;
+    height: 26px;
+    margin: 4px;
     border-radius: 50%;
     background: #065647;
     color: #fff;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.02em;
   }
@@ -313,7 +316,6 @@ const t = Object.fromEntries(
       transform: scale(1.35);
     }
   }
-  .mc-badge.bump,
   .mc-avatar-wrap.bump {
     animation: mc-bump 0.45s ease-out;
   }
@@ -378,6 +380,9 @@ const t = Object.fromEntries(
   .mc-warn svg {
     flex: none;
     margin-top: 1px;
+  }
+  .mc-login-only {
+    margin: 0 20px 14px;
   }
   .mc-panel .mc-login {
     justify-content: center;
@@ -559,7 +564,9 @@ const t = Object.fromEntries(
     color: var(--nf-on-mint);
   }
   @media (prefers-reduced-motion: reduce) {
-    .mc-badge.bump,
+    .mc-chev {
+      transition: none;
+    }
     .mc-avatar-wrap.bump,
     .mc-toast.show {
       animation: none;
@@ -568,6 +575,13 @@ const t = Object.fromEntries(
   @media (max-width: 640px) {
     .mc-label {
       display: none;
+    }
+    /* Just the ring and icon on phones. */
+    .mc-btn,
+    .mc-btn:hover {
+      padding: 0 4px;
+      border-color: transparent;
+      background: transparent;
     }
     .mc {
       position: static;

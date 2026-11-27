@@ -1,0 +1,154 @@
+/* Lesson pages: type, asides, Takeaway boxes, pagination and the table of contents */
+
+:root {
+  --sl-text-h1: 2.5rem;
+}
+@media (min-width: 50em) {
+  :root {
+    --sl-text-h1: 3rem;
+  }
+}
+h1#_top {
+  font-weight: 600;
+  line-height: 1.05;
+}
+.sl-markdown-content h2 {
+  margin-top: 48px;
+  font-family: var(--nf-font-display);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.15;
+}
+.sl-markdown-content h3 {
+  font-family: var(--nf-font-body);
+  font-size: 20px;
+  font-weight: 600;
+}
+.sl-markdown-content :not(pre) > code {
+  padding: 1px 5px;
+  border: 1px solid var(--nf-line);
+  border-radius: var(--nf-radius-sm);
+  background: var(--nf-soft);
+}
+
+/* Asides: a tinted box with a thin border, no thick left bar */
+.starlight-aside {
+  --nf-aside-bg: var(--nf-soft);
+  --nf-aside-border: var(--nf-line);
+  --nf-aside-title: var(--nf-ink);
+  padding: 14px 18px;
+  border: 1px solid var(--nf-aside-border);
+  border-radius: var(--nf-radius-md);
+  background: var(--nf-aside-bg);
+  font-size: 15px;
+}
+.starlight-aside__title {
+  gap: 8px;
+  color: var(--nf-aside-title);
+  font-size: 15px;
+  font-weight: 600;
+}
+.starlight-aside--tip {
+  --nf-aside-bg: #e2f7f3;
+  --nf-aside-border: #b6ece2;
+  --nf-aside-title: #065647;
+}
+.starlight-aside--note {
+  --nf-aside-bg: #eef4fc;
+  --nf-aside-border: #c9dbf3;
+  --nf-aside-title: #1d4f91;
+}
+.starlight-aside--caution {
+  --nf-aside-bg: var(--nf-warn-bg);
+  --nf-aside-border: var(--nf-warn-border);
+  --nf-aside-title: var(--nf-warn-ink);
+}
+.starlight-aside--danger {
+  --nf-aside-bg: #fdeeee;
+  --nf-aside-border: #f3c4c4;
+  --nf-aside-title: #9b1c1c;
+}
+:root:not([data-theme='light']) .starlight-aside--tip {
+  --nf-aside-bg: #123029;
+  --nf-aside-border: #1f5247;
+  --nf-aside-title: #86e0ce;
+}
+:root:not([data-theme='light']) .starlight-aside--note {
+  --nf-aside-bg: #17233a;
+  --nf-aside-border: #2a3f63;
+  --nf-aside-title: #9cc0f5;
+}
+:root:not([data-theme='light']) .starlight-aside--danger {
+  --nf-aside-bg: #3a1a1d;
+  --nf-aside-border: #6b2a30;
+  --nf-aside-title: #f5a3aa;
+}
+
+/* Takeaway: the heading and the paragraph after it, as one soft box. */
+/* TODO(redesign): matches English heading IDs only; translated pages keep plain headings. */
+.sl-markdown-content .sl-heading-wrapper:has(> [id^='takeaway']) {
+  margin-top: 40px;
+  padding: 20px 22px 0;
+  border-radius: var(--nf-radius-md) var(--nf-radius-md) 0 0;
+  background: var(--nf-soft);
+}
+.sl-markdown-content .sl-heading-wrapper:has(> [id^='takeaway']) > h3 {
+  margin: 0;
+  color: var(--nf-link);
+  font-family: var(--nf-font-mono);
+  font-size: 13px;
+  font-weight: 700;
+}
+.sl-markdown-content .sl-heading-wrapper:has(> [id^='takeaway']) + p {
+  margin-top: 0;
+  padding: 6px 22px 20px;
+  border-radius: 0 0 var(--nf-radius-md) var(--nf-radius-md);
+  background: var(--nf-soft);
+}
+
+/* Pagination: two cards with Degular titles */
+.pagination-links a {
+  padding: 16px 20px;
+  border: 1px solid var(--nf-card-border);
+  border-radius: var(--nf-radius-md);
+  box-shadow: none;
+  color: var(--nf-muted);
+  font-size: 14px;
+}
+.pagination-links a:hover {
+  border-color: var(--nf-link);
+}
+.pagination-links .link-title {
+  color: var(--nf-ink);
+  font-family: var(--nf-font-display);
+  font-size: 22px;
+  font-weight: 500;
+}
+
+/* Right-hand table of contents */
+.right-sidebar {
+  border-inline-start: 0;
+}
+starlight-toc h2,
+mobile-starlight-toc h2 {
+  color: var(--nf-ink);
+  font-family: var(--nf-font-body);
+  font-size: 14px;
+  font-weight: 600;
+}
+starlight-toc nav > ul {
+  border-left: 2px solid var(--nf-line);
+}
+starlight-toc a {
+  color: var(--nf-muted);
+  font-size: 13px;
+}
+starlight-toc a:hover {
+  color: var(--nf-link);
+}
+starlight-toc a[aria-current='true'] {
+  margin-left: -2px;
+  border-left: 2px solid var(--nf-green);
+  border-radius: 0;
+  color: var(--nf-link);
+}

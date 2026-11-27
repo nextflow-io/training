@@ -1,0 +1,163 @@
+---
+import { formatMinutes, getCatalog, type Course } from '../../catalog';
+import { icon } from '../../icons.mjs';
+
+interface Props {
+  course: Course;
+}
+const { course } = Astro.props;
+const t = Astro.locals.t;
+const { locale } = Astro.locals.starlightRoute;
+const prefix = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${locale ? `${locale}/` : ''}`;
+const { courses, sideQuests } = await getCatalog();
+const next = course.next
+  .map((id) =>
+    id === sideQuests.id
+      ? { id, title: sideQuests.title, icon: sideQuests.icon, blurb: t('nf.home.sq.desc') }
+      : courses.find((c) => c.id === id),
+  )
+  .filter(Boolean) as { id: string; title: string; icon: string; blurb: string }[];
+const rows = [
+  ...(course.start
+    ? [
+        {
+          slug: course.start,
+          title: t('nf.sb.gettingStarted'),
+          description: t('nf.sb.setUp'),
+          mark: icon('terminal', 18),
+        },
+      ]
+    : []),
+  ...course.parts.map((p, i) => ({ ...p, mark: String(i + 1) })),
+];
+---
+
+<section class="nf-course-outro not-content">
+  <h2 id="lesson-plan-parts">{t('nf.course.plan')}</h2>
+  <ol class="plan">
+    {rows.map((r) => (
+      <li>
+        <a href={`${prefix}${r.slug}/`}>
+          <span class="mark" set:html={r.mark} />
+          <span class="text">
+            <span class="title">{r.title}</span>
+            {r.description && <span class="desc">{r.description}</span>}
+          </span>
+          {'minutes' in r && r.minutes && <span class="nf-meta">{formatMinutes(r.minutes)}</span>}
+        </a>
+      </li>
+    ))}
+  </ol>
+
+  {next.length > 0 && (
+    <>
+      <h2 id="after-this-course">{t('nf.course.after')}</h2>
+      <div class="next">
+        {next.map((c) => (
+          <a href={`${prefix}${c.id}/`}>
+            <span class="tile" aria-hidden="true" set:html={icon(c.icon, 18)} />
+            <span>
+              <span class="title">{c.title}</span>
+              <span class="desc">{c.blurb}</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </>
+  )}
+</section>
+
+<style>
+  .nf-course-outro h2 {
+    margin: 48px 0 16px;
+    font-family: var(--nf-font-display);
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--nf-ink);
+  }
+  .plan {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .plan li {
+    margin: 0;
+  }
+  .plan a,
+  .next a {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 20px;
+    border: 1px solid var(--nf-card-border);
+    border-radius: var(--nf-radius-md);
+    color: var(--nf-ink);
+    text-decoration: none;
+  }
+  .plan a:hover,
+  .next a:hover {
+    border-color: var(--nf-link);
+  }
+  .mark {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--nf-link);
+    border-radius: 50%;
+    color: var(--nf-link);
+    font-family: var(--nf-font-mono);
+    font-weight: 700;
+  }
+  .text {
+    flex: 1;
+    min-width: 0;
+  }
+  .title {
+    display: block;
+    font-family: var(--nf-font-display);
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+  .desc {
+    display: block;
+    margin-top: 2px;
+    color: var(--nf-muted);
+    font-size: 15px;
+  }
+  .plan .nf-meta {
+    flex: none;
+    margin-top: 4px;
+  }
+  .next {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 14px;
+  }
+  .next .title {
+    font-family: var(--nf-font-body);
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .next .desc {
+    font-size: 14px;
+  }
+  .tile {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--nf-radius-lg);
+    background: var(--nf-icon-tile);
+    color: var(--nf-link);
+  }
+</style>

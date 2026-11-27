@@ -13,7 +13,7 @@ export type State = {
   progress: Record<string, string[]>;
 };
 export type User = { name: string; email: string; initials: string };
-export type Backend = { load(): unknown; save(state: State): void };
+export type Backend = { load(): unknown; save(state: State): void; clear(): void };
 
 const KEY = 'nf-training-my-courses';
 // TODO(redesign): a stand-in for Seqera login. `?mycourses=loggedin` turns it on, `?mycourses=loggedout` off.
@@ -32,6 +32,11 @@ export const localBackend: Backend = {
   save(state) {
     try {
       localStorage.setItem(KEY, JSON.stringify(state));
+    } catch {}
+  },
+  clear() {
+    try {
+      localStorage.removeItem(KEY);
     } catch {}
   },
 };
@@ -165,10 +170,19 @@ export function createStore(items: Item[], backend: Backend = localBackend) {
       user = DEMO_USER;
       listeners.forEach((fn) => fn({ type: 'user' }));
     },
+    /** Logging out leaves nothing behind in this browser: the account keeps the learner's courses. */
     logout() {
       try {
         localStorage.removeItem(DEMO_KEY);
+        // Otherwise a reload of `?mycourses=loggedin` logs straight back in.
+        const url = new URL(location.href);
+        if (url.searchParams.has('mycourses')) {
+          url.searchParams.delete('mycourses');
+          history.replaceState(history.state, '', url);
+        }
       } catch {}
+      backend.clear();
+      state = validate(null, items);
       user = null;
       listeners.forEach((fn) => fn({ type: 'user' }));
     },

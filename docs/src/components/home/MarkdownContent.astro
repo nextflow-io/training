@@ -1,11 +1,43 @@
 ---
 import Default from '@astrojs/starlight/components/MarkdownContent.astro';
+import { pageContext } from '../../catalog';
 import { isHomepage } from '../../routeData';
+import CourseOutro from '../course/CourseOutro.astro';
+import Progress from '../course/Progress.astro';
+
+const route = Astro.locals.starlightRoute;
+const home = isHomepage(route);
+const ctx = home ? undefined : await pageContext(route);
+const course = ctx?.course;
+const part = course?.parts[ctx!.partIndex];
 ---
 
 {/* The homepage's Markdown is replaced by the Hero override. */}
-{!isHomepage(Astro.locals.starlightRoute) && (
-  <Default>
-    <slot />
-  </Default>
+{!home && (
+  <div class:list={{ 'nf-course-overview': ctx?.role === 'overview' }}>
+    <Default>
+      <slot />
+    </Default>
+  </div>
 )}
+{ctx?.role === 'overview' && course && <CourseOutro course={course} />}
+{part && course && <Progress item={course.id} parts={[part.slug]} title={part.title} />}
+{ctx?.questPart && ctx.quest && (
+  <Progress item={ctx.quest.slug} parts={[ctx.questPart.slug]} title={ctx.questPart.title} />
+)}
+{ctx?.role === 'summary' && course && (
+  <Progress item={course.id} parts={course.parts.map((p) => p.slug)} title={course.title} whole />
+)}
+
+<style is:global>
+  /* TODO(redesign): drop once course index pages lose what the overview now renders (TODO-content.md): */
+  /* the intro above CourseInfo, and the lesson-plan table and "Start learning" button at the end. */
+  .nf-course-overview .sl-markdown-content > :not(.nf-course-info):has(~ .nf-course-info),
+  .nf-course-overview .sl-heading-wrapper:has(#lesson-plan),
+  .nf-course-overview .sl-heading-wrapper:has(#lesson-plan) ~ * {
+    display: none;
+  }
+  .nf-course-overview .nf-course-info:not(.nf-course-info ~ .nf-course-info) {
+    margin-top: 0;
+  }
+</style>

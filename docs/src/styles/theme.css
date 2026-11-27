@@ -94,6 +94,7 @@
   --sl-color-hairline: var(--nf-line);
   --sl-color-hairline-shade: var(--nf-line-2);
   --sl-nav-height: 4rem;
+  --sl-sidebar-width: 18rem;
 }
 
 :root[data-theme='light'] {
@@ -268,4 +269,47 @@
 }
 .nf-ring-mark {
   position: relative;
+}
+
+/* Page layout */
+
+.content-panel + .content-panel {
+  border-top: 0;
+}
+
+/* Starlight's LinkButton, drawn like the homepage buttons (.nf-btn, .nf-btn-2) */
+
+.sl-link-button {
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: var(--nf-radius-sm);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+@media (min-width: 50rem) {
+  .sl-link-button {
+    min-height: 48px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+}
+.sl-link-button.primary,
+.sl-link-button.primary:hover {
+  border-color: var(--nf-green);
+  background: var(--nf-mint);
+  color: var(--nf-on-mint);
+}
+.sl-link-button.primary:hover {
+  background: var(--nf-mint-hover);
+}
+.sl-link-button.secondary {
+  border-color: var(--nf-line-3);
+  background: var(--nf-surface);
+  color: var(--nf-ink);
+}
+.sl-link-button.secondary:hover {
+  border-color: var(--nf-link);
+  color: var(--nf-ink);
 }

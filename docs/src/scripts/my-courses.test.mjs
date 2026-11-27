@@ -15,6 +15,9 @@ const memory = (initial = null) => ({
   save(s) {
     this.saved = s;
   },
+  clear() {
+    this.saved = null;
+  },
 });
 
 test('validate drops unknown ids and parts and orders the basket', () => {
@@ -54,6 +57,17 @@ test('marking a part done adds the item; removing keeps progress', () => {
   assert.equal(store.done('hello_nextflow'), 1);
   store.setParts('hello_nextflow', ['hello_nextflow/01_a'], false);
   assert.deepEqual(backend.saved.progress, {});
+});
+
+test('logging out clears the browser copy', () => {
+  const backend = memory();
+  const store = createStore(items, backend);
+  store.add('nextflow_run');
+  store.setParts('hello_nextflow', ['hello_nextflow/01_a'], true);
+  store.logout();
+  assert.equal(backend.saved, null);
+  assert.deepEqual(store.basket(), []);
+  assert.equal(store.done('hello_nextflow'), 0);
 });
 
 test('formatMinutes', () => {
