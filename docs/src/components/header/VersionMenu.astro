@@ -1,5 +1,4 @@
 ---
-import Default from '@astrojs/starlight/components/SiteTitle.astro';
 import Select from '@astrojs/starlight/components/Select.astro';
 
 // Empty in local dev (base `/`): there is no version to switch from.
@@ -7,9 +6,6 @@ const current = import.meta.env.BASE_URL.replace(/^\/|\/$/g, '');
 const locale = Astro.locals.starlightRoute.locale ?? '';
 ---
 
-<Default>
-  <slot />
-</Default>
 {current && (
   <nf-version-menu hidden data-current={current} data-locale={locale}>
     <Select icon="code-branch" label="Version" options={[{ label: current, value: current, selected: true }]} />
@@ -74,12 +70,15 @@ const locale = Astro.locals.starlightRoute.locale ?? '';
   nf-version-menu {
     display: flex;
     flex-shrink: 0;
-    margin-inline-start: 1rem;
   }
   nf-version-menu[hidden] {
     display: none;
   }
   nf-version-menu :global(select) {
     width: auto;
+    padding-inline-start: 12px !important;
+  }
+  nf-version-menu :global(.label-icon) {
+    display: none;
   }
 </style>

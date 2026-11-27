@@ -1,0 +1,591 @@
+---
+import { clientItems } from '../../catalog';
+import { icon } from '../../icons.mjs';
+
+const { locale } = Astro.locals.starlightRoute;
+const prefix = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${locale ? `${locale}/` : ''}`;
+const items = (await clientItems()).map((i) => ({ ...i, href: `${prefix}${i.id}/` }));
+const t = Object.fromEntries(
+  Object.entries(Astro.locals.t.all())
+    .filter(([k]) => k.startsWith('nf.mc.'))
+    .map(([k, v]) => [k.slice(6), v]),
+);
+---
+
+<script type="application/json" id="nf-catalog" set:html={JSON.stringify(items)} />
+<nf-my-courses class="mc" data-t={JSON.stringify(t)} data-home={prefix}>
+  <button type="button" class="mc-btn" aria-expanded="false" aria-controls="mc-panel" aria-label={t.label}>
+    <span class="mc-btn-body">
+      <Fragment set:html={icon('cap', 20)} />
+      <span class="mc-label">{t.label}</span>
+    </span>
+    <Fragment set:html={icon('chevronDown', 14, 2, 'mc-chev')} />
+  </button>
+  <div class="mc-panel" id="mc-panel" role="region" aria-label={t.label} hidden></div>
+  <div class="mc-toast" hidden></div>
+  <p class="nf-sr-only" aria-live="polite" id="nf-announce"></p>
+</nf-my-courses>
+
+<script>
+  import { icon } from '../../icons.mjs';
+  import { myCourses, type Change } from '../../scripts/my-courses';
+  import { announce, courseRing, esc, reducedMotion, ring, strings } from '../../scripts/ui';
+
+  class MyCoursesMenu extends HTMLElement {
+    store = myCourses();
+    t = strings(this);
+    btn = this.querySelector<HTMLButtonElement>('.mc-btn')!;
+    panel = this.querySelector<HTMLElement>('.mc-panel')!;
+    toast = this.querySelector<HTMLElement>('.mc-toast')!;
+    toastTimer = 0;
+    open = false;
+
+    connectedCallback() {
+      this.render();
+      this.store.subscribe((c) => this.onChange(c));
+      this.btn.addEventListener('click', () => {
+        this.hideToast();
+        this.setOpen(!this.open);
+      });
+      this.panel.addEventListener('click', (e) => this.onPanelClick(e));
+      this.toast.addEventListener('click', (e) => {
+        if (!(e.target as Element).closest('[data-act="view"]')) return;
+        this.hideToast();
+        this.setOpen(true);
+        this.btn.focus();
+      });
+      this.toast.addEventListener('mouseenter', () => clearTimeout(this.toastTimer));
+      this.toast.addEventListener(
+        'mouseleave',
+        () => (this.toastTimer = window.setTimeout(() => this.hideToast(), 2000)),
+      );
+      document.addEventListener('click', (e) => {
+        if (this.open && !this.contains(e.target as Node)) this.setOpen(false);
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        if (!this.toast.hidden) this.hideToast();
+        if (this.open) {
+          this.setOpen(false);
+          this.btn.focus();
+        }
+      });
+    }
+
+    onChange(c: Change) {
+      // Keep keyboard focus on a sensible control when the row it was on disappears.
+      const active = document.activeElement as HTMLElement | null;
+      const rowIndex = active?.closest('.mc-row') ? [...this.panel.querySelectorAll('.mc-act')].indexOf(active) : -1;
+      this.render();
+      if (rowIndex >= 0) {
+        const acts = this.panel.querySelectorAll<HTMLElement>('.mc-act');
+        (acts[Math.min(rowIndex, acts.length - 1)] ?? this.btn).focus();
+      }
+      if (c.type === 'add' && c.id) {
+        this.bump();
+        this.showToast(c.id);
+      }
+    }
+
+    onPanelClick(e: Event) {
+      const el = (e.target as Element).closest<HTMLElement>('[data-act]');
+      if (!el) return;
+      const { act, id } = el.dataset;
+      const title = id ? (this.store.get(id)?.title ?? '') : '';
+      if (act === 'remove' && id) {
+        const hiding = !!this.store.user && this.store.done(id) > 0;
+        this.store.remove(id);
+        announce(this.t(hiding ? 'hid' : 'removed', { title }));
+      } else if (act === 'logout') {
+        this.store.logout();
+        this.setOpen(false);
+        this.btn.focus();
+        announce(this.t('loggedOut'));
+      } else if (act === 'change') {
+        const tabs = document.getElementById('goals');
+        if (!tabs) return;
+        e.preventDefault();
+        this.setOpen(false);
+        tabs.scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', block: 'start' });
+      }
+    }
+
+    setOpen(open: boolean) {
+      this.open = open;
+      this.btn.setAttribute('aria-expanded', String(open));
+      this.panel.hidden = !open;
+    }
+
+    bump() {
+      const el = this.btn.querySelector('.mc-badge, .mc-avatar-wrap');
+      if (!el || reducedMotion()) return;
+      el.classList.remove('bump');
+      void (el as HTMLElement).offsetWidth;
+      el.classList.add('bump');
+    }
+
+    showToast(id: string) {
+      if (this.open) return;
+      const title = this.store.get(id)?.title ?? '';
+      this.toast.innerHTML =
+        `<span class="mc-tick">${icon('check', 12, 3.5)}</span>` +
+        `<span>${this.t('toast', { title: `<strong>${esc(title)}</strong>` })}</span>` +
+        `<button type="button" class="nf-text-btn" data-act="view">${esc(this.t('view'))}</button>`;
+      this.toast.hidden = false;
+      this.toast.classList.remove('show');
+      void this.toast.offsetWidth;
+      this.toast.classList.add('show');
+      clearTimeout(this.toastTimer);
+      this.toastTimer = window.setTimeout(() => this.hideToast(), 4500);
+    }
+
+    hideToast() {
+      clearTimeout(this.toastTimer);
+      this.toast.hidden = true;
+    }
+
+    render() {
+      const { store, t } = this;
+      const user = store.user;
+      const ids = store.basket();
+      const n = ids.length;
+      const f = store.overall();
+      const pct = Math.round(f * 100);
+      const chev = icon('chevronDown', 14, 2, 'mc-chev');
+
+      if (user) {
+        this.btn.className = 'mc-btn is-user';
+        this.btn.innerHTML = `<span class="mc-avatar-wrap">${ring(f, 40, 3)}<span class="mc-avatar">${esc(user.initials)}</span></span>${chev}`;
+        this.btn.setAttribute('aria-label', t('buttonLabelUser', { name: user.name, n, p: pct }));
+      } else {
+        this.btn.className = 'mc-btn';
+        this.btn.innerHTML =
+          `<span class="mc-btn-body">${icon('cap', 20)}<span class="mc-label">${esc(t('label'))}</span>` +
+          (n ? `<span class="mc-badge">${n}</span>` : '') +
+          `</span>${chev}`;
+        this.btn.setAttribute('aria-label', t('buttonLabel', { n }));
+      }
+
+      const head = user
+        ? `<div class="mc-head"><span class="mc-avatar mc-avatar-lg">${esc(user.initials)}</span><div class="mc-head-text"><span class="mc-title">${esc(user.name)}</span><span class="mc-sub">${esc(user.email)}</span></div></div>` +
+          `<p class="mc-sync">${icon('cloudCheck', 16)}${esc(t('synced'))}</p>`
+        : `<div class="mc-head"><div class="mc-head-text"><span class="mc-title">${esc(t('label'))}</span><span class="mc-sub">${esc(t('subtitle'))}</span></div></div>` +
+          // TODO(redesign): real Seqera login. Until then this turns on the logged-in preview.
+          `<div class="mc-warn"><p>${icon('warn', 16)}<span>${esc(t('warn'))}</span></p><a class="nf-btn mc-login" href="?mycourses=loggedin">${esc(t('login'))}</a></div>`;
+
+      const cap = n
+        ? `<div class="mc-cap"><span>${esc(n === 1 ? t('itemsOne') : t('items', { n }))}</span><span>${esc(t('percentDone', { p: pct }))}</span></div>`
+        : '';
+
+      const status = (id: string) => {
+        const d = store.done(id);
+        const p = store.get(id)!.parts.length;
+        return d >= p ? t('done') : d ? t('partsDone', { d, p, pct: Math.round((100 * d) / p) }) : t('notStarted');
+      };
+      const home = this.dataset.home!;
+      const list = n
+        ? `<ul class="mc-list">${ids
+            .map((id) => {
+              const item = store.get(id)! as (typeof store.items)[number] & { href: string };
+              const hide = !!user && store.done(id) > 0;
+              const label = t(hide ? 'hideLabel' : 'removeLabel', { title: item.title });
+              return (
+                `<li class="mc-row">${courseRing(store.fraction(id))}` +
+                `<a class="mc-course" href="${esc(item.href)}"><span class="mc-name">${esc(item.title)}</span><span class="mc-prog">${item.sq ? esc(t('sideQuestPrefix')) : ''}${esc(status(id))}</span></a>` +
+                `<button type="button" class="mc-act" data-act="remove" data-id="${esc(id)}" aria-label="${esc(label)}" title="${esc(t(hide ? 'hideTitle' : 'removeTitle'))}">${icon(hide ? 'eyeOff' : 'x', 16)}</button></li>`
+              );
+            })
+            .join('')}</ul>`
+        : `<p class="mc-empty">${
+            document.getElementById('goals')
+              ? esc(t('empty'))
+              : t('emptyOther', { link: `<a href="${esc(home)}#goals">${esc(t('homepage'))}</a>` })
+          }</p>`;
+
+      const hidden = store.hidden().length;
+      // TODO(redesign): link to the progress page once it exists.
+      const hiddenNote =
+        user && hidden
+          ? `<p class="mc-hidden">${icon('eyeOff', 16)}<span>${t('hiddenNote', { n: hidden, link: `<a href="#">${esc(t('progressPage'))}</a>` })}</span></p>`
+          : '';
+      const foot =
+        `<div class="mc-foot"><span class="mc-foot-links"><a class="nf-text-btn" href="${esc(home)}#goals" data-act="change">${esc(t('change'))}</a>` +
+        // TODO(redesign): link to the progress page once it exists.
+        `<a class="nf-text-btn" href="#">${esc(t('allProgress'))}</a></span>` +
+        (user ? `<button type="button" class="nf-text-btn" data-act="logout">${esc(t('logout'))}</button>` : '') +
+        `</div>`;
+      this.panel.innerHTML = head + cap + list + hiddenNote + foot;
+    }
+  }
+  customElements.define('nf-my-courses', MyCoursesMenu);
+</script>
+
+<style is:global>
+  .mc {
+    position: relative;
+    flex: none;
+  }
+  .mc-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 10px 0 12px;
+    border: 1px solid var(--nf-line);
+    border-radius: var(--nf-radius-sm);
+    background: var(--nf-surface);
+    color: var(--nf-ink);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .mc-btn-body {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mc-btn:hover {
+    border-color: var(--nf-link);
+  }
+  .mc-btn.is-user {
+    padding: 0 8px 0 2px;
+    border-color: transparent;
+    background: transparent;
+  }
+  .mc-btn.is-user:hover {
+    border-color: var(--nf-line);
+  }
+  .mc-chev {
+    color: var(--nf-muted);
+    transition: transform 0.15s;
+  }
+  .mc-btn[aria-expanded='true'] .mc-chev {
+    transform: rotate(180deg);
+  }
+  .mc-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 11px;
+    background: var(--nf-mint);
+    color: var(--nf-on-mint);
+    font-family: var(--nf-font-mono);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .mc-avatar-wrap {
+    position: relative;
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+  }
+  .mc-avatar-wrap .nf-ring {
+    position: absolute;
+    inset: 0;
+  }
+  .mc-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    border-radius: 50%;
+    background: #065647;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .mc-avatar-lg {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    font-size: 15px;
+  }
+  @keyframes mc-bump {
+    35% {
+      transform: scale(1.35);
+    }
+  }
+  .mc-badge.bump,
+  .mc-avatar-wrap.bump {
+    animation: mc-bump 0.45s ease-out;
+  }
+
+  .mc-panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    z-index: 50;
+    width: 400px;
+    max-width: calc(100vw - 32px);
+    border: 1px solid var(--nf-card-border);
+    border-radius: var(--nf-radius-lg);
+    background: var(--nf-surface);
+    box-shadow: var(--nf-shadow-pop);
+    color: var(--nf-ink);
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+  }
+  .mc-panel a {
+    color: var(--nf-ink);
+  }
+  .mc-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 20px 14px;
+  }
+  .mc-head-text {
+    min-width: 0;
+  }
+  .mc-title {
+    display: block;
+    font-family: var(--nf-font-display);
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.15;
+  }
+  .mc-sub {
+    display: block;
+    overflow: hidden;
+    color: var(--nf-muted);
+    font-size: 13px;
+    text-overflow: ellipsis;
+  }
+  .mc-warn {
+    margin: 0 20px 14px;
+    padding: 12px 14px;
+    border: 1px solid var(--nf-warn-border);
+    border-radius: var(--nf-radius-md);
+    background: var(--nf-warn-bg);
+    color: var(--nf-warn-ink);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .mc-warn p {
+    display: flex;
+    gap: 8px;
+    margin: 0 0 10px;
+  }
+  .mc-warn svg {
+    flex: none;
+    margin-top: 1px;
+  }
+  .mc-panel .mc-login {
+    justify-content: center;
+    width: 100%;
+    min-height: 40px;
+    padding: 8px 14px;
+    color: var(--nf-on-mint);
+    font-size: 14px;
+  }
+  .mc-sync {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 20px 14px;
+    padding: 10px 12px;
+    border-radius: var(--nf-radius-md);
+    background: var(--nf-on-bg);
+    color: var(--nf-on-ink);
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .mc-sync svg {
+    flex: none;
+  }
+  .mc-cap {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px 4px;
+    border-top: 1px solid var(--nf-line);
+    color: var(--nf-muted);
+    font-family: var(--nf-font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .mc-list {
+    max-height: 340px;
+    margin: 0;
+    padding: 4px 8px 8px;
+    overflow: auto;
+    list-style: none;
+  }
+  .mc-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 8px 6px 10px;
+    border-radius: var(--nf-radius-md);
+  }
+  .mc-row:hover {
+    background: var(--nf-soft);
+  }
+  .mc-course {
+    flex: 1;
+    min-width: 0;
+    text-decoration: none;
+  }
+  .mc-name {
+    display: block;
+    overflow: hidden;
+    font-size: 15px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .mc-prog {
+    display: block;
+    color: var(--nf-muted);
+    font-size: 13px;
+  }
+  .mc-act {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: var(--nf-radius-sm);
+    background: none;
+    color: var(--nf-muted);
+    cursor: pointer;
+    opacity: 0.55;
+  }
+  .mc-row:hover .mc-act,
+  .mc-act:focus-visible {
+    opacity: 1;
+  }
+  .mc-act:hover {
+    background: var(--nf-line);
+    color: var(--nf-ink);
+  }
+  .mc-empty {
+    margin: 0;
+    padding: 16px 20px;
+    border-top: 1px solid var(--nf-line);
+    color: var(--nf-muted);
+    font-size: 14px;
+  }
+  .mc-hidden {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0;
+    padding: 10px 20px;
+    border-top: 1px solid var(--nf-line);
+    color: var(--nf-muted);
+    font-size: 13px;
+  }
+  .mc-hidden svg {
+    flex: none;
+    margin-top: 1px;
+  }
+  .mc-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 4px 20px;
+    border-top: 1px solid var(--nf-line);
+    font-size: 14px;
+  }
+  .mc-foot-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 20px;
+  }
+  .mc-foot .nf-text-btn {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .mc-toast {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    z-index: 49;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: max-content;
+    max-width: min(380px, calc(100vw - 32px));
+    padding: 8px 10px 8px 12px;
+    border: 1px solid var(--nf-card-border);
+    border-left: 3px solid var(--nf-green);
+    border-radius: var(--nf-radius-md);
+    background: var(--nf-surface);
+    box-shadow: var(--nf-shadow-pop);
+    color: var(--nf-ink);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .mc-toast[hidden],
+  .mc-panel[hidden] {
+    display: none;
+  }
+  .mc-toast .nf-text-btn {
+    min-height: 32px;
+    margin-left: 4px;
+  }
+  .mc-toast.show {
+    animation: mc-toast-in 0.2s ease-out;
+  }
+  @keyframes mc-toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  }
+  .mc-tick {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--nf-green);
+    color: var(--nf-on-mint);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mc-badge.bump,
+    .mc-avatar-wrap.bump,
+    .mc-toast.show {
+      animation: none;
+    }
+  }
+  @media (max-width: 640px) {
+    .mc-label {
+      display: none;
+    }
+    .mc {
+      position: static;
+    }
+    .mc-panel {
+      left: 12px;
+      right: 12px;
+      width: auto;
+      max-width: none;
+    }
+    .mc-toast {
+      position: fixed;
+      top: auto;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      width: auto;
+      max-width: none;
+    }
+  }
+</style>

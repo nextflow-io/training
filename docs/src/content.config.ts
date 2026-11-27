@@ -52,7 +52,9 @@ export const collections = {
           'consent.description': z.string(),
           'consent.posthog': z.string(),
         })
-        .partial(),
+        .partial()
+        // Redesign UI strings (`nf.*`). English is the fallback for other languages.
+        .catchall(z.string()),
     }),
   }),
 };

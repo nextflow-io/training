@@ -234,3 +234,36 @@
   white-space: nowrap;
   border: 0;
 }
+
+/* Progress rings (src/scripts/ui.ts) */
+
+.nf-course-ring {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--nf-link);
+}
+.nf-course-ring .nf-ring {
+  position: absolute;
+  inset: 0;
+}
+.nf-course-ring.is-done {
+  color: var(--nf-on-mint);
+}
+.nf-course-ring.is-done .nf-ring circle:first-child {
+  fill: var(--nf-green);
+}
+.nf-ring-pct {
+  position: relative;
+  color: var(--nf-muted);
+  font-family: var(--nf-font-mono);
+  font-size: 10px;
+  font-weight: 700;
+}
+.nf-ring-mark {
+  position: relative;
+}

@@ -1,0 +1,45 @@
+---
+import { logos } from 'virtual:starlight/user-images';
+const { siteTitleHref } = Astro.locals.starlightRoute;
+---
+
+<a href={siteTitleHref} class="nf-title">
+  <img class="light:sl-hidden" alt="Nextflow" src={logos.dark?.src} width="160" height="26" />
+  <img class="dark:sl-hidden" alt="Nextflow" src={logos.light?.src} width="160" height="26" />
+  <span>{Astro.locals.t('nf.header.training')}</span>
+</a>
+
+<style>
+  .nf-title {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 14px;
+    color: var(--nf-ink);
+    text-decoration: none;
+  }
+  img {
+    width: auto;
+    height: 26px;
+  }
+  span {
+    padding-left: 14px;
+    border-left: 1px solid var(--nf-line);
+    font-family: var(--nf-font-display);
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 26px;
+  }
+  @media (max-width: 640px) {
+    img {
+      height: 22px;
+    }
+    span {
+      padding-left: 10px;
+      font-size: 19px;
+    }
+    .nf-title {
+      gap: 10px;
+    }
+  }
+</style>

@@ -1,0 +1,157 @@
+---
+import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
+import Search from 'virtual:starlight/components/Search';
+import SiteTitle from 'virtual:starlight/components/SiteTitle';
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+import { icon } from '../../icons.mjs';
+import MyCourses from './MyCourses.astro';
+import VersionMenu from './VersionMenu.astro';
+
+const t = Astro.locals.t;
+---
+
+<div class="nf-header">
+  <SiteTitle />
+  <div class="search print:hidden">
+    <Search />
+  </div>
+  <div class="tools print:hidden">
+    <div class="links">
+      <a
+        href="https://github.com/nextflow-io/training"
+        aria-label={t('nf.header.github')}
+        set:html={icon('github', 20)}
+      />
+      <a href="https://community.seqera.io" aria-label={t('nf.header.forum')} set:html={icon('forum', 20)} />
+      <span class="divider" aria-hidden="true"></span>
+    </div>
+    <div class="prefs">
+      <VersionMenu />
+      <LanguageSelect />
+    </div>
+    <ThemeSelect />
+  </div>
+  <MyCourses />
+</div>
+
+<style>
+  .nf-header {
+    display: flex;
+    align-items: center;
+    gap: 12px 24px;
+    height: 100%;
+  }
+  .search {
+    display: flex;
+    flex: 1 1 260px;
+    justify-content: center;
+    min-width: 0;
+  }
+  .tools,
+  .links,
+  .prefs {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: none;
+  }
+  .links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--nf-radius-sm);
+    color: var(--nf-ink);
+  }
+  .links a:hover {
+    color: var(--nf-link);
+  }
+  .divider {
+    width: 1px;
+    height: 24px;
+    margin: 0 6px;
+    background: var(--nf-line);
+  }
+
+  /* Starlight's selects, drawn as bordered boxes */
+  .tools :global(label:has(> select)) {
+    height: 44px;
+    padding-inline: 12px;
+    border: 1px solid var(--nf-line);
+    border-radius: var(--nf-radius-sm);
+    background: var(--nf-surface);
+    color: var(--nf-ink);
+    --sl-label-icon-size: 16px;
+    --sl-caret-size: 14px;
+  }
+  .tools :global(label:has(> select):hover) {
+    border-color: var(--nf-link);
+  }
+  .tools :global(label:has(> select) .icon) {
+    color: var(--nf-muted);
+  }
+  .tools :global(label:has(> select) .label-icon) {
+    inset-inline-start: 12px;
+  }
+  .tools :global(label:has(> select) .caret) {
+    inset-inline-end: 12px;
+  }
+  .tools :global(label:has(> select) select) {
+    height: 100%;
+    margin-inline: -12px;
+    padding-block: 0;
+    padding-inline: 36px 32px;
+    font-size: 14px;
+  }
+
+  /* Starlight's search button, restyled */
+  .search :global(site-search) {
+    width: 100%;
+    max-width: 380px;
+  }
+  .search :global(button[data-open-modal]) {
+    gap: 10px;
+    width: 100%;
+    height: 44px;
+    max-width: 380px;
+    padding: 0 12px;
+    border: 1px solid var(--nf-line);
+    border-radius: var(--nf-radius-sm);
+    background: var(--nf-soft);
+    color: var(--nf-muted);
+    font-size: 15px;
+  }
+  .search :global(button[data-open-modal]:hover) {
+    border-color: var(--nf-line-3);
+    color: var(--nf-ink);
+  }
+  .search :global(button[data-open-modal] > kbd) {
+    gap: 4px;
+    padding: 2px 6px;
+    border: 1px solid var(--nf-line);
+    border-radius: var(--nf-radius-sm);
+    background: var(--nf-surface);
+    font-family: var(--nf-font-mono);
+    font-size: 12px;
+    color: var(--nf-muted);
+  }
+
+  @media (max-width: 640px) {
+    .links,
+    .prefs {
+      display: none;
+    }
+    .nf-header {
+      gap: 8px;
+    }
+  }
+  @media (max-width: 1100px) {
+    .search {
+      flex: 0 1 auto;
+    }
+    .search :global(site-search) {
+      width: auto;
+    }
+  }
+</style>
