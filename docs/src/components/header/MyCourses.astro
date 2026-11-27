@@ -210,15 +210,13 @@ const t = uiStrings(Astro.locals.t.all(), 'nf.mc.');
           }</p>`;
 
       const hidden = store.hidden().length;
-      // TODO(redesign): link to the progress page once it exists.
       const hiddenNote =
         user && hidden
-          ? `<p class="mc-hidden">${icon('eyeOff', 16)}<span>${t('hiddenNote', { n: hidden, link: `<a href="#">${esc(t('progressPage'))}</a>` })}</span></p>`
+          ? `<p class="mc-hidden">${icon('eyeOff', 16)}<span>${t('hiddenNote', { n: hidden, link: `<a href="${esc(home)}progress/">${esc(t('progressPage'))}</a>` })}</span></p>`
           : '';
       const foot =
         `<div class="mc-foot"><span class="mc-foot-links"><a class="nf-text-btn" href="${esc(home)}#goals" data-act="change">${esc(t('change'))}</a>` +
-        // TODO(redesign): link to the progress page once it exists.
-        `<a class="nf-text-btn" href="#">${esc(t('allProgress'))}</a></span>` +
+        `<a class="nf-text-btn" href="${esc(home)}progress/">${esc(t('allProgress'))}</a></span>` +
         (user ? `<button type="button" class="nf-text-btn" data-act="logout">${esc(t('logout'))}</button>` : '') +
         `</div>`;
       this.panel.innerHTML = head + cap + list + hiddenNote + foot;

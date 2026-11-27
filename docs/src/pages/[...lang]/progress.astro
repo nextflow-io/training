@@ -1,0 +1,18 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import AllProgress from '../../components/course/AllProgress.astro';
+import { locales } from '../../locales.mjs';
+
+export function getStaticPaths() {
+  return Object.keys(locales).map((key) => ({ params: { lang: key === 'root' ? undefined : key } }));
+}
+
+const t = Astro.locals.t;
+const { lang } = Astro.params;
+---
+
+<StarlightPage
+  frontmatter={{ title: t('nf.progress.title'), description: t('nf.progress.description'), tableOfContents: false }}
+>
+  <AllProgress locale={lang} />
+</StarlightPage>

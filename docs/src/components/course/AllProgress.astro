@@ -1,0 +1,247 @@
+---
+// Every course and Side Quest with progress, read from the My courses store on the client.
+import { getCatalog, type Part } from '../../catalog';
+import { icon } from '../../icons.mjs';
+import { uiStrings } from '../../strings';
+
+interface Props {
+  locale?: string;
+}
+const { locale } = Astro.props;
+const t = Astro.locals.t;
+const prefix = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${locale ? `${locale}/` : ''}`;
+const { courses, sideQuests } = await getCatalog();
+const items: { id: string; title: string; parts: Part[] }[] = [
+  ...courses,
+  ...sideQuests.groups.flatMap((g) => g.quests.map((q) => ({ id: q.slug, title: q.title, parts: q.parts }))),
+];
+const all = Astro.locals.t.all();
+const strings = { ...uiStrings(all, 'nf.mc.'), ...uiStrings(all, 'nf.progress.') };
+---
+
+<nf-all-progress class="progress not-content" data-t={JSON.stringify(strings)}>
+  <div class="note"></div>
+  <p class="empty" hidden>
+    <Fragment
+      set:html={t('nf.progress.empty', {
+        link: `<a class="nf-link-u" href="${prefix}courses/">${t('nf.all.title')}</a>`,
+        interpolation: { escapeValue: false },
+      })}
+    />
+  </p>
+  {items.map((item) => (
+    <section class="card" data-id={item.id} hidden>
+      <div class="head">
+        <span data-ring />
+        <span class="name">
+          <a class="title" href={`${prefix}${item.id}/`}>
+            {item.title}
+          </a>
+          <span class="status nf-meta" data-status />
+        </span>
+        <span class="hidden-tag" hidden>
+          <Fragment set:html={icon('eyeOff', 14)} />
+          {t('nf.progress.hidden')}
+        </span>
+        <button type="button" class="nf-text-btn add" hidden>
+          {t('nf.progress.add')}
+        </button>
+      </div>
+      {/* A Side Quest without sub-parts is its own single part: the title link covers it. */}
+      {(item.parts.length > 1 || item.parts[0]?.slug !== item.id) && (
+        <ol class="parts">
+          {item.parts.map((p, i) => (
+            <li data-part={p.slug}>
+              <a href={`${prefix}${p.slug}/`}>
+                <span class="dot" aria-hidden="true">
+                  <span class="num">{i + 1}</span>
+                  <Fragment set:html={icon('check', 12, 3, 'done-mark')} />
+                </span>
+                <span>{p.title}</span>
+                <span class="nf-sr-only" data-sr />
+              </a>
+            </li>
+          ))}
+        </ol>
+      )}
+    </section>
+  ))}
+</nf-all-progress>
+
+<script>
+  import { icon } from '../../icons.mjs';
+  import { loginEnabled, loginHref, myCourses } from '../../scripts/my-courses';
+  import { courseRing, esc, strings } from '../../scripts/ui';
+
+  class AllProgress extends HTMLElement {
+    store = myCourses();
+    t = strings(this);
+
+    connectedCallback() {
+      this.render();
+      this.store.subscribe(() => this.render());
+      this.addEventListener('click', (e) => {
+        const card = (e.target as Element).closest('.add')?.closest<HTMLElement>('[data-id]');
+        if (!card) return;
+        this.store.add(card.dataset.id!);
+        // The button disappears, so focus moves to the course.
+        card.querySelector<HTMLElement>('.title')!.focus();
+      });
+    }
+
+    render() {
+      const { store, t } = this;
+      let any = false;
+      for (const card of this.querySelectorAll<HTMLElement>('.card')) {
+        const id = card.dataset.id!;
+        const item = store.get(id);
+        const d = store.done(id);
+        card.hidden = !item || !d;
+        if (card.hidden) continue;
+        any = true;
+        const p = item!.parts.length;
+        const status = d >= p ? t('done') : t('partsDone', { d, p, pct: Math.round((100 * d) / p) });
+        card.querySelector('[data-ring]')!.innerHTML = courseRing(store.fraction(id));
+        card.querySelector('[data-status]')!.textContent = (item!.sq ? t('sideQuestPrefix') : '') + status;
+        const listed = store.has(id);
+        card.querySelector<HTMLElement>('.hidden-tag')!.hidden = listed;
+        card.querySelector<HTMLElement>('.add')!.hidden = listed;
+        for (const li of card.querySelectorAll<HTMLElement>('[data-part]')) {
+          const done = store.isPartDone(id, li.dataset.part!);
+          li.classList.toggle('is-done', done);
+          li.querySelector('[data-sr]')!.textContent = done ? ` (${t('partDone')})` : '';
+        }
+      }
+      this.querySelector<HTMLElement>('.empty')!.hidden = any;
+      const login = loginEnabled ? `<a class="nf-btn" href="${esc(loginHref())}">${esc(t('login'))}</a>` : '';
+      this.querySelector('.note')!.innerHTML = store.user
+        ? `<p class="mc-sync">${icon('cloudCheck', 16)}${esc(t('synced'))}</p>`
+        : any
+          ? `<div class="mc-warn"><p>${icon('warn', 16)}<span>${esc(t('warn'))}</span></p>${login}</div>`
+          : '';
+    }
+  }
+  customElements.define('nf-all-progress', AllProgress);
+</script>
+
+<style>
+  .progress {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  [hidden] {
+    display: none !important;
+  }
+  .note:empty {
+    display: none;
+  }
+  .note :global(.mc-warn),
+  .note :global(.mc-sync) {
+    margin: 0;
+    font-size: 14px;
+  }
+  .note :global(.mc-warn p:only-child) {
+    margin: 0;
+  }
+  .note :global(.nf-btn) {
+    min-height: 40px;
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+  .empty {
+    margin: 0;
+    color: var(--nf-muted);
+    font-size: 17px;
+  }
+  .card {
+    padding: 18px 20px;
+    border: 1px solid var(--nf-card-border);
+  }
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+  }
+  .name {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: min(100%, 200px);
+  }
+  .title {
+    color: var(--nf-ink);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-decoration: none;
+  }
+  .title:hover {
+    color: var(--nf-link);
+  }
+  .hidden-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--nf-muted);
+    font-size: 13px;
+  }
+  .add {
+    font-size: 14px;
+  }
+  .parts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 2px 16px;
+    margin: 14px 0 0;
+    padding: 12px 0 0;
+    border-top: 1px solid var(--nf-line);
+    list-style: none;
+  }
+  .parts li {
+    margin: 0;
+  }
+  .parts a {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 5px 0;
+    color: var(--nf-ink);
+    font-size: 15px;
+    line-height: 1.4;
+    text-decoration: none;
+  }
+  .parts a:hover {
+    color: var(--nf-link);
+  }
+  .dot {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid var(--nf-line-3);
+    border-radius: 50%;
+    color: var(--nf-muted);
+    font-family: var(--nf-font-mono);
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .dot :global(.done-mark) {
+    display: none;
+  }
+  .is-done .dot {
+    border-color: var(--nf-green);
+    background: var(--nf-green);
+    color: var(--nf-on-mint);
+  }
+  .is-done .num {
+    display: none;
+  }
+  .is-done .dot :global(.done-mark) {
+    display: block;
+  }
+</style>

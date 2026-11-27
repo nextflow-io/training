@@ -183,5 +183,11 @@
   "nf.consent.short": "We use cookies to see how the site is used. <a href=\"https://seqera.io/privacy-policy/#cookies\" target=\"_blank\" rel=\"noopener\">More about cookies</a>",
   "nf.home.events.weeksLabel": "EVERY QUARTER",
   "nf.home.events.weeksDesc": "A free week of tutorials, live office hours and forum support. See upcoming dates.",
-  "nf.sb.contributing": "Contributing"
+  "nf.sb.contributing": "Contributing",
+  "nf.progress.title": "Your progress",
+  "nf.progress.description": "Every course and Side Quest you have started, and the parts you have finished.",
+  "nf.progress.empty": "No progress yet. Each part you finish shows up here. Find a course in {{link}}.",
+  "nf.progress.hidden": "Not in My courses",
+  "nf.progress.add": "Add to My courses",
+  "nf.progress.partDone": "done"
 }
