@@ -26,6 +26,8 @@ export const collections = {
     loader: translations ? docsLoader() : englishLoader,
     schema: docsSchema({
       extend: z.object({
+        // Minutes. On each numbered lesson page, and on a Side Quest's first page.
+        duration: z.number().int().positive().optional(),
         page_type: z.literal('index_page').optional(),
         index_type: z.enum(['course', 'module']).optional(),
         additional_information: additionalInformation.optional(),
