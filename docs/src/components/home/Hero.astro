@@ -1,0 +1,7 @@
+---
+import Default from '@astrojs/starlight/components/Hero.astro';
+import { isHomepage } from '../../routeData';
+import Homepage from './Homepage.astro';
+---
+
+{isHomepage(Astro.locals.starlightRoute) ? <Homepage /> : <Default />}

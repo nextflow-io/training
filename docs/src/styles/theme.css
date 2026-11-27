@@ -211,6 +211,8 @@
   text-underline-offset: 6px;
 }
 .nf-text-btn {
+  display: inline-flex;
+  align-items: center;
   min-height: 44px;
   padding: 0;
   border: 0;

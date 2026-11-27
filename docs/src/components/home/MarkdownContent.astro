@@ -1,0 +1,11 @@
+---
+import Default from '@astrojs/starlight/components/MarkdownContent.astro';
+import { isHomepage } from '../../routeData';
+---
+
+{/* The homepage's Markdown is replaced by the Hero override. */}
+{!isHomepage(Astro.locals.starlightRoute) && (
+  <Default>
+    <slot />
+  </Default>
+)}

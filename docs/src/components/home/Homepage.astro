@@ -1,0 +1,1452 @@
+---
+import config from 'virtual:starlight/user-config';
+import seqeraLogo from '../../assets/seqera-logo-light.svg';
+import nextflowLogo from '../../assets/nextflow-logo-white.png';
+import { formatMinutes, getCatalog } from '../../catalog';
+import { goals as presets, groups } from '../../courses.mjs';
+import { icon } from '../../icons.mjs';
+
+const t = Astro.locals.t;
+const { locale } = Astro.locals.starlightRoute;
+const prefix = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${locale ? `${locale}/` : ''}`;
+const href = (slug: string) => `${prefix}${slug}/`;
+const { courses, sideQuests } = await getCatalog();
+const byId = new Map(courses.map((c) => [c.id, c]));
+const meta = (c: { parts: unknown[]; minutes: number; partial: boolean }) =>
+  [t('nf.home.parts', { n: c.parts.length }), !c.partial && formatMinutes(c.minutes)].filter(Boolean).join(' · ');
+const quests = sideQuests.groups.flatMap((g) => g.quests);
+const science = courses.filter((c) => c.group === 'science');
+const goalTabs = [
+  { id: 'run', icon: 'play' },
+  { id: 'write', icon: 'code' },
+  { id: 'custom', icon: 'sliders' },
+] as const;
+const strings = Object.fromEntries(
+  Object.entries(t.all())
+    .filter(([k]) => k.startsWith('nf.home.'))
+    .map(([k, v]) => [k.slice(8), v]),
+);
+const editHref = config.editLink.baseUrl ? `${config.editLink.baseUrl}src/content/docs/index.mdx` : undefined;
+// TODO(redesign): All courses and Course map pages don't exist yet.
+const allCoursesHref = '#';
+const courseMapHref = '#';
+---
+
+{/* Show the learner's last tab before the route card paints, so it doesn't jump. */}
+<script is:inline>
+  try {
+    var g = JSON.parse(localStorage.getItem('nf-training-my-courses') || '{}').goal;
+    if (g === 'write' || g === 'custom') document.documentElement.dataset.nfGoal = g;
+  } catch (e) {}
+</script>
+
+<nf-homepage class="home not-content" data-t={JSON.stringify(strings)} data-prefix={prefix}>
+  <div class="top">
+    <section class="hero">
+      <p class="nf-eyebrow">{t('nf.home.eyebrow')}</p>
+      <h1>{t('nf.home.title')}</h1>
+      <p class="lede">{t('nf.home.lede')}</p>
+      <div class="browse">
+        <span>{t('nf.home.browse')}</span>
+        <a href={allCoursesHref} class="nf-btn-2">
+          <Fragment set:html={icon('list')} />
+          {t('nf.home.allCourses')}
+        </a>
+        <a href={courseMapHref} class="nf-btn-2">
+          <Fragment set:html={icon('map')} />
+          {t('nf.home.courseMap')}
+        </a>
+      </div>
+    </section>
+
+    <div class="route-wrap">
+      <div class="tabs" role="tablist" aria-label={t('nf.home.goals')} id="goals">
+        {goalTabs.map((g, i) => (
+          <button
+            type="button"
+            role="tab"
+            class="tab"
+            id={`tab-${g.id}`}
+            data-goal={g.id}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            aria-controls="route-panel"
+            tabindex={i === 0 ? 0 : -1}
+          >
+            <span class="tab-icon" aria-hidden="true" set:html={icon(g.icon, 22)} />
+            <span class="tab-text">
+              <span class="tab-title">{t(`nf.home.${g.id}.title`)}</span>
+              <span class="tab-desc">{t(`nf.home.${g.id}.desc`)}</span>
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <section class="route-wrap" aria-label={t('nf.home.routes')}>
+    <div class="card" id="route-panel" role="tabpanel" aria-labelledby="tab-run">
+      <div class="route-head">
+        <div>
+          <h2>
+            <span class="h2-cap" aria-hidden="true" set:html={icon('cap', 26)} />
+            {t('nf.home.myCourses')}
+            <span class="mc-badge" data-ref="badge" hidden></span>
+          </h2>
+          {goalTabs.map((g) => (
+            <p class="note" data-goal-only={g.id}>
+              {t(`nf.home.${g.id}.note`)}
+            </p>
+          ))}
+        </div>
+        <div class="route-actions">
+          <div class="total">
+            <span class="total-label">{t('nf.home.total')}</span>
+            <span class="total-value" data-ref="total">
+              {t('nf.home.nothingYet')}
+            </span>
+            <span class="total-count" data-ref="count">
+              {t('nf.home.pickToAdd')}
+            </span>
+          </div>
+          <a class="nf-btn cta" data-ref="cta" aria-disabled="true">
+            <span data-ref="cta-text">{t('nf.home.selectCourse')}</span>
+            <Fragment set:html={icon('arrowRight', 18)} />
+          </a>
+        </div>
+      </div>
+
+      {(['run', 'write'] as const).map((goal) => (
+        <div data-goal-only={goal}>
+          <ol class="stops">
+            {presets[goal].map((id, i, list) => {
+              const c = byId.get(id)!;
+              return (
+                <li>
+                  <button type="button" class="stop" data-id={id} aria-pressed="false">
+                    <span class="stop-row">
+                      <span class="num">{i + 1}</span>
+                      {i < list.length - 1 && <span class="line" aria-hidden="true" />}
+                    </span>
+                    <span class="stop-title">{c.title}</span>
+                    <span class="stop-desc">{c.blurb}</span>
+                    <span class="nf-meta">{meta(c)}</span>
+                    <span class="stop-slot" hidden />
+                    <span class="toggle" aria-hidden="true">
+                      <Fragment set:html={icon('check', 16, 2.5, 'tick')} />
+                      <Fragment set:html={icon('plus', 16, 2.5, 'plus')} />
+                      <span class="on-label">{t('nf.home.inMyCourses')}</span>
+                      <span class="off-label">{t('nf.home.add')}</span>
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ol>
+          <p class="also" hidden />
+        </div>
+      ))}
+
+      <div data-goal-only="custom">
+        <p class="order">
+          <strong>{t('nf.home.yourOrder')}</strong>
+          <span class="order-items">
+            <span class="order-empty">{t('nf.home.orderEmpty')}</span>
+          </span>
+        </p>
+        <div class="pick-grid">
+          {courses.map((c) => (
+            <button type="button" class="pick" data-id={c.id} aria-pressed="false">
+              <span class="box" aria-hidden="true" set:html={icon('check', 14, 3)} />
+              <span>
+                <span class="pick-group">{groups[c.group]}</span>
+                <span class="pick-title">{c.title}</span>
+                <span class="nf-meta">{meta(c)}</span>
+                <span class="pick-status" />
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div class="sq">
+        <div class="sq-head">
+          <div class="sq-title">
+            <span class="sq-icon" aria-hidden="true" set:html={icon('compass', 22)} />
+            <div>
+              <h3>{t('nf.home.sq.title')}</h3>
+              <p class="note">{t('nf.home.sq.desc')}</p>
+            </div>
+          </div>
+          <a href={href(sideQuests.id)} class="nf-link-u">
+            {t('nf.home.sq.about')}
+          </a>
+        </div>
+        <div class="chips" role="group" aria-label={sideQuests.title}>
+          {quests.map((q) => (
+            <button type="button" class="chip" data-id={q.slug} aria-pressed="false">
+              <Fragment set:html={icon('check', 16, 2.5, 'tick')} />
+              <Fragment set:html={icon('plus', 16, 2.5, 'plus')} />
+              {q.title}
+              <span class="t">{q.minutes ? formatMinutes(q.minutes) : ''}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <p class="saved" data-ref="saved" hidden>
+        <Fragment set:html={icon('check', 16, 2.5)} />
+        <span data-ref="saved-text">{t('nf.home.savedLocal')}</span>
+        {/* TODO(redesign): real Seqera login. Until then this turns on the logged-in preview. */}
+        <a class="nf-text-btn" data-ref="login" href="?mycourses=loggedin">
+          {t('nf.home.login')}
+        </a>
+        <button type="button" class="nf-text-btn" data-ref="reset">
+          {t('nf.home.reset')}
+        </button>
+      </p>
+    </div>
+  </section>
+
+  <section class="section sci">
+    <p class="nf-eyebrow">{t('nf.home.sci.eyebrow')}</p>
+    <h2>{t('nf.home.sci.title')}</h2>
+    <p class="section-lede">{t('nf.home.sci.lede')}</p>
+    <div class="sci-grid">
+      {science.map((c) => (
+        <a href={href(c.id)} class="sci-card">
+          <span class="sci-icon" aria-hidden="true" set:html={icon(c.icon, 26, 1.75)} />
+          <span class="sci-title">{c.title}</span>
+          <span>{c.blurb}</span>
+          <span class="sci-foot">
+            <span class="nf-meta">{meta(c)}</span>
+            <span class="nf-link-u">{t('nf.home.sci.view')}</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="band-inner">
+      <div>
+        <p class="nf-eyebrow">{t('nf.home.events.eyebrow')}</p>
+        <h2>{t('nf.home.events.title')}</h2>
+        <p class="band-lede">{t('nf.home.events.lede')}</p>
+        <a href={href('training_events')} class="band-cta">
+          {t('nf.home.events.cta')}
+          <Fragment set:html={icon('arrowRight', 18)} />
+        </a>
+      </div>
+      <div class="band-cards">
+        {/* TODO(redesign): the next event's name and dates need a data source. */}
+        <a href={href('training_events')} class="band-card">
+          <span class="band-icon" aria-hidden="true" set:html={icon('calendar', 24)} />
+          <span>
+            <span class="band-label">{t('nf.home.events.nextLabel')}</span>
+            <span class="band-title">{t('nf.home.events.nextTitle')}</span>
+            <span class="band-desc">{t('nf.home.events.nextDates')}</span>
+          </span>
+        </a>
+        <a href={`${href('training_events')}#information-for-trainers`} class="band-card">
+          <span class="band-icon" aria-hidden="true" set:html={icon('users', 24)} />
+          <span>
+            <span class="band-label">{t('nf.home.events.trainersLabel')}</span>
+            <span class="band-title">{t('nf.home.events.trainersTitle')}</span>
+            <span class="band-desc">{t('nf.home.events.trainersDesc')}</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section help">
+    {[
+      ['env', 'envsetup'],
+      ['versions', 'info/nxf_versions'],
+      ['help', 'help'],
+    ].map(([key, slug]) => (
+      <a href={href(slug)} class="help-card">
+        <span>
+          <span class="help-title">{t(`nf.home.help.${key}.title`)}</span>
+          <span class="help-desc">{t(`nf.home.help.${key}.desc`)}</span>
+        </span>
+        <Fragment set:html={icon('arrowRight', 18)} />
+      </a>
+    ))}
+  </section>
+
+  <footer class="site-foot">
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <img src={nextflowLogo.src} alt="Nextflow" height="22" width="135" />
+        <span>
+          {t('nf.footer.supportedBy')}
+          <img src={seqeraLogo.src} alt="Seqera" height="16" width="47" />
+        </span>
+      </div>
+      <nav aria-label="Footer">
+        <a href={allCoursesHref}>{t('nf.home.allCourses')}</a>
+        <a href={courseMapHref}>{t('nf.home.courseMap')}</a>
+        <a href="https://community.seqera.io">{t('nf.footer.forum')}</a>
+        <a href="https://nextflow.io/docs/latest/">{t('nf.footer.docs')}</a>
+        {editHref && <a href={editHref}>{t('nf.footer.edit')}</a>}
+      </nav>
+    </div>
+    <p class="foot-legal">{t('nf.footer.licence', { year: new Date().getFullYear() })}</p>
+  </footer>
+</nf-homepage>
+
+<script>
+  import { icon } from '../../icons.mjs';
+  import { formatMinutes, myCourses, type Goal } from '../../scripts/my-courses';
+  import { announce, esc, ring, strings } from '../../scripts/ui';
+
+  const GOALS: Goal[] = ['run', 'write', 'custom'];
+
+  class Homepage extends HTMLElement {
+    store = myCourses();
+    t = strings(this);
+    ref = (name: string) => this.querySelector<HTMLElement>(`[data-ref="${name}"]`)!;
+
+    connectedCallback() {
+      this.render();
+      this.store.subscribe(() => this.render());
+      this.addEventListener('click', (e) => this.onClick(e));
+      this.querySelector('.tabs')!.addEventListener('keydown', (e) => this.onTabKey(e as KeyboardEvent));
+    }
+
+    onClick(e: Event) {
+      const el = (e.target as Element).closest<HTMLElement>('[data-goal], [data-id], [data-ref="reset"]');
+      if (!el) return;
+      const { store, t } = this;
+      if (el.dataset.goal) {
+        store.setGoal(el.dataset.goal as Goal);
+        announce(t('announceGoal', { goal: t(`${store.state.goal}.title`), total: this.summary().total }));
+      } else if (el.dataset.id) {
+        const id = el.dataset.id;
+        const title = store.get(id)?.title ?? '';
+        const adding = !store.has(id);
+        const hiding = !adding && !!store.user && store.done(id) > 0;
+        store.toggle(id);
+        const total = this.summary().total;
+        announce(t(adding ? 'announceAdded' : hiding ? 'announceHid' : 'announceRemoved', { title, total }));
+      } else {
+        store.reset();
+        announce(t('announceReset', { total: this.summary().total }));
+      }
+    }
+
+    onTabKey(e: KeyboardEvent) {
+      const i = GOALS.indexOf(this.store.state.goal);
+      const n = GOALS.length;
+      const next =
+        e.key === 'ArrowRight'
+          ? GOALS[(i + 1) % n]
+          : e.key === 'ArrowLeft'
+            ? GOALS[(i - 1 + n) % n]
+            : e.key === 'Home'
+              ? GOALS[0]
+              : e.key === 'End'
+                ? GOALS[n - 1]
+                : null;
+      if (!next) return;
+      e.preventDefault();
+      this.store.setGoal(next);
+      document.getElementById(`tab-${next}`)!.focus();
+    }
+
+    /** Total, count and main button cover what is visible on the active tab: its courses plus Side Quests. */
+    summary() {
+      const { store, t } = this;
+      const goal = store.state.goal;
+      const tabIds =
+        goal === 'custom'
+          ? store.items.filter((i) => !i.sq).map((i) => i.id)
+          : [...this.querySelectorAll<HTMLElement>(`[data-goal-only="${goal}"] .stop`)].map((s) => s.dataset.id!);
+      const visible = [...tabIds, ...store.items.filter((i) => i.sq).map((i) => i.id)];
+      const mine = store.items.map((i) => i.id).filter((id) => visible.includes(id) && store.has(id));
+      let mins = 0;
+      let courses = 0;
+      let quests = 0;
+      const partial: string[] = [];
+      for (const id of mine) {
+        const item = store.get(id)!;
+        mins += item.minutes;
+        if (item.partial) partial.push(item.title);
+        item.sq ? quests++ : courses++;
+      }
+      const count = [
+        courses && (courses === 1 ? t('courseOne') : t('courses', { n: courses })),
+        quests && (quests === 1 ? t('sideQuestOne') : t('sideQuests', { n: quests })),
+      ].filter(Boolean);
+      const next = mine.find((id) => store.fraction(id) < 1);
+      return {
+        total: mine.length ? [formatMinutes(mins), ...partial].join(' + ') : t('nothingYet'),
+        count: mine.length ? count.join(' · ') : t('pickToAdd'),
+        any: mine.length > 0,
+        next,
+      };
+    }
+
+    /** Where "Continue" goes: the first part not done yet. */
+    nextHref(id: string) {
+      const item = this.store.get(id)! as { parts: string[]; href?: string };
+      const part = item.parts.find((p) => !this.store.isPartDone(id, p));
+      return this.store.done(id) && part ? `${this.dataset.prefix}${part}/` : `${this.dataset.prefix}${id}/`;
+    }
+
+    statusPill(id: string, size = 18) {
+      const { store, t } = this;
+      const d = store.done(id);
+      const p = store.get(id)!.parts.length;
+      if (!d) return '';
+      if (d >= p)
+        return `<span class="stop-status"><span class="st-ic">${icon('check', 12, 3.5)}</span>${esc(t('completed'))}</span>`;
+      return `<span class="stop-status">${ring(d / p, size, 3)}${esc(t('partsDone', { d, p }))}</span>`;
+    }
+
+    render() {
+      const { store, t } = this;
+      const goal = store.state.goal;
+      document.documentElement.dataset.nfGoal = goal;
+      this.querySelectorAll<HTMLElement>('[data-goal]').forEach((b) => {
+        const on = b.dataset.goal === goal;
+        b.setAttribute('aria-selected', String(on));
+        b.tabIndex = on ? 0 : -1;
+      });
+      this.querySelector('#route-panel')!.setAttribute('aria-labelledby', `tab-${goal}`);
+
+      const s = this.summary();
+      this.ref('total').textContent = s.total;
+      this.ref('count').textContent = s.count;
+      const cta = this.ref('cta') as HTMLAnchorElement;
+      if (s.any) {
+        cta.removeAttribute('aria-disabled');
+        // TODO(redesign): "Browse more courses" should go to the All courses page.
+        cta.href = s.next ? this.nextHref(s.next) : '#goals';
+        const title = s.next ? store.get(s.next)!.title : '';
+        this.ref('cta-text').textContent = !s.next
+          ? t('browseMore')
+          : t(store.done(s.next) ? 'continue' : 'startWith', { title });
+      } else {
+        cta.removeAttribute('href');
+        cta.setAttribute('aria-disabled', 'true');
+        this.ref('cta-text').textContent = t('selectCourse');
+      }
+      const n = store.basket().length;
+      this.ref('badge').textContent = String(n);
+      this.ref('badge').hidden = !n;
+
+      // Stops
+      this.querySelectorAll<HTMLElement>('.stops').forEach((list) => {
+        const stops = [...list.querySelectorAll<HTMLElement>('.stop')];
+        const pill = (id: string) => (store.has(id) && store.fraction(id) >= 1 ? '' : this.statusPill(id));
+        const anyPill = stops.some((s) => pill(s.dataset.id!));
+        stops.forEach((stop, i) => {
+          const id = stop.dataset.id!;
+          const on = store.has(id);
+          const done = store.fraction(id) >= 1;
+          stop.classList.toggle('on', on);
+          stop.setAttribute('aria-pressed', String(on));
+          const num = stop.querySelector('.num')!;
+          num.classList.toggle('is-done', done);
+          num.innerHTML = done ? icon('check', 14, 3) : String(i + 1);
+          stop
+            .querySelector('.line')
+            ?.classList.toggle('solid', on && !!stops[i + 1] && store.has(stops[i + 1].dataset.id!));
+          const slot = stop.querySelector<HTMLElement>('.stop-slot')!;
+          slot.hidden = !anyPill;
+          slot.innerHTML = pill(id);
+          stop.querySelector('.toggle')!.classList.toggle('is-done', done);
+          stop.querySelector('.on-label')!.textContent = t(done ? 'completed' : 'inMyCourses');
+        });
+        const shown = stops.map((s) => s.dataset.id!);
+        const others = store
+          .basket()
+          .filter((id) => !shown.includes(id) && !store.get(id)!.sq)
+          .map((id) => `<strong>${esc(store.get(id)!.title)}</strong>`);
+        const also = list.parentElement!.querySelector<HTMLElement>('.also')!;
+        also.hidden = !others.length;
+        also.innerHTML = t('also', { titles: others.join(', ') });
+      });
+
+      // Build your own
+      const seq = store.basket();
+      this.querySelector('.order-items')!.innerHTML = seq.length
+        ? seq
+            .map(
+              (id, i) =>
+                `<span class="order-item"><span class="order-n">${i + 1}</span>${esc(store.get(id)!.title)}</span>` +
+                (i < seq.length - 1 ? icon('arrowRight', 16, 2, 'order-arrow') : ''),
+            )
+            .join('')
+        : `<span class="order-empty">${esc(t('orderEmpty'))}</span>`;
+      this.querySelectorAll<HTMLElement>('.pick').forEach((pick) => {
+        const id = pick.dataset.id!;
+        pick.setAttribute('aria-pressed', String(store.has(id)));
+        pick.querySelector('.pick-status')!.innerHTML = this.statusPill(id);
+      });
+
+      // Side Quests
+      this.querySelectorAll<HTMLElement>('.chip').forEach((chip) => {
+        const id = chip.dataset.id!;
+        chip.setAttribute('aria-pressed', String(store.has(id)));
+        const time = chip.querySelector<HTMLElement>('.t')!;
+        time.dataset.time ??= time.textContent ?? '';
+        const done = store.fraction(id) >= 1;
+        time.classList.toggle('t-done', done);
+        time.innerHTML = done ? `${icon('check', 12, 3.5)}${esc(t('completed'))}` : esc(time.dataset.time);
+      });
+
+      // Saved line
+      const anyProgress = store.items.some((i) => store.done(i.id) > 0);
+      this.ref('saved').hidden = !(n || anyProgress);
+      this.ref('saved-text').textContent = t(store.user ? 'savedAccount' : 'savedLocal');
+      this.ref('login').hidden = !!store.user;
+    }
+  }
+  customElements.define('nf-homepage', Homepage);
+</script>
+
+<style>
+  .home {
+    display: block;
+    color: var(--nf-ink);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .home :global(a) {
+    color: var(--nf-ink);
+  }
+  .home :global(a:hover) {
+    color: var(--nf-link);
+  }
+  .home :is(h1, h2, h3, p) {
+    margin: 0;
+  }
+  .home button {
+    font: inherit;
+    color: inherit;
+  }
+  .home :focus-visible {
+    outline: 2px solid var(--nf-green);
+    outline-offset: 2px;
+  }
+  [hidden] {
+    display: none !important;
+  }
+
+  /* Only the active goal's note and body show. */
+  [data-goal-only]:not([data-goal-only='run']) {
+    display: none;
+  }
+  :global(html[data-nf-goal='write']) [data-goal-only='run'],
+  :global(html[data-nf-goal='custom']) [data-goal-only='run'] {
+    display: none;
+  }
+  :global(html[data-nf-goal='write']) [data-goal-only='write'],
+  :global(html[data-nf-goal='custom']) [data-goal-only='custom'] {
+    display: block;
+  }
+
+  /* Hero and tabs, on a mint grid that runs 96px past the tabs so the card overlaps it */
+  .top {
+    padding-bottom: 96px;
+    background-color: var(--nf-hero-bg);
+    background-image:
+      linear-gradient(to right, var(--nf-hero-grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--nf-hero-grid) 1px, transparent 1px);
+    background-size: 120px 120px;
+  }
+  .hero {
+    padding: 72px 32px 44px;
+    text-align: center;
+  }
+  .hero .nf-eyebrow {
+    color: var(--nf-hero-eyebrow);
+  }
+  .hero h1 {
+    max-width: 900px;
+    margin: 18px auto;
+    font-family: var(--nf-font-display);
+    font-size: clamp(44px, 7vw, 68px);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--nf-ink);
+  }
+  .lede {
+    max-width: 640px;
+    margin: 0 auto !important;
+    font-size: 19px;
+    line-height: 1.55;
+  }
+  .browse {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 12px;
+    margin-top: 24px;
+    font-size: 15px;
+  }
+
+  .route-wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    align-items: end;
+    scroll-margin-top: calc(var(--sl-nav-height) + 32px);
+  }
+  .tab {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px 20px;
+    border: 1px solid var(--nf-card-border);
+    border-bottom: 0;
+    border-radius: 6px 6px 0 0;
+    background: var(--nf-tab-idle);
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .tab:hover {
+    background: var(--nf-surface);
+  }
+  .tab[aria-selected='true'] {
+    z-index: 2;
+    margin-bottom: -1px;
+    padding-top: 16px;
+    padding-bottom: 21px;
+    border-top: 3px solid var(--nf-green);
+    background: var(--nf-surface);
+    cursor: default;
+  }
+  .tab-icon {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--nf-radius-lg);
+    background: var(--nf-icon-tile);
+    color: var(--nf-link);
+  }
+  .tab[aria-selected='true'] .tab-icon {
+    background: var(--nf-mint);
+    color: var(--nf-on-mint);
+  }
+  .tab-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .tab-title {
+    font-family: var(--nf-font-display);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.15;
+  }
+  .tab-desc {
+    color: var(--nf-muted);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .card {
+    position: relative;
+    z-index: 1;
+    margin-top: -96px;
+    padding: 32px 40px 40px;
+    border: 1px solid var(--nf-card-border);
+    border-radius: 0 0 6px 6px;
+    background: var(--nf-surface);
+    box-shadow: var(--nf-shadow-card);
+  }
+  .route-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px 32px;
+  }
+  .route-head > div:first-child {
+    flex: 1 1 420px;
+  }
+  .route-head h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 6px;
+    font-family: var(--nf-font-display);
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.1;
+    color: var(--nf-ink);
+  }
+  .h2-cap {
+    display: inline-flex;
+    color: var(--nf-link);
+  }
+  .route-head .mc-badge {
+    min-width: 26px;
+    height: 26px;
+    border-radius: 13px;
+    font-size: 14px;
+  }
+  .note {
+    color: var(--nf-muted);
+    font-size: 15px;
+  }
+  .route-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 12px 24px;
+  }
+  .total {
+    text-align: right;
+  }
+  .total-label {
+    display: block;
+    color: var(--nf-muted);
+    font-family: var(--nf-font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .total-value {
+    display: block;
+    font-family: var(--nf-font-display);
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .total-count {
+    display: block;
+    color: var(--nf-muted);
+    font-size: 14px;
+  }
+  .home .cta {
+    color: var(--nf-on-mint);
+  }
+  .home .cta[aria-disabled='true'] {
+    color: var(--nf-muted);
+  }
+
+  .stops {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 12px 0;
+    margin: 36px -18px 0;
+    padding: 0;
+    list-style: none;
+  }
+  .stops > li {
+    display: flex;
+    margin: 0;
+  }
+  .stop {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 14px 16px 18px;
+    border: 2px dotted transparent;
+    border-radius: var(--nf-radius-md);
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .stop:hover {
+    border-color: var(--nf-line-3);
+  }
+  .stop.on:hover {
+    border-color: var(--nf-green);
+  }
+  .stop-row {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    gap: 12px;
+  }
+  .num {
+    position: relative;
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 2px dashed var(--nf-line-3);
+    border-radius: 50%;
+    background: var(--nf-surface);
+    color: var(--nf-muted);
+    font-family: var(--nf-font-mono);
+    font-weight: 700;
+    transition: background 0.15s;
+  }
+  .stop.on .num {
+    border: 1px solid var(--nf-green);
+    background: var(--nf-mint);
+    color: var(--nf-on-mint);
+  }
+  .stop .num.is-done {
+    border: 1px solid var(--nf-green);
+    background: var(--nf-green);
+    color: var(--nf-on-mint);
+  }
+  .line {
+    flex: 1;
+    margin-right: -36px;
+    border-top: 2px dashed var(--nf-line-2);
+  }
+  .line:global(.solid) {
+    border-top: 2px solid var(--nf-mint);
+  }
+  .stop-title {
+    display: block;
+    margin-top: 16px;
+    color: var(--nf-muted);
+    font-family: var(--nf-font-display);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .stop.on .stop-title {
+    color: var(--nf-ink);
+  }
+  .stop-desc {
+    display: block;
+    flex: 1 0 auto;
+    margin-top: 6px;
+    color: var(--nf-muted);
+    font-size: 15px;
+  }
+  .stop .nf-meta {
+    display: block;
+    margin-top: 8px;
+  }
+  .stop-slot {
+    display: block;
+    height: 36px;
+  }
+  .toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    margin-top: 14px;
+    padding: 8px 14px;
+    border: 1px solid var(--nf-line-3);
+    border-radius: var(--nf-radius-sm);
+    background: var(--nf-surface);
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .stop:hover .toggle {
+    border-color: var(--nf-link);
+  }
+  .stop.on .toggle {
+    border-color: var(--nf-green);
+    background: var(--nf-on-bg);
+    color: var(--nf-on-ink);
+  }
+  .stop.on .toggle:global(.is-done) {
+    border-color: var(--nf-green);
+    background: var(--nf-green);
+    color: var(--nf-on-mint);
+  }
+  .home :global(.tick) {
+    display: none;
+  }
+  .home [aria-pressed='true'] :global(.tick) {
+    display: block;
+  }
+  .home [aria-pressed='true'] :global(.plus) {
+    display: none;
+  }
+  .on-label {
+    display: none;
+  }
+  [aria-pressed='true'] .on-label {
+    display: inline;
+  }
+  [aria-pressed='true'] .off-label {
+    display: none;
+  }
+  .home :global(.stop-status) {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 26px;
+    margin-top: 10px;
+    padding: 0 10px 0 4px;
+    border-radius: 999px;
+    background: var(--nf-on-bg);
+    color: var(--nf-on-ink);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .home :global(.st-ic) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--nf-green);
+    color: var(--nf-on-mint);
+  }
+  .also {
+    margin-top: 20px !important;
+    color: var(--nf-muted);
+    font-size: 14px;
+  }
+  .also :global(strong) {
+    color: var(--nf-ink);
+    font-weight: 600;
+  }
+
+  .order {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    margin: 32px 0 20px !important;
+    padding: 10px 16px;
+    border-radius: var(--nf-radius-sm);
+    background: var(--nf-soft);
+    font-size: 15px;
+  }
+  .order strong {
+    margin-right: 4px;
+  }
+  .order-items {
+    display: contents;
+  }
+  .order :global(.order-item) {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .order :global(.order-n) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--nf-mint);
+    color: var(--nf-on-mint);
+    font-family: var(--nf-font-mono);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .order :global(.order-arrow) {
+    color: #0a967b;
+  }
+  .order :global(.order-empty) {
+    color: var(--nf-muted);
+  }
+  .pick-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 12px;
+  }
+  .pick {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 18px;
+    border: 2px solid var(--nf-line);
+    border-radius: var(--nf-radius-sm);
+    background: var(--nf-surface);
+    text-align: left;
+    cursor: pointer;
+  }
+  .pick:hover {
+    border-color: var(--nf-line-3);
+  }
+  .pick[aria-pressed='true'] {
+    border-color: var(--nf-green);
+  }
+  .box {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-top: 2px;
+    border: 2px solid var(--nf-line-3);
+    border-radius: var(--nf-radius-sm);
+    color: transparent;
+  }
+  .pick[aria-pressed='true'] .box {
+    border-color: var(--nf-green);
+    background: var(--nf-green);
+    color: var(--nf-on-mint);
+  }
+  .pick-group {
+    display: block;
+    color: var(--nf-link);
+    font-family: var(--nf-font-mono);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .pick-title {
+    display: block;
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .pick .nf-meta,
+  .pick-status {
+    display: block;
+  }
+
+  .sq {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--nf-line);
+  }
+  .sq-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 8px 24px;
+  }
+  .sq-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .sq-icon {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--nf-radius-lg);
+    background: var(--nf-icon-tile);
+    color: var(--nf-link);
+  }
+  .sq h3 {
+    font-family: var(--nf-font-display);
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--nf-ink);
+  }
+  .sq .note {
+    margin-top: 2px;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 14px;
+    border: 1px solid var(--nf-line-2);
+    border-radius: 999px;
+    background: var(--nf-surface);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .chip:hover {
+    border-color: var(--nf-green);
+  }
+  .chip .t {
+    color: var(--nf-muted);
+    font-family: var(--nf-font-mono);
+    font-size: 12px;
+  }
+  .chip[aria-pressed='true'] {
+    border-color: var(--nf-green);
+    background: var(--nf-on-bg);
+    color: var(--nf-on-ink);
+    font-weight: 600;
+  }
+  .chip[aria-pressed='true'] .t {
+    color: var(--nf-on-ink);
+  }
+  .chip .t:global(.t-done) {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    color: var(--nf-on-ink);
+    font-weight: 700;
+  }
+  .home :global(.plus) {
+    color: var(--nf-link);
+  }
+  .saved {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 12px;
+    margin: 28px 0 0 !important;
+    color: var(--nf-muted);
+    font-size: 14px;
+  }
+  .saved[hidden] {
+    display: none !important;
+  }
+  .saved > :global(svg) {
+    color: var(--nf-link);
+  }
+
+  /* Sections below the card */
+  .section {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 88px 32px 96px;
+  }
+  .sci .nf-eyebrow {
+    margin-bottom: 12px;
+  }
+  .sci h2 {
+    margin-bottom: 10px;
+    font-family: var(--nf-font-display);
+    font-size: 44px;
+    font-weight: 500;
+    line-height: 1.1;
+    color: var(--nf-ink);
+  }
+  .section-lede {
+    margin-bottom: 32px !important;
+    color: var(--nf-muted);
+    font-size: 18px;
+  }
+  .sci-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 20px;
+  }
+  .sci-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 30px;
+    border: 1px solid var(--nf-card-border);
+    background: var(--nf-sci-card);
+    font-size: 15px;
+    text-decoration: none;
+  }
+  .sci-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: var(--nf-radius-lg);
+    background: var(--nf-icon-tile);
+    color: var(--nf-link);
+  }
+  .sci-title {
+    font-family: var(--nf-font-display);
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .sci-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    margin-top: auto;
+  }
+  .sci-foot .nf-link-u {
+    font-size: 16px;
+  }
+
+  .band {
+    padding: 96px 32px;
+    background: var(--nf-band-bg);
+    color: #fff;
+  }
+  .band-inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+    gap: 48px;
+    align-items: center;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .band .nf-eyebrow {
+    margin-bottom: 16px;
+    color: #86e0ce;
+  }
+  .band h2 {
+    margin-bottom: 20px;
+    color: #fff;
+    font-family: var(--nf-font-display);
+    font-size: 68px;
+    font-weight: 600;
+    line-height: 0.95;
+  }
+  .band-lede {
+    max-width: 520px;
+    margin-bottom: 32px !important;
+    color: #e2f7f3;
+    font-size: 19px;
+    line-height: 1.55;
+  }
+  .home .band-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 10px 20px;
+    border: 1px solid #0dc09d;
+    border-radius: var(--nf-radius-sm);
+    background: #86e0ce;
+    color: #160f26;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .home .band-cta:hover {
+    background: #a2e8da;
+    color: #160f26;
+  }
+  .band-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .home .band-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 24px;
+    border: 1px solid rgba(182, 236, 226, 0.3);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    text-decoration: none;
+  }
+  .home .band-card:hover {
+    border-color: #86e0ce;
+    color: #fff;
+  }
+  .band-icon {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: var(--nf-radius-lg);
+    background: #86e0ce;
+    color: #065647;
+  }
+  .band-card > span:last-child {
+    flex: 1;
+  }
+  .band-label {
+    display: block;
+    color: #b6ece2;
+    font-family: var(--nf-font-mono);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .band-title {
+    display: block;
+    margin-top: 4px;
+    font-family: var(--nf-font-display);
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+  .band-desc {
+    display: block;
+    margin-top: 4px;
+    color: #e2f7f3;
+  }
+
+  .help {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 16px;
+    padding-top: 64px;
+    padding-bottom: 88px;
+  }
+  .help-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 22px;
+    border: 1px solid var(--nf-card-border);
+    text-decoration: none;
+  }
+  .help-card > span {
+    flex: 1;
+  }
+  .help-title {
+    display: block;
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .help-desc {
+    display: block;
+    margin-top: 4px;
+    color: var(--nf-muted);
+    font-size: 14px;
+  }
+
+  .site-foot {
+    padding: 40px 32px 32px;
+    background: var(--nf-footer-bg);
+    color: #fff;
+  }
+  .foot-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 32px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .foot-brand {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 24px;
+  }
+  .foot-brand > img {
+    width: auto;
+    height: 22px;
+  }
+  .foot-brand > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #a7adb7;
+    font-size: 13px;
+  }
+  .foot-brand span img {
+    width: auto;
+    height: 16px;
+    opacity: 0.8;
+  }
+  .site-foot nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+    font-size: 14px;
+  }
+  .home .site-foot nav a {
+    color: #fff;
+  }
+  .home .site-foot nav a:hover {
+    color: #86e0ce;
+  }
+  .foot-legal {
+    max-width: 1180px;
+    margin: 24px auto 0 !important;
+    padding-top: 20px;
+    border-top: 1px solid #31353d;
+    color: #a7adb7;
+    font-size: 13px;
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 48px 16px 32px;
+    }
+    .route-wrap {
+      padding: 0 16px;
+    }
+    .tabs {
+      gap: 4px;
+    }
+    .tab {
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 6px 14px;
+      text-align: center;
+    }
+    .tab[aria-selected='true'] {
+      padding-top: 10px;
+      padding-bottom: 15px;
+    }
+    .tab-icon {
+      width: 36px;
+      height: 36px;
+    }
+    .tab-title {
+      font-size: 16px;
+    }
+    .tab-desc {
+      display: none;
+    }
+    .card {
+      padding: 24px 20px 28px;
+    }
+    .route-head h2 {
+      font-size: 28px;
+    }
+    .total {
+      text-align: left;
+    }
+    .line {
+      display: none;
+    }
+    .section {
+      padding: 64px 16px 72px;
+    }
+    .band {
+      padding: 72px 16px;
+    }
+    .band h2 {
+      font-size: 52px;
+    }
+    .site-foot {
+      padding: 32px 16px 24px;
+    }
+  }
+</style>
+
+<style is:global>
+  /* The homepage runs edge to edge: drop Starlight's content panel padding and width. */
+  html[data-has-hero] .content-panel {
+    padding: 0;
+    border: 0;
+  }
+  html[data-has-hero] .content-panel > .sl-container {
+    max-width: none;
+  }
+  html[data-has-hero] .sl-container > .home {
+    margin: 0;
+  }
+  html[data-has-hero] main {
+    padding: 0;
+  }
+  html[data-has-hero] .site-footer,
+  html[data-has-hero] .content-panel footer:not(.site-foot) {
+    display: none;
+  }
+</style>

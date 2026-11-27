@@ -49,11 +49,11 @@ const slugOf = (item: SidebarItem) => (typeof item === 'string' ? item : item.sl
 const flatten = (items: SidebarItem[]): string[] =>
   items.flatMap((i) => (typeof i === 'string' ? [i] : i.items ? flatten(i.items) : i.slug ? [i.slug] : []));
 
-/** The sidebar group whose items include the overview page `id`. */
-function findGroup(items: SidebarItem[], id: string): SidebarItem[] | undefined {
+/** The sidebar group whose items include the overview page `id`. Its label is the course's short title. */
+function findGroup(items: SidebarItem[], id: string): { label?: string; items: SidebarItem[] } | undefined {
   for (const item of items) {
     if (typeof item === 'string' || !item.items) continue;
-    if (item.items.some((i) => slugOf(i) === id)) return item.items;
+    if (item.items.some((i) => slugOf(i) === id)) return item as { label?: string; items: SidebarItem[] };
     const found = findGroup(item.items, id);
     if (found) return found;
   }
@@ -77,15 +77,15 @@ async function build() {
   const part = (slug: string): Part => ({ slug, title: shortTitle(page(slug).title), minutes: page(slug).duration });
 
   const courses: Course[] = courseConfig.map((c) => {
-    const items = findGroup(sidebar, c.id);
-    if (!items) throw new Error(`courses.mjs: "${c.id}" is not an overview page in sidebar.mjs`);
-    const slugs = flatten(items);
+    const group = findGroup(sidebar, c.id);
+    if (!group) throw new Error(`courses.mjs: "${c.id}" is not an overview page in sidebar.mjs`);
+    const slugs = flatten(group.items);
     const parts = slugs.filter(isPart).map(part);
     return {
       ...c,
       group: c.group as Course['group'],
       next: c.next ?? [],
-      title: page(c.id).title,
+      title: group.label ?? page(c.id).title,
       description: page(c.id).description ?? '',
       start: slugs.find((s) => /^0+_|^orientation$/.test(leaf(s))),
       summary: slugs.find((s) => leaf(s) === 'next_steps'),
@@ -95,7 +95,8 @@ async function build() {
     };
   });
 
-  const sqItems = findGroup(sidebar, sqConfig.id);
+  const sqGroup = findGroup(sidebar, sqConfig.id);
+  const sqItems = sqGroup?.items;
   if (!sqItems) throw new Error(`courses.mjs: "${sqConfig.id}" is not an overview page in sidebar.mjs`);
   const quest = (item: SidebarItem): Quest => {
     const slugs = typeof item === 'string' ? [item] : flatten(item.items ?? []);
@@ -110,7 +111,7 @@ async function build() {
   const sideQuests: SideQuests = {
     ...sqConfig,
     group: sqConfig.group as SideQuests['group'],
-    title: page(sqConfig.id).title,
+    title: sqGroup!.label ?? page(sqConfig.id).title,
     description: page(sqConfig.id).description ?? '',
     start: flatten(sqItems).find((s) => leaf(s) === 'orientation'),
     groups: questGroups,
