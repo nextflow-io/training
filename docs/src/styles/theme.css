@@ -1,0 +1,236 @@
+/*
+ * Design tokens. `:root` is dark (Starlight's default) and `[data-theme='light']` overrides it.
+ * Custom components use the --nf-* names; Starlight's own components get them through --sl-color-*.
+ */
+
+@font-face {
+  font-family: Degular;
+  src: url('../fonts/Degular-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: Degular;
+  src: url('../fonts/Degular-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: Degular;
+  src: url('../fonts/Degular-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
+:root {
+  --nf-ink: #ecedef;
+  --nf-muted: #a7adb7;
+  --nf-line: #31353d;
+  --nf-line-2: #3b4049;
+  --nf-line-3: #5b616c;
+  --nf-card-border: rgba(255, 255, 255, 0.12);
+
+  --nf-bg: #17191e;
+  --nf-surface: #1e2127;
+  --nf-soft: #1e2127;
+  --nf-footer-bg: #0e1013;
+  --nf-tab-idle: rgba(30, 33, 39, 0.6);
+
+  --nf-mint: #86e0ce;
+  --nf-mint-hover: #a2e8da;
+  --nf-green: #0dc09d;
+  --nf-on-mint: #160f26;
+  --nf-link: #31c9ac;
+  --nf-deep: #86e0ce;
+  --nf-mint-soft: #123029;
+  --nf-icon-tile: rgba(13, 192, 157, 0.16);
+  --nf-sci-card: rgba(13, 192, 157, 0.06);
+  --nf-band-bg: #065647;
+
+  --nf-on-bg: rgba(13, 192, 157, 0.14);
+  --nf-on-ink: #86e0ce;
+
+  --nf-hero-bg: #0f2420;
+  --nf-hero-grid: rgba(134, 224, 206, 0.07);
+  --nf-hero-eyebrow: #86e0ce;
+
+  --nf-warn-bg: rgba(249, 115, 22, 0.12);
+  --nf-warn-border: rgba(249, 115, 22, 0.45);
+  --nf-warn-ink: #fdba74;
+
+  --nf-shadow-card: 0 20px 40px rgba(0, 0, 0, 0.35);
+  --nf-shadow-pop: 0 16px 40px rgba(0, 0, 0, 0.5);
+  --nf-shadow-tile: 0 12px 28px rgba(0, 0, 0, 0.4);
+
+  --nf-font-display: Degular, Inter, system-ui, sans-serif;
+  --nf-font-body: Inter, system-ui, sans-serif;
+  --nf-font-mono: 'Roboto Mono', Menlo, monospace;
+
+  --nf-radius-sm: 4px;
+  --nf-radius-md: 6px;
+  --nf-radius-lg: 8px;
+  --nf-radius-pill: 999px;
+
+  /* Starlight */
+  --sl-font: Inter;
+  --sl-font-mono: 'Roboto Mono';
+  --sl-color-accent-low: #123029;
+  --sl-color-accent: #31c9ac;
+  --sl-color-accent-high: #86e0ce;
+  --sl-color-white: #ecedef;
+  --sl-color-gray-1: #ecedef;
+  --sl-color-gray-2: #c9ccd2;
+  --sl-color-gray-3: #a7adb7;
+  --sl-color-gray-4: #5b616c;
+  --sl-color-gray-5: #3b4049;
+  --sl-color-gray-6: #1e2127;
+  --sl-color-black: #17191e;
+  --sl-color-text: var(--nf-ink);
+  --sl-color-text-accent: var(--nf-link);
+  --sl-color-bg-nav: var(--nf-bg);
+  --sl-color-bg-sidebar: var(--nf-bg);
+  --sl-color-bg-inline-code: var(--nf-soft);
+  --sl-color-hairline-light: var(--nf-line);
+  --sl-color-hairline: var(--nf-line);
+  --sl-color-hairline-shade: var(--nf-line-2);
+  --sl-nav-height: 4rem;
+}
+
+:root[data-theme='light'] {
+  --nf-ink: #160f26;
+  --nf-muted: #5c5767;
+  --nf-line: #dddede;
+  --nf-line-2: #cfd0d1;
+  --nf-line-3: #babcbd;
+  --nf-card-border: rgba(69, 63, 81, 0.2);
+
+  --nf-bg: #ffffff;
+  --nf-surface: #ffffff;
+  --nf-soft: #f7f7f7;
+  --nf-footer-bg: #17191e;
+  --nf-tab-idle: rgba(255, 255, 255, 0.6);
+
+  --nf-link: #087f68;
+  --nf-deep: #065647;
+  --nf-mint-soft: #e2f7f3;
+  --nf-icon-tile: rgba(13, 192, 157, 0.2);
+  --nf-sci-card: rgba(182, 236, 226, 0.2);
+
+  --nf-on-bg: #e2f7f3;
+  --nf-on-ink: #065647;
+
+  --nf-hero-bg: #e2f7f3;
+  --nf-hero-grid: rgba(6, 86, 71, 0.08);
+  --nf-hero-eyebrow: #065647;
+
+  --nf-warn-bg: #fff4e6;
+  --nf-warn-border: #f7b57a;
+  --nf-warn-ink: #8a3a0b;
+
+  --nf-shadow-card: 0 20px 40px rgba(22, 15, 38, 0.06);
+  --nf-shadow-pop: 0 16px 40px rgba(22, 15, 38, 0.16);
+  --nf-shadow-tile: 0 12px 28px rgba(6, 86, 71, 0.12);
+
+  --sl-color-accent-low: #e2f7f3;
+  --sl-color-accent: #087f68;
+  --sl-color-accent-high: #065647;
+  --sl-color-white: #160f26;
+  --sl-color-gray-1: #160f26;
+  --sl-color-gray-2: #3a3446;
+  --sl-color-gray-3: #5c5767;
+  --sl-color-gray-4: #8a8693;
+  --sl-color-gray-5: #dddede;
+  --sl-color-gray-6: #f7f7f7;
+  --sl-color-gray-7: #fbfbfb;
+  --sl-color-black: #ffffff;
+}
+
+/* Shared building blocks for custom components */
+
+.nf-eyebrow {
+  margin: 0;
+  font-family: var(--nf-font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--nf-link);
+}
+.nf-meta {
+  font-family: var(--nf-font-mono);
+  font-size: 13px;
+  color: var(--nf-muted);
+}
+.nf-btn,
+.nf-btn-2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: var(--nf-radius-sm);
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+}
+.nf-btn {
+  min-height: 48px;
+  padding: 10px 20px;
+  border: 1px solid var(--nf-green);
+  background: var(--nf-mint);
+  color: var(--nf-on-mint);
+}
+.nf-btn:hover {
+  background: var(--nf-mint-hover);
+  color: var(--nf-on-mint);
+}
+.nf-btn[aria-disabled='true'],
+.nf-btn[aria-disabled='true']:hover {
+  border-color: var(--nf-line-2);
+  background: var(--nf-soft);
+  color: var(--nf-muted);
+  cursor: not-allowed;
+}
+.nf-btn-2 {
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid var(--nf-line-3);
+  background: var(--nf-surface);
+  color: var(--nf-ink);
+}
+.nf-btn-2:hover {
+  border-color: var(--nf-link);
+  color: var(--nf-ink);
+}
+.nf-link-u,
+.nf-text-btn {
+  color: var(--nf-ink);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--nf-green);
+  text-decoration-thickness: 2px;
+}
+.nf-link-u {
+  text-underline-offset: 6px;
+}
+.nf-text-btn {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 500;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+:is(.nf-link-u, .nf-text-btn):hover {
+  color: var(--nf-link);
+}
+.nf-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

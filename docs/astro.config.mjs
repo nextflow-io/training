@@ -45,7 +45,7 @@ export default defineConfig({
       sidebar,
       social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/nextflow-io/training' }],
       editLink: { baseUrl: 'https://github.com/nextflow-io/training/edit/master/docs/' },
-      customCss: ['./src/styles/custom.css'],
+      customCss: ['./src/styles/theme.css', './src/styles/custom.css'],
       components: {
         Head: './src/components/Head.astro',
         Banner: './src/components/Banner.astro',

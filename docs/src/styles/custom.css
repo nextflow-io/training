@@ -36,38 +36,11 @@
     U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
     U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-@font-face {
-  font-family: Degular;
-  src: url('../fonts/Degular-Semibold.woff2') format('woff2');
-  font-weight: 600;
-  font-display: swap;
-}
-
-/* Theme: `:root` is dark (Starlight's default), light overrides it */
-
-:root {
-  --sl-font: Inter;
-  --sl-font-mono: 'Roboto Mono';
-  --sl-color-accent-low: #0b3a30;
-  --sl-color-accent: #58bd9f;
-  --sl-color-accent-high: #c3ead3;
-  --sl-text-h1: var(--sl-text-5xl);
-}
-:root[data-theme='light'] {
-  --sl-color-accent-low: #c3ead3;
-  --sl-color-accent: #087f68;
-  --sl-color-accent-high: #064e40;
-}
-@media (min-width: 50em) {
-  :root {
-    --sl-text-h1: var(--sl-text-6xl);
-    --sl-text-h2: var(--sl-text-5xl);
-  }
-}
+/* Type */
 
 h1,
 .sl-markdown-content :is(h2, h3) {
-  font-family: Degular, var(--sl-font), sans-serif;
+  font-family: var(--nf-font-display);
 }
 
 /* `??? type` collapsibles, coloured like MkDocs Material */
